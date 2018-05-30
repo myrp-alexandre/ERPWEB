@@ -150,6 +150,7 @@
     <Compile Include="RRHH\ro_cargo_Info.cs" />
     <Compile Include="RRHH\ro_catalogoTipo_Info.cs" />
     <Compile Include="RRHH\ro_catalogo_Info.cs" />
+    <Compile Include="RRHH\ro_Comprobantes_Contables_Info.cs" />
     <Compile Include="RRHH\ro_Config_Param_contable_Info.cs" />
     <Compile Include="RRHH\ro_contrato_Info.cs" />
     <Compile Include="RRHH\ro_departamento_Info.cs" />
@@ -186,8 +187,10 @@
     <Compile Include="RRHH\ro_prestamo_detalle_Info.cs" />
     <Compile Include="RRHH\ro_prestamo_Info.cs" />
     <Compile Include="RRHH\ro_rol_detalle_Info.cs" />
+    <Compile Include="RRHH\ro_rol_detalle_x_rubro_acumulado_Info.cs" />
     <Compile Include="RRHH\ro_rol_Info.cs" />
     <Compile Include="RRHH\ro_rubros_calculados_Info.cs" />
+    <Compile Include="RRHH\ro_rubro_acumulados_Info.cs" />
     <Compile Include="RRHH\ro_rubro_tipo_Info.cs" />
     <Compile Include="RRHH\ro_Solicitud_Vacaciones_x_empleado_Info.cs" />
     <Compile Include="RRHH\ro_tipo_prestamo_Info.cs" />
