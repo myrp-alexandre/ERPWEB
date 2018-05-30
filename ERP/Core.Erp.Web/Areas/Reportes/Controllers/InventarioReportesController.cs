@@ -9,7 +9,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
     public class InventarioReportesController : Controller
     {
-        public ActionResult VWINV_001(int IdSucursal =0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
+        public ActionResult INV_001(int IdSucursal =0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
         {
             VWINV_001_Rpt model = new VWINV_001_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
@@ -23,9 +23,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-        public ActionResult VWINV_002()
+        public ActionResult INV_002()
         {
             return View();
         }
+
+
     }
 }

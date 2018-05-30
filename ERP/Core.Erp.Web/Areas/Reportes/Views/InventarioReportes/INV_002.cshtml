@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "VWCAJ_001";
+    ViewBag.Title = "INV_002";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -14,3 +14,4 @@
         settings.Name = "webDocumentViewer";
     }).Bind(Model).GetHtml();
 }
+
