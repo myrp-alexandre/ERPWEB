@@ -49,6 +49,10 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
+                odata = new ro_historico_vacaciones_x_empleado_Data();
+                
+                string msg = "";
+                int IdVacacion = 1;
                 info_empleado = bus_empleado.get_info(IdEmpresa, IdEmpleado);
                 List<ro_historico_vacaciones_x_empleado_Info> lst_vacaciones = new List<ro_historico_vacaciones_x_empleado_Info>();
                 List<ro_historico_vacaciones_x_empleado_Info> listadoTmp = new List<ro_historico_vacaciones_x_empleado_Info>();
@@ -82,6 +86,7 @@ namespace Core.Erp.Bus.RRHH
                         //RECORRE LA CANTIDAD DE AÑOS QUE TIENE DE SERVICIO
                         for (int i = 0; i < anio; i++)
                         {
+                        IdVacacion++;
                             if (i < minAnio)//VALIDA LOS 5 AÑOS BASE
                             {
                                 diasGanados = minDiasGanados;
@@ -107,6 +112,11 @@ namespace Core.Erp.Bus.RRHH
                             info.DiasGanado = diasGanados;
                             info.DiasPendientes = diasGanados;
                             info.DiasTomados = 0;
+                            info.Descripcion = info.FechaIni.Date.ToString() + " " + info.FechaFin.Date.ToString() + " " + info.DiasGanado.ToString();
+                            info.IdVacacion = IdVacacion;
+                            info.IdPeriodo_Inicio =Convert.ToInt32( info.FechaIni.ToString("ddMMyyyy"));
+                            info.IdPeriodo_Fin = Convert.ToInt32(info.FechaFin.ToString("ddMMyyyy"));
+
                         lst_vacaciones.Add(info);
                         }
                     }
@@ -116,11 +126,25 @@ namespace Core.Erp.Bus.RRHH
                         info.IdEmpresa = info_empleado.IdEmpresa;
                         info.IdEmpleado = info_empleado.IdEmpleado;
                         info.FechaIni = Convert.ToDateTime(info_empleado.em_fecha_ingreso);
-                        info.FechaFin = Convert.ToDateTime(info_empleado.em_fechaSalida);
-                        info.DiasGanado = Convert.ToInt32(dias);
-                        info.DiasPendientes = Convert.ToInt32(dias);
+                        info.FechaFin = Convert.ToDateTime(Convert.ToDateTime( info_empleado.em_fecha_ingreso).AddYears(1).AddDays(-1));
+                        info.DiasGanado = Convert.ToInt32(dias*15)/360;
+                        info.DiasPendientes = Convert.ToInt32(dias * 15) / 360;
+                        info.Descripcion = info.FechaIni.Date.ToString() + " " + info.FechaFin.Date.ToString() + " " + info.DiasGanado.ToString();
+                        info.IdVacacion = IdVacacion + 1;
+                        info.IdPeriodo_Inicio = Convert.ToInt32(info.FechaIni.ToString("ddMMyyyy"));
+                        info.IdPeriodo_Fin = Convert.ToInt32(info.FechaFin.ToString("ddMMyyyy"));
                         lst_vacaciones.Add(info);
 
+                }
+
+                foreach (var item in lst_vacaciones)
+                {
+                    if(!odata.GetExiste(item, ref msg))
+                    odata.GrabarBD(item);
+                    else
+                    {
+                        odata.ModificarBD(item);
+                    }
                 }
                 return lst_vacaciones;
             }

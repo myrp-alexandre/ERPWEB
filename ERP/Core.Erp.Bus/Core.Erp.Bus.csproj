@@ -148,7 +148,9 @@
     <Compile Include="RRHH\ro_cargo_Bus.cs" />
     <Compile Include="RRHH\ro_catalogoTipo_Bus.cs" />
     <Compile Include="RRHH\ro_catalogo_Bus.cs" />
+    <Compile Include="RRHH\ro_Comprobantes_Contables_Bus.cs" />
     <Compile Include="RRHH\ro_Config_Param_contable_Bus.cs" />
+    <Compile Include="RRHH\ro_Config_Param_contable_Data.cs" />
     <Compile Include="RRHH\ro_contrato_Bus.cs" />
     <Compile Include="RRHH\ro_departamento_Bus.cs" />
     <Compile Include="RRHH\ro_division_Bus.cs" />
@@ -186,6 +188,7 @@
     <Compile Include="RRHH\ro_prestamo_detalle_Bus.cs" />
     <Compile Include="RRHH\ro_rol_Bus.cs" />
     <Compile Include="RRHH\ro_rol_detalle_Bus.cs" />
+    <Compile Include="RRHH\ro_rol_detalle_x_rubro_acumulado_Bus.cs" />
     <Compile Include="RRHH\ro_rubros_calculados_Bus.cs" />
     <Compile Include="RRHH\ro_rubro_tipo_Bus.cs" />
     <Compile Include="RRHH\ro_Solicitud_Vacaciones_x_empleado_Bus.cs" />

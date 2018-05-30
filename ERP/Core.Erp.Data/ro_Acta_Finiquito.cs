@@ -24,7 +24,7 @@ namespace Core.Erp.Data
         public decimal IdActaFiniquito { get; set; }
         public decimal IdEmpleado { get; set; }
         public string IdCausaTerminacion { get; set; }
-        public Nullable<decimal> IdContrato { get; set; }
+        public decimal IdContrato { get; set; }
         public Nullable<int> IdCargo { get; set; }
         public System.DateTime FechaIngreso { get; set; }
         public System.DateTime FechaSalida { get; set; }
@@ -43,10 +43,10 @@ namespace Core.Erp.Data
         public string Estado { get; set; }
         public string MotiAnula { get; set; }
         public Nullable<int> IdCodSectorial { get; set; }
-        public Nullable<bool> EsMujerEmbarazada { get; set; }
-        public Nullable<bool> EsDirigenteSindical { get; set; }
-        public Nullable<bool> EsPorDiscapacidad { get; set; }
-        public Nullable<bool> EsPorEnfermedadNoProfesional { get; set; }
+        public bool EsMujerEmbarazada { get; set; }
+        public bool EsDirigenteSindical { get; set; }
+        public bool EsPorDiscapacidad { get; set; }
+        public bool EsPorEnfermedadNoProfesional { get; set; }
         public Nullable<int> IdTipoCbte { get; set; }
         public Nullable<decimal> IdCbteCble { get; set; }
         public Nullable<decimal> IdOrdenPago { get; set; }

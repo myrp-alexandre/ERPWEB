@@ -1,0 +1,96 @@
+@using System.Web.UI.WebControls;
+@model Core.Erp.Info.RRHH.ro_rol_Info
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridView_provisiones";
+        settings.CallbackRouteValues = new { Controller = "ProcesarRol", Action = "GridViewPartial_provisiones" };
+
+
+        settings.KeyFieldName = "secuencia";
+        settings.Width = Unit.Percentage(100);
+
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+
+
+
+        settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowHeaderFilterButton = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+
+        settings.SettingsExport.EnableClientSideExportAPI = true;
+        settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
+        settings.Toolbars.Add(t =>
+        {
+            t.EnableAdaptivity = true;
+            t.Items.Add(GridViewToolbarCommand.ExportToPdf);
+            t.Items.Add(GridViewToolbarCommand.ExportToXls);
+            t.Items.Add(GridViewToolbarCommand.ExportToXlsx);
+            t.Items.Add(GridViewToolbarCommand.ExportToDocx);
+            t.Items.Add(GridViewToolbarCommand.ExportToRtf);
+            t.Items.Add(GridViewToolbarCommand.ExportToCsv);
+        });
+        settings.SettingsExport.RenderBrick = (sender, e) =>
+        {
+            if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
+                e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
+        };
+
+
+        settings.Columns.Add("secuencia", "#").Width = Unit.Percentage(2);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdCtaCble";
+            column.Caption = "Cuenta contable";
+            column.Width = Unit.Percentage(30);
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("IdCtaCble", "Código").Width = Unit.Percentage(30);
+                p.Columns.Add("pc_Cuenta", "Cuenta").Width = Unit.Percentage(70);
+                p.ValueField = "IdCtaCble";
+                p.ValueType = typeof(string);
+                p.DataSource = ViewBag.lst_cuentas;
+            });
+        });
+        settings.Columns.Add("dc_Observacion", "Descripción").Width = Unit.Percentage(40);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "dc_Valor_debe";
+            column.Caption = "Debe";
+            column.Width = Unit.Percentage(15);
+            column.EditorProperties().SpinEdit(sp =>
+            {
+                sp.MinValue = 0;
+                sp.MaxValue = 999999999;
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "dc_Valor_haber";
+            column.Caption = "Haber";
+            column.Width = Unit.Percentage(15);
+            column.EditorProperties().SpinEdit(sp =>
+            {
+                sp.MinValue = 0;
+                sp.MaxValue = 999999999;
+            });
+        });
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_Valor_debe");
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_Valor_haber");
+        settings.Settings.ShowFooter = true;
+
+    });
+}
+@grid.Bind(Model.lst_provisiones).GetHtml()

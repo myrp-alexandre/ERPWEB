@@ -55,6 +55,7 @@
         settings.Columns.Add(c =>
         {
             c.Caption = "#";
+            c.Width = Unit.Percentage(5);
             c.SetDataItemTemplateContent(tc =>
             {
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A" )
@@ -71,7 +72,8 @@
             {
                 ViewContext.Writer.Write(
                     Html.ActionLink("Nuevo", "Nuevo").ToHtmlString() + "&nbsp;" + "&nbsp;"
-                );
+
+                    );
 
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
@@ -80,23 +82,85 @@
         });
 
 
-        settings.Columns.Add("IdEmpleado");
-        settings.Columns.Add("IdSolicitud");
-        settings.Columns.Add("IdVacacion");
-        settings.Columns.Add("IdEmpleado_aprue");
-        settings.Columns.Add("IdEmpleado_remp");
-        settings.Columns.Add("IdEstadoAprobacion");
+        settings.Columns.Add("IdSolicitud","ID").Width = Unit.Percentage(5);
+        settings.Columns.Add("pe_nombre_completo","Empleado").Width=Unit.Percentage(25);
         settings.Columns.Add("Fecha");
-        settings.Columns.Add("AnioServicio");
-        settings.Columns.Add("Dias_q_Corresponde");
-        settings.Columns.Add("Dias_a_disfrutar");
-        settings.Columns.Add("Dias_pendiente");
-        settings.Columns.Add("Anio_Desde");
-        settings.Columns.Add("Anio_Hasta");
-        settings.Columns.Add("Fecha_Desde");
-        settings.Columns.Add("Fecha_Hasta");
-        settings.Columns.Add("Fecha_Retorno");
-        settings.Columns.Add("Observacion");
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Fecha";
+            column.Caption = "Solicitud";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add("Observacion","Observación").Width=Unit.Percentage(15);
+        settings.Columns.Add("Dias_q_Corresponde","Días ganado").Width=Unit.Percentage(10);
+        settings.Columns.Add("Dias_a_disfrutar", "días tomado").Width = Unit.Percentage(10);
+        settings.Columns.Add("Dias_pendiente", "días pendientes").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Anio_Desde";
+            column.Caption = "Año desde";
+            column.Width = Unit.Percentage(11);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Anio_Hasta";
+            column.Caption = "Año hasta";
+            column.Width = Unit.Percentage(11);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Fecha_Desde";
+            column.Caption = "Desde";
+            column.Width = Unit.Percentage(11);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Fecha_Hasta";
+            column.Caption = "Hasta";
+            column.Width = Unit.Percentage(11);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Fecha_Retorno";
+            column.Caption = "Retorna";
+            column.Width = Unit.Percentage(11);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

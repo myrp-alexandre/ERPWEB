@@ -29,6 +29,19 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+        public double get_valor_cuotas_pendientes(int IdEmpresa, decimal IdEmpleado)
+        {
+            try
+            {
+                return odata.get_valor_cuotas_pendientes(IdEmpresa, IdEmpleado);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public ro_prestamo_detalle_Info get_info(int IdEmpresa, decimal IdPrestamo, int Secuencia)
         {
             try

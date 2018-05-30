@@ -50,6 +50,21 @@ namespace Core.Erp.Info.Helps
             QUINCE,
             SEM
         }
+        public enum eTipoTerminacioncontratoRRHH
+        {
+
+            CTL_01,
+            CTL_02,
+            CTL_03,
+            CTL_04,
+            CTL_05,
+            CTL_06,
+            CTL_07,
+            CTL_08,
+            CTL_09,
+            CTL_10,
+            CTL_11
+        }
 
         public enum eTipoIngEgr
         {

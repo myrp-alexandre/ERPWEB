@@ -38,10 +38,7 @@ namespace Core.Erp.Data.RRHH
                              }).ToList();
                 }
                   Lista.ForEach(v => v.descripcion = v.pe_FechaIni.ToString("dd/MM/yyyy").Substring(0, 10) + "                  al                  " + v.pe_FechaFin.ToString("dd/MM/yyyy").Substring(0, 10));
-                //foreach (var item in Lista)
-                //{
-                //    item.descripcion = item.pe_FechaIni.ToString("dd/MM/yyyy").Substring(0, 10) + "  al " + item.pe_FechaFin.ToString("dd/MM/yyyy").Substring(0, 10);
-                //}
+               
                 return Lista;
 
             }

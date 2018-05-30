@@ -6,6 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Bus.RRHH;
+using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Info.Contabilidad;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class ProcesarRolController : Controller
@@ -18,11 +21,16 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_periodo_x_ro_Nomina_TipoLiqui_Bus bus_periodos_x_nomina = new ro_periodo_x_ro_Nomina_TipoLiqui_Bus();
         List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> lst_periodos = new List<ro_periodo_x_ro_Nomina_TipoLiqui_Info>();
         ro_rol_Bus bus_rol = new ro_rol_Bus();
+        ct_plancta_Bus bus_cuentas = new ct_plancta_Bus();
         int IdEmpresa = 0;
         #endregion
 
 
         public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult Index2()
         {
             return View();
         }
@@ -90,7 +98,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {
                     info.IdEmpresa = GetIdEmpresa();
                     if (!bus_rol.procesar(info))
+                    {
+                        cargar_combos(info.IdNomina_Tipo, info.IdNomina_TipoLiqui);
                         return View(info);
+                    }
                     else
                         return RedirectToAction("Index");
                 }
@@ -119,6 +130,170 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
+        [HttpPost]
+        public ActionResult CerrarPeriodo(ro_rol_Info info)
+        {
+            try
+            {
+                
+                    info.IdEmpresa = GetIdEmpresa();
+                    if (!bus_rol.CerrarPeriodo(info))
+                    {
+                        cargar_combos(info.IdNomina_Tipo,info.IdNomina_TipoLiqui);
+                        return View(info);
+                    }
+                    else
+                        return RedirectToAction("Index");
+              
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public ActionResult CerrarPeriodo(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0)
+        {
+            try
+            {
+                cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
+                IdEmpresa = GetIdEmpresa();
+                return View(bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo));
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        [HttpPost]
+        public ActionResult AbrirPeriodo(ro_rol_Info info)
+        {
+            try
+            {
+
+                info.IdEmpresa = GetIdEmpresa();
+                if (!bus_rol.AbrirPeriodo(info))
+                {
+                    cargar_combos(info.IdNomina_Tipo, info.IdNomina_TipoLiqui);
+                    return View(info);
+                }
+                else
+                    return RedirectToAction("Index2");
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public ActionResult AbrirPeriodo(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0)
+        {
+            try
+            {
+                cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
+                IdEmpresa = GetIdEmpresa();
+                return View(bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo));
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        [HttpPost]
+        public ActionResult ContabilizarPeriodo(ro_rol_Info info)
+        {
+            try
+            {
+               info.lst_sueldo_x_pagar= Session["lst_sueldo_pagar"] as List<ct_cbtecble_det_Info>; 
+               info.lst_provisiones= Session["lst_provisiones"] as List<ct_cbtecble_det_Info>;
+                info.UsuarioCierre = Session["IdUsuario"].ToString();
+                
+                    info.IdEmpresa = GetIdEmpresa();
+                    if (!bus_rol.ContabilizarPeriodo(info))
+                    {
+                        cargar_combos(info.IdNomina_Tipo,info.IdNomina_TipoLiqui);
+                        cargar_combo_detalle();
+                        return View(info);
+                    }
+                    else
+                        return RedirectToAction("Index");
+               
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public ActionResult ContabilizarPeriodo(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0)
+        {
+            try
+            {
+                cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
+                cargar_combo_detalle();
+                IdEmpresa = GetIdEmpresa();
+                ro_rol_Info model = new ro_rol_Info();
+                model = bus_rol.get_info_contabilizar(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo);
+                Session["lst_sueldo_pagar"] = model.lst_sueldo_x_pagar;
+                Session["lst_provisiones"] = model.lst_provisiones;
+
+                model.Fechacontabilizacion=DateTime.Now;
+                return View(model);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        [HttpPost]
+        public ActionResult ReversarcontabilidadPeriodo(ro_rol_Info info)
+        {
+            try
+            {
+
+                info.IdEmpresa = GetIdEmpresa();
+                if (!bus_rol.Reversar_contabilidad_Periodo(info))
+                {
+                    cargar_combos(info.IdNomina_Tipo, info.IdNomina_TipoLiqui);
+                    return View(info);
+                }
+                else
+                    return RedirectToAction("Index2");
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public ActionResult ReversarcontabilidadPeriodo(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0)
+        {
+            try
+            {
+                cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
+                IdEmpresa = GetIdEmpresa();
+                return View(bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo));
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         private int GetIdEmpresa()
         {
             try
@@ -134,7 +309,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-
         private void cargar_combos(int IdNomina_Tipo, int IdNomina_Tipo_Liqui)
         {
             try
@@ -154,9 +328,50 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
+        private void cargar_combo_detalle()
+        {
+            try
+            {
+                IdEmpresa = GetIdEmpresa();                
+                ViewBag.lst_cuentas = bus_cuentas.get_list(IdEmpresa,false,true);
 
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
 
-       
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_sueldo_x_pagar()
+        {
+            ro_rol_Info model = new ro_rol_Info();
+            model.lst_sueldo_x_pagar = Session["lst_sueldo_pagar"] as List<ct_cbtecble_det_Info>;
+            return PartialView("_GridViewPartial_sueldo_x_pagar", model);
+        }
+
+        public ActionResult GridViewPartial_provisiones()
+        {
+            ro_rol_Info model = new ro_rol_Info();
+            model.lst_provisiones = Session["lst_provisiones"] as List<ct_cbtecble_det_Info>;
+            return PartialView("_GridViewPartial_provisiones", model);
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_nomonas_cerradas()
+        {
+            try
+            {
+                IdEmpresa = GetIdEmpresa();
+                List<ro_rol_Info> model = bus_rol.get_list(IdEmpresa);
+                return PartialView("_GridViewPartial_nominas_cerradas", model);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

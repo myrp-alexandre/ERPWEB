@@ -1,10 +1,18 @@
 ﻿@model Core.Erp.Info.RRHH.ro_Solicitud_Vacaciones_x_empleado_Info
 @{
-    ViewBag.Title = "Nuevo contrato";
+    ViewBag.Title = "Nuevo Solicitud";
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
 }
 
 
-@using (Html.BeginForm("Nuevo", "Contrato", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "Vacaciones", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="row">
         <div class="col-md-12">
@@ -40,7 +48,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdEstadoAprobacion">Empleado*</label>
+                    <label for="IdEstadoAprobacion">Empleado autoriza*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdEstadoAprobacion, settings =>
                {
                    settings.Name = "IdEstadoAprobacion";
@@ -65,7 +73,7 @@
             </div>
         </div>
     </div>
-
+    /*
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -90,15 +98,29 @@
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
                    settings.Properties.NullText = "== Seleccione ==";
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                   //settings.Properties.DataSource = Model.lst_vacaciones;
+                   settings.CallbackRouteValues  =  new { Controller = "Vacaciones", Action = "GridLookupPartial_vacaciones" };
+
+                   // @Html.Action("GridViewPartial_vaciones_periodos")
 
 
-                   settings.CallbackRouteValues = new { Controller = "Vacaciones", Action = "GridLookupPartial_vacaciones" };
+               }).GetHtml()
+               @Html.ValidationMessageFor(q => q.IdVacacion, "", new { @class = "text-danger" })
 
-                
 
 
-               }).BindList(ViewBag.lst_vacaciones).GetHtml()
-                    @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    */
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="FechaInicio">Periodo*</label>
+                    @Html.DropDownListFor(q => q.IdVacacion, new SelectList(ViewBag.lst_vacaciones, "IdVacacion", "Descripcion"), new { @class = "form-control", @id = "vacaciones" })
+                    @Html.ValidationMessageFor(q => q.IdVacacion, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -110,22 +132,35 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="Fecha_Desde">Fecha desde*</label>
-                    @Html.TextBoxFor(q => q.Fecha_Desde, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.Fecha_Desde, new { @class = "form-control", @id = "FechaInicio" })
                     @Html.ValidationMessageFor(q => q.Fecha_Desde, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="Fecha_Desde">Fecha hasta*</label>
-                    @Html.TextBoxFor(q => q.Fecha_Desde, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaInicio" })
-                    @Html.ValidationMessageFor(q => q.Fecha_Desde, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Fecha_Hasta">Fecha fin*</label>
+                    <label for="Fecha_Hasta">Fecha hasta*</label>
                     @Html.TextBoxFor(q => q.Fecha_Hasta, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaFin" })
                     @Html.ValidationMessageFor(q => q.Fecha_Hasta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Fecha_Retorno">Fecha retorno*</label>
+                    @Html.TextBoxFor(q => q.Fecha_Retorno, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaRetorno" })
+                    @Html.ValidationMessageFor(q => q.Fecha_Retorno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="Gozadas_Pgadas"></label>
+                        @Html.DevExpress().CheckBoxFor(q => q.Gozadas_Pgadas, settings =>
+                       {
+                           settings.Name = "Gozadas_Pgadas";
+                           settings.Text = "Vacaciones gozadas";
+
+                       }).GetHtml()
+                    </div>
                 </div>
             </div>
         </div>
@@ -165,6 +200,9 @@
         $('#FechaFin').datepicker({
             autoclose: true
         })
+        $('#FechaRetorno').datepicker({
+            autoclose: true
+        })
     })
 </script>
 
@@ -186,9 +224,11 @@
                     contentType: 'application/json; charset=utf-8',
                     success: function (data)
                     {
+                         //IdVacacion.PerformCallback();
+                        $.each(data, function (i, row) {
+                            $("#vacaciones").append("<option value=" + row.IdVacacion + ">" + row.Descripcion + "</option>");
+                        });
 
-                        IdVacacion.PerformCallback();
-                        IdVacacion.datasouce = data;
                     },
                     error: function (error)
                     {

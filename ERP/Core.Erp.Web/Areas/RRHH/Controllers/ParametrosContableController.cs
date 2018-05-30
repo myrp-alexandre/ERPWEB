@@ -44,6 +44,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa,false);
             ViewBag.lst_rubro = bus_rubro.get_list(IdEmpresa, false);
             ViewBag.lst_comprobante_tipo = bus_comprobante_tipo.get_list(IdEmpresa, false);
+            ViewBag.lst_rubro = bus_rubro.get_list_rub_concepto(IdEmpresa);
         }
         public ActionResult Nuevo()
         {

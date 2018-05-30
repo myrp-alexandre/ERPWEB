@@ -63,7 +63,7 @@
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdActaFiniquito = DataBinder.Eval(tc.DataItem, "IdActaFiniquito") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdActaFiniquito = DataBinder.Eval(tc.DataItem, "IdActaFiniquito") },
+                        Html.ActionLink("Anular", "Anular", new {  IdActaFiniquito = DataBinder.Eval(tc.DataItem, "IdActaFiniquito") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -79,17 +79,62 @@
             c.Width = Unit.Pixel(150);
         });
 
-        settings.Columns.Add("IdActaFiniquito");
-        settings.Columns.Add("IdEmpleado");
-        settings.Columns.Add("IdCausaTerminacion");
-        settings.Columns.Add("IdContrato");
-        settings.Columns.Add("IdActaFiniquito");
-        settings.Columns.Add("FechaIngreso");
-        settings.Columns.Add("FechaSalida");
-        settings.Columns.Add("UltimaRemuneracion");
-        settings.Columns.Add("Observacion");
-        settings.Columns.Add("Ingresos");
-        settings.Columns.Add("Egresos");
+        settings.Columns.Add("IdActaFiniquito","ID").Width=Unit.Percentage(5);
+        settings.Columns.Add("em_codigo", "Código").Width = Unit.Percentage(12);
+        settings.Columns.Add("pe_nombre_completo", "Empleado").Width = Unit.Percentage(30);
+        settings.Columns.Add("Contrato", "Contrato").Width = Unit.Percentage(20);
+        settings.Columns.Add("ca_descripcion", "Tipo liquidación").Width = Unit.Percentage(20);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "FechaIngreso";
+            column.Caption = "Ingreso";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "d";
+
+        }); settings.Columns.Add(column =>
+        {
+            column.FieldName = "FechaSalida";
+            column.Caption = "Salida";
+            column.Width = Unit.Percentage(8);
+            column.PropertiesEdit.DisplayFormatString = "d";
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Ingresos";
+            column.Caption = "$ Ingresos";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "c2";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Egresos";
+            column.Caption = "$ Egresos";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "c2";
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "#";
+            column.Width = Unit.Percentage(10);
+            column.SetDataItemTemplateContent(container =>
+            {
+                if (Convert.ToString(DataBinder.Eval(container.DataItem, "Estado")) == "A")
+                {
+                        Html.DevExpress().HyperLink(hyperlink =>
+                        {
+                            var IdActaFiniquito = DataBinder.Eval(container.DataItem, "IdActaFiniquito");
+                           
+                            hyperlink.Properties.Text = "Liquidar A.F";
+                            hyperlink.NavigateUrl = Url.Action("Liquidar", "ActaFiniquito", new {  IdActaFiniquito = IdActaFiniquito });
+                        }).Render();
+
+                }
+            });
+        });
+
+
     });
 }
 @grid.Bind(Model).GetHtml()

@@ -32,5 +32,6 @@ namespace Core.Erp.Data
         public virtual ro_empleado ro_empleado { get; set; }
         public virtual ro_rol ro_rol { get; set; }
         public virtual ro_rubro_tipo ro_rubro_tipo { get; set; }
+        public virtual ro_rol_detalle_x_rubro_acumulado ro_rol_detalle_x_rubro_acumulado { get; set; }
     }
 }

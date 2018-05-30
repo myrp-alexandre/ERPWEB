@@ -16,17 +16,21 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                        Lista = (from q in Context. ro_rol
-                                 where q.IdEmpresa == IdEmpresa
-                                 select new  ro_rol_Info
+                    Lista = (from ROL in Context.vwro_rol
+                                        select new  ro_rol_Info
                                  {
-                                     IdEmpresa = q.IdEmpresa,
-                                     IdNomina_Tipo = q.IdNominaTipo,
-                                     IdNomina_TipoLiqui = q.IdNominaTipoLiqui,
-                                     IdPeriodo = q.IdPeriodo,
-                                     Observacion=q.Observacion,
-                                      Descripcion=q.Descripcion,
-                                      Cerrado=q.Cerrado
+                                     IdEmpresa = ROL.IdEmpresa,
+                                     IdNomina_Tipo = ROL.IdNominaTipo,
+                                     IdNomina_TipoLiqui = ROL.IdNominaTipoLiqui,
+                                     IdPeriodo = ROL.IdPeriodo,
+                                     Observacion= ROL.Observacion,
+                                      Descripcion= ROL.Descripcion,
+                                      Cerrado= ROL.Cerrado,
+                                      DescripcionProcesoNomina=ROL.DescripcionProcesoNomina,
+                                      Procesado=ROL.Procesado,
+                                      Contabilizado=ROL.Contabilizado,
+                                      pe_FechaIni=ROL.pe_FechaIni,
+                                      pe_FechaFin=ROL.pe_FechaFin
                                        
                                  }).ToList();
                    
@@ -87,5 +91,78 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+        public bool CerrarPeriodo(ro_rol_Info info)
+        {
+            try
+            {
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    Context.spRo_Cierre_Rol(info.IdEmpresa, info.IdPeriodo, info.IdNomina_Tipo, info.IdNomina_TipoLiqui);
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool ContabilizarPeriodo(ro_rol_Info info)
+        {
+            try
+            {
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    Context.sprol_CancelarNovedades_Prestamos(info.IdEmpresa,  info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo);
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool Reversar_contabilidad_Periodo(ro_rol_Info info)
+        {
+            try
+            {
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    Context.spRo_Reverso_Rol(info.IdEmpresa, info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo);
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool AbrirPeriodo(ro_rol_Info info)
+        {
+            try
+            {
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    ro_periodo_x_ro_Nomina_TipoLiqui Entity = Context.ro_periodo_x_ro_Nomina_TipoLiqui.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa 
+                    && q.IdNomina_Tipo == info.IdNomina_Tipo
+                    && q.IdNomina_TipoLiqui==info.IdNomina_TipoLiqui
+                    && q.IdPeriodo==info.IdPeriodo);
+                    if (Entity == null)
+                        return false;
+                    Entity.Cerrado = "N";
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

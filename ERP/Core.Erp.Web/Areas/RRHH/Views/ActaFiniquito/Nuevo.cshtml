@@ -1,9 +1,9 @@
 ﻿@model Core.Erp.Info.RRHH.ro_Acta_Finiquito_Info
-
 @{
-    ViewBag.Title = "Nuevo";
+    ViewBag.Title = "Nueva acta finiquito";
 }
-
+@using (Html.BeginForm("Nuevo", "ActaFiniquito", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-12">
@@ -37,39 +37,24 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="col-md-12">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="IdContrato_Tipo">Tipo contrato*</label>
-                @Html.DropDownListFor(q => q.IdContrato, new SelectList(ViewBag.lst_tipo_contrato, "CodCatalogo", "ca_descripcion"), "== Seleccione ==", new { @class = "form-control",@id= "IdContrato_Tipo" })
-                @Html.ValidationMessageFor(q => q.IdContrato, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(q => q.Contrato_tipo, new SelectList(ViewBag.lst_tipo_contrato, "CodCatalogo", "ca_descripcion"), "== Seleccione ==", new { @class = "form-control",@id= "IdContrato_Tipo" })
+                @Html.ValidationMessageFor(q => q.Contrato_tipo, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="IdContrato_Tipo">Termino de terminación del contrato*</label>
-                @Html.DropDownListFor(q => q.IdCausaTerminacion, new SelectList(ViewBag.lst_tipo_terminacion, "CodCatalogo", "ca_descripcion"), "== Seleccione ==", new { @class = "form-control", @id="idterminacion"})
-                @Html.ValidationMessageFor(q => q.IdCausaTerminacion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
         <div class="col-md-3">
             <div class="form-group">
                 <label for="FechaIngreso">Fecha ingreso*</label>
-                @Html.TextBoxFor(q => q.FechaIngreso, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaInicio" })
+                @Html.TextBoxFor(q => q.FechaIngreso, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaIngreso" })
                 @Html.ValidationMessageFor(q => q.FechaIngreso, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                <label for="FechaFin">Fecha salida*</label>
-                @Html.TextBoxFor(q => q.FechaSalida, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "em_fechaSalida" })
+                <label for="FechaSalida">Fecha salida*</label>
+                @Html.TextBoxFor(q => q.FechaSalida, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaSalida" })
                 @Html.ValidationMessageFor(q => q.FechaSalida, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -81,7 +66,63 @@
             </div>
         </div>
     </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.DevExpress().CheckBoxFor(q => q.EsMujerEmbarazada, settings =>
+                       {
+                           settings.Name = "EsMujerEmbarazada";
+                           settings.Text = "¿Es mujer emabaraza?";
+
+                       }).GetHtml()             
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.DevExpress().CheckBoxFor(q => q.EsPorDiscapacidad, settings =>
+                       {
+                           settings.Name = "EsPorDiscapacidad";
+                           settings.Text = "¿Por discapacidad?";
+
+                       }).GetHtml()
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.DevExpress().CheckBoxFor(q => q.EsDirigenteSindical, settings =>
+                       {
+                           settings.Name = "EsDirigenteSindical";
+                           settings.Text = "¿Es dirigente sindical?";
+
+                       }).GetHtml()
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.DevExpress().CheckBoxFor(q => q.EsPorEnfermedadNoProfesional, settings =>
+                       {
+                           settings.Name = "EsPorEnfermedadNoProfesional";
+                           settings.Text = "¿Por enfermedad no profesional?";
+
+                       }).GetHtml()
+            </div>
+        </div>
     </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="IdContrato_Tipo">Termino de terminación del contrato*</label>
+                @Html.DropDownListFor(q => q.IdCausaTerminacion, new SelectList(ViewBag.lst_tipo_terminacion, "CodCatalogo", "ca_descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "idterminacion" })
+                @Html.ValidationMessageFor(q => q.IdCausaTerminacion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-12">
@@ -93,11 +134,12 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="Observacion">Detalle Acta finiquito</label>
+                <label for="GridViewPartial_liquidacion_empleado_det">Detalle Acta finiquito</label>
                 @Html.Action("GridViewPartial_liquidacion_empleado_det")
             </div>
         </div>
@@ -105,8 +147,9 @@
 </div>
 
 <div class="box-footer">
+    <button type="button" onclick="Procesar_Liqui()" class="btn btn-primary" id="btnprocesar">Procesar</button>
     <button type="submit" class="btn btn-primary">Guardar</button>
-    <a class="btn btn-default" href="@Url.Action("Index","Contrato",new { Area = "RRHH" },null)">Cancelar</a>
+    <a class="btn btn-default" href="@Url.Action("Index","ActaFiniquito",new { Area = "RRHH" },null)">Cancelar</a>
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -116,16 +159,15 @@
     $(function () {
 
         //Date picker
-        $('#FechaInicio').datepicker({
+        $('#FechaIngreso').datepicker({
             autoclose: true
         })
 
-        $('#em_fechaSalida').datepicker({
+        $('#FechaSalida').datepicker({
             autoclose: true
         })
     })
 </script>
-
 
 <script>
     function get_info()
@@ -148,9 +190,9 @@
                         $("#IdContrato_Tipo").val(data.IdContrato_Tipo);
                         $("#IdContrato").val(data.IdContrato);
                         $("#FechaInicio").val(data.FechaInicio);
-                        $("#em_fechaSalida").val(data.em_fechaSalida);
+                        $("#FechaSalida").val('dd/MM/yyyy',data.em_fechaSalida);
                         $("#Sueldo").val(data.Sueldo);
-                        
+
                     }
                 },
                 error: function (error) {
@@ -159,4 +201,41 @@
             });
         }
     
+</script>
+
+<script>
+    function Procesar_Liqui()
+            {
+        var datos = {
+                        FechaIngreso: $("#FechaIngreso").val(),
+                        FechaSalida: $("#FechaSalida").val(),
+                        IdEmpleado: IdEmpleado.GetValue(),
+                        UltimaRemuneracion: $("#Sueldo").val(),
+                        idterminacion: $("#idterminacion").val(),
+                        EsMujerEmbarazada: EsMujerEmbarazada.GetValue(),
+                        EsDirigenteSindical: EsDirigenteSindical.GetValue(),
+                        EsPorDiscapacidad: EsPorDiscapacidad.GetValue(),
+                        EsPorEnfermedadNoProfesional: EsPorEnfermedadNoProfesional.GetValue()
+
+                }
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(datos),
+                    url: '@Url.Action("Procesar","ActaFiniquito", new { Area = "RRHH" })',
+                    async: false,
+                    bDeferRender: true,
+                    bProcessing: true,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data)
+                    {
+
+                        GridView_liquidacion_empleado_det.PerformCallback();
+
+                    },
+                    error: function (error)
+                    {
+                    }
+                    });
+};
 </script>

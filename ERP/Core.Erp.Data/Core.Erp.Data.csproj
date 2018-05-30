@@ -580,6 +580,9 @@
     <Compile Include="ro_catalogoTipo.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="ro_Comprobantes_Contables.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="ro_Config_Param_contable.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -691,6 +694,9 @@
     <Compile Include="ro_rol_detalle.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="ro_rol_detalle_x_rubro_acumulado.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="ro_rubros_calculados.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -715,6 +721,7 @@
     <Compile Include="RRHH\ro_cargo_Data.cs" />
     <Compile Include="RRHH\ro_catalogoTipo_Data.cs" />
     <Compile Include="RRHH\ro_catalogo_Data.cs" />
+    <Compile Include="RRHH\ro_Comprobantes_Contables_Data.cs" />
     <Compile Include="RRHH\ro_Config_Param_contable_Data.cs" />
     <Compile Include="RRHH\ro_contrato_Data.cs" />
     <Compile Include="RRHH\ro_departamento_Data.cs" />
@@ -752,6 +759,7 @@
     <Compile Include="RRHH\ro_prestamo_detalle_Data.cs" />
     <Compile Include="RRHH\ro_rol_Data.cs" />
     <Compile Include="RRHH\ro_rol_detalle_Data.cs" />
+    <Compile Include="RRHH\ro_rol_detalle_x_rubro_acumulado_Data.cs" />
     <Compile Include="RRHH\ro_rubros_calculados_Data.cs" />
     <Compile Include="RRHH\ro_rubro_tipo_Data.cs" />
     <Compile Include="RRHH\ro_Solicitud_Vacaciones_x_empleado_Data.cs" />
@@ -870,6 +878,12 @@
     <Compile Include="VWINV_002.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwROL_Rpt002.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwRo_ActaFiniquito.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwro_empleados_consulta.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -912,7 +926,13 @@
     <Compile Include="vwRo_Prestamo.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwro_rol.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwro_rubro_tipo.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwRo_Solicitud_Vacaciones.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
   </ItemGroup>

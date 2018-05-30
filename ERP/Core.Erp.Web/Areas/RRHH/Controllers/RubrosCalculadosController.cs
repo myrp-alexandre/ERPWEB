@@ -101,7 +101,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 cargar_combos();
                 IdEmpresa = GetIdEmpresa();
-                return View(bus_cargo.get_info(IdEmpresa, IdArea));
+                return View(bus_cargo.get_info(IdEmpresa));
 
             }
             catch (Exception)

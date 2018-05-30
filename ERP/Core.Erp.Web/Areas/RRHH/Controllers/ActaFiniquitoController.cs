@@ -18,18 +18,18 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_rubro_tipo_Bus bus_rubro = new ro_rubro_tipo_Bus();
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
         ro_catalogo_Bus bus_catalogo = new ro_catalogo_Bus();
+        ro_Acta_Finiquito_Info info = new ro_Acta_Finiquito_Info();
         int IdEmpresa = 0;
         #endregion
         public ActionResult Index()
         {
             return View();
         }
-
         [ValidateInput(false)]
         public ActionResult GridViewPartial_liquidacion_empleado()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<ro_Acta_Finiquito_Info> model = bus_acta_finiquito.get_list(IdEmpresa,false);
+            List<ro_Acta_Finiquito_Info> model = bus_acta_finiquito.get_list(IdEmpresa);
             return PartialView("_GridViewPartial_liquidacion_empleado", model);
         }
         private void cargar_combos()
@@ -40,15 +40,15 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ViewBag.lst_tipo_terminacion = bus_catalogo.get_list_x_tipo(24);
 
         }
-
         public ActionResult Nuevo()
         {
             ro_Acta_Finiquito_Info model = new ro_Acta_Finiquito_Info
             {
                 IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
                 IdEmpleado = 1,
-                FechaSalida=DateTime.Now
-                
+                FechaSalida=DateTime.Now,
+               IdCausaTerminacion= "CTL_02"
+
             };
             model.lst_detalle = new List<ro_Acta_Finiquito_Detalle_Info>();
             lst_detalle.set_list(model.lst_detalle);
@@ -56,7 +56,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             cargar_combos_detalle();
             return View(model);
         }
-
         [HttpPost]
         public ActionResult Nuevo(ro_Acta_Finiquito_Info model)
         {
@@ -76,20 +75,18 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
             return RedirectToAction("Index");
         }
-
-        public ActionResult Modificar(int IdEmpleado, decimal IdActaFiniquito)
+        public ActionResult Modificar(decimal IdActaFiniquito)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            ro_Acta_Finiquito_Info model = bus_acta_finiquito.get_info(IdEmpresa, IdEmpleado, IdActaFiniquito);
+            ro_Acta_Finiquito_Info model = bus_acta_finiquito.get_info(IdEmpresa, IdActaFiniquito);
             if (model == null)
                 return RedirectToAction("Index");
-            model.lst_detalle = bus_detalle.get_list(IdEmpresa, IdEmpleado, IdEmpleado);
+            model.lst_detalle = bus_detalle.get_list(IdEmpresa, IdActaFiniquito);
             lst_detalle.set_list(model.lst_detalle);
             cargar_combos_detalle();
             cargar_combos();
             return View(model);
         }
-
         [HttpPost]
         public ActionResult Modificar(ro_Acta_Finiquito_Info model)
         {
@@ -101,7 +98,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 return View(model);
             }
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
             if (!bus_acta_finiquito.modificarDB(model))
             {
                 cargar_combos();
@@ -110,14 +107,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return RedirectToAction("Index");
 
         }
-
-        public ActionResult Anular(int IdEmpleado, decimal IdActaFiniquito)
+        public ActionResult Anular( decimal IdActaFiniquito)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            ro_Acta_Finiquito_Info model = bus_acta_finiquito.get_info(IdEmpresa, IdEmpleado, IdActaFiniquito);
+            ro_Acta_Finiquito_Info model = bus_acta_finiquito.get_info(IdEmpresa, IdActaFiniquito);
             if (model == null)
                 return RedirectToAction("Index");
-            model.lst_detalle = bus_detalle.get_list(IdEmpresa, IdEmpleado, IdActaFiniquito);
+            model.lst_detalle = bus_detalle.get_list(IdEmpresa, IdActaFiniquito);
             lst_detalle.set_list(model.lst_detalle);
             cargar_combos();
             return View(model);
@@ -128,7 +124,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.lst_detalle = lst_detalle.get_list();
 
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
             if (!bus_acta_finiquito.anularDB(model))
             {
                 cargar_combos();
@@ -136,7 +132,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
             return RedirectToAction("Index");
         }
-
         [ValidateInput(false)]
         public ActionResult GridViewPartial_liquidacion_empleado_det()
         {
@@ -148,48 +143,116 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_liquidacion_empleado_det", model);
         }
-
         private void cargar_combos_detalle()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ViewBag.lst_rubro = bus_rubro.get_list_rub_concepto(IdEmpresa);
+            Session["lst_rubro"] = ViewBag.lst_rubro;
         }
-
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ro_Acta_Finiquito_Detalle_Info info_det)
         {
+
+            List<ro_rubro_tipo_Info> lista = Session["lst_rubro"] as List<ro_rubro_tipo_Info>;
+            if (lista != null && lista.Count > 0)
+                if (lista.Where(v => v.IdRubro == info_det.IdRubro).FirstOrDefault().ru_tipo == "E")
+                    info_det.Valor = info_det.Valor * -1;
+
             if (ModelState.IsValid)
                 lst_detalle.AddRow(info_det);
             ro_Acta_Finiquito_Info model = new ro_Acta_Finiquito_Info();
             model.lst_detalle = lst_detalle.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_empleado_novedad_det", model);
+            return PartialView("_GridViewPartial_liquidacion_empleado_det", model);
         }
-
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ro_Acta_Finiquito_Detalle_Info info_det)
         {
+            List<ro_rubro_tipo_Info> lista = Session["lst_rubro"] as List<ro_rubro_tipo_Info>;
+            if (lista != null && lista.Count > 0)
+                if (lista.Where(v => v.IdRubro == info_det.IdRubro).FirstOrDefault().ru_tipo == "E")
+                    info_det.Valor = info_det.Valor * -1;
+
             if (ModelState.IsValid)
                 lst_detalle.UpdateRow(info_det);
             ro_Acta_Finiquito_Info model = new ro_Acta_Finiquito_Info();
             model.lst_detalle = lst_detalle.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_empleado_novedad_det", model);
+            return PartialView("_GridViewPartial_liquidacion_empleado_det", model);
         }
-
         public ActionResult EditingDelete([ModelBinder(typeof(DevExpressEditorsBinder))] ro_Acta_Finiquito_Detalle_Info info_det)
         {
             lst_detalle.DeleteRow(info_det.IdSecuencia);
             ro_Acta_Finiquito_Info model = new ro_Acta_Finiquito_Info();
             model.lst_detalle = lst_detalle.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_empleado_novedad_det", model);
+            return PartialView("_GridViewPartial_liquidacion_empleado_det", model);
+        }
+        public ActionResult Procesar(DateTime? FechaIngreso , DateTime? FechaSalida, decimal IdEmpleado=0, 
+        double UltimaRemuneracion=0,  string idterminacion="", bool EsMujerEmbarazada=false, bool EsDirigenteSindical = false,
+        bool EsPorDiscapacidad = false,bool EsPorEnfermedadNoProfesional=false)
+        {
+
+                      
+
+            if (FechaIngreso == null)
+                FechaIngreso = DateTime.Now;
+            if (FechaSalida == null)
+                FechaSalida = DateTime.Now;
+            IdEmpresa = Convert.ToInt32(Session["IdEmpresa"].ToString());
+            info.IdEmpleado = IdEmpleado;
+            info.IdEmpresa = IdEmpresa;
+            info.UltimaRemuneracion = UltimaRemuneracion;
+            info.FechaIngreso =Convert.ToDateTime( FechaIngreso);
+            info.FechaSalida =Convert.ToDateTime( FechaSalida);
+            info.IdCausaTerminacion = idterminacion;
+            info.EsMujerEmbarazada = EsMujerEmbarazada;
+            info.EsDirigenteSindical = EsDirigenteSindical;
+            info.EsPorDiscapacidad = EsPorDiscapacidad;
+            info.EsPorEnfermedadNoProfesional = EsPorEnfermedadNoProfesional;
+            info = bus_acta_finiquito.ObtenerIndemnizacion(info);
+            lst_detalle.set_list(info.lst_detalle);
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+
+        
+        public ActionResult Liquidar( decimal IdActaFiniquito)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            ro_Acta_Finiquito_Info model = bus_acta_finiquito.get_info(IdEmpresa, IdActaFiniquito);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.lst_detalle = bus_detalle.get_list(IdEmpresa, IdActaFiniquito);
+            lst_detalle.set_list(model.lst_detalle);
+            cargar_combos_detalle();
+            cargar_combos();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Liquidar(ro_Acta_Finiquito_Info model)
+        {
+            model.lst_detalle = lst_detalle.get_list();
+            if (model.lst_detalle == null || model.lst_detalle.Count() == 0)
+            {
+                ViewBag.mensaje = "No existe detalle para la planificación";
+                cargar_combos();
+                return View(model);
+            }
+            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            if (!bus_acta_finiquito.Liquidar(model))
+            {
+                cargar_combos();
+                return View(model);
+            }
+            return RedirectToAction("Index");
+
         }
 
     }
 
 
-    }
+}
 
     public class ro_Acta_Finiquito_Detalle_lst
     {

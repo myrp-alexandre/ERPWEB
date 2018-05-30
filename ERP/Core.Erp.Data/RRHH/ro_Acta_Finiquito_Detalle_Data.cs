@@ -9,7 +9,7 @@ namespace Core.Erp.Data.RRHH
    public class ro_Acta_Finiquito_Detalle_Data
     {
 
-        public List<ro_Acta_Finiquito_Detalle_Info> get_list(int IdEmpresa, decimal IdEmpleado, decimal IdActaFiniquito)
+        public List<ro_Acta_Finiquito_Detalle_Info> get_list(int IdEmpresa, decimal IdActaFiniquito)
         {
             try
             {
@@ -18,8 +18,10 @@ namespace Core.Erp.Data.RRHH
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     Lista = (from q in Context.ro_Acta_Finiquito_Detalle
+                             join p in Context.ro_rubro_tipo
+                             on new {q.IdEmpresa,q.IdRubro}equals new {p.IdEmpresa, p.IdRubro}
+                              
                              where q.IdEmpresa == IdEmpresa
-                                   & q.IdEmpleado == IdEmpleado
                                    && q.IdActaFiniquito == IdActaFiniquito
                              select new ro_Acta_Finiquito_Detalle_Info
                              {
@@ -27,14 +29,13 @@ namespace Core.Erp.Data.RRHH
                                  IdActaFiniquito = q.IdActaFiniquito,
                                  IdSecuencia = q.IdSecuencia,
                                  IdRubro = q.IdRubro,
-                                 IdEmpleado = q.IdEmpleado,
                                  Observacion = q.Observacion,
-                                 Otros_valor = q.Otros_valor,
-                                 Valor = q.Valor
+                                 Valor = q.Valor,
+                                 ru_tipo=p.ru_tipo
+                                 
                              }).ToList();
 
                 }
-
                 return Lista;
             }
             catch (Exception)
@@ -51,7 +52,7 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    ro_Acta_Finiquito_Detalle Entity = Context.ro_Acta_Finiquito_Detalle.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdEmpleado == IdEmpleado && q.IdActaFiniquito == IdActaFiniquito && q.IdSecuencia == Secuencia);
+                    ro_Acta_Finiquito_Detalle Entity = Context.ro_Acta_Finiquito_Detalle.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdActaFiniquito == IdActaFiniquito && q.IdSecuencia == Secuencia);
                     if (Entity == null) return null;
 
                     info = new ro_Acta_Finiquito_Detalle_Info
@@ -60,7 +61,6 @@ namespace Core.Erp.Data.RRHH
                         IdActaFiniquito = Entity.IdActaFiniquito,
                         Valor = Entity.Valor,
                         Observacion = Entity.Observacion,
-                        IdEmpleado = Entity.IdEmpleado
                     };
                 }
 
@@ -86,7 +86,6 @@ namespace Core.Erp.Data.RRHH
                             IdActaFiniquito = item.IdActaFiniquito,
                             IdSecuencia = item.IdSecuencia,
                             IdRubro = item.IdRubro,
-                            IdEmpleado = item.IdEmpleado,
                             Valor = item.Valor,
                             Observacion = item.Observacion,
                         };
@@ -96,7 +95,7 @@ namespace Core.Erp.Data.RRHH
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception )
             {
 
                 throw;
@@ -108,7 +107,7 @@ namespace Core.Erp.Data.RRHH
             {
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    string sql = "delete ro_Acta_Finiquito_Detalle where IdEmpresa='" + info.IdEmpresa + "' and IdEmpleado='" + info.IdEmpleado + "' and IdActaFiniquito='" + info.IdActaFiniquito + "'";
+                    string sql = "delete ro_Acta_Finiquito_Detalle where IdEmpresa='" + info.IdEmpresa + "' and IdActaFiniquito='" + info.IdActaFiniquito + "'";
                     Context.Database.ExecuteSqlCommand(sql);
                 }
 

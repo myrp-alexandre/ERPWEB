@@ -86,9 +86,61 @@
                         </div>
                     </div>
                     <div class="box-body">
+
                         <div class="row">
                             <div class="col-md-12">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="IdRubro_acta_finiquito">Rubro Acta finiquito*</label>
+                                                            @Html.DevExpress().ComboBoxFor(q => q.IdRubro_acta_finiquito, settings =>
+                                               {
+                                                   settings.Name = "IdRubro_acta_finiquito";
+                                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                                   settings.Properties.Columns.Add("ru_codRolGen", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                                   settings.Properties.Columns.Add("ru_descripcion", "Rubro").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                                   settings.Properties.Columns.Add("ru_tipo", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(80);
 
+                                                   //Campo ID
+                                                   settings.Properties.ValueField = "IdRubro";
+                                                   settings.Properties.ValueType = typeof(decimal);
+                                                   settings.Properties.TextField = "ru_descripcion";
+                                                   //Boton para seleccionar ningun registro
+                                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                                   settings.Properties.NullText = "== Seleccione ==";
+                                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+                                               }).BindList(ViewBag.lst_rubro).GetHtml()
+                                                            @Html.ValidationMessageFor(q => q.IdRubro_acta_finiquito, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <label for="Sueldo_basico">Salario básico*</label>
+                                        @Html.TextBoxFor(q => q.Sueldo_basico, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(q => q.Sueldo_basico, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="Porcentaje_aporte_patr">Aporte patronal*</label>
+                                        @Html.TextBoxFor(q => q.Porcentaje_aporte_patr, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(q => q.Porcentaje_aporte_patr, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="Porcentaje_aporte_patr">Aporte personal*</label>
+                                        @Html.TextBoxFor(q => q.Porcentaje_aporte_pers, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(q => q.Porcentaje_aporte_pers, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

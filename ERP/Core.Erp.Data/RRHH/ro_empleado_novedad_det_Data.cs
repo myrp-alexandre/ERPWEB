@@ -8,7 +8,7 @@ namespace Core.Erp.Data.RRHH
 {
    public class ro_empleado_novedad_det_Data
     {
-
+        
         public List<ro_empleado_novedad_det_Info> get_list(int IdEmpresa, decimal IdEmpleado, decimal IdNovedad)
         {
             try
@@ -46,6 +46,48 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+        public List<ro_empleado_novedad_det_Info> get_list_nov_liq_empleado(int IdEmpresa, decimal IdEmpleado)
+        {
+            try
+            {
+                List<ro_empleado_novedad_det_Info> Lista;
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    Lista = (from q in Context.ro_empleado_novedad_det
+                             join p in Context.ro_rubro_tipo
+                             on new { q.IdEmpresa, q.IdRubro} equals new {p.IdEmpresa, p.IdRubro}
+                                 where q.IdEmpresa == IdEmpresa
+                                   & q.IdEmpleado == IdEmpleado
+                                   && q.Estado == "A"
+                                   && q.EstadoCobro=="PEN"
+                             select new ro_empleado_novedad_det_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdNovedad = q.IdNovedad,
+                                 IdNomina_tipo = q.IdNomina_tipo,
+                                 IdNomina_Tipo_Liq = q.IdNomina_Tipo_Liq,
+                                 IdEmpleado = q.IdEmpleado,
+                                 FechaPago = q.FechaPago,
+                                 Observacion = q.Observacion,
+                                 Estado = q.Estado,
+                                 Valor = q.Valor,
+                                 IdRubro = q.IdRubro,
+                                 Secuencia = q.Secuencia,
+                                 rub_tipo=p.ru_tipo
+                             }).ToList();
+
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public ro_empleado_novedad_det_Info get_info(int IdEmpresa, decimal IdEmpleado, decimal IdNovedad, int Secuencia)
         {
             try

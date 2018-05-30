@@ -284,7 +284,7 @@ namespace Core.Erp.Data.RRHH
                              //join cat in Context.ro_catalogo
                              //on cont.IdContrato_Tipo equals cat.CodCatalogo
                              where cont.IdEmpresa == IdEmpresa
-                             && emp.IdEmpresa == IdEmpresa
+                             && emp.IdEmpleado == IdEmpleado
                              && cont.EstadoContrato== "ECT_ACT"
                              && cont.Estado=="A"
                              select new ro_contrato_Info

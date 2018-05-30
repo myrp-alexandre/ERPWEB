@@ -23,11 +23,11 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
-        public ro_Solicitud_Vacaciones_x_empleado_Info get_info(int IdEmpresa, int IdCargo)
+        public ro_Solicitud_Vacaciones_x_empleado_Info get_info(int IdEmpresa,decimal IdEmpleado, decimal IdSolicitud)
         {
             try
             {
-                return odata.get_info(IdEmpresa, IdCargo);
+                return odata.get_info(IdEmpresa,IdEmpleado, IdSolicitud);
             }
             catch (Exception)
             {
@@ -72,5 +72,29 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+
+        public string validar(ro_Solicitud_Vacaciones_x_empleado_Info info)
+        {
+            try
+            {
+                string mensaje = "";
+
+                if (info.Fecha_Retorno <= info.Fecha_Hasta)
+                    mensaje = "La fecha de retorno no puede ser menor a fecha fin de vacaciones";
+                if (info.Fecha_Hasta <= info.Fecha_Desde)
+                    mensaje = "La fecha inicio no puede ser mayor que fecha fin";
+                if (info.Dias_a_disfrutar > info.Dias_q_Corresponde)
+                    mensaje = "No puede tomar mas dias de los ganados";
+
+
+                return mensaje;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

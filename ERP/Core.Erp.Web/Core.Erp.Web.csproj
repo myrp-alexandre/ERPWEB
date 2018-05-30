@@ -7818,6 +7818,17 @@
     <Content Include="Areas\Reportes\Views\ActivoFijoReportes\VWACTF_003.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\VWINV_002.cshtml" />
     <Content Include="Areas\Reportes\Views\CajaReportes\VWCAJ_001.cshtml" />
+    <Content Include="Areas\RRHH\Views\ActaFiniquito\Index2.cshtml" />
+    <Content Include="Areas\RRHH\Views\ActaFiniquito\Liquidar.cshtml" />
+    <Content Include="Areas\RRHH\Views\ProcesarRol\AbrirPeriodo.cshtml" />
+    <Content Include="Areas\RRHH\Views\ProcesarRol\CerrarPeriodo.cshtml" />
+    <Content Include="Areas\RRHH\Views\ProcesarRol\ContabilizarPeriodo.cshtml" />
+    <Content Include="Areas\RRHH\Views\ProcesarRol\Index2.cshtml" />
+    <Content Include="Areas\RRHH\Views\ProcesarRol\ReversarcontabilidadPeriodo.cshtml" />
+    <Content Include="Areas\RRHH\Views\ProcesarRol\_GridViewPartial_nominas_cerradas.cshtml" />
+    <Content Include="Areas\RRHH\Views\ProcesarRol\_GridViewPartial_provisiones.cshtml" />
+    <Content Include="Areas\RRHH\Views\ProcesarRol\_GridViewPartial_sueldo_x_pagar.cshtml" />
+    <Content Include="Areas\RRHH\Views\Vacaciones\_GridViewPartial_vaciones_periodos.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />

@@ -48,11 +48,12 @@ namespace Core.Erp.Data
         public string MotivoAnulacion { get; set; }
         public string ip { get; set; }
         public string nom_pc { get; set; }
-        public Nullable<bool> Gozadas_Pgadas { get; set; }
-        public Nullable<bool> Canceladas { get; set; }
+        public bool Gozadas_Pgadas { get; set; }
+        public bool Canceladas { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ro_Historico_Liquidacion_Vacaciones> ro_Historico_Liquidacion_Vacaciones { get; set; }
         public virtual ro_historico_vacaciones_x_empleado ro_historico_vacaciones_x_empleado { get; set; }
+        public virtual ro_empleado ro_empleado { get; set; }
     }
 }

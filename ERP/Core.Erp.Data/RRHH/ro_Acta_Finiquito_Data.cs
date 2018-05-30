@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Core.Erp.Info.RRHH;
 namespace Core.Erp.Data.RRHH
 {
-   public class ro_Acta_Finiquito_Data
+    public class ro_Acta_Finiquito_Data
     {
-        public List<ro_Acta_Finiquito_Info> get_list(int IdEmpresa, bool mostrar_anulados)
+        public List<ro_Acta_Finiquito_Info> get_list(int IdEmpresa)
         {
             try
             {
@@ -16,26 +16,25 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    if (mostrar_anulados)
-                        Lista = (from q in Context.ro_Acta_Finiquito
-                                 where q.IdEmpresa == IdEmpresa
-                                 select new ro_Acta_Finiquito_Info
-                                 {
-                                     IdEmpresa = q.IdEmpresa,
-                                     IdActaFiniquito=q.IdActaFiniquito,
-                                     IdCargo = q.IdCargo,
-                                     Estado = q.Estado
-                                 }).ToList();
-                    else
-                        Lista = (from q in Context.ro_Acta_Finiquito
-                                 where q.IdEmpresa == IdEmpresa
-                                 && q.Estado == "A"
-                                 select new ro_Acta_Finiquito_Info
-                                 {
-                                     IdEmpresa = q.IdEmpresa,
-                                     IdCargo = q.IdCargo,
-                                     Estado = q.Estado
-                                 }).ToList();
+                    Lista = (from q in Context.vwRo_ActaFiniquito
+                             where q.IdEmpresa == IdEmpresa
+                             select new ro_Acta_Finiquito_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdActaFiniquito = q.IdActaFiniquito,
+                                 IdEmpleado = q.IdEmpleado,
+                                 ca_descripcion = q.ca_descripcion,
+                                 Contrato = q.Contrato,
+                                 pe_nombre_completo = q.pe_apellido + "" + q.pe_nombre,
+                                 em_codigo = q.em_codigo,
+                                 FechaIngreso = q.FechaIngreso,
+                                 FechaSalida = q.FechaSalida,
+                                 Ingresos = q.Ingresos,
+                                 Egresos = q.Egresos,
+                                 Estado = q.EstadoActa,
+                                 Contrato_tipo = q.CodCatalogo
+                             }).ToList();
+
                 }
 
                 return Lista;
@@ -46,7 +45,7 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
-        public ro_Acta_Finiquito_Info get_info(int IdEmpresa, decimal IdEmpleado, decimal IdActaFiniquito)
+        public ro_Acta_Finiquito_Info get_info(int IdEmpresa, decimal IdActaFiniquito)
         {
             try
             {
@@ -54,31 +53,30 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    ro_Acta_Finiquito Entity = Context.ro_Acta_Finiquito.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdEmpleado == IdEmpresa&& q.IdActaFiniquito== IdActaFiniquito);
+                    vwRo_ActaFiniquito Entity = Context.vwRo_ActaFiniquito.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdActaFiniquito == IdActaFiniquito);
                     if (Entity == null) return null;
 
                     info = new ro_Acta_Finiquito_Info
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         IdActaFiniquito = Entity.IdActaFiniquito,
-                        IdEmpleado=Entity.IdEmpleado,
-                        IdCausaTerminacion =Entity.IdCausaTerminacion,
-                        IdContrato = Entity.IdContrato,
-                        IdCargo=Entity.IdCargo,
-                        FechaIngreso=Entity.FechaIngreso,
-                        FechaSalida=Entity.FechaSalida,
-                        UltimaRemuneracion=Entity.UltimaRemuneracion,
-                        Observacion=Entity.Observacion,
-                        Ingresos=Entity.Ingresos,
-                        Egresos=Entity.Ingresos,
-                        IdCodSectorial=Entity.IdCodSectorial,
-                        EsMujerEmbarazada=Entity.EsMujerEmbarazada,
-                        EsDirigenteSindical=Entity.EsDirigenteSindical,
-                        EsPorDiscapacidad=Entity.EsPorDiscapacidad,
-                        EsPorEnfermedadNoProfesional=Entity.EsPorEnfermedadNoProfesional,
-                        IdTipoCbte=Entity.IdTipoCbte,
-                        IdCbteCble=Entity.IdCbteCble,
-                        IdOrdenPago=Entity.IdOrdenPago
+                        IdEmpleado = Entity.IdEmpleado,
+                        IdCausaTerminacion = Entity.IdCausaTerminacion,
+                        FechaIngreso = Entity.FechaIngreso,
+                        FechaSalida = Entity.FechaSalida,
+                        UltimaRemuneracion = Entity.UltimaRemuneracion,
+                        Observacion = Entity.ObservacionFiniquito,
+                        Ingresos = Entity.Ingresos,
+                        Egresos = Entity.Ingresos,
+                        IdCodSectorial = Entity.IdCodSectorial,
+                        EsMujerEmbarazada = Entity.EsMujerEmbarazada,
+                        EsDirigenteSindical = Entity.EsDirigenteSindical,
+                        EsPorDiscapacidad = Entity.EsPorDiscapacidad,
+                        EsPorEnfermedadNoProfesional = Entity.EsPorEnfermedadNoProfesional,
+                        IdTipoCbte = Entity.IdTipoCbte,
+                        IdCbteCble = Entity.IdCbteCble,
+                        IdOrdenPago = Entity.IdOrdenPago,
+                        Contrato_tipo = Entity.CodCatalogo
 
                     };
                 }
@@ -164,20 +162,18 @@ namespace Core.Erp.Data.RRHH
             {
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    ro_Acta_Finiquito Entity = Context.ro_Acta_Finiquito.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdCargo == info.IdCargo);
+                    ro_Acta_Finiquito Entity = Context.ro_Acta_Finiquito.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleado == info.IdEmpleado && q.IdActaFiniquito == info.IdActaFiniquito);
                     if (Entity == null)
                         return false;
                     Entity.FechaIngreso = info.FechaIngreso;
                     Entity.FechaSalida = info.FechaSalida;
                     Entity.Observacion = info.Observacion;
                     Entity.UltimaRemuneracion = info.UltimaRemuneracion;
-
                     Entity.EsMujerEmbarazada = info.EsMujerEmbarazada;
                     Entity.EsDirigenteSindical = info.EsDirigenteSindical;
                     Entity.EsPorDiscapacidad = info.EsPorDiscapacidad;
                     Entity.EsPorEnfermedadNoProfesional = info.EsPorEnfermedadNoProfesional;
                     Entity.UltimaRemuneracion = info.UltimaRemuneracion;
-
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
                     Context.SaveChanges();
@@ -197,7 +193,7 @@ namespace Core.Erp.Data.RRHH
             {
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    ro_Acta_Finiquito Entity = Context.ro_Acta_Finiquito.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdCargo == info.IdCargo);
+                    ro_Acta_Finiquito Entity = Context.ro_Acta_Finiquito.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdActaFiniquito == info.IdActaFiniquito);
                     if (Entity == null)
                         return false;
                     Entity.Estado = info.Estado = "I";
@@ -214,5 +210,26 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+        public bool Liquidar(ro_Acta_Finiquito_Info info)
+        {
+            {
+                try
+                {
+                    using (Entities_rrhh Contex = new Entities_rrhh())
+                    {
+                        Contex.spRo_LiquidarEmpleado(info.IdEmpresa, info.IdActaFiniquito);
+                    }
+                    return true;
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+            }
+
+        }
+
     }
 }

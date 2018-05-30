@@ -18,16 +18,10 @@ namespace Core.Erp.Data
         public decimal IdActaFiniquito { get; set; }
         public int IdSecuencia { get; set; }
         public string IdRubro { get; set; }
-        public decimal IdEmpleado { get; set; }
         public string Observacion { get; set; }
         public double Valor { get; set; }
-        public string IdUsuario { get; set; }
-        public System.DateTime Fecha_Transac { get; set; }
-        public string IdUsuarioUltMod { get; set; }
-        public Nullable<System.DateTime> Fecha_UltMod { get; set; }
-        public Nullable<double> Otros_valor { get; set; }
     
-        public virtual ro_Acta_Finiquito ro_Acta_Finiquito { get; set; }
         public virtual ro_rubro_tipo ro_rubro_tipo { get; set; }
+        public virtual ro_Acta_Finiquito ro_Acta_Finiquito { get; set; }
     }
 }

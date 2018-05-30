@@ -58,5 +58,19 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+
+        public List<ro_empleado_novedad_det_Info> get_list_nov_liq_empleado(int IdEmpresa, decimal IdEmpleado)
+        {
+            try
+            {
+                return odata.get_list_nov_liq_empleado(IdEmpresa, IdEmpleado);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

@@ -33,7 +33,34 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
-        public  ro_Config_Param_contable_Info get_info(int IdEmpresa, int IdDivision, int IdArea, int IdDepartamento, string IdRubro)
+
+        public List<ro_Config_Param_contable_Info> get_list(int IdEmpresa, string es_provision)
+        {
+            try
+            {
+                List<ro_Config_Param_contable_Info> Lista = new List<ro_Config_Param_contable_Info>();
+                int secuencia = 1;
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+
+                    string sql = " select * from vwRo_Division_Area_dep_rubro where IdEmpresa='" + IdEmpresa + "' and rub_provision='"+es_provision+ "' and rub_nocontab='"+1+"'";
+                    var result = Context.Database.SqlQuery<ro_Config_Param_contable_Info>(sql).ToList();
+                    Lista = result;
+                    Lista.ForEach(v => v.Secuencia = secuencia++);
+
+                }
+
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public ro_Config_Param_contable_Info get_info(int IdEmpresa, int IdDivision, int IdArea, int IdDepartamento, string IdRubro)
         {
             try
             {
@@ -93,7 +120,7 @@ namespace Core.Erp.Data.RRHH
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
                 throw;

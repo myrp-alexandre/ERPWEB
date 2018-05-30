@@ -11,7 +11,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdCtaCblePadre">Empleado*</label>
+                    <label for="IdEmpleado">Empleado*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado, settings =>
                {
                    settings.Name = "IdEmpleado";
@@ -40,7 +40,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdCtaCblePadre">Rubro*</label>
+                    <label for="IdRubro">Rubro*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdRubro, settings =>
                {
                    settings.Name = "IdRubro";
@@ -52,7 +52,7 @@
 
                    //Campo ID
                    settings.Properties.ValueField = "IdRubro";
-                   settings.Properties.ValueType = typeof(decimal);
+                   settings.Properties.ValueType = typeof(string);
                    settings.Properties.TextField = "ru_descripcion";
                    //Boton para seleccionar ningun registro
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
@@ -67,7 +67,7 @@
     </div>
     <div class="col-md-4">
         <div class="form-group">
-            <label for="pe_fechaNacimiento">Fecha solicitud acumulación*</label>
+            <label for="Fec_Inicio_Acumulacion">Fecha solicitud acumulación*</label>
             <div class="input-group date">
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
@@ -79,7 +79,7 @@
     </div>
     <div class="col-md-4">
         <div class="form-group">
-            <label for="pe_fechaNacimiento">Fecha de nacimiento*</label>
+            <label for="Fec_Fin_Acumulacion">Fecha fin acumulación*</label>
             <div class="input-group date">
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>

@@ -39,7 +39,7 @@ namespace Core.Erp.Data.RRHH
 
                 return lst;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 
                 throw ;
@@ -79,15 +79,18 @@ namespace Core.Erp.Data.RRHH
                 using (Entities_rrhh contex = new Entities_rrhh())
                 {
 
-                    var data = contex.ro_historico_vacaciones_x_empleado.First(a => a.IdEmpresa == info.IdEmpresa && a.IdEmpleado == info.IdEmpleado
-                               && a.IdVacacion == info.IdVacacion );
+                    var data = contex.ro_historico_vacaciones_x_empleado.First(a => a.IdEmpresa == info.IdEmpresa 
+                    && a.IdEmpleado == info.IdEmpleado
+                    && a.IdPeriodo_Inicio == info.IdPeriodo_Inicio
+                    && a.IdPeriodo_Fin==info.IdPeriodo_Fin);
+
                     data.DiasGanado = info.DiasGanado;
                     data.DiasTomados = info.DiasTomados;
                     contex.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception )
+            catch (Exception ex)
             {
                 
                 throw ;

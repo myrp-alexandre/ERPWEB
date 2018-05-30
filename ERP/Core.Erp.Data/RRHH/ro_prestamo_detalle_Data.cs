@@ -45,6 +45,32 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+
+        public double get_valor_cuotas_pendientes(int IdEmpresa, decimal IdEmpleado)
+        {
+            try
+            {
+                double valor_cuotas = 0;
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                  var  query = (from q in Context.ro_prestamo_detalle
+                                 join p in Context.ro_prestamo
+                                 on new { q.IdEmpresa, q.IdPrestamo } equals new { p.IdEmpresa, p.IdPrestamo }
+                                 where q.IdEmpresa == IdEmpresa
+                                       & q.IdPrestamo == IdEmpleado
+                                 select q.TotalCuota);
+                    if (query.Count() > 0)
+                        valor_cuotas = query.Sum();
+                }
+
+                return valor_cuotas;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public ro_prestamo_detalle_Info get_info(int IdEmpresa, decimal IdPrestamo, int Secuencia)
         {
             try
@@ -110,7 +136,7 @@ namespace Core.Erp.Data.RRHH
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
                 throw;

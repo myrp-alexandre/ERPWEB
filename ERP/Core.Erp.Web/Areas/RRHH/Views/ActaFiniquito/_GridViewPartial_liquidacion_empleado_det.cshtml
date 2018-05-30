@@ -1,9 +1,10 @@
+@using System.Web.UI.WebControls;
 @model Core.Erp.Info.RRHH.ro_Acta_Finiquito_Info
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_liquidacion_empleado_det";
         settings.CallbackRouteValues = new { Controller = "ActaFiniquito", Action = "GridViewPartial_liquidacion_empleado_det" };
-
+        settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdSecuencia";
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "ActaFiniquito", Action = "EditingAddNew", Area = "RRHH" };
@@ -29,20 +30,32 @@
         settings.InitNewRow = (s, e) =>
         {
             e.NewValues["IdRubro"] = null;
-          
+
 
         };
-        settings.Columns.Add("IdActaFiniquito");
-        settings.Columns.Add("IdEmpleado");
-        settings.Columns.Add("IdCausaTerminacion");
-        settings.Columns.Add("IdContrato");
-        settings.Columns.Add("IdActaFiniquito");
-        settings.Columns.Add("IdRubro");
-        settings.Columns.Add("FechaIngreso");
-        settings.Columns.Add("FechaSalida");
-        settings.Columns.Add("UltimaRemuneracion");
-        settings.Columns.Add("Observacion");
-        settings.Columns.Add("Valor");
+        settings.Columns.Add("IdSecuencia","ID").Width=Unit.Percentage(5);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdRubro";
+            column.Caption = "Rubro";
+            column.Width = Unit.Percentage(45);
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("IdRubro", "Código").Width = Unit.Percentage(20);
+                p.Columns.Add("ru_descripcion", "Descripción").Width = Unit.Percentage(70);
+                p.Columns.Add("ru_tipo", "Tipo").Width = Unit.Percentage(10);
+                p.ValueField = "IdRubro";
+                p.ValueType = typeof(string);
+                p.DataSource = ViewBag.lst_rubro;
+                p.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add("Observacion", "Descripción").Width = Unit.Percentage(45);
+        settings.Columns.Add("Valor","$ Valor").Width = Unit.Percentage(5);
+
+
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor");
+        settings.Settings.ShowFooter = true;
 
     });
     if (ViewData["EditError"] != null){

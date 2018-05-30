@@ -23,11 +23,11 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
-        public ro_rubros_calculados_Info get_info(int IdEmpresa, int IdCargo)
+        public ro_rubros_calculados_Info get_info(int IdEmpresa )
         {
             try
             {
-                return odata.get_info(IdEmpresa, IdCargo);
+                return odata.get_info(IdEmpresa);
             }
             catch (Exception)
             {

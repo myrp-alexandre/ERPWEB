@@ -17,7 +17,7 @@ namespace Core.Erp.Data.RRHH
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     if (mostrar_anulados)
-                        Lista = (from q in Context.ro_Solicitud_Vacaciones_x_empleado
+                        Lista = (from q in Context.vwRo_Solicitud_Vacaciones
                                  where q.IdEmpresa == IdEmpresa
                                  select new ro_Solicitud_Vacaciones_x_empleado_Info
                                  {
@@ -40,7 +40,9 @@ namespace Core.Erp.Data.RRHH
                                      Fecha_Retorno = q.Fecha_Retorno,
                                      Observacion = q.Observacion,
                                      Gozadas_Pgadas = q.Gozadas_Pgadas,
-
+                                     em_codigo=q.em_codigo,
+                                     pe_cedulaRuc=q.pe_cedulaRuc,
+                                     pe_nombre_completo=q.pe_apellido+" "+q.pe_nombre,
                                      Estado = q.Estado
                                  }).ToList();
                     else
@@ -80,7 +82,7 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
-        public ro_Solicitud_Vacaciones_x_empleado_Info get_info(int IdEmpresa, int IdSolicitud)
+        public ro_Solicitud_Vacaciones_x_empleado_Info get_info(int IdEmpresa,decimal IdEmpleado, decimal IdSolicitud)
         {
             try
             {
@@ -88,7 +90,9 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    ro_Solicitud_Vacaciones_x_empleado Entity = Context.ro_Solicitud_Vacaciones_x_empleado.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdSolicitud == IdSolicitud);
+                    ro_Solicitud_Vacaciones_x_empleado Entity = Context.ro_Solicitud_Vacaciones_x_empleado.FirstOrDefault(q => q.IdEmpresa == IdEmpresa 
+                    && q.IdEmpleado==IdEmpleado
+                    && q.IdSolicitud == IdSolicitud);
                     if (Entity == null) return null;
 
                     info = new ro_Solicitud_Vacaciones_x_empleado_Info
@@ -157,13 +161,13 @@ namespace Core.Erp.Data.RRHH
                     ro_Solicitud_Vacaciones_x_empleado Entity = new ro_Solicitud_Vacaciones_x_empleado
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdEmpleado=info.IdEmpleado,
+                        IdEmpleado = info.IdEmpleado,
                         IdSolicitud = info.IdSolicitud = get_id(info.IdEmpresa),
                         IdVacacion = info.IdVacacion,
                         IdEmpleado_aprue = info.IdEmpleado_aprue,
                         IdEmpleado_remp = info.IdEmpleado_remp,
-                        IdEstadoAprobacion = info.IdEstadoAprobacion,
-                        Fecha = info.Fecha,
+                        IdEstadoAprobacion = "PEN",
+                        Fecha = DateTime.Now.Date,
                         AnioServicio = info.AnioServicio,
                         Dias_q_Corresponde = info.Dias_q_Corresponde,
                         Dias_a_disfrutar = info.Dias_a_disfrutar,
@@ -175,17 +179,18 @@ namespace Core.Erp.Data.RRHH
                         Fecha_Retorno = info.Fecha_Retorno,
                         Observacion = info.Observacion,
                         Gozadas_Pgadas = info.Gozadas_Pgadas,
-
+                        Canceladas = info.Canceladas,
+                        
                         Estado = info.Estado = "A",
                         IdUsuario = info.IdUsuario,
-                        Fecha_Transac = info.Fecha_Transac = DateTime.Now
+                        Fecha_Transac = info.Fecha_Transac = DateTime.Now.Date
                     };
                     Context.ro_Solicitud_Vacaciones_x_empleado.Add(Entity);
                     Context.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -197,14 +202,16 @@ namespace Core.Erp.Data.RRHH
             {
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    ro_Solicitud_Vacaciones_x_empleado Entity = Context.ro_Solicitud_Vacaciones_x_empleado.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdSolicitud == info.IdSolicitud);
+                    ro_Solicitud_Vacaciones_x_empleado Entity = Context.ro_Solicitud_Vacaciones_x_empleado.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa 
+                    && q.IdEmpleado==info.IdEmpleado
+                    && q.IdSolicitud == info.IdSolicitud);
                     if (Entity == null)
                         return false;
                          Entity.IdSolicitud = info.IdSolicitud = get_id(info.IdEmpresa);
                          Entity.IdVacacion = info.IdVacacion;
                          Entity.IdEmpleado_aprue = info.IdEmpleado_aprue;
                          Entity.IdEmpleado_remp = info.IdEmpleado_remp;
-                         Entity.IdEstadoAprobacion = info.IdEstadoAprobacion;
+                         Entity.IdEstadoAprobacion = "PEN";
                          Entity.Fecha = info.Fecha;
                          Entity.AnioServicio = info.AnioServicio;
                          Entity.Dias_q_Corresponde = info.Dias_q_Corresponde;
@@ -236,7 +243,9 @@ namespace Core.Erp.Data.RRHH
             {
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    ro_Solicitud_Vacaciones_x_empleado Entity = Context.ro_Solicitud_Vacaciones_x_empleado.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdSolicitud == info.IdSolicitud);
+                    ro_Solicitud_Vacaciones_x_empleado Entity = Context.ro_Solicitud_Vacaciones_x_empleado.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa
+                                      && q.IdEmpleado == info.IdEmpleado
+                                      && q.IdSolicitud == info.IdSolicitud);
                     if (Entity == null)
                         return false;
                     Entity.Estado = info.Estado = "I";

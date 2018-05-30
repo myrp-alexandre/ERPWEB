@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Core.Erp.Info.RRHH;
+
+namespace Core.Erp.Data.RRHH
+{
+   public class ro_Comprobantes_Contables_Data
+    {
+        public bool grabarDB(ro_Comprobantes_Contables_Info info)
+        {
+            try
+            {
+                using (Entities_rrhh Contex=new Entities_rrhh())
+                {
+                    ro_Comprobantes_Contables entity = new ro_Comprobantes_Contables
+                    {
+
+                        IdEmpresa = info.IdEmpresa,
+                        IdNomina = info.IdNomina,
+                        IdNominaTipo = info.IdNominaTipo,
+                        IdPeriodo = info.IdPeriodo,
+                        IdTipoCbte = info.IdTipoCbte,
+                        IdCbteCble = info.IdCbteCble,
+                        CodCtbteCble=info.CodCtbteCble
+                    };
+                    Contex.ro_Comprobantes_Contables.Add(entity);
+                    Contex.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+    }
+}

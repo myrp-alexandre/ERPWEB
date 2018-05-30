@@ -1,20 +1,189 @@
 ﻿@model Core.Erp.Info.RRHH.ro_Solicitud_Vacaciones_x_empleado_Info
-
 @{
-    ViewBag.Title = "Modificar solicitud de vacaciones";
+    ViewBag.Title = "modificar Solicitud";
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
 }
 
 
 @using (Html.BeginForm("Modificar", "Vacaciones", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdSolicitud)
-    @Html.HiddenFor(q => q.IdEmpleado)
-    @Html.HiddenFor(q => q.IdEmpresa)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Empleado">Empleado*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado, settings =>
+               {
+                   settings.Name = "IdEmpleado";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
+                   settings.Properties.Columns.Add("IdEmpleado", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("Empleado", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(80);
 
-    
+                   //Campo ID
+                   settings.Properties.ValueField = "IdEmpleado";
+                   settings.Properties.ValueType = typeof(decimal);
+                   settings.Properties.TextField = "Empleado";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){calcular_vacaciones()}";
+               }).BindList(ViewBag.lst_empleado).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdEstadoAprobacion">Empleado autoriza*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdEstadoAprobacion, settings =>
+               {
+                   settings.Name = "IdEstadoAprobacion";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
+                   settings.Properties.Columns.Add("IdEmpleado", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("Empleado", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+
+                   //Campo ID
+                   settings.Properties.ValueField = "IdEmpleado";
+                   settings.Properties.ValueType = typeof(decimal);
+                   settings.Properties.TextField = "Empleado";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+               }).BindList(ViewBag.lst_empleado).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    /*
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdVacacion">Periodo de vacaciones*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdVacacion, settings =>
+               {
+                   settings.Name = "IdVacacion";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
+                   settings.Properties.Columns.Add("IdPeriodo_Inicio", "Periodo inicio").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("IdPeriodo_Fin", "Periodo hasta").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("FechaIni", "Fecha inicio").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                   settings.Properties.Columns.Add("FechaFin", "Fecha hasta").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                   settings.Properties.Columns.Add("DiasGanado", "Días ganado").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                   settings.Properties.Columns.Add("DiasTomados", "Días gozado").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdVacacion";
+                   settings.Properties.ValueType = typeof(decimal);
+                   settings.Properties.TextField = "Empleado";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                   //settings.Properties.DataSource = Model.lst_vacaciones;
+                   settings.CallbackRouteValues  =  new { Controller = "Vacaciones", Action = "GridLookupPartial_vacaciones" };
+
+                   // @Html.Action("GridViewPartial_vaciones_periodos")
+
+
+               }).GetHtml()
+               @Html.ValidationMessageFor(q => q.IdVacacion, "", new { @class = "text-danger" })
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    */
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="FechaInicio">Periodo*</label>
+                    @Html.DropDownListFor(q => q.IdVacacion, new SelectList(ViewBag.lst_vacaciones, "IdVacacion", "Descripcion"), new { @class = "form-control", @id = "vacaciones" })
+                    @Html.ValidationMessageFor(q => q.IdVacacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Fecha_Desde">Fecha desde*</label>
+                    @Html.TextBoxFor(q => q.Fecha_Desde, new { @class = "form-control", @id = "FechaInicio" })
+                    @Html.ValidationMessageFor(q => q.Fecha_Desde, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Fecha_Hasta">Fecha hasta*</label>
+                    @Html.TextBoxFor(q => q.Fecha_Hasta, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaFin" })
+                    @Html.ValidationMessageFor(q => q.Fecha_Hasta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Fecha_Retorno">Fecha retorno*</label>
+                    @Html.TextBoxFor(q => q.Fecha_Retorno, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaRetorno" })
+                    @Html.ValidationMessageFor(q => q.Fecha_Retorno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="Gozadas_Pgadas"></label>
+                        @Html.DevExpress().CheckBoxFor(q => q.Gozadas_Pgadas, settings =>
+                       {
+                           settings.Name = "Gozadas_Pgadas";
+                           settings.Text = "Vacaciones gozadas";
+
+                       }).GetHtml()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Observacion">Observación*</label>
+                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","Vacaciones",new { Area = "RRHH" },null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","Contrato",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
@@ -31,5 +200,39 @@
         $('#FechaFin').datepicker({
             autoclose: true
         })
+        $('#FechaRetorno').datepicker({
+            autoclose: true
+        })
     })
+</script>
+
+
+<script>
+    function calcular_vacaciones()
+            {
+                 var datos = {
+                     IdEmpleado: IdEmpleado.GetValue()
+                }
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(datos),
+                    url: '@Url.Action("get_list_vacaciones", "Vacaciones", new { Area = "RRHH" })',
+                    async: false,
+                    bDeferRender: true,
+                    bProcessing: true,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data)
+                    {
+                         //IdVacacion.PerformCallback();
+                        $.each(data, function (i, row) {
+                            $("#vacaciones").append("<option value=" + row.IdVacacion + ">" + row.Descripcion + "</option>");
+                        });
+
+                    },
+                    error: function (error)
+                    {
+                    }
+                    });
+};
 </script>

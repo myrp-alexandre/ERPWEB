@@ -22,6 +22,18 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+        public List<ro_Config_Param_contable_Info> get_list(int IdEmpresa, string es_provision)
+        {
+            try
+            {
+                return odata.get_list(IdEmpresa, es_provision);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public ro_Config_Param_contable_Info get_info(int IdEmpresa, int IdDivision, int IdArea, int IdDepartamento, string IdRubro)
         {
             try

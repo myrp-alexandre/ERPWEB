@@ -46,7 +46,7 @@ namespace Core.Erp.Bus.RRHH
                 if (odata.guardarDB(info))
                 {
                     info.IdNovedad = info.IdNovedad;
-                    info.lst_novedad_det.ForEach(q => { q.IdEmpresa = info.IdEmpresa; q.IdNomina_tipo = info.IdNomina_Tipo;q.IdNomina_Tipo_Liq = info.IdNomina_TipoLiqui; q.IdEmpleado = info.IdEmpleado; q.IdNovedad = info.IdNovedad; });
+                    info.lst_novedad_det.ForEach(q => { q.IdEmpresa = info.IdEmpresa; q.IdNomina_tipo = info.IdNomina_Tipo;q.IdNomina_Tipo_Liq = info.IdNomina_TipoLiqui; q.IdEmpleado = info.IdEmpleado; q.IdNovedad = info.IdNovedad; if(q.Observacion==null)  q.Observacion = ""; });
                     odata_det = new ro_empleado_novedad_det_Data();
                     return odata_det.guardarDB(info.lst_novedad_det);
                 }

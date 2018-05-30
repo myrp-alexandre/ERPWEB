@@ -62,7 +62,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdCtaCblePadre">Rubro*</label>
+                    <label for="IdRubro">Rubro*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdRubro, settings =>
                {
                    settings.Name = "IdRubro";
@@ -74,7 +74,7 @@
 
                    //Campo ID
                    settings.Properties.ValueField = "IdRubro";
-                   settings.Properties.ValueType = typeof(decimal);
+                   settings.Properties.ValueType = typeof(string);
                    settings.Properties.TextField = "ru_descripcion";
                    //Boton para seleccionar ningun registro
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
