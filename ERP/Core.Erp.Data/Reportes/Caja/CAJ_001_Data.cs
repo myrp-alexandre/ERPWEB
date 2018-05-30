@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Data.Reportes.Caja
 {
-    public class VWCAJ_001_Data
+    public class CAJ_001_Data
     {
-        public List<VWCAJ_001_Info> get_list(int IdEmpresa,int IdTipoCbte, decimal IdCbteCble)
+        public List<CAJ_001_Info> get_list(int IdEmpresa,int IdTipoCbte, decimal IdCbteCble)
 
         {
             try
             {
-                List<VWCAJ_001_Info> Lista;
+                List<CAJ_001_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = (from q in Context.VWCAJ_001
                              where q.IdEmpresa == IdEmpresa
                              && q.IdTipoCbte == IdTipoCbte
                              && q.IdCbteCble == IdCbteCble
-                             select new VWCAJ_001_Info
+                             select new CAJ_001_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdTipoCbte = q.IdTipoCbte,

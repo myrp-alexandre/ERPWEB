@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.Reportes.Contabilidad
 {
-    public class VWCONTA_001_Info
+    public class CONTA_001_Info
     {
         public int IdEmpresa { get; set; }
         public int IdTipoCbte { get; set; }

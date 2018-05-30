@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Reportes.Caja
 {
-    public class VWCAJ_001_Bus
+    public class CAJ_001_Bus
     {
-        VWCAJ_001_Data odata = new VWCAJ_001_Data();
+        CAJ_001_Data odata = new CAJ_001_Data();
     
-        public List<VWCAJ_001_Info> get_list(int IdEmpresa, int IdTipoCbte, decimal IdCbteCble)
+        public List<CAJ_001_Info> get_list(int IdEmpresa, int IdTipoCbte, decimal IdCbteCble)
         {
             try
             {

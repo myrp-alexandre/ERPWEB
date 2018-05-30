@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Reportes.Contabilidad
 {
-    public class VWCONTA_001_Bus
+    public class CONTA_001_Bus
     {
-        VWCONTA_001_Data odata = new VWCONTA_001_Data();
-        public List<VWCONTA_001_Info> get_list(int IdEmpresa, int IdTipoCbte, decimal IdCbteCble)
+        CONTA_001_Data odata = new CONTA_001_Data();
+        public List<CONTA_001_Info> get_list(int IdEmpresa, int IdTipoCbte, decimal IdCbteCble)
         {
             try
             {

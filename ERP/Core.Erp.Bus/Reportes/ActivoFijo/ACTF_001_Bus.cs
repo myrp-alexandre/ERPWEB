@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Reportes.ActivoFijo
 {
-   public class VWACTF_001_Bus
+   public class ACTF_001_Bus
     {
-        VWACTF_001_Data odata = new VWACTF_001_Data();
-        public List<VWACTF_001_Info> get_list(int IdEmpresa, decimal Id_Mejora_Baja_Activo, string Id_Tipo)
+        ACTF_001_Data odata = new ACTF_001_Data();
+        public List<ACTF_001_Info> get_list(int IdEmpresa, decimal Id_Mejora_Baja_Activo, string Id_Tipo)
         {
             try
             {

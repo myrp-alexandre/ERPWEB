@@ -32,8 +32,8 @@ namespace Core.Erp.Web.Reportes.ActivoFijo
             decimal IdVtaActivo = p_IdVtaActivo.Value == null ? 0 : Convert.ToDecimal(p_IdVtaActivo.Value);
             double dc_Valor = p_dc_Valor.Value == null ? 0 : Convert.ToDouble(p_dc_Valor.Value);
 
-            VWACTF_002_Bus bus_rpt = new VWACTF_002_Bus();
-            List<VWACTF_002_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdVtaActivo);
+            ACTF_002_Bus bus_rpt = new ACTF_002_Bus();
+            List<ACTF_002_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdVtaActivo);
             this.DataSource = lst_rpt;
         }
     }

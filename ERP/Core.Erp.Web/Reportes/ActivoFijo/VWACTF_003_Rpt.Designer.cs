@@ -695,7 +695,7 @@
             // 
             // objectDataSource1
             // 
-            this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.ActivoFijo.VWACTF_003_Info);
+            this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.ActivoFijo.ACTF_003_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
             // p_IdEmpresa

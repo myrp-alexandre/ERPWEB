@@ -28,8 +28,8 @@ namespace Core.Erp.Web.Reportes.Caja
             int IdTipoCbte = p_IdTipoCbte.Value == null ? 0 : Convert.ToInt32(p_IdTipoCbte.Value);
             decimal IdCbteCble = p_IdCbteCble.Value == null ? 0 : Convert.ToDecimal(p_IdCbteCble.Value);
             
-            VWCAJ_001_Bus bus_rpt = new VWCAJ_001_Bus();
-            List<VWCAJ_001_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdTipoCbte, IdCbteCble);
+            CAJ_001_Bus bus_rpt = new CAJ_001_Bus();
+            List<CAJ_001_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdTipoCbte, IdCbteCble);
             this.DataSource = lst_rpt;
         }
     }

@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Data.Reportes.Inventario
 {
-    public class VWINV_002_Data
+    public class INV_002_Data
     {
-        public List<VWINV_002_Info> get_list(int IdEmpresa, int idSucursal, int IdMovi_inven_tipo, decimal IdNumMovi)
+        public List<INV_002_Info> get_list(int IdEmpresa, int idSucursal, int IdMovi_inven_tipo, decimal IdNumMovi)
         {
             try
             {
-                List<VWINV_002_Info> Lista;
+                List<INV_002_Info> Lista;
                 using (Entities_reportes  Context = new Entities_reportes())
                 {
                     Lista = (from q in Context.VWINV_002
@@ -21,7 +21,7 @@ namespace Core.Erp.Data.Reportes.Inventario
                              && q.IdSucursal == idSucursal
                              && q.IdMovi_inven_tipo == IdMovi_inven_tipo
                              && q.IdNumMovi == IdNumMovi
-                             select new VWINV_002_Info
+                             select new INV_002_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdSucursal = q.IdSucursal,

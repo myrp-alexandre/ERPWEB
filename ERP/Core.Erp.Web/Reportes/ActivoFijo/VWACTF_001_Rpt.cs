@@ -30,8 +30,8 @@ namespace Core.Erp.Web.Reportes.ActivoFijo
             double dc_Valor = p_dc_Valor.Value == null ? 0 : Convert.ToDouble(p_dc_Valor.Value);
 
 
-            VWACTF_001_Bus bus_rpt = new VWACTF_001_Bus();
-            List<VWACTF_001_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, Id_Mejora_Baja_Activo, Id_Tipo);
+            ACTF_001_Bus bus_rpt = new ACTF_001_Bus();
+            List<ACTF_001_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, Id_Mejora_Baja_Activo, Id_Tipo);
             this.DataSource = lst_rpt;
         }
     }

@@ -32,8 +32,8 @@ namespace Core.Erp.Web.Reportes.ActivoFijo
             decimal IdRetiroActivo = p_IdRetiroActivo.Value == null ? 0 : Convert.ToDecimal(p_IdRetiroActivo.Value);
             double dc_Valor = p_dc_Valor.Value == null ? 0 : Convert.ToDouble(p_dc_Valor.Value);
 
-            VWACTF_003_Bus bus_rpt = new VWACTF_003_Bus();
-            List<VWACTF_003_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdRetiroActivo);
+            ACTF_003_Bus bus_rpt = new ACTF_003_Bus();
+            List<ACTF_003_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdRetiroActivo);
             this.DataSource = lst_rpt;
         }
     }

@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Data.Reportes.ActivoFijo
 {
-    public class VWACTF_001_Data
+    public class ACTF_001_Data
     {
-        public List<VWACTF_001_Info> get_list(int IdEmpresa, decimal Id_Mejora_Baja_Activo, string Id_Tipo)
+        public List<ACTF_001_Info> get_list(int IdEmpresa, decimal Id_Mejora_Baja_Activo, string Id_Tipo)
         {
             try
             {
-                List<VWACTF_001_Info> Lista;
+                List<ACTF_001_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = (from q in Context.VWACTF_001
                              where q.IdEmpresa == IdEmpresa
                              && q.Id_Mejora_Baja_Activo == Id_Mejora_Baja_Activo
                              && q.Id_Tipo == Id_Tipo
-                             select new VWACTF_001_Info
+                             select new ACTF_001_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  Id_Mejora_Baja_Activo = q.Id_Mejora_Baja_Activo,

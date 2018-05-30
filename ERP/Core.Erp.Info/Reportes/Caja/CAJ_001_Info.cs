@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.Reportes.Caja
 {
-    public class VWCAJ_001_Info
+    public class CAJ_001_Info
     {
         public int IdEmpresa { get; set; }
         public int IdTipoCbte { get; set; }

@@ -299,6 +299,21 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_002' no tien
           <Property Name="nom_presentacion" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="signo" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
+        <Function Name="SPINV_003" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdSucursal_ini" Type="int" Mode="In" />
+          <Parameter Name="IdSucursal_fin" Type="int" Mode="In" />
+          <Parameter Name="IdBodega_ini" Type="int" Mode="In" />
+          <Parameter Name="IdBodega_fin" Type="int" Mode="In" />
+          <Parameter Name="IdProducto_ini" Type="numeric" Mode="In" />
+          <Parameter Name="IdProducto_fin" Type="numeric" Mode="In" />
+          <Parameter Name="IdCategoria" Type="varchar" Mode="In" />
+          <Parameter Name="IdLinea" Type="int" Mode="In" />
+          <Parameter Name="IdGrupo" Type="int" Mode="In" />
+          <Parameter Name="IdSubGrupo" Type="int" Mode="In" />
+          <Parameter Name="fecha_corte" Type="datetime" Mode="In" />
+          <Parameter Name="mostrar_stock_0" Type="bit" Mode="In" />
+        </Function>
         <EntityContainer Name="Model_reportesStoreContainer">
           <EntitySet Name="VWACTF_001" EntityType="Self.VWACTF_001" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
@@ -507,6 +522,21 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_002' no tien
           <EntitySet Name="VWINV_001" EntityType="Model_reportes.VWINV_001" />
           <EntitySet Name="VWINV_002" EntityType="Model_reportes.VWINV_002" />
           <EntitySet Name="VWCAJ_001" EntityType="Model_reportes.VWCAJ_001" />
+          <FunctionImport Name="SPINV_003" ReturnType="Collection(Model_reportes.SPINV_003_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursal_ini" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursal_fin" Mode="In" Type="Int32" />
+            <Parameter Name="IdBodega_ini" Mode="In" Type="Int32" />
+            <Parameter Name="IdBodega_fin" Mode="In" Type="Int32" />
+            <Parameter Name="IdProducto_ini" Mode="In" Type="Decimal" />
+            <Parameter Name="IdProducto_fin" Mode="In" Type="Decimal" />
+            <Parameter Name="IdCategoria" Mode="In" Type="String" />
+            <Parameter Name="IdLinea" Mode="In" Type="Int32" />
+            <Parameter Name="IdGrupo" Mode="In" Type="Int32" />
+            <Parameter Name="IdSubGrupo" Mode="In" Type="Int32" />
+            <Parameter Name="fecha_corte" Mode="In" Type="DateTime" />
+            <Parameter Name="mostrar_stock_0" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="VWACTF_001">
           <Key>
@@ -760,6 +790,31 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_002' no tien
           <Property Name="tc_TipoCbte" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
           <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="SPINV_003_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
+          <Property Type="Int32" Name="IdBodega" Nullable="false" />
+          <Property Type="Decimal" Name="IdProducto" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Double" Name="Stock" Nullable="false" />
+          <Property Type="Double" Name="Costo_promedio" Nullable="false" />
+          <Property Type="Double" Name="Costo_total" Nullable="false" />
+          <Property Type="String" Name="Su_Descripcion" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="bo_Descripcion" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="pr_codigo" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="pr_descripcion" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="lote_num_lote" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="lote_fecha_vcto" Nullable="true" Precision="23" />
+          <Property Type="String" Name="IdCategoria" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="ca_Categoria" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="IdLinea" Nullable="false" />
+          <Property Type="String" Name="nom_linea" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="IdGrupo" Nullable="false" />
+          <Property Type="String" Name="nom_grupo" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="IdSubgrupo" Nullable="false" />
+          <Property Type="String" Name="nom_subgrupo" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="IdPresentacion" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="nom_presentacion" Nullable="false" MaxLength="150" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -946,6 +1001,35 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_002' no tien
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPINV_003" FunctionName="Model_reportes.Store.SPINV_003">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_reportes.SPINV_003_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Costo_promedio" ColumnName="Costo_promedio" />
+                <ScalarProperty Name="Costo_total" ColumnName="Costo_total" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="bo_Descripcion" ColumnName="bo_Descripcion" />
+                <ScalarProperty Name="pr_codigo" ColumnName="pr_codigo" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="lote_num_lote" ColumnName="lote_num_lote" />
+                <ScalarProperty Name="lote_fecha_vcto" ColumnName="lote_fecha_vcto" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="ca_Categoria" ColumnName="ca_Categoria" />
+                <ScalarProperty Name="IdLinea" ColumnName="IdLinea" />
+                <ScalarProperty Name="nom_linea" ColumnName="nom_linea" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="nom_grupo" ColumnName="nom_grupo" />
+                <ScalarProperty Name="IdSubgrupo" ColumnName="IdSubgrupo" />
+                <ScalarProperty Name="nom_subgrupo" ColumnName="nom_subgrupo" />
+                <ScalarProperty Name="IdPresentacion" ColumnName="IdPresentacion" />
+                <ScalarProperty Name="nom_presentacion" ColumnName="nom_presentacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

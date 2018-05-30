@@ -746,7 +746,7 @@
             // 
             // objectDataSource1
             // 
-            this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.ActivoFijo.VWACTF_001_Info);
+            this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.ActivoFijo.ACTF_001_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
             // p_dc_Valor

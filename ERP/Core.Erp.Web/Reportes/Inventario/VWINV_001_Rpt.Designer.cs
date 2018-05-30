@@ -676,7 +676,7 @@
             // 
             // objectDataSource1
             // 
-            this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.Inventario.VWINV_001_Info);
+            this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.Inventario.INV_001_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
             // p_IdEmpresa

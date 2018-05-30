@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Data.Reportes.Contabilidad
 {
-    public class VWCONTA_001_Data
+    public class CONTA_001_Data
     {
-        public List<VWCONTA_001_Info> get_list(int IdEmpresa, int IdTipoCbte, decimal IdCbteCble)
+        public List<CONTA_001_Info> get_list(int IdEmpresa, int IdTipoCbte, decimal IdCbteCble)
         {
             try
             {
-                List<VWCONTA_001_Info> Lista;
+                List<CONTA_001_Info> Lista;
 
                 using (Entities_reportes Context = new Entities_reportes())
                 {
@@ -21,7 +21,7 @@ namespace Core.Erp.Data.Reportes.Contabilidad
                              where q.IdEmpresa == IdEmpresa
                              && q.IdTipoCbte == IdTipoCbte
                              && q.IdCbteCble == IdCbteCble
-                             select new VWCONTA_001_Info
+                             select new CONTA_001_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdTipoCbte = q.IdTipoCbte,

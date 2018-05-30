@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.Reportes.Inventario
 {
-    public class VWINV_001_Info
+  public  class INV_002_Info
     {
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
