@@ -1,6 +1,6 @@
 ﻿namespace Core.Erp.Web.Reportes.ActivoFijo
 {
-    partial class VWACTF_001_Rpt
+    partial class ACTF_001_Rpt
     {
         /// <summary>
         /// Required designer variable.

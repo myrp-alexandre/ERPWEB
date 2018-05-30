@@ -356,29 +356,29 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reportes\ActivoFijo\VWACTF_001_Rpt.cs">
+    <Compile Include="Reportes\ActivoFijo\ACTF_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\ActivoFijo\VWACTF_001_Rpt.Designer.cs">
-      <DependentUpon>VWACTF_001_Rpt.cs</DependentUpon>
+    <Compile Include="Reportes\ActivoFijo\ACTF_001_Rpt.Designer.cs">
+      <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\ActivoFijo\VWACTF_002_Rpt.cs">
+    <Compile Include="Reportes\ActivoFijo\ACTF_002_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\ActivoFijo\VWACTF_002_Rpt.Designer.cs">
-      <DependentUpon>VWACTF_002_Rpt.cs</DependentUpon>
+    <Compile Include="Reportes\ActivoFijo\ACTF_002_Rpt.Designer.cs">
+      <DependentUpon>ACTF_002_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\ActivoFijo\VWACTF_003_Rpt.cs">
+    <Compile Include="Reportes\ActivoFijo\ACTF_003_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\ActivoFijo\VWACTF_003_Rpt.Designer.cs">
-      <DependentUpon>VWACTF_003_Rpt.cs</DependentUpon>
+    <Compile Include="Reportes\ActivoFijo\ACTF_003_Rpt.Designer.cs">
+      <DependentUpon>ACTF_003_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\Caja\VWCAJ_001_Rpt.cs">
+    <Compile Include="Reportes\Caja\CAJ_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Caja\VWCAJ_001_Rpt.Designer.cs">
-      <DependentUpon>VWCAJ_001_Rpt.cs</DependentUpon>
+    <Compile Include="Reportes\Caja\CAJ_001_Rpt.Designer.cs">
+      <DependentUpon>CAJ_001_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\Contabilidad\CONTA_001_Rpt.cs">
       <SubType>Component</SubType>
@@ -386,17 +386,23 @@
     <Compile Include="Reportes\Contabilidad\CONTA_001_Rpt.Designer.cs">
       <DependentUpon>CONTA_001_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\Inventario\VWINV_001_Rpt.cs">
+    <Compile Include="Reportes\Inventario\INV_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Inventario\VWINV_001_Rpt.Designer.cs">
-      <DependentUpon>VWINV_001_Rpt.cs</DependentUpon>
+    <Compile Include="Reportes\Inventario\INV_001_Rpt.Designer.cs">
+      <DependentUpon>INV_001_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\Inventario\VWINV_002_Rpt.cs">
+    <Compile Include="Reportes\Inventario\INV_002_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Inventario\VWINV_002_Rpt.Designer.cs">
-      <DependentUpon>VWINV_002_Rpt.cs</DependentUpon>
+    <Compile Include="Reportes\Inventario\INV_002_Rpt.Designer.cs">
+      <DependentUpon>INV_002_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Inventario\INV_003_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Inventario\INV_003_Rpt.Designer.cs">
+      <DependentUpon>INV_003_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -7829,6 +7835,7 @@
     <Content Include="Areas\RRHH\Views\ProcesarRol\_GridViewPartial_provisiones.cshtml" />
     <Content Include="Areas\RRHH\Views\ProcesarRol\_GridViewPartial_sueldo_x_pagar.cshtml" />
     <Content Include="Areas\RRHH\Views\Vacaciones\_GridViewPartial_vaciones_periodos.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_003.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
@@ -7944,26 +7951,30 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reportes\ActivoFijo\VWACTF_001_Rpt.resx">
-      <DependentUpon>VWACTF_001_Rpt.cs</DependentUpon>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
+      <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ActivoFijo\VWACTF_002_Rpt.resx">
-      <DependentUpon>VWACTF_002_Rpt.cs</DependentUpon>
+    <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_002_Rpt.resx">
+      <DependentUpon>ACTF_002_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ActivoFijo\VWACTF_003_Rpt.resx">
-      <DependentUpon>VWACTF_003_Rpt.cs</DependentUpon>
+    <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_003_Rpt.resx">
+      <DependentUpon>ACTF_003_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Caja\VWCAJ_001_Rpt.resx">
-      <DependentUpon>VWCAJ_001_Rpt.cs</DependentUpon>
+    <EmbeddedResource Include="Reportes\Caja\CAJ_001_Rpt.resx">
+      <DependentUpon>CAJ_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Contabilidad\CONTA_001_Rpt.resx">
       <DependentUpon>CONTA_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Inventario\VWINV_001_Rpt.resx">
-      <DependentUpon>VWINV_001_Rpt.cs</DependentUpon>
+    <EmbeddedResource Include="Reportes\Inventario\INV_001_Rpt.resx">
+      <DependentUpon>INV_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Inventario\VWINV_002_Rpt.resx">
-      <DependentUpon>VWINV_002_Rpt.cs</DependentUpon>
+    <EmbeddedResource Include="Reportes\Inventario\INV_002_Rpt.resx">
+      <DependentUpon>INV_002_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Inventario\INV_003_Rpt.resx">
+      <DependentUpon>INV_003_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

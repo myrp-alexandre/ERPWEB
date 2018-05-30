@@ -1,6 +1,6 @@
 ﻿namespace Core.Erp.Web.Reportes.Inventario
 {
-    partial class VWINV_001_Rpt
+    partial class INV_001_Rpt
     {
         /// <summary>
         /// Required designer variable.

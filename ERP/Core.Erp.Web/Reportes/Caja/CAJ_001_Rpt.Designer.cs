@@ -1,6 +1,6 @@
 ﻿namespace Core.Erp.Web.Reportes.Caja
 {
-    partial class VWCAJ_001_Rpt
+    partial class CAJ_001_Rpt
     {
         /// <summary>
         /// Required designer variable.

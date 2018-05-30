@@ -11,7 +11,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     {
         public ActionResult ACTF_001(decimal Id_Mejora_Baja_Activo = 0, string Id_Tipo = "" )
         {
-            VWACTF_001_Rpt model = new VWACTF_001_Rpt();
+            ACTF_001_Rpt model = new ACTF_001_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_Id_Mejora_Baja_Activo.Value = Id_Mejora_Baja_Activo;
             model.p_Id_Tipo.Value = Id_Tipo;
@@ -24,7 +24,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         public ActionResult ACTF_002(decimal IdVtaActivo = 0)
         {
-            VWACTF_002_Rpt model = new VWACTF_002_Rpt();
+            ACTF_002_Rpt model = new ACTF_002_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_IdVtaActivo.Value = IdVtaActivo;
             model.usuario = Session["IdUsuario"].ToString();
@@ -36,7 +36,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         public ActionResult ACTF_003(decimal IdRetiroActivo = 0)
         {
-            VWACTF_003_Rpt model = new VWACTF_003_Rpt();
+            ACTF_003_Rpt model = new ACTF_003_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_IdRetiroActivo.Value = IdRetiroActivo;
             model.usuario = Session["IdUsuario"].ToString();

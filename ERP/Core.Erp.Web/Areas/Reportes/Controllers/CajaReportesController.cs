@@ -11,7 +11,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     {
         public ActionResult CAJ_001(int IdTipoCbte = 0 , decimal IdCbteCble = 0)
         {
-            VWCAJ_001_Rpt model = new VWCAJ_001_Rpt();
+            CAJ_001_Rpt model = new CAJ_001_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_IdTipoCbte.Value = IdTipoCbte;
             model.p_IdCbteCble.Value = IdCbteCble;

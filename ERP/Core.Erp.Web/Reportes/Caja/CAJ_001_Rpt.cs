@@ -9,11 +9,11 @@ using System.Collections.Generic;
 
 namespace Core.Erp.Web.Reportes.Caja
 {
-    public partial class VWCAJ_001_Rpt : DevExpress.XtraReports.UI.XtraReport
+    public partial class CAJ_001_Rpt : DevExpress.XtraReports.UI.XtraReport
     {
         public string usuario { get; set; }
         public string empresa { get; set; }
-        public VWCAJ_001_Rpt()
+        public CAJ_001_Rpt()
         {
             InitializeComponent();
         }

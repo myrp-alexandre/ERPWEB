@@ -9,11 +9,11 @@ using Core.Erp.Info.Reportes.ActivoFijo;
 
 namespace Core.Erp.Web.Reportes.ActivoFijo
 {
-    public partial class VWACTF_001_Rpt : DevExpress.XtraReports.UI.XtraReport
+    public partial class ACTF_001_Rpt : DevExpress.XtraReports.UI.XtraReport
     {
         public string usuario { get; set; }
         public string empresa { get; set; }
-        public VWACTF_001_Rpt()
+        public ACTF_001_Rpt()
         {
             InitializeComponent();
         }

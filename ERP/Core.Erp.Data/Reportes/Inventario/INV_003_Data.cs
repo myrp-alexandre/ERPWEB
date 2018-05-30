@@ -49,7 +49,7 @@ namespace Core.Erp.Data.Reportes.Inventario
                                  IdSubgrupo = q.IdSubgrupo,
                                  nom_subgrupo = q.nom_subgrupo,
                                  IdPresentacion = q.IdPresentacion,
-                                 nom_presentacion = q.nom_presentacion,
+                                 nom_presentacion = q.nom_presentacion
                                  
                              }).ToList();
                 }
