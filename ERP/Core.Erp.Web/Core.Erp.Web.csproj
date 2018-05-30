@@ -7841,6 +7841,8 @@
     <Content Include="Scripts\Devexpress\date.js" />
     <Content Include="Scripts\Devexpress\ext-language_tools.js" />
     <Content Include="Scripts\Devexpress\globalize.js" />
+    <Content Include="Scripts\Devexpress\jquery.js" />
+    <Content Include="Scripts\Devexpress\jquery.min.js" />
     <Content Include="Scripts\Devexpress\knockout.debug.js" />
     <Content Include="Scripts\Devexpress\knockout.js" />
     <Content Include="Scripts\Devexpress\message.js" />
