@@ -42,37 +42,19 @@
     <!-- Bootstrap DatePicker -->
     <script src="~/AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="~/Scripts/moment.min.js"></script>
-
-    <link href="~/Content/DevExpress/jquery-ui.css" rel="stylesheet" />
-    <link href="~/Content/DevExpress/jquery-ui.min.css" rel="stylesheet" />
-    <script src="~/Scripts/Devexpress/ace.js"></script>
-    <script src="~/Scripts/Devexpress/cldr.js"></script>
-    <script src="~/Scripts/Devexpress/currency.js"></script>
-    <script src="~/Scripts/Devexpress/date.js"></script>
-    <script src="~/Scripts/Devexpress/ext-language_tools.js"></script>
-    <script src="~/Scripts/Devexpress/globalize.js"></script>
-    <script src="~/Scripts/Devexpress/jquery.js"></script>
-    <script src="~/Scripts/Devexpress/jquery.min.js"></script>
-    <script src="~/Scripts/Devexpress/knockout.debug.js"></script>
-    <script src="~/Scripts/Devexpress/knockout.js"></script>
-    <script src="~/Scripts/Devexpress/message.js"></script>
-    <script src="~/Scripts/Devexpress/number.js"></script>
-
-
+        
     @RenderSection("scripts", required: false)
     @Html.DevExpress().GetStyleSheets(
             new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
             new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
             new StyleSheet { ExtensionSuite = ExtensionSuite.GridView },
             new StyleSheet { ExtensionSuite = ExtensionSuite.Report },
-            new StyleSheet { ExtensionType = ExtensionType.WebDocumentViewer}
         )
     @Html.DevExpress().GetScripts(
             new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
             new Script { ExtensionSuite = ExtensionSuite.Editors },
             new Script { ExtensionSuite = ExtensionSuite.GridView },
-            new Script { ExtensionSuite = ExtensionSuite.Report },
-            new Script { ExtensionType = ExtensionType.WebDocumentViewer }
+            new Script { ExtensionSuite = ExtensionSuite.Report }
         )
 </head>
 <body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
