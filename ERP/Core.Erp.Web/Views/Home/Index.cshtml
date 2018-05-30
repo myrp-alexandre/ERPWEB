@@ -1,0 +1,8 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}

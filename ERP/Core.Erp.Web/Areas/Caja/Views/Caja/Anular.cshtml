@@ -1,0 +1,112 @@
+﻿@model Core.Erp.Info.Caja.caj_Caja_Info
+@{
+    ViewBag.Title = "Anular caja";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm("Anular", "Caja", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdCaja)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="ca_Codigo">Código</label>
+                    @Html.TextBoxFor(q => q.ca_Codigo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.ca_Codigo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="ca_Descripcion">Descripción*</label>
+                    @Html.TextBoxFor(q => q.ca_Descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.ca_Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdSucursal">Sucursal</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdSucursal, settings =>
+               {
+                   settings.Name = "IdCtaCblePadre";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdSucursal", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("Su_Descripcion", "Descripcion").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdSucursal";
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "Su_Descripcion";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+               }).BindList(ViewBag.lst_sucursal).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdCtaCble">Cuenta contable</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble, settings =>
+               {
+                   settings.Name = "IdCtaCble";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                   settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdCtaCble";
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "pc_Cuenta";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+               }).BindList(ViewBag.lst_cuentas).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="IdUsuario_Responsable">Responsable</label>
+                            @Html.DropDownListFor(q => q.IdUsuario_Responsable, new SelectList(ViewBag.lst_responsable, "IdUsuario_Responsable", "IdUsuario_Responsable"), new { @class = "form-control", @id = "IdUsuario_Responsable" })
+                            @Html.ValidationMessageFor(q => q.IdUsuario_Responsable, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-footer">
+                <button type="submit" class="btn btn-danger">Anular</button>
+                <a class="btn btn-default" href="@Url.Action("Index", "Caja", new { Area ="Caja" }, null)">Cancelar</a>
+            </div>
+
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }
+}

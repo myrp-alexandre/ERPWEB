@@ -1,0 +1,181 @@
+﻿@model Core.Erp.Info.Caja.caj_Caja_Movimiento_Info
+@{
+    ViewBag.Title = "Anular ingreso";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm("Anular", "CajaMovimientoIngreso", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdCbteCble)
+    @Html.HiddenFor(q => q.IdTipocbte)
+    @Html.HiddenFor(q => q.IdPersona)
+    @Html.HiddenFor(q => q.IdTipo_Persona)
+    @Html.HiddenFor(q => q.IdEntidad, new { @id = "IdEntidad" })
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="CodMoviCaja">Código</label>
+                    @Html.TextBoxFor(q => q.CodMoviCaja, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.CodMoviCaja, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-7 col-md-2">
+                <div class="form-group">
+                    <label for="">Fecha</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.cm_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "cm_fecha" })
+                        @Html.ValidationMessageFor(q => q.cm_fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdCaja">Caja*</label>
+                    @Html.DropDownListFor(q => q.IdCaja, new SelectList(ViewBag.lst_caja, "IdCaja", "ca_Descripcion"), new { @class = "form-control", @id = "IdCaja" })
+                    @Html.ValidationMessageFor(q => q.IdCaja, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdTipoMovi">Tipo movimiento*</label>
+                    @Html.DropDownListFor(q => q.IdTipoMovi, new SelectList(ViewBag.lst_tipo, "IdTipoMovi", "tm_descripcion"), new { @class = "form-control", @id = "IdTipoMovi" })
+                    @Html.ValidationMessageFor(q => q.IdTipoMovi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="info_caj_Caja_Movimiento_det.IdCobro_tipo">Tipo cobro</label>
+                    @Html.DropDownListFor(q => q.info_caj_Caja_Movimiento_det.IdCobro_tipo, new SelectList(ViewBag.lst_cobro, "IdCobro_tipo", "tc_descripcion"), new { @class = "form-control", @id = "IdTipoMovi" })
+                    @Html.ValidationMessageFor(q => q.info_caj_Caja_Movimiento_det.IdCobro_tipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="info_caj_Caja_Movimiento_det.cr_Valor">Valor</label>
+                    @Html.TextBoxFor(q => q.info_caj_Caja_Movimiento_det.cr_Valor, new { @class = "form-control", @id = "cr_Valor" })
+                    @Html.ValidationMessageFor(q => q.info_caj_Caja_Movimiento_det.cr_Valor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdPersona">Persona</label>
+                    @Html.DevExpress().ComboBoxFor(i => i.IdPersona, settings =>
+               {
+                   settings.Name = "IdPersona";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
+                   settings.Properties.Columns.Add("IdPersona", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                   settings.Properties.Columns.Add("pe_nombreCompleto", "Nombre completo").Width = System.Web.UI.WebControls.Unit.Percentage(70);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdPersona";
+                   settings.Properties.ValueType = typeof(decimal);
+                   settings.Properties.TextField = "pe_nombreCompleto";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.DropDownButton.Enabled = false;
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                   settings.ReadOnly = true;
+               }).BindList(ViewBag.lst_personas).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdPersona, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="cm_observacion">Observación</label>
+                    @Html.TextAreaFor(q => q.cm_observacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.cm_observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.Action("GridViewPartial_comprobante_detalle", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-danger">Anular</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "CajaMovimientoIngreso", new { Area = "Caja" }, null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+<script>
+    $(function () {
+        //Date picker
+        $('#cm_fecha').datepicker({
+            autoclose: true
+        })
+    });
+
+   $("#IdCaja").change(function () {
+    armar_diario();
+    });
+
+    $("#IdTipoMovi").change(function () {
+        armar_diario();
+    });
+
+    $("#cr_Valor").change(function () {
+        armar_diario();
+    });
+
+    function armar_diario() {
+        var caja = $("#IdCaja").val();
+        var tipo_movimiento = $("#IdTipoMovi").val();
+        var monto = $("#cr_Valor").val();
+
+        var datos = {
+            IdCaja: caja,
+            IdTipoMovi: tipo_movimiento,
+            valor: monto
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("armar_diario", "CajaMovimientoIngreso", new { Area = "Caja" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridView_comprobante_detalle.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>

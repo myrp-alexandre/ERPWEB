@@ -1,0 +1,35 @@
+﻿@model Core.Erp.Info.RRHH.ro_Solicitud_Vacaciones_x_empleado_Info
+
+@{
+    ViewBag.Title = "Modificar solicitud de vacaciones";
+}
+
+
+@using (Html.BeginForm("Modificar", "Vacaciones", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdSolicitud)
+    @Html.HiddenFor(q => q.IdEmpleado)
+    @Html.HiddenFor(q => q.IdEmpresa)
+
+    
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Vacaciones",new { Area = "RRHH" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+<script>
+    $(function () {
+
+        //Date picker
+        $('#FechaInicio').datepicker({
+            autoclose: true
+        })
+
+        $('#FechaFin').datepicker({
+            autoclose: true
+        })
+    })
+</script>

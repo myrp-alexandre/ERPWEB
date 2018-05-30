@@ -1,0 +1,84 @@
+@using System.Web.UI.WebControls;
+@model Core.Erp.Info.RRHH.ro_Parametros_Info
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridViewPartial_cta_ctble_provisiones";
+        settings.CallbackRouteValues = new { Controller = "ParametrosContable", Action = "GridViewPartial_cta_ctble_provisiones" };
+
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ParametrosContable", Action = "EditingUpdate_pprovisiones" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+        settings.KeyFieldName = "Secuencia";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add("DescripcionDiv", "División").Width = Unit.Percentage(15);
+        settings.Columns.Add("DescripcionArea", "Área").Width = Unit.Percentage(15);
+        settings.Columns.Add("de_descripcion", "Departamento").Width = Unit.Percentage(15);
+        settings.Columns.Add("ru_descripcion", "Rubro").Width = Unit.Percentage(20);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdCtaCble";
+            column.Caption = "Cta. contable debe";
+            column.Width = Unit.Percentage(35);
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("IdCtaCble", "Cta. contable").Width = Unit.Percentage(20);
+                p.Columns.Add("pc_Cuenta", "cta. contable").Width = Unit.Percentage(70);
+                p.ValueField = "IdCtaCble";
+                p.ValueType = typeof(string);
+                p.DataSource = ViewBag.lst_cta_contable;
+                p.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdCtaCble_Haber";
+            column.Caption = "Cta. contable haber";
+            column.Width = Unit.Percentage(35);
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("IdCtaCble", "Cta. contable").Width = Unit.Percentage(20);
+                p.Columns.Add("pc_Cuenta", "cta. contable").Width = Unit.Percentage(70);
+                p.ValueField = "IdCtaCble";
+                p.ValueType = typeof(string);
+                p.DataSource = ViewBag.lst_cta_contable;
+                p.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "DebCre";
+            column.Caption = "Credito/Debito";
+            column.Width = Unit.Percentage(10);
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("CodCatalogo", "Código").Width = Unit.Percentage(20);
+                p.Columns.Add("ca_descripcion", "Descripción").Width = Unit.Percentage(70);
+                p.ValueField = "CodCatalogo";
+                p.ValueType = typeof(string);
+                p.DataSource = ViewBag.lst_catalogo;
+                p.Width = Unit.Percentage(100);
+            });
+        });
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model.lst_cta_x_provisiones).GetHtml()

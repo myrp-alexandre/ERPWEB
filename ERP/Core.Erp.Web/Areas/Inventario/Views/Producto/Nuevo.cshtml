@@ -1,0 +1,868 @@
+﻿@model Core.Erp.Info.Inventario.in_Producto_Info
+@{
+    ViewBag.Title = "Nuevo producto";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+@using (Html.BeginForm("Nuevo", "Producto", FormMethod.Post, new { @class = "form", @rolw = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="pr_codigo">Código</label>
+                    @Html.TextBoxFor(q => q.pr_codigo, new { @class = "form-control", @id = "pr_codigo" })
+                    @Html.ValidationMessageFor(q => q.pr_codigo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="pr_codigo2">Código 2</label>
+                    @Html.TextBoxFor(q => q.pr_codigo2, new { @class = "form-control", @id = "pr_codigo2" })
+                    @Html.ValidationMessageFor(q => q.pr_codigo2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdProductoTipo">Tipo producto*</label>
+                    @Html.DropDownListFor(q => q.IdProductoTipo, new SelectList(ViewBag.lst_producto_tipo, "IdProductoTipo", "tp_descripcion"), new { @class = "form-control", @id = "IdProductoTipo" })
+                    @Html.ValidationMessageFor(q => q.IdProductoTipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-7">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="IdProducto_padre">Producto padre</label>
+                            @Html.DevExpress().ComboBoxFor(q => q.IdProducto_padre, settings =>
+                       {
+                           settings.Name = "IdProducto_padre";
+                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                           settings.Properties.Columns.Add("IdProducto", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                           settings.Properties.Columns.Add("pr_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                           //Campo ID
+                           settings.Properties.ValueField = "IdProducto";
+                           settings.Properties.ValueType = typeof(decimal);
+                           //Boton para seleccionar ningun registro
+                           settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                           settings.Properties.NullText = "== Seleccione ==";
+                           settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                           settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){get_info_padre()}";
+                       }).BindList(ViewBag.lst_producto_padre).GetHtml()
+                            @Html.ValidationMessageFor(q => q.IdProducto_padre, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>                
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="pr_descripcion">Descripción*</label>
+                            @Html.TextBoxFor(q => q.pr_descripcion, new { @class = "form-control", @id = "pr_descripcion" })
+                            @Html.ValidationMessageFor(q => q.pr_descripcion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="pr_descripcion_2">Descripción 2</label>
+                            @Html.TextBoxFor(q => q.pr_descripcion_2, new { @class = "form-control", @id = "pr_descripcion_2" })
+                            @Html.ValidationMessageFor(q => q.pr_descripcion_2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label for="Aparece_modu_Inventario">@Html.CheckBoxFor(q => q.Aparece_modu_Inventario, new { @id = "Aparece_modu_Inventario" }) Inventario</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label for="Aparece_modu_Ventas">@Html.CheckBoxFor(q => q.Aparece_modu_Ventas, new { @id = "Aparece_modu_Ventas" }) Facturación</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label for="Aparece_modu_Compras">@Html.CheckBoxFor(q => q.Aparece_modu_Compras, new { @id = "Aparece_modu_Compras" }) Compras</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_general" aria-controls="general" role="tab" data-toggle="tab" id="link_general">Datos generales</a>
+            </li>            
+            <li hidden>
+                <a href="#tab_lote" aria-controls="lote" role="tab" data-toggle="tab" id="link_lote">Lote</a>
+            </li>
+            <li hidden>
+                <a href="#tab_precios" aria-controls="Precios" role="tab" data-toggle="tab" id="link_precios">Precios</a>
+            </li>
+            <li hidden>
+                <a href="#tab_composicion" aria-controls="Composicion" role="tab" data-toggle="tab" id="link_composicion">Composición</a>
+            </li>
+            <li>
+                <a href="#tab_imagen" aria-controls="Imágen" role="tab" data-toggle="tab">Imágen</a>
+            </li>
+        </ul>
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_general">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="IdCategoria">Categoría*</label>
+                                    @Html.DropDownListFor(q => q.IdCategoria, new SelectList(ViewBag.lst_categoria, "IdCategoria", "ca_Categoria"), new { @class = "form-control", @id = "IdCategoria" })
+                                    @Html.ValidationMessageFor(q => q.IdCategoria, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="IdLinea">Línea*</label>
+                                    @Html.DropDownListFor(q => q.IdLinea, new SelectList(ViewBag.lst_linea, "IdLinea", "nom_linea"), new { @class = "form-control", @id = "IdLinea" })
+                                    @Html.ValidationMessageFor(q => q.IdLinea, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="IdGrupo">Grupo*</label>
+                                    @Html.DropDownListFor(q => q.IdGrupo, new SelectList(ViewBag.lst_grupo, "IdGrupo", "nom_grupo"), new { @class = "form-control", @id = "IdGrupo" })
+                                    @Html.ValidationMessageFor(q => q.IdGrupo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="IdSubGrupo">Sub grupo*</label>
+                                    @Html.DropDownListFor(q => q.IdSubGrupo, new SelectList(ViewBag.lst_subgrupo, "IdSubgrupo", "nom_subgrupo"), new { @class = "form-control", @id = "IdSubGrupo" })
+                                    @Html.ValidationMessageFor(q => q.IdSubGrupo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-offset-1 col-md-3">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="IdMarca">Marca*</label>
+                                    @Html.DropDownListFor(q => q.IdMarca, new SelectList(ViewBag.lst_marca, "IdMarca", "Descripcion"), new { @class = "form-control", @id = "IdMarca" })
+                                    @Html.ValidationMessageFor(q => q.IdMarca, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="IdPresentacion">Presentación*</label>
+                                    @Html.DropDownListFor(q => q.IdPresentacion, new SelectList(ViewBag.lst_presentacion, "IdPresentacion", "nom_presentacion"), new { @class = "form-control", @id = "IdPresentacion" })
+                                    @Html.ValidationMessageFor(q => q.IdPresentacion, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="IdUnidadMedida">Unidad de medida ingresos*</label>
+                                    @Html.DropDownListFor(q => q.IdUnidadMedida, new SelectList(ViewBag.lst_unidad_medida, "IdUnidadMedida", "Descripcion"), new { @class = "form-control", @id = "IdUnidadMedida" })
+                                    @Html.ValidationMessageFor(q => q.IdUnidadMedida, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="IdUnidadMedida_Consumo">Unidad de medida para control kárdex*</label>
+                                    @Html.DropDownListFor(q => q.IdUnidadMedida_Consumo, new SelectList(ViewBag.lst_unidad_medida, "IdUnidadMedida", "Descripcion"), new { @class = "form-control", @id = "IdUnidadMedida_Consumo" })
+                                    @Html.ValidationMessageFor(q => q.IdUnidadMedida_Consumo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="pr_codigo_barra">Código de barra</label>
+                            @Html.TextBoxFor(q => q.pr_codigo_barra, new { @class = "form-control", @id = "pr_codigo_barra" })
+                            @Html.ValidationMessageFor(q => q.pr_codigo_barra, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-offset-1 col-md-3">
+                        <div class="form-group">
+                            <label for="IdCod_Impuesto_Iva">Impuesto IVA*</label>
+                            @Html.DropDownListFor(q => q.IdCod_Impuesto_Iva, new SelectList(ViewBag.lst_impuesto, "IdCod_Impuesto", "nom_impuesto"), new { @class = "form-control", @id = "IdCod_Impuesto_Iva" })
+                            @Html.ValidationMessageFor(q => q.IdCod_Impuesto_Iva, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <label for="pr_observacion">Observación</label>
+                            @Html.TextAreaFor(q => q.pr_observacion, new { @class = "form-control", @rows = "2", @id = "pr_observacion" })
+                            @Html.ValidationMessageFor(q => q.pr_observacion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_lote">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="lote_num_lote">Código lote</label>
+                            @Html.TextBoxFor(q => q.lote_num_lote, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.lote_num_lote, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="lote_fecha_fab">Fecha fabricación</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.TextBoxFor(q => q.lote_fecha_fab, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "lote_fecha_fab" })
+                                @Html.ValidationMessageFor(q => q.lote_fecha_fab, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="lote_fecha_fab">Fecha vencimiento</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.TextBoxFor(q => q.lote_fecha_vcto, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "lote_fecha_vcto" })
+                                @Html.ValidationMessageFor(q => q.lote_fecha_vcto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label for="se_distribuye">@Html.CheckBoxFor(q => q.se_distribuye) Se distribuye</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_precios">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="precio_1">Precio</label>
+                            @Html.TextBoxFor(q => q.precio_1, new { @class = "form-control", @id = "precio_1" })
+                            @Html.ValidationMessageFor(q => q.precio_1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="precio_2">Precio 2</label>
+                            @Html.TextBoxFor(q => q.precio_2, new { @class = "form-control", @id = "precio_2" })
+                            @Html.ValidationMessageFor(q => q.precio_2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label for="signo_2">Signo 2</label>
+                            @Html.DropDownListFor(q => q.signo_2, new SelectList(ViewBag.lst_signos, "Key", "Value"), new { @class = "form-control", @id = "signo_2" })
+                            @Html.ValidationMessageFor(q => q.signo_2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="porcentaje_2">Porcentaje 2</label>
+                            @Html.TextBoxFor(q => q.porcentaje_2, new { @class = "form-control", @id = "porcentaje_2" })
+                            @Html.ValidationMessageFor(q => q.porcentaje_2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="precio_3">Precio 3</label>
+                            @Html.TextBoxFor(q => q.precio_3, new { @class = "form-control", @id = "precio_3" })
+                            @Html.ValidationMessageFor(q => q.precio_3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label for="signo_3">Signo 3</label>
+                            @Html.DropDownListFor(q => q.signo_3, new SelectList(ViewBag.lst_signos, "Key", "Value"), new { @class = "form-control", @id = "signo_3" })
+                            @Html.ValidationMessageFor(q => q.signo_3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="porcentaje_3">Porcentaje 3</label>
+                            @Html.TextBoxFor(q => q.porcentaje_3, new { @class = "form-control", @id = "porcentaje_3" })
+                            @Html.ValidationMessageFor(q => q.porcentaje_3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="precio_4">Precio 4</label>
+                            @Html.TextBoxFor(q => q.precio_4, new { @class = "form-control", @id = "precio_4" })
+                            @Html.ValidationMessageFor(q => q.precio_4, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label for="signo_4">Signo 4</label>
+                            @Html.DropDownListFor(q => q.signo_4, new SelectList(ViewBag.lst_signos, "Key", "Value"), new { @class = "form-control", @id = "signo_4" })
+                            @Html.ValidationMessageFor(q => q.signo_4, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="porcentaje_4">Porcentaje 4</label>
+                            @Html.TextBoxFor(q => q.porcentaje_4, new { @class = "form-control", @id = "porcentaje_4" })
+                            @Html.ValidationMessageFor(q => q.porcentaje_4, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="precio_5">Precio 5</label>
+                            @Html.TextBoxFor(q => q.precio_5, new { @class = "form-control", @id = "precio_5" })
+                            @Html.ValidationMessageFor(q => q.precio_5, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label for="signo_5">Signo 5</label>
+                            @Html.DropDownListFor(q => q.signo_5, new SelectList(ViewBag.lst_signos, "Key", "Value"), new { @class = "form-control", @id = "signo_5" })
+                            @Html.ValidationMessageFor(q => q.signo_5, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="porcentaje_5">Porcentaje 5</label>
+                            @Html.TextBoxFor(q => q.porcentaje_5, new { @class = "form-control", @id = "porcentaje_5" })
+                            @Html.ValidationMessageFor(q => q.porcentaje_5, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_composicion">
+                <div class="row">
+                    <div class="col-md-7">
+                        @Html.Action("GridViewPartial_producto_composicion")
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_imagen">
+                <div class="row">
+                   
+                </div>                
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "Producto", new { Area = "Inventario" }, null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+<script>
+        $(function () {
+            $('#lote_fecha_vcto').datepicker({
+                autoclose: true
+            })
+            $('#lote_fecha_fab').datepicker({
+                autoclose: true
+            })
+
+            cargar_lineas();
+            cargar_grupos();
+            cargar_subgrupos();
+            get_info_producto_tipo();
+        });
+        $("#IdProductoTipo").change(function () {
+            get_info_producto_tipo();
+        });
+        $("#IdCategoria").change(function () {
+            cargar_lineas();
+            cargar_grupos();
+            cargar_subgrupos();
+        });
+
+        $("#IdLinea").change(function () {
+            cargar_grupos();
+            cargar_subgrupos();
+        });
+        $("#IdGrupo").change(function () {
+            cargar_subgrupos();
+        });
+        $("#signo_2").change(function () {
+            calcular_precio_2("SIGNO");
+        });
+        $("#porcentaje_2").keyup(function () {
+            calcular_precio_2("PORCENTAJE");
+        });
+        $("#precio_2").keyup(function () {
+            calcular_precio_2("VALOR");
+        });
+
+        $("#signo_3").change(function () {
+            calcular_precio_3("SIGNO");
+        });
+        $("#porcentaje_3").keyup(function () {
+            calcular_precio_3("PORCENTAJE");
+        });
+        $("#precio_3").keyup(function () {
+            calcular_precio_3("VALOR");
+        });
+
+        $("#signo_4").change(function () {
+            calcular_precio_4("SIGNO");
+        });
+        $("#porcentaje_4").keyup(function () {
+            calcular_precio_4("PORCENTAJE");
+        });
+        $("#precio_4").keyup(function () {
+            calcular_precio_4("VALOR");
+        });
+
+        $("#signo_5").change(function () {
+            calcular_precio_5("SIGNO");
+        });
+        $("#porcentaje_5").keyup(function () {
+            calcular_precio_5("PORCENTAJE");
+        });
+        $("#precio_5").keyup(function () {
+            calcular_precio_5("VALOR");
+        });
+        $("#precio_1").keyup(function () {
+            calcular_precio_2("PORCENTAJE");
+            calcular_precio_3("PORCENTAJE");
+            calcular_precio_4("PORCENTAJE");
+            calcular_precio_5("PORCENTAJE");
+        });
+
+        function cargar_lineas() {
+            $("#IdLinea").empty();
+            $("#IdGrupo").empty();
+            $("#IdSubGrupo").empty();
+
+            var categoria = $("#IdCategoria").val();           
+
+            var datos = {
+                IdCategoria: categoria
+            }
+
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("cargar_lineas", "Producto", new { Area = "Inventario" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    $.each(data, function (i, row) {
+                        $("#IdLinea").append("<option value=" + row.IdLinea + ">" + row.nom_linea + "</option>");
+                    });
+                },
+                error: function (error) {
+                }
+            });
+        };
+
+    function cargar_grupos() {
+        $("#IdGrupo").empty();
+        $("#IdSubGrupo").empty();
+
+        var categoria = $("#IdCategoria").val();
+        var linea = $("#IdLinea").val();
+
+        var datos = {
+            IdCategoria: categoria,
+            IdLinea: linea
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("cargar_grupos", "Producto", new { Area = "Inventario" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                $.each(data, function (i, row) {
+                    $("#IdGrupo").append("<option value=" + row.IdGrupo + ">" + row.nom_grupo + "</option>");
+                });
+            },
+            error: function (error) {
+            }
+        });
+    };
+    function cargar_subgrupos() {
+        $("#IdSubGrupo").empty();
+
+        var categoria = $("#IdCategoria").val();
+        var linea = $("#IdLinea").val();
+        var grupo = $("#IdGrupo").val();
+
+        var datos = {
+            IdCategoria: categoria,
+            IdLinea: linea,
+            IdGrupo: grupo
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("cargar_subgrupos", "Producto", new { Area = "Inventario" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdSubGrupo").append("<option value=" + row.IdSubgrupo + ">" + row.nom_subgrupo + "</option>");
+                });
+            },
+            error: function (error) {
+            }
+        });
+    };
+
+    function Round(num, scale) {
+        if (!("" + num).includes("e")) {
+            return +(Math.round(num + "e+" + scale) + "e-" + scale);
+        } else {
+            var arr = ("" + num).split("e");
+            var sig = ""
+            if (+arr[1] + scale > 0) {
+                sig = "+";
+            }
+            return +(Math.round(+arr[0] + "e" + sig + (+arr[1] + scale)) + "e-" + scale);
+        }
+    }
+
+    function calcular_precio_2(tipo) {
+        var precio_1 = Number($("#precio_1").val());
+        var precio = Number($("#precio_2").val());
+        var signo = $("#signo_2").val();
+        var porcentaje = Number($("#porcentaje_2").val());
+        var resultado;
+        switch (tipo) {
+            case "SIGNO":
+                if (signo == "-") {
+                    resultado = precio_1 - (precio_1 * (porcentaje / 100));
+                } else {
+                    resultado = precio_1 + (precio_1 * (porcentaje / 100));
+                }
+                $("#precio_2").val(Math.abs(Round(resultado, 2)));
+                break;
+            case "PORCENTAJE":
+                if (signo == "-") {
+                    resultado = precio_1 - (precio_1 * (porcentaje / 100));
+                } else {
+                    resultado = precio_1 + (precio_1 * (porcentaje / 100));
+                }
+                $("#precio_2").val(Math.abs(Round(resultado, 2)));
+                break;
+            case "VALOR":
+                if (precio_1 > precio) {
+                    $("#signo_2").val("-");
+                    resultado = 100 - ((precio / precio_1) * 100);
+                    $("#porcentaje_2").val(Math.abs(Round(resultado, 2)));
+                } else
+                    if (precio > precio_1) {
+                        $("#signo_2").val("+");
+                        resultado = 100 - ((precio / precio_1) * 100);
+                        $("#porcentaje_2").val(Math.abs(Round(resultado, 2)));
+                    } else {
+                        $("#signo_2").val("-");
+                        $("#porcentaje_2").val(0);
+                    }
+                break;
+        }
+    }
+    function calcular_precio_3(tipo) {
+        var precio_1 = Number($("#precio_1").val());
+        var precio = Number($("#precio_3").val());
+        var signo = $("#signo_3").val();
+        var porcentaje = Number($("#porcentaje_3").val());
+        var resultado;
+        switch (tipo) {
+            case "SIGNO":
+                if (signo == "-") {
+                    resultado = precio_1 - (precio_1 * (porcentaje / 100));
+                } else {
+                    resultado = precio_1 + (precio_1 * (porcentaje / 100));
+                }
+                $("#precio_3").val(Math.abs(Round(resultado, 2)));
+                break;
+            case "PORCENTAJE":
+                if (signo == "-") {
+                    resultado = precio_1 - (precio_1 * (porcentaje / 100));
+                } else {
+                    resultado = precio_1 + (precio_1 * (porcentaje / 100));
+                }
+                $("#precio_3").val(Math.abs(Round(resultado, 2)));
+                break;
+            case "VALOR":
+                if (precio_1 > precio) {
+                    $("#signo_3").val("-");
+                    resultado = 100 - ((precio / precio_1) * 100);
+                    $("#porcentaje_3").val(Math.abs(Round(resultado, 2)));
+                } else
+                    if (precio > precio_1) {
+                        $("#signo_3").val("+");
+                        resultado = 100 - ((precio / precio_1) * 100);
+                        $("#porcentaje_3").val(Math.abs(Round(resultado, 2)));
+                    } else {
+                        $("#signo_3").val("-");
+                        $("#porcentaje_3").val(0);
+                    }
+                break;
+        }
+    }
+
+    function calcular_precio_4(tipo) {
+        var precio_1 = Number($("#precio_1").val());
+        var precio = Number($("#precio_4").val());
+        var signo = $("#signo_4").val();
+        var porcentaje = Number($("#porcentaje_4").val());
+        var resultado;
+        switch (tipo) {
+            case "SIGNO":
+                if (signo == "-") {
+                    resultado = precio_1 - (precio_1 * (porcentaje / 100));
+                } else {
+                    resultado = precio_1 + (precio_1 * (porcentaje / 100));
+                }
+                $("#precio_4").val(Math.abs(Round(resultado, 2)));
+                break;
+            case "PORCENTAJE":
+                if (signo == "-") {
+                    resultado = precio_1 - (precio_1 * (porcentaje / 100));
+                } else {
+                    resultado = precio_1 + (precio_1 * (porcentaje / 100));
+                }
+                $("#precio_4").val(Math.abs(Round(resultado, 2)));
+                break;
+            case "VALOR":
+                if (precio_1 > precio) {
+                    $("#signo_4").val("-");
+                    resultado = 100 - ((precio / precio_1) * 100);
+                    $("#porcentaje_4").val(Math.abs(Round(resultado, 2)));
+                } else
+                    if (precio > precio_1) {
+                        $("#signo_4").val("+");
+                        resultado = 100 - ((precio / precio_1) * 100);
+                        $("#porcentaje_4").val(Math.abs(Round(resultado, 2)));
+                    } else {
+                        $("#signo_4").val("-");
+                        $("#porcentaje_4").val(0);
+                    }
+                break;
+        }
+    }
+
+    function calcular_precio_5(tipo) {
+        var precio_1 = Number($("#precio_1").val());
+        var precio = Number($("#precio_5").val());
+        var signo = $("#signo_5").val();
+        var porcentaje = Number($("#porcentaje_5").val());
+        var resultado;
+        switch (tipo) {
+            case "SIGNO":
+                if (signo == "-") {
+                    resultado = precio_1 - (precio_1 * (porcentaje / 100));
+                } else {
+                    resultado = precio_1 + (precio_1 * (porcentaje / 100));
+                }
+                $("#precio_5").val(Math.abs(Round(resultado, 2)));
+                break;
+            case "PORCENTAJE":
+                if (signo == "-") {
+                    resultado = precio_1 - (precio_1 * (porcentaje / 100));
+                } else {
+                    resultado = precio_1 + (precio_1 * (porcentaje / 100));
+                }
+                $("#precio_5").val(Math.abs(Round(resultado, 2)));
+                break;
+            case "VALOR":
+                if (precio_1 > precio) {
+                    $("#signo_5").val("-");
+                    resultado = 100 - ((precio / precio_1) * 100);
+                    $("#porcentaje_5").val(Math.abs(Round(resultado, 2)));
+                } else
+                    if (precio > precio_1) {
+                        $("#signo_5").val("+");
+                        resultado = 100 - ((precio / precio_1) * 100);
+                        $("#porcentaje_5").val(Math.abs(Round(resultado, 2)));
+                    } else {
+                        $("#signo_5").val("-");
+                        $("#porcentaje_5").val(0);
+                    }
+                break;
+        }
+    }
+
+    function get_info_producto_tipo() {
+        var tipo = $("#IdProductoTipo").val();
+
+        var datos = {
+            IdProductoTipo: tipo
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("get_info_producto_tipo", "ProductoTipo",new { Area = "Inventario"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data == '') {
+                    //No hago nada
+                } else {
+                    $("#link_general").click();
+                    if (data.tp_EsCombo == "S") {
+                        $("#link_composicion").show();
+                    }
+                    else {
+                        $("#link_composicion").hide();
+                    }
+                    if (data.tp_es_lote) {
+                        $("#link_lote").show();
+                    } else {
+                        $("#link_lote").hide();
+                    }
+                }
+            },
+            error: function (error) {
+
+            }
+        });
+    }
+
+    function get_info_padre() {
+        var IPadre = IdProducto_padre.GetValue();
+        if (IPadre != "") {
+            var datos = {
+                IdProducto: IPadre
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("get_info_padre", "Producto",new { Area = "Inventario"})',
+                async: false,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data == '') {
+                        //No hago nada
+                    } else {
+                        $("#pr_codigo").val(data.pr_codigo);
+                        $("#pr_codigo2").val(data.pr_codigo2);
+                        $("#pr_descripcion").val(data.pr_descripcion);
+                        $("#pr_descripcion_2").val(data.pr_descripcion_2);
+                        $("#IdProductoTipo").val(4);
+                        $("#IdMarca").val(data.IdMarca);
+                        $("#IdPresentacion").val(data.IdPresentacion);
+                        $("#IdCategoria").val(data.IdCategoria);
+                        cargar_lineas();
+                        $("#IdLinea").val(data.IdLinea);
+                        cargar_grupos();
+                        $("#IdGrupo").val(data.IdGrupo);
+                        cargar_subgrupos();
+                        $("#IdSubGrupo").val(data.IdSubGrupo);
+                        $("#IdUnidadMedida").val(data.IdUnidadMedida);
+                        $("#IdUnidadMedida_Consumo").val(data.IdUnidadMedida_Consumo);
+                        $("#pr_codigo_barra").val(data.pr_codigo_barra);
+                        $("#pr_observacion").val(data.pr_observacion);
+                        $("#IdCod_Impuesto_Iva").val(data.IdCod_Impuesto_Iva);
+                        $("#Aparece_modu_Ventas").attr("checked", data.Aparece_modu_Ventas);
+                        $("#Aparece_modu_Compras").attr("checked", data.Aparece_modu_Compras);
+                        $("#Aparece_modu_Inventario").attr("checked", data.Aparece_modu_Inventario);
+                        $("#Aparece_modu_Activo_F").attr("checked", data.Aparece_modu_Activo_F);
+                        $("#precio_1").val(data.precio_1);
+                        $("#precio_2").val(data.precio_2);
+                        $("#signo_2").val(data.signo_2);
+                        $("#porcentaje_2").val(data.porcentaje_2);
+                        $("#precio_3").val(data.precio_3);
+                        $("#signo_3").val(data.signo_3);
+                        $("#porcentaje_3").val(data.porcentaje_3);
+                        $("#precio_4").val(data.precio_4);
+                        $("#signo_4").val(data.signo_4);
+                        $("#porcentaje_4").val(data.porcentaje_4);
+                        $("#precio_5").val(data.precio_5);
+                        $("#signo_5").val(data.signo_5);
+                        $("#porcentaje_5").val(data.porcentaje_5);
+                    }
+                },
+                error: function (error) {
+
+                }
+            });
+        }
+    }
+
+</script>

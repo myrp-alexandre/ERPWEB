@@ -1,0 +1,125 @@
+﻿@model Core.Erp.Info.Inventario.in_Ing_Egr_Inven_Info
+@{
+    ViewBag.Title = "Modificar ingreso";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm("Modificar", "IngresoInventario", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q=>q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdSucursal)
+    @Html.HiddenFor(q => q.IdBodega)
+    @Html.HiddenFor(q => q.IdNumMovi)
+    @Html.HiddenFor(q => q.signo)
+    @Html.HiddenFor(q => q.IdMovi_inven_tipo)
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="CodMoviInven">Código</label>
+                    @Html.TextBoxFor(q => q.CodMoviInven, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.CodMoviInven, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-7 col-md-2">
+                <div class="form-group">
+                    <label for="">Fecha</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.cm_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "cm_fecha" })
+                        @Html.ValidationMessageFor(q => q.cm_fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdSucursal">Sucursal*</label>
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" , @disabled = "disabled"})
+                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-6 col-md-3">
+                <div class="form-group">
+                    <label for="IdMotivo_Inv">Motivo*</label>
+                    @Html.DropDownListFor(q => q.IdMotivo_Inv, new SelectList(ViewBag.lst_motivo, "IdMotivo_Inv", "Desc_mov_inv"), new { @class = "form-control", @id = "IdMotivo_Inv" })
+                    @Html.ValidationMessageFor(q => q.IdMotivo_Inv, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdBodega">Bodega</label>
+                    @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodega" })
+                    @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-6 col-md-3">
+                <div class="form-group">
+                    <label for="IdMovi_inven_tipo">Tipo movimiento*</label>
+                    @Html.DropDownListFor(q => q.IdMovi_inven_tipo, new SelectList(ViewBag.lst_tipo, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control", @id = "IdMovi_inven_tipo", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="cm_observacion">Observación</label>
+                    @Html.TextAreaFor(q => q.cm_observacion, new { @class = "form-control", @rows = 3 })
+                    @Html.ValidationMessageFor(q => q.cm_observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.Action("GridViewPartial_inv_det")
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","IngresoInventario",new { Area = "Inventario" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+<script>
+    $(function () {
+        //Date picker
+        $('#cm_fecha').datepicker({
+            autoclose: true
+        })
+    });
+</script>

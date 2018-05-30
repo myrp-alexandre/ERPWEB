@@ -1,0 +1,83 @@
+﻿@model Core.Erp.Info.Caja.caj_Caja_Movimiento_Tipo_Info
+@{
+    ViewBag.Title = "Modificar tipo";
+
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm("Modificar", "TipoMovimientoCaja", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdTipoMovi)
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="tm_descripcion">Descripción*</label>
+                    @Html.TextBoxFor(q => q.tm_descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.tm_descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdCtaCble">Cuenta contable</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble, settings =>
+               {
+                   settings.Name = "IdCtaCble";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                   settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdCtaCble";
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "pc_Cuenta";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+               }).BindList(ViewBag.lst_cuentas).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="tm_Signo">Signo</label>
+                    @Html.DropDownListFor(q => q.tm_Signo, new SelectList(ViewBag.lst_signo, "Key", "Value"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.tm_Signo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-5">
+                <div class="checkbox">
+                    <label for="SeDeposita">@Html.CheckBoxFor(q => q.SeDeposita) Se deposita</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","TipoMovimientoCaja",new { Area = "Caja" },null)">Cancelar</a>
+    </div>
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }
+}

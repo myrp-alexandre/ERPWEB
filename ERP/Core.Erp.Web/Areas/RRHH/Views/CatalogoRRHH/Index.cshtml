@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Tipo catalogo";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm())
+{
+
+
+    @Html.Action("GridViewPartial_catalogos")
+
+}
+
+

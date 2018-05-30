@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Revalorización de venta activo";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.Action("GridViewPartial_venta_activo")
+
+}

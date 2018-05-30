@@ -1,0 +1,116 @@
+﻿@model Core.Erp.Info.Contabilidad.ct_plancta_Info
+@{
+    ViewBag.Title = "Modificar cuenta contable";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm("Modificar", "PlanDeCuentas", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa);
+    @Html.HiddenFor(q => q.IdCtaCble);
+    @Html.HiddenFor(q => q.IdNivelCta);
+    @Html.HiddenFor(q => q.IdCtaCblePadre);
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdCtaCblePadre">Cuenta padre</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdCtaCblePadre, settings =>
+               {
+                   settings.Name = "IdCtaCblePadre";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                   settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdCtaCble";
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "pc_Cuenta";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                   settings.Properties.DropDownButton.Enabled = false;
+                   settings.ReadOnly = true;
+               }).BindList(ViewBag.lst_cuentas).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdCtaCblePadre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdCtaCble">Código cuenta*</label>
+                    @Html.TextBoxFor(q => q.IdCtaCble, new { @class = "form-control", @id = "IdCtaCble", @readonly = "readonly"})
+                    @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="pc_clave_corta">Clave corta</label>
+                    @Html.TextBoxFor(q => q.pc_clave_corta, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.pc_clave_corta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdNivelCta">Nivel</label>
+                    @Html.TextBoxFor(q => q.IdNivelCta, new { @class = "form-control", @id = "IdNivelCta" })
+                    @Html.ValidationMessageFor(q => q.IdNivelCta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="checkbox">
+                    <label for="pc_EsMovimiento_bool">@Html.CheckBoxFor(q => q.pc_EsMovimiento_bool) Es cuenta de movimiento</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdGrupoCble">Grupo contable</label>
+                    @Html.DropDownListFor(q => q.IdGrupoCble, new SelectList(ViewBag.lst_grupo_contabe, "IdGrupoCble", "gc_GrupoCble"), new { @class = "form-control", @id = "IdGrupoCble" })
+                    @Html.ValidationMessageFor(q => q.IdGrupoCble, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="pc_Naturaleza">Naturaleza</label>
+                    @Html.DropDownListFor(q => q.pc_Naturaleza, new SelectList(ViewBag.lst_naturaleza, "Key", "Value"), new { @class = "form-control", @id = "pc_Naturaleza" })
+                    @Html.ValidationMessageFor(q => q.pc_Naturaleza, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="pc_Cuenta">Cuenta contable*</label>
+                    @Html.TextBoxFor(q => q.pc_Cuenta, new { @class = "form-control", @id = "pc_Cuenta" })
+                    @Html.ValidationMessageFor(q => q.pc_Cuenta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "PlanDeCuentas", new { Area ="Contabilidad" }, null)">Cancelar</a>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

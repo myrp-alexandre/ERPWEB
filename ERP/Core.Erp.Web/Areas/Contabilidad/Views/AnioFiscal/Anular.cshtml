@@ -1,0 +1,86 @@
+﻿@model Core.Erp.Info.Contabilidad.ct_anio_fiscal_Info
+@{
+    ViewBag.Title = "Anular año";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+@using (Html.BeginForm("Anular", "AnioFiscal", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q=>q.IdanioFiscal)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdanioFiscal">Año fiscal*</label>
+                    @Html.TextBoxFor(q => q.IdanioFiscal, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.IdanioFiscal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="">Fecha inicio*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.af_fechaIni, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "af_fechaIni" })
+                        @Html.ValidationMessageFor(q => q.af_fechaIni, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="">Fecha fin*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.af_fechaFin, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "af_fechaFin" })
+                        @Html.ValidationMessageFor(q => q.af_fechaFin, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdCtaCble">Utilidad</label>
+                    @Html.DropDownListFor(q => q.info_anio_ctautil.IdCtaCble, new SelectList(" "), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.info_anio_ctautil.IdCtaCble, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-danger">Anular</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "AnioFiscal", new { Area ="Contabilidad" }, null)">Cancelar</a>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+
+<script>
+    $(function () {
+
+        //Date picker
+        $('#af_fechaIni').datepicker({
+            autoclose: true
+        })
+
+        $('#af_fechaFin').datepicker({
+            autoclose: true
+        })
+    })
+</script>

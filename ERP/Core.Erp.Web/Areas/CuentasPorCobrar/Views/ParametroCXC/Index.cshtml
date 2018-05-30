@@ -1,0 +1,212 @@
+﻿@model Core.Erp.Info.CuentasPorCobrar.cxc_Parametro_Info
+@{
+    ViewBag.Title = "Parámetros de cuentas por cobrar";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+@using (Html.BeginForm("Index", "ParametroCXC", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q=>q.IdEmpresa)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="pa_tipoND_x_CheqProtestado">Tipo de nota de débito</label>
+                    @Html.DropDownListFor(q=>q.pa_tipoND_x_CheqProtestado, new SelectList(ViewBag.lst_tiponota, "IdTipoNota", "Tipo"), new { @class = "form-control"})
+                    @Html.ValidationMessageFor(q => q.pa_tipoND_x_CheqProtestado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="pa_IdCaja_x_cobros_x_CXC">Caja para los cobros</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.pa_IdCaja_x_cobros_x_CXC, settings =>
+                            {
+                                settings.Name = "pa_IdCaja_x_cobros_x_CXC";
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                settings.Properties.Columns.Add("IdCaja", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                settings.Properties.Columns.Add("ca_Descripcion", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                                //Campo ID
+                                settings.Properties.ValueField = "IdCaja";
+                                settings.Properties.ValueType = typeof(int);
+                                settings.Properties.TextField = "ca_Descripcion";
+                                //Boton para seleccionar ningun registro
+                                settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                settings.Properties.NullText = "== Seleccione ==";
+                                settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                            }).BindList(ViewBag.lst_caja).GetHtml()
+                    @Html.ValidationMessageFor(q => q.pa_IdCaja_x_cobros_x_CXC, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="pa_IdTipoMoviCaja_x_Cobros_x_cliente">Tipo de movimiento de caja</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.pa_IdTipoMoviCaja_x_Cobros_x_cliente, settings =>
+                            {
+                                settings.Name = "pa_IdTipoMoviCaja_x_Cobros_x_cliente";
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                settings.Properties.Columns.Add("IdTipoMovi", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                settings.Properties.Columns.Add("tm_descripcion", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                                //Campo ID
+                                settings.Properties.ValueField = "IdTipoMovi";
+                                settings.Properties.ValueType = typeof(int);
+                                settings.Properties.TextField = "tm_descripcion";
+                                //Boton para seleccionar ningun registro
+                                settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                settings.Properties.NullText = "== Seleccione ==";
+                                settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                            }).BindList(ViewBag.lst_movimiento).GetHtml()
+                    @Html.ValidationMessageFor(q => q.pa_IdTipoMoviCaja_x_Cobros_x_cliente, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="pa_IdTipoCbteCble_CxC">Comprobante contable que genera cobros</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.pa_IdTipoCbteCble_CxC, settings =>
+                            {
+                                settings.Name = "pa_IdTipoCbteCble_CxC";
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                settings.Properties.Columns.Add("tc_TipoCbte", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                                //Campo ID
+                                settings.Properties.ValueField = "IdTipoCbte";
+                                settings.Properties.ValueType = typeof(int);
+                                settings.Properties.TextField = "tc_TipoCbte";
+                                //Boton para seleccionar ningun registro
+                                settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                settings.Properties.NullText = "== Seleccione ==";
+                                settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                            }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
+                    @Html.ValidationMessageFor(q => q.pa_IdTipoCbteCble_CxC, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="pa_IdTipoCbteCble_CxC_ANU">Comprobante contable que anula cobros</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.pa_IdTipoCbteCble_CxC_ANU, settings =>
+                            {
+                                settings.Name = "pa_IdTipoCbteCble_CxC_ANU";
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                settings.Properties.Columns.Add("tc_TipoCbte", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                                //Campo ID
+                                settings.Properties.ValueField = "IdTipoCbte";
+                                settings.Properties.ValueType = typeof(int);
+                                settings.Properties.TextField = "tc_TipoCbte";
+                                //Boton para seleccionar ningun registro
+                                settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                settings.Properties.NullText = "== Seleccione ==";
+                                settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                            }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
+                    @Html.ValidationMessageFor(q => q.pa_IdTipoCbteCble_CxC_ANU, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="pa_IdTipoCbte_x_conciliacion">Comprobante contable que genera conciliación</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.pa_IdTipoCbte_x_conciliacion, settings =>
+                            {
+                                settings.Name = "pa_IdTipoCbte_x_conciliacion";
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                settings.Properties.Columns.Add("tc_TipoCbte", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                                //Campo ID
+                                settings.Properties.ValueField = "IdTipoCbte";
+                                settings.Properties.ValueType = typeof(int);
+                                settings.Properties.TextField = "tc_TipoCbte";
+                                //Boton para seleccionar ningun registro
+                                settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                settings.Properties.NullText = "== Seleccione ==";
+                                settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                            }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
+                    @Html.ValidationMessageFor(q => q.pa_IdTipoCbte_x_conciliacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="pa_IdCobro_tipo_Comision_TC">Tipo de cobro por comisión de tarjeta de crédito</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.pa_IdCobro_tipo_Comision_TC, settings =>
+                            {
+                                settings.Name = "pa_IdCobro_tipo_Comision_TC";
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                settings.Properties.Columns.Add("IdCobro_tipo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                settings.Properties.Columns.Add("tc_descripcion", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                                //Campo ID
+                                settings.Properties.ValueField = "IdCobro_tipo";
+                                settings.Properties.ValueType = typeof(string);
+                                settings.Properties.TextField = "tc_descripcion";
+                                //Boton para seleccionar ningun registro
+                                settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                settings.Properties.NullText = "== Seleccione ==";
+                                settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                            }).BindList(ViewBag.lst_cobrotipo).GetHtml()
+                    @Html.ValidationMessageFor(q => q.pa_IdCobro_tipo_Comision_TC, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="pa_IdCobro_tipo_default">Tipo de cobro por default</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.pa_IdCobro_tipo_default, settings =>
+                            {
+                                settings.Name = "pa_IdCobro_tipo_default";
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                settings.Properties.Columns.Add("IdCobro_tipo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                settings.Properties.Columns.Add("tc_descripcion", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                                //Campo ID
+                                settings.Properties.ValueField = "IdCobro_tipo";
+                                settings.Properties.ValueType = typeof(string);
+                                settings.Properties.TextField = "tc_descripcion";
+                                //Boton para seleccionar ningun registro
+                                settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                settings.Properties.NullText = "== Seleccione ==";
+                                settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                            }).BindList(ViewBag.lst_cobrotipo).GetHtml()
+                    @Html.ValidationMessageFor(q => q.pa_IdCobro_tipo_default, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

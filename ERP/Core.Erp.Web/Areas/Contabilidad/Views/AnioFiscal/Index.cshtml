@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Año fiscal";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.Action("GridViewPartial_anio_fiscal")
+
+}
+

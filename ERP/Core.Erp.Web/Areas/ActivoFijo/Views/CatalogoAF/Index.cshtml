@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Catálogos";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm())
+{
+
+
+    @Html.Action("GridViewPartial_catalogo_af", new { IdTipoCatalogo = ViewBag.IdTipoCatalogo })
+
+    <div class="box-footer">
+        <a class="btn btn-default" href="@Url.Action("Index","CatalogoTipoAF",new { IdTipoCatalogo = ViewBag.IdTipoCatalogo, Area = "ActivoFijo" },null)">Volver</a>
+    </div>
+
+}

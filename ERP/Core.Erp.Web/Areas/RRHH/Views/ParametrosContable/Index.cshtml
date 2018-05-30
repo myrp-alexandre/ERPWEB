@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Parametros contables";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm())
+{
+    @Html.Action("GridViewPartial_parametros")
+}

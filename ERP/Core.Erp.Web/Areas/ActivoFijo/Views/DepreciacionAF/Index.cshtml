@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Depreciaciones";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm())
+{
+
+}

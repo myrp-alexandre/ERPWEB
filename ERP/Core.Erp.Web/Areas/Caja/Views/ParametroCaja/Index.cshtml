@@ -1,0 +1,154 @@
+﻿@model Core.Erp.Info.Caja.caj_parametro_Info
+@{
+    ViewBag.Title = "Parámetros de caja";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+@using (Html.BeginForm("Index", "ParametroCaja", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdTipoCbteCble_MoviCaja_Ing">Comprobante contable para ingreso de caja</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbteCble_MoviCaja_Ing, settings =>
+              {
+                  settings.Name = "IdTipoCbteCble_MoviCaja_Ing";
+                  settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                  settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                  settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                  settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                  //Campo ID
+                  settings.Properties.ValueField = "IdTipoCbte";
+                  settings.Properties.ValueType = typeof(string);
+                  settings.Properties.TextField = "tc_TipoCbte";
+                  //Boton para seleccionar ningun registro
+                  settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                  settings.Properties.NullText = "== Seleccione ==";
+                  settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+              }).BindList(ViewBag.lst_parametrocontable).GetHtml()
+
+                    @Html.ValidationMessageFor(q => q.IdTipoCbteCble_MoviCaja_Ing, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdTipoCbteCble_MoviCaja_Ing_Anu">Comprobante contable para anular ingreso de caja</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbteCble_MoviCaja_Ing_Anu, settings =>
+              {
+                  settings.Name = "IdTipoCbteCble_MoviCaja_Ing_Anu";
+                  settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                  settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                  settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                  settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                  //Campo ID
+                  settings.Properties.ValueField = "IdTipoCbte";
+                  settings.Properties.ValueType = typeof(string);
+                  settings.Properties.TextField = "tc_TipoCbte";
+                  //Boton para seleccionar ningun registro
+                  settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                  settings.Properties.NullText = "== Seleccione ==";
+                  settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+              }).BindList(ViewBag.lst_parametrocontable).GetHtml()
+
+                    @Html.ValidationMessageFor(q => q.IdTipoCbteCble_MoviCaja_Ing_Anu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdTipoCbteCble_MoviCaja_Egr">Comprobante contable para egreso de caja</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbteCble_MoviCaja_Egr, settings =>
+              {
+                  settings.Name = "IdTipoCbteCble_MoviCaja_Egr";
+                  settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                  settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                  settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                  settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                  //Campo ID
+                  settings.Properties.ValueField = "IdTipoCbte";
+                  settings.Properties.ValueType = typeof(string);
+                  settings.Properties.TextField = "tc_TipoCbte";
+                  //Boton para seleccionar ningun registro
+                  settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                  settings.Properties.NullText = "== Seleccione ==";
+                  settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+              }).BindList(ViewBag.lst_parametrocontable).GetHtml()
+
+                    @Html.ValidationMessageFor(q => q.IdTipoCbteCble_MoviCaja_Egr, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdTipoCbteCble_MoviCaja_Egr_Anu">Comprobante contable para anular egreso de caja</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbteCble_MoviCaja_Egr_Anu, settings =>
+              {
+                  settings.Name = "IdTipoCbteCble_MoviCaja_Egr_Anu";
+                  settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                  settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                  settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                  settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                  //Campo ID
+                  settings.Properties.ValueField = "IdTipoCbte";
+                  settings.Properties.ValueType = typeof(string);
+                  settings.Properties.TextField = "tc_TipoCbte";
+                  //Boton para seleccionar ningun registro
+                  settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                  settings.Properties.NullText = "== Seleccione ==";
+                  settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+              }).BindList(ViewBag.lst_parametrocontable).GetHtml()
+
+                    @Html.ValidationMessageFor(q => q.IdTipoCbteCble_MoviCaja_Egr_Anu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdTipo_movi_ing_x_reposicion">Motivo</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipo_movi_ing_x_reposicion, settings =>
+              {
+                  settings.Name = "IdTipo_movi_ing_x_reposicion";
+                  settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                  settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                  settings.Properties.Columns.Add("IdTipoMovi", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                  settings.Properties.Columns.Add("tm_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                  //Campo ID
+                  settings.Properties.ValueField = "IdTipoMovi";
+                  settings.Properties.ValueType = typeof(string);
+                  settings.Properties.TextField = "tm_descripcion";
+                  //Boton para seleccionar ningun registro
+                  settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                  settings.Properties.NullText = "== Seleccione ==";
+                  settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+              }).BindList(ViewBag.lst_tipomovimiento).GetHtml()
+
+                    @Html.ValidationMessageFor(q => q.IdTipo_movi_ing_x_reposicion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }
+}

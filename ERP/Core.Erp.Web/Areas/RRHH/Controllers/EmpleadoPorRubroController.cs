@@ -1,0 +1,204 @@
+﻿using DevExpress.Web.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Core.Erp.Info.RRHH;
+using Core.Erp.Bus.RRHH;
+namespace Core.Erp.Web.Areas.RRHH.Controllers
+{
+    public class EmpleadoPorRubroController : Controller
+    {
+        ro_empleado_x_ro_rubro_Bus bus_rubro_fijos = new ro_empleado_x_ro_rubro_Bus();
+        ro_rubro_tipo_Bus bus_rubro = new ro_rubro_tipo_Bus();
+        ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
+        ro_nomina_tipo_Bus bus_nomina = new ro_nomina_tipo_Bus();
+        ro_Nomina_Tipoliquiliqui_Bus bus_nomina_tipo = new ro_Nomina_Tipoliquiliqui_Bus();
+        int IdEmpresa = 0;
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_rubros_fijos(decimal IdEmpleado = 0)
+        {
+            try
+            {
+                IdEmpresa = GetIdEmpresa();
+                ViewBag.IdEmpleado = IdEmpleado;
+                bus_rubro_fijos = new ro_empleado_x_ro_rubro_Bus();
+                List<ro_empleado_x_ro_rubro_Info> model = bus_rubro_fijos.get_list(IdEmpresa);
+                return PartialView("_GridViewPartial_rubros_fijos", model);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        [HttpPost]
+        public ActionResult Nuevo(ro_empleado_x_ro_rubro_Info info)
+        {
+            try
+            {
+
+                ViewBag.IdEmpleado = info.IdEmpleado;
+                IdEmpresa = GetIdEmpresa();
+                info.IdEmpresa = IdEmpresa;
+                if (ModelState.IsValid)
+                {
+                    if (!bus_rubro_fijos.guardarDB(info))
+                    {
+                        cargar_combos(0);
+                        return View(info);
+                    }
+                    else
+                        return RedirectToAction("Index", new { IdEmpleado = info.IdEmpleado });
+
+                }
+                else
+                    return View(info);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public ActionResult Nuevo(int IdEmpleado = 0)
+        {
+            try
+            {
+                ro_empleado_x_ro_rubro_Info model = new ro_empleado_x_ro_rubro_Info
+                {
+                    IdEmpleado = IdEmpleado
+                };
+                ViewBag.IdEmpleado = IdEmpleado;
+                cargar_combos(0);
+                return View(model);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        [HttpPost]
+        public ActionResult Modificar(ro_empleado_x_ro_rubro_Info info)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    info.IdEmpresa = GetIdEmpresa();
+                    if (!bus_rubro_fijos.modificarDB(info))
+                    {
+                        cargar_combos(info.IdNomina_Tipo);
+                        return View(info);
+                    }
+                    else
+                        return RedirectToAction("Index", new { IdEmpleado = info.IdEmpleado });
+                }
+                else
+                    return View(info);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public ActionResult Modificar(int IdNomina_Tipo=0, int IdRubroFijo = 0)
+        {
+            try
+            {
+                cargar_combos(IdNomina_Tipo);
+                IdEmpresa = GetIdEmpresa();
+                return View(bus_rubro_fijos.get_info(IdEmpresa, IdRubroFijo));
+                
+    }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        [HttpPost]
+
+        public ActionResult Anular(ro_empleado_x_ro_rubro_Info info)
+        {
+            try
+            {
+                if (!bus_rubro_fijos.anularDB(info))
+                {
+                    cargar_combos(info.IdNomina_Tipo);
+                    return View(info);
+                }
+                else
+                    return RedirectToAction("Index");
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public ActionResult Anular(int IdNomina_Tipo = 0, int IdRubroFijo = 0)
+        {
+            try
+            {
+                cargar_combos(IdNomina_Tipo);
+                IdEmpresa = GetIdEmpresa();
+                return View(bus_rubro_fijos.get_info(IdEmpresa, IdRubroFijo));
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void cargar_combos(int IdNominaTipo)
+        {
+            try
+            {
+                IdEmpresa = GetIdEmpresa();
+                ViewBag.lst_rubro = bus_rubro.get_list_rub_concepto(IdEmpresa);
+                ViewBag.lst_empleado = bus_empleado.get_list_combo(IdEmpresa);
+                ViewBag.lst_nomina = bus_nomina.get_list(IdEmpresa, false);
+                ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, IdNominaTipo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        private int GetIdEmpresa()
+        {
+            try
+            {
+                if (Session["IdEmpresa"] != null)
+                    return Convert.ToInt32(Session["IdEmpresa"]);
+                else
+                    return 0;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+    }
+}

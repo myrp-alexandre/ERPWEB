@@ -1,0 +1,140 @@
+﻿@model Core.Erp.Info.RRHH.ro_contrato_Info
+
+@{
+    ViewBag.Title = "Nuevo contrato";
+}
+
+
+@using (Html.BeginForm("Nuevo", "Contrato", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdCtaCblePadre">Empleado*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado, settings =>
+               {
+                   settings.Name = "IdEmpleado";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
+                   settings.Properties.Columns.Add("IdEmpleado", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("Empleado", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+
+                   //Campo ID
+                   settings.Properties.ValueField = "IdEmpleado";
+                   settings.Properties.ValueType = typeof(decimal);
+                   settings.Properties.TextField = "Empleado";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+               }).BindList(ViewBag.lst_empleado).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdContrato_Tipo">Nómina*</label>
+                    @Html.DropDownListFor(q => q.IdNomina, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), "== Seleccione ==", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdNomina, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdContrato_Tipo">Tipo contrato*</label>
+                    @Html.DropDownListFor(q => q.IdContrato_Tipo, new SelectList(ViewBag.lst_tipo_contrato, "CodCatalogo", "ca_descripcion"), "== Seleccione ==", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdContrato_Tipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdContrato_Tipo">Estado contrato*</label>
+                    @Html.DropDownListFor(q => q.EstadoContrato, new SelectList(ViewBag.lst_estado_contrato, "CodCatalogo", "ca_descripcion"), "== Seleccione ==", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.EstadoContrato, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="NumDocumento">Nº contrato*</label>
+                    @Html.TextBoxFor(q => q.NumDocumento, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.NumDocumento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="FechaInicio">Fecha inicio*</label>
+                    @Html.TextBoxFor(q => q.FechaInicio, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaInicio" })
+                    @Html.ValidationMessageFor(q => q.FechaInicio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="FechaFin">Fecha fin*</label>
+                    @Html.TextBoxFor(q => q.FechaFin, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaFin" })
+                    @Html.ValidationMessageFor(q => q.FechaFin, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Observacion">Sueldo*</label>
+                    @Html.TextBoxFor(q => q.Sueldo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Sueldo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Observacion">Observación*</label>
+                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Contrato",new { Area = "RRHH" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+<script>
+    $(function () {
+
+        //Date picker
+        $('#FechaInicio').datepicker({
+            autoclose: true
+        })
+
+        $('#FechaFin').datepicker({
+            autoclose: true
+        })
+    })
+</script>

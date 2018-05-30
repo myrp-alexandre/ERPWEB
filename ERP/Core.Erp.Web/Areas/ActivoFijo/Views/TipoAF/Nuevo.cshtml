@@ -1,0 +1,152 @@
+﻿@model Core.Erp.Info.ActivoFijo.Af_Activo_fijo_tipo_Info
+@{
+    ViewBag.Title = "Nuevo tipo";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+@using (Html.BeginForm("Nuevo", "TipoAF", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="CodActivoFijo">Código</label>
+                    @Html.TextBoxFor(q => q.CodActivoFijo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.CodActivoFijo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Af_Descripcion">Descripción*</label>
+                    @Html.TextBoxFor(q => q.Af_Descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Af_Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <div class="checkbox">
+                            <label for="Se_Deprecia">@Html.CheckBoxFor(q => q.Se_Deprecia) Aplica depreciación</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="Af_anio_depreciacion">Años de depreciación*</label>
+                            @Html.TextBoxFor(q => q.Af_anio_depreciacion, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.Af_anio_depreciacion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="Af_Porcentaje_depre">Porcentaje de depreciación*</label>
+                            @Html.TextBoxFor(q => q.Af_Porcentaje_depre, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.Af_Porcentaje_depre, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="IdCtaCble_Activo">Cuenta contable activo</label>
+                            @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_Activo, settings =>
+               {
+                   settings.Name = "IdCtaCble_Activo";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                   settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdCtaCble";
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "pc_Cuenta";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+               }).BindList(ViewBag.lst_cuentas).GetHtml()
+                            @Html.ValidationMessageFor(q => q.IdCtaCble_Activo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="IdCtaCble_Dep_Acum">Cuenta contable depreciación acumulada</label>
+                            @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_Dep_Acum, settings =>
+               {
+                   settings.Name = "IdCtaCble_Dep_Acum";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                   settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdCtaCble";
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "pc_Cuenta";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+               }).BindList(ViewBag.lst_cuentas).GetHtml()
+                            @Html.ValidationMessageFor(q => q.IdCtaCble_Dep_Acum, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="IdCtaCble_Gastos_Depre">Cuenta contable gastos de depreciación</label>
+                            @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_Gastos_Depre, settings =>
+               {
+                   settings.Name = "IdCtaCble_Gastos_Depre";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                   settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdCtaCble";
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "pc_Cuenta";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+               }).BindList(ViewBag.lst_cuentas).GetHtml()
+                            @Html.ValidationMessageFor(q => q.IdCtaCble_Gastos_Depre, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a class="btn btn-default" href="@Url.Action("Index", "TipoAF", new { Area ="ActivoFijo" }, null)">Cancelar</a>
+            </div>
+
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }
+}

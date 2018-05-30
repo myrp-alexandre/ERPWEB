@@ -1,0 +1,80 @@
+@using System.Web.UI.WebControls;
+@model Core.Erp.Info.RRHH.ro_horario_planificacion_Info
+@{
+
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridViewPartial_horario_planificacion_det";
+        settings.CallbackRouteValues = new { Controller = "HorarioPlanificacion", Action = "GridViewPartial_horario_planificacion_det", IdPlanificacion=Model.IdPlanificacion  };
+        settings.KeyFieldName = "Secuencia";
+        settings.Width = Unit.Percentage(100);
+        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "HorarioPlanificacion", Action = "EditingUpdate", Area = "RRHH" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "HorarioPlanificacion", Action = "EditingDelete", Area = "RRHH" };
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+        //Funcion para inicializar fila al presionar nuevo
+        settings.InitNewRow = (s, e) =>
+        {
+            e.NewValues["pe_cedulaRuc"] = "";
+            e.NewValues["pe_nombreCompleto"] = "";
+            e.NewValues["Su_Descripcion"] = "";
+            e.NewValues["di_descripcion"] = "";
+            e.NewValues["ar_descripcion"] = "";
+            e.NewValues["de_descripcion"] = "";
+            e.NewValues["ca_descripcion"] = "";
+            e.NewValues["IdHorario"] = 1;
+
+        };
+        settings.Columns.Add("pe_cedulaRuc", "Cédula").Width = Unit.Percentage(5);
+        settings.Columns.Add("pe_nombreCompleto", "Empleado").Width = Unit.Percentage(20);
+        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(15);
+        settings.Columns.Add("di_descripcion", "División").Width = Unit.Percentage(10);
+        settings.Columns.Add("ar_descripcion", "Área").Width = Unit.Percentage(10);
+        settings.Columns.Add("de_descripcion", "Departamento").Width = Unit.Percentage(10);
+        settings.Columns.Add("ca_descripcion", "Cargo").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "fecha";
+            column.Caption = "Fecha";
+            column.Width = Unit.Percentage(15);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdHorario";
+            column.Caption = "Horario";
+            column.Width = Unit.Percentage(35);
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("IdHorario", "ID").Width = Unit.Percentage(20);
+                p.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(70);
+                p.ValueField = "IdHorario";
+                p.ValueType = typeof(int);
+                p.DataSource = ViewBag.lst_horario;
+                p.Width = Unit.Percentage(100);
+            });
+        });
+
+    });
+
+}
+@grid.Bind(Model.lst_planificacion_det).GetHtml()

@@ -1,0 +1,102 @@
+﻿@model Core.Erp.Info.RRHH.ro_cargaFamiliar_Info
+
+@{
+    ViewBag.Title = "Nuevo carga ";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+
+    if (ViewBag.mensaje != null)
+    {
+        <h2>@ViewBag.mensaje</h2>
+    }
+}
+@using (Html.BeginForm("Nuevo", "CargaFamiliar", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpleado);
+
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="em_status">Parentezco*</label>
+                @Html.DropDownListFor(q => q.TipoFamiliar, new SelectList(ViewBag.lst_tipo_familiar, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(q => q.TipoFamiliar, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="em_status">Sexo*</label>
+                @Html.DropDownListFor(q => q.Sexo, new SelectList(ViewBag.lst_sexo, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(q => q.Sexo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="tc_Descripcion">Cédula*</label>
+                @Html.TextBoxFor(q => q.Cedula, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Cedula, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="tc_Descripcion">Nombres*</label>
+                    @Html.TextBoxFor(q => q.Nombres, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Nombres, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="pe_fechaNacimiento">Fecha de nacimiento*</label>
+                <div class="input-group date">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    @Html.TextBoxFor(q => q.FechaNacimiento, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "pe_fechaNacimiento" })
+                    @Html.ValidationMessageFor(q => q.FechaNacimiento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="tc_Descripcion">Capacidades especiales*</label>
+                    @Html.EditorFor(q => q.capacidades_especiales, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.capacidades_especiales, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","CargaFamiliar", new { IdEmpleado = ViewBag.IdEmpleado, Area = "RRHH"},null)">Cancelar</a>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+<script>
+
+
+    $(function () {
+
+        $('#pe_fechaNacimiento').datepicker({
+            autoclose: true
+        })
+    })
+
+
+</script>

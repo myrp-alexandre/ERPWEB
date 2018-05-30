@@ -1,0 +1,165 @@
+﻿@model Core.Erp.Info.RRHH.ro_Parametros_Info
+@{
+    ViewBag.Title = "Parametrización contable";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm("Modificar", "ParametrosContable", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+
+    @Html.HiddenFor(q => q.IdEmpresa);
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdTipoCbte_AsientoSueldoXPagar">Tipo comprobante*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbte_AsientoSueldoXPagar, settings =>
+               {
+                   settings.Name = "IdTipoCbte_AsientoSueldoXPagar";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("CodTipoCbte", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+
+                   //Campo ID
+                   settings.Properties.ValueField = "IdTipoCbte";
+                   settings.Properties.ValueType = typeof(int);
+                   settings.Properties.TextField = "tc_TipoCbte";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+               }).BindList(ViewBag.lst_comprobante_tipo).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdTipoCbte_AsientoSueldoXPagar, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="Tabs" role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_param_general" aria-controls="param_general" role="tab" data-toggle="tab">Parametros generales</a>
+            </li>
+            <li>
+                <a href="#tab_param_rubros" aria-controls="param_rubros" role="tab" data-toggle="tab">Cta. contable por rubros</a>
+            </li>
+            <li>
+                <a href="#tab_param_provisiones" aria-controls="param_provisiones" role="tab" data-toggle="tab">Cta. contable provisiones</a>
+            </li>
+            <li>
+                <a href="#tab_param_sueldo" aria-controls="param_sueldo" role="tab" data-toggle="tab">Cta. contable sueldo por pagar</a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content" style="padding-top: 20px">
+
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tab_param_general">
+
+
+
+                <div class="box collapsed-box">
+                    <div class="box-header with-border">
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+
+
+
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="tab_param_rubros">
+
+                @Html.Action("GridViewPartial_cta_ctble_rubros")
+
+
+            </div>
+
+
+            <div role="tabpanel" class="tab-pane" id="tab_param_provisiones">
+
+                @Html.Action("GridViewPartial_cta_ctble_provisiones")
+
+
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="tab_param_sueldo">
+
+                @Html.Action("GridViewPartial_cta_contable_sueldo_pagar")
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "Empleado", new { Area ="RRHH" }, null)">Cancelar</a>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+}
+
+
+<script>
+
+    $(function () {
+
+        $('#fechaingreso').datepicker({
+            autoclose: true
+        })
+    })
+
+    $(function () {
+
+        $('#fechasalida').datepicker({
+            autoclose: true
+        })
+    })
+    $(function () {
+
+        $('#pe_fechaNacimiento').datepicker({
+            autoclose: true
+        })
+    })
+
+
+</script>

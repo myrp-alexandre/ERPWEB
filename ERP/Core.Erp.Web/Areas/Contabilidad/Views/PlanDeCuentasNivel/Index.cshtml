@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Niveles del plan de cuenta";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.Action("GridViewPartial_plancta_nivel")
+
+}

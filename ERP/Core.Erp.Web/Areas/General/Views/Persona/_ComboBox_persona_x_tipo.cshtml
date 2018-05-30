@@ -1,0 +1,18 @@
+﻿@model Core.Erp.Info.General.tb_persona_Info
+@Html.DevExpress().ComboBoxFor(i => i.IdPersona, settings =>
+{
+    settings.CallbackRouteValues = new { Controller = "Persona", Action = "ComboBox_persona_x_tipo", Area = "General", tipo_persona = ViewBag.tipo_persona, IdPersona = Model == null ? 0 : Model.IdPersona };
+    settings.Name = "IdPersona";
+    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.Properties.DisplayFormatString = "[{0}] - {2}";
+    settings.Properties.Columns.Add("IdPersona", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+    settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+    settings.Properties.Columns.Add("pe_nombreCompleto", "Nombre completo").Width = System.Web.UI.WebControls.Unit.Percentage(70);
+    //Campo ID
+    settings.Properties.ValueField = "IdPersona";
+    settings.Properties.ValueType = typeof(decimal);
+    settings.Properties.TextField = "pe_nombreCompleto";
+    //Boton para seleccionar ningun registro
+    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+}).BindList(ViewBag.lst_persona).GetHtml()

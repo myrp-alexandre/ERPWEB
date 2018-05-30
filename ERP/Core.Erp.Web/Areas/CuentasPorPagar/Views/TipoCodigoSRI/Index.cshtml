@@ -1,0 +1,15 @@
+﻿@model Core.Erp.Info.CuentasPorPagar.cp_codigo_SRI_tipo_Info
+@{
+    ViewBag.Title = "Tipos códigos SRI";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+@using (Html.BeginForm())
+{
+@Html.Action("GridViewPartial_tipo_codigo_sri")
+}
+
+
+

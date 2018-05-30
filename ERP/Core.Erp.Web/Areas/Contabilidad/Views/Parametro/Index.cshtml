@@ -1,0 +1,53 @@
+﻿@model Core.Erp.Info.Contabilidad.ct_parametro_Info
+@{
+    ViewBag.Title = "Parametro";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm("Index", "Parametro", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdTipoCbte_SaldoInicial">Comprobante contable para saldo inicial</label>
+                    @Html.DropDownListFor(q => q.IdTipoCbte_SaldoInicial, new SelectList(ViewBag.lst_cuentas, "IdTipoCbte_SaldoInicial", "IdTipoCbte"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdTipoCbte_SaldoInicial, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdTipoCbte_AsientoCierre_Anual">Comprobante contable para cierre anual</label>
+                    @Html.DropDownListFor(q => q.IdTipoCbte_AsientoCierre_Anual, new SelectList(ViewBag.lst_cuentas,"IdTipoCbte_AsientoCierre_Anual", "IdTipoCbte"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdTipoCbte_AsientoCierre_Anual, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label for="P_Se_Muestra_Todas_las_ctas_en_combos">@Html.CheckBoxFor(q =>q.P_Se_Muestra_Todas_las_ctas_en_combos) Este comprobante es usado solo por contabilidad </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","TipoComprobante",new { Area = "Contabilidad" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+

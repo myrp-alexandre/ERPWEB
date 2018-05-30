@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Activos";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.Action("GridViewPartial_activo_fijo")
+
+}

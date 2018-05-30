@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Líneas";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.Action("GridViewPartial_linea", new { IdCategoria = ViewBag.IdCategoria })
+
+    <div class="box-footer">
+        <a class="btn btn-default" href="@Url.Action("Index","Categoria",new { IdCategoria = ViewBag.IdCategoria, Area = "Inventario" },null)">Volver</a>
+    </div>
+
+}

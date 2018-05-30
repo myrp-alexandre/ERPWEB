@@ -1,0 +1,177 @@
+﻿@model Core.Erp.Info.ActivoFijo.Af_Venta_Activo_Info
+@{
+    ViewBag.Title = "Nueva revalorización de activo";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+@using (Html.BeginForm("Nuevo", "RevalorizacionVentaActivo", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Cod_VtaActivo">Código</label>
+                    @Html.TextBoxFor(q => q.Cod_VtaActivo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Cod_VtaActivo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdActivoFijo">Activo fijo</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdActivoFijo, settings =>
+                              {
+                                  settings.Name = "IdActivoFijo";
+                                  settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                  settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                  settings.Properties.Columns.Add("IdActivoFijo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                  settings.Properties.Columns.Add("Af_Nombre", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                                 //Campo ID
+                                 settings.Properties.ValueField = "IdActivoFijo";
+                                  settings.Properties.ValueType = typeof(int);
+                                  settings.Properties.TextField = "Af_Nombre";
+                                 //Boton para seleccionar ningun registro
+                                 settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                  settings.Properties.NullText = "== Seleccione ==";
+                                  settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                              }).BindList(ViewBag.lst_fijo).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdActivoFijo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="ValorActivo">V. activo*</label>
+                    @Html.TextBoxFor(q => q.ValorActivo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.ValorActivo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Valor_Tot_Bajas">V. baja*</label>
+                    @Html.TextBoxFor(q => q.Valor_Tot_Bajas, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Valor_Tot_Bajas, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Valor_Tot_Mejora">V. mejora*</label>
+                    @Html.TextBoxFor(q => q.Valor_Tot_Mejora, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Valor_Tot_Mejora, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Valor_Depre_Acu">V. Depr. Acum.*</label>
+                    @Html.TextBoxFor(q => q.Valor_Depre_Acu, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Valor_Depre_Acu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Valor_Neto">V. neto*</label>
+                    @Html.TextBoxFor(q => q.Valor_Neto, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Valor_Neto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_datos" aria-controls="datos" role="tab" data-toggle="tab">Datos de la mejora</a>
+            </li>
+            <li>
+                <a href="#tab_diario" aria-controls="diario" role="tab" data-toggle="tab">Diario contable</a>
+            </li>
+        </ul>
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_datos">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="NumComprobante">Número de comprobante</label>
+                                @Html.TextBoxFor(q => q.NumComprobante, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.NumComprobante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class=" col-md-3">
+                            <div class="form-group">
+                                <label for="">Fecha de venta</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.TextBoxFor(q => q.Fecha_Venta, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_Venta" })
+                                    @Html.ValidationMessageFor(q => q.Fecha_Venta, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Valor_Venta">V. venta</label>
+                                @Html.TextBoxFor(q => q.Valor_Venta, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Valor_Venta, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Valor_Perdi_Gana">V. perdida y ganancia</label>
+                                @Html.TextBoxFor(q => q.Valor_Perdi_Gana, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Valor_Perdi_Gana, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="Concepto_Vta">Concepto venta</label>
+                                @Html.TextBoxFor(q => q.Concepto_Vta, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Concepto_Vta, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+                    <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_diario">
+
+                    </div>
+
+
+                </div>
+            </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "RevalorizacionVentaActivo", new { Area = "ActivoFijo" }, null)">Cancelar</a>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+<script>
+    $(function () {
+        //Date picker
+        $('#Fecha_Venta').datepicker({
+            autoclose: true
+        })
+</script>

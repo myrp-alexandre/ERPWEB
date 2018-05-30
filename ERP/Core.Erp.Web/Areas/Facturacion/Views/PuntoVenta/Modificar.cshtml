@@ -1,0 +1,106 @@
+﻿@model Core.Erp.Info.Facturacion.fa_PuntoVta_Info
+@{
+    ViewBag.Title = "Modificar punto";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm("Modificar", "PuntoVenta", FormMethod.Post, new { @class = "form", @rolw = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdPuntoVta)
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="cod_PuntoVta">Código</label>
+                    @Html.TextBoxFor(q => q.cod_PuntoVta, new { @class = "form-control", @id = "pr_codigo" })
+                    @Html.ValidationMessageFor(q => q.cod_PuntoVta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="nom_PuntoVta">Descripción</label>
+                    @Html.TextBoxFor(q => q.nom_PuntoVta, new { @class = "form-control", @id = "pr_codigo" })
+                    @Html.ValidationMessageFor(q => q.nom_PuntoVta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdSucursal">Sucursal*</label>
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdBodega">Bodega*</label>
+                    @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodega" })
+                    @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "PuntoVenta", new { IdSucursal = Model.IdSucursal, IdBodega = Model.IdBodega,  Area = "Facturacion" }, null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+<script>
+    $(function () {
+        cargar_bodega();
+    });
+
+    $("#IdSucursal").change(function () {
+        cargar_bodega();
+    });
+
+    function cargar_bodega() {
+        $("#IdBodega").empty();
+
+        var sucursal = $("#IdSucursal").val();
+
+        var datos = {
+            IdSucursal: sucursal
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("cargar_bodega", "PuntoVenta", new { Area = "Facturacion" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdBodega").append("<option value=" + row.IdBodega + ">" + row.bo_Descripcion + "</option>");
+                });
+            },
+            error: function (error) {
+            }
+        });
+    };
+</script>

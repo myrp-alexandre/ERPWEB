@@ -1,0 +1,103 @@
+﻿@model Core.Erp.Info.General.tb_sucursal_Info
+@{
+    ViewBag.Title = "Anular sucursal";
+
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm("Anular", "Sucursal", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdSucursal)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="codigo">Código</label>
+                    @Html.TextBoxFor(q => q.codigo, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Su_CodigoEstablecimiento">Establecimiento</label>
+                    @Html.TextBoxFor(q => q.Su_CodigoEstablecimiento, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(q => q.Es_establecimiento)
+                        <label for="Es_establecimiento">Es establecimiento</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Su_Descripcion">Descripción*</label>
+                    @Html.TextBoxFor(q => q.Su_Descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Su_Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Su_Ruc">Ruc</label>
+                    @Html.TextBoxFor(q => q.Su_Ruc, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label for="Su_Telefonos">Teléfonos</label>
+                    @Html.TextBoxFor(q => q.Su_Telefonos, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Su_JefeSucursal">Jefe de sucursal</label>
+                    @Html.TextBoxFor(q => q.Su_JefeSucursal, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Su_Direccion">Dirección</label>
+                    @Html.TextAreaFor(m => m.Su_Direccion, new { @class = "form-control", @rows = 3 })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Su_Ubicacion">Ubicación</label>
+                    @Html.TextAreaFor(m => m.Su_Ubicacion, new { @class = "form-control", @rows = 3 })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-danger">Anular</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Sucursal",new { Area = "General" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

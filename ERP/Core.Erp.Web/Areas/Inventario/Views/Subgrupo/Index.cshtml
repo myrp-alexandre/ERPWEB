@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Subgrupos";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+@using (Html.BeginForm())
+{
+
+    @Html.Action("GridViewPartial_subgrupo", new { IdCategoria = ViewBag.IdCategoria, IdLinea = ViewBag.IdLinea, IdGrupo = ViewBag.IdGrupo })
+
+    <div class="box-footer">
+        <a class="btn btn-default" href="@Url.Action("Index","Grupo",new {IdCategoria = ViewBag.IdCategoria, IdLinea = ViewBag.IdLinea, IdGrupo = ViewBag.IdGrupo, Area = "Inventario" },null)">Volver</a>
+    </div>
+
+
+}
+
+

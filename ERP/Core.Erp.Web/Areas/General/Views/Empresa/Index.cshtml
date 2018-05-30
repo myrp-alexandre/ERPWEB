@@ -1,0 +1,15 @@
+﻿@model Core.Erp.Info.General.tb_empresa_Info
+@{
+    ViewBag.Title = "Empresas";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.Action("GridViewPartial_empresa")
+
+}

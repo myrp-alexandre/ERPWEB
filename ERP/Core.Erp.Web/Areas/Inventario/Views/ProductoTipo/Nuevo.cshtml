@@ -1,0 +1,57 @@
+﻿@model Core.Erp.Info.Inventario.in_ProductoTipo_Info
+@{
+    ViewBag.Title = "Nuevo tipo";
+    ViewBag.Title = "Anular clase";
+
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm("Nuevo","ProductoTipo",FormMethod.Post,new { @class = "form", @role = "form"}))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="tp_descripcion">Descripción*</label>
+                    @Html.TextBoxFor(q=> q.tp_descripcion,new { @class = "form-control"})
+                    @Html.ValidationMessageFor(q=> q.tp_descripcion, "", new { @class = "text-danger"})
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="checkbox">
+                    <label for="tp_EsCombo_bool">@Html.CheckBoxFor(q=>q.tp_EsCombo_bool) Es combo</label>
+                </div>
+            </div>            
+            <div class="col-md-2">
+                <div class="checkbox">
+                    <label for="tp_ManejaInven_bool">@Html.CheckBoxFor(q => q.tp_ManejaInven_bool) Maneja inventario</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="checkbox">
+                    <label for="tp_ManejaLote">@Html.CheckBoxFor(q => q.tp_ManejaLote) Maneja lote</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="checkbox">
+                    <label for="tp_es_lote">@Html.CheckBoxFor(q => q.tp_es_lote) Es lote</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","ProductoTipo",new { Area = "Inventario" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

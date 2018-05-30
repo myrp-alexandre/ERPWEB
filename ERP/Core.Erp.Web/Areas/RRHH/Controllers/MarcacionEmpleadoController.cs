@@ -1,0 +1,196 @@
+﻿using DevExpress.Web.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Core.Erp.Bus.RRHH;
+using Core.Erp.Info.RRHH;
+namespace Core.Erp.Web.Areas.RRHH.Controllers
+{
+    public class MarcacionEmpleadoController : Controller
+    {
+        ro_catalogo_Bus bus_catalogo = new ro_catalogo_Bus();
+        ro_marcaciones_x_empleado_Bus bus_marcaciones = new ro_marcaciones_x_empleado_Bus();
+        ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
+        int IdEmpresa = 0;
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_marcaciones_empleado()
+        {
+            try
+            {
+                IdEmpresa = GetIdEmpresa();
+                List<ro_marcaciones_x_empleado_Info> model = bus_marcaciones.get_list(IdEmpresa);
+                return PartialView("_GridViewPartial_marcaciones_empleado", model);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        [HttpPost]
+        public ActionResult Nuevo(ro_marcaciones_x_empleado_Info info)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    info.IdUsuario = Session["IdUsuario"].ToString();
+
+                    info.IdEmpresa = GetIdEmpresa();
+                    if (!bus_marcaciones.guardarDB(info))
+                    {
+                        cargar_combo();
+                        return View(info);
+                    }
+                    else
+                        return RedirectToAction("Index");
+                }
+                else
+                    return View(info);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public ActionResult Nuevo()
+        {
+            try
+            {
+                ro_marcaciones_x_empleado_Info info = new ro_marcaciones_x_empleado_Info();
+                info.es_fechaRegistro = DateTime.Now.Date;
+                info.es_Hora = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+                cargar_combo();
+                return View(info);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        [HttpPost]
+        public ActionResult Modificar(ro_marcaciones_x_empleado_Info info)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (!bus_marcaciones.modificarDB(info))
+                    {
+                        cargar_combo();
+                        return View(info);
+                    }
+                    else
+                        return RedirectToAction("Index");
+                }
+                else
+                    return View(info);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public ActionResult Modificar(decimal IdEmpleado = 0, decimal IdRegistro = 0)
+        {
+            try
+            {
+                IdEmpresa = GetIdEmpresa();
+                cargar_combo();
+                return View(bus_marcaciones.get_info(IdEmpresa, IdEmpleado, IdRegistro));
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        [HttpPost]
+
+        public ActionResult Anular(ro_marcaciones_x_empleado_Info info)
+        {
+            try
+            {
+
+                if (!bus_marcaciones.anularDB(info))
+                {
+                    cargar_combo();
+                    return View(info);
+                }
+                else
+                    return RedirectToAction("Index");
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public ActionResult Anular(decimal IdEmpleado = 0, decimal IdRegistro = 0)
+        {
+            try
+            {
+                IdEmpresa = GetIdEmpresa();
+                cargar_combo();
+                return View(bus_marcaciones.get_info(IdEmpresa, IdEmpleado, IdRegistro));
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void cargar_combo()
+        {
+            try
+            {
+                ro_nomina_tipo_Bus bus_nomina = new ro_nomina_tipo_Bus();
+                IdEmpresa = GetIdEmpresa();
+                ViewBag.lst_empleado = bus_empleado.get_list_combo(IdEmpresa);
+                ViewBag.lst_tipomarcacion = bus_catalogo.get_list_x_tipo(43);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private int GetIdEmpresa()
+        {
+            try
+            {
+                if (Session["IdEmpresa"] != null)
+                    return Convert.ToInt32(Session["IdEmpresa"]);
+                else
+                    return 0;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+       
+    }
+}

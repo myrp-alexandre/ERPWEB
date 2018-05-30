@@ -1,0 +1,228 @@
+﻿@using System.Web.UI.WebControls;
+@model Core.Erp.Info.RRHH.ro_participacion_utilidad_Info
+
+@{
+    ViewBag.Title = "Modificar";
+}
+@using (Html.BeginForm("Modificar", "ParticipacionUtilidad", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="FechaInicio">Nómina*</label>
+                    @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_Tipo" })
+                    @Html.ValidationMessageFor(q => q.IdNomina_Tipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="FechaFin">Tipo liquidación nómina*</label>
+                    @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
+                    @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="FechaFin">Período*</label>
+                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodos, "IdPeriodo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdPeriodo" })
+                    @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="FechaFin">10% Individual*</label>
+                    @Html.TextBoxFor(q => q.UtilidadDerechoIndividual, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.UtilidadDerechoIndividual, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="FechaFin">5% Por cargas*</label>
+                    @Html.TextBoxFor(q => q.UtilidadCargaFamiliar, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.UtilidadCargaFamiliar, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Procesar</button>
+                    <a class="btn btn-default" href="@Url.Action("Index","ParticipacionUtilidad",new { Area = "RRHH" },null)">Cancelar</a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridView_utilidades";
+        settings.CallbackRouteValues = new { Controller = "ParticipacionUtilidad", Action = "GridViewPartial_utilidades_detalle", IdNomina_Tipo = Model.IdNomina_Tipo, IdNomina_TipoLiqui = Model.IdNomina_TipoLiqui, IdPeriodo = Model.IdPeriodo };
+
+        settings.Width = Unit.Percentage(99);
+
+        settings.KeyFieldName = "IdUtilidad";
+
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
+
+        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Hidden;
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
+        settings.Settings.VerticalScrollableHeight = 400;
+        settings.SettingsPager.Visible = true;
+        settings.SettingsPager.PageSize = 10000;
+        settings.SettingsPager.Mode = GridViewPagerMode.ShowPager;
+        settings.SettingsPager.AlwaysShowPager = true;
+
+
+        settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowHeaderFilterButton = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+
+        settings.SettingsExport.RenderBrick = (sender, e) =>
+        {
+            if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
+                e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
+        };
+        settings.HtmlRowPrepared = (s, e) =>
+        {
+            if (Convert.ToString(e.GetValue("em_status")) != "EST_ACT")
+            {
+                e.Row.ForeColor = System.Drawing.Color.Red;
+            }
+        };
+
+        settings.Columns.Add("IdEmpleado", "ID").Width = Unit.Percentage(2);
+        settings.Columns.Add("pe_cedulaRuc", "Cédula").Width = Unit.Percentage(5);
+        settings.Columns.Add("pe_nombre", "Nombres").Width = Unit.Percentage(10);
+        settings.Columns.Add("pe_apellido", "Apellidos").Width = Unit.Percentage(10);
+        settings.Columns.Add("ca_descripcion", "Cargo").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "em_fechaIngaRol";
+            column.Caption = "Fech. ingreso";
+            column.Width = Unit.Percentage(5);
+            column.PropertiesEdit.DisplayFormatString = "d";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "em_fechaSalida";
+            column.Caption = "Fech. salida";
+            column.Width = Unit.Percentage(5);
+            column.PropertiesEdit.DisplayFormatString = "d";
+        });
+        settings.Columns.Add("CargasFamiliares", "#cargas").Width = Unit.Percentage(5);
+        settings.Columns.Add("DiasTrabajados", "#Días").Width = Unit.Percentage(5);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ValorIndividual";
+            column.Caption = "$ Individual";
+            column.Width = Unit.Percentage(5);
+            column.PropertiesEdit.DisplayFormatString = "c2";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ValorCargaFamiliar";
+            column.Caption = "$ Carga";
+            column.Width = Unit.Percentage(5);
+            column.PropertiesEdit.DisplayFormatString = "c2";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ValorTotal";
+            column.Caption = "$ Total";
+            column.Width = Unit.Percentage(5);
+            column.PropertiesEdit.DisplayFormatString = "c2";
+        });
+
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "ValorIndividual");
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "ValorCargaFamiliar");
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "ValorTotal");
+
+        settings.Settings.ShowFooter = true;
+    });
+
+    @grid.Bind(Model.detalle).GetHtml()
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+
+
+<script>
+
+
+       $("#IdNomina_Tipo").change(function () {
+           $("#IdNomina_TipoLiqui").empty();
+             cargar_tipo_liquidacion_nomina();
+
+        });
+
+       $("#IdNomina_TipoLiqui").change(function () {
+           $("#IdPeriodo").empty();
+            cargar_periodos_x_nomina();
+        });
+
+
+
+        function cargar_tipo_liquidacion_nomina() {
+            var datos = {
+                IdNomina: $("#IdNomina_Tipo").val()
+            }
+
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("get_lst_nomina_tipo_liq","ParticipacionUtilidad", new { Area = "RRHH" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    $.each(data, function (i, row) {
+                        $("#IdNomina_TipoLiqui").append("<option value=" + row.IdNomina_TipoLiqui + ">" + row.DescripcionProcesoNomina + "</option>");
+                    });
+                },
+                error: function (error) {
+                }
+            });
+        };
+
+    function cargar_periodos_x_nomina() {
+        var datos = {
+            IdNomina: $("#IdNomina_Tipo").val(),
+            IdNomina_Tipo: $("#IdNomina_TipoLiqui").val()
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("get_lst_periodo_x_nomina","ParticipacionUtilidad", new { Area = "RRHH" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                $.each(data, function (i, row) {
+                    $("#IdPeriodo").append("<option value=" + row.IdPeriodo + ">" + row.descripcion + "</option>");
+                });
+            },
+            error: function (error) {
+            }
+        });
+    };
+
+
+
+</script>

@@ -1,0 +1,55 @@
+﻿@model Core.Erp.Info.Facturacion.fa_TipoNota_Info
+@{
+    ViewBag.Title = "Anular Tipo ";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm("Anular", "TipoNota", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdTipoNota)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="CodTipoNota">Código*</label>
+                    @Html.TextBoxFor(q => q.CodTipoNota, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.CodTipoNota, "", new { @class = "form", @role = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Tipo">Tipo*</label>
+                    @Html.DropDownListFor(q => q.Tipo, new SelectList(ViewBag.lst_tipos, "Key", "Value"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Tipo, "", new { @class = "form", @role = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="No_Descripcion">Descripción*</label>
+                    @Html.TextBoxFor(q => q.No_Descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.No_Descripcion, "", new { @class = "form", @role = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-danger">Anular</button>
+        <a class="btn btn-default" href="@Url.Action("Index","TipoNota",new { Area = "Facturacion" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

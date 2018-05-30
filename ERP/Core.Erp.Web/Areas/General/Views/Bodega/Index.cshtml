@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Bodegas";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm())
+{
+    @Html.Action("GridViewPartial_bodega", new { IdSucursal = ViewBag.IdSucursal })
+}
+
+<div class="box-footer">
+    <a class="btn btn-default" href="@Url.Action("Index","Sucursal",new { Area = "General" },null)">Volver</a>
+</div>

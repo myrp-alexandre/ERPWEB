@@ -1,0 +1,104 @@
+﻿@model Core.Erp.Info.Contabilidad.ct_cbtecble_Info
+@{
+    ViewBag.Title = "Anular comprobante contable";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm("Anular", "ComprobanteContable", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdTipoCbte)
+    @Html.HiddenFor(q => q.IdCbteCble)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="CodCbteCble">Código</label>
+                    @Html.TextBoxFor(q => q.CodCbteCble, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.CodCbteCble, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-offset-7 col-md-3">
+                <div class="form-group">
+                    <label for="">Fecha de comprobante</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.cb_Fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "cb_Fecha" })
+                        @Html.ValidationMessageFor(q => q.cb_Fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdTipoCbte">Tipo comprobante</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbte, settings =>
+               {
+                   settings.Name = "IdTipoCbte";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdTipoCbte";
+                   settings.Properties.ValueType = typeof(int);
+                   settings.Properties.TextField = "tc_TipoCbte";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownButton.Enabled = false;
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                   settings.ReadOnly = true;
+               }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdTipoCbte, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="cb_Observacion">Observación</label>
+                    @Html.TextBoxFor(q => q.cb_Observacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.cb_Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_comprobante_detalle")
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-danger">Anular</button>
+        <a class="btn btn-default" href="@Url.Action("Index","ComprobanteContable",new { Area = "Contabilidad" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+<script>
+    $(function () {
+
+        //Date picker
+        $('#cb_Fecha').datepicker({
+            autoclose: true
+        })
+    });
+
+</script>

@@ -1,0 +1,78 @@
+﻿@model Core.Erp.Info.RRHH.ro_periodo_Info
+@{
+    ViewBag.Title = "Nuevo Periodo";
+}
+@using (Html.BeginForm("Nuevo", "Periodo", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="FechaInicio">Fecha inicio*</label>
+                    @Html.TextBoxFor(q => q.pe_FechaIni, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "pe_FechaIni" })
+                    @Html.ValidationMessageFor(q => q.pe_FechaIni, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="FechaFin">Fecha fin*</label>
+                    @Html.TextBoxFor(q => q.pe_FechaFin, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "pe_FechaFin" })
+                    @Html.ValidationMessageFor(q => q.pe_FechaFin, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="ca_descripcion">Región</label>
+                    @Html.DropDownListFor(q => q.Cod_region, new SelectList(ViewBag.lst_region, "Cod_Region", "Nom_region"), "== Seleccione ==", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Cod_region, "", new { @class = "text-danger" })
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="ca_descripcion">Consideran empleados pasivos</label>
+                    @Html.EditorFor(q => q.Carga_Todos_Empleados, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Carga_Todos_Empleados, "", new { @class = "text-danger" })
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Periodo",new { Area = "RRHH" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+
+<script>
+                $(function () {
+
+                    //Date picker
+                    $('#pe_FechaIni').datepicker({
+                        autoclose: true
+                    })
+
+                    $('#pe_FechaFin').datepicker({
+                        autoclose: true
+                    })
+                })
+
+
+</script>

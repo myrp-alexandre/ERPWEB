@@ -1,0 +1,89 @@
+@using System.Web.UI.WebControls;
+@model Core.Erp.Info.RRHH.ro_Parametros_Info
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridViewPartial_cta_contable_sueldo_pagar";
+        settings.CallbackRouteValues = new { Controller = "ParametrosContable", Action = "GridViewPartial_cta_contable_sueldo_pagar" };
+
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ParametrosContable", Action = "EditingUpdate_cta_sueldo" };
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "ParametrosContable", Action = "EditingNew_cta_sueldo" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ParametrosContable", Action = "EditingDelete_cta_sueldo" };
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+        settings.Width = Unit.Percentage(100);
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+
+
+        settings.KeyFieldName = "Secuencia";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdNomina";
+            column.Caption = "Nómina";
+            column.Width = Unit.Percentage(35);
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(70);
+                p.ValueField = "IdNomina_Tipo";
+
+                p.ValueType = typeof(int);
+                p.DataSource = ViewBag.lst_nomina;
+                p.Width = Unit.Percentage(100);
+            });
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdNominaTipo";
+            column.Caption = "Proceso";
+            column.Width = Unit.Percentage(35);
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("DescripcionProcesoNomina", "Descripción").Width = Unit.Percentage(70);
+                p.ValueField = "IdNomina_TipoLiqui";
+
+                p.ValueType = typeof(int);
+                p.DataSource = ViewBag.lst_nomina_tipo;
+                p.Width = Unit.Percentage(100);
+            });
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdCtaCble";
+            column.Caption = "Cta. contable";
+            column.Width = Unit.Percentage(35);
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("IdCtaCble", "Cta. contable").Width = Unit.Percentage(20);
+                p.Columns.Add("pc_Cuenta", "cta. contable").Width = Unit.Percentage(70);
+                p.ValueField = "IdCtaCble";
+                p.ValueType = typeof(string);
+                p.DataSource = ViewBag.lst_cta_contable;
+                p.Width = Unit.Percentage(100);
+            });
+        });
+
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model.lst_cta_x_sueldo_pagar).GetHtml()

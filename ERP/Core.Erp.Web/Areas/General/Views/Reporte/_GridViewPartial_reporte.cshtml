@@ -1,0 +1,81 @@
+@using System.Web.UI.WebControls;
+
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridView_reporte";
+        settings.CallbackRouteValues = new { Controller = "Reporte", Action = "GridViewPartial_reporte" };
+        settings.KeyFieldName = "CodReporte";
+        settings.Width = Unit.Percentage(100);
+
+        //CConfiguracion responsive
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
+        //Configuración scrolling y pager
+        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Hidden;
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
+        settings.Settings.VerticalScrollableHeight = 400;
+        settings.SettingsPager.Visible = true;
+        settings.SettingsPager.PageSize = 10;
+        settings.SettingsPager.Mode = GridViewPagerMode.ShowPager;
+        settings.SettingsPager.AlwaysShowPager = true;
+        //Configuración filtro por columna
+        settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowHeaderFilterButton = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        //Configuracion exportacion
+        settings.SettingsExport.EnableClientSideExportAPI = true;
+        settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
+        settings.Toolbars.Add(t =>
+        {
+            t.EnableAdaptivity = true;
+            t.Items.Add(GridViewToolbarCommand.ExportToPdf);
+            t.Items.Add(GridViewToolbarCommand.ExportToXls);
+            t.Items.Add(GridViewToolbarCommand.ExportToXlsx);
+            t.Items.Add(GridViewToolbarCommand.ExportToDocx);
+            t.Items.Add(GridViewToolbarCommand.ExportToRtf);
+            t.Items.Add(GridViewToolbarCommand.ExportToCsv);
+        });
+        settings.SettingsExport.RenderBrick = (sender, e) =>
+        {
+            if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
+                e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
+        };
+        settings.Columns.Add(c =>
+        {
+            c.Caption = "#";
+            c.SetDataItemTemplateContent(tc =>
+            {
+                ViewContext.Writer.Write(
+            Html.ActionLink("Modificar", "Modificar", new { CodReporte = DataBinder.Eval(tc.DataItem, "CodReporte") })
+                );
+            });
+            c.SetHeaderTemplateContent(tc =>
+            {
+                ViewContext.Writer.Write(
+                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                );
+            });
+            c.Settings.AllowDragDrop = DefaultBoolean.False;
+            c.Settings.AllowSort = DefaultBoolean.False;
+            c.Width = Unit.Pixel(150);
+        });
+
+        settings.Columns.Add("CodReporte", "Código").Width = Unit.Percentage(10);
+        settings.Columns.Add("nom_reporte", "Nombre").Width = Unit.Percentage(60);
+        settings.Columns.Add("estado", "Estado").Width = Unit.Percentage(10);
+        settings.Columns.Add("orden", "Orden").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('"+Url.Action(DataBinder.Eval(c.DataItem, "mvc_accion").ToString(), DataBinder.Eval(c.DataItem, "mvc_controlador").ToString(), new { Area = DataBinder.Eval(c.DataItem, "mvc_area").ToString() }, Request.Url.Scheme)+"');\"></span>");
+            });
+            column.Width = Unit.Percentage(10);
+        });
+    });
+}
+@grid.Bind(Model).GetHtml()

@@ -1,0 +1,259 @@
+﻿@model Core.Erp.Info.RRHH.ro_prestamo_Info
+
+@{
+    ViewBag.Title = "Nuevo prestamo";
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
+}
+
+
+@using (Html.BeginForm("Nuevo", "Prestamos", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdEmpleado">Empleado*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado, settings =>
+               {
+                   settings.Name = "IdEmpleado";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
+                   settings.Properties.Columns.Add("IdEmpleado", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("Empleado", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+
+                   //Campo ID
+                   settings.Properties.ValueField = "IdEmpleado";
+                   settings.Properties.ValueType = typeof(decimal);
+                   settings.Properties.TextField = "Empleado";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+               }).BindList(ViewBag.lst_empleado).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdEmpleado_Aprueba">Empleado autoriza*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado_Aprueba, settings =>
+               {
+                   settings.Name = "IdEmpleado_Aprueba";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
+                   settings.Properties.Columns.Add("IdEmpleado", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("Empleado", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+
+                   //Campo ID
+                   settings.Properties.ValueField = "IdEmpleado";
+                   settings.Properties.ValueType = typeof(decimal);
+                   settings.Properties.TextField = "Empleado";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+               }).BindList(ViewBag.lst_empleado).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdCtaCblePadre">Rubro*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdRubro, settings =>
+               {
+                   settings.Name = "IdRubro";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("ru_codRolGen", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("ru_descripcion", "Rubro").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("ru_tipo", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+
+                   //Campo ID
+                   settings.Properties.ValueField = "IdRubro";
+                   settings.Properties.ValueType = typeof(decimal);
+                   settings.Properties.TextField = "ru_descripcion";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+               }).BindList(ViewBag.lst_rubro).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdRubro, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Valor">Monto solicitado*</label>
+                    @Html.TextBoxFor(q => q.MontoSol, new { @class = "form-control", @id = "MontoSol" })
+                    @Html.ValidationMessageFor(q => q.MontoSol, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Fecha_PriPago">Fecha primer pago*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.Fecha_PriPago, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_PriPago" })
+                        @Html.ValidationMessageFor(q => q.Fecha_PriPago, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Valor">Nímero cuotas*</label>
+                    @Html.TextBoxFor(q => q.NumCuotas, new { @class = "form-control", @id = "NumCuotas" })
+                    @Html.ValidationMessageFor(q => q.NumCuotas, "", new { @class = "text-danger" })
+                </div>
+            </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="descuento_mensual">Descuento</label>
+                            @Html.DevExpress().RadioButtonFor(q => q.descuento_mensual, settings =>
+                       {
+                           settings.Name = "descuento_mensual";
+                           settings.GroupName = "formapao";
+                           settings.Text = "Fin de mes";
+
+                       }).GetHtml()
+                        </div>
+                    </div>
+                </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="descuento_quincena">Descuento</label>
+                        @Html.DevExpress().RadioButtonFor(q => q.descuento_quincena, settings =>
+                   {
+                       settings.Name = "descuento_quincena";
+                       settings.GroupName = "formapao";
+                       settings.Text = "Quincena";
+                   }).GetHtml()
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="descuento_men_quin">Descuentos</label>
+                        @Html.DevExpress().RadioButtonFor(q => q.descuento_men_quin, settings =>
+                   {
+                       settings.Name = "descuento_men_quin";
+                       settings.GroupName = "formapao";
+                       settings.Text = "Quincena y fin de mes";
+
+                   }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Valor">Observaciones*</label>
+                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+
+                <div class="form-group">
+                    <label for="Valor">Detalle prestamos*</label>
+                    @Html.Action("GridViewPartial_prestamos_det")
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="box-footer">
+        <button type="button" onclick="Generar();" id="btnconsultar" class="btn btn-primary">Generar</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Prestamos",new { Area = "RRHH" },null)">Cancelar</a>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+
+<script>
+
+
+    $(function () {
+
+        $('#Fecha_PriPago').datepicker({
+            autoclose: true
+        })
+    })
+
+
+</script>
+
+
+<script>
+    function Generar()
+            {
+                 var datos = {
+                     MontoSol: $("#MontoSol").val(),
+                     Fecha_PriPago: $("#Fecha_PriPago").val(),
+                     NumCuotas: $("#NumCuotas").val(),
+                     descuento_mensual: descuento_mensual.GetValue(),
+                     descuento_quincena: descuento_quincena.GetValue(),
+                     descuento_men_quin: descuento_men_quin.GetValue()
+                }
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(datos),
+                    url: '@Url.Action("GenerarPrestamo", "Prestamos", new { Area = "RRHH" })',
+                    async: false,
+                    bDeferRender: true,
+                    bProcessing: true,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data)
+                    {
+
+                        GridViewPartial_prestamos_det.PerformCallback();
+
+                    },
+                    error: function (error)
+                    {
+                    }
+                    });
+};
+</script>

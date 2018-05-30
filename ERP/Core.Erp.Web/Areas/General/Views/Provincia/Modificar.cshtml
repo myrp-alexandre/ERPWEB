@@ -1,0 +1,100 @@
+﻿@model Core.Erp.Info.General.tb_provincia_Info
+@{
+    ViewBag.Title = "Modificar provincia";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm("Modificar", "Provincia", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q=>q.IdProvincia)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Cod_Provincia">Código*</label>
+                    @Html.TextBoxFor(q => q.Cod_Provincia, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Cod_Provincia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdPais">País*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdPais, settings =>
+               {
+                   settings.Name = "IdPais";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdPais", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("Nombre", "País").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdPais";
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "Nombre";
+                   settings.Properties.AllowNull = false;
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+               }).BindList(ViewBag.lst_paises).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdPais, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Cod_Region">Región*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.Cod_Region, settings =>
+               {
+                   settings.Name = "Cod_Region";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("Cod_Region", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("Nom_region", "Región").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                   //Campo ID
+                   settings.Properties.ValueField = "Cod_Region";
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "Nom_region";
+                   settings.Properties.AllowNull = false;
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+               }).BindList(ViewBag.lst_regiones).GetHtml()
+                    @Html.ValidationMessageFor(q => q.Cod_Region, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Descripcion_Prov">Descripción*</label>
+                    @Html.TextBoxFor(q => q.Descripcion_Prov, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Descripcion_Prov, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Provincia",new { Area = "General" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
