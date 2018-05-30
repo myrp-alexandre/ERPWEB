@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.ActivoFijo
 {
+//EDITADO
     public class Af_Activo_fijo_Info
     {       
         public int IdEmpresa { get; set; }
