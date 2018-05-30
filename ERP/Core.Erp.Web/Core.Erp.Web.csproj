@@ -7846,6 +7846,18 @@
     <Content Include="Areas\RRHH\Views\DepartamentoPorArea\Modificar.cshtml" />
     <Content Include="Areas\RRHH\Views\DepartamentoPorArea\Anular.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Devexpress\ace.js" />
+    <Content Include="Scripts\Devexpress\cldr.js" />
+    <Content Include="Scripts\Devexpress\currency.js" />
+    <Content Include="Scripts\Devexpress\date.js" />
+    <Content Include="Scripts\Devexpress\ext-language_tools.js" />
+    <Content Include="Scripts\Devexpress\globalize.js" />
+    <Content Include="Scripts\Devexpress\jquery.js" />
+    <Content Include="Scripts\Devexpress\jquery.min.js" />
+    <Content Include="Scripts\Devexpress\knockout.debug.js" />
+    <Content Include="Scripts\Devexpress\knockout.js" />
+    <Content Include="Scripts\Devexpress\message.js" />
+    <Content Include="Scripts\Devexpress\number.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -7861,7 +7873,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
