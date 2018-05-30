@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3f8cebb5fa1e48fc9777139875abe5b0" Name="Diagram1" >
+        <EntityTypeShape EntityType="Model_cuentas_por_cobrar.cxc_Catalogo" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="Model_cuentas_por_cobrar.cxc_CatalogoTipo" Width="1.5" PointX="0.75" PointY="1.75" />
+        <AssociationConnector Association="Model_cuentas_por_cobrar.FK_cxc_Catalogo_cxc_CatalogoTipo" />
+        <EntityTypeShape EntityType="Model_cuentas_por_cobrar.cxc_cobro_tipo" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_cuentas_por_cobrar.cxc_cobro_tipo_motivo" Width="1.5" PointX="3.125" PointY="5.5" />
+        <AssociationConnector Association="Model_cuentas_por_cobrar.FK_cxc_cobro_tipo_cxc_cobro_tipo_motivo" />
+        <EntityTypeShape EntityType="Model_cuentas_por_cobrar.cxc_Parametro" Width="1.5" PointX="7.625" PointY="2.625" />
+        <AssociationConnector Association="Model_cuentas_por_cobrar.FK_cxc_Parametro_cxc_cobro_tipo" />
+        <AssociationConnector Association="Model_cuentas_por_cobrar.FK_cxc_Parametro_cxc_cobro_tipo1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

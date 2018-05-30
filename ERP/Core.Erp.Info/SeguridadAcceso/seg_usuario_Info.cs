@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace Core.Erp.Info.SeguridadAcceso
+{
+    public class seg_usuario_Info
+    {
+        [Key]
+        [Required(ErrorMessage = "El campo usuario es obligatorio")]
+        public string IdUsuario { get; set; }
+        public string Contrasena { get; set; }
+        public string estado { get; set; }
+        public Nullable<System.DateTime> Fecha_Transaccion { get; set; }
+        public string IdUsuarioUltModi { get; set; }
+        public Nullable<System.DateTime> Fecha_UltMod { get; set; }
+        public string IdUsuarioUltAnu { get; set; }
+        public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
+        public string MotivoAnulacion { get; set; }
+        public string Nombre { get; set; }
+        public bool ExigirDirectivaContrasenia { get; set; }
+        public bool CambiarContraseniaSgtSesion { get; set; }
+
+        public List<seg_Usuario_x_Empresa_Info> lst_usuario_x_empresa { get; set; }
+    }
+}

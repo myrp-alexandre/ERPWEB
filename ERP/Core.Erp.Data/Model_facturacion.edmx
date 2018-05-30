@@ -1,0 +1,687 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model_facturacion.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="fa_cliente">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCliente" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Idtipo_cliente" Type="int" Nullable="false" />
+          <Property Name="IdTipoCredito" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="cl_plazo" Type="int" Nullable="false" />
+          <Property Name="IdCtaCble_cxc" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCble_Anti" Type="varchar" MaxLength="20" />
+          <Property Name="cl_Cupo" Type="float" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdCtaCble_cxc_Credito" Type="varchar" MaxLength="20" />
+          <Property Name="es_empresa_relacionada" Type="bit" />
+          <Property Name="NivelPrecio" Type="int" />
+          <Property Name="FormaPago" Type="varchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="fa_cliente_contactos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="IdContacto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCliente" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdContacto" Type="int" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="200" />
+          <Property Name="Celular" Type="varchar" MaxLength="200" />
+          <Property Name="Correo" Type="varchar" MaxLength="1000" />
+          <Property Name="Direccion" Type="varchar" MaxLength="1000" />
+          <Property Name="IdCiudad" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdParroquia" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fa_cliente_tipo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="Idtipo_cliente" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="Idtipo_cliente" Type="int" Nullable="false" />
+          <Property Name="Cod_cliente_tipo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Descripcion_tip_cliente" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdCtaCble_CXC_Anticipo" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCble_CXC_Con" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCble_CXC_Cred" Type="varchar" MaxLength="20" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotivoAnula" Type="varchar" MaxLength="100" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="25" />
+          <Property Name="estado" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fa_formaPago">
+          <Key>
+            <PropertyRef Name="IdFormaPago" />
+          </Key>
+          <Property Name="IdFormaPago" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="nom_FormaPago" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fa_PuntoVta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdPuntoVta" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdPuntoVta" Type="int" Nullable="false" />
+          <Property Name="cod_PuntoVta" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nom_PuntoVta" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+          <Property Name="IdBodega" Type="int" />
+        </EntityType>
+        <EntityType Name="fa_TerminoPago">
+          <Key>
+            <PropertyRef Name="IdTerminoPago" />
+          </Key>
+          <Property Name="IdTerminoPago" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="nom_TerminoPago" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Num_Coutas" Type="int" Nullable="false" />
+          <Property Name="Dias_Vct" Type="int" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fa_TipoNota">
+          <Key>
+            <PropertyRef Name="IdTipoNota" />
+          </Key>
+          <Property Name="IdTipoNota" Type="int" Nullable="false" />
+          <Property Name="CodTipoNota" Type="varchar" MaxLength="20" />
+          <Property Name="Tipo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="No_Descripcion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="25" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="fa_Vendedor">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdVendedor" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdVendedor" Type="int" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="Ve_Vendedor" Type="nchar" MaxLength="200" Nullable="false" />
+          <Property Name="ve_cedula" Type="varchar" MaxLength="20" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="25" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="MotivoAnula" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consulta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwfa_cliente_consulta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="Idtipo_cliente" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCliente" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Idtipo_cliente" Type="int" Nullable="false" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_fa_cliente_contactos_fa_cliente">
+          <End Role="fa_cliente" Type="Self.fa_cliente" Multiplicity="1" />
+          <End Role="fa_cliente_contactos" Type="Self.fa_cliente_contactos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_cliente">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="fa_cliente_contactos">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_cliente_fa_cliente_tipo">
+          <End Role="fa_cliente_tipo" Type="Self.fa_cliente_tipo" Multiplicity="1" />
+          <End Role="fa_cliente" Type="Self.fa_cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_cliente_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="Idtipo_cliente" />
+            </Principal>
+            <Dependent Role="fa_cliente">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="Idtipo_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_cliente_fa_forma_pago">
+          <End Role="fa_formaPago" Type="Self.fa_formaPago" Multiplicity="0..1" />
+          <End Role="fa_cliente" Type="Self.fa_cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_formaPago">
+              <PropertyRef Name="IdFormaPago" />
+            </Principal>
+            <Dependent Role="fa_cliente">
+              <PropertyRef Name="FormaPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_cliente_fa_TerminoPago">
+          <End Role="fa_TerminoPago" Type="Self.fa_TerminoPago" Multiplicity="1" />
+          <End Role="fa_cliente" Type="Self.fa_cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_TerminoPago">
+              <PropertyRef Name="IdTerminoPago" />
+            </Principal>
+            <Dependent Role="fa_cliente">
+              <PropertyRef Name="IdTipoCredito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Model_facturacionStoreContainer">
+          <EntitySet Name="fa_cliente" EntityType="Self.fa_cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_cliente_contactos" EntityType="Self.fa_cliente_contactos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_cliente_tipo" EntityType="Self.fa_cliente_tipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_formaPago" EntityType="Self.fa_formaPago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_PuntoVta" EntityType="Self.fa_PuntoVta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_TerminoPago" EntityType="Self.fa_TerminoPago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_TipoNota" EntityType="Self.fa_TipoNota" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_Vendedor" EntityType="Self.fa_Vendedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwfa_cliente_consulta" EntityType="Self.vwfa_cliente_consulta" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [vwfa_cliente_consulta].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_cliente_consulta].[IdCliente] AS [IdCliente], 
+    [vwfa_cliente_consulta].[Codigo] AS [Codigo], 
+    [vwfa_cliente_consulta].[IdPersona] AS [IdPersona], 
+    [vwfa_cliente_consulta].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwfa_cliente_consulta].[Idtipo_cliente] AS [Idtipo_cliente], 
+    [vwfa_cliente_consulta].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [vwfa_cliente_consulta].[Estado] AS [Estado]
+    FROM [web].[vwfa_cliente_consulta] AS [vwfa_cliente_consulta]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_fa_cliente_contactos_fa_cliente" Association="Self.FK_fa_cliente_contactos_fa_cliente">
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+            <End Role="fa_cliente_contactos" EntitySet="fa_cliente_contactos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_cliente_fa_cliente_tipo" Association="Self.FK_fa_cliente_fa_cliente_tipo">
+            <End Role="fa_cliente_tipo" EntitySet="fa_cliente_tipo" />
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_cliente_fa_forma_pago" Association="Self.FK_fa_cliente_fa_forma_pago">
+            <End Role="fa_formaPago" EntitySet="fa_formaPago" />
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_cliente_fa_TerminoPago" Association="Self.FK_fa_cliente_fa_TerminoPago">
+            <End Role="fa_TerminoPago" EntitySet="fa_TerminoPago" />
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model_facturacion" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities_facturacion" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="fa_cliente_tipo" EntityType="Model_facturacion.fa_cliente_tipo" />
+          <EntitySet Name="fa_TerminoPago" EntityType="Model_facturacion.fa_TerminoPago" />
+          <EntitySet Name="fa_TipoNota" EntityType="Model_facturacion.fa_TipoNota" />
+          <EntitySet Name="fa_PuntoVta" EntityType="Model_facturacion.fa_PuntoVta" />
+          <EntitySet Name="fa_formaPago" EntityType="Model_facturacion.fa_formaPago" />
+          <EntitySet Name="fa_Vendedor" EntityType="Model_facturacion.fa_Vendedor" />
+          <EntitySet Name="vwfa_cliente_consulta" EntityType="Model_facturacion.vwfa_cliente_consulta" />
+          <EntitySet Name="fa_cliente" EntityType="Model_facturacion.fa_cliente" />
+          <AssociationSet Name="FK_fa_cliente_fa_cliente_tipo" Association="Model_facturacion.FK_fa_cliente_fa_cliente_tipo">
+            <End Role="fa_cliente_tipo" EntitySet="fa_cliente_tipo" />
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_cliente_fa_forma_pago" Association="Model_facturacion.FK_fa_cliente_fa_forma_pago">
+            <End Role="fa_formaPago" EntitySet="fa_formaPago" />
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_cliente_fa_TerminoPago" Association="Model_facturacion.FK_fa_cliente_fa_TerminoPago">
+            <End Role="fa_TerminoPago" EntitySet="fa_TerminoPago" />
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+          </AssociationSet>
+          <EntitySet Name="fa_cliente_contactos" EntityType="Model_facturacion.fa_cliente_contactos" />
+          <AssociationSet Name="FK_fa_cliente_contactos_fa_cliente" Association="Model_facturacion.FK_fa_cliente_contactos_fa_cliente">
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+            <End Role="fa_cliente_contactos" EntitySet="fa_cliente_contactos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="fa_cliente_tipo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="Idtipo_cliente" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="Idtipo_cliente" Type="Int32" Nullable="false" />
+          <Property Name="Cod_cliente_tipo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion_tip_cliente" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_CXC_Anticipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_CXC_Con" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_CXC_Cred" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="fa_cliente" Relationship="Model_facturacion.FK_fa_cliente_fa_cliente_tipo" FromRole="fa_cliente_tipo" ToRole="fa_cliente" />
+        </EntityType>
+        <EntityType Name="fa_TerminoPago">
+          <Key>
+            <PropertyRef Name="IdTerminoPago" />
+          </Key>
+          <Property Name="IdTerminoPago" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="nom_TerminoPago" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Num_Coutas" Type="Int32" Nullable="false" />
+          <Property Name="Dias_Vct" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="fa_cliente" Relationship="Model_facturacion.FK_fa_cliente_fa_TerminoPago" FromRole="fa_TerminoPago" ToRole="fa_cliente" />
+        </EntityType>
+        <EntityType Name="fa_TipoNota">
+          <Key>
+            <PropertyRef Name="IdTipoNota" />
+          </Key>
+          <Property Name="IdTipoNota" Type="Int32" Nullable="false" />
+          <Property Name="CodTipoNota" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="No_Descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="fa_PuntoVta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdPuntoVta" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdPuntoVta" Type="Int32" Nullable="false" />
+          <Property Name="cod_PuntoVta" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom_PuntoVta" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" />
+        </EntityType>
+        <EntityType Name="fa_formaPago">
+          <Key>
+            <PropertyRef Name="IdFormaPago" />
+          </Key>
+          <Property Name="IdFormaPago" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="nom_FormaPago" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="fa_cliente" Relationship="Model_facturacion.FK_fa_cliente_fa_forma_pago" FromRole="fa_formaPago" ToRole="fa_cliente" />
+        </EntityType>
+        <EntityType Name="fa_Vendedor">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdVendedor" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdVendedor" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ve_Vendedor" Type="String" Nullable="false" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="ve_cedula" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="MotivoAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwfa_cliente_consulta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="Idtipo_cliente" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Idtipo_cliente" Type="Int32" Nullable="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="fa_cliente">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Idtipo_cliente" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCredito" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cl_plazo" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble_cxc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_Anti" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cl_Cupo" Type="Double" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdCtaCble_cxc_Credito" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="es_empresa_relacionada" Type="Boolean" />
+          <Property Name="NivelPrecio" Type="Int32" />
+          <Property Name="FormaPago" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="fa_cliente_tipo" Relationship="Model_facturacion.FK_fa_cliente_fa_cliente_tipo" FromRole="fa_cliente" ToRole="fa_cliente_tipo" />
+          <NavigationProperty Name="fa_formaPago" Relationship="Model_facturacion.FK_fa_cliente_fa_forma_pago" FromRole="fa_cliente" ToRole="fa_formaPago" />
+          <NavigationProperty Name="fa_TerminoPago" Relationship="Model_facturacion.FK_fa_cliente_fa_TerminoPago" FromRole="fa_cliente" ToRole="fa_TerminoPago" />
+          <NavigationProperty Name="fa_cliente_contactos" Relationship="Model_facturacion.FK_fa_cliente_contactos_fa_cliente" FromRole="fa_cliente" ToRole="fa_cliente_contactos" />
+        </EntityType>
+        <Association Name="FK_fa_cliente_fa_cliente_tipo">
+          <End Type="Model_facturacion.fa_cliente_tipo" Role="fa_cliente_tipo" Multiplicity="1" />
+          <End Type="Model_facturacion.fa_cliente" Role="fa_cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_cliente_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="Idtipo_cliente" />
+            </Principal>
+            <Dependent Role="fa_cliente">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="Idtipo_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_cliente_fa_forma_pago">
+          <End Type="Model_facturacion.fa_formaPago" Role="fa_formaPago" Multiplicity="0..1" />
+          <End Type="Model_facturacion.fa_cliente" Role="fa_cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_formaPago">
+              <PropertyRef Name="IdFormaPago" />
+            </Principal>
+            <Dependent Role="fa_cliente">
+              <PropertyRef Name="FormaPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_cliente_fa_TerminoPago">
+          <End Type="Model_facturacion.fa_TerminoPago" Role="fa_TerminoPago" Multiplicity="1" />
+          <End Type="Model_facturacion.fa_cliente" Role="fa_cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_TerminoPago">
+              <PropertyRef Name="IdTerminoPago" />
+            </Principal>
+            <Dependent Role="fa_cliente">
+              <PropertyRef Name="IdTipoCredito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="fa_cliente_contactos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="IdContacto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdContacto" Type="Int32" Nullable="false" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IdCiudad" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdParroquia" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="fa_cliente" Relationship="Model_facturacion.FK_fa_cliente_contactos_fa_cliente" FromRole="fa_cliente_contactos" ToRole="fa_cliente" />
+        </EntityType>
+        <Association Name="FK_fa_cliente_contactos_fa_cliente">
+          <End Type="Model_facturacion.fa_cliente" Role="fa_cliente" Multiplicity="1" />
+          <End Type="Model_facturacion.fa_cliente_contactos" Role="fa_cliente_contactos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_cliente">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="fa_cliente_contactos">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Model_facturacionStoreContainer" CdmEntityContainer="Entities_facturacion" >
+          <EntitySetMapping Name="fa_cliente_tipo">
+            <EntityTypeMapping TypeName="Model_facturacion.fa_cliente_tipo">
+              <MappingFragment StoreEntitySet="fa_cliente_tipo">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="MotivoAnula" ColumnName="MotivoAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdCtaCble_CXC_Cred" ColumnName="IdCtaCble_CXC_Cred" />
+                <ScalarProperty Name="IdCtaCble_CXC_Con" ColumnName="IdCtaCble_CXC_Con" />
+                <ScalarProperty Name="IdCtaCble_CXC_Anticipo" ColumnName="IdCtaCble_CXC_Anticipo" />
+                <ScalarProperty Name="Descripcion_tip_cliente" ColumnName="Descripcion_tip_cliente" />
+                <ScalarProperty Name="Cod_cliente_tipo" ColumnName="Cod_cliente_tipo" />
+                <ScalarProperty Name="Idtipo_cliente" ColumnName="Idtipo_cliente" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_TerminoPago">
+            <EntityTypeMapping TypeName="Model_facturacion.fa_TerminoPago">
+              <MappingFragment StoreEntitySet="fa_TerminoPago">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="Dias_Vct" ColumnName="Dias_Vct" />
+                <ScalarProperty Name="Num_Coutas" ColumnName="Num_Coutas" />
+                <ScalarProperty Name="nom_TerminoPago" ColumnName="nom_TerminoPago" />
+                <ScalarProperty Name="IdTerminoPago" ColumnName="IdTerminoPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_TipoNota">
+            <EntityTypeMapping TypeName="Model_facturacion.fa_TipoNota">
+              <MappingFragment StoreEntitySet="fa_TipoNota">
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="No_Descripcion" ColumnName="No_Descripcion" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="CodTipoNota" ColumnName="CodTipoNota" />
+                <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_PuntoVta">
+            <EntityTypeMapping TypeName="Model_facturacion.fa_PuntoVta">
+              <MappingFragment StoreEntitySet="fa_PuntoVta">
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="nom_PuntoVta" ColumnName="nom_PuntoVta" />
+                <ScalarProperty Name="cod_PuntoVta" ColumnName="cod_PuntoVta" />
+                <ScalarProperty Name="IdPuntoVta" ColumnName="IdPuntoVta" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_formaPago">
+            <EntityTypeMapping TypeName="Model_facturacion.fa_formaPago">
+              <MappingFragment StoreEntitySet="fa_formaPago">
+                <ScalarProperty Name="nom_FormaPago" ColumnName="nom_FormaPago" />
+                <ScalarProperty Name="IdFormaPago" ColumnName="IdFormaPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_Vendedor">
+            <EntityTypeMapping TypeName="Model_facturacion.fa_Vendedor">
+              <MappingFragment StoreEntitySet="fa_Vendedor">
+                <ScalarProperty Name="MotivoAnula" ColumnName="MotivoAnula" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="ve_cedula" ColumnName="ve_cedula" />
+                <ScalarProperty Name="Ve_Vendedor" ColumnName="Ve_Vendedor" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdVendedor" ColumnName="IdVendedor" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwfa_cliente_consulta">
+            <EntityTypeMapping TypeName="Model_facturacion.vwfa_cliente_consulta">
+              <MappingFragment StoreEntitySet="vwfa_cliente_consulta">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="Idtipo_cliente" ColumnName="Idtipo_cliente" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_cliente">
+            <EntityTypeMapping TypeName="Model_facturacion.fa_cliente">
+              <MappingFragment StoreEntitySet="fa_cliente">
+                <ScalarProperty Name="FormaPago" ColumnName="FormaPago" />
+                <ScalarProperty Name="NivelPrecio" ColumnName="NivelPrecio" />
+                <ScalarProperty Name="es_empresa_relacionada" ColumnName="es_empresa_relacionada" />
+                <ScalarProperty Name="IdCtaCble_cxc_Credito" ColumnName="IdCtaCble_cxc_Credito" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="cl_Cupo" ColumnName="cl_Cupo" />
+                <ScalarProperty Name="IdCtaCble_Anti" ColumnName="IdCtaCble_Anti" />
+                <ScalarProperty Name="IdCtaCble_cxc" ColumnName="IdCtaCble_cxc" />
+                <ScalarProperty Name="cl_plazo" ColumnName="cl_plazo" />
+                <ScalarProperty Name="IdTipoCredito" ColumnName="IdTipoCredito" />
+                <ScalarProperty Name="Idtipo_cliente" ColumnName="Idtipo_cliente" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_cliente_contactos">
+            <EntityTypeMapping TypeName="Model_facturacion.fa_cliente_contactos">
+              <MappingFragment StoreEntitySet="fa_cliente_contactos">
+                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="IdContacto" ColumnName="IdContacto" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

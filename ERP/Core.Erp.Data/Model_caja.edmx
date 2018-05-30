@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model_caja.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="caj_Caja">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCaja" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCaja" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" />
+          <Property Name="ca_Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="ca_Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="50" />
+          <Property Name="Estado" Type="varchar" MaxLength="1" />
+          <Property Name="IdUsuario_Responsable" Type="varchar" MaxLength="50" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotivoAnu" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="caj_Caja_Movimiento">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="IdTipocbte" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdTipocbte" Type="int" Nullable="false" />
+          <Property Name="CodMoviCaja" Type="varchar" MaxLength="20" />
+          <Property Name="cm_Signo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="cm_valor" Type="float" Nullable="false" />
+          <Property Name="IdTipoMovi" Type="int" Nullable="false" />
+          <Property Name="cm_observacion" Type="varchar(max)" />
+          <Property Name="IdCaja" Type="int" Nullable="false" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+          <Property Name="cm_fecha" Type="datetime" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="IdUsuario_Anu" Type="varchar" MaxLength="50" />
+          <Property Name="FechaAnulacion" Type="datetime" />
+          <Property Name="Fecha_Transac" Type="datetime" Nullable="false" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="50" />
+          <Property Name="Estado" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="MotivoAnulacion" Type="varchar" MaxLength="200" />
+          <Property Name="IdTipoFlujo" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdTipo_Persona" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IdEntidad" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="caj_Caja_Movimiento_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="IdTipocbte" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdTipocbte" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdCobro_tipo" Type="varchar" MaxLength="20" />
+          <Property Name="cr_Valor" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="caj_Caja_Movimiento_Tipo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoMovi" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipoMovi" Type="int" Nullable="false" />
+          <Property Name="tm_descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="tm_Signo" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="25" />
+          <Property Name="MotivoAnulacion" Type="varchar" MaxLength="200" />
+          <Property Name="SeDeposita" Type="bit" Nullable="false" />
+          <Property Name="IdTipoMovi_grupo" Type="int" />
+        </EntityType>
+        <EntityType Name="caj_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbteCble_MoviCaja_Ing" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbteCble_MoviCaja_Egr" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbteCble_MoviCaja_Ing_Anu" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbteCble_MoviCaja_Egr_Anu" Type="int" Nullable="false" />
+          <Property Name="IdTipo_movi_ing_x_reposicion" Type="int" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="FechaUltMod" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_caj_Caja_Movimiento_caj_Caja">
+          <End Role="caj_Caja" Type="Self.caj_Caja" Multiplicity="1" />
+          <End Role="caj_Caja_Movimiento" Type="Self.caj_Caja_Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="caj_Caja">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCaja" />
+            </Principal>
+            <Dependent Role="caj_Caja_Movimiento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_caj_Caja_Movimiento_caj_Caja_Movimiento_Tipo">
+          <End Role="caj_Caja_Movimiento_Tipo" Type="Self.caj_Caja_Movimiento_Tipo" Multiplicity="1" />
+          <End Role="caj_Caja_Movimiento" Type="Self.caj_Caja_Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="caj_Caja_Movimiento_Tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoMovi" />
+            </Principal>
+            <Dependent Role="caj_Caja_Movimiento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoMovi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_caj_Caja_Movimiento_det_caj_Caja_Movimiento">
+          <End Role="caj_Caja_Movimiento" Type="Self.caj_Caja_Movimiento" Multiplicity="1" />
+          <End Role="caj_Caja_Movimiento_det" Type="Self.caj_Caja_Movimiento_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="caj_Caja_Movimiento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCbteCble" />
+              <PropertyRef Name="IdTipocbte" />
+            </Principal>
+            <Dependent Role="caj_Caja_Movimiento_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCbteCble" />
+              <PropertyRef Name="IdTipocbte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Model_cajaStoreContainer">
+          <EntitySet Name="caj_Caja" EntityType="Self.caj_Caja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="caj_Caja_Movimiento" EntityType="Self.caj_Caja_Movimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="caj_Caja_Movimiento_det" EntityType="Self.caj_Caja_Movimiento_det" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="caj_Caja_Movimiento_Tipo" EntityType="Self.caj_Caja_Movimiento_Tipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="caj_parametro" EntityType="Self.caj_parametro" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_caj_Caja_Movimiento_caj_Caja" Association="Self.FK_caj_Caja_Movimiento_caj_Caja">
+            <End Role="caj_Caja" EntitySet="caj_Caja" />
+            <End Role="caj_Caja_Movimiento" EntitySet="caj_Caja_Movimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_caj_Caja_Movimiento_caj_Caja_Movimiento_Tipo" Association="Self.FK_caj_Caja_Movimiento_caj_Caja_Movimiento_Tipo">
+            <End Role="caj_Caja_Movimiento_Tipo" EntitySet="caj_Caja_Movimiento_Tipo" />
+            <End Role="caj_Caja_Movimiento" EntitySet="caj_Caja_Movimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_caj_Caja_Movimiento_det_caj_Caja_Movimiento" Association="Self.FK_caj_Caja_Movimiento_det_caj_Caja_Movimiento">
+            <End Role="caj_Caja_Movimiento" EntitySet="caj_Caja_Movimiento" />
+            <End Role="caj_Caja_Movimiento_det" EntitySet="caj_Caja_Movimiento_det" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model_caja" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities_caja" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="caj_parametro" EntityType="Model_caja.caj_parametro" />
+          <EntitySet Name="caj_Caja" EntityType="Model_caja.caj_Caja" />
+          <EntitySet Name="caj_Caja_Movimiento_Tipo" EntityType="Model_caja.caj_Caja_Movimiento_Tipo" />
+          <EntitySet Name="caj_Caja_Movimiento" EntityType="Model_caja.caj_Caja_Movimiento" />
+          <AssociationSet Name="FK_caj_Caja_Movimiento_caj_Caja" Association="Model_caja.FK_caj_Caja_Movimiento_caj_Caja">
+            <End Role="caj_Caja" EntitySet="caj_Caja" />
+            <End Role="caj_Caja_Movimiento" EntitySet="caj_Caja_Movimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_caj_Caja_Movimiento_caj_Caja_Movimiento_Tipo" Association="Model_caja.FK_caj_Caja_Movimiento_caj_Caja_Movimiento_Tipo">
+            <End Role="caj_Caja_Movimiento_Tipo" EntitySet="caj_Caja_Movimiento_Tipo" />
+            <End Role="caj_Caja_Movimiento" EntitySet="caj_Caja_Movimiento" />
+          </AssociationSet>
+          <EntitySet Name="caj_Caja_Movimiento_det" EntityType="Model_caja.caj_Caja_Movimiento_det" />
+          <AssociationSet Name="FK_caj_Caja_Movimiento_det_caj_Caja_Movimiento" Association="Model_caja.FK_caj_Caja_Movimiento_det_caj_Caja_Movimiento">
+            <End Role="caj_Caja_Movimiento" EntitySet="caj_Caja_Movimiento" />
+            <End Role="caj_Caja_Movimiento_det" EntitySet="caj_Caja_Movimiento_det" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="caj_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbteCble_MoviCaja_Ing" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbteCble_MoviCaja_Egr" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbteCble_MoviCaja_Ing_Anu" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbteCble_MoviCaja_Egr_Anu" Type="Int32" Nullable="false" />
+          <Property Name="IdTipo_movi_ing_x_reposicion" Type="Int32" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="caj_Caja">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCaja" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCaja" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" />
+          <Property Name="ca_Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ca_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario_Responsable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnu" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="caj_Caja_Movimiento" Relationship="Model_caja.FK_caj_Caja_Movimiento_caj_Caja" FromRole="caj_Caja" ToRole="caj_Caja_Movimiento" />
+        </EntityType>
+        <EntityType Name="caj_Caja_Movimiento_Tipo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoMovi" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoMovi" Type="Int32" Nullable="false" />
+          <Property Name="tm_descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="tm_Signo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SeDeposita" Type="Boolean" Nullable="false" />
+          <Property Name="IdTipoMovi_grupo" Type="Int32" />
+          <NavigationProperty Name="caj_Caja_Movimiento" Relationship="Model_caja.FK_caj_Caja_Movimiento_caj_Caja_Movimiento_Tipo" FromRole="caj_Caja_Movimiento_Tipo" ToRole="caj_Caja_Movimiento" />
+        </EntityType>
+        <EntityType Name="caj_Caja_Movimiento">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="IdTipocbte" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipocbte" Type="Int32" Nullable="false" />
+          <Property Name="CodMoviCaja" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cm_Signo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="cm_valor" Type="Double" Nullable="false" />
+          <Property Name="IdTipoMovi" Type="Int32" Nullable="false" />
+          <Property Name="cm_observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdCaja" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="cm_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario_Anu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_Transac" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoFlujo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdTipo_Persona" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdEntidad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="caj_Caja" Relationship="Model_caja.FK_caj_Caja_Movimiento_caj_Caja" FromRole="caj_Caja_Movimiento" ToRole="caj_Caja" />
+          <NavigationProperty Name="caj_Caja_Movimiento_Tipo" Relationship="Model_caja.FK_caj_Caja_Movimiento_caj_Caja_Movimiento_Tipo" FromRole="caj_Caja_Movimiento" ToRole="caj_Caja_Movimiento_Tipo" />
+          <NavigationProperty Name="caj_Caja_Movimiento_det" Relationship="Model_caja.FK_caj_Caja_Movimiento_det_caj_Caja_Movimiento" FromRole="caj_Caja_Movimiento" ToRole="caj_Caja_Movimiento_det" />
+        </EntityType>
+        <Association Name="FK_caj_Caja_Movimiento_caj_Caja">
+          <End Type="Model_caja.caj_Caja" Role="caj_Caja" Multiplicity="1" />
+          <End Type="Model_caja.caj_Caja_Movimiento" Role="caj_Caja_Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="caj_Caja">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCaja" />
+            </Principal>
+            <Dependent Role="caj_Caja_Movimiento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_caj_Caja_Movimiento_caj_Caja_Movimiento_Tipo">
+          <End Type="Model_caja.caj_Caja_Movimiento_Tipo" Role="caj_Caja_Movimiento_Tipo" Multiplicity="1" />
+          <End Type="Model_caja.caj_Caja_Movimiento" Role="caj_Caja_Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="caj_Caja_Movimiento_Tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoMovi" />
+            </Principal>
+            <Dependent Role="caj_Caja_Movimiento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoMovi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="caj_Caja_Movimiento_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="IdTipocbte" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipocbte" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdCobro_tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cr_Valor" Type="Double" Nullable="false" />
+          <NavigationProperty Name="caj_Caja_Movimiento" Relationship="Model_caja.FK_caj_Caja_Movimiento_det_caj_Caja_Movimiento" FromRole="caj_Caja_Movimiento_det" ToRole="caj_Caja_Movimiento" />
+        </EntityType>
+        <Association Name="FK_caj_Caja_Movimiento_det_caj_Caja_Movimiento">
+          <End Type="Model_caja.caj_Caja_Movimiento" Role="caj_Caja_Movimiento" Multiplicity="1" />
+          <End Type="Model_caja.caj_Caja_Movimiento_det" Role="caj_Caja_Movimiento_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="caj_Caja_Movimiento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCbteCble" />
+              <PropertyRef Name="IdTipocbte" />
+            </Principal>
+            <Dependent Role="caj_Caja_Movimiento_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCbteCble" />
+              <PropertyRef Name="IdTipocbte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Model_cajaStoreContainer" CdmEntityContainer="Entities_caja" >
+          <EntitySetMapping Name="caj_parametro">
+            <EntityTypeMapping TypeName="Model_caja.caj_parametro">
+              <MappingFragment StoreEntitySet="caj_parametro">
+                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdTipo_movi_ing_x_reposicion" ColumnName="IdTipo_movi_ing_x_reposicion" />
+                <ScalarProperty Name="IdTipoCbteCble_MoviCaja_Egr_Anu" ColumnName="IdTipoCbteCble_MoviCaja_Egr_Anu" />
+                <ScalarProperty Name="IdTipoCbteCble_MoviCaja_Ing_Anu" ColumnName="IdTipoCbteCble_MoviCaja_Ing_Anu" />
+                <ScalarProperty Name="IdTipoCbteCble_MoviCaja_Egr" ColumnName="IdTipoCbteCble_MoviCaja_Egr" />
+                <ScalarProperty Name="IdTipoCbteCble_MoviCaja_Ing" ColumnName="IdTipoCbteCble_MoviCaja_Ing" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="caj_Caja">
+            <EntityTypeMapping TypeName="Model_caja.caj_Caja">
+              <MappingFragment StoreEntitySet="caj_Caja">
+                <ScalarProperty Name="MotivoAnu" ColumnName="MotivoAnu" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="IdUsuario_Responsable" ColumnName="IdUsuario_Responsable" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="ca_Descripcion" ColumnName="ca_Descripcion" />
+                <ScalarProperty Name="ca_Codigo" ColumnName="ca_Codigo" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="caj_Caja_Movimiento_Tipo">
+            <EntityTypeMapping TypeName="Model_caja.caj_Caja_Movimiento_Tipo">
+              <MappingFragment StoreEntitySet="caj_Caja_Movimiento_Tipo">
+                <ScalarProperty Name="IdTipoMovi_grupo" ColumnName="IdTipoMovi_grupo" />
+                <ScalarProperty Name="SeDeposita" ColumnName="SeDeposita" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="tm_Signo" ColumnName="tm_Signo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="tm_descripcion" ColumnName="tm_descripcion" />
+                <ScalarProperty Name="IdTipoMovi" ColumnName="IdTipoMovi" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="caj_Caja_Movimiento">
+            <EntityTypeMapping TypeName="Model_caja.caj_Caja_Movimiento">
+              <MappingFragment StoreEntitySet="caj_Caja_Movimiento">
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdEntidad" ColumnName="IdEntidad" />
+                <ScalarProperty Name="IdTipo_Persona" ColumnName="IdTipo_Persona" />
+                <ScalarProperty Name="IdTipoFlujo" ColumnName="IdTipoFlujo" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuario_Anu" ColumnName="IdUsuario_Anu" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="cm_fecha" ColumnName="cm_fecha" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="cm_observacion" ColumnName="cm_observacion" />
+                <ScalarProperty Name="IdTipoMovi" ColumnName="IdTipoMovi" />
+                <ScalarProperty Name="cm_valor" ColumnName="cm_valor" />
+                <ScalarProperty Name="cm_Signo" ColumnName="cm_Signo" />
+                <ScalarProperty Name="CodMoviCaja" ColumnName="CodMoviCaja" />
+                <ScalarProperty Name="IdTipocbte" ColumnName="IdTipocbte" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="caj_Caja_Movimiento_det">
+            <EntityTypeMapping TypeName="Model_caja.caj_Caja_Movimiento_det">
+              <MappingFragment StoreEntitySet="caj_Caja_Movimiento_det">
+                <ScalarProperty Name="cr_Valor" ColumnName="cr_Valor" />
+                <ScalarProperty Name="IdCobro_tipo" ColumnName="IdCobro_tipo" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdTipocbte" ColumnName="IdTipocbte" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

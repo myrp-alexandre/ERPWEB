@@ -1,0 +1,77 @@
+﻿using Core.Erp.Info.Contabilidad;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Core.Erp.Data.Contabilidad
+{
+    public class ct_anio_fiscal_x_cuenta_utilidad_Data
+    {
+        public ct_anio_fiscal_x_cuenta_utilidad_Info get_info(int IdEmpresa, int IdanioFiscal)
+        {
+            try
+            {
+                ct_anio_fiscal_x_cuenta_utilidad_Info info = new ct_anio_fiscal_x_cuenta_utilidad_Info();
+                using (Entities_contabilidad Context = new Entities_contabilidad())
+                {
+                    ct_anio_fiscal_x_cuenta_utilidad Entity = Context.ct_anio_fiscal_x_cuenta_utilidad.FirstOrDefault(q => q.IdanioFiscal == IdanioFiscal && q.IdEmpresa == IdEmpresa);
+                    if (Entity == null) return null;
+                    info = new ct_anio_fiscal_x_cuenta_utilidad_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdanioFiscal = Entity.IdanioFiscal,
+                        IdCtaCble = Entity.IdCtaCble,
+                        observacion = Entity.observacion
+                    };
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool guardarDB(ct_anio_fiscal_x_cuenta_utilidad_Info info)
+        {
+            try
+            {
+                using (Entities_contabilidad Context = new Entities_contabilidad())
+                {
+                    ct_anio_fiscal_x_cuenta_utilidad Entity = new ct_anio_fiscal_x_cuenta_utilidad
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdanioFiscal = info.IdanioFiscal,
+                        IdCtaCble = info.IdCtaCble,
+                        observacion = info.observacion
+                    };
+                    Context.ct_anio_fiscal_x_cuenta_utilidad.Add(Entity);
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool eliminarDB(int IdEmpresa, int IdanioFiscal)
+        {
+            try
+            {
+                using (Entities_contabilidad Context = new Entities_contabilidad())
+                {
+                    Context.Database.ExecuteSqlCommand("delete ct_anio_fiscal_x_cuenta_utilidad where IdCtaCble = '" + IdanioFiscal + "' and IdEmpresa_cta = " + IdEmpresa);
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+    }
+}

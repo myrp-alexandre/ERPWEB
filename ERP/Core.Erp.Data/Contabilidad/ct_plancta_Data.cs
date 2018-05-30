@@ -1,0 +1,289 @@
+﻿using Core.Erp.Info.Contabilidad;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Core.Erp.Data.Contabilidad
+{
+    public class ct_plancta_Data
+    {
+        public List<ct_plancta_Info> get_list(int IdEmpresa, bool mostrar_anulados, bool mostrar_solo_cuentas_movimiento)
+        {
+            try
+            {
+                List<ct_plancta_Info> Lista;
+
+                using (Entities_contabilidad Context = new Entities_contabilidad())
+                {
+                    if (mostrar_anulados && mostrar_solo_cuentas_movimiento)
+                        Lista = (from q in Context.ct_plancta
+                                 join padre in Context.ct_plancta
+                                 on q.IdCtaCblePadre equals padre.IdCtaCble into temp_padre
+                                 from padre in temp_padre.DefaultIfEmpty()
+                                 where q.pc_EsMovimiento == "S"
+                                 && q.IdEmpresa == IdEmpresa
+                                 select new ct_plancta_Info
+                                 {
+                                     IdCtaCble = q.IdCtaCble,
+                                     pc_Cuenta = q.pc_Cuenta,
+                                     IdCtaCblePadre = q.IdCtaCblePadre,
+                                     pc_Estado = q.pc_Estado,
+                                     pc_EsMovimiento = q.pc_EsMovimiento,
+                                     IdGrupoCble = q.IdGrupoCble,
+                                     pc_Cuenta_padre = padre.pc_Cuenta,
+                                     IdNivelCta = q.IdNivelCta
+                                 }).ToList();
+                    else
+                        if (!mostrar_anulados && mostrar_solo_cuentas_movimiento)
+                        Lista = (from q in Context.ct_plancta
+                                 join padre in Context.ct_plancta
+                                 on q.IdCtaCblePadre equals padre.IdCtaCble into temp_padre
+                                 from padre in temp_padre.DefaultIfEmpty()
+                                 where q.pc_EsMovimiento == "S"
+                                 && q.pc_Estado == "A"
+                                 && q.IdEmpresa == IdEmpresa
+                                 select new ct_plancta_Info
+                                 {
+                                     IdCtaCble = q.IdCtaCble,
+                                     pc_Cuenta = q.pc_Cuenta,
+                                     IdCtaCblePadre = q.IdCtaCblePadre,
+                                     pc_Estado = q.pc_Estado,
+                                     pc_EsMovimiento = q.pc_EsMovimiento,
+                                     IdGrupoCble = q.IdGrupoCble,
+                                     pc_Cuenta_padre = padre.pc_Cuenta,
+                                     IdNivelCta = q.IdNivelCta
+                                 }).ToList();
+                    else
+                        if (mostrar_anulados && !mostrar_solo_cuentas_movimiento)
+                        Lista = (from q in Context.ct_plancta
+                                 join padre in Context.ct_plancta
+                             on q.IdCtaCblePadre equals padre.IdCtaCble into temp_padre
+                                 from padre in temp_padre.DefaultIfEmpty()
+                                 where q.IdEmpresa == IdEmpresa
+                                 select new ct_plancta_Info
+                                 {
+                                     IdCtaCble = q.IdCtaCble,
+                                     pc_Cuenta = q.pc_Cuenta,
+                                     IdCtaCblePadre = q.IdCtaCblePadre,
+                                     pc_Estado = q.pc_Estado,
+                                     pc_EsMovimiento = q.pc_EsMovimiento,
+                                     IdGrupoCble = q.IdGrupoCble,
+                                     IdNivelCta = q.IdNivelCta,
+                                     pc_Cuenta_padre = padre.pc_Cuenta
+                                 }).ToList();
+                    else
+                        Lista = (from q in Context.ct_plancta
+                                 join padre in Context.ct_plancta
+                             on q.IdCtaCblePadre equals padre.IdCtaCble into temp_padre
+                                 from padre in temp_padre.DefaultIfEmpty()
+                                 where q.pc_Estado == "A"
+                                 && q.IdEmpresa == IdEmpresa
+                                 select new ct_plancta_Info
+                                 {
+                                     IdCtaCble = q.IdCtaCble,
+                                     pc_Cuenta = q.pc_Cuenta,
+                                     IdCtaCblePadre = q.IdCtaCblePadre,
+                                     pc_Estado = q.pc_Estado,
+                                     pc_EsMovimiento = q.pc_EsMovimiento,
+                                     IdGrupoCble = q.IdGrupoCble,
+                                     IdNivelCta = q.IdNivelCta,
+                                     pc_Cuenta_padre = padre.pc_Cuenta
+                                 }).ToList();
+
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public ct_plancta_Info get_info(int IdEmpresa, string IdCtaCble)
+        {
+            try
+            {
+                ct_plancta_Info info = new ct_plancta_Info();
+
+                using (Entities_contabilidad Context = new Entities_contabilidad())
+                {
+                    ct_plancta Entity = Context.ct_plancta.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdCtaCble == IdCtaCble);
+                    if (Entity == null) return null;
+                    info = new ct_plancta_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdCtaCble = Entity.IdCtaCble,
+                        pc_Cuenta = Entity.pc_Cuenta,
+                        IdCtaCblePadre = Entity.IdCtaCblePadre,
+                        pc_Naturaleza = Entity.pc_Naturaleza,
+                        IdNivelCta = Entity.IdNivelCta,
+                        IdGrupoCble = Entity.IdGrupoCble,
+                        pc_Estado = Entity.pc_Estado,
+                        pc_EsMovimiento = Entity.pc_EsMovimiento,
+                        pc_clave_corta = Entity.pc_clave_corta,
+                        IdTipo_Gasto = Entity.IdTipo_Gasto,
+                        pc_EsMovimiento_bool = Entity.pc_EsMovimiento == "S" ? true : false,
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool guardarDB(ct_plancta_Info info)
+        {
+            try
+            {
+                using (Entities_contabilidad Context = new Entities_contabilidad())
+                {
+                    ct_plancta Entity = new ct_plancta
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdCtaCble = info.IdCtaCble,
+                        IdCtaCblePadre = info.IdCtaCblePadre,
+                        pc_Cuenta = info.pc_Cuenta,
+                        pc_clave_corta = info.pc_clave_corta,
+                        IdNivelCta = info.IdNivelCta,
+                        IdGrupoCble = info.IdGrupoCble,
+                        pc_Estado = info.pc_Estado = "A",
+                        pc_Naturaleza = info.pc_Naturaleza,
+                        pc_EsMovimiento = info.pc_EsMovimiento_bool == true ? "S" : "N"
+                    };
+                    Context.ct_plancta.Add(Entity);
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool modificarDB(ct_plancta_Info info)
+        {
+            try
+            {
+                using (Entities_contabilidad Context = new Entities_contabilidad())
+                {
+                    ct_plancta Entity = Context.ct_plancta.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdCtaCble == info.IdCtaCble);
+                    if (Entity == null) return false;
+                    Entity.pc_Cuenta = info.pc_Cuenta;
+                    Entity.pc_clave_corta = info.pc_clave_corta;
+                    Entity.IdGrupoCble = info.IdGrupoCble;
+                    Entity.pc_Naturaleza = info.pc_Naturaleza;
+                    Entity.pc_EsMovimiento = info.pc_EsMovimiento_bool == true ? "S" : "N";
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool anularDB(ct_plancta_Info info)
+        {
+            try
+            {
+                using (Entities_contabilidad Context = new Entities_contabilidad())
+                {
+                    ct_plancta Entity = Context.ct_plancta.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdCtaCble == info.IdCtaCble);
+                    if (Entity == null) return false;
+                    Entity.pc_Estado = info.pc_Estado = "I";
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public ct_plancta_Info get_info_nuevo(int IdEmpresa, string IdCtaCble_padre)
+        {
+            try
+            {
+                ct_plancta_Info info = new ct_plancta_Info();
+                string ID = IdCtaCble_padre;
+
+                using (Entities_contabilidad Context = new Entities_contabilidad())
+                {
+                    ct_plancta Entity_padre = Context.ct_plancta.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdCtaCble == IdCtaCble_padre);
+                    if (Entity_padre == null) return info;
+                    int IdNivel_hijo = Entity_padre.IdNivelCta + 1;
+                    ct_plancta_nivel Entity_nivel_hijo = Context.ct_plancta_nivel.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdNivelCta == IdNivel_hijo);
+                    if (Entity_nivel_hijo == null) return info;
+
+                    var lst = from q in Context.ct_plancta
+                              where q.IdCtaCblePadre == IdCtaCble_padre
+                              select q;
+
+                    string relleno = "";
+                    string digitos = relleno.PadLeft(Entity_nivel_hijo.nv_NumDigitos, '0');
+
+                    if (lst.Count() > 0)
+                    {
+                        ID += (Convert.ToInt32(lst.Max(q => q.IdCtaCble.Substring(q.IdCtaCble.Length - Entity_nivel_hijo.nv_NumDigitos, Entity_nivel_hijo.nv_NumDigitos)))+1).ToString(digitos);
+                    }
+                    else
+                        ID += Convert.ToInt32(1).ToString(digitos);
+
+                    info = new ct_plancta_Info
+                    {
+                        IdCtaCble = ID,
+                        pc_Cuenta = Entity_padre.pc_Cuenta,
+                        IdGrupoCble = Entity_padre.IdGrupoCble,
+                        IdNivelCta = Entity_nivel_hijo.IdNivelCta,
+                        pc_Naturaleza = Entity_padre.pc_Naturaleza
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool validar_existe_id(int IdEmpresa, string IdCtaCble)
+        {
+            try
+            {
+                using (Entities_contabilidad Context = new Entities_contabilidad())
+                {
+                    var lst = from q in Context.ct_plancta
+                              where q.IdEmpresa == IdEmpresa
+                              && q.IdCtaCble == IdCtaCble
+                              select q;
+
+                    if (lst.Count() == 0)
+                        return false;
+                    else
+                        return true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+    }
+}

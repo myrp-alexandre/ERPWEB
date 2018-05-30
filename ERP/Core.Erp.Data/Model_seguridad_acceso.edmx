@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model_seguridad_acceso.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="seg_Menu">
+          <Key>
+            <PropertyRef Name="IdMenu" />
+          </Key>
+          <Property Name="IdMenu" Type="int" Nullable="false" />
+          <Property Name="IdMenuPadre" Type="int" />
+          <Property Name="DescripcionMenu" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PosicionMenu" Type="int" Nullable="false" />
+          <Property Name="Habilitado" Type="bit" Nullable="false" />
+          <Property Name="Tiene_FormularioAsociado" Type="bit" Nullable="false" />
+          <Property Name="nom_Formulario" Type="varchar" MaxLength="255" />
+          <Property Name="nom_Asembly" Type="varchar" MaxLength="200" />
+          <Property Name="nivel" Type="int" />
+          <Property Name="web_nom_Area" Type="varchar" MaxLength="200" />
+          <Property Name="web_nom_Controller" Type="varchar" MaxLength="200" />
+          <Property Name="web_nom_Action" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="seg_Menu_x_Empresa">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMenu" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdMenu" Type="int" Nullable="false" />
+          <Property Name="observacion" Type="varchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="seg_Menu_x_Empresa_x_Usuario">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="IdMenu" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdMenu" Type="int" Nullable="false" />
+          <Property Name="Lectura" Type="bit" Nullable="false" />
+          <Property Name="Escritura" Type="bit" Nullable="false" />
+          <Property Name="Eliminacion" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="seg_usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contrasena" Type="varchar(max)" />
+          <Property Name="estado" Type="nvarchar" MaxLength="1" />
+          <Property Name="Fecha_Transaccion" Type="datetime" />
+          <Property Name="IdUsuarioUltModi" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotivoAnulacion" Type="varchar" MaxLength="100" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="ExigirDirectivaContrasenia" Type="bit" />
+          <Property Name="CambiarContraseniaSgtSesion" Type="bit" />
+        </EntityType>
+        <EntityType Name="seg_Usuario_x_Empresa">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="Observacion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_seg_Menu_x_Empresa_seg_Menu">
+          <End Role="seg_Menu" Type="Self.seg_Menu" Multiplicity="1" />
+          <End Role="seg_Menu_x_Empresa" Type="Self.seg_Menu_x_Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seg_Menu">
+              <PropertyRef Name="IdMenu" />
+            </Principal>
+            <Dependent Role="seg_Menu_x_Empresa">
+              <PropertyRef Name="IdMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario">
+          <End Role="seg_usuario" Type="Self.seg_usuario" Multiplicity="1" />
+          <End Role="seg_Menu_x_Empresa_x_Usuario" Type="Self.seg_Menu_x_Empresa_x_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seg_usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="seg_Menu_x_Empresa_x_Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_seg_Usuario_x_Empresa_seg_usuario">
+          <End Role="seg_usuario" Type="Self.seg_usuario" Multiplicity="1" />
+          <End Role="seg_Usuario_x_Empresa" Type="Self.seg_Usuario_x_Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seg_usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="seg_Usuario_x_Empresa">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Model_seguridad_accesoStoreContainer">
+          <EntitySet Name="seg_Menu" EntityType="Self.seg_Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="seg_Menu_x_Empresa" EntityType="Self.seg_Menu_x_Empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="seg_Menu_x_Empresa_x_Usuario" EntityType="Self.seg_Menu_x_Empresa_x_Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="seg_usuario" EntityType="Self.seg_usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="seg_Usuario_x_Empresa" EntityType="Self.seg_Usuario_x_Empresa" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_seg_Menu_x_Empresa_seg_Menu" Association="Self.FK_seg_Menu_x_Empresa_seg_Menu">
+            <End Role="seg_Menu" EntitySet="seg_Menu" />
+            <End Role="seg_Menu_x_Empresa" EntitySet="seg_Menu_x_Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" Association="Self.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario">
+            <End Role="seg_usuario" EntitySet="seg_usuario" />
+            <End Role="seg_Menu_x_Empresa_x_Usuario" EntitySet="seg_Menu_x_Empresa_x_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_seg_Usuario_x_Empresa_seg_usuario" Association="Self.FK_seg_Usuario_x_Empresa_seg_usuario">
+            <End Role="seg_usuario" EntitySet="seg_usuario" />
+            <End Role="seg_Usuario_x_Empresa" EntitySet="seg_Usuario_x_Empresa" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model_seguridad_acceso" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities_seguridad_acceso" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="seg_usuario" EntityType="Model_seguridad_acceso.seg_usuario" />
+          <EntitySet Name="seg_Usuario_x_Empresa" EntityType="Model_seguridad_acceso.seg_Usuario_x_Empresa" />
+          <AssociationSet Name="FK_seg_Usuario_x_Empresa_seg_usuario" Association="Model_seguridad_acceso.FK_seg_Usuario_x_Empresa_seg_usuario">
+            <End Role="seg_usuario" EntitySet="seg_usuario" />
+            <End Role="seg_Usuario_x_Empresa" EntitySet="seg_Usuario_x_Empresa" />
+          </AssociationSet>
+          <EntitySet Name="seg_Menu" EntityType="Model_seguridad_acceso.seg_Menu" />
+          <EntitySet Name="seg_Menu_x_Empresa" EntityType="Model_seguridad_acceso.seg_Menu_x_Empresa" />
+          <EntitySet Name="seg_Menu_x_Empresa_x_Usuario" EntityType="Model_seguridad_acceso.seg_Menu_x_Empresa_x_Usuario" />
+          <AssociationSet Name="FK_seg_Menu_x_Empresa_seg_Menu" Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_seg_Menu">
+            <End Role="seg_Menu" EntitySet="seg_Menu" />
+            <End Role="seg_Menu_x_Empresa" EntitySet="seg_Menu_x_Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario">
+            <End Role="seg_usuario" EntitySet="seg_usuario" />
+            <End Role="seg_Menu_x_Empresa_x_Usuario" EntitySet="seg_Menu_x_Empresa_x_Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="seg_usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha_Transaccion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltModi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExigirDirectivaContrasenia" Type="Boolean" />
+          <Property Name="CambiarContraseniaSgtSesion" Type="Boolean" />
+          <NavigationProperty Name="seg_Usuario_x_Empresa" Relationship="Model_seguridad_acceso.FK_seg_Usuario_x_Empresa_seg_usuario" FromRole="seg_usuario" ToRole="seg_Usuario_x_Empresa" />
+          <NavigationProperty Name="seg_Menu_x_Empresa_x_Usuario" Relationship="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" FromRole="seg_usuario" ToRole="seg_Menu_x_Empresa_x_Usuario" />
+        </EntityType>
+        <EntityType Name="seg_Usuario_x_Empresa">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="seg_usuario" Relationship="Model_seguridad_acceso.FK_seg_Usuario_x_Empresa_seg_usuario" FromRole="seg_Usuario_x_Empresa" ToRole="seg_usuario" />
+        </EntityType>
+        <Association Name="FK_seg_Usuario_x_Empresa_seg_usuario">
+          <End Type="Model_seguridad_acceso.seg_usuario" Role="seg_usuario" Multiplicity="1" />
+          <End Type="Model_seguridad_acceso.seg_Usuario_x_Empresa" Role="seg_Usuario_x_Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seg_usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="seg_Usuario_x_Empresa">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="seg_Menu">
+          <Key>
+            <PropertyRef Name="IdMenu" />
+          </Key>
+          <Property Name="IdMenu" Type="Int32" Nullable="false" />
+          <Property Name="IdMenuPadre" Type="Int32" />
+          <Property Name="DescripcionMenu" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PosicionMenu" Type="Int32" Nullable="false" />
+          <Property Name="Habilitado" Type="Boolean" Nullable="false" />
+          <Property Name="Tiene_FormularioAsociado" Type="Boolean" Nullable="false" />
+          <Property Name="nom_Formulario" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="nom_Asembly" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="nivel" Type="Int32" />
+          <Property Name="web_nom_Area" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="web_nom_Controller" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="web_nom_Action" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="seg_Menu_x_Empresa" Relationship="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_seg_Menu" FromRole="seg_Menu" ToRole="seg_Menu_x_Empresa" />
+        </EntityType>
+        <EntityType Name="seg_Menu_x_Empresa">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMenu" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMenu" Type="Int32" Nullable="false" />
+          <Property Name="observacion" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="seg_Menu" Relationship="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_seg_Menu" FromRole="seg_Menu_x_Empresa" ToRole="seg_Menu" />
+        </EntityType>
+        <EntityType Name="seg_Menu_x_Empresa_x_Usuario">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="IdMenu" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdMenu" Type="Int32" Nullable="false" />
+          <Property Name="Lectura" Type="Boolean" Nullable="false" />
+          <Property Name="Escritura" Type="Boolean" Nullable="false" />
+          <Property Name="Eliminacion" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="seg_usuario" Relationship="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" FromRole="seg_Menu_x_Empresa_x_Usuario" ToRole="seg_usuario" />
+        </EntityType>
+        <Association Name="FK_seg_Menu_x_Empresa_seg_Menu">
+          <End Type="Model_seguridad_acceso.seg_Menu" Role="seg_Menu" Multiplicity="1" />
+          <End Type="Model_seguridad_acceso.seg_Menu_x_Empresa" Role="seg_Menu_x_Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seg_Menu">
+              <PropertyRef Name="IdMenu" />
+            </Principal>
+            <Dependent Role="seg_Menu_x_Empresa">
+              <PropertyRef Name="IdMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario">
+          <End Type="Model_seguridad_acceso.seg_usuario" Role="seg_usuario" Multiplicity="1" />
+          <End Type="Model_seguridad_acceso.seg_Menu_x_Empresa_x_Usuario" Role="seg_Menu_x_Empresa_x_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seg_usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="seg_Menu_x_Empresa_x_Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Model_seguridad_accesoStoreContainer" CdmEntityContainer="Entities_seguridad_acceso" >
+          <EntitySetMapping Name="seg_usuario">
+            <EntityTypeMapping TypeName="Model_seguridad_acceso.seg_usuario">
+              <MappingFragment StoreEntitySet="seg_usuario">
+                <ScalarProperty Name="CambiarContraseniaSgtSesion" ColumnName="CambiarContraseniaSgtSesion" />
+                <ScalarProperty Name="ExigirDirectivaContrasenia" ColumnName="ExigirDirectivaContrasenia" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
+                <ScalarProperty Name="Fecha_Transaccion" ColumnName="Fecha_Transaccion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="seg_Usuario_x_Empresa">
+            <EntityTypeMapping TypeName="Model_seguridad_acceso.seg_Usuario_x_Empresa">
+              <MappingFragment StoreEntitySet="seg_Usuario_x_Empresa">
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="seg_Menu">
+            <EntityTypeMapping TypeName="Model_seguridad_acceso.seg_Menu">
+              <MappingFragment StoreEntitySet="seg_Menu">
+                <ScalarProperty Name="web_nom_Action" ColumnName="web_nom_Action" />
+                <ScalarProperty Name="web_nom_Controller" ColumnName="web_nom_Controller" />
+                <ScalarProperty Name="web_nom_Area" ColumnName="web_nom_Area" />
+                <ScalarProperty Name="nivel" ColumnName="nivel" />
+                <ScalarProperty Name="nom_Asembly" ColumnName="nom_Asembly" />
+                <ScalarProperty Name="nom_Formulario" ColumnName="nom_Formulario" />
+                <ScalarProperty Name="Tiene_FormularioAsociado" ColumnName="Tiene_FormularioAsociado" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="PosicionMenu" ColumnName="PosicionMenu" />
+                <ScalarProperty Name="DescripcionMenu" ColumnName="DescripcionMenu" />
+                <ScalarProperty Name="IdMenuPadre" ColumnName="IdMenuPadre" />
+                <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="seg_Menu_x_Empresa">
+            <EntityTypeMapping TypeName="Model_seguridad_acceso.seg_Menu_x_Empresa">
+              <MappingFragment StoreEntitySet="seg_Menu_x_Empresa">
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="seg_Menu_x_Empresa_x_Usuario">
+            <EntityTypeMapping TypeName="Model_seguridad_acceso.seg_Menu_x_Empresa_x_Usuario">
+              <MappingFragment StoreEntitySet="seg_Menu_x_Empresa_x_Usuario">
+                <ScalarProperty Name="Eliminacion" ColumnName="Eliminacion" />
+                <ScalarProperty Name="Escritura" ColumnName="Escritura" />
+                <ScalarProperty Name="Lectura" ColumnName="Lectura" />
+                <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

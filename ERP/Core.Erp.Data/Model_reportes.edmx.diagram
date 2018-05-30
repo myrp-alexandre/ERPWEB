@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ee2de8308b2a4a49bc177fd1932ea539" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="Model_reportes.VWCONTA_001" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_reportes.VWACTF_001" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWACTF_002" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWACTF_003" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWINV_001" Width="1.5" PointX="10" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWINV_002" Width="1.5" PointX="12" PointY="0.875" />
+        <EntityTypeShape EntityType="Model_reportes.VWCAJ_001" Width="1.5" PointX="0.75" PointY="5.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

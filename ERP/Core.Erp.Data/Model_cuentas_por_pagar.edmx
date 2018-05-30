@@ -1,0 +1,675 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model_cuentas_por_pagar.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cp_codigo_SRI">
+          <Key>
+            <PropertyRef Name="IdCodigo_SRI" />
+          </Key>
+          <Property Name="IdCodigo_SRI" Type="int" Nullable="false" />
+          <Property Name="codigoSRI" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="co_codigoBase" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="co_descripcion" Type="varchar" MaxLength="350" Nullable="false" />
+          <Property Name="co_porRetencion" Type="float" Nullable="false" />
+          <Property Name="co_f_valides_desde" Type="date" Nullable="false" />
+          <Property Name="co_f_valides_hasta" Type="date" Nullable="false" />
+          <Property Name="co_estado" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdTipoSRI" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="50" />
+          <Property Name="MotivoAnulacion" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="cp_codigo_SRI_tipo">
+          <Key>
+            <PropertyRef Name="IdTipoSRI" />
+          </Key>
+          <Property Name="IdTipoSRI" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="estado" Type="varchar" MaxLength="1" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="cp_codigo_SRI_x_CtaCble">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="idCodigo_SRI" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="idCodigo_SRI" Type="int" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fecha_UltMod" Type="datetime" />
+          <Property Name="idUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="cp_proveedor">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdProveedor" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pr_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="pr_contribuyenteEspecial" Type="char" MaxLength="1" />
+          <Property Name="pr_plazo" Type="int" />
+          <Property Name="representante_legal" Type="varchar" MaxLength="250" />
+          <Property Name="pr_estado" Type="varchar" MaxLength="1" />
+          <Property Name="IdCiudad" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="idCredito_Predeter" Type="int" />
+          <Property Name="codigoSRI_ICE_Predeter" Type="int" />
+          <Property Name="codigoSRI_101_Predeter" Type="int" />
+          <Property Name="IdCentroCosot" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCble_CXP" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCble_Anticipo" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCble_Gasto" Type="varchar" MaxLength="20" />
+          <Property Name="IdClaseProveedor" Type="int" Nullable="false" />
+          <Property Name="MotivoAnulacion" Type="varchar" MaxLength="200" />
+          <Property Name="IdTipoCta_acreditacion_cat" Type="varchar" MaxLength="25" />
+          <Property Name="num_cta_acreditacion" Type="varchar" MaxLength="50" />
+          <Property Name="IdBanco_acreditacion" Type="int" />
+          <Property Name="IdPunto_cargo" Type="int" />
+          <Property Name="IdPunto_cargo_grupo" Type="int" />
+          <Property Name="es_empresa_relacionada" Type="bit" Nullable="false" />
+          <Property Name="pr_telefonos" Type="varchar" MaxLength="100" />
+          <Property Name="pr_celular" Type="varchar" MaxLength="100" />
+          <Property Name="pr_direccion" Type="varchar" MaxLength="500" />
+          <Property Name="pr_correo" Type="varchar" MaxLength="200" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+        </EntityType>
+        <EntityType Name="cp_proveedor_clase">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdClaseProveedor" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdClaseProveedor" Type="int" Nullable="false" />
+          <Property Name="cod_clase_proveedor" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="descripcion_clas_prove" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdCtaCble_Anticipo" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCble_gasto" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCble_CXP" Type="varchar" MaxLength="20" />
+          <Property Name="IdCentroCosto" Type="varchar" MaxLength="20" />
+          <Property Name="IdCentroCosto_sub_centro_costo" Type="varchar" MaxLength="20" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="IdUsuarioAnu" Type="varchar" MaxLength="20" />
+          <Property Name="MotivoAnu" Type="varchar" MaxLength="150" />
+          <Property Name="IdUsuarioUltModi" Type="varchar" MaxLength="20" />
+          <Property Name="FechaAnu" Type="datetime" />
+          <Property Name="FechaTransac" Type="datetime" />
+          <Property Name="FechaUltModi" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_proveedor_consulta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwcp_proveedor_consulta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProveedor" />
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="IdClaseProveedor" />
+            <PropertyRef Name="pe_cedulaRuc" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdProveedor" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pr_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="IdClaseProveedor" Type="int" Nullable="false" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pr_estado" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <Association Name="FK_cp_codigo_SRI_cp_codigo_SRI_tipo">
+          <End Role="cp_codigo_SRI_tipo" Type="Self.cp_codigo_SRI_tipo" Multiplicity="1" />
+          <End Role="cp_codigo_SRI" Type="Self.cp_codigo_SRI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_codigo_SRI_tipo">
+              <PropertyRef Name="IdTipoSRI" />
+            </Principal>
+            <Dependent Role="cp_codigo_SRI">
+              <PropertyRef Name="IdTipoSRI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_codigo_SRI_x_CtaCble_cp_codigo_SRI">
+          <End Role="cp_codigo_SRI" Type="Self.cp_codigo_SRI" Multiplicity="1" />
+          <End Role="cp_codigo_SRI_x_CtaCble" Type="Self.cp_codigo_SRI_x_CtaCble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_codigo_SRI">
+              <PropertyRef Name="IdCodigo_SRI" />
+            </Principal>
+            <Dependent Role="cp_codigo_SRI_x_CtaCble">
+              <PropertyRef Name="idCodigo_SRI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_proveedor_cp_codigo_SRI">
+          <End Role="cp_codigo_SRI" Type="Self.cp_codigo_SRI" Multiplicity="0..1" />
+          <End Role="cp_proveedor" Type="Self.cp_proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_codigo_SRI">
+              <PropertyRef Name="IdCodigo_SRI" />
+            </Principal>
+            <Dependent Role="cp_proveedor">
+              <PropertyRef Name="idCredito_Predeter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_proveedor_cp_codigo_SRI1">
+          <End Role="cp_codigo_SRI" Type="Self.cp_codigo_SRI" Multiplicity="0..1" />
+          <End Role="cp_proveedor" Type="Self.cp_proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_codigo_SRI">
+              <PropertyRef Name="IdCodigo_SRI" />
+            </Principal>
+            <Dependent Role="cp_proveedor">
+              <PropertyRef Name="codigoSRI_ICE_Predeter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_proveedor_cp_codigo_SRI2">
+          <End Role="cp_codigo_SRI" Type="Self.cp_codigo_SRI" Multiplicity="0..1" />
+          <End Role="cp_proveedor" Type="Self.cp_proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_codigo_SRI">
+              <PropertyRef Name="IdCodigo_SRI" />
+            </Principal>
+            <Dependent Role="cp_proveedor">
+              <PropertyRef Name="codigoSRI_101_Predeter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_proveedor_cp_proveedor_clase">
+          <End Role="cp_proveedor_clase" Type="Self.cp_proveedor_clase" Multiplicity="1" />
+          <End Role="cp_proveedor" Type="Self.cp_proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_proveedor_clase">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdClaseProveedor" />
+            </Principal>
+            <Dependent Role="cp_proveedor">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdClaseProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Model_cuentas_por_pagarStoreContainer">
+          <EntitySet Name="cp_codigo_SRI" EntityType="Self.cp_codigo_SRI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cp_codigo_SRI_tipo" EntityType="Self.cp_codigo_SRI_tipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cp_codigo_SRI_x_CtaCble" EntityType="Self.cp_codigo_SRI_x_CtaCble" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cp_proveedor" EntityType="Self.cp_proveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cp_proveedor_clase" EntityType="Self.cp_proveedor_clase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwcp_proveedor_consulta" EntityType="Self.vwcp_proveedor_consulta" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [vwcp_proveedor_consulta].[IdEmpresa] AS [IdEmpresa], 
+    [vwcp_proveedor_consulta].[IdProveedor] AS [IdProveedor], 
+    [vwcp_proveedor_consulta].[pr_codigo] AS [pr_codigo], 
+    [vwcp_proveedor_consulta].[IdPersona] AS [IdPersona], 
+    [vwcp_proveedor_consulta].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwcp_proveedor_consulta].[IdClaseProveedor] AS [IdClaseProveedor], 
+    [vwcp_proveedor_consulta].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [vwcp_proveedor_consulta].[pr_estado] AS [pr_estado]
+    FROM [web].[vwcp_proveedor_consulta] AS [vwcp_proveedor_consulta]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_cp_codigo_SRI_cp_codigo_SRI_tipo" Association="Self.FK_cp_codigo_SRI_cp_codigo_SRI_tipo">
+            <End Role="cp_codigo_SRI_tipo" EntitySet="cp_codigo_SRI_tipo" />
+            <End Role="cp_codigo_SRI" EntitySet="cp_codigo_SRI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_codigo_SRI_x_CtaCble_cp_codigo_SRI" Association="Self.FK_cp_codigo_SRI_x_CtaCble_cp_codigo_SRI">
+            <End Role="cp_codigo_SRI" EntitySet="cp_codigo_SRI" />
+            <End Role="cp_codigo_SRI_x_CtaCble" EntitySet="cp_codigo_SRI_x_CtaCble" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_proveedor_cp_codigo_SRI" Association="Self.FK_cp_proveedor_cp_codigo_SRI">
+            <End Role="cp_codigo_SRI" EntitySet="cp_codigo_SRI" />
+            <End Role="cp_proveedor" EntitySet="cp_proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_proveedor_cp_codigo_SRI1" Association="Self.FK_cp_proveedor_cp_codigo_SRI1">
+            <End Role="cp_codigo_SRI" EntitySet="cp_codigo_SRI" />
+            <End Role="cp_proveedor" EntitySet="cp_proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_proveedor_cp_codigo_SRI2" Association="Self.FK_cp_proveedor_cp_codigo_SRI2">
+            <End Role="cp_codigo_SRI" EntitySet="cp_codigo_SRI" />
+            <End Role="cp_proveedor" EntitySet="cp_proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_proveedor_cp_proveedor_clase" Association="Self.FK_cp_proveedor_cp_proveedor_clase">
+            <End Role="cp_proveedor_clase" EntitySet="cp_proveedor_clase" />
+            <End Role="cp_proveedor" EntitySet="cp_proveedor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model_cuentas_por_pagar" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities_cuentas_por_pagar" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="cp_codigo_SRI_tipo" EntityType="Model_cuentas_por_pagar.cp_codigo_SRI_tipo" />
+          <EntitySet Name="cp_codigo_SRI" EntityType="Model_cuentas_por_pagar.cp_codigo_SRI" />
+          <AssociationSet Name="FK_cp_codigo_SRI_cp_codigo_SRI_tipo" Association="Model_cuentas_por_pagar.FK_cp_codigo_SRI_cp_codigo_SRI_tipo">
+            <End Role="cp_codigo_SRI_tipo" EntitySet="cp_codigo_SRI_tipo" />
+            <End Role="cp_codigo_SRI" EntitySet="cp_codigo_SRI" />
+          </AssociationSet>
+          <EntitySet Name="cp_codigo_SRI_x_CtaCble" EntityType="Model_cuentas_por_pagar.cp_codigo_SRI_x_CtaCble" />
+          <AssociationSet Name="FK_cp_codigo_SRI_x_CtaCble_cp_codigo_SRI" Association="Model_cuentas_por_pagar.FK_cp_codigo_SRI_x_CtaCble_cp_codigo_SRI">
+            <End Role="cp_codigo_SRI" EntitySet="cp_codigo_SRI" />
+            <End Role="cp_codigo_SRI_x_CtaCble" EntitySet="cp_codigo_SRI_x_CtaCble" />
+          </AssociationSet>
+          <EntitySet Name="cp_proveedor_clase" EntityType="Model_cuentas_por_pagar.cp_proveedor_clase" />
+          <EntitySet Name="cp_proveedor" EntityType="Model_cuentas_por_pagar.cp_proveedor" />
+          <EntitySet Name="vwcp_proveedor_consulta" EntityType="Model_cuentas_por_pagar.vwcp_proveedor_consulta" />
+          <AssociationSet Name="FK_cp_proveedor_cp_codigo_SRI" Association="Model_cuentas_por_pagar.FK_cp_proveedor_cp_codigo_SRI">
+            <End Role="cp_codigo_SRI" EntitySet="cp_codigo_SRI" />
+            <End Role="cp_proveedor" EntitySet="cp_proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_proveedor_cp_codigo_SRI1" Association="Model_cuentas_por_pagar.FK_cp_proveedor_cp_codigo_SRI1">
+            <End Role="cp_codigo_SRI" EntitySet="cp_codigo_SRI" />
+            <End Role="cp_proveedor" EntitySet="cp_proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_proveedor_cp_codigo_SRI2" Association="Model_cuentas_por_pagar.FK_cp_proveedor_cp_codigo_SRI2">
+            <End Role="cp_codigo_SRI" EntitySet="cp_codigo_SRI" />
+            <End Role="cp_proveedor" EntitySet="cp_proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_proveedor_cp_proveedor_clase" Association="Model_cuentas_por_pagar.FK_cp_proveedor_cp_proveedor_clase">
+            <End Role="cp_proveedor_clase" EntitySet="cp_proveedor_clase" />
+            <End Role="cp_proveedor" EntitySet="cp_proveedor" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="cp_codigo_SRI_tipo">
+          <Key>
+            <PropertyRef Name="IdTipoSRI" />
+          </Key>
+          <Property Name="IdTipoSRI" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cp_codigo_SRI" Relationship="Model_cuentas_por_pagar.FK_cp_codigo_SRI_cp_codigo_SRI_tipo" FromRole="cp_codigo_SRI_tipo" ToRole="cp_codigo_SRI" />
+        </EntityType>
+        <EntityType Name="cp_codigo_SRI">
+          <Key>
+            <PropertyRef Name="IdCodigo_SRI" />
+          </Key>
+          <Property Name="IdCodigo_SRI" Type="Int32" Nullable="false" />
+          <Property Name="codigoSRI" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="co_codigoBase" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="co_descripcion" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="co_porRetencion" Type="Double" Nullable="false" />
+          <Property Name="co_f_valides_desde" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="co_f_valides_hasta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="co_estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoSRI" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cp_codigo_SRI_tipo" Relationship="Model_cuentas_por_pagar.FK_cp_codigo_SRI_cp_codigo_SRI_tipo" FromRole="cp_codigo_SRI" ToRole="cp_codigo_SRI_tipo" />
+          <NavigationProperty Name="cp_codigo_SRI_x_CtaCble" Relationship="Model_cuentas_por_pagar.FK_cp_codigo_SRI_x_CtaCble_cp_codigo_SRI" FromRole="cp_codigo_SRI" ToRole="cp_codigo_SRI_x_CtaCble" />
+          <NavigationProperty Name="cp_proveedor" Relationship="Model_cuentas_por_pagar.FK_cp_proveedor_cp_codigo_SRI" FromRole="cp_codigo_SRI" ToRole="cp_proveedor" />
+          <NavigationProperty Name="cp_proveedor1" Relationship="Model_cuentas_por_pagar.FK_cp_proveedor_cp_codigo_SRI1" FromRole="cp_codigo_SRI" ToRole="cp_proveedor" />
+          <NavigationProperty Name="cp_proveedor2" Relationship="Model_cuentas_por_pagar.FK_cp_proveedor_cp_codigo_SRI2" FromRole="cp_codigo_SRI" ToRole="cp_proveedor" />
+          </EntityType>
+        <Association Name="FK_cp_codigo_SRI_cp_codigo_SRI_tipo">
+          <End Type="Model_cuentas_por_pagar.cp_codigo_SRI_tipo" Role="cp_codigo_SRI_tipo" Multiplicity="1" />
+          <End Type="Model_cuentas_por_pagar.cp_codigo_SRI" Role="cp_codigo_SRI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_codigo_SRI_tipo">
+              <PropertyRef Name="IdTipoSRI" />
+            </Principal>
+            <Dependent Role="cp_codigo_SRI">
+              <PropertyRef Name="IdTipoSRI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="cp_codigo_SRI_x_CtaCble">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="idCodigo_SRI" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="idCodigo_SRI" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="idUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cp_codigo_SRI" Relationship="Model_cuentas_por_pagar.FK_cp_codigo_SRI_x_CtaCble_cp_codigo_SRI" FromRole="cp_codigo_SRI_x_CtaCble" ToRole="cp_codigo_SRI" />
+        </EntityType>
+        <Association Name="FK_cp_codigo_SRI_x_CtaCble_cp_codigo_SRI">
+          <End Type="Model_cuentas_por_pagar.cp_codigo_SRI" Role="cp_codigo_SRI" Multiplicity="1" />
+          <End Type="Model_cuentas_por_pagar.cp_codigo_SRI_x_CtaCble" Role="cp_codigo_SRI_x_CtaCble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_codigo_SRI">
+              <PropertyRef Name="IdCodigo_SRI" />
+            </Principal>
+            <Dependent Role="cp_codigo_SRI_x_CtaCble">
+              <PropertyRef Name="idCodigo_SRI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="cp_proveedor_clase">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdClaseProveedor" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdClaseProveedor" Type="Int32" Nullable="false" />
+          <Property Name="cod_clase_proveedor" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion_clas_prove" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_Anticipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_gasto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_CXP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCentroCosto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCentroCosto_sub_centro_costo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoAnu" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltModi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnu" Type="DateTime" Precision="3" />
+          <Property Name="FechaTransac" Type="DateTime" Precision="3" />
+          <Property Name="FechaUltModi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="cp_proveedor" Relationship="Model_cuentas_por_pagar.FK_cp_proveedor_cp_proveedor_clase" FromRole="cp_proveedor_clase" ToRole="cp_proveedor" />
+        </EntityType>
+        <EntityType Name="cp_proveedor">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdProveedor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pr_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pr_contribuyenteEspecial" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="pr_plazo" Type="Int32" />
+          <Property Name="representante_legal" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="pr_estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCiudad" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="idCredito_Predeter" Type="Int32" />
+          <Property Name="codigoSRI_ICE_Predeter" Type="Int32" />
+          <Property Name="codigoSRI_101_Predeter" Type="Int32" />
+          <Property Name="IdCentroCosot" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_CXP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_Anticipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_Gasto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdClaseProveedor" Type="Int32" Nullable="false" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoCta_acreditacion_cat" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="num_cta_acreditacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdBanco_acreditacion" Type="Int32" />
+          <Property Name="IdPunto_cargo" Type="Int32" />
+          <Property Name="IdPunto_cargo_grupo" Type="Int32" />
+          <Property Name="es_empresa_relacionada" Type="Boolean" Nullable="false" />
+          <Property Name="pr_telefonos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pr_celular" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pr_direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="pr_correo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="cp_codigo_SRI" Relationship="Model_cuentas_por_pagar.FK_cp_proveedor_cp_codigo_SRI" FromRole="cp_proveedor" ToRole="cp_codigo_SRI" />
+          <NavigationProperty Name="cp_codigo_SRI1" Relationship="Model_cuentas_por_pagar.FK_cp_proveedor_cp_codigo_SRI1" FromRole="cp_proveedor" ToRole="cp_codigo_SRI" />
+          <NavigationProperty Name="cp_codigo_SRI2" Relationship="Model_cuentas_por_pagar.FK_cp_proveedor_cp_codigo_SRI2" FromRole="cp_proveedor" ToRole="cp_codigo_SRI" />
+          <NavigationProperty Name="cp_proveedor_clase" Relationship="Model_cuentas_por_pagar.FK_cp_proveedor_cp_proveedor_clase" FromRole="cp_proveedor" ToRole="cp_proveedor_clase" />
+        </EntityType>
+        <EntityType Name="vwcp_proveedor_consulta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProveedor" />
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="IdClaseProveedor" />
+            <PropertyRef Name="pe_cedulaRuc" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdProveedor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pr_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdClaseProveedor" Type="Int32" Nullable="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pr_estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_cp_proveedor_cp_codigo_SRI">
+          <End Type="Model_cuentas_por_pagar.cp_codigo_SRI" Role="cp_codigo_SRI" Multiplicity="0..1" />
+          <End Type="Model_cuentas_por_pagar.cp_proveedor" Role="cp_proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_codigo_SRI">
+              <PropertyRef Name="IdCodigo_SRI" />
+            </Principal>
+            <Dependent Role="cp_proveedor">
+              <PropertyRef Name="idCredito_Predeter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_proveedor_cp_codigo_SRI1">
+          <End Type="Model_cuentas_por_pagar.cp_codigo_SRI" Role="cp_codigo_SRI" Multiplicity="0..1" />
+          <End Type="Model_cuentas_por_pagar.cp_proveedor" Role="cp_proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_codigo_SRI">
+              <PropertyRef Name="IdCodigo_SRI" />
+            </Principal>
+            <Dependent Role="cp_proveedor">
+              <PropertyRef Name="codigoSRI_ICE_Predeter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_proveedor_cp_codigo_SRI2">
+          <End Type="Model_cuentas_por_pagar.cp_codigo_SRI" Role="cp_codigo_SRI" Multiplicity="0..1" />
+          <End Type="Model_cuentas_por_pagar.cp_proveedor" Role="cp_proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_codigo_SRI">
+              <PropertyRef Name="IdCodigo_SRI" />
+            </Principal>
+            <Dependent Role="cp_proveedor">
+              <PropertyRef Name="codigoSRI_101_Predeter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_proveedor_cp_proveedor_clase">
+          <End Type="Model_cuentas_por_pagar.cp_proveedor_clase" Role="cp_proveedor_clase" Multiplicity="1" />
+          <End Type="Model_cuentas_por_pagar.cp_proveedor" Role="cp_proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_proveedor_clase">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdClaseProveedor" />
+            </Principal>
+            <Dependent Role="cp_proveedor">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdClaseProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Model_cuentas_por_pagarStoreContainer" CdmEntityContainer="Entities_cuentas_por_pagar" >
+          <EntitySetMapping Name="cp_codigo_SRI_tipo">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_codigo_SRI_tipo">
+              <MappingFragment StoreEntitySet="cp_codigo_SRI_tipo">
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="IdTipoSRI" ColumnName="IdTipoSRI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cp_codigo_SRI">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_codigo_SRI">
+              <MappingFragment StoreEntitySet="cp_codigo_SRI">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdTipoSRI" ColumnName="IdTipoSRI" />
+                <ScalarProperty Name="co_estado" ColumnName="co_estado" />
+                <ScalarProperty Name="co_f_valides_hasta" ColumnName="co_f_valides_hasta" />
+                <ScalarProperty Name="co_f_valides_desde" ColumnName="co_f_valides_desde" />
+                <ScalarProperty Name="co_porRetencion" ColumnName="co_porRetencion" />
+                <ScalarProperty Name="co_descripcion" ColumnName="co_descripcion" />
+                <ScalarProperty Name="co_codigoBase" ColumnName="co_codigoBase" />
+                <ScalarProperty Name="codigoSRI" ColumnName="codigoSRI" />
+                <ScalarProperty Name="IdCodigo_SRI" ColumnName="IdCodigo_SRI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cp_codigo_SRI_x_CtaCble">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_codigo_SRI_x_CtaCble">
+              <MappingFragment StoreEntitySet="cp_codigo_SRI_x_CtaCble">
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="fecha_UltMod" ColumnName="fecha_UltMod" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="idCodigo_SRI" ColumnName="idCodigo_SRI" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cp_proveedor_clase">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_proveedor_clase">
+              <MappingFragment StoreEntitySet="cp_proveedor_clase">
+                <ScalarProperty Name="FechaUltModi" ColumnName="FechaUltModi" />
+                <ScalarProperty Name="FechaTransac" ColumnName="FechaTransac" />
+                <ScalarProperty Name="FechaAnu" ColumnName="FechaAnu" />
+                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
+                <ScalarProperty Name="MotivoAnu" ColumnName="MotivoAnu" />
+                <ScalarProperty Name="IdUsuarioAnu" ColumnName="IdUsuarioAnu" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdCentroCosto_sub_centro_costo" ColumnName="IdCentroCosto_sub_centro_costo" />
+                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
+                <ScalarProperty Name="IdCtaCble_CXP" ColumnName="IdCtaCble_CXP" />
+                <ScalarProperty Name="IdCtaCble_gasto" ColumnName="IdCtaCble_gasto" />
+                <ScalarProperty Name="IdCtaCble_Anticipo" ColumnName="IdCtaCble_Anticipo" />
+                <ScalarProperty Name="descripcion_clas_prove" ColumnName="descripcion_clas_prove" />
+                <ScalarProperty Name="cod_clase_proveedor" ColumnName="cod_clase_proveedor" />
+                <ScalarProperty Name="IdClaseProveedor" ColumnName="IdClaseProveedor" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cp_proveedor">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_proveedor">
+              <MappingFragment StoreEntitySet="cp_proveedor">
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="pr_correo" ColumnName="pr_correo" />
+                <ScalarProperty Name="pr_direccion" ColumnName="pr_direccion" />
+                <ScalarProperty Name="pr_celular" ColumnName="pr_celular" />
+                <ScalarProperty Name="pr_telefonos" ColumnName="pr_telefonos" />
+                <ScalarProperty Name="es_empresa_relacionada" ColumnName="es_empresa_relacionada" />
+                <ScalarProperty Name="IdPunto_cargo_grupo" ColumnName="IdPunto_cargo_grupo" />
+                <ScalarProperty Name="IdPunto_cargo" ColumnName="IdPunto_cargo" />
+                <ScalarProperty Name="IdBanco_acreditacion" ColumnName="IdBanco_acreditacion" />
+                <ScalarProperty Name="num_cta_acreditacion" ColumnName="num_cta_acreditacion" />
+                <ScalarProperty Name="IdTipoCta_acreditacion_cat" ColumnName="IdTipoCta_acreditacion_cat" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="IdClaseProveedor" ColumnName="IdClaseProveedor" />
+                <ScalarProperty Name="IdCtaCble_Gasto" ColumnName="IdCtaCble_Gasto" />
+                <ScalarProperty Name="IdCtaCble_Anticipo" ColumnName="IdCtaCble_Anticipo" />
+                <ScalarProperty Name="IdCtaCble_CXP" ColumnName="IdCtaCble_CXP" />
+                <ScalarProperty Name="IdCentroCosot" ColumnName="IdCentroCosot" />
+                <ScalarProperty Name="codigoSRI_101_Predeter" ColumnName="codigoSRI_101_Predeter" />
+                <ScalarProperty Name="codigoSRI_ICE_Predeter" ColumnName="codigoSRI_ICE_Predeter" />
+                <ScalarProperty Name="idCredito_Predeter" ColumnName="idCredito_Predeter" />
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+                <ScalarProperty Name="pr_estado" ColumnName="pr_estado" />
+                <ScalarProperty Name="representante_legal" ColumnName="representante_legal" />
+                <ScalarProperty Name="pr_plazo" ColumnName="pr_plazo" />
+                <ScalarProperty Name="pr_contribuyenteEspecial" ColumnName="pr_contribuyenteEspecial" />
+                <ScalarProperty Name="pr_codigo" ColumnName="pr_codigo" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwcp_proveedor_consulta">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.vwcp_proveedor_consulta">
+              <MappingFragment StoreEntitySet="vwcp_proveedor_consulta">
+                <ScalarProperty Name="pr_estado" ColumnName="pr_estado" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="IdClaseProveedor" ColumnName="IdClaseProveedor" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="pr_codigo" ColumnName="pr_codigo" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

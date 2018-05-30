@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model_banco.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ba_Banco_Cuenta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdBanco" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdBanco" Type="int" Nullable="false" />
+          <Property Name="ba_descripcion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="ba_Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ba_Num_Cuenta" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ba_num_digito_cheq" Type="int" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="50" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
+          <Property Name="Reporte" Type="varbinary(max)" />
+          <Property Name="ReporteSolo_Cheque" Type="varbinary(max)" />
+          <Property Name="MostrarVistaPreviaCheque" Type="bit" />
+          <Property Name="Imprimir_Solo_el_cheque" Type="bit" />
+          <Property Name="IdBanco_Financiero" Type="int" />
+        </EntityType>
+        <EntityType Name="ba_Catalogo">
+          <Key>
+            <PropertyRef Name="IdCatalogo" />
+          </Key>
+          <Property Name="IdCatalogo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdTipoCatalogo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ca_descripcion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="ca_estado" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="50" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ba_CatalogoTipo">
+          <Key>
+            <PropertyRef Name="IdTipoCatalogo" />
+          </Key>
+          <Property Name="IdTipoCatalogo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="tc_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ba_parametros">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="El_Diario_Contable_es_modificable" Type="bit" Nullable="false" />
+          <Property Name="CiudadDefaultParaCrearCheques" Type="varchar" MaxLength="25" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="FechaUltMod" Type="datetime" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="25" />
+          <Property Name="IdTipoCbte_x_Prestamo" Type="int" />
+          <Property Name="IdTipoNota_ND_Can_Cuotas" Type="int" />
+          <Property Name="Ruta_descarga_fila_x_PreAviso_cheq" Type="varchar" MaxLength="200" />
+          <Property Name="IdCtaCble_Interes" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCble_prestamos" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK_ba_Catalogo_ba_CatalogoTipo">
+          <End Role="ba_CatalogoTipo" Type="Self.ba_CatalogoTipo" Multiplicity="1" />
+          <End Role="ba_Catalogo" Type="Self.ba_Catalogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ba_CatalogoTipo">
+              <PropertyRef Name="IdTipoCatalogo" />
+            </Principal>
+            <Dependent Role="ba_Catalogo">
+              <PropertyRef Name="IdTipoCatalogo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Model_bancoStoreContainer">
+          <EntitySet Name="ba_Banco_Cuenta" EntityType="Self.ba_Banco_Cuenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ba_Catalogo" EntityType="Self.ba_Catalogo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ba_CatalogoTipo" EntityType="Self.ba_CatalogoTipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ba_parametros" EntityType="Self.ba_parametros" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ba_Catalogo_ba_CatalogoTipo" Association="Self.FK_ba_Catalogo_ba_CatalogoTipo">
+            <End Role="ba_CatalogoTipo" EntitySet="ba_CatalogoTipo" />
+            <End Role="ba_Catalogo" EntitySet="ba_Catalogo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model_banco" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities_banco" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="ba_CatalogoTipo" EntityType="Model_banco.ba_CatalogoTipo" />
+          <EntitySet Name="ba_parametros" EntityType="Model_banco.ba_parametros" />
+          <EntitySet Name="ba_Banco_Cuenta" EntityType="Model_banco.ba_Banco_Cuenta" />
+          <EntitySet Name="ba_Catalogo" EntityType="Model_banco.ba_Catalogo" />
+          <AssociationSet Name="FK_ba_Catalogo_ba_CatalogoTipo" Association="Model_banco.FK_ba_Catalogo_ba_CatalogoTipo">
+            <End Role="ba_CatalogoTipo" EntitySet="ba_CatalogoTipo" />
+            <End Role="ba_Catalogo" EntitySet="ba_Catalogo" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ba_CatalogoTipo">
+          <Key>
+            <PropertyRef Name="IdTipoCatalogo" />
+          </Key>
+          <Property Name="IdTipoCatalogo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="tc_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ba_Catalogo" Relationship="Model_banco.FK_ba_Catalogo_ba_CatalogoTipo" FromRole="ba_CatalogoTipo" ToRole="ba_Catalogo" />
+        </EntityType>
+        <EntityType Name="ba_parametros">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="El_Diario_Contable_es_modificable" Type="Boolean" Nullable="false" />
+          <Property Name="CiudadDefaultParaCrearCheques" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoCbte_x_Prestamo" Type="Int32" />
+          <Property Name="IdTipoNota_ND_Can_Cuotas" Type="Int32" />
+          <Property Name="Ruta_descarga_fila_x_PreAviso_cheq" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_Interes" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_prestamos" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ba_Banco_Cuenta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdBanco" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdBanco" Type="Int32" Nullable="false" />
+          <Property Name="ba_descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ba_Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ba_Num_Cuenta" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ba_num_digito_cheq" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Reporte" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ReporteSolo_Cheque" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="MostrarVistaPreviaCheque" Type="Boolean" />
+          <Property Name="Imprimir_Solo_el_cheque" Type="Boolean" />
+          <Property Name="IdBanco_Financiero" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ba_Catalogo">
+          <Key>
+            <PropertyRef Name="IdCatalogo" />
+          </Key>
+          <Property Name="IdCatalogo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoCatalogo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ca_descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ca_estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ba_CatalogoTipo" Relationship="Model_banco.FK_ba_Catalogo_ba_CatalogoTipo" FromRole="ba_Catalogo" ToRole="ba_CatalogoTipo" />
+        </EntityType>
+        <Association Name="FK_ba_Catalogo_ba_CatalogoTipo">
+          <End Type="Model_banco.ba_CatalogoTipo" Role="ba_CatalogoTipo" Multiplicity="1" />
+          <End Type="Model_banco.ba_Catalogo" Role="ba_Catalogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ba_CatalogoTipo">
+              <PropertyRef Name="IdTipoCatalogo" />
+            </Principal>
+            <Dependent Role="ba_Catalogo">
+              <PropertyRef Name="IdTipoCatalogo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Model_bancoStoreContainer" CdmEntityContainer="Entities_banco" >
+          <EntitySetMapping Name="ba_CatalogoTipo">
+            <EntityTypeMapping TypeName="Model_banco.ba_CatalogoTipo">
+              <MappingFragment StoreEntitySet="ba_CatalogoTipo">
+                <ScalarProperty Name="tc_Descripcion" ColumnName="tc_Descripcion" />
+                <ScalarProperty Name="IdTipoCatalogo" ColumnName="IdTipoCatalogo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ba_parametros">
+            <EntityTypeMapping TypeName="Model_banco.ba_parametros">
+              <MappingFragment StoreEntitySet="ba_parametros">
+                <ScalarProperty Name="IdCtaCble_prestamos" ColumnName="IdCtaCble_prestamos" />
+                <ScalarProperty Name="IdCtaCble_Interes" ColumnName="IdCtaCble_Interes" />
+                <ScalarProperty Name="Ruta_descarga_fila_x_PreAviso_cheq" ColumnName="Ruta_descarga_fila_x_PreAviso_cheq" />
+                <ScalarProperty Name="IdTipoNota_ND_Can_Cuotas" ColumnName="IdTipoNota_ND_Can_Cuotas" />
+                <ScalarProperty Name="IdTipoCbte_x_Prestamo" ColumnName="IdTipoCbte_x_Prestamo" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="CiudadDefaultParaCrearCheques" ColumnName="CiudadDefaultParaCrearCheques" />
+                <ScalarProperty Name="El_Diario_Contable_es_modificable" ColumnName="El_Diario_Contable_es_modificable" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ba_Banco_Cuenta">
+            <EntityTypeMapping TypeName="Model_banco.ba_Banco_Cuenta">
+              <MappingFragment StoreEntitySet="ba_Banco_Cuenta">
+                <ScalarProperty Name="IdBanco_Financiero" ColumnName="IdBanco_Financiero" />
+                <ScalarProperty Name="Imprimir_Solo_el_cheque" ColumnName="Imprimir_Solo_el_cheque" />
+                <ScalarProperty Name="MostrarVistaPreviaCheque" ColumnName="MostrarVistaPreviaCheque" />
+                <ScalarProperty Name="ReporteSolo_Cheque" ColumnName="ReporteSolo_Cheque" />
+                <ScalarProperty Name="Reporte" ColumnName="Reporte" />
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="ba_num_digito_cheq" ColumnName="ba_num_digito_cheq" />
+                <ScalarProperty Name="ba_Num_Cuenta" ColumnName="ba_Num_Cuenta" />
+                <ScalarProperty Name="ba_Tipo" ColumnName="ba_Tipo" />
+                <ScalarProperty Name="ba_descripcion" ColumnName="ba_descripcion" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ba_Catalogo">
+            <EntityTypeMapping TypeName="Model_banco.ba_Catalogo">
+              <MappingFragment StoreEntitySet="ba_Catalogo">
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="ca_estado" ColumnName="ca_estado" />
+                <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
+                <ScalarProperty Name="IdTipoCatalogo" ColumnName="IdTipoCatalogo" />
+                <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B08CCCBC-A2ED-4505-89E2-DCCFC4ABBD46}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Core.Erp.Info</RootNamespace>
+    <AssemblyName>Core.Erp.Info</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivoFijo\Af_Activo_fijo_Categoria_Info.cs" />
+    <Compile Include="ActivoFijo\Af_Activo_fijo_Info.cs" />
+    <Compile Include="ActivoFijo\Af_Activo_fijo_tipo_Info.cs" />
+    <Compile Include="ActivoFijo\Af_CatalogoTipo_Info.cs" />
+    <Compile Include="ActivoFijo\Af_Catalogo_Info.cs" />
+    <Compile Include="ActivoFijo\Af_Depreciacion_Det_Info.cs" />
+    <Compile Include="ActivoFijo\Af_Depreciacion_Info.cs" />
+    <Compile Include="ActivoFijo\Af_Mej_Baj_Activo_Info.cs" />
+    <Compile Include="ActivoFijo\Af_Parametros_Info.cs" />
+    <Compile Include="ActivoFijo\Af_Retiro_Activo_Info.cs" />
+    <Compile Include="ActivoFijo\Af_Venta_Activo_Info.cs" />
+    <Compile Include="Banco\ba_Banco_Cuenta_Info.cs" />
+    <Compile Include="Banco\ba_CatalogoTipo_Info.cs" />
+    <Compile Include="Banco\ba_Catalogo_Info.cs" />
+    <Compile Include="Banco\ba_parametros_Info.cs" />
+    <Compile Include="Caja\caj_Caja_Info.cs" />
+    <Compile Include="Caja\caj_Caja_Movimiento_det_Info.cs" />
+    <Compile Include="Caja\caj_Caja_Movimiento_Info.cs" />
+    <Compile Include="Caja\caj_Caja_Movimiento_Tipo_Info.cs" />
+    <Compile Include="Caja\caj_parametro_Info.cs" />
+    <Compile Include="Contabilidad\ct_anio_fiscal_Info.cs" />
+    <Compile Include="Contabilidad\ct_anio_fiscal_x_cuenta_utilidad_Info.cs" />
+    <Compile Include="Contabilidad\ct_cbtecble_det_Info.cs" />
+    <Compile Include="Contabilidad\ct_cbtecble_Info.cs" />
+    <Compile Include="Contabilidad\ct_cbtecble_tipo_Info.cs" />
+    <Compile Include="Contabilidad\ct_grupocble_Info.cs" />
+    <Compile Include="Contabilidad\ct_parametro_Info.cs" />
+    <Compile Include="Contabilidad\ct_periodo_Info.cs" />
+    <Compile Include="Contabilidad\ct_plancta_Info.cs" />
+    <Compile Include="Contabilidad\ct_plancta_nivel_Info.cs" />
+    <Compile Include="Contabilidad\ct_punto_cargo_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_CatalogoTipo_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_Catalogo_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_motivo_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_Parametro_Info.cs" />
+    <Compile Include="CuentasPorPagar\cp_codigo_SRI_Info.cs" />
+    <Compile Include="CuentasPorPagar\cp_codigo_SRI_tipo_Info.cs" />
+    <Compile Include="CuentasPorPagar\cp_codigo_SRI_x_CtaCble_Info.cs" />
+    <Compile Include="CuentasPorPagar\cp_proveedor_clase_Info.cs" />
+    <Compile Include="CuentasPorPagar\cp_proveedor_Info.cs" />
+    <Compile Include="Facturacion\fa_cliente_contactos_Info.cs" />
+    <Compile Include="Facturacion\fa_cliente_Info.cs" />
+    <Compile Include="Facturacion\fa_cliente_tipo_Info.cs" />
+    <Compile Include="Facturacion\fa_formaPago_Info.cs" />
+    <Compile Include="Facturacion\fa_PuntoVta_Info.cs" />
+    <Compile Include="Facturacion\fa_TerminoPago_Info.cs" />
+    <Compile Include="Facturacion\fa_TipoNota_Info.cs" />
+    <Compile Include="Facturacion\fa_Vendedor_Info.cs" />
+    <Compile Include="General\tb_banco_Info.cs" />
+    <Compile Include="General\tb_bodega_Info.cs" />
+    <Compile Include="General\tb_CatalogoTipo_Info.cs" />
+    <Compile Include="General\tb_Catalogo_Info.cs" />
+    <Compile Include="General\tb_ciudad_Info.cs" />
+    <Compile Include="General\tb_empresa_Info.cs" />
+    <Compile Include="General\tb_mes_Info.cs" />
+    <Compile Include="General\tb_modulo_Info.cs" />
+    <Compile Include="General\tb_pais_Info.cs" />
+    <Compile Include="General\tb_parroquia_Info.cs" />
+    <Compile Include="General\tb_persona_Info.cs" />
+    <Compile Include="General\tb_provincia_Info.cs" />
+    <Compile Include="General\tb_region_Info.cs" />
+    <Compile Include="General\tb_sis_Documento_Tipo_Info.cs" />
+    <Compile Include="General\tb_sis_Documento_Tipo_Talonario_Info.cs" />
+    <Compile Include="General\tb_sis_Impuesto_Info.cs" />
+    <Compile Include="General\tb_sis_Impuesto_Tipo_Info.cs" />
+    <Compile Include="General\tb_sis_Impuesto_x_ctacble_Info.cs" />
+    <Compile Include="General\tb_sis_reporte_Info.cs" />
+    <Compile Include="General\tb_sucursal_Info.cs" />
+    <Compile Include="General\tb_transportista_Info.cs" />
+    <Compile Include="Helps\cl_enumeradores.cs" />
+    <Compile Include="Helps\cl_filtros_Info.cs" />
+    <Compile Include="Helps\cl_funciones.cs" />
+    <Compile Include="Inventario\in_CatalogoTipo_Info.cs" />
+    <Compile Include="Inventario\in_Catalogo_Info.cs" />
+    <Compile Include="Inventario\in_categorias_Info.cs" />
+    <Compile Include="Inventario\in_grupo_Info.cs" />
+    <Compile Include="Inventario\in_Ing_Egr_Inven_det_Info.cs" />
+    <Compile Include="Inventario\in_Ing_Egr_Inven_Info.cs" />
+    <Compile Include="Inventario\in_linea_Info.cs" />
+    <Compile Include="Inventario\in_Marca_Info.cs" />
+    <Compile Include="Inventario\in_Motivo_Inven_Info.cs" />
+    <Compile Include="Inventario\in_movi_inven_tipo_Info.cs" />
+    <Compile Include="Inventario\in_movi_inven_tipo_x_tb_bodega_Info.cs" />
+    <Compile Include="Inventario\in_parametro_Info.cs" />
+    <Compile Include="Inventario\in_presentacion_Info.cs" />
+    <Compile Include="Inventario\in_ProductoTipo_Info.cs" />
+    <Compile Include="Inventario\in_Producto_Composicion_Info.cs" />
+    <Compile Include="Inventario\in_Producto_Info.cs" />
+    <Compile Include="Inventario\in_subgrupo_Info.cs" />
+    <Compile Include="Inventario\in_UnidadMedida_Equiv_conversion_Info.cs" />
+    <Compile Include="Inventario\in_UnidadMedida_Info.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reportes\ActivoFijo\VWACTF_001_Info.cs" />
+    <Compile Include="Reportes\ActivoFijo\VWACTF_002_Info.cs" />
+    <Compile Include="Reportes\ActivoFijo\VWACTF_003_Info.cs" />
+    <Compile Include="Reportes\Caja\VWCAJ_001_Info.cs" />
+    <Compile Include="Reportes\Contabilidad\VWCONTA_001_Info.cs" />
+    <Compile Include="Reportes\Inventario\VWINV_001_Info.cs" />
+    <Compile Include="Reportes\Inventario\VWINV_002_Info.cs" />
+    <Compile Include="RRHH\ro_Acta_Finiquito_Detalle_Info.cs" />
+    <Compile Include="RRHH\ro_Acta_Finiquito_Info.cs" />
+    <Compile Include="RRHH\ro_area_Info.cs" />
+    <Compile Include="RRHH\ro_area_x_departamento_Info.cs" />
+    <Compile Include="RRHH\ro_Capacitaciones_x_Empleado_Info.cs" />
+    <Compile Include="RRHH\ro_cargaFamiliar_Info.cs" />
+    <Compile Include="RRHH\ro_cargo_Info.cs" />
+    <Compile Include="RRHH\ro_catalogoTipo_Info.cs" />
+    <Compile Include="RRHH\ro_catalogo_Info.cs" />
+    <Compile Include="RRHH\ro_Config_Param_contable_Info.cs" />
+    <Compile Include="RRHH\ro_contrato_Info.cs" />
+    <Compile Include="RRHH\ro_departamento_Info.cs" />
+    <Compile Include="RRHH\ro_division_Info.cs" />
+    <Compile Include="RRHH\ro_DocumentoxEmp_Info.cs" />
+    <Compile Include="RRHH\ro_empleado_historial_Sueldo_Info.cs" />
+    <Compile Include="RRHH\ro_empleado_Info.cs" />
+    <Compile Include="RRHH\ro_empleado_novedad_det_Info.cs" />
+    <Compile Include="RRHH\ro_empleado_novedad_Info.cs" />
+    <Compile Include="RRHH\ro_empleado_x_centro_costo_Info.cs" />
+    <Compile Include="RRHH\ro_empleado_x_horario_Info.cs" />
+    <Compile Include="RRHH\ro_empleado_x_Proyeccion_Gastos_Personales_Info.cs" />
+    <Compile Include="RRHH\ro_empleado_x_ro_rubro_Info.cs" />
+    <Compile Include="RRHH\ro_empleado_x_ro_tipoNomina_Info.cs" />
+    <Compile Include="RRHH\ro_empleado_x_rubro_acumulado_Info.cs" />
+    <Compile Include="RRHH\ro_empleado_x_titulos_Info.cs" />
+    <Compile Include="RRHH\ro_Historico_Liquidacion_Vacaciones_Det_Info.cs" />
+    <Compile Include="RRHH\ro_Historico_Liquidacion_Vacaciones_Info.cs" />
+    <Compile Include="RRHH\ro_historico_vacaciones_x_empleado_Info.cs" />
+    <Compile Include="RRHH\ro_horario_Info.cs" />
+    <Compile Include="RRHH\ro_horario_planificacion_det_Info.cs" />
+    <Compile Include="RRHH\ro_horario_planificacion_Info.cs" />
+    <Compile Include="RRHH\ro_marcaciones_x_empleado_Info.cs" />
+    <Compile Include="RRHH\ro_Nomina_Tipoliqui_Info.cs" />
+    <Compile Include="RRHH\ro_nomina_tipo_Info.cs" />
+    <Compile Include="RRHH\ro_nomina_x_horas_extras_det_Info.cs" />
+    <Compile Include="RRHH\ro_nomina_x_horas_extras_Info.cs" />
+    <Compile Include="RRHH\ro_Parametros_Info.cs" />
+    <Compile Include="RRHH\ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info.cs" />
+    <Compile Include="RRHH\ro_participacion_utilidad_empleado_Info.cs" />
+    <Compile Include="RRHH\ro_participacion_utilidad_Info.cs" />
+    <Compile Include="RRHH\ro_periodo_Info.cs" />
+    <Compile Include="RRHH\ro_periodo_x_ro_Nomina_TipoLiqui_Info.cs" />
+    <Compile Include="RRHH\ro_prestamo_detalle_Info.cs" />
+    <Compile Include="RRHH\ro_prestamo_Info.cs" />
+    <Compile Include="RRHH\ro_rol_detalle_Info.cs" />
+    <Compile Include="RRHH\ro_rol_Info.cs" />
+    <Compile Include="RRHH\ro_rubros_calculados_Info.cs" />
+    <Compile Include="RRHH\ro_rubro_tipo_Info.cs" />
+    <Compile Include="RRHH\ro_Solicitud_Vacaciones_x_empleado_Info.cs" />
+    <Compile Include="RRHH\ro_tipo_prestamo_Info.cs" />
+    <Compile Include="RRHH\ro_turno_Info.cs" />
+    <Compile Include="SeguridadAcceso\seg_Menu_Info.cs" />
+    <Compile Include="SeguridadAcceso\seg_Menu_x_Empresa_Info.cs" />
+    <Compile Include="SeguridadAcceso\seg_Menu_x_Empresa_x_Usuario_Info.cs" />
+    <Compile Include="SeguridadAcceso\seg_usuario_Info.cs" />
+    <Compile Include="SeguridadAcceso\seg_Usuario_x_Empresa_Info.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Importacion\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

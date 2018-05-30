@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b498a907f50d4550ac15e5af619fed9d" Name="Diagram1" ZoomLevel="86" >
+        <EntityTypeShape EntityType="Model_facturacion.fa_cliente_tipo" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_TerminoPago" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_TipoNota" Width="1.5" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_PuntoVta" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_formaPago" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_Vendedor" Width="1.5" PointX="5.375" PointY="9.125" />
+        <EntityTypeShape EntityType="Model_facturacion.vwfa_cliente_consulta" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_cliente" Width="1.5" PointX="7.625" PointY="1.75" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_cliente_fa_cliente_tipo" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_cliente_fa_forma_pago" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_cliente_fa_TerminoPago" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_cliente_contactos" Width="1.5" PointX="9.875" PointY="3.125" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_cliente_contactos_fa_cliente" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

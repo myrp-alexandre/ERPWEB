@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f54e603d40784ea2a012d783e6a46862" Name="Diagram1" >
+        <EntityTypeShape EntityType="Model_contabilidad.ct_grupocble" Width="1.5" PointX="0.75" PointY="8.5" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_periodo" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_anio_fiscal" Width="1.5" PointX="1.375" PointY="12.125" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_periodo_ct_anio_fiscal" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_parametro" Width="1.5" PointX="5.625" PointY="3.75" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_anio_fiscal_x_cuenta_utilidad" Width="1.5" PointX="5.625" PointY="7.125" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_plancta" Width="1.5" PointX="3" PointY="16" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_plancta_ct_grupocble" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_plancta_ct_plancta" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_plancta_nivel" Width="1.5" PointX="0.75" PointY="17.125" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_plancta_ct_plancta_nivel" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_cbtecble" Width="1.5" PointX="8.625" PointY="4.875" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_cbtecble_det" Width="1.5" PointX="10.875" PointY="11.625" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_ct_anio_fiscal" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_ct_periodo" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_det_ct_cbtecble" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_det_ct_plancta" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_punto_cargo" Width="1.5" PointX="0.75" PointY="1" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_det_ct_punto_cargo" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_cbtecble_tipo" Width="1.5" PointX="3.375" PointY="4.75" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_ct_cbtecble_tipo" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo1" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_cbtecble_Reversado" Width="1.5" PointX="10.875" PointY="6.375" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble1" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
