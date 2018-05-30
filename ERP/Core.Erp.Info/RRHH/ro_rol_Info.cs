@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Info.RRHH;
 using System.ComponentModel.DataAnnotations;
-
+using Core.Erp.Info.Contabilidad;
 namespace Core.Erp.Info.RRHH
 {
    public class ro_rol_Info
@@ -17,7 +17,6 @@ namespace Core.Erp.Info.RRHH
         public int IdNomina_TipoLiqui { get; set; }
         [Required(ErrorMessage = "El campo périodo es obligatorio")]
         public int IdPeriodo { get; set; }
-        [Required(ErrorMessage = "El campo descripción es obligatorio")]
         public string Descripcion { get; set; }
         [Required(ErrorMessage = "El campo observación es obligatorio")]
         public string Observacion { get; set; }
@@ -33,5 +32,21 @@ namespace Core.Erp.Info.RRHH
         public Nullable<System.DateTime> FechaCierre { get; set; }
         public string IdCentroCosto { get; set; }
 
+
+
+        public System.DateTime Fechacontabilizacion { get; set; }
+        public string DescripcionProcesoNomina { get; set; }
+        public string Procesado { get; set; }
+        public string Contabilizado { get; set; }
+        public System.DateTime pe_FechaIni { get; set; }
+        public System.DateTime pe_FechaFin { get; set; }
+        public List<ct_cbtecble_det_Info> lst_sueldo_x_pagar { get; set; }
+        public List<ct_cbtecble_det_Info> lst_provisiones { get; set; }
+
+        public  ro_rol_Info()
+        {
+            lst_sueldo_x_pagar = new List<ct_cbtecble_det_Info>();
+            lst_provisiones = new List<ct_cbtecble_det_Info>();
+        }
     }
 }

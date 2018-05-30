@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,8 @@ namespace Core.Erp.Info.RRHH
         public System.DateTime Fecha_Desde { get; set; }
         public System.DateTime Fecha_Hasta { get; set; }
         public System.DateTime Fecha_Retorno { get; set; }
+        [Required(ErrorMessage = "El campo observación es obligatorio")]
+        [StringLength(100, MinimumLength = 4, ErrorMessage = "El campo descripción debe tener mínimo 4 caracteres y máximo 250")]
         public string Observacion { get; set; }
         public string IdUsuario { get; set; }
         public string IdUsuario_Anu { get; set; }
@@ -36,7 +39,18 @@ namespace Core.Erp.Info.RRHH
         public string MotivoAnulacion { get; set; }
         public string ip { get; set; }
         public string nom_pc { get; set; }
-        public Nullable<bool> Gozadas_Pgadas { get; set; }
-        public Nullable<bool> Canceladas { get; set; }
+        public bool Gozadas_Pgadas { get; set; }
+        public bool Canceladas { get; set; }
+
+        public string pe_cedulaRuc { get; set; }
+        public string em_codigo { get; set; }
+        public string pe_nombre_completo { get; set; }
+
+        public List<ro_historico_vacaciones_x_empleado_Info> lst_vacaciones { get; set; }
+        public  ro_Solicitud_Vacaciones_x_empleado_Info()
+        {
+            lst_vacaciones = new List<ro_historico_vacaciones_x_empleado_Info>();
+
+        }
     }
 }

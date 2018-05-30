@@ -21,8 +21,16 @@ namespace Core.Erp.Info.RRHH
         [Required(ErrorMessage = "El campo sueldo es obligatorio")]
         public string IdRubro_sueldo { get; set; }
         [Required(ErrorMessage = "El campo total a pagar es obligatorio")]
-
         public string IdRubro_tot_pagar { get; set; }
-
+        public string IdRubro_aporte_patronal { get; set; }
+        public string IdRubro_fondo_reserva { get; set; }
+        public string IdRubro_prov_vac { get; set; }
+        public string IdRubro_prov_DIII { get; set; }
+        public string IdRubro_prov_DIV { get; set; }
+        public string IdRubro_prov_FR { get; set; }
+        public string IdRubro_DIII { get; set; }
+        public string IdRubro_DIV { get; set; }
+        public string IdRubro_IR { get; set; }
+        public string IdRubro_FR { get; set; }
     }
 }

@@ -19,6 +19,6 @@ namespace Core.Erp.Info.RRHH
         public System.DateTime Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
-        public Nullable<double> Otros_valor { get; set; }
+        public string ru_tipo{ get; set; }
     }
 }

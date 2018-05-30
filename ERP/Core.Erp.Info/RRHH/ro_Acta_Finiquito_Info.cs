@@ -12,7 +12,7 @@ namespace Core.Erp.Info.RRHH
         public decimal IdActaFiniquito { get; set; }
         public decimal IdEmpleado { get; set; }
         public string IdCausaTerminacion { get; set; }
-        public Nullable<decimal> IdContrato { get; set; }
+        public decimal IdContrato { get; set; }
         public Nullable<int> IdCargo { get; set; }
         public System.DateTime FechaIngreso { get; set; }
         public System.DateTime FechaSalida { get; set; }
@@ -31,13 +31,22 @@ namespace Core.Erp.Info.RRHH
         public string Estado { get; set; }
         public string MotiAnula { get; set; }
         public Nullable<int> IdCodSectorial { get; set; }
-        public Nullable<bool> EsMujerEmbarazada { get; set; }
-        public Nullable<bool> EsDirigenteSindical { get; set; }
-        public Nullable<bool> EsPorDiscapacidad { get; set; }
-        public Nullable<bool> EsPorEnfermedadNoProfesional { get; set; }
+        public bool EsMujerEmbarazada { get; set; }
+        public bool EsDirigenteSindical { get; set; }
+        public bool EsPorDiscapacidad { get; set; }
+        public bool EsPorEnfermedadNoProfesional { get; set; }
         public Nullable<int> IdTipoCbte { get; set; }
         public Nullable<decimal> IdCbteCble { get; set; }
         public Nullable<decimal> IdOrdenPago { get; set; }
+        public string Contrato_tipo { get; set; }
+
+        public string pe_apellido { get; set; }
+        public string pe_nombre { get; set; }
+        public string em_codigo { get; set; }
+        public string ca_descripcion { get; set; }
+        public string Contrato { get; set; }
+        public string pe_nombre_completo { get; set; }
+
         public List<ro_Acta_Finiquito_Detalle_Info> lst_detalle { get; set; }
 
     }

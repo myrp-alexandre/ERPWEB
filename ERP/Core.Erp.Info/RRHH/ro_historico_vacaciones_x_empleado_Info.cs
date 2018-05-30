@@ -20,5 +20,8 @@ namespace Core.Erp.Info.RRHH
 
         public int DiasPendientes { get; set; }
 
+
+        public string Descripcion { get; set; }
+
     }
 }
