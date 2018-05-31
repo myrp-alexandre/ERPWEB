@@ -883,6 +883,9 @@
     <Compile Include="VWINV_002.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="VWINV_004.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="VWROL_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
