@@ -405,11 +405,11 @@
     <Compile Include="Reportes\Inventario\INV_003_Rpt.Designer.cs">
       <DependentUpon>INV_003_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\VWROL_001_Rpt.cs">
+    <Compile Include="Reportes\RRHH\ROL_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\VWROL_001_Rpt.Designer.cs">
-      <DependentUpon>VWROL_001_Rpt.cs</DependentUpon>
+    <Compile Include="Reportes\RRHH\ROL_001_Rpt.Designer.cs">
+      <DependentUpon>ROL_001_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -8077,8 +8077,8 @@
     <EmbeddedResource Include="Reportes\Inventario\INV_003_Rpt.resx">
       <DependentUpon>INV_003_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\VWROL_001_Rpt.resx">
-      <DependentUpon>VWROL_001_Rpt.cs</DependentUpon>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_001_Rpt.resx">
+      <DependentUpon>ROL_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

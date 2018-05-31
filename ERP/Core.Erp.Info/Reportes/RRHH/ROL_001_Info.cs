@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.Reportes.RRHH
 {
-   public class VWROL_001_Info
+   public class ROL_001_Info
     {
         public decimal IdEmpleado { get; set; }
         public string Ruc { get; set; }

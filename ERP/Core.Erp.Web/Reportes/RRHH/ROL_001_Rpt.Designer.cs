@@ -1,6 +1,6 @@
 ﻿namespace Core.Erp.Web.Reportes.RRHH
 {
-    partial class VWROL_001_Rpt
+    partial class ROL_001_Rpt
     {
         /// <summary>
         /// Required designer variable.
@@ -96,7 +96,7 @@
             // 
             // objectDataSource1
             // 
-            this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.RRHH.VWROL_001_Info);
+            this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.RRHH.ROL_001_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
             // xrPivotGrid1

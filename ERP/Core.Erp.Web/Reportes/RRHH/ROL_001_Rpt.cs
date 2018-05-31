@@ -9,9 +9,9 @@ using System.Collections.Generic;
 
 namespace Core.Erp.Web.Reportes.RRHH
 {
-    public partial class VWROL_001_Rpt : DevExpress.XtraReports.UI.XtraReport
+    public partial class ROL_001_Rpt : DevExpress.XtraReports.UI.XtraReport
     {
-        public VWROL_001_Rpt()
+        public ROL_001_Rpt()
         {
             InitializeComponent();
         }
@@ -33,8 +33,8 @@ namespace Core.Erp.Web.Reportes.RRHH
                 int IdPeriodo = p_IdPeriodo.Value == null ? 0 : Convert.ToInt32(p_IdPeriodo.Value);
 
 
-                VWROL_001_Bus bus_rpt = new VWROL_001_Bus();
-                List<VWROL_001_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo);
+                ROL_001_Bus bus_rpt = new ROL_001_Bus();
+                List<ROL_001_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo);
                 this.DataSource = lst_rpt;
             }
             catch (Exception)

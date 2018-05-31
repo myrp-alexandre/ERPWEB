@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using Core.Erp.Info.Reportes.RRHH;
 namespace Core.Erp.Data.Reportes.RRHH
 {
-   public class VWROL_001_Data
+   public class ROL_001_Data
     {
-        public List<VWROL_001_Info> get_list(int IdEmpresa, int IdNomina, int IdNominaTipo, int IdPeriodo)
+        public List<ROL_001_Info> get_list(int IdEmpresa, int IdNomina, int IdNominaTipo, int IdPeriodo)
         {
             try
             {
-                List<VWROL_001_Info> Lista;
+                List<ROL_001_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = (from q in Context.VWROL_001
@@ -20,7 +20,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                              && q.IdNominaTipo == IdNomina
                              && q.IdNominaTipoLiqui == IdNominaTipo
                              && q.IdPeriodo == IdPeriodo
-                             select new VWROL_001_Info
+                             select new ROL_001_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdEmpleado = q.IdEmpleado,
