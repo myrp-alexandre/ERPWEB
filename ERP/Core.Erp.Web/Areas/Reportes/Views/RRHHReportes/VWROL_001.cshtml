@@ -1,0 +1,23 @@
+﻿@model Core.Erp.Web.Reportes.RRHH.VWROL_001_Rpt
+@{
+    ViewBag.Title = "VWROL_001";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+@using (Html.BeginForm())
+{
+    //Html.DevExpress().DocumentViewer(settings =>
+    //{
+    //    settings.Name = "ROL_001";
+    //    settings.CallbackRouteValues = new { Controller = "RRHHReportes", Action = "VWROL_001" };
+    //    settings.ExportRouteValues = new { Controller = "RRHHReportes", Action = "VWROL_001" };
+    //   // settings.Report = (XtraReport)Model;
+    //    settings.ToolbarMode = DocumentViewerToolbarMode.Ribbon;
+
+    //}).GetHtml();
+    @Html.Action("DocumentViewerPartial");
+
+
+}

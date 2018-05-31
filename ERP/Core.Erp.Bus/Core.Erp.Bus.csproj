@@ -139,6 +139,7 @@
     <Compile Include="Reportes\Contabilidad\VWCONTA_001_Bus.cs" />
     <Compile Include="Reportes\Inventario\VWINV_001_Bus.cs" />
     <Compile Include="Reportes\Inventario\VWINV_002_Bus.cs" />
+    <Compile Include="Reportes\RRHH\VWROL_001_Bus.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Bus.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Detalle_Bus.cs" />
     <Compile Include="RRHH\ro_area_Bus.cs" />

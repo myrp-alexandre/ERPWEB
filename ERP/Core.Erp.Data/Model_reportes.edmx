@@ -6,7 +6,73 @@
     <edmx:StorageModels>
     <Schema Namespace="Model_reportes.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWACTF_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.dbo.VWROL_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWROL_001">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdNominaTipoLiqui" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="Cerrado" />
+            <PropertyRef Name="de_descripcion" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="Orden" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="IdDepartamento" />
+            <PropertyRef Name="IdArea" />
+            <PropertyRef Name="IdDivision" />
+            <PropertyRef Name="Area" />
+            <PropertyRef Name="Division" />
+            <PropertyRef Name="pe_FechaIni" />
+            <PropertyRef Name="pe_FechaFin" />
+            <PropertyRef Name="pe_estado" />
+            <PropertyRef Name="Nomina" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="ru_codRolGen" />
+            <PropertyRef Name="ru_descripcion" />
+            <PropertyRef Name="NombreCorto" />
+            <PropertyRef Name="DescripcionProcesoNomina" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="Su_Descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="int" Nullable="false" />
+          <Property Name="IdNominaTipoLiqui" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Observacion" Type="varchar" MaxLength="200" />
+          <Property Name="Cerrado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="de_descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdRubro" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Orden" Type="int" Nullable="false" />
+          <Property Name="rub_visible_reporte" Type="bit" />
+          <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="em_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="IdDepartamento" Type="int" Nullable="false" />
+          <Property Name="IdArea" Type="int" Nullable="false" />
+          <Property Name="IdDivision" Type="int" Nullable="false" />
+          <Property Name="Area" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Division" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="pe_FechaIni" Type="smalldatetime" Nullable="false" />
+          <Property Name="pe_FechaFin" Type="smalldatetime" Nullable="false" />
+          <Property Name="pe_estado" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="Nomina" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+          <Property Name="ru_codRolGen" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
+          <Property Name="ru_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NombreCorto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DescripcionProcesoNomina" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="em_fechaIngaRol" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.web.VWACTF_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACTF_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -48,7 +114,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWACTF_001' no tie
           <Property Name="pc_Cuenta" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWACTF_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.web.VWACTF_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACTF_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -89,7 +155,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWACTF_002' no tie
           <Property Name="pc_Cuenta" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWACTF_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.web.VWACTF_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACTF_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -128,7 +194,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWACTF_003' no tie
           <Property Name="pc_Cuenta" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCAJ_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.web.VWCAJ_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCAJ_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -172,7 +238,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCAJ_001' no tien
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCONTA_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.web.VWCONTA_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCONTA_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -202,7 +268,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCONTA_001' no ti
           <Property Name="dc_Observacion" Type="varchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.web.VWINV_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWINV_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -251,7 +317,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_001' no tien
           <Property Name="signo" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.web.VWINV_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWINV_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -300,6 +366,43 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_002' no tien
           <Property Name="signo" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityContainer Name="Model_reportesStoreContainer">
+          <EntitySet Name="VWROL_001" EntityType="Self.VWROL_001" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VWROL_001].[IdEmpresa] AS [IdEmpresa], 
+    [VWROL_001].[IdNominaTipo] AS [IdNominaTipo], 
+    [VWROL_001].[IdNominaTipoLiqui] AS [IdNominaTipoLiqui], 
+    [VWROL_001].[Descripcion] AS [Descripcion], 
+    [VWROL_001].[Observacion] AS [Observacion], 
+    [VWROL_001].[Cerrado] AS [Cerrado], 
+    [VWROL_001].[de_descripcion] AS [de_descripcion], 
+    [VWROL_001].[IdEmpleado] AS [IdEmpleado], 
+    [VWROL_001].[IdRubro] AS [IdRubro], 
+    [VWROL_001].[Orden] AS [Orden], 
+    [VWROL_001].[rub_visible_reporte] AS [rub_visible_reporte], 
+    [VWROL_001].[pe_nombre] AS [pe_nombre], 
+    [VWROL_001].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [VWROL_001].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [VWROL_001].[em_codigo] AS [em_codigo], 
+    [VWROL_001].[IdDepartamento] AS [IdDepartamento], 
+    [VWROL_001].[IdArea] AS [IdArea], 
+    [VWROL_001].[IdDivision] AS [IdDivision], 
+    [VWROL_001].[Area] AS [Area], 
+    [VWROL_001].[Division] AS [Division], 
+    [VWROL_001].[pe_FechaIni] AS [pe_FechaIni], 
+    [VWROL_001].[pe_FechaFin] AS [pe_FechaFin], 
+    [VWROL_001].[pe_estado] AS [pe_estado], 
+    [VWROL_001].[Nomina] AS [Nomina], 
+    [VWROL_001].[IdPeriodo] AS [IdPeriodo], 
+    [VWROL_001].[ru_codRolGen] AS [ru_codRolGen], 
+    [VWROL_001].[pe_apellido] AS [pe_apellido], 
+    [VWROL_001].[ru_descripcion] AS [ru_descripcion], 
+    [VWROL_001].[NombreCorto] AS [NombreCorto], 
+    [VWROL_001].[DescripcionProcesoNomina] AS [DescripcionProcesoNomina], 
+    [VWROL_001].[Valor] AS [Valor], 
+    [VWROL_001].[Su_Descripcion] AS [Su_Descripcion], 
+    [VWROL_001].[em_fechaIngaRol] AS [em_fechaIngaRol]
+    FROM [dbo].[VWROL_001] AS [VWROL_001]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VWACTF_001" EntityType="Self.VWACTF_001" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
     [VWACTF_001].[IdEmpresa] AS [IdEmpresa], 
@@ -507,6 +610,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_002' no tien
           <EntitySet Name="VWINV_001" EntityType="Model_reportes.VWINV_001" />
           <EntitySet Name="VWINV_002" EntityType="Model_reportes.VWINV_002" />
           <EntitySet Name="VWCAJ_001" EntityType="Model_reportes.VWCAJ_001" />
+          <EntitySet Name="VWROL_001" EntityType="Model_reportes.VWROL_001" />
         </EntityContainer>
         <EntityType Name="VWACTF_001">
           <Key>
@@ -760,6 +864,70 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_002' no tien
           <Property Name="tc_TipoCbte" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
           <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="VWROL_001">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdNominaTipoLiqui" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="Cerrado" />
+            <PropertyRef Name="de_descripcion" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="Orden" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="IdDepartamento" />
+            <PropertyRef Name="IdArea" />
+            <PropertyRef Name="IdDivision" />
+            <PropertyRef Name="Area" />
+            <PropertyRef Name="Division" />
+            <PropertyRef Name="pe_FechaIni" />
+            <PropertyRef Name="pe_FechaFin" />
+            <PropertyRef Name="pe_estado" />
+            <PropertyRef Name="Nomina" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="ru_codRolGen" />
+            <PropertyRef Name="ru_descripcion" />
+            <PropertyRef Name="NombreCorto" />
+            <PropertyRef Name="DescripcionProcesoNomina" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="Su_Descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipoLiqui" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Observacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Cerrado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="de_descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Orden" Type="Int32" Nullable="false" />
+          <Property Name="rub_visible_reporte" Type="Boolean" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
+          <Property Name="IdArea" Type="Int32" Nullable="false" />
+          <Property Name="IdDivision" Type="Int32" Nullable="false" />
+          <Property Name="Area" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Division" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_FechaIni" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="pe_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="pe_estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Nomina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="ru_codRolGen" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ru_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NombreCorto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DescripcionProcesoNomina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="em_fechaIngaRol" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -942,6 +1110,45 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_002' no tien
                 <ScalarProperty Name="secuencia" ColumnName="secuencia" />
                 <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
                 <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWROL_001">
+            <EntityTypeMapping TypeName="Model_reportes.VWROL_001">
+              <MappingFragment StoreEntitySet="VWROL_001">
+                <ScalarProperty Name="em_fechaIngaRol" ColumnName="em_fechaIngaRol" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="DescripcionProcesoNomina" ColumnName="DescripcionProcesoNomina" />
+                <ScalarProperty Name="NombreCorto" ColumnName="NombreCorto" />
+                <ScalarProperty Name="ru_descripcion" ColumnName="ru_descripcion" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="ru_codRolGen" ColumnName="ru_codRolGen" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="Nomina" ColumnName="Nomina" />
+                <ScalarProperty Name="pe_estado" ColumnName="pe_estado" />
+                <ScalarProperty Name="pe_FechaFin" ColumnName="pe_FechaFin" />
+                <ScalarProperty Name="pe_FechaIni" ColumnName="pe_FechaIni" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="IdDivision" ColumnName="IdDivision" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="rub_visible_reporte" ColumnName="rub_visible_reporte" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="de_descripcion" ColumnName="de_descripcion" />
+                <ScalarProperty Name="Cerrado" ColumnName="Cerrado" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
+                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

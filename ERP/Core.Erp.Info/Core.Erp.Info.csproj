@@ -141,6 +141,7 @@
     <Compile Include="Reportes\Contabilidad\VWCONTA_001_Info.cs" />
     <Compile Include="Reportes\Inventario\VWINV_001_Info.cs" />
     <Compile Include="Reportes\Inventario\VWINV_002_Info.cs" />
+    <Compile Include="Reportes\RRHH\VWROL_001_Info.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Detalle_Info.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Info.cs" />
     <Compile Include="RRHH\ro_area_Info.cs" />
