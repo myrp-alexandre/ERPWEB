@@ -546,13 +546,6 @@
       <DependentUpon>Model_seguridad_acceso.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reportes\ActivoFijo\VWACTF_001_Data.cs" />
-    <Compile Include="Reportes\ActivoFijo\VWACTF_002_Data.cs" />
-    <Compile Include="Reportes\ActivoFijo\VWACTF_003_Data.cs" />
-    <Compile Include="Reportes\Caja\VWCAJ_001_Data.cs" />
-    <Compile Include="Reportes\Contabilidad\VWCONTA_001_Data.cs" />
-    <Compile Include="Reportes\Inventario\VWINV_001_Data.cs" />
-    <Compile Include="Reportes\Inventario\VWINV_002_Data.cs" />
     <Compile Include="Reportes\RRHH\VWROL_001_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_001_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_002_Data.cs" />

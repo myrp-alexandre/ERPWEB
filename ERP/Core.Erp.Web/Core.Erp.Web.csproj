@@ -8019,7 +8019,6 @@
     <Folder Include="Areas\Importacion\Views\Shared\" />
     <Folder Include="Areas\Inventario\Models\" />
     <Folder Include="Areas\Reportes\Models\" />
-    <Folder Include="Areas\Reportes\Views\RRHH\" />
     <Folder Include="Areas\RRHH\Models\" />
     <Folder Include="Areas\RRHH\Views\CapacitacionesEmpleado\" />
     <Folder Include="Areas\RRHH\Views\DocumentoEmpleado\" />
