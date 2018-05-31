@@ -20,7 +20,7 @@ namespace Core.Erp.Web.Reportes.ActivoFijo
 
 
 
-        private void VWACTF_003_Rpt_BeforePrint_1(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void ACTF_003_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
 
             lbl_fecha.Text = DateTime.Now.ToString("d/MM/yyyy hh:mm:ss");
@@ -30,7 +30,6 @@ namespace Core.Erp.Web.Reportes.ActivoFijo
 
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             decimal IdRetiroActivo = p_IdRetiroActivo.Value == null ? 0 : Convert.ToDecimal(p_IdRetiroActivo.Value);
-            double dc_Valor = p_dc_Valor.Value == null ? 0 : Convert.ToDouble(p_dc_Valor.Value);
 
             ACTF_003_Bus bus_rpt = new ACTF_003_Bus();
             List<ACTF_003_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdRetiroActivo);

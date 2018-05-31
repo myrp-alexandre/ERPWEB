@@ -18,7 +18,7 @@ namespace Core.Erp.Web.Reportes.ActivoFijo
             InitializeComponent();
         }
 
-        private void VWACTF_001_Rpt_BeforePrint_1(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void ACTF_001_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
             lbl_empresa.Text = empresa;
@@ -27,7 +27,6 @@ namespace Core.Erp.Web.Reportes.ActivoFijo
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             decimal Id_Mejora_Baja_Activo = p_Id_Mejora_Baja_Activo.Value == null ? 0 : Convert.ToDecimal(p_Id_Mejora_Baja_Activo.Value);
             string Id_Tipo = p_Id_Tipo.Value == null ? "" : Convert.ToString(p_Id_Tipo.Value);
-            double dc_Valor = p_dc_Valor.Value == null ? 0 : Convert.ToDouble(p_dc_Valor.Value);
 
 
             ACTF_001_Bus bus_rpt = new ACTF_001_Bus();
