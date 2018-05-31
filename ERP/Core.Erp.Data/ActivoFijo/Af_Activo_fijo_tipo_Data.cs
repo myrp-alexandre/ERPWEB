@@ -159,7 +159,10 @@ namespace Core.Erp.Data.ActivoFijo
                 {
                     Af_Activo_fijo_tipo Entity = Context.Af_Activo_fijo_tipo.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdActivoFijoTipo == info.IdActivoFijoTipo);
                     if (Entity == null) return false;
-                    
+                    Entity.Af_anio_depreciacion = info.Af_anio_depreciacion;
+                    Entity.Af_Descripcion = info.Af_Descripcion;
+                    Entity.Af_Porcentaje_depre = info.Af_Porcentaje_depre;
+                    Entity.CodActivoFijo = info.CodActivoFijo;
                     Entity.IdCtaCble_Activo = info.IdCtaCble_Activo;
                     Entity.IdCtaCble_Dep_Acum = info.IdCtaCble_Dep_Acum;
                     Entity.IdCtaCble_Gastos_Depre = info.IdCtaCble_Gastos_Depre;
