@@ -20,6 +20,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                              && q.IdNominaTipo == IdNomina
                              && q.IdNominaTipoLiqui == IdNominaTipo
                              && q.IdPeriodo == IdPeriodo
+                             && q.rub_visible_reporte==true
                              select new ROL_001_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -48,7 +49,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  IdDepartamento = q.IdDepartamento,
                                  IdArea = q.IdArea,
                                  Area = q.Area,
-                                 
+                                 Periodo=q.Periodo
 
                              }).ToList();
                 }

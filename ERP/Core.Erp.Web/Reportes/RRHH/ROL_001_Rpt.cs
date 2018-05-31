@@ -6,7 +6,7 @@ using DevExpress.XtraReports.UI;
 using Core.Erp.Bus.Reportes.RRHH;
 using Core.Erp.Info.Reportes.RRHH;
 using System.Collections.Generic;
-
+using System.Linq;
 namespace Core.Erp.Web.Reportes.RRHH
 {
     public partial class ROL_001_Rpt : DevExpress.XtraReports.UI.XtraReport

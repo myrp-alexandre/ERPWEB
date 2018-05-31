@@ -8,7 +8,7 @@
 }
 @using (Html.BeginForm())
 {
-    Html.DevExpress().WebDocumentViewer(settings =>
+    @Html.DevExpress().WebDocumentViewer(settings =>
     {
         settings.MobileMode = false;
         settings.Name = "webDocumentViewer";

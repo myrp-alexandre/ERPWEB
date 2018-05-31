@@ -41,6 +41,8 @@ namespace Core.Erp.Info.Reportes.RRHH
         public double Valor { get; set; }
         public string Su_Descripcion { get; set; }
         public string Empleado { get; set; }
+        public string Periodo { get; set; }
+
         public Nullable<System.DateTime> em_fechaIngaRol { get; set; }
     }
 }
