@@ -25,22 +25,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.empresa = Session["nom_empresa"].ToString();
             if (IdPeriodo == 0)
                 model.RequestParameters = false;
-           // ViewData["Report"] = model;
-            return View("~/Areas/Reportes/Views/RRHHReportes/VWROL_001.cshtml",model);
-           // return DocumentViewerExtension.ExportTo(,);
+            return View(model);
         }
 
 
-        Core.Erp.Web.Reportes.RRHH.VWROL_001_Rpt report = new Core.Erp.Web.Reportes.RRHH.VWROL_001_Rpt();
-
-        public ActionResult DocumentViewerPartial()
-        {
-            return View(report);
-        }
-
-        public ActionResult DocumentViewerPartialExport()
-        {
-            return DocumentViewerExtension.ExportTo(report, Request);
-        }
     }
 }

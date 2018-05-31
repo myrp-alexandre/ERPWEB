@@ -8,16 +8,10 @@
 }
 @using (Html.BeginForm())
 {
-    //Html.DevExpress().DocumentViewer(settings =>
-    //{
-    //    settings.Name = "ROL_001";
-    //    settings.CallbackRouteValues = new { Controller = "RRHHReportes", Action = "VWROL_001" };
-    //    settings.ExportRouteValues = new { Controller = "RRHHReportes", Action = "VWROL_001" };
-    //   // settings.Report = (XtraReport)Model;
-    //    settings.ToolbarMode = DocumentViewerToolbarMode.Ribbon;
-
-    //}).GetHtml();
-    @Html.Action("DocumentViewerPartial");
-
+    Html.DevExpress().WebDocumentViewer(settings =>
+    {
+        settings.MobileMode = false;
+        settings.Name = "webDocumentViewer";
+    }).Bind(Model).GetHtml();
 
 }

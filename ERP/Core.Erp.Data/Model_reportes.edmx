@@ -625,9 +625,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.web.VWINV_002' no tiene d
           <EntitySet Name="VWINV_001" EntityType="Model_reportes.VWINV_001" />
           <EntitySet Name="VWINV_002" EntityType="Model_reportes.VWINV_002" />
           <EntitySet Name="VWCAJ_001" EntityType="Model_reportes.VWCAJ_001" />
-<<<<<<< HEAD
           <EntitySet Name="VWROL_001" EntityType="Model_reportes.VWROL_001" />
-=======
           <FunctionImport Name="SPINV_003" ReturnType="Collection(Model_reportes.SPINV_003_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdSucursal_ini" Mode="In" Type="Int32" />
@@ -643,7 +641,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.web.VWINV_002' no tiene d
             <Parameter Name="fecha_corte" Mode="In" Type="DateTime" />
             <Parameter Name="mostrar_stock_0" Mode="In" Type="Boolean" />
           </FunctionImport>
->>>>>>> 8c4b02720abbd585eefc13cbb6c2b2f23d139ae4
         </EntityContainer>
         <EntityType Name="VWACTF_001">
           <Key>
@@ -897,7 +894,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.web.VWINV_002' no tiene d
           <Property Name="tc_TipoCbte" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
           <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
-<<<<<<< HEAD
         <EntityType Name="VWROL_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -962,7 +958,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.web.VWINV_002' no tiene d
           <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
           <Property Name="em_fechaIngaRol" Type="DateTime" Precision="3" />
         </EntityType>
-=======
         <ComplexType Name="SPINV_003_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
           <Property Type="Int32" Name="IdSucursal" Nullable="false" />
@@ -988,7 +983,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.web.VWINV_002' no tiene d
           <Property Type="String" Name="IdPresentacion" Nullable="false" MaxLength="25" />
           <Property Type="String" Name="nom_presentacion" Nullable="false" MaxLength="150" />
         </ComplexType>
->>>>>>> 8c4b02720abbd585eefc13cbb6c2b2f23d139ae4
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1175,7 +1169,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.web.VWINV_002' no tiene d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-<<<<<<< HEAD
           <EntitySetMapping Name="VWROL_001">
             <EntityTypeMapping TypeName="Model_reportes.VWROL_001">
               <MappingFragment StoreEntitySet="VWROL_001">
@@ -1215,7 +1208,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.web.VWINV_002' no tiene d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-=======
           <FunctionImportMapping FunctionImportName="SPINV_003" FunctionName="Model_reportes.Store.SPINV_003">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Model_reportes.SPINV_003_Result">
@@ -1245,7 +1237,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.web.VWINV_002' no tiene d
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
->>>>>>> 8c4b02720abbd585eefc13cbb6c2b2f23d139ae4
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
