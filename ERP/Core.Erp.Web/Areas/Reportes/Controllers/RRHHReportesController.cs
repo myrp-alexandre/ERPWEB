@@ -14,7 +14,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     {
 
 
-        public ActionResult VWROL_001(int IdEmpresa=0, int IdNomina=0, int IdNominaTipo=0, int IdPeriodo=0)
+        public ActionResult ROL_001(int IdEmpresa=0, int IdNomina=0, int IdNominaTipo=0, int IdPeriodo=0)
         {
             ROL_001_Rpt model = new ROL_001_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
