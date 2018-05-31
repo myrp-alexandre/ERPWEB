@@ -134,7 +134,6 @@
     <Compile Include="Inventario\in_UnidadMedida_Equiv_conversion_Info.cs" />
     <Compile Include="Inventario\in_UnidadMedida_Info.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-<<<<<<< HEAD
     <Compile Include="Reportes\ActivoFijo\VWACTF_001_Info.cs" />
     <Compile Include="Reportes\ActivoFijo\VWACTF_002_Info.cs" />
     <Compile Include="Reportes\ActivoFijo\VWACTF_003_Info.cs" />
@@ -143,7 +142,6 @@
     <Compile Include="Reportes\Inventario\VWINV_001_Info.cs" />
     <Compile Include="Reportes\Inventario\VWINV_002_Info.cs" />
     <Compile Include="Reportes\RRHH\VWROL_001_Info.cs" />
-=======
     <Compile Include="Reportes\ActivoFijo\ACTF_001_Info.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_002_Info.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_003_Info.cs" />
@@ -152,7 +150,6 @@
     <Compile Include="Reportes\Inventario\INV_001_Info.cs" />
     <Compile Include="Reportes\Inventario\INV_002_Info.cs" />
     <Compile Include="Reportes\Inventario\INV_003_Info.cs" />
->>>>>>> 8c4b02720abbd585eefc13cbb6c2b2f23d139ae4
     <Compile Include="RRHH\ro_Acta_Finiquito_Detalle_Info.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Info.cs" />
     <Compile Include="RRHH\ro_area_Info.cs" />

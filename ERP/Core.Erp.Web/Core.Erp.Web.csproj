@@ -7902,9 +7902,7 @@
     <Content Include="Areas\RRHH\Views\ProcesarRol\_GridViewPartial_provisiones.cshtml" />
     <Content Include="Areas\RRHH\Views\ProcesarRol\_GridViewPartial_sueldo_x_pagar.cshtml" />
     <Content Include="Areas\RRHH\Views\Vacaciones\_GridViewPartial_vaciones_periodos.cshtml" />
-<<<<<<< HEAD
     <Content Include="Areas\Reportes\Views\RRHHReportes\VWROL_001.cshtml" />
-=======
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_003.cshtml" />
     <Content Include="bower_DevExpress\ace-builds\.bower.json" />
     <Content Include="bower_DevExpress\ace-builds\bower.json" />
@@ -7951,7 +7949,6 @@
     <Content Include="bower_DevExpress\knockout\LICENSE" />
     <Content Include="bower_DevExpress\knockout\package.json" />
     <Content Include="bower_DevExpress\knockout\README.md" />
->>>>>>> 8c4b02720abbd585eefc13cbb6c2b2f23d139ae4
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
