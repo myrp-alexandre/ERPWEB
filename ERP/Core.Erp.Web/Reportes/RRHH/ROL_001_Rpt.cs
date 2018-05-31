@@ -23,6 +23,8 @@ namespace Core.Erp.Web.Reportes.RRHH
         {
             try
             {
+                (sender as XtraReport).PrintingSystem.Document.AutoFitToPagesWidth = 1;
+
                 lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
                 lbl_empresa.Text = empresa;
                 lbl_usuario.Text = usuario;
@@ -36,6 +38,19 @@ namespace Core.Erp.Web.Reportes.RRHH
                 ROL_001_Bus bus_rpt = new ROL_001_Bus();
                 List<ROL_001_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo);
                 this.DataSource = lst_rpt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void ROL_001_Rpt_AfterPrint(object sender, EventArgs e)
+        {
+            try
+            {
+                (sender as XtraReport).PrintingSystem.Document.AutoFitToPagesWidth = 1;
             }
             catch (Exception)
             {
