@@ -5,6 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.Helps;
+using Core.Erp.Bus.General;
+using Core.Erp.Bus.Inventario;
+
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
@@ -95,6 +98,38 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
+        }
+
+        private void cargar_combos(cl_filtros_Info model)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+
+            tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+            var lst_bodega = bus_bodega.get_list(IdEmpresa, model.IdSucursal, false);
+            ViewBag.lst_bodega = lst_bodega;
+
+            in_Producto_Bus bus_producto = new in_Producto_Bus();
+            var lst_producto = bus_producto.get_list(IdEmpresa, false);
+            ViewBag.lst_producto = lst_producto;
+
+            in_categorias_Bus bus_categoria = new in_categorias_Bus();
+            var lst_categoria = bus_categoria.get_list(IdEmpresa, false);
+            ViewBag.lst_categoria = lst_categoria;
+
+            in_linea_Bus bus_linea = new in_linea_Bus();
+            var lst_linea = bus_linea.get_list(IdEmpresa, model.IdCategoria, false);
+            ViewBag.lst_linea = lst_linea;
+
+            in_grupo_Bus bus_grupo = new in_grupo_Bus();
+            var lst_grupo = bus_grupo.get_list(IdEmpresa, model.IdCategoria, model.IdLinea, false);
+            ViewBag.lst_grupo = lst_grupo;
+
+            in_subgrupo_Bus bus_subgrupo = new in_subgrupo_Bus();
+            var lst_subgrupo = bus_subgrupo.get_list(IdEmpresa, model.IdCategoria, model.IdLinea, model.IdGrupo, false);
+            ViewBag.lst_subgrupo = lst_subgrupo;
         }
     }
 }

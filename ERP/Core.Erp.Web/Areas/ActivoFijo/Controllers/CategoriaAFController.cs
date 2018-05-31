@@ -63,7 +63,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         public ActionResult Modificar(int IdActivoFijoTipo = 0, int IdCategoriaAF = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            Af_Activo_fijo_Categoria_Info model = bus_categoria.get_info(IdEmpresa, IdActivoFijoTipo, IdCategoriaAF);
+            Af_Activo_fijo_Categoria_Info model = bus_categoria.get_info(IdEmpresa, IdCategoriaAF);
             if (model == null)
                 return RedirectToAction("Index", new { IdActivoFijoTipo = IdActivoFijoTipo });
             ViewBag.IdActivoFijoTipo = IdActivoFijoTipo;
@@ -86,7 +86,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         public ActionResult Anular(int IdActivoFijoTipo = 0, int IdCategoriaAF = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            Af_Activo_fijo_Categoria_Info model = bus_categoria.get_info(IdEmpresa, IdActivoFijoTipo, IdCategoriaAF);
+            Af_Activo_fijo_Categoria_Info model = bus_categoria.get_info(IdEmpresa, IdCategoriaAF);
             if (model == null)
                 return RedirectToAction("Index", new { IdActivoFijoTipo = IdActivoFijoTipo });
             ViewBag.IdActivoFijoTipo = IdActivoFijoTipo;

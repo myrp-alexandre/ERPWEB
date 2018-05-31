@@ -11,8 +11,6 @@ namespace Core.Erp.Info.ActivoFijo
     {
         public int IdEmpresa { get; set; }
         public int IdActivoFijoTipo { get; set; }
-
-        [Required(ErrorMessage = ("el campo código es obligatorio"))]
         [StringLength(150, MinimumLength = 1, ErrorMessage = "el campo código debe tener mínimo 1 caracter y máximo 150")]
         public string CodActivoFijo { get; set; }
         [Required(ErrorMessage = ("el campo descripción es obligatorio"))]

@@ -55,14 +55,14 @@ namespace Core.Erp.Data.ActivoFijo
             }
         }
 
-        public Af_Activo_fijo_Categoria_Info get_info(int IdEmpresa, int IdActivoFijoTipo, int IdCategoriaAF)
+        public Af_Activo_fijo_Categoria_Info get_info(int IdEmpresa, int IdCategoriaAF)
         {
             try
             {
                 Af_Activo_fijo_Categoria_Info info = new Af_Activo_fijo_Categoria_Info();
                 using (Entities_activo_fijo Context = new Entities_activo_fijo())
                 {
-                    Af_Activo_fijo_Categoria Entity = Context.Af_Activo_fijo_Categoria.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdActivoFijoTipo == IdActivoFijoTipo && q.IdCategoriaAF == IdCategoriaAF);
+                    Af_Activo_fijo_Categoria Entity = Context.Af_Activo_fijo_Categoria.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdCategoriaAF == IdCategoriaAF);
                     if (Entity == null) return null;
                     info = new Af_Activo_fijo_Categoria_Info
                     {
@@ -143,7 +143,7 @@ namespace Core.Erp.Data.ActivoFijo
             {
                 using (Entities_activo_fijo Context = new Entities_activo_fijo())
                 {
-                    Af_Activo_fijo_Categoria Entity = Context.Af_Activo_fijo_Categoria.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdActivoFijoTipo == info.IdActivoFijoTipo && q.IdCategoriaAF == info.IdCategoriaAF);
+                    Af_Activo_fijo_Categoria Entity = Context.Af_Activo_fijo_Categoria.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdCategoriaAF == info.IdCategoriaAF);
                     if (Entity == null) return false;
 
                     Entity.CodCategoriaAF = info.CodCategoriaAF;
@@ -169,7 +169,7 @@ namespace Core.Erp.Data.ActivoFijo
             {
                 using (Entities_activo_fijo Context = new Entities_activo_fijo())
                 {
-                    Af_Activo_fijo_Categoria Entity = Context.Af_Activo_fijo_Categoria.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdActivoFijoTipo == info.IdActivoFijoTipo && q.IdCategoriaAF == info.IdCategoriaAF);
+                    Af_Activo_fijo_Categoria Entity = Context.Af_Activo_fijo_Categoria.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdCategoriaAF == info.IdCategoriaAF);
                     if (Entity == null) return false;
 
                     Entity.Estado = info.Estado = "I";
