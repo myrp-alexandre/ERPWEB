@@ -43,5 +43,6 @@ namespace Core.Erp.Data
         public Nullable<int> mes { get; set; }
         public Nullable<decimal> IdProducto_padre { get; set; }
         public string pr_descripcion_padre { get; set; }
+        public int IdBodega { get; set; }
     }
 }
