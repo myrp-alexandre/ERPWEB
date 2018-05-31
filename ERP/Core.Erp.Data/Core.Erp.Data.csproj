@@ -546,6 +546,7 @@
       <DependentUpon>Model_seguridad_acceso.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
     <Compile Include="Reportes\ActivoFijo\VWACTF_001_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\VWACTF_002_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\VWACTF_003_Data.cs" />
@@ -554,6 +555,16 @@
     <Compile Include="Reportes\Inventario\VWINV_001_Data.cs" />
     <Compile Include="Reportes\Inventario\VWINV_002_Data.cs" />
     <Compile Include="Reportes\RRHH\VWROL_001_Data.cs" />
+=======
+    <Compile Include="Reportes\ActivoFijo\ACTF_001_Data.cs" />
+    <Compile Include="Reportes\ActivoFijo\ACTF_002_Data.cs" />
+    <Compile Include="Reportes\ActivoFijo\ACTF_003_Data.cs" />
+    <Compile Include="Reportes\Caja\CAJ_001_Data.cs" />
+    <Compile Include="Reportes\Contabilidad\CONTA_001_Data.cs" />
+    <Compile Include="Reportes\Inventario\INV_003_Data.cs" />
+    <Compile Include="Reportes\Inventario\INV_001_Data.cs" />
+    <Compile Include="Reportes\Inventario\INV_002_Data.cs" />
+>>>>>>> 8c4b02720abbd585eefc13cbb6c2b2f23d139ae4
     <Compile Include="ro_Acta_Finiquito.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -785,6 +796,9 @@
     </Compile>
     <Compile Include="seg_Usuario_x_Empresa.cs">
       <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPINV_003_Result.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="spro_nomina_x_pago_utilidad_Result.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>

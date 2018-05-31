@@ -132,6 +132,7 @@
     <Compile Include="Inventario\in_UnidadMedida_Bus.cs" />
     <Compile Include="Inventario\in_UnidadMedida_Equiv_conversion_Bus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
     <Compile Include="Reportes\ActivoFijo\VWACTF_001_Bus.cs" />
     <Compile Include="Reportes\ActivoFijo\VWACTF_002_Bus.cs" />
     <Compile Include="Reportes\ActivoFijo\VWACTF_003_Bus.cs" />
@@ -140,6 +141,16 @@
     <Compile Include="Reportes\Inventario\VWINV_001_Bus.cs" />
     <Compile Include="Reportes\Inventario\VWINV_002_Bus.cs" />
     <Compile Include="Reportes\RRHH\VWROL_001_Bus.cs" />
+=======
+    <Compile Include="Reportes\ActivoFijo\ACTF_001_Bus.cs" />
+    <Compile Include="Reportes\ActivoFijo\ACTF_002_Bus.cs" />
+    <Compile Include="Reportes\ActivoFijo\ACTF_003_Bus.cs" />
+    <Compile Include="Reportes\Caja\CAJ_001_Bus.cs" />
+    <Compile Include="Reportes\Contabilidad\CONTA_001_Bus.cs" />
+    <Compile Include="Reportes\Inventario\INV_003_Bus.cs" />
+    <Compile Include="Reportes\Inventario\INV_001_Bus.cs" />
+    <Compile Include="Reportes\Inventario\INV_002_Bus.cs" />
+>>>>>>> 8c4b02720abbd585eefc13cbb6c2b2f23d139ae4
     <Compile Include="RRHH\ro_Acta_Finiquito_Bus.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Detalle_Bus.cs" />
     <Compile Include="RRHH\ro_area_Bus.cs" />

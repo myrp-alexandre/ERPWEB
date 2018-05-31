@@ -42,36 +42,32 @@
     <!-- Bootstrap DatePicker -->
     <script src="~/AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="~/Scripts/moment.min.js"></script>
-
-
-    <script src="~/Scripts/Devexpress/ace.js"></script>
-    <script src="~/Scripts/Devexpress/cldr.js"></script>
-    <script src="~/Scripts/Devexpress/currency.js"></script>
-    <script src="~/Scripts/Devexpress/date.js"></script>
-    <script src="~/Scripts/Devexpress/ext-language_tools.js"></script>
-    <script src="~/Scripts/Devexpress/globalize.js"></script>
-    <script src="~/Scripts/Devexpress/jquery.js"></script>
-    <script src="~/Scripts/Devexpress/jquery.min.js"></script>
-    <script src="~/Scripts/Devexpress/knockout.debug.js"></script>
-    <script src="~/Scripts/Devexpress/knockout.js"></script>
-    <script src="~/Scripts/Devexpress/message.js"></script>
-    <script src="~/Scripts/Devexpress/number.js"></script>
-
-
-    @RenderSection("scripts", required: false)
+    @*<script src="~/bower_DevExpress/jquery/dist/jquery.min.js"></script>*@
+    <link href="~/bower_DevExpress/jqueryui/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script src="~/bower_DevExpress/jqueryui/jquery-ui.js"></script>
+    <script src="~/bower_DevExpress/cldrjs/dist/cldr.js"></script>
+    <script src="~/bower_DevExpress/cldrjs/dist/cldr/event.js"></script>
+    <script src="~/bower_DevExpress/cldrjs/dist/cldr/supplemental.js"></script>
+    <script src="~/bower_DevExpress/globalize/dist/globalize.js"></script>
+    <script src="~/bower_DevExpress/globalize/dist/globalize/currency.js"></script>
+    <script src="~/bower_DevExpress/globalize/dist/globalize/date.js"></script>
+    <script src="~/bower_DevExpress/globalize/dist/globalize/message.js"></script>
+    <script src="~/bower_DevExpress/globalize/dist/globalize/number.js"></script>
+    <script src="~/bower_DevExpress/knockout/dist/knockout.js"></script>
+    <script src="~/bower_DevExpress/ace-builds/src/ace.js"></script>
+    <script src="~/bower_DevExpress/ace-builds/src/ext-language_tools.js"></script>
+    @*RenderSection("scripts", required: false)*@
     @Html.DevExpress().GetStyleSheets(
             new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
             new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
             new StyleSheet { ExtensionSuite = ExtensionSuite.GridView },
-            new StyleSheet { ExtensionSuite = ExtensionSuite.Report },
-            new StyleSheet { ExtensionType = ExtensionType.WebDocumentViewer}
+            new StyleSheet { ExtensionSuite = ExtensionSuite.Report }
         )
     @Html.DevExpress().GetScripts(
             new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
             new Script { ExtensionSuite = ExtensionSuite.Editors },
             new Script { ExtensionSuite = ExtensionSuite.GridView },
-            new Script { ExtensionSuite = ExtensionSuite.Report },
-            new Script { ExtensionType = ExtensionType.WebDocumentViewer }
+            new Script { ExtensionSuite = ExtensionSuite.Report }
         )
 </head>
 <body class="hold-transition skin-blue sidebar-collapse sidebar-mini">

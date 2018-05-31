@@ -357,29 +357,29 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reportes\ActivoFijo\VWACTF_001_Rpt.cs">
+    <Compile Include="Reportes\ActivoFijo\ACTF_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\ActivoFijo\VWACTF_001_Rpt.Designer.cs">
-      <DependentUpon>VWACTF_001_Rpt.cs</DependentUpon>
+    <Compile Include="Reportes\ActivoFijo\ACTF_001_Rpt.Designer.cs">
+      <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\ActivoFijo\VWACTF_002_Rpt.cs">
+    <Compile Include="Reportes\ActivoFijo\ACTF_002_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\ActivoFijo\VWACTF_002_Rpt.Designer.cs">
-      <DependentUpon>VWACTF_002_Rpt.cs</DependentUpon>
+    <Compile Include="Reportes\ActivoFijo\ACTF_002_Rpt.Designer.cs">
+      <DependentUpon>ACTF_002_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\ActivoFijo\VWACTF_003_Rpt.cs">
+    <Compile Include="Reportes\ActivoFijo\ACTF_003_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\ActivoFijo\VWACTF_003_Rpt.Designer.cs">
-      <DependentUpon>VWACTF_003_Rpt.cs</DependentUpon>
+    <Compile Include="Reportes\ActivoFijo\ACTF_003_Rpt.Designer.cs">
+      <DependentUpon>ACTF_003_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\Caja\VWCAJ_001_Rpt.cs">
+    <Compile Include="Reportes\Caja\CAJ_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Caja\VWCAJ_001_Rpt.Designer.cs">
-      <DependentUpon>VWCAJ_001_Rpt.cs</DependentUpon>
+    <Compile Include="Reportes\Caja\CAJ_001_Rpt.Designer.cs">
+      <DependentUpon>CAJ_001_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\Contabilidad\CONTA_001_Rpt.cs">
       <SubType>Component</SubType>
@@ -387,17 +387,23 @@
     <Compile Include="Reportes\Contabilidad\CONTA_001_Rpt.Designer.cs">
       <DependentUpon>CONTA_001_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\Inventario\VWINV_001_Rpt.cs">
+    <Compile Include="Reportes\Inventario\INV_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Inventario\VWINV_001_Rpt.Designer.cs">
-      <DependentUpon>VWINV_001_Rpt.cs</DependentUpon>
+    <Compile Include="Reportes\Inventario\INV_001_Rpt.Designer.cs">
+      <DependentUpon>INV_001_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\Inventario\VWINV_002_Rpt.cs">
+    <Compile Include="Reportes\Inventario\INV_002_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Inventario\VWINV_002_Rpt.Designer.cs">
-      <DependentUpon>VWINV_002_Rpt.cs</DependentUpon>
+    <Compile Include="Reportes\Inventario\INV_002_Rpt.Designer.cs">
+      <DependentUpon>INV_002_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Inventario\INV_003_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Inventario\INV_003_Rpt.Designer.cs">
+      <DependentUpon>INV_003_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\RRHH\VWROL_001_Rpt.cs">
       <SubType>Component</SubType>
@@ -6772,6 +6778,66 @@
     <Content Include="AdminLTE\dist\js\demo.js" />
     <Content Include="AdminLTE\dist\js\pages\dashboard.js" />
     <Content Include="AdminLTE\dist\js\pages\dashboard2.js" />
+    <Content Include="bower_DevExpress\ace-builds\ChangeLog.txt" />
+    <Content Include="bower_DevExpress\ace-builds\editor.html" />
+    <Content Include="bower_DevExpress\ace-builds\kitchen-sink.html" />
+    <Content Include="bower_DevExpress\ace-builds\src-min\ace.js" />
+    <Content Include="bower_DevExpress\ace-builds\src-min\ext-language_tools.js" />
+    <Content Include="bower_DevExpress\ace-builds\src\ace.js" />
+    <Content Include="bower_DevExpress\ace-builds\src\ext-language_tools.js" />
+    <Content Include="bower_DevExpress\cldrjs\dist\cldr.js" />
+    <Content Include="bower_DevExpress\cldrjs\dist\cldr\event.js" />
+    <Content Include="bower_DevExpress\cldrjs\dist\cldr\supplemental.js" />
+    <Content Include="bower_DevExpress\cldrjs\dist\cldr\unresolved.js" />
+    <Content Include="bower_DevExpress\cldrjs\Gruntfile.js" />
+    <Content Include="bower_DevExpress\devextreme\css\dx.android5.light.css" />
+    <Content Include="bower_DevExpress\devextreme\css\dx.common.css" />
+    <Content Include="bower_DevExpress\devextreme\css\dx.contrast.compact.css" />
+    <Content Include="bower_DevExpress\devextreme\css\dx.contrast.css" />
+    <Content Include="bower_DevExpress\devextreme\css\dx.dark.compact.css" />
+    <Content Include="bower_DevExpress\devextreme\css\dx.dark.css" />
+    <Content Include="bower_DevExpress\devextreme\css\dx.ios7.default.css" />
+    <Content Include="bower_DevExpress\devextreme\css\dx.light.compact.css" />
+    <Content Include="bower_DevExpress\devextreme\css\dx.light.css" />
+    <Content Include="bower_DevExpress\devextreme\css\dx.spa.css" />
+    <Content Include="bower_DevExpress\devextreme\css\dx.win10.black.css" />
+    <Content Include="bower_DevExpress\devextreme\css\dx.win10.white.css" />
+    <Content Include="bower_DevExpress\devextreme\css\dx.win8.black.css" />
+    <Content Include="bower_DevExpress\devextreme\css\dx.win8.white.css" />
+    <Content Include="bower_DevExpress\devextreme\js\dx.all.debug.js" />
+    <Content Include="bower_DevExpress\devextreme\js\dx.all.js" />
+    <Content Include="bower_DevExpress\devextreme\js\localization\dx.all.de.js" />
+    <Content Include="bower_DevExpress\devextreme\js\localization\dx.all.ja.js" />
+    <Content Include="bower_DevExpress\devextreme\js\localization\dx.all.ru.js" />
+    <Content Include="bower_DevExpress\devextreme\js\vectormap-data\africa.js" />
+    <Content Include="bower_DevExpress\devextreme\js\vectormap-data\canada.js" />
+    <Content Include="bower_DevExpress\devextreme\js\vectormap-data\eurasia.js" />
+    <Content Include="bower_DevExpress\devextreme\js\vectormap-data\europe.js" />
+    <Content Include="bower_DevExpress\devextreme\js\vectormap-data\usa.js" />
+    <Content Include="bower_DevExpress\devextreme\js\vectormap-data\world.js" />
+    <Content Include="bower_DevExpress\devextreme\js\vectormap-utils\dx.vectormaputils.debug.js" />
+    <Content Include="bower_DevExpress\devextreme\js\vectormap-utils\dx.vectormaputils.js" />
+    <Content Include="bower_DevExpress\devextreme\js\vectormap-utils\dx.vectormaputils.node.js" />
+    <Content Include="bower_DevExpress\devextreme\LICENSE.txt" />
+    <Content Include="bower_DevExpress\globalize\AUTHORS.txt" />
+    <Content Include="bower_DevExpress\globalize\dist\globalize.js" />
+    <Content Include="bower_DevExpress\globalize\dist\globalize\currency.js" />
+    <Content Include="bower_DevExpress\globalize\dist\globalize\date.js" />
+    <Content Include="bower_DevExpress\globalize\dist\globalize\message.js" />
+    <Content Include="bower_DevExpress\globalize\dist\globalize\number.js" />
+    <Content Include="bower_DevExpress\globalize\Gruntfile.js" />
+    <Content Include="bower_DevExpress\globalize\LICENSE.txt" />
+    <Content Include="bower_DevExpress\jqueryui\jquery-ui.js" />
+    <Content Include="bower_DevExpress\jqueryui\jquery-ui.min.js" />
+    <Content Include="bower_DevExpress\jqueryui\themes\base\jquery-ui.css" />
+    <Content Include="bower_DevExpress\jqueryui\themes\base\jquery-ui.min.css" />
+    <Content Include="bower_DevExpress\jquery\AUTHORS.txt" />
+    <Content Include="bower_DevExpress\jquery\dist\jquery.js" />
+    <Content Include="bower_DevExpress\jquery\dist\jquery.min.js" />
+    <Content Include="bower_DevExpress\jquery\LICENSE.txt" />
+    <Content Include="bower_DevExpress\knockout\dist\knockout.debug.js" />
+    <Content Include="bower_DevExpress\knockout\dist\knockout.js" />
+    <Content Include="bower_DevExpress\knockout\Gruntfile.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -7819,12 +7885,12 @@
     <Content Include="Areas\Reportes\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Reportes\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Reportes\Views\ContabilidadReportes\CONTA_001.cshtml" />
-    <Content Include="Areas\Reportes\Views\ActivoFijoReportes\VWACTF_001.cshtml" />
-    <Content Include="Areas\Reportes\Views\InventarioReportes\VWINV_001.cshtml" />
-    <Content Include="Areas\Reportes\Views\ActivoFijoReportes\VWACTF_002.cshtml" />
-    <Content Include="Areas\Reportes\Views\ActivoFijoReportes\VWACTF_003.cshtml" />
-    <Content Include="Areas\Reportes\Views\InventarioReportes\VWINV_002.cshtml" />
-    <Content Include="Areas\Reportes\Views\CajaReportes\VWCAJ_001.cshtml" />
+    <Content Include="Areas\Reportes\Views\ActivoFijoReportes\ACTF_001.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_001.cshtml" />
+    <Content Include="Areas\Reportes\Views\ActivoFijoReportes\ACTF_002.cshtml" />
+    <Content Include="Areas\Reportes\Views\ActivoFijoReportes\ACTF_003.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_002.cshtml" />
+    <Content Include="Areas\Reportes\Views\CajaReportes\CAJ_001.cshtml" />
     <Content Include="Areas\RRHH\Views\ActaFiniquito\Index2.cshtml" />
     <Content Include="Areas\RRHH\Views\ActaFiniquito\Liquidar.cshtml" />
     <Content Include="Areas\RRHH\Views\ProcesarRol\AbrirPeriodo.cshtml" />
@@ -7836,7 +7902,56 @@
     <Content Include="Areas\RRHH\Views\ProcesarRol\_GridViewPartial_provisiones.cshtml" />
     <Content Include="Areas\RRHH\Views\ProcesarRol\_GridViewPartial_sueldo_x_pagar.cshtml" />
     <Content Include="Areas\RRHH\Views\Vacaciones\_GridViewPartial_vaciones_periodos.cshtml" />
+<<<<<<< HEAD
     <Content Include="Areas\Reportes\Views\RRHHReportes\VWROL_001.cshtml" />
+=======
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_003.cshtml" />
+    <Content Include="bower_DevExpress\ace-builds\.bower.json" />
+    <Content Include="bower_DevExpress\ace-builds\bower.json" />
+    <Content Include="bower_DevExpress\ace-builds\LICENSE" />
+    <Content Include="bower_DevExpress\ace-builds\package.json" />
+    <Content Include="bower_DevExpress\ace-builds\README.md" />
+    <Content Include="bower_DevExpress\cldrjs\.bower.json" />
+    <Content Include="bower_DevExpress\cldrjs\.bowerrc" />
+    <Content Include="bower_DevExpress\cldrjs\.gitignore" />
+    <Content Include="bower_DevExpress\cldrjs\.jshintrc" />
+    <Content Include="bower_DevExpress\cldrjs\bower.json" />
+    <Content Include="bower_DevExpress\cldrjs\CHANGELOG.md" />
+    <Content Include="bower_DevExpress\cldrjs\DCO.md" />
+    <Content Include="bower_DevExpress\cldrjs\LICENSE-MIT" />
+    <Content Include="bower_DevExpress\cldrjs\package.json" />
+    <Content Include="bower_DevExpress\cldrjs\README.md" />
+    <Content Include="bower_DevExpress\devextreme\.bower.json" />
+    <Content Include="bower_DevExpress\devextreme\bower.json" />
+    <Content Include="bower_DevExpress\devextreme\css\icons\dxicons.eot" />
+    <Content Include="bower_DevExpress\devextreme\css\icons\dxicons.ttf" />
+    <Content Include="bower_DevExpress\devextreme\css\icons\dxicons.woff" />
+    <Content Include="bower_DevExpress\devextreme\css\icons\dxiconsios.eot" />
+    <Content Include="bower_DevExpress\devextreme\css\icons\dxiconsios.ttf" />
+    <Content Include="bower_DevExpress\devextreme\css\icons\dxiconsios.woff" />
+    <Content Include="bower_DevExpress\devextreme\README.md" />
+    <Content Include="bower_DevExpress\globalize\.bower.json" />
+    <Content Include="bower_DevExpress\globalize\bower.json" />
+    <Content Include="bower_DevExpress\globalize\browserstack.json" />
+    <Content Include="bower_DevExpress\globalize\chore\release.sh" />
+    <Content Include="bower_DevExpress\globalize\package.json" />
+    <Content Include="bower_DevExpress\globalize\README.md" />
+    <Content Include="bower_DevExpress\jqueryui\.bower.json" />
+    <Content Include="bower_DevExpress\jqueryui\.gitignore" />
+    <Content Include="bower_DevExpress\jqueryui\bower.json" />
+    <Content Include="bower_DevExpress\jqueryui\component.json" />
+    <Content Include="bower_DevExpress\jqueryui\composer.json" />
+    <Content Include="bower_DevExpress\jqueryui\package.json" />
+    <Content Include="bower_DevExpress\jqueryui\README.md" />
+    <Content Include="bower_DevExpress\jquery\.bower.json" />
+    <Content Include="bower_DevExpress\jquery\bower.json" />
+    <Content Include="bower_DevExpress\jquery\README.md" />
+    <Content Include="bower_DevExpress\knockout\.bower.json" />
+    <Content Include="bower_DevExpress\knockout\bower.json" />
+    <Content Include="bower_DevExpress\knockout\LICENSE" />
+    <Content Include="bower_DevExpress\knockout\package.json" />
+    <Content Include="bower_DevExpress\knockout\README.md" />
+>>>>>>> 8c4b02720abbd585eefc13cbb6c2b2f23d139ae4
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
@@ -7854,18 +7969,6 @@
     <Content Include="Areas\RRHH\Views\DepartamentoPorArea\Modificar.cshtml" />
     <Content Include="Areas\RRHH\Views\DepartamentoPorArea\Anular.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\Devexpress\ace.js" />
-    <Content Include="Scripts\Devexpress\cldr.js" />
-    <Content Include="Scripts\Devexpress\currency.js" />
-    <Content Include="Scripts\Devexpress\date.js" />
-    <Content Include="Scripts\Devexpress\ext-language_tools.js" />
-    <Content Include="Scripts\Devexpress\globalize.js" />
-    <Content Include="Scripts\Devexpress\jquery.js" />
-    <Content Include="Scripts\Devexpress\jquery.min.js" />
-    <Content Include="Scripts\Devexpress\knockout.debug.js" />
-    <Content Include="Scripts\Devexpress\knockout.js" />
-    <Content Include="Scripts\Devexpress\message.js" />
-    <Content Include="Scripts\Devexpress\number.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -7954,26 +8057,29 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
-    <EmbeddedResource Include="Reportes\ActivoFijo\VWACTF_001_Rpt.resx">
-      <DependentUpon>VWACTF_001_Rpt.cs</DependentUpon>
+    <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
+      <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ActivoFijo\VWACTF_002_Rpt.resx">
-      <DependentUpon>VWACTF_002_Rpt.cs</DependentUpon>
+    <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_002_Rpt.resx">
+      <DependentUpon>ACTF_002_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ActivoFijo\VWACTF_003_Rpt.resx">
-      <DependentUpon>VWACTF_003_Rpt.cs</DependentUpon>
+    <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_003_Rpt.resx">
+      <DependentUpon>ACTF_003_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Caja\VWCAJ_001_Rpt.resx">
-      <DependentUpon>VWCAJ_001_Rpt.cs</DependentUpon>
+    <EmbeddedResource Include="Reportes\Caja\CAJ_001_Rpt.resx">
+      <DependentUpon>CAJ_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Contabilidad\CONTA_001_Rpt.resx">
       <DependentUpon>CONTA_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Inventario\VWINV_001_Rpt.resx">
-      <DependentUpon>VWINV_001_Rpt.cs</DependentUpon>
+    <EmbeddedResource Include="Reportes\Inventario\INV_001_Rpt.resx">
+      <DependentUpon>INV_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Inventario\VWINV_002_Rpt.resx">
-      <DependentUpon>VWINV_002_Rpt.cs</DependentUpon>
+    <EmbeddedResource Include="Reportes\Inventario\INV_002_Rpt.resx">
+      <DependentUpon>INV_002_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Inventario\INV_003_Rpt.resx">
+      <DependentUpon>INV_003_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\VWROL_001_Rpt.resx">
       <DependentUpon>VWROL_001_Rpt.cs</DependentUpon>
