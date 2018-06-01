@@ -375,6 +375,12 @@
     <Compile Include="Reportes\ActivoFijo\ACTF_003_Rpt.Designer.cs">
       <DependentUpon>ACTF_003_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\ActivoFijo\ACTF_004_resumen_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ActivoFijo\ACTF_004_resumen_Rpt.Designer.cs">
+      <DependentUpon>ACTF_004_resumen_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\ActivoFijo\ACTF_004_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -8068,6 +8074,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_003_Rpt.resx">
       <DependentUpon>ACTF_003_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_004_resumen_Rpt.resx">
+      <DependentUpon>ACTF_004_resumen_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_004_Rpt.resx">
       <DependentUpon>ACTF_004_Rpt.cs</DependentUpon>
