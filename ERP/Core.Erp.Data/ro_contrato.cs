@@ -40,9 +40,9 @@ namespace Core.Erp.Data
         public string IdUsuarioUltAnu { get; set; }
         public string EstadoContrato { get; set; }
     
-        public virtual ro_empleado ro_empleado { get; set; }
         public virtual ro_Nomina_Tipo ro_Nomina_Tipo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ro_Acta_Finiquito> ro_Acta_Finiquito { get; set; }
+        public virtual ro_empleado ro_empleado { get; set; }
     }
 }

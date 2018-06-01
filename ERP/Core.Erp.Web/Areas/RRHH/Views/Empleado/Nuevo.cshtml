@@ -36,21 +36,21 @@
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="IdTipoDocumento">Tipo documento*</label>
+                    <label for="info_persona.IdTipoDocumento">Tipo documento*</label>
                     @Html.DropDownListFor(q => q.info_persona.IdTipoDocumento, new SelectList(ViewBag.lst_tipo_docu, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.info_persona.IdTipoDocumento, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="pe_cedulaRuc">Código</label>
+                    <label for="em_codigo">Código</label>
                     @Html.TextBoxFor(q => q.em_codigo, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.em_codigo, "", new { @class = "text-danger", @id = "pe_cedulaRuc" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="pe_cedulaRuc">Número documento*</label>
+                    <label for="info_persona.pe_cedulaRuc">Número documento*</label>
                     @Html.TextBoxFor(q => q.info_persona.pe_cedulaRuc, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.pe_cedulaRuc, "", new { @class = "text-danger", @id = "pe_cedulaRuc" })
                 </div>
@@ -63,7 +63,7 @@
             
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="pe_apellido">Apellidos*</label>
+                    <label for="info_persona.pe_apellido">Apellidos*</label>
                     @Html.TextBoxFor(q => q.info_persona.pe_apellido, new { @class = "form-control", @id = "pe_apellido" })
                     @Html.ValidationMessageFor(q => q.info_persona.pe_apellido, "", new { @class = "text-danger" })
                 </div>
@@ -71,7 +71,7 @@
 
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="pe_nombre">Nombres*</label>
+                    <label for="info_persona.pe_nombre">Nombres*</label>
                     @Html.TextBoxFor(q => q.info_persona.pe_nombre, new { @class = "form-control", @id = "pe_nombre" })
                     @Html.ValidationMessageFor(q => q.info_persona.pe_nombre, "", new { @class = "text-danger" })
                 </div>
@@ -127,7 +127,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="pe_direccion">Dirección*</label>
+                            <label for="info_persona.pe_direccion">Dirección*</label>
                             @Html.TextBoxFor(q => q.info_persona.pe_direccion, new { @class = "form-control", @rows = "2" })
                             @Html.ValidationMessageFor(q => q.info_persona.pe_direccion, "", new { @class = "text-danger" })
                         </div>
@@ -136,7 +136,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="pe_correo">Correo*</label>
+                            <label for="info_persona.pe_correo">Correo*</label>
                             @Html.TextBoxFor(q => q.info_persona.pe_correo, new { @class = "form-control" })
                             @Html.ValidationMessageFor(q => q.info_persona.pe_correo, "", new { @class = "text-danger" })
                         </div>
@@ -145,21 +145,21 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="pe_sexo">Sexo*</label>
+                            <label for="info_persona.pe_sexo">Sexo*</label>
                             @Html.DropDownListFor(q => q.info_persona.pe_sexo, new SelectList(ViewBag.lst_sexo, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
                             @Html.ValidationMessageFor(q => q.info_persona.pe_sexo, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="IdEstadoCivil">Estado civil*</label>
+                            <label for="info_persona.IdEstadoCivil">Estado civil*</label>
                             @Html.DropDownListFor(q => q.info_persona.IdEstadoCivil, new SelectList(ViewBag.lst_estado_civil, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
                             @Html.ValidationMessageFor(q => q.info_persona.IdEstadoCivil, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="pe_fechaNacimiento">Fecha de nacimiento*</label>
+                            <label for="info_persona.pe_fechaNacimiento">Fecha de nacimiento*</label>
                             <div class="input-group date">
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
@@ -173,7 +173,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="pe_telfono_Contacto">Teléfono contacto*</label>
+                            <label for="info_persona.pe_telfono_Contacto">Teléfono contacto*</label>
                             @Html.TextBoxFor(q => q.info_persona.pe_telfono_Contacto, new { @class = "form-control" })
                             @Html.ValidationMessageFor(q => q.info_persona.pe_telfono_Contacto, "", new { @class = "text-danger" })
                         </div>
@@ -181,7 +181,7 @@
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="pe_celular">Celular*</label>
+                            <label for="info_persona.pe_celular">Celular*</label>
                             @Html.TextBoxFor(q => q.info_persona.pe_celular, new { @class = "form-control" })
                             @Html.ValidationMessageFor(q => q.info_persona.pe_celular, "", new { @class = "text-danger" })
                         </div>
@@ -456,9 +456,14 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="Marca_Biometrico">Marca Biometrico</label>
-                            @Html.EditorFor(q => q.Marca_Biometrico, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(q => q.Marca_Biometrico, "", new { @class = "text-danger" })
+                            <label for="Marca_Biometrico"></label>
+                       @Html.DevExpress().CheckBoxFor(q => q.Marca_Biometrico, settings =>
+                       {
+                           settings.Name = "Marca_Biometrico";
+                           settings.Text = "Marca biometrico";
+
+                       }).GetHtml() 
+                       @Html.ValidationMessageFor(q => q.Marca_Biometrico, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
@@ -468,8 +473,13 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="es_AcreditaHorasExtras">Goza horas extras</label>
-                                @Html.EditorFor(q => q.es_AcreditaHorasExtras, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.es_AcreditaHorasExtras, "", new { @class = "text-danger" })
+                        @Html.DevExpress().CheckBoxFor(q => q.es_AcreditaHorasExtras, settings =>
+                       {
+                           settings.Name = "es_AcreditaHorasExtras";
+                           settings.Text = "Goza horas extras";
+
+                       }).GetHtml()
+                       @Html.ValidationMessageFor(q => q.es_AcreditaHorasExtras, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
