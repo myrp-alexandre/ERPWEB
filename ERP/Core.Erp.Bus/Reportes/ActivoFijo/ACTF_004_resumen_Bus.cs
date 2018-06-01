@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Reportes.ActivoFijo
 {
-   public class ACTF_004_Bus
+    public class ACTF_004_resumen_Bus
     {
-        ACTF_004_Data odata = new ACTF_004_Data();
+        ACTF_004_resumen_Data odata = new ACTF_004_resumen_Data();
     
-        public List<ACTF_004_Info> get_list(int IdEmpresa, DateTime fecha_corte)
+        public List<ACTF_004_resumen_Info> get_list(int IdEmpresa, DateTime fecha_corte)
         {
             try
             {

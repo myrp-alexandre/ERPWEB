@@ -44,6 +44,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             if (IdRetiroActivo == 0)
                 model.RequestParameters = false;
             return View(model);
+
         }
+
     }
 }
