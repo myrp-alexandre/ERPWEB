@@ -29,6 +29,7 @@ namespace Core.Erp.Bus.ActivoFijo
         {
             try
             {
+                return odata.get_info(IdEmpresa, IdCategoriaAF);
             }
             catch (Exception)
             {
