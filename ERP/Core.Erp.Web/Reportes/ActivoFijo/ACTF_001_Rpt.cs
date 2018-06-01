@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Drawing;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using DevExpress.XtraReports.UI;
-using Core.Erp.Bus.Reportes.ActivoFijo;
 using Core.Erp.Info.Reportes.ActivoFijo;
+using Core.Erp.Bus.Reportes.ActivoFijo;
+using System.Collections.Generic;
 
 namespace Core.Erp.Web.Reportes.ActivoFijo
 {
@@ -27,7 +27,6 @@ namespace Core.Erp.Web.Reportes.ActivoFijo
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             decimal Id_Mejora_Baja_Activo = p_Id_Mejora_Baja_Activo.Value == null ? 0 : Convert.ToDecimal(p_Id_Mejora_Baja_Activo.Value);
             string Id_Tipo = p_Id_Tipo.Value == null ? "" : Convert.ToString(p_Id_Tipo.Value);
-
 
             ACTF_001_Bus bus_rpt = new ACTF_001_Bus();
             List<ACTF_001_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, Id_Mejora_Baja_Activo, Id_Tipo);
