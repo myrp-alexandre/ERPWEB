@@ -361,6 +361,11 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_004' no tien
           <Parameter Name="Fecha_corte" Type="datetime" Mode="In" />
           <Parameter Name="IdUsuario" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="SPACTF_004_resumen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="Fecha_corte" Type="datetime" Mode="In" />
+          <Parameter Name="IdUsuario" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="Model_reportesStoreContainer">
           <EntitySet Name="VWACTF_001" EntityType="Self.VWACTF_001" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
@@ -620,6 +625,11 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_004' no tien
           <EntitySet Name="VWROL_001" EntityType="Model_reportes.VWROL_001" />
           <EntitySet Name="VWINV_004" EntityType="Model_reportes.VWINV_004" />
           <FunctionImport Name="SPACTF_004_detalle" ReturnType="Collection(Model_reportes.SPACTF_004_detalle_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="Fecha_corte" Mode="In" Type="DateTime" />
+            <Parameter Name="IdUsuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SPACTF_004_resumen" ReturnType="Collection(Model_reportes.SPACTF_004_resumen_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="Fecha_corte" Mode="In" Type="DateTime" />
             <Parameter Name="IdUsuario" Mode="In" Type="String" />
@@ -1042,6 +1052,16 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_004' no tien
           <Property Type="Double" Name="valor_ult_depreciacion" Nullable="false" />
           <Property Type="DateTime" Name="Af_fecha_compra" Nullable="false" Precision="23" />
         </ComplexType>
+        <ComplexType Name="SPACTF_004_resumen_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdActivoFijoTipo" Nullable="false" />
+          <Property Type="String" Name="IdUsuario" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Af_Descripcion" Nullable="false" MaxLength="500" />
+          <Property Type="Double" Name="Af_costo_compra" Nullable="false" />
+          <Property Type="Double" Name="Valor_Depreciacion" Nullable="false" />
+          <Property Type="Double" Name="Valor_ult_depreciacion" Nullable="false" />
+          <Property Type="Double" Name="Costo_neto" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1282,6 +1302,20 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_004' no tien
                 <ScalarProperty Name="Costo_actual" ColumnName="Costo_actual" />
                 <ScalarProperty Name="valor_ult_depreciacion" ColumnName="valor_ult_depreciacion" />
                 <ScalarProperty Name="Af_fecha_compra" ColumnName="Af_fecha_compra" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPACTF_004_resumen" FunctionName="Model_reportes.Store.SPACTF_004_resumen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_reportes.SPACTF_004_resumen_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdActivoFijoTipo" ColumnName="IdActivoFijoTipo" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Af_Descripcion" ColumnName="Af_Descripcion" />
+                <ScalarProperty Name="Af_costo_compra" ColumnName="Af_costo_compra" />
+                <ScalarProperty Name="Valor_Depreciacion" ColumnName="Valor_Depreciacion" />
+                <ScalarProperty Name="Valor_ult_depreciacion" ColumnName="Valor_ult_depreciacion" />
+                <ScalarProperty Name="Costo_neto" ColumnName="Costo_neto" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
