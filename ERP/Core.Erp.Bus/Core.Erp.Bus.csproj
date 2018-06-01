@@ -153,7 +153,6 @@
     <Compile Include="RRHH\ro_catalogo_Bus.cs" />
     <Compile Include="RRHH\ro_Comprobantes_Contables_Bus.cs" />
     <Compile Include="RRHH\ro_Config_Param_contable_Bus.cs" />
-    <Compile Include="RRHH\ro_Config_Param_contable_Data.cs" />
     <Compile Include="RRHH\ro_contrato_Bus.cs" />
     <Compile Include="RRHH\ro_departamento_Bus.cs" />
     <Compile Include="RRHH\ro_division_Bus.cs" />

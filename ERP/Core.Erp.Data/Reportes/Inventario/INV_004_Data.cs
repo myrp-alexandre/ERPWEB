@@ -28,7 +28,7 @@ namespace Core.Erp.Data.Reportes.Inventario
                     Lista = (from q in Context.VWINV_004
                              where q.IdEmpresa == IdEmpresa
                              && q.IdSucursal == IdSucursal
-                             && q.IdBodega == IdBodega
+                             && q.IdBodega == IdBodega 
                              && q.IdMovi_inven_tipo == IdMovi_inven_tipo
                              && q.IdNumMovi == IdNumMovi
                              && q.mv_tipo_movi == mv_tipo_movi
