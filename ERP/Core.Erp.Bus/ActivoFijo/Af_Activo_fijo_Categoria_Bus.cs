@@ -25,11 +25,10 @@ namespace Core.Erp.Bus.ActivoFijo
             }
         }
 
-        public Af_Activo_fijo_Categoria_Info get_info(int IdEmpresa, int IdActivoFijoTipo, int IdCategoriaAF)
+        public Af_Activo_fijo_Categoria_Info get_info(int IdEmpresa, int IdCategoriaAF)
         {
             try
             {
-                return odata.get_info(IdEmpresa, IdActivoFijoTipo, IdCategoriaAF);
             }
             catch (Exception)
             {

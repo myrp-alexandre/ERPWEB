@@ -37,30 +37,44 @@
     <script src="~/AdminLTE/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/AdminLTE/dist/js/demo.js"></script>
-
     <!-- Bootstrap DatePicker -->
     <link rel="stylesheet" href="~/AdminLTE/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <!-- Bootstrap DatePicker -->
     <script src="~/AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-    
     <script src="~/Scripts/moment.min.js"></script>
-    @RenderSection("scripts", required: false)
+    @*<script src="~/bower_DevExpress/jquery/dist/jquery.min.js"></script>*@
+    <link href="~/bower_DevExpress/jqueryui/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script src="~/bower_DevExpress/jqueryui/jquery-ui.js"></script>
+    <script src="~/bower_DevExpress/cldrjs/dist/cldr.js"></script>
+    <script src="~/bower_DevExpress/cldrjs/dist/cldr/event.js"></script>
+    <script src="~/bower_DevExpress/cldrjs/dist/cldr/supplemental.js"></script>
+    <script src="~/bower_DevExpress/globalize/dist/globalize.js"></script>
+    <script src="~/bower_DevExpress/globalize/dist/globalize/currency.js"></script>
+    <script src="~/bower_DevExpress/globalize/dist/globalize/date.js"></script>
+    <script src="~/bower_DevExpress/globalize/dist/globalize/message.js"></script>
+    <script src="~/bower_DevExpress/globalize/dist/globalize/number.js"></script>
+    <script src="~/bower_DevExpress/knockout/dist/knockout.js"></script>
+    <script src="~/bower_DevExpress/ace-builds/src/ace.js"></script>
+    <script src="~/bower_DevExpress/ace-builds/src/ext-language_tools.js"></script>
+    @*RenderSection("scripts", required: false)*@
     @Html.DevExpress().GetStyleSheets(
             new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
             new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
-            new StyleSheet { ExtensionSuite = ExtensionSuite.GridView }
+            new StyleSheet { ExtensionSuite = ExtensionSuite.GridView },
+            new StyleSheet { ExtensionSuite = ExtensionSuite.Report }
         )
     @Html.DevExpress().GetScripts(
             new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
             new Script { ExtensionSuite = ExtensionSuite.Editors },
-            new Script { ExtensionSuite = ExtensionSuite.GridView }
+            new Script { ExtensionSuite = ExtensionSuite.GridView },
+            new Script { ExtensionSuite = ExtensionSuite.Report }
         )
 </head>
 <body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="@Url.Action("Index","Home",new { Area = ""})" class="logo">
+            <a href="@Url.Action("Index","Home",new { area = ""})" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>FX</b></span>
                 <!-- logo for regular state and mobile devices -->
@@ -125,9 +139,7 @@
                             <li><a href="@Url.Action("Index","Provincia",new { area = "General"})"><i class="fa fa-circle-o"></i> Provincia</a></li>
                             <li><a href="@Url.Action("Index","Transportista",new { area = "General"})"><i class="fa fa-circle-o"></i> Transportistas</a></li>
                             <li><a href="@Url.Action("Index","Persona",new { area = "General"})"><i class="fa fa-circle-o"></i> Persona</a></li>
-                            <li><a href="@Url.Action("Index","TipoDocumento",new { area = "General"})"><i class="fa fa-circle-o"></i> Tipo Documento</a></li>
-
-                         </ul>
+                        </ul>
                     </li>
                     <li class="treeview">
                         <a href="#">
@@ -140,7 +152,7 @@
                             <li><a href="@Url.Action("Index","ClaseProveedor",new { area = "CuentasPorPagar"})"><i class="fa fa-circle-o"></i> Clase proveedor</a></li>
                             <li><a href="@Url.Action("Index","TipoCodigoSRI",new { area = "CuentasPorPagar"})"><i class="fa fa-circle-o"></i> Código SRI</a></li>
                         </ul>
-                    </li>                    
+                    </li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-folder-o"></i> <span>Seguridad y acceso</span>
@@ -164,8 +176,12 @@
                             <li><a href="@Url.Action("Index","GrupoContable",new { area = "Contabilidad"})"><i class="fa fa-circle-o"></i> Grupos contables</a></li>
                             <li><a href="@Url.Action("Index","PeriodoContable",new { area = "Contabilidad"})"><i class="fa fa-circle-o"></i> Periodos</a></li>
                             <li><a href="@Url.Action("Index","TipoComprobante",new { area = "Contabilidad"})"><i class="fa fa-circle-o"></i> Tipo de comprobante</a></li>
+                            <li><a href="@Url.Action("Index","ParametroContable",new { area = "Contabilidad"})"><i class="fa fa-circle-o"></i> Parámetro contable</a></li>
+
                         </ul>
                     </li>
+
+
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-folder-o"></i> <span>Roles</span>
@@ -182,6 +198,8 @@
                             <li><a href="@Url.Action("Index","Contrato",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Contrato</a></li>
                             <li><a href="@Url.Action("Index","NominaTipo",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Tipo de nómina</a></li>
                             <li><a href="@Url.Action("Index","TipoPrestamo",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Tipo préstamo</a></li>
+                            <li><a href="@Url.Action("Index","Periodo",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Périodos</a></li>
+                            <li><a href="@Url.Action("Index","Rubros_acumulados",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Rubros acumulados</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -194,6 +212,8 @@
                         <ul class="treeview-menu">
                             <li><a href="@Url.Action("Index","ProductoTipo",new { area = "Inventario"})"><i class="fa fa-circle-o"></i> Tipo producto</a></li>
                             <li><a href="@Url.Action("Index","TipoMovimiento",new { area = "Inventario"})"><i class="fa fa-circle-o"></i> Tipo movimiento</a></li>
+                            <li><a href="@Url.Action("Index","MotivoInventario",new { area = "Inventario"})"><i class="fa fa-circle-o"></i> Movimiento</a></li>
+
                         </ul>
                     </li>
                 </ul>
@@ -202,31 +222,10 @@
         </aside>
         <!-- =============================================== -->
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper">            
             <!-- Main content -->
             <section class="content">
-                <div class="box">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">@ViewBag.Title</h3>
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fa fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                                <i class="fa fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="box-body">
-                        @RenderBody()
-                    </div>
-                    <!-- /.box-body -->
-                    <div class="box-footer">
-                        [@Session["IdEmpresa"]] @Session["nom_empresa"]
-                    </div>
-                    <!-- /.box-footer-->
-                </div>
-                <!-- /.box -->
+                @RenderBody()
             </section>
             <!-- /.content -->
         </div>
@@ -243,6 +242,6 @@
 
 
     <!-- ./wrapper -->
-    
+
 </body>
 </html>

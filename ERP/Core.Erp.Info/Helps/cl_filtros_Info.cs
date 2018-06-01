@@ -15,8 +15,18 @@ namespace Core.Erp.Info.Helps
         [Required(ErrorMessage = "El campo fecha fin es obligatorio")]
         [DataType(DataType.Date, ErrorMessage = "El campo fecha fin debe ser una fecha en formato dd/MM/yyyy")]
         public DateTime fecha_fin { get; set; }
+        public bool mostrar_registros_0 { get; set; }
+        #region Filtros inventario
         public int IdSucursal { get; set; }
         public int IdBodega { get; set; }
+        public string IdCategoria { get; set; }
+        public int IdLinea { get; set; }
+        public int IdGrupo { get; set; }
+        public int IdSubGrupo { get; set; }
+        public decimal IdProducto { get; set; }
+        public int IdMovi_inven_tipo { get; set; }
+        public string signo { get; set; }        
+        #endregion
 
         public cl_filtros_Info()
         {
