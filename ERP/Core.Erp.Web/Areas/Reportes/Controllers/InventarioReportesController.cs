@@ -135,8 +135,15 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         #region json
 
+        public JsonResult cargar_bodega(int IdSucursal = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+            var resultado = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
 
-         public JsonResult cargar_lineas(string IdCategoria = "")
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult cargar_lineas(string IdCategoria = "")
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_linea_Bus bus_linea = new in_linea_Bus();
@@ -162,7 +169,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-    }
+    
         #endregion
     }
 }
