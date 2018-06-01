@@ -148,6 +148,31 @@
         })
 
         });
+    $("#IdSucursal").change(function () {
+        cargar_bodega();
+    });
 
+    function cargar_bodega() {
+        var sucursal = $("#IdSucursal").val();
+
+        var datos = {
+            IdSucursal: sucursal
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("cargar_bodega", "InventarioReportes",new { Area = "Reporte" })',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                $("#IdBodega").val(data.IdBodega);
+            },
+            error: function (error) {
+            }
+        });
+    }
   
 </script>
