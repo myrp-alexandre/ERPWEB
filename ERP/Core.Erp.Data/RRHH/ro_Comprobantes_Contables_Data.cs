@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Info.RRHH;
-
 namespace Core.Erp.Data.RRHH
 {
    public class ro_Comprobantes_Contables_Data
@@ -13,22 +12,22 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
-                using (Entities_rrhh Contex=new Entities_rrhh())
+                using (Entities_rrhh Contex = new Entities_rrhh())
                 {
-                    ro_Comprobantes_Contables entity = new ro_Comprobantes_Contables
+                    ro_Comprobantes_Contables Entity = new ro_Comprobantes_Contables
                     {
-
                         IdEmpresa = info.IdEmpresa,
                         IdNomina = info.IdNomina,
                         IdNominaTipo = info.IdNominaTipo,
                         IdPeriodo = info.IdPeriodo,
                         IdTipoCbte = info.IdTipoCbte,
                         IdCbteCble = info.IdCbteCble,
-                        CodCtbteCble=info.CodCtbteCble
+                        CodCtbteCble = info.CodCtbteCble
                     };
-                    Contex.ro_Comprobantes_Contables.Add(entity);
+                    Contex.ro_Comprobantes_Contables.Add(Entity);
                     Contex.SaveChanges();
                 }
+
                 return true;
             }
             catch (Exception)

@@ -55,7 +55,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                 }
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception )
             {
 
                 throw;
