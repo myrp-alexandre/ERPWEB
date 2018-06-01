@@ -18,11 +18,11 @@ namespace Core.Erp.Data
         public ro_catalogo()
         {
             this.ro_cargaFamiliar = new HashSet<ro_cargaFamiliar>();
+            this.ro_marcaciones_x_empleado = new HashSet<ro_marcaciones_x_empleado>();
             this.ro_empleado = new HashSet<ro_empleado>();
             this.ro_empleado1 = new HashSet<ro_empleado>();
             this.ro_empleado2 = new HashSet<ro_empleado>();
             this.ro_empleado3 = new HashSet<ro_empleado>();
-            this.ro_marcaciones_x_empleado = new HashSet<ro_marcaciones_x_empleado>();
         }
     
         public string CodCatalogo { get; set; }
@@ -45,6 +45,8 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_cargaFamiliar> ro_cargaFamiliar { get; set; }
         public virtual ro_catalogoTipo ro_catalogoTipo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ro_marcaciones_x_empleado> ro_marcaciones_x_empleado { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ro_empleado> ro_empleado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ro_empleado> ro_empleado1 { get; set; }
@@ -52,7 +54,5 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_empleado> ro_empleado2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ro_empleado> ro_empleado3 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_marcaciones_x_empleado> ro_marcaciones_x_empleado { get; set; }
     }
 }

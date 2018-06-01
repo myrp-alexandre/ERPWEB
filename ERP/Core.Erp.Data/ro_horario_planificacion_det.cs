@@ -23,8 +23,8 @@ namespace Core.Erp.Data
         public string Estado { get; set; }
         public string Observacion { get; set; }
     
-        public virtual ro_empleado ro_empleado { get; set; }
         public virtual ro_horario ro_horario { get; set; }
         public virtual ro_horario_planificacion ro_horario_planificacion { get; set; }
+        public virtual ro_empleado ro_empleado { get; set; }
     }
 }

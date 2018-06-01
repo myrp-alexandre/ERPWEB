@@ -17,9 +17,9 @@ namespace Core.Erp.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ro_Departamento()
         {
-            this.ro_empleado = new HashSet<ro_empleado>();
             this.ro_Config_Param_contable = new HashSet<ro_Config_Param_contable>();
             this.ro_area_x_departamento = new HashSet<ro_area_x_departamento>();
+            this.ro_empleado = new HashSet<ro_empleado>();
         }
     
         public int IdEmpresa { get; set; }
@@ -37,10 +37,10 @@ namespace Core.Erp.Data
         public string MotiAnula { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_empleado> ro_empleado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ro_Config_Param_contable> ro_Config_Param_contable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ro_area_x_departamento> ro_area_x_departamento { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ro_empleado> ro_empleado { get; set; }
     }
 }

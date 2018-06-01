@@ -45,9 +45,9 @@ namespace Core.Erp.Data
         public Nullable<int> IdPeriodo { get; set; }
         public string Observacion { get; set; }
     
-        public virtual ro_empleado ro_empleado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ro_empleado_novedad_det> ro_empleado_novedad_det { get; set; }
         public virtual ro_Nomina_Tipoliqui ro_Nomina_Tipoliqui { get; set; }
+        public virtual ro_empleado ro_empleado { get; set; }
     }
 }

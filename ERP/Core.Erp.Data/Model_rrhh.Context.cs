@@ -60,8 +60,6 @@ namespace Core.Erp.Data
         public virtual DbSet<vwro_empleado_x_ro_rubro> vwro_empleado_x_ro_rubro { get; set; }
         public virtual DbSet<ro_empleado_x_rubro_acumulado> ro_empleado_x_rubro_acumulado { get; set; }
         public virtual DbSet<vwro_empleado_x_rubro_acumulado> vwro_empleado_x_rubro_acumulado { get; set; }
-        public virtual DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
-        public virtual DbSet<ro_empleado> ro_empleado { get; set; }
         public virtual DbSet<ro_contrato> ro_contrato { get; set; }
         public virtual DbSet<ro_empleado_x_titulos> ro_empleado_x_titulos { get; set; }
         public virtual DbSet<ro_rubros_calculados> ro_rubros_calculados { get; set; }
@@ -99,6 +97,8 @@ namespace Core.Erp.Data
         public virtual DbSet<ro_Solicitud_Vacaciones_x_empleado> ro_Solicitud_Vacaciones_x_empleado { get; set; }
         public virtual DbSet<vwRo_Solicitud_Vacaciones> vwRo_Solicitud_Vacaciones { get; set; }
         public virtual DbSet<vwROL_Rpt002> vwROL_Rpt002 { get; set; }
+        public virtual DbSet<ro_empleado> ro_empleado { get; set; }
+        public virtual DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
     
         public virtual ObjectResult<spro_nomina_x_pago_utilidad_Result> spro_nomina_x_pago_utilidad(Nullable<int> idempresa, Nullable<int> idNomina, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
         {

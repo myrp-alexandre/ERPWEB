@@ -88,7 +88,7 @@ namespace Core.Erp.Info.RRHH
         public string IdAplicaConvenioDobleImposicionSRI { get; set; }
         public string IdTipoResidenciaSRI { get; set; }
         public string IdTipoSistemaSalarioNetoSRI { get; set; }
-        public Nullable<bool> es_AcreditaHorasExtras { get; set; }
+        public bool es_AcreditaHorasExtras { get; set; }
         public string IdTipoAnticipo { get; set; }
         public Nullable<double> ValorAnticipo { get; set; }
         public string CodigoSectorial { get; set; }
@@ -96,7 +96,7 @@ namespace Core.Erp.Info.RRHH
         public Nullable<double> em_AnticipoSueldo { get; set; }
         public Nullable<int> IdBanco_Acreditacion { get; set; }
         public Nullable<int> IdGrupo { get; set; }
-        public Nullable<bool> Marca_Biometrico { get; set; }
+        public bool Marca_Biometrico { get; set; }
         public string em_motivo_salisa { get; set; }
         public tb_persona_Info info_persona { get; set; }
         public Nullable<int> IdHorario { get; set; }
