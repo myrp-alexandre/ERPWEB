@@ -35,9 +35,11 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         {
             Af_Depreciacion_Info model = new Af_Depreciacion_Info
             {
-                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"])
+                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
+                Fecha_Depreciacion = DateTime.Now.Date,
+                IdPeriodo = Convert.ToInt32(DateTime.Now.Date.ToString("yyyyMM"))
             };
-            return View();
+            return View(model);
         }
 
         [HttpPost]
@@ -52,7 +54,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             {
                 IdEmpresa = Convert.ToInt32(Session["IdEmpresa"])
             };
-            return View();
+            return View(model);
         }
 
         [HttpPost]
@@ -67,7 +69,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             {
                 IdEmpresa = Convert.ToInt32(Session["IdEmpresa"])
             };
-            return View();
+            return View(model);
         }
 
         [HttpPost]
