@@ -271,6 +271,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
         }
 
-       
+
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_utilidades_detalle()
+        {
+            var model = new object[0];
+            return PartialView("_GridViewPartial_utilidades_detalle", model);
+        }
     }
 }

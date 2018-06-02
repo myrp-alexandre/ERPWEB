@@ -55,6 +55,8 @@
             <a class="btn btn-default" href="@Url.Action("Index","ParticipacionUtilidad",new { Area = "RRHH" },null)">Cancelar</a>
         </div>
 
+    @Html.Action("GridViewPartial_utilidades_detalle")
+
 
     var grid = Html.DevExpress().GridView(settings =>
     {
