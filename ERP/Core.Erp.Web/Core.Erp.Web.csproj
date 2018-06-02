@@ -7969,6 +7969,7 @@
     <Content Include="bower_DevExpress\knockout\README.md" />
     <Content Include="Areas\Reportes\Views\Layout\_Layout_filtros.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_002.cshtml" />
+    <Content Include="Areas\RRHH\Views\ParticipacionUtilidad\GridViewPartial_utilidades_detalle.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
