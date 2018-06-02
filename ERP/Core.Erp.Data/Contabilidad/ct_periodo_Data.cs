@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Info.Contabilidad;
+using Core.Erp.Info.General;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,38 @@ namespace Core.Erp.Data.Contabilidad
 
             try
             {
+
                 List<ct_periodo_Info> Lista;
-                using (Entities_contabilidad Context = new Entities_contabilidad())
-                {
-                    if (mostrar_anulados == true)
-                        Lista = (from q in Context.ct_periodo
+
+                Entities_general Context_g = new Entities_general();
+                Entities_contabilidad Context = new Entities_contabilidad();
+                    var lst_mes = (from q in Context_g.tb_mes
+                                  select new tb_mes_Info
+                                  {
+                                      idMes = q.idMes,
+                                      smes = q.smes
+                                  }).ToList();
+                Context_g.Dispose();
+
+                var lst_periodo = (from q in Context.ct_periodo
+                                   where q.IdEmpresa == IdEmpresa
+                                   select new ct_periodo_Info
+                                   {
+                                       IdPeriodo = q.IdPeriodo,
+                                       IdEmpresa = q.IdEmpresa,
+                                       IdanioFiscal = q.IdanioFiscal,
+                                       pe_FechaIni = q.pe_FechaIni,
+                                       pe_FechaFin = q.pe_FechaFin,
+                                       pe_mes = q.pe_mes,
+                                       pe_cerrado = q.pe_cerrado,
+                                       pe_estado = q.pe_estado,
+                                   }).ToList();                
+
+
+                if (mostrar_anulados == true)
+                        Lista = (from q in lst_periodo
+                                 join m in lst_mes
+                                 on q.pe_mes equals m.idMes
                                  where q.IdEmpresa == IdEmpresa
                                  select new ct_periodo_Info
                                  {
@@ -29,12 +57,14 @@ namespace Core.Erp.Data.Contabilidad
                                      pe_FechaFin = q.pe_FechaFin,
                                      pe_mes = q.pe_mes,
                                      pe_cerrado = q.pe_cerrado,
-                                     pe_estado = q.pe_estado
-                                     
+                                     pe_estado = q.pe_estado,
+                                     smes = m.smes
                                  }).ToList();
                     else
-                        Lista = (from q in Context.ct_periodo
-                                  where q.IdEmpresa == IdEmpresa
+                        Lista = (from q in lst_periodo
+                                 join m in lst_mes
+                                  on q.pe_mes equals m.idMes
+                                 where q.IdEmpresa == IdEmpresa
                                   && q.pe_estado == "A"
                                   select new ct_periodo_Info
                                   {
@@ -45,10 +75,13 @@ namespace Core.Erp.Data.Contabilidad
                                       pe_FechaFin = q.pe_FechaFin,
                                       pe_mes = q.pe_mes,
                                       pe_cerrado = q.pe_cerrado,
-                                      pe_estado = q.pe_estado
+                                      pe_estado = q.pe_estado,
+                                      smes = m.smes
                                   }).ToList();
-                }
-                Lista.ForEach(q => q.nom_periodo_combo = q.IdanioFiscal + " "+ q.pe_mes);
+                
+                Lista.ForEach(q => q.nom_periodo_combo = q.IdanioFiscal + " "+ q.smes);
+                
+                Context.Dispose();
                 return Lista;
             }
             catch (Exception)

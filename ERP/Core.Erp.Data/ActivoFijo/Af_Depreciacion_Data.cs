@@ -78,18 +78,21 @@ namespace Core.Erp.Data.ActivoFijo
                     if (Entity == null) return null;
                     info = new Af_Depreciacion_Info
                     {
-                                     IdEmpresa = Entity.IdEmpresa,
-                                     IdDepreciacion = Entity.IdDepreciacion,
-                                     IdPeriodo = Entity.IdPeriodo,
-                                     Cod_Depreciacion = Entity.Cod_Depreciacion,
-                                     Descripcion = Entity.Descripcion,
-                                     Estado = Entity.Estado,
-                                     Fecha_Depreciacion = Entity.Fecha_Depreciacion,
-                                     Num_Act_Depre = Entity.Num_Act_Depre,
-                                     Valor_Tot_Act = Entity.Valor_Tot_Act,
-                                     Valor_Tot_Depre = Entity.Valor_Tot_Depre,
-                                     Valor_Tot_DepreAcum = Entity.Valor_Tot_DepreAcum,
-                                     Valot_Tot_Importe = Entity.Valot_Tot_Importe
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdDepreciacion = Entity.IdDepreciacion,
+                        IdPeriodo = Entity.IdPeriodo,
+                        Cod_Depreciacion = Entity.Cod_Depreciacion,
+                        Descripcion = Entity.Descripcion,
+                        Estado = Entity.Estado,
+                        Fecha_Depreciacion = Entity.Fecha_Depreciacion,
+                        Num_Act_Depre = Entity.Num_Act_Depre,
+                        Valor_Tot_Act = Entity.Valor_Tot_Act,
+                        Valor_Tot_Depre = Entity.Valor_Tot_Depre,
+                        Valor_Tot_DepreAcum = Entity.Valor_Tot_DepreAcum,
+                        Valot_Tot_Importe = Entity.Valot_Tot_Importe,
+                        IdEmpresa_ct = Entity.IdEmpresa_ct,
+                        IdTipoCbte = Entity.IdTipoCbte,
+                        IdCbteCble = Entity.IdCbteCble
                     };
                 }
                 return info;
@@ -144,7 +147,7 @@ namespace Core.Erp.Data.ActivoFijo
                         Valor_Tot_DepreAcum = info.Valor_Tot_DepreAcum,
                         Valot_Tot_Importe = info.Valot_Tot_Importe,
                         IdUsuario = info.IdUsuario,
-                        Fecha_Transac = DateTime.Now
+                        Fecha_Transac = DateTime.Now,
                         
                     };
                     Context.Af_Depreciacion.Add(Entity);

@@ -16,6 +16,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         Af_Depreciacion_Bus bus_depreciacion = new Af_Depreciacion_Bus();
         Af_Depreciacion_Det_Bus bus_depreciacion_det = new Af_Depreciacion_Det_Bus();
         Af_Depreciacion_Det_list lst_depreciacion_det = new Af_Depreciacion_Det_list();
+        string mensaje = string.Empty;
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -45,6 +46,17 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             ViewBag.lst_periodo = lst_periodo;
         }
 
+        private bool validar(Af_Depreciacion_Info i_validar, ref string msg)
+        {
+            i_validar.lst_detalle = lst_depreciacion_det.get_list();
+            if (i_validar.lst_detalle.Count == 0)
+            {
+                msg = "No existen activos a depreciarse";
+                return false;
+            }
+            return true;
+        }
+
         public ActionResult Nuevo()
         {
             Af_Depreciacion_Info model = new Af_Depreciacion_Info
@@ -62,7 +74,20 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Nuevo(Af_Depreciacion_Info model)
         {
-            return View(model);
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
+            model.IdUsuario = Session["IdUsuario"].ToString();            
+            if (!bus_depreciacion.guardarDB(model))
+            {
+                ViewBag.mensaje = "No se ha podido guardar el registro";
+                cargar_combos();
+                return View(model);
+            }
+            return RedirectToAction("Index");
         }
 
         public ActionResult Modificar(decimal IdDepreciacion = 0)
@@ -80,7 +105,20 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Modificar(Af_Depreciacion_Info model)
         {
-            return View(model);
+            if (!validar(model, ref mensaje))
+            {
+                cargar_combos();
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
+            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            if (!bus_depreciacion.modificarDB(model))
+            {
+                cargar_combos();
+                ViewBag.mensaje = "No se ha podido modificar el registro";
+                return View(model);
+            }
+            return RedirectToAction("Index");
         }
 
         public ActionResult Anular(decimal IdDepreciacion = 0)
@@ -98,13 +136,24 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Anular(Af_Depreciacion_Info model)
         {
-            return View(model);
+            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            if (!bus_depreciacion.anularDB(model))
+            {
+                cargar_combos();
+                ViewBag.mensaje = "No se ha podido anular el registro";
+                return View(model);
+            }
+            return RedirectToAction("Index");
         }
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial_depreciacion_det(decimal IdDepreciacion = 0)
         {
-            var model = new object[0];
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            Af_Depreciacion_Info model = new Af_Depreciacion_Info();
+            model.lst_detalle = bus_depreciacion_det.get_list(IdEmpresa, IdDepreciacion);
+            if (model.lst_detalle.Count == 0)
+                model.lst_detalle = lst_depreciacion_det.get_list();
             return PartialView("_GridViewPartial_depreciacion_det", model);
         }
     }

@@ -7,27 +7,35 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdDepreciacion)
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
 
+    }
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdPeriodo">Periodo*</label>
-                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodo, "IdPeriodo", "nom_periodo_combo"), new { @class = "form-control", @id = "IdPeriodo" , @disabled = "disabled" });
+                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodo, "IdPeriodo", "nom_periodo_combo"), new { @class = "form-control", @id = "IdPeriodo" , @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="Cod_Depreciacion">Código</label>
-                    @Html.TextBoxFor(q => q.Cod_Depreciacion, new { @class = "form-control" });
+                    @Html.TextBoxFor(q => q.Cod_Depreciacion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Cod_Depreciacion, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-offset-5 col-md-2">
                 <div class="form-group">
                     <label for="Cod_Depreciacion">Fecha*</label>
-                    @Html.TextBoxFor(q => q.Fecha_Depreciacion, new { @class = "form-control", @id = "Fecha_Depreciacion" });
+                    @Html.TextBoxFor(q => q.Fecha_Depreciacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_Depreciacion" })
                     @Html.ValidationMessageFor(q => q.Fecha_Depreciacion, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -39,7 +47,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="Descripcion">Observación</label>
-                    @Html.TextAreaFor(q => q.Descripcion, new { @class = "form-control", @rows = 3 });
+                    @Html.TextAreaFor(q => q.Descripcion, new { @class = "form-control", @rows = 3 })
                     @Html.ValidationMessageFor(q => q.Descripcion, "", new { @class = "text-danger" })
                 </div>
             </div>
