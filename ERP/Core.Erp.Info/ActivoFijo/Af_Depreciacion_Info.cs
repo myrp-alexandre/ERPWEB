@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +11,11 @@ namespace Core.Erp.Info.ActivoFijo
     {
         public int IdEmpresa { get; set; }
         public decimal IdDepreciacion { get; set; }
+        [StringLength(20, ErrorMessage = "el campo código debe tener máximo 20 caracteres")]
         public string Cod_Depreciacion { get; set; }
+        [Required(ErrorMessage ="El campo periodo es obligatorio")]
         public int IdPeriodo { get; set; }
+        [StringLength(200, ErrorMessage = "el campo observación debe tener máximo 200 caracteres")]
         public string Descripcion { get; set; }
         public System.DateTime Fecha_Depreciacion { get; set; }
         public int Num_Act_Depre { get; set; }
