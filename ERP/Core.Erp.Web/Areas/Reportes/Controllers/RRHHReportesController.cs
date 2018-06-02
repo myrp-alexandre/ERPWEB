@@ -14,14 +14,26 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     {
 
 
-        public ActionResult ROL_001(int IdEmpresa=0, int IdNomina=0, int IdNominaTipo=0, int IdPeriodo=0)
+        public ActionResult ROL_001(int IdEmpresa=0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui= 0, int IdPeriodo=0)
         {
             ROL_001_Rpt model = new ROL_001_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
-            model.p_IdNomina.Value = IdNomina;
-            model.p_IdNominaTipo.Value = IdNominaTipo;
+            model.p_IdNomina.Value = IdNomina_Tipo;
+            model.p_IdNominaTipo.Value = IdNomina_TipoLiqui;
             model.p_IdPeriodo.Value = IdPeriodo;
             model.usuario = Session["IdUsuario"].ToString();
+            model.empresa = Session["nom_empresa"].ToString();
+            if (IdPeriodo == 0)
+                model.RequestParameters = false;
+            return View(model);
+        }
+        public ActionResult ROL_002(int IdEmpresa = 0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0)
+        {
+            ROL_002_Rpt model = new ROL_002_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdNomina.Value = IdNomina_Tipo;
+            model.p_IdNominaTipo.Value = IdNomina_TipoLiqui;
+            model.p_IdPeriodo.Value = IdPeriodo;
             model.empresa = Session["nom_empresa"].ToString();
             if (IdPeriodo == 0)
                 model.RequestParameters = false;

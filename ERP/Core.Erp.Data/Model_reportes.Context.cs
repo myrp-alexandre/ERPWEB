@@ -38,6 +38,7 @@ namespace Core.Erp.Data
         public virtual DbSet<VWINV_002> VWINV_002 { get; set; }
         public virtual DbSet<VWINV_004> VWINV_004 { get; set; }
         public virtual DbSet<VWROL_001> VWROL_001 { get; set; }
+        public virtual DbSet<VWROL_002> VWROL_002 { get; set; }
     
         public virtual ObjectResult<SPACTF_004_detalle_Result> SPACTF_004_detalle(Nullable<int> idEmpresa, Nullable<System.DateTime> fecha_corte, string idUsuario)
         {
@@ -128,6 +129,27 @@ namespace Core.Erp.Data
                 new ObjectParameter("mostrar_stock_0", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPINV_001_Result>("SPINV_001", idEmpresaParameter, idSucursal_iniParameter, idSucursal_finParameter, idBodega_iniParameter, idBodega_finParameter, idProducto_iniParameter, idProducto_finParameter, idCategoriaParameter, idLineaParameter, idGrupoParameter, idSubGrupoParameter, fecha_corteParameter, mostrar_stock_0Parameter);
+        }
+    
+        public virtual int SPROL_002(Nullable<int> idempresa, Nullable<int> idnomina_tipo, Nullable<int> idnomina_Tipo_liq, Nullable<int> idperiodo)
+        {
+            var idempresaParameter = idempresa.HasValue ?
+                new ObjectParameter("idempresa", idempresa) :
+                new ObjectParameter("idempresa", typeof(int));
+    
+            var idnomina_tipoParameter = idnomina_tipo.HasValue ?
+                new ObjectParameter("idnomina_tipo", idnomina_tipo) :
+                new ObjectParameter("idnomina_tipo", typeof(int));
+    
+            var idnomina_Tipo_liqParameter = idnomina_Tipo_liq.HasValue ?
+                new ObjectParameter("idnomina_Tipo_liq", idnomina_Tipo_liq) :
+                new ObjectParameter("idnomina_Tipo_liq", typeof(int));
+    
+            var idperiodoParameter = idperiodo.HasValue ?
+                new ObjectParameter("idperiodo", idperiodo) :
+                new ObjectParameter("idperiodo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPROL_002", idempresaParameter, idnomina_tipoParameter, idnomina_Tipo_liqParameter, idperiodoParameter);
         }
     }
 }
