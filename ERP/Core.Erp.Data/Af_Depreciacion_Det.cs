@@ -16,10 +16,8 @@ namespace Core.Erp.Data
     {
         public int IdEmpresa { get; set; }
         public decimal IdDepreciacion { get; set; }
-        public int IdTipoDepreciacion { get; set; }
         public int Secuencia { get; set; }
         public int IdActivoFijo { get; set; }
-        public int Ciclo { get; set; }
         public string Concepto { get; set; }
         public double Valor_Compra { get; set; }
         public double Valor_Salvamento { get; set; }
@@ -27,10 +25,7 @@ namespace Core.Erp.Data
         public double Porc_Depreciacion { get; set; }
         public double Valor_Depreciacion { get; set; }
         public double Valor_Depre_Acum { get; set; }
-        public double Valor_Importe { get; set; }
-        public bool Es_Activo_x_Mejora { get; set; }
     
         public virtual Af_Activo_fijo Af_Activo_fijo { get; set; }
-        public virtual Af_Depreciacion Af_Depreciacion { get; set; }
     }
 }

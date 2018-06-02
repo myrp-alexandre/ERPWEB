@@ -23,16 +23,12 @@ namespace Core.Erp.Data.ActivoFijo
                         IdEmpresa = Entity.IdEmpresa,
                         IdActivoFijo = Entity.IdActivoFijo,
                         IdDepreciacion = Entity.IdDepreciacion,
-                        Ciclo = Entity.Ciclo,
                         Concepto = Entity.Concepto,
-                        Es_Activo_x_Mejora = Entity.Es_Activo_x_Mejora,
-                        IdTipoDepreciacion = Entity.IdTipoDepreciacion,
                         Porc_Depreciacion = Entity.Porc_Depreciacion,
                         Secuencia = Entity.Secuencia,
                         Valor_Compra = Entity.Valor_Compra,
                         Valor_Depreciacion = Entity.Valor_Depreciacion,
                         Valor_Depre_Acum = Entity.Valor_Depre_Acum,
-                        Valor_Importe = Entity.Valor_Importe,
                         Valor_Salvamento = Entity.Valor_Salvamento,
                         Vida_Util = Entity.Vida_Util
                     };
@@ -57,16 +53,12 @@ namespace Core.Erp.Data.ActivoFijo
                         IdEmpresa = info.IdEmpresa,
                         IdActivoFijo = info.IdActivoFijo,
                         IdDepreciacion = info.IdDepreciacion,
-                        Ciclo = info.Ciclo,
                         Concepto = info.Concepto,
-                        Es_Activo_x_Mejora = info.Es_Activo_x_Mejora,
-                        IdTipoDepreciacion = info.IdTipoDepreciacion,
                         Porc_Depreciacion = info.Porc_Depreciacion,
                         Secuencia = info.Secuencia,
                         Valor_Compra = info.Valor_Compra,
                         Valor_Depreciacion = info.Valor_Depreciacion,
                         Valor_Depre_Acum = info.Valor_Depre_Acum,
-                        Valor_Importe = info.Valor_Importe,
                         Valor_Salvamento = info.Valor_Salvamento,
                         Vida_Util = info.Vida_Util
 

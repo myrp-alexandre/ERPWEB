@@ -23,7 +23,6 @@ namespace Core.Erp.Data.ActivoFijo
                                {
                                    IdEmpresa = q.IdEmpresa,
                                    IdDepreciacion = q.IdDepreciacion,
-                                   IdTipoDepreciacion = q.IdTipoDepreciacion,
                                    IdPeriodo = q.IdPeriodo,
                                     Cod_Depreciacion = q.Cod_Depreciacion,
                                     Descripcion = q.Descripcion,
@@ -43,7 +42,6 @@ namespace Core.Erp.Data.ActivoFijo
                                  {
                                      IdEmpresa = q.IdEmpresa,
                                      IdDepreciacion = q.IdDepreciacion,
-                                     IdTipoDepreciacion = q.IdTipoDepreciacion,
                                      IdPeriodo = q.IdPeriodo,
                                      Cod_Depreciacion = q.Cod_Depreciacion,
                                      Descripcion = q.Descripcion,
@@ -78,7 +76,6 @@ namespace Core.Erp.Data.ActivoFijo
                     {
                                      IdEmpresa = Entity.IdEmpresa,
                                      IdDepreciacion = Entity.IdDepreciacion,
-                                     IdTipoDepreciacion = Entity.IdTipoDepreciacion,
                                      IdPeriodo = Entity.IdPeriodo,
                                      Cod_Depreciacion = Entity.Cod_Depreciacion,
                                      Descripcion = Entity.Descripcion,
@@ -132,7 +129,6 @@ namespace Core.Erp.Data.ActivoFijo
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdDepreciacion = info.IdDepreciacion=get_id(info.IdEmpresa),
-                        IdTipoDepreciacion = info.IdTipoDepreciacion,
                         IdPeriodo = info.IdPeriodo,
                         Cod_Depreciacion = info.Cod_Depreciacion,
                         Descripcion = info.Descripcion,
@@ -167,8 +163,7 @@ namespace Core.Erp.Data.ActivoFijo
                 {
                     Af_Depreciacion Entity = Context.Af_Depreciacion.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdDepreciacion == info.IdDepreciacion);
                     if (Entity == null) return false;
-
-                    Entity.IdTipoDepreciacion = info.IdTipoDepreciacion;
+                    
                     Entity.IdPeriodo = info.IdPeriodo;
                     Entity.Cod_Depreciacion = info.Cod_Depreciacion;
                     Entity.Descripcion = info.Descripcion;

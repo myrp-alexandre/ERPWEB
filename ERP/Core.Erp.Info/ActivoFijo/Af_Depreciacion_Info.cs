@@ -10,7 +10,6 @@ namespace Core.Erp.Info.ActivoFijo
     {
         public int IdEmpresa { get; set; }
         public decimal IdDepreciacion { get; set; }
-        public int IdTipoDepreciacion { get; set; }
         public string Cod_Depreciacion { get; set; }
         public int IdPeriodo { get; set; }
         public string Descripcion { get; set; }
@@ -27,9 +26,10 @@ namespace Core.Erp.Info.ActivoFijo
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotivoAnula { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
         public string Estado { get; set; }
+        public Nullable<int> IdEmpresa_ct { get; set; }
+        public Nullable<int> IdTipoCbte { get; set; }
+        public Nullable<decimal> IdCbteCble { get; set; }
 
         //campos que no existen en la tabla
 

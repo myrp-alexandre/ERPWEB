@@ -7847,7 +7847,6 @@
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Index.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Modificar.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Nuevo.cshtml" />
-    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Index.cshtml" />
     <Content Include="Areas\General\Views\Persona\_ComboBox_persona_x_tipo.cshtml" />
     <Content Include="Areas\Facturacion\Views\Cliente\_GridViewPartial_cliente_contacto.cshtml" />
     <Content Include="Areas\Inventario\Views\IngresoInventario\Index.cshtml" />
@@ -7887,7 +7886,6 @@
     <Content Include="Areas\RRHH\Views\Vacaciones\_GridViewPartial_solicitud_vacaciones.cshtml" />
     <Content Include="Areas\RRHH\Views\ActaFiniquito\_GridViewPartial_liquidacion_empleado.cshtml" />
     <Content Include="Areas\RRHH\Views\ActaFiniquito\_GridViewPartial_liquidacion_empleado_det.cshtml" />
-    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Index.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\_GridViewPartial_movimiento_egresos.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Anular.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Index.cshtml" />
@@ -7970,6 +7968,7 @@
     <Content Include="Areas\Reportes\Views\Layout\_Layout_filtros.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_002.cshtml" />
     <Content Include="Areas\RRHH\Views\ParticipacionUtilidad\_GridViewPartial_utilidades_detalle.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />

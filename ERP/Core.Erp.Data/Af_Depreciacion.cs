@@ -14,15 +14,8 @@ namespace Core.Erp.Data
     
     public partial class Af_Depreciacion
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Af_Depreciacion()
-        {
-            this.Af_Depreciacion_Det = new HashSet<Af_Depreciacion_Det>();
-        }
-    
         public int IdEmpresa { get; set; }
         public decimal IdDepreciacion { get; set; }
-        public int IdTipoDepreciacion { get; set; }
         public string Cod_Depreciacion { get; set; }
         public int IdPeriodo { get; set; }
         public string Descripcion { get; set; }
@@ -39,11 +32,9 @@ namespace Core.Erp.Data
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotivoAnula { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
         public string Estado { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Af_Depreciacion_Det> Af_Depreciacion_Det { get; set; }
+        public Nullable<int> IdEmpresa_ct { get; set; }
+        public Nullable<int> IdTipoCbte { get; set; }
+        public Nullable<decimal> IdCbteCble { get; set; }
     }
 }

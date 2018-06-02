@@ -128,12 +128,10 @@
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdDepreciacion" />
-            <PropertyRef Name="IdTipoDepreciacion" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdDepreciacion" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdTipoDepreciacion" Type="int" Nullable="false" />
-          <Property Name="Cod_Depreciacion" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="Cod_Depreciacion" Type="char" MaxLength="20" />
           <Property Name="IdPeriodo" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="200" />
           <Property Name="Fecha_Depreciacion" Type="datetime" Nullable="false" />
@@ -149,23 +147,21 @@
           <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_UltAnu" Type="datetime" />
           <Property Name="MotivoAnula" Type="varchar" MaxLength="100" />
-          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
-          <Property Name="ip" Type="varchar" MaxLength="25" />
-          <Property Name="Estado" Type="char" MaxLength="1" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdEmpresa_ct" Type="int" />
+          <Property Name="IdTipoCbte" Type="int" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="Af_Depreciacion_Det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdDepreciacion" />
-            <PropertyRef Name="IdTipoDepreciacion" />
             <PropertyRef Name="Secuencia" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdDepreciacion" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdTipoDepreciacion" Type="int" Nullable="false" />
           <Property Name="Secuencia" Type="int" Nullable="false" />
           <Property Name="IdActivoFijo" Type="int" Nullable="false" />
-          <Property Name="Ciclo" Type="int" Nullable="false" />
           <Property Name="Concepto" Type="varchar" MaxLength="1000" />
           <Property Name="Valor_Compra" Type="float" Nullable="false" />
           <Property Name="Valor_Salvamento" Type="float" Nullable="false" />
@@ -173,8 +169,6 @@
           <Property Name="Porc_Depreciacion" Type="float" Nullable="false" />
           <Property Name="Valor_Depreciacion" Type="float" Nullable="false" />
           <Property Name="Valor_Depre_Acum" Type="float" Nullable="false" />
-          <Property Name="Valor_Importe" Type="float" Nullable="false" />
-          <Property Name="Es_Activo_x_Mejora" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Af_Mej_Baj_Activo">
           <Key>
@@ -423,22 +417,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Af_Depreciacion_Det_Af_Depreciacion">
-          <End Role="Af_Depreciacion" Type="Self.Af_Depreciacion" Multiplicity="1" />
-          <End Role="Af_Depreciacion_Det" Type="Self.Af_Depreciacion_Det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Af_Depreciacion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdDepreciacion" />
-              <PropertyRef Name="IdTipoDepreciacion" />
-            </Principal>
-            <Dependent Role="Af_Depreciacion_Det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdDepreciacion" />
-              <PropertyRef Name="IdTipoDepreciacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Af_Mej_Baj_Activo_Af_Activo_fijo">
           <End Role="Af_Activo_fijo" Type="Self.Af_Activo_fijo" Multiplicity="1" />
           <End Role="Af_Mej_Baj_Activo" Type="Self.Af_Mej_Baj_Activo" Multiplicity="*" />
@@ -533,10 +511,6 @@
             <End Role="Af_Activo_fijo" EntitySet="Af_Activo_fijo" />
             <End Role="Af_Depreciacion_Det" EntitySet="Af_Depreciacion_Det" />
           </AssociationSet>
-          <AssociationSet Name="FK_Af_Depreciacion_Det_Af_Depreciacion" Association="Self.FK_Af_Depreciacion_Det_Af_Depreciacion">
-            <End Role="Af_Depreciacion" EntitySet="Af_Depreciacion" />
-            <End Role="Af_Depreciacion_Det" EntitySet="Af_Depreciacion_Det" />
-          </AssociationSet>
           <AssociationSet Name="FK_Af_Mej_Baj_Activo_Af_Activo_fijo" Association="Self.FK_Af_Mej_Baj_Activo_Af_Activo_fijo">
             <End Role="Af_Activo_fijo" EntitySet="Af_Activo_fijo" />
             <End Role="Af_Mej_Baj_Activo" EntitySet="Af_Mej_Baj_Activo" />
@@ -616,10 +590,6 @@
           <EntitySet Name="Af_Depreciacion_Det" EntityType="Model_activo_fijo.Af_Depreciacion_Det" />
           <AssociationSet Name="FK_Af_Depreciacion_Det_Af_Activo_fijo" Association="Model_activo_fijo.FK_Af_Depreciacion_Det_Af_Activo_fijo">
             <End Role="Af_Activo_fijo" EntitySet="Af_Activo_fijo" />
-            <End Role="Af_Depreciacion_Det" EntitySet="Af_Depreciacion_Det" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Af_Depreciacion_Det_Af_Depreciacion" Association="Model_activo_fijo.FK_Af_Depreciacion_Det_Af_Depreciacion">
-            <End Role="Af_Depreciacion" EntitySet="Af_Depreciacion" />
             <End Role="Af_Depreciacion_Det" EntitySet="Af_Depreciacion_Det" />
           </AssociationSet>
           </EntityContainer>
@@ -1046,12 +1016,10 @@
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdDepreciacion" />
-            <PropertyRef Name="IdTipoDepreciacion" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdDepreciacion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdTipoDepreciacion" Type="Int32" Nullable="false" />
-          <Property Name="Cod_Depreciacion" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="Cod_Depreciacion" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
           <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_Depreciacion" Type="DateTime" Nullable="false" Precision="3" />
@@ -1067,24 +1035,21 @@
           <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="Af_Depreciacion_Det" Relationship="Model_activo_fijo.FK_Af_Depreciacion_Det_Af_Depreciacion" FromRole="Af_Depreciacion" ToRole="Af_Depreciacion_Det" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdEmpresa_ct" Type="Int32" />
+          <Property Name="IdTipoCbte" Type="Int32" />
+          <Property Name="IdCbteCble" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="Af_Depreciacion_Det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdDepreciacion" />
-            <PropertyRef Name="IdTipoDepreciacion" />
             <PropertyRef Name="Secuencia" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdDepreciacion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdTipoDepreciacion" Type="Int32" Nullable="false" />
           <Property Name="Secuencia" Type="Int32" Nullable="false" />
           <Property Name="IdActivoFijo" Type="Int32" Nullable="false" />
-          <Property Name="Ciclo" Type="Int32" Nullable="false" />
           <Property Name="Concepto" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Valor_Compra" Type="Double" Nullable="false" />
           <Property Name="Valor_Salvamento" Type="Double" Nullable="false" />
@@ -1092,10 +1057,7 @@
           <Property Name="Porc_Depreciacion" Type="Double" Nullable="false" />
           <Property Name="Valor_Depreciacion" Type="Double" Nullable="false" />
           <Property Name="Valor_Depre_Acum" Type="Double" Nullable="false" />
-          <Property Name="Valor_Importe" Type="Double" Nullable="false" />
-          <Property Name="Es_Activo_x_Mejora" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Af_Activo_fijo" Relationship="Model_activo_fijo.FK_Af_Depreciacion_Det_Af_Activo_fijo" FromRole="Af_Depreciacion_Det" ToRole="Af_Activo_fijo" />
-          <NavigationProperty Name="Af_Depreciacion" Relationship="Model_activo_fijo.FK_Af_Depreciacion_Det_Af_Depreciacion" FromRole="Af_Depreciacion_Det" ToRole="Af_Depreciacion" />
         </EntityType>
         <Association Name="FK_Af_Depreciacion_Det_Af_Activo_fijo">
           <End Type="Model_activo_fijo.Af_Activo_fijo" Role="Af_Activo_fijo" Multiplicity="1" />
@@ -1108,22 +1070,6 @@
             <Dependent Role="Af_Depreciacion_Det">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdActivoFijo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Af_Depreciacion_Det_Af_Depreciacion">
-          <End Type="Model_activo_fijo.Af_Depreciacion" Role="Af_Depreciacion" Multiplicity="1" />
-          <End Type="Model_activo_fijo.Af_Depreciacion_Det" Role="Af_Depreciacion_Det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Af_Depreciacion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdDepreciacion" />
-              <PropertyRef Name="IdTipoDepreciacion" />
-            </Principal>
-            <Dependent Role="Af_Depreciacion_Det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdDepreciacion" />
-              <PropertyRef Name="IdTipoDepreciacion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1376,9 +1322,10 @@
           <EntitySetMapping Name="Af_Depreciacion">
             <EntityTypeMapping TypeName="Model_activo_fijo.Af_Depreciacion">
               <MappingFragment StoreEntitySet="Af_Depreciacion">
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdEmpresa_ct" ColumnName="IdEmpresa_ct" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="ip" ColumnName="ip" />
-                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
                 <ScalarProperty Name="MotivoAnula" ColumnName="MotivoAnula" />
                 <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
                 <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
@@ -1395,7 +1342,6 @@
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
                 <ScalarProperty Name="Cod_Depreciacion" ColumnName="Cod_Depreciacion" />
-                <ScalarProperty Name="IdTipoDepreciacion" ColumnName="IdTipoDepreciacion" />
                 <ScalarProperty Name="IdDepreciacion" ColumnName="IdDepreciacion" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
@@ -1404,8 +1350,6 @@
           <EntitySetMapping Name="Af_Depreciacion_Det">
             <EntityTypeMapping TypeName="Model_activo_fijo.Af_Depreciacion_Det">
               <MappingFragment StoreEntitySet="Af_Depreciacion_Det">
-                <ScalarProperty Name="Es_Activo_x_Mejora" ColumnName="Es_Activo_x_Mejora" />
-                <ScalarProperty Name="Valor_Importe" ColumnName="Valor_Importe" />
                 <ScalarProperty Name="Valor_Depre_Acum" ColumnName="Valor_Depre_Acum" />
                 <ScalarProperty Name="Valor_Depreciacion" ColumnName="Valor_Depreciacion" />
                 <ScalarProperty Name="Porc_Depreciacion" ColumnName="Porc_Depreciacion" />
@@ -1413,10 +1357,8 @@
                 <ScalarProperty Name="Valor_Salvamento" ColumnName="Valor_Salvamento" />
                 <ScalarProperty Name="Valor_Compra" ColumnName="Valor_Compra" />
                 <ScalarProperty Name="Concepto" ColumnName="Concepto" />
-                <ScalarProperty Name="Ciclo" ColumnName="Ciclo" />
                 <ScalarProperty Name="IdActivoFijo" ColumnName="IdActivoFijo" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdTipoDepreciacion" ColumnName="IdTipoDepreciacion" />
                 <ScalarProperty Name="IdDepreciacion" ColumnName="IdDepreciacion" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
