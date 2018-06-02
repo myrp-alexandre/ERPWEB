@@ -7,13 +7,7 @@
         settings.KeyFieldName = "Secuencia";
         settings.Width = Unit.Percentage(100);
 
-        settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowNewButton = true;
-        settings.CommandColumn.ShowEditButton = true;
-        settings.CommandColumn.ShowDeleteButton = true;
-
-        settings.SettingsContextMenu.Enabled = true;
-        settings.SettingsBehavior.EnableCustomizationWindow = true;
+        settings.CommandColumn.Visible = false;
 
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
@@ -23,13 +17,13 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
 
-        settings.Columns.Add("IdActivoFijo").Width = Unit.Percentage(40);
-        settings.Columns.Add("Valor_Compra").Width = Unit.Percentage(10);
-        settings.Columns.Add("Valor_Salvamento").Width = Unit.Percentage(10);
-        settings.Columns.Add("Vida_Util").Width = Unit.Percentage(10);
-        settings.Columns.Add("Porc_Depreciacion").Width = Unit.Percentage(10);
-        settings.Columns.Add("Valor_Depreciacion").Width = Unit.Percentage(10);
-        settings.Columns.Add("Valor_Depre_Acum").Width = Unit.Percentage(10);
+
+        settings.Columns.Add("nom_tipo","Tipo").Width = Unit.Percentage(20);
+        settings.Columns.Add("nom_categoria","Categoría").Width = Unit.Percentage(20);
+        settings.Columns.Add("Af_Nombre","Activo").Width = Unit.Percentage(30);
+        settings.Columns.Add("Valor_Compra","Valor compra").Width = Unit.Percentage(10);
+        settings.Columns.Add("Valor_Depreciacion","Valor depreciación").Width = Unit.Percentage(10);
+        settings.Columns.Add("Valor_Depre_Acum","Valor depr. acumulada").Width = Unit.Percentage(10);
     });
 }
 @grid.Bind(Model.lst_detalle).GetHtml()

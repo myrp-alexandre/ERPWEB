@@ -57,6 +57,13 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             return true;
         }
 
+        public void Get_list_activos_a_depreciar(int IdPeriodo = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            string IdUsuario = Session["IdUsuario"].ToString();
+            var lst = bus_depreciacion_det.get_list_a_depreciar(IdEmpresa, IdPeriodo, IdUsuario);
+            lst_depreciacion_det.set_list(lst);
+        }
         public ActionResult Nuevo()
         {
             Af_Depreciacion_Info model = new Af_Depreciacion_Info

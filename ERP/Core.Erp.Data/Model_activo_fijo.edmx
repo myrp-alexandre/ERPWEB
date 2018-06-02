@@ -459,6 +459,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spACTF_activos_a_depreciar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="Fecha_ini" Type="datetime" Mode="In" />
+          <Parameter Name="Fecha_fin" Type="datetime" Mode="In" />
+          <Parameter Name="IdUsuario" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="Model_activo_fijoStoreContainer">
           <EntitySet Name="Af_Activo_fijo" EntityType="Self.Af_Activo_fijo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Af_Activo_fijo_Categoria" EntityType="Self.Af_Activo_fijo_Categoria" Schema="dbo" store:Type="Tables" />
@@ -592,6 +598,12 @@
             <End Role="Af_Activo_fijo" EntitySet="Af_Activo_fijo" />
             <End Role="Af_Depreciacion_Det" EntitySet="Af_Depreciacion_Det" />
           </AssociationSet>
+          <FunctionImport Name="spACTF_activos_a_depreciar" ReturnType="Collection(Model_activo_fijo.spACTF_activos_a_depreciar_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="Fecha_ini" Mode="In" Type="DateTime" />
+            <Parameter Name="Fecha_fin" Mode="In" Type="DateTime" />
+            <Parameter Name="IdUsuario" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Af_Activo_fijo_Categoria">
           <Key>
@@ -1073,6 +1085,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="spACTF_activos_a_depreciar_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdActivoFijo" Nullable="false" />
+          <Property Type="String" Name="CodActivoFijo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Af_Nombre" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="IdUsuario" Nullable="false" MaxLength="25" />
+          <Property Type="Double" Name="Af_costo_compra" Nullable="false" />
+          <Property Type="Double" Name="Af_depreciacion_acum" Nullable="false" />
+          <Property Type="Double" Name="Af_valor_depreciacion" Nullable="false" />
+          <Property Type="Int32" Name="IdActijoFijoTipo" Nullable="true" />
+          <Property Type="String" Name="nom_tipo" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="IdCategoriaAF" Nullable="true" />
+          <Property Type="String" Name="nom_categoria" Nullable="true" MaxLength="500" />
+          <Property Type="Double" Name="Af_porcentaje_deprec" Nullable="true" />
+          <Property Type="Double" Name="Valor_importe" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1364,6 +1392,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spACTF_activos_a_depreciar" FunctionName="Model_activo_fijo.Store.spACTF_activos_a_depreciar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_activo_fijo.spACTF_activos_a_depreciar_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdActivoFijo" ColumnName="IdActivoFijo" />
+                <ScalarProperty Name="CodActivoFijo" ColumnName="CodActivoFijo" />
+                <ScalarProperty Name="Af_Nombre" ColumnName="Af_Nombre" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Af_costo_compra" ColumnName="Af_costo_compra" />
+                <ScalarProperty Name="Af_depreciacion_acum" ColumnName="Af_depreciacion_acum" />
+                <ScalarProperty Name="Af_valor_depreciacion" ColumnName="Af_valor_depreciacion" />
+                <ScalarProperty Name="IdActijoFijoTipo" ColumnName="IdActijoFijoTipo" />
+                <ScalarProperty Name="nom_tipo" ColumnName="nom_tipo" />
+                <ScalarProperty Name="IdCategoriaAF" ColumnName="IdCategoriaAF" />
+                <ScalarProperty Name="nom_categoria" ColumnName="nom_categoria" />
+                <ScalarProperty Name="Af_porcentaje_deprec" ColumnName="Af_porcentaje_deprec" />
+                <ScalarProperty Name="Valor_importe" ColumnName="Valor_importe" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

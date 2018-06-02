@@ -19,5 +19,13 @@ namespace Core.Erp.Info.ActivoFijo
         public double Porc_Depreciacion { get; set; }
         public double Valor_Depreciacion { get; set; }
         public double Valor_Depre_Acum { get; set; }
+
+        //Campos que no existen en la table
+        public string CodActivoFijo { get; set; }
+        public string Af_Nombre { get; set; }
+        public Nullable<int> IdActijoFijoTipo { get; set; }
+        public string nom_tipo { get; set; }
+        public Nullable<int> IdCategoriaAF { get; set; }
+        public string nom_categoria { get; set; }
     }
 }

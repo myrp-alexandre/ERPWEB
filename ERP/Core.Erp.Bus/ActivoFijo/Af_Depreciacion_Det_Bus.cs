@@ -25,6 +25,19 @@ namespace Core.Erp.Bus.ActivoFijo
             }
         }
 
+        public List<Af_Depreciacion_Det_Info> get_list_a_depreciar(int IdEmpresa, int IdPeriodo, string IdUsuario)
+        {
+            try
+            {
+                return odata.get_list_a_depreciar(IdEmpresa, IdPeriodo, IdUsuario);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool guardarDB(Af_Depreciacion_Det_Info info)
         {
             try

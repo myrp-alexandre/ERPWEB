@@ -77,5 +77,32 @@
         $('#Fecha_Depreciacion').datepicker({
             autoclose: true
         })
+
+        $("#IdPeriodo").change(function () {
+            Get_list_activos_a_depreciar();
+        });        
     });
+    function Get_list_activos_a_depreciar() {
+        var periodo = $("#IdPeriodo").val();
+
+        var datos = {
+            IdPeriodo: periodo
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("Get_list_activos_a_depreciar", "DepreciacionAF", new { Area = "ActivoFijo" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                
+            },
+            error: function (error) {
+            }
+        });
+        GridView_depreciacion_det.PerformCallback();
+    }
 </script>
