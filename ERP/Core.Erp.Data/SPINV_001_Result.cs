@@ -11,7 +11,7 @@ namespace Core.Erp.Data
 {
     using System;
     
-    public partial class SPINV_003_Result
+    public partial class SPINV_001_Result
     {
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }

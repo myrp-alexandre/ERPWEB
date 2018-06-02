@@ -1911,83 +1911,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.dbo.vwRo_Solicitud_Vacaci
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.dbo.vwROL_Rpt002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="vwROL_Rpt002">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdNominaTipo" />
-            <PropertyRef Name="IdNominaTipoLiqui" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="Cerrado" />
-            <PropertyRef Name="de_descripcion" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="IdRubro" />
-            <PropertyRef Name="Orden" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="IdDepartamento" />
-            <PropertyRef Name="IdArea" />
-            <PropertyRef Name="IdDivision" />
-            <PropertyRef Name="Area" />
-            <PropertyRef Name="Division" />
-            <PropertyRef Name="pe_FechaIni" />
-            <PropertyRef Name="pe_FechaFin" />
-            <PropertyRef Name="pe_estado" />
-            <PropertyRef Name="Nomina" />
-            <PropertyRef Name="IdPeriodo" />
-            <PropertyRef Name="ru_codRolGen" />
-            <PropertyRef Name="codigo" />
-            <PropertyRef Name="em_nombre" />
-            <PropertyRef Name="RazonSocial" />
-            <PropertyRef Name="NombreComercial" />
-            <PropertyRef Name="ContribuyenteEspecial" />
-            <PropertyRef Name="ru_descripcion" />
-            <PropertyRef Name="NombreCorto" />
-            <PropertyRef Name="DescripcionProcesoNomina" />
-            <PropertyRef Name="Valor" />
-            <PropertyRef Name="Su_Descripcion" />
-          </Key>
-          <Property Name="IdEmpresa" Type="int" Nullable="false" />
-          <Property Name="IdNominaTipo" Type="int" Nullable="false" />
-          <Property Name="IdNominaTipoLiqui" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Observacion" Type="varchar" MaxLength="200" />
-          <Property Name="Cerrado" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="de_descripcion" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdRubro" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Orden" Type="int" Nullable="false" />
-          <Property Name="rub_visible_reporte" Type="bit" />
-          <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
-          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="em_codigo" Type="varchar" MaxLength="50" />
-          <Property Name="IdDepartamento" Type="int" Nullable="false" />
-          <Property Name="IdArea" Type="int" Nullable="false" />
-          <Property Name="IdDivision" Type="int" Nullable="false" />
-          <Property Name="IdCentroCosto" Type="varchar" MaxLength="20" />
-          <Property Name="Area" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Division" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="pe_FechaIni" Type="smalldatetime" Nullable="false" />
-          <Property Name="pe_FechaFin" Type="smalldatetime" Nullable="false" />
-          <Property Name="pe_estado" Type="nvarchar" MaxLength="1" Nullable="false" />
-          <Property Name="Nomina" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="IdPeriodo" Type="int" Nullable="false" />
-          <Property Name="ru_codRolGen" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
-          <Property Name="codigo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="em_nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="RazonSocial" Type="varchar" MaxLength="300" Nullable="false" />
-          <Property Name="NombreComercial" Type="varchar" MaxLength="300" Nullable="false" />
-          <Property Name="ContribuyenteEspecial" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="ru_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="NombreCorto" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="DescripcionProcesoNomina" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Valor" Type="float" Nullable="false" />
-          <Property Name="Centro_costo" Type="varchar" MaxLength="250" />
-          <Property Name="CodCentroCosto" Type="varchar" MaxLength="20" />
-          <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
-          <Property Name="em_fechaIngaRol" Type="datetime" />
-        </EntityType>
         <Association Name="FK_ro_Acta_Finiquito_Detalle_ro_Acta_Finiquito">
           <End Role="ro_Acta_Finiquito" Type="Self.ro_Acta_Finiquito" Multiplicity="1" />
           <End Role="ro_Acta_Finiquito_Detalle" Type="Self.ro_Acta_Finiquito_Detalle" Multiplicity="*" />
@@ -3644,51 +3567,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.dbo.vwROL_Rpt002' no tien
     [vwRo_Solicitud_Vacaciones].[em_codigo] AS [em_codigo]
     FROM [dbo].[vwRo_Solicitud_Vacaciones] AS [vwRo_Solicitud_Vacaciones]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="vwROL_Rpt002" EntityType="Self.vwROL_Rpt002" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [vwROL_Rpt002].[IdEmpresa] AS [IdEmpresa], 
-    [vwROL_Rpt002].[IdNominaTipo] AS [IdNominaTipo], 
-    [vwROL_Rpt002].[IdNominaTipoLiqui] AS [IdNominaTipoLiqui], 
-    [vwROL_Rpt002].[Descripcion] AS [Descripcion], 
-    [vwROL_Rpt002].[Observacion] AS [Observacion], 
-    [vwROL_Rpt002].[Cerrado] AS [Cerrado], 
-    [vwROL_Rpt002].[de_descripcion] AS [de_descripcion], 
-    [vwROL_Rpt002].[IdEmpleado] AS [IdEmpleado], 
-    [vwROL_Rpt002].[IdRubro] AS [IdRubro], 
-    [vwROL_Rpt002].[Orden] AS [Orden], 
-    [vwROL_Rpt002].[rub_visible_reporte] AS [rub_visible_reporte], 
-    [vwROL_Rpt002].[pe_nombre] AS [pe_nombre], 
-    [vwROL_Rpt002].[pe_nombreCompleto] AS [pe_nombreCompleto], 
-    [vwROL_Rpt002].[pe_cedulaRuc] AS [pe_cedulaRuc], 
-    [vwROL_Rpt002].[em_codigo] AS [em_codigo], 
-    [vwROL_Rpt002].[IdDepartamento] AS [IdDepartamento], 
-    [vwROL_Rpt002].[IdArea] AS [IdArea], 
-    [vwROL_Rpt002].[IdDivision] AS [IdDivision], 
-    [vwROL_Rpt002].[IdCentroCosto] AS [IdCentroCosto], 
-    [vwROL_Rpt002].[Area] AS [Area], 
-    [vwROL_Rpt002].[Division] AS [Division], 
-    [vwROL_Rpt002].[pe_FechaIni] AS [pe_FechaIni], 
-    [vwROL_Rpt002].[pe_FechaFin] AS [pe_FechaFin], 
-    [vwROL_Rpt002].[pe_estado] AS [pe_estado], 
-    [vwROL_Rpt002].[Nomina] AS [Nomina], 
-    [vwROL_Rpt002].[IdPeriodo] AS [IdPeriodo], 
-    [vwROL_Rpt002].[ru_codRolGen] AS [ru_codRolGen], 
-    [vwROL_Rpt002].[pe_apellido] AS [pe_apellido], 
-    [vwROL_Rpt002].[codigo] AS [codigo], 
-    [vwROL_Rpt002].[em_nombre] AS [em_nombre], 
-    [vwROL_Rpt002].[RazonSocial] AS [RazonSocial], 
-    [vwROL_Rpt002].[NombreComercial] AS [NombreComercial], 
-    [vwROL_Rpt002].[ContribuyenteEspecial] AS [ContribuyenteEspecial], 
-    [vwROL_Rpt002].[ru_descripcion] AS [ru_descripcion], 
-    [vwROL_Rpt002].[NombreCorto] AS [NombreCorto], 
-    [vwROL_Rpt002].[DescripcionProcesoNomina] AS [DescripcionProcesoNomina], 
-    [vwROL_Rpt002].[Valor] AS [Valor], 
-    [vwROL_Rpt002].[Centro_costo] AS [Centro_costo], 
-    [vwROL_Rpt002].[CodCentroCosto] AS [CodCentroCosto], 
-    [vwROL_Rpt002].[Su_Descripcion] AS [Su_Descripcion], 
-    [vwROL_Rpt002].[em_fechaIngaRol] AS [em_fechaIngaRol]
-    FROM [dbo].[vwROL_Rpt002] AS [vwROL_Rpt002]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_ro_Acta_Finiquito_Detalle_ro_Acta_Finiquito" Association="Self.FK_ro_Acta_Finiquito_Detalle_ro_Acta_Finiquito">
             <End Role="ro_Acta_Finiquito" EntitySet="ro_Acta_Finiquito" />
             <End Role="ro_Acta_Finiquito_Detalle" EntitySet="ro_Acta_Finiquito_Detalle" />
@@ -4320,7 +4198,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.dbo.vwROL_Rpt002' no tien
             <End Role="ro_Solicitud_Vacaciones_x_empleado" EntitySet="ro_Solicitud_Vacaciones_x_empleado" />
           </AssociationSet>
           <EntitySet Name="vwRo_Solicitud_Vacaciones" EntityType="Model_rrhh.vwRo_Solicitud_Vacaciones" />
-          <EntitySet Name="vwROL_Rpt002" EntityType="Model_rrhh.vwROL_Rpt002" />
           <EntitySet Name="ro_empleado" EntityType="Model_rrhh.ro_empleado" />
           <AssociationSet Name="FK_ro_Acta_Finiquito_ro_empleado" Association="Model_rrhh.FK_ro_Acta_Finiquito_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
@@ -7018,83 +6895,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.dbo.vwROL_Rpt002' no tien
           <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="vwROL_Rpt002">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdNominaTipo" />
-            <PropertyRef Name="IdNominaTipoLiqui" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="Cerrado" />
-            <PropertyRef Name="de_descripcion" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="IdRubro" />
-            <PropertyRef Name="Orden" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="IdDepartamento" />
-            <PropertyRef Name="IdArea" />
-            <PropertyRef Name="IdDivision" />
-            <PropertyRef Name="Area" />
-            <PropertyRef Name="Division" />
-            <PropertyRef Name="pe_FechaIni" />
-            <PropertyRef Name="pe_FechaFin" />
-            <PropertyRef Name="pe_estado" />
-            <PropertyRef Name="Nomina" />
-            <PropertyRef Name="IdPeriodo" />
-            <PropertyRef Name="ru_codRolGen" />
-            <PropertyRef Name="codigo" />
-            <PropertyRef Name="em_nombre" />
-            <PropertyRef Name="RazonSocial" />
-            <PropertyRef Name="NombreComercial" />
-            <PropertyRef Name="ContribuyenteEspecial" />
-            <PropertyRef Name="ru_descripcion" />
-            <PropertyRef Name="NombreCorto" />
-            <PropertyRef Name="DescripcionProcesoNomina" />
-            <PropertyRef Name="Valor" />
-            <PropertyRef Name="Su_Descripcion" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
-          <Property Name="IdNominaTipoLiqui" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Observacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Cerrado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="de_descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Orden" Type="Int32" Nullable="false" />
-          <Property Name="rub_visible_reporte" Type="Boolean" />
-          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
-          <Property Name="IdArea" Type="Int32" Nullable="false" />
-          <Property Name="IdDivision" Type="Int32" Nullable="false" />
-          <Property Name="IdCentroCosto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Area" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Division" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_FechaIni" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="pe_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="pe_estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="Nomina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="ru_codRolGen" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="em_nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RazonSocial" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="NombreComercial" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="ContribuyenteEspecial" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="ru_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NombreCorto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DescripcionProcesoNomina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Valor" Type="Double" Nullable="false" />
-          <Property Name="Centro_costo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="CodCentroCosto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
-          <Property Name="em_fechaIngaRol" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="ro_empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -9195,53 +8995,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRUEBAS.dbo.vwROL_Rpt002' no tien
                 <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwROL_Rpt002">
-            <EntityTypeMapping TypeName="Model_rrhh.vwROL_Rpt002">
-              <MappingFragment StoreEntitySet="vwROL_Rpt002">
-                <ScalarProperty Name="em_fechaIngaRol" ColumnName="em_fechaIngaRol" />
-                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
-                <ScalarProperty Name="CodCentroCosto" ColumnName="CodCentroCosto" />
-                <ScalarProperty Name="Centro_costo" ColumnName="Centro_costo" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="DescripcionProcesoNomina" ColumnName="DescripcionProcesoNomina" />
-                <ScalarProperty Name="NombreCorto" ColumnName="NombreCorto" />
-                <ScalarProperty Name="ru_descripcion" ColumnName="ru_descripcion" />
-                <ScalarProperty Name="ContribuyenteEspecial" ColumnName="ContribuyenteEspecial" />
-                <ScalarProperty Name="NombreComercial" ColumnName="NombreComercial" />
-                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
-                <ScalarProperty Name="em_nombre" ColumnName="em_nombre" />
-                <ScalarProperty Name="codigo" ColumnName="codigo" />
-                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
-                <ScalarProperty Name="ru_codRolGen" ColumnName="ru_codRolGen" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-                <ScalarProperty Name="Nomina" ColumnName="Nomina" />
-                <ScalarProperty Name="pe_estado" ColumnName="pe_estado" />
-                <ScalarProperty Name="pe_FechaFin" ColumnName="pe_FechaFin" />
-                <ScalarProperty Name="pe_FechaIni" ColumnName="pe_FechaIni" />
-                <ScalarProperty Name="Division" ColumnName="Division" />
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
-                <ScalarProperty Name="IdDivision" ColumnName="IdDivision" />
-                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
-                <ScalarProperty Name="rub_visible_reporte" ColumnName="rub_visible_reporte" />
-                <ScalarProperty Name="Orden" ColumnName="Orden" />
-                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="de_descripcion" ColumnName="de_descripcion" />
-                <ScalarProperty Name="Cerrado" ColumnName="Cerrado" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
-                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

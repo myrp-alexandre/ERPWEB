@@ -27,17 +27,53 @@ namespace Core.Erp.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<VWCONTA_001> VWCONTA_001 { get; set; }
+        public virtual DbSet<Af_SPACTF_004_detalle> Af_SPACTF_004_detalle { get; set; }
+        public virtual DbSet<Af_SPACTF_004_resumen> Af_SPACTF_004_resumen { get; set; }
         public virtual DbSet<VWACTF_001> VWACTF_001 { get; set; }
         public virtual DbSet<VWACTF_002> VWACTF_002 { get; set; }
         public virtual DbSet<VWACTF_003> VWACTF_003 { get; set; }
+        public virtual DbSet<VWCAJ_001> VWCAJ_001 { get; set; }
+        public virtual DbSet<VWCONTA_001> VWCONTA_001 { get; set; }
         public virtual DbSet<VWINV_001> VWINV_001 { get; set; }
         public virtual DbSet<VWINV_002> VWINV_002 { get; set; }
-        public virtual DbSet<VWCAJ_001> VWCAJ_001 { get; set; }
-        public virtual DbSet<VWROL_001> VWROL_001 { get; set; }
         public virtual DbSet<VWINV_004> VWINV_004 { get; set; }
+        public virtual DbSet<VWROL_001> VWROL_001 { get; set; }
     
-        public virtual ObjectResult<SPINV_003_Result> SPINV_003(Nullable<int> idEmpresa, Nullable<int> idSucursal_ini, Nullable<int> idSucursal_fin, Nullable<int> idBodega_ini, Nullable<int> idBodega_fin, Nullable<decimal> idProducto_ini, Nullable<decimal> idProducto_fin, string idCategoria, Nullable<int> idLinea, Nullable<int> idGrupo, Nullable<int> idSubGrupo, Nullable<System.DateTime> fecha_corte, Nullable<bool> mostrar_stock_0)
+        public virtual ObjectResult<SPACTF_004_detalle_Result> SPACTF_004_detalle(Nullable<int> idEmpresa, Nullable<System.DateTime> fecha_corte, string idUsuario)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var fecha_corteParameter = fecha_corte.HasValue ?
+                new ObjectParameter("Fecha_corte", fecha_corte) :
+                new ObjectParameter("Fecha_corte", typeof(System.DateTime));
+    
+            var idUsuarioParameter = idUsuario != null ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACTF_004_detalle_Result>("SPACTF_004_detalle", idEmpresaParameter, fecha_corteParameter, idUsuarioParameter);
+        }
+    
+        public virtual ObjectResult<SPACTF_004_resumen_Result> SPACTF_004_resumen(Nullable<int> idEmpresa, Nullable<System.DateTime> fecha_corte, string idUsuario)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var fecha_corteParameter = fecha_corte.HasValue ?
+                new ObjectParameter("Fecha_corte", fecha_corte) :
+                new ObjectParameter("Fecha_corte", typeof(System.DateTime));
+    
+            var idUsuarioParameter = idUsuario != null ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACTF_004_resumen_Result>("SPACTF_004_resumen", idEmpresaParameter, fecha_corteParameter, idUsuarioParameter);
+        }
+    
+        public virtual ObjectResult<SPINV_001_Result> SPINV_001(Nullable<int> idEmpresa, Nullable<int> idSucursal_ini, Nullable<int> idSucursal_fin, Nullable<int> idBodega_ini, Nullable<int> idBodega_fin, Nullable<decimal> idProducto_ini, Nullable<decimal> idProducto_fin, string idCategoria, Nullable<int> idLinea, Nullable<int> idGrupo, Nullable<int> idSubGrupo, Nullable<System.DateTime> fecha_corte, Nullable<bool> mostrar_stock_0)
         {
             var idEmpresaParameter = idEmpresa.HasValue ?
                 new ObjectParameter("IdEmpresa", idEmpresa) :
@@ -91,41 +127,7 @@ namespace Core.Erp.Data
                 new ObjectParameter("mostrar_stock_0", mostrar_stock_0) :
                 new ObjectParameter("mostrar_stock_0", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPINV_003_Result>("SPINV_003", idEmpresaParameter, idSucursal_iniParameter, idSucursal_finParameter, idBodega_iniParameter, idBodega_finParameter, idProducto_iniParameter, idProducto_finParameter, idCategoriaParameter, idLineaParameter, idGrupoParameter, idSubGrupoParameter, fecha_corteParameter, mostrar_stock_0Parameter);
-        }
-    
-        public virtual ObjectResult<SPACTF_004_detalle_Result> SPACTF_004_detalle(Nullable<int> idEmpresa, Nullable<System.DateTime> fecha_corte, string idUsuario)
-        {
-            var idEmpresaParameter = idEmpresa.HasValue ?
-                new ObjectParameter("IdEmpresa", idEmpresa) :
-                new ObjectParameter("IdEmpresa", typeof(int));
-    
-            var fecha_corteParameter = fecha_corte.HasValue ?
-                new ObjectParameter("Fecha_corte", fecha_corte) :
-                new ObjectParameter("Fecha_corte", typeof(System.DateTime));
-    
-            var idUsuarioParameter = idUsuario != null ?
-                new ObjectParameter("IdUsuario", idUsuario) :
-                new ObjectParameter("IdUsuario", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACTF_004_detalle_Result>("SPACTF_004_detalle", idEmpresaParameter, fecha_corteParameter, idUsuarioParameter);
-        }
-    
-        public virtual ObjectResult<SPACTF_004_resumen_Result> SPACTF_004_resumen(Nullable<int> idEmpresa, Nullable<System.DateTime> fecha_corte, string idUsuario)
-        {
-            var idEmpresaParameter = idEmpresa.HasValue ?
-                new ObjectParameter("IdEmpresa", idEmpresa) :
-                new ObjectParameter("IdEmpresa", typeof(int));
-    
-            var fecha_corteParameter = fecha_corte.HasValue ?
-                new ObjectParameter("Fecha_corte", fecha_corte) :
-                new ObjectParameter("Fecha_corte", typeof(System.DateTime));
-    
-            var idUsuarioParameter = idUsuario != null ?
-                new ObjectParameter("IdUsuario", idUsuario) :
-                new ObjectParameter("IdUsuario", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACTF_004_resumen_Result>("SPACTF_004_resumen", idEmpresaParameter, fecha_corteParameter, idUsuarioParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPINV_001_Result>("SPINV_001", idEmpresaParameter, idSucursal_iniParameter, idSucursal_finParameter, idBodega_iniParameter, idBodega_finParameter, idProducto_iniParameter, idProducto_finParameter, idCategoriaParameter, idLineaParameter, idGrupoParameter, idSubGrupoParameter, fecha_corteParameter, mostrar_stock_0Parameter);
         }
     }
 }

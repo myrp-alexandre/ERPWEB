@@ -96,7 +96,6 @@ namespace Core.Erp.Data
         public virtual DbSet<vwRo_ActaFiniquito> vwRo_ActaFiniquito { get; set; }
         public virtual DbSet<ro_Solicitud_Vacaciones_x_empleado> ro_Solicitud_Vacaciones_x_empleado { get; set; }
         public virtual DbSet<vwRo_Solicitud_Vacaciones> vwRo_Solicitud_Vacaciones { get; set; }
-        public virtual DbSet<vwROL_Rpt002> vwROL_Rpt002 { get; set; }
         public virtual DbSet<ro_empleado> ro_empleado { get; set; }
         public virtual DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
     

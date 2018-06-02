@@ -125,7 +125,6 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_Historico_Liquidacion_Vacaciones_ro_Solicitud_Vacaciones_x_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Solicitud_Vacaciones_x_empleado_ro_historico_vacaciones_x_empleado" />
         <EntityTypeShape EntityType="Model_rrhh.vwRo_Solicitud_Vacaciones" Width="1.5" PointX="20.375" PointY="30.75" />
-        <EntityTypeShape EntityType="Model_rrhh.vwROL_Rpt002" Width="1.5" PointX="0.75" PointY="31.75" />
         <EntityTypeShape EntityType="Model_rrhh.ro_empleado" Width="1.5" PointX="34.625" PointY="0.75" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Acta_Finiquito_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_CargaFamiliar_ro_empleado" />

@@ -92,6 +92,12 @@
     <Compile Include="Af_Retiro_Activo.cs">
       <DependentUpon>Model_activo_fijo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Af_SPACTF_004_detalle.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Af_SPACTF_004_resumen.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Af_Venta_Activo.cs">
       <DependentUpon>Model_activo_fijo.tt</DependentUpon>
     </Compile>
@@ -796,7 +802,7 @@
     <Compile Include="SPACTF_004_resumen_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
-    <Compile Include="SPINV_003_Result.cs">
+    <Compile Include="SPINV_001_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="spro_nomina_x_pago_utilidad_Result.cs">
@@ -897,9 +903,6 @@
     </Compile>
     <Compile Include="VWROL_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="vwROL_Rpt002.cs">
-      <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="vwRo_ActaFiniquito.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
