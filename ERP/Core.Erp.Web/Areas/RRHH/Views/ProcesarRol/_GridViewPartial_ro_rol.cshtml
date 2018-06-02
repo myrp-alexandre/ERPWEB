@@ -153,14 +153,14 @@
             column.Width = Unit.Pixel(100);
             column.SetDataItemTemplateContent(container =>
             {
-                    Html.DevExpress().HyperLink(hyperlink =>
-                    {
-                        var IdNomina_Tipo = DataBinder.Eval(container.DataItem, "IdNomina_Tipo");
-                        var IdNomina_TipoLiqui = DataBinder.Eval(container.DataItem, "IdNomina_TipoLiqui");
-                        var IdPeriodo = DataBinder.Eval(container.DataItem, "IdPeriodo");
-                        hyperlink.Properties.Text = "Rol gen.";
-                        hyperlink.NavigateUrl = Url.Action("ROL_001", "RRHHReportes", new { IdNomina_Tipo = IdNomina_Tipo, IdNomina_TipoLiqui = IdNomina_TipoLiqui, IdPeriodo = IdPeriodo });
-                    }).Render();
+                Html.DevExpress().HyperLink(hyperlink =>
+                {
+                    var IdNomina_Tipo = DataBinder.Eval(container.DataItem, "IdNomina_Tipo");
+                    var IdNomina_TipoLiqui = DataBinder.Eval(container.DataItem, "IdNomina_TipoLiqui");
+                    var IdPeriodo = DataBinder.Eval(container.DataItem, "IdPeriodo");
+                    hyperlink.Properties.Text = "Rol gen.";
+                    hyperlink.NavigateUrl = Url.Action("ROL_001", "RRHHReportes", new { Area = "Reportes", IdNomina_Tipo = IdNomina_Tipo, IdNomina_TipoLiqui = IdNomina_TipoLiqui, IdPeriodo = IdPeriodo });
+                }).Render();
             });
         });
         settings.Columns.Add(column =>
@@ -169,14 +169,14 @@
             column.Width = Unit.Pixel(100);
             column.SetDataItemTemplateContent(container =>
             {
-                  Html.DevExpress().HyperLink(hyperlink =>
-                    {
-                        var IdNomina_Tipo = DataBinder.Eval(container.DataItem, "IdNomina_Tipo");
-                        var IdNomina_TipoLiqui = DataBinder.Eval(container.DataItem, "IdNomina_TipoLiqui");
-                        var IdPeriodo = DataBinder.Eval(container.DataItem, "IdPeriodo");
-                        hyperlink.Properties.Text = "rol. indv.";
-                        hyperlink.NavigateUrl = Url.Action("ROL_002", "RRHHReportes", new { IdNomina_Tipo = IdNomina_Tipo, IdNomina_TipoLiqui = IdNomina_TipoLiqui, IdPeriodo = IdPeriodo });
-                    }).Render();
+                Html.DevExpress().HyperLink(hyperlink =>
+                {
+                    var IdNomina_Tipo = DataBinder.Eval(container.DataItem, "IdNomina_Tipo");
+                    var IdNomina_TipoLiqui = DataBinder.Eval(container.DataItem, "IdNomina_TipoLiqui");
+                    var IdPeriodo = DataBinder.Eval(container.DataItem, "IdPeriodo");
+                    hyperlink.Properties.Text = "rol. indv.";
+                    hyperlink.NavigateUrl = Url.Action("ROL_002", "RRHHReportes", new { Area = "Reportes",  IdNomina_Tipo = IdNomina_Tipo, IdNomina_TipoLiqui = IdNomina_TipoLiqui, IdPeriodo = IdPeriodo });
+                }).Render();
             });
         });
 

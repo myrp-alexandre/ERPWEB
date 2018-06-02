@@ -7968,6 +7968,7 @@
     <Content Include="bower_DevExpress\knockout\package.json" />
     <Content Include="bower_DevExpress\knockout\README.md" />
     <Content Include="Areas\Reportes\Views\Layout\_Layout_filtros.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_002.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
@@ -8071,7 +8072,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
