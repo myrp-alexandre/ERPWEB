@@ -66,8 +66,8 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
                 Af_fecha_compra = DateTime.Now,
                 Af_fecha_fin_depre = DateTime.Now,
-                Af_fecha_ini_depre = DateTime.Now
-
+                Af_fecha_ini_depre = DateTime.Now,
+                Estado_Proceso = "TIP_ESTADO_AF_ACTIVO"
             };
             cargar_combos();
             return View(model);

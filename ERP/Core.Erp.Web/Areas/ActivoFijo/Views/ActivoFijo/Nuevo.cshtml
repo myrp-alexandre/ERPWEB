@@ -8,6 +8,8 @@
 }
 @using (Html.BeginForm("Nuevo", "ActivoFijo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    @Html.HiddenFor(q => q.IdEmpresa);
+    @Html.HiddenFor(q => q.Estado_Proceso);
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
