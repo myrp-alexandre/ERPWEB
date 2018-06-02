@@ -9,16 +9,19 @@ namespace Core.Erp.Data.ActivoFijo
 {
     public class Af_Depreciacion_Data
     {
-        public List<Af_Depreciacion_Info> get_list(int IdEmpresa, bool mostrar_anulados)
+        public List<Af_Depreciacion_Info> get_list(int IdEmpresa, bool mostrar_anulados, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
             {
+                Fecha_ini = Fecha_ini.Date;
+                Fecha_fin = Fecha_fin.Date;
                 List<Af_Depreciacion_Info> Lista;
                 using (Entities_activo_fijo Context = new Entities_activo_fijo())
                 {
                     if(mostrar_anulados)
                         Lista=(from q in Context.Af_Depreciacion
                                where q.IdEmpresa == IdEmpresa
+                               && Fecha_ini <= q.Fecha_Depreciacion && q.Fecha_Depreciacion <= Fecha_fin
                                select new Af_Depreciacion_Info
                                {
                                    IdEmpresa = q.IdEmpresa,
@@ -37,6 +40,7 @@ namespace Core.Erp.Data.ActivoFijo
                     else
                         Lista = (from q in Context.Af_Depreciacion
                                  where q.IdEmpresa == IdEmpresa
+                                 && Fecha_ini <= q.Fecha_Depreciacion && q.Fecha_Depreciacion <= Fecha_fin
                                  && q.Estado == "A"
                                  select new Af_Depreciacion_Info
                                  {
@@ -61,7 +65,7 @@ namespace Core.Erp.Data.ActivoFijo
 
                 throw;
             }
-        }
+        }        
 
         public Af_Depreciacion_Info get_info(int IdEmpresa, decimal IdDepreciacion)
         {

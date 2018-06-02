@@ -9,7 +9,7 @@
 }
 
 <h2>Depreciaciones</h2>
-
+<script src="~/Scripts/ScriptsGenerales.js"></script>
 @using (Html.BeginForm("Index", "DepreciacionAF", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     <div class="box collapsed-box">
@@ -61,6 +61,8 @@
         <!-- /.box-body -->
     </div>
 
+    
+
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">@ViewBag.Title</h3>
@@ -74,7 +76,7 @@
             </div>
         </div>
         <div class="box-body">
-            
+            @Html.Action("GridViewPartial_depreciacion", new { Model.fecha_ini, Model.fecha_fin })
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

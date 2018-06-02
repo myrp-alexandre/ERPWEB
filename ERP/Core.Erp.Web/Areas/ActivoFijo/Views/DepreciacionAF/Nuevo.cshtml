@@ -1,0 +1,10 @@
+﻿@model Core.Erp.Info.ActivoFijo.Af_Depreciacion_Info
+@{
+    ViewBag.Title = "Nueva depreciación";
+}
+
+@using (Html.BeginForm("Nuevo", "DepreciacionAF", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.Action("GridViewPartial_depreciacion_det")
+}

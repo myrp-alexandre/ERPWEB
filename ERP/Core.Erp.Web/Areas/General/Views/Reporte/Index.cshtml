@@ -7,23 +7,10 @@
         Response.Redirect("~/Account/Login");
     }
 }
+<script src="~/Scripts/ScriptsGenerales.js"></script>
 @using (Html.BeginForm())
 {
 
     @Html.Action("GridViewPartial_reporte")
 
 }
-
-<script>
-    function OnImageClick(sender) {
-        var idAtt = $(sender).attr("data-id");
-        var idObj = $(sender).data();
-        alert("att: " + idAtt + ":  obj.id: " + idObj.id);
-    }
-
-    function OpenInNewTabWinBrowser(url) {
-        
-        var win = window.open(url,'_blank');
-        win.focus();
-    }
-</script>

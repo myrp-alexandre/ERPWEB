@@ -33,6 +33,6 @@ namespace Core.Erp.Info.ActivoFijo
 
         //campos que no existen en la tabla
 
-        public Af_Depreciacion_Det_Info info_Af_Depreciacion_Det { get; set; }
+        public List<Af_Depreciacion_Det_Info> lst_detalle { get; set; }
     }
 }

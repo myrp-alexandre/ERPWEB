@@ -12,12 +12,12 @@ namespace Core.Erp.Bus.ActivoFijo
     {
         Af_Depreciacion_Data odata = new Af_Depreciacion_Data();
 
-        public List<Af_Depreciacion_Info> get_list(int IdEmpresa, bool mostrar_anulados)
+        public List<Af_Depreciacion_Info> get_list(int IdEmpresa, bool mostrar_anulados, DateTime Fecha_ini, DateTime Fecha_fin)
 
         {
             try
             {
-                return odata.get_list(IdEmpresa, mostrar_anulados);
+                return odata.get_list(IdEmpresa, mostrar_anulados, Fecha_ini, Fecha_fin);
             }
             catch (Exception)
             {

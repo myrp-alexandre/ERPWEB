@@ -7969,6 +7969,11 @@
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_002.cshtml" />
     <Content Include="Areas\RRHH\Views\ParticipacionUtilidad\_GridViewPartial_utilidades_detalle.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Index.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\_GridViewPartial_depreciacion.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Nuevo.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Modificar.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Anular.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\_GridViewPartial_depreciacion_det.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
@@ -8000,6 +8005,7 @@
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ScriptsGenerales.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

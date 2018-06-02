@@ -1,0 +1,35 @@
+@using System.Web.UI.WebControls;
+@model Core.Erp.Info.ActivoFijo.Af_Depreciacion_Info
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridView_depreciacion_det";
+        settings.CallbackRouteValues = new { Controller = "DepreciacionAF", Action = "GridViewPartial_depreciacion_det", IdDepreciacion = Model == null ? 0 : Model.IdDepreciacion };
+        settings.KeyFieldName = "Secuencia";
+        settings.Width = Unit.Percentage(100);
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add("IdActivoFijo").Width = Unit.Percentage(40);
+        settings.Columns.Add("Valor_Compra").Width = Unit.Percentage(10);
+        settings.Columns.Add("Valor_Salvamento").Width = Unit.Percentage(10);
+        settings.Columns.Add("Vida_Util").Width = Unit.Percentage(10);
+        settings.Columns.Add("Porc_Depreciacion").Width = Unit.Percentage(10);
+        settings.Columns.Add("Valor_Depreciacion").Width = Unit.Percentage(10);
+        settings.Columns.Add("Valor_Depre_Acum").Width = Unit.Percentage(10);
+    });
+}
+@grid.Bind(Model.lst_detalle).GetHtml()
