@@ -148,6 +148,100 @@
         })
 
         });
+    $("#IdSucursal").change(function () {
+        cargar_bodega();
+    });
+    $("#IdCategoria").change(function () {
+        cargar_lineas();
+        cargar_grupos();
+        cargar_subgrupos();
+    });
+    function cargar_bodega() {
+        var sucursal = $("#IdSucursal").val();
 
-  
+        var datos = {
+            IdSucursal: sucursal
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("cargar_bodega", "InventarioReportes",new { Area = "Reporte" })',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                $("#IdBodega").val(data.IdBodega);
+            },
+            error: function (error) {
+            }
+        });
+    }
+    function cargar_lineas() {
+        var categoria = $("#IdCategoria").val();
+
+        var datos = {
+            IdCategoria: categoria
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("cargar_lineas", "InventarioReportes",new { Area = "Reporte" })',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                $("#IdLinea").val(data.IdLinea);
+            },
+            error: function (error) {
+            }
+        });
+    }
+    function cargar_grupos() {
+        var linea = $("#IdLinea").val();
+
+        var datos = {
+            IdLinea: linea
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("cargar_grupos", "InventarioReportes",new { Area = "Reporte" })',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                $("#IdGrupo").val(data.IdGrupo);
+            },
+            error: function (error) {
+            }
+        });
+    }
+    function cargar_subgrupos() {
+        var grupo = $("#IdGrupo").val();
+
+        var datos = {
+            IdGrupo: grupo
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("cargar_subgrupos", "InventarioReportes",new { Area = "Reporte" })',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                $("#IdSuGrupo").val(data.IdSubGrupo);
+            },
+            error: function (error) {
+            }
+        });
+    }
 </script>
