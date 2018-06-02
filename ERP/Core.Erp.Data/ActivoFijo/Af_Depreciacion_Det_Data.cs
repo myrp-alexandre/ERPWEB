@@ -9,31 +9,32 @@ namespace Core.Erp.Data.ActivoFijo
 {
     public class Af_Depreciacion_Det_Data
     {
-        public Af_Depreciacion_Det_Info get_info(int IdEmpresa, decimal IdDepreciacion)
+        public List<Af_Depreciacion_Det_Info> get_list(int IdEmpresa, decimal IdDepreciacion)
         {
             try
             {
-                Af_Depreciacion_Det_Info info = new Af_Depreciacion_Det_Info();
+                List<Af_Depreciacion_Det_Info> lista;
                 using (Entities_activo_fijo Context = new Entities_activo_fijo())
                 {
-                    Af_Depreciacion_Det Entity = Context.Af_Depreciacion_Det.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdDepreciacion == IdDepreciacion);
-                    if (Entity == null) return null;
-                    info = new Af_Depreciacion_Det_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdActivoFijo = Entity.IdActivoFijo,
-                        IdDepreciacion = Entity.IdDepreciacion,
-                        Concepto = Entity.Concepto,
-                        Porc_Depreciacion = Entity.Porc_Depreciacion,
-                        Secuencia = Entity.Secuencia,
-                        Valor_Compra = Entity.Valor_Compra,
-                        Valor_Depreciacion = Entity.Valor_Depreciacion,
-                        Valor_Depre_Acum = Entity.Valor_Depre_Acum,
-                        Valor_Salvamento = Entity.Valor_Salvamento,
-                        Vida_Util = Entity.Vida_Util
-                    };
+                    lista = (from q in Context.Af_Depreciacion_Det
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdDepreciacion == IdDepreciacion
+                             select new Af_Depreciacion_Det_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdActivoFijo = q.IdActivoFijo,
+                                 IdDepreciacion = q.IdDepreciacion,
+                                 Concepto = q.Concepto,
+                                 Porc_Depreciacion = q.Porc_Depreciacion,
+                                 Secuencia = q.Secuencia,
+                                 Valor_Compra = q.Valor_Compra,
+                                 Valor_Depreciacion = q.Valor_Depreciacion,
+                                 Valor_Depre_Acum = q.Valor_Depre_Acum,
+                                 Valor_Salvamento = q.Valor_Salvamento,
+                                 Vida_Util = q.Vida_Util
+                             }).ToList();
                 }
-                return info;
+                return lista; 
             }
             catch (Exception)
             {

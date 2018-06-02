@@ -25,5 +25,6 @@ namespace Core.Erp.Info.Contabilidad
 
         //Campos que no existen en la tabla
         public bool pe_cerrado_bool { get; set; }
+        public string nom_periodo_combo { get; set; }
     }
 }

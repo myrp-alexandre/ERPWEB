@@ -29,8 +29,8 @@ namespace Core.Erp.Data.Contabilidad
                                      pe_FechaFin = q.pe_FechaFin,
                                      pe_mes = q.pe_mes,
                                      pe_cerrado = q.pe_cerrado,
-                                     pe_estado = q.pe_estado 
-
+                                     pe_estado = q.pe_estado
+                                     
                                  }).ToList();
                     else
                         Lista = (from q in Context.ct_periodo
@@ -48,6 +48,7 @@ namespace Core.Erp.Data.Contabilidad
                                       pe_estado = q.pe_estado
                                   }).ToList();
                 }
+                Lista.ForEach(q => q.nom_periodo_combo = q.IdanioFiscal + " "+ q.pe_mes);
                 return Lista;
             }
             catch (Exception)

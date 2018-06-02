@@ -11,12 +11,12 @@ namespace Core.Erp.Bus.ActivoFijo
     public class Af_Depreciacion_Det_Bus
     {
         Af_Depreciacion_Det_Data odata = new Af_Depreciacion_Det_Data();
-    
-        public Af_Depreciacion_Det_Info get_info(int IdEmpresa, decimal IdDepreciacion)
+
+        public List<Af_Depreciacion_Det_Info> get_list(int IdEmpresa, decimal IdDepreciacion)
         {
             try
             {
-                return odata.get_info(IdEmpresa, IdDepreciacion);
+                return odata.get_list(IdEmpresa, IdDepreciacion);
             }
             catch (Exception)
             {
