@@ -25,7 +25,8 @@ namespace Core.Erp.Data.ActivoFijo
                                      Cod_VtaActivo = q.Cod_VtaActivo,
                                      Concepto_Vta = q.Concepto_Vta,
                                      Estado = q.Estado,
-                                     IdVtaActivo = q.IdVtaActivo
+                                     IdVtaActivo = q.IdVtaActivo,
+                                     Fecha_Venta = q.Fecha_Venta
                                  }).ToList();
                     else
                         Lista = (from q in Context.Af_Venta_Activo
@@ -37,8 +38,8 @@ namespace Core.Erp.Data.ActivoFijo
                                      Cod_VtaActivo = q.Cod_VtaActivo,
                                      Concepto_Vta = q.Concepto_Vta,
                                      Estado = q.Estado,
-                                     IdVtaActivo = q.IdVtaActivo
-
+                                     IdVtaActivo = q.IdVtaActivo,
+                                     Fecha_Venta = q.Fecha_Venta
                                  }).ToList();
                 }
                 return Lista;
