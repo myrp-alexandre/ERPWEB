@@ -17,7 +17,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_Id_Tipo.Value = Id_Tipo;
             model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
-            if (Id_Mejora_Baja_Activo == 0)
+            if (Id_Mejora_Baja_Activo != 0)
+            {
+                model.p_IdEmpresa.Visible = false;
+                model.p_Id_Mejora_Baja_Activo.Visible = false;
+                model.p_Id_Tipo.Visible = false;
+            }
+            else
                 model.RequestParameters = false;
             return View(model);
         }
@@ -29,7 +35,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdVtaActivo.Value = IdVtaActivo;
             model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
-            if (IdVtaActivo == 0)
+            if (IdVtaActivo != 0)
+            {
+                model.p_IdEmpresa.Visible = false;
+                model.p_IdVtaActivo.Visible = false;
+            }
+            else
                 model.RequestParameters = false;
             return View(model);
         }
@@ -41,7 +52,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdRetiroActivo.Value = IdRetiroActivo;
             model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
-            if (IdRetiroActivo == 0)
+            if (IdRetiroActivo != 0)
+            {
+                model.p_IdEmpresa.Visible = false;
+                model.p_IdRetiroActivo.Visible = false;
+            }
+            else
                 model.RequestParameters = false;
             return View(model);
 

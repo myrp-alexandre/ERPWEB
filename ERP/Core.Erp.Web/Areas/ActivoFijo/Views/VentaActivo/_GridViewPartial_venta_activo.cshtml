@@ -75,9 +75,24 @@
             c.Width = System.Web.UI.WebControls.Unit.Pixel(150);
         });
 
-        settings.Columns.Add("IdVtaActivo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(25);
-        settings.Columns.Add("Cod_VtaActivo", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-        settings.Columns.Add("Estado", "Estado").Width = System.Web.UI.WebControls.Unit.Percentage(25);
+        settings.Columns.Add("IdVtaActivo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Fecha_Venta";
+            column.Caption = "Fecha";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
+        });
+        settings.Columns.Add("Concepto_Vta", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(60);
+        settings.Columns.Add("Estado", "Estado").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ACTF_002", "ActivoFijoReportes", new { Area = "Reportes", IdVtaActivo = DataBinder.Eval(c.DataItem, "IdVtaActivo").ToString()}, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

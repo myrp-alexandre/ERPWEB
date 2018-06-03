@@ -75,10 +75,25 @@
             c.Width = System.Web.UI.WebControls.Unit.Pixel(150);
         });
 
-        settings.Columns.Add("Id_Mejora_Baja_Activo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(25);
-        settings.Columns.Add("Cod_Mej_Baj_Activo", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(25);
-        settings.Columns.Add("Id_Tipo", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(25);
-        settings.Columns.Add("Estado", "Estado").Width = System.Web.UI.WebControls.Unit.Percentage(25);
+        settings.Columns.Add("Id_Mejora_Baja_Activo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Fecha_MejBaj";
+            column.Caption = "Fecha";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
+        });
+        settings.Columns.Add("Id_Tipo", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+        settings.Columns.Add("Motivo", "Motivo").Width = System.Web.UI.WebControls.Unit.Percentage(40);
+        settings.Columns.Add("Estado", "Estado").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ACTF_001", "ActivoFijoReportes", new { Area = "Reportes", Id_Mejora_Baja_Activo = DataBinder.Eval(c.DataItem, "Id_Mejora_Baja_Activo").ToString(), Id_Tipo = DataBinder.Eval(c.DataItem, "Id_Tipo").ToString() }, Request.Url.Scheme) + "');\"></span>");             
+            });
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+        });
     });
 }
 @grid.Bind(Model).GetHtml()
