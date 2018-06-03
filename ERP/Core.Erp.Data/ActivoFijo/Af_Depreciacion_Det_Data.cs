@@ -43,56 +43,6 @@ namespace Core.Erp.Data.ActivoFijo
             }
         }
 
-        public bool guardarDB(Af_Depreciacion_Det_Info info)
-        {
-            try
-            {
-                using (Entities_activo_fijo Context = new Entities_activo_fijo())
-                {
-                    Af_Depreciacion_Det Entity = new Af_Depreciacion_Det
-                    {
-                        IdEmpresa = info.IdEmpresa,
-                        IdActivoFijo = info.IdActivoFijo,
-                        IdDepreciacion = info.IdDepreciacion,
-                        Concepto = info.Concepto,
-                        Porc_Depreciacion = info.Porc_Depreciacion,
-                        Secuencia = info.Secuencia,
-                        Valor_Compra = info.Valor_Compra,
-                        Valor_Depreciacion = info.Valor_Depreciacion,
-                        Valor_Depre_Acum = info.Valor_Depre_Acum,
-                        Valor_Salvamento = info.Valor_Salvamento,
-                        Vida_Util = info.Vida_Util
-
-                    };
-                    Context.Af_Depreciacion_Det.Add(Entity);
-                    Context.SaveChanges();
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        public bool eliminarDB(int IdEmpresa, decimal IdDepreciacion)
-        {
-            try
-            {
-                using (Entities_activo_fijo Context = new Entities_activo_fijo())
-                {
-                    Context.Database.ExecuteSqlCommand("delete Af_Depreciacion_Det where IdEmpresa = '" + IdEmpresa + "'and IdDepreciacion = '" + IdDepreciacion);
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
         public List<Af_Depreciacion_Det_Info> get_list_a_depreciar(int IdEmpresa, int IdPeriodo, string IdUsuario)
         {
             try
@@ -124,7 +74,10 @@ namespace Core.Erp.Data.ActivoFijo
                                  nom_categoria = q.nom_categoria,
                                  Valor_Depreciacion = q.Af_valor_depreciacion,
                                  Valor_Depre_Acum = q.Af_depreciacion_acum,
-                                 Valor_Compra = q.Af_costo_compra
+                                 Valor_Compra = q.Af_costo_compra,
+                                 IdCtaCble_Activo = q.IdCtaCble_Activo,
+                                 IdCtaCble_Dep_Acum = q.IdCtaCble_Dep_Acum,
+                                 IdCtaCble_Gastos_Depre = q.IdCtaCble_Gastos_Depre
                              }).ToList();
                 }
 

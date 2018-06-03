@@ -1,6 +1,10 @@
 ﻿@model Core.Erp.Info.ActivoFijo.Af_Depreciacion_Info
 @{
     ViewBag.Title = "Anular depreciación";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
 }
 
 @using (Html.BeginForm("Anular", "DepreciacionAF", FormMethod.Post, new { @class = "form", @role = "form" }))

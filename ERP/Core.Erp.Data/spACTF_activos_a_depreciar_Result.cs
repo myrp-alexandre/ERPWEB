@@ -27,5 +27,8 @@ namespace Core.Erp.Data
         public string nom_categoria { get; set; }
         public Nullable<double> Af_porcentaje_deprec { get; set; }
         public double Valor_importe { get; set; }
+        public string IdCtaCble_Activo { get; set; }
+        public string IdCtaCble_Dep_Acum { get; set; }
+        public string IdCtaCble_Gastos_Depre { get; set; }
     }
 }

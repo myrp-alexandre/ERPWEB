@@ -151,6 +151,24 @@ namespace Core.Erp.Data.ActivoFijo
                         
                     };
                     Context.Af_Depreciacion.Add(Entity);
+                    foreach (var item in info.lst_detalle)
+                    {
+                        Af_Depreciacion_Det Entity_d = new Af_Depreciacion_Det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdActivoFijo = item.IdActivoFijo,
+                            IdDepreciacion = info.IdDepreciacion,
+                            Concepto = item.Concepto,
+                            Porc_Depreciacion = item.Porc_Depreciacion,
+                            Secuencia = item.Secuencia,
+                            Valor_Compra = item.Valor_Compra,
+                            Valor_Depreciacion = item.Valor_Depreciacion,
+                            Valor_Depre_Acum = item.Valor_Depre_Acum,
+                            Valor_Salvamento = item.Valor_Salvamento,
+                            Vida_Util = item.Vida_Util
+                        };
+                        Context.Af_Depreciacion_Det.Add(Entity_d);
+                    }
                     Context.SaveChanges();
                 }
                 return true;
@@ -183,6 +201,25 @@ namespace Core.Erp.Data.ActivoFijo
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
+                    Context.Database.ExecuteSqlCommand("delete Af_Depreciacion_Det where IdEmpresa = " + info.IdEmpresa + "and IdDepreciacion = " + info.IdDepreciacion);
+                    foreach (var item in info.lst_detalle)
+                    {
+                        Af_Depreciacion_Det Entity_d = new Af_Depreciacion_Det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdActivoFijo = item.IdActivoFijo,
+                            IdDepreciacion = info.IdDepreciacion,
+                            Concepto = item.Concepto,
+                            Porc_Depreciacion = item.Porc_Depreciacion,
+                            Secuencia = item.Secuencia,
+                            Valor_Compra = item.Valor_Compra,
+                            Valor_Depreciacion = item.Valor_Depreciacion,
+                            Valor_Depre_Acum = item.Valor_Depre_Acum,
+                            Valor_Salvamento = item.Valor_Salvamento,
+                            Vida_Util = item.Vida_Util
+                        };
+                        Context.Af_Depreciacion_Det.Add(Entity_d);
+                    }
                     Context.SaveChanges();
                 }
                 return true;

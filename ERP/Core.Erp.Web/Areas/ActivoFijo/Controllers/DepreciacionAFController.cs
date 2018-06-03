@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Bus.Contabilidad;
 using System.Web;
+using Core.Erp.Web.Areas.Contabilidad.Controllers;
 
 namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 {
@@ -16,6 +17,8 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         Af_Depreciacion_Bus bus_depreciacion = new Af_Depreciacion_Bus();
         Af_Depreciacion_Det_Bus bus_depreciacion_det = new Af_Depreciacion_Det_Bus();
         Af_Depreciacion_Det_list lst_depreciacion_det = new Af_Depreciacion_Det_list();
+        ct_cbtecble_det_List lst_comprobante_detalle = new ct_cbtecble_det_List();
+
         string mensaje = string.Empty;
         public ActionResult Index()
         {
@@ -63,6 +66,29 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             string IdUsuario = Session["IdUsuario"].ToString();
             var lst = bus_depreciacion_det.get_list_a_depreciar(IdEmpresa, IdPeriodo, IdUsuario);
             lst_depreciacion_det.set_list(lst);
+
+            List<ct_cbtecble_det_Info> lst_ct = new List<ct_cbtecble_det_Info>();
+            int secuencia = 1;
+            foreach (var item in lst)
+            {
+                lst_ct.Add(new ct_cbtecble_det_Info
+                {
+                    //Debe
+                    secuencia = secuencia++,
+                    IdCtaCble = item.IdCtaCble_Gastos_Depre,
+                    dc_Valor = item.Valor_Depreciacion,
+                    dc_Valor_debe = item.Valor_Depreciacion
+                });
+                lst_ct.Add(new ct_cbtecble_det_Info
+                {
+                    //Haber
+                    secuencia = secuencia++,
+                    IdCtaCble = item.IdCtaCble_Dep_Acum,
+                    dc_Valor = item.Valor_Depreciacion * -1,
+                    dc_Valor_haber = item.Valor_Depreciacion
+                });
+            }
+            lst_comprobante_detalle.set_list(lst_ct);
         }
         public ActionResult Nuevo()
         {

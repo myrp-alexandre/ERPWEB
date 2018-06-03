@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Data.ActivoFijo;
 using Core.Erp.Info.ActivoFijo;
+using Core.Erp.Info.Contabilidad;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +44,11 @@ namespace Core.Erp.Bus.ActivoFijo
         {
             try
             {
-                return odata.guardarDB(info);
+                if(odata.guardarDB(info))
+                {
+
+                }
+                return false;
             }
             catch (Exception)
             {
@@ -77,6 +82,7 @@ namespace Core.Erp.Bus.ActivoFijo
                 throw;
             }
         }
+        
 
     }
 }

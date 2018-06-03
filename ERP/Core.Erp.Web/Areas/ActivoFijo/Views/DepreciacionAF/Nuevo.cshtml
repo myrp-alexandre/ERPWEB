@@ -1,6 +1,10 @@
 ﻿@model Core.Erp.Info.ActivoFijo.Af_Depreciacion_Info
 @{
     ViewBag.Title = "Nueva depreciación";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
 }
 
 @using (Html.BeginForm("Nuevo", "DepreciacionAF", FormMethod.Post, new { @class = "form", @role = "form" }))
@@ -20,7 +24,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdPeriodo">Periodo*</label>
-                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodo,"IdPeriodo", "nom_periodo_combo"), new { @class = "form-control", @id = "IdPeriodo" })
+                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodo, "IdPeriodo", "nom_periodo_combo"), new { @class = "form-control", @id = "IdPeriodo" })
                     @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -28,7 +32,7 @@
                 <div class="form-group">
                     <label for="Cod_Depreciacion">Código</label>
                     @Html.TextBoxFor(q => q.Cod_Depreciacion, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q=>q.Cod_Depreciacion, "", new { @class = "text-danger"})
+                    @Html.ValidationMessageFor(q => q.Cod_Depreciacion, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-offset-5 col-md-2">
@@ -51,25 +55,51 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index", "DepreciacionAF", new { Area = "ActivoFijo" }, null)">Cancelar</a>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                @Html.Action("GridViewPartial_depreciacion_det")
+
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_detalle" aria-controls="general" role="tab" data-toggle="tab">Detalle</a>
+            </li>
+            <li>
+                <a href="#tab_contable" aria-controls="contable" role="tab" data-toggle="tab">Diario contable</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tab_detalle">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            @Html.Action("GridViewPartial_depreciacion_det")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tab_contable">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.Action("GridViewPartial_comprobante_detalle", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }
 }
 <script>
     $(function () {
@@ -80,7 +110,7 @@
 
         $("#IdPeriodo").change(function () {
             Get_list_activos_a_depreciar();
-        });        
+        });
     });
     function Get_list_activos_a_depreciar() {
         var periodo = $("#IdPeriodo").val();
@@ -98,11 +128,12 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                
+
             },
             error: function (error) {
             }
         });
         GridView_depreciacion_det.PerformCallback();
+        GridView_comprobante_detalle.PerformCallback();
     }
 </script>

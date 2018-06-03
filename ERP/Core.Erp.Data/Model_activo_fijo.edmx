@@ -1100,6 +1100,9 @@
           <Property Type="String" Name="nom_categoria" Nullable="true" MaxLength="500" />
           <Property Type="Double" Name="Af_porcentaje_deprec" Nullable="true" />
           <Property Type="Double" Name="Valor_importe" Nullable="false" />
+          <Property Type="String" Name="IdCtaCble_Activo" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="IdCtaCble_Dep_Acum" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="IdCtaCble_Gastos_Depre" Nullable="true" MaxLength="30" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1409,6 +1412,9 @@
                 <ScalarProperty Name="nom_categoria" ColumnName="nom_categoria" />
                 <ScalarProperty Name="Af_porcentaje_deprec" ColumnName="Af_porcentaje_deprec" />
                 <ScalarProperty Name="Valor_importe" ColumnName="Valor_importe" />
+                <ScalarProperty Name="IdCtaCble_Activo" ColumnName="IdCtaCble_Activo" />
+                <ScalarProperty Name="IdCtaCble_Dep_Acum" ColumnName="IdCtaCble_Dep_Acum" />
+                <ScalarProperty Name="IdCtaCble_Gastos_Depre" ColumnName="IdCtaCble_Gastos_Depre" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

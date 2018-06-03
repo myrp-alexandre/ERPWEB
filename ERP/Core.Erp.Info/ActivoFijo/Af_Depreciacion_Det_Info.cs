@@ -27,5 +27,8 @@ namespace Core.Erp.Info.ActivoFijo
         public string nom_tipo { get; set; }
         public Nullable<int> IdCategoriaAF { get; set; }
         public string nom_categoria { get; set; }
+        public string IdCtaCble_Activo { get; set; }
+        public string IdCtaCble_Dep_Acum { get; set; }
+        public string IdCtaCble_Gastos_Depre { get; set; }
     }
 }

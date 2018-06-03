@@ -37,31 +37,5 @@ namespace Core.Erp.Bus.ActivoFijo
                 throw;
             }
         }
-
-        public bool guardarDB(Af_Depreciacion_Det_Info info)
-        {
-            try
-            {
-                return odata.guardarDB(info);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        public bool eliminarDB(int IdEmpresa, decimal IdDepreciacion)
-        {
-            try
-            {
-                return odata.eliminarDB(IdEmpresa, IdDepreciacion);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
     }
 }
