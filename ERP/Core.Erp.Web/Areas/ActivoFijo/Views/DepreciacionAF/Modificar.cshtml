@@ -100,12 +100,11 @@
         //Date picker
         $('#Fecha_Depreciacion').datepicker({
             autoclose: true
-        })
-
-        
+        })        
     });
 
     function Get_list_activos_a_depreciar() {
+        $("#link_detalle").click();
         var periodo = $("#IdPeriodo").val();
 
         var datos = {

@@ -58,6 +58,9 @@
     </div>
 
     <div class="box-footer">
+        <button type="button" class="btn btn-primary" id="btn_refrescar" onclick="Get_list_activos_a_depreciar();">
+            <i class="fa fa-refresh"></i>
+        </button> 
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index", "DepreciacionAF", new { Area = "ActivoFijo" }, null)">Cancelar</a>
     </div>
@@ -66,7 +69,7 @@
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
-                <a href="#tab_detalle" aria-controls="general" role="tab" data-toggle="tab">Detalle</a>
+                <a href="#tab_detalle" aria-controls="general" role="tab" data-toggle="tab" id="link_detalle">Detalle</a>
             </li>
             <li>
                 <a href="#tab_contable" aria-controls="contable" role="tab" data-toggle="tab">Diario contable</a>
@@ -98,9 +101,9 @@
             Get_list_activos_a_depreciar();
         });
 
-        Get_list_activos_a_depreciar();
     });
     function Get_list_activos_a_depreciar() {
+        $("#link_detalle").click();
         var periodo = $("#IdPeriodo").val();
 
         var datos = {

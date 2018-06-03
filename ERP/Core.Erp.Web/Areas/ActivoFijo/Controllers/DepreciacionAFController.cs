@@ -125,9 +125,11 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
                 Fecha_Depreciacion = DateTime.Now.Date,
                 IdPeriodo = Convert.ToInt32(DateTime.Now.Date.ToString("yyyyMM")),
-                lst_detalle = new List<Af_Depreciacion_Det_Info>()
+                lst_detalle = new List<Af_Depreciacion_Det_Info>(),
+                lst_detalle_ct = new List<ct_cbtecble_det_Info>()
             };
             lst_depreciacion_det.set_list(model.lst_detalle);
+            lst_comprobante_detalle.set_list(model.lst_detalle_ct);
             cargar_combos();
             return View(model);
         }
