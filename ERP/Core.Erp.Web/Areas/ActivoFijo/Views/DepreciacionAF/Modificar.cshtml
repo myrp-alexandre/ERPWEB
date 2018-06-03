@@ -63,15 +63,27 @@
         <a class="btn btn-default" href="@Url.Action("Index", "DepreciacionAF", new { Area = "ActivoFijo" }, null)">Cancelar</a>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_detalle" aria-controls="general" role="tab" data-toggle="tab">Detalle</a>
+            </li>
+            <li>
+                <a href="#tab_contable" aria-controls="contable" role="tab" data-toggle="tab">Diario contable</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tab_detalle">
                 @Html.Action("GridViewPartial_depreciacion_det")
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tab_contable">
+                @Html.Action("GridViewPartial_comprobante_detalle_readonly", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
             </div>
         </div>
     </div>
 
-    
+
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }

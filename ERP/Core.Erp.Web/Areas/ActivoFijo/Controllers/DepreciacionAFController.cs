@@ -9,6 +9,7 @@ using Core.Erp.Info.Contabilidad;
 using Core.Erp.Bus.Contabilidad;
 using System.Web;
 using Core.Erp.Web.Areas.Contabilidad.Controllers;
+using System.Linq;
 
 namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 {
@@ -57,6 +58,31 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 msg = "No existen activos a depreciarse";
                 return false;
             }
+            i_validar.lst_detalle_ct = lst_comprobante_detalle.get_list();
+            if (i_validar.lst_detalle_ct.Count == 0)
+            {
+                mensaje = "Debe ingresar registros en el detalle, por favor verifique";
+                return false;
+            }
+
+            foreach (var item in i_validar.lst_detalle_ct)
+            {
+                if (string.IsNullOrEmpty(item.IdCtaCble))
+                {
+                    mensaje = "Faltan cuentas contables, por favor verifique";
+                    return false;
+                }
+            }
+            if (i_validar.lst_detalle_ct.Sum(q => q.dc_Valor) != 0)
+            {
+                mensaje = "La suma de los detalles debe ser 0, por favor verifique";
+                return false;
+            }
+            if (i_validar.lst_detalle_ct.Where(q => q.dc_Valor == 0).Count() > 0)
+            {
+                mensaje = "Existen detalles con valor 0 en el debe o haber, por favor verifique";
+                return false;
+            }
             return true;
         }
 
@@ -71,21 +97,22 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             int secuencia = 1;
             foreach (var item in lst)
             {
+                item.Valor_Depreciacion = Math.Round(item.Valor_Depreciacion, 2, MidpointRounding.AwayFromZero);
                 lst_ct.Add(new ct_cbtecble_det_Info
                 {
                     //Debe
                     secuencia = secuencia++,
                     IdCtaCble = item.IdCtaCble_Gastos_Depre,
-                    dc_Valor = item.Valor_Depreciacion,
-                    dc_Valor_debe = item.Valor_Depreciacion
+                    dc_Valor = Math.Round(item.Valor_Depreciacion,2, MidpointRounding.AwayFromZero),
+                    dc_Valor_debe = Math.Round(item.Valor_Depreciacion, 2, MidpointRounding.AwayFromZero)
                 });
                 lst_ct.Add(new ct_cbtecble_det_Info
                 {
                     //Haber
                     secuencia = secuencia++,
                     IdCtaCble = item.IdCtaCble_Dep_Acum,
-                    dc_Valor = item.Valor_Depreciacion * -1,
-                    dc_Valor_haber = item.Valor_Depreciacion
+                    dc_Valor = Math.Round(item.Valor_Depreciacion, 2, MidpointRounding.AwayFromZero) * -1,
+                    dc_Valor_haber = Math.Round(item.Valor_Depreciacion, 2, MidpointRounding.AwayFromZero)
                 });
             }
             lst_comprobante_detalle.set_list(lst_ct);

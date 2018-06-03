@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Data.ActivoFijo;
+using Core.Erp.Data.Contabilidad;
 using Core.Erp.Info.ActivoFijo;
 using Core.Erp.Info.Contabilidad;
 using System;
@@ -12,6 +13,8 @@ namespace Core.Erp.Bus.ActivoFijo
     public class Af_Depreciacion_Bus
     {
         Af_Depreciacion_Data odata = new Af_Depreciacion_Data();
+        ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
+        Af_Parametros_Data odata_param = new Af_Parametros_Data();
 
         public List<Af_Depreciacion_Info> get_list(int IdEmpresa, bool mostrar_anulados, DateTime Fecha_ini, DateTime Fecha_fin)
 
@@ -44,10 +47,18 @@ namespace Core.Erp.Bus.ActivoFijo
         {
             try
             {
-                if(odata.guardarDB(info))
+                var i_param = odata_param.get_info(info.IdEmpresa);
+                var info_ct_cbtecble = odata_ct.armar_info(info.lst_detalle_ct, info.IdEmpresa, i_param.IdTipoCbte, 0, "Depreciación "+info.IdPeriodo.ToString() + info.Descripcion, info.Fecha_Depreciacion);
+                if (odata_ct.guardarDB(info_ct_cbtecble))
                 {
-                    return true;
-                }
+                    info.IdEmpresa_ct = info_ct_cbtecble.IdEmpresa;
+                    info.IdTipoCbte = info_ct_cbtecble.IdTipoCbte;
+                    info.IdCbteCble = info_ct_cbtecble.IdCbteCble;
+                    if (odata.guardarDB(info))
+                    {
+                        return true;
+                    }
+                }                
                 return false;
             }
             catch (Exception)
@@ -61,7 +72,15 @@ namespace Core.Erp.Bus.ActivoFijo
         {
             try
             {
-                return odata.modificarDB(info);
+                var info_ct_cbtecble = odata_ct.armar_info(info.lst_detalle_ct, info.IdEmpresa, Convert.ToInt32(info.IdTipoCbte), Convert.ToDecimal(info.IdCbteCble), info.Descripcion, info.Fecha_Depreciacion);
+                if (odata_ct.modificarDB(info_ct_cbtecble))
+                {
+                    if (odata.modificarDB(info))
+                    {
+                        return true;
+                    }
+                }
+                return false;
             }
             catch (Exception)
             {

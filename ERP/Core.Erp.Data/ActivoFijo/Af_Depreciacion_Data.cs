@@ -35,7 +35,10 @@ namespace Core.Erp.Data.ActivoFijo
                                     Valor_Tot_Act = q.Valor_Tot_Act,
                                     Valor_Tot_Depre = q.Valor_Tot_Depre,
                                     Valor_Tot_DepreAcum = q.Valor_Tot_DepreAcum,
-                                    Valot_Tot_Importe = q.Valot_Tot_Importe
+                                    Valot_Tot_Importe = q.Valot_Tot_Importe,
+                                    IdEmpresa_ct = q.IdEmpresa_ct,
+                                    IdTipoCbte = q.IdTipoCbte,
+                                    IdCbteCble  = q.IdCbteCble
                                }).ToList();
                     else
                         Lista = (from q in Context.Af_Depreciacion
@@ -55,7 +58,10 @@ namespace Core.Erp.Data.ActivoFijo
                                      Valor_Tot_Act = q.Valor_Tot_Act,
                                      Valor_Tot_Depre = q.Valor_Tot_Depre,
                                      Valor_Tot_DepreAcum = q.Valor_Tot_DepreAcum,
-                                     Valot_Tot_Importe = q.Valot_Tot_Importe
+                                     Valot_Tot_Importe = q.Valot_Tot_Importe,
+                                     IdEmpresa_ct = q.IdEmpresa_ct,
+                                     IdTipoCbte = q.IdTipoCbte,
+                                     IdCbteCble = q.IdCbteCble
                                  }).ToList();
                 }
                 return Lista;
@@ -146,6 +152,9 @@ namespace Core.Erp.Data.ActivoFijo
                         Valor_Tot_Depre = info.Valor_Tot_Depre,
                         Valor_Tot_DepreAcum = info.Valor_Tot_DepreAcum,
                         Valot_Tot_Importe = info.Valot_Tot_Importe,
+                        IdEmpresa_ct = info.IdEmpresa_ct,
+                        IdTipoCbte = info.IdTipoCbte,
+                        IdCbteCble = info.IdCbteCble,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now,
                         
