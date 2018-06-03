@@ -149,13 +149,44 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="@Url.Action("Index","ActivoFijo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Activos</a></li>
-                            <li><a href="@Url.Action("Index","TipoAF",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Tipo activo</a></li>
-                            <li><a href="@Url.Action("Index","CatalogoTipoAF",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Catálogos</a></li>
-                            <li><a href="@Url.Action("Index","ParametroAF",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Parámetros</a></li>
-                            <li><a href="@Url.Action("Index","RevalorizacionActivo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Revalorización</a></li>
-                            <li><a href="@Url.Action("Index","VentaActivo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Venta</a></li>
-                            <li><a href="@Url.Action("Index","RetiroActivo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Retiro</a></li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-circle-o"></i> Mantenimiento
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="@Url.Action("Index","ParametroAF",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Parámetros</a></li>
+                                    <li><a href="@Url.Action("Index","CatalogoTipoAF",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Catálogos</a></li>
+                                    <li><a href="@Url.Action("Index","TipoAF",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Tipo activo</a></li>
+                                    <li><a href="@Url.Action("Index","ActivoFijo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Activos</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-circle-o"></i> Transaciones
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="@Url.Action("Index","RevalorizacionActivo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Revalorización</a></li>
+                                    <li><a href="@Url.Action("Index","VentaActivo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Venta</a></li>
+                                    <li><a href="@Url.Action("Index","RetiroActivo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Retiro</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-circle-o"></i> Procesos
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="@Url.Action("Index","DepreciacionAF",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Depreciación</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                     <li class="treeview">
