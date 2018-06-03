@@ -38,7 +38,8 @@ namespace Core.Erp.Data.Reportes.ActivoFijo
                                  IdCtaCble = q.IdCtaCble,
                                  dc_Valor = q.dc_Valor,
                                  dc_Valor_Debe = q.dc_Valor_Debe,
-                                 dc_Valor_Haber = q.dc_Valor_Haber
+                                 dc_Valor_Haber = q.dc_Valor_Haber,
+                                 pc_Cuenta = q.pc_Cuenta                                                                  
                              }).ToList();
                 }
                 return Lista;
