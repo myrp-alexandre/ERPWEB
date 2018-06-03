@@ -214,13 +214,13 @@
             this.xrTableCell23.Name = "xrTableCell23";
             this.xrTableCell23.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
             this.xrTableCell23.StylePriority.UsePadding = false;
-            this.xrTableCell23.Text = "# Comprobante:";
+            this.xrTableCell23.Text = "# Retiro";
             this.xrTableCell23.Weight = 0.63987964436267775D;
             // 
             // xrTableCell24
             // 
             this.xrTableCell24.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NumComprobante]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[IdRetiroActivo]")});
             this.xrTableCell24.Font = new System.Drawing.Font("Verdana", 8F);
             this.xrTableCell24.Name = "xrTableCell24";
             this.xrTableCell24.StylePriority.UseFont = false;
@@ -259,7 +259,7 @@
             this.xrTableCell20.Name = "xrTableCell20";
             this.xrTableCell20.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
             this.xrTableCell20.StylePriority.UsePadding = false;
-            this.xrTableCell20.Text = "Nombre:";
+            this.xrTableCell20.Text = "Activo:";
             this.xrTableCell20.Weight = 1.3456301895617098D;
             // 
             // xrTableCell27
@@ -276,7 +276,7 @@
             this.xrTableCell30.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell30.Name = "xrTableCell30";
             this.xrTableCell30.StylePriority.UseFont = false;
-            this.xrTableCell30.Text = "Valor neto:";
+            this.xrTableCell30.Text = "Valor actual:";
             this.xrTableCell30.Weight = 1.0676072330068578D;
             // 
             // xrTableCell31
