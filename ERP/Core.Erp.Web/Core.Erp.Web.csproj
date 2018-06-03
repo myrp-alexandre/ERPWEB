@@ -7974,6 +7974,7 @@
     <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Modificar.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Anular.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\_GridViewPartial_depreciacion_det.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\ComprobanteContable\_GridViewPartial_comprobante_detalle_readonly.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />

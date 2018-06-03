@@ -75,24 +75,10 @@
 
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tab_detalle">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            @Html.Action("GridViewPartial_depreciacion_det")
-                        </div>
-                    </div>
-                </div>
+                    @Html.Action("GridViewPartial_depreciacion_det")                
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tab_contable">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                @Html.Action("GridViewPartial_comprobante_detalle", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    @Html.Action("GridViewPartial_comprobante_detalle_readonly", new { Area = "Contabilidad", Controller = "ComprobanteContable" })                    
             </div>
         </div>
     </div>
@@ -134,6 +120,6 @@
             }
         });
         GridView_depreciacion_det.PerformCallback();
-        GridView_comprobante_detalle.PerformCallback();
+        GridView_comprobante_detalle_readonly.PerformCallback();
     }
 </script>

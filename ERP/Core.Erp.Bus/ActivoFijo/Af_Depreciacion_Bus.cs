@@ -46,7 +46,7 @@ namespace Core.Erp.Bus.ActivoFijo
             {
                 if(odata.guardarDB(info))
                 {
-
+                    return true;
                 }
                 return false;
             }

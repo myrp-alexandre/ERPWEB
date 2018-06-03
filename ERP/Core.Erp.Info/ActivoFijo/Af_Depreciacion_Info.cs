@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Erp.Info.Contabilidad;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -38,5 +39,6 @@ namespace Core.Erp.Info.ActivoFijo
         //campos que no existen en la tabla
 
         public List<Af_Depreciacion_Det_Info> lst_detalle { get; set; }
+        public List<ct_cbtecble_det_Info> lst_detalle_ct { get; set; }
     }
 }

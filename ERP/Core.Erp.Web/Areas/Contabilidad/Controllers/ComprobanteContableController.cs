@@ -60,6 +60,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             List<ct_cbtecble_Info> model = bus_comprobante.get_list(IdEmpresa, true, ViewBag.fecha_ini, ViewBag.fecha_fin);
             return PartialView("_GridViewPartial_comprobante_contable", model);
         }
+
         private void cargar_combos()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -170,6 +171,18 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
                 model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_comprobante_detalle", model);
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_comprobante_detalle_readonly(int IdTipoCbte = 0, decimal IdCbteCble = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            ct_cbtecble_Info model = new ct_cbtecble_Info();
+            model.lst_ct_cbtecble_det = bus_comprobante_detalle.get_list(IdEmpresa, IdTipoCbte, IdCbteCble);
+            if (model.lst_ct_cbtecble_det.Count == 0)
+                model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_comprobante_detalle_readonly", model);
         }
 
         private void cargar_combos_detalle()
