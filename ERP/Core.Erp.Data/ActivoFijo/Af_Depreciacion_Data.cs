@@ -212,6 +212,7 @@ namespace Core.Erp.Data.ActivoFijo
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
                     Context.Database.ExecuteSqlCommand("delete Af_Depreciacion_Det where IdEmpresa = " + info.IdEmpresa + "and IdDepreciacion = " + info.IdDepreciacion);
+                    int secuencia = 1;
                     foreach (var item in info.lst_detalle)
                     {
                         Af_Depreciacion_Det Entity_d = new Af_Depreciacion_Det
@@ -221,7 +222,7 @@ namespace Core.Erp.Data.ActivoFijo
                             IdDepreciacion = info.IdDepreciacion,
                             Concepto = item.Concepto,
                             Porc_Depreciacion = item.Porc_Depreciacion,
-                            Secuencia = item.Secuencia,
+                            Secuencia = item.Secuencia = secuencia++,
                             Valor_Compra = item.Valor_Compra,
                             Valor_Depreciacion = item.Valor_Depreciacion,
                             Valor_Depre_Acum = item.Valor_Depre_Acum,

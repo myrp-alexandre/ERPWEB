@@ -11,6 +11,9 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdDepreciacion)
+    @Html.HiddenFor(q => q.IdPeriodo)
+    @Html.HiddenFor(q => q.IdTipoCbte)
+    @Html.HiddenFor(q => q.IdCbteCble)
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">

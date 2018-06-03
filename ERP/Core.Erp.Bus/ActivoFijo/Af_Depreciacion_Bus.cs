@@ -93,7 +93,13 @@ namespace Core.Erp.Bus.ActivoFijo
         {
             try
             {
-                return odata.anularDB(info);
+                var info_ct_cbtecble = odata_ct.get_info(info.IdEmpresa, Convert.ToInt32(info.IdTipoCbte), Convert.ToDecimal(info.IdCbteCble));
+                if (odata_ct.anularDB(info_ct_cbtecble))
+                {
+                    if(odata.anularDB(info))
+                        return true;
+                }
+                return false;
             }
             catch (Exception)
             {

@@ -17,6 +17,12 @@ namespace Core.Erp.Data.ActivoFijo
                 using (Entities_activo_fijo Context = new Entities_activo_fijo())
                 {
                     lista = (from q in Context.Af_Depreciacion_Det
+                             join a in Context.Af_Activo_fijo
+                             on new { q.IdEmpresa, q.IdActivoFijo} equals new { a.IdEmpresa, a.IdActivoFijo}
+                             join t in Context.Af_Activo_fijo_tipo
+                             on new { IdEmpresa = a.IdEmpresa, IdActivoFijoTipo = a.IdActivoFijoTipo} equals new { IdEmpresa = t.IdEmpresa, IdActivoFijoTipo = (int?)t.IdActivoFijoTipo}
+                             join c in Context.Af_Activo_fijo_Categoria
+                             on new { a.IdEmpresa, a.IdCategoriaAF} equals new { c.IdEmpresa, IdCategoriaAF = (int?)c.IdCategoriaAF}
                              where q.IdEmpresa == IdEmpresa
                              && q.IdDepreciacion == IdDepreciacion
                              select new Af_Depreciacion_Det_Info
@@ -31,7 +37,10 @@ namespace Core.Erp.Data.ActivoFijo
                                  Valor_Depreciacion = q.Valor_Depreciacion,
                                  Valor_Depre_Acum = q.Valor_Depre_Acum,
                                  Valor_Salvamento = q.Valor_Salvamento,
-                                 Vida_Util = q.Vida_Util
+                                 Vida_Util = q.Vida_Util,
+                                 nom_categoria = c.Descripcion,
+                                 nom_tipo = t.Af_Descripcion,
+                                 Af_Nombre = a.Af_Nombre
                              }).ToList();
                 }
                 return lista; 

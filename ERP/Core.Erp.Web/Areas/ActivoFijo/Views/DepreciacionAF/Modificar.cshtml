@@ -11,6 +11,9 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdDepreciacion)
+    @Html.HiddenFor(q => q.IdPeriodo)
+    @Html.HiddenFor(q => q.IdTipoCbte)
+    @Html.HiddenFor(q => q.IdCbteCble)
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -29,6 +32,7 @@
                     @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
                 </div>
             </div>
+            
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="Cod_Depreciacion">Código</label>
@@ -36,7 +40,7 @@
                     @Html.ValidationMessageFor(q => q.Cod_Depreciacion, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-offset-5 col-md-2">
+            <div class="col-md-offset-4 col-md-2">
                 <div class="form-group">
                     <label for="Cod_Depreciacion">Fecha*</label>
                     @Html.TextBoxFor(q => q.Fecha_Depreciacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_Depreciacion" })
@@ -59,6 +63,9 @@
     </div>
 
     <div class="box-footer">
+        <button type="button" class="btn btn-primary" id="btn_refrescar" onclick="Get_list_activos_a_depreciar();">
+            <i class="fa fa-refresh"></i>
+        </button> 
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index", "DepreciacionAF", new { Area = "ActivoFijo" }, null)">Cancelar</a>
     </div>
@@ -94,5 +101,32 @@
         $('#Fecha_Depreciacion').datepicker({
             autoclose: true
         })
+
+        
     });
+
+    function Get_list_activos_a_depreciar() {
+        var periodo = $("#IdPeriodo").val();
+
+        var datos = {
+            IdPeriodo: periodo
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("Get_list_activos_a_depreciar", "DepreciacionAF", new { Area = "ActivoFijo" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+            },
+            error: function (error) {
+            }
+        });
+        GridView_depreciacion_det.PerformCallback();
+        GridView_comprobante_detalle_readonly.PerformCallback();
+    }
 </script>

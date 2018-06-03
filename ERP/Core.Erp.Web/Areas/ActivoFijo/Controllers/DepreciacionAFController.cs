@@ -19,6 +19,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         Af_Depreciacion_Det_Bus bus_depreciacion_det = new Af_Depreciacion_Det_Bus();
         Af_Depreciacion_Det_list lst_depreciacion_det = new Af_Depreciacion_Det_list();
         ct_cbtecble_det_List lst_comprobante_detalle = new ct_cbtecble_det_List();
+        ct_cbtecble_det_Bus bus_comprobante_detalle = new ct_cbtecble_det_Bus();
 
         string mensaje = string.Empty;
         public ActionResult Index()
@@ -157,7 +158,9 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_detalle = bus_depreciacion_det.get_list(IdEmpresa, IdDepreciacion);
+            model.lst_detalle_ct = bus_comprobante_detalle.get_list(IdEmpresa, Convert.ToInt32(model.IdTipoCbte), Convert.ToInt32(model.IdCbteCble));
             lst_depreciacion_det.set_list(model.lst_detalle);
+            lst_comprobante_detalle.set_list(model.lst_detalle_ct);
             cargar_combos();
             return View(model);
         }
@@ -188,7 +191,9 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_detalle = bus_depreciacion_det.get_list(IdEmpresa, IdDepreciacion);
+            model.lst_detalle_ct = bus_comprobante_detalle.get_list(IdEmpresa, Convert.ToInt32(model.IdTipoCbte), Convert.ToInt32(model.IdCbteCble));
             lst_depreciacion_det.set_list(model.lst_detalle);
+            lst_comprobante_detalle.set_list(model.lst_detalle_ct);
             cargar_combos();
             return View(model);
         }
