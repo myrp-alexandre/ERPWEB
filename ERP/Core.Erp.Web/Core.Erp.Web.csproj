@@ -381,11 +381,11 @@
     <Compile Include="Reportes\ActivoFijo\ACTF_004_resumen_Rpt.Designer.cs">
       <DependentUpon>ACTF_004_resumen_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\ActivoFijo\ACTF_004_Rpt.cs">
+    <Compile Include="Reportes\ActivoFijo\ACTF_004_detalle_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\ActivoFijo\ACTF_004_Rpt.Designer.cs">
-      <DependentUpon>ACTF_004_Rpt.cs</DependentUpon>
+    <Compile Include="Reportes\ActivoFijo\ACTF_004_detalle_Rpt.Designer.cs">
+      <DependentUpon>ACTF_004_detalle_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\Caja\CAJ_001_Rpt.cs">
       <SubType>Component</SubType>
@@ -8092,8 +8092,8 @@
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_004_resumen_Rpt.resx">
       <DependentUpon>ACTF_004_resumen_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_004_Rpt.resx">
-      <DependentUpon>ACTF_004_Rpt.cs</DependentUpon>
+    <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_004_detalle_Rpt.resx">
+      <DependentUpon>ACTF_004_detalle_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Caja\CAJ_001_Rpt.resx">
       <DependentUpon>CAJ_001_Rpt.cs</DependentUpon>

@@ -9,11 +9,11 @@ using System.Collections.Generic;
 
 namespace Core.Erp.Web.Reportes.ActivoFijo
 {
-    public partial class ACTF_004_Rpt : DevExpress.XtraReports.UI.XtraReport
+    public partial class ACTF_004_detalle_Rpt : DevExpress.XtraReports.UI.XtraReport
     {
         public string usuario { get; set; }
         public string empresa { get; set; }
-        public ACTF_004_Rpt()
+        public ACTF_004_detalle_Rpt()
         {
             InitializeComponent();
         }
