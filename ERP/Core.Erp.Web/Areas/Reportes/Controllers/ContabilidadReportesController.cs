@@ -1,9 +1,5 @@
-﻿using DevExpress.Web.Mvc;
-using Core.Erp.Web.Reportes.Contabilidad;
+﻿using Core.Erp.Web.Reportes.Contabilidad;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers

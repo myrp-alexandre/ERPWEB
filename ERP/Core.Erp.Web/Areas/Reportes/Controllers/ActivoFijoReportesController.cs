@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.Reportes.ActivoFijo;
+using Core.Erp.Info.Helps;
+using Core.Erp.Bus.ActivoFijo;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
@@ -63,25 +65,118 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
 
         }
-        public ActionResult ACTF_004(DateTime fecha_corte, int IdActivoFijoTipo = 0,int  IdCategoriaAF= 0, string Estado_Proceso ="",string IdUsuario="")
+        public ActionResult ACTF_004(DateTime fecha_corte, int IdActivoFijoTipo = 0,int  IdCategoriaAF= 0, string Estado_Proceso ="",string IdUsuario="", bool  mostrar_detallado = false)
         {
-            ACTF_004_detalle_Rpt model = new ACTF_004_detalle_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
-            model.p_IdActivoFijoTipo.Value = IdActivoFijoTipo;
-            model.p_IdCategoriaAF.Value = IdCategoriaAF;
-            model.p_fecha_corte.Value = fecha_corte;
-            model.p_Estado_Proceso.Value = Estado_Proceso;
-            model.p_IdUsuario.Value = IdUsuario;
-
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
-            if (IdActivoFijoTipo != 0)
+            cl_filtros_Info model = new cl_filtros_Info
             {
-                model.p_IdEmpresa.Visible = false;
+                IdActivoFijoTipo = IdActivoFijoTipo,
+                IdCategoriaAF = IdCategoriaAF,
+                Estado_Proceso = Estado_Proceso,
+                IdUsuario = IdUsuario,
+                fecha_fin = fecha_corte == null ? DateTime.Now : Convert.ToDateTime(fecha_corte),
+            };
+
+
+            if (mostrar_detallado)
+            {
+                ACTF_004_detalle_Rpt model_detalle = new ACTF_004_detalle_Rpt();
+                model_detalle.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+                model_detalle.p_IdActivoFijoTipo.Value = model.IdActivoFijoTipo;
+                model_detalle.p_IdCategoriaAF.Value = model.IdCategoriaAF;
+                model_detalle.p_fecha_corte.Value = model.fecha_fin;
+                model_detalle.p_Estado_Proceso.Value = model.Estado_Proceso;
+                model_detalle.p_IdUsuario.Value = model.IdUsuario;
+
+                model_detalle.usuario = Session["IdUsuario"].ToString();
+                model_detalle.empresa = Session["nom_empresa"].ToString();
+                if (IdActivoFijoTipo != 0)
+                {
+                    model_detalle.p_IdEmpresa.Visible = false;
+                }
+                else
+                    model_detalle.RequestParameters = false;
+                ViewBag.report = model_detalle;
             }
             else
-                model.RequestParameters = false;
+            {
+                ACTF_004_resumen_Rpt model_resumen = new ACTF_004_resumen_Rpt();
+                model_resumen.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+                model_resumen.p_IdActivoFijoTipo.Value = model.IdActivoFijoTipo;
+                model_resumen.p_IdCategoriaAF.Value = model.IdCategoriaAF;
+                model_resumen.p_fecha_corte.Value = model.fecha_fin;
+                model_resumen.p_Estado_Proceso.Value = model.Estado_Proceso;
+                model_resumen.p_IdUsuario.Value = model.IdUsuario;
+
+                model_resumen.usuario = Session["IdUsuario"].ToString();
+                model_resumen.empresa = Session["nom_empresa"].ToString();
+                if (IdActivoFijoTipo != 0)
+                {
+                    model_resumen.p_IdEmpresa.Visible = false;
+                }
+                else
+                    model_resumen.RequestParameters = false;
+                ViewBag.report = model_resumen;
+            }
+            
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ACTF_004(cl_filtros_Info model, bool mostrar_detallado = false)
+        {
+           if(mostrar_detallado)
+            {
+                ACTF_004_detalle_Rpt report = new ACTF_004_detalle_Rpt();
+                report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+                report.p_IdActivoFijoTipo.Value = model.IdActivoFijoTipo;
+                report.p_IdCategoriaAF.Value = model.IdCategoriaAF;
+                report.p_Estado_Proceso.Value = model.Estado_Proceso;
+                report.p_IdUsuario.Value = model.IdUsuario;
+                report.p_fecha_corte.Value = model.fecha_fin;
+                cargar_combos(model);
+
+                report.usuario = Session["IdUsuario"].ToString();
+                report.empresa = Session["nom_empresa"].ToString();
+
+                if (model.IdActivoFijoTipo == 0)
+                    report.RequestParameters = false;
+                ViewBag.Report = report;
+            }
+            else
+            {
+                ACTF_004_resumen_Rpt report = new ACTF_004_resumen_Rpt();
+                report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+                report.p_IdActivoFijoTipo.Value = model.IdActivoFijoTipo;
+                report.p_IdCategoriaAF.Value = model.IdCategoriaAF;
+                report.p_Estado_Proceso.Value = model.Estado_Proceso;
+                report.p_IdUsuario.Value = model.IdUsuario;
+                report.p_fecha_corte.Value = model.fecha_fin;
+                cargar_combos(model);
+
+                report.usuario = Session["IdUsuario"].ToString();
+                report.empresa = Session["nom_empresa"].ToString();
+
+                if (model.IdActivoFijoTipo == 0)
+                    report.RequestParameters = false;
+                ViewBag.Report = report;
+            }
             return View(model);
+        }
+
+        private void cargar_combos(cl_filtros_Info model)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            Af_Activo_fijo_tipo_Bus bus_tipo = new Af_Activo_fijo_tipo_Bus();
+            var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
+            ViewBag.lst_tipo = lst_tipo;
+
+            Af_Activo_fijo_Categoria_Bus bus_categoria = new Af_Activo_fijo_Categoria_Bus();
+            var lst_categoria = bus_categoria.get_list(IdEmpresa, model.IdActivoFijoTipo, false);
+            ViewBag.lst_categoria = lst_categoria;
+
+            Af_Catalogo_Bus bus_catalogo = new Af_Catalogo_Bus();
+            var lst_estado = bus_catalogo.get_list(Convert.ToString(cl_enumeradores.eTipoCatalogoAF.TIP_ESTADO_AF), false);
+            ViewBag.lst_estado = lst_estado;
+
         }
         public ActionResult ACTF_005()
         {

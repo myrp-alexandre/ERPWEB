@@ -8103,6 +8103,9 @@
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_004_detalle_Rpt.resx">
       <DependentUpon>ACTF_004_detalle_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_005_Rpt.resx">
+      <DependentUpon>ACTF_005_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Caja\CAJ_001_Rpt.resx">
       <DependentUpon>CAJ_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

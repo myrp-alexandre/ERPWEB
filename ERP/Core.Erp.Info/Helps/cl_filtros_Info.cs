@@ -25,7 +25,14 @@ namespace Core.Erp.Info.Helps
         public int IdSubGrupo { get; set; }
         public decimal IdProducto { get; set; }
         public int IdMovi_inven_tipo { get; set; }
-        public string signo { get; set; }        
+        public string signo { get; set; }
+        #endregion
+
+        #region Filtros activo
+        public int IdActivoFijoTipo { get; set; }
+        public int IdCategoriaAF { get; set; }
+        public string Estado_Proceso { get; set; }
+        public string IdUsuario { get; set; }
         #endregion
 
         public cl_filtros_Info()

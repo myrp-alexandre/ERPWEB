@@ -13,5 +13,9 @@ namespace Core.Erp.Web.Reportes.ActivoFijo
             InitializeComponent();
         }
 
+        private void ACTF_005_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
+        }
     }
 }
