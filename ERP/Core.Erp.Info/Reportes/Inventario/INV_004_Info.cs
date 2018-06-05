@@ -10,6 +10,7 @@ namespace Core.Erp.Info.Reportes.Inventario
     {
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
+        public int IdBodega { get; set; }
         public int IdMovi_inven_tipo { get; set; }
         public decimal IdNumMovi { get; set; }
         public int Secuencia { get; set; }
@@ -37,6 +38,5 @@ namespace Core.Erp.Info.Reportes.Inventario
         public Nullable<int> mes { get; set; }
         public Nullable<decimal> IdProducto_padre { get; set; }
         public string pr_descripcion_padre { get; set; }
-        public int IdBodega { get; set; }
     }
 }

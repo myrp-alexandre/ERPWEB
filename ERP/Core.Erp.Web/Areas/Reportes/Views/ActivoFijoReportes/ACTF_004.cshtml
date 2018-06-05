@@ -1,0 +1,8 @@
+﻿
+@{
+    ViewBag.Title = "ACTF_004";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}

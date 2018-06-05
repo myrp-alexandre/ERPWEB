@@ -26,10 +26,14 @@ namespace Core.Erp.Web.Reportes.ActivoFijo
             lbl_empresa.Text = empresa;
 
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            int IdActivoFijoTipo = p_IdActivoFijoTipo.Value == null ? 0 : Convert.ToInt32(p_IdActivoFijoTipo.Value);
+            int IdCategoriaAF = p_IdCategoriaAF.Value == null ? 0 : Convert.ToInt32(p_IdCategoriaAF.Value);
+            string Estado_Proceso = p_Estado_Proceso.Value == null ? "" : Convert.ToString(p_Estado_Proceso.Value);
+            string IdUsuario = p_IdUsuario.Value == null ? "" : Convert.ToString(p_IdUsuario.Value);
             DateTime fecha_corte = p_fecha_corte.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_corte.Value);
 
-            ACTF_004_Bus bus_rpt = new ACTF_004_Bus();
-            List<ACTF_004_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, fecha_corte);
+            ACTF_004_detalle_Bus bus_rpt = new ACTF_004_detalle_Bus();
+            List<ACTF_004_detalle_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdActivoFijoTipo, IdCategoriaAF, fecha_corte, Estado_Proceso, IdUsuario);
             this.DataSource = lst_rpt;
 
         }

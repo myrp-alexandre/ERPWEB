@@ -74,6 +74,10 @@
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_fecha_corte = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdActivoFijoTipo = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdCategoriaAF = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_Estado_Proceso = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdUsuario = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
@@ -511,6 +515,22 @@
             // 
             this.p_fecha_corte.Name = "p_fecha_corte";
             // 
+            // p_IdActivoFijoTipo
+            // 
+            this.p_IdActivoFijoTipo.Name = "p_IdActivoFijoTipo";
+            // 
+            // p_IdCategoriaAF
+            // 
+            this.p_IdCategoriaAF.Name = "p_IdCategoriaAF";
+            // 
+            // p_Estado_Proceso
+            // 
+            this.p_Estado_Proceso.Name = "p_Estado_Proceso";
+            // 
+            // p_IdUsuario
+            // 
+            this.p_IdUsuario.Name = "p_IdUsuario";
+            // 
             // ACTF_004_resumen_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -529,7 +549,11 @@
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this.p_IdEmpresa,
-            this.p_fecha_corte});
+            this.p_fecha_corte,
+            this.p_IdActivoFijoTipo,
+            this.p_IdCategoriaAF,
+            this.p_Estado_Proceso,
+            this.p_IdUsuario});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACTF_004_resumen_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
@@ -584,5 +608,9 @@
         private DevExpress.DataAccess.ObjectBinding.ObjectDataSource objectDataSource1;
         public DevExpress.XtraReports.Parameters.Parameter p_IdEmpresa;
         public DevExpress.XtraReports.Parameters.Parameter p_fecha_corte;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdActivoFijoTipo;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdCategoriaAF;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdUsuario;
+        public DevExpress.XtraReports.Parameters.Parameter p_Estado_Proceso;
     }
 }

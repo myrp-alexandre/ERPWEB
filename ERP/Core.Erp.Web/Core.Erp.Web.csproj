@@ -387,6 +387,12 @@
     <Compile Include="Reportes\ActivoFijo\ACTF_004_detalle_Rpt.Designer.cs">
       <DependentUpon>ACTF_004_detalle_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\ActivoFijo\ACTF_005_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ActivoFijo\ACTF_005_Rpt.Designer.cs">
+      <DependentUpon>ACTF_005_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Caja\CAJ_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -7975,6 +7981,8 @@
     <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Anular.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\_GridViewPartial_depreciacion_det.cshtml" />
     <Content Include="Areas\Contabilidad\Views\ComprobanteContable\_GridViewPartial_comprobante_detalle_readonly.cshtml" />
+    <Content Include="Areas\Reportes\Views\ActivoFijoReportes\ACTF_004.cshtml" />
+    <Content Include="Areas\Reportes\Views\ActivoFijoReportes\ACTF_005.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />

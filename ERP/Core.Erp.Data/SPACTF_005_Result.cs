@@ -10,25 +10,25 @@
 namespace Core.Erp.Data
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Af_SPACTF_004_detalle
+    public partial class SPACTF_005_Result
     {
         public int IdEmpresa { get; set; }
         public int IdActivoFijo { get; set; }
-        public string IdUsuario { get; set; }
-        public int IdSucursal { get; set; }
-        public string Su_Descripcion { get; set; }
+        public Nullable<int> IdActivoFijoTipo { get; set; }
+        public string nom_tipo { get; set; }
+        public string nom_categoria { get; set; }
+        public Nullable<int> IdCategoriaAF { get; set; }
         public string CodActivoFijo { get; set; }
         public string Af_Nombre { get; set; }
-        public int IdActivoFijoTipo { get; set; }
-        public string tipo_AF { get; set; }
-        public int IdCategoria_Af { get; set; }
-        public string Categoria_AF { get; set; }
-        public double Af_costo_compra { get; set; }
-        public double Af_Depreciacion_acum { get; set; }
-        public double Costo_actual { get; set; }
-        public double valor_ult_depreciacion { get; set; }
+        public string Estado_Proceso { get; set; }
+        public string nom_estado_proceso { get; set; }
         public System.DateTime Af_fecha_compra { get; set; }
+        public double Af_costo_compra { get; set; }
+        public double valor_mejora { get; set; }
+        public double valor_baja { get; set; }
+        public double valor_depreciacion { get; set; }
+        public double valor_venta { get; set; }
+        public double saldo { get; set; }
     }
 }

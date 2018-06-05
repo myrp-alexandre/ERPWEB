@@ -92,12 +92,6 @@
     <Compile Include="Af_Retiro_Activo.cs">
       <DependentUpon>Model_activo_fijo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Af_SPACTF_004_detalle.cs">
-      <DependentUpon>Model_reportes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Af_SPACTF_004_resumen.cs">
-      <DependentUpon>Model_reportes.tt</DependentUpon>
-    </Compile>
     <Compile Include="Af_Venta_Activo.cs">
       <DependentUpon>Model_activo_fijo.tt</DependentUpon>
     </Compile>
@@ -552,8 +546,9 @@
       <DependentUpon>Model_seguridad_acceso.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reportes\ActivoFijo\ACTF_004_Data.cs" />
+    <Compile Include="Reportes\ActivoFijo\ACTF_004_detalle_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_004_resumen_Data.cs" />
+    <Compile Include="Reportes\ActivoFijo\ACTF_005_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_001_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_001_Data.cs" />
@@ -803,10 +798,16 @@
     <Compile Include="SPACTF_004_resumen_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="SPACTF_005_Result.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="spACTF_activos_a_depreciar_Result.cs">
       <DependentUpon>Model_activo_fijo.tt</DependentUpon>
     </Compile>
     <Compile Include="SPINV_001_Result.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPINV_003_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="spro_nomina_x_pago_utilidad_Result.cs">
@@ -903,12 +904,6 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="VWINV_004.cs">
-      <DependentUpon>Model_reportes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="VWROL_001.cs">
-      <DependentUpon>Model_reportes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="VWROL_002.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="vwRo_ActaFiniquito.cs">

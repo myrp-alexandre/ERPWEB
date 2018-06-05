@@ -15,6 +15,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                 List<ROL_001_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
+                    /*
                     Lista = (from q in Context.VWROL_001
                              where q.IdEmpresa == IdEmpresa
                              && q.IdNominaTipo == IdNomina
@@ -51,7 +52,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  Area = q.Area,
                                  Periodo=q.Periodo
 
-                             }).ToList();
+                             }).ToList();*/
+                    Lista = new List<ROL_001_Info>();
                 }
                 return Lista;
             }

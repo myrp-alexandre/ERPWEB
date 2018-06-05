@@ -134,8 +134,9 @@
     <Compile Include="Inventario\in_UnidadMedida_Equiv_conversion_Info.cs" />
     <Compile Include="Inventario\in_UnidadMedida_Info.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reportes\ActivoFijo\ACTF_004_Info.cs" />
+    <Compile Include="Reportes\ActivoFijo\ACTF_004_detalle_Info.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_004_resumen_Info.cs" />
+    <Compile Include="Reportes\ActivoFijo\ACTF_005_Info.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Info.cs" />
     <Compile Include="Reportes\RRHH\ROL_001_Info.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_001_Info.cs" />
