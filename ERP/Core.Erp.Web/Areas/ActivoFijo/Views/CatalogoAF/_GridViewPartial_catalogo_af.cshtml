@@ -17,7 +17,7 @@
         settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
         settings.Settings.VerticalScrollableHeight = 400;
         settings.SettingsPager.Visible = true;
-        settings.SettingsPager.PageSize = 10000;
+        settings.SettingsPager.PageSize = 10;
         settings.SettingsPager.Mode = GridViewPagerMode.ShowPager;
         settings.SettingsPager.AlwaysShowPager = true;
         //Configuración filtro por columna
@@ -77,7 +77,7 @@
         });
 
 
-        settings.Columns.Add("IdTipoCatalogo", "Código").Width = Unit.Percentage(20);
+        settings.Columns.Add("IdCatalogo", "Código").Width = Unit.Percentage(20);
         settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(60);
         settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(10);
         settings.Columns.Add("Orden", "Orden").Width = Unit.Percentage(10);

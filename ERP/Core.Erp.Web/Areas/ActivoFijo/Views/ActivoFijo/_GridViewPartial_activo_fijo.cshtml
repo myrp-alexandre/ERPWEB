@@ -55,7 +55,7 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
+                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A" && Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado_Proceso")) == "TIP_ESTADO_AF_ACTIVO")
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdActivoFijo = DataBinder.Eval(tc.DataItem, "IdActivoFijo")}) + "&nbsp;" +
@@ -76,7 +76,7 @@
         });
 
         settings.Columns.Add("IdActivoFijo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add("CodActivoFijo", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("Estado_Proceso_nombre", "Proceso").Width = System.Web.UI.WebControls.Unit.Percentage(10);
         settings.Columns.Add("Af_Nombre", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(70);
         settings.Columns.Add("Estado", "Estado").Width = System.Web.UI.WebControls.Unit.Percentage(10);
 

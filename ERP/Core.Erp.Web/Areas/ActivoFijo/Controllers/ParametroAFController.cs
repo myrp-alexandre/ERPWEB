@@ -45,8 +45,8 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 
             Dictionary<string, string> lst_forma = new Dictionary<string, string>();
             lst_forma.Add("Por_Activo", "Por activo");
-            lst_forma.Add("Por_Tipo_CtaCble", "Por tipo cuenta cuentable");
-            lst_forma.Add("¨Por_CtaCble", "Por cuenta cuentable");
+            lst_forma.Add("Por_Tipo_CtaCble", "Por tipo");
+            lst_forma.Add("¨Por_CtaCble", "Por parámetros");
             ViewBag.lst_forma = lst_forma;
 
 

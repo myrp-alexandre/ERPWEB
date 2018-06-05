@@ -12,37 +12,12 @@
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
-        //Configuración scrolling y pager
-        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Hidden;
-        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
-        settings.Settings.VerticalScrollableHeight = 400;
-        settings.SettingsPager.Visible = true;
         settings.SettingsPager.PageSize = 10;
-        settings.SettingsPager.Mode = GridViewPagerMode.ShowPager;
-        settings.SettingsPager.AlwaysShowPager = true;
         //Configuración filtro por columna
         settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
         settings.Settings.ShowFilterRow = true;
         settings.Settings.ShowHeaderFilterButton = true;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
-        //Configuracion exportacion
-        settings.SettingsExport.EnableClientSideExportAPI = true;
-        settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
-        settings.Toolbars.Add(t =>
-        {
-            t.EnableAdaptivity = false;
-            t.Items.Add(GridViewToolbarCommand.ExportToPdf);
-            t.Items.Add(GridViewToolbarCommand.ExportToXls);
-            t.Items.Add(GridViewToolbarCommand.ExportToXlsx);
-            t.Items.Add(GridViewToolbarCommand.ExportToDocx);
-            t.Items.Add(GridViewToolbarCommand.ExportToRtf);
-            t.Items.Add(GridViewToolbarCommand.ExportToCsv);
-        });
-        settings.SettingsExport.RenderBrick = (sender, e) =>
-        {
-            if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
-                e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
-        };
 
         settings.Columns.Add(column =>
         {
@@ -60,8 +35,8 @@
         });
         settings.Columns.Add("Af_Nombre","Activo").Width = Unit.Percentage(30);
         settings.Columns.Add("Valor_Compra","Valor compra").Width = Unit.Percentage(5);
-        settings.Columns.Add("Valor_Depreciacion","Valor depreciación").Width = Unit.Percentage(5);
-        settings.Columns.Add("Valor_Depre_Acum","Valor depr. acumulada").Width = Unit.Percentage(5);
+        settings.Columns.Add("Valor_Depreciacion","Depreciación").Width = Unit.Percentage(5);
+        settings.Columns.Add("Valor_Depre_Acum","Depr. acumulada").Width = Unit.Percentage(5);
 
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Count, "Af_Nombre").DisplayFormat = "Conteo: {0:##}";
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor_Depreciacion").DisplayFormat = "Total {0:c2}";

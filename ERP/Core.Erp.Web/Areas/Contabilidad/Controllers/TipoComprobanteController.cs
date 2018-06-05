@@ -35,7 +35,11 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
         public ActionResult Nuevo()
         {
-            ct_cbtecble_tipo_Info model = new ct_cbtecble_tipo_Info();
+            ct_cbtecble_tipo_Info model = new ct_cbtecble_tipo_Info
+            {
+                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
+                IdTipoCbte_Anul = 1,
+            };
             cargar_combos();
             return View(model);
         }
@@ -43,7 +47,6 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         [HttpPost]
         public ActionResult Nuevo(ct_cbtecble_tipo_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_comprobante_tipo.guardarDB(model))
             {
                 cargar_combos();

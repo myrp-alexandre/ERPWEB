@@ -144,6 +144,11 @@ namespace Core.Erp.Data.ActivoFijo
                         Fecha_Transac = DateTime.Now
                     };
                     Context.Af_Venta_Activo.Add(Entity);
+
+                    Af_Activo_fijo Entity_A = Context.Af_Activo_fijo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdActivoFijo == info.IdActivoFijo).FirstOrDefault();
+                    if (Entity_A == null) return false;
+                    Entity_A.Estado_Proceso = "TIP_ESTADO_AF_VENTA";
+
                     Context.SaveChanges();
                 }
                 return true;

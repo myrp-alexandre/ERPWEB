@@ -18,26 +18,33 @@ namespace Core.Erp.Data.ActivoFijo
                 {
                     if (mostrar_anulados)
                         Lista = (from q in Context.Af_Activo_fijo
+                                 join c in Context.Af_Catalogo
+                                 on q.Estado_Proceso equals c.IdCatalogo
                                  where q.IdEmpresa == IdEmpresa
                                  select new Af_Activo_fijo_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
                                      Estado = q.Estado,
                                      Af_Nombre = q.Af_Nombre,
-                                     IdActivoFijo = q.IdActivoFijo
+                                     IdActivoFijo = q.IdActivoFijo,
+                                     Estado_Proceso = q.Estado_Proceso,
+                                     Estado_Proceso_nombre = c.Descripcion
 
                                  }).ToList();
                     else
                         Lista = (from q in Context.Af_Activo_fijo
+                                 join c in Context.Af_Catalogo
+                                 on q.Estado_Proceso equals c.IdCatalogo
                                  where q.IdEmpresa == IdEmpresa
                                  && q.Estado == "A"
                                  select new Af_Activo_fijo_Info
-                                 {
-                                     
+                                 {                                     
                                      IdEmpresa = q.IdEmpresa,
                                      Af_Nombre = q.Af_Nombre,
                                      Estado = q.Estado,
-                                     IdActivoFijo = q.IdActivoFijo
+                                     IdActivoFijo = q.IdActivoFijo,
+                                     Estado_Proceso = q.Estado_Proceso,
+                                     Estado_Proceso_nombre = c.Descripcion
                                  }).ToList();
                 }
                 return Lista;

@@ -41,31 +41,29 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-3">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdTipoCbte_Anul">Tipo comprobante*</label>
+                    <label for="IdTipoCbte_Anul">Tipo comprobante anulación*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbte_Anul, settings =>
                {
                    settings.Name = "IdTipoCbte_Anul";
                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                   settings.Properties.Columns.Add("IdTipoCbte_Anul", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
                    settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
                    //Campo ID
-                   settings.Properties.ValueField = "IdTipoCbte_Anul";
+                   settings.Properties.ValueField = "IdTipoCbte";
                    settings.Properties.ValueType = typeof(int);
                    settings.Properties.TextField = "tc_TipoCbte";
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
                    settings.Properties.NullText = "== Seleccione ==";
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                   settings.Properties.DropDownButton.Enabled = false;
-                   settings.ReadOnly = true;
                }).BindList(ViewBag.lst_tipo).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdTipoCbte_Anul, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
-    </div>>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-4">
@@ -76,6 +74,11 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Modificar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","TipoComprobante",new { Area = "Contabilidad" },null)">Cancelar</a>
     </div>
     @section Scripts {
      @Scripts.Render("~/bundles/jqueryval")

@@ -308,31 +308,26 @@
         $('#Af_fecha_compra').datepicker({
             autoclose: true
         })
-             $('#Af_fecha_ini_depre').datepicker({
-            autoclose: true
-             })
-
-             $('#Af_fecha_fin_depre').datepicker({
+        $('#Af_fecha_ini_depre').datepicker({
             autoclose: true
         })
-    });
-    $(function () {
+
+        $('#Af_fecha_fin_depre').datepicker({
+            autoclose: true
+        })
+
         cargar_categoria();
         get_info_tipo();
-
+        cargar_fecha();
     });
 
     $("#IdActivoFijoTipo").change(function () {
         cargar_categoria();
         get_info_tipo();
-    });
-    $("#Af_fecha_ini_depre").change(function () {
-        cargar_categoria();
         cargar_fecha();
     });
-    $("#Af_fecha_fin_depre").change(function () {
-            cargar_categoria();
-            cargar_fecha();
+    $("#Af_fecha_ini_depre").change(function () {
+        cargar_fecha();
     });
 
     function cargar_fecha() {
@@ -344,8 +339,7 @@
         var day = d.getDate();
 
         var c = new Date(year + Number(vida), month, day)
-        $("#Af_fecha_fin_depre").val(moment(c).format("DD/MM/YYYY"))
-
+        $('#Af_fecha_fin_depre').datepicker("setDate", moment(c).format("DD/MM/YYYY"));
     }
     function get_info_tipo() {
         var activo = $("#IdActivoFijoTipo").val();

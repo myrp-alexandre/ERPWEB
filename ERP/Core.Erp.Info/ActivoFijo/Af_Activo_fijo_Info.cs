@@ -57,6 +57,9 @@ namespace Core.Erp.Info.ActivoFijo
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string Af_NumSerie_Motor { get; set; }
         public string Af_NumSerie_Chasis { get; set; }
+
+        //Campos que no existen en la tabla
+        public string Estado_Proceso_nombre { get; set; }
     }
 
     public class Af_Activo_fijo_valores_Info

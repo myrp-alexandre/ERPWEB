@@ -17,7 +17,7 @@
         settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
         settings.Settings.VerticalScrollableHeight = 400;
         settings.SettingsPager.Visible = true;
-        settings.SettingsPager.PageSize = 10000;
+        settings.SettingsPager.PageSize = 10;
         settings.SettingsPager.Mode = GridViewPagerMode.ShowPager;
         settings.SettingsPager.AlwaysShowPager = true;
         //Configuración filtro por columna
@@ -76,7 +76,7 @@
             c.Width = System.Web.UI.WebControls.Unit.Pixel(150);
         });
         
-        settings.Columns.Add("IdActivoFijoTipo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("IdCategoriaAF", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
         settings.Columns.Add("CodCategoriaAF", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
         settings.Columns.Add("Descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(70);
         settings.Columns.Add("Estado", "Estado").Width = System.Web.UI.WebControls.Unit.Percentage(10);
