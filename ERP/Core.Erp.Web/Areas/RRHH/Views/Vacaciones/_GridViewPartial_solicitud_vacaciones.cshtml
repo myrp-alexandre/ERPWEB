@@ -78,7 +78,7 @@
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = Unit.Pixel(160);
+            c.Width = Unit.Percentage(15);
         });
 
 
@@ -98,9 +98,9 @@
             });
         });
         settings.Columns.Add("Observacion","Observación").Width=Unit.Percentage(15);
-        settings.Columns.Add("Dias_q_Corresponde","Días ganado").Width=Unit.Percentage(10);
-        settings.Columns.Add("Dias_a_disfrutar", "días tomado").Width = Unit.Percentage(10);
-        settings.Columns.Add("Dias_pendiente", "días pendientes").Width = Unit.Percentage(10);
+        settings.Columns.Add("Dias_q_Corresponde","Ganados").Width=Unit.Percentage(10);
+        settings.Columns.Add("Dias_a_disfrutar", "Tomados").Width = Unit.Percentage(10);
+        settings.Columns.Add("Dias_pendiente", "Pendientes").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.FieldName = "Anio_Desde";
@@ -161,6 +161,24 @@
                 sp.Width = Unit.Percentage(100);
             });
         });
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "#";
+            column.Width = Unit.Pixel(100);
+            column.SetDataItemTemplateContent(container =>
+            {
+                Html.DevExpress().HyperLink(hyperlink =>
+                {
+                    var IdEmpleado = DataBinder.Eval(container.DataItem, "IdEmpleado");
+                    var IdSolicitud = DataBinder.Eval(container.DataItem, "IdSolicitud");
+                    hyperlink.Properties.Text = "Liquidar";
+                    hyperlink.NavigateUrl = Url.Action("Nuevo", "LiquidacionVacaciones", new { Area = "RRHH", IdEmpleado = IdEmpleado, IdSolicitud = IdSolicitud });
+                }).Render();
+            });
+        });
+
+
     });
 }
 @grid.Bind(Model).GetHtml()

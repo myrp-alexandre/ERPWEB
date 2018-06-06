@@ -237,7 +237,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="cb_Observacion">Detalle de la planificación</label>
-                    @Html.Action("GridViewPartial_horario_planificacion_det", new { IdPlanificacion = Model.IdPlanificacion, @id = "detalle" })
+                    @Html.Action("GridViewPartial_horario_planificacion_det");
                 </div>
             </div>
         </div>
@@ -291,7 +291,7 @@
                     success: function (data)
                     {
                        
-                        $("#GridViewPartial_horario_planificacion_det").html(data);
+                        GridViewPartial_horario_planificacion_det.PerformCallback();
 
                     },
                     error: function (error)

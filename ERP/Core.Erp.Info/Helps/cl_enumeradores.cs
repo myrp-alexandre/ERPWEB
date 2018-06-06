@@ -40,8 +40,9 @@ namespace Core.Erp.Info.Helps
         }
         public enum eEstadoContratoRRHH
         {
-            ECT_ACT = 1,
-            ECT_LIQ = 2           
+            ECT_ACT,
+            ECT_LIQ,
+            ECT_PLQ
         }
         public enum eTipoPeriodoRRHH
         {

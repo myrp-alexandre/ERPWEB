@@ -92,6 +92,12 @@
     <Compile Include="Af_Retiro_Activo.cs">
       <DependentUpon>Model_activo_fijo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Af_SPACTF_004_detalle.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Af_SPACTF_004_resumen.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Af_Venta_Activo.cs">
       <DependentUpon>Model_activo_fijo.tt</DependentUpon>
     </Compile>
@@ -714,6 +720,9 @@
     <Compile Include="ro_Solicitud_Vacaciones_x_empleado.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="ro_SPROL_002.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="ro_Tipo_Prestamo.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -910,6 +919,12 @@
     <Compile Include="VWINV_004.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="VWROL_001.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWROL_002.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwRo_ActaFiniquito.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -932,6 +947,9 @@
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="vwro_empleado_x_titulos.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwro_Historico_Liquidacion_Vacaciones.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="vwro_horario_planificacion_det.cs">

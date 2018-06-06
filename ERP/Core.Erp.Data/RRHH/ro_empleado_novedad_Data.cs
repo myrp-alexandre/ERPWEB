@@ -119,6 +119,7 @@ namespace Core.Erp.Data.RRHH
                         IdNomina_TipoLiqui=info.IdNomina_TipoLiqui,
                         IdEmpleado=info.IdEmpleado,
                         Fecha=info.Fecha,
+                        TotalValor=info.TotalValor,
                         Fecha_PrimerPago=info.Fecha_PrimerPago,
                         Observacion=info.Observacion,                     
                         Estado = info.Estado = "A",
@@ -187,5 +188,7 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+
+  
     }
 }

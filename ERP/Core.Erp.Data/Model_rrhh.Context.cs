@@ -36,7 +36,6 @@ namespace Core.Erp.Data
         public virtual DbSet<ro_participacion_utilidad> ro_participacion_utilidad { get; set; }
         public virtual DbSet<ro_participacion_utilidad_empleado> ro_participacion_utilidad_empleado { get; set; }
         public virtual DbSet<ro_periodo_x_ro_Nomina_TipoLiqui> ro_periodo_x_ro_Nomina_TipoLiqui { get; set; }
-        public virtual DbSet<ro_rubro_tipo> ro_rubro_tipo { get; set; }
         public virtual DbSet<ro_Departamento> ro_Departamento { get; set; }
         public virtual DbSet<ro_Division> ro_Division { get; set; }
         public virtual DbSet<ro_Nomina_Tipo> ro_Nomina_Tipo { get; set; }
@@ -98,6 +97,8 @@ namespace Core.Erp.Data
         public virtual DbSet<vwRo_Solicitud_Vacaciones> vwRo_Solicitud_Vacaciones { get; set; }
         public virtual DbSet<ro_empleado> ro_empleado { get; set; }
         public virtual DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
+        public virtual DbSet<vwro_Historico_Liquidacion_Vacaciones> vwro_Historico_Liquidacion_Vacaciones { get; set; }
+        public virtual DbSet<ro_rubro_tipo> ro_rubro_tipo { get; set; }
     
         public virtual ObjectResult<spro_nomina_x_pago_utilidad_Result> spro_nomina_x_pago_utilidad(Nullable<int> idempresa, Nullable<int> idNomina, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
         {
@@ -252,6 +253,56 @@ namespace Core.Erp.Data
                 new ObjectParameter("IdActaFiniquito", typeof(decimal));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spRo_LiquidarEmpleado", idEmpresaParameter, idActaFiniquitoParameter);
+        }
+    
+        public virtual int spROL_DecimoCuarto(Nullable<int> idEmpresa, Nullable<int> idPeriodo, string region, string idUsuario, string observacion)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idPeriodoParameter = idPeriodo.HasValue ?
+                new ObjectParameter("IdPeriodo", idPeriodo) :
+                new ObjectParameter("IdPeriodo", typeof(int));
+    
+            var regionParameter = region != null ?
+                new ObjectParameter("Region", region) :
+                new ObjectParameter("Region", typeof(string));
+    
+            var idUsuarioParameter = idUsuario != null ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(string));
+    
+            var observacionParameter = observacion != null ?
+                new ObjectParameter("observacion", observacion) :
+                new ObjectParameter("observacion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spROL_DecimoCuarto", idEmpresaParameter, idPeriodoParameter, regionParameter, idUsuarioParameter, observacionParameter);
+        }
+    
+        public virtual int spROL_DecimoTercero(Nullable<int> idEmpresa, Nullable<int> idPeriodo, string region, string idUsuario, string observacion)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idPeriodoParameter = idPeriodo.HasValue ?
+                new ObjectParameter("IdPeriodo", idPeriodo) :
+                new ObjectParameter("IdPeriodo", typeof(int));
+    
+            var regionParameter = region != null ?
+                new ObjectParameter("Region", region) :
+                new ObjectParameter("Region", typeof(string));
+    
+            var idUsuarioParameter = idUsuario != null ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(string));
+    
+            var observacionParameter = observacion != null ?
+                new ObjectParameter("observacion", observacion) :
+                new ObjectParameter("observacion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spROL_DecimoTercero", idEmpresaParameter, idPeriodoParameter, regionParameter, idUsuarioParameter, observacionParameter);
         }
     }
 }

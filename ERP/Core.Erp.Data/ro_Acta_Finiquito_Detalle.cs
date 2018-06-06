@@ -21,7 +21,6 @@ namespace Core.Erp.Data
         public string Observacion { get; set; }
         public double Valor { get; set; }
     
-        public virtual ro_rubro_tipo ro_rubro_tipo { get; set; }
         public virtual ro_Acta_Finiquito ro_Acta_Finiquito { get; set; }
     }
 }

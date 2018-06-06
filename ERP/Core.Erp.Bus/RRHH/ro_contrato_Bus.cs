@@ -5,11 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Data.RRHH;
 using Core.Erp.Info.RRHH;
+using Core.Erp.Info.Helps;
+
 namespace Core.Erp.Bus.RRHH
 {
   public class ro_contrato_Bus
     {
         ro_contrato_Data odata = new ro_contrato_Data();
+
+        ro_empleado_Data data_empleado = new ro_empleado_Data();
         public List<ro_contrato_Info> get_list(int IdEmpresa, bool estado)
         {
             try
@@ -64,8 +68,15 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
+                bool bandera = true;
+                if(info.EstadoContrato==cl_enumeradores.eEstadoContratoRRHH.ECT_PLQ.ToString())
+                {
+                    bandera= data_empleado.modificar_estadoDB(info.IdEmpresa, info.IdEmpleado, cl_enumeradores.eEstadoEmpleadoRRHH.EST_PLQ.ToString(), info.FechaFin.Date);
+                }
 
-                return odata.modificarDB(info);
+                bandera= odata.modificarDB(info);
+
+                return bandera;
             }
             catch (Exception)
             {
@@ -104,6 +115,19 @@ namespace Core.Erp.Bus.RRHH
             try
             {
                 return odata.get_info_contato_a_liquidar(IdEmpresa, IdEmpleado);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public decimal get_sueldo_actual(int IdEmpresa, decimal IdEmpleado)
+        {
+            try
+            {
+                return odata.get_sueldo_actual(IdEmpresa, IdEmpleado);
             }
             catch (Exception)
             {

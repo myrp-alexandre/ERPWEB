@@ -29,7 +29,10 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
-                return odata.get_info(IdEmpresa, IdUtilidad);
+                ro_participacion_utilidad_Info info = new ro_participacion_utilidad_Info();
+                info= odata.get_info(IdEmpresa, IdUtilidad);
+                info.detalle = odataDetalle.get_list(info.IdEmpresa, info.IdUtilidad);
+                return info;
             }
             catch (Exception)
             {

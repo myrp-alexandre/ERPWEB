@@ -143,54 +143,6 @@
                     </li>
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-folder-o"></i> <span>Activo fijo</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li class="treeview">
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i> Mantenimiento
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="@Url.Action("Index","ParametroAF",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Parámetros</a></li>
-                                    <li><a href="@Url.Action("Index","CatalogoTipoAF",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Catálogos</a></li>
-                                    <li><a href="@Url.Action("Index","TipoAF",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Tipo activo</a></li>
-                                    <li><a href="@Url.Action("Index","ActivoFijo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Activos</a></li>
-                                </ul>
-                            </li>
-                            <li class="treeview">
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i> Transaciones
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="@Url.Action("Index","RevalorizacionActivo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Revalorización</a></li>
-                                    <li><a href="@Url.Action("Index","VentaActivo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Venta</a></li>
-                                    <li><a href="@Url.Action("Index","RetiroActivo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Retiro</a></li>
-                                </ul>
-                            </li>
-                            <li class="treeview">
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i> Procesos
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="@Url.Action("Index","DepreciacionAF",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Depreciación</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
                             <i class="fa fa-folder-o"></i> <span>Cuentas por pagar</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
@@ -238,69 +190,16 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="treeview">
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i> Mantenimiento
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="@Url.Action("Index","Empleado",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Empleados </a></li>
-                                    <li><a href="@Url.Action("Index","Contrato",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Contrato</a></li>
-                                    <li><a href="@Url.Action("Index","Division",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> División </a></li>
-                                    <li><a href="@Url.Action("Index","Area",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Área </a></li>
-                                    <li><a href="@Url.Action("Index","Departamento",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Departamento</a></li>
-                                    <li><a href="@Url.Action("Index","DepartamentoPorArea",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Dep. por área</a></li>
-                                    <li><a href="@Url.Action("Index","Cargo",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Cargo</a></li>
-                                    <li><a href="@Url.Action("Index","MarcacionEmpleado",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Marcaciones </a></li>
-                                    <li><a href="@Url.Action("Index","EmpleadoTitulo",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Estudios realizados</a></li>
-                                    <li><a href="@Url.Action("Index","NominaTipo",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Tipo de nómina</a></li>
-                                    <li><a href="@Url.Action("Index","NominaTipoLiquidacion",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Tipo liquidación</a></li>
-                                    <li><a href="@Url.Action("Index","Turno",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Turnos</a></li>
-                                    <li><a href="@Url.Action("Index","Horario",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Horarios</a></li>
-                                    <li><a href="@Url.Action("Index","CatalogoTipoRRHH",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Catálogos</a></li>
-                                    <li><a href="@Url.Action("Index","Rubro",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Rubro</a></li>
-                                    <li><a href="@Url.Action("Index","TipoPrestamo",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Tipo préstamo</a></li>
-                                    <li><a href="@Url.Action("Index","RubrosCalculados",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Rubros calculados</a></li>
-                                    <li><a href="@Url.Action("Index","ParametrosContable",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Param. contable</a></li>
-
-
-                                </ul>
-                            </li>
-                            <li class="treeview">
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i> Transaciones
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="@Url.Action("Index","EmpleadoPorRubro",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Rubro fijos </a></li>
-                                    <li><a href="@Url.Action("Index","EmpleadoRubroAcumulado",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Acumulación de beneficios </a></li>
-                                    <li><a href="@Url.Action("Index","EmpleadoNovedad",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Registro novedad</a></li>
-                                    <li><a href="@Url.Action("Index","Prestamos",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Prestamos</a></li>
-                                    <li><a href="@Url.Action("Index","ActaFiniquito",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Acta finiquito</a></li>
-                                    <li><a href="@Url.Action("Index","Vacaciones",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Soli. vacaciones</a></li>
-
-
-                                </ul>
-                            </li>
-                            <li class="treeview">
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i> Procesos
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="@Url.Action("Index","HorarioPlanificacion",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Planificar horarios</a></li>
-                                    <li><a href="@Url.Action("Index","HorasExtras",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Horas extras</a></li>
-                                    <li><a href="@Url.Action("Index2","HorasExtras",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Aprobar H.E.</a></li>
-                                    <li><a href="@Url.Action("Index","ParticipacionUtilidad",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Reparto utilidad</a></li>
-                                    <li><a href="@Url.Action("Index","ProcesarRol",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Procesar rol </a></li>
-                                </ul>
-                            </li>
+                            <li><a href="@Url.Action("Index","Division",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> División </a></li>
+                            <li><a href="@Url.Action("Index","Area",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Área </a></li>
+                            <li><a href="@Url.Action("Index","Departamento",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Departamento</a></li>
+                            <li><a href="@Url.Action("Index","Cargo",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Cargo</a></li>
+                            <li><a href="@Url.Action("Index","Rubro",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Rubro</a></li>
+                            <li><a href="@Url.Action("Index","Contrato",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Contrato</a></li>
+                            <li><a href="@Url.Action("Index","NominaTipo",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Tipo de nómina</a></li>
+                            <li><a href="@Url.Action("Index","TipoPrestamo",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Tipo préstamo</a></li>
+                            <li><a href="@Url.Action("Index","Periodo",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Périodos</a></li>
+                            <li><a href="@Url.Action("Index","Rubros_acumulados",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Rubros acumulados</a></li>
                         </ul>
                     </li>
                     <li class="treeview">

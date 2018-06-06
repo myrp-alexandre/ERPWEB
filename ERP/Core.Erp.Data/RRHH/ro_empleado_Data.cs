@@ -429,5 +429,29 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+
+
+        public bool modificar_estadoDB(int IdEmpresa, decimal IdEmpleado, string em_status, DateTime fecha_salida)
+        {
+            try
+            {
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    ro_empleado Entity = Context.ro_empleado.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdEmpleado == IdEmpleado);
+                    if (Entity == null)
+                        return false;
+                    Entity.em_status = em_status;
+                    Entity.em_fechaSalida = fecha_salida;
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

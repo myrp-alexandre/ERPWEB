@@ -77,6 +77,13 @@
             this.xrLabel23 = new DevExpress.XtraReports.UI.XRLabel();
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrPivotGrid1 = new DevExpress.XtraReports.UI.XRPivotGrid();
+            this.xrPivotGridField41 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.xrPivotGridField42 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.xrPivotGridField43 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.xrPivotGridField44 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.pivotGridField1 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.pivotGridField2 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.pivotGridField3 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField21 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField22 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField23 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
@@ -85,9 +92,6 @@
             this.xrPivotGridField26 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField27 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField28 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.pivotGridField1 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.pivotGridField2 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.pivotGridField3 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField29 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField30 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField31 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
@@ -100,10 +104,6 @@
             this.xrPivotGridField38 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField39 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField40 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.xrPivotGridField41 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.xrPivotGridField42 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.xrPivotGridField43 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.xrPivotGridField44 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -517,6 +517,8 @@
             this.xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrPivotGrid1.Name = "xrPivotGrid1";
             this.xrPivotGrid1.OptionsPrint.FilterSeparatorBarPadding = 3;
+            this.xrPivotGrid1.OptionsPrint.MergeColumnFieldValues = false;
+            this.xrPivotGrid1.OptionsPrint.MergeRowFieldValues = false;
             this.xrPivotGrid1.OptionsView.RowTotalsLocation = DevExpress.XtraPivotGrid.PivotRowTotalsLocation.Tree;
             this.xrPivotGrid1.OptionsView.RowTreeWidth = 170;
             this.xrPivotGrid1.OptionsView.ShowColumnGrandTotalHeader = false;
@@ -526,6 +528,69 @@
             this.xrPivotGrid1.OptionsView.ShowRowGrandTotalHeader = false;
             this.xrPivotGrid1.OptionsView.ShowRowGrandTotals = false;
             this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(286.875F, 81.25F);
+            // 
+            // xrPivotGridField41
+            // 
+            this.xrPivotGridField41.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
+            this.xrPivotGridField41.AreaIndex = 0;
+            this.xrPivotGridField41.Caption = "División";
+            this.xrPivotGridField41.FieldName = "Division";
+            this.xrPivotGridField41.Name = "xrPivotGridField41";
+            // 
+            // xrPivotGridField42
+            // 
+            this.xrPivotGridField42.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
+            this.xrPivotGridField42.AreaIndex = 1;
+            this.xrPivotGridField42.Caption = "Área";
+            this.xrPivotGridField42.FieldName = "Area";
+            this.xrPivotGridField42.Name = "xrPivotGridField42";
+            // 
+            // xrPivotGridField43
+            // 
+            this.xrPivotGridField43.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
+            this.xrPivotGridField43.AreaIndex = 2;
+            this.xrPivotGridField43.Caption = "Departamento";
+            this.xrPivotGridField43.FieldName = "de_descripcion";
+            this.xrPivotGridField43.Name = "xrPivotGridField43";
+            // 
+            // xrPivotGridField44
+            // 
+            this.xrPivotGridField44.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
+            this.xrPivotGridField44.AreaIndex = 3;
+            this.xrPivotGridField44.Caption = "Empleado";
+            this.xrPivotGridField44.FieldName = "Empleado";
+            this.xrPivotGridField44.Name = "xrPivotGridField44";
+            // 
+            // pivotGridField1
+            // 
+            this.pivotGridField1.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
+            this.pivotGridField1.AreaIndex = 0;
+            this.pivotGridField1.Caption = "Valor";
+            this.pivotGridField1.CellFormat.FormatString = "n2";
+            this.pivotGridField1.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.pivotGridField1.EmptyCellText = "0.00";
+            this.pivotGridField1.EmptyValueText = "0.00";
+            this.pivotGridField1.FieldName = "Valor";
+            this.pivotGridField1.Name = "pivotGridField1";
+            this.pivotGridField1.Width = 52;
+            // 
+            // pivotGridField2
+            // 
+            this.pivotGridField2.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
+            this.pivotGridField2.AreaIndex = 0;
+            this.pivotGridField2.Caption = "Orden";
+            this.pivotGridField2.FieldName = "Orden";
+            this.pivotGridField2.Name = "pivotGridField2";
+            this.pivotGridField2.Width = 52;
+            // 
+            // pivotGridField3
+            // 
+            this.pivotGridField3.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
+            this.pivotGridField3.AreaIndex = 1;
+            this.pivotGridField3.Caption = "Rubros";
+            this.pivotGridField3.FieldName = "ru_codRolGen";
+            this.pivotGridField3.Name = "pivotGridField3";
+            this.pivotGridField3.Width = 52;
             // 
             // xrPivotGridField21
             // 
@@ -582,37 +647,6 @@
             this.xrPivotGridField28.Caption = "Empleado";
             this.xrPivotGridField28.FieldName = "Empleado";
             this.xrPivotGridField28.Name = "xrPivotGridField28";
-            // 
-            // pivotGridField1
-            // 
-            this.pivotGridField1.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
-            this.pivotGridField1.AreaIndex = 0;
-            this.pivotGridField1.Caption = "Valor";
-            this.pivotGridField1.CellFormat.FormatString = "n2";
-            this.pivotGridField1.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.pivotGridField1.EmptyCellText = "0.00";
-            this.pivotGridField1.EmptyValueText = "0.00";
-            this.pivotGridField1.FieldName = "Valor";
-            this.pivotGridField1.Name = "pivotGridField1";
-            this.pivotGridField1.Width = 52;
-            // 
-            // pivotGridField2
-            // 
-            this.pivotGridField2.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
-            this.pivotGridField2.AreaIndex = 0;
-            this.pivotGridField2.Caption = "Orden";
-            this.pivotGridField2.FieldName = "Orden";
-            this.pivotGridField2.Name = "pivotGridField2";
-            this.pivotGridField2.Width = 52;
-            // 
-            // pivotGridField3
-            // 
-            this.pivotGridField3.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
-            this.pivotGridField3.AreaIndex = 1;
-            this.pivotGridField3.Caption = "Rubros";
-            this.pivotGridField3.FieldName = "ru_codRolGen";
-            this.pivotGridField3.Name = "pivotGridField3";
-            this.pivotGridField3.Width = 52;
             // 
             // xrPivotGridField29
             // 
@@ -709,38 +743,6 @@
             this.xrPivotGridField40.Caption = "Empleado";
             this.xrPivotGridField40.FieldName = "Empleado";
             this.xrPivotGridField40.Name = "xrPivotGridField40";
-            // 
-            // xrPivotGridField41
-            // 
-            this.xrPivotGridField41.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.xrPivotGridField41.AreaIndex = 0;
-            this.xrPivotGridField41.Caption = "División";
-            this.xrPivotGridField41.FieldName = "Division";
-            this.xrPivotGridField41.Name = "xrPivotGridField41";
-            // 
-            // xrPivotGridField42
-            // 
-            this.xrPivotGridField42.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.xrPivotGridField42.AreaIndex = 1;
-            this.xrPivotGridField42.Caption = "Área";
-            this.xrPivotGridField42.FieldName = "Area";
-            this.xrPivotGridField42.Name = "xrPivotGridField42";
-            // 
-            // xrPivotGridField43
-            // 
-            this.xrPivotGridField43.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.xrPivotGridField43.AreaIndex = 2;
-            this.xrPivotGridField43.Caption = "Departamento";
-            this.xrPivotGridField43.FieldName = "de_descripcion";
-            this.xrPivotGridField43.Name = "xrPivotGridField43";
-            // 
-            // xrPivotGridField44
-            // 
-            this.xrPivotGridField44.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.xrPivotGridField44.AreaIndex = 3;
-            this.xrPivotGridField44.Caption = "Empleado";
-            this.xrPivotGridField44.FieldName = "Empleado";
-            this.xrPivotGridField44.Name = "xrPivotGridField44";
             // 
             // ROL_001_Rpt
             // 

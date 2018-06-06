@@ -34,7 +34,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdNomina.Value = IdNomina_Tipo;
             model.p_IdNominaTipo.Value = IdNomina_TipoLiqui;
             model.p_IdPeriodo.Value = IdPeriodo;
-            //model.empresa = Session["nom_empresa"].ToString();
+            model.empresa.Value = Session["nom_empresa"].ToString();
             if (IdPeriodo == 0)
                 model.RequestParameters = false;
             return View(model);

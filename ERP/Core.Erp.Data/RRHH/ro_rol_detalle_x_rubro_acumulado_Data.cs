@@ -35,5 +35,34 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+
+
+        public double get_vac_x_mes_x_anio(int IdEmpresa, decimal IdEmpleado,int Anio, int mes)
+        {
+            try
+            {
+                double valor_cuotas = 0;
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    var datos = (from q in Context.ro_rol_detalle_x_rubro_acumulado
+                                 join p in Context.ro_periodo
+                                 on new { q.IdEmpresa, q.IdPeriodo} equals new { p.IdEmpresa,p.IdPeriodo}
+                                     where q.IdEmpresa == IdEmpresa
+                                       & q.IdEmpleado == IdEmpleado
+                                       && q.IdRubro == "295"
+                                       && q.Estado == "PEN"
+                                 select q.Valor);
+                    if (datos.Count() > 0)
+                        valor_cuotas = datos.Sum();
+                }
+
+                return valor_cuotas;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

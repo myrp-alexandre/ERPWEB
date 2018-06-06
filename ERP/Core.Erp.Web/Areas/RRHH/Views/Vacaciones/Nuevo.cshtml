@@ -48,10 +48,10 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdEstadoAprobacion">Empleado autoriza*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdEstadoAprobacion, settings =>
+                    <label for="IdEmpleado_aprue">Empleado autoriza*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado_aprue, settings =>
                {
-                   settings.Name = "IdEstadoAprobacion";
+                   settings.Name = "IdEmpleado_aprue";
                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                    settings.Properties.DisplayFormatString = "[{0}] - {2}";
                    settings.Properties.Columns.Add("IdEmpleado", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
@@ -73,7 +73,7 @@
             </div>
         </div>
     </div>
-    /*
+    
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -90,31 +90,29 @@
                    settings.Properties.Columns.Add("FechaFin", "Fecha hasta").Width = System.Web.UI.WebControls.Unit.Percentage(20);
                    settings.Properties.Columns.Add("DiasGanado", "Días ganado").Width = System.Web.UI.WebControls.Unit.Percentage(20);
                    settings.Properties.Columns.Add("DiasTomados", "Días gozado").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                   //Campo ID
+
                    settings.Properties.ValueField = "IdVacacion";
                    settings.Properties.ValueType = typeof(decimal);
                    settings.Properties.TextField = "Empleado";
-                   //Boton para seleccionar ningun registro
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
                    settings.Properties.NullText = "== Seleccione ==";
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
                    //settings.Properties.DataSource = Model.lst_vacaciones;
-                   settings.CallbackRouteValues  =  new { Controller = "Vacaciones", Action = "GridLookupPartial_vacaciones" };
-
-                   // @Html.Action("GridViewPartial_vaciones_periodos")
-
-
-               }).GetHtml()
-               @Html.ValidationMessageFor(q => q.IdVacacion, "", new { @class = "text-danger" })
-
-
+                   settings.CallbackRouteValues = new { Controller = "Vacaciones", Action = "GridLookupPartial_vacaciones" };
+               }
+             ).BindList(ViewData["vacaciones"]).GetHtml()
 
                 </div>
             </div>
         </div>
     </div>
-    */
-    <div class="row">
+   
+
+
+
+
+
+    @*<div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
@@ -124,7 +122,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
 
     <div class="row">
         <div class="col-md-12">
@@ -183,7 +181,7 @@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","Contrato",new { Area = "RRHH" },null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","Vacaciones",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
@@ -224,11 +222,8 @@
                     contentType: 'application/json; charset=utf-8',
                     success: function (data)
                     {
-                         //IdVacacion.PerformCallback();
-                        $.each(data, function (i, row) {
-                            $("#vacaciones").append("<option value=" + row.IdVacacion + ">" + row.Descripcion + "</option>");
-                        });
-
+                         IdVacacion.PerformCallback();
+                       
                     },
                     error: function (error)
                     {

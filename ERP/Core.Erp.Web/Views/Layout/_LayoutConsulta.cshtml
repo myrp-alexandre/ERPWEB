@@ -59,7 +59,7 @@
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="@Url.Action("Index","Home", new { Area = ""})" class="logo">
+            <a href="@Url.Action("Index","Home")" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>FX</b></span>
                 <!-- logo for regular state and mobile devices -->
@@ -137,44 +137,13 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="treeview">
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i> Mantenimiento
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="@Url.Action("Index","ParametroAF",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Parámetros</a></li>
-                                    <li><a href="@Url.Action("Index","CatalogoTipoAF",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Catálogos</a></li>
-                                    <li><a href="@Url.Action("Index","TipoAF",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Tipo activo</a></li>
-                                    <li><a href="@Url.Action("Index","ActivoFijo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Activos</a></li>
-                                </ul>
-                            </li>
-                            <li class="treeview">
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i> Transaciones
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="@Url.Action("Index","RevalorizacionActivo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Revalorización</a></li>
-                                    <li><a href="@Url.Action("Index","VentaActivo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Venta</a></li>
-                                    <li><a href="@Url.Action("Index","RetiroActivo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Retiro</a></li>
-                                </ul>
-                            </li>
-                            <li class="treeview">
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i> Procesos
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="@Url.Action("Index","DepreciacionAF",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Depreciación</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="@Url.Action("Index","ActivoFijo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Activos</a></li>
+                            <li><a href="@Url.Action("Index","TipoAF",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Tipo activo</a></li>
+                            <li><a href="@Url.Action("Index","CatalogoTipoAF",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Catálogos</a></li>
+                            <li><a href="@Url.Action("Index","ParametroAF",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Parámetros</a></li>
+                            <li><a href="@Url.Action("Index","RevalorizacionActivo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Revalorización</a></li>
+                            <li><a href="@Url.Action("Index","VentaActivo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Venta</a></li>
+                            <li><a href="@Url.Action("Index","RetiroActivo",new { area = "ActivoFijo"})"><i class="fa fa-circle-o"></i>Retiro</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -310,6 +279,7 @@
                                     <li><a href="@Url.Action("Index","Prestamos",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Prestamos</a></li>
                                     <li><a href="@Url.Action("Index","ActaFiniquito",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Acta finiquito</a></li>
                                     <li><a href="@Url.Action("Index","Vacaciones",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Soli. vacaciones</a></li>
+                                    <li><a href="@Url.Action("Index","LiquidacionVacaciones",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Vac. liquidadas</a></li>
 
                                 </ul>
                             </li>
@@ -326,6 +296,8 @@
                                     <li><a href="@Url.Action("Index2","HorasExtras",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Aprobar H.E.</a></li>
                                     <li><a href="@Url.Action("Index","ParticipacionUtilidad",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Reparto utilidad</a></li>
                                     <li><a href="@Url.Action("Index","ProcesarRol",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Procesar rol </a></li>
+                                    <li><a href="@Url.Action("Index","PagoBenediciosSociales",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Liquidar B.S</a></li>
+
                                 </ul>
                             </li>
                         </ul>

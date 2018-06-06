@@ -78,6 +78,9 @@ namespace Core.Erp.Bus.RRHH
             {
 
                 if (odata.modificarDB(info))
+                {
+                    odata_det.anularDB(info);
+                }
                     info.lst_planificacion_det.ForEach(var => { var.IdPlanificacion = info.IdPlanificacion; var.IdEmpresa = info.IdEmpresa; var.IdCalendario =Convert.ToInt32(Convert.ToDateTime( var.fecha).ToString("ddMMyyyy")); });
                 return odata_det.guardarDB(info.lst_planificacion_det);
             }

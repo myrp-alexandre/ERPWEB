@@ -20,7 +20,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             return View();
         }
-
+        
         [ValidateInput(false)]
         public ActionResult GridViewPartial_solicitud_vacaciones()
         {
@@ -154,6 +154,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                IdEmpresa = GetIdEmpresa();
+                lst_vacaciones = bus_vacaciones.get_lst_vaciones_x_empleado(IdEmpresa, IdEmpleado);
+                Session["lst_vacaciones"] = lst_vacaciones;
+
+                cargar_combo();
                 return View(bus_solicitud.get_info(GetIdEmpresa(),IdEmpleado, IdSolicitud));
 
             }
@@ -227,8 +232,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
            return Json(lst_vacaciones, JsonRequestBehavior.AllowGet);
         }
-
-
         [ValidateInput(false)]
         public ActionResult GridLookupPartial_vacaciones()
         {

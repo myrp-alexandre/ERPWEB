@@ -99,7 +99,7 @@ namespace Core.Erp.Data.RRHH
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         IdEmpleado = Entity.IdEmpleado,
-                        IdSolicitud = Entity.IdSolicitud = get_id(Entity.IdEmpresa),
+                        IdSolicitud = Entity.IdSolicitud,
                         IdVacacion = Entity.IdVacacion,
                         IdEmpleado_aprue = Entity.IdEmpleado_aprue,
                         IdEmpleado_remp = Entity.IdEmpleado_remp,
@@ -207,12 +207,8 @@ namespace Core.Erp.Data.RRHH
                     && q.IdSolicitud == info.IdSolicitud);
                     if (Entity == null)
                         return false;
-                         Entity.IdSolicitud = info.IdSolicitud = get_id(info.IdEmpresa);
-                         Entity.IdVacacion = info.IdVacacion;
                          Entity.IdEmpleado_aprue = info.IdEmpleado_aprue;
                          Entity.IdEmpleado_remp = info.IdEmpleado_remp;
-                         Entity.IdEstadoAprobacion = "PEN";
-                         Entity.Fecha = info.Fecha;
                          Entity.AnioServicio = info.AnioServicio;
                          Entity.Dias_q_Corresponde = info.Dias_q_Corresponde;
                          Entity.Dias_a_disfrutar = info.Dias_a_disfrutar;
@@ -231,7 +227,7 @@ namespace Core.Erp.Data.RRHH
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

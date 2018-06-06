@@ -314,5 +314,34 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
+        public decimal get_sueldo_actual(int IdEmpresa, decimal IdEmpleado)
+        {
+            try
+            {
+                decimal sueldo = 0;
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    var lst = from q in Context.ro_contrato
+                              where q.IdEmpresa == IdEmpresa
+                              && q.IdEmpleado == IdEmpleado
+                              && q.EstadoContrato== "ECT_ACT"
+                              && q.Estado=="A"
+                              select q;
+
+                    if (lst.Count() > 0)
+                        sueldo =Convert.ToDecimal( lst.Max(q => q.Sueldo));
+                }
+
+                return sueldo;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
     }
 }

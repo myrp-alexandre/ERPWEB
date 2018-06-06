@@ -41,7 +41,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 IdEmpresa = GetIdEmpresa();
-                List< ro_rol_Info> model = bus_rol.get_list(IdEmpresa);
+                List< ro_rol_Info> model = bus_rol.get_list_nominas(IdEmpresa);
                 return PartialView("_GridViewPartial_ro_rol", model);
             }
             catch (Exception)
@@ -364,7 +364,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 IdEmpresa = GetIdEmpresa();
-                List<ro_rol_Info> model = bus_rol.get_list(IdEmpresa);
+                List<ro_rol_Info> model = bus_rol.get_list_nominas(IdEmpresa);
                 return PartialView("_GridViewPartial_nominas_cerradas", model);
             }
             catch (Exception)

@@ -11,27 +11,31 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="rub_codigo">Código*</label>
                     @Html.TextBoxFor(q => q.rub_codigo, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.rub_codigo, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="ru_codRolGen">Código reporte*</label>
                     @Html.TextBoxFor(q => q.ru_codRolGen, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.ru_codRolGen, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="ru_orden">Orden*</label>
+                    @Html.TextBoxFor(q => q.ru_orden, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.ru_orden, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -72,6 +76,31 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
+                    <label for="ru_descripcion">Descripción*</label>
+                    @Html.TextBoxFor(q => q.ru_descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.ru_descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="NombreCorto">Descripción corta</label>
+                    @Html.TextBoxFor(q => q.NombreCorto, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.NombreCorto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="col-md-12">
+                <div class="form-group">
                     <label for="IdCtaCblePadre">Cuenta contable</label>
                     @Html.DevExpress().ComboBoxFor(q => q.rub_ctacon, settings =>
                {
@@ -97,15 +126,17 @@
         </div>
     </div>
 
-
-
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="form-group">
                 <div class="form-group">
-                    <label for="ru_descripcion">Descripción*</label>
-                    @Html.TextBoxFor(q => q.ru_descripcion, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.ru_descripcion, "", new { @class = "text-danger" })
+                    <label for="rub_noafecta"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.rub_noafecta, settings =>
+                       {
+                           settings.Name = "rub_noafecta";
+                           settings.Text = "Se contabiliza";
+
+                       }).GetHtml()
                 </div>
             </div>
         </div>
@@ -113,65 +144,80 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="form-group">
                 <div class="form-group">
-                    <label for="NombreCorto">Descripción corta</label>
-                    @Html.TextBoxFor(q => q.NombreCorto, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.NombreCorto, "", new { @class = "text-danger" })
+                    <label for="rub_concep"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.rub_concep, settings =>
+                       {
+                           settings.Name = "rub_concep";
+                           settings.Text = "Es un concepto";
+
+                       }).GetHtml()
                 </div>
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="form-group">
                 <div class="form-group">
-                    <label for="rub_concep">¿Es un concepto?</label>
-                    @Html.EditorFor(q => q.rub_concep, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.rub_concep, "", new { @class = "text-danger" })
+                    <label for="rub_guarda_rol"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.rub_guarda_rol, settings =>
+                       {
+                           settings.Name = "rub_guarda_rol";
+                           settings.Text = "Se guarda en rol";
+
+                       }).GetHtml()
                 </div>
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="form-group">
                 <div class="form-group">
-                    <label for="rub_noafecta">¿Afecta rol preliminar?</label>
-                    @Html.EditorFor(q => q.rub_noafecta, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.rub_noafecta, "", new { @class = "text-danger" })
+                    <label for="rub_aplica_IESS"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.rub_aplica_IESS, settings =>
+                       {
+                           settings.Name = "rub_aplica_IESS";
+                           settings.Text = "Aplica IESS";
+
+                       }).GetHtml()
                 </div>
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="form-group">
                 <div class="form-group">
-                    <label for="rub_guarda_rol">¿Se guarda en rol?</label>
-                    @Html.EditorFor(q => q.rub_guarda_rol, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.rub_guarda_rol, "", new { @class = "text-danger" })
+                    <label for="rub_acumula_descuento"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.rub_acumula_descuento, settings =>
+                       {
+                           settings.Name = "rub_acumula_descuento";
+                           settings.Text = "Acumula valor para descuento";
+
+                       }).GetHtml()
                 </div>
             </div>
         </div>
     </div>
-
-
-
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="form-group">
                 <div class="form-group">
-                    <label for="rub_aplica_IESS">¿Aplica IESS?</label>
-                    @Html.EditorFor(q => q.rub_aplica_IESS, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.rub_aplica_IESS, "", new { @class = "text-danger" })
+                    <label for="rub_provision"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.rub_provision, settings =>
+                       {
+                           settings.Name = "rub_provision";
+                           settings.Text = "Se provisiona";
+
+                       }).GetHtml()
                 </div>
             </div>
         </div>
     </div>
+
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","Rubro",new { Area = "RRHH" },null)">Cancelar</a>

@@ -14,6 +14,7 @@ namespace Core.Erp.Bus.RRHH
         List<ro_participacion_utilidad_empleado_Info> lista = new List<ro_participacion_utilidad_empleado_Info>();
         ro_contrato_Bus bus_contrato = new ro_contrato_Bus();
         List<ro_contrato_Info> lista_contratos = new List<ro_contrato_Info>();
+        ro_periodo_Bus bus_periodo = new ro_periodo_Bus();
 
         public List<ro_participacion_utilidad_empleado_Info> get_list(int IdEmpresa, int IdUtilidad)
         {
@@ -39,10 +40,13 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
-        public List<ro_participacion_utilidad_empleado_Info> get_list(int IdEmpresa, int IdNomina, DateTime FechaInicio, DateTime FechaFin, double valorIndividual, double valorCarga)
+        public List<ro_participacion_utilidad_empleado_Info> calcular(int IdEmpresa, int IdNomina, int IdPeriodo, double valorIndividual, double valorCarga)
         {
             try
             {
+                ro_periodo_Info info_periodo = bus_periodo.get_info(IdEmpresa, IdPeriodo);
+                DateTime FechaInicio = info_periodo.pe_FechaIni;
+                DateTime FechaFin = info_periodo.pe_FechaFin;
                 double factorB = 0;
                 lista= odata.get_list(IdEmpresa, IdNomina, FechaInicio, FechaFin);
                 int DiasTrabajados = 0;

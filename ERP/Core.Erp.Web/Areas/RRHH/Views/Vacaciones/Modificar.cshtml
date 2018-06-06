@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.RRHH.ro_Solicitud_Vacaciones_x_empleado_Info
 @{
-    ViewBag.Title = "modificar Solicitud";
+    ViewBag.Title = "Modificar Solicitud";
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -14,6 +14,9 @@
 
 @using (Html.BeginForm("Modificar", "Vacaciones", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    @Html.HiddenFor(q => q.IdSolicitud);
+    @Html.HiddenFor(q => q.IdEmpleado);
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -49,9 +52,9 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdEstadoAprobacion">Empleado autoriza*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdEstadoAprobacion, settings =>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado_aprue, settings =>
                {
-                   settings.Name = "IdEstadoAprobacion";
+                   settings.Name = "IdEmpleado_aprue";
                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                    settings.Properties.DisplayFormatString = "[{0}] - {2}";
                    settings.Properties.Columns.Add("IdEmpleado", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
@@ -68,7 +71,7 @@
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                }).BindList(ViewBag.lst_empleado).GetHtml()
-                    @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(q => q.IdEmpleado_aprue, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -183,7 +186,7 @@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","Contrato",new { Area = "RRHH" },null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","Vacaciones",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

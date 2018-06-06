@@ -134,13 +134,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.lst_subgrupo = lst_subgrupo;
         }
 
-
         public ActionResult INV_005()
         {
+            INV_005_resumen_Rpt model = new INV_005_resumen_Rpt();
+
             return View();
         }
-
-
         #region json
 
         public JsonResult cargar_bodega(int IdSucursal = 0)

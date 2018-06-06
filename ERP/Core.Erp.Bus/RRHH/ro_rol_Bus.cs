@@ -25,11 +25,23 @@ namespace Core.Erp.Bus.RRHH
 
         ro_Comprobantes_Contables_Data ro_comprobante = new ro_Comprobantes_Contables_Data();
         #endregion
-        public List< ro_rol_Info> get_list(int IdEmpresa )
+        public List< ro_rol_Info> get_list_nominas(int IdEmpresa )
         {
             try
             {
-                return odata.get_list(IdEmpresa);
+                return odata.get_list_nominas(IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public List<ro_rol_Info> get_list_decimos(int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_list_decimos(IdEmpresa);
             }
             catch (Exception)
             {
@@ -333,6 +345,26 @@ namespace Core.Erp.Bus.RRHH
                 info_diario.IdUsuario = info.UsuarioIngresa;
 
                 return info_diario;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
+        // funciones para decimos
+        public bool Decimos(ro_rol_Info info)
+        {
+            try
+            {
+                if (info.decimoIII)
+                    odata.procesarDIII(info);
+                else
+                    odata.procesarIV(info);
+                return true;
             }
             catch (Exception)
             {

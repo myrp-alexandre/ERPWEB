@@ -190,5 +190,36 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+
+        public decimal get_valor_acumulado_del_mes_x_rubro(int IdEmpresa, decimal IdEmpleado, string IdRubro, DateTime Fi, DateTime Ff)
+        {
+            try
+            {
+                decimal valor = 0;
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    var lst = from q in Context.ro_empleado_novedad_det
+                              where q.IdEmpresa == IdEmpresa
+                              && q.IdEmpleado == IdEmpleado
+                              && q.IdRubro==IdRubro
+                              && q.FechaPago>=Fi
+                              && q.FechaPago <=Ff
+
+                              select q;
+
+                    if (lst.Count() > 0)
+                        valor =Convert.ToDecimal( lst.Sum(q => q.Valor));
+                }
+
+                return valor;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

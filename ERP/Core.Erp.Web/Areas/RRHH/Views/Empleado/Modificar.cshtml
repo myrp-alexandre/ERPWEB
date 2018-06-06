@@ -23,21 +23,21 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-2" height="100" width="100" style="border:solid">
+            @*<div class="col-md-2" height="100" width="100" style="border:solid">
                 <label for="foto">Foto*</label>
                 <div class="form-group">
                     @Html.EditorFor(q => q.em_foto, new { @class = "form-control" })
                 </div>
-            </div>
+            </div>*@
 
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="em_status">Estado*</label>
                     @Html.DropDownListFor(q => q.em_status, new SelectList(ViewBag.lst_estado_empleado, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.em_status, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdTipoDocumento">Tipo documento*</label>
                     @Html.DropDownListFor(q => q.info_persona.IdTipoDocumento, new SelectList(ViewBag.lst_tipo_docu, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
@@ -439,7 +439,7 @@
                                {
                                    settings.Name = "IdHorario";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
                                    settings.Properties.Columns.Add("HoraIni", "Hora ingreso").Width = System.Web.UI.WebControls.Unit.Percentage(10);
                                    settings.Properties.Columns.Add("HoraFin", "Hora salidad").Width = System.Web.UI.WebControls.Unit.Percentage(50);
                                    //Campo ID

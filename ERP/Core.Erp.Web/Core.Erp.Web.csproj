@@ -330,9 +330,11 @@
     <Compile Include="Areas\RRHH\Controllers\HorarioController.cs" />
     <Compile Include="Areas\RRHH\Controllers\HorarioPlanificacionController.cs" />
     <Compile Include="Areas\RRHH\Controllers\HorasExtrasController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\LiquidacionVacacionesController.cs" />
     <Compile Include="Areas\RRHH\Controllers\MarcacionEmpleadoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\NominaTipoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\NominaTipoLiquidacionController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\PagoBenediciosSocialesController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ParametrosContableController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ParticipacionUtilidadController.cs" />
     <Compile Include="Areas\RRHH\Controllers\PeriodoController.cs" />
@@ -375,17 +377,17 @@
     <Compile Include="Reportes\ActivoFijo\ACTF_003_Rpt.Designer.cs">
       <DependentUpon>ACTF_003_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\ActivoFijo\ACTF_004_resumen_Rpt.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\ActivoFijo\ACTF_004_resumen_Rpt.Designer.cs">
-      <DependentUpon>ACTF_004_resumen_Rpt.cs</DependentUpon>
-    </Compile>
     <Compile Include="Reportes\ActivoFijo\ACTF_004_detalle_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\ActivoFijo\ACTF_004_detalle_Rpt.Designer.cs">
       <DependentUpon>ACTF_004_detalle_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\ActivoFijo\ACTF_004_resumen_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ActivoFijo\ACTF_004_resumen_Rpt.Designer.cs">
+      <DependentUpon>ACTF_004_resumen_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\ActivoFijo\ACTF_005_Rpt.cs">
       <SubType>Component</SubType>
@@ -423,11 +425,23 @@
     <Compile Include="Reportes\Inventario\INV_003_Rpt.Designer.cs">
       <DependentUpon>INV_003_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Inventario\INV_005_detalle_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Inventario\INV_005_detalle_Rpt.Designer.cs">
+      <DependentUpon>INV_005_detalle_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Inventario\INV_005_resumen_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\Inventario\INV_005_resumen_Rpt.Designer.cs">
       <DependentUpon>INV_005_resumen_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Inventario\INV_006_resumen_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Inventario\INV_006_resumen_Rpt.Designer.cs">
+      <DependentUpon>INV_006_resumen_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\RRHH\ROL_001_Rpt.cs">
       <SubType>Component</SubType>
@@ -7859,6 +7873,7 @@
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Index.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Modificar.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Nuevo.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Index.cshtml" />
     <Content Include="Areas\General\Views\Persona\_ComboBox_persona_x_tipo.cshtml" />
     <Content Include="Areas\Facturacion\Views\Cliente\_GridViewPartial_cliente_contacto.cshtml" />
     <Content Include="Areas\Inventario\Views\IngresoInventario\Index.cshtml" />
@@ -7898,6 +7913,7 @@
     <Content Include="Areas\RRHH\Views\Vacaciones\_GridViewPartial_solicitud_vacaciones.cshtml" />
     <Content Include="Areas\RRHH\Views\ActaFiniquito\_GridViewPartial_liquidacion_empleado.cshtml" />
     <Content Include="Areas\RRHH\Views\ActaFiniquito\_GridViewPartial_liquidacion_empleado_det.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Index.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\_GridViewPartial_movimiento_egresos.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Anular.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Index.cshtml" />
@@ -7929,7 +7945,6 @@
     <Content Include="Areas\RRHH\Views\ProcesarRol\_GridViewPartial_nominas_cerradas.cshtml" />
     <Content Include="Areas\RRHH\Views\ProcesarRol\_GridViewPartial_provisiones.cshtml" />
     <Content Include="Areas\RRHH\Views\ProcesarRol\_GridViewPartial_sueldo_x_pagar.cshtml" />
-    <Content Include="Areas\RRHH\Views\Vacaciones\_GridViewPartial_vaciones_periodos.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_001.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_003.cshtml" />
     <Content Include="bower_DevExpress\ace-builds\.bower.json" />
@@ -7980,16 +7995,22 @@
     <Content Include="Areas\Reportes\Views\Layout\_Layout_filtros.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_002.cshtml" />
     <Content Include="Areas\RRHH\Views\ParticipacionUtilidad\_GridViewPartial_utilidades_detalle.cshtml" />
-    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Index.cshtml" />
-    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\_GridViewPartial_depreciacion.cshtml" />
-    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Nuevo.cshtml" />
-    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Modificar.cshtml" />
+    <Content Include="Areas\RRHH\Views\LiquidacionVacaciones\Anular.cshtml" />
+    <Content Include="Areas\RRHH\Views\LiquidacionVacaciones\Modificar.cshtml" />
+    <Content Include="Areas\RRHH\Views\LiquidacionVacaciones\Index.cshtml" />
+    <Content Include="Areas\RRHH\Views\LiquidacionVacaciones\Nuevo.cshtml" />
+    <Content Include="Areas\RRHH\Views\LiquidacionVacaciones\_GridViewPartial_vacaciones_liquidadas.cshtml" />
+    <Content Include="Areas\RRHH\Views\LiquidacionVacaciones\_GridViewPartial_vacaciones_liquidadas_det.cshtml" />
+    <Content Include="Areas\RRHH\Views\PagoBenediciosSociales\Nuevo.cshtml" />
+    <Content Include="Areas\RRHH\Views\PagoBenediciosSociales\Modificar.cshtml" />
+    <Content Include="Areas\RRHH\Views\PagoBenediciosSociales\Index.cshtml" />
+    <Content Include="Areas\RRHH\Views\PagoBenediciosSociales\_GridViewPartial_pago_beneficios.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Anular.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Modificar.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Nuevo.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\_GridViewPartial_depreciacion.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\_GridViewPartial_depreciacion_det.cshtml" />
     <Content Include="Areas\Contabilidad\Views\ComprobanteContable\_GridViewPartial_comprobante_detalle_readonly.cshtml" />
-    <Content Include="Areas\Reportes\Views\ActivoFijoReportes\ACTF_004.cshtml" />
-    <Content Include="Areas\Reportes\Views\ActivoFijoReportes\ACTF_005.cshtml" />
-    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_005.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
@@ -8104,11 +8125,11 @@
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_003_Rpt.resx">
       <DependentUpon>ACTF_003_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_004_resumen_Rpt.resx">
-      <DependentUpon>ACTF_004_resumen_Rpt.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_004_detalle_Rpt.resx">
       <DependentUpon>ACTF_004_detalle_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_004_resumen_Rpt.resx">
+      <DependentUpon>ACTF_004_resumen_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_005_Rpt.resx">
       <DependentUpon>ACTF_005_Rpt.cs</DependentUpon>
@@ -8128,8 +8149,14 @@
     <EmbeddedResource Include="Reportes\Inventario\INV_003_Rpt.resx">
       <DependentUpon>INV_003_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Inventario\INV_005_detalle_Rpt.resx">
+      <DependentUpon>INV_005_detalle_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Inventario\INV_005_resumen_Rpt.resx">
       <DependentUpon>INV_005_resumen_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Inventario\INV_006_resumen_Rpt.resx">
+      <DependentUpon>INV_006_resumen_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_001_Rpt.resx">
       <DependentUpon>ROL_001_Rpt.cs</DependentUpon>

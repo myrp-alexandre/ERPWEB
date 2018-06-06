@@ -182,16 +182,17 @@ namespace Core.Erp.Data.RRHH
                                 Observacion = item.Observacion
                             };
                             if (!si_existe(item))
+                            {
                                 Context.ro_horario_planificacion_det.Add(Entity);
-                            else
-                                modificarDB(item);
+                                Context.SaveChanges();
+                            }
+
                         });
                     
-                    Context.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception )
+            catch (Exception ex)
             {
 
                 throw;
@@ -218,17 +219,15 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
-        public bool anularDB(ro_horario_planificacion_det_Info info)
+        public bool anularDB(ro_horario_planificacion_Info info)
         {
             try
             {
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    ro_horario_planificacion_det Entity = Context.ro_horario_planificacion_det.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleado==info.IdEmpleado && q.IdCalendario==info.IdCalendario && q.IdPlanificacion == info.IdPlanificacion);
-                    if (Entity == null)
-                        return false;
-                    Context.ro_horario_planificacion_det.Remove(Entity);
-                    Context.SaveChanges();
+
+                    string sql = "delete ro_horario_planificacion_det where IdEmpresa='"+info.IdEmpresa+"' and IdPlanificacion='"+info.IdPlanificacion+"'";
+                    Context.Database.ExecuteSqlCommand(sql);
                 }
 
                 return true;

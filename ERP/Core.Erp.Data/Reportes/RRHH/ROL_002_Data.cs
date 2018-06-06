@@ -19,7 +19,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                 {
 
                     Context.SPROL_002(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo);
-                    /*Lista = (from q in Context.VWROL_002 
+                    Lista = (from q in Context.VWROL_002 
                             
                              select new ROL_002_Info
                              {
@@ -37,14 +37,13 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  pe_FechaFin = q.pe_FechaFin,
                                  IdNominaTipo = q.IdNominaTipo                                
                                  
-                             }).ToList();*/
-                    Lista = new List<ROL_002_Info>();
+                             }).ToList();
                 }
 
                 Lista.ForEach(v => { if (v.Valor >= 0) v.Ingresos = v.Valor; else v.Egreso = v.Valor * -1; });
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

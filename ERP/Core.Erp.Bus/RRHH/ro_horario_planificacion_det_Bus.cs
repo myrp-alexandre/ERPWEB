@@ -63,7 +63,7 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
-        public bool anularDB(ro_horario_planificacion_det_Info info)
+        public bool anularDB(ro_horario_planificacion_Info info)
         {
             try
             {

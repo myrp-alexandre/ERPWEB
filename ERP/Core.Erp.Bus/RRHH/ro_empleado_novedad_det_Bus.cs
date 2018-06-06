@@ -72,5 +72,18 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
+        public decimal get_valor_acumulado_del_mes_x_rubro(int IdEmpresa, decimal IdEmpleado, string IdRubro, DateTime Fi, DateTime Ff)
+        {
+            try
+            {
+                return odata.get_valor_acumulado_del_mes_x_rubro(IdEmpresa, IdEmpleado,IdRubro,Fi,Ff);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

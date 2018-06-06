@@ -19,6 +19,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_empleado_novedad_det_lst lst_novedad_det = new ro_empleado_novedad_det_lst();
         ro_rubro_tipo_Bus bus_rubro = new ro_rubro_tipo_Bus();
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
+        ro_contrato_Bus bus_contrato = new ro_contrato_Bus();
+        List<ro_rubro_tipo_Info> lst_rubros = new List<ro_rubro_tipo_Info>();
+
         int IdEmpresa = 0;
         #endregion
         public ActionResult Index()
@@ -61,6 +64,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         [HttpPost]
         public ActionResult Nuevo( ro_empleado_novedad_Info model)
         {
+
+
+
             model.lst_novedad_det =lst_novedad_det.get_list();
             if (model.lst_novedad_det==null || model.lst_novedad_det.Count()==0)
             {
@@ -68,6 +74,32 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 cargar_combos(model.IdNomina_Tipo);
                 return View(model);
             }
+
+            foreach (var item in model.lst_novedad_det)
+            {
+                lst_rubros = Session["rubros"] as List<ro_rubro_tipo_Info>;
+                if(lst_rubros.Count() >0)
+                {
+                    if (lst_rubros.Where(v => v.IdRubro == item.IdRubro).FirstOrDefault().rub_acumula_descuento)
+                    {
+                        double sueldo = 0;
+                        double valor_acumulado = 0;
+                        DateTime fechai = new DateTime(item.FechaPago.Year, item.FechaPago.Month, 1);
+                        DateTime fechaf = fechai.AddMonths(1).AddDays(-1);
+                        valor_acumulado = (double)bus_novedad_detalle_bus.get_valor_acumulado_del_mes_x_rubro(model.IdEmpresa, model.IdEmpleado, item.IdRubro, fechai, fechaf);
+                        sueldo = (double)bus_contrato.get_sueldo_actual(model.IdEmpresa, model.IdEmpleado);
+                        if ((valor_acumulado+item.Valor) > (sueldo) * 0.10)
+                        {
+                            ViewBag.mensaje = "Ha excedido el valor de multa permitido por la ley";
+                            cargar_combos(model.IdNomina_Tipo);
+                            return View(model);
+                        }
+
+                    }
+                 }
+            }
+
+
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             model.IdUsuario = Session["IdUsuario"].ToString();
             if (!bus_novedad.guardarDB(model))
@@ -153,7 +185,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         private void cargar_combos_detalle()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            ViewBag.lst_rubro = bus_rubro.get_list_rub_concepto(IdEmpresa);
+            lst_rubros= bus_rubro.get_list_rub_concepto(IdEmpresa);
+            ViewBag.lst_rubro = lst_rubros;
+            Session["rubros"]=lst_rubros;
         }
 
         [HttpPost, ValidateInput(false)]

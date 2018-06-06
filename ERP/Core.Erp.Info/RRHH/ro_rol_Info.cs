@@ -33,6 +33,9 @@ namespace Core.Erp.Info.RRHH
         public string IdCentroCosto { get; set; }
 
 
+        public int Anio { get; set; }
+        public bool decimoIII { get; set; }
+        public bool decimoIV { get; set; }
 
         public System.DateTime Fechacontabilizacion { get; set; }
         public string DescripcionProcesoNomina { get; set; }
@@ -42,7 +45,7 @@ namespace Core.Erp.Info.RRHH
         public System.DateTime pe_FechaFin { get; set; }
         public List<ct_cbtecble_det_Info> lst_sueldo_x_pagar { get; set; }
         public List<ct_cbtecble_det_Info> lst_provisiones { get; set; }
-
+        public string region { get; set; }
         public  ro_rol_Info()
         {
             lst_sueldo_x_pagar = new List<ct_cbtecble_det_Info>();

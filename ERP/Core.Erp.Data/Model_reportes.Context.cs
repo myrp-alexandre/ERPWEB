@@ -27,6 +27,8 @@ namespace Core.Erp.Data
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Af_SPACTF_004_detalle> Af_SPACTF_004_detalle { get; set; }
+        public virtual DbSet<Af_SPACTF_004_resumen> Af_SPACTF_004_resumen { get; set; }
         public virtual DbSet<VWACTF_001> VWACTF_001 { get; set; }
         public virtual DbSet<VWACTF_002> VWACTF_002 { get; set; }
         public virtual DbSet<VWACTF_003> VWACTF_003 { get; set; }
@@ -35,6 +37,9 @@ namespace Core.Erp.Data
         public virtual DbSet<VWINV_001> VWINV_001 { get; set; }
         public virtual DbSet<VWINV_002> VWINV_002 { get; set; }
         public virtual DbSet<VWINV_004> VWINV_004 { get; set; }
+        public virtual DbSet<VWROL_001> VWROL_001 { get; set; }
+        public virtual DbSet<VWROL_002> VWROL_002 { get; set; }
+        public virtual DbSet<ro_SPROL_002> ro_SPROL_002 { get; set; }
     
         public virtual ObjectResult<SPINV_001_Result> SPINV_001(Nullable<int> idEmpresa, Nullable<int> idSucursal_ini, Nullable<int> idSucursal_fin, Nullable<int> idBodega_ini, Nullable<int> idBodega_fin, Nullable<decimal> idProducto_ini, Nullable<decimal> idProducto_fin, string idCategoria, Nullable<int> idLinea, Nullable<int> idGrupo, Nullable<int> idSubGrupo, Nullable<System.DateTime> fecha_corte, Nullable<bool> mostrar_stock_0)
         {

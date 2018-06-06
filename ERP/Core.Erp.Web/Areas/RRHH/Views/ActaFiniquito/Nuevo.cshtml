@@ -4,6 +4,9 @@
 }
 @using (Html.BeginForm("Nuevo", "ActaFiniquito", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+
+
+
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-12">
@@ -34,7 +37,6 @@
         </div>
     </div>
 </div>
-
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-3">
@@ -122,7 +124,6 @@
         </div>
     </div>
 </div>
-
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-12">
@@ -134,7 +135,6 @@
         </div>
     </div>
 </div>
-
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-12">
@@ -145,7 +145,6 @@
         </div>
     </div>
 </div>
-
 <div class="box-footer">
     <button type="button" onclick="Procesar_Liqui()" class="btn btn-primary" id="btnprocesar">Procesar</button>
     <button type="submit" class="btn btn-primary">Guardar</button>
@@ -168,7 +167,6 @@
         })
     })
 </script>
-
 <script>
     function get_info()
     {
@@ -189,8 +187,9 @@
                     } else {
                         $("#IdContrato_Tipo").val(data.IdContrato_Tipo);
                         $("#IdContrato").val(data.IdContrato);
-                        $("#FechaInicio").val(data.FechaInicio);
-                        $("#FechaSalida").val('dd/MM/yyyy',data.em_fechaSalida);
+                        $("#FechaIngreso").val(data.FechaInicio);
+                        $('#FechaIngreso').datepicker("setDate", moment(data.FechaInicio).format("DD/MM/YYYY"));
+                        $('#FechaSalida').datepicker("setDate", moment(data.em_fechaSalida).format("DD/MM/YYYY"));
                         $("#Sueldo").val(data.Sueldo);
 
                     }
@@ -202,7 +201,6 @@
         }
     
 </script>
-
 <script>
     function Procesar_Liqui()
             {

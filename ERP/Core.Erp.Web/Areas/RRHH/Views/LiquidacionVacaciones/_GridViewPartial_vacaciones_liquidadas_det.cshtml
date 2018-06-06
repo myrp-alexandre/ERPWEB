@@ -1,0 +1,58 @@
+@using System.Web.UI.WebControls;
+
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridView_vacaciones_liquidadas_det";
+        settings.CallbackRouteValues = new { Controller = "LiquidacionVacaciones", Action = "GridViewPartial_vacaciones_liquidadas_det" };
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "LiquidacionVacaciones", Action = "EditingUpdate", Area = "RRHH" };
+        settings.Width = Unit.Percentage(100);
+        settings.KeyFieldName = "Sec";
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+        settings.SettingsPager.PageSize = 13;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+        //Funcion para inicializar fila al presionar nuevo
+
+        settings.Columns.Add("Sec","Secuencia");
+        settings.Columns.Add("Anio","Año");
+        settings.Columns.Add("Mes","Mes");
+        settings.Columns.Add("Total_Remuneracion","$Remuneración");
+        settings.Columns.Add("Total_Vacaciones","$Vacaciones");
+        settings.Columns.Add("Valor_Cancelar","$Valor cancelar");
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Total_Remuneracion");
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Total_Vacaciones");
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor_Cancelar");
+        settings.ClientSideEvents.FocusedCellChanging = "function(s,e,){get_fila()}";
+
+        settings.Settings.ShowFooter = true;
+
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()
+
+
+
+<script>
+    function get_fila()
+            {
+        grid.GetRowValues(grid.GetFocusedRowIndex(), 'Sec;Anio', OnGetRowValues);
+        var Sec = values[0];
+        var Anio = values[1];
+};
+</script>

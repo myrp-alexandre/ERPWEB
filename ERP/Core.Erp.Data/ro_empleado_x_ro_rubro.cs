@@ -33,7 +33,7 @@ namespace Core.Erp.Data
         public string MotiAnula { get; set; }
     
         public virtual ro_Nomina_Tipoliqui ro_Nomina_Tipoliqui { get; set; }
-        public virtual ro_rubro_tipo ro_rubro_tipo { get; set; }
         public virtual ro_empleado ro_empleado { get; set; }
+        public virtual ro_rubro_tipo ro_rubro_tipo { get; set; }
     }
 }

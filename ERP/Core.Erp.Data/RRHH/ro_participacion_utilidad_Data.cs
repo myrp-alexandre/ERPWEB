@@ -69,7 +69,7 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    ro_participacion_utilidad Entity = Context.ro_participacion_utilidad.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdPeriodo == IdPeriodo);
+                    ro_participacion_utilidad Entity = Context.ro_participacion_utilidad.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdUtilidad == IdPeriodo);
                     if (Entity == null) return null;
 
                     info = new ro_participacion_utilidad_Info

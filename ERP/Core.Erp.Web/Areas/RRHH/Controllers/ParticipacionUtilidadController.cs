@@ -21,6 +21,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         List<ro_Nomina_Tipoliqui_Info> lst_nomina_tipo = new List<ro_Nomina_Tipoliqui_Info>();
         ro_periodo_x_ro_Nomina_TipoLiqui_Bus bus_periodos_x_nomina = new ro_periodo_x_ro_Nomina_TipoLiqui_Bus();
         List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> lst_periodos = new List<ro_periodo_x_ro_Nomina_TipoLiqui_Info>();
+        ro_participacion_utilidad_Info info_utilidad = new ro_participacion_utilidad_Info();
         #endregion
 
         int IdEmpresa = 0;
@@ -43,16 +44,15 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        public ActionResult GridViewPartial_utilidades_detalle(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0)
+        public ActionResult GridViewPartial_utilidades_detalle()
         {
             try
             {
-                cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
                 ro_participacion_utilidad_Info info = new ro_participacion_utilidad_Info();
-                IdEmpresa = GetIdEmpresa();
-                info.detalle = bus_detalle.get_list(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo);
-
-                return View("Nuevo", info);
+                info.detalle = Session["detalle"] as List<ro_participacion_utilidad_empleado_Info>;
+                if (info == null)
+                    info = new ro_participacion_utilidad_Info();
+                return PartialView("_GridViewPartial_utilidades_detalle", info);
             }
             catch (Exception)
             {
@@ -79,11 +79,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     info.IdPeriodo = 20181284;
                     info.IdNomina_TipoLiqui = 5;
                     info.IdEmpresa = IdEmpresa;
-                    ro_periodo_Info info_periodo = bus_periodo.get_info(IdEmpresa, info.IdPeriodo);
-                    info.detalle = bus_detalle.get_list(IdEmpresa, info.IdNomina_Tipo, info_periodo.pe_FechaIni, info_periodo.pe_FechaFin, info.UtilidadDerechoIndividual, info.UtilidadCargaFamiliar);
+                    info.detalle = Session["detalle"] as List<ro_participacion_utilidad_empleado_Info>;
                     bus_utilidad.guardarDB(info);
-                    
-                    return View(info);
+
+                    return RedirectToAction("Index");
                 }
 
             }
@@ -99,14 +98,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 ro_participacion_utilidad_Info info = new ro_participacion_utilidad_Info();
                 IdEmpresa = GetIdEmpresa();
-                info.detalle = bus_detalle.get_list(IdEmpresa, IdUtilidad);
-                info.IdUtilidad = info.detalle.FirstOrDefault().IdUtilidad;
-                info.IdNomina_Tipo= info.detalle.FirstOrDefault().IdNomina;
-                info.UtilidadCargaFamiliar = info.detalle.FirstOrDefault().UtilidadCargaFamiliar;
-                info.UtilidadDerechoIndividual = info.detalle.FirstOrDefault().UtilidadDerechoIndividual;
-
-                info.IdNomina_TipoLiqui = info.detalle.FirstOrDefault().IdNominaTipo_liq;
-                info.IdPeriodo = info.detalle.FirstOrDefault().IdPeriodo;
+                info= bus_utilidad.get_info(IdEmpresa, IdUtilidad);
+                Session["info_utilidad"] = info.detalle;
                 cargar_combos(info.IdNomina_Tipo,info.IdNomina_TipoLiqui);
 
                 return View(info);
@@ -143,14 +136,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 ro_participacion_utilidad_Info info = new ro_participacion_utilidad_Info();
                 IdEmpresa = GetIdEmpresa();
-                info.detalle = bus_detalle.get_list(IdEmpresa, IdUtilidad);
-                info.IdUtilidad = info.detalle.FirstOrDefault().IdUtilidad;
-                info.IdNomina_Tipo = info.detalle.FirstOrDefault().IdNomina;
-                info.UtilidadCargaFamiliar = info.detalle.FirstOrDefault().UtilidadCargaFamiliar;
-                info.UtilidadDerechoIndividual = info.detalle.FirstOrDefault().UtilidadDerechoIndividual;
-
-                info.IdNomina_TipoLiqui = info.detalle.FirstOrDefault().IdNominaTipo_liq;
-                info.IdPeriodo = info.detalle.FirstOrDefault().IdPeriodo;
+                info = bus_utilidad.get_info(IdEmpresa, IdUtilidad);
+                Session["detalle"] = info.detalle;
                 cargar_combos(info.IdNomina_Tipo, info.IdNomina_TipoLiqui);
 
                 return View(info);
@@ -178,11 +165,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {                   
                     IdEmpresa = GetIdEmpresa();
                     info.IdEmpresa = IdEmpresa;
-                    ro_periodo_Info info_periodo = bus_periodo.get_info(IdEmpresa, info.IdPeriodo);
-                    info.detalle = bus_detalle.get_list(IdEmpresa, info.IdNomina_Tipo, info_periodo.pe_FechaIni, info_periodo.pe_FechaFin,info.UtilidadDerechoIndividual,info.UtilidadCargaFamiliar);
+                    info.detalle = Session["detalle"] as List<ro_participacion_utilidad_empleado_Info>;
                     bus_utilidad.guardarDB(info);
+                    return RedirectToAction("Index");
 
-                    return View(info);
                 }
 
             }
@@ -271,13 +257,25 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
         }
 
-
-
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_utilidades_detalle()
+        public JsonResult calcular( int IdNomina_Tipo = 0,int IdPeriodo = 0, double UtilidadDerechoIndividual = 0, double UtilidadCargaFamiliar=0)
         {
-            var model = new object[0];
-            return PartialView("_GridViewPartial_utilidades_detalle", model);
+            try
+            {
+                IdEmpresa = GetIdEmpresa();
+                info_utilidad.IdNomina_Tipo = IdNomina_Tipo;
+                info_utilidad.IdPeriodo = info_utilidad.IdPeriodo;
+                info_utilidad.UtilidadDerechoIndividual = UtilidadDerechoIndividual;
+                info_utilidad.UtilidadCargaFamiliar = UtilidadCargaFamiliar;
+                info_utilidad.detalle = bus_detalle.calcular(IdEmpresa, IdNomina_Tipo, IdPeriodo, UtilidadDerechoIndividual, UtilidadCargaFamiliar);
+                Session["detalle"] = info_utilidad.detalle as  List < ro_participacion_utilidad_empleado_Info >;
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
+
     }
 }

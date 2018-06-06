@@ -35,7 +35,8 @@ namespace Core.Erp.Data.RRHH
                                      rub_nocontab = q.rub_nocontab,
                                      rub_Contabiliza_x_empleado = q.rub_Contabiliza_x_empleado ,
                                      rub_ctacon = q.rub_ctacon,
-                                    ru_estado = q.ru_estado
+                                    ru_estado = q.ru_estado,
+                                     rub_acumula_descuento = q.rub_acumula_descuento
                                  }).ToList();
                     else
                         Lista = (from q in Context.ro_rubro_tipo
@@ -57,7 +58,8 @@ namespace Core.Erp.Data.RRHH
                                      rub_nocontab = q.rub_nocontab,
                                      rub_Contabiliza_x_empleado = q.rub_Contabiliza_x_empleado,
                                      rub_ctacon = q.rub_ctacon,
-                                     ru_estado = q.ru_estado
+                                     ru_estado = q.ru_estado,
+                                     rub_acumula_descuento = q.rub_acumula_descuento
 
                                  }).ToList();
                 }
@@ -99,7 +101,9 @@ namespace Core.Erp.Data.RRHH
                                      rub_nocontab = q.rub_nocontab,
                                      rub_Contabiliza_x_empleado = q.rub_Contabiliza_x_empleado,
                                      rub_ctacon = q.rub_ctacon,
-                                     ru_estado = q.ru_estado
+                                     ru_estado = q.ru_estado,
+                                     rub_acumula_descuento = q.rub_acumula_descuento
+
 
                                  }).ToList();
                 }
@@ -141,7 +145,8 @@ namespace Core.Erp.Data.RRHH
                                  rub_nocontab = q.rub_nocontab,
                                  rub_Contabiliza_x_empleado = q.rub_Contabiliza_x_empleado,
                                  rub_ctacon = q.rub_ctacon,
-                                 ru_estado = q.ru_estado
+                                 ru_estado = q.ru_estado,
+                                 rub_acumula_descuento=q.rub_acumula_descuento
 
                              }).ToList();
                 }
@@ -185,7 +190,8 @@ namespace Core.Erp.Data.RRHH
                         rub_ctacon = Entity.rub_ctacon,
                         ru_estado = Entity.ru_estado,
                         rub_guarda_rol=Entity.rub_guarda_rol,
-                        rub_aplica_IESS=Entity.rub_aplica_IESS
+                        rub_aplica_IESS=Entity.rub_aplica_IESS,
+                        rub_acumula_descuento=Entity.rub_acumula_descuento
                     };
                 }
 
@@ -197,7 +203,6 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
-
         public int get_id(int IdEmpresa)
         {
             try
@@ -248,6 +253,7 @@ namespace Core.Erp.Data.RRHH
                         rub_ctacon = info.rub_ctacon,
                         IdUsuario = info.IdUsuario,
                         rub_guarda_rol=info.rub_guarda_rol,
+                        rub_acumula_descuento=info.rub_acumula_descuento,
                         ru_estado =  "A",
                         Fecha_Transac =  DateTime.Now
                     };
@@ -288,6 +294,8 @@ namespace Core.Erp.Data.RRHH
                     Entity.rub_aplica_IESS = info.rub_aplica_IESS;
                     Entity.rub_provision = info.rub_provision;
                     Entity.rub_guarda_rol = info.rub_guarda_rol;
+                    Entity.rub_acumula_descuento = info.rub_acumula_descuento;
+
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
                     Context.SaveChanges();

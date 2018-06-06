@@ -22,5 +22,18 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+
+        public double get_vac_x_mes_x_anio(int IdEmpresa, decimal IdEmpleado, int Anio, int mes)
+        {
+            try
+            {
+                return odata.get_vac_x_mes_x_anio(IdEmpresa, IdEmpleado, Anio, mes);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
+   }
 }

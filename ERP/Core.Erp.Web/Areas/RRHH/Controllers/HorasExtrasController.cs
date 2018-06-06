@@ -76,7 +76,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 cargar_combos(model.IdNomina_Tipo, model.IdNomina_TipoLiqui);
                 return View(model);
             }
-            return RedirectToAction("Inde2");
+            return RedirectToAction("Index2");
 
         }
         #endregion

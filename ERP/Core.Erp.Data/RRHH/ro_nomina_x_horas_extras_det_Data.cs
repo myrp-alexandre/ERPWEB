@@ -252,6 +252,8 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
+
+                   
                     Lista = (from p in Context.ro_nomina_x_horas_extras
                              join q in Context.ro_nomina_x_horas_extras_det
                              on new { p.IdEmpresa, p.IdHorasExtras } equals new { q.IdEmpresa, q.IdHorasExtras }

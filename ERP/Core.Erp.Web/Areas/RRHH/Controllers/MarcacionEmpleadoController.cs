@@ -162,10 +162,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                bus_empleado = new ro_empleado_Bus();
+                bus_catalogo = new ro_catalogo_Bus();
                 ro_nomina_tipo_Bus bus_nomina = new ro_nomina_tipo_Bus();
                 IdEmpresa = GetIdEmpresa();
                 ViewBag.lst_empleado = bus_empleado.get_list_combo(IdEmpresa);
-                ViewBag.lst_tipomarcacion = bus_catalogo.get_list_x_tipo(43);
+                ViewBag.lst_tipomarcacion = bus_catalogo.get_list_x_tipo(18);
 
             }
             catch (Exception)
