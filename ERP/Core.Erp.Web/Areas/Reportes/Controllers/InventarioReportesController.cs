@@ -133,6 +133,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             var lst_subgrupo = bus_subgrupo.get_list(IdEmpresa, model.IdCategoria, model.IdLinea, model.IdGrupo, false);
             ViewBag.lst_subgrupo = lst_subgrupo;
         }
+
+
+        public ActionResult INV_005()
+        {
+            return View();
+        }
+
+
         #region json
 
         public JsonResult cargar_bodega(int IdSucursal = 0)

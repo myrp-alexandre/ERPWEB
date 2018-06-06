@@ -423,6 +423,12 @@
     <Compile Include="Reportes\Inventario\INV_003_Rpt.Designer.cs">
       <DependentUpon>INV_003_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Inventario\INV_005_resumen_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Inventario\INV_005_resumen_Rpt.Designer.cs">
+      <DependentUpon>INV_005_resumen_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\RRHH\ROL_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -7983,6 +7989,7 @@
     <Content Include="Areas\Contabilidad\Views\ComprobanteContable\_GridViewPartial_comprobante_detalle_readonly.cshtml" />
     <Content Include="Areas\Reportes\Views\ActivoFijoReportes\ACTF_004.cshtml" />
     <Content Include="Areas\Reportes\Views\ActivoFijoReportes\ACTF_005.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_005.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
@@ -8120,6 +8127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Inventario\INV_003_Rpt.resx">
       <DependentUpon>INV_003_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Inventario\INV_005_resumen_Rpt.resx">
+      <DependentUpon>INV_005_resumen_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_001_Rpt.resx">
       <DependentUpon>ROL_001_Rpt.cs</DependentUpon>

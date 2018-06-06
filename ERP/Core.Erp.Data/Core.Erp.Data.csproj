@@ -550,6 +550,7 @@
     <Compile Include="Reportes\ActivoFijo\ACTF_004_resumen_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_005_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Data.cs" />
+    <Compile Include="Reportes\Inventario\INV_005_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_001_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_001_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_002_Data.cs" />
@@ -808,6 +809,9 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="SPINV_003_Result.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPINV_005_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="spro_nomina_x_pago_utilidad_Result.cs">

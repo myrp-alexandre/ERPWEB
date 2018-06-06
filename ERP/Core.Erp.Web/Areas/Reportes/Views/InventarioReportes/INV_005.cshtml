@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "INV_005";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+<h2>INV_005</h2>
+
