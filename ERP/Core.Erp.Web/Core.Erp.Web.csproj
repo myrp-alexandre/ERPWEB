@@ -105,12 +105,15 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -436,6 +439,12 @@
     </Compile>
     <Compile Include="Reportes\Inventario\INV_005_resumen_Rpt.Designer.cs">
       <DependentUpon>INV_005_resumen_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Inventario\INV_006_detalle_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Inventario\INV_006_detalle_Rpt.Designer.cs">
+      <DependentUpon>INV_006_detalle_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\Inventario\INV_006_resumen_Rpt.cs">
       <SubType>Component</SubType>
@@ -8011,6 +8020,8 @@
     <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\_GridViewPartial_depreciacion.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\_GridViewPartial_depreciacion_det.cshtml" />
     <Content Include="Areas\Contabilidad\Views\ComprobanteContable\_GridViewPartial_comprobante_detalle_readonly.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_005.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_006.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
@@ -8154,6 +8165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Inventario\INV_005_resumen_Rpt.resx">
       <DependentUpon>INV_005_resumen_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Inventario\INV_006_detalle_Rpt.resx">
+      <DependentUpon>INV_006_detalle_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Inventario\INV_006_resumen_Rpt.resx">
       <DependentUpon>INV_006_resumen_Rpt.cs</DependentUpon>
