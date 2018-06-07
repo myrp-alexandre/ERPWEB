@@ -43,7 +43,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                 Lista.ForEach(v => { if (v.Valor >= 0) v.Ingresos = v.Valor; else v.Egreso = v.Valor * -1; });
                 return Lista;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;

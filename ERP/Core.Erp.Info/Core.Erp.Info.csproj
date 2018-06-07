@@ -139,6 +139,7 @@
     <Compile Include="Reportes\ActivoFijo\ACTF_005_Info.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Info.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Info.cs" />
+    <Compile Include="Reportes\Inventario\ROL_004_Info.cs" />
     <Compile Include="Reportes\RRHH\ROL_001_Info.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_001_Info.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_002_Info.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Reportes\Inventario\INV_002_Info.cs" />
     <Compile Include="Reportes\Inventario\INV_003_Info.cs" />
     <Compile Include="Reportes\RRHH\ROL_002_Info.cs" />
+    <Compile Include="Reportes\RRHH\ROL_003_Info.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Detalle_Info.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Info.cs" />
     <Compile Include="RRHH\ro_area_Info.cs" />
