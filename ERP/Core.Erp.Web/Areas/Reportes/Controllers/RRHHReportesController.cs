@@ -40,6 +40,20 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+        public ActionResult ROL_003(int IdEmpresa, decimal IdEmpleado, decimal IdNovedad)
+        {
+            return View();
+        }
 
+        public ActionResult ROL_004(int IdEmpresa, int IdUtilidad)
+        {
+            ROL_004_Rpt model = new ROL_004_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdUtilidad.Value = IdUtilidad;
+            model.empresa = Session["nom_empresa"].ToString();
+            if (IdUtilidad == 0)
+                model.RequestParameters = false;
+            return View(model);
+        }
     }
 }

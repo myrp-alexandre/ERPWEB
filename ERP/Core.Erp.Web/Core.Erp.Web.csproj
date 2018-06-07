@@ -464,6 +464,12 @@
     <Compile Include="Reportes\RRHH\ROL_002_Rpt.Designer.cs">
       <DependentUpon>ROL_002_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\RRHH\ROL_004_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_004_Rpt.Designer.cs">
+      <DependentUpon>ROL_004_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -8022,6 +8028,8 @@
     <Content Include="Areas\Contabilidad\Views\ComprobanteContable\_GridViewPartial_comprobante_detalle_readonly.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_005.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_006.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_003.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_004.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
@@ -8126,6 +8134,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -8176,6 +8185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_002_Rpt.resx">
       <DependentUpon>ROL_002_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_004_Rpt.resx">
+      <DependentUpon>ROL_004_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

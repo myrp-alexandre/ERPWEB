@@ -1,4 +1,4 @@
-﻿using Core.Erp.Info.Reportes.Inventario;
+﻿using Core.Erp.Info.Reportes.RRHH;
 using System;
 using System.Collections.Generic;
 using System.Linq;

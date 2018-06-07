@@ -1,5 +1,5 @@
 ﻿using Core.Erp.Data.Reportes.RRHH;
-using Core.Erp.Info.Reportes.Inventario;
+using Core.Erp.Info.Reportes.RRHH;
 using System;
 using System.Collections.Generic;
 using System.Linq;
