@@ -26,6 +26,9 @@ namespace Core.Erp.Info.Helps
         public decimal IdProducto { get; set; }
         public int IdMovi_inven_tipo { get; set; }
         public string signo { get; set; }
+        public bool no_mostrar_valores_en_0 { get; set; }
+        public bool mostrar_detallado { get; set; }
+
         #endregion
 
         #region Filtros activo
