@@ -42,7 +42,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         public ActionResult ROL_003(int IdEmpresa, decimal IdEmpleado, decimal IdNovedad)
         {
-            return View();
+            ROL_003_Rpt model = new ROL_003_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdEmpleado.Value = IdEmpleado;
+            model.p_IdNovedad.Value = IdNovedad;
+            model.empresa = Session["nom_empresa"].ToString();
+            if (IdEmpleado == 0)
+                model.RequestParameters = false;
+            return View(model);
         }
 
         public ActionResult ROL_004(int IdEmpresa, int IdUtilidad)
@@ -54,6 +61,23 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             if (IdUtilidad == 0)
                 model.RequestParameters = false;
             return View(model);
+        }
+   
+        public ActionResult ROL_005()
+        {
+            return View();
+        }
+        public ActionResult ROL_006()
+        {
+            return View();
+        }
+        public ActionResult ROL_007()
+        {
+            return View();
+        }
+        public ActionResult ROL_008()
+        {
+            return View();
         }
     }
 }

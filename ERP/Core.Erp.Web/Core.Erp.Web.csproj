@@ -8036,6 +8036,10 @@
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_006.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_003.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_004.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_005.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_006.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_007.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_008.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />

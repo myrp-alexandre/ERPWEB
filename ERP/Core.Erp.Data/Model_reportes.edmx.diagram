@@ -20,6 +20,10 @@
         <EntityTypeShape EntityType="Model_reportes.ro_SPROL_002" Width="1.5" PointX="2.75" PointY="12.75" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_003" Width="1.5" PointX="13.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_004" Width="1.5" PointX="5.375" PointY="13.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWROL_005" Width="1.5" PointX="13.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWROL_006" Width="1.5" PointX="13.375" PointY="13.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWROL_007" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWROL_008" Width="1.5" PointX="15.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

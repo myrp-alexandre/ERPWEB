@@ -569,6 +569,10 @@
     <Compile Include="Reportes\RRHH\ROL_002_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_003_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_004_Data.cs" />
+    <Compile Include="Reportes\RRHH\ROL_005_Data.cs" />
+    <Compile Include="Reportes\RRHH\ROL_006_Data.cs" />
+    <Compile Include="Reportes\RRHH\ROL_007_Data.cs" />
+    <Compile Include="Reportes\RRHH\ROL_008_Data.cs" />
     <Compile Include="ro_Acta_Finiquito.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -931,6 +935,18 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="VWROL_004.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWROL_005.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWROL_006.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWROL_007.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWROL_008.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="vwRo_ActaFiniquito.cs">
