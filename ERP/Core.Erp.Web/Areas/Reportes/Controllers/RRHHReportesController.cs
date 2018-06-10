@@ -63,21 +63,46 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
    
-        public ActionResult ROL_005()
+        public ActionResult ROL_005(decimal IdActaFiniquito = 0)
         {
-            return View();
+            ROL_005_Rpt model = new ROL_005_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdActaFiniquito.Value = IdActaFiniquito;
+            model.empresa = Session["nom_empresa"].ToString();
+            if (IdActaFiniquito == 0)
+                model.RequestParameters = false;
+            return View(model);
         }
-        public ActionResult ROL_006()
+        public ActionResult ROL_006( decimal IdEmpleado = 0)
         {
-            return View();
+            ROL_006_Rpt model = new ROL_006_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdEmpleado.Value = IdEmpleado;
+            model.empresa = Session["nom_empresa"].ToString();
+            if (IdEmpleado == 0)
+                model.RequestParameters = false;
+            return View(model);
         }
-        public ActionResult ROL_007()
+        public ActionResult ROL_007(decimal IdEmpleado = 0, int IdSolicitud = 0)
         {
-            return View();
+            ROL_007_Rpt model = new ROL_007_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdEmpleado.Value = IdEmpleado;
+            model.p_IdSolicitud.Value = IdSolicitud;
+            model.empresa = Session["nom_empresa"].ToString();
+            if (IdEmpleado == 0)
+                model.RequestParameters = false;
+            return View(model);
         }
-        public ActionResult ROL_008()
+        public ActionResult ROL_008(decimal IdPrestamo = 0 )
         {
-            return View();
+            ROL_008_Rpt model = new ROL_008_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdPrestamo.Value = IdPrestamo;
+            model.empresa = Session["nom_empresa"].ToString();
+            if (IdPrestamo == 0)
+                model.RequestParameters = false;
+            return View(model);
         }
     }
 }

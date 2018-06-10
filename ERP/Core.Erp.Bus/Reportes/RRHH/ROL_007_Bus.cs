@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Reportes.RRHH
 {
-    class ROL_007_Bus
+    public class ROL_007_Bus
     {
         ROL_007_Data odata = new ROL_007_Data();
     
