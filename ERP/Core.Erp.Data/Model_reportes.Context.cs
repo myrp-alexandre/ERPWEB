@@ -46,6 +46,7 @@ namespace Core.Erp.Data
         public virtual DbSet<VWROL_006> VWROL_006 { get; set; }
         public virtual DbSet<VWROL_007> VWROL_007 { get; set; }
         public virtual DbSet<VWROL_008> VWROL_008 { get; set; }
+        public virtual DbSet<VWCXP_001> VWCXP_001 { get; set; }
     
         public virtual ObjectResult<SPINV_001_Result> SPINV_001(Nullable<int> idEmpresa, Nullable<int> idSucursal_ini, Nullable<int> idSucursal_fin, Nullable<int> idBodega_ini, Nullable<int> idBodega_fin, Nullable<decimal> idProducto_ini, Nullable<decimal> idProducto_fin, string idCategoria, Nullable<int> idLinea, Nullable<int> idGrupo, Nullable<int> idSubGrupo, Nullable<System.DateTime> fecha_corte, Nullable<bool> mostrar_stock_0)
         {

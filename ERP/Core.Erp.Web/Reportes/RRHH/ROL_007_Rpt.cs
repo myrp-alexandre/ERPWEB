@@ -19,20 +19,7 @@ namespace Core.Erp.Web.Reportes.RRHH
         }
 
         private void ROL_007_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
-            /*try
-            {
-                txtSolicitud.Text = "Yo, " + info.pe_apellido + " con cedula identidad # " + info.pe_cedulaRuc + " solicitud se me conceda a disfrutar o se me cancelen las vacaciones correspondiente al periodo de: " + info.Anio_Desde.ToString().Substring(0, 10) + " al " + info.Anio_Hasta.ToString().Substring(0, 10) +
-                  " en las fechas de : " + info.Fecha_Desde.ToString().Substring(0, 10) + " al " + info.Fecha_Hasta.ToString().Substring(0, 10);
-
-                this.DataSource = Listado.ToArray();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }*/
-
+        {            
             lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
             lbl_empresa.Text = empresa;
             lbl_usuario.Text = usuario;
@@ -42,6 +29,12 @@ namespace Core.Erp.Web.Reportes.RRHH
 
             ROL_007_Bus bus_rpt = new ROL_007_Bus();
             List<ROL_007_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdEmpleado, IdSolicitud);
+            if (lst_rpt.Count > 0)
+            {
+                ROL_007_Info info = lst_rpt[0];
+                txtSolicitud.Text = "Yo, " + info.pe_apellido + " con cedula identidad # " + info.pe_cedulaRuc + " solicitud se me conceda a disfrutar o se me cancelen las vacaciones correspondiente al periodo de: " + info.Anio_Desde.ToString().Substring(0, 10) + " al " + info.Anio_Hasta.ToString().Substring(0, 10) +
+                  " en las fechas de : " + info.Fecha_Desde.ToString().Substring(0, 10) + " al " + info.Fecha_Hasta.ToString().Substring(0, 10);
+            }
             this.DataSource = lst_rpt;
         }
     }

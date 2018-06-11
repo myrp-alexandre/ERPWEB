@@ -555,6 +555,7 @@
     <Compile Include="Reportes\ActivoFijo\ACTF_004_detalle_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_004_resumen_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_005_Data.cs" />
+    <Compile Include="Reportes\CuentasPorPagar\CXP_001_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_001_Data.cs" />
@@ -912,6 +913,9 @@
     </Compile>
     <Compile Include="vwcp_proveedor_consulta.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWCXP_001.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="vwfa_cliente_consulta.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
