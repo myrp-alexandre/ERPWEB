@@ -198,7 +198,7 @@
             this.xrTableCell3.StylePriority.UseBorders = false;
             this.xrTableCell3.StylePriority.UseFont = false;
             this.xrTableCell3.Text = "Ejercicio fiscal";
-            this.xrTableCell3.Weight = 0.85333333333333339D;
+            this.xrTableCell3.Weight = 0.90666666666666673D;
             // 
             // xrTableCell4
             // 
@@ -210,7 +210,7 @@
             this.xrTableCell4.StylePriority.UseBorders = false;
             this.xrTableCell4.StylePriority.UseFont = false;
             this.xrTableCell4.Text = "Base imponible para la retención";
-            this.xrTableCell4.Weight = 2.666666666666667D;
+            this.xrTableCell4.Weight = 2.6133333333333337D;
             // 
             // xrTableCell5
             // 
@@ -286,20 +286,22 @@
             // 
             // xrTableCell9
             // 
+            this.xrTableCell9.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[fecha]")});
             this.xrTableCell9.Name = "xrTableCell9";
-            this.xrTableCell9.Weight = 0.85333333333333339D;
+            this.xrTableCell9.Weight = 0.90666666666666673D;
             // 
             // xrTableCell10
             // 
             this.xrTableCell10.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[re_baseRetencion]")});
             this.xrTableCell10.Name = "xrTableCell10";
-            this.xrTableCell10.Weight = 2.666666666666667D;
+            this.xrTableCell10.Weight = 2.6133333333333337D;
             // 
             // xrTableCell11
             // 
             this.xrTableCell11.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NumRetencion]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[re_tipoRet]")});
             this.xrTableCell11.Name = "xrTableCell11";
             this.xrTableCell11.Weight = 1.0666666666666662D;
             // 
@@ -338,12 +340,12 @@
             // lbl_usuario
             // 
             this.lbl_usuario.Name = "lbl_usuario";
-            this.lbl_usuario.Weight = 0.85333333333333339D;
+            this.lbl_usuario.Weight = 0.90666666666666673D;
             // 
             // lbl_fecha
             // 
             this.lbl_fecha.Name = "lbl_fecha";
-            this.lbl_fecha.Weight = 3.7333336588541668D;
+            this.lbl_fecha.Weight = 3.6800003255208336D;
             // 
             // xrTableCell19
             // 
