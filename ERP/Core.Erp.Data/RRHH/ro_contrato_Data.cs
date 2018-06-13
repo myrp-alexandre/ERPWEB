@@ -285,7 +285,7 @@ namespace Core.Erp.Data.RRHH
                              //on cont.IdContrato_Tipo equals cat.CodCatalogo
                              where cont.IdEmpresa == IdEmpresa
                              && emp.IdEmpleado == IdEmpleado
-                             && cont.EstadoContrato== "ECT_ACT"
+                             && cont.EstadoContrato== "ECT_PLQ"
                              && cont.Estado=="A"
                              select new ro_contrato_Info
                              {
@@ -325,7 +325,7 @@ namespace Core.Erp.Data.RRHH
                     var lst = from q in Context.ro_contrato
                               where q.IdEmpresa == IdEmpresa
                               && q.IdEmpleado == IdEmpleado
-                              && q.EstadoContrato== "ECT_ACT"
+                              && q.EstadoContrato!= "ECT_LIQ"
                               && q.Estado=="A"
                               select q;
 

@@ -36,5 +36,59 @@ namespace Core.Erp.Bus.General
                 throw;
             }
         }
+
+
+
+        public tb_parroquia_Info get_info(string IdProvincia, string IdCiudad)
+        {
+            try
+            {
+                return odata.get_info(IdProvincia, IdCiudad);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool guardarDB(tb_parroquia_Info info)
+        {
+            try
+            {
+                return odata.guardarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool modificarDB(tb_parroquia_Info info)
+        {
+            try
+            {
+                return odata.modificarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool anularDB(tb_parroquia_Info info)
+        {
+            try
+            {
+                return odata.anularDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

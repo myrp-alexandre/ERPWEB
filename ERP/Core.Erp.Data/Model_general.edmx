@@ -210,6 +210,13 @@
           <Property Name="num_cta_acreditacion" Type="varchar" MaxLength="50" />
           <Property Name="IdBanco_acreditacion" Type="int" />
         </EntityType>
+        <EntityType Name="tb_persona_tipo">
+          <Key>
+            <PropertyRef Name="IdTipo_Persona" />
+          </Key>
+          <Property Name="IdTipo_Persona" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Descricpion" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="tb_provincia">
           <Key>
             <PropertyRef Name="IdProvincia" />
@@ -366,6 +373,15 @@
           <Property Name="se_muestra_administrador_reportes" Type="bit" Nullable="false" />
           <Property Name="orden" Type="int" Nullable="false" />
           <Property Name="observacion" Type="varchar" MaxLength="2000" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwtb_pais">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="IdPais" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_tb_bodega_tb_sucursal">
           <End Role="tb_sucursal" Type="Self.tb_sucursal" Multiplicity="1" />
@@ -609,6 +625,7 @@
           <EntitySet Name="tb_pais" EntityType="Self.tb_pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_parroquia" EntityType="Self.tb_parroquia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_persona" EntityType="Self.tb_persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_persona_tipo" EntityType="Self.tb_persona_tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_provincia" EntityType="Self.tb_provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_region" EntityType="Self.tb_region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_Documento_Tipo" EntityType="Self.tb_sis_Documento_Tipo" Schema="dbo" store:Type="Tables" />
@@ -619,6 +636,12 @@
           <EntitySet Name="tb_sucursal" EntityType="Self.tb_sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_transportista" EntityType="Self.tb_transportista" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_reporte" EntityType="Self.tb_sis_reporte" Schema="web" store:Type="Tables" />
+          <EntitySet Name="vwtb_pais" EntityType="Self.vwtb_pais" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwtb_pais].[IdPais] AS [IdPais], 
+    [vwtb_pais].[Nombre] AS [Nombre]
+    FROM [dbo].[vwtb_pais] AS [vwtb_pais]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_tb_bodega_tb_sucursal" Association="Self.FK_tb_bodega_tb_sucursal">
             <End Role="tb_sucursal" EntitySet="tb_sucursal" />
             <End Role="tb_bodega" EntitySet="tb_bodega" />
@@ -827,6 +850,8 @@
             <End Role="tb_modulo" EntitySet="tb_modulo" />
             <End Role="tb_sis_reporte" EntitySet="tb_sis_reporte" />
           </AssociationSet>
+          <EntitySet Name="vwtb_pais" EntityType="Model_general.vwtb_pais" />
+          <EntitySet Name="tb_persona_tipo" EntityType="Model_general.tb_persona_tipo" />
           </EntityContainer>
         <EntityType Name="tb_region">
           <Key>
@@ -1429,6 +1454,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwtb_pais">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="IdPais" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tb_persona_tipo">
+          <Key>
+            <PropertyRef Name="IdTipo_Persona" />
+          </Key>
+          <Property Name="IdTipo_Persona" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Descricpion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1806,6 +1845,22 @@
                 <ScalarProperty Name="CodModulo" ColumnName="CodModulo" />
                 <ScalarProperty Name="nom_reporte" ColumnName="nom_reporte" />
                 <ScalarProperty Name="CodReporte" ColumnName="CodReporte" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwtb_pais">
+            <EntityTypeMapping TypeName="Model_general.vwtb_pais">
+              <MappingFragment StoreEntitySet="vwtb_pais">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_persona_tipo">
+            <EntityTypeMapping TypeName="Model_general.tb_persona_tipo">
+              <MappingFragment StoreEntitySet="tb_persona_tipo">
+                <ScalarProperty Name="Descricpion" ColumnName="Descricpion" />
+                <ScalarProperty Name="IdTipo_Persona" ColumnName="IdTipo_Persona" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

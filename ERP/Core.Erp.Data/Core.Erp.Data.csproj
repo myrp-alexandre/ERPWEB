@@ -157,10 +157,40 @@
     <Compile Include="cp_codigo_SRI_x_CtaCble.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
+    <Compile Include="cp_cuotas_x_doc.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cp_cuotas_x_doc_det.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cp_orden_giro.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cp_orden_pago.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cp_orden_pago_det.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cp_orden_pago_formapago.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cp_orden_pago_tipo_x_empresa.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cp_pagos_sri.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cp_parametros.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
     <Compile Include="cp_proveedor.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
     <Compile Include="cp_proveedor_clase.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cp_TipoDocumento.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
     <Compile Include="ct_anio_fiscal.cs">
@@ -207,8 +237,18 @@
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_tipo_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_x_CtaCble_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_cuotas_x_doc_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_cuotas_x_doc_det_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_orden_giro_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_orden_pago_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_orden_pago_det_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_orden_pago_formapago_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_orden_pago_tipo_x_empresa_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_pagos_sri_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_parametros_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_proveedor_clase_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_proveedor_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_TipoDocumento_Data.cs" />
     <Compile Include="cxc_Catalogo.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
@@ -267,6 +307,7 @@
     <Compile Include="General\tb_pais_Data.cs" />
     <Compile Include="General\tb_parroquia_Data.cs" />
     <Compile Include="General\tb_persona_Data.cs" />
+    <Compile Include="General\tb_persona_tipo_Data.cs" />
     <Compile Include="General\tb_provincia_Data.cs" />
     <Compile Include="General\tb_region_Data.cs" />
     <Compile Include="General\tb_sis_Documento_Tipo_Data.cs" />
@@ -867,6 +908,9 @@
     <Compile Include="tb_persona.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
+    <Compile Include="tb_persona_tipo.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
     <Compile Include="tb_provincia.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
@@ -911,6 +955,12 @@
     </Compile>
     <Compile Include="VWCONTA_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwcp_codigo_SRI.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwcp_orden_giro.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
     <Compile Include="vwcp_proveedor_consulta.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
@@ -1016,6 +1066,9 @@
     </Compile>
     <Compile Include="vwRo_Solicitud_Vacaciones.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwtb_pais.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,73 @@
+﻿@model Core.Erp.Info.General.tb_ciudad_Info
+@{
+    ViewBag.Title = "Anular Ciudad";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+@using (Html.BeginForm("Anular", "Ciudad", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdCiudad)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Cod_Ciudad">Código*</label>
+                    @Html.TextBoxFor(q => q.Cod_Ciudad, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Cod_Ciudad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdPais">Provincia*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdProvincia, settings =>
+               {
+                   settings.Name = "IdProvincia";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdPais", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("Descripcion_Prov", "Provincia").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdProvincia";
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "Descripcion_Prov";
+                   settings.Properties.AllowNull = false;
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+               }).BindList(ViewBag.lst_provincias).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdProvincia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Descripcion_Ciudad">Descripción*</label>
+                    @Html.TextBoxFor(q => q.Descripcion_Ciudad, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Descripcion_Ciudad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-danger">Anular</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Ciudad",new { Area = "General" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

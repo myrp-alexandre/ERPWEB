@@ -141,7 +141,7 @@ namespace Core.Erp.Data.RRHH
                     return true;
                
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -167,7 +167,7 @@ namespace Core.Erp.Data.RRHH
                     return true;
                
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                
                 throw ;
@@ -197,7 +197,7 @@ namespace Core.Erp.Data.RRHH
                 }
                 return Id;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 
                 throw;

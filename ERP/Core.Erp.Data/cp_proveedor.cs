@@ -14,6 +14,12 @@ namespace Core.Erp.Data
     
     public partial class cp_proveedor
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public cp_proveedor()
+        {
+            this.cp_orden_giro = new HashSet<cp_orden_giro>();
+        }
+    
         public int IdEmpresa { get; set; }
         public decimal IdProveedor { get; set; }
         public decimal IdPersona { get; set; }
@@ -53,5 +59,7 @@ namespace Core.Erp.Data
         public virtual cp_codigo_SRI cp_codigo_SRI1 { get; set; }
         public virtual cp_codigo_SRI cp_codigo_SRI2 { get; set; }
         public virtual cp_proveedor_clase cp_proveedor_clase { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cp_orden_giro> cp_orden_giro { get; set; }
     }
 }

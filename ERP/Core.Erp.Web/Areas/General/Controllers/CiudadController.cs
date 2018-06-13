@@ -10,19 +10,26 @@ namespace Core.Erp.Web.Areas.General.Controllers
     public class CiudadController : Controller
     {
         tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
-        tb_region_Bus bus_region = new tb_region_Bus();
+        tb_provincia_Bus bus_provincia = new tb_provincia_Bus();
         List<tb_ciudad_Info> lst_ciudad = new List<tb_ciudad_Info>();
-        List<tb_region_Info> lst_region = new List<tb_region_Info>();
+        List<tb_provincia_Info> lst_provincia = new List<tb_provincia_Info>();
 
         public ActionResult Index()
         {
             return View();
         }
 
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_Ciudad()
+        {
+          lst_ciudad = bus_ciudad.get_list(true);
+            return PartialView("_GridViewPartial_Ciudad", lst_ciudad);
+        }
         private void cargar_combos()
         {
-           lst_region = bus_region.get_list(false);
-            ViewBag.lst_region = lst_region;
+           lst_provincia = bus_provincia.get_list(false);
+            ViewBag.lst_provincias = lst_provincia;
         }
 
         public ActionResult Nuevo()

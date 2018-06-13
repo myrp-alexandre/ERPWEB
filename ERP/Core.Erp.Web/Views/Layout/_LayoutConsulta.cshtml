@@ -122,6 +122,8 @@
                             <li><a href="@Url.Action("Index","Pais",new { area = "General"})"><i class="fa fa-circle-o"></i> País</a></li>
                             <li><a href="@Url.Action("Index","Region",new { area = "General"})"><i class="fa fa-circle-o"></i> Región</a></li>
                             <li><a href="@Url.Action("Index","Provincia",new { area = "General"})"><i class="fa fa-circle-o"></i> Provincia</a></li>
+                            <li><a href="@Url.Action("Index","Ciudad",new { area = "General"})"><i class="fa fa-circle-o"></i> Ciudad</a></li>
+                            <li><a href="@Url.Action("Index","Parroquia",new { area = "General"})"><i class="fa fa-circle-o"></i>Parroquia</a></li>
                             <li><a href="@Url.Action("Index","Transportista",new { area = "General"})"><i class="fa fa-circle-o"></i> Transportistas</a></li>
                             <li><a href="@Url.Action("Index","Persona",new { area = "General"})"><i class="fa fa-circle-o"></i> Persona</a></li>
                             <li><a href="@Url.Action("Index","Modulo",new { area = "General"})"><i class="fa fa-circle-o"></i> Módulo</a></li>
@@ -169,6 +171,11 @@
                         <ul class="treeview-menu">
                             <li><a href="@Url.Action("Index","ClaseProveedor",new { area = "CuentasPorPagar"})"><i class="fa fa-circle-o"></i> Clase proveedor</a></li>
                             <li><a href="@Url.Action("Index","TipoCodigoSRI",new { area = "CuentasPorPagar"})"><i class="fa fa-circle-o"></i> Código SRI</a></li>
+                            <li><a href="@Url.Action("Index","Deudas",new { area = "CuentasPorPagar"})"><i class="fa fa-circle-o"></i>Deudas</a></li>
+                            <li><a href="@Url.Action("Index","OrdenPago",new { area = "CuentasPorPagar"})"><i class="fa fa-circle-o"></i> Orden de pago</a></li>
+                            <li><a href="@Url.Action("Index","ParametrosCXP",new { area = "CuentasPorPagar"})"><i class="fa fa-circle-o"></i> Parametros</a></li>
+
+
                         </ul>
                     </li>
                     <li class="treeview">
@@ -296,6 +303,7 @@
                                     <li><a href="@Url.Action("Index2","HorasExtras",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Aprobar H.E.</a></li>
                                     <li><a href="@Url.Action("Index","ParticipacionUtilidad",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Reparto utilidad</a></li>
                                     <li><a href="@Url.Action("Index","ProcesarRol",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Procesar rol </a></li>
+                                    <li><a href="@Url.Action("Index2","ProcesarRol",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Reversar procesos</a></li>
                                     <li><a href="@Url.Action("Index","PagoBenediciosSociales",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Liquidar B.S</a></li>
 
                                 </ul>

@@ -38,6 +38,38 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
+        public List<ro_empleado_Info> get_list_combo_liquidar(int IdEmpresa)
+        {
+            try
+            {
+                List<ro_empleado_Info> Lista;
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    Lista = (from q in Context.vwro_empleado_combo
+                             where q.IdEmpresa == IdEmpresa
+                             && q.em_status== "EST_PLQ"
+                             select new ro_empleado_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdEmpleado = q.IdEmpleado,
+                                 IdTipoNomina = q.IdTipoNomina,
+                                 Empleado = q.Empleado,
+                                 pe_cedulaRuc = q.pe_cedulaRuc
+                             }).ToList();
+
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         public List<ro_empleado_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
             try
@@ -194,7 +226,7 @@ namespace Core.Erp.Data.RRHH
 
                 return info_;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;

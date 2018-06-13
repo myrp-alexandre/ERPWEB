@@ -26,6 +26,11 @@ namespace Core.Erp.Bus.RRHH
         ro_rol_detalle_x_rubro_acumulado_Bus bus_rubros_acumulados = new ro_rol_detalle_x_rubro_acumulado_Bus();
         ro_rubros_calculados_Bus bus_rubros_calculados = new ro_rubros_calculados_Bus();
         ro_rubros_calculados_Info info_rubros_calculados = new ro_rubros_calculados_Info();
+
+        double sueldo = 0;
+        int dias_trabajados = 0;
+        double sueldo_base = 0;
+
         #endregion
         public List<ro_Acta_Finiquito_Info> get_list(int IdEmpresa)
         {
@@ -80,6 +85,9 @@ namespace Core.Erp.Bus.RRHH
             try
             {
                 int secuencia = 1;
+                odata = new ro_Acta_Finiquito_Data();
+                info.Ingresos = info.lst_detalle.Where(v => v.Valor > 0).Sum(v => v.Valor);
+                info.Egresos = info.lst_detalle.Where(v => v.Valor < 0).Sum(v => v.Valor);
                 if (odata.modificarDB(info))
                 {
                     odata_detalle.eliminarDB(info);
@@ -107,7 +115,6 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
-
         public bool Liquidar(ro_Acta_Finiquito_Info info)
         {
             try
@@ -171,8 +178,10 @@ namespace Core.Erp.Bus.RRHH
                     default:
                         break;
                 }
-
-                ObtenerProvisionDecimoII();
+               
+                Obtenersueldo_no_pagados();
+                ObtenerAportePersonal();
+                ObtenerProvisionDecimoIII();
                 ObtenerProvisionDecimoIV();
                 ObtenerProvisionVacaciones();
                 ObtenerCuotasPrestamosPendientes();
@@ -447,7 +456,7 @@ namespace Core.Erp.Bus.RRHH
                     item.IdEmpleado = _Info.IdEmpleado;
                     item.IdActaFiniquito = _Info.IdActaFiniquito;
                     item.Observacion ="Cuotas de prestamos pendientes de cobors ";
-                    item.Valor = prestamo;
+                    item.Valor = prestamo*-1;
                     item.IdRubro ="277";
                     lst_valores_x_indegnizacion.Add(item);
                 
@@ -498,7 +507,7 @@ namespace Core.Erp.Bus.RRHH
                     item.IdEmpleado = _Info.IdEmpleado;
                     item.IdActaFiniquito = _Info.IdActaFiniquito;
                     item.Observacion = "Vacaciones no gozadas";
-                    item.Valor = vacaciones;
+                    item.Valor = vacaciones+(sueldo_base/24);
                     item.IdRubro = "998";
                     lst_valores_x_indegnizacion.Add(item);
                 
@@ -510,7 +519,7 @@ namespace Core.Erp.Bus.RRHH
 
             }
         }
-        private Boolean ObtenerProvisionDecimoII()
+        private Boolean ObtenerProvisionDecimoIII()
         {
             try
             {
@@ -520,7 +529,7 @@ namespace Core.Erp.Bus.RRHH
                 item.IdEmpleado = _Info.IdEmpleado;
                 item.IdActaFiniquito = _Info.IdActaFiniquito;
                 item.Observacion = "Decima tercera remuneracón";
-                item.Valor = vacaciones;
+                item.Valor = vacaciones+(sueldo_base/12);
                 item.IdRubro = info_rubros_calculados.IdRubro_prov_DIII;
                 lst_valores_x_indegnizacion.Add(item);
 
@@ -542,7 +551,7 @@ namespace Core.Erp.Bus.RRHH
                 item.IdEmpleado = _Info.IdEmpleado;
                 item.IdActaFiniquito = _Info.IdActaFiniquito;
                 item.Observacion = "Decima cuarta remuneracón";
-                item.Valor = vacaciones;
+                item.Valor = vacaciones+((info_parametro.Sueldo_basico/360)*dias_trabajados);
                 item.IdRubro = info_rubros_calculados.IdRubro_prov_DIV;
                 lst_valores_x_indegnizacion.Add(item);
                 return true;
@@ -553,6 +562,54 @@ namespace Core.Erp.Bus.RRHH
 
             }
         }
+        private Boolean Obtenersueldo_no_pagados()
+        {
+            try
+            {
+               
+                DateTime fecha_inicio;
+                fecha_inicio=new DateTime(_Info.FechaSalida.Year, _Info.FechaSalida.Month, 1);
+                dias_trabajados =(int) (Convert.ToDateTime(_Info.FechaSalida) - fecha_inicio).TotalDays;
+                dias_trabajados = dias_trabajados + 1;
+                sueldo =(double) bus_contrato.get_sueldo_actual(_Info.IdEmpresa, _Info.IdEmpleado);
+                sueldo_base = (sueldo / 30) * dias_trabajados;
+                ro_Acta_Finiquito_Detalle_Info item = new ro_Acta_Finiquito_Detalle_Info();
+                item.IdEmpresa = _Info.IdEmpresa;
+                item.IdEmpleado = _Info.IdEmpleado;
+                item.IdActaFiniquito = _Info.IdActaFiniquito;
+                item.Observacion = "Sueldo no pagado";
+                item.Valor = sueldo_base;
+                item.IdRubro = info_rubros_calculados.IdRubro_sueldo;
+                lst_valores_x_indegnizacion.Add(item);
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
+        private Boolean ObtenerAportePersonal()
+        {
+            try
+            {
+                ro_Acta_Finiquito_Detalle_Info item = new ro_Acta_Finiquito_Detalle_Info();
+                item.IdEmpresa = _Info.IdEmpresa;
+                item.IdEmpleado = _Info.IdEmpleado;
+                item.IdActaFiniquito = _Info.IdActaFiniquito;
+                item.Observacion = "Aporte personal";
+                item.Valor = (sueldo_base*info_parametro.Porcentaje_aporte_pers)*-1;
+                item.IdRubro = info_rubros_calculados.IdRubro_iess_perso;
+                lst_valores_x_indegnizacion.Add(item);
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
+
 
 
 

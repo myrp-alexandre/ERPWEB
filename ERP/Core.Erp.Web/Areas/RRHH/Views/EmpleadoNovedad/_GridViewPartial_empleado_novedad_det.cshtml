@@ -30,18 +30,7 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
         //Funcion para inicializar fila al presionar nuevo
-        settings.InitNewRow = (s, e) =>
-        {
-            e.NewValues["IdNovedad"] = null;
-            e.NewValues["Secuencia"] = 0;
-            e.NewValues["IdRubro"] = 0;
-            e.NewValues["FechaPago"] = DateTime.Now;
-            e.NewValues["Valor"] = 0;
-            e.NewValues["Observacion"] = "";
-
-        };
-
-
+       
         settings.Columns.Add(column =>
         {
             column.FieldName = "Secuencia";

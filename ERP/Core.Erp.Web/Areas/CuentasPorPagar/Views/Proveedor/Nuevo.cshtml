@@ -205,22 +205,22 @@
                             <div class="form-group">
                                 <label for="IdCtaCble_Anticipo">Cta. Cble. Anticipo</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_Anticipo, settings =>
-                                                              {
-                                                                  settings.Name = "IdCtaCble_Anticipo";
-                                                                  settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                                                  settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                                                  settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                                                  settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                                                                  settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
-                                                                             //Campo ID
-                                                                             settings.Properties.ValueField = "IdCtaCble";
-                                                                  settings.Properties.ValueType = typeof(string);
-                                                                  settings.Properties.TextField = "pc_Cuenta";
-                                                                             //Boton para seleccionar ningun registro
-                                                                             settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                                                  settings.Properties.NullText = "== Seleccione ==";
-                                                                  settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                                                              }).BindList(ViewBag.lst_cuentas).GetHtml()
+                           {
+                               settings.Name = "IdCtaCble_Anticipo";
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                               settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                               settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                               settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
+                               //Campo ID
+                               settings.Properties.ValueField = "IdCtaCble";
+                               settings.Properties.ValueType = typeof(string);
+                               settings.Properties.TextField = "pc_Cuenta";
+                               //Boton para seleccionar ningun registro
+                               settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                               settings.Properties.NullText = "== Seleccione ==";
+                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                           }).BindList(ViewBag.lst_cuentas).GetHtml()
                                 @Html.ValidationMessageFor(q => q.IdCtaCble_Anticipo, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -228,21 +228,21 @@
                             <div class="form-group">
                                 <label for="idCredito_Predeter">Crédito perdeterminado</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.idCredito_Predeter, settings =>
-                                                               {
-                                                                   settings.Name = "idCredito_Predeter";
-                                                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                                                   settings.Properties.Columns.Add("IdTipoSRI", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                                                   settings.Properties.Columns.Add("co_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                                                                              //Campo ID
-                                                                              settings.Properties.ValueField = "IdTipoSRI";
-                                                                   settings.Properties.ValueType = typeof(string);
-                                                                   settings.Properties.TextField = "co_descripcion";
-                                                                              //Boton para seleccionar ningun registro
-                                                                              settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                                                   settings.Properties.NullText = "== Seleccione ==";
-                                                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                                                               }).BindList(ViewBag.lst_codigo).GetHtml()
+                           {
+                               settings.Name = "idCredito_Predeter";
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                               settings.Properties.Columns.Add("IdTipoSRI", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                               settings.Properties.Columns.Add("co_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                               //Campo ID
+                               settings.Properties.ValueField = "IdTipoSRI";
+                               settings.Properties.ValueType = typeof(string);
+                               settings.Properties.TextField = "co_descripcion";
+                               //Boton para seleccionar ningun registro
+                               settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                               settings.Properties.NullText = "== Seleccione ==";
+                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                           }).BindList(ViewBag.lst_codigo).GetHtml()
                                 @Html.ValidationMessageFor(q => q.idCredito_Predeter, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -254,22 +254,22 @@
                             <div class="form-group">
                                 <label for="IdCtaCble_Gasto">Cta. Cble. Gasto</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_Gasto, settings =>
-                                                              {
-                                                                  settings.Name = "IdCtaCble_Gasto";
-                                                                  settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                                                  settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                                                  settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                                                  settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                                                                  settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
-                                                                             //Campo ID
-                                                                             settings.Properties.ValueField = "IdCtaCble";
-                                                                  settings.Properties.ValueType = typeof(string);
-                                                                  settings.Properties.TextField = "pc_Cuenta";
-                                                                             //Boton para seleccionar ningun registro
-                                                                             settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                                                  settings.Properties.NullText = "== Seleccione ==";
-                                                                  settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                                                              }).BindList(ViewBag.lst_cuentas).GetHtml()
+                           {
+                               settings.Name = "IdCtaCble_Gasto";
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                               settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                               settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                               settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
+                               //Campo ID
+                               settings.Properties.ValueField = "IdCtaCble";
+                               settings.Properties.ValueType = typeof(string);
+                               settings.Properties.TextField = "pc_Cuenta";
+                               //Boton para seleccionar ningun registro
+                               settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                               settings.Properties.NullText = "== Seleccione ==";
+                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                           }).BindList(ViewBag.lst_cuentas).GetHtml()
                                 @Html.ValidationMessageFor(q => q.IdCtaCble_Gasto, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -278,21 +278,21 @@
                             <div class="form-group">
                                 <label for="codigoSRI_101_Predeter">Código SRI 101</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.codigoSRI_101_Predeter, settings =>
-                                                               {
-                                                                   settings.Name = "codigoSRI_101_Predeter";
-                                                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                                                   settings.Properties.Columns.Add("IdTipoSRI", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                                                   settings.Properties.Columns.Add("co_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                                                                              //Campo ID
-                                                                              settings.Properties.ValueField = "IdTipoSRI";
-                                                                   settings.Properties.ValueType = typeof(string);
-                                                                   settings.Properties.TextField = "co_descripcion";
-                                                                              //Boton para seleccionar ningun registro
-                                                                              settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                                                   settings.Properties.NullText = "== Seleccione ==";
-                                                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                                                               }).BindList(ViewBag.lst_codigo).GetHtml()
+                           {
+                               settings.Name = "codigoSRI_101_Predeter";
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                               settings.Properties.Columns.Add("IdTipoSRI", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                               settings.Properties.Columns.Add("co_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                               //Campo ID
+                               settings.Properties.ValueField = "IdTipoSRI";
+                               settings.Properties.ValueType = typeof(string);
+                               settings.Properties.TextField = "co_descripcion";
+                               //Boton para seleccionar ningun registro
+                               settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                               settings.Properties.NullText = "== Seleccione ==";
+                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                           }).BindList(ViewBag.lst_codigo).GetHtml()
                                 @Html.ValidationMessageFor(q => q.codigoSRI_101_Predeter, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -304,22 +304,22 @@
                             <div class="form-group">
                                 <label for="IdCtaCble_CXP">Cta. Cble. CXP</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_CXP, settings =>
-                                                              {
-                                                                  settings.Name = "IdCtaCble_CXP";
-                                                                  settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                                                  settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                                                  settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                                                  settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                                                                  settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
-                                                                             //Campo ID
-                                                                             settings.Properties.ValueField = "IdCtaCble";
-                                                                  settings.Properties.ValueType = typeof(string);
-                                                                  settings.Properties.TextField = "pc_Cuenta";
-                                                                             //Boton para seleccionar ningun registro
-                                                                             settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                                                  settings.Properties.NullText = "== Seleccione ==";
-                                                                  settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                                                              }).BindList(ViewBag.lst_cuentas).GetHtml()
+                           {
+                               settings.Name = "IdCtaCble_CXP";
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                               settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                               settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                               settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
+                               //Campo ID
+                               settings.Properties.ValueField = "IdCtaCble";
+                               settings.Properties.ValueType = typeof(string);
+                               settings.Properties.TextField = "pc_Cuenta";
+                               //Boton para seleccionar ningun registro
+                               settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                               settings.Properties.NullText = "== Seleccione ==";
+                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                           }).BindList(ViewBag.lst_cuentas).GetHtml()
                                 @Html.ValidationMessageFor(q => q.IdCtaCble_CXP, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -327,21 +327,21 @@
                             <div class="form-group">
                                 <label for="codigoSRI_ICE_Predeter">Código SRI ICE</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.codigoSRI_ICE_Predeter, settings =>
-                                                               {
-                                                                   settings.Name = "codigoSRI_ICE_Predeter";
-                                                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                                                   settings.Properties.Columns.Add("IdTipoSRI", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                                                   settings.Properties.Columns.Add("co_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                                                                              //Campo ID
-                                                                              settings.Properties.ValueField = "IdTipoSRI";
-                                                                   settings.Properties.ValueType = typeof(string);
-                                                                   settings.Properties.TextField = "co_descripcion";
-                                                                              //Boton para seleccionar ningun registro
-                                                                              settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                                                   settings.Properties.NullText = "== Seleccione ==";
-                                                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                                                               }).BindList(ViewBag.lst_codigo).GetHtml()
+                           {
+                               settings.Name = "codigoSRI_ICE_Predeter";
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                               settings.Properties.Columns.Add("IdTipoSRI", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                               settings.Properties.Columns.Add("co_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                               //Campo ID
+                               settings.Properties.ValueField = "IdTipoSRI";
+                               settings.Properties.ValueType = typeof(string);
+                               settings.Properties.TextField = "co_descripcion";
+                               //Boton para seleccionar ningun registro
+                               settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                               settings.Properties.NullText = "== Seleccione ==";
+                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                           }).BindList(ViewBag.lst_codigo).GetHtml()
                                 @Html.ValidationMessageFor(q => q.codigoSRI_ICE_Predeter, "", new { @class = "text-danger" })
                             </div>
                         </div>

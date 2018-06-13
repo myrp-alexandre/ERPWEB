@@ -41,5 +41,6 @@ namespace Core.Erp.Data
         public string ca_descripcion { get; set; }
         public string Contrato { get; set; }
         public string CodCatalogo { get; set; }
+        public string EstadoContrato { get; set; }
     }
 }

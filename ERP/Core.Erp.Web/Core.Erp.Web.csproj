@@ -105,15 +105,12 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -261,6 +258,9 @@
     <Compile Include="Areas\CuentasPorCobrar\CuentasPorCobrarAreaRegistration.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\ClaseProveedorController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\CodigoSRIController.cs" />
+    <Compile Include="Areas\CuentasPorPagar\Controllers\DeudasController.cs" />
+    <Compile Include="Areas\CuentasPorPagar\Controllers\OrdenPagoController.cs" />
+    <Compile Include="Areas\CuentasPorPagar\Controllers\ParametrosCXPController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\ProveedorController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\TipoCodigoSRIController.cs" />
     <Compile Include="Areas\CuentasPorPagar\CuentasPorPagarAreaRegistration.cs" />
@@ -280,6 +280,7 @@
     <Compile Include="Areas\General\Controllers\ImpuestoController.cs" />
     <Compile Include="Areas\General\Controllers\ModuloController.cs" />
     <Compile Include="Areas\General\Controllers\PaisController.cs" />
+    <Compile Include="Areas\General\Controllers\ParroquiaController.cs" />
     <Compile Include="Areas\General\Controllers\PersonaController.cs" />
     <Compile Include="Areas\General\Controllers\ProvinciaController.cs" />
     <Compile Include="Areas\General\Controllers\RegionController.cs" />
@@ -489,11 +490,11 @@
     <Compile Include="Reportes\RRHH\ROL_005_Rpt.Designer.cs">
       <DependentUpon>ROL_005_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_006_Rpt.cs">
+    <Compile Include="Reportes\RRHH\ROL_006_rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_006_Rpt.Designer.cs">
-      <DependentUpon>ROL_006_Rpt.cs</DependentUpon>
+    <Compile Include="Reportes\RRHH\ROL_006_rpt.Designer.cs">
+      <DependentUpon>ROL_006_rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\RRHH\ROL_007_Rpt.cs">
       <SubType>Component</SubType>
@@ -8063,15 +8064,40 @@
     <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\_GridViewPartial_depreciacion.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\_GridViewPartial_depreciacion_det.cshtml" />
     <Content Include="Areas\Contabilidad\Views\ComprobanteContable\_GridViewPartial_comprobante_detalle_readonly.cshtml" />
-    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_005.cshtml" />
-    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_006.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Deudas\Index.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Deudas\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Deudas\Modificar.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Deudas\Anular.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Deudas\_GridViewPartial_documento_cuotas_det.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Deudas\_GridViewPartial_deudas.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Deudas\_GridViewPartial_deudas_dc.cshtml" />
+    <Content Include="Areas\General\Views\Ciudad\Anular.cshtml" />
+    <Content Include="Areas\General\Views\Ciudad\Index.cshtml" />
+    <Content Include="Areas\General\Views\Ciudad\Modificar.cshtml" />
+    <Content Include="Areas\General\Views\Ciudad\Nuevo.cshtml" />
+    <Content Include="Areas\General\Views\Ciudad\_GridViewPartial_ciudad.cshtml" />
+    <Content Include="Areas\General\Views\Parroquia\_GridViewPartial_parroquia.cshtml" />
+    <Content Include="Areas\General\Views\Parroquia\Anular.cshtml" />
+    <Content Include="Areas\General\Views\Parroquia\Index.cshtml" />
+    <Content Include="Areas\General\Views\Parroquia\Modificar.cshtml" />
+    <Content Include="Areas\General\Views\Parroquia\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ParametrosCXP\Index.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ParametrosCXP\Modificar.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ParametrosCXP\_GridViewPartial_parametros.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\_GridViewPartial_detalle_op.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\_GridViewPartial_orden_pago_dc.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\Index.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\_GridViewPartial_ordenes_pagos.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_001.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_003.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_004.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_005.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_006.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_007.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_008.cshtml" />
-    <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_001.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_005.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_006.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
@@ -8137,7 +8163,6 @@
     <Folder Include="Areas\CuentasPorPagar\Models\" />
     <Folder Include="Areas\Facturacion\Models\" />
     <Folder Include="Areas\General\Models\" />
-    <Folder Include="Areas\General\Views\Ciudad\" />
     <Folder Include="Areas\Importacion\Controllers\" />
     <Folder Include="Areas\Importacion\Models\" />
     <Folder Include="Areas\Importacion\Views\Shared\" />
@@ -8176,7 +8201,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -8240,8 +8264,8 @@
     <EmbeddedResource Include="Reportes\RRHH\ROL_005_Rpt.resx">
       <DependentUpon>ROL_005_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_006_Rpt.resx">
-      <DependentUpon>ROL_006_Rpt.cs</DependentUpon>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_006_rpt.resx">
+      <DependentUpon>ROL_006_rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_007_Rpt.resx">
       <DependentUpon>ROL_007_Rpt.cs</DependentUpon>

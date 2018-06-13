@@ -45,6 +45,8 @@
         <AssociationConnector Association="Model_general.FK_tb_parroquia_tb_ciudad" />
         <EntityTypeShape EntityType="Model_general.tb_sis_reporte" Width="1.5" PointX="13.625" PointY="0.75" />
         <AssociationConnector Association="Model_general.FK_tb_sis_reporte_tb_modulo" />
+        <EntityTypeShape EntityType="Model_general.vwtb_pais" Width="1.5" PointX="5.375" PointY="12.75" />
+        <EntityTypeShape EntityType="Model_general.tb_persona_tipo" Width="1.5" PointX="7.375" PointY="14.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

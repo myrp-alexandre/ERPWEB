@@ -29,7 +29,6 @@ namespace Core.Erp.Data
     
         public virtual DbSet<ro_cargo> ro_cargo { get; set; }
         public virtual DbSet<ro_Tipo_Prestamo> ro_Tipo_Prestamo { get; set; }
-        public virtual DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
         public virtual DbSet<vwro_rubro_tipo> vwro_rubro_tipo { get; set; }
         public virtual DbSet<ro_periodo> ro_periodo { get; set; }
         public virtual DbSet<ro_area> ro_area { get; set; }
@@ -92,13 +91,14 @@ namespace Core.Erp.Data
         public virtual DbSet<ro_Comprobantes_Contables> ro_Comprobantes_Contables { get; set; }
         public virtual DbSet<ro_Acta_Finiquito_Detalle> ro_Acta_Finiquito_Detalle { get; set; }
         public virtual DbSet<ro_Acta_Finiquito> ro_Acta_Finiquito { get; set; }
-        public virtual DbSet<vwRo_ActaFiniquito> vwRo_ActaFiniquito { get; set; }
         public virtual DbSet<ro_Solicitud_Vacaciones_x_empleado> ro_Solicitud_Vacaciones_x_empleado { get; set; }
         public virtual DbSet<vwRo_Solicitud_Vacaciones> vwRo_Solicitud_Vacaciones { get; set; }
         public virtual DbSet<ro_empleado> ro_empleado { get; set; }
         public virtual DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
         public virtual DbSet<vwro_Historico_Liquidacion_Vacaciones> vwro_Historico_Liquidacion_Vacaciones { get; set; }
         public virtual DbSet<ro_rubro_tipo> ro_rubro_tipo { get; set; }
+        public virtual DbSet<vwRo_ActaFiniquito> vwRo_ActaFiniquito { get; set; }
+        public virtual DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
     
         public virtual ObjectResult<spro_nomina_x_pago_utilidad_Result> spro_nomina_x_pago_utilidad(Nullable<int> idempresa, Nullable<int> idNomina, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
         {

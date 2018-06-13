@@ -11,7 +11,18 @@ namespace Core.Erp.Bus.CuentasPorPagar
     public class cp_codigo_SRI_x_CtaCble_Bus
     {
         cp_codigo_SRI_x_CtaCble_Data odata = new cp_codigo_SRI_x_CtaCble_Data();
+        public List<cp_codigo_SRI_Info> get_list(int IdEmpresa)
+        {
+            try
+            {
+               return odata.get_list(IdEmpresa);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
         public cp_codigo_SRI_x_CtaCble_Info get_info(int idCodigo_SRI, int IdEmpresa)
         {
             try

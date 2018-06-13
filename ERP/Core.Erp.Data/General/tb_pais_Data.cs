@@ -54,11 +54,13 @@ namespace Core.Erp.Data.General
                 string ID = "";
                 using (Entities_general Context = new Entities_general())
                 {
-                    var lst = from q in Context.tb_pais
+                    var lst = from q in Context.vwtb_pais
                               select q;
 
                     if (lst.Count() > 0)
+                    {
                         ID = (Convert.ToInt32(lst.Max(q => q.IdPais)) + 1).ToString("00000");
+                    }
                 }
                 return ID;
             }

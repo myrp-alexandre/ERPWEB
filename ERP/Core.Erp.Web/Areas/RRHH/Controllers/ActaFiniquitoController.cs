@@ -35,7 +35,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         private void cargar_combos()
         {
             IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            ViewBag.lst_empleado = bus_empleado.get_list_combo(IdEmpresa);
+            ViewBag.lst_empleado = bus_empleado.get_list_combo_liquidar(IdEmpresa);
             ViewBag.lst_tipo_contrato = bus_catalogo.get_list_x_tipo(2);
             ViewBag.lst_tipo_terminacion = bus_catalogo.get_list_x_tipo(24);
 

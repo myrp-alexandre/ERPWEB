@@ -31,5 +31,17 @@ namespace Core.Erp.Data
         public virtual DbSet<cp_proveedor_clase> cp_proveedor_clase { get; set; }
         public virtual DbSet<cp_proveedor> cp_proveedor { get; set; }
         public virtual DbSet<vwcp_proveedor_consulta> vwcp_proveedor_consulta { get; set; }
+        public virtual DbSet<cp_orden_giro> cp_orden_giro { get; set; }
+        public virtual DbSet<cp_pagos_sri> cp_pagos_sri { get; set; }
+        public virtual DbSet<cp_cuotas_x_doc> cp_cuotas_x_doc { get; set; }
+        public virtual DbSet<cp_cuotas_x_doc_det> cp_cuotas_x_doc_det { get; set; }
+        public virtual DbSet<vwcp_codigo_SRI> vwcp_codigo_SRI { get; set; }
+        public virtual DbSet<cp_TipoDocumento> cp_TipoDocumento { get; set; }
+        public virtual DbSet<cp_parametros> cp_parametros { get; set; }
+        public virtual DbSet<vwcp_orden_giro> vwcp_orden_giro { get; set; }
+        public virtual DbSet<cp_orden_pago> cp_orden_pago { get; set; }
+        public virtual DbSet<cp_orden_pago_det> cp_orden_pago_det { get; set; }
+        public virtual DbSet<cp_orden_pago_formapago> cp_orden_pago_formapago { get; set; }
+        public virtual DbSet<cp_orden_pago_tipo_x_empresa> cp_orden_pago_tipo_x_empresa { get; set; }
     }
 }

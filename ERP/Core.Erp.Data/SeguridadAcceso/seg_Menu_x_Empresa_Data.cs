@@ -87,6 +87,9 @@ namespace Core.Erp.Data.SeguridadAcceso
         {
             try
             {
+                int IdEmpresa = 0;
+                if (Lista.Count() > 0)
+                    IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
                 using (Entities_seguridad_acceso Context = new Entities_seguridad_acceso())
                 {
                     foreach (var item in Lista)
@@ -99,6 +102,9 @@ namespace Core.Erp.Data.SeguridadAcceso
                         Context.seg_Menu_x_Empresa.Add(Entity);
                     }
                     Context.SaveChanges();
+
+                    string sql = "exec spseg_corregir_menu '" + IdEmpresa + "','admin'";
+                    Context.Database.ExecuteSqlCommand(sql);
                 }
 
                 return true;

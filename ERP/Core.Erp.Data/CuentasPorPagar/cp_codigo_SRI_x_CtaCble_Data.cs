@@ -72,5 +72,53 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
+
+
+        public List<cp_codigo_SRI_Info> get_list(int IdEmpresa)
+        {
+            try
+            {
+
+                List<cp_codigo_SRI_Info> lista = new List<cp_codigo_SRI_Info>();
+                using (Entities_cuentas_por_pagar Contex=new Entities_cuentas_por_pagar())
+                {
+                    var select_ = from q in Contex.vwcp_codigo_SRI
+                                  where q.IdEmpresa == IdEmpresa
+                                  && q.IdTipoSRI== "COD_IDCREDITO"
+                                  && q.co_estado=="A"
+                                  orderby q.co_f_valides_hasta descending
+                                  select q;
+
+                    foreach (var item in select_)
+                    {
+                        cp_codigo_SRI_Info dat = new cp_codigo_SRI_Info();
+                        dat.IdCodigo_SRI = item.IdCodigo_SRI;
+                        dat.codigoSRI = item.codigoSRI;
+                        dat.co_codigoBase = item.co_codigoBase;
+                        dat.co_descripcion = item.co_descripcion;
+                        dat.co_porRetencion = item.co_porRetencion;
+                        dat.co_f_valides_desde = item.co_f_valides_desde;
+                        dat.co_f_valides_hasta = item.co_f_valides_hasta;
+                        dat.co_estado = item.co_estado;
+                        dat.IdTipoSRI = item.IdTipoSRI;
+                        if (item.codigoSRI == "01")
+                            dat.co_descripcion = "[" + item.codigoSRI + "] - " + item.co_descripcion + " " + item.co_porRetencion.ToString().Replace("0", "") + "12%";
+                        else
+                            dat.co_descripcion = "[" + item.codigoSRI + "] - " + item.co_descripcion + " " + item.co_porRetencion + "%";
+
+
+
+                        lista.Add(dat);
+                    }
+                }
+              
+                return (lista);
+            }
+            catch (Exception ex)
+            {
+               
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
     }
 }

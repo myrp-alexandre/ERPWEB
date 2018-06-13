@@ -1,0 +1,54 @@
+@using System.Web.UI.WebControls;
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridViewPartial_documento_cuotas_det";
+        settings.CallbackRouteValues = new { Controller = "Deudas", Action = "GridViewPartial_documento_cuotas_det" };
+
+
+        settings.KeyFieldName = "Secuencia";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.Width = Unit.Percentage(100);
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+        settings.Settings.ShowFooter = true;
+
+        settings.Columns.Add("Num_cuota","Cuota #").Width=Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Fecha_vcto_cuota";
+            column.Caption = "Fecha vencimiento";
+            column.Width = Unit.Percentage(15);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Valor_cuota";
+            column.Caption = "$Valor cuota";
+            column.Width = Unit.Percentage(15);
+            column.EditorProperties().SpinEdit(sp =>
+            {
+                sp.MinValue = 0;
+                sp.MaxValue = 999999999;
+                sp.Width = Unit.Percentage(100);
+                column.PropertiesEdit.DisplayFormatString = "n2";
+
+            });
+        });
+        settings.Columns.Add("Observacion", "Observación").Width=Unit.Percentage(60);
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor_cuota");
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Count, "Num_cuota");
+
+    });
+}
+@grid.Bind(Model).GetHtml()
