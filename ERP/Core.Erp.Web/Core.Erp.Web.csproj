@@ -418,6 +418,12 @@
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Rpt.Designer.cs">
       <DependentUpon>CXP_001_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\CuentasPorPagar\CXP_002_diario_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorPagar\CXP_002_diario_Rpt.Designer.cs">
+      <DependentUpon>CXP_002_diario_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\CuentasPorPagar\CXP_002_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -8235,6 +8241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorPagar\CXP_001_Rpt.resx">
       <DependentUpon>CXP_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorPagar\CXP_002_diario_Rpt.resx">
+      <DependentUpon>CXP_002_diario_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorPagar\CXP_002_Rpt.resx">
       <DependentUpon>CXP_002_Rpt.cs</DependentUpon>
