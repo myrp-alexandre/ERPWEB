@@ -28,7 +28,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdEmpresa_Ogiro.Value = IdEmpresa_Ogiro;
             model.p_IdTipoCbte_Ogiro.Value = IdTipoCbte_Ogiro;
             model.p_IdCbteCble_Ogiro.Value = IdCbteCble_Ogiro;
-            model.usuario = Session["IdUsuario"].ToString();
             if (IdTipoCbte_Ogiro == 0)
                 model.RequestParameters = false;
             return View(model);

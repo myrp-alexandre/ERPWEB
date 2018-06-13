@@ -1,7 +1,7 @@
 ﻿@model Core.Erp.Info.Helps.cl_filtros_Info
 @{
     Layout = "~/Areas/Reportes/Views/Layout/_Layout_filtros.cshtml";
-    ViewBag.Title = "INV_006;
+    ViewBag.Title = "INV_006";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -44,9 +44,7 @@
                     </div>
                 </div>
             </div>
-
-
-        </div><div class="row">
+            <div class="row">
             <div class="col-md-12">
                 <div class="col-md-2">
                     <div class="form-group">
@@ -78,32 +76,31 @@
     </div>
     </div>
 
-
-        <div class="box">
-            <div class="box-header with-border">
-                <h3 class="box-title">@ViewBag.Title</h3>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                        <i class="fa fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                        <i class="fa fa-times"></i>
-                    </button>
-                </div>
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">@ViewBag.Title</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fa fa-times"></i>
+                </button>
             </div>
-            <div class="box-body">
-                @Html.DevExpress().WebDocumentViewer(settings =>
-       {
-           settings.MobileMode = false;
-           settings.Name = "webDocumentViewer";
-       }).Bind(ViewBag.Report).GetHtml();
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-                [@Session["IdEmpresa"]] @Session["nom_empresa"]
-            </div>
-            <!-- /.box-footer-->
         </div>
+        <div class="box-body">
+            @Html.DevExpress().WebDocumentViewer(settings =>
+   {
+       settings.MobileMode = false;
+       settings.Name = "webDocumentViewer";
+   }).Bind(ViewBag.Report).GetHtml();
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            [@Session["IdEmpresa"]] @Session["nom_empresa"]
+        </div>
+        <!-- /.box-footer-->
+    </div>
 }
 <script>
     $(function () {
@@ -116,6 +113,6 @@
             autoclose: true
         })
 
-        });
+    });
 
 </script>

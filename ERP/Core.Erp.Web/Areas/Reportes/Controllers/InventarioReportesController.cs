@@ -134,7 +134,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.lst_subgrupo = lst_subgrupo;
         }
 
-        public ActionResult INV_005(DateTime fecha_ini, DateTime fecha_fin, int IdEmpresa = 0, int IdSucursal= 0, int IdBodega = 0, int IdProducto= 0, string IdUsuario = "", bool no_mostrar_valores_en_0 = false, bool mostrar_detallado = false )
+        public ActionResult INV_005(DateTime? fecha_ini, DateTime? fecha_fin, int IdEmpresa = 0, int IdSucursal= 0, int IdBodega = 0, int IdProducto= 0, string IdUsuario = "", bool no_mostrar_valores_en_0 = false, bool mostrar_detallado = false )
         {  cl_filtros_Info model = new cl_filtros_Info
             {
                 IdSucursal = IdSucursal,
@@ -146,9 +146,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 fecha_ini = fecha_ini == null ? DateTime.Now : Convert.ToDateTime(fecha_ini),
                 fecha_fin = fecha_fin == null ? DateTime.Now : Convert.ToDateTime(fecha_fin)
             };
-
-
-            if(mostrar_detallado)
+            
+            cargar_combos(model);
+            if (mostrar_detallado)
             {
                 INV_005_detalle_Rpt model_detalle = new INV_005_detalle_Rpt();
                 model_detalle.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
@@ -246,7 +246,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-        public ActionResult INV_006(DateTime fecha_ini, DateTime fecha_fin, int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, int IdProducto = 0, string IdUsuario = "", bool no_mostrar_valores_en_0 = false, bool mostrar_detallado = false)
+        public ActionResult INV_006(DateTime? fecha_ini, DateTime? fecha_fin, int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, int IdProducto = 0, string IdUsuario = "", bool no_mostrar_valores_en_0 = false, bool mostrar_detallado = false)
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
@@ -260,7 +260,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 fecha_fin = fecha_fin == null ? DateTime.Now : Convert.ToDateTime(fecha_fin)
             };
 
-
+            cargar_combos(model);
             if (mostrar_detallado)
             {
                 INV_006_detalle_Rpt model_detalle = new INV_006_detalle_Rpt();

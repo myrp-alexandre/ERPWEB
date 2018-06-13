@@ -40,7 +40,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-        public ActionResult ROL_003(int IdEmpresa, decimal IdEmpleado, decimal IdNovedad)
+        public ActionResult ROL_003(decimal IdEmpleado=0, decimal IdNovedad=0)
         {
             ROL_003_Rpt model = new ROL_003_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
@@ -52,7 +52,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-        public ActionResult ROL_004(int IdEmpresa, int IdUtilidad)
+        public ActionResult ROL_004(int IdUtilidad=0)
         {
             ROL_004_Rpt model = new ROL_004_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
