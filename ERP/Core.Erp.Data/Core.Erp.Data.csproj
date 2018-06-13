@@ -598,6 +598,7 @@
     <Compile Include="Reportes\ActivoFijo\ACTF_005_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_002_Data.cs" />
+    <Compile Include="Reportes\CuentasPorPagar\CXP_002_diario_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_001_Data.cs" />

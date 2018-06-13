@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Reportes.CuentasPorPagar
 {
-    public class CXP_002_Bus
+    public class CXP_002_diario_Bus
     {
-        CXP_002_Data odata = new CXP_002_Data();
+        CXP_002_diario_Data odata = new CXP_002_diario_Data();
     
-    public List<CXP_002_Info> get_list(int IdEmpresa_Ogiro, int IdTipoCbte_Ogiro, decimal IdCbteCble_Ogiro)
+        public List<CXP_002_diario_Info> get_list(int IdEmpresa_Ogiro, int IdTipoCbte_Ogiro, decimal IdCbteCble_Ogiro)
         {
             try
             {

@@ -22,5 +22,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
+        public ActionResult CXP_002(int IdEmpresa_Ogiro = 0, int IdTipoCbte_Ogiro = 0, decimal IdCbteCble_Ogiro = 0)
+        {
+            CXP_002_Rpt model = new CXP_002_Rpt();
+            model.p_IdEmpresa_Ogiro.Value = IdEmpresa_Ogiro;
+            model.p_IdTipoCbte_Ogiro.Value = IdTipoCbte_Ogiro;
+            model.p_IdCbteCble_Ogiro.Value = IdCbteCble_Ogiro;
+            model.usuario = Session["IdUsuario"].ToString();
+            if (IdTipoCbte_Ogiro == 0)
+                model.RequestParameters = false;
+            return View(model);
+        }
     }
 }

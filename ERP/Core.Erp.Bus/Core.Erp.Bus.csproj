@@ -148,6 +148,7 @@
     <Compile Include="Reportes\ActivoFijo\ACTF_005_Bus.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Bus.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_002_Bus.cs" />
+    <Compile Include="Reportes\CuentasPorPagar\CXP_002_diario_Bus.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Bus.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Bus.cs" />
     <Compile Include="Reportes\RRHH\ROL_001_Bus.cs" />
