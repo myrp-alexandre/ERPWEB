@@ -32,5 +32,29 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
+        public ActionResult CXP_003(int IdEmpresa = 0, int IdTipoCbte = 0, decimal IdCbteCble = 0)
+        {
+            CXP_003_Rpt model = new CXP_003_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdTipoCbte.Value = IdTipoCbte;
+            model.p_IdCbteCble.Value = IdCbteCble;
+            model.usuario = Session["IdUsuario"].ToString();
+            model.empresa = Session["nom_empresa"].ToString();
+            if (IdTipoCbte == 0)
+                model.RequestParameters = false;
+            return View(model);
+        }
+        public ActionResult CXP_004(int IdEmpresa = 0, int IdTipoCbte = 0, decimal IdCbteCble = 0)
+        {
+            CXP_004_Rpt model = new CXP_004_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdTipoCbte.Value = IdTipoCbte;
+            model.p_IdCbteCble.Value = IdCbteCble;
+            model.usuario = Session["IdUsuario"].ToString();
+            model.empresa = Session["nom_empresa"].ToString();
+            if (IdTipoCbte == 0)
+                model.RequestParameters = false;
+            return View(model);
+        }
     }
 }

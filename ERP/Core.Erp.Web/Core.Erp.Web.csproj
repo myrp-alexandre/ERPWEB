@@ -430,6 +430,18 @@
     <Compile Include="Reportes\CuentasPorPagar\CXP_002_Rpt.Designer.cs">
       <DependentUpon>CXP_002_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\CuentasPorPagar\CXP_003_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorPagar\CXP_003_Rpt.Designer.cs">
+      <DependentUpon>CXP_003_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorPagar\CXP_004_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorPagar\CXP_004_Rpt.Designer.cs">
+      <DependentUpon>CXP_004_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Inventario\INV_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -8111,6 +8123,8 @@
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_005.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_006.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_002.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_003.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_004.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
@@ -8247,6 +8261,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorPagar\CXP_002_Rpt.resx">
       <DependentUpon>CXP_002_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorPagar\CXP_003_Rpt.resx">
+      <DependentUpon>CXP_003_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorPagar\CXP_004_Rpt.resx">
+      <DependentUpon>CXP_004_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Inventario\INV_001_Rpt.resx">
       <DependentUpon>INV_001_Rpt.cs</DependentUpon>

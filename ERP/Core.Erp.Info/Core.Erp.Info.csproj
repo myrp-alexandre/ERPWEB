@@ -151,6 +151,8 @@
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Info.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_002_diario_Info.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_002_Info.cs" />
+    <Compile Include="Reportes\CuentasPorPagar\CXP_003_Info.cs" />
+    <Compile Include="Reportes\CuentasPorPagar\CXP_004_Info.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Info.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Info.cs" />
     <Compile Include="Reportes\RRHH\ROL_001_Info.cs" />
