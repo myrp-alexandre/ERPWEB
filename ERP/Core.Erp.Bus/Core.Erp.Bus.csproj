@@ -146,6 +146,8 @@
     <Compile Include="Reportes\ActivoFijo\ACTF_004_detalle_Bus.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_004_resumen_Bus.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_005_Bus.cs" />
+    <Compile Include="Reportes\Caja\CAJ_002_Bus.cs" />
+    <Compile Include="Reportes\Caja\CAJ_002_ingresos_Bus.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Bus.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_002_Bus.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_002_diario_Bus.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="Reportes\CuentasPorPagar\CXP_004_Bus.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Bus.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Bus.cs" />
+    <Compile Include="Reportes\Inventario\INV_007_Bus.cs" />
     <Compile Include="Reportes\RRHH\ROL_001_Bus.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_001_Bus.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_002_Bus.cs" />

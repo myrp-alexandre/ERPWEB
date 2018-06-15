@@ -224,6 +224,76 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCAJ_001' does not have
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCAJ_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VWCAJ_002">
+          <Key>
+            <PropertyRef Name="IdRow" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdEmpresa_OGiro" />
+            <PropertyRef Name="IdTipoCbte_Ogiro" />
+            <PropertyRef Name="IdCbteCble_Ogiro" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="co_FechaFactura" />
+            <PropertyRef Name="co_total" />
+            <PropertyRef Name="valor_retencion" />
+            <PropertyRef Name="valor_a_pagar" />
+            <PropertyRef Name="Valor_a_aplicar" />
+            <PropertyRef Name="Saldo_cont_al_periodo" />
+            <PropertyRef Name="Ingresos" />
+            <PropertyRef Name="Dif_x_pagar_o_cobrar" />
+            <PropertyRef Name="TIPO" />
+          </Key>
+          <Property Name="IdRow" Type="bigint" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdEmpresa_OGiro" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte_Ogiro" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble_Ogiro" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="co_factura" Type="varchar" MaxLength="50" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="co_FechaFactura" Type="datetime" Nullable="false" />
+          <Property Name="co_total" Type="float" Nullable="false" />
+          <Property Name="valor_retencion" Type="float" Nullable="false" />
+          <Property Name="valor_a_pagar" Type="float" Nullable="false" />
+          <Property Name="Valor_a_aplicar" Type="float" Nullable="false" />
+          <Property Name="co_observacion" Type="varchar(max)" />
+          <Property Name="Saldo_cont_al_periodo" Type="float" Nullable="false" />
+          <Property Name="Ingresos" Type="float" Nullable="false" />
+          <Property Name="Total_fact_vale" Type="float" />
+          <Property Name="Dif_x_pagar_o_cobrar" Type="float" Nullable="false" />
+          <Property Name="TIPO" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="Fecha_ini" Type="datetime" />
+          <Property Name="Fecha_fin" Type="datetime" />
+          <Property Name="valor_a_reponer" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCAJ_002_ingresos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VWCAJ_002_ingresos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="IdTipocbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="valor_aplicado" />
+            <PropertyRef Name="cr_Valor" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="cm_fecha" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdTipocbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="valor_disponible" Type="float" />
+          <Property Name="valor_aplicado" Type="float" Nullable="false" />
+          <Property Name="cr_Valor" Type="float" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="cm_observacion" Type="varchar(max)" />
+          <Property Name="cm_fecha" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCONTA_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCONTA_001">
           <Key>
@@ -641,6 +711,53 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWINV_004' does not have
           <Property Name="IdProducto_padre" Type="numeric" Precision="18" Scale="0" />
           <Property Name="pr_descripcion_padre" Type="nvarchar" MaxLength="500" />
           <Property Name="IdBodega" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWINV_007' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VWINV_007">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursalOrigen" />
+            <PropertyRef Name="IdBodegaOrigen" />
+            <PropertyRef Name="IdTransferencia" />
+            <PropertyRef Name="dt_secuencia" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="pr_codigo" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="dt_cantidad" />
+            <PropertyRef Name="IdUnidadMedida" />
+            <PropertyRef Name="nom_unidad_medida" />
+            <PropertyRef Name="nom_sucursal_origen" />
+            <PropertyRef Name="nom_bodega_origen" />
+            <PropertyRef Name="nom_sucursal_destino" />
+            <PropertyRef Name="nom_bodega_destino" />
+            <PropertyRef Name="tr_fecha" />
+            <PropertyRef Name="tr_Observacion" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursalOrigen" Type="int" Nullable="false" />
+          <Property Name="IdBodegaOrigen" Type="int" Nullable="false" />
+          <Property Name="IdTransferencia" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="dt_secuencia" Type="int" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pr_codigo" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="dt_cantidad" Type="float" Nullable="false" />
+          <Property Name="IdUnidadMedida" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="nom_unidad_medida" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="cod_sucursal_origen" Type="varchar" MaxLength="10" />
+          <Property Name="nom_sucursal_origen" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="cod_bodega_origen" Type="varchar" MaxLength="50" />
+          <Property Name="nom_bodega_origen" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="cod_sucursal_destino" Type="varchar" MaxLength="10" />
+          <Property Name="nom_sucursal_destino" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="cod_bodega_destino" Type="varchar" MaxLength="50" />
+          <Property Name="nom_bodega_destino" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="tr_fecha" Type="datetime" Nullable="false" />
+          <Property Name="tr_Observacion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1200,6 +1317,47 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_008' does not have
     [VWCAJ_001].[IdCtaCble] AS [IdCtaCble]
     FROM [web].[VWCAJ_001] AS [VWCAJ_001]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VWCAJ_002" EntityType="Self.VWCAJ_002" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWCAJ_002].[IdRow] AS [IdRow], 
+    [VWCAJ_002].[IdEmpresa] AS [IdEmpresa], 
+    [VWCAJ_002].[IdConciliacion_Caja] AS [IdConciliacion_Caja], 
+    [VWCAJ_002].[Secuencia] AS [Secuencia], 
+    [VWCAJ_002].[IdEmpresa_OGiro] AS [IdEmpresa_OGiro], 
+    [VWCAJ_002].[IdTipoCbte_Ogiro] AS [IdTipoCbte_Ogiro], 
+    [VWCAJ_002].[IdCbteCble_Ogiro] AS [IdCbteCble_Ogiro], 
+    [VWCAJ_002].[co_factura] AS [co_factura], 
+    [VWCAJ_002].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [VWCAJ_002].[co_FechaFactura] AS [co_FechaFactura], 
+    [VWCAJ_002].[co_total] AS [co_total], 
+    [VWCAJ_002].[valor_retencion] AS [valor_retencion], 
+    [VWCAJ_002].[valor_a_pagar] AS [valor_a_pagar], 
+    [VWCAJ_002].[Valor_a_aplicar] AS [Valor_a_aplicar], 
+    [VWCAJ_002].[co_observacion] AS [co_observacion], 
+    [VWCAJ_002].[Saldo_cont_al_periodo] AS [Saldo_cont_al_periodo], 
+    [VWCAJ_002].[Ingresos] AS [Ingresos], 
+    [VWCAJ_002].[Total_fact_vale] AS [Total_fact_vale], 
+    [VWCAJ_002].[Dif_x_pagar_o_cobrar] AS [Dif_x_pagar_o_cobrar], 
+    [VWCAJ_002].[TIPO] AS [TIPO], 
+    [VWCAJ_002].[Fecha_ini] AS [Fecha_ini], 
+    [VWCAJ_002].[Fecha_fin] AS [Fecha_fin], 
+    [VWCAJ_002].[valor_a_reponer] AS [valor_a_reponer]
+    FROM [web].[VWCAJ_002] AS [VWCAJ_002]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VWCAJ_002_ingresos" EntityType="Self.VWCAJ_002_ingresos" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWCAJ_002_ingresos].[IdEmpresa] AS [IdEmpresa], 
+    [VWCAJ_002_ingresos].[IdConciliacion_Caja] AS [IdConciliacion_Caja], 
+    [VWCAJ_002_ingresos].[IdTipocbte] AS [IdTipocbte], 
+    [VWCAJ_002_ingresos].[IdCbteCble] AS [IdCbteCble], 
+    [VWCAJ_002_ingresos].[valor_disponible] AS [valor_disponible], 
+    [VWCAJ_002_ingresos].[valor_aplicado] AS [valor_aplicado], 
+    [VWCAJ_002_ingresos].[cr_Valor] AS [cr_Valor], 
+    [VWCAJ_002_ingresos].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [VWCAJ_002_ingresos].[cm_observacion] AS [cm_observacion], 
+    [VWCAJ_002_ingresos].[cm_fecha] AS [cm_fecha]
+    FROM [web].[VWCAJ_002_ingresos] AS [VWCAJ_002_ingresos]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VWCONTA_001" EntityType="Self.VWCONTA_001" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
     [VWCONTA_001].[IdEmpresa] AS [IdEmpresa], 
@@ -1442,6 +1600,33 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_008' does not have
     [VWINV_004].[pr_descripcion_padre] AS [pr_descripcion_padre], 
     [VWINV_004].[IdBodega] AS [IdBodega]
     FROM [web].[VWINV_004] AS [VWINV_004]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VWINV_007" EntityType="Self.VWINV_007" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWINV_007].[IdEmpresa] AS [IdEmpresa], 
+    [VWINV_007].[IdSucursalOrigen] AS [IdSucursalOrigen], 
+    [VWINV_007].[IdBodegaOrigen] AS [IdBodegaOrigen], 
+    [VWINV_007].[IdTransferencia] AS [IdTransferencia], 
+    [VWINV_007].[dt_secuencia] AS [dt_secuencia], 
+    [VWINV_007].[IdProducto] AS [IdProducto], 
+    [VWINV_007].[pr_codigo] AS [pr_codigo], 
+    [VWINV_007].[pr_descripcion] AS [pr_descripcion], 
+    [VWINV_007].[dt_cantidad] AS [dt_cantidad], 
+    [VWINV_007].[IdUnidadMedida] AS [IdUnidadMedida], 
+    [VWINV_007].[nom_unidad_medida] AS [nom_unidad_medida], 
+    [VWINV_007].[cod_sucursal_origen] AS [cod_sucursal_origen], 
+    [VWINV_007].[nom_sucursal_origen] AS [nom_sucursal_origen], 
+    [VWINV_007].[cod_bodega_origen] AS [cod_bodega_origen], 
+    [VWINV_007].[nom_bodega_origen] AS [nom_bodega_origen], 
+    [VWINV_007].[cod_sucursal_destino] AS [cod_sucursal_destino], 
+    [VWINV_007].[nom_sucursal_destino] AS [nom_sucursal_destino], 
+    [VWINV_007].[cod_bodega_destino] AS [cod_bodega_destino], 
+    [VWINV_007].[nom_bodega_destino] AS [nom_bodega_destino], 
+    [VWINV_007].[tr_fecha] AS [tr_fecha], 
+    [VWINV_007].[tr_Observacion] AS [tr_Observacion], 
+    [VWINV_007].[Estado] AS [Estado], 
+    [VWINV_007].[Codigo] AS [Codigo]
+    FROM [web].[VWINV_007] AS [VWINV_007]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWROL_001" EntityType="Self.VWROL_001" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
@@ -1774,6 +1959,9 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_008' does not have
           <EntitySet Name="VWROL_008" EntityType="Model_reportes.VWROL_008" />
           <EntitySet Name="VWCXP_003" EntityType="Model_reportes.VWCXP_003" />
           <EntitySet Name="VWCXP_004" EntityType="Model_reportes.VWCXP_004" />
+          <EntitySet Name="VWCAJ_002" EntityType="Model_reportes.VWCAJ_002" />
+          <EntitySet Name="VWCAJ_002_ingresos" EntityType="Model_reportes.VWCAJ_002_ingresos" />
+          <EntitySet Name="VWINV_007" EntityType="Model_reportes.VWINV_007" />
         </EntityContainer>
         <EntityType Name="Af_SPACTF_004_detalle">
           <Key>
@@ -2907,6 +3095,117 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_008' does not have
           <Property Name="IdEstadoAprobacion" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="estado_apro" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="VWCAJ_002">
+          <Key>
+            <PropertyRef Name="IdRow" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdEmpresa_OGiro" />
+            <PropertyRef Name="IdTipoCbte_Ogiro" />
+            <PropertyRef Name="IdCbteCble_Ogiro" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="co_FechaFactura" />
+            <PropertyRef Name="co_total" />
+            <PropertyRef Name="valor_retencion" />
+            <PropertyRef Name="valor_a_pagar" />
+            <PropertyRef Name="Valor_a_aplicar" />
+            <PropertyRef Name="Saldo_cont_al_periodo" />
+            <PropertyRef Name="Ingresos" />
+            <PropertyRef Name="Dif_x_pagar_o_cobrar" />
+            <PropertyRef Name="TIPO" />
+          </Key>
+          <Property Name="IdRow" Type="Int64" Nullable="false" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa_OGiro" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte_Ogiro" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble_Ogiro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="co_factura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="co_FechaFactura" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="co_total" Type="Double" Nullable="false" />
+          <Property Name="valor_retencion" Type="Double" Nullable="false" />
+          <Property Name="valor_a_pagar" Type="Double" Nullable="false" />
+          <Property Name="Valor_a_aplicar" Type="Double" Nullable="false" />
+          <Property Name="co_observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Saldo_cont_al_periodo" Type="Double" Nullable="false" />
+          <Property Name="Ingresos" Type="Double" Nullable="false" />
+          <Property Name="Total_fact_vale" Type="Double" />
+          <Property Name="Dif_x_pagar_o_cobrar" Type="Double" Nullable="false" />
+          <Property Name="TIPO" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_ini" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_fin" Type="DateTime" Precision="3" />
+          <Property Name="valor_a_reponer" Type="Double" />
+        </EntityType>
+        <EntityType Name="VWCAJ_002_ingresos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="IdTipocbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="valor_aplicado" />
+            <PropertyRef Name="cr_Valor" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="cm_fecha" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipocbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="valor_disponible" Type="Double" />
+          <Property Name="valor_aplicado" Type="Double" Nullable="false" />
+          <Property Name="cr_Valor" Type="Double" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="cm_observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cm_fecha" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="VWINV_007">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursalOrigen" />
+            <PropertyRef Name="IdBodegaOrigen" />
+            <PropertyRef Name="IdTransferencia" />
+            <PropertyRef Name="dt_secuencia" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="pr_codigo" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="dt_cantidad" />
+            <PropertyRef Name="IdUnidadMedida" />
+            <PropertyRef Name="nom_unidad_medida" />
+            <PropertyRef Name="nom_sucursal_origen" />
+            <PropertyRef Name="nom_bodega_origen" />
+            <PropertyRef Name="nom_sucursal_destino" />
+            <PropertyRef Name="nom_bodega_destino" />
+            <PropertyRef Name="tr_fecha" />
+            <PropertyRef Name="tr_Observacion" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursalOrigen" Type="Int32" Nullable="false" />
+          <Property Name="IdBodegaOrigen" Type="Int32" Nullable="false" />
+          <Property Name="IdTransferencia" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="dt_secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pr_codigo" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="dt_cantidad" Type="Double" Nullable="false" />
+          <Property Name="IdUnidadMedida" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="nom_unidad_medida" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="cod_sucursal_origen" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="nom_sucursal_origen" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="cod_bodega_origen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom_bodega_origen" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="cod_sucursal_destino" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="nom_sucursal_destino" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="cod_bodega_destino" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom_bodega_destino" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="tr_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="tr_Observacion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3692,6 +3991,80 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_008' does not have
                 <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
                 <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
                 <ScalarProperty Name="IdOrdenPago" ColumnName="IdOrdenPago" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWCAJ_002">
+            <EntityTypeMapping TypeName="Model_reportes.VWCAJ_002">
+              <MappingFragment StoreEntitySet="VWCAJ_002">
+                <ScalarProperty Name="valor_a_reponer" ColumnName="valor_a_reponer" />
+                <ScalarProperty Name="Fecha_fin" ColumnName="Fecha_fin" />
+                <ScalarProperty Name="Fecha_ini" ColumnName="Fecha_ini" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="Dif_x_pagar_o_cobrar" ColumnName="Dif_x_pagar_o_cobrar" />
+                <ScalarProperty Name="Total_fact_vale" ColumnName="Total_fact_vale" />
+                <ScalarProperty Name="Ingresos" ColumnName="Ingresos" />
+                <ScalarProperty Name="Saldo_cont_al_periodo" ColumnName="Saldo_cont_al_periodo" />
+                <ScalarProperty Name="co_observacion" ColumnName="co_observacion" />
+                <ScalarProperty Name="Valor_a_aplicar" ColumnName="Valor_a_aplicar" />
+                <ScalarProperty Name="valor_a_pagar" ColumnName="valor_a_pagar" />
+                <ScalarProperty Name="valor_retencion" ColumnName="valor_retencion" />
+                <ScalarProperty Name="co_total" ColumnName="co_total" />
+                <ScalarProperty Name="co_FechaFactura" ColumnName="co_FechaFactura" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="co_factura" ColumnName="co_factura" />
+                <ScalarProperty Name="IdCbteCble_Ogiro" ColumnName="IdCbteCble_Ogiro" />
+                <ScalarProperty Name="IdTipoCbte_Ogiro" ColumnName="IdTipoCbte_Ogiro" />
+                <ScalarProperty Name="IdEmpresa_OGiro" ColumnName="IdEmpresa_OGiro" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdConciliacion_Caja" ColumnName="IdConciliacion_Caja" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdRow" ColumnName="IdRow" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWCAJ_002_ingresos">
+            <EntityTypeMapping TypeName="Model_reportes.VWCAJ_002_ingresos">
+              <MappingFragment StoreEntitySet="VWCAJ_002_ingresos">
+                <ScalarProperty Name="cm_fecha" ColumnName="cm_fecha" />
+                <ScalarProperty Name="cm_observacion" ColumnName="cm_observacion" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="cr_Valor" ColumnName="cr_Valor" />
+                <ScalarProperty Name="valor_aplicado" ColumnName="valor_aplicado" />
+                <ScalarProperty Name="valor_disponible" ColumnName="valor_disponible" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipocbte" ColumnName="IdTipocbte" />
+                <ScalarProperty Name="IdConciliacion_Caja" ColumnName="IdConciliacion_Caja" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWINV_007">
+            <EntityTypeMapping TypeName="Model_reportes.VWINV_007">
+              <MappingFragment StoreEntitySet="VWINV_007">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="tr_Observacion" ColumnName="tr_Observacion" />
+                <ScalarProperty Name="tr_fecha" ColumnName="tr_fecha" />
+                <ScalarProperty Name="nom_bodega_destino" ColumnName="nom_bodega_destino" />
+                <ScalarProperty Name="cod_bodega_destino" ColumnName="cod_bodega_destino" />
+                <ScalarProperty Name="nom_sucursal_destino" ColumnName="nom_sucursal_destino" />
+                <ScalarProperty Name="cod_sucursal_destino" ColumnName="cod_sucursal_destino" />
+                <ScalarProperty Name="nom_bodega_origen" ColumnName="nom_bodega_origen" />
+                <ScalarProperty Name="cod_bodega_origen" ColumnName="cod_bodega_origen" />
+                <ScalarProperty Name="nom_sucursal_origen" ColumnName="nom_sucursal_origen" />
+                <ScalarProperty Name="cod_sucursal_origen" ColumnName="cod_sucursal_origen" />
+                <ScalarProperty Name="nom_unidad_medida" ColumnName="nom_unidad_medida" />
+                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
+                <ScalarProperty Name="dt_cantidad" ColumnName="dt_cantidad" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="pr_codigo" ColumnName="pr_codigo" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="dt_secuencia" ColumnName="dt_secuencia" />
+                <ScalarProperty Name="IdTransferencia" ColumnName="IdTransferencia" />
+                <ScalarProperty Name="IdBodegaOrigen" ColumnName="IdBodegaOrigen" />
+                <ScalarProperty Name="IdSucursalOrigen" ColumnName="IdSucursalOrigen" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

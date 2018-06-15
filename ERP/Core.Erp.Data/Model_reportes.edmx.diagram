@@ -29,6 +29,9 @@
         <EntityTypeShape EntityType="Model_reportes.VWROL_008" Width="1.5" PointX="2.75" PointY="16.75" />
         <EntityTypeShape EntityType="Model_reportes.VWCXP_003" Width="1.5" PointX="8.375" PointY="17.75" />
         <EntityTypeShape EntityType="Model_reportes.VWCXP_004" Width="1.5" PointX="18.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCAJ_002" Width="1.5" PointX="18.375" PointY="7.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCAJ_002_ingresos" Width="1.5" PointX="18.375" PointY="14.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWINV_007" Width="1.5" PointX="18.375" PointY="18.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -395,5 +395,19 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
     
         #endregion
+
+        public ActionResult INV_007(int IdSucursalOrigen = 0, int IdBodegaOrigen = 0, decimal IdTransferencia = 0)
+        {
+            INV_007_Rpt model = new INV_007_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdSucursalOrigen.Value = IdSucursalOrigen;
+            model.p_IdBodegaOrigen.Value = IdBodegaOrigen;
+            model.p_IdTransferencia.Value = IdTransferencia;
+            model.usuario = Session["IdUsuario"].ToString();
+            model.empresa = Session["nom_empresa"].ToString();
+            if (IdTransferencia == 0)
+                model.RequestParameters = false;
+            return View(model);
+        }
     }
 }

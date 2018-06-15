@@ -406,6 +406,18 @@
     <Compile Include="Reportes\Caja\CAJ_001_Rpt.Designer.cs">
       <DependentUpon>CAJ_001_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Caja\CAJ_002_ingresos_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Caja\CAJ_002_ingresos_Rpt.Designer.cs">
+      <DependentUpon>CAJ_002_ingresos_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Caja\CAJ_002_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Caja\CAJ_002_Rpt.Designer.cs">
+      <DependentUpon>CAJ_002_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Contabilidad\CONTA_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -483,6 +495,12 @@
     </Compile>
     <Compile Include="Reportes\Inventario\INV_006_resumen_Rpt.Designer.cs">
       <DependentUpon>INV_006_resumen_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Inventario\INV_007_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Inventario\INV_007_Rpt.Designer.cs">
+      <DependentUpon>INV_007_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\RRHH\ROL_001_Rpt.cs">
       <SubType>Component</SubType>
@@ -8125,6 +8143,8 @@
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_002.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_003.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_004.cshtml" />
+    <Content Include="Areas\Reportes\Views\CajaReportes\CAJ_002.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_007.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
@@ -8250,6 +8270,12 @@
     <EmbeddedResource Include="Reportes\Caja\CAJ_001_Rpt.resx">
       <DependentUpon>CAJ_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Caja\CAJ_002_ingresos_Rpt.resx">
+      <DependentUpon>CAJ_002_ingresos_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Caja\CAJ_002_Rpt.resx">
+      <DependentUpon>CAJ_002_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Contabilidad\CONTA_001_Rpt.resx">
       <DependentUpon>CONTA_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -8288,6 +8314,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Inventario\INV_006_resumen_Rpt.resx">
       <DependentUpon>INV_006_resumen_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Inventario\INV_007_Rpt.resx">
+      <DependentUpon>INV_007_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_001_Rpt.resx">
       <DependentUpon>ROL_001_Rpt.cs</DependentUpon>
