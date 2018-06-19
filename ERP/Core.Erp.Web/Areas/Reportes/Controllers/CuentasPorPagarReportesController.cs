@@ -56,5 +56,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
+        public ActionResult CXP_005(int IdEmpresa = 0,  decimal IdConciliacion = 0)
+        {
+            CXP_005_Rpt model = new CXP_005_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdConciliacion.Value = IdConciliacion;
+            model.usuario = Session["IdUsuario"].ToString();
+            model.empresa = Session["nom_empresa"].ToString();
+            if (IdConciliacion == 0)
+                model.RequestParameters = false;
+            return View(model);
+        }
     }
 }

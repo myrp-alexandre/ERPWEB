@@ -32,6 +32,9 @@
         <EntityTypeShape EntityType="Model_reportes.VWCAJ_002" Width="1.5" PointX="18.375" PointY="7.75" />
         <EntityTypeShape EntityType="Model_reportes.VWCAJ_002_ingresos" Width="1.5" PointX="18.375" PointY="14.75" />
         <EntityTypeShape EntityType="Model_reportes.VWINV_007" Width="1.5" PointX="18.375" PointY="18.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCXP_003_cancelaciones" Width="1.5" PointX="5.375" PointY="19.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCXP_005" Width="1.5" PointX="20.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCXP_005_cancelaciones" Width="1.5" PointX="20.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

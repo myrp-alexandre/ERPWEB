@@ -77,6 +77,7 @@
             this.xrTableCell33 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell34 = new DevExpress.XtraReports.UI.XRTableCell();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
+            this.SubReporte_cancelaciones = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrTable5 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow12 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell48 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -488,9 +489,18 @@
             // ReportFooter
             // 
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.SubReporte_cancelaciones,
             this.xrTable5});
-            this.ReportFooter.HeightF = 20F;
+            this.ReportFooter.HeightF = 52.83335F;
             this.ReportFooter.Name = "ReportFooter";
+            // 
+            // SubReporte_cancelaciones
+            // 
+            this.SubReporte_cancelaciones.LocationFloat = new DevExpress.Utils.PointFloat(0F, 32.83335F);
+            this.SubReporte_cancelaciones.Name = "SubReporte_cancelaciones";
+            this.SubReporte_cancelaciones.ReportSource = new Core.Erp.Web.Reportes.CuentasPorPagar.CXP_003_cancelaciones_Rpt();
+            this.SubReporte_cancelaciones.SizeF = new System.Drawing.SizeF(750F, 20F);
+            this.SubReporte_cancelaciones.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SubReporte_cancelaciones_BeforePrint);
             // 
             // xrTable5
             // 
@@ -641,5 +651,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell9;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell10;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell11;
+        private DevExpress.XtraReports.UI.XRSubreport SubReporte_cancelaciones;
     }
 }
