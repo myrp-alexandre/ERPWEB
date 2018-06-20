@@ -12,11 +12,10 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class VWCXP_002
+    public partial class VWCXP_006
     {
         public int IdEmpresa { get; set; }
         public decimal IdRetencion { get; set; }
-        public string serie { get; set; }
         public string NumRetencion { get; set; }
         public string NAutorizacion { get; set; }
         public System.DateTime fecha { get; set; }
@@ -31,5 +30,9 @@ namespace Core.Erp.Data
         public string re_Codigo_impuesto { get; set; }
         public double re_Porcen_retencion { get; set; }
         public double re_valor_retencion { get; set; }
+        public string NumFactura { get; set; }
+        public double co_baseImponible { get; set; }
+        public double co_valoriva { get; set; }
+        public string pe_nombreCompleto { get; set; }
     }
 }

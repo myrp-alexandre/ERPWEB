@@ -12,7 +12,7 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class VWCXP_005_cancelaciones
+    public partial class VWBAN_001_cancelaciones
     {
         public int IdEmpresa { get; set; }
         public decimal Idcancelacion { get; set; }
@@ -23,7 +23,8 @@ namespace Core.Erp.Data
         public string Referencia { get; set; }
         public string Observacion { get; set; }
         public double MontoAplicado { get; set; }
-        public int IdEmpresa_conciliacion { get; set; }
-        public decimal IdConciliacion { get; set; }
+        public int IdEmpresa_pago { get; set; }
+        public int IdTipoCbte_pago { get; set; }
+        public decimal IdCbteCble_pago { get; set; }
     }
 }
