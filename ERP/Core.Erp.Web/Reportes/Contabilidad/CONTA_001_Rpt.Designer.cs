@@ -475,7 +475,7 @@
             this.xrTableCell11.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.xrTableCell11.Name = "xrTableCell11";
             this.xrTableCell11.StylePriority.UseFont = false;
-            this.xrTableCell11.Text = "Debitos";
+            this.xrTableCell11.Text = "Débitos";
             this.xrTableCell11.Weight = 0.541708053301355D;
             // 
             // xrTableCell13
@@ -483,7 +483,7 @@
             this.xrTableCell13.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.xrTableCell13.Name = "xrTableCell13";
             this.xrTableCell13.StylePriority.UseFont = false;
-            this.xrTableCell13.Text = "Creditos";
+            this.xrTableCell13.Text = "Créditos";
             this.xrTableCell13.Weight = 0.54353233732913531D;
             // 
             // ReportFooter

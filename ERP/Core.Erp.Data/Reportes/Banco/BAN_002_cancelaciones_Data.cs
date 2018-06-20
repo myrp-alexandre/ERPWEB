@@ -22,14 +22,17 @@ namespace Core.Erp.Data.Reportes.Banco
                              && q.mba_IdCbteCble == mba_IdCbteCble
                              select new BAN_002_cancelaciones_Info
                              {
-                                 mcj_IdCbteCble = q.mcj_IdCbteCble,
-                                 mcj_IdEmpresa = q.mcj_IdEmpresa,
-                                 mcj_IdTipocbte = q.mcj_IdTipocbte,
                                  mba_IdTipocbte = q.mba_IdTipocbte,
                                  mba_IdCbteCble = q.mba_IdCbteCble,
                                  mba_IdEmpresa = q.mba_IdEmpresa,
                                  Observacion = q.Observacion,
-                                 Referencia = q.Referencia
+                                 Referencia = q.Referencia,
+                                 dc_TipoDocumento =q.dc_TipoDocumento,
+                                 IdBodega_Cbte = q.IdBodega_Cbte,
+                                 IdCbte_vta_nota = q.IdCbte_vta_nota,
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdSucursal = q.IdSucursal,
+                                 monto = q.monto
                              }).ToList();
                 }
                 return Lista;
