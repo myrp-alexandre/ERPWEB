@@ -71,6 +71,8 @@
             this.xrTableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableRow15 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.xrTableCell36 = new DevExpress.XtraReports.UI.XRTableCell();
             this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
             this.xrTable3 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow10 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -102,8 +104,6 @@
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdTipoCbte = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdCbteCble = new DevExpress.XtraReports.Parameters.Parameter();
-            this.xrTableRow15 = new DevExpress.XtraReports.UI.XRTableRow();
-            this.xrTableCell36 = new DevExpress.XtraReports.UI.XRTableCell();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -474,6 +474,26 @@
             this.xrTableCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell1.Weight = 2D;
             // 
+            // xrTableRow15
+            // 
+            this.xrTableRow15.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+            this.xrTableCell36});
+            this.xrTableRow15.Name = "xrTableRow15";
+            this.xrTableRow15.Weight = 1D;
+            // 
+            // xrTableCell36
+            // 
+            this.xrTableCell36.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([Estado] = \'I\', \'ANULADO\' , \'\' )")});
+            this.xrTableCell36.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell36.ForeColor = System.Drawing.Color.Red;
+            this.xrTableCell36.Name = "xrTableCell36";
+            this.xrTableCell36.StylePriority.UseFont = false;
+            this.xrTableCell36.StylePriority.UseForeColor = false;
+            this.xrTableCell36.StylePriority.UseTextAlignment = false;
+            this.xrTableCell36.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell36.Weight = 2D;
+            // 
             // PageHeader
             // 
             this.PageHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
@@ -563,7 +583,7 @@
             this.xrTableCell22.Name = "xrTableCell22";
             this.xrTableCell22.StylePriority.UseBorders = false;
             this.xrTableCell22.StylePriority.UseFont = false;
-            this.xrTableCell22.Text = "Cuenta";
+            this.xrTableCell22.Text = "Descripción cuenta";
             this.xrTableCell22.Weight = 1.6D;
             // 
             // xrTableCell23
@@ -575,7 +595,7 @@
             this.xrTableCell23.Name = "xrTableCell23";
             this.xrTableCell23.StylePriority.UseBorders = false;
             this.xrTableCell23.StylePriority.UseFont = false;
-            this.xrTableCell23.Text = "Debe";
+            this.xrTableCell23.Text = "Débitos";
             this.xrTableCell23.Weight = 0.8D;
             // 
             // xrTableCell24
@@ -587,7 +607,7 @@
             this.xrTableCell24.Name = "xrTableCell24";
             this.xrTableCell24.StylePriority.UseBorders = false;
             this.xrTableCell24.StylePriority.UseFont = false;
-            this.xrTableCell24.Text = "Haber";
+            this.xrTableCell24.Text = "Créditos";
             this.xrTableCell24.Weight = 0.8D;
             // 
             // ReportFooter
@@ -756,26 +776,6 @@
             // p_IdCbteCble
             // 
             this.p_IdCbteCble.Name = "p_IdCbteCble";
-            // 
-            // xrTableRow15
-            // 
-            this.xrTableRow15.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
-            this.xrTableCell36});
-            this.xrTableRow15.Name = "xrTableRow15";
-            this.xrTableRow15.Weight = 1D;
-            // 
-            // xrTableCell36
-            // 
-            this.xrTableCell36.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([Estado] = \'I\', \'ANULADO\' , \'\' )")});
-            this.xrTableCell36.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold);
-            this.xrTableCell36.ForeColor = System.Drawing.Color.Red;
-            this.xrTableCell36.Name = "xrTableCell36";
-            this.xrTableCell36.StylePriority.UseFont = false;
-            this.xrTableCell36.StylePriority.UseForeColor = false;
-            this.xrTableCell36.StylePriority.UseTextAlignment = false;
-            this.xrTableCell36.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell36.Weight = 2D;
             // 
             // CXP_004_Rpt
             // 

@@ -387,12 +387,14 @@
             // 
             // xrTable3
             // 
+            this.xrTable3.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTable3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrTable3.Name = "xrTable3";
             this.xrTable3.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow7,
             this.xrTableRow6});
             this.xrTable3.SizeF = new System.Drawing.SizeF(751.0001F, 40F);
+            this.xrTable3.StylePriority.UseFont = false;
             this.xrTable3.StylePriority.UseTextAlignment = false;
             this.xrTable3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
@@ -454,26 +456,34 @@
             // 
             // xrTableCell9
             // 
+            this.xrTableCell9.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.xrTableCell9.Name = "xrTableCell9";
+            this.xrTableCell9.StylePriority.UseFont = false;
             this.xrTableCell9.Text = "Código";
             this.xrTableCell9.Weight = 0.75170645483005594D;
             // 
             // xrTableCell10
             // 
+            this.xrTableCell10.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.xrTableCell10.Name = "xrTableCell10";
-            this.xrTableCell10.Text = "Cuenta contable";
+            this.xrTableCell10.StylePriority.UseFont = false;
+            this.xrTableCell10.Text = "Descripción cuenta";
             this.xrTableCell10.Weight = 2.2593693865169153D;
             // 
             // xrTableCell11
             // 
+            this.xrTableCell11.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.xrTableCell11.Name = "xrTableCell11";
-            this.xrTableCell11.Text = "Debe";
+            this.xrTableCell11.StylePriority.UseFont = false;
+            this.xrTableCell11.Text = "Debitos";
             this.xrTableCell11.Weight = 0.541708053301355D;
             // 
             // xrTableCell13
             // 
+            this.xrTableCell13.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.xrTableCell13.Name = "xrTableCell13";
-            this.xrTableCell13.Text = "Haber";
+            this.xrTableCell13.StylePriority.UseFont = false;
+            this.xrTableCell13.Text = "Creditos";
             this.xrTableCell13.Weight = 0.54353233732913531D;
             // 
             // ReportFooter

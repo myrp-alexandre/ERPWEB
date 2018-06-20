@@ -241,7 +241,7 @@
             this.xrTableCell3.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell3.Name = "xrTableCell3";
             this.xrTableCell3.StylePriority.UseFont = false;
-            this.xrTableCell3.Text = "Cedula empleado:";
+            this.xrTableCell3.Text = "Cédula empleado:";
             this.xrTableCell3.Weight = 0.906666814236135D;
             // 
             // xrTableCell4

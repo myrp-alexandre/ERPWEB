@@ -196,19 +196,19 @@
             // xrTableCell2
             // 
             this.xrTableCell2.Name = "xrTableCell2";
-            this.xrTableCell2.Text = "Cuenta";
+            this.xrTableCell2.Text = "Descripción cuenta";
             this.xrTableCell2.Weight = 1.157530413422478D;
             // 
             // xrTableCell3
             // 
             this.xrTableCell3.Name = "xrTableCell3";
-            this.xrTableCell3.Text = "Debe";
+            this.xrTableCell3.Text = "Débitos";
             this.xrTableCell3.Weight = 0.57876522523555762D;
             // 
             // xrTableCell4
             // 
             this.xrTableCell4.Name = "xrTableCell4";
-            this.xrTableCell4.Text = "Haber";
+            this.xrTableCell4.Text = "Créditos";
             this.xrTableCell4.Weight = 0.5787656962358938D;
             // 
             // objectDataSource1

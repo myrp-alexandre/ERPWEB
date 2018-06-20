@@ -286,20 +286,20 @@
             // xrTableCell28
             // 
             this.xrTableCell28.Name = "xrTableCell28";
-            this.xrTableCell28.Text = "Descripción de la cuenta";
+            this.xrTableCell28.Text = "Descripción cuenta";
             this.xrTableCell28.Weight = 3.1999999999999997D;
             // 
             // xrTableCell33
             // 
             this.xrTableCell33.Name = "xrTableCell33";
-            this.xrTableCell33.Text = "Debitos";
+            this.xrTableCell33.Text = "Débitos";
             this.xrTableCell33.Weight = 1.6000000000000005D;
             // 
             // xrTableCell34
             // 
             this.xrTableCell34.Multiline = true;
             this.xrTableCell34.Name = "xrTableCell34";
-            this.xrTableCell34.Text = "Creditos";
+            this.xrTableCell34.Text = "Créditos";
             this.xrTableCell34.Weight = 1.5999999999999996D;
             // 
             // ReportHeader

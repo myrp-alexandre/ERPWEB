@@ -349,7 +349,7 @@
             // xrTableCell1
             // 
             this.xrTableCell1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([DebCre]=\'D\',\'NOTA DE DEBITO\' ,\'NOTA DE CREDITO\' )")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([DebCre]=\'D\',\'NOTA DE DÉBITO\' ,\'NOTA DE CRÉDITO\' )")});
             this.xrTableCell1.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Italic);
             this.xrTableCell1.Name = "xrTableCell1";
             this.xrTableCell1.StylePriority.UseFont = false;
@@ -470,20 +470,20 @@
             // xrTableCell28
             // 
             this.xrTableCell28.Name = "xrTableCell28";
-            this.xrTableCell28.Text = "Descripción de la cuenta";
+            this.xrTableCell28.Text = "Descripción cuenta";
             this.xrTableCell28.Weight = 3.1999999999999997D;
             // 
             // xrTableCell33
             // 
             this.xrTableCell33.Name = "xrTableCell33";
-            this.xrTableCell33.Text = "Debitos";
+            this.xrTableCell33.Text = "Débitos";
             this.xrTableCell33.Weight = 1.6000000000000005D;
             // 
             // xrTableCell34
             // 
             this.xrTableCell34.Multiline = true;
             this.xrTableCell34.Name = "xrTableCell34";
-            this.xrTableCell34.Text = "Creditos";
+            this.xrTableCell34.Text = "Créditos";
             this.xrTableCell34.Weight = 1.5999999999999996D;
             // 
             // ReportFooter
