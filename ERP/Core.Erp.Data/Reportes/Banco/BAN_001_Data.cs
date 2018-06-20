@@ -33,7 +33,12 @@ namespace Core.Erp.Data.Reportes.Banco
                                  Estado = q.Estado,
                                  IdTipoNota = q.IdTipoNota,
                                  Descripcion_TipoNota = q.Descripcion_TipoNota,
-                                 NomBeneficiario = q.NomBeneficiario
+                                 NomBeneficiario = q.NomBeneficiario,
+                                 dc_Valor = q.dc_Valor,
+                                 dc_Valor_Debe =q.dc_Valor_Debe,
+                                 dc_Valor_Haber = q.dc_Valor_Haber,
+                                 IdCtaCble = q.IdCtaCble,
+                                 pc_Cuenta = q.pc_Cuenta
                              }).ToList();
                 }
                 return Lista;

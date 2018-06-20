@@ -20,5 +20,10 @@ namespace Core.Erp.Info.Reportes.Banco
         public Nullable<int> IdTipoNota { get; set; }
         public string Descripcion_TipoNota { get; set; }
         public string NomBeneficiario { get; set; }
+        public string IdCtaCble { get; set; }
+        public string pc_Cuenta { get; set; }
+        public double dc_Valor { get; set; }
+        public double dc_Valor_Debe { get; set; }
+        public Nullable<double> dc_Valor_Haber { get; set; }
     }
 }
