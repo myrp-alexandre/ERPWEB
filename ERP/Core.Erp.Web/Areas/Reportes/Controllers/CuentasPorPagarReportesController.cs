@@ -67,5 +67,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
+        public ActionResult CXP_006(int IdEmpresa = 0, decimal IdRetencion = 0)
+        {
+            CXP_006_Rpt model = new CXP_006_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdRetencion.Value = IdRetencion;
+            model.usuario = Session["IdUsuario"].ToString();
+            model.empresa = Session["nom_empresa"].ToString();
+            if (IdRetencion == 0)
+                model.RequestParameters = false;
+            return View(model);
+        }
     }
 }

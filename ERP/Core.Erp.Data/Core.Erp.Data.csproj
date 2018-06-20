@@ -596,6 +596,8 @@
     <Compile Include="Reportes\ActivoFijo\ACTF_004_detalle_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_004_resumen_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_005_Data.cs" />
+    <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Data.cs" />
+    <Compile Include="Reportes\Banco\BAN_001_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_ingresos_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Data.cs" />
@@ -606,6 +608,8 @@
     <Compile Include="Reportes\CuentasPorPagar\CXP_004_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_005_cancelaciones_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_005_Data.cs" />
+    <Compile Include="Reportes\CuentasPorPagar\CXP_006_Data.cs" />
+    <Compile Include="Reportes\CuentasPorPagar\CXP_006_diario_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_007_Data.cs" />
@@ -959,6 +963,12 @@
     <Compile Include="VWACTF_003.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="VWBAN_001.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWBAN_001_cancelaciones.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="VWCAJ_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
@@ -1002,6 +1012,12 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="VWCXP_005_cancelaciones.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWCXP_006.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWCXP_006_diario.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="vwfa_cliente_consulta.cs">

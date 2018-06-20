@@ -1,0 +1,48 @@
+﻿using Core.Erp.Info.Reportes.Banco;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Core.Erp.Data.Reportes.Banco
+{
+    public class BAN_001_Data
+    {
+        public List<BAN_001_Info> get_list(int IdEmpresa, int IdTipoCbte, decimal IdCbteCble)
+        {
+            try
+            {
+                List<BAN_001_Info> Lista;
+                using (Entities_reportes Context = new Entities_reportes())
+                {
+                    Lista = (from q in Context.VWBAN_001
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdTipocbte == IdTipoCbte
+                             && q.IdCbteCble == IdCbteCble
+                             select new BAN_001_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdTipocbte = q.IdTipocbte,
+                                 IdCbteCble = q.IdCbteCble,
+                                 CodTipoCbteBan = q.CodTipoCbteBan,
+                                 IdBanco = q.IdBanco,
+                                 ba_descripcion = q.ba_descripcion,
+                                 cb_Fecha = q.cb_Fecha,
+                                 cb_Observacion = q.cb_Observacion,
+                                 Estado = q.Estado,
+                                 IdTipoNota = q.IdTipoNota,
+                                 Descripcion_TipoNota = q.Descripcion_TipoNota,
+                                 NomBeneficiario = q.NomBeneficiario
+                             }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+    }
+}
