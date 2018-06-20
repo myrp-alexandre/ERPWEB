@@ -598,6 +598,8 @@
     <Compile Include="Reportes\ActivoFijo\ACTF_005_Data.cs" />
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Data.cs" />
     <Compile Include="Reportes\Banco\BAN_001_Data.cs" />
+    <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Data.cs" />
+    <Compile Include="Reportes\Banco\BAN_002_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_ingresos_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Data.cs" />
@@ -967,6 +969,12 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="VWBAN_001_cancelaciones.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWBAN_002.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWBAN_002_cancelaciones.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="VWCAJ_001.cs">

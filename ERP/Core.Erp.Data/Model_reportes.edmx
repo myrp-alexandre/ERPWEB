@@ -243,6 +243,64 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWBAN_001_cancelaciones'
           <Property Name="IdCbteCble_pago" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWBAN_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VWBAN_002">
+          <Key>
+            <PropertyRef Name="CodTipoCbteBan" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="IdTipocbte" />
+            <PropertyRef Name="IdBanco" />
+            <PropertyRef Name="ba_descripcion" />
+            <PropertyRef Name="cb_Fecha" />
+            <PropertyRef Name="cb_Observacion" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Descripcion_TipoNota" />
+            <PropertyRef Name="NomBeneficiario" />
+            <PropertyRef Name="IdCtaCble" />
+            <PropertyRef Name="pc_Cuenta" />
+            <PropertyRef Name="dc_Valor" />
+            <PropertyRef Name="dc_Valor_Debe" />
+          </Key>
+          <Property Name="CodTipoCbteBan" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdTipocbte" Type="int" Nullable="false" />
+          <Property Name="IdBanco" Type="int" Nullable="false" />
+          <Property Name="ba_descripcion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="cb_Fecha" Type="date" Nullable="false" />
+          <Property Name="cb_Observacion" Type="varchar(max)" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdTipoNota" Type="int" />
+          <Property Name="Descripcion_TipoNota" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NomBeneficiario" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="pc_Cuenta" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="dc_Valor" Type="float" Nullable="false" />
+          <Property Name="dc_Valor_Debe" Type="float" Nullable="false" />
+          <Property Name="dc_Valor_Haber" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWBAN_002_cancelaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VWBAN_002_cancelaciones">
+          <Key>
+            <PropertyRef Name="mcj_IdEmpresa" />
+            <PropertyRef Name="mcj_IdTipocbte" />
+            <PropertyRef Name="mcj_IdCbteCble" />
+            <PropertyRef Name="mba_IdEmpresa" />
+            <PropertyRef Name="mba_IdCbteCble" />
+            <PropertyRef Name="mba_IdTipocbte" />
+          </Key>
+          <Property Name="mcj_IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="mcj_IdTipocbte" Type="int" Nullable="false" />
+          <Property Name="mcj_IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="mba_IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="mba_IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="mba_IdTipocbte" Type="int" Nullable="false" />
+          <Property Name="Referencia" Type="varchar" MaxLength="55" />
+          <Property Name="Observacion" Type="varchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCAJ_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCAJ_001">
           <Key>
@@ -1541,6 +1599,39 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_008' does not have
     [VWBAN_001_cancelaciones].[IdCbteCble_pago] AS [IdCbteCble_pago]
     FROM [web].[VWBAN_001_cancelaciones] AS [VWBAN_001_cancelaciones]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VWBAN_002" EntityType="Self.VWBAN_002" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWBAN_002].[CodTipoCbteBan] AS [CodTipoCbteBan], 
+    [VWBAN_002].[IdEmpresa] AS [IdEmpresa], 
+    [VWBAN_002].[IdCbteCble] AS [IdCbteCble], 
+    [VWBAN_002].[IdTipocbte] AS [IdTipocbte], 
+    [VWBAN_002].[IdBanco] AS [IdBanco], 
+    [VWBAN_002].[ba_descripcion] AS [ba_descripcion], 
+    [VWBAN_002].[cb_Fecha] AS [cb_Fecha], 
+    [VWBAN_002].[cb_Observacion] AS [cb_Observacion], 
+    [VWBAN_002].[Estado] AS [Estado], 
+    [VWBAN_002].[IdTipoNota] AS [IdTipoNota], 
+    [VWBAN_002].[Descripcion_TipoNota] AS [Descripcion_TipoNota], 
+    [VWBAN_002].[NomBeneficiario] AS [NomBeneficiario], 
+    [VWBAN_002].[IdCtaCble] AS [IdCtaCble], 
+    [VWBAN_002].[pc_Cuenta] AS [pc_Cuenta], 
+    [VWBAN_002].[dc_Valor] AS [dc_Valor], 
+    [VWBAN_002].[dc_Valor_Debe] AS [dc_Valor_Debe], 
+    [VWBAN_002].[dc_Valor_Haber] AS [dc_Valor_Haber]
+    FROM [web].[VWBAN_002] AS [VWBAN_002]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VWBAN_002_cancelaciones" EntityType="Self.VWBAN_002_cancelaciones" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWBAN_002_cancelaciones].[mcj_IdEmpresa] AS [mcj_IdEmpresa], 
+    [VWBAN_002_cancelaciones].[mcj_IdTipocbte] AS [mcj_IdTipocbte], 
+    [VWBAN_002_cancelaciones].[mcj_IdCbteCble] AS [mcj_IdCbteCble], 
+    [VWBAN_002_cancelaciones].[mba_IdEmpresa] AS [mba_IdEmpresa], 
+    [VWBAN_002_cancelaciones].[mba_IdCbteCble] AS [mba_IdCbteCble], 
+    [VWBAN_002_cancelaciones].[mba_IdTipocbte] AS [mba_IdTipocbte], 
+    [VWBAN_002_cancelaciones].[Referencia] AS [Referencia], 
+    [VWBAN_002_cancelaciones].[Observacion] AS [Observacion]
+    FROM [web].[VWBAN_002_cancelaciones] AS [VWBAN_002_cancelaciones]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VWCAJ_001" EntityType="Self.VWCAJ_001" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
     [VWCAJ_001].[IdEmpresa] AS [IdEmpresa], 
@@ -2306,6 +2397,8 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_008' does not have
           <EntitySet Name="VWCXP_006" EntityType="Model_reportes.VWCXP_006" />
           <EntitySet Name="VWCXP_006_diario" EntityType="Model_reportes.VWCXP_006_diario" />
           <EntitySet Name="VWBAN_001" EntityType="Model_reportes.VWBAN_001" />
+          <EntitySet Name="VWBAN_002" EntityType="Model_reportes.VWBAN_002" />
+          <EntitySet Name="VWBAN_002_cancelaciones" EntityType="Model_reportes.VWBAN_002_cancelaciones" />
         </EntityContainer>
         <EntityType Name="Af_SPACTF_004_detalle">
           <Key>
@@ -3747,6 +3840,60 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_008' does not have
           <Property Name="dc_Valor_Debe" Type="Double" Nullable="false" />
           <Property Name="dc_Valor_Haber" Type="Double" />
         </EntityType>
+        <EntityType Name="VWBAN_002">
+          <Key>
+            <PropertyRef Name="CodTipoCbteBan" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="IdTipocbte" />
+            <PropertyRef Name="IdBanco" />
+            <PropertyRef Name="ba_descripcion" />
+            <PropertyRef Name="cb_Fecha" />
+            <PropertyRef Name="cb_Observacion" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Descripcion_TipoNota" />
+            <PropertyRef Name="NomBeneficiario" />
+            <PropertyRef Name="IdCtaCble" />
+            <PropertyRef Name="pc_Cuenta" />
+            <PropertyRef Name="dc_Valor" />
+            <PropertyRef Name="dc_Valor_Debe" />
+          </Key>
+          <Property Name="CodTipoCbteBan" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipocbte" Type="Int32" Nullable="false" />
+          <Property Name="IdBanco" Type="Int32" Nullable="false" />
+          <Property Name="ba_descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="cb_Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cb_Observacion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdTipoNota" Type="Int32" />
+          <Property Name="Descripcion_TipoNota" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NomBeneficiario" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pc_Cuenta" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="dc_Valor" Type="Double" Nullable="false" />
+          <Property Name="dc_Valor_Debe" Type="Double" Nullable="false" />
+          <Property Name="dc_Valor_Haber" Type="Double" />
+        </EntityType>
+        <EntityType Name="VWBAN_002_cancelaciones">
+          <Key>
+            <PropertyRef Name="mcj_IdEmpresa" />
+            <PropertyRef Name="mcj_IdTipocbte" />
+            <PropertyRef Name="mcj_IdCbteCble" />
+            <PropertyRef Name="mba_IdEmpresa" />
+            <PropertyRef Name="mba_IdCbteCble" />
+            <PropertyRef Name="mba_IdTipocbte" />
+          </Key>
+          <Property Name="mcj_IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="mcj_IdTipocbte" Type="Int32" Nullable="false" />
+          <Property Name="mcj_IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="mba_IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="mba_IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="mba_IdTipocbte" Type="Int32" Nullable="false" />
+          <Property Name="Referencia" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4747,6 +4894,43 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_008' does not have
                 <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
                 <ScalarProperty Name="CodTipoCbteBan" ColumnName="CodTipoCbteBan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWBAN_002">
+            <EntityTypeMapping TypeName="Model_reportes.VWBAN_002">
+              <MappingFragment StoreEntitySet="VWBAN_002">
+                <ScalarProperty Name="dc_Valor_Haber" ColumnName="dc_Valor_Haber" />
+                <ScalarProperty Name="dc_Valor_Debe" ColumnName="dc_Valor_Debe" />
+                <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
+                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="NomBeneficiario" ColumnName="NomBeneficiario" />
+                <ScalarProperty Name="Descripcion_TipoNota" ColumnName="Descripcion_TipoNota" />
+                <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="cb_Observacion" ColumnName="cb_Observacion" />
+                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
+                <ScalarProperty Name="ba_descripcion" ColumnName="ba_descripcion" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="IdTipocbte" ColumnName="IdTipocbte" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="CodTipoCbteBan" ColumnName="CodTipoCbteBan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWBAN_002_cancelaciones">
+            <EntityTypeMapping TypeName="Model_reportes.VWBAN_002_cancelaciones">
+              <MappingFragment StoreEntitySet="VWBAN_002_cancelaciones">
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="mba_IdTipocbte" ColumnName="mba_IdTipocbte" />
+                <ScalarProperty Name="mba_IdCbteCble" ColumnName="mba_IdCbteCble" />
+                <ScalarProperty Name="mba_IdEmpresa" ColumnName="mba_IdEmpresa" />
+                <ScalarProperty Name="mcj_IdCbteCble" ColumnName="mcj_IdCbteCble" />
+                <ScalarProperty Name="mcj_IdTipocbte" ColumnName="mcj_IdTipocbte" />
+                <ScalarProperty Name="mcj_IdEmpresa" ColumnName="mcj_IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

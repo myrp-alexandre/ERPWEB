@@ -150,6 +150,8 @@
     <Compile Include="Reportes\ActivoFijo\ACTF_005_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_001_Info.cs" />
+    <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Info.cs" />
+    <Compile Include="Reportes\Banco\BAN_002_Info.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_Info.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_ingresos_Info.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Info.cs" />

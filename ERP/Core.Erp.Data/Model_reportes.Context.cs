@@ -61,6 +61,8 @@ namespace Core.Erp.Data
         public virtual DbSet<VWCXP_006> VWCXP_006 { get; set; }
         public virtual DbSet<VWCXP_006_diario> VWCXP_006_diario { get; set; }
         public virtual DbSet<VWBAN_001> VWBAN_001 { get; set; }
+        public virtual DbSet<VWBAN_002> VWBAN_002 { get; set; }
+        public virtual DbSet<VWBAN_002_cancelaciones> VWBAN_002_cancelaciones { get; set; }
     
         public virtual ObjectResult<SPINV_001_Result> SPINV_001(Nullable<int> idEmpresa, Nullable<int> idSucursal_ini, Nullable<int> idSucursal_fin, Nullable<int> idBodega_ini, Nullable<int> idBodega_fin, Nullable<decimal> idProducto_ini, Nullable<decimal> idProducto_fin, string idCategoria, Nullable<int> idLinea, Nullable<int> idGrupo, Nullable<int> idSubGrupo, Nullable<System.DateTime> fecha_corte, Nullable<bool> mostrar_stock_0)
         {

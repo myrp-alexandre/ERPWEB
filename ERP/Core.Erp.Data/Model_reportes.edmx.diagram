@@ -39,6 +39,8 @@
         <EntityTypeShape EntityType="Model_reportes.VWCXP_006" Width="1.5" PointX="14.375" PointY="20.75" />
         <EntityTypeShape EntityType="Model_reportes.VWCXP_006_diario" Width="1.5" PointX="20.375" PointY="19.75" />
         <EntityTypeShape EntityType="Model_reportes.VWBAN_001" Width="1.5" PointX="22.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWBAN_002" Width="1.5" PointX="22.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWBAN_002_cancelaciones" Width="1.5" PointX="10.375" PointY="22.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

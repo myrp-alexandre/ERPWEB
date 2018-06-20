@@ -413,6 +413,18 @@
     <Compile Include="Reportes\Banco\BAN_001_Rpt.Designer.cs">
       <DependentUpon>BAN_001_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Rpt.Designer.cs">
+      <DependentUpon>BAN_002_cancelaciones_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Banco\BAN_002_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Banco\BAN_002_Rpt.Designer.cs">
+      <DependentUpon>BAN_002_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Caja\CAJ_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -8191,6 +8203,7 @@
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_005.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_006.cshtml" />
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_001.cshtml" />
+    <Content Include="Areas\Reportes\Views\BancoReportes\BAN_002.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
@@ -8318,6 +8331,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Banco\BAN_001_Rpt.resx">
       <DependentUpon>BAN_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Banco\BAN_002_cancelaciones_Rpt.resx">
+      <DependentUpon>BAN_002_cancelaciones_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Banco\BAN_002_Rpt.resx">
+      <DependentUpon>BAN_002_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Caja\CAJ_001_Rpt.resx">
       <DependentUpon>CAJ_001_Rpt.cs</DependentUpon>

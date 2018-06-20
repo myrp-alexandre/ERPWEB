@@ -148,6 +148,8 @@
     <Compile Include="Reportes\ActivoFijo\ACTF_005_Bus.cs" />
     <Compile Include="Reportes\Banco\BAN_001_Bus.cs" />
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Bus.cs" />
+    <Compile Include="Reportes\Banco\BAN_002_Bus.cs" />
+    <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Bus.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_Bus.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_ingresos_Bus.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Bus.cs" />
