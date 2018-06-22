@@ -245,6 +245,7 @@
           <Property Name="Nom_region" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="codigo" Type="varchar" MaxLength="10" />
           <Property Name="estado" Type="bit" Nullable="false" />
+          <Property Name="IdPais" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_sis_Documento_Tipo">
           <Key>
@@ -374,8 +375,8 @@
           <Property Name="orden" Type="int" Nullable="false" />
           <Property Name="observacion" Type="varchar" MaxLength="2000" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwtb_pais">
           <Key>
             <PropertyRef Name="Nombre" />
@@ -553,6 +554,18 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' no tien
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tb_region_tb_pais">
+          <End Role="tb_pais" Type="Self.tb_pais" Multiplicity="1" />
+          <End Role="tb_region" Type="Self.tb_region" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_pais">
+              <PropertyRef Name="IdPais" />
+            </Principal>
+            <Dependent Role="tb_region">
+              <PropertyRef Name="IdPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo">
           <End Role="tb_sis_Documento_Tipo" Type="Self.tb_sis_Documento_Tipo" Multiplicity="1" />
           <End Role="tb_sis_Documento_Tipo_Talonario" Type="Self.tb_sis_Documento_Tipo_Talonario" Multiplicity="*" />
@@ -698,6 +711,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' no tien
             <End Role="tb_region" EntitySet="tb_region" />
             <End Role="tb_provincia" EntitySet="tb_provincia" />
           </AssociationSet>
+          <AssociationSet Name="FK_tb_region_tb_pais" Association="Self.FK_tb_region_tb_pais">
+            <End Role="tb_pais" EntitySet="tb_pais" />
+            <End Role="tb_region" EntitySet="tb_region" />
+          </AssociationSet>
           <AssociationSet Name="FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo" Association="Self.FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo">
             <End Role="tb_sis_Documento_Tipo" EntitySet="tb_sis_Documento_Tipo" />
             <End Role="tb_sis_Documento_Tipo_Talonario" EntitySet="tb_sis_Documento_Tipo_Talonario" />
@@ -754,15 +771,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' no tien
         </EntityType>
         <EntityContainer Name="Entities_general" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tb_sucursal" EntityType="Self.tb_sucursal" />
-          <EntitySet Name="tb_region" EntityType="Model_general.tb_region" />
           <EntitySet Name="tb_pais" EntityType="Model_general.tb_pais" />
           <EntitySet Name="tb_provincia" EntityType="Model_general.tb_provincia" />
           <AssociationSet Name="FK_tb_provincia_tb_pais" Association="Model_general.FK_tb_provincia_tb_pais">
             <End Role="tb_pais" EntitySet="tb_pais" />
-            <End Role="tb_provincia" EntitySet="tb_provincia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_provincia_tb_region" Association="Model_general.FK_tb_provincia_tb_region">
-            <End Role="tb_region" EntitySet="tb_region" />
             <End Role="tb_provincia" EntitySet="tb_provincia" />
           </AssociationSet>
           <EntitySet Name="tb_CatalogoTipo" EntityType="Model_general.tb_CatalogoTipo" />
@@ -852,17 +864,16 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' no tien
           </AssociationSet>
           <EntitySet Name="vwtb_pais" EntityType="Model_general.vwtb_pais" />
           <EntitySet Name="tb_persona_tipo" EntityType="Model_general.tb_persona_tipo" />
+          <EntitySet Name="tb_region" EntityType="Model_general.tb_region" />
+          <AssociationSet Name="FK_tb_region_tb_pais" Association="Model_general.FK_tb_region_tb_pais">
+            <End Role="tb_pais" EntitySet="tb_pais" />
+            <End Role="tb_region" EntitySet="tb_region" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_provincia_tb_region" Association="Model_general.FK_tb_provincia_tb_region">
+            <End Role="tb_region" EntitySet="tb_region" />
+            <End Role="tb_provincia" EntitySet="tb_provincia" />
+          </AssociationSet>
           </EntityContainer>
-        <EntityType Name="tb_region">
-          <Key>
-            <PropertyRef Name="Cod_Region" />
-          </Key>
-          <Property Name="Cod_Region" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Nom_region" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="estado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="tb_provincia" Relationship="Model_general.FK_tb_provincia_tb_region" FromRole="tb_region" ToRole="tb_provincia" />
-        </EntityType>
         <EntityType Name="tb_pais">
           <Key>
             <PropertyRef Name="IdPais" />
@@ -882,6 +893,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' no tien
           <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tb_provincia" Relationship="Model_general.FK_tb_provincia_tb_pais" FromRole="tb_pais" ToRole="tb_provincia" />
+          <NavigationProperty Name="tb_region" Relationship="Model_general.FK_tb_region_tb_pais" FromRole="tb_pais" ToRole="tb_region" />
         </EntityType>
         <EntityType Name="tb_provincia">
           <Key>
@@ -903,8 +915,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' no tien
           <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="Cod_Region" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tb_pais" Relationship="Model_general.FK_tb_provincia_tb_pais" FromRole="tb_provincia" ToRole="tb_pais" />
-          <NavigationProperty Name="tb_region" Relationship="Model_general.FK_tb_provincia_tb_region" FromRole="tb_provincia" ToRole="tb_region" />
           <NavigationProperty Name="tb_ciudad" Relationship="Model_general.FK_tb_ciudad_tb_provincia" FromRole="tb_provincia" ToRole="tb_ciudad" />
+          <NavigationProperty Name="tb_region" Relationship="Model_general.FK_tb_provincia_tb_region" FromRole="tb_provincia" ToRole="tb_region" />
         </EntityType>
         <Association Name="FK_tb_provincia_tb_pais">
           <End Type="Model_general.tb_pais" Role="tb_pais" Multiplicity="1" />
@@ -915,18 +927,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' no tien
             </Principal>
             <Dependent Role="tb_provincia">
               <PropertyRef Name="IdPais" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_provincia_tb_region">
-          <End Type="Model_general.tb_region" Role="tb_region" Multiplicity="0..1" />
-          <End Type="Model_general.tb_provincia" Role="tb_provincia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_region">
-              <PropertyRef Name="Cod_Region" />
-            </Principal>
-            <Dependent Role="tb_provincia">
-              <PropertyRef Name="Cod_Region" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1468,6 +1468,42 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' no tien
           <Property Name="IdTipo_Persona" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Descricpion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="tb_region">
+          <Key>
+            <PropertyRef Name="Cod_Region" />
+          </Key>
+          <Property Name="Cod_Region" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Nom_region" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdPais" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_pais" Relationship="Model_general.FK_tb_region_tb_pais" FromRole="tb_region" ToRole="tb_pais" />
+          <NavigationProperty Name="tb_provincia" Relationship="Model_general.FK_tb_provincia_tb_region" FromRole="tb_region" ToRole="tb_provincia" />
+        </EntityType>
+        <Association Name="FK_tb_region_tb_pais">
+          <End Type="Model_general.tb_pais" Role="tb_pais" Multiplicity="1" />
+          <End Type="Model_general.tb_region" Role="tb_region" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_pais">
+              <PropertyRef Name="IdPais" />
+            </Principal>
+            <Dependent Role="tb_region">
+              <PropertyRef Name="IdPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_provincia_tb_region">
+          <End Type="Model_general.tb_region" Role="tb_region" Multiplicity="0..1" />
+          <End Type="Model_general.tb_provincia" Role="tb_provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_region">
+              <PropertyRef Name="Cod_Region" />
+            </Principal>
+            <Dependent Role="tb_provincia">
+              <PropertyRef Name="Cod_Region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1498,16 +1534,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' no tien
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
                 <ScalarProperty Name="Es_establecimiento" ColumnName="Es_establecimiento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_region">
-            <EntityTypeMapping TypeName="Model_general.tb_region">
-              <MappingFragment StoreEntitySet="tb_region">
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="codigo" ColumnName="codigo" />
-                <ScalarProperty Name="Nom_region" ColumnName="Nom_region" />
-                <ScalarProperty Name="Cod_Region" ColumnName="Cod_Region" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1861,6 +1887,17 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' no tien
               <MappingFragment StoreEntitySet="tb_persona_tipo">
                 <ScalarProperty Name="Descricpion" ColumnName="Descricpion" />
                 <ScalarProperty Name="IdTipo_Persona" ColumnName="IdTipo_Persona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_region">
+            <EntityTypeMapping TypeName="Model_general.tb_region">
+              <MappingFragment StoreEntitySet="tb_region">
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="Nom_region" ColumnName="Nom_region" />
+                <ScalarProperty Name="Cod_Region" ColumnName="Cod_Region" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

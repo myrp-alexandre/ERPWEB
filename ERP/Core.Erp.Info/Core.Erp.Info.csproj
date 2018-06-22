@@ -192,6 +192,8 @@
     <Compile Include="Reportes\RRHH\ROL_006_Info.cs" />
     <Compile Include="Reportes\RRHH\ROL_007_Info.cs" />
     <Compile Include="Reportes\RRHH\ROL_008_Info.cs" />
+    <Compile Include="Reportes\RRHH\ROL_009_Info.cs" />
+    <Compile Include="Reportes\RRHH\ROL_010_Info.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Detalle_Info.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Info.cs" />
     <Compile Include="RRHH\ro_area_Info.cs" />

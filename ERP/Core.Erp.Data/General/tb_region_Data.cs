@@ -9,7 +9,7 @@ namespace Core.Erp.Data.General
 {
     public class tb_region_Data
     {
-        public List<tb_region_Info> get_list(bool mostrar_anulados)
+        public List<tb_region_Info> get_list(string IdPais, bool mostrar_anulados)
         {
             try
             {
@@ -19,22 +19,26 @@ namespace Core.Erp.Data.General
                 {
                     if(mostrar_anulados)
                     Lista = (from q in Context.tb_region
+                             where q.IdPais == IdPais
                              select new tb_region_Info
                              {
                                  Cod_Region = q.Cod_Region,
                                  Nom_region = q.Nom_region,
                                  codigo = q.codigo,
-                                 estado = q.estado
+                                 estado = q.estado,
+                                 IdPais = q.IdPais
                              }).ToList();
                     else
                         Lista = (from q in Context.tb_region
-                                 where q.estado == true
+                                 where q.IdPais == IdPais
+                                 && q.estado == true
                                  select new tb_region_Info
                                  {
                                      Cod_Region = q.Cod_Region,
                                      Nom_region = q.Nom_region,
                                      codigo = q.codigo,
-                                     estado = q.estado
+                                     estado = q.estado,
+                                     IdPais = q.IdPais
                                  }).ToList();
 
                 }
@@ -83,7 +87,8 @@ namespace Core.Erp.Data.General
                         Cod_Region = info.Cod_Region = get_id(),
                         Nom_region = info.Nom_region,
                         codigo = info.codigo,
-                        estado = info.estado = true
+                        estado = info.estado = true,
+                        IdPais = info.IdPais
                     };
                     Context.tb_region.Add(Entity);
                     Context.SaveChanges();
@@ -98,7 +103,7 @@ namespace Core.Erp.Data.General
             }
         }
 
-        public tb_region_Info get_info(string CodRegion)
+        public tb_region_Info get_info(string IdPais, string CodRegion)
         {
             try
             {
@@ -114,7 +119,8 @@ namespace Core.Erp.Data.General
                         Cod_Region = Entity.Cod_Region,
                         codigo = Entity.codigo,
                         Nom_region = Entity.Nom_region,
-                        estado = Entity.estado
+                        estado = Entity.estado,
+                         IdPais = Entity.IdPais
                     };
                 }
 

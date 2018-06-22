@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.General
     public class tb_region_Bus
     {
         tb_region_Data odata = new tb_region_Data();
-        public List<tb_region_Info> get_list(bool mostrar_anulados)
+        public List<tb_region_Info> get_list(string IdPais, bool mostrar_anulados)
         {
             try
             {
-                return odata.get_list(mostrar_anulados);
+                return odata.get_list(IdPais, mostrar_anulados);
             }
             catch (Exception)
             {
@@ -24,11 +24,11 @@ namespace Core.Erp.Bus.General
             }
         }
 
-        public tb_region_Info get_info(string CodRegion)
+        public tb_region_Info get_info(string IdPais, string CodRegion)
         {
             try
             {
-                return odata.get_info(CodRegion);
+                return odata.get_info(IdPais, CodRegion);
             }
             catch (Exception)
             {

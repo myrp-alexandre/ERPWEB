@@ -22,10 +22,10 @@ namespace Core.Erp.Web.Areas.General.Controllers
         private void cargar_combos()
         {
             List<tb_pais_Info> lst_pais = bus_pais.get_list(false);
-            List<tb_region_Info> lst_region = bus_region.get_list(false);
+           // List<tb_region_Info> lst_region = bus_region.get_list(false);
 
             ViewBag.lst_paises = lst_pais;
-            ViewBag.lst_regiones = lst_region;
+         //   ViewBag.lst_regiones = lst_region;
         }
 
         public ActionResult Nuevo()
