@@ -26,7 +26,9 @@ namespace Core.Erp.Data.SeguridadAcceso
                                      DescripcionMenu = q.DescripcionMenu,
                                      nivel = q.nivel,
                                      PosicionMenu = q.PosicionMenu,                                     
-                                     Habilitado = q.Habilitado
+                                     Habilitado = q.Habilitado,
+                                     es_desktop = q.es_desktop,
+                                     es_web = q.es_web
                                  }).ToList();
                     else
                         Lista = (from q in Context.seg_Menu
@@ -39,6 +41,8 @@ namespace Core.Erp.Data.SeguridadAcceso
                                      nivel = q.nivel,
                                      PosicionMenu = q.PosicionMenu,
                                      Habilitado = q.Habilitado,
+                                     es_desktop = q.es_desktop,
+                                     es_web = q.es_web
                                  }).ToList();
                 }
 
@@ -129,8 +133,10 @@ namespace Core.Erp.Data.SeguridadAcceso
                         web_nom_Area = Entity.web_nom_Area,
                         web_nom_Controller = Entity.web_nom_Controller,
                         web_nom_Action = Entity.web_nom_Action,
-                        nivel = Entity.nivel
-                    };
+                        nivel = Entity.nivel,
+                        es_desktop = Entity.es_desktop,
+                        es_web = Entity.es_web
+                        };
                 }
 
                 return info;
@@ -183,7 +189,9 @@ namespace Core.Erp.Data.SeguridadAcceso
                         nivel = info.nivel,
                         web_nom_Area = info.web_nom_Area,
                         web_nom_Controller = info.web_nom_Controller == null ? "" : info.web_nom_Controller,
-                        web_nom_Action = info.web_nom_Action
+                        web_nom_Action = info.web_nom_Action,
+                        es_web = info.es_web,
+                        es_desktop = info.es_desktop
                     };
                     Context.seg_Menu.Add(Entity);
                     Context.SaveChanges();
@@ -214,6 +222,8 @@ namespace Core.Erp.Data.SeguridadAcceso
                     Entity.web_nom_Area = info.web_nom_Area;
                     Entity.web_nom_Action = info.web_nom_Action;
                     Entity.nivel = info.nivel;
+                    Entity.es_web = info.es_web;
+                    Entity.es_desktop = info.es_desktop;
                     Context.SaveChanges();
                 }
 

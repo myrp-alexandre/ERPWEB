@@ -28,6 +28,8 @@ namespace Core.Erp.Info.SeguridadAcceso
         public string web_nom_Controller { get; set; }
         [StringLength(300, MinimumLength = 0, ErrorMessage = "El campo acción debe tener mínimo 0 caracter y máximo 300")]
         public string web_nom_Action { get; set; }
+        public bool es_web { get; set; }
+        public bool es_desktop { get; set; }
 
         //Campos que no existen en la base
         public string DescripcionMenu_combo { get; set; }
