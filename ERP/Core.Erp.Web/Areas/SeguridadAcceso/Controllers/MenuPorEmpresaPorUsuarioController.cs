@@ -1,6 +1,7 @@
 ﻿using Core.Erp.Bus.General;
 using Core.Erp.Bus.SeguridadAcceso;
 using Core.Erp.Info.SeguridadAcceso;
+using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
 {
     public class MenuPorEmpresaPorUsuarioController : Controller
     {
-        seg_Menu_x_Empresa_x_Usuario_Bus bus_menu_x_empresa_x_usuario = new seg_Menu_x_Empresa_x_Usuario_Bus();
+        static seg_Menu_x_Empresa_x_Usuario_Bus bus_menu_x_empresa_x_usuario = new seg_Menu_x_Empresa_x_Usuario_Bus();
         public ActionResult Index()
         {
             seg_Menu_x_Empresa_x_Usuario_Info model = new seg_Menu_x_Empresa_x_Usuario_Info();
@@ -23,6 +24,19 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
         {
             cargar_combos();
             return View(model);
+        }
+
+        public static void CreateTreeViewNodesRecursive(List<seg_Menu_x_Empresa_x_Usuario_Info> model, MVCxTreeViewNodeCollection nodesCollection, Int32 parentID, int IdEmpresa = 0, string IdUsuario = "")
+        {
+            var rows = bus_menu_x_empresa_x_usuario.get_list(IdEmpresa, IdUsuario, parentID);
+
+            foreach (seg_Menu_x_Empresa_x_Usuario_Info row in rows)
+            {
+                var url = string.IsNullOrEmpty(row.info_menu.web_nom_Controller) ? null :
+                    ("~/" + row.info_menu.web_nom_Area + "/" + row.info_menu.web_nom_Controller + "/" + row.info_menu.web_nom_Action + "/");
+                MVCxTreeViewNode node = nodesCollection.Add(row.info_menu.DescripcionMenu, row.IdMenu.ToString(), null, url);
+                CreateTreeViewNodesRecursive(model, node.Nodes, row.IdMenu,IdEmpresa,IdUsuario);
+            }
         }
 
         private void cargar_combos()

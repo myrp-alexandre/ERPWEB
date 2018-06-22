@@ -27,8 +27,8 @@ namespace Core.Erp.Data
     
         public virtual DbSet<seg_usuario> seg_usuario { get; set; }
         public virtual DbSet<seg_Usuario_x_Empresa> seg_Usuario_x_Empresa { get; set; }
-        public virtual DbSet<seg_Menu> seg_Menu { get; set; }
         public virtual DbSet<seg_Menu_x_Empresa> seg_Menu_x_Empresa { get; set; }
         public virtual DbSet<seg_Menu_x_Empresa_x_Usuario> seg_Menu_x_Empresa_x_Usuario { get; set; }
+        public virtual DbSet<seg_Menu> seg_Menu { get; set; }
     }
 }

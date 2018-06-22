@@ -25,6 +25,19 @@ namespace Core.Erp.Bus.SeguridadAcceso
             }
         }
 
+        public List<seg_Menu_x_Empresa_x_Usuario_Info> get_list(int IdEmpresa, string IdUsuario, int IdMenuPadre)
+        {
+            try
+            {
+                return odata.get_list(IdEmpresa, IdUsuario, IdMenuPadre);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool eliminarDB(int IdEmpresa, string IdUsuario)
         {
             try

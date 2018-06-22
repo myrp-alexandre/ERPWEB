@@ -21,6 +21,8 @@
           <Property Name="web_nom_Area" Type="varchar" MaxLength="200" />
           <Property Name="web_nom_Controller" Type="varchar" MaxLength="200" />
           <Property Name="web_nom_Action" Type="varchar" MaxLength="300" />
+          <Property Name="es_web" Type="bit" Nullable="false" />
+          <Property Name="es_desktop" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="seg_Menu_x_Empresa">
           <Key>
@@ -136,16 +138,16 @@
             <End Role="seg_usuario" EntitySet="seg_usuario" />
             <End Role="seg_Usuario_x_Empresa" EntitySet="seg_Usuario_x_Empresa" />
           </AssociationSet>
-          <EntitySet Name="seg_Menu" EntityType="Model_seguridad_acceso.seg_Menu" />
           <EntitySet Name="seg_Menu_x_Empresa" EntityType="Model_seguridad_acceso.seg_Menu_x_Empresa" />
           <EntitySet Name="seg_Menu_x_Empresa_x_Usuario" EntityType="Model_seguridad_acceso.seg_Menu_x_Empresa_x_Usuario" />
-          <AssociationSet Name="FK_seg_Menu_x_Empresa_seg_Menu" Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_seg_Menu">
-            <End Role="seg_Menu" EntitySet="seg_Menu" />
-            <End Role="seg_Menu_x_Empresa" EntitySet="seg_Menu_x_Empresa" />
-          </AssociationSet>
           <AssociationSet Name="FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario">
             <End Role="seg_usuario" EntitySet="seg_usuario" />
             <End Role="seg_Menu_x_Empresa_x_Usuario" EntitySet="seg_Menu_x_Empresa_x_Usuario" />
+          </AssociationSet>
+          <EntitySet Name="seg_Menu" EntityType="Model_seguridad_acceso.seg_Menu" />
+          <AssociationSet Name="FK_seg_Menu_x_Empresa_seg_Menu" Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_seg_Menu">
+            <End Role="seg_Menu" EntitySet="seg_Menu" />
+            <End Role="seg_Menu_x_Empresa" EntitySet="seg_Menu_x_Empresa" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="seg_usuario">
@@ -189,24 +191,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="seg_Menu">
-          <Key>
-            <PropertyRef Name="IdMenu" />
-          </Key>
-          <Property Name="IdMenu" Type="Int32" Nullable="false" />
-          <Property Name="IdMenuPadre" Type="Int32" />
-          <Property Name="DescripcionMenu" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="PosicionMenu" Type="Int32" Nullable="false" />
-          <Property Name="Habilitado" Type="Boolean" Nullable="false" />
-          <Property Name="Tiene_FormularioAsociado" Type="Boolean" Nullable="false" />
-          <Property Name="nom_Formulario" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="nom_Asembly" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="nivel" Type="Int32" />
-          <Property Name="web_nom_Area" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="web_nom_Controller" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="web_nom_Action" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="seg_Menu_x_Empresa" Relationship="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_seg_Menu" FromRole="seg_Menu" ToRole="seg_Menu_x_Empresa" />
-        </EntityType>
         <EntityType Name="seg_Menu_x_Empresa">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -231,18 +215,6 @@
           <Property Name="Eliminacion" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="seg_usuario" Relationship="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" FromRole="seg_Menu_x_Empresa_x_Usuario" ToRole="seg_usuario" />
         </EntityType>
-        <Association Name="FK_seg_Menu_x_Empresa_seg_Menu">
-          <End Type="Model_seguridad_acceso.seg_Menu" Role="seg_Menu" Multiplicity="1" />
-          <End Type="Model_seguridad_acceso.seg_Menu_x_Empresa" Role="seg_Menu_x_Empresa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="seg_Menu">
-              <PropertyRef Name="IdMenu" />
-            </Principal>
-            <Dependent Role="seg_Menu_x_Empresa">
-              <PropertyRef Name="IdMenu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario">
           <End Type="Model_seguridad_acceso.seg_usuario" Role="seg_usuario" Multiplicity="1" />
           <End Type="Model_seguridad_acceso.seg_Menu_x_Empresa_x_Usuario" Role="seg_Menu_x_Empresa_x_Usuario" Multiplicity="*" />
@@ -252,6 +224,38 @@
             </Principal>
             <Dependent Role="seg_Menu_x_Empresa_x_Usuario">
               <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="seg_Menu">
+          <Key>
+            <PropertyRef Name="IdMenu" />
+          </Key>
+          <Property Name="IdMenu" Type="Int32" Nullable="false" />
+          <Property Name="IdMenuPadre" Type="Int32" />
+          <Property Name="DescripcionMenu" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PosicionMenu" Type="Int32" Nullable="false" />
+          <Property Name="Habilitado" Type="Boolean" Nullable="false" />
+          <Property Name="Tiene_FormularioAsociado" Type="Boolean" Nullable="false" />
+          <Property Name="nom_Formulario" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="nom_Asembly" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="nivel" Type="Int32" />
+          <Property Name="web_nom_Area" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="web_nom_Controller" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="web_nom_Action" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="es_web" Type="Boolean" Nullable="false" />
+          <Property Name="es_desktop" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="seg_Menu_x_Empresa" Relationship="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_seg_Menu" FromRole="seg_Menu" ToRole="seg_Menu_x_Empresa" />
+        </EntityType>
+        <Association Name="FK_seg_Menu_x_Empresa_seg_Menu">
+          <End Type="Model_seguridad_acceso.seg_Menu" Role="seg_Menu" Multiplicity="1" />
+          <End Type="Model_seguridad_acceso.seg_Menu_x_Empresa" Role="seg_Menu_x_Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seg_Menu">
+              <PropertyRef Name="IdMenu" />
+            </Principal>
+            <Dependent Role="seg_Menu_x_Empresa">
+              <PropertyRef Name="IdMenu" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -288,24 +292,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="seg_Menu">
-            <EntityTypeMapping TypeName="Model_seguridad_acceso.seg_Menu">
-              <MappingFragment StoreEntitySet="seg_Menu">
-                <ScalarProperty Name="web_nom_Action" ColumnName="web_nom_Action" />
-                <ScalarProperty Name="web_nom_Controller" ColumnName="web_nom_Controller" />
-                <ScalarProperty Name="web_nom_Area" ColumnName="web_nom_Area" />
-                <ScalarProperty Name="nivel" ColumnName="nivel" />
-                <ScalarProperty Name="nom_Asembly" ColumnName="nom_Asembly" />
-                <ScalarProperty Name="nom_Formulario" ColumnName="nom_Formulario" />
-                <ScalarProperty Name="Tiene_FormularioAsociado" ColumnName="Tiene_FormularioAsociado" />
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-                <ScalarProperty Name="PosicionMenu" ColumnName="PosicionMenu" />
-                <ScalarProperty Name="DescripcionMenu" ColumnName="DescripcionMenu" />
-                <ScalarProperty Name="IdMenuPadre" ColumnName="IdMenuPadre" />
-                <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="seg_Menu_x_Empresa">
             <EntityTypeMapping TypeName="Model_seguridad_acceso.seg_Menu_x_Empresa">
               <MappingFragment StoreEntitySet="seg_Menu_x_Empresa">
@@ -324,6 +310,26 @@
                 <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="seg_Menu">
+            <EntityTypeMapping TypeName="Model_seguridad_acceso.seg_Menu">
+              <MappingFragment StoreEntitySet="seg_Menu">
+                <ScalarProperty Name="es_desktop" ColumnName="es_desktop" />
+                <ScalarProperty Name="es_web" ColumnName="es_web" />
+                <ScalarProperty Name="web_nom_Action" ColumnName="web_nom_Action" />
+                <ScalarProperty Name="web_nom_Controller" ColumnName="web_nom_Controller" />
+                <ScalarProperty Name="web_nom_Area" ColumnName="web_nom_Area" />
+                <ScalarProperty Name="nivel" ColumnName="nivel" />
+                <ScalarProperty Name="nom_Asembly" ColumnName="nom_Asembly" />
+                <ScalarProperty Name="nom_Formulario" ColumnName="nom_Formulario" />
+                <ScalarProperty Name="Tiene_FormularioAsociado" ColumnName="Tiene_FormularioAsociado" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="PosicionMenu" ColumnName="PosicionMenu" />
+                <ScalarProperty Name="DescripcionMenu" ColumnName="DescripcionMenu" />
+                <ScalarProperty Name="IdMenuPadre" ColumnName="IdMenuPadre" />
+                <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

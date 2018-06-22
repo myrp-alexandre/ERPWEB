@@ -71,7 +71,53 @@ namespace Core.Erp.Data.SeguridadAcceso
 
                 throw;
             }
-        } 
+        }
+
+        public List<seg_Menu_x_Empresa_x_Usuario_Info> get_list(int IdEmpresa, string IdUsuario, int IdMenuPadre)
+        {
+            try
+            {
+                List<seg_Menu_x_Empresa_x_Usuario_Info> Lista;
+
+                using (Entities_seguridad_acceso Context = new Entities_seguridad_acceso())
+                {
+                    Lista = (from m in Context.seg_Menu
+                             join me in Context.seg_Menu_x_Empresa
+                             on m.IdMenu equals me.IdMenu
+                             join meu in Context.seg_Menu_x_Empresa_x_Usuario
+                             on new { me.IdEmpresa, me.IdMenu } equals new { meu.IdEmpresa, meu.IdMenu }
+                             where m.Habilitado == true && meu.IdEmpresa == IdEmpresa
+                             && meu.IdUsuario == IdUsuario && m.IdMenuPadre == IdMenuPadre
+                             select new seg_Menu_x_Empresa_x_Usuario_Info
+                             {
+                                 seleccionado = true,
+                                 IdEmpresa = meu.IdEmpresa,
+                                 IdUsuario = meu.IdUsuario,
+                                 IdMenu = meu.IdMenu,
+                                 Lectura = meu.Lectura,
+                                 Escritura = meu.Escritura,
+                                 Eliminacion = meu.Eliminacion,
+                                 info_menu = new seg_Menu_Info
+                                 {
+                                     IdMenu = m.IdMenu,
+                                     DescripcionMenu = m.DescripcionMenu,
+                                     IdMenuPadre = m.IdMenuPadre,
+                                     PosicionMenu = m.PosicionMenu,
+                                     web_nom_Action = m.web_nom_Action,
+                                     web_nom_Area = m.web_nom_Area,
+                                     web_nom_Controller = m.web_nom_Controller
+                                 }
+                             }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public bool eliminarDB(int IdEmpresa, string IdUsuario)
         {

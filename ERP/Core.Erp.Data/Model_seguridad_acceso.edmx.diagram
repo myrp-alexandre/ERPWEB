@@ -8,11 +8,11 @@
         <EntityTypeShape EntityType="Model_seguridad_acceso.seg_usuario" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Usuario_x_Empresa" Width="1.5" PointX="3" PointY="1.625" />
         <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Usuario_x_Empresa_seg_usuario" />
-        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu" Width="1.5" PointX="3.375" PointY="4.75" />
         <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu_x_Empresa" Width="1.5" PointX="5.625" PointY="5.625" />
         <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu_x_Empresa_x_Usuario" Width="1.5" PointX="3" PointY="9.375" />
-        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_seg_Menu" />
         <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" />
+        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu" Width="1.5" PointX="3.375" PointY="4.625" />
+        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_seg_Menu" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -32,6 +32,8 @@ namespace Core.Erp.Data
         public string web_nom_Area { get; set; }
         public string web_nom_Controller { get; set; }
         public string web_nom_Action { get; set; }
+        public bool es_web { get; set; }
+        public bool es_desktop { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<seg_Menu_x_Empresa> seg_Menu_x_Empresa { get; set; }

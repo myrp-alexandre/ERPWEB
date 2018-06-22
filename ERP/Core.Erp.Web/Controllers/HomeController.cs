@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Core.Erp.Info.SeguridadAcceso;
+using DevExpress.Web.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,8 +12,8 @@ namespace Core.Erp.Web.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
+            return View();            
+        }       
 
         public ActionResult About()
         {
