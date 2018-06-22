@@ -343,6 +343,32 @@
     $("#pe_cedulaRuc").change(function () {
         get_info_x_num_cedula();
     });
+
+
+    $("#pe_cedulaRuc").keyup(function () {
+        var tipo_doc = $("#IdTipoDocumento").val();
+        var cedula = $("#pe_cedulaRuc").val();
+
+        if (tipo_doc == "RUC") {
+            if (cedula.length > 13) {
+                var len = $("#pe_cedulaRuc").val();
+                len = len.substring(0, 13);
+                $("#pe_cedulaRuc").val(len);
+            }
+
+        }
+        else
+            if (tipo_doc == "CED") {
+                if (cedula.length > 10) {
+                    var len = $("#pe_cedulaRuc").val();
+                    len = len.substring(0, 10);
+                    $("#pe_cedulaRuc").val(len);
+                }
+            }
+    });
+
+
+
     $("#pe_nombreCompleto").change(function () {
         agregar_contacto();
     });

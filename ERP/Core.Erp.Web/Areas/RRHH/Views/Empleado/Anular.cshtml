@@ -182,16 +182,45 @@
 }
 
 <script>
+    $(function () {
 
 
+        $('#fechaingreso').datepicker({
+            autoclose: true
+        });
+        $('#fechasalida').datepicker({
+            autoclose: true
+        });
 
-    function show(input) {
-        if (input.files && input.files[0]) {
-            var filerdr = new FileReader();
-            filerdr.onload = function (e) {
-                $('#user_img').attr('src', e.target.result);
+        $('#pe_fechaNacimiento').datepicker({
+            autoclose: true
+        });
+    });
+
+    $("#pe_cedulaRuc").keyup(function () {
+        validar();
+    });
+    function  validar() {
+        var tipo_doc = $("#IdTipoDocumento").val();
+        var cedula = $("#pe_cedulaRuc").val();
+
+        if (tipo_doc == "RUC") {
+            if (cedula.length > 13) {
+                var len = $("#pe_cedulaRuc").val();
+                len = len.substring(0, 13);
+                $("#pe_cedulaRuc").val(len);
             }
-            filerdr.readAsDataURL(input.files[0]);
+
         }
+        else
+            if (tipo_doc == "CED") {
+                if (cedula.length > 10) {
+                    var len = $("#pe_cedulaRuc").val();
+                    len = len.substring(0,10);
+                    $("#pe_cedulaRuc").val(len);
+                }
+            }
     }
+
+
 </script>

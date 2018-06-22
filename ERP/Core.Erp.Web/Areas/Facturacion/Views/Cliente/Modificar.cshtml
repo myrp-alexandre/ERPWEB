@@ -342,6 +342,29 @@
         get_info_termino_pago();
     });
 
+    $("#pe_cedulaRuc").keyup(function () {
+        var tipo_doc = $("#IdTipoDocumento").val();
+        var cedula = $("#pe_cedulaRuc").val();
+
+        if (tipo_doc == "RUC") {
+            if (cedula.length > 13) {
+                var len = $("#pe_cedulaRuc").val();
+                len = len.substring(0, 13);
+                $("#pe_cedulaRuc").val(len);
+            }
+
+        }
+        else
+            if (tipo_doc == "CED") {
+                if (cedula.length > 10) {
+                    var len = $("#pe_cedulaRuc").val();
+                    len = len.substring(0, 10);
+                    $("#pe_cedulaRuc").val(len);
+                }
+            }
+    });
+
+
     function actualizar_nombre_completo() {
         var apellido = $("#pe_apellido").val();
         var nombre = $("#pe_nombre").val();

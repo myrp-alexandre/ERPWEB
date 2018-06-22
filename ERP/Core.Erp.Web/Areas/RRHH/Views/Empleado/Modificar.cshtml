@@ -630,26 +630,45 @@
 
 
 <script>
-
     $(function () {
+
 
         $('#fechaingreso').datepicker({
             autoclose: true
-        })
-    })
-
-    $(function () {
-
+        });
         $('#fechasalida').datepicker({
             autoclose: true
-        })
-    })
-    $(function () {
+        });
 
         $('#pe_fechaNacimiento').datepicker({
             autoclose: true
-        })
-    })
+        });
+    });
+
+    $("#pe_cedulaRuc").keyup(function () {
+        validar();
+    });
+    function  validar() {
+        var tipo_doc = $("#IdTipoDocumento").val();
+        var cedula = $("#pe_cedulaRuc").val();
+
+        if (tipo_doc == "RUC") {
+            if (cedula.length > 13) {
+                var len = $("#pe_cedulaRuc").val();
+                len = len.substring(0, 13);
+                $("#pe_cedulaRuc").val(len);
+            }
+
+        }
+        else
+            if (tipo_doc == "CED") {
+                if (cedula.length > 10) {
+                    var len = $("#pe_cedulaRuc").val();
+                    len = len.substring(0,10);
+                    $("#pe_cedulaRuc").val(len);
+                }
+            }
+    }
 
 
 </script>
