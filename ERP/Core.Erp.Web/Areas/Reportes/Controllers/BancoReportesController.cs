@@ -33,5 +33,17 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
+        public ActionResult BAN_003(int IdEmpresa = 0, int IdTipocbte = 0, decimal IdCbteCble = 0)
+        {
+            BAN_003_Rpt model = new BAN_003_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdTipocbte.Value = IdTipocbte;
+            model.p_IdCbteCble.Value = IdCbteCble;
+            model.usuario = Session["IdUsuario"].ToString();
+            model.empresa = Session["nom_empresa"].ToString();
+            if (IdTipocbte == 0)
+                model.RequestParameters = false;
+            return View(model);
+        }
     }
 }

@@ -426,6 +426,12 @@
     <Compile Include="Reportes\Banco\BAN_002_Rpt.Designer.cs">
       <DependentUpon>BAN_002_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Banco\BAN_003_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Banco\BAN_003_Rpt.Designer.cs">
+      <DependentUpon>BAN_003_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Caja\CAJ_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -8205,6 +8211,7 @@
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_006.cshtml" />
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_001.cshtml" />
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_002.cshtml" />
+    <Content Include="Areas\Reportes\Views\BancoReportes\BAN_003.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
@@ -8339,6 +8346,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Banco\BAN_002_Rpt.resx">
       <DependentUpon>BAN_002_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Banco\BAN_003_Rpt.resx">
+      <DependentUpon>BAN_003_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Caja\CAJ_001_Rpt.resx">
       <DependentUpon>CAJ_001_Rpt.cs</DependentUpon>

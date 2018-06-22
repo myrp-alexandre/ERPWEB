@@ -274,14 +274,14 @@
             // xrTableCell33
             // 
             this.xrTableCell33.Name = "xrTableCell33";
-            this.xrTableCell33.Text = "Debitos";
+            this.xrTableCell33.Text = "Débitos";
             this.xrTableCell33.Weight = 1.6000000000000005D;
             // 
             // xrTableCell34
             // 
             this.xrTableCell34.Multiline = true;
             this.xrTableCell34.Name = "xrTableCell34";
-            this.xrTableCell34.Text = "Creditos";
+            this.xrTableCell34.Text = "Créditos";
             this.xrTableCell34.Weight = 1.5999999999999996D;
             // 
             // ReportHeader
@@ -424,7 +424,7 @@
             this.xrTableCell1.Name = "xrTableCell1";
             this.xrTableCell1.StylePriority.UseFont = false;
             this.xrTableCell1.StylePriority.UseTextAlignment = false;
-            this.xrTableCell1.Text = "DEBITO BANCARIO";
+            this.xrTableCell1.Text = "DÉBITO BANCARIO";
             this.xrTableCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell1.Weight = 2D;
             // 
