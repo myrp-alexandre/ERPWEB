@@ -9,14 +9,14 @@ namespace Core.Erp.Data.Reportes.Banco
 {
     public class BAN_004_Data
     {
-        public List<BAN_004_Info> get_list(int IdEmpresa, int Idbanco, decimal IdConciliacion)
+        public List<BAN_004_Info> get_list(int IdEmpresa, int IdBanco, decimal IdConciliacion)
         {
             try
             {
                 List<BAN_004_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
-                    Lista = (from q in Context.SPBAN_004(IdEmpresa, Idbanco, IdConciliacion)
+                    Lista = (from q in Context.SPBAN_004(IdEmpresa, IdBanco, IdConciliacion)
                              select new BAN_004_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

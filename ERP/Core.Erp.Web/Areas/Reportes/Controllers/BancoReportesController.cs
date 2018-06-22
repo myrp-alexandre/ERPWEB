@@ -45,5 +45,17 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
+        public ActionResult BAN_004(int IdEmpresa = 0, int IdBanco = 0, decimal IdConciliacion = 0)
+        {
+            BAN_004_Rpt model = new BAN_004_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdBanco.Value = IdBanco;
+            model.p_IdConciliacion.Value = IdConciliacion;
+            model.usuario = Session["IdUsuario"].ToString();
+            model.empresa = Session["nom_empresa"].ToString();
+            if (IdBanco == 0)
+                model.RequestParameters = false;
+            return View(model);
+        }
     }
 }

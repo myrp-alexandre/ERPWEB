@@ -12,11 +12,11 @@ namespace Core.Erp.Bus.Reportes.Banco
     {
         BAN_004_Data odata = new BAN_004_Data();
     
-        public List<BAN_004_Info> get_list(int IdEmpresa, int Idbanco, decimal IdConciliacion)
+        public List<BAN_004_Info> get_list(int IdEmpresa, int IdBanco, decimal IdConciliacion)
         {
             try
             {
-                return odata.get_list(IdEmpresa, Idbanco, IdConciliacion);
+                return odata.get_list(IdEmpresa, IdBanco, IdConciliacion);
             }
             catch (Exception)
             {
