@@ -18,34 +18,12 @@
             t.Items.Add(TreeListToolbarCommand.ExportToDocx);
             t.Items.Add(TreeListToolbarCommand.ExportToRtf);
         });
-        settings.SettingsText.ToolbarNew = "Nuevo";
+        
         settings.Columns.Add(
     column =>
     {
         column.FieldName = "DescripcionMenu";
         column.Caption = "Descripción";
-    }
-);
-        settings.Columns.Add(
-    column =>
-    {
-        column.FieldName = "PosicionMenu";
-        column.Caption = "Posición";
-    }
-);
-        settings.Columns.Add(
-    column =>
-    {
-        column.FieldName = "Habilitado";
-        column.Caption = "Estado";
-        column.ColumnType = MVCxTreeListColumnType.CheckBox;
-    }
-);
-        settings.Columns.Add(
-    column =>
-    {
-        column.FieldName = "IdMenu";
-        column.Caption = "ID";
     }
 );
 
@@ -65,6 +43,48 @@
             });
             c.Width = Unit.Pixel(150);
         });
+
+        settings.Columns.Add(
+    column =>
+    {
+        column.FieldName = "PosicionMenu";
+        column.Caption = "Posición";
+    }
+
+);
+        settings.Columns.Add(
+    column =>
+    {
+        column.FieldName = "Habilitado";
+        column.Caption = "Estado";
+        column.ColumnType = MVCxTreeListColumnType.CheckBox;
+    }
+);
+
+        settings.Columns.Add(
+column =>
+{
+    column.FieldName = "es_web";
+    column.Caption = "Web";
+    column.ColumnType = MVCxTreeListColumnType.CheckBox;
+}
+);
+
+        settings.Columns.Add(
+column =>
+{
+    column.FieldName = "es_desktop";
+    column.Caption = "Desktop";
+    column.ColumnType = MVCxTreeListColumnType.CheckBox;
+}
+);
+        settings.Columns.Add(
+    column =>
+    {
+        column.FieldName = "IdMenu";
+        column.Caption = "ID";
+    }
+);        
 
         settings.SettingsPager.Visible = true;
         settings.Settings.GridLines = GridLines.Both;

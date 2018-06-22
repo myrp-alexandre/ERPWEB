@@ -88,6 +88,7 @@ namespace Core.Erp.Data.SeguridadAcceso
                              on new { me.IdEmpresa, me.IdMenu } equals new { meu.IdEmpresa, meu.IdMenu }
                              where m.Habilitado == true && meu.IdEmpresa == IdEmpresa
                              && meu.IdUsuario == IdUsuario && m.IdMenuPadre == IdMenuPadre
+                             && m.es_web == true
                              select new seg_Menu_x_Empresa_x_Usuario_Info
                              {
                                  seleccionado = true,

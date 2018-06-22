@@ -1,12 +1,13 @@
 ﻿@model Core.Erp.Info.ActivoFijo.Af_Venta_Activo_Info
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Nueva venta";
-                if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
-                {
-                    Response.Redirect("~/Account/Login");
-                }
+    ViewBag.Title = "Nueva venta";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using (Html.BeginForm("Nuevo", "VentaActivo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
