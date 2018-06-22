@@ -600,6 +600,8 @@
     <Compile Include="Reportes\Banco\BAN_001_Data.cs" />
     <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Data.cs" />
     <Compile Include="Reportes\Banco\BAN_002_Data.cs" />
+    <Compile Include="Reportes\Banco\BAN_003_Data.cs" />
+    <Compile Include="Reportes\Banco\BAN_004_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_ingresos_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Data.cs" />
@@ -878,6 +880,9 @@
     <Compile Include="spACTF_activos_a_depreciar_Result.cs">
       <DependentUpon>Model_activo_fijo.tt</DependentUpon>
     </Compile>
+    <Compile Include="SPBAN_004_Result.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="SPINV_001_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
@@ -975,6 +980,9 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="VWBAN_002_cancelaciones.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWBAN_003.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="VWCAJ_001.cs">
