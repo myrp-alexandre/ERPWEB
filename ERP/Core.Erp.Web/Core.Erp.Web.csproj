@@ -8030,7 +8030,6 @@
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Index.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Modificar.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Nuevo.cshtml" />
-    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Index.cshtml" />
     <Content Include="Areas\General\Views\Persona\_ComboBox_persona_x_tipo.cshtml" />
     <Content Include="Areas\Facturacion\Views\Cliente\_GridViewPartial_cliente_contacto.cshtml" />
     <Content Include="Areas\Inventario\Views\IngresoInventario\Index.cshtml" />
