@@ -78,11 +78,38 @@
             c.Width = Unit.Pixel(100);
         });
 
+        settings.Columns.Add("IdOrdenPago","ID").Width=Unit.Percentage(10);
+        settings.Columns.Add("Nom_Beneficiario", "Beneficiario").Width=Unit.Percentage(30);
+        settings.Columns.Add("Observacion","Observación").Width = Unit.Percentage(30);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Total_OP";
+            column.Caption = "$Valor";
+            column.Width = Unit.Percentage(10);
+            column.EditorProperties().SpinEdit(sp =>
+            {
+                sp.MinValue = 0;
+                sp.MaxValue = 999999999;
+                sp.Width = Unit.Percentage(100);
+                column.PropertiesEdit.DisplayFormatString = "n2";
 
-        settings.Columns.Add("IdOrdenPago");
-        settings.Columns.Add("Observacion");
-        settings.Columns.Add("IdEntidad");
-        settings.Columns.Add("IdEstadoAprobacion");
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Fecha_Pago";
+            column.Caption = "Fecha pago";
+            column.Width = Unit.Percentage(15);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
+
+        
+
     });
 }
 @grid.Bind(Model).GetHtml()

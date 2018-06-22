@@ -27,21 +27,21 @@
         <EntityTypeShape EntityType="Model_reportes.VWROL_006" Width="1.5" PointX="15.75" PointY="12.75" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_007" Width="1.5" PointX="0.75" PointY="16.75" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_008" Width="1.5" PointX="2.75" PointY="16.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWCXP_003" Width="1.5" PointX="8.375" PointY="17.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWCXP_004" Width="1.5" PointX="18.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWCAJ_002" Width="1.5" PointX="18.375" PointY="7.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWCAJ_002_ingresos" Width="1.5" PointX="18.375" PointY="14.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWINV_007" Width="1.5" PointX="18.375" PointY="18.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWCXP_003_cancelaciones" Width="1.5" PointX="5.375" PointY="19.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWCXP_005" Width="1.5" PointX="20.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWCXP_005_cancelaciones" Width="1.5" PointX="20.375" PointY="5.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWBAN_001_cancelaciones" Width="1.5" PointX="20.375" PointY="14.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWCXP_006" Width="1.5" PointX="14.375" PointY="20.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWCXP_006_diario" Width="1.5" PointX="20.375" PointY="19.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWBAN_001" Width="1.5" PointX="22.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWBAN_002" Width="1.5" PointX="22.375" PointY="6.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWBAN_002_cancelaciones" Width="1.5" PointX="10.375" PointY="22.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWBAN_003" Width="1.5" PointX="22.375" PointY="12.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWBAN_001" Width="1.5" PointX="8.375" PointY="17.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWBAN_001_cancelaciones" Width="1.5" PointX="18.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWBAN_002" Width="1.5" PointX="18.375" PointY="5.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWBAN_002_cancelaciones" Width="1.5" PointX="18.375" PointY="11.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWBAN_003" Width="1.5" PointX="18.375" PointY="15.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCAJ_002" Width="1.5" PointX="5.375" PointY="19.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCAJ_002_ingresos" Width="1.5" PointX="20.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCXP_003" Width="1.5" PointX="20.375" PointY="4.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCXP_003_cancelaciones" Width="1.5" PointX="20.375" PointY="11.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCXP_004" Width="1.5" PointX="14.375" PointY="20.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCXP_005" Width="1.5" PointX="20.375" PointY="16.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCXP_005_cancelaciones" Width="1.5" PointX="16.375" PointY="21.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCXP_006" Width="1.5" PointX="18.375" PointY="21.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCXP_006_diario" Width="1.5" PointX="20.375" PointY="21.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWINV_007" Width="1.5" PointX="22.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -14,6 +14,10 @@ namespace Core.Erp.Bus.CuentasPorPagar
         ct_cbtecble_Bus bus_contabilidad = new ct_cbtecble_Bus();
         cp_cuotas_x_doc_Bus bus_cuotas = new cp_cuotas_x_doc_Bus();
         ct_cbtecble_det_Bus bus_comrpbante_det = new ct_cbtecble_det_Bus();
+        cp_orden_pago_Bus bus_op;
+        cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
+        cp_parametros_Info info_parametro = new cp_parametros_Info();
+        cp_parametros_Bus bus_parametro = new cp_parametros_Bus();
         public List<cp_orden_giro_Info> get_lst(int IdEmpresa, DateTime fi, DateTime ff)
         {
             try
@@ -26,7 +30,30 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
+        public List<cp_orden_giro_Info> get_lst_sin_ret(int IdEmpresa, DateTime fi, DateTime ff)
+        {
+            try
+            {
+                return data.get_lst_sin_ret(IdEmpresa, fi, ff);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
+        public List<cp_orden_giro_Info> get_lst_orden_giro_x_pagar(int IdEmpresa)
+        {
+            try
+            {
+                return data.get_lst_orden_giro_x_pagar(IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool guardarDB(cp_orden_giro_Info info)
         {
             try
@@ -142,6 +169,8 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
                 info.info_comrobante.cb_Observacion = info.co_observacion+" ANULADO";
 
+                info.info_comrobante.IdTipoCbte = info.IdTipoCbte_Ogiro;
+                info.info_comrobante.IdCbteCble = info.IdCbteCble_Ogiro;
                 info.co_valorpagar = info.co_total;
                 if (info.info_cuota.Total_a_pagar == 0)
                     info.co_FechaFactura_vct = info.co_FechaFactura;
@@ -282,6 +311,54 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 }
                 return mensaje;
 
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public bool Generar_OP_x_orden_giro(cp_orden_giro_Info info)
+        {
+            try
+            {
+                info_parametro = bus_parametro.get_info(info.IdEmpresa);
+                bus_proveedor = new cp_proveedor_Bus();
+                decimal IdPersona = bus_proveedor.get_info(info.IdEmpresa, info.IdProveedor).IdPersona;
+                cp_orden_pago_tipo_x_empresa_Info info_tipo_op = new cp_orden_pago_tipo_x_empresa_Info();
+                cp_orden_pago_tipo_x_empresa_Data op_tipo_data = new cp_orden_pago_tipo_x_empresa_Data();
+                info_tipo_op = op_tipo_data.get_info(info.IdEmpresa, "FACT_PROVEE");
+                cp_orden_pago_Info info_op = new cp_orden_pago_Info();
+                bus_op = new cp_orden_pago_Bus();
+                info_op.IdEmpresa = info.IdEmpresa;
+                info_op.IdTipo_op = info_tipo_op.IdTipo_op;
+                info_op.Observacion = "Por cancelacion de la factura # "+info.co_factura;
+                info_op.IdTipo_Persona = "PROVEE";
+                info_op.IdPersona = IdPersona;
+                info_op.IdEntidad = info.IdProveedor;
+                info_op.IdEstadoAprobacion = info_tipo_op.IdEstadoAprobacion;
+                info_op.IdFormaPago = "CHEQUE";
+                info_op.Fecha_Pago = DateTime.Now ;
+                info_op.Estado = "A";
+                info_op.Fecha = DateTime.Now;
+                
+                // crear detalle de op
+                cp_orden_pago_det_Info info_op_det = new cp_orden_pago_det_Info();
+                info_op_det.IdEmpresa = info.IdEmpresa;
+                info_op_det.IdEmpresa_cxp = info.IdEmpresa;
+                info_op_det.Secuencia = 1;
+                info_op_det.IdCbteCble_cxp = info.IdCbteCble_Ogiro;
+                info_op_det.IdTipoCbte_cxp = info.IdTipoCbte_Ogiro;
+                info_op_det.Valor_a_pagar = info.Total_Pagado;
+                info_op_det.Referencia = "Pago factura # "+info.co_factura;
+                info_op_det.IdFormaPago = "CHEQUE";
+                info_op_det.Fecha_Pago = DateTime.Now;
+                info_op_det.IdEstadoAprobacion = info_tipo_op.IdEstadoAprobacion;
+                info_op.detalle.Add(info_op_det);
+                bus_op.guardar_op_x_fpDB(info_op);
+                return true;
             }
             catch (Exception)
             {

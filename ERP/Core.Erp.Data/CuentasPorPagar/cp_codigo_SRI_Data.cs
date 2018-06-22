@@ -50,6 +50,49 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
+        public List<cp_codigo_SRI_Info> get_list_cod_ret( bool mostrar_anulados)
+        {
+            try
+            {
+                List<cp_codigo_SRI_Info> Lista;
+                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
+                {
+                    if (mostrar_anulados == true)
+                        Lista = (from q in Context.cp_codigo_SRI
+                                 where (q.IdTipoSRI == "COD_RET_FUE" || q.IdTipoSRI == "COD_RET_IVA")
+                                 select new cp_codigo_SRI_Info
+                                 {
+                                     IdTipoSRI = q.IdTipoSRI,
+                                     IdCodigo_SRI = q.IdCodigo_SRI,
+                                     codigoSRI = q.codigoSRI,
+                                     co_descripcion = q.co_descripcion,
+                                     co_codigoBase = q.co_codigoBase,
+                                     co_porRetencion = q.co_porRetencion,
+                                     co_estado = q.co_estado
+                                 }).ToList();
+                    else
+                        Lista = (from q in Context.cp_codigo_SRI
+                                 where q.co_estado == "A"
+                                 && (q.IdTipoSRI == "COD_RET_FUE" || q.IdTipoSRI == "COD_RET_IVA")
+
+                                 select new cp_codigo_SRI_Info
+                                 {
+                                     IdCodigo_SRI = q.IdCodigo_SRI,
+                                     codigoSRI = q.codigoSRI,
+                                     co_descripcion = q.co_descripcion,
+                                     co_codigoBase = q.co_codigoBase,
+                                     co_porRetencion = q.co_porRetencion,
+                                     co_estado = q.co_estado,
+                                     IdTipoSRI = q.IdTipoSRI
+                                 }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public cp_codigo_SRI_Info get_info(int IdCodigoSRI)
         {

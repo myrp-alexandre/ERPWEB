@@ -37,7 +37,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="info_persona.IdTipoDocumento">Tipo documento*</label>
-                    @Html.DropDownListFor(q => q.info_persona.IdTipoDocumento, new SelectList(ViewBag.lst_tipo_docu, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
+                    @Html.DropDownListFor(q => q.info_persona.IdTipoDocumento, new SelectList(ViewBag.lst_tipo_docu, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "IdTipoDocumento" } )
                     @Html.ValidationMessageFor(q => q.info_persona.IdTipoDocumento, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -45,14 +45,14 @@
                 <div class="form-group">
                     <label for="em_codigo">Código</label>
                     @Html.TextBoxFor(q => q.em_codigo, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.em_codigo, "", new { @class = "text-danger", @id = "pe_cedulaRuc" })
+                    @Html.ValidationMessageFor(q => q.em_codigo, "", new { @class = "text-danger", @id = "em_codigo" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="info_persona.pe_cedulaRuc">Número documento*</label>
-                    @Html.TextBoxFor(q => q.info_persona.pe_cedulaRuc, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.pe_cedulaRuc, "", new { @class = "text-danger", @id = "pe_cedulaRuc" })
+                    @Html.TextBoxFor(q => q.info_persona.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc" })
+                    @Html.ValidationMessageFor(q => q.pe_cedulaRuc, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -637,26 +637,45 @@
 
 
 <script>
-
     $(function () {
+
 
         $('#fechaingreso').datepicker({
             autoclose: true
-        })
-    })
-
-    $(function () {
-
+        });
         $('#fechasalida').datepicker({
             autoclose: true
-        })
-    })
-    $(function () {
+        });
 
         $('#pe_fechaNacimiento').datepicker({
             autoclose: true
-        })
-    })
-  
-    
+        });
+    });
+
+    $("#pe_cedulaRuc").keyup(function () {
+        validar();
+    });
+    function  validar() {
+        var tipo_doc = $("#IdTipoDocumento").val();
+        var cedula = $("#pe_cedulaRuc").val();
+
+        if (tipo_doc == "RUC") {
+            if (cedula.length > 13) {
+                var len = $("#pe_cedulaRuc").val();
+                len = len.substring(0, 13);
+                $("#pe_cedulaRuc").val(len);
+            }
+
+        }
+        else
+            if (tipo_doc == "CED") {
+                if (cedula.length > 10) {
+                    var len = $("#pe_cedulaRuc").val();
+                    len = len.substring(0,10);
+                    $("#pe_cedulaRuc").val(len);
+                }
+            }
+    }
+
+     
 </script>

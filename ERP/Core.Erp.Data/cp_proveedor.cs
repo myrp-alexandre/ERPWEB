@@ -18,6 +18,7 @@ namespace Core.Erp.Data
         public cp_proveedor()
         {
             this.cp_orden_giro = new HashSet<cp_orden_giro>();
+            this.cp_nota_DebCre = new HashSet<cp_nota_DebCre>();
         }
     
         public int IdEmpresa { get; set; }
@@ -61,5 +62,7 @@ namespace Core.Erp.Data
         public virtual cp_proveedor_clase cp_proveedor_clase { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cp_orden_giro> cp_orden_giro { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cp_nota_DebCre> cp_nota_DebCre { get; set; }
     }
 }

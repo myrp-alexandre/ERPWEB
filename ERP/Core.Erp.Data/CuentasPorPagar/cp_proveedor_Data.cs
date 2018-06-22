@@ -29,6 +29,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                                      IdProveedor = q.IdProveedor,
                                      pr_estado = q.pr_estado,
                                      descripcion_clas_prove = t.descripcion_clas_prove,
+                                     IdEntidad=q.IdProveedor,
                                      info_persona = new Info.General.tb_persona_Info
                                      {
                                          IdPersona = q.IdPersona,

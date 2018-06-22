@@ -2,16 +2,16 @@
 @model  Core.Erp.Info.Contabilidad.ct_cbtecble_Info
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridViewPartial_deudas_dc";
-        settings.CallbackRouteValues = new { Controller = "Deudas", Action = "GridViewPartial_deudas_dc", Area = "CuentasPorPagar" };
+        settings.Name = "GridViewPartial_orden_pago_dc";
+        settings.CallbackRouteValues = new { Controller = "OrdenPago", Action = "GridViewPartial_orden_pago_dc", Area = "CuentasPorPagar" };
         settings.KeyFieldName = "secuencia";
         settings.Width = Unit.Percentage(100);
 
 
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Deudas", Action = "EditingAddNew", Area = "CuentasPorPagar" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Deudas", Action = "EditingUpdate", Area = "CuentasPorPagar" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Deudas", Action = "EditingDelete", Area = "CuentasPorPagar" };
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "OrdenPago", Action = "EditingAddNew", Area = "CuentasPorPagar" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "OrdenPago", Action = "EditingUpdate", Area = "CuentasPorPagar" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "OrdenPago", Action = "EditingDelete", Area = "CuentasPorPagar" };
 
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = true;

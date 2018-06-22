@@ -16,7 +16,7 @@ namespace Core.Erp.Data.CuentasPorPagar
 
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
-                    Lista = (from q in Context.cp_orden_pago
+                    Lista = (from q in Context.vwcp_orden_pago
                              where IdEmpresa == q.IdEmpresa
                              select new cp_orden_pago_Info
                              {
@@ -31,13 +31,12 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  IdEstadoAprobacion = q.IdEstadoAprobacion,
                                  IdFormaPago = q.IdFormaPago,
                                  Fecha_Pago = q.Fecha_Pago,
-
                                  IdBanco = q.IdBanco,
                                  IdTipoFlujo = q.IdTipoFlujo,
                                  IdTipoMovi = q.IdTipoMovi,
                                  Estado =q.Estado,
-                                 IdUsuario = q.IdUsuario,
-                                 Fecha_Transac = q.Fecha_Transac
+                                 Nom_Beneficiario=q.pe_nombreCompleto,
+                                 Total_OP=q.Total_OP
 
                              }).ToList();
                 }
@@ -152,7 +151,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                     cp_orden_pago Entity = new cp_orden_pago
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdOrdenPago = info.IdOrdenPago,
+                        IdOrdenPago =info.IdOrdenPago= get_id(info.IdEmpresa),
                         Observacion = info.Observacion,
                         IdTipo_op = info.IdTipo_op,
                         IdTipo_Persona = info.IdTipo_Persona,
@@ -170,18 +169,41 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Fecha_Transac = info.Fecha_Transac = DateTime.Now
                     };
                     Context.cp_orden_pago.Add(Entity);
-                    Context.SaveChanges();
-                }
+              
 
                     cp_orden_pago_det_Data oData_det = new cp_orden_pago_det_Data();
                     foreach (var item in info.detalle)
                     {
+                    cp_orden_pago_det Entity_det= new cp_orden_pago_det
+                        {
+                        IdEmpresa = info.IdEmpresa,
+                        IdEmpresa_cxp=info.IdEmpresa,
+                        IdOrdenPago = info.IdOrdenPago,
+                        IdFormaPago = info.IdFormaPago,
+                        
+                        IdTipoCbte_cxp = (item.IdTipoCbte_cxp==0| item.IdTipoCbte_cxp == null)? info.info_comprobante.IdTipoCbte:item.IdTipoCbte_cxp,
+                        IdCbteCble_cxp = (item.IdCbteCble_cxp == 0 | item.IdCbteCble_cxp == null) ? info.info_comprobante.IdCbteCble : item.IdCbteCble_cxp,
+                        Fecha_Pago =info.Fecha_Pago,
+                        IdEstadoAprobacion=info.IdEstadoAprobacion,
+                        Valor_a_pagar=(item.Valor_a_pagar)==0?info.Valor_a_pagar:item.Valor_a_pagar,
+                        Referencia=item.Referencia
 
-
+                    };
+                        if (item.Referencia == null)
+                        {
+                            if (info.Observacion.Length > 50)
+                                Entity_det.Referencia = info.Observacion.Substring(0, 49);
+                            else
+                                Entity_det.Referencia = info.Observacion;
+                          };
+                        Context.cp_orden_pago_det.Add(Entity_det);
                     }
-                    return true;
+                    Context.SaveChanges();
+
+                }
+                return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw;
             }
@@ -270,6 +292,61 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
+
+        public List<cp_orden_pago_det_Info> Get_List_orden_pago_con_saldo(int IdEmpresa, string IdTipo_op, decimal IdProveedor, string IdEstado_Aprobacion, string IdUsuario)
+        {
+
+            try
+            {
+
+                List<cp_orden_pago_det_Info> Lista = new List<cp_orden_pago_det_Info>();
+
+                using (Entities_cuentas_por_pagar Contex= new Entities_cuentas_por_pagar())
+                {
+
+                    try
+                    {
+                        Lista = (from q in Contex.spcp_Get_Data_orden_pago_con_cancelacion_data(IdEmpresa, 1, 99999, "PROVEE", IdProveedor, IdProveedor, IdEstado_Aprobacion, IdUsuario, false)
+                                 where q.IdTipo_op == IdTipo_op
+                                 select new
+                                 cp_orden_pago_det_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdOrdenPago = q.IdOrdenPago,
+                                     IdTipoCbte_cxp=q.IdTipoCbte_cxp,
+                                     IdCbteCble_cxp=q.IdCbteCble_cxp,
+                                     IdEntidad = q.IdEntidad,
+                                     IdPersona = q.IdPersona,
+                                     IdTipo_op = q.IdTipo_op,
+                                     IdEstadoAprobacion = q.IdEstadoAprobacion,
+                                     IdTipo_Persona = q.IdTipoPersona,
+                                     Valor_a_pagar = q.Valor_a_pagar,
+                                     Valor_estimado_a_pagar_OP = q.Valor_estimado_a_pagar_OP,
+                                     Total_cancelado_OP = q.Total_cancelado_OP,
+                                     Saldo_x_Pagar_OP = q.Saldo_x_Pagar_OP,
+                                     Nom_Beneficiario = q.Nom_Beneficiario
+
+                                 }).ToList();
+
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                   
+                    return Lista;
+
+                }
+                
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
 
     }
 }

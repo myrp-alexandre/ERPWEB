@@ -79,5 +79,6 @@ namespace Core.Erp.Data
         public string pe_razonSocial { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string pe_cedulaRuc { get; set; }
+        public string Descripcion { get; set; }
     }
 }

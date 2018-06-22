@@ -63,5 +63,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public tb_persona_Info info_persona { get; set; }
         public string descripcion_clas_prove { get; set; }
 
+        public decimal IdEntidad { get; set; }
+
     }
 }

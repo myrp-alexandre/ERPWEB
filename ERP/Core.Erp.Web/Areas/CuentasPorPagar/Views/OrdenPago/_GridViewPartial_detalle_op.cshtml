@@ -1,10 +1,18 @@
+@using System.Web.UI.WebControls;
+
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView_detalle_op";
+        settings.Name = "GridViewPartial_detalle_op";
         settings.CallbackRouteValues = new { Controller = "OrdenPago", Action = "GridViewPartial_detalle_op" };
 
 
         settings.KeyFieldName = "Secuencia";
+        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "OrdenPago", Action = "EditingAddNew", Area = "CuentasPorPagar" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "OrdenPago", Action = "EditingUpdate", Area = "CuentasPorPagar" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "OrdenPago", Action = "EditingDelete", Area = "CuentasPorPagar" };
+        settings.Width = Unit.Percentage(100);
+
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = true;
         settings.CommandColumn.ShowEditButton = true;
@@ -20,14 +28,22 @@
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+        //Funcion para inicializar fila al presionar nuevo
 
-        settings.Columns.Add("IdOrdenPago");
-        settings.Columns.Add("Secuencia");
-        settings.Columns.Add("IdTipoCbte_cxp");
-        settings.Columns.Add("Valor_a_pagar");
-        settings.Columns.Add("IdFormaPago");
-        settings.Columns.Add("Fecha_Pago");
-        settings.Columns.Add("IdEstadoAprobacion");
+        settings.Columns.Add("Referencia", "Referencia").Width=Unit.Percentage(85);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Valor_a_pagar";
+            column.Caption = "$Valor";
+            column.Width = Unit.Percentage(15);
+            column.EditorProperties().SpinEdit(sp =>
+            {
+                sp.MinValue = 0;
+                sp.MaxValue = 999999999;
+                sp.Width = Unit.Percentage(100);
+
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

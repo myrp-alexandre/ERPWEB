@@ -23,5 +23,20 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string IdUsuario_Aprobacion { get; set; }
         public Nullable<System.DateTime> fecha_hora_Aproba { get; set; }
         public string Motivo_aproba { get; set; }
+
+
+
+        public string IdTipo_Persona { get; set; }
+        public string IdTipoPersona { get; set; }
+        public decimal IdPersona { get; set; }
+        public Nullable<decimal> IdEntidad { get; set; }
+        public string IdTipo_op { get; set; }
+        public double Total_cancelado_OP { get; set; }
+        public double Valor_estimado_a_pagar_OP { get; set; }
+        public double Saldo_x_Pagar_OP { get; set; }
+        public string Nom_Beneficiario { get; set; }
+        public bool check { get; set; }
+
+
     }
 }

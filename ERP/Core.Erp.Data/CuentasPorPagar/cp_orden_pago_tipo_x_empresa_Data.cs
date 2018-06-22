@@ -20,7 +20,10 @@ namespace Core.Erp.Data.CuentasPorPagar
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
                     Lista = (from q in Context.cp_orden_pago_tipo_x_empresa
+                             join p in Context.cp_orden_pago_tipo
+                             on new {q.IdTipo_op} equals new {p.IdTipo_op}
                              where q.IdEmpresa == IdEmpresa
+                             && q.IdTipo_op==p.IdTipo_op
                              select new cp_orden_pago_tipo_x_empresa_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -32,7 +35,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  IdEstadoAprobacion = q.IdEstadoAprobacion,
                                  Buscar_FactxPagar = q.Buscar_FactxPagar,
                                  IdCtaCble_Credito = q.IdCtaCble_Credito,
-                                 Dispara_Alerta = q.Dispara_Alerta
+                                 Dispara_Alerta = q.Dispara_Alerta,
+                                 Descripcion=p.Descripcion,
+                                 Estado=p.Estado
 
                                 
                              }).ToList();
@@ -50,24 +55,34 @@ namespace Core.Erp.Data.CuentasPorPagar
             try
             {
                 cp_orden_pago_tipo_x_empresa_Info info = new cp_orden_pago_tipo_x_empresa_Info();
+                List<cp_orden_pago_tipo_x_empresa_Info> Lista;
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
-                    cp_orden_pago_tipo_x_empresa q = Context.cp_orden_pago_tipo_x_empresa.FirstOrDefault(v => v.IdEmpresa == IdEmpresa& v.IdTipo_op== IdTipo_op);
-                    if (q == null) return null;
-                    info = new cp_orden_pago_tipo_x_empresa_Info
-                    {
-                        IdEmpresa = q.IdEmpresa,
-                        IdTipo_op = q.IdTipo_op,
-                        IdCtaCble = q.IdCtaCble,
-                        IdCentroCosto = q.IdCentroCosto,
-                        IdTipoCbte_OP = q.IdTipoCbte_OP,
-                        IdTipoCbte_OP_anulacion = q.IdTipoCbte_OP_anulacion,
-                        IdEstadoAprobacion = q.IdEstadoAprobacion,
-                        Buscar_FactxPagar = q.Buscar_FactxPagar,
-                        IdCtaCble_Credito = q.IdCtaCble_Credito,
-                        Dispara_Alerta = q.Dispara_Alerta
-                    };
+                    Lista = (from q in Context.cp_orden_pago_tipo_x_empresa
+                             join p in Context.cp_orden_pago_tipo
+                             on new { q.IdTipo_op } equals new { p.IdTipo_op }
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdTipo_op == p.IdTipo_op
+                             select new cp_orden_pago_tipo_x_empresa_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdTipo_op = q.IdTipo_op,
+                                 IdCtaCble = q.IdCtaCble,
+                                 IdCentroCosto = q.IdCentroCosto,
+                                 IdTipoCbte_OP = q.IdTipoCbte_OP,
+                                 IdTipoCbte_OP_anulacion = q.IdTipoCbte_OP_anulacion,
+                                 IdEstadoAprobacion = q.IdEstadoAprobacion,
+                                 Buscar_FactxPagar = q.Buscar_FactxPagar,
+                                 IdCtaCble_Credito = q.IdCtaCble_Credito,
+                                 Dispara_Alerta = q.Dispara_Alerta,
+                                 Descripcion = p.Descripcion,
+                                 Estado = p.Estado
+
+
+                             }).ToList();
                 }
+                if(Lista.Count()>0)
+                 info = Lista.FirstOrDefault();
                 return info;
             }
             catch (Exception)
@@ -76,32 +91,14 @@ namespace Core.Erp.Data.CuentasPorPagar
             }
         }
 
-        public bool eliminarDB(int IdEmpresa, decimal IdOrdenPago)
+
+        public bool guardarDB(cp_orden_pago_tipo_x_empresa_Info item)
         {
             try
             {
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
-                    string comando = "delete cp_orden_pago_tipo_x_empresa where IdEmpresa = " + IdEmpresa + " and IdOrdenPago = " + IdOrdenPago;
-                    Context.Database.ExecuteSqlCommand(comando);
-                }
-
-                return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public bool guardarDB(List<cp_orden_pago_tipo_x_empresa_Info> Lista)
-        {
-            try
-            {
-                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
-                {
-                    foreach (var item in Lista)
-                    {
+                    
                         cp_orden_pago_tipo_x_empresa Entity = new cp_orden_pago_tipo_x_empresa
                         {
                             IdEmpresa = item.IdEmpresa,
@@ -116,14 +113,82 @@ namespace Core.Erp.Data.CuentasPorPagar
                             Dispara_Alerta = item.Dispara_Alerta
                         };
                         Context.cp_orden_pago_tipo_x_empresa.Add(Entity);
-                    }
                     Context.SaveChanges();
+
                 }
+
 
                 return true;
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public bool modificarDB(cp_orden_pago_tipo_x_empresa_Info info)
+        {
+            try
+            {
+                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
+                {
+                    cp_orden_pago_tipo_x_empresa Entity = Context.cp_orden_pago_tipo_x_empresa.FirstOrDefault(q => q.IdTipo_op == info.IdTipo_op);
+                    if (Entity == null) return false;
+                    Entity.IdCtaCble = info.IdCtaCble;
+                    Entity.IdCtaCble_Credito = info.IdCtaCble_Credito;
+                    Entity.IdEstadoAprobacion = info.IdEstadoAprobacion;
+                    Entity.IdTipoCbte_OP = info.IdTipoCbte_OP;
+                    Entity.IdTipoCbte_OP_anulacion = info.IdTipoCbte_OP_anulacion;
+
+            
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool anularDB(cp_orden_pago_tipo_x_empresa_Info info)
+        {
+            try
+            {
+                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
+                {
+                    cp_orden_pago_tipo Entity = Context.cp_orden_pago_tipo.FirstOrDefault(q => q.IdTipo_op == info.IdTipo_op);
+                    if (Entity == null) return false;
+                    Entity.Estado = "I";
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool si_existe(cp_orden_pago_tipo_x_empresa_Info info)
+        {
+            try
+            {
+                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
+                {
+                    cp_orden_pago_tipo Entity = Context.cp_orden_pago_tipo.FirstOrDefault(q => q.IdTipo_op == info.IdTipo_op);
+                    if (Entity == null)
+                        return
+                        false;
+                    else
+                        return true;
+                }
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

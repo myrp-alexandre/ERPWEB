@@ -24,5 +24,7 @@ namespace Core.Erp.Data
         public string Buscar_FactxPagar { get; set; }
         public string IdCtaCble_Credito { get; set; }
         public Nullable<bool> Dispara_Alerta { get; set; }
+    
+        public virtual cp_orden_pago_tipo cp_orden_pago_tipo { get; set; }
     }
 }

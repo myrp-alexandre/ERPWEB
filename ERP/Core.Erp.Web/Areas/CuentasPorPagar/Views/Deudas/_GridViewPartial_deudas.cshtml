@@ -1,6 +1,7 @@
 @using System.Web.UI.WebControls;
 @{
-    var grid = Html.DevExpress().GridView(settings => {
+    var grid = Html.DevExpress().GridView(settings =>
+    {
         settings.Name = "GridView_deudas";
         settings.CallbackRouteValues = new { Controller = "Deudas", Action = "GridViewPartial_deudas" };
 
@@ -77,9 +78,7 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(100);
         });
-
-        settings.Columns.Add("IdCbteCble_Ogiro","Tipo").Width=Unit.Percentage(5);
-        settings.Columns.Add("IdTipoCbte_Ogiro", "ID").Width = Unit.Percentage(5);
+        settings.Columns.Add("IdCbteCble_Ogiro", "ID").Width = Unit.Percentage(5);
         settings.Columns.Add("info_proveedor.info_persona.pe_cedulaRuc", "Cédula").Width = Unit.Percentage(10);
         settings.Columns.Add("info_proveedor.info_persona.pe_nombreCompleto", "Proveedor").Width = Unit.Percentage(30);
         settings.Columns.Add(column =>
@@ -153,6 +152,23 @@
 
             });
         });
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "#";
+            column.Width = Unit.Pixel(100);
+            column.SetDataItemTemplateContent(container =>
+            {
+                Html.DevExpress().HyperLink(hyperlink =>
+                {
+                    var IdTipoCbte_Ogiro = DataBinder.Eval(container.DataItem, "IdTipoCbte_Ogiro");
+                    var IdCbteCble_Ogiro = DataBinder.Eval(container.DataItem, "IdCbteCble_Ogiro");
+                    hyperlink.Properties.Text = "Retención";
+                    hyperlink.NavigateUrl = Url.Action("Nuevo", "Retencion", new { Area = "CuentasPorPagar", IdTipoCbte_Ogiro = IdTipoCbte_Ogiro, IdCbteCble_Ogiro = IdCbteCble_Ogiro });
+                }).Render();
+            });
+        });
+
 
     });
 }

@@ -163,16 +163,28 @@
     <Compile Include="cp_cuotas_x_doc_det.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
+    <Compile Include="cp_nota_DebCre.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
     <Compile Include="cp_orden_giro.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
     <Compile Include="cp_orden_pago.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
+    <Compile Include="cp_orden_pago_cancelaciones.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
     <Compile Include="cp_orden_pago_det.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
+    <Compile Include="cp_orden_pago_estado_aprob.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
     <Compile Include="cp_orden_pago_formapago.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cp_orden_pago_tipo.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
     <Compile Include="cp_orden_pago_tipo_x_empresa.cs">
@@ -190,6 +202,20 @@
     <Compile Include="cp_proveedor_clase.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
+    <Compile Include="cp_retencion.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cp_retencion_det.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cp_retencion_x_ct_cbtecble.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CuentasPorPagar\cp_nota_DebCre_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_orden_pago_cancelaciones_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_orden_pago_estado_aprob_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_orden_pago_tipo_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_retencion_x_ct_cbtecble_Data.cs" />
     <Compile Include="cp_TipoDocumento.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
@@ -248,6 +274,8 @@
     <Compile Include="CuentasPorPagar\cp_parametros_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_proveedor_clase_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_proveedor_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_retencion_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_retencion_det_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_TipoDocumento_Data.cs" />
     <Compile Include="cxc_Catalogo.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
@@ -883,6 +911,9 @@
     <Compile Include="SPBAN_004_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="spcp_Get_Data_orden_pago_con_cancelacion_data_Result.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
     <Compile Include="SPINV_001_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
@@ -1000,10 +1031,22 @@
     <Compile Include="vwcp_codigo_SRI.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwcp_nota_DebCre.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwcp_orden_giro.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwcp_orden_giro_x_pagar.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwcp_orden_pago.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwcp_proveedor_consulta.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwcp_retencion.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
     <Compile Include="VWCXP_001.cs">

@@ -84,5 +84,18 @@ namespace Core.Erp.Bus.General
                 throw;
             }
         }
+
+        public tb_sis_Documento_Tipo_Talonario_Info get_info_ultimo_no_usado(int IdEmpresa, string CodDocumentoTipo)
+        {
+            try
+            {
+                return odata.get_info_ultimo_no_usado(IdEmpresa, CodDocumentoTipo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
-}
+    }

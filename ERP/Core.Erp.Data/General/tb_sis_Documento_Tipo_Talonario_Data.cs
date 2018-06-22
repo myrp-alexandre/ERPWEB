@@ -202,5 +202,81 @@ namespace Core.Erp.Data.General
             }
         }
 
+        public tb_sis_Documento_Tipo_Talonario_Info get_info_ultimo_no_usado(int IdEmpresa, string CodDocumentoTipo)
+        {
+            try
+            {
+                tb_sis_Documento_Tipo_Talonario_Info info = new tb_sis_Documento_Tipo_Talonario_Info();
+                using (Entities_general Context = new Entities_general())
+                {
+
+
+
+
+                    var q = (from A in Context.tb_sis_Documento_Tipo_Talonario
+                             where A.IdEmpresa == IdEmpresa
+                             && A.CodDocumentoTipo == CodDocumentoTipo
+                             && A.Usado == false
+                             && A.Estado == "A"
+                             select A.NumDocumento).Min();
+                    if (q != null)
+                    {
+                        string UltRegistro = q.ToString();
+                        var querry = from A in Context.tb_sis_Documento_Tipo_Talonario
+                                     where A.IdEmpresa == IdEmpresa
+                                     //&& A.PuntoEmision == puntoemision 
+                                     && A.CodDocumentoTipo == CodDocumentoTipo
+                                     && A.Usado == false
+                                     && A.NumDocumento == UltRegistro
+                                     select A;
+
+                        foreach (var item in querry)
+                        {
+                            info.IdEmpresa = item.IdEmpresa;
+                            info.IdSucursal = item.IdSucursal;
+                            info.CodDocumentoTipo = item.CodDocumentoTipo;
+                            info.Establecimiento = item.Establecimiento;
+                            info.Estado = item.Estado;
+                            info.FechaCaducidad = item.FechaCaducidad;
+                            info.NumAutorizacion = item.NumAutorizacion;
+                            info.NumDocumento = item.NumDocumento;
+                            info.PuntoEmision = item.PuntoEmision;
+                            info.Usado =(bool) item.Usado;
+                        }
+
+                    }
+
+
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool modificar_estado_usadoDB(tb_sis_Documento_Tipo_Talonario_Info info)
+        {
+            try
+            {
+                using (Entities_general Context = new Entities_general())
+                {
+                    tb_sis_Documento_Tipo_Talonario Entity = Context.tb_sis_Documento_Tipo_Talonario.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.CodDocumentoTipo == info.CodDocumentoTipo && q.Establecimiento == info.Establecimiento && q.PuntoEmision == info.PuntoEmision && q.NumDocumento == info.NumDocumento);
+                    if (Entity == null) return false;
+                    Entity.Usado = info.Usado;
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
     }
 }

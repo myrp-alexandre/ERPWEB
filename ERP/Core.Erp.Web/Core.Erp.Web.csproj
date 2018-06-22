@@ -37,7 +37,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -260,10 +259,13 @@
     <Compile Include="Areas\CuentasPorPagar\Controllers\ClaseProveedorController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\CodigoSRIController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\DeudasController.cs" />
+    <Compile Include="Areas\CuentasPorPagar\Controllers\NotaCreditoController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\OrdenPagoController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\ParametrosCXPController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\ProveedorController.cs" />
+    <Compile Include="Areas\CuentasPorPagar\Controllers\RetencionController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\TipoCodigoSRIController.cs" />
+    <Compile Include="Areas\CuentasPorPagar\Controllers\TipoOrdenPagoController.cs" />
     <Compile Include="Areas\CuentasPorPagar\CuentasPorPagarAreaRegistration.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ClienteController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ClienteTipoController.cs" />
@@ -8036,6 +8038,7 @@
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Index.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Modificar.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Nuevo.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Index.cshtml" />
     <Content Include="Areas\General\Views\Persona\_ComboBox_persona_x_tipo.cshtml" />
     <Content Include="Areas\Facturacion\Views\Cliente\_GridViewPartial_cliente_contacto.cshtml" />
     <Content Include="Areas\Inventario\Views\IngresoInventario\Index.cshtml" />
@@ -8207,18 +8210,43 @@
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_008.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_005.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_006.cshtml" />
-    <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_002.cshtml" />
-    <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_003.cshtml" />
-    <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_004.cshtml" />
-    <Content Include="Areas\Reportes\Views\CajaReportes\CAJ_002.cshtml" />
-    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_007.cshtml" />
-    <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_005.cshtml" />
-    <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_006.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\Modificar.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\Anular.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Retencion\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Retencion\_GridViewPartial_retencion_det.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Retencion\_GridViewPartial_retencio_dc.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Retencion\Index.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Retencion\_GridViewPartial_retenciones.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Retencion\Modificar.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Retencion\Anular.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\TipoOrdenPago\Index.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\TipoOrdenPago\Anular.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\TipoOrdenPago\Modificar.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\TipoOrdenPago\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\TipoOrdenPago\_GridViewPartial_tipo_orden_pago.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Deudas\_GridViewPartial_deudas_sin_ret.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Deudas\Index2.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\_GridViewPartial_nota_credito.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\_GridViewPartial_nota_credito_dc.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\Anular.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\Index.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\Modificar.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\_GridViewPartial_ordenes_pagos_con_saldo.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Deudas\Index3.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Deudas\_GridViewPartial_aprobacion_facturas.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\_GridView2Partial.cshtml" />
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_001.cshtml" />
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_002.cshtml" />
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_003.cshtml" />
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_004.cshtml" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Areas\Reportes\Views\CajaReportes\CAJ_002.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_002.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_003.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_004.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_005.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_006.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_007.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
@@ -8322,7 +8350,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

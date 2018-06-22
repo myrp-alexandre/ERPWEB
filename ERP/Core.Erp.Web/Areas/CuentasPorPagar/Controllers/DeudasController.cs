@@ -14,7 +14,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
     public class DeudasController : Controller
     {
-        #region MyRegion
+        #region variables
         cp_orden_giro_Bus bus_orden_giro = new cp_orden_giro_Bus();
         cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
         cp_codigo_SRI_x_CtaCble_Bus bus_codigo_sri = new cp_codigo_SRI_x_CtaCble_Bus();
@@ -37,7 +37,15 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return View();
         }
 
-      
+        public ActionResult Index2()
+        {
+            return View();
+        }
+        public ActionResult Index3()
+        {
+            return View();
+        }
+
         [ValidateInput(false)]
         public ActionResult GridViewPartial_documento_cuotas_det()
         {
@@ -59,6 +67,32 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.lst_ct_cbtecble_det = Session["ct_cbtecble_det_Info"] as List<ct_cbtecble_det_Info>;
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_deudas_dc", model);
+        }
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_deudas()
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
+            model = bus_orden_giro.get_lst(IdEmpresa, DateTime.Now, DateTime.Now);
+            return PartialView("_GridViewPartial_deudas", model);
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_aprobacion_facturas()
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
+            model = bus_orden_giro.get_lst_orden_giro_x_pagar(IdEmpresa);
+            return PartialView("_GridViewPartial_aprobacion_facturas", model);
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_deudas_sin_ret()
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
+            model = bus_orden_giro.get_lst_sin_ret(IdEmpresa, DateTime.Now, DateTime.Now);
+            return PartialView("_GridViewPartial_deudas_sin_ret", model);
         }
 
         private void cargar_combos(decimal IdProveedor=0, string IdTipoSRI = "")
@@ -267,7 +301,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return View(model);
         }
      
-
         [HttpPost]
         public ActionResult Anular(cp_orden_giro_Info model)
         {
@@ -382,16 +415,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         #endregion
 
-
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_deudas()
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
-            model = bus_orden_giro.get_lst(IdEmpresa, DateTime.Now, DateTime.Now);
-            return PartialView("_GridViewPartial_deudas", model);
-        }
-
         private void cargar_combos_detalle()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -431,7 +454,25 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return PartialView("_GridViewPartial_deudas_dc", model);
         }
 
+        [HttpPost, ValidateInput(false)]
+        public ActionResult GridViewPartial_aprobacion_facturas_Update(Core.Erp.Info.CuentasPorPagar.cp_orden_giro_Info item)
+        {
+            
+                try
+                {
+                item.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+                    bus_orden_giro.Generar_OP_x_orden_giro(item);
+                return RedirectToAction("Index3");
 
+                }
+            catch (Exception e)
+                {
+                    return RedirectToAction("Index3");
+                }
+            
+           
+        }
+       
     }
 
 

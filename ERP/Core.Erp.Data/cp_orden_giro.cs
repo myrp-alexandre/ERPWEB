@@ -14,6 +14,12 @@ namespace Core.Erp.Data
     
     public partial class cp_orden_giro
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public cp_orden_giro()
+        {
+            this.cp_retencion = new HashSet<cp_retencion>();
+        }
+    
         public int IdEmpresa { get; set; }
         public decimal IdCbteCble_Ogiro { get; set; }
         public int IdTipoCbte_Ogiro { get; set; }
@@ -88,5 +94,7 @@ namespace Core.Erp.Data
         public virtual cp_codigo_SRI cp_codigo_SRI1 { get; set; }
         public virtual cp_codigo_SRI cp_codigo_SRI2 { get; set; }
         public virtual cp_proveedor cp_proveedor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cp_retencion> cp_retencion { get; set; }
     }
 }

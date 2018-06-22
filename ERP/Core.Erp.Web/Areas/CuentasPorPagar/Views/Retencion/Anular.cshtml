@@ -1,0 +1,216 @@
+﻿@model Core.Erp.Info.CuentasPorPagar.cp_retencion_Info
+@{
+    ViewBag.Title = "Nuevo registro";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
+}
+
+@using (Html.BeginForm("Anular", "Retencion", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdRetencion)
+    @Html.HiddenFor(q => q.ct_IdCbteCble)
+    @Html.HiddenFor(q => q.ct_IdTipoCbte)
+    @Html.HiddenFor(q => q.info_comprobante.IdTipoCbte)
+    @Html.HiddenFor(q => q.info_comprobante.IdCbteCble)
+    @Html.HiddenFor(q => q.co_serie)
+    @Html.HiddenFor(q => q.co_factura)
+    @Html.HiddenFor(q => q.co_valoriva)
+    @Html.HiddenFor(q => q.co_subtotal_iva)
+    @Html.HiddenFor(q => q.co_subtotal_siniva)
+    @Html.HiddenFor(q => q.co_baseImponible)
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="co_observacion">Proveedor</label>
+                    @Html.TextBoxFor(q => q.pe_razonSocial, new { @class = "form-control", @id = "observacion", @disabled="disabled" })
+                    @Html.ValidationMessageFor(q => q.pe_razonSocial, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdOrden_giro_Tipo">Tipo documento*</label>
+                    @Html.TextBoxFor(q => q.Descripcion, new { @class = "form-control", @id = "co_valoriva", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(q => q.Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="co_serie">Serie*</label>
+                    @Html.TextBoxFor(q => q.co_serie, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(q => q.co_serie, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="co_factura">Numero documento*</label>
+                    @Html.TextBoxFor(q => q.co_factura, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(q => q.co_factura, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+       
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="co_subtotal_iva">Base IVA</label>
+                        @Html.TextBoxFor(q => q.co_subtotal_iva, new { @class = "form-control", @id = "co_subtotal_iva", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(q => q.co_subtotal_iva, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="co_subtotal_siniva">Base cero</label>
+                        @Html.TextBoxFor(q => q.co_subtotal_siniva, new { @class = "form-control", @id = "co_subtotal_siniva", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(q => q.co_subtotal_siniva, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="co_valoriva">Iva</label>
+                        @Html.TextBoxFor(q => q.co_valoriva, new { @class = "form-control", @id = "co_valoriva", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(q => q.co_valoriva, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="co_total">Total</label>
+                        @Html.TextBoxFor(q => q.co_baseImponible, new { @class = "form-control", @id = "co_total", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(q => q.co_baseImponible, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label for="co_total">Estb.</label>
+                        @Html.TextBoxFor(q => q.serie1, new { @class = "form-control", @id = "co_total" })
+                        @Html.ValidationMessageFor(q => q.co_baseImponible, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label for="co_total">Pto.</label>
+                        @Html.TextBoxFor(q => q.serie2, new { @class = "form-control", @id = "co_total" })
+                        @Html.ValidationMessageFor(q => q.co_baseImponible, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="co_total"># Retención</label>
+                        @Html.TextBoxFor(q => q.NumRetencion, new { @class = "form-control", @id = "co_total"})
+                        @Html.ValidationMessageFor(q => q.co_baseImponible, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="co_observacion">Observación*</label>
+                        @Html.TextBoxFor(q => q.observacion, new { @class = "form-control", @id = "observacion" })
+                        @Html.ValidationMessageFor(q => q.observacion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="Fecha">Fecha retencion*</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            @Html.TextBoxFor(q => q.fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha" })
+                            @Html.ValidationMessageFor(q => q.fecha, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="Tabs" role="tabpanel">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active">
+                    <a href="#tab_detalle" aria-controls="detalle" role="tab" data-toggle="tab">Detalle retención</a>
+                </li>
+                <li>
+                    <a href="#tab_diario_contable" aria-controls="diario_contable" role="tab" data-toggle="tab">Diario contable</a>
+                </li>
+
+            </ul>
+            <div class="tab-content" style="padding-top: 20px">
+                <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_detalle">
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="co_observacion">Detalle retención*</label>
+
+
+                                    @Html.Action("GridViewPartial_retencion_det")
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_diario_contable">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="co_observacion">Diario contable*</label>
+                                    
+                                    @Html.Action("GridViewPartial_retencio_dc")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="box-footer">
+            <button type="submit" class="btn btn-danger">Anular</button>
+            <a class="btn btn-default" href="@Url.Action("Index","Retencion",new { Area = "CuentasPorPagar" },null)">Cancelar</a>
+        </div>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+        }
+        <script>
+
+
+            $(function () {
+                //Date picker
+                $('#fecha').datepicker({
+                    autoclose: true
+                })
+               
+            });
+          
+
+        </script>

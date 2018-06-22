@@ -18,6 +18,8 @@ namespace Core.Erp.Data
         public cp_orden_pago_det()
         {
             this.cp_cuotas_x_doc_det = new HashSet<cp_cuotas_x_doc_det>();
+            this.cp_orden_pago_cancelaciones = new HashSet<cp_orden_pago_cancelaciones>();
+            this.cp_orden_pago_cancelaciones1 = new HashSet<cp_orden_pago_cancelaciones>();
         }
     
         public int IdEmpresa { get; set; }
@@ -40,5 +42,9 @@ namespace Core.Erp.Data
         public virtual ICollection<cp_cuotas_x_doc_det> cp_cuotas_x_doc_det { get; set; }
         public virtual cp_orden_pago cp_orden_pago { get; set; }
         public virtual cp_orden_pago_formapago cp_orden_pago_formapago { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cp_orden_pago_cancelaciones> cp_orden_pago_cancelaciones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cp_orden_pago_cancelaciones> cp_orden_pago_cancelaciones1 { get; set; }
     }
 }

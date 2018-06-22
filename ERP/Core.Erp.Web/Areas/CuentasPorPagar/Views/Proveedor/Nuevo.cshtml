@@ -398,6 +398,29 @@
     $("#pe_cedulaRuc").change(function () {
         get_info_x_num_cedula();
     });
+
+    $("#pe_cedulaRuc").keyup(function () {
+        var tipo_doc = $("#IdTipoDocumento").val();
+        var cedula = $("#pe_cedulaRuc").val();
+
+        if (tipo_doc == "RUC") {
+            if (cedula.length > 13) {
+                var len = $("#pe_cedulaRuc").val();
+                len = len.substring(0, 13);
+                $("#pe_cedulaRuc").val(len);
+            }
+
+        }
+        else
+            if (tipo_doc == "CED") {
+                if (cedula.length > 10) {
+                    var len = $("#pe_cedulaRuc").val();
+                    len = len.substring(0,10);
+                    $("#pe_cedulaRuc").val(len);
+                }
+            }
+    });
+
         function actualizar_nombre_completo() {
             var apellido = $("#pe_apellido").val();
             var nombre = $("#pe_nombre").val();
@@ -423,6 +446,7 @@
         if (tipo_doc == "RUC") {
             if (cedula.length != 13) {
                 alert("El documento de tipo RUC, debe tener una longitud de 13 caracteres");
+
                 $("#pe_cedulaRuc").val("");
                 vaciar_campos_persona();
                 return;
@@ -526,6 +550,9 @@
             IdCtaCble_Gasto.SetValue(null);
             IdCtaCble_Anticipo.SetValue(null);
         }
-    }
+        }
+
+
+
 
 </script>

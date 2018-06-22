@@ -1,0 +1,93 @@
+@using System.Web.UI.WebControls;
+@model Core.Erp.Info.CuentasPorPagar.cp_retencion_Info
+
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridViewPartial_retencion_det";
+        settings.CallbackRouteValues = new { Controller = "Retencion", Action = "GridViewPartial_retencion_det" };
+
+
+        settings.KeyFieldName = "Idsecuencia";
+
+        settings.Width = Unit.Percentage(100);
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Retencion", Action = "EditingAddNew_ret", Area = "CuentasPorPagar" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Retencion", Action = "EditingUpdate_ret", Area = "CuentasPorPagar" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Retencion", Action = "EditingDelete_ret", Area = "CuentasPorPagar" };
+
+        settings.KeyFieldName = "Idsecuencia";
+
+        settings.SettingsPager.Visible = false;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "re_Codigo_impuesto";
+            column.Caption = "Código";
+            column.Width = Unit.Percentage(60);
+            column.EditorProperties().ComboBox(p =>
+            {
+
+                p.Columns.Add("IdTipoSRI", "Tipo").Width = Unit.Percentage(30);
+                p.Columns.Add("co_codigoBase", "Código").Width = Unit.Percentage(30);
+                p.Columns.Add("co_descripcion", "Descripcion").Width = Unit.Percentage(60);
+                p.ValueField = "codigoSRI";
+                p.ValueType = typeof(string);
+                p.DataSource = ViewBag.lst_codigo_retencion;
+                p.Width = Unit.Percentage(100);
+                p.ClientSideEvents.ValueChanged = "function(s,e,){llamar_partial()}";
+            });
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "re_baseRetencion";
+            column.Caption = "Base";
+            //column.ReadOnly = true;
+            column.Width = Unit.Percentage(15);
+            
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "re_Porcen_retencion";
+            column.Caption = "Porcentaje";
+            //column.ReadOnly = true;
+            column.Width = Unit.Percentage(15);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "re_valor_retencion";
+            column.Caption = "Valor retenido";
+            //column.ReadOnly = true;
+            column.Width = Unit.Percentage(15);
+
+        });
+
+        settings.ClientSideEvents.BatchEditChangesSaving= "function(s,e,){llamar_partial()}";
+    });
+
+}
+@grid.Bind(Model.detalle).GetHtml()
+
+
+<script>
+    function llamar_partial()
+    {
+        GridViewPartial_retencio_dc.PerformCallback();
+};
+</script>

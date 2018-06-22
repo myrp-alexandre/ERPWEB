@@ -2,11 +2,11 @@
 
 @model Core.Erp.Info.CuentasPorPagar.cp_orden_pago_Info
 @{
-    ViewBag.Title = "Nuevo Registro";
-    //if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
-    //{
-    //    Response.Redirect("~/Account/Login");
-    //}
+    ViewBag.Title = "Nuevo registro";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -17,14 +17,14 @@
     }
 }
 
-@using (Html.BeginForm("Nuevo", "Deudas", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "OrdenPago", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
 
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdOrdenPago)
         <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdSucursal">Tipo de persona*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdTipo_Persona, settings =>
@@ -41,9 +41,31 @@
                    //Boton para seleccionar ningun registro
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
                }).BindList(ViewBag.lst_persona_tipo).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdTipo_Persona, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdTipo_op">Tipo orden pago*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipo_op, settings =>
+               {
+                   settings.Name = "IdTipo_op";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdTipo_op", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                   settings.Properties.Columns.Add("Descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdTipo_op";
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "Descricpion";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+               }).BindList(ViewBag.lst_tipo_orden_pago).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdTipo_op, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -129,14 +151,9 @@
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="Fecha_PriPago">Fecha pago*</label>
-                            <div class="input-group date">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                @Html.TextBoxFor(q => q.Valor_a_pagar,  new { @class = "form-control", @id = "Valor_a_pagar" })
-                                @Html.ValidationMessageFor(q => q.Valor_a_pagar, "", new { @class = "text-danger" })
-                            </div>
+                            <label for="Fecha_PriPago">Valor a cancelar*</label>
+                            @Html.TextBoxFor(q => q.Valor_a_pagar, new { @class = "form-control", @id = "Valor_a_pagar" })
+                            @Html.ValidationMessageFor(q => q.Valor_a_pagar, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
@@ -200,30 +217,6 @@
 
 
 
-
-
-    @*@Html.DevExpress().ComboBoxFor(q => q.IdTipo_Persona,
-    settings =>
-    {
-        settings.Name = "comboBox4";
-        settings.Width = 180;
-        settings.SelectedIndex = 0;
-        settings.Properties.DropDownWidth = 550;
-        settings.Properties.DropDownStyle = DropDownStyle.DropDownList;
-        settings.CallbackRouteValues = new { Controller = "OrdenPago", Action = "MultiColumnComboBoxPartial" };
-        settings.Properties.CallbackPageSize = 30;
-        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.StartsWith;
-        settings.Properties.TextFormatString = "{0}";
-        settings.Properties.ValueField = "CustomerID";
-        settings.Properties.ValueType = typeof(string);
-
-        settings.Properties.Columns.Add("info_persona.pe_nombreCompleto", "Proveedor").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-        settings.Properties.Columns.Add("info_persona.pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-    }
-).BindList(ViewData["Customers"]).GetHtml()*@
-
-
-
         @section Scripts {
             @Scripts.Render("~/bundles/jqueryval")
         }
@@ -246,13 +239,14 @@
                 armar_diario();
             });
            
-   
             function armar_diario() {
 
                 var datos = {
-                    IdFormaPago: IdFormaPago.GetValue(),
+                    IdTipo_op: IdTipo_op.GetValue(),
                     IdEntidad: IdEntidad.GetValue(),
-                    Valor_a_pagar: $("#Valor_a_pagar").val()
+                    Valor_a_pagar: $("#Valor_a_pagar").val(),
+                    observacion: $("#observacion").val()
+
 
                 }
                 $.ajax({
@@ -274,6 +268,7 @@
                 });
 
             };
+
 
 
         </script>

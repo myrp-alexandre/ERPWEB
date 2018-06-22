@@ -24,6 +24,9 @@ namespace Core.Erp.Data
             this.cp_orden_giro = new HashSet<cp_orden_giro>();
             this.cp_orden_giro1 = new HashSet<cp_orden_giro>();
             this.cp_orden_giro2 = new HashSet<cp_orden_giro>();
+            this.cp_retencion_det = new HashSet<cp_retencion_det>();
+            this.cp_nota_DebCre = new HashSet<cp_nota_DebCre>();
+            this.cp_nota_DebCre1 = new HashSet<cp_nota_DebCre>();
         }
     
         public int IdCodigo_SRI { get; set; }
@@ -60,5 +63,11 @@ namespace Core.Erp.Data
         public virtual ICollection<cp_orden_giro> cp_orden_giro1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cp_orden_giro> cp_orden_giro2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cp_retencion_det> cp_retencion_det { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cp_nota_DebCre> cp_nota_DebCre { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cp_nota_DebCre> cp_nota_DebCre1 { get; set; }
     }
 }

@@ -82,7 +82,13 @@ namespace Core.Erp.Info.CuentasPorPagar
         public cp_cuotas_x_doc_Info info_cuota { get; set; }
         public ct_cbtecble_Info info_comrobante { get; set; }
         public cp_proveedor_Info info_proveedor { get; set; }
-       public cp_orden_giro_Info ()
+        public string Descripcion { get; set; }
+        public string Tipo_Vcto { get; set; }
+        public int Dias_Vencidos { get; set; }
+        public double Total_Pagado { get; set; }
+        public Nullable<double> Saldo_OG { get; set; }
+
+        public cp_orden_giro_Info ()
         {
             info_cuota = new cp_cuotas_x_doc_Info();
             info_comrobante = new ct_cbtecble_Info();

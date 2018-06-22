@@ -10,7 +10,9 @@ namespace Core.Erp.Bus.CuentasPorPagar
    public class cp_orden_pago_tipo_x_empresa_Bus
     {
         cp_orden_pago_tipo_x_empresa_Data oData = new cp_orden_pago_tipo_x_empresa_Data();
-        public List<cp_orden_pago_tipo_x_empresa_Info> Get_list_cuotas_x_doc_det(int IdEmpresa)
+        cp_orden_pago_tipo_Data odata_tipo = new cp_orden_pago_tipo_Data();
+        cp_orden_pago_tipo_Info info_op_tipo = new cp_orden_pago_tipo_Info();
+        public List<cp_orden_pago_tipo_x_empresa_Info> get_list(int IdEmpresa)
         {
             try
             {
@@ -33,11 +35,21 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
-        public bool eliminarDB(int IdEmpresa, decimal IdCuota)
+     
+        public bool guardarDB(cp_orden_pago_tipo_x_empresa_Info info)
         {
             try
             {
-                return oData.eliminarDB(IdEmpresa, IdCuota);
+                info_op_tipo.IdTipo_op = info.IdTipo_op;
+                info_op_tipo.Descripcion = info.Descripcion;
+                info_op_tipo.GeneraDiario = info.GeneraDiario;
+                info_op_tipo.GeneraDiario = "S";
+                if (odata_tipo.guardarDB(info_op_tipo))
+                {
+                    return oData.guardarDB(info);
+                }
+                else
+                    return false;
             }
             catch (Exception)
             {
@@ -45,11 +57,44 @@ namespace Core.Erp.Bus.CuentasPorPagar
             }
         }
 
-        public bool guardarDB(List<cp_orden_pago_tipo_x_empresa_Info> Lista)
+        public bool modificarDB(cp_orden_pago_tipo_x_empresa_Info info)
         {
             try
             {
-                return oData.guardarDB(Lista);
+                info_op_tipo.IdTipo_op = info.IdTipo_op;
+                info_op_tipo.Descripcion = info.Descripcion;
+                info_op_tipo.GeneraDiario = info.GeneraDiario;
+                if (odata_tipo.modificarDB(info_op_tipo))
+                {
+                    return oData.modificarDB(info);
+                }
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        public bool anularDB(cp_orden_pago_tipo_x_empresa_Info info)
+        {
+            try
+            {
+                return oData.anularDB(info);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool si_existe(cp_orden_pago_tipo_x_empresa_Info info)
+        {
+            try
+            {
+                return oData.si_existe(info);
             }
             catch (Exception)
             {
