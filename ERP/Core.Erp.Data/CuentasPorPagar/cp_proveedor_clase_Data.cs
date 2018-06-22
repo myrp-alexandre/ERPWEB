@@ -80,7 +80,7 @@ namespace Core.Erp.Data.CuentasPorPagar
             }
         }
 
-        private int get_id(int IdEmpresa)
+        public int get_id(int IdEmpresa)
         {
             try
             {

@@ -76,5 +76,26 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
-    }
+
+        public int get_id(int IdEmpresa)
+        {
+            try
+            {
+                try
+                {
+                    return odata.get_id(IdEmpresa);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        }
 }

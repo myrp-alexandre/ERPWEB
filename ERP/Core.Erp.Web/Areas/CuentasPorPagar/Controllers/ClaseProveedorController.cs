@@ -37,8 +37,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         public ActionResult Nuevo(int IdClaseProveedor = 0)
         {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             cargar_combos();
             cp_proveedor_clase_Info model = new cp_proveedor_clase_Info();
+            model.cod_clase_proveedor = bus_clase_proveedor.get_id(IdEmpresa).ToString();
             return View(model);
         }
 
