@@ -63,6 +63,7 @@ namespace Core.Erp.Data
         public virtual DbSet<VWBAN_001> VWBAN_001 { get; set; }
         public virtual DbSet<VWBAN_002> VWBAN_002 { get; set; }
         public virtual DbSet<VWBAN_002_cancelaciones> VWBAN_002_cancelaciones { get; set; }
+        public virtual DbSet<VWBAN_003> VWBAN_003 { get; set; }
     
         public virtual ObjectResult<SPINV_001_Result> SPINV_001(Nullable<int> idEmpresa, Nullable<int> idSucursal_ini, Nullable<int> idSucursal_fin, Nullable<int> idBodega_ini, Nullable<int> idBodega_fin, Nullable<decimal> idProducto_ini, Nullable<decimal> idProducto_fin, string idCategoria, Nullable<int> idLinea, Nullable<int> idGrupo, Nullable<int> idSubGrupo, Nullable<System.DateTime> fecha_corte, Nullable<bool> mostrar_stock_0)
         {
@@ -357,6 +358,23 @@ namespace Core.Erp.Data
                 new ObjectParameter("Mostrar_detallado", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPINV_005_Result>("SPINV_005", idEmpresaParameter, idSucursal_iniParameter, idSucursal_finParameter, idBodega_iniParameter, idBodega_finParameter, idProducto_iniParameter, idProducto_finParameter, fecha_iniParameter, fecha_finParameter, idUsuarioParameter, no_Mostrar_valores_en_0Parameter, mostrar_detalladoParameter);
+        }
+    
+        public virtual ObjectResult<SPBAN_004_Result> SPBAN_004(Nullable<int> idEmpresa, Nullable<int> idBanco, Nullable<decimal> idConciliacion)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idBancoParameter = idBanco.HasValue ?
+                new ObjectParameter("IdBanco", idBanco) :
+                new ObjectParameter("IdBanco", typeof(int));
+    
+            var idConciliacionParameter = idConciliacion.HasValue ?
+                new ObjectParameter("IdConciliacion", idConciliacion) :
+                new ObjectParameter("IdConciliacion", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPBAN_004_Result>("SPBAN_004", idEmpresaParameter, idBancoParameter, idConciliacionParameter);
         }
     }
 }

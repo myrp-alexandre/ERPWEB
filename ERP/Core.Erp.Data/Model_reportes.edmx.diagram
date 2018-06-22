@@ -41,6 +41,7 @@
         <EntityTypeShape EntityType="Model_reportes.VWBAN_001" Width="1.5" PointX="22.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_reportes.VWBAN_002" Width="1.5" PointX="22.375" PointY="6.75" />
         <EntityTypeShape EntityType="Model_reportes.VWBAN_002_cancelaciones" Width="1.5" PointX="10.375" PointY="22.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWBAN_003" Width="1.5" PointX="22.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
