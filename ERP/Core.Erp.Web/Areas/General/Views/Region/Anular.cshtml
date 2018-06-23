@@ -11,34 +11,17 @@
 @using (Html.BeginForm("Anular", "Region", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.Cod_Region)
-    <div class="row">
+<div class="row">
+    <div class="col-md-12">
         <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdPais">País</label>
-                    @Html.HiddenFor(q => q.IdPais)
-                    @Html.DevExpress().ComboBoxFor(q => q.IdPais, settings =>
-               {
-                   settings.Name = "IdPais";
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                   settings.Properties.Columns.Add("IdPais", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("Nombre", "Nombre").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                   //Campo ID
-                   settings.Properties.ValueField = "IdPais";
-                   settings.Properties.ValueType = typeof(string);
-                   settings.Properties.TextField = "Nombre";
-                   settings.Properties.NullText = "== Seleccione ==";
-
-                   settings.Properties.DropDownButton.Enabled = false;
-                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                   settings.ReadOnly = true;
-               }).BindList(ViewBag.lst_pais).GetHtml()
-                    @Html.ValidationMessageFor(q => q.IdPais, "", new { @class = "text-danger" })
-                </div>
+            <div class="form-group">
+                <label for="IdPais">País</label>
+                @Html.DropDownListFor(q => q.IdPais, new SelectList(ViewBag.lst_pais, "IdPais", "Nombre"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(q => q.IdPais, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
+</div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -64,7 +47,7 @@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
-        <a class="btn btn-default" href="@Url.Action("Index","Region",new { Area = "General" },null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","Region", new {IdPais = Model.IdPais, Area = "General" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
