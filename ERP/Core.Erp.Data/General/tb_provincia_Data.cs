@@ -9,7 +9,7 @@ namespace Core.Erp.Data.General
 {
     public class tb_provincia_Data
     {
-        public List<tb_provincia_Info> get_list(bool mostrar_anulados)
+        public List<tb_provincia_Info> get_list( bool mostrar_anulados)
         {
             try
             {
@@ -117,7 +117,7 @@ namespace Core.Erp.Data.General
             }
         }
 
-        public tb_provincia_Info get_info(string IdProvincia)
+        public tb_provincia_Info get_info(string IdPais, string IdProvincia)
         {
             try
             {
@@ -125,7 +125,7 @@ namespace Core.Erp.Data.General
 
                 using (Entities_general Context = new Entities_general())
                 {
-                    tb_provincia Entity = Context.tb_provincia.FirstOrDefault(q => q.IdProvincia == IdProvincia);
+                    tb_provincia Entity = Context.tb_provincia.FirstOrDefault(q => q.IdPais == IdPais && q.IdProvincia == IdProvincia);
                     if (Entity == null) return null;
                     info = new tb_provincia_Info
                     {
@@ -184,7 +184,7 @@ namespace Core.Erp.Data.General
             {
                 using (Entities_general Context = new Entities_general())
                 {
-                    tb_provincia Entity = Context.tb_provincia.FirstOrDefault(q => q.IdProvincia == info.IdProvincia);
+                    tb_provincia Entity = Context.tb_provincia.FirstOrDefault(q => q.IdPais == info.IdPais && q.IdProvincia == info.IdProvincia);
                     if (Entity == null) return false;
 
                     Entity.Cod_Provincia = info.Cod_Provincia;
@@ -212,7 +212,7 @@ namespace Core.Erp.Data.General
             {
                 using (Entities_general Context = new Entities_general())
                 {
-                    tb_provincia Entity = Context.tb_provincia.FirstOrDefault(q => q.IdProvincia == info.IdProvincia);
+                    tb_provincia Entity = Context.tb_provincia.FirstOrDefault(q => q.IdPais == info.IdPais && q.IdProvincia == info.IdProvincia);
                     if (Entity == null) return false;
                     Entity.Estado = info.Estado = "I";
 

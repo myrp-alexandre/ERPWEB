@@ -36,11 +36,11 @@ namespace Core.Erp.Bus.General
             }
         }
 
-        public tb_provincia_Info get_info(string IdProvincia)
+        public tb_provincia_Info get_info( string IdPais, string IdProvincia)
         {
             try
             {
-                return odata.get_info(IdProvincia);
+                return odata.get_info(IdPais, IdProvincia);
             }
             catch (Exception)
             {

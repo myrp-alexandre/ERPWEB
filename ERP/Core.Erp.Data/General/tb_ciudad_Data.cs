@@ -126,7 +126,7 @@ namespace Core.Erp.Data.General
                         IdCiudad = Entity.IdCiudad,
                         Cod_Ciudad = Entity.Cod_Ciudad,
                         Descripcion_Ciudad=Entity.Descripcion_Ciudad,
-                        Estado = Entity.Estado                     
+                        Estado = Entity.Estado 
                     };
                 }
 

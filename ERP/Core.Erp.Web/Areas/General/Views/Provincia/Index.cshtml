@@ -11,6 +11,9 @@
 @using (Html.BeginForm())
 {
 
-    @Html.Action("GridViewPartial_provincia")
+    @Html.Action("GridViewPartial_provincia", new { IdPais = ViewBag.IdPais })
 
+    <div class="box-footer">
+        <a class="btn btn-default" href="@Url.Action("Index","Pais",new { IdPais = ViewBag.IdPais, Area = "General" },null)">Volver</a>
+    </div>
 }

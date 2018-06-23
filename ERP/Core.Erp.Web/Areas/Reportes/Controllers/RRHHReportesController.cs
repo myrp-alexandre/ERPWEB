@@ -104,5 +104,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
+        public ActionResult ROL_009(int IdEmpresa = 0)
+        {
+            ROL_009_Rpt model = new ROL_009_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.empresa = Session["nom_empresa"].ToString();
+            if (IdEmpresa == 0)
+                model.RequestParameters = false;
+            return View(model);
+        }
     }
 }
