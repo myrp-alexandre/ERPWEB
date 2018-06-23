@@ -87,8 +87,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                  Session["ct_cbtecble_det_Info"] = null;
                  Session["detalle_retencion"] = null;
 
-                Session["info_param_op"] = bus_parametros.get_info(IdEmpresa);
+                 Session["info_param_op"] = bus_parametros.get_info(IdEmpresa);
                  model= bus_retencion.get_info_factura( IdEmpresa, IdTipoCbte_Ogiro, IdCbteCble_Ogiro);
+            if (model.co_valoriva > 0)
+                Session["co_valoriva"] = model.co_valoriva;
                  cargar_combos();
                  cargar_combos_detalle();
                  return View(model);
@@ -331,51 +333,112 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         // grid de retencion
         [HttpPost, ValidateInput(false)]
-        public ActionResult EditingAddNew_ret([ModelBinder(typeof(DevExpressEditorsBinder))] cp_retencion_det_Info info_det)
+        public ActionResult EditingAddNew_ret([ModelBinder(typeof(DevExpressEditorsBinder))]  cp_retencion_det_Info info_det)
         {
-            lst_codigo_retencion = Session["lst_codigo_retencion"] as List<cp_codigo_SRI_Info>;
-            double porcentaje = 0;
-            porcentaje= lst_codigo_retencion.Where(v => v.codigoSRI == info_det.re_Codigo_impuesto).FirstOrDefault().co_porRetencion;
-            info_det.re_Porcen_retencion = porcentaje;
-            info_det.re_valor_retencion = (info_det.re_baseRetencion * porcentaje)/100;
-
-            // calculando valores retencion
-            if (ModelState.IsValid)
-                detalle_retencion_info.AddRow(info_det);
+            cp_codigo_SRI_Info info_codifo_sri = new cp_codigo_SRI_Info();
             cp_retencion_Info model = new cp_retencion_Info();
-            model.detalle = detalle_retencion_info.get_list();
+            lst_codigo_retencion = Session["lst_codigo_retencion"] as List<cp_codigo_SRI_Info>;
+            info_codifo_sri = lst_codigo_retencion.Where(v => v.codigoSRI == info_det.re_Codigo_impuesto).FirstOrDefault();
+            info_det.re_Porcen_retencion = info_codifo_sri.co_porRetencion;
+            if (info_codifo_sri.IdTipoSRI == "COD_RET_IVA")
+            {
+                if (Session["co_valoriva"] != null)
+                {
+                    info_det.re_baseRetencion = Convert.ToDouble(Session["co_valoriva"]);
+                    info_det.re_valor_retencion = (info_det.re_baseRetencion * info_codifo_sri.co_porRetencion) / 100;
 
-            // armando diario contable
-            var detalle=  detalle_retencion_info.get_list();
-            info_param_op = Session["info_param_op"] as cp_parametros_Info;
-            comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
+
+                    // calculando valores retencion
+                    detalle_retencion_info.AddRow(info_det);
+                    model.detalle = detalle_retencion_info.get_list();
+
+                    // armando diario contable
+                    var detalle = detalle_retencion_info.get_list();
+                    info_param_op = Session["info_param_op"] as cp_parametros_Info;
+                    comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
+
+                }
+            }
+            else
+            {
+                if (info_codifo_sri.co_porRetencion!=0 & info_det.re_baseRetencion!=null & info_det.re_baseRetencion!=0)
+                {
+                    info_det.re_valor_retencion = (info_det.re_baseRetencion * info_codifo_sri.co_porRetencion) / 100;
+
+
+
+                    // calculando valores retencion
+                    detalle_retencion_info.AddRow(info_det);
+                    model.detalle = detalle_retencion_info.get_list();
+
+                    // armando diario contable
+                    var detalle = detalle_retencion_info.get_list();
+                    info_param_op = Session["info_param_op"] as cp_parametros_Info;
+                    comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
+                }
+
+
+            }
+
+           
 
             cargar_combos_detalle();
+            model.detalle = detalle_retencion_info.get_list();
             return PartialView("_GridViewPartial_retencion_det", model);
         }
 
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate_ret([ModelBinder(typeof(DevExpressEditorsBinder))] cp_retencion_det_Info info_det)
         {
-            lst_codigo_retencion = Session["lst_codigo_retencion"] as List<cp_codigo_SRI_Info>;
-            double porcentaje = 0;
-            porcentaje = lst_codigo_retencion.Where(v => v.codigoSRI == info_det.re_Codigo_impuesto).FirstOrDefault().co_porRetencion;
-            info_det.re_Porcen_retencion = porcentaje;
-            info_det.re_valor_retencion = (info_det.re_baseRetencion * porcentaje) / 100;
-
-            // calcular valore s retencion
-            if (ModelState.IsValid)
-                detalle_retencion_info.UpdateRow(info_det);
+            cp_codigo_SRI_Info info_codifo_sri = new cp_codigo_SRI_Info();
             cp_retencion_Info model = new cp_retencion_Info();
-            model.detalle = detalle_retencion_info.get_list();
+            lst_codigo_retencion = Session["lst_codigo_retencion"] as List<cp_codigo_SRI_Info>;
+            info_codifo_sri = lst_codigo_retencion.Where(v => v.codigoSRI == info_det.re_Codigo_impuesto).FirstOrDefault();
+            info_det.re_Porcen_retencion = info_codifo_sri.co_porRetencion;
+            if (info_codifo_sri.IdTipoSRI == "COD_RET_IVA")
+            {
+                if (Session["co_valoriva"] != null)
+                {
+                    info_det.re_baseRetencion = Convert.ToDouble(Session["co_valoriva"]);
+                    info_det.re_valor_retencion = (info_det.re_baseRetencion * info_codifo_sri.co_porRetencion) / 100;
 
 
-            // armando diario contable
-            var detalle = detalle_retencion_info.get_list();
-            info_param_op = Session["info_param_op"] as cp_parametros_Info;
-            comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
+                    // calculando valores retencion
+                    detalle_retencion_info.UpdateRow(info_det);
+                    model.detalle = detalle_retencion_info.get_list();
+
+                    // armando diario contable
+                    var detalle = detalle_retencion_info.get_list();
+                    info_param_op = Session["info_param_op"] as cp_parametros_Info;
+                    comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
+
+                }
+            }
+            else
+            {
+                if (info_codifo_sri.co_porRetencion != 0 & info_det.re_baseRetencion != null & info_det.re_baseRetencion != 0)
+                {
+                    info_det.re_valor_retencion = (info_det.re_baseRetencion * info_codifo_sri.co_porRetencion) / 100;
+
+
+
+                    // calculando valores retencion
+                    detalle_retencion_info.UpdateRow(info_det);
+                    model.detalle = detalle_retencion_info.get_list();
+
+                    // armando diario contable
+                    var detalle = detalle_retencion_info.get_list();
+                    info_param_op = Session["info_param_op"] as cp_parametros_Info;
+                    comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
+                }
+
+
+            }
+
+
 
             cargar_combos_detalle();
+            model.detalle = detalle_retencion_info.get_list();
             return PartialView("_GridViewPartial_retencion_det", model);
         }
 
@@ -455,8 +518,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     cbtecble_debe_Info.IdEmpresa = info_param_op.IdEmpresa;
                     cbtecble_debe_Info.IdTipoCbte = (int)info_param_op.pa_IdTipoCbte_x_Retencion;
                     cbtecble_debe_Info.IdCtaCble = info_param_op.pa_ctacble_x_RetFte_default;
-                    cbtecble_debe_Info.dc_Valor_debe = item.re_valor_retencion;
-                    cbtecble_debe_Info.dc_Valor = item.re_valor_retencion;
+                    cbtecble_debe_Info.dc_Valor_debe =(double) item.re_valor_retencion;
+                    cbtecble_debe_Info.dc_Valor =(double) item.re_valor_retencion;
                     cbtecble_debe_Info.dc_Observacion = "";
                     sec++;
                     AddRow(cbtecble_debe_Info);
@@ -467,8 +530,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                         cbtecble_haber_Info.IdEmpresa = info_param_op.IdEmpresa;
                         cbtecble_haber_Info.IdTipoCbte = (int)info_param_op.pa_IdTipoCbte_x_Retencion;
                         cbtecble_haber_Info.IdCtaCble = info_param_op.pa_ctacble_deudora;
-                        cbtecble_haber_Info.dc_Valor_haber = detalle_retencion.Sum(v => v.re_valor_retencion);
-                        cbtecble_haber_Info.dc_Valor = detalle_retencion.Sum(v => v.re_valor_retencion)*-1;
+                        cbtecble_haber_Info.dc_Valor_haber = detalle_retencion.Sum( v => Convert.ToDouble( v.re_valor_retencion));
+                        cbtecble_haber_Info.dc_Valor = detalle_retencion.Sum(v => Convert.ToDouble(v.re_valor_retencion))*-1;
                         cbtecble_haber_Info.dc_Observacion = "";
                         AddRow(cbtecble_haber_Info);
 
