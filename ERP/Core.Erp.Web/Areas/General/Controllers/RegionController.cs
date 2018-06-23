@@ -50,7 +50,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", ViewBag.IdPais = model.IdPais);
         }
 
         public ActionResult Modificar(string IdPais = "", string codRegion = "")
@@ -73,7 +73,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index", ViewBag.IdPais = model.IdPais);
+            return RedirectToAction("Index",new { IdPais = model.IdPais });
         }
         public ActionResult Anular(string IdPais = "", string codRegion = "")
         {
@@ -95,7 +95,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index", ViewBag.IdPais = model.IdPais);
+            return RedirectToAction("Index", new { IdPais = model.IdPais });
         }
     }
 }
