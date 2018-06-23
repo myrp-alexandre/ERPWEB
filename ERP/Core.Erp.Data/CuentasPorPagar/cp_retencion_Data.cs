@@ -135,9 +135,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                             Idsecuencia=secuencia,
                             re_tipoRet = item.re_tipoRet,
                             re_Codigo_impuesto=item.re_Codigo_impuesto,
-                            re_baseRetencion=item.re_baseRetencion,
-                            re_Porcen_retencion=item.re_Porcen_retencion,
-                            re_valor_retencion=item.re_valor_retencion,
+                            re_baseRetencion=(double)item.re_baseRetencion,
+                            re_Porcen_retencion= (double)item.re_Porcen_retencion,
+                            re_valor_retencion= (double)item.re_valor_retencion,
                             IdCodigo_SRI=item.IdCodigo_SRI,
                             IdUsuario=info.IdUsuario,
                             re_estado="A"

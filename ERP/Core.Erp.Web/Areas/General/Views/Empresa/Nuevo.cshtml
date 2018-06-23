@@ -1,22 +1,34 @@
 ﻿@model Core.Erp.Info.General.tb_empresa_Info
 @{
     ViewBag.Title = "Nueva empresa";
-    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
-    {
-        Response.Redirect("~/Account/Login");
-    }
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
 }
 
-@using (Html.BeginForm("Nuevo","Empresa",FormMethod.Post, new { @class = "form", @role = "form"}))
+@using (Html.BeginForm("Nuevo", "Empresa", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="row">
         <div class="col-md-12">
+
+
+
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="codigo">Logo*</label>
+                    @Html.DevExpress().BinaryImageFor(m => m.em_logo, settings =>
+               {
+               }).GetHtml()
+                </div>
+            </div>
+
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="codigo">Código*</label>
-                    @Html.TextBoxFor(q=> q.codigo, new { @class = "form-control"})
-                    @Html.ValidationMessageFor(q=> q.codigo,"",new { @class = "text-danger"})
+                    @Html.TextBoxFor(q => q.codigo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.codigo, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -31,22 +43,23 @@
             <div class="col-md-2">
                 <div class="checkbox">
                     <label for="ObligadoAllevarConta_bool">
-                    @Html.CheckBoxFor(q=> q.ObligadoAllevarConta_bool) Obligado a llevar contabilidad</label>
+                        @Html.CheckBoxFor(q => q.ObligadoAllevarConta_bool) Obligado a llevar contabilidad
+                    </label>
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="">Fecha inicio contable*</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q=>q.em_fechaInicioContable,"{0:dd/MM/yyyy}", new { @class = "form-control", @id = "datepicker" })
+                        @Html.TextBoxFor(q => q.em_fechaInicioContable, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "datepicker" })
                         @Html.ValidationMessageFor(q => q.em_fechaInicioContable, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div>            
+            </div>
         </div>
     </div>
 

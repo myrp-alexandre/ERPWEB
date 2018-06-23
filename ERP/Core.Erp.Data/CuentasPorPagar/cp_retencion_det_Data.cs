@@ -77,11 +77,11 @@ namespace Core.Erp.Data.CuentasPorPagar
                             IdRetencion = item.IdRetencion,
                             Idsecuencia = sec,
                             re_tipoRet = item.re_tipoRet,
-                            re_baseRetencion = item.re_baseRetencion,
+                            re_baseRetencion = (double)item.re_baseRetencion,
                             IdCodigo_SRI = item.IdCodigo_SRI,
                             re_Codigo_impuesto = item.re_Codigo_impuesto,
-                            re_valor_retencion = item.re_valor_retencion,
-                            re_Porcen_retencion = item.re_Porcen_retencion,
+                            re_valor_retencion = (double)item.re_valor_retencion,
+                            re_Porcen_retencion =(double) item.re_Porcen_retencion,
                             re_estado="A"
                         };
                         Context.cp_retencion_det.Add(Entity);
