@@ -6,11 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="9577fa8149bd48ec8fdc9082c39c9d5f" Name="Diagram1" ZoomLevel="66">
         <EntityTypeShape EntityType="Model_general.tb_sucursal" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_general.tb_region" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model_general.tb_pais" Width="1.5" PointX="4.875" PointY="0.75" />
         <EntityTypeShape EntityType="Model_general.tb_provincia" Width="1.5" PointX="7.125" PointY="0.75" />
         <AssociationConnector Association="Model_general.FK_tb_provincia_tb_pais" />
-        <AssociationConnector Association="Model_general.FK_tb_provincia_tb_region" />
         <EntityTypeShape EntityType="Model_general.tb_CatalogoTipo" Width="1.5" PointX="3.375" PointY="5.75" />
         <EntityTypeShape EntityType="Model_general.tb_Catalogo" Width="1.5" PointX="5.625" PointY="6.5" />
         <AssociationConnector Association="Model_general.FK_tb_Catalogo_tb_CatalogoTipo" />
@@ -47,6 +45,9 @@
         <AssociationConnector Association="Model_general.FK_tb_sis_reporte_tb_modulo" />
         <EntityTypeShape EntityType="Model_general.vwtb_pais" Width="1.5" PointX="5.375" PointY="12.75" />
         <EntityTypeShape EntityType="Model_general.tb_persona_tipo" Width="1.5" PointX="7.375" PointY="14.75" />
+        <EntityTypeShape EntityType="Model_general.tb_region" Width="1.5" PointX="7.125" PointY="17.625" />
+        <AssociationConnector Association="Model_general.FK_tb_region_tb_pais" />
+        <AssociationConnector Association="Model_general.FK_tb_provincia_tb_region" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
