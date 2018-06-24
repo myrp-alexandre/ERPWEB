@@ -20,12 +20,12 @@ namespace Core.Erp.Web.Areas.General.Controllers
             return View();
         }
 
-        private void cargar_combos(string IdPais)
+        private void cargar_combos(tb_provincia_Info model)
         {
             var lst_pais = bus_pais.get_list(false);
             ViewBag.lst_pais = lst_pais;
 
-            var lst_region = bus_region.get_list(IdPais, false);
+            var lst_region = bus_region.get_list(model.IdPais, false);
             ViewBag.lst_region = lst_region;
         }
 
@@ -35,7 +35,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             {
                 IdPais = IdPais
             };
-            cargar_combos(IdPais);
+            cargar_combos(model);
             return View(model);
         }
         [HttpPost]
@@ -44,7 +44,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             if (!bus_provincia.guardarDB(model))
             {
                 ViewBag.IdPais = model.IdPais;
-                cargar_combos(model.IdPais);
+                cargar_combos(model);
                 return View(model);
             }
             return RedirectToAction("Index", ViewBag.IdPais = model.IdPais);
@@ -58,7 +58,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 ViewBag.IdPais = IdPais;
                 return RedirectToAction("Index", IdPais = model.IdPais);
             }
-            cargar_combos(model.IdPais);
+            cargar_combos(model);
             return View(model);
         }
         [HttpPost]
@@ -67,7 +67,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             if (!bus_provincia.modificarDB(model))
             {
                 ViewBag.IdPais = model.IdPais;
-                cargar_combos(model.IdPais);
+                cargar_combos(model);
                 return View(model);
             }
             return RedirectToAction("Index", new { IdPais = model.IdPais });
@@ -81,7 +81,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 ViewBag.IdPais = IdPais;
                 return RedirectToAction("Index", IdPais = model.IdPais);
             }
-            cargar_combos(model.IdPais);
+            cargar_combos(model);
             return View(model);
         }
         [HttpPost]
@@ -90,7 +90,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             if (!bus_provincia.anularDB(model))
             {
                 ViewBag.IdPais = model.IdPais;
-                cargar_combos(model.IdPais);
+                cargar_combos(model);
                 return View(model);
             }
             return RedirectToAction("Index", new { IdPais = model.IdPais });

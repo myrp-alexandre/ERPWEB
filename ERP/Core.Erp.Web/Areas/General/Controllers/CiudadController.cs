@@ -11,8 +11,6 @@ namespace Core.Erp.Web.Areas.General.Controllers
     {
         tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
         tb_provincia_Bus bus_provincia = new tb_provincia_Bus();
-        List<tb_ciudad_Info> lst_ciudad = new List<tb_ciudad_Info>();
-        List<tb_provincia_Info> lst_provincia = new List<tb_provincia_Info>();
 
         public ActionResult Index(string IdProvincia = "")
         {
@@ -22,14 +20,14 @@ namespace Core.Erp.Web.Areas.General.Controllers
 
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_Ciudad()
+        public ActionResult GridViewPartial_Ciudad(string IdProvincia="")
         {
-          lst_ciudad = bus_ciudad.get_list(true);
+            var lst_ciudad = bus_ciudad.get_list(true);
             return PartialView("_GridViewPartial_Ciudad", lst_ciudad);
         }
         private void cargar_combos()
         {
-           lst_provincia = bus_provincia.get_list(false);
+         var  lst_provincia = bus_provincia.get_list(false);
             ViewBag.lst_provincias = lst_provincia;
         }
 
@@ -104,7 +102,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
         {
             try
             {
-                lst_ciudad = bus_ciudad.get_list(IdProvincia);
+               var lst_ciudad = bus_ciudad.get_list(IdProvincia);
                 return Json(lst_ciudad, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
