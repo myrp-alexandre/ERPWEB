@@ -68,7 +68,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdSubgrupo.Value = model.IdSubGrupo;
             report.p_fecha_corte.Value = model.fecha_fin;
             report.p_mostrar_stock_0.Value = model.mostrar_registros_0;
-
+            report.p_IdProducto.Value = model.IdProducto;
             report.usuario = Session["IdUsuario"].ToString();
             report.empresa = Session["nom_empresa"].ToString();
 
