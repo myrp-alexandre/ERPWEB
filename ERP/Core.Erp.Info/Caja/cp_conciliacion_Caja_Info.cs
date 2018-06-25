@@ -19,9 +19,11 @@ namespace Core.Erp.Info.Caja
         public int IdCaja { get; set; }
         [Required(ErrorMessage = "El campo estado es obligatorio")]
         public string IdEstadoCierre { get; set; }
+        [StringLength(20, ErrorMessage = "el campo observación debe tener máximo 1000 caracteres")]
         public string Observacion { get; set; }
         public Nullable<int> IdEmpresa_op { get; set; }
         public Nullable<decimal> IdOrdenPago_op { get; set; }
+        [Required(ErrorMessage = "El campo cuenta contable es obligatorio")]
         public string IdCtaCble { get; set; }
         public double Saldo_cont_al_periodo { get; set; }
         public double Ingresos { get; set; }
