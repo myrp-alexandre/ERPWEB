@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Core.Erp.Info.Caja
@@ -35,5 +36,9 @@ namespace Core.Erp.Info.Caja
         public Nullable<int> IdEmpresa_mov_caj { get; set; }
         public Nullable<int> IdTipoCbte_mov_caj { get; set; }
         public Nullable<decimal> IdCbteCble_mov_caj { get; set; }
+
+        public List<cp_conciliacion_Caja_det_Info> lst_det_fact { get; set; }
+        public List<cp_conciliacion_Caja_det_x_ValeCaja_Info> lst_det_vale { get; set; }
+        public List<cp_conciliacion_Caja_det_Ing_Caja_Info> lst_det_ing { get; set; }
     }
 }

@@ -54,8 +54,7 @@ namespace Core.Erp.Bus.Caja
                     if (odata.guardarDB(info))
                     {
                         return true;
-                    }
-                    
+                    }                    
                 }
                 return false;
             }

@@ -145,6 +145,7 @@ namespace Core.Erp.Data.SeguridadAcceso
                 int IdEmpresa = 0;
                 if(Lista.Count()>0)
                  IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
+                string IdUsuario = Lista.FirstOrDefault().IdUsuario;
 
                 using (Entities_seguridad_acceso Context = new Entities_seguridad_acceso())
                 {
@@ -163,7 +164,7 @@ namespace Core.Erp.Data.SeguridadAcceso
                     }
 
                     Context.SaveChanges();
-                    string sql = "exec spseg_corregir_menu '" + IdEmpresa + "','admin'";
+                    string sql = "exec spseg_corregir_menu '" + IdEmpresa + "','"+ IdUsuario + "'";
                     Context.Database.ExecuteSqlCommand(sql);
 
                 }

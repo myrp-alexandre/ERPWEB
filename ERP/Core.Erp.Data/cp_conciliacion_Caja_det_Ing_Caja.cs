@@ -21,7 +21,7 @@ namespace Core.Erp.Data
         public decimal IdCbteCble_movcaj { get; set; }
         public int IdTipocbte_movcaj { get; set; }
         public double valor_aplicado { get; set; }
-        public Nullable<double> valor_disponible { get; set; }
+        public double valor_disponible { get; set; }
     
         public virtual caj_Caja_Movimiento caj_Caja_Movimiento { get; set; }
         public virtual cp_conciliacion_Caja cp_conciliacion_Caja { get; set; }

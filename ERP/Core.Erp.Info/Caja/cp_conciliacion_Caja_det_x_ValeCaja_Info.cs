@@ -15,5 +15,11 @@ namespace Core.Erp.Info.Caja
         public Nullable<int> IdPunto_cargo_grupo { get; set; }
         public string IdCentroCosto { get; set; }
         public string IdCentroCosto_sub_centro_costo { get; set; }
+
+        #region Campos que no existen en la tabla
+        public DateTime fecha { get; set; }
+        public double valor { get; set; }
+        #endregion
+
     }
 }

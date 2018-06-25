@@ -31,6 +31,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return PartialView("_GridViewPartial_producto", model);
         }
 
+        public List<in_Producto_Info> get_lst_productos()
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            List<in_Producto_Info> model = bus_producto.get_list(IdEmpresa, true);
+            return model;
+        }
         private void cargar_combos(in_Producto_Info model)
         {
             in_ProductoTipo_Bus bus_producto_tipo = new in_ProductoTipo_Bus();

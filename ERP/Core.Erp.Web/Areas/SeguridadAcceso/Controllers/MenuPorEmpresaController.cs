@@ -60,6 +60,7 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
 
         public JsonResult guardar(int IdEmpresa = 0, string Ids = "")
         {
+            string IdUsuario = Session["IdUsuario"].ToString();
             string[] array = Ids.Split(',');
             List<seg_Menu_x_Empresa_Info> lista = new List<seg_Menu_x_Empresa_Info>();
             var output = array.GroupBy(q => q).ToList();
@@ -73,7 +74,7 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
                 lista.Add(info);
             }
             bus_menu_x_empresa.eliminarDB(IdEmpresa);
-            var resultado = bus_menu_x_empresa.guardarDB(lista);
+            var resultado = bus_menu_x_empresa.guardarDB(lista, IdUsuario);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }

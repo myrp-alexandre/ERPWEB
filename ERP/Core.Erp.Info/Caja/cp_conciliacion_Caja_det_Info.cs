@@ -21,5 +21,13 @@ namespace Core.Erp.Info.Caja
         public string Tipo_documento { get; set; }
         public Nullable<int> IdEmpresa_OP { get; set; }
         public Nullable<decimal> IdOrdenPago_OP { get; set; }
+
+        #region Campos que no existen en la tabla
+        public decimal IdPersona { get; set; }
+        public decimal idEntidad { get; set; }
+        public int idSucursal { get; set; }
+        public double por_iva { get; set; }
+        #endregion
+
     }
 }

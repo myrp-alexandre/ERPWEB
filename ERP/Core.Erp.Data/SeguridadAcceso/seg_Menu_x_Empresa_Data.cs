@@ -83,13 +83,15 @@ namespace Core.Erp.Data.SeguridadAcceso
             }
         }
 
-        public bool guardarDB(List<seg_Menu_x_Empresa_Info> Lista)
+        public bool guardarDB(List<seg_Menu_x_Empresa_Info> Lista, string IdUsuario="")
         {
             try
             {
                 int IdEmpresa = 0;
                 if (Lista.Count() > 0)
                     IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
+                IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
+
                 using (Entities_seguridad_acceso Context = new Entities_seguridad_acceso())
                 {
                     foreach (var item in Lista)
@@ -103,7 +105,7 @@ namespace Core.Erp.Data.SeguridadAcceso
                     }
                     Context.SaveChanges();
 
-                    string sql = "exec spseg_corregir_menu '" + IdEmpresa + "','admin'";
+                    string sql = "exec spseg_corregir_menu '" + IdEmpresa + "','" + IdUsuario + "'";
                     Context.Database.ExecuteSqlCommand(sql);
                 }
 
