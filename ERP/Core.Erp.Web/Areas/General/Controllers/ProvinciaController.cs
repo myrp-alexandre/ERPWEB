@@ -14,24 +14,29 @@ namespace Core.Erp.Web.Areas.General.Controllers
         tb_provincia_Bus bus_provincia = new tb_provincia_Bus();
         tb_pais_Bus bus_pais = new tb_pais_Bus();
         tb_region_Bus bus_region = new tb_region_Bus();
-        public ActionResult Index()
+        public ActionResult Index(string IdPais = "")
         {
+            ViewBag.IdPais = IdPais;
             return View();
         }
 
-        private void cargar_combos()
+        private void cargar_combos(tb_provincia_Info model)
         {
+
             List<tb_pais_Info> lst_pais = bus_pais.get_list(false);
             List<tb_region_Info> lst_region = bus_region.get_list("1",false);
 
-            ViewBag.lst_paises = lst_pais;
-            ViewBag.lst_regiones = lst_region;
+            ViewBag.lst_pais = lst_pais;
+            ViewBag.lst_region = lst_region;
         }
 
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(string IdPais)
         {
-            cargar_combos();
-            tb_provincia_Info model = new tb_provincia_Info();
+            tb_provincia_Info model = new tb_provincia_Info
+            {
+                IdPais = IdPais
+            };
+            cargar_combos(model);
             return View(model);
         }
         [HttpPost]
@@ -39,18 +44,22 @@ namespace Core.Erp.Web.Areas.General.Controllers
         {
             if (!bus_provincia.guardarDB(model))
             {
-                cargar_combos();
+                ViewBag.IdPais = model.IdPais;
+                cargar_combos(model);
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", ViewBag.IdPais = model.IdPais);
         }
 
-        public ActionResult Modificar(string IdProvincia = "")
+        public ActionResult Modificar(string IdPais = "", string IdProvincia = "")
         {
-            tb_provincia_Info model = bus_provincia.get_info(IdProvincia);
+            tb_provincia_Info model = bus_provincia.get_info(IdPais, IdProvincia);
             if (model == null)
-                return RedirectToAction("Index");
-            cargar_combos();            
+            {
+                ViewBag.IdPais = IdPais;
+                return RedirectToAction("Index", IdPais = model.IdPais);
+            }
+            cargar_combos(model);
             return View(model);
         }
         [HttpPost]
@@ -58,18 +67,22 @@ namespace Core.Erp.Web.Areas.General.Controllers
         {
             if (!bus_provincia.modificarDB(model))
             {
-                cargar_combos();
+                ViewBag.IdPais = model.IdPais;
+                cargar_combos(model);
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { IdPais = model.IdPais });
         }
 
-        public ActionResult Anular(string IdProvincia = "")
+        public ActionResult Anular(string IdPais = "", string IdProvincia = "")
         {
-            tb_provincia_Info model = bus_provincia.get_info(IdProvincia);
+            tb_provincia_Info model = bus_provincia.get_info(IdPais, IdProvincia);
             if (model == null)
-                return RedirectToAction("Index");
-            cargar_combos();
+            {
+                ViewBag.IdPais = IdPais;
+                return RedirectToAction("Index", IdPais = model.IdPais);
+            }
+            cargar_combos(model);
             return View(model);
         }
         [HttpPost]
@@ -77,10 +90,11 @@ namespace Core.Erp.Web.Areas.General.Controllers
         {
             if (!bus_provincia.anularDB(model))
             {
-                cargar_combos();
+                ViewBag.IdPais = model.IdPais;
+                cargar_combos(model);
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { IdPais = model.IdPais });
         }
 
         [ValidateInput(false)]

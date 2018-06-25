@@ -8419,9 +8419,7 @@
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_005.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_006.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_007.cshtml" />
-<<<<<<< HEAD
     <Content Include="Areas\General\Views\Imagenes\Imagenes.cshtml" />
-=======
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_009.cshtml" />
     <Content Include="bower_DevExpress\globalize-1.3.0\.bowerrc" />
     <Content Include="bower_DevExpress\globalize-1.3.0\.gitattributes" />
@@ -8438,7 +8436,6 @@
     <Content Include="bower_DevExpress\globalize-1.3.0\script\release.sh" />
     <Content Include="bower_DevExpress\globalize-1.3.0\src\.dist-jshintrc" />
     <Content Include="bower_DevExpress\globalize-1.3.0\src\.jshintrc" />
->>>>>>> ee9f402c63d2ed2f14a440595b6dab6157a0d307
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
