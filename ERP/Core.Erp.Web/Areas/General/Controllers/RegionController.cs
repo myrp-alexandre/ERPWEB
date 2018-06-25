@@ -22,8 +22,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_region(string IdPais = "")
         {
+            List<tb_region_Info> model = new List<tb_region_Info>();
+            model = bus_region.get_list(IdPais, true);
             ViewBag.IdPais = IdPais;
-            List<tb_region_Info> model = bus_region.get_list(IdPais, true);
             return PartialView("_GridViewPartial_region", model);
         }
         private void cargar_combos()
@@ -51,7 +52,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index", ViewBag.IdPais = model.IdPais);
+            return RedirectToAction("Index", new { IdPais = model.IdPais });
         }
 
         public ActionResult Modificar( string codRegion = "")
@@ -74,7 +75,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index", ViewBag.IdPais = model.IdPais);
+            return RedirectToAction("Index", new { IdPais = model.IdPais });
         }
         public ActionResult Anular( string codRegion = "")
         {
@@ -96,7 +97,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index", ViewBag.IdPais = model.IdPais);
+            return RedirectToAction("Index", new { IdPais = model.IdPais });
         }
     }
 }

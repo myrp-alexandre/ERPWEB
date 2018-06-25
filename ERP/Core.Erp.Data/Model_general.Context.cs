@@ -27,7 +27,6 @@ namespace Core.Erp.Data
     
         public virtual DbSet<tb_sucursal> tb_sucursal { get; set; }
         public virtual DbSet<tb_pais> tb_pais { get; set; }
-        public virtual DbSet<tb_provincia> tb_provincia { get; set; }
         public virtual DbSet<tb_CatalogoTipo> tb_CatalogoTipo { get; set; }
         public virtual DbSet<tb_Catalogo> tb_Catalogo { get; set; }
         public virtual DbSet<tb_empresa> tb_empresa { get; set; }
@@ -50,5 +49,7 @@ namespace Core.Erp.Data
         public virtual DbSet<tb_region> tb_region { get; set; }
         public virtual DbSet<vwtb_ciudad_id> vwtb_ciudad_id { get; set; }
         public virtual DbSet<vwtb_provincia> vwtb_provincia { get; set; }
+        public virtual DbSet<vwtb_parroquia> vwtb_parroquia { get; set; }
+        public virtual DbSet<tb_provincia> tb_provincia { get; set; }
     }
 }

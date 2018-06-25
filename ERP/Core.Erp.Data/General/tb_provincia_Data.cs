@@ -60,47 +60,20 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
-
+        
         private string get_id()
         {
             try
             {
-                string ID = "00001";
-
+                int ID = 1;
                 using (Entities_general Context = new Entities_general())
                 {
-                    var lst = from q in Context.tb_provincia
+                    var lst = from q in Context.vwtb_provincia
                               select q;
-
                     if (lst.Count() > 0)
-                        ID = (Convert.ToInt32(lst.Max(q => q.IdProvincia)) + 1).ToString("00000");
+                        ID = lst.Max(q => q.IdProvincia) + 1;
                 }
-
-                return ID;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-       
-        public bool validar_existe_Id(string IdProvincia)
-        {
-            try
-            {
-                using (Entities_general Context = new Entities_general())
-                {
-                    var lst = from q in Context.tb_provincia
-                              where IdProvincia == q.IdProvincia
-                              select q;
-
-                    if (lst.Count() > 0)
-                        return true;
-                    else
-                        return false;
-                }
+                return ID.ToString("0000");
             }
             catch (Exception)
             {
@@ -147,7 +120,7 @@ namespace Core.Erp.Data.General
                 {
                     tb_provincia Entity = new tb_provincia
                     {
-                        IdProvincia = info.IdProvincia = get_id(),
+                        IdProvincia = info.IdProvincia=get_id(),
                         Cod_Provincia = info.Cod_Provincia,
                         Descripcion_Prov = info.Descripcion_Prov,                        
                         IdPais = info.IdPais,

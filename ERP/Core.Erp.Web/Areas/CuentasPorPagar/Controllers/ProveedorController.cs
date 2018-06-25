@@ -46,7 +46,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             ViewBag.lst_cuentas = lst_cuentas;
 
             tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
-            var lst_ciudad = bus_ciudad.get_list(false);
+            var lst_ciudad = bus_ciudad.get_list("",false);
             ViewBag.lst_ciudad = lst_ciudad;
 
             cp_codigo_SRI_Bus bus_codigo = new cp_codigo_SRI_Bus();

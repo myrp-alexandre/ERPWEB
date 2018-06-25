@@ -122,6 +122,7 @@
     <Compile Include="Caja\caj_Caja_Movimiento_det_Data.cs" />
     <Compile Include="Caja\caj_Caja_Movimiento_Tipo_Data.cs" />
     <Compile Include="Caja\caj_parametro_Data.cs" />
+    <Compile Include="Caja\cp_conciliacion_Caja_Data.cs" />
     <Compile Include="caj_Caja.cs">
       <DependentUpon>Model_caja.tt</DependentUpon>
     </Compile>
@@ -1199,6 +1200,9 @@
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
     <Compile Include="vwtb_pais.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwtb_parroquia.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
     <Compile Include="vwtb_provincia.cs">

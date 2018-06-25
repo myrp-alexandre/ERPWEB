@@ -22,16 +22,10 @@ namespace Core.Erp.Web.Areas.General.Controllers
 
         private void cargar_combos(string IdPais)
         {
-
-<<<<<<< HEAD
-            List<tb_pais_Info> lst_pais = bus_pais.get_list(false);
-            List<tb_region_Info> lst_region = bus_region.get_list("1",false);
-=======
+            
             var lst_pais = bus_pais.get_list(false);
->>>>>>> 209821f05af9b84e29a7017b269f51ac8ca23129
             ViewBag.lst_pais = lst_pais;
-
-            var lst_region = bus_region.get_list(IdPais, false);
+            var lst_region = bus_region.get_list("1",false);
             ViewBag.lst_region = lst_region;
         }
 
@@ -54,7 +48,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 cargar_combos(model.IdPais);
                 return View(model);
             }
-            return RedirectToAction("Index",new { IdPais = ViewBag.IdPais});
+            return RedirectToAction("Index", new { IdPais = model.IdPais });
         }
 
         public ActionResult Modificar( string IdProvincia = "")
@@ -63,7 +57,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             if (model == null)
             {
                 ViewBag.IdPais = model.IdPais;
-                return RedirectToAction("Index", ViewBag.IdPais = model.IdPais);
+                return RedirectToAction("Index", ViewBag.IdPais = model.IdPais );
             }
             cargar_combos(model.IdPais);
             return View(model);
@@ -77,7 +71,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 cargar_combos(model.IdPais);
                 return View(model);
             }
-            return RedirectToAction("Index", new { IdPais = ViewBag.IdPais });
+            return RedirectToAction("Index", new { IdPais = model.IdPais });
         }
 
         public ActionResult Anular( string IdProvincia = "")
@@ -100,13 +94,14 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 cargar_combos(model.IdPais);
                 return View(model);
             }
-            return RedirectToAction("Index", new { IdPais = ViewBag.IdPais });
+            return RedirectToAction("Index", new { IdPais = model.IdPais });
         }
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial_provincia(string IdPais = "")
         {
-            List<tb_provincia_Info> model = bus_provincia.get_list(IdPais, true);
+            List<tb_provincia_Info> model = new List<tb_provincia_Info>();
+            model = bus_provincia.get_list(IdPais, true);
             ViewBag.IdPais = IdPais;
             return PartialView("_GridViewPartial_provincia", model);
         }

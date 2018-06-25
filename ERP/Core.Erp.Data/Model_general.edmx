@@ -393,6 +393,14 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' does not have
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_parroquia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwtb_parroquia">
+          <Key>
+            <PropertyRef Name="IdParroquia" />
+          </Key>
+          <Property Name="IdParroquia" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwtb_provincia">
           <Key>
@@ -676,6 +684,11 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
     [vwtb_pais].[Nombre] AS [Nombre]
     FROM [dbo].[vwtb_pais] AS [vwtb_pais]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwtb_parroquia" EntityType="Self.vwtb_parroquia" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwtb_parroquia].[IdParroquia] AS [IdParroquia]
+    FROM [dbo].[vwtb_parroquia] AS [vwtb_parroquia]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwtb_provincia" EntityType="Self.vwtb_provincia" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwtb_provincia].[IdProvincia] AS [IdProvincia]
@@ -798,11 +811,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
         <EntityContainer Name="Entities_general" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tb_sucursal" EntityType="Self.tb_sucursal" />
           <EntitySet Name="tb_pais" EntityType="Model_general.tb_pais" />
-          <EntitySet Name="tb_provincia" EntityType="Model_general.tb_provincia" />
-          <AssociationSet Name="FK_tb_provincia_tb_pais" Association="Model_general.FK_tb_provincia_tb_pais">
-            <End Role="tb_pais" EntitySet="tb_pais" />
-            <End Role="tb_provincia" EntitySet="tb_provincia" />
-          </AssociationSet>
           <EntitySet Name="tb_CatalogoTipo" EntityType="Model_general.tb_CatalogoTipo" />
           <EntitySet Name="tb_Catalogo" EntityType="Model_general.tb_Catalogo" />
           <AssociationSet Name="FK_tb_Catalogo_tb_CatalogoTipo" Association="Model_general.FK_tb_Catalogo_tb_CatalogoTipo">
@@ -874,10 +882,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
             <End Role="tb_sis_Documento_Tipo_Talonario" EntitySet="tb_sis_Documento_Tipo_Talonario" />
           </AssociationSet>
           <EntitySet Name="tb_ciudad" EntityType="Model_general.tb_ciudad" />
-          <AssociationSet Name="FK_tb_ciudad_tb_provincia" Association="Model_general.FK_tb_ciudad_tb_provincia">
-            <End Role="tb_provincia" EntitySet="tb_provincia" />
-            <End Role="tb_ciudad" EntitySet="tb_ciudad" />
-          </AssociationSet>
           <EntitySet Name="tb_parroquia" EntityType="Model_general.tb_parroquia" />
           <AssociationSet Name="FK_tb_parroquia_tb_ciudad" Association="Model_general.FK_tb_parroquia_tb_ciudad">
             <End Role="tb_ciudad" EntitySet="tb_ciudad" />
@@ -895,12 +899,22 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
             <End Role="tb_pais" EntitySet="tb_pais" />
             <End Role="tb_region" EntitySet="tb_region" />
           </AssociationSet>
+          <EntitySet Name="vwtb_ciudad_id" EntityType="Model_general.vwtb_ciudad_id" />
+          <EntitySet Name="vwtb_provincia" EntityType="Model_general.vwtb_provincia" />
+          <EntitySet Name="vwtb_parroquia" EntityType="Model_general.vwtb_parroquia" />
+          <EntitySet Name="tb_provincia" EntityType="Model_general.tb_provincia" />
+          <AssociationSet Name="FK_tb_ciudad_tb_provincia" Association="Model_general.FK_tb_ciudad_tb_provincia">
+            <End Role="tb_provincia" EntitySet="tb_provincia" />
+            <End Role="tb_ciudad" EntitySet="tb_ciudad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_provincia_tb_pais" Association="Model_general.FK_tb_provincia_tb_pais">
+            <End Role="tb_pais" EntitySet="tb_pais" />
+            <End Role="tb_provincia" EntitySet="tb_provincia" />
+          </AssociationSet>
           <AssociationSet Name="FK_tb_provincia_tb_region" Association="Model_general.FK_tb_provincia_tb_region">
             <End Role="tb_region" EntitySet="tb_region" />
             <End Role="tb_provincia" EntitySet="tb_provincia" />
           </AssociationSet>
-          <EntitySet Name="vwtb_ciudad_id" EntityType="Model_general.vwtb_ciudad_id" />
-          <EntitySet Name="vwtb_provincia" EntityType="Model_general.vwtb_provincia" />
           </EntityContainer>
         <EntityType Name="tb_pais">
           <Key>
@@ -920,44 +934,9 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
           <Property Name="MotivoAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tb_provincia" Relationship="Model_general.FK_tb_provincia_tb_pais" FromRole="tb_pais" ToRole="tb_provincia" />
           <NavigationProperty Name="tb_region" Relationship="Model_general.FK_tb_region_tb_pais" FromRole="tb_pais" ToRole="tb_region" />
+          <NavigationProperty Name="tb_provincia" Relationship="Model_general.FK_tb_provincia_tb_pais" FromRole="tb_pais" ToRole="tb_provincia" />
         </EntityType>
-        <EntityType Name="tb_provincia">
-          <Key>
-            <PropertyRef Name="IdProvincia" />
-          </Key>
-          <Property Name="IdProvincia" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Cod_Provincia" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion_Prov" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="IdPais" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Cod_Region" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tb_pais" Relationship="Model_general.FK_tb_provincia_tb_pais" FromRole="tb_provincia" ToRole="tb_pais" />
-          <NavigationProperty Name="tb_ciudad" Relationship="Model_general.FK_tb_ciudad_tb_provincia" FromRole="tb_provincia" ToRole="tb_ciudad" />
-          <NavigationProperty Name="tb_region" Relationship="Model_general.FK_tb_provincia_tb_region" FromRole="tb_provincia" ToRole="tb_region" />
-        </EntityType>
-        <Association Name="FK_tb_provincia_tb_pais">
-          <End Type="Model_general.tb_pais" Role="tb_pais" Multiplicity="1" />
-          <End Type="Model_general.tb_provincia" Role="tb_provincia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_pais">
-              <PropertyRef Name="IdPais" />
-            </Principal>
-            <Dependent Role="tb_provincia">
-              <PropertyRef Name="IdPais" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="tb_CatalogoTipo">
           <Key>
             <PropertyRef Name="IdTipoCatalogo" />
@@ -1400,21 +1379,9 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
           <Property Name="MotivoAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tb_provincia" Relationship="Model_general.FK_tb_ciudad_tb_provincia" FromRole="tb_ciudad" ToRole="tb_provincia" />
           <NavigationProperty Name="tb_parroquia" Relationship="Model_general.FK_tb_parroquia_tb_ciudad" FromRole="tb_ciudad" ToRole="tb_parroquia" />
+          <NavigationProperty Name="tb_provincia" Relationship="Model_general.FK_tb_ciudad_tb_provincia" FromRole="tb_ciudad" ToRole="tb_provincia" />
         </EntityType>
-        <Association Name="FK_tb_ciudad_tb_provincia">
-          <End Type="Model_general.tb_provincia" Role="tb_provincia" Multiplicity="1" />
-          <End Type="Model_general.tb_ciudad" Role="tb_ciudad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_provincia">
-              <PropertyRef Name="IdProvincia" />
-            </Principal>
-            <Dependent Role="tb_ciudad">
-              <PropertyRef Name="IdProvincia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="tb_parroquia">
           <Key>
             <PropertyRef Name="IdParroquia" />
@@ -1520,18 +1487,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tb_provincia_tb_region">
-          <End Type="Model_general.tb_region" Role="tb_region" Multiplicity="0..1" />
-          <End Type="Model_general.tb_provincia" Role="tb_provincia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_region">
-              <PropertyRef Name="Cod_Region" />
-            </Principal>
-            <Dependent Role="tb_provincia">
-              <PropertyRef Name="Cod_Region" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="vwtb_ciudad_id">
           <Key>
             <PropertyRef Name="IdCiudad" />
@@ -1544,6 +1499,71 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
           </Key>
           <Property Name="IdProvincia" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="vwtb_parroquia">
+          <Key>
+            <PropertyRef Name="IdParroquia" />
+          </Key>
+          <Property Name="IdParroquia" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_provincia">
+          <Key>
+            <PropertyRef Name="IdProvincia" />
+          </Key>
+          <Property Name="IdProvincia" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_Provincia" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion_Prov" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdPais" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_Region" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_ciudad" Relationship="Model_general.FK_tb_ciudad_tb_provincia" FromRole="tb_provincia" ToRole="tb_ciudad" />
+          <NavigationProperty Name="tb_pais" Relationship="Model_general.FK_tb_provincia_tb_pais" FromRole="tb_provincia" ToRole="tb_pais" />
+          <NavigationProperty Name="tb_region" Relationship="Model_general.FK_tb_provincia_tb_region" FromRole="tb_provincia" ToRole="tb_region" />
+        </EntityType>
+        <Association Name="FK_tb_ciudad_tb_provincia">
+          <End Type="Model_general.tb_provincia" Role="tb_provincia" Multiplicity="1" />
+          <End Type="Model_general.tb_ciudad" Role="tb_ciudad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_provincia">
+              <PropertyRef Name="IdProvincia" />
+            </Principal>
+            <Dependent Role="tb_ciudad">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_provincia_tb_pais">
+          <End Type="Model_general.tb_pais" Role="tb_pais" Multiplicity="1" />
+          <End Type="Model_general.tb_provincia" Role="tb_provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_pais">
+              <PropertyRef Name="IdPais" />
+            </Principal>
+            <Dependent Role="tb_provincia">
+              <PropertyRef Name="IdPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_provincia_tb_region">
+          <End Type="Model_general.tb_region" Role="tb_region" Multiplicity="0..1" />
+          <End Type="Model_general.tb_provincia" Role="tb_provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_region">
+              <PropertyRef Name="Cod_Region" />
+            </Principal>
+            <Dependent Role="tb_provincia">
+              <PropertyRef Name="Cod_Region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1594,27 +1614,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="CodPais" ColumnName="CodPais" />
                 <ScalarProperty Name="IdPais" ColumnName="IdPais" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_provincia">
-            <EntityTypeMapping TypeName="Model_general.tb_provincia">
-              <MappingFragment StoreEntitySet="tb_provincia">
-                <ScalarProperty Name="Cod_Region" ColumnName="Cod_Region" />
-                <ScalarProperty Name="ip" ColumnName="ip" />
-                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
-                <ScalarProperty Name="MotivoAnula" ColumnName="MotivoAnula" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Descripcion_Prov" ColumnName="Descripcion_Prov" />
-                <ScalarProperty Name="Cod_Provincia" ColumnName="Cod_Provincia" />
-                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1951,6 +1950,34 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
           <EntitySetMapping Name="vwtb_provincia">
             <EntityTypeMapping TypeName="Model_general.vwtb_provincia">
               <MappingFragment StoreEntitySet="vwtb_provincia">
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwtb_parroquia">
+            <EntityTypeMapping TypeName="Model_general.vwtb_parroquia">
+              <MappingFragment StoreEntitySet="vwtb_parroquia">
+                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_provincia">
+            <EntityTypeMapping TypeName="Model_general.tb_provincia">
+              <MappingFragment StoreEntitySet="tb_provincia">
+                <ScalarProperty Name="Cod_Region" ColumnName="Cod_Region" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="MotivoAnula" ColumnName="MotivoAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descripcion_Prov" ColumnName="Descripcion_Prov" />
+                <ScalarProperty Name="Cod_Provincia" ColumnName="Cod_Provincia" />
                 <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
               </MappingFragment>
             </EntityTypeMapping>

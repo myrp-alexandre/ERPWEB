@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.General
     public class tb_parroquia_Bus
     {
         tb_parroquia_Data odata = new tb_parroquia_Data();
-        public List<tb_parroquia_Info> get_list(bool mostrar_anulados, string IdCiudad)
+        public List<tb_parroquia_Info> get_list( string IdCiudad, bool mostrar_anulados)
         {
             try
             {
-                return odata.get_list(mostrar_anulados, IdCiudad);
+                return odata.get_list(IdCiudad, mostrar_anulados);
             }
             catch (Exception)
             {
@@ -24,26 +24,11 @@ namespace Core.Erp.Bus.General
             }
         }
 
-        public List<tb_parroquia_Info> get_list(bool mostrar_anulados)
+        public tb_parroquia_Info get_info(string IdParroquia)
         {
             try
             {
-                return odata.get_list(mostrar_anulados);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-
-
-        public tb_parroquia_Info get_info(string IdProvincia, string IdCiudad)
-        {
-            try
-            {
-                return odata.get_info(IdProvincia, IdCiudad);
+                return odata.get_info(IdParroquia);
             }
             catch (Exception)
             {

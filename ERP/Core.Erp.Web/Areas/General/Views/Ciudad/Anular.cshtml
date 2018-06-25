@@ -11,6 +11,8 @@
 @using (Html.BeginForm("Anular", "Ciudad", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdCiudad)
+    @Html.HiddenFor(q => q.IdProvincia)
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -22,36 +24,17 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdPais">Provincia*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdProvincia, settings =>
-               {
-                   settings.Name = "IdProvincia";
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                   settings.Properties.Columns.Add("IdPais", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("Descripcion_Prov", "Provincia").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                   //Campo ID
-                   settings.Properties.ValueField = "IdProvincia";
-                   settings.Properties.ValueType = typeof(string);
-                   settings.Properties.TextField = "Descripcion_Prov";
-                   settings.Properties.AllowNull = false;
-                   //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                   settings.Properties.NullText = "== Seleccione ==";
-                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-               }).BindList(ViewBag.lst_provincias).GetHtml()
+                    <label for="IdProvincia">Provincia*</label>
+                    @Html.DropDownListFor(q => q.IdProvincia, new SelectList(ViewBag.lst_provincia, "IdProvincia", "Descripcion_Prov"), new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdProvincia, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
-    
-
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">

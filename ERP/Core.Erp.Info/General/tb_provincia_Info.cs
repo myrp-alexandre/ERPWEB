@@ -13,8 +13,6 @@ namespace Core.Erp.Info.General
         [Required(ErrorMessage = "El campo código es obligatorio")]
         [StringLength(25, MinimumLength = 1, ErrorMessage = "el campo código debe tener mínimo 1 caracter y máximo 25")]
         public string IdProvincia { get; set; }
-        [Required(ErrorMessage ="El campo código es obligatorio")]
-        [StringLength(25, MinimumLength = 1, ErrorMessage = "el campo código debe tener mínimo 1 caracter y máximo 25")]
         public string Cod_Provincia { get; set; }
         [Required(ErrorMessage ="El campo descripción es obligatorio")]
         [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 50")]

@@ -8,7 +8,7 @@ namespace Core.Erp.Data.General
 {
    public class tb_ciudad_Data
     {
-        public List< tb_ciudad_Info> get_list(bool mostrar_anulados)
+        public List< tb_ciudad_Info> get_list(string IdProvincia, bool mostrar_anulados)
         {
             try
             {
@@ -16,10 +16,12 @@ namespace Core.Erp.Data.General
 
                 using (Entities_general Context = new Entities_general())
                 {
-                    if (mostrar_anulados == true)
+                    string.IsNullOrEmpty(IdProvincia);
+                    if (mostrar_anulados)
                         Lista = (from q in Context. tb_ciudad
                                  join p in Context.tb_provincia
                                  on q.IdProvincia equals p.IdProvincia
+                                 where q.IdProvincia == IdProvincia
                                  select new  tb_ciudad_Info
                                  {
                                      IdProvincia = q.IdProvincia,
@@ -32,8 +34,9 @@ namespace Core.Erp.Data.General
                     else
                         Lista = (from q in Context. tb_ciudad
                                  join p in Context.tb_provincia
-                                  on q.IdProvincia equals p.IdProvincia
-                                 where q.Estado == "A"
+                                 on q.IdProvincia equals p.IdProvincia
+                                 where q.IdProvincia == IdProvincia
+                                 && q.Estado == "A"
                                  select new  tb_ciudad_Info
                                  {
                                      IdProvincia = q.IdProvincia,
@@ -52,56 +55,23 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
-        public List<tb_ciudad_Info> get_list(string IdProvincia)
+
+        private string get_id()
         {
             try
             {
-                List<tb_ciudad_Info> Lista;
+                int ID = 1;
 
                 using (Entities_general Context = new Entities_general())
                 {
-                        Lista = (from q in Context.tb_ciudad
-                                 join p in Context.tb_provincia
-                                 on q.IdProvincia equals p.IdProvincia
-                                 where q.IdProvincia==IdProvincia
-                                 select new tb_ciudad_Info
-                                 {
-                                     IdProvincia = q.IdProvincia,
-                                     IdCiudad = q.IdCiudad,
-                                     Cod_Ciudad = q.Cod_Ciudad,
-                                     Descripcion_Ciudad = q.Descripcion_Ciudad,
-                                     Estado = q.Estado
-
-                                 }).ToList();
-                   
-                }
-
-                return Lista;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        private string get_id( string IdProvincia)
-        {
-            try
-            {
-                string ID = "00001";
-
-                using (Entities_general Context = new Entities_general())
-                {
-                    var lst = from q in Context. tb_ciudad
-                              where q.IdProvincia==IdProvincia
+                    var lst = from q in Context.vwtb_ciudad_id
                               select q;
 
                     if (lst.Count() > 0)
-                        ID = (Convert.ToInt32(lst.Max(q => q.IdCiudad)) + 1).ToString("00000");
+                        ID = lst.Max(q => q.IdCiudad) + 1;
                 }
 
-                return ID;
+                return ID.ToString("0000");
             }
             catch (Exception)
             {
@@ -110,7 +80,7 @@ namespace Core.Erp.Data.General
             }
         }
 
-        public  tb_ciudad_Info get_info(string IdProvincia, string IdCiudad)
+        public  tb_ciudad_Info get_info(string IdCiudad)
         {
             try
             {
@@ -118,7 +88,7 @@ namespace Core.Erp.Data.General
 
                 using (Entities_general Context = new Entities_general())
                 {
-                     tb_ciudad Entity = Context. tb_ciudad.FirstOrDefault(q => q.IdProvincia == IdProvincia && q.IdCiudad==IdCiudad);
+                     tb_ciudad Entity = Context. tb_ciudad.FirstOrDefault(q => q.IdCiudad==IdCiudad);
                     if (Entity == null) return null;
                     info = new  tb_ciudad_Info
                     {
@@ -147,7 +117,7 @@ namespace Core.Erp.Data.General
                 {
                      tb_ciudad Entity = new  tb_ciudad
                     {
-                        IdCiudad = info.IdCiudad = get_id(info.IdProvincia),
+                        IdCiudad = info.IdCiudad=get_id(),
                         IdProvincia=info.IdProvincia,
                         Cod_Ciudad = info.Cod_Ciudad,
                         Descripcion_Ciudad = info.Descripcion_Ciudad,
@@ -174,7 +144,7 @@ namespace Core.Erp.Data.General
             {
                 using (Entities_general Context = new Entities_general())
                 {
-                     tb_ciudad Entity = Context.tb_ciudad.FirstOrDefault(q => q.IdProvincia == info.IdProvincia && q.IdCiudad == info.IdCiudad);
+                     tb_ciudad Entity = Context.tb_ciudad.FirstOrDefault(q => q.IdCiudad == info.IdCiudad);
                     if (Entity == null) return false;
 
                     Entity.Cod_Ciudad = info.Cod_Ciudad;
@@ -200,7 +170,7 @@ namespace Core.Erp.Data.General
             {
                 using (Entities_general Context = new Entities_general())
                 {
-                    tb_ciudad Entity = Context.tb_ciudad.FirstOrDefault(q => q.IdProvincia == info.IdProvincia && q.IdCiudad == info.IdCiudad);
+                    tb_ciudad Entity = Context.tb_ciudad.FirstOrDefault(q => q.IdCiudad == info.IdCiudad);
                     if (Entity == null) return false;
                     Entity.Estado = info.Estado = "I";
 
