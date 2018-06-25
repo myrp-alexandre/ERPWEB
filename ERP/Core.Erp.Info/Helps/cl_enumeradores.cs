@@ -108,5 +108,38 @@ namespace Core.Erp.Info.Helps
             PERSONA,
             PROVEE
         }
+
+        public enum eEstadoCierreCaja
+        {
+            EST_CIE_ABI,
+            EST_CIE_CER
+        }
+
+        public enum eTipoOrdenPago
+        {
+            FACT_PROVEE,
+            OTROS_CONC
+        }
+
+        public enum eEstadoAprobacionOrdenPago
+        {
+            APRO,
+            PENDI,
+            REPRO
+        }
+
+        public enum eFormaPagoOrdenPago
+        {
+            CHEQUE,
+            EFEC,
+            NTDEB_BAN,
+            TARJE_CRE
+        }
+
+        public enum eTipoNotaCXP
+        {
+            T_TIP_NOTA_INT,
+            T_TIP_NOTA_SRI
+        }
     }
 }

@@ -51,11 +51,11 @@ namespace Core.Erp.Data
         public virtual DbSet<vwcp_orden_giro> vwcp_orden_giro { get; set; }
         public virtual DbSet<vwcp_retencion> vwcp_retencion { get; set; }
         public virtual DbSet<cp_orden_pago_estado_aprob> cp_orden_pago_estado_aprob { get; set; }
-        public virtual DbSet<cp_nota_DebCre> cp_nota_DebCre { get; set; }
         public virtual DbSet<vwcp_nota_DebCre> vwcp_nota_DebCre { get; set; }
         public virtual DbSet<vwcp_orden_pago> vwcp_orden_pago { get; set; }
         public virtual DbSet<vwcp_orden_giro_x_pagar> vwcp_orden_giro_x_pagar { get; set; }
         public virtual DbSet<cp_orden_pago_cancelaciones> cp_orden_pago_cancelaciones { get; set; }
+        public virtual DbSet<cp_nota_DebCre> cp_nota_DebCre { get; set; }
     
         public virtual ObjectResult<spcp_Get_Data_orden_pago_con_cancelacion_data_Result> spcp_Get_Data_orden_pago_con_cancelacion_data(Nullable<int> idEmpresa, Nullable<decimal> idPersona_ini, Nullable<decimal> idPersona_fin, string idTipoPersona, Nullable<decimal> idEntidad_ini, Nullable<decimal> idEntidad_fin, string idEstado_Aprobacion, string idUsuario, Nullable<bool> mostrar_saldo_0)
         {
