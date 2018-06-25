@@ -10,23 +10,11 @@ namespace Core.Erp.Bus.General
    public class tb_ciudad_Bus
     {
         tb_ciudad_Data odata = new tb_ciudad_Data();
-        public List<tb_ciudad_Info> get_list(bool mostrar_anulados)
+        public List<tb_ciudad_Info> get_list(string IdProvincia, bool mostrar_anulados)
         {
             try
             {
-                return odata.get_list(mostrar_anulados);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        public List<tb_ciudad_Info> get_list(string IdProvincia)
-        {
-            try
-            {
-                return odata.get_list(IdProvincia);
+                return odata.get_list(IdProvincia, mostrar_anulados);
             }
             catch (Exception)
             {
@@ -35,11 +23,11 @@ namespace Core.Erp.Bus.General
             }
         }
 
-        public tb_ciudad_Info get_info(string IdProvincia,string IdCiudad)
+        public tb_ciudad_Info get_info(string IdCiudad)
         {
             try
             {
-                return odata.get_info(IdProvincia, IdCiudad);
+                return odata.get_info( IdCiudad);
             }
             catch (Exception)
             {

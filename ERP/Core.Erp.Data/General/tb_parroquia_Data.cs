@@ -51,62 +51,20 @@ namespace Core.Erp.Data.General
             }
         }
 
-        public List<tb_parroquia_Info> get_list(bool mostrar_anulados)
+
+       /* private string get_id()
         {
             try
             {
-                List<tb_parroquia_Info> Lista;
+                int ID = 1;
 
                 using (Entities_general Context = new Entities_general())
                 {
-                    if (mostrar_anulados)
-                        Lista = (from q in Context.tb_parroquia
-                                 select new tb_parroquia_Info
-                                 {
-                                     IdParroquia = q.IdParroquia,
-                                     cod_parroquia = q.cod_parroquia,
-                                     nom_parroquia = q.nom_parroquia,
-                                     estado = q.estado,
-                                     IdCiudad_Canton = q.IdCiudad_Canton
-                                 }).ToList();
-                    else
-                        Lista = (from q in Context.tb_parroquia
-                                 where q.estado == true
-                                 select new tb_parroquia_Info
-                                 {
-                                     IdParroquia = q.IdParroquia,
-                                     cod_parroquia = q.cod_parroquia,
-                                     nom_parroquia = q.nom_parroquia,
-                                     estado = q.estado,
-                                     IdCiudad_Canton = q.IdCiudad_Canton
-                                 }).ToList();
-                }
-
-                return Lista;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-
-
-        private string get_id(string IdParroquia)
-        {
-            try
-            {
-                string ID = "00001";
-
-                using (Entities_general Context = new Entities_general())
-                {
-                    var lst = from q in Context.tb_parroquia
-                              where q.IdCiudad_Canton == IdParroquia
+                    var lst = from q in Context.vw
                               select q;
 
                     if (lst.Count() > 0)
-                        ID = (Convert.ToInt32(lst.Max(q => q.IdParroquia)) + 1).ToString("00000");
+                        ID = lst.Max(q => q.IdParroquia) +1;
                 }
 
                 return ID;
@@ -116,7 +74,7 @@ namespace Core.Erp.Data.General
 
                 throw;
             }
-        }
+        }*/
 
         public tb_parroquia_Info get_info(string IdCiudad, string IdParroquia)
         {
@@ -147,7 +105,7 @@ namespace Core.Erp.Data.General
             }
         }
 
-        public bool guardarDB(tb_parroquia_Info info)
+     /*   public bool guardarDB(tb_parroquia_Info info)
         {
             try
             {
@@ -174,7 +132,7 @@ namespace Core.Erp.Data.General
 
                 throw;
             }
-        }
+        }*/
 
         public bool modificarDB(tb_parroquia_Info info)
         {

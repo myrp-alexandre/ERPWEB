@@ -393,6 +393,14 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' does not have
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_parroquia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwtb_parroquia">
+          <Key>
+            <PropertyRef Name="IdParroquia" />
+          </Key>
+          <Property Name="IdParroquia" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwtb_provincia">
           <Key>
@@ -676,6 +684,11 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
     [vwtb_pais].[Nombre] AS [Nombre]
     FROM [dbo].[vwtb_pais] AS [vwtb_pais]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwtb_parroquia" EntityType="Self.vwtb_parroquia" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwtb_parroquia].[IdParroquia] AS [IdParroquia]
+    FROM [dbo].[vwtb_parroquia] AS [vwtb_parroquia]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwtb_provincia" EntityType="Self.vwtb_provincia" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwtb_provincia].[IdProvincia] AS [IdProvincia]
@@ -901,6 +914,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
           </AssociationSet>
           <EntitySet Name="vwtb_ciudad_id" EntityType="Model_general.vwtb_ciudad_id" />
           <EntitySet Name="vwtb_provincia" EntityType="Model_general.vwtb_provincia" />
+          <EntitySet Name="vwtb_parroquia" EntityType="Model_general.vwtb_parroquia" />
           </EntityContainer>
         <EntityType Name="tb_pais">
           <Key>
@@ -1544,6 +1558,12 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
           </Key>
           <Property Name="IdProvincia" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="vwtb_parroquia">
+          <Key>
+            <PropertyRef Name="IdParroquia" />
+          </Key>
+          <Property Name="IdParroquia" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1952,6 +1972,13 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
             <EntityTypeMapping TypeName="Model_general.vwtb_provincia">
               <MappingFragment StoreEntitySet="vwtb_provincia">
                 <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwtb_parroquia">
+            <EntityTypeMapping TypeName="Model_general.vwtb_parroquia">
+              <MappingFragment StoreEntitySet="vwtb_parroquia">
+                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

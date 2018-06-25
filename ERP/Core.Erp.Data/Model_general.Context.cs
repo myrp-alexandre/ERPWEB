@@ -50,5 +50,6 @@ namespace Core.Erp.Data
         public virtual DbSet<tb_region> tb_region { get; set; }
         public virtual DbSet<vwtb_ciudad_id> vwtb_ciudad_id { get; set; }
         public virtual DbSet<vwtb_provincia> vwtb_provincia { get; set; }
+        public virtual DbSet<vwtb_parroquia> vwtb_parroquia { get; set; }
     }
 }

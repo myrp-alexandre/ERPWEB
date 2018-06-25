@@ -50,6 +50,7 @@
         <AssociationConnector Association="Model_general.FK_tb_provincia_tb_region" />
         <EntityTypeShape EntityType="Model_general.vwtb_ciudad_id" Width="1.5" PointX="15.375" PointY="8.75" />
         <EntityTypeShape EntityType="Model_general.vwtb_provincia" Width="1.5" PointX="15.375" PointY="10.75" />
+        <EntityTypeShape EntityType="Model_general.vwtb_parroquia" Width="1.5" PointX="15.375" PointY="12.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
