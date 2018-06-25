@@ -16,7 +16,8 @@ namespace Core.Erp.Data.General
 
                 using (Entities_general Context = new Entities_general())
                 {
-                    if (mostrar_anulados == true)
+                    string.IsNullOrEmpty(IdProvincia);
+                    if (mostrar_anulados)
                         Lista = (from q in Context. tb_ciudad
                                  join p in Context.tb_provincia
                                  on q.IdProvincia equals p.IdProvincia
@@ -33,7 +34,7 @@ namespace Core.Erp.Data.General
                     else
                         Lista = (from q in Context. tb_ciudad
                                  join p in Context.tb_provincia
-                                  on q.IdProvincia equals p.IdProvincia
+                                 on q.IdProvincia equals p.IdProvincia
                                  where q.IdProvincia == IdProvincia
                                  && q.Estado == "A"
                                  select new  tb_ciudad_Info
@@ -116,7 +117,7 @@ namespace Core.Erp.Data.General
                 {
                      tb_ciudad Entity = new  tb_ciudad
                     {
-                        IdCiudad = info.IdCiudad,
+                        IdCiudad = info.IdCiudad=get_id(),
                         IdProvincia=info.IdProvincia,
                         Cod_Ciudad = info.Cod_Ciudad,
                         Descripcion_Ciudad = info.Descripcion_Ciudad,

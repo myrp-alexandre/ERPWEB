@@ -9,7 +9,7 @@ namespace Core.Erp.Data.General
 {
     public class tb_parroquia_Data
     {
-        public List<tb_parroquia_Info> get_list(bool mostrar_anulados, string IdCiudad)
+        public List<tb_parroquia_Info> get_list(string IdCiudad, bool mostrar_anulados)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace Core.Erp.Data.General
         }
 
 
-       /* private string get_id()
+        private string get_id()
         {
             try
             {
@@ -60,23 +60,23 @@ namespace Core.Erp.Data.General
 
                 using (Entities_general Context = new Entities_general())
                 {
-                    var lst = from q in Context.vw
+                    var lst = from q in Context.vwtb_parroquia
                               select q;
 
                     if (lst.Count() > 0)
                         ID = lst.Max(q => q.IdParroquia) +1;
                 }
 
-                return ID;
+                return ID.ToString("0000");
             }
             catch (Exception)
             {
 
                 throw;
             }
-        }*/
+        }
 
-        public tb_parroquia_Info get_info(string IdCiudad, string IdParroquia)
+        public tb_parroquia_Info get_info( string IdParroquia)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace Core.Erp.Data.General
 
                 using (Entities_general Context = new Entities_general())
                 {
-                    tb_parroquia Entity = Context.tb_parroquia.FirstOrDefault(q => q.IdCiudad_Canton == IdCiudad && q.IdParroquia == IdParroquia);
+                    tb_parroquia Entity = Context.tb_parroquia.FirstOrDefault(q => q.IdParroquia == IdParroquia);
                     if (Entity == null) return null;
                     info = new tb_parroquia_Info
                     {
@@ -105,7 +105,7 @@ namespace Core.Erp.Data.General
             }
         }
 
-     /*   public bool guardarDB(tb_parroquia_Info info)
+        public bool guardarDB(tb_parroquia_Info info)
         {
             try
             {
@@ -114,7 +114,7 @@ namespace Core.Erp.Data.General
                     tb_parroquia Entity = new tb_parroquia
                     {
                         IdCiudad_Canton = info.IdCiudad_Canton,
-                        IdParroquia = get_id(info.IdCiudad_Canton),
+                        IdParroquia = info.IdParroquia=get_id(),
                         cod_parroquia = info.cod_parroquia,
                         nom_parroquia = info.nom_parroquia,
                         estado = true,
@@ -132,7 +132,7 @@ namespace Core.Erp.Data.General
 
                 throw;
             }
-        }*/
+        }
 
         public bool modificarDB(tb_parroquia_Info info)
         {
@@ -140,7 +140,7 @@ namespace Core.Erp.Data.General
             {
                 using (Entities_general Context = new Entities_general())
                 {
-                    tb_parroquia Entity = Context.tb_parroquia.FirstOrDefault(q => q.IdCiudad_Canton == info.IdCiudad_Canton && q.IdParroquia == info.IdParroquia);
+                    tb_parroquia Entity = Context.tb_parroquia.FirstOrDefault(q => q.IdParroquia == info.IdParroquia);
                     if (Entity == null) return false;
 
                     Entity.cod_parroquia = info.cod_parroquia;
@@ -165,9 +165,9 @@ namespace Core.Erp.Data.General
             {
                 using (Entities_general Context = new Entities_general())
                 {
-                    tb_parroquia Entity = Context.tb_parroquia.FirstOrDefault(q => q.IdCiudad_Canton == info.IdCiudad_Canton && q.IdParroquia == info.IdParroquia);
+                    tb_parroquia Entity = Context.tb_parroquia.FirstOrDefault(q =>q.IdParroquia == info.IdParroquia);
                     if (Entity == null) return false;
-                    Entity.estado = info.estado = true;
+                    Entity.estado = info.estado = false;
 
                     Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                     Entity.Fecha_UltAnu = info.Fecha_UltAnu;

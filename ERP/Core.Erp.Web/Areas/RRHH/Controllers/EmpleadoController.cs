@@ -210,7 +210,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 ViewBag.lst_tipo_docu = bus_catalogo_general.get_list(3, false);
                 ViewBag.lst_estado_empleado = bus_catalogorrhh.get_list_x_tipo(25);
                 ViewBag.lst_pais = bus_pais.get_list(false);
-                ViewBag.lst_ciudad = bus_ciudad.get_list(false);
+                ViewBag.lst_ciudad = bus_ciudad.get_list("",false);
                 ViewBag.lst_empleado = bus_empleado.get_list_combo(IdEmpresa);
                 ViewBag.lst_punto_cargo = bus_puntocargo.get_list(IdEmpresa, false);
                 ViewBag.lst_horario = bus_horario.get_list(IdEmpresa, false);

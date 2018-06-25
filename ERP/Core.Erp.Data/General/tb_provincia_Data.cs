@@ -120,7 +120,7 @@ namespace Core.Erp.Data.General
                 {
                     tb_provincia Entity = new tb_provincia
                     {
-                        IdProvincia = info.IdProvincia,
+                        IdProvincia = info.IdProvincia=get_id(),
                         Cod_Provincia = info.Cod_Provincia,
                         Descripcion_Prov = info.Descripcion_Prov,                        
                         IdPais = info.IdPais,

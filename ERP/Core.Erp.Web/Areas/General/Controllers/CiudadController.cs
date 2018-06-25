@@ -12,23 +12,24 @@ namespace Core.Erp.Web.Areas.General.Controllers
         tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
         tb_provincia_Bus bus_provincia = new tb_provincia_Bus();
 
-        public ActionResult Index(string IdProvincia = "")
+        public ActionResult Index(string IdPais = "", string IdProvincia = "")
         {
+            ViewBag.IdPais = IdPais;
             ViewBag.IdProvincia = IdProvincia;
             return View();
         }
-
-
+        
         [ValidateInput(false)]
         public ActionResult GridViewPartial_Ciudad(string IdProvincia="")
         {
-            var lst_ciudad = bus_ciudad.get_list(true);
-            return PartialView("_GridViewPartial_Ciudad", lst_ciudad);
+            List<tb_ciudad_Info> model = bus_ciudad.get_list(IdProvincia, true);
+            ViewBag.IdProvincia = IdProvincia;
+            return PartialView("_GridViewPartial_Ciudad", model);
         }
         private void cargar_combos()
         {
-         var  lst_provincia = bus_provincia.get_list("1", false);
-            ViewBag.lst_provincias = lst_provincia;
+         var  lst_provincia = bus_provincia.get_list("", false);
+            ViewBag.lst_provincia = lst_provincia;
         }
 
         public ActionResult Nuevo(string IdProvincia)
@@ -37,6 +38,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             {
                 IdProvincia = IdProvincia
             };
+            ViewBag.IdProvincia = IdProvincia;
             cargar_combos();
             return View(model);
         }
@@ -49,16 +51,16 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index", ViewBag.IdProvincia = model.IdProvincia );
+            return RedirectToAction("Index", new { IdProvincia = model.IdProvincia } );
         }
 
-        public ActionResult Modificar(string IdProvincia = "", string IdCiudad="")
+        public ActionResult Modificar( string IdCiudad="")
         {
-            tb_ciudad_Info model = bus_ciudad.get_info(IdProvincia, IdCiudad);
+            tb_ciudad_Info model = bus_ciudad.get_info( IdCiudad);
             if (model == null)
             {
-                ViewBag.IdProvincia = IdProvincia;
-                return RedirectToAction("Index", IdProvincia = model.IdProvincia);
+                ViewBag.IdProvincia = model.IdProvincia;
+                return RedirectToAction("Index", ViewBag.IdProvincia = model.IdProvincia);
             }
             cargar_combos();
             return View(model);
@@ -75,13 +77,13 @@ namespace Core.Erp.Web.Areas.General.Controllers
             return RedirectToAction("Index", new { IdProvincia = model.IdProvincia });
         }
 
-        public ActionResult Anular(string IdProvincia = "", string IdCiudad="")
+        public ActionResult Anular( string IdCiudad="")
         {
-            tb_ciudad_Info model = bus_ciudad.get_info(IdProvincia,  IdCiudad);
+            tb_ciudad_Info model = bus_ciudad.get_info( IdCiudad);
             if (model == null)
             {
-                ViewBag.IdProvincia = IdProvincia;
-                return RedirectToAction("Index", new { IdProvincia = model.IdProvincia });
+                ViewBag.IdProvincia = model.IdProvincia;
+                return RedirectToAction("Index", ViewBag.IdProvincia = model.IdProvincia);
             }
             cargar_combos();
             return View(model);
@@ -102,7 +104,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
         {
             try
             {
-               var lst_ciudad = bus_ciudad.get_list(IdProvincia);
+                List<tb_ciudad_Info> lst_ciudad = new List<tb_ciudad_Info>();
+                lst_ciudad = bus_ciudad.get_list(IdProvincia, true);
                 return Json(lst_ciudad, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)

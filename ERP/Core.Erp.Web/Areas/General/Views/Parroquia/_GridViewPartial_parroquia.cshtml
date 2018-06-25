@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_Parroquia";
-        settings.CallbackRouteValues = new { Controller = "Parroquia", Action = "GridViewPartial_Parroquia", IdCiudad_Canton = ViewBag.IdCiudad_Canton };
+        settings.CallbackRouteValues = new { Controller = "Parroquia", Action = "GridViewPartial_Parroquia", IdCiudad = ViewBag.IdCiudad_Canton , IdProvincia = ViewBag.IdProvincia, IdPais = ViewBag.IdPais};
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdParroquia";
 
@@ -59,8 +59,8 @@
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdCiudad_Canton = DataBinder.Eval(tc.DataItem, "IdCiudad_Canton"), IdParroquia = DataBinder.Eval(tc.DataItem, "IdParroquia") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdCiudad_Canton = DataBinder.Eval(tc.DataItem, "IdCiudad_Canton"), IdParroquia = DataBinder.Eval(tc.DataItem, "IdParroquia") },
+                Html.ActionLink("Modificar", "Modificar", new {IdParroquia = DataBinder.Eval(tc.DataItem, "IdParroquia"), IdCiudad = ViewBag.IdCiudad_Canton , IdProvincia = ViewBag.IdProvincia, IdPais = ViewBag.IdPais }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdParroquia = DataBinder.Eval(tc.DataItem, "IdParroquia"), IdCiudad = ViewBag.IdCiudad_Canton, IdProvincia = ViewBag.IdProvincia, IdPais = ViewBag.IdPais },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -68,7 +68,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdCiudad_Canton = ViewBag.IdCiudad_Canton, }).ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdCiudad = ViewBag.IdCiudad_Canton, IdProvincia = ViewBag.IdProvincia, IdPais = ViewBag.IdPais }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;

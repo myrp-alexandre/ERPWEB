@@ -76,10 +76,9 @@
             c.Width = Unit.Pixel(150);
         });
 
-        settings.Columns.Add("IdProvincia","ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("Cod_Provincia","Código").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdProvincia", "Código").Width = Unit.Percentage(10);
         settings.Columns.Add("info_pais.Nombre", "País").Width = Unit.Percentage(30);
-        settings.Columns.Add("Descripcion_Prov","Descripción").Width = Unit.Percentage(40);
+        settings.Columns.Add("Descripcion_Prov","Descripción").Width = Unit.Percentage(50);
         settings.Columns.Add("Estado","Estado").Width = Unit.Percentage(10);
 
         settings.Columns.Add(column =>
@@ -90,9 +89,10 @@
             {
                 Html.DevExpress().HyperLink(hyperlink =>
                 {
-                    var keyValue = DataBinder.Eval(container.DataItem, "IdPais");
+                    var IdPais = DataBinder.Eval(container.DataItem, "IdPais");
+                    var IdProvincia = DataBinder.Eval(container.DataItem, "IdProvincia");
                     hyperlink.Properties.Text = "Ciudad";
-                    hyperlink.NavigateUrl = Url.Action("Index", "Ciudad", new { IdPais = keyValue });
+                    hyperlink.NavigateUrl = Url.Action("Index", "Ciudad", new { IdPais = IdPais, IdProvincia = IdProvincia });
                 }).Render();
             });
         });

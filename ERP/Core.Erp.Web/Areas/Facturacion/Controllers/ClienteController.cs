@@ -178,7 +178,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 p.TextField = "nom_parroquia";
                 p.ValueField = "IdParroquia";
                 p.ValueType = typeof(string);
-                p.BindList(bus_parroquia.get_list(false, IdCiudad));
+                p.BindList(bus_parroquia.get_list( IdCiudad, false));
             });
         }
 
@@ -212,11 +212,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         private void cargar_combos_det()
         {
             tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
-            var lst_ciudad = bus_ciudad.get_list(false);
+            var lst_ciudad = bus_ciudad.get_list("",false);
             ViewBag.lst_ciudad = lst_ciudad;
 
             tb_parroquia_Bus bus_parroquia = new tb_parroquia_Bus();
-            var lst_parroquia = bus_parroquia.get_list(false);
+            var lst_parroquia = bus_parroquia.get_list("",false);
             ViewBag.lst_parroquia = lst_parroquia;
         }
 

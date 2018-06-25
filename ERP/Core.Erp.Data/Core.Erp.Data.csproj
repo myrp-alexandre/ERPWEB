@@ -1202,6 +1202,9 @@
     <Compile Include="vwtb_pais.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwtb_parroquia.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwtb_provincia.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
