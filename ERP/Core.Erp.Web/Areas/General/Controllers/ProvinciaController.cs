@@ -43,13 +43,6 @@ namespace Core.Erp.Web.Areas.General.Controllers
         [HttpPost]
         public ActionResult Nuevo(tb_provincia_Info model)
         {
-            if (bus_provincia.validar_existe_Id(model.IdProvincia))
-            {
-                ViewBag.mensaje = "El código ya se encuentra registrado";
-                ViewBag.IdPais = model.IdPais;
-                cargar_combos(model.IdPais);
-                return View(model);
-            }
             if (!bus_provincia.guardarDB(model))
             {
                 ViewBag.IdPais = model.IdPais;

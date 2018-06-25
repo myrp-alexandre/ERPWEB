@@ -36,19 +36,7 @@ namespace Core.Erp.Bus.General
                 throw;
             }
         }
-        public bool validar_existe_Id(string IdProvincia)
-        {
-            try
-            {
-                return odata.validar_existe_Id(IdProvincia);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
+        
         public bool guardarDB(tb_provincia_Info info)
         {
             try

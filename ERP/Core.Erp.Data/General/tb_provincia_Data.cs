@@ -85,6 +85,23 @@ namespace Core.Erp.Data.General
             }
         }
 
+     /*   private int get_id()
+        {
+            try
+            {
+                int ID = 1;
+                using (Entities_general Context = new Entities_general())
+                {
+                    var lst = from q in Context
+                }
+                return ID;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }*/
         public bool validar_existe_Id(string IdProvincia)
         {
             try
