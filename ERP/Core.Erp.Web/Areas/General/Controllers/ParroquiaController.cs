@@ -53,7 +53,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index", ViewBag.IdCiudad = model.IdCiudad_Canton);
+            return RedirectToAction("Index", new { IdCiudad = model.IdCiudad_Canton });
         }
 
         public ActionResult Modificar( string IdParroquia = "")

@@ -46,6 +46,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_IdEmpleado.Value = IdEmpleado;
             model.p_IdNovedad.Value = IdNovedad;
+            model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
             if (IdEmpleado == 0)
                 model.RequestParameters = false;
@@ -57,6 +58,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ROL_004_Rpt model = new ROL_004_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_IdUtilidad.Value = IdUtilidad;
+            model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
             if (IdUtilidad == 0)
                 model.RequestParameters = false;
@@ -68,6 +70,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ROL_005_Rpt model = new ROL_005_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_IdActaFiniquito.Value = IdActaFiniquito;
+            model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
             if (IdActaFiniquito == 0)
                 model.RequestParameters = false;
@@ -78,6 +81,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ROL_006_Rpt model = new ROL_006_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_IdEmpleado.Value = IdEmpleado;
+            model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
             if (IdEmpleado == 0)
                 model.RequestParameters = false;
@@ -89,6 +93,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_IdEmpleado.Value = IdEmpleado;
             model.p_IdSolicitud.Value = IdSolicitud;
+            model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
             if (IdEmpleado == 0)
                 model.RequestParameters = false;
@@ -99,6 +104,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ROL_008_Rpt model = new ROL_008_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_IdPrestamo.Value = IdPrestamo;
+            model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
             if (IdPrestamo == 0)
                 model.RequestParameters = false;
@@ -108,6 +114,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             ROL_009_Rpt model = new ROL_009_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
             if (IdEmpresa == 0)
                 model.RequestParameters = false;
