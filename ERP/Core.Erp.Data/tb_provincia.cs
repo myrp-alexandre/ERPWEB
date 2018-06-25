@@ -36,9 +36,9 @@ namespace Core.Erp.Data
         public string ip { get; set; }
         public string Cod_Region { get; set; }
     
-        public virtual tb_pais tb_pais { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_ciudad> tb_ciudad { get; set; }
+        public virtual tb_pais tb_pais { get; set; }
         public virtual tb_region tb_region { get; set; }
     }
 }

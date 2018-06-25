@@ -35,8 +35,8 @@ namespace Core.Erp.Data
         public string nom_pc { get; set; }
         public string ip { get; set; }
     
-        public virtual tb_provincia tb_provincia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_parroquia> tb_parroquia { get; set; }
+        public virtual tb_provincia tb_provincia { get; set; }
     }
 }

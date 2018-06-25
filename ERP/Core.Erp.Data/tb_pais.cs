@@ -17,8 +17,8 @@ namespace Core.Erp.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tb_pais()
         {
-            this.tb_provincia = new HashSet<tb_provincia>();
             this.tb_region = new HashSet<tb_region>();
+            this.tb_provincia = new HashSet<tb_provincia>();
         }
     
         public string IdPais { get; set; }
@@ -37,8 +37,8 @@ namespace Core.Erp.Data
         public string ip { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_provincia> tb_provincia { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_region> tb_region { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_provincia> tb_provincia { get; set; }
     }
 }
