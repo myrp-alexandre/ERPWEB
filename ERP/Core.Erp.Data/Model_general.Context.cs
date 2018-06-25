@@ -48,5 +48,7 @@ namespace Core.Erp.Data
         public virtual DbSet<vwtb_pais> vwtb_pais { get; set; }
         public virtual DbSet<tb_persona_tipo> tb_persona_tipo { get; set; }
         public virtual DbSet<tb_region> tb_region { get; set; }
+        public virtual DbSet<vwtb_ciudad_id> vwtb_ciudad_id { get; set; }
+        public virtual DbSet<vwtb_provincia> vwtb_provincia { get; set; }
     }
 }

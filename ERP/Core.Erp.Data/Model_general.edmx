@@ -376,10 +376,13 @@
           <Property Name="observacion" Type="varchar" MaxLength="2000" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_ciudad_id' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_ciudad_id' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwtb_ciudad_id">
-          <Property Name="IdCiudad" Type="int" />
-        </EntityType>-->
+          <Key>
+            <PropertyRef Name="IdCiudad" />
+          </Key>
+          <Property Name="IdCiudad" Type="int" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwtb_pais">
@@ -390,10 +393,13 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' does not have
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwtb_provincia">
-          <Property Name="IdProvincia" Type="int" />
-        </EntityType>-->
+          <Key>
+            <PropertyRef Name="IdProvincia" />
+          </Key>
+          <Property Name="IdProvincia" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_tb_bodega_tb_sucursal">
           <End Role="tb_sucursal" Type="Self.tb_sucursal" Multiplicity="1" />
           <End Role="tb_bodega" Type="Self.tb_bodega" Multiplicity="*" />
@@ -659,11 +665,21 @@ warning 6013: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
           <EntitySet Name="tb_sucursal" EntityType="Self.tb_sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_transportista" EntityType="Self.tb_transportista" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_reporte" EntityType="Self.tb_sis_reporte" Schema="web" store:Type="Tables" />
+          <EntitySet Name="vwtb_ciudad_id" EntityType="Self.vwtb_ciudad_id" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwtb_ciudad_id].[IdCiudad] AS [IdCiudad]
+    FROM [dbo].[vwtb_ciudad_id] AS [vwtb_ciudad_id]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwtb_pais" EntityType="Self.vwtb_pais" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwtb_pais].[IdPais] AS [IdPais], 
     [vwtb_pais].[Nombre] AS [Nombre]
     FROM [dbo].[vwtb_pais] AS [vwtb_pais]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwtb_provincia" EntityType="Self.vwtb_provincia" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwtb_provincia].[IdProvincia] AS [IdProvincia]
+    FROM [dbo].[vwtb_provincia] AS [vwtb_provincia]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_tb_bodega_tb_sucursal" Association="Self.FK_tb_bodega_tb_sucursal">
             <End Role="tb_sucursal" EntitySet="tb_sucursal" />
@@ -883,6 +899,8 @@ warning 6013: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
             <End Role="tb_region" EntitySet="tb_region" />
             <End Role="tb_provincia" EntitySet="tb_provincia" />
           </AssociationSet>
+          <EntitySet Name="vwtb_ciudad_id" EntityType="Model_general.vwtb_ciudad_id" />
+          <EntitySet Name="vwtb_provincia" EntityType="Model_general.vwtb_provincia" />
           </EntityContainer>
         <EntityType Name="tb_pais">
           <Key>
@@ -1514,6 +1532,18 @@ warning 6013: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwtb_ciudad_id">
+          <Key>
+            <PropertyRef Name="IdCiudad" />
+          </Key>
+          <Property Name="IdCiudad" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwtb_provincia">
+          <Key>
+            <PropertyRef Name="IdProvincia" />
+          </Key>
+          <Property Name="IdProvincia" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1908,6 +1938,20 @@ warning 6013: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
                 <ScalarProperty Name="codigo" ColumnName="codigo" />
                 <ScalarProperty Name="Nom_region" ColumnName="Nom_region" />
                 <ScalarProperty Name="Cod_Region" ColumnName="Cod_Region" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwtb_ciudad_id">
+            <EntityTypeMapping TypeName="Model_general.vwtb_ciudad_id">
+              <MappingFragment StoreEntitySet="vwtb_ciudad_id">
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwtb_provincia">
+            <EntityTypeMapping TypeName="Model_general.vwtb_provincia">
+              <MappingFragment StoreEntitySet="vwtb_provincia">
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

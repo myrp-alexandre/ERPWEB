@@ -1195,7 +1195,13 @@
     <Compile Include="vwRo_Solicitud_Vacaciones.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwtb_ciudad_id.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwtb_pais.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwtb_provincia.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
   </ItemGroup>
