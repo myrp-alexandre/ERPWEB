@@ -28,7 +28,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
         }
         private void cargar_combos()
         {
-         var  lst_provincia = bus_provincia.get_list("", false);
+         var  lst_provincia = bus_provincia.get_list("1", false);
             ViewBag.lst_provincia = lst_provincia;
         }
 

@@ -222,7 +222,7 @@
             <PropertyRef Name="IdProvincia" />
           </Key>
           <Property Name="IdProvincia" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="Cod_Provincia" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Cod_Provincia" Type="varchar" MaxLength="25" />
           <Property Name="Descripcion_Prov" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="IdPais" Type="varchar" MaxLength="10" Nullable="false" />
@@ -1510,7 +1510,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
             <PropertyRef Name="IdProvincia" />
           </Key>
           <Property Name="IdProvincia" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Cod_Provincia" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_Provincia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion_Prov" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="IdPais" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
