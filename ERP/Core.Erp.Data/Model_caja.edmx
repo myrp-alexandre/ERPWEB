@@ -110,6 +110,91 @@
           <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
           <Property Name="FechaUltMod" Type="datetime" />
         </EntityType>
+        <EntityType Name="cp_conciliacion_Caja">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+          <Property Name="Fecha_ini" Type="datetime" />
+          <Property Name="Fecha_fin" Type="datetime" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="IdCaja" Type="int" Nullable="false" />
+          <Property Name="IdEstadoCierre" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Observacion" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="IdEmpresa_op" Type="int" />
+          <Property Name="IdOrdenPago_op" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Saldo_cont_al_periodo" Type="float" Nullable="false" />
+          <Property Name="Ingresos" Type="float" Nullable="false" />
+          <Property Name="Total_Ing" Type="float" Nullable="false" />
+          <Property Name="Total_fact_vale" Type="float" Nullable="false" />
+          <Property Name="Total_fondo" Type="float" Nullable="false" />
+          <Property Name="Dif_x_pagar_o_cobrar" Type="float" Nullable="false" />
+          <Property Name="IdTipoFlujo" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa_mov_caj" Type="int" />
+          <Property Name="IdTipoCbte_mov_caj" Type="int" />
+          <Property Name="IdCbteCble_mov_caj" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="cp_conciliacion_Caja_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdEmpresa_OGiro" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble_Ogiro" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdTipoCbte_Ogiro" Type="int" Nullable="false" />
+          <Property Name="IdTipoMovi" Type="int" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Fecha_Transac" Type="datetime" Nullable="false" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="25" />
+          <Property Name="IdCentroCosto" Type="varchar" MaxLength="20" />
+          <Property Name="IdCentroCosto_sub_centro_costo" Type="varchar" MaxLength="20" />
+          <Property Name="Valor_a_aplicar" Type="money" Nullable="false" />
+          <Property Name="Tipo_documento" Type="varchar" MaxLength="10" />
+          <Property Name="IdEmpresa_OP" Type="int" />
+          <Property Name="IdOrdenPago_OP" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="cp_conciliacion_Caja_det_Ing_Caja">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="secuencia" Type="int" Nullable="false" />
+          <Property Name="IdEmpresa_movcaj" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble_movcaj" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdTipocbte_movcaj" Type="int" Nullable="false" />
+          <Property Name="valor_aplicado" Type="float" Nullable="false" />
+          <Property Name="valor_disponible" Type="float" />
+        </EntityType>
+        <EntityType Name="cp_conciliacion_Caja_det_x_ValeCaja">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdEmpresa_movcaja" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble_movcaja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdTipocbte_movcaja" Type="int" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IdPunto_cargo" Type="int" />
+          <Property Name="IdPunto_cargo_grupo" Type="int" />
+          <Property Name="IdCentroCosto" Type="varchar" MaxLength="20" />
+          <Property Name="IdCentroCosto_sub_centro_costo" Type="varchar" MaxLength="20" />
+        </EntityType>
         <Association Name="FK_caj_Caja_Movimiento_caj_Caja">
           <End Role="caj_Caja" Type="Self.caj_Caja" Multiplicity="1" />
           <End Role="caj_Caja_Movimiento" Type="Self.caj_Caja_Movimiento" Multiplicity="*" />
@@ -154,12 +239,120 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_cp_conciliacion_Caja_caj_Caja">
+          <End Role="caj_Caja" Type="Self.caj_Caja" Multiplicity="1" />
+          <End Role="cp_conciliacion_Caja" Type="Self.cp_conciliacion_Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="caj_Caja">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCaja" />
+            </Principal>
+            <Dependent Role="cp_conciliacion_Caja">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_conciliacion_Caja_caj_Caja_Movimiento">
+          <End Role="caj_Caja_Movimiento" Type="Self.caj_Caja_Movimiento" Multiplicity="0..1" />
+          <End Role="cp_conciliacion_Caja" Type="Self.cp_conciliacion_Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="caj_Caja_Movimiento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCbteCble" />
+              <PropertyRef Name="IdTipocbte" />
+            </Principal>
+            <Dependent Role="cp_conciliacion_Caja">
+              <PropertyRef Name="IdEmpresa_mov_caj" />
+              <PropertyRef Name="IdCbteCble_mov_caj" />
+              <PropertyRef Name="IdTipoCbte_mov_caj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_conciliacion_Caja_det_cp_conciliacion_Caja">
+          <End Role="cp_conciliacion_Caja" Type="Self.cp_conciliacion_Caja" Multiplicity="1" />
+          <End Role="cp_conciliacion_Caja_det" Type="Self.cp_conciliacion_Caja_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_conciliacion_Caja">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdConciliacion_Caja" />
+            </Principal>
+            <Dependent Role="cp_conciliacion_Caja_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdConciliacion_Caja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_conciliacion_Caja_det_Ing_Caja_caj_Caja_Movimiento">
+          <End Role="caj_Caja_Movimiento" Type="Self.caj_Caja_Movimiento" Multiplicity="1" />
+          <End Role="cp_conciliacion_Caja_det_Ing_Caja" Type="Self.cp_conciliacion_Caja_det_Ing_Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="caj_Caja_Movimiento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCbteCble" />
+              <PropertyRef Name="IdTipocbte" />
+            </Principal>
+            <Dependent Role="cp_conciliacion_Caja_det_Ing_Caja">
+              <PropertyRef Name="IdEmpresa_movcaj" />
+              <PropertyRef Name="IdCbteCble_movcaj" />
+              <PropertyRef Name="IdTipocbte_movcaj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_conciliacion_Caja_det_Ing_Caja_cp_conciliacion_Caja">
+          <End Role="cp_conciliacion_Caja" Type="Self.cp_conciliacion_Caja" Multiplicity="1" />
+          <End Role="cp_conciliacion_Caja_det_Ing_Caja" Type="Self.cp_conciliacion_Caja_det_Ing_Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_conciliacion_Caja">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdConciliacion_Caja" />
+            </Principal>
+            <Dependent Role="cp_conciliacion_Caja_det_Ing_Caja">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdConciliacion_Caja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_conciliacion_Caja_det_x_ValeCaja_caj_Caja_Movimiento">
+          <End Role="caj_Caja_Movimiento" Type="Self.caj_Caja_Movimiento" Multiplicity="1" />
+          <End Role="cp_conciliacion_Caja_det_x_ValeCaja" Type="Self.cp_conciliacion_Caja_det_x_ValeCaja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="caj_Caja_Movimiento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCbteCble" />
+              <PropertyRef Name="IdTipocbte" />
+            </Principal>
+            <Dependent Role="cp_conciliacion_Caja_det_x_ValeCaja">
+              <PropertyRef Name="IdEmpresa_movcaja" />
+              <PropertyRef Name="IdCbteCble_movcaja" />
+              <PropertyRef Name="IdTipocbte_movcaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_conciliacion_Caja_det_x_ValeCaja_cp_conciliacion_Caja">
+          <End Role="cp_conciliacion_Caja" Type="Self.cp_conciliacion_Caja" Multiplicity="1" />
+          <End Role="cp_conciliacion_Caja_det_x_ValeCaja" Type="Self.cp_conciliacion_Caja_det_x_ValeCaja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_conciliacion_Caja">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdConciliacion_Caja" />
+            </Principal>
+            <Dependent Role="cp_conciliacion_Caja_det_x_ValeCaja">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdConciliacion_Caja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Model_cajaStoreContainer">
           <EntitySet Name="caj_Caja" EntityType="Self.caj_Caja" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="caj_Caja_Movimiento" EntityType="Self.caj_Caja_Movimiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="caj_Caja_Movimiento_det" EntityType="Self.caj_Caja_Movimiento_det" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="caj_Caja_Movimiento_Tipo" EntityType="Self.caj_Caja_Movimiento_Tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="caj_parametro" EntityType="Self.caj_parametro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cp_conciliacion_Caja" EntityType="Self.cp_conciliacion_Caja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cp_conciliacion_Caja_det" EntityType="Self.cp_conciliacion_Caja_det" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cp_conciliacion_Caja_det_Ing_Caja" EntityType="Self.cp_conciliacion_Caja_det_Ing_Caja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cp_conciliacion_Caja_det_x_ValeCaja" EntityType="Self.cp_conciliacion_Caja_det_x_ValeCaja" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_caj_Caja_Movimiento_caj_Caja" Association="Self.FK_caj_Caja_Movimiento_caj_Caja">
             <End Role="caj_Caja" EntitySet="caj_Caja" />
             <End Role="caj_Caja_Movimiento" EntitySet="caj_Caja_Movimiento" />
@@ -171,6 +364,34 @@
           <AssociationSet Name="FK_caj_Caja_Movimiento_det_caj_Caja_Movimiento" Association="Self.FK_caj_Caja_Movimiento_det_caj_Caja_Movimiento">
             <End Role="caj_Caja_Movimiento" EntitySet="caj_Caja_Movimiento" />
             <End Role="caj_Caja_Movimiento_det" EntitySet="caj_Caja_Movimiento_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_conciliacion_Caja_caj_Caja" Association="Self.FK_cp_conciliacion_Caja_caj_Caja">
+            <End Role="caj_Caja" EntitySet="caj_Caja" />
+            <End Role="cp_conciliacion_Caja" EntitySet="cp_conciliacion_Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_conciliacion_Caja_caj_Caja_Movimiento" Association="Self.FK_cp_conciliacion_Caja_caj_Caja_Movimiento">
+            <End Role="caj_Caja_Movimiento" EntitySet="caj_Caja_Movimiento" />
+            <End Role="cp_conciliacion_Caja" EntitySet="cp_conciliacion_Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_conciliacion_Caja_det_cp_conciliacion_Caja" Association="Self.FK_cp_conciliacion_Caja_det_cp_conciliacion_Caja">
+            <End Role="cp_conciliacion_Caja" EntitySet="cp_conciliacion_Caja" />
+            <End Role="cp_conciliacion_Caja_det" EntitySet="cp_conciliacion_Caja_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_conciliacion_Caja_det_Ing_Caja_caj_Caja_Movimiento" Association="Self.FK_cp_conciliacion_Caja_det_Ing_Caja_caj_Caja_Movimiento">
+            <End Role="caj_Caja_Movimiento" EntitySet="caj_Caja_Movimiento" />
+            <End Role="cp_conciliacion_Caja_det_Ing_Caja" EntitySet="cp_conciliacion_Caja_det_Ing_Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_conciliacion_Caja_det_Ing_Caja_cp_conciliacion_Caja" Association="Self.FK_cp_conciliacion_Caja_det_Ing_Caja_cp_conciliacion_Caja">
+            <End Role="cp_conciliacion_Caja" EntitySet="cp_conciliacion_Caja" />
+            <End Role="cp_conciliacion_Caja_det_Ing_Caja" EntitySet="cp_conciliacion_Caja_det_Ing_Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_conciliacion_Caja_det_x_ValeCaja_caj_Caja_Movimiento" Association="Self.FK_cp_conciliacion_Caja_det_x_ValeCaja_caj_Caja_Movimiento">
+            <End Role="caj_Caja_Movimiento" EntitySet="caj_Caja_Movimiento" />
+            <End Role="cp_conciliacion_Caja_det_x_ValeCaja" EntitySet="cp_conciliacion_Caja_det_x_ValeCaja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_conciliacion_Caja_det_x_ValeCaja_cp_conciliacion_Caja" Association="Self.FK_cp_conciliacion_Caja_det_x_ValeCaja_cp_conciliacion_Caja">
+            <End Role="cp_conciliacion_Caja" EntitySet="cp_conciliacion_Caja" />
+            <End Role="cp_conciliacion_Caja_det_x_ValeCaja" EntitySet="cp_conciliacion_Caja_det_x_ValeCaja" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -194,6 +415,38 @@
           <AssociationSet Name="FK_caj_Caja_Movimiento_det_caj_Caja_Movimiento" Association="Model_caja.FK_caj_Caja_Movimiento_det_caj_Caja_Movimiento">
             <End Role="caj_Caja_Movimiento" EntitySet="caj_Caja_Movimiento" />
             <End Role="caj_Caja_Movimiento_det" EntitySet="caj_Caja_Movimiento_det" />
+          </AssociationSet>
+          <EntitySet Name="cp_conciliacion_Caja" EntityType="Model_caja.cp_conciliacion_Caja" />
+          <EntitySet Name="cp_conciliacion_Caja_det" EntityType="Model_caja.cp_conciliacion_Caja_det" />
+          <EntitySet Name="cp_conciliacion_Caja_det_Ing_Caja" EntityType="Model_caja.cp_conciliacion_Caja_det_Ing_Caja" />
+          <EntitySet Name="cp_conciliacion_Caja_det_x_ValeCaja" EntityType="Model_caja.cp_conciliacion_Caja_det_x_ValeCaja" />
+          <AssociationSet Name="FK_cp_conciliacion_Caja_caj_Caja" Association="Model_caja.FK_cp_conciliacion_Caja_caj_Caja">
+            <End Role="caj_Caja" EntitySet="caj_Caja" />
+            <End Role="cp_conciliacion_Caja" EntitySet="cp_conciliacion_Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_conciliacion_Caja_caj_Caja_Movimiento" Association="Model_caja.FK_cp_conciliacion_Caja_caj_Caja_Movimiento">
+            <End Role="caj_Caja_Movimiento" EntitySet="caj_Caja_Movimiento" />
+            <End Role="cp_conciliacion_Caja" EntitySet="cp_conciliacion_Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_conciliacion_Caja_det_Ing_Caja_caj_Caja_Movimiento" Association="Model_caja.FK_cp_conciliacion_Caja_det_Ing_Caja_caj_Caja_Movimiento">
+            <End Role="caj_Caja_Movimiento" EntitySet="caj_Caja_Movimiento" />
+            <End Role="cp_conciliacion_Caja_det_Ing_Caja" EntitySet="cp_conciliacion_Caja_det_Ing_Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_conciliacion_Caja_det_x_ValeCaja_caj_Caja_Movimiento" Association="Model_caja.FK_cp_conciliacion_Caja_det_x_ValeCaja_caj_Caja_Movimiento">
+            <End Role="caj_Caja_Movimiento" EntitySet="caj_Caja_Movimiento" />
+            <End Role="cp_conciliacion_Caja_det_x_ValeCaja" EntitySet="cp_conciliacion_Caja_det_x_ValeCaja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_conciliacion_Caja_det_cp_conciliacion_Caja" Association="Model_caja.FK_cp_conciliacion_Caja_det_cp_conciliacion_Caja">
+            <End Role="cp_conciliacion_Caja" EntitySet="cp_conciliacion_Caja" />
+            <End Role="cp_conciliacion_Caja_det" EntitySet="cp_conciliacion_Caja_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_conciliacion_Caja_det_Ing_Caja_cp_conciliacion_Caja" Association="Model_caja.FK_cp_conciliacion_Caja_det_Ing_Caja_cp_conciliacion_Caja">
+            <End Role="cp_conciliacion_Caja" EntitySet="cp_conciliacion_Caja" />
+            <End Role="cp_conciliacion_Caja_det_Ing_Caja" EntitySet="cp_conciliacion_Caja_det_Ing_Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_conciliacion_Caja_det_x_ValeCaja_cp_conciliacion_Caja" Association="Model_caja.FK_cp_conciliacion_Caja_det_x_ValeCaja_cp_conciliacion_Caja">
+            <End Role="cp_conciliacion_Caja" EntitySet="cp_conciliacion_Caja" />
+            <End Role="cp_conciliacion_Caja_det_x_ValeCaja" EntitySet="cp_conciliacion_Caja_det_x_ValeCaja" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="caj_parametro">
@@ -234,6 +487,7 @@
           <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnu" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="caj_Caja_Movimiento" Relationship="Model_caja.FK_caj_Caja_Movimiento_caj_Caja" FromRole="caj_Caja" ToRole="caj_Caja_Movimiento" />
+          <NavigationProperty Name="cp_conciliacion_Caja" Relationship="Model_caja.FK_cp_conciliacion_Caja_caj_Caja" FromRole="caj_Caja" ToRole="cp_conciliacion_Caja" />
         </EntityType>
         <EntityType Name="caj_Caja_Movimiento_Tipo">
           <Key>
@@ -291,6 +545,9 @@
           <NavigationProperty Name="caj_Caja" Relationship="Model_caja.FK_caj_Caja_Movimiento_caj_Caja" FromRole="caj_Caja_Movimiento" ToRole="caj_Caja" />
           <NavigationProperty Name="caj_Caja_Movimiento_Tipo" Relationship="Model_caja.FK_caj_Caja_Movimiento_caj_Caja_Movimiento_Tipo" FromRole="caj_Caja_Movimiento" ToRole="caj_Caja_Movimiento_Tipo" />
           <NavigationProperty Name="caj_Caja_Movimiento_det" Relationship="Model_caja.FK_caj_Caja_Movimiento_det_caj_Caja_Movimiento" FromRole="caj_Caja_Movimiento" ToRole="caj_Caja_Movimiento_det" />
+          <NavigationProperty Name="cp_conciliacion_Caja" Relationship="Model_caja.FK_cp_conciliacion_Caja_caj_Caja_Movimiento" FromRole="caj_Caja_Movimiento" ToRole="cp_conciliacion_Caja" />
+          <NavigationProperty Name="cp_conciliacion_Caja_det_Ing_Caja" Relationship="Model_caja.FK_cp_conciliacion_Caja_det_Ing_Caja_caj_Caja_Movimiento" FromRole="caj_Caja_Movimiento" ToRole="cp_conciliacion_Caja_det_Ing_Caja" />
+          <NavigationProperty Name="cp_conciliacion_Caja_det_x_ValeCaja" Relationship="Model_caja.FK_cp_conciliacion_Caja_det_x_ValeCaja_caj_Caja_Movimiento" FromRole="caj_Caja_Movimiento" ToRole="cp_conciliacion_Caja_det_x_ValeCaja" />
         </EntityType>
         <Association Name="FK_caj_Caja_Movimiento_caj_Caja">
           <End Type="Model_caja.caj_Caja" Role="caj_Caja" Multiplicity="1" />
@@ -348,6 +605,205 @@
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdCbteCble" />
               <PropertyRef Name="IdTipocbte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="cp_conciliacion_Caja">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_ini" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_fin" Type="DateTime" Precision="3" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdCaja" Type="Int32" Nullable="false" />
+          <Property Name="IdEstadoCierre" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Observacion" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa_op" Type="Int32" />
+          <Property Name="IdOrdenPago_op" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Saldo_cont_al_periodo" Type="Double" Nullable="false" />
+          <Property Name="Ingresos" Type="Double" Nullable="false" />
+          <Property Name="Total_Ing" Type="Double" Nullable="false" />
+          <Property Name="Total_fact_vale" Type="Double" Nullable="false" />
+          <Property Name="Total_fondo" Type="Double" Nullable="false" />
+          <Property Name="Dif_x_pagar_o_cobrar" Type="Double" Nullable="false" />
+          <Property Name="IdTipoFlujo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa_mov_caj" Type="Int32" />
+          <Property Name="IdTipoCbte_mov_caj" Type="Int32" />
+          <Property Name="IdCbteCble_mov_caj" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="caj_Caja" Relationship="Model_caja.FK_cp_conciliacion_Caja_caj_Caja" FromRole="cp_conciliacion_Caja" ToRole="caj_Caja" />
+          <NavigationProperty Name="caj_Caja_Movimiento" Relationship="Model_caja.FK_cp_conciliacion_Caja_caj_Caja_Movimiento" FromRole="cp_conciliacion_Caja" ToRole="caj_Caja_Movimiento" />
+          <NavigationProperty Name="cp_conciliacion_Caja_det" Relationship="Model_caja.FK_cp_conciliacion_Caja_det_cp_conciliacion_Caja" FromRole="cp_conciliacion_Caja" ToRole="cp_conciliacion_Caja_det" />
+          <NavigationProperty Name="cp_conciliacion_Caja_det_Ing_Caja" Relationship="Model_caja.FK_cp_conciliacion_Caja_det_Ing_Caja_cp_conciliacion_Caja" FromRole="cp_conciliacion_Caja" ToRole="cp_conciliacion_Caja_det_Ing_Caja" />
+          <NavigationProperty Name="cp_conciliacion_Caja_det_x_ValeCaja" Relationship="Model_caja.FK_cp_conciliacion_Caja_det_x_ValeCaja_cp_conciliacion_Caja" FromRole="cp_conciliacion_Caja" ToRole="cp_conciliacion_Caja_det_x_ValeCaja" />
+        </EntityType>
+        <EntityType Name="cp_conciliacion_Caja_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa_OGiro" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble_Ogiro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipoCbte_Ogiro" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoMovi" Type="Int32" />
+          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdCentroCosto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCentroCosto_sub_centro_costo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Valor_a_aplicar" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Tipo_documento" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa_OP" Type="Int32" />
+          <Property Name="IdOrdenPago_OP" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="cp_conciliacion_Caja" Relationship="Model_caja.FK_cp_conciliacion_Caja_det_cp_conciliacion_Caja" FromRole="cp_conciliacion_Caja_det" ToRole="cp_conciliacion_Caja" />
+        </EntityType>
+        <EntityType Name="cp_conciliacion_Caja_det_Ing_Caja">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa_movcaj" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble_movcaj" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipocbte_movcaj" Type="Int32" Nullable="false" />
+          <Property Name="valor_aplicado" Type="Double" Nullable="false" />
+          <Property Name="valor_disponible" Type="Double" />
+          <NavigationProperty Name="caj_Caja_Movimiento" Relationship="Model_caja.FK_cp_conciliacion_Caja_det_Ing_Caja_caj_Caja_Movimiento" FromRole="cp_conciliacion_Caja_det_Ing_Caja" ToRole="caj_Caja_Movimiento" />
+          <NavigationProperty Name="cp_conciliacion_Caja" Relationship="Model_caja.FK_cp_conciliacion_Caja_det_Ing_Caja_cp_conciliacion_Caja" FromRole="cp_conciliacion_Caja_det_Ing_Caja" ToRole="cp_conciliacion_Caja" />
+        </EntityType>
+        <EntityType Name="cp_conciliacion_Caja_det_x_ValeCaja">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa_movcaja" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble_movcaja" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipocbte_movcaja" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdPunto_cargo" Type="Int32" />
+          <Property Name="IdPunto_cargo_grupo" Type="Int32" />
+          <Property Name="IdCentroCosto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCentroCosto_sub_centro_costo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="caj_Caja_Movimiento" Relationship="Model_caja.FK_cp_conciliacion_Caja_det_x_ValeCaja_caj_Caja_Movimiento" FromRole="cp_conciliacion_Caja_det_x_ValeCaja" ToRole="caj_Caja_Movimiento" />
+          <NavigationProperty Name="cp_conciliacion_Caja" Relationship="Model_caja.FK_cp_conciliacion_Caja_det_x_ValeCaja_cp_conciliacion_Caja" FromRole="cp_conciliacion_Caja_det_x_ValeCaja" ToRole="cp_conciliacion_Caja" />
+        </EntityType>
+        <Association Name="FK_cp_conciliacion_Caja_caj_Caja">
+          <End Type="Model_caja.caj_Caja" Role="caj_Caja" Multiplicity="1" />
+          <End Type="Model_caja.cp_conciliacion_Caja" Role="cp_conciliacion_Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="caj_Caja">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCaja" />
+            </Principal>
+            <Dependent Role="cp_conciliacion_Caja">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_conciliacion_Caja_caj_Caja_Movimiento">
+          <End Type="Model_caja.caj_Caja_Movimiento" Role="caj_Caja_Movimiento" Multiplicity="0..1" />
+          <End Type="Model_caja.cp_conciliacion_Caja" Role="cp_conciliacion_Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="caj_Caja_Movimiento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCbteCble" />
+              <PropertyRef Name="IdTipocbte" />
+            </Principal>
+            <Dependent Role="cp_conciliacion_Caja">
+              <PropertyRef Name="IdEmpresa_mov_caj" />
+              <PropertyRef Name="IdCbteCble_mov_caj" />
+              <PropertyRef Name="IdTipoCbte_mov_caj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_conciliacion_Caja_det_Ing_Caja_caj_Caja_Movimiento">
+          <End Type="Model_caja.caj_Caja_Movimiento" Role="caj_Caja_Movimiento" Multiplicity="1" />
+          <End Type="Model_caja.cp_conciliacion_Caja_det_Ing_Caja" Role="cp_conciliacion_Caja_det_Ing_Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="caj_Caja_Movimiento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCbteCble" />
+              <PropertyRef Name="IdTipocbte" />
+            </Principal>
+            <Dependent Role="cp_conciliacion_Caja_det_Ing_Caja">
+              <PropertyRef Name="IdEmpresa_movcaj" />
+              <PropertyRef Name="IdCbteCble_movcaj" />
+              <PropertyRef Name="IdTipocbte_movcaj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_conciliacion_Caja_det_x_ValeCaja_caj_Caja_Movimiento">
+          <End Type="Model_caja.caj_Caja_Movimiento" Role="caj_Caja_Movimiento" Multiplicity="1" />
+          <End Type="Model_caja.cp_conciliacion_Caja_det_x_ValeCaja" Role="cp_conciliacion_Caja_det_x_ValeCaja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="caj_Caja_Movimiento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCbteCble" />
+              <PropertyRef Name="IdTipocbte" />
+            </Principal>
+            <Dependent Role="cp_conciliacion_Caja_det_x_ValeCaja">
+              <PropertyRef Name="IdEmpresa_movcaja" />
+              <PropertyRef Name="IdCbteCble_movcaja" />
+              <PropertyRef Name="IdTipocbte_movcaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_conciliacion_Caja_det_cp_conciliacion_Caja">
+          <End Type="Model_caja.cp_conciliacion_Caja" Role="cp_conciliacion_Caja" Multiplicity="1" />
+          <End Type="Model_caja.cp_conciliacion_Caja_det" Role="cp_conciliacion_Caja_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_conciliacion_Caja">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdConciliacion_Caja" />
+            </Principal>
+            <Dependent Role="cp_conciliacion_Caja_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdConciliacion_Caja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_conciliacion_Caja_det_Ing_Caja_cp_conciliacion_Caja">
+          <End Type="Model_caja.cp_conciliacion_Caja" Role="cp_conciliacion_Caja" Multiplicity="1" />
+          <End Type="Model_caja.cp_conciliacion_Caja_det_Ing_Caja" Role="cp_conciliacion_Caja_det_Ing_Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_conciliacion_Caja">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdConciliacion_Caja" />
+            </Principal>
+            <Dependent Role="cp_conciliacion_Caja_det_Ing_Caja">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdConciliacion_Caja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_conciliacion_Caja_det_x_ValeCaja_cp_conciliacion_Caja">
+          <End Type="Model_caja.cp_conciliacion_Caja" Role="cp_conciliacion_Caja" Multiplicity="1" />
+          <End Type="Model_caja.cp_conciliacion_Caja_det_x_ValeCaja" Role="cp_conciliacion_Caja_det_x_ValeCaja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_conciliacion_Caja">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdConciliacion_Caja" />
+            </Principal>
+            <Dependent Role="cp_conciliacion_Caja_det_x_ValeCaja">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdConciliacion_Caja" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -456,6 +912,88 @@
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdTipocbte" ColumnName="IdTipocbte" />
                 <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cp_conciliacion_Caja">
+            <EntityTypeMapping TypeName="Model_caja.cp_conciliacion_Caja">
+              <MappingFragment StoreEntitySet="cp_conciliacion_Caja">
+                <ScalarProperty Name="IdCbteCble_mov_caj" ColumnName="IdCbteCble_mov_caj" />
+                <ScalarProperty Name="IdTipoCbte_mov_caj" ColumnName="IdTipoCbte_mov_caj" />
+                <ScalarProperty Name="IdEmpresa_mov_caj" ColumnName="IdEmpresa_mov_caj" />
+                <ScalarProperty Name="IdTipoFlujo" ColumnName="IdTipoFlujo" />
+                <ScalarProperty Name="Dif_x_pagar_o_cobrar" ColumnName="Dif_x_pagar_o_cobrar" />
+                <ScalarProperty Name="Total_fondo" ColumnName="Total_fondo" />
+                <ScalarProperty Name="Total_fact_vale" ColumnName="Total_fact_vale" />
+                <ScalarProperty Name="Total_Ing" ColumnName="Total_Ing" />
+                <ScalarProperty Name="Ingresos" ColumnName="Ingresos" />
+                <ScalarProperty Name="Saldo_cont_al_periodo" ColumnName="Saldo_cont_al_periodo" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdOrdenPago_op" ColumnName="IdOrdenPago_op" />
+                <ScalarProperty Name="IdEmpresa_op" ColumnName="IdEmpresa_op" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="IdEstadoCierre" ColumnName="IdEstadoCierre" />
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Fecha_fin" ColumnName="Fecha_fin" />
+                <ScalarProperty Name="Fecha_ini" ColumnName="Fecha_ini" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdConciliacion_Caja" ColumnName="IdConciliacion_Caja" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cp_conciliacion_Caja_det">
+            <EntityTypeMapping TypeName="Model_caja.cp_conciliacion_Caja_det">
+              <MappingFragment StoreEntitySet="cp_conciliacion_Caja_det">
+                <ScalarProperty Name="IdOrdenPago_OP" ColumnName="IdOrdenPago_OP" />
+                <ScalarProperty Name="IdEmpresa_OP" ColumnName="IdEmpresa_OP" />
+                <ScalarProperty Name="Tipo_documento" ColumnName="Tipo_documento" />
+                <ScalarProperty Name="Valor_a_aplicar" ColumnName="Valor_a_aplicar" />
+                <ScalarProperty Name="IdCentroCosto_sub_centro_costo" ColumnName="IdCentroCosto_sub_centro_costo" />
+                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdTipoMovi" ColumnName="IdTipoMovi" />
+                <ScalarProperty Name="IdTipoCbte_Ogiro" ColumnName="IdTipoCbte_Ogiro" />
+                <ScalarProperty Name="IdCbteCble_Ogiro" ColumnName="IdCbteCble_Ogiro" />
+                <ScalarProperty Name="IdEmpresa_OGiro" ColumnName="IdEmpresa_OGiro" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdConciliacion_Caja" ColumnName="IdConciliacion_Caja" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cp_conciliacion_Caja_det_Ing_Caja">
+            <EntityTypeMapping TypeName="Model_caja.cp_conciliacion_Caja_det_Ing_Caja">
+              <MappingFragment StoreEntitySet="cp_conciliacion_Caja_det_Ing_Caja">
+                <ScalarProperty Name="valor_disponible" ColumnName="valor_disponible" />
+                <ScalarProperty Name="valor_aplicado" ColumnName="valor_aplicado" />
+                <ScalarProperty Name="IdTipocbte_movcaj" ColumnName="IdTipocbte_movcaj" />
+                <ScalarProperty Name="IdCbteCble_movcaj" ColumnName="IdCbteCble_movcaj" />
+                <ScalarProperty Name="IdEmpresa_movcaj" ColumnName="IdEmpresa_movcaj" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="IdConciliacion_Caja" ColumnName="IdConciliacion_Caja" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cp_conciliacion_Caja_det_x_ValeCaja">
+            <EntityTypeMapping TypeName="Model_caja.cp_conciliacion_Caja_det_x_ValeCaja">
+              <MappingFragment StoreEntitySet="cp_conciliacion_Caja_det_x_ValeCaja">
+                <ScalarProperty Name="IdCentroCosto_sub_centro_costo" ColumnName="IdCentroCosto_sub_centro_costo" />
+                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
+                <ScalarProperty Name="IdPunto_cargo_grupo" ColumnName="IdPunto_cargo_grupo" />
+                <ScalarProperty Name="IdPunto_cargo" ColumnName="IdPunto_cargo" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdTipocbte_movcaja" ColumnName="IdTipocbte_movcaja" />
+                <ScalarProperty Name="IdCbteCble_movcaja" ColumnName="IdCbteCble_movcaja" />
+                <ScalarProperty Name="IdEmpresa_movcaja" ColumnName="IdEmpresa_movcaja" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdConciliacion_Caja" ColumnName="IdConciliacion_Caja" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

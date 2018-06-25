@@ -30,5 +30,9 @@ namespace Core.Erp.Data
         public virtual DbSet<caj_Caja_Movimiento_Tipo> caj_Caja_Movimiento_Tipo { get; set; }
         public virtual DbSet<caj_Caja_Movimiento> caj_Caja_Movimiento { get; set; }
         public virtual DbSet<caj_Caja_Movimiento_det> caj_Caja_Movimiento_det { get; set; }
+        public virtual DbSet<cp_conciliacion_Caja> cp_conciliacion_Caja { get; set; }
+        public virtual DbSet<cp_conciliacion_Caja_det> cp_conciliacion_Caja_det { get; set; }
+        public virtual DbSet<cp_conciliacion_Caja_det_Ing_Caja> cp_conciliacion_Caja_det_Ing_Caja { get; set; }
+        public virtual DbSet<cp_conciliacion_Caja_det_x_ValeCaja> cp_conciliacion_Caja_det_x_ValeCaja { get; set; }
     }
 }
