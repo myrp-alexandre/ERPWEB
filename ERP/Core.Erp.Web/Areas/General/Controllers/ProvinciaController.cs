@@ -25,7 +25,6 @@ namespace Core.Erp.Web.Areas.General.Controllers
 
             List<tb_pais_Info> lst_pais = bus_pais.get_list(false);
             List<tb_region_Info> lst_region = bus_region.get_list("1",false);
-
             ViewBag.lst_pais = lst_pais;
             ViewBag.lst_region = lst_region;
         }
