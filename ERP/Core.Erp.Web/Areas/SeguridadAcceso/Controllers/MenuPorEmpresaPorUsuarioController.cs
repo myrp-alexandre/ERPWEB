@@ -25,7 +25,6 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
             cargar_combos();
             return View(model);
         }
-
         public static void CreateTreeViewNodesRecursive(List<seg_Menu_x_Empresa_x_Usuario_Info> model, MVCxTreeViewNodeCollection nodesCollection, Int32 parentID, int IdEmpresa = 0, string IdUsuario = "")
         {
             var rows = bus_menu_x_empresa_x_usuario.get_list(IdEmpresa, IdUsuario, parentID);
@@ -38,7 +37,6 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
                 CreateTreeViewNodesRecursive(model, node.Nodes, row.IdMenu,IdEmpresa,IdUsuario);
             }
         }
-
         private void cargar_combos()
         {
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
@@ -74,10 +72,10 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
                 
             return PartialView("_TreeListPartial_menu_x_usuario", model);
         }
-
         public JsonResult guardar(int IdEmpresa = 0,string IdUsuario = "", string Ids = "")
         {
             string[] array = Ids.Split(',');
+
             List<seg_Menu_x_Empresa_x_Usuario_Info> lista = new List<seg_Menu_x_Empresa_x_Usuario_Info>();
             var output = array.GroupBy(q => q).ToList();
             foreach (var item in output)
