@@ -153,6 +153,8 @@
     <Compile Include="Inventario\in_Producto_Composicion_Info.cs" />
     <Compile Include="Inventario\in_Producto_Info.cs" />
     <Compile Include="Inventario\in_subgrupo_Info.cs" />
+    <Compile Include="Inventario\in_transferencia_det_Info.cs" />
+    <Compile Include="Inventario\in_transferencia_Info.cs" />
     <Compile Include="Inventario\in_UnidadMedida_Equiv_conversion_Info.cs" />
     <Compile Include="Inventario\in_UnidadMedida_Info.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

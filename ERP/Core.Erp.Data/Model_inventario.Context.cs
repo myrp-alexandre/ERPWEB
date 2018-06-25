@@ -45,5 +45,7 @@ namespace Core.Erp.Data
         public virtual DbSet<in_producto_x_tb_bodega> in_producto_x_tb_bodega { get; set; }
         public virtual DbSet<in_Ing_Egr_Inven> in_Ing_Egr_Inven { get; set; }
         public virtual DbSet<in_Ing_Egr_Inven_det> in_Ing_Egr_Inven_det { get; set; }
+        public virtual DbSet<in_transferencia> in_transferencia { get; set; }
+        public virtual DbSet<in_transferencia_det> in_transferencia_det { get; set; }
     }
 }

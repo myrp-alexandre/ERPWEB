@@ -147,6 +147,8 @@
     <Compile Include="Inventario\in_Producto_Bus.cs" />
     <Compile Include="Inventario\in_Producto_Composicion_Bus.cs" />
     <Compile Include="Inventario\in_subgrupo_Bus.cs" />
+    <Compile Include="Inventario\in_transferencia_Bus.cs" />
+    <Compile Include="Inventario\in_transferencia_det_Bus.cs" />
     <Compile Include="Inventario\in_UnidadMedida_Bus.cs" />
     <Compile Include="Inventario\in_UnidadMedida_Equiv_conversion_Bus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

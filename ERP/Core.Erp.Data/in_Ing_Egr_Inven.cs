@@ -18,6 +18,8 @@ namespace Core.Erp.Data
         public in_Ing_Egr_Inven()
         {
             this.in_Ing_Egr_Inven_det = new HashSet<in_Ing_Egr_Inven_det>();
+            this.in_transferencia = new HashSet<in_transferencia>();
+            this.in_transferencia1 = new HashSet<in_transferencia>();
         }
     
         public int IdEmpresa { get; set; }
@@ -45,5 +47,9 @@ namespace Core.Erp.Data
         public virtual in_Motivo_Inven in_Motivo_Inven { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<in_Ing_Egr_Inven_det> in_Ing_Egr_Inven_det { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_transferencia> in_transferencia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_transferencia> in_transferencia1 { get; set; }
     }
 }

@@ -66,6 +66,14 @@
         <AssociationConnector Association="Model_inventario.FK_in_Ing_Egr_Inven_det_in_Producto" />
         <AssociationConnector Association="Model_inventario.FK_in_Ing_Egr_Inven_det_in_UnidadMedida2" />
         <AssociationConnector Association="Model_inventario.FK_in_Ing_Egr_Inven_det_in_UnidadMedida3" />
+        <EntityTypeShape EntityType="Model_inventario.in_transferencia" Width="1.5" PointX="16.375" PointY="17.625" />
+        <EntityTypeShape EntityType="Model_inventario.in_transferencia_det" Width="1.5" PointX="21.625" PointY="11.125" />
+        <AssociationConnector Association="Model_inventario.FK_in_transferencia_in_Catalogo" />
+        <AssociationConnector Association="Model_inventario.FK_in_transferencia_in_Ing_Egr_Inven" />
+        <AssociationConnector Association="Model_inventario.FK_in_transferencia_in_Ing_Egr_Inven1" />
+        <AssociationConnector Association="Model_inventario.FK_in_transferencia_det_in_Producto" />
+        <AssociationConnector Association="Model_inventario.FK_in_transferencia_det_in_transferencia" />
+        <AssociationConnector Association="Model_inventario.FK_in_transferencia_det_in_UnidadMedida" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -20,6 +20,7 @@ namespace Core.Erp.Data
             this.in_parametro = new HashSet<in_parametro>();
             this.in_parametro1 = new HashSet<in_parametro>();
             this.in_Motivo_Inven = new HashSet<in_Motivo_Inven>();
+            this.in_transferencia = new HashSet<in_transferencia>();
         }
     
         public string IdCatalogo { get; set; }
@@ -42,5 +43,7 @@ namespace Core.Erp.Data
         public virtual ICollection<in_parametro> in_parametro1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<in_Motivo_Inven> in_Motivo_Inven { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_transferencia> in_transferencia { get; set; }
     }
 }

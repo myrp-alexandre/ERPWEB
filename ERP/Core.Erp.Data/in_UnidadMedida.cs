@@ -24,6 +24,7 @@ namespace Core.Erp.Data
             this.in_Producto_Composicion = new HashSet<in_Producto_Composicion>();
             this.in_Ing_Egr_Inven_det = new HashSet<in_Ing_Egr_Inven_det>();
             this.in_Ing_Egr_Inven_det1 = new HashSet<in_Ing_Egr_Inven_det>();
+            this.in_transferencia_det = new HashSet<in_transferencia_det>();
         }
     
         public string IdUnidadMedida { get; set; }
@@ -49,5 +50,7 @@ namespace Core.Erp.Data
         public virtual ICollection<in_Ing_Egr_Inven_det> in_Ing_Egr_Inven_det { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<in_Ing_Egr_Inven_det> in_Ing_Egr_Inven_det1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_transferencia_det> in_transferencia_det { get; set; }
     }
 }

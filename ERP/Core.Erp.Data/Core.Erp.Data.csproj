@@ -376,6 +376,8 @@
     <Compile Include="Inventario\in_Producto_Composicion_Data.cs" />
     <Compile Include="Inventario\in_Producto_Data.cs" />
     <Compile Include="Inventario\in_subgrupo_Data.cs" />
+    <Compile Include="Inventario\in_transferencia_Data.cs" />
+    <Compile Include="Inventario\in_transferencia_det_Data.cs" />
     <Compile Include="Inventario\in_UnidadMedida_Data.cs" />
     <Compile Include="Inventario\in_UnidadMedida_Equiv_conversion_Data.cs" />
     <Compile Include="in_Catalogo.cs">
@@ -430,6 +432,12 @@
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
     <Compile Include="in_subgrupo.cs">
+      <DependentUpon>Model_inventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="in_transferencia.cs">
+      <DependentUpon>Model_inventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="in_transferencia_det.cs">
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
     <Compile Include="in_UnidadMedida.cs">

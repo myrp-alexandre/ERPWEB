@@ -146,7 +146,7 @@
           <Property Name="Motivo_Aprobacion" Type="varchar" MaxLength="200" />
           <Property Name="dm_cantidad_sinConversion" Type="float" Nullable="false" />
           <Property Name="IdUnidadMedida_sinConversion" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="mv_costo_sinConversion" Type="float" Nullable="false" />
+          <Property Name="mv_costo_sinConversion" Type="float" />
           <Property Name="IdMotivo_Inv" Type="int" />
         </EntityType>
         <EntityType Name="in_linea">
@@ -431,6 +431,64 @@
           <Property Name="Fecha_UltMod" Type="datetime" />
           <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_UltAnu" Type="datetime" />
+        </EntityType>
+        <EntityType Name="in_transferencia">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursalOrigen" />
+            <PropertyRef Name="IdBodegaOrigen" />
+            <PropertyRef Name="IdTransferencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursalOrigen" Type="int" Nullable="false" />
+          <Property Name="IdBodegaOrigen" Type="int" Nullable="false" />
+          <Property Name="IdTransferencia" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="IdSucursalDest" Type="int" Nullable="false" />
+          <Property Name="IdBodegaDest" Type="int" Nullable="false" />
+          <Property Name="tr_Observacion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="tr_fecha" Type="datetime" Nullable="false" />
+          <Property Name="IdEmpresa_Ing_Egr_Inven_Origen" Type="int" />
+          <Property Name="IdSucursal_Ing_Egr_Inven_Origen" Type="int" />
+          <Property Name="IdMovi_inven_tipo_SucuOrig" Type="int" />
+          <Property Name="IdNumMovi_Ing_Egr_Inven_Origen" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa_Ing_Egr_Inven_Destino" Type="int" />
+          <Property Name="IdSucursal_Ing_Egr_Inven_Destino" Type="int" />
+          <Property Name="IdMovi_inven_tipo_SucuDest" Type="int" />
+          <Property Name="IdNumMovi_Ing_Egr_Inven_Destino" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="tr_userAnulo" Type="varchar" MaxLength="20" />
+          <Property Name="tr_fechaAnulacion" Type="datetime" />
+          <Property Name="tr_fecha_transaccion" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="20" />
+          <Property Name="ip" Type="varchar" MaxLength="25" />
+          <Property Name="motivo_anula" Type="varchar" MaxLength="1000" />
+          <Property Name="IdEstadoAprobacion_cat" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="in_transferencia_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursalOrigen" />
+            <PropertyRef Name="IdBodegaOrigen" />
+            <PropertyRef Name="IdTransferencia" />
+            <PropertyRef Name="dt_secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursalOrigen" Type="int" Nullable="false" />
+          <Property Name="IdBodegaOrigen" Type="int" Nullable="false" />
+          <Property Name="IdTransferencia" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="dt_secuencia" Type="int" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="dt_cantidad" Type="float" Nullable="false" />
+          <Property Name="tr_Observacion" Type="varchar" MaxLength="1000" />
+          <Property Name="IdCentroCosto" Type="varchar" MaxLength="20" />
+          <Property Name="IdCentroCosto_sub_centro_costo" Type="varchar" MaxLength="20" />
+          <Property Name="IdUnidadMedida" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdPunto_cargo_grupo" Type="int" />
+          <Property Name="IdPunto_cargo" Type="int" />
         </EntityType>
         <EntityType Name="in_UnidadMedida">
           <Key>
@@ -999,6 +1057,98 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_in_transferencia_det_in_Producto">
+          <End Role="in_Producto" Type="Self.in_Producto" Multiplicity="1" />
+          <End Role="in_transferencia_det" Type="Self.in_transferencia_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_Producto">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="in_transferencia_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_transferencia_det_in_transferencia">
+          <End Role="in_transferencia" Type="Self.in_transferencia" Multiplicity="1" />
+          <End Role="in_transferencia_det" Type="Self.in_transferencia_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_transferencia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursalOrigen" />
+              <PropertyRef Name="IdBodegaOrigen" />
+              <PropertyRef Name="IdTransferencia" />
+            </Principal>
+            <Dependent Role="in_transferencia_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursalOrigen" />
+              <PropertyRef Name="IdBodegaOrigen" />
+              <PropertyRef Name="IdTransferencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_transferencia_det_in_UnidadMedida">
+          <End Role="in_UnidadMedida" Type="Self.in_UnidadMedida" Multiplicity="1" />
+          <End Role="in_transferencia_det" Type="Self.in_transferencia_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_UnidadMedida">
+              <PropertyRef Name="IdUnidadMedida" />
+            </Principal>
+            <Dependent Role="in_transferencia_det">
+              <PropertyRef Name="IdUnidadMedida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_transferencia_in_Catalogo">
+          <End Role="in_Catalogo" Type="Self.in_Catalogo" Multiplicity="0..1" />
+          <End Role="in_transferencia" Type="Self.in_transferencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="in_transferencia">
+              <PropertyRef Name="IdEstadoAprobacion_cat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_transferencia_in_Ing_Egr_Inven">
+          <End Role="in_Ing_Egr_Inven" Type="Self.in_Ing_Egr_Inven" Multiplicity="0..1" />
+          <End Role="in_transferencia" Type="Self.in_transferencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_Ing_Egr_Inven">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdMovi_inven_tipo" />
+              <PropertyRef Name="IdNumMovi" />
+            </Principal>
+            <Dependent Role="in_transferencia">
+              <PropertyRef Name="IdEmpresa_Ing_Egr_Inven_Origen" />
+              <PropertyRef Name="IdSucursal_Ing_Egr_Inven_Origen" />
+              <PropertyRef Name="IdMovi_inven_tipo_SucuOrig" />
+              <PropertyRef Name="IdNumMovi_Ing_Egr_Inven_Origen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_transferencia_in_Ing_Egr_Inven1">
+          <End Role="in_Ing_Egr_Inven" Type="Self.in_Ing_Egr_Inven" Multiplicity="0..1" />
+          <End Role="in_transferencia" Type="Self.in_transferencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_Ing_Egr_Inven">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdMovi_inven_tipo" />
+              <PropertyRef Name="IdNumMovi" />
+            </Principal>
+            <Dependent Role="in_transferencia">
+              <PropertyRef Name="IdEmpresa_Ing_Egr_Inven_Destino" />
+              <PropertyRef Name="IdSucursal_Ing_Egr_Inven_Destino" />
+              <PropertyRef Name="IdMovi_inven_tipo_SucuDest" />
+              <PropertyRef Name="IdNumMovi_Ing_Egr_Inven_Destino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_in_UnidadMedida_Equiv_conversion_in_UnidadMedida">
           <End Role="in_UnidadMedida" Type="Self.in_UnidadMedida" Multiplicity="1" />
           <End Role="in_UnidadMedida_Equiv_conversion" Type="Self.in_UnidadMedida_Equiv_conversion" Multiplicity="*" />
@@ -1042,6 +1192,8 @@
           <EntitySet Name="in_producto_x_tb_bodega" EntityType="Self.in_producto_x_tb_bodega" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_ProductoTipo" EntityType="Self.in_ProductoTipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_subgrupo" EntityType="Self.in_subgrupo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="in_transferencia" EntityType="Self.in_transferencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="in_transferencia_det" EntityType="Self.in_transferencia_det" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_UnidadMedida" EntityType="Self.in_UnidadMedida" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_UnidadMedida_Equiv_conversion" EntityType="Self.in_UnidadMedida_Equiv_conversion" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_in_Catalogo_in_CatalogoTipo" Association="Self.FK_in_Catalogo_in_CatalogoTipo">
@@ -1199,6 +1351,30 @@
           <AssociationSet Name="FK_in_subgrupo_in_grupo" Association="Self.FK_in_subgrupo_in_grupo">
             <End Role="in_grupo" EntitySet="in_grupo" />
             <End Role="in_subgrupo" EntitySet="in_subgrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_transferencia_det_in_Producto" Association="Self.FK_in_transferencia_det_in_Producto">
+            <End Role="in_Producto" EntitySet="in_Producto" />
+            <End Role="in_transferencia_det" EntitySet="in_transferencia_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_transferencia_det_in_transferencia" Association="Self.FK_in_transferencia_det_in_transferencia">
+            <End Role="in_transferencia" EntitySet="in_transferencia" />
+            <End Role="in_transferencia_det" EntitySet="in_transferencia_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_transferencia_det_in_UnidadMedida" Association="Self.FK_in_transferencia_det_in_UnidadMedida">
+            <End Role="in_UnidadMedida" EntitySet="in_UnidadMedida" />
+            <End Role="in_transferencia_det" EntitySet="in_transferencia_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_transferencia_in_Catalogo" Association="Self.FK_in_transferencia_in_Catalogo">
+            <End Role="in_Catalogo" EntitySet="in_Catalogo" />
+            <End Role="in_transferencia" EntitySet="in_transferencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_transferencia_in_Ing_Egr_Inven" Association="Self.FK_in_transferencia_in_Ing_Egr_Inven">
+            <End Role="in_Ing_Egr_Inven" EntitySet="in_Ing_Egr_Inven" />
+            <End Role="in_transferencia" EntitySet="in_transferencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_transferencia_in_Ing_Egr_Inven1" Association="Self.FK_in_transferencia_in_Ing_Egr_Inven1">
+            <End Role="in_Ing_Egr_Inven" EntitySet="in_Ing_Egr_Inven" />
+            <End Role="in_transferencia" EntitySet="in_transferencia" />
           </AssociationSet>
           <AssociationSet Name="FK_in_UnidadMedida_Equiv_conversion_in_UnidadMedida" Association="Self.FK_in_UnidadMedida_Equiv_conversion_in_UnidadMedida">
             <End Role="in_UnidadMedida" EntitySet="in_UnidadMedida" />
@@ -1398,6 +1574,32 @@
             <End Role="in_UnidadMedida" EntitySet="in_UnidadMedida" />
             <End Role="in_Ing_Egr_Inven_det" EntitySet="in_Ing_Egr_Inven_det" />
           </AssociationSet>
+          <EntitySet Name="in_transferencia" EntityType="Model_inventario.in_transferencia" />
+          <EntitySet Name="in_transferencia_det" EntityType="Model_inventario.in_transferencia_det" />
+          <AssociationSet Name="FK_in_transferencia_in_Catalogo" Association="Model_inventario.FK_in_transferencia_in_Catalogo">
+            <End Role="in_Catalogo" EntitySet="in_Catalogo" />
+            <End Role="in_transferencia" EntitySet="in_transferencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_transferencia_in_Ing_Egr_Inven" Association="Model_inventario.FK_in_transferencia_in_Ing_Egr_Inven">
+            <End Role="in_Ing_Egr_Inven" EntitySet="in_Ing_Egr_Inven" />
+            <End Role="in_transferencia" EntitySet="in_transferencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_transferencia_in_Ing_Egr_Inven1" Association="Model_inventario.FK_in_transferencia_in_Ing_Egr_Inven1">
+            <End Role="in_Ing_Egr_Inven" EntitySet="in_Ing_Egr_Inven" />
+            <End Role="in_transferencia" EntitySet="in_transferencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_transferencia_det_in_Producto" Association="Model_inventario.FK_in_transferencia_det_in_Producto">
+            <End Role="in_Producto" EntitySet="in_Producto" />
+            <End Role="in_transferencia_det" EntitySet="in_transferencia_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_transferencia_det_in_transferencia" Association="Model_inventario.FK_in_transferencia_det_in_transferencia">
+            <End Role="in_transferencia" EntitySet="in_transferencia" />
+            <End Role="in_transferencia_det" EntitySet="in_transferencia_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_transferencia_det_in_UnidadMedida" Association="Model_inventario.FK_in_transferencia_det_in_UnidadMedida">
+            <End Role="in_UnidadMedida" EntitySet="in_UnidadMedida" />
+            <End Role="in_transferencia_det" EntitySet="in_transferencia_det" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="in_CatalogoTipo">
           <Key>
@@ -1497,6 +1699,7 @@
           <NavigationProperty Name="in_parametro" Relationship="Model_inventario.FK_in_parametro_in_Catalogo" FromRole="in_Catalogo" ToRole="in_parametro" />
           <NavigationProperty Name="in_parametro1" Relationship="Model_inventario.FK_in_parametro_in_Catalogo1" FromRole="in_Catalogo" ToRole="in_parametro" />
           <NavigationProperty Name="in_Motivo_Inven" Relationship="Model_inventario.FK_in_Motivo_Inven_in_Catalogo1" FromRole="in_Catalogo" ToRole="in_Motivo_Inven" />
+          <NavigationProperty Name="in_transferencia" Relationship="Model_inventario.FK_in_transferencia_in_Catalogo" FromRole="in_Catalogo" ToRole="in_transferencia" />
           </EntityType>
         <Association Name="FK_in_Catalogo_in_CatalogoTipo">
           <End Type="Model_inventario.in_CatalogoTipo" Role="in_CatalogoTipo" Multiplicity="1" />
@@ -1976,6 +2179,7 @@
           <NavigationProperty Name="in_Producto_Composicion" Relationship="Model_inventario.FK_in_Producto_Composicion_in_UnidadMedida" FromRole="in_UnidadMedida" ToRole="in_Producto_Composicion" />
           <NavigationProperty Name="in_Ing_Egr_Inven_det" Relationship="Model_inventario.FK_in_Ing_Egr_Inven_det_in_UnidadMedida2" FromRole="in_UnidadMedida" ToRole="in_Ing_Egr_Inven_det" />
           <NavigationProperty Name="in_Ing_Egr_Inven_det1" Relationship="Model_inventario.FK_in_Ing_Egr_Inven_det_in_UnidadMedida3" FromRole="in_UnidadMedida" ToRole="in_Ing_Egr_Inven_det" />
+          <NavigationProperty Name="in_transferencia_det" Relationship="Model_inventario.FK_in_transferencia_det_in_UnidadMedida" FromRole="in_UnidadMedida" ToRole="in_transferencia_det" />
           </EntityType>
         <EntityType Name="in_UnidadMedida_Equiv_conversion">
           <Key>
@@ -2081,6 +2285,7 @@
           <NavigationProperty Name="in_ProductoTipo" Relationship="Model_inventario.FK_in_Producto_in_ProductoTipo" FromRole="in_Producto" ToRole="in_ProductoTipo" />
           <NavigationProperty Name="in_producto_x_tb_bodega" Relationship="Model_inventario.FK_in_producto_x_tb_bodega_in_Producto" FromRole="in_Producto" ToRole="in_producto_x_tb_bodega" />
           <NavigationProperty Name="in_Ing_Egr_Inven_det" Relationship="Model_inventario.FK_in_Ing_Egr_Inven_det_in_Producto" FromRole="in_Producto" ToRole="in_Ing_Egr_Inven_det" />
+          <NavigationProperty Name="in_transferencia_det" Relationship="Model_inventario.FK_in_transferencia_det_in_Producto" FromRole="in_Producto" ToRole="in_transferencia_det" />
           </EntityType>
         <Association Name="FK_in_Producto_in_categorias">
           <End Type="Model_inventario.in_categorias" Role="in_categorias" Multiplicity="1" />
@@ -2384,6 +2589,8 @@
           <Property Name="IdResponsable" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="in_Motivo_Inven" Relationship="Model_inventario.FK_in_Ing_Egr_Inven_in_Motivo_Inven" FromRole="in_Ing_Egr_Inven" ToRole="in_Motivo_Inven" />
           <NavigationProperty Name="in_Ing_Egr_Inven_det" Relationship="Model_inventario.FK_in_Ing_Egr_Inven_det_in_Ing_Egr_Inven" FromRole="in_Ing_Egr_Inven" ToRole="in_Ing_Egr_Inven_det" />
+          <NavigationProperty Name="in_transferencia" Relationship="Model_inventario.FK_in_transferencia_in_Ing_Egr_Inven" FromRole="in_Ing_Egr_Inven" ToRole="in_transferencia" />
+          <NavigationProperty Name="in_transferencia1" Relationship="Model_inventario.FK_in_transferencia_in_Ing_Egr_Inven1" FromRole="in_Ing_Egr_Inven" ToRole="in_transferencia" />
         </EntityType>
         <Association Name="FK_in_Ing_Egr_Inven_in_Motivo_Inven">
           <End Type="Model_inventario.in_Motivo_Inven" Role="in_Motivo_Inven" Multiplicity="0..1" />
@@ -2436,7 +2643,7 @@
           <Property Name="Motivo_Aprobacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="dm_cantidad_sinConversion" Type="Double" Nullable="false" />
           <Property Name="IdUnidadMedida_sinConversion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="mv_costo_sinConversion" Type="Double" Nullable="false" />
+          <Property Name="mv_costo_sinConversion" Type="Double" />
           <Property Name="IdMotivo_Inv" Type="Int32" />
           <NavigationProperty Name="in_Ing_Egr_Inven" Relationship="Model_inventario.FK_in_Ing_Egr_Inven_det_in_Ing_Egr_Inven" FromRole="in_Ing_Egr_Inven_det" ToRole="in_Ing_Egr_Inven" />
           <NavigationProperty Name="in_Producto" Relationship="Model_inventario.FK_in_Ing_Egr_Inven_det_in_Producto" FromRole="in_Ing_Egr_Inven_det" ToRole="in_Producto" />
@@ -2496,6 +2703,163 @@
             </Principal>
             <Dependent Role="in_Ing_Egr_Inven_det">
               <PropertyRef Name="IdUnidadMedida_sinConversion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="in_transferencia">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursalOrigen" />
+            <PropertyRef Name="IdBodegaOrigen" />
+            <PropertyRef Name="IdTransferencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursalOrigen" Type="Int32" Nullable="false" />
+          <Property Name="IdBodegaOrigen" Type="Int32" Nullable="false" />
+          <Property Name="IdTransferencia" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdSucursalDest" Type="Int32" Nullable="false" />
+          <Property Name="IdBodegaDest" Type="Int32" Nullable="false" />
+          <Property Name="tr_Observacion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="tr_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdEmpresa_Ing_Egr_Inven_Origen" Type="Int32" />
+          <Property Name="IdSucursal_Ing_Egr_Inven_Origen" Type="Int32" />
+          <Property Name="IdMovi_inven_tipo_SucuOrig" Type="Int32" />
+          <Property Name="IdNumMovi_Ing_Egr_Inven_Origen" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa_Ing_Egr_Inven_Destino" Type="Int32" />
+          <Property Name="IdSucursal_Ing_Egr_Inven_Destino" Type="Int32" />
+          <Property Name="IdMovi_inven_tipo_SucuDest" Type="Int32" />
+          <Property Name="IdNumMovi_Ing_Egr_Inven_Destino" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="tr_userAnulo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="tr_fechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="tr_fecha_transaccion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="motivo_anula" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstadoAprobacion_cat" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="in_Catalogo" Relationship="Model_inventario.FK_in_transferencia_in_Catalogo" FromRole="in_transferencia" ToRole="in_Catalogo" />
+          <NavigationProperty Name="in_Ing_Egr_Inven" Relationship="Model_inventario.FK_in_transferencia_in_Ing_Egr_Inven" FromRole="in_transferencia" ToRole="in_Ing_Egr_Inven" />
+          <NavigationProperty Name="in_Ing_Egr_Inven1" Relationship="Model_inventario.FK_in_transferencia_in_Ing_Egr_Inven1" FromRole="in_transferencia" ToRole="in_Ing_Egr_Inven" />
+          <NavigationProperty Name="in_transferencia_det" Relationship="Model_inventario.FK_in_transferencia_det_in_transferencia" FromRole="in_transferencia" ToRole="in_transferencia_det" />
+        </EntityType>
+        <EntityType Name="in_transferencia_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursalOrigen" />
+            <PropertyRef Name="IdBodegaOrigen" />
+            <PropertyRef Name="IdTransferencia" />
+            <PropertyRef Name="dt_secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursalOrigen" Type="Int32" Nullable="false" />
+          <Property Name="IdBodegaOrigen" Type="Int32" Nullable="false" />
+          <Property Name="IdTransferencia" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="dt_secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="dt_cantidad" Type="Double" Nullable="false" />
+          <Property Name="tr_Observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IdCentroCosto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCentroCosto_sub_centro_costo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdUnidadMedida" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdPunto_cargo_grupo" Type="Int32" />
+          <Property Name="IdPunto_cargo" Type="Int32" />
+          <NavigationProperty Name="in_Producto" Relationship="Model_inventario.FK_in_transferencia_det_in_Producto" FromRole="in_transferencia_det" ToRole="in_Producto" />
+          <NavigationProperty Name="in_transferencia" Relationship="Model_inventario.FK_in_transferencia_det_in_transferencia" FromRole="in_transferencia_det" ToRole="in_transferencia" />
+          <NavigationProperty Name="in_UnidadMedida" Relationship="Model_inventario.FK_in_transferencia_det_in_UnidadMedida" FromRole="in_transferencia_det" ToRole="in_UnidadMedida" />
+        </EntityType>
+        <Association Name="FK_in_transferencia_in_Catalogo">
+          <End Type="Model_inventario.in_Catalogo" Role="in_Catalogo" Multiplicity="0..1" />
+          <End Type="Model_inventario.in_transferencia" Role="in_transferencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="in_transferencia">
+              <PropertyRef Name="IdEstadoAprobacion_cat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_transferencia_in_Ing_Egr_Inven">
+          <End Type="Model_inventario.in_Ing_Egr_Inven" Role="in_Ing_Egr_Inven" Multiplicity="0..1" />
+          <End Type="Model_inventario.in_transferencia" Role="in_transferencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_Ing_Egr_Inven">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdMovi_inven_tipo" />
+              <PropertyRef Name="IdNumMovi" />
+            </Principal>
+            <Dependent Role="in_transferencia">
+              <PropertyRef Name="IdEmpresa_Ing_Egr_Inven_Origen" />
+              <PropertyRef Name="IdSucursal_Ing_Egr_Inven_Origen" />
+              <PropertyRef Name="IdMovi_inven_tipo_SucuOrig" />
+              <PropertyRef Name="IdNumMovi_Ing_Egr_Inven_Origen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_transferencia_in_Ing_Egr_Inven1">
+          <End Type="Model_inventario.in_Ing_Egr_Inven" Role="in_Ing_Egr_Inven" Multiplicity="0..1" />
+          <End Type="Model_inventario.in_transferencia" Role="in_transferencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_Ing_Egr_Inven">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdMovi_inven_tipo" />
+              <PropertyRef Name="IdNumMovi" />
+            </Principal>
+            <Dependent Role="in_transferencia">
+              <PropertyRef Name="IdEmpresa_Ing_Egr_Inven_Destino" />
+              <PropertyRef Name="IdSucursal_Ing_Egr_Inven_Destino" />
+              <PropertyRef Name="IdMovi_inven_tipo_SucuDest" />
+              <PropertyRef Name="IdNumMovi_Ing_Egr_Inven_Destino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_transferencia_det_in_Producto">
+          <End Type="Model_inventario.in_Producto" Role="in_Producto" Multiplicity="1" />
+          <End Type="Model_inventario.in_transferencia_det" Role="in_transferencia_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_Producto">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="in_transferencia_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_transferencia_det_in_transferencia">
+          <End Type="Model_inventario.in_transferencia" Role="in_transferencia" Multiplicity="1" />
+          <End Type="Model_inventario.in_transferencia_det" Role="in_transferencia_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_transferencia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursalOrigen" />
+              <PropertyRef Name="IdBodegaOrigen" />
+              <PropertyRef Name="IdTransferencia" />
+            </Principal>
+            <Dependent Role="in_transferencia_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursalOrigen" />
+              <PropertyRef Name="IdBodegaOrigen" />
+              <PropertyRef Name="IdTransferencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_transferencia_det_in_UnidadMedida">
+          <End Type="Model_inventario.in_UnidadMedida" Role="in_UnidadMedida" Multiplicity="1" />
+          <End Type="Model_inventario.in_transferencia_det" Role="in_transferencia_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_UnidadMedida">
+              <PropertyRef Name="IdUnidadMedida" />
+            </Principal>
+            <Dependent Role="in_transferencia_det">
+              <PropertyRef Name="IdUnidadMedida" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2939,6 +3303,59 @@
                 <ScalarProperty Name="IdNumMovi" ColumnName="IdNumMovi" />
                 <ScalarProperty Name="IdMovi_inven_tipo" ColumnName="IdMovi_inven_tipo" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="in_transferencia">
+            <EntityTypeMapping TypeName="Model_inventario.in_transferencia">
+              <MappingFragment StoreEntitySet="in_transferencia">
+                <ScalarProperty Name="IdEstadoAprobacion_cat" ColumnName="IdEstadoAprobacion_cat" />
+                <ScalarProperty Name="motivo_anula" ColumnName="motivo_anula" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="tr_fecha_transaccion" ColumnName="tr_fecha_transaccion" />
+                <ScalarProperty Name="tr_fechaAnulacion" ColumnName="tr_fechaAnulacion" />
+                <ScalarProperty Name="tr_userAnulo" ColumnName="tr_userAnulo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdNumMovi_Ing_Egr_Inven_Destino" ColumnName="IdNumMovi_Ing_Egr_Inven_Destino" />
+                <ScalarProperty Name="IdMovi_inven_tipo_SucuDest" ColumnName="IdMovi_inven_tipo_SucuDest" />
+                <ScalarProperty Name="IdSucursal_Ing_Egr_Inven_Destino" ColumnName="IdSucursal_Ing_Egr_Inven_Destino" />
+                <ScalarProperty Name="IdEmpresa_Ing_Egr_Inven_Destino" ColumnName="IdEmpresa_Ing_Egr_Inven_Destino" />
+                <ScalarProperty Name="IdNumMovi_Ing_Egr_Inven_Origen" ColumnName="IdNumMovi_Ing_Egr_Inven_Origen" />
+                <ScalarProperty Name="IdMovi_inven_tipo_SucuOrig" ColumnName="IdMovi_inven_tipo_SucuOrig" />
+                <ScalarProperty Name="IdSucursal_Ing_Egr_Inven_Origen" ColumnName="IdSucursal_Ing_Egr_Inven_Origen" />
+                <ScalarProperty Name="IdEmpresa_Ing_Egr_Inven_Origen" ColumnName="IdEmpresa_Ing_Egr_Inven_Origen" />
+                <ScalarProperty Name="tr_fecha" ColumnName="tr_fecha" />
+                <ScalarProperty Name="tr_Observacion" ColumnName="tr_Observacion" />
+                <ScalarProperty Name="IdBodegaDest" ColumnName="IdBodegaDest" />
+                <ScalarProperty Name="IdSucursalDest" ColumnName="IdSucursalDest" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdTransferencia" ColumnName="IdTransferencia" />
+                <ScalarProperty Name="IdBodegaOrigen" ColumnName="IdBodegaOrigen" />
+                <ScalarProperty Name="IdSucursalOrigen" ColumnName="IdSucursalOrigen" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="in_transferencia_det">
+            <EntityTypeMapping TypeName="Model_inventario.in_transferencia_det">
+              <MappingFragment StoreEntitySet="in_transferencia_det">
+                <ScalarProperty Name="IdPunto_cargo" ColumnName="IdPunto_cargo" />
+                <ScalarProperty Name="IdPunto_cargo_grupo" ColumnName="IdPunto_cargo_grupo" />
+                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
+                <ScalarProperty Name="IdCentroCosto_sub_centro_costo" ColumnName="IdCentroCosto_sub_centro_costo" />
+                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
+                <ScalarProperty Name="tr_Observacion" ColumnName="tr_Observacion" />
+                <ScalarProperty Name="dt_cantidad" ColumnName="dt_cantidad" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="dt_secuencia" ColumnName="dt_secuencia" />
+                <ScalarProperty Name="IdTransferencia" ColumnName="IdTransferencia" />
+                <ScalarProperty Name="IdBodegaOrigen" ColumnName="IdBodegaOrigen" />
+                <ScalarProperty Name="IdSucursalOrigen" ColumnName="IdSucursalOrigen" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

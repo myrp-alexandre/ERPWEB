@@ -43,7 +43,7 @@ namespace Core.Erp.Data
         public string Motivo_Aprobacion { get; set; }
         public double dm_cantidad_sinConversion { get; set; }
         public string IdUnidadMedida_sinConversion { get; set; }
-        public double mv_costo_sinConversion { get; set; }
+        public Nullable<double> mv_costo_sinConversion { get; set; }
         public Nullable<int> IdMotivo_Inv { get; set; }
     
         public virtual in_Ing_Egr_Inven in_Ing_Egr_Inven { get; set; }
