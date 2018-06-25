@@ -11,11 +11,10 @@ namespace Core.Erp.Web.Areas.General.Controllers
     {
         tb_parroquia_Bus bus_parroquia = new tb_parroquia_Bus();
         tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
-        List<tb_parroquia_Info> lst_parroquia = new List<tb_parroquia_Info>();
-        List<tb_ciudad_Info> lst_ciudades = new List<tb_ciudad_Info>();
 
-        public ActionResult Index()
+        public ActionResult Index(string IdCiudad_Canton = "")
         {
+            ViewBag.IdCiudad_Canton = IdCiudad_Canton;
             return View();
         }
 
@@ -23,19 +22,22 @@ namespace Core.Erp.Web.Areas.General.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_parroquia()
         {
-            lst_parroquia = bus_parroquia.get_list(true);
+            var lst_parroquia = bus_parroquia.get_list(true);
             return PartialView("_GridViewPartial_parroquia", lst_parroquia);
         }
         private void cargar_combos()
         {
-            lst_ciudades = bus_ciudad.get_list(false);
+            var lst_ciudades = bus_ciudad.get_list(false);
             ViewBag.lst_ciudades = lst_ciudades;
         }
 
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(string IdCiudad_Canton = "")
         {
+            tb_parroquia_Info model = new tb_parroquia_Info
+            {
+                IdCiudad_Canton = IdCiudad_Canton
+            };
             cargar_combos();
-            tb_parroquia_Info model = new tb_parroquia_Info();
             return View(model);
         }
         [HttpPost]
@@ -43,17 +45,21 @@ namespace Core.Erp.Web.Areas.General.Controllers
         {
             if (!bus_parroquia.guardarDB(model))
             {
+                ViewBag.IdCiudad = model.IdCiudad_Canton;
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { IdCiudad = model.IdCiudad_Canton });
         }
 
         public ActionResult Modificar(string IdCiudad_Canton = "", string IdParroquia = "")
         {
             tb_parroquia_Info model = bus_parroquia.get_info(IdCiudad_Canton, IdParroquia);
             if (model == null)
-                return RedirectToAction("Index");
+            {
+                ViewBag.IdCiudad = model.IdCiudad_Canton;
+                return RedirectToAction("Index", new { IdCiudad = model.IdCiudad_Canton });
+            }
             cargar_combos();
             return View(model);
         }
@@ -62,17 +68,22 @@ namespace Core.Erp.Web.Areas.General.Controllers
         {
             if (!bus_parroquia.modificarDB(model))
             {
+                ViewBag.IdCiudad = model.IdCiudad_Canton;
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { IdCiudad = model.IdCiudad_Canton });
         }
+
 
         public ActionResult Anular(string IdCiudad_Canton = "", string IdParroquia = "")
         {
             tb_parroquia_Info model = bus_parroquia.get_info(IdCiudad_Canton, IdParroquia);
             if (model == null)
-                return RedirectToAction("Index");
+            {
+                ViewBag.IdCiudad = model.IdCiudad_Canton;
+                return RedirectToAction("Index", new { IdCiudad = model.IdCiudad_Canton });
+            }
             cargar_combos();
             return View(model);
         }
@@ -81,25 +92,25 @@ namespace Core.Erp.Web.Areas.General.Controllers
         {
             if (!bus_parroquia.anularDB(model))
             {
+                ViewBag.IdCiudad = model.IdCiudad_Canton;
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { IdCiudad = model.IdCiudad_Canton });
         }
 
-        public JsonResult get_lst_ciudad_x_provincia(string IdCiudad_Canton)
+   public JsonResult get_lst_ciudad_x_provincia(string IdCiudad_Canton)
         {
             try
             {
-                lst_parroquia = bus_parroquia.get_list(true);
+               var lst_parroquia = bus_parroquia.get_list(true);
                 return Json(lst_parroquia, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
 
-                throw;
+               throw;
             }
         }
-
     }
 }

@@ -26,7 +26,7 @@ namespace Core.Erp.Data.General
                                  IdParroquia = q.IdParroquia,
                                  cod_parroquia = q.cod_parroquia,
                                  nom_parroquia = q.nom_parroquia,
-                                 estado = q.estado,
+                                 estado = q.estado
                              }).ToList();
                     else
                         Lista = (from q in Context.tb_parroquia

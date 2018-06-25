@@ -11,6 +11,10 @@
 @using (Html.BeginForm())
 {
 
-    @Html.Action("GridViewPartial_parroquia")
+    @Html.Action("GridViewPartial_parroquia", new { IdCiudad_Canton = ViewBag.IdCiudad_Canton })
+
+    <div class="box-footer">
+        <a class="btn btn-default" href="@Url.Action("Index","Ciudad",new { IdCiIdCiudad_Cantonudad = ViewBag.IdCiudad_Canton, Area = "General" },null)">Volver</a>
+    </div>
 
 }

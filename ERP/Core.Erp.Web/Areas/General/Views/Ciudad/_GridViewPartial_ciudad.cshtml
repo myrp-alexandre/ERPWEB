@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_Ciudad";
-        settings.CallbackRouteValues = new { Controller = "Ciudad", Action = "GridViewPartial_Ciudad" };
+        settings.CallbackRouteValues = new { Controller = "Ciudad", Action = "GridViewPartial_Ciudad" , IdProvincia = ViewBag.IdProvincia };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdCiudad";
 
@@ -68,7 +68,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdProvincia = ViewBag.IdProvincia}).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
@@ -80,6 +80,20 @@
         settings.Columns.Add("Cod_Ciudad","Código").Width = Unit.Percentage(10);
         settings.Columns.Add("Descripcion_Ciudad", "Descripción").Width = Unit.Percentage(40);
         settings.Columns.Add("Estado","Estado").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Parroquia";
+            column.Width = Unit.Pixel(100);
+            column.SetDataItemTemplateContent(container =>
+            {
+                Html.DevExpress().HyperLink(hyperlink =>
+                {
+                    var keyValue = DataBinder.Eval(container.DataItem, "IdProvincia");
+                    hyperlink.Properties.Text = "Parroquia";
+                    hyperlink.NavigateUrl = Url.Action("Index", "Parroquia", new { IdProvincia = keyValue });
+                }).Render();
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_Parroquia";
-        settings.CallbackRouteValues = new { Controller = "Parroquia", Action = "GridViewPartial_Parroquia" };
+        settings.CallbackRouteValues = new { Controller = "Parroquia", Action = "GridViewPartial_Parroquia", IdCiudad_Canton = ViewBag.IdCiudad_Canton };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdParroquia";
 
@@ -68,7 +68,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdCiudad_Canton = ViewBag.IdCiudad_Canton, }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
