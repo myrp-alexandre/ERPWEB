@@ -9,7 +9,7 @@ namespace Core.Erp.Data.General
 {
     public class tb_provincia_Data
     {
-        public List<tb_provincia_Info> get_list( bool mostrar_anulados)
+        public List<tb_provincia_Info> get_list(string IdPais, bool mostrar_anulados)
         {
             try
             {
@@ -20,7 +20,8 @@ namespace Core.Erp.Data.General
                     if(mostrar_anulados == true)
                     Lista = (from q in Context.tb_provincia
                              join p in Context.tb_pais
-                             on q.IdPais equals p.IdPais                             
+                             on q.IdPais equals p.IdPais
+                             where q.IdPais == IdPais
                              select new tb_provincia_Info
                              {
                                  IdProvincia = q.IdProvincia,
@@ -36,41 +37,8 @@ namespace Core.Erp.Data.General
                         Lista = (from q in Context.tb_provincia
                                  join p in Context.tb_pais
                                  on q.IdPais equals p.IdPais
-                                 where q.Estado == "A"
-                                 select new tb_provincia_Info
-                                 {
-                                     IdProvincia = q.IdProvincia,
-                                     Cod_Provincia = q.Cod_Provincia,
-                                     Descripcion_Prov = q.Descripcion_Prov,
-                                     Estado = q.Estado,
-                                     info_pais = new tb_pais_Info
-                                     {
-                                         Nombre = p.Nombre
-                                     }
-                                 }).ToList();
-                }
-
-                return Lista;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        public List<tb_provincia_Info> get_list(String IdPais)
-        {
-            try
-            {
-                List<tb_provincia_Info> Lista;
-
-                using (Entities_general Context = new Entities_general())
-                {
-                   
-                        Lista = (from q in Context.tb_provincia
-                                 join p in Context.tb_pais
-                                 on q.IdPais equals p.IdPais
-                                 where q.Estado == "A"
+                                 where q.IdPais== IdPais
+                                 && q.Estado == "A"
                                  select new tb_provincia_Info
                                  {
                                      IdProvincia = q.IdProvincia,
@@ -117,7 +85,31 @@ namespace Core.Erp.Data.General
             }
         }
 
-        public tb_provincia_Info get_info(string IdPais, string IdProvincia)
+       
+        public bool validar_existe_Id(string IdProvincia)
+        {
+            try
+            {
+                using (Entities_general Context = new Entities_general())
+                {
+                    var lst = from q in Context.tb_provincia
+                              where IdProvincia == q.IdProvincia
+                              select q;
+
+                    if (lst.Count() > 0)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public tb_provincia_Info get_info(string IdProvincia)
         {
             try
             {
@@ -125,7 +117,7 @@ namespace Core.Erp.Data.General
 
                 using (Entities_general Context = new Entities_general())
                 {
-                    tb_provincia Entity = Context.tb_provincia.FirstOrDefault(q => q.IdPais == IdPais && q.IdProvincia == IdProvincia);
+                    tb_provincia Entity = Context.tb_provincia.FirstOrDefault(q => q.IdProvincia == IdProvincia);
                     if (Entity == null) return null;
                     info = new tb_provincia_Info
                     {
@@ -184,7 +176,7 @@ namespace Core.Erp.Data.General
             {
                 using (Entities_general Context = new Entities_general())
                 {
-                    tb_provincia Entity = Context.tb_provincia.FirstOrDefault(q => q.IdPais == info.IdPais && q.IdProvincia == info.IdProvincia);
+                    tb_provincia Entity = Context.tb_provincia.FirstOrDefault(q => q.IdProvincia == info.IdProvincia);
                     if (Entity == null) return false;
 
                     Entity.Cod_Provincia = info.Cod_Provincia;
@@ -212,7 +204,7 @@ namespace Core.Erp.Data.General
             {
                 using (Entities_general Context = new Entities_general())
                 {
-                    tb_provincia Entity = Context.tb_provincia.FirstOrDefault(q => q.IdPais == info.IdPais && q.IdProvincia == info.IdProvincia);
+                    tb_provincia Entity = Context.tb_provincia.FirstOrDefault(q =>q.IdProvincia == info.IdProvincia);
                     if (Entity == null) return false;
                     Entity.Estado = info.Estado = "I";
 

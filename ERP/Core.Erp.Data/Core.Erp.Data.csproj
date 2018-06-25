@@ -157,6 +157,18 @@
     <Compile Include="cp_codigo_SRI_x_CtaCble.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
+    <Compile Include="cp_conciliacion_Caja.cs">
+      <DependentUpon>Model_caja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cp_conciliacion_Caja_det.cs">
+      <DependentUpon>Model_caja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cp_conciliacion_Caja_det_Ing_Caja.cs">
+      <DependentUpon>Model_caja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cp_conciliacion_Caja_det_x_ValeCaja.cs">
+      <DependentUpon>Model_caja.tt</DependentUpon>
+    </Compile>
     <Compile Include="cp_cuotas_x_doc.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
@@ -1183,7 +1195,13 @@
     <Compile Include="vwRo_Solicitud_Vacaciones.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwtb_ciudad_id.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwtb_pais.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwtb_provincia.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
   </ItemGroup>

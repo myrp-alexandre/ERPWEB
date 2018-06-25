@@ -103,7 +103,7 @@ namespace Core.Erp.Data.General
             }
         }
 
-        public tb_region_Info get_info(string IdPais, string CodRegion)
+        public tb_region_Info get_info(string CodRegion)
         {
             try
             {
@@ -111,7 +111,7 @@ namespace Core.Erp.Data.General
 
                 using (Entities_general Context = new Entities_general())
                 {
-                    tb_region Entity = Context.tb_region.FirstOrDefault(q => q.IdPais == IdPais && q.Cod_Region == CodRegion);
+                    tb_region Entity = Context.tb_region.FirstOrDefault(q => q.Cod_Region == CodRegion);
                     if (Entity == null) return null;
 
                     info = new tb_region_Info
@@ -139,7 +139,7 @@ namespace Core.Erp.Data.General
             {
                 using (Entities_general Context = new Entities_general())
                 {
-                    tb_region Entity = Context.tb_region.FirstOrDefault(q => q.IdPais == info.IdPais && q.Cod_Region == info.Cod_Region);
+                    tb_region Entity = Context.tb_region.FirstOrDefault(q =>  q.Cod_Region == info.Cod_Region);
                     if (Entity == null)
                         return false;
                     Entity.codigo = info.codigo;
@@ -162,7 +162,7 @@ namespace Core.Erp.Data.General
             {
                 using (Entities_general Context = new Entities_general())
                 {
-                    tb_region Entity = Context.tb_region.FirstOrDefault(q => q.IdPais == info.IdPais && q.Cod_Region == info.Cod_Region);
+                    tb_region Entity = Context.tb_region.FirstOrDefault(q =>  q.Cod_Region == info.Cod_Region);
                     if (Entity == null)
                         return false;
                     Entity.estado = info.estado = false;
