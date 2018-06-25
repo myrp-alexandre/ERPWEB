@@ -11,17 +11,13 @@
 {
     <div class="row">
         <div class="col-md-12">
-
-
-
-
-            <div class="col-md-2">
-                <div class="form-group">
+            <div class="col-md-4">
                     <label for="codigo">Logo*</label>
-                    @Html.DevExpress().BinaryImageFor(m => m.em_logo, settings =>
-               {
-               }).GetHtml()
-                </div>
+                    @*@Html.DevExpress().BinaryImageFor(m => m.em_logo, settings =>
+                   {
+                   }).GetHtml()*@
+
+                    @Html.Action("Imagenes", new { Area = "General", Controller = "Imagenes" })
             </div>
 
             <div class="col-md-2">
