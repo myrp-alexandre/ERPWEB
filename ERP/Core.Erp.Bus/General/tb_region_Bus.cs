@@ -24,11 +24,11 @@ namespace Core.Erp.Bus.General
             }
         }
 
-        public tb_region_Info get_info(string IdPais, string CodRegion)
+        public tb_region_Info get_info( string CodRegion)
         {
             try
             {
-                return odata.get_info(IdPais, CodRegion);
+                return odata.get_info(CodRegion);
             }
             catch (Exception)
             {

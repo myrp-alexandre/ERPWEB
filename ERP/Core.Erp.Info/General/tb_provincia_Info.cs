@@ -10,6 +10,8 @@ namespace Core.Erp.Info.General
     public class tb_provincia_Info
     {
         [Key]
+        [Required(ErrorMessage = "El campo código es obligatorio")]
+        [StringLength(25, MinimumLength = 1, ErrorMessage = "el campo código debe tener mínimo 1 caracter y máximo 25")]
         public string IdProvincia { get; set; }
         [Required(ErrorMessage ="El campo código es obligatorio")]
         [StringLength(25, MinimumLength = 1, ErrorMessage = "el campo código debe tener mínimo 1 caracter y máximo 25")]
@@ -19,7 +21,6 @@ namespace Core.Erp.Info.General
         public string Descripcion_Prov { get; set; }
         public string Estado { get; set; }
         [Required(ErrorMessage = "El campo pais es obligatorio")]
-        [StringLength(10, MinimumLength = 1, ErrorMessage = "el campo pais debe tener mínimo 1 caracter y máximo 10")]
         public string IdPais { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }

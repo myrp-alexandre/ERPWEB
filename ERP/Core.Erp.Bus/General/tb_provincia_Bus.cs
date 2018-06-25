@@ -11,23 +11,11 @@ namespace Core.Erp.Bus.General
     public class tb_provincia_Bus
     {
         tb_provincia_Data odata = new tb_provincia_Data();
-        public List<tb_provincia_Info> get_list(bool mostrar_anulados)
+        public List<tb_provincia_Info> get_list(string IdPais, bool mostrar_anulados)
         {
             try
             {
-                return odata.get_list(mostrar_anulados);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        public List<tb_provincia_Info> get_list(String IdPais)
-        {
-            try
-            {
-                return odata.get_list(IdPais);
+                return odata.get_list(IdPais, mostrar_anulados);
             }
             catch (Exception)
             {
@@ -36,11 +24,23 @@ namespace Core.Erp.Bus.General
             }
         }
 
-        public tb_provincia_Info get_info( string IdPais, string IdProvincia)
+        public tb_provincia_Info get_info( string IdProvincia)
         {
             try
             {
-                return odata.get_info(IdPais, IdProvincia);
+                return odata.get_info( IdProvincia);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool validar_existe_Id(string IdProvincia)
+        {
+            try
+            {
+                return odata.validar_existe_Id(IdProvincia);
             }
             catch (Exception)
             {

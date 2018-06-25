@@ -37,6 +37,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             {
                 IdPais = IdPais
             };
+            ViewBag.IdPais = IdPais;
             cargar_combos();
             return View(model);
         }
@@ -53,13 +54,13 @@ namespace Core.Erp.Web.Areas.General.Controllers
             return RedirectToAction("Index", ViewBag.IdPais = model.IdPais);
         }
 
-        public ActionResult Modificar(string IdPais = "", string codRegion = "")
+        public ActionResult Modificar( string codRegion = "")
         {
-            tb_region_Info model = bus_region.get_info(IdPais, codRegion);
+            tb_region_Info model = bus_region.get_info(codRegion);
             if(model == null)
             {
-                ViewBag.IdPais = IdPais;
-                return RedirectToAction("Index", IdPais = model.IdPais);
+                ViewBag.IdPais = model.IdPais;
+                return RedirectToAction("Index", ViewBag.IdPais = model.IdPais);
             }
             cargar_combos();
             return View(model);
@@ -73,15 +74,15 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index",new { IdPais = model.IdPais });
+            return RedirectToAction("Index", ViewBag.IdPais = model.IdPais);
         }
-        public ActionResult Anular(string IdPais = "", string codRegion = "")
+        public ActionResult Anular( string codRegion = "")
         {
-            tb_region_Info model = bus_region.get_info(IdPais, codRegion);
+            tb_region_Info model = bus_region.get_info( codRegion);
             if (model == null)
             {
-                ViewBag.IdPais = IdPais;
-                return RedirectToAction("Index", IdPais = model.IdPais);
+                ViewBag.IdPais = model.IdPais;
+                return RedirectToAction("Index", ViewBag.IdPais = model.IdPais);
             }
             cargar_combos();
             return View(model);
@@ -95,7 +96,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index", new { IdPais = model.IdPais });
+            return RedirectToAction("Index", ViewBag.IdPais = model.IdPais);
         }
     }
 }

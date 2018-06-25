@@ -50,7 +50,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             ViewBag.lst_cta = lst_cta;
 
             tb_provincia_Bus bus_provincia = new tb_provincia_Bus();
-            var lst_provincia = bus_provincia.get_list(false);
+            var lst_provincia = bus_provincia.get_list("1", false);
             ViewBag.lst_provincia = lst_provincia;
 
 

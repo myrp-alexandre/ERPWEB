@@ -11,17 +11,19 @@
 @using (Html.BeginForm("Modificar", "Region", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.Cod_Region)
-<div class="row">
-    <div class="col-md-12">
+    @Html.HiddenFor(q => q.IdPais)
+
+    <div class="row">
         <div class="col-md-12">
-            <div class="form-group">
-                <label for="IdPais">País</label>
-                @Html.DropDownListFor(q => q.IdPais, new SelectList(ViewBag.lst_pais, "IdPais", "Nombre"), new { @class = "form-control" })
-                @Html.ValidationMessageFor(q => q.IdPais, "", new { @class = "text-danger" })
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdPais">País</label>
+                    @Html.DropDownListFor(q => q.IdPais, new SelectList(ViewBag.lst_pais, "IdPais", "Nombre"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdPais, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
     </div>
-</div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">

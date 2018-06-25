@@ -376,6 +376,11 @@
           <Property Name="observacion" Type="varchar" MaxLength="2000" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6013: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_ciudad_id' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="vwtb_ciudad_id">
+          <Property Name="IdCiudad" Type="int" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwtb_pais">
           <Key>

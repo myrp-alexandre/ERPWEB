@@ -11,6 +11,8 @@
 @using (Html.BeginForm("Anular", "Provincia", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdProvincia)
+    @Html.HiddenFor(q => q.IdPais)
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
