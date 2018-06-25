@@ -280,6 +280,7 @@
     <Compile Include="Areas\General\Controllers\CatalogoTipoController.cs" />
     <Compile Include="Areas\General\Controllers\CiudadController.cs" />
     <Compile Include="Areas\General\Controllers\EmpresaController.cs" />
+    <Compile Include="Areas\General\Controllers\ImagenesController.cs" />
     <Compile Include="Areas\General\Controllers\ImpuestoController.cs" />
     <Compile Include="Areas\General\Controllers\ModuloController.cs" />
     <Compile Include="Areas\General\Controllers\PaisController.cs" />
@@ -7223,6 +7224,7 @@
     <Content Include="bower_DevExpress\knockout\dist\knockout.debug.js" />
     <Content Include="bower_DevExpress\knockout\dist\knockout.js" />
     <Content Include="bower_DevExpress\knockout\Gruntfile.js" />
+    <Content Include="Content\bootstrap_imagenes.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -8417,6 +8419,7 @@
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_005.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_006.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_007.cshtml" />
+    <Content Include="Areas\General\Views\Imagenes\Imagenes.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_009.cshtml" />
     <Content Include="bower_DevExpress\globalize-1.3.0\.bowerrc" />
     <Content Include="bower_DevExpress\globalize-1.3.0\.gitattributes" />
@@ -8510,6 +8513,7 @@
     <Folder Include="Areas\RRHH\Views\EmpleadoHistorialSueldo\" />
     <Folder Include="Areas\RRHH\Views\PeriodosPorNomina\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
+    <Folder Include="Content\imagenes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

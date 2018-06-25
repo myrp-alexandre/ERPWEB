@@ -22,10 +22,11 @@ namespace Core.Erp.Web.Areas.General.Controllers
 
         private void cargar_combos(tb_provincia_Info model)
         {
-            var lst_pais = bus_pais.get_list(false);
-            ViewBag.lst_pais = lst_pais;
 
-            var lst_region = bus_region.get_list(model.IdPais, false);
+            List<tb_pais_Info> lst_pais = bus_pais.get_list(false);
+            List<tb_region_Info> lst_region = bus_region.get_list("1",false);
+
+            ViewBag.lst_pais = lst_pais;
             ViewBag.lst_region = lst_region;
         }
 

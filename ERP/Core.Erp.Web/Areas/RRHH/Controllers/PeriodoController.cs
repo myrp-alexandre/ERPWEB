@@ -194,6 +194,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 lista_catalogo = bus_catalogo.get_list_x_tipo(17);
+                lst_region = bus_region.get_list("1", false);
                 lst_region = bus_region.get_list( "1", false);
                 ViewBag.lst_region = lst_region;
                 ViewBag.lista_catalogo = lista_catalogo;

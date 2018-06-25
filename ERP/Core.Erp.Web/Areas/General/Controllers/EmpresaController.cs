@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.General;
 using Core.Erp.Bus.General;
+using DevExpress.Web;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
@@ -36,6 +37,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
         [HttpPost]
         public ActionResult Nuevo(tb_empresa_Info model)
         {
+
+            if(Session["imagen"]!=null)
+            model.em_logo = Session["imagen"] as byte[];
             if (!bus_empresa.guardarDB(model))
             {
                 return View(model);
@@ -76,5 +80,11 @@ namespace Core.Erp.Web.Areas.General.Controllers
             }
             return RedirectToAction("Index");
         }
+
+
+
     }
+  
 }
+
+
