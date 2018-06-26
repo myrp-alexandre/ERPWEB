@@ -595,7 +595,7 @@
             this.xrTableCell20.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[nom_sucursal]")});
             this.xrTableCell20.Name = "xrTableCell20";
-            this.xrTableCell20.Weight = 1.3941021456444278D;
+            this.xrTableCell20.Weight = 1.8588027712029622D;
             // 
             // xrTableCell22
             // 
@@ -603,14 +603,14 @@
             this.xrTableCell22.Name = "xrTableCell22";
             this.xrTableCell22.StylePriority.UseFont = false;
             this.xrTableCell22.Text = "Bodega:";
-            this.xrTableCell22.Weight = 0.929400812760436D;
+            this.xrTableCell22.Weight = 0.23235009260013656D;
             // 
             // xrTableCell26
             // 
             this.xrTableCell26.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[nom_bodega]")});
             this.xrTableCell26.Name = "xrTableCell26";
-            this.xrTableCell26.Weight = 1.3547812156440491D;
+            this.xrTableCell26.Weight = 1.587131310245814D;
             // 
             // xrTableRow7
             // 
@@ -635,7 +635,7 @@
             this.xrTableCell28.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pr_descripcion]")});
             this.xrTableCell28.Name = "xrTableCell28";
-            this.xrTableCell28.Weight = 1.3941019274669255D;
+            this.xrTableCell28.Weight = 1.85880255302546D;
             // 
             // xrTableCell29
             // 
@@ -643,7 +643,7 @@
             this.xrTableCell29.Name = "xrTableCell29";
             this.xrTableCell29.StylePriority.UseFont = false;
             this.xrTableCell29.Text = "Fecha:";
-            this.xrTableCell29.Weight = 0.92940103093793813D;
+            this.xrTableCell29.Weight = 0.23235031077763874D;
             // 
             // xrTableCell30
             // 
@@ -651,7 +651,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[cm_fecha]")});
             this.xrTableCell30.Name = "xrTableCell30";
             this.xrTableCell30.TextFormatString = "{0:dd/MM/yyyy}";
-            this.xrTableCell30.Weight = 1.3547812156440491D;
+            this.xrTableCell30.Weight = 1.587131310245814D;
             // 
             // xrTableRow8
             // 
@@ -711,12 +711,12 @@
             // lbl_usuario
             // 
             this.lbl_usuario.Borders = DevExpress.XtraPrinting.BorderSide.None;
-            this.lbl_usuario.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+            this.lbl_usuario.Font = new System.Drawing.Font("Verdana", 7F);
             this.lbl_usuario.Name = "lbl_usuario";
             this.lbl_usuario.StylePriority.UseBorders = false;
             this.lbl_usuario.StylePriority.UseFont = false;
             this.lbl_usuario.StylePriority.UseTextAlignment = false;
-            this.lbl_usuario.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.lbl_usuario.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.lbl_usuario.Weight = 2.2419549387145485D;
             // 
             // lbl_fecha
@@ -725,7 +725,7 @@
             this.lbl_fecha.Name = "lbl_fecha";
             this.lbl_fecha.StylePriority.UseBorders = false;
             this.lbl_fecha.StylePriority.UseTextAlignment = false;
-            this.lbl_fecha.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            this.lbl_fecha.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.lbl_fecha.Weight = 3.2882007294147093D;
             // 
             // xrTableCell25
@@ -741,10 +741,12 @@
             // 
             // xrPageInfo1
             // 
+            this.xrPageInfo1.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrPageInfo1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrPageInfo1.Name = "xrPageInfo1";
             this.xrPageInfo1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrPageInfo1.SizeF = new System.Drawing.SizeF(379F, 20F);
+            this.xrPageInfo1.StylePriority.UseFont = false;
             this.xrPageInfo1.StylePriority.UseTextAlignment = false;
             this.xrPageInfo1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrPageInfo1.TextFormatString = "Página {0} de {1}";

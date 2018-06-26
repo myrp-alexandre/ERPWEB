@@ -73,7 +73,6 @@
             this.xrTableRow8 = new DevExpress.XtraReports.UI.XRTableRow();
             this.lbl_usuario = new DevExpress.XtraReports.UI.XRTableCell();
             this.lbl_fecha = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell20 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell21 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrPageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.xrTableRow9 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -115,7 +114,7 @@
             this.xrTable4.Name = "xrTable4";
             this.xrTable4.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow10});
-            this.xrTable4.SizeF = new System.Drawing.SizeF(751F, 20F);
+            this.xrTable4.SizeF = new System.Drawing.SizeF(750.5001F, 20F);
             this.xrTable4.StylePriority.UseFont = false;
             // 
             // xrTableRow10
@@ -171,7 +170,7 @@
             this.xrTableCell27.Text = "xrTableCell27";
             this.xrTableCell27.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell27.TextFormatString = "{0:n2}";
-            this.xrTableCell27.Weight = 0.53617373581430294D;
+            this.xrTableCell27.Weight = 0.53351094505614716D;
             // 
             // TopMargin
             // 
@@ -466,7 +465,6 @@
             this.xrTableRow8.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
             this.lbl_usuario,
             this.lbl_fecha,
-            this.xrTableCell20,
             this.xrTableCell21});
             this.xrTableRow8.Name = "xrTableRow8";
             this.xrTableRow8.Weight = 1D;
@@ -481,24 +479,19 @@
             this.lbl_fecha.Name = "lbl_fecha";
             this.lbl_fecha.Weight = 4.5050006103515621D;
             // 
-            // xrTableCell20
-            // 
-            this.xrTableCell20.Name = "xrTableCell20";
-            this.xrTableCell20.Weight = 0.9983331298828122D;
-            // 
             // xrTableCell21
             // 
             this.xrTableCell21.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrPageInfo1});
             this.xrTableCell21.Name = "xrTableCell21";
-            this.xrTableCell21.Weight = 1.0016668701171869D;
+            this.xrTableCell21.Weight = 1.9999999999999991D;
             // 
             // xrPageInfo1
             // 
-            this.xrPageInfo1.LocationFloat = new DevExpress.Utils.PointFloat(0.166626F, 0F);
+            this.xrPageInfo1.LocationFloat = new DevExpress.Utils.PointFloat(0.1666387F, 0F);
             this.xrPageInfo1.Name = "xrPageInfo1";
             this.xrPageInfo1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
-            this.xrPageInfo1.SizeF = new System.Drawing.SizeF(100F, 20F);
+            this.xrPageInfo1.SizeF = new System.Drawing.SizeF(199.8333F, 20F);
             this.xrPageInfo1.StylePriority.UseTextAlignment = false;
             this.xrPageInfo1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrPageInfo1.TextFormatString = "Página {0} de {1}";
@@ -575,7 +568,7 @@
             this.xrTable5.Name = "xrTable5";
             this.xrTable5.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow11});
-            this.xrTable5.SizeF = new System.Drawing.SizeF(751F, 20F);
+            this.xrTable5.SizeF = new System.Drawing.SizeF(750.5F, 20F);
             this.xrTable5.StylePriority.UseFont = false;
             // 
             // xrTableRow11
@@ -631,7 +624,7 @@
             this.xrTableCell31.Text = "xrTableCell27";
             this.xrTableCell31.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell31.TextFormatString = "{0:n2}";
-            this.xrTableCell31.Weight = 0.53617373581430294D;
+            this.xrTableCell31.Weight = 0.5335106200478078D;
             // 
             // objectDataSource1
             // 
@@ -722,7 +715,6 @@
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow8;
         private DevExpress.XtraReports.UI.XRTableCell lbl_usuario;
         private DevExpress.XtraReports.UI.XRTableCell lbl_fecha;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell20;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell21;
         private DevExpress.XtraReports.UI.XRPageInfo xrPageInfo1;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow9;

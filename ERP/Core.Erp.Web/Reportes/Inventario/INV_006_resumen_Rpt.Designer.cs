@@ -446,7 +446,7 @@
             this.xrTableCell20.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[nom_sucursal]")});
             this.xrTableCell20.Name = "xrTableCell20";
-            this.xrTableCell20.Weight = 1.4666666801496362D;
+            this.xrTableCell20.Weight = 1.7066657035871362D;
             // 
             // xrTableCell22
             // 
@@ -454,7 +454,7 @@
             this.xrTableCell22.Name = "xrTableCell22";
             this.xrTableCell22.StylePriority.UseFont = false;
             this.xrTableCell22.Text = "Bodega:";
-            this.xrTableCell22.Weight = 0.69333334856772755D;
+            this.xrTableCell22.Weight = 0.45333432513022753D;
             // 
             // xrTableCell26
             // 
@@ -486,7 +486,7 @@
             this.xrTableCell28.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pr_descripcion]")});
             this.xrTableCell28.Name = "xrTableCell28";
-            this.xrTableCell28.Weight = 1.466666706112759D;
+            this.xrTableCell28.Weight = 1.706665729550259D;
             // 
             // xrTableCell29
             // 
@@ -494,7 +494,7 @@
             this.xrTableCell29.Name = "xrTableCell29";
             this.xrTableCell29.StylePriority.UseFont = false;
             this.xrTableCell29.Text = "Fecha:";
-            this.xrTableCell29.Weight = 0.69333332260460478D;
+            this.xrTableCell29.Weight = 0.45333429916710477D;
             // 
             // xrTableCell30
             // 

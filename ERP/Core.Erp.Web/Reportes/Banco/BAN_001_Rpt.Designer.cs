@@ -213,8 +213,10 @@
             this.lbl_usuario.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.lbl_usuario.Font = new System.Drawing.Font("Verdana", 7F);
             this.lbl_usuario.Name = "lbl_usuario";
+            this.lbl_usuario.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.lbl_usuario.StylePriority.UseBorders = false;
             this.lbl_usuario.StylePriority.UseFont = false;
+            this.lbl_usuario.StylePriority.UsePadding = false;
             this.lbl_usuario.Weight = 1.5999999999999999D;
             // 
             // lbl_fecha
