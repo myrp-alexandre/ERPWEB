@@ -1524,6 +1524,64 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_010' does not have
           <Property Name="em_fechaIngaRol" Type="datetime" />
           <Property Name="antiguedad_string" Type="varchar" MaxLength="57" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_011' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VWROL_011">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdHorasExtras" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdNominaTipoLiqui" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="FechaRegistro" />
+            <PropertyRef Name="hora_extra25" />
+            <PropertyRef Name="hora_extra50" />
+            <PropertyRef Name="hora_extra100" />
+            <PropertyRef Name="Valor25" />
+            <PropertyRef Name="Valor50" />
+            <PropertyRef Name="Valor100" />
+            <PropertyRef Name="Sueldo_base" />
+            <PropertyRef Name="hora_atraso" />
+            <PropertyRef Name="hora_temprano" />
+            <PropertyRef Name="hora_trabajada" />
+            <PropertyRef Name="pe_FechaIni" />
+            <PropertyRef Name="pe_FechaFin" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="DescripcionProcesoNomina" />
+            <PropertyRef Name="ca_descripcion" />
+            <PropertyRef Name="pe_nombreCompleto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdHorasExtras" Type="int" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="int" Nullable="false" />
+          <Property Name="IdNominaTipoLiqui" Type="int" Nullable="false" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="time_entrada1" Type="time" Precision="0" />
+          <Property Name="time_entrada2" Type="time" Precision="0" />
+          <Property Name="time_salida1" Type="time" Precision="0" />
+          <Property Name="time_salida2" Type="time" Precision="0" />
+          <Property Name="hora_extra25" Type="float" Nullable="false" />
+          <Property Name="hora_extra50" Type="float" Nullable="false" />
+          <Property Name="hora_extra100" Type="float" Nullable="false" />
+          <Property Name="Valor25" Type="float" Nullable="false" />
+          <Property Name="Valor50" Type="float" Nullable="false" />
+          <Property Name="Valor100" Type="float" Nullable="false" />
+          <Property Name="Sueldo_base" Type="float" Nullable="false" />
+          <Property Name="hora_atraso" Type="float" Nullable="false" />
+          <Property Name="hora_temprano" Type="float" Nullable="false" />
+          <Property Name="hora_trabajada" Type="float" Nullable="false" />
+          <Property Name="pe_FechaIni" Type="smalldatetime" Nullable="false" />
+          <Property Name="pe_FechaFin" Type="smalldatetime" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DescripcionProcesoNomina" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ca_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
+          <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
         <Function Name="SPACTF_004_detalle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="Fecha_corte" Type="datetime" Mode="In" />
@@ -2444,6 +2502,39 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_010' does not have
     [VWROL_010].[antiguedad_string] AS [antiguedad_string]
     FROM [web].[VWROL_010] AS [VWROL_010]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VWROL_011" EntityType="Self.VWROL_011" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWROL_011].[IdEmpresa] AS [IdEmpresa], 
+    [VWROL_011].[IdHorasExtras] AS [IdHorasExtras], 
+    [VWROL_011].[IdNominaTipo] AS [IdNominaTipo], 
+    [VWROL_011].[IdNominaTipoLiqui] AS [IdNominaTipoLiqui], 
+    [VWROL_011].[IdPeriodo] AS [IdPeriodo], 
+    [VWROL_011].[IdEmpleado] AS [IdEmpleado], 
+    [VWROL_011].[FechaRegistro] AS [FechaRegistro], 
+    [VWROL_011].[time_entrada1] AS [time_entrada1], 
+    [VWROL_011].[time_entrada2] AS [time_entrada2], 
+    [VWROL_011].[time_salida1] AS [time_salida1], 
+    [VWROL_011].[time_salida2] AS [time_salida2], 
+    [VWROL_011].[hora_extra25] AS [hora_extra25], 
+    [VWROL_011].[hora_extra50] AS [hora_extra50], 
+    [VWROL_011].[hora_extra100] AS [hora_extra100], 
+    [VWROL_011].[Valor25] AS [Valor25], 
+    [VWROL_011].[Valor50] AS [Valor50], 
+    [VWROL_011].[Valor100] AS [Valor100], 
+    [VWROL_011].[Sueldo_base] AS [Sueldo_base], 
+    [VWROL_011].[hora_atraso] AS [hora_atraso], 
+    [VWROL_011].[hora_temprano] AS [hora_temprano], 
+    [VWROL_011].[hora_trabajada] AS [hora_trabajada], 
+    [VWROL_011].[pe_FechaIni] AS [pe_FechaIni], 
+    [VWROL_011].[pe_FechaFin] AS [pe_FechaFin], 
+    [VWROL_011].[Descripcion] AS [Descripcion], 
+    [VWROL_011].[DescripcionProcesoNomina] AS [DescripcionProcesoNomina], 
+    [VWROL_011].[ca_descripcion] AS [ca_descripcion], 
+    [VWROL_011].[pe_apellido] AS [pe_apellido], 
+    [VWROL_011].[pe_nombre] AS [pe_nombre], 
+    [VWROL_011].[pe_nombreCompleto] AS [pe_nombreCompleto]
+    FROM [web].[VWROL_011] AS [VWROL_011]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -2573,6 +2664,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_010' does not have
           </FunctionImport>
           <EntitySet Name="VWROL_009" EntityType="Model_reportes.VWROL_009" />
           <EntitySet Name="VWROL_010" EntityType="Model_reportes.VWROL_010" />
+          <EntitySet Name="VWROL_011" EntityType="Model_reportes.VWROL_011" />
         </EntityContainer>
         <EntityType Name="Af_SPACTF_004_detalle">
           <Key>
@@ -4192,6 +4284,62 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_010' does not have
           <Property Name="em_fechaIngaRol" Type="DateTime" Precision="3" />
           <Property Name="antiguedad_string" Type="String" MaxLength="57" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="VWROL_011">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdHorasExtras" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdNominaTipoLiqui" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="FechaRegistro" />
+            <PropertyRef Name="hora_extra25" />
+            <PropertyRef Name="hora_extra50" />
+            <PropertyRef Name="hora_extra100" />
+            <PropertyRef Name="Valor25" />
+            <PropertyRef Name="Valor50" />
+            <PropertyRef Name="Valor100" />
+            <PropertyRef Name="Sueldo_base" />
+            <PropertyRef Name="hora_atraso" />
+            <PropertyRef Name="hora_temprano" />
+            <PropertyRef Name="hora_trabajada" />
+            <PropertyRef Name="pe_FechaIni" />
+            <PropertyRef Name="pe_FechaFin" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="DescripcionProcesoNomina" />
+            <PropertyRef Name="ca_descripcion" />
+            <PropertyRef Name="pe_nombreCompleto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdHorasExtras" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipoLiqui" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="time_entrada1" Type="Time" Precision="0" />
+          <Property Name="time_entrada2" Type="Time" Precision="0" />
+          <Property Name="time_salida1" Type="Time" Precision="0" />
+          <Property Name="time_salida2" Type="Time" Precision="0" />
+          <Property Name="hora_extra25" Type="Double" Nullable="false" />
+          <Property Name="hora_extra50" Type="Double" Nullable="false" />
+          <Property Name="hora_extra100" Type="Double" Nullable="false" />
+          <Property Name="Valor25" Type="Double" Nullable="false" />
+          <Property Name="Valor50" Type="Double" Nullable="false" />
+          <Property Name="Valor100" Type="Double" Nullable="false" />
+          <Property Name="Sueldo_base" Type="Double" Nullable="false" />
+          <Property Name="hora_atraso" Type="Double" Nullable="false" />
+          <Property Name="hora_temprano" Type="Double" Nullable="false" />
+          <Property Name="hora_trabajada" Type="Double" Nullable="false" />
+          <Property Name="pe_FechaIni" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="pe_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DescripcionProcesoNomina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ca_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5333,6 +5481,41 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_010' does not have
                 <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
                 <ScalarProperty Name="IdTipoNomina" ColumnName="IdTipoNomina" />
                 <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWROL_011">
+            <EntityTypeMapping TypeName="Model_reportes.VWROL_011">
+              <MappingFragment StoreEntitySet="VWROL_011">
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
+                <ScalarProperty Name="DescripcionProcesoNomina" ColumnName="DescripcionProcesoNomina" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="pe_FechaFin" ColumnName="pe_FechaFin" />
+                <ScalarProperty Name="pe_FechaIni" ColumnName="pe_FechaIni" />
+                <ScalarProperty Name="hora_trabajada" ColumnName="hora_trabajada" />
+                <ScalarProperty Name="hora_temprano" ColumnName="hora_temprano" />
+                <ScalarProperty Name="hora_atraso" ColumnName="hora_atraso" />
+                <ScalarProperty Name="Sueldo_base" ColumnName="Sueldo_base" />
+                <ScalarProperty Name="Valor100" ColumnName="Valor100" />
+                <ScalarProperty Name="Valor50" ColumnName="Valor50" />
+                <ScalarProperty Name="Valor25" ColumnName="Valor25" />
+                <ScalarProperty Name="hora_extra100" ColumnName="hora_extra100" />
+                <ScalarProperty Name="hora_extra50" ColumnName="hora_extra50" />
+                <ScalarProperty Name="hora_extra25" ColumnName="hora_extra25" />
+                <ScalarProperty Name="time_salida2" ColumnName="time_salida2" />
+                <ScalarProperty Name="time_salida1" ColumnName="time_salida1" />
+                <ScalarProperty Name="time_entrada2" ColumnName="time_entrada2" />
+                <ScalarProperty Name="time_entrada1" ColumnName="time_entrada1" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
+                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
+                <ScalarProperty Name="IdHorasExtras" ColumnName="IdHorasExtras" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
