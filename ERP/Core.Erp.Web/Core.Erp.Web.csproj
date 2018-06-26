@@ -8459,6 +8459,7 @@
     <Content Include="Areas\Caja\Views\ConciliacionCaja\Modificar.cshtml" />
     <Content Include="Areas\Inventario\Views\TransferenciasInventario\_GridViewPartial_transferencias.cshtml" />
     <Content Include="Areas\Inventario\Views\TransferenciasInventario\_GridViewPartial_transferencias_det.cshtml" />
+    <Content Include="Areas\Caja\Views\ConciliacionCaja\_GridViewPartial_conciliacion_caja.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
@@ -8563,7 +8564,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

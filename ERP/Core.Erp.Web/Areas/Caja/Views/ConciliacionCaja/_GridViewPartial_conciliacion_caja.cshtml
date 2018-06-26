@@ -1,0 +1,29 @@
+@{
+	var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridView_conciliacion_caja";
+        settings.CallbackRouteValues = new { Controller = "ConciliacionCaja", Action = "GridViewPartial_conciliacion_caja" };
+
+
+		settings.KeyFieldName = "IdConciliacion_Caja";
+
+		settings.SettingsPager.Visible = true;
+		settings.Settings.ShowGroupPanel = true;
+		settings.Settings.ShowFilterRow = true;
+		settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+		settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+		settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+		settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+		settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+		settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+				settings.Columns.Add("IdConciliacion_Caja");
+				settings.Columns.Add("IdPeriodo");
+				settings.Columns.Add("Fecha");
+				settings.Columns.Add("IdEstadoCierre");
+				settings.Columns.Add("Ingresos");
+				settings.Columns.Add("Total_fact_vale");
+				settings.Columns.Add("Dif_x_pagar_o_cobrar");
+			});
+}
+@grid.Bind(Model).GetHtml()

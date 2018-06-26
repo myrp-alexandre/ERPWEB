@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.Web.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -21,6 +22,13 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         public ActionResult Modificar()
         {
             return View();
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_conciliacion_caja()
+        {
+            var model = new object[0];
+            return PartialView("_GridViewPartial_conciliacion_caja", model);
         }
     }
 }
