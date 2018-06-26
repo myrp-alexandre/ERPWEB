@@ -233,6 +233,44 @@ namespace Core.Erp.Data.Inventario
                 throw ;
             }
         }
+        public in_transferencia_Info get_info(int IdEmpresa, int idSucursal, int idBodega, decimal IdTransferencia)
+        {
+            try
+            {
+                in_transferencia_Info info = new in_transferencia_Info();
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    in_transferencia Entity = Context.in_transferencia.FirstOrDefault(q => q.IdEmpresa == IdEmpresa 
+                    && q.IdSucursalOrigen == idSucursal && q.IdBodegaOrigen == idBodega && q.IdTransferencia == IdTransferencia);
+                    if (Entity == null) return null;
+                    info = new in_transferencia_Info
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdSucursalOrigen = info.IdSucursalOrigen,
+                        IdBodegaOrigen = info.IdBodegaOrigen,
+                        IdTransferencia = info.IdTransferencia ,
+                        IdSucursalDest = info.IdSucursalDest,
+                        IdBodegaDest = info.IdBodegaDest,
+                        tr_Observacion = info.tr_Observacion,
+                        IdMovi_inven_tipo_SucuOrig = info.IdMovi_inven_tipo_SucuOrig,
+                        IdMovi_inven_tipo_SucuDest = info.IdMovi_inven_tipo_SucuDest,
+                        tr_fecha = Convert.ToDateTime(info.tr_fecha.ToShortDateString()),
+                        Estado = "A",
+                        IdUsuario = (info.IdUsuario == null) ? "" : info.IdUsuario,
+                        ip = (info.ip == null) ? "" : info.ip,
+                        nom_pc = (info.nom_pc == null) ? "" : info.nom_pc,
+                        IdEstadoAprobacion_cat = info.IdEstadoAprobacion_cat,
+                        Codigo = info.Codigo,
+                    };
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
     }
 }

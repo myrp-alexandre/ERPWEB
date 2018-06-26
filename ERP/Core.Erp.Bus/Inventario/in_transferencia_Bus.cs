@@ -23,6 +23,18 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
+        public in_transferencia_Info get_info(int IdEmpresa, int IdSucursa, int IdBodega, decimal IdTransferencia)
+        {
+            try
+            {
+                return odata.get_info(IdEmpresa, IdSucursa,IdBodega,IdTransferencia);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public bool guardarDB(in_transferencia_Info info)
         {
@@ -59,6 +71,18 @@ namespace Core.Erp.Bus.Inventario
 
                 throw;
             }
+        }
+
+
+        public string validar(in_transferencia_Info info)
+        {
+            string mensaje = "";
+            if (info.list_detalle.Count == 0)
+            {
+                mensaje = "Debe ingresar al menos un producto";
+            }
+            return mensaje;
+
         }
     }
 }
