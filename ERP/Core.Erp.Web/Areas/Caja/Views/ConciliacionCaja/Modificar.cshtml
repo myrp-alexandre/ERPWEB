@@ -1,6 +1,10 @@
 ﻿
 @{
-    ViewBag.Title = "Modificar";
+    ViewBag.Title = "Modificar conciliación";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 

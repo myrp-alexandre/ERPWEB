@@ -1,7 +1,107 @@
 ﻿@model Core.Erp.Info.Caja.cp_conciliacion_Caja_Info
 
 @{
-    ViewBag.Title = "Nuevo";
+    ViewBag.Title = "Nueva conciliación";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using (Html.BeginForm("Index", "ConciliacionCaja", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="IdCaja">Caja *</label>
+                        @Html.DropDownListFor(q => q.IdCaja, new SelectList(ViewBag.lst_caja, "IdCaja", "ca_Descripcion"), new { @id = "IdCaja", @class = "form-control" })
+                        @Html.ValidationMessageFor(q => q.IdCaja, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="IdCtaCble">Cta Cble*</label>
+                        @Html.TextBoxFor(q => q.IdCtaCble, new { @id = "IdCtaCble", @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="IdPeriodo">Periodo*</label>
+                        @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodo, "IdPeriodo", "nom_periodo_combo"), new { @id = "IdPeriodo", @class = "form-control" })
+                        @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Fecha_ini">Desde*</label>
+                        @Html.TextBoxFor(q => q.Fecha_ini, new { @id = "Fecha_ini", @class = "form-control" })
+                        @Html.ValidationMessageFor(q => q.Fecha_ini, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Fecha_fin">Hasta*</label>
+                        @Html.TextBoxFor(q => q.Fecha_fin, new { @id = "Fecha_fin", @class = "form-control" })
+                        @Html.ValidationMessageFor(q => q.Fecha_fin, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="Observacion">Observación</label>
+                        @Html.TextAreaFor(q => q.Observacion, new { @id = "Observacion", @class = "form-control", @rows = 2 })
+                        @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-offset-1 col-md-4">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="Saldo_cont_al_periodo">Saldo contable mes anterior</label>
+                    @Html.TextBoxFor(q => q.Saldo_cont_al_periodo, new { @id = "Saldo_cont_al_periodo", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(q => q.Saldo_cont_al_periodo, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label for="Ingresos">Ingresos</label>
+                    @Html.TextBoxFor(q => q.Ingresos, new { @id = "Ingresos", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(q => q.Ingresos, "", new { @class = "text-danger" })
+                </div>
+                <hr />
+                <div class="form-group">
+                    <label for="Total_Ing">Ingresos</label>
+                    @Html.TextBoxFor(q => q.Total_Ing, new { @id = "Total_Ing", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(q => q.Total_Ing, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="Total_fondo">Fondo</label>
+                    @Html.TextBoxFor(q => q.Total_fondo, new { @id = "Total_fondo", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(q => q.Total_fondo, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label for="Total_fact_vale">Total fact. y vales</label>
+                    @Html.TextBoxFor(q => q.Total_fact_vale, new { @id = "Total_fact_vale", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(q => q.Total_fact_vale, "", new { @class = "text-danger" })
+                </div>
+                <hr />
+                <div class="form-group">
+                    <label for="Dif_x_pagar_o_cobrar">Diferencia</label>
+                    @Html.TextBoxFor(q => q.Dif_x_pagar_o_cobrar, new { @id = "Dif_x_pagar_o_cobrar", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(q => q.Dif_x_pagar_o_cobrar, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+}
