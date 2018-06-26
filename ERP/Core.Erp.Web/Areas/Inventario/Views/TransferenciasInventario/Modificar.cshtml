@@ -1,10 +1,10 @@
 ﻿@model Core.Erp.Info.Inventario.in_transferencia_Info
 @{
     ViewBag.Title = "Modificar registro";
-    //if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
-    //{
-    //    Response.Redirect("~/Account/Login");
-    //}
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
 }
 
 @using (Html.BeginForm("Modificar", "TransferenciasInventario", FormMethod.Post, new { @class = "form", @role = "form" }))

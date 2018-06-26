@@ -38,15 +38,15 @@ namespace Core.Erp.Data.Inventario
                                 IdSucursalOrigen = q.IdSucursalOrigen,
                                 Codigo = q.Codigo,
                                 IdEstadoAprobacion_cat = q.IdEstadoAprobacion_cat,
-                                IdMovi_inven_tipo_SucuDest = Convert.ToInt32(q.IdMovi_inven_tipo_SucuDest),
-                                IdMovi_inven_tipo_SucuOrig = Convert.ToInt32(q.IdMovi_inven_tipo_SucuOrig),
+                                IdMovi_inven_tipo_SucuDest = q.IdMovi_inven_tipo_SucuDest,
+                                IdMovi_inven_tipo_SucuOrig = q.IdMovi_inven_tipo_SucuOrig,
                 }).ToList();
 
                 }
 
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;
