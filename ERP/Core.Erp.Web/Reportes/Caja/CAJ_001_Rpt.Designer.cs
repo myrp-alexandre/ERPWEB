@@ -249,6 +249,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[cm_fecha]")});
             this.xrTableCell7.Name = "xrTableCell7";
             this.xrTableCell7.Text = "xrTableCell7";
+            this.xrTableCell7.TextFormatString = "{0:dd/MM/yyyy}";
             this.xrTableCell7.Weight = 0.53262296327691294D;
             // 
             // xrTableRow5

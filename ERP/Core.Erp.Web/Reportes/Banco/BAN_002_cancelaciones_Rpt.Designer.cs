@@ -105,7 +105,7 @@
             this.xrTableCell5.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 3, 0, 100F);
             this.xrTableCell5.StylePriority.UsePadding = false;
             this.xrTableCell5.StylePriority.UseTextAlignment = false;
-            this.xrTableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrTableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell5.Weight = 0.53333333333333344D;
             // 
             // xrTableCell6

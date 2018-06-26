@@ -113,7 +113,7 @@
             this.xrTableCell9.StylePriority.UsePadding = false;
             this.xrTableCell9.StylePriority.UseTextAlignment = false;
             this.xrTableCell9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell9.TextFormatString = "{0:dd-MMM-yy}";
+            this.xrTableCell9.TextFormatString = "{0:dd/MM/yyyy}";
             this.xrTableCell9.Weight = 0.90666666666666673D;
             // 
             // xrTableCell10

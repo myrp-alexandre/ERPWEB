@@ -154,7 +154,7 @@
             this.xrTableCell25.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 3, 0, 100F);
             this.xrTableCell25.StylePriority.UsePadding = false;
             this.xrTableCell25.StylePriority.UseTextAlignment = false;
-            this.xrTableCell25.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrTableCell25.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell25.Weight = 0.8D;
             // 
             // xrTableCell26
@@ -268,7 +268,7 @@
             this.xrTableCell6.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Fecha]")});
             this.xrTableCell6.Name = "xrTableCell6";
-            this.xrTableCell6.TextFormatString = "{0:dd-MMM-yy}";
+            this.xrTableCell6.TextFormatString = "{0:dd/MM/yyyy}";
             this.xrTableCell6.Weight = 0.8D;
             // 
             // xrTableRow4

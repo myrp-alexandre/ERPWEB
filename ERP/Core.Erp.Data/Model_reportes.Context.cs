@@ -379,5 +379,22 @@ namespace Core.Erp.Data
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPBAN_004_Result>("SPBAN_004", idEmpresaParameter, idBancoParameter, idConciliacionParameter);
         }
+    
+        public virtual ObjectResult<SPROL_012_Result> SPROL_012(Nullable<int> idEmpresa, Nullable<System.DateTime> fecha_desde, Nullable<System.DateTime> fecha_hasta)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var fecha_desdeParameter = fecha_desde.HasValue ?
+                new ObjectParameter("Fecha_desde", fecha_desde) :
+                new ObjectParameter("Fecha_desde", typeof(System.DateTime));
+    
+            var fecha_hastaParameter = fecha_hasta.HasValue ?
+                new ObjectParameter("Fecha_hasta", fecha_hasta) :
+                new ObjectParameter("Fecha_hasta", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPROL_012_Result>("SPROL_012", idEmpresaParameter, fecha_desdeParameter, fecha_hastaParameter);
+        }
     }
 }

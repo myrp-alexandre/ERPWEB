@@ -540,7 +540,7 @@
             this.xrTableCell29.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_fecha_corte]")});
             this.xrTableCell29.Name = "xrTableCell29";
-            this.xrTableCell29.TextFormatString = "{0:d/M/yyyy}";
+            this.xrTableCell29.TextFormatString = "{0:dd/MM/yyyy}";
             this.xrTableCell29.Weight = 1.3333332593042535D;
             // 
             // xrTable1

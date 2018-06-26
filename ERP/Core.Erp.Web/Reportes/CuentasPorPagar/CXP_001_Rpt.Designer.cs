@@ -365,7 +365,7 @@
             this.xrTableCell6.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[co_fechaOg]")});
             this.xrTableCell6.Name = "xrTableCell6";
-            this.xrTableCell6.TextFormatString = "{0:dd-MMM-yy}";
+            this.xrTableCell6.TextFormatString = "{0:dd/MM/yyyy}";
             this.xrTableCell6.Weight = 0.79999999999999982D;
             // 
             // xrTableRow4
@@ -406,7 +406,7 @@
             this.xrTableCell10.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[co_FechaFactura]")});
             this.xrTableCell10.Name = "xrTableCell10";
-            this.xrTableCell10.TextFormatString = "{0:dd-MMM-yy}";
+            this.xrTableCell10.TextFormatString = "{0:dd/MM/yyyy}";
             this.xrTableCell10.Weight = 0.79999999999999982D;
             // 
             // xrTableRow5
@@ -447,7 +447,7 @@
             this.xrTableCell14.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[co_FechaFactura_vct]")});
             this.xrTableCell14.Name = "xrTableCell14";
-            this.xrTableCell14.TextFormatString = "{0:dd-MMM-yy}";
+            this.xrTableCell14.TextFormatString = "{0:dd/MM/yyyy}";
             this.xrTableCell14.Weight = 0.79999999999999982D;
             // 
             // xrTableRow6
