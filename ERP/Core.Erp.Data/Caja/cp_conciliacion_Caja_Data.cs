@@ -13,9 +13,6 @@ namespace Core.Erp.Data.Caja
         cp_orden_pago_Data data_op = new cp_orden_pago_Data();
         ct_cbtecble_Data data_ct = new ct_cbtecble_Data();
         cp_orden_pago_cancelaciones_Data data_can = new cp_orden_pago_cancelaciones_Data();
-        public string IdCtaCble_cxp { get; private set; }
-        public string Observacion { get; private set; }
-
         public List<cp_conciliacion_Caja_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
@@ -234,7 +231,7 @@ namespace Core.Erp.Data.Caja
                                 IdTipoCbte = diario.IdTipoCbte,
                                 IdCbteCble = diario.IdCbteCble,
                                 secuencia = 1,
-                                IdCtaCble = IdCtaCble_cxp,
+                                IdCtaCble = item.IdCtaCble_cxp,
                                 dc_Valor = Math.Round(Convert.ToDouble(item.Valor_a_aplicar),2,MidpointRounding.AwayFromZero),
                             };
 
@@ -340,7 +337,7 @@ namespace Core.Erp.Data.Caja
                             IdTipoCbte = item.IdTipocbte_movcaja = IdTipoCbte_EG,
                             IdCbteCble = item.IdCbteCble_movcaja = IdCbteCble_EG,
                             cb_Fecha = item.fecha,
-                            cb_Observacion = "Caja # "+info.IdConciliacion_Caja + Observacion,
+                            cb_Observacion = "Caja # "+info.IdConciliacion_Caja + item.Observacion,
                             IdPeriodo = Convert.ToInt32(item.fecha.ToString("yyyyMM")),
                             cb_Anio = item.fecha.Year,
                             cb_mes = item.fecha.Month,
@@ -355,7 +352,7 @@ namespace Core.Erp.Data.Caja
                             IdTipoCbte = diario.IdTipoCbte,
                             IdCbteCble = diario.IdCbteCble,
                             secuencia = 1,
-                            IdCtaCble = IdCtaCble_cxp,
+                            IdCtaCble = item.IdCtaCble,
                             dc_Valor = Math.Round(Convert.ToDouble(item.valor), 2, MidpointRounding.AwayFromZero),
                         };
 

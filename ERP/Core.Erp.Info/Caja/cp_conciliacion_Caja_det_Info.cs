@@ -27,6 +27,8 @@ namespace Core.Erp.Info.Caja
         public decimal idEntidad { get; set; }
         public int idSucursal { get; set; }
         public double por_iva { get; set; }
+        public string IdCtaCble_cxp { get; private set; }
+        public string Observacion { get; private set; }
         #endregion
 
     }

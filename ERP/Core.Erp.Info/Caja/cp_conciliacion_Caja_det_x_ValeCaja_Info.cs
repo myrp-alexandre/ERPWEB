@@ -21,6 +21,7 @@ namespace Core.Erp.Info.Caja
         public double valor { get; set; }
         public int idTipoMovi { get; set; }
         public decimal IdPersona { get; set; }
+        public string Observacion { get; set; }
         #endregion
 
     }

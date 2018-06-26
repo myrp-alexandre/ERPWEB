@@ -1,14 +1,10 @@
 ﻿using Core.Erp.Data.Caja;
 using Core.Erp.Info.Caja;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Caja
 {
-   public class caj_parametro_Bus
+    public class caj_parametro_Bus
     {
         caj_parametro_Data odata = new caj_parametro_Data();
     
