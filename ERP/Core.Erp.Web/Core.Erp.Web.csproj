@@ -8442,7 +8442,14 @@
     <Content Include="bower_DevExpress\globalize-1.3.0\src\.dist-jshintrc" />
     <Content Include="bower_DevExpress\globalize-1.3.0\src\.jshintrc" />
     <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Index.cshtml" />
+<<<<<<< HEAD
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_010.cshtml" />
+=======
+    <Content Include="Areas\Inventario\Views\TransferenciasInventario\Index.cshtml" />
+    <Content Include="Areas\Inventario\Views\TransferenciasInventario\Nuevo.cshtml" />
+    <Content Include="Areas\Inventario\Views\TransferenciasInventario\Modificar.cshtml" />
+    <Content Include="Areas\Inventario\Views\TransferenciasInventario\Anular.cshtml" />
+>>>>>>> 162e9deb3ff0cd7a82b14e45cd216eebe14f4b9f
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
@@ -8512,7 +8519,6 @@
     <Folder Include="Areas\Importacion\Models\" />
     <Folder Include="Areas\Importacion\Views\Shared\" />
     <Folder Include="Areas\Inventario\Models\" />
-    <Folder Include="Areas\Inventario\Views\TransferenciasInventario\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
     <Folder Include="Areas\RRHH\Views\CapacitacionesEmpleado\" />
