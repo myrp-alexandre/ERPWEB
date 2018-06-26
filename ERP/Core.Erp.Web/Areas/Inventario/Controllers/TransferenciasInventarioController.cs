@@ -61,13 +61,13 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         public ActionResult Nuevo()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_parametro_Info i_param = bus_in_param.get_info(IdEmpresa);
-            if (i_param == null)
-                return RedirectToAction("Index");
+            //int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            //in_parametro_Info i_param = bus_in_param.get_info(IdEmpresa);
+            //if (i_param == null)
+            //    return RedirectToAction("Index");
             in_transferencia_Info model = new in_transferencia_Info
             {
-                IdEmpresa = IdEmpresa,
+               // IdEmpresa = IdEmpresa,
                 tr_fecha = DateTime.Now
             };
             cargar_combos();
