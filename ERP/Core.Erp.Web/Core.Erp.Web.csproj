@@ -239,6 +239,7 @@
     <Compile Include="Areas\Caja\Controllers\CajaController.cs" />
     <Compile Include="Areas\Caja\Controllers\CajaMovimientoEgresoController.cs" />
     <Compile Include="Areas\Caja\Controllers\CajaMovimientoIngresoController.cs" />
+    <Compile Include="Areas\Caja\Controllers\ConciliacionCajaController.cs" />
     <Compile Include="Areas\Caja\Controllers\ParametroCajaController.cs" />
     <Compile Include="Areas\Caja\Controllers\TipoMovimientoCajaController.cs" />
     <Compile Include="Areas\Contabilidad\ContabilidadAreaRegistration.cs" />
@@ -8447,6 +8448,9 @@
     <Content Include="Areas\Inventario\Views\TransferenciasInventario\Nuevo.cshtml" />
     <Content Include="Areas\Inventario\Views\TransferenciasInventario\Modificar.cshtml" />
     <Content Include="Areas\Inventario\Views\TransferenciasInventario\Anular.cshtml" />
+    <Content Include="Areas\Caja\Views\ConciliacionCaja\Index.cshtml" />
+    <Content Include="Areas\Caja\Views\ConciliacionCaja\Nuevo.cshtml" />
+    <Content Include="Areas\Caja\Views\ConciliacionCaja\Modificar.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
