@@ -1,7 +1,16 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Transferencias de inventario";
+
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
 }
 
-<h2>Index</h2>
+@using (Html.BeginForm())
+{
+    @Html.Action("GridViewPartial_transferencias")
 
+
+}

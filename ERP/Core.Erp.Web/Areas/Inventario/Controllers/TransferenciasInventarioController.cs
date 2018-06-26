@@ -32,13 +32,13 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_ingreso_inventario(DateTime? fecha_ini, DateTime? fecha_fin)
+        public ActionResult GridViewPartial_transferencias(DateTime? fecha_ini, DateTime? fecha_fin)
         {
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
             ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             List<in_transferencia_Info> model = bus_trnferencia.get_list(IdEmpresa);
-            return PartialView("_GridViewPartial_ingreso_inventario", model);
+            return PartialView("_GridViewPartial_transferencias", model);
         }
         private void cargar_combos()
         {
@@ -161,7 +161,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             if (model.list_detalle.Count == 0)
                 model.list_detalle = List_in_transferencia_det.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_inv_det", model);
+            return PartialView("_GridViewPartial_transferencias_det", model);
         }
         private void cargar_combos_detalle()
         {
@@ -183,7 +183,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             in_transferencia_Info model = new in_transferencia_Info();
             model.list_detalle = List_in_transferencia_det.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_inv_det", model);
+            return PartialView("_GridViewPartial_transferencias_det", model);
         }
 
         [HttpPost, ValidateInput(false)]
@@ -194,7 +194,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             in_transferencia_Info model = new in_transferencia_Info();
             model.list_detalle = List_in_transferencia_det.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_inv_det", model);
+            return PartialView("_GridViewPartial_transferencias_det", model);
         }
 
         public ActionResult EditingDelete(int Secuencia)
@@ -203,7 +203,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             in_transferencia_Info model = new in_transferencia_Info();
             model.list_detalle = List_in_transferencia_det.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_inv_det", model);
+            return PartialView("_GridViewPartial_transferencias_det", model);
         }
     }
 
