@@ -61,14 +61,15 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         public ActionResult Nuevo()
         {
-            //int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            //in_parametro_Info i_param = bus_in_param.get_info(IdEmpresa);
-            //if (i_param == null)
-            //    return RedirectToAction("Index");
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            in_parametro_Info i_param = bus_in_param.get_info(IdEmpresa);
+            if (i_param == null)
+                return RedirectToAction("Index");
             in_transferencia_Info model = new in_transferencia_Info
             {
-               // IdEmpresa = IdEmpresa,
-                tr_fecha = DateTime.Now
+                IdEmpresa = IdEmpresa,
+                tr_fecha = DateTime.Now,
+                IdMovi_inven_tipo_SucuDest=i_param.IdMovi_inven_tipo_egresoBodegaOrigen               
             };
             cargar_combos();
             return View(model);
@@ -77,6 +78,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost]
         public ActionResult Nuevo(in_transferencia_Info model)
         {
+            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             model.list_detalle = List_in_transferencia_det.get_list();
             string mensaje = bus_trnferencia.validar(model);
             if (mensaje != "")
@@ -153,7 +155,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_inv_det(int IdSucursalOrigen = 0, int IdBodegaOrigen = 0, decimal IdTransferencia = 0)
+        public ActionResult GridViewPartial_transferencias_det(int IdSucursalOrigen = 0, int IdBodegaOrigen = 0, decimal IdTransferencia = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_transferencia_Info model = new in_transferencia_Info();

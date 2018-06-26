@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Core.Erp.Info.Inventario;
 namespace Core.Erp.Info.Inventario
 {
   public  class in_transferencia_Info
@@ -46,5 +46,14 @@ namespace Core.Erp.Info.Inventario
         public string BodegDest { get; set; }
 
         public List<in_transferencia_det_Info> list_detalle { get; set; }
+        public in_Ing_Egr_Inven_Info info_ing_egr { get; set; }
+        public in_movi_inven_tipo_Info info_movimiento { get; set; }
+
+        public in_transferencia_Info()
+        {
+            list_detalle = new List<in_transferencia_det_Info>();
+            info_ing_egr = new in_Ing_Egr_Inven_Info();
+            info_movimiento = new in_movi_inven_tipo_Info();
+        }
     }
 }

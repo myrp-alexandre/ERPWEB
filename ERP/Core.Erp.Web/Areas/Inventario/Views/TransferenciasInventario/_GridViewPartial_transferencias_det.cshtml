@@ -2,9 +2,9 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_transferencias_det";
-        settings.CallbackRouteValues = new { Controller = "TransferenciasInventario", Action = "GridViewPartial_transferencias_det", IdSucursal = Model == null ? 0 : Model.IdSucursal, IdMovi_inven_tipo = Model == null ? 0 : Model.IdMovi_inven_tipo, IdNumMovi = Model == null ? 0 : Model.IdNumMovi };
+        settings.CallbackRouteValues = new { Controller = "TransferenciasInventario", Action = "GridViewPartial_transferencias_det" };
         settings.KeyFieldName = "dt_secuencia";
-
+        //int IdSucursalOrigen = 0, int IdBodegaOrigen = 0, decimal IdTransferencia = 0
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "TransferenciasInventario", Action = "EditingAddNew", Area = "Inventario" };
@@ -79,4 +79,4 @@
        
     });
 }
-@grid.Bind(Model.lst_in_Ing_Egr_Inven_det).GetHtml()
+@grid.Bind(Model.list_detalle).GetHtml()

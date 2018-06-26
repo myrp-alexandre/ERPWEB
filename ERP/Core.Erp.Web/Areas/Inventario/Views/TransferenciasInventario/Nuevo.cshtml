@@ -10,10 +10,6 @@
 @using (Html.BeginForm("Nuevo", "TransferenciasInventario", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdTransferencia)
-    @Html.HiddenFor(q => q.IdSucursalOrigen)
-    @Html.HiddenFor(q => q.IdBodegaOrigen)
-
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -51,14 +47,14 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdSucursalOrigen">Sucursal origen*</label>
-                    @Html.DropDownListFor(q => q.IdSucursalOrigen, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                    @Html.DropDownListFor(q => q.IdSucursalOrigen, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursalOrigen" })
                     @Html.ValidationMessageFor(q => q.IdSucursalOrigen, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdBodegaOrigen">Bodega origen</label>
-                    @Html.DropDownListFor(q => q.IdBodegaOrigen, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodega" })
+                    @Html.DropDownListFor(q => q.IdBodegaOrigen, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodegaOrigen" })
                     @Html.ValidationMessageFor(q => q.IdBodegaOrigen, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -128,7 +124,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    @*@Html.Action("GridViewPartial_inv_det")*@
+                    @Html.Action("GridViewPartial_transferencias_det")
                 </div>
             </div>
         </div>

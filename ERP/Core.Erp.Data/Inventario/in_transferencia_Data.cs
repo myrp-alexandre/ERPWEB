@@ -111,7 +111,7 @@ namespace Core.Erp.Data.Inventario
 
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;
