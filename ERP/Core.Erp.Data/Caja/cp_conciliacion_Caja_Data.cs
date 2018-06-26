@@ -177,7 +177,7 @@ namespace Core.Erp.Data.Caja
                             #region Orden de pago
                             cp_orden_pago op = new cp_orden_pago
                             {
-                                IdEmpresa = Entity_c.IdEmpresa,
+                                IdEmpresa  = Entity_c.IdEmpresa,
                                 IdOrdenPago = IdOrdenPago++,
                                 Observacion = "Caja #" + Entity_c.IdConciliacion_Caja,
                                 IdTipo_op = cl_enumeradores.eTipoOrdenPago.FACT_PROVEE.ToString(),
@@ -190,6 +190,8 @@ namespace Core.Erp.Data.Caja
                                 IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
                                 Estado = "A"
                             };
+                            item.IdEmpresa_OP = op.IdEmpresa;
+                            item.IdOrdenPago_OP = op.IdOrdenPago;
                             Context_cxp.cp_orden_pago.Add(op);
 
                             cp_orden_pago_det op_det = new cp_orden_pago_det
@@ -334,9 +336,9 @@ namespace Core.Erp.Data.Caja
                     {
                         ct_cbtecble diario = new ct_cbtecble
                         {
-                            IdEmpresa = info.IdEmpresa,
-                            IdTipoCbte = IdTipoCbte_EG,
-                            IdCbteCble = IdCbteCble_EG,
+                            IdEmpresa = item.IdEmpresa_movcaja = info.IdEmpresa,
+                            IdTipoCbte = item.IdTipocbte_movcaja = IdTipoCbte_EG,
+                            IdCbteCble = item.IdCbteCble_movcaja = IdCbteCble_EG,
                             cb_Fecha = item.fecha,
                             cb_Observacion = "Caja # "+info.IdConciliacion_Caja + Observacion,
                             IdPeriodo = Convert.ToInt32(item.fecha.ToString("yyyyMM")),
@@ -368,6 +370,26 @@ namespace Core.Erp.Data.Caja
                         };
                         Context_ct.ct_cbtecble_det.Add(Debe);
                         Context_ct.ct_cbtecble_det.Add(Haber);
+
+                        caj_Caja_Movimiento Entity_caj = new caj_Caja_Movimiento
+                        {
+                            IdEmpresa = diario.IdEmpresa,
+                            IdTipocbte = diario.IdTipoCbte,
+                            IdCbteCble = diario.IdCbteCble,
+                            CodMoviCaja = "Caja # "+info.IdConciliacion_Caja,
+                            cm_Signo = "-",
+                            cm_valor = item.valor,
+                            IdTipoMovi = item.idTipoMovi,
+                            cm_observacion = "Caja # "+info.IdConciliacion_Caja,
+                            IdCaja = info.IdCaja,
+                            IdPeriodo = Convert.ToInt32(item.fecha.ToString("yyyyMM")),
+                            cm_fecha = item.fecha,
+                            IdTipo_Persona = cl_enumeradores.eTipoPersona.PERSONA.ToString(),
+                            IdEntidad = item.IdPersona,
+                            IdPersona = item.IdPersona,
+                            Estado = "A"
+                        };
+                        Context.caj_Caja_Movimiento.Add(Entity_caj);
                     }
 
                     cp_conciliacion_Caja_det_x_ValeCaja Entity_d = new cp_conciliacion_Caja_det_x_ValeCaja

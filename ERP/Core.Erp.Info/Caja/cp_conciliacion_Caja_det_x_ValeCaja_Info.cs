@@ -19,6 +19,8 @@ namespace Core.Erp.Info.Caja
         #region Campos que no existen en la tabla
         public DateTime fecha { get; set; }
         public double valor { get; set; }
+        public int idTipoMovi { get; set; }
+        public decimal IdPersona { get; set; }
         #endregion
 
     }
