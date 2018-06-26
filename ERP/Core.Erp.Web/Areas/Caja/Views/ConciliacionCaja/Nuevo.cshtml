@@ -104,4 +104,32 @@
             </div>
         </div>
     </div>
-}
+
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_facturas" aria-controls="facturas" role="tab" data-toggle="tab" id="link_general">Facturas</a>
+            </li>
+            <li>
+                <a href="#tab_vales" aria-controls="vales" role="tab" data-toggle="tab">Vales</a>
+            </li>
+            <li>
+                <a href="#tab_ingresos" aria-controls="ingresos" role="tab" data-toggle="tab">Ingresos</a>
+            </li>
+        </ul>
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_facturas">
+
+                @Html.Action("GridViewPartial_conciliacion_vales")
+
+            </div>
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_vales">
+
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_ingresos">
+
+            </div>
+        </div>
+    </div>
+                }

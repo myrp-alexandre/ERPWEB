@@ -1,0 +1,28 @@
+@{
+	var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridView_conciliacion_vales";
+        settings.CallbackRouteValues = new { Controller = "ConciliacionCaja", Action = "GridViewPartial_conciliacion_vales" };
+
+
+		settings.KeyFieldName = "Secuencia";
+
+		settings.SettingsPager.Visible = true;
+		settings.Settings.ShowGroupPanel = true;
+		settings.Settings.ShowFilterRow = true;
+		settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+		settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+		settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+		settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+		settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+		settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+				settings.Columns.Add("IdCbteCble_movcaja");
+				settings.Columns.Add("fecha");
+				settings.Columns.Add("valor");
+				settings.Columns.Add("idTipoMovi");
+				settings.Columns.Add("IdPersona");
+				settings.Columns.Add("Observacion");
+			});
+}
+@grid.Bind(Model).GetHtml()

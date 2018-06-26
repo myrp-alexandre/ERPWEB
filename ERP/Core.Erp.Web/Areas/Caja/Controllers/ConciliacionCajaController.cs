@@ -1,4 +1,5 @@
-﻿using Core.Erp.Bus.Caja;
+﻿using DevExpress.Web.Mvc;
+using Core.Erp.Bus.Caja;
 using Core.Erp.Info.Caja;
 using Core.Erp.Info.Helps;
 using System;
@@ -94,6 +95,13 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             var model = bus_conciliacion.get_list(IdEmpresa, fecha_ini, fecha_fin);
             return PartialView("_GridViewPartial_conciliacion_caja", model);
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_conciliacion_vales()
+        {
+            var model = new object[0];
+            return PartialView("_GridViewPartial_conciliacion_vales", model);
         }
     }
 
