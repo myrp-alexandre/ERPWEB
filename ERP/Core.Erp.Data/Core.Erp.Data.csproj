@@ -123,6 +123,9 @@
     <Compile Include="Caja\caj_Caja_Movimiento_Tipo_Data.cs" />
     <Compile Include="Caja\caj_parametro_Data.cs" />
     <Compile Include="Caja\cp_conciliacion_Caja_Data.cs" />
+    <Compile Include="Caja\cp_conciliacion_Caja_det_Data.cs" />
+    <Compile Include="Caja\cp_conciliacion_Caja_det_Ing_Caja_Data.cs" />
+    <Compile Include="Caja\cp_conciliacion_Caja_det_x_ValeCaja_Data.cs" />
     <Compile Include="caj_Caja.cs">
       <DependentUpon>Model_caja.tt</DependentUpon>
     </Compile>
