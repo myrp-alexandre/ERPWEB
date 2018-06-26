@@ -130,5 +130,18 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
+
+        
+            public ActionResult ROL_011(int IdEmpresa = 0, int IdHorasExtras =0)
+        {
+            ROL_011_Rpt model = new ROL_011_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdHorasExtras.Value = IdHorasExtras;
+            model.usuario = Session["IdUsuario"].ToString();
+            model.empresa = Session["nom_empresa"].ToString();
+            if (IdHorasExtras == 0)
+                model.RequestParameters = false;
+            return View(model);
+        }
     }
 }
