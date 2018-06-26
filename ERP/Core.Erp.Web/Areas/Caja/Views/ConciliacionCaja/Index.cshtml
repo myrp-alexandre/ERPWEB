@@ -2,6 +2,10 @@
 
 @{
     ViewBag.Title = "Conciliaciones de caja";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
     Layout = "~/Views/Layout/_LayoutConsulta.cshtml";
 }
 
@@ -69,7 +73,6 @@
             </div>
         </div>
         <div class="box-body">
-
             @Html.Action("GridViewPartial_conciliacion_caja", new { fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
         </div>
         <!-- /.box-body -->

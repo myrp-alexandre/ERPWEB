@@ -21,14 +21,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
-        public ActionResult CAJ_002( int IdEmpresa = 0, decimal IdConciliacionCaja = 0)
+        public ActionResult CAJ_002(decimal IdConciliacionCaja = 0)
         {
             CAJ_002_Rpt model = new CAJ_002_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_IdConciliacionCaja.Value = IdConciliacionCaja;
             model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
-            if (IdConciliacionCaja == 0)
                 model.RequestParameters = false;
             return View(model);
         }

@@ -23,7 +23,7 @@ namespace Core.Erp.Data.Caja
                 {
                     Lista = (from q in Context.cp_conciliacion_Caja
                              where q.IdEmpresa == IdEmpresa
-                             && Fecha_fin <= q.Fecha && q.Fecha <= Fecha_fin
+                             && Fecha_ini <= q.Fecha && q.Fecha <= Fecha_fin
                              select new cp_conciliacion_Caja_Info
                              {
                                  IdConciliacion_Caja = q.IdConciliacion_Caja,
@@ -32,7 +32,10 @@ namespace Core.Erp.Data.Caja
                                  IdPeriodo = q.IdPeriodo,
                                  Ingresos = q.Ingresos,
                                  Dif_x_pagar_o_cobrar = q.Dif_x_pagar_o_cobrar,
-                                 Total_fact_vale = q.Total_fact_vale
+                                 Total_fact_vale = q.Total_fact_vale,
+                                 IdEstadoCierre = q.IdEstadoCierre,
+                                 Fecha_ini = q.Fecha_ini,
+                                 Fecha_fin = q.Fecha_fin
                              }).ToList();
                 }
 

@@ -37,12 +37,12 @@
     <script src="~/AdminLTE/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/AdminLTE/dist/js/demo.js"></script>
-
     <!-- Bootstrap DatePicker -->
     <link rel="stylesheet" href="~/AdminLTE/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <!-- Bootstrap DatePicker -->
     <script src="~/AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/ScriptsGenerales.js"></script>
     @RenderSection("scripts", required: false)
     @Html.DevExpress().GetStyleSheets(
         new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
@@ -99,10 +99,10 @@
                                settings.Name = "treeViewMenu";
                                settings.EnableHotTrack = true;
                                var Nodes = new List<Core.Erp.Info.SeguridadAcceso.seg_Menu_x_Empresa_x_Usuario_Info>();
-                               Core.Erp.Web.Areas.SeguridadAcceso.Controllers.MenuPorEmpresaPorUsuarioController.CreateTreeViewNodesRecursive(Nodes, settings.Nodes, 0, Convert.ToInt32(Session["IdEmpresa"]), Session["IdUsuario"].ToString());
-                               
-                           }).GetHtml()
-                            </div>
+                                Core.Erp.Web.Areas.SeguridadAcceso.Controllers.MenuPorEmpresaPorUsuarioController.CreateTreeViewNodesRecursive(Nodes, settings.Nodes, 0, (Session["IdEmpresa"] == null ? 0 : Convert.ToInt32(Session["IdEmpresa"])), (Session["IdUsuario"] == null ? "" : Session["IdUsuario"].ToString()));
+
+                            }).GetHtml()
+                        </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
