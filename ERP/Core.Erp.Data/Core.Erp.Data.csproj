@@ -1117,6 +1117,9 @@
     <Compile Include="VWINV_007.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwin_Transferencias.cs">
+      <DependentUpon>Model_inventario.tt</DependentUpon>
+    </Compile>
     <Compile Include="VWROL_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>

@@ -37,6 +37,14 @@ namespace Core.Erp.Info.Inventario
         public string motivo_anula { get; set; }
         public string IdEstadoAprobacion_cat { get; set; }
 
+
+
+
+        public string SucuOrigen { get; set; }
+        public string BodegaORIG { get; set; }
+        public string SucuDEST { get; set; }
+        public string BodegDest { get; set; }
+
         public List<in_transferencia_det_Info> list_detalle { get; set; }
     }
 }

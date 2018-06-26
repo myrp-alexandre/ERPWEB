@@ -513,6 +513,55 @@
           <Property Name="valor_equiv" Type="float" Nullable="false" />
           <Property Name="interpretacion" Type="varchar" MaxLength="500" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencias' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwin_Transferencias">
+          <Key>
+            <PropertyRef Name="SucuOrigen" />
+            <PropertyRef Name="BodegaORIG" />
+            <PropertyRef Name="SucuDEST" />
+            <PropertyRef Name="BodegDest" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursalOrigen" />
+            <PropertyRef Name="IdBodegaOrigen" />
+            <PropertyRef Name="IdTransferencia" />
+            <PropertyRef Name="IdSucursalDest" />
+            <PropertyRef Name="IdBodegaDest" />
+            <PropertyRef Name="tr_Observacion" />
+            <PropertyRef Name="tr_fecha" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="EstadoAprobacion_cat" />
+          </Key>
+          <Property Name="SucuOrigen" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="BodegaORIG" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="SucuDEST" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="BodegDest" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursalOrigen" Type="int" Nullable="false" />
+          <Property Name="IdBodegaOrigen" Type="int" Nullable="false" />
+          <Property Name="IdTransferencia" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdSucursalDest" Type="int" Nullable="false" />
+          <Property Name="IdBodegaDest" Type="int" Nullable="false" />
+          <Property Name="tr_Observacion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="tr_fecha" Type="datetime" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="IdEmpresa_Ing_Egr_Inven_Origen" Type="int" />
+          <Property Name="IdSucursal_Ing_Egr_Inven_Origen" Type="int" />
+          <Property Name="IdNumMovi_Ing_Egr_Inven_Origen" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa_Ing_Egr_Inven_Destino" Type="int" />
+          <Property Name="IdSucursal_Ing_Egr_Inven_Destino" Type="int" />
+          <Property Name="IdNumMovi_Ing_Egr_Inven_Destino" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="tr_fechaAnulacion" Type="datetime" />
+          <Property Name="tr_userAnulo" Type="varchar" MaxLength="20" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="IdMovi_inven_tipo_SucuOrig" Type="int" />
+          <Property Name="IdMovi_inven_tipo_SucuDest" Type="int" />
+          <Property Name="IdEstadoAprobacion_cat" Type="varchar" MaxLength="15" />
+          <Property Name="EstadoAprobacion_cat" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdEstadoAproba_ing" Type="varchar" MaxLength="15" />
+          <Property Name="IdEstadoAproba_egr" Type="varchar" MaxLength="15" />
+        </EntityType>
         <Association Name="FK_in_Catalogo_in_CatalogoTipo">
           <End Role="in_CatalogoTipo" Type="Self.in_CatalogoTipo" Multiplicity="1" />
           <End Role="in_Catalogo" Type="Self.in_Catalogo" Multiplicity="*" />
@@ -1196,6 +1245,39 @@
           <EntitySet Name="in_transferencia_det" EntityType="Self.in_transferencia_det" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_UnidadMedida" EntityType="Self.in_UnidadMedida" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_UnidadMedida_Equiv_conversion" EntityType="Self.in_UnidadMedida_Equiv_conversion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwin_Transferencias" EntityType="Self.vwin_Transferencias" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwin_Transferencias].[SucuOrigen] AS [SucuOrigen], 
+    [vwin_Transferencias].[BodegaORIG] AS [BodegaORIG], 
+    [vwin_Transferencias].[SucuDEST] AS [SucuDEST], 
+    [vwin_Transferencias].[BodegDest] AS [BodegDest], 
+    [vwin_Transferencias].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_Transferencias].[IdSucursalOrigen] AS [IdSucursalOrigen], 
+    [vwin_Transferencias].[IdBodegaOrigen] AS [IdBodegaOrigen], 
+    [vwin_Transferencias].[IdTransferencia] AS [IdTransferencia], 
+    [vwin_Transferencias].[IdSucursalDest] AS [IdSucursalDest], 
+    [vwin_Transferencias].[IdBodegaDest] AS [IdBodegaDest], 
+    [vwin_Transferencias].[tr_Observacion] AS [tr_Observacion], 
+    [vwin_Transferencias].[tr_fecha] AS [tr_fecha], 
+    [vwin_Transferencias].[Estado] AS [Estado], 
+    [vwin_Transferencias].[IdUsuario] AS [IdUsuario], 
+    [vwin_Transferencias].[IdEmpresa_Ing_Egr_Inven_Origen] AS [IdEmpresa_Ing_Egr_Inven_Origen], 
+    [vwin_Transferencias].[IdSucursal_Ing_Egr_Inven_Origen] AS [IdSucursal_Ing_Egr_Inven_Origen], 
+    [vwin_Transferencias].[IdNumMovi_Ing_Egr_Inven_Origen] AS [IdNumMovi_Ing_Egr_Inven_Origen], 
+    [vwin_Transferencias].[IdEmpresa_Ing_Egr_Inven_Destino] AS [IdEmpresa_Ing_Egr_Inven_Destino], 
+    [vwin_Transferencias].[IdSucursal_Ing_Egr_Inven_Destino] AS [IdSucursal_Ing_Egr_Inven_Destino], 
+    [vwin_Transferencias].[IdNumMovi_Ing_Egr_Inven_Destino] AS [IdNumMovi_Ing_Egr_Inven_Destino], 
+    [vwin_Transferencias].[tr_fechaAnulacion] AS [tr_fechaAnulacion], 
+    [vwin_Transferencias].[tr_userAnulo] AS [tr_userAnulo], 
+    [vwin_Transferencias].[Codigo] AS [Codigo], 
+    [vwin_Transferencias].[IdMovi_inven_tipo_SucuOrig] AS [IdMovi_inven_tipo_SucuOrig], 
+    [vwin_Transferencias].[IdMovi_inven_tipo_SucuDest] AS [IdMovi_inven_tipo_SucuDest], 
+    [vwin_Transferencias].[IdEstadoAprobacion_cat] AS [IdEstadoAprobacion_cat], 
+    [vwin_Transferencias].[EstadoAprobacion_cat] AS [EstadoAprobacion_cat], 
+    [vwin_Transferencias].[IdEstadoAproba_ing] AS [IdEstadoAproba_ing], 
+    [vwin_Transferencias].[IdEstadoAproba_egr] AS [IdEstadoAproba_egr]
+    FROM [dbo].[vwin_Transferencias] AS [vwin_Transferencias]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_in_Catalogo_in_CatalogoTipo" Association="Self.FK_in_Catalogo_in_CatalogoTipo">
             <End Role="in_CatalogoTipo" EntitySet="in_CatalogoTipo" />
             <End Role="in_Catalogo" EntitySet="in_Catalogo" />
@@ -1600,6 +1682,7 @@
             <End Role="in_UnidadMedida" EntitySet="in_UnidadMedida" />
             <End Role="in_transferencia_det" EntitySet="in_transferencia_det" />
           </AssociationSet>
+          <EntitySet Name="vwin_Transferencias" EntityType="Model_inventario.vwin_Transferencias" />
           </EntityContainer>
         <EntityType Name="in_CatalogoTipo">
           <Key>
@@ -2863,6 +2946,53 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwin_Transferencias">
+          <Key>
+            <PropertyRef Name="SucuOrigen" />
+            <PropertyRef Name="BodegaORIG" />
+            <PropertyRef Name="SucuDEST" />
+            <PropertyRef Name="BodegDest" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursalOrigen" />
+            <PropertyRef Name="IdBodegaOrigen" />
+            <PropertyRef Name="IdTransferencia" />
+            <PropertyRef Name="IdSucursalDest" />
+            <PropertyRef Name="IdBodegaDest" />
+            <PropertyRef Name="tr_Observacion" />
+            <PropertyRef Name="tr_fecha" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="EstadoAprobacion_cat" />
+          </Key>
+          <Property Name="SucuOrigen" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="BodegaORIG" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="SucuDEST" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="BodegDest" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursalOrigen" Type="Int32" Nullable="false" />
+          <Property Name="IdBodegaOrigen" Type="Int32" Nullable="false" />
+          <Property Name="IdTransferencia" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdSucursalDest" Type="Int32" Nullable="false" />
+          <Property Name="IdBodegaDest" Type="Int32" Nullable="false" />
+          <Property Name="tr_Observacion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="tr_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa_Ing_Egr_Inven_Origen" Type="Int32" />
+          <Property Name="IdSucursal_Ing_Egr_Inven_Origen" Type="Int32" />
+          <Property Name="IdNumMovi_Ing_Egr_Inven_Origen" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa_Ing_Egr_Inven_Destino" Type="Int32" />
+          <Property Name="IdSucursal_Ing_Egr_Inven_Destino" Type="Int32" />
+          <Property Name="IdNumMovi_Ing_Egr_Inven_Destino" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="tr_fechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="tr_userAnulo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdMovi_inven_tipo_SucuOrig" Type="Int32" />
+          <Property Name="IdMovi_inven_tipo_SucuDest" Type="Int32" />
+          <Property Name="IdEstadoAprobacion_cat" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoAprobacion_cat" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstadoAproba_ing" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstadoAproba_egr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3357,6 +3487,41 @@
                 <ScalarProperty Name="IdBodegaOrigen" ColumnName="IdBodegaOrigen" />
                 <ScalarProperty Name="IdSucursalOrigen" ColumnName="IdSucursalOrigen" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwin_Transferencias">
+            <EntityTypeMapping TypeName="Model_inventario.vwin_Transferencias">
+              <MappingFragment StoreEntitySet="vwin_Transferencias">
+                <ScalarProperty Name="IdEstadoAproba_egr" ColumnName="IdEstadoAproba_egr" />
+                <ScalarProperty Name="IdEstadoAproba_ing" ColumnName="IdEstadoAproba_ing" />
+                <ScalarProperty Name="EstadoAprobacion_cat" ColumnName="EstadoAprobacion_cat" />
+                <ScalarProperty Name="IdEstadoAprobacion_cat" ColumnName="IdEstadoAprobacion_cat" />
+                <ScalarProperty Name="IdMovi_inven_tipo_SucuDest" ColumnName="IdMovi_inven_tipo_SucuDest" />
+                <ScalarProperty Name="IdMovi_inven_tipo_SucuOrig" ColumnName="IdMovi_inven_tipo_SucuOrig" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="tr_userAnulo" ColumnName="tr_userAnulo" />
+                <ScalarProperty Name="tr_fechaAnulacion" ColumnName="tr_fechaAnulacion" />
+                <ScalarProperty Name="IdNumMovi_Ing_Egr_Inven_Destino" ColumnName="IdNumMovi_Ing_Egr_Inven_Destino" />
+                <ScalarProperty Name="IdSucursal_Ing_Egr_Inven_Destino" ColumnName="IdSucursal_Ing_Egr_Inven_Destino" />
+                <ScalarProperty Name="IdEmpresa_Ing_Egr_Inven_Destino" ColumnName="IdEmpresa_Ing_Egr_Inven_Destino" />
+                <ScalarProperty Name="IdNumMovi_Ing_Egr_Inven_Origen" ColumnName="IdNumMovi_Ing_Egr_Inven_Origen" />
+                <ScalarProperty Name="IdSucursal_Ing_Egr_Inven_Origen" ColumnName="IdSucursal_Ing_Egr_Inven_Origen" />
+                <ScalarProperty Name="IdEmpresa_Ing_Egr_Inven_Origen" ColumnName="IdEmpresa_Ing_Egr_Inven_Origen" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="tr_fecha" ColumnName="tr_fecha" />
+                <ScalarProperty Name="tr_Observacion" ColumnName="tr_Observacion" />
+                <ScalarProperty Name="IdBodegaDest" ColumnName="IdBodegaDest" />
+                <ScalarProperty Name="IdSucursalDest" ColumnName="IdSucursalDest" />
+                <ScalarProperty Name="IdTransferencia" ColumnName="IdTransferencia" />
+                <ScalarProperty Name="IdBodegaOrigen" ColumnName="IdBodegaOrigen" />
+                <ScalarProperty Name="IdSucursalOrigen" ColumnName="IdSucursalOrigen" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="BodegDest" ColumnName="BodegDest" />
+                <ScalarProperty Name="SucuDEST" ColumnName="SucuDEST" />
+                <ScalarProperty Name="BodegaORIG" ColumnName="BodegaORIG" />
+                <ScalarProperty Name="SucuOrigen" ColumnName="SucuOrigen" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
