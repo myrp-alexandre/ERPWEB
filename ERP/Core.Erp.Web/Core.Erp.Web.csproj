@@ -8442,6 +8442,7 @@
     <Content Include="bower_DevExpress\globalize-1.3.0\src\.dist-jshintrc" />
     <Content Include="bower_DevExpress\globalize-1.3.0\src\.jshintrc" />
     <Content Include="Areas\ActivoFijo\Views\DepreciacionAF\Index.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_010.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
