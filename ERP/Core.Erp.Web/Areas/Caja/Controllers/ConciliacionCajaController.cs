@@ -147,6 +147,13 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             if (model == null) model = new Info.General.tb_persona_Info();
             return PartialView("_ComboBoxPartial_persona", model);
         }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_facturas()
+        {
+            var model = new object[0];
+            return PartialView("_GridViewPartial_facturas", model);
+        }
     }
 
     public class cp_conciliacion_Caja_det_List
