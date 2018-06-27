@@ -1622,6 +1622,12 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_011' does not have
           <Parameter Name="Fecha_fin" Type="datetime" Mode="In" />
           <Parameter Name="Mostrar_agrupado" Type="bit" Mode="In" />
         </Function>
+        <Function Name="SPCXP_008" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
+          <Parameter Name="idempresa" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="datetime" Mode="In" />
+          <Parameter Name="idProveedorIni" Type="decimal" Mode="In" />
+          <Parameter Name="idProveedorFIn" Type="decimal" Mode="In" />
+        </Function>
         <Function Name="SPINV_003" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="IdSucursal_ini" Type="int" Mode="In" />
@@ -2686,6 +2692,12 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_011' does not have
             <Parameter Name="Fecha_ini" Mode="In" Type="DateTime" />
             <Parameter Name="Fecha_fin" Mode="In" Type="DateTime" />
             <Parameter Name="Mostrar_agrupado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SPCXP_008" ReturnType="Collection(Model_reportes.SPCXP_008_Result)">
+            <Parameter Name="idempresa" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="idProveedorIni" Mode="In" Type="Decimal" />
+            <Parameter Name="idProveedorFIn" Mode="In" Type="Decimal" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Af_SPACTF_004_detalle">
@@ -4421,6 +4433,37 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_011' does not have
           <Property Type="String" Name="re_tipoRet" Nullable="true" MaxLength="3" />
           <Property Type="String" Name="Num_Autorizacion_OG" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="SPCXP_008_Result">
+          <Property Type="Int64" Name="IdRow" Nullable="false" />
+          <Property Type="Int32" Name="IdEmpresa" Nullable="true" />
+          <Property Type="Decimal" Name="IdCbteCble_Ogiro" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="IdTipoCbte_Ogiro" Nullable="true" />
+          <Property Type="String" Name="IdOrden_giro_Tipo" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="Documento" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="nom_tipo_doc" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="cod_tipo_doc" Nullable="false" MaxLength="10" />
+          <Property Type="Decimal" Name="IdProveedor" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="nom_proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="Double" Name="Valor_a_pagar" Nullable="false" />
+          <Property Type="Double" Name="MontoAplicado" Nullable="false" />
+          <Property Type="Double" Name="Saldo" Nullable="false" />
+          <Property Type="String" Name="Observacion" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="Ruc_Proveedor" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="representante_legal" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Tipo_cbte" Nullable="false" MaxLength="9" />
+          <Property Type="Int32" Name="Plazo_fact" Nullable="true" />
+          <Property Type="DateTime" Name="co_fechaOg" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="co_FechaFactura_vct" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Dias_Vcto" Nullable="true" />
+          <Property Type="DateTime" Name="Fecha_corte" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="x_Vencer" Nullable="false" />
+          <Property Type="Double" Name="Vencido" Nullable="false" />
+          <Property Type="Double" Name="Vencido_1_30" Nullable="false" />
+          <Property Type="Double" Name="Vencido_31_60" Nullable="false" />
+          <Property Type="Double" Name="Vencido_60_90" Nullable="false" />
+          <Property Type="Double" Name="Vencido_mayor_90" Nullable="false" />
+          <Property Type="Boolean" Name="en_conciliacion" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5665,6 +5708,41 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_011' does not have
                 <ScalarProperty Name="descripcion_cod_sri" ColumnName="descripcion_cod_sri" />
                 <ScalarProperty Name="re_tipoRet" ColumnName="re_tipoRet" />
                 <ScalarProperty Name="Num_Autorizacion_OG" ColumnName="Num_Autorizacion_OG" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPCXP_008" FunctionName="Model_reportes.Store.SPCXP_008">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_reportes.SPCXP_008_Result">
+                <ScalarProperty Name="IdRow" ColumnName="IdRow" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdCbteCble_Ogiro" ColumnName="IdCbteCble_Ogiro" />
+                <ScalarProperty Name="IdTipoCbte_Ogiro" ColumnName="IdTipoCbte_Ogiro" />
+                <ScalarProperty Name="IdOrden_giro_Tipo" ColumnName="IdOrden_giro_Tipo" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="nom_tipo_doc" ColumnName="nom_tipo_doc" />
+                <ScalarProperty Name="cod_tipo_doc" ColumnName="cod_tipo_doc" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="nom_proveedor" ColumnName="nom_proveedor" />
+                <ScalarProperty Name="Valor_a_pagar" ColumnName="Valor_a_pagar" />
+                <ScalarProperty Name="MontoAplicado" ColumnName="MontoAplicado" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Ruc_Proveedor" ColumnName="Ruc_Proveedor" />
+                <ScalarProperty Name="representante_legal" ColumnName="representante_legal" />
+                <ScalarProperty Name="Tipo_cbte" ColumnName="Tipo_cbte" />
+                <ScalarProperty Name="Plazo_fact" ColumnName="Plazo_fact" />
+                <ScalarProperty Name="co_fechaOg" ColumnName="co_fechaOg" />
+                <ScalarProperty Name="co_FechaFactura_vct" ColumnName="co_FechaFactura_vct" />
+                <ScalarProperty Name="Dias_Vcto" ColumnName="Dias_Vcto" />
+                <ScalarProperty Name="Fecha_corte" ColumnName="Fecha_corte" />
+                <ScalarProperty Name="x_Vencer" ColumnName="x_Vencer" />
+                <ScalarProperty Name="Vencido" ColumnName="Vencido" />
+                <ScalarProperty Name="Vencido_1_30" ColumnName="Vencido_1_30" />
+                <ScalarProperty Name="Vencido_31_60" ColumnName="Vencido_31_60" />
+                <ScalarProperty Name="Vencido_60_90" ColumnName="Vencido_60_90" />
+                <ScalarProperty Name="Vencido_mayor_90" ColumnName="Vencido_mayor_90" />
+                <ScalarProperty Name="en_conciliacion" ColumnName="en_conciliacion" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -417,5 +417,26 @@ namespace Core.Erp.Data
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPCXP_007_Result>("SPCXP_007", idEmpresaParameter, fecha_iniParameter, fecha_finParameter, mostrar_agrupadoParameter);
         }
+    
+        public virtual ObjectResult<SPCXP_008_Result> SPCXP_008(Nullable<int> idempresa, Nullable<System.DateTime> fecha, Nullable<decimal> idProveedorIni, Nullable<decimal> idProveedorFIn)
+        {
+            var idempresaParameter = idempresa.HasValue ?
+                new ObjectParameter("idempresa", idempresa) :
+                new ObjectParameter("idempresa", typeof(int));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            var idProveedorIniParameter = idProveedorIni.HasValue ?
+                new ObjectParameter("idProveedorIni", idProveedorIni) :
+                new ObjectParameter("idProveedorIni", typeof(decimal));
+    
+            var idProveedorFInParameter = idProveedorFIn.HasValue ?
+                new ObjectParameter("idProveedorFIn", idProveedorFIn) :
+                new ObjectParameter("idProveedorFIn", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPCXP_008_Result>("SPCXP_008", idempresaParameter, fechaParameter, idProveedorIniParameter, idProveedorFInParameter);
+        }
     }
 }
