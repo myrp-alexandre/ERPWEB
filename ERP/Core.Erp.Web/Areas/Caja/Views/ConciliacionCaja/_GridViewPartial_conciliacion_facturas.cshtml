@@ -38,23 +38,9 @@
         });
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(40);
             column.FieldName = "pe_nombreCompleto";
             column.Caption = "Proveedor";
-        });
-        settings.Columns.Add(column =>
-        {
-            column.Width = Unit.Percentage(10);
-            column.FieldName = "co_baseImponible";
-            column.Caption = "Subtotal";
-            column.PropertiesEdit.DisplayFormatString = "{0:N2}";
-        });
-        settings.Columns.Add(column =>
-        {
-            column.Width = Unit.Percentage(10);
-            column.FieldName = "co_valoriva";
-            column.Caption = "I.V.A.";
-            column.PropertiesEdit.DisplayFormatString = "{0:N2}";
         });
         settings.Columns.Add(column =>
         {
