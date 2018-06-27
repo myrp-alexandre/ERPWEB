@@ -382,6 +382,27 @@
           <Property Name="IdCtaCble_Gasto_x_cxp" Type="varchar" MaxLength="20" />
           <Property Name="IdCtaCble_Vta" Type="varchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="in_producto_x_tb_bodega_Costo_Historico">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdFecha" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdBodega" Type="int" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdFecha" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="costo" Type="float" Nullable="false" />
+          <Property Name="Stock_a_la_fecha" Type="float" Nullable="false" />
+          <Property Name="Observacion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fecha_trans" Type="datetime" />
+        </EntityType>
         <EntityType Name="in_ProductoTipo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1074,6 +1095,24 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencia
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_in_producto_x_tb_bodega_Costo_Historico_in_producto_x_tb_bodega">
+          <End Role="in_producto_x_tb_bodega" Type="Self.in_producto_x_tb_bodega" Multiplicity="1" />
+          <End Role="in_producto_x_tb_bodega_Costo_Historico" Type="Self.in_producto_x_tb_bodega_Costo_Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_producto_x_tb_bodega">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="in_producto_x_tb_bodega_Costo_Historico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_in_producto_x_tb_bodega_in_Producto">
           <End Role="in_Producto" Type="Self.in_Producto" Multiplicity="1" />
           <End Role="in_producto_x_tb_bodega" Type="Self.in_producto_x_tb_bodega" Multiplicity="*" />
@@ -1239,6 +1278,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencia
           <EntitySet Name="in_Producto" EntityType="Self.in_Producto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_Producto_Composicion" EntityType="Self.in_Producto_Composicion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_producto_x_tb_bodega" EntityType="Self.in_producto_x_tb_bodega" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="in_producto_x_tb_bodega_Costo_Historico" EntityType="Self.in_producto_x_tb_bodega_Costo_Historico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_ProductoTipo" EntityType="Self.in_ProductoTipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_subgrupo" EntityType="Self.in_subgrupo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_transferencia" EntityType="Self.in_transferencia" Schema="dbo" store:Type="Tables" />
@@ -1425,6 +1465,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencia
           <AssociationSet Name="FK_in_Producto_in_UnidadMedida1" Association="Self.FK_in_Producto_in_UnidadMedida1">
             <End Role="in_UnidadMedida" EntitySet="in_UnidadMedida" />
             <End Role="in_Producto" EntitySet="in_Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_producto_x_tb_bodega_Costo_Historico_in_producto_x_tb_bodega" Association="Self.FK_in_producto_x_tb_bodega_Costo_Historico_in_producto_x_tb_bodega">
+            <End Role="in_producto_x_tb_bodega" EntitySet="in_producto_x_tb_bodega" />
+            <End Role="in_producto_x_tb_bodega_Costo_Historico" EntitySet="in_producto_x_tb_bodega_Costo_Historico" />
           </AssociationSet>
           <AssociationSet Name="FK_in_producto_x_tb_bodega_in_Producto" Association="Self.FK_in_producto_x_tb_bodega_in_Producto">
             <End Role="in_Producto" EntitySet="in_Producto" />
@@ -1683,6 +1727,11 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencia
             <End Role="in_transferencia_det" EntitySet="in_transferencia_det" />
           </AssociationSet>
           <EntitySet Name="vwin_Transferencias" EntityType="Model_inventario.vwin_Transferencias" />
+          <EntitySet Name="in_producto_x_tb_bodega_Costo_Historico" EntityType="Model_inventario.in_producto_x_tb_bodega_Costo_Historico" />
+          <AssociationSet Name="FK_in_producto_x_tb_bodega_Costo_Historico_in_producto_x_tb_bodega" Association="Model_inventario.FK_in_producto_x_tb_bodega_Costo_Historico_in_producto_x_tb_bodega">
+            <End Role="in_producto_x_tb_bodega" EntitySet="in_producto_x_tb_bodega" />
+            <End Role="in_producto_x_tb_bodega_Costo_Historico" EntitySet="in_producto_x_tb_bodega_Costo_Historico" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="in_CatalogoTipo">
           <Key>
@@ -2627,6 +2676,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencia
           <Property Name="IdCtaCble_Gasto_x_cxp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdCtaCble_Vta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="in_Producto" Relationship="Model_inventario.FK_in_producto_x_tb_bodega_in_Producto" FromRole="in_producto_x_tb_bodega" ToRole="in_Producto" />
+          <NavigationProperty Name="in_producto_x_tb_bodega_Costo_Historico" Relationship="Model_inventario.FK_in_producto_x_tb_bodega_Costo_Historico_in_producto_x_tb_bodega" FromRole="in_producto_x_tb_bodega" ToRole="in_producto_x_tb_bodega_Costo_Historico" />
         </EntityType>
         <Association Name="FK_in_producto_x_tb_bodega_in_Producto">
           <End Type="Model_inventario.in_Producto" Role="in_Producto" Multiplicity="1" />
@@ -2993,6 +3043,46 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencia
           <Property Name="IdEstadoAproba_ing" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="IdEstadoAproba_egr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="in_producto_x_tb_bodega_Costo_Historico">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdFecha" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdFecha" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="costo" Type="Double" Nullable="false" />
+          <Property Name="Stock_a_la_fecha" Type="Double" Nullable="false" />
+          <Property Name="Observacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_trans" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="in_producto_x_tb_bodega" Relationship="Model_inventario.FK_in_producto_x_tb_bodega_Costo_Historico_in_producto_x_tb_bodega" FromRole="in_producto_x_tb_bodega_Costo_Historico" ToRole="in_producto_x_tb_bodega" />
+        </EntityType>
+        <Association Name="FK_in_producto_x_tb_bodega_Costo_Historico_in_producto_x_tb_bodega">
+          <End Type="Model_inventario.in_producto_x_tb_bodega" Role="in_producto_x_tb_bodega" Multiplicity="1" />
+          <End Type="Model_inventario.in_producto_x_tb_bodega_Costo_Historico" Role="in_producto_x_tb_bodega_Costo_Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_producto_x_tb_bodega">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="in_producto_x_tb_bodega_Costo_Historico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3522,6 +3612,23 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencia
                 <ScalarProperty Name="SucuDEST" ColumnName="SucuDEST" />
                 <ScalarProperty Name="BodegaORIG" ColumnName="BodegaORIG" />
                 <ScalarProperty Name="SucuOrigen" ColumnName="SucuOrigen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="in_producto_x_tb_bodega_Costo_Historico">
+            <EntityTypeMapping TypeName="Model_inventario.in_producto_x_tb_bodega_Costo_Historico">
+              <MappingFragment StoreEntitySet="in_producto_x_tb_bodega_Costo_Historico">
+                <ScalarProperty Name="fecha_trans" ColumnName="fecha_trans" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Stock_a_la_fecha" ColumnName="Stock_a_la_fecha" />
+                <ScalarProperty Name="costo" ColumnName="costo" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdFecha" ColumnName="IdFecha" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

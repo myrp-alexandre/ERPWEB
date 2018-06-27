@@ -48,5 +48,6 @@ namespace Core.Erp.Data
         public virtual DbSet<in_transferencia> in_transferencia { get; set; }
         public virtual DbSet<in_transferencia_det> in_transferencia_det { get; set; }
         public virtual DbSet<vwin_Transferencias> vwin_Transferencias { get; set; }
+        public virtual DbSet<in_producto_x_tb_bodega_Costo_Historico> in_producto_x_tb_bodega_Costo_Historico { get; set; }
     }
 }

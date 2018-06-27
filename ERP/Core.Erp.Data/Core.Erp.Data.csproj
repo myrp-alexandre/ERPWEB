@@ -378,6 +378,7 @@
     <Compile Include="Inventario\in_ProductoTipo_Data.cs" />
     <Compile Include="Inventario\in_Producto_Composicion_Data.cs" />
     <Compile Include="Inventario\in_Producto_Data.cs" />
+    <Compile Include="Inventario\in_producto_x_tb_bodega_Costo_Historico_Data.cs" />
     <Compile Include="Inventario\in_subgrupo_Data.cs" />
     <Compile Include="Inventario\in_transferencia_Data.cs" />
     <Compile Include="Inventario\in_transferencia_det_Data.cs" />
@@ -432,6 +433,9 @@
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
     <Compile Include="in_producto_x_tb_bodega.cs">
+      <DependentUpon>Model_inventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="in_producto_x_tb_bodega_Costo_Historico.cs">
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
     <Compile Include="in_subgrupo.cs">

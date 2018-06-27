@@ -14,6 +14,12 @@ namespace Core.Erp.Data
     
     public partial class in_producto_x_tb_bodega
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public in_producto_x_tb_bodega()
+        {
+            this.in_producto_x_tb_bodega_Costo_Historico = new HashSet<in_producto_x_tb_bodega_Costo_Historico>();
+        }
+    
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public int IdBodega { get; set; }
@@ -24,5 +30,7 @@ namespace Core.Erp.Data
         public string IdCtaCble_Vta { get; set; }
     
         public virtual in_Producto in_Producto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_producto_x_tb_bodega_Costo_Historico> in_producto_x_tb_bodega_Costo_Historico { get; set; }
     }
 }
