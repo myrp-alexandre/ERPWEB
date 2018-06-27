@@ -1,0 +1,24 @@
+﻿@using System.Web.UI.WebControls;
+@Html.DevExpress().ComboBox(
+    settings =>
+    {
+        settings.Name = "IdPersona";
+        settings.Width = Unit.Percentage(100);
+        settings.Properties.DropDownWidth = 350;
+        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+        settings.CallbackRouteValues = new { Controller = "Persona", Action = "ComboBoxPartial_persona", Area = "General" };
+        settings.Properties.CallbackPageSize = 15;
+        settings.Properties.TextField = "pe_nombreCompleto";
+        settings.Properties.TextFormatString = "{0} {1} {2}";
+        settings.Properties.ValueField = "ID";
+        settings.Properties.ValueType = typeof(int);
+        settings.Properties.FilterMinLength = 2;
+
+        settings.Properties.Columns.Add("FirstName", "FirstName", 90);
+        settings.Properties.Columns.Add("LastName", "LastName", 90);
+        settings.Properties.Columns.Add("Phone", "Phone", Unit.Percentage(100));
+
+        settings.Properties.ClientSideEvents.BeginCallback = "OnStartCallback";
+        settings.Properties.ClientSideEvents.EndCallback = "OnEndCallback";
+    }
+).BindList(LargeDatabaseDataProvider.GetPersonsRange, LargeDatabaseDataProvider.GetPersonByID).GetHtml()
