@@ -69,6 +69,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         public ActionResult Nuevo()
         {
+            Session["in_Ing_Egr_Inven_det_Info"] = null;
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_parametro_Info i_param = bus_in_param.get_info(IdEmpresa);
             if (i_param == null)

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Info.Inventario;
+using System.ComponentModel.DataAnnotations;
+
 namespace Core.Erp.Info.Inventario
 {
   public  class in_transferencia_Info
@@ -15,6 +17,8 @@ namespace Core.Erp.Info.Inventario
         public string Codigo { get; set; }
         public int IdSucursalDest { get; set; }
         public int IdBodegaDest { get; set; }
+        [Required(ErrorMessage = ("El campo observación es obligatorio"))]
+        [StringLength(1000, MinimumLength = 1, ErrorMessage = ("El campo descripción debe tener mínimo 1 caracter máximo 1000"))]
         public string tr_Observacion { get; set; }
         public System.DateTime tr_fecha { get; set; }
         public Nullable<int> IdEmpresa_Ing_Egr_Inven_Origen { get; set; }

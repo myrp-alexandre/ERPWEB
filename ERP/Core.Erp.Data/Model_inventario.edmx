@@ -1261,6 +1261,13 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencia
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spINV_aprobacion_ing_egr" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdSucursal" Type="int" Mode="In" />
+          <Parameter Name="IdBodega" Type="int" Mode="In" />
+          <Parameter Name="IdMovi_inven_tipo" Type="int" Mode="In" />
+          <Parameter Name="IdNumMovi" Type="numeric" Mode="In" />
+        </Function>
         <EntityContainer Name="Model_inventarioStoreContainer">
           <EntitySet Name="in_Catalogo" EntityType="Self.in_Catalogo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_CatalogoTipo" EntityType="Self.in_CatalogoTipo" Schema="dbo" store:Type="Tables" />
@@ -1732,6 +1739,13 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencia
             <End Role="in_producto_x_tb_bodega" EntitySet="in_producto_x_tb_bodega" />
             <End Role="in_producto_x_tb_bodega_Costo_Historico" EntitySet="in_producto_x_tb_bodega_Costo_Historico" />
           </AssociationSet>
+          <FunctionImport Name="spINV_aprobacion_ing_egr">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
+            <Parameter Name="IdBodega" Mode="In" Type="Int32" />
+            <Parameter Name="IdMovi_inven_tipo" Mode="In" Type="Int32" />
+            <Parameter Name="IdNumMovi" Mode="In" Type="Decimal" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="in_CatalogoTipo">
           <Key>
@@ -3632,6 +3646,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencia
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spINV_aprobacion_ing_egr" FunctionName="Model_inventario.Store.spINV_aprobacion_ing_egr" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

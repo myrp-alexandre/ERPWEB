@@ -11,6 +11,7 @@ namespace Core.Erp.Bus.Inventario
     public class in_Ing_Egr_Inven_Bus
     {
         in_Ing_Egr_Inven_Data odata = new in_Ing_Egr_Inven_Data();
+        in_Ing_Egr_Inven_det_Data odata_det = new in_Ing_Egr_Inven_det_Data();
     
         public List<in_Ing_Egr_Inven_Info> get_list(int IdEmpresa,  string signo, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
         {
@@ -55,7 +56,9 @@ namespace Core.Erp.Bus.Inventario
         {
             try
             {
-                return odata.modificarDB(info);
+                if (odata_det.eliminarDB(info.IdEmpresa, info.IdSucursal, info.IdMovi_inven_tipo, info.IdNumMovi))
+                    odata.modificarDB(info);
+                return true;
             }
             catch (Exception)
             {

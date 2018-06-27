@@ -12,6 +12,8 @@ namespace Core.Erp.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Entities_inventario : DbContext
     {
@@ -49,5 +51,30 @@ namespace Core.Erp.Data
         public virtual DbSet<in_transferencia_det> in_transferencia_det { get; set; }
         public virtual DbSet<vwin_Transferencias> vwin_Transferencias { get; set; }
         public virtual DbSet<in_producto_x_tb_bodega_Costo_Historico> in_producto_x_tb_bodega_Costo_Historico { get; set; }
+    
+        public virtual int spINV_aprobacion_ing_egr(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idBodega, Nullable<int> idMovi_inven_tipo, Nullable<decimal> idNumMovi)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idSucursalParameter = idSucursal.HasValue ?
+                new ObjectParameter("IdSucursal", idSucursal) :
+                new ObjectParameter("IdSucursal", typeof(int));
+    
+            var idBodegaParameter = idBodega.HasValue ?
+                new ObjectParameter("IdBodega", idBodega) :
+                new ObjectParameter("IdBodega", typeof(int));
+    
+            var idMovi_inven_tipoParameter = idMovi_inven_tipo.HasValue ?
+                new ObjectParameter("IdMovi_inven_tipo", idMovi_inven_tipo) :
+                new ObjectParameter("IdMovi_inven_tipo", typeof(int));
+    
+            var idNumMoviParameter = idNumMovi.HasValue ?
+                new ObjectParameter("IdNumMovi", idNumMovi) :
+                new ObjectParameter("IdNumMovi", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spINV_aprobacion_ing_egr", idEmpresaParameter, idSucursalParameter, idBodegaParameter, idMovi_inven_tipoParameter, idNumMoviParameter);
+        }
     }
 }

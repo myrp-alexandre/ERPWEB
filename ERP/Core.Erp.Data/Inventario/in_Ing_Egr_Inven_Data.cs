@@ -131,6 +131,8 @@ namespace Core.Erp.Data.Inventario
         {
             try
             {
+
+                int sec = 1;
                 using (Entities_inventario Context = new Entities_inventario())
                 {
                     in_Ing_Egr_Inven Entity = new in_Ing_Egr_Inven
@@ -152,11 +154,57 @@ namespace Core.Erp.Data.Inventario
                         Fecha_Transac = DateTime.Now
                     };
                     Context.in_Ing_Egr_Inven.Add(Entity);
+
+                    foreach (var item in info.lst_in_Ing_Egr_Inven_det)
+                    {
+                        in_Ing_Egr_Inven_det entity_det = new in_Ing_Egr_Inven_det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
+                            IdMovi_inven_tipo = info.IdMovi_inven_tipo,
+                            IdNumMovi = info.IdNumMovi,
+                            Secuencia = sec,
+                            IdBodega =(int) info.IdBodega,
+                            IdProducto = item.IdProducto,
+
+                            IdCentroCosto = item.IdCentroCosto,
+                            IdCentroCosto_sub_centro_costo = item.IdCentroCosto_sub_centro_costo,
+                            IdPunto_cargo = item.IdPunto_cargo,
+                            IdPunto_cargo_grupo = item.IdPunto_cargo_grupo,
+
+                            dm_observacion = item.dm_observacion,
+                            IdMotivo_Inv = item.IdMotivo_Inv,
+                            IdEstadoAproba = item.IdEstadoAproba,
+                            Motivo_Aprobacion = item.Motivo_Aprobacion,
+
+                            IdEmpresa_oc = item.IdEmpresa_oc,
+                            IdSucursal_oc = item.IdSucursal_oc,
+                            IdOrdenCompra = item.IdOrdenCompra,
+                            Secuencia_oc = item.Secuencia_oc,
+
+                            IdEmpresa_inv = item.IdEmpresa_inv,
+                            IdSucursal_inv = item.IdSucursal_inv,
+                            IdBodega_inv = item.IdBodega_inv,
+                            IdMovi_inven_tipo_inv = item.IdMovi_inven_tipo_inv,
+                            IdNumMovi_inv = item.IdNumMovi_inv,
+                            secuencia_inv = item.secuencia_inv,
+
+                            dm_cantidad_sinConversion = item.dm_cantidad_sinConversion,
+                            dm_cantidad = item.dm_cantidad ,
+                            IdUnidadMedida_sinConversion = item.IdUnidadMedida_sinConversion,
+                            IdUnidadMedida  = item.IdUnidadMedida_sinConversion,
+                            mv_costo_sinConversion = item.mv_costo_sinConversion,
+                            mv_costo =(double) item.mv_costo_sinConversion,
+
+                        };
+                        Context.in_Ing_Egr_Inven_det.Add(entity_det);
+                        sec++;
+                    }
                     Context.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception EX)
             {
 
                 throw;
@@ -167,6 +215,7 @@ namespace Core.Erp.Data.Inventario
         {
             try
             {
+                int sec = 1;
                 using (Entities_inventario Context = new Entities_inventario())
                 {
                     in_Ing_Egr_Inven Entity = Context.in_Ing_Egr_Inven.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdMovi_inven_tipo == info.IdMovi_inven_tipo && q.IdNumMovi == info.IdNumMovi);
@@ -178,13 +227,61 @@ namespace Core.Erp.Data.Inventario
                     Entity.IdResponsable = info.IdResponsable;
                     Entity.IdMotivo_Inv = info.IdMotivo_Inv;
                     Entity.IdBodega = info.IdBodega;
-
                     Entity.IdUsuarioUltModi = info.IdUsuarioUltModi;
                     Entity.Fecha_UltMod = DateTime.Now;
-                    Context.SaveChanges();
-                }
-                return true;
 
+
+                    foreach (var item in info.lst_in_Ing_Egr_Inven_det)
+                    {
+                        in_Ing_Egr_Inven_det entity_det = new in_Ing_Egr_Inven_det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
+                            IdMovi_inven_tipo = info.IdMovi_inven_tipo,
+                            IdNumMovi = info.IdNumMovi,
+                            Secuencia = sec,
+                            IdBodega = (int)info.IdBodega,
+                            IdProducto = item.IdProducto,
+
+                            IdCentroCosto = item.IdCentroCosto,
+                            IdCentroCosto_sub_centro_costo = item.IdCentroCosto_sub_centro_costo,
+                            IdPunto_cargo = item.IdPunto_cargo,
+                            IdPunto_cargo_grupo = item.IdPunto_cargo_grupo,
+
+                            dm_observacion = item.dm_observacion,
+                            IdMotivo_Inv = item.IdMotivo_Inv,
+                            IdEstadoAproba = item.IdEstadoAproba,
+                            Motivo_Aprobacion = item.Motivo_Aprobacion,
+
+                            IdEmpresa_oc = item.IdEmpresa_oc,
+                            IdSucursal_oc = item.IdSucursal_oc,
+                            IdOrdenCompra = item.IdOrdenCompra,
+                            Secuencia_oc = item.Secuencia_oc,
+
+                            IdEmpresa_inv = item.IdEmpresa_inv,
+                            IdSucursal_inv = item.IdSucursal_inv,
+                            IdBodega_inv = item.IdBodega_inv,
+                            IdMovi_inven_tipo_inv = item.IdMovi_inven_tipo_inv,
+                            IdNumMovi_inv = item.IdNumMovi_inv,
+                            secuencia_inv = item.secuencia_inv,
+
+                            dm_cantidad_sinConversion = item.dm_cantidad_sinConversion,
+                            dm_cantidad = item.dm_cantidad,
+                            IdUnidadMedida_sinConversion = item.IdUnidadMedida_sinConversion,
+                            IdUnidadMedida = item.IdUnidadMedida_sinConversion,
+                            mv_costo_sinConversion = item.mv_costo_sinConversion,
+                            mv_costo = (double)item.mv_costo_sinConversion,
+
+                        };
+                        Context.in_Ing_Egr_Inven_det.Add(entity_det);
+                        sec++;
+
+
+                        Context.SaveChanges();
+                    }
+                    return true;
+
+                }
             }
             catch (Exception)
             {

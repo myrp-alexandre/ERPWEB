@@ -9,7 +9,8 @@ namespace Core.Erp.Bus.Inventario
 {
    public class in_transferencia_Bus
     {
-       in_transferencia_Data odata = new in_transferencia_Data();
+        in_transferencia_Data odata = new in_transferencia_Data();
+        in_Ing_Egr_Inven_Bus bus_ingreso = new in_Ing_Egr_Inven_Bus();
         in_producto_x_tb_bodega_Costo_Historico_Bus bus_costo = new in_producto_x_tb_bodega_Costo_Historico_Bus();
         public List<in_transferencia_Info> get_list(int IdEmpresa)
         {
@@ -40,7 +41,15 @@ namespace Core.Erp.Bus.Inventario
         {
             try
             {
-                return odata.guardarDB(info);
+                if (odata.guardarDB(info))
+                {
+                    get_info_ing_egr(info);
+                    bus_ingreso.guardarDB(info.info_ingreso);
+                    bus_ingreso.guardarDB(info.info_egreso);
+                }
+
+
+                return true;
             }
             catch (Exception)
             {
@@ -107,7 +116,7 @@ namespace Core.Erp.Bus.Inventario
                 egreso.nom_pc = info.nom_pc;
                 egreso.ip = info.ip;
                 egreso.Fecha_Transac = info.tr_fecha;
-                egreso.signo = "+";
+                egreso.signo = "-";
                 egreso.IdSucursal = info.IdSucursalDest;
                 egreso.IdBodega = info.IdBodegaDest;
                 egreso.cm_observacion = "Egreso x Trans."  + info.tr_Observacion;
@@ -146,6 +155,7 @@ namespace Core.Erp.Bus.Inventario
                     info.dm_cantidad = item.dt_cantidad;
                     info.dm_observacion = item.tr_Observacion;
                     info.mv_costo = costo;
+                    info.mv_costo_sinConversion = costo;
                     info.dm_cantidad_sinConversion = item.dt_cantidad;
                     info.dm_cantidad = item.dt_cantidad;
                     info.IdUnidadMedida = item.IdUnidadMedida;

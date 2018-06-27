@@ -82,7 +82,7 @@ namespace Core.Erp.Data.Inventario
                     contex.in_transferencia.Add(address);
 
 
-                    foreach (var item in info.list_detalle)
+                    foreach (var item in info.list_detalle)//guardando detalle de transferencia
                     {
                         in_transferencia_det addressDeta = new in_transferencia_det
                         {
