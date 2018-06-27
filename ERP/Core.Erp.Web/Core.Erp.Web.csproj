@@ -527,6 +527,12 @@
     <Compile Include="Reportes\CuentasPorPagar\CXP_006_Rpt.Designer.cs">
       <DependentUpon>CXP_006_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\CuentasPorPagar\CXP_007_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorPagar\CXP_007_Rpt.Designer.cs">
+      <DependentUpon>CXP_007_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Inventario\INV_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
