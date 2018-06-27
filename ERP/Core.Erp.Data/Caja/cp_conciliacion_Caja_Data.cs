@@ -258,7 +258,7 @@ namespace Core.Erp.Data.Caja
                                 DebCre = "C",
                                 IdTipoNota = cl_enumeradores.eTipoNotaCXP.T_TIP_NOTA_INT.ToString(),
                                 IdProveedor = item.idEntidad,
-                                IdSucursal = item.idSucursal,
+                                IdSucursal = Convert.ToInt32(item.idSucursal),
                                 cn_fecha = op.Fecha_Pago,
                                 Fecha_contable = op.Fecha_Pago,
                                 cn_Fecha_vcto = op.Fecha_Pago,
