@@ -25,10 +25,16 @@ namespace Core.Erp.Info.Caja
         #region Campos que no existen en la tabla
         public decimal IdPersona { get; set; }
         public decimal idEntidad { get; set; }
-        public int idSucursal { get; set; }
+        public int? idSucursal { get; set; }
         public double por_iva { get; set; }
-        public string IdCtaCble_cxp { get; private set; }
-        public string Observacion { get; private set; }
+        public string IdCtaCble_cxp { get; set; }
+        public string Observacion { get; set; }
+        public string co_factura { get; set; }
+        public System.DateTime co_FechaFactura { get; set; }
+        public double co_valoriva { get; set; }
+        public double co_total { get; set; }
+        public double co_valorpagar { get; set; }
+        public Nullable<double> Saldo_OG { get; set; }
         #endregion
 
     }

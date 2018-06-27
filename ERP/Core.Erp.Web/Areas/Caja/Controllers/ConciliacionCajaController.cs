@@ -149,10 +149,11 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_facturas()
+        public ActionResult GridViewPartial_conciliacion_facturas()
         {
-            var model = new object[0];
-            return PartialView("_GridViewPartial_facturas", model);
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            var model = bus_det.get_list_x_pagar(IdEmpresa);
+            return PartialView("_GridViewPartial_conciliacion_facturas", model);
         }
     }
 

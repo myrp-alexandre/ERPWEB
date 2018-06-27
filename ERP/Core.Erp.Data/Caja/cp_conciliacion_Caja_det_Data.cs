@@ -44,5 +44,48 @@ namespace Core.Erp.Data.Caja
                 throw;
             }
         }        
+
+        public List<cp_conciliacion_Caja_det_Info> get_list_x_pagar(int IdEmpresa)
+        {
+            try
+            {
+                List<cp_conciliacion_Caja_det_Info> Lista;
+
+                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
+                {
+                    Lista = (from q in Context.vwcp_orden_giro_x_pagar
+                             where q.IdEmpresa == IdEmpresa
+                             && q.en_conci_caja == true
+                             && q.Saldo_OG > 0
+                             select new cp_conciliacion_Caja_det_Info
+                             {
+                                 IdEmpresa_OGiro = q.IdEmpresa,
+                                 IdTipoCbte_Ogiro = q.IdTipoCbte_Ogiro,
+                                 IdCbteCble_Ogiro = q.IdCbteCble_Ogiro,
+                                 IdPersona = q.IdPersona,
+                                 idEntidad = q.IdProveedor,
+                                 idSucursal = q.IdSucursal,
+                                 por_iva = q.co_Por_iva,
+                                 Observacion = q.co_observacion,
+                                 co_factura = q.co_factura,
+                                 co_FechaFactura = q.co_FechaFactura,
+                                 co_valoriva = q.co_valoriva,
+                                 co_total = q.co_total,
+                                 co_valorpagar = q.co_valorpagar,
+                                 Saldo_OG = q.Saldo_OG,
+                                 Tipo_documento = q.cod_Documento
+                             }).ToList();
+
+                    Lista.ForEach(q => q.Valor_a_aplicar = Convert.ToDecimal(q.Saldo_OG));
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -21,6 +21,8 @@ namespace Core.Erp.Bus.Caja
             }
         }
 
+        
+
         public bool guardarDB(caj_Caja_Movimiento_det_Info info)
         {
             try

@@ -21,5 +21,18 @@ namespace Core.Erp.Bus.Caja
                 throw;
             }
         }
+
+        public List<cp_conciliacion_Caja_det_Info> get_list_x_pagar(int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_list_x_pagar(IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
