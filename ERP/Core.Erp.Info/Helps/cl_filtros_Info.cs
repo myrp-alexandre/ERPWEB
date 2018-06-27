@@ -38,6 +38,8 @@ namespace Core.Erp.Info.Helps
         public string IdUsuario { get; set; }
         #endregion
 
+       
+
         public cl_filtros_Info()
         {
             fecha_ini = DateTime.Now.Date.AddMonths(-1);

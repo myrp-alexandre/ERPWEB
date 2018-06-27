@@ -56,7 +56,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
-        public ActionResult CXP_005(int IdEmpresa = 0,  decimal IdConciliacion = 0)
+        public ActionResult CXP_005( decimal IdConciliacion = 0)
         {
             CXP_005_Rpt model = new CXP_005_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
@@ -67,7 +67,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
-        public ActionResult CXP_006(int IdEmpresa = 0, decimal IdRetencion = 0)
+        public ActionResult CXP_006( decimal IdRetencion = 0)
         {
             CXP_006_Rpt model = new CXP_006_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
@@ -75,6 +75,18 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
             if (IdRetencion == 0)
+                model.RequestParameters = false;
+            return View(model);
+        }
+        public ActionResult CXP_007( DateTime? fecha_ini, DateTime? fecha_fin, bool Mostrar_agrupado = false)
+        {
+            CXP_007_Rpt model = new CXP_007_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_fecha_ini.Value = fecha_ini;
+            model.p_fecha_fin.Value = fecha_fin;
+            model.p_Mostrar_agrupado.Value = Mostrar_agrupado;
+            model.usuario = Session["IdUsuario"].ToString();
+            model.empresa = Session["nom_empresa"].ToString();
                 model.RequestParameters = false;
             return View(model);
         }
