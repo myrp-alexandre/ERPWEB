@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Core.Erp.Data.Reportes.CuentasPorPagar;
+using Core.Erp.Info.Reportes.CuentasPorPagar;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,21 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Reportes.CuentasPorPagar
 {
-    class CXP_008_Bus
+    public class CXP_008_Bus
     {
+        CXP_008_Data odata = new CXP_008_Data();
+    
+        public List<CXP_008_Info> get_list(int IdEmpresa, DateTime fecha, decimal IdProveedor)
+        {
+            try
+            {
+                return odata.get_list(IdEmpresa, fecha, IdProveedor);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
