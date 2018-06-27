@@ -12,7 +12,7 @@ namespace Core.Erp.Bus.Reportes.CuentasPorPagar
     {
         CXP_008_Data odata = new CXP_008_Data();
     
-        public List<CXP_008_Info> get_list(int IdEmpresa, DateTime fecha, decimal IdProveedor)
+        public List<CXP_008_Info> get_list(int IdEmpresa, DateTime fecha, decimal IdProveedor, bool no_mostrar_en_conciliacion, bool no_mostrar_saldo_0)
         {
             try
             {
