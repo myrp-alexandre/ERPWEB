@@ -5,11 +5,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Info.Helps;
+using DevExpress.Web;
 
 namespace Core.Erp.Data.General
 {
     public class tb_persona_Data
     {
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<tb_persona_Info> Lista = new List<tb_persona_Info>();
+            using (Entities_general Context = new Entities_general())
+            {
+                var lst = (from q in Context.tb_persona
+                           where q.pe_nombreCompleto.StartsWith(args.Filter)
+                           orderby q.pe_nombreCompleto
+                           select q).Skip(skip).Take(take);
+
+                foreach (var item in lst)
+                {
+                    tb_persona_Info info = new tb_persona_Info
+                    {
+                        IdPersona = item.IdPersona,
+                        pe_nombreCompleto = item.pe_nombreCompleto
+                    };
+                    Lista.Add(info);
+                }
+            }
+
+            return Lista;
+        }
+
         public List<tb_persona_Info> get_list(bool mostrar_anulados)
         {
             try
