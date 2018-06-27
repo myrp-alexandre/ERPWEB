@@ -863,6 +863,66 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_006_diario' does n
           <Property Name="dc_Valor_Haber" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_007' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VWCXP_007">
+          <Key>
+            <PropertyRef Name="IdRow" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte_Ogiro" />
+            <PropertyRef Name="IdCbteCble_Ogiro" />
+            <PropertyRef Name="IdOrden_giro_Tipo" />
+            <PropertyRef Name="Codigo" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="IdProveedor" />
+            <PropertyRef Name="pr_nombre" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="subtotal_iva" />
+            <PropertyRef Name="subtotal_sin_iva" />
+            <PropertyRef Name="valor_iva" />
+            <PropertyRef Name="Documento" />
+          </Key>
+          <Property Name="IdRow" Type="bigint" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte_Ogiro" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble_Ogiro" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdOrden_giro_Tipo" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="IdProveedor" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pr_nombre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="serie_fact" Type="varchar" MaxLength="21" />
+          <Property Name="num_factura" Type="varchar" MaxLength="50" />
+          <Property Name="co_FechaFactura" Type="datetime" />
+          <Property Name="subtotal_iva" Type="float" Nullable="false" />
+          <Property Name="subtotal_sin_iva" Type="float" Nullable="false" />
+          <Property Name="valor_iva" Type="float" Nullable="false" />
+          <Property Name="NAutorizacion" Type="varchar" MaxLength="150" />
+          <Property Name="serie_ret" Type="varchar" MaxLength="7" />
+          <Property Name="NumRetencion" Type="varchar" MaxLength="20" />
+          <Property Name="re_baseRetencion" Type="float" />
+          <Property Name="re_Porcen_retencion" Type="float" />
+          <Property Name="re_valor_retencion" Type="float" />
+          <Property Name="re_Codigo_impuesto" Type="varchar" MaxLength="50" />
+          <Property Name="RIVA_0" Type="float" />
+          <Property Name="RIVA_10" Type="float" />
+          <Property Name="RIVA_20" Type="float" />
+          <Property Name="RIVA_30" Type="float" />
+          <Property Name="RIVA_70" Type="float" />
+          <Property Name="RIVA_100" Type="float" />
+          <Property Name="RTF_0" Type="float" />
+          <Property Name="RTF_0_1" Type="float" />
+          <Property Name="RTF_1" Type="float" />
+          <Property Name="RTF_2" Type="float" />
+          <Property Name="RTF_8" Type="float" />
+          <Property Name="RTF_10" Type="float" />
+          <Property Name="RTF_100" Type="float" />
+          <Property Name="Documento" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="descripcion_cod_sri" Type="varchar" MaxLength="350" />
+          <Property Name="re_tipoRet" Type="char" MaxLength="3" />
+          <Property Name="Num_Autorizacion_OG" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWINV_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWINV_001">
           <Key>
@@ -2130,6 +2190,50 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_011' does not have
     [VWCXP_006_diario].[dc_Valor_Haber] AS [dc_Valor_Haber]
     FROM [web].[VWCXP_006_diario] AS [VWCXP_006_diario]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VWCXP_007" EntityType="Self.VWCXP_007" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWCXP_007].[IdRow] AS [IdRow], 
+    [VWCXP_007].[IdEmpresa] AS [IdEmpresa], 
+    [VWCXP_007].[IdTipoCbte_Ogiro] AS [IdTipoCbte_Ogiro], 
+    [VWCXP_007].[IdCbteCble_Ogiro] AS [IdCbteCble_Ogiro], 
+    [VWCXP_007].[IdOrden_giro_Tipo] AS [IdOrden_giro_Tipo], 
+    [VWCXP_007].[Codigo] AS [Codigo], 
+    [VWCXP_007].[Descripcion] AS [Descripcion], 
+    [VWCXP_007].[IdProveedor] AS [IdProveedor], 
+    [VWCXP_007].[pr_nombre] AS [pr_nombre], 
+    [VWCXP_007].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [VWCXP_007].[serie_fact] AS [serie_fact], 
+    [VWCXP_007].[num_factura] AS [num_factura], 
+    [VWCXP_007].[co_FechaFactura] AS [co_FechaFactura], 
+    [VWCXP_007].[subtotal_iva] AS [subtotal_iva], 
+    [VWCXP_007].[subtotal_sin_iva] AS [subtotal_sin_iva], 
+    [VWCXP_007].[valor_iva] AS [valor_iva], 
+    [VWCXP_007].[NAutorizacion] AS [NAutorizacion], 
+    [VWCXP_007].[serie_ret] AS [serie_ret], 
+    [VWCXP_007].[NumRetencion] AS [NumRetencion], 
+    [VWCXP_007].[re_baseRetencion] AS [re_baseRetencion], 
+    [VWCXP_007].[re_Porcen_retencion] AS [re_Porcen_retencion], 
+    [VWCXP_007].[re_valor_retencion] AS [re_valor_retencion], 
+    [VWCXP_007].[re_Codigo_impuesto] AS [re_Codigo_impuesto], 
+    [VWCXP_007].[RIVA_0] AS [RIVA_0], 
+    [VWCXP_007].[RIVA_10] AS [RIVA_10], 
+    [VWCXP_007].[RIVA_20] AS [RIVA_20], 
+    [VWCXP_007].[RIVA_30] AS [RIVA_30], 
+    [VWCXP_007].[RIVA_70] AS [RIVA_70], 
+    [VWCXP_007].[RIVA_100] AS [RIVA_100], 
+    [VWCXP_007].[RTF_0] AS [RTF_0], 
+    [VWCXP_007].[RTF_0_1] AS [RTF_0_1], 
+    [VWCXP_007].[RTF_1] AS [RTF_1], 
+    [VWCXP_007].[RTF_2] AS [RTF_2], 
+    [VWCXP_007].[RTF_8] AS [RTF_8], 
+    [VWCXP_007].[RTF_10] AS [RTF_10], 
+    [VWCXP_007].[RTF_100] AS [RTF_100], 
+    [VWCXP_007].[Documento] AS [Documento], 
+    [VWCXP_007].[descripcion_cod_sri] AS [descripcion_cod_sri], 
+    [VWCXP_007].[re_tipoRet] AS [re_tipoRet], 
+    [VWCXP_007].[Num_Autorizacion_OG] AS [Num_Autorizacion_OG]
+    FROM [web].[VWCXP_007] AS [VWCXP_007]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VWINV_001" EntityType="Self.VWINV_001" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
     [VWINV_001].[IdEmpresa] AS [IdEmpresa], 
@@ -2675,6 +2779,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_011' does not have
             <Parameter Name="Fecha_desde" Mode="In" Type="DateTime" />
             <Parameter Name="Fecha_hasta" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="VWCXP_007" EntityType="Model_reportes.VWCXP_007" />
         </EntityContainer>
         <EntityType Name="Af_SPACTF_004_detalle">
           <Key>
@@ -4367,6 +4472,64 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_011' does not have
           <Property Type="Double" Name="Total_Pendiente_pago" Nullable="true" />
           <Property Type="String" Name="Observacion" Nullable="false" MaxLength="250" />
         </ComplexType>
+        <EntityType Name="VWCXP_007">
+          <Key>
+            <PropertyRef Name="IdRow" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte_Ogiro" />
+            <PropertyRef Name="IdCbteCble_Ogiro" />
+            <PropertyRef Name="IdOrden_giro_Tipo" />
+            <PropertyRef Name="Codigo" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="IdProveedor" />
+            <PropertyRef Name="pr_nombre" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="subtotal_iva" />
+            <PropertyRef Name="subtotal_sin_iva" />
+            <PropertyRef Name="valor_iva" />
+            <PropertyRef Name="Documento" />
+          </Key>
+          <Property Name="IdRow" Type="Int64" Nullable="false" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte_Ogiro" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble_Ogiro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdOrden_giro_Tipo" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IdProveedor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pr_nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="serie_fact" Type="String" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Name="num_factura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="co_FechaFactura" Type="DateTime" Precision="3" />
+          <Property Name="subtotal_iva" Type="Double" Nullable="false" />
+          <Property Name="subtotal_sin_iva" Type="Double" Nullable="false" />
+          <Property Name="valor_iva" Type="Double" Nullable="false" />
+          <Property Name="NAutorizacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="serie_ret" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="NumRetencion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="re_baseRetencion" Type="Double" />
+          <Property Name="re_Porcen_retencion" Type="Double" />
+          <Property Name="re_valor_retencion" Type="Double" />
+          <Property Name="re_Codigo_impuesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RIVA_0" Type="Double" />
+          <Property Name="RIVA_10" Type="Double" />
+          <Property Name="RIVA_20" Type="Double" />
+          <Property Name="RIVA_30" Type="Double" />
+          <Property Name="RIVA_70" Type="Double" />
+          <Property Name="RIVA_100" Type="Double" />
+          <Property Name="RTF_0" Type="Double" />
+          <Property Name="RTF_0_1" Type="Double" />
+          <Property Name="RTF_1" Type="Double" />
+          <Property Name="RTF_2" Type="Double" />
+          <Property Name="RTF_8" Type="Double" />
+          <Property Name="RTF_10" Type="Double" />
+          <Property Name="RTF_100" Type="Double" />
+          <Property Name="Documento" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion_cod_sri" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="re_tipoRet" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="Num_Autorizacion_OG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5568,6 +5731,52 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_011' does not have
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="VWCXP_007">
+            <EntityTypeMapping TypeName="Model_reportes.VWCXP_007">
+              <MappingFragment StoreEntitySet="VWCXP_007">
+                <ScalarProperty Name="Num_Autorizacion_OG" ColumnName="Num_Autorizacion_OG" />
+                <ScalarProperty Name="re_tipoRet" ColumnName="re_tipoRet" />
+                <ScalarProperty Name="descripcion_cod_sri" ColumnName="descripcion_cod_sri" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="RTF_100" ColumnName="RTF_100" />
+                <ScalarProperty Name="RTF_10" ColumnName="RTF_10" />
+                <ScalarProperty Name="RTF_8" ColumnName="RTF_8" />
+                <ScalarProperty Name="RTF_2" ColumnName="RTF_2" />
+                <ScalarProperty Name="RTF_1" ColumnName="RTF_1" />
+                <ScalarProperty Name="RTF_0_1" ColumnName="RTF_0_1" />
+                <ScalarProperty Name="RTF_0" ColumnName="RTF_0" />
+                <ScalarProperty Name="RIVA_100" ColumnName="RIVA_100" />
+                <ScalarProperty Name="RIVA_70" ColumnName="RIVA_70" />
+                <ScalarProperty Name="RIVA_30" ColumnName="RIVA_30" />
+                <ScalarProperty Name="RIVA_20" ColumnName="RIVA_20" />
+                <ScalarProperty Name="RIVA_10" ColumnName="RIVA_10" />
+                <ScalarProperty Name="RIVA_0" ColumnName="RIVA_0" />
+                <ScalarProperty Name="re_Codigo_impuesto" ColumnName="re_Codigo_impuesto" />
+                <ScalarProperty Name="re_valor_retencion" ColumnName="re_valor_retencion" />
+                <ScalarProperty Name="re_Porcen_retencion" ColumnName="re_Porcen_retencion" />
+                <ScalarProperty Name="re_baseRetencion" ColumnName="re_baseRetencion" />
+                <ScalarProperty Name="NumRetencion" ColumnName="NumRetencion" />
+                <ScalarProperty Name="serie_ret" ColumnName="serie_ret" />
+                <ScalarProperty Name="NAutorizacion" ColumnName="NAutorizacion" />
+                <ScalarProperty Name="valor_iva" ColumnName="valor_iva" />
+                <ScalarProperty Name="subtotal_sin_iva" ColumnName="subtotal_sin_iva" />
+                <ScalarProperty Name="subtotal_iva" ColumnName="subtotal_iva" />
+                <ScalarProperty Name="co_FechaFactura" ColumnName="co_FechaFactura" />
+                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
+                <ScalarProperty Name="serie_fact" ColumnName="serie_fact" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="pr_nombre" ColumnName="pr_nombre" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdOrden_giro_Tipo" ColumnName="IdOrden_giro_Tipo" />
+                <ScalarProperty Name="IdCbteCble_Ogiro" ColumnName="IdCbteCble_Ogiro" />
+                <ScalarProperty Name="IdTipoCbte_Ogiro" ColumnName="IdTipoCbte_Ogiro" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdRow" ColumnName="IdRow" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

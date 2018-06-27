@@ -670,6 +670,7 @@
     <Compile Include="Reportes\CuentasPorPagar\CXP_005_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_006_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_006_diario_Data.cs" />
+    <Compile Include="Reportes\CuentasPorPagar\CXP_007_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_007_Data.cs" />
@@ -1112,6 +1113,9 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="VWCXP_006_diario.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWCXP_007.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="vwfa_cliente_consulta.cs">
