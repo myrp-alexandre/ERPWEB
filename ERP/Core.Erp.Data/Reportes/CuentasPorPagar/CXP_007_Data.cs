@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
 {
     public class CXP_007_Data
     {
-        public List<CXP_007_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin, bool Mostrar_agrupado )
+        public List<CXP_007_Info> get_list(int IdEmpresa, DateTime fecha_ini, DateTime fecha_fin, bool Mostrar_agrupado )
         {
             try
             {
