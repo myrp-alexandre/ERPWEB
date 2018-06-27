@@ -213,7 +213,7 @@
             this.xrTableCell104 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell105 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell106 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.p_Mostrar_agrupado = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_mostrar_agrupado = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
@@ -1862,9 +1862,9 @@
             this.xrTableCell106.TextFormatString = "{0:n2}";
             this.xrTableCell106.Weight = 0.86792453909819978D;
             // 
-            // p_Mostrar_agrupado
+            // p_mostrar_agrupado
             // 
-            this.p_Mostrar_agrupado.Name = "p_Mostrar_agrupado";
+            this.p_mostrar_agrupado.Name = "p_mostrar_agrupado";
             // 
             // CXP_007_Rpt
             // 
@@ -1892,7 +1892,7 @@
             this.p_IdEmpresa,
             this.p_fecha_ini,
             this.p_fecha_fin,
-            this.p_Mostrar_agrupado});
+            this.p_mostrar_agrupado});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.CXP_007_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
@@ -2056,6 +2056,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell104;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell105;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell106;
-        public DevExpress.XtraReports.Parameters.Parameter p_Mostrar_agrupado;
+        public DevExpress.XtraReports.Parameters.Parameter p_mostrar_agrupado;
     }
 }

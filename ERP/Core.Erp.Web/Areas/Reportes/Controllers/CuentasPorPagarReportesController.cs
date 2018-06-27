@@ -79,19 +79,19 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
-        public ActionResult CXP_007( DateTime? fecha_ini, DateTime? fecha_fin, bool Mostrar_agrupado = false)
+        public ActionResult CXP_007( DateTime? fecha_ini, DateTime? fecha_fin, bool mostrar_agrupado = false)
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
                 fecha_ini = fecha_ini == null ? DateTime.Now : Convert.ToDateTime(fecha_ini),
                 fecha_fin = fecha_fin == null ? DateTime.Now : Convert.ToDateTime(fecha_fin),
-                Mostrar_agrupado = Mostrar_agrupado 
+                mostrar_agrupado = mostrar_agrupado 
             };
             CXP_007_Rpt report = new CXP_007_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             report.p_fecha_ini.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
-            report.p_Mostrar_agrupado.Value = model.Mostrar_agrupado;
+            report.p_mostrar_agrupado.Value = model.mostrar_agrupado;
             report.usuario = Session["IdUsuario"].ToString();
             report.empresa = Session["nom_empresa"].ToString();
             report.RequestParameters = false;
@@ -106,7 +106,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             report.p_fecha_ini.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
-            report.p_Mostrar_agrupado.Value = model.Mostrar_agrupado;
+            report.p_mostrar_agrupado.Value = model.mostrar_agrupado;
             report.usuario = Session["IdUsuario"].ToString();
             report.empresa = Session["nom_empresa"].ToString();
             report.RequestParameters = false;
