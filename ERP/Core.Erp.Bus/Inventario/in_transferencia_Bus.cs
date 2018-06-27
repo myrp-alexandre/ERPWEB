@@ -72,10 +72,11 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
-        private in_Ing_Egr_Inven_Info Get_Info_Ing_Egr_Inven(in_transferencia_Info info)
+        private void get_info_ing_egr(in_transferencia_Info info)
         {
             try
             {
+                // armando ingreso
                 in_Ing_Egr_Inven_Info ingreso = new in_Ing_Egr_Inven_Info();
                 ingreso.IdEmpresa = info.IdEmpresa;
                 ingreso.IdNumMovi = 0;
@@ -86,17 +87,37 @@ namespace Core.Erp.Bus.Inventario
                 ingreso.ip = info.ip;
                 ingreso.Fecha_Transac = info.tr_fecha;
                 ingreso.signo = "+";
-               ingreso.IdSucursal = info.IdSucursalDest;
-               ingreso.IdBodega = info.IdBodegaDest;
-               ingreso.cm_observacion = "Ingreso x Trans. #" + info.IdTransferencia + " Suc.Dest.# " + info.IdSucursalDest + "Bod.Dest.# " + info.IdBodegaDest + " Suc.Org.# " + info.IdSucursalOrigen + "Bod.Org.# " + info.IdBodegaOrigen + ". " + info.tr_Observacion;
-               ingreso.IdMovi_inven_tipo = info.IdMovi_inven_tipo_SucuDest == null ? 0 : Convert.ToInt32(info.IdMovi_inven_tipo_SucuDest);
-               ingreso.IdMotivo_Inv = info.IdMovi_inven_tipo_SucuDest;
+                ingreso.IdSucursal = info.IdSucursalDest;
+                ingreso.IdBodega = info.IdBodegaDest;
+                ingreso.cm_observacion = "Egreso x Trans." + info.tr_Observacion;
+                ingreso.IdMovi_inven_tipo = info.IdMovi_inven_tipo_SucuDest == null ? 0 : Convert.ToInt32(info.IdMovi_inven_tipo_SucuDest);
+                ingreso.IdMotivo_Inv = info.IdMovi_inven_tipo_SucuDest;
 
                 ingreso.lst_in_Ing_Egr_Inven_det = new List<in_Ing_Egr_Inven_det_Info>();
                 ingreso.lst_in_Ing_Egr_Inven_det = get_detalle(info.list_detalle, info.IdSucursalDest, info.IdBodegaDest, "+", ingreso.cm_fecha);
+                info.info_ingreso=ingreso;
 
+                // armando egreso
+                in_Ing_Egr_Inven_Info egreso = new in_Ing_Egr_Inven_Info();
+                egreso.IdEmpresa = info.IdEmpresa;
+                egreso.IdNumMovi = 0;
+                egreso.CodMoviInven = "0";
+                egreso.cm_fecha = info.tr_fecha;
+                egreso.IdUsuario = info.IdUsuario;
+                egreso.nom_pc = info.nom_pc;
+                egreso.ip = info.ip;
+                egreso.Fecha_Transac = info.tr_fecha;
+                egreso.signo = "+";
+                egreso.IdSucursal = info.IdSucursalDest;
+                egreso.IdBodega = info.IdBodegaDest;
+                egreso.cm_observacion = "Egreso x Trans."  + info.tr_Observacion;
+                egreso.IdMovi_inven_tipo = info.IdMovi_inven_tipo_SucuDest == null ? 0 : Convert.ToInt32(info.IdMovi_inven_tipo_SucuDest);
+                egreso.IdMotivo_Inv = info.IdMovi_inven_tipo_SucuDest;
 
-                return ingreso;
+                egreso.lst_in_Ing_Egr_Inven_det = new List<in_Ing_Egr_Inven_det_Info>();
+                egreso.lst_in_Ing_Egr_Inven_det = get_detalle(info.list_detalle, info.IdSucursalDest, info.IdBodegaDest, "+", ingreso.cm_fecha);
+                info.info_egreso = egreso;
+
             }
             catch (Exception )
             {

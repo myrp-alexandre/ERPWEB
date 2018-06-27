@@ -46,13 +46,15 @@ namespace Core.Erp.Info.Inventario
         public string BodegDest { get; set; }
 
         public List<in_transferencia_det_Info> list_detalle { get; set; }
-        public in_Ing_Egr_Inven_Info info_ing_egr { get; set; }
+        public in_Ing_Egr_Inven_Info info_ingreso { get; set; }
+        public in_Ing_Egr_Inven_Info info_egreso { get; set; }
         public in_movi_inven_tipo_Info info_movimiento { get; set; }
 
         public in_transferencia_Info()
         {
             list_detalle = new List<in_transferencia_det_Info>();
-            info_ing_egr = new in_Ing_Egr_Inven_Info();
+            info_ingreso = new in_Ing_Egr_Inven_Info();
+            info_egreso = new in_Ing_Egr_Inven_Info();
             info_movimiento = new in_movi_inven_tipo_Info();
         }
     }
