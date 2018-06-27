@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Data.General;
 using Core.Erp.Info.General;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,17 @@ namespace Core.Erp.Bus.General
     {
         tb_persona_Data odata = new tb_persona_Data();
 
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            try
+            {
+                return odata.get_list_bajo_demanda(args);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public List<tb_persona_Info> get_list(bool mostrar_anulados)
         {
             try
