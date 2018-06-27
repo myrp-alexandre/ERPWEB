@@ -180,6 +180,7 @@
     <Compile Include="Reportes\CuentasPorPagar\CXP_005_Info.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_006_diario_Info.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_006_Info.cs" />
+    <Compile Include="Reportes\CuentasPorPagar\CXP_007_Info.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Info.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Info.cs" />
     <Compile Include="Reportes\Inventario\INV_007_Info.cs" />
