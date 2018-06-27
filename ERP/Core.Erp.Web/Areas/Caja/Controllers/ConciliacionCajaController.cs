@@ -11,6 +11,7 @@ using Core.Erp.Info.Contabilidad;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.CuentasPorPagar;
 using Core.Erp.Info.CuentasPorPagar;
+using Core.Erp.Bus.General;
 
 namespace Core.Erp.Web.Areas.Caja.Controllers
 {
@@ -27,6 +28,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         caj_Caja_Bus bus_caja = new caj_Caja_Bus();
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -97,11 +99,53 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             return PartialView("_GridViewPartial_conciliacion_caja", model);
         }
 
+        #region Vales
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_conciliacion_vales()
+        public ActionResult GridViewPartial_conciliacion_vales(decimal IdConciliacion_caja = 0)
         {
-            var model = new object[0];
+
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
+            model.lst_det_vale = bus_vales.get_list(IdEmpresa, IdConciliacion_caja);
+            if (model.lst_det_vale.Count == 0)
+                model.lst_det_vale = list_vale.get_list();
             return PartialView("_GridViewPartial_conciliacion_vales", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNewVale([ModelBinder(typeof(DevExpressEditorsBinder))] cp_conciliacion_Caja_det_x_ValeCaja_Info info_det)
+        {
+            if (ModelState.IsValid)
+                list_vale.AddRow(info_det);
+            cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
+            model.lst_det_vale = list_vale.get_list();
+            return PartialView("_GridViewPartial_conciliacion_vales", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdateVale([ModelBinder(typeof(DevExpressEditorsBinder))] cp_conciliacion_Caja_det_x_ValeCaja_Info info_det)
+        {
+            if (ModelState.IsValid)
+                list_vale.UpdateRow(info_det);
+            cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
+            model.lst_det_vale = list_vale.get_list();
+            return PartialView("_GridViewPartial_conciliacion_vales", model);
+        }
+
+        public ActionResult EditingDeleteVale(int secuencia)
+        {
+            list_vale.DeleteRow(secuencia);
+            cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
+            model.lst_det_vale = list_vale.get_list();
+            return PartialView("_GridViewPartial_conciliacion_vales", model);
+        }
+        #endregion
+
+        public ActionResult ComboBoxPartial_persona(decimal IdPersona = 0)
+       {
+            var model = bus_persona.get_info(IdPersona);
+            if (model == null) model = new Info.General.tb_persona_Info();
+            return PartialView("_ComboBoxPartial_persona", model);
         }
     }
 
@@ -181,6 +225,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
     public class cp_conciliacion_Caja_det_x_ValeCaja_List
     {
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
         public List<cp_conciliacion_Caja_det_x_ValeCaja_Info> get_list()
         {
             if (HttpContext.Current.Session["cp_conciliacion_Caja_det_x_ValeCaja_Info"] == null)
@@ -201,12 +246,26 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         {
             List<cp_conciliacion_Caja_det_x_ValeCaja_Info> list = get_list();
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+            var per = bus_persona.get_info(info_det.IdPersona);
+            if (per != null)
+                info_det.pe_nombreCompleto = per.pe_nombreCompleto;
             list.Add(info_det);
         }
 
         public void UpdateRow(cp_conciliacion_Caja_det_x_ValeCaja_Info info_det)
         {
             cp_conciliacion_Caja_det_x_ValeCaja_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();
+            edited_info.valor = info_det.valor;
+            edited_info.IdPersona = info_det.IdPersona;
+            if (edited_info.IdPersona != info_det.IdPersona)
+            {
+                var per = bus_persona.get_info(info_det.IdPersona);
+                if (per != null)
+                    edited_info.pe_nombreCompleto = per.pe_nombreCompleto;
+            }            
+            edited_info.Observacion = info_det.Observacion;
+            edited_info.idTipoMovi = info_det.idTipoMovi;
+            edited_info.fecha = info_det.fecha;
         }
 
         public void DeleteRow(int Secuencia)

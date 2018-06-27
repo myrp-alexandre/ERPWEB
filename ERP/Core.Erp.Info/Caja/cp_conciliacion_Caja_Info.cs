@@ -40,5 +40,7 @@ namespace Core.Erp.Info.Caja
         public List<cp_conciliacion_Caja_det_Info> lst_det_fact { get; set; }
         public List<cp_conciliacion_Caja_det_x_ValeCaja_Info> lst_det_vale { get; set; }
         public List<cp_conciliacion_Caja_det_Ing_Caja_Info> lst_det_ing { get; set; }
+
+
     }
 }

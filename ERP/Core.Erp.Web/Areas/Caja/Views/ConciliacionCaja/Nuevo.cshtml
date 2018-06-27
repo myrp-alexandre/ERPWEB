@@ -9,6 +9,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script type="text/javascript">
+    function OnSelectedIndexChanged(s, e) {
+        GridView_conciliacion_vales.AutoFilterByColumn("IdPersona", s.GetText());
+    }
+</script>
+
 @using (Html.BeginForm("Index", "ConciliacionCaja", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="row">
@@ -120,12 +126,9 @@
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_facturas">
 
-                @Html.Action("GridViewPartial_conciliacion_vales")
-
             </div>
-
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_vales">
-
+                @Html.Action("GridViewPartial_conciliacion_vales")
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_ingresos">
 

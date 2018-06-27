@@ -8475,7 +8475,7 @@
     <Content Include="Areas\Caja\Views\ConciliacionCaja\_GridViewPartial_conciliacion_vales.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_012.cshtml" />
     <Content Include="Areas\Inventario\Views\Subgrupo\Anular.cshtml" />
-    <Content Include="Areas\General\Views\Persona\_ComboBoxPartial_persona.cshtml" />
+    <Content Include="Areas\Caja\Views\ConciliacionCaja\_ComboBoxPartial_persona.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
