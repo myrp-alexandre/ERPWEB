@@ -173,6 +173,41 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
+        public bool modificar_id_ing_egrDB(in_transferencia_Info info)
+        {
+            try
+            {
+                int c = 1;
+                using (Entities_inventario contex = new Entities_inventario())
+                {
+                    in_transferencia Entity = contex.in_transferencia.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa
+                    && q.IdBodegaOrigen == info.IdBodegaOrigen && q.IdSucursalOrigen == info.IdSucursalOrigen
+                    && q.IdTransferencia == info.IdTransferencia);
+
+
+                    Entity.IdSucursal_Ing_Egr_Inven_Origen = info.IdSucursal_Ing_Egr_Inven_Origen;
+                    Entity.IdMovi_inven_tipo_SucuOrig = info.IdMovi_inven_tipo_SucuOrig;
+                    Entity.IdNumMovi_Ing_Egr_Inven_Origen = info.IdNumMovi_Ing_Egr_Inven_Origen;
+                    Entity.IdEmpresa_Ing_Egr_Inven_Destino = info.IdEmpresa_Ing_Egr_Inven_Destino;
+                    Entity.IdSucursal_Ing_Egr_Inven_Destino = info.IdSucursal_Ing_Egr_Inven_Destino;
+                    Entity.IdMovi_inven_tipo_SucuDest = info.IdMovi_inven_tipo_SucuDest;
+                    Entity.IdNumMovi_Ing_Egr_Inven_Destino = info.IdNumMovi_Ing_Egr_Inven_Destino;
+                   
+                    contex.SaveChanges();
+
+
+
+                    return true;
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool anularDB(in_transferencia_Info info)
         {
             try

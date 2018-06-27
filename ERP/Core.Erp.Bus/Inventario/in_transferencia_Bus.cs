@@ -46,6 +46,17 @@ namespace Core.Erp.Bus.Inventario
                     get_info_ing_egr(info);
                     bus_ingreso.guardarDB(info.info_ingreso);
                     bus_ingreso.guardarDB(info.info_egreso);
+
+                    info.IdEmpresa_Ing_Egr_Inven_Origen = info.IdEmpresa;
+                    info.IdSucursal_Ing_Egr_Inven_Origen = info.IdSucursalOrigen;
+                    info.IdMovi_inven_tipo_SucuOrig = info.IdMovi_inven_tipo_SucuOrig;
+                    info.IdNumMovi_Ing_Egr_Inven_Origen = info.info_ingreso.IdNumMovi;
+
+                    info.IdEmpresa_Ing_Egr_Inven_Destino = info.IdEmpresa;
+                    info.IdSucursal_Ing_Egr_Inven_Destino = info.IdSucursalDest;
+                    info.IdMovi_inven_tipo_SucuDest = info.IdMovi_inven_tipo_SucuDest;
+                    info.IdNumMovi_Ing_Egr_Inven_Destino = info.info_egreso.IdNumMovi;
+                    odata.modificar_id_ing_egrDB(info);
                 }
 
 
@@ -61,7 +72,13 @@ namespace Core.Erp.Bus.Inventario
         {
             try
             {
-                return odata.modificarDB(info);
+                if (odata.modificarDB(info))
+                {
+                    get_info_ing_egr(info);
+                    bus_ingreso.modificarDB(info.info_ingreso);
+                    bus_ingreso.modificarDB(info.info_egreso);
+                }
+                return true;
             }
             catch (Exception)
             {
@@ -73,7 +90,13 @@ namespace Core.Erp.Bus.Inventario
         {
             try
             {
-                return odata.guardarDB(info);
+                if (odata.anularDB(info))
+                {
+                    get_info_ing_egr(info);
+                    bus_ingreso.anularDB(info.info_ingreso);
+                    bus_ingreso.anularDB(info.info_egreso);
+                }
+                return true;
             }
             catch (Exception)
             {
@@ -180,6 +203,21 @@ namespace Core.Erp.Bus.Inventario
             if (info.list_detalle.Count == 0)
             {
                 mensaje = "Debe ingresar al menos un producto";
+            }
+
+            foreach (var item in info.list_detalle)
+            {
+                if(item.dt_cantidad==0)
+                {
+                    mensaje = "No existe cantidad";
+
+                }
+
+                if (item.IdProducto == 0)
+                {
+                    mensaje = "No existe producto en el detalle";
+
+                }
             }
             return mensaje;
 

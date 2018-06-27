@@ -30,19 +30,19 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
         //Funcion para inicializar fila al presionar nuevo
-       
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Secuencia";
-            column.Caption = "Nº";
-            column.Width = Unit.Percentage(5);
-            column.Visible = true;
-            column.ReadOnly = true;
-            column.EditorProperties().TextBox(sp =>
-            {
 
-            });
-        });
+        //settings.Columns.Add(column =>
+        //{
+        //    column.FieldName = "Secuencia";
+        //    column.Caption = "Nº";
+        //    column.Width = Unit.Percentage(5);
+        //    column.Visible = true;
+        //    column.ReadOnly = true;
+        //    column.EditorProperties().TextBox(sp =>
+        //    {
+
+        //    });
+        //});
 
         settings.Columns.Add(column =>
         {
