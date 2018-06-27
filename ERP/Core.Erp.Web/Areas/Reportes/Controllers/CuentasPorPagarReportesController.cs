@@ -1,4 +1,5 @@
-﻿using Core.Erp.Web.Reportes.CuentasPorPagar;
+﻿using Core.Erp.Info.Helps;
+using Core.Erp.Web.Reportes.CuentasPorPagar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,14 +81,36 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         public ActionResult CXP_007( DateTime? fecha_ini, DateTime? fecha_fin, bool Mostrar_agrupado = false)
         {
-            CXP_007_Rpt model = new CXP_007_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
-            model.p_fecha_ini.Value = fecha_ini;
-            model.p_fecha_fin.Value = fecha_fin;
-            model.p_Mostrar_agrupado.Value = Mostrar_agrupado;
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
-                model.RequestParameters = false;
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                fecha_ini = fecha_ini == null ? DateTime.Now : Convert.ToDateTime(fecha_ini),
+                fecha_fin = fecha_fin == null ? DateTime.Now : Convert.ToDateTime(fecha_fin),
+                Mostrar_agrupado = Mostrar_agrupado 
+            };
+            CXP_007_Rpt report = new CXP_007_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_Mostrar_agrupado.Value = model.Mostrar_agrupado;
+            report.usuario = Session["IdUsuario"].ToString();
+            report.empresa = Session["nom_empresa"].ToString();
+            report.RequestParameters = false;
+            ViewBag.Report = report;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult CXP_007(cl_filtros_Info model)
+        {
+            CXP_007_Rpt report = new CXP_007_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_Mostrar_agrupado.Value = model.Mostrar_agrupado;
+            report.usuario = Session["IdUsuario"].ToString();
+            report.empresa = Session["nom_empresa"].ToString();
+            report.RequestParameters = false;
+            ViewBag.Report = report;
             return View(model);
         }
     }
