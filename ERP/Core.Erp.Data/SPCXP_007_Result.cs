@@ -10,9 +10,8 @@
 namespace Core.Erp.Data
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class VWCXP_007
+    public partial class SPCXP_007_Result
     {
         public long IdRow { get; set; }
         public int IdEmpresa { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.Erp.Info.Caja
 {
@@ -17,11 +18,17 @@ namespace Core.Erp.Info.Caja
         public string IdCentroCosto_sub_centro_costo { get; set; }
 
         #region Campos que no existen en la tabla
+        [Required(ErrorMessage ="El campo fecha es obligatorio")]
         public DateTime fecha { get; set; }
+        [Required(ErrorMessage ="El campo valor es obligatorio")]
+        [Range(0.01, 9999999.99, ErrorMessage = "El valor debe ser mayor a 0")]
         public double valor { get; set; }
-        public int idTipoMovi { get; set; }
+        [Required(ErrorMessage = "El campo tipo de movimiento es obligatorio")]
+        public int? idTipoMovi { get; set; }
+        [Range(1,99999999,ErrorMessage = "Seleccione una persona")]
         public decimal IdPersona { get; set; }
         public string Observacion { get; set; }
+        public string pe_nombreCompleto { get; set; }
         #endregion
 
     }

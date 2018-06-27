@@ -103,17 +103,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
             return RedirectToAction("Index", "Persona");
         }
 
-        public ActionResult ComboBox_persona_x_tipo(string tipo_persona = "", decimal IdPersona = 0)
+        public ActionResult ComboBoxPartial_persona()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            ViewBag.tipo_persona = tipo_persona;
-            var lst_persona = bus_persona.get_list(IdEmpresa, tipo_persona);
-            ViewBag.lst_persona = lst_persona;
-            tb_persona_Info model = new tb_persona_Info
-            {
-                IdPersona = (IdPersona == 0 && lst_persona.Count > 0) ? lst_persona.First().IdPersona : IdPersona 
-            };
-            return PartialView("_ComboBox_persona_x_tipo", model);
+            return PartialView("_ComboBoxPartial_persona");
         }
     }
 }

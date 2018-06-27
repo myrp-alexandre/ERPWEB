@@ -379,7 +379,7 @@ namespace Core.Erp.Data.Caja
                             CodMoviCaja = "Caja # "+info.IdConciliacion_Caja,
                             cm_Signo = "-",
                             cm_valor = item.valor,
-                            IdTipoMovi = item.idTipoMovi,
+                            IdTipoMovi = Convert.ToInt32(item.idTipoMovi),
                             cm_observacion = "Caja # "+info.IdConciliacion_Caja,
                             IdCaja = info.IdCaja,
                             IdPeriodo = Convert.ToInt32(item.fecha.ToString("yyyyMM")),

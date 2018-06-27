@@ -39,7 +39,7 @@ namespace Core.Erp.Info.Helps
         #endregion
 
         #region Filtros activo
-        public bool Mostrar_agrupado { get; set; }
+        public bool mostrar_agrupado { get; set; }
         #endregion
 
         public cl_filtros_Info()

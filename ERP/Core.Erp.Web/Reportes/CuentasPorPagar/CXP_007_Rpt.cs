@@ -27,10 +27,10 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             DateTime fecha_ini = p_fecha_ini.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_ini.Value);
             DateTime fecha_fin = p_fecha_fin.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_fin.Value);
-            bool Mostrar_agrupado = p_Mostrar_agrupado == null ? false : Convert.ToBoolean(p_Mostrar_agrupado.Value);
+            bool mostrar_agrupado = p_mostrar_agrupado == null ? false : Convert.ToBoolean(p_mostrar_agrupado.Value);
 
             CXP_007_Bus bus_rpt = new CXP_007_Bus();
-            List<CXP_007_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, fecha_ini, fecha_fin, Mostrar_agrupado);
+            List<CXP_007_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, fecha_ini, fecha_fin, mostrar_agrupado);
             this.DataSource = lst_rpt;
         }
     }
