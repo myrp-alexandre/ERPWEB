@@ -10,23 +10,7 @@
 }
 
 <script type="text/javascript">
-    $(function () {
-        //Date picker
-        $('#Fecha_ini').datepicker({
-            autoclose: true
-        })
-        $('#Fecha_ini').datepicker({
-            autoclose: true
-        })
-
-        $('#Fecha').datepicker({
-            autoclose: true
-        })
-
-        GetIdCtaCbleCaja();
-    });
-
-    function OnSelectedIndexChanged(s, e) {
+     function OnSelectedIndexChanged(s, e) {
         GridView_conciliacion_vales.AutoFilterByColumn("IdPersona", s.GetText());
     }
 
@@ -42,6 +26,7 @@
             //Capture all selected keys
             selectedIDs = values.join(',');
     }
+
     function MostrarModal() {
         selectedIDs = "";
         GridView_conciliacion_facturas_x_cruzar.PerformCallback();
@@ -74,49 +59,6 @@
         GridView_conciliacion_facturas.PerformCallback();
         $("#FacturasModal").modal("hide");
     }
-
-    function GetSaldoAnterior() {
-        var datos = {
-            FechaCorte = new Date($("#Fecha_ini").val()),
-            IdCtaCble = $("#IdCtaCble").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetSaldoAnterior", "ConciliacionCaja",new { Area = "Caja"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                $("#Saldo_cont_al_periodo").val(Number(data));
-            },
-            error: function (error) {
-            }
-        });
-    }
-
-    function GetIdCtaCbleCaja() {
-        var datos = {
-            IdCaja = $("#IdCaja").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetIdCtaCbleCaja", "ConciliacionCaja",new { Area = "Caja"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                $("#IdCtaCble").val(data);
-            },
-            error: function (error) {
-            }
-        });
-    }
 </script>
 
 @using (Html.BeginForm("Index", "ConciliacionCaja", FormMethod.Post, new { @class = "form", @role = "form" }))
@@ -146,17 +88,25 @@
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="IdEstadoCierre">Caja *</label>
-                    @Html.DropDownListFor(q => q.IdEstadoCierre, new SelectList(ViewBag.lst_estado, "Key", "Value"), new { @id = "IdEstadoCierre", @class = "form-control", @disabled = "disabled" })
+                    <label for="IdEstadoCierre">Estado *</label>
+                    @Html.DropDownListFor(q => q.IdEstadoCierre, new SelectList(ViewBag.lst_estado, "Key", "Value"), new { @id = "IdEstadoCierreCombo", @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdEstadoCierre, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(q => q.IdEstadoCierre, new { @id = "IdEstadoCierre" })
+                </div>
+            </div>
+            <div class="col-md-offset-6 col-md-2">
+                <div class="form-group">
+                    <label for="Fecha_fin">Fecha*</label>
+                    @Html.TextBoxFor(q => q.Fecha, "{0:dd/MM/yyyy}", new { @id = "Fecha", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
-    </div>
-
+    </div>   
+        
+    
     <div class="row">
         <div class="col-md-6">
-            <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="IdCaja">Caja *</label>
@@ -171,47 +121,47 @@
                         @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-4">
+            
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="IdPeriodo">Periodo*</label>
                         @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodo, "IdPeriodo", "nom_periodo_combo"), new { @id = "IdPeriodo", @class = "form-control" })
                         @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="Fecha_ini">Desde*</label>
-                        @Html.TextBoxFor(q => q.Fecha_ini, new { @id = "Fecha_ini", @class = "form-control" })
+                        @Html.TextBoxFor(q => q.Fecha_ini, "{0:dd/MM/yyyy}", new { @id = "Fecha_ini", @class = "form-control" })
                         @Html.ValidationMessageFor(q => q.Fecha_ini, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="Fecha_fin">Hasta*</label>
-                        @Html.TextBoxFor(q => q.Fecha_fin, new { @id = "Fecha_fin", @class = "form-control" })
+                        @Html.TextBoxFor(q => q.Fecha_fin, "{0:dd/MM/yyyy}", new { @id = "Fecha_fin", @class = "form-control" })
                         @Html.ValidationMessageFor(q => q.Fecha_fin, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="Observacion">Observación</label>
-                        @Html.TextAreaFor(q => q.Observacion, new { @id = "Observacion", @class = "form-control", @rows = 2 })
-                        @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="Observacion">Observación</label>
+                            @Html.TextAreaFor(q => q.Observacion, new { @id = "Observacion", @class = "form-control", @rows = 2 })
+                            @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
+                </div>                
             </div>
 
         </div>
         <div class="col-md-offset-1 col-md-4">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="Saldo_cont_al_periodo">Saldo contable mes anterior</label>
+                    <label for="Saldo_cont_al_periodo">Saldo contable anterior</label>
                     @Html.TextBoxFor(q => q.Saldo_cont_al_periodo, new { @id = "Saldo_cont_al_periodo", @class = "form-control", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.Saldo_cont_al_periodo, "", new { @class = "text-danger" })
                 </div>
@@ -283,7 +233,107 @@
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_ingresos">
 
+                @Html.Action("GridViewPartial_conciliacion_ingresos")
+
             </div>
         </div>
     </div>
 }
+<script type="text/javascript">
+    $(function () {
+        //Date picker
+        $('#Fecha_ini').datepicker({
+            autoclose: true
+        })
+        $('#Fecha_fin').datepicker({
+            autoclose: true
+        })
+        $('#Fecha').datepicker({
+            autoclose: true
+        })
+
+        $("#Fecha_ini").change(function () {
+            GetSaldoAnterior();
+        });
+        $("#IdPeriodo").change(function () {
+            GetSaldoAnterior();
+        });
+        $("#IdCaja").change(function () {
+            GetIdCtaCbleCaja();
+            GetSaldoAnterior();
+        });
+
+        GetIdCtaCbleCaja();
+        GetPeriodo();
+        GetSaldoAnterior();
+    });
+
+    
+    function GetSaldoAnterior() {
+        var d = $("#Fecha_ini").val();
+        var datos = {
+            FechaCorte: d,
+            IdCtaCble: $("#IdCtaCble").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetSaldoAnterior", "ConciliacionCaja",new { Area = "Caja"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#Saldo_cont_al_periodo").val(Math.round(Number(data),2));
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function GetIdCtaCbleCaja() {
+        var datos = {
+            IdCaja: $("#IdCaja").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetIdCtaCbleCaja", "ConciliacionCaja",new { Area = "Caja"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#IdCtaCble").val(data);
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function GetPeriodo() {
+        var datos = {
+            IdPeriodo: $("#IdPeriodo").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetPeriodo", "ConciliacionCaja",new { Area = "Caja"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.IdEmpresa != 0) {
+                    $('#Fecha_ini').datepicker("setDate", moment(data.pe_FechaIni).format("DD/MM/YYYY"));
+                    $('#Fecha_fin').datepicker("setDate", moment(data.pe_FechaFin).format("DD/MM/YYYY"));
+                }                
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>

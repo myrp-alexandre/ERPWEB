@@ -12,5 +12,10 @@ namespace Core.Erp.Info.Caja
         public int IdTipocbte_movcaj { get; set; }
         public double valor_aplicado { get; set; }
         public double valor_disponible { get; set; }
+        public object cm_observacion { get; set; }
+        public object cm_fecha { get; set; }
+        public object Total_movi { get; set; }
+        public object Total_aplicado { get; set; }
+        public object Saldo { get; set; }
     }
 }

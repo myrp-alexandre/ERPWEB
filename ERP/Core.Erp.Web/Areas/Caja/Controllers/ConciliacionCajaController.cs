@@ -68,6 +68,8 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                 IdEmpresa = IdEmpresa,
                 Fecha = DateTime.Now.Date,
                 IdPeriodo = Convert.ToInt32(DateTime.Now.Date.ToString("yyyyMM")),
+                Fecha_ini = DateTime.Now,
+                Fecha_fin = DateTime.Now,
                 IdEstadoCierre = cl_enumeradores.eEstadoCierreCaja.EST_CIE_ABI.ToString(),
                 lst_det_fact = new List<cp_conciliacion_Caja_det_Info>(),
                 lst_det_ing = new List<cp_conciliacion_Caja_det_Ing_Caja_Info>(),
@@ -235,7 +237,23 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetPeriodo(int IdPeriodo = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            var resultado = bus_periodo.get_info(IdEmpresa, IdPeriodo);
+            if (resultado == null)
+                resultado = new ct_periodo_Info();
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
         #endregion
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_conciliacion_ingresos()
+        {
+            var model = new object[0];
+            return PartialView("_GridViewPartial_conciliacion_ingresos", model);
+        }
     }
 
     public class cp_conciliacion_Caja_det_List

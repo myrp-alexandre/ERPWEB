@@ -11,9 +11,9 @@ namespace Core.Erp.Info.Caja
         [Required(ErrorMessage ="El campo periodo es obligatorio")]
         public int IdPeriodo { get; set; }
         [Required(ErrorMessage = "El campo fecha inicio es obligatorio")]
-        public Nullable<System.DateTime> Fecha_ini { get; set; }
+        public System.DateTime Fecha_ini { get; set; }
         [Required(ErrorMessage = "El campo fecha fin es obligatorio")]
-        public Nullable<System.DateTime> Fecha_fin { get; set; }
+        public DateTime Fecha_fin { get; set; }
         [Required(ErrorMessage = "El campo fecha es obligatorio")]
         public System.DateTime Fecha { get; set; }
         [Required(ErrorMessage = "El campo caja es obligatorio")]

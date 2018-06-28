@@ -8499,6 +8499,8 @@
     <Content Include="Areas\Caja\Views\ConciliacionCaja\_GridViewPartial_conciliacion_facturas_x_cruzar.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_008.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_002.cshtml" />
+    <Content Include="Areas\Caja\Views\ConciliacionCaja\_GridViewPartial_conciliacion_facturas.cshtml" />
+    <Content Include="Areas\Caja\Views\ConciliacionCaja\_GridViewPartial_conciliacion_ingresos.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
@@ -8604,7 +8606,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
