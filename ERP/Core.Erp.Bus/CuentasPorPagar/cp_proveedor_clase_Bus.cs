@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.CuentasPorPagar
 {
-   public class cp_proveedor_clase_Bus
+   public class cp_proveedor_Bus
     {
         cp_proveedor_clase_Data odata = new cp_proveedor_clase_Data();
 

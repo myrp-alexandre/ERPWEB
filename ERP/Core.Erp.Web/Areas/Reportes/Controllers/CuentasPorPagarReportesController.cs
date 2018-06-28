@@ -119,7 +119,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         private void cargar_combos()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            cp_proveedor_clase_Bus bus_proveedor = new cp_proveedor_clase_Bus();
+            cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
             var lst_proveedor = bus_proveedor.get_list(IdEmpresa, false);
             ViewBag.lst_proveedor = lst_proveedor;
 

@@ -319,6 +319,7 @@
     <Compile Include="Areas\Reportes\Controllers\CajaReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\ContabilidadReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\CuentasPorPagarReportesController.cs" />
+    <Compile Include="Areas\Reportes\Controllers\FacturacionReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\InventarioReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\RRHHReportesController.cs" />
     <Compile Include="Areas\Reportes\ReportesAreaRegistration.cs" />
@@ -538,6 +539,18 @@
     </Compile>
     <Compile Include="Reportes\CuentasPorPagar\CXP_008_Rpt.Designer.cs">
       <DependentUpon>CXP_008_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_001_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_001_Rpt.Designer.cs">
+      <DependentUpon>FAC_001_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_002_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_002_Rpt.Designer.cs">
+      <DependentUpon>FAC_002_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\Inventario\INV_001_Rpt.cs">
       <SubType>Component</SubType>
@@ -8485,6 +8498,7 @@
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_007.cshtml" />
     <Content Include="Areas\Caja\Views\ConciliacionCaja\_GridViewPartial_conciliacion_facturas.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_008.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_002.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
@@ -8673,6 +8687,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorPagar\CXP_008_Rpt.resx">
       <DependentUpon>CXP_008_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\FAC_001_Rpt.resx">
+      <DependentUpon>FAC_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\FAC_002_Rpt.resx">
+      <DependentUpon>FAC_002_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Inventario\INV_001_Rpt.resx">
       <DependentUpon>INV_001_Rpt.cs</DependentUpon>
