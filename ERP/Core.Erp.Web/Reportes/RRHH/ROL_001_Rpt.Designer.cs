@@ -260,9 +260,11 @@
             this.xrTableRow1,
             this.xrTableRow2,
             this.xrTableRow3});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(1127F, 75F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(1196.792F, 75F);
             this.xrTable1.StylePriority.UseBorders = false;
             this.xrTable1.StylePriority.UseBorderWidth = false;
+            this.xrTable1.StylePriority.UseTextAlignment = false;
+            this.xrTable1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             // 
             // xrTableRow1
             // 
@@ -436,8 +438,8 @@
             // 
             // xrLabel20
             // 
-            this.xrLabel20.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrLabel20.LocationFloat = new DevExpress.Utils.PointFloat(222.2088F, 29.16667F);
+            this.xrLabel20.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel20.LocationFloat = new DevExpress.Utils.PointFloat(216.1251F, 10.00001F);
             this.xrLabel20.Name = "xrLabel20";
             this.xrLabel20.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel20.SizeF = new System.Drawing.SizeF(196.2498F, 19.375F);
@@ -448,8 +450,8 @@
             // 
             // xrLabel21
             // 
-            this.xrLabel21.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrLabel21.LocationFloat = new DevExpress.Utils.PointFloat(489.0422F, 29.16667F);
+            this.xrLabel21.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel21.LocationFloat = new DevExpress.Utils.PointFloat(482.9585F, 10.00001F);
             this.xrLabel21.Name = "xrLabel21";
             this.xrLabel21.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel21.SizeF = new System.Drawing.SizeF(206.6665F, 19.375F);
@@ -460,26 +462,26 @@
             // 
             // xrLine3
             // 
-            this.xrLine3.LocationFloat = new DevExpress.Utils.PointFloat(206.5831F, 82.16667F);
+            this.xrLine3.LocationFloat = new DevExpress.Utils.PointFloat(206.5831F, 100.4999F);
             this.xrLine3.Name = "xrLine3";
             this.xrLine3.SizeF = new System.Drawing.SizeF(245.8333F, 2F);
             // 
             // xrLine4
             // 
-            this.xrLine4.LocationFloat = new DevExpress.Utils.PointFloat(473.0002F, 82.16667F);
+            this.xrLine4.LocationFloat = new DevExpress.Utils.PointFloat(473.0002F, 100.4999F);
             this.xrLine4.Name = "xrLine4";
             this.xrLine4.SizeF = new System.Drawing.SizeF(245.8333F, 2F);
             // 
             // xrLine5
             // 
-            this.xrLine5.LocationFloat = new DevExpress.Utils.PointFloat(739.0417F, 82.08338F);
+            this.xrLine5.LocationFloat = new DevExpress.Utils.PointFloat(739.0417F, 100.4166F);
             this.xrLine5.Name = "xrLine5";
             this.xrLine5.SizeF = new System.Drawing.SizeF(228.5415F, 2.083366F);
             // 
             // xrLabel23
             // 
-            this.xrLabel23.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrLabel23.LocationFloat = new DevExpress.Utils.PointFloat(745.1253F, 29.16667F);
+            this.xrLabel23.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel23.LocationFloat = new DevExpress.Utils.PointFloat(739.0416F, 10.00001F);
             this.xrLabel23.Name = "xrLabel23";
             this.xrLabel23.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel23.SizeF = new System.Drawing.SizeF(206.6666F, 19.375F);
@@ -497,15 +499,15 @@
             // 
             // xrPivotGrid1
             // 
-            this.xrPivotGrid1.Appearance.Cell.Font = new System.Drawing.Font("Verdana", 8.25F);
-            this.xrPivotGrid1.Appearance.CustomTotalCell.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.xrPivotGrid1.Appearance.FieldHeader.Font = new System.Drawing.Font("Verdana", 8.25F);
-            this.xrPivotGrid1.Appearance.FieldValue.Font = new System.Drawing.Font("Verdana", 8.25F);
-            this.xrPivotGrid1.Appearance.FieldValueGrandTotal.Font = new System.Drawing.Font("Verdana", 8.25F);
-            this.xrPivotGrid1.Appearance.FieldValueTotal.Font = new System.Drawing.Font("Verdana", 8.25F);
-            this.xrPivotGrid1.Appearance.GrandTotalCell.Font = new System.Drawing.Font("Verdana", 8.25F);
-            this.xrPivotGrid1.Appearance.Lines.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.xrPivotGrid1.Appearance.TotalCell.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold);
+            this.xrPivotGrid1.Appearance.Cell.Font = new System.Drawing.Font("Verdana", 6.75F);
+            this.xrPivotGrid1.Appearance.CustomTotalCell.Font = new System.Drawing.Font("Verdana", 6.75F);
+            this.xrPivotGrid1.Appearance.FieldHeader.Font = new System.Drawing.Font("Verdana", 6.75F);
+            this.xrPivotGrid1.Appearance.FieldValue.Font = new System.Drawing.Font("Verdana", 6.75F);
+            this.xrPivotGrid1.Appearance.FieldValueGrandTotal.Font = new System.Drawing.Font("Verdana", 6.75F);
+            this.xrPivotGrid1.Appearance.FieldValueTotal.Font = new System.Drawing.Font("Verdana", 6.75F);
+            this.xrPivotGrid1.Appearance.GrandTotalCell.Font = new System.Drawing.Font("Verdana", 6.75F);
+            this.xrPivotGrid1.Appearance.Lines.Font = new System.Drawing.Font("Verdana", 6F);
+            this.xrPivotGrid1.Appearance.TotalCell.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Bold);
             this.xrPivotGrid1.Fields.AddRange(new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField[] {
             this.xrPivotGridField41,
             this.xrPivotGridField42,
@@ -520,6 +522,7 @@
             this.xrPivotGrid1.OptionsPrint.MergeColumnFieldValues = false;
             this.xrPivotGrid1.OptionsPrint.MergeRowFieldValues = false;
             this.xrPivotGrid1.OptionsView.RowTotalsLocation = DevExpress.XtraPivotGrid.PivotRowTotalsLocation.Tree;
+            this.xrPivotGrid1.OptionsView.RowTreeOffset = 10;
             this.xrPivotGrid1.OptionsView.RowTreeWidth = 220;
             this.xrPivotGrid1.OptionsView.ShowColumnGrandTotalHeader = false;
             this.xrPivotGrid1.OptionsView.ShowColumnGrandTotals = false;
@@ -561,6 +564,7 @@
             this.xrPivotGridField44.FieldName = "Empleado";
             this.xrPivotGridField44.MinWidth = 30;
             this.xrPivotGridField44.Name = "xrPivotGridField44";
+            this.xrPivotGridField44.Width = 120;
             // 
             // pivotGridField1
             // 
