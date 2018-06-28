@@ -180,6 +180,8 @@
     <Compile Include="Reportes\CuentasPorPagar\CXP_006_diario_Bus.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_007_Bus.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_008_Bus.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_001_Bus.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_002_Bus.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Bus.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Bus.cs" />
     <Compile Include="Reportes\Inventario\INV_007_Bus.cs" />

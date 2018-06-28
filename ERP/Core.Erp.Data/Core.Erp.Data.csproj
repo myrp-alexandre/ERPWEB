@@ -673,6 +673,8 @@
     <Compile Include="Reportes\CuentasPorPagar\CXP_006_diario_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_007_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_008_Data.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_001_Data.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_002_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_007_Data.cs" />
