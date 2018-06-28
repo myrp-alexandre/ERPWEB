@@ -1,13 +1,13 @@
 ﻿@model Core.Erp.Info.Helps.cl_filtros_Info
 @{
     Layout = "~/Areas/Reportes/Views/Layout/_Layout_filtros.cshtml";
-    ViewBag.Title = "FAC_002";
+    ViewBag.Title = "FAC_001";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
     }
 }
-@using (Html.BeginForm("FAC_002", "FacturacionReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("FAC_001", "FacturacionReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="box collapsed-box">
         <div class="box-header with-border">
@@ -100,13 +100,25 @@
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="">Fecha corte *</label>
+                            <label for="">Fecha inicio*</label>
                             <div class="input-group date">
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                @Html.TextBoxFor(q => q.fechaCorte, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechaCorte" })
-                                @Html.ValidationMessageFor(q => q.fechaCorte, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.fecha_ini, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_ini" })
+                                @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">Fecha fin*</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.TextBoxFor(q => q.fecha_fin, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_fin" })
+                                @Html.ValidationMessageFor(q => q.fecha_fin, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -144,10 +156,13 @@
 <script>
     $(function () {
         //Date picker
-        $('#fechaCorte').datepicker({
+        $('#fecha_ini').datepicker({
             autoclose: true
         })
-        
+
+        $('#fecha_fin').datepicker({
+            autoclose: true
+        })
 
     });
 </script>

@@ -34,7 +34,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.lst_vendedor = lst_vendedor;
 
             in_Producto_Bus bus_producto = new in_Producto_Bus();
-            var lst_producto = bus_producto.get_list(IdEmpresa, false);
+            var lst_producto = bus_producto.get_list_combo_padre(IdEmpresa);
             ViewBag.lst_producto = lst_producto;
             
         }

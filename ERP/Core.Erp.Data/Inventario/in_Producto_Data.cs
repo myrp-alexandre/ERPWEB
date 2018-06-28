@@ -148,6 +148,67 @@ namespace Core.Erp.Data.Inventario
             }
         }
 
+        public List<vwin_producto_padre_combo> get_list_combo_padre(int IdEmpresa)
+        {
+            try
+            {
+                List<vwin_producto_padre_combo> Lista;
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    Lista = (from q in Context.vwin_producto_padre_combo
+                             where q.IdEmpresa == IdEmpresa
+                             select new vwin_producto_padre_combo
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdProducto = q.IdProducto,
+                                 pr_descripcion = q.pr_descripcion,
+                                 nom_presentacion = q.nom_presentacion,
+                                 ca_Categoria = q.ca_Categoria
+                                 
+                             }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<vwin_producto_hijo_combo> get_list_combo_hijo(int IdEmpresa, int IdProducto_padre)
+        {
+            try
+            {
+                List<vwin_producto_hijo_combo> Lista;
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    Lista = (from q in Context.vwin_producto_hijo_combo
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdProducto_padre == IdProducto_padre
+                             select new vwin_producto_hijo_combo
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdProducto = q.IdProducto,
+                                 pr_descripcion = q.pr_descripcion,
+                                 nom_presentacion = q.nom_presentacion,
+                                 ca_Categoria = q.ca_Categoria,
+                                 lote_fecha_vcto = q.lote_fecha_vcto,
+                                 lote_num_lote = q.lote_num_lote,
+                                 IdProducto_padre = q.IdProducto_padre
+
+                             }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         public in_Producto_Info get_info(int IdEmpresa, decimal IdProducto)
         {
             try
