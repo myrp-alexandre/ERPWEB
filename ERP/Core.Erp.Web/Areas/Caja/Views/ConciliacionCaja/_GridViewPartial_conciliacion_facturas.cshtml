@@ -10,39 +10,66 @@
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
         settings.Settings.ShowFilterRow = true;
-        settings.SettingsBehavior.AllowSelectByRowClick = false;
 
-        //Configuración checkbox
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ConciliacionCaja", Action = "EditingUpdateFactura", Area = "Caja" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ConciliacionCaja", Action = "EditingDeleteFactura", Area = "Caja" };
+
         settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowSelectCheckbox = true;
-        settings.CommandColumn.SelectAllCheckboxMode = GridViewSelectAllCheckBoxMode.AllPages;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = false;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
 
         //Configuración click derecho
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
-        settings.SettingsContextMenu.EnableRowMenu = DefaultBoolean.False;
+        settings.SettingsContextMenu.EnableRowMenu = DefaultBoolean.True;
 
-        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
-        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
-        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
 
-        settings.Columns.Add("IdCbteCble_Ogiro", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("Tipo_documento", "Tipo").Width = Unit.Percentage(10);
-        settings.Columns.Add("co_factura", "# Documento").Width = Unit.Percentage(20);
+        settings.Columns.Add(column =>
+        {
+            column.Width = Unit.Percentage(10);
+            column.FieldName = "IdCbteCble_Ogiro";
+            column.Caption = "ID";
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Width = Unit.Percentage(10);
+            column.FieldName = "Tipo_documento";
+            column.Caption = "Tipo";
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Width = Unit.Percentage(20);
+            column.FieldName = "co_factura";
+            column.Caption = "# Documento";
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(10);
             column.FieldName = "co_FechaFactura";
             column.Caption = "Fecha";
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(40);
             column.FieldName = "pe_nombreCompleto";
             column.Caption = "Proveedor";
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
@@ -50,6 +77,7 @@
             column.FieldName = "co_total";
             column.Caption = "Total";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
@@ -57,7 +85,22 @@
             column.FieldName = "Saldo_OG";
             column.Caption = "Saldo";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
+        settings.Columns.Add(column =>
+        {
+            column.Width = Unit.Percentage(10);
+            column.FieldName = "Valor_a_aplicar";
+            column.Caption = "Valor a aplicar";
+            column.PropertiesEdit.DisplayFormatString = "{0:N2}";
+            column.EditorProperties().SpinEdit(p =>
+            {
+                p.MinValue = 0;
+                p.DisplayFormatInEditMode = true;
+                p.DisplayFormatString = "N2";
+            });
+        });
+        
     });
 }
-@grid.Bind(Model).GetHtml()
+@grid.Bind(Model.lst_det_fact).GetHtml()

@@ -337,6 +337,6 @@ namespace Core.Erp.Data.Contabilidad
 
                 throw;
             }            
-        }
+        }        
     }
 }

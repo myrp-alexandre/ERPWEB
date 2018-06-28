@@ -4,7 +4,7 @@
         settings.Name = "GridView_conciliacion_facturas_x_cruzar";
         settings.CallbackRouteValues = new { Controller = "ConciliacionCaja", Action = "GridViewPartial_conciliacion_facturas_x_cruzar" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "Secuencia";
+        settings.KeyFieldName = "IdCbteCble_Ogiro";
 
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
@@ -56,6 +56,8 @@
             column.Caption = "Saldo";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
         });
+        settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
+        settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
     });
 }
 @grid.Bind(Model).GetHtml()

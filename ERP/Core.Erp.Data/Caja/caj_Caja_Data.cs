@@ -202,7 +202,27 @@ namespace Core.Erp.Data.Caja
             }
         }
 
+        public string get_IdCtaCble(int IdEmpresa, int IdCaja)
+        {
+            try
+            {
+                string IdCtaCble = string.Empty;
 
+                using (Entities_caja Context = new Entities_caja())
+                {
+                    var Entity = Context.caj_Caja.Where(q => q.IdEmpresa == IdEmpresa && q.IdCaja == IdCaja).FirstOrDefault();
+                    if (Entity != null)
+                        IdCtaCble = Entity.IdCtaCble;
+                }
+
+                return IdCtaCble;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
     }
 }

@@ -285,5 +285,37 @@ namespace Core.Erp.Data.Contabilidad
                 throw;
             }
         }
+
+        public double get_saldo_anterior(int IdEmpresa, string IdCtaCble, DateTime Fecha_corte)
+        {
+            try
+            {
+                double saldo_anterior = 0;
+
+                using (Entities_contabilidad Context = new Entities_contabilidad())
+                {
+                    var lst = from d in Context.ct_cbtecble_det
+                              join c in Context.ct_cbtecble
+                              on new { d.IdEmpresa, d.IdTipoCbte, d.IdCbteCble } equals new { c.IdEmpresa, c.IdTipoCbte, c.IdCbteCble }
+                              where d.IdEmpresa == IdEmpresa
+                              && d.IdCtaCble == IdCtaCble
+                              && c.cb_Fecha > Fecha_corte
+                              group d by new
+                              {
+                                  d.IdEmpresa,
+                                  d.IdCtaCble
+                              } into grouping
+                              select grouping.Sum(q => q.dc_Valor);
+                    if (lst.Count() > 0)
+                        saldo_anterior = lst.First();
+                }
+
+                return saldo_anterior;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

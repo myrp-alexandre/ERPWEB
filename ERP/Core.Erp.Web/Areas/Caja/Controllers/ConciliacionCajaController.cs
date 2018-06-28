@@ -17,6 +17,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 {
     public class ConciliacionCajaController : Controller
     {
+        #region Variables
         cp_conciliacion_Caja_Bus bus_conciliacion = new cp_conciliacion_Caja_Bus();
         cp_conciliacion_Caja_det_Bus bus_det = new cp_conciliacion_Caja_det_Bus();
         cp_conciliacion_Caja_det_Ing_Caja_Bus bus_ing = new cp_conciliacion_Caja_det_Ing_Caja_Bus();
@@ -29,6 +30,9 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         caj_Caja_Bus bus_caja = new caj_Caja_Bus();
         tb_persona_Bus bus_persona = new tb_persona_Bus();
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        #endregion
+
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -49,6 +53,11 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
             var lst_caja = bus_caja.get_list(IdEmpresa, false);
             ViewBag.lst_caja = lst_caja;
+
+            Dictionary<string, string> lst = new Dictionary<string, string>();
+            lst.Add(cl_enumeradores.eEstadoCierreCaja.EST_CIE_ABI.ToString(), "ABIERTA");
+            lst.Add(cl_enumeradores.eEstadoCierreCaja.EST_CIE_CER.ToString(), "CERRADA");
+            ViewBag.lst_estado = lst;
         }
 
         public ActionResult Nuevo()
@@ -148,6 +157,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             return PartialView("_ComboBoxPartial_persona", model);
         }
 
+        #region Facturas
         [ValidateInput(false)]
         public ActionResult GridViewPartial_conciliacion_facturas_x_cruzar()
         {
@@ -157,11 +167,75 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_conciliacion_facturas()
+        public ActionResult GridViewPartial_conciliacion_facturas(decimal IdConciliacion_caja = 0)
         {
-            var model = new object[0];
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
+            model.lst_det_fact = bus_det.get_list(IdEmpresa, IdConciliacion_caja);
+            if (model.lst_det_fact.Count == 0)
+                model.lst_det_fact = list_det.get_list();
             return PartialView("_GridViewPartial_conciliacion_facturas", model);
         }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNewFactura(string IDs = "")
+        {
+            if (IDs != "")
+            {
+                int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+                var lst_x_cruzar = bus_det.get_list_x_pagar(IdEmpresa);
+                string[] array = IDs.Split(',');
+                foreach (var item in array)
+                {
+                    var info_det = lst_x_cruzar.Where(q => q.IdCbteCble_Ogiro == Convert.ToInt32(item)).FirstOrDefault();
+                    if(info_det != null)
+                        list_det.AddRow(info_det);
+                }
+            }
+            cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
+            model.lst_det_fact = list_det.get_list();
+            return PartialView("_GridViewPartial_conciliacion_facturas", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdateFactura([ModelBinder(typeof(DevExpressEditorsBinder))] cp_conciliacion_Caja_det_Info info_det)
+        {
+            if (ModelState.IsValid)
+                list_det.UpdateRow(info_det);
+            cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
+            model.lst_det_fact = list_det.get_list();
+            return PartialView("_GridViewPartial_conciliacion_facturas", model);
+        }
+
+        public ActionResult EditingDeleteFactura(int secuencia)
+        {
+            list_det.DeleteRow(secuencia);
+            cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
+            model.lst_det_fact = list_det.get_list();
+            return PartialView("_GridViewPartial_conciliacion_facturas", model);
+        }
+        #endregion
+
+        #region Json
+        public JsonResult GetSaldoAnterior(DateTime? FechaCorte, string IdCtaCble = "")
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            double resultado = 0;
+            if(FechaCorte != null)
+                resultado = bus_plancta.get_saldo_anterior(IdEmpresa, IdCtaCble, Convert.ToDateTime(FechaCorte));
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetIdCtaCbleCaja(int IdCaja = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            string resultado = string.Empty;
+            if (IdCaja != 0)
+                resultado = bus_caja.get_IdCtaCble(IdEmpresa, IdCaja);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 
     public class cp_conciliacion_Caja_det_List
@@ -185,13 +259,15 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         public void AddRow(cp_conciliacion_Caja_det_Info info_det)
         {
             List<cp_conciliacion_Caja_det_Info> list = get_list();
-            info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;            
-            list.Add(info_det);
+            info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+            if (list.Where(q=>q.IdEmpresa_OGiro == info_det.IdEmpresa_OGiro && q.IdTipoCbte_Ogiro == info_det.IdTipoCbte_Ogiro && q.IdCbteCble_Ogiro == info_det.IdCbteCble_Ogiro).Count() == 0)
+                list.Add(info_det);
         }
 
         public void UpdateRow(cp_conciliacion_Caja_det_Info info_det)
         {
-            cp_conciliacion_Caja_det_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();            
+            cp_conciliacion_Caja_det_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();
+            edited_info.Valor_a_aplicar = info_det.Valor_a_aplicar;
         }
 
         public void DeleteRow(int Secuencia)
