@@ -53,6 +53,9 @@ namespace Core.Erp.Info.Helps
         public DateTime fechaCorte { get; set; }
         public decimal IdCliente { get; set; }
         public int IdClienteContacto { get; set; }
+        public int IdVendedor { get; set; }
+        public decimal IdProducto_padre { get; set; }
+        public bool mostrar_anulados { get; set; }
 
         public cl_filtros_Info()
         {

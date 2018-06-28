@@ -1,4 +1,4 @@
-﻿using Core.Erp.Data.CuentasPorPagar;
+using Core.Erp.Data.CuentasPorPagar;
 using Core.Erp.Info.CuentasPorPagar;
 using System;
 using System.Collections.Generic;
@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.CuentasPorPagar
 {
-   public class cp_proveedor_clase_Bus
-    {
+
+    public class cp_proveedor_clase_Bus
+    { 
         cp_proveedor_clase_Data odata = new cp_proveedor_clase_Data();
 
         public List<cp_proveedor_clase_Info> get_list(int IdEmpresa, bool mostrar_anulados)
@@ -97,5 +98,5 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
-        }
+    }
 }
