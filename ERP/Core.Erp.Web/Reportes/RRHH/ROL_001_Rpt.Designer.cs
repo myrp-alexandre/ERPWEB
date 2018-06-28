@@ -520,7 +520,7 @@
             this.xrPivotGrid1.OptionsPrint.MergeColumnFieldValues = false;
             this.xrPivotGrid1.OptionsPrint.MergeRowFieldValues = false;
             this.xrPivotGrid1.OptionsView.RowTotalsLocation = DevExpress.XtraPivotGrid.PivotRowTotalsLocation.Tree;
-            this.xrPivotGrid1.OptionsView.RowTreeWidth = 180;
+            this.xrPivotGrid1.OptionsView.RowTreeWidth = 220;
             this.xrPivotGrid1.OptionsView.ShowColumnGrandTotalHeader = false;
             this.xrPivotGrid1.OptionsView.ShowColumnGrandTotals = false;
             this.xrPivotGrid1.OptionsView.ShowFilterHeaders = false;
@@ -533,7 +533,7 @@
             // 
             this.xrPivotGridField41.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
             this.xrPivotGridField41.AreaIndex = 0;
-            this.xrPivotGridField41.Caption = "División";
+            this.xrPivotGridField41.Caption = "Div.";
             this.xrPivotGridField41.FieldName = "Division";
             this.xrPivotGridField41.Name = "xrPivotGridField41";
             // 
@@ -549,7 +549,7 @@
             // 
             this.xrPivotGridField43.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
             this.xrPivotGridField43.AreaIndex = 2;
-            this.xrPivotGridField43.Caption = "Departamento";
+            this.xrPivotGridField43.Caption = "Dep.";
             this.xrPivotGridField43.FieldName = "de_descripcion";
             this.xrPivotGridField43.Name = "xrPivotGridField43";
             // 
@@ -559,6 +559,7 @@
             this.xrPivotGridField44.AreaIndex = 3;
             this.xrPivotGridField44.Caption = "Empleado";
             this.xrPivotGridField44.FieldName = "Empleado";
+            this.xrPivotGridField44.MinWidth = 30;
             this.xrPivotGridField44.Name = "xrPivotGridField44";
             // 
             // pivotGridField1
@@ -572,7 +573,7 @@
             this.pivotGridField1.EmptyValueText = "0.00";
             this.pivotGridField1.FieldName = "Valor";
             this.pivotGridField1.Name = "pivotGridField1";
-            this.pivotGridField1.Width = 65;
+            this.pivotGridField1.Width = 75;
             // 
             // pivotGridField2
             // 
@@ -581,7 +582,7 @@
             this.pivotGridField2.Caption = "Orden";
             this.pivotGridField2.FieldName = "Orden";
             this.pivotGridField2.Name = "pivotGridField2";
-            this.pivotGridField2.Width = 65;
+            this.pivotGridField2.Width = 75;
             // 
             // pivotGridField3
             // 
@@ -590,7 +591,7 @@
             this.pivotGridField3.Caption = "Rubros";
             this.pivotGridField3.FieldName = "ru_codRolGen";
             this.pivotGridField3.Name = "pivotGridField3";
-            this.pivotGridField3.Width = 65;
+            this.pivotGridField3.Width = 75;
             // 
             // xrPivotGridField21
             // 

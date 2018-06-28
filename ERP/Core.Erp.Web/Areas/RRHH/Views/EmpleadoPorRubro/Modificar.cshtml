@@ -18,12 +18,12 @@
                     <label for="IdCtaCblePadre">Empleado*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado, settings =>
                {
-                   settings.Name = "IdEmpleado";
+                   settings.Name = "IdRubro";
                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
-                   settings.Properties.Columns.Add("IdEmpleado", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("Empleado", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("ru_codRolGen", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("ru_descripcion", "Rubro").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                   settings.Properties.Columns.Add("ru_tipo", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(10);
 
                    //Campo ID
                    settings.Properties.ValueField = "IdEmpleado";
