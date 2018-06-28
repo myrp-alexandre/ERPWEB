@@ -1,4 +1,5 @@
-﻿using Core.Erp.Bus.General;
+﻿using Core.Erp.Bus.Facturacion;
+using Core.Erp.Bus.General;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Reportes.Facturacion;
 using System;
@@ -19,6 +20,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
 
+            fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
+            var lst_cliente = bus_cliente.get_list(IdEmpresa, false);
+            ViewBag.lst_cliente = lst_cliente;
+
+            fa_cliente_tipo_Bus bus_tipo = new fa_cliente_tipo_Bus();
+            var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
+            ViewBag.lst_tipo = lst_tipo;
         }
 
         public ActionResult FAC_002(DateTime? fechaCorte, int IdSucursal = 0, decimal IdCliente= 0,int IdClienteContacto = 0)
