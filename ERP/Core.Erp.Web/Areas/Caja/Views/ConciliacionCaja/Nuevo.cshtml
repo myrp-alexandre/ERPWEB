@@ -10,6 +10,52 @@
 }
 
 <script type="text/javascript">
+
+    $(function () {
+        //Date picker
+        $('#Fecha_ini').datepicker({
+            autoclose: true
+        })
+        $('#Fecha_fin').datepicker({
+            autoclose: true
+        })
+        $('#Fecha').datepicker({
+            autoclose: true
+        })
+
+        $("#Fecha_ini").change(function () {
+            GetSaldoAnterior();
+        });
+        $("#Fecha_ini").change(function () {
+            GetSaldoAnterior();
+            GetIngresos();
+        });
+        $("#IdPeriodo").change(function () {
+            GetPeriodo();
+            GetSaldoAnterior();
+            GetIngresos();
+        });
+        $("#IdCaja").change(function () {
+            GetIdCtaCbleCaja();
+            GetSaldoAnterior();
+            GetIngresos();
+        });
+
+        $("#IdEstadoCierre").change(function () {
+            if ($("IdEstadoCierre").val() = "EST_CIE_ABI") {
+                $("#link_op").hide();
+            } else {
+                $("#link_op").click();
+                $("#link_op").show();
+            }
+        });
+
+        GetIdCtaCbleCaja();
+        GetPeriodo();
+        GetSaldoAnterior();
+        GetIngresos();
+    });
+
      function OnSelectedIndexChanged(s, e) {
         GridView_conciliacion_vales.AutoFilterByColumn("IdPersona", s.GetText());
     }
@@ -35,7 +81,7 @@
     }
 
     function AddFacturas() {
-        
+
         var datos = {
             IDs: selectedIDs
         }
@@ -53,11 +99,127 @@
             error: function (error) {
             }
         });
-        selectedIDs = "";        
+        selectedIDs = "";
         GridView_conciliacion_facturas_x_cruzar.PerformCallback();
         GridView_conciliacion_facturas_x_cruzar.UnselectRows();
         GridView_conciliacion_facturas.PerformCallback();
         $("#FacturasModal").modal("hide");
+    }
+
+    function GetSaldoAnterior() {
+        var d = $("#Fecha_ini").val();
+        var datos = {
+            FechaCorte: d,
+            IdCtaCble: $("#IdCtaCble").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetSaldoAnterior", "ConciliacionCaja",new { Area = "Caja"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#Saldo_cont_al_periodo").val(Math.round(Number(data),2));
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function GetIdCtaCbleCaja() {
+        var datos = {
+            IdCaja: $("#IdCaja").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetIdCtaCbleCaja", "ConciliacionCaja",new { Area = "Caja"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#IdCtaCble").val(data);
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function GetPeriodo() {
+        var datos = {
+            IdPeriodo: $("#IdPeriodo").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetPeriodo", "ConciliacionCaja",new { Area = "Caja"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.IdEmpresa != 0) {
+                    $('#Fecha_ini').datepicker("setDate", moment(data.pe_FechaIni).format("DD/MM/YYYY"));
+                    $('#Fecha_fin').datepicker("setDate", moment(data.pe_FechaFin).format("DD/MM/YYYY"));
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function GetIngresos() {
+        var datos = {
+            FechaFin: $("#Fecha_fin").val(),
+            IdCaja: $("#IdCaja").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetIngresos", "ConciliacionCaja",new { Area = "Caja"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+        Calcular();
+        GridView_conciliacion_ingresos.PerformCallback();
+    }
+
+    function Calcular() {
+        var datos = {
+            SaldoContableAnterior: $("#Saldo_cont_al_periodo").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("Calcular", "ConciliacionCaja",new { Area = "Caja"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#Ingresos").val(data.Ingresos);
+                $("#Total_Ing").val(data.Dif_ingresos);
+                $("#Total_fondo").val(data.Fondo);
+                $("#Total_fact_vale").val(data.Total_fact_vales);
+                $("#Dif_x_pagar_o_cobrar").val(data.Diferencia);
+            },
+            error: function (error) {
+            }
+        });
     }
 </script>
 
@@ -89,9 +251,8 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdEstadoCierre">Estado *</label>
-                    @Html.DropDownListFor(q => q.IdEstadoCierre, new SelectList(ViewBag.lst_estado, "Key", "Value"), new { @id = "IdEstadoCierreCombo", @class = "form-control", @disabled = "disabled" })
+                    @Html.DropDownListFor(q => q.IdEstadoCierre, new SelectList(ViewBag.lst_estado, "Key", "Value"), new { @id = "IdEstadoCierre", @class = "form-control"})
                     @Html.ValidationMessageFor(q => q.IdEstadoCierre, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(q => q.IdEstadoCierre, new { @id = "IdEstadoCierre" })
                 </div>
             </div>
             <div class="col-md-offset-6 col-md-2">
@@ -209,6 +370,9 @@
             <li>
                 <a href="#tab_ingresos" aria-controls="ingresos" role="tab" data-toggle="tab">Ingresos</a>
             </li>
+            <li>
+                <a href="#tab_op" id="link_op" aria-controls="vales" role="tab" data-toggle="tab" hidden>Orden de pago</a>
+            </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_facturas">
@@ -220,120 +384,27 @@
                     </div>
                 </div>
                 <br />
-                    @Html.Action("GridViewPartial_conciliacion_facturas")
-                
-                
+                @Html.Action("GridViewPartial_conciliacion_facturas")
+
+
 
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_vales">
-                
-                    @Html.Action("GridViewPartial_conciliacion_vales")
-                
-                
+
+                @Html.Action("GridViewPartial_conciliacion_vales")
+
+
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_ingresos">
 
                 @Html.Action("GridViewPartial_conciliacion_ingresos")
 
             </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_op">
+                <div class="row">
+
+                </div>
+            </div>
         </div>
     </div>
 }
-<script type="text/javascript">
-    $(function () {
-        //Date picker
-        $('#Fecha_ini').datepicker({
-            autoclose: true
-        })
-        $('#Fecha_fin').datepicker({
-            autoclose: true
-        })
-        $('#Fecha').datepicker({
-            autoclose: true
-        })
-
-        $("#Fecha_ini").change(function () {
-            GetSaldoAnterior();
-        });
-        $("#IdPeriodo").change(function () {
-            GetSaldoAnterior();
-        });
-        $("#IdCaja").change(function () {
-            GetIdCtaCbleCaja();
-            GetSaldoAnterior();
-        });
-
-        GetIdCtaCbleCaja();
-        GetPeriodo();
-        GetSaldoAnterior();
-    });
-
-    
-    function GetSaldoAnterior() {
-        var d = $("#Fecha_ini").val();
-        var datos = {
-            FechaCorte: d,
-            IdCtaCble: $("#IdCtaCble").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetSaldoAnterior", "ConciliacionCaja",new { Area = "Caja"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                $("#Saldo_cont_al_periodo").val(Math.round(Number(data),2));
-            },
-            error: function (error) {
-            }
-        });
-    }
-
-    function GetIdCtaCbleCaja() {
-        var datos = {
-            IdCaja: $("#IdCaja").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetIdCtaCbleCaja", "ConciliacionCaja",new { Area = "Caja"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                $("#IdCtaCble").val(data);
-            },
-            error: function (error) {
-            }
-        });
-    }
-
-    function GetPeriodo() {
-        var datos = {
-            IdPeriodo: $("#IdPeriodo").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetPeriodo", "ConciliacionCaja",new { Area = "Caja"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if (data.IdEmpresa != 0) {
-                    $('#Fecha_ini').datepicker("setDate", moment(data.pe_FechaIni).format("DD/MM/YYYY"));
-                    $('#Fecha_fin').datepicker("setDate", moment(data.pe_FechaFin).format("DD/MM/YYYY"));
-                }                
-            },
-            error: function (error) {
-            }
-        });
-    }
-</script>

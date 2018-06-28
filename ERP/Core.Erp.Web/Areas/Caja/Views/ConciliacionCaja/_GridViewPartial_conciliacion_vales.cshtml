@@ -111,7 +111,7 @@
                 p.Width = Unit.Percentage(100);
             });
         });
-
+        settings.ClientSideEvents.EndCallback = "Calcular";
     });
 }
 @grid.Bind(Model.lst_det_vale).GetHtml()
