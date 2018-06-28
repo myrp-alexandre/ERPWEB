@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
 {
     public class FAC_001_Data
     {
-         public List<FAC_001_Info> get_list(int IdEmpresa, int IdSucursal, int IdVendedor, decimal IdCLiente, int IdCliente_contacto, decimal IdProducto, decimal IdProducto_padre, DateTime fecha_ini, DateTime fecha_fin, bool mostrar_anulados)
+         public List<FAC_001_Info> get_list(int IdEmpresa, int IdSucursal, int IdVendedor, decimal IdCliente, int IdCliente_contacto, decimal IdProducto, decimal IdProducto_padre, DateTime fecha_ini, DateTime fecha_fin, bool mostrar_anulados)
         {
             try
             {
@@ -20,7 +20,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
                              where q.IdEmpresa == IdEmpresa
                              && q.IdSucursal == IdSucursal
                              && q.IdVendedor == IdVendedor
-                             && q.IdCliente == IdCLiente
+                             && q.IdCliente == IdCliente
                              && q.IdProducto == IdProducto
                              && q.IdProducto_padre == IdProducto_padre
                              select new FAC_001_Info

@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Bus.Facturacion;
 using Core.Erp.Bus.General;
+using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Reportes.Facturacion;
 using System;
@@ -27,6 +28,70 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             fa_cliente_tipo_Bus bus_tipo = new fa_cliente_tipo_Bus();
             var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_tipo = lst_tipo;
+
+            fa_Vendedor_Bus bus_vendedor = new fa_Vendedor_Bus();
+            var lst_vendedor = bus_vendedor.get_list(IdEmpresa, false);
+            ViewBag.lst_vendedor = lst_vendedor;
+
+            in_Producto_Bus bus_producto = new in_Producto_Bus();
+            var lst_producto = bus_producto.get_list(IdEmpresa, false);
+            ViewBag.lst_producto = lst_producto;
+            
+        }
+
+
+        public ActionResult FAC_001(DateTime? fecha_ini, DateTime? fecha_fin, int IdEmpresa = 0, int IdSucursal = 0, int IdVendedor = 0, decimal IdCliente = 0, int IdCliente_contacto = 0, decimal IdProducto = 0, decimal IdProducto_padre = 0,  bool mostrar_anulados = false)
+        {
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                fecha_ini = fecha_ini == null ? DateTime.Now : Convert.ToDateTime(fecha_ini),
+                fecha_fin = fecha_fin == null ? DateTime.Now : Convert.ToDateTime(fecha_fin),
+                IdSucursal = IdSucursal,
+                IdCliente = IdCliente,
+                IdClienteContacto = IdCliente_contacto,
+                IdProducto = IdProducto,
+                IdProducto_padre = IdProducto_padre,
+                mostrar_anulados= mostrar_anulados
+            };
+
+            cargar_combos();
+            FAC_001_Rpt report = new FAC_001_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdCliente.Value = model.IdCliente;
+            report.p_IdCliente_contacto.Value = model.IdClienteContacto;
+            report.p_IdVendedor.Value = model.IdVendedor;
+            report.p_IdProducto.Value = model.IdProducto;
+            report.p_IdProducto_padre.Value = model.IdProducto_padre;
+            report.p_mostrar_anulados.Value = model.mostrar_anulados;
+            report.usuario = Session["IdUsuario"].ToString();
+            report.empresa = Session["nom_empresa"].ToString();
+            report.RequestParameters = false;
+            ViewBag.Report = report;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult FAC_001(cl_filtros_Info model)
+        {
+            FAC_001_Rpt report = new FAC_001_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdCliente.Value = model.IdCliente;
+            report.p_IdCliente_contacto.Value = model.IdClienteContacto;
+            report.p_IdVendedor.Value = model.IdVendedor;
+            report.p_IdProducto.Value = model.IdProducto;
+            report.p_IdProducto_padre.Value = model.IdProducto_padre;
+            report.p_mostrar_anulados.Value = model.mostrar_anulados;
+            report.usuario = Session["IdUsuario"].ToString();
+            report.empresa = Session["nom_empresa"].ToString();
+            report.RequestParameters = false;
+            ViewBag.Report = report;
+            return View(model);
         }
 
         public ActionResult FAC_002(DateTime? fechaCorte, int IdSucursal = 0, decimal IdCliente= 0,int IdClienteContacto = 0)
