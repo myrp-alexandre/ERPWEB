@@ -28,6 +28,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  IdNominaTipoLiqui = q.IdNominaTipoLiqui,
                                  IdPeriodo = q.IdPeriodo,
                                  Ruc = q.Ruc,
+                                 em_ruc=q.em_ruc,
                                  ru_orden = q.ru_orden,
                                  NombreCompleto = q.pe_apellido + " " + q.pe_nombre,
                                  RubroDescripcion = q.RubroDescripcion,
