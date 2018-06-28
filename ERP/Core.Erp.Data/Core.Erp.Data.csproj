@@ -369,7 +369,6 @@
     <Compile Include="Inventario\in_grupo_Data.cs" />
     <Compile Include="Inventario\in_Ing_Egr_Inven_Data.cs" />
     <Compile Include="Inventario\in_Ing_Egr_Inven_det_Data.cs" />
-    <Compile Include="Inventario\in_Ing_Egr_Inven_distribucion_Data.cs" />
     <Compile Include="Inventario\in_linea_Data.cs" />
     <Compile Include="Inventario\in_Marca_Data.cs" />
     <Compile Include="Inventario\in_Motivo_Inven_Data.cs" />
@@ -956,6 +955,9 @@
     <Compile Include="SPCXP_008_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="SPFAC_002_Result.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="SPINV_001_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
@@ -1122,6 +1124,9 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="VWCXP_006_diario.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWFAC_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="vwfa_cliente_consulta.cs">
