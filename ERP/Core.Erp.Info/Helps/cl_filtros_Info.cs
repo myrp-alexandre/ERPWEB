@@ -46,7 +46,13 @@ namespace Core.Erp.Info.Helps
         public bool no_mostrar_en_conciliacion { get; set; }
         public bool no_mostrar_saldo_en_0 { get; set; }
 
+
         #endregion
+
+
+        public DateTime fechaCorte { get; set; }
+        public decimal IdCliente { get; set; }
+        public int IdClienteContacto { get; set; }
 
         public cl_filtros_Info()
         {
