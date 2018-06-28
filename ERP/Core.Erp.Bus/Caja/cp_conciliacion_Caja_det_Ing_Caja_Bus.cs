@@ -17,7 +17,18 @@ namespace Core.Erp.Bus.Caja
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
 
+        public List<cp_conciliacion_Caja_det_Ing_Caja_Info> get_list_ingresos_x_conciliar(int IdEmpresa, DateTime Fecha_fin, int IdCaja)
+        {
+            try
+            {
+                return odata.get_list_ingresos_x_conciliar(IdEmpresa, Fecha_fin, IdCaja);
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

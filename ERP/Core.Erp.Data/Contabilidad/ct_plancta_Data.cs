@@ -299,7 +299,7 @@ namespace Core.Erp.Data.Contabilidad
                               on new { d.IdEmpresa, d.IdTipoCbte, d.IdCbteCble } equals new { c.IdEmpresa, c.IdTipoCbte, c.IdCbteCble }
                               where d.IdEmpresa == IdEmpresa
                               && d.IdCtaCble == IdCtaCble
-                              && c.cb_Fecha > Fecha_corte
+                              && c.cb_Fecha < Fecha_corte
                               group d by new
                               {
                                   d.IdEmpresa,
