@@ -497,15 +497,15 @@
             // 
             // xrPivotGrid1
             // 
-            this.xrPivotGrid1.Appearance.Cell.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.xrPivotGrid1.Appearance.Cell.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.xrPivotGrid1.Appearance.CustomTotalCell.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.xrPivotGrid1.Appearance.FieldHeader.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.xrPivotGrid1.Appearance.FieldHeader.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.xrPivotGrid1.Appearance.FieldValue.Font = new System.Drawing.Font("Verdana", 8.25F);
-            this.xrPivotGrid1.Appearance.FieldValueGrandTotal.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.xrPivotGrid1.Appearance.FieldValueTotal.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.xrPivotGrid1.Appearance.GrandTotalCell.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.xrPivotGrid1.Appearance.FieldValueGrandTotal.Font = new System.Drawing.Font("Verdana", 8.25F);
+            this.xrPivotGrid1.Appearance.FieldValueTotal.Font = new System.Drawing.Font("Verdana", 8.25F);
+            this.xrPivotGrid1.Appearance.GrandTotalCell.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.xrPivotGrid1.Appearance.Lines.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.xrPivotGrid1.Appearance.TotalCell.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.xrPivotGrid1.Appearance.TotalCell.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold);
             this.xrPivotGrid1.Fields.AddRange(new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField[] {
             this.xrPivotGridField41,
             this.xrPivotGridField42,
@@ -520,14 +520,14 @@
             this.xrPivotGrid1.OptionsPrint.MergeColumnFieldValues = false;
             this.xrPivotGrid1.OptionsPrint.MergeRowFieldValues = false;
             this.xrPivotGrid1.OptionsView.RowTotalsLocation = DevExpress.XtraPivotGrid.PivotRowTotalsLocation.Tree;
-            this.xrPivotGrid1.OptionsView.RowTreeWidth = 170;
+            this.xrPivotGrid1.OptionsView.RowTreeWidth = 180;
             this.xrPivotGrid1.OptionsView.ShowColumnGrandTotalHeader = false;
             this.xrPivotGrid1.OptionsView.ShowColumnGrandTotals = false;
             this.xrPivotGrid1.OptionsView.ShowFilterHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowFilterSeparatorBar = false;
             this.xrPivotGrid1.OptionsView.ShowRowGrandTotalHeader = false;
             this.xrPivotGrid1.OptionsView.ShowRowGrandTotals = false;
-            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(286.875F, 81.25F);
+            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(397.2917F, 81.25F);
             // 
             // xrPivotGridField41
             // 
@@ -572,7 +572,7 @@
             this.pivotGridField1.EmptyValueText = "0.00";
             this.pivotGridField1.FieldName = "Valor";
             this.pivotGridField1.Name = "pivotGridField1";
-            this.pivotGridField1.Width = 52;
+            this.pivotGridField1.Width = 65;
             // 
             // pivotGridField2
             // 
@@ -581,7 +581,7 @@
             this.pivotGridField2.Caption = "Orden";
             this.pivotGridField2.FieldName = "Orden";
             this.pivotGridField2.Name = "pivotGridField2";
-            this.pivotGridField2.Width = 52;
+            this.pivotGridField2.Width = 65;
             // 
             // pivotGridField3
             // 
@@ -590,7 +590,7 @@
             this.pivotGridField3.Caption = "Rubros";
             this.pivotGridField3.FieldName = "ru_codRolGen";
             this.pivotGridField3.Name = "pivotGridField3";
-            this.pivotGridField3.Width = 52;
+            this.pivotGridField3.Width = 65;
             // 
             // xrPivotGridField21
             // 

@@ -100,6 +100,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_transferencia_Info model = bus_trnferencia.get_info(IdEmpresa, IdSucursalOrigen, IdBodegaOrigen, IdTransferencia);
+            Session["in_transferencia_det_Info"] = model.list_detalle;
             if (model == null)
                 return RedirectToAction("Index");
             cargar_combos();
@@ -129,6 +130,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_transferencia_Info model = bus_trnferencia.get_info(IdEmpresa, IdSucursalOrigen, IdBodegaOrigen, IdTransferencia);
+            Session["in_transferencia_det_Info"] = model.list_detalle;
             if (model == null)
                 return RedirectToAction("Index");
             cargar_combos();

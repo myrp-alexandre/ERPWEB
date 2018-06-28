@@ -10,6 +10,7 @@ namespace Core.Erp.Bus.Inventario
    public class in_transferencia_Bus
     {
         in_transferencia_Data odata = new in_transferencia_Data();
+        in_transferencia_det_Data odata_det = new in_transferencia_det_Data();
         in_Ing_Egr_Inven_Bus bus_ingreso = new in_Ing_Egr_Inven_Bus();
         in_producto_x_tb_bodega_Costo_Historico_Bus bus_costo = new in_producto_x_tb_bodega_Costo_Historico_Bus();
         public List<in_transferencia_Info> get_list(int IdEmpresa)
@@ -28,7 +29,10 @@ namespace Core.Erp.Bus.Inventario
         {
             try
             {
-                return odata.get_info(IdEmpresa, IdSucursa,IdBodega,IdTransferencia);
+                in_transferencia_Info info = new in_transferencia_Info();
+                info= odata.get_info(IdEmpresa, IdSucursa,IdBodega,IdTransferencia);
+                info.list_detalle = odata_det.get_list(IdEmpresa, IdSucursa, IdBodega, IdTransferencia);
+                return info;
             }
             catch (Exception)
             {
