@@ -148,23 +148,22 @@ namespace Core.Erp.Data.Inventario
             }
         }
 
-        public List<vwin_producto_padre_combo> get_list_combo_padre(int IdEmpresa)
+        public List<in_Producto_Info> get_list_combo_padre(int IdEmpresa)
         {
             try
             {
-                List<vwin_producto_padre_combo> Lista;
+                List<in_Producto_Info> Lista;
                 using (Entities_inventario Context = new Entities_inventario())
                 {
                     Lista = (from q in Context.vwin_producto_padre_combo
                              where q.IdEmpresa == IdEmpresa
-                             select new vwin_producto_padre_combo
+                             select new in_Producto_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdProducto = q.IdProducto,
                                  pr_descripcion = q.pr_descripcion,
                                  nom_presentacion = q.nom_presentacion,
-                                 ca_Categoria = q.ca_Categoria
-                                 
+                                 nom_categoria = q.ca_Categoria                                 
                              }).ToList();
                 }
                 return Lista;
