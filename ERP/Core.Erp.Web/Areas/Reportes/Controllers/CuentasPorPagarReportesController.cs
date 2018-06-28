@@ -1,4 +1,5 @@
-﻿using Core.Erp.Info.Helps;
+﻿using Core.Erp.Bus.CuentasPorPagar;
+using Core.Erp.Info.Helps;
 using Core.Erp.Web.Reportes.CuentasPorPagar;
 using System;
 using System.Collections.Generic;
@@ -111,6 +112,56 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.empresa = Session["nom_empresa"].ToString();
             report.RequestParameters = false;
             ViewBag.Report = report;
+            return View(model);
+        }
+
+
+        private void cargar_combos()
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            cp_proveedor_clase_Bus bus_proveedor = new cp_proveedor_clase_Bus();
+            var lst_proveedor = bus_proveedor.get_list(IdEmpresa, false);
+            ViewBag.lst_proveedor = lst_proveedor;
+
+        }
+        public ActionResult CXP_008(DateTime? fecha,  bool no_mostrar_en_conciliacion = false, bool no_mostrar_saldo_en_0 = false, decimal IdProveedor = 0)
+        {
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                fecha = fecha == null ? DateTime.Now : Convert.ToDateTime(fecha),
+                IdProveedor = IdProveedor,
+                no_mostrar_en_conciliacion = no_mostrar_en_conciliacion,
+                no_mostrar_saldo_en_0 = no_mostrar_saldo_en_0
+            };
+            cargar_combos();
+            CXP_008_Rpt report = new CXP_008_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_fecha.Value = model.fecha;
+            report.p_IdProveedor.Value = model.IdProveedor;
+            report.p_no_mostrar_en_conciliacion.Value = model.no_mostrar_en_conciliacion;
+            report.p_no_mostrar_saldo_0.Value = model.no_mostrar_saldo_en_0;
+            report.usuario = Session["IdUsuario"].ToString();
+            report.empresa = Session["nom_empresa"].ToString();
+            report.RequestParameters = false;
+            ViewBag.Report = report;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult CXP_008(cl_filtros_Info model)
+        {
+            CXP_008_Rpt report = new CXP_008_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_fecha.Value = model.fecha;
+            report.p_IdProveedor.Value = model.IdProveedor;
+            report.p_no_mostrar_en_conciliacion.Value = model.no_mostrar_en_conciliacion;
+            report.p_no_mostrar_saldo_0.Value = model.no_mostrar_saldo_en_0;
+            report.usuario = Session["IdUsuario"].ToString();
+            report.empresa = Session["nom_empresa"].ToString();
+            cargar_combos();
+            report.RequestParameters = false;
+            if (model.IdProveedor == 0)
+                ViewBag.Report = report;
             return View(model);
         }
     }

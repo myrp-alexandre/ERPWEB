@@ -16,7 +16,7 @@ namespace Core.Erp.Bus.Reportes.CuentasPorPagar
         {
             try
             {
-                return odata.get_list(IdEmpresa, fecha, IdProveedor);
+                return odata.get_list(IdEmpresa, fecha, IdProveedor, no_mostrar_en_conciliacion, no_mostrar_saldo_0);
             }
             catch (Exception)
             {

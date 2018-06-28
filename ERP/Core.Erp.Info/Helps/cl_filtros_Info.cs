@@ -36,10 +36,16 @@ namespace Core.Erp.Info.Helps
         public int IdCategoriaAF { get; set; }
         public string Estado_Proceso { get; set; }
         public string IdUsuario { get; set; }
+        public DateTime fecha { get; set; }
+
         #endregion
 
         #region Filtros activo
+        public decimal IdProveedor { get; set; }
         public bool mostrar_agrupado { get; set; }
+        public bool no_mostrar_en_conciliacion { get; set; }
+        public bool no_mostrar_saldo_en_0 { get; set; }
+
         #endregion
 
         public cl_filtros_Info()
