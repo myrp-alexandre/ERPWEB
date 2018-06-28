@@ -10,8 +10,112 @@
 }
 
 <script type="text/javascript">
+    $(function () {
+        //Date picker
+        $('#Fecha_ini').datepicker({
+            autoclose: true
+        })
+        $('#Fecha_ini').datepicker({
+            autoclose: true
+        })
+
+        $('#Fecha').datepicker({
+            autoclose: true
+        })
+
+        GetIdCtaCbleCaja();
+    });
+
     function OnSelectedIndexChanged(s, e) {
         GridView_conciliacion_vales.AutoFilterByColumn("IdPersona", s.GetText());
+    }
+
+    var selectedIDs;
+    function OnBeginCallback(s, e) {
+            //Pass all selected keys to GridView callback action
+            e.customArgs["selectedIDs"] = selectedIDs;
+        }
+    function OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("IdCbteCble_Ogiro", GetSelectedFieldValuesCallback);
+        }
+    function GetSelectedFieldValuesCallback(values) {
+            //Capture all selected keys
+            selectedIDs = values.join(',');
+    }
+    function MostrarModal() {
+        selectedIDs = "";
+        GridView_conciliacion_facturas_x_cruzar.PerformCallback();
+        GridView_conciliacion_facturas_x_cruzar.UnselectRows();
+        $("#FacturasModal").modal("show");
+    }
+
+    function AddFacturas() {
+        
+        var datos = {
+            IDs: selectedIDs
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("EditingAddNewFactura", "ConciliacionCaja",new { Area = "Caja"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+        selectedIDs = "";        
+        GridView_conciliacion_facturas_x_cruzar.PerformCallback();
+        GridView_conciliacion_facturas_x_cruzar.UnselectRows();
+        GridView_conciliacion_facturas.PerformCallback();
+        $("#FacturasModal").modal("hide");
+    }
+
+    function GetSaldoAnterior() {
+        var datos = {
+            FechaCorte = new Date($("#Fecha_ini").val()),
+            IdCtaCble = $("#IdCtaCble").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetSaldoAnterior", "ConciliacionCaja",new { Area = "Caja"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#Saldo_cont_al_periodo").val(Number(data));
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function GetIdCtaCbleCaja() {
+        var datos = {
+            IdCaja = $("#IdCaja").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetIdCtaCbleCaja", "ConciliacionCaja",new { Area = "Caja"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#IdCtaCble").val(data);
+            },
+            error: function (error) {
+            }
+        });
     }
 </script>
 
@@ -30,10 +134,23 @@
                    @Html.Action("GridViewPartial_conciliacion_facturas_x_cruzar")
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="AddFacturas();" >Aceptar</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdEstadoCierre">Caja *</label>
+                    @Html.DropDownListFor(q => q.IdEstadoCierre, new SelectList(ViewBag.lst_estado, "Key", "Value"), new { @id = "IdEstadoCierre", @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(q => q.IdEstadoCierre, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
 
@@ -147,17 +264,22 @@
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_facturas">
                 <div class="row">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-primary" id="btn_buscar_og" data-toggle="modal" data-target="#FacturasModal">
+                        <button type="button" class="btn btn-primary" id="btn_buscar_og" onclick="MostrarModal();">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
                 </div>
-
-                @Html.Action("GridViewPartial_conciliacion_facturas")
+                <br />
+                    @Html.Action("GridViewPartial_conciliacion_facturas")
+                
+                
 
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_vales">
-                @Html.Action("GridViewPartial_conciliacion_vales")
+                
+                    @Html.Action("GridViewPartial_conciliacion_vales")
+                
+                
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_ingresos">
 

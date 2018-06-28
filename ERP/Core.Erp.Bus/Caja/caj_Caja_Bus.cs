@@ -73,5 +73,17 @@ namespace Core.Erp.Bus.Caja
             }
         }
 
+        public string get_IdCtaCble(int IdEmpresa, int IdCaja)
+        {
+            try
+            {
+                return odata.get_IdCtaCble(IdEmpresa, IdCaja);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

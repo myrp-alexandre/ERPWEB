@@ -99,5 +99,17 @@ namespace Core.Erp.Bus.Contabilidad
                 throw;
             }
         }
+
+        public double get_saldo_anterior(int IdEmpresa, string IdCtaCble, DateTime Fecha_corte)
+        {
+            try
+            {
+                return odata.get_saldo_anterior(IdEmpresa, IdCtaCble, Fecha_corte);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
