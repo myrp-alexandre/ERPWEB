@@ -63,8 +63,8 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdMovi_inven_tipo = DataBinder.Eval(tc.DataItem, "IdMovi_inven_tipo"), IdNumMovi = DataBinder.Eval(tc.DataItem, "IdNumMovi") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdMovi_inven_tipo = DataBinder.Eval(tc.DataItem, "IdMovi_inven_tipo"), IdNumMovi = DataBinder.Eval(tc.DataItem, "IdNumMovi") },
+                Html.ActionLink("Modificar", "Modificar", new { IdTransferencia = DataBinder.Eval(tc.DataItem, "IdTransferencia") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdTransferencia = DataBinder.Eval(tc.DataItem, "IdTransferencia") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
