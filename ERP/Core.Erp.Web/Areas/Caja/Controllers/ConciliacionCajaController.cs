@@ -155,6 +155,13 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             var model = bus_det.get_list_x_pagar(IdEmpresa);
             return PartialView("_GridViewPartial_conciliacion_facturas_x_cruzar", model);
         }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_conciliacion_facturas()
+        {
+            var model = new object[0];
+            return PartialView("_GridViewPartial_conciliacion_facturas", model);
+        }
     }
 
     public class cp_conciliacion_Caja_det_List
