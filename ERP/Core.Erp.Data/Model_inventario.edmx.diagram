@@ -77,6 +77,8 @@
         <EntityTypeShape EntityType="Model_inventario.vwin_Transferencias" Width="1.5" PointX="0.75" PointY="19.75" />
         <EntityTypeShape EntityType="Model_inventario.in_producto_x_tb_bodega_Costo_Historico" Width="1.5" PointX="18.125" PointY="3.5" />
         <AssociationConnector Association="Model_inventario.FK_in_producto_x_tb_bodega_Costo_Historico_in_producto_x_tb_bodega" />
+        <EntityTypeShape EntityType="Model_inventario.vwin_producto_hijo_combo" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_inventario.vwin_producto_padre_combo" Width="1.5" PointX="2.75" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

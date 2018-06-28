@@ -534,8 +534,8 @@
           <Property Name="valor_equiv" Type="float" Nullable="false" />
           <Property Name="interpretacion" Type="varchar" MaxLength="500" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencias' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencias' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_Transferencias">
           <Key>
             <PropertyRef Name="SucuOrigen" />
@@ -582,6 +582,42 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencia
           <Property Name="EstadoAprobacion_cat" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="IdEstadoAproba_ing" Type="varchar" MaxLength="15" />
           <Property Name="IdEstadoAproba_egr" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwin_producto_hijo_combo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwin_producto_hijo_combo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdProducto_padre" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="nom_presentacion" />
+            <PropertyRef Name="ca_Categoria" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdProducto_padre" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="nom_presentacion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="ca_Categoria" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
+          <Property Name="lote_fecha_vcto" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padre_combo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwin_producto_padre_combo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="nom_presentacion" />
+            <PropertyRef Name="ca_Categoria" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="nom_presentacion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="ca_Categoria" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <Association Name="FK_in_Catalogo_in_CatalogoTipo">
           <End Role="in_CatalogoTipo" Type="Self.in_CatalogoTipo" Multiplicity="1" />
@@ -1325,6 +1361,27 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencia
     [vwin_Transferencias].[IdEstadoAproba_egr] AS [IdEstadoAproba_egr]
     FROM [dbo].[vwin_Transferencias] AS [vwin_Transferencias]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwin_producto_hijo_combo" EntityType="Self.vwin_producto_hijo_combo" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [vwin_producto_hijo_combo].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_producto_hijo_combo].[IdProducto] AS [IdProducto], 
+    [vwin_producto_hijo_combo].[IdProducto_padre] AS [IdProducto_padre], 
+    [vwin_producto_hijo_combo].[pr_descripcion] AS [pr_descripcion], 
+    [vwin_producto_hijo_combo].[nom_presentacion] AS [nom_presentacion], 
+    [vwin_producto_hijo_combo].[ca_Categoria] AS [ca_Categoria], 
+    [vwin_producto_hijo_combo].[lote_num_lote] AS [lote_num_lote], 
+    [vwin_producto_hijo_combo].[lote_fecha_vcto] AS [lote_fecha_vcto]
+    FROM [web].[vwin_producto_hijo_combo] AS [vwin_producto_hijo_combo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwin_producto_padre_combo" EntityType="Self.vwin_producto_padre_combo" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [vwin_producto_padre_combo].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_producto_padre_combo].[IdProducto] AS [IdProducto], 
+    [vwin_producto_padre_combo].[pr_descripcion] AS [pr_descripcion], 
+    [vwin_producto_padre_combo].[nom_presentacion] AS [nom_presentacion], 
+    [vwin_producto_padre_combo].[ca_Categoria] AS [ca_Categoria]
+    FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_in_Catalogo_in_CatalogoTipo" Association="Self.FK_in_Catalogo_in_CatalogoTipo">
             <End Role="in_CatalogoTipo" EntitySet="in_CatalogoTipo" />
             <End Role="in_Catalogo" EntitySet="in_Catalogo" />
@@ -1746,6 +1803,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencia
             <Parameter Name="IdMovi_inven_tipo" Mode="In" Type="Int32" />
             <Parameter Name="IdNumMovi" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <EntitySet Name="vwin_producto_hijo_combo" EntityType="Model_inventario.vwin_producto_hijo_combo" />
+          <EntitySet Name="vwin_producto_padre_combo" EntityType="Model_inventario.vwin_producto_padre_combo" />
           </EntityContainer>
         <EntityType Name="in_CatalogoTipo">
           <Key>
@@ -3097,6 +3156,38 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencia
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwin_producto_hijo_combo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdProducto_padre" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="nom_presentacion" />
+            <PropertyRef Name="ca_Categoria" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdProducto_padre" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="nom_presentacion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ca_Categoria" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="lote_num_lote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lote_fecha_vcto" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="vwin_producto_padre_combo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="nom_presentacion" />
+            <PropertyRef Name="ca_Categoria" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="nom_presentacion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ca_Categoria" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3647,6 +3738,31 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencia
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="spINV_aprobacion_ing_egr" FunctionName="Model_inventario.Store.spINV_aprobacion_ing_egr" />
+          <EntitySetMapping Name="vwin_producto_hijo_combo">
+            <EntityTypeMapping TypeName="Model_inventario.vwin_producto_hijo_combo">
+              <MappingFragment StoreEntitySet="vwin_producto_hijo_combo">
+                <ScalarProperty Name="lote_fecha_vcto" ColumnName="lote_fecha_vcto" />
+                <ScalarProperty Name="lote_num_lote" ColumnName="lote_num_lote" />
+                <ScalarProperty Name="ca_Categoria" ColumnName="ca_Categoria" />
+                <ScalarProperty Name="nom_presentacion" ColumnName="nom_presentacion" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="IdProducto_padre" ColumnName="IdProducto_padre" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwin_producto_padre_combo">
+            <EntityTypeMapping TypeName="Model_inventario.vwin_producto_padre_combo">
+              <MappingFragment StoreEntitySet="vwin_producto_padre_combo">
+                <ScalarProperty Name="ca_Categoria" ColumnName="ca_Categoria" />
+                <ScalarProperty Name="nom_presentacion" ColumnName="nom_presentacion" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

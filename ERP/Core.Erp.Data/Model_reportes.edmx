@@ -919,6 +919,10 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWFAC_001' does not have
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwin_producto_hijo_combo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padre_combo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWINV_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWINV_001">
           <Key>
