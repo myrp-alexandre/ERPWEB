@@ -1,3 +1,4 @@
+@using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_transferencias";
@@ -55,6 +56,7 @@
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
         };
+        //int IdSucursalOrigen = 0, int IdBodegaOrigen = 0, decimal IdTransferencia = 0
         settings.Columns.Add(c =>
         {
             c.Caption = "#";
@@ -63,8 +65,8 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdTransferencia = DataBinder.Eval(tc.DataItem, "IdTransferencia") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdTransferencia = DataBinder.Eval(tc.DataItem, "IdTransferencia") },
+                Html.ActionLink("Modificar", "Modificar", new { IdSucursalOrigen= DataBinder.Eval(tc.DataItem, "IdSucursalOrigen"), IdBodegaOrigen = DataBinder.Eval(tc.DataItem, "IdBodegaOrigen"), IdTransferencia = DataBinder.Eval(tc.DataItem, "IdTransferencia") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdSucursalOrigen = DataBinder.Eval(tc.DataItem, "IdSucursalOrigen"), IdBodegaOrigen = DataBinder.Eval(tc.DataItem, "IdBodegaOrigen"), IdTransferencia = DataBinder.Eval(tc.DataItem, "IdTransferencia") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -74,19 +76,28 @@
                 ViewContext.Writer.Write(
                     Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
                 );
+
             });
+
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = System.Web.UI.WebControls.Unit.Pixel(150);
+            c.Width = System.Web.UI.WebControls.Unit.Pixel(130);
         });
 
-        settings.Columns.Add("IdTransferencia");
-        settings.Columns.Add("tr_Observacion");
-        settings.Columns.Add("tr_fecha");
-        settings.Columns.Add("SucuOrigen");
-        settings.Columns.Add("BodegaORIG");
-        settings.Columns.Add("SucuDEST");
-        settings.Columns.Add("BodegDest");
+        settings.Columns.Add("IdTransferencia","ID").Width=Unit.Percentage(5);
+        settings.Columns.Add("tr_Observacion").Width=Unit.Percentage(20);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "tr_fecha";
+            column.Caption = "Fecha";
+            column.Width = Unit.Percentage(8);
+            column.PropertiesEdit.DisplayFormatString = "d";
+
+        });
+        settings.Columns.Add("SucuOrigen", "Sucu. Origen").Width = Unit.Percentage(15);
+        settings.Columns.Add("BodegaORIG", "Bod. orig").Width = Unit.Percentage(15);
+        settings.Columns.Add("SucuDEST", "Sucu. dest").Width = Unit.Percentage(15);
+        settings.Columns.Add("BodegDest", "Bod. dest").Width = Unit.Percentage(15);
     });
     if (ViewData["EditError"] != null){
         grid.SetEditErrorText((string)ViewData["EditError"]);

@@ -280,22 +280,19 @@ namespace Core.Erp.Data.Inventario
                     if (Entity == null) return null;
                     info = new in_transferencia_Info
                     {
-                        IdEmpresa = info.IdEmpresa,
-                        IdSucursalOrigen = info.IdSucursalOrigen,
-                        IdBodegaOrigen = info.IdBodegaOrigen,
-                        IdTransferencia = info.IdTransferencia ,
-                        IdSucursalDest = info.IdSucursalDest,
-                        IdBodegaDest = info.IdBodegaDest,
-                        tr_Observacion = info.tr_Observacion,
-                        IdMovi_inven_tipo_SucuOrig = info.IdMovi_inven_tipo_SucuOrig,
-                        IdMovi_inven_tipo_SucuDest = info.IdMovi_inven_tipo_SucuDest,
-                        tr_fecha = Convert.ToDateTime(info.tr_fecha.ToShortDateString()),
-                        Estado = "A",
-                        IdUsuario = (info.IdUsuario == null) ? "" : info.IdUsuario,
-                        ip = (info.ip == null) ? "" : info.ip,
-                        nom_pc = (info.nom_pc == null) ? "" : info.nom_pc,
-                        IdEstadoAprobacion_cat = info.IdEstadoAprobacion_cat,
-                        Codigo = info.Codigo,
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdSucursalOrigen = Entity.IdSucursalOrigen,
+                        IdBodegaOrigen = Entity.IdBodegaOrigen,
+                        IdTransferencia = Entity.IdTransferencia ,
+                        IdSucursalDest = Entity.IdSucursalDest,
+                        IdBodegaDest = Entity.IdBodegaDest,
+                        tr_Observacion = Entity.tr_Observacion,
+                        IdMovi_inven_tipo_SucuOrig = Entity.IdMovi_inven_tipo_SucuOrig,
+                        IdMovi_inven_tipo_SucuDest = Entity.IdMovi_inven_tipo_SucuDest,
+                        tr_fecha = Entity.tr_fecha,
+                        Estado = Entity.Estado,
+                        IdEstadoAprobacion_cat = Entity.IdEstadoAprobacion_cat,
+                        Codigo = Entity.Codigo,
                     };
                 }
                 return info;
