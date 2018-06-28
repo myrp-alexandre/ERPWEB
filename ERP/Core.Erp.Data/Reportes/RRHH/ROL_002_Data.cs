@@ -29,7 +29,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  IdNominaTipoLiqui = q.IdNominaTipoLiqui,
                                  IdPeriodo = q.IdPeriodo,
                                  Ruc = q.Ruc,
-                                 em_ruc = q.em_ruc,
+                                 em_ruc = "RUC #"+q.em_ruc,
                                  ru_orden = q.ru_orden,
                                  NombreCompleto = q.pe_apellido + " " + q.pe_nombre,
                                  RubroDescripcion = q.RubroDescripcion,
@@ -52,8 +52,6 @@ namespace Core.Erp.Data.Reportes.RRHH
                 throw;
             }
         }
-
-
         public string mes(int idperiodo)
         {
             try
@@ -84,7 +82,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                 if (idperiodo.ToString().Substring(4, 2) == "11")
                     mes_nom = "COMPROBANTE DE PAGO NOVIEMBRE " + anio;
                 if (idperiodo.ToString().Substring(4, 2) == "12")
-                    mes_nom = "COMPROBANTE DE PAGO DICIEMBRE " + anio;
+                    mes_nom = "COMPROBANTE PAGO DICIEMBRE " + anio;
 
                 return mes_nom;
             }
