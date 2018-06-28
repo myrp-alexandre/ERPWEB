@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Core.Erp.Info.CuentasPorPagar;
+using Core.Erp.Info.Contabilidad;
 
 namespace Core.Erp.Info.Caja
 {
     public class cp_conciliacion_Caja_Info
     {
-        public int IdEmpresa { get; set; }        
+        public int IdEmpresa { get; set; }
         public decimal IdConciliacion_Caja { get; set; }
-        [Required(ErrorMessage ="El campo periodo es obligatorio")]
+        [Required(ErrorMessage = "El campo periodo es obligatorio")]
         public int IdPeriodo { get; set; }
         [Required(ErrorMessage = "El campo fecha inicio es obligatorio")]
         public System.DateTime Fecha_ini { get; set; }
@@ -41,6 +43,7 @@ namespace Core.Erp.Info.Caja
         public List<cp_conciliacion_Caja_det_x_ValeCaja_Info> lst_det_vale { get; set; }
         public List<cp_conciliacion_Caja_det_Ing_Caja_Info> lst_det_ing { get; set; }
 
-
+        public cp_orden_pago_Info info_op { get; set; }
+        public List<ct_cbtecble_det_Info> lst_det_ct { get; set; }
     }
 }
