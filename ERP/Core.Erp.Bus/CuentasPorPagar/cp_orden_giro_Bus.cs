@@ -59,6 +59,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
         {
             try
             {
+                info.co_baseImponible = info.co_subtotal_iva + info.co_subtotal_siniva;
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
                 info.info_comrobante.cb_Fecha =(DateTime) info.co_FechaContabilizacion;
                 info.info_comrobante.cb_Anio = info.info_comrobante.cb_Fecha.Year;
@@ -97,7 +98,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 }
 
 
-                if(info.info_forma_pago.codigo_pago_sri!="")
+                if(info.info_forma_pago.codigo_pago_sri!=null)
                 {
                     info.info_forma_pago.IdEmpresa = info.IdEmpresa;
                     info.info_forma_pago.IdTipoCbte_Ogiro = info.IdTipoCbte_Ogiro;
@@ -118,6 +119,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
         {
             try
             {
+                info.co_baseImponible = info.co_subtotal_iva + info.co_subtotal_siniva;
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
                 info.info_comrobante.IdTipoCbte = info.IdTipoCbte_Ogiro;
                 info.info_comrobante.IdCbteCble = info.IdCbteCble_Ogiro;
@@ -239,6 +241,10 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_cuota = bus_cuotas.get_info(IdEmpresa, IdTipoCbte_Ogiro, IdCbteCble_Ogiro);
                 if (info.info_cuota == null)
                     info.info_cuota = new cp_cuotas_x_doc_Info();
+
+                info.info_forma_pago = bus_forma_pago.get_info(info.IdEmpresa, info.IdTipoCbte_Ogiro, info.IdCbteCble_Ogiro);
+                if (info.info_forma_pago == null)
+                    info.info_forma_pago = new cp_orden_giro_pagos_sri_Info();
                 return info;
             }
             catch (Exception)
@@ -330,9 +336,9 @@ namespace Core.Erp.Bus.CuentasPorPagar
 
                 }
 
-                if(info.co_valorpagar>100)
+                if(info.co_total>1000)
                 {
-                    if(info.info_forma_pago.codigo_pago_sri=="")
+                    if(info.info_forma_pago.codigo_pago_sri==null)
                     mensaje = "Debe seleccionar la forma de pago";
 
                 }

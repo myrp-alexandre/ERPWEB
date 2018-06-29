@@ -42,6 +42,10 @@
             GetSaldoAnterior();
             GetIngresos();
         });
+        $("#IdTipoPersona").change(function () {
+            IdEntidad.SetValue(null);
+        });
+        
 
         $("#IdEstadoCierre").change(function () {
             MostrarOcultarOP();
@@ -437,21 +441,28 @@
                 <div class="row">
                     <div class="col-md-offset-10 col-md-2">
                         <div class="form-group">
-                            <label for="FechaOP">Fecha*</label>
+                            <label for="FechaOP">Fecha*</label>                            
                             @Html.TextBoxFor(q => q.FechaOP, "{0:dd/MM/yyyy}", new { @id = "FechaOP", @class = "form-control" })
                             @Html.ValidationMessageFor(q => q.FechaOP, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label for="IdPersona">Beneficiario*</label>
+                            <label for="IdTipoPersona">Tipo persona*</label>
+                            @Html.DropDownListFor(q => q.IdTipoPersona, new SelectList(ViewBag.lst_tipo_personas, "Key", "Value"), new { @class = "form-control", @id = "IdTipoPersona" })
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label for="IdEntidad">Beneficiario*</label>
                             @Html.Partial("_CmbPersona_ConciliacionCaja", Model)
                             @Html.ValidationMessageFor(q => q.IdEntidad, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
+                    
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
@@ -462,7 +473,6 @@
                     </div>
                 </div>
 
-                <br />
                 @Html.Action("GridViewPartial_comprobante_detalle", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
 
             </div>

@@ -153,21 +153,21 @@
             });
         });
 
-        settings.Columns.Add(column =>
-        {
-            column.Caption = "#";
-            column.Width = Unit.Pixel(100);
-            column.SetDataItemTemplateContent(container =>
-            {
-                Html.DevExpress().HyperLink(hyperlink =>
-                {
-                    var IdTipoCbte_Ogiro = DataBinder.Eval(container.DataItem, "IdTipoCbte_Ogiro");
-                    var IdCbteCble_Ogiro = DataBinder.Eval(container.DataItem, "IdCbteCble_Ogiro");
-                    hyperlink.Properties.Text = "Retención";
-                    hyperlink.NavigateUrl = Url.Action("Nuevo", "Retencion", new { Area = "CuentasPorPagar", IdTipoCbte_Ogiro = IdTipoCbte_Ogiro, IdCbteCble_Ogiro = IdCbteCble_Ogiro });
-                }).Render();
-            });
-        });
+        //settings.Columns.Add(column =>
+        //{
+        //    column.Caption = "#";
+        //    column.Width = Unit.Pixel(100);
+        //    column.SetDataItemTemplateContent(container =>
+        //    {
+        //        Html.DevExpress().HyperLink(hyperlink =>
+        //        {
+        //            var IdTipoCbte_Ogiro = DataBinder.Eval(container.DataItem, "IdTipoCbte_Ogiro");
+        //            var IdCbteCble_Ogiro = DataBinder.Eval(container.DataItem, "IdCbteCble_Ogiro");
+        //            hyperlink.Properties.Text = "Retención";
+        //            hyperlink.NavigateUrl = Url.Action("Nuevo", "Retencion", new { Area = "CuentasPorPagar", IdTipoCbte_Ogiro = IdTipoCbte_Ogiro, IdCbteCble_Ogiro = IdCbteCble_Ogiro });
+        //        }).Render();
+        //    });
+        //});
 
 
     });
