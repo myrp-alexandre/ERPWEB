@@ -13,10 +13,10 @@ namespace Core.Erp.Info.RRHH
         [Required(ErrorMessage = "El campo Código es obligatorio")]
         [StringLength(50, MinimumLength = 4, ErrorMessage = "El campo Código debe tener mínimo 4 caracteres y máximo 50")]
         public string rub_codigo { get; set; }
-        [StringLength(30, MinimumLength = 4, ErrorMessage = "El campo Código reporte debe tener mínimo 4 caracteres y máximo 30")]
+        [StringLength(30, MinimumLength = 1, ErrorMessage = "El campo Código reporte debe tener mínimo 1 caracteres y máximo 30")]
         [Required(ErrorMessage = "El campo Código reporte es obligatorio")]
         public string ru_codRolGen { get; set; }
-        [StringLength(50, MinimumLength = 4, ErrorMessage = "El campo descripción debe tener mínimo 4 caracteres y máximo 50")]
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "El campo descripción debe tener mínimo 1 caracteres y máximo 50")]
         [Required(ErrorMessage = "El campo descripción es obligatorio")]
         public string ru_descripcion { get; set; }
         [Required(ErrorMessage = "El campo descripción corta es obligatorio")]
