@@ -12,18 +12,15 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class cp_pagos_sri
+    public partial class cp_orden_giro_pagos_sri
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public cp_pagos_sri()
-        {
-            this.cp_orden_giro_pagos_sri = new HashSet<cp_orden_giro_pagos_sri>();
-        }
-    
-        public string formas_pago_sri { get; set; }
+        public int IdEmpresa { get; set; }
+        public decimal IdCbteCble_Ogiro { get; set; }
+        public int IdTipoCbte_Ogiro { get; set; }
         public string codigo_pago_sri { get; set; }
+        public string formas_pago_sri { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cp_orden_giro_pagos_sri> cp_orden_giro_pagos_sri { get; set; }
+        public virtual cp_orden_giro cp_orden_giro { get; set; }
+        public virtual cp_pagos_sri cp_pagos_sri { get; set; }
     }
 }

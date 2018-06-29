@@ -39,20 +39,10 @@ namespace Core.Erp.Data.General
 
         public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
         {
-            int id;
-            if (args.Value == null || !int.TryParse(args.Value.ToString(), out id))
+            decimal id;
+            if (args.Value == null || !decimal.TryParse(args.Value.ToString(), out id))
                 return null;
-            using (Entities_general Context = new Entities_general())
-            {
-                var per = Context.tb_persona.Where(p => p.IdPersona == id).Take(1).SingleOrDefault();
-                if (per == null) return new tb_persona_Info();
-                return new tb_persona_Info
-                {
-                    IdPersona = per.IdPersona,
-                    pe_nombreCompleto = per.pe_nombreCompleto
-                };
-            }            
-            
+            return get_info((decimal)args.Value);            
         }
 
         public List<tb_persona_Info> get_list(bool mostrar_anulados)

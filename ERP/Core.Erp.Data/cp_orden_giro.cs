@@ -18,6 +18,7 @@ namespace Core.Erp.Data
         public cp_orden_giro()
         {
             this.cp_retencion = new HashSet<cp_retencion>();
+            this.cp_orden_giro_pagos_sri = new HashSet<cp_orden_giro_pagos_sri>();
         }
     
         public int IdEmpresa { get; set; }
@@ -96,5 +97,7 @@ namespace Core.Erp.Data
         public virtual cp_proveedor cp_proveedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cp_retencion> cp_retencion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cp_orden_giro_pagos_sri> cp_orden_giro_pagos_sri { get; set; }
     }
 }

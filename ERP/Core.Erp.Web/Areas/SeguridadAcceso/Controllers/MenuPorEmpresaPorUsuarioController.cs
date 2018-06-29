@@ -89,7 +89,7 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
                 lista.Add(info);
             }
             bus_menu_x_empresa_x_usuario.eliminarDB(IdEmpresa,IdUsuario);
-            var resultado = bus_menu_x_empresa_x_usuario.guardarDB(lista);
+            var resultado = bus_menu_x_empresa_x_usuario.guardarDB(lista, IdEmpresa, IdUsuario);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }

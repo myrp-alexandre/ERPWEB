@@ -83,7 +83,7 @@ namespace Core.Erp.Data.SeguridadAcceso
             }
         }
 
-        public bool guardarDB(List<seg_Menu_x_Empresa_Info> Lista, string IdUsuario="")
+        public bool guardarDB(List<seg_Menu_x_Empresa_Info> Lista)
         {
             try
             {
@@ -105,7 +105,7 @@ namespace Core.Erp.Data.SeguridadAcceso
                     }
                     Context.SaveChanges();
 
-                    string sql = "exec spseg_corregir_menu '" + IdEmpresa + "','" + IdUsuario + "'";
+                    string sql = "exec spseg_corregir_menu '" + IdEmpresa + "','" + "" + "'";
                     Context.Database.ExecuteSqlCommand(sql);
                 }
 

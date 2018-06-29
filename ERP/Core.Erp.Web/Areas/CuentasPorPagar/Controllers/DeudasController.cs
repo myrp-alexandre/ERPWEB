@@ -537,18 +537,19 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 cbtecble_det_total_Info.dc_Observacion = observacion;
                 AddRow(cbtecble_det_total_Info);
 
-
-                // cuenta iva
-                ct_cbtecble_det_Info cbtecble_det_iva_Info = new ct_cbtecble_det_Info();
-                cbtecble_det_iva_Info.secuencia = 2;
-                cbtecble_det_iva_Info.IdEmpresa = 0;
-                cbtecble_det_iva_Info.IdTipoCbte = 1;
-                cbtecble_det_iva_Info.IdCtaCble = info_parametro.pa_ctacble_iva;
-                cbtecble_det_iva_Info.dc_Valor_debe = co_valoriva;
-                cbtecble_det_iva_Info.dc_Valor = co_valoriva;
-                cbtecble_det_iva_Info.dc_Observacion = observacion;
-                AddRow(cbtecble_det_iva_Info);
-
+                if (co_valoriva != 0)
+                {
+                    // cuenta iva
+                    ct_cbtecble_det_Info cbtecble_det_iva_Info = new ct_cbtecble_det_Info();
+                    cbtecble_det_iva_Info.secuencia = 2;
+                    cbtecble_det_iva_Info.IdEmpresa = 0;
+                    cbtecble_det_iva_Info.IdTipoCbte = 1;
+                    cbtecble_det_iva_Info.IdCtaCble = info_parametro.pa_ctacble_iva;
+                    cbtecble_det_iva_Info.dc_Valor_debe = co_valoriva;
+                    cbtecble_det_iva_Info.dc_Valor = co_valoriva;
+                    cbtecble_det_iva_Info.dc_Observacion = observacion;
+                    AddRow(cbtecble_det_iva_Info);
+                }
                 // cuenta sbtotal
                 ct_cbtecble_det_Info cbtecble_det_sub_Info = new ct_cbtecble_det_Info();
                 cbtecble_det_sub_Info.secuencia = 1;
