@@ -19,7 +19,6 @@ namespace Core.Erp.Info.RRHH
         public int IdNomina_TipoLiqui { get; set; }
         [Required(ErrorMessage = "El campo rubro es obligatorio")]
         public string IdRubro { get; set; }
-        [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Ingrese solo numeros")]
         [Required(ErrorMessage = "El campo valor es obligatorio")]
         public decimal Valor { get; set; }
         public string Estado { get; set; }

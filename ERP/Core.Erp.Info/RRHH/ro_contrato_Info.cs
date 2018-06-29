@@ -30,7 +30,6 @@ namespace Core.Erp.Info.RRHH
         [Required(ErrorMessage = "El campo nómina es obligatorio")]
         public Nullable<int> IdNomina { get; set; }
         [Required(ErrorMessage = "El campo sueldo es obligatorio")]
-        [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Ingrese solo numeros")]
         public Nullable<double> Sueldo { get; set; }
         public string MotiAnula { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
