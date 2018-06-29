@@ -8,29 +8,33 @@ namespace Core.Erp.Data.CuentasPorPagar
 {
    public class cp_orden_giro_pagos_sri_Data
     {
-        public List<cp_orden_giro_pagos_sri_Info> Get_list_cuotas_x_doc_det(int IdEmpresa, int IdTipoCbte_Ogiro, decimal IdCbteCble_Ogiro)
+        public cp_orden_giro_pagos_sri_Info get_info(int IdEmpresa, int IdTipoCbte_Ogiro, decimal IdCbteCble_Ogiro)
         {
             try
             {
-                List<cp_orden_giro_pagos_sri_Info> Lista;
+                cp_orden_giro_pagos_sri_Info info;
 
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
-                    Lista = (from q in Context.cp_orden_giro_pagos_sri
-                             where q.IdEmpresa == IdEmpresa
-                             && q.IdTipoCbte_Ogiro == IdTipoCbte_Ogiro
-                             && q.IdCbteCble_Ogiro==IdCbteCble_Ogiro
-                             select new cp_orden_giro_pagos_sri_Info
-                             {
-                                 IdEmpresa = q.IdEmpresa,
-                                 IdTipoCbte_Ogiro = q.IdTipoCbte_Ogiro,
-                                 IdCbteCble_Ogiro = q.IdCbteCble_Ogiro,
-                                 codigo_pago_sri = q.codigo_pago_sri,
-                                 formas_pago_sri = q.formas_pago_sri
-                             }).ToList();
+
+                    cp_orden_giro_pagos_sri Entity = Context.cp_orden_giro_pagos_sri.FirstOrDefault(q => q.IdEmpresa == IdEmpresa
+                   && q.IdTipoCbte_Ogiro == IdTipoCbte_Ogiro
+                   && q.IdCbteCble_Ogiro == IdCbteCble_Ogiro);
+                    if (Entity == null) return null;
+                    else
+
+                        info = new cp_orden_giro_pagos_sri_Info
+                        {
+
+                            IdEmpresa = Entity.IdEmpresa,
+                            IdTipoCbte_Ogiro = Entity.IdTipoCbte_Ogiro,
+                            IdCbteCble_Ogiro = Entity.IdCbteCble_Ogiro,
+                            codigo_pago_sri = Entity.codigo_pago_sri,
+                            formas_pago_sri = Entity.formas_pago_sri
+                        };
                 }
 
-                return Lista;
+                return info;
             }
             catch (Exception)
             {
@@ -56,24 +60,22 @@ namespace Core.Erp.Data.CuentasPorPagar
             }
         }
 
-        public bool GuardarDB(List<cp_orden_giro_pagos_sri_Info> Lista)
+        public bool GuardarDB(cp_orden_giro_pagos_sri_Info Info)
         {
             try
             {
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
-                    foreach (var item in Lista)
-                    {
+                   
                         cp_orden_giro_pagos_sri Entity = new cp_orden_giro_pagos_sri
                         {
-                         IdEmpresa = item.IdEmpresa,
-                        IdTipoCbte_Ogiro = item.IdTipoCbte_Ogiro,
-                        IdCbteCble_Ogiro = item.IdCbteCble_Ogiro,
-                        codigo_pago_sri = item.codigo_pago_sri,
-                        formas_pago_sri = item.formas_pago_sri,
+                         IdEmpresa = Info.IdEmpresa,
+                        IdTipoCbte_Ogiro = Info.IdTipoCbte_Ogiro,
+                        IdCbteCble_Ogiro = Info.IdCbteCble_Ogiro,
+                        codigo_pago_sri = Info.codigo_pago_sri,
+                        formas_pago_sri = Info.formas_pago_sri,
                         };
                         Context.cp_orden_giro_pagos_sri.Add(Entity);
-                    }
                     Context.SaveChanges();
                 }
 

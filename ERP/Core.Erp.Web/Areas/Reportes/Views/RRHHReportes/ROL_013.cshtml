@@ -1,13 +1,13 @@
 ﻿@model Core.Erp.Info.Helps.cl_filtros_Info
 @{
     Layout = "~/Areas/Reportes/Views/Layout/_Layout_filtros.cshtml";
-    ViewBag.Title = "ROL_012";
+    ViewBag.Title = "ROL_013";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
     }
 }
-@using (Html.BeginForm("ROL_012", "RRHHReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("ROL_013", "RRHHReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="box collapsed-box">
         <div class="box-header with-border">
@@ -93,4 +93,4 @@
             autoclose: true
         })
     });
-    </script>
+</script>

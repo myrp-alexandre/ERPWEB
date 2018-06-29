@@ -18,6 +18,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
         cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
         cp_parametros_Info info_parametro = new cp_parametros_Info();
         cp_parametros_Bus bus_parametro = new cp_parametros_Bus();
+        cp_orden_giro_pagos_sri_Bus bus_forma_pago = new cp_orden_giro_pagos_sri_Bus();
         public List<cp_orden_giro_Info> get_lst(int IdEmpresa, DateTime fi, DateTime ff)
         {
             try
@@ -58,6 +59,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
         {
             try
             {
+                info.co_baseImponible = info.co_subtotal_iva + info.co_subtotal_siniva;
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
                 info.info_comrobante.cb_Fecha =(DateTime) info.co_FechaContabilizacion;
                 info.info_comrobante.cb_Anio = info.info_comrobante.cb_Fecha.Year;
@@ -95,6 +97,15 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     bus_cuotas.GuardarDB(info.info_cuota);
                 }
 
+
+                if(info.info_forma_pago.codigo_pago_sri!=null)
+                {
+                    info.info_forma_pago.IdEmpresa = info.IdEmpresa;
+                    info.info_forma_pago.IdTipoCbte_Ogiro = info.IdTipoCbte_Ogiro;
+                    info.info_forma_pago.IdCbteCble_Ogiro = info.IdCbteCble_Ogiro;
+                    info.info_forma_pago.formas_pago_sri = "";
+                    bus_forma_pago.GuardarDB(info.info_forma_pago);
+                }
                 return true;
             }
             catch (Exception)
@@ -108,6 +119,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
         {
             try
             {
+                info.co_baseImponible = info.co_subtotal_iva + info.co_subtotal_siniva;
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
                 info.info_comrobante.IdTipoCbte = info.IdTipoCbte_Ogiro;
                 info.info_comrobante.IdCbteCble = info.IdCbteCble_Ogiro;
@@ -147,7 +159,17 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     info.info_cuota.Estado = true;
                     bus_cuotas.ModificarDB(info.info_cuota);
                 }
+                if (info.info_forma_pago.codigo_pago_sri != "")
+                {
+                    bus_forma_pago.EliminarDB(info.IdEmpresa, info.IdTipoCbte_Ogiro, info.IdCbteCble_Ogiro);
 
+                    info.info_forma_pago.IdEmpresa = info.IdEmpresa;
+                    info.info_forma_pago.IdTipoCbte_Ogiro = info.IdTipoCbte_Ogiro;
+                    info.info_forma_pago.IdCbteCble_Ogiro = info.IdCbteCble_Ogiro;
+                    info.info_forma_pago.formas_pago_sri = "";
+
+                    bus_forma_pago.GuardarDB(info.info_forma_pago);
+                }
                 return true;
             }
             catch (Exception)
@@ -219,6 +241,10 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_cuota = bus_cuotas.get_info(IdEmpresa, IdTipoCbte_Ogiro, IdCbteCble_Ogiro);
                 if (info.info_cuota == null)
                     info.info_cuota = new cp_cuotas_x_doc_Info();
+
+                info.info_forma_pago = bus_forma_pago.get_info(info.IdEmpresa, info.IdTipoCbte_Ogiro, info.IdCbteCble_Ogiro);
+                if (info.info_forma_pago == null)
+                    info.info_forma_pago = new cp_orden_giro_pagos_sri_Info();
                 return info;
             }
             catch (Exception)
@@ -307,6 +333,13 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 {
                     if(info.info_cuota.lst_cuotas_det.Count()==0)
                         mensaje = "No existe detalle de pago";
+
+                }
+
+                if(info.co_total>1000)
+                {
+                    if(info.info_forma_pago.codigo_pago_sri==null)
+                    mensaje = "Debe seleccionar la forma de pago";
 
                 }
                 return mensaje;

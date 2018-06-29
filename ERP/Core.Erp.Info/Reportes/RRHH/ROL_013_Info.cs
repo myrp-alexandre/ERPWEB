@@ -23,5 +23,6 @@ namespace Core.Erp.Info.Reportes.RRHH
         public Nullable<System.DateTime> em_fechaSalida { get; set; }
         public Nullable<System.DateTime> em_fechaIngaRol { get; set; }
         public string Descripcion { get; set; }
+        public double Valor { get; set; }
     }
 }

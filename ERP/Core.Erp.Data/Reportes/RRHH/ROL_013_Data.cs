@@ -33,7 +33,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  ca_descripcion = q.ca_descripcion,
                                  em_fechaIngaRol = q.em_fechaIngaRol,
                                  em_fechaSalida = q.em_fechaSalida,
-                                 Descripcion = q.de_descripcion
+                                 Descripcion = q.de_descripcion,
+                                 Valor = q.Valor
 
 
                              }).ToList();

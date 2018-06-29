@@ -49,13 +49,16 @@ namespace Core.Erp.Info.Helps
 
         #endregion
 
-
+        #region filtro facturación
         public DateTime fechaCorte { get; set; }
         public decimal IdCliente { get; set; }
         public int IdClienteContacto { get; set; }
         public int IdVendedor { get; set; }
         public decimal IdProducto_padre { get; set; }
         public bool mostrar_anulados { get; set; }
+
+        #endregion
+        public int IdNomina { get; set; }
 
         public cl_filtros_Info()
         {

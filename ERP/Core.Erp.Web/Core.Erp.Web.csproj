@@ -468,6 +468,12 @@
     <Compile Include="Reportes\Contabilidad\CONTA_001_Rpt.Designer.cs">
       <DependentUpon>CONTA_001_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Contabilidad\CONTA_002_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Contabilidad\CONTA_002_Rpt.Designer.cs">
+      <DependentUpon>CONTA_002_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -8508,6 +8514,8 @@
     <Content Include="Areas\Caja\Views\ConciliacionCaja\_GridViewPartial_conciliacion_facturas.cshtml" />
     <Content Include="Areas\Caja\Views\ConciliacionCaja\_GridViewPartial_conciliacion_ingresos.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_001.cshtml" />
+    <Content Include="Areas\Caja\Views\ConciliacionCaja\_ComboPersona.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_013.cshtml" />
     <Content Include="Areas\Caja\Views\ConciliacionCaja\_CmbPersona_ConciliacionCaja.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -8662,6 +8670,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Contabilidad\CONTA_001_Rpt.resx">
       <DependentUpon>CONTA_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Contabilidad\CONTA_002_Rpt.resx">
+      <DependentUpon>CONTA_002_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorPagar\CXP_001_Rpt.resx">
       <DependentUpon>CXP_001_Rpt.cs</DependentUpon>
