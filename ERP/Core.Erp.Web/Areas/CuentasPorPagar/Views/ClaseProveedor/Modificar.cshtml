@@ -1,11 +1,12 @@
 ﻿@model Core.Erp.Info.CuentasPorPagar.cp_proveedor_clase_Info
 @{
     ViewBag.Title = "Modificar clase";
-    
+
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
     }
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using (Html.BeginForm("Modificar", "ClaseProveedor", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
