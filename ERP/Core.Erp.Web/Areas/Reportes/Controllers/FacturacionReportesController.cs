@@ -25,7 +25,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             var lst_cliente = bus_cliente.get_list(IdEmpresa, false);
             ViewBag.lst_cliente = lst_cliente;
 
-            
+            fa_cliente_contactos_Bus bus_contacto = new fa_cliente_contactos_Bus();
+            var lst_contacto = bus_contacto.get_list(IdEmpresa, model.IdCliente);
+            ViewBag.lst_contacto = lst_contacto;
 
             fa_Vendedor_Bus bus_vendedor = new fa_Vendedor_Bus();
             var lst_vendedor = bus_vendedor.get_list(IdEmpresa, false);
