@@ -948,6 +948,9 @@
     <Compile Include="SPBAN_004_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="SPCONTA_002_Result.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="spcp_Get_Data_orden_pago_con_cancelacion_data_Result.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
@@ -970,6 +973,9 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="SPROL_012_Result.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPROL_013_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="spro_nomina_x_pago_utilidad_Result.cs">
@@ -1129,6 +1135,9 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="VWCXP_006_diario.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWCXP_007.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="VWFAC_001.cs">

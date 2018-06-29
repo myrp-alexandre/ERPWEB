@@ -25,8 +25,8 @@ namespace Core.Erp.Web.Reportes.RRHH
             lbl_empresa.Text = empresa;
             lbl_usuario.Text = usuario;
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            DateTime fecha_desde = p_fecha_desde.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_desde.Value);
-            DateTime fecha_hasta = p_fecha_hasta.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_hasta.Value);
+            DateTime fecha_desde = p_fecha_desde.Value == null ? DateTime.Now.Date : Convert.ToDateTime(p_fecha_desde.Value);
+            DateTime fecha_hasta = p_fecha_hasta.Value == null ? DateTime.Now.Date : Convert.ToDateTime(p_fecha_hasta.Value);
 
             ROL_012_Bus bus_rpt = new ROL_012_Bus();
             List<ROL_012_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, fecha_desde, fecha_hasta);

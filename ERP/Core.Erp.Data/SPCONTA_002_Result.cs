@@ -10,29 +10,23 @@
 namespace Core.Erp.Data
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class VWCAJ_001
+    public partial class SPCONTA_002_Result
     {
         public int IdEmpresa { get; set; }
         public int IdTipoCbte { get; set; }
         public decimal IdCbteCble { get; set; }
         public int secuencia { get; set; }
+        public string IdCtaCble { get; set; }
         public string pc_Cuenta { get; set; }
         public double dc_Valor { get; set; }
+        public double SaldoInicial { get; set; }
         public double dc_Valor_Debe { get; set; }
         public Nullable<double> dc_Valor_Haber { get; set; }
-        public string tc_descripcion { get; set; }
-        public double cr_Valor { get; set; }
-        public string cm_Signo { get; set; }
-        public int IdTipoMovi { get; set; }
-        public string tm_descripcion { get; set; }
-        public string cm_observacion { get; set; }
-        public int IdCaja { get; set; }
-        public string ca_Descripcion { get; set; }
-        public System.DateTime cm_fecha { get; set; }
-        public string Estado { get; set; }
+        public Nullable<double> Saldo { get; set; }
+        public System.DateTime cb_Fecha { get; set; }
+        public string cb_Observacion { get; set; }
+        public string cb_Estado { get; set; }
         public string tc_TipoCbte { get; set; }
-        public string IdCtaCble { get; set; }
     }
 }

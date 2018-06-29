@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ee2de8308b2a4a49bc177fd1932ea539" Name="Diagram1" ZoomLevel="41">
+      <Diagram DiagramId="ee2de8308b2a4a49bc177fd1932ea539" Name="Diagram1" ZoomLevel="15">
         <EntityTypeShape EntityType="Model_reportes.Af_SPACTF_004_detalle" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model_reportes.Af_SPACTF_004_resumen" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model_reportes.VWACTF_001" Width="1.5" PointX="4.75" PointY="0.75" />
@@ -43,9 +43,10 @@
         <EntityTypeShape EntityType="Model_reportes.VWINV_007" Width="1.5" PointX="22.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_009" Width="1.5" PointX="22.375" PointY="7.75" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_010" Width="1.5" PointX="10.375" PointY="22.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWROL_001" Width="1.5" PointX="0.75" PointY="23.75" />
         <EntityTypeShape EntityType="Model_reportes.VWFAC_001" Width="1.5" PointX="22.375" PointY="13.75" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_011" Width="1.5" PointX="22.375" PointY="20.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWROL_001" Width="1.5" PointX="0.75" PointY="23.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCXP_007" Width="1.5" PointX="7.375" PointY="23.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
