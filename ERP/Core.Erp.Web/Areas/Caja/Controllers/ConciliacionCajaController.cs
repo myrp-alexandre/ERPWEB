@@ -37,7 +37,10 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
         public ActionResult CmbPersona_ConciliacionCaja()
         {
-            var model = bus_persona.get_list(false);
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            string IdTipoPersona = Request.Params["IdTipoPersona"] != null ? Request.Params["IdTipoPersona"].ToString() : "PERSONA";
+            cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
+            ViewBag.lst_persona = bus_persona.get_list(IdEmpresa, IdTipoPersona);
             return PartialView("_CmbPersona_ConciliacionCaja",model);
         }
 
@@ -66,6 +69,13 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             lst.Add(cl_enumeradores.eEstadoCierreCaja.EST_CIE_ABI.ToString(), "ABIERTA");
             lst.Add(cl_enumeradores.eEstadoCierreCaja.EST_CIE_CER.ToString(), "CERRADA");
             ViewBag.lst_estado = lst;
+
+            Dictionary<string, string> lst_tipo_personas = new Dictionary<string, string>();
+            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.PERSONA.ToString(),"Persona");
+            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.PROVEE.ToString(), "Proveedor");
+            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.EMPLEA.ToString(), "Empleado");
+            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.CLIENTE.ToString(), "Cliente");
+            ViewBag.lst_tipo_personas = lst_tipo_personas;
         }
 
         public ActionResult Nuevo()
