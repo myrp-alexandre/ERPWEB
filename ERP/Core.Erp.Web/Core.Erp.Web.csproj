@@ -8517,6 +8517,7 @@
     <Content Include="Areas\Caja\Views\ConciliacionCaja\_ComboPersona.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_013.cshtml" />
     <Content Include="Areas\Caja\Views\ConciliacionCaja\_CmbPersona_ConciliacionCaja.cshtml" />
+    <Content Include="Areas\Reportes\Views\ContabilidadReportes\CONTA_002.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />

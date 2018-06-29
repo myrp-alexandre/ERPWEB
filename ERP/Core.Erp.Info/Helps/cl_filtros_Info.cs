@@ -59,6 +59,7 @@ namespace Core.Erp.Info.Helps
 
         #endregion
         public int IdNomina { get; set; }
+        public string IdCtaCble { get; set; }
 
         public cl_filtros_Info()
         {
