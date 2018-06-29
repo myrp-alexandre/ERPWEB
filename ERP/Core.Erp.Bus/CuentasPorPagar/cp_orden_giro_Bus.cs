@@ -18,6 +18,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
         cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
         cp_parametros_Info info_parametro = new cp_parametros_Info();
         cp_parametros_Bus bus_parametro = new cp_parametros_Bus();
+        cp_orden_giro_pagos_sri_Bus bus_forma_pago = new cp_orden_giro_pagos_sri_Bus();
         public List<cp_orden_giro_Info> get_lst(int IdEmpresa, DateTime fi, DateTime ff)
         {
             try
@@ -95,6 +96,15 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     bus_cuotas.GuardarDB(info.info_cuota);
                 }
 
+
+                if(info.info_forma_pago.codigo_pago_sri!="")
+                {
+                    info.info_forma_pago.IdEmpresa = info.IdEmpresa;
+                    info.info_forma_pago.IdTipoCbte_Ogiro = info.IdTipoCbte_Ogiro;
+                    info.info_forma_pago.IdCbteCble_Ogiro = info.IdCbteCble_Ogiro;
+                    info.info_forma_pago.formas_pago_sri = "";
+                    bus_forma_pago.GuardarDB(info.info_forma_pago);
+                }
                 return true;
             }
             catch (Exception)
@@ -147,7 +157,17 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     info.info_cuota.Estado = true;
                     bus_cuotas.ModificarDB(info.info_cuota);
                 }
+                if (info.info_forma_pago.codigo_pago_sri != "")
+                {
+                    bus_forma_pago.EliminarDB(info.IdEmpresa, info.IdTipoCbte_Ogiro, info.IdCbteCble_Ogiro);
 
+                    info.info_forma_pago.IdEmpresa = info.IdEmpresa;
+                    info.info_forma_pago.IdTipoCbte_Ogiro = info.IdTipoCbte_Ogiro;
+                    info.info_forma_pago.IdCbteCble_Ogiro = info.IdCbteCble_Ogiro;
+                    info.info_forma_pago.formas_pago_sri = "";
+
+                    bus_forma_pago.GuardarDB(info.info_forma_pago);
+                }
                 return true;
             }
             catch (Exception)
@@ -307,6 +327,13 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 {
                     if(info.info_cuota.lst_cuotas_det.Count()==0)
                         mensaje = "No existe detalle de pago";
+
+                }
+
+                if(info.co_valorpagar>100)
+                {
+                    if(info.info_forma_pago.codigo_pago_sri=="")
+                    mensaje = "Debe seleccionar la forma de pago";
 
                 }
                 return mensaje;
