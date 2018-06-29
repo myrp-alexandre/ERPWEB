@@ -9,14 +9,14 @@ namespace Core.Erp.Data.Reportes.RRHH
 {
    public class ROL_012_Data
     {
-        public List<ROL_012_Info> get_list(int IdEmpresa, int IdNomina, DateTime fecha_inicio, DateTime fecha_fin)
+        public List<ROL_012_Info> get_list(int IdEmpresa,  DateTime fecha_inicio, DateTime fecha_fin)
         {
             try
             {
                 List<ROL_012_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
-                    Lista = (from q in Context.SPROL_012(IdEmpresa, IdNomina, fecha_inicio, fecha_fin)
+                    Lista = (from q in Context.SPROL_012(IdEmpresa,  fecha_inicio, fecha_fin)
                              select new ROL_012_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

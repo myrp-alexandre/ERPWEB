@@ -28,7 +28,7 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="IdCtaCble">Cuenta contable</label>
                             @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble, settings =>
@@ -36,8 +36,8 @@
                            settings.Name = "IdCtaCble";
                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                            settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                           settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(40);
-                           settings.Properties.Columns.Add("pc_Cuenta", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(60);
+                           settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                           settings.Properties.Columns.Add("pc_Cuenta", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
                            //Campo ID
                            settings.Properties.ValueField = "IdCtaCble";
                            settings.Properties.ValueType = typeof(string);
@@ -51,10 +51,6 @@
                             @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Fecha inicio*</label>

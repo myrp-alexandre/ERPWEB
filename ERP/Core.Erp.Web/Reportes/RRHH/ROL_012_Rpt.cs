@@ -25,12 +25,11 @@ namespace Core.Erp.Web.Reportes.RRHH
             lbl_empresa.Text = empresa;
             lbl_usuario.Text = usuario;
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            int IdNomina = p_IdNomina.Value == null ? 0 : Convert.ToInt32(p_IdNomina.Value);
             DateTime fecha_inicio = p_fecha_inicio.Value == null ? DateTime.Now.Date : Convert.ToDateTime(p_fecha_inicio.Value);
             DateTime fecha_fin = p_fecha_fin.Value == null ? DateTime.Now.Date : Convert.ToDateTime(p_fecha_fin.Value);
 
             ROL_012_Bus bus_rpt = new ROL_012_Bus();
-            List<ROL_012_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, fecha_inicio, fecha_fin);
+            List<ROL_012_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, fecha_inicio, fecha_fin);
             this.DataSource = lst_rpt;
         }
     }

@@ -28,6 +28,29 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="IdNomina">Nomina</label>
+                            @Html.DevExpress().ComboBoxFor(q => q.IdNomina, settings =>
+                       {
+                           settings.Name = "IdNomina";
+                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                           settings.Properties.Columns.Add("IdNomina_Tipo", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                           settings.Properties.Columns.Add("Descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                           //Campo ID
+                           settings.Properties.ValueField = "IdNomina_Tipo";
+                           settings.Properties.ValueType = typeof(int);
+                           settings.Properties.TextField = "Descripcion";
+                           //Boton para seleccionar ningun registro
+                           settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                           settings.Properties.NullText = "== Seleccione ==";
+                           settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                           settings.Properties.AllowNull = true;
+                       }).BindList(ViewBag.lst_nomina).GetHtml()
+                            @Html.ValidationMessageFor(q => q.IdNomina, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Fecha inicio*</label>

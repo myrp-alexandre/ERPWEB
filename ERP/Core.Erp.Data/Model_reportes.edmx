@@ -1798,10 +1798,9 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_011' does not have
           <Parameter Name="idperiodo" Type="int" Mode="In" />
         </Function>
         <Function Name="SPROL_012" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
-          <Parameter Name="idempresa" Type="int" Mode="In" />
-          <Parameter Name="idnomina" Type="int" Mode="In" />
-          <Parameter Name="fecha_inicio" Type="date" Mode="In" />
-          <Parameter Name="fecha_fin" Type="date" Mode="In" />
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="Fecha_desde" Type="date" Mode="In" />
+          <Parameter Name="Fecha_hasta" Type="date" Mode="In" />
         </Function>
         <Function Name="SPROL_013" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="idempresa" Type="int" Mode="In" />
@@ -2921,12 +2920,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_011' does not have
             <Parameter Name="idProveedorIni" Mode="In" Type="Decimal" />
             <Parameter Name="idProveedorFIn" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <FunctionImport Name="SPROL_012" ReturnType="Collection(Model_reportes.SPROL_012_Result)">
-            <Parameter Name="idempresa" Mode="In" Type="Int32" />
-            <Parameter Name="idnomina" Mode="In" Type="Int32" />
-            <Parameter Name="fecha_inicio" Mode="In" Type="DateTime" />
-            <Parameter Name="fecha_fin" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="SPCONTA_002" ReturnType="Collection(Model_reportes.SPCONTA_002_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdCtaCble" Mode="In" Type="String" />
@@ -2935,6 +2928,11 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_011' does not have
           </FunctionImport>
           <EntitySet Name="VWROL_001" EntityType="Model_reportes.VWROL_001" />
           <EntitySet Name="VWCXP_007" EntityType="Model_reportes.VWCXP_007" />
+          <FunctionImport Name="SPROL_012" ReturnType="Collection(Model_reportes.SPROL_012_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="Fecha_desde" Mode="In" Type="DateTime" />
+            <Parameter Name="Fecha_hasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <FunctionImport Name="SPROL_013" ReturnType="Collection(Model_reportes.SPROL_013_Result)">
             <Parameter Name="idempresa" Mode="In" Type="Int32" />
             <Parameter Name="idnomina" Mode="In" Type="Int32" />
@@ -4710,23 +4708,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_011' does not have
           <Property Type="Double" Name="Vencido_mayor_90" Nullable="false" />
           <Property Type="Boolean" Name="en_conciliacion" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="SPROL_012_Result">
-          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
-          <Property Type="Int32" Name="IdTipoNomina" Nullable="false" />
-          <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
-          <Property Type="Decimal" Name="IdEmpleado" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="Decimal" Name="IdPrestamo" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="String" Name="pe_cedulaRuc" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="pe_apellido" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="pe_nombre" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="EstadoPago" Nullable="false" MaxLength="10" />
-          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="de_descripcion" Nullable="false" MaxLength="200" />
-          <Property Type="Double" Name="Total_Prestamo" Nullable="true" />
-          <Property Type="Double" Name="Total_Cancelado" Nullable="true" />
-          <Property Type="Double" Name="Total_Pendiente_pago" Nullable="true" />
-          <Property Type="String" Name="Observacion" Nullable="false" MaxLength="250" />
-        </ComplexType>
         <ComplexType Name="SPCONTA_002_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
           <Property Type="Int32" Name="IdTipoCbte" Nullable="false" />
@@ -4869,6 +4850,23 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_011' does not have
           <Property Name="re_tipoRet" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="Num_Autorizacion_OG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="SPROL_012_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoNomina" Nullable="false" />
+          <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
+          <Property Type="Decimal" Name="IdEmpleado" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="IdPrestamo" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="pe_cedulaRuc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="pe_apellido" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="pe_nombre" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="EstadoPago" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="de_descripcion" Nullable="false" MaxLength="200" />
+          <Property Type="Double" Name="Total_Prestamo" Nullable="true" />
+          <Property Type="Double" Name="Total_Cancelado" Nullable="true" />
+          <Property Type="Double" Name="Total_Pendiente_pago" Nullable="true" />
+          <Property Type="String" Name="Observacion" Nullable="false" MaxLength="250" />
+        </ComplexType>
         <ComplexType Name="SPROL_013_Result">
           <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
           <Property Type="Int32" Name="pe_anio" Nullable="true" />
@@ -6177,27 +6175,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_011' does not have
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SPROL_012" FunctionName="Model_reportes.Store.SPROL_012">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model_reportes.SPROL_012_Result">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdTipoNomina" ColumnName="IdTipoNomina" />
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdPrestamo" ColumnName="IdPrestamo" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
-                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
-                <ScalarProperty Name="EstadoPago" ColumnName="EstadoPago" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="de_descripcion" ColumnName="de_descripcion" />
-                <ScalarProperty Name="Total_Prestamo" ColumnName="Total_Prestamo" />
-                <ScalarProperty Name="Total_Cancelado" ColumnName="Total_Cancelado" />
-                <ScalarProperty Name="Total_Pendiente_pago" ColumnName="Total_Pendiente_pago" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SPCONTA_002" FunctionName="Model_reportes.Store.SPCONTA_002">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Model_reportes.SPCONTA_002_Result">
@@ -6306,6 +6283,27 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_011' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPROL_012" FunctionName="Model_reportes.Store.SPROL_012">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_reportes.SPROL_012_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdTipoNomina" ColumnName="IdTipoNomina" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdPrestamo" ColumnName="IdPrestamo" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="EstadoPago" ColumnName="EstadoPago" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="de_descripcion" ColumnName="de_descripcion" />
+                <ScalarProperty Name="Total_Prestamo" ColumnName="Total_Prestamo" />
+                <ScalarProperty Name="Total_Cancelado" ColumnName="Total_Cancelado" />
+                <ScalarProperty Name="Total_Pendiente_pago" ColumnName="Total_Pendiente_pago" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SPROL_013" FunctionName="Model_reportes.Store.SPROL_013">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Model_reportes.SPROL_013_Result">
