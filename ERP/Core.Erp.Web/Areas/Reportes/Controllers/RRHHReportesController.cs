@@ -156,5 +156,18 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
+        public ActionResult ROL_013(DateTime? fecha_inicio, DateTime? fecha_fin, int IdNomina = 0)
+        {
+            ROL_013_Rpt model = new ROL_013_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdNomina.Value = IdNomina;
+            model.p_fecha_inicio.Value = fecha_inicio;
+            model.p_fecha_fin.Value = fecha_fin;
+            model.usuario = Session["IdUsuario"].ToString();
+            model.empresa = Session["nom_empresa"].ToString();
+            if (IdNomina == 0)
+                model.RequestParameters = false;
+            return View(model);
+        }
     }
 }
