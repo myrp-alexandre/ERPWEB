@@ -28,6 +28,70 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="IdProducto">Producto</label>
+                            @Html.DevExpress().ComboBoxFor(q => q.IdProducto, settings =>
+                       {
+                           settings.Name = "IdProducto";
+                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                           settings.Properties.Columns.Add("IdProducto", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(15);
+                           settings.Properties.Columns.Add("pr_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(60);
+                           settings.Properties.Columns.Add("nom_presentacion", "Presentación").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                           settings.Properties.Columns.Add("nom_categoria", "Categoría").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                           //Campo ID
+                           settings.Properties.ValueField = "IdProducto";
+                           settings.Properties.ValueType = typeof(decimal);
+                           settings.Properties.TextField = "pr_descripcion";
+                           //Boton para seleccionar ningun registro
+                           settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                           settings.Properties.NullText = "== Seleccione ==";
+                           settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                           settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){cargar_producto()}";
+                           settings.Properties.AllowNull = true;
+                       }).BindList(ViewBag.lst_producto).GetHtml()
+                            @Html.ValidationMessageFor(q => q.IdProducto, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="IdProducto_padre">Producto padre</label>
+                            @Html.DevExpress().ComboBoxFor(q => q.IdProducto_padre, settings =>
+                       {
+                           settings.Name = "IdProducto_padre";
+                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                           settings.Properties.Columns.Add("IdProducto", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                           settings.Properties.Columns.Add("pr_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(25);
+                           settings.Properties.Columns.Add("nom_presentacion", "Presentación").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                           settings.Properties.Columns.Add("nom_categoria", "Categoría").Width = System.Web.UI.WebControls.Unit.Percentage(35);
+                           settings.Properties.Columns.Add("lote_num_lote", "Lote").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                           settings.Properties.Columns.Add("lote_fecha_vcto", "Lote vcto").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                           //Campo ID
+                           settings.Properties.ValueField = "IdProducto_padre";
+                           settings.Properties.ValueType = typeof(decimal);
+                           settings.Properties.TextField = "pr_descripcion";
+                           //Boton para seleccionar ningun registro
+                           settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                           settings.Properties.NullText = "== Seleccione ==";
+                           settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                           settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){cargar_producto()}";
+                           settings.Properties.AllowNull = true;
+                       }).BindList(ViewBag.lst_producto_padre).GetHtml()
+                            @Html.ValidationMessageFor(q => q.IdProducto_padre, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdSucursal">Sucursal</label>
@@ -98,6 +162,10 @@
                             @Html.ValidationMessageFor(q => q.IdClienteContacto, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Fecha inicio*</label>
@@ -126,43 +194,70 @@
             </div>
             <!-- /.box-body -->
         </div>
-    </div>
-    <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title">@ViewBag.Title</h3>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                    <i class="fa fa-times"></i>
-                </button>
+                </div>
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">@ViewBag.Title</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    @Html.DevExpress().WebDocumentViewer(settings =>
+               {
+                   settings.MobileMode = false;
+                   settings.Name = "webDocumentViewer";
+               }).Bind(ViewBag.Report).GetHtml();
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    [@Session["IdEmpresa"]] @Session["nom_empresa"]
+                </div>
+                <!-- /.box-footer-->
             </div>
-        </div>
-        <div class="box-body">
-            @Html.DevExpress().WebDocumentViewer(settings =>
-       {
-           settings.MobileMode = false;
-           settings.Name = "webDocumentViewer";
-       }).Bind(ViewBag.Report).GetHtml();
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-            [@Session["IdEmpresa"]] @Session["nom_empresa"]
-        </div>
-        <!-- /.box-footer-->
-    </div>
-}
-<script>
-    $(function () {
-        //Date picker
-        $('#fecha_ini').datepicker({
-            autoclose: true
-        })
+            }
+        <script>
+            $(function () {
+                //Date picker
+                $('#fecha_ini').datepicker({
+                    autoclose: true
+                })
 
-        $('#fecha_fin').datepicker({
-            autoclose: true
-        })
+                $('#fecha_fin').datepicker({
+                    autoclose: true
+                })
 
-    });
-</script>
+                cargar_producto();
+                $("#IdProducto").change(function () {
+                    cargar_producto();
+                });
+                $("#IdProducto_padre").change(function () {
+                    cargar_producto();
+                });
+            });
+                function cargar_producto() {
+                    var codigo = IdProducto_padre.GetValue();
+
+                    var datos = {
+                        IdProducto_padre: codigo
+                    }
+                    $.ajax({
+                        type: 'POST',
+                        data: JSON.stringify(datos),
+                        url: '@Url.Action("cargar_producto", "FacturacionReportes",new { Area = "Reportes"})',
+                        async: false,
+                        dataType: 'json',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            GridView.GetEditor("IdProducto_padre").PerformCallback();
+                        },
+                        error: function (error) {
+                        }
+                    });
+                }
+            </script>

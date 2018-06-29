@@ -52,7 +52,7 @@ namespace Core.Erp.Bus.Inventario
             }
         }
 
-        public List<vwin_producto_hijo_combo> get_list_combo_hijo(int IdEmpresa, int IdProducto_padre)
+        public List<in_Producto_Info> get_list_combo_hijo(int IdEmpresa, decimal IdProducto_padre)
         {
             try
             {
