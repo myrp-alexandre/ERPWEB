@@ -13,14 +13,14 @@ namespace Core.Erp.Bus.General
     {
         tb_persona_Data odata = new tb_persona_Data();
 
-        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, string IdTipoPersona)
         {
-            return odata.get_list_bajo_demanda(args);
+            return odata.get_list_bajo_demanda(args,IdEmpresa,IdTipoPersona);
         }
 
-        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa, string IdTipoPersona)
         {
-            return odata.get_info_bajo_demanda(args);
+            return odata.get_info_bajo_demanda(args,IdEmpresa,IdTipoPersona);
         }
         public List<tb_persona_Info> get_list(bool mostrar_anulados)
         {
@@ -32,19 +32,6 @@ namespace Core.Erp.Bus.General
             {
                 throw;
             }            
-        }
-
-        public List<tb_persona_Info> get_list(int IdEmpresa, string IdTipo_persona)
-        {
-            try
-            {
-                return odata.get_list(IdEmpresa, IdTipo_persona);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
         }
 
         public decimal validar_existe_cedula(string pe_CedulaRuc)

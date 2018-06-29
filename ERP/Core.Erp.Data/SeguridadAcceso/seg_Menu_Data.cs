@@ -186,7 +186,7 @@ namespace Core.Erp.Data.SeguridadAcceso
                         PosicionMenu = info.PosicionMenu,
                         Habilitado = info.Habilitado = true,
                         Tiene_FormularioAsociado = info.Tiene_FormularioAsociado,
-                        nivel = info.nivel,
+                        nivel = 1,
                         web_nom_Area = info.web_nom_Area,
                         web_nom_Controller = info.web_nom_Controller == null ? "" : info.web_nom_Controller,
                         web_nom_Action = info.web_nom_Action,
@@ -221,7 +221,6 @@ namespace Core.Erp.Data.SeguridadAcceso
                     Entity.web_nom_Controller = info.web_nom_Controller == null ? "" : info.web_nom_Controller;
                     Entity.web_nom_Area = info.web_nom_Area;
                     Entity.web_nom_Action = info.web_nom_Action;
-                    Entity.nivel = info.nivel;
                     Entity.es_web = info.es_web;
                     Entity.es_desktop = info.es_desktop;
                     Context.SaveChanges();

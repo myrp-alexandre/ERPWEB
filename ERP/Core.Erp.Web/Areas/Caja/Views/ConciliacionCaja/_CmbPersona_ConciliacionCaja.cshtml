@@ -6,7 +6,7 @@
         settings.Width = Unit.Percentage(100);
         settings.Properties.DropDownWidth = Unit.Percentage(100);
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-        settings.CallbackRouteValues = new { Controller = "ConciliacionCaja", Action = "CmbPersona_ConciliacionCaja", Area = "Caja", IdTipoPersona = ViewBag.IdTipoPersona };
+        settings.CallbackRouteValues = new { Controller = "ConciliacionCaja", Action = "CmbPersona_ConciliacionCaja", Area = "Caja" };
         settings.Properties.CallbackPageSize = 15;
         settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
         settings.Properties.TextField = "pe_nombreCompleto";
@@ -18,10 +18,10 @@
         settings.Properties.Columns.Add("pe_nombreCompleto", "Persona", 80);
         settings.Properties.Columns.Add("IdPersona", "ID Persona", 10);
         settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdTipoPersona'] = $('#IdTipoPersona').val(); }";
-        //settings.Properties.ClientSideEvents.EndCallback = "OnEndCallbackCombo";
     })
-    .BindList(ViewBag.lst_persona)
+    .BindList()
+    //.BindList(ViewBag.lst_persona)
     .Bind(Model.IdEntidad);
-    
+
 }
 @comboBox.GetHtml()
