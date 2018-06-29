@@ -5,26 +5,28 @@
 }
 
 
-@using (Html.BeginForm("Nuevo", "EmpleadoPorRubro", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Anular", "EmpleadoPorRubro", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
 
     @Html.HiddenFor(q => q.IdEmpleado);
     @Html.HiddenFor(q => q.IdNomina_Tipo);
     @Html.HiddenFor(q => q.IdNomina_TipoLiqui);
     @Html.HiddenFor(q => q.IdRubroFijo);
+    @Html.HiddenFor(q => q.IdEmpresa);
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdEmpleado">Empleado*</label>
+                    <label for="Empleado">Empleado*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado, settings =>
                {
-                   settings.Name = "IdRubro";
+                   settings.Name = "IdEmpleado";
                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                   settings.Properties.Columns.Add("ru_codRolGen", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("ru_descripcion", "Rubro").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                   settings.Properties.Columns.Add("ru_tipo", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
+                   settings.Properties.Columns.Add("IdEmpleado", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("Empleado", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(80);
 
                    //Campo ID
                    settings.Properties.ValueField = "IdEmpleado";
@@ -34,14 +36,14 @@
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
                    settings.Properties.NullText = "== Seleccione ==";
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
+                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){calcular_vacaciones()}";
                }).BindList(ViewBag.lst_empleado).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+  <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
@@ -82,7 +84,7 @@
                    settings.Properties.ValueType = typeof(string);
                    settings.Properties.TextField = "ru_descripcion";
                    //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                    settings.Properties.NullText = "== Seleccione ==";
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 

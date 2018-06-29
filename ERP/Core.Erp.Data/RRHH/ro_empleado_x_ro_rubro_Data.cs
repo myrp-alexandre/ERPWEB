@@ -55,7 +55,7 @@ namespace Core.Erp.Data.RRHH
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     ro_empleado_x_ro_rubro Entity = Context.ro_empleado_x_ro_rubro.FirstOrDefault(q => q.IdEmpresa == IdEmpresa 
-                    && q.IdNomina_Tipo==IdRubroFijo);
+                    && q.IdRubroFijo==IdRubroFijo);
                     if (Entity == null) return null;
 
                     info = new ro_empleado_x_ro_rubro_Info

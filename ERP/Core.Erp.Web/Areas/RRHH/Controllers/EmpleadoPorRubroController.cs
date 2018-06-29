@@ -22,12 +22,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_rubros_fijos(decimal IdEmpleado = 0)
+        public ActionResult GridViewPartial_rubros_fijos()
         {
             try
             {
                 IdEmpresa = GetIdEmpresa();
-                ViewBag.IdEmpleado = IdEmpleado;
                 bus_rubro_fijos = new ro_empleado_x_ro_rubro_Bus();
                 List<ro_empleado_x_ro_rubro_Info> model = bus_rubro_fijos.get_list(IdEmpresa);
                 return PartialView("_GridViewPartial_rubros_fijos", model);
@@ -44,7 +43,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
 
-                ViewBag.IdEmpleado = info.IdEmpleado;
                 IdEmpresa = GetIdEmpresa();
                 info.IdEmpresa = IdEmpresa;
                 if (ModelState.IsValid)
@@ -68,15 +66,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        public ActionResult Nuevo(int IdEmpleado = 0)
+        public ActionResult Nuevo()
         {
             try
             {
                 ro_empleado_x_ro_rubro_Info model = new ro_empleado_x_ro_rubro_Info
                 {
-                    IdEmpleado = IdEmpleado
                 };
-                ViewBag.IdEmpleado = IdEmpleado;
                 cargar_combos(0);
                 return View(model);
 
@@ -118,9 +114,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                cargar_combos(IdNomina_Tipo);
                 IdEmpresa = GetIdEmpresa();
-                return View(bus_rubro_fijos.get_info(IdEmpresa, IdRubroFijo));
+                ro_empleado_x_ro_rubro_Info model = new ro_empleado_x_ro_rubro_Info();
+                model = bus_rubro_fijos.get_info(IdEmpresa, IdRubroFijo);
+                cargar_combos(IdNomina_Tipo);
+                
+                return View(model);
                 
     }
             catch (Exception)
@@ -155,9 +154,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                ro_empleado_x_ro_rubro_Info model = new ro_empleado_x_ro_rubro_Info();
                 cargar_combos(IdNomina_Tipo);
                 IdEmpresa = GetIdEmpresa();
-                return View(bus_rubro_fijos.get_info(IdEmpresa, IdRubroFijo));
+                model = bus_rubro_fijos.get_info(IdEmpresa, IdRubroFijo);
+                if (model == null)
+                    return RedirectToAction("Index");
+                return View(model);
 
             }
             catch (Exception)
