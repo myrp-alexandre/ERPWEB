@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Reportes.RRHH
 {
-    public class ROL_012_Bus
+    public class ROL_013_Bus
     {
-        ROL_012_Data odata = new ROL_012_Data();
-        public List<ROL_012_Info> get_list(int IdEmpresa, int IdNomina, DateTime fecha_inicio, DateTime fecha_fin)
+        ROL_013_Data odata = new ROL_013_Data();
+    
+        public List<ROL_013_Info> get_list(int IdEmpresa, int IdNomina, DateTime fecha_inicio, DateTime fecha_fin)
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdNomina,fecha_inicio, fecha_fin);
+                return odata.get_list(IdEmpresa, IdNomina, fecha_inicio, fecha_fin);
             }
             catch (Exception)
             {

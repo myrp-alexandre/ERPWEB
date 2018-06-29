@@ -44,8 +44,8 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
-            this.p_fecha_desde = new DevExpress.XtraReports.Parameters.Parameter();
-            this.p_fecha_hasta = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_fecha_inicio = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_fecha_fin = new DevExpress.XtraReports.Parameters.Parameter();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
             this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow1 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -86,6 +86,7 @@
             this.xrTableCell9 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell24 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell26 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.p_IdNomina = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -210,13 +211,13 @@
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
             // 
-            // p_fecha_desde
+            // p_fecha_inicio
             // 
-            this.p_fecha_desde.Name = "p_fecha_desde";
+            this.p_fecha_inicio.Name = "p_fecha_inicio";
             // 
-            // p_fecha_hasta
+            // p_fecha_fin
             // 
-            this.p_fecha_hasta.Name = "p_fecha_hasta";
+            this.p_fecha_fin.Name = "p_fecha_fin";
             // 
             // ReportHeader
             // 
@@ -327,7 +328,7 @@
             // xrTableCell14
             // 
             this.xrTableCell14.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_fecha_desde]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_fecha_inicio]")});
             this.xrTableCell14.Name = "xrTableCell14";
             this.xrTableCell14.TextFormatString = "{0:dd-MM-yy}";
             this.xrTableCell14.Weight = 1.6D;
@@ -368,7 +369,7 @@
             // xrTableCell21
             // 
             this.xrTableCell21.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_fecha_hasta]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_fecha_fin]")});
             this.xrTableCell21.Name = "xrTableCell21";
             this.xrTableCell21.TextFormatString = "{0:dd-MM-yy}";
             this.xrTableCell21.Weight = 1.6D;
@@ -604,6 +605,10 @@
             this.xrTableCell26.TextFormatString = "{0:n2}";
             this.xrTableCell26.Weight = 1.1701933716153086D;
             // 
+            // p_IdNomina
+            // 
+            this.p_IdNomina.Name = "p_IdNomina";
+            // 
             // ROL_012_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -622,8 +627,9 @@
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this.p_IdEmpresa,
-            this.p_fecha_desde,
-            this.p_fecha_hasta});
+            this.p_IdNomina,
+            this.p_fecha_inicio,
+            this.p_fecha_fin});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ROL_012_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
@@ -643,8 +649,8 @@
         private DevExpress.XtraReports.UI.BottomMarginBand BottomMargin;
         private DevExpress.DataAccess.ObjectBinding.ObjectDataSource objectDataSource1;
         public DevExpress.XtraReports.Parameters.Parameter p_IdEmpresa;
-        public DevExpress.XtraReports.Parameters.Parameter p_fecha_desde;
-        public DevExpress.XtraReports.Parameters.Parameter p_fecha_hasta;
+        public DevExpress.XtraReports.Parameters.Parameter p_fecha_inicio;
+        public DevExpress.XtraReports.Parameters.Parameter p_fecha_fin;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
         private DevExpress.XtraReports.UI.PageHeaderBand PageHeader;
         private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
@@ -692,5 +698,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell9;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell24;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell26;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdNomina;
     }
 }
