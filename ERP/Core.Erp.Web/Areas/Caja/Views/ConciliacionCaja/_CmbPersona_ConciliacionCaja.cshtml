@@ -17,9 +17,10 @@
         settings.Properties.Columns.Add("IdEntidad", "ID", 10);
         settings.Properties.Columns.Add("pe_nombreCompleto", "Persona", 80);
         settings.Properties.Columns.Add("IdPersona", "ID Persona", 10);
+
         settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdTipoPersona'] = $('#IdTipoPersona').val(); }";
     })
-    .BindList()
+    .BindList(new Core.Erp.Web.Areas.Caja.Controllers.ConciliacionCajaController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Caja.Controllers.ConciliacionCajaController().get_info_bajo_demanda)
     //.BindList(ViewBag.lst_persona)
     .Bind(Model.IdEntidad);
 
