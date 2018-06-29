@@ -6,8 +6,9 @@
     {
         Response.Redirect("~/Account/Login");
     }
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
-    if(ViewBag.mensaje!=null)
+    if (ViewBag.mensaje!=null)
     {
         <h2 >@ViewBag.mensaje</h2>
     }

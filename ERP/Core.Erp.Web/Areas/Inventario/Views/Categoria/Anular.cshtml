@@ -5,6 +5,7 @@
     {
         Response.Redirect("~/Account/Login");
     }
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using (Html.BeginForm("Anular", "Categoria", FormMethod.Post, new { @class = "form", @role = "form" }))
 {

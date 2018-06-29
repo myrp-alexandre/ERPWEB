@@ -1,6 +1,11 @@
 ﻿@model Core.Erp.Info.RRHH.ro_horario_Info
 @{
-    ViewBag.Title = "Anular orario";
+    ViewBag.Title = "Anular horario";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using (Html.BeginForm("Anular", "Horario", FormMethod.Post, new { @class = "form", @role = "form" }))
 {@Html.HiddenFor(q => q.IdHorario);

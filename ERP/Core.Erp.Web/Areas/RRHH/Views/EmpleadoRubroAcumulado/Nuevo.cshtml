@@ -2,6 +2,11 @@
 
 @{
     ViewBag.Title = "Nueva solicitud de acumulación";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
