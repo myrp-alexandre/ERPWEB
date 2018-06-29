@@ -100,7 +100,7 @@
                 p.DisplayFormatString = "N2";
             });
         });
-        
+        settings.ClientSideEvents.EndCallback = "Calcular";
     });
 }
 @grid.Bind(Model.lst_det_fact).GetHtml()

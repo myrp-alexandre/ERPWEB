@@ -1,4 +1,5 @@
-﻿using Core.Erp.Data.Inventario;
+﻿using Core.Erp.Data;
+using Core.Erp.Data.Inventario;
 using Core.Erp.Info.Inventario;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,32 @@ namespace Core.Erp.Bus.Inventario
             try
             {
                 return odata.get_list_para_composicion(IdEmpresa, mostrar_anulados);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<in_Producto_Info> get_list_combo_padre(int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_list_combo_padre(IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<in_Producto_Info> get_list_combo_hijo(int IdEmpresa, decimal IdProducto_padre)
+        {
+            try
+            {
+                return odata.get_list_combo_hijo(IdEmpresa, IdProducto_padre);
             }
             catch (Exception)
             {

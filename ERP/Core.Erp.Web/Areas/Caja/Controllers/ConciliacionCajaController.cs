@@ -12,6 +12,7 @@ using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.CuentasPorPagar;
 using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Bus.General;
+using Core.Erp.Web.Areas.Contabilidad.Controllers;
 
 namespace Core.Erp.Web.Areas.Caja.Controllers
 {
@@ -26,7 +27,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         cp_conciliacion_Caja_det_List list_det = new cp_conciliacion_Caja_det_List();
         cp_conciliacion_Caja_det_x_ValeCaja_List list_vale = new cp_conciliacion_Caja_det_x_ValeCaja_List();
         cp_conciliacion_Caja_det_Ing_Caja_List list_ing = new cp_conciliacion_Caja_det_Ing_Caja_List();
-
+        ct_cbtecble_det_List list_ct = new ct_cbtecble_det_List();        
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         caj_Caja_Bus bus_caja = new caj_Caja_Bus();
         tb_persona_Bus bus_persona = new tb_persona_Bus();
@@ -248,12 +249,50 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         }
         #endregion
 
+        #region Ingresos
         [ValidateInput(false)]
         public ActionResult GridViewPartial_conciliacion_ingresos()
         {
-            var model = new object[0];
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
+            model.lst_det_ing = list_ing.get_list();
             return PartialView("_GridViewPartial_conciliacion_ingresos", model);
         }
+        public void GetIngresos(DateTime? FechaFin, int IdCaja = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            var lst = bus_ing.get_list_ingresos_x_conciliar(IdEmpresa, FechaFin == null ? DateTime.Now.Date : Convert.ToDateTime(FechaFin), IdCaja);
+            list_ing.set_list(lst);
+        }
+        #endregion
+
+        public JsonResult Calcular(double SaldoContableAnterior = 0)
+        {
+            var lst_ing = list_ing.get_list();
+            var lst_vale = list_vale.get_list();
+            var lst_fact = list_det.get_list();
+
+            var ingresos = lst_ing.Sum(q => q.Saldo);
+            var egresos =  Convert.ToDouble(lst_fact.Count == 0 ? 0 : lst_fact.Sum(q => q.Valor_a_aplicar)) + Convert.ToDouble(lst_vale.Count == 0 ? 0 : lst_vale.Sum(q => q.valor));
+            var resultado = new cp_conciliacion_valores
+            {
+                Ingresos = Math.Round(ingresos,2,MidpointRounding.AwayFromZero),
+                Dif_ingresos = Math.Round(Math.Abs(SaldoContableAnterior) - ingresos,2,MidpointRounding.AwayFromZero),
+                Fondo = Math.Round(ingresos, 2, MidpointRounding.AwayFromZero),
+                Total_fact_vales = Math.Round(egresos,2,MidpointRounding.AwayFromZero),
+                Diferencia = Math.Round(ingresos - egresos,2,MidpointRounding.AwayFromZero)
+            };
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+    }
+
+    public class cp_conciliacion_valores
+    {
+        public double Ingresos { get; set; }
+        public double Dif_ingresos { get; set; }
+        public double Fondo { get; set; }
+        public double Total_fact_vales { get; set; }
+        public double Diferencia { get; set; }
     }
 
     public class cp_conciliacion_Caja_det_List

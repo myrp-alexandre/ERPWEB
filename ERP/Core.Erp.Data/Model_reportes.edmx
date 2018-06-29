@@ -918,8 +918,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_001' no tien
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWINV_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />

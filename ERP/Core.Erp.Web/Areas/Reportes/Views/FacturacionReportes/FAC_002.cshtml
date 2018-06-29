@@ -100,13 +100,13 @@
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="">Fecha *</label>
+                            <label for="">Fecha corte *</label>
                             <div class="input-group date">
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                @Html.TextBoxFor(q => q.fechaCorte, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_fin" })
-                                @Html.ValidationMessageFor(q => q.fecha, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.fechaCorte, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechaCorte" })
+                                @Html.ValidationMessageFor(q => q.fechaCorte, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -144,13 +144,10 @@
 <script>
     $(function () {
         //Date picker
-        $('#fecha_ini').datepicker({
+        $('#fechaCorte').datepicker({
             autoclose: true
         })
-
-        $('#fecha_fin').datepicker({
-            autoclose: true
-        })
+        
 
     });
 </script>

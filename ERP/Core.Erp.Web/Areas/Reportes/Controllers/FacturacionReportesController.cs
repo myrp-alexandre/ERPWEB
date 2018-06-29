@@ -14,7 +14,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     public class FacturacionReportesController : Controller
     {
 
-        private void cargar_combos()
+        private void cargar_combos(cl_filtros_Info model)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
@@ -33,8 +33,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             var lst_vendedor = bus_vendedor.get_list(IdEmpresa, false);
             ViewBag.lst_vendedor = lst_vendedor;
 
+         
             in_Producto_Bus bus_producto = new in_Producto_Bus();
-            var lst_producto = bus_producto.get_list(IdEmpresa, false);
+            var lst_producto = bus_producto.get_list_combo_padre(IdEmpresa);
+            var lst_producto_padre = bus_producto.get_list_combo_hijo(IdEmpresa, model.IdProducto_padre);
+
+            ViewBag.lst_producto_padre = lst_producto_padre;
             ViewBag.lst_producto = lst_producto;
             
         }
@@ -54,7 +58,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 mostrar_anulados= mostrar_anulados
             };
 
-            cargar_combos();
+            cargar_combos(model);
             FAC_001_Rpt report = new FAC_001_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             report.p_fecha_ini.Value = model.fecha_ini;
@@ -68,7 +72,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_mostrar_anulados.Value = model.mostrar_anulados;
             report.usuario = Session["IdUsuario"].ToString();
             report.empresa = Session["nom_empresa"].ToString();
-            report.RequestParameters = false;
+
+            if (IdProducto == 0)
+                report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
         }
@@ -89,7 +95,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_mostrar_anulados.Value = model.mostrar_anulados;
             report.usuario = Session["IdUsuario"].ToString();
             report.empresa = Session["nom_empresa"].ToString();
-            report.RequestParameters = false;
+            cargar_combos(model);
+            if (model.IdProducto == 0)
+                report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
         }
@@ -104,7 +112,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdClienteContacto = IdClienteContacto
             };
             
-            cargar_combos();
+            cargar_combos(model);
             FAC_002_Rpt report = new FAC_002_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             report.p_fechaCorte.Value = model.fechaCorte;
@@ -113,7 +121,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdClienteContacto.Value = model.IdClienteContacto;
             report.usuario = Session["IdUsuario"].ToString();
             report.empresa = Session["nom_empresa"].ToString();
-            report.RequestParameters = false;
+            if (model.IdProducto == 0)
+                report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
         }
@@ -129,9 +138,20 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdClienteContacto.Value = model.IdClienteContacto;
             report.usuario = Session["IdUsuario"].ToString();
             report.empresa = Session["nom_empresa"].ToString();
-            report.RequestParameters = false;
+            cargar_combos(model);
+            if (model.IdProducto == 0)
+                report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
+        }
+
+        public JsonResult cargar_producto(decimal IdProducto_padre = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            in_Producto_Bus bus_producto = new in_Producto_Bus();
+            var resultado = bus_producto.get_list_combo_hijo(IdEmpresa, IdProducto_padre);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
         }
     }
 }

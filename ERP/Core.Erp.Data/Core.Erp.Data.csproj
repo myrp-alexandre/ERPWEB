@@ -1149,6 +1149,12 @@
     <Compile Include="VWINV_007.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwin_producto_hijo_combo.cs">
+      <DependentUpon>Model_inventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwin_producto_padre_combo.cs">
+      <DependentUpon>Model_inventario.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwin_Transferencias.cs">
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
