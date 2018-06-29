@@ -105,125 +105,7 @@
                 </div>
             </nav>
         </header>
-        <!-- =============================================== -->
-        <!-- Left side column. contains the sidebar -->
-        <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                <!-- search form -->
-                <form action="#" method="get" class="sidebar-form">
-                    <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </form>
-                <!-- /.search form -->
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu" data-widget="tree">
-                    <li class="header">Menú</li>
-                    <li class="treeview active">
-                        <a href="#">
-                            <i class="fa fa-folder-o"></i> <span>General</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="@Url.Action("Index","Banco",new { area = "General"})"><i class="fa fa-circle-o"></i> Bancos</a></li>
-                            <li><a href="@Url.Action("Index","Sucursal",new { area = "General"})"><i class="fa fa-circle-o"></i> Sucursales y Bodegas</a></li>
-                            <li><a href="@Url.Action("Index","CatalogoTipo",new { area = "General"})"><i class="fa fa-circle-o"></i> Catálogos</a></li>
-                            <li><a href="@Url.Action("Index","Empresa",new { area = "General"})"><i class="fa fa-circle-o"></i> Empresas</a></li>
-                            <li><a href="@Url.Action("Index","Impuesto",new { area = "General"})"><i class="fa fa-circle-o"></i> Impuestos</a></li>
-                            <li><a href="@Url.Action("Index","Pais",new { area = "General"})"><i class="fa fa-circle-o"></i> País</a></li>
-                            <li><a href="@Url.Action("Index","Region",new { area = "General"})"><i class="fa fa-circle-o"></i> Región</a></li>
-                            <li><a href="@Url.Action("Index","Provincia",new { area = "General"})"><i class="fa fa-circle-o"></i> Provincia</a></li>
-                            <li><a href="@Url.Action("Index","Transportista",new { area = "General"})"><i class="fa fa-circle-o"></i> Transportistas</a></li>
-                            <li><a href="@Url.Action("Index","Persona",new { area = "General"})"><i class="fa fa-circle-o"></i> Persona</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-folder-o"></i> <span>Cuentas por pagar</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="@Url.Action("Index","ClaseProveedor",new { area = "CuentasPorPagar"})"><i class="fa fa-circle-o"></i> Clase proveedor</a></li>
-                            <li><a href="@Url.Action("Index","TipoCodigoSRI",new { area = "CuentasPorPagar"})"><i class="fa fa-circle-o"></i> Código SRI</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-folder-o"></i> <span>Seguridad y acceso</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="@Url.Action("Index","Usuario",new { area = "SeguridadAcceso"})"><i class="fa fa-circle-o"></i> Usuario</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-folder-o"></i> <span>Contabilidad</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="@Url.Action("Index","AnioFiscal",new { area = "Contabilidad"})"><i class="fa fa-circle-o"></i> Año fiscal</a></li>
-                            <li><a href="@Url.Action("Index","GrupoContable",new { area = "Contabilidad"})"><i class="fa fa-circle-o"></i> Grupos contables</a></li>
-                            <li><a href="@Url.Action("Index","PeriodoContable",new { area = "Contabilidad"})"><i class="fa fa-circle-o"></i> Periodos</a></li>
-                            <li><a href="@Url.Action("Index","TipoComprobante",new { area = "Contabilidad"})"><i class="fa fa-circle-o"></i> Tipo de comprobante</a></li>
-                            <li><a href="@Url.Action("Index","ParametroContable",new { area = "Contabilidad"})"><i class="fa fa-circle-o"></i> Parámetro contable</a></li>
-
-                        </ul>
-                    </li>
-
-
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-folder-o"></i> <span>Roles</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="@Url.Action("Index","Division",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> División </a></li>
-                            <li><a href="@Url.Action("Index","Area",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Área </a></li>
-                            <li><a href="@Url.Action("Index","Departamento",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Departamento</a></li>
-                            <li><a href="@Url.Action("Index","Cargo",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Cargo</a></li>
-                            <li><a href="@Url.Action("Index","Rubro",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Rubro</a></li>
-                            <li><a href="@Url.Action("Index","Contrato",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Contrato</a></li>
-                            <li><a href="@Url.Action("Index","NominaTipo",new { area = "RRHH"})"><i class="fa fa-circle-o"></i> Tipo de nómina</a></li>
-                            <li><a href="@Url.Action("Index","TipoPrestamo",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Tipo préstamo</a></li>
-                            <li><a href="@Url.Action("Index","Periodo",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Périodos</a></li>
-                            <li><a href="@Url.Action("Index","Rubros_acumulados",new { area = "RRHH"})"><i class="fa fa-circle-o"></i>Rubros acumulados</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-folder-o"></i> <span>Inventario</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="@Url.Action("Index","ProductoTipo",new { area = "Inventario"})"><i class="fa fa-circle-o"></i> Tipo producto</a></li>
-                            <li><a href="@Url.Action("Index","TipoMovimiento",new { area = "Inventario"})"><i class="fa fa-circle-o"></i> Tipo movimiento</a></li>
-                            <li><a href="@Url.Action("Index","MotivoInventario",new { area = "Inventario"})"><i class="fa fa-circle-o"></i> Movimiento</a></li>
-
-                        </ul>
-                    </li>
-                </ul>
-            </section>
-            <!-- /.sidebar -->
-        </aside>
+     
         <!-- =============================================== -->
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -242,6 +124,31 @@
                         </div>
                     </div>
                     <div class="box-body">
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Menú</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        @Html.DevExpress().TreeView(settings =>
+                                   {
+                                       settings.Name = "treeViewMenu";
+                                       settings.EnableHotTrack = true;
+                                       var Nodes = new List<Core.Erp.Info.SeguridadAcceso.seg_Menu_x_Empresa_x_Usuario_Info>();
+                                       Core.Erp.Web.Areas.SeguridadAcceso.Controllers.MenuPorEmpresaPorUsuarioController.CreateTreeViewNodesRecursive(Nodes, settings.Nodes, 0, (Session["IdEmpresa"] == null ? 0 : Convert.ToInt32(Session["IdEmpresa"])), (Session["IdUsuario"] == null ? "" : Session["IdUsuario"].ToString()));
+
+                                   }).GetHtml()
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                         @RenderBody()
                     </div>
                     <!-- /.box-body -->
