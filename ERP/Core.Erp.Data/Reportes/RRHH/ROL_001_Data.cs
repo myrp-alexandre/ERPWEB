@@ -49,7 +49,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  IdDepartamento = q.IdDepartamento,
                                  IdArea = q.IdArea,
                                  Area = q.Area,
-                                 Periodo=q.Periodo
+                                 Periodo=q.Periodo,
+                                 em_ruc=q.em_ruc
 
                              }).ToList();
                 }
