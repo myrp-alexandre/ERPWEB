@@ -38,11 +38,11 @@ namespace Core.Erp.Bus.SeguridadAcceso
             }
         }
 
-        public bool guardarDB(List<seg_Menu_x_Empresa_Info> Lista, string IdUsuario = "")
+        public bool guardarDB(List<seg_Menu_x_Empresa_Info> Lista)
         {
             try
             {
-                return odata.guardarDB(Lista, IdUsuario);
+                return odata.guardarDB(Lista);
             }
             catch (Exception)
             {

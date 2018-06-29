@@ -138,15 +138,10 @@ namespace Core.Erp.Data.SeguridadAcceso
             }
         }
 
-        public bool guardarDB(List<seg_Menu_x_Empresa_x_Usuario_Info> Lista)
+        public bool guardarDB(List<seg_Menu_x_Empresa_x_Usuario_Info> Lista, int IdEmpresa, string IdUsuario)
         {
             try
             {
-                int IdEmpresa = 0;
-                if(Lista.Count()>0)
-                 IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
-                string IdUsuario = Lista.FirstOrDefault().IdUsuario;
-
                 using (Entities_seguridad_acceso Context = new Entities_seguridad_acceso())
                 {
                     foreach (var item in Lista)

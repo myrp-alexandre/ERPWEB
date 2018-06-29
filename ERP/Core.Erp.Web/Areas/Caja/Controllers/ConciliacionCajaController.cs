@@ -35,6 +35,12 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
         #endregion
 
+        public ActionResult CmbPersona_ConciliacionCaja()
+        {
+            var model = bus_persona.get_list(false);
+            return PartialView("_CmbPersona_ConciliacionCaja",model);
+        }
+
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -164,16 +170,6 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             if (model == null) model = new Info.General.tb_persona_Info();
             //ViewBag.lst_personas = bus_persona.get_list(false);
             return PartialView("_ComboBoxPartial_persona", model);
-        }
-
-        public ActionResult ComboPersona(decimal IdEntidad = 0)
-        {
-            cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info
-            {
-                IdEntidad = IdEntidad
-            };
-            ViewBag.lst_personas = bus_persona.get_list(false);
-            return PartialView("_ComboPersona",model);
         }
 
         #region Facturas
