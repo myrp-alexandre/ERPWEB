@@ -227,7 +227,6 @@
                 $('#fecha_ini').datepicker({
                     autoclose: true
                 })
-
                 $('#fecha_fin').datepicker({
                     autoclose: true
                 })
@@ -254,7 +253,6 @@
                         dataType: 'json',
                         contentType: 'application/json; charset=utf-8',
                         success: function (data) {
-                            GridView.GetEditor("IdProducto_padre").PerformCallback();
                         },
                         error: function (error) {
                         }
