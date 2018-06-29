@@ -22,7 +22,9 @@
         $('#Fecha').datepicker({
             autoclose: true
         })
-
+        $('#Fecha_op').datepicker({
+            autoclose: true
+        })
         $("#Fecha_ini").change(function () {
             GetSaldoAnterior();
         });
@@ -42,19 +44,27 @@
         });
 
         $("#IdEstadoCierre").change(function () {
-            if ($("IdEstadoCierre").val() = "EST_CIE_ABI") {
-                $("#link_op").hide();
-            } else {
-                $("#link_op").click();
-                $("#link_op").show();
-            }
+            MostrarOcultarOP();
         });
 
         GetIdCtaCbleCaja();
         GetPeriodo();
         GetSaldoAnterior();
         GetIngresos();
+        IdEntidad.PerformCallback();
     });
+
+    function MostrarOcultarOP() {
+        var Estado = $("#IdEstadoCierre").val();
+        if (Estado == "EST_CIE_ABI") {
+            $("#link_fact").click();
+            $("#link_op").hide();
+        } else {
+            $("#link_op").show();
+            $("#link_op").click();
+            armar_diario();
+        }
+    }
 
      function OnSelectedIndexChanged(s, e) {
         GridView_conciliacion_vales.AutoFilterByColumn("IdPersona", s.GetText());
@@ -221,9 +231,32 @@
             }
         });
     }
+
+    function armar_diario() {
+        var datos = {
+            IdCtaCble: $("#IdCtaCble").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("armar_diario", "ConciliacionCaja",new { Area = "Caja"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+
+        });
+        $('#FechaOP').datepicker("setDate", moment(new Date()).format("DD/MM/YYYY"));
+        GridView_comprobante_detalle.PerformCallback();
+    }
 </script>
 
-@using (Html.BeginForm("Index", "ConciliacionCaja", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "ConciliacionCaja", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
 
     <div class="modal fade" id="FacturasModal" role="dialog">
@@ -235,10 +268,10 @@
                     <h4 class="modal-title">Facturas</h4>
                 </div>
                 <div class="modal-body">
-                   @Html.Action("GridViewPartial_conciliacion_facturas_x_cruzar")
+                    @Html.Action("GridViewPartial_conciliacion_facturas_x_cruzar")
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="AddFacturas();" >Aceptar</button>
+                    <button type="button" class="btn btn-primary" onclick="AddFacturas();">Aceptar</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -251,7 +284,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdEstadoCierre">Estado *</label>
-                    @Html.DropDownListFor(q => q.IdEstadoCierre, new SelectList(ViewBag.lst_estado, "Key", "Value"), new { @id = "IdEstadoCierre", @class = "form-control"})
+                    @Html.DropDownListFor(q => q.IdEstadoCierre, new SelectList(ViewBag.lst_estado, "Key", "Value"), new { @id = "IdEstadoCierre", @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.IdEstadoCierre, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -263,48 +296,48 @@
                 </div>
             </div>
         </div>
-    </div>   
-        
-    
+    </div>
+
+
     <div class="row">
         <div class="col-md-6">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="IdCaja">Caja *</label>
-                        @Html.DropDownListFor(q => q.IdCaja, new SelectList(ViewBag.lst_caja, "IdCaja", "ca_Descripcion"), new { @id = "IdCaja", @class = "form-control" })
-                        @Html.ValidationMessageFor(q => q.IdCaja, "", new { @class = "text-danger" })
-                    </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdCaja">Caja *</label>
+                    @Html.DropDownListFor(q => q.IdCaja, new SelectList(ViewBag.lst_caja, "IdCaja", "ca_Descripcion"), new { @id = "IdCaja", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdCaja, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="IdCtaCble">Cta Cble*</label>
-                        @Html.TextBoxFor(q => q.IdCtaCble, new { @id = "IdCtaCble", @class = "form-control", @readonly = "readonly" })
-                        @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
-                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdCtaCble">Cta Cble*</label>
+                    @Html.TextBoxFor(q => q.IdCtaCble, new { @id = "IdCtaCble", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
                 </div>
+            </div>
 
-            
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="IdPeriodo">Periodo*</label>
-                        @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodo, "IdPeriodo", "nom_periodo_combo"), new { @id = "IdPeriodo", @class = "form-control" })
-                        @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
-                    </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdPeriodo">Periodo*</label>
+                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodo, "IdPeriodo", "nom_periodo_combo"), new { @id = "IdPeriodo", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="Fecha_ini">Desde*</label>
-                        @Html.TextBoxFor(q => q.Fecha_ini, "{0:dd/MM/yyyy}", new { @id = "Fecha_ini", @class = "form-control" })
-                        @Html.ValidationMessageFor(q => q.Fecha_ini, "", new { @class = "text-danger" })
-                    </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Fecha_ini">Desde*</label>
+                    @Html.TextBoxFor(q => q.Fecha_ini, "{0:dd/MM/yyyy}", new { @id = "Fecha_ini", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Fecha_ini, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="Fecha_fin">Hasta*</label>
-                        @Html.TextBoxFor(q => q.Fecha_fin, "{0:dd/MM/yyyy}", new { @id = "Fecha_fin", @class = "form-control" })
-                        @Html.ValidationMessageFor(q => q.Fecha_fin, "", new { @class = "text-danger" })
-                    </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Fecha_fin">Hasta*</label>
+                    @Html.TextBoxFor(q => q.Fecha_fin, "{0:dd/MM/yyyy}", new { @id = "Fecha_fin", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Fecha_fin, "", new { @class = "text-danger" })
                 </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-12">
@@ -315,7 +348,7 @@
                             @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                </div>                
+                </div>
             </div>
 
         </div>
@@ -362,7 +395,7 @@
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
-                <a href="#tab_facturas" aria-controls="facturas" role="tab" data-toggle="tab" id="link_general">Facturas</a>
+                <a href="#tab_facturas" aria-controls="facturas" role="tab" data-toggle="tab" id="link_fact">Facturas</a>
             </li>
             <li>
                 <a href="#tab_vales" aria-controls="vales" role="tab" data-toggle="tab">Vales</a>
@@ -370,8 +403,8 @@
             <li>
                 <a href="#tab_ingresos" aria-controls="ingresos" role="tab" data-toggle="tab">Ingresos</a>
             </li>
-            <li>
-                <a href="#tab_op" id="link_op" aria-controls="vales" role="tab" data-toggle="tab" hidden>Orden de pago</a>
+            <li hidden>
+                <a href="#tab_op" aria-controls="vales" role="tab" data-toggle="tab" id="link_op">Orden de pago</a>
             </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
@@ -402,9 +435,45 @@
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_op">
                 <div class="row">
-
+                    <div class="col-md-offset-10 col-md-2">
+                        <div class="form-group">
+                            <label for="FechaOP">Fecha*</label>
+                            @Html.TextBoxFor(q => q.FechaOP, "{0:dd/MM/yyyy}", new { @id = "FechaOP", @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.FechaOP, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="IdPersona">Beneficiario*</label>
+                            @Html.Partial("_ComboPersona")
+                            @Html.ValidationMessageFor(q => q.IdEntidad, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="ObservacionOP">Observación</label>
+                            @Html.TextAreaFor(q => q.ObservacionOP, new { @id = "ObservacionOP", @class = "form-control", @rows = 2 })
+                            @Html.ValidationMessageFor(q => q.ObservacionOP, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+                @Html.Action("GridViewPartial_comprobante_detalle", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
+
             </div>
         </div>
     </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "ConciliacionCaja", new { Area = "Caja" }, null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }

@@ -8502,6 +8502,7 @@
     <Content Include="Areas\Caja\Views\ConciliacionCaja\_GridViewPartial_conciliacion_facturas.cshtml" />
     <Content Include="Areas\Caja\Views\ConciliacionCaja\_GridViewPartial_conciliacion_ingresos.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_001.cshtml" />
+    <Content Include="Areas\Caja\Views\ConciliacionCaja\_ComboPersona.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />

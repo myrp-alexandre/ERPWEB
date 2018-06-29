@@ -27,7 +27,8 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         cp_conciliacion_Caja_det_List list_det = new cp_conciliacion_Caja_det_List();
         cp_conciliacion_Caja_det_x_ValeCaja_List list_vale = new cp_conciliacion_Caja_det_x_ValeCaja_List();
         cp_conciliacion_Caja_det_Ing_Caja_List list_ing = new cp_conciliacion_Caja_det_Ing_Caja_List();
-        ct_cbtecble_det_List list_ct = new ct_cbtecble_det_List();        
+        ct_cbtecble_det_List list_ct = new ct_cbtecble_det_List();  
+        
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         caj_Caja_Bus bus_caja = new caj_Caja_Bus();
         tb_persona_Bus bus_persona = new tb_persona_Bus();
@@ -71,15 +72,18 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                 IdPeriodo = Convert.ToInt32(DateTime.Now.Date.ToString("yyyyMM")),
                 Fecha_ini = DateTime.Now,
                 Fecha_fin = DateTime.Now,
+                FechaOP = DateTime.Now,
                 IdEstadoCierre = cl_enumeradores.eEstadoCierreCaja.EST_CIE_ABI.ToString(),
                 lst_det_fact = new List<cp_conciliacion_Caja_det_Info>(),
                 lst_det_ing = new List<cp_conciliacion_Caja_det_Ing_Caja_Info>(),
-                lst_det_vale = new List<cp_conciliacion_Caja_det_x_ValeCaja_Info>()
+                lst_det_vale = new List<cp_conciliacion_Caja_det_x_ValeCaja_Info>(),
+                lst_det_ct = new List<ct_cbtecble_det_Info>()
             };
 
             list_det.set_list(model.lst_det_fact);
             list_vale.set_list(model.lst_det_vale);
             list_ing.set_list(model.lst_det_ing);
+            list_ct.set_list(model.lst_det_ct);
             cargar_combos();
             return View(model);
         }
@@ -90,6 +94,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             if (!bus_conciliacion.guardarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
+                cargar_combos();
                 return View(model);
             }
 
@@ -157,7 +162,18 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
        {
             var model = bus_persona.get_info(IdPersona);
             if (model == null) model = new Info.General.tb_persona_Info();
+            //ViewBag.lst_personas = bus_persona.get_list(false);
             return PartialView("_ComboBoxPartial_persona", model);
+        }
+
+        public ActionResult ComboPersona(decimal IdEntidad = 0)
+        {
+            cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info
+            {
+                IdEntidad = IdEntidad
+            };
+            ViewBag.lst_personas = bus_persona.get_list(false);
+            return PartialView("_ComboPersona",model);
         }
 
         #region Facturas
@@ -247,6 +263,52 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                 resultado = new ct_periodo_Info();
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult Calcular(double SaldoContableAnterior = 0)
+        {
+            var lst_ing = list_ing.get_list();
+            var lst_vale = list_vale.get_list();
+            var lst_fact = list_det.get_list();
+
+            var ingresos = lst_ing.Sum(q => q.Saldo);
+            var egresos = Convert.ToDouble(lst_fact.Count == 0 ? 0 : lst_fact.Sum(q => q.Valor_a_aplicar)) + Convert.ToDouble(lst_vale.Count == 0 ? 0 : lst_vale.Sum(q => q.valor));
+            var resultado = new cp_conciliacion_valores
+            {
+                Ingresos = Math.Round(ingresos, 2, MidpointRounding.AwayFromZero),
+                Dif_ingresos = Math.Round(Math.Abs(SaldoContableAnterior) - ingresos, 2, MidpointRounding.AwayFromZero),
+                Fondo = Math.Round(ingresos, 2, MidpointRounding.AwayFromZero),
+                Total_fact_vales = Math.Round(egresos, 2, MidpointRounding.AwayFromZero),
+                Diferencia = Math.Round(ingresos - egresos, 2, MidpointRounding.AwayFromZero)
+            };
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        public void armar_diario(string IdCtaCble = "")
+        {
+            var lst_vale = list_vale.get_list();
+            var lst_fact = list_det.get_list();
+            var valor = Convert.ToDouble(lst_fact.Count == 0 ? 0 : lst_fact.Sum(q => q.Valor_a_aplicar)) + Convert.ToDouble(lst_vale.Count == 0 ? 0 : lst_vale.Sum(q => q.valor));
+
+            List<ct_cbtecble_det_Info> lst_det = new List<ct_cbtecble_det_Info>
+            {
+               //Debe
+                new ct_cbtecble_det_Info
+                {
+                    IdCtaCble = IdCtaCble,
+                    dc_Valor = Math.Abs(valor),
+                    dc_Valor_debe = Math.Abs(valor),
+                    secuencia = 1
+
+                },
+                //Haber
+                new ct_cbtecble_det_Info
+                {
+                    IdCtaCble = IdCtaCble,
+                    dc_Valor = Math.Abs(valor)*-1,
+                    dc_Valor_haber = Math.Abs(valor),
+                    secuencia = 2
+                }
+            };
+            list_ct.set_list(lst_det);
+        }
         #endregion
 
         #region Ingresos
@@ -264,26 +326,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             var lst = bus_ing.get_list_ingresos_x_conciliar(IdEmpresa, FechaFin == null ? DateTime.Now.Date : Convert.ToDateTime(FechaFin), IdCaja);
             list_ing.set_list(lst);
         }
-        #endregion
-
-        public JsonResult Calcular(double SaldoContableAnterior = 0)
-        {
-            var lst_ing = list_ing.get_list();
-            var lst_vale = list_vale.get_list();
-            var lst_fact = list_det.get_list();
-
-            var ingresos = lst_ing.Sum(q => q.Saldo);
-            var egresos =  Convert.ToDouble(lst_fact.Count == 0 ? 0 : lst_fact.Sum(q => q.Valor_a_aplicar)) + Convert.ToDouble(lst_vale.Count == 0 ? 0 : lst_vale.Sum(q => q.valor));
-            var resultado = new cp_conciliacion_valores
-            {
-                Ingresos = Math.Round(ingresos,2,MidpointRounding.AwayFromZero),
-                Dif_ingresos = Math.Round(Math.Abs(SaldoContableAnterior) - ingresos,2,MidpointRounding.AwayFromZero),
-                Fondo = Math.Round(ingresos, 2, MidpointRounding.AwayFromZero),
-                Total_fact_vales = Math.Round(egresos,2,MidpointRounding.AwayFromZero),
-                Diferencia = Math.Round(ingresos - egresos,2,MidpointRounding.AwayFromZero)
-            };
-            return Json(resultado, JsonRequestBehavior.AllowGet);
-        }
+        #endregion        
     }
 
     public class cp_conciliacion_valores
