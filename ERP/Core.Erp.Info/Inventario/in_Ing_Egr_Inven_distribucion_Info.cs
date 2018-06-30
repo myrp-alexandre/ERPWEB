@@ -37,6 +37,8 @@ namespace Core.Erp.Info.Inventario
         public double mv_costo { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string vt_NumFactura { get; set; }
+
+        public string IdUsuario { get; set; }
         #endregion
 
         public List<in_Ing_Egr_Inven_distribucion_Info> lst_x_distribuir { get; set; }
