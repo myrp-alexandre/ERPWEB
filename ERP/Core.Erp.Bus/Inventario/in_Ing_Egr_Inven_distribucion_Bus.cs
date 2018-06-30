@@ -17,19 +17,29 @@ namespace Core.Erp.Bus.Inventario
             {
                 return oData.get_list(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 throw;
             }
         }
-
+        public List<in_Ing_Egr_Inven_distribucion_Info> get_list(int IdEmpresa)
+        {
+            try
+            {
+                return oData.get_list(IdEmpresa);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public in_Ing_Egr_Inven_distribucion_Info get_info(int IdEmpresa, int IdSucursal, int IdMovi_inven_tipo, decimal IdNumMovi, string signo)
         {
             try
             {
                 return oData.get_info(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi, signo);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 throw;
             }
@@ -42,7 +52,7 @@ namespace Core.Erp.Bus.Inventario
             {
                 return oData.get_list(IdEmpresa, IdSucursal, IdMovi_inven_tipo);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 throw;
             }
@@ -54,7 +64,7 @@ namespace Core.Erp.Bus.Inventario
             {
                 return oData.get_list_x_distribuir(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 throw;
             }
@@ -66,7 +76,7 @@ namespace Core.Erp.Bus.Inventario
             {
                 return oData.get_list_distribuido(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 throw;
             }
@@ -78,7 +88,7 @@ namespace Core.Erp.Bus.Inventario
             {
                 return oData.guardarDB(lista);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 throw;
             }
@@ -90,7 +100,7 @@ namespace Core.Erp.Bus.Inventario
             {
                 return oData.guardarDB(info);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 throw;
             }

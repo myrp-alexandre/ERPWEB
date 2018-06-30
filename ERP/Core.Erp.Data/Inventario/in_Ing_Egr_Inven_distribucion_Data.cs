@@ -212,6 +212,47 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
+        public List<in_Ing_Egr_Inven_distribucion_Info> get_list(int IdEmpresa)
+        {
+            try
+            {
+                List<in_Ing_Egr_Inven_distribucion_Info> Lista = new List<in_Ing_Egr_Inven_distribucion_Info>();
+
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    Lista = (from q in Context.vwin_Ing_Egr_Inven_distribucion
+                             where q.IdEmpresa == IdEmpresa
+                         
+                             select new in_Ing_Egr_Inven_distribucion_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdSucursal = q.IdSucursal,
+                                 IdMovi_inven_tipo = q.IdMovi_inven_tipo,
+                                 IdNumMovi = q.IdNumMovi,
+                                 signo = q.signo,
+                                 can_total = q.can_total,
+                                 can_distribuida = q.can_distribuida,
+                                 can_x_distribuir = q.can_x_distribuir,
+                                 cm_observacion = q.cm_observacion,
+                                 cm_fecha = q.cm_fecha,
+                                 tm_descripcion = q.tm_descripcion,
+                                 Su_Descripcion = q.Su_Descripcion,
+                                 IdBodega = q.IdBodega,
+
+                                 pe_nombreCompleto = q.pe_nombreCompleto,
+                                 vt_NumFactura = q.vt_NumFactura
+                             }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
         private int get_id(int IdEmpresa, int IdSucursal, int IdMovi_inven_tipo, decimal IdNumMovi)
         {
