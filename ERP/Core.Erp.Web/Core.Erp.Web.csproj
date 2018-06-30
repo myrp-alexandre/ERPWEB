@@ -8572,6 +8572,7 @@
     <Content Include="Views\Account\LoginEmpresa.cshtml" />
     <Content Include="Views\Account\CambiarContrasena.cshtml" />
     <Content Include="Views\Layout\_LayoutConsulta.cshtml" />
+    <Content Include="Views\Layout\_GridViewPartial_entidad_cmb.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

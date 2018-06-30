@@ -107,5 +107,12 @@ namespace Core.Erp.Web.Areas.General.Controllers
         {
             return PartialView("_ComboBoxPartial_persona");
         }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_entidad_cmb(string IdTipo_Persona = "")
+        {
+            var model = new object[0];
+            return PartialView("~/Views/Layout/_GridViewPartial_entidad_cmb.cshtml", model);
+        }
     }
 }
