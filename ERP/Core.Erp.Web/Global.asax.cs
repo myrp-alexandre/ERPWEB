@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Erp.Web.Helps;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,6 +20,7 @@ namespace Core.Erp.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             ModelBinders.Binders.DefaultBinder = new DevExpress.Web.Mvc.DevExpressEditorsBinder();
             DevExpress.Web.Mvc.MVCxWebDocumentViewer.StaticInitialize();
+            SessionFixed.SetSessionValueProvider(new WebSessionValueProvider());
         }
     }
 }

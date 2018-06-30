@@ -12,6 +12,7 @@ using Core.Erp.Web.Models;
 using Core.Erp.Info.SeguridadAcceso;
 using Core.Erp.Bus.SeguridadAcceso;
 using Core.Erp.Bus.General;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Controllers
 {
@@ -19,10 +20,10 @@ namespace Core.Erp.Web.Controllers
     {
         seg_Usuario_x_Empresa_Bus bus_usuario_x_empresa = new seg_Usuario_x_Empresa_Bus();
         seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
-        tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+        tb_empresa_Bus bus_empresa = new tb_empresa_Bus();        
         [AllowAnonymous]
         public ActionResult Login()
-        {
+        {            
             LoginModel model = new LoginModel();
             return View(model);
         }
@@ -74,8 +75,11 @@ namespace Core.Erp.Web.Controllers
             Session["IdUsuario"] = model.IdUsuario;
             Session["IdEmpresa"] = model.IdEmpresa;
             Session["nom_empresa"] = info_empresa.em_nombre;
+            SessionFixed.IdEmpresa = model.IdEmpresa.ToString();
             return RedirectToAction("Index","Home");
         }
+
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]

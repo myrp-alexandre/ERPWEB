@@ -15,6 +15,7 @@ using Core.Erp.Bus.General;
 using Core.Erp.Web.Areas.Contabilidad.Controllers;
 using Core.Erp.Info.General;
 using DevExpress.Web;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Caja.Controllers
 {
@@ -39,22 +40,18 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
         public ActionResult CmbPersona_ConciliacionCaja()
         {
-            
+            SessionFixed.CurrentTipoPersona = Request.Params["IdTipoPersona"] != null ? Request.Params["IdTipoPersona"].ToString() : "PERSONA";
             cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
             return PartialView("_CmbPersona_ConciliacionCaja",model);
         }
 
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            string IdTipoPersona = Request.Params["IdTipoPersona"] != null ? Request.Params["IdTipoPersona"].ToString() : "PERSONA";
-            return bus_persona.get_list_bajo_demanda(args, IdEmpresa, IdTipoPersona);
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), SessionFixed.CurrentTipoPersona);
         }
         public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            string IdTipoPersona = Request.Params["IdTipoPersona"] != null ? Request.Params["IdTipoPersona"].ToString() : "PERSONA";
-            return bus_persona.get_info_bajo_demanda(args, IdEmpresa, IdTipoPersona);
+        {            
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), SessionFixed.CurrentTipoPersona);
         }
 
         public ActionResult Index()
