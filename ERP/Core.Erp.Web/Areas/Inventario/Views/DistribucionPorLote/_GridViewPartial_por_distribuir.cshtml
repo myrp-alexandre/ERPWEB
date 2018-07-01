@@ -20,7 +20,7 @@
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
-       
+
         settings.Columns.Add("pr_descripcion", "Producto").Width = System.Web.UI.WebControls.Unit.Percentage(40);
         settings.Columns.Add("IdUnidadMedida", "Unidad medida").Width = System.Web.UI.WebControls.Unit.Percentage(20);
         settings.Columns.Add(column =>
@@ -45,6 +45,42 @@
 
         });
 
+
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Distribuir";
+            column.Width = Unit.Percentage(5);
+
+            column.EditorProperties().ButtonEdit(sp =>
+            {
+
+                sp.Width = Unit.Percentage(100);
+                sp.ClientSideEvents.ButtonClick = "function(s,e,){buscar()}";
+
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()
+
+
+<div class="modal fade" id="FacturasModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Detalle</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Action("GridViewPartial_distribucion_det")
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="AddFacturas();">Aceptar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>

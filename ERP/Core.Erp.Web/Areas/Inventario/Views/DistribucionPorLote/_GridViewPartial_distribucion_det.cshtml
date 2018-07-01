@@ -27,37 +27,49 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
 
-        settings.Columns.Add("IdCbteCble_Ogiro","ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("Tipo_documento", "Tipo").Width = Unit.Percentage(10);
-        settings.Columns.Add("co_factura", "# Documento").Width = Unit.Percentage(20);
-        settings.Columns.Add(column => {
-            column.Width = Unit.Percentage(10);
-            column.FieldName = "co_FechaFactura";
-            column.Caption = "Fecha";
-            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdProducto";
+            column.Caption = "Producto";
+            column.Width = Unit.Percentage(50);
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("pr_descripcion", "Descripción").Width = Unit.Percentage(100);
+                p.TextField = "pr_descripcion";
+                p.ValueField = "IdProducto";
+                p.ValueType = typeof(decimal);
+                p.DataSource = ViewBag.lst_producto;
+            });
+
         });
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(40);
-            column.FieldName = "pe_nombreCompleto";
-            column.Caption = "Proveedor";
+            column.FieldName = "lote_fecha_fab";
+            column.Caption = "Fecha fab.";
+            column.Width = Unit.Percentage(15);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
         });
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(10);
-            column.FieldName = "co_total";
-            column.Caption = "Total";
-            column.PropertiesEdit.DisplayFormatString = "{0:N2}";
+            column.FieldName = "lote_fecha_vcto";
+            column.Caption = "Fecha venc.";
+            column.Width = Unit.Percentage(15);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
         });
-        settings.Columns.Add(column =>
-        {
-            column.Width = Unit.Percentage(10);
-            column.FieldName = "Saldo_OG";
-            column.Caption = "Saldo";
-            column.PropertiesEdit.DisplayFormatString = "{0:N2}";
-        });
-        settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
-        settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
+        settings.Columns.Add("cantidad", "Cantidad").Width = Unit.Percentage(20);
+        settings.Columns.Add("lote_numero", "código").Width = Unit.Percentage(20);
+
+        
     });
 }
 @grid.Bind(Model).GetHtml()
