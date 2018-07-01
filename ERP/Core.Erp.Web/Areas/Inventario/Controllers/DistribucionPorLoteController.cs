@@ -47,6 +47,20 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             List<in_Ing_Egr_Inven_distribucion_Info> model = bus_ing_inv.get_list(IdEmpresa);
             return PartialView("_GridViewPartial_distribuion", model);
         }
+
+        public ActionResult GridViewPartial_distribuidos(int IdSucursal=0, int IdMovi_inven_tipo=0, decimal IdNumMovi=0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            List<in_Ing_Egr_Inven_distribucion_Info> model = bus_ing_inv.get_list_distribuido(IdEmpresa, IdSucursal,IdMovi_inven_tipo, IdNumMovi);
+            return PartialView("_GridViewPartial_distribuidos", model);
+        }
+        public ActionResult GridViewPartial_por_distribuir(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            List<in_Ing_Egr_Inven_distribucion_Info> model = bus_ing_inv.get_list_x_distribuir(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
+            return PartialView("_GridViewPartial_por_distribuir", model);
+        }
+
         private void cargar_combos()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
