@@ -17,8 +17,9 @@ namespace Core.Erp.Data.Caja
 
                 using (Entities_caja Context = new Entities_caja())
                 {
-                    Lista = (from q in Context.cp_conciliacion_Caja_det_x_ValeCaja
-                             where q.IdEmpresa == IdEmpresa && q.IdConciliacion_Caja == IdConciliacion_caja
+                    Lista = (from q in Context.vwcp_conciliacion_Caja_det_x_ValeCaja
+                             where q.IdEmpresa == IdEmpresa 
+                             && q.IdConciliacion_Caja == IdConciliacion_caja
                              select new cp_conciliacion_Caja_det_x_ValeCaja_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -27,6 +28,13 @@ namespace Core.Erp.Data.Caja
                                  IdEmpresa_movcaja = q.IdEmpresa_movcaja,
                                  IdCbteCble_movcaja = q.IdCbteCble_movcaja,
                                  IdTipocbte_movcaja = q.IdTipocbte_movcaja,
+                                 IdCtaCble = q.IdCtaCble,
+                                 fecha = q.cm_fecha,
+                                 valor = q.cm_valor,
+                                 idTipoMovi = q.IdTipoMovi,
+                                 IdPersona = q.IdPersona,
+                                 Observacion = q.cm_observacion,
+                                 pe_nombreCompleto = q.pe_nombreCompleto
                              }).ToList();
                 }
 

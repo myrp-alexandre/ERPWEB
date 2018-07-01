@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_conciliacion_ingresos";
-        settings.CallbackRouteValues = new { Controller = "ConciliacionCaja", Action = "GridViewPartial_conciliacion_ingresos" };
+        settings.CallbackRouteValues = new { Controller = "ConciliacionCaja", Action = "GridViewPartial_conciliacion_ingresos", Area = "Caja" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "secuencia";
         settings.SettingsPager.Visible = true;

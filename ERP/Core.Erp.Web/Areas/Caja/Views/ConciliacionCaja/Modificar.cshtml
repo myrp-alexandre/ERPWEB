@@ -51,6 +51,10 @@
         GetSaldoAnterior();
         GetIngresos();
         $("#link_op").hide();
+        $("#link_ingresos").click(function () {
+            GridView_conciliacion_ingresos.PerformCallback();
+        });
+
     });
 
     function MostrarOcultarOP() {
@@ -280,6 +284,7 @@
     @Html.HiddenFor(q => q.Dif_x_pagar_o_cobrar, new { @id = "Dif_x_pagar_o_cobrar" })
 
     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdConciliacion_Caja)
     <div class="modal fade" id="FacturasModal" role="dialog">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
@@ -422,7 +427,7 @@
                 <a href="#tab_vales" aria-controls="vales" role="tab" data-toggle="tab">Vales</a>
             </li>
             <li>
-                <a href="#tab_ingresos" aria-controls="ingresos" role="tab" data-toggle="tab">Ingresos</a>
+                <a href="#tab_ingresos" aria-controls="ingresos" role="tab" data-toggle="tab" id="link_ingresos">Ingresos</a>
             </li>
             <li>
                 <a href="#tab_op" aria-controls="vales" role="tab" data-toggle="tab" id="link_op">Orden de pago</a>

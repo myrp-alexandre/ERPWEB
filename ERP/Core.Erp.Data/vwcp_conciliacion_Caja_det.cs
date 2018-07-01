@@ -36,5 +36,7 @@ namespace Core.Erp.Data
         public decimal Valor_a_aplicar { get; set; }
         public Nullable<int> IdEmpresa_OP { get; set; }
         public Nullable<decimal> IdOrdenPago_OP { get; set; }
+        public string co_factura { get; set; }
+        public double co_total { get; set; }
     }
 }

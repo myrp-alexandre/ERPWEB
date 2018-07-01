@@ -79,7 +79,8 @@ namespace Core.Erp.Data.Caja
                         IdTipoFlujo = Entity.IdTipoFlujo,
                         IdEmpresa_mov_caj = Entity.IdEmpresa_mov_caj,
                         IdTipoCbte_mov_caj = Entity.IdTipoCbte_mov_caj,
-                        IdCbteCble_mov_caj = Entity.IdCbteCble_mov_caj
+                        IdCbteCble_mov_caj = Entity.IdCbteCble_mov_caj,
+                        IdCtaCble = Entity.IdCtaCble
                     };
                 }
                 return info;
@@ -500,34 +501,36 @@ namespace Core.Erp.Data.Caja
                 #endregion
 
                 #region Ingresos
-                Secuencia = 1;
-                double saldo_egresos = info.Total_fact_vale;
-                foreach (var item in info.lst_det_ing)
+                if (info.IdEstadoCierre == cl_enumeradores.eEstadoCierreCaja.EST_CIE_CER.ToString())
                 {
-                    if (saldo_egresos > 0)
+                    Secuencia = 1;
+                    double saldo_egresos = info.Total_fact_vale;
+                    foreach (var item in info.lst_det_ing)
                     {
-                        item.valor_aplicado = item.valor_disponible <= saldo_egresos ? item.valor_disponible : saldo_egresos;
-                        saldo_egresos = saldo_egresos - item.valor_aplicado;
-                    }                    
-                    cp_conciliacion_Caja_det_Ing_Caja Entity_d = new cp_conciliacion_Caja_det_Ing_Caja
-                    {
-                        IdEmpresa = Entity_c.IdEmpresa,
-                        IdConciliacion_Caja = Entity_c.IdConciliacion_Caja,
-                        secuencia = Secuencia++,
-                        IdEmpresa_movcaj = item.IdEmpresa_movcaj,
-                        IdTipocbte_movcaj = item.IdTipocbte_movcaj,
-                        IdCbteCble_movcaj = item.IdCbteCble_movcaj,
-                        valor_aplicado = item.valor_aplicado,
-                        valor_disponible = item.valor_disponible
-                    };
-                    Context.cp_conciliacion_Caja_det_Ing_Caja.Add(Entity_d);
-                }
+                        if (saldo_egresos > 0)
+                        {
+                            item.valor_aplicado = item.valor_disponible <= saldo_egresos ? item.valor_disponible : saldo_egresos;
+                            saldo_egresos = saldo_egresos - item.valor_aplicado;
+                        }
+                        cp_conciliacion_Caja_det_Ing_Caja Entity_d = new cp_conciliacion_Caja_det_Ing_Caja
+                        {
+                            IdEmpresa = Entity_c.IdEmpresa,
+                            IdConciliacion_Caja = Entity_c.IdConciliacion_Caja,
+                            secuencia = Secuencia++,
+                            IdEmpresa_movcaj = item.IdEmpresa_movcaj,
+                            IdTipocbte_movcaj = item.IdTipocbte_movcaj,
+                            IdCbteCble_movcaj = item.IdCbteCble_movcaj,
+                            valor_aplicado = item.valor_aplicado,
+                            valor_disponible = item.valor_disponible
+                        };
+                        Context.cp_conciliacion_Caja_det_Ing_Caja.Add(Entity_d);
+                    }
+                }                
                 #endregion
 
                 Context_ct.SaveChanges();
                 Context_cxp.SaveChanges();
                 Context.SaveChanges();
-
 
                 Context_ct.Dispose();
                 Context.Dispose();
@@ -546,17 +549,441 @@ namespace Core.Erp.Data.Caja
         public bool modificarDB(cp_conciliacion_Caja_Info info)
         {
             Entities_caja Context = new Entities_caja();
+            Entities_cuentas_por_pagar Context_cxp = new Entities_cuentas_por_pagar();
+            Entities_contabilidad Context_ct = new Entities_contabilidad();
             try
             {
+                #region Variables
+                int Secuencia = 1;
+                decimal IdOrdenPago = 1;
+                decimal IdCbteCble_NC = 1;
+                decimal IdCbteCble_EG = 1;
+                decimal IdCbteCble_OP = 1;
+                decimal IdCancelacion = 1;
+
+                cp_parametros Entity_p = Context_cxp.cp_parametros.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                caj_parametro Entity_pc = Context.caj_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                cp_orden_pago_tipo_x_empresa Entity_op_tipo = Context_cxp.cp_orden_pago_tipo_x_empresa.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipo_op == cl_enumeradores.eTipoOrdenPago.OTROS_CONC.ToString()).FirstOrDefault();
+                if (Entity_p == null || Entity_pc == null || Entity_op_tipo == null)
+                    return false;
+                int IdTipoCbte_NC = Convert.ToInt32(Entity_p.pa_TipoCbte_NC);
+                int IdTipoCbte_EG = Entity_pc.IdTipoCbteCble_MoviCaja_Egr;
+                int IdTipoCbte_op = Convert.ToInt32(Entity_op_tipo.IdTipoCbte_OP);
+                #endregion
+
                 cp_conciliacion_Caja Entity = Context.cp_conciliacion_Caja.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConciliacion_Caja == info.IdConciliacion_Caja).FirstOrDefault();
                 if (Entity == null) return false;
+                if (info.IdEstadoCierre == cl_enumeradores.eEstadoCierreCaja.EST_CIE_CER.ToString())
+                {
+                    IdOrdenPago = data_op.get_id(info.IdEmpresa);
+                    IdCbteCble_NC = data_ct.get_id(info.IdEmpresa, IdTipoCbte_NC);
+                    IdCancelacion = data_can.get_id(info.IdEmpresa);
+                    IdCbteCble_OP = data_ct.get_id(info.IdEmpresa, IdTipoCbte_op);
+                }
 
+                #region Facturas
+                var lst_fact = Context.cp_conciliacion_Caja_det.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConciliacion_Caja == info.IdConciliacion_Caja).ToList();
+                foreach (var item in lst_fact)
+                {
+                    Context.cp_conciliacion_Caja_det.Remove(item);
+                }
 
+                foreach (var item in info.lst_det_fact)
+                {
+                    if (info.IdEstadoCierre == cl_enumeradores.eEstadoCierreCaja.EST_CIE_CER.ToString())
+                    {
+                        if (item.IdOrdenPago_OP == null)
+                        {
+                            #region Orden de pago
+                            cp_orden_pago op = new cp_orden_pago
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdOrdenPago = IdOrdenPago++,
+                                Observacion = "Caja #" + info.IdConciliacion_Caja,
+                                IdTipo_op = cl_enumeradores.eTipoOrdenPago.FACT_PROVEE.ToString(),
+                                IdTipo_Persona = cl_enumeradores.eTipoPersona.PROVEE.ToString(),
+                                IdPersona = item.IdPersona,
+                                IdEntidad = item.idEntidad,
+                                Fecha = Convert.ToDateTime(info.Fecha_fin).Date,
+                                Fecha_Pago = Convert.ToDateTime(info.Fecha_fin).Date,
+                                IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString(),
+                                IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
+                                Estado = "A"
+                            };
+                            item.IdEmpresa_OP = op.IdEmpresa;
+                            item.IdOrdenPago_OP = op.IdOrdenPago;
+                            Context_cxp.cp_orden_pago.Add(op);
+
+                            cp_orden_pago_det op_det = new cp_orden_pago_det
+                            {
+                                IdEmpresa = op.IdEmpresa,
+                                IdOrdenPago = op.IdOrdenPago,
+                                Secuencia = 1,
+
+                                IdEmpresa_cxp = item.IdEmpresa_OGiro,
+                                IdTipoCbte_cxp = item.IdTipoCbte_Ogiro,
+                                IdCbteCble_cxp = item.IdCbteCble_Ogiro,
+
+                                Valor_a_pagar = Convert.ToDouble(item.Valor_a_aplicar),
+                                IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString(),
+                                IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
+                                Fecha_Pago = op.Fecha_Pago
+                            };
+                            Context_cxp.cp_orden_pago_det.Add(op_det);
+                            #endregion
+
+                            #region Nota de crédito
+                            ct_cbtecble diario = new ct_cbtecble
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdTipoCbte = IdTipoCbte_NC,
+                                IdCbteCble = IdCbteCble_NC,
+                                cb_Fecha = op.Fecha_Pago,
+                                cb_Observacion = op.Observacion,
+                                IdPeriodo = Convert.ToInt32(op.Fecha_Pago.ToString("yyyyMM")),
+                                cb_Anio = op.Fecha_Pago.Year,
+                                cb_mes = op.Fecha_Pago.Month,
+                                cb_FechaTransac = DateTime.Now,
+                                cb_Estado = "A"
+                            };
+                            Context_ct.ct_cbtecble.Add(diario);
+
+                            ct_cbtecble_det Debe = new ct_cbtecble_det
+                            {
+                                IdEmpresa = diario.IdEmpresa,
+                                IdTipoCbte = diario.IdTipoCbte,
+                                IdCbteCble = diario.IdCbteCble,
+                                secuencia = 1,
+                                IdCtaCble = item.IdCtaCble_cxp,
+                                dc_Valor = Math.Round(Convert.ToDouble(item.Valor_a_aplicar), 2, MidpointRounding.AwayFromZero),
+                            };
+
+                            ct_cbtecble_det Haber = new ct_cbtecble_det
+                            {
+                                IdEmpresa = diario.IdEmpresa,
+                                IdTipoCbte = diario.IdTipoCbte,
+                                IdCbteCble = diario.IdCbteCble,
+                                secuencia = 2,
+                                IdCtaCble = info.IdCtaCble,
+                                dc_Valor = Math.Round(Convert.ToDouble(item.Valor_a_aplicar), 2, MidpointRounding.AwayFromZero) * -1,
+                            };
+                            Context_ct.ct_cbtecble_det.Add(Debe);
+                            Context_ct.ct_cbtecble_det.Add(Haber);
+
+                            cp_nota_DebCre Entity_nc = new cp_nota_DebCre
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdTipoCbte_Nota = IdTipoCbte_NC,
+                                IdCbteCble_Nota = IdCbteCble_NC++,
+                                DebCre = "C",
+                                IdTipoNota = cl_enumeradores.eTipoNotaCXP.T_TIP_NOTA_INT.ToString(),
+                                IdProveedor = item.idEntidad,
+                                IdSucursal = Convert.ToInt32(item.idSucursal),
+                                cn_fecha = op.Fecha_Pago,
+                                Fecha_contable = op.Fecha_Pago,
+                                cn_Fecha_vcto = op.Fecha_Pago,
+                                cn_observacion = op.Observacion,
+                                cn_subtotal_iva = 0,
+                                cn_subtotal_siniva = Convert.ToDouble(item.Valor_a_aplicar),
+                                cn_Por_iva = item.por_iva,
+                                cn_valoriva = 0,
+                                cn_baseImponible = 0,
+                                cn_Ice_valor = 0,
+                                cn_Ice_base = 0,
+                                cn_Ice_por = 0,
+                                cn_Serv_por = 0,
+                                cn_Serv_valor = 0,
+                                cn_vaCoa = "N",
+                                cn_BaseSeguro = 0,
+                                cn_total = item.Valor_a_aplicar,
+                                Estado = "A",
+                                PagoLocExt = "LOC",
+                                PagoSujetoRetencion = "NA"
+                            };
+                            Context_cxp.cp_nota_DebCre.Add(Entity_nc);
+                            #endregion
+
+                            #region Cancelación
+                            cp_orden_pago_cancelaciones cancelacion = new cp_orden_pago_cancelaciones
+                            {
+                                IdEmpresa = op.IdEmpresa,
+                                Idcancelacion = IdCancelacion++,
+                                Secuencia = 1,
+                                IdEmpresa_op = op.IdEmpresa,
+                                IdOrdenPago_op = op.IdOrdenPago,
+                                Secuencia_op = 1,
+                                IdEmpresa_cxp = item.IdEmpresa_OGiro,
+                                IdTipoCbte_cxp = item.IdTipoCbte_Ogiro,
+                                IdCbteCble_cxp = item.IdCbteCble_Ogiro,
+                                IdEmpresa_pago = diario.IdEmpresa,
+                                IdTipoCbte_pago = diario.IdTipoCbte,
+                                IdCbteCble_pago = diario.IdCbteCble,
+                                MontoAplicado = Debe.dc_Valor,
+                                SaldoActual = 0,
+                                SaldoAnterior = 0,
+                                fechaTransaccion = DateTime.Now,
+                                Observacion = op.Observacion
+                            };
+                            Context_cxp.cp_orden_pago_cancelaciones.Add(cancelacion);
+                            #endregion
+                        }
+
+                    }
+
+                    cp_conciliacion_Caja_det Entity_d = new cp_conciliacion_Caja_det
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdConciliacion_Caja = info.IdConciliacion_Caja,
+                        Secuencia = Secuencia++,
+
+                        IdEmpresa_OGiro = item.IdEmpresa_OGiro,
+                        IdTipoCbte_Ogiro = item.IdTipoCbte_Ogiro,
+                        IdCbteCble_Ogiro = item.IdCbteCble_Ogiro,
+                        Tipo_documento = item.Tipo_documento,
+                        Valor_a_aplicar = item.Valor_a_aplicar,
+
+                        IdEmpresa_OP = item.IdEmpresa_OP,
+                        IdOrdenPago_OP = item.IdOrdenPago_OP,
+                        IdUsuario = info.IdUsuario,
+                        Fecha_Transac = DateTime.Now
+                    };
+                    Context.cp_conciliacion_Caja_det.Add(Entity_d);
+
+                }
+                #endregion
+
+                #region Vales
+                var lst_vales = Context.cp_conciliacion_Caja_det_x_ValeCaja.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConciliacion_Caja == info.IdConciliacion_Caja).ToList();
+                foreach (var item in lst_vales)
+                {
+                    Context.cp_conciliacion_Caja_det_x_ValeCaja.Remove(item);
+                }
+
+                Secuencia = 1;
+                IdCbteCble_EG = data_ct.get_id(info.IdEmpresa, IdTipoCbte_EG);
+                foreach (var item in info.lst_det_vale)
+                {
+                    if (item.IdCbteCble_movcaja == 0)
+                    {
+                        ct_cbtecble diario = new ct_cbtecble
+                        {
+                            IdEmpresa = item.IdEmpresa_movcaja = info.IdEmpresa,
+                            IdTipoCbte = item.IdTipocbte_movcaja = IdTipoCbte_EG,
+                            IdCbteCble = item.IdCbteCble_movcaja = IdCbteCble_EG++,
+                            cb_Fecha = item.fecha,
+                            cb_Observacion = "Caja # " + info.IdConciliacion_Caja + item.Observacion,
+                            IdPeriodo = Convert.ToInt32(item.fecha.ToString("yyyyMM")),
+                            cb_Anio = item.fecha.Year,
+                            cb_mes = item.fecha.Month,
+                            cb_FechaTransac = DateTime.Now,
+                            cb_Estado = "A",
+                            cb_Valor = item.valor,
+                            IdUsuario = info.IdUsuario
+                        };
+                        Context_ct.ct_cbtecble.Add(diario);
+
+                        ct_cbtecble_det Debe = new ct_cbtecble_det
+                        {
+                            IdEmpresa = diario.IdEmpresa,
+                            IdTipoCbte = diario.IdTipoCbte,
+                            IdCbteCble = diario.IdCbteCble,
+                            secuencia = 1,
+                            IdCtaCble = item.IdCtaCble,
+                            dc_Valor = Math.Round(Convert.ToDouble(item.valor), 2, MidpointRounding.AwayFromZero),
+                        };
+
+                        ct_cbtecble_det Haber = new ct_cbtecble_det
+                        {
+                            IdEmpresa = diario.IdEmpresa,
+                            IdTipoCbte = diario.IdTipoCbte,
+                            IdCbteCble = diario.IdCbteCble,
+                            secuencia = 2,
+                            IdCtaCble = info.IdCtaCble,
+                            dc_Valor = Math.Round(Convert.ToDouble(item.valor), 2, MidpointRounding.AwayFromZero) * -1,
+                        };
+                        Context_ct.ct_cbtecble_det.Add(Debe);
+                        Context_ct.ct_cbtecble_det.Add(Haber);
+
+                        caj_Caja_Movimiento Entity_caj = new caj_Caja_Movimiento
+                        {
+                            IdEmpresa = diario.IdEmpresa,
+                            IdTipocbte = diario.IdTipoCbte,
+                            IdCbteCble = diario.IdCbteCble,
+                            CodMoviCaja = "Caja # " + info.IdConciliacion_Caja,
+                            cm_Signo = "-",
+                            cm_valor = item.valor,
+                            IdTipoMovi = Convert.ToInt32(item.idTipoMovi),
+                            cm_observacion = "Caja # " + info.IdConciliacion_Caja,
+                            IdCaja = info.IdCaja,
+                            IdPeriodo = Convert.ToInt32(item.fecha.ToString("yyyyMM")),
+                            cm_fecha = item.fecha,
+                            IdTipo_Persona = cl_enumeradores.eTipoPersona.PERSONA.ToString(),
+                            IdEntidad = item.IdPersona,
+                            IdPersona = item.IdPersona,
+                            Estado = "A",
+                            IdUsuario = info.IdUsuario,
+                            Fecha_Transac = DateTime.Now
+                        };
+                        Context.caj_Caja_Movimiento.Add(Entity_caj);
+                        caj_Caja_Movimiento_det Entity_caj_det = new caj_Caja_Movimiento_det
+                        {
+                            IdEmpresa = diario.IdEmpresa,
+                            IdTipocbte = diario.IdTipoCbte,
+                            IdCbteCble = diario.IdCbteCble,
+                            Secuencia = 1,
+                            IdCobro_tipo = "EFEC",
+                            cr_Valor = item.valor
+                        };
+                        Context.caj_Caja_Movimiento_det.Add(Entity_caj_det);
+                    }
+
+                    cp_conciliacion_Caja_det_x_ValeCaja Entity_d = new cp_conciliacion_Caja_det_x_ValeCaja
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdConciliacion_Caja = info.IdConciliacion_Caja,
+                        Secuencia = Secuencia++,
+                        IdEmpresa_movcaja = item.IdEmpresa_movcaja,
+                        IdTipocbte_movcaja = item.IdTipocbte_movcaja,
+                        IdCbteCble_movcaja = item.IdCbteCble_movcaja,
+                        IdCtaCble = item.IdCtaCble
+                    };
+                    Context.cp_conciliacion_Caja_det_x_ValeCaja.Add(Entity_d);
+                }
+                #endregion
+
+                #region Ingresos
+                if (info.IdEstadoCierre == cl_enumeradores.eEstadoCierreCaja.EST_CIE_CER.ToString())
+                {
+                    Secuencia = 1;
+                    double saldo_egresos = info.Total_fact_vale;
+                    foreach (var item in info.lst_det_ing)
+                    {
+                        if (saldo_egresos > 0)
+                        {
+                            item.valor_aplicado = item.valor_disponible <= saldo_egresos ? item.valor_disponible : saldo_egresos;
+                            saldo_egresos = saldo_egresos - item.valor_aplicado;
+                        }
+                        cp_conciliacion_Caja_det_Ing_Caja Entity_d = new cp_conciliacion_Caja_det_Ing_Caja
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdConciliacion_Caja = info.IdConciliacion_Caja,
+                            secuencia = Secuencia++,
+                            IdEmpresa_movcaj = item.IdEmpresa_movcaj,
+                            IdTipocbte_movcaj = item.IdTipocbte_movcaj,
+                            IdCbteCble_movcaj = item.IdCbteCble_movcaj,
+                            valor_aplicado = item.valor_aplicado,
+                            valor_disponible = item.valor_disponible
+                        };
+                        Context.cp_conciliacion_Caja_det_Ing_Caja.Add(Entity_d);
+                    }
+                }
+                #endregion
+
+                #region Orden de pago
+                if (info.IdEstadoCierre == cl_enumeradores.eEstadoCierreCaja.EST_CIE_CER.ToString())
+                {
+                    #region Orden de pago
+                    cp_orden_pago op = new cp_orden_pago
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdOrdenPago = IdOrdenPago++,
+                        Observacion = "Caja #" + info.IdConciliacion_Caja,
+                        IdTipo_op = cl_enumeradores.eTipoOrdenPago.OTROS_CONC.ToString(),
+                        IdTipo_Persona = info.IdTipoPersona,
+                        IdPersona = info.IdPersona,
+                        IdEntidad = info.IdEntidad,
+                        Fecha = info.FechaOP.Date,
+                        Fecha_Pago = info.FechaOP.Date,
+                        IdEstadoAprobacion = Entity_op_tipo.IdEstadoAprobacion,
+                        IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
+                        Estado = "A"
+                    };
+                    info.IdEmpresa_op = op.IdEmpresa;
+                    info.IdOrdenPago_op = op.IdOrdenPago;
+                    Context_cxp.cp_orden_pago.Add(op);
+
+                    ct_cbtecble diario = new ct_cbtecble
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdTipoCbte = IdTipoCbte_op,
+                        IdCbteCble = IdCbteCble_OP,
+                        cb_Fecha = info.FechaOP.Date,
+                        cb_Observacion = op.Observacion,
+                        IdPeriodo = Convert.ToInt32(info.FechaOP.ToString("yyyyMM")),
+                        cb_Anio = info.FechaOP.Year,
+                        cb_mes = info.FechaOP.Month,
+                        cb_FechaTransac = DateTime.Now,
+                        cb_Estado = "A"
+                    };
+                    Context_ct.ct_cbtecble.Add(diario);
+
+                    int sec = 1;
+                    foreach (var item in info.lst_det_ct)
+                    {
+                        ct_cbtecble_det diario_det = new ct_cbtecble_det
+                        {
+                            IdEmpresa = diario.IdEmpresa,
+                            IdTipoCbte = diario.IdTipoCbte,
+                            IdCbteCble = diario.IdCbteCble,
+                            secuencia = sec++,
+                            IdCtaCble = item.IdCtaCble,
+                            dc_Valor = Math.Round(Convert.ToDouble(item.dc_Valor), 2, MidpointRounding.AwayFromZero),
+                        };
+                        Context_ct.ct_cbtecble_det.Add(diario_det);
+                    }
+                    cp_orden_pago_det op_det = new cp_orden_pago_det
+                    {
+                        IdEmpresa = op.IdEmpresa,
+                        IdOrdenPago = op.IdOrdenPago,
+                        Secuencia = 1,
+
+                        IdEmpresa_cxp = diario.IdEmpresa,
+                        IdTipoCbte_cxp = diario.IdTipoCbte,
+                        IdCbteCble_cxp = diario.IdCbteCble,
+
+                        Valor_a_pagar = Convert.ToDouble(info.lst_det_ct.Sum(q => q.dc_Valor_debe)),
+                        IdEstadoAprobacion = Entity_op_tipo.IdEstadoAprobacion,
+                        IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
+                        Fecha_Pago = op.Fecha_Pago
+                    };
+                    Context_cxp.cp_orden_pago_det.Add(op_det);
+                    Entity.IdEmpresa_op = op.IdEmpresa;
+                    Entity.IdOrdenPago_op = op.IdOrdenPago;
+                    #endregion
+                }
+                #endregion
+
+                #region Cabecera
+                Entity.IdCaja = info.IdCaja;
+                Entity.IdCtaCble = info.IdCtaCble;
+                Entity.Observacion = info.Observacion;
+                Entity.Fecha = info.Fecha.Date;
+                Entity.Fecha_ini = info.Fecha_ini;
+                Entity.Fecha_fin = info.Fecha_fin;
+                Entity.IdEstadoCierre = info.IdEstadoCierre;
+                Entity.IdPeriodo = info.IdPeriodo;
+
+                Entity.Ingresos = info.Ingresos;
+                Entity.Total_fondo = info.Total_fondo;
+                Entity.Saldo_cont_al_periodo = info.Saldo_cont_al_periodo;
+                Entity.Total_fact_vale = info.Total_fact_vale;
+                Entity.Dif_x_pagar_o_cobrar = info.Dif_x_pagar_o_cobrar;
+                Entity.Total_Ing = info.Total_Ing;
+                #endregion
+
+                Context_ct.SaveChanges();
+                Context_cxp.SaveChanges();
+                Context.SaveChanges();
+
+                Context_ct.Dispose();
                 Context.Dispose();
+                Context_cxp.Dispose();
                 return true;
             }
             catch (Exception)
             {
+                Context_ct.Dispose();
+                Context_cxp.Dispose();
                 Context.Dispose();
                 throw;
             }

@@ -116,9 +116,41 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar()
+        public ActionResult Modificar(decimal IdConciliacion_caja = 0)
         {
-            return View();
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            cp_conciliacion_Caja_Info model = bus_conciliacion.get_info(IdEmpresa, IdConciliacion_caja);
+            if(model == null)
+                return RedirectToAction("Index");
+            model.lst_det_fact = bus_det.get_list(model.IdEmpresa, model.IdConciliacion_Caja);
+            list_det.set_list(model.lst_det_fact);
+            model.lst_det_vale = bus_vales.get_list(model.IdEmpresa, model.IdConciliacion_Caja);
+            list_vale.set_list(model.lst_det_vale);
+            model.lst_det_ing = bus_ing.get_list_ingresos_x_conciliar(IdEmpresa, model.Fecha_fin, model.IdCaja);
+            list_ing.set_list(model.lst_det_ing);
+            cargar_combos();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(cp_conciliacion_Caja_Info model)
+        {
+
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
+            model.IdUsuario = SessionFixed.IdUsuario;
+            if (!bus_conciliacion.modificarDB(model))
+            {
+                ViewBag.mensaje = "No se ha podido modificar el registro";
+                cargar_combos();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
         }
         #endregion
 
@@ -215,14 +247,10 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
         #region Vales
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_conciliacion_vales(decimal IdConciliacion_caja = 0)
+        public ActionResult GridViewPartial_conciliacion_vales()
         {
-
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
-            model.lst_det_vale = bus_vales.get_list(IdEmpresa, IdConciliacion_caja);
-            if (model.lst_det_vale.Count == 0)
-                model.lst_det_vale = list_vale.get_list();
+            model.lst_det_vale = list_vale.get_list();
             return PartialView("_GridViewPartial_conciliacion_vales", model);
         }
 
@@ -272,13 +300,10 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_conciliacion_facturas(decimal IdConciliacion_caja = 0)
+        public ActionResult GridViewPartial_conciliacion_facturas()
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
-            model.lst_det_fact = bus_det.get_list(IdEmpresa, IdConciliacion_caja);
-            if (model.lst_det_fact.Count == 0)
-                model.lst_det_fact = list_det.get_list();
+            model.lst_det_fact = list_det.get_list();
             return PartialView("_GridViewPartial_conciliacion_facturas", model);
         }
         [HttpPost, ValidateInput(false)]
@@ -401,7 +426,6 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_conciliacion_ingresos()
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
             model.lst_det_ing = list_ing.get_list();
             return PartialView("_GridViewPartial_conciliacion_ingresos", model);
