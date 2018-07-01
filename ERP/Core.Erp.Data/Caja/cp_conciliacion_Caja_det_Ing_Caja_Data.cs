@@ -63,7 +63,7 @@ namespace Core.Erp.Data.Caja
                                  cm_fecha = q.cm_fecha,
                                  Total_movi = q.Total_movi,
                                  Total_aplicado = q.Total_aplicado,
-                                 Saldo = q.Saldo,
+                                 valor_disponible = q.Saldo,
                              }).ToList();
                 }
 

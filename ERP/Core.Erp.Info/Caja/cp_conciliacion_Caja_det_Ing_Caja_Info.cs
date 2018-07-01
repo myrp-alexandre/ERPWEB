@@ -17,7 +17,6 @@ namespace Core.Erp.Info.Caja
         public DateTime cm_fecha { get; set; }
         public double Total_movi { get; set; }
         public double Total_aplicado { get; set; }
-        public double Saldo { get; set; }
         #endregion
 
     }

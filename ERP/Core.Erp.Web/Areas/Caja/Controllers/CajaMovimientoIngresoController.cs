@@ -79,7 +79,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         private void cargar_combos()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);            
-            var lst_tipo = bus_tipo.get_list(IdEmpresa,"+", false);
+            var lst_tipo = bus_tipo.get_list(IdEmpresa,"+", false, true);
             ViewBag.lst_tipo = lst_tipo;
             
             var lst_caja = bus_caja.get_list(IdEmpresa, false);

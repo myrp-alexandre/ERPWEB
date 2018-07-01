@@ -166,7 +166,7 @@ namespace Core.Erp.Data.Caja
                     IdOrdenPago = data_op.get_id(Entity_c.IdEmpresa);
                     IdCbteCble_NC = data_ct.get_id(Entity_c.IdEmpresa, IdTipoCbte_NC);
                     IdCancelacion = data_can.get_id(Entity_c.IdEmpresa);
-                    IdCbteCble_EG = data_ct.get_id(Entity_c.IdEmpresa, IdTipoCbte_EG);
+                    
                 }
                 foreach (var item in info.lst_det_fact)
                 {
@@ -322,6 +322,8 @@ namespace Core.Erp.Data.Caja
 
                         IdEmpresa_OP = item.IdEmpresa_OP,
                         IdOrdenPago_OP = item.IdOrdenPago_OP,
+                        IdUsuario = info.IdUsuario,
+                        Fecha_Transac = DateTime.Now
                     };
                     Context.cp_conciliacion_Caja_det.Add(Entity_d);
                 }
@@ -329,6 +331,7 @@ namespace Core.Erp.Data.Caja
 
                 #region Vales
                 Secuencia = 1;
+                IdCbteCble_EG = data_ct.get_id(Entity_c.IdEmpresa, IdTipoCbte_EG);
                 foreach (var item in info.lst_det_vale)
                 {
 
@@ -345,7 +348,9 @@ namespace Core.Erp.Data.Caja
                             cb_Anio = item.fecha.Year,
                             cb_mes = item.fecha.Month,
                             cb_FechaTransac = DateTime.Now,
-                            cb_Estado = "A"
+                            cb_Estado = "A",
+                            cb_Valor = item.valor,
+                            IdUsuario = info.IdUsuario
                         };
                         Context_ct.ct_cbtecble.Add(diario);
 
@@ -364,7 +369,7 @@ namespace Core.Erp.Data.Caja
                             IdEmpresa = diario.IdEmpresa,
                             IdTipoCbte = diario.IdTipoCbte,
                             IdCbteCble = diario.IdCbteCble,
-                            secuencia = 1,
+                            secuencia = 2,
                             IdCtaCble = info.IdCtaCble,
                             dc_Valor = Math.Round(Convert.ToDouble(item.valor), 2, MidpointRounding.AwayFromZero) * -1,
                         };
@@ -387,16 +392,28 @@ namespace Core.Erp.Data.Caja
                             IdTipo_Persona = cl_enumeradores.eTipoPersona.PERSONA.ToString(),
                             IdEntidad = item.IdPersona,
                             IdPersona = item.IdPersona,
-                            Estado = "A"
+                            Estado = "A",
+                            IdUsuario = info.IdUsuario,
+                            Fecha_Transac = DateTime.Now
                         };
                         Context.caj_Caja_Movimiento.Add(Entity_caj);
+                        caj_Caja_Movimiento_det Entity_caj_det = new caj_Caja_Movimiento_det
+                        {
+                            IdEmpresa = diario.IdEmpresa,
+                            IdTipocbte = diario.IdTipoCbte,
+                            IdCbteCble = diario.IdCbteCble,
+                            Secuencia = 1,
+                            IdCobro_tipo = "EFEC",
+                            cr_Valor = item.valor
+                        };
+                        Context.caj_Caja_Movimiento_det.Add(Entity_caj_det);
                     }
 
                     cp_conciliacion_Caja_det_x_ValeCaja Entity_d = new cp_conciliacion_Caja_det_x_ValeCaja
                     {
-                        IdEmpresa = item.IdEmpresa,
+                        IdEmpresa = Entity_c.IdEmpresa,
                         IdConciliacion_Caja = Entity_c.IdConciliacion_Caja,
-                        Secuencia = item.Secuencia++,
+                        Secuencia = Secuencia++,
                         IdEmpresa_movcaja = item.IdEmpresa_movcaja,
                         IdTipocbte_movcaja = item.IdTipocbte_movcaja,
                         IdCbteCble_movcaja = item.IdCbteCble_movcaja,
@@ -408,8 +425,14 @@ namespace Core.Erp.Data.Caja
 
                 #region Ingresos
                 Secuencia = 1;
+                double saldo_egresos = info.Total_fact_vale;
                 foreach (var item in info.lst_det_ing)
                 {
+                    if (saldo_egresos > 0)
+                    {
+                        item.valor_aplicado = item.valor_disponible <= saldo_egresos ? item.valor_disponible : saldo_egresos;
+                        saldo_egresos = saldo_egresos - item.valor_aplicado;
+                    }                    
                     cp_conciliacion_Caja_det_Ing_Caja Entity_d = new cp_conciliacion_Caja_det_Ing_Caja
                     {
                         IdEmpresa = Entity_c.IdEmpresa,

@@ -22,7 +22,7 @@ namespace Core.Erp.Data
         public int IdTipoCbte_Ogiro { get; set; }
         public Nullable<int> IdTipoMovi { get; set; }
         public string IdUsuario { get; set; }
-        public System.DateTime Fecha_Transac { get; set; }
+        public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string nom_pc { get; set; }
         public string ip { get; set; }
         public string IdCentroCosto { get; set; }

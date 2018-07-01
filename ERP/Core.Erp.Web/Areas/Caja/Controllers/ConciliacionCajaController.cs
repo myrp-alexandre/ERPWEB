@@ -36,6 +36,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         caj_Caja_Bus bus_caja = new caj_Caja_Bus();
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        
         string mensaje = string.Empty;
         #endregion
 
@@ -104,10 +105,10 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                 cargar_combos();
                 return View(model);
             }
-            model.lst_det_fact = list_det.get_list();
             model.lst_det_ing = list_ing.get_list();
             model.lst_det_vale = list_vale.get_list();
-
+            model.lst_det_fact = list_det.get_list();
+            model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_conciliacion.guardarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
@@ -337,7 +338,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             var lst_vale = list_vale.get_list();
             var lst_fact = list_det.get_list();
 
-            var ingresos = lst_ing.Sum(q => q.Saldo);
+            var ingresos = lst_ing.Sum(q => q.valor_disponible);
             var egresos = Convert.ToDouble(lst_fact.Count == 0 ? 0 : lst_fact.Sum(q => q.Valor_a_aplicar)) + Convert.ToDouble(lst_vale.Count == 0 ? 0 : lst_vale.Sum(q => q.valor));
             var resultado = new cp_conciliacion_valores
             {
@@ -485,6 +486,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
     public class cp_conciliacion_Caja_det_x_ValeCaja_List
     {
         tb_persona_Bus bus_persona = new tb_persona_Bus();
+        caj_Caja_Movimiento_Tipo_Bus bus_tipo_movi = new caj_Caja_Movimiento_Tipo_Bus();
         public List<cp_conciliacion_Caja_det_x_ValeCaja_Info> get_list()
         {
             if (HttpContext.Current.Session["cp_conciliacion_Caja_det_x_ValeCaja_Info"] == null)
@@ -508,6 +510,11 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             var per = bus_persona.get_info(info_det.IdPersona);
             if (per != null)
                 info_det.pe_nombreCompleto = per.pe_nombreCompleto;
+
+            var tipo = bus_tipo_movi.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(info_det.idTipoMovi));
+            if (tipo != null)
+                info_det.IdCtaCble = tipo.IdCtaCble;
+
             list.Add(info_det);
         }
 
@@ -521,7 +528,13 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                 var per = bus_persona.get_info(info_det.IdPersona);
                 if (per != null)
                     edited_info.pe_nombreCompleto = per.pe_nombreCompleto;
-            }            
+            }
+            if (edited_info.idTipoMovi != info_det.idTipoMovi)
+            {
+                var tipo = bus_tipo_movi.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(info_det.idTipoMovi));
+                if (tipo != null)
+                    info_det.IdCtaCble = tipo.IdCtaCble;
+            }
             edited_info.Observacion = info_det.Observacion;
             edited_info.idTipoMovi = info_det.idTipoMovi;
             edited_info.fecha = info_det.fecha;
