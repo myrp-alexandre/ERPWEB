@@ -60,7 +60,15 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             List<in_Ing_Egr_Inven_distribucion_Info> model = bus_ing_inv.get_list_x_distribuir(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
             return PartialView("_GridViewPartial_por_distribuir", model);
         }
+        public ActionResult GridViewPartial_distribucion_det(decimal IdProducto_padre = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            List<in_Ing_Egr_Inven_distribucion_Info> model = new List<in_Ing_Egr_Inven_distribucion_Info>();
+            cargar_combos_detalle(IdProducto_padre);
+            return PartialView("_GridViewPartial_por_distribuir", model);
+        }
 
+        
         private void cargar_combos()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -110,11 +118,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return RedirectToAction("Index");
         }
         
-        private void cargar_combos_detalle()
+        private void cargar_combos_detalle(decimal IdProducto_padre=0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_Producto_Bus bus_producto = new in_Producto_Bus();
-            var lst_producto = bus_producto.get_list(IdEmpresa, false);
+            var lst_producto = bus_producto.get_list_combo_hijo(IdEmpresa, IdProducto_padre);
             ViewBag.lst_producto = lst_producto;
 
             in_UnidadMedida_Bus bus_unidad = new in_UnidadMedida_Bus();

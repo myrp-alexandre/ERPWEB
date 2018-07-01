@@ -65,7 +65,7 @@
 @grid.Bind(Model).GetHtml()
 
 
-<div class="modal fade" id="FacturasModal" role="dialog">
+<div class="modal fade" id="detalle_distr" role="dialog">
     <div class="modal-dialog modal-lg">
         <!-- Modal content-->
         <div class="modal-content">
@@ -84,3 +84,12 @@
 
     </div>
 </div>
+
+
+<script type="text/javascript">
+    function buscar() {
+        GridViewPartial_distribucion_det.PerformCallback();
+        GridViewPartial_distribucion_det.UnselectRows();
+        $("#detalle_distr").modal("show");
+    }
+</script>
