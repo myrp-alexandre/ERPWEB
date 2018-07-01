@@ -4,8 +4,11 @@ using Core.Erp.Bus.CuentasPorCobrar;
 using Core.Erp.Bus.General;
 using Core.Erp.Info.Caja;
 using Core.Erp.Info.Contabilidad;
+using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Areas.Contabilidad.Controllers;
+using Core.Erp.Web.Helps;
+using DevExpress.Web;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -25,6 +28,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         caj_Caja_Bus bus_caja = new caj_Caja_Bus();
         caj_Caja_Movimiento_Tipo_Bus bus_tipo = new caj_Caja_Movimiento_Tipo_Bus();
         string mensaje = string.Empty;
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
 
         public ActionResult Index()
         {
@@ -84,15 +88,16 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             var lst_caja = bus_caja.get_list(IdEmpresa, false);
             ViewBag.lst_caja = lst_caja;
 
-
-            tb_persona_Bus bus_persona = new tb_persona_Bus();
-            var lst_personas = bus_persona.get_list(false);
-            ViewBag.lst_personas = lst_personas;
-
             cxc_cobro_tipo_Bus bus_cobro = new cxc_cobro_tipo_Bus();
             var lst_cobro = bus_cobro.get_list(false);
             ViewBag.lst_cobro = lst_cobro;
 
+            Dictionary<string, string> lst_tipo_personas = new Dictionary<string, string>();
+            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.PERSONA.ToString(), "Persona");
+            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.PROVEE.ToString(), "Proveedor");
+            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.EMPLEA.ToString(), "Empleado");
+            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.CLIENTE.ToString(), "Cliente");
+            ViewBag.lst_tipo_personas = lst_tipo_personas;
         }
 
         private void cargar_combos_detalle()
@@ -245,6 +250,21 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             };
             list_ct_cbtecble_det.set_list(lst_ct_cbtecble_det);
             return Json("", JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult CmbPersona_MovimientoEgreso()
+        {
+            SessionFixed.TipoPersona = Request.Params["IdTipoPersona"] != null ? Request.Params["IdTipoPersona"].ToString() : "PERSONA";
+            caj_Caja_Movimiento_Info model = new caj_Caja_Movimiento_Info();
+            return PartialView("_CmbPersona_MovimientoEgreso", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), SessionFixed.TipoPersona);
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), SessionFixed.TipoPersona);
         }
     }
 }

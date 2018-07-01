@@ -1,6 +1,7 @@
 ﻿using Core.Erp.Bus.Caja;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.General;
+using Core.Erp.Bus.SeguridadAcceso;
 using Core.Erp.Info.Caja;
 using DevExpress.Web.Mvc;
 using System;
@@ -14,6 +15,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
     public class CajaController : Controller
     {
         caj_Caja_Bus bus_caja = new caj_Caja_Bus();
+        seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
         public ActionResult Index()
         {
             return View();
@@ -38,7 +40,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
 
-            var lst_responsable = bus_caja.get_list(IdEmpresa, false);
+            var lst_responsable = bus_usuario.get_list(false);
             ViewBag.lst_responsable = lst_responsable;
         }
 

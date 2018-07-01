@@ -52,18 +52,13 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="tm_Signo">Signo</label>
                     @Html.DropDownListFor(q => q.tm_Signo, new SelectList(ViewBag.lst_signo, "Key", "Value"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.tm_Signo, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
             <div class="col-md-5">
                 <div class="checkbox">
                     <label for="SeDeposita">@Html.CheckBoxFor(q => q.SeDeposita) Se deposita</label>

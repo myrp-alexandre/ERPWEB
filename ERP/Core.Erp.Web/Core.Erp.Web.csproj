@@ -8313,11 +8313,6 @@
     <Content Include="Areas\RRHH\Views\Vacaciones\_GridViewPartial_solicitud_vacaciones.cshtml" />
     <Content Include="Areas\RRHH\Views\ActaFiniquito\_GridViewPartial_liquidacion_empleado.cshtml" />
     <Content Include="Areas\RRHH\Views\ActaFiniquito\_GridViewPartial_liquidacion_empleado_det.cshtml" />
-    <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\_GridViewPartial_movimiento_egresos.cshtml" />
-    <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Anular.cshtml" />
-    <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Index.cshtml" />
-    <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Modificar.cshtml" />
-    <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Nuevo.cshtml" />
     <Content Include="Areas\General\Views\Reporte\Index.cshtml" />
     <Content Include="Areas\General\Views\Reporte\_GridViewPartial_reporte.cshtml" />
     <Content Include="Areas\General\Views\Reporte\Nuevo.cshtml" />
@@ -8526,6 +8521,8 @@
     <Content Include="Areas\Inventario\Views\DistribucionPorLote\_GridViewPartial_por_distribuir.cshtml" />
     <Content Include="Areas\Inventario\Views\DistribucionPorLote\_GridViewPartial_distribuidos.cshtml" />
     <Content Include="Areas\Inventario\Views\DistribucionPorLote\_GridViewPartial_distribucion_det.cshtml" />
+    <Content Include="Areas\Caja\Views\CajaMovimientoIngreso\_CmbPersona_MovimientoIngreso.cshtml" />
+    <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\_CmbPersona_MovimientoEgreso.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />

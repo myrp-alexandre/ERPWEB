@@ -25,13 +25,13 @@
                   settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
                   //Campo ID
                   settings.Properties.ValueField = "IdTipoCbte";
-                  settings.Properties.ValueType = typeof(string);
+                  settings.Properties.ValueType = typeof(int);
                   settings.Properties.TextField = "tc_TipoCbte";
                   //Boton para seleccionar ningun registro
                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                   settings.Properties.NullText = "== Seleccione ==";
                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-              }).BindList(ViewBag.lst_parametrocontable).GetHtml()
+              }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
 
                     @Html.ValidationMessageFor(q => q.IdTipoCbteCble_MoviCaja_Ing, "", new { @class = "text-danger" })
                 </div>
@@ -52,13 +52,13 @@
                   settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
                   //Campo ID
                   settings.Properties.ValueField = "IdTipoCbte";
-                  settings.Properties.ValueType = typeof(string);
+                  settings.Properties.ValueType = typeof(int);
                   settings.Properties.TextField = "tc_TipoCbte";
                   //Boton para seleccionar ningun registro
                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                   settings.Properties.NullText = "== Seleccione ==";
                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-              }).BindList(ViewBag.lst_parametrocontable).GetHtml()
+              }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
 
                     @Html.ValidationMessageFor(q => q.IdTipoCbteCble_MoviCaja_Ing_Anu, "", new { @class = "text-danger" })
                 </div>
@@ -79,13 +79,13 @@
                   settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
                   //Campo ID
                   settings.Properties.ValueField = "IdTipoCbte";
-                  settings.Properties.ValueType = typeof(string);
+                  settings.Properties.ValueType = typeof(int);
                   settings.Properties.TextField = "tc_TipoCbte";
                   //Boton para seleccionar ningun registro
                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                   settings.Properties.NullText = "== Seleccione ==";
                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-              }).BindList(ViewBag.lst_parametrocontable).GetHtml()
+              }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
 
                     @Html.ValidationMessageFor(q => q.IdTipoCbteCble_MoviCaja_Egr, "", new { @class = "text-danger" })
                 </div>
@@ -106,13 +106,13 @@
                   settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
                   //Campo ID
                   settings.Properties.ValueField = "IdTipoCbte";
-                  settings.Properties.ValueType = typeof(string);
+                  settings.Properties.ValueType = typeof(int);
                   settings.Properties.TextField = "tc_TipoCbte";
                   //Boton para seleccionar ningun registro
                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                   settings.Properties.NullText = "== Seleccione ==";
                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-              }).BindList(ViewBag.lst_parametrocontable).GetHtml()
+              }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
 
                     @Html.ValidationMessageFor(q => q.IdTipoCbteCble_MoviCaja_Egr_Anu, "", new { @class = "text-danger" })
                 </div>
@@ -133,7 +133,7 @@
                   settings.Properties.Columns.Add("tm_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
                   //Campo ID
                   settings.Properties.ValueField = "IdTipoMovi";
-                  settings.Properties.ValueType = typeof(string);
+                  settings.Properties.ValueType = typeof(int);
                   settings.Properties.TextField = "tm_descripcion";
                   //Boton para seleccionar ningun registro
                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;

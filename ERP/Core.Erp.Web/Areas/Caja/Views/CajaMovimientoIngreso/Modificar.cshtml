@@ -13,9 +13,6 @@
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdCbteCble)
     @Html.HiddenFor(q => q.IdTipocbte)
-    @Html.HiddenFor(q => q.IdPersona)
-    @Html.HiddenFor(q => q.IdTipo_Persona)
-    @Html.HiddenFor(q => q.IdEntidad, new { @id = "IdEntidad" })
 
     if (ViewBag.mensaje != null)
     {
@@ -87,28 +84,17 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-3">
                 <div class="form-group">
-                    <label for="IdPersona">Persona</label>
-                    @Html.DevExpress().ComboBoxFor(i => i.IdPersona, settings =>
-               {
-                   settings.Name = "IdPersona";
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
-                   settings.Properties.Columns.Add("IdPersona", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                   settings.Properties.Columns.Add("pe_nombreCompleto", "Nombre completo").Width = System.Web.UI.WebControls.Unit.Percentage(70);
-                   //Campo ID
-                   settings.Properties.ValueField = "IdPersona";
-                   settings.Properties.ValueType = typeof(decimal);
-                   settings.Properties.TextField = "pe_nombreCompleto";
-                   //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                   settings.Properties.DropDownButton.Enabled = false;
-                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                   settings.ReadOnly = true;
-               }).BindList(ViewBag.lst_personas).GetHtml()
-                    @Html.ValidationMessageFor(q => q.IdPersona, "", new { @class = "text-danger" })
+                    <label for="IdTipoPersona">Tipo persona*</label>
+                    @Html.DropDownListFor(q => q.IdTipo_Persona, new SelectList(ViewBag.lst_tipo_personas, "Key", "Value"), new { @class = "form-control", @id = "IdTipoPersona" })
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label for="IdEntidad">Beneficiario*</label>
+                    @Html.Partial("_CmbPersona_MovimientoIngreso", Model)
+                    @Html.ValidationMessageFor(q => q.IdEntidad, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -148,6 +134,9 @@
         $('#cm_fecha').datepicker({
             autoclose: true
         })
+    });
+    $("#IdTipoPersona").change(function () {
+        IdEntidad.SetValue(null);
     });
 
    $("#IdCaja").change(function () {

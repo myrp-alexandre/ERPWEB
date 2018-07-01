@@ -213,7 +213,7 @@ namespace Core.Erp.Data.Caja
                         SeDeposita = info.SeDeposita,
                         tm_Signo = info.tm_Signo,
                         IdTipoMovi_grupo = info.IdTipoMovi_grupo,
-                        
+                        IdCtaCble = info.IdCtaCble,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
 
@@ -243,7 +243,7 @@ namespace Core.Erp.Data.Caja
                     Entity.tm_descripcion = info.tm_descripcion;
                     Entity.SeDeposita = info.SeDeposita;
                     Entity.tm_Signo = info.tm_Signo;
-
+                    Entity.IdCtaCble = info.IdCtaCble;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod;
                     Context.SaveChanges();
