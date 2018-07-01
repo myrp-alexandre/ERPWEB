@@ -47,6 +47,20 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             List<in_Ing_Egr_Inven_distribucion_Info> model = bus_ing_inv.get_list(IdEmpresa);
             return PartialView("_GridViewPartial_distribuion", model);
         }
+
+        public ActionResult GridViewPartial_distribuidos(int IdSucursal=0, int IdMovi_inven_tipo=0, decimal IdNumMovi=0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            List<in_Ing_Egr_Inven_distribucion_Info> model = bus_ing_inv.get_list_distribuido(IdEmpresa, IdSucursal,IdMovi_inven_tipo, IdNumMovi);
+            return PartialView("_GridViewPartial_distribuidos", model);
+        }
+        public ActionResult GridViewPartial_por_distribuir(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            List<in_Ing_Egr_Inven_distribucion_Info> model = bus_ing_inv.get_list_x_distribuir(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
+            return PartialView("_GridViewPartial_por_distribuir", model);
+        }
+
         private void cargar_combos()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -59,7 +73,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             ViewBag.lst_motivo = lst_motivo;
 
         }
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
         {
             Session["in_Ing_Egr_Inven_distribucion_Info"] = null;
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -95,48 +109,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index");
         }
-
-        public ActionResult Modificar(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_Ing_Egr_Inven_distribucion_Info model = bus_ing_inv.get_info(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi,"");
-            if (model == null)
-                return RedirectToAction("Index");
-            cargar_combos();
-            return View(model);
-        }
-
-      
-        public ActionResult Anular(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_Ing_Egr_Inven_distribucion_Info model = bus_ing_inv.get_info(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi,"");
-            if (model == null)
-                return RedirectToAction("Index");
-            cargar_combos();
-            return View(model);
-        }
-
-        [HttpPost]
-        public ActionResult Anular(in_Ing_Egr_Inven_distribucion_Info model)
-        {
-            model.lst_x_distribuir = List_in_Ing_Egr_Inven_det.get_list();
-            if (!validar(model, ref mensaje))
-            {
-                cargar_combos();
-                ViewBag.mensaje = mensaje;
-                return View(model);
-            }
-            model.IdUsuario = Session["IdUsuario"].ToString();
-            if (!bus_ing_inv.eliminarDB(model.IdEmpresa, model.IdSucursal, model.IdMovi_inven_tipo,Convert.ToInt32( model.IdNumMovi)))
-            {
-                cargar_combos();
-                return View(model);
-            }
-            return RedirectToAction("Index");
-        }
-
-       
+        
         private void cargar_combos_detalle()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);

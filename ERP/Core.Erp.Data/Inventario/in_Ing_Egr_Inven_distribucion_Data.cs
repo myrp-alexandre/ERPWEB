@@ -222,7 +222,7 @@ namespace Core.Erp.Data.Inventario
                 {
                     Lista = (from q in Context.vwin_Ing_Egr_Inven_distribucion
                              where q.IdEmpresa == IdEmpresa
-                         
+
                              select new in_Ing_Egr_Inven_distribucion_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -238,7 +238,7 @@ namespace Core.Erp.Data.Inventario
                                  tm_descripcion = q.tm_descripcion,
                                  Su_Descripcion = q.Su_Descripcion,
                                  IdBodega = q.IdBodega,
-
+                                 estado = true,
                                  pe_nombreCompleto = q.pe_nombreCompleto,
                                  vt_NumFactura = q.vt_NumFactura
                              }).ToList();

@@ -1,0 +1,55 @@
+﻿@model Core.Erp.Info.Inventario.in_Ing_Egr_Inven_distribucion_Info
+@{
+    ViewBag.Title = "Distribución de lotes";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Nuevo", "IngresoInventario", FormMethod.Post, new { @class = "form", @role = "form" }))
+{   
+     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.signo)
+    @Html.HiddenFor(q => q.IdMovi_inven_tipo)
+    
+ 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="cm_observacion">Detalle de items por distribuir</label>
+                    @Html.Action("GridViewPartial_por_distribuir")
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="cm_observacion">Detalle de items distribuidos</label>
+                    @Html.Action("GridViewPartial_distribuidos")
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","IngresoInventario",new { Area = "Inventario" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+<script>
+    $(function () {
+        //Date picker
+        $('#cm_fecha').datepicker({
+            autoclose: true
+        })
+    });
+</script>
