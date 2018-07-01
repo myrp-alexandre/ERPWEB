@@ -22,6 +22,12 @@ namespace Core.Erp.Bus.General
         {
             return odata.get_info_bajo_demanda(args,IdEmpresa,IdTipoPersona);
         }
+
+        public tb_persona_Info get_info(int IdEmpresa, string IdTipoPersona, decimal IdEntidad)
+        {
+            return odata.get_info(IdEmpresa, IdTipoPersona, IdEntidad);
+        }
+
         public List<tb_persona_Info> get_list(bool mostrar_anulados)
         {
             try
@@ -70,6 +76,7 @@ namespace Core.Erp.Bus.General
                 throw;
             }
         }
+
         public bool modificarDB(tb_persona_Info info)
         {
             try
@@ -81,6 +88,7 @@ namespace Core.Erp.Bus.General
                 throw;
             }
         }
+
         public bool anularDB(tb_persona_Info info)
         {
             try

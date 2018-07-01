@@ -69,7 +69,7 @@
                 p.TextField = "tm_descripcion";
                 p.DropDownStyle = DropDownStyle.DropDownList;
                 p.ValueType = typeof(int);
-                p.BindList(new Core.Erp.Bus.Caja.caj_Caja_Movimiento_Tipo_Bus().get_list(Convert.ToInt32(Session["IdEmpresa"]),"-", false));
+                p.BindList(new Core.Erp.Bus.Caja.caj_Caja_Movimiento_Tipo_Bus().get_list(Convert.ToInt32(Session["IdEmpresa"]),"-", false,false));
                 p.Columns.Add("tm_descripcion", "Tipo").Width = Unit.Percentage(100);
             });
         });

@@ -201,6 +201,19 @@
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="IdPunto_cargo_grupo" Type="int" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_ctacble_acreedora' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwct_cbtecble_con_ctacble_acreedora">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdCtaCble_Acreedora" Type="varchar" MaxLength="20" />
+        </EntityType>
         <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal">
           <End Role="ct_anio_fiscal" Type="Self.ct_anio_fiscal" Multiplicity="1" />
           <End Role="ct_anio_fiscal_x_cuenta_utilidad" Type="Self.ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
@@ -452,6 +465,14 @@
           <EntitySet Name="ct_plancta" EntityType="Self.ct_plancta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ct_plancta_nivel" EntityType="Self.ct_plancta_nivel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ct_punto_cargo" EntityType="Self.ct_punto_cargo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwct_cbtecble_con_ctacble_acreedora" EntityType="Self.vwct_cbtecble_con_ctacble_acreedora" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwct_cbtecble_con_ctacble_acreedora].[IdEmpresa] AS [IdEmpresa], 
+    [vwct_cbtecble_con_ctacble_acreedora].[IdTipoCbte] AS [IdTipoCbte], 
+    [vwct_cbtecble_con_ctacble_acreedora].[IdCbteCble] AS [IdCbteCble], 
+    [vwct_cbtecble_con_ctacble_acreedora].[IdCtaCble_Acreedora] AS [IdCtaCble_Acreedora]
+    FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_acreedora]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" Association="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal">
             <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
             <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
@@ -606,6 +627,7 @@
             <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
             <End Role="ct_cbtecble_Reversado" EntitySet="ct_cbtecble_Reversado" />
           </AssociationSet>
+          <EntitySet Name="vwct_cbtecble_con_ctacble_acreedora" EntityType="Model_contabilidad.vwct_cbtecble_con_ctacble_acreedora" />
           </EntityContainer>
         <EntityType Name="ct_grupocble">
           <Key>
@@ -1075,6 +1097,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwct_cbtecble_con_ctacble_acreedora">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdCtaCble_Acreedora" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1267,6 +1300,16 @@
                 <ScalarProperty Name="IdCbteCble_Anu" ColumnName="IdCbteCble_Anu" />
                 <ScalarProperty Name="IdTipoCbte_Anu" ColumnName="IdTipoCbte_Anu" />
                 <ScalarProperty Name="IdEmpresa_Anu" ColumnName="IdEmpresa_Anu" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwct_cbtecble_con_ctacble_acreedora">
+            <EntityTypeMapping TypeName="Model_contabilidad.vwct_cbtecble_con_ctacble_acreedora">
+              <MappingFragment StoreEntitySet="vwct_cbtecble_con_ctacble_acreedora">
+                <ScalarProperty Name="IdCtaCble_Acreedora" ColumnName="IdCtaCble_Acreedora" />
                 <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
                 <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />

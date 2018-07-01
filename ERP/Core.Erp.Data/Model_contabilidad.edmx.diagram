@@ -34,6 +34,7 @@
         <EntityTypeShape EntityType="Model_contabilidad.ct_cbtecble_Reversado" Width="1.5" PointX="10.875" PointY="6.375" />
         <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble" />
         <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble1" />
+        <EntityTypeShape EntityType="Model_contabilidad.vwct_cbtecble_con_ctacble_acreedora" Width="1.5" PointX="0.75" PointY="4.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

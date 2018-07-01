@@ -36,24 +36,27 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         caj_Caja_Bus bus_caja = new caj_Caja_Bus();
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        string mensaje = string.Empty;
         #endregion
 
+        #region Metodos ComboBox bajo demanda
         public ActionResult CmbPersona_ConciliacionCaja()
         {
-            SessionFixed.CurrentTipoPersona = Request.Params["IdTipoPersona"] != null ? Request.Params["IdTipoPersona"].ToString() : "PERSONA";
+            SessionFixed.TipoPersona = Request.Params["IdTipoPersona"] != null ? Request.Params["IdTipoPersona"].ToString() : "PERSONA";
             cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
-            return PartialView("_CmbPersona_ConciliacionCaja",model);
+            return PartialView("_CmbPersona_ConciliacionCaja", model);
         }
-
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), SessionFixed.CurrentTipoPersona);
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), SessionFixed.TipoPersona);
         }
         public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
-        {            
-            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), SessionFixed.CurrentTipoPersona);
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), SessionFixed.TipoPersona);
         }
+        #endregion
 
+        #region Acciones
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -62,35 +65,12 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
-        {            
+        {
             return View(model);
         }
-
-        private void cargar_combos()
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            var lst_periodo = bus_periodo.get_list(IdEmpresa, false);
-            ViewBag.lst_periodo = lst_periodo;
-
-            var lst_caja = bus_caja.get_list(IdEmpresa, false);
-            ViewBag.lst_caja = lst_caja;
-
-            Dictionary<string, string> lst = new Dictionary<string, string>();
-            lst.Add(cl_enumeradores.eEstadoCierreCaja.EST_CIE_ABI.ToString(), "ABIERTA");
-            lst.Add(cl_enumeradores.eEstadoCierreCaja.EST_CIE_CER.ToString(), "CERRADA");
-            ViewBag.lst_estado = lst;
-
-            Dictionary<string, string> lst_tipo_personas = new Dictionary<string, string>();
-            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.PERSONA.ToString(),"Persona");
-            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.PROVEE.ToString(), "Proveedor");
-            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.EMPLEA.ToString(), "Empleado");
-            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.CLIENTE.ToString(), "Cliente");
-            ViewBag.lst_tipo_personas = lst_tipo_personas;
-        }
-
         public ActionResult Nuevo()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info
             {
                 IdEmpresa = IdEmpresa,
@@ -117,6 +97,17 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         [HttpPost]
         public ActionResult Nuevo(cp_conciliacion_Caja_Info model)
         {
+            
+            if (!validar(model,ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
+            model.lst_det_fact = list_det.get_list();
+            model.lst_det_ing = list_ing.get_list();
+            model.lst_det_vale = list_vale.get_list();
+
             if (!bus_conciliacion.guardarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
@@ -131,13 +122,75 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         {
             return View();
         }
+        #endregion
+
+        #region Metodos
+        private void cargar_combos()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_periodo = bus_periodo.get_list(IdEmpresa, false);
+            ViewBag.lst_periodo = lst_periodo;
+
+            var lst_caja = bus_caja.get_list(IdEmpresa, false);
+            ViewBag.lst_caja = lst_caja;
+
+            Dictionary<string, string> lst = new Dictionary<string, string>();
+            lst.Add(cl_enumeradores.eEstadoCierreCaja.EST_CIE_ABI.ToString(), "ABIERTA");
+            lst.Add(cl_enumeradores.eEstadoCierreCaja.EST_CIE_CER.ToString(), "CERRADA");
+            ViewBag.lst_estado = lst;
+
+            Dictionary<string, string> lst_tipo_personas = new Dictionary<string, string>();
+            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.PERSONA.ToString(), "Persona");
+            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.PROVEE.ToString(), "Proveedor");
+            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.EMPLEA.ToString(), "Empleado");
+            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.CLIENTE.ToString(), "Cliente");
+            ViewBag.lst_tipo_personas = lst_tipo_personas;
+        }
+
+        private bool validar(cp_conciliacion_Caja_Info i_validar, ref string msg)
+        {
+            i_validar.lst_det_ct = list_ct.get_list();
+
+            if (i_validar.IdEstadoCierre == cl_enumeradores.eEstadoCierreCaja.EST_CIE_CER.ToString())
+            {
+                if (i_validar.lst_det_ct.Count == 0)
+                {
+                    msg = "Debe ingresar registros en el detalle del diario";
+                    return false;
+                }
+                if (i_validar.lst_det_ct.Sum(q => q.dc_Valor) != 0)
+                {
+                    msg = "La suma del detalle del diario debe ser 0";
+                    return false;
+                }
+
+                if (i_validar.lst_det_ct.Where(q => q.dc_Valor == 0).Count() > 0)
+                {
+                    msg = "Existen detalles con valor 0 en el debe o haber";
+                    return false;
+                }
+                var persona = bus_persona.get_info(i_validar.IdEmpresa, i_validar.IdTipoPersona, i_validar.IdEntidad);
+                if (persona == null)
+                {
+                    msg = "La persona seleccionada no corresponde al tipo asignado";
+                    return false;
+                }
+                i_validar.IdPersona = persona.IdPersona;
+                i_validar.lst_det_fact = list_det.get_list();
+
+                
+            }
+
+            return true;
+        }
+        #endregion
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial_conciliacion_caja(DateTime fecha_ini, DateTime fecha_fin)
         {
             ViewBag.fecha_ini = fecha_ini;
             ViewBag.fecha_fin = fecha_fin;
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = bus_conciliacion.get_list(IdEmpresa, fecha_ini, fecha_fin);
             return PartialView("_GridViewPartial_conciliacion_caja", model);
         }
@@ -147,7 +200,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         public ActionResult GridViewPartial_conciliacion_vales(decimal IdConciliacion_caja = 0)
         {
 
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
             model.lst_det_vale = bus_vales.get_list(IdEmpresa, IdConciliacion_caja);
             if (model.lst_det_vale.Count == 0)
@@ -188,7 +241,6 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
        {
             var model = bus_persona.get_info(IdPersona);
             if (model == null) model = new Info.General.tb_persona_Info();
-            //ViewBag.lst_personas = bus_persona.get_list(false);
             return PartialView("_ComboBoxPartial_persona", model);
         }
 
@@ -196,7 +248,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_conciliacion_facturas_x_cruzar()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = bus_det.get_list_x_pagar(IdEmpresa);
             return PartialView("_GridViewPartial_conciliacion_facturas_x_cruzar", model);
         }
@@ -204,7 +256,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_conciliacion_facturas(decimal IdConciliacion_caja = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
             model.lst_det_fact = bus_det.get_list(IdEmpresa, IdConciliacion_caja);
             if (model.lst_det_fact.Count == 0)
@@ -216,7 +268,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         {
             if (IDs != "")
             {
-                int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 var lst_x_cruzar = bus_det.get_list_x_pagar(IdEmpresa);
                 string[] array = IDs.Split(',');
                 foreach (var item in array)
@@ -253,7 +305,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         #region Json
         public JsonResult GetSaldoAnterior(DateTime? FechaCorte, string IdCtaCble = "")
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             double resultado = 0;
             if(FechaCorte != null)
                 resultado = bus_plancta.get_saldo_anterior(IdEmpresa, IdCtaCble, Convert.ToDateTime(FechaCorte));
@@ -263,7 +315,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
         public JsonResult GetIdCtaCbleCaja(int IdCaja = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             string resultado = string.Empty;
             if (IdCaja != 0)
                 resultado = bus_caja.get_IdCtaCble(IdEmpresa, IdCaja);
@@ -273,7 +325,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
         public JsonResult GetPeriodo(int IdPeriodo = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var resultado = bus_periodo.get_info(IdEmpresa, IdPeriodo);
             if (resultado == null)
                 resultado = new ct_periodo_Info();
@@ -331,14 +383,14 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_conciliacion_ingresos()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
             model.lst_det_ing = list_ing.get_list();
             return PartialView("_GridViewPartial_conciliacion_ingresos", model);
         }
         public void GetIngresos(DateTime? FechaFin, int IdCaja = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst = bus_ing.get_list_ingresos_x_conciliar(IdEmpresa, FechaFin == null ? DateTime.Now.Date : Convert.ToDateTime(FechaFin), IdCaja);
             list_ing.set_list(lst);
         }

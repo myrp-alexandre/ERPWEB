@@ -99,7 +99,17 @@ namespace Core.Erp.Bus.Contabilidad
                 throw;
             }
         }
-
+        public string get_CtaCble_acreedora(int IdEmpresa, int IdTipoCbte, decimal IdCbteCble)
+        {
+            try
+            {
+                return odata.get_CtaCble_acreedora(IdEmpresa, IdTipoCbte, IdCbteCble);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public double get_saldo_anterior(int IdEmpresa, string IdCtaCble, DateTime Fecha_corte)
         {
             try

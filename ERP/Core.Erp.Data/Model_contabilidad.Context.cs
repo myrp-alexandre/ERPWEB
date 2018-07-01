@@ -37,5 +37,6 @@ namespace Core.Erp.Data
         public virtual DbSet<ct_punto_cargo> ct_punto_cargo { get; set; }
         public virtual DbSet<ct_cbtecble_tipo> ct_cbtecble_tipo { get; set; }
         public virtual DbSet<ct_cbtecble_Reversado> ct_cbtecble_Reversado { get; set; }
+        public virtual DbSet<vwct_cbtecble_con_ctacble_acreedora> vwct_cbtecble_con_ctacble_acreedora { get; set; }
     }
 }

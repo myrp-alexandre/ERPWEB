@@ -22,11 +22,11 @@ namespace Core.Erp.Bus.Caja
             }
         }
 
-        public List<caj_Caja_Movimiento_Tipo_Info> get_list(int IdEmpresa,string signo, bool mostrar_anulados)
+        public List<caj_Caja_Movimiento_Tipo_Info> get_list(int IdEmpresa,string signo, bool mostrar_anulados, bool mostrar_sin_ctaCble)
         {
             try
             {
-                return odata.get_list(IdEmpresa, signo, mostrar_anulados);
+                return odata.get_list(IdEmpresa, signo, mostrar_anulados, mostrar_sin_ctaCble);
             }
             catch (Exception)
             {

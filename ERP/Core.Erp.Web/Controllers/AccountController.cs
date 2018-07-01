@@ -72,9 +72,11 @@ namespace Core.Erp.Web.Controllers
             var info_empresa = bus_empresa.get_info(model.IdEmpresa);
             if (info_empresa == null)
                 return View(model);
-            Session["IdUsuario"] = model.IdUsuario;
+            Session["IdUsuario"] = model.IdUsuario;            
             Session["IdEmpresa"] = model.IdEmpresa;
             Session["nom_empresa"] = info_empresa.em_nombre;
+            SessionFixed.NomEmpresa = info_empresa.em_nombre;
+            SessionFixed.IdUsuario = model.IdUsuario;
             SessionFixed.IdEmpresa = model.IdEmpresa.ToString();
             return RedirectToAction("Index","Home");
         }

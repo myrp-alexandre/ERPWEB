@@ -45,7 +45,7 @@
         $("#IdTipoPersona").change(function () {
             IdEntidad.SetValue(null);
         });
-        
+
 
         $("#IdEstadoCierre").change(function () {
             MostrarOcultarOP();
@@ -261,7 +261,16 @@
 
 @using (Html.BeginForm("Nuevo", "ConciliacionCaja", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
 
+    }
+    @Html.HiddenFor(q => q.IdEmpresa)
     <div class="modal fade" id="FacturasModal" role="dialog">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
@@ -406,8 +415,8 @@
             <li>
                 <a href="#tab_ingresos" aria-controls="ingresos" role="tab" data-toggle="tab">Ingresos</a>
             </li>
-            <li hidden>
-                <a href="#tab_op" aria-controls="vales" role="tab" data-toggle="tab" id="link_op">Orden de pago</a>
+            <li>
+                <a href="#tab_op" aria-controls="vales" role="tab" data-toggle="tab" id="link_op" hidden>Orden de pago</a>
             </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
@@ -440,7 +449,7 @@
                 <div class="row">
                     <div class="col-md-offset-10 col-md-2">
                         <div class="form-group">
-                            <label for="FechaOP">Fecha*</label>                            
+                            <label for="FechaOP">Fecha*</label>
                             @Html.TextBoxFor(q => q.FechaOP, "{0:dd/MM/yyyy}", new { @id = "FechaOP", @class = "form-control" })
                             @Html.ValidationMessageFor(q => q.FechaOP, "", new { @class = "text-danger" })
                         </div>
@@ -461,7 +470,7 @@
                         </div>
                     </div>
                 </div>
-                    
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">

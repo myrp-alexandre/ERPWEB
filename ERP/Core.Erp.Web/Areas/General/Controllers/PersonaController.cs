@@ -102,22 +102,5 @@ namespace Core.Erp.Web.Areas.General.Controllers
             }
             return RedirectToAction("Index", "Persona");
         }
-
-        public ActionResult ComboBoxPartial_persona()
-        {
-            return PartialView("_ComboBoxPartial_persona");
-        }
-
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_entidad_cmb(string IdTipo_Persona = "")
-        {
-            List<tb_persona_Info> model = new List<tb_persona_Info>();
-            if (string.IsNullOrEmpty(IdTipo_Persona))
-            {
-                int IdEmpresa = Session["IdEmpresa"] == null ? 0 : Convert.ToInt32(Session["IdEmpresa"]);
-            }           
-            
-            return PartialView("~/Views/Layout/_GridViewPartial_entidad_cmb.cshtml", model);
-        }
     }
 }

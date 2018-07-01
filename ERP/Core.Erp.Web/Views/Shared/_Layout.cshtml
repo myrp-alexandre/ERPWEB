@@ -74,7 +74,7 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="hidden-xs">@Session["IdUsuario"]</span>
+                                <span class="hidden-xs">@Core.Erp.Web.Helps.SessionFixed.IdUsuario</span>
                             </a>
                         </li>
                     </ul>
@@ -112,7 +112,7 @@
                                        settings.Name = "treeViewMenu";
                                        settings.EnableHotTrack = true;
                                        var Nodes = new List<Core.Erp.Info.SeguridadAcceso.seg_Menu_x_Empresa_x_Usuario_Info>();
-                                       Core.Erp.Web.Areas.SeguridadAcceso.Controllers.MenuPorEmpresaPorUsuarioController.CreateTreeViewNodesRecursive(Nodes, settings.Nodes, 0, (Session["IdEmpresa"] == null ? 0 : Convert.ToInt32(Session["IdEmpresa"])), (Session["IdUsuario"] == null ? "" : Session["IdUsuario"].ToString()));
+                                       Core.Erp.Web.Areas.SeguridadAcceso.Controllers.MenuPorEmpresaPorUsuarioController.CreateTreeViewNodesRecursive(Nodes, settings.Nodes, 0, (Core.Erp.Web.Helps.SessionFixed.IdEmpresa == null ? 0 : Convert.ToInt32(Core.Erp.Web.Helps.SessionFixed.IdEmpresa)), (Core.Erp.Web.Helps.SessionFixed.IdUsuario == null ? "" : Core.Erp.Web.Helps.SessionFixed.IdUsuario.ToString()));
 
                                    }).GetHtml()
                                     </div>
@@ -127,7 +127,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        [@Session["IdEmpresa"]] @Session["nom_empresa"]
+                         [@Core.Erp.Web.Helps.SessionFixed.IdEmpresa] @Core.Erp.Web.Helps.SessionFixed.NomEmpresa                        
                     </div>
                     <!-- /.box-footer-->
                 </div>

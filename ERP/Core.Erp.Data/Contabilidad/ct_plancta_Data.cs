@@ -285,7 +285,6 @@ namespace Core.Erp.Data.Contabilidad
                 throw;
             }
         }
-
         public double get_saldo_anterior(int IdEmpresa, string IdCtaCble, DateTime Fecha_corte)
         {
             try
@@ -314,6 +313,27 @@ namespace Core.Erp.Data.Contabilidad
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+        public string get_CtaCble_acreedora(int IdEmpresa, int IdTipoCbte, decimal IdCbteCble)
+        {
+            try
+            {
+                string IdCtaCble = string.Empty;
+                using (Entities_contabilidad Context = new Entities_contabilidad())
+                {
+                    var cta = Context.vwct_cbtecble_con_ctacble_acreedora.Where(q => q.IdEmpresa == IdEmpresa
+                              && q.IdTipoCbte == IdTipoCbte
+                              && q.IdCbteCble == IdCbteCble).FirstOrDefault();
+                    if (cta == null) return null;
+                    IdCtaCble = cta.IdCtaCble_Acreedora;
+                }
+                return IdCtaCble;
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

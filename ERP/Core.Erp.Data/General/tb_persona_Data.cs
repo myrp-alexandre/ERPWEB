@@ -190,7 +190,6 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
-
         public tb_persona_Info get_info(int IdEmpresa, string IdTipoPersona, decimal IdEntidad)
         {
             tb_persona_Info info = new tb_persona_Info();
@@ -261,7 +260,6 @@ namespace Core.Erp.Data.General
 
             return info;
         }
-
         public tb_persona_Info get_info(decimal IdPersona)
         {
             try

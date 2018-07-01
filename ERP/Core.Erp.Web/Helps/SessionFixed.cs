@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 
 namespace Core.Erp.Web.Helps
 {
     public interface ISessionValueProvider
     {
-        string CurrentTipoPersona { get; set; }
+        string TipoPersona { get; set; }
         string IdEmpresa { get; set; }
+        string IdUsuario { get; set; }
+        string NomEmpresa { get; set; }
     }
 
     public static class SessionFixed
@@ -19,10 +18,10 @@ namespace Core.Erp.Web.Helps
             _sessionValueProvider = provider;
         }
 
-        public static string CurrentTipoPersona
+        public static string TipoPersona
         {
-            get { return _sessionValueProvider.CurrentTipoPersona; }
-            set { _sessionValueProvider.CurrentTipoPersona = value; }
+            get { return _sessionValueProvider.TipoPersona; }
+            set { _sessionValueProvider.TipoPersona = value; }
         }
 
         public static string IdEmpresa
@@ -30,22 +29,44 @@ namespace Core.Erp.Web.Helps
             get { return _sessionValueProvider.IdEmpresa; }
             set { _sessionValueProvider.IdEmpresa = value; }
         }
+        public static string NomEmpresa
+        {
+            get { return _sessionValueProvider.NomEmpresa; }
+            set { _sessionValueProvider.NomEmpresa = value; }
+        }
+        public static string IdUsuario
+        {
+            get { return _sessionValueProvider.IdUsuario; }
+            set { _sessionValueProvider.IdUsuario = value; }
+        }
     }
 
     public class WebSessionValueProvider : ISessionValueProvider
     {
-        private const string TIPOPERSONA = "PERSONA";
-        private const string IDEMPRESA = "0";
-        public string CurrentTipoPersona
+        private const string _IdTipoPersona = "PERSONA";
+        private const string _IdUsuario = "IdUsuario";
+        private const string _IdEmpresa = "IdEmpresa";
+        private const string _NomEmpresa = "FIXED";
+        public string TipoPersona
         {
-            get { return (string)HttpContext.Current.Session[TIPOPERSONA]; }
-            set { HttpContext.Current.Session[TIPOPERSONA] = value; }
+            get { return (string)HttpContext.Current.Session[_IdTipoPersona]; }
+            set { HttpContext.Current.Session[_IdTipoPersona] = value; }
         }
 
         public string IdEmpresa
         {
-            get { return (string)HttpContext.Current.Session[IDEMPRESA]; }
-            set { HttpContext.Current.Session[IDEMPRESA] = value; }
+            get { return (string)HttpContext.Current.Session[_IdEmpresa]; }
+            set { HttpContext.Current.Session[_IdEmpresa] = value; }
+        }
+        public string IdUsuario
+        {
+            get { return (string)HttpContext.Current.Session[_IdUsuario]; }
+            set { HttpContext.Current.Session[_IdUsuario] = value; }
+        }
+        public string NomEmpresa
+        {
+            get { return (string)HttpContext.Current.Session[_NomEmpresa]; }
+            set { HttpContext.Current.Session[_NomEmpresa] = value; }
         }
     }
 }

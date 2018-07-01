@@ -338,7 +338,7 @@ namespace Core.Erp.Data.Caja
                         {
                             IdEmpresa = item.IdEmpresa_movcaja = info.IdEmpresa,
                             IdTipoCbte = item.IdTipocbte_movcaja = IdTipoCbte_EG,
-                            IdCbteCble = item.IdCbteCble_movcaja = IdCbteCble_EG,
+                            IdCbteCble = item.IdCbteCble_movcaja = IdCbteCble_EG++,
                             cb_Fecha = item.fecha,
                             cb_Observacion = "Caja # "+info.IdConciliacion_Caja + item.Observacion,
                             IdPeriodo = Convert.ToInt32(item.fecha.ToString("yyyyMM")),
@@ -424,6 +424,11 @@ namespace Core.Erp.Data.Caja
                     Context.cp_conciliacion_Caja_det_Ing_Caja.Add(Entity_d);
                 }
                 #endregion
+
+                Context_ct.SaveChanges();
+                Context_cxp.SaveChanges();
+                Context.SaveChanges();
+
 
                 Context_ct.Dispose();
                 Context.Dispose();

@@ -55,8 +55,8 @@ namespace Core.Erp.Data.Caja
                 throw;
             }
         }
-
-        public List<caj_Caja_Movimiento_Tipo_Info> get_list(int IdEmpresa,string signo, bool mostrar_anulados)
+        
+        public List<caj_Caja_Movimiento_Tipo_Info> get_list(int IdEmpresa, string signo, bool mostrar_anulados, bool mostrar_sin_ctaCble)
         {
             try
             {
@@ -64,6 +64,8 @@ namespace Core.Erp.Data.Caja
                 using (Entities_caja Context = new Entities_caja())
                 {
                     if (mostrar_anulados)
+                    {
+                        if(mostrar_sin_ctaCble)
                         Lista = (from q in Context.caj_Caja_Movimiento_Tipo
                                  where q.IdEmpresa == IdEmpresa
                                  && q.tm_Signo == signo
@@ -78,8 +80,27 @@ namespace Core.Erp.Data.Caja
                                      IdTipoMovi_grupo = q.IdTipoMovi_grupo,
                                      IdCtaCble = q.IdCtaCble
                                  }).ToList();
+                        else
+                            Lista = (from q in Context.caj_Caja_Movimiento_Tipo
+                                     where q.IdEmpresa == IdEmpresa
+                                     && q.tm_Signo == signo
+                                     && q.IdCtaCble != null
+                                     select new caj_Caja_Movimiento_Tipo_Info
+                                     {
+                                         IdEmpresa = q.IdEmpresa,
+                                         IdTipoMovi = q.IdTipoMovi,
+                                         Estado = q.Estado,
+                                         tm_descripcion = q.tm_descripcion,
+                                         SeDeposita = q.SeDeposita,
+                                         tm_Signo = q.tm_Signo,
+                                         IdTipoMovi_grupo = q.IdTipoMovi_grupo,
+                                         IdCtaCble = q.IdCtaCble
+                                     }).ToList();
+                    }
                     else
-                        Lista = (from q in Context.caj_Caja_Movimiento_Tipo
+                    {
+                        if (mostrar_sin_ctaCble)
+                            Lista = (from q in Context.caj_Caja_Movimiento_Tipo
                                  where q.IdEmpresa == IdEmpresa
                                  && q.tm_Signo == signo
                                  && q.Estado == "A"
@@ -95,6 +116,25 @@ namespace Core.Erp.Data.Caja
                                      IdCtaCble = q.IdCtaCble,
 
                                  }).ToList();
+                        else
+                            Lista = (from q in Context.caj_Caja_Movimiento_Tipo
+                                     where q.IdEmpresa == IdEmpresa
+                                     && q.tm_Signo == signo
+                                     && q.Estado == "A"
+                                     && q.IdCtaCble != null
+                                     select new caj_Caja_Movimiento_Tipo_Info
+                                     {
+                                         IdEmpresa = q.IdEmpresa,
+                                         IdTipoMovi = q.IdTipoMovi,
+                                         Estado = q.Estado,
+                                         tm_descripcion = q.tm_descripcion,
+                                         SeDeposita = q.SeDeposita,
+                                         tm_Signo = q.tm_Signo,
+                                         IdTipoMovi_grupo = q.IdTipoMovi_grupo,
+                                         IdCtaCble = q.IdCtaCble,
+
+                                     }).ToList();
+                    }
                 }
                 return Lista;
             }
