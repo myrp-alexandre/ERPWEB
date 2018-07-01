@@ -8,9 +8,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Nuevo", "IngresoInventario", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "DistribucionPorLote", FormMethod.Post, new { @class = "form", @role = "form" }))
 {   
-     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.signo)
     @Html.HiddenFor(q => q.IdMovi_inven_tipo)
     

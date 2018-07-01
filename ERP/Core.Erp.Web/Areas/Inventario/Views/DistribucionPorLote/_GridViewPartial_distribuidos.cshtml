@@ -1,5 +1,6 @@
 @using System.Web.UI.WebControls;
 @{
+
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridViewPartial_distribuidos";
@@ -20,69 +21,18 @@
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
-        settings.HtmlRowPrepared = (s, e) =>
-        {
-            if (Convert.ToBoolean(e.GetValue("estado")) == false)
-            {
-                e.Row.ForeColor = System.Drawing.Color.Red;
-            }
-        };
-        settings.Columns.Add(c =>
-        {
-            c.Caption = "#";
-            c.SetDataItemTemplateContent(tc =>
-            {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) ==true && Convert.ToInt32(DataBinder.Eval(tc.DataItem, "can_x_distribuir")) >Convert.ToInt32(DataBinder.Eval(tc.DataItem, "can_distribuida")) )
-                {
-                    ViewContext.Writer.Write(
-                Html.ActionLink("Distribuir", "Modificar", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdMovi_inven_tipo = DataBinder.Eval(tc.DataItem, "IdMovi_inven_tipo"), IdNumMovi = DataBinder.Eval(tc.DataItem, "IdNumMovi") })
-                    );
-                }
-            });
-
-            c.Settings.AllowDragDrop = DefaultBoolean.False;
-            c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = System.Web.UI.WebControls.Unit.Pixel(90);
-        });
-
-        settings.Columns.Add("IdNumMovi", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-        settings.Columns.Add("tm_descripcion", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(30);
-        settings.Columns.Add("cm_observacion", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-        settings.Columns.Add("vt_NumFactura", "Factura").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-
-
-
+        //Evento para pintar de rojo las filas anuladas
+      
+        settings.Columns.Add("pr_descripcion", "Producto").Width = System.Web.UI.WebControls.Unit.Percentage(60);
+        settings.Columns.Add("IdUnidadMedida", "Unidad medida").Width = System.Web.UI.WebControls.Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.FieldName = "can_total";
             column.Caption = "total";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
 
         });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "can_distribuida";
-            column.Caption = "Distr.";
-            column.Width = Unit.Percentage(15);
-
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "can_x_distribuir";
-            column.Caption = "X distr.";
-            column.Width = Unit.Percentage(15);
-
-        });
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "cm_fecha";
-            column.Caption = "Fecha";
-            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        });
+       
     });
 }
 @grid.Bind(Model).GetHtml()
