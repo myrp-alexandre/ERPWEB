@@ -35,5 +35,7 @@ namespace Core.Erp.Data
         public virtual DbSet<cp_conciliacion_Caja_det> cp_conciliacion_Caja_det { get; set; }
         public virtual DbSet<cp_conciliacion_Caja> cp_conciliacion_Caja { get; set; }
         public virtual DbSet<vwcaj_Caja_Movimiento_x_Conciliar> vwcaj_Caja_Movimiento_x_Conciliar { get; set; }
+        public virtual DbSet<vwcp_conciliacion_Caja_det> vwcp_conciliacion_Caja_det { get; set; }
+        public virtual DbSet<vwcp_conciliacion_Caja_det_x_ValeCaja> vwcp_conciliacion_Caja_det_x_ValeCaja { get; set; }
     }
 }
