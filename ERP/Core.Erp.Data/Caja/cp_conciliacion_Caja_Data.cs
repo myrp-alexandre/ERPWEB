@@ -12,7 +12,7 @@ namespace Core.Erp.Data.Caja
     {
         cp_orden_pago_Data data_op = new cp_orden_pago_Data();
         ct_cbtecble_Data data_ct = new ct_cbtecble_Data();
-        cp_orden_pago_cancelaciones_Data data_can = new cp_orden_pago_cancelaciones_Data();
+        cp_orden_pago_cancelaciones_Data data_can = new cp_orden_pago_cancelaciones_Data();        
         public List<cp_conciliacion_Caja_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
@@ -121,6 +121,24 @@ namespace Core.Erp.Data.Caja
             Entities_contabilidad Context_ct = new Entities_contabilidad();
             try
             {
+                #region Variables
+                int Secuencia = 1;
+                decimal IdOrdenPago = 1;
+                decimal IdCbteCble_NC = 1;
+                decimal IdCbteCble_EG = 1;
+                decimal IdCbteCble_OP = 1;
+                decimal IdCancelacion = 1;
+
+                cp_parametros Entity_p = Context_cxp.cp_parametros.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                caj_parametro Entity_pc = Context.caj_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                cp_orden_pago_tipo_x_empresa Entity_op_tipo = Context_cxp.cp_orden_pago_tipo_x_empresa.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipo_op == cl_enumeradores.eTipoOrdenPago.OTROS_CONC.ToString()).FirstOrDefault();
+                if (Entity_p == null || Entity_pc == null || Entity_op_tipo == null)
+                    return false;
+                int IdTipoCbte_NC = Convert.ToInt32(Entity_p.pa_TipoCbte_NC);
+                int IdTipoCbte_EG = Entity_pc.IdTipoCbteCble_MoviCaja_Egr;
+                int IdTipoCbte_op = Convert.ToInt32(Entity_op_tipo.IdTipoCbte_OP);
+                #endregion
+
                 #region Cabecera
                 cp_conciliacion_Caja Entity_c = new cp_conciliacion_Caja
                 {
@@ -145,29 +163,86 @@ namespace Core.Erp.Data.Caja
                     IdEmpresa_op = info.IdEmpresa_op,
                     IdOrdenPago_op = info.IdOrdenPago_op,
                 };
-                Context.cp_conciliacion_Caja.Add(Entity_c);
-                #endregion
-
-                #region Facturas
-                int Secuencia = 1;
-                decimal IdOrdenPago = 1;
-                decimal IdCbteCble_NC = 1;
-                decimal IdCbteCble_EG = 1;
-                decimal IdCancelacion = 1;
-                cp_parametros Entity_p = Context_cxp.cp_parametros.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
-                caj_parametro Entity_pc = Context.caj_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
-                if (Entity_p == null || Entity_pc == null)
-                    return false;
-                int IdTipoCbte_NC = Convert.ToInt32(Entity_p.pa_TipoCbte_NC);
-                int IdTipoCbte_EG = Entity_pc.IdTipoCbteCble_MoviCaja_Egr;
 
                 if (info.IdEstadoCierre == cl_enumeradores.eEstadoCierreCaja.EST_CIE_CER.ToString())
                 {
                     IdOrdenPago = data_op.get_id(Entity_c.IdEmpresa);
                     IdCbteCble_NC = data_ct.get_id(Entity_c.IdEmpresa, IdTipoCbte_NC);
                     IdCancelacion = data_can.get_id(Entity_c.IdEmpresa);
-                    
+                    IdCbteCble_OP = data_ct.get_id(info.IdEmpresa, IdTipoCbte_op);
+
+                    #region Orden de pago
+                    cp_orden_pago op = new cp_orden_pago
+                    {
+                        IdEmpresa = Entity_c.IdEmpresa,
+                        IdOrdenPago = IdOrdenPago++,
+                        Observacion = "Caja #" + Entity_c.IdConciliacion_Caja,
+                        IdTipo_op = cl_enumeradores.eTipoOrdenPago.OTROS_CONC.ToString(),
+                        IdTipo_Persona = info.IdTipoPersona,
+                        IdPersona = info.IdPersona,
+                        IdEntidad = info.IdEntidad,
+                        Fecha = info.FechaOP.Date,
+                        Fecha_Pago = info.FechaOP.Date,
+                        IdEstadoAprobacion = Entity_op_tipo.IdEstadoAprobacion,
+                        IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
+                        Estado = "A"
+                    };
+                    Entity_c.IdEmpresa_op = op.IdEmpresa;
+                    Entity_c.IdOrdenPago_op = op.IdOrdenPago;
+                    Context_cxp.cp_orden_pago.Add(op);
+
+                    ct_cbtecble diario = new ct_cbtecble
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdTipoCbte = IdTipoCbte_op,
+                        IdCbteCble = IdCbteCble_OP,
+                        cb_Fecha = info.FechaOP.Date,
+                        cb_Observacion = op.Observacion,
+                        IdPeriodo = Convert.ToInt32(info.FechaOP.ToString("yyyyMM")),
+                        cb_Anio = info.FechaOP.Year,
+                        cb_mes = info.FechaOP.Month,
+                        cb_FechaTransac = DateTime.Now,
+                        cb_Estado = "A"
+                    };
+                    Context_ct.ct_cbtecble.Add(diario);
+
+                    int sec = 1;
+                    foreach (var item in info.lst_det_ct)
+                    {
+                        ct_cbtecble_det diario_det = new ct_cbtecble_det
+                        {
+                            IdEmpresa = diario.IdEmpresa,
+                            IdTipoCbte = diario.IdTipoCbte,
+                            IdCbteCble = diario.IdCbteCble,
+                            secuencia = sec++,
+                            IdCtaCble = item.IdCtaCble,
+                            dc_Valor = Math.Round(Convert.ToDouble(item.dc_Valor), 2, MidpointRounding.AwayFromZero),
+                        };
+                        Context_ct.ct_cbtecble_det.Add(diario_det);
+                    }
+                    cp_orden_pago_det op_det = new cp_orden_pago_det
+                    {
+                        IdEmpresa = op.IdEmpresa,
+                        IdOrdenPago = op.IdOrdenPago,
+                        Secuencia = 1,
+
+                        IdEmpresa_cxp = diario.IdEmpresa,
+                        IdTipoCbte_cxp = diario.IdTipoCbte,
+                        IdCbteCble_cxp = diario.IdCbteCble,
+
+                        Valor_a_pagar = Convert.ToDouble(info.lst_det_ct.Sum(q=>q.dc_Valor_debe)),
+                        IdEstadoAprobacion = Entity_op_tipo.IdEstadoAprobacion,
+                        IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
+                        Fecha_Pago = op.Fecha_Pago
+                    };
+                    Context_cxp.cp_orden_pago_det.Add(op_det);
+                    #endregion
                 }
+
+                Context.cp_conciliacion_Caja.Add(Entity_c);
+                #endregion
+
+                #region Facturas
                 foreach (var item in info.lst_det_fact)
                 {
                     if (info.IdEstadoCierre == cl_enumeradores.eEstadoCierreCaja.EST_CIE_CER.ToString())
@@ -243,7 +318,7 @@ namespace Core.Erp.Data.Caja
                                 IdEmpresa = diario.IdEmpresa,
                                 IdTipoCbte = diario.IdTipoCbte,
                                 IdCbteCble = diario.IdCbteCble,
-                                secuencia = 1,
+                                secuencia = 2,
                                 IdCtaCble = info.IdCtaCble,
                                 dc_Valor = Math.Round(Convert.ToDouble(item.Valor_a_aplicar), 2, MidpointRounding.AwayFromZero)*-1,
                             };
@@ -289,6 +364,7 @@ namespace Core.Erp.Data.Caja
                                 IdEmpresa = op.IdEmpresa,
                                 Idcancelacion = IdCancelacion++,
                                 Secuencia = 1,
+                                IdEmpresa_op = op.IdEmpresa,
                                 IdOrdenPago_op = op.IdOrdenPago,
                                 Secuencia_op = 1,
                                 IdEmpresa_cxp = item.IdEmpresa_OGiro,

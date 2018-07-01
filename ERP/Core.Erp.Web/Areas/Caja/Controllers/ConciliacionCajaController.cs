@@ -105,9 +105,6 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                 cargar_combos();
                 return View(model);
             }
-            model.lst_det_ing = list_ing.get_list();
-            model.lst_det_vale = list_vale.get_list();
-            model.lst_det_fact = list_det.get_list();
             model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_conciliacion.guardarDB(model))
             {
@@ -152,6 +149,19 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         {
             i_validar.lst_det_ct = list_ct.get_list();
 
+            i_validar.lst_det_ing = list_ing.get_list();
+            i_validar.lst_det_vale = list_vale.get_list();
+            i_validar.lst_det_fact = list_det.get_list();
+
+            var ingresos = i_validar.lst_det_ing.Sum(q => q.valor_disponible);
+            var egresos = Convert.ToDouble(i_validar.lst_det_fact.Count == 0 ? 0 : i_validar.lst_det_fact.Sum(q => q.Valor_a_aplicar)) + Convert.ToDouble(i_validar.lst_det_vale.Count == 0 ? 0 : i_validar.lst_det_vale.Sum(q => q.valor));
+
+            i_validar.Ingresos = Math.Round(ingresos, 2, MidpointRounding.AwayFromZero);
+            i_validar.Total_Ing = Math.Round(Math.Abs(i_validar.Saldo_cont_al_periodo) - ingresos, 2, MidpointRounding.AwayFromZero);
+            i_validar.Total_fondo = Math.Round(ingresos, 2, MidpointRounding.AwayFromZero);
+            i_validar.Total_fact_vale = Math.Round(egresos, 2, MidpointRounding.AwayFromZero);
+            i_validar.Dif_x_pagar_o_cobrar = Math.Round(ingresos - egresos, 2, MidpointRounding.AwayFromZero);
+
             if (i_validar.IdEstadoCierre == cl_enumeradores.eEstadoCierreCaja.EST_CIE_CER.ToString())
             {
                 if (i_validar.lst_det_ct.Count == 0)
@@ -177,11 +187,18 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                     return false;
                 }
                 i_validar.IdPersona = persona.IdPersona;
-                i_validar.lst_det_fact = list_det.get_list();
 
-                
+                foreach (var item in i_validar.lst_det_fact)
+                {
+                    item.IdCtaCble_cxp = bus_plancta.get_CtaCble_acreedora(item.IdEmpresa_OGiro, item.IdTipoCbte_Ogiro, item.IdCbteCble_Ogiro);
+                    if (string.IsNullOrEmpty(item.IdCtaCble_cxp))
+                    {
+                        msg = "No se puede identificar la cuenta contable del documento "+item.co_factura;
+                        return false;
+                    }
+                }
             }
-
+            
             return true;
         }
         #endregion
