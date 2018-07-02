@@ -143,6 +143,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 co_FechaFactura = DateTime.Now,
                 co_FechaContabilizacion = DateTime.Now,
                 co_FechaFactura_vct = DateTime.Now,
+                PaisPago = "593",
                 info_cuota = new cp_cuotas_x_doc_Info
                 {
                     Fecha_inicio = DateTime.Now

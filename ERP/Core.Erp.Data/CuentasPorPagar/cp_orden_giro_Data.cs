@@ -59,8 +59,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdSucursal = info.IdSucursal,
                         PagoLocExt = info.PagoLocExt,
                         PaisPago = info.PaisPago,
-                        ConvenioTributacion = info.ConvenioTributacion,
-                        PagoSujetoRetencion = info.PagoSujetoRetencion,
+                        ConvenioTributacion = info.ConvenioTributacion_bool == true ? "SI" : "NO",
+                        PagoSujetoRetencion = info.PagoSujetoRetencion_bool == true ? "SI" : "NO",
                         BseImpNoObjDeIva = info.BseImpNoObjDeIva,
                         fecha_autorizacion = info.fecha_autorizacion,
                         Num_Autorizacion = info.Num_Autorizacion,
@@ -142,8 +142,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.IdSucursal = info.IdSucursal;
                         Entity.PagoLocExt = info.PagoLocExt;
                         Entity.PaisPago = info.PaisPago;
-                        Entity.ConvenioTributacion = info.ConvenioTributacion;
-                        Entity.PagoSujetoRetencion = info.PagoSujetoRetencion;
+                        Entity.ConvenioTributacion = info.ConvenioTributacion_bool == true ? "SI" : "NO";
+                        Entity.PagoSujetoRetencion = info.PagoSujetoRetencion_bool == true ? "SI" : "NO";
                         Entity.BseImpNoObjDeIva = info.BseImpNoObjDeIva;
                         Entity.fecha_autorizacion = info.fecha_autorizacion;
                         Entity.Num_Autorizacion = info.Num_Autorizacion;
@@ -527,8 +527,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdSucursal = Entity.IdSucursal,
                         PagoLocExt = Entity.PagoLocExt,
                         PaisPago = Entity.PaisPago,
-                        ConvenioTributacion = Entity.ConvenioTributacion,
-                        PagoSujetoRetencion = Entity.PagoSujetoRetencion,
+                        ConvenioTributacion_bool = Entity.ConvenioTributacion == "SI" ? true : false,
+                        PagoSujetoRetencion_bool = Entity.PagoSujetoRetencion == "SI" ? true : false,
                         BseImpNoObjDeIva = Entity.BseImpNoObjDeIva,
                         fecha_autorizacion = Entity.fecha_autorizacion,
                         Num_Autorizacion = Entity.Num_Autorizacion,
@@ -612,8 +612,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdSucursal = Entity.IdSucursal,
                         PagoLocExt = Entity.PagoLocExt,
                         PaisPago = Entity.PaisPago,
-                        ConvenioTributacion = Entity.ConvenioTributacion,
-                        PagoSujetoRetencion = Entity.PagoSujetoRetencion,
+                        ConvenioTributacion_bool = Entity.ConvenioTributacion == "SI" ? true : false,
+                        PagoSujetoRetencion_bool = Entity.PagoSujetoRetencion == "SI" ? true : false,
                         BseImpNoObjDeIva = Entity.BseImpNoObjDeIva,
                         fecha_autorizacion = Entity.fecha_autorizacion,
                         Num_Autorizacion = Entity.Num_Autorizacion,
