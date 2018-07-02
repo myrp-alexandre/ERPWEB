@@ -324,7 +324,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="PaisPago">País efectua el pago*</label>
-                            @Html.DropDownListFor(q => q.PaisPago, new SelectList(ViewBag.lst_paises, "IdPais", "Nombre"), new { @class = "form-control" })
+                            @Html.DropDownListFor(q => q.PaisPago, new SelectList(ViewBag.lst_paises, "Codigo", "Pais"), new { @class = "form-control" })
                             @Html.ValidationMessageFor(q => q.PaisPago, "", new { @class = "text-danger" })
                         </div>
                     </div>

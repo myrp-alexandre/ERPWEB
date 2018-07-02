@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.CuentasPorPagar
 {
-    class cp_pais_sri_Info
+    public class cp_pais_sri_Info
     {
+        public string Codigo { get; set; }
+        public string Pais { get; set; }
     }
 }
