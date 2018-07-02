@@ -62,7 +62,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdMovi_inven_tipo_SucuOrig">Tipo movimiento origen*</label>
-                    @Html.DropDownListFor(q => q.IdMovi_inven_tipo_SucuOrig, new SelectList(ViewBag.lst_tipo, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control", @id = "IdMovi_inven_tipo", @disabled = "disabled" })
+                    @Html.DropDownListFor(q => q.IdMovi_inven_tipo_SucuOrig, new SelectList(ViewBag.lst_tipo, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control", @id = "IdMovi_inven_tipo"  })
                     @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_SucuOrig, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -95,7 +95,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdMovi_inven_tipo_SucuDest">Tipo movimiento destino*</label>
-                    @Html.DropDownListFor(q => q.IdMovi_inven_tipo_SucuDest, new SelectList(ViewBag.lst_tipo, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control", @id = "IdMovi_inven_tipo_SucuDest", @disabled = "disabled" })
+                    @Html.DropDownListFor(q => q.IdMovi_inven_tipo_SucuDest, new SelectList(ViewBag.lst_tipo, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control", @id = "IdMovi_inven_tipo_SucuDest" })
                     @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_SucuDest, "", new { @class = "text-danger" })
                 </div>
             </div>

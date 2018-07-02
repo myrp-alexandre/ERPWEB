@@ -61,6 +61,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         public ActionResult Nuevo()
         {
+            Session["in_transferencia_det_Info"] = null;
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_parametro_Info i_param = bus_in_param.get_info(IdEmpresa);
             if (i_param == null)
@@ -69,7 +70,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             {
                 IdEmpresa = IdEmpresa,
                 tr_fecha = DateTime.Now,
-                IdMovi_inven_tipo_SucuDest=i_param.IdMovi_inven_tipo_egresoBodegaOrigen               
+                IdMovi_inven_tipo_SucuOrig = i_param.P_IdMovi_inven_tipo_default_egr,
+                IdMovi_inven_tipo_SucuDest = i_param.P_IdMovi_inven_tipo_default_ing
+                    
             };
             cargar_combos();
             return View(model);

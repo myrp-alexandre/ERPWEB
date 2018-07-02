@@ -45,6 +45,7 @@ namespace Core.Erp.Bus.Inventario
         {
             try
             {
+                info.IdEstadoAprobacion_cat = "XAPRO";
                 if (odata.guardarDB(info))
                 {
                     get_info_ing_egr(info);
@@ -76,6 +77,9 @@ namespace Core.Erp.Bus.Inventario
         {
             try
             {
+                odata = new in_transferencia_Data();
+                odata_det = new in_transferencia_det_Data();
+                odata_det.anularDB(info);
                 if (odata.modificarDB(info))
                 {
                     get_info_ing_egr(info);

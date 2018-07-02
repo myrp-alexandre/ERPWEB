@@ -129,12 +129,7 @@ namespace Core.Erp.Data.Inventario
                     && q.IdTransferencia == info.IdTransferencia );
 
 
-                    Entity.IdBodegaDest = info.IdBodegaDest;
                     Entity.tr_Observacion = info.tr_Observacion;
-                    Entity.IdMovi_inven_tipo_SucuOrig = info.IdMovi_inven_tipo_SucuOrig;
-                    Entity.IdMovi_inven_tipo_SucuDest = info.IdMovi_inven_tipo_SucuDest;
-                    Entity.tr_fecha = Convert.ToDateTime(info.tr_fecha.ToShortDateString());
-                    Entity.IdEstadoAprobacion_cat = info.IdEstadoAprobacion_cat;
                     Entity.Codigo = info.Codigo;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
