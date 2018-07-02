@@ -32,7 +32,6 @@ namespace Core.Erp.Data
         public virtual DbSet<VWACTF_001> VWACTF_001 { get; set; }
         public virtual DbSet<VWACTF_002> VWACTF_002 { get; set; }
         public virtual DbSet<VWACTF_003> VWACTF_003 { get; set; }
-        public virtual DbSet<VWCAJ_001> VWCAJ_001 { get; set; }
         public virtual DbSet<VWCONTA_001> VWCONTA_001 { get; set; }
         public virtual DbSet<VWINV_001> VWINV_001 { get; set; }
         public virtual DbSet<VWINV_002> VWINV_002 { get; set; }

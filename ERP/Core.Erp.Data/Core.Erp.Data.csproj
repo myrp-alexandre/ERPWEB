@@ -1081,9 +1081,6 @@
     <Compile Include="VWBAN_003.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
-    <Compile Include="VWCAJ_001.cs">
-      <DependentUpon>Model_reportes.tt</DependentUpon>
-    </Compile>
     <Compile Include="VWCAJ_002.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
