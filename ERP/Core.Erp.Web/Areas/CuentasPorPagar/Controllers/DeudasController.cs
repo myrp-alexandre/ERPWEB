@@ -110,6 +110,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_paises = bus_pais.get_list(false);
             ViewBag.lst_paises = lst_paises;
 
+            var lst_doc_tipo = bus_tipo_documento.get_list(false);
+            ViewBag.lst_doc_tipo = lst_doc_tipo;
+
             var lst_sucursales = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursales = lst_sucursales;
             if (IdProveedor != 0)
@@ -123,7 +126,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             }
 
-           
+
+            Dictionary<string, string> lst_pagos = new Dictionary<string, string>();
+            lst_pagos.Add("LOC", "LOCAL");
+            lst_pagos.Add("EXT", "EXTERIOR");
+            ViewBag.lst_pagos = lst_pagos;
 
         }
 
@@ -135,6 +142,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             {
                 co_FechaFactura = DateTime.Now,
                 co_FechaContabilizacion = DateTime.Now,
+                co_FechaFactura_vct = DateTime.Now,
                 info_cuota = new cp_cuotas_x_doc_Info
                 {
                     Fecha_inicio = DateTime.Now
@@ -524,8 +532,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             try
             {
-
-                HttpContext.Current.Session["ct_cbtecble_det_Info"] = null;
+                if (info_proveedor == null)
+                {
+                    return;
+                }
+                set_list(new List<ct_cbtecble_det_Info>());
 
                 // cuenta total
                 ct_cbtecble_det_Info cbtecble_det_total_Info = new ct_cbtecble_det_Info();

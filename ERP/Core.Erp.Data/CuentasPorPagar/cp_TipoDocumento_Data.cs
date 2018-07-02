@@ -42,12 +42,13 @@ namespace Core.Erp.Data.CuentasPorPagar
             }
         }
 
-        public List<cp_TipoDocumento_Info> get_list()
+        public List<cp_TipoDocumento_Info> get_list(bool mostrar_anulados)
         {
             try
             {
                 List<cp_TipoDocumento_Info> Lst = new List<cp_TipoDocumento_Info>();
                 Entities_cuentas_por_pagar oEnti = new Entities_cuentas_por_pagar();
+                if(mostrar_anulados)
                 Lst = (from q in oEnti.cp_TipoDocumento
                        orderby q.Orden ascending
                        select new cp_TipoDocumento_Info
@@ -63,6 +64,23 @@ namespace Core.Erp.Data.CuentasPorPagar
                            Codigo_Secuenciales_Transaccion = q.Codigo_Secuenciales_Transaccion,
                            Sustento_Tributario = q.Sustento_Tributario,
                        }).ToList();
+                else
+                    Lst = (from q in oEnti.cp_TipoDocumento
+                           orderby q.Orden ascending
+                           where q.Estado == "A"
+                           select new cp_TipoDocumento_Info
+                           {
+                               CodTipoDocumento = q.CodTipoDocumento,
+                               Codigo = q.Codigo,
+                               Descripcion = q.Descripcion,
+                               Orden = q.Orden,
+                               DeclaraSRI = q.DeclaraSRI,
+                               CodSRI = q.CodSRI,
+                               Estado = q.Estado,
+                               GeneraRetencion = q.GeneraRetencion,
+                               Codigo_Secuenciales_Transaccion = q.Codigo_Secuenciales_Transaccion,
+                               Sustento_Tributario = q.Sustento_Tributario,
+                           }).ToList();
 
                 return Lst;
             }

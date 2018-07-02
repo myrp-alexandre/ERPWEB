@@ -15,7 +15,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string IdOrden_giro_Tipo { get; set; }
         public decimal IdProveedor { get; set; }
         public System.DateTime co_fechaOg { get; set; }
-        [RegularExpression(@"\d{3}-\d{3}", ErrorMessage = "Serie no valida")]
+        [RegularExpression(@"\d{3}-\d{3}", ErrorMessage = "El formato de la serie debe ser 000-000")]
         public string co_serie { get; set; }
         public string co_factura { get; set; }
         public System.DateTime co_FechaFactura { get; set; }
