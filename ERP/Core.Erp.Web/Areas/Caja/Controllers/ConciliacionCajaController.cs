@@ -16,7 +16,6 @@ using Core.Erp.Web.Areas.Contabilidad.Controllers;
 using Core.Erp.Info.General;
 using DevExpress.Web;
 using Core.Erp.Web.Helps;
-
 namespace Core.Erp.Web.Areas.Caja.Controllers
 {
     public class ConciliacionCajaController : Controller

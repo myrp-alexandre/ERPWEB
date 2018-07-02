@@ -47,7 +47,7 @@
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "";
+            column.FieldName = "IdProducto_padre";
             column.UnboundType = DevExpress.Data.UnboundColumnType.String;
             column.SetDataItemTemplateContent(c =>
             {
@@ -55,8 +55,9 @@
                 {
                     settingsBtn.Name = "btn" + c.KeyValue;
                     settingsBtn.Text = "Asignar";
-                    settingsBtn.ClientSideEvents.Click = "function(s, e) {buscar('"+1+"');}";
-                  
+                    //settingsBtn.ClientSideEvents.Click = "function(s, e) {buscar('"+ c.KeyValue + "');}";
+                    settingsBtn.ClientSideEvents.Click = "function(s, e) { e.customArgs['IdProducto_padre'] = '" + c.KeyValue+ "'; }";
+                    // settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdTipoPersona'] = $('#IdTipoPersona').val(); }";
 
                 }).Render();
             });
@@ -91,9 +92,9 @@
 
 
 <script type="text/javascript">
-    function buscar() {
-        GridViewPartial_distribucion_det.PerformCallback(1);
-        GridViewPartial_distribucion_det.UnselectRows();
+    function Mostrar()
+    {
+        GridViewPartial_distribucion_det.PerformCallback();
         $("#detalle_distr").modal("show");
     }
 </script>   

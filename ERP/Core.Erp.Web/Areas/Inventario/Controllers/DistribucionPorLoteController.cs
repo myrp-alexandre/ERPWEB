@@ -7,7 +7,7 @@ using Core.Erp.Info.Inventario;
 using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Helps;
 using DevExpress.Web.Mvc;
-
+using Core.Erp.Web.Helps;
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
     public class DistribucionPorLoteController : Controller
@@ -60,8 +60,13 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             List<in_Ing_Egr_Inven_distribucion_Info> model = bus_ing_inv.get_list_x_distribuir(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
             return PartialView("_GridViewPartial_por_distribuir", model);
         }
-        public ActionResult GridViewPartial_distribucion_det(decimal IdProducto_padre = 0)
+        public ActionResult GridViewPartial_distribucion_det()
         {
+            decimal IdProducto_padre = 0;
+            if(SessionFixed.IdProducto_padre_dist!=null)
+            IdProducto_padre =Convert.ToDecimal( SessionFixed.IdProducto_padre_dist.ToString());
+
+
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             List<in_Ing_Egr_Inven_distribucion_Info> model = new List<in_Ing_Egr_Inven_distribucion_Info>();
             cargar_combos_detalle(IdProducto_padre);
@@ -83,7 +88,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         public ActionResult Nuevo(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
         {
-            Session["in_Ing_Egr_Inven_distribucion_Info"] = null;
+            Session["list_distribuida"] = null;
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_parametro_Info i_param = bus_in_param.get_info(IdEmpresa);
             if (i_param == null)
