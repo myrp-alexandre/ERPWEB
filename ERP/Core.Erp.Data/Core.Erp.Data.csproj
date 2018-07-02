@@ -213,6 +213,9 @@
     <Compile Include="cp_pagos_sri.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
+    <Compile Include="cp_pais_sri.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
     <Compile Include="cp_parametros.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
@@ -231,11 +234,14 @@
     <Compile Include="cp_retencion_x_ct_cbtecble.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
+    <Compile Include="CuentasPorCobrar\cxc_cobro_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_cobro_det_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_nota_DebCre_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_orden_giro_pagos_sri_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_orden_pago_cancelaciones_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_orden_pago_estado_aprob_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_orden_pago_tipo_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_pais_sri_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_retencion_x_ct_cbtecble_Data.cs" />
     <Compile Include="cp_TipoDocumento.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
@@ -302,6 +308,12 @@
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="cxc_CatalogoTipo.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cxc_cobro.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cxc_cobro_det.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="cxc_cobro_tipo.cs">
@@ -670,6 +682,8 @@
     <Compile Include="Reportes\Caja\CAJ_002_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_ingresos_Data.cs" />
     <Compile Include="Reportes\Contabilidad\CONTA_002_Data.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_001_Data.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_001_diario_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_002_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_002_diario_Data.cs" />
@@ -1128,6 +1142,15 @@
     </Compile>
     <Compile Include="vwct_cbtecble_con_ctacble_acreedora.cs">
       <DependentUpon>Model_contabilidad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWCXC_001.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWCXC_001_diario.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwcxc_cobro.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="VWCXP_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>

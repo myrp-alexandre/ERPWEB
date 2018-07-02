@@ -9,6 +9,7 @@ namespace Core.Erp.Web.Helps
         string IdUsuario { get; set; }
         string NomEmpresa { get; set; }
         string IdProducto_padre_dist { get; set; }
+        string IdSucursal { get; set; }
     }
 
     public static class SessionFixed
@@ -40,10 +41,17 @@ namespace Core.Erp.Web.Helps
             get { return _sessionValueProvider.IdUsuario; }
             set { _sessionValueProvider.IdUsuario = value; }
         }
+
         public static string IdProducto_padre_dist
         {
             get { return _sessionValueProvider.IdProducto_padre_dist; }
             set { _sessionValueProvider.IdProducto_padre_dist = value; }
+
+        }
+        public static string IdSucursal
+        {
+            get { return _sessionValueProvider.IdSucursal; }
+            set { _sessionValueProvider.IdSucursal = value; }
         }
     }
 
@@ -56,6 +64,7 @@ namespace Core.Erp.Web.Helps
         private const string _IdProducto_padre_dist = "IdProducto_padre_dist";
 
         
+        private const string _IdSucursal = "IdSucursal";
         public string TipoPersona
         {
             get { return (string)HttpContext.Current.Session[_IdTipoPersona]; }
@@ -81,6 +90,11 @@ namespace Core.Erp.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_IdProducto_padre_dist]; }
             set { HttpContext.Current.Session[_IdProducto_padre_dist] = value; }
+        }
+        public string IdSucursal
+        {
+            get { return (string)HttpContext.Current.Session[_IdSucursal]; }
+            set { HttpContext.Current.Session[_IdSucursal] = value; }
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
         cp_codigo_SRI_x_CtaCble_Bus bus_codigo_sri = new cp_codigo_SRI_x_CtaCble_Bus();
         cp_pagos_sri_Bus bus_forma_paogo = new cp_pagos_sri_Bus();
-        tb_pais_Bus bus_pais = new tb_pais_Bus();
+        cp_pais_sri_Bus bus_pais = new cp_pais_sri_Bus();
         List<cp_cuotas_x_doc_det_Info> lst_detalle_cuotas = new List<cp_cuotas_x_doc_det_Info>();
         cp_cuotas_x_doc_det_Bus bus_detalle_cuotas = new cp_cuotas_x_doc_det_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
@@ -107,8 +107,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_forma_pago = bus_forma_paogo.get_list();
             ViewBag.lst_forma_pago = lst_forma_pago;
 
-            var lst_paises = bus_pais.get_list(false);
+            var lst_paises = bus_pais.get_list();
             ViewBag.lst_paises = lst_paises;
+
+            var lst_doc_tipo = bus_tipo_documento.get_list(false);
+            ViewBag.lst_doc_tipo = lst_doc_tipo;
 
             var lst_sucursales = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursales = lst_sucursales;
@@ -123,7 +126,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             }
 
-           
+
+            Dictionary<string, string> lst_pagos = new Dictionary<string, string>();
+            lst_pagos.Add("LOC", "LOCAL");
+            lst_pagos.Add("EXT", "EXTERIOR");
+            ViewBag.lst_pagos = lst_pagos;
 
         }
 
@@ -135,6 +142,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             {
                 co_FechaFactura = DateTime.Now,
                 co_FechaContabilizacion = DateTime.Now,
+                co_FechaFactura_vct = DateTime.Now,
+                PaisPago = "593",
                 info_cuota = new cp_cuotas_x_doc_Info
                 {
                     Fecha_inicio = DateTime.Now
@@ -524,8 +533,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             try
             {
-
-                HttpContext.Current.Session["ct_cbtecble_det_Info"] = null;
+                if (info_proveedor == null)
+                {
+                    return;
+                }
+                set_list(new List<ct_cbtecble_det_Info>());
 
                 // cuenta total
                 ct_cbtecble_det_Info cbtecble_det_total_Info = new ct_cbtecble_det_Info();

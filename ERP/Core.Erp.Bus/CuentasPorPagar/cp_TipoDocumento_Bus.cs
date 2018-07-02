@@ -33,7 +33,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 List<cp_TipoDocumento_Info> lista = new List<cp_TipoDocumento_Info>();
                 List<cp_TipoDocumento_Info> lista_retorna = new List<cp_TipoDocumento_Info>();
 
-                lista = odata.get_list();
+                lista = odata.get_list(false);
 
                 foreach (var item in lista)
                 {
@@ -99,11 +99,11 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
-        public List<cp_TipoDocumento_Info> get_list()
+        public List<cp_TipoDocumento_Info> get_list(bool mostrar_anulados)
         {
             try
             {
-                return odata.get_list();
+                return odata.get_list(mostrar_anulados);
             }
             catch (Exception)
             {

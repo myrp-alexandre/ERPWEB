@@ -22,13 +22,38 @@
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdCbteCble_Ogiro, new { @id = "IdCbteCble_Ogiro" })
 
-    <div class="row">
-        <div class="col-md-12">
+        <div class="row">
             <div class="col-md-6">
-                <div class="form-group">
-                    <label for="IdSucursal">Sucursal*</label>
-                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursales, "IdSucursal", "Su_descripcion"), new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="IdSucursal">Sucursal*</label>
+                        @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursales, "IdSucursal", "Su_descripcion"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="IdProveedor">Proveedor*</label>
+                        @Html.DevExpress().ComboBoxFor(q => q.IdProveedor, settings =>
+                   {
+                       settings.Name = "IdProveedor";
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                       settings.Properties.Columns.Add("IdProveedor", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                       settings.Properties.Columns.Add("info_persona.pe_nombreCompleto", "Proveedor").Width = System.Web.UI.WebControls.Unit.Percentage(60);
+                       settings.Properties.Columns.Add("info_persona.pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                       settings.Properties.CallbackPageSize = 10;
+                       //Campo ID
+                       settings.Properties.ValueField = "IdProveedor";
+                       settings.Properties.ValueType = typeof(decimal);
+                       settings.Properties.TextField = "info_persona.pe_nombreCompleto";
+                       //Boton para seleccionar ningun registro
+                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+                   }).BindList(ViewBag.lst_proveedores).GetHtml()
+                        @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
             <div class="col-md-2">
@@ -67,36 +92,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="IdProveedor">Proveedor*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdProveedor, settings =>
-               {
-                   settings.Name = "IdProveedor";
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                   settings.Properties.Columns.Add("IdProveedor", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("info_persona.pe_nombreCompleto", "Proveedor").Width = System.Web.UI.WebControls.Unit.Percentage(60);
-                   settings.Properties.Columns.Add("info_persona.pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                   settings.Properties.CallbackPageSize = 10;
-                   //Campo ID
-                   settings.Properties.ValueField = "IdProveedor";
-                   settings.Properties.ValueType = typeof(decimal);
-                   settings.Properties.TextField = "info_persona.pe_nombreCompleto";
-                   //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-               }).BindList(ViewBag.lst_proveedores).GetHtml()
-                    @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="co_plazo">Plazo*</label>
@@ -104,20 +99,19 @@
                     @Html.ValidationMessageFor(q => q.co_plazo, "", new { @class = "text-danger" })
                 </div>
             </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label for="co_FechaFactura_vct">Fecha vencimiento*</label>
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            @Html.TextBoxFor(q => q.co_FechaFactura_vct, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "co_FechaFactura_vct" })
-                            @Html.ValidationMessageFor(q => q.co_FechaFactura_vct, "", new { @class = "text-danger" })
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="co_FechaFactura_vct">Fecha vencimiento*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
                         </div>
+                        @Html.TextBoxFor(q => q.co_FechaFactura_vct, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "co_FechaFactura_vct" })
+                        @Html.ValidationMessageFor(q => q.co_FechaFactura_vct, "", new { @class = "text-danger" })
                     </div>
                 </div>
+            </div>
         </div>
-    </div>
 
     <div class="row">
         <div class="col-md-12">
@@ -128,7 +122,7 @@
                     @Html.ValidationMessageFor(q => q.IdOrden_giro_Tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdOrden_giro_Tipo">Tipo documento*</label>
                     @Html.DropDownListFor(q => q.IdOrden_giro_Tipo, new SelectList(ViewBag.lst_tipo_doc, "CodTipoDocumento", "Descripcion"), new { @class = "form-control", @id = "cmbTipoDocu" })
@@ -140,21 +134,21 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="co_serie">Serie*</label>
                     @Html.TextBoxFor(q => q.co_serie, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.co_serie, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="co_factura">Número documento*</label>
                     @Html.TextBoxFor(q => q.co_factura, new { @class = "form-control", @id = "co_factura" })
                     @Html.ValidationMessageFor(q => q.co_factura, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="co_factura">Número autorización*</label>
                     @Html.TextBoxFor(q => q.Num_Autorizacion, new { @class = "form-control" })
@@ -196,7 +190,7 @@
                     <div class="col-md-12">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="co_subtotal_iva">Base IVA</label>
+                                <label for="co_subtotal_iva">Subtotal IVA</label>
                                 @Html.TextBoxFor(q => q.co_subtotal_iva, new { @class = "form-control", @id = "co_subtotal_iva" })
                                 @Html.ValidationMessageFor(q => q.co_subtotal_iva, "", new { @class = "text-danger" })
                             </div>
@@ -204,9 +198,16 @@
 
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="co_subtotal_siniva">Base cero</label>
+                                <label for="co_subtotal_siniva">Subtotal cero</label>
                                 @Html.TextBoxFor(q => q.co_subtotal_siniva, new { @class = "form-control", @id = "co_subtotal_siniva" })
                                 @Html.ValidationMessageFor(q => q.co_subtotal_siniva, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="co_Por_iva">% Iva</label>
+                                @Html.TextBoxFor(q => q.co_Por_iva, new { @class = "form-control", @id = "co_valoriva", @readonly="readonly" })
+                                @Html.ValidationMessageFor(q => q.co_Por_iva, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -239,13 +240,12 @@
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_documento_modificado">
                 <div class="row">
-
                     <div class="col-md-12">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="IdOrden_giro_Tipo">Tipo documento*</label>
-                                @Html.DropDownListFor(q => q.IdOrden_giro_Tipo, new SelectList(ViewBag.lst_tipo_doc, "CodTipoDocumento", "Descripcion"), new { @class = "form-control", @id = "cmbTipoDocu_modif" })
-                                @Html.ValidationMessageFor(q => q.IdOrden_giro_Tipo, "", new { @class = "text-danger" })
+                                <label for="Tipodoc_a_Modificar">Tipo documento*</label>
+                                @Html.DropDownListFor(q => q.Tipodoc_a_Modificar, new SelectList(ViewBag.lst_doc_tipo, "CodTipoDocumento", "Descripcion"), new { @class = "form-control", @id = "Tipodoc_a_Modificar" })
+                                @Html.ValidationMessageFor(q => q.Tipodoc_a_Modificar, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -270,7 +270,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="num_docu_Modificar">Numero documento*</label>
-                                @Html.TextBoxFor(q => q.num_docu_Modificar, new { @class = "form-control" })
+                                @Html.TextBoxFor(q => q.num_docu_Modificar, new { @class = "form-control", @id= "num_docu_Modificar" })
                                 @Html.ValidationMessageFor(q => q.num_docu_Modificar, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -283,13 +283,12 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_informacion_pago">
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="info_forma_pago.codigo_pago_sri">Forma Pago*</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.info_forma_pago.codigo_pago_sri, settings =>
@@ -313,91 +312,42 @@
                                 @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
-                    </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="PagoLocExt">Pago local o exterior</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.PagoLocExt, setting =>
-                           {
-                               setting.Properties.Items.Add("LOC");
-                               setting.Properties.Items.Add("EXT");
-                               //setting.Properties.ValueField = "PagoLocExt";
-                               //setting.Properties.ValueType = typeof(string);
-                               //setting.Properties.TextField = "PagoLocExt";
-
-                           }).GetHtml()
+                                @Html.DropDownListFor(q => q.PagoLocExt, new SelectList(ViewBag.lst_pagos, "Key", "Value"), new { @class = "form-control" })
                                 @Html.ValidationMessageFor(q => q.PagoLocExt, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
-
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="PaisPago">País efectua el pago*</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.PaisPago, settings =>
-                                           {
-                                               settings.Name = "PaisPago";
-                                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                               settings.Properties.Columns.Add("IdPais", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                               settings.Properties.Columns.Add("Nombre", "País").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                               //Campo ID
-                                               settings.Properties.ValueField = "IdPais";
-                                               settings.Properties.ValueType = typeof(int);
-                                               settings.Properties.TextField = "Nombre";
-                                               //Boton para seleccionar ningun registro
-                                               settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-                                           }).BindList(ViewBag.lst_paises).GetHtml()
+                                @Html.DropDownListFor(q => q.PaisPago, new SelectList(ViewBag.lst_paises, "Codigo", "Pais"), new { @class = "form-control" })
                                 @Html.ValidationMessageFor(q => q.PaisPago, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="form-group">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="descuento_mensual"></label>
-                                @Html.DevExpress().CheckBoxFor(q => q.ConvenioTributacion, settings =>
-                           {
-                               settings.Name = "ConvenioTributacion";
-                               settings.Text = "¿Aplica convenio de doble tributación?";
-
-                           }).GetHtml()
+                                <div class="form-group">
+                                    <label for="ConvenioTributacion_bool">@Html.CheckBoxFor(q => q.ConvenioTributacion_bool) Aplica convenio de doble tributación en el pago</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="descuento_mensual"></label>
-                                @Html.DevExpress().CheckBoxFor(q => q.PagoSujetoRetencion, settings =>
-                           {
-                               settings.Name = "PagoSujetoRetencion";
-                               settings.Text = "¿Pago sujeto a retención en aplicación en la norma legal?";
-                           }).GetHtml()
+                                <div class="form-group">
+                                    <label for="PagoSujetoRetencion_bool">@Html.CheckBoxFor(q => q.PagoSujetoRetencion_bool) Pago sujeto a retención en aplicación en la norma legal</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-            </div>
+                </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle_cuotas">
                 <div class="row">
                     <div class="col-md-12">
@@ -475,6 +425,11 @@
         $('#Fecha_inicio').datepicker({
             autoclose: true
         })
+        
+        $('#co_FechaFactura_vct').datepicker({
+            autoclose: true
+        })
+
     });
     // funciones calcular total
     $("#co_FechaFactura").change(function ()
@@ -483,18 +438,20 @@
         $('#co_FechaContabilizacion').datepicker("setDate", moment(d).format("DD/MM/YYYY"));
 
     });
-    $("#co_subtotal_iva").keyup(function () {
+    $("#co_subtotal_iva").change(function () {
 
         actualizar_valores();
         armar_diario();
     });
-    $("#co_subtotal_siniva").keyup(function () {
+    $("#co_subtotal_siniva").change(function () {
 
         actualizar_valores();
         armar_diario();
     });
-
-
+    
+    $("#num_docu_Modificar").change(function () {
+        rellenar_ceros_izq();
+    });
     $("#co_factura").change(function () {
         rellenar_ceros_izquierda();
     });
@@ -548,7 +505,14 @@
 
         $("#co_factura").val(doc);
     }
+    
+    function rellenar_ceros_izq() {
+        var str = "" + Number($("#num_docu_Modificar").val());
+        var pad = "000000000";
+        var doc = pad.substring(0, pad.length - str.length) + str;
 
+        $("#num_docu_Modificar").val(doc);
+    }
     // calcular cuotas
     function get_cuotas()
     {
@@ -618,11 +582,6 @@
     // armar diario contable
 
     function armar_diario() {
-
-
-
-
-
             var datos = {
             IdProveedor :  IdProveedor.GetValue(),
             co_subtotal_iva : $("#co_subtotal_iva").val(),
