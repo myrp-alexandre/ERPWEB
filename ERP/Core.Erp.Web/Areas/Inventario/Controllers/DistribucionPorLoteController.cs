@@ -65,7 +65,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             List<in_Ing_Egr_Inven_distribucion_Info> model = new List<in_Ing_Egr_Inven_distribucion_Info>();
             cargar_combos_detalle(IdProducto_padre);
-            return PartialView("_GridViewPartial_por_distribuir", model);
+            return PartialView("_GridViewPartial_distribucion_det", model);
         }
 
         
@@ -136,9 +136,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             if (ModelState.IsValid)
                 List_in_Ing_Egr_Inven_det.AddRow(info_det);
             in_Ing_Egr_Inven_distribucion_Info model = new in_Ing_Egr_Inven_distribucion_Info();
-            model.lst_x_distribuir = List_in_Ing_Egr_Inven_det.get_list();
+            model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_inv_det", model);
+            return PartialView("_GridViewPartial_distribucion_det", model.lst_distribuido);
         }
 
         [HttpPost, ValidateInput(false)]
@@ -147,18 +147,18 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             if (ModelState.IsValid)
                 List_in_Ing_Egr_Inven_det.UpdateRow(info_det);
             in_Ing_Egr_Inven_distribucion_Info model = new in_Ing_Egr_Inven_distribucion_Info();
-            model.lst_x_distribuir = List_in_Ing_Egr_Inven_det.get_list();
+            model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_inv_det", model);
+            return PartialView("_GridViewPartial_distribucion_det", model.lst_distribuido);
         }
 
         public ActionResult EditingDelete(int secuencia_distribucion)
         {
             List_in_Ing_Egr_Inven_det.DeleteRow(secuencia_distribucion);
             in_Ing_Egr_Inven_distribucion_Info model = new in_Ing_Egr_Inven_distribucion_Info();
-            model.lst_x_distribuir = List_in_Ing_Egr_Inven_det.get_list();
+            model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_inv_det", model);
+            return PartialView("_GridViewPartial_distribucion_det", model.lst_distribuido);
         }
     }
 
@@ -167,18 +167,18 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
     {
         public List<in_Ing_Egr_Inven_distribucion_Info> get_list()
         {
-            if (HttpContext.Current.Session["in_Ing_Egr_Inven_distribucion_Info"] == null)
+            if (HttpContext.Current.Session["list_distribuida"] == null)
             {
                 List<in_Ing_Egr_Inven_distribucion_Info> list = new List<in_Ing_Egr_Inven_distribucion_Info>();
 
-                HttpContext.Current.Session["in_Ing_Egr_Inven_distribucion_Info"] = list;
+                HttpContext.Current.Session["list_distribuida"] = list;
             }
-            return (List<in_Ing_Egr_Inven_distribucion_Info>)HttpContext.Current.Session["in_Ing_Egr_Inven_distribucion_Info"];
+            return (List<in_Ing_Egr_Inven_distribucion_Info>)HttpContext.Current.Session["list_distribuida"];
         }
 
         public void set_list(List<in_Ing_Egr_Inven_distribucion_Info> list)
         {
-            HttpContext.Current.Session["in_Ing_Egr_Inven_distribucion_Info"] = list;
+            HttpContext.Current.Session["list_distribuida"] = list;
         }
 
         public void AddRow(in_Ing_Egr_Inven_distribucion_Info info_det)
@@ -192,7 +192,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
             list.Add(info_det);
         }
-
+        
         public void UpdateRow(in_Ing_Egr_Inven_distribucion_Info info_det)
         {
             in_Ing_Egr_Inven_distribucion_Info edited_info = get_list().Where(m => m.secuencia_distribucion == info_det.secuencia_distribucion).First();

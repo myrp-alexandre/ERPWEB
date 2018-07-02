@@ -1,20 +1,26 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "_GridViewPartial_distribucion_det";
-        settings.CallbackRouteValues = new { Controller = "DistribucionPorLote", Action = "_GridViewPartial_distribucion_det" };
+        settings.Name = "GridViewPartial_distribucion_det";
+        settings.CallbackRouteValues = new { Controller = "DistribucionPorLote", Action = "GridViewPartial_distribucion_det" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdProducto";
+        settings.KeyFieldName = "secuencia_distribucion";
+
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "DistribucionPorLote", Action = "EditingAddNew", Area = "Inventario" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "DistribucionPorLote", Action = "EditingUpdate", Area = "Inventario" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "DistribucionPorLote", Action = "EditingDelete", Area = "Inventario" };
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
 
         settings.SettingsPager.Visible = true;
-        settings.Settings.ShowGroupPanel = false;
-        settings.Settings.ShowFilterRow = true;
         settings.SettingsBehavior.AllowSelectByRowClick = false;
 
-        //Configuración checkbox
-        settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowSelectCheckbox = true;
-        settings.CommandColumn.SelectAllCheckboxMode = GridViewSelectAllCheckBoxMode.AllPages;
+        
 
         //Configuración click derecho
         settings.SettingsContextMenu.Enabled = true;
@@ -66,10 +72,7 @@
                 sp.Width = Unit.Percentage(100);
             });
         });
-        settings.Columns.Add("cantidad", "Cantidad").Width = Unit.Percentage(20);
-        settings.Columns.Add("lote_numero", "código").Width = Unit.Percentage(20);
-
-        
+        settings.Columns.Add("dm_cantidad", "Cantidad").Width = Unit.Percentage(20);
     });
 }
 @grid.Bind(Model).GetHtml()
