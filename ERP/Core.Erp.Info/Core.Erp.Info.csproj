@@ -78,6 +78,8 @@
     <Compile Include="Contabilidad\ct_punto_cargo_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_CatalogoTipo_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_Catalogo_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_cobro_det_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_cobro_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_motivo_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_Parametro_Info.cs" />
