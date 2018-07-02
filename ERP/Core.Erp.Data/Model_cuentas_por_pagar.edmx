@@ -370,6 +370,13 @@
           <Property Name="formas_pago_sri" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="codigo_pago_sri" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
+        <EntityType Name="cp_pais_sri">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Pais" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="cp_parametros">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1086,6 +1093,18 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_cp_orden_giro_cp_pais_sri">
+          <End Role="cp_pais_sri" Type="Self.cp_pais_sri" Multiplicity="0..1" />
+          <End Role="cp_orden_giro" Type="Self.cp_orden_giro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_pais_sri">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="cp_orden_giro">
+              <PropertyRef Name="PaisPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_cp_orden_giro_cp_proveedor">
           <End Role="cp_proveedor" Type="Self.cp_proveedor" Multiplicity="1" />
           <End Role="cp_orden_giro" Type="Self.cp_orden_giro" Multiplicity="*" />
@@ -1356,6 +1375,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' does not
           <EntitySet Name="cp_orden_pago_tipo" EntityType="Self.cp_orden_pago_tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cp_orden_pago_tipo_x_empresa" EntityType="Self.cp_orden_pago_tipo_x_empresa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cp_pagos_sri" EntityType="Self.cp_pagos_sri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cp_pais_sri" EntityType="Self.cp_pais_sri" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cp_parametros" EntityType="Self.cp_parametros" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cp_proveedor" EntityType="Self.cp_proveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cp_proveedor_clase" EntityType="Self.cp_proveedor_clase" Schema="dbo" store:Type="Tables" />
@@ -1652,6 +1672,10 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' does not
             <End Role="cp_codigo_SRI" EntitySet="cp_codigo_SRI" />
             <End Role="cp_orden_giro" EntitySet="cp_orden_giro" />
           </AssociationSet>
+          <AssociationSet Name="FK_cp_orden_giro_cp_pais_sri" Association="Self.FK_cp_orden_giro_cp_pais_sri">
+            <End Role="cp_pais_sri" EntitySet="cp_pais_sri" />
+            <End Role="cp_orden_giro" EntitySet="cp_orden_giro" />
+          </AssociationSet>
           <AssociationSet Name="FK_cp_orden_giro_cp_proveedor" Association="Self.FK_cp_orden_giro_cp_proveedor">
             <End Role="cp_proveedor" EntitySet="cp_proveedor" />
             <End Role="cp_orden_giro" EntitySet="cp_orden_giro" />
@@ -1882,6 +1906,11 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' does not
           <AssociationSet Name="FK_cp_orden_giro_pagos_sri_cp_pagos_sri" Association="Model_cuentas_por_pagar.FK_cp_orden_giro_pagos_sri_cp_pagos_sri">
             <End Role="cp_pagos_sri" EntitySet="cp_pagos_sri" />
             <End Role="cp_orden_giro_pagos_sri" EntitySet="cp_orden_giro_pagos_sri" />
+          </AssociationSet>
+          <EntitySet Name="cp_pais_sri" EntityType="Model_cuentas_por_pagar.cp_pais_sri" />
+          <AssociationSet Name="FK_cp_orden_giro_cp_pais_sri" Association="Model_cuentas_por_pagar.FK_cp_orden_giro_cp_pais_sri">
+            <End Role="cp_pais_sri" EntitySet="cp_pais_sri" />
+            <End Role="cp_orden_giro" EntitySet="cp_orden_giro" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="cp_codigo_SRI_tipo">
@@ -2192,6 +2221,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' does not
           <NavigationProperty Name="cp_proveedor" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_cp_proveedor" FromRole="cp_orden_giro" ToRole="cp_proveedor" />
           <NavigationProperty Name="cp_retencion" Relationship="Model_cuentas_por_pagar.FK_cp_retencion_cp_orden_giro" FromRole="cp_orden_giro" ToRole="cp_retencion" />
           <NavigationProperty Name="cp_orden_giro_pagos_sri" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_pagos_sri_cp_orden_giro" FromRole="cp_orden_giro" ToRole="cp_orden_giro_pagos_sri" />
+          <NavigationProperty Name="cp_pais_sri" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_cp_pais_sri" FromRole="cp_orden_giro" ToRole="cp_pais_sri" />
         </EntityType>
         <Association Name="FK_cp_orden_giro_cp_codigo_SRI">
           <End Type="Model_cuentas_por_pagar.cp_codigo_SRI" Role="cp_codigo_SRI" Multiplicity="0..1" />
@@ -3285,6 +3315,26 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="cp_pais_sri">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cp_orden_giro" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_cp_pais_sri" FromRole="cp_pais_sri" ToRole="cp_orden_giro" />
+        </EntityType>
+        <Association Name="FK_cp_orden_giro_cp_pais_sri">
+          <End Type="Model_cuentas_por_pagar.cp_pais_sri" Role="cp_pais_sri" Multiplicity="0..1" />
+          <End Type="Model_cuentas_por_pagar.cp_orden_giro" Role="cp_orden_giro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_pais_sri">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="cp_orden_giro">
+              <PropertyRef Name="PaisPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4149,6 +4199,14 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' does not
                 <ScalarProperty Name="IdTipoCbte_Ogiro" ColumnName="IdTipoCbte_Ogiro" />
                 <ScalarProperty Name="IdCbteCble_Ogiro" ColumnName="IdCbteCble_Ogiro" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cp_pais_sri">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_pais_sri">
+              <MappingFragment StoreEntitySet="cp_pais_sri">
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

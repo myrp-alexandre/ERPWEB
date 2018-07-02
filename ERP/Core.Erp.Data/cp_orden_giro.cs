@@ -99,5 +99,6 @@ namespace Core.Erp.Data
         public virtual ICollection<cp_retencion> cp_retencion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cp_orden_giro_pagos_sri> cp_orden_giro_pagos_sri { get; set; }
+        public virtual cp_pais_sri cp_pais_sri { get; set; }
     }
 }

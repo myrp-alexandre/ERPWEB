@@ -63,6 +63,8 @@
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_orden_giro_pagos_sri" Width="1.5" PointX="21.125" PointY="13.375" />
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_giro_pagos_sri_cp_orden_giro" />
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_giro_pagos_sri_cp_pagos_sri" />
+        <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_pais_sri" Width="1.5" PointX="15.375" PointY="16.875" />
+        <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_giro_cp_pais_sri" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
