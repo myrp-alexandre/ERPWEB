@@ -30,5 +30,7 @@ namespace Core.Erp.Data
         public virtual DbSet<cxc_cobro_tipo> cxc_cobro_tipo { get; set; }
         public virtual DbSet<cxc_cobro_tipo_motivo> cxc_cobro_tipo_motivo { get; set; }
         public virtual DbSet<cxc_Parametro> cxc_Parametro { get; set; }
+        public virtual DbSet<cxc_cobro> cxc_cobro { get; set; }
+        public virtual DbSet<cxc_cobro_det> cxc_cobro_det { get; set; }
     }
 }
