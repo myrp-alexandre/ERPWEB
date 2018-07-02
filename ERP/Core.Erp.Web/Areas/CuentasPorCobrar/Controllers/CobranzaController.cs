@@ -9,7 +9,6 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 {
     public class CobranzaController : Controller
     {
-        // GET: CuentasPorCobrar/Cobranza
         public ActionResult Index()
         {
             return View();
