@@ -99,6 +99,7 @@
     <Compile Include="CuentasPorPagar\cp_orden_pago_tipo_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_orden_pago_tipo_x_empresa_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_pagos_sri_Info.cs" />
+    <Compile Include="CuentasPorPagar\cp_pais_sri_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_parametros_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_proveedor_clase_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_proveedor_Info.cs" />
