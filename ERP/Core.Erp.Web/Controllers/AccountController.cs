@@ -13,6 +13,8 @@ using Core.Erp.Info.SeguridadAcceso;
 using Core.Erp.Bus.SeguridadAcceso;
 using Core.Erp.Bus.General;
 using Core.Erp.Web.Helps;
+using Core.Erp.Info.General;
+using System.Collections.Generic;
 
 namespace Core.Erp.Web.Controllers
 {
@@ -20,7 +22,8 @@ namespace Core.Erp.Web.Controllers
     {
         seg_Usuario_x_Empresa_Bus bus_usuario_x_empresa = new seg_Usuario_x_Empresa_Bus();
         seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
-        tb_empresa_Bus bus_empresa = new tb_empresa_Bus();        
+        tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();       
         [AllowAnonymous]
         public ActionResult Login()
         {            
@@ -49,7 +52,8 @@ namespace Core.Erp.Web.Controllers
                 return RedirectToAction("Login");
 
             var lst_empresa = bus_empresa.get_list(true);
-
+            var lst_sucursal = new List<tb_sucursal_Info>();
+            ViewBag.lst_sucursal = lst_sucursal;
             lst = (from q in lst
                    join e in lst_empresa
                    on q.IdEmpresa equals e.IdEmpresa
@@ -71,7 +75,11 @@ namespace Core.Erp.Web.Controllers
         {
             var info_empresa = bus_empresa.get_info(model.IdEmpresa);
             if (info_empresa == null)
+            {
+                var lst_sucursal = new List<tb_sucursal_Info>();
+                ViewBag.lst_sucursal = lst_sucursal;
                 return View(model);
+            }
             Session["IdUsuario"] = model.IdUsuario;            
             Session["IdEmpresa"] = model.IdEmpresa;
             Session["nom_empresa"] = info_empresa.em_nombre;

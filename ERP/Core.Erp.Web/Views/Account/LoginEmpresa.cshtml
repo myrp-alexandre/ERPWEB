@@ -50,6 +50,10 @@
                     @Html.DropDownListFor(q=> q.IdEmpresa,new SelectList(ViewBag.lst_empresas,"IdEmpresa", "em_nombre"),new { @class = "form-control"})
                 </div>
 
+                <div class="form-group has-feedback">
+                     @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                </div>
+
                 <div class="row">
                     <div class="col-md-6">
                         <button type="submit" class="btn btn-primary btn-block btn-flat">Aceptar</button>
@@ -67,3 +71,7 @@
     <script src="~/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+<script type="text/javascript">
+
+</script>

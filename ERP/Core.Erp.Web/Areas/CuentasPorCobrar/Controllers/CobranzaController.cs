@@ -1,4 +1,7 @@
-﻿using DevExpress.Web.Mvc;
+﻿using Core.Erp.Bus.General;
+using Core.Erp.Info.Helps;
+using Core.Erp.Web.Helps;
+using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +12,27 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 {
     public class CobranzaController : Controller
     {
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         public ActionResult Index()
         {
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+            cargar_combos();
             return View();
+        }
+        private void cargar_combos()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+        }
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            cargar_combos();
+            return View(model);
         }
 
         public ActionResult Nuevo()
