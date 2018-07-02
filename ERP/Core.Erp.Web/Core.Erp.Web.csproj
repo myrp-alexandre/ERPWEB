@@ -8698,6 +8698,12 @@
     <EmbeddedResource Include="Reportes\Contabilidad\CONTA_002_Rpt.resx">
       <DependentUpon>CONTA_002_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_001_diario_Rpt.resx">
+      <DependentUpon>CXC_001_diario_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_001_Rpt.resx">
+      <DependentUpon>CXC_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorPagar\CXP_001_Rpt.resx">
       <DependentUpon>CXP_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
