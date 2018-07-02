@@ -2,6 +2,11 @@
 
 @{
     ViewBag.Title = "Nuevo prestamo";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">

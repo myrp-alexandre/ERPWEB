@@ -2,6 +2,11 @@
 
 @{
     ViewBag.Title = "Anular périodo";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using (Html.BeginForm("Anular", "Periodo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {

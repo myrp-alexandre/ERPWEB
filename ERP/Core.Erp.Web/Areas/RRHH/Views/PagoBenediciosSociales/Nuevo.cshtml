@@ -1,6 +1,11 @@
 ﻿@model Core.Erp.Info.RRHH.ro_rol_Info
 @{
     ViewBag.Title = "Nuevo";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using (Html.BeginForm("Nuevo", "PagoBenediciosSociales", FormMethod.Post, new { @class = "form", @role = "form" }))
 {

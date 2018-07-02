@@ -3,6 +3,11 @@
 
 @{
     ViewBag.Title = "Modificar";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using (Html.BeginForm("Modificar", "ParticipacionUtilidad", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
