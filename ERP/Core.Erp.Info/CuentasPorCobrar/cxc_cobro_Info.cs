@@ -4,6 +4,8 @@ namespace Core.Erp.Info.CuentasPorCobrar
 {
     public class cxc_cobro_Info
     {
+        public string Su_Descripcion;
+
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public decimal IdCobro { get; set; }
@@ -36,5 +38,7 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public int IdCaja { get; set; }
         public string MotiAnula { get; set; }
         public Nullable<int> IdTipoNotaCredito { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public string tc_descripcion { get; set; }
     }
 }
