@@ -95,5 +95,10 @@ namespace Core.Erp.Info.CuentasPorPagar
             info_proveedor = new cp_proveedor_Info();
             info_forma_pago = new cp_orden_giro_pagos_sri_Info();
         }
+
+        //campos que no existen en la tabla
+
+        public bool ConvenioTributacion_bool { get; set; }
+        public bool PagoSujetoRetencion_bool { get; set; }
     }
 }

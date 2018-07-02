@@ -333,25 +333,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="form-group">
-                                    <label for="descuento_mensual"></label>
-                                    @Html.DevExpress().CheckBoxFor(q => q.ConvenioTributacion, settings =>
-                               {
-                                   settings.Name = "ConvenioTributacion";
-                                   settings.Text = "¿Aplica convenio de doble tributación?";
-
-                               }).GetHtml()
+                                    <label for="ConvenioTributacion_bool">@Html.CheckBoxFor(q => q.ConvenioTributacion_bool) Aplica convenio de doble tributación en el pago</label>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="form-group">
-                                    <label for="descuento_mensual"></label>
-                                    @Html.DevExpress().CheckBoxFor(q => q.PagoSujetoRetencion, settings =>
-                               {
-                                   settings.Name = "PagoSujetoRetencion";
-                                   settings.Text = "¿Pago sujeto a retención en aplicación en la norma legal?";
-                               }).GetHtml()
+                                    <label for="PagoSujetoRetencion_bool">@Html.CheckBoxFor(q => q.PagoSujetoRetencion_bool) Pago sujeto a retención en aplicación en la norma legal</label>
                                 </div>
                             </div>
                         </div>

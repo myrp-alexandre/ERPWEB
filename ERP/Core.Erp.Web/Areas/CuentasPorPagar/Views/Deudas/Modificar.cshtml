@@ -288,78 +288,67 @@
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_informacion_pago">
 
-               <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="info_forma_pago.codigo_pago_sri">Forma Pago*</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.info_forma_pago.codigo_pago_sri, settings =>
-                               {
-                                   settings.Name = "info_forma_pago.codigo_pago_sri";
-                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                   settings.Properties.Columns.Add("codigo_pago_sri", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                   settings.Properties.Columns.Add("formas_pago_sri", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-
-
-                                   //Campo ID
-                                   settings.Properties.ValueField = "codigo_pago_sri";
-                                   settings.Properties.ValueType = typeof(string);
-                                   settings.Properties.TextField = "formas_pago_sri";
-                                   //Boton para seleccionar ningun registro
-                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-                               }).BindList(ViewBag.lst_forma_pago).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="PagoLocExt">Pago local o exterior</label>
-                            @Html.DropDownListFor(q => q.PagoLocExt, new SelectList(ViewBag.lst_pagos, "Key", "Value"), new { @class = "form-control" })
-                            @Html.ValidationMessageFor(q => q.PagoLocExt, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="PaisPago">País efectua el pago*</label>
-                            @Html.DropDownListFor(q => q.PaisPago, new SelectList(ViewBag.lst_paises, "Codigo", "Pais"), new { @class = "form-control" })
-                            @Html.ValidationMessageFor(q => q.PaisPago, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-6">
-                        <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="descuento_mensual"></label>
-                                @Html.DevExpress().CheckBoxFor(q => q.ConvenioTributacion, settings =>
-                           {
-                               settings.Name = "ConvenioTributacion";
-                               settings.Text = "¿Aplica convenio de doble tributación?";
+                                <label for="info_forma_pago.codigo_pago_sri">Forma Pago*</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.info_forma_pago.codigo_pago_sri, settings =>
+                                   {
+                                       settings.Name = "info_forma_pago.codigo_pago_sri";
+                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                       settings.Properties.Columns.Add("codigo_pago_sri", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                       settings.Properties.Columns.Add("formas_pago_sri", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
 
-                           }).GetHtml()
+
+                                       //Campo ID
+                                       settings.Properties.ValueField = "codigo_pago_sri";
+                                       settings.Properties.ValueType = typeof(string);
+                                       settings.Properties.TextField = "formas_pago_sri";
+                                       //Boton para seleccionar ningun registro
+                                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+                                   }).BindList(ViewBag.lst_forma_pago).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="PagoLocExt">Pago local o exterior</label>
+                                @Html.DropDownListFor(q => q.PagoLocExt, new SelectList(ViewBag.lst_pagos, "Key", "Value"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.PagoLocExt, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="PaisPago">País efectua el pago*</label>
+                                @Html.DropDownListFor(q => q.PaisPago, new SelectList(ViewBag.lst_paises, "Codigo", "Pais"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.PaisPago, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="descuento_mensual"></label>
-                                @Html.DevExpress().CheckBoxFor(q => q.PagoSujetoRetencion, settings =>
-                           {
-                               settings.Name = "PagoSujetoRetencion";
-                               settings.Text = "¿Pago sujeto a retención en aplicación en la norma legal?";
-                           }).GetHtml()
+                                <div class="form-group">
+                                    <label for="ConvenioTributacion_bool">@Html.CheckBoxFor(q => q.ConvenioTributacion_bool) Aplica convenio de doble tributación en el pago</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="PagoSujetoRetencion_bool">@Html.CheckBoxFor(q => q.PagoSujetoRetencion_bool) Pago sujeto a retención en aplicación en la norma legal</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle_cuotas">
                 <div class="row">
                     <div class="col-md-12">
