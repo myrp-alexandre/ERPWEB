@@ -46,12 +46,12 @@ namespace Core.Erp.Data
         public Nullable<decimal> IdCbteCble_mov_caj { get; set; }
     
         public virtual caj_Caja caj_Caja { get; set; }
-        public virtual caj_Caja_Movimiento caj_Caja_Movimiento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cp_conciliacion_Caja_det> cp_conciliacion_Caja_det { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cp_conciliacion_Caja_det_Ing_Caja> cp_conciliacion_Caja_det_Ing_Caja { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cp_conciliacion_Caja_det_x_ValeCaja> cp_conciliacion_Caja_det_x_ValeCaja { get; set; }
+        public virtual caj_Caja_Movimiento caj_Caja_Movimiento { get; set; }
     }
 }

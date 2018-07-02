@@ -42,8 +42,12 @@ namespace Core.Erp.Info.Caja
         public decimal IdEntidad { get; set; }
         public decimal IdPersona { get; set; }
 
-        //Campos que no existen en la tabla
-        
+        #region Campos que no existen en la tabla
+        public string ca_Descripcion { get; set; }
+        public string tm_descripcion { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        #endregion
+
         public caj_Caja_Movimiento_det_Info info_caj_Caja_Movimiento_det { get; set; }
         public ct_cbtecble_Info info_ct_cbtecble { get; set; }
         public List<ct_cbtecble_det_Info> lst_ct_cbtecble_det { get; set; }

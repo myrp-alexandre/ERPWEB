@@ -20,10 +20,11 @@ namespace Core.Erp.Data.Caja
                 using (Entities_caja Context = new Entities_caja())
                 {
                     if (mostrar_anulados)
-                        Lista = (from q in Context.caj_Caja_Movimiento
+                        Lista = (from q in Context.vwcaj_Caja_Movimiento
                                  where q.IdEmpresa == IdEmpresa
                                  && q.cm_Signo == cm_signo
                                  && fecha_ini <= q.cm_fecha && q.cm_fecha <= fecha_fin
+                                 orderby q.IdCbteCble descending
                                  select new caj_Caja_Movimiento_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
@@ -32,17 +33,20 @@ namespace Core.Erp.Data.Caja
                                      IdCbteCble = q.IdCbteCble,
                                      cm_observacion = q.cm_observacion,
                                      cm_Signo = q.cm_Signo,
-                                     CodMoviCaja = q.CodMoviCaja,
                                      Estado = q.Estado,
-                                     cm_fecha = q.cm_fecha
-                                   
+                                     cm_fecha = q.cm_fecha,
+                                     ca_Descripcion = q.ca_Descripcion,
+                                     pe_nombreCompleto = q.pe_nombreCompleto,
+                                     tm_descripcion = q.tm_descripcion,
+                                     cm_valor = q.cm_valor
                                  }).ToList();
                     else
-                        Lista = (from q in Context.caj_Caja_Movimiento
+                        Lista = (from q in Context.vwcaj_Caja_Movimiento
                                  where q.IdEmpresa == IdEmpresa
                                  && q.cm_Signo == cm_signo
                                  && fecha_ini <= q.cm_fecha && q.cm_fecha <= fecha_fin
                                  && q.Estado =="A"
+                                 orderby q.IdCbteCble descending
                                  select new caj_Caja_Movimiento_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
@@ -51,10 +55,12 @@ namespace Core.Erp.Data.Caja
                                      IdCbteCble = q.IdCbteCble,
                                      cm_observacion = q.cm_observacion,
                                      cm_Signo = q.cm_Signo,
-                                     CodMoviCaja = q.CodMoviCaja,
                                      Estado = q.Estado,
-                                     cm_fecha = q.cm_fecha
-
+                                     cm_fecha = q.cm_fecha,
+                                     ca_Descripcion = q.ca_Descripcion,
+                                     pe_nombreCompleto = q.pe_nombreCompleto,
+                                     tm_descripcion = q.tm_descripcion,
+                                     cm_valor = q.cm_valor
                                  }).ToList();
                 }
                 return Lista;

@@ -76,7 +76,7 @@
             c.Width = System.Web.UI.WebControls.Unit.Pixel(150);
         });
         settings.Columns.Add("IdCbteCble", "#Cbte").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add("IdTipocbte", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("ca_Descripcion", "Caja").Width = System.Web.UI.WebControls.Unit.Percentage(20);
         settings.Columns.Add(column =>
         {
             column.FieldName = "cm_fecha";
@@ -84,9 +84,24 @@
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
         });
-        settings.Columns.Add("CodMoviCaja", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-        settings.Columns.Add("cm_observacion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(40);
-        settings.Columns.Add("Estado", "Estado").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("pe_nombreCompleto", "Beneficiario").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+        settings.Columns.Add("cm_observacion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "cm_valor";
+            column.Caption = "Valor";
+            column.PropertiesEdit.DisplayFormatString = "{0:N2}";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        });
+        settings.Columns.Add("Estado", "Estado").Width = System.Web.UI.WebControls.Unit.Percentage(5);
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CAJ_001", "CajaReportes", new { Area = "Reportes", IdTipoCbte = DataBinder.Eval(c.DataItem, "IdTipoCbte").ToString(), IdCbteCble = DataBinder.Eval(c.DataItem, "IdCbteCble").ToString() }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

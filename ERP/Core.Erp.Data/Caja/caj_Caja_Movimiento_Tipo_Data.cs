@@ -19,6 +19,7 @@ namespace Core.Erp.Data.Caja
                     if(mostrar_anulados)
                     Lista = (from q in Context.caj_Caja_Movimiento_Tipo
                              where q.IdEmpresa == IdEmpresa
+                             orderby q.tm_Signo
                              select new caj_Caja_Movimiento_Tipo_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -34,6 +35,7 @@ namespace Core.Erp.Data.Caja
                         Lista = (from q in Context.caj_Caja_Movimiento_Tipo
                                  where q.IdEmpresa == IdEmpresa
                                  && q.Estado == "A"
+                                 orderby q.tm_Signo
                                  select new caj_Caja_Movimiento_Tipo_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,

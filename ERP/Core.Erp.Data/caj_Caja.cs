@@ -17,8 +17,8 @@ namespace Core.Erp.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public caj_Caja()
         {
-            this.caj_Caja_Movimiento = new HashSet<caj_Caja_Movimiento>();
             this.cp_conciliacion_Caja = new HashSet<cp_conciliacion_Caja>();
+            this.caj_Caja_Movimiento = new HashSet<caj_Caja_Movimiento>();
         }
     
         public int IdEmpresa { get; set; }
@@ -40,8 +40,8 @@ namespace Core.Erp.Data
         public string MotivoAnu { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<caj_Caja_Movimiento> caj_Caja_Movimiento { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cp_conciliacion_Caja> cp_conciliacion_Caja { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<caj_Caja_Movimiento> caj_Caja_Movimiento { get; set; }
     }
 }

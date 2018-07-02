@@ -24,6 +24,7 @@ namespace Core.Erp.Data.Caja
                     Lista = (from q in Context.cp_conciliacion_Caja
                              where q.IdEmpresa == IdEmpresa
                              && Fecha_ini <= q.Fecha && q.Fecha <= Fecha_fin
+                             orderby q.IdConciliacion_Caja descending
                              select new cp_conciliacion_Caja_Info
                              {
                                  IdConciliacion_Caja = q.IdConciliacion_Caja,
