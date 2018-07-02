@@ -8,7 +8,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Modificar", "TransferenciasInventario", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Anular", "TransferenciasInventario", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdTransferencia)
@@ -129,7 +129,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    @*@Html.Action("GridViewPartial_inv_det")*@
+                   @Html.Action("GridViewPartial_transferencias_det")
                 </div>
             </div>
         </div>

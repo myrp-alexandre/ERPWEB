@@ -178,13 +178,14 @@ namespace Core.Erp.Data.Inventario
         {
             try
             {
+                string sql = "Delete in_Ing_Egr_Inven_det where IdEmpresa = '" + IdEmpresa + "'and IdSucursal = '" + IdSucursal + "' and IdMovi_inven_tipo = '" + IdMovi_inven_tipo + "' and IdNumMovi = " + IdNumMovi;
                 using (Entities_inventario Context = new Entities_inventario())
                 {
-                    Context.Database.ExecuteSqlCommand("Delete in_Ing_Egr_Inven_det where IdEmpresa = '" + IdEmpresa + "'and IdSucursal = '" + IdSucursal + "' and IdMovi_inven_tipo = " + IdMovi_inven_tipo + "' and IdNumMovi = " + IdNumMovi);
+                    Context.Database.ExecuteSqlCommand(sql);
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;

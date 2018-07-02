@@ -143,6 +143,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost]
         public ActionResult Anular(in_transferencia_Info model)
         {
+            model.list_detalle = List_in_transferencia_det.get_list();
             string mensaje = bus_trnferencia.validar(model);
             if (mensaje != "")
             {

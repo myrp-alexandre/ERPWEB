@@ -130,7 +130,7 @@ namespace Core.Erp.Data.Inventario
 
 
                     Entity.tr_Observacion = info.tr_Observacion;
-                    Entity.Codigo = info.Codigo;
+                    Entity.Codigo = info.Codigo==null?"":info.Codigo;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
                     foreach (var item in info.list_detalle)
@@ -215,7 +215,7 @@ namespace Core.Erp.Data.Inventario
                     && q.IdTransferencia == info.IdTransferencia);
                     Entity.tr_userAnulo = info.tr_userAnulo;
                     Entity.tr_fechaAnulacion = DateTime.Now;
-                    Entity.Estado = "A";
+                    Entity.Estado = "I";
                    
                     contex.SaveChanges();
 
