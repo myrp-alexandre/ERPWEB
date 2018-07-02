@@ -63,6 +63,23 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                 mensaje = "Existen detalles con valor 0 en el debe o haber, por favor verifique";
                 return false;
             }
+
+            var persona = bus_persona.get_info(i_validar.IdEmpresa, i_validar.IdTipo_Persona, i_validar.IdEntidad);
+            if (persona == null)
+            {
+                msg = "La persona seleccionada no corresponde al tipo asignado";
+                return false;
+            }
+            i_validar.IdPersona = persona.IdPersona;
+
+            if (Math.Round(i_validar.info_caj_Caja_Movimiento_det.cr_Valor,2,MidpointRounding.AwayFromZero) != Math.Round(i_validar.lst_ct_cbtecble_det.Sum(q=>q.dc_Valor_debe),2,MidpointRounding.AwayFromZero))
+            {
+                msg = "Los valores ingresados no concuerdan con el valor del diario";
+                return false;
+            }
+
+            i_validar.cm_valor = i_validar.info_caj_Caja_Movimiento_det.cr_Valor;
+
             return true;
         }
 
