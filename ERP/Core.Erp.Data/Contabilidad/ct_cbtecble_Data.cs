@@ -326,7 +326,8 @@ namespace Core.Erp.Data.Contabilidad
                     IdTipoCbte = IdTipoCbte,
                     IdCbteCble = IdCbteCble,
                     cb_Observacion = Observacion,
-                    cb_Fecha = Fecha
+                    cb_Fecha = Fecha,
+                    cb_Valor = lista.Sum(q=>q.dc_Valor_debe)
                 };
                 info.lst_ct_cbtecble_det = lista;
                 info.lst_ct_cbtecble_det.ForEach(q => { q.IdEmpresa = IdEmpresa; q.IdTipoCbte = IdTipoCbte; q.IdCbteCble = IdCbteCble; });

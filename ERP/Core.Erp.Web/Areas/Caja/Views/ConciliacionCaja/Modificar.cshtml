@@ -383,36 +383,30 @@
                 <div class="form-group">
                     <label for="Saldo_cont_al_periodo">Saldo contable anterior</label>
                     @Html.TextBoxFor(q => q.Saldo_cont_al_periodo, new { @id = "Saldo_cont_al_periodoR", @class = "form-control", @readonly = "readonly" })
-                    @Html.ValidationMessageFor(q => q.Saldo_cont_al_periodo, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <label for="Ingresos">Ingresos</label>
                     @Html.TextBoxFor(q => q.Ingresos, new { @id = "IngresosR", @class = "form-control", @readonly = "readonly" })
-                    @Html.ValidationMessageFor(q => q.Ingresos, "", new { @class = "text-danger" })
                 </div>
                 <hr />
                 <div class="form-group">
                     <label for="Total_Ing">Ingresos</label>
                     @Html.TextBoxFor(q => q.Total_Ing, new { @id = "Total_IngR", @class = "form-control", @readonly = "readonly" })
-                    @Html.ValidationMessageFor(q => q.Total_Ing, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="Total_fondo">Fondo</label>
                     @Html.TextBoxFor(q => q.Total_fondo, new { @id = "Total_fondoR", @class = "form-control", @readonly = "readonly" })
-                    @Html.ValidationMessageFor(q => q.Total_fondo, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <label for="Total_fact_vale">Total fact. y vales</label>
                     @Html.TextBoxFor(q => q.Total_fact_vale, new { @id = "Total_fact_valeR", @class = "form-control", @readonly = "readonly" })
-                    @Html.ValidationMessageFor(q => q.Total_fact_vale, "", new { @class = "text-danger" })
                 </div>
                 <hr />
                 <div class="form-group">
                     <label for="Dif_x_pagar_o_cobrar">Diferencia</label>
                     @Html.TextBoxFor(q => q.Dif_x_pagar_o_cobrar, new { @id = "Dif_x_pagar_o_cobrarR", @class = "form-control", @readonly = "readonly" })
-                    @Html.ValidationMessageFor(q => q.Dif_x_pagar_o_cobrar, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
