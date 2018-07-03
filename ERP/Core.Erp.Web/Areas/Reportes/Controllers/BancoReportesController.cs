@@ -9,7 +9,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
     public class BancoReportesController : Controller
     {
-        public ActionResult BAN_001(int IdEmpresa = 0, int IdTipoCbte = 0, decimal IdCbteCble = 0)
+        public ActionResult BAN_001( int IdTipoCbte = 0, decimal IdCbteCble = 0)
         {
             BAN_001_Rpt model = new BAN_001_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
@@ -17,11 +17,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdCbteCble.Value = IdCbteCble;
             model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
-            if (IdTipoCbte == 0)
                 model.RequestParameters = false;
             return View(model);
         }
-        public ActionResult BAN_002(int IdEmpresa = 0, int IdTipocbte = 0, decimal IdCbteCble = 0)
+        public ActionResult BAN_002( int IdTipocbte = 0, decimal IdCbteCble = 0)
         {
             BAN_002_Rpt model = new BAN_002_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
@@ -29,11 +28,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdCbteCble.Value = IdCbteCble;
             model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
-            if (IdTipocbte == 0)
                 model.RequestParameters = false;
             return View(model);
         }
-        public ActionResult BAN_003(int IdEmpresa = 0, int IdTipocbte = 0, decimal IdCbteCble = 0)
+        public ActionResult BAN_003( int IdTipocbte = 0, decimal IdCbteCble = 0)
         {
             BAN_003_Rpt model = new BAN_003_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
@@ -41,11 +39,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdCbteCble.Value = IdCbteCble;
             model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
-            if (IdTipocbte == 0)
                 model.RequestParameters = false;
             return View(model);
         }
-        public ActionResult BAN_004(int IdEmpresa = 0, int IdBanco = 0, decimal IdConciliacion = 0)
+        public ActionResult BAN_004( int IdBanco = 0, decimal IdConciliacion = 0)
         {
             BAN_004_Rpt model = new BAN_004_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
@@ -53,7 +50,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdConciliacion.Value = IdConciliacion;
             model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
-            if (IdBanco == 0)
                 model.RequestParameters = false;
             return View(model);
         }
