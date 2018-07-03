@@ -83,9 +83,11 @@ namespace Core.Erp.Web.Controllers
             Session["IdUsuario"] = model.IdUsuario;            
             Session["IdEmpresa"] = model.IdEmpresa;
             Session["nom_empresa"] = info_empresa.em_nombre;
+            Session["IdSucursal"] = model.IdSucursal;
             SessionFixed.NomEmpresa = info_empresa.em_nombre;
             SessionFixed.IdUsuario = model.IdUsuario;
             SessionFixed.IdEmpresa = model.IdEmpresa.ToString();
+            SessionFixed.IdSucursal = model.IdSucursal.ToString();
             return RedirectToAction("Index","Home");
         }
 
@@ -121,5 +123,14 @@ namespace Core.Erp.Web.Controllers
             }
             return RedirectToAction("Login");
         }
+
+        #region Json
+        public JsonResult cargar_sucursal_x_empresa(int IdEmpresa = 0)
+        {            
+            var resultado = bus_sucursal.get_list(IdEmpresa, false);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }
