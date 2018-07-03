@@ -1,10 +1,10 @@
+@using System.Web.UI.WebControls;
 @{
 	var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_cobranza_det";
         settings.CallbackRouteValues = new { Controller = "Cobranza", Action = "GridViewPartial_cobranza_det" };
-
-
-		settings.KeyFieldName = "secuencial";
+		settings.KeyFieldName = "secuencia";
+        settings.Width = Unit.Percentage(100);
 
 		settings.SettingsPager.Visible = true;
 		settings.Settings.ShowGroupPanel = true;

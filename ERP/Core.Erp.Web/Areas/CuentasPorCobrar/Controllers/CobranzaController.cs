@@ -131,4 +131,41 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             return PartialView("_GridViewPartial_cobranza_det", model);
         }
     }
+
+    public class cxc_cobro_det_List
+    {
+        public List<cxc_cobro_det_Info> get_list()
+        {
+            if (HttpContext.Current.Session["cxc_cobro_det_Info"] == null)
+            {
+                List<cxc_cobro_det_Info> list = new List<cxc_cobro_det_Info>();
+
+                HttpContext.Current.Session["cxc_cobro_det_Info"] = list;
+            }
+            return (List<cxc_cobro_det_Info>)HttpContext.Current.Session["cxc_cobro_det_Info"];
+        }
+
+        public void set_list(List<cxc_cobro_det_Info> list)
+        {
+            HttpContext.Current.Session["cxc_cobro_det_Info"] = list;
+        }
+
+        public void AddRow(cxc_cobro_det_Info info_det)
+        {
+            List<cxc_cobro_det_Info> list = get_list();
+            info_det.secuencia = list.Count == 0 ? 1 : list.Max(q => q.secuencia) + 1;
+            list.Add(info_det);
+        }
+
+        public void UpdateRow(cxc_cobro_det_Info info_det)
+        {
+            cxc_cobro_det_Info edited_info = get_list().Where(m => m.secuencia == info_det.secuencia).First();
+        }
+
+        public void DeleteRow(int secuencia)
+        {
+            List<cxc_cobro_det_Info> list = get_list();
+            list.Remove(list.Where(m => m.secuencia == secuencia).First());
+        }
+    }
 }
