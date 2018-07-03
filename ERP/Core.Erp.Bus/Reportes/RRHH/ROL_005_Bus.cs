@@ -1,10 +1,6 @@
 ﻿using Core.Erp.Data.Reportes.RRHH;
 using Core.Erp.Info.Reportes.RRHH;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Reportes.RRHH
 {

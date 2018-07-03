@@ -76,16 +76,15 @@
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = Unit.Pixel(100);
+            c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("IdCbteCble_Nota", "ID").Width = Unit.Percentage(5);
-        settings.Columns.Add("info_proveedor.info_persona.pe_cedulaRuc", "Cédula").Width = Unit.Percentage(10);
-        settings.Columns.Add("info_proveedor.info_persona.pe_nombreCompleto", "Proveedor").Width = Unit.Percentage(30);
+        settings.Columns.Add("info_proveedor.info_persona.pe_cedulaRuc", "Cédula").Width = Unit.Percentage(15);
+        settings.Columns.Add("info_proveedor.info_persona.pe_nombreCompleto", "Proveedor").Width = Unit.Percentage(25);
         settings.Columns.Add(column =>
         {
             column.FieldName = "cn_fecha";
             column.Caption = "Fecha";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.PropertiesEdit.DisplayFormatString = "d";
             column.EditorProperties().DateEdit(sp =>
             {
@@ -93,65 +92,7 @@
                 sp.Width = Unit.Percentage(100);
             });
         });
-        settings.Columns.Add("cn_serie1", "Serie").Width = Unit.Percentage(5);
-        settings.Columns.Add("cn_Nota", "Documento").Width = Unit.Percentage(10);
-        // settings.Columns.Add("co_observacion", "Observción").Width = Unit.Percentage(10);
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "cn_subtotal_iva";
-            column.Caption = "$Base iva";
-            column.Width = Unit.Percentage(10);
-            column.EditorProperties().SpinEdit(sp =>
-            {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
-                sp.Width = Unit.Percentage(100);
-                column.PropertiesEdit.DisplayFormatString = "n2";
-
-            });
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "cn_valoriva";
-            column.Caption = "$Iva";
-            column.Width = Unit.Percentage(10);
-            column.EditorProperties().SpinEdit(sp =>
-            {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
-                sp.Width = Unit.Percentage(100);
-                column.PropertiesEdit.DisplayFormatString = "n2";
-
-            });
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "cn_subtotal_siniva";
-            column.Caption = "$Base 0";
-            column.Width = Unit.Percentage(10);
-            column.EditorProperties().SpinEdit(sp =>
-            {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
-                sp.Width = Unit.Percentage(100);
-                column.PropertiesEdit.DisplayFormatString = "n2";
-
-            });
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "cn_baseImponible";
-            column.Caption = "$Base imp.";
-            column.Width = Unit.Percentage(10);
-            column.EditorProperties().SpinEdit(sp =>
-            {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
-                sp.Width = Unit.Percentage(100);
-                column.PropertiesEdit.DisplayFormatString = "n2";
-
-            });
-        });
+        settings.Columns.Add("cn_observacion", "Observación").Width = Unit.Percentage(50);
 
         settings.Columns.Add(column =>
         {
@@ -168,7 +109,14 @@
                 }).Render();
             });
         });
-
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CXP_003", "CuentasPorPagarReportes", new { Area = "Reportes", IdTipoCbte = DataBinder.Eval(c.DataItem, "IdTipoCbte").ToString(), IdCbteCble = DataBinder.Eval(c.DataItem, "IdCbteCble").ToString() }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
+        });
 
     });
 }

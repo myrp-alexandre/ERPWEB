@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Erp.Data.RRHH;
 using Core.Erp.Info.RRHH;
-using Core.Erp.Data.RRHH;
+using System;
+using System.Collections.Generic;
 namespace Core.Erp.Bus.RRHH
 {
-  public  class ro_participacion_utilidad_Bus
+    public  class ro_participacion_utilidad_Bus
     {
         ro_participacion_utilidad_Data odata = new ro_participacion_utilidad_Data();
         ro_participacion_utilidad_empleado_Data odataDetalle = new ro_participacion_utilidad_empleado_Data();

@@ -50,7 +50,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_fechaFin.Value = model.fecha_fin;
             report.usuario = Session["IdUsuario"].ToString();
             report.empresa = Session["nom_empresa"].ToString();
-            if (IdCtaCble == "")
                 report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
@@ -67,7 +66,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.usuario = Session["IdUsuario"].ToString();
             report.empresa = Session["nom_empresa"].ToString();
             cargar_combos();
-            if (model.IdCtaCble == "")
                 report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);

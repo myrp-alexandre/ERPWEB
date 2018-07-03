@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Erp.Data.RRHH;
+﻿using Core.Erp.Data.RRHH;
 using Core.Erp.Info.RRHH;
+using System;
+using System.Collections.Generic;
 namespace Core.Erp.Bus.RRHH
 {
-   public class ro_catalogoTipo_Bus
+    public class ro_catalogoTipo_Bus
     {
         ro_catalogoTipo_Data odata = new ro_catalogoTipo_Data();
         public List<ro_catalogoTipo_Info> get_list( bool estado)

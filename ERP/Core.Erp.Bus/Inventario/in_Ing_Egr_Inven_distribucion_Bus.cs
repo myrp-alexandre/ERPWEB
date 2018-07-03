@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Erp.Data.Inventario;
 using Core.Erp.Info.Inventario;
-using Core.Erp.Data.Inventario;
+using System;
+using System.Collections.Generic;
 namespace Core.Erp.Bus.Inventario
 {
-   public class in_Ing_Egr_Inven_distribucion_Bus
+    public class in_Ing_Egr_Inven_distribucion_Bus
     {
         in_Ing_Egr_Inven_distribucion_Data oData = new in_Ing_Egr_Inven_distribucion_Data();
 

@@ -136,8 +136,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
                 report.usuario = Session["IdUsuario"].ToString();
                 report.empresa = Session["nom_empresa"].ToString();
-
-                if (model.IdActivoFijoTipo == 0)
                     report.RequestParameters = false;
                 ViewBag.Report = report;
             }
@@ -154,8 +152,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
                 report.usuario = Session["IdUsuario"].ToString();
                 report.empresa = Session["nom_empresa"].ToString();
-
-                if (model.IdActivoFijoTipo == 0)
                     report.RequestParameters = false;
                 ViewBag.Report = report;
             }
@@ -220,8 +216,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             report.usuario = Session["IdUsuario"].ToString();
             report.empresa = Session["nom_empresa"].ToString();
-
-            if (model.IdActivoFijoTipo == 0)
                 report.RequestParameters = false;
             ViewBag.Report = report;
             return View();

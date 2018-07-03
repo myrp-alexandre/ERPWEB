@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Core.Erp.Data.RRHH;
+using Core.Erp.Info.RRHH;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Erp.Info.RRHH;
-using Core.Erp.Data.RRHH;
 namespace Core.Erp.Bus.RRHH
 {
-   public class ro_prestamo_Bus
+    public class ro_prestamo_Bus
     {
         ro_prestamo_Data odata = new ro_prestamo_Data();
         ro_prestamo_detalle_Data odata_det = new ro_prestamo_detalle_Data();

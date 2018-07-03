@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Erp.Data.CuentasPorPagar;
 using Core.Erp.Info.CuentasPorPagar;
-using Core.Erp.Data.CuentasPorPagar;
+using System;
 namespace Core.Erp.Bus.CuentasPorPagar
 {
-  public  class cp_orden_giro_pagos_sri_Bus
+    public  class cp_orden_giro_pagos_sri_Bus
     {
         cp_orden_giro_pagos_sri_Data data = new cp_orden_giro_pagos_sri_Data();
         public cp_orden_giro_pagos_sri_Info get_info(int IdEmpresa, int IdTipoCbte_Ogiro, decimal IdCbteCble_Ogiro)

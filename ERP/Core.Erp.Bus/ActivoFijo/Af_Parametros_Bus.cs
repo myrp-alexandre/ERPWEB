@@ -1,10 +1,6 @@
 ﻿using Core.Erp.Data.ActivoFijo;
 using Core.Erp.Info.ActivoFijo;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.ActivoFijo
 {

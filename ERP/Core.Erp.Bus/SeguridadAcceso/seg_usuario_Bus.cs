@@ -1,11 +1,8 @@
 ﻿using Core.Erp.Data.SeguridadAcceso;
+using Core.Erp.Info.Helps;
 using Core.Erp.Info.SeguridadAcceso;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Erp.Info.Helps;
 
 namespace Core.Erp.Bus.SeguridadAcceso
 {

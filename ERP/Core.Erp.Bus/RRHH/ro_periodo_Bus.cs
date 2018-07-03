@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Erp.Info.RRHH;
-using Core.Erp.Data.RRHH;
-using System.Globalization;
+﻿using Core.Erp.Data.RRHH;
 using Core.Erp.Info.Helps;
+using Core.Erp.Info.RRHH;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 namespace Core.Erp.Bus.RRHH
 {
-   public class ro_periodo_Bus
+    public class ro_periodo_Bus
     {
 
         List<ro_periodo_Info> lista_periodos = null;

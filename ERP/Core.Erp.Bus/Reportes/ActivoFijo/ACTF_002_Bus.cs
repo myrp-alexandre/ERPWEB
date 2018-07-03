@@ -2,13 +2,10 @@
 using Core.Erp.Info.Reportes.ActivoFijo;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Reportes.ActivoFijo
 {
-   public class ACTF_002_Bus
+    public class ACTF_002_Bus
     {
         ACTF_002_Data odata = new ACTF_002_Data();
     

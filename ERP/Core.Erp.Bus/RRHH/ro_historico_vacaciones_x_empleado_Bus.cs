@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Erp.Data.RRHH;
 using Core.Erp.Info.RRHH;
-using Core.Erp.Data.RRHH;
+using System;
+using System.Collections.Generic;
 namespace Core.Erp.Bus.RRHH
 {
-   public class ro_historico_vacaciones_x_empleado_Bus
+    public class ro_historico_vacaciones_x_empleado_Bus
     {
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
         ro_empleado_Info info_empleado = new ro_empleado_Info();

@@ -1,17 +1,14 @@
-﻿using System;
+﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Data.CuentasPorPagar;
+using Core.Erp.Data.General;
+using Core.Erp.Info.CuentasPorPagar;
+using Core.Erp.Info.General;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Erp.Info.CuentasPorPagar;
-using Core.Erp.Data.CuentasPorPagar;
-using Core.Erp.Bus.Contabilidad;
-using Core.Erp.Info.Contabilidad;
-using Core.Erp.Info.General;
-using Core.Erp.Data.General;
 namespace Core.Erp.Bus.CuentasPorPagar
 {
-   public class cp_retencion_Bus
+    public class cp_retencion_Bus
     {
 
         #region MyRegion

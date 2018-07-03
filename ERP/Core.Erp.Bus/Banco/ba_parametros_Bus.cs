@@ -1,10 +1,6 @@
 ﻿using Core.Erp.Data.Banco;
 using Core.Erp.Info.Banco;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Banco
 {

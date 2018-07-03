@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Erp.Data.RRHH;
 using Core.Erp.Info.RRHH;
-using Core.Erp.Data.RRHH;
+using System;
+using System.Collections.Generic;
 namespace Core.Erp.Bus.RRHH
 {
-   public class ro_Parametros_Bus
+    public class ro_Parametros_Bus
     {
         ro_Parametros_Data odata = new ro_Parametros_Data();
         ro_Config_Param_contable_Bus bus_parametros = new ro_Config_Param_contable_Bus();

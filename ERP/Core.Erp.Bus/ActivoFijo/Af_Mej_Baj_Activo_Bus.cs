@@ -1,12 +1,8 @@
 ﻿using Core.Erp.Data.ActivoFijo;
+using Core.Erp.Data.Contabilidad;
 using Core.Erp.Info.ActivoFijo;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Erp.Info.Contabilidad;
-using Core.Erp.Data.Contabilidad;
 
 namespace Core.Erp.Bus.ActivoFijo
 {

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Erp.Data.RRHH;
+﻿using Core.Erp.Data.RRHH;
 using Core.Erp.Info.RRHH;
+using System;
+using System.Collections.Generic;
 namespace Core.Erp.Bus.RRHH
 {
-   public class ro_Historico_Liquidacion_Vacaciones_Det_Bus
+    public class ro_Historico_Liquidacion_Vacaciones_Det_Bus
     {
         ro_Historico_Liquidacion_Vacaciones_Det_Data data = new ro_Historico_Liquidacion_Vacaciones_Det_Data();
         public bool Guardar_DB(ro_Historico_Liquidacion_Vacaciones_Det_Info info)

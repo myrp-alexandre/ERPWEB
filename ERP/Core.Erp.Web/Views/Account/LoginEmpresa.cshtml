@@ -73,5 +73,31 @@
 </html>
 
 <script type="text/javascript">
+    cargar_sucursal_x_empresa();
 
+    function cargar_sucursal_x_empresa() {
+        $("#IdSucursal").empty();        
+
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val()
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("cargar_sucursal_x_empresa", "Account", new { Area = "" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdSucursal").append("<option value=" + row.IdSucursal + ">" + row.Su_Descripcion + "</option>");
+                });
+            },
+            error: function (error) {
+            }
+        });
+    };
 </script>
