@@ -48,5 +48,6 @@ namespace Core.Erp.Data
         public string Su_Descripcion { get; set; }
         public Nullable<System.DateTime> em_fechaIngaRol { get; set; }
         public string Periodo { get; set; }
+        public string em_ruc { get; set; }
     }
 }

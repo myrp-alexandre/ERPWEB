@@ -42,13 +42,13 @@
         <EntityTypeShape EntityType="Model_reportes.VWINV_007" Width="1.5" PointX="21.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_009" Width="1.5" PointX="21.75" PointY="7.75" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_010" Width="1.5" PointX="4.75" PointY="15.25" />
-        <EntityTypeShape EntityType="Model_reportes.VWFAC_001" Width="1.5" PointX="11.5" PointY="18.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWROL_011" Width="1.5" PointX="8.75" PointY="18.25" />
         <EntityTypeShape EntityType="Model_reportes.VWCXP_007" Width="1.5" PointX="6.625" PointY="11.625" />
-        <EntityTypeShape EntityType="Model_reportes.VWCAJ_001" Width="1.5" PointX="23.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWCXC_001_diario" Width="1.5" PointX="19.875" PointY="10.25" />
-        <EntityTypeShape EntityType="Model_reportes.VWCXC_001" Width="1.5" PointX="18.375" PointY="16.75" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_001" Width="1.5" PointX="14.375" PointY="19.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWROL_011" Width="1.5" PointX="20.375" PointY="14.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCXC_001" Width="1.5" PointX="16.375" PointY="18.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCXC_001_diario" Width="1.5" PointX="9.375" PointY="19.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWFAC_001" Width="1.5" PointX="11.375" PointY="19.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCAJ_001" Width="1.5" PointX="22.375" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
