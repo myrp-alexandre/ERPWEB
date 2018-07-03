@@ -37,13 +37,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             var lst_usuario = bus_usuario.get_list(false);
             ViewBag.lst_usuario = lst_usuario;
         }
-
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_reportes_por_usuario()
-        {
-            var model = new object[0];
-            return PartialView("_GridViewPartial_reportes_por_usuario", model);
-        }
+        
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial_reportes_por_usuario(int IdEmpresa = 0, string IdUsuario = "")
@@ -51,24 +45,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
             var model = bus_reporte_x_usuario.get_list(IdEmpresa, IdUsuario);
             ViewBag.IdEmpresa = IdEmpresa;
             ViewBag.IdUsuario = IdUsuario;
-
-            /*ViewData["selectedIDs"] = Request.Params["selectedIDs"];
-            if (ViewData["selectedIDs"] == null)
-            {
-                int x = 0;
-                string selectedIDs = "";
-                foreach (var item in model.Where(q => q.seleccionado == true).ToList())
-                {
-                    if (x == 0)
-                        selectedIDs = item.IdMenu.ToString();
-                    else
-                        selectedIDs += "," + item.IdMenu.ToString();
-                    x++;
-                }
-                ViewData["selectedIDs"] = selectedIDs;
-            }*/
-
-            return PartialView("_TreeListPartial_menu_x_usuario", model);
+            
+            return PartialView("_GridViewPartial_reportes_por_usuario", model);
         }
     }
 }
