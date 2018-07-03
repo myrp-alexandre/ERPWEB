@@ -320,6 +320,7 @@
     <Compile Include="Areas\Reportes\Controllers\BancoReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\CajaReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\ContabilidadReportesController.cs" />
+    <Compile Include="Areas\Reportes\Controllers\CuentasPorCobrarReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\CuentasPorPagarReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\FacturacionReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\InventarioReportesController.cs" />
@@ -8541,6 +8542,7 @@
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\Modificar.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\Anular.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_GridViewPartial_cobranza.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_001.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
