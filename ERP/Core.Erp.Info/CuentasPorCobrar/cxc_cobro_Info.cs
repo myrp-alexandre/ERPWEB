@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.Erp.Info.CuentasPorCobrar
 {
@@ -12,6 +13,8 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public Nullable<decimal> IdCobro_a_aplicar { get; set; }
         public string cr_Codigo { get; set; }
         public string IdCobro_tipo { get; set; }
+        [Range(1,999999,ErrorMessage ="El campo cliente es obligatorio")]
+        [Required(ErrorMessage = "El campo cliente es obligatorio")]
         public decimal IdCliente { get; set; }
         public double cr_TotalCobro { get; set; }
         public System.DateTime cr_fecha { get; set; }

@@ -29,7 +29,8 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCliente">Cliente*</label>
-
+                    @Html.Partial("_CmbCliente_Cobranza", Model)
+                    @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-12">

@@ -2,8 +2,10 @@
 using Core.Erp.Bus.CuentasPorCobrar;
 using Core.Erp.Bus.General;
 using Core.Erp.Info.CuentasPorCobrar;
+using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
+using DevExpress.Web;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,6 +22,24 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         caj_Caja_Bus bus_caja = new caj_Caja_Bus();
         caj_parametro_Bus bus_param_caja = new caj_parametro_Bus();
         cxc_cobro_tipo_Bus bus_cobro_tipo = new cxc_cobro_tipo_Bus();
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+
+        #region Metodos ComboBox bajo demanda
+        public ActionResult CmbCliente_Cobranza()
+        {
+            cxc_cobro_Info model = new cxc_cobro_Info();
+            return PartialView("_CmbCliente_Cobranza", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.CLIENTE.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.CLIENTE.ToString());
+        }
+        #endregion
+
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info

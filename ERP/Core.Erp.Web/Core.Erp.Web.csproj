@@ -8545,6 +8545,7 @@
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_001.cshtml" />
     <Content Include="Areas\General\Views\ReportesPorUsuario\Index.cshtml" />
     <Content Include="Areas\General\Views\ReportesPorUsuario\_GridViewPartial_reportes_por_usuario.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_CmbCliente_Cobranza.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
