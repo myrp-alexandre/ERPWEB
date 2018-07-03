@@ -17,6 +17,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         in_Ing_Egr_Inven_distribucion_lst List_in_Ing_Egr_Inven_det = new in_Ing_Egr_Inven_distribucion_lst();
         in_parametro_Bus bus_in_param = new in_parametro_Bus();
         string mensaje = string.Empty;
+        decimal IdProducto_padre = 0;
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -62,14 +63,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         public ActionResult GridViewPartial_distribucion_det()
         {
-            decimal IdProducto_padre = 0;
-            if(SessionFixed.IdProducto_padre_dist!=null)
-            IdProducto_padre =Convert.ToDecimal( SessionFixed.IdProducto_padre_dist.ToString());
-
-
+            if (Session["IdProducto_padre"] != null)
+                IdProducto_padre = (decimal)Session["IdProducto_padre"];
+            cargar_combos_detalle(IdProducto_padre);
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             List<in_Ing_Egr_Inven_distribucion_Info> model = new List<in_Ing_Egr_Inven_distribucion_Info>();
-            cargar_combos_detalle(IdProducto_padre);
             return PartialView("_GridViewPartial_distribucion_det", model);
         }
 
@@ -142,7 +140,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 List_in_Ing_Egr_Inven_det.AddRow(info_det);
             in_Ing_Egr_Inven_distribucion_Info model = new in_Ing_Egr_Inven_distribucion_Info();
             model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
-            cargar_combos_detalle();
+            if(Session["IdProducto_padre"]!=null)
+            IdProducto_padre =(decimal) Session["IdProducto_padre"];
+            cargar_combos_detalle(IdProducto_padre);
             return PartialView("_GridViewPartial_distribucion_det", model.lst_distribuido);
         }
 
@@ -153,7 +153,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 List_in_Ing_Egr_Inven_det.UpdateRow(info_det);
             in_Ing_Egr_Inven_distribucion_Info model = new in_Ing_Egr_Inven_distribucion_Info();
             model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
-            cargar_combos_detalle();
+            if (Session["IdProducto_padre"] != null)
+                IdProducto_padre = (decimal)Session["IdProducto_padre"];
+            cargar_combos_detalle(IdProducto_padre);
             return PartialView("_GridViewPartial_distribucion_det", model.lst_distribuido);
         }
 
@@ -162,8 +164,19 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             List_in_Ing_Egr_Inven_det.DeleteRow(secuencia_distribucion);
             in_Ing_Egr_Inven_distribucion_Info model = new in_Ing_Egr_Inven_distribucion_Info();
             model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
-            cargar_combos_detalle();
-            return PartialView("_GridViewPartial_distribucion_det", model.lst_distribuido);
+
+            if (Session["IdProducto_padre"] != null)
+                IdProducto_padre = (decimal)Session["IdProducto_padre"];
+            cargar_combos_detalle(IdProducto_padre); return PartialView("_GridViewPartial_distribucion_det", model.lst_distribuido);
+        }
+
+
+        public JsonResult Mostrar(decimal IdProducto_padre=0)
+        {
+            Session["IdProducto_padre"] = IdProducto_padre;
+            cargar_combos_detalle(IdProducto_padre);
+
+            return Json("", JsonRequestBehavior.AllowGet);
         }
     }
 

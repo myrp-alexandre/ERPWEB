@@ -6,7 +6,7 @@
         settings.CallbackRouteValues = new { Controller = "DistribucionPorLote", Action = "GridViewPartial_por_distribuir" };
 
 
-        settings.KeyFieldName = "IdNumMovi";
+        settings.KeyFieldName = "IdProducto_padre";
 
         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
 
@@ -55,8 +55,8 @@
                 {
                     settingsBtn.Name = "btn" + c.KeyValue;
                     settingsBtn.Text = "Asignar";
-                    //settingsBtn.ClientSideEvents.Click = "function(s, e) {buscar('"+ c.KeyValue + "');}";
-                    settingsBtn.ClientSideEvents.Click = "function(s, e) { e.customArgs['IdProducto_padre'] = '" + c.KeyValue+ "'; }";
+                    settingsBtn.ClientSideEvents.Click = "function(s, e) {Mostrar('" + c.KeyValue + "');}";
+                    // settingsBtn.ClientSideEvents.Click = "function(s, e) { e.customArgs['IdProducto_padre'] = '" + c.KeyValue+ "'; }";
                     // settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdTipoPersona'] = $('#IdTipoPersona').val(); }";
 
                 }).Render();
@@ -92,9 +92,33 @@
 
 
 <script type="text/javascript">
-    function Mostrar()
+    //function Mostrar(IdProducto_padre)
+    //{
+    //    GridViewPartial_distribucion_det.PerformCallback(IdProducto_padre);
+    //    $("#detalle_distr").modal("show");
+    //}
+
+    function Mostrar(IdProducto_padre)
     {
-        GridViewPartial_distribucion_det.PerformCallback();
-        $("#detalle_distr").modal("show");
-    }
+        var datos = {
+            IdProducto_padre: IdProducto_padre
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("Mostrar", "DistribucionPorLote", new { Area = "Inventario" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            GridViewPartial_distribucion_det.PerformCallback();
+            $("#detalle_distr").modal("show");
+               
+            },
+            error: function (error) {
+            }
+        });
+    };
 </script>   
