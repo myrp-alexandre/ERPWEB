@@ -84,7 +84,16 @@
         settings.Columns.Add("NumRetencion","Retención").Width = Unit.Percentage(15);
         settings.Columns.Add("pe_razonSocial","Proveedor").Width = Unit.Percentage(30);
         settings.Columns.Add("co_serie", "Serie documento").Width = Unit.Percentage(15);
-        settings.Columns.Add("co_factura","#documento").Width = Unit.Percentage(14);
+        settings.Columns.Add("co_factura","#documento").Width = Unit.Percentage(10);
+
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CXP_006", "CuentasPorPagarReportes", new { Area = "Reportes", IdRetencion = DataBinder.Eval(c.DataItem, "IdRetencion").ToString() }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

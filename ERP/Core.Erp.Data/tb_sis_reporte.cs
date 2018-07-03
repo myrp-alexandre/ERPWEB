@@ -14,6 +14,12 @@ namespace Core.Erp.Data
     
     public partial class tb_sis_reporte
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tb_sis_reporte()
+        {
+            this.tb_sis_reporte_x_seg_usuario = new HashSet<tb_sis_reporte_x_seg_usuario>();
+        }
+    
         public string CodReporte { get; set; }
         public string nom_reporte { get; set; }
         public string CodModulo { get; set; }
@@ -33,5 +39,7 @@ namespace Core.Erp.Data
         public string observacion { get; set; }
     
         public virtual tb_modulo tb_modulo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_sis_reporte_x_seg_usuario> tb_sis_reporte_x_seg_usuario { get; set; }
     }
 }

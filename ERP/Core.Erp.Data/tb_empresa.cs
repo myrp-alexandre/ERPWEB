@@ -18,6 +18,7 @@ namespace Core.Erp.Data
         public tb_empresa()
         {
             this.tb_sucursal = new HashSet<tb_sucursal>();
+            this.tb_sis_reporte_x_seg_usuario = new HashSet<tb_sis_reporte_x_seg_usuario>();
         }
     
         public int IdEmpresa { get; set; }
@@ -46,5 +47,7 @@ namespace Core.Erp.Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_sucursal> tb_sucursal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_sis_reporte_x_seg_usuario> tb_sis_reporte_x_seg_usuario { get; set; }
     }
 }
