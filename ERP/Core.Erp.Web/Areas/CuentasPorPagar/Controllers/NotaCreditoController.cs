@@ -7,10 +7,9 @@ using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Bus.CuentasPorPagar;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.Contabilidad;
-using Core.Erp.Info.General;
 using Core.Erp.Bus.General;
 using DevExpress.Web.Mvc;
-
+using Core.Erp.Info.Helps;
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
     public class NotaCreditoController : Controller
@@ -73,6 +72,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 ViewBag.lst_tipo_doc = new List<cp_TipoDocumento_Info>();
 
             }
+            List<string> lst_tipo_nota=new  List<string>();
+            lst_tipo_nota.Add(cl_enumeradores.eTipoNotaCXP.T_TIP_NOTA_INT.ToString());
+            lst_tipo_nota.Add(cl_enumeradores.eTipoNotaCXP.T_TIP_NOTA_SRI.ToString());
+            ViewBag.lst_tipo_nota = lst_tipo_nota;
 
 
         }

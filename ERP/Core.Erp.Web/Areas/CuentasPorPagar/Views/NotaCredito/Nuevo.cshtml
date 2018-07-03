@@ -83,15 +83,8 @@
         <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="IdOrden_giro_Tipo">Sustento tributario*</label>
-                    @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_codigos_sri, "codigoSRI", "co_descripcion"), new { @class = "form-control",@id= "cmb_idtCredito" })
-                    @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="IdOrden_giro_Tipo">Tipo documento*</label>
-                    @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_tipo_doc, "CodTipoDocumento", "Descripcion"), new { @class = "form-control", @id = "cmbTipoDocu" })
+                    <label for="IdOrden_giro_Tipo">Tipo nota*</label>
+                    @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_tipo_nota), new { @class = "form-control", @id = "cmb_idtCredito" })
                     @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -100,7 +93,7 @@
    
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-2">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdTipoServicio">Tipo de servicio</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdTipoServicio, setting =>
@@ -199,6 +192,20 @@
                             </div>
                         </div>
 
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="cn_subtotal_iva">% IVA</label>
+                                    @Html.TextBoxFor(q => q.cn_Por_iva, new { @class = "form-control", @id = "cn_Por_iva" })
+                                    @Html.ValidationMessageFor(q => q.cn_Por_iva, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="cn_valoriva">Iva</label>
+                                    @Html.TextBoxFor(q => q.cn_valoriva, new { @class = "form-control", @id = "cn_valoriva" })
+                                    @Html.ValidationMessageFor(q => q.cn_valoriva, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="cn_subtotal_siniva">Base cero</label>
@@ -206,13 +213,7 @@
                                 @Html.ValidationMessageFor(q => q.cn_subtotal_siniva, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="cn_valoriva">Iva</label>
-                                @Html.TextBoxFor(q => q.cn_valoriva, new { @class = "form-control",@id= "cn_valoriva"})
-                                @Html.ValidationMessageFor(q => q.cn_valoriva, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                        
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="cn_total">Total</label>
@@ -220,12 +221,7 @@
                                 @Html.ValidationMessageFor(q => q.cn_total, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="cn_total">Buscar </label>
-
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
 
@@ -244,14 +240,21 @@
                 <div class="row">
 
                     <div class="col-md-12">
-                        <div class="col-md-9">
+                        
+                        <div class="col-md-5">
                             <div class="form-group">
-                                <label for="IdOrden_giro_Tipo">Tipo documento*</label>
-                                @Html.DropDownListFor(q => q.IdTipoServicio, new SelectList(ViewBag.lst_tipo_doc, "CodTipoDocumento", "Descripcion"), new { @class = "form-control", @id = "cmbTipoDocu_modif" })
-                                @Html.ValidationMessageFor(q => q.IdTipoServicio, "", new { @class = "text-danger" })
+                                <label for="IdOrden_giro_Tipo">Sustento tributario*</label>
+                                @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_codigos_sri, "codigoSRI", "co_descripcion"), new { @class = "form-control", @id = "cmb_idtCredito" })
+                                @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="IdOrden_giro_Tipo">Tipo documento*</label>
+                                @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_tipo_doc, "CodTipoDocumento", "Descripcion"), new { @class = "form-control", @id = "cmbTipoDocu" })
+                                @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="num_docu_Modificar">Numero documento*</label>
@@ -427,7 +430,10 @@
             $('#cn_total').val(tot.toFixed(2));
         else
             $('#cn_total').val(0.00);
-
+        if (iva > 0)
+            $('#cn_Por_iva').val(12);
+        else
+            $('#cn_Por_iva').val(0.00);
 
     }
    
