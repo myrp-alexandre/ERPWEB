@@ -1065,6 +1065,9 @@
     <Compile Include="tb_sis_reporte.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
+    <Compile Include="tb_sis_reporte_x_seg_usuario.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
     <Compile Include="tb_sucursal.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
