@@ -29,8 +29,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         cp_parametros_Info info_parametro = new cp_parametros_Info();
         cp_parametros_Bus bus_param = new cp_parametros_Bus();
         ct_cbtecble_det_List_fp comprobante_contable_fp = new ct_cbtecble_det_List_fp();
+        cp_cuotas_x_doc_det_Info_lst comprobante_cuota = new cp_cuotas_x_doc_det_Info_lst();
 
-         
+
         #endregion
         public ActionResult Index()
         {
@@ -432,6 +433,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
         }
+        #region Diario contable
 
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
@@ -467,22 +469,54 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult GridViewPartial_aprobacion_facturas_Update(Core.Erp.Info.CuentasPorPagar.cp_orden_giro_Info item)
         {
-            
-                try
-                {
+
+            try
+            {
                 item.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-                    bus_orden_giro.Generar_OP_x_orden_giro(item);
+                bus_orden_giro.Generar_OP_x_orden_giro(item);
                 return RedirectToAction("Index3");
 
-                }
+            }
             catch (Exception e)
-                {
-                    return RedirectToAction("Index3");
-                }
-            
-           
+            {
+                return RedirectToAction("Index3");
+            }
+
+
         }
-       
+
+
+        #endregion
+
+        #region cuotas
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew_cuota([ModelBinder(typeof(DevExpressEditorsBinder))] cp_cuotas_x_doc_det_Info info_det)
+        {
+            if (ModelState.IsValid)
+                comprobante_cuota.AddRow(info_det);
+            lst_detalle_cuotas = comprobante_cuota.get_list();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_documento_cuotas_det", lst_detalle_cuotas);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate_cuota([ModelBinder(typeof(DevExpressEditorsBinder))] cp_cuotas_x_doc_det_Info info_det)
+        {
+            if (ModelState.IsValid)
+                comprobante_cuota.UpdateRow(info_det);
+            lst_detalle_cuotas = comprobante_cuota.get_list();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_documento_cuotas_det", lst_detalle_cuotas);
+        }
+
+        public ActionResult EditingDelete_cuota(int secuencia)
+        {
+            comprobante_cuota.DeleteRow(secuencia);
+            lst_detalle_cuotas = comprobante_cuota.get_list();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_documento_cuotas_det", lst_detalle_cuotas);
+        }
+        #endregion
     }
 
 
@@ -583,5 +617,46 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 throw;
             }
         }
+    }
+
+
+    public class cp_cuotas_x_doc_det_Info_lst
+    {
+        public List<cp_cuotas_x_doc_det_Info> get_list()
+        {
+            if (HttpContext.Current.Session["lst_cuotas"] == null)
+            {
+                List<cp_cuotas_x_doc_det_Info> list = new List<cp_cuotas_x_doc_det_Info>();
+
+                HttpContext.Current.Session["lst_cuotas"] = list;
+            }
+            return (List<cp_cuotas_x_doc_det_Info>)HttpContext.Current.Session["lst_cuotas"];
+        }
+
+        public void set_list(List<cp_cuotas_x_doc_det_Info> list)
+        {
+            HttpContext.Current.Session["lst_cuotas"] = list;
+        }
+
+        public void AddRow(cp_cuotas_x_doc_det_Info info_det)
+        {
+            List<cp_cuotas_x_doc_det_Info> list = get_list();
+            list.Add(info_det);
+        }
+
+        public void UpdateRow(cp_cuotas_x_doc_det_Info info_det)
+        {
+            cp_cuotas_x_doc_det_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();
+            edited_info.Fecha_vcto_cuota = info_det.Fecha_vcto_cuota;
+            edited_info.Valor_cuota = info_det.Valor_cuota;
+            edited_info.Observacion = info_det.Observacion;
+        }
+
+        public void DeleteRow(int secuencia)
+        {
+            List<cp_cuotas_x_doc_det_Info> list = get_list();
+            list.Remove(list.Where(m => m.Secuencia == secuencia).First());
+        }
+        
     }
 }

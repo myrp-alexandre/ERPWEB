@@ -20,7 +20,7 @@
 {
 
     @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdCbteCble_Ogiro, new { @id = "IdCbteCble_Ogiro" })
+    @Html.HiddenFor(q => q.IdCbteCble_Ogiro)
 
         <div class="row">
             <div class="col-md-6">
@@ -206,7 +206,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="co_Por_iva">% Iva</label>
-                                @Html.TextBoxFor(q => q.co_Por_iva, new { @class = "form-control", @id = "co_valoriva", @readonly="readonly" })
+                                @Html.TextBoxFor(q => q.co_Por_iva, new { @class = "form-control", @id = "co_Por_iva", @readonly="readonly" })
                                 @Html.ValidationMessageFor(q => q.co_Por_iva, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -481,6 +481,11 @@
             $('#co_total').val(tot.toFixed(2));
         else
             $('#co_total').val(0.00);
+        if(iva>0)
+            $('#co_Por_iva').val(12);
+        else
+            $('#co_Por_iva').val(0.00);
+
 
 
     }

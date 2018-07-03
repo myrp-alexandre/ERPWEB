@@ -7,6 +7,17 @@
 
         settings.KeyFieldName = "Secuencia";
 
+        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Deudas", Action = "EditingAddNew_cuota", Area = "CuentasPorPagar" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Deudas", Action = "EditingUpdate_cuota", Area = "CuentasPorPagar" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Deudas", Action = "EditingDelete_cuota", Area = "CuentasPorPagar" };
+        settings.Width = Unit.Percentage(100);
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowFilterRow = true;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
