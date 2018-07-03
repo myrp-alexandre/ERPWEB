@@ -109,7 +109,14 @@
                 }).Render();
             });
         });
-
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CXP_003", "CuentasPorPagarReportes", new { Area = "Reportes", IdTipoCbte = DataBinder.Eval(c.DataItem, "IdTipoCbte").ToString(), IdCbteCble = DataBinder.Eval(c.DataItem, "IdCbteCble").ToString() }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
+        });
 
     });
 }
