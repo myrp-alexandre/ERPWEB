@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Erp.Data.CuentasPorPagar;
 using Core.Erp.Info.CuentasPorPagar;
-using Core.Erp.Data.CuentasPorPagar;
+using System;
+using System.Collections.Generic;
 namespace Core.Erp.Bus.CuentasPorPagar
 {
-   public class cp_parametros_Bus
+    public class cp_parametros_Bus
     {
         cp_parametros_Data odata = new cp_parametros_Data();
         public Boolean modificarDB(cp_parametros_Info inf)

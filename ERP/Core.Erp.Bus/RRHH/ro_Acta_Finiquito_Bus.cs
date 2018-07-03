@@ -1,14 +1,12 @@
-﻿using System;
+﻿using Core.Erp.Data.RRHH;
+using Core.Erp.Info.Helps;
+using Core.Erp.Info.RRHH;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Erp.Info.RRHH;
-using Core.Erp.Data.RRHH;
-using Core.Erp.Info.Helps;
 namespace Core.Erp.Bus.RRHH
 {
-  public  class ro_Acta_Finiquito_Bus
+    public  class ro_Acta_Finiquito_Bus
     {
 
         #region variables

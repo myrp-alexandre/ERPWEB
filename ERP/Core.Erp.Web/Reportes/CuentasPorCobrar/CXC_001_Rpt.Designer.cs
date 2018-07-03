@@ -619,7 +619,7 @@
             // 
             // xrTable7
             // 
-            this.xrTable7.LocationFloat = new DevExpress.Utils.PointFloat(500.0001F, 93.75F);
+            this.xrTable7.LocationFloat = new DevExpress.Utils.PointFloat(500F, 93.75F);
             this.xrTable7.Name = "xrTable7";
             this.xrTable7.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow13});

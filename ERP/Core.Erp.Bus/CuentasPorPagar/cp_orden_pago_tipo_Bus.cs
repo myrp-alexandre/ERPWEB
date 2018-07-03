@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Erp.Data.CuentasPorPagar;
 using Core.Erp.Info.CuentasPorPagar;
-using Core.Erp.Data.CuentasPorPagar;
+using System;
 namespace Core.Erp.Bus.CuentasPorPagar
 {
-   public class cp_orden_pago_tipo_Bus
+    public class cp_orden_pago_tipo_Bus
     {
         cp_orden_pago_tipo_Data oData = new cp_orden_pago_tipo_Data();
      

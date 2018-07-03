@@ -2,13 +2,10 @@
 using Core.Erp.Info.Reportes.Banco;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Reportes.Banco
 {
-   public class BAN_002_cancelaciones_Bus
+    public class BAN_002_cancelaciones_Bus
     {
         BAN_002_cancelaciones_Data odata = new BAN_002_cancelaciones_Data();
 

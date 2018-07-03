@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Erp.Data.RRHH;
 using Core.Erp.Info.RRHH;
-using Core.Erp.Data.RRHH;
+using System;
+using System.Collections.Generic;
 namespace Core.Erp.Bus.RRHH
 {
-   public class ro_nomina_x_horas_extras_Bus
+    public class ro_nomina_x_horas_extras_Bus
     {
         #region variables
         ro_nomina_x_horas_extras_Data odata = new ro_nomina_x_horas_extras_Data();

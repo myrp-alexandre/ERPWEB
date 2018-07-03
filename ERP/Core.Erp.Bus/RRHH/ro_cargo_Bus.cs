@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Erp.Data.RRHH;
+﻿using Core.Erp.Data.RRHH;
 using Core.Erp.Info.RRHH;
+using System;
+using System.Collections.Generic;
 namespace Core.Erp.Bus.RRHH
 {
-  public  class ro_cargo_Bus
+    public  class ro_cargo_Bus
     {
         ro_cargo_Data odata = new ro_cargo_Data();
         public List<ro_cargo_Info> get_list(int IdEmpresa, bool estado)

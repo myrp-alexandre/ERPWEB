@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Erp.Data.Reportes.RRHH;
 using Core.Erp.Info.Reportes.RRHH;
-using Core.Erp.Data.Reportes.RRHH;
+using System;
+using System.Collections.Generic;
 
 namespace Core.Erp.Bus.Reportes.RRHH
 {

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Erp.Data.Contabilidad;
 using Core.Erp.Info.Contabilidad;
-using Core.Erp.Data.Contabilidad;
+using System;
+using System.Collections.Generic;
 namespace Core.Erp.Bus.Contabilidad
 {
-   public class ct_punto_cargo_Bus
+    public class ct_punto_cargo_Bus
     {
          ct_punto_cargo_Data odata = new  ct_punto_cargo_Data();
         public List< ct_punto_cargo_Info> get_list(int IdEmpresa, bool mostrar_anulados)

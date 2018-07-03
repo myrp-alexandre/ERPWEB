@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Erp.Data.RRHH;
 using Core.Erp.Info.RRHH;
-using Core.Erp.Data.RRHH;
+using System;
+using System.Collections.Generic;
 namespace Core.Erp.Bus.RRHH
 {
     public class ro_DocumentoxEmp_Bus

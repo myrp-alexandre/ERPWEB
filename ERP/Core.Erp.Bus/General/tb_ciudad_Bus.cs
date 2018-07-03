@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Erp.Data.General;
 using Core.Erp.Info.General;
-using Core.Erp.Data.General;
+using System;
+using System.Collections.Generic;
 namespace Core.Erp.Bus.General
 {
-   public class tb_ciudad_Bus
+    public class tb_ciudad_Bus
     {
         tb_ciudad_Data odata = new tb_ciudad_Data();
         public List<tb_ciudad_Info> get_list(string IdProvincia, bool mostrar_anulados)

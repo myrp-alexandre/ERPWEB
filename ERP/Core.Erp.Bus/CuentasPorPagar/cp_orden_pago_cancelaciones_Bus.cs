@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Erp.Data.CuentasPorPagar;
 using Core.Erp.Info.CuentasPorPagar;
-using Core.Erp.Data.CuentasPorPagar;
+using System;
+using System.Collections.Generic;
 namespace Core.Erp.Bus.CuentasPorPagar
 {
-   public class cp_orden_pago_cancelaciones_Bus
+    public class cp_orden_pago_cancelaciones_Bus
     {
         cp_orden_pago_cancelaciones_Data odata = new cp_orden_pago_cancelaciones_Data();
         public Boolean guardarDB(cp_orden_pago_cancelaciones_Info Info)

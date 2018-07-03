@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Erp.Data.Inventario;
 using Core.Erp.Info.Inventario;
-using Core.Erp.Data.Inventario;
+using System;
+using System.Collections.Generic;
 namespace Core.Erp.Bus.Inventario
 {
-   public class in_transferencia_Bus
+    public class in_transferencia_Bus
     {
         in_transferencia_Data odata = new in_transferencia_Data();
         in_transferencia_det_Data odata_det = new in_transferencia_det_Data();

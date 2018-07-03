@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Erp.Data.RRHH;
+﻿using Core.Erp.Data.RRHH;
 using Core.Erp.Info.RRHH;
+using System;
+using System.Collections.Generic;
 namespace Core.Erp.Bus.RRHH
 {
-   public class ro_periodo_x_ro_Nomina_TipoLiqui_Bus
+    public class ro_periodo_x_ro_Nomina_TipoLiqui_Bus
     {
         ro_periodo_x_ro_Nomina_TipoLiqui_Data odata = new ro_periodo_x_ro_Nomina_TipoLiqui_Data();
         public List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> get_list(int IdEmpresa,int IdNominaTipo, int IdNominaTipoLiq)

@@ -2,13 +2,10 @@
 using Core.Erp.Info.Reportes.CuentasPorPagar;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Reportes.CuentasPorPagar
 {
-   public class CXP_006_diario_Bus
+    public class CXP_006_diario_Bus
     {
         CXP_006_diario_Data odata = new CXP_006_diario_Data();
 

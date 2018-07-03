@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Erp.Data.CuentasPorPagar;
 using Core.Erp.Info.CuentasPorPagar;
-using Core.Erp.Data.CuentasPorPagar;
+using System;
 namespace Core.Erp.Bus.CuentasPorPagar
 {
-   public class cp_retencion_x_ct_cbtecble_Bus
+    public class cp_retencion_x_ct_cbtecble_Bus
     {
         cp_retencion_x_ct_cbtecble_Data odata = new cp_retencion_x_ct_cbtecble_Data();
         public cp_retencion_x_ct_cbtecble_Info get_info(int IdEmpresa, decimal IdRetencion)

@@ -2,13 +2,10 @@
 using Core.Erp.Info.Facturacion;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Facturacion
 {
-   public  class fa_cliente_contactos_Bus
+    public  class fa_cliente_contactos_Bus
     {
         fa_cliente_contactos_Data odata = new fa_cliente_contactos_Data();
     

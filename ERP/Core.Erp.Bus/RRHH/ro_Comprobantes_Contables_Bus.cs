@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.Erp.Bus.RRHH
+﻿namespace Core.Erp.Bus.RRHH
 {
-  public  class ro_Comprobantes_Contables_Bus
+    public  class ro_Comprobantes_Contables_Bus
     {
     }
 }

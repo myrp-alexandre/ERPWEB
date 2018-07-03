@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Erp.Data.RRHH;
 using Core.Erp.Info.RRHH;
-using Core.Erp.Data.RRHH;
+using System;
+using System.Collections.Generic;
 namespace Core.Erp.Bus.RRHH
 {
-  public  class ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Bus
+    public  class ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Bus
     {
         ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Data odata = new ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Data();
         public List<ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Info> get_list(int IdEmpresa)

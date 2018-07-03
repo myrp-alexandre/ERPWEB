@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Erp.Data.RRHH;
 using Core.Erp.Info.RRHH;
-using Core.Erp.Data.RRHH;
+using System;
+using System.Collections.Generic;
 namespace Core.Erp.Bus.RRHH
 {
-   public class ro_marcaciones_x_empleado_Bus
+    public class ro_marcaciones_x_empleado_Bus
     {
         ro_marcaciones_x_empleado_Data odata = new ro_marcaciones_x_empleado_Data();
         public List<ro_marcaciones_x_empleado_Info> get_list(int IdEmpresa)

@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Core.Erp.Data.RRHH;
+using Core.Erp.Info.RRHH;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Erp.Info.RRHH;
-using Core.Erp.Data.RRHH;
 namespace Core.Erp.Bus.RRHH
 {
-  public  class ro_Historico_Liquidacion_Vacaciones_Bus
+    public  class ro_Historico_Liquidacion_Vacaciones_Bus
     {
         #region MyRegion
         ro_Solicitud_Vacaciones_x_empleado_Bus bus_solicitud = new ro_Solicitud_Vacaciones_x_empleado_Bus();
