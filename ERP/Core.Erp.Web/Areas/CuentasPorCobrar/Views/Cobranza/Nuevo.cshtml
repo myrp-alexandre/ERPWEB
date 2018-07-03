@@ -1,8 +1,69 @@
-﻿
+﻿@model Core.Erp.Info.CuentasPorCobrar.cxc_cobro_Info
 @{
-    ViewBag.Title = "Nuevo";
+    ViewBag.Title = "Nuevo cobro";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Nuevo</h2>
 
+@using (Html.BeginForm("Nuevo", "Cobranza", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    <div class="alert alert-warning alert-dismissible">
+        <h4>
+            <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+        </h4>
+    </div>
+    @Html.HiddenFor(q => q.IdEmpresa)
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdSucursal">Sucursal*</label>
+                    @Html.DropDownListFor(q=>q.IdSucursal,new SelectList(ViewBag.lst_sucursal, "IdSucursal","Su_Descripción"),new { @class = "form-control", @id = "IdSucursal"})
+                    @Html.ValidationMessageFor(q=>q.IdSucursal,"",new { @class = "text-danger"})
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdCliente">Cliente*</label>
+
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdCobro_tipo">Tipo cobro*</label>
+                    @Html.DropDownListFor(q => q.IdCobro_tipo, new SelectList(ViewBag.lst_cobro_tipo, "IdCobro_tipo", "tc_descripcion"), new { @class = "form-control", @id = "IdCobro_tipo" })
+                    @Html.ValidationMessageFor(q => q.IdCobro_tipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="col-md-offset-4 col-md-8">
+                <div class="form-group">
+                    <label for="cr_fecha">Fecha*</label>
+                    @Html.TextBoxFor(q => q.cr_fecha, "{0:dd/MM/yyyy}", new { @id = "cr_fecha", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.cr_fecha, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdCaja">Caja*</label>
+                    @Html.DropDownListFor(q => q.IdCaja, new SelectList(ViewBag.lst_caja, "IdCaja", "ca_Descripcion"), new { @class = "form-control", @id = "IdCaja" })
+                    @Html.ValidationMessageFor(q => q.IdCaja, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $(function () {
+        //Date picker
+        $('#cr_fecha').datepicker({
+            autoclose: true
+        })
+    })
+</script>
