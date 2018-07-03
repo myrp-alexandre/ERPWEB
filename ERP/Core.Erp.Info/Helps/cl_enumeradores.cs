@@ -147,5 +147,10 @@ namespace Core.Erp.Info.Helps
             T_TIP_NOTA_INT,
             T_TIP_NOTA_SRI
         }
+        public enum eTiLocalizacionCXP
+        {
+            LOC,
+            EXT
+        }
     }
 }
