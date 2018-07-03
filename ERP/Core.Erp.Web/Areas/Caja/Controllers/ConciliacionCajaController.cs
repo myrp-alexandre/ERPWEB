@@ -526,6 +526,8 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
     public class cp_conciliacion_Caja_det_x_ValeCaja_List
     {
         tb_persona_Bus bus_persona = new tb_persona_Bus();
+        caj_Caja_Movimiento_Bus bus_mov = new caj_Caja_Movimiento_Bus();
+
         caj_Caja_Movimiento_Tipo_Bus bus_tipo_movi = new caj_Caja_Movimiento_Tipo_Bus();
         public List<cp_conciliacion_Caja_det_x_ValeCaja_Info> get_list()
         {
@@ -583,7 +585,16 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         public void DeleteRow(int Secuencia)
         {
             List<cp_conciliacion_Caja_det_x_ValeCaja_Info> list = get_list();
-            list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
+            var mov = list.Where(m => m.Secuencia == Secuencia).FirstOrDefault();
+            if (mov.IdCbteCble_movcaja != 0)
+            {
+                var egreso = bus_mov.get_info(mov.IdEmpresa, mov.IdTipocbte_movcaja, mov.IdCbteCble_movcaja);
+                if (bus_mov.anularDB(egreso))
+                {
+                    list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
+                }
+            }else
+                list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
         }
     }
 }

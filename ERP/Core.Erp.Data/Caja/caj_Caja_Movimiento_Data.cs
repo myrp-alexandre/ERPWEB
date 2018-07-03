@@ -213,6 +213,8 @@ namespace Core.Erp.Data.Caja
                     Entity.IdUsuario_Anu = info.IdUsuario_Anu;
                     Entity.FechaAnulacion = DateTime.Now;
                     Context.SaveChanges();
+
+                    Context.Database.ExecuteSqlCommand("DELETE cp_conciliacion_Caja_det_x_ValeCaja WHERE IdEmpresa_movcaja = " + info.IdEmpresa+ " AND IdTipocbte_movcaja = " + info.IdTipocbte+ " AND IdCbteCble_movcaja = " + info.IdCbteCble);
                 }
                 return true;
             }
