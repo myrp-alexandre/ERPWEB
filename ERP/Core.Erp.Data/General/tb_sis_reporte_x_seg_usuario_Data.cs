@@ -17,14 +17,32 @@ namespace Core.Erp.Data.General
                 using (Entities_general Context = new Entities_general())
                 {
                     Lista = (from q in Context.tb_sis_reporte_x_seg_usuario
+                             join r in Context.tb_sis_reporte
+                             on q.CodReporte equals r.CodReporte
                              where q.IdEmpresa == IdEmpresa
                              && q.IdUsuario == IdUsuario
                              select new tb_sis_reporte_x_seg_usuario_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdUsuario = q.IdUsuario,
-                                 CodReporte = q.CodReporte
+                                 CodReporte = q.CodReporte,
+                                 nom_reporte = r.nom_reporte,
+                                 seleccionado = true
                              }).ToList();
+
+                    Lista.AddRange((from q in Context.tb_sis_reporte
+                                    where !(from f in Context.tb_sis_reporte_x_seg_usuario
+                                            where f.IdEmpresa == IdEmpresa
+                                            && f.IdUsuario == IdUsuario
+                                            select f.CodReporte).Equals(q.CodReporte)
+                                    select new tb_sis_reporte_x_seg_usuario_Info
+                                    {
+                                        IdEmpresa = IdEmpresa,
+                                        IdUsuario = IdUsuario,
+                                        CodReporte = q.CodReporte,
+                                        nom_reporte = q.nom_reporte,
+                                        seleccionado = false
+                                    }).ToList());
                 }
                 return Lista;
             }

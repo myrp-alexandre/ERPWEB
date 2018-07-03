@@ -11,5 +11,7 @@ namespace Core.Erp.Info.General
         public string IdUsuario { get; set; }
         public int IdEmpresa { get; set; }
         public string CodReporte { get; set; }
+        public string nom_reporte { get; set; }
+        public bool seleccionado { get; set; }
     }
 }

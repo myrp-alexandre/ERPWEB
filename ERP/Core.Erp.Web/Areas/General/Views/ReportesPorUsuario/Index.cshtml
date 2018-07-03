@@ -8,6 +8,35 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<script>
+
+    function guardar() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdUsuario: $("#IdUsuario").val(),
+            IDs: selectedIDs
+        }
+        $("#btn_guardar").disabled = true;
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("guardar", "ReportesPorUsuario", new { Area = "General" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#myform").submit();
+            },
+            error: function (error) {
+            }
+        });
+        $("#btn_guardar").disabled = false;
+    }
+</script>
+
 @using (Html.BeginForm("Index", "ReportesPorUsuario", FormMethod.Post, new { role = "form", @class = "form" }))
 {
     <div class="row">
