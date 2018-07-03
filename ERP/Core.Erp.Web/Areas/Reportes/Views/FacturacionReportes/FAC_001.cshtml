@@ -94,23 +94,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdCliente">Cliente</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdCliente, settings =>
-                 {
-                     settings.Name = "IdCliente";
-                     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                     settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                     settings.Properties.Columns.Add("IdCliente", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                     settings.Properties.Columns.Add("info_persona.pe_nombreCompleto", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                     //Campo ID
-                     settings.Properties.ValueField = "IdCliente";
-                     settings.Properties.ValueType = typeof(decimal);
-                     settings.Properties.TextField = "info_persona.pe_nombreCompleto";
-                     //Boton para seleccionar ningun registro
-                     settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                     settings.Properties.NullText = "== Seleccione ==";
-                     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                     settings.Properties.AllowNull = true;
-                 }).BindList(ViewBag.lst_cliente).GetHtml()
+                    @Html.Partial("_CmbCliente_Facturacion", Model)
                     @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
                 </div>
             </div>

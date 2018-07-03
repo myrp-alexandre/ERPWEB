@@ -1,8 +1,12 @@
 ﻿using Core.Erp.Bus.Facturacion;
 using Core.Erp.Bus.General;
 using Core.Erp.Bus.Inventario;
+using Core.Erp.Info.CuentasPorCobrar;
+using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
+using Core.Erp.Web.Helps;
 using Core.Erp.Web.Reportes.Facturacion;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +17,23 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
     public class FacturacionReportesController : Controller
     {
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+
+        #region Metodos ComboBox bajo demanda
+        public ActionResult CmbCliente_Facturacion()
+        {
+            cxc_cobro_Info model = new cxc_cobro_Info();
+            return PartialView("_CmbCliente_Facturacion", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.CLIENTE.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.CLIENTE.ToString());
+        }
+        #endregion
 
         private void cargar_combos(cl_filtros_Info model)
         {
@@ -121,7 +142,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdClienteContacto.Value = model.IdClienteContacto;
             report.usuario = Session["IdUsuario"].ToString();
             report.empresa = Session["nom_empresa"].ToString();
-            if (model.IdProducto == 0)
                 report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
@@ -139,7 +159,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.usuario = Session["IdUsuario"].ToString();
             report.empresa = Session["nom_empresa"].ToString();
             cargar_combos(model);
-            if (model.IdProducto == 0)
                 report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);

@@ -56,6 +56,7 @@ namespace Core.Erp.Info.Helps
         public int IdVendedor { get; set; }
         public decimal IdProducto_padre { get; set; }
         public bool mostrar_anulados { get; set; }
+        public decimal IdEntidad { get; set; }
 
         #endregion
         public int IdNomina { get; set; }
