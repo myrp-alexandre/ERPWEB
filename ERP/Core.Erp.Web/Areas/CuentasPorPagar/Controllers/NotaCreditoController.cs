@@ -78,6 +78,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             ViewBag.lst_tipo_nota = lst_tipo_nota;
 
 
+            List<string> lst_tipo_servicio = new List<string>();
+            lst_tipo_servicio.Add(cl_enumeradores.eTipoServicioCXP.SERVI.ToString());
+            lst_tipo_servicio.Add(cl_enumeradores.eTipoServicioCXP.BIEN.ToString());
+            lst_tipo_servicio.Add(cl_enumeradores.eTipoServicioCXP.AMBAS.ToString());
+
+            ViewBag.lst_tipo_servicio = lst_tipo_servicio;
+
+
         }
 
         public ActionResult Nuevo()
