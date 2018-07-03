@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.General
 {
-    class tb_sis_reporte_x_seg_usuario_Info
+   public class tb_sis_reporte_x_seg_usuario_Info
     {
+        public string IdUsuario { get; set; }
+        public int IdEmpresa { get; set; }
+        public string CodReporte { get; set; }
     }
 }

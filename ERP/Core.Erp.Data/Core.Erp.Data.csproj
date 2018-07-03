@@ -377,6 +377,7 @@
     <Compile Include="General\tb_sis_Impuesto_Tipo_Data.cs" />
     <Compile Include="General\tb_sis_Impuesto_x_ctacble_Data.cs" />
     <Compile Include="General\tb_sis_reporte_Data.cs" />
+    <Compile Include="General\tb_sis_reporte_x_seg_usuario_Data.cs" />
     <Compile Include="General\tb_sucursal_Data.cs" />
     <Compile Include="General\tb_transportista_Data.cs" />
     <Compile Include="Inventario\in_CatalogoTipo_Data.cs" />
