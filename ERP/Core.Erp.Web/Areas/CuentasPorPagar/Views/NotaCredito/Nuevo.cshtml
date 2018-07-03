@@ -93,18 +93,7 @@
    
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="IdTipoServicio">Tipo de servicio</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoServicio, setting =>
-                   {
-                   setting.Properties.Items.Add("BIEN");
-                   setting.Properties.Items.Add("SERVI");
-                   setting.Properties.Items.Add("AMBAS");
-                   }).GetHtml()
-                    @Html.ValidationMessageFor(q => q.IdTipoServicio, "", new { @class = "text-danger" })
-                </div>
-            </div>
+           
 
             <div class="col-md-2">
                 <div class="form-group">
@@ -248,6 +237,16 @@
                                 @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="IdTipoServicio">Tipo servicio*</label>
+                                    @Html.DropDownListFor(q => q.IdTipoServicio, new SelectList(ViewBag.lst_tipo_servicio), new { @class = "form-control", @id = "cmb_idtCredito" })
+                                    @Html.ValidationMessageFor(q => q.IdTipoServicio, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="IdOrden_giro_Tipo">Tipo documento*</label>

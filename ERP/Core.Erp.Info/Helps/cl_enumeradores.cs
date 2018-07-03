@@ -136,6 +136,12 @@ namespace Core.Erp.Info.Helps
             TARJE_CRE
         }
 
+        public enum eTipoServicioCXP
+        {
+            BIEN,
+            SERVI,
+            AMBAS
+        }
         public enum eTipoNotaCXP
         {
             T_TIP_NOTA_INT,
