@@ -76,6 +76,18 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
+        public Boolean Reversar_Aprobacion(int IdEmpresa, int IdSucursal, int IdMovi_inve_tipo, decimal IdNumMovi, string Genera_movi_inven)
+        {
+            try
+            {
+               return odata_det.Reversar_Aprobacion(IdEmpresa,IdSucursal,IdMovi_inve_tipo,IdNumMovi, Genera_movi_inven);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
+
+        }
     }
-}
