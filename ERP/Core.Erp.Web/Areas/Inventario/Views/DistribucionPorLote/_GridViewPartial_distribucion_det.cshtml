@@ -40,10 +40,7 @@
             column.Width = Unit.Percentage(50);
             column.EditorProperties().ComboBox(p =>
             {
-                p.Columns.Add("pr_descripcion", "Descripción").Width = Unit.Percentage(70);
-                //p.Columns.Add("lote_num_lote", "Lote").Width = Unit.Percentage(15);
-                //p.Columns.Add("lote_fecha_vcto", "Fecha exp.").Width = Unit.Percentage(15);
-
+                p.Columns.Add("pr_descripcion", "Descripción").Width = Unit.Percentage(100);
                 p.TextField = "pr_descripcion";
                 p.ValueField = "IdProducto";
                 p.ValueType = typeof(decimal);
