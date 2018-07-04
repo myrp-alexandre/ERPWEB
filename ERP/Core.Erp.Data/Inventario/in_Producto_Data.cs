@@ -199,6 +199,13 @@ namespace Core.Erp.Data.Inventario
 
                              }).ToList();
                 }
+                Lista.ForEach(V=>{
+                    V.pr_descripcion = V.pr_descripcion + " " + V.lote_num_lote + " ";
+                    if(V.lote_fecha_vcto!=null)
+                    {
+                        V.pr_descripcion = V.pr_descripcion + V.lote_fecha_vcto.ToString().Substring(0, 10);
+                    };
+                });
                 return Lista;
             }
             catch (Exception)

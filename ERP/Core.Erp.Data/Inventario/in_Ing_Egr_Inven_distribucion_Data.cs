@@ -156,7 +156,12 @@ namespace Core.Erp.Data.Inventario
                                  
                              }).ToList();
                 }
-
+                int idsecuencia = 1;
+                foreach (var item in Lista)
+                {
+                    item.secuencia_distribucion = idsecuencia;
+                    idsecuencia++;
+                }
                 return Lista;
             }
             catch (Exception )

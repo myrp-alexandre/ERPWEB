@@ -166,22 +166,24 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             in_Ing_Egr_Inven_distribucion_Info model = new in_Ing_Egr_Inven_distribucion_Info();
             if (ModelState.IsValid)
             {
-                if (Session["list_productos"] != null)
+                if(info_det.IdProducto!=0)
                 {
-                    var list = Session["list_productos"] as List<in_Producto_Info>;
-                    var info_ = list.Where(v => v.IdProducto == info_det.IdProducto).FirstOrDefault();
-                    lote_fecha_fab = info_.lote_fecha_fab;
-                    lote_fecha_vcto = info_.lote_fecha_vcto;
-                    lote_num_lote = info_.lote_num_lote;
-                    pr_descripcion = info_.pr_descripcion;
-                    unidad_medida = info_.IdUnidadMedida;
+                    if (Session["list_productos"] != null)
+                    {
+                        var list = Session["list_productos"] as List<in_Producto_Info>;
+                        var info_ = list.Where(v => v.IdProducto == info_det.IdProducto).FirstOrDefault();
+                        lote_fecha_fab = info_.lote_fecha_fab;
+                        lote_fecha_vcto = info_.lote_fecha_vcto;
+                        lote_num_lote = info_.lote_num_lote;
+                        pr_descripcion = info_.pr_descripcion;
+                        unidad_medida = info_.IdUnidadMedida;
 
-                    info_det.lote_fecha_fab = lote_fecha_fab;
-                    info_det.lote_fecha_vcto = lote_fecha_vcto;
-                    info_det.lote_num_lote = lote_num_lote;
-                    info_det.pr_descripcion = pr_descripcion;
-                    info_det.IdUnidadMedida = unidad_medida;
-
+                        info_det.lote_fecha_fab = lote_fecha_fab;
+                        info_det.lote_fecha_vcto = lote_fecha_vcto;
+                        info_det.lote_num_lote = lote_num_lote;
+                        info_det.pr_descripcion = pr_descripcion;
+                        info_det.IdUnidadMedida = unidad_medida;
+                    }
 
 
                 }
@@ -225,7 +227,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
             if (Session["IdProducto_padre"] != null)
                 IdProducto_padre = (decimal)Session["IdProducto_padre"];
-            cargar_combos_detalle(IdProducto_padre); return PartialView("_GridViewPartial_distribuidos", model.lst_distribuido);
+            cargar_combos_detalle(IdProducto_padre);
+            return PartialView("_GridViewPartial_distribuidos", model.lst_distribuido);
         }
         #endregion
         #region Funciones new, update, delete, agregar distribucion
