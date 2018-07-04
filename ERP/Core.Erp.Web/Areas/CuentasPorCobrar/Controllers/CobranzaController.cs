@@ -26,6 +26,8 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         tb_banco_Bus bus_banco = new tb_banco_Bus();
         ba_Banco_Cuenta_Bus bus_banco_cuenta = new ba_Banco_Cuenta_Bus();
+        cxc_cobro_det_Bus bus_det = new cxc_cobro_det_Bus();
+        cxc_cobro_det_List list_det = new cxc_cobro_det_List();
 
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbCliente_Cobranza()
@@ -127,7 +129,37 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_cobranza_det()
         {
-            var model = new object[0];
+            var model = list_det.get_list();
+            return PartialView("_GridViewPartial_cobranza_det", model);
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_cobranza_facturas_x_cruzar()
+        {
+            Session["IdSucursalCobranza"] = (Request.Params["IdSucursalCobranza"] != null ? Convert.ToInt32(Request.Params["IdSucursalCobranza"]) : 0);
+            Session["IdClienteCobranza"] = Request.Params["IdClienteCobranza"] != null ? Convert.ToDecimal(Request.Params["IdClienteCobranza"]) : 0;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            int IdSucursal = Convert.ToInt32(Session["IdSucursalCobranza"]);
+            decimal IdCliente = Convert.ToDecimal(Session["IdClienteCobranza"]);
+            var model = bus_det.get_list_cartera(IdEmpresa, IdSucursal, IdCliente);
+            return PartialView("_GridViewPartial_cobranza_facturas_x_cruzar", model);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNewFactura(string IDs = "")
+        {
+            if (IDs != "")
+            {
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                var lst_x_cruzar = bus_det.get_list_cartera(IdEmpresa, Convert.ToInt32(Session["IdSucursalCobranza"]), Convert.ToDecimal(Session["IdClienteCobranza"]));
+                string[] array = IDs.Split(',');
+                foreach (var item in array)
+                {
+                    var info_det = lst_x_cruzar.Where(q => q.secuencia == item).FirstOrDefault();
+                    if (info_det != null)
+                        list_det.AddRow(info_det);
+                }
+            }
+            var model = list_det.get_list();
             return PartialView("_GridViewPartial_cobranza_det", model);
         }
     }
@@ -152,8 +184,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 
         public void AddRow(cxc_cobro_det_Info info_det)
         {
-            List<cxc_cobro_det_Info> list = get_list();
-            info_det.secuencia = list.Count == 0 ? 1 : list.Max(q => q.secuencia) + 1;
+            List<cxc_cobro_det_Info> list = get_list();            
             list.Add(info_det);
         }
 
@@ -162,7 +193,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             cxc_cobro_det_Info edited_info = get_list().Where(m => m.secuencia == info_det.secuencia).First();
         }
 
-        public void DeleteRow(int secuencia)
+        public void DeleteRow(string secuencia)
         {
             List<cxc_cobro_det_Info> list = get_list();
             list.Remove(list.Where(m => m.secuencia == secuencia).First());

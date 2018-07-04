@@ -8,6 +8,8 @@ namespace Core.Erp.Info.CuentasPorCobrar
 {
     public class cxc_cobro_det_Info
     {
+        public string Observacion;
+
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public decimal IdCobro { get; set; }
@@ -30,7 +32,16 @@ namespace Core.Erp.Info.CuentasPorCobrar
         #endregion
                 
         #region Campos que no existen en la tabla
-        public int secuencia { get; set; }
+        public string secuencia { get; set; }
+        public DateTime vt_fecha { get; set; }
+        public double? vt_total { get; set; }
+        public string vt_NumDocumento { get; set; }
+        public double? Saldo { get; set; }
+        public double? vt_Subtotal { get; set; }
+        public double? vt_iva { get; set; }
+        public DateTime? vt_fech_venc { get; set; }
+        public double dc_ValorRetFu { get; set; }
+        public double dc_ValorRetIva { get; set; }
         #endregion
 
     }

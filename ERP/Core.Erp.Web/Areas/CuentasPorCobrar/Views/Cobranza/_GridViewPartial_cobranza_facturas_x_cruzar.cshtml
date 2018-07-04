@@ -1,8 +1,8 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView_cobranza_det";
-        settings.CallbackRouteValues = new { Controller = "Cobranza", Action = "GridViewPartial_cobranza_det" };
+        settings.Name = "GridView_cobranza_facturas_x_cruzar";
+        settings.CallbackRouteValues = new { Controller = "Cobranza", Action = "GridViewPartial_cobranza_facturas_x_cruzar" };
         settings.KeyFieldName = "secuencia";
         settings.Width = Unit.Percentage(100);
 
@@ -19,10 +19,9 @@
 
         settings.Columns.Add("IdEmpresa");
         settings.Columns.Add("IdSucursal");
-        settings.Columns.Add("IdCobro");
-        settings.Columns.Add("secuencial");
 
-        
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdClienteCobranza'] = IdCliente.GetValue(); e.customArgs['IdSucursalCobranza'] = $('#IdSucursal').val(); OnBeginCallback(s,e);}";
+        settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
     });
 }
 @grid.Bind(Model).GetHtml()

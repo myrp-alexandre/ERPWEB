@@ -8,7 +8,79 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script type="text/javascript">
+    var selectedIDs;
 
+    $(function () {
+        //Date picker
+        $('#cr_fecha').datepicker({
+            autoclose: true
+        })
+
+        $("#IdCobro_tipo").change(function () {
+            SetCobroTipo();
+        });
+
+        SetCobroTipo();
+    })
+
+    function SetCobroTipo() {
+
+        var tipo_cobro = $("#IdCobro_tipo").val();
+
+        $("#div_bancos").hide();
+        $("#div_cheque").hide();
+        if (tipo_cobro == "CHQF" || tipo_cobro == "CHQV") {
+            $("#div_cheque").show();
+        }else
+            if (tipo_cobro == "DEPO") {
+                $("#div_bancos").show();
+            }
+    }
+
+    function OnBeginCallback(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDs"] = selectedIDs;
+    }
+    function OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("secuencia", GetSelectedFieldValuesCallback);
+    }
+    function GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedIDs = values.join(',');
+    }
+
+    function MostrarModal() {
+        selectedIDs = "";
+        GridView_cobranza_facturas_x_cruzar.PerformCallback();
+        GridView_cobranza_facturas_x_cruzar.UnselectRows();
+        $("#FacturasModal").modal("show");
+    }
+
+    function AddFacturas() {
+
+        var datos = {
+            IDs: selectedIDs
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("EditingAddNewFactura", "Cobranza",new { Area = "CuentasPorCobrar"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+        selectedIDs = "";
+        GridView_cobranza_det.PerformCallback();
+        $("#FacturasModal").modal("hide");
+    }
+</script>
 @using (Html.BeginForm("Nuevo", "Cobranza", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     if (@ViewBag.mensaje != null)
@@ -19,7 +91,27 @@
             </h4>
         </div>
     }
+    <div class="modal fade" id="FacturasModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Facturas</h4>
+                </div>
+                <div class="modal-body">
 
+                    @Html.Action("GridViewPartial_cobranza_facturas_x_cruzar")
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="AddFacturas();">Aceptar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
     @Html.HiddenFor(q => q.IdEmpresa)
     <div class="row">
         <div class="col-md-8">
@@ -113,7 +205,15 @@
             </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-primary" id="btn_buscar" onclick="MostrarModal();">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>        
+    </div>
 
     @Html.Action("GridViewPartial_cobranza_det")
 
@@ -127,32 +227,3 @@
     }
 }
 
-<script type="text/javascript">
-    $(function () {
-        //Date picker
-        $('#cr_fecha').datepicker({
-            autoclose: true
-        })
-
-        $("#IdCobro_tipo").change(function () {
-            SetCobroTipo();
-        });
-
-        SetCobroTipo();
-    })
-
-    function SetCobroTipo() {
-        
-        var tipo_cobro = $("#IdCobro_tipo").val();
-
-        $("#div_bancos").hide();
-        $("#div_cheque").hide();
-        if (tipo_cobro == "CHQF" || tipo_cobro == "CHQV") {
-            $("#div_cheque").show();
-        }else
-            if (tipo_cobro == "DEPO") {
-                $("#div_bancos").show();
-                
-            }
-    }
-</script>
