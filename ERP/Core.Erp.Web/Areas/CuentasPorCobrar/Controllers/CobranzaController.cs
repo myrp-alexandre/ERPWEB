@@ -97,8 +97,10 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
                 IdSucursal = IdSucursal,
                 cr_fecha = DateTime.Now.Date,
                 IdCobro_tipo = "EFEC",
-                IdCaja = 1
+                IdCaja = 1,
+                lst_det = new List<cxc_cobro_det_Info>(),
             };
+            list_det.set_list(model.lst_det);
             cargar_combos();
             return View(model);
         }
@@ -145,8 +147,9 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             return PartialView("_GridViewPartial_cobranza_facturas_x_cruzar", model);
         }
         [HttpPost, ValidateInput(false)]
-        public ActionResult EditingAddNewFactura(string IDs = "")
+        public JsonResult EditingAddNewFactura(string IDs = "", double TotalACobrar = 0)
         {
+            double saldo = TotalACobrar;
             if (IDs != "")
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -159,9 +162,40 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
                         list_det.AddRow(info_det);
                 }
             }
-            var model = list_det.get_list();
+            var lst = list_det.get_list();
+            foreach (var item in lst)
+            {
+                if (saldo > 0)
+                {
+                    item.dc_ValorPago = saldo >= Convert.ToDouble(item.Saldo) ? Convert.ToDouble(item.Saldo) : saldo;
+                    saldo = saldo - item.dc_ValorPago;
+                }
+                else
+                    item.dc_ValorPago = 0;                
+            }
+            list_det.set_list(lst);
+            var resultado = saldo;
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }        
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdateFactura([ModelBinder(typeof(DevExpressEditorsBinder))] cxc_cobro_det_Info info_det)
+        {
+            if (ModelState.IsValid)
+                list_det.UpdateRow(info_det);
+            cxc_cobro_Info model = new cxc_cobro_Info();
+            model.lst_det = list_det.get_list();
             return PartialView("_GridViewPartial_cobranza_det", model);
         }
+
+        public ActionResult EditingDeleteFactura(string secuencia)
+        {
+            list_det.DeleteRow(secuencia);
+            cxc_cobro_Info model = new cxc_cobro_Info();
+            model.lst_det = list_det.get_list();
+            return PartialView("_GridViewPartial_cobranza_det", model);
+        }
+
     }
 
     public class cxc_cobro_det_List
@@ -184,7 +218,8 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 
         public void AddRow(cxc_cobro_det_Info info_det)
         {
-            List<cxc_cobro_det_Info> list = get_list();            
+            List<cxc_cobro_det_Info> list = get_list();
+            if(list.Where(q=>q.secuencia == info_det.secuencia).FirstOrDefault() == null)
             list.Add(info_det);
         }
 

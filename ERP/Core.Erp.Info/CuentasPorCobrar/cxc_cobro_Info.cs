@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Core.Erp.Info.CuentasPorCobrar
@@ -51,6 +52,7 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public string Su_Descripcion { get; set; }
         public double cr_saldo { get; set; }
         public decimal IdEntidad { get; set; }
+        public List<cxc_cobro_det_Info> lst_det { get; set; }
         #endregion
     }
 }

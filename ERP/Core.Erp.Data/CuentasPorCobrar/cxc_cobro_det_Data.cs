@@ -39,10 +39,10 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  vt_iva = q.vt_iva,
                                  vt_fech_venc = q.vt_fech_venc,
                                  dc_ValorRetFu = q.dc_ValorRetFu,
-                                 dc_ValorRetIva = q.dc_ValorRetIva,
+                                 dc_ValorRetIva = q.dc_ValorRetIva                                 
                              }).ToList();
 
-                    Lista.ForEach(q => q.secuencia = q.dc_TipoDocumento + q.IdCbte_vta_nota.ToString());
+                    Lista.ForEach(q => { q.secuencia = q.dc_TipoDocumento + q.IdCbte_vta_nota.ToString(); q.dc_ValorPago = Convert.ToDouble(q.Saldo); });
                 }
 
                 return Lista;

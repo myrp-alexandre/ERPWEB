@@ -51,6 +51,11 @@
     }
 
     function MostrarModal() {
+        if (Number($("#cr_TotalCobro").val()) == 0) {
+            alert("Debe ingresar el total a cobrar");
+            return;
+        }
+
         selectedIDs = "";
         GridView_cobranza_facturas_x_cruzar.PerformCallback();
         GridView_cobranza_facturas_x_cruzar.UnselectRows();
@@ -60,7 +65,8 @@
     function AddFacturas() {
 
         var datos = {
-            IDs: selectedIDs
+            IDs: selectedIDs,
+            TotalACobrar: $("#cr_TotalCobro").val()
         }
         $.ajax({
             type: 'POST',
@@ -72,11 +78,14 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
+                $("#cr_saldo").val(data);
             },
             error: function (error) {
             }
         });
         selectedIDs = "";
+        GridView_cobranza_facturas_x_cruzar.PerformCallback();
+        GridView_cobranza_facturas_x_cruzar.UnselectRows();
         GridView_cobranza_det.PerformCallback();
         $("#FacturasModal").modal("hide");
     }
@@ -214,7 +223,7 @@
             </div>
         </div>        
     </div>
-
+    <br />
     @Html.Action("GridViewPartial_cobranza_det")
 
 

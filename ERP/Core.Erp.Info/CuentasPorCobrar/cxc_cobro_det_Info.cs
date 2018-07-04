@@ -8,8 +8,7 @@ namespace Core.Erp.Info.CuentasPorCobrar
 {
     public class cxc_cobro_det_Info
     {
-        public string Observacion;
-
+        public string Observacion { get; set; }
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public decimal IdCobro { get; set; }
