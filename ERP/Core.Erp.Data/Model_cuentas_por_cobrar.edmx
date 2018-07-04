@@ -253,6 +253,46 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro' no ti
           <Property Name="cr_estado" Type="nvarchar" MaxLength="1" />
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwcxc_cobro_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdCobro" />
+            <PropertyRef Name="secuencial" />
+            <PropertyRef Name="IdCbte_vta_nota" />
+            <PropertyRef Name="dc_ValorPago" />
+            <PropertyRef Name="IdCobro_tipo" />
+            <PropertyRef Name="vt_Subtotal" />
+            <PropertyRef Name="vt_iva" />
+            <PropertyRef Name="vt_total" />
+            <PropertyRef Name="ValorCobrado" />
+            <PropertyRef Name="saldo" />
+            <PropertyRef Name="saldo_sin_cobro" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdCobro" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="secuencial" Type="int" Nullable="false" />
+          <Property Name="dc_TipoDocumento" Type="varchar" MaxLength="20" />
+          <Property Name="IdBodega_Cbte" Type="int" />
+          <Property Name="IdCbte_vta_nota" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="dc_ValorPago" Type="float" Nullable="false" />
+          <Property Name="IdCobro_tipo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="vt_NumFactura" Type="varchar" MaxLength="41" />
+          <Property Name="vt_Observacion" Type="varchar" MaxLength="500" />
+          <Property Name="CodDoc" Type="varchar" MaxLength="20" />
+          <Property Name="vt_Subtotal" Type="float" Nullable="false" />
+          <Property Name="vt_iva" Type="float" Nullable="false" />
+          <Property Name="vt_total" Type="float" Nullable="false" />
+          <Property Name="ValorCobrado" Type="float" Nullable="false" />
+          <Property Name="saldo" Type="float" Nullable="false" />
+          <Property Name="saldo_sin_cobro" Type="float" Nullable="false" />
+          <Property Name="vt_fecha" Type="datetime" />
+          <Property Name="vt_fech_venc" Type="datetime" />
+          <Property Name="IdCliente" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
         <Association Name="FK_cxc_Catalogo_cxc_CatalogoTipo">
           <End Role="cxc_CatalogoTipo" Type="Self.cxc_CatalogoTipo" Multiplicity="1" />
           <End Role="cxc_Catalogo" Type="Self.cxc_Catalogo" Multiplicity="*" />
@@ -422,6 +462,31 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro' no ti
     [vwcxc_cobro].[Su_Descripcion] AS [Su_Descripcion]
     FROM [web].[vwcxc_cobro] AS [vwcxc_cobro]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwcxc_cobro_det" EntityType="Self.vwcxc_cobro_det" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [vwcxc_cobro_det].[IdEmpresa] AS [IdEmpresa], 
+    [vwcxc_cobro_det].[IdSucursal] AS [IdSucursal], 
+    [vwcxc_cobro_det].[IdCobro] AS [IdCobro], 
+    [vwcxc_cobro_det].[secuencial] AS [secuencial], 
+    [vwcxc_cobro_det].[dc_TipoDocumento] AS [dc_TipoDocumento], 
+    [vwcxc_cobro_det].[IdBodega_Cbte] AS [IdBodega_Cbte], 
+    [vwcxc_cobro_det].[IdCbte_vta_nota] AS [IdCbte_vta_nota], 
+    [vwcxc_cobro_det].[dc_ValorPago] AS [dc_ValorPago], 
+    [vwcxc_cobro_det].[IdCobro_tipo] AS [IdCobro_tipo], 
+    [vwcxc_cobro_det].[vt_NumFactura] AS [vt_NumFactura], 
+    [vwcxc_cobro_det].[vt_Observacion] AS [vt_Observacion], 
+    [vwcxc_cobro_det].[CodDoc] AS [CodDoc], 
+    [vwcxc_cobro_det].[vt_Subtotal] AS [vt_Subtotal], 
+    [vwcxc_cobro_det].[vt_iva] AS [vt_iva], 
+    [vwcxc_cobro_det].[vt_total] AS [vt_total], 
+    [vwcxc_cobro_det].[ValorCobrado] AS [ValorCobrado], 
+    [vwcxc_cobro_det].[saldo] AS [saldo], 
+    [vwcxc_cobro_det].[saldo_sin_cobro] AS [saldo_sin_cobro], 
+    [vwcxc_cobro_det].[vt_fecha] AS [vt_fecha], 
+    [vwcxc_cobro_det].[vt_fech_venc] AS [vt_fech_venc], 
+    [vwcxc_cobro_det].[IdCliente] AS [IdCliente]
+    FROM [web].[vwcxc_cobro_det] AS [vwcxc_cobro_det]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_cxc_Catalogo_cxc_CatalogoTipo" Association="Self.FK_cxc_Catalogo_cxc_CatalogoTipo">
             <End Role="cxc_CatalogoTipo" EntitySet="cxc_CatalogoTipo" />
             <End Role="cxc_Catalogo" EntitySet="cxc_Catalogo" />
@@ -511,6 +576,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro' no ti
             <End Role="cxc_cobro_tipo" EntitySet="cxc_cobro_tipo" />
             <End Role="cxc_cobro_det" EntitySet="cxc_cobro_det" />
           </AssociationSet>
+          <EntitySet Name="vwcxc_cobro_det" EntityType="Model_cuentas_por_cobrar.vwcxc_cobro_det" />
         </EntityContainer>
         <EntityType Name="cxc_Catalogo">
           <Key>
@@ -890,6 +956,44 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwcxc_cobro_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdCobro" />
+            <PropertyRef Name="secuencial" />
+            <PropertyRef Name="IdCbte_vta_nota" />
+            <PropertyRef Name="dc_ValorPago" />
+            <PropertyRef Name="IdCobro_tipo" />
+            <PropertyRef Name="vt_Subtotal" />
+            <PropertyRef Name="vt_iva" />
+            <PropertyRef Name="vt_total" />
+            <PropertyRef Name="ValorCobrado" />
+            <PropertyRef Name="saldo" />
+            <PropertyRef Name="saldo_sin_cobro" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdCobro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="secuencial" Type="Int32" Nullable="false" />
+          <Property Name="dc_TipoDocumento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdBodega_Cbte" Type="Int32" />
+          <Property Name="IdCbte_vta_nota" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="dc_ValorPago" Type="Double" Nullable="false" />
+          <Property Name="IdCobro_tipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="vt_NumFactura" Type="String" MaxLength="41" FixedLength="false" Unicode="false" />
+          <Property Name="vt_Observacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CodDoc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="vt_Subtotal" Type="Double" Nullable="false" />
+          <Property Name="vt_iva" Type="Double" Nullable="false" />
+          <Property Name="vt_total" Type="Double" Nullable="false" />
+          <Property Name="ValorCobrado" Type="Double" Nullable="false" />
+          <Property Name="saldo" Type="Double" Nullable="false" />
+          <Property Name="saldo_sin_cobro" Type="Double" Nullable="false" />
+          <Property Name="vt_fecha" Type="DateTime" Precision="3" />
+          <Property Name="vt_fech_venc" Type="DateTime" Precision="3" />
+          <Property Name="IdCliente" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1109,6 +1213,33 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro' no ti
                 <ScalarProperty Name="IdCobro_tipo" ColumnName="IdCobro_tipo" />
                 <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
                 <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdCobro" ColumnName="IdCobro" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwcxc_cobro_det">
+            <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.vwcxc_cobro_det">
+              <MappingFragment StoreEntitySet="vwcxc_cobro_det">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="vt_fech_venc" ColumnName="vt_fech_venc" />
+                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
+                <ScalarProperty Name="saldo_sin_cobro" ColumnName="saldo_sin_cobro" />
+                <ScalarProperty Name="saldo" ColumnName="saldo" />
+                <ScalarProperty Name="ValorCobrado" ColumnName="ValorCobrado" />
+                <ScalarProperty Name="vt_total" ColumnName="vt_total" />
+                <ScalarProperty Name="vt_iva" ColumnName="vt_iva" />
+                <ScalarProperty Name="vt_Subtotal" ColumnName="vt_Subtotal" />
+                <ScalarProperty Name="CodDoc" ColumnName="CodDoc" />
+                <ScalarProperty Name="vt_Observacion" ColumnName="vt_Observacion" />
+                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
+                <ScalarProperty Name="IdCobro_tipo" ColumnName="IdCobro_tipo" />
+                <ScalarProperty Name="dc_ValorPago" ColumnName="dc_ValorPago" />
+                <ScalarProperty Name="IdCbte_vta_nota" ColumnName="IdCbte_vta_nota" />
+                <ScalarProperty Name="IdBodega_Cbte" ColumnName="IdBodega_Cbte" />
+                <ScalarProperty Name="dc_TipoDocumento" ColumnName="dc_TipoDocumento" />
+                <ScalarProperty Name="secuencial" ColumnName="secuencial" />
                 <ScalarProperty Name="IdCobro" ColumnName="IdCobro" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
