@@ -228,6 +228,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
                 return RedirectToAction("Index");
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdCobro);
             list_det.set_list(model.lst_det);
+            model.IdEntidad = model.IdCliente;
             cargar_combos();
             return View(model);
         }
