@@ -191,7 +191,6 @@
     <Compile Include="Reportes\Facturacion\FAC_001_Bus.cs" />
     <Compile Include="Reportes\Facturacion\FAC_002_Bus.cs" />
     <Compile Include="Reportes\Facturacion\FAC_003_Bus.cs" />
-    <Compile Include="Reportes\Facturacion\FAC_003_cuotas_Bus.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Bus.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Bus.cs" />
     <Compile Include="Reportes\Inventario\INV_007_Bus.cs" />

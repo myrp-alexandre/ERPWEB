@@ -699,7 +699,6 @@
     <Compile Include="Reportes\CuentasPorPagar\CXP_008_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_001_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_002_Data.cs" />
-    <Compile Include="Reportes\Facturacion\FAC_003_cuotas_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_003_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Data.cs" />
