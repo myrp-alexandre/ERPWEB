@@ -8564,6 +8564,7 @@
     <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbCliente_Facturacion.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_003.cshtml" />
     <Content Include="Areas\General\Views\ReportesPorUsuarioController\Index.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_004.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
