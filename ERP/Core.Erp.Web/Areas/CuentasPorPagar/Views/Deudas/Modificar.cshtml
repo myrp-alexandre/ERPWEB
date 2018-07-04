@@ -23,6 +23,9 @@
     @Html.HiddenFor(q => q.IdCbteCble_Ogiro)
     @Html.HiddenFor(q => q.IdTipoCbte_Ogiro)
 
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdCbteCble_Ogiro)
+
     <div class="row">
         <div class="col-md-6">
             <div class="col-md-12">
@@ -51,6 +54,7 @@
                        //Boton para seleccionar ningun registro
                        settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                       settings.Properties.ClientSideEvents.SelectedIndexChanged = "function (s,e) {get_list_tipo_doc();}";
 
                    }).BindList(ViewBag.lst_proveedores).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
@@ -96,7 +100,7 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label for="co_plazo">Plazo*</label>
-                @Html.TextBoxFor(q => q.co_plazo, new { @class = "form-control" })
+                @Html.TextBoxFor(q => q.co_plazo, new { @class = "form-control", @id = "co_plazo" })
                 @Html.ValidationMessageFor(q => q.co_plazo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -412,8 +416,6 @@
             @Scripts.Render("~/bundles/jqueryval")
         }
 }
-
-
 <script>
 
 
@@ -432,9 +434,11 @@
         $('#co_FechaFactura_vct').datepicker({
             autoclose: true
         })
+
+
     });
 
-    get_list_tipo_doc();
+
 
     // funciones calcular total
     $("#co_FechaFactura").change(function ()
@@ -461,12 +465,13 @@
         rellenar_ceros_izquierda();
     });
     $("#cmb_idtCredito").change(function () {
-        if (IdProveedor.GetValue() == 0) {
-            alert("Seleccione el proveedor");
-        }
         $("#cmbTipoDocu").empty();
         $("#cmbTipoDocu_modif").empty();
-        get_list_tipo_doc();
+        if (IdProveedor.GetValue() == 0) {
+            alert("Seleccione el proveedor");
+        } else {
+            get_list_tipo_doc();
+        }
     });
     $("#co_plazo").change(function () {
         var plazo = $("#co_plazo").val();
@@ -479,9 +484,7 @@
             var c = new Date(year , month, day+Number(plazo))
             $('#co_FechaFactura_vct').datepicker("setDate", moment(c).format("DD/MM/YYYY"));
         };
-
     });
-
     function actualizar_valores() {
         var base_iva = $("#co_subtotal_iva").val();
         var base_cero = $("#co_subtotal_siniva").val();

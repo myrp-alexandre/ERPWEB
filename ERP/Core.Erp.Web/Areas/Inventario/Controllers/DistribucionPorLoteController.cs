@@ -69,9 +69,18 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         public ActionResult GridViewPartial_por_distribuir(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
         {
+            List<in_Ing_Egr_Inven_distribucion_Info> model = new List<in_Ing_Egr_Inven_distribucion_Info>();
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<in_Ing_Egr_Inven_distribucion_Info> model = bus_ing_inv.get_list_x_distribuir(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
-            Session["lst_x_distribuir"] = model;
+            if (IdSucursal != 0 & IdMovi_inven_tipo != 0 & IdNumMovi != 0 & Session["list_distribuida"] == null)
+            {
+                model = bus_ing_inv.get_list_x_distribuir(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
+                Session["lst_x_distribuir"] = model;
+
+            }
+            else
+            {
+                model = Session["lst_x_distribuir"] as List<in_Ing_Egr_Inven_distribucion_Info>;
+            }
             return PartialView("_GridViewPartial_por_distribuir", model);
         }
         public ActionResult GridViewPartial_distribucion_det()
@@ -100,6 +109,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public ActionResult Nuevo(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
         {
             Session["list_distribuida"] = null;
+            Session["lst_x_distribuir"] = null;
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_parametro_Info i_param = bus_in_param.get_info(IdEmpresa);
             if (i_param == null)
@@ -116,6 +126,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             bus_ing_inv = new in_Ing_Egr_Inven_distribucion_Bus();
             model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
+            model.lst_x_distribuir = Session["lst_x_distribuir"] as List<in_Ing_Egr_Inven_distribucion_Info>;
             if (!validar(model, ref mensaje))
             {
                 cargar_combos();
@@ -182,6 +193,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 foreach (var item in lst_x_distribuir)
                 {
                     item.can_distribuida = model.lst_distribuido.Sum(v => v.dm_cantidad);
+                    item.can_x_distribuir = item.can_total-item.can_distribuida;
                 }
                 Session["lst_x_distribuir"]=lst_x_distribuir;
                 if (Session["IdProducto_padre"] != null)
@@ -230,6 +242,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 foreach (var item in lst_x_distribuir)
                 {
                     item.can_distribuida = model.lst_distribuido.Sum(v => v.dm_cantidad);
+                    item.can_x_distribuir = item.can_total - item.can_distribuida;
+
                 }
                 Session["lst_x_distribuir"] = lst_x_distribuir;
                 if (Session["IdProducto_padre"] != null)
@@ -251,6 +265,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             foreach (var item in lst_x_distribuir)
             {
                 item.can_distribuida = model.lst_distribuido.Sum(v => v.dm_cantidad);
+                item.can_x_distribuir = item.can_total - item.can_distribuida;
+
             }
             Session["lst_x_distribuir"] = lst_x_distribuir;
 
