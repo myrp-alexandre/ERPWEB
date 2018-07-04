@@ -154,6 +154,81 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             ViewBag.lst_unidad = lst_unidad;
         }
 
+        #region update and delete fila distribuida
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate_list_dis([ModelBinder(typeof(DevExpressEditorsBinder))] in_Ing_Egr_Inven_distribucion_Info info_det)
+        {
+            DateTime? lote_fecha_fab;
+            DateTime? lote_fecha_vcto;
+            string lote_num_lote = "";
+            string pr_descripcion = "";
+            string unidad_medida = "";
+            in_Ing_Egr_Inven_distribucion_Info model = new in_Ing_Egr_Inven_distribucion_Info();
+            if (ModelState.IsValid)
+            {
+                if (Session["list_productos"] != null)
+                {
+                    var list = Session["list_productos"] as List<in_Producto_Info>;
+                    var info_ = list.Where(v => v.IdProducto == info_det.IdProducto).FirstOrDefault();
+                    lote_fecha_fab = info_.lote_fecha_fab;
+                    lote_fecha_vcto = info_.lote_fecha_vcto;
+                    lote_num_lote = info_.lote_num_lote;
+                    pr_descripcion = info_.pr_descripcion;
+                    unidad_medida = info_.IdUnidadMedida;
+
+                    info_det.lote_fecha_fab = lote_fecha_fab;
+                    info_det.lote_fecha_vcto = lote_fecha_vcto;
+                    info_det.lote_num_lote = lote_num_lote;
+                    info_det.pr_descripcion = pr_descripcion;
+                    info_det.IdUnidadMedida = unidad_medida;
+
+
+
+                }
+                List_in_Ing_Egr_Inven_det.UpdateRow(info_det);
+                model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
+
+                // actualizar lista distribuidas
+                List<in_Ing_Egr_Inven_distribucion_Info> lst_x_distribuir;
+                lst_x_distribuir = Session["lst_x_distribuir"] as List<in_Ing_Egr_Inven_distribucion_Info>;
+                foreach (var item in lst_x_distribuir)
+                {
+                    item.can_distribuida = model.lst_distribuido.Sum(v => v.dm_cantidad);
+                    item.can_x_distribuir = item.can_total - item.can_distribuida;
+
+                }
+                Session["lst_x_distribuir"] = lst_x_distribuir;
+                if (Session["IdProducto_padre"] != null)
+                    IdProducto_padre = (decimal)Session["IdProducto_padre"];
+                cargar_combos_detalle(IdProducto_padre);
+            }
+            return PartialView("_GridViewPartial_distribuidos", model.lst_distribuido);
+        }
+
+        public ActionResult EditingDelete_list_dis(int secuencia_distribucion)
+        {
+            List_in_Ing_Egr_Inven_det.DeleteRow(secuencia_distribucion);
+            in_Ing_Egr_Inven_distribucion_Info model = new in_Ing_Egr_Inven_distribucion_Info();
+            model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
+
+            // actualizar lista distribuidas
+            List<in_Ing_Egr_Inven_distribucion_Info> lst_x_distribuir;
+            lst_x_distribuir = Session["lst_x_distribuir"] as List<in_Ing_Egr_Inven_distribucion_Info>;
+            foreach (var item in lst_x_distribuir)
+            {
+                item.can_distribuida = model.lst_distribuido.Sum(v => v.dm_cantidad);
+                item.can_x_distribuir = item.can_total - item.can_distribuida;
+
+            }
+            Session["lst_x_distribuir"] = lst_x_distribuir;
+
+
+            if (Session["IdProducto_padre"] != null)
+                IdProducto_padre = (decimal)Session["IdProducto_padre"];
+            cargar_combos_detalle(IdProducto_padre); return PartialView("_GridViewPartial_distribuidos", model.lst_distribuido);
+        }
+        #endregion
+        #region Funciones new, update, delete, agregar distribucion
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] in_Ing_Egr_Inven_distribucion_Info info_det)
         {
@@ -168,7 +243,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 if (Session["list_productos"] != null)
                 {
                     var list = Session["list_productos"] as List<in_Producto_Info>;
-                    var info_ = list.Where(v=>v.IdProducto==info_det.IdProducto).FirstOrDefault();
+                    var info_ = list.Where(v => v.IdProducto == info_det.IdProducto).FirstOrDefault();
                     lote_fecha_fab = info_.lote_fecha_fab;
                     lote_fecha_vcto = info_.lote_fecha_vcto;
                     lote_num_lote = info_.lote_num_lote;
@@ -181,7 +256,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                     info_det.pr_descripcion = pr_descripcion;
                     info_det.IdUnidadMedida = unidad_medida;
 
-                   
+
 
                 }
                 List_in_Ing_Egr_Inven_det.AddRow(info_det);
@@ -193,16 +268,15 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 foreach (var item in lst_x_distribuir)
                 {
                     item.can_distribuida = model.lst_distribuido.Sum(v => v.dm_cantidad);
-                    item.can_x_distribuir = item.can_total-item.can_distribuida;
+                    item.can_x_distribuir = item.can_total - item.can_distribuida;
                 }
-                Session["lst_x_distribuir"]=lst_x_distribuir;
+                Session["lst_x_distribuir"] = lst_x_distribuir;
                 if (Session["IdProducto_padre"] != null)
                     IdProducto_padre = (decimal)Session["IdProducto_padre"];
                 cargar_combos_detalle(IdProducto_padre);
             }
             return PartialView("_GridViewPartial_distribucion_det", model.lst_distribuido);
         }
-        
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] in_Ing_Egr_Inven_distribucion_Info info_det)
         {
@@ -275,18 +349,21 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 IdProducto_padre = (decimal)Session["IdProducto_padre"];
             cargar_combos_detalle(IdProducto_padre); return PartialView("_GridViewPartial_distribucion_det", model.lst_distribuido);
         }
+        #endregion
 
+        #region Funciones Json
 
-        public JsonResult Mostrar(decimal IdProducto_padre=0)
+        public JsonResult Mostrar(decimal IdProducto_padre = 0)
         {
             Session["IdProducto_padre"] = IdProducto_padre;
             cargar_combos_detalle(IdProducto_padre);
 
             return Json("", JsonRequestBehavior.AllowGet);
         }
+        #endregion
     }
 
-
+    #region clase personalizada
     public class in_Ing_Egr_Inven_distribucion_lst
     {
         public List<in_Ing_Egr_Inven_distribucion_Info> get_list()
@@ -316,11 +393,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
             list.Add(info_det);
         }
-        
+
         public void UpdateRow(in_Ing_Egr_Inven_distribucion_Info info_det)
         {
             in_Ing_Egr_Inven_distribucion_Info edited_info = get_list().Where(m => m.secuencia_distribucion == info_det.secuencia_distribucion).First();
-           
+
             edited_info.IdProducto = info_det.IdProducto;
             edited_info.IdUnidadMedida = info_det.IdUnidadMedida;
             edited_info.mv_costo = info_det.mv_costo;
@@ -334,4 +411,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             list.Remove(list.Where(m => m.secuencia_distribucion == secuencia_distribucion).First());
         }
     }
+    #endregion
+
 }

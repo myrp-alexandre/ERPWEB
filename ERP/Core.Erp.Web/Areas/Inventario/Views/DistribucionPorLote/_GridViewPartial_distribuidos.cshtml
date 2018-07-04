@@ -7,9 +7,20 @@
         settings.CallbackRouteValues = new { Controller = "DistribucionPorLote", Action = "GridViewPartial_distribuidos" };
 
 
-        settings.KeyFieldName = "IdNumMovi";
-
+        settings.KeyFieldName = "secuencia_distribucion";
         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "DistribucionPorLote", Action = "EditingUpdate_list_dis", Area = "Inventario" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "DistribucionPorLote", Action = "EditingDelete_list_dis", Area = "Inventario" };
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+
+        settings.SettingsPager.Visible = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = false;
 
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
@@ -22,7 +33,7 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
         //Evento para pintar de rojo las filas anuladas
-      
+
         settings.Columns.Add("pr_descripcion", "Producto").Width = System.Web.UI.WebControls.Unit.Percentage(60);
         settings.Columns.Add("IdUnidadMedida", "Unidad medida").Width = System.Web.UI.WebControls.Unit.Percentage(10);
         settings.Columns.Add(column =>
@@ -32,7 +43,7 @@
             column.Width = Unit.Percentage(10);
 
         });
-       
+
     });
 }
 @grid.Bind(Model).GetHtml()

@@ -152,13 +152,14 @@ namespace Core.Erp.Data.Inventario
                                  IdUnidadMedida = q.IdUnidadMedida,
 
                                  dm_cantidad = q.dm_cantidad,
-                                 mv_costo = q.mv_costo
+                                 mv_costo = q.mv_costo,
+                                 
                              }).ToList();
                 }
 
                 return Lista;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 throw;
 
