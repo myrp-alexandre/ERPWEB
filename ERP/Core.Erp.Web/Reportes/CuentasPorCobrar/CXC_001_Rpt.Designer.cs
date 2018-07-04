@@ -481,7 +481,7 @@
             this.xrTableCell1.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Italic);
             this.xrTableCell1.Name = "xrTableCell1";
             this.xrTableCell1.StylePriority.UseFont = false;
-            this.xrTableCell1.Text = "SOPORTE DE COBRANZA";
+            this.xrTableCell1.Text = "REPORTE DE COBRANZA";
             this.xrTableCell1.Weight = 2.0026702269692924D;
             // 
             // PageHeader

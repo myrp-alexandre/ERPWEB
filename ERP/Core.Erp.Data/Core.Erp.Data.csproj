@@ -1156,6 +1156,9 @@
     <Compile Include="VWCXC_001_diario.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwcxc_cartera_x_cobrar.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwcxc_cobro.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>

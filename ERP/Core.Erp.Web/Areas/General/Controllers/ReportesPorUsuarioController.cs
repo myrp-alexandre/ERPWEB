@@ -12,6 +12,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
 {
     public class ReportesPorUsuarioController : Controller
     {
+        static tb_sis_reporte_x_seg_usuario_Bus bus_reporte_x_usuario = new tb_sis_reporte_x_seg_usuario_Bus();
+
         public ActionResult Index()
         {
             tb_sis_reporte_x_seg_usuario_Info model = new tb_sis_reporte_x_seg_usuario_Info();
@@ -35,12 +37,37 @@ namespace Core.Erp.Web.Areas.General.Controllers
             var lst_usuario = bus_usuario.get_list(false);
             ViewBag.lst_usuario = lst_usuario;
         }
+        
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_reportes_por_usuario()
+        public ActionResult GridViewPartial_reportes_por_usuario(int IdEmpresa = 0, string IdUsuario = "")
         {
-            var model = new object[0];
+            var model = bus_reporte_x_usuario.get_list(IdEmpresa, IdUsuario);
+            ViewBag.IdEmpresa = IdEmpresa;
+            ViewBag.IdUsuario = IdUsuario;
+            
             return PartialView("_GridViewPartial_reportes_por_usuario", model);
+        }
+
+        public JsonResult guardar(int IdEmpresa = 0, string IdUsuario = "", string Ids = "")
+        {
+            string[] array = Ids.Split(',');
+
+            List<tb_sis_reporte_x_seg_usuario_Info> lista = new List<tb_sis_reporte_x_seg_usuario_Info>();
+            var output = array.GroupBy(q => q).ToList();
+            foreach (var item in output)
+            {
+                tb_sis_reporte_x_seg_usuario_Info info = new tb_sis_reporte_x_seg_usuario_Info
+                {
+                    IdEmpresa = IdEmpresa,
+                    IdUsuario = IdUsuario
+                };
+                lista.Add(info);
+            }
+            bus_reporte_x_usuario.eliminarDB(IdEmpresa, IdUsuario);
+            var resultado = bus_reporte_x_usuario.guardarDB(lista, IdEmpresa, IdUsuario);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
         }
     }
 }

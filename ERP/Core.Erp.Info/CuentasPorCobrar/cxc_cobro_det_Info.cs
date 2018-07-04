@@ -16,6 +16,9 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public Nullable<int> IdBodega_Cbte { get; set; }
         public decimal IdCbte_vta_nota { get; set; }
         public double dc_ValorPago { get; set; }
+        public string estado { get; set; }
+
+        #region Campos de auditoria
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }
@@ -24,6 +27,11 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string nom_pc { get; set; }
         public string ip { get; set; }
-        public string estado { get; set; }
+        #endregion
+                
+        #region Campos que no existen en la tabla
+        public int secuencia { get; set; }
+        #endregion
+
     }
 }

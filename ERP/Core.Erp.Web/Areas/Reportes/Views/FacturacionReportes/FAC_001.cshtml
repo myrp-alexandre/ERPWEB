@@ -94,47 +94,15 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdCliente">Cliente</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdCliente, settings =>
-                 {
-                     settings.Name = "IdCliente";
-                     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                     settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                     settings.Properties.Columns.Add("IdCliente", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                     settings.Properties.Columns.Add("info_persona.pe_nombreCompleto", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                     //Campo ID
-                     settings.Properties.ValueField = "IdCliente";
-                     settings.Properties.ValueType = typeof(decimal);
-                     settings.Properties.TextField = "info_persona.pe_nombreCompleto";
-                     //Boton para seleccionar ningun registro
-                     settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                     settings.Properties.NullText = "== Seleccione ==";
-                     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                     settings.Properties.AllowNull = true;
-                 }).BindList(ViewBag.lst_cliente).GetHtml()
-                    @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
+                    @Html.Partial("_CmbCliente_Facturacion", Model)
+                    @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger",@id="IdCliente" })
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdClienteContacto">Cliente contacto</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdClienteContacto, settings =>
-                 {
-                     settings.Name = "IdClienteContacto";
-                     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                     settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                     settings.Properties.Columns.Add("IdContacto", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                     settings.Properties.Columns.Add("Nombres", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                     //Campo ID
-                     settings.Properties.ValueField = "IdCliente";
-                     settings.Properties.ValueType = typeof(decimal);
-                     settings.Properties.TextField = "Nombres";
-                     //Boton para seleccionar ningun registro
-                     settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                     settings.Properties.NullText = "== Seleccione ==";
-                     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                     settings.Properties.AllowNull = true;
-                 }).BindList(ViewBag.lst_contacto).GetHtml()
+                    @Html.DropDownListFor(q=>q.IdClienteContacto, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres"), new { @class="form-control", @id="IdClienteContacto"})
                     @Html.ValidationMessageFor(q => q.IdClienteContacto, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -231,31 +199,34 @@
                     autoclose: true
                 })
 
-                cargar_producto();
-                $("#IdProducto").change(function () {
-                    cargar_producto();
+                cargar_cliente();
+                $("#IdCliente").change(function () {
+                    cargar_cliente();
                 });
-                $("#IdProducto_padre").change(function () {
-                    cargar_producto();
+                $("#IdClienteContacto").change(function () {
+                    cargar_cliente();
                 });
             });
-                function cargar_producto() {
-                    var codigo = IdProducto_padre.GetValue();
+            function cargar_cliente() {
+                var codigo = IdCliente.GetValue();
 
                     var datos = {
-                        IdProducto_padre: codigo
+                        IdCliente: codigo
                     }
                     $.ajax({
                         type: 'POST',
                         data: JSON.stringify(datos),
-                        url: '@Url.Action("cargar_producto", "FacturacionReportes",new { Area = "Reportes"})',
+                        url: '@Url.Action("cargar_cliente", "FacturacionReportes",new { Area = "Reportes"})',
                         async: false,
                         dataType: 'json',
                         contentType: 'application/json; charset=utf-8',
                         success: function (data) {
-                        },
-                        error: function (error) {
-                        }
-                    });
-                }
+                            $.each(data, function (i, row) {
+                                $("#IdClienteContacto").append("<option value=" + row.IdClienteContacto + ">" + row.Nombres + "</option>");
+                        });
+                    },
+                    error: function (error) {
+                    }
+                });
+            };
             </script>
