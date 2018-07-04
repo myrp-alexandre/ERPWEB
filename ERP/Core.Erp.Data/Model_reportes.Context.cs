@@ -73,6 +73,7 @@ namespace Core.Erp.Data
         public virtual DbSet<VWCAJ_001> VWCAJ_001 { get; set; }
         public virtual DbSet<VWFAC_003> VWFAC_003 { get; set; }
         public virtual DbSet<VWFAC_003_cuotas> VWFAC_003_cuotas { get; set; }
+        public virtual DbSet<VWFAC_004> VWFAC_004 { get; set; }
     
         public virtual ObjectResult<SPINV_001_Result> SPINV_001(Nullable<int> idEmpresa, Nullable<int> idSucursal_ini, Nullable<int> idSucursal_fin, Nullable<int> idBodega_ini, Nullable<int> idBodega_fin, Nullable<decimal> idProducto_ini, Nullable<decimal> idProducto_fin, string idCategoria, Nullable<int> idLinea, Nullable<int> idGrupo, Nullable<int> idSubGrupo, Nullable<System.DateTime> fecha_corte, Nullable<bool> mostrar_stock_0)
         {
