@@ -17,7 +17,10 @@ namespace Core.Erp.Info.CuentasPorCobrar
         [Range(1,999999,ErrorMessage ="El campo cliente es obligatorio")]
         [Required(ErrorMessage = "El campo cliente es obligatorio")]
         public decimal IdCliente { get; set; }
+        [Range(0.01,double.MaxValue, ErrorMessage ="El campo total cobro es obligatorio")]
+        [Required(ErrorMessage ="El campo total cobro es obligatorio")]
         public double cr_TotalCobro { get; set; }
+        [Required(ErrorMessage ="El campo fecha es obligatorio")]
         public System.DateTime cr_fecha { get; set; }
         public System.DateTime cr_fechaDocu { get; set; }
         public System.DateTime cr_fechaCobro { get; set; }
@@ -31,6 +34,7 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public Nullable<decimal> cr_recibo { get; set; }
         public string cr_es_anticipo { get; set; }
         public Nullable<int> IdBanco { get; set; }
+        [Required(ErrorMessage ="El campo caja es obligatorio")]
         public int IdCaja { get; set; }
         public string MotiAnula { get; set; }
         public Nullable<int> IdTipoNotaCredito { get; set; }

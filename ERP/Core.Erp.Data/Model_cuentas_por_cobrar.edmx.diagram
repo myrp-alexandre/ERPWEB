@@ -20,6 +20,8 @@
         <AssociationConnector Association="Model_cuentas_por_cobrar.FK_cxc_cobro_det_cxc_cobro" />
         <EntityTypeShape EntityType="Model_cuentas_por_cobrar.vwcxc_cobro" Width="1.5" PointX="0.75" PointY="5.75" />
         <EntityTypeShape EntityType="Model_cuentas_por_cobrar.vwcxc_cartera_x_cobrar" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="Model_cuentas_por_cobrar.cxc_cobro_tipo_Param_conta_x_sucursal" Width="1.5" PointX="7.625" PointY="0.75" />
+        <AssociationConnector Association="Model_cuentas_por_cobrar.FK_cxc_cobro_tipo_Param_conta_x_sucursal_cxc_cobro_tipo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

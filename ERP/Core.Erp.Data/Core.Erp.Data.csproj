@@ -236,6 +236,7 @@
     </Compile>
     <Compile Include="CuentasPorCobrar\cxc_cobro_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_det_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Param_conta_x_sucursal_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_nota_DebCre_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_orden_giro_pagos_sri_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_orden_pago_cancelaciones_Data.cs" />
@@ -320,6 +321,9 @@
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="cxc_cobro_tipo_motivo.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cxc_cobro_tipo_Param_conta_x_sucursal.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="cxc_Parametro.cs">

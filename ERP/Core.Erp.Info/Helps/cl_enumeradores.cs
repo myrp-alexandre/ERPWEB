@@ -152,5 +152,16 @@ namespace Core.Erp.Info.Helps
             LOC,
             EXT
         }
+
+        public enum eTipoCobroGenera
+        {
+            MOVI_CAJA,
+            DIARIO
+        }        
+        public enum eTipoCobroTomaCuentaDe
+        {
+            TIP_COBRO,
+            CAJA
+        }
     }
 }

@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridViewPartial_por_distribuir    ";
+        settings.Name = "GridViewPartial_por_distribuir";
         settings.CallbackRouteValues = new { Controller = "DistribucionPorLote", Action = "GridViewPartial_por_distribuir" };
 
 
@@ -117,6 +117,7 @@
     };
     function cerrar() {
         GridViewPartial_distribuidos.PerformCallback();
+        GridViewPartial_por_distribuir.PerformCallback();
         $("#detalle_distr").modal("hide");
 
     };

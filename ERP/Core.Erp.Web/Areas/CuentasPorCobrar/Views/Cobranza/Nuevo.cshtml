@@ -21,6 +21,10 @@
             SetCobroTipo();
         });
 
+        $("#cr_TotalCobro").change(function () {
+            CalcularSaldo();
+        });
+
         SetCobroTipo();
     })
 
@@ -89,7 +93,31 @@
         GridView_cobranza_det.PerformCallback();
         $("#FacturasModal").modal("hide");
     }
+
+    function CalcularSaldo() {
+
+        var datos = {
+            TotalACobrar: $("#cr_TotalCobro").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CalcularSaldo", "Cobranza",new { Area = "CuentasPorCobrar"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#cr_saldo").val(data);
+            },
+            error: function (error) {
+            }
+        });
+    }
 </script>
+
+
 @using (Html.BeginForm("Nuevo", "Cobranza", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     if (@ViewBag.mensaje != null)

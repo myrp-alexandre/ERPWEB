@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Info.CuentasPorCobrar;
+using Core.Erp.Info.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -116,44 +117,109 @@ namespace Core.Erp.Data.CuentasPorCobrar
 
         public bool guardarDB(cxc_cobro_Info info)
         {
+            Entities_cuentas_por_cobrar Context_cxc = new Entities_cuentas_por_cobrar();
+            Entities_facturacion Context_fac = new Entities_facturacion();
+            Entities_caja Context_caj = new Entities_caja();
+            Entities_contabilidad Context_ct = new Entities_contabilidad();
             try
             {
-                using (Entities_cuentas_por_cobrar Context = new Entities_cuentas_por_cobrar())
-                {
-                    cxc_cobro Entity = new cxc_cobro
-                    {
-                        IdEmpresa = info.IdEmpresa,
-                        IdSucursal = info.IdSucursal,
-                        IdCobro = info.IdCobro = get_id(info.IdEmpresa,info.IdSucursal),
-                        cr_Codigo = info.cr_Codigo,
-                        IdCobro_tipo = info.IdCobro_tipo,
-                        IdCliente = info.IdCliente,
-                        cr_TotalCobro = info.cr_TotalCobro,
-                        cr_fecha = info.cr_fecha,
-                        cr_fechaDocu = info.cr_fechaDocu,
-                        cr_fechaCobro = info.cr_fechaCobro,
-                        cr_observacion = info.cr_observacion,
-                        cr_Banco = info.cr_Banco,
-                        cr_cuenta = info.cr_cuenta,
-                        cr_NumDocumento = info.cr_NumDocumento,
-                        cr_Tarjeta = info.cr_Tarjeta,
-                        cr_propietarioCta = info.cr_propietarioCta,
-                        cr_estado = "A",
-                        cr_es_anticipo = "N",
-                        IdBanco = info.IdBanco,
-                        IdCaja = info.IdCaja,
+                #region Variables
+                int Secuencia = 1;
+                bool generar_diario = true;
+                string IdCtaCble_debe = string.Empty;
+                string IdCtaCble_haber = string.Empty;
+                #endregion
 
-                        Fecha_Transac = DateTime.Now,
-                        IdUsuario = info.IdUsuario
-                    };
-                    Context.cxc_cobro.Add(Entity);
-                    Context.SaveChanges();
+                #region Consultas para generar diario
+                var cliente = Context_fac.fa_cliente.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente).FirstOrDefault();
+                if (cliente == null)
+                    return false;
+                IdCtaCble_haber = cliente.IdCtaCble_cxc;
+                var tipo_cobro = Context_cxc.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == info.IdCobro_tipo).FirstOrDefault();
+                if (tipo_cobro == null)
+                    generar_diario = false;
+                if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.CAJA.ToString())
+                {
+                    var caja = Context_caj.caj_Caja.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCaja == info.IdCaja).FirstOrDefault();
+                    if (caja == null)
+                        return false;
+                    IdCtaCble_haber = caja.IdCtaCble;
+                }else
+                    if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.TIP_COBRO.ToString())
+                {
+                    
                 }
 
+                #endregion
+
+                #region Cabecera cobro
+                cxc_cobro cab = new cxc_cobro
+                {
+                    IdEmpresa = info.IdEmpresa,
+                    IdSucursal = info.IdSucursal,
+                    IdCobro = info.IdCobro = get_id(info.IdEmpresa, info.IdSucursal),
+                    cr_Codigo = info.cr_Codigo,
+                    IdCobro_tipo = info.IdCobro_tipo,
+                    IdCliente = info.IdCliente,
+                    cr_TotalCobro = info.cr_TotalCobro,
+                    cr_fecha = info.cr_fecha,
+                    cr_fechaDocu = info.cr_fechaDocu,
+                    cr_fechaCobro = info.cr_fechaCobro,
+                    cr_observacion = info.cr_observacion,
+
+                    cr_Banco = info.cr_Banco,
+                    cr_cuenta = info.cr_cuenta,
+                    cr_NumDocumento = info.cr_NumDocumento,
+                    cr_Tarjeta = info.cr_Tarjeta,
+                    cr_propietarioCta = info.cr_propietarioCta,
+                    cr_estado = "A",
+                    cr_es_anticipo = "N",
+
+                    IdBanco = info.IdBanco,
+                    IdCaja = info.IdCaja,
+
+                    Fecha_Transac = DateTime.Now,
+                    IdUsuario = info.IdUsuario
+                };
+                Context_cxc.cxc_cobro.Add(cab);
+                #endregion
+
+                #region Detalle cobro
+                foreach (var item in info.lst_det)
+                {
+                    cxc_cobro_det det = new cxc_cobro_det
+                    {
+                        IdEmpresa = cab.IdEmpresa,
+                        IdSucursal = cab.IdSucursal,
+                        IdCobro = cab.IdCobro,
+                        secuencial = Secuencia++,
+                        dc_TipoDocumento = item.dc_TipoDocumento,
+                        IdBodega_Cbte = item.IdBodega_Cbte,
+                        IdCbte_vta_nota = item.IdCbte_vta_nota,
+                        dc_ValorPago = item.dc_ValorPago,
+                        IdUsuario = cab.IdUsuario,
+                        Fecha_Transac = DateTime.Now,
+                        estado = "A"
+                    };
+                    Context_cxc.cxc_cobro_det.Add(det);
+                }
+                #endregion               
+
+                Context_ct.SaveChanges();
+                Context_cxc.SaveChanges();
+
+                Context_cxc.Dispose();
+                Context_fac.Dispose();
+                Context_caj.Dispose();
+                Context_ct.Dispose();
                 return true;
             }
             catch (Exception)
             {
+                Context_cxc.Dispose();
+                Context_fac.Dispose();
+                Context_caj.Dispose();
+                Context_ct.Dispose();
                 throw;
             }
         }
