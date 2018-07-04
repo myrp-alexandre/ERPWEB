@@ -31,7 +31,9 @@ namespace Core.Erp.Data
         public string nom_pc { get; set; }
         public string ip { get; set; }
         public string estado { get; set; }
+        public string IdCobro_tipo { get; set; }
     
         public virtual cxc_cobro cxc_cobro { get; set; }
+        public virtual cxc_cobro_tipo cxc_cobro_tipo { get; set; }
     }
 }

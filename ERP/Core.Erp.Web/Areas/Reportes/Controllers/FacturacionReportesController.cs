@@ -1,4 +1,5 @@
-﻿using Core.Erp.Bus.Facturacion;
+﻿
+using Core.Erp.Bus.Facturacion;
 using Core.Erp.Bus.General;
 using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.CuentasPorCobrar;
@@ -169,5 +170,18 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult FAC_003(int IdSucursal = 0, int IdBodega= 0, decimal IdCbteVta= 0, bool mostrar_cuotas = false)
+        {
+            FAC_003_Rpt model = new FAC_003_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdBodega.Value = IdBodega;
+            model.p_IdSucursal.Value = IdSucursal;
+            model.p_IdCbteVta.Value = IdCbteVta;
+            model.p_mostrar_cuotas.Value = mostrar_cuotas;
+            model.RequestParameters = false;
+            return View(model);
+        }
+
     }
 }

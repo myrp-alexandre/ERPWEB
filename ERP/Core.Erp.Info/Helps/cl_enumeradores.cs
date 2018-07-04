@@ -75,15 +75,15 @@ namespace Core.Erp.Info.Helps
 
         public enum eCobroTipoMotivoCuentasPorCobrar
         {
-            CHEQ=1,
-            COMI_TAR=2,
-            DEPO=3,
-            EFEC=4,
-            NTCR=5,
-            NTDB=6,
-            RET=7,
-            TARJ=8,
-            TRANS_BAN=9
+            CHEQ,
+            COMI_TAR,
+            DEPO,
+            EFEC,
+            NTCR,
+            NTDB,
+            RET,
+            TARJ,
+            TRANS_BAN
         }
 
         public enum eTipoCatalogoAF

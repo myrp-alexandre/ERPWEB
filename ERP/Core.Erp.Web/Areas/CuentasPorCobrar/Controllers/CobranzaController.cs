@@ -89,6 +89,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 
         private bool validar(cxc_cobro_Info i_validar, ref string msg)
         {
+            i_validar.IdEntidad = i_validar.IdCliente;
             if (i_validar.cr_TotalCobro == 0)
             {
                 msg = "No ha seleccionado documentos para realizar la cobranza";
@@ -115,6 +116,17 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
                 msg = "Existen documentos cuyo valor aplicado es mayor al saldo de la factura";
                 return false;
             }
+            string observacion = "Canc./ ";
+            foreach (var item in i_validar.lst_det)
+            {
+                observacion += item.vt_NumDocumento+ "/";
+            }
+            i_validar.cr_observacion = observacion;
+            i_validar.cr_fechaCobro = i_validar.cr_fecha;
+            i_validar.cr_fechaDocu = i_validar.cr_fecha;
+            if (!string.IsNullOrEmpty(i_validar.IdCobro_tipo))
+                i_validar.lst_det.ForEach(q => q.IdCobro_tipo = i_validar.IdCobro_tipo);
+            
             switch (i_validar.IdCobro_tipo)
             {
                 case "DEPO":
@@ -207,8 +219,12 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar()
+        public ActionResult Modificar(int IdSucursal = 0, decimal IdCobro = 0)
         {
+            cxc_cobro_Info model = bus_cobro.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), IdSucursal, IdCobro);
+            if (model == null)
+                return RedirectToAction("Index");
+            
             cargar_combos();
             return View();
         }
@@ -325,8 +341,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 
                 HttpContext.Current.Session["cxc_cobro_det_Info"] = list;
             }
-            var lst = (List<cxc_cobro_det_Info>)HttpContext.Current.Session["cxc_cobro_det_Info"];
-            return lst.OrderBy(q=>q.vt_fech_venc).ToList();
+            return (List<cxc_cobro_det_Info>)HttpContext.Current.Session["cxc_cobro_det_Info"];            
         }
 
         public void set_list(List<cxc_cobro_det_Info> list)
