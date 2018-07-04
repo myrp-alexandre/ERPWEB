@@ -1,3 +1,4 @@
+
 @using System.Web.UI.WebControls;
 @{
 
@@ -43,7 +44,10 @@
             column.Width = Unit.Percentage(10);
 
         });
+        settings.ClientSideEvents.EndCallback = "refresch_partial";
 
     });
 }
 @grid.Bind(Model).GetHtml()
+
+
