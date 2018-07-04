@@ -61,6 +61,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             cargar_combos_consulta();
             return View(model);
         }
+
         #region Metodos
         private void cargar_combos_consulta()
         {
@@ -221,12 +222,34 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 
         public ActionResult Modificar(int IdSucursal = 0, decimal IdCobro = 0)
         {
-            cxc_cobro_Info model = bus_cobro.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), IdSucursal, IdCobro);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            cxc_cobro_Info model = bus_cobro.get_info(IdEmpresa, IdSucursal, IdCobro);
             if (model == null)
                 return RedirectToAction("Index");
-            
+            model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdCobro);
+            list_det.set_list(model.lst_det);
             cargar_combos();
-            return View();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(cxc_cobro_Info model)
+        {
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
+            if (!bus_cobro.modificarDB(model))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
         }
 
         public ActionResult Anular()
@@ -327,6 +350,11 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             list_det.set_list(lst);
             var resultado = saldo;
             return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        public void VaciarLista()
+        {
+            list_det.set_list(new List<cxc_cobro_det_Info>());
         }
         #endregion
     }
