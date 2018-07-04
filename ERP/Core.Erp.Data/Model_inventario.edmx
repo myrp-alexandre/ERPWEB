@@ -613,6 +613,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Ing_Egr_Inven
           <Property Name="IdUnidadMedida" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="dm_cantidad" Type="float" Nullable="false" />
           <Property Name="mv_costo" Type="float" Nullable="false" />
+          <Property Name="lote_fecha_vcto" Type="datetime" />
+          <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Ing_Egr_Inven_distribucion_x_distribuir' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1513,7 +1515,9 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
     [vwin_Ing_Egr_Inven_distribucion_det].[pr_descripcion] AS [pr_descripcion], 
     [vwin_Ing_Egr_Inven_distribucion_det].[IdUnidadMedida] AS [IdUnidadMedida], 
     [vwin_Ing_Egr_Inven_distribucion_det].[dm_cantidad] AS [dm_cantidad], 
-    [vwin_Ing_Egr_Inven_distribucion_det].[mv_costo] AS [mv_costo]
+    [vwin_Ing_Egr_Inven_distribucion_det].[mv_costo] AS [mv_costo], 
+    [vwin_Ing_Egr_Inven_distribucion_det].[lote_fecha_vcto] AS [lote_fecha_vcto], 
+    [vwin_Ing_Egr_Inven_distribucion_det].[lote_num_lote] AS [lote_num_lote]
     FROM [dbo].[vwin_Ing_Egr_Inven_distribucion_det] AS [vwin_Ing_Egr_Inven_distribucion_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_Ing_Egr_Inven_distribucion_x_distribuir" EntityType="Self.vwin_Ing_Egr_Inven_distribucion_x_distribuir" store:Type="Views" store:Schema="dbo">
@@ -2018,7 +2022,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
           </FunctionImport>
           <EntitySet Name="in_Ing_Egr_Inven_distribucion" EntityType="Model_inventario.in_Ing_Egr_Inven_distribucion" />
           <EntitySet Name="vwin_Ing_Egr_Inven_distribucion" EntityType="Model_inventario.vwin_Ing_Egr_Inven_distribucion" />
-          <EntitySet Name="vwin_Ing_Egr_Inven_distribucion_det" EntityType="Model_inventario.vwin_Ing_Egr_Inven_distribucion_det" />
           <EntitySet Name="vwin_Ing_Egr_Inven_distribucion_x_distribuir" EntityType="Model_inventario.vwin_Ing_Egr_Inven_distribucion_x_distribuir" />
           <AssociationSet Name="FK_in_Ing_Egr_Inven_distribucion_in_Ing_Egr_Inven" Association="Model_inventario.FK_in_Ing_Egr_Inven_distribucion_in_Ing_Egr_Inven">
             <End Role="in_Ing_Egr_Inven" EntitySet="in_Ing_Egr_Inven" />
@@ -2037,6 +2040,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
             <Parameter Name="IdNumMovi" Mode="In" Type="Decimal" />
             <Parameter Name="Borar" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <EntitySet Name="vwin_Ing_Egr_Inven_distribucion_det" EntityType="Model_inventario.vwin_Ing_Egr_Inven_distribucion_det" />
           </EntityContainer>
         <EntityType Name="in_CatalogoTipo">
           <Key>
@@ -3443,31 +3447,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
           <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="pe_nombreCompleto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="vwin_Ing_Egr_Inven_distribucion_det">
-          <Key>
-            <PropertyRef Name="IdRow" />
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdMovi_inven_tipo" />
-            <PropertyRef Name="IdNumMovi" />
-            <PropertyRef Name="IdProducto" />
-            <PropertyRef Name="pr_descripcion" />
-            <PropertyRef Name="IdUnidadMedida" />
-            <PropertyRef Name="dm_cantidad" />
-            <PropertyRef Name="mv_costo" />
-          </Key>
-          <Property Name="IdRow" Type="Int64" Nullable="false" />
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdMovi_inven_tipo" Type="Int32" Nullable="false" />
-          <Property Name="IdNumMovi" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdProducto_padre" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="IdUnidadMedida" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="dm_cantidad" Type="Double" Nullable="false" />
-          <Property Name="mv_costo" Type="Double" Nullable="false" />
-        </EntityType>
         <EntityType Name="vwin_Ing_Egr_Inven_distribucion_x_distribuir">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3596,6 +3575,33 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
           <Property Type="Double" Name="mv_costo_sinConversion" Nullable="true" />
           <Property Type="Int32" Name="IdMotivo_Inv" Nullable="true" />
         </ComplexType>
+        <EntityType Name="vwin_Ing_Egr_Inven_distribucion_det">
+          <Key>
+            <PropertyRef Name="IdRow" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdMovi_inven_tipo" />
+            <PropertyRef Name="IdNumMovi" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="IdUnidadMedida" />
+            <PropertyRef Name="dm_cantidad" />
+            <PropertyRef Name="mv_costo" />
+          </Key>
+          <Property Name="IdRow" Type="Int64" Nullable="false" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo" Type="Int32" Nullable="false" />
+          <Property Name="IdNumMovi" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdProducto_padre" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IdUnidadMedida" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="dm_cantidad" Type="Double" Nullable="false" />
+          <Property Name="mv_costo" Type="Double" Nullable="false" />
+          <Property Name="lote_fecha_vcto" Type="DateTime" Precision="3" />
+          <Property Name="lote_num_lote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4185,23 +4191,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwin_Ing_Egr_Inven_distribucion_det">
-            <EntityTypeMapping TypeName="Model_inventario.vwin_Ing_Egr_Inven_distribucion_det">
-              <MappingFragment StoreEntitySet="vwin_Ing_Egr_Inven_distribucion_det">
-                <ScalarProperty Name="mv_costo" ColumnName="mv_costo" />
-                <ScalarProperty Name="dm_cantidad" ColumnName="dm_cantidad" />
-                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
-                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="IdProducto_padre" ColumnName="IdProducto_padre" />
-                <ScalarProperty Name="IdNumMovi" ColumnName="IdNumMovi" />
-                <ScalarProperty Name="IdMovi_inven_tipo" ColumnName="IdMovi_inven_tipo" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdRow" ColumnName="IdRow" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwin_Ing_Egr_Inven_distribucion_x_distribuir">
             <EntityTypeMapping TypeName="Model_inventario.vwin_Ing_Egr_Inven_distribucion_x_distribuir">
               <MappingFragment StoreEntitySet="vwin_Ing_Egr_Inven_distribucion_x_distribuir">
@@ -4283,6 +4272,25 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="vwin_Ing_Egr_Inven_distribucion_det">
+            <EntityTypeMapping TypeName="Model_inventario.vwin_Ing_Egr_Inven_distribucion_det">
+              <MappingFragment StoreEntitySet="vwin_Ing_Egr_Inven_distribucion_det">
+                <ScalarProperty Name="lote_num_lote" ColumnName="lote_num_lote" />
+                <ScalarProperty Name="lote_fecha_vcto" ColumnName="lote_fecha_vcto" />
+                <ScalarProperty Name="mv_costo" ColumnName="mv_costo" />
+                <ScalarProperty Name="dm_cantidad" ColumnName="dm_cantidad" />
+                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdProducto_padre" ColumnName="IdProducto_padre" />
+                <ScalarProperty Name="IdNumMovi" ColumnName="IdNumMovi" />
+                <ScalarProperty Name="IdMovi_inven_tipo" ColumnName="IdMovi_inven_tipo" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdRow" ColumnName="IdRow" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

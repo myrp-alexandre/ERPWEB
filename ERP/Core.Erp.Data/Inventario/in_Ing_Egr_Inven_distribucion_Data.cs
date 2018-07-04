@@ -153,10 +153,18 @@ namespace Core.Erp.Data.Inventario
 
                                  dm_cantidad = q.dm_cantidad,
                                  mv_costo = q.mv_costo,
+                                 lote_fecha_vcto=q.lote_fecha_vcto,
+                                 lote_num_lote=q.lote_num_lote
                                  
                              }).ToList();
                 }
-
+                int idsecuencia = 1;
+                foreach (var item in Lista)
+                {
+                    item.secuencia_distribucion = idsecuencia;
+                    idsecuencia++;
+                    item.pr_descripcion = item.pr_descripcion+ "  "+item.lote_num_lote+"  "+(item.lote_fecha_vcto)==null?"":item.lote_fecha_vcto.ToString().Substring(0,10);
+                }
                 return Lista;
             }
             catch (Exception )
