@@ -41,5 +41,9 @@ namespace Core.Erp.Info.Inventario
 
         //Campos que no existen en la tabla
         public List<in_Ing_Egr_Inven_det_Info> lst_in_Ing_Egr_Inven_det { get; set; }
+        public in_Ing_Egr_Inven_Info()
+        {
+            lst_in_Ing_Egr_Inven_det = new List<in_Ing_Egr_Inven_det_Info>();
+        }
     }
 }

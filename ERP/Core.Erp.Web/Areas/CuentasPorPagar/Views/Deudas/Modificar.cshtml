@@ -412,6 +412,8 @@
             @Scripts.Render("~/bundles/jqueryval")
         }
 }
+
+
 <script>
 
 
@@ -430,8 +432,10 @@
         $('#co_FechaFactura_vct').datepicker({
             autoclose: true
         })
-
     });
+
+    get_list_tipo_doc();
+
     // funciones calcular total
     $("#co_FechaFactura").change(function ()
     {
@@ -464,7 +468,19 @@
         $("#cmbTipoDocu_modif").empty();
         get_list_tipo_doc();
     });
+    $("#co_plazo").change(function () {
+        var plazo = $("#co_plazo").val();
+        if (plazo > 0) {
+            var d = new Date($("#co_FechaFactura_vct").val());
+            var year = d.getFullYear();
+            var month = d.getMonth();
+            var day = d.getDate();
 
+            var c = new Date(year , month, day+Number(plazo))
+            $('#co_FechaFactura_vct').datepicker("setDate", moment(c).format("DD/MM/YYYY"));
+        };
+
+    });
 
     function actualizar_valores() {
         var base_iva = $("#co_subtotal_iva").val();
