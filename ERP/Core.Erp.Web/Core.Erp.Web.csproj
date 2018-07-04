@@ -291,7 +291,8 @@
     <Compile Include="Areas\General\Controllers\ProvinciaController.cs" />
     <Compile Include="Areas\General\Controllers\RegionController.cs" />
     <Compile Include="Areas\General\Controllers\ReporteController.cs" />
-    <Compile Include="Areas\General\Controllers\ReportesPorUsuarioController.cs" />
+    <Compile Include="Areas\General\Controllers\ReportesPorUsuarioControllerController.cs" />
+    <Compile Include="Areas\General\Controllers\Reportes_pre_impreso.cs" />
     <Compile Include="Areas\General\Controllers\SucursalController.cs" />
     <Compile Include="Areas\General\Controllers\TipoDocumentoController.cs" />
     <Compile Include="Areas\General\Controllers\TipoDocumentoTalonarioController.cs" />
@@ -8562,6 +8563,7 @@
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_GridViewPartial_cobranza_facturas_x_cruzar.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbCliente_Facturacion.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_003.cshtml" />
+    <Content Include="Areas\General\Views\ReportesPorUsuarioController\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />

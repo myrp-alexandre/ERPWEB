@@ -42,7 +42,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  dc_ValorRetIva = q.dc_ValorRetIva                                 
                              }).ToList();
 
-                    Lista.ForEach(q => { q.secuencia = q.dc_TipoDocumento + q.IdCbte_vta_nota.ToString(); q.dc_ValorPago = Convert.ToDouble(q.Saldo); });
+                    Lista.ForEach(q => { q.secuencia = q.dc_TipoDocumento + "-" + q.IdBodega_Cbte.ToString() + "-" + q.IdCbte_vta_nota.ToString(); q.dc_ValorPago = Convert.ToDouble(q.Saldo); });
                 }
 
                 return Lista;
@@ -52,5 +52,49 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 throw;
             }
         }
+
+        public List<cxc_cobro_det_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdCobro)
+        {
+            try
+            {
+                List<cxc_cobro_det_Info> Lista;
+
+                using (Entities_cuentas_por_cobrar Context = new Entities_cuentas_por_cobrar())
+                {
+                    Lista = (from q in Context.vwcxc_cobro_det
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdSucursal == IdSucursal
+                             && q.IdCobro == IdCobro
+                             select new cxc_cobro_det_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdSucursal = q.IdSucursal,
+                                 IdBodega_Cbte = q.IdBodega_Cbte,
+                                 dc_TipoDocumento = q.dc_TipoDocumento,
+                                 vt_NumDocumento = q.vt_NumFactura,
+                                 Observacion = q.vt_Observacion,
+                                 IdCbte_vta_nota = q.IdCbte_vta_nota,
+                                 vt_fecha = q.vt_fecha,
+                                 vt_total = q.vt_total,
+                                 Saldo = q.saldo_sin_cobro,
+                                 vt_Subtotal = q.vt_Subtotal,
+                                 vt_iva = q.vt_iva,
+                                 vt_fech_venc = q.vt_fech_venc,
+                                 IdCobro_tipo = q.IdCobro_tipo,
+                                 IdCobro = q.IdCobro
+                             }).ToList();
+
+                    Lista.ForEach(q => { q.secuencia = q.dc_TipoDocumento +"-"+ q.IdBodega_Cbte.ToString() +"-"+ q.IdCbte_vta_nota.ToString();});
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
     }
 }
