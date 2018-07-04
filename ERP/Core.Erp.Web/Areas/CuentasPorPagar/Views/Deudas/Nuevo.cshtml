@@ -50,6 +50,7 @@
                        //Boton para seleccionar ningun registro
                        settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                       settings.Properties.ClientSideEvents.SelectedIndexChanged = "function (s,e) {get_list_tipo_doc();}";
 
                    }).BindList(ViewBag.lst_proveedores).GetHtml()
                         @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
@@ -429,9 +430,11 @@
         $('#co_FechaFactura_vct').datepicker({
             autoclose: true
         })
+
+
     });
 
-    get_list_tipo_doc();
+    
 
     // funciones calcular total
     $("#co_FechaFactura").change(function ()
@@ -458,14 +461,14 @@
         rellenar_ceros_izquierda();
     });
     $("#cmb_idtCredito").change(function () {
-        if (IdProveedor.GetValue() == 0) {
-            alert("Seleccione el proveedor");
-        }
         $("#cmbTipoDocu").empty();
         $("#cmbTipoDocu_modif").empty();
-        get_list_tipo_doc();
+        if (IdProveedor.GetValue() == 0) {
+            alert("Seleccione el proveedor");            
+        } else {
+            get_list_tipo_doc();
+        }
     });
-
 
     function actualizar_valores() {
         var base_iva = $("#co_subtotal_iva").val();

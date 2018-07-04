@@ -220,12 +220,13 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         {
             List<cxc_cobro_det_Info> list = get_list();
             if(list.Where(q=>q.secuencia == info_det.secuencia).FirstOrDefault() == null)
-            list.Add(info_det);
+                list.Add(info_det);
         }
 
         public void UpdateRow(cxc_cobro_det_Info info_det)
         {
             cxc_cobro_det_Info edited_info = get_list().Where(m => m.secuencia == info_det.secuencia).First();
+            edited_info.dc_ValorPago = info_det.dc_ValorPago;
         }
 
         public void DeleteRow(string secuencia)
