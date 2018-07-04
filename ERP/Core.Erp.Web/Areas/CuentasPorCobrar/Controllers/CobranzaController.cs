@@ -28,6 +28,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         ba_Banco_Cuenta_Bus bus_banco_cuenta = new ba_Banco_Cuenta_Bus();
         cxc_cobro_det_Bus bus_det = new cxc_cobro_det_Bus();
         cxc_cobro_det_List list_det = new cxc_cobro_det_List();
+        string mensaje = string.Empty;
 
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbCliente_Cobranza()
@@ -54,13 +55,19 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             cargar_combos_consulta();
             return View(model);
         }
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            cargar_combos_consulta();
+            return View(model);
+        }
+        #region Metodos
         private void cargar_combos_consulta()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
         }
-
         private void cargar_combos()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -79,13 +86,89 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             var lst_banco_cuenta = bus_banco_cuenta.get_list(IdEmpresa, false);
             ViewBag.lst_banco_cuenta = lst_banco_cuenta;
         }
-        [HttpPost]
-        public ActionResult Index(cl_filtros_Info model)
-        {
-            cargar_combos_consulta();
-            return View(model);
-        }
 
+        private bool validar(cxc_cobro_Info i_validar, ref string msg)
+        {
+            if (i_validar.cr_TotalCobro == 0)
+            {
+                msg = "No ha seleccionado documentos para realizar la cobranza";
+                return false;
+            }
+            if (Math.Round(i_validar.cr_saldo,2,MidpointRounding.AwayFromZero) < 0)
+            {
+                msg = "El valor aplicado a los documentos es mayor al total a cobrar";
+                return false;
+            }
+            i_validar.lst_det = list_det.get_list();
+            if (i_validar.lst_det.Count == 0)
+            {
+                msg = "No ha seleccionado documentos para realizar la cobranza";
+                return false;
+            }
+            if (i_validar.lst_det.Where(q=>q.dc_ValorPago == 0).Count() > 0)
+            {
+                msg = "Existen documentos con valor aplicado 0";
+                return false;
+            }
+            if (i_validar.IdCobro > 0 && i_validar.lst_det.Where(q => q.dc_ValorPago > q.Saldo).Count() > 0)
+            {
+                msg = "Existen documentos cuyo valor aplicado es mayor al saldo de la factura";
+                return false;
+            }
+            switch (i_validar.IdCobro_tipo)
+            {
+                case "DEPO":
+                    if (i_validar.IdBanco == null)
+                    {
+                        msg = "El campo cuenta bancaria es obligatorio para depositos";
+                        return false;
+                    }
+                    break;
+                case "CHQF":
+                    if (string.IsNullOrEmpty(i_validar.cr_Banco))
+                    {
+                        msg = "El campo banco es obligatorio para cheques";
+                        return false;
+                    }
+                    if (string.IsNullOrEmpty(i_validar.cr_cuenta))
+                    {
+                        msg = "El campo cuenta es obligatorio para cheques";
+                        return false;
+                    }
+                    if (string.IsNullOrEmpty(i_validar.cr_NumDocumento))
+                    {
+                        msg = "El campo # cheque es obligatorio para cheques";
+                        return false;
+                    }
+                    i_validar.IdBanco = null;
+                    break;
+
+                case "CHQV":
+                    if (string.IsNullOrEmpty(i_validar.cr_Banco))
+                    {
+                        msg = "El campo banco es obligatorio para cheques";
+                        return false;
+                    }
+                    if (string.IsNullOrEmpty(i_validar.cr_cuenta))
+                    {
+                        msg = "El campo cuenta es obligatorio para cheques";
+                        return false;
+                    }
+                    if (string.IsNullOrEmpty(i_validar.cr_NumDocumento))
+                    {
+                        msg = "El campo # cheque es obligatorio para cheques";
+                        return false;
+                    }
+                    i_validar.IdBanco = null;
+                    break;
+                default:
+                    i_validar.IdBanco = null;
+                    i_validar.cr_Banco = null;
+                    break;
+            }
+            return true;
+        }
+        #endregion
         public ActionResult Nuevo()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -104,6 +187,25 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             cargar_combos();
             return View(model);
         }
+        [HttpPost]
+        public ActionResult Nuevo(cxc_cobro_Info model)
+        {
+            if (!validar(model,ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
+            model.IdUsuario = SessionFixed.IdUsuario;
+            if (!bus_cobro.guardarDB(model))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
 
         public ActionResult Modificar()
         {
@@ -117,6 +219,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             return View();
         }
 
+        #region Grids
         [ValidateInput(false)]
         public ActionResult GridViewPartial_cobranza(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
         {
@@ -124,7 +227,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
             ViewBag.IdSucursal = IdSucursal;
-            var model = bus_cobro.get_list(IdEmpresa,IdSucursal, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
+            var model = bus_cobro.get_list(IdEmpresa, IdSucursal, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_cobranza", model);
         }
 
@@ -146,6 +249,24 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             var model = bus_det.get_list_cartera(IdEmpresa, IdSucursal, IdCliente);
             return PartialView("_GridViewPartial_cobranza_facturas_x_cruzar", model);
         }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdateFactura([ModelBinder(typeof(DevExpressEditorsBinder))] cxc_cobro_det_Info info_det)
+        {
+            if (ModelState.IsValid)
+                list_det.UpdateRow(info_det);
+            var model = list_det.get_list();
+            return PartialView("_GridViewPartial_cobranza_det", model);
+        }
+
+        public ActionResult EditingDeleteFactura(string secuencia)
+        {
+            list_det.DeleteRow(secuencia);
+            var model = list_det.get_list();
+            return PartialView("_GridViewPartial_cobranza_det", model);
+        }
+        #endregion
+
+        #region Json
         [HttpPost, ValidateInput(false)]
         public JsonResult EditingAddNewFactura(string IDs = "", double TotalACobrar = 0)
         {
@@ -171,31 +292,27 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
                     saldo = saldo - item.dc_ValorPago;
                 }
                 else
-                    item.dc_ValorPago = 0;                
+                    item.dc_ValorPago = 0;
             }
             list_det.set_list(lst);
             var resultado = saldo;
             return Json(resultado, JsonRequestBehavior.AllowGet);
-        }        
-
-        [HttpPost, ValidateInput(false)]
-        public ActionResult EditingUpdateFactura([ModelBinder(typeof(DevExpressEditorsBinder))] cxc_cobro_det_Info info_det)
-        {
-            if (ModelState.IsValid)
-                list_det.UpdateRow(info_det);
-            cxc_cobro_Info model = new cxc_cobro_Info();
-            model.lst_det = list_det.get_list();
-            return PartialView("_GridViewPartial_cobranza_det", model);
         }
 
-        public ActionResult EditingDeleteFactura(string secuencia)
+        public JsonResult CalcularSaldo(double TotalACobrar = 0)
         {
-            list_det.DeleteRow(secuencia);
-            cxc_cobro_Info model = new cxc_cobro_Info();
-            model.lst_det = list_det.get_list();
-            return PartialView("_GridViewPartial_cobranza_det", model);
-        }
+            double saldo = TotalACobrar;
 
+            var lst = list_det.get_list();
+            foreach (var item in lst)
+            {
+                saldo -= item.dc_ValorPago;
+            }
+            list_det.set_list(lst);
+            var resultado = saldo;
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 
     public class cxc_cobro_det_List
@@ -208,7 +325,8 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 
                 HttpContext.Current.Session["cxc_cobro_det_Info"] = list;
             }
-            return (List<cxc_cobro_det_Info>)HttpContext.Current.Session["cxc_cobro_det_Info"];
+            var lst = (List<cxc_cobro_det_Info>)HttpContext.Current.Session["cxc_cobro_det_Info"];
+            return lst.OrderBy(q=>q.vt_fech_venc).ToList();
         }
 
         public void set_list(List<cxc_cobro_det_Info> list)

@@ -82,6 +82,7 @@
     <Compile Include="CuentasPorCobrar\cxc_cobro_det_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_motivo_Bus.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Param_conta_x_sucursal_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_Parametro_Bus.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_Bus.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_tipo_Bus.cs" />

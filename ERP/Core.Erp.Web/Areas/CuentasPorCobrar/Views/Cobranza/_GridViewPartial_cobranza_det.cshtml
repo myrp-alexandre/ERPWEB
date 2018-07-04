@@ -119,7 +119,7 @@
             });
         });
 
-
+        settings.ClientSideEvents.EndCallback = "function (s,e){CalcularSaldo();}";
     });
 }
 @grid.Bind(Model).GetHtml()
