@@ -326,6 +326,9 @@
     <Compile Include="cxc_cobro_tipo_Param_conta_x_sucursal.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
+    <Compile Include="cxc_cobro_x_ct_cbtecble.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
     <Compile Include="cxc_Parametro.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
