@@ -81,7 +81,8 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  vt_iva = q.vt_iva,
                                  vt_fech_venc = q.vt_fech_venc,
                                  IdCobro_tipo = q.IdCobro_tipo,
-                                 IdCobro = q.IdCobro
+                                 IdCobro = q.IdCobro,
+                                 dc_ValorPago = q.dc_ValorPago
                              }).ToList();
 
                     Lista.ForEach(q => { q.secuencia = q.dc_TipoDocumento +"-"+ q.IdBodega_Cbte.ToString() +"-"+ q.IdCbte_vta_nota.ToString();});
