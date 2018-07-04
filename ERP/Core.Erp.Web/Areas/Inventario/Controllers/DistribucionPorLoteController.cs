@@ -103,13 +103,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             in_parametro_Info i_param = bus_in_param.get_info(IdEmpresa);
             if (i_param == null)
                 return RedirectToAction("Index");
-            in_Ing_Egr_Inven_distribucion_Info model = new in_Ing_Egr_Inven_distribucion_Info
-            {
-                IdEmpresa = IdEmpresa,
-                cm_fecha = DateTime.Now,
-                signo = "+",
-                IdMovi_inven_tipo = i_param.P_IdMovi_inven_tipo_default_ing == null ? 0 : Convert.ToInt32(i_param.P_IdMovi_inven_tipo_default_ing)
-            };
+            in_Ing_Egr_Inven_distribucion_Info model = new in_Ing_Egr_Inven_distribucion_Info();
+            model = bus_ing_inv.get_info(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi, "+");
+
             cargar_combos();
             return View(model);
         }
@@ -117,6 +113,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost]
         public ActionResult Nuevo(in_Ing_Egr_Inven_distribucion_Info model)
         {
+            bus_ing_inv = new in_Ing_Egr_Inven_distribucion_Bus();
             model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
             if (!validar(model, ref mensaje))
             {

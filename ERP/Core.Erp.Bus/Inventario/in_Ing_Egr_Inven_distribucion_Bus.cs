@@ -135,9 +135,6 @@ namespace Core.Erp.Bus.Inventario
                 in_Ing_Egr_Inven_distribucion_Info distribucion_con_lote = oData.get_info(info_distribucion.IdEmpresa, info_distribucion.IdSucursal, info_distribucion.IdMovi_inven_tipo, info_distribucion.IdNumMovi, info_distribucion.signo);
                 in_Motivo_Inven_Info info_motivo = new in_Motivo_Inven_Info();
                 in_Ing_Egr_Inven_Bus bus_ing_egr = new in_Ing_Egr_Inven_Bus();
-                decimal Id = 0;
-                string mensaje = "";
-
                 #region Crear movimiento sin lote
                 in_Ing_Egr_Inven_Info mov_sin_lote = new in_Ing_Egr_Inven_Info();
 
