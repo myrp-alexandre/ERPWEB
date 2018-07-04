@@ -183,5 +183,17 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+        public ActionResult FAC_004(int IdSucursal = 0, int IdBodega = 0, decimal IdNota = 0)
+        {
+            FAC_004_Rpt model = new FAC_004_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdBodega.Value = IdBodega;
+            model.p_IdSucursal.Value = IdSucursal;
+            model.p_IdNota.Value = IdNota;
+            model.RequestParameters = false;
+            return View(model);
+        }
+
+
     }
 }

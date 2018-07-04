@@ -8770,6 +8770,9 @@
     <EmbeddedResource Include="Reportes\Facturacion\FAC_003_Rpt.resx">
       <DependentUpon>FAC_003_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\FAC_004_Rpt.resx">
+      <DependentUpon>FAC_004_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Inventario\INV_001_Rpt.resx">
       <DependentUpon>INV_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
