@@ -76,7 +76,7 @@
             this.xrTableCell9 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow3 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell7 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.label_valor_letras = new DevExpress.XtraReports.UI.XRLabel();
+            this.lbl_valorenletras = new DevExpress.XtraReports.UI.XRLabel();
             this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow13 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell24 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -92,6 +92,11 @@
             this.xrTableCell26 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow16 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell27 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdSucursal = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdBodega = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdCbteVta = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_mostrar_cuotas = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_factura)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
@@ -394,7 +399,7 @@
             // 
             this.PageFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable2,
-            this.label_valor_letras,
+            this.lbl_valorenletras,
             this.xrTable1,
             this.xrTable3,
             this.xrTable4});
@@ -480,12 +485,12 @@
             this.xrTableCell7.Summary = xrSummary4;
             this.xrTableCell7.Weight = 3D;
             // 
-            // label_valor_letras
+            // lbl_valorenletras
             // 
-            this.label_valor_letras.LocationFloat = new DevExpress.Utils.PointFloat(197.1044F, 38.69001F);
-            this.label_valor_letras.Name = "label_valor_letras";
-            this.label_valor_letras.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.label_valor_letras.SizeF = new System.Drawing.SizeF(291.92F, 63.77F);
+            this.lbl_valorenletras.LocationFloat = new DevExpress.Utils.PointFloat(197.1044F, 38.69001F);
+            this.lbl_valorenletras.Name = "lbl_valorenletras";
+            this.lbl_valorenletras.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.lbl_valorenletras.SizeF = new System.Drawing.SizeF(291.92F, 63.77F);
             // 
             // xrTable1
             // 
@@ -617,6 +622,26 @@
             this.xrTableCell27.Summary = xrSummary10;
             this.xrTableCell27.Weight = 3D;
             // 
+            // p_IdEmpresa
+            // 
+            this.p_IdEmpresa.Name = "p_IdEmpresa";
+            // 
+            // p_IdSucursal
+            // 
+            this.p_IdSucursal.Name = "p_IdSucursal";
+            // 
+            // p_IdBodega
+            // 
+            this.p_IdBodega.Name = "p_IdBodega";
+            // 
+            // p_IdCbteVta
+            // 
+            this.p_IdCbteVta.Name = "p_IdCbteVta";
+            // 
+            // p_mostrar_cuotas
+            // 
+            this.p_mostrar_cuotas.Name = "p_mostrar_cuotas";
+            // 
             // FAC_003_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -632,7 +657,14 @@
             this.PageHeight = 1167;
             this.PageWidth = 827;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
+            this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
+            this.p_IdEmpresa,
+            this.p_IdSucursal,
+            this.p_IdBodega,
+            this.p_IdCbteVta,
+            this.p_mostrar_cuotas});
             this.Version = "17.2";
+            this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.FAC_003_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.tbl_factura)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
@@ -682,7 +714,7 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell9;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow3;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell7;
-        private DevExpress.XtraReports.UI.XRLabel label_valor_letras;
+        private DevExpress.XtraReports.UI.XRLabel lbl_valorenletras;
         private DevExpress.XtraReports.UI.XRTable xrTable1;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow13;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell24;
@@ -698,5 +730,10 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell26;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow16;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell27;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdEmpresa;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdSucursal;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdBodega;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdCbteVta;
+        public DevExpress.XtraReports.Parameters.Parameter p_mostrar_cuotas;
     }
 }

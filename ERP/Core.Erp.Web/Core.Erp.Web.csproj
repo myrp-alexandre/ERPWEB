@@ -8555,6 +8555,7 @@
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_GridViewPartial_cobranza_det.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_GridViewPartial_cobranza_facturas_x_cruzar.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbCliente_Facturacion.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_003.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
