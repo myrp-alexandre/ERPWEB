@@ -22,5 +22,6 @@ namespace Core.Erp.Data
         public string ca_Categoria { get; set; }
         public string lote_num_lote { get; set; }
         public Nullable<System.DateTime> lote_fecha_vcto { get; set; }
+        public string IdUnidadMedida { get; set; }
     }
 }

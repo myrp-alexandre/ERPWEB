@@ -48,5 +48,26 @@ namespace Core.Erp.Web.Areas.General.Controllers
             
             return PartialView("_GridViewPartial_reportes_por_usuario", model);
         }
+
+        public JsonResult guardar(int IdEmpresa = 0, string IdUsuario = "", string Ids = "")
+        {
+            string[] array = Ids.Split(',');
+
+            List<tb_sis_reporte_x_seg_usuario_Info> lista = new List<tb_sis_reporte_x_seg_usuario_Info>();
+            var output = array.GroupBy(q => q).ToList();
+            foreach (var item in output)
+            {
+                tb_sis_reporte_x_seg_usuario_Info info = new tb_sis_reporte_x_seg_usuario_Info
+                {
+                    IdEmpresa = IdEmpresa,
+                    IdUsuario = IdUsuario
+                };
+                lista.Add(info);
+            }
+            bus_reporte_x_usuario.eliminarDB(IdEmpresa, IdUsuario);
+            var resultado = bus_reporte_x_usuario.guardarDB(lista, IdEmpresa, IdUsuario);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
     }
 }

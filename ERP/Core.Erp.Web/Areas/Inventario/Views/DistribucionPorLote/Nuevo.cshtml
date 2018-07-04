@@ -11,10 +11,19 @@
 @using (Html.BeginForm("Nuevo", "DistribucionPorLote", FormMethod.Post, new { @class = "form", @role = "form" }))
 {   
     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdSucursal)
+    @Html.HiddenFor(q => q.IdProducto)
+    @Html.HiddenFor(q => q.IdProducto_padre)
     @Html.HiddenFor(q => q.signo)
     @Html.HiddenFor(q => q.IdMovi_inven_tipo)
-    
- 
+    @Html.HiddenFor(q => q.IdNumMovi)
+    @Html.HiddenFor(q => q.can_distribuida)
+    @Html.HiddenFor(q => q.can_x_distribuir)
+    @Html.HiddenFor(q => q.can_total)
+    @Html.HiddenFor(q => q.dm_cantidad)
+
+
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">

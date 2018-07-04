@@ -191,5 +191,39 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
+        public Boolean Reversar_Aprobacion(int IdEmpresa, int IdSucursal, int IdMovi_inve_tipo, decimal IdNumMovi, string Genera_movi_inven)
+        {
+            try
+            {
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    if (Genera_movi_inven == "")
+                    {
+                        in_movi_inven_tipo enti = Context.in_movi_inven_tipo.Where(q => q.IdEmpresa == IdEmpresa && q.IdMovi_inven_tipo == IdMovi_inve_tipo).FirstOrDefault();
+                        if (enti == null) return false;
+                        Genera_movi_inven = enti.Genera_Movi_Inven == true ? "S" : "N";
+                    }
+
+
+                    if (Genera_movi_inven == "S")
+                    {
+                        Context.spSys_inv_Reversar_aprobacion(IdEmpresa, IdSucursal, IdMovi_inve_tipo, IdNumMovi, true);
+                    }
+                    else
+                    {
+                        string comando = "update in_Ing_Egr_Inven_det set IdEstadoAproba = 'PEND' where IdEmpresa = " + IdEmpresa + " and IdSucursal = " + IdSucursal + " and IdMovi_inven_tipo = " + IdMovi_inve_tipo + " and IdNumMovi = " + IdNumMovi;
+                        Context.Database.ExecuteSqlCommand(comando);
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+               
+                throw ;
+            }
+        }
+
     }
 }

@@ -83,8 +83,8 @@
         <EntityTypeShape EntityType="Model_inventario.vwin_Ing_Egr_Inven_distribucion_x_distribuir" Width="1.5" PointX="7.375" PointY="19.75" />
         <AssociationConnector Association="Model_inventario.FK_in_Ing_Egr_Inven_distribucion_in_Ing_Egr_Inven" />
         <AssociationConnector Association="Model_inventario.FK_in_Ing_Egr_Inven_distribucion_in_Ing_Egr_Inven1" />
-        <EntityTypeShape EntityType="Model_inventario.vwin_producto_hijo_combo" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model_inventario.vwin_producto_padre_combo" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_inventario.vwin_producto_hijo_combo" Width="1.5" PointX="9.375" PointY="19.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

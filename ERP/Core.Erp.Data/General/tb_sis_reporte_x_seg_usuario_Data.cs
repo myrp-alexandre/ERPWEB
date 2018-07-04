@@ -31,10 +31,7 @@ namespace Core.Erp.Data.General
                              }).ToList();
 
                     Lista.AddRange((from q in Context.tb_sis_reporte
-                                    where !(from f in Context.tb_sis_reporte_x_seg_usuario
-                                            where f.IdEmpresa == IdEmpresa
-                                            && f.IdUsuario == IdUsuario
-                                            select f.CodReporte).Equals(q.CodReporte)
+                                    where !Context.tb_sis_reporte_x_seg_usuario.Any(meu => meu.CodReporte == q.CodReporte && meu.IdEmpresa == IdEmpresa && meu.IdUsuario == IdUsuario)
                                     select new tb_sis_reporte_x_seg_usuario_Info
                                     {
                                         IdEmpresa = IdEmpresa,

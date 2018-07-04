@@ -75,15 +75,14 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button"  class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Detalle</h4>
             </div>
             <div class="modal-body">
                 @Html.Action("GridViewPartial_distribucion_det")
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="AddFacturas();">Aceptar</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" onclick="cerrar();">Close</button>
             </div>
         </div>
 
@@ -92,12 +91,7 @@
 
 
 <script type="text/javascript">
-    //function Mostrar(IdProducto_padre)
-    //{
-    //    GridViewPartial_distribucion_det.PerformCallback(IdProducto_padre);
-    //    $("#detalle_distr").modal("show");
-    //}
-
+   
     function Mostrar(IdProducto_padre)
     {
         var datos = {
@@ -121,4 +115,10 @@
             }
         });
     };
+    function cerrar() {
+        GridViewPartial_distribuidos.PerformCallback();
+        $("#detalle_distr").modal("hide");
+
+    };
+  
 </script>   

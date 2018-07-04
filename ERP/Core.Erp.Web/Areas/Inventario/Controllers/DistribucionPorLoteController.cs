@@ -34,7 +34,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         private bool validar(in_Ing_Egr_Inven_distribucion_Info i_validar, ref string msg)
         {
-            if (i_validar.lst_x_distribuir.Count == 0)
+            if (i_validar.lst_distribuido.Count == 0)
             {
                 mensaje = "Debe ingresar al menos un producto";
                 return false;
@@ -53,8 +53,18 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         public ActionResult GridViewPartial_distribuidos(int IdSucursal=0, int IdMovi_inven_tipo=0, decimal IdNumMovi=0)
         {
+            List<in_Ing_Egr_Inven_distribucion_Info> model = new List<in_Ing_Egr_Inven_distribucion_Info>();
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<in_Ing_Egr_Inven_distribucion_Info> model = bus_ing_inv.get_list_distribuido(IdEmpresa, IdSucursal,IdMovi_inven_tipo, IdNumMovi);
+            if (IdSucursal != 0 & IdMovi_inven_tipo != 0 & IdNumMovi != 0 & Session["list_distribuida"] == null)
+            {
+                model = bus_ing_inv.get_list_distribuido(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
+                Session["list_distribuida"] = model;
+
+            }
+            else
+            {
+                model = Session["list_distribuida"] as List<in_Ing_Egr_Inven_distribucion_Info>;
+            }
             return PartialView("_GridViewPartial_distribuidos", model);
         }
         public ActionResult GridViewPartial_por_distribuir(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
@@ -93,13 +103,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             in_parametro_Info i_param = bus_in_param.get_info(IdEmpresa);
             if (i_param == null)
                 return RedirectToAction("Index");
-            in_Ing_Egr_Inven_distribucion_Info model = new in_Ing_Egr_Inven_distribucion_Info
-            {
-                IdEmpresa = IdEmpresa,
-                cm_fecha = DateTime.Now,
-                signo = "+",
-                IdMovi_inven_tipo = i_param.P_IdMovi_inven_tipo_default_ing == null ? 0 : Convert.ToInt32(i_param.P_IdMovi_inven_tipo_default_ing)
-            };
+            in_Ing_Egr_Inven_distribucion_Info model = new in_Ing_Egr_Inven_distribucion_Info();
+            model = bus_ing_inv.get_info(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi, "+");
+
             cargar_combos();
             return View(model);
         }
@@ -107,7 +113,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost]
         public ActionResult Nuevo(in_Ing_Egr_Inven_distribucion_Info model)
         {
-            model.lst_x_distribuir = List_in_Ing_Egr_Inven_det.get_list();
+            bus_ing_inv = new in_Ing_Egr_Inven_distribucion_Bus();
+            model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
             if (!validar(model, ref mensaje))
             {
                 cargar_combos();
@@ -138,9 +145,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] in_Ing_Egr_Inven_distribucion_Info info_det)
         {
-            DateTime lote_fecha_fab;
-            DateTime lote_fecha_vcto;
+            DateTime? lote_fecha_fab;
+            DateTime? lote_fecha_vcto;
             string lote_num_lote = "";
+            string pr_descripcion = "";
+            string unidad_medida = "";
             in_Ing_Egr_Inven_distribucion_Info model = new in_Ing_Egr_Inven_distribucion_Info();
             if (ModelState.IsValid)
             {
@@ -148,9 +157,18 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 {
                     var list = Session["list_productos"] as List<in_Producto_Info>;
                     var info_ = list.Where(v=>v.IdProducto==info_det.IdProducto).FirstOrDefault();
-                    info_det.lote_fecha_fab = info_.lote_fecha_fab;
-                    info_det.lote_fecha_vcto = info_.lote_fecha_fab;
-                    info_det.lote_num_lote = info_.lote_num_lote;
+                    lote_fecha_fab = info_.lote_fecha_fab;
+                    lote_fecha_vcto = info_.lote_fecha_vcto;
+                    lote_num_lote = info_.lote_num_lote;
+                    pr_descripcion = info_.pr_descripcion;
+                    unidad_medida = info_.IdUnidadMedida;
+
+                    info_det.lote_fecha_fab = lote_fecha_fab;
+                    info_det.lote_fecha_vcto = lote_fecha_vcto;
+                    info_det.lote_num_lote = lote_num_lote;
+                    info_det.pr_descripcion = pr_descripcion;
+                    info_det.IdUnidadMedida = unidad_medida;
+
                 }
                 List_in_Ing_Egr_Inven_det.AddRow(info_det);
                 model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
