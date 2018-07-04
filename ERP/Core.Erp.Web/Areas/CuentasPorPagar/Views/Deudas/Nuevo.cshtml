@@ -95,7 +95,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="co_plazo">Plazo*</label>
-                    @Html.TextBoxFor(q => q.co_plazo, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.co_plazo, new { @class = "form-control",@id= "co_plazo" })
                     @Html.ValidationMessageFor(q => q.co_plazo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -465,8 +465,20 @@
         $("#cmbTipoDocu_modif").empty();
         get_list_tipo_doc();
     });
+    $("#co_plazo").change(function () {
+        var plazo = $("#co_plazo").val();
+        if (plazo > 0) {
+            var d = new Date($("#co_FechaFactura_vct").val());
+            var year = d.getFullYear();
+            var month = d.getMonth();
+            var day = d.getDate();
 
+            var c = new Date(year , month, day+Number(plazo))
+            $('#co_FechaFactura_vct').datepicker("setDate", moment(c).format("DD/MM/YYYY"));
+        };
 
+    });
+    
     function actualizar_valores() {
         var base_iva = $("#co_subtotal_iva").val();
         var base_cero = $("#co_subtotal_siniva").val();

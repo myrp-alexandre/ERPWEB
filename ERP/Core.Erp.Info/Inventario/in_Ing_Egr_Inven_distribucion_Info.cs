@@ -42,9 +42,14 @@ namespace Core.Erp.Info.Inventario
         public Nullable<DateTime> lote_fecha_fab { get; set; }
         public Nullable<DateTime> lote_fecha_vcto { get; set; }
         public string lote_num_lote { get; set; }
-        #endregion
-
         public List<in_Ing_Egr_Inven_distribucion_Info> lst_x_distribuir { get; set; }
         public List<in_Ing_Egr_Inven_distribucion_Info> lst_distribuido { get; set; }
+        #endregion
+
+        public in_Ing_Egr_Inven_distribucion_Info()
+        {
+            lst_distribuido = new List<in_Ing_Egr_Inven_distribucion_Info>();
+            lst_x_distribuir = new List<in_Ing_Egr_Inven_distribucion_Info>(); 
+         }
     }
 }

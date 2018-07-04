@@ -10,8 +10,8 @@ namespace Core.Erp.Bus.Inventario
     {
         in_Ing_Egr_Inven_distribucion_Data oData = new in_Ing_Egr_Inven_distribucion_Data();
 
-        List<in_Ing_Egr_Inven_distribucion_Info> blst_x_distribuir = new List<in_Ing_Egr_Inven_distribucion_Info>();
-        List<in_Ing_Egr_Inven_distribucion_Info> blst_distribuido = new List<in_Ing_Egr_Inven_distribucion_Info>();
+        List<in_Ing_Egr_Inven_distribucion_Info> list_distribuir = new List<in_Ing_Egr_Inven_distribucion_Info>();
+        List<in_Ing_Egr_Inven_distribucion_Info> lst_distribuidos = new List<in_Ing_Egr_Inven_distribucion_Info>();
         public List<in_Ing_Egr_Inven_distribucion_Info> get_list(int IdEmpresa, int IdSucursal, int IdMovi_inven_tipo, decimal IdNumMovi)
         {
             try
@@ -169,7 +169,7 @@ namespace Core.Erp.Bus.Inventario
                 #endregion
 
                 #region Detalle
-                foreach (var item in blst_x_distribuir)
+                foreach (var item in info_distribucion.lst_x_distribuir)
                 {
                     if (item.can_distribuida > 0)
                     {
@@ -232,7 +232,7 @@ namespace Core.Erp.Bus.Inventario
                 #endregion
 
                 #region Detalle
-                foreach (var item in blst_distribuido)
+                foreach (var item in info_distribucion.lst_distribuido)
                 {
                     in_Ing_Egr_Inven_det_Info info_det = new in_Ing_Egr_Inven_det_Info
                     {
