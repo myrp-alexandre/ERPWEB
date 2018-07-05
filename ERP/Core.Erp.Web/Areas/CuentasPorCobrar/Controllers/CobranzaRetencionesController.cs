@@ -40,7 +40,6 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             ViewBag.lst_sucursal = lst_sucursal;
         }
 
-
         [ValidateInput(false)]
         public ActionResult GridViewPartial_cobranza_ret( DateTime? fecha_ini , DateTime? fecha_fin, int IdSucursal = 0)
         {
