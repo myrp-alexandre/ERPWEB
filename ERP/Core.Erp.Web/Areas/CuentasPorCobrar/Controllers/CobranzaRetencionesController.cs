@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.CuentasPorCobrar;
+using Core.Erp.Info.Helps;
+using Core.Erp.Bus.General;
 
 namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 {
@@ -16,14 +18,39 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         cxc_cobro_det_Bus bus_det = new cxc_cobro_det_Bus();
         cxc_cobro_tipo_Bus bus_cobro_tipo = new cxc_cobro_tipo_Bus();
         #region Index
-        public ActionResult Index()
+        public ActionResult Index(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdSucursal = IdSucursal,
+                fecha_fin = Fecha_fin == null ? DateTime.Now : Convert.ToDateTime(Fecha_fin),
+                fecha_ini = Fecha_ini == null ? DateTime.Now : Convert.ToDateTime(Fecha_ini),
+            };
+            cargar_combos();
+            return View(model);
         }
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_cobranza_ret()
+
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
         {
-            var model = new object[0];
+            cargar_combos();
+            return View(model);
+        }
+        private void cargar_combos()
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+        }
+
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_cobranza_ret(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            List<cxc_cobro_Info> model = new List<cxc_cobro_Info>();
+     //       model = bus_cobro.get_list_para_retencion(IdEmpresa, IdSucursal);
             return PartialView("_GridViewPartial_cobranza_ret", model);
         }
         #endregion
