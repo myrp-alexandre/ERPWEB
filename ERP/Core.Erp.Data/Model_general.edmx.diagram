@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9577fa8149bd48ec8fdc9082c39c9d5f" Name="Diagram1" ZoomLevel="75">
+      <Diagram DiagramId="9577fa8149bd48ec8fdc9082c39c9d5f" Name="Diagram1" ZoomLevel="60">
         <EntityTypeShape EntityType="Model_general.tb_sucursal" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_general.tb_pais" Width="1.5" PointX="4.875" PointY="0.75" />
         <EntityTypeShape EntityType="Model_general.tb_CatalogoTipo" Width="1.5" PointX="3.375" PointY="5.75" />
@@ -51,10 +51,10 @@
         <AssociationConnector Association="Model_general.FK_tb_ciudad_tb_provincia" />
         <AssociationConnector Association="Model_general.FK_tb_provincia_tb_pais" />
         <AssociationConnector Association="Model_general.FK_tb_provincia_tb_region" />
+        <EntityTypeShape EntityType="Model_general.tb_sis_reporte_diseno" Width="1.5" PointX="16.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_general.tb_sis_reporte_x_seg_usuario" Width="1.5" PointX="17.875" PointY="8.625" />
         <AssociationConnector Association="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_empresa" />
         <AssociationConnector Association="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_sis_reporte" />
-        <EntityTypeShape EntityType="Model_general.tb_sis_reporte_diseno" Width="1.5" PointX="16.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

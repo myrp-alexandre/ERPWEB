@@ -393,6 +393,16 @@
           <Property Name="nom_pc" Type="varchar" MaxLength="50" />
           <Property Name="ip" Type="varchar" MaxLength="25" />
         </EntityType>
+        <EntityType Name="tb_sis_reporte_x_seg_usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="CodReporte" />
+          </Key>
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="CodReporte" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_ciudad_id' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_ciudad_id">
@@ -656,6 +666,30 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' no
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tb_sis_reporte_x_seg_usuario_tb_empresa">
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="1" />
+          <End Role="tb_sis_reporte_x_seg_usuario" Type="Self.tb_sis_reporte_x_seg_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="tb_sis_reporte_x_seg_usuario">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_sis_reporte_x_seg_usuario_tb_sis_reporte">
+          <End Role="tb_sis_reporte" Type="Self.tb_sis_reporte" Multiplicity="1" />
+          <End Role="tb_sis_reporte_x_seg_usuario" Type="Self.tb_sis_reporte_x_seg_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sis_reporte">
+              <PropertyRef Name="CodReporte" />
+            </Principal>
+            <Dependent Role="tb_sis_reporte_x_seg_usuario">
+              <PropertyRef Name="CodReporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tb_sucursal_tb_empresa">
           <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="1" />
           <End Role="tb_sucursal" Type="Self.tb_sucursal" Multiplicity="*" />
@@ -692,6 +726,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' no
           <EntitySet Name="tb_transportista" EntityType="Self.tb_transportista" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_reporte" EntityType="Self.tb_sis_reporte" Schema="web" store:Type="Tables" />
           <EntitySet Name="tb_sis_reporte_diseno" EntityType="Self.tb_sis_reporte_diseno" Schema="web" store:Type="Tables" />
+          <EntitySet Name="tb_sis_reporte_x_seg_usuario" EntityType="Self.tb_sis_reporte_x_seg_usuario" Schema="web" store:Type="Tables" />
           <EntitySet Name="vwtb_ciudad_id" EntityType="Self.vwtb_ciudad_id" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwtb_ciudad_id].[IdCiudad] AS [IdCiudad]
@@ -788,6 +823,14 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' no
           <AssociationSet Name="FK_tb_sis_reporte_tb_modulo" Association="Self.FK_tb_sis_reporte_tb_modulo">
             <End Role="tb_modulo" EntitySet="tb_modulo" />
             <End Role="tb_sis_reporte" EntitySet="tb_sis_reporte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_sis_reporte_x_seg_usuario_tb_empresa" Association="Self.FK_tb_sis_reporte_x_seg_usuario_tb_empresa">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_sis_reporte_x_seg_usuario" EntitySet="tb_sis_reporte_x_seg_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_sis_reporte_x_seg_usuario_tb_sis_reporte" Association="Self.FK_tb_sis_reporte_x_seg_usuario_tb_sis_reporte">
+            <End Role="tb_sis_reporte" EntitySet="tb_sis_reporte" />
+            <End Role="tb_sis_reporte_x_seg_usuario" EntitySet="tb_sis_reporte_x_seg_usuario" />
           </AssociationSet>
           <AssociationSet Name="FK_tb_sucursal_tb_empresa" Association="Self.FK_tb_sucursal_tb_empresa">
             <End Role="tb_empresa" EntitySet="tb_empresa" />
@@ -934,6 +977,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' no
             <End Role="tb_region" EntitySet="tb_region" />
             <End Role="tb_provincia" EntitySet="tb_provincia" />
           </AssociationSet>
+          <EntitySet Name="tb_sis_reporte_diseno" EntityType="Model_general.tb_sis_reporte_diseno" />
           <EntitySet Name="tb_sis_reporte_x_seg_usuario" EntityType="Model_general.tb_sis_reporte_x_seg_usuario" />
           <AssociationSet Name="FK_tb_sis_reporte_x_seg_usuario_tb_empresa" Association="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_empresa">
             <End Role="tb_empresa" EntitySet="tb_empresa" />
@@ -943,7 +987,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' no
             <End Role="tb_sis_reporte" EntitySet="tb_sis_reporte" />
             <End Role="tb_sis_reporte_x_seg_usuario" EntitySet="tb_sis_reporte_x_seg_usuario" />
           </AssociationSet>
-          <EntitySet Name="tb_sis_reporte_diseno" EntityType="Model_general.tb_sis_reporte_diseno" />
           </EntityContainer>
         <EntityType Name="tb_pais">
           <Key>
@@ -1595,6 +1638,24 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' no
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tb_sis_reporte_diseno">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="codDocumentoTipo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="codDocumentoTipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="File_Disenio_Reporte" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="tb_sis_reporte_x_seg_usuario">
           <Key>
             <PropertyRef Name="IdUsuario" />
@@ -1631,24 +1692,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' no
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="tb_sis_reporte_diseno">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="codDocumentoTipo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="codDocumentoTipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="File_Disenio_Reporte" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2082,6 +2125,15 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' no
                 <ScalarProperty Name="File_Disenio_Reporte" ColumnName="File_Disenio_Reporte" />
                 <ScalarProperty Name="codDocumentoTipo" ColumnName="codDocumentoTipo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_sis_reporte_x_seg_usuario">
+            <EntityTypeMapping TypeName="Model_general.tb_sis_reporte_x_seg_usuario">
+              <MappingFragment StoreEntitySet="tb_sis_reporte_x_seg_usuario">
+                <ScalarProperty Name="CodReporte" ColumnName="CodReporte" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
