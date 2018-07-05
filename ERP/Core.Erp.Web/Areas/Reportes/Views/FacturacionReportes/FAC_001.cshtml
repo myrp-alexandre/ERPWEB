@@ -113,23 +113,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdSucursal, settings =>
-                 {
-                     settings.Name = "IdSucursal";
-                     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                     settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                     settings.Properties.Columns.Add("IdSucursal", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                     settings.Properties.Columns.Add("Su_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                     //Campo ID
-                     settings.Properties.ValueField = "IdSucursal";
-                     settings.Properties.ValueType = typeof(int);
-                     settings.Properties.TextField = "Su_descripcion";
-                     //Boton para seleccionar ningun registro
-                     settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                     settings.Properties.NullText = "== Seleccione ==";
-                     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                     settings.Properties.AllowNull = true;
-                 }).BindList(ViewBag.lst_sucursal).GetHtml()
+                    @Html.DropDownListFor(q=>q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucusarl", "Su_descripcion"), new { @class="form-control"})
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
