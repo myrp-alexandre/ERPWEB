@@ -125,8 +125,11 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             i_validar.cr_observacion = observacion;
             i_validar.cr_fechaCobro = i_validar.cr_fecha;
             i_validar.cr_fechaDocu = i_validar.cr_fecha;
+
             if (!string.IsNullOrEmpty(i_validar.IdCobro_tipo))
                 i_validar.lst_det.ForEach(q => q.IdCobro_tipo = i_validar.IdCobro_tipo);
+
+            
             
             switch (i_validar.IdCobro_tipo)
             {
@@ -253,10 +256,31 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Anular()
+        public ActionResult Anular(int IdSucursal = 0, decimal IdCobro = 0)
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            cxc_cobro_Info model = bus_cobro.get_info(IdEmpresa, IdSucursal, IdCobro);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdCobro);
+            list_det.set_list(model.lst_det);
+            model.IdEntidad = model.IdCliente;
             cargar_combos();
-            return View();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Anular(cxc_cobro_Info model)
+        {
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
+            if (!bus_cobro.anularDB(model))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
         }
 
         #region Grids

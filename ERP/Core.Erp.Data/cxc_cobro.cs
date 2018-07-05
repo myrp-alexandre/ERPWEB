@@ -17,8 +17,8 @@ namespace Core.Erp.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public cxc_cobro()
         {
-            this.cxc_cobro_det = new HashSet<cxc_cobro_det>();
             this.cxc_cobro_x_ct_cbtecble = new HashSet<cxc_cobro_x_ct_cbtecble>();
+            this.cxc_cobro_det = new HashSet<cxc_cobro_det>();
         }
     
         public int IdEmpresa { get; set; }
@@ -56,8 +56,8 @@ namespace Core.Erp.Data
     
         public virtual cxc_cobro_tipo cxc_cobro_tipo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cxc_cobro_det> cxc_cobro_det { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cxc_cobro_x_ct_cbtecble> cxc_cobro_x_ct_cbtecble { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cxc_cobro_det> cxc_cobro_det { get; set; }
     }
 }

@@ -255,6 +255,7 @@
     <Compile Include="Areas\CuentasPorCobrar\Controllers\CatalogoCXCController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\CatalogoTipoCXCController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\CobranzaController.cs" />
+    <Compile Include="Areas\CuentasPorCobrar\Controllers\CobranzaRetencionesController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\ParametroCXCController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\TipoCobroController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\CuentasPorCobrarAreaRegistration.cs" />
@@ -285,6 +286,7 @@
     <Compile Include="Areas\General\Controllers\EmpresaController.cs" />
     <Compile Include="Areas\General\Controllers\ImagenesController.cs" />
     <Compile Include="Areas\General\Controllers\ImpuestoController.cs" />
+    <Compile Include="Areas\General\Controllers\ReportesPorUsuarioController.cs" />
     <Compile Include="Areas\General\Controllers\ModuloController.cs" />
     <Compile Include="Areas\General\Controllers\PaisController.cs" />
     <Compile Include="Areas\General\Controllers\ParroquiaController.cs" />
@@ -8563,7 +8565,6 @@
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_GridViewPartial_cobranza_facturas_x_cruzar.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbCliente_Facturacion.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_003.cshtml" />
-    <Content Include="Areas\General\Views\ReportesPorUsuarioController\Index.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_004.cshtml" />
     <Content Include="Areas\General\Views\DisenadorReporte\_GridViewPartial_disenador_reporte.cshtml" />
     <Content Include="Areas\General\Views\DisenadorReporte\Anular.cshtml" />
@@ -8637,6 +8638,7 @@
     <Folder Include="Areas\Contabilidad\Models\" />
     <Folder Include="Areas\Contabilidad\Views\PuntoCargo\" />
     <Folder Include="Areas\CuentasPorCobrar\Models\" />
+    <Folder Include="Areas\CuentasPorCobrar\Views\CobranzaRetenciones\" />
     <Folder Include="Areas\CuentasPorPagar\Models\" />
     <Folder Include="Areas\Facturacion\Models\" />
     <Folder Include="Areas\General\Models\" />

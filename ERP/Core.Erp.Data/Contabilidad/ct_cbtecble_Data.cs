@@ -245,17 +245,17 @@ namespace Core.Erp.Data.Contabilidad
                     #region Cabecera
                     ct_cbtecble Entity_reverso = new ct_cbtecble
                     {
-                        IdEmpresa = info.IdEmpresa,
+                        IdEmpresa = Entity.IdEmpresa,
                         IdTipoCbte = e_tipo.IdTipoCbte_Anul,
-                        IdCbteCble = get_id(info.IdEmpresa, e_tipo.IdTipoCbte_Anul),
+                        IdCbteCble = get_id(Entity.IdEmpresa, e_tipo.IdTipoCbte_Anul),
                         cb_Anio = DateTime.Now.Year,
-                        cb_Estado = info.cb_Estado = "A",
+                        cb_Estado = Entity.cb_Estado = "A",
                         cb_Fecha = DateTime.Now.Date,
                         cb_mes = DateTime.Now.Month,
-                        cb_Observacion = "**REVERSO DE DIARIO tipo: "+info.IdTipoCbte.ToString()+ " #cbte: "+info.IdCbteCble.ToString()+"** "+ info.cb_Observacion,
-                        cb_Valor = info.cb_Valor,
-                        CodCbteCble = "ANU"+info.CodCbteCble,
-                        IdPeriodo = info.IdPeriodo = Convert.ToInt32(DateTime.Now.ToString("yyyyMM")),
+                        cb_Observacion = "**REVERSO DE DIARIO tipo: "+ Entity.IdTipoCbte.ToString()+ " #cbte: "+ Entity.IdCbteCble.ToString()+"** "+ Entity.cb_Observacion,
+                        cb_Valor = Entity.cb_Valor,
+                        CodCbteCble = "ANU"+ Entity.CodCbteCble,
+                        IdPeriodo = Entity.IdPeriodo = Convert.ToInt32(DateTime.Now.ToString("yyyyMM")),
 
                         IdUsuario = info.IdUsuarioAnu,
                         cb_FechaTransac = DateTime.Now
@@ -264,7 +264,7 @@ namespace Core.Erp.Data.Contabilidad
                     #endregion
 
                     #region Detalle
-                    var det = Context.ct_cbtecble_det.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoCbte == info.IdTipoCbte && q.IdCbteCble == info.IdCbteCble).ToList();
+                    var det = Context.ct_cbtecble_det.Where(q => q.IdEmpresa == Entity.IdEmpresa && q.IdTipoCbte == Entity.IdTipoCbte && q.IdCbteCble == Entity.IdCbteCble).ToList();
                     foreach (var item in det)
                     {
                         ct_cbtecble_det Entity_reverso_det = new ct_cbtecble_det
@@ -274,7 +274,7 @@ namespace Core.Erp.Data.Contabilidad
                             IdCbteCble = Entity_reverso.IdCbteCble,
                             secuencia = item.secuencia,
                             IdCtaCble = item.IdCtaCble,
-                            dc_Observacion = "**REVERSO DE DIARIO tipo: " + info.IdTipoCbte.ToString() + " #cbte: " + info.IdCbteCble.ToString() + "** " + item.dc_Observacion,
+                            dc_Observacion = "**REVERSO DE DIARIO tipo: " + Entity.IdTipoCbte.ToString() + " #cbte: " + Entity.IdCbteCble.ToString() + "** " + item.dc_Observacion,
                             dc_Valor = item.dc_Valor * -1,
                             IdCentroCosto = item.IdCentroCosto,
                             IdCentroCosto_sub_centro_costo = item.IdCentroCosto_sub_centro_costo,
@@ -289,9 +289,9 @@ namespace Core.Erp.Data.Contabilidad
                     #region Tabla intermedia
                     ct_cbtecble_Reversado Entity_int = new ct_cbtecble_Reversado
                     {
-                        IdEmpresa = info.IdEmpresa,
-                        IdTipoCbte = info.IdTipoCbte,
-                        IdCbteCble = info.IdCbteCble,
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdTipoCbte = Entity.IdTipoCbte,
+                        IdCbteCble = Entity.IdCbteCble,
                         IdEmpresa_Anu = Entity_reverso.IdEmpresa,
                         IdTipoCbte_Anu = Entity_reverso.IdTipoCbte,
                         IdCbteCble_Anu = Entity_reverso.IdCbteCble,
@@ -300,10 +300,10 @@ namespace Core.Erp.Data.Contabilidad
                     Context.ct_cbtecble_Reversado.Add(Entity_int);
                     #endregion
 
-                    Entity.cb_Estado = info.cb_Estado = "I";
-                    Entity.IdUsuarioAnu = info.IdUsuarioAnu;
+                    Entity.cb_Estado = Entity.cb_Estado = "I";
+                    Entity.IdUsuarioAnu = Entity.IdUsuarioAnu;
                     Entity.cb_FechaAnu = DateTime.Now;
-                    Entity.cb_Observacion = "REVERSADO CON EL DIARIO tipo: " + Entity_reverso.IdTipoCbte.ToString() + " #cbte: " + Entity_reverso.IdCbteCble.ToString() + "** " + info.cb_Observacion;
+                    Entity.cb_Observacion = "REVERSADO CON EL DIARIO tipo: " + Entity_reverso.IdTipoCbte.ToString() + " #cbte: " + Entity_reverso.IdCbteCble.ToString() + "** " + Entity.cb_Observacion;
 
                     Context.SaveChanges();
                 };
