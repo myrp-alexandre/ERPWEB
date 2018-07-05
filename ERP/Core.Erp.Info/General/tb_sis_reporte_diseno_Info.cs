@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.General
 {
-    class tb_sis_reporte_diseno_Info
+ public   class tb_sis_reporte_diseno_Info
     {
     }
 }
