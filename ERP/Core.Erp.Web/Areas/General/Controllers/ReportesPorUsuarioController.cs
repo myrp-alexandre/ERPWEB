@@ -8,11 +8,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
+namespace Core.Erp.Web.Areas.General.Controllers
 {
     public class ReportesPorUsuarioController : Controller
     {
-        static tb_sis_reporte_x_seg_usuario_Bus bus_menu_x_empresa_x_usuario = new tb_sis_reporte_x_seg_usuario_Bus();
+        tb_sis_reporte_x_seg_usuario_Bus bus_reporte_x_usuario = new tb_sis_reporte_x_seg_usuario_Bus();
         public ActionResult Index()
         {
             tb_sis_reporte_x_seg_usuario_Info model = new tb_sis_reporte_x_seg_usuario_Info();
@@ -36,7 +36,12 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
             ViewBag.lst_usuario = lst_usuario;
         }
 
-
+        public ActionResult GridViewPartial_reportes_por_usuario(int IdEmpresa=0, string IdUsuario="")
+        {
+            List<tb_sis_reporte_x_seg_usuario_Info> model = new List<tb_sis_reporte_x_seg_usuario_Info>();
+            model = bus_reporte_x_usuario.get_list(IdEmpresa, IdUsuario);
+            return PartialView("_GridViewPartial_reportes_por_usuario", model);
+        }
         public JsonResult guardar(int IdEmpresa = 0, string IdUsuario = "", string Ids = "")
         {
             string[] array = Ids.Split(',');
@@ -53,8 +58,8 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
                 };
                 lista.Add(info);
             }
-            bus_menu_x_empresa_x_usuario.eliminarDB(IdEmpresa, IdUsuario);
-            var resultado = bus_menu_x_empresa_x_usuario.guardarDB(lista, IdEmpresa, IdUsuario);
+            bus_reporte_x_usuario.eliminarDB(IdEmpresa, IdUsuario);
+            var resultado = bus_reporte_x_usuario.guardarDB(lista, IdEmpresa, IdUsuario);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }

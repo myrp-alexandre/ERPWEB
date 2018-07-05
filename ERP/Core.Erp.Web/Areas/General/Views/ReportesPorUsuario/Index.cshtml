@@ -10,7 +10,21 @@
 }
 
 <script>
+    var selectedIDs;
 
+    function OnBeginCallback(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDs"] = selectedIDs;
+    }
+    function OnSelectionChanged(s, e) {
+        s.GetSelectedNodeValues("CodReporte", GetSelectedNodeValuesCallback);
+    }
+    function GetSelectedNodeValuesCallback(values) {
+        if (values != null) {
+            selectedIDs = values.join(',');
+        }
+    }
+    
     function guardar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),

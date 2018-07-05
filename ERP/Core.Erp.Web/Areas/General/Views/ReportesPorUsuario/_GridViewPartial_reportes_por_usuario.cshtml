@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridView_reportes_por_usuario";
+        settings.Name = "GridViewPartial_reportes_por_usuario";
         settings.CallbackRouteValues = new
         {
             Controller = "ReportesPorUsuario",
@@ -34,8 +34,6 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
 
-        settings.Columns.Add("CodReporte", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("nom_reporte", "Nombre").Width = Unit.Percentage(85);
         settings.Columns.Add(column =>
         {
             column.Caption = "*";
@@ -43,6 +41,9 @@
             column.ColumnType = MVCxGridViewColumnType.CheckBox;
             column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
         });
+        settings.Columns.Add("CodReporte", "Código").Width = Unit.Percentage(10);
+        settings.Columns.Add("nom_reporte", "Nombre").Width = Unit.Percentage(50);
+
     });
 }
 @grid.Bind(Model).GetHtml()
