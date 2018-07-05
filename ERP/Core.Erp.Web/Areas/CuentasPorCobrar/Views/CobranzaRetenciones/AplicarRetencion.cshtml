@@ -8,6 +8,49 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script type="text/javascript">
+
+    $(function () {
+        //Date picker
+        $('#cr_fecha').datepicker({
+            autoclose: true
+        })
+    })
+
+
+    function SetValorRetencion(s,e)
+    {
+        var datos = {
+            IdCobroTipo: s.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetValorRetencion", "Cobranza",new { Area = "CuentasPorCobrar"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {                
+                var valor = 0;
+                if (data.ESRetenFTE == "S") {
+                    var subtotal = Number($("#vt_Subtotal").val());
+                    var porcentaje = Number(data.PorcentajeRet) / 100;
+                    valor = subtotal * porcentaje;
+                } else {
+                    var iva = Number($("#vt_Iva").val());
+                    var porcentaje = Number(data.PorcentajeRet) / 100;
+                    valor = iva * porcentaje;
+                }                
+                GridView_cobranza_ret_det.GetEditor('dc_ValorPago').SetValue(valor);
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
+
 @using (Html.BeginForm("AplicarRetencion", "CobranzaRetenciones", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
@@ -75,9 +118,7 @@
         </div>
     </div>
 
-    @Html.Action("GridViewPartial_cobranza_ret_fte")
-    
-    @Html.Action("GridViewPartial_cobranza_ret_iva")
+    @Html.Action("GridViewPartial_cobranza_ret_det")
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
