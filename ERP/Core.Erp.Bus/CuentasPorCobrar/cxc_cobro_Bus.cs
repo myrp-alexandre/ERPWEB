@@ -69,7 +69,7 @@ namespace Core.Erp.Bus.CuentasPorCobrar
             }
         }
         
-        public List<vwcxc_cobro_para_retencion> get_list_para_retencion(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin)
+        public List<cxc_cobro_Info> get_list_para_retencion(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace Core.Erp.Bus.CuentasPorCobrar
             }
         }
 
-        public vwcxc_cobro_para_retencion get_info_para_retencion(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string vt_tipoDoc)
+        public cxc_cobro_Info get_info_para_retencion(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string vt_tipoDoc)
         {
             try
             {

@@ -796,31 +796,31 @@ namespace Core.Erp.Data.CuentasPorCobrar
             }
         }
 
-        public List<vwcxc_cobro_para_retencion> get_list_para_retencion(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin)
+        public List<cxc_cobro_Info> get_list_para_retencion(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
             {
-                List<vwcxc_cobro_para_retencion> Lista;
+                List<cxc_cobro_Info> Lista;
                 using (Entities_cuentas_por_cobrar Context = new Entities_cuentas_por_cobrar())
                 {
                     Lista = (from q in Context.vwcxc_cobro_para_retencion
                              where q.IdEmpresa == IdEmpresa
                              && q.IdSucursal == IdSucursal
-                             select new vwcxc_cobro_para_retencion
+                             select new cxc_cobro_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdSucursal = q.IdSucursal,
                                  IdBodega = q.IdBodega,
                                  IdCbteVta = q.IdCbteVta,
-                                 vt_tipoDoc = q.vt_tipoDoc,
-                                 vt_iva = q.vt_iva,
-                                 vt_total = q.vt_total,
-                                 Nombres = q.Nombres,
-                                 vt_fecha = q.vt_fecha,
-                                 vt_fech_venc = q.vt_fech_venc,
+                                 cr_NumDocumento = q.vt_tipoDoc,
+                                 vt_Iva = Convert.ToDouble(q.vt_iva),
+                                 vt_Total = Convert.ToDouble(q.vt_total),
+                                 pe_nombreCompleto = q.Nombres,
+                                 cr_fecha = q.vt_fecha,
+                                 cr_fechaCobro = Convert.ToDateTime(q.vt_fech_venc),
                                  vt_NumFactura = q.vt_NumFactura,
-                                 vt_Observacion = q.vt_Observacion,
-                                 vt_Subtotal = q.vt_Subtotal
+                                 cr_observacion = q.vt_Observacion,
+                                 vt_Subtotal = Convert.ToDouble(q.vt_Subtotal)
                              }).ToList();
                 }
                 return Lista;
@@ -832,31 +832,31 @@ namespace Core.Erp.Data.CuentasPorCobrar
             }
         }
 
-        public vwcxc_cobro_para_retencion get_info_para_retencion(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string vt_tipoDoc)
+        public cxc_cobro_Info get_info_para_retencion(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string vt_tipoDoc)
         {
             try
             {
-                vwcxc_cobro_para_retencion info = new vwcxc_cobro_para_retencion();
+                cxc_cobro_Info info = new cxc_cobro_Info();
                 using (Entities_cuentas_por_cobrar Context = new Entities_cuentas_por_cobrar())
                 {
                     vwcxc_cobro_para_retencion Entity = Context.vwcxc_cobro_para_retencion.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.vt_tipoDoc == vt_tipoDoc);
                     if (Entity == null) return null;
-                    info = new vwcxc_cobro_para_retencion
+                    info = new cxc_cobro_Info
                     {
 
                         IdEmpresa = Entity.IdEmpresa,
                         IdSucursal = Entity.IdSucursal,
                         IdBodega = Entity.IdBodega,
                         IdCbteVta = Entity.IdCbteVta,
-                        vt_tipoDoc = Entity.vt_tipoDoc,
-                        vt_iva = Entity.vt_iva,
-                        vt_total = Entity.vt_total,
-                        Nombres = Entity.Nombres,
-                        vt_fecha = Entity.vt_fecha,
-                        vt_fech_venc = Entity.vt_fech_venc,
+                        cr_NumDocumento = Entity.vt_tipoDoc,
+                        vt_Iva = Convert.ToDouble(Entity.vt_iva),
+                        vt_Total =  Convert.ToDouble(Entity.vt_total),
+                        pe_nombreCompleto = Entity.Nombres,
+                        cr_fecha = Entity.vt_fecha,
+                        cr_fechaCobro = Convert.ToDateTime(Entity.vt_fech_venc),
                         vt_NumFactura = Entity.vt_NumFactura,
-                        vt_Observacion = Entity.vt_Observacion,
-                        vt_Subtotal = Entity.vt_Subtotal
+                        cr_observacion = Entity.vt_Observacion,
+                        vt_Subtotal = Convert.ToDouble(Entity.vt_Subtotal)
                     };
                 }
                 return info;
