@@ -12,7 +12,7 @@
         settings.Settings.ShowFilterRow = true;
 
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "CobranzaRetenciones", Action = "AddNew", Area = "CuentasPorCobrar" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "CobranzaRetenciones", Action = "EditingAddNew", Area = "CuentasPorCobrar" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "CobranzaRetenciones", Action = "EditingUpdate", Area = "CuentasPorCobrar" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "CobranzaRetenciones", Action = "EditingDelete", Area = "CuentasPorCobrar" };
 
@@ -46,6 +46,7 @@
                 p.ValueField = "IdCobro_tipo";
                 p.TextField = "tc_descripcion";
                 p.BindList(new Core.Erp.Bus.CuentasPorCobrar.cxc_cobro_tipo_Bus().get_list_retenciones(false));
+                p.ClientSideEvents.SelectedIndexChanged = "SetValorRetencion";
             });
         });
         settings.Columns.Add(column =>
