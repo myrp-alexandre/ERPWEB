@@ -77,5 +77,10 @@ using Core.Erp.Info.CuentasPorPagar;
             lst_detalle_op = new List<cp_orden_pago_det_Info>();
         }
 
+        // campos que no existen en la tabla
+
+        public bool ConvenioTributacion_bool { get; set; }
+        public bool PagoSujetoRetencion_bool { get; set; }
+
     }
 }

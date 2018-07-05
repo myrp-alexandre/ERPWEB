@@ -56,8 +56,10 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Fecha_Transac = info.Fecha_Transac = DateTime.Now,
                         Estado = info.Estado,
                         ip=info.ip,
-                        nom_pc=info.nom_pc
-                        
+                        nom_pc=info.nom_pc,
+                        ConvenioTributacion = info.ConvenioTributacion_bool == true ? "SI" : "NO",
+                        PagoSujetoRetencion = info.PagoSujetoRetencion_bool == true ? "SI" : "NO"
+
                     };
                     Context.cp_nota_DebCre.Add(Entity);
                     Context.SaveChanges();
@@ -117,7 +119,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.IdTipoFlujo = info.IdTipoFlujo;
                         Entity.IdTipoServicio = info.IdTipoServicio;
                         Entity.IdCtaCble_IVA = info.IdCtaCble_IVA;
-
+                        Entity.ConvenioTributacion = info.ConvenioTributacion_bool == true ? "SI" : "NO";
+                        Entity.PagoSujetoRetencion = info.PagoSujetoRetencion_bool == true ? "SI" : "NO";
 
 
                     };
@@ -280,7 +283,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdCtaCble_Acre = info.IdCtaCble_Acre,
                         IdTipoFlujo = info.IdTipoFlujo,
                         IdTipoServicio = info.IdTipoServicio,
-                        IdCtaCble_IVA = info.IdCtaCble_IVA
+                        IdCtaCble_IVA = info.IdCtaCble_IVA,
+                        ConvenioTributacion_bool = Entity.ConvenioTributacion == "SI" ? true : false,
+                        PagoSujetoRetencion_bool = Entity.PagoSujetoRetencion == "SI" ? true : false
                     };
                 }
                 return info;
