@@ -32,5 +32,18 @@ namespace Core.Erp.Bus.CuentasPorCobrar
                 throw;
             }
         }
+
+        public List<cxc_cobro_det_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string dc_TipoDocumento)
+        {
+            try
+            {
+                return odata.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, dc_TipoDocumento);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -38,5 +38,6 @@ namespace Core.Erp.Data
         public virtual DbSet<cxc_cobro_det> cxc_cobro_det { get; set; }
         public virtual DbSet<vwcxc_cobro_det> vwcxc_cobro_det { get; set; }
         public virtual DbSet<vwcxc_cobro_para_retencion> vwcxc_cobro_para_retencion { get; set; }
+        public virtual DbSet<vwcxc_cobro_det_retencion> vwcxc_cobro_det_retencion { get; set; }
     }
 }
