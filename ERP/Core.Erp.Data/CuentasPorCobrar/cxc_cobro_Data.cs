@@ -796,7 +796,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
             }
         }
 
-        public List<cxc_cobro_Info> get_list_para_retencion(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin)
+        public List<cxc_cobro_Info> get_list_para_retencion(int IdEmpresa, int IdSucursal, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
