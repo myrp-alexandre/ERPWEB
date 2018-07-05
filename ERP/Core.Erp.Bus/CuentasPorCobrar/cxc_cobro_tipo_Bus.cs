@@ -21,6 +21,19 @@ namespace Core.Erp.Bus.CuentasPorCobrar
                 throw;
             }
         }
+
+        public List<cxc_cobro_tipo_Info> get_list_retenciones(bool mostrar_anulados)
+        {
+            try
+            {
+                return odata.get_list_retenciones(mostrar_anulados);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public cxc_cobro_tipo_Info get_info(string IdCobro_tipo)
         {
             try

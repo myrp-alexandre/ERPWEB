@@ -1,0 +1,67 @@
+@using System.Web.UI.WebControls;
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridView_cobranza_ret_det";
+        settings.CallbackRouteValues = new { Controller = "CobranzaRetenciones", Action = "GridViewPartial_cobranza_ret_det" };
+        settings.Width = Unit.Percentage(100);
+        settings.KeyFieldName = "secuencial";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "CobranzaRetenciones", Action = "AddNew", Area = "CuentasPorCobrar" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "CobranzaRetenciones", Action = "EditingUpdate", Area = "CuentasPorCobrar" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "CobranzaRetenciones", Action = "EditingDelete", Area = "CuentasPorCobrar" };
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = false;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+
+        //Configuración click derecho
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+        settings.SettingsContextMenu.EnableRowMenu = DefaultBoolean.True;
+
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add(column =>
+        {
+            column.Width = Unit.Percentage(70);
+            column.FieldName = "IdCobro_tipo";
+            column.Caption = "Tipo de retención";
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.ValueField = "IdCobro_tipo";
+                p.TextField = "tc_descripcion";
+                p.BindList(new Core.Erp.Bus.CuentasPorCobrar.cxc_cobro_tipo_Bus().get_list_retenciones(false));
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Width = Unit.Percentage(20);
+            column.FieldName = "dc_ValorPago";
+            column.Caption = "V. aplicado";
+            column.PropertiesEdit.DisplayFormatString = "{0:N2}";
+            column.EditorProperties().SpinEdit(p =>
+            {
+                p.MinValue = 0;
+                p.DisplayFormatInEditMode = true;
+                p.DisplayFormatString = "N2";
+            });
+        });
+        MVCxGridView grid = (MVCxGridView)s;
+    });
+}
+@grid.Bind(Model.lst_det).GetHtml()

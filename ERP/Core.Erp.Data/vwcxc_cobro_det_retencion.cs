@@ -27,5 +27,7 @@ namespace Core.Erp.Data
         public string ESRetenIVA { get; set; }
         public string ESRetenFTE { get; set; }
         public double PorcentajeRet { get; set; }
+        public string cr_NumDocumento { get; set; }
+        public System.DateTime cr_fecha { get; set; }
     }
 }

@@ -1,15 +1,89 @@
-﻿
+﻿@model Core.Erp.Info.CuentasPorCobrar.cxc_cobro_Info
 @{
-                /**/
-
-                ViewBag.Title = "AplicarRetencion";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    ViewBag.Title = "Aplicar / Anular retención";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>AplicarRetencion</h2>
+@using (Html.BeginForm("AplicarRetencion", "CobranzaRetenciones", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdSucursal)
+    @Html.HiddenFor(q => q.IdCobro)
+    if (@ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="cr_NumDocumento"># NumRetención</label>
+                    @Html.TextBoxFor(q => q.cr_NumDocumento, new { @class = "form-control", @id = "cr_NumDocumento" })
+                    @Html.ValidationMessageFor(q => q.cr_NumDocumento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-7 col-md-2">
+                <div class="form-group">
+                    <label for="cr_fecha">Fecha*</label>
+                    @Html.TextBoxFor(q => q.cr_fecha, "{0:dd/MM/yyyy}", new { @id = "cr_fecha", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.cr_fecha, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="vt_NumFactura"># Documento</label>
+                    @Html.TextBoxFor(q => q.vt_NumFactura, new { @class = "form-control", @id = "vt_NumFactura", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="pe_nombreCompleto">Cliente</label>
+                    @Html.TextBoxFor(q => q.pe_nombreCompleto, new { @class = "form-control", @id = "pe_nombreCompleto", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="vt_Subtotal">Subtotal</label>
+                    @Html.TextBoxFor(q => q.vt_Subtotal, "{0:N2}", new { @class = "form-control", @id = "vt_Subtotal", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="vt_Iva">I.V.A.</label>
+                    @Html.TextBoxFor(q => q.vt_Iva, "{0:N2}", new { @class = "form-control", @id = "vt_Iva", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="vt_Total">Total</label>
+                    @Html.TextBoxFor(q => q.vt_Total, "{0:N2}", new { @class = "form-control", @id = "vt_Total", @readonly = "readonly" })
+                </div>
+            </div>
+        </div>
+    </div>
 
-@Html.Action("GridViewPartial_cobranza_ret_fte")
+    @Html.Action("GridViewPartial_cobranza_ret_fte")
+    
+    @Html.Action("GridViewPartial_cobranza_ret_iva")
 
-
-@Html.Action("GridViewPartial_cobranza_ret_iva")
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "Cobranza", new { Area = "CuentasPorCobrar" }, null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

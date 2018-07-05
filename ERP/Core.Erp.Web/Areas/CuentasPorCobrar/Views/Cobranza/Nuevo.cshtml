@@ -296,12 +296,13 @@
         </div>        
     </div>
     <br />
+    
     @Html.Action("GridViewPartial_cobranza_det")
 
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index", "Cobranza", new { Area = "CuentasPorCobrar" }, null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index", "CobranzaRetenciones", new { Area = "CuentasPorCobrar" }, null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

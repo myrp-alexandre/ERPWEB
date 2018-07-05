@@ -15,6 +15,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         cxc_cobro_Bus bus_cobro = new cxc_cobro_Bus();
         cxc_cobro_det_Bus bus_det = new cxc_cobro_det_Bus();
         cxc_cobro_tipo_Bus bus_cobro_tipo = new cxc_cobro_tipo_Bus();
+        cxc_cobro_det_ret_List List_det = new cxc_cobro_det_ret_List();
         #region Index
         public ActionResult Index()
         {
@@ -32,85 +33,53 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         public ActionResult AplicarRetencion(int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0, string CodTipoDocumento = "")
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            cxc_cobro_Info model = new cxc_cobro_Info
+            cxc_cobro_Info model = bus_cobro.get_info_para_retencion(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, CodTipoDocumento);
+            if (model == null)            
+                return RedirectToAction("Index");            
+            model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, CodTipoDocumento);
+            if (model.lst_det.Count == 0)
+            {                
+                model.cr_fechaCobro = DateTime.Now.Date;
+            }
+            else
             {
-                
-            };
-            
+                model.IdCobro = model.lst_det[0].IdCobro;
+                model.cr_fecha = model.lst_det[0].cr_fecha;
+                model.cr_NumDocumento = model.lst_det[0].cr_NumDocumento;
+            }
+            List_det.set_list(model.lst_det);
             return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_cobranza_ret_fte()
+        public ActionResult GridViewPartial_cobranza_ret_det()
         {
-            var model = new object[0];
-            return PartialView("_GridViewPartial_cobranza_ret_fte", model);
-        }
-
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_cobranza_ret_iva()
-        {
-            var model = new object[0];
-            return PartialView("_GridViewPartial_cobranza_ret_iva", model);
+            cxc_cobro_Info model = new cxc_cobro_Info
+            {
+                lst_det = List_det.get_list()
+            };
+            return PartialView("_GridViewPartial_cobranza_ret_det", model);
         }
         #endregion
     }
 
 
-    public class cxc_cobro_det_ret_fte_List
+    public class cxc_cobro_det_ret_List
     {
         public List<cxc_cobro_det_Info> get_list()
         {
-            if (HttpContext.Current.Session["cxc_cobro_det_ret_fte"] == null)
+            if (HttpContext.Current.Session["cxc_cobro_det_ret"] == null)
             {
                 List<cxc_cobro_det_Info> list = new List<cxc_cobro_det_Info>();
 
-                HttpContext.Current.Session["cxc_cobro_det_ret_fte"] = list;
+                HttpContext.Current.Session["cxc_cobro_det_ret"] = list;
             }
-            return (List<cxc_cobro_det_Info>)HttpContext.Current.Session["cxc_cobro_det_ret_fte"];
+            return (List<cxc_cobro_det_Info>)HttpContext.Current.Session["cxc_cobro_det_ret"];
         }
 
         public void set_list(List<cxc_cobro_det_Info> list)
         {
-            HttpContext.Current.Session["cxc_cobro_det_ret_fte"] = list;
-        }
-
-        public void AddRow(cxc_cobro_det_Info info_det)
-        {
-            List<cxc_cobro_det_Info> list = get_list();
-            if (list.Where(q => q.secuencia == info_det.secuencia).FirstOrDefault() == null)
-                list.Add(info_det);
-        }
-
-        public void UpdateRow(cxc_cobro_det_Info info_det)
-        {
-            cxc_cobro_det_Info edited_info = get_list().Where(m => m.secuencia == info_det.secuencia).First();
-            edited_info.dc_ValorPago = info_det.dc_ValorPago;
-        }
-
-        public void DeleteRow(string secuencia)
-        {
-            List<cxc_cobro_det_Info> list = get_list();
-            list.Remove(list.Where(m => m.secuencia == secuencia).First());
-        }
-    }
-
-    public class cxc_cobro_det_ret_iva_List
-    {
-        public List<cxc_cobro_det_Info> get_list()
-        {
-            if (HttpContext.Current.Session["cxc_cobro_det_ret_iva"] == null)
-            {
-                List<cxc_cobro_det_Info> list = new List<cxc_cobro_det_Info>();
-
-                HttpContext.Current.Session["cxc_cobro_det_ret_iva"] = list;
-            }
-            return (List<cxc_cobro_det_Info>)HttpContext.Current.Session["cxc_cobro_det_ret_iva"];
-        }
-
-        public void set_list(List<cxc_cobro_det_Info> list)
-        {
-            HttpContext.Current.Session["cxc_cobro_det_ret_iva"] = list;
+            HttpContext.Current.Session["cxc_cobro_det_ret"] = list;
         }
 
         public void AddRow(cxc_cobro_det_Info info_det)
