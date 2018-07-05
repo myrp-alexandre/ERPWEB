@@ -96,6 +96,44 @@ namespace Core.Erp.Data.CuentasPorCobrar
             }
         }
 
+        public List<cxc_cobro_det_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string dc_TipoDocumento)
+        {
+            try
+            {
+                List<cxc_cobro_det_Info> Lista;
 
+                using (Entities_cuentas_por_cobrar Context = new Entities_cuentas_por_cobrar())
+                {
+                    Lista = (from q in Context.vwcxc_cobro_det_retencion
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdSucursal == IdSucursal
+                             && q.IdBodega_Cbte == IdBodega
+                             && q.IdCbte_vta_nota == IdCbteVta
+                             && q.dc_TipoDocumento == dc_TipoDocumento
+                             select new cxc_cobro_det_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdSucursal = q.IdSucursal,
+                                 IdBodega_Cbte = q.IdBodega_Cbte,
+                                 IdCbte_vta_nota = q.IdCbte_vta_nota,
+                                 dc_TipoDocumento = q.dc_TipoDocumento,
+                                 IdCobro = q.IdCobro,
+                                 secuencial = q.secuencial,
+                                 IdCobro_tipo = q.IdCobro_tipo,
+                                 dc_ValorPago = q.dc_ValorPago,
+                                 tc_descripcion = q.tc_descripcion,
+                                 ESRetenIVA = q.ESRetenIVA,
+                                 ESRetenFTE = q.ESRetenFTE,
+                                 PorcentajeRet = q.PorcentajeRet,
+                             }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

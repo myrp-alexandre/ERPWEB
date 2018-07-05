@@ -137,6 +137,28 @@
             }
         });
     }
+
+        function VaciarLista() {
+
+        var datos = {
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("VaciarLista", "Cobranza",new { Area = "CuentasPorCobrar"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                
+            },
+            error: function (error) {
+            }
+        });
+        GridView_cobranza_det.PerformCallback();
+    }
 </script>
 
 
@@ -274,12 +296,13 @@
         </div>        
     </div>
     <br />
+    
     @Html.Action("GridViewPartial_cobranza_det")
 
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index", "Cobranza", new { Area = "CuentasPorCobrar" }, null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index", "CobranzaRetenciones", new { Area = "CuentasPorCobrar" }, null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

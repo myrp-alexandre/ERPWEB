@@ -46,6 +46,45 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 throw;
             }
         }
+        public List<cxc_cobro_tipo_Info> get_list_retenciones(bool mostrar_anulados)
+        {
+            try
+            {
+                List<cxc_cobro_tipo_Info> Lista;
+                using (Entities_cuentas_por_cobrar Context = new Entities_cuentas_por_cobrar())
+                {
+                    if (mostrar_anulados)
+                        Lista = (from q in Context.cxc_cobro_tipo
+                                 where q.IdMotivo_tipo_cobro == "RET"
+                                 select new cxc_cobro_tipo_Info
+                                 {
+                                     IdCobro_tipo = q.IdCobro_tipo,
+                                     tc_abreviatura = q.tc_abreviatura,
+                                     tc_Orden = q.tc_Orden,
+                                     tc_descripcion = q.tc_descripcion,
+                                     Estado = q.Estado
+                                 }).ToList();
+                    else
+                        Lista = (from q in Context.cxc_cobro_tipo
+                                 where q.Estado == "A"
+                                 && q.IdMotivo_tipo_cobro == "RET"
+                                 select new cxc_cobro_tipo_Info
+                                 {
+                                     IdCobro_tipo = q.IdCobro_tipo,
+                                     tc_abreviatura = q.tc_abreviatura,
+                                     tc_Orden = q.tc_Orden,
+                                     tc_descripcion = q.tc_descripcion,
+                                     Estado = q.Estado
+                                 }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public cxc_cobro_tipo_Info get_info(string IdCobro_tipo)
         {
             try

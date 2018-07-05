@@ -1178,6 +1178,12 @@
     <Compile Include="vwcxc_cobro_det.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwcxc_cobro_det_retencion.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwcxc_cobro_para_retencion.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
     <Compile Include="VWCXP_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>

@@ -42,6 +42,12 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public DateTime? vt_fech_venc { get; set; }
         public double dc_ValorRetFu { get; set; }
         public double dc_ValorRetIva { get; set; }
+        public string ESRetenIVA { get; set; }
+        public string ESRetenFTE { get; set; }
+        public string tc_descripcion { get; set; }
+        public double PorcentajeRet { get; set; }
+        public string cr_NumDocumento { get; set; }
+        public System.DateTime cr_fecha { get; set; }
         #endregion
 
     }
