@@ -42,13 +42,12 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_cobranza_ret( DateTime fecha_ini , DateTime fecha_fin, int IdSucursal = 0)
+        public ActionResult GridViewPartial_cobranza_ret( DateTime? fecha_ini , DateTime? fecha_fin, int IdSucursal = 0)
         {
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
             ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<cxc_cobro_Info> model = new List<cxc_cobro_Info>();
-            model = bus_cobro.get_list_para_retencion(IdEmpresa, IdSucursal, ViewBag.fecha_ini, ViewBag.fecha_fin);
+            List<cxc_cobro_Info> model =  bus_cobro.get_list_para_retencion(IdEmpresa, IdSucursal, Convert.ToDateTime(fecha_ini), Convert.ToDateTime(fecha_fin));
             return PartialView("_GridViewPartial_cobranza_ret", model);
         }
         #endregion
