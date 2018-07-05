@@ -1,4 +1,5 @@
-﻿using Core.Erp.Data.CuentasPorCobrar;
+﻿using Core.Erp.Data;
+using Core.Erp.Data.CuentasPorCobrar;
 using Core.Erp.Info.CuentasPorCobrar;
 using System;
 using System.Collections.Generic;
@@ -64,6 +65,32 @@ namespace Core.Erp.Bus.CuentasPorCobrar
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+        
+        public List<vwcxc_cobro_para_retencion> get_list_para_retencion(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin)
+        {
+            try
+            {
+                return odata.get_list_para_retencion(IdEmpresa, IdSucursal, Fecha_ini, Fecha_fin);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public vwcxc_cobro_para_retencion get_info_para_retencion(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string vt_tipoDoc)
+        {
+            try
+            {
+                return odata.get_info_para_retencion(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, vt_tipoDoc);
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }
