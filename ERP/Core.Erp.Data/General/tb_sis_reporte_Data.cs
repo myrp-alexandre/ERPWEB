@@ -51,7 +51,6 @@ namespace Core.Erp.Data.General
                     if (Entity == null) return null;
                     info = new tb_sis_reporte_Info
                     {
-                        CodModulo = Entity.CodModulo,
                         CodReporte = Entity.CodReporte,
                         observacion = Entity.observacion,
                         orden = Entity.orden,
@@ -67,7 +66,9 @@ namespace Core.Erp.Data.General
                         rpt_store_procedure = Entity.rpt_store_procedure,
                         rpt_usa_store_procedure = Entity.rpt_usa_store_procedure,
                         rpt_vista = Entity.rpt_vista,
-                        se_muestra_administrador_reportes = Entity.se_muestra_administrador_reportes
+                        se_muestra_administrador_reportes = Entity.se_muestra_administrador_reportes,
+                        rpt_muestra_disenador_reporte=Entity.se_muestra_administrador_reportes,
+                        
                     };
                 }
                 return info;
@@ -194,6 +195,7 @@ namespace Core.Erp.Data.General
                     Entity.rpt_usa_store_procedure = info.rpt_usa_store_procedure;
                     Entity.rpt_vista = info.rpt_vista;
                     Entity.se_muestra_administrador_reportes = info.se_muestra_administrador_reportes;
+                    Entity.rpt_muestra_disenador_reporte = info.se_muestra_administrador_reportes;
 
                     Context.SaveChanges();
                 }

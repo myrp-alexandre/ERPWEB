@@ -1,6 +1,6 @@
 ﻿using Core.Erp.Bus.General;
 using Core.Erp.Bus.SeguridadAcceso;
-using Core.Erp.Info.SeguridadAcceso;
+using Core.Erp.Info.General;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,12 +15,12 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
         static tb_sis_reporte_x_seg_usuario_Bus bus_menu_x_empresa_x_usuario = new tb_sis_reporte_x_seg_usuario_Bus();
         public ActionResult Index()
         {
-            seg_Menu_x_Empresa_x_Usuario_Info model = new seg_Menu_x_Empresa_x_Usuario_Info();
+            tb_sis_reporte_x_seg_usuario_Info model = new tb_sis_reporte_x_seg_usuario_Info();
             cargar_combos();
             return View(model);
         }
         [HttpPost]
-        public ActionResult Index(seg_Menu_x_Empresa_x_Usuario_Info model)
+        public ActionResult Index(tb_sis_reporte_x_seg_usuario_Info model)
         {
             cargar_combos();
             return View(model);
@@ -37,5 +37,26 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
         }
 
 
+        public JsonResult guardar(int IdEmpresa = 0, string IdUsuario = "", string Ids = "")
+        {
+            string[] array = Ids.Split(',');
+
+            List<tb_sis_reporte_x_seg_usuario_Info> lista = new List<tb_sis_reporte_x_seg_usuario_Info>();
+            var output = array.GroupBy(q => q).ToList();
+            foreach (var item in output)
+            {
+                tb_sis_reporte_x_seg_usuario_Info info = new tb_sis_reporte_x_seg_usuario_Info
+                {
+                    IdEmpresa = IdEmpresa,
+                    CodReporte = Convert.ToString(item.Key),
+                    IdUsuario = IdUsuario
+                };
+                lista.Add(info);
+            }
+            bus_menu_x_empresa_x_usuario.eliminarDB(IdEmpresa, IdUsuario);
+            var resultado = bus_menu_x_empresa_x_usuario.guardarDB(lista, IdEmpresa, IdUsuario);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
     }
 }

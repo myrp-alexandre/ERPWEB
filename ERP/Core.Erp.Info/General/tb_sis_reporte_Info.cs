@@ -45,5 +45,7 @@ namespace Core.Erp.Info.General
         public bool se_muestra_administrador_reportes { get; set; }
         public int orden { get; set; }
         public string observacion { get; set; }
+        public bool rpt_muestra_disenador_reporte { get; set; }
+
     }
 }
