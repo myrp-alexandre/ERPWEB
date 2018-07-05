@@ -54,6 +54,7 @@
         <EntityTypeShape EntityType="Model_general.tb_sis_reporte_x_seg_usuario" Width="1.5" PointX="17.875" PointY="8.625" />
         <AssociationConnector Association="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_empresa" />
         <AssociationConnector Association="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_sis_reporte" />
+        <EntityTypeShape EntityType="Model_general.tb_sis_reporte_diseno" Width="1.5" PointX="16.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
