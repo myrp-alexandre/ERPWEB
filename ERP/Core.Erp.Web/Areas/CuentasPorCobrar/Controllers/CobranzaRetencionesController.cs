@@ -18,14 +18,9 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         cxc_cobro_det_Bus bus_det = new cxc_cobro_det_Bus();
         cxc_cobro_tipo_Bus bus_cobro_tipo = new cxc_cobro_tipo_Bus();
         #region Index
-        public ActionResult Index(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
+        public ActionResult Index()
         {
-            cl_filtros_Info model = new cl_filtros_Info
-            {
-                IdSucursal = IdSucursal,
-                fecha_fin = Fecha_fin == null ? DateTime.Now : Convert.ToDateTime(Fecha_fin),
-                fecha_ini = Fecha_ini == null ? DateTime.Now : Convert.ToDateTime(Fecha_ini),
-            };
+            cl_filtros_Info model = new cl_filtros_Info();
             cargar_combos();
             return View(model);
         }
@@ -46,11 +41,13 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_cobranza_ret(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
+        public ActionResult GridViewPartial_cobranza_ret( DateTime fecha_ini , DateTime fecha_fin, int IdSucursal = 0)
         {
+            ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
+            ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             List<cxc_cobro_Info> model = new List<cxc_cobro_Info>();
-     //       model = bus_cobro.get_list_para_retencion(IdEmpresa, IdSucursal);
+            model = bus_cobro.get_list_para_retencion(IdEmpresa, IdSucursal, ViewBag.fecha_ini, ViewBag.fecha_fin);
             return PartialView("_GridViewPartial_cobranza_ret", model);
         }
         #endregion
