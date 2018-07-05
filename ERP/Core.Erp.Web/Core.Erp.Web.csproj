@@ -285,6 +285,7 @@
     <Compile Include="Areas\General\Controllers\EmpresaController.cs" />
     <Compile Include="Areas\General\Controllers\ImagenesController.cs" />
     <Compile Include="Areas\General\Controllers\ImpuestoController.cs" />
+    <Compile Include="Areas\General\Controllers\ReportesPorUsuarioController.cs" />
     <Compile Include="Areas\General\Controllers\ModuloController.cs" />
     <Compile Include="Areas\General\Controllers\PaisController.cs" />
     <Compile Include="Areas\General\Controllers\ParroquiaController.cs" />
@@ -8563,7 +8564,6 @@
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_GridViewPartial_cobranza_facturas_x_cruzar.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbCliente_Facturacion.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_003.cshtml" />
-    <Content Include="Areas\General\Views\ReportesPorUsuarioController\Index.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_004.cshtml" />
     <Content Include="Areas\General\Views\DisenadorReporte\_GridViewPartial_disenador_reporte.cshtml" />
     <Content Include="Areas\General\Views\DisenadorReporte\Anular.cshtml" />
