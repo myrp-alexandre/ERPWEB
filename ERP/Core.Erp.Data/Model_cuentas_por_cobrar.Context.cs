@@ -34,8 +34,8 @@ namespace Core.Erp.Data
         public virtual DbSet<cxc_cobro_tipo_Param_conta_x_sucursal> cxc_cobro_tipo_Param_conta_x_sucursal { get; set; }
         public virtual DbSet<cxc_cobro_x_ct_cbtecble> cxc_cobro_x_ct_cbtecble { get; set; }
         public virtual DbSet<cxc_cobro> cxc_cobro { get; set; }
-        public virtual DbSet<cxc_cobro_det> cxc_cobro_det { get; set; }
         public virtual DbSet<vwcxc_cobro> vwcxc_cobro { get; set; }
+        public virtual DbSet<cxc_cobro_det> cxc_cobro_det { get; set; }
         public virtual DbSet<vwcxc_cobro_det> vwcxc_cobro_det { get; set; }
     }
 }

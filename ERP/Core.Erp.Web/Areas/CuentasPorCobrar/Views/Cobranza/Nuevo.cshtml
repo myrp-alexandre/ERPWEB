@@ -137,6 +137,28 @@
             }
         });
     }
+
+        function VaciarLista() {
+
+        var datos = {
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("VaciarLista", "Cobranza",new { Area = "CuentasPorCobrar"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                
+            },
+            error: function (error) {
+            }
+        });
+        GridView_cobranza_det.PerformCallback();
+    }
 </script>
 
 
