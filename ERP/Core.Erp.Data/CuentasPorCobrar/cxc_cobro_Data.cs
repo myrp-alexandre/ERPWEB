@@ -813,14 +813,10 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  IdBodega = q.IdBodega,
                                  IdCbteVta = q.IdCbteVta,
                                  cr_NumDocumento = q.vt_tipoDoc,
-                                 vt_Iva = Convert.ToDouble(q.vt_iva),
-                                 vt_Total = Convert.ToDouble(q.vt_total),
                                  pe_nombreCompleto = q.Nombres,
                                  cr_fecha = q.vt_fecha,
-                                 cr_fechaCobro = Convert.ToDateTime(q.vt_fech_venc),
                                  vt_NumFactura = q.vt_NumFactura,
-                                 cr_observacion = q.vt_Observacion,
-                                 vt_Subtotal = Convert.ToDouble(q.vt_Subtotal)
+                                 cr_observacion = q.vt_Observacion
                              }).ToList();
                 }
                 return Lista;
