@@ -8603,6 +8603,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\ScriptsGenerales.js" />
+    <Content Include="Scripts\jquery-1.11.3.min.js" />
+    <Content Include="Scripts\theme-ambiance.js" />
+    <Content Include="Scripts\theme-dreamweaver.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -8624,6 +8627,7 @@
     <Content Include="Views\Account\LoginEmpresa.cshtml" />
     <Content Include="Views\Account\CambiarContrasena.cshtml" />
     <Content Include="Views\Layout\_LayoutConsulta.cshtml" />
+    <Content Include="Scripts\knockout-3.3.0.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
