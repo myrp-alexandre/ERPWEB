@@ -8571,6 +8571,11 @@
     <Content Include="Areas\General\Views\DisenadorReporte\Index.cshtml" />
     <Content Include="Areas\General\Views\DisenadorReporte\Modificar.cshtml" />
     <Content Include="Areas\General\Views\DisenadorReporte\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\CobranzaRetenciones\Index.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\CobranzaRetenciones\AplicarRetencion.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\CobranzaRetenciones\_GridViewPartial_cobranza_ret_fte.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\CobranzaRetenciones\_GridViewPartial_cobranza_ret_iva.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\CobranzaRetenciones\_GridViewPartial_cobranza_ret.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
@@ -8638,7 +8643,6 @@
     <Folder Include="Areas\Contabilidad\Models\" />
     <Folder Include="Areas\Contabilidad\Views\PuntoCargo\" />
     <Folder Include="Areas\CuentasPorCobrar\Models\" />
-    <Folder Include="Areas\CuentasPorCobrar\Views\CobranzaRetenciones\" />
     <Folder Include="Areas\CuentasPorPagar\Models\" />
     <Folder Include="Areas\Facturacion\Models\" />
     <Folder Include="Areas\General\Models\" />
