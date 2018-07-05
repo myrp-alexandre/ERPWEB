@@ -291,7 +291,6 @@
     <Compile Include="Areas\General\Controllers\ProvinciaController.cs" />
     <Compile Include="Areas\General\Controllers\RegionController.cs" />
     <Compile Include="Areas\General\Controllers\ReporteController.cs" />
-    <Compile Include="Areas\General\Controllers\ReportesPorUsuarioControllerController.cs" />
     <Compile Include="Areas\General\Controllers\Reportes_pre_impreso.cs" />
     <Compile Include="Areas\General\Controllers\SucursalController.cs" />
     <Compile Include="Areas\General\Controllers\TipoDocumentoController.cs" />
@@ -8670,7 +8669,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
