@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Países";
+    ViewBag.Title = "Diseádor de reportes";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -10,5 +10,5 @@
 
 @using (Html.BeginForm())
 {
-    @Html.Action("GridViewPartial_pais")
+    @Html.Action("GridViewPartial_disenador_reporte")
 }
