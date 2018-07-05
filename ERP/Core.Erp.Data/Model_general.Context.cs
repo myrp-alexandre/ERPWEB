@@ -43,7 +43,6 @@ namespace Core.Erp.Data
         public virtual DbSet<tb_sis_Documento_Tipo_Talonario> tb_sis_Documento_Tipo_Talonario { get; set; }
         public virtual DbSet<tb_ciudad> tb_ciudad { get; set; }
         public virtual DbSet<tb_parroquia> tb_parroquia { get; set; }
-        public virtual DbSet<tb_sis_reporte> tb_sis_reporte { get; set; }
         public virtual DbSet<vwtb_pais> vwtb_pais { get; set; }
         public virtual DbSet<tb_persona_tipo> tb_persona_tipo { get; set; }
         public virtual DbSet<tb_region> tb_region { get; set; }
@@ -53,5 +52,6 @@ namespace Core.Erp.Data
         public virtual DbSet<tb_provincia> tb_provincia { get; set; }
         public virtual DbSet<tb_sis_reporte_diseno> tb_sis_reporte_diseno { get; set; }
         public virtual DbSet<tb_sis_reporte_x_seg_usuario> tb_sis_reporte_x_seg_usuario { get; set; }
+        public virtual DbSet<tb_sis_reporte> tb_sis_reporte { get; set; }
     }
 }

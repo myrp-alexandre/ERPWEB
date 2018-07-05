@@ -37,6 +37,7 @@ namespace Core.Erp.Data
         public bool se_muestra_administrador_reportes { get; set; }
         public int orden { get; set; }
         public string observacion { get; set; }
+        public bool rpt_muestra_disenador_reporte { get; set; }
     
         public virtual tb_modulo tb_modulo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -72,6 +72,7 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
                 
             return PartialView("_TreeListPartial_menu_x_usuario", model);
         }
+
         public JsonResult guardar(int IdEmpresa = 0,string IdUsuario = "", string Ids = "")
         {
             string[] array = Ids.Split(',');
