@@ -375,6 +375,24 @@
           <Property Name="orden" Type="int" Nullable="false" />
           <Property Name="observacion" Type="varchar" MaxLength="2000" />
         </EntityType>
+        <EntityType Name="tb_sis_reporte_diseno">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="codDocumentoTipo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="codDocumentoTipo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="File_Disenio_Reporte" Type="varbinary(max)" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotivoAnula" Type="varchar" MaxLength="100" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="25" />
+        </EntityType>
         <EntityType Name="tb_sis_reporte_x_seg_usuario">
           <Key>
             <PropertyRef Name="IdUsuario" />
@@ -385,16 +403,16 @@
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="CodReporte" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_ciudad_id' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_ciudad_id' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_ciudad_id">
           <Key>
             <PropertyRef Name="IdCiudad" />
           </Key>
           <Property Name="IdCiudad" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_pais">
           <Key>
             <PropertyRef Name="Nombre" />
@@ -402,16 +420,16 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' does not have
           <Property Name="IdPais" Type="numeric" Precision="18" Scale="0" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_parroquia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_parroquia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_parroquia">
           <Key>
             <PropertyRef Name="IdParroquia" />
           </Key>
           <Property Name="IdParroquia" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_provincia">
           <Key>
             <PropertyRef Name="IdProvincia" />
@@ -707,6 +725,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
           <EntitySet Name="tb_sucursal" EntityType="Self.tb_sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_transportista" EntityType="Self.tb_transportista" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_reporte" EntityType="Self.tb_sis_reporte" Schema="web" store:Type="Tables" />
+          <EntitySet Name="tb_sis_reporte_diseno" EntityType="Self.tb_sis_reporte_diseno" Schema="web" store:Type="Tables" />
           <EntitySet Name="tb_sis_reporte_x_seg_usuario" EntityType="Self.tb_sis_reporte_x_seg_usuario" Schema="web" store:Type="Tables" />
           <EntitySet Name="vwtb_ciudad_id" EntityType="Self.vwtb_ciudad_id" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -958,6 +977,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
             <End Role="tb_region" EntitySet="tb_region" />
             <End Role="tb_provincia" EntitySet="tb_provincia" />
           </AssociationSet>
+          <EntitySet Name="tb_sis_reporte_diseno" EntityType="Model_general.tb_sis_reporte_diseno" />
           <EntitySet Name="tb_sis_reporte_x_seg_usuario" EntityType="Model_general.tb_sis_reporte_x_seg_usuario" />
           <AssociationSet Name="FK_tb_sis_reporte_x_seg_usuario_tb_empresa" Association="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_empresa">
             <End Role="tb_empresa" EntitySet="tb_empresa" />
@@ -1618,6 +1638,24 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tb_sis_reporte_diseno">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="codDocumentoTipo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="codDocumentoTipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="File_Disenio_Reporte" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="tb_sis_reporte_x_seg_usuario">
           <Key>
             <PropertyRef Name="IdUsuario" />
@@ -2069,6 +2107,24 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
                 <ScalarProperty Name="Descripcion_Prov" ColumnName="Descripcion_Prov" />
                 <ScalarProperty Name="Cod_Provincia" ColumnName="Cod_Provincia" />
                 <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_sis_reporte_diseno">
+            <EntityTypeMapping TypeName="Model_general.tb_sis_reporte_diseno">
+              <MappingFragment StoreEntitySet="tb_sis_reporte_diseno">
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="MotivoAnula" ColumnName="MotivoAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="File_Disenio_Reporte" ColumnName="File_Disenio_Reporte" />
+                <ScalarProperty Name="codDocumentoTipo" ColumnName="codDocumentoTipo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

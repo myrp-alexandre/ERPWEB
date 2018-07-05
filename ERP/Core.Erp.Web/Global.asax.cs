@@ -13,6 +13,8 @@ namespace Core.Erp.Web
     {
         protected void Application_Start()
         {
+            DevExpress.XtraReports.Web.QueryBuilder.Native.QueryBuilderBootstrapper.SessionState = System.Web.SessionState.SessionStateBehavior.Disabled;
+            DevExpress.XtraReports.Web.ReportDesigner.Native.ReportDesignerBootstrapper.SessionState = System.Web.SessionState.SessionStateBehavior.Disabled;
             DevExpress.XtraReports.Web.WebDocumentViewer.Native.WebDocumentViewerBootstrapper.SessionState = System.Web.SessionState.SessionStateBehavior.Disabled;
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -21,6 +23,7 @@ namespace Core.Erp.Web
             ModelBinders.Binders.DefaultBinder = new DevExpress.Web.Mvc.DevExpressEditorsBinder();
             DevExpress.Web.Mvc.MVCxWebDocumentViewer.StaticInitialize();
             SessionFixed.SetSessionValueProvider(new WebSessionValueProvider());
+            DevExpress.Web.Mvc.MVCxReportDesigner.StaticInitialize();
         }
     }
 }
