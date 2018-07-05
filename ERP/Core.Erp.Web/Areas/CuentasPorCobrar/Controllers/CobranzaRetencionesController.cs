@@ -40,15 +40,13 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             ViewBag.lst_sucursal = lst_sucursal;
         }
 
-
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_cobranza_ret( DateTime fecha_ini , DateTime fecha_fin, int IdSucursal = 0)
+        public ActionResult GridViewPartial_cobranza_ret( DateTime? fecha_ini , DateTime? fecha_fin, int IdSucursal = 0)
         {
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
             ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<cxc_cobro_Info> model = new List<cxc_cobro_Info>();
-            model = bus_cobro.get_list_para_retencion(IdEmpresa, IdSucursal, ViewBag.fecha_ini, ViewBag.fecha_fin);
+            List<cxc_cobro_Info> model =  bus_cobro.get_list_para_retencion(IdEmpresa, IdSucursal, Convert.ToDateTime(fecha_ini), Convert.ToDateTime(fecha_fin));
             return PartialView("_GridViewPartial_cobranza_ret", model);
         }
         #endregion
@@ -85,8 +83,52 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             return PartialView("_GridViewPartial_cobranza_ret_det", model);
         }
         #endregion
-    }
 
+        #region Json
+        public JsonResult SetValorRetencion(string IdCobro_tipo = "")
+        {
+            var resultado = bus_cobro_tipo.get_info(IdCobro_tipo);
+            if (resultado == null)
+                resultado = new cxc_cobro_tipo_Info();
+            return Json(resultado, JsonRequestBehavior.AllowGet);            
+        }
+        #endregion
+
+        #region Acciones grilla
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] cxc_cobro_det_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_det.AddRow(info_det);
+            cxc_cobro_Info model = new cxc_cobro_Info
+            {
+                lst_det = List_det.get_list()
+            };
+            return PartialView("_GridViewPartial_cobranza_ret_det", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] cxc_cobro_det_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_det.UpdateRow(info_det);
+            cxc_cobro_Info model = new cxc_cobro_Info
+            {
+                lst_det = List_det.get_list()
+            };
+            return PartialView("_GridViewPartial_cobranza_ret_det", model);
+        }
+
+        public ActionResult EditingDelete(int secuencial)
+        {
+            List_det.DeleteRow(secuencial);
+            cxc_cobro_Info model = new cxc_cobro_Info
+            {
+                lst_det = List_det.get_list()
+            };
+            return PartialView("_GridViewPartial_cobranza_ret_det", model);
+        }
+        #endregion
+    }
 
     public class cxc_cobro_det_ret_List
     {
@@ -109,20 +151,21 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         public void AddRow(cxc_cobro_det_Info info_det)
         {
             List<cxc_cobro_det_Info> list = get_list();
-            if (list.Where(q => q.secuencia == info_det.secuencia).FirstOrDefault() == null)
-                list.Add(info_det);
+            info_det.secuencial = list.Count == 0 ? 1 : list.Max(q => q.secuencial) + 1;
+            list.Add(info_det);
         }
 
         public void UpdateRow(cxc_cobro_det_Info info_det)
         {
-            cxc_cobro_det_Info edited_info = get_list().Where(m => m.secuencia == info_det.secuencia).First();
+            cxc_cobro_det_Info edited_info = get_list().Where(m => m.secuencial == info_det.secuencial).First();
+            edited_info.IdCobro_tipo = info_det.IdCobro_tipo;
             edited_info.dc_ValorPago = info_det.dc_ValorPago;
         }
 
-        public void DeleteRow(string secuencia)
+        public void DeleteRow(int secuencial)
         {
             List<cxc_cobro_det_Info> list = get_list();
-            list.Remove(list.Where(m => m.secuencia == secuencia).First());
+            list.Remove(list.Where(m => m.secuencial == secuencial).First());
         }
     }
 }
