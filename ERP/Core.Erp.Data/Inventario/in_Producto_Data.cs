@@ -195,7 +195,7 @@ namespace Core.Erp.Data.Inventario
                                  lote_fecha_vcto = q.lote_fecha_vcto,
                                  lote_num_lote = q.lote_num_lote,
                                  IdProducto_padre = q.IdProducto_padre,
-                                 IdUnidadMedida=q.IdUnidadMedida
+                                 IdUnidadMedida =   q.IdUnidadMedida
 
                              }).ToList();
                 }
