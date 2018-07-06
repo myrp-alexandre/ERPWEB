@@ -18,7 +18,7 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public decimal IdCbte_vta_nota { get; set; }
         public double dc_ValorPago { get; set; }
         public string estado { get; set; }
-        public string IdCobro_tipo { get; set; }
+        public string IdCobro_tipo_det { get; set; }
 
         #region Campos de auditoria
         public string IdUsuario { get; set; }

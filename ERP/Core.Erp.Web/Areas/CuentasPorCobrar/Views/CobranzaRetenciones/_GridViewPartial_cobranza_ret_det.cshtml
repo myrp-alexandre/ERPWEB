@@ -7,8 +7,8 @@
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "secuencial";
 
-        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "CobranzaRetenciones", Action = "EditingAddNew", Area = "CuentasPorCobrar" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "CobranzaRetenciones", Action = "EditingAddNew", Area = "CuentasPorCobrar" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "CobranzaRetenciones", Action = "EditingUpdate", Area = "CuentasPorCobrar" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "CobranzaRetenciones", Action = "EditingDelete", Area = "CuentasPorCobrar" };
 
@@ -30,15 +30,11 @@
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
-        settings.InitNewRow = (s, e) =>
-        {
-            e.NewValues["IdCobro_tipo"] = null;
-            e.NewValues["dc_ValorPago"] = 0;
-        };
+     
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(70);
-            column.FieldName = "IdCobro_tipo";
+            column.FieldName = "IdCobro_tipo_det";
             column.Caption = "Tipo de retención";
 
             column.EditorProperties().ComboBox(p =>
@@ -47,19 +43,20 @@
                 p.ValueField = "IdCobro_tipo";
                 p.TextField = "tc_descripcion";
                 p.ValueType = typeof(string);
+                p.DropDownStyle = DropDownStyle.DropDownList;
                 p.DataSource = ViewBag.lst_retenciones;
                 p.ClientSideEvents.SelectedIndexChanged = "SetValorRetencion";
+                p.Columns.Add("tc_descripcion", "Retención").Width = Unit.Percentage(100);
             });
         });
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(30);
+            column.Width = Unit.Percentage(20);
             column.FieldName = "dc_ValorPago";
             column.Caption = "V. aplicado";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
             column.EditorProperties().SpinEdit(p =>
             {
-                p.Width = Unit.Percentage(100);
                 p.MinValue = 0;
                 p.DisplayFormatInEditMode = true;
                 p.DisplayFormatString = "N2";

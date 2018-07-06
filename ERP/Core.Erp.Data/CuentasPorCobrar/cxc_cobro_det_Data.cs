@@ -80,7 +80,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  vt_Subtotal = q.vt_Subtotal,
                                  vt_iva = q.vt_iva,
                                  vt_fech_venc = q.vt_fech_venc,
-                                 IdCobro_tipo = q.IdCobro_tipo,
+                                 IdCobro_tipo_det = q.IdCobro_tipo,
                                  IdCobro = q.IdCobro,
                                  dc_ValorPago = q.dc_ValorPago
                              }).ToList();
@@ -119,7 +119,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  dc_TipoDocumento = q.dc_TipoDocumento,
                                  IdCobro = q.IdCobro,
                                  secuencial = q.secuencial,
-                                 IdCobro_tipo = q.IdCobro_tipo,
+                                 IdCobro_tipo_det = q.IdCobro_tipo,
                                  dc_ValorPago = q.dc_ValorPago,
                                  tc_descripcion = q.tc_descripcion,
                                  ESRetenIVA = q.ESRetenIVA,

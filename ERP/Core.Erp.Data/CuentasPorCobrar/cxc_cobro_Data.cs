@@ -244,7 +244,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         IdUsuario = cab.IdUsuario,
                         Fecha_Transac = DateTime.Now,
                         estado = "A",
-                        IdCobro_tipo = item.IdCobro_tipo
+                        IdCobro_tipo = item.IdCobro_tipo_det
                     };
                     Context_cxc.cxc_cobro_det.Add(det);
                 }
@@ -487,7 +487,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         IdUsuarioUltMod = info.IdUsuario,
                         Fecha_UltMod = DateTime.Now,
                         estado = "A",
-                        IdCobro_tipo = item.IdCobro_tipo
+                        IdCobro_tipo = item.IdCobro_tipo_det
                     };
                     Context_cxc.cxc_cobro_det.Add(det);
                 }

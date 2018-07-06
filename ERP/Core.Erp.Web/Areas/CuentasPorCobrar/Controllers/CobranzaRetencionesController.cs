@@ -85,18 +85,19 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             List_det.set_list(model.lst_det);
             return View(model);
         }
-        /*
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_cobranza_ret_det()
+        [HttpPost]
+        public ActionResult AplicarRetencion(cxc_cobro_Info model)
         {
-            cxc_cobro_Info model = new cxc_cobro_Info
-            {
-                lst_det = List_det.get_list()
-            };
-            cargar_combos_det();
-            return PartialView("_GridViewPartial_cobranza_ret_det", model);
+
+            if (model.IdCobro != 0)
+                if(!bus_cobro.modificarDB(model))
+                    return View(model);                
+            else
+                if (!bus_cobro.guardarDB(model))
+                    return View(model);
+            
+            return RedirectToAction("Index");
         }
-        */
         #endregion
 
         #region Json
@@ -175,7 +176,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         public void UpdateRow(cxc_cobro_det_Info info_det)
         {
             cxc_cobro_det_Info edited_info = get_list().Where(m => m.secuencial == info_det.secuencial).First();
-            edited_info.IdCobro_tipo = info_det.IdCobro_tipo;
+            edited_info.IdCobro_tipo_det = info_det.IdCobro_tipo_det;
             edited_info.dc_ValorPago = info_det.dc_ValorPago;
         }
 
