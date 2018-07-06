@@ -50,13 +50,16 @@ namespace Core.Erp.Web.Areas.General.Controllers
             var output = array.GroupBy(q => q).ToList();
             foreach (var item in output)
             {
-                tb_sis_reporte_x_seg_usuario_Info info = new tb_sis_reporte_x_seg_usuario_Info
+                if (item.Key != "")
                 {
-                    IdEmpresa = IdEmpresa,
-                    CodReporte = Convert.ToString(item.Key),
-                    IdUsuario = IdUsuario
-                };
-                lista.Add(info);
+                    tb_sis_reporte_x_seg_usuario_Info info = new tb_sis_reporte_x_seg_usuario_Info
+                    {
+                        IdEmpresa = IdEmpresa,
+                        CodReporte = Convert.ToString(item.Key),
+                        IdUsuario = IdUsuario
+                    };
+                    lista.Add(info);
+                }
             }
             bus_reporte_x_usuario.eliminarDB(IdEmpresa, IdUsuario);
             var resultado = bus_reporte_x_usuario.guardarDB(lista, IdEmpresa, IdUsuario);

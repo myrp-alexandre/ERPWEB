@@ -56,7 +56,7 @@ namespace Core.Erp.Data.General
             {
                 using (Entities_general Context = new Entities_general())
                 {
-                    Context.Database.ExecuteSqlCommand("DELETE tb_sis_reporte_x_seg_usuario WHERE IdEmpresa = " + IdEmpresa + " AND IdUsuario = '" + IdUsuario + "'");
+                    Context.Database.ExecuteSqlCommand("DELETE web.tb_sis_reporte_x_seg_usuario WHERE IdEmpresa = " + IdEmpresa + " AND IdUsuario = '" + IdUsuario + "'");
                 }
 
                 return true;
