@@ -49,6 +49,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             ViewBag.lst_retenciones = lst_retenciones;
         }
 
+
         [ValidateInput(false)]
         public ActionResult GridViewPartial_cobranza_ret( DateTime? fecha_ini , DateTime? fecha_fin, int IdSucursal = 0)
         {
@@ -84,7 +85,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             List_det.set_list(model.lst_det);
             return View(model);
         }
-
+        /*
         [ValidateInput(false)]
         public ActionResult GridViewPartial_cobranza_ret_det()
         {
@@ -95,6 +96,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             cargar_combos_det();
             return PartialView("_GridViewPartial_cobranza_ret_det", model);
         }
+        */
         #endregion
 
         #region Json
@@ -112,10 +114,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         {
             if (ModelState.IsValid)
                 List_det.AddRow(info_det);
-            cxc_cobro_Info model = new cxc_cobro_Info
-            {
-                lst_det = List_det.get_list()
-            };
+            var model = List_det.get_list();
             cargar_combos_det();
             return PartialView("_GridViewPartial_cobranza_ret_det", model);
         }
@@ -125,10 +124,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         {
             if (ModelState.IsValid)
                 List_det.UpdateRow(info_det);
-            cxc_cobro_Info model = new cxc_cobro_Info
-            {
-                lst_det = List_det.get_list()
-            };
+            var model = List_det.get_list();
             cargar_combos_det();
             return PartialView("_GridViewPartial_cobranza_ret_det", model);
         }
@@ -136,14 +132,19 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         public ActionResult EditingDelete(int secuencial)
         {
             List_det.DeleteRow(secuencial);
-            cxc_cobro_Info model = new cxc_cobro_Info
-            {
-                lst_det = List_det.get_list()
-            };
+            var model = List_det.get_list();
             cargar_combos_det();
             return PartialView("_GridViewPartial_cobranza_ret_det", model);
         }
         #endregion
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_cobranza_ret_det()
+        {
+            var model = List_det.get_list();
+            cargar_combos_det();
+            return PartialView("_GridViewPartial_cobranza_ret_det", model);
+        }
     }
 
     public class cxc_cobro_det_ret_List

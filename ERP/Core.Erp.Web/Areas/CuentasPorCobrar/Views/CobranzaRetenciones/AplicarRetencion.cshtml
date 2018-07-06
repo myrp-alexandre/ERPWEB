@@ -1,10 +1,10 @@
 ﻿@model Core.Erp.Info.CuentasPorCobrar.cxc_cobro_Info
 @{
+    ViewBag.Title = "Aplicar retención";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
     }
-    ViewBag.Title = "Aplicar / Anular retención";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -120,7 +120,9 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
+
                 @Html.Action("GridViewPartial_cobranza_ret_det")
+
             </div>
         </div>
     </div>
