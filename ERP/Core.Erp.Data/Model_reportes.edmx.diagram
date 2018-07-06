@@ -52,6 +52,8 @@
         <EntityTypeShape EntityType="Model_reportes.VWFAC_003" Width="1.5" PointX="18.375" PointY="22.75" />
         <EntityTypeShape EntityType="Model_reportes.VWFAC_003_cuotas" Width="1.5" PointX="22.375" PointY="19.75" />
         <EntityTypeShape EntityType="Model_reportes.VWFAC_004" Width="1.5" PointX="24.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCXC_002" Width="1.5" PointX="24.375" PointY="9.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWCXC_002_diario" Width="1.5" PointX="24.375" PointY="15.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

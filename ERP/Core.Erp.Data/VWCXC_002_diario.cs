@@ -12,20 +12,22 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class VWCXP_005
+    public partial class VWCXC_002_diario
     {
         public int IdEmpresa { get; set; }
-        public decimal IdConciliacion { get; set; }
-        public int IdTipoCbte { get; set; }
-        public decimal IdCbteCble { get; set; }
-        public int secuencia { get; set; }
+        public int IdSucursal { get; set; }
+        public decimal IdCobro { get; set; }
+        public int secuencial { get; set; }
+        public string dc_TipoDocumento { get; set; }
+        public Nullable<int> IdBodega_Cbte { get; set; }
+        public decimal IdCbte_vta_nota { get; set; }
+        public int IdEmpresa_ct { get; set; }
+        public int IdTipoCbte_ct { get; set; }
+        public decimal IdCbteCble_ct { get; set; }
         public string IdCtaCble { get; set; }
         public string pc_Cuenta { get; set; }
         public double dc_Valor { get; set; }
         public double dc_Valor_Debe { get; set; }
         public Nullable<double> dc_Valor_Haber { get; set; }
-        public System.DateTime Fecha { get; set; }
-        public string Observacion { get; set; }
-        public string pe_nombreCompleto { get; set; }
     }
 }
