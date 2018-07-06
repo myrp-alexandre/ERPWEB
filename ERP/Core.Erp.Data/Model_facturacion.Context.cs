@@ -35,5 +35,6 @@ namespace Core.Erp.Data
         public virtual DbSet<fa_cliente> fa_cliente { get; set; }
         public virtual DbSet<fa_cliente_contactos> fa_cliente_contactos { get; set; }
         public virtual DbSet<fa_cliente_x_fa_Vendedor_x_sucursal> fa_cliente_x_fa_Vendedor_x_sucursal { get; set; }
+        public virtual DbSet<fa_TerminoPago_Distribucion> fa_TerminoPago_Distribucion { get; set; }
     }
 }

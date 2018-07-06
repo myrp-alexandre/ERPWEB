@@ -114,6 +114,7 @@
     <Compile Include="Facturacion\fa_cliente_x_fa_Vendedor_x_sucursal_Info.cs" />
     <Compile Include="Facturacion\fa_formaPago_Info.cs" />
     <Compile Include="Facturacion\fa_PuntoVta_Info.cs" />
+    <Compile Include="Facturacion\fa_TerminoPago_Distribucion_Info.cs" />
     <Compile Include="Facturacion\fa_TerminoPago_Info.cs" />
     <Compile Include="Facturacion\fa_TipoNota_Info.cs" />
     <Compile Include="Facturacion\fa_Vendedor_Info.cs" />

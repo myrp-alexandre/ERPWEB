@@ -8591,6 +8591,7 @@
     <Content Include="Areas\CuentasPorCobrar\Views\TipoCobro\_GridViewPartial_tipo_param.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\Deudas\_GridViewPartial_facturas_con_saldos.cshtml" />
     <Content Include="Areas\Facturacion\Views\Cliente\_GridViewPartial_fa_vendedor.cshtml" />
+    <Content Include="Areas\Facturacion\Views\TerminoPago\_GridViewPartial_pago_dist.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />

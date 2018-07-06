@@ -115,6 +115,7 @@
     <Compile Include="Facturacion\fa_formaPago_Bus.cs" />
     <Compile Include="Facturacion\fa_PuntoVta_Bus.cs" />
     <Compile Include="Facturacion\fa_TerminoPago_Bus.cs" />
+    <Compile Include="Facturacion\fa_TerminoPago_Distribucion_Bus.cs" />
     <Compile Include="Facturacion\fa_TipoNota_Bus.cs" />
     <Compile Include="Facturacion\fa_Vendedor_Bus.cs" />
     <Compile Include="General\tb_banco_Bus.cs" />

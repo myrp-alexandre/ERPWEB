@@ -113,6 +113,18 @@ namespace Core.Erp.Data.Facturacion
 
                     };
                     Context.fa_TerminoPago.Add(Entity);
+
+                    foreach (var item in info.Lst_fa_TerminoPago_Distribucion)
+                    {
+                        fa_TerminoPago_Distribucion det = new fa_TerminoPago_Distribucion
+                        {
+                            IdTerminoPago = info.IdTerminoPago,
+                            Num_Dias_Vcto = item.Num_Dias_Vcto,
+                            Por_distribucion = item.Por_distribucion,
+                            Secuencia = item.Secuencia
+                        };
+                        Context.fa_TerminoPago_Distribucion.Add(det);
+                    }
                     Context.SaveChanges();
                 }
                 return true;
@@ -136,7 +148,18 @@ namespace Core.Erp.Data.Facturacion
                     Entity.Dias_Vct = info.Dias_Vct;
                     Entity.nom_TerminoPago = info.nom_TerminoPago;
                     Entity.Num_Coutas = info.Num_Coutas;
-
+                    
+                    foreach (var item in info.Lst_fa_TerminoPago_Distribucion)
+                    {
+                        fa_TerminoPago_Distribucion det = new fa_TerminoPago_Distribucion
+                        {
+                            IdTerminoPago = info.IdTerminoPago,
+                            Num_Dias_Vcto = item.Num_Dias_Vcto,
+                            Por_distribucion = item.Por_distribucion,
+                            Secuencia = item.Secuencia
+                        };
+                        Context.fa_TerminoPago_Distribucion.Add(det);
+                    }
                     Context.SaveChanges();
                 }
                 return true;

@@ -1,0 +1,46 @@
+@using System.Web.UI.WebControls;
+
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridView_pago_dist";
+        settings.CallbackRouteValues = new { Controller = "TerminoPago", Action = "GridViewPartial_pago_dist", IdTerminoPago = Model == null ? 0 : Model.IdTerminoPago };
+
+
+        settings.KeyFieldName = "IdTerminoPago";
+        settings.Width = Unit.Percentage(100);
+        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "TerminoPago", Action = "EditingAddNew", Area = "Facturacion" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "TerminoPago", Action = "EditingUpdate", Area = "Facturacion" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "TerminoPago", Action = "EditingDelete", Area = "Facturacion" };
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        //Funcion para inicializar fila al presionar nuevo
+        settings.InitNewRow = (s, e) =>
+        {
+            e.NewValues["Facturacion"] = "";
+            e.NewValues["IdCtaCble"] = 0;
+        };
+
+        settings.Columns.Add("IdTerminoPago");
+        settings.Columns.Add("Secuencia");
+        settings.Columns.Add("Num_Dias_Vcto");
+        settings.Columns.Add("Por_distribucion");
+    });
+}
+@grid.Bind(Model).GetHtml()

@@ -23,5 +23,9 @@ namespace Core.Erp.Info.Facturacion
         [Required(ErrorMessage = ("el campo dias es obligatorio"))]
         public int Dias_Vct { get; set; }
         public bool estado { get; set; }
+
+        // campos que no existen
+
+        public List<fa_TerminoPago_Distribucion_Info> Lst_fa_TerminoPago_Distribucion { get; set; }
     }
 }
