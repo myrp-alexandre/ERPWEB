@@ -41,6 +41,6 @@ namespace Core.Erp.Info.Facturacion
         public tb_persona_Info info_persona { get; set; }
         public string Descripcion_tip_cliente { get; set; }
         public List<fa_cliente_contactos_Info> lst_fa_cliente_contactos { get; set; }
-
+        public List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> Lst_fa_cliente_x_fa_Vendedor_x_sucursal { get; set; }
     }
 }

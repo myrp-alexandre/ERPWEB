@@ -17,7 +17,7 @@
         <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="cod_PuntoVta">Código</label>
+                    <label for="cod_PuntoVta">Código*</label>
                     @Html.TextBoxFor(q => q.cod_PuntoVta, new { @class = "form-control", @id = "pr_codigo" })
                     @Html.ValidationMessageFor(q => q.cod_PuntoVta, "", new { @class = "text-danger" })
                 </div>
@@ -28,7 +28,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="nom_PuntoVta">Descripción</label>
+                    <label for="nom_PuntoVta">Descripción*</label>
                     @Html.TextBoxFor(q => q.nom_PuntoVta, new { @class = "form-control", @id = "pr_codigo" })
                     @Html.ValidationMessageFor(q => q.nom_PuntoVta, "", new { @class = "text-danger" })
                 </div>

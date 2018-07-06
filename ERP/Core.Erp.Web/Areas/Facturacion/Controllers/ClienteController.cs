@@ -18,6 +18,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
         fa_cliente_contactos_Bus bus_cliente_contacto = new fa_cliente_contactos_Bus();
         fa_cliente_contactos_List List_fa_cliente_contactos = new fa_cliente_contactos_List();
+        fa_cliente_x_fa_Vendedor_x_sucursal_list List_fa_cliente_x_fa_Vendedor_x_sucursal = new fa_cliente_x_fa_Vendedor_x_sucursal_list();
+        fa_cliente_x_fa_Vendedor_x_sucursal_Bus bus_fa_vendedor = new fa_cliente_x_fa_Vendedor_x_sucursal_Bus();
         string mensaje = string.Empty;
 
         public ActionResult Index()
@@ -45,7 +47,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         private void cargar_combos(fa_cliente_Info info)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            
+
             fa_formaPago_Bus bus_formapago = new fa_formaPago_Bus();
             var lst_formapago = bus_formapago.get_list();
             ViewBag.lst_formapago = lst_formapago;
@@ -91,11 +93,15 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             };
             List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos);
             cargar_combos(model);
+            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>();
+            List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal);
+            cargar_combos_det();
             return View(model);
         }
         [HttpPost]
         public ActionResult Nuevo(fa_cliente_Info model)
         {
+            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list();
             model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list();
             if (!validar(model, ref mensaje))
             {
@@ -117,6 +123,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             fa_cliente_Info model = bus_cliente.get_info(IdEmpresa, IdCliente);
             if (model == null)
                 return RedirectToAction("Index");
+            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = bus_fa_vendedor.get_list(IdEmpresa, IdCliente);
+            List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal);
             model.lst_fa_cliente_contactos = bus_cliente_contacto.get_list(IdEmpresa, IdCliente);
             List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos);
             cargar_combos(model);
@@ -126,6 +134,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult Modificar(fa_cliente_Info model)
         {
             model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list();
             model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list();
             if (!validar(model, ref mensaje))
             {
@@ -139,7 +148,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 cargar_combos(model);
                 return View(model);
             }
-            
+
             if (!bus_cliente.modificarDB(model))
             {
                 cargar_combos(model);
@@ -155,6 +164,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 return RedirectToAction("Index");
             model.lst_fa_cliente_contactos = bus_cliente_contacto.get_list(IdEmpresa, IdCliente);
             List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos);
+
+            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = bus_fa_vendedor.get_list(IdEmpresa, IdCliente);
+            List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal);
             cargar_combos(model);
             return View(model);
         }
@@ -178,7 +190,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 p.TextField = "nom_parroquia";
                 p.ValueField = "IdParroquia";
                 p.ValueType = typeof(string);
-                p.BindList(bus_parroquia.get_list( IdCiudad, false));
+                p.BindList(bus_parroquia.get_list(IdCiudad, false));
             });
         }
 
@@ -212,12 +224,21 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         private void cargar_combos_det()
         {
             tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
-            var lst_ciudad = bus_ciudad.get_list("",false);
+            var lst_ciudad = bus_ciudad.get_list("", false);
             ViewBag.lst_ciudad = lst_ciudad;
 
             tb_parroquia_Bus bus_parroquia = new tb_parroquia_Bus();
-            var lst_parroquia = bus_parroquia.get_list("",false);
+            var lst_parroquia = bus_parroquia.get_list("", false);
             ViewBag.lst_parroquia = lst_parroquia;
+
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+
+            fa_Vendedor_Bus bus_vendedor = new fa_Vendedor_Bus();
+            var lst_vendedor = bus_vendedor.get_list(IdEmpresa, false);
+            ViewBag.lst_vendedor = lst_vendedor;
         }
 
         [ValidateInput(false)]
@@ -252,6 +273,50 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list();
             cargar_combos_det();
             return PartialView("_GridViewPartial_cliente_contacto", model);
+        }
+
+    
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_fa_vendedor(decimal IdCliente = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            fa_cliente_Info model = new fa_cliente_Info();
+            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = bus_fa_vendedor.get_list(IdEmpresa, IdCliente);
+            if (model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal.Count == 0)
+                model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list();
+            cargar_combos_det();
+            return PartialView("_GridViewPartial_fa_vendedor", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult Editing_AddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_cliente_x_fa_Vendedor_x_sucursal_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_fa_cliente_x_fa_Vendedor_x_sucursal.AddRow(info_det);
+            fa_cliente_Info model = new fa_cliente_Info();
+            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list();
+            cargar_combos_det();
+            return PartialView("_GridViewPartial_fa_vendedor", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult Editing_Update([ModelBinder(typeof(DevExpressEditorsBinder))] fa_cliente_x_fa_Vendedor_x_sucursal_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_fa_cliente_x_fa_Vendedor_x_sucursal.UpdateRow(info_det);
+            fa_cliente_Info model = new fa_cliente_Info();
+            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list();
+            cargar_combos_det();
+            return PartialView("_GridViewPartial_fa_vendedor", model);
+        }
+
+        public ActionResult Editing_Delete(decimal IdCliente)
+        {
+            List_fa_cliente_x_fa_Vendedor_x_sucursal.DeleteRow(IdCliente);
+            fa_cliente_Info model = new fa_cliente_Info();
+            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list();
+            cargar_combos_det();
+            return PartialView("_GridViewPartial_fa_vendedor", model);
         }
     }
     public class fa_cliente_contactos_List
@@ -290,5 +355,48 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             edited_info.Nombres = info_det.Nombres;
         }
 
+    }
+    public class fa_cliente_x_fa_Vendedor_x_sucursal_list
+    {
+        public List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> get_list()
+        {
+            if (HttpContext.Current.Session["fa_cliente_x_fa_Vendedor_x_sucursal_Info"] == null)
+            {
+                List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> list = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>();
+
+                HttpContext.Current.Session["fa_cliente_x_fa_Vendedor_x_sucursal_Info"] = list;
+            }
+            return (List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>)HttpContext.Current.Session["fa_cliente_x_fa_Vendedor_x_sucursal_Info"];
+        }
+
+        public void set_list(List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> list)
+        {
+            HttpContext.Current.Session["fa_cliente_x_fa_Vendedor_x_sucursal_Info"] = list;
+        }
+        public void AddRow(fa_cliente_x_fa_Vendedor_x_sucursal_Info info_det)
+        {
+            List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> list = get_list();
+            info_det.IdCliente = list.Count == 0 ? 1 : list.Max(q => q.IdCliente) + 1;
+            info_det.IdEmpresa = info_det.IdEmpresa;
+            info_det.IdSucursal = info_det.IdSucursal;
+            info_det.IdVendedor = info_det.IdVendedor;
+
+            list.Add(info_det);
+        }
+
+        public void UpdateRow(fa_cliente_x_fa_Vendedor_x_sucursal_Info info_det)
+        {
+            fa_cliente_x_fa_Vendedor_x_sucursal_Info edited_info = get_list().Where(m => m.IdCliente == info_det.IdCliente).First();
+            info_det.IdEmpresa = info_det.IdEmpresa;
+            info_det.IdSucursal = info_det.IdSucursal;
+            edited_info.IdVendedor = info_det.IdVendedor;
+
+        }
+
+        public void DeleteRow(decimal IdCliente)
+        {
+            List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> list = get_list();
+            list.Remove(list.Where(m => m.IdCliente == IdCliente).First());
+        }
     }
 }

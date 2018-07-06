@@ -26,7 +26,7 @@ namespace Core.Erp.Data.Facturacion
                                      IdPuntoVta = q.IdPuntoVta,
                                      cod_PuntoVta = q.cod_PuntoVta,
                                      nom_PuntoVta = q.nom_PuntoVta,
-                                     estado = q.estado
+                                     estado = q.estado == true
 
                                  }).ToList();
                 }
@@ -138,7 +138,7 @@ namespace Core.Erp.Data.Facturacion
                     Context.SaveChanges();
                 
                 }
-                return true; ;
+                return true;
             }
             catch (Exception)
             {
@@ -161,7 +161,7 @@ namespace Core.Erp.Data.Facturacion
                     Context.SaveChanges();
 
                 }
-                return true; ;
+                return true; 
             }
             catch (Exception)
             {

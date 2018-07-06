@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Facturacion
 {
-    public class fa_cliente_x_fa_Vendedor_x_sucursal_Bus
+    public class fa_TerminoPago_Distribucion_Bus
     {
-        fa_cliente_x_fa_Vendedor_x_sucursal_Data odata = new fa_cliente_x_fa_Vendedor_x_sucursal_Data();
+        fa_TerminoPago_Distribucion_Data odata = new fa_TerminoPago_Distribucion_Data();
     
-        public List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> get_list(int IdEmpresa, decimal IdCliente)
+        public List<fa_TerminoPago_Distribucion_Info> get_list(string IdTerminoPago)
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdCliente);
+                return odata.get_list(IdTerminoPago);
             }
             catch (Exception)
             {

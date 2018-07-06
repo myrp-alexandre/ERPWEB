@@ -40,17 +40,6 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Ve_Comision">Comisión%*</label>
-                    @Html.TextBoxFor(q => q.Ve_Comision, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.Ve_Comision, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index", "Vendedor", new {  Area ="Facturacion" }, null)">Cancelar</a>

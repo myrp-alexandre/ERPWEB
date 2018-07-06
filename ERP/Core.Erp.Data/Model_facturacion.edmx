@@ -116,6 +116,16 @@
           <Property Name="Dias_Vct" Type="int" Nullable="false" />
           <Property Name="estado" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="fa_TerminoPago_Distribucion">
+          <Key>
+            <PropertyRef Name="IdTerminoPago" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdTerminoPago" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="Num_Dias_Vcto" Type="int" Nullable="false" />
+          <Property Name="Por_distribucion" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="fa_TipoNota">
           <Key>
             <PropertyRef Name="IdTipoNota" />
@@ -257,6 +267,18 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_fa_TerminoPago_Distribucion_fa_TerminoPago">
+          <End Role="fa_TerminoPago" Type="Self.fa_TerminoPago" Multiplicity="1" />
+          <End Role="fa_TerminoPago_Distribucion" Type="Self.fa_TerminoPago_Distribucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_TerminoPago">
+              <PropertyRef Name="IdTerminoPago" />
+            </Principal>
+            <Dependent Role="fa_TerminoPago_Distribucion">
+              <PropertyRef Name="IdTerminoPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Model_facturacionStoreContainer">
           <EntitySet Name="fa_cliente" EntityType="Self.fa_cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_cliente_contactos" EntityType="Self.fa_cliente_contactos" Schema="dbo" store:Type="Tables" />
@@ -265,6 +287,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
           <EntitySet Name="fa_formaPago" EntityType="Self.fa_formaPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_PuntoVta" EntityType="Self.fa_PuntoVta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_TerminoPago" EntityType="Self.fa_TerminoPago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_TerminoPago_Distribucion" EntityType="Self.fa_TerminoPago_Distribucion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_TipoNota" EntityType="Self.fa_TipoNota" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_Vendedor" EntityType="Self.fa_Vendedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vwfa_cliente_consulta" EntityType="Self.vwfa_cliente_consulta" store:Type="Views" store:Schema="web">
@@ -302,6 +325,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
           <AssociationSet Name="FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_Vendedor" Association="Self.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_Vendedor">
             <End Role="fa_Vendedor" EntitySet="fa_Vendedor" />
             <End Role="fa_cliente_x_fa_Vendedor_x_sucursal" EntitySet="fa_cliente_x_fa_Vendedor_x_sucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_TerminoPago_Distribucion_fa_TerminoPago" Association="Self.FK_fa_TerminoPago_Distribucion_fa_TerminoPago">
+            <End Role="fa_TerminoPago" EntitySet="fa_TerminoPago" />
+            <End Role="fa_TerminoPago_Distribucion" EntitySet="fa_TerminoPago_Distribucion" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -343,6 +370,11 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
             <End Role="fa_Vendedor" EntitySet="fa_Vendedor" />
             <End Role="fa_cliente_x_fa_Vendedor_x_sucursal" EntitySet="fa_cliente_x_fa_Vendedor_x_sucursal" />
           </AssociationSet>
+          <EntitySet Name="fa_TerminoPago_Distribucion" EntityType="Model_facturacion.fa_TerminoPago_Distribucion" />
+          <AssociationSet Name="FK_fa_TerminoPago_Distribucion_fa_TerminoPago" Association="Model_facturacion.FK_fa_TerminoPago_Distribucion_fa_TerminoPago">
+            <End Role="fa_TerminoPago" EntitySet="fa_TerminoPago" />
+            <End Role="fa_TerminoPago_Distribucion" EntitySet="fa_TerminoPago_Distribucion" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="fa_cliente_tipo">
           <Key>
@@ -378,6 +410,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
           <Property Name="Dias_Vct" Type="Int32" Nullable="false" />
           <Property Name="estado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="fa_cliente" Relationship="Model_facturacion.FK_fa_cliente_fa_TerminoPago" FromRole="fa_TerminoPago" ToRole="fa_cliente" />
+          <NavigationProperty Name="fa_TerminoPago_Distribucion" Relationship="Model_facturacion.FK_fa_TerminoPago_Distribucion_fa_TerminoPago" FromRole="fa_TerminoPago" ToRole="fa_TerminoPago_Distribucion" />
         </EntityType>
         <EntityType Name="fa_TipoNota">
           <Key>
@@ -606,6 +639,29 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="fa_TerminoPago_Distribucion">
+          <Key>
+            <PropertyRef Name="IdTerminoPago" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdTerminoPago" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="Num_Dias_Vcto" Type="Int32" Nullable="false" />
+          <Property Name="Por_distribucion" Type="Double" Nullable="false" />
+          <NavigationProperty Name="fa_TerminoPago" Relationship="Model_facturacion.FK_fa_TerminoPago_Distribucion_fa_TerminoPago" FromRole="fa_TerminoPago_Distribucion" ToRole="fa_TerminoPago" />
+        </EntityType>
+        <Association Name="FK_fa_TerminoPago_Distribucion_fa_TerminoPago">
+          <End Type="Model_facturacion.fa_TerminoPago" Role="fa_TerminoPago" Multiplicity="1" />
+          <End Type="Model_facturacion.fa_TerminoPago_Distribucion" Role="fa_TerminoPago_Distribucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_TerminoPago">
+              <PropertyRef Name="IdTerminoPago" />
+            </Principal>
+            <Dependent Role="fa_TerminoPago_Distribucion">
+              <PropertyRef Name="IdTerminoPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -773,6 +829,16 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_TerminoPago_Distribucion">
+            <EntityTypeMapping TypeName="Model_facturacion.fa_TerminoPago_Distribucion">
+              <MappingFragment StoreEntitySet="fa_TerminoPago_Distribucion">
+                <ScalarProperty Name="Por_distribucion" ColumnName="Por_distribucion" />
+                <ScalarProperty Name="Num_Dias_Vcto" ColumnName="Num_Dias_Vcto" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdTerminoPago" ColumnName="IdTerminoPago" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

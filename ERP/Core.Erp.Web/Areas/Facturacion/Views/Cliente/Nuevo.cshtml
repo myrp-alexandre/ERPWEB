@@ -127,6 +127,9 @@
             <li>
                 <a href="#tab_contabilidad" aria-controls="contabilidad" role="tab" data-toggle="tab">Contabilidad</a>
             </li>
+            <li>
+                <a href="#tab_vendedor" aria-controls="vendedor" role="tab" data-toggle="tab"> Vendedor </a>
+            </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_informacion_general">
@@ -163,16 +166,16 @@
             </div>
 
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_contactos_telefonos">
-                
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        @Html.Action("GridViewPartial_cliente_contacto")
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.Action("GridViewPartial_cliente_contacto")
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
+            </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_informacion_financiera">
                 <div class="row">
                     <div class="col-md-12">
@@ -303,6 +306,21 @@
                 </div>
 
             </div>
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_vendedor">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+
+                            @Html.Action("GridViewPartial_fa_vendedor")
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
     <div class="box-footer">
