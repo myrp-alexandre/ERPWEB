@@ -43,7 +43,8 @@
         });
         settings.Columns.Add("CodReporte", "Código").Width = Unit.Percentage(10);
         settings.Columns.Add("nom_reporte", "Nombre").Width = Unit.Percentage(50);
-
+        settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
+        settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
     });
 }
 @grid.Bind(Model).GetHtml()
