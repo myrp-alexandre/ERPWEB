@@ -11,25 +11,23 @@
 
 <script>
     var selectedIDs;
-
     function OnBeginCallback(s, e) {
         //Pass all selected keys to GridView callback action
         e.customArgs["selectedIDs"] = selectedIDs;
     }
     function OnSelectionChanged(s, e) {
-        s.GetSelectedNodeValues("CodReporte", GetSelectedNodeValuesCallback);
+        s.GetSelectedFieldValues("CodReporte", GetSelectedFieldValuesCallback);
     }
-    function GetSelectedNodeValuesCallback(values) {
-        if (values != null) {
-            selectedIDs = values.join(',');
-        }
+    function GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedIDs = values.join(',');
     }
     
     function guardar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdUsuario: $("#IdUsuario").val(),
-            IDs: selectedIDs
+            Ids: selectedIDs
         }
         $("#btn_guardar").disabled = true;
         $.ajax({
@@ -51,7 +49,7 @@
     }
 </script>
 
-@using (Html.BeginForm("Index", "ReportesPorUsuario", FormMethod.Post, new { role = "form", @class = "form" }))
+@using (Html.BeginForm("Index", "ReportesPorUsuario", FormMethod.Post, new { role = "form", @class = "myform" }))
 {
     <div class="row">
         <div class="col-md-12">
