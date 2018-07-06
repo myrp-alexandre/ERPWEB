@@ -83,8 +83,15 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
-            model = bus_orden_giro.get_lst_orden_giro_x_pagar(IdEmpresa);
+            //model = bus_orden_giro.get_lst_orden_giro_x_pagar(IdEmpresa);
             return PartialView("_GridViewPartial_aprobacion_facturas", model);
+        }
+        public ActionResult GridViewPartial_facturas_con_saldos()
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
+            model = bus_orden_giro.get_lst_orden_giro_x_pagar(IdEmpresa);
+            return PartialView("_GridViewPartial_facturas_con_saldos", model);
         }
 
         [ValidateInput(false)]

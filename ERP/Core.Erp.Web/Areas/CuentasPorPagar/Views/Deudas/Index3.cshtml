@@ -1,4 +1,58 @@
 ﻿
+<script type="text/javascript">
+
+    function fac_con_saldo()
+    {
+            GridViewPartial_facturas_con_saldos.PerformCallback();
+            $("#fac_con_saldo").modal("show");
+    };
+    function cerrar() {
+        //GridViewPartial_distribuidos.PerformCallback();
+        //GridViewPartial_por_distribuir.PerformCallback();
+        $("#fac_con_saldo").modal("hide");
+    };
+
+
+
+     var selectedIDs;
+    function OnBeginCallback(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDs"] = selectedIDs;
+    }
+    function OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("CodReporte", GetSelectedFieldValuesCallback);
+    }
+    function GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedIDs = values.join(',');
+    }
+
+    function guardar() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdUsuario: $("#IdUsuario").val(),
+            Ids: selectedIDs
+        }
+        $("#btn_guardar").disabled = true;
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("guardar", "ReportesPorUsuario", new { Area = "General" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#myform").submit();
+            },
+            error: function (error) {
+            }
+        });
+        $("#btn_guardar").disabled = false;
+    }
+</script>
+
 @{
     ViewBag.Title = "Aprobación de factura por proveedor";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -10,6 +64,43 @@
 
 @using (Html.BeginForm())
 {
-    @Html.Action("GridViewPartial_aprobacion_facturas")
+    
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-primary" onclick="fac_con_saldo()">Buscar
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
 
-}
+        @Html.Action("GridViewPartial_aprobacion_facturas")
+        <div class="modal-footer">
+
+            <button type="button" class="btn btn-primary" onclick="guardar()">Guardar</button>
+        </div>
+        }
+
+
+        <div class="modal fade" id="fac_con_saldo" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title">Facturas con saldos</h4>
+                    </div>
+                    <div class="modal-body">
+                        @Html.Action("GridViewPartial_facturas_con_saldos")
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="">Aceptar</button>
+                        <button type="button" class="btn btn-default" onclick="cerrar();">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
