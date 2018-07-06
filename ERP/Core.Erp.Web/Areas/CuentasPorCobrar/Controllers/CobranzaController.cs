@@ -353,6 +353,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
                 if (saldo > 0)
                 {
                     item.dc_ValorPago = saldo >= Convert.ToDouble(item.Saldo) ? Convert.ToDouble(item.Saldo) : saldo;
+                    item.Saldo_final = Convert.ToDouble(item.Saldo) - item.dc_ValorPago;
                     saldo = saldo - item.dc_ValorPago;
                 }
                 else
@@ -405,13 +406,17 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         public void AddRow(cxc_cobro_det_Info info_det)
         {
             List<cxc_cobro_det_Info> list = get_list();
-            if(list.Where(q=>q.secuencia == info_det.secuencia).FirstOrDefault() == null)
+            if (list.Where(q => q.secuencia == info_det.secuencia).FirstOrDefault() == null)
+            {
+                info_det.Saldo_final = Convert.ToDouble(info_det.Saldo) - info_det.dc_ValorPago;
                 list.Add(info_det);
+            }
         }
 
         public void UpdateRow(cxc_cobro_det_Info info_det)
         {
             cxc_cobro_det_Info edited_info = get_list().Where(m => m.secuencia == info_det.secuencia).First();
+            edited_info.Saldo_final = Convert.ToDouble(info_det.Saldo) - info_det.dc_ValorPago;
             edited_info.dc_ValorPago = info_det.dc_ValorPago;
         }
 

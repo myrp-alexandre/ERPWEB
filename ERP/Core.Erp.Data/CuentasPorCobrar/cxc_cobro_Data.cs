@@ -228,7 +228,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         IdTipoMoviCaja = param_cxc.pa_IdTipoMoviCaja_x_Cobros_x_cliente == null ? 0 : Convert.ToInt32(param_cxc.pa_IdTipoMoviCaja_x_Cobros_x_cliente);
                     }
 
-                    if (IdTipoCbte == 0 || IdTipoMoviCaja == 0)
+                    if (IdTipoCbte == 0)
                         generar_diario = false;
                     
                     #endregion
@@ -960,6 +960,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  vt_Iva = q.vt_iva,
                                  vt_Total = q.vt_total,
                                  Su_Descripcion = q.Su_Descripcion
+                                 
                              }).ToList();
                 }
                 return Lista;
@@ -996,7 +997,8 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         vt_Subtotal = Convert.ToDouble(Entity.vt_Subtotal),
                         IdCliente = Entity.IdCliente,
                         IdEntidad = Entity.IdCliente,
-                        vt_tipoDoc = Entity.vt_tipoDoc,                        
+                        vt_tipoDoc = Entity.vt_tipoDoc
+                                               
                     };
                 }
                 return info;

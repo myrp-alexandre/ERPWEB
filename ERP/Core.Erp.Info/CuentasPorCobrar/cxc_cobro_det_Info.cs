@@ -37,6 +37,7 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public double? vt_total { get; set; }
         public string vt_NumDocumento { get; set; }
         public double? Saldo { get; set; }
+        public double Saldo_final { get; set; }
         public double? vt_Subtotal { get; set; }
         public double? vt_iva { get; set; }
         public DateTime? vt_fech_venc { get; set; }

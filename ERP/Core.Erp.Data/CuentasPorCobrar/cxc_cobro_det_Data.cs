@@ -85,7 +85,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  dc_ValorPago = q.dc_ValorPago
                              }).ToList();
 
-                    Lista.ForEach(q => { q.secuencia = q.dc_TipoDocumento +"-"+ q.IdBodega_Cbte.ToString() +"-"+ q.IdCbte_vta_nota.ToString();});
+                    Lista.ForEach(q => { q.secuencia = q.dc_TipoDocumento +"-"+ q.IdBodega_Cbte.ToString() +"-"+ q.IdCbte_vta_nota.ToString(); q.Saldo_final = Convert.ToDouble(q.Saldo - q.dc_ValorPago); });
                 }
 
                 return Lista;
@@ -125,7 +125,8 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  ESRetenIVA = q.ESRetenIVA,
                                  ESRetenFTE = q.ESRetenFTE,
                                  PorcentajeRet = q.PorcentajeRet,
-                                 cr_fecha = q.cr_fecha
+                                 cr_fecha = q.cr_fecha,
+                                 cr_NumDocumento = q.cr_NumDocumento
                              }).ToList();
                 }
 
