@@ -261,7 +261,7 @@ namespace Core.Erp.Data.Facturacion
                     {
                         fa_cliente_x_fa_Vendedor_x_sucursal det = new fa_cliente_x_fa_Vendedor_x_sucursal
                         {
-                            IdEmpresa = info.IdEmpresa,
+                            IdEmpresa = item.IdEmpresa,
                             IdSucursal = item.IdSucursal,
                             IdCliente = item.IdCliente,
                             IdVendedor = item.IdVendedor,
@@ -314,7 +314,7 @@ namespace Core.Erp.Data.Facturacion
                         {
                             IdEmpresa = info.IdEmpresa,
                             IdSucursal = item.IdSucursal,
-                            IdCliente = item.IdCliente,
+                            IdCliente = info.IdCliente,
                             IdVendedor = item.IdVendedor,
                             observacion = item.observacion
                         };
