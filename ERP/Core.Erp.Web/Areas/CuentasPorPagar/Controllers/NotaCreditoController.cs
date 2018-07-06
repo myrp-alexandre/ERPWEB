@@ -15,7 +15,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
     public class NotaCreditoController : Controller
     {
         #region variables
-       cp_nota_DebCre_Bus bus_orden_giro = new cp_nota_DebCre_Bus();
+        cp_nota_DebCre_Bus bus_orden_giro = new cp_nota_DebCre_Bus();
         cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
         cp_codigo_SRI_x_CtaCble_Bus bus_codigo_sri = new cp_codigo_SRI_x_CtaCble_Bus();
         cp_pagos_sri_Bus bus_forma_paogo = new cp_pagos_sri_Bus();
@@ -27,6 +27,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         cp_parametros_Info info_parametro = new cp_parametros_Info();
         cp_parametros_Bus bus_param = new cp_parametros_Bus();
         ct_cbtecble_det_List_nc comprobante_contable_fp = new ct_cbtecble_det_List_nc();
+        cp_orden_pago_Bus bus_orden_pago = new cp_orden_pago_Bus();
         int IdEmpresa = 0;
 
 
@@ -366,7 +367,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             comprobante_contable_fp.delete_detail_New_details(info_proveedor, info_parametro, cn_subtotal_iva, cn_subtotal_siniva, cn_valoriva, cn_total, observacion);
             return Json("", JsonRequestBehavior.AllowGet);
         }
-
+       
+        
         #endregion
 
 

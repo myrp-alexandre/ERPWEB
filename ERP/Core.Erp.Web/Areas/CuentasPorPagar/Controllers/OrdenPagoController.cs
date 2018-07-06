@@ -8,7 +8,7 @@ using Core.Erp.Bus.CuentasPorPagar;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.General;
-
+using Core.Erp.Info.Helps;
 using DevExpress.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
@@ -324,10 +324,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             try
             {
+                string IdTipo_op = cl_enumeradores.eTipoOrdenPago.FACT_PROVEE.ToString();
+                string IdEstado_Aprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString();
+                string IdUsuario = Session["IdUsuario"].ToString();
                 IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-                string IdUsuario = Convert.ToString(Session["IdUsuario"]);
-
-                lst_detalle_op =  bus_orden_pago.Get_List_orden_pago_con_saldo(IdEmpresa, "FACT_PROVEE", IdProveedor, "APRO", IdUsuario);
+                var list_tipo_doc = bus_orden_pago.Get_List_orden_pago_con_saldo(IdEmpresa, IdTipo_op, IdProveedor, IdEstado_Aprobacion, IdUsuario);
                 Session["lst_detalle_op"] = lst_detalle_op as List<cp_orden_pago_det_Info>;
                 return Json("", JsonRequestBehavior.AllowGet);
             }
