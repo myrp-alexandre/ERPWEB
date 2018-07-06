@@ -185,6 +185,17 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         Fecha_Transac = DateTime.Now
                     };
                     Context.cxc_cobro_tipo.Add(Entity);
+                    foreach (var item in info.Lst_tipo_param_det)
+                    {
+                        cxc_cobro_tipo_Param_conta_x_sucursal det = new cxc_cobro_tipo_Param_conta_x_sucursal
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = item.IdSucursal,
+                            IdCtaCble = item.IdCtaCble,
+                            IdCobro_tipo = info.IdCobro_tipo                            
+                        };
+                        Context.cxc_cobro_tipo_Param_conta_x_sucursal.Add(det);
+                    }
                     Context.SaveChanges();
                 }
                 return true;
@@ -225,6 +236,24 @@ namespace Core.Erp.Data.CuentasPorCobrar
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod;
+
+                    var lst = Context.cxc_cobro_tipo_Param_conta_x_sucursal.Where(q => q.IdCobro_tipo == info.IdCobro_tipo && q.IdEmpresa == info.IdEmpresa).ToList();
+                    foreach (var item in lst)
+                    {
+                        Context.cxc_cobro_tipo_Param_conta_x_sucursal.Remove(item);
+                    }
+                    foreach (var item in info.Lst_tipo_param_det)
+                    {
+                        cxc_cobro_tipo_Param_conta_x_sucursal det = new cxc_cobro_tipo_Param_conta_x_sucursal
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = item.IdSucursal,
+                            IdCtaCble = item.IdCtaCble,
+                            IdCobro_tipo = info.IdCobro_tipo
+                        };
+                        Context.cxc_cobro_tipo_Param_conta_x_sucursal.Add(det);
+                    }
+
                     Context.SaveChanges();
                 }
                 return true;

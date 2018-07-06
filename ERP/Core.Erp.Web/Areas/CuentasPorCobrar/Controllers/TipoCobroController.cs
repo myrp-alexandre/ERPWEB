@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.Helps;
 using Core.Erp.Bus.General;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 {
@@ -16,7 +17,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
     {
         cxc_cobro_tipo_Bus bus_tipocobro = new cxc_cobro_tipo_Bus();
         cxc_cobro_tipo_Param_conta_x_sucursal_Bus bus_tipo_param = new cxc_cobro_tipo_Param_conta_x_sucursal_Bus();
-        tipo_param_det_List Lst_tipo_param_det = new tipo_param_det_List();
+        tipo_param_det_List List_tipo_param_det = new tipo_param_det_List();
 
         public ActionResult Index()
         {
@@ -48,7 +49,14 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         }
         public ActionResult Nuevo()
         {
-            cxc_cobro_tipo_Info model = new cxc_cobro_tipo_Info();
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            cxc_cobro_tipo_Info model = new cxc_cobro_tipo_Info
+            {
+                IdEmpresa = IdEmpresa
+            };
+            model.Lst_tipo_param_det = new List<cxc_cobro_tipo_Param_conta_x_sucursal_Info>();
+            List_tipo_param_det.set_list(model.Lst_tipo_param_det);
+            cargar_combos_detalle();
             cargar_combos();
             return View(model);
         }
@@ -56,6 +64,8 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         [HttpPost]
         public ActionResult Nuevo(cxc_cobro_tipo_Info model)
         {
+            model.Lst_tipo_param_det = List_tipo_param_det.get_list();
+
             if (bus_tipocobro.validar_existe_IdCobro_tipo(model.IdCobro_tipo))
             {
                 ViewBag.mensaje = "El codigo ya se encuentra registrado";
@@ -71,15 +81,21 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         }
         public ActionResult Modificar(string IdCobro_tipo = "")
         {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             cxc_cobro_tipo_Info model = bus_tipocobro.get_info(IdCobro_tipo);
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdEmpresa = IdEmpresa;
+            model.Lst_tipo_param_det = bus_tipo_param.get_list(IdEmpresa, IdCobro_tipo);
+            List_tipo_param_det.set_list(model.Lst_tipo_param_det);
             cargar_combos();
             return View(model);
         }
         [HttpPost]
         public ActionResult Modificar(cxc_cobro_tipo_Info model)
         {
+            model.Lst_tipo_param_det = List_tipo_param_det.get_list();
+
             if (!bus_tipocobro.modificarDB(model))
             {
                 cargar_combos();
@@ -110,13 +126,15 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         public ActionResult GridViewPartial_tipo_param(string IdCobro_tipo = "")
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            cxc_cobro_tipo_Param_conta_x_sucursal_Info model = new cxc_cobro_tipo_Param_conta_x_sucursal_Info();
-  //           model.Lst_tipo_param_det = bus_tipo_param.get_list(IdEmpresa, IdCobro_tipo);
-            cargar_combos_det();
-            return PartialView("~/Areas/CuentasPorCobrar/Views/TipoCobro/_GridViewPartial_tipo_param.cshtml", model);
+            cxc_cobro_tipo_Info model = new cxc_cobro_tipo_Info();
+            model.Lst_tipo_param_det = bus_tipo_param.get_list(IdEmpresa, IdCobro_tipo);
+            if (model.Lst_tipo_param_det.Count == 0)
+                model.Lst_tipo_param_det = List_tipo_param_det.get_list();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_tipo_param", model);
         }
 
-        private void cargar_combos_det()
+        private void cargar_combos_detalle()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
@@ -128,6 +146,36 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             ViewBag.lst_cta = lst_cta;
         }
 
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] cxc_cobro_tipo_Param_conta_x_sucursal_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_tipo_param_det.AddRow(info_det);
+            cxc_cobro_tipo_Info model = new cxc_cobro_tipo_Info();
+            model.Lst_tipo_param_det = List_tipo_param_det.get_list();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_tipo_param", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] cxc_cobro_tipo_Param_conta_x_sucursal_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_tipo_param_det.UpdateRow(info_det);
+            cxc_cobro_tipo_Info model = new cxc_cobro_tipo_Info();
+            model.Lst_tipo_param_det = List_tipo_param_det.get_list();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_tipo_param", model);
+        }
+
+        public ActionResult EditingDelete(int IdSucursal)
+        {
+            List_tipo_param_det.DeleteRow(IdSucursal);
+            cxc_cobro_tipo_Info model = new cxc_cobro_tipo_Info();
+            model.Lst_tipo_param_det = List_tipo_param_det.get_list();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_tipo_param", model);
+        }
     }
 
     public class tipo_param_det_List
@@ -147,6 +195,26 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         {
             HttpContext.Current.Session["cxc_cobro_tipo_Param_conta_x_sucursal_Info"] = list;
         }
+        public void AddRow(cxc_cobro_tipo_Param_conta_x_sucursal_Info info_det)
+        {
+            List<cxc_cobro_tipo_Param_conta_x_sucursal_Info> list = get_list();
+            info_det.IdSucursal = list.Count == 0 ? 1 : list.Max(q => q.IdSucursal) + 1;
+            info_det.IdCtaCble = info_det.IdCtaCble;
 
+            list.Add(info_det);
+        }
+
+        public void UpdateRow(cxc_cobro_tipo_Param_conta_x_sucursal_Info info_det)
+        {
+            cxc_cobro_tipo_Param_conta_x_sucursal_Info edited_info = get_list().Where(m => m.IdSucursal == info_det.IdSucursal).First();
+            edited_info.IdCtaCble = info_det.IdCtaCble;
+
+        }
+
+        public void DeleteRow(int IdSucursal)
+        {
+            List<cxc_cobro_tipo_Param_conta_x_sucursal_Info> list = get_list();
+            list.Remove(list.Where(m => m.IdSucursal == IdSucursal).First());
+        }
     }
 }

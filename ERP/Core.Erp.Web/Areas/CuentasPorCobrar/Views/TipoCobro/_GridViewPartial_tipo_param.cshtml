@@ -2,10 +2,10 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_tipo_param";
-        settings.CallbackRouteValues = new { Controller = "TipoCobro", Action = "GridViewPartial_tipo_param" };
+        settings.CallbackRouteValues = new { Controller = "TipoCobro", Action = "GridViewPartial_tipo_param", IdSucursal = Model == null ? 0 : Model.IdSucursal, IdCobro_tipo = Model == null ? "" : Model.IdCobro_tipo };
 
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdCobro_tipo";
+        settings.KeyFieldName = "IdSucursal";
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "TipoCobro", Action = "EditingAddNew", Area = "CuentasPorCobrar" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "TipoCobro", Action = "EditingUpdate", Area = "CuentasPorCobrar" };
@@ -26,7 +26,13 @@
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
-       
+
+        //Funcion para inicializar fila al presionar nuevo
+        settings.InitNewRow = (s, e) =>
+        {
+            e.NewValues["IdSucursal"] = 0;
+            e.NewValues["IdCtaCble"] = 0;
+        };
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdSucursal";
@@ -48,7 +54,7 @@
             column.Width = Unit.Percentage(50);
             column.EditorProperties().ComboBox(p =>
             {
-                p.Columns.Add("pc_Cuenta", "Descripción").Width = Unit.Percentage(100);
+                p.Columns.Add("pc_Cuenta", "Cuenta").Width = Unit.Percentage(100);
                 p.TextField = "pc_Cuenta";
                 p.ValueField = "IdCtaCble";
                 p.ValueType = typeof(int);
@@ -57,4 +63,4 @@
         });
     });
 }
-@grid.Bind(Model).GetHtml()
+@grid.Bind(Model.Lst_tipo_param_det).GetHtml()

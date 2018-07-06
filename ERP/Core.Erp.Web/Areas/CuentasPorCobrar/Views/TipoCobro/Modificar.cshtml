@@ -10,6 +10,7 @@
 
 @using (Html.BeginForm("Modificar", "TipoCobro", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
+    @Html.HiddenFor(q => q.IdEmpresa);
     @Html.HiddenFor(q=>q.IdCobro_tipo)
     <div class="row">
         <div class="col-md-12">
@@ -127,6 +128,15 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.Action("GridViewPartial_tipo_param")
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">

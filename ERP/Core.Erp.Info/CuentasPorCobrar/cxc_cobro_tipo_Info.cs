@@ -50,6 +50,9 @@ namespace Core.Erp.Info.CuentasPorCobrar
 
         //campos que no existen en la tabla
 
+
+        public List<cxc_cobro_tipo_Param_conta_x_sucursal_Info> Lst_tipo_param_det { get; set; }
+        public int IdSucursal { get; set; }
         public bool tc_seMuestraManCheque_bool { get; set; }
         public bool tc_seCobra_bool { get; set; }
         public bool tc_SePuede_Depositar_bool { get; set; }
@@ -62,5 +65,6 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public bool tc_cobroDirecto_bool { get; set; }
         public bool tc_cobroInDirecto_bool { get; set; }
         public bool tc_docXCobrar_bool { get; set; }
+        public int IdEmpresa { get; set; }
     }
 }
