@@ -61,8 +61,8 @@
                 {
 
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdPuntoVta = DataBinder.Eval(tc.DataItem, "IdPuntoVta"), IdSucursal = ViewBag.IdSucursal, IdBodega = ViewBag.IdBodega }) + "&nbsp;" +
-                            Html.ActionLink("Anular", "Anular", new { IdPuntoVta = DataBinder.Eval(tc.DataItem, "IdPuntoVta"), IdSucursal = ViewBag.IdSucursal, IdBodega = ViewBag.IdBodega },
+                Html.ActionLink("Modificar", "Modificar", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(tc.DataItem, "IdBodega"), IdPuntoVta = DataBinder.Eval(tc.DataItem, "IdPuntoVta") }) + "&nbsp;" +
+                            Html.ActionLink("Anular", "Anular", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(tc.DataItem, "IdBodega"), IdPuntoVta = DataBinder.Eval(tc.DataItem, "IdPuntoVta")},
                                 new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                         );
                 }
