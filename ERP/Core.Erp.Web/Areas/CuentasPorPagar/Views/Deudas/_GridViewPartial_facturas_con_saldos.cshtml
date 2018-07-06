@@ -1,0 +1,158 @@
+@using System.Web.UI.WebControls;
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridView_aprobacion_facturas";
+        settings.CallbackRouteValues = new { Controller = "Deudas", Action = "GridViewPartial_aprobacion_facturas" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Deudas", Action = "GridViewPartial_aprobacion_facturas_AddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Deudas", Action = "GridViewPartial_aprobacion_facturas_Update" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Deudas", Action = "GridViewPartial_aprobacion_facturas_Delete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = true;
+
+        settings.CommandColumn.ShowEditButton = true;
+
+        settings.KeyFieldName = "IdCbteCble_Ogiro";
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.None;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+
+        //Evento para pintar de rojo las filas anuladas
+        //settings.HtmlRowPrepared = (s, e) =>
+        //{
+        //    if (Convert.ToInt32(e.GetValue("Dias_Vencidos")) <  1)
+        //    {
+        //        e.Row.ForeColor = System.Drawing.Color.Red;
+        //    }
+        //    if (Convert.ToInt32(e.GetValue("Dias_Vencidos")) > 10)
+        //    {
+        //        e.Row.ForeColor = System.Drawing.Color.Green;
+        //    }
+        //    if (Convert.ToInt32(e.GetValue("Dias_Vencidos")) ==0)
+        //    {
+        //        e.Row.ForeColor = System.Drawing.Color.Orange;
+        //    }
+        //};
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdTipoCbte_Ogiro";
+            column.Caption = "#";
+            column.Width = Unit.Percentage(2);
+            column.ReadOnly = true;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdCbteCble_Ogiro";
+            column.Caption = "#";
+            column.Width = Unit.Percentage(2);
+            column.ReadOnly = true;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdProveedor";
+            column.Caption = "#";
+            column.Width = Unit.Percentage(2);
+            column.ReadOnly = true;
+        });
+
+        settings.Columns.Add("co_factura", "Factura").Width = Unit.Percentage(20);
+        settings.Columns.Add("info_proveedor.info_persona.pe_razonSocial", "Proveedor").Width = Unit.Percentage(30);
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "co_fechaOg";
+            column.Caption = "Fecha";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+            column.ReadOnly = false;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "co_FechaFactura_vct";
+            column.Caption = "Vence";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+                column.ReadOnly = false;
+
+            });
+        });
+        // settings.Columns.Add("co_observacion").Width = Unit.Percentage(30);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "co_total";
+            column.Caption = "Total";
+            column.Width = Unit.Percentage(10);
+            column.EditorProperties().SpinEdit(sp =>
+            {
+                sp.MinValue = 0;
+                sp.MaxValue = 999999999;
+                sp.Width = Unit.Percentage(100);
+                column.PropertiesEdit.DisplayFormatString = "n2";
+                column.ReadOnly = false;
+
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Total_Pagado";
+            column.Caption = "Cancelado";
+            column.Width = Unit.Percentage(10);
+            column.EditorProperties().SpinEdit(sp =>
+            {
+                sp.MinValue = 0;
+                sp.MaxValue = 999999999;
+                sp.Width = Unit.Percentage(100);
+                column.PropertiesEdit.DisplayFormatString = "n2";
+
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Saldo_OG";
+            column.Caption = "Saldo";
+            column.Width = Unit.Percentage(10);
+            column.EditorProperties().SpinEdit(sp =>
+            {
+                sp.MinValue = 0;
+                sp.MaxValue = 999999999;
+                sp.Width = Unit.Percentage(100);
+                column.PropertiesEdit.DisplayFormatString = "n2";
+
+            });
+        });
+
+        settings.Columns.Add("Tipo_Vcto", "Estado").Width = Unit.Percentage(5);
+        settings.Columns.Add("Dias_Vencidos", "Vencido").Width = Unit.Percentage(5);
+
+
+    });
+
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()
