@@ -14,13 +14,16 @@ namespace Core.Erp.Data
     
     public partial class VWCXC_002_diario
     {
-        public Nullable<int> IdEmpresa_Ogiro { get; set; }
-        public Nullable<int> IdTipoCbte_Ogiro { get; set; }
-        public Nullable<decimal> IdCbteCble_Ogiro { get; set; }
         public int IdEmpresa { get; set; }
-        public int IdTipoCbte { get; set; }
-        public decimal IdCbteCble { get; set; }
-        public int secuencia { get; set; }
+        public int IdSucursal { get; set; }
+        public decimal IdCobro { get; set; }
+        public int secuencial { get; set; }
+        public string dc_TipoDocumento { get; set; }
+        public Nullable<int> IdBodega_Cbte { get; set; }
+        public decimal IdCbte_vta_nota { get; set; }
+        public int IdEmpresa_ct { get; set; }
+        public int IdTipoCbte_ct { get; set; }
+        public decimal IdCbteCble_ct { get; set; }
         public string IdCtaCble { get; set; }
         public string pc_Cuenta { get; set; }
         public double dc_Valor { get; set; }

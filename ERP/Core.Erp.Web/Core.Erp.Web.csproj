@@ -494,6 +494,18 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_Rpt.Designer.cs">
       <DependentUpon>CXC_001_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_diario_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_diario_Rpt.Designer.cs">
+      <DependentUpon>CXC_002_diario_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Rpt.Designer.cs">
+      <DependentUpon>CXC_002_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
