@@ -32,7 +32,6 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  IdCliente = q.IdCliente,
                                  pe_nombreCompleto = q.pe_nombreCompleto,
                                  IdCobro_tipo = q.IdCobro_tipo,
-                                 tc_descripcion = q.tc_descripcion,
                                  cr_fecha = q.cr_fecha,
                                  cr_TotalCobro = q.cr_TotalCobro,
                                  cr_estado = q.cr_estado,
@@ -130,7 +129,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 #region Variables
                 int Secuencia = 1;
                 bool generar_diario = true;
-                string IdCtaCble_debe = string.Empty;
+                
                 string IdCtaCble_haber = string.Empty;
                 int IdTipoCbte = 0;
                 int IdTipoMoviCaja = 0;
@@ -143,29 +142,66 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     return false;
                 IdCtaCble_haber = cliente.IdCtaCble_cxc;
                 #endregion
-
-                var tipo_cobro = Context_cxc.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == info.IdCobro_tipo).FirstOrDefault();
-                if (tipo_cobro == null)
-                    return false;
-
+                
                 #region CtaCble Haber
-                if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.CAJA.ToString())
+                if (info.IdCobro_tipo != null)
                 {
-                    var caja = Context_caj.caj_Caja.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCaja == info.IdCaja).FirstOrDefault();
-                    if (caja == null)
+                    var tipo_cobro = Context_cxc.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == info.IdCobro_tipo).FirstOrDefault();
+                    if (tipo_cobro == null)
                         return false;
-                    IdCtaCble_debe = caja.IdCtaCble;
+
+                    
+                    if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.CAJA.ToString())
+                    {
+                        var caja = Context_caj.caj_Caja.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCaja == info.IdCaja).FirstOrDefault();
+                        if (caja == null)
+                            return false;
+                        info.lst_det.ForEach(q => q.IdCtaCble = caja.IdCtaCble);
+                    }
+                    else
+                        if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.TIP_COBRO.ToString())
+                    {
+                        if (info.IdCobro_tipo == null)
+                        {
+                            foreach (var item in info.lst_det)
+                            {
+                                var cta_x_tipo = Context_cxc.cxc_cobro_tipo_Param_conta_x_sucursal.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdCobro_tipo == item.IdCobro_tipo_det && q.IdSucursal == item.IdSucursal).FirstOrDefault();
+                                if (cta_x_tipo != null)
+                                    item.IdCtaCble = cta_x_tipo.IdCtaCble;
+                            }
+                        }
+                    }
                 }
                 else
-                    if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.TIP_COBRO.ToString())
                 {
-                    var cta_x_tipo = Context_cxc.cxc_cobro_tipo_Param_conta_x_sucursal.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCobro_tipo == info.IdCobro_tipo && q.IdSucursal == info.IdSucursal).FirstOrDefault();
-                    if (cta_x_tipo != null)
-                        IdCtaCble_debe = cta_x_tipo.IdCtaCble;
+                    foreach (var item in info.lst_det)
+                    {
+                        var tipo_cobro = Context_cxc.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == item.IdCobro_tipo_det).FirstOrDefault();
+                        if (tipo_cobro == null)
+                            return false;
+
+                        if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.CAJA.ToString())
+                        {
+                            var caja = Context_caj.caj_Caja.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCaja == info.IdCaja).FirstOrDefault();
+                            if (caja == null)
+                                return false;
+                            item.IdCtaCble = caja.IdCtaCble;
+                        }
+                        else
+                        if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.TIP_COBRO.ToString())
+                        {
+                            if (info.IdCobro_tipo == null)
+                            {
+                                var cta_x_tipo = Context_cxc.cxc_cobro_tipo_Param_conta_x_sucursal.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdCobro_tipo == item.IdCobro_tipo_det && q.IdSucursal == item.IdSucursal).FirstOrDefault();
+                                if (cta_x_tipo != null)
+                                    item.IdCtaCble = cta_x_tipo.IdCtaCble;
+                            }
+                        }
+                    }
                 }
-                if (string.IsNullOrEmpty(IdCtaCble_debe) || string.IsNullOrEmpty(IdCtaCble_haber))
-                    generar_diario = false;
-                
+               
+                if (info.lst_det.Where(q=> string.IsNullOrEmpty(q.IdCtaCble)).Count() > 0 || string.IsNullOrEmpty(IdCtaCble_haber))
+                    generar_diario = false;                
                 #endregion
 
                 if(generar_diario)
@@ -174,7 +210,10 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     var param_cxc = Context_cxc.cxc_Parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                     if (param_cxc == null)
                         return false;
-                                        
+                    var d = info.lst_det[0];
+                    var tipo_cobro = Context_cxc.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == d.IdCobro_tipo_det).FirstOrDefault();
+                    if (tipo_cobro == null)
+                        return false;
                     if (tipo_cobro.tc_Que_Tipo_Registro_Genera == cl_enumeradores.eTipoCobroGenera.DIARIO.ToString())
                     {
                         IdTipoCbte = param_cxc.pa_IdTipoCbteCble_CxC == null ? 0 : Convert.ToInt32(param_cxc.pa_IdTipoCbteCble_CxC);
@@ -270,27 +309,46 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         cb_Valor = Math.Round(info.lst_det.Sum(q => q.dc_ValorPago), 2, MidpointRounding.AwayFromZero),
                     };
                     Context_ct.ct_cbtecble.Add(diario);
-
-                    ct_cbtecble_det Debe = new ct_cbtecble_det
+                    Secuencia = 1;
+                    if (IdTipoMoviCaja != 0)
                     {
-                        IdEmpresa = diario.IdEmpresa,
-                        IdTipoCbte = diario.IdTipoCbte,
-                        IdCbteCble = diario.IdCbteCble,
-                        secuencia = 1,
-                        IdCtaCble = IdCtaCble_debe,
-                        dc_Valor = Math.Round(Convert.ToDouble(diario.cb_Valor), 2, MidpointRounding.AwayFromZero),
-                    };
+                        ct_cbtecble_det Debe = new ct_cbtecble_det
+                        {
+                            IdEmpresa = diario.IdEmpresa,
+                            IdTipoCbte = diario.IdTipoCbte,
+                            IdCbteCble = diario.IdCbteCble,
+                            secuencia = 1,
+                            IdCtaCble = info.lst_det[0].IdCtaCble,
+                            dc_Valor = Math.Round(Convert.ToDouble(diario.cb_Valor), 2, MidpointRounding.AwayFromZero),
+                        };
+                        Context_ct.ct_cbtecble_det.Add(Debe);
+                    }
+                    else
+                    {
+                        foreach (var item in info.lst_det)
+                        {
+                            ct_cbtecble_det Debe = new ct_cbtecble_det
+                            {
+                                IdEmpresa = diario.IdEmpresa,
+                                IdTipoCbte = diario.IdTipoCbte,
+                                IdCbteCble = diario.IdCbteCble,
+                                secuencia = Secuencia++,
+                                IdCtaCble = item.IdCtaCble,
+                                dc_Valor = Math.Round(Convert.ToDouble(item.dc_ValorPago), 2, MidpointRounding.AwayFromZero),
+                            };
+                        }
+                    }
 
                     ct_cbtecble_det Haber = new ct_cbtecble_det
                     {
                         IdEmpresa = diario.IdEmpresa,
                         IdTipoCbte = diario.IdTipoCbte,
                         IdCbteCble = diario.IdCbteCble,
-                        secuencia = 2,
+                        secuencia = Secuencia++,
                         IdCtaCble = IdCtaCble_haber,
                         dc_Valor = Math.Round(Convert.ToDouble(diario.cb_Valor), 2, MidpointRounding.AwayFromZero) * -1,
                     };
-                    Context_ct.ct_cbtecble_det.Add(Debe);
+                    
                     Context_ct.ct_cbtecble_det.Add(Haber);
                     #endregion
 
@@ -377,7 +435,6 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 #region Variables
                 int Secuencia = 1;
                 bool generar_diario = true;
-                string IdCtaCble_debe = string.Empty;
                 string IdCtaCble_haber = string.Empty;
                 int IdTipoCbte = 0;
                 int IdTipoMoviCaja = 0;
@@ -414,28 +471,65 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 IdCtaCble_haber = cliente.IdCtaCble_cxc;
                 #endregion
 
-                var tipo_cobro = Context_cxc.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == info.IdCobro_tipo).FirstOrDefault();
-                if (tipo_cobro == null)
-                    return false;
-
                 #region CtaCble Haber
-                if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.CAJA.ToString())
+                if (info.IdCobro_tipo != null)
                 {
-                    var caja = Context_caj.caj_Caja.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCaja == info.IdCaja).FirstOrDefault();
-                    if (caja == null)
+                    var tipo_cobro = Context_cxc.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == info.IdCobro_tipo).FirstOrDefault();
+                    if (tipo_cobro == null)
                         return false;
-                    IdCtaCble_debe = caja.IdCtaCble;
+
+
+                    if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.CAJA.ToString())
+                    {
+                        var caja = Context_caj.caj_Caja.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCaja == info.IdCaja).FirstOrDefault();
+                        if (caja == null)
+                            return false;
+                        info.lst_det.ForEach(q => q.IdCtaCble = caja.IdCtaCble);
+                    }
+                    else
+                        if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.TIP_COBRO.ToString())
+                    {
+                        if (info.IdCobro_tipo == null)
+                        {
+                            foreach (var item in info.lst_det)
+                            {
+                                var cta_x_tipo = Context_cxc.cxc_cobro_tipo_Param_conta_x_sucursal.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdCobro_tipo == item.IdCobro_tipo_det && q.IdSucursal == item.IdSucursal).FirstOrDefault();
+                                if (cta_x_tipo != null)
+                                    item.IdCtaCble = cta_x_tipo.IdCtaCble;
+                            }
+                        }
+                    }
                 }
                 else
-                    if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.TIP_COBRO.ToString())
                 {
-                    var cta_x_tipo = Context_cxc.cxc_cobro_tipo_Param_conta_x_sucursal.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCobro_tipo == info.IdCobro_tipo && q.IdSucursal == info.IdSucursal).FirstOrDefault();
-                    if (cta_x_tipo != null)
-                        IdCtaCble_debe = cta_x_tipo.IdCtaCble;
-                }
-                if (string.IsNullOrEmpty(IdCtaCble_debe) || string.IsNullOrEmpty(IdCtaCble_haber))
-                    generar_diario = false;
+                    foreach (var item in info.lst_det)
+                    {
+                        var tipo_cobro = Context_cxc.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == item.IdCobro_tipo_det).FirstOrDefault();
+                        if (tipo_cobro == null)
+                            return false;
 
+                        if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.CAJA.ToString())
+                        {
+                            var caja = Context_caj.caj_Caja.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCaja == info.IdCaja).FirstOrDefault();
+                            if (caja == null)
+                                return false;
+                            item.IdCtaCble = caja.IdCtaCble;
+                        }
+                        else
+                        if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.TIP_COBRO.ToString())
+                        {
+                            if (info.IdCobro_tipo == null)
+                            {
+                                var cta_x_tipo = Context_cxc.cxc_cobro_tipo_Param_conta_x_sucursal.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdCobro_tipo == item.IdCobro_tipo_det && q.IdSucursal == item.IdSucursal).FirstOrDefault();
+                                if (cta_x_tipo != null)
+                                    item.IdCtaCble = cta_x_tipo.IdCtaCble;
+                            }
+                        }
+                    }
+                }
+
+                if (info.lst_det.Where(q => string.IsNullOrEmpty(q.IdCtaCble)).Count() > 0 || string.IsNullOrEmpty(IdCtaCble_haber))
+                    generar_diario = false;
                 #endregion
 
                 if (generar_diario)
@@ -444,7 +538,10 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     var param_cxc = Context_cxc.cxc_Parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                     if (param_cxc == null)
                         return false;
-
+                    var d = info.lst_det[0];
+                    var tipo_cobro = Context_cxc.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == d.IdCobro_tipo_det).FirstOrDefault();
+                    if (tipo_cobro == null)
+                        return false;
                     if (tipo_cobro.tc_Que_Tipo_Registro_Genera == cl_enumeradores.eTipoCobroGenera.DIARIO.ToString())
                     {
                         IdTipoCbte = param_cxc.pa_IdTipoCbteCble_CxC == null ? 0 : Convert.ToInt32(param_cxc.pa_IdTipoCbteCble_CxC);
@@ -459,7 +556,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         IdTipoMoviCaja = param_cxc.pa_IdTipoMoviCaja_x_Cobros_x_cliente == null ? 0 : Convert.ToInt32(param_cxc.pa_IdTipoMoviCaja_x_Cobros_x_cliente);
                     }
 
-                    if (IdTipoCbte == 0 || IdTipoMoviCaja == 0)
+                    if (IdTipoCbte == 0)
                         generar_diario = false;
 
                     #endregion
@@ -498,7 +595,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 {
                     var relacion = Context_cxc.cxc_cobro_x_ct_cbtecble.Where(q => q.cbr_IdEmpresa == info.IdEmpresa && q.cbr_IdSucursal == info.IdSucursal && q.cbr_IdCobro == info.IdCobro).FirstOrDefault();
 
-                    #region Si tiene relacion creada
+                    #region Si no tiene relacion creada
                     if (generar_diario && relacion == null)
                     {
                         #region Diario
@@ -519,27 +616,47 @@ namespace Core.Erp.Data.CuentasPorCobrar
                             cb_Valor = Math.Round(info.lst_det.Sum(q => q.dc_ValorPago), 2, MidpointRounding.AwayFromZero),
                         };
                         Context_ct.ct_cbtecble.Add(diario);
-
-                        ct_cbtecble_det Debe = new ct_cbtecble_det
+                        Secuencia = 1;
+                        if (IdTipoMoviCaja != 0)
                         {
-                            IdEmpresa = diario.IdEmpresa,
-                            IdTipoCbte = diario.IdTipoCbte,
-                            IdCbteCble = diario.IdCbteCble,
-                            secuencia = 1,
-                            IdCtaCble = IdCtaCble_debe,
-                            dc_Valor = Math.Round(Convert.ToDouble(diario.cb_Valor), 2, MidpointRounding.AwayFromZero),
-                        };
+                            ct_cbtecble_det Debe = new ct_cbtecble_det
+                            {
+                                IdEmpresa = diario.IdEmpresa,
+                                IdTipoCbte = diario.IdTipoCbte,
+                                IdCbteCble = diario.IdCbteCble,
+                                secuencia = Secuencia++,
+                                IdCtaCble = info.lst_det[0].IdCtaCble,
+                                dc_Valor = Math.Round(Convert.ToDouble(diario.cb_Valor), 2, MidpointRounding.AwayFromZero),
+                            };
+                            Context_ct.ct_cbtecble_det.Add(Debe);
+                        }
+                        else
+                        {
+                            foreach (var item in info.lst_det)
+                            {
+                                ct_cbtecble_det Debe = new ct_cbtecble_det
+                                {
+                                    IdEmpresa = diario.IdEmpresa,
+                                    IdTipoCbte = diario.IdTipoCbte,
+                                    IdCbteCble = diario.IdCbteCble,
+                                    secuencia = Secuencia++,
+                                    IdCtaCble = item.IdCtaCble,
+                                    dc_Valor = Math.Round(Convert.ToDouble(item.dc_ValorPago), 2, MidpointRounding.AwayFromZero),
+                                };
+                                Context_ct.ct_cbtecble_det.Add(Debe);
+                            }
+                        }
 
                         ct_cbtecble_det Haber = new ct_cbtecble_det
                         {
                             IdEmpresa = diario.IdEmpresa,
                             IdTipoCbte = diario.IdTipoCbte,
                             IdCbteCble = diario.IdCbteCble,
-                            secuencia = 2,
+                            secuencia = Secuencia++,
                             IdCtaCble = IdCtaCble_haber,
                             dc_Valor = Math.Round(Convert.ToDouble(diario.cb_Valor), 2, MidpointRounding.AwayFromZero) * -1,
                         };
-                        Context_ct.ct_cbtecble_det.Add(Debe);
+
                         Context_ct.ct_cbtecble_det.Add(Haber);
                         #endregion
 
@@ -597,7 +714,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
 
                     else
 
-                    #region Si no tiene diario creado
+                    #region Si tiene diario creado
                     if (generar_diario && relacion != null)
                     {
                         #region Diario
@@ -619,26 +736,46 @@ namespace Core.Erp.Data.CuentasPorCobrar
                             Context_ct.ct_cbtecble_det.Remove(item);
                         }
 
-                        ct_cbtecble_det Debe = new ct_cbtecble_det
+                        Secuencia = 1;
+                        if (IdTipoMoviCaja != 0)
                         {
-                            IdEmpresa = relacion.ct_IdEmpresa,
-                            IdTipoCbte = relacion.ct_IdTipoCbte,
-                            IdCbteCble = relacion.ct_IdCbteCble,
-                            secuencia = 1,
-                            IdCtaCble = IdCtaCble_debe,
-                            dc_Valor = Math.Round(Convert.ToDouble(diario.cb_Valor), 2, MidpointRounding.AwayFromZero),
-                        };
+                            ct_cbtecble_det Debe = new ct_cbtecble_det
+                            {
+                                IdEmpresa = diario.IdEmpresa,
+                                IdTipoCbte = diario.IdTipoCbte,
+                                IdCbteCble = diario.IdCbteCble,
+                                secuencia = Secuencia++,
+                                IdCtaCble = info.lst_det[0].IdCtaCble,
+                                dc_Valor = Math.Round(Convert.ToDouble(diario.cb_Valor), 2, MidpointRounding.AwayFromZero),
+                            };
+                            Context_ct.ct_cbtecble_det.Add(Debe);
+                        }
+                        else
+                        {
+                            foreach (var item in info.lst_det)
+                            {
+                                ct_cbtecble_det Debe = new ct_cbtecble_det
+                                {
+                                    IdEmpresa = diario.IdEmpresa,
+                                    IdTipoCbte = diario.IdTipoCbte,
+                                    IdCbteCble = diario.IdCbteCble,
+                                    secuencia = Secuencia++,
+                                    IdCtaCble = item.IdCtaCble,
+                                    dc_Valor = Math.Round(Convert.ToDouble(item.dc_ValorPago), 2, MidpointRounding.AwayFromZero),
+                                };
+                                Context_ct.ct_cbtecble_det.Add(Debe);
+                            }
+                        }
 
                         ct_cbtecble_det Haber = new ct_cbtecble_det
                         {
                             IdEmpresa = relacion.ct_IdEmpresa,
                             IdTipoCbte = relacion.ct_IdTipoCbte,
                             IdCbteCble = relacion.ct_IdCbteCble,
-                            secuencia = 2,
+                            secuencia = Secuencia++,
                             IdCtaCble = IdCtaCble_haber,
                             dc_Valor = Math.Round(Convert.ToDouble(diario.cb_Valor), 2, MidpointRounding.AwayFromZero) * -1,
                         };
-                        Context_ct.ct_cbtecble_det.Add(Debe);
                         Context_ct.ct_cbtecble_det.Add(Haber);
                         #endregion
 
@@ -850,15 +987,16 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         IdSucursal = Entity.IdSucursal,
                         IdBodega = Entity.IdBodega,
                         IdCbteVta = Entity.IdCbteVta,
-                        cr_NumDocumento = Entity.vt_tipoDoc,
                         vt_Iva = Convert.ToDouble(Entity.vt_iva),
                         vt_Total =  Convert.ToDouble(Entity.vt_total),
                         pe_nombreCompleto = Entity.Nombres,
                         cr_fecha = Entity.vt_fecha,
-                        cr_fechaCobro = Convert.ToDateTime(Entity.vt_fech_venc),
                         vt_NumFactura = Entity.vt_NumFactura,
                         cr_observacion = Entity.vt_Observacion,
-                        vt_Subtotal = Convert.ToDouble(Entity.vt_Subtotal)
+                        vt_Subtotal = Convert.ToDouble(Entity.vt_Subtotal),
+                        IdCliente = Entity.IdCliente,
+                        IdEntidad = Entity.IdCliente,
+                        vt_tipoDoc = Entity.vt_tipoDoc,                        
                     };
                 }
                 return info;

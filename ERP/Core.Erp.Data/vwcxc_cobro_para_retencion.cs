@@ -28,5 +28,6 @@ namespace Core.Erp.Data
         public string vt_Observacion { get; set; }
         public string vt_NumFactura { get; set; }
         public string Su_Descripcion { get; set; }
+        public decimal IdCliente { get; set; }
     }
 }

@@ -125,6 +125,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  ESRetenIVA = q.ESRetenIVA,
                                  ESRetenFTE = q.ESRetenFTE,
                                  PorcentajeRet = q.PorcentajeRet,
+                                 cr_fecha = q.cr_fecha
                              }).ToList();
                 }
 

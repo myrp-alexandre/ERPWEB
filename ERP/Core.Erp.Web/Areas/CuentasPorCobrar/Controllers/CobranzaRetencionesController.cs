@@ -18,6 +18,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         cxc_cobro_det_Bus bus_det = new cxc_cobro_det_Bus();
         cxc_cobro_tipo_Bus bus_cobro_tipo = new cxc_cobro_tipo_Bus();
         cxc_cobro_det_ret_List List_det = new cxc_cobro_det_ret_List();
+        string mensaje = string.Empty;
         #region Index
         public ActionResult Index()
         {
@@ -47,6 +48,33 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         {
             var lst_retenciones = bus_cobro_tipo.get_list_retenciones(false);
             ViewBag.lst_retenciones = lst_retenciones;
+        }
+
+        private bool validar(cxc_cobro_Info i_validar, ref string msg)
+        {
+            i_validar.IdEntidad = i_validar.IdCliente;            
+            i_validar.cr_TotalCobro = i_validar.lst_det.Sum(q => q.dc_ValorPago);
+            i_validar.IdCaja = i_validar.IdCaja == 0 ? 1 : i_validar.IdCaja;
+            i_validar.lst_det.ForEach(q => { q.IdEmpresa = i_validar.IdEmpresa; q.IdSucursal = i_validar.IdSucursal; q.IdCobro = i_validar.IdCobro; q.IdBodega_Cbte = i_validar.IdBodega; q.IdCbte_vta_nota = i_validar.IdCbteVta; q.dc_TipoDocumento = i_validar.vt_tipoDoc; });
+            if (i_validar.lst_det.Count == 0)
+            {
+                msg = "No ha ingresado valores para realizar la retención";
+                return false;
+            }
+            if (i_validar.lst_det.Where(q => q.dc_ValorPago == 0).Count() > 0)
+            {
+                msg = "Existen documentos con valor aplicado 0";
+                return false;
+            }
+            string observacion = "Retención./ "+i_validar.vt_NumFactura+" # Ret./"+i_validar.cr_NumDocumento;
+            
+            i_validar.cr_observacion = observacion;
+            i_validar.cr_fechaCobro = i_validar.cr_fecha;
+            i_validar.cr_fechaDocu = i_validar.cr_fecha;            
+
+            i_validar.IdBanco = null;
+            i_validar.cr_Banco = null;
+            return true;
         }
 
 
@@ -88,14 +116,26 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         [HttpPost]
         public ActionResult AplicarRetencion(cxc_cobro_Info model)
         {
-
+            model.lst_det = List_det.get_list();
+            if (!validar(model,ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
             if (model.IdCobro != 0)
-                if(!bus_cobro.modificarDB(model))
-                    return View(model);                
+            {
+                if (!bus_cobro.modificarDB(model))
+                {
+                    ViewBag.mensaje = "No se ha podido modificar el registro";
+                    return View(model);
+                }
+            }
             else
                 if (!bus_cobro.guardarDB(model))
-                    return View(model);
-            
+            {
+                ViewBag.mensaje = "No se ha podido guardar el registro";
+                return View(model);
+            }            
             return RedirectToAction("Index");
         }
         #endregion

@@ -20,6 +20,9 @@ namespace Core.Erp.Web.Reportes.CuentasPorCobrar
 
         private void CXC_002_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
+            lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+            lbl_empresa.Text = empresa;
+            lbl_usuario.Text = usuario;
 
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);

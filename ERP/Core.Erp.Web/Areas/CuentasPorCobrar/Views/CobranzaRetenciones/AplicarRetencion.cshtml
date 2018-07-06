@@ -32,7 +32,7 @@
             bProcessing: true,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
-            success: function (data) {                
+            success: function (data) {
                 var valor = 0;
                 if (data.ESRetenFTE == "S") {
                     var subtotal = parseFloat($("#vt_Subtotal").val());
@@ -42,7 +42,7 @@
                     var iva = parseFloat($("#vt_Iva").val());
                     var porcentaje = Number(data.PorcentajeRet) / 100;
                     valor = Number(iva) * porcentaje;
-                }                
+                }
                 GridView_cobranza_ret_det.GetEditor('dc_ValorPago').SetValue(valor);
             },
             error: function (error) {
@@ -56,6 +56,10 @@
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdSucursal)
     @Html.HiddenFor(q => q.IdCobro)
+    @Html.HiddenFor(q => q.IdCliente)
+    @Html.HiddenFor(q => q.IdBodega)
+    @Html.HiddenFor(q => q.IdCbteVta)
+    @Html.HiddenFor(q => q.vt_tipoDoc)
     if (@ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -126,7 +130,7 @@
             </div>
         </div>
     </div>
-    
+
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>

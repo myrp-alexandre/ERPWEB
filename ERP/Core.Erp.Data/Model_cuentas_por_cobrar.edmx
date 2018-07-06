@@ -38,7 +38,7 @@
           <Property Name="IdCobro" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdCobro_a_aplicar" Type="numeric" Precision="18" Scale="0" />
           <Property Name="cr_Codigo" Type="varchar" MaxLength="10" />
-          <Property Name="IdCobro_tipo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IdCobro_tipo" Type="varchar" MaxLength="20" />
           <Property Name="IdCliente" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="cr_TotalCobro" Type="float" Nullable="false" />
           <Property Name="cr_fecha" Type="datetime" Nullable="false" />
@@ -235,8 +235,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro' no ti
             <PropertyRef Name="IdCobro" />
             <PropertyRef Name="IdCliente" />
             <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="IdCobro_tipo" />
-            <PropertyRef Name="tc_descripcion" />
             <PropertyRef Name="cr_fecha" />
             <PropertyRef Name="cr_TotalCobro" />
             <PropertyRef Name="Su_Descripcion" />
@@ -246,8 +244,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro' no ti
           <Property Name="IdCobro" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdCliente" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="IdCobro_tipo" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="tc_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdCobro_tipo" Type="varchar" MaxLength="20" />
           <Property Name="cr_fecha" Type="datetime" Nullable="false" />
           <Property Name="cr_TotalCobro" Type="float" Nullable="false" />
           <Property Name="cr_estado" Type="nvarchar" MaxLength="1" />
@@ -340,6 +337,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
             <PropertyRef Name="vt_fecha" />
             <PropertyRef Name="vt_Observacion" />
             <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="IdCliente" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
@@ -355,6 +353,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
           <Property Name="vt_Observacion" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="vt_NumFactura" Type="varchar" MaxLength="71" />
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="IdCliente" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <Association Name="FK_cxc_Catalogo_cxc_CatalogoTipo">
           <End Role="cxc_CatalogoTipo" Type="Self.cxc_CatalogoTipo" Multiplicity="1" />
@@ -369,7 +368,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_cxc_cobro_cxc_cobro_tipo">
-          <End Role="cxc_cobro_tipo" Type="Self.cxc_cobro_tipo" Multiplicity="1" />
+          <End Role="cxc_cobro_tipo" Type="Self.cxc_cobro_tipo" Multiplicity="0..1" />
           <End Role="cxc_cobro" Type="Self.cxc_cobro" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="cxc_cobro_tipo">
@@ -518,7 +517,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
     [vwcxc_cobro].[IdCliente] AS [IdCliente], 
     [vwcxc_cobro].[pe_nombreCompleto] AS [pe_nombreCompleto], 
     [vwcxc_cobro].[IdCobro_tipo] AS [IdCobro_tipo], 
-    [vwcxc_cobro].[tc_descripcion] AS [tc_descripcion], 
     [vwcxc_cobro].[cr_fecha] AS [cr_fecha], 
     [vwcxc_cobro].[cr_TotalCobro] AS [cr_TotalCobro], 
     [vwcxc_cobro].[cr_estado] AS [cr_estado], 
@@ -585,7 +583,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
     [vwcxc_cobro_para_retencion].[vt_fech_venc] AS [vt_fech_venc], 
     [vwcxc_cobro_para_retencion].[vt_Observacion] AS [vt_Observacion], 
     [vwcxc_cobro_para_retencion].[vt_NumFactura] AS [vt_NumFactura], 
-    [vwcxc_cobro_para_retencion].[Su_Descripcion] AS [Su_Descripcion]
+    [vwcxc_cobro_para_retencion].[Su_Descripcion] AS [Su_Descripcion], 
+    [vwcxc_cobro_para_retencion].[IdCliente] AS [IdCliente]
     FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_cxc_Catalogo_cxc_CatalogoTipo" Association="Self.FK_cxc_Catalogo_cxc_CatalogoTipo">
@@ -658,28 +657,28 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
             <End Role="cxc_cobro_tipo_Param_conta_x_sucursal" EntitySet="cxc_cobro_tipo_Param_conta_x_sucursal" />
           </AssociationSet>
           <EntitySet Name="cxc_cobro_x_ct_cbtecble" EntityType="Model_cuentas_por_cobrar.cxc_cobro_x_ct_cbtecble" />
-          <EntitySet Name="cxc_cobro" EntityType="Model_cuentas_por_cobrar.cxc_cobro" />
-          <EntitySet Name="vwcxc_cobro" EntityType="Model_cuentas_por_cobrar.vwcxc_cobro" />
-          <AssociationSet Name="FK_cxc_cobro_cxc_cobro_tipo" Association="Model_cuentas_por_cobrar.FK_cxc_cobro_cxc_cobro_tipo">
-            <End Role="cxc_cobro_tipo" EntitySet="cxc_cobro_tipo" />
-            <End Role="cxc_cobro" EntitySet="cxc_cobro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_cxc_cobro_x_ct_cbtecble_cxc_cobro" Association="Model_cuentas_por_cobrar.FK_cxc_cobro_x_ct_cbtecble_cxc_cobro">
-            <End Role="cxc_cobro" EntitySet="cxc_cobro" />
-            <End Role="cxc_cobro_x_ct_cbtecble" EntitySet="cxc_cobro_x_ct_cbtecble" />
-          </AssociationSet>
           <EntitySet Name="cxc_cobro_det" EntityType="Model_cuentas_por_cobrar.cxc_cobro_det" />
           <EntitySet Name="vwcxc_cobro_det" EntityType="Model_cuentas_por_cobrar.vwcxc_cobro_det" />
-          <AssociationSet Name="FK_cxc_cobro_det_cxc_cobro" Association="Model_cuentas_por_cobrar.FK_cxc_cobro_det_cxc_cobro">
-            <End Role="cxc_cobro" EntitySet="cxc_cobro" />
-            <End Role="cxc_cobro_det" EntitySet="cxc_cobro_det" />
-          </AssociationSet>
           <AssociationSet Name="FK_cxc_cobro_det_cxc_cobro_tipo" Association="Model_cuentas_por_cobrar.FK_cxc_cobro_det_cxc_cobro_tipo">
             <End Role="cxc_cobro_tipo" EntitySet="cxc_cobro_tipo" />
             <End Role="cxc_cobro_det" EntitySet="cxc_cobro_det" />
           </AssociationSet>
           <EntitySet Name="vwcxc_cobro_det_retencion" EntityType="Model_cuentas_por_cobrar.vwcxc_cobro_det_retencion" />
           <EntitySet Name="vwcxc_cobro_para_retencion" EntityType="Model_cuentas_por_cobrar.vwcxc_cobro_para_retencion" />
+          <EntitySet Name="cxc_cobro" EntityType="Model_cuentas_por_cobrar.cxc_cobro" />
+          <AssociationSet Name="FK_cxc_cobro_cxc_cobro_tipo" Association="Model_cuentas_por_cobrar.FK_cxc_cobro_cxc_cobro_tipo">
+            <End Role="cxc_cobro_tipo" EntitySet="cxc_cobro_tipo" />
+            <End Role="cxc_cobro" EntitySet="cxc_cobro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cxc_cobro_det_cxc_cobro" Association="Model_cuentas_por_cobrar.FK_cxc_cobro_det_cxc_cobro">
+            <End Role="cxc_cobro" EntitySet="cxc_cobro" />
+            <End Role="cxc_cobro_det" EntitySet="cxc_cobro_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cxc_cobro_x_ct_cbtecble_cxc_cobro" Association="Model_cuentas_por_cobrar.FK_cxc_cobro_x_ct_cbtecble_cxc_cobro">
+            <End Role="cxc_cobro" EntitySet="cxc_cobro" />
+            <End Role="cxc_cobro_x_ct_cbtecble" EntitySet="cxc_cobro_x_ct_cbtecble" />
+          </AssociationSet>
+          <EntitySet Name="vwcxc_cobro" EntityType="Model_cuentas_por_cobrar.vwcxc_cobro" />
         </EntityContainer>
         <EntityType Name="cxc_Catalogo">
           <Key>
@@ -755,8 +754,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
           <NavigationProperty Name="cxc_Parametro" Relationship="Model_cuentas_por_cobrar.FK_cxc_Parametro_cxc_cobro_tipo" FromRole="cxc_cobro_tipo" ToRole="cxc_Parametro" />
           <NavigationProperty Name="cxc_Parametro1" Relationship="Model_cuentas_por_cobrar.FK_cxc_Parametro_cxc_cobro_tipo1" FromRole="cxc_cobro_tipo" ToRole="cxc_Parametro" />
           <NavigationProperty Name="cxc_cobro_tipo_Param_conta_x_sucursal" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_tipo_Param_conta_x_sucursal_cxc_cobro_tipo" FromRole="cxc_cobro_tipo" ToRole="cxc_cobro_tipo_Param_conta_x_sucursal" />
-          <NavigationProperty Name="cxc_cobro" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_cxc_cobro_tipo" FromRole="cxc_cobro_tipo" ToRole="cxc_cobro" />
           <NavigationProperty Name="cxc_cobro_det" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_det_cxc_cobro_tipo" FromRole="cxc_cobro_tipo" ToRole="cxc_cobro_det" />
+          <NavigationProperty Name="cxc_cobro" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_cxc_cobro_tipo" FromRole="cxc_cobro_tipo" ToRole="cxc_cobro" />
         </EntityType>
         <EntityType Name="cxc_cobro_tipo_motivo">
           <Key>
@@ -908,101 +907,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
           <Property Name="observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="cxc_cobro" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_x_ct_cbtecble_cxc_cobro" FromRole="cxc_cobro_x_ct_cbtecble" ToRole="cxc_cobro" />
         </EntityType>
-        <EntityType Name="cxc_cobro">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdCobro" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdCobro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdCobro_a_aplicar" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="cr_Codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdCobro_tipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="cr_TotalCobro" Type="Double" Nullable="false" />
-          <Property Name="cr_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="cr_fechaDocu" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="cr_fechaCobro" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="cr_observacion" Type="String" Nullable="false" MaxLength="700" FixedLength="false" Unicode="false" />
-          <Property Name="cr_Banco" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cr_cuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="cr_NumDocumento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="cr_Tarjeta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cr_propietarioCta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="cr_estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="cr_recibo" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="cr_es_anticipo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdBanco" Type="Int32" />
-          <Property Name="IdCaja" Type="Int32" Nullable="false" />
-          <Property Name="MotiAnula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoNotaCredito" Type="Int32" />
-          <NavigationProperty Name="cxc_cobro_tipo" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_cxc_cobro_tipo" FromRole="cxc_cobro" ToRole="cxc_cobro_tipo" />
-          <NavigationProperty Name="cxc_cobro_x_ct_cbtecble" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_x_ct_cbtecble_cxc_cobro" FromRole="cxc_cobro" ToRole="cxc_cobro_x_ct_cbtecble" />
-          <NavigationProperty Name="cxc_cobro_det" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_det_cxc_cobro" FromRole="cxc_cobro" ToRole="cxc_cobro_det" />
-        </EntityType>
-        <EntityType Name="vwcxc_cobro">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdCobro" />
-            <PropertyRef Name="IdCliente" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="IdCobro_tipo" />
-            <PropertyRef Name="tc_descripcion" />
-            <PropertyRef Name="cr_fecha" />
-            <PropertyRef Name="cr_TotalCobro" />
-            <PropertyRef Name="Su_Descripcion" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdCobro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IdCobro_tipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="tc_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cr_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="cr_TotalCobro" Type="Double" Nullable="false" />
-          <Property Name="cr_estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
-        </EntityType>
-        <Association Name="FK_cxc_cobro_cxc_cobro_tipo">
-          <End Type="Model_cuentas_por_cobrar.cxc_cobro_tipo" Role="cxc_cobro_tipo" Multiplicity="1" />
-          <End Type="Model_cuentas_por_cobrar.cxc_cobro" Role="cxc_cobro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cxc_cobro_tipo">
-              <PropertyRef Name="IdCobro_tipo" />
-            </Principal>
-            <Dependent Role="cxc_cobro">
-              <PropertyRef Name="IdCobro_tipo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_cxc_cobro_x_ct_cbtecble_cxc_cobro">
-          <End Type="Model_cuentas_por_cobrar.cxc_cobro" Role="cxc_cobro" Multiplicity="1" />
-          <End Type="Model_cuentas_por_cobrar.cxc_cobro_x_ct_cbtecble" Role="cxc_cobro_x_ct_cbtecble" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cxc_cobro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSucursal" />
-              <PropertyRef Name="IdCobro" />
-            </Principal>
-            <Dependent Role="cxc_cobro_x_ct_cbtecble">
-              <PropertyRef Name="cbr_IdEmpresa" />
-              <PropertyRef Name="cbr_IdSucursal" />
-              <PropertyRef Name="cbr_IdCobro" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="cxc_cobro_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1028,8 +932,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
           <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="IdCobro_tipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="cxc_cobro" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_det_cxc_cobro" FromRole="cxc_cobro_det" ToRole="cxc_cobro" />
           <NavigationProperty Name="cxc_cobro_tipo" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_det_cxc_cobro_tipo" FromRole="cxc_cobro_det" ToRole="cxc_cobro_tipo" />
+          <NavigationProperty Name="cxc_cobro" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_det_cxc_cobro" FromRole="cxc_cobro_det" ToRole="cxc_cobro" />
         </EntityType>
         <EntityType Name="vwcxc_cobro_det">
           <Key>
@@ -1070,22 +974,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
           <Property Name="IdCliente" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="pe_nombreCompleto" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK_cxc_cobro_det_cxc_cobro">
-          <End Type="Model_cuentas_por_cobrar.cxc_cobro" Role="cxc_cobro" Multiplicity="1" />
-          <End Type="Model_cuentas_por_cobrar.cxc_cobro_det" Role="cxc_cobro_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cxc_cobro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSucursal" />
-              <PropertyRef Name="IdCobro" />
-            </Principal>
-            <Dependent Role="cxc_cobro_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSucursal" />
-              <PropertyRef Name="IdCobro" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_cxc_cobro_det_cxc_cobro_tipo">
           <End Type="Model_cuentas_por_cobrar.cxc_cobro_tipo" Role="cxc_cobro_tipo" Multiplicity="1" />
           <End Type="Model_cuentas_por_cobrar.cxc_cobro_det" Role="cxc_cobro_det" Multiplicity="*" />
@@ -1140,6 +1028,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
             <PropertyRef Name="vt_fecha" />
             <PropertyRef Name="vt_Observacion" />
             <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="IdCliente" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdSucursal" Type="Int32" Nullable="false" />
@@ -1154,6 +1043,115 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
           <Property Name="vt_fech_venc" Type="DateTime" Precision="3" />
           <Property Name="vt_Observacion" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="vt_NumFactura" Type="String" MaxLength="71" FixedLength="false" Unicode="false" />
+          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="cxc_cobro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdCobro" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdCobro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdCobro_a_aplicar" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="cr_Codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdCobro_tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="cr_TotalCobro" Type="Double" Nullable="false" />
+          <Property Name="cr_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cr_fechaDocu" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cr_fechaCobro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cr_observacion" Type="String" Nullable="false" MaxLength="700" FixedLength="false" Unicode="false" />
+          <Property Name="cr_Banco" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cr_cuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cr_NumDocumento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cr_Tarjeta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cr_propietarioCta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cr_estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="cr_recibo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="cr_es_anticipo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdBanco" Type="Int32" />
+          <Property Name="IdCaja" Type="Int32" Nullable="false" />
+          <Property Name="MotiAnula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoNotaCredito" Type="Int32" />
+          <NavigationProperty Name="cxc_cobro_tipo" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_cxc_cobro_tipo" FromRole="cxc_cobro" ToRole="cxc_cobro_tipo" />
+          <NavigationProperty Name="cxc_cobro_det" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_det_cxc_cobro" FromRole="cxc_cobro" ToRole="cxc_cobro_det" />
+          <NavigationProperty Name="cxc_cobro_x_ct_cbtecble" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_x_ct_cbtecble_cxc_cobro" FromRole="cxc_cobro" ToRole="cxc_cobro_x_ct_cbtecble" />
+        </EntityType>
+        <Association Name="FK_cxc_cobro_cxc_cobro_tipo">
+          <End Type="Model_cuentas_por_cobrar.cxc_cobro_tipo" Role="cxc_cobro_tipo" Multiplicity="0..1" />
+          <End Type="Model_cuentas_por_cobrar.cxc_cobro" Role="cxc_cobro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cxc_cobro_tipo">
+              <PropertyRef Name="IdCobro_tipo" />
+            </Principal>
+            <Dependent Role="cxc_cobro">
+              <PropertyRef Name="IdCobro_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cxc_cobro_det_cxc_cobro">
+          <End Type="Model_cuentas_por_cobrar.cxc_cobro" Role="cxc_cobro" Multiplicity="1" />
+          <End Type="Model_cuentas_por_cobrar.cxc_cobro_det" Role="cxc_cobro_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cxc_cobro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdCobro" />
+            </Principal>
+            <Dependent Role="cxc_cobro_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdCobro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cxc_cobro_x_ct_cbtecble_cxc_cobro">
+          <End Type="Model_cuentas_por_cobrar.cxc_cobro" Role="cxc_cobro" Multiplicity="1" />
+          <End Type="Model_cuentas_por_cobrar.cxc_cobro_x_ct_cbtecble" Role="cxc_cobro_x_ct_cbtecble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cxc_cobro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdCobro" />
+            </Principal>
+            <Dependent Role="cxc_cobro_x_ct_cbtecble">
+              <PropertyRef Name="cbr_IdEmpresa" />
+              <PropertyRef Name="cbr_IdSucursal" />
+              <PropertyRef Name="cbr_IdCobro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwcxc_cobro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdCobro" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="cr_fecha" />
+            <PropertyRef Name="cr_TotalCobro" />
+            <PropertyRef Name="Su_Descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdCobro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdCobro_tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cr_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cr_TotalCobro" Type="Double" Nullable="false" />
+          <Property Name="cr_estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
@@ -1302,61 +1300,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="cxc_cobro">
-            <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.cxc_cobro">
-              <MappingFragment StoreEntitySet="cxc_cobro">
-                <ScalarProperty Name="IdTipoNotaCredito" ColumnName="IdTipoNotaCredito" />
-                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
-                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
-                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
-                <ScalarProperty Name="ip" ColumnName="ip" />
-                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="cr_es_anticipo" ColumnName="cr_es_anticipo" />
-                <ScalarProperty Name="cr_recibo" ColumnName="cr_recibo" />
-                <ScalarProperty Name="cr_estado" ColumnName="cr_estado" />
-                <ScalarProperty Name="cr_propietarioCta" ColumnName="cr_propietarioCta" />
-                <ScalarProperty Name="cr_Tarjeta" ColumnName="cr_Tarjeta" />
-                <ScalarProperty Name="cr_NumDocumento" ColumnName="cr_NumDocumento" />
-                <ScalarProperty Name="cr_cuenta" ColumnName="cr_cuenta" />
-                <ScalarProperty Name="cr_Banco" ColumnName="cr_Banco" />
-                <ScalarProperty Name="cr_observacion" ColumnName="cr_observacion" />
-                <ScalarProperty Name="cr_fechaCobro" ColumnName="cr_fechaCobro" />
-                <ScalarProperty Name="cr_fechaDocu" ColumnName="cr_fechaDocu" />
-                <ScalarProperty Name="cr_fecha" ColumnName="cr_fecha" />
-                <ScalarProperty Name="cr_TotalCobro" ColumnName="cr_TotalCobro" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="IdCobro_tipo" ColumnName="IdCobro_tipo" />
-                <ScalarProperty Name="cr_Codigo" ColumnName="cr_Codigo" />
-                <ScalarProperty Name="IdCobro_a_aplicar" ColumnName="IdCobro_a_aplicar" />
-                <ScalarProperty Name="IdCobro" ColumnName="IdCobro" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwcxc_cobro">
-            <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.vwcxc_cobro">
-              <MappingFragment StoreEntitySet="vwcxc_cobro">
-                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
-                <ScalarProperty Name="cr_estado" ColumnName="cr_estado" />
-                <ScalarProperty Name="cr_TotalCobro" ColumnName="cr_TotalCobro" />
-                <ScalarProperty Name="cr_fecha" ColumnName="cr_fecha" />
-                <ScalarProperty Name="tc_descripcion" ColumnName="tc_descripcion" />
-                <ScalarProperty Name="IdCobro_tipo" ColumnName="IdCobro_tipo" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="IdCobro" ColumnName="IdCobro" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="cxc_cobro_det">
             <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.cxc_cobro_det">
               <MappingFragment StoreEntitySet="cxc_cobro_det">
@@ -1433,6 +1376,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
           <EntitySetMapping Name="vwcxc_cobro_para_retencion">
             <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.vwcxc_cobro_para_retencion">
               <MappingFragment StoreEntitySet="vwcxc_cobro_para_retencion">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
                 <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
                 <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
                 <ScalarProperty Name="vt_Observacion" ColumnName="vt_Observacion" />
@@ -1445,6 +1389,60 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
                 <ScalarProperty Name="vt_tipoDoc" ColumnName="vt_tipoDoc" />
                 <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
                 <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cxc_cobro">
+            <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.cxc_cobro">
+              <MappingFragment StoreEntitySet="cxc_cobro">
+                <ScalarProperty Name="IdTipoNotaCredito" ColumnName="IdTipoNotaCredito" />
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="cr_es_anticipo" ColumnName="cr_es_anticipo" />
+                <ScalarProperty Name="cr_recibo" ColumnName="cr_recibo" />
+                <ScalarProperty Name="cr_estado" ColumnName="cr_estado" />
+                <ScalarProperty Name="cr_propietarioCta" ColumnName="cr_propietarioCta" />
+                <ScalarProperty Name="cr_Tarjeta" ColumnName="cr_Tarjeta" />
+                <ScalarProperty Name="cr_NumDocumento" ColumnName="cr_NumDocumento" />
+                <ScalarProperty Name="cr_cuenta" ColumnName="cr_cuenta" />
+                <ScalarProperty Name="cr_Banco" ColumnName="cr_Banco" />
+                <ScalarProperty Name="cr_observacion" ColumnName="cr_observacion" />
+                <ScalarProperty Name="cr_fechaCobro" ColumnName="cr_fechaCobro" />
+                <ScalarProperty Name="cr_fechaDocu" ColumnName="cr_fechaDocu" />
+                <ScalarProperty Name="cr_fecha" ColumnName="cr_fecha" />
+                <ScalarProperty Name="cr_TotalCobro" ColumnName="cr_TotalCobro" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdCobro_tipo" ColumnName="IdCobro_tipo" />
+                <ScalarProperty Name="cr_Codigo" ColumnName="cr_Codigo" />
+                <ScalarProperty Name="IdCobro_a_aplicar" ColumnName="IdCobro_a_aplicar" />
+                <ScalarProperty Name="IdCobro" ColumnName="IdCobro" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwcxc_cobro">
+            <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.vwcxc_cobro">
+              <MappingFragment StoreEntitySet="vwcxc_cobro">
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="cr_estado" ColumnName="cr_estado" />
+                <ScalarProperty Name="cr_TotalCobro" ColumnName="cr_TotalCobro" />
+                <ScalarProperty Name="cr_fecha" ColumnName="cr_fecha" />
+                <ScalarProperty Name="IdCobro_tipo" ColumnName="IdCobro_tipo" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdCobro" ColumnName="IdCobro" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>

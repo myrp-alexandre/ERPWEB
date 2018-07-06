@@ -20,7 +20,6 @@ namespace Core.Erp.Data
         public decimal IdCliente { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string IdCobro_tipo { get; set; }
-        public string tc_descripcion { get; set; }
         public System.DateTime cr_fecha { get; set; }
         public double cr_TotalCobro { get; set; }
         public string cr_estado { get; set; }
