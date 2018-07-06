@@ -1,10 +1,9 @@
 @using System.Web.UI.WebControls;
-@model Core.Erp.Info.CuentasPorCobrar.cxc_cobro_Info
 @{
-    var grid = Html.DevExpress().GridView(settings =>
-    {
+    var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_cobranza_ret_det";
-        settings.CallbackRouteValues = new { Controller = "CobranzaRetenciones", Action = "GridViewPartial_cobranza_ret_det" };
+
+        settings.CallbackRouteValues = new { Controller = "CobranzaRetenciones", Action = "GridViewPartial_cobranza_ret_det", Area = "CuentasPorCobrar" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "secuencial";
 
@@ -54,7 +53,7 @@
         });
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(30);
             column.FieldName = "dc_ValorPago";
             column.Caption = "V. aplicado";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
@@ -69,4 +68,4 @@
 
     });
 }
-@grid.Bind(Model.lst_det).GetHtml()
+@grid.Bind(Model).GetHtml()
