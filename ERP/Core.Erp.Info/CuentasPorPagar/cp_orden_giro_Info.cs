@@ -88,6 +88,8 @@ namespace Core.Erp.Info.CuentasPorPagar
         public double Total_Pagado { get; set; }
         public Nullable<double> Saldo_OG { get; set; }
         public cp_orden_giro_pagos_sri_Info info_forma_pago { get; set; }
+
+        public bool seleccionado { get; set; }
         public cp_orden_giro_Info ()
         {
             info_cuota = new cp_cuotas_x_doc_Info();
