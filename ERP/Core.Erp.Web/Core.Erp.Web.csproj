@@ -8587,6 +8587,7 @@
     <Content Include="Areas\CuentasPorCobrar\Views\CobranzaRetenciones\AplicarRetencion.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\CobranzaRetenciones\_GridViewPartial_cobranza_ret_det.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\CobranzaRetenciones\_GridViewPartial_cobranza_ret.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_002.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
