@@ -597,7 +597,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXC_002' no tien
           <Property Name="vt_Subtotal" Type="float" />
           <Property Name="vt_iva" Type="float" />
           <Property Name="vt_total" Type="float" />
-          <Property Name="PorcentajeRet" Type="float" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXC_002_diario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1605,7 +1604,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_001' no tien
             <PropertyRef Name="DescripcionProcesoNomina" />
             <PropertyRef Name="Valor" />
             <PropertyRef Name="Su_Descripcion" />
-            <PropertyRef Name="em_ruc" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdNominaTipo" Type="int" Nullable="false" />
@@ -1641,7 +1639,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_001' no tien
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
           <Property Name="em_fechaIngaRol" Type="datetime" />
           <Property Name="Periodo" Type="varchar" MaxLength="64" />
-          <Property Name="em_ruc" Type="nvarchar" MaxLength="13" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -2517,8 +2514,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_011' no tien
     [VWCXC_002].[vt_fecha] AS [vt_fecha], 
     [VWCXC_002].[vt_Subtotal] AS [vt_Subtotal], 
     [VWCXC_002].[vt_iva] AS [vt_iva], 
-    [VWCXC_002].[vt_total] AS [vt_total], 
-    [VWCXC_002].[PorcentajeRet] AS [PorcentajeRet]
+    [VWCXC_002].[vt_total] AS [vt_total]
     FROM [web].[VWCXC_002] AS [VWCXC_002]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWCXC_002_diario" EntityType="Self.VWCXC_002_diario" store:Type="Views" store:Schema="web">
@@ -3136,8 +3132,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_011' no tien
     [VWROL_001].[Valor] AS [Valor], 
     [VWROL_001].[Su_Descripcion] AS [Su_Descripcion], 
     [VWROL_001].[em_fechaIngaRol] AS [em_fechaIngaRol], 
-    [VWROL_001].[Periodo] AS [Periodo], 
-    [VWROL_001].[em_ruc] AS [em_ruc]
+    [VWROL_001].[Periodo] AS [Periodo]
     FROM [web].[VWROL_001] AS [VWROL_001]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWROL_002" EntityType="Self.VWROL_002" store:Type="Views" store:Schema="web">
@@ -3570,9 +3565,9 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_011' no tien
           <EntitySet Name="VWFAC_003" EntityType="Model_reportes.VWFAC_003" />
           <EntitySet Name="VWFAC_003_cuotas" EntityType="Model_reportes.VWFAC_003_cuotas" />
           <EntitySet Name="VWFAC_004" EntityType="Model_reportes.VWFAC_004" />
-          <EntitySet Name="VWCXC_002_diario" EntityType="Model_reportes.VWCXC_002_diario" />
           <EntitySet Name="VWROL_001" EntityType="Model_reportes.VWROL_001" />
           <EntitySet Name="VWCXC_002" EntityType="Model_reportes.VWCXC_002" />
+          <EntitySet Name="VWCXC_002_diario" EntityType="Model_reportes.VWCXC_002_diario" />
         </EntityContainer>
         <EntityType Name="Af_SPACTF_004_detalle">
           <Key>
@@ -5765,37 +5760,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_011' no tien
           <Property Name="IdCaja" Type="Int32" Nullable="false" />
           <Property Name="Caja" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="VWCXC_002_diario">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdCobro" />
-            <PropertyRef Name="secuencial" />
-            <PropertyRef Name="IdCbte_vta_nota" />
-            <PropertyRef Name="IdEmpresa_ct" />
-            <PropertyRef Name="IdTipoCbte_ct" />
-            <PropertyRef Name="IdCbteCble_ct" />
-            <PropertyRef Name="IdCtaCble" />
-            <PropertyRef Name="pc_Cuenta" />
-            <PropertyRef Name="dc_Valor" />
-            <PropertyRef Name="dc_Valor_Debe" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdCobro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="secuencial" Type="Int32" Nullable="false" />
-          <Property Name="dc_TipoDocumento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdBodega_Cbte" Type="Int32" />
-          <Property Name="IdCbte_vta_nota" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdEmpresa_ct" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbte_ct" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteCble_ct" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pc_Cuenta" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="dc_Valor" Type="Double" Nullable="false" />
-          <Property Name="dc_Valor_Debe" Type="Double" Nullable="false" />
-          <Property Name="dc_Valor_Haber" Type="Double" />
-        </EntityType>
         <EntityType Name="VWROL_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -5898,6 +5862,37 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_011' no tien
           <Property Name="vt_iva" Type="Double" />
           <Property Name="vt_total" Type="Double" />
           <Property Name="PorcentajeRet" Type="Double" />
+        </EntityType>
+        <EntityType Name="VWCXC_002_diario">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdCobro" />
+            <PropertyRef Name="secuencial" />
+            <PropertyRef Name="IdCbte_vta_nota" />
+            <PropertyRef Name="IdEmpresa_ct" />
+            <PropertyRef Name="IdTipoCbte_ct" />
+            <PropertyRef Name="IdCbteCble_ct" />
+            <PropertyRef Name="IdCtaCble" />
+            <PropertyRef Name="pc_Cuenta" />
+            <PropertyRef Name="dc_Valor" />
+            <PropertyRef Name="dc_Valor_Debe" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdCobro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="secuencial" Type="Int32" Nullable="false" />
+          <Property Name="dc_TipoDocumento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdBodega_Cbte" Type="Int32" />
+          <Property Name="IdCbte_vta_nota" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa_ct" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte_ct" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble_ct" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pc_Cuenta" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="dc_Valor" Type="Double" Nullable="false" />
+          <Property Name="dc_Valor_Debe" Type="Double" Nullable="false" />
+          <Property Name="dc_Valor_Haber" Type="Double" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -7357,31 +7352,9 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_011' no tien
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VWCXC_002_diario">
-            <EntityTypeMapping TypeName="Model_reportes.VWCXC_002_diario">
-              <MappingFragment StoreEntitySet="VWCXC_002_diario">
-                <ScalarProperty Name="dc_Valor_Haber" ColumnName="dc_Valor_Haber" />
-                <ScalarProperty Name="dc_Valor_Debe" ColumnName="dc_Valor_Debe" />
-                <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
-                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
-                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
-                <ScalarProperty Name="IdCbteCble_ct" ColumnName="IdCbteCble_ct" />
-                <ScalarProperty Name="IdTipoCbte_ct" ColumnName="IdTipoCbte_ct" />
-                <ScalarProperty Name="IdEmpresa_ct" ColumnName="IdEmpresa_ct" />
-                <ScalarProperty Name="IdCbte_vta_nota" ColumnName="IdCbte_vta_nota" />
-                <ScalarProperty Name="IdBodega_Cbte" ColumnName="IdBodega_Cbte" />
-                <ScalarProperty Name="dc_TipoDocumento" ColumnName="dc_TipoDocumento" />
-                <ScalarProperty Name="secuencial" ColumnName="secuencial" />
-                <ScalarProperty Name="IdCobro" ColumnName="IdCobro" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VWROL_001">
             <EntityTypeMapping TypeName="Model_reportes.VWROL_001">
               <MappingFragment StoreEntitySet="VWROL_001">
-                <ScalarProperty Name="em_ruc" ColumnName="em_ruc" />
                 <ScalarProperty Name="Periodo" ColumnName="Periodo" />
                 <ScalarProperty Name="em_fechaIngaRol" ColumnName="em_fechaIngaRol" />
                 <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
@@ -7422,7 +7395,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_011' no tien
           <EntitySetMapping Name="VWCXC_002">
             <EntityTypeMapping TypeName="Model_reportes.VWCXC_002">
               <MappingFragment StoreEntitySet="VWCXC_002">
-                <ScalarProperty Name="PorcentajeRet" ColumnName="PorcentajeRet" />
                 <ScalarProperty Name="vt_total" ColumnName="vt_total" />
                 <ScalarProperty Name="vt_iva" ColumnName="vt_iva" />
                 <ScalarProperty Name="vt_Subtotal" ColumnName="vt_Subtotal" />
@@ -7436,6 +7408,27 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_011' no tien
                 <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
                 <ScalarProperty Name="dc_ValorPago" ColumnName="dc_ValorPago" />
                 <ScalarProperty Name="tc_descripcion" ColumnName="tc_descripcion" />
+                <ScalarProperty Name="IdCbte_vta_nota" ColumnName="IdCbte_vta_nota" />
+                <ScalarProperty Name="IdBodega_Cbte" ColumnName="IdBodega_Cbte" />
+                <ScalarProperty Name="dc_TipoDocumento" ColumnName="dc_TipoDocumento" />
+                <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+                <ScalarProperty Name="IdCobro" ColumnName="IdCobro" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWCXC_002_diario">
+            <EntityTypeMapping TypeName="Model_reportes.VWCXC_002_diario">
+              <MappingFragment StoreEntitySet="VWCXC_002_diario">
+                <ScalarProperty Name="dc_Valor_Haber" ColumnName="dc_Valor_Haber" />
+                <ScalarProperty Name="dc_Valor_Debe" ColumnName="dc_Valor_Debe" />
+                <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
+                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdCbteCble_ct" ColumnName="IdCbteCble_ct" />
+                <ScalarProperty Name="IdTipoCbte_ct" ColumnName="IdTipoCbte_ct" />
+                <ScalarProperty Name="IdEmpresa_ct" ColumnName="IdEmpresa_ct" />
                 <ScalarProperty Name="IdCbte_vta_nota" ColumnName="IdCbte_vta_nota" />
                 <ScalarProperty Name="IdBodega_Cbte" ColumnName="IdBodega_Cbte" />
                 <ScalarProperty Name="dc_TipoDocumento" ColumnName="dc_TipoDocumento" />

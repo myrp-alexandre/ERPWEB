@@ -17,12 +17,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
-        public ActionResult CXC_002(int IdSucursal, int IdBodega_Cbte = 0, decimal IdCbte_cta_nota =0, string dc_TipoDocumento ="")
+        public ActionResult CXC_002(int IdSucursal, int IdBodega_Cbte = 0, decimal IdCbte_vta_nota =0, string dc_TipoDocumento ="")
         {
             CXC_002_Rpt model = new CXC_002_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_IdSucursal.Value = IdSucursal;
             model.p_IdBodega_Cbte.Value = IdBodega_Cbte;
+            model.p_IdCbte_vta_nota.Value = IdCbte_vta_nota;
+            model.p_dc_TipoDocumento.Value = dc_TipoDocumento;
             model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
             model.RequestParameters = false;

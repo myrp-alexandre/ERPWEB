@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.CuentasPorCobrar
 {
    public class CXC_002_Data
     {
-        public List<CXC_002_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega_Cbte, decimal IdCbte_cta_nota, string dc_TipoDocumento)
+        public List<CXC_002_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega_Cbte, decimal IdCbte_vta_nota, string dc_TipoDocumento)
         {
             try
             {
@@ -20,7 +20,7 @@ namespace Core.Erp.Data.Reportes.CuentasPorCobrar
                              where q.IdEmpresa == IdEmpresa
                              && q.IdSucursal == IdSucursal
                              && q.IdBodega_Cbte == IdBodega_Cbte
-                             && q.IdCbte_vta_nota == IdCbte_cta_nota
+                             && q.IdCbte_vta_nota == IdCbte_vta_nota
                              && q.dc_TipoDocumento == dc_TipoDocumento
                              select new CXC_002_Info
                              {
