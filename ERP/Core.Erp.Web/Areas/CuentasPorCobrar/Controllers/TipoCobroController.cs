@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Bus.CuentasPorCobrar;
+using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.CuentasPorCobrar;
 using DevExpress.Web.Mvc;
 using System;
@@ -7,12 +8,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.Helps;
+using Core.Erp.Bus.General;
 
 namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 {
     public class TipoCobroController : Controller
     {
         cxc_cobro_tipo_Bus bus_tipocobro = new cxc_cobro_tipo_Bus();
+        cxc_cobro_tipo_Param_conta_x_sucursal_Bus bus_tipo_param = new cxc_cobro_tipo_Param_conta_x_sucursal_Bus();
+        tipo_param_det_List Lst_tipo_param_det = new tipo_param_det_List();
+
         public ActionResult Index()
         {
             return View();
@@ -100,5 +105,48 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_tipo_param(string IdCobro_tipo = "")
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            cxc_cobro_tipo_Param_conta_x_sucursal_Info model = new cxc_cobro_tipo_Param_conta_x_sucursal_Info();
+  //           model.Lst_tipo_param_det = bus_tipo_param.get_list(IdEmpresa, IdCobro_tipo);
+            cargar_combos_det();
+            return PartialView("~/Areas/CuentasPorCobrar/Views/TipoCobro/_GridViewPartial_tipo_param.cshtml", model);
+        }
+
+        private void cargar_combos_det()
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+
+            ct_plancta_Bus bus_cta = new ct_plancta_Bus();
+            var lst_cta = bus_cta.get_list(IdEmpresa, false, true);
+            ViewBag.lst_cta = lst_cta;
+        }
+
+    }
+
+    public class tipo_param_det_List
+    {
+        public List<cxc_cobro_tipo_Param_conta_x_sucursal_Info> get_list()
+        {
+            if (HttpContext.Current.Session["cxc_cobro_tipo_Param_conta_x_sucursal_Info"] == null)
+            {
+                List<cxc_cobro_tipo_Param_conta_x_sucursal_Info> list = new List<cxc_cobro_tipo_Param_conta_x_sucursal_Info>();
+
+                HttpContext.Current.Session["cxc_cobro_tipo_Param_conta_x_sucursal_Info"] = list;
+            }
+            return (List<cxc_cobro_tipo_Param_conta_x_sucursal_Info>)HttpContext.Current.Session["cxc_cobro_tipo_Param_conta_x_sucursal_Info"];
+        }
+
+        public void set_list(List<cxc_cobro_tipo_Param_conta_x_sucursal_Info> list)
+        {
+            HttpContext.Current.Session["cxc_cobro_tipo_Param_conta_x_sucursal_Info"] = list;
+        }
+
     }
 }
