@@ -42,7 +42,9 @@ namespace Core.Erp.Data.Reportes.CuentasPorCobrar
                                  vt_NumFactura = q.vt_NumFactura,
                                  vt_fecha = q.vt_fecha,
                                  vt_iva = q.vt_iva,
-                                 vt_Subtotal = q.vt_Subtotal
+                                 vt_Subtotal = q.vt_Subtotal,
+                                 vt_total = q.vt_total,
+                                 PorcentajeRet = q.PorcentajeRet
 
                              }).ToList();
                 }
