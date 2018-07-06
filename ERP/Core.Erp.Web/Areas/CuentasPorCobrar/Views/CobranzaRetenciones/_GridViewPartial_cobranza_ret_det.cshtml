@@ -30,7 +30,7 @@
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
-     
+
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(70);
@@ -62,7 +62,8 @@
                 p.DisplayFormatString = "N2";
             });
         });
-
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_ValorPago").DisplayFormat = "Total: {0:n2}";
+        settings.Settings.ShowFooter = true;
     });
 }
 @grid.Bind(Model).GetHtml()

@@ -317,7 +317,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                             IdEmpresa = diario.IdEmpresa,
                             IdTipoCbte = diario.IdTipoCbte,
                             IdCbteCble = diario.IdCbteCble,
-                            secuencia = 1,
+                            secuencia = Secuencia++,
                             IdCtaCble = info.lst_det[0].IdCtaCble,
                             dc_Valor = Math.Round(Convert.ToDouble(diario.cb_Valor), 2, MidpointRounding.AwayFromZero),
                         };

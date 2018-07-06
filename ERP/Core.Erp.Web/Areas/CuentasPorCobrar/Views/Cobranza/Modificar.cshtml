@@ -189,13 +189,16 @@
                     @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdCobro_tipo">Tipo cobro*</label>
-                    @Html.DropDownListFor(q => q.IdCobro_tipo, new SelectList(ViewBag.lst_cobro_tipo, "IdCobro_tipo", "tc_descripcion"), new { @class = "form-control", @id = "IdCobro_tipo" })
-                    @Html.ValidationMessageFor(q => q.IdCobro_tipo, "", new { @class = "text-danger" })
+            @if (!String.IsNullOrEmpty(Model.IdCobro_tipo))
+            {
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="IdCobro_tipo">Tipo cobro*</label>
+                        @Html.DropDownListFor(q => q.IdCobro_tipo, new SelectList(ViewBag.lst_cobro_tipo, "IdCobro_tipo", "tc_descripcion"), new { @class = "form-control", @id = "IdCobro_tipo" })
+                        @Html.ValidationMessageFor(q => q.IdCobro_tipo, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
+            }            
         </div>
         <div class="col-md-4">
             <div class="col-md-offset-6 col-md-6">
@@ -278,8 +281,12 @@
     @Html.Action("GridViewPartial_cobranza_det")
 
 
+
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        @if (!String.IsNullOrEmpty(Model.IdCobro_tipo))
+        {
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        }
         <a class="btn btn-default" href="@Url.Action("Index", "Cobranza", new { Area = "CuentasPorCobrar" }, null)">Cancelar</a>
     </div>
     @section Scripts {
