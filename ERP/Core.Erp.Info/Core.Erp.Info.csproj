@@ -181,6 +181,8 @@
     <Compile Include="Reportes\Contabilidad\CONTA_002_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_diario_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_Info.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_diario_Info.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Info.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Info.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_002_diario_Info.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_002_Info.cs" />

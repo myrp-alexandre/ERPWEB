@@ -812,11 +812,17 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  IdSucursal = q.IdSucursal,
                                  IdBodega = q.IdBodega,
                                  IdCbteVta = q.IdCbteVta,
-                                 cr_NumDocumento = q.vt_tipoDoc,
+                                 vt_tipoDoc = q.vt_tipoDoc,
                                  pe_nombreCompleto = q.Nombres,
                                  cr_fecha = q.vt_fecha,
                                  vt_NumFactura = q.vt_NumFactura,
-                                 cr_observacion = q.vt_Observacion
+                                 cr_observacion = q.vt_Observacion,
+                                 vt_fecha = q.vt_fecha,
+                                 vt_fech_venc = q.vt_fech_venc,
+                                 vt_Subtotal = q.vt_Subtotal,
+                                 vt_Iva = q.vt_iva,
+                                 vt_Total = q.vt_total,
+                                 Su_Descripcion = q.Su_Descripcion
                              }).ToList();
                 }
                 return Lista;

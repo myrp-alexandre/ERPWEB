@@ -63,6 +63,9 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public string vt_NumFactura { get; set; }        
         public decimal IdCbteVta { get; set; }
         public List<cxc_cobro_det_Info> lst_det { get; set; }
+        public DateTime? vt_fech_venc { get; set; }
+        public DateTime vt_fecha { get; set; }
+        public string vt_tipoDoc { get; set; }
         #endregion
     }
 }

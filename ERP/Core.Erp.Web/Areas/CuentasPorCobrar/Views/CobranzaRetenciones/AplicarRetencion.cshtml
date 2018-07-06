@@ -21,12 +21,12 @@
     function SetValorRetencion(s,e)
     {
         var datos = {
-            IdCobroTipo: s.GetValue()
+            IdCobro_tipo: s.GetValue()
         }
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("SetValorRetencion", "Cobranza",new { Area = "CuentasPorCobrar"})',
+            url: '@Url.Action("SetValorRetencion", "CobranzaRetenciones",new { Area = "CuentasPorCobrar"})',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -35,13 +35,13 @@
             success: function (data) {                
                 var valor = 0;
                 if (data.ESRetenFTE == "S") {
-                    var subtotal = Number($("#vt_Subtotal").val());
+                    var subtotal = parseFloat($("#vt_Subtotal").val());
                     var porcentaje = Number(data.PorcentajeRet) / 100;
-                    valor = subtotal * porcentaje;
+                    valor = Number(subtotal) * porcentaje;
                 } else {
-                    var iva = Number($("#vt_Iva").val());
+                    var iva = parseFloat($("#vt_Iva").val());
                     var porcentaje = Number(data.PorcentajeRet) / 100;
-                    valor = iva * porcentaje;
+                    valor = Number(iva) * porcentaje;
                 }                
                 GridView_cobranza_ret_det.GetEditor('dc_ValorPago').SetValue(valor);
             },
@@ -117,12 +117,18 @@
             </div>
         </div>
     </div>
-
-    @Html.Action("GridViewPartial_cobranza_ret_det")
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_cobranza_ret_det")
+            </div>
+        </div>
+    </div>
+    
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index", "Cobranza", new { Area = "CuentasPorCobrar" }, null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index", "CobranzaRetenciones", new { Area = "CuentasPorCobrar" }, null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
