@@ -5,9 +5,6 @@
         settings.Name = "GridViewPartial_facturas_con_saldos";
         settings.CallbackRouteValues = new { Controller = "Deudas", Action = "GridViewPartial_facturas_con_saldos" };
 
-       
-
-
         settings.KeyFieldName = "IdCbteCble_Ogiro";
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowFilterRow = true;
@@ -19,11 +16,21 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
 
+        //Configuración checkbox
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowSelectCheckbox = true;
+        settings.CommandColumn.SelectAllCheckboxMode = GridViewSelectAllCheckBoxMode.AllPages;
 
-        
-        settings.Columns.Add("co_factura", "Factura").Width = Unit.Percentage(20);
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "*";
+            column.FieldName = "seleccionado";
+            column.ColumnType = MVCxGridViewColumnType.CheckBox;
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(2);
+            column.Visible = false;
+        });
+        settings.Columns.Add("co_factura", "Documento").Width = Unit.Percentage(20);
         settings.Columns.Add("info_proveedor.info_persona.pe_razonSocial", "Proveedor").Width = Unit.Percentage(30);
-
         settings.Columns.Add(column =>
         {
             column.FieldName = "co_fechaOg";
@@ -37,7 +44,6 @@
             });
             column.ReadOnly = false;
         });
-
         settings.Columns.Add(column =>
         {
             column.FieldName = "co_FechaFactura_vct";
@@ -56,7 +62,7 @@
         {
             column.FieldName = "co_total";
             column.Caption = "Total";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(5);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -85,7 +91,7 @@
         {
             column.FieldName = "Saldo_OG";
             column.Caption = "Saldo";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(5);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -95,11 +101,11 @@
 
             });
         });
-
         settings.Columns.Add("Tipo_Vcto", "Estado").Width = Unit.Percentage(5);
         settings.Columns.Add("Dias_Vencidos", "Vencido").Width = Unit.Percentage(5);
 
-
+        settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
+        settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
     });
 
     if (ViewData["EditError"] != null)
