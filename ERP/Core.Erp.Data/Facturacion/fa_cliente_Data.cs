@@ -256,6 +256,19 @@ namespace Core.Erp.Data.Facturacion
                         };
                         Context.fa_cliente_contactos.Add(Entity_det);
                     }
+
+                    foreach (var item in info.Lst_fa_cliente_x_fa_Vendedor_x_sucursal)
+                    {
+                        fa_cliente_x_fa_Vendedor_x_sucursal det = new fa_cliente_x_fa_Vendedor_x_sucursal
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = item.IdSucursal,
+                            IdCliente = item.IdCliente,
+                            IdVendedor = item.IdVendedor,
+                            observacion = item.observacion
+                        };
+                        Context.fa_cliente_x_fa_Vendedor_x_sucursal.Add(det);
+                    }
                     Context.SaveChanges();
                 }
                 return true;
@@ -289,6 +302,27 @@ namespace Core.Erp.Data.Facturacion
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
+
+                    var lst = Context.fa_cliente_x_fa_Vendedor_x_sucursal.Where(q =>  q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente).ToList();
+                    foreach (var item in lst)
+                    {
+                        Context.fa_cliente_x_fa_Vendedor_x_sucursal.Remove(item);
+                    }
+                    foreach (var item in info.Lst_fa_cliente_x_fa_Vendedor_x_sucursal)
+                    {
+                        fa_cliente_x_fa_Vendedor_x_sucursal det = new fa_cliente_x_fa_Vendedor_x_sucursal
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = item.IdSucursal,
+                            IdCliente = item.IdCliente,
+                            IdVendedor = item.IdVendedor,
+                            observacion = item.observacion
+                        };
+                        Context.fa_cliente_x_fa_Vendedor_x_sucursal.Add(det);
+                    }
+
+
+
                     Context.SaveChanges();
                 }
                 return true;
