@@ -335,6 +335,7 @@
     <Compile Include="Facturacion\fa_cliente_contactos_Data.cs" />
     <Compile Include="Facturacion\fa_cliente_Data.cs" />
     <Compile Include="Facturacion\fa_cliente_tipo_Data.cs" />
+    <Compile Include="Facturacion\fa_cliente_x_fa_Vendedor_x_sucursal_Data.cs" />
     <Compile Include="Facturacion\fa_formaPago_Data.cs" />
     <Compile Include="Facturacion\fa_PuntoVta_Data.cs" />
     <Compile Include="Facturacion\fa_TerminoPago_Data.cs" />
