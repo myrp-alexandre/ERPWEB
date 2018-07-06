@@ -6,10 +6,6 @@
         settings.KeyFieldName = "secuencia";
         settings.Width = Unit.Percentage(100);
 
-        settings.SettingsPager.Visible = true;
-        settings.Settings.ShowGroupPanel = false;
-        settings.Settings.ShowFilterRow = true;
-
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Cobranza", Action = "EditingUpdateFactura", Area = "CuentasPorCobrar" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Cobranza", Action = "EditingDeleteFactura", Area = "CuentasPorCobrar" };

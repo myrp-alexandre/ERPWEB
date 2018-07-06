@@ -65,7 +65,6 @@ namespace Core.Erp.Data
         public virtual DbSet<VWROL_009> VWROL_009 { get; set; }
         public virtual DbSet<VWROL_010> VWROL_010 { get; set; }
         public virtual DbSet<VWCXP_007> VWCXP_007 { get; set; }
-        public virtual DbSet<VWROL_001> VWROL_001 { get; set; }
         public virtual DbSet<VWROL_011> VWROL_011 { get; set; }
         public virtual DbSet<VWCXC_001> VWCXC_001 { get; set; }
         public virtual DbSet<VWCXC_001_diario> VWCXC_001_diario { get; set; }
@@ -74,8 +73,9 @@ namespace Core.Erp.Data
         public virtual DbSet<VWFAC_003> VWFAC_003 { get; set; }
         public virtual DbSet<VWFAC_003_cuotas> VWFAC_003_cuotas { get; set; }
         public virtual DbSet<VWFAC_004> VWFAC_004 { get; set; }
-        public virtual DbSet<VWCXC_002> VWCXC_002 { get; set; }
         public virtual DbSet<VWCXC_002_diario> VWCXC_002_diario { get; set; }
+        public virtual DbSet<VWROL_001> VWROL_001 { get; set; }
+        public virtual DbSet<VWCXC_002> VWCXC_002 { get; set; }
     
         public virtual ObjectResult<SPINV_001_Result> SPINV_001(Nullable<int> idEmpresa, Nullable<int> idSucursal_ini, Nullable<int> idSucursal_fin, Nullable<int> idBodega_ini, Nullable<int> idBodega_fin, Nullable<decimal> idProducto_ini, Nullable<decimal> idProducto_fin, string idCategoria, Nullable<int> idLinea, Nullable<int> idGrupo, Nullable<int> idSubGrupo, Nullable<System.DateTime> fecha_corte, Nullable<bool> mostrar_stock_0)
         {

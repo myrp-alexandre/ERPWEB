@@ -43,13 +43,21 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             ViewBag.lst_sucursal = lst_sucursal;
         }
 
+        private void cargar_combos_det()
+        {
+            var lst_retenciones = bus_cobro_tipo.get_list_retenciones(false);
+            ViewBag.lst_retenciones = lst_retenciones;
+        }
+
         [ValidateInput(false)]
         public ActionResult GridViewPartial_cobranza_ret( DateTime? fecha_ini , DateTime? fecha_fin, int IdSucursal = 0)
         {
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
             ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
+            ViewBag.IdSucursal = IdSucursal;
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             List<cxc_cobro_Info> model =  bus_cobro.get_list_para_retencion(IdEmpresa, IdSucursal, Convert.ToDateTime(fecha_ini), Convert.ToDateTime(fecha_fin));
+            cargar_combos_det();
             return PartialView("_GridViewPartial_cobranza_ret", model);
         }
         #endregion
@@ -65,6 +73,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             if (model.lst_det.Count == 0)
             {                
                 model.cr_fechaCobro = DateTime.Now.Date;
+                model.cr_NumDocumento = string.Empty;
             }
             else
             {
@@ -83,6 +92,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             {
                 lst_det = List_det.get_list()
             };
+            cargar_combos_det();
             return PartialView("_GridViewPartial_cobranza_ret_det", model);
         }
         #endregion
@@ -106,6 +116,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             {
                 lst_det = List_det.get_list()
             };
+            cargar_combos_det();
             return PartialView("_GridViewPartial_cobranza_ret_det", model);
         }
 
@@ -118,6 +129,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             {
                 lst_det = List_det.get_list()
             };
+            cargar_combos_det();
             return PartialView("_GridViewPartial_cobranza_ret_det", model);
         }
 
@@ -128,6 +140,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             {
                 lst_det = List_det.get_list()
             };
+            cargar_combos_det();
             return PartialView("_GridViewPartial_cobranza_ret_det", model);
         }
         #endregion

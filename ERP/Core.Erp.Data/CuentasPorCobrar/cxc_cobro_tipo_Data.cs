@@ -99,6 +99,8 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         IdCobro_tipo = Entity.IdCobro_tipo,
                         ESRetenFTE_bool = Entity.ESRetenFTE == "S" ? true : false,
                         ESRetenIVA_bool = Entity.ESRetenIVA == "S" ? true : false,
+                        ESRetenFTE = Entity.ESRetenFTE,
+                        ESRetenIVA = Entity.ESRetenIVA,
                         IdMotivo_tipo_cobro = Entity.IdMotivo_tipo_cobro,
                         tc_abreviatura = Entity.tc_abreviatura,
                         tc_Afecha_bool = Entity.tc_Afecha == "S" ? true : false,
