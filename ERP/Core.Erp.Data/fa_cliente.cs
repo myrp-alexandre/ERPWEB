@@ -18,6 +18,7 @@ namespace Core.Erp.Data
         public fa_cliente()
         {
             this.fa_cliente_contactos = new HashSet<fa_cliente_contactos>();
+            this.fa_cliente_x_fa_Vendedor_x_sucursal = new HashSet<fa_cliente_x_fa_Vendedor_x_sucursal>();
         }
     
         public int IdEmpresa { get; set; }
@@ -47,5 +48,7 @@ namespace Core.Erp.Data
         public virtual fa_TerminoPago fa_TerminoPago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_cliente_contactos> fa_cliente_contactos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fa_cliente_x_fa_Vendedor_x_sucursal> fa_cliente_x_fa_Vendedor_x_sucursal { get; set; }
     }
 }

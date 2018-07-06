@@ -14,6 +14,12 @@ namespace Core.Erp.Data
     
     public partial class fa_Vendedor
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public fa_Vendedor()
+        {
+            this.fa_cliente_x_fa_Vendedor_x_sucursal = new HashSet<fa_cliente_x_fa_Vendedor_x_sucursal>();
+        }
+    
         public int IdEmpresa { get; set; }
         public int IdVendedor { get; set; }
         public string Codigo { get; set; }
@@ -29,5 +35,8 @@ namespace Core.Erp.Data
         public string ip { get; set; }
         public string Estado { get; set; }
         public string MotivoAnula { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fa_cliente_x_fa_Vendedor_x_sucursal> fa_cliente_x_fa_Vendedor_x_sucursal { get; set; }
     }
 }

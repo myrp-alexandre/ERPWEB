@@ -18,6 +18,9 @@
         <AssociationConnector Association="Model_facturacion.FK_fa_cliente_fa_TerminoPago" />
         <EntityTypeShape EntityType="Model_facturacion.fa_cliente_contactos" Width="1.5" PointX="9.875" PointY="3.125" />
         <AssociationConnector Association="Model_facturacion.FK_fa_cliente_contactos_fa_cliente" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_cliente_x_fa_Vendedor_x_sucursal" Width="1.5" PointX="9.875" PointY="7.25" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_cliente" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_Vendedor" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
