@@ -1,7 +1,7 @@
 ﻿@model Core.Erp.Info.Helps.cl_filtros_Info
 @{
     Layout = "~/Areas/Reportes/Views/Layout/_Layout_filtros.cshtml";
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Cobros por retención";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -9,8 +9,6 @@
 }
 @using (Html.BeginForm())
 {
-
-
     <div class="box collapsed-box">
         <div class="box-header with-border">
             <div class="row">
@@ -81,7 +79,7 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_cobranza_ret")
+            @Html.Action("GridViewPartial_cobranza_ret", new { Fecha_ini = Model.fecha_ini, Fecha_fin = Model.fecha_fin, IdSucursal = Model.IdSucursal})
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

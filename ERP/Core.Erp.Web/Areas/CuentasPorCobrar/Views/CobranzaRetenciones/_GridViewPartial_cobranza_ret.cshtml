@@ -3,7 +3,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_cobranza_ret";
-        settings.CallbackRouteValues = new { Controller = "CobranzaRetenciones", Action = "GridViewPartial_cobranza_ret"  };
+        settings.CallbackRouteValues = new { Controller = "CobranzaRetenciones", Action = "GridViewPartial_cobranza_ret", Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin, IdSucursal = ViewBag.IdSucursal  };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdCobro";
 
@@ -76,9 +76,11 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(20);
-        settings.Columns.Add("IdCobro", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("tc_descripcion", "Tipo").Width = Unit.Percentage(20);
+        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(10);
+        settings.Columns.Add("vt_NumFactura", "# Documento").Width = Unit.Percentage(10);
+        settings.Columns.Add("vt_fecha", "Fecha").Width = Unit.Percentage(10);
+        settings.Columns.Add("vt_fech_venc", "Fecha Vcto.").Width = Unit.Percentage(10);
+        settings.Columns.Add("cr_observacion", "Observación").Width = Unit.Percentage(10);
         settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = Unit.Percentage(20);
 
     });

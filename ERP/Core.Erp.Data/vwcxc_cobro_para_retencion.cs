@@ -19,13 +19,14 @@ namespace Core.Erp.Data
         public int IdBodega { get; set; }
         public decimal IdCbteVta { get; set; }
         public string vt_tipoDoc { get; set; }
-        public Nullable<double> vt_Subtotal { get; set; }
-        public Nullable<double> vt_iva { get; set; }
-        public Nullable<double> vt_total { get; set; }
+        public double vt_Subtotal { get; set; }
+        public double vt_iva { get; set; }
+        public double vt_total { get; set; }
         public string Nombres { get; set; }
         public System.DateTime vt_fecha { get; set; }
         public Nullable<System.DateTime> vt_fech_venc { get; set; }
         public string vt_Observacion { get; set; }
         public string vt_NumFactura { get; set; }
+        public string Su_Descripcion { get; set; }
     }
 }

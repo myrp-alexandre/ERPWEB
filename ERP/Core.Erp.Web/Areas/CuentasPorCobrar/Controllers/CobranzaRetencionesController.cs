@@ -21,7 +21,10 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         #region Index
         public ActionResult Index()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+            };
             cargar_combos();
             return View(model);
         }
