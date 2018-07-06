@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Reportes.CuentasPorCobrar
 {
-    class CXC_002_diario_Bus
+    public class CXC_002_diario_Bus
     {
         CXC_002_diario_Data odata = new CXC_002_diario_Data();
-        public List<CXC_002_diario_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega_Cbte, decimal IdCbte_cta_nota, string dc_TipoDocumento)
+        public List<CXC_002_diario_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega_Cbte, decimal IdCbte_vta_nota, string dc_TipoDocumento)
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdSucursal, IdBodega_Cbte, IdCbte_cta_nota, dc_TipoDocumento);
+                return odata.get_list(IdEmpresa, IdSucursal, IdBodega_Cbte, IdCbte_vta_nota, dc_TipoDocumento);
             }
             catch (Exception)
             {
