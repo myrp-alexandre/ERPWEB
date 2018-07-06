@@ -465,6 +465,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             List<cp_orden_giro_Info> list_facturas_seleccionadas = new List<cp_orden_giro_Info>();
             model = Session["list_ordenes_giro"] as List<cp_orden_giro_Info>;
             list_facturas_seleccionadas = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_Info>;
+            if (list_facturas_seleccionadas == null)
+                list_facturas_seleccionadas = new List<cp_orden_giro_Info>();
             foreach (var item in output)
             {
                 if (item.Key != "")
