@@ -29,15 +29,13 @@
 
     function guardar() {
         var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdUsuario: $("#IdUsuario").val(),
             Ids: selectedIDs
         }
         $("#btn_guardar").disabled = true;
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("guardar", "ReportesPorUsuario", new { Area = "General" })',
+            url: '@Url.Action("guardar", "Deudas", new { Area = "CuentasPorPagar" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -76,7 +74,7 @@
         @Html.Action("GridViewPartial_aprobacion_facturas")
         <div class="modal-footer">
 
-            <button type="button" class="btn btn-primary" onclick="guardar()">Guardar</button>
+            <button type="button" class="btn btn-primary" onclick="guardar()" id="btn_guardar">Guardar</button>
         </div>
         }
 

@@ -83,7 +83,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
-            //model = bus_orden_giro.get_lst_orden_giro_x_pagar(IdEmpresa);
+            model = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_Info>;
             return PartialView("_GridViewPartial_aprobacion_facturas", model);
         }
         public ActionResult GridViewPartial_facturas_con_saldos()
@@ -91,6 +91,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
             model = bus_orden_giro.get_lst_orden_giro_x_pagar(IdEmpresa);
+            Session["list_ordenes_giro"] = model;
             return PartialView("_GridViewPartial_facturas_con_saldos", model);
         }
 
@@ -431,6 +432,51 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult guardar_aprobacion(string Ids)
+        {
+            string[] array = Ids.Split(',');
+            var output = array.GroupBy(q => q).ToList();
+            List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
+            List<cp_orden_giro_Info> list_facturas_seleccionadas = new List<cp_orden_giro_Info>();
+            model = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_Info>;
+            foreach (var item in output)
+            {
+                if (item.Key != "")
+                {
+                    model.ForEach(
+                        item_ =>
+                        {
+
+                            if(Convert.ToDecimal( item.Key)== item_.IdCbteCble_Ogiro)
+                            {
+                                //item_.co_valorpagar (double)= item.Key;
+                            }
+                        }
+                        );
+                }
+            }
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult seleccionar_aprobacion(string Ids)
+        {
+            string[] array = Ids.Split(',');
+            var output = array.GroupBy(q => q).ToList();
+            List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
+            List<cp_orden_giro_Info> list_facturas_seleccionadas = new List<cp_orden_giro_Info>();
+            model = Session["list_ordenes_giro"] as List<cp_orden_giro_Info>;
+            list_facturas_seleccionadas = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_Info>;
+            foreach (var item in output)
+            {
+                if (item.Key != "")
+                {
+                    var lista_tmp = model.Where(v => v.IdCbteCble_Ogiro == Convert.ToDecimal(item.Key));
+                    if(lista_tmp.Count()==1)// agrego si existe y no esta repetida
+                    list_facturas_seleccionadas.Add(lista_tmp.FirstOrDefault());
+                }
+            }
+            Session["list_facturas_seleccionadas"]= list_facturas_seleccionadas;
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         private void cargar_combos_detalle()
