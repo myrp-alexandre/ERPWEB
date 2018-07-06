@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Erp.Bus.Reportes.CuentasPorCobrar
+namespace Core.Erp.Data.Reportes.CuentasPorCobrar
 {
-    class CXP_002_diario_Bus
+    class CXC_002_Data
     {
     }
 }

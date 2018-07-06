@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Data.Reportes.CuentasPorCobrar
 {
-    class CXP_002_Data
+    class CXC_002_diario_Data
     {
     }
 }

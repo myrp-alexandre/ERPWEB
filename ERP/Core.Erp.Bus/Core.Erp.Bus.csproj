@@ -178,8 +178,8 @@
     <Compile Include="Reportes\Contabilidad\CONTA_002_Bus.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_Bus.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_diario_Bus.cs" />
-    <Compile Include="Reportes\CuentasPorCobrar\CXP_002_Bus.cs" />
-    <Compile Include="Reportes\CuentasPorCobrar\CXP_002_diario_Bus.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Bus.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_diario_Bus.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Bus.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_002_Bus.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_002_diario_Bus.cs" />
