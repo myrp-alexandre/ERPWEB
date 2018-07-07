@@ -499,8 +499,12 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="num_docu_Modificar">Ordenes pagos*</label>
-                                            @Html.Action("GridViewPartial_ordenes_pagos_con_saldo", new { Area = "CuentasPorPagar", Controller = "OrdenPago" })
+
+                                            <button type="button" class="btn btn-primary" onclick="op_con_saldo">
+                                                Buscar OP
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                            @Html.Action("GridViewPartial_nota_credito_det")
 
 
                                         </div>
@@ -567,7 +571,8 @@
                 <h4 class="modal-title">Ordenes de pago con aldos</h4>
             </div>
             <div class="modal-body">
-                @Html.Action("GridViewPartial_ordenes_pagos_con_saldo")
+             @Html.Action("GridViewPartial_ordenes_pagos_con_saldo", new { Area = "CuentasPorPagar", Controller = "OrdenPago" }) 
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onclick="seleccionar_op();">Aceptar</button>

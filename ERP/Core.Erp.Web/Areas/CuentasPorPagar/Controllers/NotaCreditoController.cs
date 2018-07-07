@@ -45,6 +45,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_nota_credito_dc", model);
         }
+        public ActionResult GridViewPartial_nota_credito_det()
+        {
+            List<cp_orden_pago_det_Info> lst_detalle_op = new List<cp_orden_pago_det_Info>();
+            return PartialView("_GridViewPartial_nota_credito_det", lst_detalle_op);
+        }
 
         private void cargar_combos(decimal IdProveedor = 0, string IdTipoSRI = "")
         {
