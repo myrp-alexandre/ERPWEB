@@ -213,14 +213,20 @@
 </script>
 
 <script>
-    function fac_con_saldo() {
-        GridViewPartial_facturas_con_saldos.PerformCallback();
-        $("#fac_con_saldo").modal("show");
+    function op_con_saldo() {
+        if (IdProveedor.GetValue() == 0) {
+            alert("Seleccione el proveedor");
+        }
+        else {
+            Buscar_op();
+            GridViewPartial_ordenes_pagos_con_saldo.PerformCallback();
+            $("#op_con_saldo").modal("show");
+        }
     };
     function cerrar() {
         //GridViewPartial_distribuidos.PerformCallback();
         //GridViewPartial_por_distribuir.PerformCallback();
-        $("#fac_con_saldo").modal("hide");
+        $("#op_con_saldo").modal("hide");
     };
 
 
@@ -299,7 +305,6 @@
                    //Boton para seleccionar ningun registro
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){Buscar_op()}";
 
                }).BindList(ViewBag.lst_proveedores).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
@@ -500,7 +505,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
 
-                                            <button type="button" class="btn btn-primary" onclick="op_con_saldo">
+                                            <button type="button" class="btn btn-primary" onclick="op_con_saldo()">
                                                 Buscar OP
                                                 <i class="fa fa-search"></i>
                                             </button>
