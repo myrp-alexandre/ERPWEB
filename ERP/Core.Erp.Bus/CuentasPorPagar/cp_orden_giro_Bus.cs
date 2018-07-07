@@ -384,7 +384,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info_op_det.Secuencia = 1;
                 info_op_det.IdCbteCble_cxp = info.IdCbteCble_Ogiro;
                 info_op_det.IdTipoCbte_cxp = info.IdTipoCbte_Ogiro;
-                info_op_det.Valor_a_pagar = info.Total_Pagado;
+                info_op_det.Valor_a_pagar = info.co_valorpagar;
                 info_op_det.Referencia = "Pago factura # "+info.co_factura;
                 info_op_det.IdFormaPago = "CHEQUE";
                 info_op_det.Fecha_Pago = DateTime.Now;
