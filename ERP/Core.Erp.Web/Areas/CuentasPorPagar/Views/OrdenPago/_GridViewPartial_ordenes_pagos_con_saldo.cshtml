@@ -8,49 +8,33 @@
         //CConfiguracion responsive
 
 
-        settings.SettingsEditing.Mode = GridViewEditingMode.EditForm;
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "OrdenPago", Action = "EditingCheckUncheck", Area = "CuentasPorPagar" };
-
-        settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowEditButton = true;
-
-
-        settings.SettingsContextMenu.Enabled = true;
-        settings.SettingsBehavior.EnableCustomizationWindow = true;
-
         settings.SettingsPager.Visible = true;
-        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
+
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
-        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.None;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
 
+        //Configuración checkbox
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowSelectCheckbox = true;
+        settings.CommandColumn.SelectAllCheckboxMode = GridViewSelectAllCheckBoxMode.AllPages;
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdTipoCbte_cxp";
-            column.Caption = "tipo_cbtle";
-            column.Width = Unit.Percentage(10);
+            column.Caption = "*";
+            column.FieldName = "seleccionado";
+            column.ColumnType = MVCxGridViewColumnType.CheckBox;
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(2);
             column.Visible = false;
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "IdCbteCble_cxp";
-            column.Caption = "Cblte";
-            column.Width = Unit.Percentage(10);
-            column.Visible = false;
-        });
-        settings.Columns.Add(columnCheck =>
-        {
-            columnCheck.FieldName = "check";
-            columnCheck.ColumnType = MVCxGridViewColumnType.CheckBox;
-            var checkBoxProperties = columnCheck.PropertiesEdit as CheckBoxProperties;
         });
 
 
-        settings.Columns.Add("IdOrdenPago","ID").Width=Unit.Percentage(10);
-        settings.Columns.Add("Nom_Beneficiario", "Beneficiario").Width=Unit.Percentage(30);
+
+        settings.Columns.Add("Nom_Beneficiario", "Beneficiario").Width=Unit.Percentage(40);
         //  settings.Columns.Add("Observacion","Observación").Width = Unit.Percentage(30);
         settings.Columns.Add(column =>
         {
@@ -108,7 +92,8 @@
             });
         });
 
-
+        settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
+        settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
     });
     if (ViewData["EditError"] != null)
     {

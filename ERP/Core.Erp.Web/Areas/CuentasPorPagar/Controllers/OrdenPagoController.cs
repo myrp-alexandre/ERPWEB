@@ -353,7 +353,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     {
                         if (item.IdOrdenPago == info_det.IdOrdenPago)
                         {
-                            item.check = info_det.check;
+                            item.seleccionado = info_det.seleccionado;
                             item.Total_cancelado_OP = info_det.Total_cancelado_OP;
                             item.Fecha_Pago = info_det.Fecha_Pago;
                         }
