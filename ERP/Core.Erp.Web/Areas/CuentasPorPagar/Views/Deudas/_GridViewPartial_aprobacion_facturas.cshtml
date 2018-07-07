@@ -5,28 +5,59 @@
         settings.Name = "GridView_aprobacion_facturas";
         settings.CallbackRouteValues = new { Controller = "Deudas", Action = "GridViewPartial_aprobacion_facturas" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Deudas", Action = "GridViewPartial_aprobacion_facturas_Update" };
-        settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
-        settings.SettingsBehavior.ConfirmDelete = true;
+        settings.KeyFieldName = "IdCbteCble_Ogiro";
 
         settings.CommandColumn.Visible = true;
-
+        settings.CommandColumn.ShowNewButton = false;
         settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
 
-        settings.KeyFieldName = "IdCbteCble_Ogiro";
-        settings.SettingsPager.Visible = true;
-        settings.Settings.ShowFilterRow = true;
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = false;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+
+        //Configuración click derecho
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+        settings.SettingsContextMenu.EnableRowMenu = DefaultBoolean.True;
+
         settings.SettingsBehavior.AllowSelectByRowClick = true;
-
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
-        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.None;
-        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
 
 
-       
-        settings.Columns.Add("co_factura", "Factura").Width = Unit.Percentage(20);
-        settings.Columns.Add("info_proveedor.info_persona.pe_razonSocial", "Proveedor").Width = Unit.Percentage(30);
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "co_factura";
+            column.Caption = "Documento";
+            column.Width = Unit.Percentage(30);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.ReadOnly = false;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "info_proveedor.info_persona.pe_razonSocial";
+            column.Caption = "Proveedor";
+            column.Width = Unit.Percentage(40);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.ReadOnly = false;
+        });
 
         settings.Columns.Add(column =>
         {
@@ -39,6 +70,7 @@
                 column.PropertiesEdit.DisplayFormatString = "d";
                 sp.Width = Unit.Percentage(100);
             });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
             column.ReadOnly = false;
         });
 
@@ -53,14 +85,15 @@
                 column.PropertiesEdit.DisplayFormatString = "d";
                 sp.Width = Unit.Percentage(100);
                 column.ReadOnly = false;
-
             });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
         });
-        // settings.Columns.Add("co_observacion").Width = Unit.Percentage(30);
+
         settings.Columns.Add(column =>
         {
-            column.FieldName = "co_total";
-            column.Caption = "Total";
+            column.FieldName = "Tipo_Vcto";
+            column.Caption = "Estado";
             column.Width = Unit.Percentage(5);
             column.EditorProperties().SpinEdit(sp =>
             {
@@ -68,23 +101,9 @@
                 sp.MaxValue = 999999999;
                 sp.Width = Unit.Percentage(100);
                 column.PropertiesEdit.DisplayFormatString = "n2";
-                column.ReadOnly = false;
-
             });
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Total_Pagado";
-            column.Caption = "Cancelado";
-            column.Width = Unit.Percentage(10);
-            column.EditorProperties().SpinEdit(sp =>
-            {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
-                sp.Width = Unit.Percentage(100);
-                column.PropertiesEdit.DisplayFormatString = "n2";
+            column.EditFormSettings.Visible = DefaultBoolean.False;
 
-            });
         });
         settings.Columns.Add(column =>
         {
@@ -97,12 +116,23 @@
                 sp.MaxValue = 999999999;
                 sp.Width = Unit.Percentage(100);
                 column.PropertiesEdit.DisplayFormatString = "n2";
+            });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "co_valorpagar";
+            column.Caption = "Valor a pagar";
+            column.Width = Unit.Percentage(5);
+            column.EditorProperties().SpinEdit(sp =>
+            {
+                sp.MinValue = 0;
+                sp.DisplayFormatInEditMode = true;
+                sp.DisplayFormatString = "N2";
 
             });
         });
-
-        settings.Columns.Add("Tipo_Vcto", "Estado").Width = Unit.Percentage(5);
-        settings.Columns.Add("Dias_Vencidos", "Vencido").Width = Unit.Percentage(5);
 
 
     });

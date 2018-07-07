@@ -35,7 +35,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("guardar", "Deudas", new { Area = "CuentasPorPagar" })',
+            url: '@Url.Action("guardar_aprobacion", "Deudas", new { Area = "CuentasPorPagar" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -69,6 +69,8 @@
 
                 $("#myform").submit();
                 GridView_aprobacion_facturas.PerformCallback();
+                $("#fac_con_saldo").modal("hide");
+
             },
             error: function (error) {
             }

@@ -434,27 +434,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         public JsonResult guardar_aprobacion(string Ids)
         {
-            string[] array = Ids.Split(',');
-            var output = array.GroupBy(q => q).ToList();
+           
             List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
-            List<cp_orden_giro_Info> list_facturas_seleccionadas = new List<cp_orden_giro_Info>();
             model = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_Info>;
-            foreach (var item in output)
+            foreach (var item in model)
             {
-                if (item.Key != "")
-                {
-                    model.ForEach(
-                        item_ =>
-                        {
-
-                            if(Convert.ToDecimal( item.Key)== item_.IdCbteCble_Ogiro)
-                            {
-                                //item_.co_valorpagar (double)= item.Key;
-                            }
-                        }
-                        );
-                }
+                bus_orden_giro.Generar_OP_x_orden_giro(item);
             }
+            Session["list_facturas_seleccionadas"] = null;
             return Json("", JsonRequestBehavior.AllowGet);
         }
         public JsonResult seleccionar_aprobacion(string Ids)
@@ -472,8 +459,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 if (item.Key != "")
                 {
                     var lista_tmp = model.Where(v => v.IdCbteCble_Ogiro == Convert.ToDecimal(item.Key));
-                    if(lista_tmp.Count()==1)// agrego si existe y no esta repetida
-                    list_facturas_seleccionadas.Add(lista_tmp.FirstOrDefault());
+                    if (lista_tmp.Count() == 1 & list_facturas_seleccionadas.Where(v => v.IdCbteCble_Ogiro == Convert.ToDecimal(item.Key)).Count() == 0)// agrego si existe y no esta repetida
+                    {
+                        var info_add = lista_tmp.FirstOrDefault();
+                        info_add.co_valorpagar =(double) info_add.Saldo_OG;
+                        list_facturas_seleccionadas.Add(info_add);
+                    }
                 }
             }
             Session["list_facturas_seleccionadas"]= list_facturas_seleccionadas;
