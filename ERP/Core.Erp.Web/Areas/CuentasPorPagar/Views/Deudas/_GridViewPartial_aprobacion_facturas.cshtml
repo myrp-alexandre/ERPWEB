@@ -4,7 +4,10 @@
     {
         settings.Name = "GridView_aprobacion_facturas";
         settings.CallbackRouteValues = new { Controller = "Deudas", Action = "GridViewPartial_aprobacion_facturas" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Deudas", Action = "GridViewPartial_aprobacion_facturas_Update" };
+
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Deudas", Action = "EditingUpdate_og", Area = "CuentasPorPagar" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Deudas", Action = "EditingDelete_og", Area = "CuentasPorPagar" };
+
         settings.KeyFieldName = "IdCbteCble_Ogiro";
         settings.Width = Unit.Percentage(100);
 
