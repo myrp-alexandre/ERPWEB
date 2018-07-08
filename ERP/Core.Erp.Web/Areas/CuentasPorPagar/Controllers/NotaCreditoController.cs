@@ -92,9 +92,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             model.info_comrobante = new ct_cbtecble_Info();
 
-            if (Session["lst_detalle_op"] != null)
+            if (Session["list_op_seleccionadas"] != null)
             {
-                model.lst_detalle_op = Session["lst_detalle_op"] as List<cp_orden_pago_det_Info>;
+                model.lst_detalle_op = Session["list_op_seleccionadas"] as List<cp_orden_pago_det_Info>;
             }
             if (Session["ct_cbtecble_det_Info"] != null)
             {
@@ -322,7 +322,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
 
         public JsonResult armar_diario(decimal IdProveedor = 0, double cn_subtotal_iva = 0, double cn_subtotal_siniva = 0,
-            double cn_valoriva = 0, double cn_total = 0, string observacion = "")
+            double valoriva = 0, double total = 0, string observacion = "")
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (Session["info_proveedor"] == null)
@@ -343,7 +343,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 info_parametro = Session["info_parametro"] as cp_parametros_Info;
 
 
-            comprobante_contable_fp.delete_detail_New_details(info_proveedor, info_parametro, cn_subtotal_iva, cn_subtotal_siniva, cn_valoriva, cn_total, observacion);
+            comprobante_contable_fp.delete_detail_New_details(info_proveedor, info_parametro, cn_subtotal_iva, cn_subtotal_siniva, valoriva, total, observacion);
             return Json("", JsonRequestBehavior.AllowGet);
         }
 

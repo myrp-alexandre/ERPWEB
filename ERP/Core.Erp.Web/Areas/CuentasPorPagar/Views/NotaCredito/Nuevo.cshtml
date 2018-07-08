@@ -528,32 +528,40 @@
                     };
                     // armar diario contable
 
-                    function armar_diario() {
-                        var datos = {
-                            IdProveedor: IdProveedor.GetValue(),
-                            cn_subtotal_iva: $("#cn_subtotal_iva").val(),
-                            cn_subtotal_siniva: $("#cn_subtotal_siniva").val(),
-                            cn_valoriva: $("#cn_valoriva").val(),
-                            cn_total: $("#cn_total").val(),
-                            observacion: $("#observacion").val()
-                        }
-                        $.ajax({
-                            type: 'POST',
-                            data: JSON.stringify(datos),
-                            url: '@Url.Action("armar_diario", "NotaCredito", new { Area = "CuentasPorPagar" })',
-                            async: false,
-                            bDeferRender: true,
-                            bProcessing: true,
-                            dataType: 'json',
-                            contentType: 'application/json; charset=utf-8',
-                            success: function (data) {
-                                GridViewPartial_nota_credito_dc.PerformCallback();
-                            },
-                            error: function (error) {
-                            }
-                        });
+    function armar_diario() {
 
-                    };
+
+        if (IdProveedor.GetValue() == 0) {
+            alert("Seleccione el proveedor");
+        }
+        else
+        {
+            var datos = {
+                IdProveedor: IdProveedor.GetValue(),
+                cn_subtotal_iva: $("#cn_subtotal_iva").val(),
+                cn_subtotal_siniva: $("#cn_subtotal_siniva").val(),
+                valoriva: $("#cn_valoriva").val(),
+                total: $("#cn_total").val(),
+                observacion: $("#observacion").val()
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("armar_diario", "NotaCredito", new { Area = "CuentasPorPagar" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    GridViewPartial_nota_credito_dc.PerformCallback();
+                },
+                error: function (error) {
+                }
+            });
+        }
+
+       };
 
 
 

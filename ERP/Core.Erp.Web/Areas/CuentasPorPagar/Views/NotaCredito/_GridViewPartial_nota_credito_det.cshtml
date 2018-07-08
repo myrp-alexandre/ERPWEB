@@ -26,26 +26,25 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
 
-
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdTipoCbte_cxp";
-            column.Caption = "tipo_cbtle";
+            column.FieldName = "IdOrdenPago";
+            column.Caption = "Id op";
             column.Width = Unit.Percentage(10);
-            column.Visible = false;
+           
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdCbteCble_cxp";
-            column.Caption = "Cblte";
-            column.Width = Unit.Percentage(10);
-            column.Visible = false;
-        });
-      
+            column.FieldName = "Nom_Beneficiario";
+            column.Caption = "Beneficiario";
+            column.Width = Unit.Percentage(30);
+            
+            column.EditFormSettings.Visible = DefaultBoolean.False;
 
-        settings.Columns.Add("IdOrdenPago","ID").Width=Unit.Percentage(10);
-        settings.Columns.Add("Nom_Beneficiario", "Beneficiario").Width=Unit.Percentage(30);
-        //  settings.Columns.Add("Observacion","Observación").Width = Unit.Percentage(30);
+        });
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "Fecha_Pago";
@@ -57,35 +56,8 @@
                 column.PropertiesEdit.DisplayFormatString = "d";
                 sp.Width = Unit.Percentage(100);
             });
-        });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
 
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Valor_a_pagar";
-            column.Caption = "$Valor a pagar";
-            column.Width = Unit.Percentage(10);
-            column.EditorProperties().SpinEdit(sp =>
-            {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
-                sp.Width = Unit.Percentage(100);
-                column.PropertiesEdit.DisplayFormatString = "n2";
-
-            });
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Total_cancelado_OP";
-            column.Caption = "$Valor cancelado";
-            column.Width = Unit.Percentage(10);
-            column.EditorProperties().SpinEdit(sp =>
-            {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
-                sp.Width = Unit.Percentage(100);
-                column.PropertiesEdit.DisplayFormatString = "n2";
-
-            });
         });
         settings.Columns.Add(column =>
         {
@@ -100,6 +72,24 @@
                 column.PropertiesEdit.DisplayFormatString = "n2";
 
             });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Valor_a_pagar";
+            column.Caption = "$Valor a cancelar";
+            column.Width = Unit.Percentage(10);
+            column.EditorProperties().SpinEdit(sp =>
+            {
+                sp.MinValue = 0;
+                sp.MaxValue = 999999999;
+                sp.Width = Unit.Percentage(100);
+                column.PropertiesEdit.DisplayFormatString = "n2";
+
+            });
+
         });
 
 
