@@ -89,6 +89,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
                  Session["info_param_op"] = bus_parametros.get_info(IdEmpresa);
                  model= bus_retencion.get_info_factura( IdEmpresa, IdTipoCbte_Ogiro, IdCbteCble_Ogiro);
+            model.fecha = DateTime.Now;
             if (model.co_valoriva > 0)
                 Session["co_valoriva"] = model.co_valoriva;
                  cargar_combos();
