@@ -12,30 +12,28 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class cp_orden_pago_cancelaciones
+    public partial class vwcp_orden_pago_con_cancelacion
     {
         public int IdEmpresa { get; set; }
-        public decimal Idcancelacion { get; set; }
+        public decimal IdOrdenPago { get; set; }
         public int Secuencia { get; set; }
-        public int IdEmpresa_op { get; set; }
-        public decimal IdOrdenPago_op { get; set; }
-        public int Secuencia_op { get; set; }
-        public Nullable<int> IdEmpresa_op_padre { get; set; }
-        public Nullable<decimal> IdOrdenPago_op_padre { get; set; }
-        public Nullable<int> Secuencia_op_padre { get; set; }
         public Nullable<int> IdEmpresa_cxp { get; set; }
-        public Nullable<int> IdTipoCbte_cxp { get; set; }
         public Nullable<decimal> IdCbteCble_cxp { get; set; }
-        public int IdEmpresa_pago { get; set; }
-        public int IdTipoCbte_pago { get; set; }
-        public decimal IdCbteCble_pago { get; set; }
+        public Nullable<int> IdTipoCbte_cxp { get; set; }
+        public double Valor_a_pagar { get; set; }
+        public string Referencia { get; set; }
+        public string IdFormaPago { get; set; }
+        public System.DateTime Fecha_Pago { get; set; }
         public double MontoAplicado { get; set; }
         public double SaldoAnterior { get; set; }
         public double SaldoActual { get; set; }
         public string Observacion { get; set; }
-        public System.DateTime fechaTransaccion { get; set; }
-    
-        public virtual cp_orden_pago_det cp_orden_pago_det { get; set; }
-        public virtual cp_orden_pago_det cp_orden_pago_det1 { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public string pe_cedulaRuc { get; set; }
+        public string IdTipo_op { get; set; }
+        public string IdTipo_Persona { get; set; }
+        public decimal IdPersona { get; set; }
+        public Nullable<decimal> IdEntidad { get; set; }
+        public string IdEstadoAprobacion { get; set; }
     }
 }

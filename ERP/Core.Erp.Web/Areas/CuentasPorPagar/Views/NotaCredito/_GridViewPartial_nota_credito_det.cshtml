@@ -9,10 +9,12 @@
 
 
         settings.SettingsEditing.Mode = GridViewEditingMode.EditForm;
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "NotaCredito", Action = "EditingCheckUncheck", Area = "CeuntasPorPagar" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "NotaCredito", Action = "EditingUpdate_op", Area = "CeuntasPorPagar" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "NotaCredito", Action = "EditingDelete_op", Area = "CeuntasPorPagar" };
 
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
 
 
         settings.SettingsContextMenu.Enabled = true;
@@ -29,9 +31,9 @@
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdOrdenPago";
-            column.Caption = "Id op";
-            column.Width = Unit.Percentage(10);
-           
+            column.Caption = "ID";
+            column.Width = Unit.Percentage(5);
+
             column.EditFormSettings.Visible = DefaultBoolean.False;
 
         });
@@ -39,58 +41,53 @@
         {
             column.FieldName = "Nom_Beneficiario";
             column.Caption = "Beneficiario";
-            column.Width = Unit.Percentage(30);
-            
+            column.Width = Unit.Percentage(40);
+
             column.EditFormSettings.Visible = DefaultBoolean.False;
 
         });
+    settings.Columns.Add(column =>
+    {
+        column.FieldName = "Referencia";
+        column.Caption = "Observación";
+        column.Width = Unit.Percentage(40);
 
+        column.EditFormSettings.Visible = DefaultBoolean.False;
+
+    });
+    
         settings.Columns.Add(column =>
+{
+    column.FieldName = "Saldo_x_Pagar_OP";
+    column.Caption = "$Saldo op";
+    column.Width = Unit.Percentage(10);
+    column.EditorProperties().SpinEdit(sp =>
+    {
+        sp.MinValue = 0;
+        sp.MaxValue = 999999999;
+        sp.Width = Unit.Percentage(100);
+        column.PropertiesEdit.DisplayFormatString = "n2";
+
+    });
+    column.EditFormSettings.Visible = DefaultBoolean.False;
+
+});
+
+    settings.Columns.Add(column =>
+    {
+        column.FieldName = "Valor_a_pagar";
+        column.Caption = "$Valor a cancelar";
+        column.Width = Unit.Percentage(10);
+        column.EditorProperties().SpinEdit(sp =>
         {
-            column.FieldName = "Fecha_Pago";
-            column.Caption = "Fecha pago";
-            column.Width = Unit.Percentage(15);
-            column.PropertiesEdit.DisplayFormatString = "d";
-            column.EditorProperties().DateEdit(sp =>
-            {
-                column.PropertiesEdit.DisplayFormatString = "d";
-                sp.Width = Unit.Percentage(100);
-            });
-            column.EditFormSettings.Visible = DefaultBoolean.False;
+            sp.MinValue = 0;
+            sp.MaxValue = 999999999;
+            sp.Width = Unit.Percentage(100);
+            column.PropertiesEdit.DisplayFormatString = "n2";
 
         });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Saldo_x_Pagar_OP";
-            column.Caption = "$Saldo op";
-            column.Width = Unit.Percentage(10);
-            column.EditorProperties().SpinEdit(sp =>
-            {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
-                sp.Width = Unit.Percentage(100);
-                column.PropertiesEdit.DisplayFormatString = "n2";
 
-            });
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-
-        });
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Valor_a_pagar";
-            column.Caption = "$Valor a cancelar";
-            column.Width = Unit.Percentage(10);
-            column.EditorProperties().SpinEdit(sp =>
-            {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
-                sp.Width = Unit.Percentage(100);
-                column.PropertiesEdit.DisplayFormatString = "n2";
-
-            });
-
-        });
+    });
 
 
     });

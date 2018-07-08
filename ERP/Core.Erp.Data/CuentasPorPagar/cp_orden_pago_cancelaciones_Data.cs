@@ -84,43 +84,42 @@ namespace Core.Erp.Data.CuentasPorPagar
             }
         }
 
-        public List<cp_orden_pago_cancelaciones_Info> Get_list_Cancelacion_x_CXP(int IdEmpresa_cxp, int IdTipoCbte_cxp, decimal IdCbteCble_cxp)
+        public List<cp_orden_pago_det_Info> Get_list_Cancelacion_x_CXP(int IdEmpresa_cxp, int IdTipoCbte_cxp, decimal IdCbteCble_cxp)
         {
             try
             {
 
-                List<cp_orden_pago_cancelaciones_Info> Lst = new List<cp_orden_pago_cancelaciones_Info>();
+                List<cp_orden_pago_det_Info> Lista = new List<cp_orden_pago_det_Info>();
 
                 using (Entities_cuentas_por_pagar cxp = new Entities_cuentas_por_pagar())
                 {
-                    var consulta = from q in cxp.cp_orden_pago_cancelaciones
+                    Lista = (from q in cxp.vwcp_orden_pago_con_cancelacion
                                    where q.IdEmpresa_cxp == IdEmpresa_cxp
                                    && q.IdTipoCbte_cxp == IdTipoCbte_cxp
                                    && q.IdCbteCble_cxp == IdCbteCble_cxp
-                                   select q;
+                                        select new
+                             cp_orden_pago_det_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdOrdenPago = q.IdOrdenPago,
+                                 IdTipoCbte_cxp = q.IdTipoCbte_cxp,
+                                 IdCbteCble_cxp = q.IdCbteCble_cxp,
+                                 IdEntidad = q.IdEntidad,
+                                 IdPersona = q.IdPersona,
+                                 IdTipo_op = q.IdTipo_op,
+                                 IdEstadoAprobacion = q.IdEstadoAprobacion,
+                                 Valor_a_pagar = q.Valor_a_pagar,
+                                 Valor_estimado_a_pagar_OP = q.Valor_a_pagar,
+                                 Total_cancelado_OP = q.Valor_a_pagar,
+                                 Nom_Beneficiario = q.pe_nombreCompleto, 
+                                 Referencia=q.Observacion
+                                 
+                             }).ToList();
 
-                    foreach (var item in consulta)
-                    {
-                        cp_orden_pago_cancelaciones_Info info = new cp_orden_pago_cancelaciones_Info();
 
-                        info.IdEmpresa = item.IdEmpresa;
-                        info.Idcancelacion = item.Idcancelacion;
-                        info.Secuencia = item.Secuencia;
-                        info.IdEmpresa_cxp = item.IdEmpresa_cxp;
-                        info.IdTipoCbte_cxp = item.IdTipoCbte_cxp;
-                        info.IdCbteCble_cxp = item.IdCbteCble_cxp;
-                        info.IdEmpresa_pago = item.IdEmpresa_pago;
-                        info.IdTipoCbte_pago = item.IdTipoCbte_pago;
-                        info.IdCbteCble_pago = item.IdCbteCble_pago;
-                        info.MontoAplicado = Convert.ToDouble(item.MontoAplicado);
-                        info.SaldoAnterior = Convert.ToDouble(item.SaldoAnterior);
-                        info.SaldoActual = Convert.ToDouble(item.SaldoActual);
-
-                        Lst.Add(info);
-                    }
                 }
 
-                return Lst;
+                return Lista;
             }
             catch (Exception ex)
             {

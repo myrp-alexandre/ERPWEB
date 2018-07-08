@@ -573,8 +573,8 @@
           <Property Name="Codigo_Secuenciales_Transaccion" Type="varchar" MaxLength="250" />
           <Property Name="Sustento_Tributario" Type="varchar" MaxLength="250" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwcp_codigo_SRI' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcp_codigo_SRI' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_codigo_SRI">
           <Key>
             <PropertyRef Name="IdCodigo_SRI" />
@@ -599,8 +599,8 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwcp_codigo_SRI' does no
           <Property Name="IdTipoSRI" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwcp_orden_giro_x_pagar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcp_orden_giro_x_pagar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_orden_giro_x_pagar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -667,8 +667,8 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwcp_orden_giro_x_pagar'
           <Property Name="Valor_cuota" Type="float" />
           <Property Name="IdTipoMovi" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwcp_orden_pago' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcp_orden_pago' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_orden_pago">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -708,8 +708,8 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwcp_orden_pago' does no
           <Property Name="Descripcion" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="IdTipoMovi" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcp_nota_DebCre' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_nota_DebCre' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_nota_DebCre">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -792,8 +792,8 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcp_nota_DebCre' does n
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="pe_razonSocial" Type="varchar" MaxLength="150" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcp_orden_giro' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_orden_giro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_orden_giro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -898,8 +898,50 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcp_orden_giro' does no
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="250" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcp_proveedor_consulta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_orden_pago_con_cancelacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwcp_orden_pago_con_cancelacion">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenPago" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="Valor_a_pagar" />
+            <PropertyRef Name="IdFormaPago" />
+            <PropertyRef Name="Fecha_Pago" />
+            <PropertyRef Name="MontoAplicado" />
+            <PropertyRef Name="SaldoAnterior" />
+            <PropertyRef Name="SaldoActual" />
+            <PropertyRef Name="Observacion" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="IdTipo_op" />
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="IdEstadoAprobacion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdOrdenPago" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdEmpresa_cxp" Type="int" />
+          <Property Name="IdCbteCble_cxp" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdTipoCbte_cxp" Type="int" />
+          <Property Name="Valor_a_pagar" Type="float" Nullable="false" />
+          <Property Name="Referencia" Type="varchar" MaxLength="50" />
+          <Property Name="IdFormaPago" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Fecha_Pago" Type="date" Nullable="false" />
+          <Property Name="MontoAplicado" Type="float" Nullable="false" />
+          <Property Name="SaldoAnterior" Type="float" Nullable="false" />
+          <Property Name="SaldoActual" Type="float" Nullable="false" />
+          <Property Name="Observacion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdTipo_op" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IdTipo_Persona" Type="varchar" MaxLength="20" />
+          <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdEntidad" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdEstadoAprobacion" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_proveedor_consulta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_proveedor_consulta">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -918,8 +960,8 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcp_proveedor_consulta'
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="pr_estado" Type="varchar" MaxLength="1" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_retencion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1591,6 +1633,31 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' does not
     [vwcp_orden_giro].[Descripcion] AS [Descripcion]
     FROM [web].[vwcp_orden_giro] AS [vwcp_orden_giro]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwcp_orden_pago_con_cancelacion" EntityType="Self.vwcp_orden_pago_con_cancelacion" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [vwcp_orden_pago_con_cancelacion].[IdEmpresa] AS [IdEmpresa], 
+    [vwcp_orden_pago_con_cancelacion].[IdOrdenPago] AS [IdOrdenPago], 
+    [vwcp_orden_pago_con_cancelacion].[Secuencia] AS [Secuencia], 
+    [vwcp_orden_pago_con_cancelacion].[IdEmpresa_cxp] AS [IdEmpresa_cxp], 
+    [vwcp_orden_pago_con_cancelacion].[IdCbteCble_cxp] AS [IdCbteCble_cxp], 
+    [vwcp_orden_pago_con_cancelacion].[IdTipoCbte_cxp] AS [IdTipoCbte_cxp], 
+    [vwcp_orden_pago_con_cancelacion].[Valor_a_pagar] AS [Valor_a_pagar], 
+    [vwcp_orden_pago_con_cancelacion].[Referencia] AS [Referencia], 
+    [vwcp_orden_pago_con_cancelacion].[IdFormaPago] AS [IdFormaPago], 
+    [vwcp_orden_pago_con_cancelacion].[Fecha_Pago] AS [Fecha_Pago], 
+    [vwcp_orden_pago_con_cancelacion].[MontoAplicado] AS [MontoAplicado], 
+    [vwcp_orden_pago_con_cancelacion].[SaldoAnterior] AS [SaldoAnterior], 
+    [vwcp_orden_pago_con_cancelacion].[SaldoActual] AS [SaldoActual], 
+    [vwcp_orden_pago_con_cancelacion].[Observacion] AS [Observacion], 
+    [vwcp_orden_pago_con_cancelacion].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwcp_orden_pago_con_cancelacion].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [vwcp_orden_pago_con_cancelacion].[IdTipo_op] AS [IdTipo_op], 
+    [vwcp_orden_pago_con_cancelacion].[IdTipo_Persona] AS [IdTipo_Persona], 
+    [vwcp_orden_pago_con_cancelacion].[IdPersona] AS [IdPersona], 
+    [vwcp_orden_pago_con_cancelacion].[IdEntidad] AS [IdEntidad], 
+    [vwcp_orden_pago_con_cancelacion].[IdEstadoAprobacion] AS [IdEstadoAprobacion]
+    FROM [web].[vwcp_orden_pago_con_cancelacion] AS [vwcp_orden_pago_con_cancelacion]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwcp_proveedor_consulta" EntityType="Self.vwcp_proveedor_consulta" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
     [vwcp_proveedor_consulta].[IdEmpresa] AS [IdEmpresa], 
@@ -1912,6 +1979,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' does not
             <End Role="cp_pais_sri" EntitySet="cp_pais_sri" />
             <End Role="cp_orden_giro" EntitySet="cp_orden_giro" />
           </AssociationSet>
+          <EntitySet Name="vwcp_orden_pago_con_cancelacion" EntityType="Model_cuentas_por_pagar.vwcp_orden_pago_con_cancelacion" />
           </EntityContainer>
         <EntityType Name="cp_codigo_SRI_tipo">
           <Key>
@@ -3335,6 +3403,46 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwcp_orden_pago_con_cancelacion">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenPago" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="Valor_a_pagar" />
+            <PropertyRef Name="IdFormaPago" />
+            <PropertyRef Name="Fecha_Pago" />
+            <PropertyRef Name="MontoAplicado" />
+            <PropertyRef Name="SaldoAnterior" />
+            <PropertyRef Name="SaldoActual" />
+            <PropertyRef Name="Observacion" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="IdTipo_op" />
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="IdEstadoAprobacion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenPago" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa_cxp" Type="Int32" />
+          <Property Name="IdCbteCble_cxp" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdTipoCbte_cxp" Type="Int32" />
+          <Property Name="Valor_a_pagar" Type="Double" Nullable="false" />
+          <Property Name="Referencia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdFormaPago" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Pago" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MontoAplicado" Type="Double" Nullable="false" />
+          <Property Name="SaldoAnterior" Type="Double" Nullable="false" />
+          <Property Name="SaldoActual" Type="Double" Nullable="false" />
+          <Property Name="Observacion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipo_op" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipo_Persona" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEntidad" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdEstadoAprobacion" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4207,6 +4315,33 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' does not
               <MappingFragment StoreEntitySet="cp_pais_sri">
                 <ScalarProperty Name="Pais" ColumnName="Pais" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwcp_orden_pago_con_cancelacion">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.vwcp_orden_pago_con_cancelacion">
+              <MappingFragment StoreEntitySet="vwcp_orden_pago_con_cancelacion">
+                <ScalarProperty Name="IdEstadoAprobacion" ColumnName="IdEstadoAprobacion" />
+                <ScalarProperty Name="IdEntidad" ColumnName="IdEntidad" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdTipo_Persona" ColumnName="IdTipo_Persona" />
+                <ScalarProperty Name="IdTipo_op" ColumnName="IdTipo_op" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="SaldoActual" ColumnName="SaldoActual" />
+                <ScalarProperty Name="SaldoAnterior" ColumnName="SaldoAnterior" />
+                <ScalarProperty Name="MontoAplicado" ColumnName="MontoAplicado" />
+                <ScalarProperty Name="Fecha_Pago" ColumnName="Fecha_Pago" />
+                <ScalarProperty Name="IdFormaPago" ColumnName="IdFormaPago" />
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="Valor_a_pagar" ColumnName="Valor_a_pagar" />
+                <ScalarProperty Name="IdTipoCbte_cxp" ColumnName="IdTipoCbte_cxp" />
+                <ScalarProperty Name="IdCbteCble_cxp" ColumnName="IdCbteCble_cxp" />
+                <ScalarProperty Name="IdEmpresa_cxp" ColumnName="IdEmpresa_cxp" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdOrdenPago" ColumnName="IdOrdenPago" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -21,7 +21,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
 
         }
 
-        public List<cp_orden_pago_cancelaciones_Info> Get_list_Cancelacion_x_CXP(int IdEmpresa_cxp, int IdTipoCbte_cxp, decimal IdCbteCble_cxp)
+        public List<cp_orden_pago_det_Info> Get_list_Cancelacion_x_CXP(int IdEmpresa_cxp, int IdTipoCbte_cxp, decimal IdCbteCble_cxp)
         {
             try
             {
