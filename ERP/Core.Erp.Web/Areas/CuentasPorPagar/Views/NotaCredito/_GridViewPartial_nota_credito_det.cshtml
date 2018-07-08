@@ -41,13 +41,7 @@
             column.Width = Unit.Percentage(10);
             column.Visible = false;
         });
-        settings.Columns.Add(columnCheck =>
-        {
-            columnCheck.FieldName = "check";
-            columnCheck.ColumnType = MVCxGridViewColumnType.CheckBox;
-            var checkBoxProperties = columnCheck.PropertiesEdit as CheckBoxProperties;
-        });
-
+      
 
         settings.Columns.Add("IdOrdenPago","ID").Width=Unit.Percentage(10);
         settings.Columns.Add("Nom_Beneficiario", "Beneficiario").Width=Unit.Percentage(30);

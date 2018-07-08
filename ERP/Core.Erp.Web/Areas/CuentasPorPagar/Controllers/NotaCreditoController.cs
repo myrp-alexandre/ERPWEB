@@ -64,7 +64,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
         public ActionResult GridViewPartial_ordenes_pagos_con_saldo()
         {
-            lst_detalle_op = Session["lst_detalle_op"] as List<cp_orden_pago_det_Info>;
+            lst_detalle_op = Session["list_op_por_proveedor"] as List<cp_orden_pago_det_Info>;
             return PartialView("_GridViewPartial_ordenes_pagos_con_saldo", lst_detalle_op);
         }
 
@@ -321,7 +321,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return Json(list_tipo_doc, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult armar_diario(decimal IdProveedor = 0, double cn_subtotal_iva = 0, double cn_subtotal_siniva = 0, double cn_valoriva = 0, double cn_total = 0, string observacion = "")
+        public JsonResult armar_diario(decimal IdProveedor = 0, double cn_subtotal_iva = 0, double cn_subtotal_siniva = 0,
+            double cn_valoriva = 0, double cn_total = 0, string observacion = "")
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (Session["info_proveedor"] == null)

@@ -15,202 +15,6 @@
         </div>
     }
 }
-<script>
-
-
-                    $(function () {
-                        //Date picker
-                        $('#cn_fecha').datepicker({
-                            autoclose: true
-                        })
-                        $('#Fecha_contable').datepicker({
-                            autoclose: true
-                        })
-                        $('#Fecha_inicio').datepicker({
-                            autoclose: true
-                        })
-                        $('#cn_Fecha_vcto').datepicker({
-                            autoclose: true
-                        })
-
-                        $("#cn_num_doc_modificado").change(function () {
-                            rellenar_ceros();
-
-                        });
-                        $("#cn_Nota").change(function () {
-                            rellenar_ceros_izquierda();
-
-                        });
-                        $("#IdTipoNota").change(function () {
-                            ocultar_mostrar_div();
-                        });
-                    });
-
-                    // funciones calcular total
-                    $("#cn_fecha").change(function () {
-                        var d = new Date($("#cn_fecha").val());
-                        $('#Fecha_contable').datepicker("setDate", moment(d).format("DD/MM/YYYY"));
-
-                    });
-                    $("#cn_subtotal_iva").keyup(function () {
-
-                        actualizar_valores();
-                        armar_diario();
-                    });
-                    $("#cn_subtotal_siniva").keyup(function () {
-
-                        actualizar_valores();
-                        armar_diario();
-                    });
-                    $("#cmb_idtCredito").change(function () {
-                        if (IdProveedor.GetValue() == 0) {
-                            alert("Seleccione el proveedor");
-                        }
-                        $("#cmbTipoDocu").empty();
-                        $("#cmbTipoDocu_modif").empty();
-                        get_list_tipo_doc();
-                    });
-
-                    function rellenar_ceros_izquierda() {
-                        var str = "" + Number($("#cn_Nota").val());
-                        var pad = "000000000";
-                        var doc = pad.substring(0, pad.length - str.length) + str;
-                        $("#cn_Nota").val(doc);
-                    }
-                    function rellenar_ceros() {
-                        var sts = "" + Number($("#cn_num_doc_modificado").val());
-                        var pad = "000000000";
-                        var doc = pad.substring(0, pad.length - sts.length) + sts;
-                        $("#cn_num_doc_modificado").val(doc);
-                    }
-                    function ocultar_mostrar_div() {
-                        var tipo_nota = $("#IdTipoNota").val();
-                        if (tipo_nota == "T_TIP_NOTA_INT") {
-                            $("#div_tipo").hide();
-                        } else {
-                            $("#div_tipo").show();
-                        }
-                    }
-
-                    function actualizar_valores() {
-                        var base_iva = $("#cn_subtotal_iva").val();
-                        var base_cero = $("#cn_subtotal_siniva").val();
-                        var iva = base_iva * 0.12;
-                        if (base_iva == "")
-                            base_iva = 0;
-                        if (base_cero == "")
-                            base_cero = 0;
-                        if (iva == "")
-                            iva = 0;
-                        var tot = parseFloat(parseFloat(base_iva) + parseFloat(base_cero) + parseFloat(iva));
-                        $('#cn_valoriva').val(iva.toFixed(2));
-                        if (tot > 0)
-                            $('#cn_total').val(tot.toFixed(2));
-                        else
-                            $('#cn_total').val(0.00);
-                        if (iva > 0)
-                            $('#cn_Por_iva').val(12);
-                        else
-                            $('#cn_Por_iva').val(0.00);
-
-                    }
-
-
-                    // obtener tipo de documento
-                    function get_list_tipo_doc() {
-
-
-
-                        if (IdProveedor.GetValue() > 0 && $("#cmb_idtCredito").val() != "") {
-                            var datos = {
-                                IdProveedor: IdProveedor.GetValue(),
-                                codigoSRI: $("#cmb_idtCredito").val()
-
-                            }
-                            $.ajax({
-                                type: 'POST',
-                                data: JSON.stringify(datos),
-                                url: '@Url.Action("get_list_tipo_doc", "Deudas", new { Area = "CuentasPorPagar" })',
-                                async: false,
-                                bDeferRender: true,
-                                bProcessing: true,
-                                dataType: 'json',
-                                contentType: 'application/json; charset=utf-8',
-                                success: function (data) {
-                                    $.each(data, function (i, row) {
-                                        $("#cmbTipoDocu").append("<option value=" + row.CodTipoDocumento + ">" + row.Descripcion + "</option>");
-                                        $("#cmbTipoDocu_modif").append("<option value=" + row.CodTipoDocumento + ">" + row.Descripcion + "</option>");
-                                    });
-                                },
-                                error: function (error) {
-                                }
-                            });
-                        }
-                    };
-                    // armar diario contable
-
-                    function armar_diario() {
-
-
-
-
-
-                        var datos = {
-                            IdProveedor: IdProveedor.GetValue(),
-                            cn_subtotal_iva: $("#cn_subtotal_iva").val(),
-                            cn_subtotal_siniva: $("#cn_subtotal_siniva").val(),
-                            cn_valoriva: $("#cn_valoriva").val(),
-                            cn_total: $("#cn_total").val(),
-                            observacion: $("#observacion").val()
-                        }
-                        $.ajax({
-                            type: 'POST',
-                            data: JSON.stringify(datos),
-                            url: '@Url.Action("armar_diario", "NotaCredito", new { Area = "CuentasPorPagar" })',
-                            async: false,
-                            bDeferRender: true,
-                            bProcessing: true,
-                            dataType: 'json',
-                            contentType: 'application/json; charset=utf-8',
-                            success: function (data) {
-                                GridViewPartial_nota_credito_dc.PerformCallback();
-                            },
-                            error: function (error) {
-                            }
-                        });
-
-                    };
-
-
-
-                    function Buscar_op() {
-
-                        var datos = {
-                            IdProveedor: IdProveedor.GetValue()
-
-
-                        }
-                        $.ajax({
-                            type: 'POST',
-                            data: JSON.stringify(datos),
-                            url: '@Url.Action("Buscar_op", "NotaCredito", new { Area = "CuentasPorPagar" })',
-                            async: false,
-                            bDeferRender: true,
-                            bProcessing: true,
-                            dataType: 'json',
-                            contentType: 'application/json; charset=utf-8',
-                            success: function (data) {
-                                GridViewPartial_ordenes_pagos_con_saldo.PerformCallback();
-
-                            },
-                            error: function (error) {
-                            }
-                        });
-
-                    };
-
-
-</script>
 
 <script>
     function op_con_saldo() {
@@ -588,3 +392,196 @@
     </div>
 </div>
   
+
+
+<script>
+
+
+                    $(function () {
+                        //Date picker
+                        $('#cn_fecha').datepicker({
+                            autoclose: true
+                        })
+                        $('#Fecha_contable').datepicker({
+                            autoclose: true
+                        })
+                        $('#Fecha_inicio').datepicker({
+                            autoclose: true
+                        })
+                        $('#cn_Fecha_vcto').datepicker({
+                            autoclose: true
+                        })
+
+                        $("#cn_num_doc_modificado").change(function () {
+                            rellenar_ceros();
+
+                        });
+                        $("#cn_Nota").change(function () {
+                            rellenar_ceros_izquierda();
+
+                        });
+                        $("#IdTipoNota").change(function () {
+                            ocultar_mostrar_div();
+                        });
+                    });
+
+                    // funciones calcular total
+                    $("#cn_fecha").change(function () {
+                        var d = new Date($("#cn_fecha").val());
+                        $('#Fecha_contable').datepicker("setDate", moment(d).format("DD/MM/YYYY"));
+
+                    });
+                    $("#cn_subtotal_iva").keyup(function () {
+
+                        actualizar_valores();
+                        armar_diario();
+                    });
+                    $("#cn_subtotal_siniva").keyup(function () {
+
+                        actualizar_valores();
+                        armar_diario();
+                    });
+                    $("#cmb_idtCredito").change(function () {
+                        if (IdProveedor.GetValue() == 0) {
+                            alert("Seleccione el proveedor");
+                        }
+                        $("#cmbTipoDocu").empty();
+                        $("#cmbTipoDocu_modif").empty();
+                        get_list_tipo_doc();
+                    });
+
+                    function rellenar_ceros_izquierda() {
+                        var str = "" + Number($("#cn_Nota").val());
+                        var pad = "000000000";
+                        var doc = pad.substring(0, pad.length - str.length) + str;
+                        $("#cn_Nota").val(doc);
+                    }
+                    function rellenar_ceros() {
+                        var sts = "" + Number($("#cn_num_doc_modificado").val());
+                        var pad = "000000000";
+                        var doc = pad.substring(0, pad.length - sts.length) + sts;
+                        $("#cn_num_doc_modificado").val(doc);
+                    }
+                    function ocultar_mostrar_div() {
+                        var tipo_nota = $("#IdTipoNota").val();
+                        if (tipo_nota == "T_TIP_NOTA_INT") {
+                            $("#div_tipo").hide();
+                        } else {
+                            $("#div_tipo").show();
+                        }
+                    }
+
+                    function actualizar_valores() {
+                        var base_iva = $("#cn_subtotal_iva").val();
+                        var base_cero = $("#cn_subtotal_siniva").val();
+                        var iva = base_iva * 0.12;
+                        if (base_iva == "")
+                            base_iva = 0;
+                        if (base_cero == "")
+                            base_cero = 0;
+                        if (iva == "")
+                            iva = 0;
+                        var tot = parseFloat(parseFloat(base_iva) + parseFloat(base_cero) + parseFloat(iva));
+                        $('#cn_valoriva').val(iva.toFixed(2));
+                        if (tot > 0)
+                            $('#cn_total').val(tot.toFixed(2));
+                        else
+                            $('#cn_total').val(0.00);
+                        if (iva > 0)
+                            $('#cn_Por_iva').val(12);
+                        else
+                            $('#cn_Por_iva').val(0.00);
+
+                    }
+
+
+                    // obtener tipo de documento
+                    function get_list_tipo_doc() {
+
+
+
+                        if (IdProveedor.GetValue() > 0 && $("#cmb_idtCredito").val() != "") {
+                            var datos = {
+                                IdProveedor: IdProveedor.GetValue(),
+                                codigoSRI: $("#cmb_idtCredito").val()
+
+                            }
+                            $.ajax({
+                                type: 'POST',
+                                data: JSON.stringify(datos),
+                                url: '@Url.Action("get_list_tipo_doc", "Deudas", new { Area = "CuentasPorPagar" })',
+                                async: false,
+                                bDeferRender: true,
+                                bProcessing: true,
+                                dataType: 'json',
+                                contentType: 'application/json; charset=utf-8',
+                                success: function (data) {
+                                    $.each(data, function (i, row) {
+                                        $("#cmbTipoDocu").append("<option value=" + row.CodTipoDocumento + ">" + row.Descripcion + "</option>");
+                                        $("#cmbTipoDocu_modif").append("<option value=" + row.CodTipoDocumento + ">" + row.Descripcion + "</option>");
+                                    });
+                                },
+                                error: function (error) {
+                                }
+                            });
+                        }
+                    };
+                    // armar diario contable
+
+                    function armar_diario() {
+                        var datos = {
+                            IdProveedor: IdProveedor.GetValue(),
+                            cn_subtotal_iva: $("#cn_subtotal_iva").val(),
+                            cn_subtotal_siniva: $("#cn_subtotal_siniva").val(),
+                            cn_valoriva: $("#cn_valoriva").val(),
+                            cn_total: $("#cn_total").val(),
+                            observacion: $("#observacion").val()
+                        }
+                        $.ajax({
+                            type: 'POST',
+                            data: JSON.stringify(datos),
+                            url: '@Url.Action("armar_diario", "NotaCredito", new { Area = "CuentasPorPagar" })',
+                            async: false,
+                            bDeferRender: true,
+                            bProcessing: true,
+                            dataType: 'json',
+                            contentType: 'application/json; charset=utf-8',
+                            success: function (data) {
+                                GridViewPartial_nota_credito_dc.PerformCallback();
+                            },
+                            error: function (error) {
+                            }
+                        });
+
+                    };
+
+
+
+                    function Buscar_op() {
+
+                        var datos = {
+                            IdProveedor: IdProveedor.GetValue()
+
+
+                        }
+                        $.ajax({
+                            type: 'POST',
+                            data: JSON.stringify(datos),
+                            url: '@Url.Action("Buscar_op", "NotaCredito", new { Area = "CuentasPorPagar" })',
+                            async: false,
+                            bDeferRender: true,
+                            bProcessing: true,
+                            dataType: 'json',
+                            contentType: 'application/json; charset=utf-8',
+                            success: function (data) {
+                                GridViewPartial_ordenes_pagos_con_saldo.PerformCallback();
+
+                            },
+                            error: function (error) {
+                            }
+                        });
+
+                    };
+
+
+</script>
