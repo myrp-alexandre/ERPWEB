@@ -143,6 +143,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         }
 
+        #region Funciones
         public ActionResult Nuevo()
         {
             Session["lst_cuotas"] = null;
@@ -157,7 +158,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 {
                     Fecha_inicio = DateTime.Now
                 },
-                
+
             };
             cargar_combos();
             return View(model);
@@ -201,11 +202,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
-           
-            
+
+
             model.IdUsuario = Session["IdUsuario"].ToString();
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-           
+
             if (!bus_orden_giro.guardarDB(model))
             {
                 cargar_combos(model.IdProveedor, model.IdOrden_giro_Tipo);
@@ -223,7 +224,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return RedirectToAction("Index");
             if (model.info_comrobante.lst_ct_cbtecble_det == null)
                 model.info_comrobante.lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>();
-                    Session["ct_cbtecble_det_Info"] = model.info_comrobante.lst_ct_cbtecble_det;
+            Session["ct_cbtecble_det_Info"] = model.info_comrobante.lst_ct_cbtecble_det;
             if (model.info_cuota.lst_cuotas_det == null)
                 model.info_cuota.lst_cuotas_det = new List<cp_cuotas_x_doc_det_Info>();
             Session["lst_cuotas"] = model.info_cuota.lst_cuotas_det;
@@ -303,7 +304,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(int IdTipoCbte_Ogiro=0, decimal IdCbteCble_Ogiro = 0)
+        public ActionResult Anular(int IdTipoCbte_Ogiro = 0, decimal IdCbteCble_Ogiro = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             cp_orden_giro_Info model = bus_orden_giro.get_info(IdEmpresa, IdTipoCbte_Ogiro, IdCbteCble_Ogiro);
@@ -319,7 +320,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             cargar_combos_detalle();
             return View(model);
         }
-     
+
         [HttpPost]
         public ActionResult Anular(cp_orden_giro_Info model)
         {
@@ -389,6 +390,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
         #region json
         public JsonResult calcular_cuotas(DateTime Fecha_inicio,int Num_cuotas=0, int Dias_plazo = 0, double Total_a_pagar=0)
         {
@@ -512,25 +514,40 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return PartialView("_GridViewPartial_deudas_dc", model);
         }
 
+        #endregion
+
+        #region editar y eliminar detalle lista de aprobacion
         [HttpPost, ValidateInput(false)]
-        public ActionResult GridViewPartial_aprobacion_facturas_Update(Core.Erp.Info.CuentasPorPagar.cp_orden_giro_Info item)
+        public ActionResult EditingUpdate_og([ModelBinder(typeof(DevExpressEditorsBinder))] cp_orden_giro_Info info_det)
         {
 
-            try
-            {
-                item.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-                bus_orden_giro.Generar_OP_x_orden_giro(item);
-                return RedirectToAction("Index3");
 
-            }
-            catch (Exception e)
+            List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
+            model = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_Info>;
+            if (model.Count() > 0)
             {
-                return RedirectToAction("Index3");
+                cp_orden_giro_Info edited_info = model.Where(m => m.IdCbteCble_Ogiro == info_det.IdCbteCble_Ogiro).First();
+
+                edited_info.co_valorpagar = info_det.co_valorpagar;
             }
+
+            return PartialView("_GridViewPartial_aprobacion_facturas", model);
+        }
+        public ActionResult EditingDelete_og(decimal IdCbteCble_Ogiro)
+        {
+            List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
+            model = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_Info>;
+            if (model.Count() > 0)
+            {
+                cp_orden_giro_Info edited_info = model.Where(m => m.IdCbteCble_Ogiro == IdCbteCble_Ogiro).First();
+                model.Remove(edited_info);
+                Session["list_facturas_seleccionadas"] = model;
+            }
+
+            return PartialView("_GridViewPartial_aprobacion_facturas", model);
 
 
         }
-
 
         #endregion
 

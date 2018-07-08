@@ -457,6 +457,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             {
                 cp_orden_pago_det_Info edited_info = model.Where(m => m.IdOrdenPago == IdOrdenPago).First();
                 model.Remove(edited_info);
+                Session["list_op_seleccionadas"] = model;
 
             }
 
