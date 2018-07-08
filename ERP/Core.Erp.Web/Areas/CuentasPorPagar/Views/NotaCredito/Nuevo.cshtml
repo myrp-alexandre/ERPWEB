@@ -237,7 +237,7 @@
         e.customArgs["selectedIDs"] = selectedIDs;
     }
     function OnSelectionChanged(s, e) {
-        s.GetSelectedFieldValues("IdOrdePago", GetSelectedFieldValuesCallback);
+        s.GetSelectedFieldValues("IdOrdenPago", GetSelectedFieldValuesCallback);
     }
     function GetSelectedFieldValuesCallback(values) {
         //Capture all selected keys
@@ -252,7 +252,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("seleccionar_op","Deudas", new { Area = "CuentasPorPagar" })',
+            url: '@Url.Action("seleccionar_op","NotaCredito", new { Area = "CuentasPorPagar" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -261,7 +261,7 @@
             success: function (data) {
 
                 $("#myform").submit();
-                GridView_aprobacion_facturas.PerformCallback();
+                GridViewPartial_nota_credito_det.PerformCallback();
                 $("#op_con_saldo").modal("hide");
 
             },

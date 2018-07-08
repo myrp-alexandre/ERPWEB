@@ -28,6 +28,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         cp_parametros_Bus bus_param = new cp_parametros_Bus();
         ct_cbtecble_det_List_nc comprobante_contable_fp = new ct_cbtecble_det_List_nc();
         cp_orden_pago_Bus bus_orden_pago = new cp_orden_pago_Bus();
+        List<cp_orden_pago_det_Info> lst_detalle_op = new List<cp_orden_pago_det_Info>();
         int IdEmpresa = 0;
 
 
@@ -49,6 +50,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             List<cp_orden_pago_det_Info> lst_detalle_op = new List<cp_orden_pago_det_Info>();
             return PartialView("_GridViewPartial_nota_credito_det", lst_detalle_op);
+        }
+        public ActionResult GridViewPartial_ordenes_pagos_con_saldo()
+        {
+            lst_detalle_op = Session["lst_detalle_op"] as List<cp_orden_pago_det_Info>;
+            return PartialView("_GridViewPartial_ordenes_pagos_con_saldo", lst_detalle_op);
         }
 
         private void cargar_combos(decimal IdProveedor = 0, string IdTipoSRI = "")
@@ -372,8 +378,52 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             comprobante_contable_fp.delete_detail_New_details(info_proveedor, info_parametro, cn_subtotal_iva, cn_subtotal_siniva, cn_valoriva, cn_total, observacion);
             return Json("", JsonRequestBehavior.AllowGet);
         }
-       
-        
+
+        public JsonResult Buscar_op(decimal IdProveedor)
+        {
+            try
+            {
+                string IdTipo_op = cl_enumeradores.eTipoOrdenPago.FACT_PROVEE.ToString();
+                string IdEstado_Aprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString();
+                string IdUsuario = Session["IdUsuario"].ToString();
+                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+                lst_detalle_op = bus_orden_pago.Get_List_orden_pago_con_saldo(IdEmpresa, IdTipo_op, IdProveedor, IdEstado_Aprobacion, IdUsuario);
+                Session["lst_detalle_op"] = lst_detalle_op as List<cp_orden_pago_det_Info>;
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public JsonResult seleccionar_op(string Ids)
+        {
+            string[] array = Ids.Split(',');
+            var output = array.GroupBy(q => q).ToList();
+            List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
+            List<cp_orden_giro_Info> list_facturas_seleccionadas = new List<cp_orden_giro_Info>();
+            model = Session["list_ordenes_giro"] as List<cp_orden_giro_Info>;
+            list_facturas_seleccionadas = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_Info>;
+            if (list_facturas_seleccionadas == null)
+                list_facturas_seleccionadas = new List<cp_orden_giro_Info>();
+            foreach (var item in output)
+            {
+                if (item.Key != "")
+                {
+                    var lista_tmp = model.Where(v => v.IdCbteCble_Ogiro == Convert.ToDecimal(item.Key));
+                    if (lista_tmp.Count() == 1 & list_facturas_seleccionadas.Where(v => v.IdCbteCble_Ogiro == Convert.ToDecimal(item.Key)).Count() == 0)// agrego si existe y no esta repetida
+                    {
+                        var info_add = lista_tmp.FirstOrDefault();
+                        info_add.co_valorpagar = (double)info_add.Saldo_OG;
+                        list_facturas_seleccionadas.Add(info_add);
+                    }
+                }
+            }
+            Session["list_facturas_seleccionadas"] = list_facturas_seleccionadas;
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
 

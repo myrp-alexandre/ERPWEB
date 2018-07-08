@@ -8497,7 +8497,7 @@
     <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\Index.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\Modificar.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\Nuevo.cshtml" />
-    <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\_GridViewPartial_ordenes_pagos_con_saldo.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\_GridViewPartial_ordenes_pagos_con_saldo.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\Deudas\Index3.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\Deudas\_GridViewPartial_aprobacion_facturas.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\_GridView2Partial.cshtml" />

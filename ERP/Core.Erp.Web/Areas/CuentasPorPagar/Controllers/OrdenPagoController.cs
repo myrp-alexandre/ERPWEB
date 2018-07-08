@@ -42,11 +42,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return PartialView("_GridViewPartial_ordenes_pagos", lst_ordenes_pagos);
         }
 
-        public ActionResult GridViewPartial_ordenes_pagos_con_saldo()
-        {
-            lst_detalle_op = Session["lst_detalle_op"] as List<cp_orden_pago_det_Info>;
-            return PartialView("_GridViewPartial_ordenes_pagos_con_saldo", lst_detalle_op);
-        }
+    
         [ValidateInput(false)]
         public ActionResult GridViewPartial_detalle_op()
         {
@@ -318,25 +314,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.lst_ct_cbtecble_det = comprobante_contable_fp.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_orden_pago_dc", model);
-        }
-
-        public JsonResult Buscar_op(decimal IdProveedor)
-        {
-            try
-            {
-                string IdTipo_op = cl_enumeradores.eTipoOrdenPago.FACT_PROVEE.ToString();
-                string IdEstado_Aprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString();
-                string IdUsuario = Session["IdUsuario"].ToString();
-                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-                var list_tipo_doc = bus_orden_pago.Get_List_orden_pago_con_saldo(IdEmpresa, IdTipo_op, IdProveedor, IdEstado_Aprobacion, IdUsuario);
-                Session["lst_detalle_op"] = lst_detalle_op as List<cp_orden_pago_det_Info>;
-                return Json("", JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
         }
 
         public ActionResult EditingCheckUncheck([ModelBinder(typeof(DevExpressEditorsBinder))] cp_orden_pago_det_Info info_det)
