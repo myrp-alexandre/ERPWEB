@@ -128,5 +128,24 @@ namespace Core.Erp.Data.CuentasPorPagar
             }
         }
 
+        public bool ElimarDB(int IdEmpresa_cxp, int IdTipoCbte_cxp, decimal IdCbteCble_cxp)
+        {
+            try
+            {
+                using (Entities_cuentas_por_pagar Contex = new Entities_cuentas_por_pagar())
+                {
+                    string sql = "Delete cp_orden_pago_cancelaciones where IdEmpresa_cxp='" + IdEmpresa_cxp+ "' and IdTipoCbte_cxp='"+IdTipoCbte_cxp+ "' and IdCbteCble_cxp='"+IdCbteCble_cxp+"'";
+                    Contex.Database.ExecuteSqlCommand(sql);
+                }
+             
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

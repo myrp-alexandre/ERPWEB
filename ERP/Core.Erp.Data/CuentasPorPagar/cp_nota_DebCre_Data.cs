@@ -85,17 +85,12 @@ namespace Core.Erp.Data.CuentasPorPagar
                     {
 
                         Entity.IdEmpresa = info.IdEmpresa;
-                        Entity.IdCbteCble_Nota = info.IdCbteCble_Nota;
-                        Entity.IdTipoCbte_Nota = info.IdTipoCbte_Nota;
-                        Entity.DebCre = info.DebCre;
                         Entity.IdProveedor = info.IdProveedor;
                         Entity.IdTipoNota = info.IdTipoNota;
                         Entity.IdSucursal = info.IdSucursal;
                         Entity.cn_fecha = info.cn_fecha;
                         Entity.Fecha_contable = info.Fecha_contable;
                         Entity.cn_Fecha_vcto = info.cn_Fecha_vcto;
-                        Entity.cn_serie1 = info.cn_serie1;
-                        Entity.cn_serie2 = info.cn_serie2;
                         Entity.cn_Nota = info.cn_Nota;
                         Entity.cn_observacion = info.cn_observacion;
                         Entity.cn_subtotal_iva = info.cn_subtotal_iva;
@@ -109,7 +104,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.cn_Serv_valor = info.cn_Serv_valor;
                         Entity.cn_BaseSeguro = info.cn_BaseSeguro;
                         Entity.cn_total = info.cn_total;
-                        Entity.cn_vaCoa = info.cn_vaCoa;
                         Entity.cn_Autorizacion = info.cn_Autorizacion;
                         Entity.cn_Autorizacion_Imprenta = info.cn_Autorizacion_Imprenta;
                         Entity.cn_num_doc_modificado = info.cn_num_doc_modificado;

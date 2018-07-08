@@ -208,34 +208,16 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         public ActionResult Anular(cp_orden_pago_Info model)
         {
 
-
-            model.detalle = Session["lst_detalle"] as List<cp_orden_pago_det_Info>;
-            model.info_comprobante = Session["ct_cbtecble_Info"] as ct_cbtecble_Info;
-            model.info_comprobante.lst_ct_cbtecble_det = Session["ct_cbtecble_det_Info"] as List<ct_cbtecble_det_Info>;
-            info_param_op = Session["info_param_op"] as cp_orden_pago_tipo_x_empresa_Info;
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.info_comprobante.IdTipoCbte = (int)info_param_op.IdTipoCbte_OP;
-            model.IdEstadoAprobacion = info_param_op.IdEstadoAprobacion;
-            string mensaje = bus_orden_pago.validar(model);
-            if (mensaje != "")
-            {
-                cargar_combos();
-                ViewBag.mensaje = mensaje;
-                cargar_combos_detalle();
-                return View(model);
-            }
-            else
-            {
+            bus_orden_pago = new cp_orden_pago_Bus();
+            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
                 if (bus_orden_pago.anularDB(model))
                     return RedirectToAction("Index");
                 else
                 {
-                    ViewBag.mensaje = mensaje;
                     cargar_combos();
                     cargar_combos_detalle();
                     return View(model);
                 }
-            }
         }
         #region json
        

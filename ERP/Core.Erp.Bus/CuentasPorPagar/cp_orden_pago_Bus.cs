@@ -115,15 +115,11 @@ namespace Core.Erp.Bus.CuentasPorPagar
         {
             try
             {
+                oData = new cp_orden_pago_Data();
                 if (oData.anularDB(info))
                 {
                     bus_contabilidad.anularDB(info.info_comprobante);
 
-                    foreach (var item in info.detalle)
-                    {
-                        odata_detalle.modificarDB(item);
-
-                    }
                 }
                 return true;
             }

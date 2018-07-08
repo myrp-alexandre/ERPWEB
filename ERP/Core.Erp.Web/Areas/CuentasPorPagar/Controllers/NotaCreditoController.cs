@@ -173,25 +173,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
 
 
-            if (Session["info_proveedor"] == null)
-            {
-                info_proveedor = bus_prov.get_info(model.IdEmpresa, model.IdProveedor);
-                Session["info_proveedor"] = info_proveedor;
-            }
-            else
-                info_proveedor = Session["info_proveedor"] as cp_proveedor_Info;
-
-
-            if (Session["info_parametro"] == null)
-            {
-                info_parametro = bus_param.get_info(model.IdEmpresa);
-                Session["info_parametro"] = info_parametro;
-            }
-            else
-                info_parametro = Session["info_parametro"] as cp_parametros_Info;
-
-
-
+           
             model.info_comrobante = new ct_cbtecble_Info();
 
             if (Session["ct_cbtecble_det_Info"] != null)
@@ -206,18 +188,19 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return View(model);
 
             }
-            if (Session["info_parametro"] != null)
+            if (Session["list_op_seleccionadas"] != null)
             {
-                info_parametro = Session["info_parametro"] as cp_parametros_Info;
-                model.info_comrobante.IdTipoCbte = (int)info_parametro.pa_TipoCbte_OG;
+                model.lst_detalle_op = Session["list_op_seleccionadas"] as List<cp_orden_pago_det_Info>;
             }
             else
             {
-                ViewBag.mensaje = "Falta parametros del modulo cuenta por pagar";
+                ViewBag.mensaje = "Falta detalle  de pago";
                 cargar_combos(model.IdProveedor, model.IdTipoNota);
                 cargar_combos_detalle();
                 return View(model);
+
             }
+           
             string mensaje = bus_orden_giro.validar(model);
             if (mensaje != "")
             {
@@ -264,61 +247,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost]
         public ActionResult Anular(cp_nota_DebCre_Info model)
         {
-            if (Session["info_proveedor"] == null)
-            {
-                info_proveedor = bus_prov.get_info(model.IdEmpresa, model.IdProveedor);
-                Session["info_proveedor"] = info_proveedor;
-            }
-            else
-                info_proveedor = Session["info_proveedor"] as cp_proveedor_Info;
 
-
-            if (Session["info_parametro"] == null)
-            {
-                info_parametro = bus_param.get_info(model.IdEmpresa);
-                Session["info_parametro"] = info_parametro;
-            }
-            else
-                info_parametro = Session["info_parametro"] as cp_parametros_Info;
-
-
-
-            model.info_comrobante = new ct_cbtecble_Info();
-
-            if (Session["ct_cbtecble_det_Info"] != null)
-            {
-                model.info_comrobante.lst_ct_cbtecble_det = Session["ct_cbtecble_det_Info"] as List<ct_cbtecble_det_Info>;
-            }
-            else
-            {
-                ViewBag.mensaje = "Falta diario contable";
-                cargar_combos();
-                cargar_combos_detalle();
-                return View(model);
-
-            }
-            if (Session["info_parametro"] != null)
-            {
-                info_parametro = Session["info_parametro"] as cp_parametros_Info;
-                model.info_comrobante.IdTipoCbte = (int)info_parametro.pa_TipoCbte_OG;
-            }
-            else
-            {
-                ViewBag.mensaje = "Falta parametros del modulo cuenta por pagar";
-                cargar_combos();
-                cargar_combos_detalle();
-                return View(model);
-            }
-            string mensaje = bus_orden_giro.validar(model);
-            if (mensaje != "")
-            {
-                cargar_combos();
-                cargar_combos_detalle();
-                ViewBag.mensaje = mensaje;
-                return View(model);
-            }
-
-
+            bus_orden_giro = new cp_nota_DebCre_Bus();
             model.IdUsuario = Session["IdUsuario"].ToString();
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
 

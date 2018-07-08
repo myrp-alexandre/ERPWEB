@@ -75,10 +75,11 @@
     }
 
 </script>
-@using (Html.BeginForm("Nuevo", "OrdenPago", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Anular", "NotaCredito", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdCbteCble_Nota)
+    @Html.HiddenFor(q => q.IdTipoCbte_Nota)
 
     <div class="row">
         <div class="col-md-6">

@@ -257,6 +257,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.Estado = "I";
                         Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                         Entity.Fecha_UltAnu = info.Fecha_UltAnu=DateTime.Now;
+                        Context.SaveChanges();
                     }
                 }
 
