@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_ordenes_pagos_con_saldo";
-        settings.CallbackRouteValues = new { Controller = "OrdenPago", Action = "GridViewPartial_ordenes_pagos_con_saldo" };
+        settings.CallbackRouteValues = new { Controller = "NotaCredito", Action = "GridViewPartial_ordenes_pagos_con_saldo" };
         settings.KeyFieldName = "IdOrdenPago";
         settings.Width = Unit.Percentage(100);
         //CConfiguracion responsive

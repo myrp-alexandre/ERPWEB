@@ -193,7 +193,7 @@
                         $.ajax({
                             type: 'POST',
                             data: JSON.stringify(datos),
-                            url: '@Url.Action("Buscar_op", "OrdenPago", new { Area = "CuentasPorPagar" })',
+                            url: '@Url.Action("Buscar_op", "NotaCredito", new { Area = "CuentasPorPagar" })',
                             async: false,
                             bDeferRender: true,
                             bProcessing: true,
@@ -576,7 +576,7 @@
                 <h4 class="modal-title">Ordenes de pago con aldos</h4>
             </div>
             <div class="modal-body">
-             @Html.Action("GridViewPartial_ordenes_pagos_con_saldo", new { Area = "CuentasPorPagar", Controller = "OrdenPago" }) 
+             @Html.Action("GridViewPartial_ordenes_pagos_con_saldo") 
                 
             </div>
             <div class="modal-footer">

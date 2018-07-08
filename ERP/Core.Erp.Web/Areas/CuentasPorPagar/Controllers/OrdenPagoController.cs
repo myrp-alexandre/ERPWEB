@@ -316,46 +316,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return PartialView("_GridViewPartial_orden_pago_dc", model);
         }
 
-        public ActionResult EditingCheckUncheck([ModelBinder(typeof(DevExpressEditorsBinder))] cp_orden_pago_det_Info info_det)
-        {
-            IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-          cp_orden_pago_Info op_info= bus_orden_pago.get_info(IdEmpresa, info_det.IdOrdenPago);
-           
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    lst_detalle_op = Session["lst_detalle_op"] as List<cp_orden_pago_det_Info>;
-                    lst_detalle_op.ForEach(item =>
-                    {
-                        if (item.IdOrdenPago == info_det.IdOrdenPago)
-                        {
-                            item.seleccionado = info_det.seleccionado;
-                            item.Total_cancelado_OP = info_det.Total_cancelado_OP;
-                            item.Fecha_Pago = info_det.Fecha_Pago;
-                        }
-                    });
-                    Session["lst_detalle_op"] = lst_detalle_op;
-                    return PartialView("_GridViewPartial_ordenes_pagos_con_saldo", lst_detalle_op);
-
-                }
-                catch (Exception ex)
-                {
-
-                    ViewData["EditError"] = ex.Message;
-                }
-            }
-            else
-            {
-                ViewData["EditError"] = ModelState.FirstOrDefault().Value.Errors.ToString();
-
-                lst_ordenes_pagos = Session["lst_detalle_op"] as List<cp_orden_pago_Info>;
-            }
-
-            cargar_combos_detalle();
-            return PartialView("_GridViewPartial_ordenes_pagos_con_saldo", lst_detalle_op);
-        }
-
+     
     }
 
     public class ct_cbtecble_det_List_op
