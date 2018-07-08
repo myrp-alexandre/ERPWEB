@@ -23,7 +23,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Secuencia = Info.Secuencia,
                         IdEmpresa_op = Info.IdEmpresa_op,
                         IdOrdenPago_op = Info.IdOrdenPago_op,
-                        Secuencia_op = 1,
+                        Secuencia_op = Info.Secuencia_op,
                         IdEmpresa_op_padre = Info.IdEmpresa_op_padre,
                         IdOrdenPago_op_padre = Info.IdOrdenPago_op_padre,
                         Secuencia_op_padre = Info.Secuencia_op_padre,
