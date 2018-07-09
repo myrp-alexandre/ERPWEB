@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.Banco
 {
-    class ba_tipo_nota_Info
+    public class ba_tipo_nota_Info
     {
+        public int IdEmpresa { get; set; }
+        public int IdTipoNota { get; set; }
+        public string Tipo { get; set; }
+        public string Descripcion { get; set; }
+        public string IdCtaCble { get; set; }
+        public string IdCentroCosto { get; set; }
+        public string Estado { get; set; }
     }
 }
