@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Banco
 {
     public class ba_tipo_nota_Data
     {
-        public List<ba_tipo_nota_Info> get_list(int IdEmpresa, int IdTipoNota, bool mostrar_anulados)
+        public List<ba_tipo_nota_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
             try
             {
@@ -19,7 +19,6 @@ namespace Core.Erp.Data.Banco
                  if(mostrar_anulados)
                         Lista = (from q in Context.ba_tipo_nota
                                  where q.IdEmpresa == IdEmpresa
-                                 && q.IdTipoNota == IdTipoNota
                                  select new ba_tipo_nota_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
@@ -33,7 +32,6 @@ namespace Core.Erp.Data.Banco
                  else
                         Lista = (from q in Context.ba_tipo_nota
                                  where q.IdEmpresa == IdEmpresa
-                                 && q.IdTipoNota == IdTipoNota
                                  && q.Estado == "A"
                                  select new ba_tipo_nota_Info
                                  {
@@ -147,6 +145,7 @@ namespace Core.Erp.Data.Banco
 
                     Entity.Descripcion = info.Descripcion;
                     Entity.Tipo = info.Tipo;
+                    Entity.IdCtaCble = info.IdCtaCble;
 
                     Context.SaveChanges();
                 }

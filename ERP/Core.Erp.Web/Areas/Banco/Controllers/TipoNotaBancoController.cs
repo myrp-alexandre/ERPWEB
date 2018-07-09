@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.Banco;
 using Core.Erp.Info.Banco;
 using Core.Erp.Info.Helps;
@@ -19,11 +20,11 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_tipo_nota(int IdTipoNota = 0)
+        public ActionResult GridViewPartial_tipo_nota()
         {
             List<ba_tipo_nota_Info> model = new List<ba_tipo_nota_Info>();
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model = bus_tipo.get_list(IdEmpresa, IdTipoNota, true);
+            model = bus_tipo.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_tipo_nota", model);
         }
 
@@ -35,10 +36,20 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             lst_tipo_nota.Add("NCBA", "Nota de crédito");
             lst_tipo_nota.Add("NDBA", "Nota de débito");
             ViewBag.lst_tipo_nota = lst_tipo_nota;
+
+
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
+            var lst_cuenta = bus_cuenta.get_list(IdEmpresa, false, true);
+            ViewBag.lst_cuenta = lst_cuenta;
+            
         }
         public ActionResult Nuevo()
         {
-            ba_tipo_nota_Info model = new ba_tipo_nota_Info();
+            ba_tipo_nota_Info model = new ba_tipo_nota_Info
+            {
+                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"])
+            };
             cargar_combos();
             return View(model);
         }

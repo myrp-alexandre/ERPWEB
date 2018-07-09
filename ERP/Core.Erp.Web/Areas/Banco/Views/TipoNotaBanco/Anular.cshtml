@@ -1,7 +1,7 @@
 ﻿@model Core.Erp.Info.Banco.ba_tipo_nota_Info
 
 @{
-    ViewBag.Title = "Nuevo tipo";
+    ViewBag.Title = "Anular tipo";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -9,7 +9,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Nuevo", "TipoNotaBanco", FormMethod.Post, new { @role = "form", @class = "form" }))
+@using (Html.BeginForm("Anular", "TipoNotaBanco", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdTipoNota)
@@ -58,7 +58,7 @@
         </div>
     </div>
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index","TipoNotaBanco", new { Area = "Banco"  },null)">Cancelar</a>
     </div>
     @section Scripts {

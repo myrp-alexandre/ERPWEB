@@ -12,11 +12,11 @@ namespace Core.Erp.Bus.Banco
     {
         ba_tipo_nota_Data odata = new ba_tipo_nota_Data();
     
-        public List<ba_tipo_nota_Info> get_list(int IdEmpresa, int IdTipoNota, bool mostrar_anulados)
+        public List<ba_tipo_nota_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdTipoNota, mostrar_anulados);
+                return odata.get_list(IdEmpresa, mostrar_anulados);
             }
             catch (Exception)
             {
