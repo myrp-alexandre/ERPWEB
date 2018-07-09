@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Core.Erp.Info.Contabilidad;
+using Core.Erp.Info.CuentasPorPagar;
+using System;
+using System.Collections.Generic;
 
 namespace Core.Erp.Info.Banco
 {
@@ -28,6 +31,7 @@ namespace Core.Erp.Info.Banco
         public Nullable<decimal> IdPersona { get; set; }
         public Nullable<decimal> IdEntidad { get; set; }
         public string IdTipo_Persona { get; set; }
+
         #region Campos auditoria
         public string IdUsuario { get; set; }
         public string IdUsuario_Anu { get; set; }
@@ -36,6 +40,11 @@ namespace Core.Erp.Info.Banco
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public string MotivoAnulacion { get; set; }
+        #endregion
+
+        #region Campos que no existen en la tabla
+        public List<ct_cbtecble_det_Info> lst_det_ct { get; set; }
+        public List<cp_orden_pago_cancelaciones_Info> lst_det_canc_op { get; set; }
         #endregion
     }
 }
