@@ -1,7 +1,7 @@
 ﻿@model Core.Erp.Info.Banco.ba_Talonario_cheques_x_banco_Info
 
 @{
-    ViewBag.Title = "Nuevo talonario";
+    ViewBag.Title = "Modificar talonario";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -9,9 +9,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Nuevo", "TalonarioChequeBanco", FormMethod.Post, new { @role = "form", @class = "form" }))
+@using (Html.BeginForm("Modificar", "TalonarioChequeBanco", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdBanco)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
@@ -29,9 +30,11 @@
                    settings.Properties.ValueType = typeof(int);
                    settings.Properties.TextField = "ba_descripcion";
                    //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
                    settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownButton.Enabled = false;
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                   settings.ReadOnly = true;
                }).BindList(ViewBag.lst_banco).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
                 </div>

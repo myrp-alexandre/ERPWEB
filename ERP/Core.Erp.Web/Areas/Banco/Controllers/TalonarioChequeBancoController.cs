@@ -38,7 +38,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         {
             ba_Talonario_cheques_x_banco_Info model = new ba_Talonario_cheques_x_banco_Info
             {
-               IdEmpresa = Convert.ToInt32(Session["IdEmpresa"])
+               IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
+               Estado_bool = true
             };
             cargar_combos();
             return View(model);

@@ -78,9 +78,11 @@
             c.Width = Unit.Pixel(150);
         });
         
-        settings.Columns.Add("IdBanco", "Código").Width = Unit.Percentage(15);
-        settings.Columns.Add("Num_cheque", "Número cheque").Width = Unit.Percentage(15);
-        settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(15);
+        settings.Columns.Add("IdBanco", "Código").Width = Unit.Percentage(10);
+        settings.Columns.Add("secuencia", "Secuencia").Width = Unit.Percentage(10);
+        settings.Columns.Add("Num_cheque", "Número cheque").Width = Unit.Percentage(50);
+        settings.Columns.Add("Usado", "Usado").Width = Unit.Percentage(10);
+        settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(10);
     });
 }
 @grid.Bind(Model).GetHtml()
