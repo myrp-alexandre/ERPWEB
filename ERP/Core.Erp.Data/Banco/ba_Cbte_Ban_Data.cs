@@ -312,6 +312,7 @@ namespace Core.Erp.Data.Banco
                 diario.IdUsuarioUltModi = info.IdUsuario;
 
                 var lst_diario_det = Context_ct.ct_cbtecble_det.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoCbte == info.IdTipocbte && q.IdCbteCble == info.IdCbteCble).ToList();
+                Context_ct.ct_cbtecble_det.RemoveRange(lst_diario_det);
                 foreach (var item in info.lst_det_ct)
                 {
                     Context_ct.ct_cbtecble_det.Add(new ct_cbtecble_det
@@ -327,39 +328,66 @@ namespace Core.Erp.Data.Banco
                 #endregion
 
                 #region Cbte bancario
-                Context_b.ba_Cbte_Ban.Add(new ba_Cbte_Ban
-                {
-                    IdEmpresa = info.IdEmpresa,
-                    IdCbteCble = info.IdCbteCble,
-                    IdTipocbte = info.IdTipocbte,
-                    Cod_Cbtecble = info.Cod_Cbtecble,
-                    IdPeriodo = info.IdPeriodo,
-                    IdBanco = info.IdBanco,
-                    cb_Fecha = info.cb_Fecha,
-                    cb_Observacion = info.cb_Observacion,
-                    cb_Valor = info.cb_Valor,
-                    cb_Cheque = info.cb_Cheque,
-                    Estado = "A",
-                    IdPersona_Girado_a = info.IdPersona_Girado_a,
-                    cb_giradoA = info.cb_giradoA,
-                    cb_ciudadChq = info.cb_ciudadChq,
-                    IdTipoFlujo = info.IdTipoFlujo,
-                    IdTipoNota = info.IdTipoNota,
-                    ValorEnLetras = info.ValorEnLetras,
-                    IdSucursal = info.IdSucursal,
-                    IdEstado_Cbte_Ban_cat = info.IdEstado_Cbte_Ban_cat,
-                    IdEstado_Preaviso_ch_cat = info.IdEstado_Preaviso_ch_cat,
-                    IdEstado_cheque_cat = info.IdEstado_cheque_cat,
-                    IdPersona = info.IdPersona,
-                    IdEntidad = info.IdEntidad,
-                    IdTipo_Persona = info.IdTipo_Persona,
-                });
+                var mov_ban = Context_b.ba_Cbte_Ban.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipocbte == info.IdTipocbte && q.IdCbteCble == info.IdCbteCble).FirstOrDefault();
+                if (mov_ban == null)
+                    Context_b.ba_Cbte_Ban.Add(new ba_Cbte_Ban
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdCbteCble = info.IdCbteCble,
+                        IdTipocbte = info.IdTipocbte,
+                        Cod_Cbtecble = info.Cod_Cbtecble,
+                        IdPeriodo = info.IdPeriodo,
+                        IdBanco = info.IdBanco,
+                        cb_Fecha = info.cb_Fecha,
+                        cb_Observacion = info.cb_Observacion,
+                        cb_Valor = info.cb_Valor,
+                        cb_Cheque = info.cb_Cheque,
+                        Estado = "A",
+                        IdPersona_Girado_a = info.IdPersona_Girado_a,
+                        cb_giradoA = info.cb_giradoA,
+                        cb_ciudadChq = info.cb_ciudadChq,
+                        IdTipoFlujo = info.IdTipoFlujo,
+                        IdTipoNota = info.IdTipoNota,
+                        ValorEnLetras = info.ValorEnLetras,
+                        IdSucursal = info.IdSucursal,
+                        IdEstado_Cbte_Ban_cat = info.IdEstado_Cbte_Ban_cat,
+                        IdEstado_Preaviso_ch_cat = info.IdEstado_Preaviso_ch_cat,
+                        IdEstado_cheque_cat = info.IdEstado_cheque_cat,
+                        IdPersona = info.IdPersona,
+                        IdEntidad = info.IdEntidad,
+                        IdTipo_Persona = info.IdTipo_Persona,
+                    });
+                else
+                {                    
+                    mov_ban.Cod_Cbtecble = info.Cod_Cbtecble;
+                    mov_ban.IdPeriodo = info.IdPeriodo;
+                    mov_ban.IdBanco = info.IdBanco;
+                    mov_ban.cb_Fecha = info.cb_Fecha;
+                    mov_ban.cb_Observacion = info.cb_Observacion;
+                    mov_ban.cb_Valor = info.cb_Valor;
+                    mov_ban.cb_Cheque = info.cb_Cheque;
+                    mov_ban.IdPersona_Girado_a = info.IdPersona_Girado_a;
+                    mov_ban.cb_giradoA = info.cb_giradoA;
+                    mov_ban.cb_ciudadChq = info.cb_ciudadChq;
+                    mov_ban.IdTipoFlujo = info.IdTipoFlujo;
+                    mov_ban.IdTipoNota = info.IdTipoNota;
+                    mov_ban.ValorEnLetras = info.ValorEnLetras;
+                    mov_ban.IdSucursal = info.IdSucursal;
+                    mov_ban.IdEstado_Cbte_Ban_cat = info.IdEstado_Cbte_Ban_cat;
+                    mov_ban.IdEstado_Preaviso_ch_cat = info.IdEstado_Preaviso_ch_cat;
+                    mov_ban.IdEstado_cheque_cat = info.IdEstado_cheque_cat;
+                    mov_ban.IdPersona = info.IdPersona;
+                    mov_ban.IdEntidad = info.IdEntidad;
+                    mov_ban.IdTipo_Persona = info.IdTipo_Persona;
+                }
                 #endregion
 
                 switch (TipoCbteBanco)
                 {
                     case cl_enumeradores.eTipoCbteBancario.CHEQ:
                         #region Guardo cancelaciones
+                        var lst_cancelaciones = Context_cxp.cp_orden_pago_cancelaciones.Where(q => q.IdEmpresa_pago == info.IdEmpresa && q.IdTipoCbte_pago == info.IdTipocbte && q.IdCbteCble_pago == info.IdCbteCble).ToList();
+                        Context_cxp.cp_orden_pago_cancelaciones.RemoveRange(lst_cancelaciones);
                         Idcancelacion = odata_can.get_id(info.IdEmpresa);
                         secuencia = 1;
                         foreach (var item in info.lst_det_canc_op)
@@ -393,6 +421,8 @@ namespace Core.Erp.Data.Banco
                         break;
                     case cl_enumeradores.eTipoCbteBancario.DEPO:
                         #region Guardo ingresos
+                        var lst_ing = Context_b.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.Where(q => q.mba_IdEmpresa == info.IdEmpresa && q.mba_IdTipocbte == info.IdTipocbte && q.mba_IdCbteCble == info.IdCbteCble).ToList();
+                        Context_b.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.RemoveRange(lst_ing);
                         foreach (var item in info.lst_det_ing)
                         {
                             Context_b.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.Add(new ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito
@@ -413,6 +443,8 @@ namespace Core.Erp.Data.Banco
                         break;
                     case cl_enumeradores.eTipoCbteBancario.NDBA:
                         #region Guardo cancelaciones
+                        var lst_cancelaciones_ndba = Context_cxp.cp_orden_pago_cancelaciones.Where(q => q.IdEmpresa_pago == info.IdEmpresa && q.IdTipoCbte_pago == info.IdTipocbte && q.IdCbteCble_pago == info.IdCbteCble).ToList();
+                        Context_cxp.cp_orden_pago_cancelaciones.RemoveRange(lst_cancelaciones_ndba);
                         Idcancelacion = odata_can.get_id(info.IdEmpresa);
                         secuencia = 1;
                         foreach (var item in info.lst_det_canc_op)
@@ -460,6 +492,33 @@ namespace Core.Erp.Data.Banco
                 Context_ct.Dispose();
                 Context_b.Dispose();
                 Context_cxp.Dispose();
+                throw;
+            }
+        }
+
+        public bool anularDB(ba_Cbte_Ban_Info info)
+        {
+            try
+            {
+                using (Entities_banco Context = new Entities_banco())
+                {
+                    ba_Cbte_Ban Entity = Context.ba_Cbte_Ban.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipocbte == info.IdTipocbte && q.IdCbteCble == info.IdCbteCble).FirstOrDefault();
+                    if (Entity == null) return false;
+                    Entity.IdUsuario_Anu = info.IdUsuario_Anu;
+                    Entity.FechaAnulacion = info.FechaAnulacion;
+                    Entity.Estado = "I";
+                    Context.SaveChanges();
+                }
+
+                using (Entities_cuentas_por_pagar Context_cxp = new Entities_cuentas_por_pagar())
+                {
+
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
