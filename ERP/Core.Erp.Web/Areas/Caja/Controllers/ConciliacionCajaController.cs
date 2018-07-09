@@ -580,6 +580,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             edited_info.Observacion = info_det.Observacion;
             edited_info.idTipoMovi = info_det.idTipoMovi;
             edited_info.fecha = info_det.fecha;
+            edited_info.se_modifico = true;
         }
 
         public void DeleteRow(int Secuencia)

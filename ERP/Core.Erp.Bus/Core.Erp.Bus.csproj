@@ -53,6 +53,7 @@
     <Compile Include="ActivoFijo\Af_Retiro_Activo_Bus.cs" />
     <Compile Include="ActivoFijo\Af_Venta_Activo_Bus.cs" />
     <Compile Include="Banco\ba_Banco_Cuenta_Bus.cs" />
+    <Compile Include="Banco\ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Bus.cs" />
     <Compile Include="Banco\ba_CatalogoTipo_Bus.cs" />
     <Compile Include="Banco\ba_Catalogo_Bus.cs" />
     <Compile Include="Banco\ba_Cbte_Ban_Bus.cs" />

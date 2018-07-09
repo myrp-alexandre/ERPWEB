@@ -45,6 +45,7 @@ namespace Core.Erp.Info.Banco
         #region Campos que no existen en la tabla
         public List<ct_cbtecble_det_Info> lst_det_ct { get; set; }
         public List<cp_orden_pago_cancelaciones_Info> lst_det_canc_op { get; set; }
+        public List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info> lst_det_ing { get; set; }
         #endregion
     }
 }

@@ -29,6 +29,7 @@ namespace Core.Erp.Info.Caja
         public decimal IdPersona { get; set; }
         public string Observacion { get; set; }
         public string pe_nombreCompleto { get; set; }
+        public bool se_modifico { get; set; }
         #endregion
 
     }
