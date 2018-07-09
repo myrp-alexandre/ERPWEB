@@ -15,7 +15,7 @@
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="Tipo">Tipo</label>
+                    <label for="Tipo">Tipo*</label>
                     @Html.DropDownListFor(q => q.Tipo, new SelectList(ViewBag.lst_tipo_nota, "Key", "Value"), new { @class = "form-control", })
                     @Html.ValidationMessageFor(q => q.Tipo, "", new { @class = "text-danger" })
                 </div>
@@ -26,7 +26,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="Descripcion">Descripción</label>
+                    <label for="Descripcion">Descripción*</label>
                     @Html.TextBoxFor(q => q.Descripcion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Descripcion, "", new { @class = "text-danger" })
                 </div>
