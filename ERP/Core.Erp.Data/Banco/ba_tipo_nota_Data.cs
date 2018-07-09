@@ -17,7 +17,6 @@ namespace Core.Erp.Data.Banco
                 using (Entities_banco Context = new Entities_banco())
                 {
                  if(mostrar_anulados)
-                    {
                         Lista = (from q in Context.ba_tipo_nota
                                  where q.IdEmpresa == IdEmpresa
                                  && q.IdTipoNota == IdTipoNota
@@ -31,9 +30,7 @@ namespace Core.Erp.Data.Banco
                                      Tipo = q.Tipo,
                                      Estado = q.Estado
                                  }).ToList();
-                    }
                  else
-                    {
                         Lista = (from q in Context.ba_tipo_nota
                                  where q.IdEmpresa == IdEmpresa
                                  && q.IdTipoNota == IdTipoNota
@@ -48,7 +45,7 @@ namespace Core.Erp.Data.Banco
                                      Tipo = q.Tipo,
                                      Estado = q.Estado
                                  }).ToList();
-                    }
+                    
                 }
                 return Lista;
             }

@@ -115,15 +115,6 @@
           <Property Name="IdEntidad" Type="numeric" Precision="18" Scale="0" />
           <Property Name="IdTipo_Persona" Type="varchar" MaxLength="20" />
         </EntityType>
-        <EntityType Name="ba_Cbte_Ban_tipo">
-          <Key>
-            <PropertyRef Name="CodTipoCbteBan" />
-          </Key>
-          <Property Name="CodTipoCbteBan" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Signo" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="orden" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -267,18 +258,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo_ba_Cbte_Ban_tipo">
-          <End Role="ba_Cbte_Ban_tipo" Type="Self.ba_Cbte_Ban_tipo" Multiplicity="1" />
-          <End Role="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo" Type="Self.ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ba_Cbte_Ban_tipo">
-              <PropertyRef Name="CodTipoCbteBan" />
-            </Principal>
-            <Dependent Role="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo">
-              <PropertyRef Name="CodTipoCbteBan" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta">
           <End Role="ba_Banco_Cuenta" Type="Self.ba_Banco_Cuenta" Multiplicity="1" />
           <End Role="ba_Talonario_cheques_x_banco" Type="Self.ba_Talonario_cheques_x_banco" Multiplicity="*" />
@@ -299,7 +278,6 @@
           <EntitySet Name="ba_Catalogo" EntityType="Self.ba_Catalogo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ba_CatalogoTipo" EntityType="Self.ba_CatalogoTipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ba_Cbte_Ban" EntityType="Self.ba_Cbte_Ban" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ba_Cbte_Ban_tipo" EntityType="Self.ba_Cbte_Ban_tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo" EntityType="Self.ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ba_parametros" EntityType="Self.ba_parametros" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ba_Talonario_cheques_x_banco" EntityType="Self.ba_Talonario_cheques_x_banco" Schema="dbo" store:Type="Tables" />
@@ -328,10 +306,6 @@
             <End Role="ba_tipo_nota" EntitySet="ba_tipo_nota" />
             <End Role="ba_Cbte_Ban" EntitySet="ba_Cbte_Ban" />
           </AssociationSet>
-          <AssociationSet Name="FK_ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo_ba_Cbte_Ban_tipo" Association="Self.FK_ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo_ba_Cbte_Ban_tipo">
-            <End Role="ba_Cbte_Ban_tipo" EntitySet="ba_Cbte_Ban_tipo" />
-            <End Role="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo" EntitySet="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo" />
-          </AssociationSet>
           <AssociationSet Name="FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta" Association="Self.FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta">
             <End Role="ba_Banco_Cuenta" EntitySet="ba_Banco_Cuenta" />
             <End Role="ba_Talonario_cheques_x_banco" EntitySet="ba_Talonario_cheques_x_banco" />
@@ -351,17 +325,12 @@
             <End Role="ba_Catalogo" EntitySet="ba_Catalogo" />
           </AssociationSet>
           <EntitySet Name="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" EntityType="Model_banco.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" />
-          <EntitySet Name="ba_Cbte_Ban_tipo" EntityType="Model_banco.ba_Cbte_Ban_tipo" />
           <EntitySet Name="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo" EntityType="Model_banco.ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo" />
           <EntitySet Name="ba_Talonario_cheques_x_banco" EntityType="Model_banco.ba_Talonario_cheques_x_banco" />
           <EntitySet Name="ba_tipo_nota" EntityType="Model_banco.ba_tipo_nota" />
           <AssociationSet Name="FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta" Association="Model_banco.FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta">
             <End Role="ba_Banco_Cuenta" EntitySet="ba_Banco_Cuenta" />
             <End Role="ba_Talonario_cheques_x_banco" EntitySet="ba_Talonario_cheques_x_banco" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo_ba_Cbte_Ban_tipo" Association="Model_banco.FK_ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo_ba_Cbte_Ban_tipo">
-            <End Role="ba_Cbte_Ban_tipo" EntitySet="ba_Cbte_Ban_tipo" />
-            <End Role="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo" EntitySet="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo" />
           </AssociationSet>
           <EntitySet Name="ba_Cbte_Ban" EntityType="Model_banco.ba_Cbte_Ban" />
           <AssociationSet Name="FK_ba_Cbte_Ban_ba_Banco_Cuenta" Association="Model_banco.FK_ba_Cbte_Ban_ba_Banco_Cuenta">
@@ -494,16 +463,6 @@
           <Property Name="Observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ba_Cbte_Ban" Relationship="Model_banco.FK_ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_ba_Cbte_Ban1" FromRole="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" ToRole="ba_Cbte_Ban" />
         </EntityType>
-        <EntityType Name="ba_Cbte_Ban_tipo">
-          <Key>
-            <PropertyRef Name="CodTipoCbteBan" />
-          </Key>
-          <Property Name="CodTipoCbteBan" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Signo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="orden" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo" Relationship="Model_banco.FK_ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo_ba_Cbte_Ban_tipo" FromRole="ba_Cbte_Ban_tipo" ToRole="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo" />
-        </EntityType>
         <EntityType Name="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -515,7 +474,6 @@
           <Property Name="IdTipoCbteCble_Anu" Type="Int32" Nullable="false" />
           <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Tipo_DebCred" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="ba_Cbte_Ban_tipo" Relationship="Model_banco.FK_ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo_ba_Cbte_Ban_tipo" FromRole="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo" ToRole="ba_Cbte_Ban_tipo" />
         </EntityType>
         <EntityType Name="ba_Talonario_cheques_x_banco">
           <Key>
@@ -563,18 +521,6 @@
             <Dependent Role="ba_Talonario_cheques_x_banco">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdBanco" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo_ba_Cbte_Ban_tipo">
-          <End Type="Model_banco.ba_Cbte_Ban_tipo" Role="ba_Cbte_Ban_tipo" Multiplicity="1" />
-          <End Type="Model_banco.ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo" Role="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ba_Cbte_Ban_tipo">
-              <PropertyRef Name="CodTipoCbteBan" />
-            </Principal>
-            <Dependent Role="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo">
-              <PropertyRef Name="CodTipoCbteBan" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -780,16 +726,6 @@
                 <ScalarProperty Name="mcj_IdTipocbte" ColumnName="mcj_IdTipocbte" />
                 <ScalarProperty Name="mcj_IdCbteCble" ColumnName="mcj_IdCbteCble" />
                 <ScalarProperty Name="mcj_IdEmpresa" ColumnName="mcj_IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ba_Cbte_Ban_tipo">
-            <EntityTypeMapping TypeName="Model_banco.ba_Cbte_Ban_tipo">
-              <MappingFragment StoreEntitySet="ba_Cbte_Ban_tipo">
-                <ScalarProperty Name="orden" ColumnName="orden" />
-                <ScalarProperty Name="Signo" ColumnName="Signo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="CodTipoCbteBan" ColumnName="CodTipoCbteBan" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

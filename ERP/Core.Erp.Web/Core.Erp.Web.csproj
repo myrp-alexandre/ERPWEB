@@ -8599,6 +8599,7 @@
     <Content Include="Areas\Facturacion\Views\TerminoPago\_GridViewPartial_pago_dist.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\_GridViewPartial_nota_credito_det.cshtml" />
     <Content Include="Areas\Banco\Views\TipoNotaBanco\Index.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoNotaBanco\_GridViewPartial_tipo_nota.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
