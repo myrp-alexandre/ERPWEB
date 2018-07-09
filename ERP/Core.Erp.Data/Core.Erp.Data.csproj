@@ -107,6 +107,7 @@
     <Compile Include="Banco\ba_Catalogo_Data.cs" />
     <Compile Include="Banco\ba_Cbte_Ban_Data.cs" />
     <Compile Include="Banco\ba_parametros_Data.cs" />
+    <Compile Include="Banco\ba_Talonario_cheques_x_banco_Data.cs" />
     <Compile Include="Banco\ba_tipo_nota_Data.cs" />
     <Compile Include="ba_Banco_Cuenta.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
