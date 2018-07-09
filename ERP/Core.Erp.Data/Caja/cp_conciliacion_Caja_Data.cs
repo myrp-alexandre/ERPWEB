@@ -493,7 +493,6 @@ namespace Core.Erp.Data.Caja
                 IdCbteCble_EG = data_ct.get_id(Entity_c.IdEmpresa, IdTipoCbte_EG);
                 foreach (var item in info.lst_det_vale)
                 {
-
                     if (item.IdCbteCble_movcaja == 0)
                     {
                         ct_cbtecble diario = new ct_cbtecble
@@ -919,6 +918,69 @@ namespace Core.Erp.Data.Caja
                             cr_Valor = item.valor
                         };
                         Context.caj_Caja_Movimiento_det.Add(Entity_caj_det);
+                    }
+                    else
+                        if (item.IdCbteCble_movcaja != 0 && item.se_modifico)
+                    {
+                        ct_cbtecble diario = Context_ct.ct_cbtecble.Where(q => q.IdEmpresa == item.IdEmpresa_movcaja && q.IdTipoCbte == item.IdTipocbte_movcaja && q.IdCbteCble == item.IdCbteCble_movcaja).FirstOrDefault();
+                        if (diario != null)
+                        {
+                            diario.cb_Fecha = item.fecha;
+                            diario.cb_Observacion = item.Observacion;
+                            diario.IdPeriodo = Convert.ToInt32(item.fecha.ToString("yyyyMM"));
+                            diario.cb_Anio = item.fecha.Year;
+                            diario.cb_mes = item.fecha.Month;
+                            diario.cb_FechaUltModi = DateTime.Now;
+                            diario.cb_Valor = item.valor;
+                            diario.IdUsuarioUltModi = info.IdUsuario;
+
+                            var lst_det_ct = Context_ct.ct_cbtecble_det.Where(q => q.IdEmpresa == item.IdEmpresa_movcaja && q.IdTipoCbte == item.IdTipocbte_movcaja && q.IdCbteCble == item.IdCbteCble_movcaja).ToList();
+                            Context_ct.ct_cbtecble_det.RemoveRange(lst_det_ct);
+
+                            ct_cbtecble_det Debe = new ct_cbtecble_det
+                            {
+                                IdEmpresa = diario.IdEmpresa,
+                                IdTipoCbte = diario.IdTipoCbte,
+                                IdCbteCble = diario.IdCbteCble,
+                                secuencia = 1,
+                                IdCtaCble = item.IdCtaCble,
+                                dc_Valor = Math.Round(Convert.ToDouble(item.valor), 2, MidpointRounding.AwayFromZero),
+                            };
+
+                            ct_cbtecble_det Haber = new ct_cbtecble_det
+                            {
+                                IdEmpresa = diario.IdEmpresa,
+                                IdTipoCbte = diario.IdTipoCbte,
+                                IdCbteCble = diario.IdCbteCble,
+                                secuencia = 2,
+                                IdCtaCble = info.IdCtaCble,
+                                dc_Valor = Math.Round(Convert.ToDouble(item.valor), 2, MidpointRounding.AwayFromZero) * -1,
+                            };
+                            Context_ct.ct_cbtecble_det.Add(Debe);
+                            Context_ct.ct_cbtecble_det.Add(Haber);
+
+                            caj_Caja_Movimiento Entity_caj = Context.caj_Caja_Movimiento.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdTipocbte == item.IdTipocbte_movcaja && q.IdCbteCble == item.IdCbteCble_movcaja).FirstOrDefault();
+                            if (Entity_caj != null)
+                            {
+                                Entity_caj.IdEmpresa = diario.IdEmpresa;
+                                Entity_caj.IdTipocbte = diario.IdTipoCbte;
+                                Entity_caj.IdCbteCble = diario.IdCbteCble;
+                                Entity_caj.CodMoviCaja = "Caja # " + info.IdConciliacion_Caja;
+                                Entity_caj.cm_valor = item.valor;
+                                Entity_caj.IdTipoMovi = Convert.ToInt32(item.idTipoMovi);
+                                Entity_caj.cm_observacion = diario.cb_Observacion;
+                                Entity_caj.IdPeriodo = Convert.ToInt32(item.fecha.ToString("yyyyMM"));
+                                Entity_caj.cm_fecha = item.fecha;
+                                Entity_caj.IdTipo_Persona = cl_enumeradores.eTipoPersona.PERSONA.ToString();
+                                Entity_caj.IdEntidad = item.IdPersona;
+                                Entity_caj.IdPersona = item.IdPersona;
+                                Entity_caj.IdUsuarioUltMod = info.IdUsuario;
+                                Entity_caj.Fecha_UltMod = DateTime.Now;
+
+                                var Entity_caj_det = Context.caj_Caja_Movimiento_det.Where(q => q.IdEmpresa == diario.IdEmpresa && q.IdTipocbte == diario.IdTipoCbte && q.IdCbteCble == diario.IdCbteCble).FirstOrDefault();
+                                Entity_caj_det.cr_Valor = item.valor;
+                            }
+                        }
                     }
 
                     cp_conciliacion_Caja_det_x_ValeCaja Entity_d = new cp_conciliacion_Caja_det_x_ValeCaja

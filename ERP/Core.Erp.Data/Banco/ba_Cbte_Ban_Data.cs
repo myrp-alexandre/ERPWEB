@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Data.Contabilidad;
+using Core.Erp.Data.CuentasPorPagar;
 using Core.Erp.Info.Banco;
 using Core.Erp.Info.Helps;
 using System;
@@ -12,6 +13,7 @@ namespace Core.Erp.Data.Banco
     public class ba_Cbte_Ban_Data
     {
         ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
+        cp_orden_pago_cancelaciones_Data odata_can = new cp_orden_pago_cancelaciones_Data();
         public List<ba_Cbte_Ban_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin, string CodCbte)
         {
             try
@@ -102,9 +104,10 @@ namespace Core.Erp.Data.Banco
                 #region Variables
                 string TipoCbteBancoS = TipoCbteBanco.ToString();
                 int secuencia = 1;
+                decimal Idcancelacion = 0;
                 #endregion
 
-                #region Obtengo datos para el diario
+                #region Datos para el diario
                 var e_TipoCbteBan = Context_b.ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo.Where(q => q.CodTipoCbteBan == TipoCbteBancoS && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                 if (e_TipoCbteBan == null)
                     return false;
@@ -176,16 +179,77 @@ namespace Core.Erp.Data.Banco
                 switch (TipoCbteBanco)
                 {
                     case cl_enumeradores.eTipoCbteBancario.CHEQ:
+                        #region Guardo cancelaciones
+                        Idcancelacion = odata_can.get_id(info.IdEmpresa);
+                        secuencia = 1;
                         foreach (var item in info.lst_det_canc_op)
                         {
-                            
+                            Context_cxp.cp_orden_pago_cancelaciones.Add(new cp_orden_pago_cancelaciones
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                Idcancelacion = Idcancelacion,
+                                Secuencia = secuencia++,
+
+                                IdEmpresa_op = item.IdEmpresa_op,
+                                IdOrdenPago_op = item.IdOrdenPago_op,
+                                Secuencia_op = item.Secuencia_op,
+
+                                IdEmpresa_cxp = item.IdEmpresa_cxp,
+                                IdTipoCbte_cxp = item.IdTipoCbte_cxp,
+                                IdCbteCble_cxp = item.IdCbteCble_cxp,
+
+                                IdEmpresa_pago = info.IdEmpresa,
+                                IdTipoCbte_pago = info.IdTipocbte,
+                                IdCbteCble_pago = info.IdCbteCble,
+
+                                MontoAplicado = item.MontoAplicado,
+                                SaldoActual = 0,
+                                SaldoAnterior = 0,
+                                fechaTransaccion = DateTime.Now,
+                                Observacion = item.Observacion
+                            });
                         }
+                        #endregion
                         break;
                     case cl_enumeradores.eTipoCbteBancario.DEPO:
+                        #region Guardo ingresos
+
+                        #endregion
                         break;
                     case cl_enumeradores.eTipoCbteBancario.NCBA:
                         break;
                     case cl_enumeradores.eTipoCbteBancario.NDBA:
+                        #region Guardo cancelaciones
+                        Idcancelacion = odata_can.get_id(info.IdEmpresa);
+                        secuencia = 1;
+                        foreach (var item in info.lst_det_canc_op)
+                        {
+                            Context_cxp.cp_orden_pago_cancelaciones.Add(new cp_orden_pago_cancelaciones
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                Idcancelacion = Idcancelacion,
+                                Secuencia = secuencia++,
+
+                                IdEmpresa_op = item.IdEmpresa_op,
+                                IdOrdenPago_op = item.IdOrdenPago_op,
+                                Secuencia_op = item.Secuencia_op,
+
+                                IdEmpresa_cxp = item.IdEmpresa_cxp,
+                                IdTipoCbte_cxp = item.IdTipoCbte_cxp,
+                                IdCbteCble_cxp = item.IdCbteCble_cxp,
+
+                                IdEmpresa_pago = info.IdEmpresa,
+                                IdTipoCbte_pago = info.IdTipocbte,
+                                IdCbteCble_pago = info.IdCbteCble,
+
+                                MontoAplicado = item.MontoAplicado,
+                                SaldoActual = 0,
+                                SaldoAnterior = 0,
+                                fechaTransaccion = DateTime.Now,
+                                Observacion = item.Observacion
+                            });
+                        }
+                        #endregion
                         break;
                 }
 
