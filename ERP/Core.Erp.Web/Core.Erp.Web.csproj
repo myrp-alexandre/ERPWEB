@@ -8603,6 +8603,9 @@
     <Content Include="Areas\Banco\Views\TipoNotaBanco\Nuevo.cshtml" />
     <Content Include="Areas\Banco\Views\TipoNotaBanco\Modificar.cshtml" />
     <Content Include="Areas\Banco\Views\TipoNotaBanco\Anular.cshtml" />
+    <Content Include="Areas\Banco\Views\TalonarioChequeBanco\Index.cshtml" />
+    <Content Include="Areas\Banco\Views\TalonarioChequeBanco\_GridViewPartial_talonario_cheque.cshtml" />
+    <Content Include="Areas\Banco\Views\TalonarioChequeBanco\Nuevo.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />

@@ -64,7 +64,7 @@ namespace Core.Erp.Bus.Banco
             }
         }
 
-        public bool Anular(ba_Talonario_cheques_x_banco_Info info)
+        public bool anularDB(ba_Talonario_cheques_x_banco_Info info)
         {
             try
             {
