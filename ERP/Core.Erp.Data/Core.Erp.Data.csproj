@@ -123,9 +123,6 @@
     <Compile Include="ba_Cbte_Ban.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
-    <Compile Include="ba_Cbte_Ban_tipo.cs">
-      <DependentUpon>Model_banco.tt</DependentUpon>
-    </Compile>
     <Compile Include="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
