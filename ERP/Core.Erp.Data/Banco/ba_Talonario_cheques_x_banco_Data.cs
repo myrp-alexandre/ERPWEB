@@ -193,5 +193,33 @@ namespace Core.Erp.Data.Banco
             }
         }
 
+        public string get_NumeroCheque(int IdEmpresa,  int IdBanco)
+        {
+            try
+            {
+                string NumCheque = "000000001";
+                using (Entities_banco Context = new Entities_banco())
+                {
+                    var lst = from q in Context.ba_Talonario_cheques_x_banco
+                              where q.IdEmpresa == IdEmpresa
+                              && q.IdBanco == IdBanco
+                              select q;
+                    if (lst.Count() > 0)
+                    {
+                        NumCheque = lst.Max(q => q.Num_cheque) + "";
+                        double NumCheque_double = Convert.ToDouble(NumCheque) + 1;
+                        NumCheque = NumCheque_double.ToString("000000000");
+                    }
+                }
+                return NumCheque;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
     }
 }

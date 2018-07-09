@@ -98,5 +98,13 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public JsonResult get_NumeroCheque( int IdBanco = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            var NumCheque = bus_talonario.get_NumeroCheque(IdEmpresa, IdBanco);
+
+            return Json(NumCheque, JsonRequestBehavior.AllowGet);
+        }
     }
 }

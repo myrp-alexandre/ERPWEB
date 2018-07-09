@@ -32,6 +32,7 @@
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                    settings.Properties.NullText = "== Seleccione ==";
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){get_NumeroCheque();}";
                }).BindList(ViewBag.lst_banco).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
                 </div>
@@ -44,7 +45,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="Estado_bool">Número de cheque</label>
-                    @Html.TextBoxFor(q => q.Num_cheque, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.Num_cheque, new { @class = "form-control" , @id="Num_cheque"})
                     @Html.ValidationMessageFor(q => q.Num_cheque, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -72,3 +73,35 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+    <script>
+
+            $("#Num_cheque").change(function () {
+                get_NumeroCheque();
+            });
+
+    function get_NumeroCheque() {
+        var codigo = IdBanco.GetValue();
+
+        var datos = {
+            IdBanco: codigo,
+            Establecimiento: establecimiento
+        };
+
+        $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("get_NumeroCheque", "TalonarioChequeBanco", new { Area = "Banco"})',
+                async: false,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $("#Num_cheque").val(data);
+                },
+                error: function (error) {
+
+                }
+            });
+        }
+    }
+
+        </script>
