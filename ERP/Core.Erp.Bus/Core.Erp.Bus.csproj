@@ -55,6 +55,7 @@
     <Compile Include="Banco\ba_Banco_Cuenta_Bus.cs" />
     <Compile Include="Banco\ba_CatalogoTipo_Bus.cs" />
     <Compile Include="Banco\ba_Catalogo_Bus.cs" />
+    <Compile Include="Banco\ba_Cbte_Ban_Bus.cs" />
     <Compile Include="Banco\ba_parametros_Bus.cs" />
     <Compile Include="Caja\caj_Caja_Bus.cs" />
     <Compile Include="Caja\caj_Caja_Movimiento_Bus.cs" />

@@ -105,8 +105,12 @@
     <Compile Include="Banco\ba_Banco_Cuenta_Data.cs" />
     <Compile Include="Banco\ba_CatalogoTipo_Data.cs" />
     <Compile Include="Banco\ba_Catalogo_Data.cs" />
+    <Compile Include="Banco\ba_Cbte_Ban_Data.cs" />
     <Compile Include="Banco\ba_parametros_Data.cs" />
     <Compile Include="ba_Banco_Cuenta.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
     <Compile Include="ba_Catalogo.cs">
@@ -115,7 +119,22 @@
     <Compile Include="ba_CatalogoTipo.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
+    <Compile Include="ba_Cbte_Ban.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ba_Cbte_Ban_tipo.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
     <Compile Include="ba_parametros.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ba_Talonario_cheques_x_banco.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ba_tipo_nota.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
     <Compile Include="Caja\caj_Caja_Data.cs" />

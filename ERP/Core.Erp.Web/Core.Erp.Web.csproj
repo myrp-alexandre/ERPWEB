@@ -234,6 +234,10 @@
     <Compile Include="Areas\Banco\Controllers\BancoCuentaController.cs" />
     <Compile Include="Areas\Banco\Controllers\CatalogoBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\CatalogoTipoBancoController.cs" />
+    <Compile Include="Areas\Banco\Controllers\ChequeBancoController.cs" />
+    <Compile Include="Areas\Banco\Controllers\DepositoBancoController.cs" />
+    <Compile Include="Areas\Banco\Controllers\NotaDeCreditoBancoController.cs" />
+    <Compile Include="Areas\Banco\Controllers\NotaDeDebitoBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\ParametroBancoController.cs" />
     <Compile Include="Areas\Caja\CajaAreaRegistration.cs" />
     <Compile Include="Areas\Caja\Controllers\CajaController.cs" />
@@ -8656,6 +8660,10 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\ActivoFijo\Models\" />
     <Folder Include="Areas\Banco\Models\" />
+    <Folder Include="Areas\Banco\Views\ChequeBanco\" />
+    <Folder Include="Areas\Banco\Views\DepositoBanco\" />
+    <Folder Include="Areas\Banco\Views\NotaDeCreditoBanco\" />
+    <Folder Include="Areas\Banco\Views\NotaDeDebitoBanco\" />
     <Folder Include="Areas\Caja\Models\" />
     <Folder Include="Areas\Contabilidad\Models\" />
     <Folder Include="Areas\Contabilidad\Views\PuntoCargo\" />

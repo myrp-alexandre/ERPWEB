@@ -55,6 +55,7 @@
     <Compile Include="Banco\ba_Banco_Cuenta_Info.cs" />
     <Compile Include="Banco\ba_CatalogoTipo_Info.cs" />
     <Compile Include="Banco\ba_Catalogo_Info.cs" />
+    <Compile Include="Banco\ba_Cbte_Ban_Info.cs" />
     <Compile Include="Banco\ba_parametros_Info.cs" />
     <Compile Include="Caja\caj_Caja_Info.cs" />
     <Compile Include="Caja\caj_Caja_Movimiento_det_Info.cs" />
