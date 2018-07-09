@@ -239,6 +239,7 @@
     <Compile Include="Areas\Banco\Controllers\NotaDeCreditoBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\NotaDeDebitoBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\ParametroBancoController.cs" />
+    <Compile Include="Areas\Banco\Controllers\TipoNotaBancoController.cs" />
     <Compile Include="Areas\Caja\CajaAreaRegistration.cs" />
     <Compile Include="Areas\Caja\Controllers\CajaController.cs" />
     <Compile Include="Areas\Caja\Controllers\CajaMovimientoEgresoController.cs" />
@@ -8597,6 +8598,7 @@
     <Content Include="Areas\Facturacion\Views\Cliente\_GridViewPartial_fa_vendedor.cshtml" />
     <Content Include="Areas\Facturacion\Views\TerminoPago\_GridViewPartial_pago_dist.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\_GridViewPartial_nota_credito_det.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoNotaBanco\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
