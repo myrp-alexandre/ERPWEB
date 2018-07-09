@@ -1,0 +1,60 @@
+﻿@model Core.Erp.Info.Banco.ba_Talonario_cheques_x_banco_Info
+
+@{
+    ViewBag.Title = "Nuevo talonario";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Nuevo", "TalonarioChequeBanco", FormMethod.Post, new { @role = "form", @class = "form" }))
+{
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdBanco">Banco</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdBanco, settings =>
+               {
+                   settings.Name = "IdBanco";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdBanco", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                   settings.Properties.Columns.Add("ba_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdBanco";
+                   settings.Properties.ValueType = typeof(int);
+                   settings.Properties.TextField = "ba_descripcion";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+               }).BindList(ViewBag.lst_banco).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="Estado_bool">@Html.CheckBoxFor(q=>q.Estado_bool) Estado</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","TalonarioChequeBanco", new { Area = "Banco"  },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

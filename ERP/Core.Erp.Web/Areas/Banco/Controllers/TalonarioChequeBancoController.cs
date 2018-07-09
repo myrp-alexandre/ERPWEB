@@ -25,5 +25,77 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             model = bus_talonario.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_talonario_cheque", model);
         }
+
+        private void cargar_combos()
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            ba_Banco_Cuenta_Bus bus_banco = new ba_Banco_Cuenta_Bus();
+            var lst_banco = bus_banco.get_list(IdEmpresa, false);
+            ViewBag.lst_banco = lst_banco;
+        }
+
+        public ActionResult Nuevo()
+        {
+            ba_Talonario_cheques_x_banco_Info model = new ba_Talonario_cheques_x_banco_Info
+            {
+               IdEmpresa = Convert.ToInt32(Session["IdEmpresa"])
+            };
+            cargar_combos();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Nuevo(ba_Talonario_cheques_x_banco_Info model)
+        {
+            if(!bus_talonario.guardarDB(model))
+            {
+                cargar_combos();
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Modificar(int IdBanco = 0, string Num_cheque = "")
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            ba_Talonario_cheques_x_banco_Info model = bus_talonario.get_info(IdEmpresa, IdBanco, Num_cheque);
+                if (model == null) 
+            return RedirectToAction("Index");
+            cargar_combos();
+            return View(model);
+        }
+
+        [HttpPost]
+
+        public ActionResult Modificar(ba_Talonario_cheques_x_banco_Info model)
+        {
+            if(!bus_talonario.modificarDB(model))
+            {
+                cargar_combos();
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
+        public ActionResult Anular(int IdBanco = 0, string Num_cheque = "")
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            ba_Talonario_cheques_x_banco_Info model = bus_talonario.get_info(IdEmpresa, IdBanco, Num_cheque);
+            if (model == null)
+                return RedirectToAction("Index");
+            cargar_combos();
+            return View(model);
+        }
+
+        [HttpPost]
+
+        public ActionResult Anular(ba_Talonario_cheques_x_banco_Info model)
+        {
+            if (!bus_talonario.anularDB(model))
+            {
+                cargar_combos();
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
