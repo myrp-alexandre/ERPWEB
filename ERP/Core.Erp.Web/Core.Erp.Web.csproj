@@ -239,7 +239,6 @@
     <Compile Include="Areas\Banco\Controllers\NotaDeCreditoBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\NotaDeDebitoBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\ParametroBancoController.cs" />
-    <Compile Include="Areas\Banco\Controllers\TalonarioChequeBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\TipoNotaBancoController.cs" />
     <Compile Include="Areas\Caja\CajaAreaRegistration.cs" />
     <Compile Include="Areas\Caja\Controllers\CajaController.cs" />
@@ -8604,8 +8603,6 @@
     <Content Include="Areas\Banco\Views\TipoNotaBanco\Nuevo.cshtml" />
     <Content Include="Areas\Banco\Views\TipoNotaBanco\Modificar.cshtml" />
     <Content Include="Areas\Banco\Views\TipoNotaBanco\Anular.cshtml" />
-    <Content Include="Areas\Banco\Views\TalonarioChequeBanco\Index.cshtml" />
-    <Content Include="Areas\Banco\Views\TalonarioChequeBanco\_GridViewPartial_talonario_cheque.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
@@ -8719,6 +8716,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
