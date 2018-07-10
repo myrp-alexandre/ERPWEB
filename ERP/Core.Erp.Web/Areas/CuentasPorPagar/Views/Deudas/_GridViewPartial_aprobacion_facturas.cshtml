@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridView_aprobacion_facturas";
+        settings.Name = "GridViewPartial_aprobacion_facturas";
         settings.CallbackRouteValues = new { Controller = "Deudas", Action = "GridViewPartial_aprobacion_facturas" };
 
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Deudas", Action = "EditingUpdate_og", Area = "CuentasPorPagar" };

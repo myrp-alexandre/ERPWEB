@@ -9,7 +9,7 @@ using Core.Erp.Bus.CuentasPorPagar;
 using Core.Erp.Bus.General;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Bus.Contabilidad;
-using Core.Erp.Info.General;
+using Core.Erp.Info.Helps;
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
     public class DeudasController : Controller
@@ -154,6 +154,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 co_FechaContabilizacion = DateTime.Now,
                 co_FechaFactura_vct = DateTime.Now,
                 PaisPago = "593",
+                IdTipoServicio = cl_enumeradores.eTipoServicioCXP.SERVI.ToString(),
                 info_cuota = new cp_cuotas_x_doc_Info
                 {
                     Fecha_inicio = DateTime.Now
@@ -448,28 +449,31 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
         public JsonResult seleccionar_aprobacion(string Ids)
         {
-            string[] array = Ids.Split(',');
-            var output = array.GroupBy(q => q).ToList();
-            List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
-            List<cp_orden_giro_Info> list_facturas_seleccionadas = new List<cp_orden_giro_Info>();
-            model = Session["list_ordenes_giro"] as List<cp_orden_giro_Info>;
-            list_facturas_seleccionadas = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_Info>;
-            if (list_facturas_seleccionadas == null)
-                list_facturas_seleccionadas = new List<cp_orden_giro_Info>();
-            foreach (var item in output)
+            if (Ids != null)
             {
-                if (item.Key != "")
+                string[] array = Ids.Split(',');
+                var output = array.GroupBy(q => q).ToList();
+                List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
+                List<cp_orden_giro_Info> list_facturas_seleccionadas = new List<cp_orden_giro_Info>();
+                model = Session["list_ordenes_giro"] as List<cp_orden_giro_Info>;
+                list_facturas_seleccionadas = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_Info>;
+                if (list_facturas_seleccionadas == null)
+                    list_facturas_seleccionadas = new List<cp_orden_giro_Info>();
+                foreach (var item in output)
                 {
-                    var lista_tmp = model.Where(v => v.IdCbteCble_Ogiro == Convert.ToDecimal(item.Key));
-                    if (lista_tmp.Count() == 1 & list_facturas_seleccionadas.Where(v => v.IdCbteCble_Ogiro == Convert.ToDecimal(item.Key)).Count() == 0)// agrego si existe y no esta repetida
+                    if (item.Key != "")
                     {
-                        var info_add = lista_tmp.FirstOrDefault();
-                        info_add.co_valorpagar =(double) info_add.Saldo_OG;
-                        list_facturas_seleccionadas.Add(info_add);
+                        var lista_tmp = model.Where(v => v.IdCbteCble_Ogiro == Convert.ToDecimal(item.Key));
+                        if (lista_tmp.Count() == 1 & list_facturas_seleccionadas.Where(v => v.IdCbteCble_Ogiro == Convert.ToDecimal(item.Key)).Count() == 0)// agrego si existe y no esta repetida
+                        {
+                            var info_add = lista_tmp.FirstOrDefault();
+                            info_add.co_valorpagar = (double)info_add.Saldo_OG;
+                            list_facturas_seleccionadas.Add(info_add);
+                        }
                     }
                 }
+                Session["list_facturas_seleccionadas"] = list_facturas_seleccionadas;
             }
-            Session["list_facturas_seleccionadas"]= list_facturas_seleccionadas;
             return Json("", JsonRequestBehavior.AllowGet);
         }
         #endregion

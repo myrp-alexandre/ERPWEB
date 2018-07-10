@@ -74,7 +74,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     else
                         info.Fecha_vcto_cuota = fecha;
                     info.Valor_cuota = Total_a_pagar / Num_cuotas;
-                    info.Observacion = "Cuota # " + contador + " vence el " + info.Fecha_vcto_cuota.Date;
+                    info.Observacion = "Cuota # " + contador + " vence el " + info.Fecha_vcto_cuota.Date.ToString().Substring(0,10);
                     contador++;
                     fecha = fecha.AddDays(Dias_plazo);
                     lst_cuotas.Add(info);
