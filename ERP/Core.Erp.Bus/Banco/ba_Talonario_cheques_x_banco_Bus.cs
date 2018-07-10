@@ -81,7 +81,7 @@ namespace Core.Erp.Bus.Banco
         {
             try
             {
-                return odata.get_NumeroCheque(IdEmpresa, IdBanco)
+                return odata.get_NumeroCheque(IdEmpresa, IdBanco);
             }
             catch (Exception)
             {
