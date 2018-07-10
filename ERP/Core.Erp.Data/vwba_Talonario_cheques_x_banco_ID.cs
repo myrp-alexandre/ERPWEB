@@ -12,7 +12,7 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ba_Talonario_cheques_x_banco_ID
+    public partial class vwba_Talonario_cheques_x_banco_ID
     {
         public int IdEmpresa { get; set; }
         public int IdBanco { get; set; }

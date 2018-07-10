@@ -187,8 +187,8 @@
           <Property Name="Estado" Type="char" MaxLength="1" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.ba_Talonario_cheques_x_banco_ID' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="ba_Talonario_cheques_x_banco_ID">
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwba_Talonario_cheques_x_banco_ID' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwba_Talonario_cheques_x_banco_ID">
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdBanco" />
@@ -301,12 +301,12 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.ba_Talonario_cheques_x_b
           <EntitySet Name="ba_parametros" EntityType="Self.ba_parametros" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ba_Talonario_cheques_x_banco" EntityType="Self.ba_Talonario_cheques_x_banco" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ba_tipo_nota" EntityType="Self.ba_tipo_nota" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ba_Talonario_cheques_x_banco_ID" EntityType="Self.ba_Talonario_cheques_x_banco_ID" store:Type="Views" store:Schema="web">
+          <EntitySet Name="vwba_Talonario_cheques_x_banco_ID" EntityType="Self.vwba_Talonario_cheques_x_banco_ID" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-    [ba_Talonario_cheques_x_banco_ID].[IdEmpresa] AS [IdEmpresa], 
-    [ba_Talonario_cheques_x_banco_ID].[IdBanco] AS [IdBanco], 
-    [ba_Talonario_cheques_x_banco_ID].[Num_cheque] AS [Num_cheque]
-    FROM [web].[ba_Talonario_cheques_x_banco_ID] AS [ba_Talonario_cheques_x_banco_ID]</DefiningQuery>
+    [vwba_Talonario_cheques_x_banco_ID].[IdEmpresa] AS [IdEmpresa], 
+    [vwba_Talonario_cheques_x_banco_ID].[IdBanco] AS [IdBanco], 
+    [vwba_Talonario_cheques_x_banco_ID].[Num_cheque] AS [Num_cheque]
+    FROM [web].[vwba_Talonario_cheques_x_banco_ID] AS [vwba_Talonario_cheques_x_banco_ID]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_ba_Cbte_Ban1" Association="Self.FK_ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_ba_Cbte_Ban1">
             <End Role="ba_Cbte_Ban" EntitySet="ba_Cbte_Ban" />
@@ -379,7 +379,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.ba_Talonario_cheques_x_b
             <End Role="ba_tipo_nota" EntitySet="ba_tipo_nota" />
             <End Role="ba_Cbte_Ban" EntitySet="ba_Cbte_Ban" />
           </AssociationSet>
-          <EntitySet Name="ba_Talonario_cheques_x_banco_ID" EntityType="Model_banco.ba_Talonario_cheques_x_banco_ID" />
+          <EntitySet Name="vwba_Talonario_cheques_x_banco_ID" EntityType="Model_banco.vwba_Talonario_cheques_x_banco_ID" />
         </EntityContainer>
         <EntityType Name="ba_CatalogoTipo">
           <Key>
@@ -673,7 +673,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.ba_Talonario_cheques_x_b
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ba_Talonario_cheques_x_banco_ID">
+        <EntityType Name="vwba_Talonario_cheques_x_banco_ID">
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdBanco" />
@@ -865,9 +865,9 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.ba_Talonario_cheques_x_b
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ba_Talonario_cheques_x_banco_ID">
-            <EntityTypeMapping TypeName="Model_banco.ba_Talonario_cheques_x_banco_ID">
-              <MappingFragment StoreEntitySet="ba_Talonario_cheques_x_banco_ID">
+          <EntitySetMapping Name="vwba_Talonario_cheques_x_banco_ID">
+            <EntityTypeMapping TypeName="Model_banco.vwba_Talonario_cheques_x_banco_ID">
+              <MappingFragment StoreEntitySet="vwba_Talonario_cheques_x_banco_ID">
                 <ScalarProperty Name="Num_cheque" ColumnName="Num_cheque" />
                 <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
