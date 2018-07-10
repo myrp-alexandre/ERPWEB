@@ -34,5 +34,6 @@ namespace Core.Erp.Data
         public virtual DbSet<ba_Talonario_cheques_x_banco> ba_Talonario_cheques_x_banco { get; set; }
         public virtual DbSet<ba_tipo_nota> ba_tipo_nota { get; set; }
         public virtual DbSet<ba_Cbte_Ban> ba_Cbte_Ban { get; set; }
+        public virtual DbSet<ba_Talonario_cheques_x_banco_ID> ba_Talonario_cheques_x_banco_ID { get; set; }
     }
 }
