@@ -33,7 +33,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             {
                 return View();
             }
-
             public ActionResult GridViewPartial_retenciones()
             {
                 int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -67,7 +66,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 cargar_combos_detalle();
                 return PartialView("_GridViewPartial_retencio_dc", model);
             }
-
             private void cargar_combos(string TipoPersona = "")
             {
                 int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -78,7 +76,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
 
         }
-
             public ActionResult Nuevo(int IdTipoCbte_Ogiro = 0, decimal IdCbteCble_Ogiro = 0)
         {
                  cp_retencion_Info model = new cp_retencion_Info();
@@ -96,7 +93,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                  cargar_combos_detalle();
                  return View(model);
             }
-
             [HttpPost]
             public ActionResult Nuevo(cp_retencion_Info model)
             {
@@ -146,7 +142,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     }
                 }
             }
-
             public ActionResult Modificar(int IdRetencion = 0)
             {
                 cargar_combos();
@@ -161,7 +156,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 Session["ct_cbtecble_det_Info"] = model.info_comprobante.lst_ct_cbtecble_det;
                 return View(model);
             }
-
             [HttpPost]
             public ActionResult Modificar(cp_retencion_Info model)
             {
@@ -226,8 +220,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 Session["ct_cbtecble_det_Info"] = model.info_comprobante.lst_ct_cbtecble_det;
                 return View(model);
             }
-
-
             [HttpPost]
             public ActionResult Anular(cp_retencion_Info model)
             {
@@ -278,8 +270,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 }
             }
         }
-         
-
             [ValidateInput(false)]
             public ActionResult GridViewPartial_deudas()
             {
@@ -288,7 +278,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
                 return PartialView("_GridViewPartial_deudas", model);
             }
-
             private void cargar_combos_detalle()
             {
                 int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -299,7 +288,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 ViewBag.lst_codigo_retencion = lst_codigo_retencion;
                 Session["lst_codigo_retencion"] = lst_codigo_retencion;
         }
-
             [HttpPost, ValidateInput(false)]
             public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
             {
