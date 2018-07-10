@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9d9b3620b04b4e61a69c184699cc66b5" Name="Diagram1" >
+      <Diagram DiagramId="9d9b3620b04b4e61a69c184699cc66b5" Name="Diagram1" ZoomLevel="68" >
         <EntityTypeShape EntityType="Model_banco.ba_CatalogoTipo" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model_banco.ba_parametros" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_banco.ba_Banco_Cuenta" Width="1.5" PointX="5.375" PointY="5.75" />
@@ -21,6 +21,7 @@
         <AssociationConnector Association="Model_banco.FK_ba_Cbte_Ban_ba_Catalogo" />
         <AssociationConnector Association="Model_banco.FK_ba_Cbte_Ban_ba_Catalogo1" />
         <AssociationConnector Association="Model_banco.FK_ba_Cbte_Ban_ba_tipo_nota" />
+        <EntityTypeShape EntityType="Model_banco.ba_Talonario_cheques_x_banco_ID" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

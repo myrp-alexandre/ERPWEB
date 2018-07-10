@@ -12,7 +12,6 @@
 @using (Html.BeginForm("Nuevo", "TalonarioChequeBanco", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdBanco)
     @Html.HiddenFor(q => q.Num_cheque)
     <div class="row">
         <div class="col-md-12">
@@ -75,35 +74,3 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
-<script>
-
-            $("#Num_cheque").change(function () {
-                get_NumeroCheque();
-            });
-
-    function get_NumeroCheque() {
-        var codigo = IdBanco.GetValue();
-
-        var datos = {
-            IdBanco: codigo,
-            Establecimiento: establecimiento
-        };
-
-        $.ajax({
-                type: 'POST',
-                data: JSON.stringify(datos),
-                url: '@Url.Action("get_NumeroCheque", "TalonarioChequeBanco", new { Area = "Banco"})',
-                async: false,
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                    $("#Num_cheque").val(data);
-                },
-                error: function (error) {
-
-                }
-            });
-        }
-    }
-
-</script>

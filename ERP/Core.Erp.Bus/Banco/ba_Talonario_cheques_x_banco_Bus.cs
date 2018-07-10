@@ -77,18 +77,6 @@ namespace Core.Erp.Bus.Banco
             }
         }
 
-        public string get_NumeroCheque(int IdEmpresa, int IdBanco)
-        {
-            try
-            {
-                return odata.get_NumeroCheque(IdEmpresa, IdBanco);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
 
     }
 }

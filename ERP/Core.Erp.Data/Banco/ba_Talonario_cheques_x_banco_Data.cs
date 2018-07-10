@@ -93,18 +93,18 @@ namespace Core.Erp.Data.Banco
             }
         }
 
-        public int get_id(int IdEmpresa)
+        public string get_id(int IdEmpresa)
         {
             try
             {
-                int ID = 1;
+                string ID = "";
                 using (Entities_banco Context = new Entities_banco())
                 {
                     var lst = from q in Context.ba_Talonario_cheques_x_banco
                               where q.IdEmpresa == IdEmpresa
                               select q;
                     if (lst.Count() > 0)
-                        ID = lst.Max(q => q.IdBanco) + 1;
+                        ID = (Convert.ToInt32(lst.Max(q => q.Num_cheque)) + 1).ToString("00000");
                 }
                 return ID;
             }
@@ -124,7 +124,7 @@ namespace Core.Erp.Data.Banco
                     ba_Talonario_cheques_x_banco Entity = new ba_Talonario_cheques_x_banco
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdBanco = info.IdBanco=get_id(info.IdEmpresa),
+                        IdBanco = info.IdBanco=Convert.ToInt32(get_id(info.IdEmpresa)),
                         Num_cheque = info.Num_cheque,
                         Usado = info.Usado,
                         Estado = info.Estado_bool == true ? "S" : "N",
@@ -192,34 +192,5 @@ namespace Core.Erp.Data.Banco
                 throw;
             }
         }
-
-        public string get_NumeroCheque(int IdEmpresa,  int IdBanco)
-        {
-            try
-            {
-                string NumCheque = "000000001";
-                using (Entities_banco Context = new Entities_banco())
-                {
-                    var lst = from q in Context.ba_Talonario_cheques_x_banco
-                              where q.IdEmpresa == IdEmpresa
-                              && q.IdBanco == IdBanco
-                              select q;
-                    if (lst.Count() > 0)
-                    {
-                        NumCheque = lst.Max(q => q.Num_cheque) + "";
-                        double NumCheque_double = Convert.ToDouble(NumCheque) + 1;
-                        NumCheque = NumCheque_double.ToString("000000000");
-                    }
-                }
-                return NumCheque;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-
     }
 }
