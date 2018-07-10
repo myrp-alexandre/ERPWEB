@@ -13,7 +13,7 @@ namespace Core.Erp.Data.Banco
     {
         ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
         cp_orden_pago_cancelaciones_Data odata_can = new cp_orden_pago_cancelaciones_Data();
-        public List<ba_Cbte_Ban_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin, string CodCbte)
+        public List<ba_Cbte_Ban_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin, int IdSucursal, string CodCbte)
         {
             try
             {
@@ -26,6 +26,7 @@ namespace Core.Erp.Data.Banco
                              && Fecha_ini <= q.cb_Fecha
                              && q.cb_Fecha <= Fecha_fin
                              && q.CodTipoCbteBan == CodCbte
+                             && q.IdSucursal == IdSucursal
                              select new ba_Cbte_Ban_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

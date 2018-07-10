@@ -12,11 +12,11 @@ namespace Core.Erp.Bus.Banco
         ba_Cbte_Ban_Data odata = new ba_Cbte_Ban_Data();
         ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
 
-        public List<ba_Cbte_Ban_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin, string CodCbte)
+        public List<ba_Cbte_Ban_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin, int IdSucursal, string CodCbte)
         {
             try
             {
-                return odata.get_list(IdEmpresa, Fecha_ini, Fecha_fin, CodCbte);
+                return odata.get_list(IdEmpresa, Fecha_ini, Fecha_fin, IdSucursal, CodCbte);
             }
             catch (Exception)
             {
