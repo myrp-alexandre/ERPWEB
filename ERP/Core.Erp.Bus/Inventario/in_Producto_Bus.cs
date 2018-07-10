@@ -73,6 +73,19 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
+        public List<in_Producto_Info> get_list_bajo_demanda(int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_list_bajo_demanda(IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
         public in_Producto_Info get_info(int IdEmpresa, decimal IdProducto)
         {
             try
