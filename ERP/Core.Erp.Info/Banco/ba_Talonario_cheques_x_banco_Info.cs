@@ -29,6 +29,8 @@ namespace Core.Erp.Info.Banco
         // campos que no existen en la tabla
 
         public bool Estado_bool { get; set; }
-
+        
+        public string Documentofinal { get; set; }
+        public int Cantidad { get; set; }
     }
 }
