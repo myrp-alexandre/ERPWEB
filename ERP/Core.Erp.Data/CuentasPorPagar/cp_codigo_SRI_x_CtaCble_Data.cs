@@ -72,8 +72,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-
-
         public List<cp_codigo_SRI_Info> get_list(int IdEmpresa)
         {
             try

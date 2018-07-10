@@ -213,6 +213,36 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
+        public List<in_Producto_Info> get_list_bajo_demanda(int IdEmpresa)
+        {
+            try
+            {
+                List<in_Producto_Info> Lista;
+
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                        Lista = (from q in Context.in_Producto
+                                 where q.IdEmpresa == IdEmpresa
+                                 select new in_Producto_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdProducto = q.IdProducto,
+                                     pr_codigo = q.pr_codigo,
+                                     pr_descripcion = q.pr_descripcion,
+                                     Estado = q.Estado,
+                                     lote_fecha_vcto = q.lote_fecha_vcto
+                                 }).ToList();
+                   
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
 
         public in_Producto_Info get_info(int IdEmpresa, decimal IdProducto)

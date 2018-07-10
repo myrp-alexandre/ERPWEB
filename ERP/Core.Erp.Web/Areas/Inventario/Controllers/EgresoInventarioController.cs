@@ -3,6 +3,8 @@ using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Caja;
 using Core.Erp.Info.Helps;
 using Core.Erp.Info.Inventario;
+using Core.Erp.Web.Helps;
+using DevExpress.Web;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,7 +20,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         in_Ing_Egr_Inven_det_Bus bus_det_ing_inv = new in_Ing_Egr_Inven_det_Bus();
         in_Ing_Egr_Inven_det_List List_in_Ing_Egr_Inven_det = new in_Ing_Egr_Inven_det_List();
         in_parametro_Bus bus_in_param = new in_parametro_Bus();
+        in_Producto_Bus bus_producto = new in_Producto_Bus();
         string mensaje = string.Empty;
+        #region Acciones
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -158,7 +162,19 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        #endregion
+        #region Metodos ComboBox bajo demanda
+        public ActionResult CmbProducto_EgresoInventario()
+        {
+            cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
+            return PartialView("_CmbProducto_EgresoInventario", model);
+        }
+        public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_producto.get_list_bajo_demanda( Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+       
+        #endregion
         private void cargar_combos_detalle()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);

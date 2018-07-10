@@ -32,11 +32,11 @@ namespace Core.Erp.Bus.CuentasPorPagar
             }
         }
 
-        public bool guardarDB(List<cp_retencion_det_Info> Lista)
+        public bool guardarDB(cp_retencion_Info info)
         {
             try
             {
-                return oData.guardarDB(Lista);
+                return oData.guardarDB(info);
             }
             catch (Exception)
             {

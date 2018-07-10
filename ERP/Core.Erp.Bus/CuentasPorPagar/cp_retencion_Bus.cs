@@ -81,6 +81,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info_retencion.co_subtotal_siniva = info_orden_giro.co_subtotal_siniva;
                 info_retencion.Descripcion = info_orden_giro.Descripcion;
                 info_retencion.pe_razonSocial = info_orden_giro.info_proveedor.info_persona.pe_razonSocial;
+                info_retencion.observacion = info_orden_giro.co_observacion;
                 return info_retencion;
             }
             catch (Exception)
@@ -169,7 +170,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     if (odata.modificarDB(info))
                     {
                         data_retencion_der.eliminarDB(info.IdEmpresa,info.IdRetencion);
-                        data_retencion_der.guardarDB(info.detalle);
+                        data_retencion_der.guardarDB(info);
                         return true;
                     }
                     else
