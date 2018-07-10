@@ -33,7 +33,7 @@ namespace Core.Erp.Data
         public string IdUsuario { get; set; }
         public string IdUsuario_Anu { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
-        public Nullable<System.DateTime> Fecha_Transac { get; set; }
+        public System.DateTime Fecha_Transac { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public string Estado { get; set; }
@@ -51,6 +51,17 @@ namespace Core.Erp.Data
         public Nullable<decimal> IdPersona { get; set; }
         public Nullable<decimal> IdEntidad { get; set; }
         public string IdTipo_Persona { get; set; }
+        public Nullable<decimal> IdProveedor { get; set; }
+        public decimal cb_secuencia { get; set; }
+        public string cb_ChequeImpreso { get; set; }
+        public Nullable<System.DateTime> cb_FechaCheque { get; set; }
+        public string ip { get; set; }
+        public string nom_pc { get; set; }
+        public Nullable<decimal> IdCbteCble_Anulacion { get; set; }
+        public Nullable<int> IdTipoCbte_Anulacion { get; set; }
+        public string IdTransaccion { get; set; }
+        public string Por_Anticipo { get; set; }
+        public string PosFechado { get; set; }
     
         public virtual ba_Banco_Cuenta ba_Banco_Cuenta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
