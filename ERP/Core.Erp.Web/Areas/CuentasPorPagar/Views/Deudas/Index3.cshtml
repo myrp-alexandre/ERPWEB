@@ -51,7 +51,33 @@
         $("#btn_guardar").disabled = false;
     }
 
-   
+    function seleccionar_aprobacion() {
+        var datos = {
+            Ids: selectedIDs
+        }
+        $("#btn_guardar").disabled = true;
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("seleccionar_aprobacion","Deudas", new { Area = "CuentasPorPagar" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                $("#myform").submit();
+                GridViewPartial_aprobacion_facturas.PerformCallback();
+                $("#fac_con_saldo").modal("hide");
+
+            },
+            error: function (error) {
+            }
+        });
+        $("#btn_guardar").disabled = false;
+    }
+
     
 </script>
 
@@ -107,31 +133,5 @@
 
 
 <script type="text/javascript">
-    function seleccionar_aprobacion() {
-        var datos = {
-            Ids: selectedIDs
-        }
-        $("#btn_guardar").disabled = true;
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("seleccionar_aprobacion","Deudas", new { Area = "CuentasPorPagar" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-
-                $("#myform").submit();
-                GridView_aprobacion_facturas.PerformCallback();
-                $("#fac_con_saldo").modal("hide");
-
-            },
-            error: function (error) {
-            }
-        });
-        $("#btn_guardar").disabled = false;
-    }
-
+    
 </script>
