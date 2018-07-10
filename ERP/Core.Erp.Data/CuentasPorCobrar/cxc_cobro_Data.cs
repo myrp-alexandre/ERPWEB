@@ -979,7 +979,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 cxc_cobro_Info info = new cxc_cobro_Info();
                 using (Entities_cuentas_por_cobrar Context = new Entities_cuentas_por_cobrar())
                 {
-                    vwcxc_cobro_para_retencion Entity = Context.vwcxc_cobro_para_retencion.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.vt_tipoDoc == vt_tipoDoc);
+                    vwcxc_cobro_para_retencion Entity = Context.vwcxc_cobro_para_retencion.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdCbteVta == IdCbteVta && q.vt_tipoDoc == vt_tipoDoc);
                     if (Entity == null) return null;
                     info = new cxc_cobro_Info
                     {
