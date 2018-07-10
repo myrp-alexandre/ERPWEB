@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,10 @@ namespace Core.Erp.Info.Banco
     public class ba_Talonario_cheques_x_banco_Info
     {
         public int IdEmpresa { get; set; }
+        [Required(ErrorMessage = ("el campo banco es obligatorio"))]
         public int IdBanco { get; set; }
+        [Required(ErrorMessage = ("el campo número cheque es obligatorio"))]
+        [StringLength(20, MinimumLength = 1, ErrorMessage = "el campo número debe tener mínimo 1 caracter y máximo 20")]
         public string Num_cheque { get; set; }
         public Nullable<decimal> secuencia { get; set; }
         public bool Usado { get; set; }

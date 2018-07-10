@@ -239,6 +239,7 @@
     <Compile Include="Areas\Banco\Controllers\NotaDeCreditoBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\NotaDeDebitoBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\ParametroBancoController.cs" />
+    <Compile Include="Areas\Banco\Controllers\TalonarioChequeBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\TipoNotaBancoController.cs" />
     <Compile Include="Areas\Caja\CajaAreaRegistration.cs" />
     <Compile Include="Areas\Caja\Controllers\CajaController.cs" />

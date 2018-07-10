@@ -12,12 +12,20 @@
 @using (Html.BeginForm("Nuevo", "TalonarioChequeBanco", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.Num_cheque)
+
+        if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="IdBanco">Banco</label>
+                    <label for="IdBanco">Banco*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdBanco, settings =>
                {
                    settings.Name = "IdBanco";
@@ -33,7 +41,7 @@
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                    settings.Properties.NullText = "== Seleccione ==";
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){get_NumeroCheque();}";
+                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){get_id();}";
                }).BindList(ViewBag.lst_banco).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
                 </div>
@@ -45,7 +53,7 @@
         <div class="col-md-12">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="Estado_bool">Número de cheque</label>
+                    <label for="Estado_bool">Número de cheque*</label>
                     @Html.TextBoxFor(q => q.Num_cheque, new { @class = "form-control", @id = "Num_cheque" })
                     @Html.ValidationMessageFor(q => q.Num_cheque, "", new { @class = "text-danger" })
                 </div>
@@ -74,3 +82,35 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+    <script>
+        $(function () {
+            $("#IdBanco").change(function () {
+                get_id();
+            });
+        });
+
+    function get_id(){
+
+        var id = IdBanco.GetValue();
+        var datos = {
+            IdBanco: id
+        }
+    $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("get_id", "TalonarioChequeBanco", new { Area = "Banco" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                $("#Num_cheque").val();
+            },
+            error: function (error) {
+            }
+        });
+    };
+
+    </script>

@@ -77,6 +77,30 @@ namespace Core.Erp.Bus.Banco
             }
         }
 
+        public bool validar_existe_Numcheque( string Num_cheque)
+        {
+            try
+            {
+                return odata.validar_existe_Numcheque( Num_cheque);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
+
+        public string get_id(int IdEmpresa, int IdBanco)
+        {
+            try
+            {
+                return odata.get_id(IdEmpresa, IdBanco);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

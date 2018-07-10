@@ -48,7 +48,14 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost]
         public ActionResult Nuevo(ba_Talonario_cheques_x_banco_Info model)
         {
-            if(!bus_talonario.guardarDB(model))
+            if (bus_talonario.validar_existe_Numcheque(model.Num_cheque))
+            {
+                ViewBag.mensaje = "El número ya se encuentra registrado";
+                cargar_combos();
+                return View(model);
+            }
+
+            if (!bus_talonario.guardarDB(model))
             {
                 cargar_combos();
                 return View(model);
@@ -67,7 +74,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
 
         [HttpPost]
-
         public ActionResult Modificar(ba_Talonario_cheques_x_banco_Info model)
         {
             if(!bus_talonario.modificarDB(model))
@@ -88,7 +94,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
 
         [HttpPost]
-
         public ActionResult Anular(ba_Talonario_cheques_x_banco_Info model)
         {
             if (!bus_talonario.anularDB(model))
@@ -99,6 +104,16 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return RedirectToAction("Index");
         }
 
+        public JsonResult get_id(int IdBanco = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            var Numerocheque = bus_talonario.get_id(IdEmpresa, IdBanco);
 
+            ba_Banco_Cuenta_Bus bus_bco_cuenta = new ba_Banco_Cuenta_Bus();
+            var bco_cuenta = bus_bco_cuenta.get_info(IdEmpresa, IdBanco);
+
+            return Json(JsonRequestBehavior.AllowGet);
+
+        }
     }
 }
