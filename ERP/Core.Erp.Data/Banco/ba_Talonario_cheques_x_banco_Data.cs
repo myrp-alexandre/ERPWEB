@@ -77,7 +77,7 @@ namespace Core.Erp.Data.Banco
                         IdCbteCble_cbtecble_Usado = Entity.IdCbteCble_cbtecble_Usado,
                         IdEmpresa_cbtecble_Usado = Entity.IdEmpresa_cbtecble_Usado,
                         IdTipoCbte_cbtecble_Usado = Entity.IdTipoCbte_cbtecble_Usado,
-                        Estado = Entity.Estado,
+                        Estado_bool = Entity.Estado == "S" ? true : false,
                         Num_cheque = Entity.Num_cheque,
                         secuencia = Entity.secuencia,
                         Usado = Entity.Usado,
@@ -134,7 +134,7 @@ namespace Core.Erp.Data.Banco
                         IdBanco = info.IdBanco,
                         Num_cheque = info.Num_cheque,
                         Usado = info.Usado,
-                        Estado = info.Estado_bool == true ? "S" : "N",
+                        Estado = info.Estado="A",
                         IdCbteCble_cbtecble_Usado = info.IdCbteCble_cbtecble_Usado,
                         IdEmpresa_cbtecble_Usado = info.IdEmpresa_cbtecble_Usado,
                         IdTipoCbte_cbtecble_Usado = info.IdTipoCbte_cbtecble_Usado,
@@ -163,7 +163,7 @@ namespace Core.Erp.Data.Banco
                     if (Entity == null) return false;
 
                     Entity.Usado = info.Usado;
-                    Entity.Estado = info.Estado_bool == true ? "S" : "N";
+                    Entity.Estado = info.Estado;
 
                     Context.SaveChanges();
                 }

@@ -11,31 +11,16 @@
 
 @using (Html.BeginForm("Anular", "TalonarioChequeBanco", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
+
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdBanco)
+    @Html.HiddenFor(q => q.Num_cheque)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="IdBanco">Banco</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdBanco, settings =>
-               {
-                   settings.Name = "IdBanco";
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                   settings.Properties.Columns.Add("IdBanco", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                   settings.Properties.Columns.Add("ba_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                   //Campo ID
-                   settings.Properties.ValueField = "IdBanco";
-                   settings.Properties.ValueType = typeof(int);
-                   settings.Properties.TextField = "ba_descripcion";
-                   //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                   settings.Properties.NullText = "== Seleccione ==";
-                   settings.Properties.DropDownButton.Enabled = false;
-                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                   settings.ReadOnly = true;
-               }).BindList(ViewBag.lst_banco).GetHtml()
+                    <label for="IdBanco">Banco*</label>
+                    @Html.DropDownListFor(q => q.IdBanco, new SelectList(ViewBag.lst_banco, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -46,8 +31,8 @@
         <div class="col-md-12">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="Estado_bool">Número de cheque</label>
-                    @Html.TextBoxFor(q => q.Num_cheque, new { @class = "form-control" })
+                    <label for="Estado_bool">Número de cheque*</label>
+                    @Html.TextBoxFor(q => q.Num_cheque, new { @class = "form-control", @id = "Num_cheque" })
                     @Html.ValidationMessageFor(q => q.Num_cheque, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -65,7 +50,24 @@
             </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Cantidad">Cantidad</label>
+                    @Html.TextBoxFor(q => q.Cantidad, new { @class = "form-control", @id = "Cantidad" })
+                    @Html.ValidationMessageFor(q => q.Cantidad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Documentofinal">Documento final</label>
+                    @Html.TextBoxFor(q => q.Documentofinal, new { @class = "form-control", @id = "Documentofinal", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(q => q.Documentofinal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
@@ -75,3 +77,52 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+<script>
+        $(function () {
+            $("#IdBanco").change(function () {
+                get_id();
+            });
+            $("#Cantidad").change(function () {
+                set_documentofinal();
+            });
+            $("#Documentofinal").change(function () {
+                set_documentofinal();
+            });
+        });
+
+    function get_id(){
+
+        var id = $("#IdBanco").val();
+        var datos = {
+            IdBanco: id
+        }
+    $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("get_id", "TalonarioChequeBanco", new { Area = "Banco" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                $("#Num_cheque").val(data);
+            },
+            error: function (error) {
+            }
+        });
+        };
+
+        function set_documentofinal() {
+            var cantidad = Number($("#Cantidad").val());
+            var doc_inicial = Number($("#Documentofinal").val());
+
+            var docfinal = "" + (doc_inicial + cantidad - 1)
+            var pad = "000000000";
+            var doc = pad.substring(0, pad.length - docfinal.length) + docfinal;
+
+            $("#Documentofinal").val(doc);
+        }
+
+</script>

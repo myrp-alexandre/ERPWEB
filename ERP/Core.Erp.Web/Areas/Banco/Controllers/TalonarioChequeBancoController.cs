@@ -105,6 +105,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return RedirectToAction("Index");
         }
 
+        #region
+        #endregion
         public JsonResult get_id(int IdBanco = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);

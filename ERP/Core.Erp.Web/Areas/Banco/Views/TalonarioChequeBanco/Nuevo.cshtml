@@ -60,15 +60,15 @@
         <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="Cantidad">Cantidad*</label>
+                    <label for="Cantidad">Cantidad</label>
                     @Html.TextBoxFor(q => q.Cantidad, new { @class = "form-control", @id = "Cantidad" })
                     @Html.ValidationMessageFor(q => q.Cantidad, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="Documentofinal">Documento final*</label>
-                    @Html.TextBoxFor(q => q.Documentofinal, new { @class = "form-control", @id = "Documentofinal" })
+                    <label for="Documentofinal">Documento final</label>
+                    @Html.TextBoxFor(q => q.Documentofinal, new { @class = "form-control", @id = "Documentofinal" , @disabled="disabled"})
                     @Html.ValidationMessageFor(q => q.Documentofinal, "", new { @class = "text-danger" })
                 </div>
             </div>
