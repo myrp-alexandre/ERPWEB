@@ -296,7 +296,6 @@ namespace Core.Erp.Data.CuentasPorPagar
 
         public List<cp_orden_pago_det_Info> Get_List_orden_pago_con_saldo(int IdEmpresa, string IdTipo_op, decimal IdProveedor, string IdEstado_Aprobacion, string IdUsuario)
         {
-
             try
             {
 

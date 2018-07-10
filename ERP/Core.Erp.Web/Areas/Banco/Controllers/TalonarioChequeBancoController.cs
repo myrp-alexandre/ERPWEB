@@ -105,13 +105,32 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return RedirectToAction("Index");
         }
 
+        #region Json
+
         public JsonResult get_id(int IdBanco = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             var banco_cuenta = bus_bco_cuenta.get_info(IdEmpresa, IdBanco);
             var Numerocheque = bus_talonario.get_id(IdEmpresa, IdBanco, banco_cuenta.ba_num_digito_cheq);
+
             return Json(Numerocheque, JsonRequestBehavior.AllowGet);
 
         }
+
+        public JsonResult get_num_x_bco(int IdBanco= 0)
+        {
+
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            var banco_cuenta = bus_bco_cuenta.get_info(IdEmpresa, IdBanco);
+            string relleno = string.Empty;
+            for (int i = 0; i < banco_cuenta.ba_num_digito_cheq; i++)
+            {
+                relleno += "0";
+            }
+
+            return Json(relleno, JsonRequestBehavior.AllowGet);
+
+        }
+        #endregion
     }
 }

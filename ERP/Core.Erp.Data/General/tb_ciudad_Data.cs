@@ -13,31 +13,30 @@ namespace Core.Erp.Data.General
             try
             {
                 List< tb_ciudad_Info> Lista;
-
+               
                 using (Entities_general Context = new Entities_general())
                 {
-                    string.IsNullOrEmpty(IdProvincia);
                     if (mostrar_anulados)
-                        Lista = (from q in Context. tb_ciudad
+                        Lista = (from q in Context.tb_ciudad
                                  join p in Context.tb_provincia
                                  on q.IdProvincia equals p.IdProvincia
-                                 where q.IdProvincia == IdProvincia
-                                 select new  tb_ciudad_Info
+                                 where q.IdProvincia.Contains(IdProvincia)
+                                 select new tb_ciudad_Info
                                  {
                                      IdProvincia = q.IdProvincia,
-                                     IdCiudad=q.IdCiudad,
+                                     IdCiudad = q.IdCiudad,
                                      Cod_Ciudad = q.Cod_Ciudad,
                                      Descripcion_Ciudad = q.Descripcion_Ciudad,
                                      Estado = q.Estado
-                                    
+
                                  }).ToList();
                     else
-                        Lista = (from q in Context. tb_ciudad
+                        Lista = (from q in Context.tb_ciudad
                                  join p in Context.tb_provincia
                                  on q.IdProvincia equals p.IdProvincia
-                                 where q.IdProvincia == IdProvincia
+                                 where q.IdProvincia.Contains(IdProvincia)
                                  && q.Estado == "A"
-                                 select new  tb_ciudad_Info
+                                 select new tb_ciudad_Info
                                  {
                                      IdProvincia = q.IdProvincia,
                                      IdCiudad = q.IdCiudad,
@@ -46,12 +45,10 @@ namespace Core.Erp.Data.General
                                      Estado = q.Estado
                                  }).ToList();
                 }
-
                 return Lista;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

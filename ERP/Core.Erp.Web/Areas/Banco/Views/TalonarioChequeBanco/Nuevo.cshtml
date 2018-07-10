@@ -60,15 +60,15 @@
         <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="Cantidad">Cantidad*</label>
+                    <label for="Cantidad">Cantidad</label>
                     @Html.TextBoxFor(q => q.Cantidad, new { @class = "form-control", @id = "Cantidad" })
                     @Html.ValidationMessageFor(q => q.Cantidad, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="Documentofinal">Documento final*</label>
-                    @Html.TextBoxFor(q => q.Documentofinal, new { @class = "form-control", @id = "Documentofinal" })
+                    <label for="Documentofinal">Documento final</label>
+                    @Html.TextBoxFor(q => q.Documentofinal, new { @class = "form-control", @id = "Documentofinal" , @disabled="disabled"})
                     @Html.ValidationMessageFor(q => q.Documentofinal, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -118,17 +118,37 @@
             error: function (error) {
             }
         });
-        };
+    };
 
         function set_documentofinal() {
             var cantidad = Number($("#Cantidad").val());
             var doc_inicial = Number($("#Num_cheque").val());
 
             var docfinal = "" + (doc_inicial + cantidad - 1)
-            var pad = "000000000";
-            var doc = pad.substring(0, pad.length - docfinal.length) + docfinal;
+            var id = $("#IdBanco").val();
 
-            $("#Documentofinal").val(doc);
+            var datos = {
+            IdBanco: id
+            }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("get_num_x_bco", "TalonarioChequeBanco", new { Area = "Banco" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                var pad = data;
+                var doc = pad.substring(0, pad.length - docfinal.length) + docfinal;
+                $("#Documentofinal").val(doc);
+            },
+            error: function (error) {
+            }
+        });
+            
         }
 
 </script>
