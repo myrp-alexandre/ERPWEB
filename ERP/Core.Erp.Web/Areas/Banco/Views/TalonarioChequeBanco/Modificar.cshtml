@@ -14,12 +14,14 @@
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdBanco)
     @Html.HiddenFor(q => q.Num_cheque)
+    @Html.HiddenFor(q => q.Cantidad)
+    @Html.HiddenFor(q => q.Documentofinal)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdBanco">Banco*</label>
-                    @Html.DropDownListFor(q => q.IdBanco, new SelectList(ViewBag.lst_banco, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco" , @disabled="disabled"})
+                    @Html.DropDownListFor(q => q.IdBanco, new SelectList(ViewBag.lst_banco, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -31,10 +33,11 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="Estado_bool">Número de cheque*</label>
-                    @Html.TextBoxFor(q => q.Num_cheque, new { @class = "form-control", @id = "Num_cheque" })
+                    @Html.TextBoxFor(q => q.Num_cheque, new { @class = "form-control", @id = "Num_cheque" , @disabled="disabled"})
                     @Html.ValidationMessageFor(q => q.Num_cheque, "", new { @class = "text-danger" })
                 </div>
             </div>
+
             <div class="col-md-2">
                 <div class="form-group">
                     <div class="checkbox">
@@ -45,24 +48,6 @@
                     <div class="checkbox">
                         <label for="Usado">@Html.CheckBoxFor(q => q.Usado) Usado</label>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="Cantidad">Cantidad</label>
-                    @Html.TextBoxFor(q => q.Cantidad, new { @class = "form-control", @id = "Cantidad" })
-                    @Html.ValidationMessageFor(q => q.Cantidad, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Documentofinal">Documento final</label>
-                    @Html.TextBoxFor(q => q.Documentofinal, new { @class = "form-control", @id = "Documentofinal", @disabled = "disabled" })
-                    @Html.ValidationMessageFor(q => q.Documentofinal, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -118,10 +103,30 @@
             var doc_inicial = Number($("#Documentofinal").val());
 
             var docfinal = "" + (doc_inicial + cantidad - 1)
-            var pad = "000000000";
-            var doc = pad.substring(0, pad.length - docfinal.length) + docfinal;
+            var id = $("#IdBanco").val();
 
-            $("#Documentofinal").val(doc);
+            var datos = {
+            IdBanco: id
+            }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("get_num_x_bco", "TalonarioChequeBanco", new { Area = "Banco" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                var pad = data;
+                var doc = pad.substring(0, pad.length - docfinal.length) + docfinal;
+                $("#Documentofinal").val(doc);
+            },
+            error: function (error) {
+            }
+        });
+
         }
 
 </script>
