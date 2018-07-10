@@ -62,15 +62,22 @@
     }
 }
 <script>
-        $(function () {
-            $("#IdBanco").change(function () {
-                get_id();
-            });
-            $("#Cantidad").change(function () {
-                set_documentofinal();
-            });
-            $("#Documentofinal").change(function () {
-                set_documentofinal();
+    $(function () {
+
+        get_id();
+        set_documentofinal();
+
+        $("#IdBanco").change(function () {
+            get_id();
+            set_documentofinal();
+        });
+
+        $("#Cantidad").change(function () {
+             set_documentofinal();
+        });
+
+        $("#Documentofinal").change(function () {
+             set_documentofinal();
             });
         });
 
@@ -96,7 +103,7 @@
             error: function (error) {
             }
         });
-        };
+    }
 
         function set_documentofinal() {
             var cantidad = Number($("#Cantidad").val());

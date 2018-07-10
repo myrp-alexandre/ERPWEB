@@ -62,9 +62,17 @@
     }
 }
 <script>
-        $(function () {
+    $(function () {
+
+        get_id();
+        set_documentofinal();
+
+        $("#Num_cheque").change(function () {
+            set_documentofinal();
+        });
             $("#IdBanco").change(function () {
                 get_id();
+                set_documentofinal();
             });
             $("#Cantidad").change(function () {
                 set_documentofinal();
@@ -72,6 +80,8 @@
             $("#Documentofinal").change(function () {
                 set_documentofinal();
             });
+
+
         });
 
     function get_id(){
@@ -96,13 +106,14 @@
             error: function (error) {
             }
         });
-        };
+    };
 
         function set_documentofinal() {
             var cantidad = Number($("#Cantidad").val());
-            var doc_inicial = Number($("#Documentofinal").val());
+            var doc_inicial = Number($("#Num_cheque").val());
 
             var docfinal = "" + (doc_inicial + cantidad - 1)
+            var docf = "" + (doc_inicial)
             var id = $("#IdBanco").val();
 
             var datos = {
@@ -121,12 +132,15 @@
             success: function (data) {
                 var pad = data;
                 var doc = pad.substring(0, pad.length - docfinal.length) + docfinal;
+                var df = pad.substring(0, pad.length - docf.length) + docf;
+                
                 $("#Documentofinal").val(doc);
+                $("#Num_cheque").val(df);
             },
             error: function (error) {
             }
         });
-
+            
         }
 
 </script>

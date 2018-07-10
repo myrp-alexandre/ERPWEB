@@ -49,17 +49,31 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost]
         public ActionResult Nuevo(ba_Talonario_cheques_x_banco_Info model)
         {
-            if (bus_talonario.validar_existe_Numcheque(model.Num_cheque))
+            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            decimal documento_inicial = Convert.ToDecimal(model.Num_cheque);
+            decimal documento_final = Convert.ToDecimal(model.Documentofinal);
+            for (decimal i = documento_inicial; i < documento_final; i++)
             {
-                ViewBag.mensaje = "El número ya se encuentra registrado";
-                cargar_combos();
-                return View(model);
-            }
-
-            if (!bus_talonario.guardarDB(model))
-            {
-                cargar_combos();
-                return View(model);
+                ba_Talonario_cheques_x_banco_Info info = new ba_Talonario_cheques_x_banco_Info
+                {
+                    IdEmpresa = model.IdEmpresa,
+                    IdBanco = model.IdBanco,
+                    Num_cheque = model.Num_cheque,
+                    Estado = model.Estado_bool == true ? "A" : "I",
+                    Usado = model.Usado,
+                    Cantidad = model.Cantidad,
+                    Documentofinal = model.Documentofinal
+                };
+                if (bus_talonario.validar_existe_Numcheque(model.Num_cheque))
+                {
+                    ViewBag.mensaje = "El número ya se encuentra registrado";
+                    cargar_combos();
+                    return View(model);
+                }
+                if (!bus_talonario.guardarDB(model))
+                {
+                    return View(model);
+                }
             }
             return RedirectToAction("Index");
         }
