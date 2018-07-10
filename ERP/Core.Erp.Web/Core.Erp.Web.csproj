@@ -239,7 +239,6 @@
     <Compile Include="Areas\Banco\Controllers\NotaDeCreditoBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\NotaDeDebitoBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\ParametroBancoController.cs" />
-    <Compile Include="Areas\Banco\Controllers\TalonarioChequeBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\TipoNotaBancoController.cs" />
     <Compile Include="Areas\Caja\CajaAreaRegistration.cs" />
     <Compile Include="Areas\Caja\Controllers\CajaController.cs" />
@@ -8607,8 +8606,11 @@
     <Content Include="Areas\Banco\Views\TalonarioChequeBanco\Index.cshtml" />
     <Content Include="Areas\Banco\Views\TalonarioChequeBanco\_GridViewPartial_talonario_cheque.cshtml" />
     <Content Include="Areas\Banco\Views\TalonarioChequeBanco\Nuevo.cshtml" />
-    <Content Include="Areas\Banco\Views\TalonarioChequeBanco\Modificar.cshtml" />
-    <Content Include="Areas\Banco\Views\TalonarioChequeBanco\Anular.cshtml" />
+    <Content Include="Areas\Banco\Views\ChequeBanco\Index.cshtml" />
+    <Content Include="Areas\Banco\Views\ChequeBanco\Nuevo.cshtml" />
+    <Content Include="Areas\Banco\Views\ChequeBanco\Modificar.cshtml" />
+    <Content Include="Areas\Banco\Views\ChequeBanco\Anular.cshtml" />
+    <Content Include="Areas\Banco\Views\ChequeBanco\_GridViewPartial_cheque.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
@@ -8672,7 +8674,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\ActivoFijo\Models\" />
     <Folder Include="Areas\Banco\Models\" />
-    <Folder Include="Areas\Banco\Views\ChequeBanco\" />
     <Folder Include="Areas\Banco\Views\DepositoBanco\" />
     <Folder Include="Areas\Banco\Views\NotaDeCreditoBanco\" />
     <Folder Include="Areas\Banco\Views\NotaDeDebitoBanco\" />

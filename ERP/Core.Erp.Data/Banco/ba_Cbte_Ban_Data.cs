@@ -5,8 +5,7 @@ using Core.Erp.Info.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Core.Erp.Data.Banco
 {
@@ -22,10 +21,11 @@ namespace Core.Erp.Data.Banco
 
                 using (Entities_banco Context = new Entities_banco())
                 {
-                    Lista = (from q in Context.ba_Cbte_Ban
+                    Lista = (from q in Context.vwba_Cbte_Ban
                              where q.IdEmpresa == IdEmpresa
                              && Fecha_ini <= q.cb_Fecha
                              && q.cb_Fecha <= Fecha_fin
+                             && q.CodTipoCbteBan == CodCbte
                              select new ba_Cbte_Ban_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -33,7 +33,11 @@ namespace Core.Erp.Data.Banco
                                  IdCbteCble = q.IdCbteCble,
                                  cb_Fecha = q.cb_Fecha,
                                  cb_Observacion = q.cb_Observacion,
-                                 Estado = q.Estado
+                                 Estado = q.Estado,
+                                 CodTipoCbteBan = q.CodTipoCbteBan,
+                                 ba_descripcion = q.ba_descripcion,
+                                 pe_nombreCompleto = q.pe_nombreCompleto,
+                                 Su_Descripcion = q.Su_Descripcion
                              }).ToList();
                 }
 
@@ -498,27 +502,34 @@ namespace Core.Erp.Data.Banco
 
         public bool anularDB(ba_Cbte_Ban_Info info)
         {
+            Entities_cuentas_por_pagar Context_cxp = new Entities_cuentas_por_pagar();
+            Entities_banco Context = new Entities_banco();
             try
             {
-                using (Entities_banco Context = new Entities_banco())
-                {
-                    ba_Cbte_Ban Entity = Context.ba_Cbte_Ban.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipocbte == info.IdTipocbte && q.IdCbteCble == info.IdCbteCble).FirstOrDefault();
-                    if (Entity == null) return false;
-                    Entity.IdUsuario_Anu = info.IdUsuario_Anu;
-                    Entity.FechaAnulacion = info.FechaAnulacion;
-                    Entity.Estado = "I";
-                    Context.SaveChanges();
-                }
+                ba_Cbte_Ban Entity = Context.ba_Cbte_Ban.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipocbte == info.IdTipocbte && q.IdCbteCble == info.IdCbteCble).FirstOrDefault();
+                if (Entity == null) return false;
+                Entity.IdUsuario_Anu = info.IdUsuario_Anu;
+                Entity.FechaAnulacion = info.FechaAnulacion;
+                Entity.Estado = "I";
 
-                using (Entities_cuentas_por_pagar Context_cxp = new Entities_cuentas_por_pagar())
-                {
+                var lst_ing = Context.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.Where(q => q.mba_IdEmpresa == info.IdEmpresa && q.mba_IdTipocbte == info.IdTipocbte && q.mba_IdCbteCble == info.IdCbteCble).ToList();
+                Context.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.RemoveRange(lst_ing);
 
-                }
+                var lst_cance = Context_cxp.cp_orden_pago_cancelaciones.Where(q => q.IdEmpresa_pago == info.IdEmpresa && q.IdTipoCbte_pago == info.IdTipocbte && q.IdCbteCble_pago == info.IdCbteCble).ToList();
+                Context_cxp.cp_orden_pago_cancelaciones.RemoveRange(lst_cance);
 
+                Context_cxp.SaveChanges();
+                Context.SaveChanges();
+
+
+                Context_cxp.Dispose();
+                Context.Dispose();
                 return true;
             }
             catch (Exception)
             {
+                Context_cxp.Dispose();
+                Context.Dispose();
                 throw;
             }
         }

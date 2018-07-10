@@ -228,7 +228,9 @@ namespace Core.Erp.Data.Contabilidad
                 throw;
             }
         }
-
+        
+        /// <param name="info">Debe ir llenos los PK y el IdUsuarioUltAnu</param>
+        /// <returns></returns>
         public bool anularDB(ct_cbtecble_Info info)
         {
             try
