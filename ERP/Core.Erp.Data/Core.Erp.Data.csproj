@@ -134,6 +134,9 @@
     <Compile Include="ba_Talonario_cheques_x_banco.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
+    <Compile Include="ba_Talonario_cheques_x_banco_ID.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
     <Compile Include="ba_tipo_nota.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
