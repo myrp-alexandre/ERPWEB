@@ -12,6 +12,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
     public class TalonarioChequeBancoController : Controller
     {
         ba_Talonario_cheques_x_banco_Bus bus_talonario = new ba_Talonario_cheques_x_banco_Bus();
+        ba_Banco_Cuenta_Bus bus_bco_cuenta = new ba_Banco_Cuenta_Bus();
         public ActionResult Index()
         {
             return View();
@@ -107,12 +108,9 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public JsonResult get_id(int IdBanco = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            var Numerocheque = bus_talonario.get_id(IdEmpresa, IdBanco);
-
-            ba_Banco_Cuenta_Bus bus_bco_cuenta = new ba_Banco_Cuenta_Bus();
-            var bco_cuenta = bus_bco_cuenta.get_info(IdEmpresa, IdBanco);
-
-            return Json(JsonRequestBehavior.AllowGet);
+            var banco_cuenta = bus_bco_cuenta.get_info(IdEmpresa, IdBanco);
+            var Numerocheque = bus_talonario.get_id(IdEmpresa, IdBanco, banco_cuenta.ba_num_digito_cheq);
+            return Json(Numerocheque, JsonRequestBehavior.AllowGet);
 
         }
     }

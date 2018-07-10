@@ -13,7 +13,7 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa)
 
-        if (ViewBag.mensaje != null)
+    if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
             <h4>
@@ -26,7 +26,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdBanco">Banco*</label>
-                    @Html.DropDownListFor(q=>q.IdBanco, new SelectList(ViewBag.lst_banco, "IdBanco" , "ba_descripcion"), new { @class="form-control", @id="IdBanco"})
+                    @Html.DropDownListFor(q => q.IdBanco, new SelectList(ViewBag.lst_banco, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco" })
                     @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -54,14 +54,18 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="Cantidad">Cantidad*</label>
                     @Html.TextBoxFor(q => q.Cantidad, new { @class = "form-control", @id = "Cantidad" })
                     @Html.ValidationMessageFor(q => q.Cantidad, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="Documentofinal">Documento final*</label>
                     @Html.TextBoxFor(q => q.Documentofinal, new { @class = "form-control", @id = "Documentofinal" })
@@ -71,7 +75,6 @@
         </div>
     </div>
 
-
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","TalonarioChequeBanco", new { Area = "Banco"  },null)">Cancelar</a>
@@ -80,7 +83,7 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
-    <script>
+<script>
         $(function () {
             $("#IdBanco").change(function () {
                 get_id();
@@ -96,7 +99,6 @@
     function get_id(){
 
         var id = $("#IdBanco").val();
-        
         var datos = {
             IdBanco: id
         }
@@ -129,4 +131,4 @@
             $("#Documentofinal").val(doc);
         }
 
-    </script>
+</script>

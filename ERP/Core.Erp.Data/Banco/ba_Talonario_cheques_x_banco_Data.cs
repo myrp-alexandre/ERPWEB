@@ -93,11 +93,12 @@ namespace Core.Erp.Data.Banco
             }
         }
 
-        public string get_id(int IdEmpresa, int IdBanco)
+        public string get_id(int IdEmpresa, int IdBanco, int NumDigitos)
         {
             try
             {
                 decimal ID = 1;
+                string relleno = string.Empty;
                 using (Entities_banco Context = new Entities_banco())
                 {
                     var lst = from q in Context.vwba_Talonario_cheques_x_banco_ID
@@ -107,9 +108,12 @@ namespace Core.Erp.Data.Banco
                     if (lst.Count() > 0)
                         ID = Convert.ToDecimal(lst.Max(q => q.Num_cheque) + 1);
 
-
+                    for (int i = 0; i < NumDigitos; i++)
+                    {
+                        relleno += "0";
+                    }
                 }
-                return ID.ToString("0000");
+                return ID.ToString(relleno);
             }
             catch (Exception)
             {
@@ -127,7 +131,7 @@ namespace Core.Erp.Data.Banco
                     ba_Talonario_cheques_x_banco Entity = new ba_Talonario_cheques_x_banco
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdBanco = info.IdBanco=Convert.ToInt32(get_id(info.IdEmpresa, info.IdBanco)),
+                        IdBanco = info.IdBanco,
                         Num_cheque = info.Num_cheque,
                         Usado = info.Usado,
                         Estado = info.Estado_bool == true ? "S" : "N",

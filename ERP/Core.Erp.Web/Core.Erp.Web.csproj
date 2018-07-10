@@ -8613,6 +8613,8 @@
     <Content Include="Areas\Banco\Views\ChequeBanco\Anular.cshtml" />
     <Content Include="Areas\Banco\Views\ChequeBanco\_GridViewPartial_cheque.cshtml" />
     <Content Include="Areas\Inventario\Views\EgresoInventario\_CmbProducto_EgresoInventario.cshtml" />
+    <Content Include="Areas\Banco\Views\TalonarioChequeBanco\Anular.cshtml" />
+    <Content Include="Areas\Banco\Views\TalonarioChequeBanco\Modificar.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />

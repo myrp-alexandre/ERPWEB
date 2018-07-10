@@ -90,11 +90,11 @@ namespace Core.Erp.Bus.Banco
             }
         }
 
-        public string get_id(int IdEmpresa, int IdBanco)
+        public string get_id(int IdEmpresa, int IdBanco, int NumDigitos)
         {
             try
             {
-                return odata.get_id(IdEmpresa, IdBanco);
+                return odata.get_id(IdEmpresa, IdBanco, NumDigitos);
             }
             catch (Exception)
             {
