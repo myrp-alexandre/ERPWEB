@@ -100,11 +100,13 @@ namespace Core.Erp.Data.Banco
                 decimal ID = 1;
                 using (Entities_banco Context = new Entities_banco())
                 {
+                    /*
                     var lst = from q in Context.ba_Talonario_cheques_x_banco_ID
                               where q.IdEmpresa == IdEmpresa
                               select q;
                     if (lst.Count() > 0)
                         ID = lst.Max(q => q.Num_cheque) +1;
+                        */
                 }
                 return ID.ToString("0000");
             }

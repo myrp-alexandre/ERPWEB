@@ -178,6 +178,8 @@
           <Property Name="IdCentroCosto" Type="varchar" MaxLength="20" />
           <Property Name="Estado" Type="char" MaxLength="1" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwba_Cbte_Ban' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Cbte_Ban">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -212,6 +214,8 @@
           <Property Name="IdSucursal" Type="int" />
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwba_Talonario_cheques_x_banco_ID' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Talonario_cheques_x_banco_ID">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -427,8 +431,7 @@
             <End Role="ba_tipo_nota" EntitySet="ba_tipo_nota" />
             <End Role="ba_Cbte_Ban" EntitySet="ba_Cbte_Ban" />
           </AssociationSet>
-          <EntitySet Name="vwba_Talonario_cheques_x_banco_ID" EntityType="Model_banco.vwba_Talonario_cheques_x_banco_ID" />
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="ba_CatalogoTipo">
           <Key>
             <PropertyRef Name="IdTipoCatalogo" />
@@ -753,16 +756,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="vwba_Talonario_cheques_x_banco_ID">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdBanco" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdBanco" Type="Int32" Nullable="false" />
-          <Property Name="Num_cheque" Type="Decimal" Precision="18" Scale="0" />
-        </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
