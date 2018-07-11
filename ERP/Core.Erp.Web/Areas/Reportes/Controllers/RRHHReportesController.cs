@@ -16,7 +16,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     {
 
 
-        public ActionResult ROL_001(int IdEmpresa=0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui= 0, int IdPeriodo=0)
+        public ActionResult ROL_001(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui= 0, int IdPeriodo=0)
         {
             ROL_001_Rpt model = new ROL_001_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
@@ -29,7 +29,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
-        public ActionResult ROL_002(int IdEmpresa = 0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0)
+        public ActionResult ROL_002(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0)
         {
             ROL_002_Rpt model = new ROL_002_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
@@ -152,6 +152,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ro_nomina_tipo_Bus bus_nomina = new ro_nomina_tipo_Bus();
             var lst_nomina = bus_nomina.get_list(IdEmpresa, false);
             ViewBag.lst_nomina = lst_nomina;
+
+            
         }
 
         public ActionResult ROL_012(DateTime? fecha_inicio, DateTime? fecha_fin )
@@ -207,7 +209,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
 
         [HttpPost]
-        public ActionResult ROl_013(cl_filtros_Info model)
+        public ActionResult ROL_013(cl_filtros_Info model)
         {
             ROL_013_Rpt report = new ROL_013_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
@@ -219,6 +221,31 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cargar_combos();
             if (model.IdNomina == 0)
                 report.RequestParameters = false;
+            ViewBag.Report = report;
+            return View(model);
+        }
+        public ActionResult ROL_014(int IdTipoNomina = 0)
+        {
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdTipoNomina = IdTipoNomina
+            };
+            cargar_combos();
+            ROL_014_Rpt report = new ROL_014_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdTipoNomina.Value = model.IdTipoNomina;
+                report.RequestParameters = false;
+            ViewBag.Report = report;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult ROL_014(cl_filtros_Info model)
+        {
+            ROL_014_Rpt report = new ROL_014_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdTipoNomina.Value = model.IdTipoNomina;
+            report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
         }

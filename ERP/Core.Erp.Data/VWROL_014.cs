@@ -10,23 +10,21 @@
 namespace Core.Erp.Data
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class SPROL_012_Result
+    public partial class VWROL_014
     {
         public int IdEmpresa { get; set; }
+        public decimal IdEmpleado { get; set; }
         public int IdTipoNomina { get; set; }
         public int IdDepartamento { get; set; }
-        public decimal IdEmpleado { get; set; }
-        public decimal IdPrestamo { get; set; }
+        public string de_descripcion { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string pe_apellido { get; set; }
         public string pe_nombre { get; set; }
-        public string EstadoPago { get; set; }
-        public string Descripcion { get; set; }
-        public string de_descripcion { get; set; }
-        public Nullable<double> Total_Prestamo { get; set; }
-        public Nullable<double> Total_Cancelado { get; set; }
-        public Nullable<double> Total_Pendiente_pago { get; set; }
-        public string Observacion { get; set; }
+        public string Decimo_Cuarto { get; set; }
+        public string Decimo_Tercero { get; set; }
+        public string Fondos_Reservas { get; set; }
+        public Nullable<int> IdDivision { get; set; }
     }
 }

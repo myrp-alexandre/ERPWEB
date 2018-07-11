@@ -59,6 +59,7 @@ namespace Core.Erp.Info.Helps
         public decimal IdEntidad { get; set; }
 
         #endregion
+        public int IdTipoNomina { get; set; }
         public int IdNomina { get; set; }
         public string IdCtaCble { get; set; }
 
