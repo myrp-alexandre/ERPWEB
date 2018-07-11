@@ -50,6 +50,7 @@
             column.Caption = "Valor aprobado";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
         });
+        settings.ClientSideEvents.EndCallback = "function(s,e){ armar_diario(); }";
     });
 }
 @grid.Bind(Model).GetHtml()

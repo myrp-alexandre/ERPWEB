@@ -8,8 +8,6 @@ namespace Core.Erp.Info.CuentasPorPagar
 {
    public class cp_orden_pago_cancelaciones_Info
     {
-        public string pe_nombreCompleto;
-
         public int IdEmpresa { get; set; }
         public decimal Idcancelacion { get; set; }
         public int Secuencia { get; set; }
@@ -40,6 +38,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public DateTime Fecha_Fa_Prov { get; set; }
         public DateTime Fecha_Venc_Fac_Prov { get; set; }
         public string IdCtaCble { get; set; }
+        public string pe_nombreCompleto { get; set; }
         #endregion
 
     }

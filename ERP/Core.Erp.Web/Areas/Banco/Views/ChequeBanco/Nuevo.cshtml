@@ -14,6 +14,9 @@
         $('#cb_Fecha').datepicker({
             autoclose: true
         })
+        $("#IdBanco").change(function () {
+            armar_diario();
+        });
     });
     var selectedIDs;
     function OnBeginCallback(s, e) {
@@ -58,6 +61,29 @@
         GridView_cheque_op_x_cruzar.UnselectRows();
         GridView_cheque_op.PerformCallback();
         $("#OpModal").modal("hide");
+    }
+
+    function armar_diario() {
+        var datos = {
+            IdBanco: $("#IdBanco").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("armar_diario", "ChequeBanco",new { Area = "Banco"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridView_comprobante_detalle.PerformCallback();
+                $("#cb_Valor").val(data);
+            },
+            error: function (error) {
+            }
+        });
+        
     }
 </script>
 
@@ -140,7 +166,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="cb_Valor">Valor</label>
-                            @Html.TextBoxFor(q => q.cb_Valor,"{0:n2}", new { @id = "cb_Valor", @class = "form-control", @readonly = "readonly" })
+                            @Html.TextBoxFor(q => q.cb_Valor, new { @id = "cb_Valor", @class = "form-control", @readonly = "readonly" })
                         </div>
                     </div>
                 </div>
@@ -190,8 +216,8 @@
                 @Html.Action("GridViewPartial_cheque_op")
             </div>
 
-            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_diario">
-
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_diario">                
+                   @Html.Action("GridViewPartial_comprobante_detalle", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
             </div>
         </div>
     </div>

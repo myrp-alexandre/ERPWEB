@@ -2,9 +2,11 @@
 using Core.Erp.Bus.CuentasPorPagar;
 using Core.Erp.Bus.General;
 using Core.Erp.Info.Banco;
+using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
+using Core.Erp.Web.Areas.Contabilidad.Controllers;
 using Core.Erp.Web.Helps;
 using DevExpress.Web;
 using System;
@@ -26,6 +28,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         cp_orden_pago_cancelaciones_Bus bus_cancelaciones = new cp_orden_pago_cancelaciones_Bus();
         ba_Banco_Cuenta_Bus bus_banco_cuenta = new ba_Banco_Cuenta_Bus();
         cp_orden_pago_cancelaciones_List List_op = new cp_orden_pago_cancelaciones_List();
+        ct_cbtecble_det_List List_ct = new ct_cbtecble_det_List();
         #endregion
 
         #region Index
@@ -106,8 +109,12 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 cb_ciudadChq = "09",
                 IdTipo_Persona = cl_enumeradores.eTipoPersona.PROVEE.ToString(),
                 cb_Fecha = DateTime.Now.Date,
-                IdEntidad = 1
+                IdEntidad = 0,
+                lst_det_canc_op = new List<cp_orden_pago_cancelaciones_Info>(),
+                lst_det_ct = new List<ct_cbtecble_det_Info>()
             };
+            List_ct.set_list(model.lst_det_ct);
+            List_op.set_list(model.lst_det_canc_op);
             cargar_combos();
             return View(model);
         }
@@ -126,8 +133,9 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public ActionResult GridViewPartial_cheque_op_x_cruzar()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            SessionFixed.TipoPersona = Request.Params["IdTipoPersona"] != null ? Request.Params["IdTipoPersona"].ToString() : "PERSONA";
-            decimal IdEntidad = !string.IsNullOrEmpty(Request.Params["IdEntidad"]) ? Convert.ToDecimal(Request.Params["IdEntidad"]) : 0;
+            SessionFixed.TipoPersona = Request.Params["TipoPersona"] != null ? Request.Params["TipoPersona"].ToString() : "PERSONA";
+            SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["IdEntidad"]) ? Request.Params["IdEntidad"].ToString() : "0";
+            decimal IdEntidad = Convert.ToDecimal(SessionFixed.IdEntidad);
             List<cp_orden_pago_cancelaciones_Info> model;
             if (IdEntidad == 0)
                 model = new List<cp_orden_pago_cancelaciones_Info>();
@@ -139,7 +147,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public ActionResult GridViewPartial_cheque_op()
         {
             var model = List_op.get_list();
-            return PartialView("_GridViewPartial_cheque_op_x_cruzar", model);
+            return PartialView("_GridViewPartial_cheque_op", model);
         }
 
         [HttpPost, ValidateInput(false)]
@@ -148,9 +156,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (IDs != "")
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-                SessionFixed.TipoPersona = Request.Params["IdTipoPersona"] != null ? Request.Params["IdTipoPersona"].ToString() : "PERSONA";
-                decimal IdEntidad = !string.IsNullOrEmpty(Request.Params["IdEntidad"]) ? Convert.ToDecimal(Request.Params["IdEntidad"]) : 0;
-
+                decimal IdEntidad = Convert.ToDecimal(SessionFixed.IdEntidad);
                 List<cp_orden_pago_cancelaciones_Info> lst_x_cruzar;
                 if (IdEntidad == 0)
                     lst_x_cruzar = new List<cp_orden_pago_cancelaciones_Info>();
@@ -164,8 +170,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                         List_op.AddRow(info_det);
                 }
             }
-            ba_Cbte_Ban_Info model = new ba_Cbte_Ban_Info();
-            model.lst_det_canc_op = List_op.get_list();
+            var model = List_op.get_list();
             return PartialView("_GridViewPartial_cheque_op", model);
         }
 
@@ -175,6 +180,37 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             ba_Cbte_Ban_Info model = new ba_Cbte_Ban_Info();
             model.lst_det_canc_op = List_op.get_list();
             return PartialView("_GridViewPartial_cheque_op", model);
+        }
+
+        public JsonResult armar_diario(int IdBanco = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var bco = bus_banco_cuenta.get_info(IdEmpresa, IdBanco);
+            var lst_op = List_op.get_list();
+
+            List<ct_cbtecble_det_Info> lst_ct = new List<ct_cbtecble_det_Info>();
+            int secuencia = 1;
+            foreach (var item in lst_op)
+            {
+                //Debe
+                lst_ct.Add(new ct_cbtecble_det_Info
+                {
+                    IdCtaCble = item.IdCtaCble,
+                    secuencia = secuencia++,
+                    dc_Valor = Math.Round(item.MontoAplicado,2,MidpointRounding.AwayFromZero),
+                    dc_Valor_debe = Math.Round(item.MontoAplicado, 2, MidpointRounding.AwayFromZero)
+                });
+            }
+            lst_ct.Add(new ct_cbtecble_det_Info
+            {
+                IdCtaCble = bco.IdCtaCble,
+                secuencia = secuencia++,
+                dc_Valor = Math.Round(lst_op.Sum(q=>q.MontoAplicado), 2, MidpointRounding.AwayFromZero)*-1,
+                dc_Valor_haber = Math.Round(lst_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero),
+                dc_para_conciliar = true
+            });
+            List_ct.set_list(lst_ct);
+            return Json(Math.Round(lst_op.Sum(q => q.MontoAplicado),2,MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
         }
     }
 
