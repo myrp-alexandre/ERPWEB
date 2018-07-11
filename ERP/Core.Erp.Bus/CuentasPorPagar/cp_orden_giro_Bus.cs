@@ -159,7 +159,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     info.info_cuota.Estado = true;
                     bus_cuotas.ModificarDB(info.info_cuota);
                 }
-                if (info.info_forma_pago.codigo_pago_sri != "")
+                if (info.info_forma_pago.codigo_pago_sri != "" && info.info_forma_pago.codigo_pago_sri!=null)
                 {
                     bus_forma_pago.EliminarDB(info.IdEmpresa, info.IdTipoCbte_Ogiro, info.IdCbteCble_Ogiro);
 

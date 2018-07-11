@@ -18,10 +18,8 @@
         settings.Properties.Columns.Add("pr_codigo", "Código", 10);
         settings.Properties.Columns.Add("pr_descripcion", "Producto", 80);
 
-
-        settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdTipoPersona'] = $('#IdTipoPersona').val(); }";
-    })
-   // .BindList(new Core.Erp.Web.Areas.Inventario.Controllers.EgresoInventarioController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Inventario.Controllers.EgresoInventarioController().get_info_bajo_demanda)
+   })
+    .BindList(new Core.Erp.Web.Areas.Inventario.Controllers.EgresoInventarioController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Inventario.Controllers.EgresoInventarioController().get_info_bajo_demanda)
     .Bind(Model.IdEntidad);
 
 }

@@ -684,4 +684,4 @@ namespace Core.Erp.Data.CuentasPorPagar
         }
     }
     }
-}
+
