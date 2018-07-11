@@ -50,6 +50,36 @@
                 p.DataSource = ViewBag.lst_producto;
             });
         });
+
+
+
+
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pr_descripcion";
+            column.Caption = "Producto";
+            column.Width = Unit.Percentage(30);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdProducto";
+            column.Caption = "pr_descripcion";
+            column.Width = Unit.Percentage(30);
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
+            {
+                Html.RenderPartial("_CmbProducto_EgresoInventario", DataBinder.Eval(c.DataItem, "IdProducto"));
+            });
+        });
+
+
+
+
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdUnidadMedida_sinConversion";

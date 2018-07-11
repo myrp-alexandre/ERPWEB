@@ -100,5 +100,26 @@ namespace Core.Erp.Data
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spcp_Get_Data_orden_pago_con_cancelacion_data_Result>("spcp_Get_Data_orden_pago_con_cancelacion_data", idEmpresaParameter, idPersona_iniParameter, idPersona_finParameter, idTipoPersonaParameter, idEntidad_iniParameter, idEntidad_finParameter, idEstado_AprobacionParameter, idUsuarioParameter, mostrar_saldo_0Parameter);
         }
+    
+        public virtual ObjectResult<spcp_Get_Data_orden_pago_con_cancelacion_x_pago_Result> spcp_Get_Data_orden_pago_con_cancelacion_x_pago(Nullable<int> idEmpresa_pago, Nullable<int> idTipoCbte_pago, Nullable<decimal> idCbteCble_pago, string idUsuario)
+        {
+            var idEmpresa_pagoParameter = idEmpresa_pago.HasValue ?
+                new ObjectParameter("IdEmpresa_pago", idEmpresa_pago) :
+                new ObjectParameter("IdEmpresa_pago", typeof(int));
+    
+            var idTipoCbte_pagoParameter = idTipoCbte_pago.HasValue ?
+                new ObjectParameter("IdTipoCbte_pago", idTipoCbte_pago) :
+                new ObjectParameter("IdTipoCbte_pago", typeof(int));
+    
+            var idCbteCble_pagoParameter = idCbteCble_pago.HasValue ?
+                new ObjectParameter("IdCbteCble_pago", idCbteCble_pago) :
+                new ObjectParameter("IdCbteCble_pago", typeof(decimal));
+    
+            var idUsuarioParameter = idUsuario != null ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spcp_Get_Data_orden_pago_con_cancelacion_x_pago_Result>("spcp_Get_Data_orden_pago_con_cancelacion_x_pago", idEmpresa_pagoParameter, idTipoCbte_pagoParameter, idCbteCble_pagoParameter, idUsuarioParameter);
+        }
     }
 }

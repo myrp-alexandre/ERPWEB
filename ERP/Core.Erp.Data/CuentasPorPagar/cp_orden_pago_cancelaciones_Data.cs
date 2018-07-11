@@ -169,6 +169,48 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  IdOrdenPago_op = q.IdOrdenPago,
                                  IdTipo_op = q.IdTipo_op,
                                  Referencia = q.Referencia,
+                                 IdEmpresa_op = q.IdEmpresa,
+                                 Secuencia_op = q.Secuencia_OP,
+                                 IdTipo_Persona = q.IdTipoPersona,
+                                 IdEntidad = q.IdEntidad,
+                                 IdPersona = q.IdPersona,
+                                 Fecha_Fa_Prov = q.Fecha_Fa_Prov,
+                                 Fecha_Venc_Fac_Prov = q.Fecha_Venc_Fac_Prov,
+                                 Observacion = q.Observacion,
+                                 pe_nombreCompleto = q.Nom_Beneficiario,
+                                 IdCtaCble = q.IdCtaCble,
+                                 MontoAplicado = q.Valor_a_pagar
+                             }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<cp_orden_pago_cancelaciones_Info> get_list_x_pago(int IdEmpresa_pago, int IdTipoCbte_pago, decimal IdCbteCble_pago, string IdUsuario)
+        {
+            try
+            {
+                List<cp_orden_pago_cancelaciones_Info> Lista;
+
+                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
+                {
+                    Lista = (from q in Context.spcp_Get_Data_orden_pago_con_cancelacion_x_pago(IdEmpresa_pago,IdTipoCbte_pago,IdCbteCble_pago, IdUsuario)
+                             select new cp_orden_pago_cancelaciones_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdEmpresa_cxp = q.IdEmpresa_cxp,
+                                 IdTipoCbte_cxp = q.IdTipoCbte_cxp,
+                                 IdCbteCble_cxp = q.IdCbteCble_cxp,
+                                 IdOrdenPago_op = q.IdOrdenPago,
+                                 IdTipo_op = q.IdTipo_op,
+                                 Referencia = q.Referencia,
+                                 IdEmpresa_op = q.IdEmpresa,
                                  Secuencia_op = q.Secuencia_OP,
                                  IdTipo_Persona = q.IdTipoPersona,
                                  IdEntidad = q.IdEntidad,

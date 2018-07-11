@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Bus.Banco;
+using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.CuentasPorPagar;
 using Core.Erp.Bus.General;
 using Core.Erp.Info.Banco;
@@ -29,12 +30,18 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         ba_Banco_Cuenta_Bus bus_banco_cuenta = new ba_Banco_Cuenta_Bus();
         cp_orden_pago_cancelaciones_List List_op = new cp_orden_pago_cancelaciones_List();
         ct_cbtecble_det_List List_ct = new ct_cbtecble_det_List();
+        ba_Talonario_cheques_x_banco_Bus bus_talonario = new ba_Talonario_cheques_x_banco_Bus();
+        ct_cbtecble_det_Bus bus_det_ct = new ct_cbtecble_det_Bus();
+        string mensaje = string.Empty;
         #endregion
 
         #region Index
         public ActionResult Index()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+            };
             cargar_combos_consulta();
             return View(model);
         }
@@ -54,7 +61,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
-            ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_ini);
+            ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
             ViewBag.IdSucursal = IdSucursal;
             var model = bus_cbteban.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, IdSucursal, cl_enumeradores.eTipoCbteBancario.CHEQ.ToString());
             return PartialView("_GridViewPartial_cheque", model);
@@ -64,7 +71,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbPersona_ChequeBanco()
         {
-            SessionFixed.TipoPersona = Request.Params["IdTipoPersona"] != null ? Request.Params["IdTipoPersona"].ToString() : "PERSONA";
+            SessionFixed.TipoPersona = Request.Params["TipoPersona"] != null ? Request.Params["TipoPersona"].ToString() : "PERSONA";
             ba_Cbte_Ban_Info model = new ba_Cbte_Ban_Info();
             return PartialView("_CmbPersona_ChequeBanco", model);
         }
@@ -99,6 +106,71 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             var lst_banco_cuenta = bus_banco_cuenta.get_list(IdEmpresa, false);
             ViewBag.lst_banco_cuenta = lst_banco_cuenta;
         }
+        private bool validar(ba_Cbte_Ban_Info i_validar, ref string msg)
+        {
+            i_validar.lst_det_canc_op = List_op.get_list();
+            i_validar.lst_det_ct = List_ct.get_list();
+
+            if (i_validar.IdEntidad == 0)
+            {
+                msg = "Seleccione el beneficiario";
+                return false;
+            }
+            if (i_validar.lst_det_canc_op.Count == 0)
+            {
+                msg = "Seleccione las órdenes de pago a ser canceladas";
+                return false;
+            }
+            if (i_validar.lst_det_ct.Count == 0)
+            {
+                msg = "El detalle del diario se encuentra vacío";
+                return false;
+            }
+
+            foreach (var item in i_validar.lst_det_ct)
+            {
+                if (string.IsNullOrEmpty(item.IdCtaCble))
+                {
+                    mensaje = "Faltan cuentas contables, por favor verifique";
+                    return false;
+                }
+            }
+
+            if (Math.Round(i_validar.lst_det_ct.Sum(q => q.dc_Valor),2,MidpointRounding.AwayFromZero) != 0)
+            {
+                mensaje = "La suma de los detalles debe ser 0, por favor verifique";
+                return false;
+            }
+            if (i_validar.lst_det_ct.Where(q => q.dc_Valor == 0).Count() > 0)
+            {
+                mensaje = "Existen detalles con valor 0 en el debe o haber, por favor verifique";
+                return false;
+            }
+
+            var persona = bus_persona.get_info(i_validar.IdEmpresa, i_validar.IdTipo_Persona, Convert.ToDecimal(i_validar.IdEntidad));
+            if (persona == null)
+            {
+                msg = "La persona seleccionada no corresponde al tipo asignado";
+                return false;
+            }
+            i_validar.IdPersona = persona.IdPersona;
+            i_validar.IdPersona_Girado_a = persona.IdPersona;
+
+            if (Math.Round(i_validar.lst_det_canc_op.Sum(q=>q.MontoAplicado), 2, MidpointRounding.AwayFromZero) != Math.Round(i_validar.lst_det_ct.Sum(q => q.dc_Valor_debe), 2, MidpointRounding.AwayFromZero))
+            {
+                msg = "Los valores ingresados no concuerdan con el valor del diario";
+                return false;
+            }
+            i_validar.cb_Observacion = "Canc./ ";
+            foreach (var item in i_validar.lst_det_canc_op)
+            {
+                i_validar.cb_Observacion += item.Referencia+"/";
+            }
+            i_validar.IdPeriodo = Convert.ToInt32(i_validar.cb_Fecha.ToString("yyyyMM"));
+            i_validar.IdUsuario = SessionFixed.IdUsuario;
+            i_validar.cb_Valor = Math.Round(i_validar.lst_det_ct.Sum(q => q.dc_Valor_debe), 2, MidpointRounding.AwayFromZero);
+            return true;
+        }
         public ActionResult Nuevo()
         {
             ba_Cbte_Ban_Info model = new ba_Cbte_Ban_Info
@@ -119,23 +191,78 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return View(model);
         }
 
-        public ActionResult Modificar()
+        [HttpPost]
+        public ActionResult Nuevo(ba_Cbte_Ban_Info model)
         {
-            return View();
+            if (!validar(model,ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
+            if (!bus_cbteban.guardarDB(model, cl_enumeradores.eTipoCbteBancario.CHEQ))
+            {
+                ViewBag.mensaje = "No se pudo guardar el registro";
+                cargar_combos();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
         }
 
-        public ActionResult Anular()
+        [HttpPost]
+        public ActionResult Modificar(ba_Cbte_Ban_Info model)
         {
-            return View();
-        }  
-        
-        
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
+            if (!bus_cbteban.modificarDB(model, cl_enumeradores.eTipoCbteBancario.CHEQ))
+            {
+                ViewBag.mensaje = "No se pudo modificar el registro";
+                cargar_combos();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Modificar(int IdTipocbte = 0, decimal IdCbteCble = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
+            if(model == null)
+                return RedirectToAction("Index");
+            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            List_ct.set_list(model.lst_det_ct);
+            model.lst_det_canc_op = bus_cancelaciones.get_list_x_pago(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble, SessionFixed.IdUsuario);
+            List_op.set_list(model.lst_det_canc_op);
+            cargar_combos();
+            return View(model);
+        }
+
+        public ActionResult Anular(int IdTipocbte = 0, decimal IdCbteCble = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            List_ct.set_list(model.lst_det_ct);
+            model.lst_det_canc_op = bus_cancelaciones.get_list_x_pago(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble, SessionFixed.IdUsuario);
+            List_op.set_list(model.lst_det_canc_op);
+            cargar_combos();
+            return View(model);
+        }
+
         public ActionResult GridViewPartial_cheque_op_x_cruzar()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             SessionFixed.TipoPersona = Request.Params["TipoPersona"] != null ? Request.Params["TipoPersona"].ToString() : "PERSONA";
-            SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["IdEntidad"]) ? Request.Params["IdEntidad"].ToString() : "0";
-            decimal IdEntidad = Convert.ToDecimal(SessionFixed.IdEntidad);
+            SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["Entidad"]) ? Request.Params["Entidad"].ToString() : "0";
+            decimal IdEntidad = Convert.ToInt32(SessionFixed.IdEntidad);
             List<cp_orden_pago_cancelaciones_Info> model;
             if (IdEntidad == 0)
                 model = new List<cp_orden_pago_cancelaciones_Info>();
@@ -181,7 +308,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             model.lst_det_canc_op = List_op.get_list();
             return PartialView("_GridViewPartial_cheque_op", model);
         }
-
+        #region Json
         public JsonResult armar_diario(int IdBanco = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -197,7 +324,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 {
                     IdCtaCble = item.IdCtaCble,
                     secuencia = secuencia++,
-                    dc_Valor = Math.Round(item.MontoAplicado,2,MidpointRounding.AwayFromZero),
+                    dc_Valor = Math.Round(item.MontoAplicado, 2, MidpointRounding.AwayFromZero),
                     dc_Valor_debe = Math.Round(item.MontoAplicado, 2, MidpointRounding.AwayFromZero)
                 });
             }
@@ -205,13 +332,27 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             {
                 IdCtaCble = bco.IdCtaCble,
                 secuencia = secuencia++,
-                dc_Valor = Math.Round(lst_op.Sum(q=>q.MontoAplicado), 2, MidpointRounding.AwayFromZero)*-1,
+                dc_Valor = Math.Round(lst_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero) * -1,
                 dc_Valor_haber = Math.Round(lst_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero),
                 dc_para_conciliar = true
             });
             List_ct.set_list(lst_ct);
-            return Json(Math.Round(lst_op.Sum(q => q.MontoAplicado),2,MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
+            return Json(Math.Round(lst_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetNumCheque(int IdBanco = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var resultado = bus_talonario.get_ult_NumCheque_no_usado(IdEmpresa, IdBanco);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        public void vaciar_detalle()
+        {
+            List_op.set_list(new List<cp_orden_pago_cancelaciones_Info>());
+            List_ct.set_list(new List<ct_cbtecble_det_Info>());
+        }
+        #endregion
     }
 
     public class cp_orden_pago_cancelaciones_List

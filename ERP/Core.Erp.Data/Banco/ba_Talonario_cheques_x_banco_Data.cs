@@ -128,10 +128,35 @@ namespace Core.Erp.Data.Banco
             }
         }
 
+        private decimal get_secuencia(int IdEmpresa, int IdBanco)
+        {
+            try
+            {
+                decimal secuencia = 1;
+                using (Entities_banco Context = new Entities_banco())
+                {
+                    var lst = from q in Context.ba_Talonario_cheques_x_banco
+                              where q.IdEmpresa == IdEmpresa
+                              && q.IdBanco == IdBanco
+                              && q.secuencia != null
+                              select q;
+
+                    if (lst.Count() > 0)
+                        secuencia = (decimal)lst.Max(q => q.secuencia) + 1;
+                }
+                return secuencia;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool guardarDB(ba_Talonario_cheques_x_banco_Info info)
         {
             try
             {
+                decimal secuencia = get_secuencia(info.IdEmpresa, info.IdBanco);
                 using (Entities_banco Context = new Entities_banco())
                 {
                     ba_Talonario_cheques_x_banco Entity = new ba_Talonario_cheques_x_banco
@@ -140,10 +165,7 @@ namespace Core.Erp.Data.Banco
                         IdBanco = info.IdBanco,
                         Num_cheque = info.Num_cheque,
                         Usado = info.Usado,
-                        IdCbteCble_cbtecble_Usado = info.IdCbteCble_cbtecble_Usado,
-                        IdEmpresa_cbtecble_Usado = info.IdEmpresa_cbtecble_Usado,
-                        IdTipoCbte_cbtecble_Usado = info.IdTipoCbte_cbtecble_Usado,
-                        secuencia = info.secuencia,
+                        secuencia = info.secuencia = secuencia++,
                         Fecha_uso = info.Fecha_uso,
                         Estado = info.Estado ="A"
                     };
@@ -225,6 +247,36 @@ namespace Core.Erp.Data.Banco
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public string get_ult_NumCheque_no_usado(int IdEmpresa, int IdBanco)
+        {
+            try
+            {
+                string NumCheque = string.Empty;
+                decimal secuencia = 0;
+                using (Entities_banco Context = new Entities_banco())
+                {
+                    var lst = from q in Context.ba_Talonario_cheques_x_banco
+                              where q.IdEmpresa == IdEmpresa
+                              && q.IdBanco == IdBanco
+                              && q.Usado == false
+                              && q.Estado == "A"
+                              select q;
+
+                    if (lst.Count() > 0)
+                    {
+                        secuencia = (decimal)lst.Max(q => q.secuencia);
+                        NumCheque = lst.Where(q => q.secuencia == secuencia).FirstOrDefault().Num_cheque;
+                    }         
+                }
+
+                return NumCheque;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

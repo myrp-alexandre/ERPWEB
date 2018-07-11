@@ -25,6 +25,18 @@ namespace Core.Erp.Bus.Banco
             }
         }
 
+        public string get_ult_NumCheque_no_usado(int IdEmpresa, int IdBanco)
+        {
+            try
+            {
+                return odata.get_ult_NumCheque_no_usado(IdEmpresa, IdBanco);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public ba_Talonario_cheques_x_banco_Info get_info(int IdEmpresa, int IdBanco, string Num_cheque)
         {
             try

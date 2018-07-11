@@ -17,6 +17,8 @@ namespace Core.Erp.Data.Banco
         {
             try
             {
+                Fecha_ini = Fecha_ini.Date;
+                Fecha_fin = Fecha_fin.Date;
                 List<ba_Cbte_Ban_Info> Lista;
 
                 using (Entities_banco Context = new Entities_banco())
@@ -38,7 +40,9 @@ namespace Core.Erp.Data.Banco
                                  CodTipoCbteBan = q.CodTipoCbteBan,
                                  ba_descripcion = q.ba_descripcion,
                                  pe_nombreCompleto = q.pe_nombreCompleto,
-                                 Su_Descripcion = q.Su_Descripcion
+                                 Su_Descripcion = q.Su_Descripcion,
+                                 cb_Cheque = q.cb_Cheque,
+                                 cb_giradoA = q.cb_giradoA,
                              }).ToList();
                 }
 
@@ -84,8 +88,8 @@ namespace Core.Erp.Data.Banco
                         IdEstado_Cbte_Ban_cat = Entity.IdEstado_Cbte_Ban_cat,
                         IdEstado_Preaviso_ch_cat = Entity.IdEstado_Preaviso_ch_cat,
                         IdEstado_cheque_cat = Entity.IdEstado_cheque_cat,
-                        IdPersona = Entity.IdPersona,
-                        IdEntidad = Entity.IdEntidad,
+                        IdPersona = Entity.IdPersona == null ? 0 : Convert.ToDecimal(Entity.IdPersona),
+                        IdEntidad = Entity.IdEntidad == null ? 0 : Convert.ToDecimal(Entity.IdEntidad),
                         IdTipo_Persona = Entity.IdTipo_Persona,
                     };
                 }
@@ -215,6 +219,15 @@ namespace Core.Erp.Data.Banco
                             });
                         }
                         #endregion
+
+                        var cheque = Context_b.ba_Talonario_cheques_x_banco.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdBanco == info.IdBanco && q.Num_cheque == info.cb_Cheque).FirstOrDefault();
+                        if(cheque != null)
+                        {
+                            cheque.IdEmpresa_cbtecble_Usado = info.IdEmpresa;
+                            cheque.IdTipoCbte_cbtecble_Usado = info.IdTipocbte;
+                            cheque.IdCbteCble_cbtecble_Usado = info.IdCbteCble;
+                            cheque.Usado = true;
+                        }
                         break;
                     case cl_enumeradores.eTipoCbteBancario.DEPO:
                         #region Guardo ingresos
