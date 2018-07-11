@@ -81,6 +81,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  Estado = p.Estado
 
 
+
                              }).ToList();
                 }
                 if(Lista.Count()>0)
