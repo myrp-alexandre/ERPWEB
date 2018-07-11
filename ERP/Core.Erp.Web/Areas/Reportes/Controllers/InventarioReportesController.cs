@@ -443,6 +443,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_mostrar_saldos_en_0.Value = model.mostrar_saldos_en_0;
             report.usuario = Session["IdUsuario"].ToString();
             report.empresa = Session["nom_empresa"].ToString();
+            cargar_combos(model);
             report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
