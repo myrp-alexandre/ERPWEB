@@ -88,7 +88,7 @@ namespace Core.Erp.Data.Banco
                         IdEstado_Cbte_Ban_cat = Entity.IdEstado_Cbte_Ban_cat,
                         IdEstado_Preaviso_ch_cat = Entity.IdEstado_Preaviso_ch_cat,
                         IdEstado_cheque_cat = Entity.IdEstado_cheque_cat,
-                        IdPersona = Entity.IdPersona,
+                        IdPersona = Entity.IdPersona == null ? 0 : Convert.ToDecimal(Entity.IdPersona),
                         IdEntidad = Entity.IdEntidad == null ? 0 : Convert.ToDecimal(Entity.IdEntidad),
                         IdTipo_Persona = Entity.IdTipo_Persona,
                     };

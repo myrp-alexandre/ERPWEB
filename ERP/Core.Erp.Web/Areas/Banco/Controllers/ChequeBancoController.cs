@@ -71,7 +71,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbPersona_ChequeBanco()
         {
-            SessionFixed.TipoPersona = Request.Params["IdTipoPersona"] != null ? Request.Params["IdTipoPersona"].ToString() : "PERSONA";
+            SessionFixed.TipoPersona = Request.Params["TipoPersona"] != null ? Request.Params["TipoPersona"].ToString() : "PERSONA";
             ba_Cbte_Ban_Info model = new ba_Cbte_Ban_Info();
             return PartialView("_CmbPersona_ChequeBanco", model);
         }
@@ -202,7 +202,26 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             }
             if (!bus_cbteban.guardarDB(model, cl_enumeradores.eTipoCbteBancario.CHEQ))
             {
+                ViewBag.mensaje = "No se pudo guardar el registro";
+                cargar_combos();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(ba_Cbte_Ban_Info model)
+        {
+            if (!validar(model, ref mensaje))
+            {
                 ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
+            if (!bus_cbteban.modificarDB(model, cl_enumeradores.eTipoCbteBancario.CHEQ))
+            {
+                ViewBag.mensaje = "No se pudo modificar el registro";
                 cargar_combos();
                 return View(model);
             }
@@ -218,15 +237,26 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 return RedirectToAction("Index");
             model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
             List_ct.set_list(model.lst_det_ct);
+            model.lst_det_canc_op = bus_cancelaciones.get_list_x_pago(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble, SessionFixed.IdUsuario);
+            List_op.set_list(model.lst_det_canc_op);
             cargar_combos();
             return View(model);
         }
 
-        public ActionResult Anular()
+        public ActionResult Anular(int IdTipocbte = 0, decimal IdCbteCble = 0)
         {
-            return View();
-        }          
-        
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            List_ct.set_list(model.lst_det_ct);
+            model.lst_det_canc_op = bus_cancelaciones.get_list_x_pago(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble, SessionFixed.IdUsuario);
+            List_op.set_list(model.lst_det_canc_op);
+            cargar_combos();
+            return View(model);
+        }
+
         public ActionResult GridViewPartial_cheque_op_x_cruzar()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
