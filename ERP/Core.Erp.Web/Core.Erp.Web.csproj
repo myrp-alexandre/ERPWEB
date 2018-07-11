@@ -8619,6 +8619,7 @@
     <Content Include="Areas\Banco\Views\ChequeBanco\_GridViewPartial_cheque_op_x_cruzar.cshtml" />
     <Content Include="Areas\Banco\Views\ChequeBanco\_GridViewPartial_cheque_op.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
