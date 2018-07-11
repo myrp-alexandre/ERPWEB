@@ -656,11 +656,11 @@
     <Compile Include="Reportes\Inventario\INV_007_Rpt.Designer.cs">
       <DependentUpon>INV_007_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\Inventario\INV_008.cs">
+    <Compile Include="Reportes\Inventario\INV_008_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Inventario\INV_008.Designer.cs">
-      <DependentUpon>INV_008.cs</DependentUpon>
+    <Compile Include="Reportes\Inventario\INV_008_Rpt.Designer.cs">
+      <DependentUpon>INV_008_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\RRHH\ROL_001_Rpt.cs">
       <SubType>Component</SubType>
@@ -8648,6 +8648,7 @@
     <Content Include="Areas\Banco\Views\DepositoBanco\Index.cshtml" />
     <Content Include="Areas\Banco\Views\DepositoBanco\Anular.cshtml" />
     <Content Include="Areas\Banco\Views\DepositoBanco\_GridViewPartial_DepositoBanco.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_008.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />
@@ -8759,6 +8760,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -8893,6 +8895,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Inventario\INV_007_Rpt.resx">
       <DependentUpon>INV_007_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Inventario\INV_008_Rpt.resx">
+      <DependentUpon>INV_008_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_001_Rpt.resx">
       <DependentUpon>ROL_001_Rpt.cs</DependentUpon>

@@ -409,5 +409,43 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
+
+        public ActionResult INV_008(int IdSucursal = 0, int IdBodega = 0, bool mostrar_saldos_en_0 = false)
+        {
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdSucursal = IdSucursal,
+                IdBodega = IdBodega,
+                mostrar_saldos_en_0 = mostrar_saldos_en_0
+            };
+
+            cargar_combos(model);
+            INV_008_Rpt report = new INV_008_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdBodega.Value = model.IdBodega;
+            report.p_mostrar_saldos_en_0.Value = model.mostrar_saldos_en_0;
+            report.usuario = Session["IdUsuario"].ToString();
+            report.empresa = Session["nom_empresa"].ToString();
+                report.RequestParameters = false;
+            ViewBag.Report = report;
+            return View(model);
+        }
+
+        [HttpPost]
+
+        public ActionResult INV_008(cl_filtros_Info model)
+        {
+            INV_008_Rpt report = new INV_008_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdBodega.Value = model.IdBodega;
+            report.p_mostrar_saldos_en_0.Value = model.mostrar_saldos_en_0;
+            report.usuario = Session["IdUsuario"].ToString();
+            report.empresa = Session["nom_empresa"].ToString();
+            report.RequestParameters = false;
+            ViewBag.Report = report;
+            return View(model);
+        }
     }
 }
