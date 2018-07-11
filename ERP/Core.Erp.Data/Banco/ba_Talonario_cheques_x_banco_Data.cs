@@ -18,6 +18,8 @@ namespace Core.Erp.Data.Banco
                 {
                     if (mostrar_anulados)
                         Lista = (from q in Context.ba_Talonario_cheques_x_banco
+                                 join p in Context.ba_Banco_Cuenta
+                                 on new { q.IdEmpresa , q.IdBanco} equals new {p.IdEmpresa , p.IdBanco}
                                  where q.IdEmpresa == IdEmpresa
                                  select new ba_Talonario_cheques_x_banco_Info
                                  {
@@ -30,12 +32,15 @@ namespace Core.Erp.Data.Banco
                                      IdCbteCble_cbtecble_Usado = q.IdCbteCble_cbtecble_Usado,
                                      IdEmpresa_cbtecble_Usado = q.IdEmpresa_cbtecble_Usado,
                                      IdTipoCbte_cbtecble_Usado = q.IdTipoCbte_cbtecble_Usado,
-                                     Fecha_uso= q.Fecha_uso
+                                     Fecha_uso= q.Fecha_uso,
+                                     ba_descripcion = p.ba_descripcion
 
                                      
                                  }).ToList();
                     else
                         Lista = (from q in Context.ba_Talonario_cheques_x_banco
+                                 join p in Context.ba_Banco_Cuenta
+                                 on new { q.IdEmpresa, q.IdBanco } equals new { p.IdEmpresa, p.IdBanco }
                                  where q.IdEmpresa == IdEmpresa
                                  && q.Estado == "A"
                                  select new ba_Talonario_cheques_x_banco_Info
@@ -49,7 +54,8 @@ namespace Core.Erp.Data.Banco
                                      IdCbteCble_cbtecble_Usado = q.IdCbteCble_cbtecble_Usado,
                                      IdEmpresa_cbtecble_Usado = q.IdEmpresa_cbtecble_Usado,
                                      IdTipoCbte_cbtecble_Usado = q.IdTipoCbte_cbtecble_Usado,
-                                     Fecha_uso = q.Fecha_uso
+                                     Fecha_uso = q.Fecha_uso,
+                                     ba_descripcion = p.ba_descripcion
                                  }).ToList();
                 }
                 return Lista;
