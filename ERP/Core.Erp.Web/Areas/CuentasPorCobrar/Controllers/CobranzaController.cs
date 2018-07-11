@@ -361,7 +361,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             }
             list_det.set_list(lst);
             var resultado = saldo;
-            return Json(resultado, JsonRequestBehavior.AllowGet);
+            return Json(Math.Round(resultado,2,MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult CalcularSaldo(double TotalACobrar = 0)
@@ -375,7 +375,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             }
             list_det.set_list(lst);
             var resultado = saldo;
-            return Json(resultado, JsonRequestBehavior.AllowGet);
+            return Json(Math.Round(resultado, 2, MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
         }
 
         public void VaciarLista()

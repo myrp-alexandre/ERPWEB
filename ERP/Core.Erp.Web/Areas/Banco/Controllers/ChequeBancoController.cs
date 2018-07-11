@@ -90,9 +90,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
 
-            var lst_tipo_nota = bus_tipo_nota.get_list(IdEmpresa, false);
-            ViewBag.lst_tipo_nota = lst_tipo_nota;
-
             var lst_ciudad = bus_ciudad.get_list("", false);
             ViewBag.lst_ciudad = lst_ciudad;
 
