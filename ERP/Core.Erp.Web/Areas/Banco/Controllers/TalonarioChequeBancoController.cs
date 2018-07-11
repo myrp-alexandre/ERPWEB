@@ -59,17 +59,12 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                     IdEmpresa = model.IdEmpresa,
                     IdBanco = model.IdBanco,
                     Num_cheque = model.Num_cheque,
-                    Estado = model.Estado_bool == true ? "A" : "I",
+                    Estado_bool = model.Estado_bool ,
+                    Estado= model.Estado,
                     Usado = model.Usado,
                     Cantidad = model.Cantidad,
                     Documentofinal = model.Documentofinal
                 };
-                if (bus_talonario.validar_existe_Numcheque(model.Num_cheque))
-                {
-                    ViewBag.mensaje = "El número ya se encuentra registrado";
-                    cargar_combos();
-                    return View(model);
-                }
                 if (!bus_talonario.guardarDB(model))
                 {
                     return View(model);

@@ -13,14 +13,7 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa)
 
-    if (ViewBag.mensaje != null)
-    {
-        <div class="alert alert-warning alert-dismissible">
-            <h4>
-                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
-            </h4>
-        </div>
-    }
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
@@ -68,7 +61,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="Documentofinal">Documento final</label>
-                    @Html.TextBoxFor(q => q.Documentofinal, new { @class = "form-control", @id = "Documentofinal" , @disabled="disabled"})
+                    @Html.TextBoxFor(q => q.Documentofinal, new { @class = "form-control", @id = "Documentofinal" })
                     @Html.ValidationMessageFor(q => q.Documentofinal, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -96,10 +89,10 @@
                 get_id();
                 set_documentofinal();
             });
-            $("#Cantidad").change(function () {
+        $("#Cantidad").change(function () {
                 set_documentofinal();
             });
-            $("#Documentofinal").change(function () {
+        $("#Documentofinal").change(function () {
                 set_documentofinal();
             });
 
@@ -155,14 +148,14 @@
                 var pad = data;
                 var doc = pad.substring(0, pad.length - docfinal.length) + docfinal;
                 var df = pad.substring(0, pad.length - docf.length) + docf;
-                
+
                 $("#Documentofinal").val(doc);
                 $("#Num_cheque").val(df);
             },
             error: function (error) {
             }
         });
-            
+
         }
 
 </script>
