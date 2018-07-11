@@ -26,7 +26,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         cp_orden_pago_formapago_Bus bus_forma_pago = new cp_orden_pago_formapago_Bus();
         List<cp_orden_pago_det_Info> lst_detalle_op = new List<cp_orden_pago_det_Info>();
         List<cp_orden_pago_Info> lst_ordenes_pagos = new List<cp_orden_pago_Info>();
-
+        cp_orden_pago_cancelaciones_Bus bus_cancelacion = new cp_orden_pago_cancelaciones_Bus();
         List<cp_orden_pago_tipo_x_empresa_Info> lst_tipo_orden_pago = new List<cp_orden_pago_tipo_x_empresa_Info>();
         int IdEmpresa = 0;
         #endregion
@@ -245,6 +245,18 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             Session["lst_detalle"] = lst_detalle_op;
 
             return Json("", JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ValidarOP(decimal IdOrdenPago)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            var mensaje = "";
+           if( bus_cancelacion.si_existe_cancelacion(IdEmpresa, IdOrdenPago))
+            {
+                mensaje = "La orden de pago tiene cancelaciones no se puede modificar";
+            }
+
+            return Json(mensaje, JsonRequestBehavior.AllowGet);
         }
 
         #endregion

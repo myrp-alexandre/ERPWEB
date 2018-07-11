@@ -45,5 +45,18 @@ namespace Core.Erp.Bus.CuentasPorPagar
             }
 
         }
-    }
+        public bool si_existe_cancelacion(int IdEmpresa, decimal IdOrdenPago)
+        {
+            try
+            {
+                return odata.si_existe_cancelacion(IdEmpresa, IdOrdenPago);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        }
     }

@@ -335,7 +335,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 {
                     info_det.re_baseRetencion = Convert.ToDouble(Session["co_valoriva"]);
                     info_det.re_valor_retencion = (info_det.re_baseRetencion * info_codifo_sri.co_porRetencion) / 100;
-
+                    info_det.IdCtacble = info_codifo_sri.info_codigo_ctacble.IdCtaCble;
 
                     // calculando valores retencion
                     detalle_retencion_info.AddRow(info_det);
@@ -353,7 +353,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 if (info_codifo_sri.co_porRetencion!=0 & info_det.re_baseRetencion!=null & info_det.re_baseRetencion!=0)
                 {
                     info_det.re_valor_retencion = (info_det.re_baseRetencion * info_codifo_sri.co_porRetencion) / 100;
-
+                    info_det.IdCtacble = info_codifo_sri.info_codigo_ctacble.IdCtaCble;
 
 
                     // calculando valores retencion
@@ -390,6 +390,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 {
                     info_det.re_baseRetencion = Convert.ToDouble(Session["co_valoriva"]);
                     info_det.re_valor_retencion = (info_det.re_baseRetencion * info_codifo_sri.co_porRetencion) / 100;
+                    info_det.IdCtacble = info_codifo_sri.info_codigo_ctacble.IdCtaCble;
 
 
                     // calculando valores retencion
@@ -408,6 +409,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 if (info_codifo_sri.co_porRetencion != 0 & info_det.re_baseRetencion != null & info_det.re_baseRetencion != 0)
                 {
                     info_det.re_valor_retencion = (info_det.re_baseRetencion * info_codifo_sri.co_porRetencion) / 100;
+                    info_det.IdCtacble = info_codifo_sri.info_codigo_ctacble.IdCtaCble;
 
 
 
@@ -506,7 +508,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     cbtecble_debe_Info.secuencia = sec;
                     cbtecble_debe_Info.IdEmpresa = info_param_op.IdEmpresa;
                     cbtecble_debe_Info.IdTipoCbte = (int)info_param_op.pa_IdTipoCbte_x_Retencion;
-                    cbtecble_debe_Info.IdCtaCble = info_param_op.pa_ctacble_x_RetFte_default;
+                    cbtecble_debe_Info.IdCtaCble = item.IdCtacble;
                     cbtecble_debe_Info.dc_Valor_debe =(double) item.re_valor_retencion;
                     cbtecble_debe_Info.dc_Valor =(double) item.re_valor_retencion;
                     cbtecble_debe_Info.dc_Observacion = "";

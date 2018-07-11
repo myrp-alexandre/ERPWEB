@@ -58,7 +58,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
                     if (mostrar_anulados == true)
-                        Lista = (from q in Context.cp_codigo_SRI
+                        Lista = (from q in Context.vwcp_codigo_SRI
                                  where (q.IdTipoSRI == "COD_RET_FUE" || q.IdTipoSRI == "COD_RET_IVA")
                                  select new cp_codigo_SRI_Info
                                  {
@@ -68,10 +68,15 @@ namespace Core.Erp.Data.CuentasPorPagar
                                      co_descripcion = q.co_descripcion,
                                      co_codigoBase = q.co_codigoBase,
                                      co_porRetencion = q.co_porRetencion,
-                                     co_estado = q.co_estado
+                                     co_estado = q.co_estado,
+                                     info_codigo_ctacble =new cp_codigo_SRI_x_CtaCble_Info
+                                     {
+                                         IdCtaCble=q.IdCtaCble,
+                                     }
+                                     
                                  }).ToList();
                     else
-                        Lista = (from q in Context.cp_codigo_SRI
+                        Lista = (from q in Context.vwcp_codigo_SRI
                                  where q.co_estado == "A"
                                  && (q.IdTipoSRI == "COD_RET_FUE" || q.IdTipoSRI == "COD_RET_IVA")
 
@@ -83,7 +88,11 @@ namespace Core.Erp.Data.CuentasPorPagar
                                      co_codigoBase = q.co_codigoBase,
                                      co_porRetencion = q.co_porRetencion,
                                      co_estado = q.co_estado,
-                                     IdTipoSRI = q.IdTipoSRI
+                                     IdTipoSRI = q.IdTipoSRI,
+                                     info_codigo_ctacble = new cp_codigo_SRI_x_CtaCble_Info
+                                     {
+                                         IdCtaCble = q.IdCtaCble,
+                                     }
                                  }).ToList();
                 }
                 return Lista;
