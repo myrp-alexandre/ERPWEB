@@ -656,6 +656,12 @@
     <Compile Include="Reportes\Inventario\INV_007_Rpt.Designer.cs">
       <DependentUpon>INV_007_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Inventario\INV_008.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Inventario\INV_008.Designer.cs">
+      <DependentUpon>INV_008.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\RRHH\ROL_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
