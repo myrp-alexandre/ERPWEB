@@ -1,8 +1,8 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView_cheque";
-        settings.CallbackRouteValues = new { Controller = "ChequeBanco", Action = "GridViewPartial_cheque", Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin, IdSucursal = ViewBag.IdSucursal };
+        settings.Name = "GridView_DepositoBanco";
+        settings.CallbackRouteValues = new { Controller = "DepositoBanco", Action = "GridViewPartial_DepositoBanco", Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin, IdSucursal = ViewBag.IdSucursal };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdCbteCble";
 
@@ -77,8 +77,7 @@
         });
         settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(20);
         settings.Columns.Add("IdCbteCble", "ID").Width = Unit.Percentage(5);
-        settings.Columns.Add("cb_Cheque", "# Cheque").Width = Unit.Percentage(7);
-        settings.Columns.Add("cb_giradoA", "Beneficiario").Width = Unit.Percentage(30);
+        settings.Columns.Add("pe_nombreCompleto", "Beneficiario").Width = Unit.Percentage(30);
         settings.Columns.Add(column =>
         {
             column.FieldName = "cb_Fecha";
@@ -91,7 +90,7 @@
             column.FieldName = "cb_Valor";
             column.Caption = "Valor";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
-            column.Width = Unit.Percentage(8);
+            column.Width = Unit.Percentage(10);
         });
         settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(5);
         settings.Columns.Add(column =>

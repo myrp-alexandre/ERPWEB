@@ -24,7 +24,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         {
             List<ba_tipo_nota_Info> model = new List<ba_tipo_nota_Info>();
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model = bus_tipo.get_list(IdEmpresa, true);
+            model = bus_tipo.get_list(IdEmpresa,"", true);
             return PartialView("_GridViewPartial_tipo_nota", model);
         }
 
