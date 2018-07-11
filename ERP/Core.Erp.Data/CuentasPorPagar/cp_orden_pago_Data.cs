@@ -260,8 +260,19 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.Estado = "I";
                         Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                         Entity.Fecha_UltAnu = info.Fecha_UltAnu=DateTime.Now;
-                        Context.SaveChanges();
+
+                        cp_orden_pago_det Entity_de = Context.cp_orden_pago_det.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdOrdenPago == info.IdOrdenPago);
+                        if (Entity != null)
+                        {
+                            Entity_de.IdEmpresa_cxp = null;
+                            Entity_de.IdTipoCbte_cxp = null;
+                            Entity_de.IdCbteCble_cxp = null;
+                        }
                     }
+
+                   
+                    Context.SaveChanges();
+
                 }
 
                 return true;

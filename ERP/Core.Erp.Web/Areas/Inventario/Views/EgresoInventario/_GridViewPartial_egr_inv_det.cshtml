@@ -3,11 +3,11 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_egr_inv_det";
-        settings.CallbackRouteValues = new { Controller = "EgresoInventario", Action = "GridViewPartial_egr_inv_det", IdSucursal = Model == null ? 0 : Model.IdSucursal, IdMovi_inven_tipo = Model == null ? 0 : Model.IdMovi_inven_tipo, IdNumMovi = Model == null ? 0 : Model.IdNumMovi };
+        settings.CallbackRouteValues = new { Controller = "EgresoInventario", Action = "GridViewPartial_egr_inv_det", Area = "Inventario"};
         settings.KeyFieldName = "Secuencia";
 
         settings.Width = Unit.Percentage(100);
-        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "EgresoInventario", Action = "EditingAddNew", Area = "Inventario" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "EgresoInventario", Action = "EditingUpdate", Area = "Inventario" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "EgresoInventario", Action = "EditingDelete", Area = "Inventario" };
@@ -30,29 +30,11 @@
         //Funcion para inicializar fila al presionar nuevo
         settings.InitNewRow = (s, e) =>
         {
-            e.NewValues["IdProducto"] = null;
+            e.NewValues["IdProducto"] = 0;
             e.NewValues["IdUnidadMedida_sinConversion"] = null;
             e.NewValues["dm_cantidad_sinConversion"] = 0;
             e.NewValues["mv_costo_sinConversion"] = 0;
         };
-
-        //settings.Columns.Add(column =>
-        //{
-        //    column.FieldName = "IdProducto";
-        //    column.Caption = "Producto";
-        //    column.Width = Unit.Percentage(50);
-        //    column.EditorProperties().ComboBox(p =>
-        //    {
-        //        p.Columns.Add("pr_descripcion", "Descripción").Width = Unit.Percentage(100);
-        //        p.TextField = "pr_descripcion";
-        //        p.ValueField = "IdProducto";
-        //        p.ValueType = typeof(decimal);
-        //        p.DataSource = ViewBag.lst_producto;
-        //    });
-        //});
-
-
-
 
 
         settings.Columns.Add(column =>
@@ -66,9 +48,9 @@
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdProducto";
-            column.Caption = "pr_descripcion";
+            column.Caption = "Producto";
             column.Width = Unit.Percentage(30);
-            column.Visible = true;
+            column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
             {
@@ -101,13 +83,6 @@
             column.Width = Unit.Percentage(15);
 
         });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "mv_costo_sinConversion";
-            column.Caption = "Costo";
-            column.Width = Unit.Percentage(15);
-
-        });
     });
 }
-@grid.Bind(Model.lst_in_Ing_Egr_Inven_det).GetHtml()
+@grid.Bind(Model).GetHtml()

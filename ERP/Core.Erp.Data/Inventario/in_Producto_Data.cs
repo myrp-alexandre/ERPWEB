@@ -214,73 +214,7 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
-        public List<in_Producto_Info> get_list_bajo_demanda(int IdEmpresa)
-        {
-            try
-            {
-                List<in_Producto_Info> Lista;
-
-                using (Entities_inventario Context = new Entities_inventario())
-                {
-                        Lista = (from q in Context.in_Producto
-                                 where q.IdEmpresa == IdEmpresa
-                                 select new in_Producto_Info
-                                 {
-                                     IdEmpresa = q.IdEmpresa,
-                                     IdProducto = q.IdProducto,
-                                     pr_codigo = q.pr_codigo,
-                                     pr_descripcion = q.pr_descripcion,
-                                     Estado = q.Estado,
-                                     lote_fecha_vcto = q.lote_fecha_vcto
-                                 }).ToList();
-                   
-                }
-
-                return Lista;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        public in_Producto_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
-        {
-            try
-            {
-                decimal id;
-                in_Producto_Info info = new in_Producto_Info();
-
-                if (args.Value == null || !decimal.TryParse(args.Value.ToString(), out id))
-                    return null;
-                else
-                {
-
-                    using (Entities_inventario Contex = new Entities_inventario())
-                    {
-                        in_Producto Entity = Contex.in_Producto.FirstOrDefault(q => q.IdEmpresa == IdEmpresa );
-                        if (Entity == null) return null;
-                        info = new in_Producto_Info
-                        {
-                            IdEmpresa = Entity.IdEmpresa,
-                            IdProducto = Entity.IdProducto,
-                            pr_codigo = Entity.pr_codigo,
-                            pr_codigo2 = Entity.pr_codigo2,
-                            pr_descripcion = Entity.pr_descripcion,
-                            pr_descripcion_2 = Entity.pr_descripcion_2,
-                            IdProductoTipo = Entity.IdProductoTipo
-                        };
-                    }
-                }
-
-                return info;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
+      
 
         public in_Producto_Info get_info(int IdEmpresa, decimal IdProducto)
         {
@@ -518,6 +452,84 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
-      
+
+        #region metodo baja demanda
+
+        public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<in_Producto_Info> Lista = new List<in_Producto_Info>();
+            Lista = get_list(IdEmpresa, skip, take, args.Filter);
+            return Lista;
+        }
+
+        public List<in_Producto_Info> get_list(int IdEmpresa,  int skip, int take, string filter)
+        {
+            try
+            {
+                List<in_Producto_Info> Lista = new List<in_Producto_Info>();
+
+                Entities_inventario context_g = new Entities_inventario();
+                var lstg = context_g.in_Producto.Where(q => q.Estado == "A" && (q.IdProducto.ToString() + " " + q.pr_descripcion).Contains(filter)).OrderBy(q => q.IdProducto).Skip(skip).Take(take);
+                foreach (var q in lstg)
+                {
+                    Lista.Add(new in_Producto_Info
+                    {
+                        IdProducto = q.IdProducto,
+                        pr_descripcion = q.pr_descripcion,
+                        pr_descripcion_2 = q.pr_descripcion_2,
+                        pr_codigo = q.pr_codigo,
+                        lote_num_lote = q.lote_num_lote,
+                        lote_fecha_vcto = q.lote_fecha_vcto
+                    });
+                }
+
+                context_g.Dispose();
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public in_Producto_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            decimal id;
+            if (args.Value == null || !decimal.TryParse(args.Value.ToString(), out id))
+                return null;
+             return get_info_demanda(IdEmpresa, Convert.ToDecimal(args.Value));
+        }
+
+
+        public in_Producto_Info get_info_demanda(int IdEmpresa, decimal IdProducto)
+        {
+            in_Producto_Info info = new in_Producto_Info();
+
+            using (Entities_inventario Contex = new Entities_inventario())
+            {
+                in_Producto Entity = Contex.in_Producto.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdProducto == IdProducto);
+
+                if (Entity != null)
+                {
+                    info = new in_Producto_Info
+                    {
+                        IdProducto = Entity.IdProducto,
+                        pr_descripcion = Entity.pr_descripcion,
+                        pr_descripcion_2 = Entity.pr_descripcion_2,
+                        pr_codigo = Entity.pr_codigo,
+                        lote_num_lote = Entity.lote_num_lote,
+                        lote_fecha_vcto = Entity.lote_fecha_vcto
+                    };
+                }                
+            }
+
+
+            return info;
+        }
+
+        #endregion
     }
 }

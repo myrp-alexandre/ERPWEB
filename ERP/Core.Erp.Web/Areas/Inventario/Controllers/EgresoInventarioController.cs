@@ -22,6 +22,23 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         in_parametro_Bus bus_in_param = new in_parametro_Bus();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         string mensaje = string.Empty;
+
+        #region Metodos ComboBox bajo demanda
+        public ActionResult CmbProducto_EgresoInventario()
+       {
+            in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info();
+            return PartialView("_CmbProducto_EgresoInventario", model);
+        }
+        public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public in_Producto_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
         #region Acciones
         public ActionResult Index()
         {
@@ -163,41 +180,16 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return RedirectToAction("Index");
         }
         #endregion
-        #region Metodos ComboBox bajo demanda
-        public ActionResult CmbProducto_EgresoInventario()
-        {
-            cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
-            return PartialView("_CmbProducto_EgresoInventario", model);
-        }
-        public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
-        {
-            return bus_producto.get_list_bajo_demanda( Convert.ToInt32(SessionFixed.IdEmpresa));
-        }
-
-        public in_Producto_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
-        {
-            return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
-        }
-        #endregion
         private void cargar_combos_detalle()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_Producto_Bus bus_producto = new in_Producto_Bus();
-            var lst_producto = bus_producto.get_list(IdEmpresa, false);
-            ViewBag.lst_producto = lst_producto;
-
             in_UnidadMedida_Bus bus_unidad = new in_UnidadMedida_Bus();
             var lst_unidad = bus_unidad.get_list(false);
             ViewBag.lst_unidad = lst_unidad;
         }
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_egr_inv_det(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
+        public ActionResult GridViewPartial_egr_inv_det()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info();
-            model.lst_in_Ing_Egr_Inven_det = bus_det_ing_inv.get_list(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
-            if (model.lst_in_Ing_Egr_Inven_det.Count == 0)
-                model.lst_in_Ing_Egr_Inven_det = List_in_Ing_Egr_Inven_det.get_list();
+            var model = List_in_Ing_Egr_Inven_det.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_egr_inv_det", model);
         }
@@ -208,8 +200,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             if (ModelState.IsValid)
                 List_in_Ing_Egr_Inven_det.AddRow(info_det);
-            in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info();
-            model.lst_in_Ing_Egr_Inven_det = List_in_Ing_Egr_Inven_det.get_list();
+            var model = List_in_Ing_Egr_Inven_det.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_egr_inv_det", model);
         }
@@ -219,8 +210,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             if (ModelState.IsValid)
                 List_in_Ing_Egr_Inven_det.UpdateRow(info_det);
-            in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info();
-            model.lst_in_Ing_Egr_Inven_det = List_in_Ing_Egr_Inven_det.get_list();
+            var model = List_in_Ing_Egr_Inven_det.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_egr_inv_det", model);
         }
@@ -228,8 +218,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public ActionResult EditingDelete(int Secuencia)
         {
             List_in_Ing_Egr_Inven_det.DeleteRow(Secuencia);
-            in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info();
-            model.lst_in_Ing_Egr_Inven_det = List_in_Ing_Egr_Inven_det.get_list();
+            var model = List_in_Ing_Egr_Inven_det.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_egr_inv_det", model);
         }

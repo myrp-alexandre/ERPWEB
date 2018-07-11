@@ -20,8 +20,6 @@
 
     })
     .BindList(new Core.Erp.Web.Areas.Inventario.Controllers.EgresoInventarioController().get_list_bajo_demanda,
-    new Core.Erp.Web.Areas.Inventario.Controllers.EgresoInventarioController().get_info_bajo_demanda)
-    .Bind(Model.IdProducto);
-
+    new Core.Erp.Web.Areas.Inventario.Controllers.EgresoInventarioController().get_info_bajo_demanda).Bind(Model);
 }
 @comboBox.GetHtml()
