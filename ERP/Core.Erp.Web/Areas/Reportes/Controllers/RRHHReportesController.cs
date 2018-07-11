@@ -209,7 +209,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
 
         [HttpPost]
-        public ActionResult ROl_013(cl_filtros_Info model)
+        public ActionResult ROL_013(cl_filtros_Info model)
         {
             ROL_013_Rpt report = new ROL_013_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
@@ -240,7 +240,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
 
         [HttpPost]
-        public ActionResult ROl_014(cl_filtros_Info model)
+        public ActionResult ROL_014(cl_filtros_Info model)
         {
             ROL_014_Rpt report = new ROL_014_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
