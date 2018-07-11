@@ -34,8 +34,8 @@ namespace Core.Erp.Data
         public Nullable<double> Total_fact_vale { get; set; }
         public double Dif_x_pagar_o_cobrar { get; set; }
         public string TIPO { get; set; }
-        public System.DateTime Fecha_ini { get; set; }
-        public System.DateTime Fecha_fin { get; set; }
+        public Nullable<System.DateTime> Fecha_ini { get; set; }
+        public Nullable<System.DateTime> Fecha_fin { get; set; }
         public Nullable<double> valor_a_reponer { get; set; }
     }
 }
