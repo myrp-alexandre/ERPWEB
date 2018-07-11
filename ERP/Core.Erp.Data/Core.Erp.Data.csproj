@@ -1019,9 +1019,6 @@
     <Compile Include="spcp_Get_Data_orden_pago_con_cancelacion_data_Result.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
-    <Compile Include="spcp_Get_Data_orden_pago_con_cancelacion_x_pago_Result.cs">
-      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
-    </Compile>
     <Compile Include="SPCXP_007_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
@@ -1290,6 +1287,9 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="VWINV_007.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWINV_008.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="vwin_Ing_Egr_Inven_distribucion.cs">
