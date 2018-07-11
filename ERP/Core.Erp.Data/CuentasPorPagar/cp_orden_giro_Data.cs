@@ -655,6 +655,33 @@ namespace Core.Erp.Data.CuentasPorPagar
             }
         }
 
+        public bool si_existe(cp_orden_giro_Info info)
+        {
+            try
+            {
+                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
+                {
+                    var lst = from q in Context.cp_orden_giro
+                              where 
+                               q.IdEmpresa==info.IdEmpresa
+                             && q.co_serie==info.co_serie
+                              && q.co_factura==info.co_factura
+                              && q.IdProveedor==info.IdProveedor
+                              select q;
+                    if (lst.Count() > 0)
+                        return true;
+                    else
+                        return false;
 
+                    
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
-}
+    }
+

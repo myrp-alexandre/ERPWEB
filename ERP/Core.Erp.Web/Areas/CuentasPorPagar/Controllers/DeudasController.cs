@@ -88,7 +88,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
+            if (IdSucursal == 0)
+                IdSucursal =Convert.ToInt32( SessionFixed.IdSucursal);
             ViewBag.IdSucursal = IdSucursal;
+
             List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
             model = bus_orden_giro.get_lst(IdEmpresa,IdSucursal, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_deudas", model);
@@ -190,6 +193,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost]
         public ActionResult Nuevo(cp_orden_giro_Info model)
         {
+
+            if(bus_orden_giro.si_existe(model))
+            {
+                ViewBag.mensaje = "El documento "+model.co_serie+" "+ model.co_factura+", ya se encuentra registrado";
+                cargar_combos(model.IdProveedor, model.IdOrden_giro_Tipo);
+                cargar_combos_detalle();
+                return View(model);
+            }
             model.info_comrobante = new ct_cbtecble_Info();
             if (Session["lst_cuotas"] != null)
                 model.info_cuota.lst_cuotas_det = Session["lst_cuotas"] as List<cp_cuotas_x_doc_det_Info>;
@@ -259,8 +270,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost]
         public ActionResult Modificar(cp_orden_giro_Info model)
         {
-
-
+           
             if (Session["info_proveedor"] == null)
             {
                 info_proveedor = bus_prov.get_info(model.IdEmpresa, model.IdProveedor);

@@ -173,7 +173,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             return bus_producto.get_list_bajo_demanda( Convert.ToInt32(SessionFixed.IdEmpresa));
         }
-       
+
+        public in_Producto_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
         #endregion
         private void cargar_combos_detalle()
         {

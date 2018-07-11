@@ -159,7 +159,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     info.info_cuota.Estado = true;
                     bus_cuotas.ModificarDB(info.info_cuota);
                 }
-                if (info.info_forma_pago.codigo_pago_sri != "")
+                if (info.info_forma_pago.codigo_pago_sri != "" && info.info_forma_pago.codigo_pago_sri!=null)
                 {
                     bus_forma_pago.EliminarDB(info.IdEmpresa, info.IdTipoCbte_Ogiro, info.IdCbteCble_Ogiro);
 
@@ -329,7 +329,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 if(Convert.ToDouble( info.info_comrobante.lst_ct_cbtecble_det.Sum(v => v.dc_Valor))!=0)
                     mensaje = "El diario contable esta descuadrado ";
 
-                if(info.info_cuota.Total_a_pagar!=0)
+                if(info.info_cuota.Total_a_pagar!=0 && info.info_cuota.Num_cuotas!=0&& info.info_cuota.Dias_plazo!=0)
                 {
                     if(info.info_cuota.lst_cuotas_det.Count()==0)
                         mensaje = "No existe detalle de pago";
@@ -399,5 +399,17 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
-    }
+        public bool si_existe(cp_orden_giro_Info info)
+        {
+            try
+            {
+                return data.si_existe(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        }
 }

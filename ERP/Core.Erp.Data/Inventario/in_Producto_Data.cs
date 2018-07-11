@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Info.Inventario;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -243,7 +244,43 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
+        public in_Producto_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            try
+            {
+                decimal id;
+                in_Producto_Info info = new in_Producto_Info();
 
+                if (args.Value == null || !decimal.TryParse(args.Value.ToString(), out id))
+                    return null;
+                else
+                {
+
+                    using (Entities_inventario Contex = new Entities_inventario())
+                    {
+                        in_Producto Entity = Contex.in_Producto.FirstOrDefault(q => q.IdEmpresa == IdEmpresa );
+                        if (Entity == null) return null;
+                        info = new in_Producto_Info
+                        {
+                            IdEmpresa = Entity.IdEmpresa,
+                            IdProducto = Entity.IdProducto,
+                            pr_codigo = Entity.pr_codigo,
+                            pr_codigo2 = Entity.pr_codigo2,
+                            pr_descripcion = Entity.pr_descripcion,
+                            pr_descripcion_2 = Entity.pr_descripcion_2,
+                            IdProductoTipo = Entity.IdProductoTipo
+                        };
+                    }
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public in_Producto_Info get_info(int IdEmpresa, decimal IdProducto)
         {
