@@ -17,6 +17,7 @@
         $("#IdBanco").change(function () {
             armar_diario();
         });
+        armar_diario();
     });
     var selectedIDs;
     function OnBeginCallback(s, e) {
@@ -131,6 +132,17 @@
 @using (Html.BeginForm("Nuevo", "NotaDeDebitoBanco", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
+
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+
+    }
+
     <div class="modal fade" id="OpModal" role="dialog">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
@@ -183,17 +195,19 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="IdBanco">Cuenta bancaria:*</label>
-                @Html.DropDownListFor(q => q.IdBanco, new SelectList(ViewBag.lst_banco_cuenta, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco" })
-                @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdBanco">Cuenta bancaria:*</label>
+                    @Html.DropDownListFor(q => q.IdBanco, new SelectList(ViewBag.lst_banco_cuenta, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco" })
+                    @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label for="cb_Valor">Valor</label>
-                @Html.TextBoxFor(q => q.cb_Valor, new { @id = "cb_Valor", @class = "form-control", @readonly = "readonly" })
+            <div class="col-md-2 col-md-offset-4">
+                <div class="form-group">
+                    <label for="cb_Valor">Valor</label>
+                    @Html.TextBoxFor(q => q.cb_Valor, new { @id = "cb_Valor", @class = "form-control", @readonly = "readonly" })
+                </div>
             </div>
         </div>
     </div>
@@ -202,10 +216,10 @@
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
-                <a href="#tab_op" aria-controls="vales" role="tab" data-toggle="tab">Ordenes de pago</a>
+                <a href="#tab_diario" aria-controls="vales" role="tab" data-toggle="tab">Diario</a>
             </li>
             <li>
-                <a href="#tab_diario" aria-controls="vales" role="tab" data-toggle="tab">Diario</a>
+                <a href="#tab_op" aria-controls="vales" role="tab" data-toggle="tab">Ordenes de pago</a>
             </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
@@ -236,7 +250,7 @@
                 @Html.Action("GridViewPartial_DebitoBanco_op")
             </div>
 
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_diario">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_diario">
                 @Html.Action("GridViewPartial_comprobante_detalle", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
             </div>
         </div>

@@ -132,6 +132,18 @@
     @Html.HiddenFor(q => q.IdCbteCble)
     @Html.HiddenFor(q => q.cb_Cheque)
     @Html.HiddenFor(q => q.IdBanco)
+
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+
+    }
+
+
     <div class="modal fade" id="OpModal" role="dialog">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
