@@ -282,10 +282,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             return Json(mensaje, JsonRequestBehavior.AllowGet);
         }
-
         #endregion
-
-
         [ValidateInput(false)]
         public ActionResult GridViewPartial_deudas()
         {
