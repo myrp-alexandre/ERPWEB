@@ -52,23 +52,30 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             decimal documento_inicial = Convert.ToDecimal(model.Num_cheque);
             decimal documento_final = Convert.ToDecimal(model.Documentofinal);
-            for (decimal i = documento_inicial; i < documento_final; i++)
+            int length = model.Num_cheque.Length;
+            string relleno = string.Empty;
+            for (int i = 0; i < length; i++)
             {
+                relleno += "0";
+            }
+            decimal secuencia = documento_inicial;
+            for (decimal i = documento_inicial; i < documento_final+1; i++)
+            {
+
                 ba_Talonario_cheques_x_banco_Info info = new ba_Talonario_cheques_x_banco_Info
                 {
                     IdEmpresa = model.IdEmpresa,
                     IdBanco = model.IdBanco,
-                    Num_cheque = model.Num_cheque,
+                    Num_cheque = secuencia.ToString(relleno),
                     Estado_bool = model.Estado_bool ,
-                    Estado= model.Estado,
+                    Estado= model.Estado_bool == true ? "A" : "I",
                     Usado = model.Usado,
-                    Cantidad = model.Cantidad,
-                    Documentofinal = model.Documentofinal
                 };
-                if (!bus_talonario.guardarDB(model))
+                if (!bus_talonario.guardarDB(info))
                 {
                     return View(model);
                 }
+                secuencia++;
             }
             return RedirectToAction("Index");
         }
@@ -87,26 +94,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public ActionResult Modificar(ba_Talonario_cheques_x_banco_Info model)
         {
             if(!bus_talonario.modificarDB(model))
-            {
-                cargar_combos();
-                return View(model);
-            }
-            return RedirectToAction("Index");
-        }
-        public ActionResult Anular(int IdBanco = 0, string Num_cheque = "")
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            ba_Talonario_cheques_x_banco_Info model = bus_talonario.get_info(IdEmpresa, IdBanco, Num_cheque);
-            if (model == null)
-                return RedirectToAction("Index");
-            cargar_combos();
-            return View(model);
-        }
-
-        [HttpPost]
-        public ActionResult Anular(ba_Talonario_cheques_x_banco_Info model)
-        {
-            if (!bus_talonario.anularDB(model))
             {
                 cargar_combos();
                 return View(model);
