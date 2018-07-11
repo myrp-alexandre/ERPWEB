@@ -32,6 +32,19 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
+
+        public List<cp_orden_pago_cancelaciones_Info> get_list_x_pago(int IdEmpresa_pago, int IdTipoCbte_pago, decimal IdCbteCble_pago, string IdUsuario)
+        {
+            try
+            {
+                return odata.get_list_x_pago(IdEmpresa_pago,IdTipoCbte_pago,IdCbteCble_pago,IdUsuario);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<cp_orden_pago_det_Info> Get_list_Cancelacion_x_CXP(int IdEmpresa_cxp, int IdTipoCbte_cxp, decimal IdCbteCble_cxp)
         {
             try
