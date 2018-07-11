@@ -71,7 +71,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbPersona_ChequeBanco()
         {
-            SessionFixed.TipoPersona = Request.Params["TipoPersona"] != null ? Request.Params["TipoPersona"].ToString() : "PERSONA";
+            SessionFixed.TipoPersona = Request.Params["IdTipo_Persona"] != null ? Request.Params["IdTipo_Persona"].ToString() : SessionFixed.TipoPersona;
             ba_Cbte_Ban_Info model = new ba_Cbte_Ban_Info();
             return PartialView("_CmbPersona_ChequeBanco", model);
         }
@@ -240,6 +240,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             model.lst_det_canc_op = bus_cancelaciones.get_list_x_pago(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble, SessionFixed.IdUsuario);
             List_op.set_list(model.lst_det_canc_op);
             cargar_combos();
+            SessionFixed.TipoPersona = model.IdTipo_Persona;
             return View(model);
         }
 
@@ -257,10 +258,23 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult Anular(ba_Cbte_Ban_Info model)
+        {
+            if (!bus_cbteban.anularDB(model))
+            {
+                ViewBag.mensaje = "No se pudo anular el registro";
+                cargar_combos();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+
         public ActionResult GridViewPartial_cheque_op_x_cruzar()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            SessionFixed.TipoPersona = Request.Params["TipoPersona"] != null ? Request.Params["TipoPersona"].ToString() : "PERSONA";
+            SessionFixed.TipoPersona = Request.Params["IdTipo_Persona"] != null ? Request.Params["IdTipo_Persona"].ToString() : SessionFixed.TipoPersona;
             SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["Entidad"]) ? Request.Params["Entidad"].ToString() : "0";
             decimal IdEntidad = Convert.ToInt32(SessionFixed.IdEntidad);
             List<cp_orden_pago_cancelaciones_Info> model;
@@ -303,9 +317,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         public ActionResult EditingDeleteFactura(decimal IdOrdenPago_op)
         {
-            List_op.DeleteRow(IdOrdenPago_op);
-            ba_Cbte_Ban_Info model = new ba_Cbte_Ban_Info();
-            model.lst_det_canc_op = List_op.get_list();
+            List_op.DeleteRow(IdOrdenPago_op);            
+            var model = List_op.get_list();
             return PartialView("_GridViewPartial_cheque_op", model);
         }
         #region Json

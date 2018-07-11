@@ -183,6 +183,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             caj_Caja_Movimiento_Info model = bus_caja_mov.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
             if (model == null)
                 return RedirectToAction("Index");
+            SessionFixed.TipoPersona = model.IdTipo_Persona;
             model.info_caj_Caja_Movimiento_det = bus_caja_mov_det.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
             if (model.info_caj_Caja_Movimiento_det == null)
                 return RedirectToAction("Index");
@@ -219,6 +220,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             caj_Caja_Movimiento_Info model = bus_caja_mov.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
             if (model == null)
                 return RedirectToAction("Index");
+            SessionFixed.TipoPersona = model.IdTipo_Persona;
             model.info_caj_Caja_Movimiento_det = bus_caja_mov_det.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
             if (model.info_caj_Caja_Movimiento_det == null)
                 return RedirectToAction("Index");
