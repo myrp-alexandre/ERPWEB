@@ -32,5 +32,6 @@ namespace Core.Erp.Info.Banco
         
         public string Documentofinal { get; set; }
         public int Cantidad { get; set; }
+        public string ba_descripcion { get; set; }
     }
 }

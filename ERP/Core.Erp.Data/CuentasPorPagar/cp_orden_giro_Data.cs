@@ -201,7 +201,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-        public List<cp_orden_giro_Info> get_lst(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin)
+        public List<cp_orden_giro_Info> get_lst(int IdEmpresa, int IdSucursal, DateTime FechaInicio, DateTime FechaFin)
         {
             try
             {
@@ -210,6 +210,10 @@ namespace Core.Erp.Data.CuentasPorPagar
                 {
                         Lista = (from q in Context.vwcp_orden_giro
                                  where q.IdEmpresa==IdEmpresa
+                                 && q.IdSucursal==IdSucursal
+                                 &&q.co_FechaFactura>=FechaInicio
+                                  && q.co_FechaFactura <= FechaFin
+
                     select new cp_orden_giro_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,

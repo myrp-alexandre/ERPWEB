@@ -83,7 +83,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-
         public List<cp_orden_pago_det_Info> Get_list_Cancelacion_x_CXP(int IdEmpresa_cxp, int IdTipoCbte_cxp, decimal IdCbteCble_cxp)
         {
             try
@@ -191,5 +190,31 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
+        public bool si_existe_cancelacion(int IdEmpresa, decimal IdOrdenPago)
+        {
+            try
+            {
+                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
+                {
+                    var select = Context.cp_orden_pago_cancelaciones.Count(q => q.IdEmpresa == IdEmpresa & q.IdOrdenPago_op== IdOrdenPago);
+                    if (select == 0)
+                    {
+                        return false;
+                    }
+                    else
+                        return true;
+
+                    
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

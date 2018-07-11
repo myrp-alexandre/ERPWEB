@@ -476,15 +476,27 @@
     $("#co_plazo").change(function () {
         var plazo = $("#co_plazo").val();
         if (plazo > 0) {
-            var d = new Date($("#co_FechaFactura_vct").val());
-            var year = d.getFullYear();
-            var month = d.getMonth();
-            var day = d.getDate();
-
-            var c = new Date(year , month, day+Number(plazo))
-            $('#co_FechaFactura_vct').datepicker("setDate", moment(c).format("DD/MM/YYYY"));
+            var date = moment($("#co_FechaFactura").val(), "DD-MM-YYYY").add(plazo, 'days');
+            $('#co_FechaFactura_vct').datepicker("setDate", moment(date).format("DD/MM/YYYY"));
         };
     });
+
+    $("#cmbTipoDocu").change(function () {
+
+        var tipo_doc = $("#cmbTipoDocu").val();
+
+        if (tipo_doc == "04")
+        {
+            $("#tab_documento_modificado").show();
+        }
+        else
+        {
+            $("#tab_documento_modificado").hide();
+
+        }
+    });
+
+
     function actualizar_valores() {
         var base_iva = $("#co_subtotal_iva").val();
         var base_cero = $("#co_subtotal_siniva").val();
@@ -497,8 +509,11 @@
             iva = 0;
         var tot = parseFloat(parseFloat(base_iva) + parseFloat(base_cero) + parseFloat(iva));
         $('#co_valoriva').val(iva.toFixed(2));
-        if(tot>0)
+        if (tot > 0) {
             $('#co_total').val(tot.toFixed(2));
+            $('#Total_a_pagar').val(tot.toFixed(2));
+
+        }
         else
             $('#co_total').val(0.00);
         if(iva>0)
@@ -577,7 +592,7 @@
     function get_list_tipo_doc() {
 
 
-
+        get_info_proveedor();
         if (IdProveedor.GetValue() > 0 && $("#cmb_idtCredito").val() != "") {
             var datos = {
                 IdProveedor:  IdProveedor.GetValue(),
@@ -633,5 +648,42 @@
 
     };
 
+
+
+    function get_info_proveedor() {
+
+
+
+        if (IdProveedor.GetValue() > 0)  {
+            var datos = {
+                IdProveedor: IdProveedor.GetValue()
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("get_info", "Proveedor", new { Area = "CuentasPorPagar" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data.pr_plazo == 0)
+                    {
+                        $("#co_plazo").val(1);
+                    }
+                    else
+                    {
+                        var date = moment($("#co_FechaFactura").val(), "DD-MM-YYYY").add(data.pr_plazo, 'days');
+                        $('#co_FechaFactura_vct').datepicker("setDate", moment(date).format("DD/MM/YYYY"));
+                    }
+
+
+                },
+                error: function (error) {
+                }
+            });
+        }
+    };
 
 </script>
