@@ -1,8 +1,8 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView_cheque_op";
-        settings.CallbackRouteValues = new { Controller = "ChequeBanco", Action = "GridViewPartial_cheque_op" };
+        settings.Name = "GridView_DebitoBanco_op";
+        settings.CallbackRouteValues = new { Controller = "NotaDeDebitoBanco", Action = "GridViewPartial_DebitoBanco_op" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdOrdenPago_op";
 
@@ -10,7 +10,7 @@
         settings.Settings.ShowGroupPanel = false;
         settings.Settings.ShowFilterRow = true;
         settings.SettingsBehavior.AllowSelectByRowClick = false;
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ChequeBanco", Action = "EditingDeleteFactura", Area = "Banco" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "NotaDeDebitoBanco", Action = "EditingDeleteFactura", Area = "Banco" };
 
         //Configuración click derecho
         settings.SettingsContextMenu.Enabled = true;

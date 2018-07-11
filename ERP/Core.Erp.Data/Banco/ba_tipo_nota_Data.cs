@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Banco
 {
     public class ba_tipo_nota_Data
     {
-        public List<ba_tipo_nota_Info> get_list(int IdEmpresa, bool mostrar_anulados)
+        public List<ba_tipo_nota_Info> get_list(int IdEmpresa,string CodTipo, bool mostrar_anulados)
         {
             try
             {
@@ -19,6 +19,7 @@ namespace Core.Erp.Data.Banco
                  if(mostrar_anulados)
                         Lista = (from q in Context.ba_tipo_nota
                                  where q.IdEmpresa == IdEmpresa
+                                 && q.Tipo.Contains(CodTipo)
                                  select new ba_tipo_nota_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
@@ -33,15 +34,16 @@ namespace Core.Erp.Data.Banco
                         Lista = (from q in Context.ba_tipo_nota
                                  where q.IdEmpresa == IdEmpresa
                                  && q.Estado == "A"
+                                 && q.Tipo.Contains(CodTipo)
                                  select new ba_tipo_nota_Info
-                                 {
+                                 {                                     
                                      IdEmpresa = q.IdEmpresa,
                                      IdTipoNota = q.IdTipoNota,
                                      Descripcion = q.Descripcion,
                                      IdCentroCosto = q.IdCentroCosto,
                                      IdCtaCble = q.IdCtaCble,
                                      Tipo = q.Tipo,
-                                     Estado = q.Estado
+                                     Estado = q.Estado                                     
                                  }).ToList();
                     
                 }
