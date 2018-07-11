@@ -16,7 +16,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     {
 
 
-        public ActionResult ROL_001(int IdEmpresa=0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui= 0, int IdPeriodo=0)
+        public ActionResult ROL_001(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui= 0, int IdPeriodo=0)
         {
             ROL_001_Rpt model = new ROL_001_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
@@ -29,7 +29,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
-        public ActionResult ROL_002(int IdEmpresa = 0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0)
+        public ActionResult ROL_002(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0)
         {
             ROL_002_Rpt model = new ROL_002_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
