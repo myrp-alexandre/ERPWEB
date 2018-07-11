@@ -152,6 +152,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ro_nomina_tipo_Bus bus_nomina = new ro_nomina_tipo_Bus();
             var lst_nomina = bus_nomina.get_list(IdEmpresa, false);
             ViewBag.lst_nomina = lst_nomina;
+
+            
         }
 
         public ActionResult ROL_012(DateTime? fecha_inicio, DateTime? fecha_fin )
@@ -219,6 +221,31 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cargar_combos();
             if (model.IdNomina == 0)
                 report.RequestParameters = false;
+            ViewBag.Report = report;
+            return View(model);
+        }
+        public ActionResult ROL_014(int IdTipoNomina = 0)
+        {
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdTipoNomina = IdTipoNomina
+            };
+            cargar_combos();
+            ROL_014_Rpt report = new ROL_014_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdTipoNomina.Value = model.IdTipoNomina;
+                report.RequestParameters = false;
+            ViewBag.Report = report;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult ROl_014(cl_filtros_Info model)
+        {
+            ROL_014_Rpt report = new ROL_014_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdTipoNomina.Value = model.IdTipoNomina;
+            report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
         }

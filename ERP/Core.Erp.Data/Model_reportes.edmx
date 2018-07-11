@@ -5705,23 +5705,23 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
             <PropertyRef Name="cr_TotalCobro" />
             <PropertyRef Name="cr_observacion" />
           </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdCobro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="secuencial" Type="Int32" Nullable="false" />
-          <Property Name="dc_TipoDocumento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa" Nullable="false" Type="Int32" />
+          <Property Name="IdSucursal" Nullable="false" Type="Int32" />
+          <Property Name="IdCobro" Nullable="false" Precision="18" Scale="0" Type="Decimal" />
+          <Property Name="secuencial" Nullable="false" Type="Int32" />
+          <Property Name="dc_TipoDocumento" MaxLength="20" FixedLength="false" Unicode="false" Type="String" />
           <Property Name="IdBodega_Cbte" Type="Int32" />
-          <Property Name="IdCbte_vta_nota" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="tc_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="dc_ValorPago" Type="Double" Nullable="false" />
-          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
-          <Property Name="pe_nombreCompleto" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="cr_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="cr_TotalCobro" Type="Double" Nullable="false" />
-          <Property Name="cr_observacion" Type="String" Nullable="false" MaxLength="700" FixedLength="false" Unicode="false" />
-          <Property Name="cr_NumDocumento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="vt_NumFactura" Type="String" MaxLength="41" FixedLength="false" Unicode="false" />
-          <Property Name="vt_fecha" Type="DateTime" Precision="3" />
+          <Property Name="IdCbte_vta_nota" Nullable="false" Precision="18" Scale="0" Type="Decimal" />
+          <Property Name="tc_descripcion" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="dc_ValorPago" Nullable="false" Type="Double" />
+          <Property Name="Su_Descripcion" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" Type="String" />
+          <Property Name="pe_nombreCompleto" MaxLength="1000" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="cr_fecha" Nullable="false" Precision="3" Type="DateTime" />
+          <Property Name="cr_TotalCobro" Nullable="false" Type="Double" />
+          <Property Name="cr_observacion" Nullable="false" MaxLength="700" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="cr_NumDocumento" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="vt_NumFactura" MaxLength="41" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="vt_fecha" Precision="3" Type="DateTime" />
           <Property Name="vt_Subtotal" Type="Double" />
           <Property Name="vt_iva" Type="Double" />
           <Property Name="vt_total" Type="Double" />
@@ -5742,20 +5742,20 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
             <PropertyRef Name="dc_Valor" />
             <PropertyRef Name="dc_Valor_Debe" />
           </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdCobro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="secuencial" Type="Int32" Nullable="false" />
-          <Property Name="dc_TipoDocumento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa" Nullable="false" Type="Int32" />
+          <Property Name="IdSucursal" Nullable="false" Type="Int32" />
+          <Property Name="IdCobro" Nullable="false" Precision="18" Scale="0" Type="Decimal" />
+          <Property Name="secuencial" Nullable="false" Type="Int32" />
+          <Property Name="dc_TipoDocumento" MaxLength="20" FixedLength="false" Unicode="false" Type="String" />
           <Property Name="IdBodega_Cbte" Type="Int32" />
-          <Property Name="IdCbte_vta_nota" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdEmpresa_ct" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbte_ct" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteCble_ct" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pc_Cuenta" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="dc_Valor" Type="Double" Nullable="false" />
-          <Property Name="dc_Valor_Debe" Type="Double" Nullable="false" />
+          <Property Name="IdCbte_vta_nota" Nullable="false" Precision="18" Scale="0" Type="Decimal" />
+          <Property Name="IdEmpresa_ct" Nullable="false" Type="Int32" />
+          <Property Name="IdTipoCbte_ct" Nullable="false" Type="Int32" />
+          <Property Name="IdCbteCble_ct" Nullable="false" Precision="18" Scale="0" Type="Decimal" />
+          <Property Name="IdCtaCble" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="pc_Cuenta" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="dc_Valor" Nullable="false" Type="Double" />
+          <Property Name="dc_Valor_Debe" Nullable="false" Type="Double" />
           <Property Name="dc_Valor_Haber" Type="Double" />
         </EntityType>
         <EntityType Name="VWROL_001">

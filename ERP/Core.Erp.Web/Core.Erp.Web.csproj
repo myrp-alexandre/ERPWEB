@@ -734,6 +734,12 @@
     <Compile Include="Reportes\RRHH\ROL_013_Rpt.Designer.cs">
       <DependentUpon>ROL_013_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\RRHH\ROL_014_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_014_Rpt.Designer.cs">
+      <DependentUpon>ROL_014_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -8617,6 +8623,7 @@
     <Content Include="Areas\Banco\Views\ChequeBanco\_CmbPersona_ChequeBanco.cshtml" />
     <Content Include="Areas\Banco\Views\ChequeBanco\_GridViewPartial_cheque_op_x_cruzar.cshtml" />
     <Content Include="Areas\Banco\Views\ChequeBanco\_GridViewPartial_cheque_op.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROl_014.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -8730,6 +8737,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -8903,6 +8911,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_013_Rpt.resx">
       <DependentUpon>ROL_013_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_014_Rpt.resx">
+      <DependentUpon>ROL_014_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

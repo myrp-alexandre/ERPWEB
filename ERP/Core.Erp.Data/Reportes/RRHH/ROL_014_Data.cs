@@ -21,7 +21,18 @@ namespace Core.Erp.Data.Reportes.RRHH
                              && q.IdTipoNomina == IdTipoNomina
                              select new ROL_014_Info
                              {
-
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdEmpleado = q.IdEmpleado,
+                                 IdTipoNomina = q.IdTipoNomina,
+                                 IdDepartamento = q.IdDepartamento,
+                                 IdDivision = q.IdDivision,
+                                 pe_apellido = q.pe_apellido,
+                                 pe_cedulaRuc = q.pe_cedulaRuc,
+                                 pe_nombre = q.pe_nombre,
+                                 Decimo_Cuarto = q.Decimo_Cuarto,
+                                 de_descripcion = q.de_descripcion,
+                                 Decimo_Tercero = q.Decimo_Tercero,
+                                 Fondos_Reservas = q.Fondos_Reservas
                              }).ToList();
                 }
                 return Lista;
