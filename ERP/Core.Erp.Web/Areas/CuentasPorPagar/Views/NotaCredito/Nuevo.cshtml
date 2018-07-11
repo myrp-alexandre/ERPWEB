@@ -427,6 +427,7 @@
                     // funciones calcular total
                     $("#cn_fecha").change(function () {
                         var d = new Date($("#cn_fecha").val());
+                        d = moment(d).format("DD/MM/YYYY");
                         $('#Fecha_contable').datepicker("setDate", moment(d).format("DD/MM/YYYY"));
 
                     });
