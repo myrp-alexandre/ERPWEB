@@ -10,6 +10,8 @@ using Core.Erp.Bus.General;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.Helps;
+using Core.Erp.Web.Helps;
+
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
     public class DeudasController : Controller
@@ -35,7 +37,18 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #endregion
         public ActionResult Index()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+            cargar_combos_consulta();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            cargar_combos_consulta();
+            return View(model);
         }
 
         public ActionResult Index2()
@@ -70,11 +83,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return PartialView("_GridViewPartial_deudas_dc", model);
         }
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_deudas()
+        public ActionResult GridViewPartial_deudas(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
+            ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
+            ViewBag.IdSucursal = IdSucursal;
             List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
-            model = bus_orden_giro.get_lst(IdEmpresa, DateTime.Now, DateTime.Now);
+            model = bus_orden_giro.get_lst(IdEmpresa,IdSucursal, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_deudas", model);
         }
 
@@ -143,6 +159,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         }
 
+        private void cargar_combos_consulta()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+        }
         #region Funciones
         public ActionResult Nuevo()
         {

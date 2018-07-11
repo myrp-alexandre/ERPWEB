@@ -19,11 +19,11 @@ namespace Core.Erp.Bus.CuentasPorPagar
         cp_parametros_Info info_parametro = new cp_parametros_Info();
         cp_parametros_Bus bus_parametro = new cp_parametros_Bus();
         cp_orden_giro_pagos_sri_Bus bus_forma_pago = new cp_orden_giro_pagos_sri_Bus();
-        public List<cp_orden_giro_Info> get_lst(int IdEmpresa, DateTime fi, DateTime ff)
+        public List<cp_orden_giro_Info> get_lst(int IdEmpresa,int IdSucursal, DateTime fi, DateTime ff)
         {
             try
             {
-                return data.get_lst(IdEmpresa, fi,ff);
+                return data.get_lst(IdEmpresa,IdSucursal, fi,ff);
             }
             catch (Exception)
             {

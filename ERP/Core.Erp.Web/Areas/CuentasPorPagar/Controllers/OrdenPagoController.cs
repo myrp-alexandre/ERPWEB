@@ -10,6 +10,7 @@ using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.General;
 using Core.Erp.Info.Helps;
 using DevExpress.Web.Mvc;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
@@ -32,13 +33,29 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #endregion
         public ActionResult Index()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+            cargar_combos_consulta();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            cargar_combos_consulta();
+            return View(model);
         }
 
-        public ActionResult GridViewPartial_ordenes_pagos()
+        public ActionResult GridViewPartial_ordenes_pagos(DateTime? Fecha_ini, DateTime? Fecha_fin)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            lst_ordenes_pagos = bus_orden_pago.get_list(IdEmpresa);
+
+
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
+            ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
+
+            lst_ordenes_pagos = bus_orden_pago.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_ordenes_pagos", lst_ordenes_pagos);
         }
 
@@ -84,6 +101,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         }
 
+        private void cargar_combos_consulta()
+        {
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+        }
         public ActionResult Nuevo()
         {
            
