@@ -36,20 +36,20 @@
             e.NewValues["mv_costo_sinConversion"] = 0;
         };
 
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "IdProducto";
-            column.Caption = "Producto";
-            column.Width = Unit.Percentage(50);
-            column.EditorProperties().ComboBox(p =>
-            {
-                p.Columns.Add("pr_descripcion", "Descripción").Width = Unit.Percentage(100);
-                p.TextField = "pr_descripcion";
-                p.ValueField = "IdProducto";
-                p.ValueType = typeof(decimal);
-                p.DataSource = ViewBag.lst_producto;
-            });
-        });
+        //settings.Columns.Add(column =>
+        //{
+        //    column.FieldName = "IdProducto";
+        //    column.Caption = "Producto";
+        //    column.Width = Unit.Percentage(50);
+        //    column.EditorProperties().ComboBox(p =>
+        //    {
+        //        p.Columns.Add("pr_descripcion", "Descripción").Width = Unit.Percentage(100);
+        //        p.TextField = "pr_descripcion";
+        //        p.ValueField = "IdProducto";
+        //        p.ValueType = typeof(decimal);
+        //        p.DataSource = ViewBag.lst_producto;
+        //    });
+        //});
 
 
 
@@ -68,7 +68,7 @@
             column.FieldName = "IdProducto";
             column.Caption = "pr_descripcion";
             column.Width = Unit.Percentage(30);
-            column.Visible = false;
+            column.Visible = true;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
             {
