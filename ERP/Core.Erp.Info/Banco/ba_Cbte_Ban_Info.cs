@@ -29,7 +29,7 @@ namespace Core.Erp.Info.Banco
         public string IdEstado_Preaviso_ch_cat { get; set; }
         public string IdEstado_cheque_cat { get; set; }
         public Nullable<decimal> IdPersona { get; set; }
-        public Nullable<decimal> IdEntidad { get; set; }
+        public decimal IdEntidad { get; set; }
         public string IdTipo_Persona { get; set; }
 
         #region Campos auditoria

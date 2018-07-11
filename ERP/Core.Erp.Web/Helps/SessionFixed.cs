@@ -68,7 +68,7 @@ namespace Core.Erp.Web.Helps
         private const string _IdEmpresa = "IdEmpresa";
         private const string _NomEmpresa = "FIXED";
         private const string _IdProducto_padre_dist = "IdProducto_padre_dist";
-        private const string _IdEntidad = "IdEntidad";
+        private const string _IdEntidad = "IdEntidadParam";
         private const string _IdSucursal = "IdSucursal";
         public string TipoPersona
         {

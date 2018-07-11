@@ -19,7 +19,7 @@
         settings.Properties.Columns.Add("IdPersona", "ID Persona", 10);
 
         settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdTipoPersona'] = $('#IdTipo_Persona').val(); }";
-        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e) {$('#cb_giradoA').val(s.GetText());}";
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e) {$('#cb_giradoA').val(s.GetText()); vaciar_detalles();}";
     })
     .BindList(new Core.Erp.Web.Areas.Banco.Controllers.ChequeBancoController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Banco.Controllers.ChequeBancoController().get_info_bajo_demanda)
     .Bind(Model.IdEntidad);

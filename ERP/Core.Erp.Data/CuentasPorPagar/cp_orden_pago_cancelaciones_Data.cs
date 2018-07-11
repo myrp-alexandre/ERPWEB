@@ -169,6 +169,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  IdOrdenPago_op = q.IdOrdenPago,
                                  IdTipo_op = q.IdTipo_op,
                                  Referencia = q.Referencia,
+                                 IdEmpresa_op = q.IdEmpresa,
                                  Secuencia_op = q.Secuencia_OP,
                                  IdTipo_Persona = q.IdTipoPersona,
                                  IdEntidad = q.IdEntidad,
