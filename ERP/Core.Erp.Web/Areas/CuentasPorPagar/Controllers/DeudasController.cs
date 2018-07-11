@@ -190,6 +190,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost]
         public ActionResult Nuevo(cp_orden_giro_Info model)
         {
+
+            if(bus_orden_giro.si_existe(model))
+            {
+                ViewBag.mensaje = "El documento "+model.co_serie+" "+ model.co_factura+", ya se encuentra registrado";
+                cargar_combos(model.IdProveedor, model.IdOrden_giro_Tipo);
+                cargar_combos_detalle();
+                return View(model);
+            }
             model.info_comrobante = new ct_cbtecble_Info();
             if (Session["lst_cuotas"] != null)
                 model.info_cuota.lst_cuotas_det = Session["lst_cuotas"] as List<cp_cuotas_x_doc_det_Info>;
@@ -259,7 +267,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost]
         public ActionResult Modificar(cp_orden_giro_Info model)
         {
-
+            if (bus_orden_giro.si_existe(model))
+            {
+                ViewBag.mensaje = "El documento " + model.co_serie + " " + model.co_factura + ", ya se encuentra registrado";
+                cargar_combos(model.IdProveedor, model.IdOrden_giro_Tipo);
+                cargar_combos_detalle();
+                return View(model);
+            }
 
             if (Session["info_proveedor"] == null)
             {
