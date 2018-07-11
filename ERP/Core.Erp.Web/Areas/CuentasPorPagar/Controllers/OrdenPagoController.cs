@@ -182,8 +182,23 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost]
         public ActionResult Modificar(cp_orden_pago_Info model)
         {
-
-
+            string mensaje = "";
+            if (bus_cancelacion.si_existe_cancelacion(IdEmpresa, model.IdOrdenPago))
+            {
+                mensaje = "La orden de pago tiene cancelaciones no se puede modificar";
+                cargar_combos();
+                cargar_combos_detalle();
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
+            if (model.IdTipo_op==cl_enumeradores.eTipoOrdenPago.FACT_PROVEE.ToString())
+            {
+                mensaje = "No se puede modificar una orden de pago de tipo factura por proveedor";
+                cargar_combos();
+                cargar_combos_detalle();
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
 
 
             model.detalle = Session["lst_detalle"] as List<cp_orden_pago_det_Info>;
@@ -193,7 +208,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             model.info_comprobante.IdTipoCbte = (int)info_param_op.IdTipoCbte_OP;
             model.IdEstadoAprobacion = info_param_op.IdEstadoAprobacion;
-            string mensaje = bus_orden_pago.validar(model);
+            mensaje = bus_orden_pago.validar(model);
             if (mensaje != "")
             {
                 cargar_combos();
@@ -216,6 +231,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
         public ActionResult Anular(int IdOrdenPago =0)
         {
+            
             cargar_combos();
             cargar_combos_detalle();
             IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -231,6 +247,16 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost]
         public ActionResult Anular(cp_orden_pago_Info model)
         {
+            string mensaje = "";
+            if (bus_cancelacion.si_existe_cancelacion(IdEmpresa, model.IdOrdenPago))
+            {
+                mensaje = "La orden de pago tiene cancelaciones no se puede anular";
+                cargar_combos();
+                cargar_combos_detalle();
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
+
 
             bus_orden_pago = new cp_orden_pago_Bus();
             model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
