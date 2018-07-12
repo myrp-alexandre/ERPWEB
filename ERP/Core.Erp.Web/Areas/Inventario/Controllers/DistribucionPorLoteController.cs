@@ -16,6 +16,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         in_Ing_Egr_Inven_det_Bus bus_det_ing_inv = new in_Ing_Egr_Inven_det_Bus();
         in_Ing_Egr_Inven_distribucion_lst List_in_Ing_Egr_Inven_det = new in_Ing_Egr_Inven_distribucion_lst();
         in_parametro_Bus bus_in_param = new in_parametro_Bus();
+        in_Ing_Egr_Inven_Bus bus_ingreso = new in_Ing_Egr_Inven_Bus();
         string mensaje = string.Empty;
         decimal IdProducto_padre = 0;
         List<in_Producto_Info> list_productos = new List<in_Producto_Info>();
@@ -116,7 +117,15 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 return RedirectToAction("Index");
             in_Ing_Egr_Inven_distribucion_Info model = new in_Ing_Egr_Inven_distribucion_Info();
             model = bus_ing_inv.get_info(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi, signo);
-
+            if (model == null)
+            {
+                model = new in_Ing_Egr_Inven_distribucion_Info();
+                var info_mov = bus_ingreso.get_info(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
+                model.IdEmpresa = info_mov.IdEmpresa;
+                model.IdSucursal = info_mov.IdSucursal;
+                model.IdBodega =Convert.ToInt32( info_mov.IdBodega);
+             
+             }
             cargar_combos();
             return View(model);
         }

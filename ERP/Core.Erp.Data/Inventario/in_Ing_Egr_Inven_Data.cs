@@ -194,8 +194,9 @@ namespace Core.Erp.Data.Inventario
 
                             dm_cantidad_sinConversion = item.dm_cantidad_sinConversion,
                             dm_cantidad = item.dm_cantidad ,
-                            IdUnidadMedida_sinConversion = item.IdUnidadMedida_sinConversion,
-                            IdUnidadMedida  = item.IdUnidadMedida_sinConversion,
+                            IdUnidadMedida  = (item.IdUnidadMedida)==null? "UNID":item.IdUnidadMedida,
+                            IdUnidadMedida_sinConversion = (item.IdUnidadMedida_sinConversion) == null ? "UNID" : item.IdUnidadMedida_sinConversion,
+
                             mv_costo_sinConversion = (item.mv_costo_sinConversion)==null?0:item.mv_costo_sinConversion,
                             mv_costo =(double)(item.mv_costo) == null ? 0 : item.mv_costo,
 
@@ -270,11 +271,10 @@ namespace Core.Erp.Data.Inventario
                             IdMovi_inven_tipo_inv = item.IdMovi_inven_tipo_inv,
                             IdNumMovi_inv = item.IdNumMovi_inv,
                             secuencia_inv = item.secuencia_inv,
-
+                            IdUnidadMedida = (item.IdUnidadMedida) == null ? "UNID" : item.IdUnidadMedida,
+                            IdUnidadMedida_sinConversion = (item.IdUnidadMedida_sinConversion) == null ? "UNID" : item.IdUnidadMedida_sinConversion,
                             dm_cantidad_sinConversion = item.dm_cantidad_sinConversion,
                             dm_cantidad = item.dm_cantidad,
-                            IdUnidadMedida_sinConversion = item.IdUnidadMedida_sinConversion,
-                            IdUnidadMedida = item.IdUnidadMedida_sinConversion,
                             mv_costo_sinConversion = item.mv_costo_sinConversion,
                             mv_costo = (double)item.mv_costo_sinConversion,
 
