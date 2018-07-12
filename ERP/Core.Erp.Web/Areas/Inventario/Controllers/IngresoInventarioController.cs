@@ -23,6 +23,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         string mensaje = string.Empty;
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         #endregion
+
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbProducto_IngresoInventario()
         {
@@ -39,6 +40,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         #endregion
 
+        #region Vistas
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -51,7 +53,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return View(model);
         }
 
-         [ValidateInput(false)]
+        [ValidateInput(false)]
         public ActionResult GridViewPartial_ingreso_inventario(DateTime? fecha_ini, DateTime? fecha_fin)
         {
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
@@ -60,26 +62,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             List<in_Ing_Egr_Inven_Info> model = bus_ing_inv.get_list(IdEmpresa, "+", true, ViewBag.fecha_ini, ViewBag.fecha_fin);
             return PartialView("_GridViewPartial_ingreso_inventario", model);
         }
-        private void cargar_combos()
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_movi_inven_tipo_Bus bus_tipo = new in_movi_inven_tipo_Bus();
-            var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
-            ViewBag.lst_tipo = lst_tipo;
-
-            in_Motivo_Inven_Bus bus_motivo = new in_Motivo_Inven_Bus();
-            var lst_motivo = bus_motivo.get_list(IdEmpresa,cl_enumeradores.eTipoIngEgr.ING.ToString(), false);
-            ViewBag.lst_motivo = lst_motivo;
-
-            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
-            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
-            ViewBag.lst_sucursal = lst_sucursal;
-
-            tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
-            var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
-            ViewBag.lst_bodega = lst_bodega;
-        }
-
+        #endregion
+      
         #region Acciones
         public ActionResult Nuevo()
         {
@@ -237,6 +221,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return PartialView("_GridViewPartial_inv_det", model);
         }
         #endregion
+
+        #region validaciones cargar cobo
         private bool validar(in_Ing_Egr_Inven_Info i_validar, ref string msg)
         {
             if (i_validar.lst_in_Ing_Egr_Inven_det.Count == 0)
@@ -246,6 +232,26 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return true;
         }
+        private void cargar_combos()
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            in_movi_inven_tipo_Bus bus_tipo = new in_movi_inven_tipo_Bus();
+            var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
+            ViewBag.lst_tipo = lst_tipo;
+
+            in_Motivo_Inven_Bus bus_motivo = new in_Motivo_Inven_Bus();
+            var lst_motivo = bus_motivo.get_list(IdEmpresa, cl_enumeradores.eTipoIngEgr.ING.ToString(), false);
+            ViewBag.lst_motivo = lst_motivo;
+
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+
+            tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+            var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
+            ViewBag.lst_bodega = lst_bodega;
+        }
+        #endregion
 
     }
 
