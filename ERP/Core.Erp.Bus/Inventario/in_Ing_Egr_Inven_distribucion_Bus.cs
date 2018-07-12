@@ -137,7 +137,8 @@ namespace Core.Erp.Bus.Inventario
                 in_Ing_Egr_Inven_Bus bus_ing_egr = new in_Ing_Egr_Inven_Bus();
                 #region Crear movimiento sin lote
                 in_Ing_Egr_Inven_Info mov_sin_lote = new in_Ing_Egr_Inven_Info();
-
+                if (info_info_distribucion_in == null)
+                    info_info_distribucion_in = info_distribucion;
                 #region Cabecera
                 if (distribucion_sin_lote != null)
                     mov_sin_lote = bus_ing_egr.get_info(distribucion_sin_lote.IdEmpresa_dis, distribucion_sin_lote.IdSucursal_dis, distribucion_sin_lote.IdMovi_inven_tipo_dis, distribucion_sin_lote.IdNumMovi_dis);
@@ -259,7 +260,7 @@ namespace Core.Erp.Bus.Inventario
                 #region guardar movimientos y distribucion
                 if (distribucion_sin_lote == null)
                 {
-                    if (!bus_ing_egr.guardarDB(mov_sin_lote))
+                    if (!bus_ing_egr.guardarDB(mov_sin_lote,""))
                         return false;
 
                     distribucion_sin_lote = new in_Ing_Egr_Inven_distribucion_Info
@@ -291,7 +292,7 @@ namespace Core.Erp.Bus.Inventario
 
                 if (distribucion_con_lote == null)
                 {
-                    if (!bus_ing_egr.guardarDB(mov_con_lote))
+                    if (!bus_ing_egr.guardarDB(mov_con_lote, mov_con_lote.signo))
                         return false;
 
                     distribucion_con_lote = new in_Ing_Egr_Inven_distribucion_Info

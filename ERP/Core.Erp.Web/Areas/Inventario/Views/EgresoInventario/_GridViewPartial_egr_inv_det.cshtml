@@ -57,21 +57,20 @@
                 Html.RenderPartial("_CmbProducto_EgresoInventario", DataBinder.Eval(c.DataItem, "IdProducto"));
             });
         });
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "IdUnidadMedida_sinConversion";
-            column.Caption = "Unidad de medida";
-            column.Width = Unit.Percentage(60);
-            column.EditorProperties().ComboBox(p =>
-            {
-                p.Columns.Add("descripcion", "Descripción").Width = Unit.Percentage(100);
-                p.TextField = "descripcion";
-                p.ValueField = "IdUnidadMedida";
-                p.ValueType = typeof(string);
-                p.DataSource = ViewBag.lst_unidad;
-            });
-        });
+         settings.Columns.Add(column =>
+         {
+             column.FieldName = "IdUnidadMedida_sinConversion";
+             column.Caption = "Unidad de medida";
+             column.Width = Unit.Percentage(60);
+             column.EditorProperties().ComboBox(p =>
+             {
+                 p.Columns.Add("descripcion", "Descripción").Width = Unit.Percentage(100);
+                 p.TextField = "descripcion";
+                 p.ValueField = "IdUnidadMedida";
+                 p.ValueType = typeof(string);
+                 p.DataSource = ViewBag.lst_unidad;
+             });
+         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "dm_cantidad_sinConversion";

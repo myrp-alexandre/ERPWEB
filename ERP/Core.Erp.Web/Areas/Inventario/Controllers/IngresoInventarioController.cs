@@ -93,7 +93,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 return View(model);
             }
             model.IdUsuario = Session["IdUsuario"].ToString();
-            if (!bus_ing_inv.guardarDB(model))
+            if (!bus_ing_inv.guardarDB(model,"+"))
             {
                 cargar_combos();
                 return View(model);

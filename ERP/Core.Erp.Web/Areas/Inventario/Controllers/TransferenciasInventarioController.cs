@@ -116,6 +116,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 cargar_combos();
                 return View(model);
             }
+            Session["in_transferencia_det_Info"] = null;
             return RedirectToAction("Index");
         }
 
@@ -147,6 +148,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 cargar_combos();
                 return View(model);
             }
+            Session["in_transferencia_det_Info"] = null;
             return RedirectToAction("Index");
         }
         public ActionResult Anular(int IdSucursalOrigen = 0, int IdBodegaOrigen = 0, decimal IdTransferencia = 0)
@@ -186,23 +188,40 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] in_transferencia_det_Info info_det)
         {
-            if (ModelState.IsValid)
-                List_in_transferencia_det.AddRow(info_det);
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            if (info_det != null)
+                if (info_det.IdProducto != 0)
+                {
+                    in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+                    if (info_producto != null)
+                        info_det.pr_descripcion = info_producto.pr_descripcion;
+                }
+
+
+            List_in_transferencia_det.AddRow(info_det);
             in_transferencia_Info model = new in_transferencia_Info();
             model.list_detalle = List_in_transferencia_det.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_transferencias_det", model);
+            return PartialView("_GridViewPartial_transferencias_det", model.list_detalle);
         }
 
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] in_transferencia_det_Info info_det)
         {
-            if (ModelState.IsValid)
-                List_in_transferencia_det.UpdateRow(info_det);
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            if (info_det != null)
+                if (info_det.IdProducto != 0)
+                {
+                    in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+                    if (info_producto != null)
+                        info_det.pr_descripcion = info_producto.pr_descripcion;
+                }
+
+            List_in_transferencia_det.UpdateRow(info_det);
             in_transferencia_Info model = new in_transferencia_Info();
             model.list_detalle = List_in_transferencia_det.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_transferencias_det", model);
+            return PartialView("_GridViewPartial_transferencias_det", model.list_detalle);
         }
 
         public ActionResult EditingDelete(int Secuencia)
@@ -211,7 +230,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             in_transferencia_Info model = new in_transferencia_Info();
             model.list_detalle = List_in_transferencia_det.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_transferencias_det", model);
+            return PartialView("_GridViewPartial_transferencias_det", model.list_detalle);
         }
         #endregion
 

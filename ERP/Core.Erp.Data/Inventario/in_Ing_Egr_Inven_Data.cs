@@ -127,11 +127,11 @@ namespace Core.Erp.Data.Inventario
             }
         }
 
-        public bool guardarDB(in_Ing_Egr_Inven_Info info)
+        public bool guardarDB(in_Ing_Egr_Inven_Info info, string signo)
         {
             try
             {
-
+                in_producto_x_tb_bodega_Costo_Historico_Data data_costo = new in_producto_x_tb_bodega_Costo_Historico_Data();
                 int sec = 1;
                 using (Entities_inventario Context = new Entities_inventario())
                 {
@@ -157,8 +157,11 @@ namespace Core.Erp.Data.Inventario
 
                     foreach (var item in info.lst_in_Ing_Egr_Inven_det)
                     {
+                        if (signo == "-")
+                            item.mv_costo = data_costo.get_ultimo_costo(info.IdEmpresa, info.IdSucursal, Convert.ToInt32(info.IdBodega), item.IdProducto, info.cm_fecha);
                         in_Ing_Egr_Inven_det entity_det = new in_Ing_Egr_Inven_det
                         {
+                            
                             IdEmpresa = info.IdEmpresa,
                             IdSucursal = info.IdSucursal,
                             IdMovi_inven_tipo = info.IdMovi_inven_tipo,
@@ -307,7 +310,10 @@ namespace Core.Erp.Data.Inventario
                     Entity.IdusuarioUltAnu = info.IdusuarioUltAnu;
                     Entity.Fecha_UltAnu = DateTime.Now;
                     Context.SaveChanges();
+                    Context.spSys_inv_Reversar_aprobacion(info.IdEmpresa, info.IdSucursal, info.IdMovi_inven_tipo, info.IdNumMovi, true);
+
                 }
+
                 return true;
 
             }

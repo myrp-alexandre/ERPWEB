@@ -199,6 +199,7 @@ namespace Core.Erp.Data.Inventario
 
                              }).ToList();
                 }
+                if(Lista.Count()>0)
                 Lista.ForEach(V=>{
                     V.pr_descripcion = V.pr_descripcion + " " + V.lote_num_lote + " ";
                     if(V.lote_fecha_vcto!=null)
@@ -208,7 +209,7 @@ namespace Core.Erp.Data.Inventario
                 });
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;

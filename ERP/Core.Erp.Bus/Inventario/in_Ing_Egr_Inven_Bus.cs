@@ -36,11 +36,11 @@ namespace Core.Erp.Bus.Inventario
             }
         }
 
-        public bool guardarDB(in_Ing_Egr_Inven_Info info)
+        public bool guardarDB(in_Ing_Egr_Inven_Info info, string signo)
         {
             try
             {
-                return odata.guardarDB(info);
+                return odata.guardarDB(info,  signo);
             }
             catch (Exception)
             {

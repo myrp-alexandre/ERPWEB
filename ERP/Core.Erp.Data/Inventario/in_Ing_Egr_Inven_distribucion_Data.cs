@@ -167,7 +167,7 @@ namespace Core.Erp.Data.Inventario
                 }
                 return Lista;
             }
-            catch (Exception )
+            catch (Exception e)
             {
                 throw;
 
