@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.Reportes.Inventario
     public class INV_008_Bus
     {
         INV_008_Data odata = new INV_008_Data();
-        public List<INV_008_Info> get_list(int idEmpresa, int IdSucursal, int IdBodega, bool mostrar_saldos_en_0, List<decimal> lst_producto)
+        public List<INV_008_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, bool mostrar_saldos_en_0, List<decimal> lst_producto)
         {
             try
             {
-                return odata.get_list(idEmpresa, IdSucursal, IdBodega, mostrar_saldos_en_0, lst_producto);
+                return odata.get_list(IdEmpresa, IdSucursal, IdBodega, mostrar_saldos_en_0, lst_producto);
             }
             catch (Exception)
             {

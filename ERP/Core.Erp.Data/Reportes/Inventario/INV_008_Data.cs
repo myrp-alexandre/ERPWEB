@@ -9,17 +9,19 @@ namespace Core.Erp.Data.Reportes.Inventario
 {
     public class INV_008_Data
     {
-        public List<INV_008_Info> get_list(int idEmpresa, int IdSucursal, int IdBodega, bool mostrar_saldos_en_0, List<decimal> lst_producto)
+        public List<INV_008_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, bool mostrar_saldos_en_0, List<decimal> lst_producto)
         {
             try
             {
+                if (lst_producto == null)
+                    lst_producto = new List<decimal>();
                 List<INV_008_Info> Lista = new List<INV_008_Info>();
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     foreach (var IdProducto in lst_producto)
                     {
                         Lista.AddRange((from q in Context.VWINV_008
-                                        where q.IdEmpresa == idEmpresa
+                                        where q.IdEmpresa == IdEmpresa
                                         && q.IdSucursal == IdSucursal
                                         && q.IdBodega == IdBodega
                                         && q.IdProducto_padre == IdProducto
@@ -50,7 +52,7 @@ namespace Core.Erp.Data.Reportes.Inventario
                 }
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;
