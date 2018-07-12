@@ -1,4 +1,5 @@
-﻿using Core.Erp.Web.Reportes.Inventario;
+﻿using DevExpress.Web.Mvc;
+using Core.Erp.Web.Reportes.Inventario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,8 @@ using System.Web.Mvc;
 using Core.Erp.Info.Helps;
 using Core.Erp.Bus.General;
 using Core.Erp.Bus.Inventario;
-
+using Core.Erp.Bus.Reportes.Inventario;
+using Core.Erp.Info.Reportes.Inventario;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
@@ -448,5 +450,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
+        
     }
+
 }
