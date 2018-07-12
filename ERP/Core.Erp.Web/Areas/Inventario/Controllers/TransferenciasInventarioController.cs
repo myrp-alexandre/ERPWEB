@@ -9,16 +9,39 @@ using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
 using DevExpress.Web.Mvc;
+using DevExpress.Web;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
     public class TransferenciasInventarioController : Controller
     {
+        #region variables
         in_transferencia_Bus bus_trnferencia = new in_transferencia_Bus();
         in_transferencia_det_Bus bus_tras_detalle = new in_transferencia_det_Bus();
         in_transferencia_det_List List_in_transferencia_det = new in_transferencia_det_List();
         in_parametro_Bus bus_in_param = new in_parametro_Bus();
         string mensaje = string.Empty;
+        in_Producto_Bus bus_producto = new in_Producto_Bus();
+        #endregion
+
+        #region Metodos ComboBox bajo demanda
+        public ActionResult CmbProducto_TransferenciaInventario()
+        {
+            in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info();
+            return PartialView("_CmbProducto_TransferenciaInventario", model);
+        }
+        public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public in_Producto_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
+        #region vistas
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -40,25 +63,22 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             List<in_transferencia_Info> model = bus_trnferencia.get_list(IdEmpresa);
             return PartialView("_GridViewPartial_transferencias", model);
         }
-        private void cargar_combos()
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_transferencias_det(int IdSucursalOrigen = 0, int IdBodegaOrigen = 0, decimal IdTransferencia = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_movi_inven_tipo_Bus bus_tipo = new in_movi_inven_tipo_Bus();
-            var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
-            ViewBag.lst_tipo = lst_tipo;
-
-            in_Motivo_Inven_Bus bus_motivo = new in_Motivo_Inven_Bus();
-            var lst_motivo = bus_motivo.get_list(IdEmpresa, cl_enumeradores.eTipoIngEgr.ING.ToString(), false);
-            ViewBag.lst_motivo = lst_motivo;
-
-            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
-            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
-            ViewBag.lst_sucursal = lst_sucursal;
-
-            tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
-            var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
-            ViewBag.lst_bodega = lst_bodega;
+            in_transferencia_Info model = new in_transferencia_Info();
+            model.list_detalle = bus_tras_detalle.get_list(IdEmpresa, IdSucursalOrigen, IdBodegaOrigen, IdTransferencia);
+            if (model.list_detalle.Count == 0)
+                model.list_detalle = List_in_transferencia_det.get_list();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_transferencias_det", model.list_detalle);
         }
+
+        #endregion
+
+        #region Acciones
         public ActionResult Nuevo()
         {
             Session["in_transferencia_det_Info"] = null;
@@ -72,7 +92,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 tr_fecha = DateTime.Now,
                 IdMovi_inven_tipo_SucuOrig = i_param.P_IdMovi_inven_tipo_default_egr,
                 IdMovi_inven_tipo_SucuDest = i_param.P_IdMovi_inven_tipo_default_ing
-                    
+
             };
             cargar_combos();
             return View(model);
@@ -115,7 +135,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             model.list_detalle = List_in_transferencia_det.get_list();
             string mensaje = bus_trnferencia.validar(model);
-            if (mensaje!="")
+            if (mensaje != "")
             {
                 cargar_combos();
                 ViewBag.mensaje = mensaje;
@@ -159,30 +179,10 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
 
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_transferencias_det(int IdSucursalOrigen = 0, int IdBodegaOrigen = 0, decimal IdTransferencia = 0)
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_transferencia_Info model = new in_transferencia_Info();
-            model.list_detalle = bus_tras_detalle.get_list(IdEmpresa, IdSucursalOrigen, IdBodegaOrigen, IdTransferencia);
-            if (model.list_detalle.Count == 0)
-                model.list_detalle = List_in_transferencia_det.get_list();
-            cargar_combos_detalle();
-            return PartialView("_GridViewPartial_transferencias_det", model);
-        }
-        private void cargar_combos_detalle()
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_Producto_Bus bus_producto = new in_Producto_Bus();
-            var lst_producto = bus_producto.get_list(IdEmpresa, false);
-            ViewBag.lst_producto = lst_producto;
-
-            in_UnidadMedida_Bus bus_unidad = new in_UnidadMedida_Bus();
-            var lst_unidad = bus_unidad.get_list(false);
-            ViewBag.lst_unidad = lst_unidad;
-        }
-
+        #region Funciones del detalle
+       
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] in_transferencia_det_Info info_det)
         {
@@ -213,6 +213,36 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_transferencias_det", model);
         }
+        #endregion
+
+        private void cargar_combos_detalle()
+        {
+           
+
+            in_UnidadMedida_Bus bus_unidad = new in_UnidadMedida_Bus();
+            var lst_unidad = bus_unidad.get_list(false);
+            ViewBag.lst_unidad = lst_unidad;
+        }
+        private void cargar_combos()
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            in_movi_inven_tipo_Bus bus_tipo = new in_movi_inven_tipo_Bus();
+            var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
+            ViewBag.lst_tipo = lst_tipo;
+
+            in_Motivo_Inven_Bus bus_motivo = new in_Motivo_Inven_Bus();
+            var lst_motivo = bus_motivo.get_list(IdEmpresa, cl_enumeradores.eTipoIngEgr.ING.ToString(), false);
+            ViewBag.lst_motivo = lst_motivo;
+
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+
+            tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+            var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
+            ViewBag.lst_bodega = lst_bodega;
+        }
+
     }
 
     public class in_transferencia_det_List

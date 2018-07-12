@@ -21,5 +21,9 @@ namespace Core.Erp.Info.Inventario
         public string IdUnidadMedida { get; set; }
         public Nullable<int> IdPunto_cargo_grupo { get; set; }
         public Nullable<int> IdPunto_cargo { get; set; }
+
+        #region Campos que no existen en la tabla
+        public string pr_descripcion { get; set; }
+        #endregion
     }
 }

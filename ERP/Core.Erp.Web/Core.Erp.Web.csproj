@@ -8650,6 +8650,7 @@
     <Content Include="Areas\Banco\Views\DepositoBanco\_GridViewPartial_DepositoBanco.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_008.cshtml" />
     <Content Include="Areas\Inventario\Views\IngresoInventario\_CmbProducto_IngresoInventario.cshtml" />
+    <Content Include="Areas\Inventario\Views\TransferenciasInventario\_CmbProducto_TransferenciaInventario.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />
