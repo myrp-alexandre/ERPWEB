@@ -6,6 +6,7 @@ using DevExpress.XtraReports.UI;
 using Core.Erp.Bus.Reportes.Inventario;
 using Core.Erp.Info.Reportes.Inventario;
 using System.Collections.Generic;
+using Core.Erp.Web.Areas.Reportes.Controllers;
 
 namespace Core.Erp.Web.Reportes.Inventario
 {
