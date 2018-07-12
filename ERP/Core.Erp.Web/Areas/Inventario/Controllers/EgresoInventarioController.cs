@@ -125,10 +125,13 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         public ActionResult Modificar(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
         {
+
+            Session["in_Ing_Egr_Inven_det_Info"] = null;
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_Ing_Egr_Inven_Info model = bus_ing_inv.get_info(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
             if (model == null)
                 return RedirectToAction("Index");
+            model.lst_in_Ing_Egr_Inven_det = bus_det_ing_inv.get_list(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
             cargar_combos();
             return View(model);
         }
@@ -198,8 +201,15 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] in_Ing_Egr_Inven_det_Info info_det)
         {
-            if (ModelState.IsValid)
-                List_in_Ing_Egr_Inven_det.AddRow(info_det);
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            if (info_det != null)
+                if (info_det.IdProducto != 0) {
+                    in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+                    if (info_producto != null)
+                        info_det.pr_descripcion = info_producto.pr_descripcion;
+                        }
+
+            List_in_Ing_Egr_Inven_det.AddRow(info_det);
             var model = List_in_Ing_Egr_Inven_det.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_egr_inv_det", model);
@@ -208,8 +218,16 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] in_Ing_Egr_Inven_det_Info info_det)
         {
-            if (ModelState.IsValid)
-                List_in_Ing_Egr_Inven_det.UpdateRow(info_det);
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            if (info_det != null)
+                if (info_det.IdProducto != 0)
+                {
+                    in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+                    if (info_producto != null)
+                        info_det.pr_descripcion = info_producto.pr_descripcion;
+                }
+
+            List_in_Ing_Egr_Inven_det.UpdateRow(info_det);
             var model = List_in_Ing_Egr_Inven_det.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_egr_inv_det", model);

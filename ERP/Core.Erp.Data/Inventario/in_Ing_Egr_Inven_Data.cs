@@ -173,8 +173,8 @@ namespace Core.Erp.Data.Inventario
                             IdPunto_cargo_grupo = item.IdPunto_cargo_grupo,
 
                             dm_observacion = item.dm_observacion,
-                            IdMotivo_Inv = item.IdMotivo_Inv,
-                            IdEstadoAproba = item.IdEstadoAproba,
+                            IdMotivo_Inv = info.IdMotivo_Inv,
+                            IdEstadoAproba = "APRO",
                             Motivo_Aprobacion = item.Motivo_Aprobacion,
 
                             IdEmpresa_oc = item.IdEmpresa_oc,
@@ -193,8 +193,8 @@ namespace Core.Erp.Data.Inventario
                             dm_cantidad = item.dm_cantidad ,
                             IdUnidadMedida_sinConversion = item.IdUnidadMedida_sinConversion,
                             IdUnidadMedida  = item.IdUnidadMedida_sinConversion,
-                            mv_costo_sinConversion = item.mv_costo_sinConversion,
-                            mv_costo =(double) item.mv_costo_sinConversion,
+                            mv_costo_sinConversion = (item.mv_costo_sinConversion)==null?0:item.mv_costo_sinConversion,
+                            mv_costo =(double)(item.mv_costo) == null ? 0 : item.mv_costo,
 
                         };
                         Context.in_Ing_Egr_Inven_det.Add(entity_det);
