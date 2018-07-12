@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_DebitoBanco_op_x_cruzar";
-        settings.CallbackRouteValues = new { Controller = "NotaDeCreditoBanco", Action = "GridViewPartial_DebitoBanco_x_cruzar" };
+        settings.CallbackRouteValues = new { Controller = "NotaDeDebitoBanco", Action = "GridViewPartial_DebitoBanco_op_x_cruzar" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdOrdenPago_op";
 

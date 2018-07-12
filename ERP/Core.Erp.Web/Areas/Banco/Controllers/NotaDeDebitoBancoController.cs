@@ -34,11 +34,11 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #endregion
 
         #region Metodos ComboBox bajo demanda
-        public ActionResult CmbPersona_ChequeBanco()
+        public ActionResult CmbPersona_DebitoBanco()
         {
             SessionFixed.TipoPersona = Request.Params["IdTipo_Persona"] != null ? Request.Params["IdTipo_Persona"].ToString() : SessionFixed.TipoPersona;
             ba_Cbte_Ban_Info model = new ba_Cbte_Ban_Info();
-            return PartialView("_CmbPersona_ChequeBanco", model);
+            return PartialView("_CmbPersona_DebitoBanco", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
@@ -75,16 +75,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             i_validar.lst_det_canc_op = List_op.get_list();
             i_validar.lst_det_ct = List_ct.get_list();
 
-            if (i_validar.IdEntidad == 0)
-            {
-                msg = "Seleccione el beneficiario";
-                return false;
-            }
-            if (i_validar.lst_det_canc_op.Count == 0)
-            {
-                msg = "Seleccione las órdenes de pago a ser canceladas";
-                return false;
-            }
             if (i_validar.lst_det_ct.Count == 0)
             {
                 msg = "El detalle del diario se encuentra vacío";
@@ -110,28 +100,33 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 mensaje = "Existen detalles con valor 0 en el debe o haber, por favor verifique";
                 return false;
             }
+            if (i_validar.IdEntidad != 0 && i_validar.IdEntidad != null)
+            {
+                var persona = bus_persona.get_info(i_validar.IdEmpresa, i_validar.IdTipo_Persona, Convert.ToDecimal(i_validar.IdEntidad));
+                if (persona == null)
+                {
+                    msg = "La persona seleccionada no corresponde al tipo asignado";
+                    return false;
+                }
+                i_validar.IdPersona = persona.IdPersona;
+                i_validar.IdPersona_Girado_a = persona.IdPersona;
 
-            var persona = bus_persona.get_info(i_validar.IdEmpresa, i_validar.IdTipo_Persona, Convert.ToDecimal(i_validar.IdEntidad));
-            if (persona == null)
-            {
-                msg = "La persona seleccionada no corresponde al tipo asignado";
-                return false;
+                if (Math.Round(i_validar.lst_det_canc_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero) != Math.Round(i_validar.lst_det_ct.Sum(q => q.dc_Valor_debe), 2, MidpointRounding.AwayFromZero))
+                {
+                    msg = "Los valores ingresados no concuerdan con el valor del diario";
+                    return false;
+                }
+                i_validar.cb_Observacion = "Canc./ ";
+                foreach (var item in i_validar.lst_det_canc_op)
+                {
+                    i_validar.cb_Observacion += item.Referencia + "/";
+                }
             }
-            i_validar.IdPersona = persona.IdPersona;
-            i_validar.IdPersona_Girado_a = persona.IdPersona;
-
-            if (Math.Round(i_validar.lst_det_canc_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero) != Math.Round(i_validar.lst_det_ct.Sum(q => q.dc_Valor_debe), 2, MidpointRounding.AwayFromZero))
-            {
-                msg = "Los valores ingresados no concuerdan con el valor del diario";
-                return false;
-            }
-            i_validar.cb_Observacion = "Canc./ ";
-            foreach (var item in i_validar.lst_det_canc_op)
-            {
-                i_validar.cb_Observacion += item.Referencia + "/";
-            }
+            
+           
             i_validar.IdPeriodo = Convert.ToInt32(i_validar.cb_Fecha.ToString("yyyyMM"));
             i_validar.IdUsuario = SessionFixed.IdUsuario;
+            i_validar.IdUsuarioUltMod = SessionFixed.IdUsuario;
             i_validar.cb_Valor = Math.Round(i_validar.lst_det_ct.Sum(q => q.dc_Valor_debe), 2, MidpointRounding.AwayFromZero);
             return true;
         }
@@ -202,6 +197,67 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             {
                 ViewBag.mensaje = "No se pudo guardar el registro";
                 SessionFixed.TipoPersona = model.IdTipo_Persona;
+                cargar_combos();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(ba_Cbte_Ban_Info model)
+        {
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
+            if (!bus_cbteban.modificarDB(model, cl_enumeradores.eTipoCbteBancario.NDBA))
+            {
+                ViewBag.mensaje = "No se pudo modificar el registro";
+                cargar_combos();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Modificar(int IdTipocbte = 0, decimal IdCbteCble = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            List_ct.set_list(model.lst_det_ct);
+            model.lst_det_canc_op = bus_cancelaciones.get_list_x_pago(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble, SessionFixed.IdUsuario);
+            List_op.set_list(model.lst_det_canc_op);
+            cargar_combos();
+            SessionFixed.TipoPersona = model.IdTipo_Persona;
+            return View(model);
+        }
+
+        public ActionResult Anular(int IdTipocbte = 0, decimal IdCbteCble = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            List_ct.set_list(model.lst_det_ct);
+            model.lst_det_canc_op = bus_cancelaciones.get_list_x_pago(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble, SessionFixed.IdUsuario);
+            List_op.set_list(model.lst_det_canc_op);
+            cargar_combos();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Anular(ba_Cbte_Ban_Info model)
+        {
+            if (!bus_cbteban.anularDB(model))
+            {
+                ViewBag.mensaje = "No se pudo anular el registro";
                 cargar_combos();
                 return View(model);
             }

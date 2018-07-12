@@ -137,6 +137,15 @@
 
 @using (Html.BeginForm("Nuevo", "ChequeBanco", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+     if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+
+    }
     @Html.HiddenFor(q=>q.IdEmpresa)
     <div class="modal fade" id="OpModal" role="dialog">
         <div class="modal-dialog modal-lg">
