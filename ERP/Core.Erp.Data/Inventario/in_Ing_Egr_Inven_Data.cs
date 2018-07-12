@@ -201,6 +201,9 @@ namespace Core.Erp.Data.Inventario
                         sec++;
                     }
                     Context.SaveChanges();
+
+                    // ejecutando el sp para in_movi_det
+                    Context.spINV_aprobacion_ing_egr(info.IdEmpresa, info.IdSucursal, info.IdBodega, info.IdMovi_inven_tipo, info.IdNumMovi);
                 }
                 return true;
             }

@@ -8,16 +8,37 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.General;
+using DevExpress.Web;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
     public class IngresoInventarioController : Controller
     {
+        #region variables
         in_Ing_Egr_Inven_Bus bus_ing_inv = new in_Ing_Egr_Inven_Bus();
         in_Ing_Egr_Inven_det_Bus bus_det_ing_inv = new in_Ing_Egr_Inven_det_Bus();
         in_Ing_Egr_Inven_det_List List_in_Ing_Egr_Inven_det = new in_Ing_Egr_Inven_det_List();
         in_parametro_Bus bus_in_param = new in_parametro_Bus();
         string mensaje = string.Empty;
+        in_Producto_Bus bus_producto = new in_Producto_Bus();
+        #endregion
+        #region Metodos ComboBox bajo demanda
+        public ActionResult CmbProducto_IngresoInventario()
+        {
+            in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info();
+            return PartialView("_CmbProducto_IngresoInventario", model);
+        }
+        public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public in_Producto_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -30,16 +51,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return View(model);
         }
 
-        private bool validar(in_Ing_Egr_Inven_Info i_validar, ref string msg)
-        {
-            if (i_validar.lst_in_Ing_Egr_Inven_det.Count == 0)
-            {
-                mensaje = "Debe ingresar al menos un producto";
-                return false;
-            }
-            return true;
-        }
-        [ValidateInput(false)]
+         [ValidateInput(false)]
         public ActionResult GridViewPartial_ingreso_inventario(DateTime? fecha_ini, DateTime? fecha_fin)
         {
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
@@ -67,6 +79,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
             ViewBag.lst_bodega = lst_bodega;
         }
+
+        #region Acciones
         public ActionResult Nuevo()
         {
             Session["in_Ing_Egr_Inven_det_Info"] = null;
@@ -84,7 +98,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             cargar_combos();
             return View(model);
         }
-
         [HttpPost]
         public ActionResult Nuevo(in_Ing_Egr_Inven_Info model)
         {
@@ -103,17 +116,18 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index");
         }
-
-        public ActionResult Modificar(int IdSucursal=0, int IdMovi_inven_tipo=0, decimal IdNumMovi=0)
+        public ActionResult Modificar(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
         {
+            Session["in_Ing_Egr_Inven_det_Info"] = null;
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_Ing_Egr_Inven_Info model = bus_ing_inv.get_info(IdEmpresa,  IdSucursal,  IdMovi_inven_tipo,  IdNumMovi);
+            in_Ing_Egr_Inven_Info model = bus_ing_inv.get_info(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
             if (model == null)
                 return RedirectToAction("Index");
+            model.lst_in_Ing_Egr_Inven_det = bus_det_ing_inv.get_list(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
+            Session["in_Ing_Egr_Inven_det_Info"] = model.lst_in_Ing_Egr_Inven_det;
             cargar_combos();
             return View(model);
         }
-
         [HttpPost]
         public ActionResult Modificar(in_Ing_Egr_Inven_Info model)
         {
@@ -141,7 +155,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             cargar_combos();
             return View(model);
         }
-
         [HttpPost]
         public ActionResult Anular(in_Ing_Egr_Inven_Info model)
         {
@@ -160,24 +173,19 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index");
         }
-        
+        #endregion
+
+        #region Funciones del detalle
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_inv_det(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
+        public ActionResult GridViewPartial_inv_det()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info();
-            model.lst_in_Ing_Egr_Inven_det = bus_det_ing_inv.get_list(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
-            if (model.lst_in_Ing_Egr_Inven_det.Count == 0)
-                model.lst_in_Ing_Egr_Inven_det = List_in_Ing_Egr_Inven_det.get_list();
+            var model = List_in_Ing_Egr_Inven_det.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_inv_det", model);
         }
         private void cargar_combos_detalle()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_Producto_Bus bus_producto = new in_Producto_Bus();
-            var lst_producto = bus_producto.get_list(IdEmpresa , false);
-            ViewBag.lst_producto = lst_producto;
+           
 
             in_UnidadMedida_Bus bus_unidad = new in_UnidadMedida_Bus();
             var lst_unidad = bus_unidad.get_list(false);
@@ -187,10 +195,17 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] in_Ing_Egr_Inven_det_Info info_det)
         {
-            if (ModelState.IsValid)
-                List_in_Ing_Egr_Inven_det.AddRow(info_det);
-            in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info();
-            model.lst_in_Ing_Egr_Inven_det = List_in_Ing_Egr_Inven_det.get_list();
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            if (info_det != null)
+                if (info_det.IdProducto != 0)
+                {
+                    in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+                    if (info_producto != null)
+                        info_det.pr_descripcion = info_producto.pr_descripcion;
+                }
+
+            List_in_Ing_Egr_Inven_det.AddRow(info_det);
+            var model = List_in_Ing_Egr_Inven_det.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_inv_det", model);
         }
@@ -198,10 +213,17 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] in_Ing_Egr_Inven_det_Info info_det)
         {
-            if (ModelState.IsValid)
-                List_in_Ing_Egr_Inven_det.UpdateRow(info_det);
-            in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info();
-            model.lst_in_Ing_Egr_Inven_det = List_in_Ing_Egr_Inven_det.get_list();
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            if (info_det != null)
+                if (info_det.IdProducto != 0)
+                {
+                    in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+                    if (info_producto != null)
+                        info_det.pr_descripcion = info_producto.pr_descripcion;
+                }
+
+            List_in_Ing_Egr_Inven_det.UpdateRow(info_det);
+            var model = List_in_Ing_Egr_Inven_det.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_inv_det", model);
         }
@@ -214,6 +236,17 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_inv_det", model);
         }
+        #endregion
+        private bool validar(in_Ing_Egr_Inven_Info i_validar, ref string msg)
+        {
+            if (i_validar.lst_in_Ing_Egr_Inven_det.Count == 0)
+            {
+                mensaje = "Debe ingresar al menos un producto";
+                return false;
+            }
+            return true;
+        }
+
     }
 
     public class in_Ing_Egr_Inven_det_List

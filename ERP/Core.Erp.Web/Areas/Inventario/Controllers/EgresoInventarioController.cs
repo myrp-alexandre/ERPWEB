@@ -16,12 +16,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
     public class EgresoInventarioController : Controller
     {
+        #region Variables
         in_Ing_Egr_Inven_Bus bus_ing_inv = new in_Ing_Egr_Inven_Bus();
         in_Ing_Egr_Inven_det_Bus bus_det_ing_inv = new in_Ing_Egr_Inven_det_Bus();
         in_Ing_Egr_Inven_det_List List_in_Ing_Egr_Inven_det = new in_Ing_Egr_Inven_det_List();
         in_parametro_Bus bus_in_param = new in_parametro_Bus();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         string mensaje = string.Empty;
+        #endregion
 
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbProducto_EgresoInventario()
