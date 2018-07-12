@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Erp.Info.Reportes.Inventario;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -60,6 +61,8 @@ namespace Core.Erp.Info.Helps
         public decimal IdEntidad { get; set; }
 
         #endregion
+        public List<INV_008_Info> lst_decimal { get; set; }
+
         public int IdTipoNomina { get; set; }
         public int IdNomina { get; set; }
         public string IdCtaCble { get; set; }

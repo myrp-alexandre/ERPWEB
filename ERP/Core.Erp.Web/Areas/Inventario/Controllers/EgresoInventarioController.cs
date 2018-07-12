@@ -177,7 +177,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var lst_unidad = bus_unidad.get_list(false);
             ViewBag.lst_unidad = lst_unidad;
         }
-
         private bool validar(in_Ing_Egr_Inven_Info i_validar, ref string msg)
         {
             if (i_validar.lst_in_Ing_Egr_Inven_det.Count == 0)

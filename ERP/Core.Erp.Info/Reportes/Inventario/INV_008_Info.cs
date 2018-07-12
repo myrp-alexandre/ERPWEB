@@ -29,5 +29,7 @@ namespace Core.Erp.Info.Reportes.Inventario
         public string nom_presentacion { get; set; }
         public string Su_Descripcion { get; set; }
         public string bo_Descripcion { get; set; }
+
+
     }
 }
