@@ -1,4 +1,5 @@
-﻿using Core.Erp.Web.Reportes.Inventario;
+﻿using DevExpress.Web.Mvc;
+using Core.Erp.Web.Reportes.Inventario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,8 @@ using System.Web.Mvc;
 using Core.Erp.Info.Helps;
 using Core.Erp.Bus.General;
 using Core.Erp.Bus.Inventario;
-
+using Core.Erp.Bus.Reportes.Inventario;
+using Core.Erp.Info.Reportes.Inventario;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
@@ -447,6 +449,45 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_producto_lst(int IdSucursal = 0 , int IdBodega = 0)
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            List<decimal> lst_producto = new List<decimal>();
+            INV_008_Bus bus_inventario = new INV_008_Bus();
+            List<INV_008_Info> model_ = bus_inventario.get_list(IdEmpresa, IdSucursal, IdBodega, true, lst_producto);
+            cargar_combos(model);
+            return PartialView("_GridViewPartial_producto_lst", model_);
+        }
+    }
+
+
+    public class decimal_list
+    {
+        public List<INV_008_Info> get_list()
+        {
+            if (HttpContext.Current.Session["ct_cbtecble_det_Info"] == null)
+            {
+                List<INV_008_Info> list = new List<INV_008_Info>();
+
+                HttpContext.Current.Session["INV_008_Info"] = list;
+            }
+            return (List<INV_008_Info>)HttpContext.Current.Session["INV_008_Info"];
+        }
+
+        public void set_list(List<INV_008_Info> list)
+        {
+            HttpContext.Current.Session["INV_008_Info"] = list;
+        }
+
+
+        public void DeleteRow(int IdSucursal)
+        {
+            List<INV_008_Info> list = get_list();
+            list.Remove(list.Where(m => m.IdSucursal == IdSucursal).First());
         }
     }
 }

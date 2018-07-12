@@ -28,14 +28,14 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdSucursal">Sucursal</label>
                             @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
                             @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdBodega">Bodega</label>
                             @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodega" })
@@ -44,14 +44,29 @@
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="mostrar_saldos_en_0">@Html.CheckBoxFor(q=>q.mostrar_saldos_en_0) Mostrar saldos en 0</label>
+                            <label for="mostrar_saldos_en_0">@Html.CheckBoxFor(q => q.mostrar_saldos_en_0) Mostrar saldos en 0</label>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.Action("GridViewPartial_producto_lst")
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <!-- /.box-body -->
         </div>
-    </div>
+        </div>
 
     <div class="box">
         <div class="box-header with-border">
