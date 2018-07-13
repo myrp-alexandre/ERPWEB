@@ -278,6 +278,7 @@
     <Compile Include="Areas\CuentasPorPagar\CuentasPorPagarAreaRegistration.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ClienteController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ClienteTipoController.cs" />
+    <Compile Include="Areas\Facturacion\Controllers\ProformaController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\PuntoVentaController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\TerminoPagoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\TipoNotaController.cs" />
@@ -8653,7 +8654,7 @@
     <Content Include="Areas\Inventario\Views\TransferenciasInventario\_CmbProducto_TransferenciaInventario.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\_CmbProducto_Inventario.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\_GridViewPartial_producto_lst.cshtml" />
-    <Content Include="Areas\Inventario\Views\DistribucionPorLote\NuevoLote.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Proforma\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />
@@ -8765,6 +8766,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
