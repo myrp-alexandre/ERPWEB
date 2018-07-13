@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.Banco.ba_Cbte_Ban_Info
 @{
-    ViewBag.Title = "Anular cheque";
+    ViewBag.Title = "Modificar crédito";
     Layout = "~/Views/Shared/_Layout.cshtml";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
@@ -14,60 +14,24 @@
         $('#cb_Fecha').datepicker({
             autoclose: true
         })
+        $("#IdBanco").change(function () {
+            armar_diario();
+        });
+        $("#IdTipoNota").change(function () {
+            armar_diario();
+        });
     });
     var selectedIDs;
-    function OnBeginCallback(s, e) {
-        e.customArgs["IdTipo_Persona"] = $("#IdTipo_Persona").val();
-        e.customArgs["Entidad"] = IdEntidad.GetValue();
-        e.customArgs["selectedIDs"] = selectedIDs;
-    }
-    function OnSelectionChanged(s, e) {
-        s.GetSelectedFieldValues("IdOrdenPago_op", GetSelectedFieldValuesCallback);
-    }
-    function GetSelectedFieldValuesCallback(values) {
-        //Capture all selected keys
-        selectedIDs = values.join(',');
-    }
-    function MostrarModal() {
-        selectedIDs = "";
-        GridView_cheque_op_x_cruzar.PerformCallback();
-        GridView_cheque_op_x_cruzar.UnselectRows();
-        $("#OpModal").modal("show");
-    }
-
-    function AddOP() {
-        var datos = {
-            IDs: selectedIDs
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("EditingAddNew", "ChequeBanco",new { Area = "Banco"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-            },
-            error: function (error) {
-            }
-        });
-        selectedIDs = "";
-        GridView_cheque_op_x_cruzar.PerformCallback();
-        GridView_cheque_op_x_cruzar.UnselectRows();
-        GridView_cheque_op.PerformCallback();
-        $("#OpModal").modal("hide");
-    }
 
     function armar_diario() {
         var datos = {
-            IdBanco: $("#IdBanco").val()
+            IdBanco: $("#IdBanco").val(),
+            IdTipoNota : $("#IdTipoNota").val()
         }
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("armar_diario", "ChequeBanco",new { Area = "Banco"})',
+            url: '@Url.Action("armar_diario", "NotaDeCreditoBanco",new { Area = "Banco"})',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -82,75 +46,45 @@
         });
     }
 
-    function vaciar_detalles() {
+    function GetValorTotal() {
         var datos = {
         }
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("vaciar_detalle", "ChequeBanco",new { Area = "Banco"})',
+            url: '@Url.Action("GetValorTotal", "NotaDeCreditoBanco",new { Area = "Banco"})',
             async: false,
             bDeferRender: true,
             bProcessing: true,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
+                $("#cb_Valor").val(data);
             },
             error: function (error) {
             }
         });
-        GridView_comprobante_detalle.PerformCallback();
-        GridView_cheque_op.PerformCallback();
     }
 
-    function GetNumCheque() {
-        var datos = {
-            IdBanco: $("#IdBanco").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetNumCheque", "ChequeBanco",new { Area = "Banco"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                $("#cb_Cheque").val(data);
-            },
-            error: function (error) {
-            }
-        });
-    }
+
 </script>
 
-@using (Html.BeginForm("Anular", "ChequeBanco", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Modificar", "NotaDeCreditoBanco", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdTipocbte)
     @Html.HiddenFor(q => q.IdCbteCble)
-    @Html.HiddenFor(q => q.cb_Cheque)
     @Html.HiddenFor(q => q.IdBanco)
-    <div class="modal fade" id="OpModal" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Ordenes de pago</h4>
-                </div>
-                <div class="modal-body">
-                    @Html.Action("GridViewPartial_cheque_op_x_cruzar")
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="AddOP();">Aceptar</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
 
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
         </div>
-    </div>
+
+    }
 
     <div class="row">
         <div class="col-md-12">
@@ -161,7 +95,14 @@
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-offset-7 col-md-2">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdTipoNota">Tipo de nota:*</label>
+                    @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_tipo_nota, "IdTipoNota", "Descripcion"), new { @class = "form-control", @id = "IdTipoNota" })
+                    @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-4 col-md-2">
                 <div class="form-group">
                     <label for="cb_Fecha">Fecha:*</label>
                     <div class="input-group date">
@@ -176,98 +117,53 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdBanco">Cuenta bancaria:*</label>
+                    @Html.DropDownListFor(q => q.IdBanco, new SelectList(ViewBag.lst_banco_cuenta, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2 col-md-offset-4">
+                <div class="form-group">
+                    <label for="cb_Valor">Valor</label>
+                    @Html.TextBoxFor(q => q.cb_Valor, new { @id = "cb_Valor", @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="cb_Observacion">Observación</label>
+                    @Html.TextAreaFor(q => q.cb_Observacion, new { @id = "cb_Valor", @class = "form-control", @rows = 3 })
+                    @Html.ValidationMessageFor(q => q.cb_Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
-                <a href="#tab_cheque" aria-controls="facturas" role="tab" data-toggle="tab">Datos del cheque</a>
-            </li>
-            <li>
-                <a href="#tab_op" aria-controls="vales" role="tab" data-toggle="tab">Ordenes de pago</a>
-            </li>
-            <li>
                 <a href="#tab_diario" aria-controls="vales" role="tab" data-toggle="tab">Diario</a>
             </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
-            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_cheque">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="IdBanco">Cuenta bancaria:*</label>
-                            @Html.DropDownListFor(q => q.IdBanco, new SelectList(ViewBag.lst_banco_cuenta, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco", @disabled = "disabled" })
-                            @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-offset-2 col-md-2">
-                        <div class="form-group">
-                            <label for="cb_Cheque"># Cheque:*</label>
-                            @Html.TextBoxFor(q => q.cb_Cheque, new { @class = "form-control", @id = "cb_Cheque", @readonly = "readonly" })
-                            @Html.ValidationMessageFor(q => q.cb_Cheque, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="cb_Valor">Valor</label>
-                            @Html.TextBoxFor(q => q.cb_Valor, new { @id = "cb_Valor", @class = "form-control", @readonly = "readonly" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="cb_ciudadChq">Ciudad:*</label>
-                            @Html.DropDownListFor(q => q.cb_ciudadChq, new SelectList(ViewBag.lst_ciudad, "IdCiudad", "Descripcion_Ciudad"), new { @class = "form-control", @id = "cb_ciudadChq" })
-                            @Html.ValidationMessageFor(q => q.cb_ciudadChq, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="form-group">
-                            <label for="cb_giradoA">Girado a:*</label>
-                            @Html.TextBoxFor(q => q.cb_giradoA, new { @class = "form-control", @id = "cb_giradoA" })
-                            @Html.ValidationMessageFor(q => q.cb_giradoA, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_op">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="IdTipo_Persona">Tipo persona:*</label>
-                            @Html.DropDownListFor(q => q.IdTipo_Persona, new SelectList(ViewBag.lst_tipo_personas, "Key", "Value"), new { @class = "form-control", @id = "IdTipo_Persona" })
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="form-group">
-                            <label for="IdEntidad">Beneficiario:*</label>
-                            @Html.Partial("_CmbPersona_ChequeBanco", Model)
-                            @Html.ValidationMessageFor(q => q.IdEntidad, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-primary" id="btn_buscar_op" onclick="MostrarModal();">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <br />
-                @Html.Action("GridViewPartial_cheque_op")
-            </div>
-
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_diario">
-                @Html.Action("GridViewPartial_comprobante_detalle", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_diario">
+                @Html.Action("GridViewPartial_comprobante_detalle_Credito", new { Area = "Banco", Controller = "NotaDeCreditoBanco" })
             </div>
         </div>
     </div>
 
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
-        <a class="btn btn-default" href="@Url.Action("Index", "ChequeBanco", new { Area = "Banco" }, null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index", "NotaDeCreditoBanco", new { Area = "Banco" }, null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

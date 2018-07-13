@@ -6,6 +6,7 @@ using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Areas.Contabilidad.Controllers;
 using Core.Erp.Web.Helps;
+using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -146,6 +147,63 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult Modificar(ba_Cbte_Ban_Info model)
+        {
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
+            if (!bus_cbteban.modificarDB(model, cl_enumeradores.eTipoCbteBancario.NCBA))
+            {
+                ViewBag.mensaje = "No se pudo modificar el registro";
+                cargar_combos();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Modificar(int IdTipocbte = 0, decimal IdCbteCble = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            List_ct.set_list(model.lst_det_ct);
+            cargar_combos();
+            SessionFixed.TipoPersona = model.IdTipo_Persona;
+            return View(model);
+        }
+
+        public ActionResult Anular(int IdTipocbte = 0, decimal IdCbteCble = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            List_ct.set_list(model.lst_det_ct);
+            cargar_combos();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Anular(ba_Cbte_Ban_Info model)
+        {
+            if (!bus_cbteban.anularDB(model))
+            {
+                ViewBag.mensaje = "No se pudo anular el registro";
+                cargar_combos();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+
         #region Json
         public JsonResult GetValorTotal()
         {
@@ -198,5 +256,55 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return Json(0, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        #region Detalle del diario
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_comprobante_detalle_Credito(int IdTipoCbte = 0, decimal IdCbteCble = 0)
+        {
+            ct_cbtecble_Info model = new ct_cbtecble_Info();
+            model.lst_ct_cbtecble_det = List_ct.get_list();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_comprobante_detalle_Credito", model);
+        }
+
+        private void cargar_combos_detalle()
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
+            var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
+            ViewBag.lst_cuentas = lst_cuentas;
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_ct.AddRow(info_det);
+            ct_cbtecble_Info model = new ct_cbtecble_Info();
+            model.lst_ct_cbtecble_det = List_ct.get_list();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_comprobante_detalle_Credito", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_ct.UpdateRow(info_det);
+            ct_cbtecble_Info model = new ct_cbtecble_Info();
+            model.lst_ct_cbtecble_det = List_ct.get_list();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_comprobante_detalle_Credito", model);
+        }
+
+        public ActionResult EditingDelete(int secuencia)
+        {
+            List_ct.DeleteRow(secuencia);
+            ct_cbtecble_Info model = new ct_cbtecble_Info();
+            model.lst_ct_cbtecble_det = List_ct.get_list();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_comprobante_detalle_Credito", model);
+        }
     }
+    #endregion
 }
