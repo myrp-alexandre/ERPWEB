@@ -3,8 +3,8 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridView_proforma";
-        settings.CallbackRouteValues = new { Controller = "Proforma", Action = "GridViewPartial_proforma" };
+    settings.Name = "GridView_proforma";
+    settings.CallbackRouteValues = new { Controller = "Proforma", Action = "GridViewPartial_proforma" , IdSucursal = ViewBag.IdSucursal };
         settings.KeyFieldName = "IdProforma";
         settings.Width = Unit.Percentage(100);
 
@@ -61,8 +61,8 @@
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdProforma = DataBinder.Eval(tc.DataItem, "IdProforma") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdProforma = DataBinder.Eval(tc.DataItem, "IdProforma") },
+                Html.ActionLink("Modificar", "Modificar", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdProforma = DataBinder.Eval(tc.DataItem, "IdProforma") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdProforma = DataBinder.Eval(tc.DataItem, "IdProforma") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -70,18 +70,19 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdSucursal = ViewBag.IdSucursal }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = Unit.Pixel(100);
+            c.Width = Unit.Pixel(150);
         });
-        
-        settings.Columns.Add("pf_codigo", "Código").Width = Unit.Percentage(5);
-        settings.Columns.Add("pf_observacion", "Observación").Width = Unit.Percentage(5);
-        settings.Columns.Add("pf_fecha", "Fecha").Width = Unit.Percentage(5);
-        settings.Columns.Add("pf_fecha_vcto", "Fecha vencimiento").Width = Unit.Percentage(5);
+
+        settings.Columns.Add("IdProforma", "ID").Width = Unit.Percentage(5);
+        settings.Columns.Add("pf_codigo", "Código").Width = Unit.Percentage(8);
+        settings.Columns.Add("pf_observacion", "Observación").Width = Unit.Percentage(20);
+        settings.Columns.Add("pf_fecha", "Fecha").Width = Unit.Percentage(20);
+        settings.Columns.Add("pf_fecha_vcto", "Fecha vencimiento").Width = Unit.Percentage(20);
         settings.Columns.Add("estado", "Estado").Width = Unit.Percentage(5);
     });
 }

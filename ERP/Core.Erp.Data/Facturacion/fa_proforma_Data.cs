@@ -171,6 +171,7 @@ namespace Core.Erp.Data.Facturacion
 
                     Entity.IdUsuario_modificacion = info.IdUsuario_modificacion;
                     Entity.fecha_modificacion = DateTime.Now;
+                    Context.SaveChanges();
                 }
                 return true;
             }
@@ -194,6 +195,8 @@ namespace Core.Erp.Data.Facturacion
 
                     Entity.IdUsuario_anulacion = info.IdUsuario_anulacion;
                     Entity.fecha_anulacion = DateTime.Now;
+                    Context.SaveChanges();
+
                 }
                 return true;
             }
