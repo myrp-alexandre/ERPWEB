@@ -218,8 +218,8 @@
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="MotivoAnula" Type="varchar" MaxLength="200" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consulta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consulta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwfa_cliente_consulta">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -866,8 +866,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consulta' d
           <Property Name="anulado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="fa_proforma" Relationship="Model_facturacion.FK_fa_proforma_det_fa_proforma" FromRole="fa_proforma_det" ToRole="fa_proforma" />
         </EntityType>
-          <NavigationProperty Name="fa_TerminoPago" Relationship="Model_facturacion.FK_fa_proforma_fa_TerminoPago" FromRole="fa_proforma" ToRole="fa_TerminoPago" />
-          <NavigationProperty Name="fa_Vendedor" Relationship="Model_facturacion.FK_fa_proforma_fa_Vendedor" FromRole="fa_proforma" ToRole="fa_Vendedor" />
         <Association Name="FK_fa_proforma_fa_cliente">
           <End Type="Model_facturacion.fa_cliente" Role="fa_cliente" Multiplicity="1" />
           <End Type="Model_facturacion.fa_proforma" Role="fa_proforma" Multiplicity="*" />
@@ -1131,7 +1129,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consulta' d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-
           <EntitySetMapping Name="fa_proforma_det">
             <EntityTypeMapping TypeName="Model_facturacion.fa_proforma_det">
               <MappingFragment StoreEntitySet="fa_proforma_det">
