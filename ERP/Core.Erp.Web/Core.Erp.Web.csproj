@@ -284,6 +284,7 @@
     <Compile Include="Areas\Facturacion\Controllers\TipoNotaController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\VendedorController.cs" />
     <Compile Include="Areas\Facturacion\FacturacionAreaRegistration.cs" />
+    <Compile Include="Areas\Facturacion\ProformaController.cs" />
     <Compile Include="Areas\General\Controllers\BancoController.cs" />
     <Compile Include="Areas\General\Controllers\BodegaController.cs" />
     <Compile Include="Areas\General\Controllers\CatalogoController.cs" />
@@ -8726,6 +8727,7 @@
     <Folder Include="Areas\CuentasPorCobrar\Models\" />
     <Folder Include="Areas\CuentasPorPagar\Models\" />
     <Folder Include="Areas\Facturacion\Models\" />
+    <Folder Include="Areas\Facturacion\Views\Proforma\" />
     <Folder Include="Areas\General\Models\" />
     <Folder Include="Areas\Importacion\Controllers\" />
     <Folder Include="Areas\Importacion\Models\" />

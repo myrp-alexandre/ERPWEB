@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Data.Facturacion
 {
-    public class fa_proforma_Data
+  public  class fa_proforma_Data
     {
          public List<fa_proforma_Info> get_list(int IdEmpresa)
         {

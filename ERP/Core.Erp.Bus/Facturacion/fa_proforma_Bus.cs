@@ -8,7 +8,12 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Facturacion
 {
+<<<<<<< HEAD
     public class fa_proforma_Bus
+=======
+
+   public class fa_proforma_Bus
+>>>>>>> d48486dbb832b297423c151b4a617e6d97b8fd84
     {
         fa_proforma_Data odata = new fa_proforma_Data();
     
