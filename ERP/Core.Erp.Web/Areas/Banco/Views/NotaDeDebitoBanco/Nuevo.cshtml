@@ -17,6 +17,9 @@
         $("#IdBanco").change(function () {
             armar_diario();
         });
+        $("#IdTipoNota").change(function () {
+            armar_diario();
+        });
         armar_diario();
     });
     var selectedIDs;
@@ -67,7 +70,7 @@
     function armar_diario() {
         var datos = {
             IdBanco: $("#IdBanco").val(),
-            IdTipoNota = $("#IdTipoNota").val()
+            IdTipoNota : $("#IdTipoNota").val()
         }
         $.ajax({
             type: 'POST',

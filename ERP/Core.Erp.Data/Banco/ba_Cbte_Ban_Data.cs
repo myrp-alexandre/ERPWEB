@@ -43,6 +43,7 @@ namespace Core.Erp.Data.Banco
                                  Su_Descripcion = q.Su_Descripcion,
                                  cb_Cheque = q.cb_Cheque,
                                  cb_giradoA = q.cb_giradoA,
+                                 cb_Valor = q.cb_Valor
                              }).ToList();
                 }
 

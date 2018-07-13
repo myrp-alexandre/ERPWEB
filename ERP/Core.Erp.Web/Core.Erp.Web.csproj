@@ -8660,6 +8660,7 @@
     <Content Include="Areas\Facturacion\Views\Proforma\Modificar.cshtml" />
     <Content Include="Areas\Facturacion\Views\Proforma\Anular.cshtml" />
     <Content Include="Areas\Facturacion\Views\Proforma\_CmbCliente_Proforma.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_GridViewPartial_comprobante_detalle.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />

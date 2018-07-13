@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.Helps.cl_filtros_Info
 @{
-    ViewBag.Title = "Cheques";
+    ViewBag.Title = "Notas de crédito";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -8,7 +8,7 @@
     Layout = "~/Views/Layout/_LayoutConsulta.cshtml";
 }
 
-@using (Html.BeginForm("Index", "ChequeBanco", FormMethod.Post, new { @role = "form", @class = "form" }))
+@using (Html.BeginForm("Index", "NotaDeCreditoBanco", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     <div class="box collapsed-box">
         <div class="box-header with-border">
@@ -81,7 +81,7 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_cheque", new { Fecha_ini = Model.fecha_ini, Fecha_fin = Model.fecha_fin, IdSucursal = Model.IdSucursal })
+            @Html.Action("GridViewPartial_CreditoBanco", new { Fecha_ini = Model.fecha_ini, Fecha_fin = Model.fecha_fin, IdSucursal = Model.IdSucursal })
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

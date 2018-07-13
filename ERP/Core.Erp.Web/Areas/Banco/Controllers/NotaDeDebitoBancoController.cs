@@ -131,6 +131,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return true;
         }
         #endregion
+
         #region Index
         public ActionResult Index()
         {
