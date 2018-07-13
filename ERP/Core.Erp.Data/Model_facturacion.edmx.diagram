@@ -23,10 +23,15 @@
         <AssociationConnector Association="Model_facturacion.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_Vendedor" />
         <EntityTypeShape EntityType="Model_facturacion.fa_TerminoPago_Distribucion" Width="1.5" PointX="5.625" PointY="15" />
         <AssociationConnector Association="Model_facturacion.FK_fa_TerminoPago_Distribucion_fa_TerminoPago" />
+<<<<<<< HEAD
         <EntityTypeShape EntityType="Model_facturacion.fa_proforma" Width="1.5" PointX="12.875" PointY="4.125" />
         <EntityTypeShape EntityType="Model_facturacion.fa_proforma_det" Width="1.5" PointX="15.125" PointY="5" />
         <AssociationConnector Association="Model_facturacion.FK_fa_proforma_fa_cliente" />
         <AssociationConnector Association="Model_facturacion.FK_fa_proforma_det_fa_proforma" />
+=======
+        <EntityTypeShape EntityType="Model_facturacion.fa_proforma" Width="1.5" PointX="12.875" PointY="4.25" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_proforma_fa_cliente" />
+>>>>>>> 90c244d701f8a6b27799294ef8a138155e63b258
         <AssociationConnector Association="Model_facturacion.FK_fa_proforma_fa_TerminoPago" />
         <AssociationConnector Association="Model_facturacion.FK_fa_proforma_fa_Vendedor" />
       </Diagram>

@@ -120,6 +120,7 @@
           <Property Name="pf_atencion_a" Type="varchar" MaxLength="500" />
           <Property Name="pr_dias_entrega" Type="int" Nullable="false" />
         </EntityType>
+<<<<<<< HEAD
         <EntityType Name="fa_proforma_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -144,6 +145,8 @@
           <Property Name="pd_total" Type="float" Nullable="false" />
           <Property Name="anulado" Type="bit" Nullable="false" />
         </EntityType>
+=======
+>>>>>>> 90c244d701f8a6b27799294ef8a138155e63b258
         <EntityType Name="fa_PuntoVta">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -218,8 +221,8 @@
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="MotivoAnula" Type="varchar" MaxLength="200" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consulta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consulta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwfa_cliente_consulta">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -319,6 +322,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
             </Dependent>
           </ReferentialConstraint>
         </Association>
+<<<<<<< HEAD
         <Association Name="FK_fa_proforma_det_fa_proforma">
           <End Role="fa_proforma" Type="Self.fa_proforma" Multiplicity="1" />
           <End Role="fa_proforma_det" Type="Self.fa_proforma_det" Multiplicity="*" />
@@ -335,6 +339,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
             </Dependent>
           </ReferentialConstraint>
         </Association>
+=======
+>>>>>>> 90c244d701f8a6b27799294ef8a138155e63b258
         <Association Name="FK_fa_proforma_fa_cliente">
           <End Role="fa_cliente" Type="Self.fa_cliente" Multiplicity="1" />
           <End Role="fa_proforma" Type="Self.fa_proforma" Multiplicity="*" />
@@ -394,7 +400,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
           <EntitySet Name="fa_cliente_x_fa_Vendedor_x_sucursal" EntityType="Self.fa_cliente_x_fa_Vendedor_x_sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_formaPago" EntityType="Self.fa_formaPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_proforma" EntityType="Self.fa_proforma" Schema="dbo" store:Type="Tables" />
+<<<<<<< HEAD
           <EntitySet Name="fa_proforma_det" EntityType="Self.fa_proforma_det" Schema="dbo" store:Type="Tables" />
+=======
+>>>>>>> 90c244d701f8a6b27799294ef8a138155e63b258
           <EntitySet Name="fa_PuntoVta" EntityType="Self.fa_PuntoVta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_TerminoPago" EntityType="Self.fa_TerminoPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_TerminoPago_Distribucion" EntityType="Self.fa_TerminoPago_Distribucion" Schema="dbo" store:Type="Tables" />
@@ -436,10 +445,13 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
             <End Role="fa_Vendedor" EntitySet="fa_Vendedor" />
             <End Role="fa_cliente_x_fa_Vendedor_x_sucursal" EntitySet="fa_cliente_x_fa_Vendedor_x_sucursal" />
           </AssociationSet>
+<<<<<<< HEAD
           <AssociationSet Name="FK_fa_proforma_det_fa_proforma" Association="Self.FK_fa_proforma_det_fa_proforma">
             <End Role="fa_proforma" EntitySet="fa_proforma" />
             <End Role="fa_proforma_det" EntitySet="fa_proforma_det" />
           </AssociationSet>
+=======
+>>>>>>> 90c244d701f8a6b27799294ef8a138155e63b258
           <AssociationSet Name="FK_fa_proforma_fa_cliente" Association="Self.FK_fa_proforma_fa_cliente">
             <End Role="fa_cliente" EntitySet="fa_cliente" />
             <End Role="fa_proforma" EntitySet="fa_proforma" />
@@ -502,15 +514,21 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
             <End Role="fa_TerminoPago_Distribucion" EntitySet="fa_TerminoPago_Distribucion" />
           </AssociationSet>
           <EntitySet Name="fa_proforma" EntityType="Model_facturacion.fa_proforma" />
+<<<<<<< HEAD
           <EntitySet Name="fa_proforma_det" EntityType="Model_facturacion.fa_proforma_det" />
+=======
+>>>>>>> 90c244d701f8a6b27799294ef8a138155e63b258
           <AssociationSet Name="FK_fa_proforma_fa_cliente" Association="Model_facturacion.FK_fa_proforma_fa_cliente">
             <End Role="fa_cliente" EntitySet="fa_cliente" />
             <End Role="fa_proforma" EntitySet="fa_proforma" />
           </AssociationSet>
+<<<<<<< HEAD
           <AssociationSet Name="FK_fa_proforma_det_fa_proforma" Association="Model_facturacion.FK_fa_proforma_det_fa_proforma">
             <End Role="fa_proforma" EntitySet="fa_proforma" />
             <End Role="fa_proforma_det" EntitySet="fa_proforma_det" />
           </AssociationSet>
+=======
+>>>>>>> 90c244d701f8a6b27799294ef8a138155e63b258
           <AssociationSet Name="FK_fa_proforma_fa_TerminoPago" Association="Model_facturacion.FK_fa_proforma_fa_TerminoPago">
             <End Role="fa_TerminoPago" EntitySet="fa_TerminoPago" />
             <End Role="fa_proforma" EntitySet="fa_proforma" />
@@ -837,6 +855,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
           <Property Name="pf_atencion_a" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="pr_dias_entrega" Type="Int32" Nullable="false" />
           <NavigationProperty Name="fa_cliente" Relationship="Model_facturacion.FK_fa_proforma_fa_cliente" FromRole="fa_proforma" ToRole="fa_cliente" />
+<<<<<<< HEAD
           <NavigationProperty Name="fa_proforma_det" Relationship="Model_facturacion.FK_fa_proforma_det_fa_proforma" FromRole="fa_proforma" ToRole="fa_proforma_det" />
           <NavigationProperty Name="fa_TerminoPago" Relationship="Model_facturacion.FK_fa_proforma_fa_TerminoPago" FromRole="fa_proforma" ToRole="fa_TerminoPago" />
           <NavigationProperty Name="fa_Vendedor" Relationship="Model_facturacion.FK_fa_proforma_fa_Vendedor" FromRole="fa_proforma" ToRole="fa_Vendedor" />
@@ -866,6 +885,11 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
           <Property Name="anulado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="fa_proforma" Relationship="Model_facturacion.FK_fa_proforma_det_fa_proforma" FromRole="fa_proforma_det" ToRole="fa_proforma" />
         </EntityType>
+=======
+          <NavigationProperty Name="fa_TerminoPago" Relationship="Model_facturacion.FK_fa_proforma_fa_TerminoPago" FromRole="fa_proforma" ToRole="fa_TerminoPago" />
+          <NavigationProperty Name="fa_Vendedor" Relationship="Model_facturacion.FK_fa_proforma_fa_Vendedor" FromRole="fa_proforma" ToRole="fa_Vendedor" />
+        </EntityType>
+>>>>>>> 90c244d701f8a6b27799294ef8a138155e63b258
         <Association Name="FK_fa_proforma_fa_cliente">
           <End Type="Model_facturacion.fa_cliente" Role="fa_cliente" Multiplicity="1" />
           <End Type="Model_facturacion.fa_proforma" Role="fa_proforma" Multiplicity="*" />
@@ -880,6 +904,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
             </Dependent>
           </ReferentialConstraint>
         </Association>
+<<<<<<< HEAD
         <Association Name="FK_fa_proforma_det_fa_proforma">
           <End Type="Model_facturacion.fa_proforma" Role="fa_proforma" Multiplicity="1" />
           <End Type="Model_facturacion.fa_proforma_det" Role="fa_proforma_det" Multiplicity="*" />
@@ -896,6 +921,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
             </Dependent>
           </ReferentialConstraint>
         </Association>
+=======
+>>>>>>> 90c244d701f8a6b27799294ef8a138155e63b258
         <Association Name="FK_fa_proforma_fa_TerminoPago">
           <End Type="Model_facturacion.fa_TerminoPago" Role="fa_TerminoPago" Multiplicity="1" />
           <End Type="Model_facturacion.fa_proforma" Role="fa_proforma" Multiplicity="*" />
@@ -1129,6 +1156,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+<<<<<<< HEAD
           <EntitySetMapping Name="fa_proforma_det">
             <EntityTypeMapping TypeName="Model_facturacion.fa_proforma_det">
               <MappingFragment StoreEntitySet="fa_proforma_det">
@@ -1151,6 +1179,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+=======
+>>>>>>> 90c244d701f8a6b27799294ef8a138155e63b258
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

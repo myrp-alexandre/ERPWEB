@@ -4,6 +4,11 @@
 //
 //     Los cambios manuales en este archivo pueden causar un comportamiento inesperado de la aplicación.
 //     Los cambios manuales en este archivo se sobrescribirán si se regenera el código.
+
+//     This code was generated from a template.
+//
+//     Manual changes to this file may cause unexpected behavior in your application.
+//     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
 

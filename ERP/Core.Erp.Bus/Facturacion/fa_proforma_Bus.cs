@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Facturacion
 {
+
    public class fa_proforma_Bus
+    class fa_proforma_Bus
     {
     }
 }
