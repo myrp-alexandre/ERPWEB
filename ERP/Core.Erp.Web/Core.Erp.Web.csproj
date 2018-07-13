@@ -284,7 +284,6 @@
     <Compile Include="Areas\Facturacion\Controllers\TipoNotaController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\VendedorController.cs" />
     <Compile Include="Areas\Facturacion\FacturacionAreaRegistration.cs" />
-    <Compile Include="Areas\Facturacion\ProformaController.cs" />
     <Compile Include="Areas\General\Controllers\BancoController.cs" />
     <Compile Include="Areas\General\Controllers\BodegaController.cs" />
     <Compile Include="Areas\General\Controllers\CatalogoController.cs" />
