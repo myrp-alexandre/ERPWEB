@@ -262,7 +262,6 @@ namespace Core.Erp.Data.Inventario
             }
         }
 
-
         private int get_id(int IdEmpresa, int IdSucursal, int IdMovi_inven_tipo, decimal IdNumMovi)
         {
             try

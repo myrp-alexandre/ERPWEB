@@ -8653,6 +8653,7 @@
     <Content Include="Areas\Inventario\Views\TransferenciasInventario\_CmbProducto_TransferenciaInventario.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\_CmbProducto_Inventario.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\_GridViewPartial_producto_lst.cshtml" />
+    <Content Include="Areas\Inventario\Views\DistribucionPorLote\NuevoLote.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />

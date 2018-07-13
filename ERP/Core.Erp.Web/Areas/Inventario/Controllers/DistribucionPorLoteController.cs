@@ -33,15 +33,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return View(model);
         }
 
-        private bool validar(in_Ing_Egr_Inven_distribucion_Info i_validar, ref string msg)
-        {
-            if (i_validar.lst_distribuido.Count == 0)
-            {
-                mensaje = "Debe ingresar al menos un producto";
-                return false;
-            }
-            return true;
-        }
+       
         [ValidateInput(false)]
         public ActionResult GridViewPartial_distribuion(DateTime? fecha_ini, DateTime? fecha_fin)
         {
@@ -136,12 +128,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             bus_ing_inv = new in_Ing_Egr_Inven_distribucion_Bus();
             model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
             model.lst_x_distribuir = Session["lst_x_distribuir"] as List<in_Ing_Egr_Inven_distribucion_Info>;
-            if (!validar(model, ref mensaje))
-            {
-                cargar_combos();
-                ViewBag.mensaje = mensaje;
-                return View(model);
-            }
+          
             model.IdUsuario = Session["IdUsuario"].ToString();
             model.IdEmpresa =Convert.ToInt32( SessionFixed.IdEmpresa);
             if (!bus_ing_inv.guardarDB(model))

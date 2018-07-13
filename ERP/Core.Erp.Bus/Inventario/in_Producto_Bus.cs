@@ -110,6 +110,29 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
+        public bool guardar_loteDB(int IdEmpresa, decimal IdProducto_padre, DateTime fecha_fab, DateTime fecha_ven, string lote)
+        {
+            try
+            {
+                in_Producto_Info info_new_lote = new in_Producto_Info();
+                info_new_lote = odata.get_info(IdEmpresa, IdProducto_padre);
+                if(info_new_lote!=null)
+                {
+                    info_new_lote.IdProducto_padre = info_new_lote.IdProducto;
+                    info_new_lote.lote_fecha_fab = fecha_fab;
+                    info_new_lote.lote_fecha_vcto = fecha_ven;
+                    info_new_lote.lote_num_lote = lote;
+                    info_new_lote.Estado = "A";
+                    info_new_lote.Fecha_Transac = DateTime.Now;
+                }
+                return odata.guardarDB(info_new_lote);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool modificarDB(in_Producto_Info info)
         {
             try

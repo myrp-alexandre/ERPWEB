@@ -191,7 +191,18 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var resultado = bus_producto.get_info(IdEmpresa, IdProducto);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
-        }        
+        }
+        public JsonResult Guardar_lote(DateTime?  fecha_fab, DateTime? fecha_ven, string lote="")
+        {
+            decimal IdProducto_padre = 0;
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            if (Session["IdProducto_padre"] != null)
+            {
+               IdProducto_padre = Convert.ToDecimal(Session["IdProducto_padre"]);
+            }
+            bus_producto.guardar_loteDB(IdEmpresa, IdProducto_padre,Convert.ToDateTime( fecha_fab),Convert.ToDateTime( fecha_ven), lote);
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         private void cargar_combos()
