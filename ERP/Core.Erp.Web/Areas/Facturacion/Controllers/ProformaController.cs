@@ -49,8 +49,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.CLIENTE.ToString());
         }
         #endregion
-
-
+        
+        #region acciones
         private bool validar(fa_proforma_Info i_validar, ref string msg)
         {
             i_validar.IdEntidad = i_validar.IdCliente;
@@ -83,9 +83,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 pf_fecha = DateTime.Now,
                 pf_fecha_vcto = DateTime.Now
-        };
-        cargar_combos();
-        return View(model);
+            };
+            cargar_combos();
+            return View(model);
         }
 
         [HttpPost]
@@ -107,11 +107,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdSucursal = 0 , decimal IdProforma = 0)
+        public ActionResult Modificar(int IdSucursal = 0, decimal IdProforma = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             fa_proforma_Info model = bus_proforma.get_info(IdEmpresa, IdSucursal, IdProforma);
-                if(model == null)
+            if (model == null)
                 return RedirectToAction("Index");
             model.IdEntidad = model.IdCliente;
             cargar_combos();
@@ -160,5 +160,32 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             };
             return RedirectToAction("Index");
         }
+        #endregion
+
+        #region json
+        public JsonResult get_info_termino_pago(string IdTerminoPago = "")
+        {
+            fa_TerminoPago_Bus bus_termino_pago = new fa_TerminoPago_Bus();
+            var resultado = bus_termino_pago.get_info(IdTerminoPago);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult get_info_cliente(decimal IdCliente = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
+            fa_cliente_Info resultado = bus_cliente.get_info(IdEmpresa, IdCliente);
+            if (resultado == null)
+                resultado = new fa_cliente_Info();
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+
+        #endregion
+
+
+
     }
 }

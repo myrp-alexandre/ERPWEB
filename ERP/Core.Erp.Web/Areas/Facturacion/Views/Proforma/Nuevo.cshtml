@@ -24,7 +24,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdTerminoPago">Termino pago*</label>
-                    @Html.DropDownListFor(q => q.IdTerminoPago, new SelectList(ViewBag.lst_pago, "IdTerminoPago", "nom_TerminoPago"), new { @class = "form-control" })
+                    @Html.DropDownListFor(q => q.IdTerminoPago, new SelectList(ViewBag.lst_pago, "IdTerminoPago", "nom_TerminoPago"), new { @class = "form-control" , @id="IdTerminoPago"})
                     @Html.ValidationMessageFor(q => q.IdTerminoPago, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -74,21 +74,21 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="pf_atencion_a">Atención a</label>
-                    @Html.TextBoxFor(q => q.pf_atencion_a, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.pf_atencion_a, new { @class = "form-control", @id = "pf_atencion_a" })
                     @Html.ValidationMessageFor(q => q.pf_atencion_a, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="pr_dias_entrega">Días de entrega*</label>
-                    @Html.TextBoxFor(q => q.pr_dias_entrega, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.pr_dias_entrega, new { @class = "form-control" , @id= "pr_dias_entrega" })
                     @Html.ValidationMessageFor(q => q.pr_dias_entrega, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="pf_plazo">Plazo*</label>
-                    @Html.TextBoxFor(q => q.pf_plazo, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.pf_plazo, new { @class = "form-control" ,@id= "pf_plazo"})
                     @Html.ValidationMessageFor(q => q.pf_plazo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -106,7 +106,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdVendedor">Vendedor*</label>
-                    @Html.DropDownListFor(q => q.IdVendedor, new SelectList(ViewBag.lst_vendedor, "IdVendedor", "Ve_Vendedor"), new { @class = "form-control" })
+                    @Html.DropDownListFor(q => q.IdVendedor, new SelectList(ViewBag.lst_vendedor, "IdVendedor", "Ve_Vendedor"), new { @class = "form-control" , @id="IdVendedor" })
                     @Html.ValidationMessageFor(q => q.IdVendedor, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -132,15 +132,79 @@
     }
 }
 <script>
-
-
     $(function () {
+        get_info_termino_pago();
+        get_info_cliente();
+
         //Date picker
         $('#pf_fecha').datepicker({
             autoclose: true
         })
         $('#pf_fecha_vcto').datepicker({
-            autoclose: true
+            autoclose: true    
         })
+        $("#IdTerminoPago").change(function () {
+            get_info_termino_pago();
+        });
+        $("#pf_plazo").change(function () {
+            get_info_termino_pago();
+        });
+        $("#pr_dias_entrega").change(function () {
+            get_info_termino_pago();
+        });
+        $("#pf_fecha_vcto").change(function () {
+            get_info_termino_pago();
+        });
+        $("#pf_atencion_a").change(function () {
+            get_info_cliente();
+        });
+        $("#IdVendedor").change(function () {
+            get_info_cliente();
+        });
+
     });
+
+        function get_info_termino_pago() {
+        var datos = {
+            IdTerminoPago: $("#IdTerminoPago").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("get_info_termino_pago", "Proforma",new { Area = "Facturacion"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                    $("#pf_plazo").val();
+                    $("#pr_dias_entrega").val();
+                    $("#pf_fecha_vcto").val();
+            },
+            error: function (error) {
+
+            }
+        });
+    }
+        function get_info_cliente() {
+            var tipo = IdCliente.GetValue();
+            
+            var datos = {
+                IdCliente: tipo
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("get_info_cliente", "Proforma",new { Area = "Facturacion"})',
+                async: false,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $("#pf_atencion_a").val();
+                    $("#IdVendedor").val();
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            });
+    }
 </script>
