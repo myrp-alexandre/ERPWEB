@@ -13,5 +13,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             return View();
         }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_proforma()
+        {
+            var model = new object[0];
+            return PartialView("_GridViewPartial_proforma", model);
+        }
     }
 }

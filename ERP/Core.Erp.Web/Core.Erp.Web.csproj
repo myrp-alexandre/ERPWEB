@@ -8656,6 +8656,7 @@
     <Content Include="Areas\Reportes\Views\InventarioReportes\_CmbProducto_Inventario.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\_GridViewPartial_producto_lst.cshtml" />
     <Content Include="Areas\Facturacion\Views\Proforma\Index.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Proforma\_GridViewPartial_proforma.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />
@@ -8727,7 +8728,6 @@
     <Folder Include="Areas\CuentasPorCobrar\Models\" />
     <Folder Include="Areas\CuentasPorPagar\Models\" />
     <Folder Include="Areas\Facturacion\Models\" />
-    <Folder Include="Areas\Facturacion\Views\Proforma\" />
     <Folder Include="Areas\General\Models\" />
     <Folder Include="Areas\Importacion\Controllers\" />
     <Folder Include="Areas\Importacion\Models\" />
