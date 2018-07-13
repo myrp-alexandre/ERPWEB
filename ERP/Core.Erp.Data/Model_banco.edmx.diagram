@@ -23,6 +23,7 @@
         <AssociationConnector Association="Model_banco.FK_ba_Cbte_Ban_ba_Catalogo" />
         <AssociationConnector Association="Model_banco.FK_ba_Cbte_Ban_ba_Catalogo1" />
         <AssociationConnector Association="Model_banco.FK_ba_Cbte_Ban_ba_tipo_nota" />
+        <EntityTypeShape EntityType="Model_banco.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar" Width="1.5" PointX="9.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

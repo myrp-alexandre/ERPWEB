@@ -179,6 +179,39 @@
           <Property Name="Estado" Type="char" MaxLength="1" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipocbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="tc_descripcion" />
+            <PropertyRef Name="cr_Valor" />
+            <PropertyRef Name="cm_fecha" />
+            <PropertyRef Name="tm_descripcion" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="IdCaja" />
+            <PropertyRef Name="ca_Descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipocbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="tc_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cr_Valor" Type="float" Nullable="false" />
+          <Property Name="cm_fecha" Type="datetime" Nullable="false" />
+          <Property Name="cm_observacion" Type="varchar(max)" />
+          <Property Name="tm_descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="cr_NumDocumento" Type="varchar" MaxLength="100" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
+          <Property Name="IdCaja" Type="int" Nullable="false" />
+          <Property Name="ca_Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwba_Cbte_Ban' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Cbte_Ban">
           <Key>
@@ -329,6 +362,25 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwba_Talonario_che
           <EntitySet Name="ba_parametros" EntityType="Self.ba_parametros" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ba_Talonario_cheques_x_banco" EntityType="Self.ba_Talonario_cheques_x_banco" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ba_tipo_nota" EntityType="Self.ba_tipo_nota" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar" EntityType="Self.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar].[IdEmpresa] AS [IdEmpresa], 
+    [vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar].[IdTipocbte] AS [IdTipocbte], 
+    [vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar].[IdCbteCble] AS [IdCbteCble], 
+    [vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar].[Secuencia] AS [Secuencia], 
+    [vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar].[tc_descripcion] AS [tc_descripcion], 
+    [vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar].[cr_Valor] AS [cr_Valor], 
+    [vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar].[cm_fecha] AS [cm_fecha], 
+    [vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar].[cm_observacion] AS [cm_observacion], 
+    [vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar].[tm_descripcion] AS [tm_descripcion], 
+    [vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar].[Estado] AS [Estado], 
+    [vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar].[cr_NumDocumento] AS [cr_NumDocumento], 
+    [vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar].[IdCtaCble] AS [IdCtaCble], 
+    [vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar].[IdCaja] AS [IdCaja], 
+    [vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar].[ca_Descripcion] AS [ca_Descripcion]
+    FROM [dbo].[vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar] AS [vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwba_Cbte_Ban" EntityType="Self.vwba_Cbte_Ban" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
     [vwba_Cbte_Ban].[IdEmpresa] AS [IdEmpresa], 
@@ -431,6 +483,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwba_Talonario_che
             <End Role="ba_tipo_nota" EntitySet="ba_tipo_nota" />
             <End Role="ba_Cbte_Ban" EntitySet="ba_Cbte_Ban" />
           </AssociationSet>
+          <EntitySet Name="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar" EntityType="Model_banco.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar" />
           </EntityContainer>
         <EntityType Name="ba_CatalogoTipo">
           <Key>
@@ -756,6 +809,37 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwba_Talonario_che
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipocbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="tc_descripcion" />
+            <PropertyRef Name="cr_Valor" />
+            <PropertyRef Name="cm_fecha" />
+            <PropertyRef Name="tm_descripcion" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="IdCaja" />
+            <PropertyRef Name="ca_Descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipocbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="tc_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cr_Valor" Type="Double" Nullable="false" />
+          <Property Name="cm_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cm_observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="tm_descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="cr_NumDocumento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCaja" Type="Int32" Nullable="false" />
+          <Property Name="ca_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -960,6 +1044,27 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwba_Talonario_che
               <MappingFragment StoreEntitySet="vwba_Talonario_cheques_x_banco_ID">
                 <ScalarProperty Name="Num_cheque" ColumnName="Num_cheque" />
                 <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar">
+            <EntityTypeMapping TypeName="Model_banco.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar">
+              <MappingFragment StoreEntitySet="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar">
+                <ScalarProperty Name="ca_Descripcion" ColumnName="ca_Descripcion" />
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="cr_NumDocumento" ColumnName="cr_NumDocumento" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="tm_descripcion" ColumnName="tm_descripcion" />
+                <ScalarProperty Name="cm_observacion" ColumnName="cm_observacion" />
+                <ScalarProperty Name="cm_fecha" ColumnName="cm_fecha" />
+                <ScalarProperty Name="cr_Valor" ColumnName="cr_Valor" />
+                <ScalarProperty Name="tc_descripcion" ColumnName="tc_descripcion" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipocbte" ColumnName="IdTipocbte" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
