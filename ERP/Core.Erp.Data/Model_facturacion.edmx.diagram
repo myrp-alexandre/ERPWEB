@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b498a907f50d4550ac15e5af619fed9d" Name="Diagram1" ZoomLevel="86" >
+      <Diagram DiagramId="b498a907f50d4550ac15e5af619fed9d" Name="Diagram1" ZoomLevel="73" >
         <EntityTypeShape EntityType="Model_facturacion.fa_cliente_tipo" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model_facturacion.fa_TerminoPago" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_facturacion.fa_TipoNota" Width="1.5" PointX="3.375" PointY="3.75" />
@@ -23,6 +23,12 @@
         <AssociationConnector Association="Model_facturacion.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_Vendedor" />
         <EntityTypeShape EntityType="Model_facturacion.fa_TerminoPago_Distribucion" Width="1.5" PointX="5.625" PointY="15" />
         <AssociationConnector Association="Model_facturacion.FK_fa_TerminoPago_Distribucion_fa_TerminoPago" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_proforma" Width="1.5" PointX="12.875" PointY="4.125" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_proforma_det" Width="1.5" PointX="15.125" PointY="5" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_proforma_fa_cliente" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_proforma_det_fa_proforma" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_proforma_fa_TerminoPago" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_proforma_fa_Vendedor" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

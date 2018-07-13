@@ -160,6 +160,19 @@
 
 
     function Guardar_lote() {
+
+        if ($("#lote").val() == "") {
+            alert("Ingrese el numero de lote");
+            return;
+        }
+        if ($("#fecha_fab").val() == "") {
+            alert("Ingrese fecha fabricación");
+            return;
+        }
+        if ($("#fecha_ven").val() == "") {
+            alert("Ingrese fecha vencimiento");
+            return;
+        }
         var datos = {
             fecha_fab: $("#fecha_fab").val(),
             fecha_ven: $("#fecha_ven").val(),
@@ -176,8 +189,10 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 GridViewPartial_distribucion_det.PerformCallback();
-                $("#detalle_distr").modal("show");
-
+                alert("El lote grabado correctamente");
+                $("#lote").val("");
+                $("#fecha_ven").val("");
+                $("#fecha_fab").val("");
             },
             error: function (error) {
             }
