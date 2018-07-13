@@ -139,7 +139,7 @@ namespace Core.Erp.Data.Facturacion
                     Context.fa_proforma.Add(Entity);
                     Context.SaveChanges();
                 }
-                return false;
+                return true;
             }
             catch (Exception)
             {
