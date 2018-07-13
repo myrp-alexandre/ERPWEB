@@ -31,7 +31,7 @@ namespace Core.Erp.Data.Facturacion
                                  pf_fecha = q.pf_fecha,
                                  pf_fecha_vcto = q.pf_fecha_vcto,
                                  pf_atencion_a = q.pf_atencion_a,
-                                 estado = q.estado,
+                                 estado = q.estado==true,
                                  IdBodega = q.IdBodega,
                                  IdVendedor = q.IdVendedor,
                                  pr_dias_entrega = q.pr_dias_entrega
