@@ -8660,7 +8660,7 @@
     <Content Include="Areas\Facturacion\Views\Proforma\Modificar.cshtml" />
     <Content Include="Areas\Facturacion\Views\Proforma\Anular.cshtml" />
     <Content Include="Areas\Facturacion\Views\Proforma\_CmbCliente_Proforma.cshtml" />
-    <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_GridViewPartial_comprobante_detalle.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_GridViewPartial_comprobante_detalle_Credito.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />
@@ -8772,6 +8772,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

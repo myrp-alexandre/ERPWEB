@@ -74,6 +74,7 @@
             this.Detail.Name = "Detail";
             this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            this.Detail.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Detail_BeforePrint);
             // 
             // xrTable2
             // 
@@ -179,6 +180,7 @@
             this.xrTable4});
             this.ReportHeader.HeightF = 25F;
             this.ReportHeader.Name = "ReportHeader";
+            this.ReportHeader.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ReportHeader_BeforePrint);
             // 
             // xrTable4
             // 
@@ -213,6 +215,7 @@
             this.xrTable1});
             this.PageHeader.HeightF = 20F;
             this.PageHeader.Name = "PageHeader";
+            this.PageHeader.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.PageHeader_BeforePrint);
             // 
             // xrTable1
             // 
@@ -270,6 +273,7 @@
             this.xrTable3});
             this.ReportFooter.HeightF = 20F;
             this.ReportFooter.Name = "ReportFooter";
+            this.ReportFooter.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ReportFooter_BeforePrint);
             // 
             // xrTable3
             // 
