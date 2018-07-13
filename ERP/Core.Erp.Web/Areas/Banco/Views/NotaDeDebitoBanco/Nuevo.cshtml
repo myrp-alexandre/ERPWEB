@@ -66,12 +66,13 @@
 
     function armar_diario() {
         var datos = {
-            IdBanco: $("#IdBanco").val()
+            IdBanco: $("#IdBanco").val(),
+            IdTipoNota = $("#IdTipoNota").val()
         }
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("armar_diario", "ChequeBanco",new { Area = "Banco"})',
+            url: '@Url.Action("armar_diario", "NotaDeDebitoBanco",new { Area = "Banco"})',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -175,7 +176,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdTipoNota">Tipo de nota:*</label>
-                    @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_tipo_nota, "IdTipoNota", "Descripcion"), new { @class = "form-control" })
+                    @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_tipo_nota, "IdTipoNota", "Descripcion"), new { @class = "form-control", @id = "IdTipoNota" })
                     @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
                 </div>
             </div>

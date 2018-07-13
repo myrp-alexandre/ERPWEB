@@ -319,25 +319,39 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #endregion
 
         #region Json
-        public JsonResult armar_diario(int IdBanco = 0)
+        public JsonResult armar_diario(int IdBanco = 0, int IdTipoNota = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var bco = bus_banco_cuenta.get_info(IdEmpresa, IdBanco);
+            var tipo_nota = bus_tipo_nota.get_info(IdEmpresa, IdTipoNota);
             var lst_op = List_op.get_list();
-
             List<ct_cbtecble_det_Info> lst_ct = new List<ct_cbtecble_det_Info>();
             int secuencia = 1;
-            foreach (var item in lst_op)
+            if (string.IsNullOrEmpty(tipo_nota.IdCtaCble))
+            {
+                foreach (var item in lst_op)
+                {
+                    //Debe
+                    lst_ct.Add(new ct_cbtecble_det_Info
+                    {
+                        IdCtaCble = item.IdCtaCble,
+                        secuencia = secuencia++,
+                        dc_Valor = Math.Round(item.MontoAplicado, 2, MidpointRounding.AwayFromZero),
+                        dc_Valor_debe = Math.Round(item.MontoAplicado, 2, MidpointRounding.AwayFromZero)
+                    });
+                }
+            }else
             {
                 //Debe
                 lst_ct.Add(new ct_cbtecble_det_Info
                 {
-                    IdCtaCble = item.IdCtaCble,
+                    IdCtaCble = tipo_nota.IdCtaCble,
                     secuencia = secuencia++,
-                    dc_Valor = Math.Round(item.MontoAplicado, 2, MidpointRounding.AwayFromZero),
-                    dc_Valor_debe = Math.Round(item.MontoAplicado, 2, MidpointRounding.AwayFromZero)
+                    dc_Valor = Math.Round(lst_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero),
+                    dc_Valor_debe = Math.Round(lst_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero)
                 });
             }
+            
             lst_ct.Add(new ct_cbtecble_det_Info
             {
                 IdCtaCble = bco.IdCtaCble,

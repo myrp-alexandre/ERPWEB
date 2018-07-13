@@ -65,12 +65,13 @@
 
     function armar_diario() {
         var datos = {
-            IdBanco: $("#IdBanco").val()
+            IdBanco: $("#IdBanco").val(),
+            IdTipoNota = $("#IdTipoNota").val()
         }
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("armar_diario", "ChequeBanco",new { Area = "Banco"})',
+            url: '@Url.Action("armar_diario", "NotaDeDebitoBanco",new { Area = "Banco"})',
             async: false,
             bDeferRender: true,
             bProcessing: true,

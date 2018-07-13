@@ -868,7 +868,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consulta' d
         </EntityType>
           <NavigationProperty Name="fa_TerminoPago" Relationship="Model_facturacion.FK_fa_proforma_fa_TerminoPago" FromRole="fa_proforma" ToRole="fa_TerminoPago" />
           <NavigationProperty Name="fa_Vendedor" Relationship="Model_facturacion.FK_fa_proforma_fa_Vendedor" FromRole="fa_proforma" ToRole="fa_Vendedor" />
-        </EntityType>
         <Association Name="FK_fa_proforma_fa_cliente">
           <End Type="Model_facturacion.fa_cliente" Role="fa_cliente" Multiplicity="1" />
           <End Type="Model_facturacion.fa_proforma" Role="fa_proforma" Multiplicity="*" />
