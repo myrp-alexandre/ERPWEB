@@ -1,10 +1,10 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView_DebitoBanco_op_x_cruzar";
-        settings.CallbackRouteValues = new { Controller = "NotaDeDebitoBanco", Action = "GridViewPartial_DebitoBanco_op_x_cruzar" };
+        settings.Name = "GridView_DepositoBanco_x_cruzar";
+        settings.CallbackRouteValues = new { Controller = "DepositoBanco", Action = "GridViewPartial_DepositoBanco_x_cruzar" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdOrdenPago_op";
+        settings.KeyFieldName = "IdCbteCble";
 
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;

@@ -1,16 +1,16 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView_DebitoBanco_op";
-        settings.CallbackRouteValues = new { Controller = "NotaDeDebitoBanco", Action = "GridViewPartial_DebitoBanco_op" };
+        settings.Name = "GridView_DepositoBanco_det";
+        settings.CallbackRouteValues = new { Controller = "DepositoBanco", Action = "GridViewPartial_DepositoBanco_det" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdOrdenPago_op";
+        settings.KeyFieldName = "IdCbteCble";
 
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
         settings.Settings.ShowFilterRow = true;
         settings.SettingsBehavior.AllowSelectByRowClick = false;
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "NotaDeDebitoBanco", Action = "EditingDeleteFactura", Area = "Banco" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "DepositoBanco", Action = "EditingDelete", Area = "Banco" };
 
         //Configuración click derecho
         settings.SettingsContextMenu.Enabled = true;

@@ -8661,7 +8661,6 @@
     <Content Include="Areas\Facturacion\Views\Proforma\Modificar.cshtml" />
     <Content Include="Areas\Facturacion\Views\Proforma\Anular.cshtml" />
     <Content Include="Areas\Facturacion\Views\Proforma\_CmbCliente_Proforma.cshtml" />
-    <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_GridViewPartial_comprobante_detalle_Credito.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\ATS\Index.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\ATS\Nuevo.cshtml" />
     <Content Include="Areas\Banco\Views\DepositoBanco\_GridViewPartial_DepositoBanco_x_cruzar.cshtml" />

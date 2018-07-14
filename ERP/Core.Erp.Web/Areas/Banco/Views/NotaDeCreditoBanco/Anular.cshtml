@@ -126,12 +126,6 @@
                     @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-2 col-md-offset-4">
-                <div class="form-group">
-                    <label for="cb_Valor">Valor</label>
-                    @Html.TextBoxFor(q => q.cb_Valor, new { @id = "cb_Valor", @class = "form-control", @readonly = "readonly" })
-                </div>
-            </div>
         </div>
     </div>
 
@@ -156,7 +150,7 @@
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_diario">
-                @Html.Action("GridViewPartial_comprobante_detalle_Credito", new { Area = "Banco", Controller = "NotaDeCreditoBanco" })
+                @Html.Action("GridViewPartial_comprobante_detalle", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
             </div>
         </div>
     </div>

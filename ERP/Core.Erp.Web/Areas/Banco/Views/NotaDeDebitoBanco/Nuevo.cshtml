@@ -108,28 +108,7 @@
             }
         });
         GridView_comprobante_detalle.PerformCallback();
-        GridView_cheque_op.PerformCallback();
-    }
-
-    function GetNumCheque() {
-        var datos = {
-            IdBanco: $("#IdBanco").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetNumCheque", "ChequeBanco",new { Area = "Banco"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                $("#cb_Cheque").val(data);
-            },
-            error: function (error) {
-            }
-        });
+        GridView_cheque_op.PerformCallback();    
     }
 </script>
 
