@@ -8663,6 +8663,8 @@
     <Content Include="Areas\Facturacion\Views\Proforma\_CmbCliente_Proforma.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\ATS\Index.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\ATS\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ATS\_GridViewPartial_compras.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ATS\_GridViewPartial_ventas.cshtml" />
     <Content Include="Areas\Banco\Views\DepositoBanco\_GridViewPartial_DepositoBanco_x_cruzar.cshtml" />
     <Content Include="Areas\Banco\Views\DepositoBanco\_GridViewPartial_DepositoBanco_det.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
