@@ -88,6 +88,12 @@
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_motivo_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Param_conta_x_sucursal_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_Parametro_Info.cs" />
+    <Compile Include="CuentasPorPagar\ATS\ATS_Info\ats_Info.cs" />
+    <Compile Include="CuentasPorPagar\ATS\ATS_Info\compras_Info.cs" />
+    <Compile Include="CuentasPorPagar\ATS\ATS_Info\comprobantesAnulados_info.cs" />
+    <Compile Include="CuentasPorPagar\ATS\ATS_Info\importaciones_info.cs" />
+    <Compile Include="CuentasPorPagar\ATS\ATS_Info\retenciones_Info.cs" />
+    <Compile Include="CuentasPorPagar\ATS\ATS_Info\ventas_Info.cs" />
     <Compile Include="CuentasPorPagar\ATS\compensacion.cs" />
     <Compile Include="CuentasPorPagar\ATS\detalleAir.cs" />
     <Compile Include="CuentasPorPagar\ATS\detalleAirCompras.cs" />

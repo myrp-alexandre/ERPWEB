@@ -265,6 +265,7 @@
     <Compile Include="Areas\CuentasPorCobrar\Controllers\ParametroCXCController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\TipoCobroController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\CuentasPorCobrarAreaRegistration.cs" />
+    <Compile Include="Areas\CuentasPorPagar\Controllers\ATSController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\ClaseProveedorController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\CodigoSRIController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\DeudasController.cs" />
@@ -8661,6 +8662,8 @@
     <Content Include="Areas\Facturacion\Views\Proforma\Anular.cshtml" />
     <Content Include="Areas\Facturacion\Views\Proforma\_CmbCliente_Proforma.cshtml" />
     <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_GridViewPartial_comprobante_detalle_Credito.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ATS\Index.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ATS\Nuevo.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />
