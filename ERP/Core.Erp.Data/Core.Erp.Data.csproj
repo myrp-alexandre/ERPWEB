@@ -161,6 +161,12 @@
     <Compile Include="caj_parametro.cs">
       <DependentUpon>Model_caja.tt</DependentUpon>
     </Compile>
+    <Compile Include="compras.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="comprobantes_anulados.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Contabilidad\ct_anio_fiscal_Data.cs" />
     <Compile Include="Contabilidad\ct_anio_fiscal_x_cuenta_utilidad_Data.cs" />
     <Compile Include="Contabilidad\ct_cbtecble_Data.cs" />
@@ -1132,6 +1138,9 @@
     </Compile>
     <Compile Include="tb_transportista.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ventas.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
     <Compile Include="VWACTF_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
