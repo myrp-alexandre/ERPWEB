@@ -8664,6 +8664,8 @@
     <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_GridViewPartial_comprobante_detalle_Credito.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\ATS\Index.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\ATS\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ATS\_GridViewPartial_compras.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ATS\_GridViewPartial_ventas.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />
