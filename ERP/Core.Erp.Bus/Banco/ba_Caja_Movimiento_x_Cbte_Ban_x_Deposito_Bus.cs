@@ -23,5 +23,18 @@ namespace Core.Erp.Bus.Banco
                 throw;
             }
         }
+
+        public List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info> get_list_x_depositar(int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_list_x_depositar(IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
