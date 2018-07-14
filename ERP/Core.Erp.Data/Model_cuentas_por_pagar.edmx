@@ -5,6 +5,90 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Model_cuentas_por_pagar.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="compras">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="codSustento" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="tpIdProv" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="idProv" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="tipoComprobante" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="parteRel" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="tipoProv" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="denopr" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="fechaRegistro" Type="date" Nullable="false" />
+          <Property Name="establecimiento" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="puntoEmision" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="secuencial" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="fechaEmision" Type="date" Nullable="false" />
+          <Property Name="autorizacion" Type="varchar" MaxLength="49" Nullable="false" />
+          <Property Name="baseNoGraIva" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="baseImponible" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="baseImpGrav" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="baseImpExe" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="montoIce" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="montoIva" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="valRetBien10" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="valRetServ20" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="valorRetBienes" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="valRetServ50" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="valorRetServicios" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="valRetServ100" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="pagoLocExt" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="denopago" Type="varchar" MaxLength="2" />
+          <Property Name="paisEfecPago" Type="varchar" MaxLength="2" />
+          <Property Name="formaPago" Type="varchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="comprobantes_anulados">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="tipoComprobante" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Establecimiento" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="puntoEmision" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="secuencialInicio" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="secuencialFin" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="Autorización" Type="varchar" MaxLength="49" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ventas">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="tpIdCliente" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="idCliente" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="parteRel" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="tipoCliente" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="DenoCli" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="tipoComprobante" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="tipoEm" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="numeroComprobantes" Type="int" Nullable="false" />
+          <Property Name="baseNoGraIva" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="baseImponible" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="baseImpGrav" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="montoIva" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="montoIce" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="valorRetIva" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="valorRetRenta" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="formaPago" Type="varchar" MaxLength="2" />
+          <Property Name="codEstab" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="ventasEstab" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="ivaComp" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="cp_codigo_SRI">
           <Key>
             <PropertyRef Name="IdCodigo_SRI" />
@@ -1389,6 +1473,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' no
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="generarATS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ats">
+          <Parameter Name="idempresa" Type="int" Mode="In" />
+          <Parameter Name="idPeriodo" Type="int" Mode="In" />
+        </Function>
         <Function Name="spcp_Get_Data_orden_pago_con_cancelacion_data" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="IdPersona_ini" Type="numeric" Mode="In" />
@@ -1400,13 +1488,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' no
           <Parameter Name="IdUsuario" Type="varchar" Mode="In" />
           <Parameter Name="mostrar_saldo_0" Type="bit" Mode="In" />
         </Function>
-        <Function Name="spcp_Get_Data_orden_pago_con_cancelacion_x_pago" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="IdEmpresa_pago" Type="int" Mode="In" />
-          <Parameter Name="IdTipoCbte_pago" Type="int" Mode="In" />
-          <Parameter Name="IdCbteCble_pago" Type="numeric" Mode="In" />
-          <Parameter Name="IdUsuario" Type="varchar" Mode="In" />
-        </Function>
         <EntityContainer Name="Model_cuentas_por_pagarStoreContainer">
+          <EntitySet Name="compras" EntityType="Self.compras" Schema="ats" store:Type="Tables" />
+          <EntitySet Name="comprobantes_anulados" EntityType="Self.comprobantes_anulados" Schema="ats" store:Type="Tables" />
+          <EntitySet Name="ventas" EntityType="Self.ventas" Schema="ats" store:Type="Tables" />
           <EntitySet Name="cp_codigo_SRI" EntityType="Self.cp_codigo_SRI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cp_codigo_SRI_tipo" EntityType="Self.cp_codigo_SRI_tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cp_codigo_SRI_x_CtaCble" EntityType="Self.cp_codigo_SRI_x_CtaCble" Schema="dbo" store:Type="Tables" />
@@ -1991,6 +2076,13 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' no
             <Parameter Name="IdTipoCbte_pago" Mode="In" Type="Int32" />
             <Parameter Name="IdCbteCble_pago" Mode="In" Type="Decimal" />
             <Parameter Name="IdUsuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="compras" EntityType="Model_cuentas_por_pagar.compras" />
+          <EntitySet Name="comprobantes_anulados" EntityType="Model_cuentas_por_pagar.comprobantes_anulados" />
+          <EntitySet Name="ventas" EntityType="Model_cuentas_por_pagar.ventas" />
+          <FunctionImport Name="generarATS">
+            <Parameter Name="idempresa" Mode="In" Type="Int32" />
+            <Parameter Name="idPeriodo" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="cp_codigo_SRI_tipo">
@@ -3491,6 +3583,90 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' no
           <Property Type="Decimal" Name="IdCbteCble_cxp" Nullable="true" Precision="18" Scale="0" />
           <Property Type="Int32" Name="IdBanco" Nullable="true" />
         </ComplexType>
+        <EntityType Name="compras">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="codSustento" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="tpIdProv" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="idProv" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="tipoComprobante" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="parteRel" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="tipoProv" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="denopr" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="fechaRegistro" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="establecimiento" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="puntoEmision" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="secuencial" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="fechaEmision" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="autorizacion" Type="String" Nullable="false" MaxLength="49" FixedLength="false" Unicode="false" />
+          <Property Name="baseNoGraIva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="baseImponible" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="baseImpGrav" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="baseImpExe" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="montoIce" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="montoIva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="valRetBien10" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="valRetServ20" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="valorRetBienes" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="valRetServ50" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="valorRetServicios" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="valRetServ100" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="pagoLocExt" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="denopago" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="paisEfecPago" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="formaPago" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="comprobantes_anulados">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="tipoComprobante" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Establecimiento" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="puntoEmision" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="secuencialInicio" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="secuencialFin" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Autorización" Type="String" Nullable="false" MaxLength="49" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ventas">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="tpIdCliente" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="idCliente" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="parteRel" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="tipoCliente" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="DenoCli" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="tipoComprobante" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="tipoEm" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="numeroComprobantes" Type="Int32" Nullable="false" />
+          <Property Name="baseNoGraIva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="baseImponible" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="baseImpGrav" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="montoIva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="montoIce" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="valorRetIva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="valorRetRenta" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="formaPago" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="codEstab" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="ventasEstab" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="ivaComp" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4393,46 +4569,88 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' no
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="spcp_Get_Data_orden_pago_con_cancelacion_x_pago" FunctionName="Model_cuentas_por_pagar.Store.spcp_Get_Data_orden_pago_con_cancelacion_x_pago">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model_cuentas_por_pagar.spcp_Get_Data_orden_pago_con_cancelacion_x_pago_Result">
-                <ScalarProperty Name="IdRow" ColumnName="IdRow" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <EntitySetMapping Name="compras">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.compras">
+              <MappingFragment StoreEntitySet="compras">
+                <ScalarProperty Name="formaPago" ColumnName="formaPago" />
+                <ScalarProperty Name="paisEfecPago" ColumnName="paisEfecPago" />
+                <ScalarProperty Name="denopago" ColumnName="denopago" />
+                <ScalarProperty Name="pagoLocExt" ColumnName="pagoLocExt" />
+                <ScalarProperty Name="valRetServ100" ColumnName="valRetServ100" />
+                <ScalarProperty Name="valorRetServicios" ColumnName="valorRetServicios" />
+                <ScalarProperty Name="valRetServ50" ColumnName="valRetServ50" />
+                <ScalarProperty Name="valorRetBienes" ColumnName="valorRetBienes" />
+                <ScalarProperty Name="valRetServ20" ColumnName="valRetServ20" />
+                <ScalarProperty Name="valRetBien10" ColumnName="valRetBien10" />
+                <ScalarProperty Name="montoIva" ColumnName="montoIva" />
+                <ScalarProperty Name="montoIce" ColumnName="montoIce" />
+                <ScalarProperty Name="baseImpExe" ColumnName="baseImpExe" />
+                <ScalarProperty Name="baseImpGrav" ColumnName="baseImpGrav" />
+                <ScalarProperty Name="baseImponible" ColumnName="baseImponible" />
+                <ScalarProperty Name="baseNoGraIva" ColumnName="baseNoGraIva" />
+                <ScalarProperty Name="autorizacion" ColumnName="autorizacion" />
+                <ScalarProperty Name="fechaEmision" ColumnName="fechaEmision" />
+                <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+                <ScalarProperty Name="puntoEmision" ColumnName="puntoEmision" />
+                <ScalarProperty Name="establecimiento" ColumnName="establecimiento" />
+                <ScalarProperty Name="fechaRegistro" ColumnName="fechaRegistro" />
+                <ScalarProperty Name="denopr" ColumnName="denopr" />
+                <ScalarProperty Name="tipoProv" ColumnName="tipoProv" />
+                <ScalarProperty Name="parteRel" ColumnName="parteRel" />
+                <ScalarProperty Name="tipoComprobante" ColumnName="tipoComprobante" />
+                <ScalarProperty Name="idProv" ColumnName="idProv" />
+                <ScalarProperty Name="tpIdProv" ColumnName="tpIdProv" />
+                <ScalarProperty Name="codSustento" ColumnName="codSustento" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdTipo_op" ColumnName="IdTipo_op" />
-                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
-                <ScalarProperty Name="Referencia2" ColumnName="Referencia2" />
-                <ScalarProperty Name="IdOrdenPago" ColumnName="IdOrdenPago" />
-                <ScalarProperty Name="Secuencia_OP" ColumnName="Secuencia_OP" />
-                <ScalarProperty Name="IdTipoPersona" ColumnName="IdTipoPersona" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-                <ScalarProperty Name="IdEntidad" ColumnName="IdEntidad" />
-                <ScalarProperty Name="Fecha_OP" ColumnName="Fecha_OP" />
-                <ScalarProperty Name="Fecha_Fa_Prov" ColumnName="Fecha_Fa_Prov" />
-                <ScalarProperty Name="Fecha_Venc_Fac_Prov" ColumnName="Fecha_Venc_Fac_Prov" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="Nom_Beneficiario" ColumnName="Nom_Beneficiario" />
-                <ScalarProperty Name="Girar_Cheque_a" ColumnName="Girar_Cheque_a" />
-                <ScalarProperty Name="Valor_a_pagar" ColumnName="Valor_a_pagar" />
-                <ScalarProperty Name="Valor_estimado_a_pagar_OP" ColumnName="Valor_estimado_a_pagar_OP" />
-                <ScalarProperty Name="Total_cancelado_OP" ColumnName="Total_cancelado_OP" />
-                <ScalarProperty Name="Saldo_x_Pagar_OP" ColumnName="Saldo_x_Pagar_OP" />
-                <ScalarProperty Name="IdEstadoAprobacion" ColumnName="IdEstadoAprobacion" />
-                <ScalarProperty Name="IdFormaPago" ColumnName="IdFormaPago" />
-                <ScalarProperty Name="Fecha_Pago" ColumnName="Fecha_Pago" />
-                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
-                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
-                <ScalarProperty Name="IdSubCentro_Costo" ColumnName="IdSubCentro_Costo" />
-                <ScalarProperty Name="Cbte_cxp" ColumnName="Cbte_cxp" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Nom_Beneficiario_2" ColumnName="Nom_Beneficiario_2" />
-                <ScalarProperty Name="IdEmpresa_cxp" ColumnName="IdEmpresa_cxp" />
-                <ScalarProperty Name="IdTipoCbte_cxp" ColumnName="IdTipoCbte_cxp" />
-                <ScalarProperty Name="IdCbteCble_cxp" ColumnName="IdCbteCble_cxp" />
-                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comprobantes_anulados">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.comprobantes_anulados">
+              <MappingFragment StoreEntitySet="comprobantes_anulados">
+                <ScalarProperty Name="Autorización" ColumnName="Autorización" />
+                <ScalarProperty Name="secuencialFin" ColumnName="secuencialFin" />
+                <ScalarProperty Name="secuencialInicio" ColumnName="secuencialInicio" />
+                <ScalarProperty Name="puntoEmision" ColumnName="puntoEmision" />
+                <ScalarProperty Name="Establecimiento" ColumnName="Establecimiento" />
+                <ScalarProperty Name="tipoComprobante" ColumnName="tipoComprobante" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ventas">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.ventas">
+              <MappingFragment StoreEntitySet="ventas">
+                <ScalarProperty Name="ivaComp" ColumnName="ivaComp" />
+                <ScalarProperty Name="ventasEstab" ColumnName="ventasEstab" />
+                <ScalarProperty Name="codEstab" ColumnName="codEstab" />
+                <ScalarProperty Name="formaPago" ColumnName="formaPago" />
+                <ScalarProperty Name="valorRetRenta" ColumnName="valorRetRenta" />
+                <ScalarProperty Name="valorRetIva" ColumnName="valorRetIva" />
+                <ScalarProperty Name="montoIce" ColumnName="montoIce" />
+                <ScalarProperty Name="montoIva" ColumnName="montoIva" />
+                <ScalarProperty Name="baseImpGrav" ColumnName="baseImpGrav" />
+                <ScalarProperty Name="baseImponible" ColumnName="baseImponible" />
+                <ScalarProperty Name="baseNoGraIva" ColumnName="baseNoGraIva" />
+                <ScalarProperty Name="numeroComprobantes" ColumnName="numeroComprobantes" />
+                <ScalarProperty Name="tipoEm" ColumnName="tipoEm" />
+                <ScalarProperty Name="tipoComprobante" ColumnName="tipoComprobante" />
+                <ScalarProperty Name="DenoCli" ColumnName="DenoCli" />
+                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
+                <ScalarProperty Name="parteRel" ColumnName="parteRel" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="tpIdCliente" ColumnName="tpIdCliente" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="generarATS" FunctionName="Model_cuentas_por_pagar.Store.generarATS" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

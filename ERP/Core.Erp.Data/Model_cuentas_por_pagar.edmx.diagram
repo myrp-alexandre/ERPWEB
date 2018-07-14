@@ -66,6 +66,9 @@
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_pais_sri" Width="1.5" PointX="15.375" PointY="16.875" />
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_giro_cp_pais_sri" />
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.vwcp_orden_pago_con_cancelacion" Width="1.5" PointX="20.375" PointY="16.75" />
+        <EntityTypeShape EntityType="Model_cuentas_por_pagar.compras" Width="1.5" PointX="17.75" PointY="21.75" />
+        <EntityTypeShape EntityType="Model_cuentas_por_pagar.comprobantes_anulados" Width="1.5" PointX="0.75" PointY="18.75" />
+        <EntityTypeShape EntityType="Model_cuentas_por_pagar.ventas" Width="1.5" PointX="22.75" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
