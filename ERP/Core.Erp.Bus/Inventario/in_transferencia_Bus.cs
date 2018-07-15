@@ -197,7 +197,7 @@ namespace Core.Erp.Bus.Inventario
                 }
                 return list_IngEgrDet;
             }
-            catch (Exception )
+            catch (Exception ex)
             {
                 throw;
             }

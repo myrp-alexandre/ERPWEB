@@ -46,7 +46,7 @@ namespace Core.Erp.Data.Inventario
 
                 return Lista;
             }
-            catch (Exception )
+            catch (Exception e)
             {
 
                 throw;
@@ -111,7 +111,7 @@ namespace Core.Erp.Data.Inventario
 
                 }
             }
-            catch (Exception )
+            catch (Exception e)
             {
 
                 throw;
@@ -172,6 +172,7 @@ namespace Core.Erp.Data.Inventario
         {
             try
             {
+                int c = 1;
                 using (Entities_inventario contex = new Entities_inventario())
                 {
                     in_transferencia Entity = contex.in_transferencia.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa
@@ -206,6 +207,7 @@ namespace Core.Erp.Data.Inventario
         {
             try
             {
+                int c = 1;
                 using (Entities_inventario contex = new Entities_inventario())
                 {
                     in_transferencia Entity = contex.in_transferencia.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa

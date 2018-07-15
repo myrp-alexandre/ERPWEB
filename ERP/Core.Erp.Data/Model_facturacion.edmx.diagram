@@ -29,7 +29,7 @@
         <AssociationConnector Association="Model_facturacion.FK_fa_proforma_det_fa_proforma" />
         <AssociationConnector Association="Model_facturacion.FK_fa_proforma_fa_TerminoPago" />
         <AssociationConnector Association="Model_facturacion.FK_fa_proforma_fa_Vendedor" />
-      </Diagram>        
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

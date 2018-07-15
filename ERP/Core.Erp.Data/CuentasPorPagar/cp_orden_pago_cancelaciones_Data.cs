@@ -46,7 +46,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                 }
                 return true;
             }
-            catch (Exception )
+            catch (Exception e)
             {
                 
                 throw ;
@@ -120,7 +120,7 @@ namespace Core.Erp.Data.CuentasPorPagar
 
                 return Lista;
             }
-            catch (Exception )
+            catch (Exception ex)
             {
                 
                 throw ;

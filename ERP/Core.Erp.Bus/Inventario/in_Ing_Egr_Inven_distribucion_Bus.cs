@@ -332,7 +332,7 @@ namespace Core.Erp.Bus.Inventario
 
                 return true;
             }
-            catch (Exception )
+            catch (Exception ex)
             {
                 return false;
             }
