@@ -64,6 +64,19 @@ namespace Core.Erp.Data
         public virtual DbSet<retenciones> retenciones { get; set; }
         public virtual DbSet<ventas> ventas { get; set; }
     
+        public virtual int generarATS(Nullable<int> idempresa, Nullable<int> idPeriodo)
+        {
+            var idempresaParameter = idempresa.HasValue ?
+                new ObjectParameter("idempresa", idempresa) :
+                new ObjectParameter("idempresa", typeof(int));
+    
+            var idPeriodoParameter = idPeriodo.HasValue ?
+                new ObjectParameter("idPeriodo", idPeriodo) :
+                new ObjectParameter("idPeriodo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("generarATS", idempresaParameter, idPeriodoParameter);
+        }
+    
         public virtual ObjectResult<spcp_Get_Data_orden_pago_con_cancelacion_data_Result> spcp_Get_Data_orden_pago_con_cancelacion_data(Nullable<int> idEmpresa, Nullable<decimal> idPersona_ini, Nullable<decimal> idPersona_fin, string idTipoPersona, Nullable<decimal> idEntidad_ini, Nullable<decimal> idEntidad_fin, string idEstado_Aprobacion, string idUsuario, Nullable<bool> mostrar_saldo_0)
         {
             var idEmpresaParameter = idEmpresa.HasValue ?
@@ -124,19 +137,6 @@ namespace Core.Erp.Data
                 new ObjectParameter("IdUsuario", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spcp_Get_Data_orden_pago_con_cancelacion_x_pago_Result>("spcp_Get_Data_orden_pago_con_cancelacion_x_pago", idEmpresa_pagoParameter, idTipoCbte_pagoParameter, idCbteCble_pagoParameter, idUsuarioParameter);
-        }
-    
-        public virtual int generarATS(Nullable<int> idempresa, Nullable<int> idPeriodo)
-        {
-            var idempresaParameter = idempresa.HasValue ?
-                new ObjectParameter("idempresa", idempresa) :
-                new ObjectParameter("idempresa", typeof(int));
-    
-            var idPeriodoParameter = idPeriodo.HasValue ?
-                new ObjectParameter("idPeriodo", idPeriodo) :
-                new ObjectParameter("idPeriodo", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("generarATS", idempresaParameter, idPeriodoParameter);
         }
     }
 }
