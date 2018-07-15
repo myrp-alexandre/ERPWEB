@@ -1,0 +1,26 @@
+﻿@using System.Web.UI.WebControls;
+@{
+    var comboBox = Html.DevExpress().ComboBox(settings =>
+    {
+        settings.Name = "IdProducto";
+        settings.Width = Unit.Percentage(100);
+        settings.Properties.DropDownWidth = Unit.Percentage(100);
+        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+        settings.CallbackRouteValues = new { Controller = "TransferenciasInventario", Action = "CmbProducto_TransferenciaInventario", Area = "Inventario" };
+        settings.Properties.CallbackPageSize = 15;
+        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+        settings.Properties.TextField = "pr_descripcion";
+        settings.Properties.TextFormatString = "[{1}] {2}";
+        settings.Properties.ValueField = "IdProducto";
+        settings.Properties.ValueType = typeof(decimal);
+
+        settings.Properties.Columns.Add("IdProducto", "ID", 10);
+        settings.Properties.Columns.Add("pr_codigo", "Código", 10);
+        settings.Properties.Columns.Add("pr_descripcion", "Producto", 80);
+
+    })
+    .BindList(new Core.Erp.Web.Areas.Inventario.Controllers.TransferenciasInventarioController().get_list_bajo_demanda,
+    new Core.Erp.Web.Areas.Inventario.Controllers.TransferenciasInventarioController().get_info_bajo_demanda).Bind(Model);
+}
+@comboBox.GetHtml()
+

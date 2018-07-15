@@ -28,5 +28,18 @@ namespace Core.Erp.Info.CuentasPorPagar
         public double SaldoActual { get; set; }
         public string Observacion { get; set; }
         public System.DateTime fechaTransaccion { get; set; }
+
+        #region Campos que no existen en la tabla
+        public string IdTipo_op { get; set; }
+        public string Referencia { get; set; }
+        public string IdTipo_Persona { get; set; }
+        public decimal? IdEntidad { get; set; }
+        public decimal IdPersona { get; set; }
+        public DateTime Fecha_Fa_Prov { get; set; }
+        public DateTime Fecha_Venc_Fac_Prov { get; set; }
+        public string IdCtaCble { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        #endregion
+
     }
 }

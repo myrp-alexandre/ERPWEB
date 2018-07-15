@@ -17,5 +17,6 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string re_Codigo_impuesto { get; set; }
         public double? re_Porcen_retencion { get; set; }
         public double? re_valor_retencion { get; set; }
+        public string IdCtacble { get; set; }
     }
 }

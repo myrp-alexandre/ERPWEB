@@ -33,7 +33,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             {
                 return View();
             }
-
             public ActionResult GridViewPartial_retenciones()
             {
                 int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -67,7 +66,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 cargar_combos_detalle();
                 return PartialView("_GridViewPartial_retencio_dc", model);
             }
-
             private void cargar_combos(string TipoPersona = "")
             {
                 int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -78,7 +76,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
 
         }
-
             public ActionResult Nuevo(int IdTipoCbte_Ogiro = 0, decimal IdCbteCble_Ogiro = 0)
         {
                  cp_retencion_Info model = new cp_retencion_Info();
@@ -89,13 +86,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
                  Session["info_param_op"] = bus_parametros.get_info(IdEmpresa);
                  model= bus_retencion.get_info_factura( IdEmpresa, IdTipoCbte_Ogiro, IdCbteCble_Ogiro);
+            model.fecha = DateTime.Now;
             if (model.co_valoriva > 0)
                 Session["co_valoriva"] = model.co_valoriva;
                  cargar_combos();
                  cargar_combos_detalle();
                  return View(model);
             }
-
             [HttpPost]
             public ActionResult Nuevo(cp_retencion_Info model)
             {
@@ -145,7 +142,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     }
                 }
             }
-
             public ActionResult Modificar(int IdRetencion = 0)
             {
                 cargar_combos();
@@ -160,7 +156,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 Session["ct_cbtecble_det_Info"] = model.info_comprobante.lst_ct_cbtecble_det;
                 return View(model);
             }
-
             [HttpPost]
             public ActionResult Modificar(cp_retencion_Info model)
             {
@@ -225,8 +220,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 Session["ct_cbtecble_det_Info"] = model.info_comprobante.lst_ct_cbtecble_det;
                 return View(model);
             }
-
-
             [HttpPost]
             public ActionResult Anular(cp_retencion_Info model)
             {
@@ -277,8 +270,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 }
             }
         }
-         
-
             [ValidateInput(false)]
             public ActionResult GridViewPartial_deudas()
             {
@@ -287,7 +278,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
                 return PartialView("_GridViewPartial_deudas", model);
             }
-
             private void cargar_combos_detalle()
             {
                 int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -298,7 +288,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 ViewBag.lst_codigo_retencion = lst_codigo_retencion;
                 Session["lst_codigo_retencion"] = lst_codigo_retencion;
         }
-
             [HttpPost, ValidateInput(false)]
             public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
             {
@@ -346,7 +335,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 {
                     info_det.re_baseRetencion = Convert.ToDouble(Session["co_valoriva"]);
                     info_det.re_valor_retencion = (info_det.re_baseRetencion * info_codifo_sri.co_porRetencion) / 100;
-
+                    info_det.IdCtacble = info_codifo_sri.info_codigo_ctacble.IdCtaCble;
 
                     // calculando valores retencion
                     detalle_retencion_info.AddRow(info_det);
@@ -364,7 +353,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 if (info_codifo_sri.co_porRetencion!=0 & info_det.re_baseRetencion!=null & info_det.re_baseRetencion!=0)
                 {
                     info_det.re_valor_retencion = (info_det.re_baseRetencion * info_codifo_sri.co_porRetencion) / 100;
-
+                    info_det.IdCtacble = info_codifo_sri.info_codigo_ctacble.IdCtaCble;
 
 
                     // calculando valores retencion
@@ -401,6 +390,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 {
                     info_det.re_baseRetencion = Convert.ToDouble(Session["co_valoriva"]);
                     info_det.re_valor_retencion = (info_det.re_baseRetencion * info_codifo_sri.co_porRetencion) / 100;
+                    info_det.IdCtacble = info_codifo_sri.info_codigo_ctacble.IdCtaCble;
 
 
                     // calculando valores retencion
@@ -419,6 +409,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 if (info_codifo_sri.co_porRetencion != 0 & info_det.re_baseRetencion != null & info_det.re_baseRetencion != 0)
                 {
                     info_det.re_valor_retencion = (info_det.re_baseRetencion * info_codifo_sri.co_porRetencion) / 100;
+                    info_det.IdCtacble = info_codifo_sri.info_codigo_ctacble.IdCtaCble;
 
 
 
@@ -517,7 +508,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     cbtecble_debe_Info.secuencia = sec;
                     cbtecble_debe_Info.IdEmpresa = info_param_op.IdEmpresa;
                     cbtecble_debe_Info.IdTipoCbte = (int)info_param_op.pa_IdTipoCbte_x_Retencion;
-                    cbtecble_debe_Info.IdCtaCble = info_param_op.pa_ctacble_x_RetFte_default;
+                    cbtecble_debe_Info.IdCtaCble = item.IdCtacble;
                     cbtecble_debe_Info.dc_Valor_debe =(double) item.re_valor_retencion;
                     cbtecble_debe_Info.dc_Valor =(double) item.re_valor_retencion;
                     cbtecble_debe_Info.dc_Observacion = "";

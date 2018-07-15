@@ -49,7 +49,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public Nullable<double> Total_OP { get; set; }
         public bool check { get; set; }
         public ct_cbtecble_Info info_comprobante { get; set; }
-
+        public bool seleccionado { get; set; }
         public cp_orden_pago_Info()
         {
             detalle = new List<cp_orden_pago_det_Info>();

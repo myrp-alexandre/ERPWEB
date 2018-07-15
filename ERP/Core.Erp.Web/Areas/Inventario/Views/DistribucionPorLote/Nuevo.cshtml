@@ -5,6 +5,14 @@
     {
         Response.Redirect("~/Account/Login");
     }
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -21,6 +29,7 @@
     @Html.HiddenFor(q => q.can_x_distribuir)
     @Html.HiddenFor(q => q.can_total)
     @Html.HiddenFor(q => q.dm_cantidad)
+    @Html.HiddenFor(q => q.IdBodega)
 
 
 

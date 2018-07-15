@@ -234,7 +234,14 @@
     <Compile Include="Areas\Banco\Controllers\BancoCuentaController.cs" />
     <Compile Include="Areas\Banco\Controllers\CatalogoBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\CatalogoTipoBancoController.cs" />
+    <Compile Include="Areas\Banco\Controllers\ChequeBancoController.cs" />
+    <Compile Include="Areas\Banco\Controllers\ConciliacionBancoController.cs" />
+    <Compile Include="Areas\Banco\Controllers\DepositoBancoController.cs" />
+    <Compile Include="Areas\Banco\Controllers\NotaDeCreditoBancoController.cs" />
+    <Compile Include="Areas\Banco\Controllers\NotaDeDebitoBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\ParametroBancoController.cs" />
+    <Compile Include="Areas\Banco\Controllers\TalonarioChequeBancoController.cs" />
+    <Compile Include="Areas\Banco\Controllers\TipoNotaBancoController.cs" />
     <Compile Include="Areas\Caja\CajaAreaRegistration.cs" />
     <Compile Include="Areas\Caja\Controllers\CajaController.cs" />
     <Compile Include="Areas\Caja\Controllers\CajaMovimientoEgresoController.cs" />
@@ -259,6 +266,7 @@
     <Compile Include="Areas\CuentasPorCobrar\Controllers\ParametroCXCController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\TipoCobroController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\CuentasPorCobrarAreaRegistration.cs" />
+    <Compile Include="Areas\CuentasPorPagar\Controllers\ATSController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\ClaseProveedorController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\CodigoSRIController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\DeudasController.cs" />
@@ -272,6 +280,7 @@
     <Compile Include="Areas\CuentasPorPagar\CuentasPorPagarAreaRegistration.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ClienteController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ClienteTipoController.cs" />
+    <Compile Include="Areas\Facturacion\Controllers\ProformaController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\PuntoVentaController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\TerminoPagoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\TipoNotaController.cs" />
@@ -650,6 +659,12 @@
     <Compile Include="Reportes\Inventario\INV_007_Rpt.Designer.cs">
       <DependentUpon>INV_007_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Inventario\INV_008_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Inventario\INV_008_Rpt.Designer.cs">
+      <DependentUpon>INV_008_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\RRHH\ROL_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -727,6 +742,12 @@
     </Compile>
     <Compile Include="Reportes\RRHH\ROL_013_Rpt.Designer.cs">
       <DependentUpon>ROL_013_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_014_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_014_Rpt.Designer.cs">
+      <DependentUpon>ROL_014_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -8497,7 +8518,7 @@
     <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\Index.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\Modificar.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\Nuevo.cshtml" />
-    <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\_GridViewPartial_ordenes_pagos_con_saldo.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\_GridViewPartial_ordenes_pagos_con_saldo.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\Deudas\Index3.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\Deudas\_GridViewPartial_aprobacion_facturas.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\_GridView2Partial.cshtml" />
@@ -8592,7 +8613,70 @@
     <Content Include="Areas\CuentasPorPagar\Views\Deudas\_GridViewPartial_facturas_con_saldos.cshtml" />
     <Content Include="Areas\Facturacion\Views\Cliente\_GridViewPartial_fa_vendedor.cshtml" />
     <Content Include="Areas\Facturacion\Views\TerminoPago\_GridViewPartial_pago_dist.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\_GridViewPartial_nota_credito_det.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoNotaBanco\Index.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoNotaBanco\_GridViewPartial_tipo_nota.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoNotaBanco\Nuevo.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoNotaBanco\Modificar.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoNotaBanco\Anular.cshtml" />
+    <Content Include="Areas\Banco\Views\TalonarioChequeBanco\Index.cshtml" />
+    <Content Include="Areas\Banco\Views\TalonarioChequeBanco\_GridViewPartial_talonario_cheque.cshtml" />
+    <Content Include="Areas\Banco\Views\TalonarioChequeBanco\Nuevo.cshtml" />
+    <Content Include="Areas\Banco\Views\ChequeBanco\Index.cshtml" />
+    <Content Include="Areas\Banco\Views\ChequeBanco\Nuevo.cshtml" />
+    <Content Include="Areas\Banco\Views\ChequeBanco\Modificar.cshtml" />
+    <Content Include="Areas\Banco\Views\ChequeBanco\Anular.cshtml" />
+    <Content Include="Areas\Banco\Views\ChequeBanco\_GridViewPartial_cheque.cshtml" />
+    <Content Include="Areas\Inventario\Views\EgresoInventario\_CmbProducto_EgresoInventario.cshtml" />
+    <Content Include="Areas\Banco\Views\TalonarioChequeBanco\Modificar.cshtml" />
+    <Content Include="Areas\Banco\Views\ChequeBanco\_CmbPersona_ChequeBanco.cshtml" />
+    <Content Include="Areas\Banco\Views\ChequeBanco\_GridViewPartial_cheque_op_x_cruzar.cshtml" />
+    <Content Include="Areas\Banco\Views\ChequeBanco\_GridViewPartial_cheque_op.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROl_014.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeDebitoBanco\Nuevo.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeDebitoBanco\Modificar.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeDebitoBanco\Index.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeDebitoBanco\Anular.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeDebitoBanco\_CmbPersona_DebitoBanco.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeDebitoBanco\_GridViewPartial_DebitoBanco_op.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeDebitoBanco\_GridViewPartial_DebitoBanco_op_x_cruzar.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeDebitoBanco\_GridViewPartial_DebitoBanco.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\Nuevo.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\Modificar.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\Index.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\Anular.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_GridViewPartial_CreditoBanco.cshtml" />
+    <Content Include="Areas\Banco\Views\DepositoBanco\Nuevo.cshtml" />
+    <Content Include="Areas\Banco\Views\DepositoBanco\Modificar.cshtml" />
+    <Content Include="Areas\Banco\Views\DepositoBanco\Index.cshtml" />
+    <Content Include="Areas\Banco\Views\DepositoBanco\Anular.cshtml" />
+    <Content Include="Areas\Banco\Views\DepositoBanco\_GridViewPartial_DepositoBanco.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_008.cshtml" />
+    <Content Include="Areas\Inventario\Views\IngresoInventario\_CmbProducto_IngresoInventario.cshtml" />
+    <Content Include="Areas\Inventario\Views\TransferenciasInventario\_CmbProducto_TransferenciaInventario.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\_CmbProducto_Inventario.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\_GridViewPartial_producto_lst.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Proforma\Index.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Proforma\_GridViewPartial_proforma.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Proforma\Nuevo.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Proforma\Modificar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Proforma\Anular.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Proforma\_CmbCliente_Proforma.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ATS\Index.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ATS\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ATS\_GridViewPartial_compras.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ATS\_GridViewPartial_ventas.cshtml" />
+    <Content Include="Areas\Banco\Views\DepositoBanco\_GridViewPartial_DepositoBanco_x_cruzar.cshtml" />
+    <Content Include="Areas\Banco\Views\DepositoBanco\_GridViewPartial_DepositoBanco_det.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ATS\_GridViewPartial_retenciones.cshtml" />
+    <Content Include="Areas\Banco\Views\ConciliacionBanco\Nuevo.cshtml" />
+    <Content Include="Areas\Banco\Views\ConciliacionBanco\Modificar.cshtml" />
+    <Content Include="Areas\Banco\Views\ConciliacionBanco\Index.cshtml" />
+    <Content Include="Areas\Banco\Views\ConciliacionBanco\Anular.cshtml" />
+    <Content Include="Areas\Banco\Views\ConciliacionBanco\_GridViewPartial_ConciliacionBanco.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\HorasExtras\Index.cshtml" />
@@ -8701,6 +8785,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -8836,6 +8921,9 @@
     <EmbeddedResource Include="Reportes\Inventario\INV_007_Rpt.resx">
       <DependentUpon>INV_007_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Inventario\INV_008_Rpt.resx">
+      <DependentUpon>INV_008_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_001_Rpt.resx">
       <DependentUpon>ROL_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -8874,6 +8962,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_013_Rpt.resx">
       <DependentUpon>ROL_013_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_014_Rpt.resx">
+      <DependentUpon>ROL_014_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

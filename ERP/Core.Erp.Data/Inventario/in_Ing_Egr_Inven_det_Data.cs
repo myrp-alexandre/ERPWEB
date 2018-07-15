@@ -17,7 +17,11 @@ namespace Core.Erp.Data.Inventario
                 using (Entities_inventario Context = new Entities_inventario())
                 {
                     Lista = (from q in Context.in_Ing_Egr_Inven_det
+
+                             join p in Context.in_Producto
+                             on new {q.IdEmpresa, q.IdProducto} equals new {p.IdEmpresa, p.IdProducto }
                              where q.IdEmpresa == IdEmpresa
+                             && p.IdEmpresa==IdEmpresa
                              && q.IdSucursal == IdSucursal
                              && q.IdMovi_inven_tipo == IdMovi_inven_tipo
                              && q.IdNumMovi == IdNumMovi
@@ -52,7 +56,8 @@ namespace Core.Erp.Data.Inventario
                                  IdUnidadMedida_sinConversion = q.IdUnidadMedida_sinConversion,
                                  mv_costo_sinConversion = q.mv_costo_sinConversion,
                                  secuencia_inv = q.secuencia_inv,
-                                 Secuencia_oc = q.Secuencia_oc
+                                 Secuencia_oc = q.Secuencia_oc,
+                                 pr_descripcion=p.pr_descripcion
 
                              }).ToList();
                 }

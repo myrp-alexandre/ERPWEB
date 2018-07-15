@@ -63,6 +63,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                              on new { q.IdTipo_op } equals new { p.IdTipo_op }
                              where q.IdEmpresa == IdEmpresa
                              && q.IdTipo_op == p.IdTipo_op
+                             &&q.IdTipo_op==IdTipo_op
+                             && p.IdTipo_op==IdTipo_op
                              select new cp_orden_pago_tipo_x_empresa_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -77,6 +79,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  Dispara_Alerta = q.Dispara_Alerta,
                                  Descripcion = p.Descripcion,
                                  Estado = p.Estado
+
 
 
                              }).ToList();

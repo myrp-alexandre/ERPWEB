@@ -26,5 +26,33 @@ namespace Core.Erp.Web.Reportes.Banco
             List<BAN_001_cancelaciones_Info> lst_rpt = bus_rpt.get_list(IdEmpresa_pago, IdTipoCbte_pago, IdCbteCble_pago);
             this.DataSource = lst_rpt;
         }
+
+        private void ReportHeader_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            var lst = (List<BAN_001_cancelaciones_Info>)this.DataSource;
+            if (lst.Count == 0)
+                e.Cancel = true;
+        }
+
+        private void PageHeader_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            var lst = (List<BAN_001_cancelaciones_Info>)this.DataSource;
+            if (lst.Count == 0)
+                e.Cancel = true;
+        }
+
+        private void Detail_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            var lst = (List<BAN_001_cancelaciones_Info>)this.DataSource;
+            if (lst.Count == 0)
+                e.Cancel = true;
+        }
+
+        private void ReportFooter_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            var lst = (List<BAN_001_cancelaciones_Info>)this.DataSource;
+            if (lst.Count == 0)
+                e.Cancel = true;
+        }
     }
 }

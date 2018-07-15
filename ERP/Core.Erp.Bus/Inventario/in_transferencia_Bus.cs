@@ -2,6 +2,7 @@
 using Core.Erp.Info.Inventario;
 using System;
 using System.Collections.Generic;
+using Core.Erp.Info.Helps;
 namespace Core.Erp.Bus.Inventario
 {
     public class in_transferencia_Bus
@@ -46,8 +47,8 @@ namespace Core.Erp.Bus.Inventario
                 if (odata.guardarDB(info))
                 {
                     get_info_ing_egr(info);
-                    bus_ingreso.guardarDB(info.info_ingreso);
-                    bus_ingreso.guardarDB(info.info_egreso);
+                    bus_ingreso.guardarDB(info.info_ingreso,"+");
+                    bus_ingreso.guardarDB(info.info_egreso,"-");
 
                     info.IdEmpresa_Ing_Egr_Inven_Origen = info.IdEmpresa;
                     info.IdSucursal_Ing_Egr_Inven_Origen = info.IdSucursalOrigen;

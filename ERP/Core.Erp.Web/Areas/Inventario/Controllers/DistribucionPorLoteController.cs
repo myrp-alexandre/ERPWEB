@@ -16,6 +16,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         in_Ing_Egr_Inven_det_Bus bus_det_ing_inv = new in_Ing_Egr_Inven_det_Bus();
         in_Ing_Egr_Inven_distribucion_lst List_in_Ing_Egr_Inven_det = new in_Ing_Egr_Inven_distribucion_lst();
         in_parametro_Bus bus_in_param = new in_parametro_Bus();
+        in_Ing_Egr_Inven_Bus bus_ingreso = new in_Ing_Egr_Inven_Bus();
         string mensaje = string.Empty;
         decimal IdProducto_padre = 0;
         List<in_Producto_Info> list_productos = new List<in_Producto_Info>();
@@ -32,15 +33,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return View(model);
         }
 
-        private bool validar(in_Ing_Egr_Inven_distribucion_Info i_validar, ref string msg)
-        {
-            if (i_validar.lst_distribuido.Count == 0)
-            {
-                mensaje = "Debe ingresar al menos un producto";
-                return false;
-            }
-            return true;
-        }
+       
         [ValidateInput(false)]
         public ActionResult GridViewPartial_distribuion(DateTime? fecha_ini, DateTime? fecha_fin)
         {
@@ -106,7 +99,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             ViewBag.lst_motivo = lst_motivo;
 
         }
-        public ActionResult Nuevo(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
+        public ActionResult Nuevo(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0, string signo="")
         {
             Session["list_distribuida"] = null;
             Session["lst_x_distribuir"] = null;
@@ -115,8 +108,16 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             if (i_param == null)
                 return RedirectToAction("Index");
             in_Ing_Egr_Inven_distribucion_Info model = new in_Ing_Egr_Inven_distribucion_Info();
-            model = bus_ing_inv.get_info(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi, "+");
-
+            model = bus_ing_inv.get_info(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi, signo);
+            if (model == null)
+            {
+                model = new in_Ing_Egr_Inven_distribucion_Info();
+                var info_mov = bus_ingreso.get_info(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
+                model.IdEmpresa = info_mov.IdEmpresa;
+                model.IdSucursal = info_mov.IdSucursal;
+                model.IdBodega =Convert.ToInt32( info_mov.IdBodega);
+             
+             }
             cargar_combos();
             return View(model);
         }
@@ -127,13 +128,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             bus_ing_inv = new in_Ing_Egr_Inven_distribucion_Bus();
             model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
             model.lst_x_distribuir = Session["lst_x_distribuir"] as List<in_Ing_Egr_Inven_distribucion_Info>;
-            if (!validar(model, ref mensaje))
-            {
-                cargar_combos();
-                ViewBag.mensaje = mensaje;
-                return View(model);
-            }
+          
             model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdEmpresa =Convert.ToInt32( SessionFixed.IdEmpresa);
             if (!bus_ing_inv.guardarDB(model))
             {
                 cargar_combos();
@@ -350,7 +347,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
             if (Session["IdProducto_padre"] != null)
                 IdProducto_padre = (decimal)Session["IdProducto_padre"];
-            cargar_combos_detalle(IdProducto_padre); return PartialView("_GridViewPartial_distribucion_det", model.lst_distribuido);
+            cargar_combos_detalle(IdProducto_padre);
+            return PartialView("_GridViewPartial_distribucion_det", model.lst_distribuido);
         }
         #endregion
 

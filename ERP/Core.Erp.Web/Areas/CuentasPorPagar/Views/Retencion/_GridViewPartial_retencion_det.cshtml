@@ -60,7 +60,7 @@
             column.Caption = "Base";
             //column.ReadOnly = true;
             column.Width = Unit.Percentage(15);
-            
+
         });
         settings.Columns.Add(column =>
         {
@@ -79,6 +79,7 @@
         });
 
         settings.ClientSideEvents.BatchEditChangesSaving= "function(s,e,){llamar_partial()}";
+        settings.ClientSideEvents.SelectionChanged = "function(s,e,){llamar_partial()}";
     });
 
 }

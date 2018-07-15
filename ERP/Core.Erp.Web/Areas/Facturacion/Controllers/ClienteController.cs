@@ -221,6 +221,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         #endregion
 
+        #region detalle
         private void cargar_combos_det()
         {
             tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
@@ -275,7 +276,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return PartialView("_GridViewPartial_cliente_contacto", model);
         }
 
-    
+
         [ValidateInput(false)]
         public ActionResult GridViewPartial_fa_vendedor(decimal IdCliente = 0)
         {
@@ -318,7 +319,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             cargar_combos_det();
             return PartialView("_GridViewPartial_fa_vendedor", model);
         }
+        #endregion
+
     }
+
+    #region List
+
     public class fa_cliente_contactos_List
     {
         public List<fa_cliente_contactos_Info> get_list()
@@ -339,7 +345,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public void AddRow(fa_cliente_contactos_Info info_det)
         {
             List<fa_cliente_contactos_Info> list = get_list();
-            info_det.IdContacto = list.Count == 0 ? 1 : list.Max(q => q.IdContacto) + 1;            
+            info_det.IdContacto = list.Count == 0 ? 1 : list.Max(q => q.IdContacto) + 1;
             list.Add(info_det);
         }
 
@@ -399,4 +405,5 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             list.Remove(list.Where(m => m.IdCliente == IdCliente).First());
         }
     }
+    #endregion
 }

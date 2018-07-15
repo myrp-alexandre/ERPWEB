@@ -103,10 +103,17 @@
       <DependentUpon>Model_activo_fijo.tt</DependentUpon>
     </Compile>
     <Compile Include="Banco\ba_Banco_Cuenta_Data.cs" />
+    <Compile Include="Banco\ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Data.cs" />
     <Compile Include="Banco\ba_CatalogoTipo_Data.cs" />
     <Compile Include="Banco\ba_Catalogo_Data.cs" />
+    <Compile Include="Banco\ba_Cbte_Ban_Data.cs" />
     <Compile Include="Banco\ba_parametros_Data.cs" />
+    <Compile Include="Banco\ba_Talonario_cheques_x_banco_Data.cs" />
+    <Compile Include="Banco\ba_tipo_nota_Data.cs" />
     <Compile Include="ba_Banco_Cuenta.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
     <Compile Include="ba_Catalogo.cs">
@@ -115,7 +122,25 @@
     <Compile Include="ba_CatalogoTipo.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
+    <Compile Include="ba_Cbte_Ban.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ba_Conciliacion.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ba_Conciliacion_det_IngEgr.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
     <Compile Include="ba_parametros.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ba_Talonario_cheques_x_banco.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ba_tipo_nota.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
     <Compile Include="Caja\caj_Caja_Data.cs" />
@@ -141,6 +166,12 @@
     </Compile>
     <Compile Include="caj_parametro.cs">
       <DependentUpon>Model_caja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="compras.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="comprobantes_anulados.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
     <Compile Include="Contabilidad\ct_anio_fiscal_Data.cs" />
     <Compile Include="Contabilidad\ct_anio_fiscal_x_cuenta_utilidad_Data.cs" />
@@ -237,6 +268,7 @@
     <Compile Include="CuentasPorCobrar\cxc_cobro_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_det_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Param_conta_x_sucursal_Data.cs" />
+    <Compile Include="CuentasPorPagar\ats_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_nota_DebCre_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_orden_giro_pagos_sri_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_orden_pago_cancelaciones_Data.cs" />
@@ -337,6 +369,8 @@
     <Compile Include="Facturacion\fa_cliente_tipo_Data.cs" />
     <Compile Include="Facturacion\fa_cliente_x_fa_Vendedor_x_sucursal_Data.cs" />
     <Compile Include="Facturacion\fa_formaPago_Data.cs" />
+    <Compile Include="Facturacion\fa_proforma_Data.cs" />
+    <Compile Include="Facturacion\fa_proforma_det_Data.cs" />
     <Compile Include="Facturacion\fa_PuntoVta_Data.cs" />
     <Compile Include="Facturacion\fa_TerminoPago_Data.cs" />
     <Compile Include="Facturacion\fa_TerminoPago_Distribucion_Data.cs" />
@@ -728,6 +762,7 @@
     <Compile Include="Reportes\Inventario\INV_004_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_007_Data.cs" />
+    <Compile Include="Reportes\Inventario\INV_008_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_001_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_001_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_002_Data.cs" />
@@ -749,6 +784,10 @@
     <Compile Include="Reportes\RRHH\ROL_011_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_012_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_013_Data.cs" />
+    <Compile Include="Reportes\RRHH\ROL_014_Data.cs" />
+    <Compile Include="retenciones.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
     <Compile Include="ro_Acta_Finiquito.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -1005,6 +1044,9 @@
     <Compile Include="spcp_Get_Data_orden_pago_con_cancelacion_data_Result.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
+    <Compile Include="spcp_Get_Data_orden_pago_con_cancelacion_x_pago_Result.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
     <Compile Include="SPCXP_007_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
@@ -1107,6 +1149,9 @@
     <Compile Include="tb_transportista.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
+    <Compile Include="ventas.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
     <Compile Include="VWACTF_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
@@ -1130,6 +1175,21 @@
     </Compile>
     <Compile Include="VWBAN_003.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwba_Cbte_Ban.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwba_Conciliacion.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwba_Talonario_cheques_x_banco_ID.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
     <Compile Include="VWCAJ_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
@@ -1168,6 +1228,9 @@
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
     <Compile Include="vwcp_orden_pago.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwcp_orden_pago_con_cancelacion.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
     <Compile Include="vwcp_proveedor_consulta.cs">
@@ -1266,6 +1329,9 @@
     <Compile Include="VWINV_007.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="VWINV_008.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwin_Ing_Egr_Inven_distribucion.cs">
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
@@ -1315,6 +1381,9 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="VWROL_011.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWROL_014.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="vwRo_ActaFiniquito.cs">

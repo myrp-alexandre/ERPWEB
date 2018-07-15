@@ -8,10 +8,22 @@ namespace Core.Erp.Bus.Inventario
 {
     public class in_Ing_Egr_Inven_distribucion_Bus
     {
+        #region variables
         in_Ing_Egr_Inven_distribucion_Data oData = new in_Ing_Egr_Inven_distribucion_Data();
-
         List<in_Ing_Egr_Inven_distribucion_Info> list_distribuir = new List<in_Ing_Egr_Inven_distribucion_Info>();
         List<in_Ing_Egr_Inven_distribucion_Info> lst_distribuidos = new List<in_Ing_Egr_Inven_distribucion_Info>();
+        in_Ing_Egr_Inven_distribucion_Info info_info_distribucion_in = new in_Ing_Egr_Inven_distribucion_Info();
+        in_Ing_Egr_Inven_distribucion_Data bus_info_distribucion_in = new in_Ing_Egr_Inven_distribucion_Data();
+        List<in_Motivo_Inven_Info> lst_motivo_inve = new List<in_Motivo_Inven_Info>();
+        in_Motivo_Inven_Data data_motivo = new in_Motivo_Inven_Data();
+        in_Motivo_Inven_Info info_motivo = new in_Motivo_Inven_Info();
+        in_Ing_Egr_Inven_Bus bus_ing_egr = new in_Ing_Egr_Inven_Bus();
+        in_Ing_Egr_Inven_Info mov_sin_lote = new in_Ing_Egr_Inven_Info();
+        in_Ing_Egr_Inven_distribucion_Info distribucion_sin_lote = new in_Ing_Egr_Inven_distribucion_Info();
+        in_Ing_Egr_Inven_distribucion_Info distribucion_con_lote = new in_Ing_Egr_Inven_distribucion_Info();
+        #endregion
+
+
         public List<in_Ing_Egr_Inven_distribucion_Info> get_list(int IdEmpresa, int IdSucursal, int IdMovi_inven_tipo, decimal IdNumMovi)
         {
             try
@@ -125,19 +137,15 @@ namespace Core.Erp.Bus.Inventario
         {
             try
             {
-                in_Ing_Egr_Inven_distribucion_Info info_info_distribucion_in = new in_Ing_Egr_Inven_distribucion_Info();
-                in_Ing_Egr_Inven_distribucion_Data bus_info_distribucion_in = new in_Ing_Egr_Inven_distribucion_Data();
-                List<in_Motivo_Inven_Info> lst_motivo_inve = new List<in_Motivo_Inven_Info>();
-                in_Motivo_Inven_Data data_motivo = new in_Motivo_Inven_Data();
+               
                 info_info_distribucion_in = bus_info_distribucion_in.get_info(info_distribucion.IdEmpresa, info_distribucion.IdSucursal,info_distribucion.IdMovi_inven_tipo, info_distribucion.IdNumMovi, (info_distribucion.signo == "+" ? "-" : "+"));
                 lst_motivo_inve = data_motivo.get_list(info_distribucion.IdEmpresa,false);
-                in_Ing_Egr_Inven_distribucion_Info distribucion_sin_lote = oData.get_info(info_distribucion.IdEmpresa, info_distribucion.IdSucursal, info_distribucion.IdMovi_inven_tipo, info_distribucion.IdNumMovi, (info_distribucion.signo == "+" ? "-" : "+"));
-                in_Ing_Egr_Inven_distribucion_Info distribucion_con_lote = oData.get_info(info_distribucion.IdEmpresa, info_distribucion.IdSucursal, info_distribucion.IdMovi_inven_tipo, info_distribucion.IdNumMovi, info_distribucion.signo);
-                in_Motivo_Inven_Info info_motivo = new in_Motivo_Inven_Info();
-                in_Ing_Egr_Inven_Bus bus_ing_egr = new in_Ing_Egr_Inven_Bus();
+                distribucion_sin_lote = oData.get_info(info_distribucion.IdEmpresa, info_distribucion.IdSucursal, info_distribucion.IdMovi_inven_tipo, info_distribucion.IdNumMovi, (info_distribucion.signo == "+" ? "-" : "+"));
+                distribucion_con_lote = oData.get_info(info_distribucion.IdEmpresa, info_distribucion.IdSucursal, info_distribucion.IdMovi_inven_tipo, info_distribucion.IdNumMovi, info_distribucion.signo);
+               
                 #region Crear movimiento sin lote
-                in_Ing_Egr_Inven_Info mov_sin_lote = new in_Ing_Egr_Inven_Info();
-
+                if (info_info_distribucion_in == null)
+                    info_info_distribucion_in = info_distribucion;
                 #region Cabecera
                 if (distribucion_sin_lote != null)
                     mov_sin_lote = bus_ing_egr.get_info(distribucion_sin_lote.IdEmpresa_dis, distribucion_sin_lote.IdSucursal_dis, distribucion_sin_lote.IdMovi_inven_tipo_dis, distribucion_sin_lote.IdNumMovi_dis);
@@ -240,7 +248,7 @@ namespace Core.Erp.Bus.Inventario
                         IdSucursal = mov_sin_lote.IdSucursal,
                         IdMovi_inven_tipo = mov_sin_lote.IdMovi_inven_tipo,
                         IdNumMovi = mov_sin_lote.IdNumMovi,
-                        IdBodega =(int) mov_sin_lote.IdBodega,
+                        IdBodega =(int)info_distribucion.IdBodega,
                         IdProducto = item.IdProducto,
                         dm_observacion = "",
                         dm_cantidad = item.dm_cantidad == null ? 0 : Convert.ToDouble(item.dm_cantidad) * (info_distribucion.signo == "+" ? 1 : -1),
@@ -259,7 +267,7 @@ namespace Core.Erp.Bus.Inventario
                 #region guardar movimientos y distribucion
                 if (distribucion_sin_lote == null)
                 {
-                    if (!bus_ing_egr.guardarDB(mov_sin_lote))
+                    if (!bus_ing_egr.guardarDB(mov_sin_lote,""))
                         return false;
 
                     distribucion_sin_lote = new in_Ing_Egr_Inven_distribucion_Info
@@ -291,7 +299,7 @@ namespace Core.Erp.Bus.Inventario
 
                 if (distribucion_con_lote == null)
                 {
-                    if (!bus_ing_egr.guardarDB(mov_con_lote))
+                    if (!bus_ing_egr.guardarDB(mov_con_lote, mov_con_lote.signo))
                         return false;
 
                     distribucion_con_lote = new in_Ing_Egr_Inven_distribucion_Info

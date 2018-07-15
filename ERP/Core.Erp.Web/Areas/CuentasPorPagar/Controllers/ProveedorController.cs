@@ -147,6 +147,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-#endregion
+        public JsonResult get_info(decimal IdProveedor)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            var resultado = bus_proveedor.get_info(IdEmpresa, IdProveedor);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
     }
 }

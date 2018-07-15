@@ -55,15 +55,21 @@
         };
         settings.Columns.Add(c =>
         {
+
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
+
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
+
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdOrdenPago = DataBinder.Eval(tc.DataItem, "IdOrdenPago") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdOrdenPago = DataBinder.Eval(tc.DataItem, "IdOrdenPago") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
+                    Html.ActionLink("Modificar", "Modificar", new { IdOrdenPago = DataBinder.Eval(tc.DataItem, "IdOrdenPago") }
+
+
+                    ) + "&nbsp;" +
+                    Html.ActionLink("Anular", "Anular", new { IdOrdenPago = DataBinder.Eval(tc.DataItem, "IdOrdenPago") },
+                    new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
             });
@@ -111,11 +117,12 @@
         {
             column.SetDataItemTemplateContent(c =>
             {
-                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CXP_004", "CuentasPorPagarReportes", new { Area = "Reportes", IdTipoCbte = DataBinder.Eval(c.DataItem, "IdTipoCbte").ToString(), IdCbteCble = DataBinder.Eval(c.DataItem, "IdCbteCble").ToString() }, Request.Url.Scheme) + "');\"></span>");
+                //ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CXP_004", "CuentasPorPagarReportes", new { Area = "Reportes", IdTipoCbte = DataBinder.Eval(c.DataItem, "IdTipoCbte").ToString(), IdCbteCble = DataBinder.Eval(c.DataItem, "IdCbteCble").ToString() }, Request.Url.Scheme) + "');\"></span>");
 
             });
             column.Width = Unit.Percentage(5);
         });
+
     });
 }
 @grid.Bind(Model).GetHtml()

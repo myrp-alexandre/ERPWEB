@@ -44,5 +44,10 @@ namespace Core.Erp.Info.Inventario
         public string IdUnidadMedida_sinConversion { get; set; }
         public Nullable<double> mv_costo_sinConversion { get; set; }
         public Nullable<int> IdMotivo_Inv { get; set; }
+
+
+        #region Campos que no existen en la tabla
+        public string pr_descripcion { get; set; }
+        #endregion
     }
 }

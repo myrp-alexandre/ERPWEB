@@ -126,9 +126,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return PartialView("_GridViewPartial_pago_dist", model);
         }
 
-        public ActionResult EditingDelete(int IdSucursal)
+        public ActionResult EditingDelete(int Secuencia)
         {
-            List_fa_TerminoPago_Distribucion.DeleteRow(IdSucursal);
+            List_fa_TerminoPago_Distribucion.DeleteRow(Secuencia);
             fa_TerminoPago_Info model = new fa_TerminoPago_Info();
             return PartialView("_GridViewPartial_pago_dist", model);
         }
@@ -155,6 +155,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             List<fa_TerminoPago_Distribucion_Info> list = get_list();
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
             info_det.IdTerminoPago = info_det.IdTerminoPago;
+            info_det.Por_distribucion = info_det.Por_distribucion;
+            info_det.Num_Dias_Vcto = info_det.Num_Dias_Vcto;
 
             list.Add(info_det);
         }
@@ -163,6 +165,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             fa_TerminoPago_Distribucion_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdTerminoPago = info_det.IdTerminoPago;
+            info_det.Por_distribucion = info_det.Por_distribucion;
+            info_det.Num_Dias_Vcto = info_det.Num_Dias_Vcto;
 
         }
 

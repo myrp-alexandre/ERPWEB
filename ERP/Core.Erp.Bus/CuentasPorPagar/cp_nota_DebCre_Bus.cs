@@ -61,19 +61,28 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     info.ip = " ";
                    if( data.guardarDB(info))
                     {
+                        data_cancelacion = new cp_orden_pago_cancelaciones_Data();
                         foreach (var item in info.lst_detalle_op)
                         {
                             info_cancelacion.IdEmpresa = info.IdEmpresa;
-                            info_cancelacion.IdEmpresa_cxp = info.IdEmpresa;
+                            info_cancelacion.Idcancelacion = 0;
+                            info_cancelacion.Secuencia = 1;
+
                             info_cancelacion.IdEmpresa_op = info.IdEmpresa;
-                            info_cancelacion.IdEmpresa_op_padre = info.IdEmpresa;
-                            info_cancelacion.IdEmpresa_pago = info.IdEmpresa;
                             info_cancelacion.IdOrdenPago_op = item.IdOrdenPago;
+                            info_cancelacion.Secuencia_op = item.Secuencia;
+                            info_cancelacion.IdEmpresa_op_padre = info.IdEmpresa;
                             info_cancelacion.IdOrdenPago_op_padre = item.IdOrdenPago;
-                            info_cancelacion.IdTipoCbte_cxp = info.IdTipoCbte_Nota;
+                            info_cancelacion.Secuencia_op_padre = item.Secuencia;
+
+                            info_cancelacion.IdEmpresa_cxp = info.IdEmpresa;
+                            info_cancelacion.IdTipoCbte_cxp = info.IdTipoCbte_Nota ;
+                            info_cancelacion.IdCbteCble_cxp = info.IdCbteCble_Nota;
+                            info_cancelacion.IdEmpresa_pago = info.IdEmpresa;
+                            info_cancelacion.IdTipoCbte_pago = info.IdTipoCbte_Nota;
                             info_cancelacion.IdCbteCble_pago = info.IdCbteCble_Nota;
-                            info_cancelacion.MontoAplicado = item.Valor_a_pagar;
                             info_cancelacion.Observacion = info.cn_observacion;
+                            info_cancelacion.MontoAplicado = item.Valor_a_pagar;
                             data_cancelacion.guardarDB(info_cancelacion);
                         }
                     }
@@ -95,7 +104,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
             {
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
                 info.info_comrobante.IdTipoCbte = info.IdTipoCbte_Nota;
-                info.info_comrobante.IdCbteCble = info.IdTipoCbte_Nota;
+                info.info_comrobante.IdCbteCble = info.IdCbteCble_Nota;
                 info.info_comrobante.cb_Fecha = (DateTime)info.Fecha_contable;
                 info.info_comrobante.cb_Anio = info.info_comrobante.cb_Fecha.Year;
                 info.info_comrobante.cb_mes = info.info_comrobante.cb_Fecha.Month;
@@ -104,14 +113,39 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
                 info.info_comrobante.cb_Observacion = info.cn_observacion;
 
-              
+                info.cn_baseImponible = info.cn_subtotal_iva + info.cn_subtotal_siniva;
                 if (bus_contabilidad.modificarDB(info.info_comrobante))
                 {
                     data = new cp_nota_DebCre_Data();
-                    info.IdTipoCbte_Nota = info.IdTipoCbte_Nota;
-                    info.IdTipoCbte_Nota = info.IdTipoCbte_Nota;
-                    data.modificarDB(info);
-                }
+                    if (data.modificarDB(info))
+                    {
+                        data_cancelacion = new cp_orden_pago_cancelaciones_Data();
+                        data_cancelacion.ElimarDB(info.IdEmpresa, info.IdTipoCbte_Nota, info.IdCbteCble_Nota);
+                        foreach (var item in info.lst_detalle_op)
+                        {
+                            info_cancelacion.IdEmpresa = info.IdEmpresa;
+                            info_cancelacion.Idcancelacion = 0;
+                            info_cancelacion.Secuencia = 1;
+
+                            info_cancelacion.IdEmpresa_op = info.IdEmpresa;
+                            info_cancelacion.IdOrdenPago_op = item.IdOrdenPago;
+                            info_cancelacion.Secuencia_op = item.Secuencia;
+                            info_cancelacion.IdEmpresa_op_padre = info.IdEmpresa;
+                            info_cancelacion.IdOrdenPago_op_padre = item.IdOrdenPago;
+                            info_cancelacion.Secuencia_op_padre = item.Secuencia;
+
+                            info_cancelacion.IdEmpresa_cxp = info.IdEmpresa;
+                            info_cancelacion.IdTipoCbte_cxp = info.IdTipoCbte_Nota;
+                            info_cancelacion.IdCbteCble_cxp = info.IdCbteCble_Nota;
+                            info_cancelacion.IdEmpresa_pago = info.IdEmpresa;
+                            info_cancelacion.IdTipoCbte_pago = info.IdTipoCbte_Nota;
+                            info_cancelacion.IdCbteCble_pago = info.IdCbteCble_Nota;
+                            info_cancelacion.Observacion = info.cn_observacion;
+                            info_cancelacion.MontoAplicado = item.Valor_a_pagar;
+                            data_cancelacion.guardarDB(info_cancelacion);
+                        }
+                    }
+                    }
 
 
                 return true;
@@ -128,7 +162,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
             {
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
                 info.info_comrobante.IdTipoCbte = info.IdTipoCbte_Nota;
-                info.info_comrobante.IdCbteCble = info.IdTipoCbte_Nota;
+                info.info_comrobante.IdCbteCble = info.IdCbteCble_Nota;
                 info.info_comrobante.cb_Fecha = (DateTime)info.Fecha_contable;
                 info.info_comrobante.cb_Anio = info.info_comrobante.cb_Fecha.Year;
                 info.info_comrobante.cb_mes = info.info_comrobante.cb_Fecha.Month;
@@ -144,6 +178,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     info.IdTipoCbte_Nota = info.IdTipoCbte_Nota;
                     info.IdTipoCbte_Nota = info.IdTipoCbte_Nota;
                     data.anularDB(info);
+                    data_cancelacion.ElimarDB(info.IdEmpresa, info.IdTipoCbte_Nota, info.IdCbteCble_Nota);
                 }
 
 

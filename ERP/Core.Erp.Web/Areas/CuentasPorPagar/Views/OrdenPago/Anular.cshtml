@@ -24,6 +24,8 @@
     @Html.HiddenFor(q => q.IdOrdenPago)
     @Html.HiddenFor(q => q.IdEntidad)
     @Html.HiddenFor(q => q.IdPersona)
+    @Html.HiddenFor(q => q.info_comprobante.IdTipoCbte)
+    @Html.HiddenFor(q => q.info_comprobante.IdCbteCble)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
@@ -167,7 +169,6 @@
                         <div class="form-group">
                             <label for="co_observacion">Observación*</label>
                             @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control", @id = "observacion" })
-                            @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>

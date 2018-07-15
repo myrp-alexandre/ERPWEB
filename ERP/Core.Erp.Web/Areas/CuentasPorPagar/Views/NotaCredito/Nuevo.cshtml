@@ -16,13 +16,72 @@
     }
 }
 
+<script>
+    function op_con_saldo() {
+        if (IdProveedor.GetValue() == 0) {
+            alert("Seleccione el proveedor");
+        }
+        else {
+            Buscar_op();
+            GridViewPartial_ordenes_pagos_con_saldo.PerformCallback();
+            $("#op_con_saldo").modal("show");
+        }
+    };
+    function cerrar() {
+        //GridViewPartial_distribuidos.PerformCallback();
+        //GridViewPartial_por_distribuir.PerformCallback();
+        $("#op_con_saldo").modal("hide");
+    };
+
+
+
+    var selectedIDs;
+    function OnBeginCallback(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDs"] = selectedIDs;
+    }
+    function OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("IdOrdenPago", GetSelectedFieldValuesCallback);
+    }
+    function GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedIDs = values.join(',');
+    }
+
+
+    function seleccionar_op() {
+        var datos = {
+            Ids: selectedIDs
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("seleccionar_op","NotaCredito", new { Area = "CuentasPorPagar" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                $("#myform").submit();
+                GridViewPartial_nota_credito_det.PerformCallback();
+                $("#op_con_saldo").modal("hide");
+
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+</script>
 @using (Html.BeginForm("Nuevo", "NotaCredito", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
 
-    @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdCbteCble_Nota)
+        @Html.HiddenFor(q => q.IdEmpresa)
+        @Html.HiddenFor(q => q.IdCbteCble_Nota)
 
-    <div class="row">
+        <div class="row">
         <div class="col-md-6">
             <div class="col-md-12">
                 <div class="form-group">
@@ -50,7 +109,6 @@
                    //Boton para seleccionar ningun registro
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){Buscar_op()}";
 
                }).BindList(ViewBag.lst_proveedores).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
@@ -102,7 +160,7 @@
                             </div>
                         </div>
                     </div>
-                <div class="row" id="div_tipo">
+        <div class="row" id="div_tipo">
                     <div class="col-md-12">
                         <div class="col-md-2">
                             <div class="form-group">
@@ -129,7 +187,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+        <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -140,7 +198,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="Tabs" role="tabpanel">
+        <div id="Tabs" role="tabpanel">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="active">
                             <a href="#tab_datos_generales" aria-controls="informacion_general" role="tab" data-toggle="tab">Datos generales</a>
@@ -160,12 +218,19 @@
                                 <div class="col-md-12">
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="cn_subtotal_iva">Base IVA</label>
+                                            <label for="cn_subtotal_iva">Subtotal IVA</label>
                                             @Html.TextBoxFor(q => q.cn_subtotal_iva, new { @class = "form-control", @id = "cn_subtotal_iva" })
                                             @Html.ValidationMessageFor(q => q.cn_subtotal_iva, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="cn_subtotal_siniva">Subtotal cero</label>
+                                            @Html.TextBoxFor(q => q.cn_subtotal_siniva, new { @class = "form-control", @id = "cn_subtotal_siniva" })
+                                            @Html.ValidationMessageFor(q => q.cn_subtotal_siniva, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="cn_subtotal_iva">% IVA</label>
@@ -178,13 +243,6 @@
                                             <label for="cn_valoriva">Iva</label>
                                             @Html.TextBoxFor(q => q.cn_valoriva, new { @class = "form-control", @id = "cn_valoriva" })
                                             @Html.ValidationMessageFor(q => q.cn_valoriva, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="cn_subtotal_siniva">Base cero</label>
-                                            @Html.TextBoxFor(q => q.cn_subtotal_siniva, new { @class = "form-control", @id = "cn_subtotal_siniva" })
-                                            @Html.ValidationMessageFor(q => q.cn_subtotal_siniva, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
@@ -250,8 +308,11 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="num_docu_Modificar">Ordenes pagos*</label>
-                                            @Html.Action("GridViewPartial_ordenes_pagos_con_saldo", new { Area = "CuentasPorPagar", Controller = "OrdenPago" })
+
+                                            <button type="button" class="btn btn-primary" onclick="op_con_saldo()">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                            @Html.Action("GridViewPartial_nota_credito_det")
 
 
                                         </div>
@@ -300,15 +361,39 @@
                         </div>
                     </div>
                 </div>
-                <div class="box-footer">
+        <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <a class="btn btn-default" href="@Url.Action("Index","NotaCredito",new { Area = "CuentasPorPagar" },null)">Cancelar</a>
                 </div>
-                @section Scripts {
-                    @Scripts.Render("~/bundles/jqueryval")
-                }
-                }
-                <script>
+        @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        }
+        }
+     
+<div class="modal fade" id="op_con_saldo" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Ordenes de pago con aldos</h4>
+            </div>
+            <div class="modal-body">
+             @Html.Action("GridViewPartial_ordenes_pagos_con_saldo") 
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="seleccionar_op();">Aceptar</button>
+                <button type="button" class="btn btn-default" onclick="cerrar();">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+  
+
+
+<script>
 
 
                     $(function () {
@@ -325,7 +410,7 @@
                         $('#cn_Fecha_vcto').datepicker({
                             autoclose: true
                         })
-                        
+
                         $("#cn_num_doc_modificado").change(function () {
                             rellenar_ceros();
 
@@ -342,6 +427,7 @@
                     // funciones calcular total
                     $("#cn_fecha").change(function () {
                         var d = new Date($("#cn_fecha").val());
+                        d = moment(d).format("DD/MM/YYYY");
                         $('#Fecha_contable').datepicker("setDate", moment(d).format("DD/MM/YYYY"));
 
                     });
@@ -442,37 +528,40 @@
                     };
                     // armar diario contable
 
-                    function armar_diario() {
+    function armar_diario() {
 
 
+        if (IdProveedor.GetValue() == 0) {
+            alert("Seleccione el proveedor");
+        }
+        else
+        {
+            var datos = {
+                IdProveedor: IdProveedor.GetValue(),
+                cn_subtotal_iva: $("#cn_subtotal_iva").val(),
+                cn_subtotal_siniva: $("#cn_subtotal_siniva").val(),
+                valoriva: $("#cn_valoriva").val(),
+                total: $("#cn_total").val(),
+                observacion: $("#observacion").val()
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("armar_diario", "NotaCredito", new { Area = "CuentasPorPagar" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    GridViewPartial_nota_credito_dc.PerformCallback();
+                },
+                error: function (error) {
+                }
+            });
+        }
 
-
-
-                        var datos = {
-                            IdProveedor: IdProveedor.GetValue(),
-                            cn_subtotal_iva: $("#cn_subtotal_iva").val(),
-                            cn_subtotal_siniva: $("#cn_subtotal_siniva").val(),
-                            cn_valoriva: $("#cn_valoriva").val(),
-                            cn_total: $("#cn_total").val(),
-                            observacion: $("#observacion").val()
-                        }
-                        $.ajax({
-                            type: 'POST',
-                            data: JSON.stringify(datos),
-                            url: '@Url.Action("armar_diario", "NotaCredito", new { Area = "CuentasPorPagar" })',
-                            async: false,
-                            bDeferRender: true,
-                            bProcessing: true,
-                            dataType: 'json',
-                            contentType: 'application/json; charset=utf-8',
-                            success: function (data) {
-                                GridViewPartial_nota_credito_dc.PerformCallback();
-                            },
-                            error: function (error) {
-                            }
-                        });
-
-                    };
+       };
 
 
 
@@ -486,7 +575,7 @@
                         $.ajax({
                             type: 'POST',
                             data: JSON.stringify(datos),
-                            url: '@Url.Action("Buscar_op", "OrdenPago", new { Area = "CuentasPorPagar" })',
+                            url: '@Url.Action("Buscar_op", "NotaCredito", new { Area = "CuentasPorPagar" })',
                             async: false,
                             bDeferRender: true,
                             bProcessing: true,
@@ -503,4 +592,4 @@
                     };
 
 
-                </script>
+</script>

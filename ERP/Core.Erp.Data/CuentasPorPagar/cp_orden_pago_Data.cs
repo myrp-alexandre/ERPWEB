@@ -8,7 +8,7 @@ namespace Core.Erp.Data.CuentasPorPagar
 {
    public class cp_orden_pago_Data
     {
-        public List<cp_orden_pago_Info> get_list(int IdEmpresa)
+        public List<cp_orden_pago_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
             {
@@ -18,6 +18,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                 {
                     Lista = (from q in Context.vwcp_orden_pago
                              where IdEmpresa == q.IdEmpresa
+                             && q.Fecha_Pago>=Fecha_ini
+                             && q.Fecha_Pago <= Fecha_fin
+
                              select new cp_orden_pago_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -257,7 +260,19 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.Estado = "I";
                         Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                         Entity.Fecha_UltAnu = info.Fecha_UltAnu=DateTime.Now;
+
+                        cp_orden_pago_det Entity_de = Context.cp_orden_pago_det.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdOrdenPago == info.IdOrdenPago);
+                        if (Entity != null)
+                        {
+                            Entity_de.IdEmpresa_cxp = null;
+                            Entity_de.IdTipoCbte_cxp = null;
+                            Entity_de.IdCbteCble_cxp = null;
+                        }
                     }
+
+                   
+                    Context.SaveChanges();
+
                 }
 
                 return true;
@@ -295,7 +310,6 @@ namespace Core.Erp.Data.CuentasPorPagar
 
         public List<cp_orden_pago_det_Info> Get_List_orden_pago_con_saldo(int IdEmpresa, string IdTipo_op, decimal IdProveedor, string IdEstado_Aprobacion, string IdUsuario)
         {
-
             try
             {
 

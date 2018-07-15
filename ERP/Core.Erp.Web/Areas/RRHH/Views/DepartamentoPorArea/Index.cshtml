@@ -1,6 +1,7 @@
 ﻿@model Core.Erp.Info.RRHH.ro_area_Info
 
 @{
+    ViewBag.Title = "Departamento por área";
     @Html.Action("GridViewPartial_departamento_area")
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {

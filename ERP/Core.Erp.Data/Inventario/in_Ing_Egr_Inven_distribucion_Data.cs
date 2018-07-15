@@ -167,7 +167,7 @@ namespace Core.Erp.Data.Inventario
                 }
                 return Lista;
             }
-            catch (Exception )
+            catch (Exception e)
             {
                 throw;
 
@@ -261,7 +261,6 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
-
 
         private int get_id(int IdEmpresa, int IdSucursal, int IdMovi_inven_tipo, decimal IdNumMovi)
         {

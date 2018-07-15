@@ -23,7 +23,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Secuencia = Info.Secuencia,
                         IdEmpresa_op = Info.IdEmpresa_op,
                         IdOrdenPago_op = Info.IdOrdenPago_op,
-                        Secuencia_op = 1,
+                        Secuencia_op = Info.Secuencia_op,
                         IdEmpresa_op_padre = Info.IdEmpresa_op_padre,
                         IdOrdenPago_op_padre = Info.IdOrdenPago_op_padre,
                         Secuencia_op_padre = Info.Secuencia_op_padre,
@@ -83,49 +83,178 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-
-        public List<cp_orden_pago_cancelaciones_Info> Get_list_Cancelacion_x_CXP(int IdEmpresa_cxp, int IdTipoCbte_cxp, decimal IdCbteCble_cxp)
+        public List<cp_orden_pago_det_Info> Get_list_Cancelacion_x_CXP(int IdEmpresa_cxp, int IdTipoCbte_cxp, decimal IdCbteCble_cxp)
         {
             try
             {
 
-                List<cp_orden_pago_cancelaciones_Info> Lst = new List<cp_orden_pago_cancelaciones_Info>();
+                List<cp_orden_pago_det_Info> Lista = new List<cp_orden_pago_det_Info>();
 
                 using (Entities_cuentas_por_pagar cxp = new Entities_cuentas_por_pagar())
                 {
-                    var consulta = from q in cxp.cp_orden_pago_cancelaciones
+                    Lista = (from q in cxp.vwcp_orden_pago_con_cancelacion
                                    where q.IdEmpresa_cxp == IdEmpresa_cxp
                                    && q.IdTipoCbte_cxp == IdTipoCbte_cxp
                                    && q.IdCbteCble_cxp == IdCbteCble_cxp
-                                   select q;
+                                        select new
+                             cp_orden_pago_det_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdOrdenPago = q.IdOrdenPago,
+                                 IdTipoCbte_cxp = q.IdTipoCbte_cxp,
+                                 IdCbteCble_cxp = q.IdCbteCble_cxp,
+                                 IdEntidad = q.IdEntidad,
+                                 IdPersona = q.IdPersona,
+                                 IdTipo_op = q.IdTipo_op,
+                                 IdEstadoAprobacion = q.IdEstadoAprobacion,
+                                 Valor_a_pagar = q.Valor_a_pagar,
+                                 Valor_estimado_a_pagar_OP = q.Valor_a_pagar,
+                                 Total_cancelado_OP = q.Valor_a_pagar,
+                                 Nom_Beneficiario = q.pe_nombreCompleto, 
+                                 Referencia=q.Observacion
+                                 
+                             }).ToList();
 
-                    foreach (var item in consulta)
-                    {
-                        cp_orden_pago_cancelaciones_Info info = new cp_orden_pago_cancelaciones_Info();
 
-                        info.IdEmpresa = item.IdEmpresa;
-                        info.Idcancelacion = item.Idcancelacion;
-                        info.Secuencia = item.Secuencia;
-                        info.IdEmpresa_cxp = item.IdEmpresa_cxp;
-                        info.IdTipoCbte_cxp = item.IdTipoCbte_cxp;
-                        info.IdCbteCble_cxp = item.IdCbteCble_cxp;
-                        info.IdEmpresa_pago = item.IdEmpresa_pago;
-                        info.IdTipoCbte_pago = item.IdTipoCbte_pago;
-                        info.IdCbteCble_pago = item.IdCbteCble_pago;
-                        info.MontoAplicado = Convert.ToDouble(item.MontoAplicado);
-                        info.SaldoAnterior = Convert.ToDouble(item.SaldoAnterior);
-                        info.SaldoActual = Convert.ToDouble(item.SaldoActual);
-
-                        Lst.Add(info);
-                    }
                 }
 
-                return Lst;
+                return Lista;
             }
             catch (Exception )
             {
                 
                 throw ;
+            }
+        }
+
+        public bool ElimarDB(int IdEmpresa_cxp, int IdTipoCbte_cxp, decimal IdCbteCble_cxp)
+        {
+            try
+            {
+                using (Entities_cuentas_por_pagar Contex = new Entities_cuentas_por_pagar())
+                {
+                    string sql = "Delete cp_orden_pago_cancelaciones where IdEmpresa_cxp='" + IdEmpresa_cxp+ "' and IdTipoCbte_cxp='"+IdTipoCbte_cxp+ "' and IdCbteCble_cxp='"+IdCbteCble_cxp+"'";
+                    Contex.Database.ExecuteSqlCommand(sql);
+                }
+             
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public List<cp_orden_pago_cancelaciones_Info> get_list_con_saldo(int IdEmpresa, decimal IdPersona, string IdTipo_Persona, decimal IdEntidad, string IdEstado_Aprobacion, string IdUsuario, bool mostrar_saldo_0)
+        {
+            try
+            {
+                decimal IdPersona_ini = IdPersona;
+                decimal IdPersona_fin = IdPersona == 0 ? 99999 : IdPersona;
+
+                decimal IdEntidad_ini = IdEntidad;
+                decimal IdEntidad_fin = IdEntidad == 0 ? 99999 : IdEntidad;
+                List<cp_orden_pago_cancelaciones_Info> Lista;
+
+                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
+                {
+                    Lista = (from q in Context.spcp_Get_Data_orden_pago_con_cancelacion_data(IdEmpresa, IdPersona_ini, IdPersona_fin, IdTipo_Persona, IdEntidad_ini, IdEntidad_fin, IdEstado_Aprobacion, IdUsuario, mostrar_saldo_0)
+                             select new cp_orden_pago_cancelaciones_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdEmpresa_cxp = q.IdEmpresa_cxp,
+                                 IdTipoCbte_cxp = q.IdTipoCbte_cxp,
+                                 IdCbteCble_cxp = q.IdCbteCble_cxp,
+                                 IdOrdenPago_op = q.IdOrdenPago,
+                                 IdTipo_op = q.IdTipo_op,
+                                 Referencia = q.Referencia,
+                                 IdEmpresa_op = q.IdEmpresa,
+                                 Secuencia_op = q.Secuencia_OP,
+                                 IdTipo_Persona = q.IdTipoPersona,
+                                 IdEntidad = q.IdEntidad,
+                                 IdPersona = q.IdPersona,
+                                 Fecha_Fa_Prov = q.Fecha_Fa_Prov,
+                                 Fecha_Venc_Fac_Prov = q.Fecha_Venc_Fac_Prov,
+                                 Observacion = q.Observacion,
+                                 pe_nombreCompleto = q.Nom_Beneficiario,
+                                 IdCtaCble = q.IdCtaCble,
+                                 MontoAplicado = q.Valor_a_pagar
+                             }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<cp_orden_pago_cancelaciones_Info> get_list_x_pago(int IdEmpresa_pago, int IdTipoCbte_pago, decimal IdCbteCble_pago, string IdUsuario)
+        {
+            try
+            {
+                List<cp_orden_pago_cancelaciones_Info> Lista;
+
+                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
+                {
+                    Lista = (from q in Context.spcp_Get_Data_orden_pago_con_cancelacion_x_pago(IdEmpresa_pago,IdTipoCbte_pago,IdCbteCble_pago, IdUsuario)
+                             select new cp_orden_pago_cancelaciones_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdEmpresa_cxp = q.IdEmpresa_cxp,
+                                 IdTipoCbte_cxp = q.IdTipoCbte_cxp,
+                                 IdCbteCble_cxp = q.IdCbteCble_cxp,
+                                 IdOrdenPago_op = q.IdOrdenPago,
+                                 IdTipo_op = q.IdTipo_op,
+                                 Referencia = q.Referencia,
+                                 IdEmpresa_op = q.IdEmpresa,
+                                 Secuencia_op = q.Secuencia_OP,
+                                 IdTipo_Persona = q.IdTipoPersona,
+                                 IdEntidad = q.IdEntidad,
+                                 IdPersona = q.IdPersona,
+                                 Fecha_Fa_Prov = q.Fecha_Fa_Prov,
+                                 Fecha_Venc_Fac_Prov = q.Fecha_Venc_Fac_Prov,
+                                 Observacion = q.Observacion,
+                                 pe_nombreCompleto = q.Nom_Beneficiario,
+                                 IdCtaCble = q.IdCtaCble,
+                                 MontoAplicado = q.Valor_a_pagar
+                             }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool si_existe_cancelacion(int IdEmpresa, decimal IdOrdenPago)
+        {
+            try
+            {
+                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
+                {
+                    var select = Context.cp_orden_pago_cancelaciones.Count(q => q.IdEmpresa == IdEmpresa & q.IdOrdenPago_op== IdOrdenPago);
+                    if (select == 0)
+                    {
+                        return false;
+                    }
+                    else
+                        return true;
+
+                    
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 

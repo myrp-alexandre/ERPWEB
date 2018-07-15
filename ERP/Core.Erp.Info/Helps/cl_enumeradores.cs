@@ -8,6 +8,13 @@ namespace Core.Erp.Info.Helps
 {
     public class cl_enumeradores
     {
+        public enum eTipoCbteBancario
+        {
+            CHEQ,
+            DEPO,
+            NCBA,
+            NDBA
+        }
         public enum eTipoCatalogoGeneral
         {
             SEXO = 1,

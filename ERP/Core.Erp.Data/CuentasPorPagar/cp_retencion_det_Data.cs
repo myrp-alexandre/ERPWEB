@@ -62,19 +62,19 @@ namespace Core.Erp.Data.CuentasPorPagar
             }
         }
 
-        public bool guardarDB(List<cp_retencion_det_Info> Lista)
+        public bool guardarDB(cp_retencion_Info info)
         {
             try
             {
                 int sec = 1;
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
-                    foreach (var item in Lista)
+                    foreach (var item in info.detalle)
                     {
                         cp_retencion_det Entity = new cp_retencion_det
                         {
-                            IdEmpresa = item.IdEmpresa,
-                            IdRetencion = item.IdRetencion,
+                            IdEmpresa = info.IdEmpresa,
+                            IdRetencion = info.IdRetencion,
                             Idsecuencia = sec,
                             re_tipoRet = item.re_tipoRet,
                             re_baseRetencion = (double)item.re_baseRetencion,

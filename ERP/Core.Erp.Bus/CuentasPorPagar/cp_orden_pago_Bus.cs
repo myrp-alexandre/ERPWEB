@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Data.CuentasPorPagar;
+using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.CuentasPorPagar;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,11 @@ namespace Core.Erp.Bus.CuentasPorPagar
         cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
         ct_cbtecble_det_Bus bus_contabilidad_det = new ct_cbtecble_det_Bus();
 
-        public List<cp_orden_pago_Info> get_list(int IdEmpresa)
+        public List<cp_orden_pago_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
             {
-                return oData.get_list(IdEmpresa);
+                return oData.get_list(IdEmpresa, Fecha_ini, Fecha_fin);
             }
             catch (Exception)
             {
@@ -46,9 +47,21 @@ namespace Core.Erp.Bus.CuentasPorPagar
             {
                 cp_orden_pago_Info info_ = new cp_orden_pago_Info();
                 info_= oData.get_info(IdEmpresa, IdOrdenPago);
-
+                if (info_ == null)
+                    info_ = new cp_orden_pago_Info();
                 info_.detalle = odata_detalle.Get_list_cuotas_x_doc_det(IdEmpresa, IdOrdenPago);
+                if(info_.detalle==null)
+                {
+                    info_.detalle = new List<cp_orden_pago_det_Info>();
+                }
+                else
+                {
+                    if (info_.detalle.Count() > 0)
+                        info_.Valor_a_pagar = info_.detalle.FirstOrDefault().Valor_a_pagar;
+                }
                 info_.info_comprobante = bus_contabilidad.get_info(info_.IdEmpresa, Convert.ToInt32(info_.detalle.FirstOrDefault().IdTipoCbte_cxp), Convert.ToInt32(info_.detalle.FirstOrDefault().IdCbteCble_cxp));
+                if (info_.info_comprobante == null)
+                    info_.info_comprobante = new ct_cbtecble_Info();
                 info_.info_comprobante.lst_ct_cbtecble_det = bus_contabilidad_det.get_list(info_.IdEmpresa, info_.info_comprobante.IdTipoCbte,info_.info_comprobante.IdCbteCble);
                 return info_;
             }
@@ -115,15 +128,11 @@ namespace Core.Erp.Bus.CuentasPorPagar
         {
             try
             {
+                oData = new cp_orden_pago_Data();
                 if (oData.anularDB(info))
                 {
                     bus_contabilidad.anularDB(info.info_comprobante);
 
-                    foreach (var item in info.detalle)
-                    {
-                        odata_detalle.modificarDB(item);
-
-                    }
                 }
                 return true;
             }

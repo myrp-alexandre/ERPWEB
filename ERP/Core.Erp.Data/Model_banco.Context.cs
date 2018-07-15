@@ -29,5 +29,17 @@ namespace Core.Erp.Data
         public virtual DbSet<ba_parametros> ba_parametros { get; set; }
         public virtual DbSet<ba_Banco_Cuenta> ba_Banco_Cuenta { get; set; }
         public virtual DbSet<ba_Catalogo> ba_Catalogo { get; set; }
+        public virtual DbSet<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito> ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito { get; set; }
+        public virtual DbSet<ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo> ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo { get; set; }
+        public virtual DbSet<ba_Talonario_cheques_x_banco> ba_Talonario_cheques_x_banco { get; set; }
+        public virtual DbSet<ba_tipo_nota> ba_tipo_nota { get; set; }
+        public virtual DbSet<ba_Cbte_Ban> ba_Cbte_Ban { get; set; }
+        public virtual DbSet<vwba_Cbte_Ban> vwba_Cbte_Ban { get; set; }
+        public virtual DbSet<vwba_Talonario_cheques_x_banco_ID> vwba_Talonario_cheques_x_banco_ID { get; set; }
+        public virtual DbSet<vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar> vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar { get; set; }
+        public virtual DbSet<vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito> vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito { get; set; }
+        public virtual DbSet<ba_Conciliacion_det_IngEgr> ba_Conciliacion_det_IngEgr { get; set; }
+        public virtual DbSet<ba_Conciliacion> ba_Conciliacion { get; set; }
+        public virtual DbSet<vwba_Conciliacion> vwba_Conciliacion { get; set; }
     }
 }

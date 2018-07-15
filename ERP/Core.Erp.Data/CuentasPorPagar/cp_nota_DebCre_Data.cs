@@ -85,17 +85,12 @@ namespace Core.Erp.Data.CuentasPorPagar
                     {
 
                         Entity.IdEmpresa = info.IdEmpresa;
-                        Entity.IdCbteCble_Nota = info.IdCbteCble_Nota;
-                        Entity.IdTipoCbte_Nota = info.IdTipoCbte_Nota;
-                        Entity.DebCre = info.DebCre;
                         Entity.IdProveedor = info.IdProveedor;
                         Entity.IdTipoNota = info.IdTipoNota;
                         Entity.IdSucursal = info.IdSucursal;
                         Entity.cn_fecha = info.cn_fecha;
                         Entity.Fecha_contable = info.Fecha_contable;
                         Entity.cn_Fecha_vcto = info.cn_Fecha_vcto;
-                        Entity.cn_serie1 = info.cn_serie1;
-                        Entity.cn_serie2 = info.cn_serie2;
                         Entity.cn_Nota = info.cn_Nota;
                         Entity.cn_observacion = info.cn_observacion;
                         Entity.cn_subtotal_iva = info.cn_subtotal_iva;
@@ -109,7 +104,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.cn_Serv_valor = info.cn_Serv_valor;
                         Entity.cn_BaseSeguro = info.cn_BaseSeguro;
                         Entity.cn_total = info.cn_total;
-                        Entity.cn_vaCoa = info.cn_vaCoa;
                         Entity.cn_Autorizacion = info.cn_Autorizacion;
                         Entity.cn_Autorizacion_Imprenta = info.cn_Autorizacion_Imprenta;
                         Entity.cn_num_doc_modificado = info.cn_num_doc_modificado;
@@ -249,41 +243,41 @@ namespace Core.Erp.Data.CuentasPorPagar
                     if (Entity == null) return null;
                     info = new cp_nota_DebCre_Info
                     {
-                        IdEmpresa = info.IdEmpresa,
-                        IdCbteCble_Nota = info.IdCbteCble_Nota,
-                        IdTipoCbte_Nota = info.IdTipoCbte_Nota,
-                        DebCre = info.DebCre,
-                        IdProveedor = info.IdProveedor,
-                        IdTipoNota = info.IdTipoNota,
-                        IdSucursal = info.IdSucursal,
-                        cn_fecha = info.cn_fecha,
-                        Fecha_contable = info.Fecha_contable,
-                        cn_Fecha_vcto = info.cn_Fecha_vcto,
-                        cn_serie1 = info.cn_serie1,
-                        cn_serie2 = info.cn_serie2,
-                        cn_Nota = info.cn_Nota,
-                        cn_observacion = info.cn_observacion,
-                        cn_subtotal_iva = info.cn_subtotal_iva,
-                        cn_subtotal_siniva = info.cn_subtotal_siniva,
-                        cn_baseImponible = info.cn_baseImponible,
-                        cn_Por_iva = info.cn_Por_iva,
-                        cn_Ice_base = info.cn_Ice_base,
-                        cn_Ice_por = info.cn_Ice_por,
-                        cn_Ice_valor = info.cn_Ice_valor,
-                        cn_Serv_por = info.cn_Serv_por,
-                        cn_Serv_valor = info.cn_Serv_valor,
-                        cn_BaseSeguro = info.cn_BaseSeguro,
-                        cn_total = info.cn_total,
-                        cn_vaCoa = info.cn_vaCoa,
-                        cn_Autorizacion = info.cn_Autorizacion,
-                        cn_Autorizacion_Imprenta = info.cn_Autorizacion_Imprenta,
-                        cn_num_doc_modificado = info.cn_num_doc_modificado,
-                        IdCod_ICE = info.IdCod_ICE,
-                        IdIden_credito = info.IdIden_credito,
-                        IdCtaCble_Acre = info.IdCtaCble_Acre,
-                        IdTipoFlujo = info.IdTipoFlujo,
-                        IdTipoServicio = info.IdTipoServicio,
-                        IdCtaCble_IVA = info.IdCtaCble_IVA,
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdCbteCble_Nota = Entity.IdCbteCble_Nota,
+                        IdTipoCbte_Nota = Entity.IdTipoCbte_Nota,
+                        DebCre = Entity.DebCre,
+                        IdProveedor = Entity.IdProveedor,
+                        IdTipoNota = Entity.IdTipoNota,
+                        IdSucursal = Entity.IdSucursal,
+                        cn_fecha = Entity.cn_fecha,
+                        Fecha_contable = Entity.Fecha_contable,
+                        cn_Fecha_vcto = Entity.cn_Fecha_vcto,
+                        cn_serie1 = Entity.cn_serie1,
+                        cn_serie2 = Entity.cn_serie2,
+                        cn_Nota = Entity.cn_Nota,
+                        cn_observacion = Entity.cn_observacion,
+                        cn_subtotal_iva = Entity.cn_subtotal_iva,
+                        cn_subtotal_siniva = Entity.cn_subtotal_siniva,
+                        cn_baseImponible = Entity.cn_baseImponible,
+                        cn_Por_iva = Entity.cn_Por_iva,
+                        cn_Ice_base = Entity.cn_Ice_base,
+                        cn_Ice_por = Entity.cn_Ice_por,
+                        cn_Ice_valor = Entity.cn_Ice_valor,
+                        cn_Serv_por = Entity.cn_Serv_por,
+                        cn_Serv_valor = Entity.cn_Serv_valor,
+                        cn_BaseSeguro = Entity.cn_BaseSeguro,
+                        cn_total = Entity.cn_total,
+                        cn_vaCoa = Entity.cn_vaCoa,
+                        cn_Autorizacion = Entity.cn_Autorizacion,
+                        cn_Autorizacion_Imprenta = Entity.cn_Autorizacion_Imprenta,
+                        cn_num_doc_modificado = Entity.cn_num_doc_modificado,
+                        IdCod_ICE = Entity.IdCod_ICE,
+                        IdIden_credito = Entity.IdIden_credito,
+                        IdCtaCble_Acre = Entity.IdCtaCble_Acre,
+                        IdTipoFlujo = Entity.IdTipoFlujo,
+                        IdTipoServicio = Entity.IdTipoServicio,
+                        IdCtaCble_IVA = Entity.IdCtaCble_IVA,
                         ConvenioTributacion_bool = Entity.ConvenioTributacion == "SI" ? true : false,
                         PagoSujetoRetencion_bool = Entity.PagoSujetoRetencion == "SI" ? true : false
                     };

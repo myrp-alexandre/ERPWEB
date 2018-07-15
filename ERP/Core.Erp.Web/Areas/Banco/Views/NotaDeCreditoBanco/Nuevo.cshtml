@@ -1,0 +1,163 @@
+﻿@model Core.Erp.Info.Banco.ba_Cbte_Ban_Info
+@{
+    ViewBag.Title = "Nuevo crédito";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+<script type="text/javascript">
+    $(function () {
+        //Date picker
+        $('#cb_Fecha').datepicker({
+            autoclose: true
+        })
+        $("#IdBanco").change(function () {
+            armar_diario();
+        });
+        $("#IdTipoNota").change(function () {
+            armar_diario();
+        });
+        armar_diario();
+    });
+    var selectedIDs;
+
+    function armar_diario() {
+        var datos = {
+            IdBanco: $("#IdBanco").val(),
+            IdTipoNota : $("#IdTipoNota").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("armar_diario", "NotaDeCreditoBanco",new { Area = "Banco"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridView_comprobante_detalle.PerformCallback();
+                $("#cb_Valor").val(data);
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function GetValorTotal() {
+        var datos = {
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetValorTotal", "NotaDeCreditoBanco",new { Area = "Banco"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#cb_Valor").val(data);
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+
+</script>
+
+@using (Html.BeginForm("Nuevo", "NotaDeCreditoBanco", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+
+    }
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdSucursal">Sucursal:*</label>
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdTipoNota">Tipo de nota:*</label>
+                    @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_tipo_nota, "IdTipoNota", "Descripcion"), new { @class = "form-control", @id = "IdTipoNota" })
+                    @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-4 col-md-2">
+                <div class="form-group">
+                    <label for="cb_Fecha">Fecha:*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.cb_Fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "cb_Fecha" })
+                        @Html.ValidationMessageFor(q => q.cb_Fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdBanco">Cuenta bancaria:*</label>
+                    @Html.DropDownListFor(q => q.IdBanco, new SelectList(ViewBag.lst_banco_cuenta, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco" })
+                    @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="cb_Observacion">Observación</label>
+                    @Html.TextAreaFor(q => q.cb_Observacion, new { @id = "cb_Valor", @class = "form-control", @rows = 3 })
+                    @Html.ValidationMessageFor(q => q.cb_Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_diario" aria-controls="vales" role="tab" data-toggle="tab">Diario</a>
+            </li>
+        </ul>
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_diario">
+                @Html.Action("GridViewPartial_comprobante_detalle", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "NotaDeCreditoBanco", new { Area = "Banco" }, null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

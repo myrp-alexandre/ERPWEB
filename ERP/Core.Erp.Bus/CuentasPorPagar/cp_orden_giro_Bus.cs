@@ -19,11 +19,11 @@ namespace Core.Erp.Bus.CuentasPorPagar
         cp_parametros_Info info_parametro = new cp_parametros_Info();
         cp_parametros_Bus bus_parametro = new cp_parametros_Bus();
         cp_orden_giro_pagos_sri_Bus bus_forma_pago = new cp_orden_giro_pagos_sri_Bus();
-        public List<cp_orden_giro_Info> get_lst(int IdEmpresa, DateTime fi, DateTime ff)
+        public List<cp_orden_giro_Info> get_lst(int IdEmpresa,int IdSucursal, DateTime fi, DateTime ff)
         {
             try
             {
-                return data.get_lst(IdEmpresa, fi,ff);
+                return data.get_lst(IdEmpresa,IdSucursal, fi,ff);
             }
             catch (Exception)
             {
@@ -159,7 +159,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     info.info_cuota.Estado = true;
                     bus_cuotas.ModificarDB(info.info_cuota);
                 }
-                if (info.info_forma_pago.codigo_pago_sri != "")
+                if (info.info_forma_pago.codigo_pago_sri != "" && info.info_forma_pago.codigo_pago_sri!=null)
                 {
                     bus_forma_pago.EliminarDB(info.IdEmpresa, info.IdTipoCbte_Ogiro, info.IdCbteCble_Ogiro);
 
@@ -329,7 +329,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 if(Convert.ToDouble( info.info_comrobante.lst_ct_cbtecble_det.Sum(v => v.dc_Valor))!=0)
                     mensaje = "El diario contable esta descuadrado ";
 
-                if(info.info_cuota.Total_a_pagar!=0)
+                if(info.info_cuota.Total_a_pagar!=0 && info.info_cuota.Num_cuotas!=0&& info.info_cuota.Dias_plazo!=0)
                 {
                     if(info.info_cuota.lst_cuotas_det.Count()==0)
                         mensaje = "No existe detalle de pago";
@@ -384,7 +384,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info_op_det.Secuencia = 1;
                 info_op_det.IdCbteCble_cxp = info.IdCbteCble_Ogiro;
                 info_op_det.IdTipoCbte_cxp = info.IdTipoCbte_Ogiro;
-                info_op_det.Valor_a_pagar = info.Total_Pagado;
+                info_op_det.Valor_a_pagar = info.co_valorpagar;
                 info_op_det.Referencia = "Pago factura # "+info.co_factura;
                 info_op_det.IdFormaPago = "CHEQUE";
                 info_op_det.Fecha_Pago = DateTime.Now;
@@ -399,5 +399,17 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
-    }
+        public bool si_existe(cp_orden_giro_Info info)
+        {
+            try
+            {
+                return data.si_existe(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        }
 }

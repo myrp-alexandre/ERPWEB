@@ -39,8 +39,11 @@ namespace Core.Erp.Info.Inventario
         public Nullable<decimal> IdResponsable { get; set; }
 
 
-        //Campos que no existen en la tabla
+        #region Campos que no existen en la tabla
         public List<in_Ing_Egr_Inven_det_Info> lst_in_Ing_Egr_Inven_det { get; set; }
+        public decimal IdProducto { get; set; }
+        #endregion
+
         public in_Ing_Egr_Inven_Info()
         {
             lst_in_Ing_Egr_Inven_det = new List<in_Ing_Egr_Inven_det_Info>();

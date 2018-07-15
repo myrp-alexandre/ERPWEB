@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Erp.Info.Reportes.Inventario;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace Core.Erp.Info.Helps
         public int IdMovi_inven_tipo { get; set; }
         public string signo { get; set; }
         public bool no_mostrar_valores_en_0 { get; set; }
+        public bool mostrar_saldos_en_0 { get; set; }
         public bool mostrar_detallado { get; set; }
 
         #endregion
@@ -59,6 +61,9 @@ namespace Core.Erp.Info.Helps
         public decimal IdEntidad { get; set; }
 
         #endregion
+        public List<INV_008_Info> lst_decimal { get; set; }
+
+        public int IdTipoNomina { get; set; }
         public int IdNomina { get; set; }
         public string IdCtaCble { get; set; }
 

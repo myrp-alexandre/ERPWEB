@@ -127,11 +127,11 @@ namespace Core.Erp.Data.Inventario
             }
         }
 
-        public bool guardarDB(in_Ing_Egr_Inven_Info info)
+        public bool guardarDB(in_Ing_Egr_Inven_Info info, string signo)
         {
             try
             {
-
+                in_producto_x_tb_bodega_Costo_Historico_Data data_costo = new in_producto_x_tb_bodega_Costo_Historico_Data();
                 int sec = 1;
                 using (Entities_inventario Context = new Entities_inventario())
                 {
@@ -157,8 +157,11 @@ namespace Core.Erp.Data.Inventario
 
                     foreach (var item in info.lst_in_Ing_Egr_Inven_det)
                     {
+                        if (signo == "-")
+                            item.mv_costo = data_costo.get_ultimo_costo(info.IdEmpresa, info.IdSucursal, Convert.ToInt32(info.IdBodega), item.IdProducto, info.cm_fecha);
                         in_Ing_Egr_Inven_det entity_det = new in_Ing_Egr_Inven_det
                         {
+                            
                             IdEmpresa = info.IdEmpresa,
                             IdSucursal = info.IdSucursal,
                             IdMovi_inven_tipo = info.IdMovi_inven_tipo,
@@ -173,8 +176,8 @@ namespace Core.Erp.Data.Inventario
                             IdPunto_cargo_grupo = item.IdPunto_cargo_grupo,
 
                             dm_observacion = item.dm_observacion,
-                            IdMotivo_Inv = item.IdMotivo_Inv,
-                            IdEstadoAproba = item.IdEstadoAproba,
+                            IdMotivo_Inv = info.IdMotivo_Inv,
+                            IdEstadoAproba = "APRO",
                             Motivo_Aprobacion = item.Motivo_Aprobacion,
 
                             IdEmpresa_oc = item.IdEmpresa_oc,
@@ -191,16 +194,20 @@ namespace Core.Erp.Data.Inventario
 
                             dm_cantidad_sinConversion = item.dm_cantidad_sinConversion,
                             dm_cantidad = item.dm_cantidad ,
-                            IdUnidadMedida_sinConversion = item.IdUnidadMedida_sinConversion,
-                            IdUnidadMedida  = item.IdUnidadMedida_sinConversion,
-                            mv_costo_sinConversion = item.mv_costo_sinConversion,
-                            mv_costo =(double) item.mv_costo_sinConversion,
+                            IdUnidadMedida  = (item.IdUnidadMedida)==null? "UNID":item.IdUnidadMedida,
+                            IdUnidadMedida_sinConversion = (item.IdUnidadMedida_sinConversion) == null ? "UNID" : item.IdUnidadMedida_sinConversion,
+
+                            mv_costo_sinConversion = (item.mv_costo_sinConversion)==null?0:item.mv_costo_sinConversion,
+                            mv_costo =(double)(item.mv_costo) == null ? 0 : item.mv_costo,
 
                         };
                         Context.in_Ing_Egr_Inven_det.Add(entity_det);
                         sec++;
                     }
                     Context.SaveChanges();
+
+                    // ejecutando el sp para in_movi_det
+                    Context.spINV_aprobacion_ing_egr(info.IdEmpresa, info.IdSucursal, info.IdBodega, info.IdMovi_inven_tipo, info.IdNumMovi);
                 }
                 return true;
             }
@@ -264,11 +271,10 @@ namespace Core.Erp.Data.Inventario
                             IdMovi_inven_tipo_inv = item.IdMovi_inven_tipo_inv,
                             IdNumMovi_inv = item.IdNumMovi_inv,
                             secuencia_inv = item.secuencia_inv,
-
+                            IdUnidadMedida = (item.IdUnidadMedida) == null ? "UNID" : item.IdUnidadMedida,
+                            IdUnidadMedida_sinConversion = (item.IdUnidadMedida_sinConversion) == null ? "UNID" : item.IdUnidadMedida_sinConversion,
                             dm_cantidad_sinConversion = item.dm_cantidad_sinConversion,
                             dm_cantidad = item.dm_cantidad,
-                            IdUnidadMedida_sinConversion = item.IdUnidadMedida_sinConversion,
-                            IdUnidadMedida = item.IdUnidadMedida_sinConversion,
                             mv_costo_sinConversion = item.mv_costo_sinConversion,
                             mv_costo = (double)item.mv_costo_sinConversion,
 
@@ -304,7 +310,10 @@ namespace Core.Erp.Data.Inventario
                     Entity.IdusuarioUltAnu = info.IdusuarioUltAnu;
                     Entity.Fecha_UltAnu = DateTime.Now;
                     Context.SaveChanges();
+                    Context.spSys_inv_Reversar_aprobacion(info.IdEmpresa, info.IdSucursal, info.IdMovi_inven_tipo, info.IdNumMovi, true);
+
                 }
+
                 return true;
 
             }

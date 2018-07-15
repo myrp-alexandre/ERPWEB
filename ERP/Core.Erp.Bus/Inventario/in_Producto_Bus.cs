@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Data.Inventario;
 using Core.Erp.Info.Inventario;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 
@@ -73,6 +74,17 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
+
+        public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        {
+            return odata.get_list_bajo_demanda(args, IdEmpresa);
+        }
+
+        public in_Producto_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            return odata.get_info_bajo_demanda(args, IdEmpresa);
+        }
+
         public in_Producto_Info get_info(int IdEmpresa, decimal IdProducto)
         {
             try
@@ -91,6 +103,29 @@ namespace Core.Erp.Bus.Inventario
             try
             {
                 return odata.guardarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool guardar_loteDB(int IdEmpresa, decimal IdProducto_padre, DateTime fecha_fab, DateTime fecha_ven, string lote)
+        {
+            try
+            {
+                in_Producto_Info info_new_lote = new in_Producto_Info();
+                info_new_lote = odata.get_info(IdEmpresa, IdProducto_padre);
+                if(info_new_lote!=null)
+                {
+                    info_new_lote.IdProducto_padre = info_new_lote.IdProducto;
+                    info_new_lote.lote_fecha_fab = fecha_fab;
+                    info_new_lote.lote_fecha_vcto = fecha_ven;
+                    info_new_lote.lote_num_lote = lote;
+                    info_new_lote.Estado = "A";
+                    info_new_lote.Fecha_Transac = DateTime.Now;
+                }
+                return odata.guardarDB(info_new_lote);
             }
             catch (Exception)
             {

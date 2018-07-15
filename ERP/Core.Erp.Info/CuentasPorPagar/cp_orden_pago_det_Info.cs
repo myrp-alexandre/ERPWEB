@@ -35,7 +35,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public double Valor_estimado_a_pagar_OP { get; set; }
         public double Saldo_x_Pagar_OP { get; set; }
         public string Nom_Beneficiario { get; set; }
-        public bool check { get; set; }
+        public bool seleccionado { get; set; }
 
 
     }
