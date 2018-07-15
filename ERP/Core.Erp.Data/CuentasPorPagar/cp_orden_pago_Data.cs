@@ -203,7 +203,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                 }
                 return true;
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 throw;
             }
@@ -340,7 +340,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                 }
                 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
                 throw;

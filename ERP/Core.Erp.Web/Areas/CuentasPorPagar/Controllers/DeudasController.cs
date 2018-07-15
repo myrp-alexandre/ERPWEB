@@ -484,7 +484,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return RedirectToAction("Index3");
 
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 return RedirectToAction("Index3");
             }

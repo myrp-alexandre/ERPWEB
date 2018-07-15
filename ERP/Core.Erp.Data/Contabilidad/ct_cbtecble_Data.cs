@@ -309,7 +309,7 @@ namespace Core.Erp.Data.Contabilidad
                 };
                 return true;
             }
-            catch (Exception e)
+            catch (Exception )
             {
 
                 throw;
