@@ -20,7 +20,9 @@
         settings.SettingsPager.Visible = true;
         settings.SettingsBehavior.AllowSelectByRowClick = false;
 
-
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
 
         //Configuración click derecho
         settings.SettingsContextMenu.Enabled = true;
