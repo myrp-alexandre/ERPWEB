@@ -75,10 +75,10 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("IdConciliacion", "ID").Width = Unit.Percentage(5);
+        settings.Columns.Add("IdConciliacion", "ID").Width = Unit.Percentage(10);
         settings.Columns.Add("ba_descripcion", "Cuenta").Width = Unit.Percentage(30);
-        settings.Columns.Add("Periodo", "Periodo").Width = Unit.Percentage(20);
-        settings.Columns.Add("co_Observacion", "Observación").Width = Unit.Percentage(30);
+        settings.Columns.Add("Periodo", "Periodo").Width = Unit.Percentage(10);
+        settings.Columns.Add("co_Observacion", "Observación").Width = Unit.Percentage(20);
         settings.Columns.Add(column =>
         {
             column.FieldName = "co_Fecha";
@@ -86,7 +86,7 @@
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = Unit.Percentage(10);
         });
-        settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(5);
+        settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.SetDataItemTemplateContent(c =>

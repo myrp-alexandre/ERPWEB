@@ -25,6 +25,56 @@
         </div>
     }
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdEstado_Concil_Cat">Estado *</label>
+                    @Html.DropDownListFor(q => q.IdEstado_Concil_Cat, new SelectList(ViewBag.lst_estado, "Key", "Value"), new { @id = "IdEstado_Concil_Cat", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdEstado_Concil_Cat, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdPeriodo">Periodo *</label>
+                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodo, "IdPeriodo", "nom_periodo_combo"), new { @id = "IdPeriodo", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-4 col-md-2">
+                <div class="form-group">
+                    <label for="co_Fecha">Fecha*</label>
+                    @Html.TextBoxFor(q => q.co_Fecha, "{0:dd/MM/yyyy}", new { @id = "Fecha", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.co_Fecha, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdBanco">Cuenta bancaria:*</label>
+                    @Html.DropDownListFor(q => q.IdBanco, new SelectList(ViewBag.lst_banco_cuenta, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco" })
+                    @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="co_Observacion">Observación</label>
+                    @Html.TextAreaFor(q => q.co_Observacion, new { @id = "co_Observacion", @class = "form-control", @rows = 2 })
+                    @Html.ValidationMessageFor(q => q.co_Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index", "ConciliacionBanco", new { Area = "Banco" }, null)">Cancelar</a>

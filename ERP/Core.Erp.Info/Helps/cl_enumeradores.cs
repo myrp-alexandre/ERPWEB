@@ -116,6 +116,12 @@ namespace Core.Erp.Info.Helps
             PROVEE
         }
 
+        public enum eEstadoCierreBanco
+        {
+            PRE_CONCIL,
+            CONCILIADO
+        }
+
         public enum eEstadoCierreCaja
         {
             EST_CIE_ABI,
