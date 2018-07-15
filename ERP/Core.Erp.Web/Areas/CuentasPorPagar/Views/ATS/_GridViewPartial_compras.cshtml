@@ -19,16 +19,16 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
 
-        settings.Columns.Add("denopr", "Proveedor").Width = Unit.Percentage(30);
+        settings.Columns.Add("denopr", "Proveedor").Width = Unit.Percentage(40);
         settings.Columns.Add("establecimiento", "Est.").Width = Unit.Percentage(10);
         settings.Columns.Add("puntoEmision", "PtoEm.").Width = Unit.Percentage(10);
-        settings.Columns.Add("denosecuencialpr", "Factura").Width = Unit.Percentage(15);
+        settings.Columns.Add("secuencial", "Factura").Width = Unit.Percentage(15);
 
         settings.Columns.Add(column =>
         {
             column.FieldName = "baseImponible";
             column.Caption = "Base 0%";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -39,7 +39,7 @@
         {
             column.FieldName = "baseImpGrav";
             column.Caption = "Base iva";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -50,7 +50,7 @@
         {
             column.FieldName = "montoIva";
             column.Caption = "Iva";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;

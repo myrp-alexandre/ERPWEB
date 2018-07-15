@@ -19,14 +19,14 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
 
-        settings.Columns.Add("DenoCli", "Cliente").Width = Unit.Percentage(30);
+        settings.Columns.Add("DenoCli", "Cliente").Width = Unit.Percentage(40);
         settings.Columns.Add("numeroComprobantes", "#comprobantes").Width = Unit.Percentage(10);
 
         settings.Columns.Add(column =>
         {
             column.FieldName = "baseImponible";
             column.Caption = "Vtas. 0%";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -37,7 +37,7 @@
         {
             column.FieldName = "baseImpGrav";
             column.Caption = "Vtas. iva";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -48,7 +48,7 @@
         {
             column.FieldName = "montoIva";
             column.Caption = "Iva";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -59,7 +59,7 @@
         {
             column.FieldName = "valorRetIva";
             column.Caption = "Rte. iva";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -70,7 +70,7 @@
         {
             column.FieldName = "valorRetRenta";
             column.Caption = "Rte rent.";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -86,4 +86,4 @@
     });
 
 }
-@grid.Bind(Model.lst_ct_cbtecble_det).GetHtml()
+@grid.Bind(Model).GetHtml()
