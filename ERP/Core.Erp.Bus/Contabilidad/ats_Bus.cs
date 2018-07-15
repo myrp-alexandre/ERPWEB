@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Contabilidad
 {
-  public  class ast_Bus
+  public  class ats_Bus
     {
     }
 }
