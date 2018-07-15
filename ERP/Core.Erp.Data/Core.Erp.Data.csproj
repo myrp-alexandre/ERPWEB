@@ -107,7 +107,6 @@
     <Compile Include="Banco\ba_CatalogoTipo_Data.cs" />
     <Compile Include="Banco\ba_Catalogo_Data.cs" />
     <Compile Include="Banco\ba_Cbte_Ban_Data.cs" />
-    <Compile Include="Banco\ba_Conciliacion_Data.cs" />
     <Compile Include="Banco\ba_parametros_Data.cs" />
     <Compile Include="Banco\ba_Talonario_cheques_x_banco_Data.cs" />
     <Compile Include="Banco\ba_tipo_nota_Data.cs" />
@@ -269,6 +268,7 @@
     <Compile Include="CuentasPorCobrar\cxc_cobro_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_det_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Param_conta_x_sucursal_Data.cs" />
+    <Compile Include="CuentasPorPagar\ats_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_nota_DebCre_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_orden_giro_pagos_sri_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_orden_pago_cancelaciones_Data.cs" />
