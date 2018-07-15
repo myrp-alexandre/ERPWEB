@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.Banco.ba_Cbte_Ban_Info
 @{
-    ViewBag.Title = "Nuevo crédito";
+    ViewBag.Title = "Nuevo depósito";
     Layout = "~/Views/Shared/_Layout.cshtml";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
@@ -24,7 +24,7 @@
         e.customArgs["selectedIDs"] = selectedIDs;
     }
     function OnSelectionChanged(s, e) {
-        s.GetSelectedFieldValues("IdCbteCble", GetSelectedFieldValuesCallback);
+        s.GetSelectedFieldValues("mcj_IdCbteCble", GetSelectedFieldValuesCallback);
     }
     function GetSelectedFieldValuesCallback(values) {
         //Capture all selected keys
@@ -37,7 +37,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("EditingAddNew", "NotaDeDebitoBanco",new { Area = "Banco"})',
+            url: '@Url.Action("EditingAddNew", "DepositoBanco",new { Area = "Banco"})',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -49,9 +49,9 @@
             }
         });
         selectedIDs = "";
-        GridView_DebitoBanco_op_x_cruzar.PerformCallback();
-        GridView_DebitoBanco_op_x_cruzar.UnselectRows();
-        GridView_DebitoBanco_op.PerformCallback();
+        GridView_DepositoBanco_x_cruzar.PerformCallback();
+        GridView_DepositoBanco_x_cruzar.UnselectRows();
+        GridView_DepositoBanco_det.PerformCallback();
         $("#OpModal").modal("hide");
     }
 
@@ -83,28 +83,6 @@
             }
         });
     }
-
-    function GetValorTotal() {
-        var datos = {
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetValorTotal", "DepositoBanco",new { Area = "Banco"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                $("#cb_Valor").val(data);
-            },
-            error: function (error) {
-            }
-        });
-    }
-
-
 </script>
 
 @using (Html.BeginForm("Nuevo", "DepositoBanco", FormMethod.Post, new { @class = "form", @role = "form" }))
@@ -127,7 +105,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Ordenes de pago</h4>
+                    <h4 class="modal-title">Ingresos por depositar</h4>
                 </div>
                 <div class="modal-body">
                     @Html.Action("GridViewPartial_DepositoBanco_x_cruzar")

@@ -4,7 +4,11 @@
         settings.Name = "GridView_DepositoBanco_det";
         settings.CallbackRouteValues = new { Controller = "DepositoBanco", Action = "GridViewPartial_DepositoBanco_det" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdCbteCble";
+        settings.KeyFieldName = "mcj_IdCbteCble";
+
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
 
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
@@ -29,11 +33,11 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
 
-        settings.Columns.Add("IdOrdenPago_op","ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("Referencia", "# Documento").Width = Unit.Percentage(20);
+        settings.Columns.Add("mcj_IdCbteCble", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("cm_observacion", "Observación").Width = Unit.Percentage(20);
         settings.Columns.Add(column => {
             column.Width = Unit.Percentage(10);
-            column.FieldName = "Fecha_Fa_Prov";
+            column.FieldName = "cm_fecha";
             column.Caption = "Fecha";
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
         });
@@ -41,13 +45,13 @@
         {
             column.Width = Unit.Percentage(40);
             column.FieldName = "pe_nombreCompleto";
-            column.Caption = "Beneficiario";
+            column.Caption = "Cliente";
         });
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(10);
-            column.FieldName = "MontoAplicado";
-            column.Caption = "Valor aprobado";
+            column.FieldName = "cr_Valor";
+            column.Caption = "Valor";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
         });
         settings.ClientSideEvents.EndCallback = "function(s,e){ armar_diario(); }";
