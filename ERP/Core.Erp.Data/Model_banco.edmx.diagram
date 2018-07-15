@@ -25,7 +25,13 @@
         <AssociationConnector Association="Model_banco.FK_ba_Cbte_Ban_ba_tipo_nota" />
         <EntityTypeShape EntityType="Model_banco.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar" Width="1.5" PointX="9.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_banco.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" Width="1.5" PointX="13.375" PointY="0.75" />
-      </Diagram>
+        <EntityTypeShape EntityType="Model_banco.ba_Conciliacion_det_IngEgr" Width="1.5" PointX="15.875" PointY="13.375" />
+        <EntityTypeShape EntityType="Model_banco.ba_Conciliacion" Width="1.5" PointX="13.625" PointY="10.875" />
+        <AssociationConnector Association="Model_banco.FK_ba_Conciliacion_ba_Banco_Cuenta" />
+        <AssociationConnector Association="Model_banco.FK_ba_Conciliacion_ba_Catalogo" />
+        <AssociationConnector Association="Model_banco.FK_ba_Conciliacion_det_IngEgr_ba_Conciliacion" />
+        <EntityTypeShape EntityType="Model_banco.vwba_Conciliacion" Width="1.5" PointX="6.375" PointY="14.75" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -38,5 +38,8 @@ namespace Core.Erp.Data
         public virtual DbSet<vwba_Talonario_cheques_x_banco_ID> vwba_Talonario_cheques_x_banco_ID { get; set; }
         public virtual DbSet<vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar> vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar { get; set; }
         public virtual DbSet<vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito> vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito { get; set; }
+        public virtual DbSet<ba_Conciliacion_det_IngEgr> ba_Conciliacion_det_IngEgr { get; set; }
+        public virtual DbSet<ba_Conciliacion> ba_Conciliacion { get; set; }
+        public virtual DbSet<vwba_Conciliacion> vwba_Conciliacion { get; set; }
     }
 }

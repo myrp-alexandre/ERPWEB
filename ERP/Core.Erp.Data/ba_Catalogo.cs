@@ -19,6 +19,7 @@ namespace Core.Erp.Data
         {
             this.ba_Cbte_Ban = new HashSet<ba_Cbte_Ban>();
             this.ba_Cbte_Ban1 = new HashSet<ba_Cbte_Ban>();
+            this.ba_Conciliacion = new HashSet<ba_Conciliacion>();
         }
     
         public string IdCatalogo { get; set; }
@@ -40,5 +41,7 @@ namespace Core.Erp.Data
         public virtual ICollection<ba_Cbte_Ban> ba_Cbte_Ban { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ba_Cbte_Ban> ba_Cbte_Ban1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ba_Conciliacion> ba_Conciliacion { get; set; }
     }
 }
