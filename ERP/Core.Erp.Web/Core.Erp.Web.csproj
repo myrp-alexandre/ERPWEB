@@ -8667,6 +8667,7 @@
     <Content Include="Areas\CuentasPorPagar\Views\ATS\_GridViewPartial_ventas.cshtml" />
     <Content Include="Areas\Banco\Views\DepositoBanco\_GridViewPartial_DepositoBanco_x_cruzar.cshtml" />
     <Content Include="Areas\Banco\Views\DepositoBanco\_GridViewPartial_DepositoBanco_det.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ATS\_GridViewPartial_retenciones.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />

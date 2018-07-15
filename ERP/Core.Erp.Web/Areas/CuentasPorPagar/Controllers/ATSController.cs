@@ -33,7 +33,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             List<ventas_Info> model = new List<ventas_Info>();
             return PartialView("_GridViewPartial_ventas", model);
         }
-
+        public ActionResult GridViewPartial_compras()
+        {
+            List<compras_Info> model = new List<compras_Info>();
+            return PartialView("compras_Info", model);
+        }
         private void cargar_combos(string TipoPersona = "")
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdSucursal);
