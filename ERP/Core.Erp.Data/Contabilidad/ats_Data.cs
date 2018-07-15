@@ -18,6 +18,7 @@ namespace Core.Erp.Data.Contabilidad
                 {
 
                     Context.generarATS(IdEmpresa, IdPeriodo);
+
                     info.lst_compras = (from q in Context.ATS_compras
                                         where q.IdEmpresa==IdEmpresa
                                         && q.IdPeriodo==IdPeriodo
@@ -71,6 +72,7 @@ namespace Core.Erp.Data.Contabilidad
                                             idCliente = v.idCliente,
                                             parteRel = v.parteRel,
                                            tipoCliente=v.tipoCliente,
+                                           DenoCli=v.DenoCli,
                                            tipoEm=v.tipoEm,
                                            numeroComprobantes=v.numeroComprobantes,
                                            baseNoGraIva=v.baseNoGraIva,
@@ -122,7 +124,7 @@ namespace Core.Erp.Data.Contabilidad
 
                 return info;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 
                 throw;

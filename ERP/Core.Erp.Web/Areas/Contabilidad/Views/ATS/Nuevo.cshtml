@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.CuentasPorPagar.ATS.ATS_Info.ats_Info
+﻿@model Core.Erp.Info.Contabilidad.ATS.ATS_Info.ats_Info
 @{
     ViewBag.Title = "Anexo trasnsacciona simplificado";
     //if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -43,7 +43,9 @@
                    //Boton para seleccionar ningun registro
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-               }).BindList(ViewBag.lst_persona_tipo).GetHtml()
+                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function (s,e) {get_ats();}";
+
+               }).BindList(ViewBag.lst_periodos).GetHtml()
                     @Html.ValidationMessageFor(q => q.info_periodo.IdPeriodo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -114,45 +116,33 @@
 
 
 <script>
-    $(function () {
+    function get_ats() {
 
 
-        $('#fechaingreso').datepicker({
-            autoclose: true
-        });
-        $('#fechasalida').datepicker({
-            autoclose: true
-        });
 
-        $('#pe_fechaNacimiento').datepicker({
-            autoclose: true
-        });
-    });
-
-    $("#pe_cedulaRuc").keyup(function () {
-        validar();
-    });
-    function  validar() {
-        var tipo_doc = $("#IdTipoDocumento").val();
-        var cedula = $("#pe_cedulaRuc").val();
-
-        if (tipo_doc == "RUC") {
-            if (cedula.length > 13) {
-                var len = $("#pe_cedulaRuc").val();
-                len = len.substring(0, 13);
-                $("#pe_cedulaRuc").val(len);
+        if (IdPeriodo.GetValue() > 0) {
+            var datos = {
+                IdPeriodo: IdPeriodo.GetValue()
             }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("get_ats", "ATS", new { Area = "Contabilidad" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    GridViewPartial_ventas.PerformCallback();
+                    GridViewPartial_compras.PerformCallback();
+                    GridViewPartial_retenciones.PerformCallback();
 
-        }
-        else
-            if (tipo_doc == "CED") {
-                if (cedula.length > 10) {
-                    var len = $("#pe_cedulaRuc").val();
-                    len = len.substring(0,10);
-                    $("#pe_cedulaRuc").val(len);
+                },
+                error: function (error) {
                 }
-            }
-    }
-
+            });
+        }
+    };
      
 </script>
