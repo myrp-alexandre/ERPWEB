@@ -48,9 +48,160 @@ namespace Core.Erp.Data.Banco
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public ba_Conciliacion_Info get_info(int IdEmpresa, decimal IdConciliacion)
+        {
+            try
+            {
+                ba_Conciliacion_Info info;
+
+                using (Entities_banco Context = new Entities_banco())
+                {
+                    var Entity = Context.ba_Conciliacion.Where(q => q.IdEmpresa == IdEmpresa && q.IdConciliacion == IdConciliacion).FirstOrDefault();
+                    if (Entity == null) return null;
+                    info = new ba_Conciliacion_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdConciliacion = Entity.IdConciliacion,
+                        IdBanco = Entity.IdBanco,
+                        IdPeriodo = Entity.IdPeriodo,
+                        co_Fecha = Entity.co_Fecha,
+                        IdEstado_Concil_Cat = Entity.IdEstado_Concil_Cat,
+                        co_SaldoContable_MesAnt = Entity.co_SaldoContable_MesAnt,
+                        co_totalIng = Entity.co_totalIng,
+                        co_totalEgr = Entity.co_totalEgr,
+                        co_SaldoContable_MesAct = Entity.co_SaldoContable_MesAct,
+                        co_SaldoBanco_EstCta = Entity.co_SaldoBanco_EstCta,
+                        co_SaldoBanco_anterior = Entity.co_SaldoBanco_anterior,
+                        Estado = Entity.Estado,
+                        co_Observacion = Entity.co_Observacion,
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
 
                 throw;
             }
         }
+
+        public decimal get_id(int IdEmpresa)
+        {
+            try
+            {
+                decimal ID = 1;
+
+                using (Entities_banco Context = new Entities_banco())
+                {
+                    var lst = from q in Context.ba_Conciliacion
+                              where q.IdEmpresa == IdEmpresa
+                              select q;
+
+                    if (lst.Count() > 0)
+                        ID = lst.Max(q => q.IdConciliacion) + 1;
+                }
+
+                return ID;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool guardarDB(ba_Conciliacion_Info info)
+        {
+            try
+            {
+                using (Entities_banco Context = new Entities_banco())
+                {
+                    var id = get_id(info.IdEmpresa);
+                    Context.ba_Conciliacion.Add(new ba_Conciliacion
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdConciliacion = info.IdConciliacion = id,
+                        IdBanco = info.IdBanco,
+                        IdPeriodo = info.IdPeriodo,
+                        co_Fecha = info.co_Fecha,
+                        IdEstado_Concil_Cat = info.IdEstado_Concil_Cat,
+                        co_SaldoContable_MesAnt = info.co_SaldoContable_MesAnt,
+                        co_totalIng = info.co_totalIng,
+                        co_totalEgr = info.co_totalEgr,
+                        co_SaldoContable_MesAct = info.co_SaldoContable_MesAct,
+                        co_SaldoBanco_EstCta = info.co_SaldoBanco_EstCta,
+                        co_SaldoBanco_anterior = info.co_SaldoBanco_anterior,
+                        co_Observacion = info.co_Observacion,
+                        Estado = info.Estado = "A",
+                    });
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool modificarDB(ba_Conciliacion_Info info)
+        {
+            try
+            {
+                using (Entities_banco Context = new Entities_banco())
+                {
+                    var Entity = Context.ba_Conciliacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConciliacion == info.IdConciliacion).FirstOrDefault();
+                    if (Entity == null) return false;
+                    Entity.co_Fecha = info.co_Fecha;
+                    Entity.IdEstado_Concil_Cat = info.IdEstado_Concil_Cat;
+                    Entity.co_SaldoContable_MesAnt = info.co_SaldoContable_MesAnt;
+                    Entity.co_totalIng = info.co_totalIng;
+                    Entity.co_totalEgr = info.co_totalEgr;
+                    Entity.co_SaldoContable_MesAct = info.co_SaldoContable_MesAct;
+                    Entity.co_SaldoBanco_EstCta = info.co_SaldoBanco_EstCta;
+                    Entity.co_SaldoBanco_anterior = info.co_SaldoBanco_anterior;
+                    Entity.co_Observacion = info.co_Observacion;
+
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool anularDB(ba_Conciliacion_Info info)
+        {
+            try
+            {
+                using (Entities_banco Context = new Entities_banco())
+                {
+                    var Entity = Context.ba_Conciliacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConciliacion == info.IdConciliacion).FirstOrDefault();
+                    if (Entity == null) return false;
+                    Entity.Estado = "I";
+
+                    var lst = Context.ba_Conciliacion_det_IngEgr.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConciliacion == info.IdConciliacion).ToList();
+                    Context.ba_Conciliacion_det_IngEgr.RemoveRange(lst);
+
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }
