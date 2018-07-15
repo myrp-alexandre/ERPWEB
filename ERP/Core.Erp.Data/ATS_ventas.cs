@@ -12,7 +12,7 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ventas
+    public partial class ATS_ventas
     {
         public int IdEmpresa { get; set; }
         public int IdPeriodo { get; set; }

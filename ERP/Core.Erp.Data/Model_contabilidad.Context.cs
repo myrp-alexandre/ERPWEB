@@ -12,6 +12,8 @@ namespace Core.Erp.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Entities_contabilidad : DbContext
     {
@@ -38,5 +40,22 @@ namespace Core.Erp.Data
         public virtual DbSet<ct_cbtecble_tipo> ct_cbtecble_tipo { get; set; }
         public virtual DbSet<ct_cbtecble_Reversado> ct_cbtecble_Reversado { get; set; }
         public virtual DbSet<vwct_cbtecble_con_ctacble_acreedora> vwct_cbtecble_con_ctacble_acreedora { get; set; }
+        public virtual DbSet<ATS_compras> ATS_compras { get; set; }
+        public virtual DbSet<ATS_comprobantes_anulados> ATS_comprobantes_anulados { get; set; }
+        public virtual DbSet<ATS_retenciones> ATS_retenciones { get; set; }
+        public virtual DbSet<ATS_ventas> ATS_ventas { get; set; }
+    
+        public virtual int generarATS(Nullable<int> idempresa, Nullable<int> idPeriodo)
+        {
+            var idempresaParameter = idempresa.HasValue ?
+                new ObjectParameter("idempresa", idempresa) :
+                new ObjectParameter("idempresa", typeof(int));
+    
+            var idPeriodoParameter = idPeriodo.HasValue ?
+                new ObjectParameter("idPeriodo", idPeriodo) :
+                new ObjectParameter("idPeriodo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("generarATS", idempresaParameter, idPeriodoParameter);
+        }
     }
 }

@@ -102,6 +102,18 @@
     <Compile Include="Af_Venta_Activo.cs">
       <DependentUpon>Model_activo_fijo.tt</DependentUpon>
     </Compile>
+    <Compile Include="ATS_compras.cs">
+      <DependentUpon>Model_contabilidad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATS_comprobantes_anulados.cs">
+      <DependentUpon>Model_contabilidad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATS_retenciones.cs">
+      <DependentUpon>Model_contabilidad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATS_ventas.cs">
+      <DependentUpon>Model_contabilidad.tt</DependentUpon>
+    </Compile>
     <Compile Include="Banco\ba_Banco_Cuenta_Data.cs" />
     <Compile Include="Banco\ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Data.cs" />
     <Compile Include="Banco\ba_CatalogoTipo_Data.cs" />
@@ -166,12 +178,6 @@
     </Compile>
     <Compile Include="caj_parametro.cs">
       <DependentUpon>Model_caja.tt</DependentUpon>
-    </Compile>
-    <Compile Include="compras.cs">
-      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
-    </Compile>
-    <Compile Include="comprobantes_anulados.cs">
-      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
     <Compile Include="Contabilidad\ct_anio_fiscal_Data.cs" />
     <Compile Include="Contabilidad\ct_anio_fiscal_x_cuenta_utilidad_Data.cs" />
@@ -785,9 +791,6 @@
     <Compile Include="Reportes\RRHH\ROL_012_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_013_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_014_Data.cs" />
-    <Compile Include="retenciones.cs">
-      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
-    </Compile>
     <Compile Include="ro_Acta_Finiquito.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -1148,9 +1151,6 @@
     </Compile>
     <Compile Include="tb_transportista.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ventas.cs">
-      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
     <Compile Include="VWACTF_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
