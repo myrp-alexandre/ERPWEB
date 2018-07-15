@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace Core.Erp.Info.CuentasPorPagar.ATS
+namespace Core.Erp.Info.Contabilidad.ATS
 {
 
   /// <comentarios/>

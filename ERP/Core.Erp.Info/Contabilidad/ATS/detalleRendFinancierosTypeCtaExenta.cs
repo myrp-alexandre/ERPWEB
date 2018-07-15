@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Erp.Info.CuentasPorPagar.ATS
+namespace Core.Erp.Info.Contabilidad.ATS
 {
 
     /// <comentarios/>
@@ -13,7 +13,7 @@ namespace Core.Erp.Info.CuentasPorPagar.ATS
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class detalleRendFinancierosTypeAhorroPN
+    public partial class detalleRendFinancierosTypeCtaExenta
     {
 
         private decimal totalDepField;

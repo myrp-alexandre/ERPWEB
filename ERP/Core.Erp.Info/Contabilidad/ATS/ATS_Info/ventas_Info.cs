@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Erp.Info.CuentasPorPagar.ATS.ATS_Info
+namespace Core.Erp.Info.Contabilidad.ATS.ATS_Info
 {
    public class ventas_Info
     {

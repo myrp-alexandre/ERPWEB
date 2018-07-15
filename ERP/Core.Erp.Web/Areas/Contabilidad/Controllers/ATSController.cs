@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Core.Erp.Info.CuentasPorPagar.ATS.ATS_Info;
+using Core.Erp.Info.Contabilidad.ATS.ATS_Info;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
 using System.IO;
 
-namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
+namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 {
     public class ATSController : Controller
     {

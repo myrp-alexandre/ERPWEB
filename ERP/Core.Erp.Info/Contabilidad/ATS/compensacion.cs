@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Erp.Info.CuentasPorPagar.ATS
+
+
+namespace Core.Erp.Info.Contabilidad.ATS
 {
 
     /// <comentarios/>
@@ -12,39 +14,39 @@ namespace Core.Erp.Info.CuentasPorPagar.ATS
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class detalleRendFinancierosTypeCtaExenta
+    public partial class compensacion
     {
+        
+        private string tipoCompeField;
 
-        private decimal totalDepField;
-
-        private decimal rendGenField;
+        private decimal montoField;
 
         /// <comentarios/>
-        public decimal totalDep
+        public string tipoCompe
         {
             get
             {
-                return this.totalDepField;
+                return this.tipoCompeField;
             }
             set
             {
-                this.totalDepField = value;
+                this.tipoCompeField = value;
             }
         }
 
         /// <comentarios/>
-        public decimal rendGen
+        public decimal monto
         {
             get
             {
-                return this.rendGenField;
+                return this.montoField;
             }
             set
             {
-                this.rendGenField = value;
+                this.montoField = value;
             }
         }
     }
 
+    
 }

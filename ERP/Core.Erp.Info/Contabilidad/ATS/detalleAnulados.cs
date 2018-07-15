@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Erp.Info.CuentasPorPagar.ATS
+namespace Core.Erp.Info.Contabilidad.ATS
 {
 
     /// <comentarios/>

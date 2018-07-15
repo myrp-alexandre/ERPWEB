@@ -251,6 +251,7 @@
     <Compile Include="Areas\Caja\Controllers\TipoMovimientoCajaController.cs" />
     <Compile Include="Areas\Contabilidad\ContabilidadAreaRegistration.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\AnioFiscalController.cs" />
+    <Compile Include="Areas\Contabilidad\Controllers\ATSController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\ComprobanteContableController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\GrupoContableController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\ParametroContableController.cs" />
@@ -266,7 +267,6 @@
     <Compile Include="Areas\CuentasPorCobrar\Controllers\ParametroCXCController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\TipoCobroController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\CuentasPorCobrarAreaRegistration.cs" />
-    <Compile Include="Areas\CuentasPorPagar\Controllers\ATSController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\ClaseProveedorController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\CodigoSRIController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\DeudasController.cs" />
@@ -8674,6 +8674,11 @@
     <Content Include="Areas\Banco\Views\ConciliacionBanco\Index.cshtml" />
     <Content Include="Areas\Banco\Views\ConciliacionBanco\Anular.cshtml" />
     <Content Include="Areas\Banco\Views\ConciliacionBanco\_GridViewPartial_ConciliacionBanco.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\ATS\_GridViewPartial_compras.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\ATS\_GridViewPartial_retenciones.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\ATS\_GridViewPartial_ventas.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\ATS\Index.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\ATS\Nuevo.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />
