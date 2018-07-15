@@ -242,17 +242,6 @@
     <Compile Include="Areas\Banco\Controllers\ParametroBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\TalonarioChequeBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\TipoNotaBancoController.cs" />
-    <Compile Include="Areas\Banco\Views\ConciliacionBanco\Controllers\BancoCuentaController.cs" />
-    <Compile Include="Areas\Banco\Views\ConciliacionBanco\Controllers\CatalogoBancoController.cs" />
-    <Compile Include="Areas\Banco\Views\ConciliacionBanco\Controllers\CatalogoTipoBancoController.cs" />
-    <Compile Include="Areas\Banco\Views\ConciliacionBanco\Controllers\ChequeBancoController.cs" />
-    <Compile Include="Areas\Banco\Views\ConciliacionBanco\Controllers\ConciliacionBancoController.cs" />
-    <Compile Include="Areas\Banco\Views\ConciliacionBanco\Controllers\DepositoBancoController.cs" />
-    <Compile Include="Areas\Banco\Views\ConciliacionBanco\Controllers\NotaDeCreditoBancoController.cs" />
-    <Compile Include="Areas\Banco\Views\ConciliacionBanco\Controllers\NotaDeDebitoBancoController.cs" />
-    <Compile Include="Areas\Banco\Views\ConciliacionBanco\Controllers\ParametroBancoController.cs" />
-    <Compile Include="Areas\Banco\Views\ConciliacionBanco\Controllers\TalonarioChequeBancoController.cs" />
-    <Compile Include="Areas\Banco\Views\ConciliacionBanco\Controllers\TipoNotaBancoController.cs" />
     <Compile Include="Areas\Caja\CajaAreaRegistration.cs" />
     <Compile Include="Areas\Caja\Controllers\CajaController.cs" />
     <Compile Include="Areas\Caja\Controllers\CajaMovimientoEgresoController.cs" />
@@ -8796,6 +8785,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
