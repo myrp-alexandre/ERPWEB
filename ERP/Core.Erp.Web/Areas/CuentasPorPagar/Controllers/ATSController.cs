@@ -7,6 +7,7 @@ using Core.Erp.Info.CuentasPorPagar.ATS.ATS_Info;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
+using System.IO;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
@@ -36,7 +37,24 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         public ActionResult GridViewPartial_compras()
         {
             List<compras_Info> model = new List<compras_Info>();
-            return PartialView("compras_Info", model);
+            return PartialView("_GridViewPartial_compras", model);
+        }
+        public ActionResult GridViewPartial_retenciones()
+        {
+            List<retenciones_Info> model = new List<retenciones_Info>();
+            return PartialView("_GridViewPartial_retenciones", model);
+        }
+
+        public ActionResult DownLoadFile()
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            TextWriter tw = new StreamWriter(memoryStream);
+
+            tw.WriteLine("Hello World");
+            tw.Flush();
+            tw.Close();
+
+            return File(memoryStream.GetBuffer(), "text/plain", "file.xml");
         }
         private void cargar_combos(string TipoPersona = "")
         {

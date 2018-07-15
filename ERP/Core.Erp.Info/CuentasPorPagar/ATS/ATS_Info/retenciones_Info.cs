@@ -11,6 +11,7 @@ namespace Core.Erp.Info.CuentasPorPagar.ATS.ATS_Info
         public int IdEmpresa { get; set; }
         public int IdPeriodo { get; set; }
         public int Secuencia { get; set; }
+        public string denopr { get; set; }
         public string co_serie { get; set; }
         public string co_factura { get; set; }
         public string Cedula_ruc { get; set; }
