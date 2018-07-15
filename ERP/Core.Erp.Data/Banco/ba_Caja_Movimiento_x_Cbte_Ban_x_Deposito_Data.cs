@@ -17,19 +17,27 @@ namespace Core.Erp.Data.Banco
 
                 using (Entities_banco Context = new Entities_banco())
                 {
-                    Lista = (from q in Context.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito
+                    Lista = (from q in Context.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito
                              where q.mba_IdEmpresa == IdEmpresa
                              && q.mba_IdTipocbte == IdTipoCbte
                              && q.mba_IdCbteCble == IdCbteCble
                              select new ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info
                              {
-                                 mcj_IdEmpresa = q.mcj_IdEmpresa,
-                                 mcj_IdCbteCble = q.mcj_IdCbteCble,
-                                 mcj_IdTipocbte = q.mcj_IdTipocbte,
+                                 mcj_IdEmpresa = q.IdEmpresa,
+                                 mcj_IdCbteCble = q.IdCbteCble,
+                                 mcj_IdTipocbte = q.IdTipocbte,
                                  mba_IdEmpresa = q.mba_IdEmpresa,
                                  mba_IdCbteCble = q.mba_IdCbteCble,
                                  mba_IdTipocbte = q.mba_IdTipocbte,
-                                 mcj_Secuencia = q.mcj_Secuencia,
+                                 mcj_Secuencia = q.Secuencia,
+                                 tc_descripcion = q.tc_descripcion,
+                                 cr_Valor = q.cr_Valor,
+                                 cm_fecha = q.cm_fecha,
+                                 cm_observacion = q.cm_observacion,
+                                 pe_nombreCompleto = q.pe_nombreCompleto,
+                                 cr_NumDocumento = q.cr_NumDocumento,
+                                 IdCtaCble = q.IdCtaCble,
+                                 ca_Descripcion = q.ca_Descripcion
                              }).ToList();
                 }
 

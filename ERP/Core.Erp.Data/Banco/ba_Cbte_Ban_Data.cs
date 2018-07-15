@@ -29,6 +29,7 @@ namespace Core.Erp.Data.Banco
                              && q.cb_Fecha <= Fecha_fin
                              && q.CodTipoCbteBan == CodCbte
                              && q.IdSucursal == IdSucursal
+                             orderby q.IdCbteCble descending
                              select new ba_Cbte_Ban_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

@@ -177,7 +177,9 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            model.lst_det_ing = bus_det.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
             List_ct.set_list(model.lst_det_ct);
+            List_ing.set_list(model.lst_det_ing);
             cargar_combos();
             SessionFixed.TipoPersona = model.IdTipo_Persona;
             return View(model);
@@ -191,6 +193,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 return RedirectToAction("Index");
             model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
             List_ct.set_list(model.lst_det_ct);
+            List_ing.set_list(model.lst_det_ing);
             cargar_combos();
             return View(model);
         }
