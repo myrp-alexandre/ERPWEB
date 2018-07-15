@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Erp.Data.CuentasPorPagar
+namespace Core.Erp.Data.Contabilidad
 {
    public class ats_Data
     {
