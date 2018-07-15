@@ -70,11 +70,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return PartialView("_GridViewPartial_deudas_dc", model);
         }
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_deudas()
+        public ActionResult GridViewPartial_deudas(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
-            model = bus_orden_giro.get_lst(IdEmpresa, DateTime.Now, DateTime.Now);
+            ViewBag.IdSucursal = IdSucursal;
+            ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_ini).Date;
+            ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin).Date;
+            model = bus_orden_giro.get_lst(IdEmpresa, IdSucursal, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_deudas", model);
         }
 
