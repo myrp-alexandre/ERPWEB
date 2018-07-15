@@ -70,7 +70,7 @@
     <Compile Include="Caja\cp_conciliacion_Caja_det_Bus.cs" />
     <Compile Include="Caja\cp_conciliacion_Caja_det_Ing_Caja_Bus.cs" />
     <Compile Include="Caja\cp_conciliacion_Caja_det_x_ValeCaja_Bus.cs" />
-    <Compile Include="Contabilidad\ast_Bus.cs" />
+    <Compile Include="Contabilidad\ats_Bus.cs" />
     <Compile Include="Contabilidad\ct_anio_fiscal_Bus.cs" />
     <Compile Include="Contabilidad\ct_anio_fiscal_x_cuenta_utilidad_Bus.cs" />
     <Compile Include="Contabilidad\ct_cbtecble_Bus.cs" />
