@@ -745,6 +745,7 @@
     <Compile Include="Reportes\Banco\BAN_003_Data.cs" />
     <Compile Include="Reportes\Banco\BAN_004_Data.cs" />
     <Compile Include="Reportes\Banco\BAN_005_Data.cs" />
+    <Compile Include="Reportes\Banco\BAN_006_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_ingresos_Data.cs" />
     <Compile Include="Reportes\Contabilidad\CONTA_002_Data.cs" />

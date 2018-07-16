@@ -75,7 +75,7 @@
             // 
             this.xrLabel4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[cb_Valor]")});
-            this.xrLabel4.Font = new System.Drawing.Font("Times New Roman", 10F);
+            this.xrLabel4.Font = new System.Drawing.Font("Verdana", 8F);
             this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(627F, 4.666646F);
             this.xrLabel4.Name = "xrLabel4";
             this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -88,7 +88,7 @@
             // 
             this.xrLabel3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[cb_giradoA]")});
-            this.xrLabel3.Font = new System.Drawing.Font("Times New Roman", 10F);
+            this.xrLabel3.Font = new System.Drawing.Font("Verdana", 8F);
             this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(115.5417F, 39.41663F);
             this.xrLabel3.Name = "xrLabel3";
             this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -99,7 +99,7 @@
             // 
             this.xrLabel5.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[ValorEnLetras]")});
-            this.xrLabel5.Font = new System.Drawing.Font("Times New Roman", 10F);
+            this.xrLabel5.Font = new System.Drawing.Font("Verdana", 8F);
             this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(115.5417F, 81.0833F);
             this.xrLabel5.Name = "xrLabel5";
             this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -110,7 +110,7 @@
             // 
             this.xrLabel2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[cb_Fecha]")});
-            this.xrLabel2.Font = new System.Drawing.Font("Times New Roman", 10F);
+            this.xrLabel2.Font = new System.Drawing.Font("Verdana", 8F);
             this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(132.2083F, 134.8333F);
             this.xrLabel2.Name = "xrLabel2";
             this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -122,7 +122,7 @@
             // 
             this.xrLabel6.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Descripcion_Ciudad]")});
-            this.xrLabel6.Font = new System.Drawing.Font("Times New Roman", 10F);
+            this.xrLabel6.Font = new System.Drawing.Font("Verdana", 8F);
             this.xrLabel6.LocationFloat = new DevExpress.Utils.PointFloat(0F, 134.8333F);
             this.xrLabel6.Name = "xrLabel6";
             this.xrLabel6.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);

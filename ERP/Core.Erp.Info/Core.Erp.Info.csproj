@@ -212,6 +212,7 @@
     <Compile Include="Reportes\Banco\BAN_003_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_004_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_005_Info.cs" />
+    <Compile Include="Reportes\Banco\BAN_006_Info.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_Info.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_ingresos_Info.cs" />
     <Compile Include="Reportes\Contabilidad\CONTA_002_Info.cs" />
