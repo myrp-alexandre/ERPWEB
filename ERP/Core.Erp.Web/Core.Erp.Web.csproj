@@ -8845,6 +8845,9 @@
     <EmbeddedResource Include="Reportes\Banco\BAN_005_Rpt.resx">
       <DependentUpon>BAN_005_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Banco\BAN_006_Rpt.resx">
+      <DependentUpon>BAN_006_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Caja\CAJ_001_Rpt.resx">
       <DependentUpon>CAJ_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
