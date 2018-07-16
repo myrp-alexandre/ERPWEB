@@ -1178,6 +1178,12 @@
     <Compile Include="VWBAN_003.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="VWBAN_005.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWBAN_006.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
