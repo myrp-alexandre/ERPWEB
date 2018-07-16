@@ -11,6 +11,7 @@
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
 
+        settings.Settings.ShowFilterRow = true;
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
@@ -18,6 +19,12 @@
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+
 
         settings.Columns.Add("denopr", "Proveedor").Width = Unit.Percentage(40);
         settings.Columns.Add("establecimiento", "Est.").Width = Unit.Percentage(10);
