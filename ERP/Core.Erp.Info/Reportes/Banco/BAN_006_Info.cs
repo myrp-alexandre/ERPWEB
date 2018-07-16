@@ -6,7 +6,23 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.Reportes.Banco
 {
-    class BAN_006_Info
+    public class BAN_006_Info
     {
+        public int IdEmpresa { get; set; }
+        public int IdTipoCbte { get; set; }
+        public decimal IdCbteCble { get; set; }
+        public int secuencia { get; set; }
+        public string cb_giradoA { get; set; }
+        public string ValorEnLetras { get; set; }
+        public string Descripcion_Ciudad { get; set; }
+        public double cb_Valor { get; set; }
+        public System.DateTime cb_Fecha { get; set; }
+        public string cb_Observacion { get; set; }
+        public string IdCtaCble { get; set; }
+        public string pc_Cuenta { get; set; }
+        public double dc_Valor { get; set; }
+        public double dc_Valor_Debe { get; set; }
+        public Nullable<double> dc_Valor_Haber { get; set; }
+        public string cb_Cheque { get; set; }
     }
 }
