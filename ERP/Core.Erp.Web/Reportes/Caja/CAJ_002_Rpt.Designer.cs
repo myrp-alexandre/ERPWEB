@@ -114,7 +114,7 @@
             // 
             this.Detail.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable4});
-            this.Detail.HeightF = 27.29168F;
+            this.Detail.HeightF = 20F;
             this.Detail.Name = "Detail";
             this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.Detail.SortFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
@@ -262,7 +262,7 @@
             // 
             // BottomMargin
             // 
-            this.BottomMargin.HeightF = 40.2916F;
+            this.BottomMargin.HeightF = 45F;
             this.BottomMargin.Name = "BottomMargin";
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -687,7 +687,7 @@
             // 
             // xrTable8
             // 
-            this.xrTable8.LocationFloat = new DevExpress.Utils.PointFloat(265F, 47.50004F);
+            this.xrTable8.LocationFloat = new DevExpress.Utils.PointFloat(265.0001F, 37.50003F);
             this.xrTable8.Name = "xrTable8";
             this.xrTable8.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow5});
@@ -714,7 +714,7 @@
             // 
             // xrTable9
             // 
-            this.xrTable9.LocationFloat = new DevExpress.Utils.PointFloat(637.0001F, 47.50004F);
+            this.xrTable9.LocationFloat = new DevExpress.Utils.PointFloat(637.0001F, 37.50003F);
             this.xrTable9.Name = "xrTable9";
             this.xrTable9.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow12});
@@ -800,7 +800,7 @@
             this.objectDataSource1});
             this.DataSource = this.objectDataSource1;
             this.Landscape = true;
-            this.Margins = new System.Drawing.Printing.Margins(38, 38, 38, 40);
+            this.Margins = new System.Drawing.Printing.Margins(38, 38, 38, 45);
             this.PageHeight = 827;
             this.PageWidth = 1169;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
