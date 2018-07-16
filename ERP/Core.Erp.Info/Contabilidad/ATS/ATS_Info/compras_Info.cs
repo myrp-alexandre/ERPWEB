@@ -33,6 +33,8 @@ namespace Core.Erp.Info.Contabilidad.ATS.ATS_Info
         public string pagoLocExt { get; set; }
         public string denopago { get; set; }
         public string paisEfecPago { get; set; }
+        public string aplicConvDobTrib { get; set; }
+        public string pagExtSujRetNorLeg { get; set; }
         public string formaPago { get; set; }
         public string docModificado { get; set; }
         public string estabModificado { get; set; }
