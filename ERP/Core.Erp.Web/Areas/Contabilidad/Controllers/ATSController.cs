@@ -7,7 +7,10 @@ using Core.Erp.Info.Contabilidad.ATS.ATS_Info;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
+using Core.Erp.Info.Contabilidad.ATS;
 using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 {
@@ -60,17 +63,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             return PartialView("_GridViewPartial_retenciones", model);
         }
 
-        public ActionResult DownLoadFile()
-        {
-            MemoryStream memoryStream = new MemoryStream();
-            TextWriter tw = new StreamWriter(memoryStream);
-
-            tw.WriteLine("Hello World");
-            tw.Flush();
-            tw.Close();
-
-            return File(memoryStream.GetBuffer(), "text/plain", "file.xml");
-        }
+      
         private void cargar_combos(string TipoPersona = "")
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -80,7 +73,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
         }
 
-
+        
         #region json
         public JsonResult get_ats(int IdPeriodo)
         {
@@ -94,7 +87,25 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
             return Json("", JsonRequestBehavior.AllowGet);
         }
-      
+        public ActionResult dolowadATS(int IdPeriodo)
+        {
+            iva ats = new iva();
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            int IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
+            ats = bus_ats.get_ats(IdEmpresa, IdPeriodo, IdSucursal);
+
+            XmlSerializer xsSubmit = new XmlSerializer(typeof(iva));
+            var xml = "";
+            using (var sww = new StringWriter())
+            {
+                using (XmlWriter writer = XmlWriter.Create(sww))
+                {
+                    xsSubmit.Serialize(writer, ats);
+                    xml = sww.ToString();
+                }
+            }
+            return File(xml, "text/plain", "file.xml");
+        }
         #endregion
 
     }
