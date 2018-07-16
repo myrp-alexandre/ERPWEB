@@ -40,6 +40,7 @@ namespace Core.Erp.Bus.Contabilidad
         {
             try
             {
+                string registro = "";
                 iva ats = new iva();
                 info_periodo = data_periodo.get_info(IdEmpresa, IdPeriodo);
                 info_empresa = data_empresa.get_info(IdEmpresa);
@@ -62,50 +63,56 @@ namespace Core.Erp.Bus.Contabilidad
                     if(info_ats.lst_compras.Count() >0)
                     {
                         ats.compras = new List<detalleCompras>();
-                        ats.compras = new List<detalleCompras>();
-
                     }
                     info_ats.lst_compras.ForEach(
                     comp =>
                        {
                            detalleCompras comp_det = new detalleCompras();
-                           comp_det.codSustento = comp.codSustento;
-                           comp_det.tpIdProv = comp.tpIdProv;
-                           comp_det.idProv = comp.idProv;
-                           comp_det.tipoComprobante = comp.tipoComprobante;
-                           comp_det.parteRel = parteRelType.NO;
-                           comp_det.fechaRegistro = comp.fechaRegistro.ToString().Substring(0,10);
-                           comp_det.establecimiento = comp.establecimiento;
-                           comp_det.puntoEmision = comp.puntoEmision;
-                           comp_det.secuencial = comp.secuencial;
-                           comp_det.fechaEmision = comp.fechaEmision.ToString().Substring(0, 10);
-                           comp_det.autorizacion = comp.autorizacion;
-                           comp_det.baseNoGraIva = comp.baseNoGraIva.ToString("n2");
-                           comp_det.baseImponible = comp.baseImponible.ToString("n2"); 
-                           comp_det.baseImpGrav = comp.baseImpGrav.ToString("n2");
-                           comp_det.baseImpExe = comp.baseImpExe.ToString("n2");
-                           comp_det.montoIce = comp.montoIce.ToString("n2");
-                           comp_det.montoIva = comp.montoIva.ToString("n2");
-                           comp_det.valRetBien10 = "0.00";
-                           comp_det.valRetServ20 = "0.00";
-                           comp_det.valorRetBienes = "0.00";
-                           comp_det.valRetServ50 = "0.00";
-                           comp_det.valorRetServicios = "0.00";
-                           comp_det.valRetServ100 = "0.00";
-                           comp_det.totbasesImpReemb = "0.00";
 
-                           pagoExterior item_pago = new pagoExterior();
-                           item_pago.pagoLocExt = (comp.pagoLocExt == "LOC") ? pagoLocExtType.Item01 : pagoLocExtType.Item02;
-                           item_pago.paisEfecPago = (item_pago.pagoLocExt == pagoLocExtType.Item01) ? "NA" : (comp.pagoLocExt != null || comp.pagoLocExt != "") ? comp.pagoLocExt : "NA";
-                           item_pago.aplicConvDobTrib = (comp.aplicConvDobTrib == "S") ? aplicConvDobTribType.SI : (comp.aplicConvDobTrib == "N") ? aplicConvDobTribType.NO : aplicConvDobTribType.NA;
-                           item_pago.pagExtSujRetNorLeg = (comp.pagExtSujRetNorLeg == "S") ? aplicConvDobTribType.SI : (comp.pagExtSujRetNorLeg == "N") ? aplicConvDobTribType.NO : aplicConvDobTribType.NA;
-                           comp_det.pagoExterior = item_pago;
+                           registro = comp.denopr + " " + comp.secuencial;
+                         if(comp.secuencial== "000000301")
+                           {
+                               int s = 0;
+                           }
+                               comp_det.codSustento = comp.codSustento;
+                               comp_det.tpIdProv = comp.tpIdProv;
+                               comp_det.idProv = comp.idProv;
+                               comp_det.tipoComprobante = comp.tipoComprobante;
+                               comp_det.parteRel = parteRelType.NO;
+                               comp_det.fechaRegistro = comp.fechaRegistro.ToString().Substring(0, 10);
+                               comp_det.establecimiento = comp.establecimiento;
+                               comp_det.puntoEmision = comp.puntoEmision;
+                               comp_det.secuencial = comp.secuencial;
+                               comp_det.fechaEmision = comp.fechaEmision.ToString().Substring(0, 10);
+                               comp_det.autorizacion = comp.autorizacion;
+                               comp_det.baseNoGraIva = comp.baseNoGraIva.ToString("n2");
+                               comp_det.baseImponible = comp.baseImponible.ToString("n2");
+                               comp_det.baseImpGrav = comp.baseImpGrav.ToString("n2");
+                               comp_det.baseImpExe = comp.baseImpExe.ToString("n2");
+                               comp_det.montoIce = comp.montoIce.ToString("n2");
+                               comp_det.montoIva = comp.montoIva.ToString("n2");
+                               comp_det.valRetBien10 = "0.00";
+                               comp_det.valRetServ20 = "0.00";
+                               comp_det.valorRetBienes = "0.00";
+                               comp_det.valRetServ50 = "0.00";
+                               comp_det.valorRetServicios = "0.00";
+                               comp_det.valRetServ100 = "0.00";
+                               comp_det.totbasesImpReemb = "0.00";
+
+                               pagoExterior item_pago = new pagoExterior();
+                               item_pago.pagoLocExt = (comp.pagoLocExt == "LOC") ? pagoLocExtType.Item01 : pagoLocExtType.Item02;
+                               item_pago.paisEfecPago = (item_pago.pagoLocExt == pagoLocExtType.Item01) ? "NA" : (comp.pagoLocExt != null || comp.pagoLocExt != "") ? comp.pagoLocExt : "NA";
+                               item_pago.aplicConvDobTrib = (comp.aplicConvDobTrib == "S") ? aplicConvDobTribType.SI : (comp.aplicConvDobTrib == "N") ? aplicConvDobTribType.NO : aplicConvDobTribType.NA;
+                               item_pago.pagExtSujRetNorLeg = (comp.pagExtSujRetNorLeg == "S") ? aplicConvDobTribType.SI : (comp.pagExtSujRetNorLeg == "N") ? aplicConvDobTribType.NO : aplicConvDobTribType.NA;
+                               comp_det.pagoExterior = item_pago;
+                           
+
                            #region retencion por facturas
                            if (info_ats.lst_retenciones != null)
                            {
                                if(info_ats.lst_retenciones.Count() > 0)
                                {
-                                   var lstret_x_fac = info_ats.lst_retenciones.Where(r =>r.Cedula_ruc==comp.idProv & r.co_serie==comp.establecimiento+"-"+comp.puntoEmision);
+                                   var lstret_x_fac = info_ats.lst_retenciones.Where(r =>r.Cedula_ruc==comp.idProv & r.co_serie==comp.establecimiento+"-"+comp.puntoEmision & comp.secuencial==r.co_factura);
                                    if(lstret_x_fac!=null)
                                    {
                                        if(lstret_x_fac.Count() > 0)
@@ -195,7 +202,7 @@ namespace Core.Erp.Bus.Contabilidad
 
                 
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;

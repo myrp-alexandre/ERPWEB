@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-md-12">
             
-            <div class="col-md-12">
+            <div class="col-md-10">
                 <div class="form-group">
                     <label for="info_periodo.IdanioFiscal">Periodo*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.info_periodo.IdanioFiscal, settings =>
@@ -35,18 +35,22 @@
                    settings.Properties.Columns.Add("IdanioFiscal", "Año").Width = System.Web.UI.WebControls.Unit.Percentage(20);
                    settings.Properties.Columns.Add("pe_FechaIni", "Fecha Inicio").Width = System.Web.UI.WebControls.Unit.Percentage(80);
                    settings.Properties.Columns.Add("pe_FechaFin", "Fecha fin").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-
                    ////Campo ID
                    settings.Properties.ValueField = "IdPeriodo";
-                   //settings.Properties.ValueType = typeof(string);
-                   //settings.Properties.TextField = "Descricpion";
-                   //Boton para seleccionar ningun registro
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
                    settings.Properties.ClientSideEvents.SelectedIndexChanged = "function (s,e) {get_ats();}";
 
-               }).BindList(ViewBag.lst_periodos).GetHtml()
+                   }).BindList(ViewBag.lst_periodos).GetHtml()
                     @Html.ValidationMessageFor(q => q.info_periodo.IdPeriodo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label for="info_periodo.IdanioFiscal">Periodo*</label>
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary" onclick="dolowadATS();">Descargar</button>
+                    </div>
                 </div>
             </div>
 
@@ -103,10 +107,7 @@
         </div>
     </div>
 
-        <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a class="btn btn-default" href="@Url.Action("Index", "Empleado", new { Area ="RRHH" }, null)">Cancelar</a>
-        </div>
+       
 
         @section Scripts {
             @Scripts.Render("~/bundles/jqueryval")
@@ -116,6 +117,32 @@
 
 
 <script>
+    function dolowadATS() {
+
+
+
+        if (IdPeriodo.GetValue() > 0) {
+            var datos = {
+                IdPeriodo: IdPeriodo.GetValue()
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("dolowadATS", "ATS", new { Area = "Contabilidad" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                   
+                },
+                error: function (error) {
+                }
+            });
+        }
+    };
+
     function get_ats() {
 
 
@@ -144,5 +171,5 @@
             });
         }
     };
-     
+
 </script>
