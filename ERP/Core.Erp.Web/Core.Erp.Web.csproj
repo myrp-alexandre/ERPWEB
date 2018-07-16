@@ -8679,6 +8679,8 @@
     <Content Include="Areas\Contabilidad\Views\ATS\_GridViewPartial_ventas.cshtml" />
     <Content Include="Areas\Contabilidad\Views\ATS\Index.cshtml" />
     <Content Include="Areas\Contabilidad\Views\ATS\Nuevo.cshtml" />
+    <Content Include="Areas\Banco\Views\ConciliacionBanco\_GridViewPartial_ConciliacionBanco_x_cruzar.cshtml" />
+    <Content Include="Areas\Banco\Views\ConciliacionBanco\_GridViewPartial_ConciliacionBanco_det.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />

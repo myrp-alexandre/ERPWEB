@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Core.Erp.Info.Banco
 {
@@ -30,6 +31,7 @@ namespace Core.Erp.Info.Banco
         public string Periodo { get; set; }
         public string IdCtaCble { get; set; }
         public string ba_descripcion { get; set; }
+        public List<ba_Conciliacion_det_IngEgr_Info> lst_det { get; set; }
         #endregion
 
     }
