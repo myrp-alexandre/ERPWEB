@@ -22,7 +22,8 @@ namespace Core.Erp.Data.Contabilidad
                     info.lst_compras = (from q in Context.ATS_compras
                                         where q.IdEmpresa==IdEmpresa
                                         && q.IdPeriodo==IdPeriodo
-                             select new compras_Info
+                                        && q.idProv== "0909594202001"
+                                        select new compras_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdPeriodo = q.IdPeriodo,
@@ -63,7 +64,8 @@ namespace Core.Erp.Data.Contabilidad
                     info.lst_ventas = (from v in Context.ATS_ventas
                                         where v.IdEmpresa == IdEmpresa
                                         && v.IdPeriodo == IdPeriodo
-                                        select new ventas_Info
+                                        && v.idCliente== "987"
+                                       select new ventas_Info
                                         {
                                             IdEmpresa = v.IdEmpresa,
                                             IdPeriodo = v.IdPeriodo,
@@ -92,7 +94,8 @@ namespace Core.Erp.Data.Contabilidad
                     info.lst_retenciones = (from r in Context.ATS_retenciones
                                        where r.IdEmpresa == IdEmpresa
                                        && r.IdPeriodo == IdPeriodo
-                                       select new retenciones_Info
+                                       && r.Cedula_ruc== "0909594202001"
+                                            select new retenciones_Info
                                        {
                                            IdEmpresa = r.IdEmpresa,
                                            IdPeriodo = r.IdPeriodo,
@@ -116,7 +119,10 @@ namespace Core.Erp.Data.Contabilidad
                                           estabModificado=r.autModificado,
                                           ptoEmiModificado=r.ptoEmiModificado,
                                           secModificado=r.secModificado,
-                                          autModificado=r.autModificado
+                                          autModificado=r.autModificado,
+                                          baseImpAir=r.baseImpAir,
+                                           porcentajeAir=r.porcentajeAir,
+                                           valRetAir=r.valRetAir
                                        }).ToList();
 
 

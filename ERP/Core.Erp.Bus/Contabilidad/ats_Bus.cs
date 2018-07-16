@@ -57,6 +57,7 @@ namespace Core.Erp.Bus.Contabilidad
                 ats.codigoOperativo = codigoOperativoType.IVA;
                 ats.totalVentas = info_ats.lst_ventas.Sum(v=>v.baseImpGrav+v.baseImpGrav);
                 #endregion
+
                 #region listado de compras
                 if (info_ats.lst_compras != null)
                 {
@@ -98,7 +99,6 @@ namespace Core.Erp.Bus.Contabilidad
                                comp_det.valorRetServicios = "0.00";
                                comp_det.valRetServ100 = "0.00";
                                comp_det.totbasesImpReemb = "0.00";
-
                                pagoExterior item_pago = new pagoExterior();
                                item_pago.pagoLocExt = (comp.pagoLocExt == "LOC") ? pagoLocExtType.Item01 : pagoLocExtType.Item02;
                                item_pago.paisEfecPago = (item_pago.pagoLocExt == pagoLocExtType.Item01) ? "NA" : (comp.pagoLocExt != null || comp.pagoLocExt != "") ? comp.pagoLocExt : "NA";
@@ -137,11 +137,13 @@ namespace Core.Erp.Bus.Contabilidad
                        });
                 }
                 #endregion
+
                 #region Ventas
                 if (info_ats.lst_ventas != null)
                 {
                     if (info_ats.lst_ventas.Count() > 0)
                     {
+                        ats.ventas = new List<detalleVentas>();
                         info_ats.lst_ventas.ForEach(
                              vent =>
                              {
@@ -160,7 +162,6 @@ namespace Core.Erp.Bus.Contabilidad
                                  det_ventas.tpIdCliente = vent.tpIdCliente;
                                  det_ventas.tpIdCliente = vent.tpIdCliente;
                                  string[] forma_pago = new string[] { vent.formaPago };
-                                 det_ventas.formasDePago = forma_pago;
                                  ats.ventas.Add(det_ventas);
                              }
                             );

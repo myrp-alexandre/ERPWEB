@@ -42,8 +42,8 @@ namespace Core.Erp.Data
         public virtual DbSet<vwct_cbtecble_con_ctacble_acreedora> vwct_cbtecble_con_ctacble_acreedora { get; set; }
         public virtual DbSet<ATS_compras> ATS_compras { get; set; }
         public virtual DbSet<ATS_comprobantes_anulados> ATS_comprobantes_anulados { get; set; }
-        public virtual DbSet<ATS_retenciones> ATS_retenciones { get; set; }
         public virtual DbSet<ATS_ventas> ATS_ventas { get; set; }
+        public virtual DbSet<ATS_retenciones> ATS_retenciones { get; set; }
     
         public virtual int generarATS(Nullable<int> idempresa, Nullable<int> idPeriodo)
         {

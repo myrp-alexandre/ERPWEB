@@ -273,9 +273,9 @@
           <Property Name="valRetServ50" Type="numeric" Precision="12" Scale="2" />
           <Property Name="valorRetServicios" Type="numeric" Precision="12" Scale="2" />
           <Property Name="valRetServ100" Type="numeric" Precision="12" Scale="2" />
-          <Property Name="codRetAir" Type="numeric" Precision="12" Scale="2" />
+          <Property Name="codRetAir" Type="varchar" MaxLength="10" />
           <Property Name="baseImpAir" Type="numeric" Precision="12" Scale="2" />
-          <Property Name="porcentajeAir" Type="numeric" Precision="12" Scale="2" />
+          <Property Name="porcentajeAir" Type="varchar" MaxLength="5" />
           <Property Name="valRetAir" Type="numeric" Precision="12" Scale="2" />
           <Property Name="estabRetencion1" Type="varchar" MaxLength="3" />
           <Property Name="ptoEmiRetencion1" Type="varchar" MaxLength="3" />
@@ -754,12 +754,12 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           <EntitySet Name="vwct_cbtecble_con_ctacble_acreedora" EntityType="Model_contabilidad.vwct_cbtecble_con_ctacble_acreedora" />
           <EntitySet Name="ATS_compras" EntityType="Model_contabilidad.ATS_compras" />
           <EntitySet Name="ATS_comprobantes_anulados" EntityType="Model_contabilidad.ATS_comprobantes_anulados" />
-          <EntitySet Name="ATS_retenciones" EntityType="Model_contabilidad.ATS_retenciones" />
           <EntitySet Name="ATS_ventas" EntityType="Model_contabilidad.ATS_ventas" />
           <FunctionImport Name="generarATS">
             <Parameter Name="idempresa" Mode="In" Type="Int32" />
             <Parameter Name="idPeriodo" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="ATS_retenciones" EntityType="Model_contabilidad.ATS_retenciones" />
           </EntityContainer>
         <EntityType Name="ct_grupocble">
           <Key>
@@ -1294,39 +1294,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           <Property Name="secuencialFin" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
           <Property Name="Autorización" Type="String" Nullable="false" MaxLength="49" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="ATS_retenciones">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdPeriodo" />
-            <PropertyRef Name="Secuencia" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="co_serie" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="co_factura" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Cedula_ruc" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
-          <Property Name="valRetBien10" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="valRetServ20" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="valorRetBienes" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="valRetServ50" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="valorRetServicios" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="valRetServ100" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="codRetAir" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="baseImpAir" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="porcentajeAir" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="valRetAir" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="estabRetencion1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="ptoEmiRetencion1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="secRetencion1" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="autRetencion1" Type="String" MaxLength="49" FixedLength="false" Unicode="false" />
-          <Property Name="fechaEmiRet1" Type="DateTime" Precision="0" />
-          <Property Name="docModificado" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="estabModificado" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="ptoEmiModificado" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="secModificado" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="autModificado" Type="String" MaxLength="49" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="ATS_ventas">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1355,6 +1322,39 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           <Property Name="codEstab" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="ventasEstab" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
           <Property Name="ivaComp" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+        </EntityType>
+        <EntityType Name="ATS_retenciones">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="co_serie" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="co_factura" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Cedula_ruc" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="valRetBien10" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="valRetServ20" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="valorRetBienes" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="valRetServ50" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="valorRetServicios" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="valRetServ100" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="codRetAir" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="baseImpAir" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="porcentajeAir" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="valRetAir" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="estabRetencion1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="ptoEmiRetencion1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="secRetencion1" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="autRetencion1" Type="String" MaxLength="49" FixedLength="false" Unicode="false" />
+          <Property Name="fechaEmiRet1" Type="DateTime" Precision="0" />
+          <Property Name="docModificado" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="estabModificado" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="ptoEmiModificado" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="secModificado" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="autModificado" Type="String" MaxLength="49" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1616,6 +1616,35 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ATS_ventas">
+            <EntityTypeMapping TypeName="Model_contabilidad.ATS_ventas">
+              <MappingFragment StoreEntitySet="ATS_ventas">
+                <ScalarProperty Name="ivaComp" ColumnName="ivaComp" />
+                <ScalarProperty Name="ventasEstab" ColumnName="ventasEstab" />
+                <ScalarProperty Name="codEstab" ColumnName="codEstab" />
+                <ScalarProperty Name="formaPago" ColumnName="formaPago" />
+                <ScalarProperty Name="valorRetRenta" ColumnName="valorRetRenta" />
+                <ScalarProperty Name="valorRetIva" ColumnName="valorRetIva" />
+                <ScalarProperty Name="montoIce" ColumnName="montoIce" />
+                <ScalarProperty Name="montoIva" ColumnName="montoIva" />
+                <ScalarProperty Name="baseImpGrav" ColumnName="baseImpGrav" />
+                <ScalarProperty Name="baseImponible" ColumnName="baseImponible" />
+                <ScalarProperty Name="baseNoGraIva" ColumnName="baseNoGraIva" />
+                <ScalarProperty Name="numeroComprobantes" ColumnName="numeroComprobantes" />
+                <ScalarProperty Name="tipoEm" ColumnName="tipoEm" />
+                <ScalarProperty Name="tipoComprobante" ColumnName="tipoComprobante" />
+                <ScalarProperty Name="DenoCli" ColumnName="DenoCli" />
+                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
+                <ScalarProperty Name="parteRel" ColumnName="parteRel" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="tpIdCliente" ColumnName="tpIdCliente" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="generarATS" FunctionName="Model_contabilidad.Store.generarATS" />
           <EntitySetMapping Name="ATS_retenciones">
             <EntityTypeMapping TypeName="Model_contabilidad.ATS_retenciones">
               <MappingFragment StoreEntitySet="ATS_retenciones">
@@ -1648,35 +1677,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ATS_ventas">
-            <EntityTypeMapping TypeName="Model_contabilidad.ATS_ventas">
-              <MappingFragment StoreEntitySet="ATS_ventas">
-                <ScalarProperty Name="ivaComp" ColumnName="ivaComp" />
-                <ScalarProperty Name="ventasEstab" ColumnName="ventasEstab" />
-                <ScalarProperty Name="codEstab" ColumnName="codEstab" />
-                <ScalarProperty Name="formaPago" ColumnName="formaPago" />
-                <ScalarProperty Name="valorRetRenta" ColumnName="valorRetRenta" />
-                <ScalarProperty Name="valorRetIva" ColumnName="valorRetIva" />
-                <ScalarProperty Name="montoIce" ColumnName="montoIce" />
-                <ScalarProperty Name="montoIva" ColumnName="montoIva" />
-                <ScalarProperty Name="baseImpGrav" ColumnName="baseImpGrav" />
-                <ScalarProperty Name="baseImponible" ColumnName="baseImponible" />
-                <ScalarProperty Name="baseNoGraIva" ColumnName="baseNoGraIva" />
-                <ScalarProperty Name="numeroComprobantes" ColumnName="numeroComprobantes" />
-                <ScalarProperty Name="tipoEm" ColumnName="tipoEm" />
-                <ScalarProperty Name="tipoComprobante" ColumnName="tipoComprobante" />
-                <ScalarProperty Name="DenoCli" ColumnName="DenoCli" />
-                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
-                <ScalarProperty Name="parteRel" ColumnName="parteRel" />
-                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-                <ScalarProperty Name="tpIdCliente" ColumnName="tpIdCliente" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="generarATS" FunctionName="Model_contabilidad.Store.generarATS" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

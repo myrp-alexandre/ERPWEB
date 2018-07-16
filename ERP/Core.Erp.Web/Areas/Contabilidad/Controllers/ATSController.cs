@@ -87,7 +87,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
             return Json("", JsonRequestBehavior.AllowGet);
         }
-        public ActionResult dolowadATS(int IdPeriodo)
+        public FileResult dolowadATS(int IdPeriodo)
         {
             iva ats = new iva();
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -104,7 +104,17 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
                     xml = sww.ToString();
                 }
             }
-            return File(xml, "text/plain", "file.xml");
+
+
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C: \Users\jerry\Desktop\ats\"+IdPeriodo+".xml", true))
+            {
+                file.WriteLine(xml);
+                file.Close();
+                byte[] fileBytes = System.IO.File.ReadAllBytes(@"C: \Users\jerry\Desktop\ats\" + IdPeriodo + ".xml");
+                string fileName = IdPeriodo + ".xml";
+                return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+            }
+
         }
         #endregion
 

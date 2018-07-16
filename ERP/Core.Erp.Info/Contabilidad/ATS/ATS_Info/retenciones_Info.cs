@@ -21,9 +21,9 @@ namespace Core.Erp.Info.Contabilidad.ATS.ATS_Info
         public Nullable<decimal> valRetServ50 { get; set; }
         public Nullable<decimal> valorRetServicios { get; set; }
         public Nullable<decimal> valRetServ100 { get; set; }
-        public Nullable<decimal> codRetAir { get; set; }
+        public string codRetAir { get; set; }
         public Nullable<decimal> baseImpAir { get; set; }
-        public Nullable<decimal> porcentajeAir { get; set; }
+        public string porcentajeAir { get; set; }
         public Nullable<decimal> valRetAir { get; set; }
         public string estabRetencion1 { get; set; }
         public string ptoEmiRetencion1 { get; set; }
