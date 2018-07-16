@@ -14,6 +14,15 @@ namespace Core.Erp.Data.Facturacion
             try
             {
                 List<fa_factura_Info> Lista;
+                using (Entities_facturacion Context = new Entities_facturacion())
+                {
+                    Lista = (from q in Context.fa_factura
+                             where q.IdEmpresa == IdEmpresa
+                             select new fa_factura_Info
+                             {
+
+                             }).ToList();
+                }
                 return Lista;
             }
             catch (Exception)
