@@ -4,12 +4,8 @@
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_utilidades";
         settings.CallbackRouteValues = new { Controller = "ParticipacionUtilidad", Action = "GridViewPartial_utilidades" };
-
         settings.Width = Unit.Percentage(100);
-
         settings.KeyFieldName = "IdUtilidad";
-
-
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
@@ -79,7 +75,6 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-
 
         settings.Columns.Add("IdUtilidad","ID");
         settings.Columns.Add("pe_FechaIni", "Desde");

@@ -72,86 +72,64 @@
         <div class="tab-content" style="padding-top: 20px">
 
             <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tab_param_general">
-               
 
 
-                <div class="box collapsed-box">
-                    <div class="box-header with-border">
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                                <i class="fa fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="box-body">
-                        <div class="row">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="IdRubro_acta_finiquito">Rubro Acta finiquito*</label>
-                                            @Html.DevExpress().ComboBoxFor(q => q.IdRubro_acta_finiquito, settings =>
-                                               {
-                                                   settings.Name = "IdRubro_acta_finiquito";
-                                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                                   settings.Properties.Columns.Add("ru_codRolGen", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                                   settings.Properties.Columns.Add("ru_descripcion", "Rubro").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                                   settings.Properties.Columns.Add("ru_tipo", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="IdRubro_acta_finiquito">Rubro Acta finiquito*</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdRubro_acta_finiquito, settings =>
+                                   {
+                                       settings.Name = "IdRubro_acta_finiquito";
+                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                       settings.Properties.Columns.Add("ru_codRolGen", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                       settings.Properties.Columns.Add("ru_descripcion", "Rubro").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                       settings.Properties.Columns.Add("ru_tipo", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(80);
 
-                                                   //Campo ID
-                                                   settings.Properties.ValueField = "IdRubro";
-                                                   settings.Properties.ValueType = typeof(decimal);
-                                                   settings.Properties.TextField = "ru_descripcion";
-                                                   //Boton para seleccionar ningun registro
-                                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                                   settings.Properties.NullText = "== Seleccione ==";
-                                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                       //Campo ID
+                                       settings.Properties.ValueField = "IdRubro";
+                                       settings.Properties.ValueType = typeof(decimal);
+                                       settings.Properties.TextField = "ru_descripcion";
+                                       //Boton para seleccionar ningun registro
+                                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                       settings.Properties.NullText = "== Seleccione ==";
+                                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
-                                               }).BindList(ViewBag.lst_rubro).GetHtml()
-                                            @Html.ValidationMessageFor(q => q.IdRubro_acta_finiquito, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                </div>
+                                   }).BindList(ViewBag.lst_rubro).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdRubro_acta_finiquito, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="Sueldo_basico">Salario básico*</label>
-                                        @Html.TextBoxFor(q => q.Sueldo_basico, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(q => q.Sueldo_basico, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="Porcentaje_aporte_patr">Aporte patronal*</label>
-                                        @Html.TextBoxFor(q => q.Porcentaje_aporte_patr, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(q => q.Porcentaje_aporte_patr, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="Porcentaje_aporte_patr">Aporte personal*</label>
-                                        @Html.TextBoxFor(q => q.Porcentaje_aporte_pers, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(q => q.Porcentaje_aporte_pers, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
-                    <!-- /.box-body -->
                 </div>
 
-
-
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Sueldo_basico">Salario básico*</label>
+                            @Html.TextBoxFor(q => q.Sueldo_basico, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.Sueldo_basico, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Porcentaje_aporte_patr">Aporte patronal*</label>
+                            @Html.TextBoxFor(q => q.Porcentaje_aporte_patr, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.Porcentaje_aporte_patr, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Porcentaje_aporte_patr">Aporte personal*</label>
+                            @Html.TextBoxFor(q => q.Porcentaje_aporte_pers, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.Porcentaje_aporte_pers, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
 
             <div role="tabpanel" class="tab-pane" id="tab_param_rubros">
 

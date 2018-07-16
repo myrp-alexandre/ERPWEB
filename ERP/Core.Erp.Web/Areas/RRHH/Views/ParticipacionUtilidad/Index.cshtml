@@ -5,12 +5,9 @@
     {
         Response.Redirect("~/Account/Login");
     }
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 @using (Html.BeginForm())
 {
-@Html.Action("GridViewPartial_utilidades")
+    @Html.Action("GridViewPartial_utilidades")
 }
-
-

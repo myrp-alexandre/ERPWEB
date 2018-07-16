@@ -8100,7 +8100,6 @@
     <Content Include="Areas\Inventario\Views\Subgrupo\Nuevo.cshtml" />
     <Content Include="Areas\Inventario\Views\Subgrupo\Modificar.cshtml" />
     <Content Include="Areas\RRHH\Views\ParticipacionUtilidad\Anular.cshtml" />
-    <Content Include="Areas\RRHH\Views\ParticipacionUtilidad\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\ParticipacionUtilidad\Modificar.cshtml" />
     <Content Include="Areas\RRHH\Views\ParticipacionUtilidad\Nuevo.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\Anular.cshtml" />
@@ -8695,6 +8694,7 @@
     <Content Include="Areas\Banco\Views\ConciliacionBanco\_GridViewPartial_ConciliacionBanco_det.cshtml" />
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_005.cshtml" />
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_006.cshtml" />
+    <Content Include="Areas\RRHH\Views\ParticipacionUtilidad\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />

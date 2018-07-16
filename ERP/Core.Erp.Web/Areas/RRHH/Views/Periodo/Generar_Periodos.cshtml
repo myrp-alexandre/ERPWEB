@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.RRHH.ro_periodo_Info
 @{
-    ViewBag.Title = "Generar Período";
+    ViewBag.Title = "Generar periodo";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -15,7 +15,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="ca_descripcion">Tipo período</label>
+                    <label for="ca_descripcion">Tipo periodo</label>
                     @Html.DropDownListFor(q => q.CodCatalogo, new SelectList(ViewBag.lista_catalogo, "CodCatalogo", "ca_descripcion"), "== Seleccione ==", new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Cod_region, "", new { @class = "text-danger" })
                 </div>
@@ -27,7 +27,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="ca_descripcion">Ano*</label>
+                    <label for="ca_descripcion">Año*</label>
                     @Html.TextBoxFor(q => q.pe_anio, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.pe_anio, "", new { @class = "text-danger" })
 

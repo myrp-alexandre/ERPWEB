@@ -72,15 +72,15 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString() + "&nbsp;"+ "&nbsp;" 
+                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString() + "&nbsp;"+ "/" + "&nbsp;"
                 );
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Generar Periodos", "Generar_Periodos").ToHtmlString()
+                    Html.ActionLink("Generar Periodos","Generar_Periodos").ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = Unit.Pixel(160);
+            c.Width = Unit.Pixel(185);
         });
 
         settings.Columns.Add("IdPeriodo","ID").Width=Unit.Percentage(10);
