@@ -377,6 +377,66 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwba_Cbte_Ban' no 
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwba_Conciliacion_det_IngEgr' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwba_Conciliacion_det_IngEgr">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="secuenciaCbte" />
+            <PropertyRef Name="IdBanco" />
+            <PropertyRef Name="IdCtaCble" />
+            <PropertyRef Name="dc_Valor" />
+            <PropertyRef Name="ba_descripcion" />
+            <PropertyRef Name="cb_Fecha" />
+            <PropertyRef Name="tc_TipoCbte" />
+            <PropertyRef Name="IdConciliacion" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="secuenciaCbte" Type="int" Nullable="false" />
+          <Property Name="IdBanco" Type="int" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="dc_Valor" Type="float" Nullable="false" />
+          <Property Name="ba_descripcion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="cb_Fecha" Type="date" Nullable="false" />
+          <Property Name="cb_Observacion" Type="varchar(max)" />
+          <Property Name="cb_Cheque" Type="varchar" MaxLength="50" />
+          <Property Name="tc_TipoCbte" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="IdConciliacion" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwba_Conciliacion_det_IngEgr_x_conciliar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwba_Conciliacion_det_IngEgr_x_conciliar">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="secuencia" />
+            <PropertyRef Name="IdBanco" />
+            <PropertyRef Name="IdCtaCble" />
+            <PropertyRef Name="dc_Valor" />
+            <PropertyRef Name="ba_descripcion" />
+            <PropertyRef Name="cb_Fecha" />
+            <PropertyRef Name="tc_TipoCbte" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="secuencia" Type="int" Nullable="false" />
+          <Property Name="IdBanco" Type="int" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="dc_Valor" Type="float" Nullable="false" />
+          <Property Name="ba_descripcion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="cb_Fecha" Type="date" Nullable="false" />
+          <Property Name="cb_Observacion" Type="varchar(max)" />
+          <Property Name="cb_Cheque" Type="varchar" MaxLength="50" />
+          <Property Name="tc_TipoCbte" Type="char" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwba_Talonario_cheques_x_banco_ID' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Talonario_cheques_x_banco_ID">
           <Key>
@@ -617,6 +677,40 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwba_Talonario_che
     [vwba_Cbte_Ban].[Su_Descripcion] AS [Su_Descripcion]
     FROM [web].[vwba_Cbte_Ban] AS [vwba_Cbte_Ban]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwba_Conciliacion_det_IngEgr" EntityType="Self.vwba_Conciliacion_det_IngEgr" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [vwba_Conciliacion_det_IngEgr].[IdEmpresa] AS [IdEmpresa], 
+    [vwba_Conciliacion_det_IngEgr].[IdTipoCbte] AS [IdTipoCbte], 
+    [vwba_Conciliacion_det_IngEgr].[IdCbteCble] AS [IdCbteCble], 
+    [vwba_Conciliacion_det_IngEgr].[secuenciaCbte] AS [secuenciaCbte], 
+    [vwba_Conciliacion_det_IngEgr].[IdBanco] AS [IdBanco], 
+    [vwba_Conciliacion_det_IngEgr].[IdCtaCble] AS [IdCtaCble], 
+    [vwba_Conciliacion_det_IngEgr].[dc_Valor] AS [dc_Valor], 
+    [vwba_Conciliacion_det_IngEgr].[ba_descripcion] AS [ba_descripcion], 
+    [vwba_Conciliacion_det_IngEgr].[cb_Fecha] AS [cb_Fecha], 
+    [vwba_Conciliacion_det_IngEgr].[cb_Observacion] AS [cb_Observacion], 
+    [vwba_Conciliacion_det_IngEgr].[cb_Cheque] AS [cb_Cheque], 
+    [vwba_Conciliacion_det_IngEgr].[tc_TipoCbte] AS [tc_TipoCbte], 
+    [vwba_Conciliacion_det_IngEgr].[IdConciliacion] AS [IdConciliacion], 
+    [vwba_Conciliacion_det_IngEgr].[Secuencia] AS [Secuencia]
+    FROM [web].[vwba_Conciliacion_det_IngEgr] AS [vwba_Conciliacion_det_IngEgr]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwba_Conciliacion_det_IngEgr_x_conciliar" EntityType="Self.vwba_Conciliacion_det_IngEgr_x_conciliar" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [vwba_Conciliacion_det_IngEgr_x_conciliar].[IdEmpresa] AS [IdEmpresa], 
+    [vwba_Conciliacion_det_IngEgr_x_conciliar].[IdTipoCbte] AS [IdTipoCbte], 
+    [vwba_Conciliacion_det_IngEgr_x_conciliar].[IdCbteCble] AS [IdCbteCble], 
+    [vwba_Conciliacion_det_IngEgr_x_conciliar].[secuencia] AS [secuencia], 
+    [vwba_Conciliacion_det_IngEgr_x_conciliar].[IdBanco] AS [IdBanco], 
+    [vwba_Conciliacion_det_IngEgr_x_conciliar].[IdCtaCble] AS [IdCtaCble], 
+    [vwba_Conciliacion_det_IngEgr_x_conciliar].[dc_Valor] AS [dc_Valor], 
+    [vwba_Conciliacion_det_IngEgr_x_conciliar].[ba_descripcion] AS [ba_descripcion], 
+    [vwba_Conciliacion_det_IngEgr_x_conciliar].[cb_Fecha] AS [cb_Fecha], 
+    [vwba_Conciliacion_det_IngEgr_x_conciliar].[cb_Observacion] AS [cb_Observacion], 
+    [vwba_Conciliacion_det_IngEgr_x_conciliar].[cb_Cheque] AS [cb_Cheque], 
+    [vwba_Conciliacion_det_IngEgr_x_conciliar].[tc_TipoCbte] AS [tc_TipoCbte]
+    FROM [web].[vwba_Conciliacion_det_IngEgr_x_conciliar] AS [vwba_Conciliacion_det_IngEgr_x_conciliar]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwba_Talonario_cheques_x_banco_ID" EntityType="Self.vwba_Talonario_cheques_x_banco_ID" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
     [vwba_Talonario_cheques_x_banco_ID].[IdEmpresa] AS [IdEmpresa], 
@@ -726,6 +820,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwba_Talonario_che
             <End Role="ba_Conciliacion_det_IngEgr" EntitySet="ba_Conciliacion_det_IngEgr" />
           </AssociationSet>
           <EntitySet Name="vwba_Conciliacion" EntityType="Model_banco.vwba_Conciliacion" />
+          <EntitySet Name="vwba_Conciliacion_det_IngEgr_x_conciliar" EntityType="Model_banco.vwba_Conciliacion_det_IngEgr_x_conciliar" />
+          <EntitySet Name="vwba_Conciliacion_det_IngEgr" EntityType="Model_banco.vwba_Conciliacion_det_IngEgr" />
           </EntityContainer>
         <EntityType Name="ba_CatalogoTipo">
           <Key>
@@ -1253,6 +1349,62 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwba_Talonario_che
           <Property Name="IdEstado_Concil_Cat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="co_SaldoBanco_EstCta" Type="Double" Nullable="false" />
         </EntityType>
+        <EntityType Name="vwba_Conciliacion_det_IngEgr_x_conciliar">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="secuencia" />
+            <PropertyRef Name="IdBanco" />
+            <PropertyRef Name="IdCtaCble" />
+            <PropertyRef Name="dc_Valor" />
+            <PropertyRef Name="ba_descripcion" />
+            <PropertyRef Name="cb_Fecha" />
+            <PropertyRef Name="tc_TipoCbte" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdBanco" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="dc_Valor" Type="Double" Nullable="false" />
+          <Property Name="ba_descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="cb_Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cb_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cb_Cheque" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tc_TipoCbte" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwba_Conciliacion_det_IngEgr">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="secuenciaCbte" />
+            <PropertyRef Name="IdBanco" />
+            <PropertyRef Name="IdCtaCble" />
+            <PropertyRef Name="dc_Valor" />
+            <PropertyRef Name="ba_descripcion" />
+            <PropertyRef Name="cb_Fecha" />
+            <PropertyRef Name="tc_TipoCbte" />
+            <PropertyRef Name="IdConciliacion" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="secuenciaCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdBanco" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="dc_Valor" Type="Double" Nullable="false" />
+          <Property Name="ba_descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="cb_Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cb_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cb_Cheque" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tc_TipoCbte" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="IdConciliacion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1576,6 +1728,44 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwba_Talonario_che
                 <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
                 <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
                 <ScalarProperty Name="IdConciliacion" ColumnName="IdConciliacion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwba_Conciliacion_det_IngEgr_x_conciliar">
+            <EntityTypeMapping TypeName="Model_banco.vwba_Conciliacion_det_IngEgr_x_conciliar">
+              <MappingFragment StoreEntitySet="vwba_Conciliacion_det_IngEgr_x_conciliar">
+                <ScalarProperty Name="tc_TipoCbte" ColumnName="tc_TipoCbte" />
+                <ScalarProperty Name="cb_Cheque" ColumnName="cb_Cheque" />
+                <ScalarProperty Name="cb_Observacion" ColumnName="cb_Observacion" />
+                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
+                <ScalarProperty Name="ba_descripcion" ColumnName="ba_descripcion" />
+                <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwba_Conciliacion_det_IngEgr">
+            <EntityTypeMapping TypeName="Model_banco.vwba_Conciliacion_det_IngEgr">
+              <MappingFragment StoreEntitySet="vwba_Conciliacion_det_IngEgr">
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdConciliacion" ColumnName="IdConciliacion" />
+                <ScalarProperty Name="tc_TipoCbte" ColumnName="tc_TipoCbte" />
+                <ScalarProperty Name="cb_Cheque" ColumnName="cb_Cheque" />
+                <ScalarProperty Name="cb_Observacion" ColumnName="cb_Observacion" />
+                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
+                <ScalarProperty Name="ba_descripcion" ColumnName="ba_descripcion" />
+                <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="secuenciaCbte" ColumnName="secuenciaCbte" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

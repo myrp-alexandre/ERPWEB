@@ -53,6 +53,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             Dictionary<string, string> lst_estado = new Dictionary<string, string>();
             lst_estado.Add(cl_enumeradores.eEstadoCierreBanco.PRE_CONCIL.ToString(), "PRE-CONCILIADO");
             lst_estado.Add(cl_enumeradores.eEstadoCierreBanco.CONCILIADO.ToString(), "CONCILIADO");
+            ViewBag.lst_estado = lst_estado;
         }
         #endregion
 

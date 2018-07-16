@@ -68,7 +68,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="co_Observacion">Observación</label>
-                    @Html.TextAreaFor(q => q.co_Observacion, new { @id = "co_Observacion", @class = "form-control", @rows = 2 })
+                    @Html.TextAreaFor(q => q.co_Observacion, new { @id = "co_Observacion", @class = "form-control", @rows = 1 })
                     @Html.ValidationMessageFor(q => q.co_Observacion, "", new { @class = "text-danger" })
                 </div>
             </div>

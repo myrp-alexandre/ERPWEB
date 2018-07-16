@@ -57,6 +57,7 @@
     <Compile Include="Banco\ba_CatalogoTipo_Info.cs" />
     <Compile Include="Banco\ba_Catalogo_Info.cs" />
     <Compile Include="Banco\ba_Cbte_Ban_Info.cs" />
+    <Compile Include="Banco\ba_Conciliacion_det_IngEgr_Info.cs" />
     <Compile Include="Banco\ba_Conciliacion_Info.cs" />
     <Compile Include="Banco\ba_parametros_Info.cs" />
     <Compile Include="Banco\ba_Talonario_cheques_x_banco_Info.cs" />

@@ -120,6 +120,7 @@
     <Compile Include="Banco\ba_Catalogo_Data.cs" />
     <Compile Include="Banco\ba_Cbte_Ban_Data.cs" />
     <Compile Include="Banco\ba_Conciliacion_Data.cs" />
+    <Compile Include="Banco\ba_Conciliacion_det_IngEgr_Data.cs" />
     <Compile Include="Banco\ba_parametros_Data.cs" />
     <Compile Include="Banco\ba_Talonario_cheques_x_banco_Data.cs" />
     <Compile Include="Banco\ba_tipo_nota_Data.cs" />
@@ -1187,6 +1188,12 @@
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
     <Compile Include="vwba_Conciliacion.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwba_Conciliacion_det_IngEgr.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwba_Conciliacion_det_IngEgr_x_conciliar.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
     <Compile Include="vwba_Talonario_cheques_x_banco_ID.cs">

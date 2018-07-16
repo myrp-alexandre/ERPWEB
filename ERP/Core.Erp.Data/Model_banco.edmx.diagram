@@ -31,6 +31,8 @@
         <AssociationConnector Association="Model_banco.FK_ba_Conciliacion_ba_Catalogo" />
         <AssociationConnector Association="Model_banco.FK_ba_Conciliacion_det_IngEgr_ba_Conciliacion" />
         <EntityTypeShape EntityType="Model_banco.vwba_Conciliacion" Width="1.5" PointX="6.375" PointY="14.75" />
+        <EntityTypeShape EntityType="Model_banco.vwba_Conciliacion_det_IngEgr_x_conciliar" Width="1.5" PointX="10.375" PointY="14.75" />
+        <EntityTypeShape EntityType="Model_banco.vwba_Conciliacion_det_IngEgr" Width="1.5" PointX="15.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -41,5 +41,7 @@ namespace Core.Erp.Data
         public virtual DbSet<ba_Conciliacion_det_IngEgr> ba_Conciliacion_det_IngEgr { get; set; }
         public virtual DbSet<ba_Conciliacion> ba_Conciliacion { get; set; }
         public virtual DbSet<vwba_Conciliacion> vwba_Conciliacion { get; set; }
+        public virtual DbSet<vwba_Conciliacion_det_IngEgr_x_conciliar> vwba_Conciliacion_det_IngEgr_x_conciliar { get; set; }
+        public virtual DbSet<vwba_Conciliacion_det_IngEgr> vwba_Conciliacion_det_IngEgr { get; set; }
     }
 }
