@@ -36,7 +36,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 IdEmpresa = GetIdEmpresa();
                 List<ro_participacion_utilidad_Info> model = bus_utilidad.get_list(IdEmpresa, true);
-                return View("_GridViewPartial_utilidades", model);
+                return PartialView("_GridViewPartial_utilidades", model);
             }
             catch (Exception)
             {

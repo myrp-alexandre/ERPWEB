@@ -29,6 +29,14 @@
         <AssociationConnector Association="Model_facturacion.FK_fa_proforma_det_fa_proforma" />
         <AssociationConnector Association="Model_facturacion.FK_fa_proforma_fa_TerminoPago" />
         <AssociationConnector Association="Model_facturacion.FK_fa_proforma_fa_Vendedor" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_factura" Width="1.5" PointX="18.125" PointY="2.875" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_factura_det" Width="1.5" PointX="20.375" PointY="3.875" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_factura_fa_cliente" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_factura_fa_cliente_contactos" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_factura_det_fa_factura" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_factura_fa_PuntoVta" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_factura_fa_Vendedor" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_factura_det_fa_proforma_det" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
