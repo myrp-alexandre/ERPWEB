@@ -33,7 +33,6 @@ namespace Core.Erp.Data.Contabilidad
                 throw;
             }
         }
-
         public bool guardarDB(ct_anio_fiscal_x_cuenta_utilidad_Info info)
         {
             try
