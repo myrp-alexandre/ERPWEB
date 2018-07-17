@@ -287,6 +287,7 @@
           <Property Name="ptoEmiModificado" Type="varchar" MaxLength="3" />
           <Property Name="secModificado" Type="varchar" MaxLength="9" />
           <Property Name="autModificado" Type="varchar" MaxLength="49" />
+          <Property Name="re_tipo_Ret" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="ATS_ventas">
           <Key>
@@ -755,11 +756,11 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           <EntitySet Name="ATS_compras" EntityType="Model_contabilidad.ATS_compras" />
           <EntitySet Name="ATS_comprobantes_anulados" EntityType="Model_contabilidad.ATS_comprobantes_anulados" />
           <EntitySet Name="ATS_ventas" EntityType="Model_contabilidad.ATS_ventas" />
+          <EntitySet Name="ATS_retenciones" EntityType="Model_contabilidad.ATS_retenciones" />
           <FunctionImport Name="generarATS">
             <Parameter Name="idempresa" Mode="In" Type="Int32" />
             <Parameter Name="idPeriodo" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="ATS_retenciones" EntityType="Model_contabilidad.ATS_retenciones" />
           </EntityContainer>
         <EntityType Name="ct_grupocble">
           <Key>
@@ -1355,6 +1356,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           <Property Name="ptoEmiModificado" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="secModificado" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
           <Property Name="autModificado" Type="String" MaxLength="49" FixedLength="false" Unicode="false" />
+          <Property Name="re_tipo_Ret" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1644,10 +1646,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="generarATS" FunctionName="Model_contabilidad.Store.generarATS" />
           <EntitySetMapping Name="ATS_retenciones">
             <EntityTypeMapping TypeName="Model_contabilidad.ATS_retenciones">
               <MappingFragment StoreEntitySet="ATS_retenciones">
+                <ScalarProperty Name="re_tipo_Ret" ColumnName="re_tipo_Ret" />
                 <ScalarProperty Name="autModificado" ColumnName="autModificado" />
                 <ScalarProperty Name="secModificado" ColumnName="secModificado" />
                 <ScalarProperty Name="ptoEmiModificado" ColumnName="ptoEmiModificado" />
@@ -1677,6 +1679,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="generarATS" FunctionName="Model_contabilidad.Store.generarATS" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

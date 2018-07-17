@@ -109,7 +109,36 @@ namespace Core.Erp.Bus.Contabilidad
                                item_pago.aplicConvDobTrib = (comp.aplicConvDobTrib == "S") ? aplicConvDobTribType.SI : (comp.aplicConvDobTrib == "N") ? aplicConvDobTribType.NO : aplicConvDobTribType.NA;
                                item_pago.pagExtSujRetNorLeg = (comp.pagExtSujRetNorLeg == "S") ? aplicConvDobTribType.SI : (comp.pagExtSujRetNorLeg == "N") ? aplicConvDobTribType.NO : aplicConvDobTribType.NA;
                                comp_det.pagoExterior = item_pago;
-                           
+                                if(Convert.ToDecimal(comp.baseImponible) + Convert.ToDecimal(comp.baseImpGrav)>1000)
+                               {
+                               comp_det.formasDePago = null;
+                               string[] AFormaPago = { "20" };
+                               comp_det.formasDePago = AFormaPago;
+                               }
+                               #region Reembolso
+                                if(comp.codSustento=="41")
+                                   {
+                               comp_det.reembolsos = new List<reembolso>();
+                               reembolso reem = new reembolso();
+                               reem.tipoComprobanteReemb = comp.tipoComprobante;
+                               reem.tpIdProvReemb = comp.tpIdProv;
+                               reem.idProvReemb = comp.idProv;
+                               reem.establecimientoReemb = comp.establecimiento;
+                               reem.puntoEmisionReemb = comp.puntoEmision;
+                               reem.secuencialReemb = comp.secuencial;
+                               reem.fechaEmisionReemb = comp.fechaEmision.ToString().Substring(0,10);
+                               reem.autorizacionReemb = comp.autorizacion;
+                               reem.baseImponibleReemb = comp.baseImponible;
+                               reem.baseImpGravReemb = comp.baseImpGrav;
+                               reem.baseImpExeReemb = comp.baseImpExe;
+                               reem.montoIceRemb = comp.montoIce;
+                               reem.montoIvaRemb = comp.montoIva;
+                               comp_det.totbasesImpReembSpecified = true;
+                               comp_det.totbasesImpReemb = Convert.ToString(Convert.ToDecimal(comp.baseImponible) + Convert.ToDecimal(comp.baseImpGrav));
+                               comp_det.reembolsos.Add(reem);
+
+                           }
+                           #endregion
 
                            #region retencion por facturas
                            if (info_ats.lst_retenciones != null)
@@ -124,12 +153,31 @@ namespace Core.Erp.Bus.Contabilidad
                                            comp_det.air = new List<detalleAir>();
                                            foreach (var item in lstret_x_fac)
                                            {
-                                               detalleAir detalle_ret = new detalleAir();
-                                               detalle_ret.codRetAir = item.codRetAir.ToString();
-                                               detalle_ret.baseImpAir = item.baseImpAir.ToString();
-                                               detalle_ret.porcentajeAir = item.porcentajeAir.ToString();
-                                               detalle_ret.valRetAir = item.valRetAir.ToString();
-                                               comp_det.air.Add(detalle_ret);
+                                               if (item.re_tipo_Ret == "RTF")
+                                               {
+                                                   detalleAir detalle_ret = new detalleAir();
+                                                   detalle_ret.codRetAir = item.codRetAir.ToString();
+                                                   detalle_ret.baseImpAir = item.baseImpAir.ToString();
+                                                   detalle_ret.porcentajeAir = item.porcentajeAir.ToString();
+                                                   detalle_ret.valRetAir = item.valRetAir.ToString();
+                                                   comp_det.air.Add(detalle_ret);
+                                               }
+                                               else
+                                               {
+                                                   if (item.porcentajeAir == "10")
+                                                       comp_det.valRetBien10 = item.valRetAir.ToString();
+                                                   if (item.porcentajeAir == "20")
+                                                       comp_det.valRetServ20 = item.valRetAir.ToString();
+                                                   if (item.porcentajeAir == "30")
+                                                       comp_det.valorRetBienes = item.valRetAir.ToString();
+                                                   if (item.porcentajeAir == "50")
+                                                       comp_det.valRetServ50 = item.valRetAir.ToString();
+                                                   if (item.porcentajeAir == "70")
+                                                       comp_det.valorRetServicios = item.valRetAir.ToString();
+                                                   if (item.porcentajeAir == "100")
+                                                       comp_det.valRetServ100 = item.valRetAir.ToString();
+                                                  
+                                               }
                                            }
                                        }
                                    }

@@ -22,7 +22,7 @@ namespace Core.Erp.Data.Contabilidad
                     info.lst_compras = (from q in Context.ATS_compras
                                         where q.IdEmpresa==IdEmpresa
                                         && q.IdPeriodo==IdPeriodo
-                                        && q.idProv== "0909594202001"
+                                       // && q.idProv== "0909594202001"
                                         select new compras_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -64,7 +64,7 @@ namespace Core.Erp.Data.Contabilidad
                     info.lst_ventas = (from v in Context.ATS_ventas
                                         where v.IdEmpresa == IdEmpresa
                                         && v.IdPeriodo == IdPeriodo
-                                        && v.idCliente== "987"
+                                      //  && v.idCliente== "0190339092001"
                                        select new ventas_Info
                                         {
                                             IdEmpresa = v.IdEmpresa,
@@ -94,7 +94,7 @@ namespace Core.Erp.Data.Contabilidad
                     info.lst_retenciones = (from r in Context.ATS_retenciones
                                        where r.IdEmpresa == IdEmpresa
                                        && r.IdPeriodo == IdPeriodo
-                                       && r.Cedula_ruc== "0909594202001"
+                                      // && r.Cedula_ruc== "0909594202001"
                                             select new retenciones_Info
                                        {
                                            IdEmpresa = r.IdEmpresa,
@@ -122,7 +122,8 @@ namespace Core.Erp.Data.Contabilidad
                                           autModificado=r.autModificado,
                                           baseImpAir=r.baseImpAir,
                                            porcentajeAir=r.porcentajeAir,
-                                           valRetAir=r.valRetAir
+                                           valRetAir=r.valRetAir,
+                                           re_tipo_Ret=r.re_tipo_Ret
                                        }).ToList();
 
 
