@@ -102,6 +102,7 @@ namespace Core.Erp.Bus.Contabilidad
                                comp_det.valRetBien10Specified = true;
                                comp_det.valRetServ20Specified = true;
                                comp_det.valRetServ50Specified = true;
+                               comp_det.totbasesImpReembSpecified = true;
                                pagoExterior item_pago = new pagoExterior();
                                item_pago.pagoLocExt = (comp.pagoLocExt == "LOC") ? pagoLocExtType.Item01 : pagoLocExtType.Item02;
                                item_pago.paisEfecPago = (item_pago.pagoLocExt == pagoLocExtType.Item01) ? "NA" : (comp.pagoLocExt != null || comp.pagoLocExt != "") ? comp.pagoLocExt : "NA";
@@ -157,14 +158,16 @@ namespace Core.Erp.Bus.Contabilidad
                                  det_ventas.tipoComprobante = vent.tipoComprobante;
                                  det_ventas.tipoEmision = tipoEmisionType.F;
                                  det_ventas.numeroComprobantes = vent.numeroComprobantes.ToString();
+                                 det_ventas.baseNoGraIva = vent.baseNoGraIva;
                                  det_ventas.baseImponible = vent.baseImponible;
+                                 det_ventas.baseImpGrav = vent.baseImpGrav;
                                  det_ventas.montoIva = vent.montoIva;
                                  det_ventas.montoIce = vent.montoIce;
                                  det_ventas.valorRetIva = vent.valorRetIva.ToString("n2");
                                  det_ventas.valorRetRenta = vent.valorRetRenta.ToString("n2");
-                                 det_ventas.tpIdCliente = vent.tpIdCliente;
-                                 det_ventas.tpIdCliente = vent.tpIdCliente;
-                                 string[] forma_pago = new string[] { vent.formaPago };
+                                 det_ventas.formasDePago = null;
+                                 string[] AFormaPago = { "20" };
+                                 det_ventas.formasDePago = AFormaPago;
                                  ats.ventas.Add(det_ventas);
                              }
                             );
