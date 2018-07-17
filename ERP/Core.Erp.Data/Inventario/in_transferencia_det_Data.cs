@@ -17,27 +17,31 @@ namespace Core.Erp.Data.Inventario
 
                 using (Entities_inventario Context = new Entities_inventario())
                 {
-                    Lista = (from q in Context.in_transferencia_det
-                             where q.IdEmpresa == IdEmpresa
-                             && q.IdSucursalOrigen==IdSucursal
-                             && q.IdBodegaOrigen==IdBodega
-                             && q.IdTransferencia==IdTransferencia
+                    Lista = (from q in Context.in_Producto
+                              join p in Context.in_transferencia_det
 
+                              on new {q.IdEmpresa, q.IdProducto}equals new {p.IdEmpresa,p.IdProducto}
+                             where q.IdEmpresa == IdEmpresa
+                           && p.IdSucursalOrigen == IdSucursal
+                           && p.IdBodegaOrigen == IdBodega
+                           && p.IdTransferencia == IdTransferencia
+                           && q.IdEmpresa==IdEmpresa
                              select new in_transferencia_det_Info
                              {
-                                 IdEmpresa = q.IdEmpresa,
-                                 IdSucursalOrigen = q.IdSucursalOrigen,
-                                 IdBodegaOrigen = q.IdBodegaOrigen,
-                                 IdTransferencia = q.IdTransferencia,
-                                 dt_secuencia = q.dt_secuencia,
-                                 IdProducto = q.IdProducto,
-                                 dt_cantidad = q.dt_cantidad,
-                                 tr_Observacion = q.tr_Observacion,
-                                 IdCentroCosto = q.IdCentroCosto,
-                                 IdCentroCosto_sub_centro_costo = q.IdCentroCosto_sub_centro_costo,
-                                 IdUnidadMedida = q.IdUnidadMedida,
-                                 IdPunto_cargo_grupo = q.IdPunto_cargo_grupo,
-                                 IdPunto_cargo = q.IdPunto_cargo
+                                 IdEmpresa = p.IdEmpresa,
+                                 IdSucursalOrigen = p.IdSucursalOrigen,
+                                 IdBodegaOrigen = p.IdBodegaOrigen,
+                                 IdTransferencia = p.IdTransferencia,
+                                 dt_secuencia = p.dt_secuencia,
+                                 IdProducto = p.IdProducto,
+                                 dt_cantidad = p.dt_cantidad,
+                                 tr_Observacion = p.tr_Observacion,
+                                 IdCentroCosto = p.IdCentroCosto,
+                                 IdCentroCosto_sub_centro_costo = p.IdCentroCosto_sub_centro_costo,
+                                 IdUnidadMedida = p.IdUnidadMedida,
+                                 IdPunto_cargo_grupo = p.IdPunto_cargo_grupo,
+                                 IdPunto_cargo = p.IdPunto_cargo,
+                                 pr_descripcion=q.pr_descripcion
                              }).ToList();
 
                 }

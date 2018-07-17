@@ -79,6 +79,13 @@ namespace Core.Erp.Info.Helps
             ING,
             EGR
         }
+        public enum eModulo
+        {
+            INV,
+            VTA,
+            COM,
+            ACF
+        }
 
         public enum eCobroTipoMotivoCuentasPorCobrar
         {

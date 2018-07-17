@@ -276,7 +276,7 @@ namespace Core.Erp.Data.Inventario
                             dm_cantidad_sinConversion = item.dm_cantidad_sinConversion,
                             dm_cantidad = item.dm_cantidad,
                             mv_costo_sinConversion = item.mv_costo_sinConversion,
-                            mv_costo = (double)item.mv_costo_sinConversion,
+                            mv_costo = (double)item.mv_costo,
 
                         };
                         Context.in_Ing_Egr_Inven_det.Add(entity_det);

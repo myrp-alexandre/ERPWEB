@@ -87,6 +87,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 signo = "-",
                 IdMovi_inven_tipo = i_param.P_IdMovi_inven_tipo_default_egr == null ? 0 : Convert.ToInt32(i_param.P_IdMovi_inven_tipo_default_egr)
             };
+            Session["in_Ing_Egr_Inven_det_Info"] = null;
             cargar_combos();
             return View(model);
         }
@@ -111,13 +112,15 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         public ActionResult Modificar(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
         {
-
+            bus_ing_inv = new in_Ing_Egr_Inven_Bus();
+            bus_det_ing_inv = new in_Ing_Egr_Inven_det_Bus();
             Session["in_Ing_Egr_Inven_det_Info"] = null;
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_Ing_Egr_Inven_Info model = bus_ing_inv.get_info(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_in_Ing_Egr_Inven_det = bus_det_ing_inv.get_list(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
+            Session["in_Ing_Egr_Inven_det_Info"] = model.lst_in_Ing_Egr_Inven_det;
             cargar_combos();
             return View(model);
         }
@@ -142,10 +145,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         public ActionResult Anular(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
         {
+            bus_ing_inv = new in_Ing_Egr_Inven_Bus();
+            bus_det_ing_inv = new in_Ing_Egr_Inven_det_Bus();
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_Ing_Egr_Inven_Info model = bus_ing_inv.get_info(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
             if (model == null)
                 return RedirectToAction("Index");
+            model.lst_in_Ing_Egr_Inven_det = bus_det_ing_inv.get_list(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
+            Session["in_Ing_Egr_Inven_det_Info"] = model.lst_in_Ing_Egr_Inven_det;
             cargar_combos();
             return View(model);
         }
@@ -217,7 +224,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 {
                     in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
                     if (info_producto != null)
+                    {
                         info_det.pr_descripcion = info_producto.pr_descripcion;
+                        info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
+                        info_det.IdUnidadMedida_sinConversion = info_producto.IdUnidadMedida;
+                    }
                 }
 
             List_in_Ing_Egr_Inven_det.AddRow(info_det);
@@ -235,7 +246,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 {
                     in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
                     if (info_producto != null)
+                    {
                         info_det.pr_descripcion = info_producto.pr_descripcion;
+                        info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
+                        info_det.IdUnidadMedida_sinConversion = info_producto.IdUnidadMedida;
+                    }
                 }
 
             List_in_Ing_Egr_Inven_det.UpdateRow(info_det);

@@ -185,7 +185,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 {
                     in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
                     if (info_producto != null)
+                    {
                         info_det.pr_descripcion = info_producto.pr_descripcion;
+                        info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
+                        info_det.IdUnidadMedida_sinConversion = info_producto.IdUnidadMedida;
+                    }
                 }
 
             List_in_Ing_Egr_Inven_det.AddRow(info_det);
@@ -203,7 +207,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 {
                     in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
                     if (info_producto != null)
+                    {
                         info_det.pr_descripcion = info_producto.pr_descripcion;
+                        info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
+                        info_det.IdUnidadMedida_sinConversion = info_producto.IdUnidadMedida;
+                    }
                 }
 
             List_in_Ing_Egr_Inven_det.UpdateRow(info_det);
@@ -218,7 +226,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info();
             model.lst_in_Ing_Egr_Inven_det = List_in_Ing_Egr_Inven_det.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_inv_det", model);
+            return PartialView("_GridViewPartial_inv_det", model.lst_in_Ing_Egr_Inven_det);
         }
         #endregion
 
