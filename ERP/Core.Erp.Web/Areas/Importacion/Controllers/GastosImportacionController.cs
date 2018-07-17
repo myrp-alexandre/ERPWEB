@@ -20,6 +20,24 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         imp_gasto_x_ct_plancta_Bus bus_gasto_ct = new imp_gasto_x_ct_plancta_Bus();
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
 
+        #region Metodos ComboBox bajo demanda
+
+        public ActionResult CmbCuenta_Gasto()
+        {
+            imp_gasto_Info model = new imp_gasto_Info();
+            return PartialView("_CmbCuenta_Gasto", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            string IdCtaCble = "";
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), IdCtaCble);
+        }
+        #endregion
+
         public ActionResult Index()
         {
             return View();

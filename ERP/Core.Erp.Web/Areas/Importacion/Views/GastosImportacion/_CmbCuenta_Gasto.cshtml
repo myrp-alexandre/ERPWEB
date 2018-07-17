@@ -2,7 +2,7 @@
 @{
     var comboBox = Html.DevExpress().ComboBox(settings =>
     {
-        settings.Name = "IdCtaCble";
+        settings.Name = "info_gasto_cta.IdCtaCble";
         settings.Width = Unit.Percentage(100);
         settings.Properties.DropDownWidth = Unit.Percentage(100);
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
@@ -11,14 +11,16 @@
         settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
         settings.Properties.TextField = "pc_Cuenta";
         settings.Properties.TextFormatString = "[{0}] {1}";
-        settings.Properties.ValueField = "IdCtaCble";
+        settings.Properties.ValueField = "info_gasto_cta.IdCtaCble";
         settings.Properties.ValueType = typeof(int);
 
-        settings.Properties.Columns.Add("IdCtaCble", "ID", 10);
+        settings.Properties.Columns.Add("info_gasto_cta.IdCtaCble", "ID", 10);
         settings.Properties.Columns.Add("pc_Cuenta", "Cuenta", 90);
     })
     .BindList(new Core.Erp.Web.Areas.Importacion.Controllers.GastosImportacionController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Importacion.Controllers.GastosImportacionController().get_info_bajo_demanda)
-    .Bind(Model.IdCtaCble);
+
+
+    .Bind(Model.info_gasto_cta.IdCtaCble);
 
 }
 @comboBox.GetHtml()

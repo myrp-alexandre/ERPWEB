@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Data.Contabilidad;
 using Core.Erp.Info.Contabilidad;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 
@@ -8,6 +9,33 @@ namespace Core.Erp.Bus.Contabilidad
     public class ct_plancta_Bus
     {
         ct_plancta_Data odata = new ct_plancta_Data();
+
+        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, bool MostrarCtaMovimiento)
+        {
+            try
+            {
+                return odata.get_list_bajo_demanda(args, IdEmpresa, MostrarCtaMovimiento);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa, string IdCtaCble)
+        {
+            try
+            {
+                return odata.get_info_bajo_demanda(args, IdEmpresa, IdCtaCble);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<ct_plancta_Info> get_list(int IdEmpresa, bool mostrar_anulados, bool mostrar_solo_cuentas_movimiento)
         {
             try
