@@ -9,7 +9,8 @@
 }
 @using (Html.BeginForm("Nuevo", "GastosImportacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q=>q.IdGasto_tipo)
+    @Html.HiddenFor(q => q.IdGasto_tipo)
+    @Html.HiddenFor(q => q.info_gasto_cta.IdEmpresa)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -20,7 +21,7 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">

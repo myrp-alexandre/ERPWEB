@@ -92,10 +92,16 @@ namespace Core.Erp.Data.Importacion
                         IdGasto_tipo = info.IdGasto_tipo=get_id(),
                         gt_descripcion = info.gt_descripcion,
                         observacion = info.observacion,
-                        estado = info.estado = true,
-                        
+                        estado = info.estado = true,                        
                     };
                     Context.imp_gasto.Add(Entity);
+                    Context.imp_gasto_x_ct_plancta.Add(new imp_gasto_x_ct_plancta
+                    {
+                        IdEmpresa = info.info_gasto_cta.IdEmpresa,
+                        IdCtaCble = info.IdCtaCble,
+                        IdGasto_tipo = info.IdGasto_tipo
+                    });
+
                     Context.SaveChanges();
                 }
                 return true;
@@ -113,12 +119,29 @@ namespace Core.Erp.Data.Importacion
             {
                 using (Entities_importacion Context = new Entities_importacion())
                 {
+                    //TRes el info del gasto - OK
                     imp_gasto Entity = Context.imp_gasto.FirstOrDefault(q => q.IdGasto_tipo == info.IdGasto_tipo);
                     if (Entity == null) return false;
-
+                    //Modificar los campos si encuentra un gasto - OK
                     Entity.gt_descripcion = info.gt_descripcion;
                     Entity.observacion = info.observacion;
-
+                    //aqui tienes que hacer la parte del detalle
+                    //Primero busco si este gasto tiene cuenta en esta empresa
+                    var Entity_cta = Context.imp_gasto_x_ct_plancta.Where(q => q.IdEmpresa == info.info_gasto_cta.IdEmpresa && q.IdGasto_tipo == info.IdGasto_tipo).FirstOrDefault();
+                    if (Entity_cta == null)
+                    {
+                        //Si no tiene creo uno nuevo
+                        Context.imp_gasto_x_ct_plancta.Add(new imp_gasto_x_ct_plancta
+                        {
+                            IdEmpresa = info.info_gasto_cta.IdEmpresa,
+                            IdCtaCble = info.IdCtaCble,
+                            IdGasto_tipo = info.IdGasto_tipo
+                        });
+                    }else
+                    {
+                        //Caso contrario le actualizo la cuenta contable
+                        Entity_cta.IdCtaCble = info.IdCtaCble;
+                    }
                     Context.SaveChanges();
                 }
                 return true;

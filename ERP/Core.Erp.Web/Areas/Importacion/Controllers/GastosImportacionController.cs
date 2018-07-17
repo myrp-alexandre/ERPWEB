@@ -63,6 +63,9 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             imp_gasto_Info model = new imp_gasto_Info
             {
                 info_gasto_cta = new imp_gasto_x_ct_plancta_Info()
+                {
+                    IdEmpresa = Convert.ToInt32(Session["IdEmpresa"])
+                }
                 
                 
             };
@@ -77,7 +80,6 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             {
                 model.info_gasto_cta.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
                 model.info_gasto_cta.IdGasto_tipo = model.IdGasto_tipo;
-                model.info_gasto_cta.IdCtaCble = model.IdCtaCble;
                 bus_gasto_ct.guardarDB(model.info_gasto_cta);
                 return RedirectToAction("Index");
             }
@@ -94,9 +96,10 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 model.info_gasto_cta = new imp_gasto_x_ct_plancta_Info
                 {
                     IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
-                    IdGasto_tipo = model.IdGasto_tipo,
-                    IdCtaCble = model.IdCtaCble
+                    IdGasto_tipo = model.IdGasto_tipo
                 };
+            else
+                model.IdCtaCble = model.info_gasto_cta.IdCtaCble;
             cargar_combos();
             return View(model);
         }
@@ -104,6 +107,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost]
         public ActionResult Modificar(imp_gasto_Info model)
         {
+            model.info_gasto_cta = new imp_gasto_x_ct_plancta_Info { IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa) };
             if (!bus_gasto.modificarDB(model))
             {
                 cargar_combos();
