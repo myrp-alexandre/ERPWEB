@@ -153,6 +153,7 @@
     <Compile Include="General\tb_sis_reporte_x_seg_usuario_Bus.cs" />
     <Compile Include="General\tb_sucursal_Bus.cs" />
     <Compile Include="General\tb_transportista_Bus.cs" />
+    <Compile Include="Importacion\imp_gasto_Bus.cs" />
     <Compile Include="Inventario\in_CatalogoTipo_Bus.cs" />
     <Compile Include="Inventario\in_Catalogo_Bus.cs" />
     <Compile Include="Inventario\in_categorias_Bus.cs" />
@@ -297,9 +298,7 @@
     <Compile Include="SeguridadAcceso\seg_usuario_Bus.cs" />
     <Compile Include="SeguridadAcceso\seg_Usuario_x_Empresa_Bus.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Importacion\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Core.Erp.Data\Core.Erp.Data.csproj">
       <Project>{1e3fe2a0-1589-485f-9f71-9bb6c9968673}</Project>

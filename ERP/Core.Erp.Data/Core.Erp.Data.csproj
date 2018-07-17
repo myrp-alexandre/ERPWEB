@@ -452,6 +452,13 @@
     <Compile Include="General\tb_sis_reporte_x_seg_usuario_Data.cs" />
     <Compile Include="General\tb_sucursal_Data.cs" />
     <Compile Include="General\tb_transportista_Data.cs" />
+    <Compile Include="Importacion\imp_gasto_Data.cs" />
+    <Compile Include="imp_gasto.cs">
+      <DependentUpon>Model_importacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="imp_gasto_x_ct_plancta.cs">
+      <DependentUpon>Model_importacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="Inventario\in_CatalogoTipo_Data.cs" />
     <Compile Include="Inventario\in_Catalogo_Data.cs" />
     <Compile Include="Inventario\in_categorias_Data.cs" />
@@ -1718,9 +1725,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Importacion\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

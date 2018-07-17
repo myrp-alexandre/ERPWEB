@@ -180,6 +180,7 @@
     <Compile Include="Helps\cl_enumeradores.cs" />
     <Compile Include="Helps\cl_filtros_Info.cs" />
     <Compile Include="Helps\cl_funciones.cs" />
+    <Compile Include="Importacion\imp_gasto_Info.cs" />
     <Compile Include="Inventario\in_CatalogoTipo_Info.cs" />
     <Compile Include="Inventario\in_Catalogo_Info.cs" />
     <Compile Include="Inventario\in_categorias_Info.cs" />
@@ -324,9 +325,7 @@
     <Compile Include="SeguridadAcceso\seg_usuario_Info.cs" />
     <Compile Include="SeguridadAcceso\seg_Usuario_x_Empresa_Info.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Importacion\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
