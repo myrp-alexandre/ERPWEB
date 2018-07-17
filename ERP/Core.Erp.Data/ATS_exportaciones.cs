@@ -33,5 +33,6 @@ namespace Core.Erp.Data
         public string secuencial { get; set; }
         public string autorizacion { get; set; }
         public Nullable<System.DateTime> fechaEmision { get; set; }
+        public string denoExpCli { get; set; }
     }
 }

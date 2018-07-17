@@ -126,6 +126,34 @@ namespace Core.Erp.Data.Contabilidad
                                            re_tipo_Ret=r.re_tipo_Ret
                                        }).ToList();
 
+                    info.lst_exportaciones = (from e in Context.ATS_exportaciones
+                                            where e.IdEmpresa == IdEmpresa
+                                            && e.IdPeriodo == IdPeriodo
+                                            // && r.Cedula_ruc== "0909594202001"
+                                            select new exportaciones_Info
+                                            {
+                                                IdEmpresa = e.IdEmpresa,
+                                                IdPeriodo = e.IdPeriodo,
+                                                Secuencia = e.Secuencia,
+                                                tpIdClienteEx = e.tpIdClienteEx,
+                                                idClienteEx = e.idClienteEx,
+                                                parteRel = e.parteRel,
+                                                tipoRegi = e.tipoRegi,
+                                                paisEfecPagoGen = e.paisEfecPagoGen,
+                                                paisEfecExp = e.paisEfecExp,
+                                                exportacionDe = e.exportacionDe,
+                                                tipoComprobante = e.tipoComprobante,
+                                                fechaEmbarque = e.fechaEmbarque,
+                                                valorFOB = e.valorFOB,
+                                                valorFOBComprobante = e.valorFOBComprobante,
+                                                establecimiento = e.establecimiento,
+                                                puntoEmision = e.puntoEmision,
+                                                secuencial = e.secuencial,
+                                                autorizacion=e.autorizacion,
+                                                fechaEmision=e.fechaEmision
+
+
+                                            }).ToList();
 
                 }
 
