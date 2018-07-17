@@ -1,0 +1,45 @@
+﻿@model Core.Erp.Info.Importacion.imp_gasto_Info
+@{
+    ViewBag.Title = "Modificar gasto";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Modificar", "GastosImportacion", FormMethod.Post, new { @class = "form", @role = "form" }))
+{@Html.HiddenFor(q => q.IdGasto_tipo)
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="gt_descripcion">Descripción</label>
+                @Html.TextBoxFor(q => q.gt_descripcion, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.gt_descripcion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+</div> <div class="row">
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="observacion">Observación</label>
+                @Html.TextBoxFor(q => q.observacion, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.observacion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="box-footer">
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a class="btn btn-default" href="@Url.Action("Index", "GastosImportacion", new { Area ="Importacion" }, null)">Cancelar</a>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+}

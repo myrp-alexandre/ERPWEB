@@ -7,6 +7,10 @@ using System.Web.Mvc;
 using Core.Erp.Bus.Importacion;
 using Core.Erp.Info.Importacion;
 using Core.Erp.Bus.Contabilidad;
+using DevExpress.Web;
+using Core.Erp.Web.Helps;
+using Core.Erp.Info.Helps;
+using Core.Erp.Info.Contabilidad;
 
 namespace Core.Erp.Web.Areas.Importacion.Controllers
 {
@@ -14,6 +18,8 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
     {
         imp_gasto_Bus bus_gasto = new imp_gasto_Bus();
         imp_gasto_x_ct_plancta_Bus bus_gasto_ct = new imp_gasto_x_ct_plancta_Bus();
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+
         public ActionResult Index()
         {
             return View();
@@ -27,7 +33,6 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         }
         private void cargar_combos()
         {
-            ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
             var lst_ctacble = bus_plancta.get_list(Convert.ToInt32(Session["IdEmpresa"]), false, false);
             ViewBag.lst_cuentas = lst_ctacble;
         }

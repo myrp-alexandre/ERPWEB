@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Info.Contabilidad;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,51 @@ namespace Core.Erp.Data.Contabilidad
 {
     public class ct_plancta_Data
     {
+
+        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, string IdCtaCble)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<ct_plancta_Info> Lista = new List<ct_plancta_Info>();
+            Lista = get_list(IdEmpresa, IdCtaCble, skip, take, args.Filter);
+            return Lista;
+        }
+
+        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa, string IdCtaCble)
+        {
+            return get_info(IdEmpresa, IdCtaCble);
+        }
+        public List<ct_plancta_Info> get_list(int IdEmpresa, string IdCtaCble, int skip, int take, string filter)
+        {
+            try
+            {
+                List<ct_plancta_Info> Lista = new List<ct_plancta_Info>();
+
+                Entities_contabilidad context_g = new Entities_contabilidad();
+
+                {
+                        var lstg = context_g.ct_plancta.Where(q => q.IdCtaCble.Contains(filter)).OrderBy(q => q.IdCtaCble).Skip(skip).Take(take);
+                        foreach (var q in lstg)
+                        {
+                            Lista.Add(new ct_plancta_Info
+                            {
+                                IdCtaCble = q.IdCtaCble,
+                                pc_Cuenta = q.pc_Cuenta
+
+                            });
+                        }
+                }
+
+                context_g.Dispose();
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<ct_plancta_Info> get_list(int IdEmpresa, bool mostrar_anulados, bool mostrar_solo_cuentas_movimiento)
         {
             try
