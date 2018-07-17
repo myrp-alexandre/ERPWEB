@@ -309,6 +309,7 @@
     <Compile Include="Areas\General\Controllers\TipoDocumentoTalonarioController.cs" />
     <Compile Include="Areas\General\Controllers\TransportistaController.cs" />
     <Compile Include="Areas\General\GeneralAreaRegistration.cs" />
+    <Compile Include="Areas\Importacion\Controllers\GastosImportacionController.cs" />
     <Compile Include="Areas\Importacion\ImportacionAreaRegistration.cs" />
     <Compile Include="Areas\Inventario\Controllers\CatalogoInventarioController.cs" />
     <Compile Include="Areas\Inventario\Controllers\CatalogoTipoInventarioController.cs" />
@@ -8695,6 +8696,9 @@
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_005.cshtml" />
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_006.cshtml" />
     <Content Include="Areas\RRHH\Views\ParticipacionUtilidad\Index.cshtml" />
+    <Content Include="Areas\Importacion\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Importacion\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Importacion\Views\GastosImportacion\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />
@@ -8767,9 +8771,7 @@
     <Folder Include="Areas\CuentasPorPagar\Models\" />
     <Folder Include="Areas\Facturacion\Models\" />
     <Folder Include="Areas\General\Models\" />
-    <Folder Include="Areas\Importacion\Controllers\" />
     <Folder Include="Areas\Importacion\Models\" />
-    <Folder Include="Areas\Importacion\Views\Shared\" />
     <Folder Include="Areas\Inventario\Models\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
