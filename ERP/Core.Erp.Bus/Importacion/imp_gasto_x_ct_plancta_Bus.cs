@@ -12,11 +12,11 @@ namespace Core.Erp.Bus.Importacion
     {
         imp_gasto_x_ct_plancta_Data odata = new imp_gasto_x_ct_plancta_Data();
     
-        public List<imp_gasto_x_ct_plancta_Info> get_list(int IdEmpresa, int IdGasto_tipo)
+        public imp_gasto_x_ct_plancta_Info get_info(int IdEmpresa, int IdGasto_tipo)
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdGasto_tipo);
+                return odata.get_info(IdEmpresa, IdGasto_tipo);
             }
             catch (Exception)
             {

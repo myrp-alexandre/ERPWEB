@@ -13,5 +13,8 @@ namespace Core.Erp.Info.Importacion
         public bool estado { get; set; }
         public string observacion { get; set; }
 
+        public imp_gasto_x_ct_plancta_Info info_gasto_cta { get; set; }
+
+
     }
 }

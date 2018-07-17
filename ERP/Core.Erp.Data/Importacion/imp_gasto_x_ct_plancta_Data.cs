@@ -9,24 +9,23 @@ namespace Core.Erp.Data.Importacion
 {
     public class imp_gasto_x_ct_plancta_Data
     {
-        public List<imp_gasto_x_ct_plancta_Info> get_list(int IdEmpresa, int IdGasto_tipo)
+        public imp_gasto_x_ct_plancta_Info get_info(int IdEmpresa, int IdGasto_tipo)
         {
             try
             {
-                List<imp_gasto_x_ct_plancta_Info> Lista;
+                imp_gasto_x_ct_plancta_Info info = new imp_gasto_x_ct_plancta_Info();
                 using (Entities_importacion Context = new Entities_importacion())
                 {
-                    Lista = (from q in Context.imp_gasto_x_ct_plancta
-                             where q.IdEmpresa == IdEmpresa
-                             && q.IdGasto_tipo == IdGasto_tipo
-                             select new imp_gasto_x_ct_plancta_Info
+                    imp_gasto_x_ct_plancta Entity = Context.imp_gasto_x_ct_plancta.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdGasto_tipo == IdGasto_tipo);
+                    if (Entity == null) return null;
+                             info = new imp_gasto_x_ct_plancta_Info
                              {
-                                 IdEmpresa = q.IdEmpresa,
-                                 IdGasto_tipo = q.IdGasto_tipo,
-                                 IdCtaCble = q.IdCtaCble
-                             }).ToList();
+                                 IdEmpresa = Entity.IdEmpresa,
+                                 IdGasto_tipo = Entity.IdGasto_tipo,
+                                 IdCtaCble = Entity.IdCtaCble
+                             };
                 }
-                 return Lista;
+                 return info;
             }
             catch (Exception)
             {
