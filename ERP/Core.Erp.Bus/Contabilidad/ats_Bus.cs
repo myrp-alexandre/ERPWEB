@@ -202,6 +202,7 @@ namespace Core.Erp.Bus.Contabilidad
                 #endregion
 
                 ats.totalVentas = info_ats.lst_ventas.Sum(y => y.ventasEstab);
+                ats.totalVentasSpecified = true;
                         return ats;
 
                 
