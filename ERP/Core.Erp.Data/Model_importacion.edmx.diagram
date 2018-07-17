@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="Model_importacion.imp_gasto" Width="1.5" PointX="0.75" PointY="0.875" />
         <EntityTypeShape EntityType="Model_importacion.imp_gasto_x_ct_plancta" Width="1.5" PointX="3" PointY="1" />
         <AssociationConnector Association="Model_importacion.FK_imp_gasto_x_ct_plancta_imp_gasto" />
+        <EntityTypeShape EntityType="Model_importacion.imp_parametro" Width="1.5" PointX="0.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

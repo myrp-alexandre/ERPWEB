@@ -27,5 +27,6 @@ namespace Core.Erp.Data
     
         public virtual DbSet<imp_gasto> imp_gasto { get; set; }
         public virtual DbSet<imp_gasto_x_ct_plancta> imp_gasto_x_ct_plancta { get; set; }
+        public virtual DbSet<imp_parametro> imp_parametro { get; set; }
     }
 }
