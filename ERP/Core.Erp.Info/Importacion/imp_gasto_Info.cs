@@ -13,7 +13,11 @@ namespace Core.Erp.Info.Importacion
         public bool estado { get; set; }
         public string observacion { get; set; }
 
+        #region Campos que no existen en la tabla
+
         public imp_gasto_x_ct_plancta_Info info_gasto_cta { get; set; }
+        public string IdCtaCble { get; set; }
+        #endregion
 
 
     }

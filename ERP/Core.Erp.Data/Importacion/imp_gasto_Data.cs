@@ -92,7 +92,8 @@ namespace Core.Erp.Data.Importacion
                         IdGasto_tipo = info.IdGasto_tipo=get_id(),
                         gt_descripcion = info.gt_descripcion,
                         observacion = info.observacion,
-                        estado = info.estado = true
+                        estado = info.estado = true,
+                        
                     };
                     Context.imp_gasto.Add(Entity);
                     Context.SaveChanges();

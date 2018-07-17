@@ -23,11 +23,11 @@ namespace Core.Erp.Bus.Contabilidad
             }
         }
 
-        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa, string IdCtaCble)
+        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
         {
             try
             {
-                return odata.get_info_bajo_demanda(args, IdEmpresa, IdCtaCble);
+                return odata.get_info_bajo_demanda(args, IdEmpresa);
             }
             catch (Exception)
             {

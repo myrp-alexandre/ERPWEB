@@ -14,19 +14,20 @@
     <div class="col-md-12">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="gt_descripcion">Descripción</label>
-                @Html.TextBoxFor(q => q.gt_descripcion, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.gt_descripcion, "", new { @class = "text-danger" })
+                <label for="info_gasto_cta.IdCtaCble">Cuenta contable</label>
+                @Html.Partial("_CmbCuenta_Gasto", Model)
+                @Html.ValidationMessageFor(q => q.info_gasto_cta.IdCtaCble, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
-</div> <div class="row">
+</div>
+<div class="row">
     <div class="col-md-12">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="observacion">Observación</label>
-                @Html.TextBoxFor(q => q.observacion, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.observacion, "", new { @class = "text-danger" })
+                <label for="gt_descripcion">Descripción</label>
+                @Html.TextBoxFor(q => q.gt_descripcion, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.gt_descripcion, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>

@@ -20,9 +20,10 @@ namespace Core.Erp.Data.Contabilidad
             return Lista;
         }
 
-        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa, string IdCtaCble)
+        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
         {
-            return get_info(IdEmpresa, IdCtaCble);
+            //La variable args del devexpress ya trae el ID seleccionado en la propiedad Value, se pasa el IdEmpresa porque es un filtro que no tiene
+            return get_info(IdEmpresa, args.Value == null ? "" : args.Value.ToString());
         }
         public List<ct_plancta_Info> get_list(int IdEmpresa, int skip, int take, string filter, bool MostrarCtaMovimiento)
         {
