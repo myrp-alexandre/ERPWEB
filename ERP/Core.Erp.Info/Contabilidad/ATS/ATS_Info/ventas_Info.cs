@@ -13,11 +13,11 @@ namespace Core.Erp.Info.Contabilidad.ATS.ATS_Info
         public int Secuencia { get; set; }
         public string tpIdCliente { get; set; }
         public string idCliente { get; set; }
-        public string parteRel { get; set; }
+        public string parteRelVtas { get; set; }
         public string tipoCliente { get; set; }
         public string DenoCli { get; set; }
         public string tipoComprobante { get; set; }
-        public string tipoEm { get; set; }
+        public string tipoEmision { get; set; }
         public int numeroComprobantes { get; set; }
         public decimal baseNoGraIva { get; set; }
         public decimal baseImponible { get; set; }

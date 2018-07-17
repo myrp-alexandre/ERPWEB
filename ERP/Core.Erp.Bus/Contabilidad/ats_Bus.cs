@@ -99,6 +99,9 @@ namespace Core.Erp.Bus.Contabilidad
                                comp_det.valorRetServicios = "0.00";
                                comp_det.valRetServ100 = "0.00";
                                comp_det.totbasesImpReemb = "0.00";
+                               comp_det.valRetBien10Specified = true;
+                               comp_det.valRetServ20Specified = true;
+                               comp_det.valRetServ50Specified = true;
                                pagoExterior item_pago = new pagoExterior();
                                item_pago.pagoLocExt = (comp.pagoLocExt == "LOC") ? pagoLocExtType.Item01 : pagoLocExtType.Item02;
                                item_pago.paisEfecPago = (item_pago.pagoLocExt == pagoLocExtType.Item01) ? "NA" : (comp.pagoLocExt != null || comp.pagoLocExt != "") ? comp.pagoLocExt : "NA";
@@ -175,9 +178,9 @@ namespace Core.Erp.Bus.Contabilidad
                     if (info_ats.lst_ventas.Count() > 0)
                     {
 
-                      
+                        ats.ventasEstablecimiento = new List<ventaEst>();
 
-                        var vtas = info_ats.lst_ventas.GroupBy(x => x.codEstab)
+                         var vtas = info_ats.lst_ventas.GroupBy(x => x.codEstab)
                         .Select(x => new
                         {
                             codEstab = x.Key,
@@ -190,15 +193,15 @@ namespace Core.Erp.Bus.Contabilidad
                             vtas_esta.codEstab = item.codEstab;
                             vtas_esta.ventasEstab = item.ventasEstab;
                             vtas_esta.ivaComp = Convert.ToDecimal("0.00");
-
+                            ats.ventasEstablecimiento.Add(vtas_esta);
                         }
 
 
                     }
                 }
-                        #endregion
+                #endregion
 
-
+                ats.totalVentas = info_ats.lst_ventas.Sum(y => y.ventasEstab);
                         return ats;
 
                 
