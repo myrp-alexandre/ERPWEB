@@ -4,20 +4,115 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model_importacion.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="Model_importacionStoreContainer" />
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="Model_importacion.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="imp_gasto">
+          <Key>
+            <PropertyRef Name="IdGasto_tipo" />
+          </Key>
+          <Property Name="IdGasto_tipo" Type="int" Nullable="false" />
+          <Property Name="gt_descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+          <Property Name="observacion" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="imp_gasto_x_ct_plancta">
+          <Key>
+            <PropertyRef Name="IdGasto_tipo" />
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdGasto_tipo" Type="int" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK_imp_gasto_x_ct_plancta_imp_gasto">
+          <End Role="imp_gasto" Type="Self.imp_gasto" Multiplicity="1" />
+          <End Role="imp_gasto_x_ct_plancta" Type="Self.imp_gasto_x_ct_plancta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_gasto">
+              <PropertyRef Name="IdGasto_tipo" />
+            </Principal>
+            <Dependent Role="imp_gasto_x_ct_plancta">
+              <PropertyRef Name="IdGasto_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Model_importacionStoreContainer">
+          <EntitySet Name="imp_gasto" EntityType="Self.imp_gasto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="imp_gasto_x_ct_plancta" EntityType="Self.imp_gasto_x_ct_plancta" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_imp_gasto_x_ct_plancta_imp_gasto" Association="Self.FK_imp_gasto_x_ct_plancta_imp_gasto">
+            <End Role="imp_gasto" EntitySet="imp_gasto" />
+            <End Role="imp_gasto_x_ct_plancta" EntitySet="imp_gasto_x_ct_plancta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model_importacion" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="Entities_importacion" annotation:LazyLoadingEnabled="true" />
+        <EntityContainer Name="Entities_importacion" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="imp_gasto" EntityType="Model_importacion.imp_gasto" />
+          <EntitySet Name="imp_gasto_x_ct_plancta" EntityType="Model_importacion.imp_gasto_x_ct_plancta" />
+          <AssociationSet Name="FK_imp_gasto_x_ct_plancta_imp_gasto" Association="Model_importacion.FK_imp_gasto_x_ct_plancta_imp_gasto">
+            <End Role="imp_gasto" EntitySet="imp_gasto" />
+            <End Role="imp_gasto_x_ct_plancta" EntitySet="imp_gasto_x_ct_plancta" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="imp_gasto">
+          <Key>
+            <PropertyRef Name="IdGasto_tipo" />
+          </Key>
+          <Property Name="IdGasto_tipo" Type="Int32" Nullable="false" />
+          <Property Name="gt_descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="observacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="imp_gasto_x_ct_plancta" Relationship="Model_importacion.FK_imp_gasto_x_ct_plancta_imp_gasto" FromRole="imp_gasto" ToRole="imp_gasto_x_ct_plancta" />
+        </EntityType>
+        <EntityType Name="imp_gasto_x_ct_plancta">
+          <Key>
+            <PropertyRef Name="IdGasto_tipo" />
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdGasto_tipo" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="imp_gasto" Relationship="Model_importacion.FK_imp_gasto_x_ct_plancta_imp_gasto" FromRole="imp_gasto_x_ct_plancta" ToRole="imp_gasto" />
+        </EntityType>
+        <Association Name="FK_imp_gasto_x_ct_plancta_imp_gasto">
+          <End Type="Model_importacion.imp_gasto" Role="imp_gasto" Multiplicity="1" />
+          <End Type="Model_importacion.imp_gasto_x_ct_plancta" Role="imp_gasto_x_ct_plancta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_gasto">
+              <PropertyRef Name="IdGasto_tipo" />
+            </Principal>
+            <Dependent Role="imp_gasto_x_ct_plancta">
+              <PropertyRef Name="IdGasto_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Model_importacionStoreContainer" CdmEntityContainer="Entities_importacion" />
+        <EntityContainerMapping StorageEntityContainer="Model_importacionStoreContainer" CdmEntityContainer="Entities_importacion" >
+          <EntitySetMapping Name="imp_gasto">
+            <EntityTypeMapping TypeName="Model_importacion.imp_gasto">
+              <MappingFragment StoreEntitySet="imp_gasto">
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="gt_descripcion" ColumnName="gt_descripcion" />
+                <ScalarProperty Name="IdGasto_tipo" ColumnName="IdGasto_tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imp_gasto_x_ct_plancta">
+            <EntityTypeMapping TypeName="Model_importacion.imp_gasto_x_ct_plancta">
+              <MappingFragment StoreEntitySet="imp_gasto_x_ct_plancta">
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdGasto_tipo" ColumnName="IdGasto_tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

@@ -4,7 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0e5562b784c548e5aee89d486fea256b" Name="Diagram1" />
+      <Diagram DiagramId="0e5562b784c548e5aee89d486fea256b" Name="Diagram1" >
+        <EntityTypeShape EntityType="Model_importacion.imp_gasto" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="Model_importacion.imp_gasto_x_ct_plancta" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="Model_importacion.FK_imp_gasto_x_ct_plancta_imp_gasto" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
