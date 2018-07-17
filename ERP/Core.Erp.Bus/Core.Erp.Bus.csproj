@@ -154,6 +154,7 @@
     <Compile Include="General\tb_sucursal_Bus.cs" />
     <Compile Include="General\tb_transportista_Bus.cs" />
     <Compile Include="Importacion\imp_gasto_Bus.cs" />
+    <Compile Include="Importacion\imp_gasto_x_ct_plancta_Bus.cs" />
     <Compile Include="Inventario\in_CatalogoTipo_Bus.cs" />
     <Compile Include="Inventario\in_Catalogo_Bus.cs" />
     <Compile Include="Inventario\in_categorias_Bus.cs" />
