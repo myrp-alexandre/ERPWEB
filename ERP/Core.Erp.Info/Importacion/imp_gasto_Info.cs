@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.Importacion
 {
-    class imp_gasto_Info
+    public class imp_gasto_Info
     {
+        public int IdGasto_tipo { get; set; }
+        public string gt_descripcion { get; set; }
+        public bool estado { get; set; }
+        public string observacion { get; set; }
+
     }
 }
