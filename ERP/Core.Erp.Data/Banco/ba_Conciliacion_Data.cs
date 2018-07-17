@@ -139,6 +139,22 @@ namespace Core.Erp.Data.Banco
                         co_Observacion = info.co_Observacion,
                         Estado = info.Estado = "A",
                     });
+                    int secuencia = 1;
+                    foreach (var item in info.lst_det)
+                    {
+                        Context.ba_Conciliacion_det_IngEgr.Add(new ba_Conciliacion_det_IngEgr
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdConciliacion = info.IdConciliacion,
+                            Secuencia = secuencia++,
+                            tipo_IngEgr = item.tipo_IngEgr,
+                            IdTipocbte = item.IdTipocbte,
+                            IdCbteCble = item.IdCbteCble,                            
+                            SecuenciaCbteCble = item.SecuenciaCbteCble,
+                            Estado = "A",
+                            @checked = item.seleccionado
+                        });
+                    }
                     Context.SaveChanges();
                 }
 
@@ -168,6 +184,25 @@ namespace Core.Erp.Data.Banco
                     Entity.co_SaldoBanco_anterior = info.co_SaldoBanco_anterior;
                     Entity.co_Observacion = info.co_Observacion;
 
+                    var lst = Context.ba_Conciliacion_det_IngEgr.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConciliacion == info.IdConciliacion);
+                    Context.ba_Conciliacion_det_IngEgr.RemoveRange(lst);
+
+                    int secuencia = 1;
+                    foreach (var item in info.lst_det)
+                    {
+                        Context.ba_Conciliacion_det_IngEgr.Add(new ba_Conciliacion_det_IngEgr
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdConciliacion = info.IdConciliacion,
+                            Secuencia = secuencia++,
+                            tipo_IngEgr = item.tipo_IngEgr,
+                            IdTipocbte = item.IdTipocbte,
+                            IdCbteCble = item.IdCbteCble,
+                            SecuenciaCbteCble = item.SecuenciaCbteCble,
+                            Estado = "A",
+                            @checked = item.seleccionado
+                        });
+                    }
                     Context.SaveChanges();
                 }
 
@@ -196,6 +231,31 @@ namespace Core.Erp.Data.Banco
                 }
 
                 return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool ExisteConciliacion(int IdEmpresa, int IdPeriodo, int IdBanco)
+        {
+            try
+            {
+                using (Entities_banco Context = new Entities_banco())
+                {
+                    var lst = from q in Context.ba_Conciliacion
+                              where q.IdEmpresa == IdEmpresa
+                              && q.IdPeriodo == IdPeriodo
+                              && q.IdBanco == IdBanco
+                              && q.Estado == "A"
+                              select q;
+
+                    if (lst.Count() > 0)
+                        return true;
+                }
+
+                return false;
             }
             catch (Exception)
             {

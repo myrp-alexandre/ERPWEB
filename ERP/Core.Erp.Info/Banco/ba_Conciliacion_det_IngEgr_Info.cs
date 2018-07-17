@@ -13,8 +13,10 @@ namespace Core.Erp.Info.Banco
         public int SecuenciaCbteCble { get; set; }
         public bool seleccionado { get; set; }
         public string Estado { get; set; }
+        
         #region Campos que no existen en la tabla
         public string IdPK { get; set; }
+        public string IngEgr { get; set; }
         #endregion
         #region Campos de auditoria
         public string IdUsuario { get; set; }
@@ -33,6 +35,7 @@ namespace Core.Erp.Info.Banco
         public double dc_Valor { get; set; }
         public string IdCtaCble { get; set; }
         public int IdBanco { get; set; }
+        public DateTime cb_Fecha { get; set; }
         #endregion
 
     }
