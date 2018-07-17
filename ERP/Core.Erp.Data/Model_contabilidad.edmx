@@ -255,6 +255,32 @@
           <Property Name="secuencialFin" Type="varchar" MaxLength="9" Nullable="false" />
           <Property Name="Autorización" Type="varchar" MaxLength="49" Nullable="false" />
         </EntityType>
+        <EntityType Name="ATS_exportaciones">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="tpIdClienteEx" Type="varchar" MaxLength="5" />
+          <Property Name="idClienteEx" Type="varchar" MaxLength="50" />
+          <Property Name="parteRel" Type="varchar" MaxLength="5" />
+          <Property Name="tipoRegi" Type="varchar" MaxLength="5" />
+          <Property Name="paisEfecPagoGen" Type="varchar" MaxLength="5" />
+          <Property Name="paisEfecExp" Type="varchar" MaxLength="5" />
+          <Property Name="exportacionDe" Type="varchar" MaxLength="5" />
+          <Property Name="tipoComprobante" Type="varchar" MaxLength="5" />
+          <Property Name="fechaEmbarque" Type="date" />
+          <Property Name="valorFOB" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="valorFOBComprobante" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="establecimiento" Type="varchar" MaxLength="3" />
+          <Property Name="puntoEmision" Type="varchar" MaxLength="3" />
+          <Property Name="secuencial" Type="varchar" MaxLength="15" />
+          <Property Name="autorizacion" Type="varchar" MaxLength="50" />
+          <Property Name="fechaEmision" Type="date" />
+        </EntityType>
         <EntityType Name="ATS_retenciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -588,6 +614,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           <EntitySet Name="ct_punto_cargo" EntityType="Self.ct_punto_cargo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ATS_compras" EntityType="Self.ATS_compras" Schema="EntidadRegulatoria" store:Type="Tables" />
           <EntitySet Name="ATS_comprobantes_anulados" EntityType="Self.ATS_comprobantes_anulados" Schema="EntidadRegulatoria" store:Type="Tables" />
+          <EntitySet Name="ATS_exportaciones" EntityType="Self.ATS_exportaciones" Schema="EntidadRegulatoria" store:Type="Tables" />
           <EntitySet Name="ATS_retenciones" EntityType="Self.ATS_retenciones" Schema="EntidadRegulatoria" store:Type="Tables" />
           <EntitySet Name="ATS_ventas" EntityType="Self.ATS_ventas" Schema="EntidadRegulatoria" store:Type="Tables" />
           <EntitySet Name="vwct_cbtecble_con_ctacble_acreedora" EntityType="Self.vwct_cbtecble_con_ctacble_acreedora" store:Type="Views" store:Schema="dbo">
@@ -761,6 +788,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
             <Parameter Name="idempresa" Mode="In" Type="Int32" />
             <Parameter Name="idPeriodo" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="ATS_exportaciones" EntityType="Model_contabilidad.ATS_exportaciones" />
           </EntityContainer>
         <EntityType Name="ct_grupocble">
           <Key>
@@ -1358,6 +1386,32 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           <Property Name="autModificado" Type="String" MaxLength="49" FixedLength="false" Unicode="false" />
           <Property Name="re_tipo_Ret" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="ATS_exportaciones">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="tpIdClienteEx" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="idClienteEx" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="parteRel" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="tipoRegi" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="paisEfecPagoGen" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="paisEfecExp" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="exportacionDe" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="tipoComprobante" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="fechaEmbarque" Type="DateTime" Precision="0" />
+          <Property Name="valorFOB" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="valorFOBComprobante" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="establecimiento" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="puntoEmision" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="secuencial" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="autorizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fechaEmision" Type="DateTime" Precision="0" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1680,6 +1734,31 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="generarATS" FunctionName="Model_contabilidad.Store.generarATS" />
+          <EntitySetMapping Name="ATS_exportaciones">
+            <EntityTypeMapping TypeName="Model_contabilidad.ATS_exportaciones">
+              <MappingFragment StoreEntitySet="ATS_exportaciones">
+                <ScalarProperty Name="fechaEmision" ColumnName="fechaEmision" />
+                <ScalarProperty Name="autorizacion" ColumnName="autorizacion" />
+                <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+                <ScalarProperty Name="puntoEmision" ColumnName="puntoEmision" />
+                <ScalarProperty Name="establecimiento" ColumnName="establecimiento" />
+                <ScalarProperty Name="valorFOBComprobante" ColumnName="valorFOBComprobante" />
+                <ScalarProperty Name="valorFOB" ColumnName="valorFOB" />
+                <ScalarProperty Name="fechaEmbarque" ColumnName="fechaEmbarque" />
+                <ScalarProperty Name="tipoComprobante" ColumnName="tipoComprobante" />
+                <ScalarProperty Name="exportacionDe" ColumnName="exportacionDe" />
+                <ScalarProperty Name="paisEfecExp" ColumnName="paisEfecExp" />
+                <ScalarProperty Name="paisEfecPagoGen" ColumnName="paisEfecPagoGen" />
+                <ScalarProperty Name="tipoRegi" ColumnName="tipoRegi" />
+                <ScalarProperty Name="parteRel" ColumnName="parteRel" />
+                <ScalarProperty Name="idClienteEx" ColumnName="idClienteEx" />
+                <ScalarProperty Name="tpIdClienteEx" ColumnName="tpIdClienteEx" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

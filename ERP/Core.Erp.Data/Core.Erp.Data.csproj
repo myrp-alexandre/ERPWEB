@@ -108,6 +108,9 @@
     <Compile Include="ATS_comprobantes_anulados.cs">
       <DependentUpon>Model_contabilidad.tt</DependentUpon>
     </Compile>
+    <Compile Include="ATS_exportaciones.cs">
+      <DependentUpon>Model_contabilidad.tt</DependentUpon>
+    </Compile>
     <Compile Include="ATS_retenciones.cs">
       <DependentUpon>Model_contabilidad.tt</DependentUpon>
     </Compile>

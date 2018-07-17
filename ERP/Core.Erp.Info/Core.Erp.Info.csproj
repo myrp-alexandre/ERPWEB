@@ -74,6 +74,7 @@
     <Compile Include="Contabilidad\ATS\ATS_Info\ats_Info.cs" />
     <Compile Include="Contabilidad\ATS\ATS_Info\compras_Info.cs" />
     <Compile Include="Contabilidad\ATS\ATS_Info\comprobantesAnulados_info.cs" />
+    <Compile Include="Contabilidad\ATS\ATS_Info\exportaciones_Info.cs" />
     <Compile Include="Contabilidad\ATS\ATS_Info\importaciones_info.cs" />
     <Compile Include="Contabilidad\ATS\ATS_Info\retenciones_Info.cs" />
     <Compile Include="Contabilidad\ATS\ATS_Info\ventas_Info.cs" />

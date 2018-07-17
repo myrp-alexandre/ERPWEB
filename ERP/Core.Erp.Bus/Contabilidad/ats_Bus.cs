@@ -118,9 +118,10 @@ namespace Core.Erp.Bus.Contabilidad
                                #region Reembolso
                                 if(comp.codSustento=="41")
                                    {
+                               comp_det.codSustento = "01";
                                comp_det.reembolsos = new List<reembolso>();
                                reembolso reem = new reembolso();
-                               reem.tipoComprobanteReemb = comp.tipoComprobante;
+                               reem.tipoComprobanteReemb = "01";
                                reem.tpIdProvReemb = comp.tpIdProv;
                                reem.idProvReemb = comp.idProv;
                                reem.establecimientoReemb = comp.establecimiento;
@@ -213,6 +214,7 @@ namespace Core.Erp.Bus.Contabilidad
                                  det_ventas.montoIce = vent.montoIce;
                                  det_ventas.valorRetIva = vent.valorRetIva.ToString("n2");
                                  det_ventas.valorRetRenta = vent.valorRetRenta.ToString("n2");
+                                 
                                  det_ventas.formasDePago = null;
                                  string[] AFormaPago = { "20" };
                                  det_ventas.formasDePago = AFormaPago;
