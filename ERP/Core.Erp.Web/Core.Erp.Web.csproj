@@ -8699,6 +8699,7 @@
     <Content Include="Areas\Importacion\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Importacion\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Importacion\Views\GastosImportacion\Index.cshtml" />
+    <Content Include="Areas\Importacion\Views\GastosImportacion\_GridViewPartial_gastos_imp.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />
