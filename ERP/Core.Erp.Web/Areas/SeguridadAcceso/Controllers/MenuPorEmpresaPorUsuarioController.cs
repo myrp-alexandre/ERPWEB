@@ -81,16 +81,20 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
             var output = array.GroupBy(q => q).ToList();
             foreach (var item in output)
             {
-                seg_Menu_x_Empresa_x_Usuario_Info info = new seg_Menu_x_Empresa_x_Usuario_Info
+                if (!string.IsNullOrEmpty(item.Key))
                 {
-                    IdEmpresa = IdEmpresa,
-                    IdMenu = Convert.ToInt32(item.Key),
-                    IdUsuario = IdUsuario
-                };
-                lista.Add(info);
+                    seg_Menu_x_Empresa_x_Usuario_Info info = new seg_Menu_x_Empresa_x_Usuario_Info
+                    {
+                        IdEmpresa = IdEmpresa,
+                        IdMenu = Convert.ToInt32(item.Key),
+                        IdUsuario = IdUsuario
+                    };
+                    lista.Add(info);
+                }                
             }
-            bus_menu_x_empresa_x_usuario.eliminarDB(IdEmpresa,IdUsuario);
-            var resultado = bus_menu_x_empresa_x_usuario.guardarDB(lista, IdEmpresa, IdUsuario);
+                bus_menu_x_empresa_x_usuario.eliminarDB(IdEmpresa, IdUsuario);
+                var resultado = bus_menu_x_empresa_x_usuario.guardarDB(lista, IdEmpresa, IdUsuario);
+            
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }

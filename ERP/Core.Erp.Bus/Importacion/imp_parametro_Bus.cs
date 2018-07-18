@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Importacion
 {
-    class imp_parametro_Bus
+    public class imp_parametro_Bus
     {
     }
 }

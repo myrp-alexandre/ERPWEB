@@ -125,8 +125,10 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 model.info_gasto_cta = new imp_gasto_x_ct_plancta_Info
                 {
                     IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
-                    IdCtaCble = model.IdCtaCble
+                    IdGasto_tipo = model.IdGasto_tipo
                 };
+            else
+                model.IdCtaCble = model.info_gasto_cta.IdCtaCble;
             cargar_combos();
             return View(model);
         }
@@ -134,6 +136,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost]
         public ActionResult Anular(imp_gasto_Info model)
         {
+            model.info_gasto_cta = new imp_gasto_x_ct_plancta_Info { IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa) };
             if (!bus_gasto.anularDB(model))
             {
                 cargar_combos();
@@ -141,5 +144,4 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             }
             return RedirectToAction("Index");
         }
-    }
 }

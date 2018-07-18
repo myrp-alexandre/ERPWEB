@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.Importacion
 {
-    class imp_parametro_Info
+   public class imp_parametro_Info
     {
+        public int IdEmpresa { get; set; }
+        public int IdTipoCbte_liquidacion { get; set; }
+        public int IdTipoCbte_liquidacion_anu { get; set; }
     }
 }
