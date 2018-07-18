@@ -171,7 +171,7 @@ namespace Core.Erp.Data.Contabilidad
                                                   puntoEmision=a.puntoEmision,
                                                   secuencialInicio=a.secuencialInicio,
                                                   secuencialFin=a.secuencialFin,
-                                                  Autorización=a.Autorización
+                                                  Autorizacion=a.Autorización
                                                   
                                               }).ToList();
 

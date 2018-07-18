@@ -84,6 +84,8 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
             var lst_periodos = bus_periodo.get_list(IdEmpresa,false);
+           
+              
             ViewBag.lst_periodos = lst_periodos;
 
         }

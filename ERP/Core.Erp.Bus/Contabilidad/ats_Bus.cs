@@ -293,8 +293,35 @@ namespace Core.Erp.Bus.Contabilidad
                             );
                     }
                 }
-                        #endregion
-                        ats.totalVentas = info_ats.lst_ventas.Sum(y => y.ventasEstab);
+                #endregion
+
+                #region Anulados
+                if (info_ats.lst_exportaciones != null)
+                {
+                    if (info_ats.lst_anulados.Count() > 0)
+                    {
+                        ats.anulados = new List<detalleAnulados>();
+                        info_ats.lst_anulados.ForEach
+                            (
+                            anu =>
+                            {
+                                detalleAnulados anula = new detalleAnulados();
+                                anula.tipoComprobante = anu.tipoComprobante;
+                                anula.establecimiento = anu.Establecimiento;
+                                anula.puntoEmision = anu.puntoEmision;
+                                anula.secuencialInicio = anu.secuencialInicio;
+                                anula.secuencialFin = anu.secuencialFin;
+                                anula.autorizacion = anu.Autorizacion;
+
+                                ats.anulados.Add(anula);
+                            }
+                            );
+                    }
+                }
+                #endregion
+
+
+                ats.totalVentas = info_ats.lst_ventas.Sum(y => y.ventasEstab);
                 ats.totalVentasSpecified = true;
                 return ats;
 

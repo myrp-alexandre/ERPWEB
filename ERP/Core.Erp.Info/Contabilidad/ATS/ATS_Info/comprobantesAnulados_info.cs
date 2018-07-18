@@ -16,6 +16,6 @@ namespace Core.Erp.Info.Contabilidad.ATS.ATS_Info
         public string puntoEmision { get; set; }
         public string secuencialInicio { get; set; }
         public string secuencialFin { get; set; }
-        public string Autorización { get; set; }
+        public string Autorizacion { get; set; }
     }
 }
