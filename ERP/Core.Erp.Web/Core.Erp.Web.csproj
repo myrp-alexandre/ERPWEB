@@ -8711,6 +8711,7 @@
     <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_GridViewPartial_comprobante_detalle_Credito.cshtml" />
     <Content Include="Areas\Importacion\Views\ParametrosImportacion\Index.cshtml" />
     <Content Include="Areas\Importacion\Views\CatalogoTipoImportacion\Index.cshtml" />
+    <Content Include="Areas\Importacion\Views\CatalogoTipoImportacion\_GridViewPartial_cat_tipo_imp.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />

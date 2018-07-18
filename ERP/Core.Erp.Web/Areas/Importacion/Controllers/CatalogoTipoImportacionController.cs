@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.Web.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,13 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_cat_tipo_imp()
+        {
+            var model = new object[0];
+            return PartialView("_GridViewPartial_cat_tipo_imp", model);
         }
     }
 }
