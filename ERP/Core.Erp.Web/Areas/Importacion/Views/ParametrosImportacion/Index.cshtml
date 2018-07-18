@@ -1,4 +1,4 @@
-﻿
+﻿@model Core.Erp.Info.Importacion.imp_parametro_Info
 @{
     ViewBag.Title = "Parámetros";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -8,9 +8,64 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "ParametrosImportacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    @Html.HiddenFor(q => q.IdEmpresa)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdTipoCbte_liquidacion">Liquidación</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbte_liquidacion, settings =>
+               {
+                   settings.Name = "IdTipoCbte_liquidacion"; settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("tc_TipoCbte", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdTipoCbte";
+                   settings.Properties.ValueType = typeof(int);
+                   settings.Properties.TextField = "tc_TipoCbte";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+               }).BindList(ViewBag.lst_tipo).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdTipoCbte_liquidacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdTipoCbte_liquidacion_anu">Liquidación anulada</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbte_liquidacion_anu, settings =>
+               {
+                   settings.Name = "IdTipoCbte_liquidacion_anu"; settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("tc_TipoCbte", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdTipoCbte";
+                   settings.Properties.ValueType = typeof(int);
+                   settings.Properties.TextField = "tc_TipoCbte";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+               }).BindList(ViewBag.lst_tipo).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdTipoCbte_liquidacion_anu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
 
-    @Html.Action("GridViewPartial_parametros_imp")
-
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }
