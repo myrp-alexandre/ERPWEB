@@ -8723,6 +8723,7 @@
     <Content Include="Areas\Importacion\Views\CatalogoImportacion\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\web.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Anular.cshtml" />
