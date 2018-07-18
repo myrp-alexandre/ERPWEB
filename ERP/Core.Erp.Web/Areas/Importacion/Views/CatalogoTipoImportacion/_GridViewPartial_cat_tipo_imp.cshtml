@@ -82,18 +82,28 @@
         settings.Columns.Add("IdCatalogo_tipo", "Código").Width = Unit.Percentage(10);
         settings.Columns.Add("ct_descripcion", "Descripción").Width = Unit.Percentage(80);
         settings.Columns.Add("estado", "Estado").Width = Unit.Percentage(10);
+        settings.HtmlRowPrepared = (s, e) =>
+        {
+            if (Convert.ToBoolean(e.GetValue("estado")) == false)
+            {
+                e.Row.ForeColor = System.Drawing.Color.Red;
+            }
+        };
         settings.Columns.Add(column =>
         {
             column.Caption = "Catálogo";
             column.Width = Unit.Pixel(100);
             column.SetDataItemTemplateContent(container =>
             {
-                Html.DevExpress().HyperLink(hyperlink =>
+                if (Convert.ToBoolean(DataBinder.Eval(container.DataItem, "estado")) == true)
                 {
-                    var keyValue = DataBinder.Eval(container.DataItem, "IdCatalogo_tipo");
-                    hyperlink.Properties.Text = "Catálogos";
-                    hyperlink.NavigateUrl = Url.Action("Index", "CatalogoImportacion", new { IdCatalogo_tipo = keyValue });
-                }).Render();
+                    Html.DevExpress().HyperLink(hyperlink =>
+                    {
+                        var keyValue = DataBinder.Eval(container.DataItem, "IdCatalogo_tipo");
+                        hyperlink.Properties.Text = "Catálogos";
+                        hyperlink.NavigateUrl = Url.Action("Index", "CatalogoImportacion", new { IdCatalogo_tipo = keyValue });
+                    }).Render();
+                }
             });
         });
     });

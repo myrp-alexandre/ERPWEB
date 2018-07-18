@@ -86,12 +86,13 @@
             column.Width = Unit.Pixel(150);
             column.SetDataItemTemplateContent(container =>
             {
-                Html.DevExpress().HyperLink(hyperlink =>
-                {
-                    var keyValue = DataBinder.Eval(container.DataItem, "IdCatalogo_tipo");
-                    hyperlink.Properties.Text = "Catálogos";
-                    hyperlink.NavigateUrl = Url.Action("Index", "CatalogoInventario", new { IdCatalogo_tipo = keyValue });
-                }).Render();
+                    Html.DevExpress().HyperLink(hyperlink =>
+                    {
+                        var keyValue = DataBinder.Eval(container.DataItem, "IdCatalogo_tipo");
+                        hyperlink.Properties.Text = "Catálogos";
+                        hyperlink.NavigateUrl = Url.Action("Index", "CatalogoInventario", new { IdCatalogo_tipo = keyValue });
+                    }).Render();
+              
             });
         });
 
