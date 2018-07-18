@@ -8704,6 +8704,7 @@
     <Content Include="Areas\Importacion\Views\GastosImportacion\Modificar.cshtml" />
     <Content Include="Areas\Importacion\Views\GastosImportacion\Anular.cshtml" />
     <Content Include="Areas\Importacion\Views\GastosImportacion\_CmbCuenta_Gasto.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\ATS\_GridViewPartial_exportaciones.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />

@@ -22,7 +22,7 @@ namespace Core.Erp.Data.Contabilidad
                     info.lst_compras = (from q in Context.ATS_compras
                                         where q.IdEmpresa==IdEmpresa
                                         && q.IdPeriodo==IdPeriodo
-                                        && q.idProv== "0909594202001"
+                                       // && q.idProv== "0909594202001"
                                         select new compras_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -64,7 +64,7 @@ namespace Core.Erp.Data.Contabilidad
                     info.lst_ventas = (from v in Context.ATS_ventas
                                         where v.IdEmpresa == IdEmpresa
                                         && v.IdPeriodo == IdPeriodo
-                                        && v.idCliente== "987"
+                                      //  && v.idCliente== "0190339092001"
                                        select new ventas_Info
                                         {
                                             IdEmpresa = v.IdEmpresa,
@@ -94,7 +94,7 @@ namespace Core.Erp.Data.Contabilidad
                     info.lst_retenciones = (from r in Context.ATS_retenciones
                                        where r.IdEmpresa == IdEmpresa
                                        && r.IdPeriodo == IdPeriodo
-                                       && r.Cedula_ruc== "0909594202001"
+                                      // && r.Cedula_ruc== "0909594202001"
                                             select new retenciones_Info
                                        {
                                            IdEmpresa = r.IdEmpresa,
@@ -122,9 +122,38 @@ namespace Core.Erp.Data.Contabilidad
                                           autModificado=r.autModificado,
                                           baseImpAir=r.baseImpAir,
                                            porcentajeAir=r.porcentajeAir,
-                                           valRetAir=r.valRetAir
+                                           valRetAir=r.valRetAir,
+                                           re_tipo_Ret=r.re_tipo_Ret
                                        }).ToList();
 
+                    info.lst_exportaciones = (from e in Context.ATS_exportaciones
+                                            where e.IdEmpresa == IdEmpresa
+                                            && e.IdPeriodo == IdPeriodo
+                                            // && r.Cedula_ruc== "0909594202001"
+                                            select new exportaciones_Info
+                                            {
+                                                IdEmpresa = e.IdEmpresa,
+                                                IdPeriodo = e.IdPeriodo,
+                                                Secuencia = e.Secuencia,
+                                                tpIdClienteEx = e.tpIdClienteEx,
+                                                idClienteEx = e.idClienteEx,
+                                                parteRel = e.parteRel,
+                                                tipoRegi = e.tipoRegi,
+                                                paisEfecPagoGen = e.paisEfecPagoGen,
+                                                paisEfecExp = e.paisEfecExp,
+                                                exportacionDe = e.exportacionDe,
+                                                tipoComprobante = e.tipoComprobante,
+                                                fechaEmbarque = e.fechaEmbarque,
+                                                valorFOB = e.valorFOB,
+                                                valorFOBComprobante = e.valorFOBComprobante,
+                                                establecimiento = e.establecimiento,
+                                                puntoEmision = e.puntoEmision,
+                                                secuencial = e.secuencial,
+                                                autorizacion=e.autorizacion,
+                                                fechaEmision=e.fechaEmision
+
+
+                                            }).ToList();
 
                 }
 

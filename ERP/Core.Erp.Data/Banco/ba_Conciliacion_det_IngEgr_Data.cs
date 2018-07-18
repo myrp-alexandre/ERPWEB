@@ -26,6 +26,7 @@ namespace Core.Erp.Data.Banco
                                  IdConciliacion = q.IdConciliacion,
                                  
                                  tipo_IngEgr = q.dc_Valor > 0 ? "+" : "-",
+                                 IngEgr = q.dc_Valor > 0 ? "INGRESOS" : "EGRESOS",
                                  IdCbteCble = q.IdCbteCble,
                                  IdTipocbte = q.IdTipoCbte,
                                  Secuencia = q.Secuencia,
@@ -37,9 +38,11 @@ namespace Core.Erp.Data.Banco
                                  cb_Observacion = q.cb_Observacion,
                                  cb_Cheque = q.cb_Cheque,
                                  tc_TipoCbte = q.tc_TipoCbte,
+                                 cb_Fecha = q.cb_Fecha,
+                                 seleccionado = true
                              }).ToList();
                 }
-
+                Lista.ForEach(q => q.IdPK = q.IdTipocbte.ToString("00") + q.IdCbteCble.ToString("0000000000") + q.SecuenciaCbteCble.ToString("000"));
                 return Lista;
             }
             catch (Exception)
@@ -63,6 +66,7 @@ namespace Core.Erp.Data.Banco
                              {
                                  IdEmpresa = T.IdEmpresa,
                                  tipo_IngEgr = T.dc_Valor > 0 ? "+" :  "-",
+                                 IngEgr = T.dc_Valor > 0 ? "INGRESOS" : "EGRESOS",
                                  IdCbteCble = T.IdCbteCble,
                                  IdTipocbte = T.IdTipoCbte,
                                  SecuenciaCbteCble = T.secuencia,
@@ -73,7 +77,9 @@ namespace Core.Erp.Data.Banco
                                  cb_Observacion = T.cb_Observacion,
                                  cb_Cheque = T.cb_Cheque,
                                  tc_TipoCbte = T.tc_TipoCbte,
+                                 cb_Fecha = T.cb_Fecha
                              }).ToList();
+                    Lista.ForEach(q => q.IdPK = q.IdTipocbte.ToString("00") + q.IdCbteCble.ToString("0000000000") + q.SecuenciaCbteCble.ToString("000"));
                 }
                 return Lista;
             }

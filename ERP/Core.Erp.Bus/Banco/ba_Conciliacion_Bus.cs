@@ -2,9 +2,6 @@
 using Core.Erp.Info.Banco;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Banco
 {
@@ -31,6 +28,19 @@ namespace Core.Erp.Bus.Banco
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public bool ExisteConciliacion(int IdEmpresa, int IdPeriodo, int IdBanco)
+        {
+            try
+            {
+                return odata.ExisteConciliacion(IdEmpresa, IdPeriodo, IdBanco);
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

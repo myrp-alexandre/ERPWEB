@@ -35,5 +35,7 @@ namespace Core.Erp.Info.Contabilidad.ATS.ATS_Info
         public string ptoEmiModificado { get; set; }
         public string secModificado { get; set; }
         public string autModificado { get; set; }
+        public string re_tipo_Ret { get; set; }
+
     }
 }

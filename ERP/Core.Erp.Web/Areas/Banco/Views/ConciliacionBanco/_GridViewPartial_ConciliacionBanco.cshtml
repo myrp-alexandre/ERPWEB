@@ -50,13 +50,17 @@
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
+            if (Convert.ToString(e.GetValue("IdEstado_Concil_Cat")) == "CONCILIADO")
+            {
+                e.Row.ForeColor = System.Drawing.Color.Blue;
+            }
         };
         settings.Columns.Add(c =>
         {
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
+                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A" && Convert.ToString(DataBinder.Eval(tc.DataItem, "IdEstado_Concil_Cat")) != "CONCILIADO")
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdConciliacion = DataBinder.Eval(tc.DataItem, "IdConciliacion")}) + "&nbsp;" +
@@ -91,7 +95,10 @@
         {
             column.SetDataItemTemplateContent(c =>
             {
-                //ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("BAN_002", "BancoReportes", new { Area = "Reportes", IdTipocbte = DataBinder.Eval(c.DataItem, "IdTipocbte"), IdCbteCble = DataBinder.Eval(c.DataItem, "IdCbteCble") }, Request.Url.Scheme) + "');\"></span>");
+                if (Convert.ToString(DataBinder.Eval(c.DataItem, "IdEstado_Concil_Cat")) == "CONCILIADO")
+                {
+                    ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("BAN_004", "BancoReportes", new { Area = "Reportes", IdBanco = DataBinder.Eval(c.DataItem, "IdBanco"), IdConciliacion = DataBinder.Eval(c.DataItem, "IdConciliacion") }, Request.Url.Scheme) + "');\"></span>");
+                }
             });
             column.Width = Unit.Percentage(5);
         });

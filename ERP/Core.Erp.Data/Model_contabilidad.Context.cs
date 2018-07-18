@@ -44,8 +44,9 @@ namespace Core.Erp.Data
         public virtual DbSet<ATS_comprobantes_anulados> ATS_comprobantes_anulados { get; set; }
         public virtual DbSet<ATS_ventas> ATS_ventas { get; set; }
         public virtual DbSet<ATS_retenciones> ATS_retenciones { get; set; }
+        public virtual DbSet<ATS_exportaciones> ATS_exportaciones { get; set; }
     
-        public virtual int generarATS(Nullable<int> idempresa, Nullable<int> idPeriodo)
+        public virtual ObjectResult<generarATS_Result> generarATS(Nullable<int> idempresa, Nullable<int> idPeriodo)
         {
             var idempresaParameter = idempresa.HasValue ?
                 new ObjectParameter("idempresa", idempresa) :
@@ -55,7 +56,7 @@ namespace Core.Erp.Data
                 new ObjectParameter("idPeriodo", idPeriodo) :
                 new ObjectParameter("idPeriodo", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("generarATS", idempresaParameter, idPeriodoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<generarATS_Result>("generarATS", idempresaParameter, idPeriodoParameter);
         }
     }
 }
