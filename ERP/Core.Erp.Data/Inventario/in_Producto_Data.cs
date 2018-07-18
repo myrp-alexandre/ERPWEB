@@ -28,7 +28,9 @@ namespace Core.Erp.Data.Inventario
                                  pr_codigo = q.pr_codigo,
                                  pr_descripcion = q.pr_descripcion,
                                  Estado = q.Estado,
-                                 lote_fecha_vcto = q.lote_fecha_vcto
+                                 lote_fecha_vcto = q.lote_fecha_vcto,
+                                 lote_num_lote=q.lote_num_lote
+
                              }).ToList();
                     else
                         Lista = (from q in Context.in_Producto
@@ -41,7 +43,8 @@ namespace Core.Erp.Data.Inventario
                                      pr_codigo = q.pr_codigo,
                                      pr_descripcion = q.pr_descripcion,
                                      Estado = q.Estado,
-                                     lote_fecha_vcto = q.lote_fecha_vcto
+                                     lote_fecha_vcto = q.lote_fecha_vcto,
+                                     lote_num_lote = q.lote_num_lote
                                  }).ToList();
                 }
 

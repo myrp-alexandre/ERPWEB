@@ -1,3 +1,5 @@
+@using System.Web.UI.WebControls;
+
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
@@ -89,6 +91,15 @@
         });
         settings.Columns.Add("cm_observacion", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(60);
         settings.Columns.Add("Estado", "Estado").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("INV_001", "InventarioReportes", new { Area = "Reportes", IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdMovi_inven_tipo = DataBinder.Eval(c.DataItem, "IdMovi_inven_tipo"), IdNumMovi = DataBinder.Eval(c.DataItem, "IdNumMovi") }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

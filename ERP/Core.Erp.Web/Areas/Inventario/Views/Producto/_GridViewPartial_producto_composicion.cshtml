@@ -4,9 +4,8 @@
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "lst_producto_composicion";
         settings.CallbackRouteValues = new { Controller = "Producto", Action = "GridViewPartial_producto_composicion", IdProducto = Model == null ? 0 : Model.IdProducto };
-        settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "secuencia";
-
+        settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Producto", Action = "EditingAddNew" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Producto", Action = "EditingUpdate" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Producto", Action = "EditingDelete" };
