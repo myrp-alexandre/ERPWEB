@@ -40,13 +40,24 @@ namespace Core.Erp.Data.Importacion
             {
                 using (Entities_importacion Context = new Entities_importacion())
                 {
-                    imp_parametro Entity = new imp_parametro
+                    imp_parametro Entity = Context.imp_parametro.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa);
+                    if(Entity == null)
                     {
-                        IdEmpresa = info.IdEmpresa,
-                        IdTipoCbte_liquidacion = info.IdTipoCbte_liquidacion,
-                        IdTipoCbte_liquidacion_anu = info.IdTipoCbte_liquidacion_anu
-                    };
-                    Context.imp_parametro.Add(Entity);
+
+                        Entity = new imp_parametro
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdTipoCbte_liquidacion = info.IdTipoCbte_liquidacion,
+                            IdTipoCbte_liquidacion_anu = info.IdTipoCbte_liquidacion_anu
+                        };
+                        Context.imp_parametro.Add(Entity);
+                    }
+                    else
+                    {
+                        Entity.IdTipoCbte_liquidacion = info.IdTipoCbte_liquidacion;
+                        Entity.IdTipoCbte_liquidacion_anu = info.IdTipoCbte_liquidacion_anu;
+                        
+                    }
                     Context.SaveChanges();
                 }
                 return true;

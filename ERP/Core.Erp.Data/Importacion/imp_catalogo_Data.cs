@@ -91,7 +91,7 @@ namespace Core.Erp.Data.Importacion
                 {
                     imp_catalogo Entity = new imp_catalogo
                     {
-                        IdCatalogo = info.IdCatalogo,
+                        IdCatalogo = info.IdCatalogo = get_id(info.IdCatalogo_tipo),
                         IdCatalogo_tipo = info.IdCatalogo_tipo,
                         ca_descripcion = info.ca_descripcion,
                         estado = info.estado = true
