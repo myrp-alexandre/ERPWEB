@@ -225,7 +225,7 @@ namespace Core.Erp.Bus.Contabilidad
                 }
                 #endregion
 
-                #region MyRegion
+                #region ventas por establecimientos
                 if (info_ats.lst_ventas != null)
                 {
                     if (info_ats.lst_ventas.Count() > 0)
@@ -254,9 +254,49 @@ namespace Core.Erp.Bus.Contabilidad
                 }
                 #endregion
 
-                ats.totalVentas = info_ats.lst_ventas.Sum(y => y.ventasEstab);
+                #region exportaciones
+                if (info_ats.lst_exportaciones != null)
+                {
+                    if (info_ats.lst_exportaciones.Count() > 0)
+                    {
+                        ats.exportaciones = new List<detalleExportacionesType>();
+                        info_ats.lst_exportaciones.ForEach
+                            (
+                            exp =>
+                            {
+                                detalleExportacionesType exp_det = new detalleExportacionesType();
+                                exp_det.tpIdClienteEx = exp.tpIdClienteEx;
+                                exp_det.idClienteEx = exp.idClienteEx;
+                                exp_det.parteRelExp = parteRelType.NO;
+                                exp_det.tipoCli = "02";
+                                exp_det.denoExpCli = exp.denoExpCli;
+                                exp_det.tipoRegi = tipoRegiType.Item01;
+                                exp_det.paisEfecPagoGen = exp.paisEfecPagoGen;
+                                exp_det.paisEfecExp = exp.paisEfecExp;
+                                exp_det.exportacionDe = exp.exportacionDe;
+                                exp_det.tipoComprobante = exp.tipoComprobante;
+                                exp_det.fechaEmbarque = exp.fechaEmbarque.ToString().Substring(0,10);
+                                exp_det.valorFOB = (exp.valorFOB)==null?Convert.ToDecimal(0.00):Convert.ToDecimal(exp.valorFOB);
+                                exp_det.valorFOBComprobante = (exp.valorFOB) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(exp.valorFOBComprobante);
+                                exp_det.establecimiento = exp.establecimiento;
+                                exp_det.puntoEmision = exp.puntoEmision;
+                                exp_det.secuencial = exp.secuencial;
+                                exp_det.autorizacion = (exp.autorizacion)==null?"34345454656453":exp.autorizacion;
+                                exp_det.fechaEmision = exp.fechaEmision.ToString().Substring(0,10);
+                                //exp_det.pagoRegFisSpecified = true;
+                                exp_det.parteRelExpSpecified = true;
+                                exp_det.tipoRegiSpecified = true;
+                                //exp_det.impuestoOtroPaisSpecified = true;
+                                //exp_det.ingExtGravOtroPaisSpecified = true;
+                                ats.exportaciones.Add(exp_det);
+                            }
+                            );
+                    }
+                }
+                        #endregion
+                        ats.totalVentas = info_ats.lst_ventas.Sum(y => y.ventasEstab);
                 ats.totalVentasSpecified = true;
-                        return ats;
+                return ats;
 
                 
             }

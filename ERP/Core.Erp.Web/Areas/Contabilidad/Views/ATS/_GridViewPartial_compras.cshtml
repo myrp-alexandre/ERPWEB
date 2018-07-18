@@ -30,7 +30,18 @@
         settings.Columns.Add("establecimiento", "Est.").Width = Unit.Percentage(10);
         settings.Columns.Add("puntoEmision", "PtoEm.").Width = Unit.Percentage(10);
         settings.Columns.Add("secuencial", "Factura").Width = Unit.Percentage(15);
-
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "fechaRegistro";
+            column.Caption = "Fecha";
+            column.Width = Unit.Percentage(15);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "baseImponible";
