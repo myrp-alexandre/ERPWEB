@@ -327,7 +327,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     {
                         foreach (var item in info.lst_det)
                         {
-                            ct_cbtecble_det Debe = new ct_cbtecble_det
+                            Context_ct.ct_cbtecble_det.Add(new ct_cbtecble_det
                             {
                                 IdEmpresa = diario.IdEmpresa,
                                 IdTipoCbte = diario.IdTipoCbte,
@@ -335,7 +335,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                 secuencia = Secuencia++,
                                 IdCtaCble = item.IdCtaCble,
                                 dc_Valor = Math.Round(Convert.ToDouble(item.dc_ValorPago), 2, MidpointRounding.AwayFromZero),
-                            };
+                            });
                         }
                     }
 
@@ -754,7 +754,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         {
                             foreach (var item in info.lst_det)
                             {
-                                ct_cbtecble_det Debe = new ct_cbtecble_det
+                                Context_ct.ct_cbtecble_det.Add(new ct_cbtecble_det
                                 {
                                     IdEmpresa = diario.IdEmpresa,
                                     IdTipoCbte = diario.IdTipoCbte,
@@ -762,8 +762,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                     secuencia = Secuencia++,
                                     IdCtaCble = item.IdCtaCble,
                                     dc_Valor = Math.Round(Convert.ToDouble(item.dc_ValorPago), 2, MidpointRounding.AwayFromZero),
-                                };
-                                Context_ct.ct_cbtecble_det.Add(Debe);
+                                });                               
                             }
                         }
 
