@@ -268,7 +268,7 @@ namespace Core.Erp.Data.Banco
 
                     if (lst.Count() > 0)
                     {
-                        secuencia = (decimal)lst.Max(q => q.secuencia);
+                        secuencia = (decimal)lst.Min(q => q.secuencia);
                         NumCheque = lst.Where(q => q.secuencia == secuencia).FirstOrDefault().Num_cheque;
                     }         
                 }

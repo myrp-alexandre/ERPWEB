@@ -32,10 +32,11 @@ namespace Core.Erp.Data.Contabilidad
                                  IdPunto_cargo = q.IdPunto_cargo,
                                  IdPunto_cargo_grupo = q.IdPunto_cargo_grupo,
                                  IdTipoCbte = q.IdTipoCbte,
-                                 secuencia = q.secuencia
+                                 secuencia = q.secuencia,
+                                 dc_para_conciliar_null = q.dc_para_conciliar
                              }).ToList();
                 }
-                Lista.ForEach(q => { q.dc_Valor_debe = q.dc_Valor > 0 ? q.dc_Valor : 0; q.dc_Valor_haber = q.dc_Valor < 0 ? Math.Abs( q.dc_Valor) : 0; });
+                Lista.ForEach(q => { q.dc_Valor_debe = q.dc_Valor > 0 ? q.dc_Valor : 0; q.dc_Valor_haber = q.dc_Valor < 0 ? Math.Abs( q.dc_Valor) : 0; q.dc_para_conciliar = q.dc_para_conciliar_null == null ? false : Convert.ToBoolean(q.dc_para_conciliar_null); });
                 return Lista;
             }
             catch (Exception)
