@@ -458,6 +458,8 @@
     <Compile Include="generarATS_Result.cs">
       <DependentUpon>Model_contabilidad.tt</DependentUpon>
     </Compile>
+    <Compile Include="Importacion\imp_catalogo_Data.cs" />
+    <Compile Include="Importacion\imp_catalogo_tipo_Data.cs" />
     <Compile Include="Importacion\imp_gasto_Data.cs" />
     <Compile Include="Importacion\imp_gasto_x_ct_plancta_Data.cs" />
     <Compile Include="Importacion\imp_parametro_Data.cs" />

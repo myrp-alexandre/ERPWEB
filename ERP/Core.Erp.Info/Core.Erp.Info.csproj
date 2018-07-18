@@ -181,6 +181,8 @@
     <Compile Include="Helps\cl_enumeradores.cs" />
     <Compile Include="Helps\cl_filtros_Info.cs" />
     <Compile Include="Helps\cl_funciones.cs" />
+    <Compile Include="Importacion\imp_catalogo_Info.cs" />
+    <Compile Include="Importacion\imp_catalogo_tipo_Info.cs" />
     <Compile Include="Importacion\imp_gasto_Info.cs" />
     <Compile Include="Importacion\imp_gasto_x_ct_plancta_Info.cs" />
     <Compile Include="Importacion\imp_parametro_Info.cs" />
