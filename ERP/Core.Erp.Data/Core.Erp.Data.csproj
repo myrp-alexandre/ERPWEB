@@ -461,6 +461,12 @@
     <Compile Include="Importacion\imp_gasto_Data.cs" />
     <Compile Include="Importacion\imp_gasto_x_ct_plancta_Data.cs" />
     <Compile Include="Importacion\imp_parametro_Data.cs" />
+    <Compile Include="imp_catalogo.cs">
+      <DependentUpon>Model_importacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="imp_catalogo_tipo.cs">
+      <DependentUpon>Model_importacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="imp_gasto.cs">
       <DependentUpon>Model_importacion.tt</DependentUpon>
     </Compile>

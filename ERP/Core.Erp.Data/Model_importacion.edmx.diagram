@@ -9,6 +9,9 @@
         <EntityTypeShape EntityType="Model_importacion.imp_gasto_x_ct_plancta" Width="1.5" PointX="3" PointY="1" />
         <AssociationConnector Association="Model_importacion.FK_imp_gasto_x_ct_plancta_imp_gasto" />
         <EntityTypeShape EntityType="Model_importacion.imp_parametro" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Model_importacion.imp_catalogo" Width="1.5" PointX="5.625" PointY="3.875" />
+        <EntityTypeShape EntityType="Model_importacion.imp_catalogo_tipo" Width="1.5" PointX="3.375" PointY="4" />
+        <AssociationConnector Association="Model_importacion.FK_imp_catalogo_imp_catalogo_tipo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

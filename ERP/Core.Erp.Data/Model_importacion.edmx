@@ -5,6 +5,23 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Model_importacion.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="imp_catalogo">
+          <Key>
+            <PropertyRef Name="IdCatalogo" />
+          </Key>
+          <Property Name="IdCatalogo" Type="int" Nullable="false" />
+          <Property Name="IdCatalogo_tipo" Type="int" Nullable="false" />
+          <Property Name="ca_descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="imp_catalogo_tipo">
+          <Key>
+            <PropertyRef Name="IdCatalogo_tipo" />
+          </Key>
+          <Property Name="IdCatalogo_tipo" Type="int" Nullable="false" />
+          <Property Name="ct_descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="imp_gasto">
           <Key>
             <PropertyRef Name="IdGasto_tipo" />
@@ -31,6 +48,18 @@
           <Property Name="IdTipoCbte_liquidacion" Type="int" Nullable="false" />
           <Property Name="IdTipoCbte_liquidacion_anu" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_imp_catalogo_imp_catalogo_tipo">
+          <End Role="imp_catalogo_tipo" Type="Self.imp_catalogo_tipo" Multiplicity="1" />
+          <End Role="imp_catalogo" Type="Self.imp_catalogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_catalogo_tipo">
+              <PropertyRef Name="IdCatalogo_tipo" />
+            </Principal>
+            <Dependent Role="imp_catalogo">
+              <PropertyRef Name="IdCatalogo_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_imp_gasto_x_ct_plancta_imp_gasto">
           <End Role="imp_gasto" Type="Self.imp_gasto" Multiplicity="1" />
           <End Role="imp_gasto_x_ct_plancta" Type="Self.imp_gasto_x_ct_plancta" Multiplicity="*" />
@@ -44,9 +73,15 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Model_importacionStoreContainer">
+          <EntitySet Name="imp_catalogo" EntityType="Self.imp_catalogo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="imp_catalogo_tipo" EntityType="Self.imp_catalogo_tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="imp_gasto" EntityType="Self.imp_gasto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="imp_gasto_x_ct_plancta" EntityType="Self.imp_gasto_x_ct_plancta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="imp_parametro" EntityType="Self.imp_parametro" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_imp_catalogo_imp_catalogo_tipo" Association="Self.FK_imp_catalogo_imp_catalogo_tipo">
+            <End Role="imp_catalogo_tipo" EntitySet="imp_catalogo_tipo" />
+            <End Role="imp_catalogo" EntitySet="imp_catalogo" />
+          </AssociationSet>
           <AssociationSet Name="FK_imp_gasto_x_ct_plancta_imp_gasto" Association="Self.FK_imp_gasto_x_ct_plancta_imp_gasto">
             <End Role="imp_gasto" EntitySet="imp_gasto" />
             <End Role="imp_gasto_x_ct_plancta" EntitySet="imp_gasto_x_ct_plancta" />
@@ -64,6 +99,12 @@
             <End Role="imp_gasto_x_ct_plancta" EntitySet="imp_gasto_x_ct_plancta" />
           </AssociationSet>
           <EntitySet Name="imp_parametro" EntityType="Model_importacion.imp_parametro" />
+          <EntitySet Name="imp_catalogo" EntityType="Model_importacion.imp_catalogo" />
+          <EntitySet Name="imp_catalogo_tipo" EntityType="Model_importacion.imp_catalogo_tipo" />
+          <AssociationSet Name="FK_imp_catalogo_imp_catalogo_tipo" Association="Model_importacion.FK_imp_catalogo_imp_catalogo_tipo">
+            <End Role="imp_catalogo_tipo" EntitySet="imp_catalogo_tipo" />
+            <End Role="imp_catalogo" EntitySet="imp_catalogo" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="imp_gasto">
           <Key>
@@ -105,6 +146,37 @@
           <Property Name="IdTipoCbte_liquidacion" Type="Int32" Nullable="false" />
           <Property Name="IdTipoCbte_liquidacion_anu" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="imp_catalogo">
+          <Key>
+            <PropertyRef Name="IdCatalogo" />
+          </Key>
+          <Property Name="IdCatalogo" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogo_tipo" Type="Int32" Nullable="false" />
+          <Property Name="ca_descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="imp_catalogo_tipo" Relationship="Model_importacion.FK_imp_catalogo_imp_catalogo_tipo" FromRole="imp_catalogo" ToRole="imp_catalogo_tipo" />
+        </EntityType>
+        <EntityType Name="imp_catalogo_tipo">
+          <Key>
+            <PropertyRef Name="IdCatalogo_tipo" />
+          </Key>
+          <Property Name="IdCatalogo_tipo" Type="Int32" Nullable="false" />
+          <Property Name="ct_descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="imp_catalogo" Relationship="Model_importacion.FK_imp_catalogo_imp_catalogo_tipo" FromRole="imp_catalogo_tipo" ToRole="imp_catalogo" />
+        </EntityType>
+        <Association Name="FK_imp_catalogo_imp_catalogo_tipo">
+          <End Type="Model_importacion.imp_catalogo_tipo" Role="imp_catalogo_tipo" Multiplicity="1" />
+          <End Type="Model_importacion.imp_catalogo" Role="imp_catalogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_catalogo_tipo">
+              <PropertyRef Name="IdCatalogo_tipo" />
+            </Principal>
+            <Dependent Role="imp_catalogo">
+              <PropertyRef Name="IdCatalogo_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -136,6 +208,25 @@
                 <ScalarProperty Name="IdTipoCbte_liquidacion_anu" ColumnName="IdTipoCbte_liquidacion_anu" />
                 <ScalarProperty Name="IdTipoCbte_liquidacion" ColumnName="IdTipoCbte_liquidacion" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imp_catalogo">
+            <EntityTypeMapping TypeName="Model_importacion.imp_catalogo">
+              <MappingFragment StoreEntitySet="imp_catalogo">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
+                <ScalarProperty Name="IdCatalogo_tipo" ColumnName="IdCatalogo_tipo" />
+                <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imp_catalogo_tipo">
+            <EntityTypeMapping TypeName="Model_importacion.imp_catalogo_tipo">
+              <MappingFragment StoreEntitySet="imp_catalogo_tipo">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="ct_descripcion" ColumnName="ct_descripcion" />
+                <ScalarProperty Name="IdCatalogo_tipo" ColumnName="IdCatalogo_tipo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
