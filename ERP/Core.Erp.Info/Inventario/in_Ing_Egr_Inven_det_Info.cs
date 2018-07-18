@@ -40,7 +40,6 @@ namespace Core.Erp.Info.Inventario
         public Nullable<int> secuencia_inv { get; set; }
         public string Motivo_Aprobacion { get; set; }
         public double dm_cantidad_sinConversion { get; set; }
-        [Required(ErrorMessage = ("El campo unidad de medida es obligatorio"))]
         public string IdUnidadMedida_sinConversion { get; set; }
         public Nullable<double> mv_costo_sinConversion { get; set; }
         public Nullable<int> IdMotivo_Inv { get; set; }

@@ -106,8 +106,8 @@ namespace Core.Erp.Bus.Contabilidad
                                pagoExterior item_pago = new pagoExterior();
                                item_pago.pagoLocExt = (comp.pagoLocExt == "LOC") ? pagoLocExtType.Item01 : pagoLocExtType.Item02;
                                item_pago.paisEfecPago = (item_pago.pagoLocExt == pagoLocExtType.Item01) ? "NA" : (comp.pagoLocExt != null || comp.pagoLocExt != "") ? comp.pagoLocExt : "NA";
-                               item_pago.aplicConvDobTrib = (comp.aplicConvDobTrib == "S") ? aplicConvDobTribType.SI : (comp.aplicConvDobTrib == "N") ? aplicConvDobTribType.NO : aplicConvDobTribType.NA;
-                               item_pago.pagExtSujRetNorLeg = (comp.pagExtSujRetNorLeg == "S") ? aplicConvDobTribType.SI : (comp.pagExtSujRetNorLeg == "N") ? aplicConvDobTribType.NO : aplicConvDobTribType.NA;
+                               item_pago.aplicConvDobTrib = aplicConvDobTribType.NA;
+                               item_pago.pagExtSujRetNorLeg =  aplicConvDobTribType.NA;
                                comp_det.pagoExterior = item_pago;
                                 if(Convert.ToDecimal(comp.baseImponible) + Convert.ToDecimal(comp.baseImpGrav)>1000)
                                {
