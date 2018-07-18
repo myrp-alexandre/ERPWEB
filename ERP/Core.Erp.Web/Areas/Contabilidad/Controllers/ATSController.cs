@@ -104,7 +104,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
             return Json("", JsonRequestBehavior.AllowGet);
         }
-        public FileResult dolowadATS(int IdPeriodo)
+        public JsonResult dolowadATS(int IdPeriodo)
         {
             string nombre_file = IdPeriodo.ToString();
             if (IdPeriodo.ToString().Length == 6)
@@ -133,15 +133,15 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
                        xml=  sr.ReadToEnd();
                     }
 
-            if (System.IO.File.Exists(@"C: \Users\jerry\Desktop\ats\" + nombre_file + ".xml"))
-                System.IO.File.Delete(@"C: \Users\jerry\Desktop\ats\" + nombre_file + ".xml");
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C: \Users\jerry\Desktop\ats\"+ nombre_file + ".xml", true))
+            if (System.IO.File.Exists(@"C: \Users\jerry\Desktop\" + nombre_file + ".xml"))
+                System.IO.File.Delete(@"C: \Users\jerry\Desktop\" + nombre_file + ".xml");
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C: \Users\jerry\Desktop\"+ nombre_file + ".xml", true))
             {
                 file.WriteLine(xml);
                 file.Close();
-                byte[] fileBytes = System.IO.File.ReadAllBytes(@"C: \Users\jerry\Desktop\ats\" + nombre_file + ".xml");
+                byte[] fileBytes = System.IO.File.ReadAllBytes(@"C: \Users\jerry\Desktop\" + nombre_file + ".xml");
                 string fileName = IdPeriodo + ".xml";
-                return File(fileName, "content-disposition");
+                return Json("", JsonRequestBehavior.AllowGet);
             }
 
         }
