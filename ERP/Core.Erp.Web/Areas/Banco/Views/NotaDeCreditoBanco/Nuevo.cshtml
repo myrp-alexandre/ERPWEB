@@ -38,13 +38,13 @@
             bProcessing: true,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                GridView_comprobante_detalle.PerformCallback();
+            success: function (data) {                
                 $("#cb_Valor").val(data);
             },
             error: function (error) {
             }
         });
+        GridView_comprobante_detalle.PerformCallback();
     }
 
     function GetValorTotal() {
@@ -148,7 +148,7 @@
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_diario">
-                @Html.Action("GridViewPartial_comprobante_detalle", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
+                @Html.Action("GridViewPartial_comprobante_detalle_Credito")
             </div>
         </div>
     </div>

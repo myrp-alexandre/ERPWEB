@@ -138,7 +138,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             var bco = bus_banco_cuenta.get_info(IdEmpresa, IdBanco);
             var periodo = bus_periodo.get_info(IdEmpresa, IdPeriodo);
             if (bco != null && periodo != null)
-                resultado = bus_plancta.get_saldo_anterior(IdEmpresa, bco.IdCtaCble, periodo.pe_FechaFin);
+                resultado = bus_plancta.get_saldo_anterior(IdEmpresa, bco.IdCtaCble, periodo.pe_FechaIni);
 
             return Json(Math.Round(resultado, 2, MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
         }

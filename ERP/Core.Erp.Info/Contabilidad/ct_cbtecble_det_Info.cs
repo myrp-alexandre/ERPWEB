@@ -22,6 +22,7 @@ namespace Core.Erp.Info.Contabilidad
         public Nullable<int> IdPunto_cargo { get; set; }
         public Nullable<int> IdPunto_cargo_grupo { get; set; }
         public bool dc_para_conciliar { get; set; }
+        public bool? dc_para_conciliar_null { get; set; }
 
         //campos que no existen en la tabla
         [Required(ErrorMessage = "El campo cuenta valor debe es obligatorio")]

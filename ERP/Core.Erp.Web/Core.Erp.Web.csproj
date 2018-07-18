@@ -8705,7 +8705,11 @@
     <Content Include="Areas\Importacion\Views\GastosImportacion\Anular.cshtml" />
     <Content Include="Areas\Importacion\Views\GastosImportacion\_CmbCuenta_Gasto.cshtml" />
     <Content Include="Areas\Contabilidad\Views\ATS\_GridViewPartial_exportaciones.cshtml" />
+<<<<<<< HEAD
     <Content Include="Areas\Contabilidad\Views\ATS\_GridViewPartial_anulados.cshtml" />
+=======
+    <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_GridViewPartial_comprobante_detalle_Credito.cshtml" />
+>>>>>>> 7496abaf0986c3ed74f725db20ba68c31baaa10b
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />

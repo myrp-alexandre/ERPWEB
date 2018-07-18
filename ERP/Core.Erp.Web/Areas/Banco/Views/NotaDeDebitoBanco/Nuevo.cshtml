@@ -108,7 +108,7 @@
             }
         });
         GridView_comprobante_detalle.PerformCallback();
-        GridView_cheque_op.PerformCallback();    
+        GridView_DebitoBanco_op.PerformCallback();    
     }
 </script>
 
@@ -234,7 +234,7 @@
             </div>
 
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_diario">
-                @Html.Action("GridViewPartial_comprobante_detalle", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
+                @Html.Action("GridViewPartial_comprobante_detalle_Credito", new { Area = "Banco", Controller = "NotaDeCreditoBanco" })
             </div>
         </div>
     </div>
