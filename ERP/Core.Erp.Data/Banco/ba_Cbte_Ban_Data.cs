@@ -13,7 +13,7 @@ namespace Core.Erp.Data.Banco
     {
         ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
         cp_orden_pago_cancelaciones_Data odata_can = new cp_orden_pago_cancelaciones_Data();
-        public List<ba_Cbte_Ban_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin, int IdSucursal, string CodCbte)
+        public List<ba_Cbte_Ban_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin, int IdSucursal, string CodCbte, bool mostrar_anulados)
         {
             try
             {
@@ -23,6 +23,7 @@ namespace Core.Erp.Data.Banco
 
                 using (Entities_banco Context = new Entities_banco())
                 {
+                    if(mostrar_anulados)
                     Lista = (from q in Context.vwba_Cbte_Ban
                              where q.IdEmpresa == IdEmpresa
                              && Fecha_ini <= q.cb_Fecha
@@ -47,6 +48,32 @@ namespace Core.Erp.Data.Banco
                                  cb_Valor = q.cb_Valor,
                                  Imprimir_Solo_el_cheque = q.Imprimir_Solo_el_cheque
                              }).ToList();
+                    else
+                        Lista = (from q in Context.vwba_Cbte_Ban
+                                 where q.IdEmpresa == IdEmpresa
+                                 && Fecha_ini <= q.cb_Fecha
+                                 && q.cb_Fecha <= Fecha_fin
+                                 && q.CodTipoCbteBan == CodCbte
+                                 && q.IdSucursal == IdSucursal
+                                 && q.Estado == "A"
+                                 orderby q.IdCbteCble descending
+                                 select new ba_Cbte_Ban_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdTipocbte = q.IdTipocbte,
+                                     IdCbteCble = q.IdCbteCble,
+                                     cb_Fecha = q.cb_Fecha,
+                                     cb_Observacion = q.cb_Observacion,
+                                     Estado = q.Estado,
+                                     CodTipoCbteBan = q.CodTipoCbteBan,
+                                     ba_descripcion = q.ba_descripcion,
+                                     pe_nombreCompleto = q.pe_nombreCompleto,
+                                     Su_Descripcion = q.Su_Descripcion,
+                                     cb_Cheque = q.cb_Cheque,
+                                     cb_giradoA = q.cb_giradoA,
+                                     cb_Valor = q.cb_Valor,
+                                     Imprimir_Solo_el_cheque = q.Imprimir_Solo_el_cheque
+                                 }).ToList();
                 }
 
                 return Lista;
