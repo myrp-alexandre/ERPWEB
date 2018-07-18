@@ -16,7 +16,7 @@ namespace Core.Erp.Data.Importacion
                 imp_parametro_Info info = new imp_parametro_Info();
                 using (Entities_importacion Context = new Entities_importacion())
                 {
-                    imp_parametro Entity
+                   
                 }
                 return info;
             }
