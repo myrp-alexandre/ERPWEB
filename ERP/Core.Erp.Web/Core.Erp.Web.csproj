@@ -310,6 +310,7 @@
     <Compile Include="Areas\General\Controllers\TransportistaController.cs" />
     <Compile Include="Areas\General\GeneralAreaRegistration.cs" />
     <Compile Include="Areas\Importacion\Controllers\GastosImportacionController.cs" />
+    <Compile Include="Areas\Importacion\Controllers\ParametrosImportacionController.cs" />
     <Compile Include="Areas\Importacion\ImportacionAreaRegistration.cs" />
     <Compile Include="Areas\Inventario\Controllers\CatalogoInventarioController.cs" />
     <Compile Include="Areas\Inventario\Controllers\CatalogoTipoInventarioController.cs" />
@@ -8707,6 +8708,7 @@
     <Content Include="Areas\Contabilidad\Views\ATS\_GridViewPartial_exportaciones.cshtml" />
     <Content Include="Areas\Contabilidad\Views\ATS\_GridViewPartial_anulados.cshtml" />
     <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_GridViewPartial_comprobante_detalle_Credito.cshtml" />
+    <Content Include="Areas\Importacion\Views\ParametrosImportacion\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\WEBRAPI.pubxml" />
