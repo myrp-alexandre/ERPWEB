@@ -3,10 +3,9 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridViewPartial_cat_tipo_imp";
-        settings.CallbackRouteValues = new { Controller = "CatalogoTipoImportacion", Action = "GridViewPartial_cat_tipo_imp" };
-        settings.KeyFieldName = "IdCatalogo_tipo";
-        settings.Width = Unit.Percentage(100);
+        settings.Name = "GridView_catalogo_imp";
+        settings.CallbackRouteValues = new { Controller = "CatalogoImportacion", Action = "GridViewPartial_catalogo_imp" , IdCatalogo_tipo = ViewBag.IdCatalogo_tipo };
+        settings.KeyFieldName = "IdCatalogo";
 
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
@@ -48,7 +47,7 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToBoolean(e.GetValue("estado")) == false)
+            if (Convert.ToBoolean(e.GetValue("estado")) == false )
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
@@ -61,41 +60,27 @@
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdCatalogo_tipo = DataBinder.Eval(tc.DataItem, "IdCatalogo_tipo") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdCatalogo_tipo = DataBinder.Eval(tc.DataItem, "IdCatalogo_tipo") },
+                Html.ActionLink("Modificar", "Modificar", new { IdCatalogo = DataBinder.Eval(tc.DataItem, "IdCatalogo"), IdCatalogo_tipo = ViewBag.IdCatalogo_tipo }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdCatalogo = DataBinder.Eval(tc.DataItem, "IdCatalogo"), IdCatalogo_tipo = ViewBag.IdCatalogo_tipo },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
-
             });
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdCatalogo_tipo = ViewBag.IdCatalogo_tipo }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-
+        
+        settings.Columns.Add("IdCatalogo", "ID").Width = Unit.Percentage(10);
         settings.Columns.Add("IdCatalogo_tipo", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("ct_descripcion", "Descripción").Width = Unit.Percentage(80);
+        settings.Columns.Add("ca_descripcion", "Descripción").Width = Unit.Percentage(70);
         settings.Columns.Add("estado", "Estado").Width = Unit.Percentage(10);
-        settings.Columns.Add(column =>
-        {
-            column.Caption = "Catálogo";
-            column.Width = Unit.Pixel(100);
-            column.SetDataItemTemplateContent(container =>
-            {
-                Html.DevExpress().HyperLink(hyperlink =>
-                {
-                    var keyValue = DataBinder.Eval(container.DataItem, "IdCatalogo_tipo");
-                    hyperlink.Properties.Text = "Catálogos";
-                    hyperlink.NavigateUrl = Url.Action("Index", "CatalogoImportacion", new { IdCatalogo_tipo = keyValue });
-                }).Render();
-            });
-        });
     });
 }
 @grid.Bind(Model).GetHtml()

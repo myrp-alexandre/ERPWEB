@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.Importacion
     public class imp_catalogo_tipo_Bus
     {
         imp_catalogo_tipo_Data odata = new imp_catalogo_tipo_Data();
-        public List<imp_catalogo_tipo_Info> get_list(int IdCatalogo_tipo)
+        public List<imp_catalogo_tipo_Info> get_list()
         {
             try
             {
-                return odata.get_list(IdCatalogo_tipo);
+                return odata.get_list();
             }
             catch (Exception)
             {

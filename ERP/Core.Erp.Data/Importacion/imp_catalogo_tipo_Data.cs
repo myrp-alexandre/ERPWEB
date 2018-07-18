@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Importacion
 {
     public class imp_catalogo_tipo_Data
     {
-        public List<imp_catalogo_tipo_Info> get_list(int IdCatalogo_tipo)
+        public List<imp_catalogo_tipo_Info> get_list()
         {
             try
             {
@@ -17,7 +17,6 @@ namespace Core.Erp.Data.Importacion
                 using (Entities_importacion Context = new Entities_importacion())
                 {
                     Lista = (from q in Context.imp_catalogo_tipo
-                             where q.IdCatalogo_tipo == IdCatalogo_tipo
                              select new imp_catalogo_tipo_Info
                              {
                                  IdCatalogo_tipo = q.IdCatalogo_tipo,
@@ -91,7 +90,7 @@ namespace Core.Erp.Data.Importacion
                     {
                         IdCatalogo_tipo = info.IdCatalogo_tipo = get_id(),
                         ct_descripcion = info.ct_descripcion,
-                        estado = info.estado == true
+                        estado = info.estado = true
                     };
                     Context.imp_catalogo_tipo.Add(Entity);
                     Context.SaveChanges();
@@ -137,7 +136,7 @@ namespace Core.Erp.Data.Importacion
                     imp_catalogo_tipo Entity = Context.imp_catalogo_tipo.FirstOrDefault(q => q.IdCatalogo_tipo == info.IdCatalogo_tipo);
                     if (Entity == null) return false;
 
-                    Entity.estado = info.estado == false;
+                    Entity.estado = info.estado;
                     Context.SaveChanges();
 
                 }
