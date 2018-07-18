@@ -51,6 +51,7 @@ namespace Core.Erp.Data
         public Nullable<decimal> IdPersona { get; set; }
         public Nullable<decimal> IdEntidad { get; set; }
         public string IdTipo_Persona { get; set; }
+        public Nullable<bool> Imprimir_Solo_el_cheque { get; set; }
     
         public virtual ba_Banco_Cuenta ba_Banco_Cuenta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

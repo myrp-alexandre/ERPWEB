@@ -114,6 +114,7 @@
           <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" />
           <Property Name="IdEntidad" Type="numeric" Precision="18" Scale="0" />
           <Property Name="IdTipo_Persona" Type="varchar" MaxLength="20" />
+          <Property Name="Imprimir_Solo_el_cheque" Type="bit" />
         </EntityType>
         <EntityType Name="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo">
           <Key>
@@ -1039,6 +1040,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwba_Talonario_che
           <NavigationProperty Name="ba_Catalogo" Relationship="Model_banco.FK_ba_Cbte_Ban_ba_Catalogo" FromRole="ba_Cbte_Ban" ToRole="ba_Catalogo" />
           <NavigationProperty Name="ba_Catalogo1" Relationship="Model_banco.FK_ba_Cbte_Ban_ba_Catalogo1" FromRole="ba_Cbte_Ban" ToRole="ba_Catalogo" />
           <NavigationProperty Name="ba_tipo_nota" Relationship="Model_banco.FK_ba_Cbte_Ban_ba_tipo_nota" FromRole="ba_Cbte_Ban" ToRole="ba_tipo_nota" />
+          <Property Name="Imprimir_Solo_el_cheque" Type="Boolean" />
         </EntityType>
         <EntityType Name="vwba_Talonario_cheques_x_banco_ID">
           <Key>
@@ -1549,6 +1551,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwba_Talonario_che
           <EntitySetMapping Name="ba_Cbte_Ban">
             <EntityTypeMapping TypeName="Model_banco.ba_Cbte_Ban">
               <MappingFragment StoreEntitySet="ba_Cbte_Ban">
+                <ScalarProperty Name="Imprimir_Solo_el_cheque" ColumnName="Imprimir_Solo_el_cheque" />
                 <ScalarProperty Name="IdTipo_Persona" ColumnName="IdTipo_Persona" />
                 <ScalarProperty Name="IdEntidad" ColumnName="IdEntidad" />
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
