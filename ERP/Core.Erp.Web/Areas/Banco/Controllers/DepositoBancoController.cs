@@ -193,6 +193,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 return RedirectToAction("Index");
             model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
             List_ct.set_list(model.lst_det_ct);
+            model.lst_det_ing = bus_det.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
             List_ing.set_list(model.lst_det_ing);
             cargar_combos();
             return View(model);
@@ -262,21 +263,21 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             int secuencia = 1;
             foreach (var item in lst_op)
             {
-                //Debe
+                //Haber
                 lst_ct.Add(new ct_cbtecble_det_Info
                 {
                     IdCtaCble = item.IdCtaCble,
                     secuencia = secuencia++,
-                    dc_Valor = Math.Round(item.cr_Valor, 2, MidpointRounding.AwayFromZero),
-                    dc_Valor_debe = Math.Round(item.cr_Valor, 2, MidpointRounding.AwayFromZero)
+                    dc_Valor = Math.Round(item.cr_Valor, 2, MidpointRounding.AwayFromZero)*-1,
+                    dc_Valor_haber = Math.Round(item.cr_Valor, 2, MidpointRounding.AwayFromZero)
                 });
             }
             lst_ct.Add(new ct_cbtecble_det_Info
             {
                 IdCtaCble = bco.IdCtaCble,
                 secuencia = secuencia++,
-                dc_Valor = Math.Round(lst_op.Sum(q => q.cr_Valor), 2, MidpointRounding.AwayFromZero) * -1,
-                dc_Valor_haber = Math.Round(lst_op.Sum(q => q.cr_Valor), 2, MidpointRounding.AwayFromZero),
+                dc_Valor = Math.Round(lst_op.Sum(q => q.cr_Valor), 2, MidpointRounding.AwayFromZero),
+                dc_Valor_debe = Math.Round(lst_op.Sum(q => q.cr_Valor), 2, MidpointRounding.AwayFromZero),
                 dc_para_conciliar = true
             });
             List_ct.set_list(lst_ct);

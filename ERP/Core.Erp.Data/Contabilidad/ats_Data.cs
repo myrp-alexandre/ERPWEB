@@ -123,37 +123,57 @@ namespace Core.Erp.Data.Contabilidad
                                           baseImpAir=r.baseImpAir,
                                            porcentajeAir=r.porcentajeAir,
                                            valRetAir=r.valRetAir,
-                                           re_tipo_Ret=r.re_tipo_Ret
-                                       }).ToList();
+                                           re_tipo_Ret=r.re_tipo_Ret,
+                                           denopr=r.denopr
+                                            }).ToList();
 
                     info.lst_exportaciones = (from e in Context.ATS_exportaciones
-                                            where e.IdEmpresa == IdEmpresa
-                                            && e.IdPeriodo == IdPeriodo
-                                            // && r.Cedula_ruc== "0909594202001"
-                                            select new exportaciones_Info
-                                            {
-                                                IdEmpresa = e.IdEmpresa,
-                                                IdPeriodo = e.IdPeriodo,
-                                                Secuencia = e.Secuencia,
-                                                tpIdClienteEx = e.tpIdClienteEx,
-                                                idClienteEx = e.idClienteEx,
-                                                parteRel = e.parteRel,
-                                                tipoRegi = e.tipoRegi,
-                                                paisEfecPagoGen = e.paisEfecPagoGen,
-                                                paisEfecExp = e.paisEfecExp,
-                                                exportacionDe = e.exportacionDe,
-                                                tipoComprobante = e.tipoComprobante,
-                                                fechaEmbarque = e.fechaEmbarque,
-                                                valorFOB = e.valorFOB,
-                                                valorFOBComprobante = e.valorFOBComprobante,
-                                                establecimiento = e.establecimiento,
-                                                puntoEmision = e.puntoEmision,
-                                                secuencial = e.secuencial,
-                                                autorizacion=e.autorizacion,
-                                                fechaEmision=e.fechaEmision
-
+                                              where e.IdEmpresa == IdEmpresa
+                                              && e.IdPeriodo == IdPeriodo
+                                              // && r.Cedula_ruc== "0909594202001"
+                                              select new exportaciones_Info
+                                              {
+                                                  IdEmpresa = e.IdEmpresa,
+                                                  IdPeriodo = e.IdPeriodo,
+                                                  Secuencia = e.Secuencia,
+                                                  tpIdClienteEx = e.tpIdClienteEx,
+                                                  idClienteEx = e.idClienteEx,
+                                                  parteRel = e.parteRel,
+                                                  tipoRegi = e.tipoRegi,
+                                                  paisEfecPagoGen = e.paisEfecPagoGen,
+                                                  paisEfecExp = e.paisEfecExp,
+                                                  exportacionDe = e.exportacionDe,
+                                                  tipoComprobante = e.tipoComprobante,
+                                                  fechaEmbarque = e.fechaEmbarque,
+                                                  valorFOB = e.valorFOB,
+                                                  valorFOBComprobante = e.valorFOBComprobante,
+                                                  establecimiento = e.establecimiento,
+                                                  puntoEmision = e.puntoEmision,
+                                                  secuencial = e.secuencial,
+                                                  autorizacion = e.autorizacion,
+                                                  fechaEmision = e.fechaEmision,
+                                                  denoExpCli = e.denoExpCli
+                                                
 
                                             }).ToList();
+
+                    info.lst_anulados = (from a in Context.ATS_comprobantes_anulados
+                                              where a.IdEmpresa == IdEmpresa
+                                              && a.IdPeriodo == IdPeriodo
+                                              // && r.Cedula_ruc== "0909594202001"
+                                              select new comprobantesAnulados_info
+                                              {
+                                                  IdEmpresa = a.IdEmpresa,
+                                                  IdPeriodo = a.IdPeriodo,
+                                                  Secuencia = a.Secuencia,
+                                                  tipoComprobante=a.tipoComprobante,
+                                                  Establecimiento=a.Establecimiento,
+                                                  puntoEmision=a.puntoEmision,
+                                                  secuencialInicio=a.secuencialInicio,
+                                                  secuencialFin=a.secuencialFin,
+                                                  Autorización=a.Autorización
+                                                  
+                                              }).ToList();
 
                 }
 

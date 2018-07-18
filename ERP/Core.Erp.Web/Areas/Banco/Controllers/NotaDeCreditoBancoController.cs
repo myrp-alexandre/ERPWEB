@@ -120,7 +120,9 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 CodTipoCbteBan = cl_enumeradores.eTipoCbteBancario.NCBA.ToString(),
                 cb_Fecha = DateTime.Now.Date,
-                lst_det_ct = new List<ct_cbtecble_det_Info>()
+                lst_det_ct = new List<ct_cbtecble_det_Info>(),
+                IdBanco = 1,
+                IdTipoNota = 2
             };
             SessionFixed.TipoPersona = model.IdTipo_Persona;
             List_ct.set_list(model.lst_det_ct);
@@ -259,7 +261,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         #region Detalle del diario
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_comprobante_detalle_Credito(int IdTipoCbte = 0, decimal IdCbteCble = 0)
+        public ActionResult GridViewPartial_comprobante_detalle_Credito()
         {
             ct_cbtecble_Info model = new ct_cbtecble_Info();
             model.lst_ct_cbtecble_det = List_ct.get_list();

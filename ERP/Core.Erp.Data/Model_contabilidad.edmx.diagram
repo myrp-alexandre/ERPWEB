@@ -38,8 +38,8 @@
         <EntityTypeShape EntityType="Model_contabilidad.ATS_compras" Width="1.5" PointX="5.375" PointY="11.75" />
         <EntityTypeShape EntityType="Model_contabilidad.ATS_comprobantes_anulados" Width="1.5" PointX="8.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_contabilidad.ATS_ventas" Width="1.5" PointX="13.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Model_contabilidad.ATS_retenciones" Width="1.5" PointX="7.375" PointY="11.75" />
         <EntityTypeShape EntityType="Model_contabilidad.ATS_exportaciones" Width="1.5" PointX="13.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Model_contabilidad.ATS_retenciones" Width="1.5" PointX="7.375" PointY="11.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

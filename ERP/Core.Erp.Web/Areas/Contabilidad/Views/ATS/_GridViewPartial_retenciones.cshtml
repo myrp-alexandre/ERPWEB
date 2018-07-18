@@ -30,7 +30,18 @@
         settings.Columns.Add("co_serie", "Est-ptoemi").Width = Unit.Percentage(10);
         settings.Columns.Add("co_factura", "Factura.").Width = Unit.Percentage(10);
         settings.Columns.Add("secRetencion1", "Retencion.").Width = Unit.Percentage(10);
-
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "fechaEmiRet1";
+            column.Caption = "Fecha";
+            column.Width = Unit.Percentage(15);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "valRetBien10";

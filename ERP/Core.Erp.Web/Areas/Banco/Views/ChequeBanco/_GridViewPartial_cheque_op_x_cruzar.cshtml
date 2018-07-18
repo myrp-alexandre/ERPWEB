@@ -11,6 +11,10 @@
         settings.Settings.ShowFilterRow = true;
         settings.SettingsBehavior.AllowSelectByRowClick = false;
 
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+
         //Configuración checkbox
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowSelectCheckbox = true;

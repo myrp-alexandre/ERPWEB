@@ -45,9 +45,9 @@
                     @Html.ValidationMessageFor(q => q.info_periodo.IdPeriodo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-2">
                 <div class="form-group">
-                    <label for="info_periodo.IdanioFiscal">Periodo*</label>
+                    <label for="info_periodo.IdanioFiscal"></label>
                     <div class="box-footer">
                         <button type="button" class="btn btn-primary" onclick="dolowadATS();">Descargar</button>
                     </div>
@@ -67,7 +67,7 @@
                 <a href="#tb_compras" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Compras</a>
             </li>
             <li>
-                <a href="#tb_importaciones" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Importaciones</a>
+                <a href="#tb_importaciones" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Exportaciones</a>
             </li>
             <li>
                 <a href="#tb_retenciones" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Retenciones</a>
@@ -92,7 +92,9 @@
 
 
             <div role="tabpanel" class="tab-pane" id="tb_importaciones">
-              
+                @Html.Action("GridViewPartial_exportaciones")
+
+
             </div>
 
             <div role="tabpanel" class="tab-pane" id="tb_retenciones">
@@ -100,6 +102,8 @@
 
             </div>
             <div role="tabpanel" class="tab-pane" id="tb_comprobantes_anulados">
+                @Html.Action("GridViewPartial_anulados")
+
 
             </div>
 
@@ -135,7 +139,8 @@
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                   
+                    alert('Archivo creado correctamente en C: \Users\jerry\Desktop')
+
                 },
                 error: function (error) {
                 }

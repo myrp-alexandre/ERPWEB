@@ -12,6 +12,10 @@
         settings.SettingsBehavior.AllowSelectByRowClick = false;
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ChequeBanco", Action = "EditingDeleteFactura", Area = "Banco" };
 
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+
         //Configuración click derecho
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;

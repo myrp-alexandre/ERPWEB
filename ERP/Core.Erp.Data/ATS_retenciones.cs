@@ -41,5 +41,6 @@ namespace Core.Erp.Data
         public string secModificado { get; set; }
         public string autModificado { get; set; }
         public string re_tipo_Ret { get; set; }
+        public string denopr { get; set; }
     }
 }

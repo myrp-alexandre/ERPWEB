@@ -153,6 +153,7 @@ namespace Core.Erp.Data.Banco
                         secuencia = secuencia++,
                         IdCtaCble = item.IdCtaCble,
                         dc_Valor = Math.Round(item.dc_Valor, 2, MidpointRounding.AwayFromZero),
+                        dc_para_conciliar = item.dc_para_conciliar
                     });
                 }
                 #endregion
@@ -343,6 +344,7 @@ namespace Core.Erp.Data.Banco
                         secuencia = secuencia++,
                         IdCtaCble = item.IdCtaCble,
                         dc_Valor = Math.Round(item.dc_Valor, 2, MidpointRounding.AwayFromZero),
+                        dc_para_conciliar = item.dc_para_conciliar
                     });
                 }
                 #endregion

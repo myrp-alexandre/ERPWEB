@@ -1,8 +1,8 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridViewPartial_compras";
-        settings.CallbackRouteValues = new { Controller = "ATS", Action = "GridViewPartial_compras", Area = "Contabilidad" };
+        settings.Name = "GridViewPartial_exportaciones";
+        settings.CallbackRouteValues = new { Controller = "ATS", Action = "GridViewPartial_exportaciones", Area = "Contabilidad" };
         settings.KeyFieldName = "secuencia";
         settings.Width = Unit.Percentage(100);
 
@@ -26,47 +26,36 @@
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
 
 
-        settings.Columns.Add("denopr", "Proveedor").Width = Unit.Percentage(40);
+        settings.Columns.Add("denoExpCli", "Cliente").Width = Unit.Percentage(40);
         settings.Columns.Add("establecimiento", "Est.").Width = Unit.Percentage(10);
         settings.Columns.Add("puntoEmision", "PtoEm.").Width = Unit.Percentage(10);
         settings.Columns.Add("secuencial", "Factura").Width = Unit.Percentage(15);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "fechaEmision";
+            column.Caption = "Fecha";
+            column.Width = Unit.Percentage(15);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "valorFOB";
+            column.Caption = "Valor FOB";
+            column.Width = Unit.Percentage(10);
+            column.EditorProperties().SpinEdit(sp =>
+            {
+                sp.MinValue = 0;
+                sp.MaxValue = 999999999;
+            });
+        });
 
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "baseImponible";
-            column.Caption = "Base 0%";
-            column.Width = Unit.Percentage(10);
-            column.EditorProperties().SpinEdit(sp =>
-            {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
-            });
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "baseImpGrav";
-            column.Caption = "Base iva";
-            column.Width = Unit.Percentage(10);
-            column.EditorProperties().SpinEdit(sp =>
-            {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
-            });
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "montoIva";
-            column.Caption = "Iva";
-            column.Width = Unit.Percentage(10);
-            column.EditorProperties().SpinEdit(sp =>
-            {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
-            });
-        });
-        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "baseImponible");
-        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "baseImpGrav");
-        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "montoIva");
+
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "valorFOB");
     });
 
 }

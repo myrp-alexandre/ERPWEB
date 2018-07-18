@@ -3,16 +3,14 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_comprobante_detalle";
-        settings.CallbackRouteValues = new { Controller = "ComprobanteContable", Action = "GridViewPartial_comprobante_detalle", Area = "Contabilidad", IdTipoCbte = Model == null ? 0 : Model.IdTipoCbte , IdCbteCble = Model == null ? 0 : Model.IdCbteCble };
+        settings.CallbackRouteValues = new { Controller = "NotaDeCreditoBanco", Action = "GridViewPartial_comprobante_detalle_Credito", Area = "Banco"};
         settings.KeyFieldName = "secuencia";
         settings.Width = Unit.Percentage(100);
-
-
-
+        
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "ComprobanteContable", Action = "EditingAddNew", Area = "Contabilidad" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ComprobanteContable", Action = "EditingUpdate", Area = "Contabilidad" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ComprobanteContable", Action = "EditingDelete", Area = "Contabilidad" };
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "NotaDeCreditoBanco", Action = "EditingAddNew", Area = "Banco" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "NotaDeCreditoBanco", Action = "EditingUpdate", Area = "Banco" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "NotaDeCreditoBanco", Action = "EditingDelete", Area = "Banco" };
 
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = true;
@@ -87,6 +85,7 @@
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_Valor_debe").DisplayFormat = "Debe {0:c2}";
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_Valor_haber").DisplayFormat = "Haber {0:c2}";
         settings.Settings.ShowFooter = true;
+        settings.ClientSideEvents.Init = "function(s,e){armar_diario();}";
     });
 
 }

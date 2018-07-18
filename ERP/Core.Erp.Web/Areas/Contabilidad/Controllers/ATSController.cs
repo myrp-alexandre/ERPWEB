@@ -11,6 +11,7 @@ using Core.Erp.Info.Contabilidad.ATS;
 using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
+using System.Text;
 
 namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 {
@@ -62,8 +63,22 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
             return PartialView("_GridViewPartial_retenciones", model);
         }
+        public ActionResult GridViewPartial_exportaciones()
+        {
+            List<exportaciones_Info> model = new List<exportaciones_Info>();
+            model = Session["lst_exportaciones"] as List<exportaciones_Info>;
 
-      
+            return PartialView("_GridViewPartial_exportaciones", model);
+        }
+        public ActionResult GridViewPartial_anulados()
+        {
+            List<comprobantesAnulados_info> model = new List<comprobantesAnulados_info>();
+            model = Session["lst_anulados"] as List<comprobantesAnulados_info>;
+
+            return PartialView("_GridViewPartial_anulados", model);
+        }
+
+
         private void cargar_combos(string TipoPersona = "")
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -83,36 +98,50 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             Session["lst_compras"] = model.lst_compras;
             Session["lst_ventas"] = model.lst_ventas;
             Session["lst_retenciones"] = model.lst_retenciones;
+            Session["lst_exportaciones"] = model.lst_exportaciones;
+            Session["lst_anulados"] = model.lst_anulados;
 
 
             return Json("", JsonRequestBehavior.AllowGet);
         }
         public FileResult dolowadATS(int IdPeriodo)
         {
+            string nombre_file = IdPeriodo.ToString();
+            if (IdPeriodo.ToString().Length == 6)
+            {
+              nombre_file = "AT-" + IdPeriodo.ToString().Substring(4, 2) + IdPeriodo.ToString().Substring(0, 4);
+            }
+            string xml = "";
+
             iva ats = new iva();
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             int IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
             ats = bus_ats.get_ats(IdEmpresa, IdPeriodo, IdSucursal);
 
-            XmlSerializer xsSubmit = new XmlSerializer(typeof(iva));
-            var xml = "";
-            using (var sww = new StringWriter())
-            {
-                using (XmlWriter writer = XmlWriter.Create(sww))
-                {
-                    xsSubmit.Serialize(writer, ats);
-                    xml = sww.ToString();
-                }
-            }
+           
+            var ms = new MemoryStream();
+            var xw = XmlWriter.Create(ms);
+           
+                    var serializer = new XmlSerializer(ats.GetType());
+                    XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                    ns.Add("", "");
+                    serializer.Serialize(xw, ats,ns);
+                    xw.Flush();
+                    ms.Seek(0, SeekOrigin.Begin);
+                    using (var sr = new StreamReader(ms, Encoding.UTF8))
+                    {
+                       xml=  sr.ReadToEnd();
+                    }
 
-
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C: \Users\jerry\Desktop\ats\"+IdPeriodo+".xml", true))
+            if (System.IO.File.Exists(@"C: \Users\jerry\Desktop\ats\" + nombre_file + ".xml"))
+                System.IO.File.Delete(@"C: \Users\jerry\Desktop\ats\" + nombre_file + ".xml");
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C: \Users\jerry\Desktop\ats\"+ nombre_file + ".xml", true))
             {
                 file.WriteLine(xml);
                 file.Close();
-                byte[] fileBytes = System.IO.File.ReadAllBytes(@"C: \Users\jerry\Desktop\ats\" + IdPeriodo + ".xml");
+                byte[] fileBytes = System.IO.File.ReadAllBytes(@"C: \Users\jerry\Desktop\ats\" + nombre_file + ".xml");
                 string fileName = IdPeriodo + ".xml";
-                return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+                return File(fileName, "content-disposition");
             }
 
         }
