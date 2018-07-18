@@ -32,5 +32,6 @@ namespace Core.Erp.Data
         public string pe_nombreCompleto { get; set; }
         public Nullable<int> IdSucursal { get; set; }
         public string Su_Descripcion { get; set; }
+        public Nullable<bool> Imprimir_Solo_el_cheque { get; set; }
     }
 }

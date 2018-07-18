@@ -75,7 +75,22 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(20);
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Imprimir";
+            column.SetDataItemTemplateContent(c =>
+            {
+                if (Convert.ToString(DataBinder.Eval(c.DataItem, "Estado")) == "A")
+                {
+                    if (Convert.ToBoolean(DataBinder.Eval(c.DataItem, "Imprimir_Solo_el_cheque")) == true)
+                    {
+                        ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("BAN_005", "BancoReportes", new { Area = "Reportes", IdTipocbte = DataBinder.Eval(c.DataItem, "IdTipocbte"), IdCbteCble = DataBinder.Eval(c.DataItem, "IdCbteCble") }, Request.Url.Scheme) + "');\"></span>");
+                    }else
+                        ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("BAN_006", "BancoReportes", new { Area = "Reportes", IdTipocbte = DataBinder.Eval(c.DataItem, "IdTipocbte"), IdCbteCble = DataBinder.Eval(c.DataItem, "IdCbteCble") }, Request.Url.Scheme) + "');\"></span>");
+                }
+            });
+            column.Width = Unit.Percentage(5);
+        });
         settings.Columns.Add("IdCbteCble", "ID").Width = Unit.Percentage(5);
         settings.Columns.Add("cb_Cheque", "# Cheque").Width = Unit.Percentage(7);
         settings.Columns.Add("cb_giradoA", "Beneficiario").Width = Unit.Percentage(30);

@@ -32,6 +32,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         ct_cbtecble_det_List List_ct = new ct_cbtecble_det_List();
         ba_Talonario_cheques_x_banco_Bus bus_talonario = new ba_Talonario_cheques_x_banco_Bus();
         ct_cbtecble_det_Bus bus_det_ct = new ct_cbtecble_det_Bus();
+        cl_funciones funciones = new cl_funciones();
         string mensaje = string.Empty;
         #endregion
 
@@ -166,6 +167,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             i_validar.IdPeriodo = Convert.ToInt32(i_validar.cb_Fecha.ToString("yyyyMM"));
             i_validar.IdUsuario = SessionFixed.IdUsuario;
             i_validar.cb_Valor = Math.Round(i_validar.lst_det_ct.Sum(q => q.dc_Valor_debe), 2, MidpointRounding.AwayFromZero);
+            i_validar.ValorEnLetras = funciones.NumeroALetras(i_validar.cb_Valor.ToString());
             return true;
         }
         public ActionResult Nuevo()
@@ -182,6 +184,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 lst_det_canc_op = new List<cp_orden_pago_cancelaciones_Info>(),
                 lst_det_ct = new List<ct_cbtecble_det_Info>()
             };
+            SessionFixed.TipoPersona = model.IdTipo_Persona;
             List_ct.set_list(model.lst_det_ct);
             List_op.set_list(model.lst_det_canc_op);
             cargar_combos();
