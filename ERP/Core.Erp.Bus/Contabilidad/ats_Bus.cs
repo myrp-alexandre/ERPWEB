@@ -68,100 +68,98 @@ namespace Core.Erp.Bus.Contabilidad
                     info_ats.lst_compras.ForEach(
                     comp =>
                        {
-                           detalleCompras comp_det = new detalleCompras();
+                       detalleCompras comp_det = new detalleCompras();
 
-                           registro = comp.denopr + " " + comp.secuencial;
-                         if(comp.secuencial== "000000301")
+                       registro = comp.denopr + " " + comp.secuencial;
+
+                       comp_det.codSustento = comp.codSustento;
+                       comp_det.tpIdProv = comp.tpIdProv;
+                       comp_det.idProv = comp.idProv;
+                       comp_det.tipoComprobante = comp.tipoComprobante;
+                       comp_det.parteRel = parteRelType.NO;
+                       comp_det.fechaRegistro = comp.fechaRegistro.ToString().Substring(0, 10);
+                       comp_det.establecimiento = comp.establecimiento;
+                       comp_det.puntoEmision = comp.puntoEmision;
+                       comp_det.secuencial = comp.secuencial;
+                       comp_det.fechaEmision = comp.fechaEmision.ToString().Substring(0, 10);
+                       comp_det.autorizacion = comp.autorizacion;
+                       comp_det.baseNoGraIva = comp.baseNoGraIva.ToString("n2");
+                       comp_det.baseImponible = comp.baseImponible.ToString("n2");
+                       comp_det.baseImpGrav = comp.baseImpGrav.ToString("n2");
+                       comp_det.baseImpExe = comp.baseImpExe.ToString("n2");
+                       comp_det.montoIce = comp.montoIce.ToString("n2");
+                       comp_det.montoIva = comp.montoIva.ToString("n2");
+                       comp_det.valRetBien10 = "0.00";
+                       comp_det.valRetServ20 = "0.00";
+                       comp_det.valorRetBienes = "0.00";
+                       comp_det.valRetServ50 = "0.00";
+                       comp_det.valorRetServicios = "0.00";
+                       comp_det.valRetServ100 = "0.00";
+                       comp_det.totbasesImpReemb = "0.00";
+                       comp_det.valRetBien10Specified = true;
+                       comp_det.valRetServ20Specified = true;
+                       comp_det.valRetServ50Specified = true;
+                       comp_det.totbasesImpReembSpecified = true;
+                       pagoExterior item_pago = new pagoExterior();
+                       item_pago.pagoLocExt = (comp.pagoLocExt == "LOC") ? pagoLocExtType.Item01 : pagoLocExtType.Item02;
+                       item_pago.paisEfecPago = (item_pago.pagoLocExt == pagoLocExtType.Item01) ? "NA" : (comp.pagoLocExt != null || comp.pagoLocExt != "") ? comp.pagoLocExt : "NA";
+                       item_pago.aplicConvDobTrib = aplicConvDobTribType.NA;
+                       item_pago.pagExtSujRetNorLeg = aplicConvDobTribType.NA;
+                       comp_det.pagoExterior = item_pago;
+                       if (Convert.ToDecimal(comp.baseImponible) + Convert.ToDecimal(comp.baseImpGrav) > 1000)
+                       {
+                           comp_det.formasDePago = null;
+                           string[] AFormaPago = { "20" };
+                           comp_det.formasDePago = AFormaPago;
+                       }
+                       #region Reembolso
+                       if (comp.codSustento == "41")
+                       {
+                           comp_det.codSustento = "01";
+                           comp_det.reembolsos = new List<reembolso>();
+                           reembolso reem = new reembolso();
+                           reem.tipoComprobanteReemb = "01";
+                           reem.tpIdProvReemb = comp.tpIdProv;
+                           reem.idProvReemb = comp.idProv;
+                           reem.establecimientoReemb = comp.establecimiento;
+                           reem.puntoEmisionReemb = comp.puntoEmision;
+                           reem.secuencialReemb = comp.secuencial;
+                           reem.fechaEmisionReemb = comp.fechaEmision.ToString().Substring(0, 10);
+                           reem.autorizacionReemb = comp.autorizacion;
+                           reem.baseImponibleReemb = comp.baseImponible;
+                           reem.baseImpGravReemb = comp.baseImpGrav;
+                           reem.baseImpExeReemb = comp.baseImpExe;
+                           reem.montoIceRemb = comp.montoIce;
+                           reem.montoIvaRemb = comp.montoIva;
+                           comp_det.totbasesImpReembSpecified = true;
+                           comp_det.totbasesImpReemb = Convert.ToString(Convert.ToDecimal(comp.baseImponible) + Convert.ToDecimal(comp.baseImpGrav));
+                           comp_det.reembolsos.Add(reem);
+
+                       }
+                       #endregion
+
+                       #region retencion por facturas
+                       if (info_ats.lst_retenciones != null)
+                       {
+                           if (info_ats.lst_retenciones.Count() > 0)
                            {
-                               int s = 0;
-                           }
-                               comp_det.codSustento = comp.codSustento;
-                               comp_det.tpIdProv = comp.tpIdProv;
-                               comp_det.idProv = comp.idProv;
-                               comp_det.tipoComprobante = comp.tipoComprobante;
-                               comp_det.parteRel = parteRelType.NO;
-                               comp_det.fechaRegistro = comp.fechaRegistro.ToString().Substring(0, 10);
-                               comp_det.establecimiento = comp.establecimiento;
-                               comp_det.puntoEmision = comp.puntoEmision;
-                               comp_det.secuencial = comp.secuencial;
-                               comp_det.fechaEmision = comp.fechaEmision.ToString().Substring(0, 10);
-                               comp_det.autorizacion = comp.autorizacion;
-                               comp_det.baseNoGraIva = comp.baseNoGraIva.ToString("n2");
-                               comp_det.baseImponible = comp.baseImponible.ToString("n2");
-                               comp_det.baseImpGrav = comp.baseImpGrav.ToString("n2");
-                               comp_det.baseImpExe = comp.baseImpExe.ToString("n2");
-                               comp_det.montoIce = comp.montoIce.ToString("n2");
-                               comp_det.montoIva = comp.montoIva.ToString("n2");
-                               comp_det.valRetBien10 = "0.00";
-                               comp_det.valRetServ20 = "0.00";
-                               comp_det.valorRetBienes = "0.00";
-                               comp_det.valRetServ50 = "0.00";
-                               comp_det.valorRetServicios = "0.00";
-                               comp_det.valRetServ100 = "0.00";
-                               comp_det.totbasesImpReemb = "0.00";
-                               comp_det.valRetBien10Specified = true;
-                               comp_det.valRetServ20Specified = true;
-                               comp_det.valRetServ50Specified = true;
-                               comp_det.totbasesImpReembSpecified = true;
-                               pagoExterior item_pago = new pagoExterior();
-                               item_pago.pagoLocExt = (comp.pagoLocExt == "LOC") ? pagoLocExtType.Item01 : pagoLocExtType.Item02;
-                               item_pago.paisEfecPago = (item_pago.pagoLocExt == pagoLocExtType.Item01) ? "NA" : (comp.pagoLocExt != null || comp.pagoLocExt != "") ? comp.pagoLocExt : "NA";
-                               item_pago.aplicConvDobTrib = aplicConvDobTribType.NA;
-                               item_pago.pagExtSujRetNorLeg =  aplicConvDobTribType.NA;
-                               comp_det.pagoExterior = item_pago;
-                                if(Convert.ToDecimal(comp.baseImponible) + Convert.ToDecimal(comp.baseImpGrav)>1000)
+                               var lstret_x_fac = info_ats.lst_retenciones.Where(r => r.Cedula_ruc == comp.idProv & r.co_serie == comp.establecimiento + "-" + comp.puntoEmision & comp.secuencial == r.co_factura);
+                               if (lstret_x_fac != null)
                                {
-                               comp_det.formasDePago = null;
-                               string[] AFormaPago = { "20" };
-                               comp_det.formasDePago = AFormaPago;
-                               }
-                               #region Reembolso
-                                if(comp.codSustento=="41")
+                                   if (lstret_x_fac.Count() > 0)
                                    {
-                               comp_det.codSustento = "01";
-                               comp_det.reembolsos = new List<reembolso>();
-                               reembolso reem = new reembolso();
-                               reem.tipoComprobanteReemb = "01";
-                               reem.tpIdProvReemb = comp.tpIdProv;
-                               reem.idProvReemb = comp.idProv;
-                               reem.establecimientoReemb = comp.establecimiento;
-                               reem.puntoEmisionReemb = comp.puntoEmision;
-                               reem.secuencialReemb = comp.secuencial;
-                               reem.fechaEmisionReemb = comp.fechaEmision.ToString().Substring(0,10);
-                               reem.autorizacionReemb = comp.autorizacion;
-                               reem.baseImponibleReemb = comp.baseImponible;
-                               reem.baseImpGravReemb = comp.baseImpGrav;
-                               reem.baseImpExeReemb = comp.baseImpExe;
-                               reem.montoIceRemb = comp.montoIce;
-                               reem.montoIvaRemb = comp.montoIva;
-                               comp_det.totbasesImpReembSpecified = true;
-                               comp_det.totbasesImpReemb = Convert.ToString(Convert.ToDecimal(comp.baseImponible) + Convert.ToDecimal(comp.baseImpGrav));
-                               comp_det.reembolsos.Add(reem);
-
-                           }
-                           #endregion
-
-                           #region retencion por facturas
-                           if (info_ats.lst_retenciones != null)
-                           {
-                               if(info_ats.lst_retenciones.Count() > 0)
-                               {
-                                   var lstret_x_fac = info_ats.lst_retenciones.Where(r =>r.Cedula_ruc==comp.idProv & r.co_serie==comp.establecimiento+"-"+comp.puntoEmision & comp.secuencial==r.co_factura);
-                                   if(lstret_x_fac!=null)
-                                   {
-                                       if(lstret_x_fac.Count() > 0)
+                                       comp_det.air = new List<detalleAir>();
+                                       foreach (var item in lstret_x_fac)
                                        {
-                                           comp_det.air = new List<detalleAir>();
-                                           foreach (var item in lstret_x_fac)
+                                           if (item.re_tipo_Ret == "RTF")
                                            {
-                                               if (item.re_tipo_Ret == "RTF")
-                                               {
-                                                   detalleAir detalle_ret = new detalleAir();
-                                                   detalle_ret.codRetAir = item.codRetAir.ToString();
-                                                   detalle_ret.baseImpAir = item.baseImpAir.ToString();
-                                                   detalle_ret.porcentajeAir = item.porcentajeAir.ToString();
-                                                   detalle_ret.valRetAir = item.valRetAir.ToString();
-                                                   comp_det.air.Add(detalle_ret);
+                                                   comp_det.air.Add(new detalleAir
+                                                   {
+                                                       codRetAir = item.codRetAir.ToString(),
+                                                       baseImpAir = item.baseImpAir.ToString(),
+                                                       porcentajeAir = item.porcentajeAir.ToString(),
+                                                       valRetAir = item.valRetAir.ToString(),
+                                                   });
                                                }
                                                else
                                                {
