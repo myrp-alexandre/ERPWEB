@@ -391,7 +391,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Su_Descripcion]")});
             this.xrTableCell19.Name = "xrTableCell19";
             this.xrTableCell19.Text = "xrTableCell19";
-            this.xrTableCell19.Weight = 3.50466678232829D;
+            this.xrTableCell19.Weight = 3.35446678232829D;
             // 
             // xrTableCell20
             // 
@@ -399,7 +399,7 @@
             this.xrTableCell20.Name = "xrTableCell20";
             this.xrTableCell20.StylePriority.UseFont = false;
             this.xrTableCell20.Text = "Fecha:";
-            this.xrTableCell20.Weight = 1.00133333363851D;
+            this.xrTableCell20.Weight = 1.05139908355713D;
             // 
             // xrTableCell21
             // 
@@ -407,7 +407,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[cm_fecha]")});
             this.xrTableCell21.Name = "xrTableCell21";
             this.xrTableCell21.Text = "xrTableCell21";
-            this.xrTableCell21.Weight = 2.00266655039469D;
+            this.xrTableCell21.Weight = 2.10280080047607D;
             // 
             // xrTableRow13
             // 
@@ -455,7 +455,7 @@
             this.xrTableCell35.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Descripcion]")});
             this.xrTableCell35.Name = "xrTableCell35";
-            this.xrTableCell35.Weight = 3.50466678232829D;
+            this.xrTableCell35.Weight = 3.35446678232829D;
             // 
             // xrTableCell36
             // 
@@ -463,7 +463,7 @@
             this.xrTableCell36.Name = "xrTableCell36";
             this.xrTableCell36.StylePriority.UseFont = false;
             this.xrTableCell36.Text = "# Movimiento:";
-            this.xrTableCell36.Weight = 1.00133333363851D;
+            this.xrTableCell36.Weight = 1.05139908355713D;
             // 
             // xrTableCell37
             // 
@@ -471,7 +471,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[IdNumMovi]")});
             this.xrTableCell37.Name = "xrTableCell37";
             this.xrTableCell37.Text = "xrTableCell37";
-            this.xrTableCell37.Weight = 2.00266655039469D;
+            this.xrTableCell37.Weight = 2.10280080047607D;
             // 
             // xrTableRow5
             // 
@@ -497,7 +497,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Desc_mov_inv]")});
             this.xrTableCell13.Name = "xrTableCell13";
             this.xrTableCell13.Text = "xrTableCell13";
-            this.xrTableCell13.Weight = 3.50466678232829D;
+            this.xrTableCell13.Weight = 3.35446678232829D;
             // 
             // xrTableCell14
             // 
@@ -505,7 +505,7 @@
             this.xrTableCell14.Name = "xrTableCell14";
             this.xrTableCell14.StylePriority.UseFont = false;
             this.xrTableCell14.Text = "Código:";
-            this.xrTableCell14.Weight = 1.00133333363851D;
+            this.xrTableCell14.Weight = 1.05139908355713D;
             // 
             // xrTableCell15
             // 
@@ -513,7 +513,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[CodMoviInven]")});
             this.xrTableCell15.Name = "xrTableCell15";
             this.xrTableCell15.Text = "xrTableCell15";
-            this.xrTableCell15.Weight = 2.00266655039469D;
+            this.xrTableCell15.Weight = 2.10280080047607D;
             // 
             // xrTableRow6
             // 
