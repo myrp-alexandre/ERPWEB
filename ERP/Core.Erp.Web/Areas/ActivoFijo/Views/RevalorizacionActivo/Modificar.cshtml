@@ -128,7 +128,7 @@
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
-                <a href="#tab_datos" aria-controls="datos" role="tab" data-toggle="tab">Datos de la mejora</a>
+                <a href="#tab_datos" aria-controls="datos" role="tab" data-toggle="tab">Datos de la revalorización</a>
             </li>
             <li>
                 <a href="#tab_diario" aria-controls="diario" role="tab" data-toggle="tab">Diario contable</a>
@@ -140,14 +140,14 @@
                     <div class="col-md-12">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="Cod_Mej_Baj_Activo">Comprobante mejora</label>
+                                <label for="Cod_Mej_Baj_Activo">Comprobante revalorización</label>
                                 @Html.TextBoxFor(q => q.Cod_Mej_Baj_Activo, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(q => q.Cod_Mej_Baj_Activo, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="Valor_Mej_Baj_Activo">Valor mejora</label>
+                                <label for="Valor_Mej_Baj_Activo">Valor revalorización</label>
                                 @Html.TextBoxFor(q => q.Valor_Mej_Baj_Activo, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(q => q.Valor_Mej_Baj_Activo, "", new { @class = "text-danger" })
                             </div>
