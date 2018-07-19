@@ -157,7 +157,7 @@ namespace Core.Erp.Data.General
                         rpt_usa_store_procedure = info.rpt_usa_store_procedure,
                         rpt_vista = info.rpt_vista,
                         se_muestra_administrador_reportes = info.se_muestra_administrador_reportes,
-                        rpt_muestra_disenador_reporte = info.rpt_muestra_disenador_reporte,                        
+                        Se_Mustra_Disenador_rpt = info.rpt_muestra_disenador_reporte,                        
                     };
                     Context.tb_sis_reporte.Add(Entity);
                     Context.SaveChanges();
@@ -196,7 +196,7 @@ namespace Core.Erp.Data.General
                     Entity.rpt_usa_store_procedure = info.rpt_usa_store_procedure;
                     Entity.rpt_vista = info.rpt_vista;
                     Entity.se_muestra_administrador_reportes = info.se_muestra_administrador_reportes;
-                    Entity.rpt_muestra_disenador_reporte = info.se_muestra_administrador_reportes;
+                    Entity.Se_Mustra_Disenador_rpt = info.se_muestra_administrador_reportes;
 
                     Context.SaveChanges();
                 }
