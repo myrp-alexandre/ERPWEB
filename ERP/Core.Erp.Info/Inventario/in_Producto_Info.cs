@@ -86,6 +86,12 @@ namespace Core.Erp.Info.Inventario
         public List<in_Producto_Composicion_Info> lst_producto_composicion { get; set; }
         public string nom_presentacion { get; set; }
         public string nom_categoria { get; set; }
+
+        public string tp_descripcion { get; set; }
+        public string ca_descripcion { get; set; }
+        public string ma_descripcion { get; set; }
+
+
         #endregion
     }
 }

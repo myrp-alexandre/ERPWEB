@@ -19,32 +19,73 @@ namespace Core.Erp.Data.Inventario
                 using (Entities_inventario Context = new Entities_inventario())
                 {
                     if(mostrar_anulados)
-                    Lista = (from q in Context.in_Producto
-                             where q.IdEmpresa == IdEmpresa
+                    Lista = ( from t in Context.in_ProductoTipo
+                              join p in Context.in_Producto
+                              on new { t.IdEmpresa, t.IdProductoTipo } equals new { p.IdEmpresa, p.IdProductoTipo }
+                              join c in Context.in_categorias
+                              on new { p.IdEmpresa, p.IdCategoria } equals new { c.IdEmpresa, c.IdCategoria }
+                              join m in Context.in_Marca
+                              on new {p.IdEmpresa,p.IdMarca}equals new {m.IdEmpresa,m.IdMarca}
+                              join pr in Context.in_presentacion
+                              on new { p.IdEmpresa, p.IdPresentacion } equals new { pr.IdEmpresa, pr.IdPresentacion }
+
+                                where 
+                                t.IdEmpresa==IdEmpresa
+                                && p.IdEmpresa==IdEmpresa
+                                && c.IdEmpresa==IdEmpresa
+                                && m.IdEmpresa==IdEmpresa
+                                && pr.IdEmpresa==IdEmpresa
+
                              select new in_Producto_Info
                              {
-                                 IdEmpresa = q.IdEmpresa,
-                                 IdProducto = q.IdProducto,
-                                 pr_codigo = q.pr_codigo,
-                                 pr_descripcion = q.pr_descripcion,
-                                 Estado = q.Estado,
-                                 lote_fecha_vcto = q.lote_fecha_vcto,
-                                 lote_num_lote=q.lote_num_lote
+                                 IdEmpresa = p.IdEmpresa,
+                                 IdProducto = p.IdProducto,
+                                 pr_codigo = p.pr_codigo,
+                                 pr_descripcion = p.pr_descripcion,
+                                 Estado = p.Estado,
+                                 lote_fecha_vcto = p.lote_fecha_vcto,
+                                 lote_num_lote=p.lote_num_lote,
+
+                                 tp_descripcion=t.tp_descripcion,
+                                 nom_presentacion=pr.nom_presentacion,
+                                 ma_descripcion=m.Descripcion,
+                                 nom_categoria=c.ca_Categoria,
+                                 
+
 
                              }).ToList();
                     else
-                        Lista = (from q in Context.in_Producto
-                                 where q.IdEmpresa == IdEmpresa
-                                 && q.Estado == "A"
+                        Lista = (from t in Context.in_ProductoTipo
+                                 join p in Context.in_Producto
+                                 on new { t.IdEmpresa, t.IdProductoTipo } equals new { p.IdEmpresa, p.IdProductoTipo }
+                                 join c in Context.in_categorias
+                                 on new { p.IdEmpresa, p.IdCategoria } equals new { c.IdEmpresa, c.IdCategoria }
+                                 join m in Context.in_Marca
+                                 on new { p.IdEmpresa, p.IdMarca } equals new { m.IdEmpresa, m.IdMarca }
+                                 join pr in Context.in_presentacion
+                                 on new { p.IdEmpresa, p.IdPresentacion } equals new { pr.IdEmpresa, pr.IdPresentacion }
+
+                                 where
+                                 t.IdEmpresa == IdEmpresa
+                                 && p.IdEmpresa == IdEmpresa
+                                 && c.IdEmpresa == IdEmpresa
+                                 && m.IdEmpresa == IdEmpresa
+                                 && pr.IdEmpresa == IdEmpresa
+                                  && p.Estado == "A"
                                  select new in_Producto_Info
                                  {
-                                     IdEmpresa = q.IdEmpresa,
-                                     IdProducto = q.IdProducto,
-                                     pr_codigo = q.pr_codigo,
-                                     pr_descripcion = q.pr_descripcion,
-                                     Estado = q.Estado,
-                                     lote_fecha_vcto = q.lote_fecha_vcto,
-                                     lote_num_lote = q.lote_num_lote
+                                     IdEmpresa = p.IdEmpresa,
+                                     IdProducto = p.IdProducto,
+                                     pr_codigo = p.pr_codigo,
+                                     pr_descripcion = p.pr_descripcion,
+                                     Estado = p.Estado,
+                                     lote_fecha_vcto = p.lote_fecha_vcto,
+                                     lote_num_lote = p.lote_num_lote,
+
+                                     tp_descripcion = t.tp_descripcion,
+                                     nom_presentacion = pr.nom_presentacion,
+                                     ma_descripcion = m.Descripcion,
+                                     nom_categoria = c.ca_Categoria,
                                  }).ToList();
                 }
 
