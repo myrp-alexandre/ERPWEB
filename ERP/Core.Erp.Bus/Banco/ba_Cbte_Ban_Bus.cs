@@ -64,7 +64,7 @@ namespace Core.Erp.Bus.Banco
         {
             try
             {
-                if (odata_ct.anularDB(new Info.Contabilidad.ct_cbtecble_Info { IdEmpresa = info.IdEmpresa, IdTipoCbte = info.IdTipocbte, IdCbteCble = info.IdCbteCble, IdUsuarioAnu = info.IdUsuario_Anu}))
+                if (odata_ct.anularDB(new Info.Contabilidad.ct_cbtecble_Info { IdEmpresa = info.IdEmpresa, IdTipoCbte = info.IdTipocbte, IdCbteCble = info.IdCbteCble, IdUsuarioAnu = info.IdUsuario_Anu, cb_MotivoAnu = info.MotivoAnulacion}))
                 {
                     if (odata.anularDB(info))
                     {

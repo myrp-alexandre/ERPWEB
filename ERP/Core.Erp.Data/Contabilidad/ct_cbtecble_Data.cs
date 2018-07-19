@@ -302,6 +302,7 @@ namespace Core.Erp.Data.Contabilidad
                     Context.ct_cbtecble_Reversado.Add(Entity_int);
                     #endregion
 
+                    Entity.cb_MotivoAnu = Entity.cb_MotivoAnu;
                     Entity.cb_Estado = Entity.cb_Estado = "I";
                     Entity.IdUsuarioAnu = Entity.IdUsuarioAnu;
                     Entity.cb_FechaAnu = DateTime.Now;

@@ -116,16 +116,21 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                     msg = "Los valores ingresados no concuerdan con el valor del diario";
                     return false;
                 }
-                i_validar.cb_Observacion = "Canc./ ";
-                foreach (var item in i_validar.lst_det_canc_op)
+                if (i_validar.IdCbteCble == 0)
                 {
-                    i_validar.cb_Observacion += item.Referencia + "/";
+                    i_validar.cb_Observacion += " Canc./ ";
+                    foreach (var item in i_validar.lst_det_canc_op)
+                    {
+                        i_validar.cb_Observacion += item.Referencia + "/";
+                    }
                 }
             }
             
            
             i_validar.IdPeriodo = Convert.ToInt32(i_validar.cb_Fecha.ToString("yyyyMM"));
             i_validar.IdUsuario = SessionFixed.IdUsuario;
+            i_validar.IdUsuarioUltMod = SessionFixed.IdUsuario;
+            i_validar.IdUsuario_Anu = SessionFixed.IdUsuario;
             i_validar.IdUsuarioUltMod = SessionFixed.IdUsuario;
             i_validar.cb_Valor = Math.Round(i_validar.lst_det_ct.Sum(q => q.dc_Valor_debe), 2, MidpointRounding.AwayFromZero);
             return true;
@@ -160,7 +165,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
             ViewBag.IdSucursal = IdSucursal;
-            var model = bus_cbteban.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, IdSucursal, cl_enumeradores.eTipoCbteBancario.NDBA.ToString(), false);
+            var model = bus_cbteban.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, IdSucursal, cl_enumeradores.eTipoCbteBancario.NDBA.ToString(), true);
             return PartialView("_GridViewPartial_DebitoBanco", model);
         }
         #endregion
@@ -256,6 +261,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost]
         public ActionResult Anular(ba_Cbte_Ban_Info model)
         {
+            model.IdUsuario_Anu = SessionFixed.IdUsuario;
             if (!bus_cbteban.anularDB(model))
             {
                 ViewBag.mensaje = "No se pudo anular el registro";

@@ -8607,7 +8607,6 @@
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_GridViewPartial_cobranza.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_001.cshtml" />
     <Content Include="Areas\General\Views\ReportesPorUsuario\Index.cshtml" />
-    <Content Include="Areas\General\Views\ReportesPorUsuario\_GridViewPartial_reportes_por_usuario.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_CmbCliente_Cobranza.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_GridViewPartial_cobranza_det.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_GridViewPartial_cobranza_facturas_x_cruzar.cshtml" />
@@ -8721,6 +8720,8 @@
     <Content Include="Areas\Importacion\Views\CatalogoImportacion\Nuevo.cshtml" />
     <Content Include="Areas\Importacion\Views\CatalogoImportacion\Modificar.cshtml" />
     <Content Include="Areas\Importacion\Views\CatalogoImportacion\Anular.cshtml" />
+    <Content Include="Areas\General\Views\ReportesPorUsuario\_GridViewPartial_ReportesPorAsignar.cshtml" />
+    <Content Include="Areas\General\Views\ReportesPorUsuario\_GridViewPartial_ReportesAsignados.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

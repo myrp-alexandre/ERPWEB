@@ -213,6 +213,9 @@ namespace Core.Erp.Data.Banco
                     IdPersona = info.IdPersona,
                     IdEntidad = info.IdEntidad,
                     IdTipo_Persona = info.IdTipo_Persona,
+
+                    IdUsuario = info.IdUsuario,
+                    Fecha_Transac = info.Fecha_Transac,
                 });
                 #endregion
 
@@ -406,6 +409,9 @@ namespace Core.Erp.Data.Banco
                         IdPersona = info.IdPersona,
                         IdEntidad = info.IdEntidad,
                         IdTipo_Persona = info.IdTipo_Persona,
+
+                        IdUsuarioUltMod = info.IdUsuarioUltMod,
+                        Fecha_UltMod = DateTime.Now
                     });
                 else
                 {                    
@@ -429,6 +435,8 @@ namespace Core.Erp.Data.Banco
                     mov_ban.IdPersona = info.IdPersona;
                     mov_ban.IdEntidad = info.IdEntidad;
                     mov_ban.IdTipo_Persona = info.IdTipo_Persona;
+                    mov_ban.IdUsuarioUltMod = info.IdUsuarioUltMod;
+                    mov_ban.Fecha_UltMod = DateTime.Now;
                 }
                 #endregion
 
@@ -554,8 +562,9 @@ namespace Core.Erp.Data.Banco
             {
                 ba_Cbte_Ban Entity = Context.ba_Cbte_Ban.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipocbte == info.IdTipocbte && q.IdCbteCble == info.IdCbteCble).FirstOrDefault();
                 if (Entity == null) return false;
+                Entity.MotivoAnulacion = info.MotivoAnulacion;
                 Entity.IdUsuario_Anu = info.IdUsuario_Anu;
-                Entity.FechaAnulacion = info.FechaAnulacion;
+                Entity.FechaAnulacion = DateTime.Now;
                 Entity.Estado = "I";
 
                 var lst_ing = Context.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.Where(q => q.mba_IdEmpresa == info.IdEmpresa && q.mba_IdTipocbte == info.IdTipocbte && q.mba_IdCbteCble == info.IdCbteCble).ToList();

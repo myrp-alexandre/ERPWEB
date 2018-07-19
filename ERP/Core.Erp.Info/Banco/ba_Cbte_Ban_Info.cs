@@ -2,6 +2,7 @@
 using Core.Erp.Info.CuentasPorPagar;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.Erp.Info.Banco
 {
@@ -39,6 +40,7 @@ namespace Core.Erp.Info.Banco
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltMod { get; set; }
+        [Required(ErrorMessage ="El campo motivo anulación es obligatorio")]
         public string MotivoAnulacion { get; set; }
         #endregion
 

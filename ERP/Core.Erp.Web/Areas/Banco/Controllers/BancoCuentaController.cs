@@ -53,7 +53,10 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
         public ActionResult Nuevo()
         {
-            ba_Banco_Cuenta_Info model = new ba_Banco_Cuenta_Info();
+            ba_Banco_Cuenta_Info model = new ba_Banco_Cuenta_Info
+            {
+                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"])
+            };
             cargar_combos();
             return View(model);
         }

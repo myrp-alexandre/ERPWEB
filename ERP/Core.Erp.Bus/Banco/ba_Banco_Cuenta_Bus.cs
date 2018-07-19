@@ -39,7 +39,6 @@ namespace Core.Erp.Bus.Banco
         {
             try
             {
-                info.IdEmpresa = 1;
                 return odata.guardarDB(info);
             }
             catch (Exception)

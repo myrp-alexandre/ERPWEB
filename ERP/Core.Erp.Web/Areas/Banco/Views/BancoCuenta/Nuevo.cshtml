@@ -10,6 +10,7 @@
 
 @using (Html.BeginForm("Nuevo", "BancoCuenta", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
+    @Html.HiddenFor(q=>q.IdEmpresa)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -108,20 +109,21 @@
 }
 <script>
 
-    $("#IdBanco_Financiero").keyup(function () {
+    $("#IdBanco_Financiero").change(function () {
         actualizar_nombre_cuenta();
     });
-    $("#ba_Tipo").keyup(function () {
+    $("#ba_Tipo").change(function () {
         actualizar_nombre_cuenta();
     });
     $("#ba_Num_Cuenta").keyup(function () {
         actualizar_nombre_cuenta();
     });
+    actualizar_nombre_cuenta();
 
 
     function actualizar_nombre_cuenta() {
 
-        var banco = $("#IdBanco_Financiero").val();
+        var banco = $("#IdBanco_Financiero option:selected").text();        
         var tipo = $("#ba_Tipo").val();
         var num_cuenta = $("#ba_Num_Cuenta").val();
 
