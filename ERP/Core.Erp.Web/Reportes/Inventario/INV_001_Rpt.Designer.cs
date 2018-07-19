@@ -391,15 +391,16 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Su_Descripcion]")});
             this.xrTableCell19.Name = "xrTableCell19";
             this.xrTableCell19.Text = "xrTableCell19";
-            this.xrTableCell19.Weight = 3.35446678232829D;
+            this.xrTableCell19.Weight = 3.0040004212443057D;
             // 
             // xrTableCell20
             // 
             this.xrTableCell20.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell20.Name = "xrTableCell20";
             this.xrTableCell20.StylePriority.UseFont = false;
+            this.xrTableCell20.StylePriority.UseTextAlignment = false;
             this.xrTableCell20.Text = "Fecha:";
-            this.xrTableCell20.Weight = 1.05139908355713D;
+            this.xrTableCell20.Weight = 1.4018654446411145D;
             // 
             // xrTableCell21
             // 
@@ -455,15 +456,16 @@
             this.xrTableCell35.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Descripcion]")});
             this.xrTableCell35.Name = "xrTableCell35";
-            this.xrTableCell35.Weight = 3.35446678232829D;
+            this.xrTableCell35.Weight = 3.0040004212443057D;
             // 
             // xrTableCell36
             // 
             this.xrTableCell36.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell36.Name = "xrTableCell36";
             this.xrTableCell36.StylePriority.UseFont = false;
+            this.xrTableCell36.StylePriority.UseTextAlignment = false;
             this.xrTableCell36.Text = "# Movimiento:";
-            this.xrTableCell36.Weight = 1.05139908355713D;
+            this.xrTableCell36.Weight = 1.4018654446411145D;
             // 
             // xrTableCell37
             // 
@@ -497,15 +499,16 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Desc_mov_inv]")});
             this.xrTableCell13.Name = "xrTableCell13";
             this.xrTableCell13.Text = "xrTableCell13";
-            this.xrTableCell13.Weight = 3.35446678232829D;
+            this.xrTableCell13.Weight = 3.0040004212443057D;
             // 
             // xrTableCell14
             // 
             this.xrTableCell14.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell14.Name = "xrTableCell14";
             this.xrTableCell14.StylePriority.UseFont = false;
+            this.xrTableCell14.StylePriority.UseTextAlignment = false;
             this.xrTableCell14.Text = "Código:";
-            this.xrTableCell14.Weight = 1.05139908355713D;
+            this.xrTableCell14.Weight = 1.4018654446411145D;
             // 
             // xrTableCell15
             // 
