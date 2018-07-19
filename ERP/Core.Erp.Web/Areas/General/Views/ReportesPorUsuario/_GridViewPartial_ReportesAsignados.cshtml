@@ -1,4 +1,4 @@
-@using System.Web.UI.WebControls;
+锘緻using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_ReportesAsignados";
@@ -6,7 +6,7 @@
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "CodReporte";
 
-        //Configuraci髇 para que la grilla no muestre texto completo
+        //Configuraci贸n para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
 
@@ -15,7 +15,7 @@
         settings.Settings.ShowFilterRow = true;
         settings.SettingsBehavior.AllowSelectByRowClick = false;
 
-        //Configuraci髇 click derecho
+        //Configuraci贸n click derecho
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
         settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = false;
@@ -29,35 +29,34 @@
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IngEgr";
-            column.Caption = "Tipo";
-            column.Width = Unit.Percentage(20);
-            column.GroupIndex = 0;
-        });
+            column.FieldName = "CodReporte";
+            column.Caption = "C贸digo";
+            column.Width = Unit.Percentage(10);
+        });            
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(40);
-            column.FieldName = "cb_Observacion";
-            column.Caption = "Observaci髇";
+            column.FieldName = "nom_reporte";
+            column.Caption = "Reporte";
         });
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(10);
-            column.FieldName = "dc_Valor";
-            column.Caption = "Valor";
-            column.PropertiesEdit.DisplayFormatString = "{0:N2}";
+            column.Width = Unit.Percentage(30);
+            column.FieldName = "observacion";
+            column.Caption = "Observaci贸n";
         });
         settings.Columns.Add(column =>
         {
             column.Caption = "*";
             column.FieldName = "CodReporte";
+            column.Width = Unit.Percentage(20);
             column.UnboundType = DevExpress.Data.UnboundColumnType.String;
             column.SetDataItemTemplateContent(c =>
             {
                 Html.DevExpress().Button(settingsBtn =>
                 {
                     settingsBtn.Name = "btn" + c.KeyValue;
-                    settingsBtn.Text = "Asignar";
+                    settingsBtn.Text = "Eliminar";
                     settingsBtn.ClientSideEvents.Click = "function(s, e) {EditingUpdate('" + c.KeyValue + "');}";
                 }).Render();
             });

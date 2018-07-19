@@ -12,6 +12,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
 {
     public class ReportesPorUsuarioController : Controller
     {
+        tb_sis_reporte_x_seg_usuario_List List_det = new tb_sis_reporte_x_seg_usuario_List();
+
         tb_sis_reporte_x_seg_usuario_Bus bus_reporte_x_usuario = new tb_sis_reporte_x_seg_usuario_Bus();
         public ActionResult Index()
         {
@@ -23,6 +25,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
         public ActionResult Index(tb_sis_reporte_x_seg_usuario_Info model)
         {
             cargar_combos();
+            List_det.set_list(bus_reporte_x_usuario.get_list(model.IdEmpresa, model.IdUsuario));
             return View(model);
         }
         private void cargar_combos()
@@ -35,36 +38,52 @@ namespace Core.Erp.Web.Areas.General.Controllers
             var lst_usuario = bus_usuario.get_list(false);
             ViewBag.lst_usuario = lst_usuario;
         }
-
-        public ActionResult GridViewPartial_reportes_por_usuario(int IdEmpresa=0, string IdUsuario="")
+        public ActionResult GridViewPartial_ReportesPorAsignar()
         {
-            List<tb_sis_reporte_x_seg_usuario_Info> model = new List<tb_sis_reporte_x_seg_usuario_Info>();
-            model = bus_reporte_x_usuario.get_list(IdEmpresa, IdUsuario);
-            return PartialView("_GridViewPartial_reportes_por_usuario", model);
+            var model = List_det.get_list().Where(q => q.seleccionado == false).ToList();
+            return PartialView("_GridViewPartial_ReportesPorAsignar", model);
         }
-        public JsonResult guardar(int IdEmpresa = 0, string IdUsuario = "", string Ids = "")
+
+        public ActionResult GridViewPartial_ReportesAsignados()
         {
-            string[] array = Ids.Split(',');
-
-            List<tb_sis_reporte_x_seg_usuario_Info> lista = new List<tb_sis_reporte_x_seg_usuario_Info>();
-            var output = array.GroupBy(q => q).ToList();
-            foreach (var item in output)
-            {
-                if (item.Key != "")
-                {
-                    tb_sis_reporte_x_seg_usuario_Info info = new tb_sis_reporte_x_seg_usuario_Info
-                    {
-                        IdEmpresa = IdEmpresa,
-                        CodReporte = Convert.ToString(item.Key),
-                        IdUsuario = IdUsuario
-                    };
-                    lista.Add(info);
-                }
-            }
+            var model = List_det.get_list().Where(q => q.seleccionado == true).ToList();
+            return PartialView("_GridViewPartial_ReportesAsignados", model);
+        }
+        public void EditingUpdate(string CodReporte = "")
+        {
+            List_det.UpdateRow(CodReporte);
+        }
+        public JsonResult guardar(int IdEmpresa = 0, string IdUsuario = "")
+        {
             bus_reporte_x_usuario.eliminarDB(IdEmpresa, IdUsuario);
-            var resultado = bus_reporte_x_usuario.guardarDB(lista, IdEmpresa, IdUsuario);
-
+            var resultado = bus_reporte_x_usuario.guardarDB(List_det.get_list().Where(q => q.seleccionado == true).ToList(), IdEmpresa, IdUsuario);
             return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+    }
+
+    public class tb_sis_reporte_x_seg_usuario_List
+    {
+        public List<tb_sis_reporte_x_seg_usuario_Info> get_list()
+        {
+            if (HttpContext.Current.Session["tb_sis_reporte_x_seg_usuario_Info"] == null)
+            {
+                List<tb_sis_reporte_x_seg_usuario_Info> list = new List<tb_sis_reporte_x_seg_usuario_Info>();
+
+                HttpContext.Current.Session["tb_sis_reporte_x_seg_usuario_Info"] = list;
+            }
+            return (List<tb_sis_reporte_x_seg_usuario_Info>)HttpContext.Current.Session["tb_sis_reporte_x_seg_usuario_Info"];
+        }
+
+        public void set_list(List<tb_sis_reporte_x_seg_usuario_Info> list)
+        {
+            HttpContext.Current.Session["tb_sis_reporte_x_seg_usuario_Info"] = list;
+        }
+
+        public void UpdateRow(string CodReporte)
+        {
+            tb_sis_reporte_x_seg_usuario_Info edited_info = get_list().Where(m => m.CodReporte == CodReporte).FirstOrDefault();
+            if (edited_info != null)
+                edited_info.seleccionado = !edited_info.seleccionado;
         }
     }
 }

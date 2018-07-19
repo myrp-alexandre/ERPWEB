@@ -10,24 +10,32 @@
 }
 
 <script>
-    var selectedIDs;
-    function OnBeginCallback(s, e) {
-        //Pass all selected keys to GridView callback action
-        e.customArgs["selectedIDs"] = selectedIDs;
+    function EditingUpdate(ID) {
+        var datos = {
+            IdPk: ID
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("EditingUpdate", "ReportesPorUsuario",new { Area = "Banco"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+        GridView_ReportesPorAsignar.PerformCallback();
+        GridView_ReportesAsignados.PerformCallback();
     }
-    function OnSelectionChanged(s, e) {
-        s.GetSelectedFieldValues("CodReporte", GetSelectedFieldValuesCallback);
-    }
-    function GetSelectedFieldValuesCallback(values) {
-        //Capture all selected keys
-        selectedIDs = values.join(',');
-    }
-    
+
     function guardar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdUsuario: $("#IdUsuario").val(),
-            Ids: selectedIDs
         }
         $("#btn_guardar").disabled = true;
         $.ajax({
@@ -72,6 +80,17 @@
         <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardar();">Guardar</button>
     </div>
 
-    @Html.Action("GridViewPartial_reportes_por_usuario", new { IdEmpresa = Model.IdEmpresa, IdUsuario = Model.IdUsuario })
+  <div class="row">
+      <div class="col-md-6">
+          <div class="col-md-12">
+              @Html.Action("GridViewPartial_ReportesPorAsignar")
+          </div>
+      </div>
+      <div class="col-md-6">
+          <div class="col-md-12">
+              @Html.Action("GridViewPartial_ReportesAsignados")
+          </div>
+      </div>
+  </div>
 
 }

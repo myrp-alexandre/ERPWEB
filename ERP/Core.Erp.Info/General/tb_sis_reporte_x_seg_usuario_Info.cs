@@ -13,5 +13,6 @@ namespace Core.Erp.Info.General
         public string CodReporte { get; set; }
         public string nom_reporte { get; set; }
         public bool seleccionado { get; set; }
+        public object observacion { get; set; }
     }
 }
