@@ -156,7 +156,8 @@ namespace Core.Erp.Data.General
                         rpt_store_procedure = info.rpt_store_procedure,
                         rpt_usa_store_procedure = info.rpt_usa_store_procedure,
                         rpt_vista = info.rpt_vista,
-                        se_muestra_administrador_reportes = info.se_muestra_administrador_reportes
+                        se_muestra_administrador_reportes = info.se_muestra_administrador_reportes,
+                        rpt_muestra_disenador_reporte = info.rpt_muestra_disenador_reporte,                        
                     };
                     Context.tb_sis_reporte.Add(Entity);
                     Context.SaveChanges();

@@ -27,6 +27,7 @@ namespace Core.Erp.Data.General
                                  IdUsuario = q.IdUsuario,
                                  CodReporte = q.CodReporte,
                                  nom_reporte = r.nom_reporte,
+                                 observacion = r.observacion,
                                  seleccionado = true
                              }).ToList();
 
@@ -38,6 +39,7 @@ namespace Core.Erp.Data.General
                                         IdUsuario = IdUsuario,
                                         CodReporte = q.CodReporte,
                                         nom_reporte = q.nom_reporte,
+                                        observacion = q.observacion,
                                         seleccionado = false
                                     }).ToList());
                 }

@@ -1,10 +1,10 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView_ConciliacionBanco_x_cruzar";
-        settings.CallbackRouteValues = new { Controller = "ConciliacionBanco", Action = "GridViewPartial_ConciliacionBanco_x_cruzar" };
+        settings.Name = "GridView_ReportesPorAsignar";
+        settings.CallbackRouteValues = new { Controller = "ReportesPorUsuario", Action = "GridViewPartial_ReportesPorAsignar" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdPK";
+        settings.KeyFieldName = "CodReporte";
 
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -29,52 +29,38 @@
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IngEgr";
-            column.Caption = "Tipo";
-            column.Width = Unit.Percentage(20);
-            column.GroupIndex = 0;
-        });
-
-        settings.Columns.Add("tc_TipoCbte", "Tipo Cbte.").Width = Unit.Percentage(20);
-        settings.Columns.Add("cb_Cheque", "# Cheque").Width = Unit.Percentage(10);
-        settings.Columns.Add(column =>
-        {
+            column.FieldName = "CodReporte";
+            column.Caption = "Código";
             column.Width = Unit.Percentage(10);
-            column.FieldName = "cb_Fecha";
-            column.Caption = "Fecha";
-            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
         });
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(40);
-            column.FieldName = "cb_Observacion";
+            column.FieldName = "nom_reporte";
+            column.Caption = "Reporte";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Width = Unit.Percentage(30);
+            column.FieldName = "observacion";
             column.Caption = "Observación";
         });
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(10);
-            column.FieldName = "dc_Valor";
-            column.Caption = "Valor";
-            column.PropertiesEdit.DisplayFormatString = "{0:N2}";
-        });
-        settings.Columns.Add(column =>
-        {
             column.Caption = "*";
-            column.FieldName = "IdPK";
+            column.FieldName = "CodReporte";
+            column.Width = Unit.Percentage(20);
             column.UnboundType = DevExpress.Data.UnboundColumnType.String;
             column.SetDataItemTemplateContent(c =>
             {
                 Html.DevExpress().Button(settingsBtn =>
                 {
                     settingsBtn.Name = "btn" + c.KeyValue;
-                    settingsBtn.Text = "Aprobar";
+                    settingsBtn.Text = "Agregar";
                     settingsBtn.ClientSideEvents.Click = "function(s, e) {EditingUpdate('" + c.KeyValue + "');}";
                 }).Render();
             });
         });
-        settings.Settings.ShowFooter = true;
-        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_Valor").DisplayFormat = "Total {0:c2}";
-        settings.GroupSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_Valor").DisplayFormat = "Total conciliado {0:c2}";
         settings.PreRender = (sender, e) =>
         {
             MVCxGridView gridView = (MVCxGridView)sender;

@@ -20,9 +20,12 @@ namespace Core.Erp.Data.Inventario
                 {
                     if (mostrar_anulados)
                         Lista = (from q in Context.in_Ing_Egr_Inven
+                                 join t in Context.in_movi_inven_tipo
+                                 on new { q.IdEmpresa, q.IdMovi_inven_tipo} equals new { t.IdEmpresa, t.IdMovi_inven_tipo}
                                  where q.IdEmpresa == IdEmpresa
                                  && q.signo == signo 
                                  && fecha_ini <= q.cm_fecha && q.cm_fecha <= fecha_fin
+                                 orderby new { q.IdMovi_inven_tipo, q.IdNumMovi } descending
                                  select new in_Ing_Egr_Inven_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
@@ -35,16 +38,20 @@ namespace Core.Erp.Data.Inventario
                                      signo = q.signo,
                                      cm_observacion = q.cm_observacion,
                                      CodMoviInven = q.CodMoviInven,
-                                     cm_fecha = q.cm_fecha
+                                     cm_fecha = q.cm_fecha,
+                                     tm_descripcion = t.tm_descripcion
 
                                  }).ToList();
 
                     else
                         Lista = (from q in Context.in_Ing_Egr_Inven
+                                 join t in Context.in_movi_inven_tipo
+                                 on new { q.IdEmpresa, q.IdMovi_inven_tipo } equals new { t.IdEmpresa, t.IdMovi_inven_tipo }
                                  where q.IdEmpresa == IdEmpresa
                                  && q.signo == signo
                                  && fecha_ini <= q.cm_fecha && q.cm_fecha <= fecha_fin
                                  && q.Estado == "A"
+                                 orderby new { q.IdMovi_inven_tipo, q.IdNumMovi } descending
                                  select new in_Ing_Egr_Inven_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
@@ -57,7 +64,8 @@ namespace Core.Erp.Data.Inventario
                                      signo = q.signo,
                                      cm_observacion = q.cm_observacion,
                                      CodMoviInven = q.CodMoviInven,
-                                     cm_fecha = q.cm_fecha
+                                     cm_fecha = q.cm_fecha,
+                                     tm_descripcion = t.tm_descripcion
                                  }).ToList();
                 }
                 return Lista;

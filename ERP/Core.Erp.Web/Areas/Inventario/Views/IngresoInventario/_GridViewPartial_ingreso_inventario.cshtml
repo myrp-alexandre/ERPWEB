@@ -75,8 +75,8 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = System.Web.UI.WebControls.Unit.Pixel(150);
         });
-        settings.Columns.Add("IdMovi_inven_tipo", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add("IdNumMovi", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("tm_descripcion", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+        settings.Columns.Add("IdNumMovi", "# Movimiento").Width = System.Web.UI.WebControls.Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.FieldName = "cm_fecha";
@@ -84,8 +84,8 @@
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
         });
-        settings.Columns.Add("cm_observacion", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(60);
-        settings.Columns.Add("Estado", "Estado").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("cm_observacion", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(40);
+        settings.Columns.Add("Estado", "Estado").Width = System.Web.UI.WebControls.Unit.Percentage(5);
 
         settings.Columns.Add(column =>
         {
