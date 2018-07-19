@@ -76,13 +76,12 @@ namespace Core.Erp.Data.General
                 {
                     foreach (var item in Lista)
                     {
-                        tb_sis_reporte_x_seg_usuario Entity = new Data.tb_sis_reporte_x_seg_usuario
+                        Context.tb_sis_reporte_x_seg_usuario.Add(new tb_sis_reporte_x_seg_usuario
                         {
                             IdEmpresa = item.IdEmpresa,
                             IdUsuario = item.IdUsuario,
                             CodReporte = item.CodReporte
-                        };
-                        Context.tb_sis_reporte_x_seg_usuario.Add(Entity);
+                        });
                     }
                     Context.SaveChanges();
                 }
