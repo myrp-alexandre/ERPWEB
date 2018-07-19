@@ -42,6 +42,7 @@ namespace Core.Erp.Info.Inventario
         #region Campos que no existen en la tabla
         public List<in_Ing_Egr_Inven_det_Info> lst_in_Ing_Egr_Inven_det { get; set; }
         public decimal IdProducto { get; set; }
+        public string tm_descripcion { get; set; }
         #endregion
 
         public in_Ing_Egr_Inven_Info()
