@@ -26,6 +26,7 @@ namespace Core.Erp.Bus.Inventario
         {
             try
             {
+               
                 return odata.guardarDB(Lista);
             }
             catch (Exception)

@@ -103,6 +103,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
             model.lst_producto_composicion = list_producto_composicion.get_list();
             model.lst_producto_composicion.ForEach(q => { q.IdEmpresa = model.IdEmpresa; q.IdProductoPadre = model.IdProducto; });
+            bus_producto_composicion.eliminarDB(model.IdEmpresa, model.IdProducto);
             if (!bus_producto_composicion.guardarDB(model.lst_producto_composicion))
             {
                 cargar_combos(model);
