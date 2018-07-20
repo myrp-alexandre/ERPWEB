@@ -37,29 +37,15 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-7">
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="IdProducto_padre">Producto padre</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdProducto_padre, settings =>
-                       {
-                           settings.Name = "IdProducto_padre";
-                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                           settings.Properties.Columns.Add("IdProducto", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                           settings.Properties.Columns.Add("pr_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                           //Campo ID
-                           settings.Properties.ValueField = "IdProducto";
-                           settings.Properties.ValueType = typeof(decimal);
-                           //Boton para seleccionar ningun registro
-                           settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                           settings.Properties.NullText = "== Seleccione ==";
-                           settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                           settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){get_info_padre()}";
-                       }).BindList(ViewBag.lst_producto_padre).GetHtml()
+                            <label for="IdProducto_padre">Producto padre*</label>
+                            @Html.Partial("_CmbProducto_padre", Model)
                             @Html.ValidationMessageFor(q => q.IdProducto_padre, "", new { @class = "text-danger" })
                         </div>
                     </div>

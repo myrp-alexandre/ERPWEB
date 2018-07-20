@@ -28,6 +28,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             in_Producto_Info model = new in_Producto_Info();
             return PartialView("_CmbProducto_composicion", model);
         }
+        public ActionResult CmbProducto_padre()
+        {
+            in_Producto_Info model = new in_Producto_Info();
+            return PartialView("_CmbProducto_padre", model);
+        }
         public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
             return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
