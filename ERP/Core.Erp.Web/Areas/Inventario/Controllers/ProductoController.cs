@@ -23,7 +23,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #endregion
 
         #region Metodos ComboBox bajo demanda
-        public ActionResult CmbProducto_EgresoInventario()
+        public ActionResult CmbProducto_composicion()
         {
             in_Producto_Info model = new in_Producto_Info();
             return PartialView("_CmbProducto_composicion", model);
