@@ -14,6 +14,8 @@ namespace Core.Erp.Data.Reportes.Contabilidad
             try
             {
                 List<CONTA_002_Info> Lista;
+                fechaIni = fechaIni.Date;
+                fechaFin = fechaFin.Date;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = (from q in Context.SPCONTA_002(IdEmpresa, IdCtaCble, fechaIni, fechaFin)
