@@ -21,6 +21,7 @@ namespace Core.Erp.Data.General
                              on q.CodReporte equals r.CodReporte
                              where q.IdEmpresa == IdEmpresa
                              && q.IdUsuario == IdUsuario
+                             && r.se_muestra_administrador_reportes == true
                              select new tb_sis_reporte_x_seg_usuario_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -33,6 +34,7 @@ namespace Core.Erp.Data.General
 
                     Lista.AddRange((from q in Context.tb_sis_reporte
                                     where !Context.tb_sis_reporte_x_seg_usuario.Any(meu => meu.CodReporte == q.CodReporte && meu.IdEmpresa == IdEmpresa && meu.IdUsuario == IdUsuario)
+                                    && q.se_muestra_administrador_reportes == true
                                     select new tb_sis_reporte_x_seg_usuario_Info
                                     {
                                         IdEmpresa = IdEmpresa,

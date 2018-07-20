@@ -8724,6 +8724,8 @@
     <Content Include="Areas\General\Views\ReportesPorUsuario\_GridViewPartial_ReportesAsignados.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\_CmbProducto_composicion.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\_CmbProducto_padre.cshtml" />
+    <Content Include="Areas\General\Views\ReportesPorUsuario\Consulta.cshtml" />
+    <Content Include="Areas\General\Views\ReportesPorUsuario\_GridViewPartial_ReportesPorUsuario.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
