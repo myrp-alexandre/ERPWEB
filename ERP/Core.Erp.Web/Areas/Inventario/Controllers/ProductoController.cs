@@ -9,15 +9,36 @@ using System.Web.Mvc;
 using Core.Erp.Bus.General;
 using DevExpress.Web;
 using System.Web.UI;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
     public class ProductoController : Controller
     {
+        #region variables
         const string UploadDirectory = "~/Content/UploadControl/UploadFolder/";
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         in_Producto_Composicion_List list_producto_composicion = new in_Producto_Composicion_List();
         in_Producto_Composicion_Bus bus_producto_composicion = new in_Producto_Composicion_Bus();
+        #endregion
+
+        #region Metodos ComboBox bajo demanda
+        public ActionResult CmbProducto_EgresoInventario()
+        {
+            in_Producto_Info model = new in_Producto_Info();
+            return PartialView("_CmbProducto_composicion", model);
+        }
+        public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public in_Producto_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+        #region vistas
+
         public ActionResult Index()
         {
             return View();
@@ -37,56 +58,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             List<in_Producto_Info> model = bus_producto.get_list(IdEmpresa, true);
             return model;
         }
-        private void cargar_combos(in_Producto_Info model)
-        {
-            in_ProductoTipo_Bus bus_producto_tipo = new in_ProductoTipo_Bus();
-            var lst_producto_tipo = bus_producto_tipo.get_list(model.IdEmpresa, false);
-            ViewBag.lst_producto_tipo = lst_producto_tipo;
-
-            Dictionary<string, string> lst_signos = new Dictionary<string, string>();
-            lst_signos.Add("-", "-");
-            lst_signos.Add("+", "+");
-            ViewBag.lst_signos = lst_signos;
-
-            in_categorias_Bus bus_categoria = new in_categorias_Bus();
-            var lst_categoria = bus_categoria.get_list(model.IdEmpresa, false);
-            ViewBag.lst_categoria = lst_categoria;
-
-            in_presentacion_Bus bus_presentacion = new in_presentacion_Bus();
-            var lst_presentacion = bus_presentacion.get_list(model.IdEmpresa, false);
-            ViewBag.lst_presentacion = lst_presentacion;
-
-            in_Marca_Bus bus_marca = new in_Marca_Bus();
-            var lst_marca = bus_marca.get_list(model.IdEmpresa, false);
-            ViewBag.lst_marca = lst_marca;
-
-            in_linea_Bus bus_linea = new in_linea_Bus();
-            var lst_linea = bus_linea.get_list(model.IdEmpresa, model.IdCategoria, false);
-            ViewBag.lst_linea = lst_linea;
-
-            in_grupo_Bus bus_grupo = new in_grupo_Bus();
-            var lst_grupo = bus_grupo.get_list(model.IdEmpresa,model.IdCategoria,model.IdLinea,false);
-            ViewBag.lst_grupo = lst_grupo;
-
-            in_subgrupo_Bus bus_subgrupo = new in_subgrupo_Bus();
-            var lst_subgrupo = bus_subgrupo.get_list(model.IdEmpresa, model.IdCategoria, model.IdLinea, model.IdGrupo, false);
-            ViewBag.lst_subgrupo = lst_subgrupo;
-
-            in_UnidadMedida_Bus bus_unidad_medida = new in_UnidadMedida_Bus();
-            var lst_unidad_medida = bus_unidad_medida.get_list(false);
-            ViewBag.lst_unidad_medida = lst_unidad_medida;
-
-            var lst_producto_padre = bus_producto.get_list_padres(model.IdEmpresa, false);
-            ViewBag.lst_producto_padre = lst_producto_padre;
-
-            tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
-            var lst_impuesto = bus_impuesto.get_list("IVA", false);
-            ViewBag.lst_impuesto = lst_impuesto;
-        }
+        #endregion
+        #region Acciones
         public ActionResult Nuevo()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_Producto_Info model = new in_Producto_Info { IdEmpresa = IdEmpresa};
+            in_Producto_Info model = new in_Producto_Info { IdEmpresa = IdEmpresa };
             model.lst_producto_composicion = new List<in_Producto_Composicion_Info>();
             list_producto_composicion.set_list(model.lst_producto_composicion);
             cargar_combos(model);
@@ -156,6 +133,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
 
         #region Json
         public JsonResult cargar_lineas(string IdCategoria = "")
@@ -204,6 +182,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
         }
         #endregion
+        #region cargar combo
 
         private void cargar_combos()
         {
@@ -215,12 +194,60 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var lst_producto = bus_producto.get_list_para_composicion(IdEmpresa, false);
             ViewBag.lst_producto = lst_producto;
         }
+        private void cargar_combos(in_Producto_Info model)
+        {
+            in_ProductoTipo_Bus bus_producto_tipo = new in_ProductoTipo_Bus();
+            var lst_producto_tipo = bus_producto_tipo.get_list(model.IdEmpresa, false);
+            ViewBag.lst_producto_tipo = lst_producto_tipo;
+
+            Dictionary<string, string> lst_signos = new Dictionary<string, string>();
+            lst_signos.Add("-", "-");
+            lst_signos.Add("+", "+");
+            ViewBag.lst_signos = lst_signos;
+
+            in_categorias_Bus bus_categoria = new in_categorias_Bus();
+            var lst_categoria = bus_categoria.get_list(model.IdEmpresa, false);
+            ViewBag.lst_categoria = lst_categoria;
+
+            in_presentacion_Bus bus_presentacion = new in_presentacion_Bus();
+            var lst_presentacion = bus_presentacion.get_list(model.IdEmpresa, false);
+            ViewBag.lst_presentacion = lst_presentacion;
+
+            in_Marca_Bus bus_marca = new in_Marca_Bus();
+            var lst_marca = bus_marca.get_list(model.IdEmpresa, false);
+            ViewBag.lst_marca = lst_marca;
+
+            in_linea_Bus bus_linea = new in_linea_Bus();
+            var lst_linea = bus_linea.get_list(model.IdEmpresa, model.IdCategoria, false);
+            ViewBag.lst_linea = lst_linea;
+
+            in_grupo_Bus bus_grupo = new in_grupo_Bus();
+            var lst_grupo = bus_grupo.get_list(model.IdEmpresa, model.IdCategoria, model.IdLinea, false);
+            ViewBag.lst_grupo = lst_grupo;
+
+            in_subgrupo_Bus bus_subgrupo = new in_subgrupo_Bus();
+            var lst_subgrupo = bus_subgrupo.get_list(model.IdEmpresa, model.IdCategoria, model.IdLinea, model.IdGrupo, false);
+            ViewBag.lst_subgrupo = lst_subgrupo;
+
+            in_UnidadMedida_Bus bus_unidad_medida = new in_UnidadMedida_Bus();
+            var lst_unidad_medida = bus_unidad_medida.get_list(false);
+            ViewBag.lst_unidad_medida = lst_unidad_medida;
+
+            var lst_producto_padre = bus_producto.get_list_padres(model.IdEmpresa, false);
+            ViewBag.lst_producto_padre = lst_producto_padre;
+
+            tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
+            var lst_impuesto = bus_impuesto.get_list("IVA", false);
+            ViewBag.lst_impuesto = lst_impuesto;
+        }
+        #endregion
+        #region funciones del detalle
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial_producto_composicion(decimal IdProducto = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_Producto_Info model = new in_Producto_Info();            
+            in_Producto_Info model = new in_Producto_Info();
             model.lst_producto_composicion = bus_producto_composicion.get_list(IdEmpresa, IdProducto);
             if (model.lst_producto_composicion.Count == 0)
                 model.lst_producto_composicion = list_producto_composicion.get_list();
@@ -258,6 +285,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             cargar_combos();
             return PartialView("_GridViewPartial_producto_composicion", model);
         }
+        #endregion
 
     }
     public class in_Producto_Composicion_List

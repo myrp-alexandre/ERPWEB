@@ -954,7 +954,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
             <End Role="tb_region" EntitySet="tb_region" />
             <End Role="tb_provincia" EntitySet="tb_provincia" />
           </AssociationSet>
-          <EntitySet Name="tb_sis_reporte_diseno" EntityType="Model_general.tb_sis_reporte_diseno" />
           <EntitySet Name="tb_sis_reporte_x_seg_usuario" EntityType="Model_general.tb_sis_reporte_x_seg_usuario" />
           <AssociationSet Name="FK_tb_sis_reporte_x_seg_usuario_tb_empresa" Association="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_empresa">
             <End Role="tb_empresa" EntitySet="tb_empresa" />
@@ -1584,24 +1583,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="tb_sis_reporte_diseno">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="codDocumentoTipo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="codDocumentoTipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="File_Disenio_Reporte" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="tb_sis_reporte_x_seg_usuario">
           <Key>
             <PropertyRef Name="IdUsuario" />

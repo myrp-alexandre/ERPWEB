@@ -31,15 +31,22 @@
 
         settings.Columns.Add(column =>
         {
+            column.FieldName = "pr_descripcion";
+            column.Caption = "Producto";
+            column.Width = Unit.Percentage(60);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+
+        settings.Columns.Add(column =>
+        {
             column.FieldName = "IdProductoHijo";
             column.Caption = "Producto";
-            column.Width = Unit.Percentage(50);
-            column.EditorProperties().ComboBox(p =>
+            column.Width = Unit.Percentage(30);
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
             {
-                p.TextField = "pr_descripcion";
-                p.ValueField = "IdProducto";
-                p.ValueType = typeof(decimal);
-                p.DataSource = ViewBag.lst_producto;
+                Html.RenderPartial("_CmbProducto_composicion", DataBinder.Eval(c.DataItem, "IdProductoHijo"));
             });
         });
 

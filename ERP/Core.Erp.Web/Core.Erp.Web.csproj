@@ -8722,6 +8722,7 @@
     <Content Include="Areas\Importacion\Views\CatalogoImportacion\Anular.cshtml" />
     <Content Include="Areas\General\Views\ReportesPorUsuario\_GridViewPartial_ReportesPorAsignar.cshtml" />
     <Content Include="Areas\General\Views\ReportesPorUsuario\_GridViewPartial_ReportesAsignados.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\_CmbProducto_composicion.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
