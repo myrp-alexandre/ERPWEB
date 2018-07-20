@@ -106,7 +106,11 @@ namespace Core.Erp.Bus.Contabilidad
                        item_pago.aplicConvDobTrib = aplicConvDobTribType.NA;
                        item_pago.pagExtSujRetNorLeg = aplicConvDobTribType.NA;
                        comp_det.pagoExterior = item_pago;
-                       if (Convert.ToDecimal(comp.baseImponible) + Convert.ToDecimal(comp.baseImpGrav) > 1000)
+                        if(comp_det.secuencial== "000001512")
+                           {
+
+                           }
+                       if (Convert.ToDecimal(comp.baseImponible) + Convert.ToDecimal(comp.baseImpGrav) >= 1000)
                        {
                            comp_det.formasDePago = null;
                            string[] AFormaPago = { "20" };
@@ -201,7 +205,10 @@ namespace Core.Erp.Bus.Contabilidad
                                  detalleVentas det_ventas = new detalleVentas();
                                  det_ventas.tpIdCliente = vent.tpIdCliente;
                                  det_ventas.idCliente = vent.idCliente;
-                                 det_ventas.parteRelVtas = parteRelType.NO;
+                                 if (det_ventas.tpIdCliente == " 04" | det_ventas.tpIdCliente == " 05" | det_ventas.tpIdCliente == " 06")
+                                 {
+                                     det_ventas.parteRelVtas = parteRelType.NO;
+                                 }
                                  det_ventas.tipoComprobante = vent.tipoComprobante;
                                  det_ventas.tipoEmision = tipoEmisionType.F;
                                  det_ventas.numeroComprobantes = vent.numeroComprobantes.ToString();
@@ -212,10 +219,11 @@ namespace Core.Erp.Bus.Contabilidad
                                  det_ventas.montoIce = vent.montoIce;
                                  det_ventas.valorRetIva = vent.valorRetIva.ToString("n2");
                                  det_ventas.valorRetRenta = vent.valorRetRenta.ToString("n2");
-                                 
+                                 det_ventas.montoIceSpecified = true;
                                  det_ventas.formasDePago = null;
                                  string[] AFormaPago = { "20" };
                                  det_ventas.formasDePago = AFormaPago;
+                                 
                                  ats.ventas.Add(det_ventas);
                              }
                             );
