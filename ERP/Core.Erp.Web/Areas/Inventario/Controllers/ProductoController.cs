@@ -191,8 +191,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var lst_unidad_medida = bus_unidad_medida.get_list(false);
             ViewBag.lst_unidad_medida = lst_unidad_medida;
 
-            var lst_producto = bus_producto.get_list_para_composicion(IdEmpresa, false);
-            ViewBag.lst_producto = lst_producto;
+          
         }
         private void cargar_combos(in_Producto_Info model)
         {
@@ -258,22 +257,31 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] in_Producto_Composicion_Info info_det)
         {
-            if (ModelState.IsValid)
-                list_producto_composicion.AddRow(info_det);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            in_Producto_Info info_p = new in_Producto_Info();
+            if(info_det!=null)
+                if(info_det.IdProductoHijo!=0)
+                     info_p = bus_producto.get_info(IdEmpresa, info_det.IdProductoHijo);
+                        if (info_p != null)
+                            info_det.pr_descripcion = info_p.pr_descripcion;
+            list_producto_composicion.AddRow(info_det);
             in_Producto_Info model = new in_Producto_Info();
             model.lst_producto_composicion = list_producto_composicion.get_list();
-            cargar_combos();
             return PartialView("_GridViewPartial_producto_composicion", model);
         }
 
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] in_Producto_Composicion_Info info_det)
         {
-            if (ModelState.IsValid)
-                list_producto_composicion.UpdateRow(info_det);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            in_Producto_Info info_p = new in_Producto_Info();
+            if (info_det != null)
+                if (info_det.IdProductoHijo != 0)
+                    info_p = bus_producto.get_info(IdEmpresa, info_det.IdProductoHijo);
+            if (info_p != null)
+                info_det.pr_descripcion = info_p.pr_descripcion; list_producto_composicion.UpdateRow(info_det);
             in_Producto_Info model = new in_Producto_Info();
             model.lst_producto_composicion = list_producto_composicion.get_list();
-            cargar_combos();
             return PartialView("_GridViewPartial_producto_composicion", model);
         }
 

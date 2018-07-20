@@ -12,10 +12,11 @@ namespace Core.Erp.Info.Inventario
         public int IdEmpresa { get; set; }
         public decimal IdProductoPadre { get; set; }
         [Required(ErrorMessage = "El campo producto es obligatorio")]
+        [Range(1, 9999999, ErrorMessage = "El campo producto es obligatorio")]
         public decimal IdProductoHijo { get; set; }
-        [Required(ErrorMessage = "El campo unidad de medida es obligatorio")]
         public string IdUnidadMedida { get; set; }
         [Required(ErrorMessage = "El campo cantidad es obligatorio")]
+
         public double Cantidad { get; set; }
 
         //Campos que no existen en la tabla
