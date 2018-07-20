@@ -9,7 +9,7 @@ namespace Core.Erp.Data.General
 {
    public class tb_sis_reporte_x_seg_usuario_Data
     {
-        public List<tb_sis_reporte_x_seg_usuario_Info> get_list(int IdEmpresa, string IdUsuario)
+        public List<tb_sis_reporte_x_seg_usuario_Info> get_list(int IdEmpresa, string IdUsuario, bool MostrarNoAsignados)
         {
             try
             {
@@ -29,21 +29,27 @@ namespace Core.Erp.Data.General
                                  CodReporte = q.CodReporte,
                                  nom_reporte = r.nom_reporte,
                                  observacion = r.observacion,
+                                 mvc_area = r.mvc_area,
+                                 mvc_controlador = r.mvc_controlador,
+                                 mvc_accion = r.mvc_accion,
                                  seleccionado = true
                              }).ToList();
 
-                    Lista.AddRange((from q in Context.tb_sis_reporte
-                                    where !Context.tb_sis_reporte_x_seg_usuario.Any(meu => meu.CodReporte == q.CodReporte && meu.IdEmpresa == IdEmpresa && meu.IdUsuario == IdUsuario)
-                                    && q.se_muestra_administrador_reportes == true
-                                    select new tb_sis_reporte_x_seg_usuario_Info
-                                    {
-                                        IdEmpresa = IdEmpresa,
-                                        IdUsuario = IdUsuario,
-                                        CodReporte = q.CodReporte,
-                                        nom_reporte = q.nom_reporte,
-                                        observacion = q.observacion,
-                                        seleccionado = false
-                                    }).ToList());
+                    if (MostrarNoAsignados)
+                    {
+                        Lista.AddRange((from q in Context.tb_sis_reporte
+                                        where !Context.tb_sis_reporte_x_seg_usuario.Any(meu => meu.CodReporte == q.CodReporte && meu.IdEmpresa == IdEmpresa && meu.IdUsuario == IdUsuario)
+                                        && q.se_muestra_administrador_reportes == true
+                                        select new tb_sis_reporte_x_seg_usuario_Info
+                                        {
+                                            IdEmpresa = IdEmpresa,
+                                            IdUsuario = IdUsuario,
+                                            CodReporte = q.CodReporte,
+                                            nom_reporte = q.nom_reporte,
+                                            observacion = q.observacion,
+                                            seleccionado = false
+                                        }).ToList());
+                    }                    
                 }
                 return Lista;
             }

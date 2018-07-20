@@ -12,11 +12,11 @@ namespace Core.Erp.Bus.General
     {
         tb_sis_reporte_x_seg_usuario_Data odata = new tb_sis_reporte_x_seg_usuario_Data();
     
-        public List<tb_sis_reporte_x_seg_usuario_Info> get_list(int IdEmpresa, string IdUsuario)
+        public List<tb_sis_reporte_x_seg_usuario_Info> get_list(int IdEmpresa, string IdUsuario, bool MostrarNoAsignados)
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdUsuario);
+                return odata.get_list(IdEmpresa, IdUsuario, MostrarNoAsignados);
             }
             catch (Exception)
             {

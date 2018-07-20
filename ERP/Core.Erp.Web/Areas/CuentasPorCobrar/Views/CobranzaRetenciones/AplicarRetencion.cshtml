@@ -43,6 +43,7 @@
                     var porcentaje = Number(data.PorcentajeRet) / 100;
                     valor = Number(iva) * porcentaje;
                 }
+                valor = Number(valor).toFixed(2);
                 GridView_cobranza_ret_det.GetEditor('dc_ValorPago').SetValue(valor);
             },
             error: function (error) {

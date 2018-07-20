@@ -1,6 +1,7 @@
 ﻿using Core.Erp.Bus.General;
 using Core.Erp.Bus.SeguridadAcceso;
 using Core.Erp.Info.General;
+using Core.Erp.Web.Helps;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
         public ActionResult Index(tb_sis_reporte_x_seg_usuario_Info model)
         {
             cargar_combos();
-            List_det.set_list(bus_reporte_x_usuario.get_list(model.IdEmpresa, model.IdUsuario));
+            List_det.set_list(bus_reporte_x_usuario.get_list(model.IdEmpresa, model.IdUsuario,true));
             return View(model);
         }
         private void cargar_combos()
@@ -37,6 +38,16 @@ namespace Core.Erp.Web.Areas.General.Controllers
             seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
             var lst_usuario = bus_usuario.get_list(false);
             ViewBag.lst_usuario = lst_usuario;
+        }
+        public ActionResult Consulta()
+        {
+            return View();
+        }
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_ReportesPorUsuario()
+        {
+            var model = bus_reporte_x_usuario.get_list(Convert.ToInt32(SessionFixed.IdEmpresa),SessionFixed.IdUsuario,false);
+            return PartialView("_GridViewPartial_ReportesPorUsuario", model);
         }
         public ActionResult GridViewPartial_ReportesPorAsignar()
         {

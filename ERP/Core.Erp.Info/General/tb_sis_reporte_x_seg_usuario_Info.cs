@@ -14,5 +14,8 @@ namespace Core.Erp.Info.General
         public string nom_reporte { get; set; }
         public bool seleccionado { get; set; }
         public object observacion { get; set; }
+        public string mvc_accion { get; set; }
+        public string mvc_controlador { get; set; }
+        public string mvc_area { get; set; }
     }
 }
