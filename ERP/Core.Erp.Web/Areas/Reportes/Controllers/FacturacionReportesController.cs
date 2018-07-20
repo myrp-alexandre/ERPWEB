@@ -5,6 +5,7 @@ using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.CuentasPorCobrar;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
+using Core.Erp.Info.Reportes.Facturacion;
 using Core.Erp.Web.Helps;
 using Core.Erp.Web.Reportes.Facturacion;
 using DevExpress.Web;
@@ -23,7 +24,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbCliente_Facturacion()
         {
-            cxc_cobro_Info model = new cxc_cobro_Info();
+            FAC_002_Info model = new FAC_002_Info();
             return PartialView("_CmbCliente_Facturacion", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)

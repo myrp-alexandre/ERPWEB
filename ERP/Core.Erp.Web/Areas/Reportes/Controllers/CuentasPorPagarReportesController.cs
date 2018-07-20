@@ -1,6 +1,12 @@
 ﻿using Core.Erp.Bus.CuentasPorPagar;
+using Core.Erp.Bus.Facturacion;
+using Core.Erp.Bus.General;
+using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
+using Core.Erp.Info.Reportes.CuentasPorPagar;
+using Core.Erp.Web.Helps;
 using Core.Erp.Web.Reportes.CuentasPorPagar;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +17,25 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
     public class CuentasPorPagarReportesController : Controller
     {
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+
+        #region Metodos ComboBox bajo demanda
+        public ActionResult CmbProveedor_CXP()
+        {
+           CXP_008_Info model = new CXP_008_Info();
+            return PartialView("_CmbProveedor_CXP", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROVEE.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROVEE.ToString());
+        }
+        #endregion
+
+
         public ActionResult CXP_001(int IdTipoCbte_Ogiro = 0, decimal IdCbteCble_Ogiro = 0)
         {
             CXP_001_Rpt model = new CXP_001_Rpt();
@@ -156,5 +181,15 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 ViewBag.Report = report;
             return View(model);
         }
+
+        public JsonResult cargar_proveedor()
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            cp_proveedor_Bus bus_contacto = new cp_proveedor_Bus();
+            var resultado = bus_contacto.get_list(IdEmpresa, false);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

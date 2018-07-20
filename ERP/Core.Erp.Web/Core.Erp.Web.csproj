@@ -8726,6 +8726,7 @@
     <Content Include="Areas\Inventario\Views\Producto\_CmbProducto_padre.cshtml" />
     <Content Include="Areas\General\Views\ReportesPorUsuario\Consulta.cshtml" />
     <Content Include="Areas\General\Views\ReportesPorUsuario\_GridViewPartial_ReportesPorUsuario.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\_CmbProveedor_CXP.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

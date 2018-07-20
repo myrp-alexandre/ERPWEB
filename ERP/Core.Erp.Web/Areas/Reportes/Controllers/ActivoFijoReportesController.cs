@@ -7,11 +7,11 @@ using System.Web.Mvc;
 using Core.Erp.Info.Reportes.ActivoFijo;
 using Core.Erp.Info.Helps;
 using Core.Erp.Bus.ActivoFijo;
-
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
     public class ActivoFijoReportesController : Controller
     {
+
         public ActionResult ACTF_001(decimal Id_Mejora_Baja_Activo = 0, string Id_Tipo = "" )
         {
             ACTF_001_Rpt model = new ACTF_001_Rpt();
