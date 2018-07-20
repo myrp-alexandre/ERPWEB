@@ -61,20 +61,19 @@
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = Unit.Pixel(150);
+            c.Width = Unit.Pixel(100);
         });
 
-        settings.Columns.Add("CodReporte", "Código").Width = Unit.Percentage(10);
+        settings.Columns.Add("CodReporte", "Código").Width = Unit.Percentage(20);
         settings.Columns.Add("nom_reporte", "Nombre").Width = Unit.Percentage(60);
         settings.Columns.Add("estado", "Estado").Width = Unit.Percentage(10);
-        settings.Columns.Add("orden", "Orden").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.SetDataItemTemplateContent(c =>
             {
                 ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('"+Url.Action(DataBinder.Eval(c.DataItem, "mvc_accion").ToString(), DataBinder.Eval(c.DataItem, "mvc_controlador").ToString(), new { Area = DataBinder.Eval(c.DataItem, "mvc_area").ToString() }, Request.Url.Scheme)+"');\"></span>");
             });
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(5);
         });
     });
 }

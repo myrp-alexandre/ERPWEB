@@ -174,7 +174,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.lst_estado = lst_estado;
 
         }
-        public ActionResult ACTF_005(DateTime fecha_corte, int IdActivoFijoTipo = 0, int IdCategoriaAF = 0, string Estado_Proceso = "")
+        public ActionResult ACTF_005(DateTime? fecha_corte, int IdActivoFijoTipo = 0, int IdCategoriaAF = 0, string Estado_Proceso = "")
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
