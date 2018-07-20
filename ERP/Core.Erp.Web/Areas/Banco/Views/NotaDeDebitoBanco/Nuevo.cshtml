@@ -20,11 +20,15 @@
         $("#IdTipoNota").change(function () {
             armar_diario();
         });
+        $("#IdTipo_Persona").change(function () {
+            vaciar_detalles();
+            IdEntidad.SetValue(0);
+        });
         armar_diario();
     });
     var selectedIDs;
     function OnBeginCallback(s, e) {
-        e.customArgs["TipoPersona"] = $("#IdTipo_Persona").val();
+        e.customArgs["IdTipo_Persona"] = $("#IdTipo_Persona").val();
         e.customArgs["Entidad"] = IdEntidad.GetValue();
         e.customArgs["selectedIDs"] = selectedIDs;
     }
