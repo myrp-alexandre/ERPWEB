@@ -35,12 +35,43 @@
             </div>
         </div>
     </div>
+
+
     <div class="row">
         <div class="col-md-7">
-            <div class="form-group">
-                <label for="IdCliente">Cliente*</label>
-                @Html.Partial("_CmbCliente_Cobranza", Model)
-                @Html.ValidationMessageFor(q => q.IdProducto_padre, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="IdProducto_padre">Producto padre*</label>
+                            @Html.Partial("_CmbProducto_padre", Model)
+                            @Html.ValidationMessageFor(q => q.IdProducto_padre, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="pr_descripcion">Descripción*</label>
+                            @Html.TextBoxFor(q => q.pr_descripcion, new { @class = "form-control", @id = "pr_descripcion" })
+                            @Html.ValidationMessageFor(q => q.pr_descripcion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="pr_descripcion_2">Descripción 2</label>
+                            @Html.TextBoxFor(q => q.pr_descripcion_2, new { @class = "form-control", @id = "pr_descripcion_2" })
+                            @Html.ValidationMessageFor(q => q.pr_descripcion_2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-md-4">
@@ -73,7 +104,6 @@
             </div>
         </div>
     </div>
-    
 
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
