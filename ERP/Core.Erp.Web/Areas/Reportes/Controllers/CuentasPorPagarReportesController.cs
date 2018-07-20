@@ -181,15 +181,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 ViewBag.Report = report;
             return View(model);
         }
-
-        public JsonResult cargar_proveedor()
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            cp_proveedor_Bus bus_contacto = new cp_proveedor_Bus();
-            var resultado = bus_contacto.get_list(IdEmpresa, false);
-
-            return Json(resultado, JsonRequestBehavior.AllowGet);
-        }
+        
 
     }
 }

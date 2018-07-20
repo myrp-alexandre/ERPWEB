@@ -8727,6 +8727,8 @@
     <Content Include="Areas\General\Views\ReportesPorUsuario\Consulta.cshtml" />
     <Content Include="Areas\General\Views\ReportesPorUsuario\_GridViewPartial_ReportesPorUsuario.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\_CmbProveedor_CXP.cshtml" />
+    <Content Include="Areas\Reportes\Views\ActivoFijoReportes\ACTF_004.cshtml" />
+    <Content Include="Areas\Reportes\Views\ActivoFijoReportes\ACTF_005.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

@@ -14,13 +14,12 @@
         settings.Properties.TextFormatString = "[{0}] {1}";
         settings.Properties.ValueField = "IdEntidad";
         settings.Properties.ValueType = typeof(decimal);
-        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){cargar_proveedor()}";
 
         settings.Properties.Columns.Add("IdEntidad", "ID", 10);
         settings.Properties.Columns.Add("pe_nombreCompleto", "Proveedor", 90);
     })
     .BindList(new Core.Erp.Web.Areas.Reportes.Controllers.CuentasPorPagarReportesController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Reportes.Controllers.CuentasPorPagarReportesController().get_info_bajo_demanda)
-    .Bind(Model.IdEntidad);
+    .Bind(Model.IdProveedor);
 
 }
 @comboBox.GetHtml()
