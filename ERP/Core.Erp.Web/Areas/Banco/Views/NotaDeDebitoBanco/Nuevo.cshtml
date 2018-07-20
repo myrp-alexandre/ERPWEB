@@ -28,6 +28,7 @@
         e.customArgs["Entidad"] = IdEntidad.GetValue();
         e.customArgs["selectedIDs"] = selectedIDs;
     }
+
     function OnSelectionChanged(s, e) {
         s.GetSelectedFieldValues("IdOrdenPago_op", GetSelectedFieldValuesCallback);
     }
@@ -257,3 +258,4 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+
