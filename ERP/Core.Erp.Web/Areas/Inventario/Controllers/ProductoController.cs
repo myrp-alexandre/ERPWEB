@@ -257,15 +257,21 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] in_Producto_Composicion_Info info_det)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            in_Producto_Info info_p = new in_Producto_Info();
-            if(info_det!=null)
-                if(info_det.IdProductoHijo!=0)
-                     info_p = bus_producto.get_info(IdEmpresa, info_det.IdProductoHijo);
-                        if (info_p != null)
-                            info_det.pr_descripcion = info_p.pr_descripcion;
-            list_producto_composicion.AddRow(info_det);
             in_Producto_Info model = new in_Producto_Info();
+            if (ModelState.IsValid)
+            {
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                in_Producto_Info info_p = new in_Producto_Info();
+                if (info_det != null)
+                    if (info_det.IdProductoHijo != 0)
+                        info_p = bus_producto.get_info(IdEmpresa, info_det.IdProductoHijo);
+                if (info_p != null)
+                {
+                    info_det.pr_descripcion = info_p.pr_descripcion;
+                    info_det.IdUnidadMedida = info_p.IdUnidadMedida;
+                }
+                list_producto_composicion.AddRow(info_det);
+            }
             model.lst_producto_composicion = list_producto_composicion.get_list();
             return PartialView("_GridViewPartial_producto_composicion", model);
         }
@@ -273,14 +279,21 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] in_Producto_Composicion_Info info_det)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            in_Producto_Info info_p = new in_Producto_Info();
-            if (info_det != null)
-                if (info_det.IdProductoHijo != 0)
-                    info_p = bus_producto.get_info(IdEmpresa, info_det.IdProductoHijo);
-            if (info_p != null)
-                info_det.pr_descripcion = info_p.pr_descripcion; list_producto_composicion.UpdateRow(info_det);
             in_Producto_Info model = new in_Producto_Info();
+            if (ModelState.IsValid)
+            {
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                in_Producto_Info info_p = new in_Producto_Info();
+                if (info_det != null)
+                    if (info_det.IdProductoHijo != 0)
+                        info_p = bus_producto.get_info(IdEmpresa, info_det.IdProductoHijo);
+                if (info_p != null)
+                {
+                    info_det.pr_descripcion = info_p.pr_descripcion;
+                    info_det.IdUnidadMedida = info_p.IdUnidadMedida;
+                }
+                list_producto_composicion.UpdateRow(info_det);
+            }
             model.lst_producto_composicion = list_producto_composicion.get_list();
             return PartialView("_GridViewPartial_producto_composicion", model);
         }
