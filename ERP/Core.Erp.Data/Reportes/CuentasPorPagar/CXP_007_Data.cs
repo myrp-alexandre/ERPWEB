@@ -9,11 +9,13 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
 {
     public class CXP_007_Data
     {
-        public List<CXP_007_Info> get_list(int IdEmpresa, DateTime fecha_ini, DateTime fecha_fin, bool mostrar_agrupado )
+        public List<CXP_007_Info> get_list(int IdEmpresa, DateTime fecha_ini, DateTime fecha_fin, bool mostrar_agrupado)
         {
             try
             {
                 List<CXP_007_Info> Lista;
+                fecha_ini = fecha_ini.Date;
+                fecha_fin = fecha_fin.Date;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = (from q in Context.SPCXP_007(IdEmpresa, fecha_ini, fecha_fin, mostrar_agrupado)

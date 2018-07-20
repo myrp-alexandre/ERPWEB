@@ -1097,9 +1097,6 @@
     <Compile Include="SPFAC_002_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
-    <Compile Include="SPINV_001_Result.cs">
-      <DependentUpon>Model_reportes.tt</DependentUpon>
-    </Compile>
     <Compile Include="SPINV_003_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
