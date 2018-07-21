@@ -27,7 +27,7 @@
         settings.Properties.AllowNull = true;
     })
     .BindList(new Core.Erp.Web.Areas.Reportes.Controllers.FacturacionReportesController().get_list_ProductoPadre_bajo_demanda, new Core.Erp.Web.Areas.Reportes.Controllers.FacturacionReportesController().get_info_producto_bajo_demanda)
-    .Bind(Model.IdProducto);
+    .Bind(Model.IdProductoPadre);
 
 }
 @comboBox.GetHtml()

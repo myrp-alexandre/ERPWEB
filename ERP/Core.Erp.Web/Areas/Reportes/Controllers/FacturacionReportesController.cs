@@ -45,7 +45,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         public ActionResult CmbProductoHijo_Facturacion()
         {
-            SessionFixed.IdProducto_padre_dist = (Request.Params["IdProductoPadre"] != null) ? Request.Params["IdProductoPadre"].ToString() : "-1";
+            SessionFixed.IdProducto_padre_dist = (!string.IsNullOrEmpty(Request.Params["IdProductoPadre"])) ? Request.Params["IdProductoPadre"].ToString() : "-1";
             cl_filtros_Info model = new cl_filtros_Info();
             return PartialView("_CmbProductoHijo_Facturacion", model);
         }
@@ -55,7 +55,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         public List<in_Producto_Info> get_list_ProductoHijo_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.SOLOPADRES, cl_enumeradores.eModulo.INV, decimal.Parse(SessionFixed.IdProducto_padre_dist));
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.SOLOHIJOS, cl_enumeradores.eModulo.INV, decimal.Parse(SessionFixed.IdProducto_padre_dist));
         }
         public in_Producto_Info get_info_producto_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
         {
@@ -110,8 +110,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdProducto.Value = model.IdProducto;
             report.p_IdProducto_padre.Value = model.IdProductoPadre;
             report.p_mostrar_anulados.Value = model.mostrar_anulados;
-            report.usuario = Session["IdUsuario"].ToString();
-            report.empresa = Session["nom_empresa"].ToString();
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
                 report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
