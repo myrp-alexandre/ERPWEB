@@ -1052,6 +1052,24 @@
     <Compile Include="seg_Menu.cs">
       <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
     </Compile>
+    <Compile Include="seg_Menu_Categoria.cs">
+      <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="seg_Menu_Grupo.cs">
+      <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="seg_Menu_Grupo_x_seg_Menu_Item.cs">
+      <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="seg_Menu_Item.cs">
+      <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="seg_Menu_Item_Tipo.cs">
+      <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="seg_Menu_Pagina.cs">
+      <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
+    </Compile>
     <Compile Include="seg_Menu_x_Empresa.cs">
       <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
     </Compile>
@@ -1062,6 +1080,9 @@
       <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
     </Compile>
     <Compile Include="seg_Usuario_x_Empresa.cs">
+      <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="seg_usuario_x_tb_sis_reporte.cs">
       <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
     </Compile>
     <Compile Include="SPACTF_004_detalle_Result.cs">

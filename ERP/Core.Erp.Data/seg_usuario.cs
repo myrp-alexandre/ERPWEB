@@ -17,8 +17,9 @@ namespace Core.Erp.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public seg_usuario()
         {
-            this.seg_Usuario_x_Empresa = new HashSet<seg_Usuario_x_Empresa>();
             this.seg_Menu_x_Empresa_x_Usuario = new HashSet<seg_Menu_x_Empresa_x_Usuario>();
+            this.seg_Usuario_x_Empresa = new HashSet<seg_Usuario_x_Empresa>();
+            this.seg_usuario_x_tb_sis_reporte = new HashSet<seg_usuario_x_tb_sis_reporte>();
         }
     
         public string IdUsuario { get; set; }
@@ -35,8 +36,10 @@ namespace Core.Erp.Data
         public Nullable<bool> CambiarContraseniaSgtSesion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<seg_Menu_x_Empresa_x_Usuario> seg_Menu_x_Empresa_x_Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<seg_Usuario_x_Empresa> seg_Usuario_x_Empresa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<seg_Menu_x_Empresa_x_Usuario> seg_Menu_x_Empresa_x_Usuario { get; set; }
+        public virtual ICollection<seg_usuario_x_tb_sis_reporte> seg_usuario_x_tb_sis_reporte { get; set; }
     }
 }
