@@ -94,6 +94,11 @@ namespace Core.Erp.Data.Inventario
                 using (Entities_inventario Context = new Entities_inventario())
                 {
                     Lista = (from q in Context.vwin_Ing_Egr_Inven_distribucion_x_distribuir
+
+                             join c in Context.in_categorias
+                             on new {q.IdEmpresa,q.IdCategoria} equals new{c.IdEmpresa,c.IdCategoria }
+                             join p in Context.in_presentacion
+                             on new { q.IdEmpresa, q.IdPresentacion } equals new { p.IdEmpresa, p.IdPresentacion }
                              where q.IdEmpresa == IdEmpresa
                              && q.IdSucursal == IdSucursal
                              && q.IdMovi_inven_tipo == IdMovi_inven_tipo
@@ -105,14 +110,14 @@ namespace Core.Erp.Data.Inventario
                                  IdMovi_inven_tipo = q.IdMovi_inven_tipo,
                                  IdNumMovi = q.IdNumMovi,
                                  signo = q.signo,
-
                                  IdProducto = q.IdProducto,
                                  IdProducto_padre = q.IdProducto_padre,
-                                 pr_descripcion = q.pr_descripcion,
+                                 pr_descripcion = q.pr_descripcion+"  "+p.nom_presentacion+" "+c.ca_Categoria,
                                  IdUnidadMedida = q.IdUnidadMedida,
                                  can_total = q.can_total,
                                  can_distribuida = q.can_distribuida,
                                  can_x_distribuir = q.can_x_distribuir,
+                                 
 
                              }).ToList();
                 }

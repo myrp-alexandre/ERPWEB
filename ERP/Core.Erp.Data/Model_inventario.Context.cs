@@ -53,10 +53,10 @@ namespace Core.Erp.Data
         public virtual DbSet<in_producto_x_tb_bodega_Costo_Historico> in_producto_x_tb_bodega_Costo_Historico { get; set; }
         public virtual DbSet<in_Ing_Egr_Inven_distribucion> in_Ing_Egr_Inven_distribucion { get; set; }
         public virtual DbSet<vwin_Ing_Egr_Inven_distribucion> vwin_Ing_Egr_Inven_distribucion { get; set; }
-        public virtual DbSet<vwin_Ing_Egr_Inven_distribucion_x_distribuir> vwin_Ing_Egr_Inven_distribucion_x_distribuir { get; set; }
         public virtual DbSet<vwin_producto_padre_combo> vwin_producto_padre_combo { get; set; }
         public virtual DbSet<vwin_producto_hijo_combo> vwin_producto_hijo_combo { get; set; }
         public virtual DbSet<vwin_Ing_Egr_Inven_distribucion_det> vwin_Ing_Egr_Inven_distribucion_det { get; set; }
+        public virtual DbSet<vwin_Ing_Egr_Inven_distribucion_x_distribuir> vwin_Ing_Egr_Inven_distribucion_x_distribuir { get; set; }
     
         public virtual int spINV_aprobacion_ing_egr(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idBodega, Nullable<int> idMovi_inven_tipo, Nullable<decimal> idNumMovi)
         {

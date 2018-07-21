@@ -44,6 +44,11 @@ namespace Core.Erp.Info.Inventario
         public string lote_num_lote { get; set; }
         public List<in_Ing_Egr_Inven_distribucion_Info> lst_x_distribuir { get; set; }
         public List<in_Ing_Egr_Inven_distribucion_Info> lst_distribuido { get; set; }
+
+
+        public string ca_Categoria { get; set; }
+        public string nom_presentacion { get; set; }
+
         #endregion
 
         public in_Ing_Egr_Inven_distribucion_Info()

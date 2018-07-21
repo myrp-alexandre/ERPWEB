@@ -27,5 +27,6 @@ namespace Core.Erp.Data
         public double mv_costo { get; set; }
         public Nullable<System.DateTime> lote_fecha_vcto { get; set; }
         public string lote_num_lote { get; set; }
+        public Nullable<System.DateTime> lote_fecha_fab { get; set; }
     }
 }

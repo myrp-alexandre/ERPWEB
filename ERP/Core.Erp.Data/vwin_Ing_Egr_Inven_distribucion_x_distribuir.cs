@@ -26,5 +26,7 @@ namespace Core.Erp.Data
         public Nullable<double> can_total { get; set; }
         public Nullable<double> can_distribuida { get; set; }
         public double can_x_distribuir { get; set; }
+        public string IdCategoria { get; set; }
+        public string IdPresentacion { get; set; }
     }
 }
