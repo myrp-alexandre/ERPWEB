@@ -33,5 +33,21 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
             List<CXP_007_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, fecha_ini, fecha_fin, mostrar_agrupado);
             this.DataSource = lst_rpt;
         }
+
+        private void GroupFooter_codigo_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            if (!Convert.ToBoolean(p_mostrar_agrupado.Value))
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void GroupHeader_codigo_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            if (!Convert.ToBoolean(p_mostrar_agrupado.Value))
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }
