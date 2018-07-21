@@ -68,7 +68,6 @@ namespace Core.Erp.Data
         public virtual DbSet<VWROL_011> VWROL_011 { get; set; }
         public virtual DbSet<VWCXC_001> VWCXC_001 { get; set; }
         public virtual DbSet<VWCXC_001_diario> VWCXC_001_diario { get; set; }
-        public virtual DbSet<VWFAC_001> VWFAC_001 { get; set; }
         public virtual DbSet<VWCAJ_001> VWCAJ_001 { get; set; }
         public virtual DbSet<VWFAC_003> VWFAC_003 { get; set; }
         public virtual DbSet<VWFAC_003_cuotas> VWFAC_003_cuotas { get; set; }
@@ -80,6 +79,7 @@ namespace Core.Erp.Data
         public virtual DbSet<VWCXC_002_diario> VWCXC_002_diario { get; set; }
         public virtual DbSet<VWBAN_005> VWBAN_005 { get; set; }
         public virtual DbSet<VWBAN_006> VWBAN_006 { get; set; }
+        public virtual DbSet<VWFAC_001> VWFAC_001 { get; set; }
     
         public virtual int SPROL_002(Nullable<int> idempresa, Nullable<int> idnomina_tipo, Nullable<int> idnomina_Tipo_liq, Nullable<int> idperiodo)
         {

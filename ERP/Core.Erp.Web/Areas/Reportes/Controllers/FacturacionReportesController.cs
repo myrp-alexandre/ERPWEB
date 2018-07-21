@@ -26,7 +26,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbCliente_Facturacion()
         {
-            FAC_002_Info model = new FAC_002_Info();
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
             return PartialView("_CmbCliente_Facturacion", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -40,13 +40,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         public ActionResult CmbProductoPadre_Facturacion()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
             return PartialView("_CmbProductoPadre_Facturacion", model);
         }
         public ActionResult CmbProductoHijo_Facturacion()
         {
             SessionFixed.IdProducto_padre_dist = (!string.IsNullOrEmpty(Request.Params["IdProductoPadre"])) ? Request.Params["IdProductoPadre"].ToString() : "-1";
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
             return PartialView("_CmbProductoHijo_Facturacion", model);
         }
         public List<in_Producto_Info> get_list_ProductoPadre_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -63,7 +63,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         #endregion
 
-        private void cargar_combos(cl_filtros_Info model)
+        private void cargar_combos(cl_filtros_facturacion_Info model)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
@@ -75,7 +75,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.lst_cliente = lst_cliente;
 
             fa_cliente_contactos_Bus bus_contacto = new fa_cliente_contactos_Bus();
-            var lst_contacto = bus_contacto.get_list(IdEmpresa, model.IdCliente);
+            var lst_contacto = bus_contacto.get_list(IdEmpresa, model.IdCliente == null ? 0 : Convert.ToDecimal(model.IdCliente));
             ViewBag.lst_contacto = lst_contacto;
 
             fa_Vendedor_Bus bus_vendedor = new fa_Vendedor_Bus();
@@ -86,7 +86,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         public ActionResult FAC_001(DateTime? fecha_ini, DateTime? fecha_fin, int IdSucursal = 0, int IdVendedor = 0, decimal IdCliente = 0, int IdCliente_contacto = 0, decimal IdProducto = 0, decimal IdProducto_padre = 0,  bool mostrar_anulados = false)
         {
-            cl_filtros_Info model = new cl_filtros_Info
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
             {
                 fecha_ini = fecha_ini == null ? DateTime.Now : Convert.ToDateTime(fecha_ini),
                 fecha_fin = fecha_fin == null ? DateTime.Now : Convert.ToDateTime(fecha_fin),
@@ -118,7 +118,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
 
         [HttpPost]
-        public ActionResult FAC_001(cl_filtros_Info model)
+        public ActionResult FAC_001(cl_filtros_facturacion_Info model)
         {
             FAC_001_Rpt report = new FAC_001_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
@@ -141,9 +141,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         public ActionResult FAC_002(DateTime? fechaCorte, int IdSucursal = 0, decimal IdCliente= 0,int IdClienteContacto = 0)
         {
-            cl_filtros_Info model = new cl_filtros_Info
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
             {
-                fechaCorte = fechaCorte == null ? DateTime.Now : Convert.ToDateTime(fechaCorte),
+                fecha_fin = fechaCorte == null ? DateTime.Now : Convert.ToDateTime(fechaCorte),
                 IdSucursal = IdSucursal,
                 IdCliente = IdCliente,
                 IdClienteContacto = IdClienteContacto
@@ -152,7 +152,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cargar_combos(model);
             FAC_002_Rpt report = new FAC_002_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
-            report.p_fechaCorte.Value = model.fechaCorte;
+            report.p_fechaCorte.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdCliente.Value = model.IdCliente;
             report.p_IdClienteContacto.Value = model.IdClienteContacto;
@@ -164,11 +164,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
 
         [HttpPost]
-        public ActionResult FAC_002(cl_filtros_Info model)
+        public ActionResult FAC_002(cl_filtros_facturacion_Info model)
         {
             FAC_002_Rpt report = new FAC_002_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
-            report.p_fechaCorte.Value = model.fechaCorte;
+            report.p_fechaCorte.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdCliente.Value = model.IdCliente;
             report.p_IdClienteContacto.Value = model.IdClienteContacto;

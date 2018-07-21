@@ -28,9 +28,9 @@ namespace Core.Erp.Web.Reportes.Facturacion
             int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
             int IdVendedor = p_IdVendedor.Value == null ? 0 : Convert.ToInt32(p_IdVendedor.Value);
             decimal IdCliente = p_IdCliente.Value == null ? 0 : Convert.ToDecimal(p_IdCliente.Value);
-            decimal IdProducto = p_IdProducto.Value == null ? 0 : Convert.ToDecimal(p_IdProducto.Value);
-            decimal IdProducto_padre = p_IdProducto_padre.Value == null ? 0 : Convert.ToDecimal(p_IdProducto_padre.Value);
-            int IdCliente_contacto = p_IdCliente_contacto.Value == null ? 0 : Convert.ToInt32(p_IdCliente_contacto.Value);
+            decimal IdProducto = string.IsNullOrEmpty(p_IdProducto.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdProducto.Value);
+            decimal IdProducto_padre = string.IsNullOrEmpty(p_IdProducto_padre.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdProducto_padre.Value);
+            int IdCliente_contacto = string.IsNullOrEmpty(p_IdCliente_contacto.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCliente_contacto.Value);
             DateTime fecha_ini = p_fecha_ini.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_ini.Value);
             DateTime fecha_fin = p_fecha_fin.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_fin.Value);
             bool  mostrar_anulados = p_mostrar_anulados.Value == null ? false : Convert.ToBoolean(p_mostrar_anulados.Value);

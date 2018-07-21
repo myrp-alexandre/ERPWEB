@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.Helps.cl_filtros_Info
+﻿@model Core.Erp.Info.Helps.cl_filtros_facturacion_Info
 @{
     Layout = "~/Areas/Reportes/Views/Layout/_Layout_filtros.cshtml";
     ViewBag.Title = "FAC_002";
@@ -42,8 +42,8 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                @Html.TextBoxFor(q => q.fechaCorte, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechaCorte" })
-                                @Html.ValidationMessageFor(q => q.fechaCorte, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.fecha_fin, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_fin" })
+                                @Html.ValidationMessageFor(q => q.fecha_fin, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
 <script>
     $(function () {
         //Date picker
-        $('#fechaCorte').datepicker({
+        $('#fecha_fin').datepicker({
             autoclose: true
         })
         

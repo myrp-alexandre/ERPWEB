@@ -41,5 +41,6 @@ namespace Core.Erp.Data
         public double vt_total { get; set; }
         public string Estado { get; set; }
         public string Su_Descripcion { get; set; }
+        public System.DateTime vt_fecha { get; set; }
     }
 }

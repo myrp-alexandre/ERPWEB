@@ -13,7 +13,7 @@ namespace Core.Erp.Bus.Reportes.Facturacion
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdSucursal, IdVendedor, IdCliente, IdCliente_contacto, IdProducto, IdProducto_padre, fecha_fin, fecha_fin, mostrar_anulados);
+                return odata.get_list(IdEmpresa, IdSucursal, IdVendedor, IdCliente, IdCliente_contacto, IdProducto, IdProducto_padre, fecha_ini, fecha_fin, mostrar_anulados);
             }
             catch (Exception)
             {
