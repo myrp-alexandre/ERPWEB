@@ -509,37 +509,7 @@ namespace Core.Erp.Data.Inventario
             return Lista;
         }
 
-        public List<in_Producto_Info> get_list(int IdEmpresa,  int skip, int take, string filter)
-        {
-            try
-            {
-                List<in_Producto_Info> Lista = new List<in_Producto_Info>();
-
-                Entities_inventario context_g = new Entities_inventario();
-                var lstg = context_g.in_Producto.Where(q => q.Estado == "A" && (q.IdProducto.ToString() + " " + q.pr_descripcion).Contains(filter)).OrderBy(q => q.IdProducto).Skip(skip).Take(take);
-                foreach (var q in lstg)
-                {
-                    Lista.Add(new in_Producto_Info
-                    {
-                        IdProducto = q.IdProducto,
-                        pr_descripcion = q.pr_descripcion,
-                        pr_descripcion_2 = q.pr_descripcion_2,
-                        pr_codigo = q.pr_codigo,
-                        lote_num_lote = q.lote_num_lote,
-                        lote_fecha_vcto = q.lote_fecha_vcto
-                    });
-                }
-
-                context_g.Dispose();
-                return Lista;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
+      
         public in_Producto_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
         {
             decimal id;
@@ -574,6 +544,56 @@ namespace Core.Erp.Data.Inventario
 
             return info;
         }
+
+
+
+        public List<in_Producto_Info> get_list(int IdEmpresa, int skip, int take, string filter)
+        {
+            try
+            {
+                List<in_Producto_Info> Lista = new List<in_Producto_Info>();
+
+                Entities_inventario Context = new Entities_inventario();
+
+                var lst = (from 
+                          p in Context.in_Producto
+                         join c in Context.in_categorias
+                         on new { p.IdEmpresa, p.IdCategoria } equals new { c.IdEmpresa, c.IdCategoria }
+                         join pr in Context.in_presentacion
+                         on new { p.IdEmpresa, p.IdPresentacion } equals new { pr.IdEmpresa, pr.IdPresentacion }
+
+                         where
+                          p.IdEmpresa == IdEmpresa
+                          && c.IdEmpresa == IdEmpresa
+                          && pr.IdEmpresa == IdEmpresa
+                          && p.Estado=="A"
+                          &&(p.IdProducto.ToString() + " " + p.pr_descripcion).Contains(filter)
+                         select new {
+                             p.IdEmpresa,
+                             p.IdProducto,
+                             p.pr_descripcion,
+                             p.pr_descripcion_2,
+                             p.pr_codigo,
+                             p.lote_num_lote,
+                             p.lote_fecha_vcto,
+                             c.ca_Categoria,
+                             pr.nom_presentacion
+                         })
+                             .OrderBy(p => p.IdProducto)
+                             .Skip(skip)
+                             .Take(take)
+                             .ToList();
+
+                Context.Dispose();
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
         #endregion
     }
