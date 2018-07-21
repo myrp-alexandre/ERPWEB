@@ -37,7 +37,7 @@
         {
             column.FieldName = "IdProducto";
             column.Caption = "Producto";
-            column.Width = Unit.Percentage(50);
+            column.Width = Unit.Percentage(80);
             column.EditorProperties().ComboBox(p =>
             {
                 p.Columns.Add("pr_descripcion", "Descripción").Width = Unit.Percentage(100);
@@ -48,30 +48,7 @@
             });
 
         });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "lote_fecha_fab";
-            column.Caption = "Fecha fab.";
-            column.Width = Unit.Percentage(15);
-            column.PropertiesEdit.DisplayFormatString = "d";
-            column.EditorProperties().DateEdit(sp =>
-            {
-                column.PropertiesEdit.DisplayFormatString = "d";
-                sp.Width = Unit.Percentage(100);
-            });
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "lote_fecha_vcto";
-            column.Caption = "Fecha venc.";
-            column.Width = Unit.Percentage(15);
-            column.PropertiesEdit.DisplayFormatString = "d";
-            column.EditorProperties().DateEdit(sp =>
-            {
-                column.PropertiesEdit.DisplayFormatString = "d";
-                sp.Width = Unit.Percentage(100);
-            });
-        });
+       
         settings.Columns.Add("dm_cantidad", "Cantidad").Width = Unit.Percentage(20);
     });
 }

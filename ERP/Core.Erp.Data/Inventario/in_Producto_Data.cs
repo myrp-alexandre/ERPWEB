@@ -203,6 +203,8 @@ namespace Core.Erp.Data.Inventario
                 {
                     Lista = (from q in Context.vwin_producto_hijo_combo
                              where q.IdEmpresa == IdEmpresa
+                             &&q.lote_num_lote!= "LOTE0"
+                             && q.IdProducto_padre==IdProducto_padre
                              select new in_Producto_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -211,7 +213,8 @@ namespace Core.Erp.Data.Inventario
                                  nom_presentacion = q.nom_presentacion,
                                  nom_categoria = q.ca_Categoria,
                                  lote_fecha_vcto = q.lote_fecha_vcto,
-                                 lote_num_lote = q.lote_num_lote
+                                 lote_num_lote = q.lote_num_lote,
+                                 IdUnidadMedida=q.IdUnidadMedida
                              }).ToList();
                 }
                 Lista = get_list_nombre_combo(Lista);
