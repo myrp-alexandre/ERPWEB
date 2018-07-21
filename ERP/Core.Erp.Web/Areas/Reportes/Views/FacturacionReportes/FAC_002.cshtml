@@ -9,7 +9,7 @@
 }
 @using (Html.BeginForm("FAC_002", "FacturacionReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    <div class="box collapsed-box">
+    <div class="box">
         <div class="box-header with-border">
             <div class="row">
                 <div class="col-md-12">
@@ -18,26 +18,46 @@
             </div>
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fa fa-plus"></i>
+                    <i class="fa fa-minus"></i>
                 </button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
                     <i class="fa fa-times"></i>
                 </button>
             </div>
+
         </div>
         <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="IdCliente">Cliente</label>
+                            @Html.Partial("_CmbCliente_Facturacion", Model)
+                            @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger", @id = "IdCliente" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="IdClienteContacto">Cliente contacto</label>
+                            @Html.DropDownListFor(q => q.IdClienteContacto, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres", Model.IdClienteContacto), new { @class = "form-control", @id = "IdClienteContacto" })
+                            @Html.ValidationMessageFor(q => q.IdClienteContacto, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdSucursal">Sucursal</label>
-                            @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control" })
+                            @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion", Model.IdSucursal), new { @class = "form-control" })
                             @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="">Fecha corte *</label>
+                            <label for="">Fecha fin*</label>
                             <div class="input-group date">
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
@@ -49,44 +69,10 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="IdCliente">Cliente</label>
-                            @Html.Partial("_CmbCliente_Facturacion", Model)
-                            @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="IdClienteContacto">Cliente contacto</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdClienteContacto, settings =>
-                         {
-                             settings.Name = "IdClienteContacto";
-                             settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                             settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                             settings.Properties.Columns.Add("IdContacto", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                             settings.Properties.Columns.Add("Nombres", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                             //Campo ID
-                             settings.Properties.ValueField = "IdCliente";
-                             settings.Properties.ValueType = typeof(decimal);
-                             settings.Properties.TextField = "Nombres";
-                             //Boton para seleccionar ningun registro
-                             settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                             settings.Properties.NullText = "== Seleccione ==";
-                             settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                             settings.Properties.AllowNull = true;
-                         }).BindList(ViewBag.lst_contacto).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdClienteContacto, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- /.box-body -->
         </div>
-            </div>
+    </div>
+
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">@ViewBag.Title</h3>
@@ -104,7 +90,7 @@
        {
            settings.MobileMode = false;
            settings.Name = "webDocumentViewer";
-       }).Bind(ViewBag.Report).GetHtml();
+       }).Bind(ViewBag.Report).GetHtml()
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
@@ -113,13 +99,35 @@
         <!-- /.box-footer-->
     </div>
 }
-<script>
-    $(function () {
-        //Date picker
-        $('#fecha_fin').datepicker({
-            autoclose: true
-        })
-        
+    <script>
+            $(function () {
+                $('#fecha_fin').datepicker({
+                    autoclose: true
+                })
+            });
+            function cargar_cliente() {
 
-    });
-</script>
+                $("#IdClienteContacto").empty();
+                var codigo = IdCliente.GetValue();
+
+                    var datos = {
+                        IdCliente: codigo
+                    }
+                    $.ajax({
+                        type: 'POST',
+                        data: JSON.stringify(datos),
+                        url: '@Url.Action("cargar_cliente", "FacturacionReportes",new { Area = "Reportes"})',
+                        async: false,
+                        dataType: 'json',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            $.each(data, function (i, row) {
+                                $("#IdClienteContacto").append("<option value=" + row.IdContacto + ">" + row.Nombres + "</option>");
+                                $("#IdClienteContacto").val("0");
+                        });
+                    },
+                    error: function (error) {
+                    }
+                });
+            };
+    </script>

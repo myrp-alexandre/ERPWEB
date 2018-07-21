@@ -22,6 +22,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
                 decimal IdClienteIni = IdCliente;
                 decimal IdClienteFin = IdCliente == 0 ? 9999 : IdCliente;
 
+                fechaCorte = fechaCorte.Date;
 
                 List<FAC_002_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
@@ -58,7 +59,10 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                  Idtipo_cliente = q.Idtipo_cliente,
                                  Mayor_a_90Dias = q.Mayor_a_90Dias,
                                  Saldo = q.Saldo,
-                                 Total_Pagado = q.Total_Pagado
+                                 Total_Pagado = q.Total_Pagado,
+                                 TelefonoContacto = q.TelefonoContacto,
+                                 IdContacto = q.IdContacto,
+                                 NomContacto = q.NomContacto
                              }).ToList();
                 }
                 return Lista;

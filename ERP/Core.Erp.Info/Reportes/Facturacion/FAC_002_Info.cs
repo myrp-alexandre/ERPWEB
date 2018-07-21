@@ -38,5 +38,8 @@ namespace Core.Erp.Info.Reportes.Facturacion
         public string pe_telefonoOfic { get; set; }
         public string vt_Observacion { get; set; }
         public Nullable<decimal> vt_plazo { get; set; }
+        public string TelefonoContacto { get; set; }
+        public Nullable<int> IdContacto { get; set; }
+        public string NomContacto { get; set; }
     }
 }

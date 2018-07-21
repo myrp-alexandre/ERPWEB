@@ -20,14 +20,14 @@ namespace Core.Erp.Web.Reportes.Facturacion
 
         private void FAC_002_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            lbl_fecha.Text = DateTime.Now.ToString("d/MM/yyyy hh:mm:ss");
+            lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
             lbl_usuario.Text = usuario;
             lbl_empresa.Text = empresa;
 
-            int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
-            decimal IdCliente = p_IdCliente.Value == null ? 0 : Convert.ToDecimal(p_IdCliente.Value);
-            int IdClienteContacto = p_IdClienteContacto.Value == null ? 0 : Convert.ToInt32(p_IdClienteContacto.Value);
+            int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            int IdSucursal = string.IsNullOrEmpty(p_IdSucursal.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSucursal.Value);
+            decimal IdCliente = string.IsNullOrEmpty(p_IdCliente.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdCliente.Value);
+            int IdClienteContacto = string.IsNullOrEmpty(p_IdClienteContacto.Value.ToString()) ? 0 : Convert.ToInt32(p_IdClienteContacto.Value);
             DateTime fechaCorte = p_fechaCorte.Value == null ? DateTime.Now : Convert.ToDateTime(p_fechaCorte.Value);
 
             FAC_002_Bus bus_rpt = new FAC_002_Bus();

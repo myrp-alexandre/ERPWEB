@@ -45,5 +45,6 @@ namespace Core.Erp.Data
         public Nullable<decimal> vt_plazo { get; set; }
         public Nullable<int> IdContacto { get; set; }
         public string NomContacto { get; set; }
+        public string TelefonoContacto { get; set; }
     }
 }
