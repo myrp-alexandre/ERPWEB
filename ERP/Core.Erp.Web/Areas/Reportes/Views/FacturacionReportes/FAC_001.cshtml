@@ -28,30 +28,11 @@
     <div class="box-body">
         <div class="row">
             <div class="col-md-12">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="IdProducto">Producto</label>
-                        @Html.DevExpress().ComboBoxFor(q => q.IdProducto, settings =>
-                   {
-                       settings.Name = "IdProducto";
-                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                       settings.Properties.Columns.Add("IdProducto", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(15);
-                       settings.Properties.Columns.Add("pr_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(60);
-                       settings.Properties.Columns.Add("nom_presentacion", "Presentación").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                       settings.Properties.Columns.Add("nom_categoria", "Categoría").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                       //Campo ID
-                       settings.Properties.ValueField = "IdProducto";
-                       settings.Properties.ValueType = typeof(decimal);
-                       settings.Properties.TextField = "pr_descripcion";
-                       //Boton para seleccionar ningun registro
-                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                       settings.Properties.NullText = "== Seleccione ==";
-                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                       settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){cargar_producto()}";
-                       settings.Properties.AllowNull = true;
-                   }).BindList(ViewBag.lst_producto).GetHtml()
-                        @Html.ValidationMessageFor(q => q.IdProducto, "", new { @class = "text-danger" })
+                        <label for="IdProductoPadre">Producto matriz</label>
+                        @Html.Partial("_CmbProductoPadre_Facturacion", Model)
+                        @Html.ValidationMessageFor(q => q.IdProductoPadre, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -59,32 +40,11 @@
 
         <div class="row">
             <div class="col-md-12">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="IdProducto_padre">Producto padre</label>
-                        @Html.DevExpress().ComboBoxFor(q => q.IdProducto_padre, settings =>
-                   {
-                       settings.Name = "IdProducto_padre";
-                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                       settings.Properties.Columns.Add("IdProducto", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                       settings.Properties.Columns.Add("pr_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(25);
-                       settings.Properties.Columns.Add("nom_presentacion", "Presentación").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                       settings.Properties.Columns.Add("nom_categoria", "Categoría").Width = System.Web.UI.WebControls.Unit.Percentage(35);
-                       settings.Properties.Columns.Add("lote_num_lote", "Lote").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                       settings.Properties.Columns.Add("lote_fecha_vcto", "Lote vcto").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                       //Campo ID
-                       settings.Properties.ValueField = "IdProducto_padre";
-                       settings.Properties.ValueType = typeof(decimal);
-                       settings.Properties.TextField = "pr_descripcion";
-                       //Boton para seleccionar ningun registro
-                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                       settings.Properties.NullText = "== Seleccione ==";
-                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                       settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){cargar_producto()}";
-                       settings.Properties.AllowNull = true;
-                   }).BindList(ViewBag.lst_producto_padre).GetHtml()
-                        @Html.ValidationMessageFor(q => q.IdProducto_padre, "", new { @class = "text-danger" })
+                        <label for="IdProducto_padre">Producto</label>
+                        @Html.Partial("_CmbProductoHijo_Facturacion", Model)
+                        @Html.ValidationMessageFor(q => q.IdProducto, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>

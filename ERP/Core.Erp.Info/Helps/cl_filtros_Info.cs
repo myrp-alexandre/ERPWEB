@@ -24,7 +24,7 @@ namespace Core.Erp.Info.Helps
         public int IdLinea { get; set; }
         public int IdGrupo { get; set; }
         public int IdSubGrupo { get; set; }
-        public decimal IdProducto { get; set; }
+        public decimal? IdProducto { get; set; }
         public int IdMovi_inven_tipo { get; set; }
         public string signo { get; set; }
         public bool no_mostrar_valores_en_0 { get; set; }
@@ -56,7 +56,7 @@ namespace Core.Erp.Info.Helps
         public decimal IdCliente { get; set; }
         public int IdClienteContacto { get; set; }
         public int IdVendedor { get; set; }
-        public decimal IdProducto_padre { get; set; }
+        public decimal? IdProductoPadre { get; set; }
         public bool mostrar_anulados { get; set; }
         public decimal IdEntidad { get; set; }
 

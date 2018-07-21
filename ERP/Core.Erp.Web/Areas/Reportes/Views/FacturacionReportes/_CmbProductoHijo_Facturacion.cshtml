@@ -7,7 +7,7 @@
         settings.Width = Unit.Percentage(100);
         settings.Properties.DropDownWidth = Unit.Percentage(100);
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-        settings.CallbackRouteValues = new { Controller = "FacturacionReportes", Action = "cmbProductoPadre_Facturacion", Area = "Reportes" };
+        settings.CallbackRouteValues = new { Controller = "FacturacionReportes", Action = "cmbProductoHijo_Facturacion", Area = "Reportes" };
         settings.Properties.CallbackPageSize = 15;
         settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
         settings.Properties.ValueField = "IdProducto";
@@ -15,19 +15,19 @@
         settings.Properties.TextField = "pr_descripcion";
         settings.Properties.TextFormatString = "[{0}] {1}";
 
-        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdProducto.PerformCallback(); IdProducto.SetValue(0); }";
+        settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdProductoPadre'] = IdProductoPadre.GetValue(); }";
 
         settings.Properties.Columns.Add("IdProducto", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
         settings.Properties.Columns.Add("pr_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-        settings.Properties.Columns.Add("nom_presentacion", "Presentación").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-        settings.Properties.Columns.Add("nom_categoria", "Categoría").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+        settings.Properties.Columns.Add("lote_num_lote", "Lote").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+        settings.Properties.Columns.Add("lote_fecha_vcto", "Lote vcto").Width = System.Web.UI.WebControls.Unit.Percentage(20);
 
         settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
         settings.Properties.NullText = "== Seleccione ==";
         settings.Properties.AllowNull = true;
     })
-    .BindList(new Core.Erp.Web.Areas.Reportes.Controllers.FacturacionReportesController().get_list_ProductoPadre_bajo_demanda, new Core.Erp.Web.Areas.Reportes.Controllers.FacturacionReportesController().get_info_producto_bajo_demanda)
-    .Bind(Model.IdProducto);
+    .BindList(new Core.Erp.Web.Areas.Reportes.Controllers.FacturacionReportesController().get_list_ProductoHijo_bajo_demanda, new Core.Erp.Web.Areas.Reportes.Controllers.FacturacionReportesController().get_info_producto_bajo_demanda)
+    .Bind(Model.IdProductoPadre);
 
 }
 @comboBox.GetHtml()

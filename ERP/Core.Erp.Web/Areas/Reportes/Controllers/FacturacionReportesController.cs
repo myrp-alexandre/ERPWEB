@@ -40,12 +40,22 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         public ActionResult CmbProductoPadre_Facturacion()
         {
-            FAC_002_Info model = new FAC_002_Info();
+            cl_filtros_Info model = new cl_filtros_Info();
             return PartialView("_CmbProductoPadre_Facturacion", model);
+        }
+        public ActionResult CmbProductoHijo_Facturacion()
+        {
+            SessionFixed.IdProducto_padre_dist = (Request.Params["IdProductoPadre"] != null) ? Request.Params["IdProductoPadre"].ToString() : "-1";
+            cl_filtros_Info model = new cl_filtros_Info();
+            return PartialView("_CmbProductoHijo_Facturacion", model);
         }
         public List<in_Producto_Info> get_list_ProductoPadre_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
             return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa),cl_enumeradores.eTipoBusquedaProducto.SOLOPADRES,cl_enumeradores.eModulo.INV,0);
+        }
+        public List<in_Producto_Info> get_list_ProductoHijo_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.SOLOPADRES, cl_enumeradores.eModulo.INV, decimal.Parse(SessionFixed.IdProducto_padre_dist));
         }
         public in_Producto_Info get_info_producto_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
         {
@@ -84,7 +94,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdCliente = IdCliente,
                 IdClienteContacto = IdCliente_contacto,
                 IdProducto = IdProducto,
-                IdProducto_padre = IdProducto_padre,
+                IdProductoPadre = IdProducto_padre,
                 mostrar_anulados= mostrar_anulados
             };
 
@@ -98,7 +108,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdCliente_contacto.Value = model.IdClienteContacto;
             report.p_IdVendedor.Value = model.IdVendedor;
             report.p_IdProducto.Value = model.IdProducto;
-            report.p_IdProducto_padre.Value = model.IdProducto_padre;
+            report.p_IdProducto_padre.Value = model.IdProductoPadre;
             report.p_mostrar_anulados.Value = model.mostrar_anulados;
             report.usuario = Session["IdUsuario"].ToString();
             report.empresa = Session["nom_empresa"].ToString();
@@ -119,7 +129,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdCliente_contacto.Value = model.IdClienteContacto;
             report.p_IdVendedor.Value = model.IdVendedor;
             report.p_IdProducto.Value = model.IdProducto;
-            report.p_IdProducto_padre.Value = model.IdProducto_padre;
+            report.p_IdProducto_padre.Value = model.IdProductoPadre;
             report.p_mostrar_anulados.Value = model.mostrar_anulados;
             report.usuario = Session["IdUsuario"].ToString();
             report.empresa = Session["nom_empresa"].ToString();
