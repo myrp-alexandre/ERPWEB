@@ -2,6 +2,7 @@
 @{
     var comboBox = Html.DevExpress().ComboBox(settings =>
     {
+        
         settings.Name = "IdProductoHijo";
         settings.Width = Unit.Percentage(100);
         settings.Properties.DropDownWidth = Unit.Percentage(100);
@@ -15,8 +16,7 @@
         settings.Properties.ValueType = typeof(decimal);
 
         settings.Properties.Columns.Add("IdProducto", "ID", 10);
-        settings.Properties.Columns.Add("pr_codigo", "Código", 10);
-        settings.Properties.Columns.Add("pr_descripcion", "Producto", 50);
+        settings.Properties.Columns.Add("pr_descripcion", "Producto", 60);
         settings.Properties.Columns.Add("nom_categoria", "Categoria", 15);
         settings.Properties.Columns.Add("nom_presentacion", "Presentación", 15);
 
