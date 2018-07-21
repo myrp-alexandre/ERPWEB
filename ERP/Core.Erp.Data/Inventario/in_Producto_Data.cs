@@ -584,6 +584,23 @@ namespace Core.Erp.Data.Inventario
                              .Take(take)
                              .ToList();
 
+
+                foreach (var q in lst)
+                {
+                    Lista.Add(new in_Producto_Info
+                    {
+                        IdEmpresa=q.IdEmpresa,
+                        IdProducto = q.IdProducto,
+                        pr_descripcion = q.pr_descripcion,
+                        pr_descripcion_2 = q.pr_descripcion_2,
+                        pr_codigo = q.pr_codigo,
+                        lote_num_lote = q.lote_num_lote,
+                        lote_fecha_vcto = q.lote_fecha_vcto,
+                        nom_categoria=q.ca_Categoria,
+                        nom_presentacion=q.nom_presentacion
+                    });
+                }
+
                 Context.Dispose();
                 return Lista;
             }

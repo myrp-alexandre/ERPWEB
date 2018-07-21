@@ -64,7 +64,7 @@ namespace Core.Erp.Data.SeguridadAcceso
                 }
                 return info;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;
