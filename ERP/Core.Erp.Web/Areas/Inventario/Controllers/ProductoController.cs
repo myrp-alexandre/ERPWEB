@@ -115,7 +115,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 cargar_combos(model);
                 return View(model);
             }
-
+            
             return RedirectToAction("Index");
         }
         public ActionResult Anular(decimal IdProducto = 0)

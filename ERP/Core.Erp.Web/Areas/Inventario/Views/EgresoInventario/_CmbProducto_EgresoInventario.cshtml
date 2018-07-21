@@ -16,7 +16,10 @@
 
         settings.Properties.Columns.Add("IdProducto", "ID", 10);
         settings.Properties.Columns.Add("pr_codigo", "Código", 10);
-        settings.Properties.Columns.Add("pr_descripcion", "Producto", 80);
+        settings.Properties.Columns.Add("pr_descripcion", "Producto", 50);
+        settings.Properties.Columns.Add("nom_categoria", "Categoria", 15);
+        settings.Properties.Columns.Add("nom_presentacion", "Presentación", 15);
+
 
     })
     .BindList(new Core.Erp.Web.Areas.Inventario.Controllers.EgresoInventarioController().get_list_bajo_demanda,
