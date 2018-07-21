@@ -55,7 +55,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         public List<in_Producto_Info> get_list_ProductoHijo_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.SOLOHIJOS, cl_enumeradores.eModulo.INV, decimal.Parse(SessionFixed.IdProducto_padre_dist));
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.SOLOHIJOS, cl_enumeradores.eModulo.INV, (string.IsNullOrEmpty(SessionFixed.IdProducto_padre_dist) ? -1 : decimal.Parse(SessionFixed.IdProducto_padre_dist)));
         }
         public in_Producto_Info get_info_producto_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
         {
@@ -68,6 +68,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            lst_sucursal.Add(new tb_sucursal_Info
+            {
+                IdSucursal = 0,
+                Su_Descripcion = "Todas"
+            });
             ViewBag.lst_sucursal = lst_sucursal;
 
             fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
@@ -76,26 +81,29 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             fa_cliente_contactos_Bus bus_contacto = new fa_cliente_contactos_Bus();
             var lst_contacto = bus_contacto.get_list(IdEmpresa, model.IdCliente == null ? 0 : Convert.ToDecimal(model.IdCliente));
+            lst_contacto.Add(new Info.Facturacion.fa_cliente_contactos_Info
+            {
+                IdContacto = 0,
+                Nombres = "Todos"
+            });
             ViewBag.lst_contacto = lst_contacto;
 
             fa_Vendedor_Bus bus_vendedor = new fa_Vendedor_Bus();
             var lst_vendedor = bus_vendedor.get_list(IdEmpresa, false);
+            lst_vendedor.Add(new Info.Facturacion.fa_Vendedor_Info
+            {
+                IdVendedor = 0,
+                Ve_Vendedor = "Todos"
+            });
             ViewBag.lst_vendedor = lst_vendedor;            
         }
 
 
-        public ActionResult FAC_001(DateTime? fecha_ini, DateTime? fecha_fin, int IdSucursal = 0, int IdVendedor = 0, decimal IdCliente = 0, int IdCliente_contacto = 0, decimal IdProducto = 0, decimal IdProducto_padre = 0,  bool mostrar_anulados = false)
+        public ActionResult FAC_001()
         {
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
             {
-                fecha_ini = fecha_ini == null ? DateTime.Now : Convert.ToDateTime(fecha_ini),
-                fecha_fin = fecha_fin == null ? DateTime.Now : Convert.ToDateTime(fecha_fin),
-                IdSucursal = IdSucursal,
-                IdCliente = IdCliente,
-                IdClienteContacto = IdCliente_contacto,
-                IdProducto = IdProducto,
-                IdProductoPadre = IdProducto_padre,
-                mostrar_anulados= mostrar_anulados
+                mostrar_anulados = false
             };
 
             cargar_combos(model);
@@ -139,15 +147,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-        public ActionResult FAC_002(DateTime? fechaCorte, int IdSucursal = 0, decimal IdCliente= 0,int IdClienteContacto = 0)
+        public ActionResult FAC_002()
         {
-            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
-            {
-                fecha_fin = fechaCorte == null ? DateTime.Now : Convert.ToDateTime(fechaCorte),
-                IdSucursal = IdSucursal,
-                IdCliente = IdCliente,
-                IdClienteContacto = IdClienteContacto
-            };
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
             
             cargar_combos(model);
             FAC_002_Rpt report = new FAC_002_Rpt();
@@ -156,9 +158,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdCliente.Value = model.IdCliente;
             report.p_IdClienteContacto.Value = model.IdClienteContacto;
-            report.usuario = Session["IdUsuario"].ToString();
-            report.empresa = Session["nom_empresa"].ToString();
-                report.RequestParameters = false;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
         }
@@ -172,8 +174,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdCliente.Value = model.IdCliente;
             report.p_IdClienteContacto.Value = model.IdClienteContacto;
-            report.usuario = Session["IdUsuario"].ToString();
-            report.empresa = Session["nom_empresa"].ToString();
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
             cargar_combos(model);
                 report.RequestParameters = false;
             ViewBag.Report = report;
@@ -185,7 +187,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             fa_cliente_contactos_Bus bus_contacto = new fa_cliente_contactos_Bus();
             var resultado = bus_contacto.get_list(IdEmpresa, IdCliente);
-
+            resultado.Add(new Info.Facturacion.fa_cliente_contactos_Info
+            {
+                IdContacto = 0,
+                Nombres = "Todos"
+            });
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 

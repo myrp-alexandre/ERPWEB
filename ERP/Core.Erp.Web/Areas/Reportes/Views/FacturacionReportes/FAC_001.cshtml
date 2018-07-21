@@ -58,7 +58,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="IdClienteContacto">Cliente contacto</label>
-                        @Html.DropDownListFor(q => q.IdClienteContacto, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres"), new { @class = "form-control", @id = "IdClienteContacto" })
+                        @Html.DropDownListFor(q => q.IdClienteContacto, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres", Model.IdClienteContacto), new { @class = "form-control", @id = "IdClienteContacto" })
                         @Html.ValidationMessageFor(q => q.IdClienteContacto, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -69,8 +69,15 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="IdSucursal">Sucursal</label>
-                        @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control" })
+                        @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion",Model.IdSucursal), new { @class = "form-control" })
                         @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="IdVendedor">Vendedor</label>
+                        @Html.DropDownListFor(q => q.IdVendedor, new SelectList(ViewBag.lst_vendedor, "IdVendedor", "Ve_Vendedor",Model.IdVendedor), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(q => q.IdVendedor, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -160,7 +167,8 @@
                         contentType: 'application/json; charset=utf-8',
                         success: function (data) {
                             $.each(data, function (i, row) {
-                                $("#IdClienteContacto").append("<option value=" + row.IdClienteContacto + ">" + row.Nombres + "</option>");
+                                $("#IdClienteContacto").append("<option value=" + row.IdContacto + ">" + row.Nombres + "</option>");
+                                $("#IdClienteContacto").val("0");
                         });
                     },
                     error: function (error) {

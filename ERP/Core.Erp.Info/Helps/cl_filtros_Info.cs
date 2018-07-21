@@ -67,12 +67,18 @@ namespace Core.Erp.Info.Helps
         public DateTime fecha_fin { get; set; }
         public decimal? IdProducto { get; set; }
         public decimal? IdCliente { get; set; }
-        public int? IdClienteContacto { get; set; }
-        public int? IdVendedor { get; set; }
+        public int IdClienteContacto { get; set; }
+        public int IdVendedor { get; set; }
         public decimal? IdProductoPadre { get; set; }
         public bool mostrar_anulados { get; set; }
         public decimal? IdEntidad { get; set; }
         public DateTime fecha_ini { get; set; }
         public int IdSucursal { get; set; }
+
+        public cl_filtros_facturacion_Info()
+        {
+            fecha_ini = DateTime.Now.Date.AddMonths(-1);
+            fecha_fin = DateTime.Now.Date;
+        }
     }
 }
