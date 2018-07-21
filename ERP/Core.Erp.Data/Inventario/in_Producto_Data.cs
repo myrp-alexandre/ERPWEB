@@ -1,4 +1,5 @@
-﻿using Core.Erp.Info.Inventario;
+﻿using Core.Erp.Info.Helps;
+using Core.Erp.Info.Inventario;
 using DevExpress.Web;
 using System;
 using System.Collections.Generic;
@@ -220,45 +221,7 @@ namespace Core.Erp.Data.Inventario
             }
         }
 
-        public List<in_Producto_Info> get_list_combo_hijo(int IdEmpresa, decimal IdProducto_padre)
-        {
-            try
-            {
-                List<in_Producto_Info> Lista;
-                using (Entities_inventario Context = new Entities_inventario())
-                {
-                    Lista = (from q in Context.vwin_producto_hijo_combo
-                             where q.IdEmpresa == IdEmpresa
-                             && q.IdProducto_padre == IdProducto_padre
-                             select new in_Producto_Info
-                             {
-                                 IdEmpresa = q.IdEmpresa,
-                                 IdProducto = q.IdProducto,
-                                 pr_descripcion = q.pr_descripcion,
-                                 nom_presentacion = q.nom_presentacion,
-                                 nom_categoria = q.ca_Categoria,
-                                 lote_fecha_vcto = q.lote_fecha_vcto,
-                                 lote_num_lote = q.lote_num_lote,
-                                 IdProducto_padre = q.IdProducto_padre
-
-                             }).ToList();
-                }
-                if(Lista.Count()>0)
-                Lista.ForEach(V=>{
-                    V.pr_descripcion = V.pr_descripcion + " " + V.lote_num_lote + " ";
-                    if(V.lote_fecha_vcto!=null)
-                    {
-                        V.pr_descripcion = V.pr_descripcion + V.lote_fecha_vcto.ToString().Substring(0, 10);
-                    };
-                });
-                return Lista;
-            }
-            catch (Exception e)
-            {
-
-                throw;
-            }
-        }
+       
       
 
         public in_Producto_Info get_info(int IdEmpresa, decimal IdProducto)
@@ -500,16 +463,31 @@ namespace Core.Erp.Data.Inventario
 
         #region metodo baja demanda
 
-        public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, cl_enumeradores.eTipoBusquedaProducto Busqueda, cl_enumeradores.eModulo Modulo, decimal IdProductoPadre)
         {
             var skip = args.BeginIndex;
             var take = args.EndIndex - args.BeginIndex + 1;
             List<in_Producto_Info> Lista = new List<in_Producto_Info>();
-            Lista = get_list(IdEmpresa, skip, take, args.Filter);
+            switch (Busqueda)
+            {
+                case cl_enumeradores.eTipoBusquedaProducto.SOLOPADRES:
+                    Lista = get_list(IdEmpresa, skip, take, args.Filter, 0);
+                    break;
+                case cl_enumeradores.eTipoBusquedaProducto.SOLOHIJOS:
+                    Lista = get_list(IdEmpresa, skip, take, args.Filter,IdProductoPadre);
+                    break;
+                case cl_enumeradores.eTipoBusquedaProducto.PORMODULO:
+                    Lista = get_list(Modulo, IdEmpresa, skip, take, args.Filter);
+                    break;
+                case cl_enumeradores.eTipoBusquedaProducto.TODOS:
+                    Lista = get_list(IdEmpresa, skip, take, args.Filter);
+                    break;
+            }
+            
+            
             return Lista;
         }
 
-      
         public in_Producto_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
         {
             decimal id;
@@ -517,7 +495,6 @@ namespace Core.Erp.Data.Inventario
                 return null;
              return get_info_demanda(IdEmpresa, Convert.ToDecimal(args.Value));
         }
-
 
         public in_Producto_Info get_info_demanda(int IdEmpresa, decimal IdProducto)
         {
@@ -544,8 +521,6 @@ namespace Core.Erp.Data.Inventario
 
             return info;
         }
-
-
 
         public List<in_Producto_Info> get_list(int IdEmpresa, int skip, int take, string filter)
         {
@@ -602,6 +577,7 @@ namespace Core.Erp.Data.Inventario
                 }
 
                 Context.Dispose();
+                Lista.ForEach(V => { V.pr_descripcion = V.pr_descripcion + V.lote_num_lote + (V.lote_fecha_vcto != null ? Convert.ToDateTime(V.lote_fecha_vcto).ToString("dd/MM/yyyy") : ""); });
                 return Lista;
             }
             catch (Exception)
@@ -611,7 +587,226 @@ namespace Core.Erp.Data.Inventario
             }
         }
 
+        public List<in_Producto_Info> get_list(int IdEmpresa, int skip, int take, string filter, decimal IdProductoPadre)
+        {
+            try
+            {
+                List<in_Producto_Info> Lista;
 
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    if (IdProductoPadre != 0)
+                    {
+                        Lista = (from p in Context.vwin_producto_hijo_combo
+                                 where p.IdEmpresa == IdEmpresa
+                                 && p.IdProducto_padre == IdProductoPadre
+                                 && (p.IdProducto.ToString() + " " + p.pr_descripcion + " " + p.lote_num_lote).Contains(filter)
+                                 select new in_Producto_Info
+                                 {
+                                     IdEmpresa = p.IdEmpresa,
+                                     IdProducto = p.IdProducto,
+                                     pr_descripcion = p.pr_descripcion,
+                                     lote_num_lote = p.lote_num_lote,
+                                     lote_fecha_vcto = p.lote_fecha_vcto,
+                                     nom_categoria = p.ca_Categoria,
+                                     nom_presentacion = p.nom_presentacion
+                                 })
+                                    .OrderBy(p => p.IdProducto)
+                                    .Skip(skip)
+                                    .Take(take)
+                                    .ToList();
+                    }
+                    else
+                        Lista = (from p in Context.vwin_producto_padre_combo
+                                 where p.IdEmpresa == IdEmpresa
+                                 && (p.IdProducto.ToString() + " " + p.pr_descripcion).Contains(filter)
+                                 select new in_Producto_Info
+                                 {
+                                     IdEmpresa = p.IdEmpresa,
+                                     IdProducto = p.IdProducto,
+                                     pr_descripcion = p.pr_descripcion,
+                                     nom_categoria = p.ca_Categoria,
+                                     nom_presentacion = p.nom_presentacion
+                                 })
+                                 .OrderBy(p => p.IdProducto)
+                                 .Skip(skip)
+                                 .Take(take)
+                                 .ToList();
+                }
+                Lista.ForEach(V => { V.pr_descripcion = V.pr_descripcion + V.lote_num_lote + (V.lote_fecha_vcto != null ? Convert.ToDateTime(V.lote_fecha_vcto).ToString("dd/MM/yyyy") : ""); });
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<in_Producto_Info> get_list(cl_enumeradores.eModulo Modulo, int IdEmpresa, int skip, int take, string filter)
+        {
+            try
+            {
+                List<in_Producto_Info> Lista = new List<in_Producto_Info>();
+
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    switch (Modulo)
+                    {
+                        case cl_enumeradores.eModulo.INV:
+                            Lista = (from p in Context.in_Producto
+                                     join c in Context.in_categorias
+                                     on new { p.IdEmpresa, p.IdCategoria } equals new { c.IdEmpresa, c.IdCategoria }
+                                     join pr in Context.in_presentacion
+                                     on new { p.IdEmpresa, p.IdPresentacion } equals new { pr.IdEmpresa, pr.IdPresentacion }
+                                     where
+                                      p.IdEmpresa == IdEmpresa
+                                      && c.IdEmpresa == IdEmpresa
+                                      && pr.IdEmpresa == IdEmpresa
+                                      && p.Estado == "A"
+                                      && (p.IdProducto.ToString() + " " + p.pr_descripcion + " " +p.lote_num_lote).Contains(filter)
+                                      && p.Aparece_modu_Inventario == true
+                                     select new in_Producto_Info
+                                     {
+                                         IdEmpresa = p.IdEmpresa,
+                                         IdProducto = p.IdProducto,
+                                         pr_descripcion = p.pr_descripcion,
+                                         lote_num_lote = p.lote_num_lote,
+                                         lote_fecha_vcto = p.lote_fecha_vcto,
+                                         nom_categoria = c.ca_Categoria,
+                                         nom_presentacion = pr.nom_presentacion
+                                     })
+                                    .OrderBy(p => p.IdProducto)
+                                    .Skip(skip)
+                                    .Take(take)
+                                    .ToList();
+                            break;
+                        case cl_enumeradores.eModulo.VTA:
+                            Lista = (from p in Context.in_Producto
+                                     join c in Context.in_categorias
+                                     on new { p.IdEmpresa, p.IdCategoria } equals new { c.IdEmpresa, c.IdCategoria }
+                                     join pr in Context.in_presentacion
+                                     on new { p.IdEmpresa, p.IdPresentacion } equals new { pr.IdEmpresa, pr.IdPresentacion }
+                                     where
+                                      p.IdEmpresa == IdEmpresa
+                                      && c.IdEmpresa == IdEmpresa
+                                      && pr.IdEmpresa == IdEmpresa
+                                      && p.Estado == "A"
+                                      && (p.IdProducto.ToString() + " " + p.pr_descripcion + " " + p.lote_num_lote).Contains(filter)
+                                      && p.Aparece_modu_Ventas == true
+                                     select new in_Producto_Info
+                                     {
+                                         IdEmpresa = p.IdEmpresa,
+                                         IdProducto = p.IdProducto,
+                                         pr_descripcion = p.pr_descripcion,
+                                         lote_num_lote = p.lote_num_lote,
+                                         lote_fecha_vcto = p.lote_fecha_vcto,
+                                         nom_categoria = c.ca_Categoria,
+                                         nom_presentacion = pr.nom_presentacion
+                                     })
+                                    .OrderBy(p => p.IdProducto)
+                                    .Skip(skip)
+                                    .Take(take)
+                                    .ToList();
+                            break;
+                        case cl_enumeradores.eModulo.COM:
+                            Lista = (from p in Context.in_Producto
+                                     join c in Context.in_categorias
+                                     on new { p.IdEmpresa, p.IdCategoria } equals new { c.IdEmpresa, c.IdCategoria }
+                                     join pr in Context.in_presentacion
+                                     on new { p.IdEmpresa, p.IdPresentacion } equals new { pr.IdEmpresa, pr.IdPresentacion }
+                                     where
+                                      p.IdEmpresa == IdEmpresa
+                                      && c.IdEmpresa == IdEmpresa
+                                      && pr.IdEmpresa == IdEmpresa
+                                      && p.Estado == "A"
+                                      && (p.IdProducto.ToString() + " " + p.pr_descripcion + " " + p.lote_num_lote).Contains(filter)
+                                      && p.Aparece_modu_Compras == true
+                                     select new in_Producto_Info
+                                     {
+                                         IdEmpresa = p.IdEmpresa,
+                                         IdProducto = p.IdProducto,
+                                         pr_descripcion = p.pr_descripcion,
+                                         lote_num_lote = p.lote_num_lote,
+                                         lote_fecha_vcto = p.lote_fecha_vcto,
+                                         nom_categoria = c.ca_Categoria,
+                                         nom_presentacion = pr.nom_presentacion
+                                     })
+                                    .OrderBy(p => p.IdProducto)
+                                    .Skip(skip)
+                                    .Take(take)
+                                    .ToList();
+                            break;
+                        case cl_enumeradores.eModulo.ACF:
+                            Lista = (from p in Context.in_Producto
+                                     join c in Context.in_categorias
+                                     on new { p.IdEmpresa, p.IdCategoria } equals new { c.IdEmpresa, c.IdCategoria }
+                                     join pr in Context.in_presentacion
+                                     on new { p.IdEmpresa, p.IdPresentacion } equals new { pr.IdEmpresa, pr.IdPresentacion }
+                                     where
+                                      p.IdEmpresa == IdEmpresa
+                                      && c.IdEmpresa == IdEmpresa
+                                      && pr.IdEmpresa == IdEmpresa
+                                      && p.Estado == "A"
+                                      && (p.IdProducto.ToString() + " " + p.pr_descripcion + " " + p.lote_num_lote).Contains(filter)
+                                      && p.Aparece_modu_Activo_F == true
+                                     select new in_Producto_Info
+                                     {
+                                         IdEmpresa = p.IdEmpresa,
+                                         IdProducto = p.IdProducto,
+                                         pr_descripcion = p.pr_descripcion,
+                                         lote_num_lote = p.lote_num_lote,
+                                         lote_fecha_vcto = p.lote_fecha_vcto,
+                                         nom_categoria = c.ca_Categoria,
+                                         nom_presentacion = pr.nom_presentacion
+                                     })
+                                    .OrderBy(p => p.IdProducto)
+                                    .Skip(skip)
+                                    .Take(take)
+                                    .ToList();
+                            break;
+                    }
+                }
+                Lista.ForEach(V => { V.pr_descripcion = V.pr_descripcion + V.lote_num_lote + (V.lote_fecha_vcto != null ? Convert.ToDateTime(V.lote_fecha_vcto).ToString("dd/MM/yyyy") : ""); });
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<in_Producto_Info> get_list_combo_hijo(int IdEmpresa, decimal IdProducto_padre)
+        {
+            try
+            {
+                List<in_Producto_Info> Lista;
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    Lista = (from q in Context.vwin_producto_hijo_combo
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdProducto_padre == IdProducto_padre
+                             select new in_Producto_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdProducto = q.IdProducto,
+                                 pr_descripcion = q.pr_descripcion,
+                                 nom_presentacion = q.nom_presentacion,
+                                 nom_categoria = q.ca_Categoria,
+                                 lote_fecha_vcto = q.lote_fecha_vcto,
+                                 lote_num_lote = q.lote_num_lote,
+                                 IdProducto_padre = q.IdProducto_padre
+
+                             }).ToList();
+                }
+                    Lista.ForEach(V => {V.pr_descripcion = V.pr_descripcion + V.lote_num_lote + (V.lote_fecha_vcto != null ? Convert.ToDateTime(V.lote_fecha_vcto).ToString("dd/MM/yyyy") : "");});
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         #endregion
     }
 }

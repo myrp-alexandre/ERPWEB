@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Data.Inventario;
+using Core.Erp.Info.Helps;
 using Core.Erp.Info.Inventario;
 using DevExpress.Web;
 using System;
@@ -75,9 +76,9 @@ namespace Core.Erp.Bus.Inventario
             }
         }
 
-        public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, cl_enumeradores.eTipoBusquedaProducto Busqueda, cl_enumeradores.eModulo Modulo, decimal IdProductoPadre)
         {
-            return odata.get_list_bajo_demanda(args, IdEmpresa);
+            return odata.get_list_bajo_demanda(args, IdEmpresa, Busqueda,Modulo,IdProductoPadre);
         }
 
         public in_Producto_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)

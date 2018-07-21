@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.Erp.Info.Helps
+﻿namespace Core.Erp.Info.Helps
 {
     public class cl_enumeradores
     {
@@ -23,6 +17,14 @@ namespace Core.Erp.Info.Helps
             TIPONATPER = 5,
             TIP_CTA_AC = 27
         }
+
+        public enum eTipoBusquedaProducto
+        {
+            SOLOPADRES,
+            SOLOHIJOS,
+            PORMODULO,
+            TODOS
+        }        
 
         public enum eTipoCatalogoInventario
         {

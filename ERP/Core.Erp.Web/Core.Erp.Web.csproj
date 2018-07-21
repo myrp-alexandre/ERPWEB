@@ -8729,6 +8729,7 @@
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\_CmbProveedor_CXP.cshtml" />
     <Content Include="Areas\Reportes\Views\ActivoFijoReportes\ACTF_004.cshtml" />
     <Content Include="Areas\Reportes\Views\ActivoFijoReportes\ACTF_005.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbProductoPadre_Facturacion.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

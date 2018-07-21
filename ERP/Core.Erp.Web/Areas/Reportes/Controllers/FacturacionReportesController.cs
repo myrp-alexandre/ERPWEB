@@ -5,6 +5,7 @@ using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.CuentasPorCobrar;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
+using Core.Erp.Info.Inventario;
 using Core.Erp.Info.Reportes.Facturacion;
 using Core.Erp.Web.Helps;
 using Core.Erp.Web.Reportes.Facturacion;
@@ -20,6 +21,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     public class FacturacionReportesController : Controller
     {
         tb_persona_Bus bus_persona = new tb_persona_Bus();
+        in_Producto_Bus bus_producto = new in_Producto_Bus();
 
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbCliente_Facturacion()
@@ -34,6 +36,20 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
         {
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.CLIENTE.ToString());
+        }
+
+        public ActionResult CmbProductoPadre_Facturacion()
+        {
+            FAC_002_Info model = new FAC_002_Info();
+            return PartialView("_CmbProductoPadre_Facturacion", model);
+        }
+        public List<in_Producto_Info> get_list_ProductoPadre_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa),cl_enumeradores.eTipoBusquedaProducto.SOLOPADRES,cl_enumeradores.eModulo.INV,0);
+        }
+        public in_Producto_Info get_info_producto_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
         #endregion
 
@@ -54,16 +70,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             fa_Vendedor_Bus bus_vendedor = new fa_Vendedor_Bus();
             var lst_vendedor = bus_vendedor.get_list(IdEmpresa, false);
-            ViewBag.lst_vendedor = lst_vendedor;
-
-         
-            in_Producto_Bus bus_producto = new in_Producto_Bus();
-            var lst_producto = bus_producto.get_list_combo_padre(IdEmpresa);
-            var lst_producto_padre = bus_producto.get_list_combo_hijo(IdEmpresa, model.IdProducto_padre);
-
-            ViewBag.lst_producto_padre = lst_producto_padre;
-            ViewBag.lst_producto = lst_producto;
-            
+            ViewBag.lst_vendedor = lst_vendedor;            
         }
 
 
