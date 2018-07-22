@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.Reportes.Facturacion
     public class FAC_005_Bus
     {
         FAC_005_Data odata = new FAC_005_Data();
-        public List<FAC_005_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdCliente, DateTime Fecha_ini, DateTime Fecha_fin)
+        public List<FAC_005_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdCliente, DateTime Fecha_ini, DateTime Fecha_fin, bool MostrarSaldo0)
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdSucursal, IdCliente, Fecha_ini, Fecha_fin);   
+                return odata.get_list(IdEmpresa, IdSucursal, IdCliente, Fecha_ini, Fecha_fin, MostrarSaldo0);   
             }
             catch (Exception)
             {
