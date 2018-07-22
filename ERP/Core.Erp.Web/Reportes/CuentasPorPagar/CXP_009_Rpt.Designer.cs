@@ -146,7 +146,7 @@
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrSubreport1,
             this.xrTable6});
-            this.ReportFooter.HeightF = 55.62501F;
+            this.ReportFooter.HeightF = 87.91669F;
             this.ReportFooter.Name = "ReportFooter";
             // 
             // xrTable1
@@ -712,7 +712,7 @@
             // 
             // xrSubreport1
             // 
-            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 32.62501F);
+            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 64.91669F);
             this.xrSubreport1.Name = "xrSubreport1";
             this.xrSubreport1.ReportSource = new Core.Erp.Web.Reportes.CuentasPorPagar.CXP_009_resumen_Rpt();
             this.xrSubreport1.SizeF = new System.Drawing.SizeF(771.0001F, 23F);

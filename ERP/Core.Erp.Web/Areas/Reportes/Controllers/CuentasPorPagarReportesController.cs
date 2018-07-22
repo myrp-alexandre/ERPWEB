@@ -181,7 +181,37 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 ViewBag.Report = report;
             return View(model);
         }
-        
+
+        public ActionResult CXP_009()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            
+            CXP_009_Rpt report = new CXP_009_Rpt();
+            report.p_IdEmpresa.Value = SessionFixed.IdEmpresa;
+            report.p_Fecha_ini.Value = model.fecha_ini;
+            report.p_Fecha_fin.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            report.RequestParameters = false;
+            ViewBag.Report = report;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult CXP_009(cl_filtros_Info model)
+        {
+            CXP_009_Rpt report = new CXP_009_Rpt();
+            report.p_IdEmpresa.Value = SessionFixed.IdEmpresa;
+            report.p_Fecha_ini.Value = model.fecha_ini;
+            report.p_Fecha_fin.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            
+            report.RequestParameters = false;
+            ViewBag.Report = report;
+            return View(model);
+        }
+
 
     }
 }
