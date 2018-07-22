@@ -69,11 +69,12 @@ namespace Core.Erp.Info.Helps
         public decimal? IdCliente { get; set; }
         public int IdClienteContacto { get; set; }
         public int IdVendedor { get; set; }
-        public decimal? IdProductoPadre { get; set; }
-        public bool mostrar_anulados { get; set; }
+        public decimal? IdProductoPadre { get; set; }        
         public decimal? IdEntidad { get; set; }
         public DateTime fecha_ini { get; set; }
         public int IdSucursal { get; set; }
+        public bool Check1 { get; set; }
+        public bool Check2 { get; set; }
 
         public cl_filtros_facturacion_Info()
         {

@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
 {
     public class FAC_005_Data
     {
-        public List<FAC_005_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdCliente, DateTime Fecha_ini, DateTime Fecha_fin, bool MostrarSaldo0)
+        public List<FAC_005_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdCliente, DateTime Fecha_ini, DateTime Fecha_fin, bool MostrarSaldo0, ref List<FAC_005_resumen_Info> lst_resumen)
         {
             try
             {
@@ -50,6 +50,41 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                  Su_CodigoEstablecimiento = q.Su_CodigoEstablecimiento,
                                  Su_Descripcion = q.Su_Descripcion
                              }).ToList();
+                }
+
+                var TdebitosxCta = from Cb in Lista
+                                   group Cb by new { Cb.IdSucursal, Cb.Su_Descripcion, Cb.Su_CodigoEstablecimiento }
+                                       into grouping
+                                   select new { grouping.Key,
+                                       TotalPorSucursal = grouping.Sum(p => p.Total),
+                                       SaldoPorSucursal = grouping.Sum(p => p.Saldo),
+                                       CantidadPorSucursal = grouping.Sum(q => q.CantFactContacto),
+                                       CantidadVentasLocales = grouping.Where(q=>q.EsExportacion == false).Sum(q=>q.CantFactContacto),
+                                       CantidadExportaciones = grouping.Where(q => q.EsExportacion == true).Sum(q => q.CantFactContacto),
+                                       TotalVentasLocales = grouping.Where(q => q.EsExportacion == false).Sum(p => p.Total),
+                                       TotalExportaciones = grouping.Where(q => q.EsExportacion == true).Sum(p => p.Total),
+                                       SaldoVentasLocales = grouping.Where(q => q.EsExportacion == false).Sum(p => p.Saldo),
+                                       SaldoExportaciones = grouping.Where(q => q.EsExportacion == true).Sum(p => p.Saldo),
+                                   };
+
+                foreach (var item in TdebitosxCta)
+                {
+                    lst_resumen.Add(new FAC_005_resumen_Info
+                    {
+                        NomSucursal = "Total " + item.Key.Su_CodigoEstablecimiento + " - " + item.Key.Su_Descripcion,
+
+                        TotalVentasLocales = item.TotalVentasLocales == null ? 0 : Convert.ToDouble(item.TotalVentasLocales),
+                        TotalExportaciones = item.TotalExportaciones == null ? 0 : Convert.ToDouble(item.TotalExportaciones),
+                        TotalPorSucursal = item.TotalPorSucursal == null ? 0 : Convert.ToDouble(item.TotalPorSucursal),
+
+                        SaldoExportaciones = item.SaldoExportaciones,
+                        SaldoTotalSucursal = item.SaldoPorSucursal,
+                        SaldoVentasLocales = item.SaldoVentasLocales,
+
+                        CantidadExportaciones = item.CantidadExportaciones,
+                        CantidadVentasLocales = item.CantidadVentasLocales,
+                        CantidadPorSucursal = item.CantidadPorSucursal
+                    });
                 }
 
                 return Lista;

@@ -24,7 +24,7 @@
         settings.Properties.AllowNull = true;
     })
     .BindList(new Core.Erp.Web.Areas.Reportes.Controllers.FacturacionReportesController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Reportes.Controllers.FacturacionReportesController().get_info_bajo_demanda)
-    .Bind(Model.IdEntidad);
+    .Bind(Model.IdCliente);
 
 }
 @comboBox.GetHtml()
