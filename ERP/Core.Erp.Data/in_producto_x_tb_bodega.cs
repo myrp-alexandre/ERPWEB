@@ -29,8 +29,8 @@ namespace Core.Erp.Data
         public string IdCtaCble_Gasto_x_cxp { get; set; }
         public string IdCtaCble_Vta { get; set; }
     
-        public virtual in_Producto in_Producto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<in_producto_x_tb_bodega_Costo_Historico> in_producto_x_tb_bodega_Costo_Historico { get; set; }
+        public virtual in_Producto in_Producto { get; set; }
     }
 }

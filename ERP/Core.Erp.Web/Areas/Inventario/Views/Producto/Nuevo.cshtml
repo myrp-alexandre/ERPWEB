@@ -1,10 +1,10 @@
 ﻿@model Core.Erp.Info.Inventario.in_Producto_Info
 @{
     ViewBag.Title = "Nuevo producto";
-    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
-    {
-        Response.Redirect("~/Account/Login");
-    }
+    //if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using (Html.BeginForm("Nuevo", "Producto", FormMethod.Post, new { @class = "form", @rolw = "form" }))
@@ -393,6 +393,35 @@
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_imagen">
                 <div class="row">
                    
+                   
+                    @Html.DevExpress().BinaryImage(
+                    settings =>
+                    {
+                        settings.Name = "pr_imagen";
+                        settings.CallbackRouteValues = new { Controller = "Producto", Action = "get_imagen" };
+                    }).Bind((Model.pr_imagen).ToArray()).GetHtml()
+
+                   
+                        @Html.DevExpress().UploadControl(settings =>
+                   {
+                     
+                       settings.Name = "UploadControl";
+                       settings.CallbackRouteValues = new { Controller = "Producto", Action = "UploadControlUpload" };
+                       settings.ShowUploadButton = true;
+                       settings.ShowProgressPanel = true;
+                   }).GetHtml()
+                    
+
+                   
+
+
+
+
+
+
+
+
+
                 </div>                
             </div>
         </div>
@@ -854,3 +883,5 @@
     }
 
 </script>
+
+

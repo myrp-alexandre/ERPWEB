@@ -28,8 +28,8 @@ namespace Core.Erp.Data
         public Nullable<int> IdPunto_cargo_grupo { get; set; }
         public Nullable<int> IdPunto_cargo { get; set; }
     
-        public virtual in_Producto in_Producto { get; set; }
         public virtual in_transferencia in_transferencia { get; set; }
         public virtual in_UnidadMedida in_UnidadMedida { get; set; }
+        public virtual in_Producto in_Producto { get; set; }
     }
 }

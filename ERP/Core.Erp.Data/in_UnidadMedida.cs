@@ -19,12 +19,12 @@ namespace Core.Erp.Data
         {
             this.in_UnidadMedida_Equiv_conversion = new HashSet<in_UnidadMedida_Equiv_conversion>();
             this.in_UnidadMedida_Equiv_conversion1 = new HashSet<in_UnidadMedida_Equiv_conversion>();
-            this.in_Producto = new HashSet<in_Producto>();
-            this.in_Producto1 = new HashSet<in_Producto>();
             this.in_Producto_Composicion = new HashSet<in_Producto_Composicion>();
             this.in_Ing_Egr_Inven_det = new HashSet<in_Ing_Egr_Inven_det>();
             this.in_Ing_Egr_Inven_det1 = new HashSet<in_Ing_Egr_Inven_det>();
             this.in_transferencia_det = new HashSet<in_transferencia_det>();
+            this.in_Producto = new HashSet<in_Producto>();
+            this.in_Producto1 = new HashSet<in_Producto>();
         }
     
         public string IdUnidadMedida { get; set; }
@@ -41,10 +41,6 @@ namespace Core.Erp.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<in_UnidadMedida_Equiv_conversion> in_UnidadMedida_Equiv_conversion1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<in_Producto> in_Producto { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<in_Producto> in_Producto1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<in_Producto_Composicion> in_Producto_Composicion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<in_Ing_Egr_Inven_det> in_Ing_Egr_Inven_det { get; set; }
@@ -52,5 +48,9 @@ namespace Core.Erp.Data
         public virtual ICollection<in_Ing_Egr_Inven_det> in_Ing_Egr_Inven_det1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<in_transferencia_det> in_transferencia_det { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_Producto> in_Producto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_Producto> in_Producto1 { get; set; }
     }
 }

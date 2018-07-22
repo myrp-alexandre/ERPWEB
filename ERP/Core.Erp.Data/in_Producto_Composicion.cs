@@ -20,8 +20,8 @@ namespace Core.Erp.Data
         public string IdUnidadMedida { get; set; }
         public double Cantidad { get; set; }
     
+        public virtual in_UnidadMedida in_UnidadMedida { get; set; }
         public virtual in_Producto in_Producto { get; set; }
         public virtual in_Producto in_Producto1 { get; set; }
-        public virtual in_UnidadMedida in_UnidadMedida { get; set; }
     }
 }

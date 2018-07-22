@@ -69,7 +69,8 @@ namespace Core.Erp.Info.Inventario
         public string signo_5 { get; set; }
         public double porcentaje_5 { get; set; }
         public bool se_distribuye { get; set; }
-        
+        public byte[] pr_logo { get; set; }
+
         #region Campos auditoria
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
@@ -80,6 +81,8 @@ namespace Core.Erp.Info.Inventario
         public string pr_motivoAnulacion { get; set; }
         public string nom_pc { get; set; }
         public string ip { get; set; }
+        public byte[] pr_imagen { get; set; }
+
         #endregion
 
         #region Campos que no existen en la tabla

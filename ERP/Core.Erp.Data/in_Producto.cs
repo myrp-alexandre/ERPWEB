@@ -17,11 +17,11 @@ namespace Core.Erp.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public in_Producto()
         {
-            this.in_Producto1 = new HashSet<in_Producto>();
+            this.in_Ing_Egr_Inven_det = new HashSet<in_Ing_Egr_Inven_det>();
             this.in_Producto_Composicion = new HashSet<in_Producto_Composicion>();
             this.in_Producto_Composicion1 = new HashSet<in_Producto_Composicion>();
+            this.in_Producto1 = new HashSet<in_Producto>();
             this.in_producto_x_tb_bodega = new HashSet<in_producto_x_tb_bodega>();
-            this.in_Ing_Egr_Inven_det = new HashSet<in_Ing_Egr_Inven_det>();
             this.in_transferencia_det = new HashSet<in_transferencia_det>();
         }
     
@@ -75,25 +75,26 @@ namespace Core.Erp.Data
         public string signo_5 { get; set; }
         public Nullable<double> porcentaje_5 { get; set; }
         public Nullable<bool> se_distribuye { get; set; }
+        public byte[] pr_imagen { get; set; }
     
         public virtual in_categorias in_categorias { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_Ing_Egr_Inven_det> in_Ing_Egr_Inven_det { get; set; }
         public virtual in_Marca in_Marca { get; set; }
         public virtual in_presentacion in_presentacion { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<in_Producto> in_Producto1 { get; set; }
-        public virtual in_Producto in_Producto2 { get; set; }
-        public virtual in_subgrupo in_subgrupo { get; set; }
-        public virtual in_UnidadMedida in_UnidadMedida { get; set; }
-        public virtual in_UnidadMedida in_UnidadMedida1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<in_Producto_Composicion> in_Producto_Composicion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<in_Producto_Composicion> in_Producto_Composicion1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_Producto> in_Producto1 { get; set; }
+        public virtual in_Producto in_Producto2 { get; set; }
         public virtual in_ProductoTipo in_ProductoTipo { get; set; }
+        public virtual in_subgrupo in_subgrupo { get; set; }
+        public virtual in_UnidadMedida in_UnidadMedida { get; set; }
+        public virtual in_UnidadMedida in_UnidadMedida1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<in_producto_x_tb_bodega> in_producto_x_tb_bodega { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<in_Ing_Egr_Inven_det> in_Ing_Egr_Inven_det { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<in_transferencia_det> in_transferencia_det { get; set; }
     }

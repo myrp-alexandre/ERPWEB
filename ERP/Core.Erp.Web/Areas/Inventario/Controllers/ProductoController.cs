@@ -17,7 +17,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
     public class ProductoController : Controller
     {
         #region variables
-        const string UploadDirectory = "~/Content/UploadControl/UploadFolder/";
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         in_Producto_Composicion_List list_producto_composicion = new in_Producto_Composicion_List();
         in_Producto_Composicion_Bus bus_producto_composicion = new in_Producto_Composicion_Bus();
@@ -70,6 +69,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_Producto_Info model = new in_Producto_Info { IdEmpresa = IdEmpresa };
+            model.pr_imagen = new byte[0];
             model.lst_producto_composicion = new List<in_Producto_Composicion_Info>();
             list_producto_composicion.set_list(model.lst_producto_composicion);
             cargar_combos(model);
@@ -101,6 +101,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public ActionResult Modificar(in_Producto_Info model)
         {
             model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            model.pr_imagen = Producto_imagen.pr_imagen;
             if (!bus_producto.modificarDB(model))
             {
                 cargar_combos(model);
@@ -315,7 +316,51 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         #endregion
 
+
+        const string UploadDirectory = "~/Content/imagenes/";
+
+
+        public UploadedFile UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControl", Producto_imagen.UploadValidationSettings, Producto_imagen.FileUploadComplete);
+            
+            byte[] model = Producto_imagen.pr_imagen;
+            UploadedFile file=new UploadedFile();
+            return file;
+        }
+
+        public ActionResult get_imagen()
+        {
+
+            byte[] model = Producto_imagen.pr_imagen;
+            if (model == null)
+                model = new byte[0];
+            return PartialView("_Producto_imagen",model);
+        }
+
+
     }
+    public class Producto_imagen
+    {
+        public static byte[] pr_imagen { get; set; }
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".jpg", ".jpeg" },
+            MaxFileSize = 4000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+
+            if (e.UploadedFile.IsValid)
+            {
+                pr_imagen = e.UploadedFile.FileBytes;
+            }
+        }
+     }
+
+
+
+
     public class in_Producto_Composicion_List
     {
         public List<in_Producto_Composicion_Info> get_list()

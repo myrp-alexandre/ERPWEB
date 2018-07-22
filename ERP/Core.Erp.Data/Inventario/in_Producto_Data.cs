@@ -19,39 +19,39 @@ namespace Core.Erp.Data.Inventario
 
                 using (Entities_inventario Context = new Entities_inventario())
                 {
-                    if(mostrar_anulados)
-                    Lista = ( from t in Context.in_ProductoTipo
-                              join p in Context.in_Producto
-                              on new { t.IdEmpresa, t.IdProductoTipo } equals new { p.IdEmpresa, p.IdProductoTipo }
-                              join c in Context.in_categorias
-                              on new { p.IdEmpresa, p.IdCategoria } equals new { c.IdEmpresa, c.IdCategoria }
-                              join m in Context.in_Marca
-                              on new {p.IdEmpresa,p.IdMarca}equals new {m.IdEmpresa,m.IdMarca}
-                              join pr in Context.in_presentacion
-                              on new { p.IdEmpresa, p.IdPresentacion } equals new { pr.IdEmpresa, pr.IdPresentacion }
+                    if (mostrar_anulados)
+                        Lista = (from t in Context.in_ProductoTipo
+                                 join p in Context.in_Producto
+                                 on new { t.IdEmpresa, t.IdProductoTipo } equals new { p.IdEmpresa, p.IdProductoTipo }
+                                 join c in Context.in_categorias
+                                 on new { p.IdEmpresa, p.IdCategoria } equals new { c.IdEmpresa, c.IdCategoria }
+                                 join m in Context.in_Marca
+                                 on new { p.IdEmpresa, p.IdMarca } equals new { m.IdEmpresa, m.IdMarca }
+                                 join pr in Context.in_presentacion
+                                 on new { p.IdEmpresa, p.IdPresentacion } equals new { pr.IdEmpresa, pr.IdPresentacion }
 
-                                where 
-                                t.IdEmpresa==IdEmpresa
-                                && p.IdEmpresa==IdEmpresa
-                                && c.IdEmpresa==IdEmpresa
-                                && m.IdEmpresa==IdEmpresa
-                                && pr.IdEmpresa==IdEmpresa
+                                 where
+                                 t.IdEmpresa == IdEmpresa
+                                 && p.IdEmpresa == IdEmpresa
+                                 && c.IdEmpresa == IdEmpresa
+                                 && m.IdEmpresa == IdEmpresa
+                                 && pr.IdEmpresa == IdEmpresa
 
-                             select new in_Producto_Info
-                             {
-                                 IdEmpresa = p.IdEmpresa,
-                                 IdProducto = p.IdProducto,
-                                 pr_codigo = p.pr_codigo,
-                                 pr_descripcion = p.pr_descripcion,
-                                 Estado = p.Estado,
-                                 lote_fecha_vcto = p.lote_fecha_vcto,
-                                 lote_num_lote=p.lote_num_lote,
+                                 select new in_Producto_Info
+                                 {
+                                     IdEmpresa = p.IdEmpresa,
+                                     IdProducto = p.IdProducto,
+                                     pr_codigo = p.pr_codigo,
+                                     pr_descripcion = p.pr_descripcion,
+                                     Estado = p.Estado,
+                                     lote_fecha_vcto = p.lote_fecha_vcto,
+                                     lote_num_lote = p.lote_num_lote,
 
-                                 tp_descripcion=t.tp_descripcion,
-                                 nom_presentacion=pr.nom_presentacion,
-                                 ma_descripcion=m.Descripcion,
-                                 nom_categoria=c.ca_Categoria,
-                                 
+                                     tp_descripcion = t.tp_descripcion,
+                                     nom_presentacion = pr.nom_presentacion,
+                                     ma_descripcion = m.Descripcion,
+                                     nom_categoria = c.ca_Categoria,
+                                     pr_imagen = p.pr_imagen
 
 
                              }).ToList();
@@ -87,6 +87,9 @@ namespace Core.Erp.Data.Inventario
                                      nom_presentacion = pr.nom_presentacion,
                                      ma_descripcion = m.Descripcion,
                                      nom_categoria = c.ca_Categoria,
+                                     pr_imagen = p.pr_imagen,
+
+
                                  }).ToList();
                 }
 
@@ -279,7 +282,8 @@ namespace Core.Erp.Data.Inventario
                         precio_5 = Entity.precio_5 == null ? 0 : Convert.ToDouble(Entity.precio_5),
                         signo_5 = Entity.signo_5,
                         porcentaje_5 = Entity.porcentaje_5 == null ? 0 : Convert.ToDouble(Entity.porcentaje_5),
-                        se_distribuye = Entity.se_distribuye == null ? false : Convert.ToBoolean(Entity.se_distribuye)
+                        se_distribuye = Entity.se_distribuye == null ? false : Convert.ToBoolean(Entity.se_distribuye),
+                        pr_imagen=Entity.pr_imagen
                     };
                 }
 
@@ -365,7 +369,7 @@ namespace Core.Erp.Data.Inventario
                         signo_5 = info.signo_5,
                         porcentaje_5 = info.porcentaje_5,
                         se_distribuye = info.se_distribuye,
-
+                        pr_imagen=info.pr_imagen,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
                     };
@@ -427,7 +431,7 @@ namespace Core.Erp.Data.Inventario
                     Entity.signo_5 = info.signo_5;
                     Entity.porcentaje_5 = info.porcentaje_5;
                     Entity.se_distribuye = info.se_distribuye;
-
+                    Entity.pr_imagen = info.pr_imagen;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
                     Context.SaveChanges();

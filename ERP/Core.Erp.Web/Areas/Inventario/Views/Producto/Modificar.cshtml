@@ -10,8 +10,14 @@
 
 @using (Html.BeginForm("Modificar", "Producto", FormMethod.Post, new { @class = "form", @rolw = "form" }))
 {
-   @Html.HiddenFor(q => q.IdEmpresa)
+  
+    @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdProducto)
+
+    if (Model.pr_imagen == null)
+    {
+        Model.pr_imagen = new byte[0];
+    }
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
@@ -394,6 +400,25 @@
             </div>
 
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_imagen">
+                @Html.DevExpress().BinaryImage(
+                    settings =>
+                    {
+                        settings.Name = "pr_imagen";
+                        settings.CallbackRouteValues = new { Controller = "Producto", Action = "get_imagen" };
+                    }).Bind((Model.pr_imagen).ToArray()).GetHtml()
+
+               
+                    @Html.DevExpress().UploadControl(settings =>
+                       {
+                           settings.Name = "UploadControl";
+                           settings.CallbackRouteValues = new { Controller = "Producto", Action = "UploadControlUpload" };
+                           settings.ShowUploadButton = false;
+                           settings.ShowProgressPanel = false;
+                           settings.ValidationSettings.Assign(Core.Erp.Web.Areas.Inventario.Controllers.Producto_imagen.UploadValidationSettings);
+                       }).GetHtml()
+                
+
+
 
             </div>
 

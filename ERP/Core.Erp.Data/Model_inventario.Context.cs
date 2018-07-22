@@ -40,7 +40,6 @@ namespace Core.Erp.Data
         public virtual DbSet<in_subgrupo> in_subgrupo { get; set; }
         public virtual DbSet<in_UnidadMedida> in_UnidadMedida { get; set; }
         public virtual DbSet<in_UnidadMedida_Equiv_conversion> in_UnidadMedida_Equiv_conversion { get; set; }
-        public virtual DbSet<in_Producto> in_Producto { get; set; }
         public virtual DbSet<in_Motivo_Inven> in_Motivo_Inven { get; set; }
         public virtual DbSet<in_Producto_Composicion> in_Producto_Composicion { get; set; }
         public virtual DbSet<in_ProductoTipo> in_ProductoTipo { get; set; }
@@ -57,6 +56,7 @@ namespace Core.Erp.Data
         public virtual DbSet<vwin_producto_hijo_combo> vwin_producto_hijo_combo { get; set; }
         public virtual DbSet<vwin_Ing_Egr_Inven_distribucion_det> vwin_Ing_Egr_Inven_distribucion_det { get; set; }
         public virtual DbSet<vwin_Ing_Egr_Inven_distribucion_x_distribuir> vwin_Ing_Egr_Inven_distribucion_x_distribuir { get; set; }
+        public virtual DbSet<in_Producto> in_Producto { get; set; }
     
         public virtual int spINV_aprobacion_ing_egr(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idBodega, Nullable<int> idMovi_inven_tipo, Nullable<decimal> idNumMovi)
         {

@@ -11,6 +11,7 @@ namespace Core.Erp.Web.Helps
         string IdProducto_padre_dist { get; set; }
         string IdSucursal { get; set; }
         string IdEntidad { get; set; }
+
     }
 
     public static class SessionFixed
