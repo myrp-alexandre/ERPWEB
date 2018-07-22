@@ -639,6 +639,18 @@
     <Compile Include="Reportes\Facturacion\FAC_004_Rpt.Designer.cs">
       <DependentUpon>FAC_004_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_005_resumen_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_005_resumen_Rpt.Designer.cs">
+      <DependentUpon>FAC_005_resumen_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_005_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_005_Rpt.Designer.cs">
+      <DependentUpon>FAC_005_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Inventario\INV_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -8744,6 +8756,7 @@
     <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbProductoPadre_Facturacion.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbProductoHijo_Facturacion.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_009.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_005.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -8977,6 +8990,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Facturacion\FAC_004_Rpt.resx">
       <DependentUpon>FAC_004_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\FAC_005_resumen_Rpt.resx">
+      <DependentUpon>FAC_005_resumen_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\FAC_005_Rpt.resx">
+      <DependentUpon>FAC_005_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Inventario\INV_001_Rpt.resx">
       <DependentUpon>INV_001_Rpt.cs</DependentUpon>
