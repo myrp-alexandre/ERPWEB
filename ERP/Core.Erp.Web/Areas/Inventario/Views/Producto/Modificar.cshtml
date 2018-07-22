@@ -409,13 +409,13 @@
 
                
                     @Html.DevExpress().UploadControl(settings =>
-                       {
-                           settings.Name = "UploadControl";
-                           settings.CallbackRouteValues = new { Controller = "Producto", Action = "UploadControlUpload" };
-                           settings.ShowUploadButton = false;
-                           settings.ShowProgressPanel = false;
-                           settings.ValidationSettings.Assign(Core.Erp.Web.Areas.Inventario.Controllers.Producto_imagen.UploadValidationSettings);
-                       }).GetHtml()
+               {
+                   settings.Name = "UploadControl";
+                   settings.CallbackRouteValues = new { Controller = "Producto", Action = "UploadControlUpload" };
+                   settings.ShowUploadButton = true;
+                   settings.ShowProgressPanel = false;
+                   settings.ValidationSettings.Assign(Core.Erp.Web.Areas.Inventario.Controllers.Producto_imagen.UploadValidationSettings);
+               }).GetHtml()
                 
 
 

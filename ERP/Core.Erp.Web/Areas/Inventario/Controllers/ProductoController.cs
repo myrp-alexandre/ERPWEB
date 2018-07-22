@@ -79,11 +79,15 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public ActionResult Nuevo(in_Producto_Info model)
         {
             model.IdUsuario = Session["IdUsuario"].ToString();
+            model.pr_imagen = Producto_imagen.pr_imagen;
             if (!bus_producto.guardarDB(model))
             {
+                if (model.pr_imagen == null)
+                    model.pr_imagen = new byte[0];
                 cargar_combos(model);
                 return View(model);
             }
+            Producto_imagen.pr_imagen = null;
             return RedirectToAction("Index");
         }
         public ActionResult Modificar(decimal IdProducto = 0)
@@ -99,11 +103,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         [HttpPost]
         public ActionResult Modificar(in_Producto_Info model)
+
         {
             model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
             model.pr_imagen = Producto_imagen.pr_imagen;
             if (!bus_producto.modificarDB(model))
             {
+                if (model.pr_imagen == null)
+                    model.pr_imagen = new byte[0];
                 cargar_combos(model);
                 return View(model);
             }
@@ -116,7 +123,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 cargar_combos(model);
                 return View(model);
             }
-            
+            Producto_imagen.pr_imagen = null;
             return RedirectToAction("Index");
         }
         public ActionResult Anular(decimal IdProducto = 0)
