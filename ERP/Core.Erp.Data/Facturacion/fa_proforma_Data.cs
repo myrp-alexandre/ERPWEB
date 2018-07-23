@@ -112,9 +112,10 @@ namespace Core.Erp.Data.Facturacion
         {
             try
             {
+                int secuencia = 1;
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
-                    fa_proforma Entity = new fa_proforma
+                    Context.fa_proforma.Add(new fa_proforma
                     {
 
                         IdEmpresa = info.IdEmpresa,
@@ -135,8 +136,31 @@ namespace Core.Erp.Data.Facturacion
 
                         IdUsuario_creacion = info.IdUsuario_creacion,
                         fecha_creacion = DateTime.Now
-                    };
-                    Context.fa_proforma.Add(Entity);
+                    });
+
+                    foreach (var item in info.lst_det)
+                    {
+                        Context.fa_proforma_det.Add(new fa_proforma_det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
+                            IdProforma = info.IdProforma,
+                            Secuencia = secuencia++,
+                            IdProducto = item.IdProducto,
+                            pd_cantidad = item.pd_cantidad,
+                            pd_precio = item.pd_precio,
+                            pd_por_descuento_uni = item.pd_por_descuento_uni,
+                            pd_descuento_uni = item.pd_descuento_uni,
+                            pd_precio_final = item.pd_precio_final,
+                            pd_subtotal = item.pd_subtotal,
+                            IdCod_Impuesto = item.IdCod_Impuesto,
+                            pd_por_iva = item.pd_por_iva,
+                            pd_iva = item.pd_iva,
+                            anulado = item.anulado,
+                            pd_total = item.pd_total,
+                        });
+                    }
+
                     Context.SaveChanges();
                 }
                 return true;
