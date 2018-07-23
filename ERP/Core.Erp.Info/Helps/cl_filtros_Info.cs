@@ -17,6 +17,7 @@ namespace Core.Erp.Info.Helps
         [DataType(DataType.Date, ErrorMessage = "El campo fecha fin debe ser una fecha en formato dd/MM/yyyy")]
         public DateTime fecha_fin { get; set; }
         public bool mostrar_registros_0 { get; set; }
+        public string IdCtaCble { get; set; }
 
         #region Filtros inventario
         public int IdSucursal { get; set; }
@@ -51,9 +52,14 @@ namespace Core.Erp.Info.Helps
         #endregion
         public List<INV_008_Info> lst_decimal { get; set; }
 
+        #region filtros de RRHH
         public int IdTipoNomina { get; set; }
         public int IdNomina { get; set; }
-        public string IdCtaCble { get; set; }
+        public bool mostrar_nov_can { get; set; }
+        public bool mostrar_nov_pen { get; set; }
+        public bool mostrar_todas_nov { get; set; }
+
+        #endregion
 
         public cl_filtros_Info()
         {

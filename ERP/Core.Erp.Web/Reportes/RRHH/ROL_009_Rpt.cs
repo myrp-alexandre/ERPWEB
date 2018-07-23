@@ -26,7 +26,7 @@ namespace Core.Erp.Web.Reportes.RRHH
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
 
             ROL_009_Bus bus_rpt = new ROL_009_Bus();
-            List<ROL_009_Info> lst_rpt = bus_rpt.get_list(IdEmpresa);
+            List<ROL_009_Info> lst_rpt = bus_rpt.get_list(Convert.ToDateTime( p_fecha_inicio.Value),Convert.ToDateTime( p_fecha_fin.Value), IdEmpresa,p_can.MultiValue,p_pen.MultiValue,p_todas.MultiValue);
             this.DataSource = lst_rpt;
         }
     }

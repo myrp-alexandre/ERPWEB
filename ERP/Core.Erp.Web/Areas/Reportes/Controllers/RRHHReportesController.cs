@@ -112,14 +112,27 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
-        public ActionResult ROL_009(int IdEmpresa = 0)
+        public ActionResult ROL_009( DateTime? fecha_ini, DateTime? fecha_fin,int IdEmpresa = 0, bool mostrar_nov_can = false, bool mostrar_nov_pen = false, bool mostrar_todas_nov = false)
         {
-            ROL_009_Rpt model = new ROL_009_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
-            if (IdEmpresa == 0)
-                model.RequestParameters = false;
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                fecha_ini = fecha_ini == null ? DateTime.Now : Convert.ToDateTime(fecha_ini),
+                fecha_fin = fecha_fin == null ? DateTime.Now : Convert.ToDateTime(fecha_fin),
+                
+                
+            };
+            cargar_combos();
+            ROL_009_Rpt report = new ROL_009_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_fecha_inicio.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_can.Value = mostrar_nov_can;
+            report.p_pen.Value = mostrar_nov_pen;
+            report.p_todas.Value = mostrar_todas_nov;
+            report.usuario = Session["IdUsuario"].ToString();
+            report.empresa = Session["nom_empresa"].ToString();
+         
+            ViewBag.Report = report;
             return View(model);
         }
         public ActionResult ROL_010(int IdEmpresa = 0)
