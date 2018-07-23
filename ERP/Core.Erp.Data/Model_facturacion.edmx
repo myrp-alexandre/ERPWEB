@@ -387,6 +387,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwfa_proforma_det'
           <Property Name="anulado" Type="bit" Nullable="false" />
           <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="nom_presentacion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
+          <Property Name="lote_fecha_vcto" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwfa_proforma_det_por_facturar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -761,7 +763,9 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
     [vwfa_proforma_det].[pd_total] AS [pd_total], 
     [vwfa_proforma_det].[anulado] AS [anulado], 
     [vwfa_proforma_det].[pr_descripcion] AS [pr_descripcion], 
-    [vwfa_proforma_det].[nom_presentacion] AS [nom_presentacion]
+    [vwfa_proforma_det].[nom_presentacion] AS [nom_presentacion], 
+    [vwfa_proforma_det].[lote_num_lote] AS [lote_num_lote], 
+    [vwfa_proforma_det].[lote_fecha_vcto] AS [lote_fecha_vcto]
     FROM [dbo].[vwfa_proforma_det] AS [vwfa_proforma_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_proforma_det_por_facturar" EntityType="Self.vwfa_proforma_det_por_facturar" store:Type="Views" store:Schema="dbo">
@@ -957,8 +961,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
             <End Role="fa_factura_det" EntitySet="fa_factura_det" />
           </AssociationSet>
           <EntitySet Name="vwfa_proforma" EntityType="Model_facturacion.vwfa_proforma" />
-          <EntitySet Name="vwfa_proforma_det" EntityType="Model_facturacion.vwfa_proforma_det" />
           <EntitySet Name="vwfa_proforma_det_por_facturar" EntityType="Model_facturacion.vwfa_proforma_det_por_facturar" />
+          <EntitySet Name="vwfa_proforma_det" EntityType="Model_facturacion.vwfa_proforma_det" />
         </EntityContainer>
         <EntityType Name="fa_cliente_tipo">
           <Key>
@@ -1596,46 +1600,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
           <Property Name="pf_atencion_a" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="pr_dias_entrega" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="vwfa_proforma_det">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdProforma" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="IdProducto" />
-            <PropertyRef Name="pd_cantidad" />
-            <PropertyRef Name="pd_precio" />
-            <PropertyRef Name="pd_por_descuento_uni" />
-            <PropertyRef Name="pd_descuento_uni" />
-            <PropertyRef Name="pd_precio_final" />
-            <PropertyRef Name="pd_subtotal" />
-            <PropertyRef Name="IdCod_Impuesto" />
-            <PropertyRef Name="pd_por_iva" />
-            <PropertyRef Name="pd_iva" />
-            <PropertyRef Name="pd_total" />
-            <PropertyRef Name="anulado" />
-            <PropertyRef Name="pr_descripcion" />
-            <PropertyRef Name="nom_presentacion" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdProforma" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="pd_cantidad" Type="Double" Nullable="false" />
-          <Property Name="pd_precio" Type="Double" Nullable="false" />
-          <Property Name="pd_por_descuento_uni" Type="Double" Nullable="false" />
-          <Property Name="pd_descuento_uni" Type="Double" Nullable="false" />
-          <Property Name="pd_precio_final" Type="Double" Nullable="false" />
-          <Property Name="pd_subtotal" Type="Double" Nullable="false" />
-          <Property Name="IdCod_Impuesto" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="pd_por_iva" Type="Double" Nullable="false" />
-          <Property Name="pd_iva" Type="Double" Nullable="false" />
-          <Property Name="pd_total" Type="Double" Nullable="false" />
-          <Property Name="anulado" Type="Boolean" Nullable="false" />
-          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="nom_presentacion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="vwfa_proforma_det_por_facturar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1677,6 +1641,48 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
           <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="IdBodega" Type="Int32" Nullable="false" />
           <Property Name="anulado" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwfa_proforma_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdProforma" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="pd_cantidad" />
+            <PropertyRef Name="pd_precio" />
+            <PropertyRef Name="pd_por_descuento_uni" />
+            <PropertyRef Name="pd_descuento_uni" />
+            <PropertyRef Name="pd_precio_final" />
+            <PropertyRef Name="pd_subtotal" />
+            <PropertyRef Name="IdCod_Impuesto" />
+            <PropertyRef Name="pd_por_iva" />
+            <PropertyRef Name="pd_iva" />
+            <PropertyRef Name="pd_total" />
+            <PropertyRef Name="anulado" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="nom_presentacion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdProforma" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pd_cantidad" Type="Double" Nullable="false" />
+          <Property Name="pd_precio" Type="Double" Nullable="false" />
+          <Property Name="pd_por_descuento_uni" Type="Double" Nullable="false" />
+          <Property Name="pd_descuento_uni" Type="Double" Nullable="false" />
+          <Property Name="pd_precio_final" Type="Double" Nullable="false" />
+          <Property Name="pd_subtotal" Type="Double" Nullable="false" />
+          <Property Name="IdCod_Impuesto" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pd_por_iva" Type="Double" Nullable="false" />
+          <Property Name="pd_iva" Type="Double" Nullable="false" />
+          <Property Name="pd_total" Type="Double" Nullable="false" />
+          <Property Name="anulado" Type="Boolean" Nullable="false" />
+          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="nom_presentacion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="lote_num_lote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lote_fecha_vcto" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2013,12 +2019,13 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwfa_proforma_det">
-            <EntityTypeMapping TypeName="Model_facturacion.vwfa_proforma_det">
-              <MappingFragment StoreEntitySet="vwfa_proforma_det">
-                <ScalarProperty Name="nom_presentacion" ColumnName="nom_presentacion" />
-                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+          <EntitySetMapping Name="vwfa_proforma_det_por_facturar">
+            <EntityTypeMapping TypeName="Model_facturacion.vwfa_proforma_det_por_facturar">
+              <MappingFragment StoreEntitySet="vwfa_proforma_det_por_facturar">
                 <ScalarProperty Name="anulado" ColumnName="anulado" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="pd_cantidad_pendiente" ColumnName="pd_cantidad_pendiente" />
                 <ScalarProperty Name="pd_total" ColumnName="pd_total" />
                 <ScalarProperty Name="pd_iva" ColumnName="pd_iva" />
                 <ScalarProperty Name="pd_por_iva" ColumnName="pd_por_iva" />
@@ -2037,13 +2044,14 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_cliente_consu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwfa_proforma_det_por_facturar">
-            <EntityTypeMapping TypeName="Model_facturacion.vwfa_proforma_det_por_facturar">
-              <MappingFragment StoreEntitySet="vwfa_proforma_det_por_facturar">
+          <EntitySetMapping Name="vwfa_proforma_det">
+            <EntityTypeMapping TypeName="Model_facturacion.vwfa_proforma_det">
+              <MappingFragment StoreEntitySet="vwfa_proforma_det">
+                <ScalarProperty Name="lote_fecha_vcto" ColumnName="lote_fecha_vcto" />
+                <ScalarProperty Name="lote_num_lote" ColumnName="lote_num_lote" />
+                <ScalarProperty Name="nom_presentacion" ColumnName="nom_presentacion" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
                 <ScalarProperty Name="anulado" ColumnName="anulado" />
-                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="pd_cantidad_pendiente" ColumnName="pd_cantidad_pendiente" />
                 <ScalarProperty Name="pd_total" ColumnName="pd_total" />
                 <ScalarProperty Name="pd_iva" ColumnName="pd_iva" />
                 <ScalarProperty Name="pd_por_iva" ColumnName="pd_por_iva" />

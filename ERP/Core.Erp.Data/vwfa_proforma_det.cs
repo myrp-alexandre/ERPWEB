@@ -32,5 +32,7 @@ namespace Core.Erp.Data
         public bool anulado { get; set; }
         public string pr_descripcion { get; set; }
         public string nom_presentacion { get; set; }
+        public string lote_num_lote { get; set; }
+        public Nullable<System.DateTime> lote_fecha_vcto { get; set; }
     }
 }
