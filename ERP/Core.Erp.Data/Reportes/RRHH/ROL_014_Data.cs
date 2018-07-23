@@ -35,6 +35,28 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  Fondos_Reservas = q.Fondos_Reservas
                              }).ToList();
                 }
+                Lista.ForEach(
+
+                    item =>
+                    {
+                       item.de_descripcion= item.de_descripcion.Trim();
+                        
+                        if (item.Decimo_Cuarto == null)
+                            item.Decimo_Cuarto = "No";
+                        else
+                            item.Decimo_Cuarto = "Si";
+                        if (item.Decimo_Tercero == null)
+                            item.Decimo_Tercero = "No";
+                        else
+                            item.Decimo_Tercero = "Si";
+                        if (item.Fondos_Reservas == null)
+                            item.Fondos_Reservas = "No";
+                        else
+                            item.Fondos_Reservas = "Si";
+                    }
+
+                    );
+                   
                 return Lista;
             }
             catch (Exception)
