@@ -9,9 +9,12 @@ namespace Core.Erp.Info.Facturacion
         public int IdSucursal { get; set; }
         public decimal IdProforma { get; set; }
         public int Secuencia { get; set; }
+        [Range(1,int.MaxValue,ErrorMessage ="El campo producto es obligatorio")]
         public decimal IdProducto { get; set; }
         [Required(ErrorMessage = "El campo cantidad es obligatorio")]
+        [Range(1, int.MaxValue, ErrorMessage = "El campo cantidad es obligatorio")]
         public double pd_cantidad { get; set; }
+        [Required(ErrorMessage = "El campo precio es obligatorio")]
         public double pd_precio { get; set; }
         public double pd_por_descuento_uni { get; set; }
         public double pd_descuento_uni { get; set; }

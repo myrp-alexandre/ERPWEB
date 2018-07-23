@@ -11,12 +11,12 @@ namespace Core.Erp.Bus.Facturacion
     public class fa_proforma_Bus
     {
         fa_proforma_Data odata = new fa_proforma_Data();
-    
-         public List<fa_proforma_Info> get_list(int IdEmpresa)
+
+        public List<fa_proforma_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
             {
-                return odata.get_list(IdEmpresa);
+                return odata.get_list(IdEmpresa, Fecha_ini, Fecha_fin);
             }
             catch (Exception)
             {

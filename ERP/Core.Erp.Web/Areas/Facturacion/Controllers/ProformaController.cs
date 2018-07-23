@@ -26,20 +26,30 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
         fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
+        fa_proforma_det_Bus bus_det = new fa_proforma_det_Bus();
         string mensaje = string.Empty;
         #endregion
 
+
         public ActionResult Index()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {            
+            return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_proforma()
+        public ActionResult GridViewPartial_proforma(DateTime? Fecha_ini, DateTime? Fecha_fin)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             List<fa_proforma_Info> model = new List<fa_proforma_Info>();
-            model = bus_proforma.get_list(IdEmpresa);
+            ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
+            ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
+            model = bus_proforma.get_list(IdEmpresa,ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_proforma", model);
         }
 
@@ -79,6 +89,22 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         private bool validar(fa_proforma_Info i_validar, ref string msg)
         {
             i_validar.IdEntidad = i_validar.IdCliente;
+            i_validar.lst_det = List_det.get_list();
+            if (i_validar.lst_det.Count == 0)
+            {
+                msg = "No ha ingresado registros en el detalle de la proforma";
+                return false;
+            }
+            if (i_validar.lst_det.Where(q=>q.pd_cantidad == 0).Count() > 0)
+            {
+                msg = "Existen registros con cantidad 0 en el detalle de la proforma";
+                return false;
+            }
+            if (i_validar.lst_det.Where(q => q.IdProducto == 0).Count() > 0)
+            {
+                msg = "Existen registros sin producto en el detalle de la proforma";
+                return false;
+            }
             return true;
         }
         private void cargar_combos()
@@ -107,8 +133,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 pf_fecha = DateTime.Now,
-                pf_fecha_vcto = DateTime.Now
+                pf_fecha_vcto = DateTime.Now,
+                lst_det = new List<fa_proforma_det_Info>()
             };
+            List_det.set_list(model.lst_det);
             cargar_combos();
             return View(model);
         }
@@ -139,6 +167,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             if (model == null)
                 return RedirectToAction("Index");
             model.IdEntidad = model.IdCliente;
+            model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdProforma);
+            List_det.set_list(model.lst_det);
             cargar_combos();
             return View(model);
         }
@@ -169,6 +199,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             if (model == null)
                 return RedirectToAction("Index");
             model.IdEntidad = model.IdCliente;
+            model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdProforma);
+            List_det.set_list(model.lst_det);
             cargar_combos();
             return View(model);
         }
