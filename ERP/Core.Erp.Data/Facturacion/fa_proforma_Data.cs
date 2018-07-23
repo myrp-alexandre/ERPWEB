@@ -117,7 +117,6 @@ namespace Core.Erp.Data.Facturacion
                 {
                     Context.fa_proforma.Add(new fa_proforma
                     {
-
                         IdEmpresa = info.IdEmpresa,
                         IdSucursal = info.IdSucursal,
                         IdProforma = info.IdProforma=get_id(info.IdEmpresa, info.IdSucursal),
@@ -129,7 +128,7 @@ namespace Core.Erp.Data.Facturacion
                         pf_fecha = info.pf_fecha,
                         pf_fecha_vcto = info.pf_fecha_vcto,
                         pf_atencion_a = info.pf_atencion_a,
-                        estado = info.estado=true,
+                        estado = info.estado = true,
                         IdBodega = info.IdBodega,
                         IdVendedor = info.IdVendedor,
                         pr_dias_entrega = info.pr_dias_entrega,
@@ -176,6 +175,7 @@ namespace Core.Erp.Data.Facturacion
         {
             try
             {
+                int secuencia = 1;
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
                     fa_proforma Entity = Context.fa_proforma.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdProforma == info.IdProforma);
@@ -195,6 +195,33 @@ namespace Core.Erp.Data.Facturacion
 
                     Entity.IdUsuario_modificacion = info.IdUsuario_modificacion;
                     Entity.fecha_modificacion = DateTime.Now;
+
+                    var lst = Context.fa_proforma_det.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdProforma == info.IdProforma);
+                    Context.fa_proforma_det.RemoveRange(lst);
+
+                    foreach (var item in info.lst_det)
+                    {
+                        Context.fa_proforma_det.Add(new fa_proforma_det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
+                            IdProforma = info.IdProforma,
+                            Secuencia = secuencia++,
+                            IdProducto = item.IdProducto,
+                            pd_cantidad = item.pd_cantidad,
+                            pd_precio = item.pd_precio,
+                            pd_por_descuento_uni = item.pd_por_descuento_uni,
+                            pd_descuento_uni = item.pd_descuento_uni,
+                            pd_precio_final = item.pd_precio_final,
+                            pd_subtotal = item.pd_subtotal,
+                            IdCod_Impuesto = item.IdCod_Impuesto,
+                            pd_por_iva = item.pd_por_iva,
+                            pd_iva = item.pd_iva,
+                            anulado = item.anulado,
+                            pd_total = item.pd_total,
+                        });
+                    }
+
                     Context.SaveChanges();
                 }
                 return true;
@@ -219,6 +246,7 @@ namespace Core.Erp.Data.Facturacion
 
                     Entity.IdUsuario_anulacion = info.IdUsuario_anulacion;
                     Entity.fecha_anulacion = DateTime.Now;
+
                     Context.SaveChanges();
 
                 }
