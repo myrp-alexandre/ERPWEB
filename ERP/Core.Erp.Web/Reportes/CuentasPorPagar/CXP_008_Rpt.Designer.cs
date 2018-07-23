@@ -792,22 +792,27 @@
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // p_fecha
             // 
             this.p_fecha.Name = "p_fecha";
+            this.p_fecha.Visible = false;
             // 
             // p_IdProveedor
             // 
             this.p_IdProveedor.Name = "p_IdProveedor";
+            this.p_IdProveedor.Visible = false;
             // 
             // p_no_mostrar_en_conciliacion
             // 
             this.p_no_mostrar_en_conciliacion.Name = "p_no_mostrar_en_conciliacion";
+            this.p_no_mostrar_en_conciliacion.Visible = false;
             // 
             // p_no_mostrar_saldo_0
             // 
             this.p_no_mostrar_saldo_0.Name = "p_no_mostrar_saldo_0";
+            this.p_no_mostrar_saldo_0.Visible = false;
             // 
             // GroupHeader1
             // 

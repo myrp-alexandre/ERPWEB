@@ -195,14 +195,17 @@
             // p_IdSucursalOrigen
             // 
             this.p_IdSucursalOrigen.Name = "p_IdSucursalOrigen";
+            this.p_IdSucursalOrigen.Visible = false;
             // 
             // p_IdBodegaOrigen
             // 
             this.p_IdBodegaOrigen.Name = "p_IdBodegaOrigen";
+            this.p_IdBodegaOrigen.Visible = false;
             // 
             // p_IdTransferencia
             // 
             this.p_IdTransferencia.Name = "p_IdTransferencia";
+            this.p_IdTransferencia.Visible = false;
             // 
             // ReportHeader
             // 

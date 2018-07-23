@@ -701,14 +701,17 @@
             // p_IdCbteCble_Ogiro
             // 
             this.p_IdCbteCble_Ogiro.Name = "p_IdCbteCble_Ogiro";
+            this.p_IdCbteCble_Ogiro.Visible = false;
             // 
             // p_IdTipoCbte_Ogiro
             // 
             this.p_IdTipoCbte_Ogiro.Name = "p_IdTipoCbte_Ogiro";
+            this.p_IdTipoCbte_Ogiro.Visible = false;
             // 
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // CXP_001_Rpt
             // 

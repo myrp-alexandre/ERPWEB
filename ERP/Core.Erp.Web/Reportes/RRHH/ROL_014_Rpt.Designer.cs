@@ -468,7 +468,6 @@
             xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
             this.xrTableCell10.Summary = xrSummary1;
             this.xrTableCell10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell10.Weight = 0.8D;
             this.xrTableCell10.Weight = 0.79999999999999993D;
             // 
             // ROL_014_Rpt

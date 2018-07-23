@@ -678,10 +678,12 @@
             // p_IdUtilidad
             // 
             this.p_IdUtilidad.Name = "p_IdUtilidad";
+            this.p_IdUtilidad.Visible = false;
             // 
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // ROL_004_Rpt
             // 

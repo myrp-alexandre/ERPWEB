@@ -161,10 +161,12 @@
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // p_IdRetencion
             // 
             this.p_IdRetencion.Name = "p_IdRetencion";
+            this.p_IdRetencion.Visible = false;
             // 
             // PageHeader
             // 

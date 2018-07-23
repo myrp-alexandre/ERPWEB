@@ -646,10 +646,12 @@
             // p_IdActaFiniquito
             // 
             this.p_IdActaFiniquito.Name = "p_IdActaFiniquito";
+            this.p_IdActaFiniquito.Visible = false;
             // 
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // ROL_005_Rpt
             // 

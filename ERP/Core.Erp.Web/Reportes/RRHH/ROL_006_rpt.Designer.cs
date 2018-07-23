@@ -1028,14 +1028,17 @@
             // p_IdLiquidacion
             // 
             this.p_IdLiquidacion.Name = "p_IdLiquidacion";
+            this.p_IdLiquidacion.Visible = false;
             // 
             // p_IdEmpleado
             // 
             this.p_IdEmpleado.Name = "p_IdEmpleado";
+            this.p_IdEmpleado.Visible = false;
             // 
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // ROL_006_Rpt
             // 

@@ -317,38 +317,47 @@
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // p_IdSucursal
             // 
             this.p_IdSucursal.Name = "p_IdSucursal";
+            this.p_IdSucursal.Visible = false;
             // 
             // p_IdBodega
             // 
             this.p_IdBodega.Name = "p_IdBodega";
+            this.p_IdBodega.Visible = false;
             // 
             // p_IdProducto
             // 
             this.p_IdProducto.Name = "p_IdProducto";
+            this.p_IdProducto.Visible = false;
             // 
             // p_fecha_ini
             // 
             this.p_fecha_ini.Name = "p_fecha_ini";
+            this.p_fecha_ini.Visible = false;
             // 
             // p_fecha_fin
             // 
             this.p_fecha_fin.Name = "p_fecha_fin";
+            this.p_fecha_fin.Visible = false;
             // 
             // p_IdUsuario
             // 
             this.p_IdUsuario.Name = "p_IdUsuario";
+            this.p_IdUsuario.Visible = false;
             // 
             // p_no_mostrar_valores_en_0
             // 
             this.p_no_mostrar_valores_en_0.Name = "p_no_mostrar_valores_en_0";
+            this.p_no_mostrar_valores_en_0.Visible = false;
             // 
             // p_mostrar_detallado
             // 
             this.p_mostrar_detallado.Name = "p_mostrar_detallado";
+            this.p_mostrar_detallado.Visible = false;
             // 
             // ReportHeader
             // 

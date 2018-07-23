@@ -219,14 +219,17 @@
             // p_IdEmpresa_Ogiro
             // 
             this.p_IdEmpresa_Ogiro.Name = "p_IdEmpresa_Ogiro";
+            this.p_IdEmpresa_Ogiro.Visible = false;
             // 
             // p_IdTipoCbte_Ogiro
             // 
             this.p_IdTipoCbte_Ogiro.Name = "p_IdTipoCbte_Ogiro";
+            this.p_IdTipoCbte_Ogiro.Visible = false;
             // 
             // p_IdCbteCble_Ogiro
             // 
             this.p_IdCbteCble_Ogiro.Name = "p_IdCbteCble_Ogiro";
+            this.p_IdCbteCble_Ogiro.Visible = false;
             // 
             // ReportFooter
             // 

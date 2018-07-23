@@ -187,14 +187,17 @@
             // p_IdCbteCble
             // 
             this.p_IdCbteCble.Name = "p_IdCbteCble";
+            this.p_IdCbteCble.Visible = false;
             // 
             // p_IdTipoCbte
             // 
             this.p_IdTipoCbte.Name = "p_IdTipoCbte";
+            this.p_IdTipoCbte.Visible = false;
             // 
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // ReportHeader
             // 

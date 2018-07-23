@@ -507,10 +507,12 @@
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // p_IdConciliacion
             // 
             this.p_IdConciliacion.Name = "p_IdConciliacion";
+            this.p_IdConciliacion.Visible = false;
             // 
             // objectDataSource1
             // 

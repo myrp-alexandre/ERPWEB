@@ -594,14 +594,17 @@
             // p_IdSolicitud
             // 
             this.p_IdSolicitud.Name = "p_IdSolicitud";
+            this.p_IdSolicitud.Visible = false;
             // 
             // p_IdEmpleado
             // 
             this.p_IdEmpleado.Name = "p_IdEmpleado";
+            this.p_IdEmpleado.Visible = false;
             // 
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // ReportFooter
             // 

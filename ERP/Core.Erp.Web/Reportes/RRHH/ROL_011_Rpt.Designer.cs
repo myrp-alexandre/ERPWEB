@@ -225,10 +225,12 @@
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // p_IdHorasExtras
             // 
             this.p_IdHorasExtras.Name = "p_IdHorasExtras";
+            this.p_IdHorasExtras.Visible = false;
             // 
             // ReportHeader
             // 

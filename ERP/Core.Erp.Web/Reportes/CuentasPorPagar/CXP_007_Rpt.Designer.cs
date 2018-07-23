@@ -189,10 +189,10 @@
             this.xrTableCell92 = new DevExpress.XtraReports.UI.XRTableCell();
             this.p_mostrar_agrupado = new DevExpress.XtraReports.Parameters.Parameter();
             this.GroupHeader_codigo = new DevExpress.XtraReports.UI.GroupHeaderBand();
-            this.GroupFooter_codigo = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.xrTable2 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow3 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.GroupFooter_codigo = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.xrTable6 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow8 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -557,14 +557,17 @@
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // p_fecha_ini
             // 
             this.p_fecha_ini.Name = "p_fecha_ini";
+            this.p_fecha_ini.Visible = false;
             // 
             // p_fecha_fin
             // 
             this.p_fecha_fin.Name = "p_fecha_fin";
+            this.p_fecha_fin.Visible = false;
             // 
             // ReportHeader
             // 
@@ -1516,6 +1519,7 @@
             // p_mostrar_agrupado
             // 
             this.p_mostrar_agrupado.Name = "p_mostrar_agrupado";
+            this.p_mostrar_agrupado.Visible = false;
             // 
             // GroupHeader_codigo
             // 
@@ -1526,14 +1530,6 @@
             this.GroupHeader_codigo.HeightF = 17F;
             this.GroupHeader_codigo.Name = "GroupHeader_codigo";
             this.GroupHeader_codigo.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.GroupHeader_codigo_BeforePrint);
-            // 
-            // GroupFooter_codigo
-            // 
-            this.GroupFooter_codigo.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrTable6});
-            this.GroupFooter_codigo.HeightF = 17F;
-            this.GroupFooter_codigo.Name = "GroupFooter_codigo";
-            this.GroupFooter_codigo.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.GroupFooter_codigo_BeforePrint);
             // 
             // xrTable2
             // 
@@ -1566,6 +1562,14 @@
             this.xrTableCell3.StylePriority.UseFont = false;
             this.xrTableCell3.StylePriority.UsePadding = false;
             this.xrTableCell3.Weight = 1D;
+            // 
+            // GroupFooter_codigo
+            // 
+            this.GroupFooter_codigo.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrTable6});
+            this.GroupFooter_codigo.HeightF = 17F;
+            this.GroupFooter_codigo.Name = "GroupFooter_codigo";
+            this.GroupFooter_codigo.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.GroupFooter_codigo_BeforePrint);
             // 
             // xrTable6
             // 

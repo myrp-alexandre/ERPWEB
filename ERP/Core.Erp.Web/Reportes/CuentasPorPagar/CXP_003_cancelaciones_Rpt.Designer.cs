@@ -273,14 +273,17 @@
             // p_IdEmpresa_pago
             // 
             this.p_IdEmpresa_pago.Name = "p_IdEmpresa_pago";
+            this.p_IdEmpresa_pago.Visible = false;
             // 
             // p_IdTipoCbte_pago
             // 
             this.p_IdTipoCbte_pago.Name = "p_IdTipoCbte_pago";
+            this.p_IdTipoCbte_pago.Visible = false;
             // 
             // p_IdCbteCble_pago
             // 
             this.p_IdCbteCble_pago.Name = "p_IdCbteCble_pago";
+            this.p_IdCbteCble_pago.Visible = false;
             // 
             // objectDataSource1
             // 

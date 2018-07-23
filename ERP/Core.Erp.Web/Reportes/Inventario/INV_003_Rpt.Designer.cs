@@ -865,42 +865,52 @@
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // p_IdSucursal
             // 
             this.p_IdSucursal.Name = "p_IdSucursal";
+            this.p_IdSucursal.Visible = false;
             // 
             // p_IdBodega
             // 
             this.p_IdBodega.Name = "p_IdBodega";
+            this.p_IdBodega.Visible = false;
             // 
             // p_IdProducto
             // 
             this.p_IdProducto.Name = "p_IdProducto";
+            this.p_IdProducto.Visible = false;
             // 
             // p_IdCategoria
             // 
             this.p_IdCategoria.Name = "p_IdCategoria";
+            this.p_IdCategoria.Visible = false;
             // 
             // p_IdLinea
             // 
             this.p_IdLinea.Name = "p_IdLinea";
+            this.p_IdLinea.Visible = false;
             // 
             // p_IdGrupo
             // 
             this.p_IdGrupo.Name = "p_IdGrupo";
+            this.p_IdGrupo.Visible = false;
             // 
             // p_IdSubgrupo
             // 
             this.p_IdSubgrupo.Name = "p_IdSubgrupo";
+            this.p_IdSubgrupo.Visible = false;
             // 
             // p_fecha_corte
             // 
             this.p_fecha_corte.Name = "p_fecha_corte";
+            this.p_fecha_corte.Visible = false;
             // 
             // p_mostrar_stock_0
             // 
             this.p_mostrar_stock_0.Name = "p_mostrar_stock_0";
+            this.p_mostrar_stock_0.Visible = false;
             // 
             // GroupHeader1
             // 

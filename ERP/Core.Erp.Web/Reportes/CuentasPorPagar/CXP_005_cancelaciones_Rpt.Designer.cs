@@ -277,10 +277,12 @@
             // p_IdEmpresa_conciliacion
             // 
             this.p_IdEmpresa_conciliacion.Name = "p_IdEmpresa_conciliacion";
+            this.p_IdEmpresa_conciliacion.Visible = false;
             // 
             // p_IdConciliacion
             // 
             this.p_IdConciliacion.Name = "p_IdConciliacion";
+            this.p_IdConciliacion.Visible = false;
             // 
             // ReportHeader
             // 

@@ -558,10 +558,12 @@
             // p_IdPrestamo
             // 
             this.p_IdPrestamo.Name = "p_IdPrestamo";
+            this.p_IdPrestamo.Visible = false;
             // 
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // ROL_008_Rpt
             // 
