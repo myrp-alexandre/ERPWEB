@@ -20,7 +20,18 @@ namespace Core.Erp.Bus.Facturacion
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
 
+        public fa_cliente_x_fa_Vendedor_x_sucursal_Info get_info(int IdEmpresa, decimal IdCliente, int IdSucursal)
+        {
+            try
+            {
+                return odata.get_info(IdEmpresa, IdCliente, IdSucursal);
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

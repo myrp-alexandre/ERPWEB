@@ -1135,6 +1135,9 @@
     <Compile Include="SPROL_013_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="SPROL_013_Result1.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="spro_nomina_x_pago_utilidad_Result.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
