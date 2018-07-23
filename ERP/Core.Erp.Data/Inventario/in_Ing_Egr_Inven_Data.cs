@@ -277,12 +277,14 @@ namespace Core.Erp.Data.Inventario
                             IdOrdenCompra = item.IdOrdenCompra,
                             Secuencia_oc = item.Secuencia_oc,
 
-                            IdEmpresa_inv = item.IdEmpresa_inv,
-                            IdSucursal_inv = item.IdSucursal_inv,
-                            IdBodega_inv = item.IdBodega_inv,
-                            IdMovi_inven_tipo_inv = item.IdMovi_inven_tipo_inv,
-                            IdNumMovi_inv = item.IdNumMovi_inv,
-                            secuencia_inv = item.secuencia_inv,
+                            //Deben ir null para que al aprobarse se liguen con el nuevo
+                            IdEmpresa_inv = null,
+                            IdSucursal_inv = null,
+                            IdBodega_inv = null,
+                            IdMovi_inven_tipo_inv = null,
+                            IdNumMovi_inv = null,
+                            secuencia_inv = null,
+
                             IdUnidadMedida = (item.IdUnidadMedida) == null ? "UNID" : item.IdUnidadMedida,
                             IdUnidadMedida_sinConversion = (item.IdUnidadMedida_sinConversion) == null ? "UNID" : item.IdUnidadMedida_sinConversion,
                             dm_cantidad_sinConversion = item.dm_cantidad_sinConversion,
