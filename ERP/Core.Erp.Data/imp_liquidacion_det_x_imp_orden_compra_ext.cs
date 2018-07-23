@@ -12,12 +12,15 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class imp_gasto_x_ct_plancta
+    public partial class imp_liquidacion_det_x_imp_orden_compra_ext
     {
-        public int IdGasto_tipo { get; set; }
         public int IdEmpresa { get; set; }
-        public string IdCtaCble { get; set; }
+        public decimal IdLiquidacion { get; set; }
+        public int IdEmpresa_oe { get; set; }
+        public decimal IdOrdenCompra_ext { get; set; }
+        public string observacion { get; set; }
     
-        public virtual imp_gasto imp_gasto { get; set; }
+        public virtual imp_liquidacion imp_liquidacion { get; set; }
+        public virtual imp_orden_compra_ext imp_orden_compra_ext { get; set; }
     }
 }

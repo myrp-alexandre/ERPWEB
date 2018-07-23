@@ -40,6 +40,124 @@
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="imp_liquidacion">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdLiquidacion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdLiquidacion" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="li_num_documento" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="li_codigo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="li_num_DAU" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="li_fecha" Type="datetime" Nullable="false" />
+          <Property Name="li_observacion" Type="varchar" MaxLength="500" />
+          <Property Name="li_factor_conversion" Type="float" Nullable="false" />
+          <Property Name="li_total_fob" Type="float" Nullable="false" />
+          <Property Name="li_total_gastos" Type="float" Nullable="false" />
+          <Property Name="li_total_bodega" Type="float" Nullable="false" />
+          <Property Name="li_factor_costo" Type="float" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+          <Property Name="cerrado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="imp_liquidacion_det_x_imp_orden_compra_ext">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdLiquidacion" />
+            <PropertyRef Name="IdEmpresa_oe" />
+            <PropertyRef Name="IdOrdenCompra_ext" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdLiquidacion" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdEmpresa_oe" Type="int" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="observacion" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="imp_orden_compra_ext">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenCompra_ext" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdProveedor" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdPais_origen" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdPais_embarque" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdCiudad_destino" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdCatalogo_via" Type="int" Nullable="false" />
+          <Property Name="IdCatalogo_forma_pago" Type="int" Nullable="false" />
+          <Property Name="oe_fecha" Type="datetime" Nullable="false" />
+          <Property Name="oe_fecha_llegada_est" Type="datetime" />
+          <Property Name="oe_fecha_embarque_est" Type="datetime" />
+          <Property Name="oe_fecha_desaduanizacion_est" Type="datetime" />
+          <Property Name="IdCtaCble_importacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="oe_observacion" Type="varchar" MaxLength="100" />
+          <Property Name="oe_codigo" Type="varchar" MaxLength="30" />
+          <Property Name="oe_valor_flete" Type="float" Nullable="false" />
+          <Property Name="oe_valor_seguro" Type="float" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+          <Property Name="IdUsuario_creacion" Type="varchar" MaxLength="20" />
+          <Property Name="fecha_creacion" Type="datetime" />
+          <Property Name="IdUsuario_modificacion" Type="varchar" MaxLength="20" />
+          <Property Name="fecha_modificacion" Type="datetime" />
+          <Property Name="IdUsuario_anulacion" Type="varchar" MaxLength="20" />
+          <Property Name="fecha_anulacion" Type="datetime" />
+          <Property Name="IdLiquidacion" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="oe_fecha_llegada" Type="datetime" />
+          <Property Name="oe_fecha_embarque" Type="datetime" />
+          <Property Name="oe_fecha_desaduanizacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="imp_orden_compra_ext_ct_cbteble_det_gastos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenCompra_ext" />
+            <PropertyRef Name="IdEmpresa_ct" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="secuencia_ct" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdEmpresa_ct" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="secuencia_ct" Type="int" Nullable="false" />
+          <Property Name="IdGasto_tipo" Type="int" />
+        </EntityType>
+        <EntityType Name="imp_orden_compra_ext_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenCompra_ext" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdUnidadMedida" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="od_cantidad" Type="float" Nullable="false" />
+          <Property Name="od_costo" Type="float" Nullable="false" />
+          <Property Name="od_por_descuento" Type="float" Nullable="false" />
+          <Property Name="od_descuento" Type="float" Nullable="false" />
+          <Property Name="od_costo_final" Type="float" Nullable="false" />
+          <Property Name="od_subtotal" Type="float" Nullable="false" />
+          <Property Name="od_cantidad_recepcion" Type="float" Nullable="false" />
+          <Property Name="od_costo_convertido" Type="float" Nullable="false" />
+          <Property Name="od_total_fob" Type="float" Nullable="false" />
+          <Property Name="od_factor_costo" Type="float" Nullable="false" />
+          <Property Name="od_costo_bodega" Type="float" Nullable="false" />
+          <Property Name="od_costo_total" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="imp_orden_compra_ext_recepcion">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenCompra_ext" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="or_fecha" Type="datetime" Nullable="false" />
+          <Property Name="or_observacion" Type="varchar" MaxLength="1000" />
+        </EntityType>
         <EntityType Name="imp_parametro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -72,11 +190,123 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_liquidacion">
+          <End Role="imp_liquidacion" Type="Self.imp_liquidacion" Multiplicity="1" />
+          <End Role="imp_liquidacion_det_x_imp_orden_compra_ext" Type="Self.imp_liquidacion_det_x_imp_orden_compra_ext" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_liquidacion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdLiquidacion" />
+            </Principal>
+            <Dependent Role="imp_liquidacion_det_x_imp_orden_compra_ext">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdLiquidacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_orden_compra_ext">
+          <End Role="imp_orden_compra_ext" Type="Self.imp_orden_compra_ext" Multiplicity="1" />
+          <End Role="imp_liquidacion_det_x_imp_orden_compra_ext" Type="Self.imp_liquidacion_det_x_imp_orden_compra_ext" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_orden_compra_ext">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenCompra_ext" />
+            </Principal>
+            <Dependent Role="imp_liquidacion_det_x_imp_orden_compra_ext">
+              <PropertyRef Name="IdEmpresa_oe" />
+              <PropertyRef Name="IdOrdenCompra_ext" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_gasto">
+          <End Role="imp_gasto" Type="Self.imp_gasto" Multiplicity="0..1" />
+          <End Role="imp_orden_compra_ext_ct_cbteble_det_gastos" Type="Self.imp_orden_compra_ext_ct_cbteble_det_gastos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_gasto">
+              <PropertyRef Name="IdGasto_tipo" />
+            </Principal>
+            <Dependent Role="imp_orden_compra_ext_ct_cbteble_det_gastos">
+              <PropertyRef Name="IdGasto_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_orden_compra_ext">
+          <End Role="imp_orden_compra_ext" Type="Self.imp_orden_compra_ext" Multiplicity="1" />
+          <End Role="imp_orden_compra_ext_ct_cbteble_det_gastos" Type="Self.imp_orden_compra_ext_ct_cbteble_det_gastos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_orden_compra_ext">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenCompra_ext" />
+            </Principal>
+            <Dependent Role="imp_orden_compra_ext_ct_cbteble_det_gastos">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenCompra_ext" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imp_orden_compra_ext_det_imp_orden_compra_ext">
+          <End Role="imp_orden_compra_ext" Type="Self.imp_orden_compra_ext" Multiplicity="1" />
+          <End Role="imp_orden_compra_ext_det" Type="Self.imp_orden_compra_ext_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_orden_compra_ext">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenCompra_ext" />
+            </Principal>
+            <Dependent Role="imp_orden_compra_ext_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenCompra_ext" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imp_orden_compra_ext_imp_catalogo">
+          <End Role="imp_catalogo" Type="Self.imp_catalogo" Multiplicity="1" />
+          <End Role="imp_orden_compra_ext" Type="Self.imp_orden_compra_ext" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="imp_orden_compra_ext">
+              <PropertyRef Name="IdCatalogo_via" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imp_orden_compra_ext_imp_catalogo1">
+          <End Role="imp_catalogo" Type="Self.imp_catalogo" Multiplicity="1" />
+          <End Role="imp_orden_compra_ext" Type="Self.imp_orden_compra_ext" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="imp_orden_compra_ext">
+              <PropertyRef Name="IdCatalogo_forma_pago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imp_orden_compra_ext_imp_liquidacion">
+          <End Role="imp_liquidacion" Type="Self.imp_liquidacion" Multiplicity="0..1" />
+          <End Role="imp_orden_compra_ext" Type="Self.imp_orden_compra_ext" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_liquidacion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdLiquidacion" />
+            </Principal>
+            <Dependent Role="imp_orden_compra_ext">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdLiquidacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Model_importacionStoreContainer">
           <EntitySet Name="imp_catalogo" EntityType="Self.imp_catalogo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="imp_catalogo_tipo" EntityType="Self.imp_catalogo_tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="imp_gasto" EntityType="Self.imp_gasto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="imp_gasto_x_ct_plancta" EntityType="Self.imp_gasto_x_ct_plancta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="imp_liquidacion" EntityType="Self.imp_liquidacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="imp_liquidacion_det_x_imp_orden_compra_ext" EntityType="Self.imp_liquidacion_det_x_imp_orden_compra_ext" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="imp_orden_compra_ext" EntityType="Self.imp_orden_compra_ext" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="imp_orden_compra_ext_ct_cbteble_det_gastos" EntityType="Self.imp_orden_compra_ext_ct_cbteble_det_gastos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="imp_orden_compra_ext_det" EntityType="Self.imp_orden_compra_ext_det" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="imp_orden_compra_ext_recepcion" EntityType="Self.imp_orden_compra_ext_recepcion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="imp_parametro" EntityType="Self.imp_parametro" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_imp_catalogo_imp_catalogo_tipo" Association="Self.FK_imp_catalogo_imp_catalogo_tipo">
             <End Role="imp_catalogo_tipo" EntitySet="imp_catalogo_tipo" />
@@ -86,26 +316,117 @@
             <End Role="imp_gasto" EntitySet="imp_gasto" />
             <End Role="imp_gasto_x_ct_plancta" EntitySet="imp_gasto_x_ct_plancta" />
           </AssociationSet>
+          <AssociationSet Name="FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_liquidacion" Association="Self.FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_liquidacion">
+            <End Role="imp_liquidacion" EntitySet="imp_liquidacion" />
+            <End Role="imp_liquidacion_det_x_imp_orden_compra_ext" EntitySet="imp_liquidacion_det_x_imp_orden_compra_ext" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_orden_compra_ext" Association="Self.FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_orden_compra_ext">
+            <End Role="imp_orden_compra_ext" EntitySet="imp_orden_compra_ext" />
+            <End Role="imp_liquidacion_det_x_imp_orden_compra_ext" EntitySet="imp_liquidacion_det_x_imp_orden_compra_ext" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_gasto" Association="Self.FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_gasto">
+            <End Role="imp_gasto" EntitySet="imp_gasto" />
+            <End Role="imp_orden_compra_ext_ct_cbteble_det_gastos" EntitySet="imp_orden_compra_ext_ct_cbteble_det_gastos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_orden_compra_ext" Association="Self.FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_orden_compra_ext">
+            <End Role="imp_orden_compra_ext" EntitySet="imp_orden_compra_ext" />
+            <End Role="imp_orden_compra_ext_ct_cbteble_det_gastos" EntitySet="imp_orden_compra_ext_ct_cbteble_det_gastos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imp_orden_compra_ext_det_imp_orden_compra_ext" Association="Self.FK_imp_orden_compra_ext_det_imp_orden_compra_ext">
+            <End Role="imp_orden_compra_ext" EntitySet="imp_orden_compra_ext" />
+            <End Role="imp_orden_compra_ext_det" EntitySet="imp_orden_compra_ext_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imp_orden_compra_ext_imp_catalogo" Association="Self.FK_imp_orden_compra_ext_imp_catalogo">
+            <End Role="imp_catalogo" EntitySet="imp_catalogo" />
+            <End Role="imp_orden_compra_ext" EntitySet="imp_orden_compra_ext" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imp_orden_compra_ext_imp_catalogo1" Association="Self.FK_imp_orden_compra_ext_imp_catalogo1">
+            <End Role="imp_catalogo" EntitySet="imp_catalogo" />
+            <End Role="imp_orden_compra_ext" EntitySet="imp_orden_compra_ext" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imp_orden_compra_ext_imp_liquidacion" Association="Self.FK_imp_orden_compra_ext_imp_liquidacion">
+            <End Role="imp_liquidacion" EntitySet="imp_liquidacion" />
+            <End Role="imp_orden_compra_ext" EntitySet="imp_orden_compra_ext" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model_importacion" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Entities_importacion" annotation:LazyLoadingEnabled="true" >
-          <EntitySet Name="imp_gasto" EntityType="Model_importacion.imp_gasto" />
-          <EntitySet Name="imp_gasto_x_ct_plancta" EntityType="Model_importacion.imp_gasto_x_ct_plancta" />
-          <AssociationSet Name="FK_imp_gasto_x_ct_plancta_imp_gasto" Association="Model_importacion.FK_imp_gasto_x_ct_plancta_imp_gasto">
-            <End Role="imp_gasto" EntitySet="imp_gasto" />
-            <End Role="imp_gasto_x_ct_plancta" EntitySet="imp_gasto_x_ct_plancta" />
-          </AssociationSet>
-          <EntitySet Name="imp_parametro" EntityType="Model_importacion.imp_parametro" />
           <EntitySet Name="imp_catalogo" EntityType="Model_importacion.imp_catalogo" />
           <EntitySet Name="imp_catalogo_tipo" EntityType="Model_importacion.imp_catalogo_tipo" />
+          <EntitySet Name="imp_gasto" EntityType="Model_importacion.imp_gasto" />
+          <EntitySet Name="imp_gasto_x_ct_plancta" EntityType="Model_importacion.imp_gasto_x_ct_plancta" />
+          <EntitySet Name="imp_liquidacion" EntityType="Model_importacion.imp_liquidacion" />
+          <EntitySet Name="imp_liquidacion_det_x_imp_orden_compra_ext" EntityType="Model_importacion.imp_liquidacion_det_x_imp_orden_compra_ext" />
+          <EntitySet Name="imp_orden_compra_ext" EntityType="Model_importacion.imp_orden_compra_ext" />
+          <EntitySet Name="imp_orden_compra_ext_ct_cbteble_det_gastos" EntityType="Model_importacion.imp_orden_compra_ext_ct_cbteble_det_gastos" />
+          <EntitySet Name="imp_orden_compra_ext_det" EntityType="Model_importacion.imp_orden_compra_ext_det" />
+          <EntitySet Name="imp_orden_compra_ext_recepcion" EntityType="Model_importacion.imp_orden_compra_ext_recepcion" />
+          <EntitySet Name="imp_parametro" EntityType="Model_importacion.imp_parametro" />
           <AssociationSet Name="FK_imp_catalogo_imp_catalogo_tipo" Association="Model_importacion.FK_imp_catalogo_imp_catalogo_tipo">
             <End Role="imp_catalogo_tipo" EntitySet="imp_catalogo_tipo" />
             <End Role="imp_catalogo" EntitySet="imp_catalogo" />
           </AssociationSet>
+          <AssociationSet Name="FK_imp_orden_compra_ext_imp_catalogo" Association="Model_importacion.FK_imp_orden_compra_ext_imp_catalogo">
+            <End Role="imp_catalogo" EntitySet="imp_catalogo" />
+            <End Role="imp_orden_compra_ext" EntitySet="imp_orden_compra_ext" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imp_orden_compra_ext_imp_catalogo1" Association="Model_importacion.FK_imp_orden_compra_ext_imp_catalogo1">
+            <End Role="imp_catalogo" EntitySet="imp_catalogo" />
+            <End Role="imp_orden_compra_ext" EntitySet="imp_orden_compra_ext" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imp_gasto_x_ct_plancta_imp_gasto" Association="Model_importacion.FK_imp_gasto_x_ct_plancta_imp_gasto">
+            <End Role="imp_gasto" EntitySet="imp_gasto" />
+            <End Role="imp_gasto_x_ct_plancta" EntitySet="imp_gasto_x_ct_plancta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_gasto" Association="Model_importacion.FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_gasto">
+            <End Role="imp_gasto" EntitySet="imp_gasto" />
+            <End Role="imp_orden_compra_ext_ct_cbteble_det_gastos" EntitySet="imp_orden_compra_ext_ct_cbteble_det_gastos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_liquidacion" Association="Model_importacion.FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_liquidacion">
+            <End Role="imp_liquidacion" EntitySet="imp_liquidacion" />
+            <End Role="imp_liquidacion_det_x_imp_orden_compra_ext" EntitySet="imp_liquidacion_det_x_imp_orden_compra_ext" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imp_orden_compra_ext_imp_liquidacion" Association="Model_importacion.FK_imp_orden_compra_ext_imp_liquidacion">
+            <End Role="imp_liquidacion" EntitySet="imp_liquidacion" />
+            <End Role="imp_orden_compra_ext" EntitySet="imp_orden_compra_ext" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_orden_compra_ext" Association="Model_importacion.FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_orden_compra_ext">
+            <End Role="imp_orden_compra_ext" EntitySet="imp_orden_compra_ext" />
+            <End Role="imp_liquidacion_det_x_imp_orden_compra_ext" EntitySet="imp_liquidacion_det_x_imp_orden_compra_ext" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_orden_compra_ext" Association="Model_importacion.FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_orden_compra_ext">
+            <End Role="imp_orden_compra_ext" EntitySet="imp_orden_compra_ext" />
+            <End Role="imp_orden_compra_ext_ct_cbteble_det_gastos" EntitySet="imp_orden_compra_ext_ct_cbteble_det_gastos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imp_orden_compra_ext_det_imp_orden_compra_ext" Association="Model_importacion.FK_imp_orden_compra_ext_det_imp_orden_compra_ext">
+            <End Role="imp_orden_compra_ext" EntitySet="imp_orden_compra_ext" />
+            <End Role="imp_orden_compra_ext_det" EntitySet="imp_orden_compra_ext_det" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="imp_catalogo">
+          <Key>
+            <PropertyRef Name="IdCatalogo" />
+          </Key>
+          <Property Name="IdCatalogo" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogo_tipo" Type="Int32" Nullable="false" />
+          <Property Name="ca_descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="imp_catalogo_tipo" Relationship="Model_importacion.FK_imp_catalogo_imp_catalogo_tipo" FromRole="imp_catalogo" ToRole="imp_catalogo_tipo" />
+          <NavigationProperty Name="imp_orden_compra_ext" Relationship="Model_importacion.FK_imp_orden_compra_ext_imp_catalogo" FromRole="imp_catalogo" ToRole="imp_orden_compra_ext" />
+          <NavigationProperty Name="imp_orden_compra_ext1" Relationship="Model_importacion.FK_imp_orden_compra_ext_imp_catalogo1" FromRole="imp_catalogo" ToRole="imp_orden_compra_ext" />
+        </EntityType>
+        <EntityType Name="imp_catalogo_tipo">
+          <Key>
+            <PropertyRef Name="IdCatalogo_tipo" />
+          </Key>
+          <Property Name="IdCatalogo_tipo" Type="Int32" Nullable="false" />
+          <Property Name="ct_descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="imp_catalogo" Relationship="Model_importacion.FK_imp_catalogo_imp_catalogo_tipo" FromRole="imp_catalogo_tipo" ToRole="imp_catalogo" />
+        </EntityType>
         <EntityType Name="imp_gasto">
           <Key>
             <PropertyRef Name="IdGasto_tipo" />
@@ -115,6 +436,7 @@
           <Property Name="estado" Type="Boolean" Nullable="false" />
           <Property Name="observacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="imp_gasto_x_ct_plancta" Relationship="Model_importacion.FK_imp_gasto_x_ct_plancta_imp_gasto" FromRole="imp_gasto" ToRole="imp_gasto_x_ct_plancta" />
+          <NavigationProperty Name="imp_orden_compra_ext_ct_cbteble_det_gastos" Relationship="Model_importacion.FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_gasto" FromRole="imp_gasto" ToRole="imp_orden_compra_ext_ct_cbteble_det_gastos" />
         </EntityType>
         <EntityType Name="imp_gasto_x_ct_plancta">
           <Key>
@@ -126,18 +448,137 @@
           <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="imp_gasto" Relationship="Model_importacion.FK_imp_gasto_x_ct_plancta_imp_gasto" FromRole="imp_gasto_x_ct_plancta" ToRole="imp_gasto" />
         </EntityType>
-        <Association Name="FK_imp_gasto_x_ct_plancta_imp_gasto">
-          <End Type="Model_importacion.imp_gasto" Role="imp_gasto" Multiplicity="1" />
-          <End Type="Model_importacion.imp_gasto_x_ct_plancta" Role="imp_gasto_x_ct_plancta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="imp_gasto">
-              <PropertyRef Name="IdGasto_tipo" />
-            </Principal>
-            <Dependent Role="imp_gasto_x_ct_plancta">
-              <PropertyRef Name="IdGasto_tipo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="imp_liquidacion">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdLiquidacion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdLiquidacion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="li_num_documento" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="li_codigo" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="li_num_DAU" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="li_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="li_observacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="li_factor_conversion" Type="Double" Nullable="false" />
+          <Property Name="li_total_fob" Type="Double" Nullable="false" />
+          <Property Name="li_total_gastos" Type="Double" Nullable="false" />
+          <Property Name="li_total_bodega" Type="Double" Nullable="false" />
+          <Property Name="li_factor_costo" Type="Double" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="cerrado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="imp_liquidacion_det_x_imp_orden_compra_ext" Relationship="Model_importacion.FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_liquidacion" FromRole="imp_liquidacion" ToRole="imp_liquidacion_det_x_imp_orden_compra_ext" />
+          <NavigationProperty Name="imp_orden_compra_ext" Relationship="Model_importacion.FK_imp_orden_compra_ext_imp_liquidacion" FromRole="imp_liquidacion" ToRole="imp_orden_compra_ext" />
+        </EntityType>
+        <EntityType Name="imp_liquidacion_det_x_imp_orden_compra_ext">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdLiquidacion" />
+            <PropertyRef Name="IdEmpresa_oe" />
+            <PropertyRef Name="IdOrdenCompra_ext" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdLiquidacion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa_oe" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="observacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="imp_liquidacion" Relationship="Model_importacion.FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_liquidacion" FromRole="imp_liquidacion_det_x_imp_orden_compra_ext" ToRole="imp_liquidacion" />
+          <NavigationProperty Name="imp_orden_compra_ext" Relationship="Model_importacion.FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_orden_compra_ext" FromRole="imp_liquidacion_det_x_imp_orden_compra_ext" ToRole="imp_orden_compra_ext" />
+        </EntityType>
+        <EntityType Name="imp_orden_compra_ext">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenCompra_ext" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdProveedor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdPais_origen" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdPais_embarque" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdCiudad_destino" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdCatalogo_via" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogo_forma_pago" Type="Int32" Nullable="false" />
+          <Property Name="oe_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="oe_fecha_llegada_est" Type="DateTime" Precision="3" />
+          <Property Name="oe_fecha_embarque_est" Type="DateTime" Precision="3" />
+          <Property Name="oe_fecha_desaduanizacion_est" Type="DateTime" Precision="3" />
+          <Property Name="IdCtaCble_importacion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="oe_observacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="oe_codigo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="oe_valor_flete" Type="Double" Nullable="false" />
+          <Property Name="oe_valor_seguro" Type="Double" Nullable="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuario_creacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_modificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_modificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_anulacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_anulacion" Type="DateTime" Precision="3" />
+          <Property Name="IdLiquidacion" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="oe_fecha_llegada" Type="DateTime" Precision="3" />
+          <Property Name="oe_fecha_embarque" Type="DateTime" Precision="3" />
+          <Property Name="oe_fecha_desaduanizacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="imp_catalogo" Relationship="Model_importacion.FK_imp_orden_compra_ext_imp_catalogo" FromRole="imp_orden_compra_ext" ToRole="imp_catalogo" />
+          <NavigationProperty Name="imp_catalogo1" Relationship="Model_importacion.FK_imp_orden_compra_ext_imp_catalogo1" FromRole="imp_orden_compra_ext" ToRole="imp_catalogo" />
+          <NavigationProperty Name="imp_liquidacion" Relationship="Model_importacion.FK_imp_orden_compra_ext_imp_liquidacion" FromRole="imp_orden_compra_ext" ToRole="imp_liquidacion" />
+          <NavigationProperty Name="imp_liquidacion_det_x_imp_orden_compra_ext" Relationship="Model_importacion.FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_orden_compra_ext" FromRole="imp_orden_compra_ext" ToRole="imp_liquidacion_det_x_imp_orden_compra_ext" />
+          <NavigationProperty Name="imp_orden_compra_ext_ct_cbteble_det_gastos" Relationship="Model_importacion.FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_orden_compra_ext" FromRole="imp_orden_compra_ext" ToRole="imp_orden_compra_ext_ct_cbteble_det_gastos" />
+          <NavigationProperty Name="imp_orden_compra_ext_det" Relationship="Model_importacion.FK_imp_orden_compra_ext_det_imp_orden_compra_ext" FromRole="imp_orden_compra_ext" ToRole="imp_orden_compra_ext_det" />
+        </EntityType>
+        <EntityType Name="imp_orden_compra_ext_ct_cbteble_det_gastos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenCompra_ext" />
+            <PropertyRef Name="IdEmpresa_ct" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="secuencia_ct" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa_ct" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="secuencia_ct" Type="Int32" Nullable="false" />
+          <Property Name="IdGasto_tipo" Type="Int32" />
+          <NavigationProperty Name="imp_gasto" Relationship="Model_importacion.FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_gasto" FromRole="imp_orden_compra_ext_ct_cbteble_det_gastos" ToRole="imp_gasto" />
+          <NavigationProperty Name="imp_orden_compra_ext" Relationship="Model_importacion.FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_orden_compra_ext" FromRole="imp_orden_compra_ext_ct_cbteble_det_gastos" ToRole="imp_orden_compra_ext" />
+        </EntityType>
+        <EntityType Name="imp_orden_compra_ext_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenCompra_ext" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdUnidadMedida" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="od_cantidad" Type="Double" Nullable="false" />
+          <Property Name="od_costo" Type="Double" Nullable="false" />
+          <Property Name="od_por_descuento" Type="Double" Nullable="false" />
+          <Property Name="od_descuento" Type="Double" Nullable="false" />
+          <Property Name="od_costo_final" Type="Double" Nullable="false" />
+          <Property Name="od_subtotal" Type="Double" Nullable="false" />
+          <Property Name="od_cantidad_recepcion" Type="Double" Nullable="false" />
+          <Property Name="od_costo_convertido" Type="Double" Nullable="false" />
+          <Property Name="od_total_fob" Type="Double" Nullable="false" />
+          <Property Name="od_factor_costo" Type="Double" Nullable="false" />
+          <Property Name="od_costo_bodega" Type="Double" Nullable="false" />
+          <Property Name="od_costo_total" Type="Double" Nullable="false" />
+          <NavigationProperty Name="imp_orden_compra_ext" Relationship="Model_importacion.FK_imp_orden_compra_ext_det_imp_orden_compra_ext" FromRole="imp_orden_compra_ext_det" ToRole="imp_orden_compra_ext" />
+        </EntityType>
+        <EntityType Name="imp_orden_compra_ext_recepcion">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenCompra_ext" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="or_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="or_observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="imp_parametro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -145,25 +586,6 @@
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdTipoCbte_liquidacion" Type="Int32" Nullable="false" />
           <Property Name="IdTipoCbte_liquidacion_anu" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="imp_catalogo">
-          <Key>
-            <PropertyRef Name="IdCatalogo" />
-          </Key>
-          <Property Name="IdCatalogo" Type="Int32" Nullable="false" />
-          <Property Name="IdCatalogo_tipo" Type="Int32" Nullable="false" />
-          <Property Name="ca_descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="estado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="imp_catalogo_tipo" Relationship="Model_importacion.FK_imp_catalogo_imp_catalogo_tipo" FromRole="imp_catalogo" ToRole="imp_catalogo_tipo" />
-        </EntityType>
-        <EntityType Name="imp_catalogo_tipo">
-          <Key>
-            <PropertyRef Name="IdCatalogo_tipo" />
-          </Key>
-          <Property Name="IdCatalogo_tipo" Type="Int32" Nullable="false" />
-          <Property Name="ct_descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="estado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="imp_catalogo" Relationship="Model_importacion.FK_imp_catalogo_imp_catalogo_tipo" FromRole="imp_catalogo_tipo" ToRole="imp_catalogo" />
         </EntityType>
         <Association Name="FK_imp_catalogo_imp_catalogo_tipo">
           <End Type="Model_importacion.imp_catalogo_tipo" Role="imp_catalogo_tipo" Multiplicity="1" />
@@ -177,12 +599,149 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_imp_orden_compra_ext_imp_catalogo">
+          <End Type="Model_importacion.imp_catalogo" Role="imp_catalogo" Multiplicity="1" />
+          <End Type="Model_importacion.imp_orden_compra_ext" Role="imp_orden_compra_ext" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="imp_orden_compra_ext">
+              <PropertyRef Name="IdCatalogo_via" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imp_orden_compra_ext_imp_catalogo1">
+          <End Type="Model_importacion.imp_catalogo" Role="imp_catalogo" Multiplicity="1" />
+          <End Type="Model_importacion.imp_orden_compra_ext" Role="imp_orden_compra_ext" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="imp_orden_compra_ext">
+              <PropertyRef Name="IdCatalogo_forma_pago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imp_gasto_x_ct_plancta_imp_gasto">
+          <End Type="Model_importacion.imp_gasto" Role="imp_gasto" Multiplicity="1" />
+          <End Type="Model_importacion.imp_gasto_x_ct_plancta" Role="imp_gasto_x_ct_plancta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_gasto">
+              <PropertyRef Name="IdGasto_tipo" />
+            </Principal>
+            <Dependent Role="imp_gasto_x_ct_plancta">
+              <PropertyRef Name="IdGasto_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_gasto">
+          <End Type="Model_importacion.imp_gasto" Role="imp_gasto" Multiplicity="0..1" />
+          <End Type="Model_importacion.imp_orden_compra_ext_ct_cbteble_det_gastos" Role="imp_orden_compra_ext_ct_cbteble_det_gastos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_gasto">
+              <PropertyRef Name="IdGasto_tipo" />
+            </Principal>
+            <Dependent Role="imp_orden_compra_ext_ct_cbteble_det_gastos">
+              <PropertyRef Name="IdGasto_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_liquidacion">
+          <End Type="Model_importacion.imp_liquidacion" Role="imp_liquidacion" Multiplicity="1" />
+          <End Type="Model_importacion.imp_liquidacion_det_x_imp_orden_compra_ext" Role="imp_liquidacion_det_x_imp_orden_compra_ext" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_liquidacion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdLiquidacion" />
+            </Principal>
+            <Dependent Role="imp_liquidacion_det_x_imp_orden_compra_ext">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdLiquidacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imp_orden_compra_ext_imp_liquidacion">
+          <End Type="Model_importacion.imp_liquidacion" Role="imp_liquidacion" Multiplicity="0..1" />
+          <End Type="Model_importacion.imp_orden_compra_ext" Role="imp_orden_compra_ext" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_liquidacion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdLiquidacion" />
+            </Principal>
+            <Dependent Role="imp_orden_compra_ext">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdLiquidacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_orden_compra_ext">
+          <End Type="Model_importacion.imp_orden_compra_ext" Role="imp_orden_compra_ext" Multiplicity="1" />
+          <End Type="Model_importacion.imp_liquidacion_det_x_imp_orden_compra_ext" Role="imp_liquidacion_det_x_imp_orden_compra_ext" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_orden_compra_ext">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenCompra_ext" />
+            </Principal>
+            <Dependent Role="imp_liquidacion_det_x_imp_orden_compra_ext">
+              <PropertyRef Name="IdEmpresa_oe" />
+              <PropertyRef Name="IdOrdenCompra_ext" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_orden_compra_ext">
+          <End Type="Model_importacion.imp_orden_compra_ext" Role="imp_orden_compra_ext" Multiplicity="1" />
+          <End Type="Model_importacion.imp_orden_compra_ext_ct_cbteble_det_gastos" Role="imp_orden_compra_ext_ct_cbteble_det_gastos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_orden_compra_ext">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenCompra_ext" />
+            </Principal>
+            <Dependent Role="imp_orden_compra_ext_ct_cbteble_det_gastos">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenCompra_ext" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imp_orden_compra_ext_det_imp_orden_compra_ext">
+          <End Type="Model_importacion.imp_orden_compra_ext" Role="imp_orden_compra_ext" Multiplicity="1" />
+          <End Type="Model_importacion.imp_orden_compra_ext_det" Role="imp_orden_compra_ext_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_orden_compra_ext">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenCompra_ext" />
+            </Principal>
+            <Dependent Role="imp_orden_compra_ext_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenCompra_ext" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Model_importacionStoreContainer" CdmEntityContainer="Entities_importacion" >
+          <EntitySetMapping Name="imp_catalogo">
+            <EntityTypeMapping TypeName="Model_importacion.imp_catalogo">
+              <MappingFragment StoreEntitySet="imp_catalogo">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
+                <ScalarProperty Name="IdCatalogo_tipo" ColumnName="IdCatalogo_tipo" />
+                <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imp_catalogo_tipo">
+            <EntityTypeMapping TypeName="Model_importacion.imp_catalogo_tipo">
+              <MappingFragment StoreEntitySet="imp_catalogo_tipo">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="ct_descripcion" ColumnName="ct_descripcion" />
+                <ScalarProperty Name="IdCatalogo_tipo" ColumnName="IdCatalogo_tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="imp_gasto">
             <EntityTypeMapping TypeName="Model_importacion.imp_gasto">
               <MappingFragment StoreEntitySet="imp_gasto">
@@ -202,31 +761,123 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="imp_liquidacion">
+            <EntityTypeMapping TypeName="Model_importacion.imp_liquidacion">
+              <MappingFragment StoreEntitySet="imp_liquidacion">
+                <ScalarProperty Name="cerrado" ColumnName="cerrado" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="li_factor_costo" ColumnName="li_factor_costo" />
+                <ScalarProperty Name="li_total_bodega" ColumnName="li_total_bodega" />
+                <ScalarProperty Name="li_total_gastos" ColumnName="li_total_gastos" />
+                <ScalarProperty Name="li_total_fob" ColumnName="li_total_fob" />
+                <ScalarProperty Name="li_factor_conversion" ColumnName="li_factor_conversion" />
+                <ScalarProperty Name="li_observacion" ColumnName="li_observacion" />
+                <ScalarProperty Name="li_fecha" ColumnName="li_fecha" />
+                <ScalarProperty Name="li_num_DAU" ColumnName="li_num_DAU" />
+                <ScalarProperty Name="li_codigo" ColumnName="li_codigo" />
+                <ScalarProperty Name="li_num_documento" ColumnName="li_num_documento" />
+                <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imp_liquidacion_det_x_imp_orden_compra_ext">
+            <EntityTypeMapping TypeName="Model_importacion.imp_liquidacion_det_x_imp_orden_compra_ext">
+              <MappingFragment StoreEntitySet="imp_liquidacion_det_x_imp_orden_compra_ext">
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
+                <ScalarProperty Name="IdEmpresa_oe" ColumnName="IdEmpresa_oe" />
+                <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imp_orden_compra_ext">
+            <EntityTypeMapping TypeName="Model_importacion.imp_orden_compra_ext">
+              <MappingFragment StoreEntitySet="imp_orden_compra_ext">
+                <ScalarProperty Name="oe_fecha_desaduanizacion" ColumnName="oe_fecha_desaduanizacion" />
+                <ScalarProperty Name="oe_fecha_embarque" ColumnName="oe_fecha_embarque" />
+                <ScalarProperty Name="oe_fecha_llegada" ColumnName="oe_fecha_llegada" />
+                <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
+                <ScalarProperty Name="fecha_anulacion" ColumnName="fecha_anulacion" />
+                <ScalarProperty Name="IdUsuario_anulacion" ColumnName="IdUsuario_anulacion" />
+                <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
+                <ScalarProperty Name="IdUsuario_modificacion" ColumnName="IdUsuario_modificacion" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="IdUsuario_creacion" ColumnName="IdUsuario_creacion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="oe_valor_seguro" ColumnName="oe_valor_seguro" />
+                <ScalarProperty Name="oe_valor_flete" ColumnName="oe_valor_flete" />
+                <ScalarProperty Name="oe_codigo" ColumnName="oe_codigo" />
+                <ScalarProperty Name="oe_observacion" ColumnName="oe_observacion" />
+                <ScalarProperty Name="IdCtaCble_importacion" ColumnName="IdCtaCble_importacion" />
+                <ScalarProperty Name="oe_fecha_desaduanizacion_est" ColumnName="oe_fecha_desaduanizacion_est" />
+                <ScalarProperty Name="oe_fecha_embarque_est" ColumnName="oe_fecha_embarque_est" />
+                <ScalarProperty Name="oe_fecha_llegada_est" ColumnName="oe_fecha_llegada_est" />
+                <ScalarProperty Name="oe_fecha" ColumnName="oe_fecha" />
+                <ScalarProperty Name="IdCatalogo_forma_pago" ColumnName="IdCatalogo_forma_pago" />
+                <ScalarProperty Name="IdCatalogo_via" ColumnName="IdCatalogo_via" />
+                <ScalarProperty Name="IdCiudad_destino" ColumnName="IdCiudad_destino" />
+                <ScalarProperty Name="IdPais_embarque" ColumnName="IdPais_embarque" />
+                <ScalarProperty Name="IdPais_origen" ColumnName="IdPais_origen" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imp_orden_compra_ext_ct_cbteble_det_gastos">
+            <EntityTypeMapping TypeName="Model_importacion.imp_orden_compra_ext_ct_cbteble_det_gastos">
+              <MappingFragment StoreEntitySet="imp_orden_compra_ext_ct_cbteble_det_gastos">
+                <ScalarProperty Name="IdGasto_tipo" ColumnName="IdGasto_tipo" />
+                <ScalarProperty Name="secuencia_ct" ColumnName="secuencia_ct" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdEmpresa_ct" ColumnName="IdEmpresa_ct" />
+                <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imp_orden_compra_ext_det">
+            <EntityTypeMapping TypeName="Model_importacion.imp_orden_compra_ext_det">
+              <MappingFragment StoreEntitySet="imp_orden_compra_ext_det">
+                <ScalarProperty Name="od_costo_total" ColumnName="od_costo_total" />
+                <ScalarProperty Name="od_costo_bodega" ColumnName="od_costo_bodega" />
+                <ScalarProperty Name="od_factor_costo" ColumnName="od_factor_costo" />
+                <ScalarProperty Name="od_total_fob" ColumnName="od_total_fob" />
+                <ScalarProperty Name="od_costo_convertido" ColumnName="od_costo_convertido" />
+                <ScalarProperty Name="od_cantidad_recepcion" ColumnName="od_cantidad_recepcion" />
+                <ScalarProperty Name="od_subtotal" ColumnName="od_subtotal" />
+                <ScalarProperty Name="od_costo_final" ColumnName="od_costo_final" />
+                <ScalarProperty Name="od_descuento" ColumnName="od_descuento" />
+                <ScalarProperty Name="od_por_descuento" ColumnName="od_por_descuento" />
+                <ScalarProperty Name="od_costo" ColumnName="od_costo" />
+                <ScalarProperty Name="od_cantidad" ColumnName="od_cantidad" />
+                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imp_orden_compra_ext_recepcion">
+            <EntityTypeMapping TypeName="Model_importacion.imp_orden_compra_ext_recepcion">
+              <MappingFragment StoreEntitySet="imp_orden_compra_ext_recepcion">
+                <ScalarProperty Name="or_observacion" ColumnName="or_observacion" />
+                <ScalarProperty Name="or_fecha" ColumnName="or_fecha" />
+                <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="imp_parametro">
             <EntityTypeMapping TypeName="Model_importacion.imp_parametro">
               <MappingFragment StoreEntitySet="imp_parametro">
                 <ScalarProperty Name="IdTipoCbte_liquidacion_anu" ColumnName="IdTipoCbte_liquidacion_anu" />
                 <ScalarProperty Name="IdTipoCbte_liquidacion" ColumnName="IdTipoCbte_liquidacion" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="imp_catalogo">
-            <EntityTypeMapping TypeName="Model_importacion.imp_catalogo">
-              <MappingFragment StoreEntitySet="imp_catalogo">
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
-                <ScalarProperty Name="IdCatalogo_tipo" ColumnName="IdCatalogo_tipo" />
-                <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="imp_catalogo_tipo">
-            <EntityTypeMapping TypeName="Model_importacion.imp_catalogo_tipo">
-              <MappingFragment StoreEntitySet="imp_catalogo_tipo">
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="ct_descripcion" ColumnName="ct_descripcion" />
-                <ScalarProperty Name="IdCatalogo_tipo" ColumnName="IdCatalogo_tipo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

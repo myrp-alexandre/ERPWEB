@@ -185,6 +185,9 @@
     <Compile Include="Importacion\imp_catalogo_tipo_Info.cs" />
     <Compile Include="Importacion\imp_gasto_Info.cs" />
     <Compile Include="Importacion\imp_gasto_x_ct_plancta_Info.cs" />
+    <Compile Include="Importacion\imp_liquidacion_det_x_imp_orden_compra_ext_Info.cs" />
+    <Compile Include="Importacion\imp_ordencompra_ext_det_Info.cs" />
+    <Compile Include="Importacion\imp_ordencompra_ext_Info.cs" />
     <Compile Include="Importacion\imp_parametro_Info.cs" />
     <Compile Include="Inventario\in_CatalogoTipo_Info.cs" />
     <Compile Include="Inventario\in_Catalogo_Info.cs" />

@@ -12,24 +12,33 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class imp_catalogo
+    public partial class imp_liquidacion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public imp_catalogo()
+        public imp_liquidacion()
         {
+            this.imp_liquidacion_det_x_imp_orden_compra_ext = new HashSet<imp_liquidacion_det_x_imp_orden_compra_ext>();
             this.imp_orden_compra_ext = new HashSet<imp_orden_compra_ext>();
-            this.imp_orden_compra_ext1 = new HashSet<imp_orden_compra_ext>();
         }
     
-        public int IdCatalogo { get; set; }
-        public int IdCatalogo_tipo { get; set; }
-        public string ca_descripcion { get; set; }
+        public int IdEmpresa { get; set; }
+        public decimal IdLiquidacion { get; set; }
+        public string li_num_documento { get; set; }
+        public string li_codigo { get; set; }
+        public string li_num_DAU { get; set; }
+        public System.DateTime li_fecha { get; set; }
+        public string li_observacion { get; set; }
+        public double li_factor_conversion { get; set; }
+        public double li_total_fob { get; set; }
+        public double li_total_gastos { get; set; }
+        public double li_total_bodega { get; set; }
+        public double li_factor_costo { get; set; }
         public bool estado { get; set; }
+        public bool cerrado { get; set; }
     
-        public virtual imp_catalogo_tipo imp_catalogo_tipo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<imp_liquidacion_det_x_imp_orden_compra_ext> imp_liquidacion_det_x_imp_orden_compra_ext { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imp_orden_compra_ext> imp_orden_compra_ext { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<imp_orden_compra_ext> imp_orden_compra_ext1 { get; set; }
     }
 }
