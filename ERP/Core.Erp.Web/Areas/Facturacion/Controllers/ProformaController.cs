@@ -18,6 +18,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
     {
         fa_proforma_Bus bus_proforma = new fa_proforma_Bus();
         tb_persona_Bus bus_persona = new tb_persona_Bus();
+        fa_cliente_x_fa_Vendedor_x_sucursal_Bus bus_v_x_c = new fa_cliente_x_fa_Vendedor_x_sucursal_Bus();
         string mensaje = string.Empty;
 
         public ActionResult Index()
@@ -171,13 +172,25 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult get_info_cliente(decimal IdCliente = 0)
+        public JsonResult get_info_cliente(decimal IdCliente = 0, int IdSucursal = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
             fa_cliente_Info resultado = bus_cliente.get_info(IdEmpresa, IdCliente);
             if (resultado == null)
-                resultado = new fa_cliente_Info();
+            {
+                resultado = new fa_cliente_Info
+                {
+                    info_persona = new tb_persona_Info()
+                };
+            }else
+            {
+                var vendedor = bus_v_x_c.get_info(IdEmpresa, IdCliente, IdSucursal);
+                if (vendedor != null)
+                    resultado.IdVendedor = vendedor.IdVendedor;
+                else
+                    resultado.IdVendedor = 1;
+            }
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }

@@ -53,9 +53,7 @@ namespace Core.Erp.Bus.Inventario
         {
             try
             {
-                if (odata_det.eliminarDB(info.IdEmpresa, info.IdSucursal, info.IdMovi_inven_tipo, info.IdNumMovi))
-                    odata.modificarDB(info);
-                return true;
+                return odata.modificarDB(info);                
             }
             catch (Exception)
             {
@@ -80,7 +78,7 @@ namespace Core.Erp.Bus.Inventario
         {
             try
             {
-               return odata_det.Reversar_Aprobacion(IdEmpresa,IdSucursal,IdMovi_inve_tipo,IdNumMovi, Genera_movi_inven);
+               return odata.Reversar_Aprobacion(IdEmpresa,IdSucursal,IdMovi_inve_tipo,IdNumMovi, Genera_movi_inven);
             }
             catch (Exception)
             {

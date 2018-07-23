@@ -231,6 +231,8 @@ namespace Core.Erp.Data.Inventario
             try
             {
                 int sec = 1;
+                Reversar_Aprobacion(info.IdEmpresa, info.IdSucursal, info.IdMovi_inven_tipo, info.IdNumMovi, "");
+
                 using (Entities_inventario Context = new Entities_inventario())
                 {
                     in_Ing_Egr_Inven Entity = Context.in_Ing_Egr_Inven.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdMovi_inven_tipo == info.IdMovi_inven_tipo && q.IdNumMovi == info.IdNumMovi);
@@ -245,10 +247,12 @@ namespace Core.Erp.Data.Inventario
                     Entity.IdUsuarioUltModi = info.IdUsuarioUltModi;
                     Entity.Fecha_UltMod = DateTime.Now;
 
+                    var lst = Context.in_Ing_Egr_Inven_det.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdMovi_inven_tipo == info.IdMovi_inven_tipo && q.IdNumMovi == info.IdNumMovi);
+                    Context.in_Ing_Egr_Inven_det.RemoveRange(lst);
 
                     foreach (var item in info.lst_in_Ing_Egr_Inven_det)
                     {
-                        in_Ing_Egr_Inven_det entity_det = new in_Ing_Egr_Inven_det
+                        Context.in_Ing_Egr_Inven_det.Add(new in_Ing_Egr_Inven_det
                         {
                             IdEmpresa = info.IdEmpresa,
                             IdSucursal = info.IdSucursal,
@@ -273,26 +277,27 @@ namespace Core.Erp.Data.Inventario
                             IdOrdenCompra = item.IdOrdenCompra,
                             Secuencia_oc = item.Secuencia_oc,
 
-                            IdEmpresa_inv = item.IdEmpresa_inv,
-                            IdSucursal_inv = item.IdSucursal_inv,
-                            IdBodega_inv = item.IdBodega_inv,
-                            IdMovi_inven_tipo_inv = item.IdMovi_inven_tipo_inv,
-                            IdNumMovi_inv = item.IdNumMovi_inv,
-                            secuencia_inv = item.secuencia_inv,
+                            //Deben ir null para que al aprobarse se liguen con el nuevo
+                            IdEmpresa_inv = null,
+                            IdSucursal_inv = null,
+                            IdBodega_inv = null,
+                            IdMovi_inven_tipo_inv = null,
+                            IdNumMovi_inv = null,
+                            secuencia_inv = null,
+
                             IdUnidadMedida = (item.IdUnidadMedida) == null ? "UNID" : item.IdUnidadMedida,
                             IdUnidadMedida_sinConversion = (item.IdUnidadMedida_sinConversion) == null ? "UNID" : item.IdUnidadMedida_sinConversion,
                             dm_cantidad_sinConversion = item.dm_cantidad_sinConversion,
                             dm_cantidad = item.dm_cantidad,
                             mv_costo_sinConversion = item.mv_costo_sinConversion,
-                            mv_costo = (double)item.mv_costo,
-
-                        };
-                        Context.in_Ing_Egr_Inven_det.Add(entity_det);
+                            mv_costo = item.mv_costo,
+                        });                        
                         sec++;
-
-
-                        Context.SaveChanges();
                     }
+                    Context.SaveChanges();
+
+                    Context.spINV_aprobacion_ing_egr(info.IdEmpresa, info.IdSucursal, info.IdBodega, info.IdMovi_inven_tipo, info.IdNumMovi);
+
                     return true;
 
                 }
@@ -318,8 +323,7 @@ namespace Core.Erp.Data.Inventario
                     Entity.IdusuarioUltAnu = info.IdusuarioUltAnu;
                     Entity.Fecha_UltAnu = DateTime.Now;
                     Context.SaveChanges();
-                    Context.spSys_inv_Reversar_aprobacion(info.IdEmpresa, info.IdSucursal, info.IdMovi_inven_tipo, info.IdNumMovi, true);
-
+                    Reversar_Aprobacion(info.IdEmpresa, info.IdSucursal, info.IdMovi_inven_tipo, info.IdNumMovi, "");
                 }
 
                 return true;
@@ -332,5 +336,38 @@ namespace Core.Erp.Data.Inventario
             }
         }
 
+        public Boolean Reversar_Aprobacion(int IdEmpresa, int IdSucursal, int IdMovi_inve_tipo, decimal IdNumMovi, string Genera_movi_inven)
+        {
+            try
+            {
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    if (Genera_movi_inven == "")
+                    {
+                        in_movi_inven_tipo enti = Context.in_movi_inven_tipo.Where(q => q.IdEmpresa == IdEmpresa && q.IdMovi_inven_tipo == IdMovi_inve_tipo).FirstOrDefault();
+                        if (enti == null) return false;
+                        Genera_movi_inven = enti.Genera_Movi_Inven == true ? "S" : "N";
+                    }
+
+
+                    if (Genera_movi_inven == "S")
+                    {
+                        Context.spSys_inv_Reversar_aprobacion(IdEmpresa, IdSucursal, IdMovi_inve_tipo, IdNumMovi, true);
+                    }
+                    else
+                    {
+                        string comando = "update in_Ing_Egr_Inven_det set IdEstadoAproba = 'PEND' where IdEmpresa = " + IdEmpresa + " and IdSucursal = " + IdSucursal + " and IdMovi_inven_tipo = " + IdMovi_inve_tipo + " and IdNumMovi = " + IdNumMovi;
+                        Context.Database.ExecuteSqlCommand(comando);
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }
