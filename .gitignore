@@ -333,3 +333,4 @@ ASALocalRun/
 .svn/format
 *.svn-base
 ERP/Core.Erp.Web/Areas/General/Controllers/ProvinciaController.cs
+ERP/Core.Erp.Web/Content/fileAT-062018.xml
