@@ -32,9 +32,34 @@ namespace Core.Erp.Data.Facturacion
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
+        public fa_cliente_x_fa_Vendedor_x_sucursal_Info get_info(int IdEmpresa, decimal IdCliente, int IdSucursal)
+        {
+            try
+            {
+                fa_cliente_x_fa_Vendedor_x_sucursal_Info info;
+                using (Entities_facturacion context = new Entities_facturacion())
+                {
+                    var Entity = context.fa_cliente_x_fa_Vendedor_x_sucursal.Where(q => q.IdEmpresa == IdEmpresa && q.IdCliente == IdCliente && q.IdSucursal == IdSucursal).FirstOrDefault();
+                    if (Entity == null) return null;
+                    info = new fa_cliente_x_fa_Vendedor_x_sucursal_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdCliente = Entity.IdCliente,
+                        IdSucursal = Entity.IdSucursal,
+                        IdVendedor = Entity.IdVendedor,
+                        observacion = Entity.observacion
+                    };
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

@@ -28,14 +28,14 @@
                 @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-8">
             <div class="form-group">
                 <label for="IdCliente">Cliente*</label>
                 @Html.Partial("_CmbCliente_Proforma", Model)
                 @Html.ValidationMessageFor(q => q.IdEntidad, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <div class="form-group">
                 <label for="pr_dias_entrega">Días de entrega*</label>
                 @Html.TextBoxFor(q => q.pr_dias_entrega, new { @class = "form-control", @id = "pr_dias_entrega" })
@@ -139,9 +139,10 @@
     });
 
     function cargar_fecha_vencimiento() {
-        var vida = $("#pf_plazo").val();
-        var d = new Date($("#pf_fecha").val());
-        $('#pf_fecha_vcto').datepicker("setDate", moment(d, "DD-MM-YYYY").add('days', vida));
+        var vida = Number($("#pf_plazo").val());
+        var from = $("#pf_fecha").val().split("/")
+        var f = new Date(from[2], from[1] - 1, from[0])
+        $('#pf_fecha_vcto').datepicker("update", moment(f, "DD-MM-YYYY").add(vida, 'days').format("DD/MM/YYYY"));
     }
 
         function get_info_termino_pago() {
@@ -168,7 +169,8 @@
             var tipo = IdCliente.GetValue();
             
             var datos = {
-                IdCliente: tipo
+                IdCliente: tipo,
+                IdSucursal: $("#IdSucursal").val()
             }
             $.ajax({
                 type: 'POST',
@@ -179,7 +181,7 @@
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
                     $("#pf_atencion_a").val(data.info_persona.pe_nombreCompleto);
-                    $("#IdVendedor").val();
+                    $("#IdVendedor").val(data.IdVendedor);
                 },
                 error: function (error) {
                     alert(error);
