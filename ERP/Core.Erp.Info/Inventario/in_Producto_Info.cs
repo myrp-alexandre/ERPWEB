@@ -94,7 +94,7 @@ namespace Core.Erp.Info.Inventario
         public string ca_descripcion { get; set; }
         public string ma_descripcion { get; set; }
         public string pr_descripcion_combo { get; set; }
-
+        public double stock { get; set; }
         #endregion
     }
 }

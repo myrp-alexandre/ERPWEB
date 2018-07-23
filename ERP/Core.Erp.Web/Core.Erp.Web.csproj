@@ -8759,6 +8759,7 @@
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_005.cshtml" />
     <Content Include="Areas\Facturacion\Views\Proforma\_CmbProducto_Proforma.cshtml" />
     <Content Include="Areas\Facturacion\Views\Proforma\_GridViewPartial_proforma_det.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Proforma\_GridViewPartial_LoteProforma.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
