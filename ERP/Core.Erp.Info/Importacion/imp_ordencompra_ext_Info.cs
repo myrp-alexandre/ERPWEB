@@ -36,6 +36,6 @@ namespace Core.Erp.Info.Importacion
         public Nullable<System.DateTime> oe_fecha_llegada { get; set; }
         public Nullable<System.DateTime> oe_fecha_embarque { get; set; }
         public Nullable<System.DateTime> oe_fecha_desaduanizacion { get; set; }
-
+        public List<imp_ordencompra_ext_det_Info> lst_detalle { get; set; }
     }
 }

@@ -312,6 +312,7 @@
     <Compile Include="Areas\Importacion\Controllers\CatalogoImportacionController.cs" />
     <Compile Include="Areas\Importacion\Controllers\CatalogoTipoImportacionController.cs" />
     <Compile Include="Areas\Importacion\Controllers\GastosImportacionController.cs" />
+    <Compile Include="Areas\Importacion\Controllers\OrdenCompraExteriorController.cs" />
     <Compile Include="Areas\Importacion\Controllers\ParametrosImportacionController.cs" />
     <Compile Include="Areas\Importacion\ImportacionAreaRegistration.cs" />
     <Compile Include="Areas\Inventario\Controllers\CatalogoInventarioController.cs" />
@@ -8760,6 +8761,13 @@
     <Content Include="Areas\Facturacion\Views\Proforma\_CmbProducto_Proforma.cshtml" />
     <Content Include="Areas\Facturacion\Views\Proforma\_GridViewPartial_proforma_det.cshtml" />
     <Content Include="Areas\Facturacion\Views\Proforma\_GridViewPartial_LoteProforma.cshtml" />
+    <Content Include="Areas\Importacion\Views\OrdenCompraExterior\Nuevo.cshtml" />
+    <Content Include="Areas\Importacion\Views\OrdenCompraExterior\Modificar.cshtml" />
+    <Content Include="Areas\Importacion\Views\OrdenCompraExterior\Index.cshtml" />
+    <Content Include="Areas\Importacion\Views\OrdenCompraExterior\Anular.cshtml" />
+    <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_GridViewPartial_orden_compra_ext.cshtml" />
+    <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_GridViewPartial_orden_compra_ext_det.cshtml" />
+    <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_CmbProducto_Importacion.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
