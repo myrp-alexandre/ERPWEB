@@ -61,8 +61,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
         #region Metodos ComboBox bajo demanda producto
         public ActionResult CmbProducto_Proforma()
-        {
-            SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["IdCliente"]) ? Request.Params["IdCliente"].ToString() : "-1";
+        {            
             fa_proforma_det_Info model = new fa_proforma_det_Info();
             return PartialView("_CmbProducto_Proforma", model);
         }
@@ -235,6 +234,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             var model = List_det.get_list();
             cargar_combos_detalle();
+            SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["IdCliente"]) ? Request.Params["IdCliente"].ToString() : "-1";
             return PartialView("_GridViewPartial_proforma_det", model);
         }
 
@@ -245,14 +245,32 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
             if (info_det != null && info_det.IdProducto != 0 && IdCliente > 0)
             {
-                var producto = bus_producto.get_info(info_det.IdEmpresa, info_det.IdProducto);
+                var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
                 if (producto != null)
                 {
                     info_det.pr_descripcion = producto.pr_descripcion_combo;
                     var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
                     if (cliente != null)
                     {
-                        
+                        int nivel_precio = (cliente.NivelPrecio == null || cliente.NivelPrecio == 0) ? 1 : Convert.ToInt32(cliente.NivelPrecio);
+                        switch (nivel_precio)
+                        {
+                            case 1:
+                                info_det.pd_precio = producto.precio_1;
+                                break;
+                            case 2:
+                                info_det.pd_precio = producto.precio_2 == 0 ? producto.precio_1 : producto.precio_2;
+                                break;
+                            case 3:
+                                info_det.pd_precio = producto.precio_3 == 0 ? producto.precio_1 : producto.precio_3;
+                                break;
+                            case 4:
+                                info_det.pd_precio = producto.precio_4 == 0 ? producto.precio_1 : producto.precio_4;
+                                break;
+                            case 5:
+                                info_det.pd_precio = producto.precio_5 == 0 ? producto.precio_1 : producto.precio_5;
+                                break;
+                        }
                     }
                 }
             }
@@ -266,7 +284,38 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_proforma_det_Info info_det)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            
+            decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
+            if (info_det != null && info_det.IdProducto != 0 && IdCliente > 0)
+            {
+                var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+                if (producto != null)
+                {
+                    info_det.pr_descripcion = producto.pr_descripcion_combo;
+                    var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
+                    if (cliente != null)
+                    {
+                        int nivel_precio = (cliente.NivelPrecio == null || cliente.NivelPrecio == 0) ? 1 : Convert.ToInt32(cliente.NivelPrecio);
+                        switch (nivel_precio)
+                        {
+                            case 1:
+                                info_det.pd_precio = producto.precio_1;
+                                break;
+                            case 2:
+                                info_det.pd_precio = producto.precio_2 == 0 ? producto.precio_1 : producto.precio_2;
+                                break;
+                            case 3:
+                                info_det.pd_precio = producto.precio_3 == 0 ? producto.precio_1 : producto.precio_3;
+                                break;
+                            case 4:
+                                info_det.pd_precio = producto.precio_4 == 0 ? producto.precio_1 : producto.precio_4;
+                                break;
+                            case 5:
+                                info_det.pd_precio = producto.precio_5 == 0 ? producto.precio_1 : producto.precio_5;
+                                break;
+                        }
+                    }
+                }
+            }
             List_det.UpdateRow(info_det);
             var model = List_det.get_list();
             cargar_combos_detalle();
@@ -307,8 +356,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             List<fa_proforma_det_Info> list = get_list();
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
-            info_det.IdProducto = info_det.IdProducto;            
-            info_det.pd_precio_final = Math.Round(info_det.pd_precio * (info_det.pd_por_iva / 100), 2, MidpointRounding.AwayFromZero);
+            info_det.IdProducto = info_det.IdProducto;
+            info_det.pr_descripcion = info_det.pr_descripcion;
+            info_det.pd_descuento_uni = Math.Round(info_det.pd_precio * (info_det.pd_por_descuento_uni / 100), 2, MidpointRounding.AwayFromZero);
+            info_det.pd_precio_final = Math.Round(info_det.pd_precio - info_det.pd_descuento_uni, 2, MidpointRounding.AwayFromZero);
             info_det.pd_subtotal = Math.Round(info_det.pd_cantidad * info_det.pd_precio_final, 2, MidpointRounding.AwayFromZero);
             var impuesto = bus_impuesto.get_info(info_det.IdCod_Impuesto);
             if (impuesto != null)
@@ -322,9 +373,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             fa_proforma_det_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdProducto = info_det.IdProducto;
+            edited_info.pr_descripcion = info_det.pr_descripcion;
             edited_info.pd_cantidad = info_det.pd_cantidad;
             edited_info.pd_precio = info_det.pd_precio;
-            edited_info.pd_precio_final = Math.Round(info_det.pd_precio * (info_det.pd_por_iva / 100),2,MidpointRounding.AwayFromZero);
+            edited_info.pd_descuento_uni = Math.Round(info_det.pd_precio * (info_det.pd_por_descuento_uni / 100), 2, MidpointRounding.AwayFromZero);
+            edited_info.pd_precio_final = Math.Round(info_det.pd_precio - edited_info.pd_descuento_uni,2,MidpointRounding.AwayFromZero);
             edited_info.pd_subtotal = Math.Round(info_det.pd_cantidad * edited_info.pd_precio_final,2,MidpointRounding.AwayFromZero);
             if(!string.IsNullOrEmpty(info_det.IdCod_Impuesto) && info_det.IdCod_Impuesto != edited_info.IdCod_Impuesto)
             {

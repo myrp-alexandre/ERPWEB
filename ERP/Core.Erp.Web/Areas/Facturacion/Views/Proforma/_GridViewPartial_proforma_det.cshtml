@@ -97,7 +97,7 @@
                 q.MinValue = 0;
                 q.Width = Unit.Percentage(100);
             });
-            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
         {
@@ -149,6 +149,11 @@
         });
 
         settings.ClientSideEvents.BeginCallback = "function(s,e){e.customArgs['IdCliente'] = IdCliente.GetValue();}";
+
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "pd_subtotal").DisplayFormat = "{0:c2}";
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "pd_iva").DisplayFormat = "{0:c2}";
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "pd_total").DisplayFormat = "{0:c2}";
+        settings.Settings.ShowFooter = true;
     });
 }
 @grid.Bind(Model).GetHtml()
