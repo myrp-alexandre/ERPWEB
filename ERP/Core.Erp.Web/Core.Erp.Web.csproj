@@ -8840,6 +8840,7 @@
     <Folder Include="Areas\RRHH\Views\EmpleadoHistorialSueldo\" />
     <Folder Include="Areas\RRHH\Views\PeriodosPorNomina\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
+    <Folder Include="Content\file\" />
     <Folder Include="Content\imagenes\" />
   </ItemGroup>
   <ItemGroup>

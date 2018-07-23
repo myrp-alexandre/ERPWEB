@@ -106,7 +106,8 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
             return Json("", JsonRequestBehavior.AllowGet);
         }
-        public JsonResult dolowadATS(int IdPeriodo)
+        [HttpPost]
+        public FileResult dolowadATS(int IdPeriodo)
         {
             string nombre_file = IdPeriodo.ToString();
             if (IdPeriodo.ToString().Length == 6)
@@ -114,36 +115,37 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
               nombre_file = "AT-" + IdPeriodo.ToString().Substring(4, 2) + IdPeriodo.ToString().Substring(0, 4);
             }
             string xml = "";
-
             iva ats = new iva();
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             int IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
             ats = bus_ats.get_ats(IdEmpresa, IdPeriodo, IdSucursal);
-
-           
             var ms = new MemoryStream();
             var xw = XmlWriter.Create(ms);
-           
-                    var serializer = new XmlSerializer(ats.GetType());
-                    XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-                    ns.Add("", "");
-                    serializer.Serialize(xw, ats,ns);
-                    xw.Flush();
-                    ms.Seek(0, SeekOrigin.Begin);
-                    using (var sr = new StreamReader(ms, Encoding.UTF8))
-                    {
-                       xml=  sr.ReadToEnd();
-                    }
+            string patch = Path.Combine(Server.MapPath("~/Content/file"), nombre_file);
 
-            if (System.IO.File.Exists(@"C: \Users\jerry\Desktop\" + nombre_file + ".xml"))
-                System.IO.File.Delete(@"C: \Users\jerry\Desktop\" + nombre_file + ".xml");
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C: \Users\jerry\Desktop\"+ nombre_file + ".xml", true))
+
+
+            var serializer = new XmlSerializer(ats.GetType());
+            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            ns.Add("", "");
+            serializer.Serialize(xw, ats,ns);
+            xw.Flush();
+            ms.Seek(0, SeekOrigin.Begin);
+            using (var sr = new StreamReader(ms, Encoding.UTF8))
+             {
+               xml=  sr.ReadToEnd();
+              }
+
+
+            if (System.IO.File.Exists(patch + ".xml"))
+                System.IO.File.Delete(patch + ".xml");
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(patch + ".xml", true))
             {
                 file.WriteLine(xml);
                 file.Close();
-                byte[] fileBytes = System.IO.File.ReadAllBytes(@"C: \Users\jerry\Desktop\" + nombre_file + ".xml");
+                byte[] fileBytes = System.IO.File.ReadAllBytes(patch  + ".xml");
                 string fileName = IdPeriodo + ".xml";
-                return Json("", JsonRequestBehavior.AllowGet);
+                return File(patch, "application/vnd.ms-excel", "");
             }
 
         }
