@@ -20,7 +20,7 @@
         settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){get_info_cliente();}";
     })
     .BindList(new Core.Erp.Web.Areas.Facturacion.Controllers.ProformaController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Facturacion.Controllers.ProformaController().get_info_bajo_demanda)
-    .Bind(Model.IdEntidad);
+    .Bind(Model.IdCliente);
 
 }
 @comboBox.GetHtml()

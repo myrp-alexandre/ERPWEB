@@ -93,7 +93,7 @@ namespace Core.Erp.Info.Inventario
         public string tp_descripcion { get; set; }
         public string ca_descripcion { get; set; }
         public string ma_descripcion { get; set; }
-
+        public string pr_descripcion_combo { get; set; }
 
         #endregion
     }

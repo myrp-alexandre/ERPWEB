@@ -286,7 +286,7 @@ namespace Core.Erp.Data.Inventario
                         pr_imagen=Entity.pr_imagen
                     };
                 }
-
+                info.pr_descripcion_combo = info.pr_descripcion + " - " + info.lote_num_lote + " - " + (info.lote_fecha_vcto != null ? Convert.ToDateTime(info.lote_fecha_vcto).ToString("dd/MM/yyyy") : "");
                 return info;
             }
             catch (Exception)
