@@ -618,22 +618,27 @@
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // p_IdSucursal
             // 
             this.p_IdSucursal.Name = "p_IdSucursal";
+            this.p_IdSucursal.Visible = false;
             // 
             // p_IdBodega_Cbte
             // 
             this.p_IdBodega_Cbte.Name = "p_IdBodega_Cbte";
+            this.p_IdBodega_Cbte.Visible = false;
             // 
             // p_IdCbte_vta_nota
             // 
             this.p_IdCbte_vta_nota.Name = "p_IdCbte_vta_nota";
+            this.p_IdCbte_vta_nota.Visible = false;
             // 
             // p_dc_TipoDocumento
             // 
             this.p_dc_TipoDocumento.Name = "p_dc_TipoDocumento";
+            this.p_dc_TipoDocumento.Visible = false;
             // 
             // objectDataSource1
             // 

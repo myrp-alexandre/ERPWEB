@@ -628,10 +628,12 @@
             // p_IdVtaActivo
             // 
             this.p_IdVtaActivo.Name = "p_IdVtaActivo";
+            this.p_IdVtaActivo.Visible = false;
             // 
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // ACTF_002_Rpt
             // 

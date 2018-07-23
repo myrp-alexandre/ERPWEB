@@ -598,10 +598,12 @@
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // p_IdRetiroActivo
             // 
             this.p_IdRetiroActivo.Name = "p_IdRetiroActivo";
+            this.p_IdRetiroActivo.Visible = false;
             // 
             // ACTF_003_Rpt
             // 

@@ -165,14 +165,17 @@
             // p_mba_IdEmpresa
             // 
             this.p_mba_IdEmpresa.Name = "p_mba_IdEmpresa";
+            this.p_mba_IdEmpresa.Visible = false;
             // 
             // p_mba_IdTipocbte
             // 
             this.p_mba_IdTipocbte.Name = "p_mba_IdTipocbte";
+            this.p_mba_IdTipocbte.Visible = false;
             // 
             // p_mba_IdCbteCble
             // 
             this.p_mba_IdCbteCble.Name = "p_mba_IdCbteCble";
+            this.p_mba_IdCbteCble.Visible = false;
             // 
             // ReportHeader
             // 

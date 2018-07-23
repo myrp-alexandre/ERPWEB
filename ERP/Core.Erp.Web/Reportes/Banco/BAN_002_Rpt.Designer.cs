@@ -534,14 +534,17 @@
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // p_IdTipocbte
             // 
             this.p_IdTipocbte.Name = "p_IdTipocbte";
+            this.p_IdTipocbte.Visible = false;
             // 
             // p_IdCbteCble
             // 
             this.p_IdCbteCble.Name = "p_IdCbteCble";
+            this.p_IdCbteCble.Visible = false;
             // 
             // objectDataSource1
             // 

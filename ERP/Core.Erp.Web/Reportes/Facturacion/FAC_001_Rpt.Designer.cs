@@ -143,8 +143,8 @@
             this.xrTableCell37 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell38 = new DevExpress.XtraReports.UI.XRTableCell();
             this.GroupHeader4 = new DevExpress.XtraReports.UI.GroupHeaderBand();
-            this.GroupFooter4 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
+            this.GroupFooter4 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.xrTable8 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow10 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -359,42 +359,52 @@
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // p_IdSucursal
             // 
             this.p_IdSucursal.Name = "p_IdSucursal";
+            this.p_IdSucursal.Visible = false;
             // 
             // p_IdVendedor
             // 
             this.p_IdVendedor.Name = "p_IdVendedor";
+            this.p_IdVendedor.Visible = false;
             // 
             // p_IdCliente
             // 
             this.p_IdCliente.Name = "p_IdCliente";
+            this.p_IdCliente.Visible = false;
             // 
             // p_IdCliente_contacto
             // 
             this.p_IdCliente_contacto.Name = "p_IdCliente_contacto";
+            this.p_IdCliente_contacto.Visible = false;
             // 
             // p_IdProducto
             // 
             this.p_IdProducto.Name = "p_IdProducto";
+            this.p_IdProducto.Visible = false;
             // 
             // p_IdProducto_padre
             // 
             this.p_IdProducto_padre.Name = "p_IdProducto_padre";
+            this.p_IdProducto_padre.Visible = false;
             // 
             // p_fecha_ini
             // 
             this.p_fecha_ini.Name = "p_fecha_ini";
+            this.p_fecha_ini.Visible = false;
             // 
             // p_fecha_fin
             // 
             this.p_fecha_fin.Name = "p_fecha_fin";
+            this.p_fecha_fin.Visible = false;
             // 
             // p_mostrar_anulados
             // 
             this.p_mostrar_anulados.Name = "p_mostrar_anulados";
+            this.p_mostrar_anulados.Visible = false;
             // 
             // ReportHeader
             // 
@@ -1144,13 +1154,6 @@
             this.GroupHeader4.HeightF = 17F;
             this.GroupHeader4.Name = "GroupHeader4";
             // 
-            // GroupFooter4
-            // 
-            this.GroupFooter4.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrTable8});
-            this.GroupFooter4.HeightF = 17F;
-            this.GroupFooter4.Name = "GroupFooter4";
-            // 
             // xrLabel4
             // 
             this.xrLabel4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
@@ -1158,10 +1161,17 @@
             this.xrLabel4.Font = new System.Drawing.Font("Verdana", 8F);
             this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrLabel4.Name = "xrLabel4";
-            this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel4.SizeF = new System.Drawing.SizeF(1118F, 17F);
             this.xrLabel4.StylePriority.UseFont = false;
             this.xrLabel4.Text = "xrLabel4";
+            // 
+            // GroupFooter4
+            // 
+            this.GroupFooter4.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrTable8});
+            this.GroupFooter4.HeightF = 17F;
+            this.GroupFooter4.Name = "GroupFooter4";
             // 
             // xrTable8
             // 

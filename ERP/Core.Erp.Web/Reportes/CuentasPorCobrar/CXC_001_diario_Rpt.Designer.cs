@@ -162,14 +162,17 @@
             // p_cbr_IdEmpresa
             // 
             this.p_cbr_IdEmpresa.Name = "p_cbr_IdEmpresa";
+            this.p_cbr_IdEmpresa.Visible = false;
             // 
             // p_cbr_IdSucursal
             // 
             this.p_cbr_IdSucursal.Name = "p_cbr_IdSucursal";
+            this.p_cbr_IdSucursal.Visible = false;
             // 
             // p_cbr_IdCobro
             // 
             this.p_cbr_IdCobro.Name = "p_cbr_IdCobro";
+            this.p_cbr_IdCobro.Visible = false;
             // 
             // PageHeader
             // 

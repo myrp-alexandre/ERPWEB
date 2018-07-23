@@ -625,22 +625,27 @@
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // p_IdSucursal
             // 
             this.p_IdSucursal.Name = "p_IdSucursal";
+            this.p_IdSucursal.Visible = false;
             // 
             // p_IdBodega
             // 
             this.p_IdBodega.Name = "p_IdBodega";
+            this.p_IdBodega.Visible = false;
             // 
             // p_IdCbteVta
             // 
             this.p_IdCbteVta.Name = "p_IdCbteVta";
+            this.p_IdCbteVta.Visible = false;
             // 
             // p_mostrar_cuotas
             // 
             this.p_mostrar_cuotas.Name = "p_mostrar_cuotas";
+            this.p_mostrar_cuotas.Visible = false;
             // 
             // FAC_003_Rpt
             // 

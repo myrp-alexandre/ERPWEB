@@ -630,14 +630,17 @@
             // p_Id_Tipo
             // 
             this.p_Id_Tipo.Name = "p_Id_Tipo";
+            this.p_Id_Tipo.Visible = false;
             // 
             // p_Id_Mejora_Baja_Activo
             // 
             this.p_Id_Mejora_Baja_Activo.Name = "p_Id_Mejora_Baja_Activo";
+            this.p_Id_Mejora_Baja_Activo.Visible = false;
             // 
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // ACTF_001_Rpt
             // 

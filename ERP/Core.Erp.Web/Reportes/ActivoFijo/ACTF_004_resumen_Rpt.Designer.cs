@@ -510,26 +510,32 @@
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // p_fecha_corte
             // 
             this.p_fecha_corte.Name = "p_fecha_corte";
+            this.p_fecha_corte.Visible = false;
             // 
             // p_IdActivoFijoTipo
             // 
             this.p_IdActivoFijoTipo.Name = "p_IdActivoFijoTipo";
+            this.p_IdActivoFijoTipo.Visible = false;
             // 
             // p_IdCategoriaAF
             // 
             this.p_IdCategoriaAF.Name = "p_IdCategoriaAF";
+            this.p_IdCategoriaAF.Visible = false;
             // 
             // p_Estado_Proceso
             // 
             this.p_Estado_Proceso.Name = "p_Estado_Proceso";
+            this.p_Estado_Proceso.Visible = false;
             // 
             // p_IdUsuario
             // 
             this.p_IdUsuario.Name = "p_IdUsuario";
+            this.p_IdUsuario.Visible = false;
             // 
             // ACTF_004_resumen_Rpt
             // 
