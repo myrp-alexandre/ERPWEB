@@ -9,32 +9,32 @@ namespace Core.Erp.Data.Facturacion
 {
   public  class fa_proforma_Data
     {
-         public List<fa_proforma_Info> get_list(int IdEmpresa)
+         public List<fa_proforma_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
             {
                 List<fa_proforma_Info> Lista;
+                Fecha_ini = Fecha_ini.Date;
+                Fecha_fin = Fecha_fin.Date;
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
-                    Lista = (from q in Context.fa_proforma
+                    Lista = (from q in Context.vwfa_proforma
                              where q.IdEmpresa == IdEmpresa
+                             && Fecha_ini <= q.pf_fecha && q.pf_fecha <= Fecha_fin
                              select new fa_proforma_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdSucursal = q.IdSucursal,
                                  IdProforma = q.IdProforma,
-                                 IdCliente = q.IdCliente,
-                                 IdTerminoPago = q.IdTerminoPago,
-                                 pf_plazo = q.pf_plazo,
                                  pf_codigo = q.pf_codigo,
                                  pf_observacion = q.pf_observacion,
                                  pf_fecha = q.pf_fecha,
-                                 pf_fecha_vcto = q.pf_fecha_vcto,
-                                 pf_atencion_a = q.pf_atencion_a,
-                                 estado = q.estado==true,
-                                 IdBodega = q.IdBodega,
-                                 IdVendedor = q.IdVendedor,
-                                 pr_dias_entrega = q.pr_dias_entrega
+                                 estado = q.estado,
+                                 pr_dias_entrega = q.pr_dias_entrega,
+                                 pe_nombreCompleto = q.pe_nombreCompleto,
+                                 pd_subtotal = q.pd_subtotal,
+                                 pd_iva = q.pd_iva,
+                                 pd_total = q.pd_total
                              }).ToList();
                 }
                 return Lista;
