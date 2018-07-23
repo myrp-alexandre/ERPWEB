@@ -78,12 +78,12 @@
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = Unit.Pixel(100);
+            c.Width = Unit.Pixel(85);
         });
         settings.Columns.Add(column =>
         {
             column.Caption = "#";
-            column.Width = Unit.Pixel(100);
+            column.Width = Unit.Pixel(85);
             column.SetDataItemTemplateContent(container =>
             {
                 if (Convert.ToString(DataBinder.Eval(container.DataItem, "Cerrado")) == "N")
@@ -104,7 +104,7 @@
         settings.Columns.Add(column =>
         {
             column.Caption = "#";
-            column.Width = Unit.Pixel(100);
+            column.Width = Unit.Pixel(85);
             column.SetDataItemTemplateContent(container =>
             {
                 if (Convert.ToString(DataBinder.Eval(container.DataItem, "Contabilizado")) == "N")
@@ -124,14 +124,14 @@
             });
         });
 
-        settings.Columns.Add("Descripcion","Nómina").Width=Unit.Percentage(8);
+        settings.Columns.Add("Descripcion","Nómina").Width=Unit.Percentage(9);
         settings.Columns.Add("DescripcionProcesoNomina","Proceso").Width = Unit.Percentage(15);
-        settings.Columns.Add("IdPeriodo").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdPeriodo", "Periodo").Width = Unit.Percentage(9);
         settings.Columns.Add(column =>
         {
             column.FieldName = "pe_FechaIni";
             column.Caption = "Desde";
-            column.Width = Unit.Percentage(8);
+            column.Width = Unit.Percentage(10);
             column.PropertiesEdit.DisplayFormatString = "d";
 
         });
@@ -139,18 +139,18 @@
         {
             column.FieldName = "pe_FechaFin";
             column.Caption = "Hasta";
-            column.Width = Unit.Percentage(8);
+            column.Width = Unit.Percentage(10);
             column.PropertiesEdit.DisplayFormatString = "d";
 
         });
-        settings.Columns.Add("Procesado","Procesado").Width=Unit.Percentage(7);
-        settings.Columns.Add("Cerrado","Cerrado").Width = Unit.Percentage(5);
-        settings.Columns.Add("Contabilizado","Contabilizado").Width = Unit.Percentage(8);
+        settings.Columns.Add("Procesado","Procesado").Width=Unit.Percentage(10);
+        settings.Columns.Add("Cerrado","Cerrado").Width = Unit.Percentage(10);
+        settings.Columns.Add("Contabilizado","Contabilizado").Width = Unit.Percentage(12);
 
         settings.Columns.Add(column =>
         {
             column.Caption = "#";
-            column.Width = Unit.Pixel(100);
+            column.Width = Unit.Pixel(75);
             column.SetDataItemTemplateContent(container =>
             {
                 Html.DevExpress().HyperLink(hyperlink =>
@@ -166,7 +166,7 @@
         settings.Columns.Add(column =>
         {
             column.Caption = "#";
-            column.Width = Unit.Pixel(100);
+            column.Width = Unit.Pixel(75);
             column.SetDataItemTemplateContent(container =>
             {
                 Html.DevExpress().HyperLink(hyperlink =>
@@ -174,25 +174,28 @@
                     var IdNomina_Tipo = DataBinder.Eval(container.DataItem, "IdNomina_Tipo");
                     var IdNomina_TipoLiqui = DataBinder.Eval(container.DataItem, "IdNomina_TipoLiqui");
                     var IdPeriodo = DataBinder.Eval(container.DataItem, "IdPeriodo");
-                    hyperlink.Properties.Text = "rol. indv.";
+                    hyperlink.Properties.Text = "rol. indiv.";
                     hyperlink.NavigateUrl = Url.Action("ROL_002", "RRHHReportes", new { Area = "Reportes",  IdNomina_Tipo = IdNomina_Tipo, IdNomina_TipoLiqui = IdNomina_TipoLiqui, IdPeriodo = IdPeriodo });
                 }).Render();
             });
         });
 
-
-
         settings.Columns.Add(column =>
         {
-          
             column.SetDataItemTemplateContent(c =>
             {
-
                 ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ROL_001", "RRHHReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa"), IdNomina_Tipo = DataBinder.Eval(c.DataItem, "IdNomina_Tipo"), IdNomina_TipoLiqui = DataBinder.Eval(c.DataItem, "IdNomina_TipoLiqui"), IdPeriodo = DataBinder.Eval(c.DataItem, "IdPeriodo") }, Request.Url.Scheme) + "');\"></span>");
             });
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(4);
         });
-
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ROL_002", "RRHHReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa"), IdNomina_Tipo = DataBinder.Eval(c.DataItem, "IdNomina_Tipo"), IdNomina_TipoLiqui = DataBinder.Eval(c.DataItem, "IdNomina_TipoLiqui"), IdPeriodo = DataBinder.Eval(c.DataItem, "IdPeriodo") }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(4);
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

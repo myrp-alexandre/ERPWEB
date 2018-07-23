@@ -50,7 +50,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdNovedad.Value = IdNovedad;
             model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
-            if (IdEmpleado == 0)
                 model.RequestParameters = false;
             return View(model);
         }
