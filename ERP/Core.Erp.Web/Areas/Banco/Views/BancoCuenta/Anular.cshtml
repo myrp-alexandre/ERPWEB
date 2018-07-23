@@ -17,7 +17,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdBanco_Financiero">Banco</label>
+                    <label for="IdBanco_Financiero">Banco*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdBanco_Financiero, settings =>
                {
                    settings.Name = "IdBanco_Financiero";
@@ -47,21 +47,21 @@
         <div class="col-md-12">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="ba_Tipo">Tipo de cuenta</label>
+                    <label for="ba_Tipo">Tipo de cuenta*</label>
                     @Html.DropDownListFor(q => q.ba_Tipo, new SelectList(ViewBag.lst_cta, "Key", "Value"), new { @class = "form-control", @id = "ba_Tipo", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.ba_Tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="ba_Num_Cuenta">Número de cuenta</label>
+                    <label for="ba_Num_Cuenta">Número de cuenta*</label>
                     @Html.TextBoxFor(q => q.ba_Num_Cuenta, new { @class = "form-control", @id = "ba_Num_Cuenta", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.ba_Num_Cuenta, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="ba_num_digito_cheq">Dígitos por cheque</label>
+                    <label for="ba_num_digito_cheq">Dígitos por cheque*</label>
                     @Html.TextBoxFor(q => q.ba_num_digito_cheq, new { @class = "form-control", @id = "ba_num_digito_cheq" })
                     @Html.ValidationMessageFor(q => q.ba_num_digito_cheq, "", new { @class = "text-danger" })
                 </div>
@@ -73,7 +73,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="ba_descripcion">Nombre de la cuenta</label>
+                    <label for="ba_descripcion">Nombre de la cuenta*</label>
                     @Html.TextBoxFor(q => q.ba_descripcion, new { @class = "form-control", @id = "ba_descripcion" })
                     @Html.ValidationMessageFor(q => q.ba_descripcion, "", new { @class = "text-danger" })
                 </div>
@@ -85,7 +85,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdCtaCble">Cuenta contable bancos</label>
+                    <label for="IdCtaCble">Cuenta contable bancos*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble, settings =>
                {
                    settings.Name = "IdCtaCble";
