@@ -206,7 +206,7 @@ namespace Core.Erp.Data.Inventario
                 {
                     Lista = (from q in Context.vwin_producto_hijo_combo
                              where q.IdEmpresa == IdEmpresa
-                             &&q.lote_num_lote!= "LOTE0"
+                             && q.lote_num_lote!= "LOTE0"
                              && q.IdProducto_padre==IdProducto_padre
                              select new in_Producto_Info
                              {
@@ -286,7 +286,7 @@ namespace Core.Erp.Data.Inventario
                         pr_imagen=Entity.pr_imagen
                     };
                 }
-                info.pr_descripcion_combo = info.pr_descripcion + " - " + info.lote_num_lote + " - " + (info.lote_fecha_vcto != null ? Convert.ToDateTime(info.lote_fecha_vcto).ToString("dd/MM/yyyy") : "");
+                info.pr_descripcion_combo = info.pr_descripcion + " " + info.nom_presentacion + " - " + info.lote_num_lote + " - " + (info.lote_fecha_vcto != null ? Convert.ToDateTime(info.lote_fecha_vcto).ToString("dd/MM/yyyy") : "");
                 return info;
             }
             catch (Exception)
@@ -785,7 +785,10 @@ namespace Core.Erp.Data.Inventario
         
         public List<in_Producto_Info> get_list_nombre_combo(List<in_Producto_Info> Lista)
         {
-            Lista.ForEach(V => { V.pr_descripcion = V.pr_descripcion + " - " + V.lote_num_lote + " - "+(V.lote_fecha_vcto != null ? Convert.ToDateTime(V.lote_fecha_vcto).ToString("dd/MM/yyyy") : ""); });
+            Lista.ForEach(V => {
+                V.pr_descripcion = V.pr_descripcion + " " + V.nom_presentacion + " - " + V.lote_num_lote + " - " + (V.lote_fecha_vcto != null ? Convert.ToDateTime(V.lote_fecha_vcto).ToString("dd/MM/yyyy") : "");
+                V.pr_descripcion_combo = V.pr_descripcion;
+            });
             return Lista;
         }
         #endregion

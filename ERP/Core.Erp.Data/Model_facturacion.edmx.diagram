@@ -37,6 +37,9 @@
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_fa_PuntoVta" />
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_fa_Vendedor" />
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_det_fa_proforma_det" />
+        <EntityTypeShape EntityType="Model_facturacion.vwfa_proforma" Width="1.5" PointX="8.375" PointY="10.75" />
+        <EntityTypeShape EntityType="Model_facturacion.vwfa_proforma_det" Width="1.5" PointX="10.375" PointY="10.75" />
+        <EntityTypeShape EntityType="Model_facturacion.vwfa_proforma_det_por_facturar" Width="1.5" PointX="12.375" PointY="10.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
