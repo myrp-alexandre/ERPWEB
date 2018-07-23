@@ -121,6 +121,7 @@ namespace Core.Erp.Data.Importacion
         {
             try
             {
+                int secuancia = 1;
                 using (Entities_importacion Context = new Entities_importacion())
                 {
                     imp_orden_compra_ext Entity = new imp_orden_compra_ext
@@ -148,12 +149,32 @@ namespace Core.Erp.Data.Importacion
                         oe_fecha_embarque_est = info.oe_fecha_embarque_est,
                         oe_fecha_desaduanizacion = info.oe_fecha_desaduanizacion
                     };
-                    Context.imp_orden_compra_ext.Add(Entity);
-                    Context.imp_orden_compra_ext_det.Add(new imp_orden_compra_ext_det
+                    foreach (var item in info.lst_detalle)
                     {
-                        
-                    });
+                        Context.imp_orden_compra_ext_det.Add(new imp_orden_compra_ext_det
+                        {
+                            IdEmpresa=info.IdEmpresa,
+                            IdOrdenCompra_ext=info.IdOrdenCompra_ext,
+                            Secuencia=secuancia,
+                            IdProducto=item.IdProducto,
+                            IdUnidadMedida=item.IdUnidadMedida,
+                            od_cantidad=item.od_cantidad,
+                            od_costo=item.od_costo,
+                            od_por_descuento=item.od_por_descuento,
+                            od_descuento=item.od_descuento,
+                            od_costo_final=item.od_costo_final,
+                            od_subtotal=item.od_subtotal,
+                            od_cantidad_recepcion=item.od_cantidad_recepcion,
+                            od_costo_convertido=item.od_costo_convertido,
+                            od_total_fob=item.od_total_fob,
+                            od_factor_costo=item.od_factor_costo,
+                            od_costo_bodega=item.od_costo_bodega,
+                            od_costo_total=item.od_costo_total
 
+                        });
+                        secuancia++;
+                        }
+                    Context.imp_orden_compra_ext.Add(Entity);
                     Context.SaveChanges();
                 }
                 return true;
@@ -167,16 +188,58 @@ namespace Core.Erp.Data.Importacion
 
         public bool modificarDB(imp_ordencompra_ext_Info info)
         {
+            int secuancia = 1;
             try
             {
                 using (Entities_importacion Context = new Entities_importacion())
                 {
-                    //TRes el info del gasto - OK
                     imp_orden_compra_ext Entity = Context.imp_orden_compra_ext.FirstOrDefault(q => q.IdOrdenCompra_ext == info.IdOrdenCompra_ext);
                     if (Entity == null) return false;
-                   
-                  
-                  
+                         Entity.IdPais_origen = info.IdPais_origen;
+                         Entity.IdPais_embarque = info.IdPais_embarque;
+                         Entity.IdCiudad_destino = info.IdCiudad_destino;
+                         Entity.IdCatalogo_via = info.IdCatalogo_via;
+                         Entity.IdCatalogo_forma_pago = info.IdCatalogo_forma_pago;
+                         Entity.oe_fecha = info.oe_fecha;
+                         Entity.oe_fecha_llegada_est = info.oe_fecha_llegada_est;
+                         Entity.oe_fecha_embarque = info.oe_fecha_embarque;
+                         Entity.oe_fecha_desaduanizacion_est = info.oe_fecha_desaduanizacion_est;
+                         Entity.IdCtaCble_importacion = info.IdCtaCble_importacion;
+                         Entity.oe_observacion = info.oe_observacion;
+                         Entity.oe_codigo = info.oe_codigo;
+                         Entity.oe_valor_flete = info.oe_valor_flete;
+                         Entity.oe_valor_seguro = info.oe_valor_seguro;
+                         Entity.IdLiquidacion = info.IdLiquidacion;
+                         Entity.oe_fecha_llegada = info.oe_fecha_llegada;
+                         Entity.oe_fecha_embarque_est = info.oe_fecha_embarque_est;
+                    Entity.oe_fecha_desaduanizacion = info.oe_fecha_desaduanizacion;
+
+                    foreach (var item in info.lst_detalle)
+                    {
+                        Context.imp_orden_compra_ext_det.Add(new imp_orden_compra_ext_det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdOrdenCompra_ext = info.IdOrdenCompra_ext,
+                            Secuencia = secuancia,
+                            IdProducto = item.IdProducto,
+                            IdUnidadMedida = item.IdUnidadMedida,
+                            od_cantidad = item.od_cantidad,
+                            od_costo = item.od_costo,
+                            od_por_descuento = item.od_por_descuento,
+                            od_descuento = item.od_descuento,
+                            od_costo_final = item.od_costo_final,
+                            od_subtotal = item.od_subtotal,
+                            od_cantidad_recepcion = item.od_cantidad_recepcion,
+                            od_costo_convertido = item.od_costo_convertido,
+                            od_total_fob = item.od_total_fob,
+                            od_factor_costo = item.od_factor_costo,
+                            od_costo_bodega = item.od_costo_bodega,
+                            od_costo_total = item.od_costo_total
+
+                        });
+                        secuancia++;
+                    }
+                    Context.imp_orden_compra_ext.Add(Entity);
                     Context.SaveChanges();
                 }
                 return true;
@@ -195,9 +258,8 @@ namespace Core.Erp.Data.Importacion
                 {
                     imp_orden_compra_ext Entity = Context.imp_orden_compra_ext.FirstOrDefault(q => q.IdOrdenCompra_ext == info.IdOrdenCompra_ext);
                     if (Entity == null) return false;
-
                     Entity.estado = info.estado = false;
-
+                    Entity.fecha_anulacion = DateTime.Now;
                     Context.SaveChanges();
                 }
                 return true;
