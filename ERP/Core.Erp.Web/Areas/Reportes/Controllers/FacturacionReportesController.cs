@@ -270,13 +270,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-        public ActionResult FAC_006(int IdSucursal = 0, decimal IdProforma = 0, bool formato_hoja_membretada = false)
+        public ActionResult FAC_006(int IdSucursal = 0, decimal IdProforma = 0)
         {
             FAC_006_Rpt model = new FAC_006_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_IdSucursal.Value = IdSucursal;
             model.p_IdProforma.Value = IdProforma;
-            model.p_formato_hoja_membretada.Value = formato_hoja_membretada;
             model.RequestParameters = false;
             return View(model);
         }
