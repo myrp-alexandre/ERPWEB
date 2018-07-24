@@ -8779,6 +8779,7 @@
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\Anular.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_GridViewPartial_orden_compra_ext.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_GridViewPartial_orden_compra_ext_det.cshtml" />
+    <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_CmbProveedor_exterior.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_CmbProducto_Importacion.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_006.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />

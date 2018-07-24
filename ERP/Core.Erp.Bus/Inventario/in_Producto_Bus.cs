@@ -117,11 +117,18 @@ namespace Core.Erp.Bus.Inventario
                 if(info_new_lote!=null)
                 {
                     info_new_lote.IdProducto_padre = info_new_lote.IdProducto;
+                    if (fecha_fab == DateTime.MinValue)
+                    {
+                        info_new_lote.lote_fecha_fab = null;
+                    }
+                    else
                     info_new_lote.lote_fecha_fab = fecha_fab;
                     info_new_lote.lote_fecha_vcto = fecha_ven;
                     info_new_lote.lote_num_lote = lote;
                     info_new_lote.Estado = "A";
                     info_new_lote.Fecha_Transac = DateTime.Now;
+                    info_new_lote.Aparece_modu_Ventas = false;
+                    info_new_lote.Aparece_modu_Inventario = true;                    
                 }
                 return odata.guardarDB(info_new_lote);
             }

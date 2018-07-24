@@ -21,7 +21,7 @@
         settings.Properties.Columns.Add("nom_presentacion", "Presentación", 15);
 
     })
-    .BindList(new Core.Erp.Web.Areas.Inventario.Controllers.ProductoController().get_list_bajo_demanda,
+    .BindList(new Core.Erp.Web.Areas.Inventario.Controllers.ProductoController().get_list_bajo_demandaComposicion,
     new Core.Erp.Web.Areas.Inventario.Controllers.ProductoController().get_info_bajo_demanda).Bind(Model);
 }
 @comboBox.GetHtml()

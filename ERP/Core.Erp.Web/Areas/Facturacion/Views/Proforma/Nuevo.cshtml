@@ -11,7 +11,6 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdProforma)
-    @Html.HiddenFor(q => q.IdProductoSeleccionado, new { @id = "IdProductoSeleccionado" })
 
     <div class="modal fade" id="OpModal" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -172,8 +171,19 @@
     }
 
     function SetLoteDetalle(ID) {
-        $("#IdProductoSeleccionado").val(ID);
-        IdProducto.SetValue(ID);
+
+        $.ajax({
+            url: '@Url.Action("ChangeValuePartial", "Proforma",new { Area = "Facturacion"})',
+            type: "GET",
+            data: { value: ID },
+            success: function (data) {
+                $('#ajaxDiv').html(data);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Request Status: ' + xhr.status + '; Status Text: ' + textStatus + '; Error: ' + errorThrown);
+            }
+        });
+
         $("#OpModal").modal("hide");
 
     }
