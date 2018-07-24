@@ -160,5 +160,29 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
+
+        public bool si_esta_en_uso(int IdEmpresa, int IdMarca)
+        {
+            try
+            {
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    var lst = from q in Context.in_Producto
+                              where q.IdEmpresa == IdEmpresa
+                              && q.IdMarca==IdMarca
+                              select q;
+                    if (lst.Count() > 0)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

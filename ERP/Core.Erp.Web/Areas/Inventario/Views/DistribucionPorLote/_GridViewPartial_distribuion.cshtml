@@ -76,11 +76,18 @@
         });
 
         settings.Columns.Add("IdNumMovi", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "cm_fecha";
+            column.Caption = "Fecha";
+            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        });
         settings.Columns.Add("Su_Descripcion", "Sucursal").Width = System.Web.UI.WebControls.Unit.Percentage(20);
         settings.Columns.Add("tm_descripcion", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(30);
         settings.Columns.Add("cm_observacion", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(20);
         settings.Columns.Add("vt_NumFactura", "Factura").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+        //settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = System.Web.UI.WebControls.Unit.Percentage(20);
 
 
 
@@ -106,13 +113,7 @@
 
         });
 
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "cm_fecha";
-            column.Caption = "Fecha";
-            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        });
+
     });
 }
 @grid.Bind(Model).GetHtml()

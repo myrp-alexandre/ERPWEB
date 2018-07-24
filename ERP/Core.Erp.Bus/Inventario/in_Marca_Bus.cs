@@ -68,5 +68,18 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
+
+        public bool si_esta_en_uso(int IdEmpresa, int IdMarca)
+        {
+            try
+            {
+                return odata.si_esta_en_uso(IdEmpresa,IdMarca);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
