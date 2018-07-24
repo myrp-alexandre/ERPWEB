@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
 {
     public class FAC_006_Data
     {
-        public List<FAC_006_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdProforma, bool formato_hoja_membretada)
+        public List<FAC_006_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdProforma, bool formato_hoja_membretada, bool mostrar_imagen)
         {
             try
             {

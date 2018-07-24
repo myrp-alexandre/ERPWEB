@@ -1,6 +1,6 @@
 ﻿namespace Core.Erp.Web.Reportes.Facturacion
 {
-    partial class FAC_006_imagen
+    partial class FAC_006_imagen_Rpt
     {
         /// <summary>
         /// Required designer variable.
@@ -126,6 +126,7 @@
             this.xrTableCell55 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow18 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell56 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.p_formato_hoja_membretada = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -1101,7 +1102,12 @@
     " Número de teléfono, Dirección de correo electrónico";
             this.xrTableCell56.Weight = 3D;
             // 
-            // FAC_006_imagen
+            // p_formato_hoja_membretada
+            // 
+            this.p_formato_hoja_membretada.Name = "p_formato_hoja_membretada";
+            this.p_formato_hoja_membretada.Visible = false;
+            // 
+            // FAC_006_imagen_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
             this.Detail,
@@ -1119,9 +1125,10 @@
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this.p_IdEmpresa,
             this.p_IdSucursal,
-            this.p_IdProforma});
+            this.p_IdProforma,
+            this.p_formato_hoja_membretada});
             this.Version = "17.2";
-            this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.FAC_006_imagen_BeforePrint);
+            this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.FAC_006_imagen_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
@@ -1230,5 +1237,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell55;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow18;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell56;
+        public DevExpress.XtraReports.Parameters.Parameter p_formato_hoja_membretada;
     }
 }
