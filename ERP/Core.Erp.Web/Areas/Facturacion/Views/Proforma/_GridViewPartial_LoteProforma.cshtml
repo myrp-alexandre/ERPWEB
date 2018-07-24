@@ -5,11 +5,7 @@
         settings.CallbackRouteValues = new { Controller = "Proforma", Action = "GridViewPartial_LoteProforma" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdProducto";
-
-        //Configuracion cabecera
-        settings.Settings.ShowTitlePanel = true;
-        settings.SettingsText.Title = "Por asignar";
-
+        
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
@@ -82,7 +78,7 @@
                 {
                     settingsBtn.Name = "btn" + c.KeyValue;
                     settingsBtn.Text = "Aceptar";
-                    settingsBtn.ClientSideEvents.Click = "function(s, e) {EditingUpdate('" + c.KeyValue + "');}";
+                    settingsBtn.ClientSideEvents.Click = "function(s, e) {SeleccionarLote('" + c.KeyValue + "');}";
                 }).Render();
             });
         });

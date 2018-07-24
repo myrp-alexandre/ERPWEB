@@ -230,6 +230,41 @@ namespace Core.Erp.Data.Inventario
             }
         }
 
+        public List<in_Producto_Info> get_list_stock_lotes(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdProducto_padre)
+        {
+            try
+            {
+                List<in_Producto_Info> Lista;
+
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    Lista = (from q in Context.vwin_producto_x_tb_bodega_stock_x_lote
+                             where q.IdEmpresa == IdEmpresa && q.IdProducto_padre == IdProducto_padre
+                             select new in_Producto_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdSucursal = q.IdSucursal,
+                                 IdBodega = q.IdBodega,
+                                 IdProducto = q.IdProducto,
+                                 pr_codigo = q.pr_codigo,
+                                 pr_descripcion = q.pr_descripcion,
+                                 IdProducto_padre = q.IdProducto_padre,
+                                 lote_fecha_fab = q.lote_fecha_fab,
+                                 lote_fecha_vcto = q.lote_fecha_vcto,
+                                 lote_num_lote = q.lote_num_lote,
+                                 stock = q.stock
+                             }).ToList();
+                }
+                Lista = get_list_nombre_combo(Lista);
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public in_Producto_Info get_info(int IdEmpresa, decimal IdProducto)
         {
             try
@@ -466,6 +501,15 @@ namespace Core.Erp.Data.Inventario
             {
                 throw;
             }
+        }
+
+        public List<in_Producto_Info> get_list_nombre_combo(List<in_Producto_Info> Lista)
+        {
+            Lista.ForEach(V => {
+                V.pr_descripcion = V.pr_descripcion + " " + V.nom_presentacion + " - " + V.lote_num_lote + " - " + (V.lote_fecha_vcto != null ? Convert.ToDateTime(V.lote_fecha_vcto).ToString("dd/MM/yyyy") : "");
+                V.pr_descripcion_combo = V.pr_descripcion;
+            });
+            return Lista;
         }
 
         #region metodo baja demanda
@@ -782,15 +826,7 @@ namespace Core.Erp.Data.Inventario
             }
         }
 
-        
-        public List<in_Producto_Info> get_list_nombre_combo(List<in_Producto_Info> Lista)
-        {
-            Lista.ForEach(V => {
-                V.pr_descripcion = V.pr_descripcion + " " + V.nom_presentacion + " - " + V.lote_num_lote + " - " + (V.lote_fecha_vcto != null ? Convert.ToDateTime(V.lote_fecha_vcto).ToString("dd/MM/yyyy") : "");
-                V.pr_descripcion_combo = V.pr_descripcion;
-            });
-            return Lista;
-        }
         #endregion
+        
     }
 }

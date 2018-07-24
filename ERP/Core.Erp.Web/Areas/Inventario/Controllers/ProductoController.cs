@@ -407,4 +407,23 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             list.Remove(list.Where(m => m.secuencia == secuencia).First());
         }
     }
+
+    public class in_Producto_List
+    {
+        public List<in_Producto_Info> get_list()
+        {
+            if (HttpContext.Current.Session["in_Producto_Info"] == null)
+            {
+                List<in_Producto_Info> list = new List<in_Producto_Info>();
+
+                HttpContext.Current.Session["in_Producto_Info"] = list;
+            }
+            return (List<in_Producto_Info>)HttpContext.Current.Session["in_Producto_Info"];
+        }
+
+        public void set_list(List<in_Producto_Info> list)
+        {
+            HttpContext.Current.Session["in_Producto_Info"] = list;
+        }
+    }
 }

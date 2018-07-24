@@ -95,6 +95,8 @@ namespace Core.Erp.Info.Inventario
         public string ma_descripcion { get; set; }
         public string pr_descripcion_combo { get; set; }
         public double stock { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdBodega { get; set; }
         #endregion
     }
 }

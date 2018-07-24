@@ -23,7 +23,17 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
-
+        public List<in_Producto_Info> get_list_stock_lotes(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdProducto_padre)
+        {
+            try
+            {
+                return odata.get_list_stock_lotes(IdEmpresa, IdSucursal, IdBodega, IdProducto_padre);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public List<in_Producto_Info> get_list_para_composicion(int IdEmpresa, bool mostrar_anulados)
         {
             try

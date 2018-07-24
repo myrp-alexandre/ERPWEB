@@ -85,6 +85,7 @@
         <AssociationConnector Association="Model_inventario.FK_in_Producto_in_UnidadMedida1" />
         <AssociationConnector Association="Model_inventario.FK_in_producto_x_tb_bodega_in_Producto" />
         <AssociationConnector Association="Model_inventario.FK_in_transferencia_det_in_Producto" />
+        <EntityTypeShape EntityType="Model_inventario.vwin_producto_x_tb_bodega_stock_x_lote" Width="1.5" PointX="18.375" PointY="20.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

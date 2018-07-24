@@ -12,6 +12,25 @@
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdProforma)
 
+    <div class="modal fade" id="OpModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Lotes disponibles</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Action("GridViewPartial_LoteProforma")
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-6">
             <div class="col-md-6">
@@ -110,10 +129,10 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 @Html.Action("GridViewPartial_proforma_det")
-            </div>            
-        </div>        
+            </div>
+        </div>
     </div>
-    
+
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","Proforma",new { Area = "Facturacion" },null)">Cancelar</a>
@@ -145,6 +164,37 @@
         });
 
     });
+
+    function MostrarModal() {
+        GridView_LoteProforma.PerformCallback();
+        $("#OpModal").modal("show");
+    }
+
+    function SeleccionarLote(s,e) {
+        var datos = {
+            IdSucursal: $("#IdSucursal").val(),
+            IdBodega: $("#IdBodega").val(),
+            IdProducto: s.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetLotesPorProducto", "Proforma",new { Area = "Facturacion"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.IdProducto_padre > 0) {
+                    MostrarModal();
+                    GridView_proforma_det.GetEditor('IdProducto').SetValue(valor);
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
 
     function cargar_fecha_vencimiento() {
         var vida = Number($("#pf_plazo").val());

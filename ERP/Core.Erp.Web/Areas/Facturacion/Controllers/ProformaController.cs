@@ -5,6 +5,7 @@ using Core.Erp.Info.Facturacion;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
 using Core.Erp.Info.Inventario;
+using Core.Erp.Web.Areas.Inventario.Controllers;
 using Core.Erp.Web.Helps;
 using DevExpress.Web;
 using DevExpress.Web.Mvc;
@@ -27,6 +28,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
         fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
         fa_proforma_det_Bus bus_det = new fa_proforma_det_Bus();
+        in_Producto_List List_producto = new in_Producto_List();
         string mensaje = string.Empty;
         #endregion
 
@@ -251,10 +253,30 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetLotesPorProducto(int IdSucursal = 0, int IdBodega = 0, decimal IdProducto = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var resultado = bus_producto.get_info(IdEmpresa,IdProducto);
+            if (resultado == null)
+                resultado = new in_Producto_Info();
+            
+                if(resultado.IdProducto_padre > 0)
+                    List_producto.set_list(bus_producto.get_list_stock_lotes(IdEmpresa, IdSucursal, IdBodega, Convert.ToDecimal(resultado.IdProducto_padre)));
+                else
+                List_producto.set_list(new List<in_Producto_Info>());
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
 
         #endregion
 
         #region funciones del detalle
+
+        public ActionResult GridViewPartial_LoteProforma()
+        {
+            var model = List_producto.get_list();            
+            return PartialView("_GridViewPartial_LoteProforma", model);
+        }
+
         private void cargar_combos_detalle()
         {
             var lst_impuesto = bus_impuesto.get_list("IVA", false);
@@ -362,6 +384,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return PartialView("_GridViewPartial_proforma_det", model);
         }
         #endregion
+
     }
 
     public class fa_proforma_det_List
