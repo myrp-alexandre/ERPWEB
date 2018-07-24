@@ -11,11 +11,11 @@
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Proforma", Action = "EditingAddNew", Area = "Facturacion" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Proforma", Action = "EditingUpdate", Area = "Facturacion" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Proforma", Action = "EditingDelete", Area = "Facturacion" };
-        
+
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
-        
+
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = true;
         settings.CommandColumn.ShowEditButton = true;
@@ -58,7 +58,9 @@
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
             {
+                ViewContext.Writer.Write("<div id='ajaxDiv'>");
                 Html.RenderPartial("_CmbProducto_Proforma", DataBinder.Eval(c.DataItem, "IdProducto"));
+                ViewContext.Writer.Write("</div>");
             });
         });
 

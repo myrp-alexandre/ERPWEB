@@ -554,22 +554,29 @@ namespace Core.Erp.Data.Inventario
 
             using (Entities_inventario Contex = new Entities_inventario())
             {
-                in_Producto Entity = Contex.in_Producto.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdProducto == IdProducto);
-
-                if (Entity != null)
-                {
-                    info = new in_Producto_Info
-                    {
-                        IdProducto = Entity.IdProducto,
-                        pr_descripcion = Entity.pr_descripcion,
-                        pr_descripcion_2 = Entity.pr_descripcion_2,
-                        pr_codigo = Entity.pr_codigo,
-                        lote_num_lote = Entity.lote_num_lote,
-                        lote_fecha_vcto = Entity.lote_fecha_vcto
-                    };
-                }                
+                info = (from q in Contex.in_Producto
+                                     join p in Contex.in_presentacion
+                                     on new { q.IdEmpresa, q.IdPresentacion} equals new { p.IdEmpresa, p.IdPresentacion}
+                                     where q.IdEmpresa == IdEmpresa && q.IdProducto == IdProducto
+                                     select new in_Producto_Info
+                                     {
+                                         IdProducto = q.IdProducto,
+                                         pr_descripcion = q.pr_descripcion,
+                                         pr_descripcion_2 = q.pr_descripcion_2,
+                                         pr_codigo = q.pr_codigo,
+                                         lote_num_lote = q.lote_num_lote,
+                                         lote_fecha_vcto = q.lote_fecha_vcto,
+                                         nom_presentacion = p.nom_presentacion
+                                     }).FirstOrDefault();
+             
             }
-
+            if (info != null)
+            {
+                info.pr_descripcion = info.pr_descripcion + " " + info.nom_presentacion + " - " + info.lote_num_lote + " - " + (info.lote_fecha_vcto != null ? Convert.ToDateTime(info.lote_fecha_vcto).ToString("dd/MM/yyyy") : "");
+                info.pr_descripcion_combo = info.pr_descripcion + " " + info.nom_presentacion + " - " + info.lote_num_lote + " - " + (info.lote_fecha_vcto != null ? Convert.ToDateTime(info.lote_fecha_vcto).ToString("dd/MM/yyyy") : "");
+            }
+            else
+                info = new in_Producto_Info();
 
             return info;
         }

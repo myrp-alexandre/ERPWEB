@@ -72,19 +72,18 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #endregion
 
         #region Metodos ComboBox bajo demanda producto
+        public ActionResult ChangeValuePartial(decimal value = 0)
+        {
+            return PartialView("_CmbProducto_Proforma", value);
+        }
         public ActionResult CmbProducto_Proforma()
         {
-            SessionFixed.IdProducto_padre_dist = !string.IsNullOrEmpty(Request.Params["IdProductoSeleccionado"]) ? Request.Params["IdProductoSeleccionado"].ToString() : "";
             fa_proforma_det_Info model = new fa_proforma_det_Info();
             return PartialView("_CmbProducto_Proforma", model);
         }
         public List<in_Producto_Info> get_list_bajo_demandaProducto(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
             List<in_Producto_Info> Lista = bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.PORMODULO, cl_enumeradores.eModulo.VTA, 0);
-            if (!string.IsNullOrEmpty(SessionFixed.IdProducto_padre_dist) && SessionFixed.IdProducto_padre_dist != "0")
-            {
-                Lista.Add(bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToDecimal(SessionFixed.IdProducto_padre_dist)));
-            }
             return Lista;
         }
         public in_Producto_Info get_info_bajo_demandaProducto(ListEditItemRequestedByValueEventArgs args)
@@ -436,6 +435,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             edited_info.IdProducto = info_det.IdProducto;
             edited_info.pr_descripcion = info_det.pr_descripcion;
             edited_info.pd_cantidad = info_det.pd_cantidad;
+            edited_info.pd_por_descuento_uni = info_det.pd_por_descuento_uni;
             edited_info.pd_precio = info_det.pd_precio;
             edited_info.pd_descuento_uni = Math.Round(info_det.pd_precio * (info_det.pd_por_descuento_uni / 100), 2, MidpointRounding.AwayFromZero);
             edited_info.pd_precio_final = Math.Round(info_det.pd_precio - edited_info.pd_descuento_uni,2,MidpointRounding.AwayFromZero);
