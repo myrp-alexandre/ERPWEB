@@ -280,7 +280,9 @@
     <Compile Include="Areas\CuentasPorPagar\CuentasPorPagarAreaRegistration.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ClienteController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ClienteTipoController.cs" />
+    <Compile Include="Areas\Facturacion\Controllers\FacturaController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ProformaController.cs" />
+    <Compile Include="Areas\Facturacion\Controllers\ProformaFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\PuntoVentaController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\TerminoPagoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\TipoNotaController.cs" />
@@ -8782,6 +8784,16 @@
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_CmbProveedor_exterior.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_CmbProducto_Importacion.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_006.cshtml" />
+    <Content Include="Areas\Facturacion\Views\ProformaFacturacion\Index.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\Nuevo.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\Modificar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\Index.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\Anular.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\_GridViewPartial_factura.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\_GridViewPartial_factura_det.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\_GridViewPartial_LoteFactura.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\_CmbProducto_Factura.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\_CmbCliente_Factura.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
