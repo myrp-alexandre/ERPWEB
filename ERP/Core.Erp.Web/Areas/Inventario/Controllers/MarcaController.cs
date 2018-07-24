@@ -22,7 +22,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             List<in_Marca_Info> model = new List<in_Marca_Info>();
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model = bus_marca.get_list(IdEmpresa, false);
+            model = bus_marca.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_marca", model);
         }
 
