@@ -13,11 +13,14 @@
         settings.Properties.TextFormatString = "[{0}] {1}";
         settings.Properties.ValueField = "IdProducto";
         settings.Properties.ValueType = typeof(decimal);
+        settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+        settings.Properties.NullDisplayText = "== Seleccione el producto padre ==";
 
         settings.Properties.Columns.Add("IdProducto", "ID", 5);
         settings.Properties.Columns.Add("pr_descripcion", "Producto", 65);
         settings.Properties.Columns.Add("nom_categoria", "Categoria", 15);
         settings.Properties.Columns.Add("nom_presentacion", "Presentación", 15);
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){ValidarTabImagen();}";
     })
     .BindList(new Core.Erp.Web.Areas.Inventario.Controllers.ProductoController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Inventario.Controllers.ProductoController().get_info_bajo_demanda)
     .Bind(Model.IdProducto);
