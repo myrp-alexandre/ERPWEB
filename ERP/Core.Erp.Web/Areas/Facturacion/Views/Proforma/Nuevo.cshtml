@@ -11,6 +11,7 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdProforma)
+    @Html.HiddenFor(q => q.IdProductoSeleccionado, new { @id = "IdProductoSeleccionado" })
 
     <div class="modal fade" id="OpModal" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -170,6 +171,13 @@
         $("#OpModal").modal("show");
     }
 
+    function SetLoteDetalle(ID) {
+        $("#IdProductoSeleccionado").val(ID);
+        IdProducto.SetValue(ID);
+        $("#OpModal").modal("hide");
+
+    }
+
     function SeleccionarLote(s,e) {
         var datos = {
             IdSucursal: $("#IdSucursal").val(),
@@ -186,9 +194,9 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
+                GridView_proforma_det.GetEditor('IdCod_Impuesto').SetValue(data.IdCod_Impuesto_Iva);
                 if (data.IdProducto_padre > 0) {
                     MostrarModal();
-                    GridView_proforma_det.GetEditor('IdProducto').SetValue(valor);
                 }
             },
             error: function (error) {

@@ -73,13 +73,19 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
         #region Metodos ComboBox bajo demanda producto
         public ActionResult CmbProducto_Proforma()
-        {            
+        {
+            SessionFixed.IdProducto_padre_dist = !string.IsNullOrEmpty(Request.Params["IdProductoSeleccionado"]) ? Request.Params["IdProductoSeleccionado"].ToString() : "";
             fa_proforma_det_Info model = new fa_proforma_det_Info();
             return PartialView("_CmbProducto_Proforma", model);
         }
         public List<in_Producto_Info> get_list_bajo_demandaProducto(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.PORMODULO, cl_enumeradores.eModulo.VTA, 0);
+            List<in_Producto_Info> Lista = bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.PORMODULO, cl_enumeradores.eModulo.VTA, 0);
+            if (!string.IsNullOrEmpty(SessionFixed.IdProducto_padre_dist) && SessionFixed.IdProducto_padre_dist != "0")
+            {
+                Lista.Add(bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToDecimal(SessionFixed.IdProducto_padre_dist)));
+            }
+            return Lista;
         }
         public in_Producto_Info get_info_bajo_demandaProducto(ListEditItemRequestedByValueEventArgs args)
         {

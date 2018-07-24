@@ -31,17 +31,17 @@
         {
             column.FieldName = "IdProducto";
             column.Caption = "ID";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(5);
         });
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(40);
+            column.Width = Unit.Percentage(35);
             column.FieldName = "pr_descripcion";
             column.Caption = "Producto";
         });
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(15);
             column.FieldName = "lote_num_lote";
             column.Caption = "Lote";
         });
@@ -64,7 +64,7 @@
             column.FieldName = "stock";
             column.Caption = "Stock";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(5);
         });
         settings.Columns.Add(column =>
         {
@@ -78,7 +78,7 @@
                 {
                     settingsBtn.Name = "btn" + c.KeyValue;
                     settingsBtn.Text = "Aceptar";
-                    settingsBtn.ClientSideEvents.Click = "function(s, e) {SeleccionarLote('" + c.KeyValue + "');}";
+                    settingsBtn.ClientSideEvents.Click = "function(s, e) {SetLoteDetalle('" + c.KeyValue + "');}";
                 }).Render();
             });
         });
