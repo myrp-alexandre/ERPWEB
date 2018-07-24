@@ -652,6 +652,12 @@
     <Compile Include="Reportes\Facturacion\FAC_005_Rpt.Designer.cs">
       <DependentUpon>FAC_005_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_006_imagen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_006_imagen.Designer.cs">
+      <DependentUpon>FAC_006_imagen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Facturacion\FAC_006_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9015,6 +9021,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Facturacion\FAC_005_Rpt.resx">
       <DependentUpon>FAC_005_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\FAC_006_imagen.resx">
+      <DependentUpon>FAC_006_imagen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Facturacion\FAC_006_Rpt.resx">
       <DependentUpon>FAC_006_Rpt.cs</DependentUpon>

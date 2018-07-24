@@ -66,6 +66,7 @@ namespace Core.Erp.Info.Helps
             fecha_ini = DateTime.Now.Date.AddMonths(-1);
             fecha_fin = DateTime.Now.Date;
         }
+
     }
 
     public class cl_filtros_facturacion_Info
@@ -81,6 +82,10 @@ namespace Core.Erp.Info.Helps
         public int IdSucursal { get; set; }
         public bool Check1 { get; set; }
         public bool Check2 { get; set; }
+
+
+        public decimal IdProforma { get; set; }
+        public bool formato_hoja_membretada { get; set; }
 
         public cl_filtros_facturacion_Info()
         {

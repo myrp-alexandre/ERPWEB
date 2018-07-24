@@ -95,7 +95,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdVendedor = 0,
                 Ve_Vendedor = "Todos"
             });
-            ViewBag.lst_vendedor = lst_vendedor;            
+            ViewBag.lst_vendedor = lst_vendedor;
+
+            fa_proforma_Bus bus_proforma = new fa_proforma_Bus();
+            var lst_proforma = bus_proforma.get_list(IdEmpresa, model.fecha_ini, model.fecha_fin);
+            lst_proforma.Add(new Info.Facturacion.fa_proforma_Info
+            {
+                IdProforma = 0,
+                pf_codigo = "Todos"
+            });
+            ViewBag.lst_proforma = lst_proforma;
         }
 
 
@@ -271,6 +280,5 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.RequestParameters = false;
             return View(model);
         }
-
     }
 }
