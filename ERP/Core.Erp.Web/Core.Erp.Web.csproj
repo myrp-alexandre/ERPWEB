@@ -8774,6 +8774,7 @@
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_GridViewPartial_orden_compra_ext.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_GridViewPartial_orden_compra_ext_det.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_CmbProducto_Importacion.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_006.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
