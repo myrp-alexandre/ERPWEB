@@ -9,6 +9,8 @@ using Core.Erp.Info.Contabilidad;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.General;
 using Core.Erp.Bus.General;
+using Core.Erp.Info.Helps;
+
 namespace Core.Erp.Bus.CuentasPorPagar
 {
    public class cp_nota_DebCre_Bus
@@ -243,21 +245,25 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     mensaje = "Selecciona el tipo de documento";
                     return mensaje;
                 }
-                if (info.cn_serie1 == "" | info.cn_Nota == null)
+                if (info.IdTipoNota == cl_enumeradores.eTipoNotaCXP.T_TIP_NOTA_SRI.ToString())
                 {
-                    mensaje = "Ingrese seri del documento";
-                    return mensaje;
+                    if (info.cn_serie1 == "" | info.cn_Nota == null)
+                    {
+                        mensaje = "Ingrese seri del documento";
+                        return mensaje;
+                    }
+                    if (info.cn_Nota == "" | info.cn_Nota == null)
+                    {
+                        mensaje = "Ingrese el número del documento";
+                        return mensaje;
+                    }
+                    if (info.cn_Autorizacion == "" | info.cn_Autorizacion == null)
+                    {
+                        mensaje = "Ingrese el número de autorización";
+                        return mensaje;
+                    }
                 }
-                if (info.cn_Nota == "" | info.cn_Nota == null)
-                {
-                    mensaje = "Ingrese el número del documento";
-                    return mensaje;
-                }
-                if (info.cn_Autorizacion == "" | info.cn_Autorizacion == null)
-                {
-                    mensaje = "Ingrese el número de autorización";
-                    return mensaje;
-                }
+                
                 if (info.cn_observacion == "" | info.cn_observacion == null)
                 {
                     mensaje = "Ingrese la observación";

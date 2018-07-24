@@ -415,6 +415,7 @@
                 autoclose: true
             })
             get_info_producto_tipo();
+            ValidarTabImagen();
         });
         $("#IdProductoTipo").change(function () {
             get_info_producto_tipo();
@@ -847,5 +848,14 @@
             });
         }
     }
-
+    function ValidarTabImagen() {
+        var ID = IdProducto_padre.GetValue();
+        if (ID > 0) {
+            $("#link_imagen").hide();
+            $("#link_general").click();
+        } else {
+            $("#link_imagen").show();
+            $("#link_general").click();
+        }
+    }
 </script>

@@ -14,6 +14,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
     public class ProveedorController : Controller
     {
+
+
+
         cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
 
         public ActionResult Index()

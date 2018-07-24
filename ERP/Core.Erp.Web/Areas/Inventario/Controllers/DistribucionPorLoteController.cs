@@ -259,7 +259,16 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
 
                 }
-                List_in_Ing_Egr_Inven_det.AddRow(info_det);
+                // si existe
+                var pro = List_in_Ing_Egr_Inven_det.get_list().Where(v => v.IdProducto == info_det.IdProducto).FirstOrDefault();
+                if (pro == null)
+                    List_in_Ing_Egr_Inven_det.AddRow(info_det);
+                else
+                {
+                    pro.dm_cantidad = pro.dm_cantidad + info_det.dm_cantidad; 
+                    List_in_Ing_Egr_Inven_det.UpdateRow(pro);
+                }
+
                 model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
 
                 // actualizar lista distribuidas

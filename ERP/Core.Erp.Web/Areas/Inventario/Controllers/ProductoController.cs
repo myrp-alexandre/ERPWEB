@@ -46,6 +46,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
         #endregion
+
         #region vistas
 
         public ActionResult Index()
@@ -68,6 +69,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return model;
         }
         #endregion
+
         #region Acciones
         public ActionResult Nuevo()
         {
@@ -201,6 +203,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
         }
         #endregion
+
         #region cargar combo
 
         private void cargar_combos()
@@ -259,6 +262,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             ViewBag.lst_impuesto = lst_impuesto;
         }
         #endregion
+
         #region funciones del detalle
 
         [ValidateInput(false)]
