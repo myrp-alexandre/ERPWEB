@@ -147,38 +147,7 @@
         settings.Columns.Add("Cerrado","Cerrado").Width = Unit.Percentage(10);
         settings.Columns.Add("Contabilizado","Contabilizado").Width = Unit.Percentage(12);
 
-        settings.Columns.Add(column =>
-        {
-            column.Caption = "#";
-            column.Width = Unit.Pixel(75);
-            column.SetDataItemTemplateContent(container =>
-            {
-                Html.DevExpress().HyperLink(hyperlink =>
-                {
-                    var IdNomina_Tipo = DataBinder.Eval(container.DataItem, "IdNomina_Tipo");
-                    var IdNomina_TipoLiqui = DataBinder.Eval(container.DataItem, "IdNomina_TipoLiqui");
-                    var IdPeriodo = DataBinder.Eval(container.DataItem, "IdPeriodo");
-                    hyperlink.Properties.Text = "Rol gen.";
-                    hyperlink.NavigateUrl = Url.Action("ROL_001", "RRHHReportes", new { Area = "Reportes", IdNomina_Tipo = IdNomina_Tipo, IdNomina_TipoLiqui = IdNomina_TipoLiqui, IdPeriodo = IdPeriodo });
-                }).Render();
-            });
-        });
-        settings.Columns.Add(column =>
-        {
-            column.Caption = "#";
-            column.Width = Unit.Pixel(75);
-            column.SetDataItemTemplateContent(container =>
-            {
-                Html.DevExpress().HyperLink(hyperlink =>
-                {
-                    var IdNomina_Tipo = DataBinder.Eval(container.DataItem, "IdNomina_Tipo");
-                    var IdNomina_TipoLiqui = DataBinder.Eval(container.DataItem, "IdNomina_TipoLiqui");
-                    var IdPeriodo = DataBinder.Eval(container.DataItem, "IdPeriodo");
-                    hyperlink.Properties.Text = "rol. indiv.";
-                    hyperlink.NavigateUrl = Url.Action("ROL_002", "RRHHReportes", new { Area = "Reportes",  IdNomina_Tipo = IdNomina_Tipo, IdNomina_TipoLiqui = IdNomina_TipoLiqui, IdPeriodo = IdPeriodo });
-                }).Render();
-            });
-        });
+   
 
         settings.Columns.Add(column =>
         {
