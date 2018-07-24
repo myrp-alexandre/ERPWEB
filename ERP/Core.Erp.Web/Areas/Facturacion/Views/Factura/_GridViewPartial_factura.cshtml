@@ -1,17 +1,13 @@
 @using System.Web.UI.WebControls;
+
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridViewPartial_distribuion    ";
-        settings.CallbackRouteValues = new { Controller = "DistribucionPorLote", Action = "GridViewPartial_distribuion" };
+        settings.Name = "GridView_proforma";
+        settings.CallbackRouteValues = new { Controller = "Proforma", Action = "GridViewPartial_proforma" , IdSucursal = ViewBag.IdSucursal };
+        settings.KeyFieldName = "IdProforma";
+        settings.Width = Unit.Percentage(100);
 
-
-        settings.KeyFieldName = "IdNumMovi";
-
-        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-        //Configuración para que la grilla no muestre texto completo
-        settings.SettingsBehavior.AllowEllipsisInText = true;
-        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
@@ -62,58 +58,58 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) ==true && Convert.ToInt32(DataBinder.Eval(tc.DataItem, "can_x_distribuir")) >Convert.ToInt32(DataBinder.Eval(tc.DataItem, "can_distribuida")) )
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Distribuir", "Nuevo", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdMovi_inven_tipo = DataBinder.Eval(tc.DataItem, "IdMovi_inven_tipo"), IdNumMovi = DataBinder.Eval(tc.DataItem, "IdNumMovi"), signo= DataBinder.Eval(tc.DataItem, "signo") })
+                Html.ActionLink("Modificar", "Modificar", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdProforma = DataBinder.Eval(tc.DataItem, "IdProforma") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdProforma = DataBinder.Eval(tc.DataItem, "IdProforma") },
+                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
             });
-
+            c.SetHeaderTemplateContent(tc =>
+            {
+                ViewContext.Writer.Write(
+                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                );
+            });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = System.Web.UI.WebControls.Unit.Pixel(90);
+            c.Width = Unit.Pixel(150);
         });
 
-        settings.Columns.Add("IdNumMovi", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("IdProforma", "ID").Width = Unit.Percentage(5);
+        settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = Unit.Percentage(30);
+        settings.Columns.Add("pf_observacion", "Observación").Width = Unit.Percentage(15);
         settings.Columns.Add(column =>
         {
-            column.FieldName = "cm_fecha";
+            column.FieldName = "pd_subtotal";
+            column.Caption = "Subtotal";
+            column.PropertiesEdit.DisplayFormatString = "{0:c2}";
+            column.Width = Unit.Percentage(10);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pd_iva";
+            column.Caption = "I.V.A.";
+            column.PropertiesEdit.DisplayFormatString = "{0:c2}";
+            column.Width = Unit.Percentage(10);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pd_total";
+            column.Caption = "Total";
+            column.PropertiesEdit.DisplayFormatString = "{0:c2}";
+            column.Width = Unit.Percentage(10);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pf_fecha";
             column.Caption = "Fecha";
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.Width = Unit.Percentage(10);
         });
-        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-        settings.Columns.Add("tm_descripcion", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(30);
-        settings.Columns.Add("cm_observacion", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-        settings.Columns.Add("vt_NumFactura", "Factura").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        //settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-
-
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "can_total";
-            column.Caption = "total";
-            column.Width = Unit.Percentage(15);
-
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "can_distribuida";
-            column.Caption = "Distr.";
-            column.Width = Unit.Percentage(15);
-
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "can_x_distribuir";
-            column.Caption = "X distr.";
-            column.Width = Unit.Percentage(15);
-
-        });
-
-
+        settings.Columns.Add("estado", "Estado").Width = Unit.Percentage(5);
     });
 }
 @grid.Bind(Model).GetHtml()

@@ -1,0 +1,267 @@
+﻿@model Core.Erp.Info.Facturacion.fa_proforma_Info
+@{
+    ViewBag.Title = "Nueva proforma";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Nuevo", "Proforma", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdProforma)
+
+    <div class="modal fade" id="OpModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Lotes disponibles</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Action("GridViewPartial_LoteProforma")
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdSucursal">Sucursal*</label>
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdBodega">Bodega*</label>
+                    @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_descripcion"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="IdCliente">Cliente*</label>
+                    @Html.Partial("_CmbCliente_Proforma", Model)
+                    @Html.ValidationMessageFor(q => q.IdEntidad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="pr_dias_entrega">Días de entrega*</label>
+                    @Html.TextBoxFor(q => q.pr_dias_entrega, new { @class = "form-control", @id = "pr_dias_entrega" })
+                    @Html.ValidationMessageFor(q => q.pr_dias_entrega, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="pf_atencion_a">Atención a</label>
+                    @Html.TextBoxFor(q => q.pf_atencion_a, new { @class = "form-control", @id = "pf_atencion_a" })
+                    @Html.ValidationMessageFor(q => q.pf_atencion_a, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdVendedor">Vendedor*</label>
+                    @Html.DropDownListFor(q => q.IdVendedor, new SelectList(ViewBag.lst_vendedor, "IdVendedor", "Ve_Vendedor"), new { @class = "form-control", @id = "IdVendedor" })
+                    @Html.ValidationMessageFor(q => q.IdVendedor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdTerminoPago">Termino pago*</label>
+                    @Html.DropDownListFor(q => q.IdTerminoPago, new SelectList(ViewBag.lst_pago, "IdTerminoPago", "nom_TerminoPago"), new { @class = "form-control", @id = "IdTerminoPago" })
+                    @Html.ValidationMessageFor(q => q.IdTerminoPago, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="pf_fecha">Fecha*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.pf_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "pf_fecha" })
+                        @Html.ValidationMessageFor(q => q.pf_fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="pf_plazo">Plazo*</label>
+                    @Html.TextBoxFor(q => q.pf_plazo, new { @class = "form-control", @id = "pf_plazo" })
+                    @Html.ValidationMessageFor(q => q.pf_plazo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="pf_fecha_vcto">Vencimiento*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.pf_fecha_vcto, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "pf_fecha_vcto" })
+                        @Html.ValidationMessageFor(q => q.pf_fecha_vcto, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="pf_observacion">Observación</label>
+                    @Html.TextBoxFor(q => q.pf_observacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.pf_observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_proforma_det")
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Proforma",new { Area = "Facturacion" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+<script>
+    $(function () {
+        get_info_termino_pago();
+        get_info_cliente();
+
+        //Date picker
+        $('#pf_fecha').datepicker({
+            autoclose: true
+        })
+        $('#pf_fecha_vcto').datepicker({
+            autoclose: true
+        })
+        $("#IdTerminoPago").change(function () {
+            get_info_termino_pago();
+        });
+        $("#pf_plazo").change(function () {
+            cargar_fecha_vencimiento();
+        });
+        $("#pf_fecha").change(function () {
+            cargar_fecha_vencimiento();
+        });
+
+    });
+
+    function MostrarModal() {
+        GridView_LoteProforma.PerformCallback();
+        $("#OpModal").modal("show");
+    }
+
+    function SetLoteDetalle(ID) {
+
+        $.ajax({
+            url: '@Url.Action("ChangeValuePartial", "Proforma",new { Area = "Facturacion"})',
+            type: "GET",
+            data: { value: ID },
+            success: function (data) {
+                $('#ajaxDiv').html(data);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Request Status: ' + xhr.status + '; Status Text: ' + textStatus + '; Error: ' + errorThrown);
+            }
+        });
+
+        $("#OpModal").modal("hide");
+
+    }
+
+    function SeleccionarLote(s,e) {
+        var datos = {
+            IdSucursal: $("#IdSucursal").val(),
+            IdBodega: $("#IdBodega").val(),
+            IdProducto: s.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetLotesPorProducto", "Proforma",new { Area = "Facturacion"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridView_proforma_det.GetEditor('IdCod_Impuesto').SetValue(data.IdCod_Impuesto_Iva);
+                if (data.IdProducto_padre > 0) {
+                    MostrarModal();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function cargar_fecha_vencimiento() {
+        var vida = Number($("#pf_plazo").val());
+        var from = $("#pf_fecha").val().split("/")
+        var f = new Date(from[2], from[1] - 1, from[0])
+        $('#pf_fecha_vcto').datepicker("update", moment(f, "DD-MM-YYYY").add(vida, 'days').format("DD/MM/YYYY"));
+    }
+
+        function get_info_termino_pago() {
+        var datos = {
+            IdTerminoPago: $("#IdTerminoPago").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("get_info_termino_pago", "Proforma",new { Area = "Facturacion"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#pf_plazo").val(data.Dias_Vct);
+                cargar_fecha_vencimiento();
+            },
+            error: function (error) {
+
+            }
+        });
+    }
+        function get_info_cliente() {
+            var tipo = IdCliente.GetValue();
+
+            var datos = {
+                IdCliente: tipo,
+                IdSucursal: $("#IdSucursal").val()
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("get_info_cliente", "Proforma",new { Area = "Facturacion"})',
+                async: false,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $("#pf_atencion_a").val(data.info_persona.pe_nombreCompleto);
+                    $("#IdVendedor").val(data.IdVendedor);
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            });
+    }
+</script>

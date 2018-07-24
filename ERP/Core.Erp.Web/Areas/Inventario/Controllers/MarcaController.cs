@@ -57,7 +57,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public ActionResult Modificar(in_Marca_Info model)
         {
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            if(!bus_marca.modificarDB(model))
+
+         
+            if (!bus_marca.modificarDB(model))
             {
                 return View(model);
             }
@@ -77,6 +79,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public ActionResult Anular(in_Marca_Info model)
         {
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            if (bus_marca.si_esta_en_uso(model.IdEmpresa, model.IdMarca))
+            {
+                ViewBag.mensaje = "El registro " + model.Descripcion + ", esta en uso en productos";
+                return View(model);
+            }
             if (!bus_marca.anularDB(model))
             {
                 return View(model);

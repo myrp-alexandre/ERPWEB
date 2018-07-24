@@ -7,6 +7,8 @@
     //}
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
 @using (Html.BeginForm("Nuevo", "Producto", FormMethod.Post, new { @class = "form", @rolw = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
@@ -411,17 +413,6 @@
                        settings.ShowProgressPanel = true;
                    }).GetHtml()
                     
-
-                   
-
-
-
-
-
-
-
-
-
                 </div>                
             </div>
         </div>
@@ -881,6 +872,9 @@
             });
         }
     }
+
+
+
 
 </script>
 
