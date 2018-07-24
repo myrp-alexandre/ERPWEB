@@ -168,7 +168,7 @@ namespace Core.Erp.Data.Inventario
                 {
                     item.secuencia_distribucion = idsecuencia;
                     idsecuencia++;
-                    item.pr_descripcion = item.pr_descripcion+ "  "+item.lote_num_lote+"  "+(item.lote_fecha_vcto)==null?"":item.lote_fecha_vcto.ToString().Substring(0,10);
+                    item.pr_descripcion = item.pr_descripcion+ "  "+item.lote_num_lote+"  "+((item.lote_fecha_vcto)==null?"": Convert.ToDateTime(item.lote_fecha_vcto).ToString("dd/MM/yyyy"));
                 }
                 return Lista;
             }
