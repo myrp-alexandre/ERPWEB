@@ -274,13 +274,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             if(mostrar_imagen)
             {
-                FAC_006_imagen_Rpt model_ = new FAC_006_imagen_Rpt();
-                model_.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
-                model_.p_IdSucursal.Value = IdSucursal;
-                model_.p_IdProforma.Value = IdProforma;
-                model_.p_formato_hoja_membretada.Value = formato_hoja_membretada;
-                model_.RequestParameters = false;
-                return View(model_);
+                //FAC_006_imagen_Rpt model_ = new FAC_006_imagen_Rpt();
+                //model_.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+                //model_.p_IdSucursal.Value = IdSucursal;
+                //model_.p_IdProforma.Value = IdProforma;
+                //model_.p_formato_hoja_membretada.Value = formato_hoja_membretada;
+                //model_.RequestParameters = false;
+                return View();
             }
             else
             {

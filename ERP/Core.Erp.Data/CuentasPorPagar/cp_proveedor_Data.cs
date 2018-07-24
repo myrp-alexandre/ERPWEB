@@ -340,5 +340,64 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
+
+        #region metodo bajo demanda
+        public List<cp_proveedor_Info> get_list(int IdEmpresa, int skip, int take, string filter)
+        {
+            try
+            {
+                List<cp_proveedor_Info> Lista = new List<cp_proveedor_Info>();
+
+                Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar();
+
+                var lst = (from
+                          p in Context.vwcp_proveedor_consulta
+                          
+                           where
+                            p.IdEmpresa == IdEmpresa
+                         
+                           select new
+                           {
+                               p.IdEmpresa,
+                               p.IdPersona,
+                               p.IdProveedor,
+                               p.pe_nombreCompleto,
+                               p.pr_codigo,
+                               p.pe_cedulaRuc
+                           })
+                             .OrderBy(p => p.IdProveedor)
+                             .Skip(skip)
+                             .Take(take)
+                             .ToList();
+
+
+                foreach (var q in lst)
+                {
+                    Lista.Add(new cp_proveedor_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdPersona = q.IdPersona,
+                        //pr_descripcion = q.pr_descripcion,
+                        //pr_descripcion_2 = q.pr_descripcion_2,
+                        //pr_codigo = q.pr_codigo,
+                        //lote_num_lote = q.lote_num_lote,
+                        //lote_fecha_vcto = q.lote_fecha_vcto,
+                        //nom_categoria = q.ca_Categoria,
+                        //nom_presentacion = q.nom_presentacion
+                    });
+                }
+
+                Context.Dispose();
+              //  Lista = get_list_nombre_combo(Lista);
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        #endregion
     }
 }
