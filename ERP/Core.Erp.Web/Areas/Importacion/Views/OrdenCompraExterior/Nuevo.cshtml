@@ -1,34 +1,23 @@
-﻿@model Core.Erp.Info.Importacion.imp_gasto_Info
+﻿@model Core.Erp.Info.Importacion.imp_ordencompra_ext_Info
 @{
-    ViewBag.Title = "Nuevo gasto";
-    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
-    {
-        Response.Redirect("~/Account/Login");
-    }
+    ViewBag.Title = "Nueva orden compra al exterior";
+    //if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using (Html.BeginForm("Nuevo", "GastosImportacion", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "OrdenCompraExterior", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdGasto_tipo)
-    @Html.HiddenFor(q => q.info_gasto_cta.IdEmpresa)
+    @Html.HiddenFor(q => q.IdOrdenCompra_ext)
+    @Html.HiddenFor(q => q.IdEmpresa)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="info_gasto_cta.IdCtaCble">Cuenta contable*</label>
+                    <label for="info_gasto_cta.IdCtaCble">Proveedor*</label>
                     @Html.Partial("_CmbCuenta_Gasto", Model)
-                    @Html.ValidationMessageFor(q => q.info_gasto_cta.IdCtaCble, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="gt_descripcion">Descripción*</label>
-                    @Html.TextBoxFor(q => q.gt_descripcion, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.gt_descripcion, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -37,7 +26,7 @@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index", "GastosImportacion", new { Area ="Importacion" }, null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index", "OrdenCompraExterior", new { Area ="Importacion" }, null)">Cancelar</a>
     </div>
 
     @section Scripts {
