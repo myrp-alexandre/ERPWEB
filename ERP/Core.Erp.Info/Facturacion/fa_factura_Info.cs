@@ -64,7 +64,28 @@ namespace Core.Erp.Info.Facturacion
         #endregion
 
         #region Campos que no existen en la tabla
-        public List<fa_factura_det_Info> lst_det { get; set; }
+        public List<fa_factura_det_Info> lst_det { get; set; }        
         #endregion
+    }
+
+    public class fa_factura_consulta_Info
+    {
+        public string NomContacto { get; set; }
+        public string Ve_Vendedor { get; set; }
+        public Nullable<double> vt_Subtotal { get; set; }
+        public Nullable<double> vt_iva { get; set; }
+        public Nullable<double> vt_total { get; set; }
+        public Nullable<int> IdEmpresa_in_eg_x_inv { get; set; }
+        public Nullable<int> IdSucursal_in_eg_x_inv { get; set; }
+        public Nullable<int> IdMovi_inven_tipo_in_eg_x_inv { get; set; }
+        public Nullable<decimal> IdNumMovi_in_eg_x_inv { get; set; }
+        public int IdEmpresa { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdBodega { get; set; }
+        public decimal IdCbteVta { get; set; }
+        public DateTime vt_fecha { get; set; }
+        public string Estado { get; set; }
+        public bool? esta_impresa { get; set; }
+        public string vt_NumFactura { get; set; }
     }
 }

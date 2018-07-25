@@ -9,92 +9,46 @@ namespace Core.Erp.Data.Facturacion
 {
    public class fa_factura_Data
     {
-        public List<fa_factura_Info> get_list(int IdEmpresa, bool mostrar_anulados)
+        public List<fa_factura_consulta_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
             {
-                List<fa_factura_Info> Lista;
+                List<fa_factura_consulta_Info> Lista;
+                Fecha_ini = Fecha_ini.Date;
+                Fecha_fin = Fecha_fin.Date;
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
-                    if(mostrar_anulados)
-                    Lista = (from q in Context.fa_factura
+                    Lista = (from q in Context.vwfa_factura
                              where q.IdEmpresa == IdEmpresa
-                             select new fa_factura_Info
+                             && Fecha_ini <= q.vt_fecha && q.vt_fecha <= Fecha_fin
+                             select new fa_factura_consulta_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdSucursal = q.IdSucursal,
                                  IdBodega = q.IdBodega,
                                  IdCbteVta = q.IdCbteVta,
-                                 CodCbteVta = q.CodCbteVta,
-                                 vt_tipoDoc = q.vt_tipoDoc,
-                                 vt_serie1 = q.vt_serie1,
-                                 vt_serie2 = q.vt_serie2,
+
                                  vt_NumFactura = q.vt_NumFactura,
-                                 Fecha_Autorizacion = q.fecha_primera_cuota,
-                                 vt_anio = q.vt_anio,
-                                 vt_autorizacion = q.vt_autorizacion,
                                  vt_fecha = q.vt_fecha,
-                                 vt_fech_venc = q.vt_fech_venc,
-                                 vt_mes = q.vt_mes,
-                                 IdCliente = q.IdCliente,
-                                 IdContacto = q.IdContacto,
-                                 IdVendedor = q.IdVendedor,
-                                 vt_plazo = q.vt_plazo,
-                                 vt_Observacion = q.vt_Observacion,
-                                 IdPeriodo = q.IdPeriodo,
-                                 vt_tipo_venta = q.vt_tipo_venta,
-                                 IdCaja = q.IdCaja,
-                                 IdPuntoVta = q.IdPuntoVta,
-                                 fecha_primera_cuota = q.fecha_primera_cuota,
-                                 Fecha_Transaccion = q.fecha_primera_cuota,
+                                 NomContacto = q.Nombres,
+                                 Ve_Vendedor = q.Ve_Vendedor,
+                                 vt_Subtotal = q.vt_Subtotal,
+                                 vt_iva = q.vt_iva,
+                                 vt_total = q.vt_total,
                                  Estado = q.Estado,
                                  esta_impresa = q.esta_impresa,
-                                 valor_abono = q.valor_abono
-                                 
+
+                                 IdEmpresa_in_eg_x_inv = q.IdEmpresa_in_eg_x_inv,
+                                 IdSucursal_in_eg_x_inv = q.IdSucursal_in_eg_x_inv,
+                                 IdMovi_inven_tipo_in_eg_x_inv = q.IdMovi_inven_tipo_in_eg_x_inv,
+                                 IdNumMovi_in_eg_x_inv = q.IdNumMovi_in_eg_x_inv,
 
                              }).ToList();
-                    else Lista = (from q in Context.fa_factura
-                                  where q.IdEmpresa == IdEmpresa
-                                  && q.Estado == "A"
-                                  select new fa_factura_Info
-                                  {
-
-                                      IdEmpresa = q.IdEmpresa,
-                                      IdSucursal = q.IdSucursal,
-                                      IdBodega = q.IdBodega,
-                                      IdCbteVta = q.IdCbteVta,
-                                      CodCbteVta = q.CodCbteVta,
-                                      vt_tipoDoc = q.vt_tipoDoc,
-                                      vt_serie1 = q.vt_serie1,
-                                      vt_serie2 = q.vt_serie2,
-                                      vt_NumFactura = q.vt_NumFactura,
-                                      Fecha_Autorizacion = q.fecha_primera_cuota,
-                                      vt_anio = q.vt_anio,
-                                      vt_autorizacion = q.vt_autorizacion,
-                                      vt_fecha = q.vt_fecha,
-                                      vt_fech_venc = q.vt_fech_venc,
-                                      vt_mes = q.vt_mes,
-                                      IdCliente = q.IdCliente,
-                                      IdContacto = q.IdContacto,
-                                      IdVendedor = q.IdVendedor,
-                                      vt_plazo = q.vt_plazo,
-                                      vt_Observacion = q.vt_Observacion,
-                                      IdPeriodo = q.IdPeriodo,
-                                      vt_tipo_venta = q.vt_tipo_venta,
-                                      IdCaja = q.IdCaja,
-                                      IdPuntoVta = q.IdPuntoVta,
-                                      fecha_primera_cuota = q.fecha_primera_cuota,
-                                      Fecha_Transaccion = q.fecha_primera_cuota,
-                                      Estado = q.Estado,
-                                      esta_impresa = q.esta_impresa,
-                                      valor_abono = q.valor_abono
-                                  }).ToList();
                 }
                 return Lista;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
