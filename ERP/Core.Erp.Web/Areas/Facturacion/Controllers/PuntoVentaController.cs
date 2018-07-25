@@ -21,12 +21,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_puntoventa(int IdSucursal = 0, int IdBodega = 0)
+        public ActionResult GridViewPartial_puntoventa()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<fa_PuntoVta_Info> model = bus_punto.get_list(IdEmpresa, IdSucursal, IdBodega);
-            ViewBag.IdSucursal = IdSucursal;
-            ViewBag.Idbodega = IdBodega;
+            List<fa_PuntoVta_Info> model = bus_punto.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_puntoventa", model);
         }
         private void cargar_combos( fa_PuntoVta_Info model)
@@ -45,15 +43,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             lst_signos.Add("+", "+");
             ViewBag.lst_signos = lst_signos;
         }
-        public ActionResult Nuevo(int IdSucursal = 0, int IdBodega = 0)
+        public ActionResult Nuevo()
         {
-            fa_PuntoVta_Info model = new fa_PuntoVta_Info
-            {
-                IdSucursal = IdSucursal,
-                IdBodega = IdBodega
-            };
-            ViewBag.IdSucursal = IdSucursal;
-            ViewBag.IdBodega = IdBodega;
+            fa_PuntoVta_Info model = new fa_PuntoVta_Info();
             cargar_combos(model);
             return View(model);
         }
@@ -69,16 +61,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 cargar_combos(model);
                 return View(model);
             }
-            return RedirectToAction("Index", new { IdSucursal = model.IdSucursal, IdBodega = model.IdBodega });
+            return RedirectToAction("Index");
         }
-        public ActionResult Modificar(int IdSucursal = 0, int IdBodega = 0,int IdPuntoVta = 0)
+        public ActionResult Modificar(int IdSucursal = 0, int IdPuntoVta = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             fa_PuntoVta_Info model = bus_punto.get_info(IdEmpresa,IdSucursal, IdPuntoVta);
             if (model == null)
-            return RedirectToAction("Index", new { IdSucursal = IdSucursal, IdBodega = IdBodega });
-                ViewBag.IdSucursal = IdSucursal;
-                ViewBag.IdBodega = IdBodega;
+            return RedirectToAction("Index");
                 cargar_combos(model);
             return View(model);
         }
@@ -94,17 +84,15 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 cargar_combos(model);
                 return View(model);
             }
-            return RedirectToAction("Index", new { IdSucursal = model.IdSucursal, IdBodega = model.IdBodega });
+            return RedirectToAction("Index");
         }
-        public ActionResult Anular(int IdSucursal = 0, int IdBodega = 0, int IdPuntoVta = 0)
+        public ActionResult Anular(int IdSucursal = 0, int IdPuntoVta = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             fa_PuntoVta_Info model = bus_punto.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
             if (model == null)
             {
-                ViewBag.IdSucursal = IdSucursal;
-                ViewBag.IdBodega = IdBodega;
-                return RedirectToAction("Index", new { IdSucursal = IdSucursal, IdBodega = IdBodega});
+                return RedirectToAction("Index");
             }
                 cargar_combos(model);
             return View(model);
@@ -116,12 +104,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_punto.anularDB(model))
             {
-                ViewBag.IdSucursal = model.IdSucursal;
-                ViewBag.IdBodega = model.IdBodega;
                 cargar_combos(model);
                 return View(model);
             }
-            return RedirectToAction("Index", new { IdSucursal = model.IdSucursal, IdBodega = model.IdBodega });
+            return RedirectToAction("Index");
         }
 
         #region Json

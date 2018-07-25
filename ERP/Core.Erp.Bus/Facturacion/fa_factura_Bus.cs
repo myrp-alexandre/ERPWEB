@@ -2,20 +2,17 @@
 using Core.Erp.Info.Facturacion;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Facturacion
 {
     public class fa_factura_Bus
     {
         fa_factura_Data odata = new fa_factura_Data();
-        public List<fa_factura_Info> get_list(int IdEmpresa, bool mostrar_anulados)
+        public List<fa_factura_consulta_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
             {
-                return odata.get_list(IdEmpresa, mostrar_anulados);
+                return odata.get_list(IdEmpresa, Fecha_ini,Fecha_fin);
             }
             catch (Exception)
             {
