@@ -7,11 +7,11 @@ namespace Core.Erp.Bus.RRHH
     public class ro_catalogoTipo_Bus
     {
         ro_catalogoTipo_Data odata = new ro_catalogoTipo_Data();
-        public List<ro_catalogoTipo_Info> get_list( bool estado)
+        public List<ro_catalogoTipo_Info> get_list( bool mostrar_anulados)
         {
             try
             {
-                return odata.get_list( estado);
+                return odata.get_list( mostrar_anulados);
             }
             catch (Exception)
             {
