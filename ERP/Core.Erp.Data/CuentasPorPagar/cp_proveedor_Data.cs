@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Data.General;
 using Core.Erp.Info.CuentasPorPagar;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -341,7 +342,55 @@ namespace Core.Erp.Data.CuentasPorPagar
             }
         }
 
-        #region metodo bajo demanda
+
+
+        #region metodo baja demanda
+
+        public List<cp_proveedor_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<cp_proveedor_Info> Lista = new List<cp_proveedor_Info>();
+            Lista = get_list(IdEmpresa, skip, take, args.Filter);
+
+            return Lista;
+        }
+
+        public cp_proveedor_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            decimal id;
+            if (args.Value == null || !decimal.TryParse(args.Value.ToString(), out id))
+                return null;
+            return get_info_demanda(IdEmpresa, Convert.ToDecimal(args.Value));
+        }
+
+        public cp_proveedor_Info get_info_demanda(int IdEmpresa, decimal IdProducto)
+        {
+            cp_proveedor_Info info = new cp_proveedor_Info();
+
+            using (Entities_cuentas_por_pagar Contex = new Entities_cuentas_por_pagar())
+            {
+                info = (from q in Contex.vwcp_proveedor_consulta
+                      
+                        select new cp_proveedor_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdPersona = q.IdPersona,
+                            IdProveedor = q.IdProveedor,
+                            pr_codigo = q.pr_codigo,
+                            info_persona = new Info.General.tb_persona_Info
+                            {
+                                pe_cedulaRuc=q.pe_cedulaRuc,
+                                pe_nombreCompleto=q.pe_nombreCompleto
+                            }
+                           
+                        }).FirstOrDefault();
+
+            }
+          
+            return info;
+        }
+
         public List<cp_proveedor_Info> get_list(int IdEmpresa, int skip, int take, string filter)
         {
             try
@@ -355,33 +404,38 @@ namespace Core.Erp.Data.CuentasPorPagar
                           
                            where
                             p.IdEmpresa == IdEmpresa
-                         
+                           
+                            && (p.IdProveedor.ToString() + " " + p.pe_nombreCompleto).Contains(filter)
                            select new
                            {
                                p.IdEmpresa,
                                p.IdPersona,
                                p.IdProveedor,
-                               p.pe_nombreCompleto,
+                               p.pe_cedulaRuc,
                                p.pr_codigo,
-                               p.pe_cedulaRuc
+                               p.pe_nombreCompleto
+                             
                            })
                              .OrderBy(p => p.IdProveedor)
                              .Skip(skip)
                              .Take(take)
                              .ToList();
+
+
                 foreach (var q in lst)
                 {
                     Lista.Add(new cp_proveedor_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdPersona = q.IdPersona,
+                        IdProveedor = q.IdProveedor,
+                        pr_codigo=q.pr_codigo,
                         info_persona=new Info.General.tb_persona_Info
                         {
                             pe_cedulaRuc=q.pe_cedulaRuc,
                             pe_nombreCompleto=q.pe_nombreCompleto,
-                            CodPersona=q.pr_codigo
-                            
                         }
+                        
                     });
                 }
 
@@ -394,35 +448,10 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-        public cp_proveedor_Info get_info_demanda(int IdEmpresa, decimal IdProveedor)
-        {
-            cp_proveedor_Info info = new cp_proveedor_Info();
-
-            using (Entities_cuentas_por_pagar Contex = new Entities_cuentas_por_pagar())
-            {
-                info = (from q in Contex.vwcp_proveedor_consulta
-                        where q.IdEmpresa == IdEmpresa 
-                        && q.IdProveedor ==   IdProveedor
-
-                        select new cp_proveedor_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdProveedor = q.IdProveedor,
-                            info_persona=new Info.General.tb_persona_Info
-                            {
-                                pe_cedulaRuc=q.pe_cedulaRuc,
-                                pe_nombreCompleto=q.pe_nombreCompleto,
-                            },
-                             pr_codigo = q.pr_codigo
-
-                        }).FirstOrDefault();
-
-            }
-           
-
-            return info;
-        }
 
         #endregion
+
+
+
     }
 }

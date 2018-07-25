@@ -80,6 +80,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         co_subtotal_iva=Entity.co_subtotal_iva,
                         co_subtotal_siniva=Entity.co_subtotal_siniva,
                         co_valoriva=Entity.co_valoriva,
+                        pe_razonSocial=Entity.pe_razonSocial,
                         
                         
                     };
