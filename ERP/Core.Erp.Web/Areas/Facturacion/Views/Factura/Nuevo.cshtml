@@ -46,18 +46,11 @@
                     @Html.ValidationMessageFor(q => q.IdPuntoVta, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdCliente">Cliente*</label>
                     @Html.Partial("_CmbCliente_Factura", Model)
                     @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdClienteContacto">Contacto</label>
-                    @Html.DropDownListFor(q => q.IdContacto, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres"), new { @class = "form-control", @id = "IdContacto" })
-                    @Html.ValidationMessageFor(q => q.IdContacto, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-6">
@@ -67,52 +60,11 @@
                     @Html.ValidationMessageFor(q => q.IdVendedor, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-6">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdTerminoPago">Termino pago*</label>
-                    @Html.DropDownListFor(q => q.vt_tipo_venta, new SelectList(ViewBag.lst_pago, "IdTerminoPago", "nom_TerminoPago"), new { @class = "form-control", @id = "IdTerminoPago" })
-                    @Html.ValidationMessageFor(q => q.vt_tipo_venta, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdTerminoPago">Termino pago*</label>
-                    @Html.DropDownListFor(q => q.vt_tipo_venta, new SelectList(ViewBag.lst_pago, "IdTerminoPago", "nom_TerminoPago"), new { @class = "form-control", @id = "IdTerminoPago" })
-                    @Html.ValidationMessageFor(q => q.vt_tipo_venta, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="pf_fecha">Fecha*</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.TextBoxFor(q => q.vt_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "vt_fecha" })
-                        @Html.ValidationMessageFor(q => q.vt_fecha, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="pf_plazo">Plazo*</label>
-                    @Html.TextBoxFor(q => q.vt_plazo, new { @class = "form-control", @id = "pf_plazo" })
-                    @Html.ValidationMessageFor(q => q.vt_plazo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="pf_fecha_vcto">Vencimiento*</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.TextBoxFor(q => q.vt_fech_venc, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "vt_fech_venc" })
-                        @Html.ValidationMessageFor(q => q.vt_fech_venc, "", new { @class = "text-danger" })
-                    </div>
+                    <label for="IdClienteContacto">Contacto</label>
+                    @Html.DropDownListFor(q => q.IdContacto, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres"), new { @class = "form-control", @id = "IdContacto" })
+                    @Html.ValidationMessageFor(q => q.IdContacto, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-12">
@@ -120,6 +72,72 @@
                     <label for="pf_observacion">Observación</label>
                     @Html.TextBoxFor(q => q.vt_Observacion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.vt_Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+
+
+            <div id="Tabs" role="tabpanel">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active">
+                        <a href="#tab_general" aria-controls="general" role="tab" data-toggle="tab" id="link_general">Datos generales</a>
+                    </li>
+                    <li>
+                        <a href="#tab_cuotas" aria-controls="lote" role="tab" data-toggle="tab" id="link_cuotas">Detalle de cuotas</a>
+                    </li>
+                </ul>
+                <div class="tab-content" style="padding-top: 20px">
+                    <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_general">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="IdFormaPago">Forma de pago*</label>
+                                @Html.DropDownListFor(q => q.IdFormaPago, new SelectList(ViewBag.lst_forma_pago, "IdFormaPago", "nom_FormaPago"), new { @class = "form-control", @id = "IdFormaPago" })
+                                @Html.ValidationMessageFor(q => q.IdFormaPago, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="IdTerminoPago">Termino pago*</label>
+                                @Html.DropDownListFor(q => q.vt_tipo_venta, new SelectList(ViewBag.lst_pago, "IdTerminoPago", "nom_TerminoPago"), new { @class = "form-control", @id = "vt_tipo_venta" })
+                                @Html.ValidationMessageFor(q => q.vt_tipo_venta, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="pf_fecha">Fecha*</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.TextBoxFor(q => q.vt_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "vt_fecha" })
+                                    @Html.ValidationMessageFor(q => q.vt_fecha, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="pf_plazo">Plazo*</label>
+                                @Html.TextBoxFor(q => q.vt_plazo, new { @class = "form-control", @id = "vt_plazo" })
+                                @Html.ValidationMessageFor(q => q.vt_plazo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="pf_fecha_vcto">Vencimiento*</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.TextBoxFor(q => q.vt_fech_venc, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "vt_fech_venc" })
+                                    @Html.ValidationMessageFor(q => q.vt_fech_venc, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                    <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_cuotas">
+                    </div>
                 </div>
             </div>
         </div>
@@ -132,19 +150,19 @@
         </div>
     </div>
 
-    <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","Factura",new { Area = "Facturacion" },null)">Cancelar</a>
-    </div>
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
-}
-<script>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a class="btn btn-default" href="@Url.Action("Index","Factura",new { Area = "Facturacion" },null)">Cancelar</a>
+                </div>
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }
+                }
+                <script>
     $(function () {
         CargarPuntosDeVenta();
         get_info_termino_pago();
-        get_info_cliente();        
+        get_info_cliente();
         //Date picker
         $('#vt_fecha').datepicker({
             autoclose: true
@@ -152,7 +170,7 @@
         $('#vt_fech_venc').datepicker({
             autoclose: true
         })
-        $("#IdTerminoPago").change(function () {
+        $("#vt_tipo_venta").change(function () {
             get_info_termino_pago();
         });
         $("#vt_plazo").change(function () {
@@ -224,7 +242,7 @@
 
         function get_info_termino_pago() {
         var datos = {
-            IdTerminoPago: $("#IdTerminoPago").val()
+            IdTerminoPago: $("#vt_tipo_venta").val()
         }
         $.ajax({
             type: 'POST',
@@ -260,6 +278,9 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 $("#IdVendedor").val(data.IdVendedor);
+                $("#IdFormaPago").val(data.FormaPago);
+                $("#vt_tipo_venta").val(data.IdTipoCredito);
+                get_info_termino_pago();
             },
             error: function (error) {
                 alert(error);
@@ -315,5 +336,5 @@
             }
         });
     }
-    
-</script>
+
+                </script>

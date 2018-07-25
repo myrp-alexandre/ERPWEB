@@ -44,5 +44,9 @@ namespace Core.Erp.Data
         public virtual DbSet<vwfa_proforma_det_por_facturar> vwfa_proforma_det_por_facturar { get; set; }
         public virtual DbSet<vwfa_proforma_det> vwfa_proforma_det { get; set; }
         public virtual DbSet<vwfa_factura> vwfa_factura { get; set; }
+        public virtual DbSet<fa_cuotas_x_doc> fa_cuotas_x_doc { get; set; }
+        public virtual DbSet<fa_factura_x_ct_cbtecble> fa_factura_x_ct_cbtecble { get; set; }
+        public virtual DbSet<fa_factura_x_formaPago> fa_factura_x_formaPago { get; set; }
+        public virtual DbSet<fa_factura_x_in_Ing_Egr_Inven> fa_factura_x_in_Ing_Egr_Inven { get; set; }
     }
 }

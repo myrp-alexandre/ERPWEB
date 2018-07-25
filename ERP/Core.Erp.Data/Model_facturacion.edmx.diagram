@@ -41,6 +41,15 @@
         <EntityTypeShape EntityType="Model_facturacion.vwfa_proforma_det_por_facturar" Width="1.5" PointX="12.375" PointY="10.75" />
         <EntityTypeShape EntityType="Model_facturacion.vwfa_proforma_det" Width="1.5" PointX="0.75" PointY="13.75" />
         <EntityTypeShape EntityType="Model_facturacion.vwfa_factura" Width="1.5" PointX="14.375" PointY="10.75" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_cuotas_x_doc" Width="1.5" PointX="20.375" PointY="12.75" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_factura_x_ct_cbtecble" Width="1.5" PointX="20.375" PointY="16.5" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_factura_x_formaPago" Width="1.5" PointX="23.375" PointY="7.5" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_factura_x_in_Ing_Egr_Inven" Width="1.5" PointX="20.375" PointY="0.75" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_cuotas_x_doc_fa_factura" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_factura_x_ct_cbtecble_fa_factura" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_factura_x_formaPago_fa_factura" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_factura_x_in_Ing_Egr_Inven_fa_factura" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_factura_x_formaPago_fa_formaPago" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
