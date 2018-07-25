@@ -1,6 +1,7 @@
 ﻿using Core.Erp.Data.CuentasPorPagar;
 using Core.Erp.Data.General;
 using Core.Erp.Info.CuentasPorPagar;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 
@@ -104,6 +105,18 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
+
+
+        //public List<cp_proveedor_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, cl_enumeradores.eTipoBusquedaProducto Busqueda, cl_enumeradores.eModulo Modulo, decimal IdProductoPadre)
+        //{
+        //    return odata.get_list_bajo_demanda(args, IdEmpresa, Busqueda, Modulo, IdProductoPadre);
+        //}
+
+        //public cp_proveedor_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        //{
+        //    return odata.get_info_bajo_demanda(args, IdEmpresa);
+        //}
+
 
     }
 }

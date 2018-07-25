@@ -369,26 +369,23 @@ namespace Core.Erp.Data.CuentasPorPagar
                              .Skip(skip)
                              .Take(take)
                              .ToList();
-
-
                 foreach (var q in lst)
                 {
                     Lista.Add(new cp_proveedor_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdPersona = q.IdPersona,
-                        //pr_descripcion = q.pr_descripcion,
-                        //pr_descripcion_2 = q.pr_descripcion_2,
-                        //pr_codigo = q.pr_codigo,
-                        //lote_num_lote = q.lote_num_lote,
-                        //lote_fecha_vcto = q.lote_fecha_vcto,
-                        //nom_categoria = q.ca_Categoria,
-                        //nom_presentacion = q.nom_presentacion
+                        info_persona=new Info.General.tb_persona_Info
+                        {
+                            pe_cedulaRuc=q.pe_cedulaRuc,
+                            pe_nombreCompleto=q.pe_nombreCompleto,
+                            CodPersona=q.pr_codigo
+                            
+                        }
                     });
                 }
 
                 Context.Dispose();
-              //  Lista = get_list_nombre_combo(Lista);
                 return Lista;
             }
             catch (Exception)
@@ -396,6 +393,34 @@ namespace Core.Erp.Data.CuentasPorPagar
 
                 throw;
             }
+        }
+        public cp_proveedor_Info get_info_demanda(int IdEmpresa, decimal IdProveedor)
+        {
+            cp_proveedor_Info info = new cp_proveedor_Info();
+
+            using (Entities_cuentas_por_pagar Contex = new Entities_cuentas_por_pagar())
+            {
+                info = (from q in Contex.vwcp_proveedor_consulta
+                        where q.IdEmpresa == IdEmpresa 
+                        && q.IdProveedor ==   IdProveedor
+
+                        select new cp_proveedor_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdProveedor = q.IdProveedor,
+                            info_persona=new Info.General.tb_persona_Info
+                            {
+                                pe_cedulaRuc=q.pe_cedulaRuc,
+                                pe_nombreCompleto=q.pe_nombreCompleto,
+                            },
+                             pr_codigo = q.pr_codigo
+
+                        }).FirstOrDefault();
+
+            }
+           
+
+            return info;
         }
 
         #endregion
