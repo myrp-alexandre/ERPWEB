@@ -36,6 +36,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         fa_cliente_x_fa_Vendedor_x_sucursal_Bus bus_v_x_c = new fa_cliente_x_fa_Vendedor_x_sucursal_Bus();
         fa_formaPago_Bus bus_forma_pago = new fa_formaPago_Bus();
+        fa_cuotas_x_doc_List List_cuotas = new fa_cuotas_x_doc_List();
+        fa_TerminoPago_Distribucion_Bus bus_termino_pago_distribucion = new fa_TerminoPago_Distribucion_Bus();
         #endregion
 
         public ActionResult Index()
@@ -147,7 +149,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var resultado = bus_contacto.get_list(IdEmpresa, IdCliente);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-
         public JsonResult CargarPuntosDeVenta(int IdSucursal = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -200,8 +201,31 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        #endregion
 
+        public void CargarCuotas(DateTime? FechaPrimerPago, string IdTerminoPago = "", double PrimerPago = 0)
+        {
+            List<fa_cuotas_x_doc_Info> lst_cuotas = new List<fa_cuotas_x_doc_Info>();
+            if (FechaPrimerPago != null)
+            {
+                var lst_distribucion = bus_termino_pago_distribucion.get_list(IdTerminoPago);
+                int Secuencia = 1;
+                int NumCuotas = lst_distribucion.Count;
+                double totalAux = Math.Round(List_det.get_list().Sum(q => q.vt_total) - PrimerPago, 2, MidpointRounding.AwayFromZero);
+                DateTime FechaPagosAcum = Convert.ToDateTime(FechaPrimerPago);
+                foreach (var item in lst_distribucion)
+                {
+                    lst_cuotas.Add(new fa_cuotas_x_doc_Info
+                    {
+                        secuencia = Secuencia,
+                        num_cuota = Secuencia++,
+                        valor_a_cobrar = Math.Round(totalAux * (item.Por_distribucion / 100), 2, MidpointRounding.AwayFromZero),
+                        fecha_vcto_cuota = FechaPagosAcum.AddDays(item.Num_Dias_Vcto)
+                    });
+                }
+            }            
+            List_cuotas.set_list(lst_cuotas);
+        }
+        #endregion
 
         #region Acciones
         public ActionResult Nuevo()
@@ -236,6 +260,28 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 return View(model);
             };
             return RedirectToAction("Index");
+        }
+        #endregion
+
+        #region Cuotas
+        public ActionResult GridViewPartial_factura_cuotas()
+        {
+            var model = List_cuotas.get_list();
+            return PartialView("_GridViewPartial_factura_cuotas", model);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdateCuota([ModelBinder(typeof(DevExpressEditorsBinder))] fa_cuotas_x_doc_Info info_det)
+        {
+            List_cuotas.UpdateRow(info_det);
+            var model = List_cuotas.get_list();
+            return PartialView("_GridViewPartial_factura_cuotas", model);
+        }
+
+        public ActionResult EditingDelete(int Secuencia)
+        {
+            List_cuotas.DeleteRow(Secuencia);
+            var model = List_cuotas.get_list();            
+            return PartialView("_GridViewPartial_factura_cuotas", model);
         }
         #endregion
 
@@ -419,6 +465,43 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             List<fa_factura_det_Info> list = get_list();
             list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
+        }
+    }
+
+    public class fa_cuotas_x_doc_List
+    {
+        public List<fa_cuotas_x_doc_Info> get_list()
+        {
+            if (HttpContext.Current.Session["fa_cuotas_x_doc_Info"] == null)
+            {
+                List<fa_cuotas_x_doc_Info> list = new List<fa_cuotas_x_doc_Info>();
+
+                HttpContext.Current.Session["fa_cuotas_x_doc_Info"] = list;
+            }
+            return (List<fa_cuotas_x_doc_Info>)HttpContext.Current.Session["fa_cuotas_x_doc_Info"];
+        }
+
+        public void set_list(List<fa_cuotas_x_doc_Info> list)
+        {
+            HttpContext.Current.Session["fa_cuotas_x_doc_Info"] = list;
+        }
+
+        public void AddRow(fa_cuotas_x_doc_Info info_det)
+        {
+            List<fa_cuotas_x_doc_Info> list = get_list();
+            info_det.secuencia = list.Count == 0 ? 1 : list.Max(q => q.secuencia) + 1;
+            list.Add(info_det);
+        }
+
+        public void UpdateRow(fa_cuotas_x_doc_Info info_det)
+        {
+            fa_cuotas_x_doc_Info edited_info = get_list().Where(m => m.secuencia == info_det.secuencia).First();
+        }
+
+        public void DeleteRow(int secuencia)
+        {
+            List<fa_cuotas_x_doc_Info> list = get_list();
+            list.Remove(list.Where(m => m.secuencia == secuencia).First());
         }
     }
 }

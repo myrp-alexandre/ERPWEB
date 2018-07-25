@@ -144,6 +144,7 @@
     <Compile Include="Facturacion\fa_cliente_Info.cs" />
     <Compile Include="Facturacion\fa_cliente_tipo_Info.cs" />
     <Compile Include="Facturacion\fa_cliente_x_fa_Vendedor_x_sucursal_Info.cs" />
+    <Compile Include="Facturacion\fa_cuotas_x_doc_Info.cs" />
     <Compile Include="Facturacion\fa_factura_det_Info.cs" />
     <Compile Include="Facturacion\fa_factura_Info.cs" />
     <Compile Include="Facturacion\fa_formaPago_Info.cs" />
