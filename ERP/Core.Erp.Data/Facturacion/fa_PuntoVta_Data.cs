@@ -54,6 +54,52 @@ namespace Core.Erp.Data.Facturacion
             }
         }
 
+        public List<fa_PuntoVta_Info> get_list(int IdEmpresa, int IdSucursal, bool mostrar_anulados)
+        {
+            try
+            {
+                List<fa_PuntoVta_Info> Lista;
+                using (Entities_facturacion Context = new Entities_facturacion())
+                {
+                    if (!mostrar_anulados)
+                        Lista = (from q in Context.fa_PuntoVta
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.IdSucursal == IdSucursal
+                                 && q.estado == true
+                                 select new fa_PuntoVta_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdSucursal = q.IdSucursal,
+                                     IdBodega = q.IdBodega,
+                                     IdPuntoVta = q.IdPuntoVta,
+                                     cod_PuntoVta = q.cod_PuntoVta,
+                                     nom_PuntoVta = q.nom_PuntoVta,
+                                     estado = q.estado
+
+                                 }).ToList();
+                    else
+                        Lista = (from q in Context.fa_PuntoVta
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.IdSucursal == IdSucursal
+                                 select new fa_PuntoVta_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdSucursal = q.IdSucursal,
+                                     IdBodega = q.IdBodega,
+                                     IdPuntoVta = q.IdPuntoVta,
+                                     cod_PuntoVta = q.cod_PuntoVta,
+                                     nom_PuntoVta = q.nom_PuntoVta,
+                                     estado = q.estado
+                                 }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public fa_PuntoVta_Info get_info(int IdEmpresa, int IdSucursal, int IdPuntoVta)
         {
             try
