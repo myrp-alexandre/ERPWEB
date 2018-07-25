@@ -119,6 +119,7 @@
     <Compile Include="Facturacion\fa_cliente_contactos_Bus.cs" />
     <Compile Include="Facturacion\fa_cliente_tipo_Bus.cs" />
     <Compile Include="Facturacion\fa_cliente_x_fa_Vendedor_x_sucursal_Bus.cs" />
+    <Compile Include="Facturacion\fa_cuotas_x_doc_Bus.cs" />
     <Compile Include="Facturacion\fa_factura_Bus.cs" />
     <Compile Include="Facturacion\fa_factura_det_Bus.cs" />
     <Compile Include="Facturacion\fa_formaPago_Bus.cs" />

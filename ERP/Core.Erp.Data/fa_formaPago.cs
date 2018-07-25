@@ -18,6 +18,7 @@ namespace Core.Erp.Data
         public fa_formaPago()
         {
             this.fa_cliente = new HashSet<fa_cliente>();
+            this.fa_factura_x_formaPago = new HashSet<fa_factura_x_formaPago>();
         }
     
         public string IdFormaPago { get; set; }
@@ -25,5 +26,7 @@ namespace Core.Erp.Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_cliente> fa_cliente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fa_factura_x_formaPago> fa_factura_x_formaPago { get; set; }
     }
 }

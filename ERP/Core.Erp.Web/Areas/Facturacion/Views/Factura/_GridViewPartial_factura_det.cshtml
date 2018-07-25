@@ -2,15 +2,15 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridView_proforma_det";
-        settings.CallbackRouteValues = new { Controller = "Proforma", Action = "GridViewPartial_proforma_det", Area = "Facturacion"};
+        settings.Name = "GridView_factura_det";
+        settings.CallbackRouteValues = new { Controller = "Factura", Action = "GridViewPartial_factura_det", Area = "Facturacion"};
         settings.KeyFieldName = "Secuencia";
 
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Proforma", Action = "EditingAddNew", Area = "Facturacion" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Proforma", Action = "EditingUpdate", Area = "Facturacion" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Proforma", Action = "EditingDelete", Area = "Facturacion" };
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Factura", Action = "EditingAddNew", Area = "Facturacion" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Factura", Action = "EditingUpdate", Area = "Facturacion" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Factura", Action = "EditingDelete", Area = "Facturacion" };
 
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -35,10 +35,10 @@
         settings.InitNewRow = (s, e) =>
         {
             e.NewValues["IdProducto"] = 0;
-            e.NewValues["IdCod_Impuesto"] = "IVA0";
-            e.NewValues["pd_cantidad"] = 0;
-            e.NewValues["pd_precio"] = 0;
-            e.NewValues["pd_por_descuento_uni"] = 0;
+            e.NewValues["IdCod_Impuesto_Iva"] = "IVA0";
+            e.NewValues["vt_cantidad"] = 0;
+            e.NewValues["vt_Precio"] = 0;
+            e.NewValues["vt_PorDescUnitario"] = 0;
         };
 
         settings.Columns.Add(column =>
@@ -59,14 +59,14 @@
             column.SetEditItemTemplateContent(c =>
             {
                 ViewContext.Writer.Write("<div id='ajaxDiv'>");
-                Html.RenderPartial("_CmbProducto_Proforma", DataBinder.Eval(c.DataItem, "IdProducto"));
+                Html.RenderPartial("_CmbProducto_Factura", DataBinder.Eval(c.DataItem, "IdProducto"));
                 ViewContext.Writer.Write("</div>");
             });
         });
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "pd_cantidad";
+            column.FieldName = "vt_cantidad";
             column.Caption = "cantidad";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(10);
@@ -78,9 +78,9 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "pd_precio";
+            column.FieldName = "vt_Precio";
             column.Caption = "Precio";
-            column.PropertiesEdit.DisplayFormatString = "{0:c2}";
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(10);
             column.EditorProperties().SpinEdit(q =>
             {
@@ -91,7 +91,7 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "pd_por_descuento_uni";
+            column.FieldName = "vt_PorDescUnitario";
             column.Caption = "% Desc. uni.";
             column.Width = Unit.Percentage(10);
             column.EditorProperties().SpinEdit(q =>
@@ -103,7 +103,7 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdCod_Impuesto";
+            column.FieldName = "IdCod_Impuesto_Iva";
             column.Caption = "Impuesto";
             column.Width = Unit.Percentage(60);
             column.Visible = false;
@@ -119,42 +119,42 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "pd_precio_final";
+            column.FieldName = "vt_PrecioFinal";
             column.Caption = "Precio final";
-            column.PropertiesEdit.DisplayFormatString = "{0:c2}";
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "pd_subtotal";
+            column.FieldName = "vt_Subtotal";
             column.Caption = "Subtotal";
-            column.PropertiesEdit.DisplayFormatString = "{0:c2}";
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "pd_iva";
+            column.FieldName = "vt_iva";
             column.Caption = "I.V.A.";
-            column.PropertiesEdit.DisplayFormatString = "{0:c2}";
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "pd_total";
+            column.FieldName = "vt_total";
             column.Caption = "Total";
-            column.PropertiesEdit.DisplayFormatString = "{0:c2}";
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
         settings.ClientSideEvents.BeginCallback = "function(s,e){e.customArgs['IdCliente'] = IdCliente.GetValue();}";
 
-        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "pd_subtotal").DisplayFormat = "{0:c2}";
-        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "pd_iva").DisplayFormat = "{0:c2}";
-        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "pd_total").DisplayFormat = "{0:c2}";
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "vt_Subtotal").DisplayFormat = "{0:n2}";
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "vt_iva").DisplayFormat = "{0:n2}";
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "vt_total").DisplayFormat = "{0:n2}";
         settings.Settings.ShowFooter = true;
     });
 }

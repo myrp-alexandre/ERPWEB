@@ -20,6 +20,18 @@ namespace Core.Erp.Bus.Facturacion
                 throw;
             }
         }
+
+        public List<fa_PuntoVta_Info> get_list(int IdEmpresa, int IdSucursal, bool mostrar_anulados)
+        {
+            try
+            {
+                return odata.get_list(IdEmpresa, IdSucursal, mostrar_anulados);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
             public fa_PuntoVta_Info get_info(int IdEmpresa, int IdSucursal, int IdPuntoVta)
         {
             try

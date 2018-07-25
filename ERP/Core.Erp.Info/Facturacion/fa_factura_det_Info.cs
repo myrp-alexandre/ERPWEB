@@ -35,5 +35,10 @@ namespace Core.Erp.Info.Facturacion
         public Nullable<int> IdSucursal_pf { get; set; }
         public Nullable<decimal> IdProforma { get; set; }
         public Nullable<int> Secuencia_pf { get; set; }
+        
+        #region Campos que no existen en la tabla
+        public string pr_descripcion { get; set; }
+        #endregion
+
     }
 }
