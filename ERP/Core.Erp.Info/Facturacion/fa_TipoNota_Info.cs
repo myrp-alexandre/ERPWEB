@@ -28,5 +28,9 @@ namespace Core.Erp.Info.Facturacion
         public string nom_pc { get; set; }
         public string ip { get; set; }
         public string MotiAnula { get; set; }
+
+        //campos que no existen en la tabla
+
+        public List<fa_TipoNota_x_Empresa_x_Sucursal_Info> Lst_fa_TipoNota_x_Empresa_x_Sucursal { get; set; }
     }
 }
