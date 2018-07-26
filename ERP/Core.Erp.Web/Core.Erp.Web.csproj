@@ -8783,7 +8783,6 @@
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_GridViewPartial_orden_compra_ext.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_GridViewPartial_orden_compra_ext_det.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_CmbProveedor_exterior.cshtml" />
-    <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_CmbProducto_Importacion.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_006.cshtml" />
     <Content Include="Areas\Facturacion\Views\ProformaFacturacion\Index.cshtml" />
     <Content Include="Areas\Facturacion\Views\Factura\Nuevo.cshtml" />
@@ -8798,6 +8797,7 @@
     <Content Include="Areas\Facturacion\Views\Factura\_GridViewPartial_factura_cuotas.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_CmbCuenta_contable.cshtml" />
     <Content Include="Areas\Facturacion\Views\ParametrosFacturacion\Index.cshtml" />
+    <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_CmbProducto_Importacion.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

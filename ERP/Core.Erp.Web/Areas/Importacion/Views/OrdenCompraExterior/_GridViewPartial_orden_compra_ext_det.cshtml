@@ -2,14 +2,14 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_orden_compra_ext_det";
-        settings.CallbackRouteValues = new { Controller = "IngresoInventario", Action = "GridViewPartial_inv_det", Area = "Inventario" };
+        settings.CallbackRouteValues = new { Controller = "OrdencompraExterior", Action = "GridViewPartial_orden_compra_ext_det", Area = "Importacion" };
         settings.KeyFieldName = "Secuencia";
 
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "IngresoInventario", Action = "EditingAddNew", Area = "Inventario" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "IngresoInventario", Action = "EditingUpdate", Area = "Inventario" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "IngresoInventario", Action = "EditingDelete", Area = "Inventario" };
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "OrdencompraExterior", Action = "EditingAddNew", Area = "Inventario" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "IngresOrdencompraExterioroInventario", Action = "EditingUpdate", Area = "Inventario" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "OrdencompraExterior", Action = "EditingDelete", Area = "Inventario" };
 
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = true;

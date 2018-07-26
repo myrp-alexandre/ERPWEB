@@ -64,6 +64,21 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         {
             return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
+
+
+        public ActionResult CmbProducto_IngresoInventario()
+        {
+            in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info();
+            return PartialView("_CmbProducto_IngresoInventario", model);
+        }
+        public List<in_Producto_Info> get_list_bajo_demanda_productos(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.PORMODULO, cl_enumeradores.eModulo.INV, 0);
+        }
+        public in_Producto_Info get_info_bajo_demanda_productos(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
         #endregion
 
         #region vistas
@@ -189,7 +204,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             detalle.AddRow(info_det);
             var model = detalle.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_egr_inv_det", model);
+            return PartialView("_GridViewPartial_orden_compra_ext_det", model);
         }
 
         [HttpPost, ValidateInput(false)]
@@ -210,7 +225,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             detalle.UpdateRow(info_det);
             var model = detalle.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_egr_inv_det", model);
+            return PartialView("_GridViewPartial_orden_compra_ext_det", model);
         }
 
         public ActionResult EditingDelete(int Secuencia)
@@ -218,7 +233,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             detalle.DeleteRow(Secuencia);
             var model = detalle.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_egr_inv_det", model);
+            return PartialView("_GridViewPartial_orden_compra_ext_det", model);
         }
         #endregion
     }
