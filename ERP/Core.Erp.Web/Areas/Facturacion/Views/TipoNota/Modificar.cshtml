@@ -10,7 +10,7 @@
 
 @using (Html.BeginForm("Modificar", "TipoNota", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q=>q.IdTipoNota)
+    @Html.HiddenFor(q => q.IdTipoNota)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -44,7 +44,17 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
 
+                    @Html.Action("GridViewPartial_tipo_nota_sucursal")
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>

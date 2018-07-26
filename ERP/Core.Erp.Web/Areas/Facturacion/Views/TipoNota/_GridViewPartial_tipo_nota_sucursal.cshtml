@@ -4,7 +4,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_tipo_nota_sucursal";
-        settings.CallbackRouteValues = new { Controller = "TipoNota", Action = "GridViewPartial_tipo_nota_sucursal", IdEmpresa = Model == null ? 0 : Model.IdEmpresa, IdSucursal = Model == null ? "" : Model.IdSucursal, IdTipoNota = Model == null ? "" : Model.IdTipoNota };
+        settings.CallbackRouteValues = new { Controller = "TipoNota", Action = "GridViewPartial_tipo_nota_sucursal", IdTipoNota = Model == null ? "" : Model.IdTipoNota };
         settings.KeyFieldName = "IdTipoNota";
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
@@ -56,7 +56,7 @@
             column.Width = Unit.Percentage(50);
             column.EditorProperties().ComboBox(p =>
             {
-                p.Columns.Add("IdCtacble", "Cuenta").Width = Unit.Percentage(100);
+                p.Columns.Add("pc_Cuenta", "Cuenta").Width = Unit.Percentage(100);
                 p.TextField = "pc_Cuenta";
                 p.ValueField = "IdCtaCble";
                 p.ValueType = typeof(int);
