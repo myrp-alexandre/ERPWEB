@@ -423,6 +423,9 @@
     <Compile Include="fa_formaPago.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="fa_parametro.cs">
+      <DependentUpon>Model_facturacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="fa_proforma.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>
@@ -439,6 +442,9 @@
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>
     <Compile Include="fa_TipoNota.cs">
+      <DependentUpon>Model_facturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fa_TipoNota_x_Empresa_x_Sucursal.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>
     <Compile Include="fa_Vendedor.cs">

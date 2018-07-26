@@ -14,6 +14,13 @@ namespace Core.Erp.Data
     
     public partial class fa_TipoNota
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public fa_TipoNota()
+        {
+            this.fa_parametro = new HashSet<fa_parametro>();
+            this.fa_TipoNota_x_Empresa_x_Sucursal = new HashSet<fa_TipoNota_x_Empresa_x_Sucursal>();
+        }
+    
         public int IdTipoNota { get; set; }
         public string CodTipoNota { get; set; }
         public string Tipo { get; set; }
@@ -28,5 +35,10 @@ namespace Core.Erp.Data
         public string ip { get; set; }
         public string Estado { get; set; }
         public string MotiAnula { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fa_parametro> fa_parametro { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fa_TipoNota_x_Empresa_x_Sucursal> fa_TipoNota_x_Empresa_x_Sucursal { get; set; }
     }
 }

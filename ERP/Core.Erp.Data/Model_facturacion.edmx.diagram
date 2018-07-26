@@ -50,6 +50,10 @@
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_x_formaPago_fa_factura" />
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_x_in_Ing_Egr_Inven_fa_factura" />
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_x_formaPago_fa_formaPago" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_parametro" Width="1.5" PointX="5.625" PointY="21.25" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_TipoNota_x_Empresa_x_Sucursal" Width="1.5" PointX="5.625" PointY="18.5" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_parametro_fa_TipoNota" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_TipoNota_x_Empresa_x_Sucursal_fa_TipoNota" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
