@@ -32,6 +32,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         imp_ordencompra_ext_det_Info_lst detalle = new imp_ordencompra_ext_det_Info_lst();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         in_UnidadMedida_Bus bus_unidad_medida = new in_UnidadMedida_Bus();
+        imp_ordencompra_ext_det_Bus bus_detalle = new imp_ordencompra_ext_det_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -66,10 +67,10 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         }
 
 
-        public ActionResult CmbProducto_IngresoInventario()
+        public ActionResult CmbProducto_importacion()
         {
-            in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info();
-            return PartialView("_CmbProducto_IngresoInventario", model);
+            imp_ordencompra_ext_Info model = new imp_ordencompra_ext_Info();
+            return PartialView("_CmbProducto_importacion", model);
         }
         public List<in_Producto_Info> get_list_bajo_demanda_productos(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
@@ -95,6 +96,10 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         public ActionResult GridViewPartial_orden_compra_ext_det()
         {
             List<imp_ordencompra_ext_det_Info> model = new List<imp_ordencompra_ext_det_Info>();
+            model = Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
+            if (model == null)
+                model = new List<imp_ordencompra_ext_det_Info>();
+            cargar_combos_detalle();
             return PartialView("_GridViewPartial_orden_compra_ext_det", model);
         }
 
@@ -103,6 +108,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         #region acciones
         public ActionResult Nuevo()
         {
+            cargar_combos_detalle();
             imp_ordencompra_ext_Info model = new imp_ordencompra_ext_Info
             {
                 fecha_creacion = DateTime.Now,
@@ -117,11 +123,14 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost]
         public ActionResult Nuevo(imp_ordencompra_ext_Info model)
         {
+            model.lst_detalle = Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
+
             if (!bus_orden.modificarDB(model))
             {
                 cargar_combos();
                 return View(model);
             }
+            Session["imp_ordencompra_ext_det_Info"] = null;
             return RedirectToAction("Index");
         }
         public ActionResult Modificar(decimal IdOrdenCompra_ext)
@@ -129,6 +138,8 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             imp_ordencompra_ext_Info model = bus_orden.get_info(IdEmpresa, IdOrdenCompra_ext);
+            var lst_detalle = bus_detalle.get_list(IdEmpresa, IdOrdenCompra_ext);
+            Session["imp_ordencompra_ext_det_Info"] = lst_detalle;
             if (model == null)
                 return RedirectToAction("Index");
             cargar_combos();
@@ -137,11 +148,13 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost]
         public ActionResult Modificar(imp_ordencompra_ext_Info model)
         {
+            model.lst_detalle= Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
             if (!bus_orden.modificarDB(model))
             {
                 cargar_combos();
                 return View(model);
             }
+            Session["imp_ordencompra_ext_det_Info"] = null;
             return RedirectToAction("Index");
         }
         public ActionResult Anular(decimal IdOrdenCompra_ext)
@@ -149,6 +162,8 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             imp_ordencompra_ext_Info model = bus_orden.get_info(IdEmpresa, IdOrdenCompra_ext);
+           var lst_detalle = bus_detalle.get_list(IdEmpresa, IdOrdenCompra_ext);
+            Session["imp_ordencompra_ext_det_Info"] = lst_detalle;
             if (model == null)
                 return RedirectToAction("Index");
             cargar_combos();
@@ -163,6 +178,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 cargar_combos();
                 return View(model);
             }
+            Session["imp_ordencompra_ext_det_Info"] = null;
             return RedirectToAction("Index");
         }
         #endregion

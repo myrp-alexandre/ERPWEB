@@ -7,9 +7,9 @@
 
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "OrdencompraExterior", Action = "EditingAddNew", Area = "Inventario" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "IngresOrdencompraExterioroInventario", Action = "EditingUpdate", Area = "Inventario" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "OrdencompraExterior", Action = "EditingDelete", Area = "Inventario" };
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "OrdenCompraExterior", Action = "EditingAddNew", Area = "Importacion" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "OrdenCompraExterior", Action = "EditingUpdate", Area = "Importacion" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "OrdenCompraExterior", Action = "EditingDelete", Area = "Importacion" };
 
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = true;
@@ -66,7 +66,7 @@
                 p.TextField = "descripcion";
                 p.ValueField = "IdUnidadMedida";
                 p.ValueType = typeof(string);
-                p.DataSource = ViewBag.lst_unidad;
+                p.DataSource = ViewBag.lst_undades;
             });
         });
         settings.Columns.Add(column =>
