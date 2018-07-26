@@ -27,7 +27,7 @@ namespace Core.Erp.Info.Importacion
         public double od_costo_total { get; set; }
 
         #region campos de vistas
-        public string MyProperty { get; set; }
+        public string pr_descripcion { get; set; }
         #endregion
     }
 }
