@@ -148,6 +148,7 @@
     <Compile Include="Facturacion\fa_factura_det_Info.cs" />
     <Compile Include="Facturacion\fa_factura_Info.cs" />
     <Compile Include="Facturacion\fa_formaPago_Info.cs" />
+    <Compile Include="Facturacion\fa_parametro_Info.cs" />
     <Compile Include="Facturacion\fa_proforma_det_Info.cs" />
     <Compile Include="Facturacion\fa_proforma_Info.cs" />
     <Compile Include="Facturacion\fa_PuntoVta_Info.cs" />
