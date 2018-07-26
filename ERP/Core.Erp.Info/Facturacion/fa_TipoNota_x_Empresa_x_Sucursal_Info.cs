@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.Facturacion
 {
-    class fa_TipoNota_x_Empresa_x_Sucursal_Info
+   public class fa_TipoNota_x_Empresa_x_Sucursal_Info
     {
+        public int IdEmpresa { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdTipoNota { get; set; }
+        public string IdCtaCble { get; set; }
     }
 }
