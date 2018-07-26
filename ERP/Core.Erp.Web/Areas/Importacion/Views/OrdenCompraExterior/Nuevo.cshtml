@@ -22,8 +22,18 @@
             </div>
         </div>
     </div>
-
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="info_gasto_cta.IdCtaCble">Cuenta contable*</label>
+                    @Html.Partial("_CmbCuenta_contable", Model)
+                    @Html.ValidationMessageFor(q => q.IdCtaCble_importacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index", "OrdenCompraExterior", new { Area ="Importacion" }, null)">Cancelar</a>

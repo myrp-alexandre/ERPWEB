@@ -8795,6 +8795,7 @@
     <Content Include="Areas\Facturacion\Views\Factura\_CmbProducto_Factura.cshtml" />
     <Content Include="Areas\Facturacion\Views\Factura\_CmbCliente_Factura.cshtml" />
     <Content Include="Areas\Facturacion\Views\Factura\_GridViewPartial_factura_cuotas.cshtml" />
+    <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_CmbCuenta_contable.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
