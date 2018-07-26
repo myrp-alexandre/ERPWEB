@@ -383,6 +383,7 @@
     <Compile Include="Facturacion\fa_factura_Data.cs" />
     <Compile Include="Facturacion\fa_factura_det_Data.cs" />
     <Compile Include="Facturacion\fa_formaPago_Data.cs" />
+    <Compile Include="Facturacion\fa_parametro_Data.cs" />
     <Compile Include="Facturacion\fa_proforma_Data.cs" />
     <Compile Include="Facturacion\fa_proforma_det_Data.cs" />
     <Compile Include="Facturacion\fa_PuntoVta_Data.cs" />
