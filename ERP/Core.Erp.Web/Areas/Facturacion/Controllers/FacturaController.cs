@@ -39,6 +39,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_cuotas_x_doc_List List_cuotas = new fa_cuotas_x_doc_List();
         fa_TerminoPago_Distribucion_Bus bus_termino_pago_distribucion = new fa_TerminoPago_Distribucion_Bus();
         tb_sis_Documento_Tipo_Talonario_Bus bus_talonario = new tb_sis_Documento_Tipo_Talonario_Bus();
+        fa_cuotas_x_doc_Bus bus_cuotas = new fa_cuotas_x_doc_Bus();
+        fa_factura_det_Bus bus_det = new fa_factura_det_Bus();
         #endregion
 
         #region Index
@@ -143,13 +145,30 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
 
             i_validar.lst_cuota = List_cuotas.get_list();
-
+            i_validar.IdBodega = (int)bus_punto_venta.get_info(i_validar.IdEmpresa, i_validar.IdSucursal, Convert.ToInt32(i_validar.IdPuntoVta)).IdBodega;
             i_validar.IdPeriodo = Convert.ToInt32(i_validar.vt_fecha.ToString("yyyyMM"));
+            i_validar.vt_mes = i_validar.vt_fecha.Month;
+            i_validar.vt_anio = i_validar.vt_fecha.Year;
             i_validar.IdCaja = 1;
 
             if (i_validar.IdCbteVta == 0)
             {
-
+                var talonario = bus_talonario.get_info(i_validar.IdEmpresa, i_validar.vt_tipoDoc, i_validar.vt_serie1, i_validar.vt_serie2, i_validar.vt_NumFactura);
+                if (talonario == null)
+                {
+                    msg = "No existe un talonario creado con la numeración: "+i_validar.vt_serie1+"-"+i_validar.vt_serie2+"-"+i_validar.vt_NumFactura;
+                    return false;
+                }
+                if (talonario.Usado == true)
+                {
+                    msg = "El talonario: " + i_validar.vt_serie1 + "-" + i_validar.vt_serie2 + "-" + i_validar.vt_NumFactura+" se encuentra utilizado.";
+                    return false;
+                }
+                if (bus_factura.factura_existe(i_validar.IdEmpresa,i_validar.vt_serie1,i_validar.vt_serie2,i_validar.vt_NumFactura))
+                {
+                    msg = "Existe una factura con el talonario: " + i_validar.vt_serie1 + "-" + i_validar.vt_serie2 + "-" + i_validar.vt_NumFactura + " utilizado.";
+                    return false;
+                }
             }
 
             return true;
@@ -291,7 +310,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 vt_fecha = DateTime.Now,
                 vt_fech_venc = DateTime.Now,
                 lst_det = new List<fa_factura_det_Info>(),
-                lst_cuota = new List<fa_cuotas_x_doc_Info>()
+                lst_cuota = new List<fa_cuotas_x_doc_Info>(),
+                vt_tipoDoc = "FACT"
             };
             List_det.set_list(model.lst_det);
             List_cuotas.set_list(model.lst_cuota);
@@ -301,6 +321,38 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
         [HttpPost]
         public ActionResult Nuevo(fa_factura_Info model)
+        {
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
+            model.IdUsuario = Session["IdUsuario"].ToString();
+            if (!bus_factura.guardarDB(model))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            };
+            return RedirectToAction("Index");
+        }
+        public ActionResult Modificar(int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            fa_factura_Info model = bus_factura.get_info(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
+            if(model == null)
+                return RedirectToAction("Index");
+            model.lst_cuota = bus_cuotas.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
+            List_det.set_list(model.lst_det);
+            model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
+            List_cuotas.set_list(model.lst_cuota);
+            cargar_combos();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(fa_factura_Info model)
         {
             if (!validar(model, ref mensaje))
             {

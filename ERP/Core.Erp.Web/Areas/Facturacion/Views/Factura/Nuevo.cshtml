@@ -9,7 +9,18 @@
 }
 @using (Html.BeginForm("Nuevo", "Factura", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)    
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.vt_tipoDoc)
+
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+
+    }
 
     <div class="modal fade" id="OpModal" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -71,7 +82,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="vt_serie1">Establecimiento*</label>
-                    @Html.TextBoxFor(q=>q.vt_serie1,new { @class = "form-control", @id = "vt_serie1" })
+                    @Html.TextBoxFor(q => q.vt_serie1, new { @class = "form-control", @id = "vt_serie1" })
                     @Html.ValidationMessageFor(q => q.vt_serie1, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -154,7 +165,7 @@
                                     @Html.ValidationMessageFor(q => q.vt_fech_venc, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                     <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_cuotas">
                         <div class="row">
@@ -173,7 +184,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Valor abono</label>
-                                    @Html.TextBoxFor(q=>q.valor_abono,new { @class = "form-control", @id = "valor_abono" })
+                                    @Html.TextBoxFor(q => q.valor_abono, new { @class = "form-control", @id = "valor_abono" })
                                 </div>
                             </div>
                         </div>
@@ -192,15 +203,15 @@
         </div>
     </div>
 
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <a class="btn btn-default" href="@Url.Action("Index","Factura",new { Area = "Facturacion" },null)">Cancelar</a>
-                </div>
-                @section Scripts {
-                    @Scripts.Render("~/bundles/jqueryval")
-                }
-                }
-                <script>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Factura",new { Area = "Facturacion" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+<script>
     $(function () {
         CargarPuntosDeVenta();
         get_info_termino_pago();
@@ -212,7 +223,7 @@
         })
         $('#fecha_primera_cuota').datepicker({
             autoclose: true
-        })        
+        })
         $('#vt_fech_venc').datepicker({
             autoclose: true
         })
@@ -394,7 +405,7 @@
         });
     }
 
-       function GetUltimoDocumento() {        
+       function GetUltimoDocumento() {
         var datos = {
             IdSucursal: $("#IdSucursal").val(),
             IdPuntoVta: $("#IdPuntoVta").val()
