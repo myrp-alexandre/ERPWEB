@@ -1,4 +1,7 @@
-﻿using Core.Erp.Info.Facturacion;
+﻿using Core.Erp.Data.Contabilidad;
+using Core.Erp.Data.Inventario;
+using Core.Erp.Info.Contabilidad;
+using Core.Erp.Info.Facturacion;
 using Core.Erp.Info.Inventario;
 using System;
 using System.Collections.Generic;
@@ -139,6 +142,8 @@ namespace Core.Erp.Data.Facturacion
             {
                 #region Variables
                 int secuencia = 1;
+                in_Ing_Egr_Inven_Data data_inv = new in_Ing_Egr_Inven_Data();
+                ct_cbtecble_Data data_ct = new ct_cbtecble_Data();
                 #endregion
 
                 #region Factura
@@ -227,11 +232,71 @@ namespace Core.Erp.Data.Facturacion
                 });
                 #endregion
 
+                #region Cuotas
+                secuencia = 1;
+                foreach (var item in info.lst_cuota)
+                {
+                    db_f.fa_cuotas_x_doc.Add(new fa_cuotas_x_doc
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdSucursal = info.IdSucursal,
+                        IdBodega = info.IdBodega,
+                        IdCbteVta = info.IdCbteVta,                        
+                        secuencia = secuencia++,
+
+                        Estado = item.Estado,
+                        fecha_vcto_cuota = item.fecha_vcto_cuota.Date,
+                        num_cuota = item.num_cuota,
+                        valor_a_cobrar = item.valor_a_cobrar
+                    });
+                }
                 #endregion
 
-                #region MovimientoDeInventario
-                //var parametro = db_f.fa_para
-                in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info,0);
+                #endregion
+
+                #region Inventario
+                var parametro = db_f.fa_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                if (parametro.IdMovi_inven_tipo_Factura != null)
+                {
+                    in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, Convert.ToInt32(parametro.IdMovi_inven_tipo_Factura));
+                    if(data_inv.guardarDB(movimiento, "-"))
+                    {
+                        db_f.fa_factura_x_in_Ing_Egr_Inven.Add(new fa_factura_x_in_Ing_Egr_Inven
+                        {
+                            IdEmpresa_fa = info.IdEmpresa,
+                            IdSucursal_fa = info.IdSucursal,
+                            IdBodega_fa = info.IdBodega,
+                            IdCbteVta_fa = info.IdCbteVta,
+
+                            IdEmpresa_in_eg_x_inv = movimiento.IdEmpresa,
+                            IdSucursal_in_eg_x_inv = movimiento.IdSucursal,
+                            IdMovi_inven_tipo_in_eg_x_inv = movimiento.IdMovi_inven_tipo,
+                            IdNumMovi_in_eg_x_inv = movimiento.IdNumMovi,                            
+                        });
+                    }
+                }
+                #endregion
+
+                #region Contabilidad
+                var cliente = db_f.fa_cliente.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente).FirstOrDefault();
+                if (!string.IsNullOrEmpty(cliente.IdCtaCble_cxc_Credito) && parametro.IdTipoCbteCble_Factura != null)
+                {
+                    ct_cbtecble_Info diario = armar_diario(info, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito);
+                    if (data_ct.guardarDB(diario))
+                    {
+                        db_f.fa_factura_x_ct_cbtecble.Add(new fa_factura_x_ct_cbtecble
+                        {
+                            vt_IdEmpresa = info.IdEmpresa,
+                            vt_IdSucursal = info.IdSucursal,
+                            vt_IdBodega = info.IdBodega,
+                            vt_IdCbteVta = info.IdCbteVta,
+
+                            ct_IdEmpresa = diario.IdEmpresa,
+                            ct_IdTipoCbte = diario.IdTipoCbte,
+                            ct_IdCbteCble = diario.IdCbteCble,
+                        });
+                    }
+                }
                 #endregion
 
                 db_f.SaveChanges();
@@ -239,7 +304,128 @@ namespace Core.Erp.Data.Facturacion
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
 
+        public ct_cbtecble_Info armar_diario(fa_factura_Info info, int IdTipoCbte, string IdCtaCble_Cliente)
+        {
+            try
+            {
+                #region Variables
+                string IdCtaCble_VentasIVA = string.Empty;
+                string IdCtaCble_Ventas0 = string.Empty;
+                string IdCtaCble_IVA = string.Empty;
+                #endregion
+
+                #region Validar cuentas
+
+                using (Entities_general Context = new Entities_general())
+                {
+                    var porcentajes = (from q in info.lst_det
+                                             group q by new { q.IdCod_Impuesto_Iva} into g
+                                             select g.Key).ToList();
+
+                    foreach (var item in porcentajes)
+                    {
+                        var impuesto = Context.tb_sis_Impuesto_x_ctacble.Include("tb_sis_Impuesto").Where(q => q.IdEmpresa_cta == info.IdEmpresa && q.IdCod_Impuesto == item.IdCod_Impuesto_Iva).FirstOrDefault();
+                        if (impuesto != null)
+                        {
+                            if (impuesto.tb_sis_Impuesto.porcentaje > 0)
+                            {
+                                IdCtaCble_VentasIVA = impuesto.IdCtaCble_vta;
+                                IdCtaCble_IVA = impuesto.IdCtaCble;
+                            }else
+                            {
+                                IdCtaCble_Ventas0 = impuesto.IdCtaCble_vta;
+                            }
+                        }                            
+                    }
+                    
+                }
+
+                #endregion
+
+                ct_cbtecble_Info diario = new ct_cbtecble_Info
+                {
+                    IdEmpresa = info.IdEmpresa,
+                    IdTipoCbte = IdTipoCbte,
+                    IdCbteCble = 0,
+                    cb_Fecha = info.vt_fecha.Date,
+                    cb_Anio = info.vt_fecha.Date.Year,
+                    cb_mes = info.vt_fecha.Date.Month,
+                    IdPeriodo = info.IdPeriodo,
+                    IdUsuario = info.IdUsuario,
+                    IdUsuarioUltModi = info.IdUsuarioUltModi,
+                    cb_Observacion = "FACT# " + info.vt_serie1 + "-" + info.vt_serie2 + "-" + info.vt_NumFactura + " " + info.vt_Observacion,
+                    CodCbteCble = "FACT# " + info.vt_NumFactura,
+                    cb_Valor = 0,
+                    lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>()
+                };
+                int secuencia = 1;
+
+                #region Ventas con IVA
+                if (!string.IsNullOrEmpty(IdCtaCble_VentasIVA))
+                    diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
+                    {
+                        IdEmpresa = diario.IdEmpresa,
+                        IdTipoCbte = diario.IdTipoCbte,
+                        IdCbteCble = diario.IdCbteCble,
+                        secuencia = secuencia++,
+                        IdCtaCble = IdCtaCble_VentasIVA,
+                        dc_Valor = Math.Round(info.lst_det.Where(q => q.vt_por_iva > 0).Sum(q => q.vt_Subtotal), 2, MidpointRounding.AwayFromZero) * -1
+                    });
+                #endregion
+
+                #region Ventas IVA 0
+                if (!string.IsNullOrEmpty(IdCtaCble_Ventas0))
+                    diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
+                    {
+                        IdEmpresa = diario.IdEmpresa,
+                        IdTipoCbte = diario.IdTipoCbte,
+                        IdCbteCble = diario.IdCbteCble,
+                        secuencia = secuencia++,
+                        IdCtaCble = IdCtaCble_Ventas0,
+                        dc_Valor = Math.Round(info.lst_det.Where(q => q.vt_por_iva == 0).Sum(q => q.vt_Subtotal), 2, MidpointRounding.AwayFromZero) * -1
+                    });
+                #endregion
+
+                #region IVA
+                if (!string.IsNullOrEmpty(IdCtaCble_IVA))
+                    diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
+                    {
+                        IdEmpresa = diario.IdEmpresa,
+                        IdTipoCbte = diario.IdTipoCbte,
+                        IdCbteCble = diario.IdCbteCble,
+                        secuencia = secuencia++,
+                        IdCtaCble = IdCtaCble_IVA,
+                        dc_Valor = Math.Round(info.lst_det.Where(q => q.vt_por_iva > 0).Sum(q => q.vt_iva), 2, MidpointRounding.AwayFromZero) * -1
+                    });
+                #endregion
+
+                #region Cliente
+                if (!string.IsNullOrEmpty(IdCtaCble_Cliente))
+                    diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
+                    {
+                        IdEmpresa = diario.IdEmpresa,
+                        IdTipoCbte = diario.IdTipoCbte,
+                        IdCbteCble = diario.IdCbteCble,
+                        secuencia = secuencia++,
+                        IdCtaCble = IdCtaCble_Cliente,
+                        dc_Valor = Math.Round(info.lst_det.Sum(q => q.vt_total), 2, MidpointRounding.AwayFromZero)
+                    });
+                #endregion
+
+                if (info.lst_det.Count == 0)
+                    return null;
+
+                if (diario.lst_ct_cbtecble_det.Sum(q => q.dc_Valor) != 0)
+                    return null;
+
+                return diario;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
@@ -286,9 +472,9 @@ namespace Core.Erp.Data.Facturacion
                                            on new { p.IdEmpresa, p.IdProductoTipo } equals new { t.IdEmpresa, t.IdProductoTipo }
                                            where p.IdEmpresa == info.IdEmpresa && p.IdProducto == item.IdProducto
                                            && t.tp_ManejaInven == "S"
-                                           select p.IdProducto).FirstOrDefault();
+                                           select p).FirstOrDefault();
 
-                            if (producto != 0)
+                            if (producto != null)
                             {
                                 movimiento.lst_in_Ing_Egr_Inven_det.Add(new in_Ing_Egr_Inven_det_Info
                                 {
@@ -303,30 +489,40 @@ namespace Core.Erp.Data.Facturacion
                                     dm_cantidad_sinConversion = item.vt_cantidad,
                                     mv_costo = 0,
                                     mv_costo_sinConversion = 0,
-                                    IdUnidadMedida = null,
-                                    IdUnidadMedida_sinConversion = null
+                                    IdUnidadMedida = producto.IdUnidadMedida_Consumo,
+                                    IdUnidadMedida_sinConversion = producto.IdUnidadMedida_Consumo
                                 });
                             }
                         }else
                         {
                             foreach (var comp in lst)
                             {
-                                movimiento.lst_in_Ing_Egr_Inven_det.Add(new in_Ing_Egr_Inven_det_Info
+                                var producto = (from p in Context.in_Producto
+                                                join t in Context.in_ProductoTipo
+                                                on new { p.IdEmpresa, p.IdProductoTipo } equals new { t.IdEmpresa, t.IdProductoTipo }
+                                                where p.IdEmpresa == info.IdEmpresa && p.IdProducto == item.IdProducto
+                                                && t.tp_ManejaInven == "S"
+                                                select p).FirstOrDefault();
+
+                                if (producto != null)
                                 {
-                                    IdEmpresa = movimiento.IdEmpresa,
-                                    IdSucursal = movimiento.IdSucursal,
-                                    IdBodega = (int)movimiento.IdBodega,
-                                    IdMovi_inven_tipo = movimiento.IdMovi_inven_tipo,
-                                    IdNumMovi = 0,
-                                    Secuencia = secuencia++,
-                                    IdProducto = comp.IdProductoHijo,
-                                    dm_cantidad = item.vt_cantidad,
-                                    dm_cantidad_sinConversion = item.vt_cantidad,
-                                    mv_costo = 0,
-                                    mv_costo_sinConversion = 0,
-                                    IdUnidadMedida = null,
-                                    IdUnidadMedida_sinConversion = null
-                                });                                
+                                    movimiento.lst_in_Ing_Egr_Inven_det.Add(new in_Ing_Egr_Inven_det_Info
+                                    {
+                                        IdEmpresa = movimiento.IdEmpresa,
+                                        IdSucursal = movimiento.IdSucursal,
+                                        IdBodega = (int)movimiento.IdBodega,
+                                        IdMovi_inven_tipo = movimiento.IdMovi_inven_tipo,
+                                        IdNumMovi = 0,
+                                        Secuencia = secuencia++,
+                                        IdProducto = comp.IdProductoHijo,
+                                        dm_cantidad = item.vt_cantidad,
+                                        dm_cantidad_sinConversion = item.vt_cantidad,
+                                        mv_costo = 0,
+                                        mv_costo_sinConversion = 0,
+                                        IdUnidadMedida = producto.IdUnidadMedida_Consumo,
+                                        IdUnidadMedida_sinConversion = producto.IdUnidadMedida_Consumo
+                                    });
+                                }
                             }
                         }
                     }

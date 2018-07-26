@@ -65,6 +65,7 @@ namespace Core.Erp.Info.Facturacion
 
         #region Campos que no existen en la tabla
         public List<fa_factura_det_Info> lst_det { get; set; }
+        public List<fa_cuotas_x_doc_Info> lst_cuota { get; set; }
         public string IdFormaPago { get; set; }
         #endregion
     }

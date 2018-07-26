@@ -40,6 +40,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_TerminoPago_Distribucion_Bus bus_termino_pago_distribucion = new fa_TerminoPago_Distribucion_Bus();
         #endregion
 
+        #region Index
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -50,7 +51,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             return View(model);
         }
-
         [ValidateInput(false)]
         public ActionResult GridViewPartial_factura(DateTime? Fecha_ini, DateTime? Fecha_fin)
         {
@@ -60,6 +60,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var model = bus_factura.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_factura", model);
         }
+        #endregion
 
         #region Metodos ComboBox bajo demanda cliente
         public ActionResult CmbCliente_Factura()
@@ -138,6 +139,17 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 msg = "Existen registros sin producto en el detalle de la proforma";
                 return false;
             }
+
+            i_validar.lst_cuota = List_cuotas.get_list();
+
+            i_validar.IdPeriodo = Convert.ToInt32(i_validar.vt_fecha.ToString("yyyyMM"));
+            i_validar.IdCaja = 1;
+
+            if (i_validar.IdCbteVta == 0)
+            {
+                
+            }
+
             return true;
         }
         #endregion
@@ -201,7 +213,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-
         public void CargarCuotas(DateTime? FechaPrimerPago, string IdTerminoPago = "", double PrimerPago = 0)
         {
             List<fa_cuotas_x_doc_Info> lst_cuotas = new List<fa_cuotas_x_doc_Info>();
@@ -236,9 +247,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 vt_fecha = DateTime.Now,
                 vt_fech_venc = DateTime.Now,
-                lst_det = new List<fa_factura_det_Info>()
+                lst_det = new List<fa_factura_det_Info>(),
+                lst_cuota = new List<fa_cuotas_x_doc_Info>()
             };
             List_det.set_list(model.lst_det);
+            List_cuotas.set_list(model.lst_cuota);
             cargar_combos();
             return View(model);
         }
@@ -286,19 +299,16 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #endregion
 
         #region funciones del detalle
-
         public ActionResult GridViewPartial_LoteFactura()
         {
             var model = List_producto.get_list();
             return PartialView("_GridViewPartial_LoteFactura", model);
         }
-
         private void cargar_combos_detalle()
         {
             var lst_impuesto = bus_impuesto.get_list("IVA", false);
             ViewBag.lst_impuesto = lst_impuesto;
         }
-
         [ValidateInput(false)]
         public ActionResult GridViewPartial_factura_det()
         {
@@ -307,7 +317,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["IdCliente"]) ? Request.Params["IdCliente"].ToString() : "-1";
             return PartialView("_GridViewPartial_factura_det", model);
         }
-
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_factura_det_Info info_det)
         {
@@ -349,7 +358,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_factura_det", model);
         }
-
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_factura_det_Info info_det)
         {
@@ -391,7 +399,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_factura_det", model);
         }
-
         public ActionResult EditingDelete(int Secuencia)
         {
             List_det.DeleteRow(Secuencia);
@@ -400,7 +407,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return PartialView("_GridViewPartial_factura_det", model);
         }
         #endregion
-
     }
 
     public class fa_factura_det_List
