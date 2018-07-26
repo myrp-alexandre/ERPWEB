@@ -38,6 +38,9 @@ namespace Core.Erp.Info.Facturacion
         
         #region Campos que no existen en la tabla
         public string pr_descripcion { get; set; }
+        public string nom_presentacion { get; set; }
+        public string lote_num_lote { get; set; }
+        public DateTime? lote_fecha_vcto { get; set; }
         #endregion
 
     }

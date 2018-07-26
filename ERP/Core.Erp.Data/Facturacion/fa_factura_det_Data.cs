@@ -14,7 +14,7 @@ namespace Core.Erp.Data.Facturacion
                 List<fa_factura_det_Info> Lista;
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
-                    Lista = (from q in Context.fa_factura_det
+                    Lista = (from q in Context.vwfa_factura_det
                              where q.IdEmpresa == IdEmpresa
                              && q.IdSucursal == IdSucursal
                              && q.IdBodega == IdBodega
@@ -47,9 +47,17 @@ namespace Core.Erp.Data.Facturacion
                                  IdPunto_cargo_grupo = q.IdPunto_cargo_grupo,
                                  IdSucursal_pf = q.IdSucursal_pf,
                                  Secuencia = q.Secuencia,
-                                 Secuencia_pf = q.Secuencia_pf
+                                 Secuencia_pf = q.Secuencia_pf,
+                                 pr_descripcion = q.pr_descripcion,
+                                 nom_presentacion = q.nom_presentacion,
+                                 lote_num_lote = q.lote_num_lote,
+                                 lote_fecha_vcto = q.lote_fecha_vcto,
                              }).ToList();
                 }
+                Lista.ForEach(V =>
+                {
+                    V.pr_descripcion = V.pr_descripcion + " " + V.nom_presentacion + " - " + V.lote_num_lote + " - " + (V.lote_fecha_vcto != null ? Convert.ToDateTime(V.lote_fecha_vcto).ToString("dd/MM/yyyy") : "");
+                });
                 return Lista;
             }
             catch (Exception)

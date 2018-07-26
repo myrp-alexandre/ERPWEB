@@ -104,19 +104,18 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #endregion
 
         #region Metodos
-        private void cargar_combos()
+        private void cargar_combos(fa_factura_Info model)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-
-            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            var lst_sucursal = bus_sucursal.get_list(model.IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
 
-            var lst_punto_venta = new List<fa_PuntoVta_Info>();
+            var lst_punto_venta = bus_punto_venta.get_list(model.IdEmpresa, model.IdSucursal, false);
             ViewBag.lst_punto_venta = lst_punto_venta;
 
-            ViewBag.lst_contacto = new List<fa_cliente_contactos_Info>();
+            var lst_contacto = bus_contacto.get_list(model.IdEmpresa, model.IdCliente);
+            ViewBag.lst_contacto = lst_contacto;
 
-            var lst_vendedor = bus_vendedor.get_list(IdEmpresa, false);
+            var lst_vendedor = bus_vendedor.get_list(model.IdEmpresa, false);
             ViewBag.lst_vendedor = lst_vendedor;
 
             var lst_pago = bus_termino_pago.get_list(false);
@@ -150,6 +149,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             i_validar.vt_mes = i_validar.vt_fecha.Month;
             i_validar.vt_anio = i_validar.vt_fecha.Year;
             i_validar.IdCaja = 1;
+            i_validar.IdUsuario = SessionFixed.IdUsuario;
+            i_validar.IdUsuarioUltModi = SessionFixed.IdUsuario;
 
             if (i_validar.IdCbteVta == 0)
             {
@@ -315,7 +316,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             };
             List_det.set_list(model.lst_det);
             List_cuotas.set_list(model.lst_cuota);
-            cargar_combos();
+            cargar_combos(model);
             return View(model);
         }
 
@@ -325,14 +326,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos();
+                cargar_combos(model);
                 return View(model);
             }
             model.IdUsuario = Session["IdUsuario"].ToString();
             if (!bus_factura.guardarDB(model))
             {
-                ViewBag.mensaje = mensaje;
-                cargar_combos();
+                ViewBag.mensaje = "No se ha podido guardar el registro";
+                cargar_combos(model);
                 return View(model);
             };
             return RedirectToAction("Index");
@@ -343,11 +344,15 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             fa_factura_Info model = bus_factura.get_info(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
             if(model == null)
                 return RedirectToAction("Index");
+            if (model.esta_impresa == null ? false : Convert.ToBoolean(model.esta_impresa))
+            {
+                return RedirectToAction("Index");
+            }
             model.lst_cuota = bus_cuotas.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
-            List_det.set_list(model.lst_det);
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
+            List_det.set_list(model.lst_det);            
             List_cuotas.set_list(model.lst_cuota);
-            cargar_combos();
+            cargar_combos(model);
             return View(model);
         }
 
@@ -357,14 +362,40 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos();
+                cargar_combos(model);
                 return View(model);
             }
             model.IdUsuario = Session["IdUsuario"].ToString();
-            if (!bus_factura.guardarDB(model))
+            if (!bus_factura.modificarDB(model))
             {
-                ViewBag.mensaje = mensaje;
-                cargar_combos();
+                ViewBag.mensaje = "No se ha podido modificar el registro";
+                cargar_combos(model);
+                return View(model);
+            };
+            return RedirectToAction("Index");
+        }
+        public ActionResult Anular(int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            fa_factura_Info model = bus_factura.get_info(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.lst_cuota = bus_cuotas.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
+            model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
+            List_det.set_list(model.lst_det);
+            List_cuotas.set_list(model.lst_cuota);
+            cargar_combos(model);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Anular(fa_factura_Info model)
+        {
+            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            if (!bus_factura.anularDB(model))
+            {
+                ViewBag.mensaje = "No se ha podido anular el registro";
+                cargar_combos(model);
                 return View(model);
             };
             return RedirectToAction("Index");
