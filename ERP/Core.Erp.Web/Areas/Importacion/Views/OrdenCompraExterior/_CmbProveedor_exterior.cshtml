@@ -14,12 +14,11 @@
         settings.Properties.ValueField = "IdProveedor";
         settings.Properties.ValueType = typeof(decimal);
 
-        settings.Properties.Columns.Add("IdProducto", "ID", 5);
-        settings.Properties.Columns.Add("pr_descripcion", "Producto", 65);
-        settings.Properties.Columns.Add("nom_categoria", "Categoria", 15);
-        settings.Properties.Columns.Add("nom_presentacion", "Presentación", 15);
+        settings.Properties.Columns.Add("IdProveedor", "ID", 5);
+        settings.Properties.Columns.Add("pe_cedulaRuc", "Cedula", 15);
+        settings.Properties.Columns.Add("info_persona.pe_nombreCompleto", "Provedor", 80);
     })
-    .BindList(new Core.Erp.Web.Areas.Inventario.Controllers.ProductoController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Inventario.Controllers.ProductoController().get_info_bajo_demanda)
+    .BindList(new Core.Erp.Web.Areas.CuentasPorPagar.Controllers.ProveedorController().get_list_bajo_demanda, new Core.Erp.Web.Areas.CuentasPorPagar.Controllers.ProveedorController().get_info_bajo_demanda)
     .Bind(Model.IdProducto);
 
 }

@@ -16,7 +16,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="info_gasto_cta.IdCtaCble">Proveedor*</label>
-                    @Html.Partial("_CmbCuenta_Gasto", Model)
+                    @Html.Partial("_CmbProveedor_exterior", Model)
                     @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
                 </div>
             </div>

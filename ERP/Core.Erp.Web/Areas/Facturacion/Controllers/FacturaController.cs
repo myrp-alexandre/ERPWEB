@@ -392,7 +392,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return PartialView("_GridViewPartial_factura_det", model);
         }
 
-        public ActionResult EditingDelete(int Secuencia)
+        public ActionResult EditingDelete_(int Secuencia)
         {
             List_det.DeleteRow(Secuencia);
             var model = List_det.get_list();
