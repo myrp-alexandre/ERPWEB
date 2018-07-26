@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +11,10 @@ namespace Core.Erp.Info.Importacion
     {
         public int IdEmpresa { get; set; }
         public decimal IdOrdenCompra_ext { get; set; }
+        [Required(ErrorMessage = "Seleccione el proveedor")]
         public decimal IdProveedor { get; set; }
         public string IdPais_origen { get; set; }
+        [Required(ErrorMessage = "Seleccione páis embarque")]
         public string IdPais_embarque { get; set; }
         public string IdCiudad_destino { get; set; }
         public int IdCatalogo_via { get; set; }

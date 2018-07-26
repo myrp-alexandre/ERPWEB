@@ -166,7 +166,7 @@ namespace Core.Erp.Data.Importacion
                             od_subtotal=item.od_subtotal,
                             od_cantidad_recepcion=item.od_cantidad_recepcion,
                             od_costo_convertido=item.od_costo_convertido,
-                            od_total_fob=item.od_total_fob,
+                            od_total_fob=Convert.ToDouble( item.od_total_fob),
                             od_factor_costo=item.od_factor_costo,
                             od_costo_bodega=item.od_costo_bodega,
                             od_costo_total=item.od_costo_total
@@ -231,7 +231,7 @@ namespace Core.Erp.Data.Importacion
                             od_subtotal = item.od_subtotal,
                             od_cantidad_recepcion = item.od_cantidad_recepcion,
                             od_costo_convertido = item.od_costo_convertido,
-                            od_total_fob = item.od_total_fob,
+                            od_total_fob =Convert.ToDouble( item.od_total_fob),
                             od_factor_costo = item.od_factor_costo,
                             od_costo_bodega = item.od_costo_bodega,
                             od_costo_total = item.od_costo_total

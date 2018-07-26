@@ -31,8 +31,8 @@
         {
             e.NewValues["IdProducto"] = 0;
             e.NewValues["IdUnidadMedida"] = null;
-            e.NewValues["od_cantidad"] = 0;
-            e.NewValues["od_costo"] = 0;
+            e.NewValues["od_cantidad"] = "";
+            e.NewValues["od_costo"] = "";
         };
 
         settings.Columns.Add(column =>
@@ -55,20 +55,20 @@
                 Html.RenderPartial("_CmbProducto_Importacion", DataBinder.Eval(c.DataItem, "IdProducto"));
             });
         });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "IdUnidadMedida";
-            column.Caption = "Unidad de medida";
-            column.Width = Unit.Percentage(20);
-            column.EditorProperties().ComboBox(p =>
-            {
-                p.Columns.Add("descripcion", "Descripción").Width = Unit.Percentage(100);
-                p.TextField = "descripcion";
-                p.ValueField = "IdUnidadMedida";
-                p.ValueType = typeof(string);
-                p.DataSource = ViewBag.lst_undades;
-            });
-        });
+        //settings.Columns.Add(column =>
+        //{
+        //    column.FieldName = "IdUnidadMedida";
+        //    column.Caption = "Unidad de medida";
+        //    column.Width = Unit.Percentage(20);
+        //    column.EditorProperties().ComboBox(p =>
+        //    {
+        //        p.Columns.Add("descripcion", "Descripción").Width = Unit.Percentage(100);
+        //        p.TextField = "descripcion";
+        //        p.ValueField = "IdUnidadMedida";
+        //        p.ValueType = typeof(string);
+        //        p.DataSource = ViewBag.lst_undades;
+        //    });
+        //});
         settings.Columns.Add(column =>
         {
             column.FieldName = "od_cantidad";
@@ -79,7 +79,14 @@
         settings.Columns.Add(column =>
         {
             column.FieldName = "od_costo";
-            column.Caption = "Costo";
+            column.Caption = "P.U";
+            column.Width = Unit.Percentage(15);
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "od_total_fob";
+            column.Caption = "Valor FOB";
             column.Width = Unit.Percentage(15);
 
         });

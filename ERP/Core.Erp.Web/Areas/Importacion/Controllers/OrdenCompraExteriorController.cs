@@ -108,16 +108,22 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         #region acciones
         public ActionResult Nuevo()
         {
-            cargar_combos_detalle();
+           
             imp_ordencompra_ext_Info model = new imp_ordencompra_ext_Info
             {
                 fecha_creacion = DateTime.Now,
                 oe_fecha = DateTime.Now,
                 oe_fecha_llegada = DateTime.Now,
-                oe_fecha_embarque = DateTime.Now
+                oe_fecha_embarque = DateTime.Now,
+                oe_fecha_desaduanizacion = DateTime.Now,
+                IdPais_origen="1",
+                IdCiudad_destino="09",
+                IdCatalogo_forma_pago=20
+                
 
             };
-
+            cargar_combos_detalle();
+            cargar_combos();
             return View(model);
         }
         [HttpPost]
@@ -143,6 +149,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             if (model == null)
                 return RedirectToAction("Index");
             cargar_combos();
+            cargar_combos_detalle();
             return View(model);
         }
         [HttpPost]
@@ -188,7 +195,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             var lst_paises = bus_paises.get_list(false);
             ViewBag.lst_paises = lst_paises;
 
-            var lst_ciudades = bus_ciudad.get_list("1", false);
+            var lst_ciudades = bus_ciudad.get_list("09", false);
             ViewBag.lst_ciudades = lst_ciudades;
 
             var lst_forma_pago = bus_forma_pago.get_list();
@@ -214,10 +221,12 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                     {
                         info_det.pr_descripcion = info_producto.pr_descripcion;
                         info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
+                        info_det.od_total_fob = info_det.od_cantidad * info_det.od_costo;
+                        detalle.AddRow(info_det);
+
                     }
                 }
 
-            detalle.AddRow(info_det);
             var model = detalle.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_orden_compra_ext_det", model);
@@ -235,6 +244,8 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                     {
                         info_det.pr_descripcion = info_producto.pr_descripcion;
                         info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
+                        info_det.od_total_fob = info_det.od_cantidad * info_det.od_costo;
+
                     }
                 }
 

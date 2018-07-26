@@ -133,13 +133,13 @@
                                {
                                    settings.Name = "IdPais_embarque";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
                                    settings.Properties.Columns.Add("IdPais", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
                                    settings.Properties.Columns.Add("CodPais", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
                                    settings.Properties.Columns.Add("Nombre", "País").Width = System.Web.UI.WebControls.Unit.Percentage(80);
                                    //Campo ID
                                    settings.Properties.ValueField = "IdPais";
-                                   settings.Properties.ValueType = typeof(decimal);
+                                   settings.Properties.ValueType = typeof(string);
                                    settings.Properties.TextField = "Nombre";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
@@ -162,13 +162,13 @@
                                {
                                    settings.Name = "IdPais_origen";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
                                    settings.Properties.Columns.Add("IdPais", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
                                    settings.Properties.Columns.Add("CodPais", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
                                    settings.Properties.Columns.Add("Nombre", "País").Width = System.Web.UI.WebControls.Unit.Percentage(80);
                                    //Campo ID
                                    settings.Properties.ValueField = "IdPais";
-                                   settings.Properties.ValueType = typeof(decimal);
+                                   settings.Properties.ValueType = typeof(string);
                                    settings.Properties.TextField = "Nombre";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
@@ -191,13 +191,13 @@
                                {
                                    settings.Name = "IdCiudad";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
                                    settings.Properties.Columns.Add("IdCiudad", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
                                    settings.Properties.Columns.Add("Cod_Ciudad", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
                                    settings.Properties.Columns.Add("Descripcion_Ciudad", "Ciudad").Width = System.Web.UI.WebControls.Unit.Percentage(80);
                                    //Campo ID
                                    settings.Properties.ValueField = "IdCiudad";
-                                   settings.Properties.ValueType = typeof(decimal);
+                                   settings.Properties.ValueType = typeof(string);
                                    settings.Properties.TextField = "Descripcion_Ciudad";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
@@ -225,7 +225,7 @@
                                    settings.Properties.Columns.Add("formas_pago_sri", "Forma pago").Width = System.Web.UI.WebControls.Unit.Percentage(90);
                                    //Campo ID
                                    settings.Properties.ValueField = "codigo_pago_sri";
-                                   settings.Properties.ValueType = typeof(decimal);
+                                   settings.Properties.ValueType = typeof(int);
                                    settings.Properties.TextField = "formas_pago_sri";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
