@@ -54,6 +54,7 @@
         <EntityTypeShape EntityType="Model_facturacion.fa_TipoNota_x_Empresa_x_Sucursal" Width="1.5" PointX="5.625" PointY="18.5" />
         <AssociationConnector Association="Model_facturacion.FK_fa_parametro_fa_TipoNota" />
         <AssociationConnector Association="Model_facturacion.FK_fa_TipoNota_x_Empresa_x_Sucursal_fa_TipoNota" />
+        <EntityTypeShape EntityType="Model_facturacion.vwfa_factura_det" Width="1.5" PointX="10.375" PointY="16.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
