@@ -12,7 +12,7 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class VWFAC_001
+    public partial class vwfa_factura_det
     {
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
@@ -20,27 +20,30 @@ namespace Core.Erp.Data
         public decimal IdCbteVta { get; set; }
         public int Secuencia { get; set; }
         public decimal IdProducto { get; set; }
-        public decimal IdProducto_padre { get; set; }
-        public string vt_NumFactura { get; set; }
-        public decimal IdCliente { get; set; }
-        public Nullable<int> IdContacto { get; set; }
-        public string NombreContacto { get; set; }
-        public int IdVendedor { get; set; }
-        public string Ve_Vendedor { get; set; }
-        public string NombreCliente { get; set; }
-        public string pr_descripcion { get; set; }
-        public Nullable<System.DateTime> lote_fecha_vcto { get; set; }
-        public string lote_num_lote { get; set; }
         public double vt_cantidad { get; set; }
         public double vt_Precio { get; set; }
         public double vt_PorDescUnitario { get; set; }
-        public double vt_DesctTotal { get; set; }
+        public double vt_DescUnitario { get; set; }
         public double vt_PrecioFinal { get; set; }
         public double vt_Subtotal { get; set; }
         public double vt_iva { get; set; }
         public double vt_total { get; set; }
-        public string Estado { get; set; }
-        public string Su_Descripcion { get; set; }
-        public System.DateTime vt_fecha { get; set; }
+        public string vt_estado { get; set; }
+        public string vt_detallexItems { get; set; }
+        public double vt_por_iva { get; set; }
+        public Nullable<int> IdPunto_Cargo { get; set; }
+        public Nullable<int> IdPunto_cargo_grupo { get; set; }
+        public string IdCod_Impuesto_Iva { get; set; }
+        public string IdCod_Impuesto_Ice { get; set; }
+        public string IdCentroCosto { get; set; }
+        public string IdCentroCosto_sub_centro_costo { get; set; }
+        public Nullable<int> IdEmpresa_pf { get; set; }
+        public Nullable<int> IdSucursal_pf { get; set; }
+        public Nullable<decimal> IdProforma { get; set; }
+        public Nullable<int> Secuencia_pf { get; set; }
+        public string pr_descripcion { get; set; }
+        public string nom_presentacion { get; set; }
+        public string lote_num_lote { get; set; }
+        public Nullable<System.DateTime> lote_fecha_vcto { get; set; }
     }
 }

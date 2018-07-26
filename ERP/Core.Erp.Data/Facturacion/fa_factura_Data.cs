@@ -57,6 +57,30 @@ namespace Core.Erp.Data.Facturacion
             }
         }
 
+        public bool factura_existe(int IdEmpresa, string Serie1, string Serie2, string NumFactura)
+        {
+            try
+            {
+                using (Entities_facturacion Context = new Entities_facturacion())
+                {
+                    var lst = from q in Context.fa_factura
+                              where q.IdEmpresa == IdEmpresa
+                              && q.vt_serie1 == Serie1
+                              && q.vt_serie2 == Serie2
+                              && q.vt_NumFactura == NumFactura
+                              select q;
+
+                    if (lst.Count() > 0)
+                        return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public fa_factura_Info get_info(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta)
         {
             try
@@ -160,7 +184,7 @@ namespace Core.Erp.Data.Facturacion
                     vt_serie1 = info.vt_serie1,
                     vt_serie2 = info.vt_serie2,
                     vt_NumFactura = info.vt_NumFactura,
-                    Fecha_Autorizacion = info.fecha_primera_cuota,
+                    Fecha_Autorizacion = info.Fecha_Autorizacion,
                     vt_anio = info.vt_anio,
                     vt_autorizacion = info.vt_autorizacion,
                     vt_fecha = info.vt_fecha,
@@ -170,13 +194,13 @@ namespace Core.Erp.Data.Facturacion
                     IdContacto = info.IdContacto,
                     IdVendedor = info.IdVendedor,
                     vt_plazo = info.vt_plazo,
-                    vt_Observacion = info.vt_Observacion,
+                    vt_Observacion = string.IsNullOrEmpty(info.vt_Observacion) ? "" : info.vt_Observacion,
                     IdPeriodo = info.IdPeriodo,
                     vt_tipo_venta = info.vt_tipo_venta,
                     IdCaja = info.IdCaja,
                     IdPuntoVta = info.IdPuntoVta,
                     fecha_primera_cuota = info.fecha_primera_cuota,
-                    Fecha_Transaccion = info.fecha_primera_cuota,
+                    Fecha_Transaccion = DateTime.Now,
                     Estado = info.Estado = "A",
                     esta_impresa = info.esta_impresa,
                     valor_abono = info.valor_abono,
@@ -228,7 +252,8 @@ namespace Core.Erp.Data.Facturacion
                     IdSucursal = info.IdSucursal,
                     IdBodega = info.IdBodega,
                     IdCbteVta = info.IdCbteVta,
-                    IdFormaPago = info.IdFormaPago
+                    IdFormaPago = info.IdFormaPago,
+                    observacion = "FACT# " + info.vt_serie1 + "-" + info.vt_serie2 + "-" + info.vt_NumFactura + " " + info.vt_Observacion
                 });
                 #endregion
 
@@ -247,11 +272,22 @@ namespace Core.Erp.Data.Facturacion
                         Estado = item.Estado,
                         fecha_vcto_cuota = item.fecha_vcto_cuota.Date,
                         num_cuota = item.num_cuota,
-                        valor_a_cobrar = item.valor_a_cobrar
+                        valor_a_cobrar = item.valor_a_cobrar                        
                     });
                 }
                 #endregion
 
+                #endregion
+                db_f.SaveChanges();
+
+                #region Talonario
+                using (Entities_general Context = new Entities_general())
+                {
+                    var talonario = Context.tb_sis_Documento_Tipo_Talonario.Where(q => q.IdEmpresa == info.IdEmpresa && q.CodDocumentoTipo == info.vt_tipoDoc && q.Establecimiento == info.vt_serie1 && q.PuntoEmision == info.vt_serie2 && q.NumDocumento == info.vt_NumFactura).FirstOrDefault();
+                    if (talonario != null)
+                        talonario.Usado = true;
+                    Context.SaveChanges();
+                }
                 #endregion
 
                 #region Inventario
@@ -273,6 +309,7 @@ namespace Core.Erp.Data.Facturacion
                             IdMovi_inven_tipo_in_eg_x_inv = movimiento.IdMovi_inven_tipo,
                             IdNumMovi_in_eg_x_inv = movimiento.IdNumMovi,                            
                         });
+                        db_f.SaveChanges();
                     }
                 }
                 #endregion
@@ -295,11 +332,12 @@ namespace Core.Erp.Data.Facturacion
                             ct_IdTipoCbte = diario.IdTipoCbte,
                             ct_IdCbteCble = diario.IdCbteCble,
                         });
+                        db_f.SaveChanges();
                     }
                 }
                 #endregion
 
-                db_f.SaveChanges();
+                
                 return true;
             }
             catch (Exception)
@@ -485,8 +523,8 @@ namespace Core.Erp.Data.Facturacion
                                     IdNumMovi = 0,
                                     Secuencia = secuencia++,
                                     IdProducto = item.IdProducto,
-                                    dm_cantidad = 0,
-                                    dm_cantidad_sinConversion = item.vt_cantidad,
+                                    dm_cantidad = item.vt_cantidad * -1,
+                                    dm_cantidad_sinConversion = item.vt_cantidad*-1,
                                     mv_costo = 0,
                                     mv_costo_sinConversion = 0,
                                     IdUnidadMedida = producto.IdUnidadMedida_Consumo,
@@ -515,8 +553,8 @@ namespace Core.Erp.Data.Facturacion
                                         IdNumMovi = 0,
                                         Secuencia = secuencia++,
                                         IdProducto = comp.IdProductoHijo,
-                                        dm_cantidad = item.vt_cantidad,
-                                        dm_cantidad_sinConversion = item.vt_cantidad,
+                                        dm_cantidad = item.vt_cantidad * -1,
+                                        dm_cantidad_sinConversion = item.vt_cantidad * -1,
                                         mv_costo = 0,
                                         mv_costo_sinConversion = 0,
                                         IdUnidadMedida = producto.IdUnidadMedida_Consumo,

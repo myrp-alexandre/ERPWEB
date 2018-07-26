@@ -34,6 +34,19 @@ namespace Core.Erp.Bus.Facturacion
             }
         }
 
+        public bool factura_existe(int IdEmpresa, string Serie1, string Serie2, string NumFactura)
+        {
+            try
+            {
+                return odata.factura_existe(IdEmpresa, Serie1, Serie2, NumFactura);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool guardarDB(fa_factura_Info info)
         {
             try
