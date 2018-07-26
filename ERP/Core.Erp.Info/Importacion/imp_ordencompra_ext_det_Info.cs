@@ -25,5 +25,9 @@ namespace Core.Erp.Info.Importacion
         public double od_factor_costo { get; set; }
         public double od_costo_bodega { get; set; }
         public double od_costo_total { get; set; }
+
+        #region campos de vistas
+        public string MyProperty { get; set; }
+        #endregion
     }
 }
