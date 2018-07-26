@@ -11,26 +11,104 @@
 {
     @Html.HiddenFor(q => q.IdOrdenCompra_ext)
     @Html.HiddenFor(q => q.IdEmpresa)
+
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-3">
                 <div class="form-group">
-                    <label for="info_gasto_cta.IdCtaCble">Proveedor*</label>
+                    <label for="CodMoviInven">Código</label>
+                    @Html.TextBoxFor(q => q.oe_codigo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.oe_codigo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-10 col-med-2">
+                <div class="form-group">
+                    <label for="">Fecha</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.oe_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "cm_fecha" })
+                        @Html.ValidationMessageFor(q => q.oe_fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="IdProveedor">Proveedor*</label>
                     @Html.Partial("_CmbProveedor_exterior", Model)
                     @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-10 col-med-2">
+                <div class="form-group">
+                    <label for="">Fecha</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.oe_fecha_embarque, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "cm_fecha" })
+                        @Html.ValidationMessageFor(q => q.oe_fecha_embarque, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="IdCtaCble_importacion">Cuenta contable*</label>
+                    @Html.Partial("_CmbCuenta_contable", Model)
+                    @Html.ValidationMessageFor(q => q.IdCtaCble_importacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-10 col-med-2">
+                <div class="form-group">
+                    <label for="">Fecha</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.oe_fecha_llegada, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "cm_fecha" })
+                        @Html.ValidationMessageFor(q => q.oe_fecha_llegada, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="form-group">
-                    <label for="info_gasto_cta.IdCtaCble">Cuenta contable*</label>
-                    @Html.Partial("_CmbCuenta_contable", Model)
-                    @Html.ValidationMessageFor(q => q.IdCtaCble_importacion, "", new { @class = "text-danger" })
+                    <label for="IdCtaCble_importacion">Observación*</label>
+                    @Html.TextAreaFor(q => q.oe_observacion, new { @class = "form-control", @rows = 2 })
+                    @Html.ValidationMessageFor(q => q.oe_observacion, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-offset-10 col-med-2">
+                <div class="form-group">
+                    <label for="">Fecha</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.oe_fecha_llegada, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "cm_fecha" })
+                        @Html.ValidationMessageFor(q => q.oe_fecha_llegada, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            
         </div>
     </div>
     
