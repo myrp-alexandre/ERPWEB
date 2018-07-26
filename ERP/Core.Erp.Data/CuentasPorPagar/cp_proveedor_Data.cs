@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Data.General;
 using Core.Erp.Info.CuentasPorPagar;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -341,7 +342,55 @@ namespace Core.Erp.Data.CuentasPorPagar
             }
         }
 
-        #region metodo bajo demanda
+
+
+        #region metodo baja demanda
+
+        public List<cp_proveedor_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<cp_proveedor_Info> Lista = new List<cp_proveedor_Info>();
+            Lista = get_list(IdEmpresa, skip, take, args.Filter);
+
+            return Lista;
+        }
+
+        public cp_proveedor_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            decimal id;
+            if (args.Value == null || !decimal.TryParse(args.Value.ToString(), out id))
+                return null;
+            return get_info_demanda(IdEmpresa, Convert.ToDecimal(args.Value));
+        }
+
+        public cp_proveedor_Info get_info_demanda(int IdEmpresa, decimal IdProducto)
+        {
+            cp_proveedor_Info info = new cp_proveedor_Info();
+
+            using (Entities_cuentas_por_pagar Contex = new Entities_cuentas_por_pagar())
+            {
+                info = (from q in Contex.vwcp_proveedor_consulta
+                      
+                        select new cp_proveedor_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdPersona = q.IdPersona,
+                            IdProveedor = q.IdProveedor,
+                            pr_codigo = q.pr_codigo,
+                            info_persona = new Info.General.tb_persona_Info
+                            {
+                                pe_cedulaRuc=q.pe_cedulaRuc,
+                                pe_nombreCompleto=q.pe_nombreCompleto
+                            }
+                           
+                        }).FirstOrDefault();
+
+            }
+          
+            return info;
+        }
+
         public List<cp_proveedor_Info> get_list(int IdEmpresa, int skip, int take, string filter)
         {
             try
@@ -355,15 +404,17 @@ namespace Core.Erp.Data.CuentasPorPagar
                           
                            where
                             p.IdEmpresa == IdEmpresa
-                         
+                           
+                            && (p.IdProveedor.ToString() + " " + p.pe_nombreCompleto).Contains(filter)
                            select new
                            {
                                p.IdEmpresa,
                                p.IdPersona,
                                p.IdProveedor,
-                               p.pe_nombreCompleto,
+                               p.pe_cedulaRuc,
                                p.pr_codigo,
-                               p.pe_cedulaRuc
+                               p.pe_nombreCompleto
+                             
                            })
                              .OrderBy(p => p.IdProveedor)
                              .Skip(skip)
@@ -377,18 +428,18 @@ namespace Core.Erp.Data.CuentasPorPagar
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdPersona = q.IdPersona,
-                        //pr_descripcion = q.pr_descripcion,
-                        //pr_descripcion_2 = q.pr_descripcion_2,
-                        //pr_codigo = q.pr_codigo,
-                        //lote_num_lote = q.lote_num_lote,
-                        //lote_fecha_vcto = q.lote_fecha_vcto,
-                        //nom_categoria = q.ca_Categoria,
-                        //nom_presentacion = q.nom_presentacion
+                        IdProveedor = q.IdProveedor,
+                        pr_codigo=q.pr_codigo,
+                        info_persona=new Info.General.tb_persona_Info
+                        {
+                            pe_cedulaRuc=q.pe_cedulaRuc,
+                            pe_nombreCompleto=q.pe_nombreCompleto,
+                        }
+                        
                     });
                 }
 
                 Context.Dispose();
-              //  Lista = get_list_nombre_combo(Lista);
                 return Lista;
             }
             catch (Exception)
@@ -399,5 +450,8 @@ namespace Core.Erp.Data.CuentasPorPagar
         }
 
         #endregion
+
+
+
     }
 }

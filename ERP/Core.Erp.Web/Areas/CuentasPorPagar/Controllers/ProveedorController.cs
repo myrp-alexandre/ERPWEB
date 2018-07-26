@@ -9,6 +9,8 @@ using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Bus.General;
 using Core.Erp.Info.Helps;
+using DevExpress.Web;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
@@ -19,6 +21,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
 
+
+  
         public ActionResult Index()
         {
             return View();

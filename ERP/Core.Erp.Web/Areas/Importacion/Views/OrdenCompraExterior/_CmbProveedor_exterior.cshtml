@@ -6,21 +6,20 @@
         settings.Width = Unit.Percentage(100);
         settings.Properties.DropDownWidth = Unit.Percentage(100);
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-        settings.CallbackRouteValues = new { Controller = "Proveedor", Action = "CmbProveedor_exterior", Area = "CuentasPorPagar" };
+        settings.CallbackRouteValues = new { Controller = "OrdenCompraExterior", Action = "CmbProveedor_exterior", Area = "Importacion" };
         settings.Properties.CallbackPageSize = 15;
         settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
-        settings.Properties.TextField = "pr_descripcion";
+        settings.Properties.TextField = "info_persona.pe_nombreCompleto";
         settings.Properties.TextFormatString = "[{0}] {1}";
-        settings.Properties.ValueField = "IdProducto";
+        settings.Properties.ValueField = "IdProveedor";
         settings.Properties.ValueType = typeof(decimal);
 
-        settings.Properties.Columns.Add("IdProducto", "ID", 5);
-        settings.Properties.Columns.Add("pr_descripcion", "Producto", 65);
-        settings.Properties.Columns.Add("nom_categoria", "Categoria", 15);
-        settings.Properties.Columns.Add("nom_presentacion", "Presentación", 15);
+        settings.Properties.Columns.Add("IdProveedor", "ID", 5);
+        settings.Properties.Columns.Add("info_persona.pe_cedulaRuc", "Cedula", 15);
+        settings.Properties.Columns.Add("info_persona.pe_nombreCompleto", "Provedor", 80);
     })
-    .BindList(new Core.Erp.Web.Areas.Inventario.Controllers.ProductoController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Inventario.Controllers.ProductoController().get_info_bajo_demanda)
-    .Bind(Model.IdProducto);
+    .BindList(new Core.Erp.Web.Areas.Importacion.Controllers.OrdenCompraExteriorController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Importacion.Controllers.OrdenCompraExteriorController().get_info_bajo_demanda)
+    .Bind(Model.IdProveedor);
 
 }
 @comboBox.GetHtml()

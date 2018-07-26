@@ -123,12 +123,14 @@
     <Compile Include="Facturacion\fa_factura_Bus.cs" />
     <Compile Include="Facturacion\fa_factura_det_Bus.cs" />
     <Compile Include="Facturacion\fa_formaPago_Bus.cs" />
+    <Compile Include="Facturacion\fa_parametro_Bus.cs" />
     <Compile Include="Facturacion\fa_proforma_Bus.cs" />
     <Compile Include="Facturacion\fa_proforma_det_Bus.cs" />
     <Compile Include="Facturacion\fa_PuntoVta_Bus.cs" />
     <Compile Include="Facturacion\fa_TerminoPago_Bus.cs" />
     <Compile Include="Facturacion\fa_TerminoPago_Distribucion_Bus.cs" />
     <Compile Include="Facturacion\fa_TipoNota_Bus.cs" />
+    <Compile Include="Facturacion\fa_TipoNota_x_Empresa_x_Sucursal_Bus.cs" />
     <Compile Include="Facturacion\fa_Vendedor_Bus.cs" />
     <Compile Include="General\tb_banco_Bus.cs" />
     <Compile Include="General\tb_bodega_Bus.cs" />

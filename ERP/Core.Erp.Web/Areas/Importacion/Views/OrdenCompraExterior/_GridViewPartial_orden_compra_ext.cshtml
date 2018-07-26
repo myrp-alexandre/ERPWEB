@@ -3,9 +3,9 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridView_gastos_imp";
-        settings.CallbackRouteValues = new { Controller = "GastosImportacion", Action = "GridViewPartial_gastos_imp" };
-        settings.KeyFieldName = "IdGasto_tipo";
+        settings.Name = "GridViewPartial_orden_compra_ext";
+        settings.CallbackRouteValues = new { Controller = "OrdenCompraExterior", Action = "GridViewPartial_orden_compra_ext" };
+        settings.KeyFieldName = "IdOrdenCompra_ext";
         settings.Width = Unit.Percentage(100);
 
         //CConfiguracion responsive
@@ -77,10 +77,9 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("IdGasto_tipo", "Código").Width = Unit.Percentage(20);
-        settings.Columns.Add("gt_descripcion", "Descripción").Width = Unit.Percentage(30);
-        settings.Columns.Add("observacion", "Obaservación").Width = Unit.Percentage(30);
-        settings.Columns.Add("estado", "Estado").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdOrdenCompra_ext", "ID").Width = Unit.Percentage(20);
+        settings.Columns.Add("oe_fecha", "Fecha").Width = Unit.Percentage(30);
+        settings.Columns.Add("obseoe_observacionrvacion", "Obaservación").Width = Unit.Percentage(30);
     });
 }
 @grid.Bind(Model).GetHtml()
