@@ -155,6 +155,7 @@
     <Compile Include="Facturacion\fa_TerminoPago_Distribucion_Info.cs" />
     <Compile Include="Facturacion\fa_TerminoPago_Info.cs" />
     <Compile Include="Facturacion\fa_TipoNota_Info.cs" />
+    <Compile Include="Facturacion\fa_TipoNota_x_Empresa_x_Sucursal_Info.cs" />
     <Compile Include="Facturacion\fa_Vendedor_Info.cs" />
     <Compile Include="General\tb_banco_Info.cs" />
     <Compile Include="General\tb_bodega_Info.cs" />
