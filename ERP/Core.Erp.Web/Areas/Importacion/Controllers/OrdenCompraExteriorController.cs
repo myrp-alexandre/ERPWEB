@@ -12,14 +12,20 @@ using DevExpress.Web;
 using Core.Erp.Bus.CuentasPorPagar;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Bus.General;
 namespace Core.Erp.Web.Areas.Importacion.Controllers
 {
     
     public class OrdenCompraExteriorController : Controller
     {
+        #region variables
         imp_ordencompra_ext_Bus bus_orden = new imp_ordencompra_ext_Bus();
         cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        tb_pais_Bus bus_paises = new tb_pais_Bus();
+        tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
+
+        #endregion
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbProveedor_exterior()
         {
@@ -139,7 +145,12 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
         private void cargar_combos()
         {
-           
+            var lst_paises = bus_paises.get_list(false);
+            ViewBag.lst_paises = lst_paises;
+
+            var lst_ciudades = bus_ciudad.get_list("1", false);
+            ViewBag.lst_ciudades = lst_ciudades;
+
         }
 
     }

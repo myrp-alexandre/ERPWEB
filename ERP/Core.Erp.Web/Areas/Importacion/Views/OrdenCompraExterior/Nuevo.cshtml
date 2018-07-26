@@ -114,19 +114,134 @@
                 <a href="#tab_detalle" aria-controls="informacion_items" role="tab" data-toggle="tab">Detalle de items</a>
             </li>
             <li>
-                <a href="#tab_otros" aria-controls="otros" role="tab" data-toggle="tab">Otros datos</a>
+                <a href="#tab_otros" aria-controls="otros" role="tab" data-toggle="tab">Datos adicionales</a>
             </li>
            
            
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_detalle">
-                @Html.Action("GridViewPartial_orden_compra_ext")
+                @Html.Action("GridViewPartial_orden_compra_ext_det")
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_otros">
-              
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="IdEmpleado">País de embarque</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdPais_embarque, settings =>
+                               {
+                                   settings.Name = "IdPais";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdPais", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                   settings.Properties.Columns.Add("CodPais", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                   settings.Properties.Columns.Add("Nombre", "País").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdPais";
+                                   settings.Properties.ValueType = typeof(decimal);
+                                   settings.Properties.TextField = "Nombre";
+                                   //Boton para seleccionar ningun registro
+                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                   settings.Properties.NullText = "== Seleccione ==";
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+                               }).BindList(ViewBag.lst_paises).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdPais_embarque, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="IdEmpleado">País destino</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdPais_origen, settings =>
+                               {
+                                   settings.Name = "IdPais";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdPais", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                   settings.Properties.Columns.Add("CodPais", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                   settings.Properties.Columns.Add("Nombre", "País").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdPais";
+                                   settings.Properties.ValueType = typeof(decimal);
+                                   settings.Properties.TextField = "Nombre";
+                                   //Boton para seleccionar ningun registro
+                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                   settings.Properties.NullText = "== Seleccione ==";
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+                               }).BindList(ViewBag.lst_paises).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdPais_origen, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="IdEmpleado">Ciudad destino</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdCiudad_destino, settings =>
+                               {
+                                   settings.Name = "IdCiudad";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdCiudad", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                   settings.Properties.Columns.Add("Cod_Ciudad", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                   settings.Properties.Columns.Add("Descripcion_Ciudad", "Ciudad").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdCiudad";
+                                   settings.Properties.ValueType = typeof(decimal);
+                                   settings.Properties.TextField = "Descripcion_Ciudad";
+                                   //Boton para seleccionar ningun registro
+                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                   settings.Properties.NullText = "== Seleccione ==";
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+                               }).BindList(ViewBag.lst_ciudades).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdCiudad_destino, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="IdEmpleado">Forma de pago</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdCiudad_destino, settings =>
+                               {
+                                   settings.Name = "IdCiudad";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdCiudad", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                   settings.Properties.Columns.Add("Cod_Ciudad", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                   settings.Properties.Columns.Add("Descripcion_Ciudad", "Ciudad").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdCiudad";
+                                   settings.Properties.ValueType = typeof(decimal);
+                                   settings.Properties.TextField = "Descripcion_Ciudad";
+                                   //Boton para seleccionar ningun registro
+                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                   settings.Properties.NullText = "== Seleccione ==";
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+                               }).BindList(ViewBag.lst_ciudades).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdCiudad_destino, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-           
+
         </div>
     </div>
 
