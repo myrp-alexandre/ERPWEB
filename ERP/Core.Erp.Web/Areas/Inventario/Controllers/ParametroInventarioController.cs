@@ -41,8 +41,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
             in_movi_inven_tipo_Bus bus_tipo_movimiento = new in_movi_inven_tipo_Bus();
             var lst_tipo_movimiento = bus_tipo_movimiento.get_list(IdEmpresa, false);
-            ViewBag.lst_tipo_movimiento_ing = lst_tipo_movimiento.Where(q => q.cm_tipo_movi == "+").ToList();
             ViewBag.lst_tipo_movimiento_egr = lst_tipo_movimiento.Where(q => q.cm_tipo_movi == "-").ToList();
+            ViewBag.lst_tipo_movimiento_ing = lst_tipo_movimiento.Where(q => q.cm_tipo_movi == "+").ToList();
 
             in_Catalogo_Bus bus_catalogo = new in_Catalogo_Bus();
             var lst_aprobacion = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoInventario.EST_APROB),false);
