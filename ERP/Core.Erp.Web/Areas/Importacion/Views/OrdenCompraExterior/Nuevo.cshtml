@@ -106,12 +106,30 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            
+
+
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_detalle" aria-controls="informacion_items" role="tab" data-toggle="tab">Detalle de items</a>
+            </li>
+            <li>
+                <a href="#tab_otros" aria-controls="otros" role="tab" data-toggle="tab">Otros datos</a>
+            </li>
+           
+           
+        </ul>
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_detalle">
+                @Html.Action("GridViewPartial_orden_compra_ext")
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_otros">
+              
+            </div>
+           
         </div>
     </div>
-    
+
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index", "OrdenCompraExterior", new { Area ="Importacion" }, null)">Cancelar</a>

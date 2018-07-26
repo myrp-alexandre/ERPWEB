@@ -62,8 +62,12 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             List<imp_ordencompra_ext_Info> model = new List<imp_ordencompra_ext_Info>();
             return PartialView("_GridViewPartial_orden_compra_ext", model);
         }
+        public ActionResult GridViewPartial_orden_compra_ext_det()
+        {
+            List<imp_ordencompra_ext_det_Info> model = new List<imp_ordencompra_ext_det_Info>();
+            return PartialView("_GridViewPartial_orden_compra_ext", model);
+        }
 
-        
         public ActionResult Nuevo()
         {
             imp_ordencompra_ext_Info model = new imp_ordencompra_ext_Info
