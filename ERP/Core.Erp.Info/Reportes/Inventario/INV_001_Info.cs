@@ -32,5 +32,6 @@ namespace Core.Erp.Info.Reportes.Inventario
         public Nullable<System.DateTime> lote_fecha_vcto { get; set; }
         public string nom_presentacion { get; set; }
         public string signo { get; set; }
+        public string tm_descripcion { get; set; }
     }
 }
