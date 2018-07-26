@@ -38,6 +38,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_formaPago_Bus bus_forma_pago = new fa_formaPago_Bus();
         fa_cuotas_x_doc_List List_cuotas = new fa_cuotas_x_doc_List();
         fa_TerminoPago_Distribucion_Bus bus_termino_pago_distribucion = new fa_TerminoPago_Distribucion_Bus();
+        tb_sis_Documento_Tipo_Talonario_Bus bus_talonario = new tb_sis_Documento_Tipo_Talonario_Bus();
         #endregion
 
         public ActionResult Index()
@@ -201,8 +202,26 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetUltimoDocumento(int IdSucursal = 0, int IdPuntoVta = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            tb_sis_Documento_Tipo_Talonario_Info resultado;
+            var punto_venta = bus_punto_venta.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
+            if (punto_venta != null)
+            {
+                tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+                var bodega = bus_bodega.get_info(IdEmpresa, IdSucursal, Convert.ToInt32(punto_venta.IdBodega));
+                var sucursal = bus_sucursal.get_info(IdEmpresa, IdSucursal);
+                resultado = bus_talonario.get_info_ultimo_no_usado(IdEmpresa,sucursal.Su_CodigoEstablecimiento, bodega.cod_punto_emision, "FACT");
+            }
+            else
+                resultado = new tb_sis_Documento_Tipo_Talonario_Info();
+            if(resultado == null)
+                resultado = new tb_sis_Documento_Tipo_Talonario_Info();
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
 
-        public void CargarCuotas(DateTime? FechaPrimerPago, string IdTerminoPago = "", double PrimerPago = 0)
+        public void CargarCuotas(DateTime? FechaPrimerPago, string IdTerminoPago = "", double ValorPrimerPago = 0)
         {
             List<fa_cuotas_x_doc_Info> lst_cuotas = new List<fa_cuotas_x_doc_Info>();
             if (FechaPrimerPago != null)
@@ -210,17 +229,39 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 var lst_distribucion = bus_termino_pago_distribucion.get_list(IdTerminoPago);
                 int Secuencia = 1;
                 int NumCuotas = lst_distribucion.Count;
-                double totalAux = Math.Round(List_det.get_list().Sum(q => q.vt_total) - PrimerPago, 2, MidpointRounding.AwayFromZero);
+                double totalAux = Math.Round(List_det.get_list().Sum(q => q.vt_total) - ValorPrimerPago, 2, MidpointRounding.AwayFromZero);
                 DateTime FechaPagosAcum = Convert.ToDateTime(FechaPrimerPago);
                 foreach (var item in lst_distribucion)
                 {
-                    lst_cuotas.Add(new fa_cuotas_x_doc_Info
+                    if (Secuencia == 1)
                     {
-                        secuencia = Secuencia,
-                        num_cuota = Secuencia++,
-                        valor_a_cobrar = Math.Round(totalAux * (item.Por_distribucion / 100), 2, MidpointRounding.AwayFromZero),
-                        fecha_vcto_cuota = FechaPagosAcum.AddDays(item.Num_Dias_Vcto)
-                    });
+                        lst_cuotas.Add(new fa_cuotas_x_doc_Info
+                        {
+                            secuencia = Secuencia,
+                            num_cuota = Secuencia++,
+                            valor_a_cobrar = Math.Round(totalAux * (item.Por_distribucion / 100), 2, MidpointRounding.AwayFromZero),
+                            fecha_vcto_cuota = FechaPagosAcum
+                        });
+                    }
+                    else
+                    if (Secuencia == NumCuotas)
+                    {
+                        lst_cuotas.Add(new fa_cuotas_x_doc_Info
+                        {
+                            secuencia = Secuencia,
+                            num_cuota = Secuencia++,
+                            valor_a_cobrar = Math.Round(totalAux - lst_cuotas.Sum(q => q.valor_a_cobrar), 2, MidpointRounding.AwayFromZero),
+                            fecha_vcto_cuota = (item.Num_Dias_Vcto == 30 ? FechaPagosAcum.AddMonths(1) : FechaPagosAcum.AddDays(item.Num_Dias_Vcto))
+                        });
+                    }
+                    else
+                        lst_cuotas.Add(new fa_cuotas_x_doc_Info
+                        {
+                            secuencia = Secuencia,
+                            num_cuota = Secuencia++,
+                            valor_a_cobrar = Math.Round(totalAux * (item.Por_distribucion / 100), 2, MidpointRounding.AwayFromZero),
+                            fecha_vcto_cuota = (item.Num_Dias_Vcto == 30 ? FechaPagosAcum.AddMonths(1) : FechaPagosAcum.AddDays(item.Num_Dias_Vcto))
+                        });
                 }
             }            
             List_cuotas.set_list(lst_cuotas);
@@ -239,6 +280,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 lst_det = new List<fa_factura_det_Info>()
             };
             List_det.set_list(model.lst_det);
+            List_cuotas.set_list(new List<fa_cuotas_x_doc_Info>());
             cargar_combos();
             return View(model);
         }

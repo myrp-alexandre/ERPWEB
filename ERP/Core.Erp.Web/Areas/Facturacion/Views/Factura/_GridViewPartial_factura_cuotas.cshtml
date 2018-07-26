@@ -5,7 +5,7 @@
         settings.Name = "GridView_factura_cuotas";
         settings.CallbackRouteValues = new { Controller = "Factura", Action = "GridViewPartial_factura_cuotas", Area = "Facturacion"};
         settings.KeyFieldName = "secuencia";
-
+        settings.SettingsPager.PageSize = 3;
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Factura", Action = "EditingUpdateCuota", Area = "Facturacion" };
