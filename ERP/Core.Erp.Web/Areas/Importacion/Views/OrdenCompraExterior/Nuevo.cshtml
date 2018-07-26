@@ -131,7 +131,7 @@
                                 <label for="IdEmpleado">País de embarque</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.IdPais_embarque, settings =>
                                {
-                                   settings.Name = "IdPais";
+                                   settings.Name = "IdPais_embarque";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
                                    settings.Properties.Columns.Add("IdPais", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
@@ -160,7 +160,7 @@
                                 <label for="IdEmpleado">País destino</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.IdPais_origen, settings =>
                                {
-                                   settings.Name = "IdPais";
+                                   settings.Name = "IdPais_origen";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
                                    settings.Properties.Columns.Add("IdPais", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
@@ -216,25 +216,24 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="IdEmpleado">Forma de pago</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.IdCiudad_destino, settings =>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdCatalogo_forma_pago, settings =>
                                {
-                                   settings.Name = "IdCiudad";
+                                   settings.Name = "IdCatalogo_forma_pago";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                   settings.Properties.Columns.Add("IdCiudad", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                   settings.Properties.Columns.Add("Cod_Ciudad", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                   settings.Properties.Columns.Add("Descripcion_Ciudad", "Ciudad").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   settings.Properties.Columns.Add("codigo_pago_sri", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                   settings.Properties.Columns.Add("formas_pago_sri", "Forma pago").Width = System.Web.UI.WebControls.Unit.Percentage(90);
                                    //Campo ID
-                                   settings.Properties.ValueField = "IdCiudad";
+                                   settings.Properties.ValueField = "codigo_pago_sri";
                                    settings.Properties.ValueType = typeof(decimal);
-                                   settings.Properties.TextField = "Descripcion_Ciudad";
+                                   settings.Properties.TextField = "formas_pago_sri";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                                    settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
-                               }).BindList(ViewBag.lst_ciudades).GetHtml()
-                                @Html.ValidationMessageFor(q => q.IdCiudad_destino, "", new { @class = "text-danger" })
+                               }).BindList(ViewBag.lst_forma_pago).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdCatalogo_forma_pago, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>

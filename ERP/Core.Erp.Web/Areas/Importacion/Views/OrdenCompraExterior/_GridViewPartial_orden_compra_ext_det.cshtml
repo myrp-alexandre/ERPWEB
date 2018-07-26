@@ -1,7 +1,7 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView_inv_det";
+        settings.Name = "GridViewPartial_orden_compra_ext_det";
         settings.CallbackRouteValues = new { Controller = "IngresoInventario", Action = "GridViewPartial_inv_det", Area = "Inventario" };
         settings.KeyFieldName = "Secuencia";
 
