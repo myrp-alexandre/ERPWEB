@@ -159,9 +159,9 @@ namespace Core.Erp.Data.Facturacion
                     {
                         fa_TipoNota_x_Empresa_x_Sucursal det = new fa_TipoNota_x_Empresa_x_Sucursal
                         {
-                            IdEmpresa = item.IdEmpresa,
+                            IdEmpresa = info.IdEmpresa,
                             IdSucursal = item.IdSucursal,
-                            IdTipoNota = item.IdTipoNota,
+                            IdTipoNota = info.IdTipoNota,
                             IdCtaCble = item.IdCtaCble
                         };
                         Context.fa_TipoNota_x_Empresa_x_Sucursal.Add(det);
@@ -193,7 +193,7 @@ namespace Core.Erp.Data.Facturacion
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
                     
-                    var lst = Context.fa_TipoNota_x_Empresa_x_Sucursal.Where(q => q.IdTipoNota == info.IdTipoNota).ToList();
+                    var lst = Context.fa_TipoNota_x_Empresa_x_Sucursal.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoNota == info.IdTipoNota).ToList();
                     foreach (var item in lst)
                     {
                         Context.fa_TipoNota_x_Empresa_x_Sucursal.Remove(item);
@@ -202,7 +202,7 @@ namespace Core.Erp.Data.Facturacion
                     {
                         fa_TipoNota_x_Empresa_x_Sucursal det = new fa_TipoNota_x_Empresa_x_Sucursal
                         {
-                            IdEmpresa = item.IdEmpresa,
+                            IdEmpresa = info.IdEmpresa,
                             IdSucursal = item.IdSucursal,
                             IdTipoNota = info.IdTipoNota, 
                             IdCtaCble = item.IdCtaCble

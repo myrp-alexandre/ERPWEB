@@ -37,7 +37,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         public ActionResult Nuevo()
         {
-            fa_TipoNota_Info model = new fa_TipoNota_Info();
+            fa_TipoNota_Info model = new fa_TipoNota_Info
+            {
+                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"])
+            };
             cargar_combos();
             model.Lst_fa_TipoNota_x_Empresa_x_Sucursal = new List<fa_TipoNota_x_Empresa_x_Sucursal_Info>();
             List_fa_TipoNota_x_Empresa_x_Sucursal.set_list(model.Lst_fa_TipoNota_x_Empresa_x_Sucursal);
@@ -59,7 +62,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult Modificar(int  IdTipoNota = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            fa_TipoNota_Info model = bus_tiponota.get_info(IdTipoNota);
+            fa_TipoNota_Info model = bus_tiponota.get_info(IdTipoNota);            
             if (model == null)
                 return RedirectToAction("Index");
             model.Lst_fa_TipoNota_x_Empresa_x_Sucursal = bus_fa_tipo.get_list(IdEmpresa, IdTipoNota);

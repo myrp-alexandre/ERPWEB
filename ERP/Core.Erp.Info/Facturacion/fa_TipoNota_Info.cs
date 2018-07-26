@@ -32,5 +32,6 @@ namespace Core.Erp.Info.Facturacion
         //campos que no existen en la tabla
 
         public List<fa_TipoNota_x_Empresa_x_Sucursal_Info> Lst_fa_TipoNota_x_Empresa_x_Sucursal { get; set; }
+        public int IdEmpresa { get; set; }
     }
 }
