@@ -15,11 +15,14 @@ namespace Core.Erp.Info.Facturacion
         public decimal IdCbteVta { get; set; }
         public string CodCbteVta { get; set; }
         public string vt_tipoDoc { get; set; }
+        [RegularExpression(@"\d{3}", ErrorMessage = "El formato debe ser 000")]
         [Required(ErrorMessage = "El campo establecimiento es obligatorio")]
         public string vt_serie1 { get; set; }
+        [RegularExpression(@"\d{3}", ErrorMessage = "El formato debe ser 000")]
         [Required(ErrorMessage = "El campo punto de emisión es obligatorio")]
         public string vt_serie2 { get; set; }
-        [Required(ErrorMessage = "El campo # de factura es obligatorio")]
+        [RegularExpression(@"\d{9}", ErrorMessage = "El formato debe ser 000000000")]
+        [Required(ErrorMessage = "El campo # documento es obligatorio")]
         public string vt_NumFactura { get; set; }
         public Nullable<System.DateTime> Fecha_Autorizacion { get; set; }
         public string vt_autorizacion { get; set; }
