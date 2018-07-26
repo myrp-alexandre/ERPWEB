@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.Facturacion
     public class fa_TipoNota_x_Empresa_x_Sucursal_Bus
     {
         fa_TipoNota_x_Empresa_x_Sucursal_Data odata = new fa_TipoNota_x_Empresa_x_Sucursal_Data();
-        public List<fa_TipoNota_x_Empresa_x_Sucursal_Info> get_list(int IdEmpresa, int IdSucursal)
+        public List<fa_TipoNota_x_Empresa_x_Sucursal_Info> get_list(int IdEmpresa, int IdTipoNota)
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdSucursal);
+                return odata.get_list(IdEmpresa, IdTipoNota);
             }
             catch (Exception)
             {

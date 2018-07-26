@@ -39,12 +39,16 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             fa_TipoNota_Info model = new fa_TipoNota_Info();
             cargar_combos();
+            model.Lst_fa_TipoNota_x_Empresa_x_Sucursal = new List<fa_TipoNota_x_Empresa_x_Sucursal_Info>();
+            List_fa_TipoNota_x_Empresa_x_Sucursal.set_list(model.Lst_fa_TipoNota_x_Empresa_x_Sucursal);
+            cargar_combos_det();
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Nuevo(fa_TipoNota_Info model)
         {
+            model.Lst_fa_TipoNota_x_Empresa_x_Sucursal = List_fa_TipoNota_x_Empresa_x_Sucursal.get_list();
             if (!bus_tiponota.guardarDB(model))
             {
                 return View(model);
@@ -54,11 +58,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
         public ActionResult Modificar(int  IdTipoNota = 0)
         {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             fa_TipoNota_Info model = bus_tiponota.get_info(IdTipoNota);
             if (model == null)
-            {
                 return RedirectToAction("Index");
-            }
+            model.Lst_fa_TipoNota_x_Empresa_x_Sucursal = bus_fa_tipo.get_list(IdEmpresa, IdTipoNota);
+            List_fa_TipoNota_x_Empresa_x_Sucursal.set_list(model.Lst_fa_TipoNota_x_Empresa_x_Sucursal);
             cargar_combos();
             return View(model);
         }
@@ -66,6 +71,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Modificar(fa_TipoNota_Info model)
         {
+            model.Lst_fa_TipoNota_x_Empresa_x_Sucursal = List_fa_TipoNota_x_Empresa_x_Sucursal.get_list();
             if (!bus_tiponota.modificarDB(model))
             {
                 cargar_combos();
@@ -75,11 +81,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         public ActionResult Anular(int IdTipoNota = 0)
         {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             fa_TipoNota_Info model = bus_tiponota.get_info(IdTipoNota);
             if (model == null)
-            {
                 return RedirectToAction("Index");
-            }
+            model.Lst_fa_TipoNota_x_Empresa_x_Sucursal = bus_fa_tipo.get_list(IdEmpresa, IdTipoNota);
+            List_fa_TipoNota_x_Empresa_x_Sucursal.set_list(model.Lst_fa_TipoNota_x_Empresa_x_Sucursal);
             cargar_combos();
             return View(model);
         }
@@ -109,11 +116,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var lst_cuenta = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuenta = lst_cuenta;
         }
-        public ActionResult GridViewPartial_tipo_nota_sucursal(int IdSucursal = 0)
+        public ActionResult GridViewPartial_tipo_nota_sucursal(int IdTipoNota = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             fa_TipoNota_Info model = new fa_TipoNota_Info();
-            model.Lst_fa_TipoNota_x_Empresa_x_Sucursal = bus_fa_tipo.get_list(IdEmpresa, IdSucursal);
+            model.Lst_fa_TipoNota_x_Empresa_x_Sucursal = bus_fa_tipo.get_list(IdEmpresa, IdTipoNota);
             if (model.Lst_fa_TipoNota_x_Empresa_x_Sucursal.Count == 0)
                 model.Lst_fa_TipoNota_x_Empresa_x_Sucursal = List_fa_TipoNota_x_Empresa_x_Sucursal.get_list();
             cargar_combos_det();
@@ -176,9 +183,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public void AddRow(fa_TipoNota_x_Empresa_x_Sucursal_Info info_det)
         {
             List<fa_TipoNota_x_Empresa_x_Sucursal_Info> list = get_list();
-            info_det.IdSucursal = list.Count == 0 ? 1 : list.Max(q => q.IdSucursal) + 1;
+            info_det.IdSucursal = list.Count == 0 ? 1 : list.Max(q => q.IdTipoNota) + 1;
             info_det.IdEmpresa = info_det.IdEmpresa;
-            info_det.IdTipoNota = info_det.IdTipoNota;
+            info_det.IdSucursal = info_det.IdSucursal;
             info_det.IdCtaCble = info_det.IdCtaCble;
 
             list.Add(info_det);
@@ -186,17 +193,17 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
         public void UpdateRow(fa_TipoNota_x_Empresa_x_Sucursal_Info info_det)
         {
-            fa_TipoNota_x_Empresa_x_Sucursal_Info edited_info = get_list().Where(m => m.IdSucursal == info_det.IdSucursal).First();
+            fa_TipoNota_x_Empresa_x_Sucursal_Info edited_info = get_list().Where(m => m.IdTipoNota == info_det.IdTipoNota).First();
             info_det.IdEmpresa = info_det.IdEmpresa;
-            info_det.IdTipoNota = info_det.IdTipoNota;
+            info_det.IdSucursal = info_det.IdSucursal;
             edited_info.IdCtaCble = info_det.IdCtaCble;
 
         }
 
-        public void DeleteRow(int IdSucursal)
+        public void DeleteRow(int IdTipoNota)
         {
             List<fa_TipoNota_x_Empresa_x_Sucursal_Info> list = get_list();
-            list.Remove(list.Where(m => m.IdSucursal == IdSucursal).First());
+            list.Remove(list.Where(m => m.IdTipoNota == IdTipoNota).First());
         }
     }
     #endregion
