@@ -23,12 +23,12 @@
             </div>
             <div class="col-md-offset-10 col-med-2">
                 <div class="form-group">
-                    <label for="">Fecha</label>
+                    <label for="">Fecha O.C</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.oe_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "cm_fecha" })
+                        @Html.TextBoxFor(q => q.oe_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_oc" })
                         @Html.ValidationMessageFor(q => q.oe_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -47,12 +47,12 @@
             </div>
             <div class="col-md-offset-10 col-med-2">
                 <div class="form-group">
-                    <label for="">Fecha</label>
+                    <label for="">Fecha embarque</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.oe_fecha_embarque, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "cm_fecha" })
+                        @Html.TextBoxFor(q => q.oe_fecha_embarque, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_embarque" })
                         @Html.ValidationMessageFor(q => q.oe_fecha_embarque, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -71,12 +71,12 @@
             </div>
             <div class="col-md-offset-10 col-med-2">
                 <div class="form-group">
-                    <label for="">Fecha</label>
+                    <label for="">Fecha llegada</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.oe_fecha_llegada, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "cm_fecha" })
+                        @Html.TextBoxFor(q => q.oe_fecha_llegada, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_llegada" })
                         @Html.ValidationMessageFor(q => q.oe_fecha_llegada, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -94,12 +94,12 @@
             </div>
             <div class="col-md-offset-10 col-med-2">
                 <div class="form-group">
-                    <label for="">Fecha</label>
+                    <label for="">Fecha desanualización</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.oe_fecha_llegada, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "cm_fecha" })
+                        @Html.TextBoxFor(q => q.oe_fecha_desaduanizacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_desanualizacion" })
                         @Html.ValidationMessageFor(q => q.oe_fecha_llegada, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -253,3 +253,28 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+
+<script>
+
+    $(function () {
+
+
+        $('#fecha_oc').datepicker({
+            autoclose: true
+        });
+        $('#fecha_llegada').datepicker({
+            autoclose: true
+        });
+
+        $('#fecha_embarque').datepicker({
+            autoclose: true
+        });
+        $('#fecha_desanualizacion').datepicker({
+            autoclose: true
+        });
+
+        
+    });
+
+
+</script>
