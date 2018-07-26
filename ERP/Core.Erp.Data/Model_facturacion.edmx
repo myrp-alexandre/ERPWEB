@@ -244,6 +244,47 @@
           <Property Name="IdFormaPago" Type="varchar" MaxLength="2" Nullable="false" />
           <Property Name="nom_FormaPago" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
+        <EntityType Name="fa_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_Factura" Type="int" />
+          <Property Name="pa_porc_max_total_item_x_despa_Guia" Type="float" />
+          <Property Name="IdMovi_inven_tipo_Dev_Vta" Type="int" />
+          <Property Name="IdMovi_inven_tipo_Factura_Anulacion" Type="int" />
+          <Property Name="IdMovi_inven_tipo_Dev_Vta_Anulacion" Type="int" />
+          <Property Name="Tipo_NC_x_DevVta" Type="int" />
+          <Property Name="IdDepartamento_x_DevVta" Type="int" />
+          <Property Name="IdTipoCbteCble_Factura" Type="int" />
+          <Property Name="IdTipoCbteCble_Factura_Reverso" Type="int" />
+          <Property Name="IdTipoCbteCble_Factura_Costo_VTA" Type="int" />
+          <Property Name="IdTipoCbteCble_Factura_Costo_VTA_Reverso" Type="int" />
+          <Property Name="IdTipoCbteCble_NC" Type="int" />
+          <Property Name="IdTipoCbteCble_NC_Reverso" Type="int" />
+          <Property Name="IdTipoCbteCble_ND" Type="int" />
+          <Property Name="IdTipoCbteCble_ND_Reverso" Type="int" />
+          <Property Name="SeImprimiGuiaRemiAuto" Type="char" MaxLength="1" />
+          <Property Name="NumeroDeItemFact" Type="int" />
+          <Property Name="TipoCobroDafaultFactu" Type="varchar" MaxLength="20" />
+          <Property Name="IdCaja_Default_Factura" Type="int" />
+          <Property Name="IdCtaCble_x_anticipo_cliente" Type="varchar" MaxLength="20" />
+          <Property Name="pa_IdTipoNota_NC_x_Anulacion" Type="int" />
+          <Property Name="pa_ruta_descarga_xml_fac_elct" Type="varchar" MaxLength="500" />
+          <Property Name="File_Reporte_FacturaDiseño" Type="varbinary(max)" />
+          <Property Name="File_Reporte_Nota_CRED_DEB" Type="varbinary(max)" />
+          <Property Name="IdCtaCble_IVA" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCble_SubTotal_Vtas_x_Default" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCble_CXC_Vtas_x_Default" Type="varchar" MaxLength="20" />
+          <Property Name="pa_X_Defecto_la_factura_es_cbte_elect" Type="bit" />
+          <Property Name="pa_X_Defecto_la_guia_es_cbte_elect" Type="bit" />
+          <Property Name="pa_X_Defecto_la_ND_es_cbte_elect" Type="bit" />
+          <Property Name="pa_X_Defecto_la_NC_es_cbte_elect" Type="bit" />
+          <Property Name="pa_Contabiliza_descuento" Type="bit" />
+          <Property Name="pa_IdCtaCble_descuento" Type="varchar" MaxLength="20" />
+          <Property Name="NumeroDeItemProforma" Type="int" />
+          <Property Name="clave_desbloqueo_precios" Type="varchar" MaxLength="200" />
+        </EntityType>
         <EntityType Name="fa_proforma">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -348,6 +389,17 @@
           <Property Name="ip" Type="varchar" MaxLength="25" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="fa_TipoNota_x_Empresa_x_Sucursal">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdTipoNota" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdTipoNota" Type="int" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="fa_Vendedor">
           <Key>
@@ -818,6 +870,18 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_factura' no t
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_fa_parametro_fa_TipoNota">
+          <End Role="fa_TipoNota" Type="Self.fa_TipoNota" Multiplicity="0..1" />
+          <End Role="fa_parametro" Type="Self.fa_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_TipoNota">
+              <PropertyRef Name="IdTipoNota" />
+            </Principal>
+            <Dependent Role="fa_parametro">
+              <PropertyRef Name="pa_IdTipoNota_NC_x_Anulacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_fa_proforma_det_fa_proforma">
           <End Role="fa_proforma" Type="Self.fa_proforma" Multiplicity="1" />
           <End Role="fa_proforma_det" Type="Self.fa_proforma_det" Multiplicity="*" />
@@ -886,6 +950,18 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_factura' no t
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_fa_TipoNota_x_Empresa_x_Sucursal_fa_TipoNota">
+          <End Role="fa_TipoNota" Type="Self.fa_TipoNota" Multiplicity="1" />
+          <End Role="fa_TipoNota_x_Empresa_x_Sucursal" Type="Self.fa_TipoNota_x_Empresa_x_Sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_TipoNota">
+              <PropertyRef Name="IdTipoNota" />
+            </Principal>
+            <Dependent Role="fa_TipoNota_x_Empresa_x_Sucursal">
+              <PropertyRef Name="IdTipoNota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Model_facturacionStoreContainer">
           <EntitySet Name="fa_cliente" EntityType="Self.fa_cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_cliente_contactos" EntityType="Self.fa_cliente_contactos" Schema="dbo" store:Type="Tables" />
@@ -898,12 +974,14 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_factura' no t
           <EntitySet Name="fa_factura_x_formaPago" EntityType="Self.fa_factura_x_formaPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_factura_x_in_Ing_Egr_Inven" EntityType="Self.fa_factura_x_in_Ing_Egr_Inven" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_formaPago" EntityType="Self.fa_formaPago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_parametro" EntityType="Self.fa_parametro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_proforma" EntityType="Self.fa_proforma" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_proforma_det" EntityType="Self.fa_proforma_det" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_PuntoVta" EntityType="Self.fa_PuntoVta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_TerminoPago" EntityType="Self.fa_TerminoPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_TerminoPago_Distribucion" EntityType="Self.fa_TerminoPago_Distribucion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_TipoNota" EntityType="Self.fa_TipoNota" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_TipoNota_x_Empresa_x_Sucursal" EntityType="Self.fa_TipoNota_x_Empresa_x_Sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_Vendedor" EntityType="Self.fa_Vendedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vwfa_proforma" EntityType="Self.vwfa_proforma" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1083,6 +1161,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_factura' no t
             <End Role="fa_factura" EntitySet="fa_factura" />
             <End Role="fa_factura_x_in_Ing_Egr_Inven" EntitySet="fa_factura_x_in_Ing_Egr_Inven" />
           </AssociationSet>
+          <AssociationSet Name="FK_fa_parametro_fa_TipoNota" Association="Self.FK_fa_parametro_fa_TipoNota">
+            <End Role="fa_TipoNota" EntitySet="fa_TipoNota" />
+            <End Role="fa_parametro" EntitySet="fa_parametro" />
+          </AssociationSet>
           <AssociationSet Name="FK_fa_proforma_det_fa_proforma" Association="Self.FK_fa_proforma_det_fa_proforma">
             <End Role="fa_proforma" EntitySet="fa_proforma" />
             <End Role="fa_proforma_det" EntitySet="fa_proforma_det" />
@@ -1102,6 +1184,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_factura' no t
           <AssociationSet Name="FK_fa_TerminoPago_Distribucion_fa_TerminoPago" Association="Self.FK_fa_TerminoPago_Distribucion_fa_TerminoPago">
             <End Role="fa_TerminoPago" EntitySet="fa_TerminoPago" />
             <End Role="fa_TerminoPago_Distribucion" EntitySet="fa_TerminoPago_Distribucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_TipoNota_x_Empresa_x_Sucursal_fa_TipoNota" Association="Self.FK_fa_TipoNota_x_Empresa_x_Sucursal_fa_TipoNota">
+            <End Role="fa_TipoNota" EntitySet="fa_TipoNota" />
+            <End Role="fa_TipoNota_x_Empresa_x_Sucursal" EntitySet="fa_TipoNota_x_Empresa_x_Sucursal" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1220,6 +1306,16 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_factura' no t
             <End Role="fa_formaPago" EntitySet="fa_formaPago" />
             <End Role="fa_factura_x_formaPago" EntitySet="fa_factura_x_formaPago" />
           </AssociationSet>
+          <EntitySet Name="fa_parametro" EntityType="Model_facturacion.fa_parametro" />
+          <EntitySet Name="fa_TipoNota_x_Empresa_x_Sucursal" EntityType="Model_facturacion.fa_TipoNota_x_Empresa_x_Sucursal" />
+          <AssociationSet Name="FK_fa_parametro_fa_TipoNota" Association="Model_facturacion.FK_fa_parametro_fa_TipoNota">
+            <End Role="fa_TipoNota" EntitySet="fa_TipoNota" />
+            <End Role="fa_parametro" EntitySet="fa_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_TipoNota_x_Empresa_x_Sucursal_fa_TipoNota" Association="Model_facturacion.FK_fa_TipoNota_x_Empresa_x_Sucursal_fa_TipoNota">
+            <End Role="fa_TipoNota" EntitySet="fa_TipoNota" />
+            <End Role="fa_TipoNota_x_Empresa_x_Sucursal" EntitySet="fa_TipoNota_x_Empresa_x_Sucursal" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="fa_cliente_tipo">
           <Key>
@@ -1276,6 +1372,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_factura' no t
           <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="fa_parametro" Relationship="Model_facturacion.FK_fa_parametro_fa_TipoNota" FromRole="fa_TipoNota" ToRole="fa_parametro" />
+          <NavigationProperty Name="fa_TipoNota_x_Empresa_x_Sucursal" Relationship="Model_facturacion.FK_fa_TipoNota_x_Empresa_x_Sucursal_fa_TipoNota" FromRole="fa_TipoNota" ToRole="fa_TipoNota_x_Empresa_x_Sucursal" />
         </EntityType>
         <EntityType Name="fa_PuntoVta">
           <Key>
@@ -2136,6 +2234,84 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_factura' no t
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="fa_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_Factura" Type="Int32" />
+          <Property Name="pa_porc_max_total_item_x_despa_Guia" Type="Double" />
+          <Property Name="IdMovi_inven_tipo_Dev_Vta" Type="Int32" />
+          <Property Name="IdMovi_inven_tipo_Factura_Anulacion" Type="Int32" />
+          <Property Name="IdMovi_inven_tipo_Dev_Vta_Anulacion" Type="Int32" />
+          <Property Name="Tipo_NC_x_DevVta" Type="Int32" />
+          <Property Name="IdDepartamento_x_DevVta" Type="Int32" />
+          <Property Name="IdTipoCbteCble_Factura" Type="Int32" />
+          <Property Name="IdTipoCbteCble_Factura_Reverso" Type="Int32" />
+          <Property Name="IdTipoCbteCble_Factura_Costo_VTA" Type="Int32" />
+          <Property Name="IdTipoCbteCble_Factura_Costo_VTA_Reverso" Type="Int32" />
+          <Property Name="IdTipoCbteCble_NC" Type="Int32" />
+          <Property Name="IdTipoCbteCble_NC_Reverso" Type="Int32" />
+          <Property Name="IdTipoCbteCble_ND" Type="Int32" />
+          <Property Name="IdTipoCbteCble_ND_Reverso" Type="Int32" />
+          <Property Name="SeImprimiGuiaRemiAuto" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="NumeroDeItemFact" Type="Int32" />
+          <Property Name="TipoCobroDafaultFactu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCaja_Default_Factura" Type="Int32" />
+          <Property Name="IdCtaCble_x_anticipo_cliente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pa_IdTipoNota_NC_x_Anulacion" Type="Int32" />
+          <Property Name="pa_ruta_descarga_xml_fac_elct" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="File_Reporte_FacturaDiseño" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="File_Reporte_Nota_CRED_DEB" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IdCtaCble_IVA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_SubTotal_Vtas_x_Default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_CXC_Vtas_x_Default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pa_X_Defecto_la_factura_es_cbte_elect" Type="Boolean" />
+          <Property Name="pa_X_Defecto_la_guia_es_cbte_elect" Type="Boolean" />
+          <Property Name="pa_X_Defecto_la_ND_es_cbte_elect" Type="Boolean" />
+          <Property Name="pa_X_Defecto_la_NC_es_cbte_elect" Type="Boolean" />
+          <Property Name="pa_Contabiliza_descuento" Type="Boolean" />
+          <Property Name="pa_IdCtaCble_descuento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroDeItemProforma" Type="Int32" />
+          <Property Name="clave_desbloqueo_precios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="fa_TipoNota" Relationship="Model_facturacion.FK_fa_parametro_fa_TipoNota" FromRole="fa_parametro" ToRole="fa_TipoNota" />
+        </EntityType>
+        <EntityType Name="fa_TipoNota_x_Empresa_x_Sucursal">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdTipoNota" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoNota" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="fa_TipoNota" Relationship="Model_facturacion.FK_fa_TipoNota_x_Empresa_x_Sucursal_fa_TipoNota" FromRole="fa_TipoNota_x_Empresa_x_Sucursal" ToRole="fa_TipoNota" />
+        </EntityType>
+        <Association Name="FK_fa_parametro_fa_TipoNota">
+          <End Type="Model_facturacion.fa_TipoNota" Role="fa_TipoNota" Multiplicity="0..1" />
+          <End Type="Model_facturacion.fa_parametro" Role="fa_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_TipoNota">
+              <PropertyRef Name="IdTipoNota" />
+            </Principal>
+            <Dependent Role="fa_parametro">
+              <PropertyRef Name="pa_IdTipoNota_NC_x_Anulacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_TipoNota_x_Empresa_x_Sucursal_fa_TipoNota">
+          <End Type="Model_facturacion.fa_TipoNota" Role="fa_TipoNota" Multiplicity="1" />
+          <End Type="Model_facturacion.fa_TipoNota_x_Empresa_x_Sucursal" Role="fa_TipoNota_x_Empresa_x_Sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_TipoNota">
+              <PropertyRef Name="IdTipoNota" />
+            </Principal>
+            <Dependent Role="fa_TipoNota_x_Empresa_x_Sucursal">
+              <PropertyRef Name="IdTipoNota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2598,6 +2774,58 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_factura' no t
                 <ScalarProperty Name="IdBodega_fa" ColumnName="IdBodega_fa" />
                 <ScalarProperty Name="IdSucursal_fa" ColumnName="IdSucursal_fa" />
                 <ScalarProperty Name="IdEmpresa_fa" ColumnName="IdEmpresa_fa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_parametro">
+            <EntityTypeMapping TypeName="Model_facturacion.fa_parametro">
+              <MappingFragment StoreEntitySet="fa_parametro">
+                <ScalarProperty Name="clave_desbloqueo_precios" ColumnName="clave_desbloqueo_precios" />
+                <ScalarProperty Name="NumeroDeItemProforma" ColumnName="NumeroDeItemProforma" />
+                <ScalarProperty Name="pa_IdCtaCble_descuento" ColumnName="pa_IdCtaCble_descuento" />
+                <ScalarProperty Name="pa_Contabiliza_descuento" ColumnName="pa_Contabiliza_descuento" />
+                <ScalarProperty Name="pa_X_Defecto_la_NC_es_cbte_elect" ColumnName="pa_X_Defecto_la_NC_es_cbte_elect" />
+                <ScalarProperty Name="pa_X_Defecto_la_ND_es_cbte_elect" ColumnName="pa_X_Defecto_la_ND_es_cbte_elect" />
+                <ScalarProperty Name="pa_X_Defecto_la_guia_es_cbte_elect" ColumnName="pa_X_Defecto_la_guia_es_cbte_elect" />
+                <ScalarProperty Name="pa_X_Defecto_la_factura_es_cbte_elect" ColumnName="pa_X_Defecto_la_factura_es_cbte_elect" />
+                <ScalarProperty Name="IdCtaCble_CXC_Vtas_x_Default" ColumnName="IdCtaCble_CXC_Vtas_x_Default" />
+                <ScalarProperty Name="IdCtaCble_SubTotal_Vtas_x_Default" ColumnName="IdCtaCble_SubTotal_Vtas_x_Default" />
+                <ScalarProperty Name="IdCtaCble_IVA" ColumnName="IdCtaCble_IVA" />
+                <ScalarProperty Name="File_Reporte_Nota_CRED_DEB" ColumnName="File_Reporte_Nota_CRED_DEB" />
+                <ScalarProperty Name="File_Reporte_FacturaDiseño" ColumnName="File_Reporte_FacturaDiseño" />
+                <ScalarProperty Name="pa_ruta_descarga_xml_fac_elct" ColumnName="pa_ruta_descarga_xml_fac_elct" />
+                <ScalarProperty Name="pa_IdTipoNota_NC_x_Anulacion" ColumnName="pa_IdTipoNota_NC_x_Anulacion" />
+                <ScalarProperty Name="IdCtaCble_x_anticipo_cliente" ColumnName="IdCtaCble_x_anticipo_cliente" />
+                <ScalarProperty Name="IdCaja_Default_Factura" ColumnName="IdCaja_Default_Factura" />
+                <ScalarProperty Name="TipoCobroDafaultFactu" ColumnName="TipoCobroDafaultFactu" />
+                <ScalarProperty Name="NumeroDeItemFact" ColumnName="NumeroDeItemFact" />
+                <ScalarProperty Name="SeImprimiGuiaRemiAuto" ColumnName="SeImprimiGuiaRemiAuto" />
+                <ScalarProperty Name="IdTipoCbteCble_ND_Reverso" ColumnName="IdTipoCbteCble_ND_Reverso" />
+                <ScalarProperty Name="IdTipoCbteCble_ND" ColumnName="IdTipoCbteCble_ND" />
+                <ScalarProperty Name="IdTipoCbteCble_NC_Reverso" ColumnName="IdTipoCbteCble_NC_Reverso" />
+                <ScalarProperty Name="IdTipoCbteCble_NC" ColumnName="IdTipoCbteCble_NC" />
+                <ScalarProperty Name="IdTipoCbteCble_Factura_Costo_VTA_Reverso" ColumnName="IdTipoCbteCble_Factura_Costo_VTA_Reverso" />
+                <ScalarProperty Name="IdTipoCbteCble_Factura_Costo_VTA" ColumnName="IdTipoCbteCble_Factura_Costo_VTA" />
+                <ScalarProperty Name="IdTipoCbteCble_Factura_Reverso" ColumnName="IdTipoCbteCble_Factura_Reverso" />
+                <ScalarProperty Name="IdTipoCbteCble_Factura" ColumnName="IdTipoCbteCble_Factura" />
+                <ScalarProperty Name="IdDepartamento_x_DevVta" ColumnName="IdDepartamento_x_DevVta" />
+                <ScalarProperty Name="Tipo_NC_x_DevVta" ColumnName="Tipo_NC_x_DevVta" />
+                <ScalarProperty Name="IdMovi_inven_tipo_Dev_Vta_Anulacion" ColumnName="IdMovi_inven_tipo_Dev_Vta_Anulacion" />
+                <ScalarProperty Name="IdMovi_inven_tipo_Factura_Anulacion" ColumnName="IdMovi_inven_tipo_Factura_Anulacion" />
+                <ScalarProperty Name="IdMovi_inven_tipo_Dev_Vta" ColumnName="IdMovi_inven_tipo_Dev_Vta" />
+                <ScalarProperty Name="pa_porc_max_total_item_x_despa_Guia" ColumnName="pa_porc_max_total_item_x_despa_Guia" />
+                <ScalarProperty Name="IdMovi_inven_tipo_Factura" ColumnName="IdMovi_inven_tipo_Factura" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_TipoNota_x_Empresa_x_Sucursal">
+            <EntityTypeMapping TypeName="Model_facturacion.fa_TipoNota_x_Empresa_x_Sucursal">
+              <MappingFragment StoreEntitySet="fa_TipoNota_x_Empresa_x_Sucursal">
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Info.Facturacion;
+using Core.Erp.Info.Inventario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,6 +95,9 @@ namespace Core.Erp.Data.Facturacion
                         esta_impresa = Entity.esta_impresa,
                         valor_abono = Entity.valor_abono
                     };
+                    var Entity_fp = Context.fa_factura_x_formaPago.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdCbteVta == IdCbteVta).FirstOrDefault();
+                    if (Entity_fp != null)
+                        info.IdFormaPago = Entity_fp.IdFormaPago;
                 }
                 return info;
             }
@@ -130,50 +134,204 @@ namespace Core.Erp.Data.Facturacion
 
         public bool guardarDB(fa_factura_Info info)
         {
+            Entities_facturacion db_f = new Entities_facturacion();
             try
             {
-                using (Entities_facturacion Context = new Entities_facturacion())
-                {
-                    fa_factura Entity = new fa_factura
-                    {
+                #region Variables
+                int secuencia = 1;
+                #endregion
 
+                #region Factura
+
+                #region Cabecera
+                db_f.fa_factura.Add(new fa_factura
+                {
+                    IdEmpresa = info.IdEmpresa,
+                    IdSucursal = info.IdSucursal,
+                    IdBodega = info.IdBodega,
+                    IdCbteVta = info.IdCbteVta = get_id(info.IdEmpresa, info.IdSucursal, info.IdBodega),
+                    CodCbteVta = info.CodCbteVta,
+                    vt_tipoDoc = info.vt_tipoDoc,
+                    vt_serie1 = info.vt_serie1,
+                    vt_serie2 = info.vt_serie2,
+                    vt_NumFactura = info.vt_NumFactura,
+                    Fecha_Autorizacion = info.fecha_primera_cuota,
+                    vt_anio = info.vt_anio,
+                    vt_autorizacion = info.vt_autorizacion,
+                    vt_fecha = info.vt_fecha,
+                    vt_fech_venc = info.vt_fech_venc,
+                    vt_mes = info.vt_mes,
+                    IdCliente = info.IdCliente,
+                    IdContacto = info.IdContacto,
+                    IdVendedor = info.IdVendedor,
+                    vt_plazo = info.vt_plazo,
+                    vt_Observacion = info.vt_Observacion,
+                    IdPeriodo = info.IdPeriodo,
+                    vt_tipo_venta = info.vt_tipo_venta,
+                    IdCaja = info.IdCaja,
+                    IdPuntoVta = info.IdPuntoVta,
+                    fecha_primera_cuota = info.fecha_primera_cuota,
+                    Fecha_Transaccion = info.fecha_primera_cuota,
+                    Estado = info.Estado = "A",
+                    esta_impresa = info.esta_impresa,
+                    valor_abono = info.valor_abono,
+                    IdUsuario = info.IdUsuario
+                });
+                #endregion
+
+                #region Detalle
+                foreach (var item in info.lst_det)
+                {
+                    db_f.fa_factura_det.Add(new fa_factura_det
+                    {
                         IdEmpresa = info.IdEmpresa,
                         IdSucursal = info.IdSucursal,
                         IdBodega = info.IdBodega,
-                        IdCbteVta = info.IdCbteVta=get_id(info.IdEmpresa, info.IdSucursal, info.IdBodega),
-                        CodCbteVta = info.CodCbteVta,
-                        vt_tipoDoc = info.vt_tipoDoc,
-                        vt_serie1 = info.vt_serie1,
-                        vt_serie2 = info.vt_serie2,
-                        vt_NumFactura = info.vt_NumFactura,
-                        Fecha_Autorizacion = info.fecha_primera_cuota,
-                        vt_anio = info.vt_anio,
-                        vt_autorizacion = info.vt_autorizacion,
-                        vt_fecha = info.vt_fecha,
-                        vt_fech_venc = info.vt_fech_venc,
-                        vt_mes = info.vt_mes,
-                        IdCliente = info.IdCliente,
-                        IdContacto = info.IdContacto,
-                        IdVendedor = info.IdVendedor,
-                        vt_plazo = info.vt_plazo,
-                        vt_Observacion = info.vt_Observacion,
-                        IdPeriodo = info.IdPeriodo,
-                        vt_tipo_venta = info.vt_tipo_venta,
-                        IdCaja = info.IdCaja,
-                        IdPuntoVta = info.IdPuntoVta,
-                        fecha_primera_cuota = info.fecha_primera_cuota,
-                        Fecha_Transaccion = info.fecha_primera_cuota,
-                        Estado = info.Estado="A",
-                        esta_impresa = info.esta_impresa,
-                        valor_abono = info.valor_abono,
+                        IdCbteVta = info.IdCbteVta,
+                        Secuencia = secuencia++,
+
+                        IdProducto = item.IdProducto,
+                        vt_cantidad = item.vt_cantidad,
+                        vt_Precio = item.vt_Precio,
+                        vt_PorDescUnitario = item.vt_PorDescUnitario,
+                        vt_DescUnitario = item.vt_DescUnitario,
+                        vt_PrecioFinal = item.vt_PrecioFinal,
+                        vt_Subtotal = item.vt_Subtotal,
+                        vt_por_iva = item.vt_por_iva,
+                        IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
+                        vt_iva = item.vt_iva,
+                        vt_total = item.vt_total,
+                        vt_estado = item.vt_estado = "A",
                         
-                        IdUsuario = info.IdUsuario
-                        
-                    };
-                    Context.fa_factura.Add(Entity);
-                    Context.SaveChanges();
+                        IdEmpresa_pf = item.IdEmpresa_pf,
+                        IdSucursal_pf = item.IdSucursal_pf,
+                        IdProforma = item.IdProforma,
+                        Secuencia_pf = item.Secuencia_pf,
+
+                        IdCentroCosto = item.IdCentroCosto,
+                        IdCentroCosto_sub_centro_costo = item.IdCentroCosto_sub_centro_costo,
+                        IdPunto_Cargo = item.IdPunto_Cargo,
+                        IdPunto_cargo_grupo = item.IdPunto_cargo_grupo
+                    });
                 }
+                #endregion
+
+                #region Forma de pago
+                db_f.fa_factura_x_formaPago.Add(new fa_factura_x_formaPago
+                {
+                    IdEmpresa = info.IdEmpresa,
+                    IdSucursal = info.IdSucursal,
+                    IdBodega = info.IdBodega,
+                    IdCbteVta = info.IdCbteVta,
+                    IdFormaPago = info.IdFormaPago
+                });
+                #endregion
+
+                #endregion
+
+                #region MovimientoDeInventario
+                //var parametro = db_f.fa_para
+                in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info,0);
+                #endregion
+
+                db_f.SaveChanges();
                 return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public in_Ing_Egr_Inven_Info armar_movi_inven(fa_factura_Info info, int IdMoviInven_tipo)
+        {
+            try
+            {
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    var motivo = Context.in_Motivo_Inven.Where(q => q.IdEmpresa == info.IdEmpresa && q.Tipo_Ing_Egr == "EGR" && q.Genera_Movi_Inven == "S").FirstOrDefault();
+                    if (motivo == null)
+                        return null;
+
+                    var tipo = Context.in_movi_inven_tipo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMovi_inven_tipo == IdMoviInven_tipo).FirstOrDefault();
+                    if (tipo == null)
+                        return null;
+
+                    int secuencia = 1;
+
+                    in_Ing_Egr_Inven_Info movimiento = new in_Ing_Egr_Inven_Info
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdSucursal = info.IdSucursal,
+                        IdBodega = info.IdBodega,
+                        IdMovi_inven_tipo = IdMoviInven_tipo,
+                        IdNumMovi = 0,
+                        cm_fecha = info.vt_fecha.Date,
+                        cm_observacion = "FACT# " + info.vt_serie1 + "-" + info.vt_serie2 + "-" + info.vt_NumFactura + " " + info.vt_Observacion,
+                        IdUsuario = info.IdUsuario,
+                        IdUsuarioUltModi = info.IdUsuarioUltModi,
+                        IdMotivo_Inv = motivo.IdMotivo_Inv,
+                        signo = "-",
+                        CodMoviInven = "FACT# " + info.vt_NumFactura,
+                        lst_in_Ing_Egr_Inven_det = new List<in_Ing_Egr_Inven_det_Info>()
+                    };
+                    foreach (var item in info.lst_det)
+                    {                        
+                        var lst = Context.in_Producto_Composicion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdProductoPadre == item.IdProducto).ToList();
+                        if (lst.Count == 0)
+                        {
+                            var producto = (from p in Context.in_Producto
+                                           join t in Context.in_ProductoTipo
+                                           on new { p.IdEmpresa, p.IdProductoTipo } equals new { t.IdEmpresa, t.IdProductoTipo }
+                                           where p.IdEmpresa == info.IdEmpresa && p.IdProducto == item.IdProducto
+                                           && t.tp_ManejaInven == "S"
+                                           select p.IdProducto).FirstOrDefault();
+
+                            if (producto != 0)
+                            {
+                                movimiento.lst_in_Ing_Egr_Inven_det.Add(new in_Ing_Egr_Inven_det_Info
+                                {
+                                    IdEmpresa = movimiento.IdEmpresa,
+                                    IdSucursal = movimiento.IdSucursal,
+                                    IdBodega = (int)movimiento.IdBodega,
+                                    IdMovi_inven_tipo = movimiento.IdMovi_inven_tipo,
+                                    IdNumMovi = 0,
+                                    Secuencia = secuencia++,
+                                    IdProducto = item.IdProducto,
+                                    dm_cantidad = 0,
+                                    dm_cantidad_sinConversion = item.vt_cantidad,
+                                    mv_costo = 0,
+                                    mv_costo_sinConversion = 0,
+                                    IdUnidadMedida = null,
+                                    IdUnidadMedida_sinConversion = null
+                                });
+                            }
+                        }else
+                        {
+                            foreach (var comp in lst)
+                            {
+                                movimiento.lst_in_Ing_Egr_Inven_det.Add(new in_Ing_Egr_Inven_det_Info
+                                {
+                                    IdEmpresa = movimiento.IdEmpresa,
+                                    IdSucursal = movimiento.IdSucursal,
+                                    IdBodega = (int)movimiento.IdBodega,
+                                    IdMovi_inven_tipo = movimiento.IdMovi_inven_tipo,
+                                    IdNumMovi = 0,
+                                    Secuencia = secuencia++,
+                                    IdProducto = comp.IdProductoHijo,
+                                    dm_cantidad = item.vt_cantidad,
+                                    dm_cantidad_sinConversion = item.vt_cantidad,
+                                    mv_costo = 0,
+                                    mv_costo_sinConversion = 0,
+                                    IdUnidadMedida = null,
+                                    IdUnidadMedida_sinConversion = null
+                                });                                
+                            }
+                        }
+                    }
+                    return movimiento;
+                }                         
             }
             catch (Exception)
             {
