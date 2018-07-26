@@ -38,6 +38,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_formaPago_Bus bus_forma_pago = new fa_formaPago_Bus();
         fa_cuotas_x_doc_List List_cuotas = new fa_cuotas_x_doc_List();
         fa_TerminoPago_Distribucion_Bus bus_termino_pago_distribucion = new fa_TerminoPago_Distribucion_Bus();
+        tb_sis_Documento_Tipo_Talonario_Bus bus_talonario = new tb_sis_Documento_Tipo_Talonario_Bus();
         #endregion
 
         #region Index
@@ -51,10 +52,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             return View(model);
         }
+
         [ValidateInput(false)]
         public ActionResult GridViewPartial_factura(DateTime? Fecha_ini, DateTime? Fecha_fin)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);            
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
             var model = bus_factura.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
@@ -147,7 +149,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             if (i_validar.IdCbteVta == 0)
             {
-                
+
             }
 
             return true;
@@ -157,7 +159,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #region Json
         public JsonResult cargar_contactos(decimal IdCliente = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);            
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             var resultado = bus_contacto.get_list(IdEmpresa, IdCliente);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
@@ -208,12 +210,31 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         public JsonResult get_info_termino_pago(string IdTerminoPago = "")
-        {            
+        {
             var resultado = bus_termino_pago.get_info(IdTerminoPago);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        public void CargarCuotas(DateTime? FechaPrimerPago, string IdTerminoPago = "", double PrimerPago = 0)
+        public JsonResult GetUltimoDocumento(int IdSucursal = 0, int IdPuntoVta = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            tb_sis_Documento_Tipo_Talonario_Info resultado;
+            var punto_venta = bus_punto_venta.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
+            if (punto_venta != null)
+            {
+                tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+                var bodega = bus_bodega.get_info(IdEmpresa, IdSucursal, Convert.ToInt32(punto_venta.IdBodega));
+                var sucursal = bus_sucursal.get_info(IdEmpresa, IdSucursal);
+                resultado = bus_talonario.get_info_ultimo_no_usado(IdEmpresa, sucursal.Su_CodigoEstablecimiento, bodega.cod_punto_emision, "FACT");
+            }
+            else
+                resultado = new tb_sis_Documento_Tipo_Talonario_Info();
+            if (resultado == null)
+                resultado = new tb_sis_Documento_Tipo_Talonario_Info();
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        public void CargarCuotas(DateTime? FechaPrimerPago, string IdTerminoPago = "", double ValorPrimerPago = 0)
         {
             List<fa_cuotas_x_doc_Info> lst_cuotas = new List<fa_cuotas_x_doc_Info>();
             if (FechaPrimerPago != null)
@@ -221,19 +242,41 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 var lst_distribucion = bus_termino_pago_distribucion.get_list(IdTerminoPago);
                 int Secuencia = 1;
                 int NumCuotas = lst_distribucion.Count;
-                double totalAux = Math.Round(List_det.get_list().Sum(q => q.vt_total) - PrimerPago, 2, MidpointRounding.AwayFromZero);
+                double totalAux = Math.Round(List_det.get_list().Sum(q => q.vt_total) - ValorPrimerPago, 2, MidpointRounding.AwayFromZero);
                 DateTime FechaPagosAcum = Convert.ToDateTime(FechaPrimerPago);
                 foreach (var item in lst_distribucion)
                 {
-                    lst_cuotas.Add(new fa_cuotas_x_doc_Info
+                    if (Secuencia == 1)
                     {
-                        secuencia = Secuencia,
-                        num_cuota = Secuencia++,
-                        valor_a_cobrar = Math.Round(totalAux * (item.Por_distribucion / 100), 2, MidpointRounding.AwayFromZero),
-                        fecha_vcto_cuota = FechaPagosAcum.AddDays(item.Num_Dias_Vcto)
-                    });
+                        lst_cuotas.Add(new fa_cuotas_x_doc_Info
+                        {
+                            secuencia = Secuencia,
+                            num_cuota = Secuencia++,
+                            valor_a_cobrar = Math.Round(totalAux * (item.Por_distribucion / 100), 2, MidpointRounding.AwayFromZero),
+                            fecha_vcto_cuota = FechaPagosAcum
+                        });
+                    }
+                    else
+                    if (Secuencia == NumCuotas)
+                    {
+                        lst_cuotas.Add(new fa_cuotas_x_doc_Info
+                        {
+                            secuencia = Secuencia,
+                            num_cuota = Secuencia++,
+                            valor_a_cobrar = Math.Round(totalAux - lst_cuotas.Sum(q => q.valor_a_cobrar), 2, MidpointRounding.AwayFromZero),
+                            fecha_vcto_cuota = (item.Num_Dias_Vcto == 30 ? FechaPagosAcum.AddMonths(1) : FechaPagosAcum.AddDays(item.Num_Dias_Vcto))
+                        });
+                    }
+                    else
+                        lst_cuotas.Add(new fa_cuotas_x_doc_Info
+                        {
+                            secuencia = Secuencia,
+                            num_cuota = Secuencia++,
+                            valor_a_cobrar = Math.Round(totalAux * (item.Por_distribucion / 100), 2, MidpointRounding.AwayFromZero),
+                            fecha_vcto_cuota = (item.Num_Dias_Vcto == 30 ? FechaPagosAcum.AddMonths(1) : FechaPagosAcum.AddDays(item.Num_Dias_Vcto))
+                        });
                 }
-            }            
+            }
             List_cuotas.set_list(lst_cuotas);
         }
         #endregion
@@ -293,22 +336,25 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult EditingDeleteCuota(int Secuencia)
         {
             List_cuotas.DeleteRow(Secuencia);
-            var model = List_cuotas.get_list();            
+            var model = List_cuotas.get_list();
             return PartialView("_GridViewPartial_factura_cuotas", model);
         }
         #endregion
 
         #region funciones del detalle
+
         public ActionResult GridViewPartial_LoteFactura()
         {
             var model = List_producto.get_list();
             return PartialView("_GridViewPartial_LoteFactura", model);
         }
+
         private void cargar_combos_detalle()
         {
             var lst_impuesto = bus_impuesto.get_list("IVA", false);
             ViewBag.lst_impuesto = lst_impuesto;
         }
+
         [ValidateInput(false)]
         public ActionResult GridViewPartial_factura_det()
         {
@@ -317,6 +363,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["IdCliente"]) ? Request.Params["IdCliente"].ToString() : "-1";
             return PartialView("_GridViewPartial_factura_det", model);
         }
+
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_factura_det_Info info_det)
         {
@@ -358,6 +405,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_factura_det", model);
         }
+
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_factura_det_Info info_det)
         {
@@ -399,6 +447,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_factura_det", model);
         }
+
         public ActionResult EditingDelete(int Secuencia)
         {
             List_det.DeleteRow(Secuencia);
@@ -407,6 +456,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return PartialView("_GridViewPartial_factura_det", model);
         }
         #endregion
+
     }
 
     public class fa_factura_det_List
