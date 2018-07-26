@@ -90,5 +90,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_tipo_nota_sucursal()
+        {
+            var model = new object[0];
+            return PartialView("_GridViewPartial_tipo_nota_sucursal", model);
+        }
     }
 }

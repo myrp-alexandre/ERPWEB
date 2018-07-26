@@ -8798,6 +8798,7 @@
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_CmbCuenta_contable.cshtml" />
     <Content Include="Areas\Facturacion\Views\ParametrosFacturacion\Index.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_CmbProducto_Importacion.cshtml" />
+    <Content Include="Areas\Facturacion\Views\TipoNota\_GridViewPartial_tipo_nota_sucursal.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
