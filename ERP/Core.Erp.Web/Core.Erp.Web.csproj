@@ -281,6 +281,7 @@
     <Compile Include="Areas\Facturacion\Controllers\ClienteController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ClienteTipoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\FacturaController.cs" />
+    <Compile Include="Areas\Facturacion\Controllers\ParametrosFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ProformaController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ProformaFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\PuntoVentaController.cs" />
@@ -8796,6 +8797,7 @@
     <Content Include="Areas\Facturacion\Views\Factura\_CmbCliente_Factura.cshtml" />
     <Content Include="Areas\Facturacion\Views\Factura\_GridViewPartial_factura_cuotas.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_CmbCuenta_contable.cshtml" />
+    <Content Include="Areas\Facturacion\Views\ParametrosFacturacion\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
