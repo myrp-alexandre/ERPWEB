@@ -25,7 +25,7 @@ namespace Core.Erp.Data.Importacion
                                  IdPais_embarque = q.IdPais_embarque,
                                  IdCiudad_destino = q.IdCiudad_destino,
                                  IdCatalogo_via = q.IdCatalogo_via,
-                                 IdCatalogo_forma_pago = q.IdCatalogo_forma_pago,
+                                 codigo_pago_sri = q.codigo_pago_sri,
                                  oe_fecha = q.oe_fecha,
                                  oe_fecha_llegada_est = q.oe_fecha_llegada_est,
                                  oe_fecha_embarque_est = q.oe_fecha_embarque_est,
@@ -70,7 +70,7 @@ namespace Core.Erp.Data.Importacion
                         IdPais_embarque = Entity.IdPais_embarque,
                         IdCiudad_destino = Entity.IdCiudad_destino,
                         IdCatalogo_via = Entity.IdCatalogo_via,
-                        IdCatalogo_forma_pago = Entity.IdCatalogo_forma_pago,
+                        codigo_pago_sri = Entity.codigo_pago_sri,
                         oe_fecha = Entity.oe_fecha,
                         oe_fecha_llegada_est = Entity.oe_fecha_llegada_est,
                         oe_fecha_embarque = Entity.oe_fecha_embarque,
@@ -96,7 +96,7 @@ namespace Core.Erp.Data.Importacion
             }
         }
 
-        private decimal get_id()
+        private decimal get_id(int IdEmpresa)
         {
             try
             {
@@ -104,6 +104,7 @@ namespace Core.Erp.Data.Importacion
                 using (Entities_importacion Context = new Entities_importacion())
                 {
                     var lst = from q in Context.imp_orden_compra_ext
+                              where q.IdEmpresa==IdEmpresa
                               select q;
                     if (lst.Count() > 0)
                         ID = lst.Max(q => q.IdOrdenCompra_ext) + 1;
@@ -127,13 +128,13 @@ namespace Core.Erp.Data.Importacion
                     imp_orden_compra_ext Entity = new imp_orden_compra_ext
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdOrdenCompra_ext = info.IdOrdenCompra_ext,
+                        IdOrdenCompra_ext = info.IdOrdenCompra_ext = get_id(info.IdEmpresa),
                         IdProveedor = info.IdProveedor,
                         IdPais_origen = info.IdPais_origen,
                         IdPais_embarque = info.IdPais_embarque,
                         IdCiudad_destino = info.IdCiudad_destino,
                         IdCatalogo_via = info.IdCatalogo_via,
-                        IdCatalogo_forma_pago = info.IdCatalogo_forma_pago,
+                        codigo_pago_sri = info.codigo_pago_sri,
                         oe_fecha = info.oe_fecha,
                         oe_fecha_llegada_est = info.oe_fecha_llegada_est,
                         oe_fecha_embarque = info.oe_fecha_embarque,
@@ -201,7 +202,7 @@ namespace Core.Erp.Data.Importacion
                          Entity.IdPais_embarque = info.IdPais_embarque;
                          Entity.IdCiudad_destino = info.IdCiudad_destino;
                          Entity.IdCatalogo_via = info.IdCatalogo_via;
-                         Entity.IdCatalogo_forma_pago = info.IdCatalogo_forma_pago;
+                         Entity.codigo_pago_sri = info.codigo_pago_sri;
                          Entity.oe_fecha = info.oe_fecha;
                          Entity.oe_fecha_llegada_est = info.oe_fecha_llegada_est;
                          Entity.oe_fecha_embarque = info.oe_fecha_embarque;

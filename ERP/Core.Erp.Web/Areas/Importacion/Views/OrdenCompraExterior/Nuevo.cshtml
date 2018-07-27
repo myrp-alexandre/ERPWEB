@@ -24,7 +24,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="rub_grupo">Tipo de embarque*</label>
-                            @Html.DropDownListFor(q => q.IdCatalogo_via, new SelectList(ViewBag.lst_catalogo, "IdCatalogo", "ca_descripcion"), new { @class = "form-control" })
+                            @Html.DropDownListFor(q => q.IdCatalogo_via, new SelectList(ViewBag.lst_catalogos, "IdCatalogo", "ca_descripcion"), new { @class = "form-control" })
                             @Html.ValidationMessageFor(q => q.IdCatalogo_via, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -223,24 +223,24 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="IdEmpleado">Forma de pago</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.IdCatalogo_forma_pago, settings =>
-                               {
-                                   settings.Name = "IdCatalogo_forma_pago";
-                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                   settings.Properties.Columns.Add("codigo_pago_sri", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                   settings.Properties.Columns.Add("formas_pago_sri", "Forma pago").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                                   //Campo ID
-                                   settings.Properties.ValueField = "codigo_pago_sri";
-                                   settings.Properties.ValueType = typeof(int);
-                                   settings.Properties.TextField = "formas_pago_sri";
-                                   //Boton para seleccionar ningun registro
-                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                   settings.Properties.NullText = "== Seleccione ==";
-                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                @Html.DevExpress().ComboBoxFor(q => q.codigo_pago_sri, settings =>
+                           {
+                               settings.Name = "codigo_pago_sri";
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                               settings.Properties.Columns.Add("codigo_pago_sri", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                               settings.Properties.Columns.Add("formas_pago_sri", "Forma pago").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                               //Campo ID
+                               settings.Properties.ValueField = "codigo_pago_sri";
+                               settings.Properties.ValueType = typeof(string);
+                               settings.Properties.TextField = "formas_pago_sri";
+                               //Boton para seleccionar ningun registro
+                               settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                               settings.Properties.NullText = "== Seleccione ==";
+                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
-                               }).BindList(ViewBag.lst_forma_pago).GetHtml()
-                                @Html.ValidationMessageFor(q => q.IdCatalogo_forma_pago, "", new { @class = "text-danger" })
+                           }).BindList(ViewBag.lst_forma_pago).GetHtml()
+                                @Html.ValidationMessageFor(q => q.codigo_pago_sri, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>

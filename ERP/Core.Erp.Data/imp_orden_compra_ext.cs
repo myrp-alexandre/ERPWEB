@@ -29,7 +29,7 @@ namespace Core.Erp.Data
         public string IdPais_embarque { get; set; }
         public string IdCiudad_destino { get; set; }
         public int IdCatalogo_via { get; set; }
-        public int IdCatalogo_forma_pago { get; set; }
+        public string codigo_pago_sri { get; set; }
         public System.DateTime oe_fecha { get; set; }
         public Nullable<System.DateTime> oe_fecha_llegada_est { get; set; }
         public Nullable<System.DateTime> oe_fecha_embarque_est { get; set; }
@@ -52,7 +52,6 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> oe_fecha_desaduanizacion { get; set; }
     
         public virtual imp_catalogo imp_catalogo { get; set; }
-        public virtual imp_catalogo imp_catalogo1 { get; set; }
         public virtual imp_liquidacion imp_liquidacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imp_liquidacion_det_x_imp_orden_compra_ext> imp_liquidacion_det_x_imp_orden_compra_ext { get; set; }

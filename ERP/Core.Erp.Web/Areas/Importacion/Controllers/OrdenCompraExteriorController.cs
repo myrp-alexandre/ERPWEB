@@ -119,7 +119,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 oe_fecha_desaduanizacion = DateTime.Now,
                 IdPais_origen="1",
                 IdCiudad_destino="09",
-                IdCatalogo_forma_pago=20
+                codigo_pago_sri="20"
                 
 
             };

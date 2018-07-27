@@ -31,10 +31,10 @@ namespace Core.Erp.Data
         public virtual DbSet<imp_gasto_x_ct_plancta> imp_gasto_x_ct_plancta { get; set; }
         public virtual DbSet<imp_liquidacion> imp_liquidacion { get; set; }
         public virtual DbSet<imp_liquidacion_det_x_imp_orden_compra_ext> imp_liquidacion_det_x_imp_orden_compra_ext { get; set; }
-        public virtual DbSet<imp_orden_compra_ext> imp_orden_compra_ext { get; set; }
         public virtual DbSet<imp_orden_compra_ext_ct_cbteble_det_gastos> imp_orden_compra_ext_ct_cbteble_det_gastos { get; set; }
         public virtual DbSet<imp_orden_compra_ext_det> imp_orden_compra_ext_det { get; set; }
         public virtual DbSet<imp_orden_compra_ext_recepcion> imp_orden_compra_ext_recepcion { get; set; }
         public virtual DbSet<imp_parametro> imp_parametro { get; set; }
+        public virtual DbSet<imp_orden_compra_ext> imp_orden_compra_ext { get; set; }
     }
 }
