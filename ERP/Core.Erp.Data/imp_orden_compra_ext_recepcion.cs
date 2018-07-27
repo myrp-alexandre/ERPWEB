@@ -30,6 +30,13 @@ namespace Core.Erp.Data
         public int IdSucursal_inv { get; set; }
         public int IdMovi_inven_tipo_inv { get; set; }
         public decimal IdNumMovi_inv { get; set; }
+        public bool estado { get; set; }
+        public string IdUsuario_creacion { get; set; }
+        public Nullable<System.DateTime> fecha_creacion { get; set; }
+        public string IdUsuario_modificacion { get; set; }
+        public Nullable<System.DateTime> fecha_modificacion { get; set; }
+        public string IdUsuario_anulacion { get; set; }
+        public Nullable<System.DateTime> fecha_anulacion { get; set; }
     
         public virtual imp_orden_compra_ext imp_orden_compra_ext { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
