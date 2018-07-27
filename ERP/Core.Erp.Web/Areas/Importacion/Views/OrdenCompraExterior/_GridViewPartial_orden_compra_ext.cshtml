@@ -8,6 +8,9 @@
         settings.KeyFieldName = "IdOrdenCompra_ext";
         settings.Width = Unit.Percentage(100);
 
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
@@ -52,17 +55,23 @@
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
+            if(Convert.ToBoolean(e.GetValue("cantidad_global"))!= Convert.ToBoolean(e.GetValue("cantidad_x_recibir")))
+            {
+                e.Row.ForeColor = System.Drawing.Color.Blue;
+
+            }
         };
         settings.Columns.Add(c =>
         {
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true)
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true && (Convert.ToInt32(DataBinder.Eval(tc.DataItem, "cantidad_global")) == Convert.ToInt32(DataBinder.Eval(tc.DataItem, "cantidad_x_recibir"))))
                 {
+
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdGasto_tipo = DataBinder.Eval(tc.DataItem, "IdGasto_tipo") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdGasto_tipo = DataBinder.Eval(tc.DataItem, "IdGasto_tipo") },
+                Html.ActionLink("Modificar", "Modificar", new { IdOrdenCompra_ext = DataBinder.Eval(tc.DataItem, "IdOrdenCompra_ext") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdOrdenCompra_ext = DataBinder.Eval(tc.DataItem, "IdOrdenCompra_ext") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -77,9 +86,22 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("IdOrdenCompra_ext", "ID").Width = Unit.Percentage(20);
-        settings.Columns.Add("oe_fecha", "Fecha").Width = Unit.Percentage(30);
-        settings.Columns.Add("obseoe_observacionrvacion", "Obaservación").Width = Unit.Percentage(30);
+        settings.Columns.Add("IdOrdenCompra_ext", "ID").Width = Unit.Percentage(5);
+        settings.Columns.Add("pe_cedulaRuc", "Cédula/Ruc").Width = Unit.Percentage(10);
+        settings.Columns.Add("pe_nombreCompleto", "Proveedor").Width = Unit.Percentage(30);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "oe_fecha";
+            column.Caption = "Fecha";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add("oe_observacion", "Obaservación").Width = Unit.Percentage(30);
     });
 }
 @grid.Bind(Model).GetHtml()

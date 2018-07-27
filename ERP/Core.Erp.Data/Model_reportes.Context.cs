@@ -67,9 +67,6 @@ namespace Core.Erp.Data
         public virtual DbSet<VWCXC_001> VWCXC_001 { get; set; }
         public virtual DbSet<VWCXC_001_diario> VWCXC_001_diario { get; set; }
         public virtual DbSet<VWCAJ_001> VWCAJ_001 { get; set; }
-        public virtual DbSet<VWFAC_003> VWFAC_003 { get; set; }
-        public virtual DbSet<VWFAC_003_cuotas> VWFAC_003_cuotas { get; set; }
-        public virtual DbSet<VWFAC_004> VWFAC_004 { get; set; }
         public virtual DbSet<VWROL_001> VWROL_001 { get; set; }
         public virtual DbSet<VWROL_014> VWROL_014 { get; set; }
         public virtual DbSet<VWINV_008> VWINV_008 { get; set; }
@@ -77,11 +74,18 @@ namespace Core.Erp.Data
         public virtual DbSet<VWCXC_002_diario> VWCXC_002_diario { get; set; }
         public virtual DbSet<VWBAN_005> VWBAN_005 { get; set; }
         public virtual DbSet<VWBAN_006> VWBAN_006 { get; set; }
-        public virtual DbSet<VWFAC_001> VWFAC_001 { get; set; }
         public virtual DbSet<VWCXP_009> VWCXP_009 { get; set; }
-        public virtual DbSet<VWFAC_006> VWFAC_006 { get; set; }
         public virtual DbSet<VWINV_001> VWINV_001 { get; set; }
         public virtual DbSet<VWINV_002> VWINV_002 { get; set; }
+        public virtual DbSet<VWFAC_001> VWFAC_001 { get; set; }
+        public virtual DbSet<VWFAC_003> VWFAC_003 { get; set; }
+        public virtual DbSet<VWFAC_003_cuotas> VWFAC_003_cuotas { get; set; }
+        public virtual DbSet<VWFAC_004> VWFAC_004 { get; set; }
+        public virtual DbSet<VWFAC_005> VWFAC_005 { get; set; }
+        public virtual DbSet<VWFAC_006> VWFAC_006 { get; set; }
+        public virtual DbSet<VWFAC_007> VWFAC_007 { get; set; }
+        public virtual DbSet<VWFAC_008> VWFAC_008 { get; set; }
+        public virtual DbSet<VWFAC_008_cancelaciones> VWFAC_008_cancelaciones { get; set; }
     
         public virtual int SPROL_002(Nullable<int> idempresa, Nullable<int> idnomina_tipo, Nullable<int> idnomina_Tipo_liq, Nullable<int> idperiodo)
         {

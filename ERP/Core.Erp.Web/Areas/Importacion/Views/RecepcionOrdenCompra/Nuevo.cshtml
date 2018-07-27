@@ -1,0 +1,49 @@
+﻿@model Core.Erp.Info.Importacion.imp_orden_compra_ext_recepcion_Info
+@{
+    ViewBag.Title = "Recepcion de ordene de compra";
+    //if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    //{
+    //    Response.Redirect("~/Account/Login");
+    //}
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Nuevo", "RecepcionOrdenCompra", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdOrdenCompraExt)
+    @Html.HiddenFor(q => q.IdEmpresa)
+    
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "OrdenCompraExterior", new { Area ="Importacion" }, null)">Cancelar</a>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+
+<script>
+
+    $(function () {
+
+
+        $('#fecha_oc').datepicker({
+            autoclose: true
+        });
+        $('#fecha_llegada').datepicker({
+            autoclose: true
+        });
+
+        $('#fecha_embarque').datepicker({
+            autoclose: true
+        });
+        $('#fecha_desanualizacion').datepicker({
+            autoclose: true
+        });
+
+        
+    });
+
+
+</script>

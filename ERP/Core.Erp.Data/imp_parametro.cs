@@ -15,6 +15,7 @@ namespace Core.Erp.Data
     public partial class imp_parametro
     {
         public int IdEmpresa { get; set; }
+        public string IdCtaCble { get; set; }
         public int IdTipoCbte_liquidacion { get; set; }
         public int IdTipoCbte_liquidacion_anu { get; set; }
     }

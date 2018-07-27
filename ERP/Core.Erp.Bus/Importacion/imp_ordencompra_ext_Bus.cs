@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.Importacion
     {
         imp_ordencompra_ext_Data odata = new imp_ordencompra_ext_Data();
 
-        public List<imp_ordencompra_ext_Info> get_list()
+        public List<imp_ordencompra_ext_Info> get_list(int IdEmpresa, DateTime fecha_inicio, DateTime Fecha_fin)
         {
             try
             {
-                return odata.get_list();
+                return odata.get_list(IdEmpresa,fecha_inicio, Fecha_fin);
             }
             catch (Exception)
             {

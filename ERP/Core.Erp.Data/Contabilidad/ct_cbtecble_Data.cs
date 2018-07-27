@@ -240,6 +240,10 @@ namespace Core.Erp.Data.Contabilidad
                     ct_cbtecble Entity = Context.ct_cbtecble.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoCbte == info.IdTipoCbte && q.IdCbteCble == info.IdCbteCble);
                     if (Entity == null) return false;
 
+                    //Si ya esta anulado no volverlo a anular
+                    if (Entity.cb_Estado == "I")
+                        return true;
+
                     #region Comprobante reverso
                     ct_cbtecble_tipo e_tipo = Context.ct_cbtecble_tipo.Where(q=>q.IdEmpresa == info.IdEmpresa && q.IdTipoCbte == info.IdTipoCbte).FirstOrDefault();
                     if (e_tipo == null) return false;

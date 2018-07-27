@@ -148,6 +148,7 @@
     <Compile Include="Facturacion\fa_factura_det_Info.cs" />
     <Compile Include="Facturacion\fa_factura_Info.cs" />
     <Compile Include="Facturacion\fa_formaPago_Info.cs" />
+    <Compile Include="Facturacion\fa_notaCreDeb_Info.cs" />
     <Compile Include="Facturacion\fa_parametro_Info.cs" />
     <Compile Include="Facturacion\fa_proforma_det_Info.cs" />
     <Compile Include="Facturacion\fa_proforma_Info.cs" />
@@ -191,6 +192,8 @@
     <Compile Include="Importacion\imp_liquidacion_det_x_imp_orden_compra_ext_Info.cs" />
     <Compile Include="Importacion\imp_ordencompra_ext_det_Info.cs" />
     <Compile Include="Importacion\imp_ordencompra_ext_Info.cs" />
+    <Compile Include="Importacion\imp_orden_compra_ext_recepcion_det_Info.cs" />
+    <Compile Include="Importacion\imp_orden_compra_ext_recepcion_Info.cs" />
     <Compile Include="Importacion\imp_parametro_Info.cs" />
     <Compile Include="Inventario\in_CatalogoTipo_Info.cs" />
     <Compile Include="Inventario\in_Catalogo_Info.cs" />
