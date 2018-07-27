@@ -64,6 +64,7 @@
         <EntityTypeShape EntityType="Model_reportes.VWFAC_007" Width="1.5" PointX="26.375" PointY="21.75" />
         <EntityTypeShape EntityType="Model_reportes.VWFAC_008" Width="1.5" PointX="28.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_reportes.VWFAC_008_cancelaciones" Width="1.5" PointX="28.375" PointY="7.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWIMP_001" Width="1.5" PointX="28.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

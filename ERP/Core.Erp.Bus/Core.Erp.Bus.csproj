@@ -124,6 +124,8 @@
     <Compile Include="Facturacion\fa_factura_det_Bus.cs" />
     <Compile Include="Facturacion\fa_formaPago_Bus.cs" />
     <Compile Include="Facturacion\fa_notaCreDeb_Bus.cs" />
+    <Compile Include="Facturacion\fa_notaCreDeb_det_Bus.cs" />
+    <Compile Include="Facturacion\fa_notaCreDeb_x_fa_factura_NotaDeb_Bus.cs" />
     <Compile Include="Facturacion\fa_parametro_Bus.cs" />
     <Compile Include="Facturacion\fa_proforma_Bus.cs" />
     <Compile Include="Facturacion\fa_proforma_det_Bus.cs" />
@@ -228,6 +230,10 @@
     <Compile Include="Reportes\Facturacion\FAC_004_Bus.cs" />
     <Compile Include="Reportes\Facturacion\FAC_005_Bus.cs" />
     <Compile Include="Reportes\Facturacion\FAC_006_Bus.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_007_Bus.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_008_Bus.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_008_cancelaciones_Bus.cs" />
+    <Compile Include="Reportes\Importacion\IMP_001_Bus.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Bus.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Bus.cs" />
     <Compile Include="Reportes\Inventario\INV_007_Bus.cs" />
