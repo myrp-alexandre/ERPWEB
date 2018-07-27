@@ -61,7 +61,7 @@ namespace Core.Erp.Data.Importacion
             }
         }
 
-        private int get_id(int IdCatalogo_tipo)
+        private int get_id()
         {
             try
             {
@@ -69,7 +69,6 @@ namespace Core.Erp.Data.Importacion
                 using (Entities_importacion Context = new Entities_importacion())
                 {
                     var lst = from q in Context.imp_catalogo
-                              where q.IdCatalogo_tipo == IdCatalogo_tipo
                               select q;
                     if (lst.Count() > 0)
                         ID = lst.Max(q => q.IdCatalogo) +1;
@@ -91,7 +90,7 @@ namespace Core.Erp.Data.Importacion
                 {
                     imp_catalogo Entity = new imp_catalogo
                     {
-                        IdCatalogo = info.IdCatalogo = get_id(info.IdCatalogo_tipo),
+                        IdCatalogo = info.IdCatalogo = get_id(),
                         IdCatalogo_tipo = info.IdCatalogo_tipo,
                         ca_descripcion = info.ca_descripcion,
                         estado = info.estado = true

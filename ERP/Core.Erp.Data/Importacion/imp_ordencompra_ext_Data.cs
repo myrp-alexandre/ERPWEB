@@ -87,7 +87,9 @@ namespace Core.Erp.Data.Importacion
                         IdLiquidacion = Entity.IdLiquidacion,
                         oe_fecha_llegada = Entity.oe_fecha_llegada,
                         oe_fecha_embarque_est = Entity.oe_fecha_embarque_est,
-                        oe_fecha_desaduanizacion = Entity.oe_fecha_desaduanizacion
+                        oe_fecha_desaduanizacion = Entity.oe_fecha_desaduanizacion,
+                        IdMoneda_destino=Entity.IdMoneda_destino,
+                        IdMoneda_origen=Entity.IdMoneda_destino
                     };
                 }
                 return info;
@@ -151,7 +153,9 @@ namespace Core.Erp.Data.Importacion
                         oe_fecha_desaduanizacion = info.oe_fecha_desaduanizacion,
                         estado = info.estado=true,
                        fecha_creacion=DateTime.Now,
-                       IdUsuario_creacion=info.IdUsuario_creacion
+                       IdUsuario_creacion=info.IdUsuario_creacion,
+                       IdMoneda_destino=info.IdMoneda_destino,
+                       IdMoneda_origen=info.IdMoneda_origen
                         
                     };
                     Context.imp_orden_compra_ext.Add(Entity);
@@ -217,6 +221,8 @@ namespace Core.Erp.Data.Importacion
                          Entity.IdLiquidacion = info.IdLiquidacion;
                          Entity.oe_fecha_llegada = info.oe_fecha_llegada;
                          Entity.oe_fecha_embarque_est = info.oe_fecha_embarque_est;
+                    Entity.IdMoneda_origen = info.IdMoneda_origen;
+                    Entity.IdMoneda_destino = info.IdMoneda_destino;
                     Entity.oe_fecha_desaduanizacion = info.oe_fecha_desaduanizacion;
 
                     foreach (var item in info.lst_detalle)
