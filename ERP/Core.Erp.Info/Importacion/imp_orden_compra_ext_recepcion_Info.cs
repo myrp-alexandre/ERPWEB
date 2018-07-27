@@ -27,5 +27,8 @@ namespace Core.Erp.Info.Importacion
         public string IdUsuario_anulacion { get; set; }
         public Nullable<System.DateTime> fecha_anulacion { get; set; }
 
+
+        public string pe_nombreCompleto { get; set; }
+        public string pe_cedulaRuc { get; set; }
     }
 }

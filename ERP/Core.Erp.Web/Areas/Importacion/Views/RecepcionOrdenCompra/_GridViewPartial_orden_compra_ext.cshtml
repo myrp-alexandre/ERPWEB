@@ -86,12 +86,13 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("IdOrdenCompra_ext", "ID").Width = Unit.Percentage(5);
+        settings.Columns.Add("IdRecepcion", "ID").Width = Unit.Percentage(5);
+        settings.Columns.Add("IdOrdenCompra_ext", "ID O.C").Width = Unit.Percentage(5);
         settings.Columns.Add("pe_cedulaRuc", "Cédula/Ruc").Width = Unit.Percentage(10);
         settings.Columns.Add("pe_nombreCompleto", "Proveedor").Width = Unit.Percentage(30);
         settings.Columns.Add(column =>
         {
-            column.FieldName = "oe_fecha";
+            column.FieldName = "or_fecha";
             column.Caption = "Fecha";
             column.Width = Unit.Percentage(10);
             column.PropertiesEdit.DisplayFormatString = "d";
@@ -101,7 +102,7 @@
                 sp.Width = Unit.Percentage(100);
             });
         });
-        settings.Columns.Add("oe_observacion", "Obaservación").Width = Unit.Percentage(30);
+        settings.Columns.Add("or_observacion", "Obaservación").Width = Unit.Percentage(30);
     });
 }
 @grid.Bind(Model).GetHtml()

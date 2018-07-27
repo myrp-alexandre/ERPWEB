@@ -38,5 +38,6 @@ namespace Core.Erp.Data
         public virtual DbSet<vwimp_orden_compra_ext> vwimp_orden_compra_ext { get; set; }
         public virtual DbSet<imp_orden_compra_ext_recepcion_det> imp_orden_compra_ext_recepcion_det { get; set; }
         public virtual DbSet<imp_orden_compra_ext_recepcion> imp_orden_compra_ext_recepcion { get; set; }
+        public virtual DbSet<vwimp_orden_compra_ext_recepcion> vwimp_orden_compra_ext_recepcion { get; set; }
     }
 }

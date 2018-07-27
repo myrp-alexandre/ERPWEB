@@ -16,7 +16,7 @@ namespace Core.Erp.Data.Importacion
                 List<imp_orden_compra_ext_recepcion_Info> Lista;
                 using (Entities_importacion Context = new Entities_importacion())
                 {
-                    Lista = (from q in Context.imp_orden_compra_ext_recepcion
+                    Lista = (from q in Context.vwimp_orden_compra_ext_recepcion
                              where q.IdEmpresa == IdEmpresa
                              && q.or_fecha >= fecha_inicio
                              && q.or_fecha <= Fecha_fin
@@ -31,7 +31,9 @@ namespace Core.Erp.Data.Importacion
                                  IdEmpresa_inv = q.IdEmpresa_inv,
                                  IdSucursal_inv = q.IdSucursal_inv,
                                  IdMovi_inven_tipo_inv = q.IdMovi_inven_tipo_inv,
-                                 IdNumMovi_inv = q.IdNumMovi_inv
+                                 IdNumMovi_inv = q.IdNumMovi_inv,
+                                 pe_cedulaRuc=q.pe_cedulaRuc,
+                                 pe_nombreCompleto=q.pe_nombreCompleto
 
                              }).ToList();
                 }
