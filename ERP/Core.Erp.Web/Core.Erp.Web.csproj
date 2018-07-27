@@ -347,6 +347,7 @@
     <Compile Include="Areas\Reportes\Controllers\CuentasPorCobrarReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\CuentasPorPagarReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\FacturacionReportesController.cs" />
+    <Compile Include="Areas\Reportes\Controllers\ImportacionReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\InventarioReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\RRHHReportesController.cs" />
     <Compile Include="Areas\Reportes\ReportesAreaRegistration.cs" />
@@ -8832,6 +8833,7 @@
     <Content Include="Areas\Importacion\Views\RecepcionOrdenCompra\Index.cshtml" />
     <Content Include="Areas\Importacion\Views\RecepcionOrdenCompra\Modificar.cshtml" />
     <Content Include="Areas\Importacion\Views\RecepcionOrdenCompra\Nuevo.cshtml" />
+    <Content Include="Areas\Reportes\Views\ImportacionReportes\IMP_001.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -9080,6 +9082,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Facturacion\FAC_006_Rpt.resx">
       <DependentUpon>FAC_006_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Importacion\IMP_001_Rpt.resx">
+      <DependentUpon>IMP_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Inventario\INV_001_Rpt.resx">
       <DependentUpon>INV_001_Rpt.cs</DependentUpon>
