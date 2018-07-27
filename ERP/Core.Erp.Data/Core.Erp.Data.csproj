@@ -869,6 +869,10 @@
     <Compile Include="Reportes\Facturacion\FAC_004_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_005_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_006_Data.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_007_Data.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_008_cancelaciones_Data.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_008_Data.cs" />
+    <Compile Include="Reportes\Importacion\IMP_001_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_007_Data.cs" />
@@ -1489,6 +1493,9 @@
     </Compile>
     <Compile Include="vwfa_proforma_det_por_facturar.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWIMP_001.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="vwimp_orden_compra_ext.cs">
       <DependentUpon>Model_importacion.tt</DependentUpon>

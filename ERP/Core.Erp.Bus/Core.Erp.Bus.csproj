@@ -228,6 +228,10 @@
     <Compile Include="Reportes\Facturacion\FAC_004_Bus.cs" />
     <Compile Include="Reportes\Facturacion\FAC_005_Bus.cs" />
     <Compile Include="Reportes\Facturacion\FAC_006_Bus.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_007_Bus.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_008_Bus.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_008_cancelaciones_Bus.cs" />
+    <Compile Include="Reportes\Importacion\IMP_001_Bus.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Bus.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Bus.cs" />
     <Compile Include="Reportes\Inventario\INV_007_Bus.cs" />
