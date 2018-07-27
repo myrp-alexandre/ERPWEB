@@ -12,7 +12,7 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class VWFAC_008_cancelaciones
+    public partial class VWFAC_008_aplicaciones
     {
         public int IdEmpresa_nt { get; set; }
         public int IdSucursal_nt { get; set; }

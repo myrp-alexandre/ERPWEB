@@ -1476,7 +1476,7 @@
     <Compile Include="VWFAC_008.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
-    <Compile Include="VWFAC_008_cancelaciones.cs">
+    <Compile Include="VWFAC_008_aplicaciones.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="vwfa_cliente_consulta.cs">

@@ -1691,8 +1691,8 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWFAC_008' does not have
           <Property Name="CreDeb" Type="char" MaxLength="3" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWFAC_008_cancelaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="VWFAC_008_cancelaciones">
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWFAC_008_aplicaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VWFAC_008_aplicaciones">
           <Key>
             <PropertyRef Name="IdEmpresa_nt" />
             <PropertyRef Name="IdSucursal_nt" />
@@ -3618,18 +3618,18 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
     [VWFAC_008].[CreDeb] AS [CreDeb]
     FROM [web].[VWFAC_008] AS [VWFAC_008]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="VWFAC_008_cancelaciones" EntityType="Self.VWFAC_008_cancelaciones" store:Type="Views" store:Schema="web">
+          <EntitySet Name="VWFAC_008_aplicaciones" EntityType="Self.VWFAC_008_aplicaciones" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-    [VWFAC_008_cancelaciones].[IdEmpresa_nt] AS [IdEmpresa_nt], 
-    [VWFAC_008_cancelaciones].[IdSucursal_nt] AS [IdSucursal_nt], 
-    [VWFAC_008_cancelaciones].[IdBodega_nt] AS [IdBodega_nt], 
-    [VWFAC_008_cancelaciones].[IdNota_nt] AS [IdNota_nt], 
-    [VWFAC_008_cancelaciones].[secuencia] AS [secuencia], 
-    [VWFAC_008_cancelaciones].[IdCbteVta_fac_nd_doc_mod] AS [IdCbteVta_fac_nd_doc_mod], 
-    [VWFAC_008_cancelaciones].[Valor_Aplicado] AS [Valor_Aplicado], 
-    [VWFAC_008_cancelaciones].[NumFactura] AS [NumFactura], 
-    [VWFAC_008_cancelaciones].[vt_fecha] AS [vt_fecha]
-    FROM [web].[VWFAC_008_cancelaciones] AS [VWFAC_008_cancelaciones]</DefiningQuery>
+    [VWFAC_008_aplicaciones].[IdEmpresa_nt] AS [IdEmpresa_nt], 
+    [VWFAC_008_aplicaciones].[IdSucursal_nt] AS [IdSucursal_nt], 
+    [VWFAC_008_aplicaciones].[IdBodega_nt] AS [IdBodega_nt], 
+    [VWFAC_008_aplicaciones].[IdNota_nt] AS [IdNota_nt], 
+    [VWFAC_008_aplicaciones].[secuencia] AS [secuencia], 
+    [VWFAC_008_aplicaciones].[IdCbteVta_fac_nd_doc_mod] AS [IdCbteVta_fac_nd_doc_mod], 
+    [VWFAC_008_aplicaciones].[Valor_Aplicado] AS [Valor_Aplicado], 
+    [VWFAC_008_aplicaciones].[NumFactura] AS [NumFactura], 
+    [VWFAC_008_aplicaciones].[vt_fecha] AS [vt_fecha]
+    FROM [web].[VWFAC_008_aplicaciones] AS [VWFAC_008_aplicaciones]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWIMP_001" EntityType="Self.VWIMP_001" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
@@ -4293,8 +4293,8 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <EntitySet Name="VWFAC_006" EntityType="Model_reportes.VWFAC_006" />
           <EntitySet Name="VWFAC_007" EntityType="Model_reportes.VWFAC_007" />
           <EntitySet Name="VWFAC_008" EntityType="Model_reportes.VWFAC_008" />
-          <EntitySet Name="VWFAC_008_cancelaciones" EntityType="Model_reportes.VWFAC_008_cancelaciones" />
           <EntitySet Name="VWIMP_001" EntityType="Model_reportes.VWIMP_001" />
+          <EntitySet Name="VWFAC_008_aplicaciones" EntityType="Model_reportes.VWFAC_008_aplicaciones" />
         </EntityContainer>
         <EntityType Name="Af_SPACTF_004_detalle">
           <Key>
@@ -7001,26 +7001,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Property Name="no_fecha_venc" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreDeb" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
         </EntityType>
-        <EntityType Name="VWFAC_008_cancelaciones">
-          <Key>
-            <PropertyRef Name="IdEmpresa_nt" />
-            <PropertyRef Name="IdSucursal_nt" />
-            <PropertyRef Name="IdBodega_nt" />
-            <PropertyRef Name="IdNota_nt" />
-            <PropertyRef Name="secuencia" />
-            <PropertyRef Name="IdCbteVta_fac_nd_doc_mod" />
-            <PropertyRef Name="Valor_Aplicado" />
-          </Key>
-          <Property Name="IdEmpresa_nt" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal_nt" Type="Int32" Nullable="false" />
-          <Property Name="IdBodega_nt" Type="Int32" Nullable="false" />
-          <Property Name="IdNota_nt" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteVta_fac_nd_doc_mod" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Valor_Aplicado" Type="Double" Nullable="false" />
-          <Property Name="NumFactura" Type="String" MaxLength="49" FixedLength="false" Unicode="false" />
-          <Property Name="vt_fecha" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="VWIMP_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -7066,6 +7046,26 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Property Name="NomFormaPago" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="NomUnidad" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion_Ciudad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VWFAC_008_aplicaciones">
+          <Key>
+            <PropertyRef Name="IdEmpresa_nt" />
+            <PropertyRef Name="IdSucursal_nt" />
+            <PropertyRef Name="IdBodega_nt" />
+            <PropertyRef Name="IdNota_nt" />
+            <PropertyRef Name="secuencia" />
+            <PropertyRef Name="IdCbteVta_fac_nd_doc_mod" />
+            <PropertyRef Name="Valor_Aplicado" />
+          </Key>
+          <Property Name="IdEmpresa_nt" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal_nt" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega_nt" Type="Int32" Nullable="false" />
+          <Property Name="IdNota_nt" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteVta_fac_nd_doc_mod" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Valor_Aplicado" Type="Double" Nullable="false" />
+          <Property Name="NumFactura" Type="String" MaxLength="49" FixedLength="false" Unicode="false" />
+          <Property Name="vt_fecha" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -9000,21 +9000,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VWFAC_008_cancelaciones">
-            <EntityTypeMapping TypeName="Model_reportes.VWFAC_008_cancelaciones">
-              <MappingFragment StoreEntitySet="VWFAC_008_cancelaciones">
-                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
-                <ScalarProperty Name="NumFactura" ColumnName="NumFactura" />
-                <ScalarProperty Name="Valor_Aplicado" ColumnName="Valor_Aplicado" />
-                <ScalarProperty Name="IdCbteVta_fac_nd_doc_mod" ColumnName="IdCbteVta_fac_nd_doc_mod" />
-                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
-                <ScalarProperty Name="IdNota_nt" ColumnName="IdNota_nt" />
-                <ScalarProperty Name="IdBodega_nt" ColumnName="IdBodega_nt" />
-                <ScalarProperty Name="IdSucursal_nt" ColumnName="IdSucursal_nt" />
-                <ScalarProperty Name="IdEmpresa_nt" ColumnName="IdEmpresa_nt" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VWIMP_001">
             <EntityTypeMapping TypeName="Model_reportes.VWIMP_001">
               <MappingFragment StoreEntitySet="VWIMP_001">
@@ -9041,6 +9026,21 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
                 <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
                 <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWFAC_008_aplicaciones">
+            <EntityTypeMapping TypeName="Model_reportes.VWFAC_008_aplicaciones">
+              <MappingFragment StoreEntitySet="VWFAC_008_aplicaciones">
+                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
+                <ScalarProperty Name="NumFactura" ColumnName="NumFactura" />
+                <ScalarProperty Name="Valor_Aplicado" ColumnName="Valor_Aplicado" />
+                <ScalarProperty Name="IdCbteVta_fac_nd_doc_mod" ColumnName="IdCbteVta_fac_nd_doc_mod" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="IdNota_nt" ColumnName="IdNota_nt" />
+                <ScalarProperty Name="IdBodega_nt" ColumnName="IdBodega_nt" />
+                <ScalarProperty Name="IdSucursal_nt" ColumnName="IdSucursal_nt" />
+                <ScalarProperty Name="IdEmpresa_nt" ColumnName="IdEmpresa_nt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

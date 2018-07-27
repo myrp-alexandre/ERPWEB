@@ -85,8 +85,8 @@ namespace Core.Erp.Data
         public virtual DbSet<VWFAC_006> VWFAC_006 { get; set; }
         public virtual DbSet<VWFAC_007> VWFAC_007 { get; set; }
         public virtual DbSet<VWFAC_008> VWFAC_008 { get; set; }
-        public virtual DbSet<VWFAC_008_cancelaciones> VWFAC_008_cancelaciones { get; set; }
         public virtual DbSet<VWIMP_001> VWIMP_001 { get; set; }
+        public virtual DbSet<VWFAC_008_aplicaciones> VWFAC_008_aplicaciones { get; set; }
     
         public virtual int SPROL_002(Nullable<int> idempresa, Nullable<int> idnomina_tipo, Nullable<int> idnomina_Tipo_liq, Nullable<int> idperiodo)
         {
