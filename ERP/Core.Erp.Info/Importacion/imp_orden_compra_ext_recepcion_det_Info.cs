@@ -18,5 +18,8 @@ namespace Core.Erp.Info.Importacion
         public int cantidad { get; set; }
         public string Observacion { get; set; }
 
+
+        public string pr_descripcion { get; set; }
+
     }
 }
