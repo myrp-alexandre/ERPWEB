@@ -38,8 +38,8 @@ namespace Core.Erp.Data
         public string IdUsuario_anulacion { get; set; }
         public Nullable<System.DateTime> fecha_anulacion { get; set; }
     
-        public virtual imp_orden_compra_ext imp_orden_compra_ext { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imp_orden_compra_ext_recepcion_det> imp_orden_compra_ext_recepcion_det { get; set; }
+        public virtual imp_orden_compra_ext imp_orden_compra_ext { get; set; }
     }
 }

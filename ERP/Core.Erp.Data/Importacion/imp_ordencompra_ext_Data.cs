@@ -28,7 +28,7 @@ namespace Core.Erp.Data.Importacion
                                  IdPais_embarque = q.IdPais_embarque,
                                  IdCiudad_destino = q.IdCiudad_destino,
                                  IdCatalogo_via = q.IdCatalogo_via,
-                                 codigo_pago_sri = q.codigo_pago_sri,
+                                 IdCatalogo_forma_pago = q.IdCatalogo_forma_pago,
                                  oe_fecha = q.oe_fecha,
                                  oe_fecha_llegada_est = q.oe_fecha_llegada_est,
                                  oe_fecha_embarque_est = q.oe_fecha_embarque_est,
@@ -36,8 +36,6 @@ namespace Core.Erp.Data.Importacion
                                  IdCtaCble_importacion = q.IdCtaCble_importacion,
                                  oe_observacion = q.oe_observacion,
                                  oe_codigo = q.oe_codigo,
-                                 oe_valor_flete = q.oe_valor_flete,
-                                 oe_valor_seguro = q.oe_valor_seguro,
                                  estado = q.estado,
                                  IdLiquidacion = q.IdLiquidacion,
                                  oe_fecha_llegada = q.oe_fecha_llegada,
@@ -77,7 +75,7 @@ namespace Core.Erp.Data.Importacion
                         IdPais_embarque = Entity.IdPais_embarque,
                         IdCiudad_destino = Entity.IdCiudad_destino,
                         IdCatalogo_via = Entity.IdCatalogo_via,
-                        codigo_pago_sri = Entity.codigo_pago_sri,
+                        IdCatalogo_forma_pago = Entity.IdCatalogo_forma_pago,
                         oe_fecha = Entity.oe_fecha,
                         oe_fecha_llegada_est = Entity.oe_fecha_llegada_est,
                         oe_fecha_embarque = Entity.oe_fecha_embarque,
@@ -85,8 +83,6 @@ namespace Core.Erp.Data.Importacion
                         IdCtaCble_importacion = Entity.IdCtaCble_importacion,
                         oe_observacion = Entity.oe_observacion,
                         oe_codigo = Entity.oe_codigo,
-                        oe_valor_flete = Entity.oe_valor_flete,
-                        oe_valor_seguro = Entity.oe_valor_seguro,
                         estado = Entity.estado,
                         IdLiquidacion = Entity.IdLiquidacion,
                         oe_fecha_llegada = Entity.oe_fecha_llegada,
@@ -141,7 +137,7 @@ namespace Core.Erp.Data.Importacion
                         IdPais_embarque = info.IdPais_embarque,
                         IdCiudad_destino = info.IdCiudad_destino,
                         IdCatalogo_via = info.IdCatalogo_via,
-                        codigo_pago_sri = info.codigo_pago_sri,
+                        IdCatalogo_forma_pago = info.IdCatalogo_forma_pago,
                         oe_fecha = info.oe_fecha,
                         oe_fecha_llegada_est = info.oe_fecha_llegada_est,
                         oe_fecha_embarque = info.oe_fecha_embarque,
@@ -149,8 +145,6 @@ namespace Core.Erp.Data.Importacion
                         IdCtaCble_importacion = info.IdCtaCble_importacion,
                         oe_observacion = info.oe_observacion,
                         oe_codigo = info.oe_codigo,
-                        oe_valor_flete = info.oe_valor_flete,
-                        oe_valor_seguro = info.oe_valor_seguro,
                         IdLiquidacion = info.IdLiquidacion,
                         oe_fecha_llegada = info.oe_fecha_llegada,
                         oe_fecha_embarque_est = info.oe_fecha_embarque_est,
@@ -212,7 +206,7 @@ namespace Core.Erp.Data.Importacion
                          Entity.IdPais_embarque = info.IdPais_embarque;
                          Entity.IdCiudad_destino = info.IdCiudad_destino;
                          Entity.IdCatalogo_via = info.IdCatalogo_via;
-                         Entity.codigo_pago_sri = info.codigo_pago_sri;
+                         Entity.IdCatalogo_forma_pago = info.IdCatalogo_forma_pago;
                          Entity.oe_fecha = info.oe_fecha;
                          Entity.oe_fecha_llegada_est = info.oe_fecha_llegada_est;
                          Entity.oe_fecha_embarque = info.oe_fecha_embarque;
@@ -220,8 +214,6 @@ namespace Core.Erp.Data.Importacion
                          Entity.IdCtaCble_importacion = info.IdCtaCble_importacion;
                          Entity.oe_observacion = info.oe_observacion;
                          Entity.oe_codigo = info.oe_codigo;
-                         Entity.oe_valor_flete = info.oe_valor_flete;
-                         Entity.oe_valor_seguro = info.oe_valor_seguro;
                          Entity.IdLiquidacion = info.IdLiquidacion;
                          Entity.oe_fecha_llegada = info.oe_fecha_llegada;
                          Entity.oe_fecha_embarque_est = info.oe_fecha_embarque_est;

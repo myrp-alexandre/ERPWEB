@@ -12,25 +12,26 @@
         <EntityTypeShape EntityType="Model_importacion.imp_liquidacion" Width="1.5" PointX="0.75" PointY="4.875" />
         <EntityTypeShape EntityType="Model_importacion.imp_liquidacion_det_x_imp_orden_compra_ext" Width="1.5" PointX="5.25" PointY="5.75" />
         <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext_ct_cbteble_det_gastos" Width="1.5" PointX="8.25" PointY="5.5" />
-        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext_det" Width="1.5" PointX="5.25" PointY="9.125" />
-        <EntityTypeShape EntityType="Model_importacion.imp_parametro" Width="1.5" PointX="2.75" PointY="0.75" />
         <AssociationConnector Association="Model_importacion.FK_imp_catalogo_imp_catalogo_tipo" />
         <AssociationConnector Association="Model_importacion.FK_imp_gasto_x_ct_plancta_imp_gasto" />
         <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_gasto" />
         <AssociationConnector Association="Model_importacion.FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_liquidacion" />
-        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext" Width="1.5" PointX="3" PointY="3.625" />
-        <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_imp_catalogo2" />
+        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext_recepcion_det" Width="1.5" PointX="7.5" PointY="12" />
+        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext_recepcion" Width="1.5" PointX="5.25" PointY="15.125" />
+        <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_recepcion" />
+        <EntityTypeShape EntityType="Model_importacion.vwimp_orden_compra_ext_recepcion" Width="1.5" PointX="10.375" PointY="7.75" />
+        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext" Width="1.5" PointX="3" PointY="1.5" />
+        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext_det" Width="1.5" PointX="5.25" PointY="9" />
+        <EntityTypeShape EntityType="Model_importacion.imp_parametro" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_importacion.vwimp_orden_compra_ext" Width="1.5" PointX="12.375" PointY="0.75" />
+        <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_imp_catalogo" />
+        <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_imp_catalogo1" />
         <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_imp_liquidacion" />
         <AssociationConnector Association="Model_importacion.FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_orden_compra_ext" />
         <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_orden_compra_ext" />
         <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_det_imp_orden_compra_ext" />
-        <EntityTypeShape EntityType="Model_importacion.vwimp_orden_compra_ext" Width="1.5" PointX="10.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext_recepcion_det" Width="1.5" PointX="7.5" PointY="12" />
-        <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_det" />
-        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext_recepcion" Width="1.5" PointX="5.25" PointY="15.125" />
         <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_recepcion_imp_orden_compra_ext" />
-        <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_recepcion" />
-        <EntityTypeShape EntityType="Model_importacion.vwimp_orden_compra_ext_recepcion" Width="1.5" PointX="10.375" PointY="7.75" />
+        <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_det" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

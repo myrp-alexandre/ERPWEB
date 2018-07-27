@@ -24,7 +24,7 @@ namespace Core.Erp.Data
         public int cantidad { get; set; }
         public string Observacion { get; set; }
     
-        public virtual imp_orden_compra_ext_det imp_orden_compra_ext_det { get; set; }
         public virtual imp_orden_compra_ext_recepcion imp_orden_compra_ext_recepcion { get; set; }
+        public virtual imp_orden_compra_ext_det imp_orden_compra_ext_det { get; set; }
     }
 }

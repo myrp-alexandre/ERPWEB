@@ -52,7 +52,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         }
 
 
-        public ActionResult GridViewPartial_orden_compra_ext(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
+        public ActionResult GridViewPartial_recepcion_oc_ext(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
@@ -63,16 +63,16 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
             List<imp_orden_compra_ext_recepcion_Info> model = new List<imp_orden_compra_ext_recepcion_Info>();
             model = bus_recepcion.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
-            return PartialView("_GridViewPartial_orden_compra_ext", model);
+            return PartialView("_GridViewPartial_recepcion_oc_ext", model);
         }
-        public ActionResult GridViewPartial_orden_compra_ext_det()
+        public ActionResult GridViewPartial_recepcion_oc_ext_det()
         {
             List<imp_orden_compra_ext_recepcion_det_Info> model = new List<imp_orden_compra_ext_recepcion_det_Info>();
             model = Session["imp_orden_compra_ext_recepcion_det_Info"] as List<imp_orden_compra_ext_recepcion_det_Info>;
             if (model == null)
                 model = new List<imp_orden_compra_ext_recepcion_det_Info>();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_orden_compra_ext_det", model);
+            return PartialView("_GridViewPartial_recepcion_oc_ext", model);
         }
 
         #endregion
