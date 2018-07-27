@@ -30,5 +30,10 @@ namespace Core.Erp.Web.Reportes.Facturacion
             List<FAC_008_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdBodega, IdNota);
             this.DataSource = lst_rpt;
         }
+
+        private void Subreporte_apliaciones_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
                 List<FAC_008_aplicaciones_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
-                    Lista = (from q in Context.VWFAC_008_cancelaciones
+                    Lista = (from q in Context.VWFAC_008_aplicaciones
                              where q.IdEmpresa_nt == IdEmpresa_nt
                              && q.IdSucursal_nt == IdSucursal_nt
                              && q.IdBodega_nt == IdBodega_nt
