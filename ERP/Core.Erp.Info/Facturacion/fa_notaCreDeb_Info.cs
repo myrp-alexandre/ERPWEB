@@ -36,4 +36,20 @@ namespace Core.Erp.Info.Facturacion
         public string MotiAnula { get; set; }
         #endregion        
     }
+
+    public class fa_notaCreDeb_consulta_Info
+    {
+        public int IdEmpresa { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdBodega { get; set; }
+        public decimal IdNota { get; set; }
+        public string CreDeb { get; set; }
+        public string NumNota_Impresa { get; set; }
+        public System.DateTime no_fecha { get; set; }
+        public string Nombres { get; set; }
+        public Nullable<double> sc_subtotal { get; set; }
+        public Nullable<double> sc_iva { get; set; }
+        public Nullable<double> sc_total { get; set; }
+        public string Estado { get; set; }
+    }
 }
