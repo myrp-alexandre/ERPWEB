@@ -151,7 +151,7 @@ namespace Core.Erp.Data.Importacion
                         oe_fecha_desaduanizacion = info.oe_fecha_desaduanizacion
                     };
                     Context.imp_orden_compra_ext.Add(Entity);
-                    Context.SaveChanges();
+                   
                     foreach (var item in info.lst_detalle)
                     {
                         Context.imp_orden_compra_ext_det.Add(new imp_orden_compra_ext_det
