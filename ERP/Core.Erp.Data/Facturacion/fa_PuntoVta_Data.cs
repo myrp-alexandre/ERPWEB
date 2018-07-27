@@ -10,17 +10,15 @@ namespace Core.Erp.Data.Facturacion
     public class fa_PuntoVta_Data
     {
 
-        public List<fa_PuntoVta_Info> get_list(int IdEmpresa, bool mostrar_anulados)
+        public List<fa_PuntoVta_Info> get_list(int IdEmpresa)
         {
             try
             {
                 List<fa_PuntoVta_Info> Lista;
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
-                    if(!mostrar_anulados)
                     Lista = (from q in Context.fa_PuntoVta
                              where q.IdEmpresa == IdEmpresa
-                             && q.estado == true
                              select new fa_PuntoVta_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -29,22 +27,9 @@ namespace Core.Erp.Data.Facturacion
                                  IdPuntoVta = q.IdPuntoVta,
                                  cod_PuntoVta = q.cod_PuntoVta,
                                  nom_PuntoVta = q.nom_PuntoVta,
-                                 estado = q.estado
+                                 estado = q.estado == true
 
                              }).ToList();
-                    else
-                        Lista = (from q in Context.fa_PuntoVta
-                                 where q.IdEmpresa == IdEmpresa
-                                 select new fa_PuntoVta_Info
-                                 {
-                                     IdEmpresa = q.IdEmpresa,
-                                     IdSucursal = q.IdSucursal,
-                                     IdBodega = q.IdBodega,
-                                     IdPuntoVta = q.IdPuntoVta,
-                                     cod_PuntoVta = q.cod_PuntoVta,
-                                     nom_PuntoVta = q.nom_PuntoVta,
-                                     estado = q.estado
-                                 }).ToList();
                 }
                 return Lista;
             }
@@ -189,13 +174,11 @@ namespace Core.Erp.Data.Facturacion
             {
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
-                    fa_PuntoVta Entity = Context.fa_PuntoVta.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdPuntoVta == info.IdPuntoVta);
+                    fa_PuntoVta Entity = Context.fa_PuntoVta.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal  && q.IdPuntoVta == info.IdPuntoVta);
                     if (Entity == null) return false;
-
-                    Entity.IdSucursal = Entity.IdSucursal;
-                    Entity.IdBodega = Entity.IdBodega;
-                    Entity.cod_PuntoVta = Entity.cod_PuntoVta;
-                    Entity.nom_PuntoVta = Entity.nom_PuntoVta;
+                    
+                    Entity.cod_PuntoVta = info.cod_PuntoVta;
+                    Entity.nom_PuntoVta = info.nom_PuntoVta;
 
                     Context.SaveChanges();
                 

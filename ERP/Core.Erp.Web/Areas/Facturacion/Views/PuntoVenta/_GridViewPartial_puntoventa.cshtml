@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_puntoventa";
-        settings.CallbackRouteValues = new { Controller = "PuntoVenta", Action = "GridViewPartial_puntoventa", IdSucursal = ViewBag.IdSucursal, IdBodega = ViewBag.IdBodega };
+        settings.CallbackRouteValues = new { Controller = "PuntoVenta", Action = "GridViewPartial_puntoventa" };
         settings.KeyFieldName = "IdPuntoVta";
         settings.Width = Unit.Percentage(100);
 
@@ -61,8 +61,8 @@
                 {
 
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(tc.DataItem, "IdBodega"), IdPuntoVta = DataBinder.Eval(tc.DataItem, "IdPuntoVta") }) + "&nbsp;" +
-                            Html.ActionLink("Anular", "Anular", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(tc.DataItem, "IdBodega"), IdPuntoVta = DataBinder.Eval(tc.DataItem, "IdPuntoVta")},
+                Html.ActionLink("Modificar", "Modificar", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdPuntoVta = DataBinder.Eval(tc.DataItem, "IdPuntoVta") }) + "&nbsp;" +
+                            Html.ActionLink("Anular", "Anular", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdPuntoVta = DataBinder.Eval(tc.DataItem, "IdPuntoVta")},
                                 new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                         );
                 }
@@ -71,7 +71,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdSucursal = ViewBag.IdSucursal, IdBodega = ViewBag.IdBodega }).ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;

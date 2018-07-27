@@ -36,32 +36,19 @@
             e.NewValues["Num_Dias_Vcto"] = 0;
             e.NewValues["Por_distribucion"] = 0;
         };
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "IdTerminoPago";
-            column.Caption = "Id*";
-            column.Width = Unit.Percentage(20);
-            column.ColumnType = MVCxGridViewColumnType.TextBox;
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Secuencia";
-            column.Caption = "Secuencia*";
-            column.Width = Unit.Percentage(20);
-            column.ColumnType = MVCxGridViewColumnType.TextBox;
-        });
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "Num_Dias_Vcto";
             column.Caption = "Dias vcto*";
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(50);
             column.ColumnType = MVCxGridViewColumnType.TextBox;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "Por_distribucion";
             column.Caption = "Por distribución*";
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(50);
             column.ColumnType = MVCxGridViewColumnType.TextBox;
         });
     });

@@ -18,7 +18,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="cod_PuntoVta">Código*</label>
-                    @Html.TextBoxFor(q => q.cod_PuntoVta, new { @class = "form-control", @id = "pr_codigo" })
+                    @Html.TextBoxFor(q => q.cod_PuntoVta, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.cod_PuntoVta, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -29,7 +29,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="nom_PuntoVta">Descripción*</label>
-                    @Html.TextBoxFor(q => q.nom_PuntoVta, new { @class = "form-control", @id = "pr_codigo" })
+                    @Html.TextBoxFor(q => q.nom_PuntoVta, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.nom_PuntoVta, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -62,7 +62,7 @@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index", "PuntoVenta", new { IdSucursal = Model.IdSucursal, IdBodega = Model.IdBodega,  Area = "Facturacion" }, null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index", "PuntoVenta", new {   Area = "Facturacion" }, null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

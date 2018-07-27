@@ -60,8 +60,8 @@
     </div>
 
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index", "PuntoVenta", new { IdSucursal = Model.IdSucursal, IdBodega = Model.IdBodega,Area = "Facturacion" }, null)">Cancelar</a>
+        <button type="submit" class="btn btn-danger">Anular</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "PuntoVenta", new { Area = "Facturacion" }, null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

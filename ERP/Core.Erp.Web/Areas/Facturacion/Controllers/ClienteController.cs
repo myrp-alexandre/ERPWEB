@@ -89,12 +89,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     pe_Naturaleza = "NATU",
                     IdTipoDocumento = "CED"
                 },
-                lst_fa_cliente_contactos = new List<fa_cliente_contactos_Info>()
+                lst_fa_cliente_contactos = new List<fa_cliente_contactos_Info>(),
+                Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>()
             };
             List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos);
-            cargar_combos(model);
-            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>();
             List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal);
+            cargar_combos(model);
             cargar_combos_det();
             return View(model);
         }

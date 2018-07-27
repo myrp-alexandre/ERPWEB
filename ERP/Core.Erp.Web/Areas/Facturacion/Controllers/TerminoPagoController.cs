@@ -28,9 +28,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
         public ActionResult Nuevo()
         {
-            fa_TerminoPago_Info model = new fa_TerminoPago_Info();
-
-            model.Lst_fa_TerminoPago_Distribucion = new List<fa_TerminoPago_Distribucion_Info>();
+            fa_TerminoPago_Info model = new fa_TerminoPago_Info
+            {
+                Lst_fa_TerminoPago_Distribucion = new List<fa_TerminoPago_Distribucion_Info>()
+            };
             List_fa_TerminoPago_Distribucion.set_list(model.Lst_fa_TerminoPago_Distribucion);
             return View();
         }

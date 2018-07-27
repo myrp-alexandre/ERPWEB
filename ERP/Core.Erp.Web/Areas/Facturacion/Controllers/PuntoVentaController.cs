@@ -13,10 +13,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
     public class PuntoVentaController : Controller
     {
         fa_PuntoVta_Bus bus_punto = new fa_PuntoVta_Bus();
-        public ActionResult Index(int IdSucursal = 0, int IdBodega = 0)
+        public ActionResult Index()
         {
-            ViewBag.IdSucursal = IdSucursal;
-            ViewBag.IdBodega = IdBodega;
             return View();
         }
 
@@ -24,7 +22,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult GridViewPartial_puntoventa()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<fa_PuntoVta_Info> model = bus_punto.get_list(IdEmpresa, true);
+            List<fa_PuntoVta_Info> model = bus_punto.get_list(IdEmpresa);
             return PartialView("_GridViewPartial_puntoventa", model);
         }
         private void cargar_combos( fa_PuntoVta_Info model)
@@ -56,8 +54,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_punto.guardarDB(model))
             {
-                ViewBag.IdSucursal = model.IdSucursal;
-                ViewBag.IdBodega = model.IdBodega;
                 cargar_combos(model);
                 return View(model);
             }
@@ -79,8 +75,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_punto.modificarDB(model))
             {
-                ViewBag.IdSucursal = model.IdSucursal;
-                ViewBag.IdBodega = model.IdBodega;
                 cargar_combos(model);
                 return View(model);
             }

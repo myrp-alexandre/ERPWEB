@@ -39,10 +39,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             fa_TipoNota_Info model = new fa_TipoNota_Info
             {
-                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"])
+                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
+                Lst_fa_TipoNota_x_Empresa_x_Sucursal = new List<fa_TipoNota_x_Empresa_x_Sucursal_Info>()
             };
             cargar_combos();
-            model.Lst_fa_TipoNota_x_Empresa_x_Sucursal = new List<fa_TipoNota_x_Empresa_x_Sucursal_Info>();
             List_fa_TipoNota_x_Empresa_x_Sucursal.set_list(model.Lst_fa_TipoNota_x_Empresa_x_Sucursal);
             cargar_combos_det();
             return View(model);
