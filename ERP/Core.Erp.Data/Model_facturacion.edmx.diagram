@@ -67,6 +67,7 @@
         <AssociationConnector Association="Model_facturacion.FK_fa_notaCreDeb_fa_TipoNota" />
         <AssociationConnector Association="Model_facturacion.FK_fa_notaCreDeb_x_ct_cbtecble_fa_notaCreDeb" />
         <AssociationConnector Association="Model_facturacion.FK_fa_notaCreDeb_x_cxc_cobro_fa_notaCreDeb" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_notaCreDeb1" Width="1.5" PointX="12.375" PointY="16.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
