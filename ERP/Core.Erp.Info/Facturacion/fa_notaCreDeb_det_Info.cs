@@ -28,5 +28,6 @@ namespace Core.Erp.Info.Facturacion
         public string IdCod_Impuesto_Ice { get; set; }
         public string IdCentroCosto { get; set; }
         public string IdCentroCosto_sub_centro_costo { get; set; }
+        public object pr_descripcion { get; set; }
     }
 }
