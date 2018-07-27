@@ -670,6 +670,30 @@
     <Compile Include="Reportes\Facturacion\FAC_006_Rpt.Designer.cs">
       <DependentUpon>FAC_006_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_007_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_007_Rpt.Designer.cs">
+      <DependentUpon>FAC_007_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_008_cancelaciones_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_008_cancelaciones_Rpt.Designer.cs">
+      <DependentUpon>FAC_008_cancelaciones_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_008_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_008_Rpt.Designer.cs">
+      <DependentUpon>FAC_008_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Importacion\IMP_001_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Importacion\IMP_001_Rpt.Designer.cs">
+      <DependentUpon>IMP_001_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Inventario\INV_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
