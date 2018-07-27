@@ -30,5 +30,6 @@ namespace Core.Erp.Info.Reportes.Importacion
         public string NomVia { get; set; }
         public string NomFormaPago { get; set; }
         public string NomUnidad { get; set; }
+        public string Descripcion_Ciudad { get; set; }
     }
 }

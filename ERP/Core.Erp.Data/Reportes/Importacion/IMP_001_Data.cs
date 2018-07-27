@@ -42,7 +42,8 @@ namespace Core.Erp.Data.Reportes.Importacion
                                  NomUnidad = q.NomUnidad,
                                  NomVia = q.NomVia,
                                  nom_presentacion = q.nom_presentacion,
-                                 pe_nombreCompleto = q.pe_nombreCompleto
+                                 pe_nombreCompleto = q.pe_nombreCompleto,
+                                 Descripcion_Ciudad =q.Descripcion_Ciudad
 
                              }).ToList();
                 }

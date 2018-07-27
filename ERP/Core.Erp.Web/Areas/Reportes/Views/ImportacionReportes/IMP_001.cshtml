@@ -1,7 +1,16 @@
 ﻿
 @{
     ViewBag.Title = "IMP_001";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
 }
-
-<h2>IMP_001</h2>
-
+@using (Html.BeginForm())
+{
+    Html.DevExpress().WebDocumentViewer(settings =>
+    {
+        settings.MobileMode = false;
+        settings.Name = "webDocumentViewer";
+    }).Bind(Model).GetHtml();
+}
