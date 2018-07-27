@@ -486,6 +486,8 @@
     <Compile Include="Importacion\imp_liquidacion_det_x_imp_orden_compra_ext_Data.cs" />
     <Compile Include="Importacion\imp_ordencompra_ext_Data.cs" />
     <Compile Include="Importacion\imp_ordencompra_ext_det_Data.cs" />
+    <Compile Include="Importacion\imp_orden_compra_ext_recepcion_Data.cs" />
+    <Compile Include="Importacion\imp_orden_compra_ext_recepcion_det_Data.cs" />
     <Compile Include="Importacion\imp_parametro_Data.cs" />
     <Compile Include="imp_catalogo.cs">
       <DependentUpon>Model_importacion.tt</DependentUpon>
@@ -515,6 +517,9 @@
       <DependentUpon>Model_importacion.tt</DependentUpon>
     </Compile>
     <Compile Include="imp_orden_compra_ext_recepcion.cs">
+      <DependentUpon>Model_importacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="imp_orden_compra_ext_recepcion_det.cs">
       <DependentUpon>Model_importacion.tt</DependentUpon>
     </Compile>
     <Compile Include="imp_parametro.cs">

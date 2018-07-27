@@ -20,6 +20,7 @@ namespace Core.Erp.Data
             this.imp_liquidacion_det_x_imp_orden_compra_ext = new HashSet<imp_liquidacion_det_x_imp_orden_compra_ext>();
             this.imp_orden_compra_ext_ct_cbteble_det_gastos = new HashSet<imp_orden_compra_ext_ct_cbteble_det_gastos>();
             this.imp_orden_compra_ext_det = new HashSet<imp_orden_compra_ext_det>();
+            this.imp_orden_compra_ext_recepcion = new HashSet<imp_orden_compra_ext_recepcion>();
         }
     
         public int IdEmpresa { get; set; }
@@ -59,5 +60,7 @@ namespace Core.Erp.Data
         public virtual ICollection<imp_orden_compra_ext_ct_cbteble_det_gastos> imp_orden_compra_ext_ct_cbteble_det_gastos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imp_orden_compra_ext_det> imp_orden_compra_ext_det { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<imp_orden_compra_ext_recepcion> imp_orden_compra_ext_recepcion { get; set; }
     }
 }
