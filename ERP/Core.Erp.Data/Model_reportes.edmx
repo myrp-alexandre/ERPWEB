@@ -1734,6 +1734,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWIMP_001' does not have
             <PropertyRef Name="NomVia" />
             <PropertyRef Name="NomFormaPago" />
             <PropertyRef Name="NomUnidad" />
+            <PropertyRef Name="Descripcion_Ciudad" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdOrdenCompra_ext" Type="decimal" Precision="18" Scale="0" Nullable="false" />
@@ -1757,6 +1758,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWIMP_001' does not have
           <Property Name="NomVia" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="NomFormaPago" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="NomUnidad" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Descripcion_Ciudad" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWINV_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3652,7 +3654,8 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
     [VWIMP_001].[nom_presentacion] AS [nom_presentacion], 
     [VWIMP_001].[NomVia] AS [NomVia], 
     [VWIMP_001].[NomFormaPago] AS [NomFormaPago], 
-    [VWIMP_001].[NomUnidad] AS [NomUnidad]
+    [VWIMP_001].[NomUnidad] AS [NomUnidad], 
+    [VWIMP_001].[Descripcion_Ciudad] AS [Descripcion_Ciudad]
     FROM [web].[VWIMP_001] AS [VWIMP_001]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWINV_001" EntityType="Self.VWINV_001" store:Type="Views" store:Schema="web">
@@ -7038,6 +7041,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
             <PropertyRef Name="NomVia" />
             <PropertyRef Name="NomFormaPago" />
             <PropertyRef Name="NomUnidad" />
+            <PropertyRef Name="Descripcion_Ciudad" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdOrdenCompra_ext" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
@@ -7061,6 +7065,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Property Name="NomVia" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="NomFormaPago" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="NomUnidad" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion_Ciudad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -9013,6 +9018,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <EntitySetMapping Name="VWIMP_001">
             <EntityTypeMapping TypeName="Model_reportes.VWIMP_001">
               <MappingFragment StoreEntitySet="VWIMP_001">
+                <ScalarProperty Name="Descripcion_Ciudad" ColumnName="Descripcion_Ciudad" />
                 <ScalarProperty Name="NomUnidad" ColumnName="NomUnidad" />
                 <ScalarProperty Name="NomFormaPago" ColumnName="NomFormaPago" />
                 <ScalarProperty Name="NomVia" ColumnName="NomVia" />
