@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Data.Reportes.Facturacion
 {
-   public class FAC_008_cancelaciones_Data
+   public class FAC_008_aplicaciones_Data
     {
-        public List<FAC_008_cancelaciones_Info> get_list(int IdEmpresa_nt, int IdSucursal_nt, int IdBodega_nt, decimal IdNota_nt, int secuencia )
+        public List<FAC_008_aplicaciones_Info> get_list(int IdEmpresa_nt, int IdSucursal_nt, int IdBodega_nt, decimal IdNota_nt, int secuencia )
         {
             try
             {
-                List<FAC_008_cancelaciones_Info> Lista;
+                List<FAC_008_aplicaciones_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = (from q in Context.VWFAC_008_cancelaciones
@@ -22,7 +22,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
                              && q.IdBodega_nt == IdBodega_nt
                              && q.IdNota_nt == IdNota_nt
                              && q.secuencia == secuencia
-                             select new FAC_008_cancelaciones_Info
+                             select new FAC_008_aplicaciones_Info
                              {
                                  IdEmpresa_nt = q.IdEmpresa_nt,
                                  IdSucursal_nt = q.IdSucursal_nt,

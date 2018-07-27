@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.Reportes.Facturacion
 {
-    public class FAC_008_cancelaciones_Info
+    public class FAC_008_aplicaciones_Info
     {
         public int IdEmpresa_nt { get; set; }
         public int IdSucursal_nt { get; set; }

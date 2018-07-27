@@ -262,7 +262,7 @@
     <Compile Include="Reportes\Facturacion\FAC_005_resumen_Info.cs" />
     <Compile Include="Reportes\Facturacion\FAC_006_Info.cs" />
     <Compile Include="Reportes\Facturacion\FAC_007_Info.cs" />
-    <Compile Include="Reportes\Facturacion\FAC_008_cancelaciones_Info.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_008_aplicaciones_Info.cs" />
     <Compile Include="Reportes\Facturacion\FAC_008_Info.cs" />
     <Compile Include="Reportes\Importacion\IMP_001_Info.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Info.cs" />

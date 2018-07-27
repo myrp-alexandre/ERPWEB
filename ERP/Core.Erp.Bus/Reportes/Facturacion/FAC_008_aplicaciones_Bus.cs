@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Reportes.Facturacion
 {
-    public class FAC_008_cancelaciones_Bus
+    public class FAC_008_aplicaciones_Bus
     {
-        FAC_008_cancelaciones_Data odata = new FAC_008_cancelaciones_Data();
+        FAC_008_aplicaciones_Data odata = new FAC_008_aplicaciones_Data();
     
-        public List<FAC_008_cancelaciones_Info> get_list(int IdEmpresa_nt, int IdSucursal_nt, int IdBodega_nt, decimal IdNota_nt, int secuencia)
+        public List<FAC_008_aplicaciones_Info> get_list(int IdEmpresa_nt, int IdSucursal_nt, int IdBodega_nt, decimal IdNota_nt, int secuencia)
         {
             try
             {

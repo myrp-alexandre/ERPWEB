@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "FAC_007";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+@using (Html.BeginForm())
+{
+    Html.DevExpress().WebDocumentViewer(settings =>
+    {
+        settings.MobileMode = false;
+        settings.Name = "webDocumentViewer";
+    }).Bind(Model).GetHtml();
+}
