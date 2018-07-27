@@ -121,6 +121,10 @@ namespace Core.Erp.Data.Facturacion
         {            
             try
             {
+                #region Variables
+                int Secuencia = 1;
+                #endregion
+
                 using (Entities_facturacion db_f = new Entities_facturacion())
                 {
                     db_f.fa_notaCreDeb.Add(new fa_notaCreDeb
@@ -128,7 +132,7 @@ namespace Core.Erp.Data.Facturacion
                         IdEmpresa = info.IdEmpresa,
                         IdSucursal = info.IdSucursal,
                         IdBodega = info.IdBodega,
-                        IdNota = info.IdNota,
+                        IdNota = info.IdNota = get_id(info.IdEmpresa,info.IdSucursal,info.IdBodega),
                         IdPuntoVta = info.IdPuntoVta,
                         CodNota = info.CodNota,
                         CreDeb = info.CreDeb,
@@ -146,8 +150,34 @@ namespace Core.Erp.Data.Facturacion
                         sc_observacion = info.sc_observacion,
                         Estado = info.Estado = "A",
                         NaturalezaNota = info.NaturalezaNota,
-                        IdCtaCble_TipoNota = info.IdCtaCble_TipoNota
+                        IdCtaCble_TipoNota = info.IdCtaCble_TipoNota,
+
+                        IdUsuario = info.IdUsuario                        
                     });
+
+                    foreach (var item in info.lst_det)
+                    {
+                        db_f.fa_notaCreDeb_det.Add(new fa_notaCreDeb_det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
+                            IdBodega = info.IdBodega,
+                            IdNota = info.IdNota,
+                            Secuencia = Secuencia++,
+                            IdProducto = item.IdProducto,
+                            sc_cantidad = item.sc_cantidad,
+                            sc_Precio = item.sc_Precio,
+                            sc_descUni = item.sc_descUni,
+                            sc_PordescUni = item.sc_PordescUni,
+                            sc_precioFinal = item.sc_precioFinal,
+                            vt_por_iva = item.vt_por_iva,
+                            sc_iva = item.sc_iva,
+                            IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
+                            sc_estado = "A",
+                            sc_subtotal = item.sc_subtotal,
+                            sc_total = item.sc_total
+                        });
+                    }
                 }
 
                 return true;

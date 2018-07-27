@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Core.Erp.Info.Facturacion
 {
@@ -34,7 +35,11 @@ namespace Core.Erp.Info.Facturacion
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotiAnula { get; set; }
-        #endregion        
+        #endregion
+
+        #region Campos auditoria
+        public List<fa_notaCreDeb_det_Info> lst_det { get; set; }
+        #endregion
     }
 
     public class fa_notaCreDeb_consulta_Info
