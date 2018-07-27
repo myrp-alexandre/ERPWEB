@@ -28,7 +28,6 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
         tb_pais_Bus bus_paises = new tb_pais_Bus();
         tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
-        cp_pagos_sri_Bus bus_forma_pago = new cp_pagos_sri_Bus();
         imp_ordencompra_ext_det_Info_lst detalle = new imp_ordencompra_ext_det_Info_lst();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         in_UnidadMedida_Bus bus_unidad_medida = new in_UnidadMedida_Bus();
@@ -215,7 +214,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             var lst_ciudades = bus_ciudad.get_list("09", false);
             ViewBag.lst_ciudades = lst_ciudades;
 
-            var lst_forma_pago = bus_forma_pago.get_list();
+            var lst_forma_pago = bus_catalogo.get_list(2);
             ViewBag.lst_forma_pago = lst_forma_pago;
 
             var lst_catalogos = bus_catalogo.get_list(1);
