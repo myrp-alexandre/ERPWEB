@@ -281,6 +281,8 @@
     <Compile Include="Areas\Facturacion\Controllers\ClienteController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ClienteTipoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\FacturaController.cs" />
+    <Compile Include="Areas\Facturacion\Controllers\NotaDeCreditoFacturacionController.cs" />
+    <Compile Include="Areas\Facturacion\Controllers\NotaDeDebitoFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ParametrosFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ProformaController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ProformaFacturacionController.cs" />
@@ -8878,6 +8880,8 @@
     <Folder Include="Areas\CuentasPorCobrar\Models\" />
     <Folder Include="Areas\CuentasPorPagar\Models\" />
     <Folder Include="Areas\Facturacion\Models\" />
+    <Folder Include="Areas\Facturacion\Views\NotaDeCreditoFacturacion\" />
+    <Folder Include="Areas\Facturacion\Views\NotaDeDebitoFacturacion\" />
     <Folder Include="Areas\General\Models\" />
     <Folder Include="Areas\Importacion\Models\" />
     <Folder Include="Areas\Inventario\Models\" />

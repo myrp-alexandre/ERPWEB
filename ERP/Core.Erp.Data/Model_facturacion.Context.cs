@@ -51,5 +51,10 @@ namespace Core.Erp.Data
         public virtual DbSet<fa_parametro> fa_parametro { get; set; }
         public virtual DbSet<fa_TipoNota_x_Empresa_x_Sucursal> fa_TipoNota_x_Empresa_x_Sucursal { get; set; }
         public virtual DbSet<vwfa_factura_det> vwfa_factura_det { get; set; }
+        public virtual DbSet<fa_notaCreDeb> fa_notaCreDeb { get; set; }
+        public virtual DbSet<fa_notaCreDeb_det> fa_notaCreDeb_det { get; set; }
+        public virtual DbSet<fa_notaCreDeb_x_ct_cbtecble> fa_notaCreDeb_x_ct_cbtecble { get; set; }
+        public virtual DbSet<fa_notaCreDeb_x_cxc_cobro> fa_notaCreDeb_x_cxc_cobro { get; set; }
+        public virtual DbSet<fa_notaCreDeb_x_fa_factura_NotaDeb> fa_notaCreDeb_x_fa_factura_NotaDeb { get; set; }
     }
 }

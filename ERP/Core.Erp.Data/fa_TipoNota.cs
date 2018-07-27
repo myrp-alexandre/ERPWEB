@@ -19,6 +19,7 @@ namespace Core.Erp.Data
         {
             this.fa_parametro = new HashSet<fa_parametro>();
             this.fa_TipoNota_x_Empresa_x_Sucursal = new HashSet<fa_TipoNota_x_Empresa_x_Sucursal>();
+            this.fa_notaCreDeb = new HashSet<fa_notaCreDeb>();
         }
     
         public int IdTipoNota { get; set; }
@@ -40,5 +41,7 @@ namespace Core.Erp.Data
         public virtual ICollection<fa_parametro> fa_parametro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_TipoNota_x_Empresa_x_Sucursal> fa_TipoNota_x_Empresa_x_Sucursal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fa_notaCreDeb> fa_notaCreDeb { get; set; }
     }
 }
