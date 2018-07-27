@@ -141,6 +141,16 @@
           <Property Name="Nom_Carpeta" Type="varchar" MaxLength="50" />
           <Property Name="Se_Cierra" Type="bit" />
         </EntityType>
+        <EntityType Name="tb_moneda">
+          <Key>
+            <PropertyRef Name="IdMoneda" />
+          </Key>
+          <Property Name="IdMoneda" Type="int" Nullable="false" />
+          <Property Name="im_descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="im_simbolo" Type="char" MaxLength="2" />
+          <Property Name="im_nemonico" Type="char" MaxLength="5" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+        </EntityType>
         <EntityType Name="tb_pais">
           <Key>
             <PropertyRef Name="IdPais" />
@@ -386,16 +396,16 @@
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="CodReporte" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_ciudad_id' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_ciudad_id' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_ciudad_id">
           <Key>
             <PropertyRef Name="IdCiudad" />
           </Key>
           <Property Name="IdCiudad" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_pais">
           <Key>
             <PropertyRef Name="Nombre" />
@@ -403,16 +413,16 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_pais' does not have
           <Property Name="IdPais" Type="numeric" Precision="18" Scale="0" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_parroquia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_parroquia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_parroquia">
           <Key>
             <PropertyRef Name="IdParroquia" />
           </Key>
           <Property Name="IdParroquia" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_provincia">
           <Key>
             <PropertyRef Name="IdProvincia" />
@@ -694,6 +704,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
           <EntitySet Name="tb_empresa" EntityType="Self.tb_empresa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_mes" EntityType="Self.tb_mes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_modulo" EntityType="Self.tb_modulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_moneda" EntityType="Self.tb_moneda" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_pais" EntityType="Self.tb_pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_parroquia" EntityType="Self.tb_parroquia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_persona" EntityType="Self.tb_persona" Schema="dbo" store:Type="Tables" />
@@ -968,6 +979,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
             <End Role="tb_sis_reporte" EntitySet="tb_sis_reporte" />
             <End Role="tb_sis_reporte_x_seg_usuario" EntitySet="tb_sis_reporte_x_seg_usuario" />
           </AssociationSet>
+          <EntitySet Name="tb_moneda" EntityType="Model_general.tb_moneda" />
           </EntityContainer>
         <EntityType Name="tb_pais">
           <Key>
@@ -1656,6 +1668,16 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tb_moneda">
+          <Key>
+            <PropertyRef Name="IdMoneda" />
+          </Key>
+          <Property Name="IdMoneda" Type="Int32" Nullable="false" />
+          <Property Name="im_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="im_simbolo" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="im_nemonico" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2081,6 +2103,17 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' does not
                 <ScalarProperty Name="CodModulo" ColumnName="CodModulo" />
                 <ScalarProperty Name="nom_reporte" ColumnName="nom_reporte" />
                 <ScalarProperty Name="CodReporte" ColumnName="CodReporte" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_moneda">
+            <EntityTypeMapping TypeName="Model_general.tb_moneda">
+              <MappingFragment StoreEntitySet="tb_moneda">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="im_nemonico" ColumnName="im_nemonico" />
+                <ScalarProperty Name="im_simbolo" ColumnName="im_simbolo" />
+                <ScalarProperty Name="im_descripcion" ColumnName="im_descripcion" />
+                <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

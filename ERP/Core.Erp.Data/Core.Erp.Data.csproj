@@ -478,6 +478,7 @@
     <Compile Include="General\tb_empresa_Data.cs" />
     <Compile Include="General\tb_mes_Data.cs" />
     <Compile Include="General\tb_modulo_Data.cs" />
+    <Compile Include="General\tb_moneda_Data.cs" />
     <Compile Include="General\tb_pais_Data.cs" />
     <Compile Include="General\tb_parroquia_Data.cs" />
     <Compile Include="General\tb_persona_Data.cs" />
@@ -1236,6 +1237,9 @@
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
     <Compile Include="tb_modulo.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_moneda.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
     <Compile Include="tb_pais.cs">

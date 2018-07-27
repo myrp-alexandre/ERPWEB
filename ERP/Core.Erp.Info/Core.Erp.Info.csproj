@@ -168,6 +168,7 @@
     <Compile Include="General\tb_empresa_Info.cs" />
     <Compile Include="General\tb_mes_Info.cs" />
     <Compile Include="General\tb_modulo_Info.cs" />
+    <Compile Include="General\tb_moneda_Info.cs" />
     <Compile Include="General\tb_pais_Info.cs" />
     <Compile Include="General\tb_parroquia_Info.cs" />
     <Compile Include="General\tb_persona_Info.cs" />
