@@ -8800,8 +8800,8 @@
     <Content Include="Areas\Facturacion\Views\ParametrosFacturacion\Index.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_CmbProducto_Importacion.cshtml" />
     <Content Include="Areas\Facturacion\Views\TipoNota\_GridViewPartial_tipo_nota_sucursal.cshtml" />
-    <Content Include="Areas\Importacion\Views\RecepcionOrdenCompra\_GridViewPartial_orden_compra_ext.cshtml" />
-    <Content Include="Areas\Importacion\Views\RecepcionOrdenCompra\_GridViewPartial_orden_compra_ext_det.cshtml" />
+    <Content Include="Areas\Importacion\Views\RecepcionOrdenCompra\_GridViewPartial_recepcion_oc_ext.cshtml" />
+    <Content Include="Areas\Importacion\Views\RecepcionOrdenCompra\_GridViewPartial_recepcion_oc_ext_det.cshtml" />
     <Content Include="Areas\Importacion\Views\RecepcionOrdenCompra\Anular.cshtml" />
     <Content Include="Areas\Importacion\Views\RecepcionOrdenCompra\Index.cshtml" />
     <Content Include="Areas\Importacion\Views\RecepcionOrdenCompra\Modificar.cshtml" />
