@@ -8,7 +8,7 @@ namespace Core.Erp.Data.Importacion
 {
    public class imp_ordencompra_ext_Data
     {
-        public List<imp_ordencompra_ext_Info> get_list()
+        public List<imp_ordencompra_ext_Info> get_list( int IdEmpresa, DateTime fecha_inicio, DateTime Fecha_fin)
         {
             try
             {
@@ -16,6 +16,9 @@ namespace Core.Erp.Data.Importacion
                 using (Entities_importacion Context = new Entities_importacion())
                 {
                     Lista = (from q in Context.imp_orden_compra_ext
+                             where q.IdEmpresa==IdEmpresa
+                             && q.oe_fecha>=fecha_inicio
+                             && q.oe_fecha<=Fecha_fin
                              select new imp_ordencompra_ext_Info
                              {
                                  IdEmpresa=q.IdEmpresa,
