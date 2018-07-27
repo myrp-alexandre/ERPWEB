@@ -16,7 +16,7 @@ namespace Core.Erp.Data.Facturacion
                 Fecha_fin = Fecha_fin.Date;
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
-                    Lista = (from q in Context.fa_notaCreDeb
+                    Lista = (from q in Context.vwfa_notaCreDeb
                              where q.IdEmpresa == IdEmpresa
                              && Fecha_ini <= q.no_fecha
                              && q.no_fecha <= Fecha_fin
