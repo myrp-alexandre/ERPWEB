@@ -1454,6 +1454,9 @@
     <Compile Include="vwfa_proforma_det_por_facturar.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwimp_orden_compra_ext.cs">
+      <DependentUpon>Model_importacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="VWINV_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>

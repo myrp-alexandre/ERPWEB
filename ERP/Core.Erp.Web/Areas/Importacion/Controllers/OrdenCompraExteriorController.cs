@@ -87,8 +87,8 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
         public ActionResult Index()
         {
-            
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info();
+            return View(model);
         }
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)

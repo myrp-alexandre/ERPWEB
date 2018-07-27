@@ -15,7 +15,7 @@ namespace Core.Erp.Data.Importacion
                 List<imp_ordencompra_ext_Info> Lista;
                 using (Entities_importacion Context = new Entities_importacion())
                 {
-                    Lista = (from q in Context.imp_orden_compra_ext
+                    Lista = (from q in Context.vwimp_orden_compra_ext
                              where q.IdEmpresa==IdEmpresa
                              && q.oe_fecha>=fecha_inicio
                              && q.oe_fecha<=Fecha_fin
@@ -42,7 +42,11 @@ namespace Core.Erp.Data.Importacion
                                  IdLiquidacion = q.IdLiquidacion,
                                  oe_fecha_llegada = q.oe_fecha_llegada,
                                  oe_fecha_embarque = q.oe_fecha_embarque,
-                                 oe_fecha_desaduanizacion = q.oe_fecha_desaduanizacion
+                                 oe_fecha_desaduanizacion = q.oe_fecha_desaduanizacion,
+                                 cantidad_global=q.cantidad_global,
+                                 cantidad_x_recibir=q.cantidad_x_recibir,
+                                 pe_cedulaRuc=q.pe_cedulaRuc,
+                                 pe_nombreCompleto=q.pe_nombreCompleto
 
                              }).ToList();
                 }
@@ -147,11 +151,14 @@ namespace Core.Erp.Data.Importacion
                         oe_codigo = info.oe_codigo,
                         oe_valor_flete = info.oe_valor_flete,
                         oe_valor_seguro = info.oe_valor_seguro,
-                        estado = info.estado,
                         IdLiquidacion = info.IdLiquidacion,
                         oe_fecha_llegada = info.oe_fecha_llegada,
                         oe_fecha_embarque_est = info.oe_fecha_embarque_est,
-                        oe_fecha_desaduanizacion = info.oe_fecha_desaduanizacion
+                        oe_fecha_desaduanizacion = info.oe_fecha_desaduanizacion,
+                        estado = info.estado=true,
+                       fecha_creacion=DateTime.Now,
+                       IdUsuario_creacion=info.IdUsuario_creacion
+                        
                     };
                     Context.imp_orden_compra_ext.Add(Entity);
                    
