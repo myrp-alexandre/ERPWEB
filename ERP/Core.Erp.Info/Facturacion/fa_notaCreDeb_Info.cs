@@ -39,6 +39,7 @@ namespace Core.Erp.Info.Facturacion
 
         #region Campos auditoria
         public List<fa_notaCreDeb_det_Info> lst_det { get; set; }
+        public List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> lst_cruce { get; set; }
         #endregion
     }
 

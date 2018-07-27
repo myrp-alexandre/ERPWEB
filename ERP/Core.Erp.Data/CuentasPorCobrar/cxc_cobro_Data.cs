@@ -883,6 +883,9 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 {
                     var Entity = Context.cxc_cobro.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdCobro == info.IdCobro).FirstOrDefault();
                     if (Entity == null) return false;
+
+                    if (Entity.cr_estado == "I") return true;
+
                     Entity.cr_estado = "I";
                     var cobros_det = Context.cxc_cobro_det.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdCobro == info.IdCobro).ToList();
                     foreach (var item in cobros_det)
