@@ -3,9 +3,9 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridView_factura";
-        settings.CallbackRouteValues = new { Controller = "Factura", Action = "GridViewPartial_factura" , Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin };
-        settings.KeyFieldName = "IdCbteVta";
+        settings.Name = "GridView_notaCredito";
+        settings.CallbackRouteValues = new { Controller = "NotaDeCreditoFacturacion", Action = "GridViewPartial_NotaCreditoFacturacion", Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin };
+        settings.KeyFieldName = "IdNota";
         settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -64,8 +64,8 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                    Html.ActionLink("Modificar", "Modificar", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(tc.DataItem, "IdBodega"), IdCbteVta = DataBinder.Eval(tc.DataItem, "IdCbteVta") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(tc.DataItem, "IdBodega"), IdCbteVta = DataBinder.Eval(tc.DataItem, "IdCbteVta") },
+                    Html.ActionLink("Modificar", "Modificar", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(tc.DataItem, "IdBodega"), IdNota = DataBinder.Eval(tc.DataItem, "IdNota") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(tc.DataItem, "IdBodega"), IdNota = DataBinder.Eval(tc.DataItem, "IdNota") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -81,51 +81,39 @@
             c.Width = Unit.Pixel(150);
         });
 
-        settings.Columns.Add("IdCbteVta", "ID").Width = Unit.Percentage(5);
+        settings.Columns.Add("IdNota", "ID").Width = Unit.Percentage(5);
         settings.Columns.Add(column =>
         {
-            column.FieldName = "vt_fecha";
+            column.FieldName = "no_fecha";
             column.Caption = "Fecha";
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = Unit.Percentage(7);
         });
-        settings.Columns.Add("NomContacto", "Cliente").Width = Unit.Percentage(30);
-        settings.Columns.Add("vt_NumFactura", "# Factura").Width = Unit.Percentage(15);
+        settings.Columns.Add("Nombres", "Cliente").Width = Unit.Percentage(30);
+        settings.Columns.Add("NumNota_Impresa", "# Nota").Width = Unit.Percentage(15);
         settings.Columns.Add(column =>
         {
-            column.FieldName = "vt_Subtotal";
+            column.FieldName = "sc_subtotal";
             column.Caption = "Subtotal";
             column.PropertiesEdit.DisplayFormatString = "{0:c2}";
             column.Width = Unit.Percentage(7);
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "vt_iva";
+            column.FieldName = "sc_iva";
             column.Caption = "I.V.A.";
             column.PropertiesEdit.DisplayFormatString = "{0:c2}";
             column.Width = Unit.Percentage(7);
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "vt_total";
+            column.FieldName = "sc_total";
             column.Caption = "Total";
             column.PropertiesEdit.DisplayFormatString = "{0:c2}";
             column.Width = Unit.Percentage(7);
         });
 
         settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(5);
-        settings.Columns.Add(column =>
-        {
-            column.Caption = "Despacho";
-            column.SetDataItemTemplateContent(c =>
-            {
-                if (DataBinder.Eval(c.DataItem, "IdNumMovi_in_eg_x_inv") != null)
-                {
-                    ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("INV_002", "InventarioReportes", new { Area = "Reportes", IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal_in_eg_x_inv"), IdMovi_inven_tipo = DataBinder.Eval(c.DataItem, "IdMovi_inven_tipo_in_eg_x_inv"), IdNumMovi = DataBinder.Eval(c.DataItem, "IdNumMovi_in_eg_x_inv") }, Request.Url.Scheme) + "');\"></span>");
-                }
-            });
-            column.Width = Unit.Percentage(5);
-        });
     });
 }
 @grid.Bind(Model).GetHtml()

@@ -1,8 +1,8 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView_LoteFactura";
-        settings.CallbackRouteValues = new { Controller = "Factura", Action = "GridViewPartial_LoteFactura" };
+        settings.Name = "GridView_LoteCreditoFacturacion";
+        settings.CallbackRouteValues = new { Controller = "NotaDeCreditoFacturacion", Action = "GridViewPartial_LoteCreditoFacturacion" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdProducto";
         
