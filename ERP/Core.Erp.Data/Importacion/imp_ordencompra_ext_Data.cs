@@ -149,6 +149,8 @@ namespace Core.Erp.Data.Importacion
                         oe_fecha_embarque_est = info.oe_fecha_embarque_est,
                         oe_fecha_desaduanizacion = info.oe_fecha_desaduanizacion
                     };
+                    Context.imp_orden_compra_ext.Add(Entity);
+                    Context.SaveChanges();
                     foreach (var item in info.lst_detalle)
                     {
                         Context.imp_orden_compra_ext_det.Add(new imp_orden_compra_ext_det
@@ -179,7 +181,7 @@ namespace Core.Erp.Data.Importacion
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;

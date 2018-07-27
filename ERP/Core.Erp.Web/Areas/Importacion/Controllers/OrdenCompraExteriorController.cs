@@ -33,6 +33,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         in_UnidadMedida_Bus bus_unidad_medida = new in_UnidadMedida_Bus();
         imp_ordencompra_ext_det_Bus bus_detalle = new imp_ordencompra_ext_det_Bus();
+        imp_catalogo_Bus bus_catalogo = new imp_catalogo_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -130,8 +131,8 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         public ActionResult Nuevo(imp_ordencompra_ext_Info model)
         {
             model.lst_detalle = Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
-
-            if (!bus_orden.modificarDB(model))
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            if (!bus_orden.guardarDB(model))
             {
                 cargar_combos();
                 return View(model);
@@ -200,6 +201,9 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
             var lst_forma_pago = bus_forma_pago.get_list();
             ViewBag.lst_forma_pago = lst_forma_pago;
+
+            var lst_catalogos = bus_catalogo.get_list(1);
+            ViewBag.lst_catalogos = lst_catalogos;
 
 
         }

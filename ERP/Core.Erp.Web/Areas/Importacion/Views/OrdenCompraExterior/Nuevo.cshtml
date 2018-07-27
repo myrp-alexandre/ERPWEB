@@ -21,6 +21,13 @@
                     @Html.ValidationMessageFor(q => q.oe_codigo, "", new { @class = "text-danger" })
                 </div>
             </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="rub_grupo">Tipo de embarque*</label>
+                            @Html.DropDownListFor(q => q.IdCatalogo_via, new SelectList(ViewBag.lst_catalogo, "IdCatalogo", "ca_descripcion"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.IdCatalogo_via, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
             <div class="col-md-offset-10 col-med-2">
                 <div class="form-group">
                     <label for="">Fecha O.C</label>
@@ -189,7 +196,7 @@
                                 <label for="IdEmpleado">Ciudad destino</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.IdCiudad_destino, settings =>
                                {
-                                   settings.Name = "IdCiudad";
+                                   settings.Name = "IdCiudad_destino";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                                    settings.Properties.DisplayFormatString = "[{0}] - {2}";
                                    settings.Properties.Columns.Add("IdCiudad", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);

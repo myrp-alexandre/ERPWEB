@@ -17,7 +17,7 @@ namespace Core.Erp.Data.Importacion
                 using (Entities_importacion Context = new Entities_importacion())
                 {
                     Lista = (from q in Context.imp_catalogo
-                             where q.IdCatalogo == IdCatalogo_tipo
+                             where q.IdCatalogo_tipo == IdCatalogo_tipo
                              select new imp_catalogo_Info
                              {
                                  IdCatalogo = q.IdCatalogo,
