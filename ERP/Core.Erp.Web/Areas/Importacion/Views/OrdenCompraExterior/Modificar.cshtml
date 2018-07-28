@@ -90,6 +90,7 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-8">
@@ -135,7 +136,7 @@
                     <div class="col-md-12">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="IdEmpleado">País de embarque</label>
+                                <label for="IdPais_embarque">País de embarque</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.IdPais_embarque, settings =>
                                {
                                    settings.Name = "IdPais_embarque";
@@ -164,7 +165,7 @@
                     <div class="col-md-12">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="IdEmpleado">País destino</label>
+                                <label for="IdPais_origen">País destino</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.IdPais_origen, settings =>
                                {
                                    settings.Name = "IdPais_origen";
@@ -193,7 +194,7 @@
                     <div class="col-md-12">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="IdEmpleado">Ciudad destino</label>
+                                <label for="IdCiudad_destino">Ciudad destino</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.IdCiudad_destino, settings =>
                                {
                                    settings.Name = "IdCiudad_destino";
@@ -220,34 +221,36 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="col-md-12">
+                        <<div class="col-md-6">
                             <div class="form-group">
-                                <label for="IdEmpleado">Forma de pago</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.codigo_pago_sri, settings =>
-                           {
-                               settings.Name = "codigo_pago_sri";
-                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                               settings.Properties.Columns.Add("codigo_pago_sri", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                               settings.Properties.Columns.Add("formas_pago_sri", "Forma pago").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                               //Campo ID
-                               settings.Properties.ValueField = "codigo_pago_sri";
-                               settings.Properties.ValueType = typeof(string);
-                               settings.Properties.TextField = "formas_pago_sri";
-                               //Boton para seleccionar ningun registro
-                               settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                               settings.Properties.NullText = "== Seleccione ==";
-                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                <label for="rub_grupo">Forma de pago*</label>
+                                @Html.DropDownListFor(q => q.IdCatalogo_forma_pago, new SelectList(ViewBag.lst_forma_pago, "IdCatalogo", "ca_descripcion"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogo_forma_pago, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                           }).BindList(ViewBag.lst_forma_pago).GetHtml()
-                                @Html.ValidationMessageFor(q => q.codigo_pago_sri, "", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="rub_grupo">Moneda origen*</label>
+                                @Html.DropDownListFor(q => q.IdMoneda_origen, new SelectList(ViewBag.lst_monedas, "IdMoneda", "im_descripcion"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.IdMoneda_origen, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="rub_grupo">Moneda local*</label>
+                                @Html.DropDownListFor(q => q.IdMoneda_destino, new SelectList(ViewBag.lst_monedas, "IdMoneda", "im_descripcion"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.IdMoneda_destino, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
                 </div>
 
             </div>
-
         </div>
     </div>
 

@@ -224,8 +224,8 @@
                         <<div class="col-md-6">
                         <div class="form-group">
                             <label for="rub_grupo">Forma de pago*</label>
-                            @Html.DropDownListFor(q => q.IdMoneda_origen, new SelectList(ViewBag.lst_forma_pago, "IdCatalogo", "ca_descripcion"), new { @class = "form-control" })
-                            @Html.ValidationMessageFor(q => q.IdMoneda_origen, "", new { @class = "text-danger" })
+                            @Html.DropDownListFor(q => q.IdCatalogo_forma_pago, new SelectList(ViewBag.lst_forma_pago, "IdCatalogo", "ca_descripcion"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.IdCatalogo_forma_pago, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     </div>

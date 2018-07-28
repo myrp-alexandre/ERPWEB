@@ -49,6 +49,24 @@ namespace Core.Erp.Data.Importacion
             }
         }
 
+        public bool eliminar(int IdEmpresa, decimal IdOrdenCompra_ext)
+        {
+            try
+            {
+                using (Entities_importacion context=new Entities_importacion())
+                {
+                    string sql = "delete imp_ordencompra_ext_det where IdEmpresa='"+IdEmpresa+ "' and IdOrdenCompra_ext='"+ IdOrdenCompra_ext + "'";
+                    context.Database.ExecuteSqlCommand(sql);
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
     }
 }

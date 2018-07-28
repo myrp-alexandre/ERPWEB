@@ -185,7 +185,6 @@ namespace Core.Erp.Data.Importacion
                         });
                         secuancia++;
                         }
-                    Context.imp_orden_compra_ext.Add(Entity);
                     Context.SaveChanges();
                 }
                 return true;
@@ -221,9 +220,9 @@ namespace Core.Erp.Data.Importacion
                          Entity.IdLiquidacion = info.IdLiquidacion;
                          Entity.oe_fecha_llegada = info.oe_fecha_llegada;
                          Entity.oe_fecha_embarque_est = info.oe_fecha_embarque_est;
-                    Entity.IdMoneda_origen = info.IdMoneda_origen;
-                    Entity.IdMoneda_destino = info.IdMoneda_destino;
-                    Entity.oe_fecha_desaduanizacion = info.oe_fecha_desaduanizacion;
+                        Entity.IdMoneda_origen = info.IdMoneda_origen;
+                        Entity.IdMoneda_destino = info.IdMoneda_destino;
+                        Entity.oe_fecha_desaduanizacion = info.oe_fecha_desaduanizacion;
 
                     foreach (var item in info.lst_detalle)
                     {
