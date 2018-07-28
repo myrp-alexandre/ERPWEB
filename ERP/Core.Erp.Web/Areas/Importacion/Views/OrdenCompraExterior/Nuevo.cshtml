@@ -90,6 +90,7 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-8">
@@ -235,14 +236,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="rub_grupo">Moneda origen*</label>
-                                @Html.DropDownListFor(q => q.IdMoneda_origen, new SelectList(ViewBag.lst_forma_pago, "IdCatalogo", "ca_descripcion"), new { @class = "form-control" })
+                                @Html.DropDownListFor(q => q.IdMoneda_origen, new SelectList(ViewBag.lst_monedas, "IdMoneda", "im_descripcion"), new { @class = "form-control" })
                                 @Html.ValidationMessageFor(q => q.IdMoneda_origen, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="rub_grupo">Moneda local*</label>
-                                @Html.DropDownListFor(q => q.IdMoneda_destino, new SelectList(ViewBag.lst_forma_pago, "IdCatalogo", "ca_descripcion"), new { @class = "form-control" })
+                                @Html.DropDownListFor(q => q.IdMoneda_destino, new SelectList(ViewBag.lst_monedas, "IdMoneda", "im_descripcion"), new { @class = "form-control" })
                                 @Html.ValidationMessageFor(q => q.IdMoneda_destino, "", new { @class = "text-danger" })
                             </div>
                         </div>

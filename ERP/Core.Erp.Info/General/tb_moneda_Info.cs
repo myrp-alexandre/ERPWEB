@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.General
 {
-    class tb_moneda_Info
+   public class tb_moneda_Info
     {
+        public int IdMoneda { get; set; }
+        public string im_descripcion { get; set; }
+        public string im_simbolo { get; set; }
+        public string im_nemonico { get; set; }
+        public string Estado { get; set; }
     }
 }

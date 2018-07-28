@@ -33,7 +33,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         in_UnidadMedida_Bus bus_unidad_medida = new in_UnidadMedida_Bus();
         imp_ordencompra_ext_det_Bus bus_detalle = new imp_ordencompra_ext_det_Bus();
         imp_catalogo_Bus bus_catalogo = new imp_catalogo_Bus();
-        
+        tb_moneda_Bus bus_moneda = new tb_moneda_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -221,6 +221,8 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             var lst_catalogos = bus_catalogo.get_list(1);
             ViewBag.lst_catalogos = lst_catalogos;
 
+            var lst_monedas = bus_moneda.get_list();
+            ViewBag.lst_monedas = lst_monedas;
 
         }
         private void cargar_combos_detalle()
