@@ -93,6 +93,31 @@ namespace Core.Erp.Data.Facturacion
                 throw;
             }
         }
+
+        public bool DocumentoExiste(int IdEmpresa, string CodDocumentoTipo, string Serie1, string Serie2, string NumNota_Impresa)
+        {
+            try
+            {
+                using (Entities_facturacion Context = new Entities_facturacion())
+                {
+                    var lst = from q in Context.fa_notaCreDeb
+                              where q.IdEmpresa == IdEmpresa
+                              && q.CodDocumentoTipo == CodDocumentoTipo
+                              && q.Serie1 == Serie1
+                              && q.Serie2 == Serie2
+                              && q.NumNota_Impresa == NumNota_Impresa
+                              select q;
+
+                    if (lst.Count() > 0)
+                        return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         private decimal get_id(int IdEmpresa, int IdSucursal, int IdBodega)
         {
             try

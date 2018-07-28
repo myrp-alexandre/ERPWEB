@@ -13,6 +13,7 @@ using Core.Erp.Web.Areas.Inventario.Controllers;
 using Core.Erp.Info.General;
 using Core.Erp.Bus.General;
 using DevExpress.Web.Mvc;
+using DevExpress.Web;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
@@ -33,6 +34,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_notaCreDeb_det_List List_det = new fa_notaCreDeb_det_List();
         tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
         fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
+        string mensaje = string.Empty;
+        fa_notaCreDeb_det_Bus bus_det = new fa_notaCreDeb_det_Bus();
         #endregion
 
         #region Index
@@ -55,6 +58,43 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
             var model = bus_nota.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, "C");
             return PartialView("_GridViewPartial_NotaCreditoFacturacion", model);
+        }
+        #endregion
+
+        #region Metodos ComboBox bajo demanda cliente
+        public ActionResult CmbCliente_NotaCredito()
+        {
+            fa_proforma_Info model = new fa_proforma_Info();
+            return PartialView("_CmbCliente_NotaCrebitoFacturacion", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.CLIENTE.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.CLIENTE.ToString());
+        }
+        #endregion
+
+        #region Metodos ComboBox bajo demanda producto
+        public ActionResult ChangeValuePartial(decimal value = 0)
+        {
+            return PartialView("_CmbProducto_NotaCrebitoFacturacion", value);
+        }
+        public ActionResult CmbProducto_NotaCredito()
+        {
+            fa_notaCreDeb_det_Info model = new fa_notaCreDeb_det_Info();
+            return PartialView("_CmbProducto_NotaCrebitoFacturacion", model);
+        }
+        public List<in_Producto_Info> get_list_bajo_demandaProducto(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            List<in_Producto_Info> Lista = bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.PORMODULO, cl_enumeradores.eModulo.VTA, 0);
+            return Lista;
+        }
+        public in_Producto_Info get_info_bajo_demandaProducto(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
         #endregion
 
@@ -152,12 +192,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_factura_det()
+        public ActionResult GridViewPartial_notaCredito_det()
         {
             var model = List_det.get_list();
             cargar_combos_detalle();
             SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["IdCliente"]) ? Request.Params["IdCliente"].ToString() : "-1";
-            return PartialView("_GridViewPartial_factura_det", model);
+            return PartialView("_GridViewPartial_NotaCrebitoFacturacion_det", model);
         }
 
         [HttpPost, ValidateInput(false)]
@@ -199,7 +239,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             List_det.AddRow(info_det);
             var model = List_det.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_factura_det", model);
+            return PartialView("_GridViewPartial_NotaCrebitoFacturacion_det", model);
         }
 
         [HttpPost, ValidateInput(false)]
@@ -241,7 +281,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             List_det.UpdateRow(info_det);
             var model = List_det.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_factura_det", model);
+            return PartialView("_GridViewPartial_NotaCrebitoFacturacion_det", model);
         }
 
         public ActionResult EditingDelete(int Secuencia)
@@ -249,7 +289,168 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             List_det.DeleteRow(Secuencia);
             var model = List_det.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_factura_det", model);
+            return PartialView("_GridViewPartial_NotaCrebitoFacturacion_det", model);
+        }
+        #endregion
+
+        #region Metodos
+        private void cargar_combos(fa_notaCreDeb_Info model)
+        {
+            var lst_sucursal = bus_sucursal.get_list(model.IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+
+            var lst_punto_venta = bus_punto_venta.get_list(model.IdEmpresa, model.IdSucursal, false);
+            ViewBag.lst_punto_venta = lst_punto_venta;
+
+            var lst_contacto = bus_contacto.get_list(model.IdEmpresa, model.IdCliente);
+            ViewBag.lst_contacto = lst_contacto;
+        }
+        private bool validar(fa_notaCreDeb_Info i_validar, ref string msg)
+        {
+            i_validar.lst_det = List_det.get_list();
+            if (i_validar.lst_det.Count == 0)
+            {
+                msg = "No ha ingresado registros en el detalle";
+                return false;
+            }
+            if (i_validar.lst_det.Where(q => q.sc_cantidad == 0).Count() > 0)
+            {
+                msg = "Existen registros con cantidad 0 en el detalle";
+                return false;
+            }
+            if (i_validar.lst_det.Where(q => q.IdProducto == 0).Count() > 0)
+            {
+                msg = "Existen registros sin producto en el detalle";
+                return false;
+            }
+
+            i_validar.IdBodega = (int)bus_punto_venta.get_info(i_validar.IdEmpresa, i_validar.IdSucursal, Convert.ToInt32(i_validar.IdPuntoVta)).IdBodega;
+            i_validar.IdUsuario = SessionFixed.IdUsuario;
+            i_validar.IdUsuarioUltMod = SessionFixed.IdUsuario;
+
+            if (i_validar.IdNota == 0 && i_validar.NaturalezaNota == "SRI")
+            {
+                var talonario = bus_talonario.get_info(i_validar.IdEmpresa, i_validar.CodDocumentoTipo, i_validar.Serie1, i_validar.Serie2, i_validar.NumNota_Impresa);
+                if (talonario == null)
+                {
+                    msg = "No existe un talonario creado con la numeración: " + i_validar.Serie1 + "-" + i_validar.Serie2 + "-" + i_validar.NumNota_Impresa;
+                    return false;
+                }
+                if (talonario.Usado == true)
+                {
+                    msg = "El talonario: " + i_validar.Serie1 + "-" + i_validar.Serie2 + "-" + i_validar.NumNota_Impresa + " se encuentra utilizado.";
+                    return false;
+                }
+                if (bus_nota.DocumentoExiste(i_validar.IdEmpresa, i_validar.CodDocumentoTipo,i_validar.Serie1, i_validar.Serie2, i_validar.NumNota_Impresa))
+                {
+                    msg = "Existe una nota de crédito con el talonario: " + i_validar.Serie1 + "-" + i_validar.Serie2 + "-" + i_validar.NumNota_Impresa + " utilizado.";
+                    return false;
+                }
+                if (talonario.es_Documento_Electronico == false)
+                {
+                    i_validar.NumAutorizacion = talonario.NumAutorizacion;                    
+                }
+            }            
+
+            if (i_validar.NaturalezaNota != "SRI")
+            {
+                i_validar.Serie1 = null;
+                i_validar.Serie2 = null;
+                i_validar.NumNota_Impresa = null;
+            }
+
+            return true;
+        }
+        #endregion
+
+        #region Acciones
+        public ActionResult Nuevo()
+        {
+            fa_notaCreDeb_Info model = new fa_notaCreDeb_Info
+            {
+                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                no_fecha = DateTime.Now,
+                no_fecha_venc = DateTime.Now,
+                lst_det = new List<fa_notaCreDeb_det_Info>(),
+                CodDocumentoTipo = "NTCR"
+            };
+            List_det.set_list(model.lst_det);
+            cargar_combos(model);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Nuevo(fa_notaCreDeb_Info model)
+        {
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos(model);
+                return View(model);
+            }
+            model.IdUsuario = Session["IdUsuario"].ToString();
+            if (!bus_nota.guardarDB(model))
+            {
+                ViewBag.mensaje = "No se ha podido guardar el registro";
+                cargar_combos(model);
+                return View(model);
+            };
+            return RedirectToAction("Index");
+        }
+        public ActionResult Modificar(int IdSucursal = 0, int IdBodega = 0, decimal IdNota = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            fa_notaCreDeb_Info model = bus_nota.get_info(IdEmpresa, IdSucursal, IdBodega, IdNota);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdBodega, IdNota);
+            List_det.set_list(model.lst_det);
+            cargar_combos(model);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(fa_notaCreDeb_Info model)
+        {
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos(model);
+                return View(model);
+            }
+            model.IdUsuario = Session["IdUsuario"].ToString();
+            if (!bus_nota.modificarDB(model))
+            {
+                ViewBag.mensaje = "No se ha podido modificar el registro";
+                cargar_combos(model);
+                return View(model);
+            };
+            return RedirectToAction("Index");
+        }
+        public ActionResult Anular(int IdSucursal = 0, int IdBodega = 0, decimal IdNota = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            fa_notaCreDeb_Info model = bus_nota.get_info(IdEmpresa, IdSucursal, IdBodega, IdNota);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdBodega, IdNota);
+            List_det.set_list(model.lst_det);
+            cargar_combos(model);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Anular(fa_notaCreDeb_Info model)
+        {
+            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            if (!bus_nota.anularDB(model))
+            {
+                ViewBag.mensaje = "No se ha podido anular el registro";
+                cargar_combos(model);
+                return View(model);
+            };
+            return RedirectToAction("Index");
         }
         #endregion
     }
@@ -302,6 +503,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             edited_info.sc_descUni = Math.Round(info_det.sc_Precio * (info_det.sc_PordescUni / 100), 2, MidpointRounding.AwayFromZero);
             edited_info.sc_precioFinal = Math.Round(info_det.sc_Precio - edited_info.sc_descUni, 2, MidpointRounding.AwayFromZero);
             edited_info.sc_subtotal = Math.Round(info_det.sc_cantidad * edited_info.sc_precioFinal, 2, MidpointRounding.AwayFromZero);
+            edited_info.IdCod_Impuesto_Iva = info_det.IdCod_Impuesto_Iva;
             if (!string.IsNullOrEmpty(info_det.IdCod_Impuesto_Iva) && info_det.IdCod_Impuesto_Iva != edited_info.IdCod_Impuesto_Iva)
             {
                 var impuesto = bus_impuesto.get_info(info_det.IdCod_Impuesto_Iva);
