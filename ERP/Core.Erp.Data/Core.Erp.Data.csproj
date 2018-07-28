@@ -1515,6 +1515,9 @@
     <Compile Include="vwimp_orden_compra_ext_recepcion.cs">
       <DependentUpon>Model_importacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwimp_orden_compra_ext_recepcion_det.cs">
+      <DependentUpon>Model_importacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="VWINV_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>

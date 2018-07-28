@@ -15,9 +15,9 @@ namespace Core.Erp.Data.Importacion
                 List<imp_orden_compra_ext_recepcion_det_Info> Lista;
                 using (Entities_importacion Context = new Entities_importacion())
                 {
-                    Lista = (from q in Context.imp_orden_compra_ext_recepcion_det
+                    Lista = (from q in Context.vwimp_orden_compra_ext_recepcion_det
                              where q.IdEmpresa == IdEmpresa
-                             && q.IdOrdenCompra_ext == IdOrdenCompra_ext
+                             && q.IdRecepcion == IdOrdenCompra_ext
                              select new imp_orden_compra_ext_recepcion_det_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -28,7 +28,10 @@ namespace Core.Erp.Data.Importacion
                                  IdOrdenCompra_ext = q.IdOrdenCompra_ext,
                                  Secuencia_oc=q.Secuencia_oc,
                                  cantidad=q.cantidad,
-                                 Observacion=q.Observacion
+                                 Observacion=q.Observacion,
+                                 od_cantidad=q.od_cantidad,
+                                 pr_descripcion=q.pr_descripcion,
+                                 IdUnidadMedida=q.IdUnidadMedida
 
                              }).ToList();
                 }

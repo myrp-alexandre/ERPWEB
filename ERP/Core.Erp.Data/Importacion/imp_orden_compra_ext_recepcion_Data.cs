@@ -54,7 +54,7 @@ namespace Core.Erp.Data.Importacion
                 imp_orden_compra_ext_recepcion_Info info = new imp_orden_compra_ext_recepcion_Info();
                 using (Entities_importacion Context = new Entities_importacion())
                 {
-                    imp_orden_compra_ext_recepcion Entity = Context.imp_orden_compra_ext_recepcion.FirstOrDefault(q => q.IdRecepcion == IdRecepcion && q.IdEmpresa == IdEmpresa);
+                    vwimp_orden_compra_ext_recepcion Entity = Context.vwimp_orden_compra_ext_recepcion.FirstOrDefault(q => q.IdRecepcion == IdRecepcion && q.IdEmpresa == IdEmpresa);
                     if (Entity == null) return null;
                     info = new imp_orden_compra_ext_recepcion_Info
                     {
@@ -69,7 +69,9 @@ namespace Core.Erp.Data.Importacion
                         IdMovi_inven_tipo_inv = Entity.IdMovi_inven_tipo_inv,
                         IdNumMovi_inv = Entity.IdNumMovi_inv,
                         IdBodega=Entity.IdBodega,
-                        IdMotivo_Inv=Entity.IdMotivo_Inv
+                        IdMotivo_Inv=Entity.IdMotivo_Inv,
+                        IdCatalogo_via=Entity.IdCatalogo_via,
+                        pe_nombreCompleto=Entity.pe_nombreCompleto
                         
                         
                     };

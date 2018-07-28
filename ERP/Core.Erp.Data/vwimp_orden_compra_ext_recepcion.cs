@@ -27,5 +27,13 @@ namespace Core.Erp.Data
         public string pe_nombreCompleto { get; set; }
         public string pe_cedulaRuc { get; set; }
         public int IdEmpresa { get; set; }
+        public int IdBodega { get; set; }
+        public int IdCatalogo_via { get; set; }
+        public string IdCiudad_destino { get; set; }
+        public int IdCatalogo_forma_pago { get; set; }
+        public System.DateTime oe_fecha { get; set; }
+        public Nullable<System.DateTime> oe_fecha_llegada_est { get; set; }
+        public Nullable<System.DateTime> oe_fecha_embarque_est { get; set; }
+        public int IdMotivo_Inv { get; set; }
     }
 }

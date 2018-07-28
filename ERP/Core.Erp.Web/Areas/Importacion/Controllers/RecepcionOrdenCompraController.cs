@@ -33,7 +33,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         imp_orden_compra_ext_recepcion_det_lst detalle = new imp_orden_compra_ext_recepcion_det_lst();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         in_UnidadMedida_Bus bus_unidad_medida = new in_UnidadMedida_Bus();
-        imp_ordencompra_ext_det_Bus bus_detalle = new imp_ordencompra_ext_det_Bus();
+        imp_orden_compra_ext_recepcion_det_Bus bus_detalle = new imp_orden_compra_ext_recepcion_det_Bus();
         imp_catalogo_Bus bus_catalogo = new imp_catalogo_Bus();
         #endregion
 
@@ -101,12 +101,12 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             Session["imp_orden_compra_ext_recepcion_det_Info"] = null;
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(decimal IdOrdenCompra_ext)
+        public ActionResult Modificar(decimal IdRecepcion=0)
         {
 
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            imp_orden_compra_ext_recepcion_Info model = bus_recepcion.get_info(IdEmpresa, IdOrdenCompra_ext);
-            var lst_detalle = bus_detalle.get_list(IdEmpresa, IdOrdenCompra_ext);
+            imp_orden_compra_ext_recepcion_Info model = bus_recepcion.get_info(IdEmpresa, IdRecepcion);
+            var lst_detalle = bus_detalle.get_list(IdEmpresa, IdRecepcion);
             Session["imp_orden_compra_ext_recepcion_det_Info"] = lst_detalle;
             if (model == null)
                 return RedirectToAction("Index");
@@ -126,12 +126,12 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             Session["imp_orden_compra_ext_recepcion_det_Info"] = null;
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(decimal IdOrdenCompra_ext)
+        public ActionResult Anular(decimal IdRecepcion=0)
         {
 
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            imp_orden_compra_ext_recepcion_Info model = bus_recepcion.get_info(IdEmpresa, IdOrdenCompra_ext);
-            var lst_detalle = bus_detalle.get_list(IdEmpresa, IdOrdenCompra_ext);
+            imp_orden_compra_ext_recepcion_Info model = bus_recepcion.get_info(IdEmpresa, IdRecepcion);
+            var lst_detalle = bus_detalle.get_list(IdEmpresa, IdRecepcion);
             Session["imp_orden_compra_ext_recepcion_det_Info"] = lst_detalle;
             if (model == null)
                 return RedirectToAction("Index");
