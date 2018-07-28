@@ -66,7 +66,11 @@ namespace Core.Erp.Data.Importacion
                         IdEmpresa_inv = Entity.IdEmpresa_inv,
                         IdSucursal_inv = Entity.IdSucursal_inv,
                         IdMovi_inven_tipo_inv = Entity.IdMovi_inven_tipo_inv,
-                        IdNumMovi_inv = Entity.IdNumMovi_inv
+                        IdNumMovi_inv = Entity.IdNumMovi_inv,
+                        IdBodega=Entity.IdBodega,
+                        IdMotivo_Inv=Entity.IdMotivo_Inv
+                        
+                        
                     };
                 }
                 return info;
@@ -118,7 +122,10 @@ namespace Core.Erp.Data.Importacion
                         IdEmpresa_inv = info.IdEmpresa_inv,
                         IdSucursal_inv = info.IdSucursal_inv,
                         IdMovi_inven_tipo_inv = info.IdMovi_inven_tipo_inv,
-                        IdNumMovi_inv = info.IdNumMovi_inv
+                        IdMotivo_Inv = info.IdMotivo_Inv,
+
+                    IdNumMovi_inv = info.IdNumMovi_inv,
+                        IdBodega=info.IdBodega,
 
                     };
 
@@ -168,6 +175,8 @@ namespace Core.Erp.Data.Importacion
                     Entity.IdSucursal_inv = info.IdSucursal_inv;
                     Entity.IdMovi_inven_tipo_inv = info.IdMovi_inven_tipo_inv;
                     Entity.IdNumMovi_inv = info.IdNumMovi_inv;
+                    Entity.IdBodega = info.IdBodega;
+                    Entity.IdMotivo_Inv = info.IdMotivo_Inv;
 
                     foreach (var item in info.lst_detalle)
                     {

@@ -22,7 +22,12 @@ namespace Core.Erp.Data.Importacion
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         IdTipoCbte_liquidacion = Entity.IdTipoCbte_liquidacion,
-                        IdTipoCbte_liquidacion_anu = Entity.IdTipoCbte_liquidacion_anu
+                        IdTipoCbte_liquidacion_anu = Entity.IdTipoCbte_liquidacion_anu,
+                        IdCtaCble=Entity.IdCtaCble,
+                        IdSucursal=Entity.IdSucursal,
+                        IdBodega=Entity.IdBodega,
+                        IdMotivo_Inv_ing=Entity.IdMotivo_Inv_ing,
+                        IdMovi_inven_tipo_ing=Entity.IdMovi_inven_tipo_ing
                     };
                 }
                 return info;
@@ -48,7 +53,12 @@ namespace Core.Erp.Data.Importacion
                         {
                             IdEmpresa = info.IdEmpresa,
                             IdTipoCbte_liquidacion = info.IdTipoCbte_liquidacion,
-                            IdTipoCbte_liquidacion_anu = info.IdTipoCbte_liquidacion_anu
+                            IdTipoCbte_liquidacion_anu = info.IdTipoCbte_liquidacion_anu,
+                            IdCtaCble = info.IdCtaCble,
+                            IdSucursal = info.IdSucursal,
+                            IdBodega = info.IdBodega,
+                            IdMotivo_Inv_ing = info.IdMotivo_Inv_ing,
+                            IdMovi_inven_tipo_ing = info.IdMovi_inven_tipo_ing
                         };
                         Context.imp_parametro.Add(Entity);
                     }
@@ -56,7 +66,10 @@ namespace Core.Erp.Data.Importacion
                     {
                         Entity.IdTipoCbte_liquidacion = info.IdTipoCbte_liquidacion;
                         Entity.IdTipoCbte_liquidacion_anu = info.IdTipoCbte_liquidacion_anu;
-                        
+                        Entity.IdSucursal = info.IdSucursal;
+                        Entity.IdBodega = info.IdBodega;
+                        Entity.IdMotivo_Inv_ing = info.IdMotivo_Inv_ing;
+                        Entity.IdMovi_inven_tipo_ing = info.IdMovi_inven_tipo_ing;
                     }
                     Context.SaveChanges();
                 }

@@ -8855,6 +8855,7 @@
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_007.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_GridViewPartial_orden_compra_con_saldo.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\OrdencompraConsaldos.cshtml" />
+    <Content Include="Areas\Importacion\Views\ParametrosImportacion\_CmbCuenta_contable.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

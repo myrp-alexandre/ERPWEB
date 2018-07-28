@@ -16,7 +16,10 @@ namespace Core.Erp.Info.Importacion
         public decimal IdOrdenCompraExt { get; set; }
         public int IdEmpresa_inv { get; set; }
         public int IdSucursal_inv { get; set; }
+        public int IdBodega { get; set; }
         public int IdMovi_inven_tipo_inv { get; set; }
+        public int IdMotivo_Inv { get; set; }
+
         public decimal IdNumMovi_inv { get; set; }
         public List<imp_orden_compra_ext_recepcion_det_Info> lst_detalle { get; set; }
         public bool estado { get; set; }

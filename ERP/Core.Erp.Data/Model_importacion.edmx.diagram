@@ -29,8 +29,8 @@
         <EntityTypeShape EntityType="Model_importacion.vwimp_orden_compra_ext_det" Width="1.5" PointX="12.375" PointY="7.75" />
         <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext_recepcion_det" Width="1.5" PointX="7.5" PointY="12.875" />
         <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_det" />
-        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext_recepcion" Width="1.5" PointX="5.25" PointY="15" />
         <EntityTypeShape EntityType="Model_importacion.imp_parametro" Width="1.5" PointX="10.375" PointY="13.75" />
+        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext_recepcion" Width="1.5" PointX="5.25" PointY="14.875" />
         <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_recepcion_imp_orden_compra_ext" />
         <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_recepcion" />
         </Diagram>
