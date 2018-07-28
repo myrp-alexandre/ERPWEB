@@ -33,7 +33,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         imp_orden_compra_ext_recepcion_det_lst detalle = new imp_orden_compra_ext_recepcion_det_lst();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         in_UnidadMedida_Bus bus_unidad_medida = new in_UnidadMedida_Bus();
-        imp_orden_compra_ext_recepcion_det_Bus bus_detalle = new imp_orden_compra_ext_recepcion_det_Bus();
+        imp_ordencompra_ext_det_Bus bus_detalle = new imp_ordencompra_ext_det_Bus();
         imp_catalogo_Bus bus_catalogo = new imp_catalogo_Bus();
         #endregion
 
@@ -67,10 +67,10 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         }
         public ActionResult GridViewPartial_recepcion_oc_ext_det()
         {
-            List<imp_orden_compra_ext_recepcion_det_Info> model = new List<imp_orden_compra_ext_recepcion_det_Info>();
-            model = Session["imp_orden_compra_ext_recepcion_det_Info"] as List<imp_orden_compra_ext_recepcion_det_Info>;
+            List<imp_ordencompra_ext_det_Info> model = new List<imp_ordencompra_ext_det_Info>();
+            model = Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
             if (model == null)
-                model = new List<imp_orden_compra_ext_recepcion_det_Info>();
+                model = new List<imp_ordencompra_ext_det_Info>();
             return PartialView("_GridViewPartial_recepcion_oc_ext_det", model);
         }
 
@@ -84,14 +84,14 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             imp_orden_compra_ext_recepcion_Info model = new imp_orden_compra_ext_recepcion_Info();
             model=  bus_recepcion.get_rcepcion_mercancia(IdEmpresa, IdOrdenCompra_ext);
             if (model != null)
-                Session["imp_orden_compra_ext_recepcion_det_Info"] = model.lst_detalle;
+                Session["imp_ordencompra_ext_det_Info"] = model.lst_detalle;
             cargar_combos();
             return View(model);
         }
         [HttpPost]
         public ActionResult Nuevo(imp_orden_compra_ext_recepcion_Info model)
         {
-            model.lst_detalle = Session["imp_orden_compra_ext_recepcion_det_Info"] as List<imp_orden_compra_ext_recepcion_det_Info>;
+            model.lst_detalle = Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
             if (model.lst_detalle == null)
             {
                 ViewBag.mensaje = "no existe detalle";
@@ -114,7 +114,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 cargar_combos();
                 return View(model);
             }
-            Session["imp_orden_compra_ext_recepcion_det_Info"] = null;
+            Session["imp_ordencompra_ext_det_Info"] = null;
             return RedirectToAction("Index");
         }
         public ActionResult Modificar(decimal IdRecepcion=0)
@@ -123,7 +123,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             imp_orden_compra_ext_recepcion_Info model = bus_recepcion.get_info(IdEmpresa, IdRecepcion);
             var lst_detalle = bus_detalle.get_list(IdEmpresa, IdRecepcion);
-            Session["imp_orden_compra_ext_recepcion_det_Info"] = lst_detalle;
+            Session["imp_ordencompra_ext_det_Info"] = lst_detalle;
             if (model == null)
                 return RedirectToAction("Index");
             cargar_combos();
@@ -133,7 +133,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost]
         public ActionResult Modificar(imp_orden_compra_ext_recepcion_Info model)
         {
-            model.lst_detalle = Session["imp_orden_compra_ext_recepcion_det_Info"] as List<imp_orden_compra_ext_recepcion_det_Info>;
+            model.lst_detalle = Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
 
             if(model.lst_detalle==null)
             {
@@ -156,7 +156,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 cargar_combos();
                 return View(model);
             }
-            Session["imp_orden_compra_ext_recepcion_det_Info"] = null;
+            Session["imp_ordencompra_ext_det_Info"] = null;
             return RedirectToAction("Index");
         }
         public ActionResult Anular(decimal IdRecepcion=0)
@@ -165,7 +165,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             imp_orden_compra_ext_recepcion_Info model = bus_recepcion.get_info(IdEmpresa, IdRecepcion);
             var lst_detalle = bus_detalle.get_list(IdEmpresa, IdRecepcion);
-            Session["imp_orden_compra_ext_recepcion_det_Info"] = lst_detalle;
+            Session["imp_ordencompra_ext_det_Info"] = lst_detalle;
             if (model == null)
                 return RedirectToAction("Index");
             cargar_combos();
@@ -180,7 +180,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 cargar_combos();
                 return View(model);
             }
-            Session["imp_orden_compra_ext_recepcion_det_Info"] = null;
+            Session["imp_ordencompra_ext_det_Info"] = null;
             return RedirectToAction("Index");
         }
         #endregion
@@ -218,7 +218,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         }
         #region funciones del detalle
         [HttpPost, ValidateInput(false)]
-        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] imp_orden_compra_ext_recepcion_det_Info info_det)
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] imp_ordencompra_ext_det_Info info_det)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (info_det != null)
@@ -239,7 +239,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] imp_orden_compra_ext_recepcion_det_Info info_det)
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] imp_ordencompra_ext_det_Info info_det)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (info_det != null)
@@ -259,9 +259,9 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             return PartialView("_GridViewPartial_recepcion_oc_ext_det", model);
         }
 
-        public ActionResult EditingDelete(int secuencia)
+        public ActionResult EditingDelete(int Secuencia)
         {
-            detalle.DeleteRow(secuencia);
+            detalle.DeleteRow(Secuencia);
             var model = detalle.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_recepcion_oc_ext_det", model);
@@ -272,40 +272,40 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
     public class imp_orden_compra_ext_recepcion_det_lst
     {
-        public List<imp_orden_compra_ext_recepcion_det_Info> get_list()
+        public List<imp_ordencompra_ext_det_Info> get_list()
         {
-            if (HttpContext.Current.Session["imp_orden_compra_ext_recepcion_det_Info"] == null)
+            if (HttpContext.Current.Session["imp_ordencompra_ext_det_Info"] == null)
             {
-                List<imp_orden_compra_ext_recepcion_det_Info> list = new List<imp_orden_compra_ext_recepcion_det_Info>();
+                List<imp_ordencompra_ext_det_Info> list = new List<imp_ordencompra_ext_det_Info>();
 
-                HttpContext.Current.Session["imp_orden_compra_ext_recepcion_det_Info"] = list;
+                HttpContext.Current.Session["imp_ordencompra_ext_det_Info"] = list;
             }
-            return (List<imp_orden_compra_ext_recepcion_det_Info>)HttpContext.Current.Session["imp_orden_compra_ext_recepcion_det_Info"];
+            return (List<imp_ordencompra_ext_det_Info>)HttpContext.Current.Session["imp_ordencompra_ext_det_Info"];
         }
 
-        public void set_list(List<imp_orden_compra_ext_recepcion_det_Info> list)
+        public void set_list(List<imp_ordencompra_ext_det_Info> list)
         {
-            HttpContext.Current.Session["imp_orden_compra_ext_recepcion_det_Info"] = list;
+            HttpContext.Current.Session["imp_ordencompra_ext_det_Info"] = list;
         }
 
-        public void AddRow(imp_orden_compra_ext_recepcion_det_Info info_det)
+        public void AddRow(imp_ordencompra_ext_det_Info info_det)
         {
-            List<imp_orden_compra_ext_recepcion_det_Info> list = get_list();
-            info_det.secuencia = list.Count == 0 ? 1 : list.Max(q => q.secuencia) + 1;
+            List<imp_ordencompra_ext_det_Info> list = get_list();
+            info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
             list.Add(info_det);
         }
 
-        public void UpdateRow(imp_orden_compra_ext_recepcion_det_Info info_det)
+        public void UpdateRow(imp_ordencompra_ext_det_Info info_det)
         {
-            imp_orden_compra_ext_recepcion_det_Info edited_info = get_list().Where(m => m.secuencia == info_det.secuencia).First();
-            edited_info.cantidad = info_det.cantidad;
+            imp_ordencompra_ext_det_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();
+            edited_info.od_cantidad_recepcion = info_det.od_cantidad_recepcion;
 
         }
 
-        public void DeleteRow(int secuencia)
+        public void DeleteRow(int Secuencia)
         {
-            List<imp_orden_compra_ext_recepcion_det_Info> list = get_list();
-            list.Remove(list.Where(m => m.secuencia == secuencia).First());
+            List<imp_ordencompra_ext_det_Info> list = get_list();
+            list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
         }
     }
 }

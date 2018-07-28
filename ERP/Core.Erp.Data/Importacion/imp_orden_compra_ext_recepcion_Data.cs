@@ -111,7 +111,6 @@ namespace Core.Erp.Data.Importacion
         {
             try
             {
-                int secuancia = 1;
                 using (Entities_importacion Context = new Entities_importacion())
                 {
                     imp_orden_compra_ext_recepcion Entity = new imp_orden_compra_ext_recepcion
@@ -134,34 +133,14 @@ namespace Core.Erp.Data.Importacion
 
                     foreach (var item in info.lst_detalle)
                     {
-                        Context.imp_orden_compra_ext_recepcion_det.Add(new imp_orden_compra_ext_recepcion_det
-                        {
-                            IdEmpresa = item.IdEmpresa,
-                            IdRecepcion = info.IdRecepcion,
-                            secuencia = item.secuencia,
-                            IdProducto = item.IdProducto,
-                            IdEmpresa_oc = item.IdEmpresa_oc,
-                            IdOrdenCompra_ext = item.IdOrdenCompra_ext,
-                            Secuencia_oc = item.Secuencia_oc,
-                            cantidad = item.cantidad,
-                            Observacion = item.Observacion
-
-                        });
-                        secuancia++;
-                    }
-                    Context.imp_orden_compra_ext_recepcion.Add(Entity);
-                    Context.SaveChanges();
-
-                    foreach (var item in info.lst_detalle)
-                    {
                         imp_orden_compra_ext_det detalle = Context.imp_orden_compra_ext_det.FirstOrDefault( q => 
                         q.IdEmpresa==item.IdEmpresa
                         &&q.IdOrdenCompra_ext == info.IdOrdenCompraExt
-                        && q.Secuencia==item.Secuencia_oc
+                        && q.Secuencia==item.Secuencia
                         && q.IdProducto==item.IdProducto);
                         if (Entity == null)
                             return false;
-                        detalle.od_cantidad_recepcion = item.cantidad;
+                        detalle.od_cantidad_recepcion = item.od_cantidad_recepcion;
                         Context.SaveChanges();
                     }
 
@@ -177,7 +156,6 @@ namespace Core.Erp.Data.Importacion
 
         public bool modificarDB(imp_orden_compra_ext_recepcion_Info info)
         {
-            int secuancia = 1;
             try
             {
                 using (Entities_importacion Context = new Entities_importacion())
@@ -195,34 +173,17 @@ namespace Core.Erp.Data.Importacion
                     Entity.IdBodega = info.IdBodega;
                     Entity.IdMotivo_Inv = info.IdMotivo_Inv;
 
-                    foreach (var item in info.lst_detalle)
-                    {
-                        Context.imp_orden_compra_ext_recepcion_det.Add(new imp_orden_compra_ext_recepcion_det
-                        {
-                            IdEmpresa = item.IdEmpresa,
-                            IdRecepcion = item.IdRecepcion,
-                            secuencia = item.secuencia,
-                            IdProducto = item.IdProducto,
-                            IdEmpresa_oc = item.IdEmpresa_oc,
-                            IdOrdenCompra_ext = item.IdOrdenCompra_ext,
-                            Secuencia_oc = item.Secuencia_oc,
-                            cantidad = item.cantidad,
-                            Observacion = item.Observacion
-
-                        });
-                        secuancia++;
-                    }
                     Context.SaveChanges();
                     foreach (var item in info.lst_detalle)
                     {
                         imp_orden_compra_ext_det detalle = Context.imp_orden_compra_ext_det.FirstOrDefault(q =>
                        q.IdEmpresa == item.IdEmpresa
                        && q.IdOrdenCompra_ext == info.IdOrdenCompraExt
-                       && q.Secuencia == item.Secuencia_oc
+                       && q.Secuencia == item.Secuencia
                        && q.IdProducto == item.IdProducto);
                         if (Entity == null)
                             return false;
-                        detalle.od_cantidad_recepcion = item.cantidad;
+                        detalle.od_cantidad_recepcion = item.od_cantidad_recepcion;
                         Context.SaveChanges();
                     }
                 }
@@ -251,7 +212,7 @@ namespace Core.Erp.Data.Importacion
                         imp_orden_compra_ext_det detalle = Context.imp_orden_compra_ext_det.FirstOrDefault(q =>
                        q.IdEmpresa == item.IdEmpresa
                        && q.IdOrdenCompra_ext == info.IdOrdenCompraExt
-                       && q.Secuencia == item.Secuencia_oc
+                       && q.Secuencia == item.Secuencia
                        && q.IdProducto == item.IdProducto);
                         if (Entity == null)
                             return false;

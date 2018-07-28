@@ -21,7 +21,7 @@ namespace Core.Erp.Info.Importacion
         public int IdMotivo_Inv { get; set; }
 
         public decimal IdNumMovi_inv { get; set; }
-        public List<imp_orden_compra_ext_recepcion_det_Info> lst_detalle { get; set; }
+        public List<imp_ordencompra_ext_det_Info> lst_detalle { get; set; }
         public bool estado { get; set; }
         public string IdUsuario_creacion { get; set; }
         public Nullable<System.DateTime> fecha_creacion { get; set; }

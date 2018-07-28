@@ -97,10 +97,10 @@ namespace Core.Erp.Bus.Importacion
                 if (info.IdCtaCble_importacion == ""|info.IdCtaCble_importacion==null)
                     mensaje = "Seleccione cuenta contable";
                 if (info.lst_detalle == null)
-                    mensaje = "No existe detalle para la orden de pago";
+                    mensaje = "No existe detalle para la orden de compra";
                 if(info.lst_detalle!=null)
                 if (info.lst_detalle.Count() == 0)
-                        mensaje = "No existe detalle para la orden de pago";
+                        mensaje = "No existe detalle para la orden de compra";
                 if (info.IdPais_embarque == "" | info.IdPais_embarque==null)
                     mensaje = "Seleccione país embarque";
                 return mensaje;

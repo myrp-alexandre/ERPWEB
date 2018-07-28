@@ -168,7 +168,6 @@
     <Compile Include="Importacion\imp_ordencompra_ext_Bus.cs" />
     <Compile Include="Importacion\imp_ordencompra_ext_det_Bus.cs" />
     <Compile Include="Importacion\imp_orden_compra_ext_recepcion_Bus.cs" />
-    <Compile Include="Importacion\imp_orden_compra_ext_recepcion_det_Bus.cs" />
     <Compile Include="Importacion\imp_parametro_Bus.cs" />
     <Compile Include="Inventario\in_CatalogoTipo_Bus.cs" />
     <Compile Include="Inventario\in_Catalogo_Bus.cs" />
