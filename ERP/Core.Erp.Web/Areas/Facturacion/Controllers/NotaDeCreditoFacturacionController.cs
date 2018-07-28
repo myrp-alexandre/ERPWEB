@@ -36,6 +36,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
         string mensaje = string.Empty;
         fa_notaCreDeb_det_Bus bus_det = new fa_notaCreDeb_det_Bus();
+        fa_TipoNota_Bus bus_tipo_nota = new fa_TipoNota_Bus();
+        fa_notaCreDeb_x_fa_factura_NotaDeb_Bus bus_cruce = new fa_notaCreDeb_x_fa_factura_NotaDeb_Bus();
+        fa_notaCreDeb_x_fa_factura_NotaDeb_List List_cruce = new fa_notaCreDeb_x_fa_factura_NotaDeb_List();
+        fa_factura_det_Bus bus_det_fact = new fa_factura_det_Bus();
         #endregion
 
         #region Index
@@ -57,7 +61,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
             var model = bus_nota.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, "C");
-            return PartialView("_GridViewPartial_NotaCreditoFacturacion", model);
+            return PartialView("_GridViewPartial_NotaCrebitoFacturacion", model);
         }
         #endregion
 
@@ -151,12 +155,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult get_info_termino_pago(string IdTerminoPago = "")
-        {
-            var resultado = bus_termino_pago.get_info(IdTerminoPago);
-
-            return Json(resultado, JsonRequestBehavior.AllowGet);
-        }
         public JsonResult GetUltimoDocumento(int IdSucursal = 0, int IdPuntoVta = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -175,6 +173,84 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 resultado = new tb_sis_Documento_Tipo_Talonario_Info();
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetDocumentosPorCobrar(int IdSucursal = 0, decimal IdCliente = 0)
+        {
+            bool resultado = true;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var List = List_cruce.get_list().Where(q=>q.seleccionado == true).ToList();
+            var ListPorCruzar = bus_cruce.get_list_cartera(IdEmpresa, IdSucursal, IdCliente, false);
+
+            foreach (var item in List)
+            {
+                ListPorCruzar.Remove(ListPorCruzar.Where(q => q.secuencial == item.secuencial).FirstOrDefault());
+            }
+
+            List.AddRange(ListPorCruzar);
+            List_cruce.set_list(List);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult VaciarListas()
+        {
+            bool resultado = true;
+            List_cruce.set_list(new List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>());
+            List_det.set_list(new List<fa_notaCreDeb_det_Info>());
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Grillas de cruce
+        public ActionResult GridViewPartial_CruceNC_x_cruzar()
+        {
+            var model = List_cruce.get_list().Where(q=>q.seleccionado == false).ToList();
+            return PartialView("_GridViewPartial_CruceNC_x_cruzar", model);
+        }
+
+        public ActionResult GridViewPartial_CruceNC()
+        {
+            var model = List_cruce.get_list().Where(q => q.seleccionado == true).ToList();
+            return PartialView("_GridViewPartial_CruceNC", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNewFacturas(string IDs = "")
+        {
+            if (IDs != "")
+            {
+                string[] array = IDs.Split(',');
+                foreach (var item in array)
+                {
+                    List_cruce.DeleteRow(item);
+                }
+            }
+            var list = List_cruce.get_list().Where(q => q.seleccionado == true).ToList();
+            var lst_det = new List<fa_notaCreDeb_det_Info>();
+            foreach (var item in list)
+            {
+                
+                lst_det.Add(new fa_notaCreDeb_det_Info
+                {
+
+                });
+            }
+
+            var model = list;
+            return PartialView("_GridViewPartial_CruceNC", model);
+        }
+
+        public ActionResult EditingUpdateFactura([ModelBinder(typeof(DevExpressEditorsBinder))] fa_notaCreDeb_x_fa_factura_NotaDeb_Info info_det)
+        {
+            List_cruce.UpdateRow(info_det);
+            var model = List_cruce.get_list().Where(q=>q.seleccionado == true).ToList();
+            return PartialView("_GridViewPartial_CruceNC", model);
+        }
+        public ActionResult EditingDeleteFactura(string secuencial)
+        {
+            List_cruce.DeleteRow(secuencial);
+            var model = List_cruce.get_list().Where(q => q.seleccionado == true).ToList();
+            return PartialView("_GridViewPartial_CruceNC", model);
+        }
+
         #endregion
 
         #region funciones del detalle
@@ -304,6 +380,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             var lst_contacto = bus_contacto.get_list(model.IdEmpresa, model.IdCliente);
             ViewBag.lst_contacto = lst_contacto;
+
+            Dictionary<string, string> lst_naturaleza = new Dictionary<string, string>();
+            lst_naturaleza.Add("INT", "Interno");
+            lst_naturaleza.Add("SRI", "Autorizado por el SRI");            
+            ViewBag.lst_naturaleza = lst_naturaleza;
+
+            var lst_tipo_nota = bus_tipo_nota.get_list("C",false);
+            ViewBag.lst_tipo_nota = lst_tipo_nota;
         }
         private bool validar(fa_notaCreDeb_Info i_validar, ref string msg)
         {
@@ -373,9 +457,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 no_fecha = DateTime.Now,
                 no_fecha_venc = DateTime.Now,
                 lst_det = new List<fa_notaCreDeb_det_Info>(),
-                CodDocumentoTipo = "NTCR"
+                lst_cruce = new List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>(),
+                CodDocumentoTipo = "NTCR",
+                CreDeb = "C"
             };
             List_det.set_list(model.lst_det);
+            List_cruce.set_list(model.lst_cruce);
             cargar_combos(model);
             return View(model);
         }
@@ -518,6 +605,47 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             List<fa_notaCreDeb_det_Info> list = get_list();
             list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
+        }
+    }
+
+    public class fa_notaCreDeb_x_fa_factura_NotaDeb_List
+    {
+        public List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> get_list()
+        {
+            if (HttpContext.Current.Session["fa_notaCreDeb_x_fa_factura_NotaDeb_Info"] == null)
+            {
+                List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> list = new List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>();
+
+                HttpContext.Current.Session["fa_notaCreDeb_x_fa_factura_NotaDeb_Info"] = list;
+            }
+            return (List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>)HttpContext.Current.Session["fa_notaCreDeb_x_fa_factura_NotaDeb_Info"];
+        }
+
+        public void set_list(List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> list)
+        {
+            HttpContext.Current.Session["fa_notaCreDeb_x_fa_factura_NotaDeb_Info"] = list;
+        }
+
+        public void AddRow(fa_notaCreDeb_x_fa_factura_NotaDeb_Info info_det)
+        {
+            List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> list = get_list();
+            list.Add(info_det);            
+        }
+
+        public void UpdateRow(fa_notaCreDeb_x_fa_factura_NotaDeb_Info info_det)
+        {
+            List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> list = get_list();
+            fa_notaCreDeb_x_fa_factura_NotaDeb_Info edited_info = list.Where(m => m.secuencial == info_det.secuencial).FirstOrDefault();
+            edited_info.Saldo_final = Convert.ToDouble(edited_info.Saldo) - info_det.Valor_Aplicado;
+            edited_info.Valor_Aplicado = info_det.Valor_Aplicado;
+        }
+
+        public void DeleteRow(string secuencial)
+        {
+            List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> list = get_list();
+            fa_notaCreDeb_x_fa_factura_NotaDeb_Info info = list.Where(m => m.secuencial == secuencial).FirstOrDefault();
+            if (info != null)
+                info.seleccionado = !info.seleccionado;
         }
     }
 }

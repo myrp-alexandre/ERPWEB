@@ -20,5 +20,18 @@ namespace Core.Erp.Info.Facturacion
         public string vt_tipoDoc { get; set; }
         public double Valor_Aplicado { get; set; }
         public System.DateTime fecha_cruce { get; set; }
+        #region Campos que no existen en la tabla
+        public string secuencial { get; set; }
+        public string vt_NumDocumento { get; set; }
+        public DateTime vt_fecha { get; set; }
+        public double? vt_total { get; set; }
+        public double? Saldo { get; set; }
+        public double? vt_Subtotal { get; set; }
+        public double? vt_iva { get; set; }
+        public string Observacion { get; set; }
+        public bool seleccionado { get; set; }
+        public double Saldo_final { get; set; }
+        #endregion
+
     }
 }

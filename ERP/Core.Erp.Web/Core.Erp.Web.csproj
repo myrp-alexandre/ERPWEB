@@ -8856,6 +8856,8 @@
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_GridViewPartial_orden_compra_con_saldo.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\OrdencompraConsaldos.cshtml" />
     <Content Include="Areas\Importacion\Views\ParametrosImportacion\_CmbCuenta_contable.cshtml" />
+    <Content Include="Areas\Facturacion\Views\NotaDeCreditoFacturacion\_GridViewPartial_CruceNC.cshtml" />
+    <Content Include="Areas\Facturacion\Views\NotaDeCreditoFacturacion\_GridViewPartial_CruceNC_x_cruzar.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
