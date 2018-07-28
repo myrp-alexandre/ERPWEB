@@ -16,7 +16,7 @@
         settings.Properties.Columns.Add("IdCtaCble", "ID", 10);
         settings.Properties.Columns.Add("pc_Cuenta", "Cuenta", 90);
     })
-    .BindList(new Core.Erp.Web.Areas.Importacion.Controllers.OrdenCompraExteriorController().get_list_bajo_demanda_cta, new Core.Erp.Web.Areas.Importacion.Controllers.OrdenCompraExteriorController().get_info_bajo_demanda_cta)
+    .BindList(new Core.Erp.Web.Areas.Importacion.Controllers.ParametrosImportacionController().get_list_bajo_demanda_cta, new Core.Erp.Web.Areas.Importacion.Controllers.ParametrosImportacionController().get_info_bajo_demanda_cta)
 
 
     .Bind(Model.IdCtaCble_importacion);

@@ -9,11 +9,36 @@ using Core.Erp.Info.Importacion;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.Inventario;
 using Core.Erp.Bus.General;
+using Core.Erp.Info.Contabilidad;
+using DevExpress.Web;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Importacion.Controllers
 {
     public class ParametrosImportacionController : Controller
     {
+        #region Metodos ComboBox bajo demanda
+
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+
+        public ActionResult CmbCuenta_cta_contable()
+        {
+            imp_ordencompra_ext_Info model = new imp_ordencompra_ext_Info();
+
+            return PartialView("_CmbCuenta_contable", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda_cta(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda_cta(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+
+
+        #endregion
+
         imp_parametro_Bus bus_parametro = new imp_parametro_Bus();
         public ActionResult Index()
         {
