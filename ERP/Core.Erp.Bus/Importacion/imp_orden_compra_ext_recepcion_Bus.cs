@@ -89,8 +89,8 @@ namespace Core.Erp.Bus.Importacion
                     info.lst_detalle = new List<imp_orden_compra_ext_recepcion_det_Info>();
                     info.pe_cedulaRuc = orden.pe_cedulaRuc;
                     info.pe_nombreCompleto = orden.pe_nombreCompleto;
-                    info.or_observacion = orden.oe_observacion;
-                    info.pe_nombreCompleto = orden.pe_nombreCompleto;
+                    info.oe_observacion = orden.oe_observacion;
+                    info.IdOrdenCompraExt = orden.IdOrdenCompra_ext;
                     info.oe_fecha = orden.oe_fecha;
                     info.oe_fecha_embarque = orden.oe_fecha_embarque;
                     info.oe_fecha_llegada = orden.oe_fecha_embarque;

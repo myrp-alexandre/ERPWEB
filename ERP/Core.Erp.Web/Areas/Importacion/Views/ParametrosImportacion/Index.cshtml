@@ -107,7 +107,7 @@
             <div class="col-md-offset-6 col-md-3">
                 <div class="form-group">
                     <label for="IdMovi_inven_tipo">Tipo movimiento*</label>
-                    @Html.DropDownListFor(q => q.IdMovi_inven_tipo_ing, new SelectList(ViewBag.lst_tipo_mov, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control", @id = "IdMovi_inven_tipo", @disabled = "disabled" })
+                    @Html.DropDownListFor(q => q.IdMovi_inven_tipo_ing, new SelectList(ViewBag.lst_tipo_mov, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control", @id = "IdMovi_inven_tipo" })
                     @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_ing, "", new { @class = "text-danger" })
                 </div>
             </div>

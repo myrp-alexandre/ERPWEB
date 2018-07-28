@@ -16,14 +16,14 @@
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="CodMoviInven">Id Orden compra</label>
+                    <label for="IdOrdenCompraExt">Id Orden compra</label>
                     @Html.TextBoxFor(q => q.IdOrdenCompraExt, new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdOrdenCompraExt, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="rub_grupo">Tipo de embarque*</label>
+                    <label for="IdCatalogo_via">Tipo de embarque*</label>
                     @Html.DropDownListFor(q => q.IdCatalogo_via, new SelectList(ViewBag.lst_catalogos, "IdCatalogo", "ca_descripcion"), new { @class = "form-control" , @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdCatalogo_via, "", new { @class = "text-danger" })
                 </div>
@@ -45,20 +45,20 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdProveedor">Proveedor*</label>
-                    @Html.TextAreaFor(q => q.pe_nombreCompleto, new { @class = "form-control", @disabled="disabled" })
+                    @Html.TextBoxFor(q => q.pe_nombreCompleto, new { @class = "form-control", @disabled="disabled" })
                 </div>
             </div>
             <div class="col-md-offset-10 col-med-2">
                 <div class="form-group">
-                    <label for="">Fecha embarque</label>
+                    <label for="">Fecha recepcion</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.oe_fecha_embarque, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_embarque" })
+                        @Html.TextBoxFor(q => q.or_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "or_fecha" })
                         @Html.ValidationMessageFor(q => q.oe_fecha_embarque, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -68,27 +68,14 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-8">
-                <div class="form-group">
-                    <label for="IdCtaCble_importacion">Observación O.C*</label>
-                    @Html.TextAreaFor(q => q.oe_observacion, new { @class = "form-control", @rows = 2 })
-                    @Html.ValidationMessageFor(q => q.oe_observacion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-           
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal*</label>
                     @Html.DropDownListFor(q => q.IdSucursal_inv, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
                     @Html.ValidationMessageFor(q => q.IdSucursal_inv, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-offset-6 col-md-3">
+            <div class="col-md-offset-10 col-med-2">
                 <div class="form-group">
                     <label for="IdMotivo_Inv">Motivo*</label>
                     @Html.DropDownListFor(q => q.IdMovi_inven_tipo_inv, new SelectList(ViewBag.lst_motivo, "IdMotivo_Inv", "Desc_mov_inv"), new { @class = "form-control", @id = "IdMotivo_Inv" })
@@ -99,17 +86,17 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdBodega">Bodega</label>
                     @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodega" })
                     @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-offset-6 col-md-3">
+            <div class="col-md-offset-10 col-med-2">
                 <div class="form-group">
                     <label for="IdMovi_inven_tipo">Tipo movimiento*</label>
-                    @Html.DropDownListFor(q => q.IdMovi_inven_tipo_inv, new SelectList(ViewBag.lst_tipo_mov, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control", @id = "IdMovi_inven_tipo", @disabled = "disabled" })
+                    @Html.DropDownListFor(q => q.IdMovi_inven_tipo_inv, new SelectList(ViewBag.lst_tipo, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control", @id = "IdMovi_inven_tipo" })
                     @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_inv, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -118,7 +105,20 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-8">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="or_observacion">Observación recepcion de mercaderia</label>
+                    @Html.TextAreaFor(q => q.or_observacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.oe_observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCtaCble_importacion">Detalle de orden de compra</label>
                     @Html.Action("GridViewPartial_recepcion_oc_ext_det")
@@ -144,20 +144,10 @@
     $(function () {
 
 
-        $('#fecha_oc').datepicker({
+        $('#or_fecha').datepicker({
             autoclose: true
         });
-        $('#fecha_llegada').datepicker({
-            autoclose: true
-        });
-
-        $('#fecha_embarque').datepicker({
-            autoclose: true
-        });
-        $('#fecha_desanualizacion').datepicker({
-            autoclose: true
-        });
-
+       
         
     });
 

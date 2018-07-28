@@ -72,7 +72,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             if (model == null)
                 model = new List<imp_orden_compra_ext_recepcion_det_Info>();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_recepcion_oc_ext", model);
+            return PartialView("_GridViewPartial_recepcion_oc_ext_det", model);
         }
 
         #endregion
@@ -154,17 +154,27 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
         private void cargar_combos()
         {
-            var lst_paises = bus_paises.get_list(false);
-            ViewBag.lst_paises = lst_paises;
 
-            var lst_ciudades = bus_ciudad.get_list("09", false);
-            ViewBag.lst_ciudades = lst_ciudades;
-
-            var lst_forma_pago = bus_forma_pago.get_list();
-            ViewBag.lst_forma_pago = lst_forma_pago;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
             var lst_catalogos = bus_catalogo.get_list(1);
             ViewBag.lst_catalogos = lst_catalogos;
+
+            in_movi_inven_tipo_Bus bus_tipo = new in_movi_inven_tipo_Bus();
+            var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
+            ViewBag.lst_tipo = lst_tipo;
+
+            in_Motivo_Inven_Bus bus_motivo = new in_Motivo_Inven_Bus();
+            var lst_motivo = bus_motivo.get_list(IdEmpresa, false);
+            ViewBag.lst_motivo = lst_motivo;
+
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+
+            tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+            var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
+            ViewBag.lst_bodega = lst_bodega;
 
 
         }

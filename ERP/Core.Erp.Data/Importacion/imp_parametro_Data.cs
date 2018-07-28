@@ -70,6 +70,7 @@ namespace Core.Erp.Data.Importacion
                         Entity.IdBodega = info.IdBodega;
                         Entity.IdMotivo_Inv_ing = info.IdMotivo_Inv_ing;
                         Entity.IdMovi_inven_tipo_ing = info.IdMovi_inven_tipo_ing;
+                        Entity.IdCtaCble = info.IdCtaCble;
                     }
                     Context.SaveChanges();
                 }

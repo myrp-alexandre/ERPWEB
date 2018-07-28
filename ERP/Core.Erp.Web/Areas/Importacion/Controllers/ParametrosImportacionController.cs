@@ -23,7 +23,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
         public ActionResult CmbCuenta_cta_contable()
         {
-            imp_ordencompra_ext_Info model = new imp_ordencompra_ext_Info();
+            imp_parametro_Info model = new imp_parametro_Info();
 
             return PartialView("_CmbCuenta_contable", model);
         }

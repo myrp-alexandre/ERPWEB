@@ -7,12 +7,10 @@
 
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "OrdenCompraExterior", Action = "EditingAddNew", Area = "Importacion" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "OrdenCompraExterior", Action = "EditingUpdate", Area = "Importacion" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "OrdenCompraExterior", Action = "EditingDelete", Area = "Importacion" };
 
         settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowNewButton = true;
         settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = true;
 
@@ -27,14 +25,7 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
         //Funcion para inicializar fila al presionar nuevo
-        settings.InitNewRow = (s, e) =>
-        {
-            e.NewValues["IdProducto"] = 0;
-            e.NewValues["IdUnidadMedida"] = null;
-            e.NewValues["od_cantidad"] = "";
-            e.NewValues["od_costo"] = "";
-        };
-
+       
         settings.Columns.Add(column =>
         {
             column.FieldName = "pr_descripcion";
