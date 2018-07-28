@@ -181,7 +181,8 @@ namespace Core.Erp.Data.Importacion
                         IdMoneda_destino = Entity.IdMoneda_destino,
                         IdMoneda_origen = Entity.IdMoneda_destino,
                         pe_cedulaRuc=Entity.pe_cedulaRuc,
-                        pe_nombreCompleto=Entity.pe_nombreCompleto
+                        pe_nombreCompleto=Entity.pe_nombreCompleto,
+                        
                     };
                 }
                 return info;

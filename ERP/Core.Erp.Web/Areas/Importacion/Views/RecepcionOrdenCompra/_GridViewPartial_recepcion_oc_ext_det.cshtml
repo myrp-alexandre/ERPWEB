@@ -2,13 +2,13 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_orden_compra_ext_det";
-        settings.CallbackRouteValues = new { Controller = "OrdencompraExterior", Action = "GridViewPartial_orden_compra_ext_det", Area = "Importacion" };
-        settings.KeyFieldName = "Secuencia";
+        settings.CallbackRouteValues = new { Controller = "RecepcionOrdencompra", Action = "GridViewPartial_recepcion_oc_ext_det", Area = "Importacion" };
+        settings.KeyFieldName = "secuencia";
 
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "OrdenCompraExterior", Action = "EditingUpdate", Area = "Importacion" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "OrdenCompraExterior", Action = "EditingDelete", Area = "Importacion" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "RecepcionOrdencompra", Action = "EditingUpdate", Area = "Importacion" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "RecepcionOrdencompra", Action = "EditingDelete", Area = "Importacion" };
 
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowEditButton = true;

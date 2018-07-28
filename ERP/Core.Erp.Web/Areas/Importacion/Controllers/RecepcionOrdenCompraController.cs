@@ -71,7 +71,6 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             model = Session["imp_orden_compra_ext_recepcion_det_Info"] as List<imp_orden_compra_ext_recepcion_det_Info>;
             if (model == null)
                 model = new List<imp_orden_compra_ext_recepcion_det_Info>();
-            cargar_combos_detalle();
             return PartialView("_GridViewPartial_recepcion_oc_ext_det", model);
         }
 
@@ -84,7 +83,8 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
             imp_orden_compra_ext_recepcion_Info model = new imp_orden_compra_ext_recepcion_Info();
             model=  bus_recepcion.get_rcepcion_mercancia(IdEmpresa, IdOrdenCompra_ext);
-            cargar_combos_detalle();
+            if (model != null)
+                Session["imp_orden_compra_ext_recepcion_det_Info"] = model.lst_detalle;
             cargar_combos();
             return View(model);
         }

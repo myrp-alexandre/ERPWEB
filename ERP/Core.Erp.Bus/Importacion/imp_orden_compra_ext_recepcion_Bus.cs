@@ -89,7 +89,7 @@ namespace Core.Erp.Bus.Importacion
                     info.lst_detalle = new List<imp_orden_compra_ext_recepcion_det_Info>();
                     info.pe_cedulaRuc = orden.pe_cedulaRuc;
                     info.pe_nombreCompleto = orden.pe_nombreCompleto;
-                    info.oe_observacion = orden.oe_observacion;
+                    info.or_observacion = orden.oe_observacion;
                     info.IdOrdenCompraExt = orden.IdOrdenCompra_ext;
                     info.oe_fecha = orden.oe_fecha;
                     info.oe_fecha_embarque = orden.oe_fecha_embarque;
@@ -99,13 +99,14 @@ namespace Core.Erp.Bus.Importacion
                     info.IdBodega = parametros.IdBodega;
                     info.IdMovi_inven_tipo_inv = parametros.IdMovi_inven_tipo_ing;
                     info.IdMotivo_Inv = parametros.IdMotivo_Inv_ing;
-
+                    info.or_fecha = DateTime.Now;
                    
                     
                     foreach (var item in detalle_oc)
                     {
                         imp_orden_compra_ext_recepcion_det_Info item_add = new imp_orden_compra_ext_recepcion_det_Info();
                         item_add.IdEmpresa = item.IdEmpresa;
+                        item_add.secuencia = item.Secuencia;
                         item_add.IdProducto = item.IdProducto;
                         item_add.Observacion = "";
                         item_add.cantidad =Convert.ToInt32( item.od_cantidad);
