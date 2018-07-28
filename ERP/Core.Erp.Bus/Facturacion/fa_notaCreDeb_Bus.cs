@@ -23,6 +23,18 @@ namespace Core.Erp.Bus.Facturacion
             }
         }
 
+        public bool DocumentoExiste(int IdEmpresa, string CodDocumentoTipo, string Serie1, string Serie2, string NumNota_Impresa)
+        {
+            try
+            {
+                return odata.DocumentoExiste(IdEmpresa, CodDocumentoTipo, Serie1, Serie1, NumNota_Impresa);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public fa_notaCreDeb_Info get_info(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdNota)
         {
             try
