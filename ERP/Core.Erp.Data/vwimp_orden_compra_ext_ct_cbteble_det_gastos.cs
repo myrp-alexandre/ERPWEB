@@ -12,19 +12,20 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class imp_orden_compra_ext_recepcion_det
+    public partial class vwimp_orden_compra_ext_ct_cbteble_det_gastos
     {
+        public long IdRow { get; set; }
         public int IdEmpresa { get; set; }
-        public decimal IdRecepcion { get; set; }
-        public int secuencia { get; set; }
-        public decimal IdProducto { get; set; }
-        public int IdEmpresa_oc { get; set; }
         public decimal IdOrdenCompra_ext { get; set; }
-        public int Secuencia_oc { get; set; }
-        public double cantidad { get; set; }
-        public string Observacion { get; set; }
-    
-        public virtual imp_orden_compra_ext_det imp_orden_compra_ext_det { get; set; }
-        public virtual imp_orden_compra_ext_recepcion imp_orden_compra_ext_recepcion { get; set; }
+        public int IdEmpresa_ct { get; set; }
+        public int IdTipoCbte { get; set; }
+        public decimal IdCbteCble { get; set; }
+        public int secuencia_ct { get; set; }
+        public string IdCtaCble { get; set; }
+        public System.DateTime cb_Fecha { get; set; }
+        public double dc_Valor { get; set; }
+        public string cb_Observacion { get; set; }
+        public Nullable<int> IdGasto_tipo { get; set; }
+        public bool seleccionado { get; set; }
     }
 }

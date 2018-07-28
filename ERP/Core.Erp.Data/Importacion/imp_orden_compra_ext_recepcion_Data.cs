@@ -28,10 +28,7 @@ namespace Core.Erp.Data.Importacion
                                  or_observacion = q.or_observacion,
                                  IdEmpresa_oc = q.IdEmpresa_oc,
                                  IdOrdenCompraExt = q.IdOrdenCompraExt,
-                                 IdEmpresa_inv = q.IdEmpresa_inv,
-                                 IdSucursal_inv = q.IdSucursal_inv,
-                                 IdMovi_inven_tipo_inv = q.IdMovi_inven_tipo_inv,
-                                 IdNumMovi_inv = q.IdNumMovi_inv,
+                                 
                                  pe_cedulaRuc=q.pe_cedulaRuc,
                                  pe_nombreCompleto=q.pe_nombreCompleto,
                                  estado=q.estado
@@ -64,12 +61,7 @@ namespace Core.Erp.Data.Importacion
                         or_observacion = Entity.or_observacion,
                         IdEmpresa_oc = Entity.IdEmpresa_oc,
                         IdOrdenCompraExt = Entity.IdOrdenCompraExt,
-                        IdEmpresa_inv = Entity.IdEmpresa_inv,
-                        IdSucursal_inv = Entity.IdSucursal_inv,
-                        IdMovi_inven_tipo_inv = Entity.IdMovi_inven_tipo_inv,
-                        IdNumMovi_inv = Entity.IdNumMovi_inv,
-                        IdBodega=Entity.IdBodega,
-                        IdMotivo_Inv=Entity.IdMotivo_Inv,
+                       
                         IdCatalogo_via=Entity.IdCatalogo_via,
                         pe_nombreCompleto=Entity.pe_nombreCompleto
                         
@@ -121,12 +113,7 @@ namespace Core.Erp.Data.Importacion
                         or_observacion = info.or_observacion,
                         IdEmpresa_oc = info.IdEmpresa,
                         IdOrdenCompraExt = info.IdOrdenCompraExt,
-                        IdEmpresa_inv = info.IdEmpresa,
-                        IdSucursal_inv = info.IdSucursal_inv,
-                        IdMovi_inven_tipo_inv = info.IdMovi_inven_tipo_inv,
-                        IdMotivo_Inv = info.IdMotivo_Inv,
-                        IdNumMovi_inv = info.IdNumMovi_inv,
-                        IdBodega = info.IdBodega,
+                      
                         estado = true
 
                     };
@@ -166,12 +153,7 @@ namespace Core.Erp.Data.Importacion
                     Entity.or_observacion = info.or_observacion;
                     Entity.IdEmpresa_oc = info.IdEmpresa;
                     Entity.IdOrdenCompraExt = info.IdOrdenCompraExt;
-                    Entity.IdEmpresa_inv = info.IdEmpresa;
-                    Entity.IdSucursal_inv = info.IdSucursal_inv;
-                    Entity.IdMovi_inven_tipo_inv = info.IdMovi_inven_tipo_inv;
-                    Entity.IdNumMovi_inv = info.IdNumMovi_inv;
-                    Entity.IdBodega = info.IdBodega;
-                    Entity.IdMotivo_Inv = info.IdMotivo_Inv;
+                  
 
                     Context.SaveChanges();
                     foreach (var item in info.lst_detalle)

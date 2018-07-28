@@ -537,9 +537,6 @@
     <Compile Include="imp_orden_compra_ext_recepcion.cs">
       <DependentUpon>Model_importacion.tt</DependentUpon>
     </Compile>
-    <Compile Include="imp_orden_compra_ext_recepcion_det.cs">
-      <DependentUpon>Model_importacion.tt</DependentUpon>
-    </Compile>
     <Compile Include="imp_parametro.cs">
       <DependentUpon>Model_importacion.tt</DependentUpon>
     </Compile>
@@ -1508,13 +1505,16 @@
     <Compile Include="vwimp_orden_compra_ext.cs">
       <DependentUpon>Model_importacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwimp_orden_compra_ext_con_saldo.cs">
+      <DependentUpon>Model_importacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwimp_orden_compra_ext_ct_cbteble_det_gastos.cs">
+      <DependentUpon>Model_importacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwimp_orden_compra_ext_det.cs">
       <DependentUpon>Model_importacion.tt</DependentUpon>
     </Compile>
     <Compile Include="vwimp_orden_compra_ext_recepcion.cs">
-      <DependentUpon>Model_importacion.tt</DependentUpon>
-    </Compile>
-    <Compile Include="vwimp_orden_compra_ext_recepcion_det.cs">
       <DependentUpon>Model_importacion.tt</DependentUpon>
     </Compile>
     <Compile Include="VWINV_001.cs">

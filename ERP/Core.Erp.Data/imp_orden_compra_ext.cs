@@ -51,6 +51,7 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> oe_fecha_desaduanizacion { get; set; }
         public Nullable<int> IdMoneda_origen { get; set; }
         public Nullable<int> IdMoneda_destino { get; set; }
+        public bool Estado_cierre { get; set; }
     
         public virtual imp_catalogo imp_catalogo { get; set; }
         public virtual imp_catalogo imp_catalogo1 { get; set; }

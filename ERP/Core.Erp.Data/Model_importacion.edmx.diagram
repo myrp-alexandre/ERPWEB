@@ -5,36 +5,34 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0e5562b784c548e5aee89d486fea256b" Name="Diagram1" >
-        <EntityTypeShape EntityType="Model_importacion.imp_catalogo" Width="1.5" PointX="0.75" PointY="1.75" />
-        <EntityTypeShape EntityType="Model_importacion.imp_catalogo_tipo" Width="1.5" PointX="1.5" PointY="12" />
-        <EntityTypeShape EntityType="Model_importacion.imp_gasto" Width="1.5" PointX="6" PointY="1.875" />
-        <EntityTypeShape EntityType="Model_importacion.imp_gasto_x_ct_plancta" Width="1.5" PointX="8.25" PointY="2" />
-        <EntityTypeShape EntityType="Model_importacion.imp_liquidacion" Width="1.5" PointX="0.75" PointY="4.875" />
-        <EntityTypeShape EntityType="Model_importacion.imp_liquidacion_det_x_imp_orden_compra_ext" Width="1.5" PointX="5.25" PointY="5.75" />
-        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext_ct_cbteble_det_gastos" Width="1.5" PointX="8.25" PointY="5.5" />
+        <EntityTypeShape EntityType="Model_importacion.imp_catalogo" Width="1.5" PointX="0.75" PointY="4.25" />
+        <EntityTypeShape EntityType="Model_importacion.imp_catalogo_tipo" Width="1.5" PointX="1.5" PointY="1.5" />
+        <EntityTypeShape EntityType="Model_importacion.imp_gasto" Width="1.5" PointX="6" PointY="4.25" />
+        <EntityTypeShape EntityType="Model_importacion.imp_gasto_x_ct_plancta" Width="1.5" PointX="8.25" PointY="4.5" />
+        <EntityTypeShape EntityType="Model_importacion.imp_liquidacion" Width="1.5" PointX="0.75" PointY="7.375" />
+        <EntityTypeShape EntityType="Model_importacion.imp_liquidacion_det_x_imp_orden_compra_ext" Width="1.5" PointX="5.25" PointY="8.25" />
+        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext" Width="1.5" PointX="3" PointY="5.375" />
+        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext_ct_cbteble_det_gastos" Width="1.5" PointX="8.25" PointY="8" />
+        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext_det" Width="1.5" PointX="5.25" PointY="15.875" />
+        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext_recepcion" Width="1.5" PointX="5.25" PointY="11.375" />
+        <EntityTypeShape EntityType="Model_importacion.imp_parametro" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_importacion.vwimp_orden_compra_ext" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_importacion.vwimp_orden_compra_ext_con_saldo" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_importacion.vwimp_orden_compra_ext_ct_cbteble_det_gastos" Width="1.5" PointX="10.75" PointY="7.75" />
+        <EntityTypeShape EntityType="Model_importacion.vwimp_orden_compra_ext_det" Width="1.5" PointX="7.75" PointY="11.75" />
+        <EntityTypeShape EntityType="Model_importacion.vwimp_orden_compra_ext_recepcion" Width="1.5" PointX="12.75" PointY="0.75" />
         <AssociationConnector Association="Model_importacion.FK_imp_catalogo_imp_catalogo_tipo" />
+        <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_imp_catalogo" />
+        <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_imp_catalogo1" />
         <AssociationConnector Association="Model_importacion.FK_imp_gasto_x_ct_plancta_imp_gasto" />
         <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_gasto" />
         <AssociationConnector Association="Model_importacion.FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_liquidacion" />
-        <EntityTypeShape EntityType="Model_importacion.vwimp_orden_compra_ext" Width="1.5" PointX="12.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext" Width="1.5" PointX="3" PointY="1.5" />
-        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext_det" Width="1.5" PointX="5.25" PointY="9" />
-        <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_imp_catalogo" />
-        <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_imp_catalogo1" />
         <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_imp_liquidacion" />
         <AssociationConnector Association="Model_importacion.FK_imp_liquidacion_det_x_imp_orden_compra_ext_imp_orden_compra_ext" />
         <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_orden_compra_ext" />
         <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_det_imp_orden_compra_ext" />
-        <EntityTypeShape EntityType="Model_importacion.vwimp_orden_compra_ext_det" Width="1.5" PointX="12.375" PointY="7.75" />
-        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext_recepcion_det" Width="1.5" PointX="7.5" PointY="12.875" />
-        <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_det" />
-        <EntityTypeShape EntityType="Model_importacion.imp_parametro" Width="1.5" PointX="10.375" PointY="13.75" />
-        <EntityTypeShape EntityType="Model_importacion.imp_orden_compra_ext_recepcion" Width="1.5" PointX="5.25" PointY="14.875" />
         <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_recepcion_imp_orden_compra_ext" />
-        <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_recepcion" />
-        <EntityTypeShape EntityType="Model_importacion.vwimp_orden_compra_ext_recepcion" Width="1.5" PointX="12.375" PointY="13.75" />
-        <EntityTypeShape EntityType="Model_importacion.vwimp_orden_compra_ext_recepcion_det" Width="1.5" PointX="14.375" PointY="0.75" />
-        </Diagram>
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
