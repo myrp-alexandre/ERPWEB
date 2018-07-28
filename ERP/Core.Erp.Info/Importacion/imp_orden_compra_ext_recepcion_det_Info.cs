@@ -15,11 +15,12 @@ namespace Core.Erp.Info.Importacion
         public int IdEmpresa_oc { get; set; }
         public decimal IdOrdenCompra_ext { get; set; }
         public int Secuencia_oc { get; set; }
-        public int cantidad { get; set; }
+        public double cantidad { get; set; }
         public string Observacion { get; set; }
 
 
         public string pr_descripcion { get; set; }
+        public double od_cantidad { get; set; }
 
     }
 }

@@ -160,6 +160,7 @@
           <Property Name="IdEmpresa_oc" Type="int" />
           <Property Name="IdOrdenCompraExt" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdEmpresa_inv" Type="int" Nullable="false" />
+          <Property Name="IdBodega" Type="int" Nullable="false" />
           <Property Name="IdSucursal_inv" Type="int" Nullable="false" />
           <Property Name="IdMovi_inven_tipo_inv" Type="int" Nullable="false" />
           <Property Name="IdNumMovi_inv" Type="numeric" Precision="18" Scale="0" Nullable="false" />
@@ -184,7 +185,7 @@
           <Property Name="IdEmpresa_oc" Type="int" Nullable="false" />
           <Property Name="IdOrdenCompra_ext" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Secuencia_oc" Type="int" Nullable="false" />
-          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="float" Nullable="false" />
           <Property Name="Observacion" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="imp_parametro">
@@ -195,6 +196,10 @@
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="IdTipoCbte_liquidacion" Type="int" Nullable="false" />
           <Property Name="IdTipoCbte_liquidacion_anu" Type="int" Nullable="false" />
+          <Property Name="IdMotivo_Inv_ing" Type="int" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_ing" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdBodega" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra_ext' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -656,14 +661,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra
             <End Role="imp_liquidacion" EntitySet="imp_liquidacion" />
             <End Role="imp_liquidacion_det_x_imp_orden_compra_ext" EntitySet="imp_liquidacion_det_x_imp_orden_compra_ext" />
           </AssociationSet>
-          <EntitySet Name="imp_orden_compra_ext_recepcion_det" EntityType="Model_importacion.imp_orden_compra_ext_recepcion_det" />
-          <EntitySet Name="imp_orden_compra_ext_recepcion" EntityType="Model_importacion.imp_orden_compra_ext_recepcion" />
-          <AssociationSet Name="FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_recepcion" Association="Model_importacion.FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_recepcion">
-            <End Role="imp_orden_compra_ext_recepcion" EntitySet="imp_orden_compra_ext_recepcion" />
-            <End Role="imp_orden_compra_ext_recepcion_det" EntitySet="imp_orden_compra_ext_recepcion_det" />
-          </AssociationSet>
           <EntitySet Name="vwimp_orden_compra_ext_recepcion" EntityType="Model_importacion.vwimp_orden_compra_ext_recepcion" />
-          <EntitySet Name="imp_parametro" EntityType="Model_importacion.imp_parametro" />
           <EntitySet Name="vwimp_orden_compra_ext" EntityType="Model_importacion.vwimp_orden_compra_ext" />
           <EntitySet Name="imp_orden_compra_ext" EntityType="Model_importacion.imp_orden_compra_ext" />
           <EntitySet Name="imp_orden_compra_ext_det" EntityType="Model_importacion.imp_orden_compra_ext_det" />
@@ -691,15 +689,22 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra
             <End Role="imp_orden_compra_ext" EntitySet="imp_orden_compra_ext" />
             <End Role="imp_orden_compra_ext_det" EntitySet="imp_orden_compra_ext_det" />
           </AssociationSet>
-          <AssociationSet Name="FK_imp_orden_compra_ext_recepcion_imp_orden_compra_ext" Association="Model_importacion.FK_imp_orden_compra_ext_recepcion_imp_orden_compra_ext">
-            <End Role="imp_orden_compra_ext" EntitySet="imp_orden_compra_ext" />
-            <End Role="imp_orden_compra_ext_recepcion" EntitySet="imp_orden_compra_ext_recepcion" />
-          </AssociationSet>
+          <EntitySet Name="vwimp_orden_compra_ext_det" EntityType="Model_importacion.vwimp_orden_compra_ext_det" />
+          <EntitySet Name="imp_orden_compra_ext_recepcion_det" EntityType="Model_importacion.imp_orden_compra_ext_recepcion_det" />
           <AssociationSet Name="FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_det" Association="Model_importacion.FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_det">
             <End Role="imp_orden_compra_ext_det" EntitySet="imp_orden_compra_ext_det" />
             <End Role="imp_orden_compra_ext_recepcion_det" EntitySet="imp_orden_compra_ext_recepcion_det" />
           </AssociationSet>
-          <EntitySet Name="vwimp_orden_compra_ext_det" EntityType="Model_importacion.vwimp_orden_compra_ext_det" />
+          <EntitySet Name="imp_orden_compra_ext_recepcion" EntityType="Model_importacion.imp_orden_compra_ext_recepcion" />
+          <EntitySet Name="imp_parametro" EntityType="Model_importacion.imp_parametro" />
+          <AssociationSet Name="FK_imp_orden_compra_ext_recepcion_imp_orden_compra_ext" Association="Model_importacion.FK_imp_orden_compra_ext_recepcion_imp_orden_compra_ext">
+            <End Role="imp_orden_compra_ext" EntitySet="imp_orden_compra_ext" />
+            <End Role="imp_orden_compra_ext_recepcion" EntitySet="imp_orden_compra_ext_recepcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_recepcion" Association="Model_importacion.FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_recepcion">
+            <End Role="imp_orden_compra_ext_recepcion" EntitySet="imp_orden_compra_ext_recepcion" />
+            <End Role="imp_orden_compra_ext_recepcion_det" EntitySet="imp_orden_compra_ext_recepcion_det" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="imp_catalogo">
           <Key>
@@ -849,63 +854,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="imp_orden_compra_ext_recepcion_det">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdRecepcion" />
-            <PropertyRef Name="secuencia" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdRecepcion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdEmpresa_oc" Type="Int32" Nullable="false" />
-          <Property Name="IdOrdenCompra_ext" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia_oc" Type="Int32" Nullable="false" />
-          <Property Name="cantidad" Type="Int32" Nullable="false" />
-          <Property Name="Observacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="imp_orden_compra_ext_recepcion" Relationship="Model_importacion.FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_recepcion" FromRole="imp_orden_compra_ext_recepcion_det" ToRole="imp_orden_compra_ext_recepcion" />
-          <NavigationProperty Name="imp_orden_compra_ext_det" Relationship="Model_importacion.FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_det" FromRole="imp_orden_compra_ext_recepcion_det" ToRole="imp_orden_compra_ext_det" />
-        </EntityType>
-        <EntityType Name="imp_orden_compra_ext_recepcion">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdRecepcion" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdRecepcion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="or_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="or_observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="IdEmpresa_oc" Type="Int32" />
-          <Property Name="IdOrdenCompraExt" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdEmpresa_inv" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal_inv" Type="Int32" Nullable="false" />
-          <Property Name="IdMovi_inven_tipo_inv" Type="Int32" Nullable="false" />
-          <Property Name="IdNumMovi_inv" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="estado" Type="Boolean" Nullable="false" />
-          <Property Name="IdUsuario_creacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuario_modificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="fecha_modificacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuario_anulacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="fecha_anulacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="imp_orden_compra_ext_recepcion_det" Relationship="Model_importacion.FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_recepcion" FromRole="imp_orden_compra_ext_recepcion" ToRole="imp_orden_compra_ext_recepcion_det" />
-          <NavigationProperty Name="imp_orden_compra_ext" Relationship="Model_importacion.FK_imp_orden_compra_ext_recepcion_imp_orden_compra_ext" FromRole="imp_orden_compra_ext_recepcion" ToRole="imp_orden_compra_ext" />
-        </EntityType>
-        <Association Name="FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_recepcion">
-          <End Type="Model_importacion.imp_orden_compra_ext_recepcion" Role="imp_orden_compra_ext_recepcion" Multiplicity="1" />
-          <End Type="Model_importacion.imp_orden_compra_ext_recepcion_det" Role="imp_orden_compra_ext_recepcion_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="imp_orden_compra_ext_recepcion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRecepcion" />
-            </Principal>
-            <Dependent Role="imp_orden_compra_ext_recepcion_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRecepcion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="vwimp_orden_compra_ext_recepcion">
           <Key>
             <PropertyRef Name="IdRecepcion" />
@@ -933,15 +881,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="imp_parametro">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoCbte_liquidacion" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbte_liquidacion_anu" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="vwimp_orden_compra_ext">
           <Key>
@@ -1132,36 +1071,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_imp_orden_compra_ext_recepcion_imp_orden_compra_ext">
-          <End Type="Model_importacion.imp_orden_compra_ext" Role="imp_orden_compra_ext" Multiplicity="0..1" />
-          <End Type="Model_importacion.imp_orden_compra_ext_recepcion" Role="imp_orden_compra_ext_recepcion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="imp_orden_compra_ext">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdOrdenCompra_ext" />
-            </Principal>
-            <Dependent Role="imp_orden_compra_ext_recepcion">
-              <PropertyRef Name="IdEmpresa_oc" />
-              <PropertyRef Name="IdOrdenCompraExt" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_det">
-          <End Type="Model_importacion.imp_orden_compra_ext_det" Role="imp_orden_compra_ext_det" Multiplicity="1" />
-          <End Type="Model_importacion.imp_orden_compra_ext_recepcion_det" Role="imp_orden_compra_ext_recepcion_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="imp_orden_compra_ext_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdOrdenCompra_ext" />
-              <PropertyRef Name="Secuencia" />
-            </Principal>
-            <Dependent Role="imp_orden_compra_ext_recepcion_det">
-              <PropertyRef Name="IdEmpresa_oc" />
-              <PropertyRef Name="IdOrdenCompra_ext" />
-              <PropertyRef Name="Secuencia_oc" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="vwimp_orden_compra_ext_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1205,6 +1114,107 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra
           <Property Name="lote_num_lote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="lote_fecha_fab" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="imp_orden_compra_ext_recepcion_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdRecepcion" />
+            <PropertyRef Name="secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdRecepcion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa_oc" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia_oc" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Double" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="imp_orden_compra_ext_det" Relationship="Model_importacion.FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_det" FromRole="imp_orden_compra_ext_recepcion_det" ToRole="imp_orden_compra_ext_det" />
+          <NavigationProperty Name="imp_orden_compra_ext_recepcion" Relationship="Model_importacion.FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_recepcion" FromRole="imp_orden_compra_ext_recepcion_det" ToRole="imp_orden_compra_ext_recepcion" />
+        </EntityType>
+        <Association Name="FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_det">
+          <End Type="Model_importacion.imp_orden_compra_ext_det" Role="imp_orden_compra_ext_det" Multiplicity="1" />
+          <End Type="Model_importacion.imp_orden_compra_ext_recepcion_det" Role="imp_orden_compra_ext_recepcion_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_orden_compra_ext_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenCompra_ext" />
+              <PropertyRef Name="Secuencia" />
+            </Principal>
+            <Dependent Role="imp_orden_compra_ext_recepcion_det">
+              <PropertyRef Name="IdEmpresa_oc" />
+              <PropertyRef Name="IdOrdenCompra_ext" />
+              <PropertyRef Name="Secuencia_oc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="imp_orden_compra_ext_recepcion">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdRecepcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdRecepcion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="or_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="or_observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa_oc" Type="Int32" />
+          <Property Name="IdOrdenCompraExt" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa_inv" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal_inv" Type="Int32" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_inv" Type="Int32" Nullable="false" />
+          <Property Name="IdNumMovi_inv" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuario_creacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_modificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_modificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario_anulacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_anulacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="imp_orden_compra_ext" Relationship="Model_importacion.FK_imp_orden_compra_ext_recepcion_imp_orden_compra_ext" FromRole="imp_orden_compra_ext_recepcion" ToRole="imp_orden_compra_ext" />
+          <NavigationProperty Name="imp_orden_compra_ext_recepcion_det" Relationship="Model_importacion.FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_recepcion" FromRole="imp_orden_compra_ext_recepcion" ToRole="imp_orden_compra_ext_recepcion_det" />
+        </EntityType>
+        <EntityType Name="imp_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoCbte_liquidacion" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte_liquidacion_anu" Type="Int32" Nullable="false" />
+          <Property Name="IdMotivo_Inv_ing" Type="Int32" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_ing" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_imp_orden_compra_ext_recepcion_imp_orden_compra_ext">
+          <End Type="Model_importacion.imp_orden_compra_ext" Role="imp_orden_compra_ext" Multiplicity="0..1" />
+          <End Type="Model_importacion.imp_orden_compra_ext_recepcion" Role="imp_orden_compra_ext_recepcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_orden_compra_ext">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenCompra_ext" />
+            </Principal>
+            <Dependent Role="imp_orden_compra_ext_recepcion">
+              <PropertyRef Name="IdEmpresa_oc" />
+              <PropertyRef Name="IdOrdenCompraExt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imp_orden_compra_ext_recepcion_det_imp_orden_compra_ext_recepcion">
+          <End Type="Model_importacion.imp_orden_compra_ext_recepcion" Role="imp_orden_compra_ext_recepcion" Multiplicity="1" />
+          <End Type="Model_importacion.imp_orden_compra_ext_recepcion_det" Role="imp_orden_compra_ext_recepcion_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imp_orden_compra_ext_recepcion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRecepcion" />
+            </Principal>
+            <Dependent Role="imp_orden_compra_ext_recepcion_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRecepcion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1293,44 +1303,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="imp_orden_compra_ext_recepcion_det">
-            <EntityTypeMapping TypeName="Model_importacion.imp_orden_compra_ext_recepcion_det">
-              <MappingFragment StoreEntitySet="imp_orden_compra_ext_recepcion_det">
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-                <ScalarProperty Name="Secuencia_oc" ColumnName="Secuencia_oc" />
-                <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
-                <ScalarProperty Name="IdEmpresa_oc" ColumnName="IdEmpresa_oc" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
-                <ScalarProperty Name="IdRecepcion" ColumnName="IdRecepcion" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="imp_orden_compra_ext_recepcion">
-            <EntityTypeMapping TypeName="Model_importacion.imp_orden_compra_ext_recepcion">
-              <MappingFragment StoreEntitySet="imp_orden_compra_ext_recepcion">
-                <ScalarProperty Name="fecha_anulacion" ColumnName="fecha_anulacion" />
-                <ScalarProperty Name="IdUsuario_anulacion" ColumnName="IdUsuario_anulacion" />
-                <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
-                <ScalarProperty Name="IdUsuario_modificacion" ColumnName="IdUsuario_modificacion" />
-                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
-                <ScalarProperty Name="IdUsuario_creacion" ColumnName="IdUsuario_creacion" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="IdNumMovi_inv" ColumnName="IdNumMovi_inv" />
-                <ScalarProperty Name="IdMovi_inven_tipo_inv" ColumnName="IdMovi_inven_tipo_inv" />
-                <ScalarProperty Name="IdSucursal_inv" ColumnName="IdSucursal_inv" />
-                <ScalarProperty Name="IdEmpresa_inv" ColumnName="IdEmpresa_inv" />
-                <ScalarProperty Name="IdOrdenCompraExt" ColumnName="IdOrdenCompraExt" />
-                <ScalarProperty Name="IdEmpresa_oc" ColumnName="IdEmpresa_oc" />
-                <ScalarProperty Name="or_observacion" ColumnName="or_observacion" />
-                <ScalarProperty Name="or_fecha" ColumnName="or_fecha" />
-                <ScalarProperty Name="IdRecepcion" ColumnName="IdRecepcion" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwimp_orden_compra_ext_recepcion">
             <EntityTypeMapping TypeName="Model_importacion.vwimp_orden_compra_ext_recepcion">
               <MappingFragment StoreEntitySet="vwimp_orden_compra_ext_recepcion">
@@ -1347,16 +1319,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra
                 <ScalarProperty Name="or_observacion" ColumnName="or_observacion" />
                 <ScalarProperty Name="or_fecha" ColumnName="or_fecha" />
                 <ScalarProperty Name="IdRecepcion" ColumnName="IdRecepcion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="imp_parametro">
-            <EntityTypeMapping TypeName="Model_importacion.imp_parametro">
-              <MappingFragment StoreEntitySet="imp_parametro">
-                <ScalarProperty Name="IdTipoCbte_liquidacion_anu" ColumnName="IdTipoCbte_liquidacion_anu" />
-                <ScalarProperty Name="IdTipoCbte_liquidacion" ColumnName="IdTipoCbte_liquidacion" />
-                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1472,6 +1434,59 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra
                 <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imp_orden_compra_ext_recepcion_det">
+            <EntityTypeMapping TypeName="Model_importacion.imp_orden_compra_ext_recepcion_det">
+              <MappingFragment StoreEntitySet="imp_orden_compra_ext_recepcion_det">
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="Secuencia_oc" ColumnName="Secuencia_oc" />
+                <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
+                <ScalarProperty Name="IdEmpresa_oc" ColumnName="IdEmpresa_oc" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="IdRecepcion" ColumnName="IdRecepcion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imp_orden_compra_ext_recepcion">
+            <EntityTypeMapping TypeName="Model_importacion.imp_orden_compra_ext_recepcion">
+              <MappingFragment StoreEntitySet="imp_orden_compra_ext_recepcion">
+                <ScalarProperty Name="fecha_anulacion" ColumnName="fecha_anulacion" />
+                <ScalarProperty Name="IdUsuario_anulacion" ColumnName="IdUsuario_anulacion" />
+                <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
+                <ScalarProperty Name="IdUsuario_modificacion" ColumnName="IdUsuario_modificacion" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="IdUsuario_creacion" ColumnName="IdUsuario_creacion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="IdNumMovi_inv" ColumnName="IdNumMovi_inv" />
+                <ScalarProperty Name="IdMovi_inven_tipo_inv" ColumnName="IdMovi_inven_tipo_inv" />
+                <ScalarProperty Name="IdSucursal_inv" ColumnName="IdSucursal_inv" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdEmpresa_inv" ColumnName="IdEmpresa_inv" />
+                <ScalarProperty Name="IdOrdenCompraExt" ColumnName="IdOrdenCompraExt" />
+                <ScalarProperty Name="IdEmpresa_oc" ColumnName="IdEmpresa_oc" />
+                <ScalarProperty Name="or_observacion" ColumnName="or_observacion" />
+                <ScalarProperty Name="or_fecha" ColumnName="or_fecha" />
+                <ScalarProperty Name="IdRecepcion" ColumnName="IdRecepcion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imp_parametro">
+            <EntityTypeMapping TypeName="Model_importacion.imp_parametro">
+              <MappingFragment StoreEntitySet="imp_parametro">
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdMovi_inven_tipo_ing" ColumnName="IdMovi_inven_tipo_ing" />
+                <ScalarProperty Name="IdMotivo_Inv_ing" ColumnName="IdMotivo_Inv_ing" />
+                <ScalarProperty Name="IdTipoCbte_liquidacion_anu" ColumnName="IdTipoCbte_liquidacion_anu" />
+                <ScalarProperty Name="IdTipoCbte_liquidacion" ColumnName="IdTipoCbte_liquidacion" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

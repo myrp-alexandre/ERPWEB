@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using Core.Erp.Bus.Importacion;
 using Core.Erp.Info.Importacion;
 using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Bus.Inventario;
+using Core.Erp.Bus.General;
 
 namespace Core.Erp.Web.Areas.Importacion.Controllers
 {
@@ -37,6 +39,22 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             ct_cbtecble_tipo_Bus bus_comprobante_tipo = new ct_cbtecble_tipo_Bus();
             var lst_tipo = bus_comprobante_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_tipo = lst_tipo;
+
+            in_movi_inven_tipo_Bus bus_tipo = new in_movi_inven_tipo_Bus();
+            var lst_tipo_mov = bus_tipo.get_list(IdEmpresa, false);
+            ViewBag.lst_tipo_mov = lst_tipo_mov;
+
+            in_Motivo_Inven_Bus bus_motivo = new in_Motivo_Inven_Bus();
+            var lst_motivo = bus_motivo.get_list(IdEmpresa, false);
+            ViewBag.lst_motivo = lst_motivo;
+
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+
+            tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+            var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
+            ViewBag.lst_bodega = lst_bodega;
         }
     }
 }

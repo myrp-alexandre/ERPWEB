@@ -28,7 +28,16 @@ namespace Core.Erp.Info.Importacion
         public Nullable<System.DateTime> fecha_anulacion { get; set; }
 
 
+        #region MyRegion
         public string pe_nombreCompleto { get; set; }
         public string pe_cedulaRuc { get; set; }
+        public int IdCatalogo_via { get; set; }
+        public System.DateTime oe_fecha { get; set; }
+        public decimal IdProveedor { get; set; }
+        public Nullable<System.DateTime> oe_fecha_llegada { get; set; }
+        public Nullable<System.DateTime> oe_fecha_embarque { get; set; }
+        public string oe_observacion { get; set; }
+        #endregion
+
     }
 }

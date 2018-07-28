@@ -80,7 +80,7 @@ namespace Core.Erp.Bus.Importacion
             try
             {
                 imp_orden_compra_ext_recepcion_Info info = new imp_orden_compra_ext_recepcion_Info();
-                var orden = odata_oc.get_info(IdEmpresa, IdOrdenCompra_ext);
+                var orden = odata_oc.get_info_recepcion_merca(IdEmpresa, IdOrdenCompra_ext);
                 var detalle_oc = odta_det_oc.get_list(IdEmpresa, IdOrdenCompra_ext);
                 if(orden!=null & detalle_oc!=null)
                 {
@@ -88,6 +88,13 @@ namespace Core.Erp.Bus.Importacion
                     info.pe_cedulaRuc = orden.pe_cedulaRuc;
                     info.pe_nombreCompleto = orden.pe_nombreCompleto;
                     info.or_observacion = orden.oe_observacion;
+                    info.pe_nombreCompleto = orden.pe_nombreCompleto;
+                    info.oe_fecha = orden.oe_fecha;
+                    info.oe_fecha_embarque = orden.oe_fecha_embarque;
+                    info.oe_fecha_llegada = orden.oe_fecha_embarque;
+                    info.IdCatalogo_via = orden.IdCatalogo_via;
+                   
+                    
                     foreach (var item in detalle_oc)
                     {
                         imp_orden_compra_ext_recepcion_det_Info item_add = new imp_orden_compra_ext_recepcion_det_Info();
@@ -95,6 +102,10 @@ namespace Core.Erp.Bus.Importacion
                         item_add.IdProducto = item.IdProducto;
                         item_add.Observacion = "";
                         item_add.cantidad =Convert.ToInt32( item.od_cantidad);
+                        item_add.pr_descripcion = item.pr_descripcion;
+                        item_add.cantidad = item.od_cantidad;
+                        item_add.od_cantidad = item.od_cantidad;
+                        info.lst_detalle.Add(item_add);
                     }
                 }
 

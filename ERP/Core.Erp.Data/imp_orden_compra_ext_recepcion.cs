@@ -27,6 +27,7 @@ namespace Core.Erp.Data
         public Nullable<int> IdEmpresa_oc { get; set; }
         public decimal IdOrdenCompraExt { get; set; }
         public int IdEmpresa_inv { get; set; }
+        public int IdBodega { get; set; }
         public int IdSucursal_inv { get; set; }
         public int IdMovi_inven_tipo_inv { get; set; }
         public decimal IdNumMovi_inv { get; set; }
@@ -38,8 +39,8 @@ namespace Core.Erp.Data
         public string IdUsuario_anulacion { get; set; }
         public Nullable<System.DateTime> fecha_anulacion { get; set; }
     
+        public virtual imp_orden_compra_ext imp_orden_compra_ext { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imp_orden_compra_ext_recepcion_det> imp_orden_compra_ext_recepcion_det { get; set; }
-        public virtual imp_orden_compra_ext imp_orden_compra_ext { get; set; }
     }
 }

@@ -11,7 +11,85 @@
 {
     @Html.HiddenFor(q => q.IdOrdenCompraExt)
     @Html.HiddenFor(q => q.IdEmpresa)
-    
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="CodMoviInven">Id Orden compra</label>
+                    @Html.TextBoxFor(q => q.IdOrdenCompraExt, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(q => q.IdOrdenCompraExt, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="rub_grupo">Tipo de embarque*</label>
+                    @Html.DropDownListFor(q => q.IdCatalogo_via, new SelectList(ViewBag.lst_catalogos, "IdCatalogo", "ca_descripcion"), new { @class = "form-control" , @disabled = "disabled" })
+                    @Html.ValidationMessageFor(q => q.IdCatalogo_via, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-10 col-med-2">
+                <div class="form-group">
+                    <label for="">Fecha O.C</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.oe_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_oc" , @disabled = "disabled" })
+                        @Html.ValidationMessageFor(q => q.oe_fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="IdProveedor">Proveedor*</label>
+                    @Html.TextAreaFor(q => q.pe_nombreCompleto, new { @class = "form-control", @disabled="disabled" })
+                </div>
+            </div>
+            <div class="col-md-offset-10 col-med-2">
+                <div class="form-group">
+                    <label for="">Fecha embarque</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.oe_fecha_embarque, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_embarque" })
+                        @Html.ValidationMessageFor(q => q.oe_fecha_embarque, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="IdCtaCble_importacion">Observación O.C*</label>
+                    @Html.TextAreaFor(q => q.oe_observacion, new { @class = "form-control", @rows = 2 })
+                    @Html.ValidationMessageFor(q => q.oe_observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="IdCtaCble_importacion">Detalle de orden de compra</label>
+                    @Html.Action("GridViewPartial_recepcion_oc_ext_det")
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>

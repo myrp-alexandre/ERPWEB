@@ -147,6 +147,51 @@ namespace Core.Erp.Data.Importacion
                 throw;
             }
         }
+        public imp_ordencompra_ext_Info get_info_recepcion_merca(int IdEmpresa, decimal IdOrdenCompra_ext)
+        {
+            try
+            {
+                imp_ordencompra_ext_Info info = new imp_ordencompra_ext_Info();
+                using (Entities_importacion Context = new Entities_importacion())
+                {
+                    vwimp_orden_compra_ext Entity = Context.vwimp_orden_compra_ext.FirstOrDefault(q => q.IdOrdenCompra_ext == IdOrdenCompra_ext && q.IdEmpresa == IdEmpresa);
+                    if (Entity == null) return null;
+                    info = new imp_ordencompra_ext_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdOrdenCompra_ext = Entity.IdOrdenCompra_ext,
+                        IdProveedor = Entity.IdProveedor,
+                        IdPais_origen = Entity.IdPais_origen,
+                        IdPais_embarque = Entity.IdPais_embarque,
+                        IdCiudad_destino = Entity.IdCiudad_destino,
+                        IdCatalogo_via = Entity.IdCatalogo_via,
+                        IdCatalogo_forma_pago = Entity.IdCatalogo_forma_pago,
+                        oe_fecha = Entity.oe_fecha,
+                        oe_fecha_llegada_est = Entity.oe_fecha_llegada_est,
+                        oe_fecha_embarque = Entity.oe_fecha_embarque,
+                        oe_fecha_desaduanizacion_est = Entity.oe_fecha_desaduanizacion_est,
+                        IdCtaCble_importacion = Entity.IdCtaCble_importacion,
+                        oe_observacion = Entity.oe_observacion,
+                        oe_codigo = Entity.oe_codigo,
+                        estado = Entity.estado,
+                        IdLiquidacion = Entity.IdLiquidacion,
+                        oe_fecha_llegada = Entity.oe_fecha_llegada,
+                        oe_fecha_embarque_est = Entity.oe_fecha_embarque_est,
+                        oe_fecha_desaduanizacion = Entity.oe_fecha_desaduanizacion,
+                        IdMoneda_destino = Entity.IdMoneda_destino,
+                        IdMoneda_origen = Entity.IdMoneda_destino,
+                        pe_cedulaRuc=Entity.pe_cedulaRuc,
+                        pe_nombreCompleto=Entity.pe_nombreCompleto
+                    };
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         private decimal get_id(int IdEmpresa)
         {
