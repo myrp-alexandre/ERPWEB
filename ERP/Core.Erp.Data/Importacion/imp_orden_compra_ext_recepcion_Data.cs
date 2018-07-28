@@ -33,7 +33,8 @@ namespace Core.Erp.Data.Importacion
                                  IdMovi_inven_tipo_inv = q.IdMovi_inven_tipo_inv,
                                  IdNumMovi_inv = q.IdNumMovi_inv,
                                  pe_cedulaRuc=q.pe_cedulaRuc,
-                                 pe_nombreCompleto=q.pe_nombreCompleto
+                                 pe_nombreCompleto=q.pe_nombreCompleto,
+                                 estado=q.estado
 
                              }).ToList();
                 }
@@ -114,18 +115,18 @@ namespace Core.Erp.Data.Importacion
                     imp_orden_compra_ext_recepcion Entity = new imp_orden_compra_ext_recepcion
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdRecepcion = info.IdRecepcion,
+                        IdRecepcion = info.IdRecepcion = get_id(info.IdEmpresa),
                         or_fecha = info.or_fecha,
                         or_observacion = info.or_observacion,
-                        IdEmpresa_oc = info.IdEmpresa_oc,
+                        IdEmpresa_oc = info.IdEmpresa,
                         IdOrdenCompraExt = info.IdOrdenCompraExt,
-                        IdEmpresa_inv = info.IdEmpresa_inv,
+                        IdEmpresa_inv = info.IdEmpresa,
                         IdSucursal_inv = info.IdSucursal_inv,
                         IdMovi_inven_tipo_inv = info.IdMovi_inven_tipo_inv,
                         IdMotivo_Inv = info.IdMotivo_Inv,
-
-                    IdNumMovi_inv = info.IdNumMovi_inv,
-                        IdBodega=info.IdBodega,
+                        IdNumMovi_inv = info.IdNumMovi_inv,
+                        IdBodega = info.IdBodega,
+                        estado = true
 
                     };
 
@@ -134,7 +135,7 @@ namespace Core.Erp.Data.Importacion
                         Context.imp_orden_compra_ext_recepcion_det.Add(new imp_orden_compra_ext_recepcion_det
                         {
                             IdEmpresa = item.IdEmpresa,
-                            IdRecepcion = item.IdRecepcion,
+                            IdRecepcion = info.IdRecepcion,
                             secuencia = item.secuencia,
                             IdProducto = item.IdProducto,
                             IdEmpresa_oc = item.IdEmpresa_oc,
@@ -148,6 +149,20 @@ namespace Core.Erp.Data.Importacion
                     }
                     Context.imp_orden_compra_ext_recepcion.Add(Entity);
                     Context.SaveChanges();
+
+                    foreach (var item in info.lst_detalle)
+                    {
+                        imp_orden_compra_ext_det detalle = Context.imp_orden_compra_ext_det.FirstOrDefault( q => 
+                        q.IdEmpresa==item.IdEmpresa
+                        &&q.IdOrdenCompra_ext == info.IdOrdenCompraExt
+                        && q.Secuencia==item.Secuencia_oc
+                        && q.IdProducto==item.IdProducto);
+                        if (Entity == null)
+                            return false;
+                        detalle.od_cantidad_recepcion = item.cantidad;
+                        Context.SaveChanges();
+                    }
+
                 }
                 return true;
             }

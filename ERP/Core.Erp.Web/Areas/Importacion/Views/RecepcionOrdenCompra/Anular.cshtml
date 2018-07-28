@@ -1,27 +1,37 @@
 ﻿@model Core.Erp.Info.Importacion.imp_ordencompra_ext_Info
 @{
-    ViewBag.Title = "Anular gasto";
+    ViewBag.Title = "Anular recepcion de orden de compra";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using (Html.BeginForm("Anular", "OrdenCompraExterior", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Anular", "RecepcionOrdenCompra", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    @Html.HiddenFor(q => q.IdOrdenCompraExt)
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdRecepcion)
+    @Html.HiddenFor(q => q.IdSucursal_inv)
+    @Html.HiddenFor(q => q.IdBodega)
+    @Html.HiddenFor(q => q.IdMovi_inven_tipo_inv)
+    @Html.HiddenFor(q => q.IdMotivo_Inv)
+    @Html.HiddenFor(q => q.IdNumMovi_inv)
+
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="CodMoviInven">Código</label>
-                    @Html.TextBoxFor(q => q.oe_codigo, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.oe_codigo, "", new { @class = "text-danger" })
+                    <label for="IdOrdenCompraExt">Id Orden compra</label>
+                    @Html.TextBoxFor(q => q.IdOrdenCompraExt, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(q => q.IdOrdenCompraExt, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="rub_grupo">Tipo de embarque*</label>
-                    @Html.DropDownListFor(q => q.IdCatalogo_via, new SelectList(ViewBag.lst_catalogos, "IdCatalogo", "ca_descripcion"), new { @class = "form-control" })
+                    <label for="IdCatalogo_via">Tipo de embarque*</label>
+                    @Html.DropDownListFor(q => q.IdCatalogo_via, new SelectList(ViewBag.lst_catalogos, "IdCatalogo", "ca_descripcion"), new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdCatalogo_via, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -32,7 +42,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.oe_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_oc" })
+                        @Html.TextBoxFor(q => q.oe_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_oc", @disabled = "disabled" })
                         @Html.ValidationMessageFor(q => q.oe_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -42,21 +52,20 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdProveedor">Proveedor*</label>
-                    @Html.Partial("_CmbProveedor_exterior", Model)
-                    @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(q => q.pe_nombreCompleto, new { @class = "form-control", @disabled = "disabled" })
                 </div>
             </div>
             <div class="col-md-offset-10 col-med-2">
                 <div class="form-group">
-                    <label for="">Fecha embarque</label>
+                    <label for="">Fecha recepcion</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.oe_fecha_embarque, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_embarque" })
+                        @Html.TextBoxFor(q => q.or_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "or_fecha" })
                         @Html.ValidationMessageFor(q => q.oe_fecha_embarque, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -66,191 +75,70 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="form-group">
-                    <label for="IdCtaCble_importacion">Cuenta contable*</label>
-                    @Html.Partial("_CmbCuenta_contable", Model)
-                    @Html.ValidationMessageFor(q => q.IdCtaCble_importacion, "", new { @class = "text-danger" })
+                    <label for="IdSucursal">Sucursal*</label>
+                    @Html.DropDownListFor(q => q.IdSucursal_inv, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                    @Html.ValidationMessageFor(q => q.IdSucursal_inv, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-offset-10 col-med-2">
                 <div class="form-group">
-                    <label for="">Fecha llegada</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.TextBoxFor(q => q.oe_fecha_llegada, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_llegada" })
-                        @Html.ValidationMessageFor(q => q.oe_fecha_llegada, "", new { @class = "text-danger" })
-                    </div>
+                    <label for="IdMovi_inven_tipo_inv">Motivo*</label>
+                    @Html.DropDownListFor(q => q.IdMotivo_Inv, new SelectList(ViewBag.lst_motivo, "IdMotivo_Inv", "Desc_mov_inv"), new { @class = "form-control", @id = "IdMotivo_Inv" })
+                    @Html.ValidationMessageFor(q => q.IdMotivo_Inv, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="form-group">
-                    <label for="IdCtaCble_importacion">Observación*</label>
-                    @Html.TextAreaFor(q => q.oe_observacion, new { @class = "form-control", @rows = 2 })
-                    @Html.ValidationMessageFor(q => q.oe_observacion, "", new { @class = "text-danger" })
+                    <label for="IdBodega">Bodega</label>
+                    @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodega" })
+                    @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-offset-10 col-med-2">
                 <div class="form-group">
-                    <label for="">Fecha desanualización</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.TextBoxFor(q => q.oe_fecha_desaduanizacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_desanualizacion" })
-                        @Html.ValidationMessageFor(q => q.oe_fecha_llegada, "", new { @class = "text-danger" })
-                    </div>
+                    <label for="IdMovi_inven_tipo">Tipo movimiento*</label>
+                    @Html.DropDownListFor(q => q.IdMovi_inven_tipo_inv, new SelectList(ViewBag.lst_tipo, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control", @id = "IdMovi_inven_tipo" })
+                    @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_inv, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
 
-
-    <div id="Tabs" role="tabpanel">
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="active">
-                <a href="#tab_detalle" aria-controls="informacion_items" role="tab" data-toggle="tab">Detalle de items</a>
-            </li>
-            <li>
-                <a href="#tab_otros" aria-controls="otros" role="tab" data-toggle="tab">Datos adicionales</a>
-            </li>
-
-
-        </ul>
-        <div class="tab-content" style="padding-top: 20px">
-            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_detalle">
-                @Html.Action("GridViewPartial_orden_compra_ext_det")
-            </div>
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_otros">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="IdEmpleado">País de embarque</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.IdPais_embarque, settings =>
-                               {
-                                   settings.Name = "IdPais_embarque";
-                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
-                                   settings.Properties.Columns.Add("IdPais", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                   settings.Properties.Columns.Add("CodPais", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                   settings.Properties.Columns.Add("Nombre", "País").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                                   //Campo ID
-                                   settings.Properties.ValueField = "IdPais";
-                                   settings.Properties.ValueType = typeof(string);
-                                   settings.Properties.TextField = "Nombre";
-                                   //Boton para seleccionar ningun registro
-                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                   settings.Properties.NullText = "== Seleccione ==";
-                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-                               }).BindList(ViewBag.lst_paises).GetHtml()
-                                @Html.ValidationMessageFor(q => q.IdPais_embarque, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="or_observacion">Observación recepcion de mercaderia</label>
+                    @Html.TextAreaFor(q => q.or_observacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.oe_observacion, "", new { @class = "text-danger" })
                 </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="IdEmpleado">País destino</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.IdPais_origen, settings =>
-                               {
-                                   settings.Name = "IdPais_origen";
-                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
-                                   settings.Properties.Columns.Add("IdPais", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                   settings.Properties.Columns.Add("CodPais", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                   settings.Properties.Columns.Add("Nombre", "País").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                                   //Campo ID
-                                   settings.Properties.ValueField = "IdPais";
-                                   settings.Properties.ValueType = typeof(string);
-                                   settings.Properties.TextField = "Nombre";
-                                   //Boton para seleccionar ningun registro
-                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                   settings.Properties.NullText = "== Seleccione ==";
-                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-                               }).BindList(ViewBag.lst_paises).GetHtml()
-                                @Html.ValidationMessageFor(q => q.IdPais_origen, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="IdEmpleado">Ciudad destino</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.IdCiudad_destino, settings =>
-                               {
-                                   settings.Name = "IdCiudad_destino";
-                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
-                                   settings.Properties.Columns.Add("IdCiudad", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                   settings.Properties.Columns.Add("Cod_Ciudad", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                   settings.Properties.Columns.Add("Descripcion_Ciudad", "Ciudad").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                                   //Campo ID
-                                   settings.Properties.ValueField = "IdCiudad";
-                                   settings.Properties.ValueType = typeof(string);
-                                   settings.Properties.TextField = "Descripcion_Ciudad";
-                                   //Boton para seleccionar ningun registro
-                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                   settings.Properties.NullText = "== Seleccione ==";
-                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-                               }).BindList(ViewBag.lst_ciudades).GetHtml()
-                                @Html.ValidationMessageFor(q => q.IdCiudad_destino, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="IdEmpleado">Forma de pago</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.codigo_pago_sri, settings =>
-                           {
-                               settings.Name = "codigo_pago_sri";
-                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                               settings.Properties.Columns.Add("codigo_pago_sri", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                               settings.Properties.Columns.Add("formas_pago_sri", "Forma pago").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                               //Campo ID
-                               settings.Properties.ValueField = "codigo_pago_sri";
-                               settings.Properties.ValueType = typeof(string);
-                               settings.Properties.TextField = "formas_pago_sri";
-                               //Boton para seleccionar ningun registro
-                               settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                               settings.Properties.NullText = "== Seleccione ==";
-                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-                           }).BindList(ViewBag.lst_forma_pago).GetHtml()
-                                @Html.ValidationMessageFor(q => q.codigo_pago_sri, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdCtaCble_importacion">Detalle de orden de compra</label>
+                    @Html.Action("GridViewPartial_recepcion_oc_ext_det")
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
 <div class="box-footer">
     <button type="submit" class="btn btn-danger">Anular</button>
-    <a class="btn btn-default" href="@Url.Action("Index", "OrdenCompraExterior", new { Area ="Importacion" }, null)">Cancelar</a>
+    <a class="btn btn-default" href="@Url.Action("Index", "RecepcionOrdenCompra", new { Area ="Importacion" }, null)">Cancelar</a>
 </div>
 
 @section Scripts {

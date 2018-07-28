@@ -66,6 +66,7 @@ namespace Core.Erp.Data.Importacion
                     Lista = (from q in Context.vwimp_orden_compra_ext
                              where q.IdEmpresa == IdEmpresa
                              && q.cantidad_x_recibir >0
+                             && q.estado==true
                              select new imp_ordencompra_ext_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

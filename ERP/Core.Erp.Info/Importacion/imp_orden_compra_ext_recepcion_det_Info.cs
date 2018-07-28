@@ -17,7 +17,9 @@ namespace Core.Erp.Info.Importacion
         public int Secuencia_oc { get; set; }
         public double cantidad { get; set; }
         public string Observacion { get; set; }
+        public double costo { get; set; }
 
+        public string IdUnidadMedida { get; set; }
 
         public string pr_descripcion { get; set; }
         public double od_cantidad { get; set; }

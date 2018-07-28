@@ -223,7 +223,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             detalle.UpdateRow(info_det);
             var model = detalle.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_orden_compra_ext_det", model);
+            return PartialView("_GridViewPartial_recepcion_oc_ext_det", model);
         }
 
         public ActionResult EditingDelete(int secuencia)
@@ -231,7 +231,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             detalle.DeleteRow(secuencia);
             var model = detalle.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_orden_compra_ext_det", model);
+            return PartialView("_GridViewPartial_recepcion_oc_ext_det", model);
         }
         #endregion
     }
@@ -265,7 +265,6 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         public void UpdateRow(imp_orden_compra_ext_recepcion_det_Info info_det)
         {
             imp_orden_compra_ext_recepcion_det_Info edited_info = get_list().Where(m => m.secuencia == info_det.secuencia).First();
-            edited_info.IdProducto = info_det.IdProducto;
             edited_info.cantidad = info_det.cantidad;
 
         }

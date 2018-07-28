@@ -4,7 +4,6 @@
         settings.Name = "GridViewPartial_orden_compra_ext_det";
         settings.CallbackRouteValues = new { Controller = "RecepcionOrdencompra", Action = "GridViewPartial_recepcion_oc_ext_det", Area = "Importacion" };
         settings.KeyFieldName = "secuencia";
-
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "RecepcionOrdencompra", Action = "EditingUpdate", Area = "Importacion" };
@@ -25,21 +24,31 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
         //Funcion para inicializar fila al presionar nuevo
-       
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Secuencia_oc";
+            column.Caption = "Producto";
+            column.Width = Unit.Percentage(60);
+            column.Visible = false;
+
+        });
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "pr_descripcion";
             column.Caption = "Producto";
             column.Width = Unit.Percentage(60);
             column.EditFormSettings.Visible = DefaultBoolean.False;
+
         });
 
-        
         settings.Columns.Add(column =>
         {
             column.FieldName = "od_cantidad";
             column.Caption = "cantidad O.C";
             column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
 
         });
         settings.Columns.Add(column =>
@@ -49,7 +58,7 @@
             column.Width = Unit.Percentage(15);
 
         });
-       
+
     });
 }
 @grid.Bind(Model).GetHtml()

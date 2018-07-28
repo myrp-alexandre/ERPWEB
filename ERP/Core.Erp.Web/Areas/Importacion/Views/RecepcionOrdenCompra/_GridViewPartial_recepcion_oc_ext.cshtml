@@ -3,9 +3,9 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridViewPartial_orden_compra_ext";
-        settings.CallbackRouteValues = new { Controller = "OrdenCompraExterior", Action = "GridViewPartial_orden_compra_ext" };
-        settings.KeyFieldName = "IdOrdenCompra_ext";
+        settings.Name = "GridViewPartial_recepcion_oc_ext";
+        settings.CallbackRouteValues = new { Controller = "RecepcionOrdenCompra", Action = "GridViewPartial_recepcion_oc_ext" };
+        settings.KeyFieldName = "IdRecepcion";
         settings.Width = Unit.Percentage(100);
 
         //Configuración para que la grilla no muestre texto completo
@@ -55,23 +55,19 @@
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
-            if(Convert.ToBoolean(e.GetValue("cantidad_global"))!= Convert.ToBoolean(e.GetValue("cantidad_x_recibir")))
-            {
-                e.Row.ForeColor = System.Drawing.Color.Blue;
 
-            }
         };
         settings.Columns.Add(c =>
         {
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true && (Convert.ToInt32(DataBinder.Eval(tc.DataItem, "cantidad_global")) == Convert.ToInt32(DataBinder.Eval(tc.DataItem, "cantidad_x_recibir"))))
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true )
                 {
 
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdOrdenCompra_ext = DataBinder.Eval(tc.DataItem, "IdOrdenCompra_ext") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdOrdenCompra_ext = DataBinder.Eval(tc.DataItem, "IdOrdenCompra_ext") },
+                Html.ActionLink("Modificar", "Modificar", new { IdOrdenCompra_ext = DataBinder.Eval(tc.DataItem, "IdRecepcion") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdOrdenCompra_ext = DataBinder.Eval(tc.DataItem, "IdRecepcion") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -87,7 +83,6 @@
             c.Width = Unit.Pixel(150);
         });
         settings.Columns.Add("IdRecepcion", "ID").Width = Unit.Percentage(5);
-        settings.Columns.Add("IdOrdenCompra_ext", "ID O.C").Width = Unit.Percentage(5);
         settings.Columns.Add("pe_cedulaRuc", "Cédula/Ruc").Width = Unit.Percentage(10);
         settings.Columns.Add("pe_nombreCompleto", "Proveedor").Width = Unit.Percentage(30);
         settings.Columns.Add(column =>
@@ -103,6 +98,15 @@
             });
         });
         settings.Columns.Add("or_observacion", "Obaservación").Width = Unit.Percentage(30);
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Ingreso";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("INV_001", "InventarioReportes", new { Area = "Reportes", IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal_inv"), IdMovi_inven_tipo = DataBinder.Eval(c.DataItem, "IdMovi_inven_tipo_inv"), IdNumMovi = DataBinder.Eval(c.DataItem, "IdNumMovi_inv") }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
+        });
     });
 }
 @grid.Bind(Model).GetHtml()
