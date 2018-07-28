@@ -17,6 +17,7 @@ namespace Core.Erp.Bus.Importacion
         imp_ordencompra_ext_det_Data odta_det_oc = new imp_ordencompra_ext_det_Data();
         imp_parametro_Data data_parametros = new imp_parametro_Data();
         in_Ing_Egr_Inven_Bus bus_ingreso = new in_Ing_Egr_Inven_Bus();
+        imp_orden_compra_ext_recepcion_det_Data odata_det = new imp_orden_compra_ext_recepcion_det_Data();
         public List<imp_orden_compra_ext_recepcion_Info> get_list(int IdEmpresa, DateTime fecha_inicio, DateTime Fecha_fin)
         {
             try
@@ -65,7 +66,16 @@ namespace Core.Erp.Bus.Importacion
         {
             try
             {
-                return odata.modificarDB(info);
+                var info_movimiento_inventario = get_movimineto_inv(info);
+                info_movimiento_inventario.signo = "+";
+                if (bus_ingreso.modificarDB(info_movimiento_inventario))
+                {
+                    info.IdNumMovi_inv = info_movimiento_inventario.IdNumMovi;
+                    odata_det.eliminar(info.IdEmpresa, info.IdRecepcion);
+                    return odata.modificarDB(info);
+                }
+                else
+                    return false;
             }
             catch (Exception)
             {
@@ -77,7 +87,15 @@ namespace Core.Erp.Bus.Importacion
         {
             try
             {
-                return odata.anularDB(info);
+                var info_movimiento_inventario = get_movimineto_inv(info);
+                info_movimiento_inventario.signo = "+";
+                if (bus_ingreso.anularDB(info_movimiento_inventario))
+                {
+                    info.IdNumMovi_inv = info_movimiento_inventario.IdNumMovi;
+                    return odata.anularDB(info);
+                }
+                else
+                    return false;
             }
             catch (Exception)
             {
@@ -149,7 +167,7 @@ namespace Core.Erp.Bus.Importacion
                 // armando ingreso
                 in_Ing_Egr_Inven_Info ingreso = new in_Ing_Egr_Inven_Info();
                 ingreso.IdEmpresa = info.IdEmpresa;
-                ingreso.IdNumMovi = 0;
+                ingreso.IdNumMovi = info.IdNumMovi_inv;
                 ingreso.CodMoviInven = "0";
                 ingreso.cm_fecha = info.or_fecha;
                 ingreso.IdUsuario = info.IdUsuario_creacion;
@@ -173,7 +191,7 @@ namespace Core.Erp.Bus.Importacion
                     IdEmpresa = item.IdEmpresa,
                     IdSucursal = info.IdSucursal_inv,
                     IdMovi_inven_tipo=info.IdMovi_inven_tipo_inv,
-                    IdNumMovi = 0,
+                    IdNumMovi = info.IdNumMovi_inv,
                     Secuencia = item.secuencia,
                     IdBodega = info.IdBodega,
                     IdProducto = item.IdProducto,

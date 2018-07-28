@@ -140,10 +140,13 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         #region acciones
         public ActionResult Nuevo()
         {
-           
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            imp_parametro_Bus bus_para = new imp_parametro_Bus();
+            var param = bus_para.get_info(IdEmpresa);
             imp_ordencompra_ext_Info model = new imp_ordencompra_ext_Info
             {
                 fecha_creacion = DateTime.Now,
+                IdCtaCble_importacion=param.IdCtaCble,
                 oe_fecha = DateTime.Now,
                 oe_fecha_llegada = DateTime.Now,
                 oe_fecha_embarque = DateTime.Now,

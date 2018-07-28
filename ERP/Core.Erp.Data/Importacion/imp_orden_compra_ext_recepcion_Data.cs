@@ -186,9 +186,9 @@ namespace Core.Erp.Data.Importacion
                     if (Entity == null) return false;
                     Entity.or_fecha = info.or_fecha;
                     Entity.or_observacion = info.or_observacion;
-                    Entity.IdEmpresa_oc = info.IdEmpresa_oc;
+                    Entity.IdEmpresa_oc = info.IdEmpresa;
                     Entity.IdOrdenCompraExt = info.IdOrdenCompraExt;
-                    Entity.IdEmpresa_inv = info.IdEmpresa_inv;
+                    Entity.IdEmpresa_inv = info.IdEmpresa;
                     Entity.IdSucursal_inv = info.IdSucursal_inv;
                     Entity.IdMovi_inven_tipo_inv = info.IdMovi_inven_tipo_inv;
                     Entity.IdNumMovi_inv = info.IdNumMovi_inv;
@@ -213,6 +213,18 @@ namespace Core.Erp.Data.Importacion
                         secuancia++;
                     }
                     Context.SaveChanges();
+                    foreach (var item in info.lst_detalle)
+                    {
+                        imp_orden_compra_ext_det detalle = Context.imp_orden_compra_ext_det.FirstOrDefault(q =>
+                       q.IdEmpresa == item.IdEmpresa
+                       && q.IdOrdenCompra_ext == info.IdOrdenCompraExt
+                       && q.Secuencia == item.Secuencia_oc
+                       && q.IdProducto == item.IdProducto);
+                        if (Entity == null)
+                            return false;
+                        detalle.od_cantidad_recepcion = item.cantidad;
+                        Context.SaveChanges();
+                    }
                 }
                 return true;
             }
@@ -233,6 +245,19 @@ namespace Core.Erp.Data.Importacion
                     Entity.estado = info.estado = false;
                     Entity.fecha_anulacion = DateTime.Now;
                     Context.SaveChanges();
+
+                    foreach (var item in info.lst_detalle)
+                    {
+                        imp_orden_compra_ext_det detalle = Context.imp_orden_compra_ext_det.FirstOrDefault(q =>
+                       q.IdEmpresa == item.IdEmpresa
+                       && q.IdOrdenCompra_ext == info.IdOrdenCompraExt
+                       && q.Secuencia == item.Secuencia_oc
+                       && q.IdProducto == item.IdProducto);
+                        if (Entity == null)
+                            return false;
+                        detalle.od_cantidad_recepcion = 0;
+                        Context.SaveChanges();
+                    }
                 }
                 return true;
             }

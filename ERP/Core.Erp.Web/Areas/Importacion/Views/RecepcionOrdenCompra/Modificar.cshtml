@@ -6,8 +6,17 @@
     //    Response.Redirect("~/Account/Login");
     //}
     Layout = "~/Views/Shared/_Layout.cshtml";
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
 }
-@using (Html.BeginForm("Nuevo", "RecepcionOrdenCompra", FormMethod.Post, new { @class = "form", @role = "form" }))
+}
+@using (Html.BeginForm("Modificar", "RecepcionOrdenCompra", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdOrdenCompraExt)
     @Html.HiddenFor(q => q.IdEmpresa)

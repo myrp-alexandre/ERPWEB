@@ -92,6 +92,22 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         public ActionResult Nuevo(imp_orden_compra_ext_recepcion_Info model)
         {
             model.lst_detalle = Session["imp_orden_compra_ext_recepcion_det_Info"] as List<imp_orden_compra_ext_recepcion_det_Info>;
+            if (model.lst_detalle == null)
+            {
+                ViewBag.mensaje = "no existe detalle";
+                cargar_combos();
+                return View(model);
+            }
+            else
+            {
+                if (model.lst_detalle.Count() == 0)
+                {
+                    ViewBag.mensaje = "no existe detalle";
+                    cargar_combos();
+                    return View(model);
+                }
+
+            }
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             if (!bus_recepcion.guardarDB(model))
             {
@@ -118,6 +134,23 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         public ActionResult Modificar(imp_orden_compra_ext_recepcion_Info model)
         {
             model.lst_detalle = Session["imp_orden_compra_ext_recepcion_det_Info"] as List<imp_orden_compra_ext_recepcion_det_Info>;
+
+            if(model.lst_detalle==null)
+            {
+                ViewBag.mensaje = "no existe detalle";
+                cargar_combos();
+                return View(model);
+            }
+            else
+            {
+                if (model.lst_detalle.Count() == 0)
+                {
+                    ViewBag.mensaje = "no existe detalle";
+                    cargar_combos();
+                    return View(model);
+                }
+
+            }
             if (!bus_recepcion.modificarDB(model))
             {
                 cargar_combos();

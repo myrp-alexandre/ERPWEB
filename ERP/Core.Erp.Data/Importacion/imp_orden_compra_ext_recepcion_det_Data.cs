@@ -8,7 +8,7 @@ namespace Core.Erp.Data.Importacion
 {
    public class imp_orden_compra_ext_recepcion_det_Data
     {
-        public List<imp_orden_compra_ext_recepcion_det_Info> get_list(int IdEmpresa, decimal IdOrdenCompra_ext)
+        public List<imp_orden_compra_ext_recepcion_det_Info> get_list(int IdEmpresa, decimal IdRecepcion)
         {
             try
             {
@@ -17,7 +17,7 @@ namespace Core.Erp.Data.Importacion
                 {
                     Lista = (from q in Context.vwimp_orden_compra_ext_recepcion_det
                              where q.IdEmpresa == IdEmpresa
-                             && q.IdRecepcion == IdOrdenCompra_ext
+                             && q.IdRecepcion == IdRecepcion
                              select new imp_orden_compra_ext_recepcion_det_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -44,5 +44,24 @@ namespace Core.Erp.Data.Importacion
             }
         }
 
+
+        public bool eliminar(int IdEmpresa, decimal IdRecepcion)
+        {
+            try
+            {
+                using (Entities_importacion context = new Entities_importacion())
+                {
+                    string sql = "delete imp_orden_compra_ext_recepcion_det where IdEmpresa='" + IdEmpresa + "' and IdRecepcion='" + IdRecepcion + "'";
+                    context.Database.ExecuteSqlCommand(sql);
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
