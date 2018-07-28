@@ -119,6 +119,21 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_orden_compra_ext_det", model);
         }
+        
+        public ActionResult GridViewPartial_orden_compra_con_saldo()
+        {
+            List<imp_ordencompra_ext_Info> model = new List<imp_ordencompra_ext_Info>();
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model = bus_orden.get_list(IdEmpresa);
+            return PartialView("_GridViewPartial_orden_compra_con_saldo", model);
+        }
+
+        
+         public ActionResult OrdencompraConsaldos()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            return View(model);
+        }
 
         #endregion
 
@@ -148,6 +163,13 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         {
             model.lst_detalle = Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            string mensaje = bus_orden.validar(model);
+            if(mensaje!="")
+            {
+                cargar_combos();
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
             if (!bus_orden.guardarDB(model))
             {
                 cargar_combos();
@@ -173,6 +195,13 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         public ActionResult Modificar(imp_ordencompra_ext_Info model)
         {
             model.lst_detalle= Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
+            string mensaje = bus_orden.validar(model);
+            if (mensaje != "")
+            {
+                cargar_combos();
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
             if (!bus_orden.modificarDB(model))
             {
                 cargar_combos();

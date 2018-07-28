@@ -8853,6 +8853,8 @@
     <Content Include="Areas\Facturacion\Views\NotaDeDebitoFacturacion\_GridViewPartial_NotaDebitoFacturacion_det.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDeDebitoFacturacion\_GridViewPartial_LoteNotaDebitoFacturacion.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_007.cshtml" />
+    <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_GridViewPartial_orden_compra_con_saldo.cshtml" />
+    <Content Include="Areas\Importacion\Views\OrdenCompraExterior\OrdencompraConsaldos.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -8964,7 +8966,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

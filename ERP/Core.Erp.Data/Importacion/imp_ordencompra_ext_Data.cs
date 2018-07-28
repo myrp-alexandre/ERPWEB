@@ -56,6 +56,53 @@ namespace Core.Erp.Data.Importacion
                 throw;
             }
         }
+        public List<imp_ordencompra_ext_Info> get_list(int IdEmpresa)
+        {
+            try
+            {
+                List<imp_ordencompra_ext_Info> Lista;
+                using (Entities_importacion Context = new Entities_importacion())
+                {
+                    Lista = (from q in Context.vwimp_orden_compra_ext
+                             where q.IdEmpresa == IdEmpresa
+                             && q.cantidad_x_recibir >0
+                             select new imp_ordencompra_ext_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdOrdenCompra_ext = q.IdOrdenCompra_ext,
+                                 IdProveedor = q.IdProveedor,
+                                 IdPais_origen = q.IdPais_origen,
+                                 IdPais_embarque = q.IdPais_embarque,
+                                 IdCiudad_destino = q.IdCiudad_destino,
+                                 IdCatalogo_via = q.IdCatalogo_via,
+                                 IdCatalogo_forma_pago = q.IdCatalogo_forma_pago,
+                                 oe_fecha = q.oe_fecha,
+                                 oe_fecha_llegada_est = q.oe_fecha_llegada_est,
+                                 oe_fecha_embarque_est = q.oe_fecha_embarque_est,
+                                 oe_fecha_desaduanizacion_est = q.oe_fecha_desaduanizacion_est,
+                                 IdCtaCble_importacion = q.IdCtaCble_importacion,
+                                 oe_observacion = q.oe_observacion,
+                                 oe_codigo = q.oe_codigo,
+                                 estado = q.estado,
+                                 IdLiquidacion = q.IdLiquidacion,
+                                 oe_fecha_llegada = q.oe_fecha_llegada,
+                                 oe_fecha_embarque = q.oe_fecha_embarque,
+                                 oe_fecha_desaduanizacion = q.oe_fecha_desaduanizacion,
+                                 cantidad_global = q.cantidad_global,
+                                 cantidad_x_recibir = q.cantidad_x_recibir,
+                                 pe_cedulaRuc = q.pe_cedulaRuc,
+                                 pe_nombreCompleto = q.pe_nombreCompleto
+
+                             }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public imp_ordencompra_ext_Info get_info(int IdEmpresa, decimal IdOrdenCompra_ext)
         {
@@ -249,7 +296,6 @@ namespace Core.Erp.Data.Importacion
                         });
                         secuancia++;
                     }
-                    Context.imp_orden_compra_ext.Add(Entity);
                     Context.SaveChanges();
                 }
                 return true;

@@ -15,7 +15,7 @@ namespace Core.Erp.Data.Importacion
                 List<imp_ordencompra_ext_det_Info> Lista;
                 using (Entities_importacion Context = new Entities_importacion())
                 {
-                    Lista = (from q in Context.imp_orden_compra_ext_det
+                    Lista = (from q in Context.vwimp_orden_compra_ext_det
                              where q.IdEmpresa==IdEmpresa
                              && q.IdOrdenCompra_ext==IdOrdenCompra_ext
                              select new imp_ordencompra_ext_det_Info
@@ -36,7 +36,8 @@ namespace Core.Erp.Data.Importacion
                                  od_total_fob = q.od_total_fob,
                                  od_factor_costo = q.od_factor_costo,
                                  od_costo_bodega = q.od_costo_bodega,
-                                 od_costo_total = q.od_costo_total
+                                 od_costo_total = q.od_costo_total,
+                                 pr_descripcion=q.pr_descripcion
 
                              }).ToList();
                 }
@@ -55,7 +56,7 @@ namespace Core.Erp.Data.Importacion
             {
                 using (Entities_importacion context=new Entities_importacion())
                 {
-                    string sql = "delete imp_ordencompra_ext_det where IdEmpresa='"+IdEmpresa+ "' and IdOrdenCompra_ext='"+ IdOrdenCompra_ext + "'";
+                    string sql = "delete imp_orden_compra_ext_det where IdEmpresa='" + IdEmpresa+ "' and IdOrdenCompra_ext='"+ IdOrdenCompra_ext + "'";
                     context.Database.ExecuteSqlCommand(sql);
                 }
 

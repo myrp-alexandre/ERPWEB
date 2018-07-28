@@ -37,6 +37,8 @@ namespace Core.Erp.Data
         public string pe_cedulaRuc { get; set; }
         public Nullable<double> cantidad_x_recibir { get; set; }
         public Nullable<double> cantidad_global { get; set; }
-        public Nullable<int> IdCatalogo_forma_pago { get; set; }
+        public int IdCatalogo_forma_pago { get; set; }
+        public Nullable<int> IdMoneda_origen { get; set; }
+        public Nullable<int> IdMoneda_destino { get; set; }
     }
 }

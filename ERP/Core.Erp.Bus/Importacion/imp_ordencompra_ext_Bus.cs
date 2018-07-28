@@ -12,11 +12,23 @@ namespace Core.Erp.Bus.Importacion
         imp_ordencompra_ext_Data odata = new imp_ordencompra_ext_Data();
         imp_ordencompra_ext_det_Data odata_det = new imp_ordencompra_ext_det_Data();
 
+        public List<imp_ordencompra_ext_Info> get_list(int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_list(IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<imp_ordencompra_ext_Info> get_list(int IdEmpresa, DateTime fecha_inicio, DateTime Fecha_fin)
         {
             try
             {
-                return odata.get_list(IdEmpresa,fecha_inicio, Fecha_fin);
+                return odata.get_list(IdEmpresa, fecha_inicio, Fecha_fin);
             }
             catch (Exception)
             {
@@ -71,6 +83,31 @@ namespace Core.Erp.Bus.Importacion
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public string validar(imp_ordencompra_ext_Info info)
+        {
+            try
+            {
+                string mensaje = "";
+                if (info.IdProveedor == 0)
+                    mensaje = "Seleccione proveedor";
+                if (info.IdCtaCble_importacion == ""|info.IdCtaCble_importacion==null)
+                    mensaje = "Seleccione cuenta contable";
+                if (info.lst_detalle == null)
+                    mensaje = "No existe detalle para la orden de pago";
+                if(info.lst_detalle!=null)
+                if (info.lst_detalle.Count() == 0)
+                        mensaje = "No existe detalle para la orden de pago";
+                if (info.IdPais_embarque == "" | info.IdPais_embarque==null)
+                    mensaje = "Seleccione país embarque";
+                return mensaje;
+
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

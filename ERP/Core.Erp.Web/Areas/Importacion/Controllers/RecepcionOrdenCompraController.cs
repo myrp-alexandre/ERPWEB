@@ -78,17 +78,12 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         #endregion
 
         #region acciones
-        public ActionResult Nuevo()
+        public ActionResult Nuevo( decimal IdOrdenCompra_ext=0)
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
-            imp_orden_compra_ext_recepcion_Info model = new imp_orden_compra_ext_recepcion_Info
-            {
-                fecha_creacion = DateTime.Now,
-                or_fecha = DateTime.Now
-                
-
-
-            };
+            imp_orden_compra_ext_recepcion_Info model = new imp_orden_compra_ext_recepcion_Info();
+            model=  bus_recepcion.get_rcepcion_mercancia(IdEmpresa, IdOrdenCompra_ext);
             cargar_combos_detalle();
             cargar_combos();
             return View(model);

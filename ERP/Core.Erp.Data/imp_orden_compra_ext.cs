@@ -30,7 +30,7 @@ namespace Core.Erp.Data
         public string IdPais_embarque { get; set; }
         public string IdCiudad_destino { get; set; }
         public int IdCatalogo_via { get; set; }
-        public Nullable<int> IdCatalogo_forma_pago { get; set; }
+        public int IdCatalogo_forma_pago { get; set; }
         public System.DateTime oe_fecha { get; set; }
         public Nullable<System.DateTime> oe_fecha_llegada_est { get; set; }
         public Nullable<System.DateTime> oe_fecha_embarque_est { get; set; }
