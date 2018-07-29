@@ -548,6 +548,7 @@ namespace Core.Erp.Data.Facturacion
                             entity.MotiAnula = null;
                         }
                     #endregion
+                    db_f.SaveChanges();
                 }
 
                 return true;
