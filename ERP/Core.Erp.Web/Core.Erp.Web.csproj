@@ -8865,6 +8865,8 @@
     <Content Include="Areas\Importacion\Views\LiquidacionImportacion\Anular.cshtml" />
     <Content Include="Areas\Importacion\Views\LiquidacionImportacion\_GridViewPartial_liquidacion_importacion_det.cshtml" />
     <Content Include="Areas\Importacion\Views\LiquidacionImportacion\_GridViewPartial_liquidacion_importacion.cshtml" />
+    <Content Include="Areas\Importacion\Views\RecepcionOrdenCompra\_GridViewPartial_gastos_asignados.cshtml" />
+    <Content Include="Areas\Importacion\Views\RecepcionOrdenCompra\_GridViewPartial_gastos_por_asignar.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
