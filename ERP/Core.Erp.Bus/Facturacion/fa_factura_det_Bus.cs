@@ -19,6 +19,18 @@ namespace Core.Erp.Bus.Facturacion
 
                 throw;
             }
-        }        
+        }
+
+        public List<fa_factura_det_Info> get_list_proformas_x_facturar(int IdEmpresa, int IdSucursal, decimal IdCliente)
+        {
+            try
+            {
+                return odata.get_list_proformas_x_facturar(IdEmpresa, IdSucursal, IdCliente);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
