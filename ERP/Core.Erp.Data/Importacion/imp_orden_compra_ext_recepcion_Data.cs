@@ -115,9 +115,10 @@ namespace Core.Erp.Data.Importacion
                         IdOrdenCompraExt = info.IdOrdenCompraExt,
                       
                         estado = true
-
+                        
                     };
-
+                    Context.imp_orden_compra_ext_recepcion.Add(Entity);
+                    Context.SaveChanges();
                     foreach (var item in info.lst_detalle)
                     {
                         imp_orden_compra_ext_det detalle = Context.imp_orden_compra_ext_det.FirstOrDefault( q => 

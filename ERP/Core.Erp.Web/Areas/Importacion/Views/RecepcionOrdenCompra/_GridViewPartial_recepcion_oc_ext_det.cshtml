@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_orden_compra_ext_det";
         settings.CallbackRouteValues = new { Controller = "RecepcionOrdencompra", Action = "GridViewPartial_recepcion_oc_ext_det", Area = "Importacion" };
-        settings.KeyFieldName = "secuencia";
+        settings.KeyFieldName = "Secuencia";
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "RecepcionOrdencompra", Action = "EditingUpdate", Area = "Importacion" };
@@ -53,7 +53,7 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "cantidad";
+            column.FieldName = "od_cantidad_recepcion";
             column.Caption = "Cantidad recibida";
             column.Width = Unit.Percentage(15);
 

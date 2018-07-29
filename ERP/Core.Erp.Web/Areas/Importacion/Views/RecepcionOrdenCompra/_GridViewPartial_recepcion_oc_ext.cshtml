@@ -98,15 +98,7 @@
             });
         });
         settings.Columns.Add("or_observacion", "Obaservación").Width = Unit.Percentage(30);
-        settings.Columns.Add(column =>
-        {
-            column.Caption = "Ingreso";
-            column.SetDataItemTemplateContent(c =>
-            {
-                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("INV_001", "InventarioReportes", new { Area = "Reportes", IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal_inv"), IdMovi_inven_tipo = DataBinder.Eval(c.DataItem, "IdMovi_inven_tipo_inv"), IdNumMovi = DataBinder.Eval(c.DataItem, "IdNumMovi_inv") }, Request.Url.Scheme) + "');\"></span>");
-            });
-            column.Width = Unit.Percentage(5);
-        });
+       
     });
 }
 @grid.Bind(Model).GetHtml()

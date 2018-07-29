@@ -175,6 +175,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost]
         public ActionResult Anular(imp_orden_compra_ext_recepcion_Info model)
         {
+            model.lst_detalle = Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
             if (!bus_recepcion.anularDB(model))
             {
                 cargar_combos();
