@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.Importacion.imp_orden_compra_ext_recepcion_Info
+﻿@model Core.Erp.Info.Importacion.imp_liquidacion_det_x_imp_orden_compra_ext_Info
 @{
     ViewBag.Title = "Recepcion de ordene de compra";
     //if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -16,7 +16,7 @@
     }
 }
 
-@using (Html.BeginForm("Nuevo", "RecepcionOrdenCompra", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "LiquidacionImportacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdOrdenCompraExt)
     @Html.HiddenFor(q => q.IdEmpresa)
@@ -88,22 +88,50 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdCtaCble_importacion">Detalle de orden de compra</label>
-                    @Html.Action("GridViewPartial_recepcion_oc_ext_det")
-                </div>
-            </div>
 
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_detalle_items" aria-controls="informacion_items" role="tab" data-toggle="tab">Detalle de productos</a>
+            </li>
+            <li>
+                <a href="#tab_detalle_gastos" aria-controls="gastos" role="tab" data-toggle="tab">Detalle de gastos incurridos</a>
+            </li>
+            <li>
+                <a href="#tab_diarios" aria-controls="diarios" role="tab" data-toggle="tab">Diarios contables</a>
+            </li>
+
+        </ul>
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_detalle_items">
+                @Html.Action("GridViewPartial_orden_compra_ext_det")
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle_gastos">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-12">
+                            @Html.Action("GridViewPartial_gastos_por_asignar")
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-12">
+                            @Html.Action("GridViewPartial_gastos_asignados")
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_diarios">
+
+
+            </div>
         </div>
     </div>
 
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index", "RecepcionOrdenCompra", new { Area ="Importacion" }, null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index", "LiquidacionImportacion", new { Area ="Importacion" }, null)">Cancelar</a>
     </div>
 
     @section Scripts {
