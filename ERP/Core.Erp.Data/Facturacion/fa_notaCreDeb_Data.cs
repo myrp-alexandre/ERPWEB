@@ -454,7 +454,7 @@ namespace Core.Erp.Data.Facturacion
                     #endregion
 
                     #region Cobranza
-                    if (info.lst_cruce.Count != 0)
+                    if (info.CreDeb == "C" && info.lst_cruce.Count != 0)
                     {
                         cxc_cobro_Info cobro = armar_cobro(info);                                                
                         if (cobro != null)

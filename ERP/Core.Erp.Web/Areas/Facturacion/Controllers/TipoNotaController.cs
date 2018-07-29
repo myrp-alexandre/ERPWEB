@@ -74,6 +74,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Modificar(fa_TipoNota_Info model)
         {
+            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             model.Lst_fa_TipoNota_x_Empresa_x_Sucursal = List_fa_TipoNota_x_Empresa_x_Sucursal.get_list();
             if (!bus_tiponota.modificarDB(model))
             {
