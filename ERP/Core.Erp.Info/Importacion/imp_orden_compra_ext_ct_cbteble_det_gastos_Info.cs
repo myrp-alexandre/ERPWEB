@@ -15,5 +15,7 @@ namespace Core.Erp.Info.Importacion
         public decimal IdCbteCble { get; set; }
         public int secuencia_ct { get; set; }
         public Nullable<int> IdGasto_tipo { get; set; }
+        public int dc_Valor { get; set; }
+        public string pc_Cuenta { get; set; }
     }
 }

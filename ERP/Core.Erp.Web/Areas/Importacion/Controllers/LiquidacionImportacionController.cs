@@ -36,7 +36,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         }
 
 
-        public ActionResult GridViewPartial_recepcion_oc_ext(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
+        public ActionResult GridViewPartial_liquidacion_importacion(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
@@ -47,17 +47,33 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
             List<imp_liquidacion_det_x_imp_orden_compra_ext_Info> model = new List<imp_liquidacion_det_x_imp_orden_compra_ext_Info>();
             //model = bus_liquidacion_oc.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
-            return PartialView("_GridViewPartial_recepcion_oc_ext", model);
+            return PartialView("_GridViewPartial_liquidacion_importacion", model);
         }
-        public ActionResult GridViewPartial_recepcion_oc_ext_det()
+        public ActionResult GridViewPartial_liquidacion_importacion_det()
         {
             List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> model = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
-            model = Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
+            model = Session["lst_detalle_oc"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
             if (model == null)
                 model = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
-            return PartialView("_GridViewPartial_recepcion_oc_ext_det", model);
+            return PartialView("_GridViewPartial_liquidacion_importacion_det", model);
         }
 
+        public ActionResult GridViewPartial_gastos_asignados()
+        {
+            List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> model = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
+            model = Session["lst_gastos_asignados"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
+            if (model == null)
+                model = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
+            return PartialView("_GridViewPartial_gastos_asignados", model);
+        }
+        public ActionResult GridViewPartial_gastos_por_asignar()
+        {
+            List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> model = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
+            model = Session["lst_gastos_por_asignar"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
+            if (model == null)
+                model = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
+            return PartialView("_GridViewPartial_gastos_por_asignar", model);
+        }
         #endregion
 
         #region acciones
@@ -68,14 +84,14 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             imp_liquidacion_det_x_imp_orden_compra_ext_Info model = new imp_liquidacion_det_x_imp_orden_compra_ext_Info();
             //model = bus_liquidacion_oc.get_rcepcion_mercancia(IdEmpresa, IdOrdenCompra_ext);
             if (model != null)
-                Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] = model.lst_gastos;
+                Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] = model.lst_gastos_asignados;
             cargar_combos();
             return View(model);
         }
         [HttpPost]
         public ActionResult Nuevo(imp_liquidacion_det_x_imp_orden_compra_ext_Info model)
         {
-            model.lst_gastos = Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
+            model.lst_gastos_asignados = Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
             if (model.lst_detalle_oc == null)
             {
                 ViewBag.mensaje = "no existe detalle";
@@ -84,7 +100,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             }
             else
             {
-                if (model.lst_gastos.Count() == 0)
+                if (model.lst_gastos_asignados.Count() == 0)
                 {
                     ViewBag.mensaje = "no existe detalle";
                     cargar_combos();
@@ -117,9 +133,9 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost]
         public ActionResult Modificar(imp_liquidacion_det_x_imp_orden_compra_ext_Info model)
         {
-            model.lst_gastos = Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
+            model.lst_gastos_asignados = Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
 
-            if (model.lst_gastos == null)
+            if (model.lst_gastos_asignados == null)
             {
                 ViewBag.mensaje = "no existe detalle";
                 cargar_combos();
@@ -127,7 +143,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             }
             else
             {
-                if (model.lst_gastos.Count() == 0)
+                if (model.lst_gastos_asignados.Count() == 0)
                 {
                     ViewBag.mensaje = "no existe detalle";
                     cargar_combos();
@@ -159,7 +175,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost]
         public ActionResult Anular(imp_liquidacion_det_x_imp_orden_compra_ext_Info model)
         {
-            model.lst_gastos = Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
+            model.lst_gastos_asignados = Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
             if (!bus_liquidacion_oc.anularDB(model))
             {
                 cargar_combos();

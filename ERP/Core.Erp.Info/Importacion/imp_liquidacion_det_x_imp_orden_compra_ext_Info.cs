@@ -31,7 +31,9 @@ namespace Core.Erp.Info.Importacion
         public Nullable<System.DateTime> fecha_modificacion { get; set; }
         public string IdUsuario_anulacion { get; set; }
         public Nullable<System.DateTime> fecha_anulacion { get; set; }
-        public List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> lst_gastos { get; set; }
+        public List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> lst_gastos_asignados { get; set; }
+        public List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> lst_gastos_por_asignar { get; set; }
+
         public List<imp_ordencompra_ext_det_Info> lst_detalle_oc { get; set; }
 
     }

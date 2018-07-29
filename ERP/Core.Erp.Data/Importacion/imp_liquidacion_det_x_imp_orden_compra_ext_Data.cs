@@ -129,7 +129,7 @@ namespace Core.Erp.Data.Importacion
 
                     };
                     Context.imp_liquidacion_det_x_imp_orden_compra_ext.Add(Entity);
-                    foreach (var item in info.lst_gastos)
+                    foreach (var item in info.lst_gastos_asignados)
                     {
                         Context.imp_orden_compra_ext_ct_cbteble_det_gastos.Add(new imp_orden_compra_ext_ct_cbteble_det_gastos
                         {
@@ -165,7 +165,7 @@ namespace Core.Erp.Data.Importacion
                     Entity.observacion = info.observacion;
                     Entity.fecha_modificacion = DateTime.Now;
 
-                    foreach (var item in info.lst_gastos)
+                    foreach (var item in info.lst_gastos_asignados)
                     {
                         Context.imp_orden_compra_ext_ct_cbteble_det_gastos.Add(new imp_orden_compra_ext_ct_cbteble_det_gastos
                         {

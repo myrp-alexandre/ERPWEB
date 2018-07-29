@@ -18,7 +18,7 @@
 
 @using (Html.BeginForm("Nuevo", "LiquidacionImportacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdOrdenCompraExt)
+    @Html.HiddenFor(q => q.IdLiquidacion)
     @Html.HiddenFor(q => q.IdEmpresa)
 
     <div class="row">
@@ -26,8 +26,8 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdOrdenCompraExt">Id Orden compra</label>
-                    @Html.TextBoxFor(q => q.IdOrdenCompraExt, new { @class = "form-control", @disabled = "disabled" })
-                    @Html.ValidationMessageFor(q => q.IdOrdenCompraExt, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(q => q.IdOrdenCompra_ext, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(q => q.IdOrdenCompra_ext, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
@@ -67,8 +67,8 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.or_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "or_fecha" })
-                        @Html.ValidationMessageFor(q => q.oe_fecha_embarque, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(q => q.oe_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "or_fecha" })
+                        @Html.ValidationMessageFor(q => q.oe_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="or_observacion">Observación recepcion de mercaderia</label>
-                    @Html.TextAreaFor(q => q.or_observacion, new { @class = "form-control" })
+                    @Html.TextAreaFor(q => q.observacion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.oe_observacion, "", new { @class = "text-danger" })
                 </div>
             </div>
