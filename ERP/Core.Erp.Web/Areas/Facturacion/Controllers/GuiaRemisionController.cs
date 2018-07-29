@@ -20,6 +20,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_guia_remision_det_Bus bus_detalle = new fa_guia_remision_det_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         fa_PuntoVta_Bus bus_punto_venta = new fa_PuntoVta_Bus();
+        tb_transportista_Bus bus_transportista = new tb_transportista_Bus();
+        tb_sis_Documento_Tipo_Talonario_Bus bus_talonario = new tb_sis_Documento_Tipo_Talonario_Bus();
+
         #region Metodos ComboBox bajo demanda cliente
         public ActionResult CmbCliente_Guia()
         {
@@ -87,10 +90,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult Nuevo()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            int IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
             fa_guia_remision_Info model = new fa_guia_remision_Info
             {
                 gi_fecha = DateTime.Now,
-
+                gi_FechaFinTraslado=DateTime.Now,
+                gi_FechaInicioTraslado=DateTime.Now,
+                IdEmpresa=IdEmpresa,
+                IdSucursal=IdSucursal
             };
             cargar_combos(model);
             return View(model);
@@ -172,6 +179,34 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         #endregion
 
+        #region Json
+      
+        public JsonResult CargarPuntosDeVenta(int IdSucursal = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            var resultado = bus_punto_venta.get_list(IdEmpresa, IdSucursal, false);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+          public JsonResult GetUltimoDocumento(int IdSucursal = 0, int IdPuntoVta = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            tb_sis_Documento_Tipo_Talonario_Info resultado;
+            var punto_venta = bus_punto_venta.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
+            if (punto_venta != null)
+            {
+                tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+                var bodega = bus_bodega.get_info(IdEmpresa, IdSucursal, Convert.ToInt32(punto_venta.IdBodega));
+                var sucursal = bus_sucursal.get_info(IdEmpresa, IdSucursal);
+                resultado = bus_talonario.get_info_ultimo_no_usado(IdEmpresa, sucursal.Su_CodigoEstablecimiento, bodega.cod_punto_emision, "GUIA");
+            }
+            else
+                resultado = new tb_sis_Documento_Tipo_Talonario_Info();
+            if (resultado == null)
+                resultado = new tb_sis_Documento_Tipo_Talonario_Info();
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
         private void cargar_combos(fa_guia_remision_Info model)
         {
             var lst_sucursal = bus_sucursal.get_list(model.IdEmpresa, false);
@@ -179,6 +214,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             var lst_punto_venta = bus_punto_venta.get_list(model.IdEmpresa, model.IdSucursal, false);
             ViewBag.lst_punto_venta = lst_punto_venta;
+
+            var lst_transportista = bus_transportista.get_list(model.IdEmpresa, false);
+            ViewBag.lst_transportista = lst_transportista;
         }
        
     }
