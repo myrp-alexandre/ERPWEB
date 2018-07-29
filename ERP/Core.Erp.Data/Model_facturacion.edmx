@@ -933,6 +933,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_factura_sin_g
             <PropertyRef Name="IdCliente" />
             <PropertyRef Name="vt_tipoDoc" />
             <PropertyRef Name="vt_Observacion" />
+            <PropertyRef Name="vt_fecha" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
@@ -945,6 +946,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_factura_sin_g
           <Property Name="vt_serie2" Type="varchar" MaxLength="3" />
           <Property Name="vt_NumFactura" Type="varchar" MaxLength="20" />
           <Property Name="vt_Observacion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="vt_fecha" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_guia_remision' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1867,7 +1869,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
     [vwfa_factura_sin_guia].[vt_serie1] AS [vt_serie1], 
     [vwfa_factura_sin_guia].[vt_serie2] AS [vt_serie2], 
     [vwfa_factura_sin_guia].[vt_NumFactura] AS [vt_NumFactura], 
-    [vwfa_factura_sin_guia].[vt_Observacion] AS [vt_Observacion]
+    [vwfa_factura_sin_guia].[vt_Observacion] AS [vt_Observacion], 
+    [vwfa_factura_sin_guia].[vt_fecha] AS [vt_fecha]
     FROM [web].[vwfa_factura_sin_guia] AS [vwfa_factura_sin_guia]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_guia_remision" EntityType="Self.vwfa_guia_remision" store:Type="Views" store:Schema="web">
@@ -3981,6 +3984,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
             <PropertyRef Name="IdCliente" />
             <PropertyRef Name="vt_tipoDoc" />
             <PropertyRef Name="vt_Observacion" />
+            <PropertyRef Name="vt_fecha" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdSucursal" Type="Int32" Nullable="false" />
@@ -3993,6 +3997,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
           <Property Name="vt_serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="vt_Observacion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -4877,6 +4882,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
           <EntitySetMapping Name="vwfa_factura_sin_guia">
             <EntityTypeMapping TypeName="Model_facturacion.vwfa_factura_sin_guia">
               <MappingFragment StoreEntitySet="vwfa_factura_sin_guia">
+                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
                 <ScalarProperty Name="vt_Observacion" ColumnName="vt_Observacion" />
                 <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
                 <ScalarProperty Name="vt_serie2" ColumnName="vt_serie2" />

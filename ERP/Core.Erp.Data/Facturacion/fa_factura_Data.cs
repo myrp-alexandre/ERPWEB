@@ -56,6 +56,37 @@ namespace Core.Erp.Data.Facturacion
                 throw;
             }
         }
+        public List<fa_factura_Info> get_list_fac_sin_guia(int IdEmpresa, decimal IdCliente)
+        {
+            try
+            {
+                List<fa_factura_Info> Lista;
+                using (Entities_facturacion Context = new Entities_facturacion())
+                {
+                    Lista = (from q in Context.vwfa_factura_sin_guia
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdCliente==IdCliente
+                             select new fa_factura_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdSucursal = q.IdSucursal,
+                                 IdBodega = q.IdBodega,
+                                 IdCbteVta = q.IdCbteVta,
+                                 vt_serie1=q.vt_serie1,
+                                 vt_serie2=q.vt_serie2,
+                                 vt_NumFactura=q.vt_NumFactura,
+                                 vt_Observacion=q.vt_Observacion,
+                                 vt_fecha=q.vt_fecha
+                               
+                             }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public bool factura_existe(int IdEmpresa, string Serie1, string Serie2, string NumFactura)
         {

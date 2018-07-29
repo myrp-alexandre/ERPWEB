@@ -25,5 +25,6 @@ namespace Core.Erp.Data
         public string vt_serie2 { get; set; }
         public string vt_NumFactura { get; set; }
         public string vt_Observacion { get; set; }
+        public System.DateTime vt_fecha { get; set; }
     }
 }

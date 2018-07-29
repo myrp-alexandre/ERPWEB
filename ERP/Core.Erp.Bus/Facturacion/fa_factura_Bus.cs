@@ -20,6 +20,18 @@ namespace Core.Erp.Bus.Facturacion
                 throw;
             }
         }
+        public List<fa_factura_Info> get_list_fac_sin_guia(int IdEmpresa, decimal IdCliente)
+        {
+            try
+            {
+                return odata.get_list_fac_sin_guia(IdEmpresa, IdCliente);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public fa_factura_Info get_info(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta)
         {
