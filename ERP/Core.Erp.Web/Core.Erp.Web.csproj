@@ -281,6 +281,7 @@
     <Compile Include="Areas\Facturacion\Controllers\ClienteController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ClienteTipoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\FacturaController.cs" />
+    <Compile Include="Areas\Facturacion\Controllers\GuiaRemisionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\NotaDeCreditoFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\NotaDeDebitoFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ParametrosFacturacionController.cs" />
@@ -291,7 +292,6 @@
     <Compile Include="Areas\Facturacion\Controllers\TipoNotaController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\VendedorController.cs" />
     <Compile Include="Areas\Facturacion\FacturacionAreaRegistration.cs" />
-    <Compile Include="Areas\Facturacion\GuiaRemisionController.cs" />
     <Compile Include="Areas\General\Controllers\BancoController.cs" />
     <Compile Include="Areas\General\Controllers\BodegaController.cs" />
     <Compile Include="Areas\General\Controllers\CatalogoController.cs" />
@@ -8870,6 +8870,11 @@
     <Content Include="Areas\Importacion\Views\LiquidacionImportacion\_GridViewPartial_gastos_por_asignar.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\Ordencompra_por_liquidar.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_GridViewPartial_orden_compra_por_liquidar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\GuiaRemision\Nuevo.cshtml" />
+    <Content Include="Areas\Facturacion\Views\GuiaRemision\Modificar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\GuiaRemision\Index.cshtml" />
+    <Content Include="Areas\Facturacion\Views\GuiaRemision\Anular.cshtml" />
+    <Content Include="Areas\Facturacion\Views\GuiaRemision\_CmbCliente_Guia.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -8942,7 +8947,6 @@
     <Folder Include="Areas\CuentasPorCobrar\Models\" />
     <Folder Include="Areas\CuentasPorPagar\Models\" />
     <Folder Include="Areas\Facturacion\Models\" />
-    <Folder Include="Areas\Facturacion\Views\GuiaRemision\" />
     <Folder Include="Areas\General\Models\" />
     <Folder Include="Areas\Importacion\Models\" />
     <Folder Include="Areas\Inventario\Models\" />
