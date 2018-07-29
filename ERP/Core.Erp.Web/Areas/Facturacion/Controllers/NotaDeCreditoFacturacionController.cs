@@ -436,6 +436,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 return RedirectToAction("Index");
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdBodega, IdNota);
             List_det.set_list(model.lst_det);
+            model.lst_cruce = bus_cruce.get_list(IdEmpresa, IdSucursal, IdBodega, IdNota);
+            List_cruce.set_list(model.lst_cruce);
             cargar_combos(model);
             return View(model);
         }
@@ -466,6 +468,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 return RedirectToAction("Index");
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdBodega, IdNota);
             List_det.set_list(model.lst_det);
+            model.lst_cruce = bus_cruce.get_list(IdEmpresa, IdSucursal, IdBodega, IdNota);
+            List_cruce.set_list(model.lst_cruce);
             cargar_combos(model);
             return View(model);
         }

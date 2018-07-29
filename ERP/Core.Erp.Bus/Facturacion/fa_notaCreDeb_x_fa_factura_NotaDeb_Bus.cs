@@ -22,5 +22,17 @@ namespace Core.Erp.Bus.Facturacion
                 throw;
             }
         }
+
+        public List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdNota)
+        {
+            try
+            {
+                return odata.get_list(IdEmpresa, IdSucursal, IdBodega, IdNota);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

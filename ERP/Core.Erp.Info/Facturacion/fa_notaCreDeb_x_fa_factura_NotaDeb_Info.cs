@@ -23,7 +23,7 @@ namespace Core.Erp.Info.Facturacion
         #region Campos que no existen en la tabla
         public string secuencial { get; set; }
         public string vt_NumDocumento { get; set; }
-        public DateTime vt_fecha { get; set; }
+        public DateTime? vt_fecha { get; set; }
         public double? vt_total { get; set; }
         public double? Saldo { get; set; }
         public double? vt_Subtotal { get; set; }

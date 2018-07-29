@@ -72,5 +72,46 @@ namespace Core.Erp.Data.Facturacion
                 throw;
             }
         }
+
+        public List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdNota)
+        {
+            try
+            {
+                List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> Lista;
+
+                using (Entities_facturacion Context = new Entities_facturacion())
+                {
+                    Lista = (from q in Context.vwfa_notaCreDeb_x_fa_factura_NotaDeb
+                             where q.IdEmpresa_nt == IdEmpresa
+                             && q.IdSucursal_nt == IdSucursal
+                             && q.IdBodega_nt == IdBodega
+                             && q.IdNota_nt == IdNota
+                             select new fa_notaCreDeb_x_fa_factura_NotaDeb_Info
+                             {
+                                 IdEmpresa_fac_nd_doc_mod = q.IdEmpresa_nt,
+                                 IdSucursal_fac_nd_doc_mod = q.IdSucursal_fac_nd_doc_mod,
+                                 IdBodega_fac_nd_doc_mod = q.IdBodega_fac_nd_doc_mod,
+                                 vt_tipoDoc = q.vt_tipoDoc,
+                                 IdCbteVta_fac_nd_doc_mod = q.IdCbteVta_fac_nd_doc_mod,
+                                 vt_NumDocumento = q.vt_NumFactura,
+                                 Observacion = q.vt_Observacion,
+                                 vt_fecha = q.vt_fecha,
+                                 vt_total = q.vt_total,
+                                 Saldo = q.saldo_sin_cobro,
+                                 vt_Subtotal = q.vt_Subtotal,
+                                 vt_iva = q.vt_iva,
+                                 Saldo_final = q.saldo,
+                                 seleccionado = true,
+                                 Valor_Aplicado = q.Valor_Aplicado
+                             }).ToList();
+                }
+                Lista.ForEach(q => { q.secuencial = q.vt_tipoDoc + "-" + q.IdBodega_fac_nd_doc_mod.ToString() + "-" + q.IdCbteVta_fac_nd_doc_mod.ToString(); });
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
