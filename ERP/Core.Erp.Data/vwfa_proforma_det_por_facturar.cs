@@ -29,9 +29,11 @@ namespace Core.Erp.Data
         public double pd_por_iva { get; set; }
         public double pd_iva { get; set; }
         public double pd_total { get; set; }
-        public double pd_cantidad_pendiente { get; set; }
-        public decimal IdCliente { get; set; }
-        public int IdBodega { get; set; }
         public bool anulado { get; set; }
+        public string pr_descripcion { get; set; }
+        public string nom_presentacion { get; set; }
+        public string lote_num_lote { get; set; }
+        public Nullable<System.DateTime> lote_fecha_vcto { get; set; }
+        public decimal IdCliente { get; set; }
     }
 }

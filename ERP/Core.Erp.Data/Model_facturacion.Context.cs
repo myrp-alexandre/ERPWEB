@@ -41,7 +41,6 @@ namespace Core.Erp.Data
         public virtual DbSet<fa_factura> fa_factura { get; set; }
         public virtual DbSet<fa_factura_det> fa_factura_det { get; set; }
         public virtual DbSet<vwfa_proforma> vwfa_proforma { get; set; }
-        public virtual DbSet<vwfa_proforma_det_por_facturar> vwfa_proforma_det_por_facturar { get; set; }
         public virtual DbSet<vwfa_factura> vwfa_factura { get; set; }
         public virtual DbSet<fa_cuotas_x_doc> fa_cuotas_x_doc { get; set; }
         public virtual DbSet<fa_factura_x_ct_cbtecble> fa_factura_x_ct_cbtecble { get; set; }
@@ -62,5 +61,6 @@ namespace Core.Erp.Data
         public virtual DbSet<fa_guia_remision_det_x_factura> fa_guia_remision_det_x_factura { get; set; }
         public virtual DbSet<vwfa_notaCreDeb_det> vwfa_notaCreDeb_det { get; set; }
         public virtual DbSet<vwfa_notaCreDeb_x_fa_factura_NotaDeb> vwfa_notaCreDeb_x_fa_factura_NotaDeb { get; set; }
+        public virtual DbSet<vwfa_proforma_det_por_facturar> vwfa_proforma_det_por_facturar { get; set; }
     }
 }
