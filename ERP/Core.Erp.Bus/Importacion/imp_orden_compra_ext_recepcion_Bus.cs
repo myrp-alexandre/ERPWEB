@@ -15,8 +15,6 @@ namespace Core.Erp.Bus.Importacion
         imp_orden_compra_ext_recepcion_Data odata = new imp_orden_compra_ext_recepcion_Data();
         imp_ordencompra_ext_Data odata_oc = new imp_ordencompra_ext_Data();
         imp_ordencompra_ext_det_Data odta_det_oc = new imp_ordencompra_ext_det_Data();
-        imp_parametro_Data data_parametros = new imp_parametro_Data();
-        in_Ing_Egr_Inven_Bus bus_ingreso = new in_Ing_Egr_Inven_Bus();
         imp_ordencompra_ext_det_Data odata_det = new imp_ordencompra_ext_det_Data();
         public List<imp_orden_compra_ext_recepcion_Info> get_list(int IdEmpresa, DateTime fecha_inicio, DateTime Fecha_fin)
         {
@@ -86,7 +84,6 @@ namespace Core.Erp.Bus.Importacion
         {
             try
             {
-                var parametros = data_parametros.get_info(IdEmpresa);
                 imp_orden_compra_ext_recepcion_Info info = new imp_orden_compra_ext_recepcion_Info();
                 var orden = odata_oc.get_info_recepcion_merca(IdEmpresa, IdOrdenCompra_ext);
                 var detalle_oc = odta_det_oc.get_list(IdEmpresa, IdOrdenCompra_ext);
@@ -100,10 +97,6 @@ namespace Core.Erp.Bus.Importacion
                     info.oe_fecha_embarque = orden.oe_fecha_embarque;
                     info.oe_fecha_llegada = orden.oe_fecha_embarque;
                     info.IdCatalogo_via = orden.IdCatalogo_via;
-                    info.IdSucursal_inv = parametros.IdSucursal;
-                    info.IdBodega = parametros.IdBodega;
-                    info.IdMovi_inven_tipo_inv = parametros.IdMovi_inven_tipo_ing;
-                    info.IdMotivo_Inv = parametros.IdMotivo_Inv_ing;
                     info.or_fecha = DateTime.Now;
                     info.lst_detalle = detalle_oc;
                 }
