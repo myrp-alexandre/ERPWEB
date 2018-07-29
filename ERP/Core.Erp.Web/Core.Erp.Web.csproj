@@ -286,7 +286,6 @@
     <Compile Include="Areas\Facturacion\Controllers\NotaDeDebitoFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ParametrosFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ProformaController.cs" />
-    <Compile Include="Areas\Facturacion\Controllers\ProformaFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\PuntoVentaController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\TerminoPagoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\TipoNotaController.cs" />
@@ -8814,7 +8813,6 @@
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_GridViewPartial_orden_compra_ext_det.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_CmbProveedor_exterior.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_006.cshtml" />
-    <Content Include="Areas\Facturacion\Views\ProformaFacturacion\Index.cshtml" />
     <Content Include="Areas\Facturacion\Views\Factura\Nuevo.cshtml" />
     <Content Include="Areas\Facturacion\Views\Factura\Modificar.cshtml" />
     <Content Include="Areas\Facturacion\Views\Factura\Index.cshtml" />
@@ -8880,11 +8878,6 @@
     <Content Include="Areas\Facturacion\Views\GuiaRemision\_GridViewPartial_guias_remision_det.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDeDebitoFacturacion\_GridViewPartial_CruceND.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDeDebitoFacturacion\_GridViewPartial_CruceND_x_cruzar.cshtml" />
-    <Content Include="Areas\Facturacion\Views\ProformaFacturacion\_GridViewPartial_FProforma_det.cshtml" />
-    <Content Include="Areas\Facturacion\Views\ProformaFacturacion\_GridViewPartial_FProforma_cuotas.cshtml" />
-    <Content Include="Areas\Facturacion\Views\ProformaFacturacion\_CmbProducto_FProforma.cshtml" />
-    <Content Include="Areas\Facturacion\Views\ProformaFacturacion\_CmbCliente_FProformaFactura.cshtml" />
-    <Content Include="Areas\Facturacion\Views\ProformaFacturacion\_GridViewPartial_LoteFProforma.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
