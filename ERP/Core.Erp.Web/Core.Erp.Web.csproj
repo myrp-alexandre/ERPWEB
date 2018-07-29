@@ -317,6 +317,7 @@
     <Compile Include="Areas\Importacion\Controllers\CatalogoImportacionController.cs" />
     <Compile Include="Areas\Importacion\Controllers\CatalogoTipoImportacionController.cs" />
     <Compile Include="Areas\Importacion\Controllers\GastosImportacionController.cs" />
+    <Compile Include="Areas\Importacion\Controllers\LiquidacionImportacionController.cs" />
     <Compile Include="Areas\Importacion\Controllers\OrdenCompraExteriorController.cs" />
     <Compile Include="Areas\Importacion\Controllers\ParametrosImportacionController.cs" />
     <Compile Include="Areas\Importacion\Controllers\RecepcionOrdenCompraController.cs" />
@@ -8932,6 +8933,7 @@
     <Folder Include="Areas\Facturacion\Models\" />
     <Folder Include="Areas\General\Models\" />
     <Folder Include="Areas\Importacion\Models\" />
+    <Folder Include="Areas\Importacion\Views\LiquidacionImportacion\" />
     <Folder Include="Areas\Inventario\Models\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
