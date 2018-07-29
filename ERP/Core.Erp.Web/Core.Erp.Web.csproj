@@ -8859,6 +8859,12 @@
     <Content Include="Areas\Importacion\Views\ParametrosImportacion\_CmbCuenta_contable.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDeCreditoFacturacion\_GridViewPartial_CruceNC.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDeCreditoFacturacion\_GridViewPartial_CruceNC_x_cruzar.cshtml" />
+    <Content Include="Areas\Importacion\Views\LiquidacionImportacion\Nuevo.cshtml" />
+    <Content Include="Areas\Importacion\Views\LiquidacionImportacion\Modificar.cshtml" />
+    <Content Include="Areas\Importacion\Views\LiquidacionImportacion\Index.cshtml" />
+    <Content Include="Areas\Importacion\Views\LiquidacionImportacion\Anular.cshtml" />
+    <Content Include="Areas\Importacion\Views\LiquidacionImportacion\_GridViewPartial_liquidacion_importacion_det.cshtml" />
+    <Content Include="Areas\Importacion\Views\LiquidacionImportacion\_GridViewPartial_liquidacion_importacion.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -8933,7 +8939,6 @@
     <Folder Include="Areas\Facturacion\Models\" />
     <Folder Include="Areas\General\Models\" />
     <Folder Include="Areas\Importacion\Models\" />
-    <Folder Include="Areas\Importacion\Views\LiquidacionImportacion\" />
     <Folder Include="Areas\Inventario\Models\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
