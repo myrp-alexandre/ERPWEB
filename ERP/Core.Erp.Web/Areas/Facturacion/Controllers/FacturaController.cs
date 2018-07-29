@@ -540,6 +540,15 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         #endregion
 
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_PFactura_det()
+        {
+            var model = List_det.get_list();
+            cargar_combos_detalle();
+            SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["IdCliente"]) ? Request.Params["IdCliente"].ToString() : "-1";
+            return PartialView("_GridViewPartial_PFactura_det", model);
+        }
+
     }
 
     public class fa_factura_det_List
