@@ -17,8 +17,8 @@ namespace Core.Erp.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public imp_liquidacion()
         {
-            this.imp_liquidacion_det_x_imp_orden_compra_ext = new HashSet<imp_liquidacion_det_x_imp_orden_compra_ext>();
             this.imp_orden_compra_ext = new HashSet<imp_orden_compra_ext>();
+            this.imp_liquidacion_det_x_imp_orden_compra_ext = new HashSet<imp_liquidacion_det_x_imp_orden_compra_ext>();
         }
     
         public int IdEmpresa { get; set; }
@@ -37,8 +37,8 @@ namespace Core.Erp.Data
         public bool cerrado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<imp_liquidacion_det_x_imp_orden_compra_ext> imp_liquidacion_det_x_imp_orden_compra_ext { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imp_orden_compra_ext> imp_orden_compra_ext { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<imp_liquidacion_det_x_imp_orden_compra_ext> imp_liquidacion_det_x_imp_orden_compra_ext { get; set; }
     }
 }

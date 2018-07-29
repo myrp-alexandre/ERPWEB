@@ -19,6 +19,13 @@ namespace Core.Erp.Data
         public int IdEmpresa_oe { get; set; }
         public decimal IdOrdenCompra_ext { get; set; }
         public string observacion { get; set; }
+        public bool estado { get; set; }
+        public string IdUsuario_creacion { get; set; }
+        public Nullable<System.DateTime> fecha_creacion { get; set; }
+        public string IdUsuario_modificacion { get; set; }
+        public Nullable<System.DateTime> fecha_modificacion { get; set; }
+        public string IdUsuario_anulacion { get; set; }
+        public Nullable<System.DateTime> fecha_anulacion { get; set; }
     
         public virtual imp_liquidacion imp_liquidacion { get; set; }
         public virtual imp_orden_compra_ext imp_orden_compra_ext { get; set; }
