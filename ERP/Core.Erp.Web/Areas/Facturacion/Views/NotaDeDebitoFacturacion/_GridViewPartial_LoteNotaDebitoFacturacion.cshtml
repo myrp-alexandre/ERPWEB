@@ -1,11 +1,12 @@
 @using System.Web.UI.WebControls;
 @{
-    var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView_LoteFactura";
-        settings.CallbackRouteValues = new { Controller = "Factura", Action = "GridViewPartial_LoteFactura" };
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridView_LoteDebitoFacturacion";
+        settings.CallbackRouteValues = new { Controller = "NotaDeDebitoFacturacion", Action = "GridViewPartial_LoteDebitoFacturacion" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdProducto";
-        
+
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;

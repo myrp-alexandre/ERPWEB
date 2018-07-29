@@ -1,13 +1,13 @@
 ﻿@model Core.Erp.Info.Helps.cl_filtros_Info
 @{
-    ViewBag.Title = "Facturas";
+    ViewBag.Title = "Notas de débito";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
     }
     Layout = "~/Views/Layout/_LayoutConsulta.cshtml";
 }
-@using (Html.BeginForm("Index", "Factura", FormMethod.Post, new { @role = "form", @class = "form" }))
+@using (Html.BeginForm("Index", "NotaDeDebitoFacturacion", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     <div class="box collapsed-box">
         <div class="box-header with-border">
@@ -71,7 +71,7 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_factura", new { fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
+            @Html.Action("GridViewPartial_NotaDebitoFacturacion", new { fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

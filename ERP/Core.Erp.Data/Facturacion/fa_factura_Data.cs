@@ -377,8 +377,7 @@ namespace Core.Erp.Data.Facturacion
                                 IdCtaCble_Ventas0 = impuesto.IdCtaCble_vta;
                             }
                         }                            
-                    }
-                    
+                    }                    
                 }
 
                 #endregion

@@ -277,7 +277,7 @@ namespace Core.Erp.Data.Facturacion
                     #endregion
 
                     #region Cobranza
-                    if (info.lst_cruce.Count != 0)
+                    if (info.CreDeb == "C" && info.lst_cruce.Count != 0)
                     {
                         cxc_cobro_Info cobro = armar_cobro(info);
                         if (cobro != null)
@@ -609,6 +609,27 @@ namespace Core.Erp.Data.Facturacion
         {
             try
             {
+
+                string IdCtaCble_IVA = string.Empty;
+                using (Entities_general Context = new Entities_general())
+                {
+                    var porcentajes = (from q in info.lst_det
+                                       group q by new { q.IdCod_Impuesto_Iva } into g
+                                       select g.Key).ToList();
+
+                    foreach (var item in porcentajes)
+                    {
+                        var impuesto = Context.tb_sis_Impuesto_x_ctacble.Include("tb_sis_Impuesto").Where(q => q.IdEmpresa_cta == info.IdEmpresa && q.IdCod_Impuesto == item.IdCod_Impuesto_Iva).FirstOrDefault();
+                        if (impuesto != null)
+                        {
+                            if (impuesto.tb_sis_Impuesto.porcentaje > 0)
+                            {                                
+                                IdCtaCble_IVA = impuesto.IdCtaCble;
+                            }
+                        }
+                    }
+                }
+
                 #region Cabecera
                 ct_cbtecble_Info diario = new ct_cbtecble_Info
                 {
@@ -639,10 +660,23 @@ namespace Core.Erp.Data.Facturacion
                         IdCbteCble = diario.IdCbteCble,
                         secuencia = secuencia++,
                         IdCtaCble = IdCtaCble_cliente,
-                        dc_Valor = Math.Round(info.lst_cruce.Sum(q => q.Valor_Aplicado), 2, MidpointRounding.AwayFromZero) * (info.CreDeb == "C" ? -1 : 1),
+                        dc_Valor = Math.Round(info.lst_det.Sum(q => q.sc_total), 2, MidpointRounding.AwayFromZero) * (info.CreDeb == "C" ? -1 : 1),
                         dc_para_conciliar = false
                     });
                 }
+                #endregion
+
+                #region IVA
+                if (!string.IsNullOrEmpty(IdCtaCble_IVA))
+                    diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
+                    {
+                        IdEmpresa = diario.IdEmpresa,
+                        IdTipoCbte = diario.IdTipoCbte,
+                        IdCbteCble = diario.IdCbteCble,
+                        secuencia = secuencia++,
+                        IdCtaCble = IdCtaCble_IVA,
+                        dc_Valor = Math.Round(info.lst_det.Where(q => q.vt_por_iva > 0).Sum(q => q.sc_iva), 2, MidpointRounding.AwayFromZero) * (info.CreDeb == "C" ? 1 : -1)
+                    });
                 #endregion
 
                 #region Cuenta tipo nota
@@ -655,7 +689,7 @@ namespace Core.Erp.Data.Facturacion
                         IdCbteCble = diario.IdCbteCble,
                         secuencia = secuencia++,
                         IdCtaCble = IdCtaCble_tipoNota,
-                        dc_Valor = Math.Round(info.lst_cruce.Sum(q => q.Valor_Aplicado), 2, MidpointRounding.AwayFromZero) * (info.CreDeb == "C" ? 1 : -1),
+                        dc_Valor = Math.Round(info.lst_det.Sum(q => q.sc_subtotal), 2, MidpointRounding.AwayFromZero) * (info.CreDeb == "C" ? 1 : -1),
                         dc_para_conciliar = false,
                     });
                 }
@@ -665,6 +699,9 @@ namespace Core.Erp.Data.Facturacion
                     return null;
 
                 if (diario.lst_ct_cbtecble_det.Sum(q => q.dc_Valor) != 0)
+                    return null;
+
+                if (diario.lst_ct_cbtecble_det.Where(q=>q.dc_Valor == 0).Count() > 0)
                     return null;
 
                 return diario;
