@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Core.Erp.Bus.General;
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
     public class GuiaRemisionController : Controller
@@ -18,6 +18,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         fa_guia_remision_Bus bus_guia = new fa_guia_remision_Bus();
         fa_guia_remision_det_Bus bus_detalle = new fa_guia_remision_det_Bus();
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        fa_PuntoVta_Bus bus_punto_venta = new fa_PuntoVta_Bus();
         #region Metodos ComboBox bajo demanda cliente
         public ActionResult CmbCliente_Guia()
         {
@@ -90,7 +92,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 gi_fecha = DateTime.Now,
 
             };
-            cargar_combos();
+            cargar_combos(model);
             return View(model);
         }
         [HttpPost]
@@ -101,13 +103,13 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             string mensaje = bus_guia.validar(model);
             if (mensaje != "")
             {
-                cargar_combos();
+                cargar_combos(model);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
             if (!bus_guia.guardarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model);
                 return View(model);
             }
             Session["fa_guia_remision_det_Info"] = null;
@@ -122,7 +124,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             Session["fa_guia_remision_det_Info"] = lst_detalle;
             if (model == null)
                 return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(model);
             return View(model);
         }
         [HttpPost]
@@ -132,13 +134,13 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             string mensaje = bus_guia.validar(model);
             if (mensaje != "")
             {
-                cargar_combos();
+                cargar_combos(model);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
             if (!bus_guia.modificarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model);
                 return View(model);
             }
             Session["fa_guia_remision_det_Info"] = null;
@@ -153,7 +155,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             Session["fa_guia_remision_det_Info"] = lst_detalle;
             if (model == null)
                 return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(model);
             return View(model);
         }
 
@@ -162,7 +164,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             if (!bus_guia.anularDB(model))
             {
-                cargar_combos();
+                cargar_combos(model);
                 return View(model);
             }
             Session["fa_guia_remision_det_Info"] = null;
@@ -170,10 +172,13 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         #endregion
 
-        private void cargar_combos()
+        private void cargar_combos(fa_guia_remision_Info model)
         {
-           
+            var lst_sucursal = bus_sucursal.get_list(model.IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
 
+            var lst_punto_venta = bus_punto_venta.get_list(model.IdEmpresa, model.IdSucursal, false);
+            ViewBag.lst_punto_venta = lst_punto_venta;
         }
        
     }
