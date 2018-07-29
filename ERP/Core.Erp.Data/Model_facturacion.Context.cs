@@ -57,6 +57,9 @@ namespace Core.Erp.Data
         public virtual DbSet<vwfa_proforma_det> vwfa_proforma_det { get; set; }
         public virtual DbSet<vwfa_factura_det> vwfa_factura_det { get; set; }
         public virtual DbSet<fa_notaCreDeb_det> fa_notaCreDeb_det { get; set; }
+        public virtual DbSet<fa_guia_remision> fa_guia_remision { get; set; }
+        public virtual DbSet<fa_guia_remision_det> fa_guia_remision_det { get; set; }
+        public virtual DbSet<fa_guia_remision_det_x_factura> fa_guia_remision_det_x_factura { get; set; }
         public virtual DbSet<vwfa_notaCreDeb_det> vwfa_notaCreDeb_det { get; set; }
         public virtual DbSet<vwfa_notaCreDeb_x_fa_factura_NotaDeb> vwfa_notaCreDeb_x_fa_factura_NotaDeb { get; set; }
     }
