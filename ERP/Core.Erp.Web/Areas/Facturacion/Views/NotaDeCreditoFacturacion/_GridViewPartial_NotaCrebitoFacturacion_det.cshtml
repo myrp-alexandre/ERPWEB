@@ -36,9 +36,9 @@
         {
             e.NewValues["IdProducto"] = 0;
             e.NewValues["IdCod_Impuesto_Iva"] = "IVA0";
-            e.NewValues["vt_cantidad"] = 0;
-            e.NewValues["vt_Precio"] = 0;
-            e.NewValues["vt_PorDescUnitario"] = 0;
+            e.NewValues["sc_cantidad"] = 0;
+            e.NewValues["sc_Precio"] = 0;
+            e.NewValues["sc_PordescUni"] = 0;
         };
 
         settings.Columns.Add(column =>
@@ -87,7 +87,7 @@
                 q.MinValue = 0;
                 q.Width = Unit.Percentage(100);
             });
-            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
         {

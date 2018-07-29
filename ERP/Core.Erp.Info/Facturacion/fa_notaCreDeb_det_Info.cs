@@ -29,10 +29,10 @@ namespace Core.Erp.Info.Facturacion
         public string IdCentroCosto { get; set; }
         public string IdCentroCosto_sub_centro_costo { get; set; }
         #region Campos que no existen en la tabla
-        public object pr_descripcion { get; set; }
-        public object lote_num_lote { get; set; }
-        public object lote_fecha_vcto { get; set; }
-        public object nom_presentacion { get; set; }
+        public string pr_descripcion { get; set; }
+        public string lote_num_lote { get; set; }
+        public DateTime? lote_fecha_vcto { get; set; }
+        public string nom_presentacion { get; set; }
         #endregion
 
     }

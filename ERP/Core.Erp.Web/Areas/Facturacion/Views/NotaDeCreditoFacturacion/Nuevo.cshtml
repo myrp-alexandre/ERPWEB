@@ -34,6 +34,10 @@
         $("#NaturalezaNota").change(function () {
             SetNaturalezaNota();
         });
+        $("#IdTipoNota").change(function () {
+            SetNaturalezaNota();
+            GetUltimoDocumento();
+        });
     });
 
     function MostrarModal() {
@@ -207,7 +211,8 @@
         selectedIDs = "";
         GridView_CruceNC_x_cruzar.PerformCallback();
         GridView_CruceNC_x_cruzar.UnselectRows();
-        GridView_CruceNC.PerformCallback();
+            GridView_CruceNC.PerformCallback();
+            GridView_notaCredito_det.PerformCallback();
         $("#FacturasModal").modal("hide");
     }
     var selectedIDs;
@@ -242,7 +247,7 @@
             success: function (data) {
                 selectedIDs = "";
                 GridView_CruceNC_x_cruzar.PerformCallback();
-                GridView_CruceNC_x_cruzar.UnselectRows();
+                GridView_CruceNC_x_cruzar.UnselectRows();                
                 $("#FacturasModal").modal("show");
             },
             error: function (error) {
@@ -275,6 +280,7 @@
             GridView_CruceNC_x_cruzar.PerformCallback();
             GridView_CruceNC_x_cruzar.UnselectRows();
             GridView_CruceNC.PerformCallback();
+            GridView_notaCredito_det.PerformCallback();
             $("#FacturasModal").modal("hide");
     }
 

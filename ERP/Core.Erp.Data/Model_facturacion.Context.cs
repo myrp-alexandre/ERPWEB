@@ -49,7 +49,6 @@ namespace Core.Erp.Data
         public virtual DbSet<fa_factura_x_in_Ing_Egr_Inven> fa_factura_x_in_Ing_Egr_Inven { get; set; }
         public virtual DbSet<fa_parametro> fa_parametro { get; set; }
         public virtual DbSet<fa_TipoNota_x_Empresa_x_Sucursal> fa_TipoNota_x_Empresa_x_Sucursal { get; set; }
-        public virtual DbSet<fa_notaCreDeb_det> fa_notaCreDeb_det { get; set; }
         public virtual DbSet<fa_notaCreDeb_x_ct_cbtecble> fa_notaCreDeb_x_ct_cbtecble { get; set; }
         public virtual DbSet<fa_notaCreDeb_x_cxc_cobro> fa_notaCreDeb_x_cxc_cobro { get; set; }
         public virtual DbSet<fa_notaCreDeb_x_fa_factura_NotaDeb> fa_notaCreDeb_x_fa_factura_NotaDeb { get; set; }
@@ -57,6 +56,8 @@ namespace Core.Erp.Data
         public virtual DbSet<vwfa_notaCreDeb> vwfa_notaCreDeb { get; set; }
         public virtual DbSet<vwfa_proforma_det> vwfa_proforma_det { get; set; }
         public virtual DbSet<vwfa_factura_det> vwfa_factura_det { get; set; }
+        public virtual DbSet<fa_notaCreDeb_det> fa_notaCreDeb_det { get; set; }
         public virtual DbSet<vwfa_notaCreDeb_det> vwfa_notaCreDeb_det { get; set; }
+        public virtual DbSet<vwfa_notaCreDeb_x_fa_factura_NotaDeb> vwfa_notaCreDeb_x_fa_factura_NotaDeb { get; set; }
     }
 }

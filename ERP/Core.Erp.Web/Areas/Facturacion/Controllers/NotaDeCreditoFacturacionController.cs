@@ -39,7 +39,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_TipoNota_Bus bus_tipo_nota = new fa_TipoNota_Bus();
         fa_notaCreDeb_x_fa_factura_NotaDeb_Bus bus_cruce = new fa_notaCreDeb_x_fa_factura_NotaDeb_Bus();
         fa_notaCreDeb_x_fa_factura_NotaDeb_List List_cruce = new fa_notaCreDeb_x_fa_factura_NotaDeb_List();
-        fa_factura_det_Bus bus_det_fact = new fa_factura_det_Bus();
+        fa_TipoNota_x_Empresa_x_Sucursal_Bus bus_tipo_nota_x_sucursal = new fa_TipoNota_x_Empresa_x_Sucursal_Bus();
         #endregion
 
         #region Index
@@ -227,13 +227,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var lst_det = new List<fa_notaCreDeb_det_Info>();
             foreach (var item in list)
             {
-                
-                lst_det.Add(new fa_notaCreDeb_det_Info
-                {
-
-                });
+                lst_det.AddRange(bus_det.get_list(item.IdEmpresa_fac_nd_doc_mod, item.IdSucursal_fac_nd_doc_mod, item.IdBodega_fac_nd_doc_mod, item.IdCbteVta_fac_nd_doc_mod,item.vt_tipoDoc));                
             }
-
+            List_det.set_list(lst_det);
             var model = list;
             return PartialView("_GridViewPartial_CruceNC", model);
         }
@@ -272,7 +268,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             var model = List_det.get_list();
             cargar_combos_detalle();
-            SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["IdCliente"]) ? Request.Params["IdCliente"].ToString() : "-1";
             return PartialView("_GridViewPartial_NotaCrebitoFacturacion_det", model);
         }
 
@@ -280,38 +275,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_notaCreDeb_det_Info info_det)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
-            if (info_det != null && info_det.IdProducto != 0 && IdCliente > 0)
-            {
-                var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
-                if (producto != null)
-                {
-                    info_det.pr_descripcion = producto.pr_descripcion_combo;
-                    var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
-                    if (cliente != null)
-                    {
-                        int nivel_precio = (cliente.NivelPrecio == null || cliente.NivelPrecio == 0) ? 1 : Convert.ToInt32(cliente.NivelPrecio);
-                        switch (nivel_precio)
-                        {
-                            case 1:
-                                info_det.sc_Precio = producto.precio_1;
-                                break;
-                            case 2:
-                                info_det.sc_Precio = producto.precio_2 == 0 ? producto.precio_1 : producto.precio_2;
-                                break;
-                            case 3:
-                                info_det.sc_Precio = producto.precio_3 == 0 ? producto.precio_1 : producto.precio_3;
-                                break;
-                            case 4:
-                                info_det.sc_Precio = producto.precio_4 == 0 ? producto.precio_1 : producto.precio_4;
-                                break;
-                            case 5:
-                                info_det.sc_Precio = producto.precio_5 == 0 ? producto.precio_1 : producto.precio_5;
-                                break;
-                        }
-                    }
-                }
-            }
             List_det.AddRow(info_det);
             var model = List_det.get_list();
             cargar_combos_detalle();
@@ -322,38 +285,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_notaCreDeb_det_Info info_det)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
-            if (info_det != null && info_det.IdProducto != 0 && IdCliente > 0)
-            {
-                var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
-                if (producto != null)
-                {
-                    info_det.pr_descripcion = producto.pr_descripcion_combo;
-                    var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
-                    if (cliente != null)
-                    {
-                        int nivel_precio = (cliente.NivelPrecio == null || cliente.NivelPrecio == 0) ? 1 : Convert.ToInt32(cliente.NivelPrecio);
-                        switch (nivel_precio)
-                        {
-                            case 1:
-                                info_det.sc_Precio = producto.precio_1;
-                                break;
-                            case 2:
-                                info_det.sc_Precio = producto.precio_2 == 0 ? producto.precio_1 : producto.precio_2;
-                                break;
-                            case 3:
-                                info_det.sc_Precio = producto.precio_3 == 0 ? producto.precio_1 : producto.precio_3;
-                                break;
-                            case 4:
-                                info_det.sc_Precio = producto.precio_4 == 0 ? producto.precio_1 : producto.precio_4;
-                                break;
-                            case 5:
-                                info_det.sc_Precio = producto.precio_5 == 0 ? producto.precio_1 : producto.precio_5;
-                                break;
-                        }
-                    }
-                }
-            }
             List_det.UpdateRow(info_det);
             var model = List_det.get_list();
             cargar_combos_detalle();
@@ -392,6 +323,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         private bool validar(fa_notaCreDeb_Info i_validar, ref string msg)
         {
             i_validar.lst_det = List_det.get_list();
+            i_validar.lst_cruce = List_cruce.get_list().Where(q=>q.seleccionado == true).ToList();
             if (i_validar.lst_det.Count == 0)
             {
                 msg = "No ha ingresado registros en el detalle";
@@ -407,10 +339,21 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 msg = "Existen registros sin producto en el detalle";
                 return false;
             }
+            if (i_validar.lst_cruce.Count != 0)
+            {
+                if (Math.Round(i_validar.lst_cruce.Sum(q => q.Valor_Aplicado), 2, MidpointRounding.AwayFromZero) != Math.Round(i_validar.lst_det.Sum(q => q.sc_total), 2, MidpointRounding.AwayFromZero))
+                {
+                    msg = "El total del detalle de la nota de crédito es distinta al total aplicado en los documentos";
+                    return false;
+                }
+            }            
 
             i_validar.IdBodega = (int)bus_punto_venta.get_info(i_validar.IdEmpresa, i_validar.IdSucursal, Convert.ToInt32(i_validar.IdPuntoVta)).IdBodega;
             i_validar.IdUsuario = SessionFixed.IdUsuario;
             i_validar.IdUsuarioUltMod = SessionFixed.IdUsuario;
+            var tipo_nota = bus_tipo_nota_x_sucursal.get_info(i_validar.IdEmpresa,i_validar.IdTipoNota,i_validar.IdSucursal);
+            if(tipo_nota != null)
+                i_validar.IdCtaCble_TipoNota = tipo_nota.IdCtaCble;
 
             if (i_validar.IdNota == 0 && i_validar.NaturalezaNota == "SRI")
             {
@@ -566,8 +509,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             List<fa_notaCreDeb_det_Info> list = get_list();
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
-            info_det.IdProducto = info_det.IdProducto;
-            info_det.pr_descripcion = info_det.pr_descripcion;
+            info_det.IdProducto = info_det.IdProducto;            
+            var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProducto);
+            if (producto != null)
+            {
+                info_det.pr_descripcion = producto.pr_descripcion;
+            }
             info_det.sc_descUni = Math.Round(info_det.sc_Precio * (info_det.sc_PordescUni / 100), 2, MidpointRounding.AwayFromZero);
             info_det.sc_precioFinal = Math.Round(info_det.sc_Precio - info_det.sc_descUni, 2, MidpointRounding.AwayFromZero);
             info_det.sc_subtotal = Math.Round(info_det.sc_cantidad * info_det.sc_precioFinal, 2, MidpointRounding.AwayFromZero);
@@ -583,7 +530,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             fa_notaCreDeb_det_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdProducto = info_det.IdProducto;
-            edited_info.pr_descripcion = info_det.pr_descripcion;
+            var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProducto);
+            if (producto != null && info_det.IdProducto != edited_info.IdProducto)
+            {
+                edited_info.pr_descripcion = producto.pr_descripcion;
+            }
             edited_info.sc_cantidad = info_det.sc_cantidad;
             edited_info.sc_PordescUni = info_det.sc_PordescUni;
             edited_info.sc_Precio = info_det.sc_Precio;

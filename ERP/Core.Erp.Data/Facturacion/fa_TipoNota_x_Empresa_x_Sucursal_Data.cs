@@ -35,5 +35,31 @@ namespace Core.Erp.Data.Facturacion
                 throw;
             }
         }
+
+        public fa_TipoNota_x_Empresa_x_Sucursal_Info get_info(int IdEmpresa, int IdTipoNota, int IdSucursal)
+        {
+            try
+            {
+                fa_TipoNota_x_Empresa_x_Sucursal_Info info;
+                using (Entities_facturacion Context = new Entities_facturacion())
+                {
+                    var Entity = Context.fa_TipoNota_x_Empresa_x_Sucursal.Where(q => q.IdEmpresa == IdEmpresa && q.IdTipoNota == IdTipoNota && q.IdSucursal == IdSucursal).FirstOrDefault();
+                    if (Entity == null) return null;
+                    info = new fa_TipoNota_x_Empresa_x_Sucursal_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdSucursal = Entity.IdSucursal,
+                        IdTipoNota = Entity.IdTipoNota,
+                        IdCtaCble = Entity.IdCtaCble
+                    };
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

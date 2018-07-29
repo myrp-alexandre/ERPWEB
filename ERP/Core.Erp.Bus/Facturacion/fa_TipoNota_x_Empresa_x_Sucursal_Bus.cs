@@ -23,5 +23,18 @@ namespace Core.Erp.Bus.Facturacion
                 throw;
             }
         }
+
+        public fa_TipoNota_x_Empresa_x_Sucursal_Info get_info(int IdEmpresa, int IdTipoNota, int IdSucursal)
+        {
+            try
+            {
+                return odata.get_info(IdEmpresa, IdTipoNota,IdSucursal);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

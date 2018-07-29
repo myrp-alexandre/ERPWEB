@@ -253,23 +253,26 @@ namespace Core.Erp.Data.Facturacion
                     if (parametros != null && parametros.IdTipoCbteCble_NC != null && parametros.IdTipoCbteCble_ND != null)
                     {
                         ct_cbtecble_Info diario = armar_diario(info, info.CreDeb == "C" ? (int)parametros.IdTipoCbteCble_NC : (int)parametros.IdTipoCbteCble_ND, cliente.IdCtaCble_cxc_Credito, info.IdCtaCble_TipoNota);
-                        if (odata_ct.guardarDB(diario))
+                        if (diario != null)
                         {
-                            db_f.fa_notaCreDeb_x_ct_cbtecble.Add(new fa_notaCreDeb_x_ct_cbtecble
+                            if (odata_ct.guardarDB(diario))
                             {
-                                no_IdEmpresa = info.IdEmpresa,
-                                no_IdSucursal = info.IdSucursal,
-                                no_IdBodega = info.IdBodega,
-                                no_IdNota = info.IdNota,                                
+                                db_f.fa_notaCreDeb_x_ct_cbtecble.Add(new fa_notaCreDeb_x_ct_cbtecble
+                                {
+                                    no_IdEmpresa = info.IdEmpresa,
+                                    no_IdSucursal = info.IdSucursal,
+                                    no_IdBodega = info.IdBodega,
+                                    no_IdNota = info.IdNota,
 
-                                ct_IdEmpresa = diario.IdEmpresa,
-                                ct_IdTipoCbte = diario.IdTipoCbte,
-                                ct_IdCbteCble = diario.IdCbteCble,
+                                    ct_IdEmpresa = diario.IdEmpresa,
+                                    ct_IdTipoCbte = diario.IdTipoCbte,
+                                    ct_IdCbteCble = diario.IdCbteCble,
 
-                                observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000"))
-                            });
-                            db_f.SaveChanges();
-                        }
+                                    observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000"))
+                                });
+                                db_f.SaveChanges();
+                            }
+                        }                        
                     }
                     #endregion
 
@@ -419,29 +422,33 @@ namespace Core.Erp.Data.Facturacion
                     {
                         var rel_conta = db_f.fa_notaCreDeb_x_ct_cbtecble.Where(q => q.no_IdEmpresa == info.IdEmpresa && q.no_IdSucursal == info.IdSucursal && q.no_IdBodega == info.IdBodega && q.no_IdNota == info.IdNota).FirstOrDefault();
                         ct_cbtecble_Info diario = armar_diario(info, info.CreDeb == "C" ? (int)parametros.IdTipoCbteCble_NC : (int)parametros.IdTipoCbteCble_ND, cliente.IdCtaCble_cxc_Credito, info.IdCtaCble_TipoNota);
-                        if (rel_conta == null)
+                        if (diario != null)
                         {
-                            if (odata_ct.guardarDB(diario))
+                            if (rel_conta == null)
                             {
-                                db_f.fa_notaCreDeb_x_ct_cbtecble.Add(new fa_notaCreDeb_x_ct_cbtecble
+                                if (odata_ct.guardarDB(diario))
                                 {
-                                    no_IdEmpresa = info.IdEmpresa,
-                                    no_IdSucursal = info.IdSucursal,
-                                    no_IdBodega = info.IdBodega,
-                                    no_IdNota = info.IdNota,
+                                    db_f.fa_notaCreDeb_x_ct_cbtecble.Add(new fa_notaCreDeb_x_ct_cbtecble
+                                    {
+                                        no_IdEmpresa = info.IdEmpresa,
+                                        no_IdSucursal = info.IdSucursal,
+                                        no_IdBodega = info.IdBodega,
+                                        no_IdNota = info.IdNota,
 
-                                    ct_IdEmpresa = diario.IdEmpresa,
-                                    ct_IdTipoCbte = diario.IdTipoCbte,
-                                    ct_IdCbteCble = diario.IdCbteCble,
+                                        ct_IdEmpresa = diario.IdEmpresa,
+                                        ct_IdTipoCbte = diario.IdTipoCbte,
+                                        ct_IdCbteCble = diario.IdCbteCble,
 
-                                    observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000"))
-                                });
-                                db_f.SaveChanges();
+                                        observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000"))
+                                    });
+                                    db_f.SaveChanges();
+                                }
                             }
-                        }else
-                        {
-                            diario.IdCbteCble = rel_conta.ct_IdCbteCble;
-                            odata_ct.modificarDB(diario);
+                            else
+                            {
+                                diario.IdCbteCble = rel_conta.ct_IdCbteCble;
+                                odata_ct.modificarDB(diario);
+                            }
                         }
                     }
                     #endregion
