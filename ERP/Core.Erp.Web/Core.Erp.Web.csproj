@@ -8875,6 +8875,9 @@
     <Content Include="Areas\Facturacion\Views\GuiaRemision\Index.cshtml" />
     <Content Include="Areas\Facturacion\Views\GuiaRemision\Anular.cshtml" />
     <Content Include="Areas\Facturacion\Views\GuiaRemision\_CmbCliente_Guia.cshtml" />
+    <Content Include="Areas\Facturacion\Views\GuiaRemision\_GridViewPartial_FacturasSinGuia.cshtml" />
+    <Content Include="Areas\Facturacion\Views\GuiaRemision\_GridViewPartial_guias_remision.cshtml" />
+    <Content Include="Areas\Facturacion\Views\GuiaRemision\_GridViewPartial_guias_remision_det.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
