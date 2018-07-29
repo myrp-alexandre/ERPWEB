@@ -127,8 +127,15 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             model = bus_orden.get_list(IdEmpresa);
             return PartialView("_GridViewPartial_orden_compra_con_saldo", model);
         }
-
+        public ActionResult GridViewPartial_orden_compra_por_liquidar()
+        {
+            List<imp_ordencompra_ext_Info> model = new List<imp_ordencompra_ext_Info>();
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model = bus_orden.get_list(IdEmpresa);
+            return PartialView("_GridViewPartial_orden_compra_por_liquidar", model);
+        }
         
+
          public ActionResult OrdencompraConsaldos()
         {
             cl_filtros_Info model = new cl_filtros_Info();

@@ -3,9 +3,9 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridViewPartial_liquidacion_importacion";
-        settings.CallbackRouteValues = new { Controller = "LiquidacionImportacion", Action = "_GridViewPartial_liquidacion_importacion" };
-        settings.KeyFieldName = "IdLiquidacion";
+        settings.Name = "Ordencompra_por_liquidar";
+        settings.CallbackRouteValues = new { Controller = "OrdenCompraExterior", Action = "Ordencompra_por_liquidar" };
+        settings.KeyFieldName = "IdOrdenCompra_ext";
         settings.Width = Unit.Percentage(100);
 
         //Configuración para que la grilla no muestre texto completo
@@ -33,16 +33,7 @@
         //Configuracion exportacion
         settings.SettingsExport.EnableClientSideExportAPI = true;
         settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
-        settings.Toolbars.Add(t =>
-        {
-            t.EnableAdaptivity = true;
-            t.Items.Add(GridViewToolbarCommand.ExportToPdf);
-            t.Items.Add(GridViewToolbarCommand.ExportToXls);
-            t.Items.Add(GridViewToolbarCommand.ExportToXlsx);
-            t.Items.Add(GridViewToolbarCommand.ExportToDocx);
-            t.Items.Add(GridViewToolbarCommand.ExportToRtf);
-            t.Items.Add(GridViewToolbarCommand.ExportToCsv);
-        });
+       
         settings.SettingsExport.RenderBrick = (sender, e) =>
         {
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
@@ -55,39 +46,19 @@
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
+            if(Convert.ToBoolean(e.GetValue("cantidad_global"))!= Convert.ToBoolean(e.GetValue("cantidad_x_recibir")))
+            {
+                e.Row.ForeColor = System.Drawing.Color.Blue;
 
+            }
         };
-        settings.Columns.Add(c =>
-        {
-            c.Caption = "#";
-            c.SetDataItemTemplateContent(tc =>
-            {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true )
-                {
-
-                    ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdLiquidacion = DataBinder.Eval(tc.DataItem, "IdLiquidacion") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdLiquidacion = DataBinder.Eval(tc.DataItem, "IdLiquidacion") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
-                }
-            });
-            c.SetHeaderTemplateContent(tc =>
-            {
-                ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "OrdencompraPorLiquidar", "LiquidacionImportacion").ToHtmlString()
-                );
-            });
-            c.Settings.AllowDragDrop = DefaultBoolean.False;
-            c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = Unit.Pixel(150);
-        });
-        settings.Columns.Add("IdLiquidacion", "ID").Width = Unit.Percentage(5);
+       
+        settings.Columns.Add("IdOrdenCompra_ext", "ID").Width = Unit.Percentage(5);
         settings.Columns.Add("pe_cedulaRuc", "Cédula/Ruc").Width = Unit.Percentage(10);
         settings.Columns.Add("pe_nombreCompleto", "Proveedor").Width = Unit.Percentage(30);
         settings.Columns.Add(column =>
         {
-            column.FieldName = "or_fecha";
+            column.FieldName = "oe_fecha";
             column.Caption = "Fecha";
             column.Width = Unit.Percentage(10);
             column.PropertiesEdit.DisplayFormatString = "d";
@@ -97,8 +68,23 @@
                 sp.Width = Unit.Percentage(100);
             });
         });
-        settings.Columns.Add("or_observacion", "Obaservación").Width = Unit.Percentage(30);
-       
+        settings.Columns.Add("oe_observacion", "Obaservación").Width = Unit.Percentage(30);
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Registrar";
+            column.Width = Unit.Pixel(100);
+            column.SetDataItemTemplateContent(container =>
+            {
+                Html.DevExpress().HyperLink(hyperlink =>
+                {
+                    var IdOrdenCompra_ext = DataBinder.Eval(container.DataItem, "IdOrdenCompra_ext");
+                    hyperlink.Properties.Text = "Mercaderia";
+                    hyperlink.NavigateUrl = Url.Action("Nuevo", "RecepcionOrdenCompra", new { Area = "Importacion", IdOrdenCompra_ext = IdOrdenCompra_ext });
+                }).Render();
+            });
+        });
+
     });
 }
 @grid.Bind(Model).GetHtml()
