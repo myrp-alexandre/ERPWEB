@@ -1,10 +1,10 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView_LoteFactura";
-        settings.CallbackRouteValues = new { Controller = "Factura", Action = "GridViewPartial_FacturasSinGuia" };
+        settings.Name = "GridViewPartial_FacturasSinGuia";
+        settings.CallbackRouteValues = new { Controller = "GuiaRemision", Action = "GridViewPartial_FacturasSinGuia" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdCbteVta";
+        settings.KeyFieldName = "IdGuiaRemision";
         
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
