@@ -129,12 +129,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             Session["fa_guia_remision_det_Info"] = null;
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(decimal IdOrdenCompra_ext)
+        public ActionResult Modificar(decimal IdGuiaRemision=0)
         {
 
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            fa_guia_remision_Info model = bus_guia.get_info(IdEmpresa, IdOrdenCompra_ext);
-            var lst_detalle = bus_detalle.get_list(IdEmpresa, IdOrdenCompra_ext);
+            fa_guia_remision_Info model = bus_guia.get_info(IdEmpresa, IdGuiaRemision);
+            var lst_detalle = bus_detalle.get_list(IdEmpresa, IdGuiaRemision);
             Session["fa_guia_remision_det_Info"] = lst_detalle;
             if (model == null)
                 return RedirectToAction("Index");
@@ -145,6 +145,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult Modificar(fa_guia_remision_Info model)
         {
             model.lst_detalle = Session["fa_guia_remision_det_Info"] as List<fa_guia_remision_det_Info>;
+            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.CodGuiaRemision = (model.CodGuiaRemision == null) ? "" : model.CodGuiaRemision;
+            model.CodDocumentoTipo = "GUIA";
             string mensaje = bus_guia.validar(model);
             if (mensaje != "")
             {
@@ -160,12 +163,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             Session["fa_guia_remision_det_Info"] = null;
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(decimal IdOrdenCompra_ext)
+        public ActionResult Anular(decimal IdGuiaRemision=0)
         {
 
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            fa_guia_remision_Info model = bus_guia.get_info(IdEmpresa, IdOrdenCompra_ext);
-            var lst_detalle = bus_detalle.get_list(IdEmpresa, IdOrdenCompra_ext);
+            fa_guia_remision_Info model = bus_guia.get_info(IdEmpresa, IdGuiaRemision);
+            var lst_detalle = bus_detalle.get_list(IdEmpresa, IdGuiaRemision);
             Session["fa_guia_remision_det_Info"] = lst_detalle;
             if (model == null)
                 return RedirectToAction("Index");

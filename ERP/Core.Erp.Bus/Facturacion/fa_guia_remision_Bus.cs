@@ -12,7 +12,7 @@ namespace Core.Erp.Bus.Facturacion
     {
         fa_guia_remision_Data odata = new fa_guia_remision_Data();
         fa_guia_remision_det_Data odata_det = new fa_guia_remision_det_Data();
-
+        fa_guia_remision_det_x_factura_Data odata_guia_x_fac = new fa_guia_remision_det_x_factura_Data();
         public List<fa_guia_remision_Info> get_list(int IdEmpresa, DateTime fecha_inicio, DateTime fecha_fin)
         {
             try
@@ -55,6 +55,7 @@ namespace Core.Erp.Bus.Facturacion
             try
             {
                 odata_det.eliminar(info.IdEmpresa, info.IdGuiaRemision);
+                odata_guia_x_fac.eliminar(info.IdEmpresa, info.IdGuiaRemision);
                 return odata.modificarDB(info);
             }
             catch (Exception)
@@ -86,7 +87,12 @@ namespace Core.Erp.Bus.Facturacion
                 string mensaje = "";
                 if (info.IdCliente == 0)
                     mensaje = "Seleccione cliente";
-               
+                if (info.lst_detalle == null)
+                    mensaje = "No existe detalle para la guia";
+                else
+                    if(info.lst_detalle.Count()==0)
+                    mensaje = "No existe detalle para la guia";
+
                 return mensaje;
 
             }

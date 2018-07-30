@@ -185,6 +185,16 @@ namespace Core.Erp.Data.Facturacion
                             gi_cantidad=item.gi_cantidad,
                             gi_detallexItems =item.gi_detallexItems
                         });
+                        Context.fa_guia_remision_det_x_factura.Add(new fa_guia_remision_det_x_factura
+                        {
+                            IdEmpresa_fact=info.IdEmpresa,
+                            IdSucursal_fact=info.IdSucursal,
+                            IdBodega_fact=info.IdBodega,
+                            IdCbteVta_fact=item.IdCbteVta,
+                            IdGuiaRemision_guia=info.IdGuiaRemision,
+                             Secuencia_fact=item.Secuencia,
+                             Secuencia_guia=item.Secuencia
+                        });
                         secuencia++;
                     }
                     Context.SaveChanges();
@@ -203,6 +213,7 @@ namespace Core.Erp.Data.Facturacion
         {
             try
             {
+                int secuencia = 1;
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
                     fa_guia_remision Entity = Context.fa_guia_remision.FirstOrDefault(q => q.IdGuiaRemision == info.IdGuiaRemision);
@@ -219,7 +230,6 @@ namespace Core.Erp.Data.Facturacion
                         Entity.gi_fecha = info.gi_fecha;
                         Entity.gi_plazo = info.gi_plazo;
                         Entity.gi_fech_venc = info.gi_fech_venc;
-                        Entity.gi_Observacion = info.gi_Observacion;
                         Entity.Impreso = info.Impreso;
                         Entity.gi_FechaInicioTraslado = info.gi_FechaInicioTraslado;
                         Entity.gi_FechaFinTraslado = info.gi_FechaFinTraslado;
@@ -227,9 +237,33 @@ namespace Core.Erp.Data.Facturacion
                         Entity.ruta = info.ruta;
                         Entity.Direccion_Destino = info.Direccion_Destino;
                         Entity.Direccion_Origen = info.Direccion_Origen;
-                    Entity.Fecha_UltMod = info.Fecha_UltMod=DateTime.Now;
-                    Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
-
+                        Entity.Fecha_UltMod = info.Fecha_UltMod=DateTime.Now;
+                        Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
+                    foreach (var item in info.lst_detalle)
+                    {
+                        Context.fa_guia_remision_det.Add(new fa_guia_remision_det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
+                            IdBodega = info.IdBodega,
+                            IdGuiaRemision = info.IdGuiaRemision,
+                            Secuencia = secuencia,
+                            IdProducto = item.IdProducto,
+                            gi_cantidad = item.gi_cantidad,
+                            gi_detallexItems = item.gi_detallexItems
+                        });
+                        Context.fa_guia_remision_det_x_factura.Add(new fa_guia_remision_det_x_factura
+                        {
+                            IdEmpresa_fact = info.IdEmpresa,
+                            IdSucursal_fact = info.IdSucursal,
+                            IdBodega_fact = info.IdBodega,
+                            IdCbteVta_fact = item.IdCbteVta,
+                            IdGuiaRemision_guia = info.IdGuiaRemision,
+                            Secuencia_fact = item.Secuencia,
+                            Secuencia_guia = item.Secuencia
+                        });
+                        secuencia++;
+                    }
                     Context.SaveChanges();
                 }
                 return true;
