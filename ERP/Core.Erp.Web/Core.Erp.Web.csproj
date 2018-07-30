@@ -278,6 +278,7 @@
     <Compile Include="Areas\CuentasPorPagar\Controllers\TipoCodigoSRIController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\TipoOrdenPagoController.cs" />
     <Compile Include="Areas\CuentasPorPagar\CuentasPorPagarAreaRegistration.cs" />
+    <Compile Include="Areas\Facturacion\Controllers\CatalogoFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\CatalogoTipoFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ClienteController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ClienteTipoController.cs" />
@@ -8894,6 +8895,11 @@
     <Content Include="Areas\Facturacion\Views\GuiaRemision\_GridViewPartial_Facturas_x_guia.cshtml" />
     <Content Include="Areas\Inventario\Views\DevolucionInventario\_GridViewPartial_devolucion_det_x_cruzar.cshtml" />
     <Content Include="Areas\Inventario\Views\DevolucionInventario\_GridViewPartial_devolucion_det.cshtml" />
+    <Content Include="Areas\Facturacion\Views\CatalogoFacturacion\_GridViewPartial_catalogo_fa.cshtml" />
+    <Content Include="Areas\Facturacion\Views\CatalogoFacturacion\Anular.cshtml" />
+    <Content Include="Areas\Facturacion\Views\CatalogoFacturacion\Index.cshtml" />
+    <Content Include="Areas\Facturacion\Views\CatalogoFacturacion\Modificar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\CatalogoFacturacion\Nuevo.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
