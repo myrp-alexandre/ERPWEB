@@ -253,7 +253,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 resultado = new tb_sis_Documento_Tipo_Talonario_Info();
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetProformasPorFacturar(int IdSucursal = 0, decimal IdCliente = 0)
+        {
+            bool resultado = true;
 
+            set_list_proformas(bus_det.get_list_proformas_x_facturar(Convert.ToInt32(SessionFixed.IdEmpresa), IdSucursal, IdCliente));
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
         public void CargarCuotas(DateTime? FechaPrimerPago, string IdTerminoPago = "", double ValorPrimerPago = 0)
         {
             List<fa_cuotas_x_doc_Info> lst_cuotas = new List<fa_cuotas_x_doc_Info>();
@@ -540,15 +547,46 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         #endregion
 
+        #region Detalle de proforma
         [ValidateInput(false)]
         public ActionResult GridViewPartial_PFactura_det()
         {
-            var model = List_det.get_list();
-            cargar_combos_detalle();
-            SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["IdCliente"]) ? Request.Params["IdCliente"].ToString() : "-1";
+            var model = get_list_proformas();
             return PartialView("_GridViewPartial_PFactura_det", model);
         }
+        public void AddProformas(string IDs = "")
+        {
+            if (!string.IsNullOrEmpty(IDs))
+            {
+                string[] array = IDs.Split(',');
+                var lst = get_list_proformas();
+                var lst_det_f = List_det.get_list();
+                foreach (var item in array)
+                {
+                    var pf = lst.Where(q => q.secuencial == item).FirstOrDefault();
+                    if(pf != null)
+                        if (lst_det_f.Where(q=>q.IdEmpresa_pf == pf.IdEmpresa_pf && q.IdSucursal_pf == pf.IdSucursal_pf && q.IdProforma == pf.IdProforma && q.Secuencia_pf == pf.Secuencia_pf).Count() == 0)
+                            lst_det_f.Add(pf);
+                }
+                List_det.set_list(lst_det_f);
+            }
+        }
+        public List<fa_factura_det_Info> get_list_proformas()
+        {
+            if (Session["fa_factura_det_proforma_Info"] == null)
+            {
+                List<fa_factura_det_Info> list = new List<fa_factura_det_Info>();
 
+                Session["fa_factura_det_proforma_Info"] = list;
+            }
+            return (List<fa_factura_det_Info>)Session["fa_factura_det_proforma_Info"];
+        }
+
+        public void set_list_proformas(List<fa_factura_det_Info> list)
+        {
+            Session["fa_factura_det_proforma_Info"] = list;
+        }
+        #endregion
     }
 
     public class fa_factura_det_List
