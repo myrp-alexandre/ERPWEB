@@ -16,6 +16,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #region Variables
         in_devolucion_inven_Bus bus_devolucion = new in_devolucion_inven_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        in_devolucion_inven_det_List List_det = new in_devolucion_inven_det_List();
         #endregion
 
         #region Index
@@ -71,6 +72,27 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public ActionResult Anular(decimal IdDev_Inven = 0)
         {
             return View();
+        }
+        #endregion
+
+        public JsonResult GetMovimientos(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
+        {
+            bool resultado = false;
+
+
+
+            return Json(resultado,JsonRequestBehavior.AllowGet);
+        }
+
+        #region Detalle
+        public ActionResult GridViewPartial_devolucion_det()
+        {
+            var model = List_det.get_list();
+            return PartialView("_GridViewPartial_devolucion_det",model);
+        }
+        public ActionResult GridViewPartial_devolucion_det_x_cruzar()
+        {
+            return PartialView("_GridViewPartial_devolucion_det_x_cruzar");
         }
         #endregion
     }

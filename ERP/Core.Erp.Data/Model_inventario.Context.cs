@@ -60,6 +60,10 @@ namespace Core.Erp.Data
         public virtual DbSet<vwin_producto_x_tb_bodega_stock_x_lote> vwin_producto_x_tb_bodega_stock_x_lote { get; set; }
         public virtual DbSet<in_devolucion_inven> in_devolucion_inven { get; set; }
         public virtual DbSet<in_devolucion_inven_det> in_devolucion_inven_det { get; set; }
+        public virtual DbSet<vwin_devolucion_inven_det> vwin_devolucion_inven_det { get; set; }
+        public virtual DbSet<vwin_Ing_Egr_Inven_det> vwin_Ing_Egr_Inven_det { get; set; }
+        public virtual DbSet<vwin_Ing_Egr_Inven_det_x_devolver> vwin_Ing_Egr_Inven_det_x_devolver { get; set; }
+        public virtual DbSet<vwin_Ing_Egr_Inven_por_devolver> vwin_Ing_Egr_Inven_por_devolver { get; set; }
     
         public virtual int spINV_aprobacion_ing_egr(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idBodega, Nullable<int> idMovi_inven_tipo, Nullable<decimal> idNumMovi)
         {
