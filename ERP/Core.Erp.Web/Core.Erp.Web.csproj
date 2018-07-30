@@ -8885,6 +8885,7 @@
     <Content Include="Areas\Inventario\Views\DevolucionInventario\Index.cshtml" />
     <Content Include="Areas\Inventario\Views\DevolucionInventario\Anular.cshtml" />
     <Content Include="Areas\Inventario\Views\DevolucionInventario\_GridViewPartial_devolucion.cshtml" />
+    <Content Include="Areas\Facturacion\Views\GuiaRemision\_GridViewPartial_Facturas_x_guia.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

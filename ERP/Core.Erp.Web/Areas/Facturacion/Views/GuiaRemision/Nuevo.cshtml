@@ -68,7 +68,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-8">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal*</label>
                     @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal" })
@@ -76,26 +76,14 @@
                 </div>
 
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdPuntoVta">Punto de venta*</label>
                     @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_punto_venta, "IdPuntoVta", "nom_PuntoVta"), new { @class = "form-control", @id = "IdPuntoVta" })
                     @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-     </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="IdCliente">Cliente*</label>
-                    @Html.Partial("_CmbCliente_Guia", Model)
-                    @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdVendedor">Transportista*</label>
                     @Html.DropDownListFor(q => q.IdTransportista, new SelectList(ViewBag.lst_transportista, "IdTransportista", "Nombre"), new { @class = "form-control", @id = "IdTransportista" })
@@ -109,6 +97,26 @@
                     @Html.ValidationMessageFor(q => q.placa, "", new { @class = "text-danger" })
                 </div>
             </div>
+        </div>
+     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label for="IdCliente">Cliente*</label>
+                    @Html.Partial("_CmbCliente_Guia", Model)
+                    @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="IdClienteContacto">Contacto</label>
+                    @Html.DropDownListFor(q => q.IdCliente, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres"), new { @class = "form-control", @id = "IdContacto" })
+                    @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
+                </div>
+            </div>
+           
             </div>
         </div>
 
@@ -208,23 +216,56 @@
             </div>
             </div>
     </div>
-    <div class="col-md-12">
-        <div class="col-md-12">
-            <button type="button" class="btn btn-primary" onclick="MostrarModal()">
-                <i class="fa fa-search"></i>
-            </button>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="pf_observacion">Detalle</label>
-                    @Html.Action("GridViewPartial_guias_remision_det")
+   
+    
+
+
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#detalle_guia" aria-controls="informacion_general" role="tab" data-toggle="tab">Detalle guia</a>
+            </li>
+            <li>
+                <a href="#tab_documentos_relacionados" aria-controls="contactos_telefonos" role="tab" data-toggle="tab">Documentos relacionados</a>
+            </li>
+           
+        </ul>
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="detalle_guia">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary" onclick="MostrarModal()">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.Action("GridViewPartial_guias_remision_det")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_documentos_relacionados">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.Action("GridViewPartial_Facturas_x_guia")
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+           
         </div>
     </div>
+
+
 
     <div class="modal fade" id="OpModal" role="dialog">
             <div class="modal-dialog modal-lg">
@@ -401,6 +442,31 @@
         });
     }
 
+
+    function cargar_contactos() {
+
+        $("#IdContacto").empty();
+        var codigo = IdCliente.GetValue();
+
+        var datos = {
+            IdCliente: codigo
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("cargar_contactos", "Factura",new { Area = "Facturacion"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdContacto").append("<option value=" + row.IdContacto + ">" + row.Nombres + "</option>");
+                });
+            },
+            error: function (error) {
+            }
+        });
+    }
 </script>
 
 
