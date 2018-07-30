@@ -10,11 +10,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Core.Erp.Bus.General;
+using DevExpress.Web.Mvc;
+
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
     public class GuiaRemisionController : Controller
     {
+        #region variables
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         fa_guia_remision_Bus bus_guia = new fa_guia_remision_Bus();
         fa_guia_remision_det_Bus bus_detalle = new fa_guia_remision_det_Bus();
@@ -22,7 +24,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_PuntoVta_Bus bus_punto_venta = new fa_PuntoVta_Bus();
         tb_transportista_Bus bus_transportista = new tb_transportista_Bus();
         tb_sis_Documento_Tipo_Talonario_Bus bus_talonario = new tb_sis_Documento_Tipo_Talonario_Bus();
-
+        fa_factura_Bus bus_factura = new fa_factura_Bus();
+        fa_guia_remision_det_Info_lst detalle_info = new fa_guia_remision_det_Info_lst();
+        #endregion
         #region Metodos ComboBox bajo demanda cliente
         public ActionResult CmbCliente_Guia()
         {
@@ -107,6 +111,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             model.lst_detalle = Session["fa_guia_remision_det_Info"] as List<fa_guia_remision_det_Info>;
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.CodGuiaRemision= (model.CodGuiaRemision == null) ? "" : model.CodGuiaRemision;
+            model.CodDocumentoTipo = "GUIA";
             string mensaje = bus_guia.validar(model);
             if (mensaje != "")
             {
@@ -187,7 +194,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var resultado = bus_punto_venta.get_list(IdEmpresa, IdSucursal, false);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-          public JsonResult GetUltimoDocumento(int IdSucursal = 0, int IdPuntoVta = 0)
+         public JsonResult GetUltimoDocumento(int IdSucursal = 0, int IdPuntoVta = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             tb_sis_Documento_Tipo_Talonario_Info resultado;
@@ -205,7 +212,67 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 resultado = new tb_sis_Documento_Tipo_Talonario_Info();
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult Cargar_facturas(decimal IdCliente = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_facturas_sin_guias = bus_factura.get_list_fac_sin_guia(IdEmpresa, IdCliente);
+            Session["fa_factura_Info"] = lst_facturas_sin_guias;
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult seleccionar_aprobacion(string Ids, int IdSucursal=0, int IdPuntoVta=0)
+        {
+            if (Ids != null)
+            {
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                fa_guia_remision_det_Bus detalle_guia = new fa_guia_remision_det_Bus();
+                string[] array = Ids.Split(',');
+                var output = array.GroupBy(q => q).ToList();
+                List<fa_guia_remision_det_Info> list_facturas_seleccionadas = new List<fa_guia_remision_det_Info>();
+                list_facturas_seleccionadas = Session["fa_guia_remision_det_Info"] as List<fa_guia_remision_det_Info>;
+                if (list_facturas_seleccionadas == null)
+                    list_facturas_seleccionadas = new List<fa_guia_remision_det_Info>();
+                foreach (var item in output)
+                {
+                    if (item.Key != "")
+                    {
+                        if (list_facturas_seleccionadas.Where(q => q.IdCbteVta == Convert.ToDecimal(Ids)).Count() == 0)
+                        {
+                            var lst_tmp = bus_detalle.get_list_x_factura(IdEmpresa, IdSucursal, IdPuntoVta, Convert.ToDecimal(item.Key));
+                            list_facturas_seleccionadas.AddRange(lst_tmp);
+                        }
+                    }
+                }
+                Session["fa_guia_remision_det_Info"] = list_facturas_seleccionadas;
+            }
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
 
+        #endregion
+
+
+        #region funciones del detalle
+   
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_guia_remision_det_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            if (info_det != null)
+                if (info_det.Secuencia != 0 && info_det.gi_cantidad!=0)
+                {
+                    detalle_info.UpdateRow(info_det);
+                }
+
+         
+            var model = detalle_info.get_list();
+            return PartialView("_GridViewPartial_guias_remision_det", model);
+        }
+
+        public ActionResult EditingDelete(int Secuencia)
+        {
+            detalle_info.DeleteRow(Secuencia);
+            var model = detalle_info.get_list();
+            return PartialView("_GridViewPartial_guias_remision_det", model);
+        }
         #endregion
         private void cargar_combos(fa_guia_remision_Info model)
         {
@@ -219,5 +286,40 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             ViewBag.lst_transportista = lst_transportista;
         }
        
+    }
+
+
+
+    public class fa_guia_remision_det_Info_lst
+    {
+        public List<fa_guia_remision_det_Info> get_list()
+        {
+            if (HttpContext.Current.Session["fa_guia_remision_det_Info"] == null)
+            {
+                List<fa_guia_remision_det_Info> list = new List<fa_guia_remision_det_Info>();
+
+                HttpContext.Current.Session["fa_guia_remision_det_Info"] = list;
+            }
+            return (List<fa_guia_remision_det_Info>)HttpContext.Current.Session["fa_guia_remision_det_Info"];
+        }
+
+        public void set_list(List<fa_guia_remision_det_Info> list)
+        {
+            HttpContext.Current.Session["fa_guia_remision_det_Info"] = list;
+        }
+
+     
+        public void UpdateRow(fa_guia_remision_det_Info info_det)
+        {
+            fa_guia_remision_det_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();
+            edited_info.gi_cantidad = info_det.gi_cantidad;
+
+        }
+
+        public void DeleteRow(int Secuencia)
+        {
+            List<fa_guia_remision_det_Info> list = get_list();
+            list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
+        }
     }
 }

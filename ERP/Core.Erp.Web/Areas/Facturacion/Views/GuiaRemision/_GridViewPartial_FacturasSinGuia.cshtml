@@ -4,8 +4,8 @@
         settings.Name = "GridViewPartial_FacturasSinGuia";
         settings.CallbackRouteValues = new { Controller = "GuiaRemision", Action = "GridViewPartial_FacturasSinGuia" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdGuiaRemision";
-        
+        settings.KeyFieldName = "IdCbteVta";
+
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
@@ -27,6 +27,28 @@
         settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
+
+
+
+
+
+        //Configuración checkbox
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowSelectCheckbox = true;
+        settings.CommandColumn.SelectAllCheckboxMode = GridViewSelectAllCheckBoxMode.AllPages;
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "*";
+            column.FieldName = "seleccionado";
+            column.ColumnType = MVCxGridViewColumnType.CheckBox;
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(2);
+            column.Visible = false;
+        });
+
+
+
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdCbteVta";
@@ -35,13 +57,13 @@
         });
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(35);
+            column.Width = Unit.Percentage(10);
             column.FieldName = "vt_serie1";
             column.Caption = "Establecimiento";
         });
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.FieldName = "vt_serie2";
             column.Caption = "Pto emision";
         });
@@ -63,9 +85,10 @@
             column.FieldName = "vt_Observacion";
             column.Caption = "Observación";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Width = Unit.Percentage(5);
+            column.Width = Unit.Percentage(50);
         });
-       
+
+
         settings.PreRender = (sender, e) =>
         {
             MVCxGridView gridView = (MVCxGridView)sender;
@@ -77,6 +100,8 @@
             MVCxGridView gridView = (MVCxGridView)sender;
             gridView.ExpandAll();
         };
+        settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
+        settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
     });
 }
 @grid.Bind(Model).GetHtml()

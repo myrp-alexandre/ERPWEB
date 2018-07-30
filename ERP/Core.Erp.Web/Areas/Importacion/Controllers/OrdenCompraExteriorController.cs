@@ -269,6 +269,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             var lst_undades = bus_unidad_medida.get_list(false);
             ViewBag.lst_undades = lst_undades;
         }
+
         #region funciones del detalle
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] imp_ordencompra_ext_det_Info info_det)

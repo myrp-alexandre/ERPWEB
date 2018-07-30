@@ -35,7 +35,8 @@
         {
             column.FieldName = "pr_descripcion";
             column.Caption = "Producto";
-            column.Width = Unit.Percentage(30);
+            column.Width = Unit.Percentage(80);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
@@ -52,20 +53,7 @@
                 q.Width = Unit.Percentage(100);
             });
         });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "gi_detallexItems";
-            column.Caption = "Observación";
-            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Width = Unit.Percentage(10);
-            column.EditorProperties().SpinEdit(q =>
-            {
-                q.MinValue = 0;
-                q.Width = Unit.Percentage(100);
-            });
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-        });
-       
+        
 
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "gi_cantidad").DisplayFormat = "{0:n2}";
         settings.Settings.ShowFooter = true;

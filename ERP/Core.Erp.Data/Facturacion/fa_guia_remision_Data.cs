@@ -16,7 +16,7 @@ namespace Core.Erp.Data.Facturacion
                 List<fa_guia_remision_Info> Lista;
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
-                    Lista = (from q in Context.fa_guia_remision
+                    Lista = (from q in Context.vwfa_guia_remision
                              where q.IdEmpresa == IdEmpresa
                              && q.gi_fecha >= fecha_inicio
                              && q.gi_fecha <= Fecha_fin
@@ -46,7 +46,10 @@ namespace Core.Erp.Data.Facturacion
                                 ruta=q.ruta,
                                 Direccion_Destino=q.Direccion_Destino,
                                 Direccion_Origen=q.Direccion_Origen,
-                                Estado=q.Estado
+                                Estado=q.Estado,
+                                pe_nombreCompleto=q.pe_nombreCompleto,
+                                pe_cedulaRuc=q.pe_cedulaRuc
+                                
                              }).ToList();
                 }
                 return Lista;
@@ -140,7 +143,7 @@ namespace Core.Erp.Data.Facturacion
                         IdEmpresa = info.IdEmpresa,
                         IdSucursal = info.IdSucursal,
                         IdBodega = info.IdBodega,
-                        IdGuiaRemision = info.IdGuiaRemision,
+                        IdGuiaRemision =info.IdGuiaRemision= get_id(info.IdEmpresa),
                         CodGuiaRemision = info.CodGuiaRemision,
                         CodDocumentoTipo = info.CodDocumentoTipo,
                         Serie1 = info.Serie1,
@@ -152,7 +155,7 @@ namespace Core.Erp.Data.Facturacion
                         IdTransportista = info.IdTransportista,
                         gi_fecha = info.gi_fecha,
                         gi_plazo = info.gi_plazo,
-                        gi_fech_venc = info.gi_fech_venc,
+                        gi_fech_venc = info.gi_fecha,
                         gi_Observacion = info.gi_Observacion,
                         Impreso = info.Impreso,
                         gi_FechaInicioTraslado = info.gi_FechaInicioTraslado,
@@ -161,7 +164,11 @@ namespace Core.Erp.Data.Facturacion
                         ruta = info.ruta,
                         Direccion_Destino = info.Direccion_Destino,
                         Direccion_Origen = info.Direccion_Origen,
-                        Estado = info.Estado="A"
+                        Estado = info.Estado="A",
+                        IdUsuario=info.IdUsuario,
+                        nom_pc=info.nom_pc,
+                        ip=info.ip,
+                        Fecha_Transac=info.Fecha_Transac=DateTime.Now
 
                     };
                     Context.fa_guia_remision.Add(Entity);
@@ -178,6 +185,7 @@ namespace Core.Erp.Data.Facturacion
                             gi_cantidad=item.gi_cantidad,
                             gi_detallexItems =item.gi_detallexItems
                         });
+                        secuencia++;
                     }
                     Context.SaveChanges();
 

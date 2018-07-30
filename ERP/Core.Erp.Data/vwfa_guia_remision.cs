@@ -40,5 +40,6 @@ namespace Core.Erp.Data
         public string Direccion_Destino { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string pe_nombreCompleto { get; set; }
+        public string Estado { get; set; }
     }
 }

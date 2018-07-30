@@ -1,4 +1,49 @@
-﻿@model Core.Erp.Info.Facturacion.fa_guia_remision_Info
+﻿<script>
+
+    var selectedIDs;
+    function OnBeginCallback(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDs"] = selectedIDs;
+    }
+    function OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("IdCbteVta", GetSelectedFieldValuesCallback);
+    }
+    function GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedIDs = values.join(',');
+    }
+
+    function seleccionar_aprobacion() {
+        var datos = {
+            Ids: selectedIDs,
+            IdSucursal: $("#IdSucursal").val(),
+            IdPuntoVta: $("#IdPuntoVta").val()
+        }
+        $("#btn_guardar").disabled = true;
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("seleccionar_aprobacion","GuiaRemision", new { Area = "Facturacion" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                $("#myform").submit();
+                GridViewPartial_guias_remision_det.PerformCallback();
+                $("#OpModal").modal("hide");
+
+            },
+            error: function (error) {
+            }
+        });
+        $("#btn_guardar").disabled = false;
+    }
+
+</script>
+@model Core.Erp.Info.Facturacion.fa_guia_remision_Info
 @{
     ViewBag.Title = "Nueva guia";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -40,7 +85,7 @@
             </div>
         </div>
      </div>
-     
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
@@ -106,7 +151,7 @@
             </div>
         </div>
 
-        <div class="row">
+    <div class="row">
             <div class="col-md-12">
                 <div class="col-md-8">
                     <div class="form-group">
@@ -129,7 +174,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+    <div class="row">
             <div class="col-md-12">
                 <div class="col-md-8">
                     <div class="form-group">
@@ -163,7 +208,13 @@
             </div>
             </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-primary" onclick="MostrarModal()">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -175,8 +226,7 @@
         </div>
     </div>
 
-
-        <div class="modal fade" id="OpModal" role="dialog">
+    <div class="modal fade" id="OpModal" role="dialog">
             <div class="modal-dialog modal-lg">
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -188,6 +238,7 @@
                         @Html.Action("GridViewPartial_FacturasSinGuia")
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="seleccionar_aprobacion();">Aceptar</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
@@ -208,6 +259,9 @@
 
 
 <script>
+
+
+
     $(function () {
         CargarPuntosDeVenta();
         GetUltimoDocumento();
@@ -215,7 +269,7 @@
         $('#vt_fecha').datepicker({
             autoclose: true
         })
-       
+
         $("#IdSucursal").change(function () {
             CargarPuntosDeVenta();
             GetUltimoDocumento();
@@ -223,7 +277,7 @@
         $("#IdPuntoVta").change(function () {
             GetUltimoDocumento();
         });
-       
+
     });
 
     function MostrarModal() {
@@ -231,9 +285,26 @@
         $("#OpModal").modal("show");
     }
 
-    
 
-  
+    function CargarFacturas() {
+        var datos = {
+            IdCliente: IdCliente.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("Cargar_facturas", "GuiaRemision",new { Area = "Facturacion"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+            },
+            error: function (error) {
+            }
+        });
+    }
+
     function CargarPuntosDeVenta() {
         $("#IdPuntoVta").empty();
         var datos = {
@@ -282,3 +353,5 @@
 
 
 </script>
+
+

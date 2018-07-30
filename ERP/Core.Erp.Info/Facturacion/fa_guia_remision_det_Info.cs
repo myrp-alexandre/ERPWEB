@@ -16,5 +16,8 @@ namespace Core.Erp.Info.Facturacion
         public decimal IdProducto { get; set; }
         public double gi_cantidad { get; set; }
         public string gi_detallexItems { get; set; }
+
+        public string pr_descripcion { get; set; }
+        public decimal IdCbteVta { get; set; }
     }
 }
