@@ -43,7 +43,7 @@ namespace Core.Erp.Bus.Facturacion
                         IdProducto = item.IdProducto,
                         gi_cantidad = item.vt_cantidad,
                         Secuencia = item.Secuencia,
-                        Secuencia_fact=item.Secuencia
+                        Secuencia_fact=item.Secuencia,
                         pr_descripcion = item.pr_descripcion
                     });
                 }

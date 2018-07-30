@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Core.Erp.Data.General;
+using Core.Erp.Info.General;
+using Core.Erp.Info.Helps;
 namespace Core.Erp.Bus.Facturacion
 {
    public class fa_guia_remision_Bus
@@ -13,6 +15,8 @@ namespace Core.Erp.Bus.Facturacion
         fa_guia_remision_Data odata = new fa_guia_remision_Data();
         fa_guia_remision_det_Data odata_det = new fa_guia_remision_det_Data();
         fa_guia_remision_det_x_factura_Data odata_guia_x_fac = new fa_guia_remision_det_x_factura_Data();
+        tb_sis_Documento_Tipo_Talonario_Data data_talonario = new tb_sis_Documento_Tipo_Talonario_Data();
+        tb_sis_Documento_Tipo_Talonario_Info info_talonario = new tb_sis_Documento_Tipo_Talonario_Info();
         public List<fa_guia_remision_Info> get_list(int IdEmpresa, DateTime fecha_inicio, DateTime fecha_fin)
         {
             try
@@ -42,7 +46,20 @@ namespace Core.Erp.Bus.Facturacion
         {
             try
             {
-                return odata.guardarDB(info);
+                info_talonario.IdEmpresa = info.IdEmpresa;
+                info_talonario.IdSucursal = info.IdSucursal;
+                info_talonario.CodDocumentoTipo = cl_enumeradores.eTipoDocumento.GUIA.ToString();
+                info_talonario.Establecimiento = info.Serie1;
+                info_talonario.PuntoEmision = info.Serie2;
+                info_talonario.NumDocumento = info.NumGuia_Preimpresa;
+                info_talonario.Usado = true;
+                if (odata.guardarDB(info))
+                {
+                    data_talonario.modificar_estado_usadoDB(info_talonario);
+                    return true;
+                }
+                else
+                    return false;
             }
             catch (Exception)
             {
@@ -68,7 +85,22 @@ namespace Core.Erp.Bus.Facturacion
         {
             try
             {
-                return odata.anularDB(info);
+                info_talonario.IdEmpresa = info.IdEmpresa;
+                info_talonario.IdSucursal = info.IdSucursal;
+                info_talonario.CodDocumentoTipo = cl_enumeradores.eTipoDocumento.GUIA.ToString();
+                info_talonario.Establecimiento = info.Serie1;
+                info_talonario.PuntoEmision = info.Serie2;
+                info_talonario.NumDocumento = info.NumGuia_Preimpresa;
+                info_talonario.Usado = false;
+                if (odata.anularDB(info))
+                {
+                    odata_guia_x_fac.eliminar(info.IdEmpresa, info.IdGuiaRemision);
+
+                    data_talonario.modificar_estado_usadoDB(info_talonario);
+                    return true;
+                }
+                else
+                    return false;
             }
             catch (Exception)
             {

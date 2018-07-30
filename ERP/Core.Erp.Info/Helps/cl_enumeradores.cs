@@ -2,12 +2,26 @@
 {
     public class cl_enumeradores
     {
+
         public enum eTipoCbteBancario
         {
             CHEQ,
             DEPO,
             NCBA,
             NDBA
+        }
+        public enum eTipoDocumento
+        {
+            COTIZ,
+            FACT,
+            GUIA,
+            NTCR,
+            NTDB,
+            NTPEDI,
+            NTVTA,
+            ORDESP,
+            PEDI,
+            RETEN
         }
         public enum eTipoCatalogoGeneral
         {
