@@ -22,5 +22,53 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
+
+        public in_devolucion_inven_Info get_info(int IdEmpresa, decimal IdDev_Inven)
+        {
+            try
+            {
+                return odata.get_info(IdEmpresa, IdDev_Inven);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool guardarDB(in_devolucion_inven_Info info)
+        {
+            try
+            {
+                return odata.guardarDB(info);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool modificarDB(in_devolucion_inven_Info info)
+        {
+            try
+            {
+                return odata.modificarDB(info);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool anularDB(in_devolucion_inven_Info info)
+        {
+            try
+            {
+                return odata.anularDB(info);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

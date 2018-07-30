@@ -33,5 +33,9 @@ namespace Core.Erp.Info.Inventario
         public string MotivoAnulacion { get; set; }
         #endregion
 
+        #region Campos que no existen en la tabla
+        public List<in_devolucion_inven_det_Info> lst_det { get; set; }
+        #endregion
+
     }
 }
