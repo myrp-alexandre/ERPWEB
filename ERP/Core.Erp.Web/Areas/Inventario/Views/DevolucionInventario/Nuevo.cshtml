@@ -10,6 +10,106 @@
 
 @using (Html.BeginForm("Nuevo", "DevolucionInventario", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    <div class="modal fade" id="Modal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Movimientos</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Action("GridViewPartial_Devolucion_det_x_dev")
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @Html.HiddenFor(q => q.IdEmpresa)
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdSucursal">Sucursal*</label>
+                    @Html.DropDownListFor(q=>q.IdSucursal_inv, new SelectList(ViewBag.lst_sucursal, "IdSucursal","Su_Descripcion"),new { @id = "IdSucursal_inv", @class = "form-control" })
+                    @Html.ValidationMessageFor(q=>q.IdSucursal_inv,"",new { @class = "text-danger"})
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="dev_signo">Tipo*</label>
+                    @Html.DropDownListFor(q => q.dev_signo, new SelectList(ViewBag.lst_signo, "Key", "Value"), new { @id = "dev_signo", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.dev_signo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-2 col-md-2">
+                <div class="form-group">
+                    <label for="">Fecha*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.Fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha" })
+                        @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="">Desde*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.Fecha_ini, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_ini" })
+                        @Html.ValidationMessageFor(q => q.Fecha_ini, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="">Hasta*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.Fecha_fin, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_fin" })
+                        @Html.ValidationMessageFor(q => q.Fecha_fin, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="observacion">Observación</label>
+                    @Html.TextAreaFor(q=>q.observacion,new { @class = "form-control", @rows = 2})
+                    @Html.ValidationMessageFor(q => q.observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Action("GridViewPartial_Devolucion_det")
         <div class="box-footer">
             <button type="submit" class="btn btn-primary">Guardar</button>
             <a class="btn btn-default" href="@Url.Action("Index", "DevolucionInventario", null)">Cancelar</a>
@@ -19,3 +119,18 @@
             @Scripts.Render("~/bundles/jqueryval")
         }
 }
+
+<script type="text/javascript">
+    $(function () {
+        //Date picker
+        $('#Fecha').datepicker({
+            autoclose: true
+        })
+        $('#Fecha_ini').datepicker({
+            autoclose: true
+        })
+        $('#Fecha_fin').datepicker({
+            autoclose: true
+        })
+    });
+</script>
