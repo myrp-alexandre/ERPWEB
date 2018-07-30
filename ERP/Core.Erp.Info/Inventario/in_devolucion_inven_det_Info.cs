@@ -17,5 +17,9 @@ namespace Core.Erp.Info.Inventario
         public decimal inv_IdNumMovi { get; set; }
         public int inv_Secuencia { get; set; }
         public double cant_devuelta { get; set; }
+        public string IdUnidadMedida { get; set; }
+        public double mv_costo { get; set; }
+        public decimal IdProducto { get; set; }
+        public int IdBodega { get; set; }
     }
 }
