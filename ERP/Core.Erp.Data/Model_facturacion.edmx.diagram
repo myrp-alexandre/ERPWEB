@@ -7,7 +7,6 @@
       <Diagram DiagramId="b498a907f50d4550ac15e5af619fed9d" Name="Diagram1" ZoomLevel="73" >
         <EntityTypeShape EntityType="Model_facturacion.fa_cliente_tipo" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model_facturacion.fa_TerminoPago" Width="1.5" PointX="3.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Model_facturacion.fa_TipoNota" Width="1.5" PointX="3.375" PointY="3.75" />
         <EntityTypeShape EntityType="Model_facturacion.fa_PuntoVta" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_facturacion.fa_formaPago" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="Model_facturacion.fa_Vendedor" Width="1.5" PointX="5.375" PointY="9.125" />
@@ -50,8 +49,6 @@
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_x_formaPago_fa_formaPago" />
         <EntityTypeShape EntityType="Model_facturacion.fa_parametro" Width="1.5" PointX="5.625" PointY="21.25" />
         <EntityTypeShape EntityType="Model_facturacion.fa_TipoNota_x_Empresa_x_Sucursal" Width="1.5" PointX="5.625" PointY="18.5" />
-        <AssociationConnector Association="Model_facturacion.FK_fa_parametro_fa_TipoNota" />
-        <AssociationConnector Association="Model_facturacion.FK_fa_TipoNota_x_Empresa_x_Sucursal_fa_TipoNota" />
         <EntityTypeShape EntityType="Model_facturacion.fa_notaCreDeb_x_ct_cbtecble" Width="1.5" PointX="17.375" PointY="21.875" />
         <EntityTypeShape EntityType="Model_facturacion.fa_notaCreDeb_x_cxc_cobro" Width="1.5" PointX="17.375" PointY="18.375" />
         <EntityTypeShape EntityType="Model_facturacion.fa_notaCreDeb_x_fa_factura_NotaDeb" Width="1.5" PointX="12.375" PointY="21.875" />
@@ -60,7 +57,6 @@
         <AssociationConnector Association="Model_facturacion.FK_fa_notaCreDeb_fa_cliente" />
         <AssociationConnector Association="Model_facturacion.FK_fa_notaCreDeb_fa_cliente_contactos" />
         <AssociationConnector Association="Model_facturacion.FK_fa_notaCreDeb_fa_PuntoVta" />
-        <AssociationConnector Association="Model_facturacion.FK_fa_notaCreDeb_fa_TipoNota" />
         <AssociationConnector Association="Model_facturacion.FK_fa_notaCreDeb_x_ct_cbtecble_fa_notaCreDeb" />
         <AssociationConnector Association="Model_facturacion.FK_fa_notaCreDeb_x_cxc_cobro_fa_notaCreDeb" />
         <EntityTypeShape EntityType="Model_facturacion.vwfa_proforma_det" Width="1.5" PointX="0.75" PointY="13.75" />
@@ -80,6 +76,10 @@
         <EntityTypeShape EntityType="Model_facturacion.vwfa_factura_sin_guia" Width="1.5" PointX="10.375" PointY="16.75" />
         <EntityTypeShape EntityType="Model_facturacion.vwfa_guia_remision" Width="1.5" PointX="19.375" PointY="20.75" />
         <EntityTypeShape EntityType="Model_facturacion.vwfa_guia_remision_det" Width="1.5" PointX="0.75" PointY="21.75" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_TipoNota" Width="1.5" PointX="0.75" PointY="12.875" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_notaCreDeb_fa_TipoNota" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_parametro_fa_TipoNota" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_TipoNota_x_Empresa_x_Sucursal_fa_TipoNota" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

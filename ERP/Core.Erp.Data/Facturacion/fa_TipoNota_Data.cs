@@ -103,7 +103,8 @@ namespace Core.Erp.Data.Facturacion
                         CodTipoNota = Entity.CodTipoNota,
                         No_Descripcion = Entity.No_Descripcion,
                         Tipo = Entity.Tipo,
-                        Estado = Entity.Estado
+                        Estado = Entity.Estado,
+                        GeneraMoviInven = Entity.GeneraMoviInven
                     };
                 }
                 return info;
@@ -150,6 +151,7 @@ namespace Core.Erp.Data.Facturacion
                         No_Descripcion = info.No_Descripcion,
                         Tipo = info.Tipo,
                         Estado = info.Estado="A",
+                        GeneraMoviInven = info.GeneraMoviInven,
 
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
@@ -189,6 +191,7 @@ namespace Core.Erp.Data.Facturacion
                     Entity.CodTipoNota = info.CodTipoNota;
                     Entity.No_Descripcion = info.No_Descripcion;
                     Entity.Tipo = info.Tipo;
+                    Entity.GeneraMoviInven = info.GeneraMoviInven;
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
