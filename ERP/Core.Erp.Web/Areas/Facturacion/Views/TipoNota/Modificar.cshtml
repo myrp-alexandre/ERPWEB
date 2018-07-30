@@ -22,17 +22,26 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="Tipo">Tipo*</label>
-                @Html.DropDownListFor(q => q.Tipo, new SelectList(ViewBag.lst_tipos, "Key", "Value"), new { @class = "form-control" })
-                @Html.ValidationMessageFor(q => q.Tipo, "", new { @class = "form", @role = "text-danger" })
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Tipo">Tipo*</label>
+                    @Html.DropDownListFor(q => q.Tipo, new SelectList(ViewBag.lst_tipos, "Key", "Value"), new { @class = "form-control", @id = "Tipo" })
+                    @Html.ValidationMessageFor(q => q.Tipo, "", new { @class = "form", @role = "text-danger" })
+                </div>
             </div>
         </div>
-    </div>
-</div>
+
+        <div class="col-md-6" id="div_movimiento">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="GeneraMoviInven">@Html.CheckBoxFor(q => q.GeneraMoviInven, new { @id = "GeneraMoviInven" }) Genera movimiento inventario</label>
+                </div>
+                </div>
+            </div>
+
+        </div>
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-12">
@@ -64,3 +73,25 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 }
+<script>
+    $(function () {
+        ocultar_mostrar_div_movimiento();
+
+        $("#Tipo").change(function () {
+            ocultar_mostrar_div_movimiento();
+        });
+        $("#GeneraMoviInven").change(function () {
+            ocultar_mostrar_div_movimiento();
+        });
+    })
+
+    function ocultar_mostrar_div_movimiento() {
+        var tipo = ($("#Tipo").val());
+        if (tipo == "D")
+        {
+            $("#div_movimiento").hide();
+        } else {
+            $("#div_movimiento").show();
+        }
+    }
+</script>

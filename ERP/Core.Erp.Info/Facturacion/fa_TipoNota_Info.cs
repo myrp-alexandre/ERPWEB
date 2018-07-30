@@ -20,7 +20,7 @@ namespace Core.Erp.Info.Facturacion
         public string Estado { get; set; }
 
         public string IdUsuario { get; set; }
-        public Nullable<bool> GeneraMoviInven { get; set; }
+        public bool GeneraMoviInven { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }

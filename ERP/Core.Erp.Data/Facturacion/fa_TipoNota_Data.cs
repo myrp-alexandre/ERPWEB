@@ -104,7 +104,7 @@ namespace Core.Erp.Data.Facturacion
                         No_Descripcion = Entity.No_Descripcion,
                         Tipo = Entity.Tipo,
                         Estado = Entity.Estado,
-                        GeneraMoviInven = Entity.GeneraMoviInven
+                        GeneraMoviInven = Entity.GeneraMoviInven == null ? false : Convert.ToBoolean(Entity.GeneraMoviInven)
                     };
                 }
                 return info;
