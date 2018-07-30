@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Helps;
+using Core.Erp.Info.Inventario;
 using Core.Erp.Web.Helps;
 using System;
 using System.Collections.Generic;
@@ -37,9 +38,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         #region Acciones
         public ActionResult Nuevo()
-        {            
-            return View();
+        {
+            in_devolucion_inven_Info model = new in_devolucion_inven_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+            };
+            return View(model);
         }
+
         public ActionResult Modificar(decimal IdDev_Inven = 0)
         {
             return View();
