@@ -29,6 +29,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_cliente_contactos_Bus bus_contacto = new fa_cliente_contactos_Bus();
 
         #endregion
+
         #region Metodos ComboBox bajo demanda cliente
         public ActionResult CmbCliente_Guia()
         {
@@ -89,6 +90,19 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 model = new List<fa_factura_Info>();
             return PartialView("_GridViewPartial_FacturasSinGuia", model);
         }
+
+        public ActionResult GridViewPartial_Facturas_x_guia()
+        {
+            List<fa_guia_remision_det_x_factura_Info> model = new List<fa_guia_remision_det_x_factura_Info>();
+            model = Session["fa_guia_remision_det_x_factura_Info"] as List<fa_guia_remision_det_x_factura_Info>;
+            if (model == null)
+                model = new List<fa_guia_remision_det_x_factura_Info>();
+            return PartialView("_GridViewPartial_Facturas_x_guia", model);
+        }
+
+        
+
+
 
         #endregion
 
@@ -264,7 +278,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var resultado = bus_transportista.get_info(IdEmpresa, Idtransportista);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        
+        public JsonResult cargar_contactos(decimal IdCliente = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            var resultado = bus_contacto.get_list(IdEmpresa, IdCliente);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
 
@@ -302,6 +321,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             var lst_transportista = bus_transportista.get_list(model.IdEmpresa, false);
             ViewBag.lst_transportista = lst_transportista;
+
+            var lst_contacto = bus_contacto.get_list(model.IdEmpresa, model.IdCliente);
+            ViewBag.lst_contacto = lst_contacto;
+
         }
        
     }

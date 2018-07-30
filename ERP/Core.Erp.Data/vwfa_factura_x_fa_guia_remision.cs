@@ -23,5 +23,6 @@ namespace Core.Erp.Data
         public string vt_serie1 { get; set; }
         public string vt_serie2 { get; set; }
         public string vt_NumFactura { get; set; }
+        public decimal gi_IdGuiaRemision { get; set; }
     }
 }
