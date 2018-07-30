@@ -30,7 +30,7 @@ namespace Core.Erp.Data.Facturacion
                                 CodDocumentoTipo=q.CodDocumentoTipo,
                                 Serie1=q.Serie1,
                                 Serie2=q.Serie2,
-                                NumGuia_Preimpresa=q.NumGuia_Preimpresa,
+                                NumGuia_Preimpresa=q.Serie1+"-"+q.Serie2+"-"+ q.NumGuia_Preimpresa,
                                 NUAutorizacion=q.NUAutorizacion,
                                 Fecha_Autorizacion=q.Fecha_Autorizacion,
                                 IdCliente=q.IdCliente,
