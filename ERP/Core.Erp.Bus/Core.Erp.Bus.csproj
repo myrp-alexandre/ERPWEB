@@ -115,6 +115,8 @@
     <Compile Include="CuentasPorPagar\cp_retencion_det_Bus.cs" />
     <Compile Include="CuentasPorPagar\cp_retencion_x_ct_cbtecble_Bus.cs" />
     <Compile Include="CuentasPorPagar\cp_TipoDocumento_Bus.cs" />
+    <Compile Include="Facturacion\fa_catalogo_Bus.cs" />
+    <Compile Include="Facturacion\fa_catalogo_tipo_Bus.cs" />
     <Compile Include="Facturacion\fa_cliente_Bus.cs" />
     <Compile Include="Facturacion\fa_cliente_contactos_Bus.cs" />
     <Compile Include="Facturacion\fa_cliente_tipo_Bus.cs" />

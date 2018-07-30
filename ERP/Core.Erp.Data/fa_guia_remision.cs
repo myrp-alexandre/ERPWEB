@@ -17,6 +17,7 @@ namespace Core.Erp.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public fa_guia_remision()
         {
+            this.fa_factura_x_fa_guia_remision = new HashSet<fa_factura_x_fa_guia_remision>();
             this.fa_guia_remision_det = new HashSet<fa_guia_remision_det>();
         }
     
@@ -54,8 +55,13 @@ namespace Core.Erp.Data
         public string Estado { get; set; }
         public string MotiAnula { get; set; }
         public string Direccion_Destino { get; set; }
+        public string Num_declaracion_aduanera { get; set; }
+        public string IdCatalogo_traslado { get; set; }
     
+        public virtual fa_catalogo fa_catalogo { get; set; }
         public virtual fa_cliente fa_cliente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fa_factura_x_fa_guia_remision> fa_factura_x_fa_guia_remision { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_guia_remision_det> fa_guia_remision_det { get; set; }
     }

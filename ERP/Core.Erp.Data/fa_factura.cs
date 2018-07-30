@@ -22,6 +22,7 @@ namespace Core.Erp.Data
             this.fa_factura_x_ct_cbtecble = new HashSet<fa_factura_x_ct_cbtecble>();
             this.fa_factura_x_formaPago = new HashSet<fa_factura_x_formaPago>();
             this.fa_factura_x_in_Ing_Egr_Inven = new HashSet<fa_factura_x_in_Ing_Egr_Inven>();
+            this.fa_factura_x_fa_guia_remision = new HashSet<fa_factura_x_fa_guia_remision>();
         }
     
         public int IdEmpresa { get; set; }
@@ -74,5 +75,7 @@ namespace Core.Erp.Data
         public virtual ICollection<fa_factura_x_formaPago> fa_factura_x_formaPago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_factura_x_in_Ing_Egr_Inven> fa_factura_x_in_Ing_Egr_Inven { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fa_factura_x_fa_guia_remision> fa_factura_x_fa_guia_remision { get; set; }
     }
 }
