@@ -7,7 +7,69 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script type="text/javascript">
+    $(function () {
+        //Date picker
+        $('#Fecha').datepicker({
+            autoclose: true
+        })
+        $('#Fecha_ini').datepicker({
+            autoclose: true
+        })
+        $('#Fecha_fin').datepicker({
+            autoclose: true
+        })
+    });
 
+    function MostrarModal() {
+        var datos = {
+            Fecha_ini: $("#Fecha_ini").val(),
+            Fecha_fin: $("#Fecha_fin").val(),
+            IdSucursal: $("IdSucursal").val(),
+            signo: $("#dev_signo").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetMovimientos", "DevolucionInventario",new { Area = "Inventario"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+            },
+            error: function (error) {
+            }
+        });
+        GridView_devolucion_det_x_cruzar.PerformCallback();
+        $("#Modal").modal("show");        
+    }
+
+    function SetMovimiento(SecuencialID) {
+        var datos = {
+            SecuencialID: SecuencialID
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetMovimiento", "DevolucionInventario",new { Area = "Inventario"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+            },
+            error: function (error) {
+            }
+        });
+        GridView_devolucion_det.PerformCallback();
+        $("#Modal").modal("hide");
+    }
+</script>
 @using (Html.BeginForm("Nuevo", "DevolucionInventario", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="modal fade" id="Modal" role="dialog">
@@ -96,6 +158,11 @@
                     </div>
                 </div>
             </div>
+                <div class="col-md-6" style="align-items:center">
+                    <button type="button" class="btn bottom btn-primary" id="btn_buscar" onclick="MostrarModal();">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
         </div>
     </div>
     <div class="row">
@@ -120,17 +187,3 @@
         }
 }
 
-<script type="text/javascript">
-    $(function () {
-        //Date picker
-        $('#Fecha').datepicker({
-            autoclose: true
-        })
-        $('#Fecha_ini').datepicker({
-            autoclose: true
-        })
-        $('#Fecha_fin').datepicker({
-            autoclose: true
-        })
-    });
-</script>

@@ -36,15 +36,15 @@
         {
             column.FieldName = "pr_descripcion";
             column.Caption = "Producto";
-            column.Width = Unit.Percentage(40);
+            column.Width = Unit.Percentage(55);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdUnidadMedida";
+            column.FieldName = "NomUnidad";
             column.Caption = "Unidad de medida";
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(15);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
@@ -52,7 +52,7 @@
         {
             column.FieldName = "dm_cantidad";
             column.Caption = "Cantidad";
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(15);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
@@ -60,7 +60,7 @@
         {
             column.FieldName = "cant_devuelta";
             column.Caption = "Cant. Devuelta";
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(15);
             column.EditorProperties().SpinEdit(q =>
             {
                 q.MinValue = 0;

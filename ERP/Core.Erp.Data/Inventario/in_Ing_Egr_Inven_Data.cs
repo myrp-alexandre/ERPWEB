@@ -372,5 +372,43 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
+
+        public List<in_Ing_Egr_Inven_Info> get_list_por_devolver(int IdEmpresa, string signo, DateTime Fecha_ini, DateTime Fecha_fin)
+        {
+            try
+            {
+                List<in_Ing_Egr_Inven_Info> Lista;
+                Fecha_ini = Fecha_ini.Date;
+                Fecha_fin = Fecha_fin.Date;
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    Lista = (from q in Context.vwin_Ing_Egr_Inven_por_devolver
+                             where q.IdEmpresa == IdEmpresa
+                             && q.signo == signo
+                             && Fecha_ini <= q.cm_fecha 
+                             && q.cm_fecha <= Fecha_fin
+                             select new in_Ing_Egr_Inven_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdSucursal = q.IdSucursal,
+                                 IdMovi_inven_tipo = q.IdMovi_inven_tipo,
+                                 IdNumMovi = q.IdNumMovi,
+                                 signo = q.signo,
+                                 tm_descripcion = q.tm_descripcion,
+                                 cm_observacion = q.cm_observacion,
+                                 cm_fecha = q.cm_fecha,
+                                 Su_Descripcion = q.Su_Descripcion
+                             }).ToList();
+                }
+
+                Lista.ForEach(q => q.SecuencialID = q.IdEmpresa.ToString("00") + q.IdSucursal.ToString("00") + q.IdMovi_inven_tipo.ToString("00") + q.IdNumMovi.ToString("00000000"));
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

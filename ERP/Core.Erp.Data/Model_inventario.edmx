@@ -862,8 +862,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_Ing_Egr_Inven
             <PropertyRef Name="IdBodega" />
             <PropertyRef Name="dm_cantidad_sinConversion" />
             <PropertyRef Name="IdUnidadMedida_sinConversion" />
+            <PropertyRef Name="mv_costo_sinConversion" />
             <PropertyRef Name="cant_devuelta" />
             <PropertyRef Name="NomUnidad" />
+            <PropertyRef Name="IdProducto" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
@@ -873,13 +875,14 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_Ing_Egr_Inven
           <Property Name="IdBodega" Type="int" Nullable="false" />
           <Property Name="dm_cantidad_sinConversion" Type="float" Nullable="false" />
           <Property Name="IdUnidadMedida_sinConversion" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="mv_costo_sinConversion" Type="float" />
+          <Property Name="mv_costo_sinConversion" Type="float" Nullable="false" />
           <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" />
           <Property Name="nom_presentacion" Type="varchar" MaxLength="150" />
           <Property Name="lote_fecha_vcto" Type="datetime" />
           <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
           <Property Name="cant_devuelta" Type="float" Nullable="false" />
           <Property Name="NomUnidad" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_Ing_Egr_Inven_por_devolver' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1945,7 +1948,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
     [vwin_Ing_Egr_Inven_det_x_devolver].[lote_fecha_vcto] AS [lote_fecha_vcto], 
     [vwin_Ing_Egr_Inven_det_x_devolver].[lote_num_lote] AS [lote_num_lote], 
     [vwin_Ing_Egr_Inven_det_x_devolver].[cant_devuelta] AS [cant_devuelta], 
-    [vwin_Ing_Egr_Inven_det_x_devolver].[NomUnidad] AS [NomUnidad]
+    [vwin_Ing_Egr_Inven_det_x_devolver].[NomUnidad] AS [NomUnidad], 
+    [vwin_Ing_Egr_Inven_det_x_devolver].[IdProducto] AS [IdProducto]
     FROM [web].[vwin_Ing_Egr_Inven_det_x_devolver] AS [vwin_Ing_Egr_Inven_det_x_devolver]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_Ing_Egr_Inven_por_devolver" EntityType="Self.vwin_Ing_Egr_Inven_por_devolver" store:Type="Views" store:Schema="web">
@@ -2470,8 +2474,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
           </AssociationSet>
           <EntitySet Name="vwin_devolucion_inven_det" EntityType="Model_inventario.vwin_devolucion_inven_det" />
           <EntitySet Name="vwin_Ing_Egr_Inven_det" EntityType="Model_inventario.vwin_Ing_Egr_Inven_det" />
-          <EntitySet Name="vwin_Ing_Egr_Inven_det_x_devolver" EntityType="Model_inventario.vwin_Ing_Egr_Inven_det_x_devolver" />
           <EntitySet Name="vwin_Ing_Egr_Inven_por_devolver" EntityType="Model_inventario.vwin_Ing_Egr_Inven_por_devolver" />
+          <EntitySet Name="vwin_Ing_Egr_Inven_det_x_devolver" EntityType="Model_inventario.vwin_Ing_Egr_Inven_det_x_devolver" />
           </EntityContainer>
         <EntityType Name="in_CatalogoTipo">
           <Key>
@@ -4263,35 +4267,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
           <Property Name="lote_fecha_vcto" Type="DateTime" Precision="3" />
           <Property Name="lote_num_lote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="vwin_Ing_Egr_Inven_det_x_devolver">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdMovi_inven_tipo" />
-            <PropertyRef Name="IdNumMovi" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="IdBodega" />
-            <PropertyRef Name="dm_cantidad_sinConversion" />
-            <PropertyRef Name="IdUnidadMedida_sinConversion" />
-            <PropertyRef Name="cant_devuelta" />
-            <PropertyRef Name="NomUnidad" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdMovi_inven_tipo" Type="Int32" Nullable="false" />
-          <Property Name="IdNumMovi" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdBodega" Type="Int32" Nullable="false" />
-          <Property Name="dm_cantidad_sinConversion" Type="Double" Nullable="false" />
-          <Property Name="IdUnidadMedida_sinConversion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="mv_costo_sinConversion" Type="Double" />
-          <Property Name="pr_descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="nom_presentacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="lote_fecha_vcto" Type="DateTime" Precision="3" />
-          <Property Name="lote_num_lote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cant_devuelta" Type="Double" Nullable="false" />
-          <Property Name="NomUnidad" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="vwin_Ing_Egr_Inven_por_devolver">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -4310,6 +4285,38 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
           <Property Name="cm_observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="cm_fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Su_Descripcion" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vwin_Ing_Egr_Inven_det_x_devolver">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdMovi_inven_tipo" />
+            <PropertyRef Name="IdNumMovi" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="dm_cantidad_sinConversion" />
+            <PropertyRef Name="IdUnidadMedida_sinConversion" />
+            <PropertyRef Name="mv_costo_sinConversion" />
+            <PropertyRef Name="cant_devuelta" />
+            <PropertyRef Name="NomUnidad" />
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo" Type="Int32" Nullable="false" />
+          <Property Name="IdNumMovi" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="dm_cantidad_sinConversion" Type="Double" Nullable="false" />
+          <Property Name="IdUnidadMedida_sinConversion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="mv_costo_sinConversion" Type="Double" Nullable="false" />
+          <Property Name="pr_descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="nom_presentacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="lote_fecha_vcto" Type="DateTime" Precision="3" />
+          <Property Name="lote_num_lote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cant_devuelta" Type="Double" Nullable="false" />
+          <Property Name="NomUnidad" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -5128,9 +5135,25 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="vwin_Ing_Egr_Inven_por_devolver">
+            <EntityTypeMapping TypeName="Model_inventario.vwin_Ing_Egr_Inven_por_devolver">
+              <MappingFragment StoreEntitySet="vwin_Ing_Egr_Inven_por_devolver">
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="cm_fecha" ColumnName="cm_fecha" />
+                <ScalarProperty Name="cm_observacion" ColumnName="cm_observacion" />
+                <ScalarProperty Name="tm_descripcion" ColumnName="tm_descripcion" />
+                <ScalarProperty Name="signo" ColumnName="signo" />
+                <ScalarProperty Name="IdNumMovi" ColumnName="IdNumMovi" />
+                <ScalarProperty Name="IdMovi_inven_tipo" ColumnName="IdMovi_inven_tipo" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="vwin_Ing_Egr_Inven_det_x_devolver">
             <EntityTypeMapping TypeName="Model_inventario.vwin_Ing_Egr_Inven_det_x_devolver">
               <MappingFragment StoreEntitySet="vwin_Ing_Egr_Inven_det_x_devolver">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
                 <ScalarProperty Name="NomUnidad" ColumnName="NomUnidad" />
                 <ScalarProperty Name="cant_devuelta" ColumnName="cant_devuelta" />
                 <ScalarProperty Name="lote_num_lote" ColumnName="lote_num_lote" />
@@ -5142,21 +5165,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
                 <ScalarProperty Name="dm_cantidad_sinConversion" ColumnName="dm_cantidad_sinConversion" />
                 <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdNumMovi" ColumnName="IdNumMovi" />
-                <ScalarProperty Name="IdMovi_inven_tipo" ColumnName="IdMovi_inven_tipo" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwin_Ing_Egr_Inven_por_devolver">
-            <EntityTypeMapping TypeName="Model_inventario.vwin_Ing_Egr_Inven_por_devolver">
-              <MappingFragment StoreEntitySet="vwin_Ing_Egr_Inven_por_devolver">
-                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
-                <ScalarProperty Name="cm_fecha" ColumnName="cm_fecha" />
-                <ScalarProperty Name="cm_observacion" ColumnName="cm_observacion" />
-                <ScalarProperty Name="tm_descripcion" ColumnName="tm_descripcion" />
-                <ScalarProperty Name="signo" ColumnName="signo" />
                 <ScalarProperty Name="IdNumMovi" ColumnName="IdNumMovi" />
                 <ScalarProperty Name="IdMovi_inven_tipo" ColumnName="IdMovi_inven_tipo" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
