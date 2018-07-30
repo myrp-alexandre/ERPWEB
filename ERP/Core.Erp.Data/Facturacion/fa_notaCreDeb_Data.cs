@@ -66,6 +66,8 @@ namespace Core.Erp.Data.Facturacion
                         IdBodega = Entity.IdBodega,
                         IdNota = Entity.IdNota,
                         IdPuntoVta = Entity.IdPuntoVta,
+                        dev_IdEmpresa = Entity.dev_IdEmpresa,
+                        dev_IdDev_Inven = Entity.dev_IdDev_Inven,
                         CodNota = Entity.CodNota,
                         CreDeb = Entity.CreDeb,
                         CodDocumentoTipo = Entity.CodDocumentoTipo,
@@ -548,6 +550,7 @@ namespace Core.Erp.Data.Facturacion
                             entity.MotiAnula = null;
                         }
                     #endregion
+
                     db_f.SaveChanges();
                 }
 

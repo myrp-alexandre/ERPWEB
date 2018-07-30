@@ -22,6 +22,8 @@ namespace Core.Erp.Data
             this.in_transferencia1 = new HashSet<in_transferencia>();
             this.in_Ing_Egr_Inven_distribucion = new HashSet<in_Ing_Egr_Inven_distribucion>();
             this.in_Ing_Egr_Inven_distribucion1 = new HashSet<in_Ing_Egr_Inven_distribucion>();
+            this.in_devolucion_inven = new HashSet<in_devolucion_inven>();
+            this.in_devolucion_inven1 = new HashSet<in_devolucion_inven>();
         }
     
         public int IdEmpresa { get; set; }
@@ -57,5 +59,9 @@ namespace Core.Erp.Data
         public virtual ICollection<in_Ing_Egr_Inven_distribucion> in_Ing_Egr_Inven_distribucion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<in_Ing_Egr_Inven_distribucion> in_Ing_Egr_Inven_distribucion1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_devolucion_inven> in_devolucion_inven { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_devolucion_inven> in_devolucion_inven1 { get; set; }
     }
 }

@@ -325,6 +325,7 @@
     <Compile Include="Areas\Inventario\Controllers\CatalogoInventarioController.cs" />
     <Compile Include="Areas\Inventario\Controllers\CatalogoTipoInventarioController.cs" />
     <Compile Include="Areas\Inventario\Controllers\CategoriaController.cs" />
+    <Compile Include="Areas\Inventario\Controllers\DevolucionInventarioController.cs" />
     <Compile Include="Areas\Inventario\Controllers\DistribucionPorLoteController.cs" />
     <Compile Include="Areas\Inventario\Controllers\EgresoInventarioController.cs" />
     <Compile Include="Areas\Inventario\Controllers\GrupoController.cs" />
@@ -8879,6 +8880,11 @@
     <Content Include="Areas\Facturacion\Views\NotaDeDebitoFacturacion\_GridViewPartial_CruceND.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDeDebitoFacturacion\_GridViewPartial_CruceND_x_cruzar.cshtml" />
     <Content Include="Areas\Facturacion\Views\Factura\_GridViewPartial_PFactura_det.cshtml" />
+    <Content Include="Areas\Inventario\Views\DevolucionInventario\Nuevo.cshtml" />
+    <Content Include="Areas\Inventario\Views\DevolucionInventario\Modificar.cshtml" />
+    <Content Include="Areas\Inventario\Views\DevolucionInventario\Index.cshtml" />
+    <Content Include="Areas\Inventario\Views\DevolucionInventario\Anular.cshtml" />
+    <Content Include="Areas\Inventario\Views\DevolucionInventario\_GridViewPartial_devolucion.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

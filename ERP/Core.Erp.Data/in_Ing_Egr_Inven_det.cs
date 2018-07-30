@@ -14,6 +14,12 @@ namespace Core.Erp.Data
     
     public partial class in_Ing_Egr_Inven_det
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public in_Ing_Egr_Inven_det()
+        {
+            this.in_devolucion_inven_det = new HashSet<in_devolucion_inven_det>();
+        }
+    
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public int IdMovi_inven_tipo { get; set; }
@@ -50,5 +56,7 @@ namespace Core.Erp.Data
         public virtual in_UnidadMedida in_UnidadMedida { get; set; }
         public virtual in_UnidadMedida in_UnidadMedida1 { get; set; }
         public virtual in_Producto in_Producto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_devolucion_inven_det> in_devolucion_inven_det { get; set; }
     }
 }

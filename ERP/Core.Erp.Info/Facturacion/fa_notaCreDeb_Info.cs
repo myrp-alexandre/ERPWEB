@@ -10,6 +10,8 @@ namespace Core.Erp.Info.Facturacion
         public int IdBodega { get; set; }
         public decimal IdNota { get; set; }
         public Nullable<int> IdPuntoVta { get; set; }
+        public Nullable<int> dev_IdEmpresa { get; set; }
+        public Nullable<decimal> dev_IdDev_Inven { get; set; }
         public string CodNota { get; set; }
         public string CreDeb { get; set; }
         public string CodDocumentoTipo { get; set; }

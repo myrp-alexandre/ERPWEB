@@ -86,6 +86,12 @@
         <AssociationConnector Association="Model_inventario.FK_in_producto_x_tb_bodega_in_Producto" />
         <AssociationConnector Association="Model_inventario.FK_in_transferencia_det_in_Producto" />
         <EntityTypeShape EntityType="Model_inventario.vwin_producto_x_tb_bodega_stock_x_lote" Width="1.5" PointX="18.375" PointY="20.75" />
+        <EntityTypeShape EntityType="Model_inventario.in_devolucion_inven" Width="1.5" PointX="14.375" PointY="31" />
+        <EntityTypeShape EntityType="Model_inventario.in_devolucion_inven_det" Width="1.5" PointX="21.125" PointY="22.625" />
+        <AssociationConnector Association="Model_inventario.FK_in_devolucion_inven_det_in_devolucion_inven" />
+        <AssociationConnector Association="Model_inventario.FK_in_devolucion_inven_in_Ing_Egr_Inven" />
+        <AssociationConnector Association="Model_inventario.FK_in_devolucion_inven_in_Ing_Egr_Inven1" />
+        <AssociationConnector Association="Model_inventario.FK_in_devolucion_inven_det_in_Ing_Egr_Inven_det" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

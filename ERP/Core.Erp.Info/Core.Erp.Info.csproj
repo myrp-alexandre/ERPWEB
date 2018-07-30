@@ -204,6 +204,8 @@
     <Compile Include="Inventario\in_CatalogoTipo_Info.cs" />
     <Compile Include="Inventario\in_Catalogo_Info.cs" />
     <Compile Include="Inventario\in_categorias_Info.cs" />
+    <Compile Include="Inventario\in_devolucion_inven_det_Info.cs" />
+    <Compile Include="Inventario\in_devolucion_inven_Info.cs" />
     <Compile Include="Inventario\in_grupo_Info.cs" />
     <Compile Include="Inventario\in_Ing_Egr_Inven_det_Info.cs" />
     <Compile Include="Inventario\in_Ing_Egr_Inven_distribucion_Info.cs" />
