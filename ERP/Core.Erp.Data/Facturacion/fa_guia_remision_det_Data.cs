@@ -30,10 +30,15 @@ namespace Core.Erp.Data.Facturacion
                                  gi_cantidad = q.gi_cantidad,
                                  gi_detallexItems = q.gi_detallexItems,
                                  pr_descripcion=q.pr_descripcion,
-                                 
+                                 nom_presentacion=q.nom_presentacion,
+                                 ca_Categoria=q.ca_Categoria
 
                              }).ToList();
                 }
+                Lista.ForEach(V =>
+                {
+                    V.pr_descripcion = V.pr_descripcion + " " + V.pr_descripcion +"-"+V.nom_presentacion+"-"+V.ca_Categoria+ " - " + V.lote_num_lote + " - " + (V.lote_fecha_vcto != null ? Convert.ToDateTime(V.lote_fecha_vcto).ToString("dd/MM/yyyy") : "");
+                });
                 return Lista;
             }
             catch (Exception)

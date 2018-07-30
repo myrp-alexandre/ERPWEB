@@ -20,5 +20,10 @@ namespace Core.Erp.Info.Facturacion
         public int Secuencia_fact { get; set; }
         public string pr_descripcion { get; set; }
         public decimal IdCbteVta { get; set; }
+        public Nullable<System.DateTime> lote_fecha_fab { get; set; }
+        public Nullable<System.DateTime> lote_fecha_vcto { get; set; }
+        public string lote_num_lote { get; set; }
+        public string ca_Categoria { get; set; }
+        public string nom_presentacion { get; set; }
     }
 }

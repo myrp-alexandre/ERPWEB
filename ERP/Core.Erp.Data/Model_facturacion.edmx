@@ -980,6 +980,11 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_guia_remision
           <Property Name="ca_Categoria" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="nom_presentacion" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="IdGuiaRemision" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdEmpresa_fact" Type="int" />
+          <Property Name="IdSucursal_fact" Type="int" />
+          <Property Name="IdBodega_fact" Type="int" />
+          <Property Name="IdCbteVta_fact" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Secuencia_fact" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1880,7 +1885,12 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
     [vwfa_guia_remision_det].[lote_num_lote] AS [lote_num_lote], 
     [vwfa_guia_remision_det].[ca_Categoria] AS [ca_Categoria], 
     [vwfa_guia_remision_det].[nom_presentacion] AS [nom_presentacion], 
-    [vwfa_guia_remision_det].[IdGuiaRemision] AS [IdGuiaRemision]
+    [vwfa_guia_remision_det].[IdGuiaRemision] AS [IdGuiaRemision], 
+    [vwfa_guia_remision_det].[IdEmpresa_fact] AS [IdEmpresa_fact], 
+    [vwfa_guia_remision_det].[IdSucursal_fact] AS [IdSucursal_fact], 
+    [vwfa_guia_remision_det].[IdBodega_fact] AS [IdBodega_fact], 
+    [vwfa_guia_remision_det].[IdCbteVta_fact] AS [IdCbteVta_fact], 
+    [vwfa_guia_remision_det].[Secuencia_fact] AS [Secuencia_fact]
     FROM [web].[vwfa_guia_remision_det] AS [vwfa_guia_remision_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_notaCreDeb" EntityType="Self.vwfa_notaCreDeb" store:Type="Views" store:Schema="web">
@@ -3965,6 +3975,11 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
           <Property Name="ca_Categoria" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="nom_presentacion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="IdGuiaRemision" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa_fact" Type="Int32" />
+          <Property Name="IdSucursal_fact" Type="Int32" />
+          <Property Name="IdBodega_fact" Type="Int32" />
+          <Property Name="IdCbteVta_fact" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Secuencia_fact" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -4838,6 +4853,11 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
           <EntitySetMapping Name="vwfa_guia_remision_det">
             <EntityTypeMapping TypeName="Model_facturacion.vwfa_guia_remision_det">
               <MappingFragment StoreEntitySet="vwfa_guia_remision_det">
+                <ScalarProperty Name="Secuencia_fact" ColumnName="Secuencia_fact" />
+                <ScalarProperty Name="IdCbteVta_fact" ColumnName="IdCbteVta_fact" />
+                <ScalarProperty Name="IdBodega_fact" ColumnName="IdBodega_fact" />
+                <ScalarProperty Name="IdSucursal_fact" ColumnName="IdSucursal_fact" />
+                <ScalarProperty Name="IdEmpresa_fact" ColumnName="IdEmpresa_fact" />
                 <ScalarProperty Name="IdGuiaRemision" ColumnName="IdGuiaRemision" />
                 <ScalarProperty Name="nom_presentacion" ColumnName="nom_presentacion" />
                 <ScalarProperty Name="ca_Categoria" ColumnName="ca_Categoria" />

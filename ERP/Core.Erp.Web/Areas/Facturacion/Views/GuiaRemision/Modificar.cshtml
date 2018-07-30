@@ -55,6 +55,7 @@
 @using (Html.BeginForm("Modificar", "GuiaRemision", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdGuiaRemision)
 
     if (ViewBag.mensaje != null)
     {
