@@ -31,7 +31,9 @@ namespace Core.Erp.Data.Facturacion
                                  gi_detallexItems = q.gi_detallexItems,
                                  pr_descripcion=q.pr_descripcion,
                                  nom_presentacion=q.nom_presentacion,
-                                 ca_Categoria=q.ca_Categoria
+                                 ca_Categoria=q.ca_Categoria,
+                                 Secuencia_fact=q.Secuencia_fact,
+                                 IdCbteVta=q.IdCbteVta_fact
 
                              }).ToList();
                 }

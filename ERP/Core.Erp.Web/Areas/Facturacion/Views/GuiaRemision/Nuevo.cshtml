@@ -143,7 +143,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.gi_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_oc" })
+                        @Html.TextBoxFor(q => q.gi_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "gi_fecha" })
                         @Html.ValidationMessageFor(q => q.gi_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -156,7 +156,7 @@
                 <div class="col-md-8">
                     <div class="form-group">
                         <label for="pf_observacion">Direcion origen</label>
-                        @Html.TextBoxFor(q => q.Direccion_Origen, new { @class = "form-control" })
+                        @Html.TextBoxFor(q => q.Direccion_Origen, new { @class = "form-control",@id= "Direccion_Origen" })
                         @Html.ValidationMessageFor(q => q.Direccion_Origen, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -167,7 +167,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            @Html.TextBoxFor(q => q.gi_FechaInicioTraslado, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_oc" })
+                            @Html.TextBoxFor(q => q.gi_FechaInicioTraslado, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "gi_FechaInicioTraslado" })
                             @Html.ValidationMessageFor(q => q.gi_FechaInicioTraslado, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -179,7 +179,7 @@
                 <div class="col-md-8">
                     <div class="form-group">
                         <label for="pf_observacion">Direcion destino</label>
-                        @Html.TextBoxFor(q => q.Direccion_Destino, new { @class = "form-control" })
+                        @Html.TextBoxFor(q => q.Direccion_Destino, new { @class = "form-control" ,@id= "Direccion_Destino" })
                         @Html.ValidationMessageFor(q => q.Direccion_Destino, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -190,7 +190,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            @Html.TextBoxFor(q => q.gi_FechaFinTraslado, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_oc" })
+                            @Html.TextBoxFor(q => q.gi_FechaFinTraslado, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "gi_FechaFinTraslado" })
                             @Html.ValidationMessageFor(q => q.gi_FechaFinTraslado, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -265,11 +265,17 @@
     $(function () {
         CargarPuntosDeVenta();
         GetUltimoDocumento();
+        get_placa();
         //Date picker
-        $('#vt_fecha').datepicker({
+        $('#gi_FechaFinTraslado').datepicker({
             autoclose: true
         })
-
+        $('#gi_FechaInicioTraslado').datepicker({
+            autoclose: true
+        })
+        $('#gi_fecha').datepicker({
+            autoclose: true
+        })
         $("#IdSucursal").change(function () {
             CargarPuntosDeVenta();
             GetUltimoDocumento();
@@ -348,9 +354,52 @@
             error: function (error) {
             }
         });
+       }
+
+    function get_placa() {
+        var datos = {
+            IdTransportista: $("#IdTransportista").val()
         }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("Get_placa", "GuiaRemision",new { Area = "Facturacion"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#placa").val(data.Placa);
+               
+            },
+            error: function (error) {
+            }
+        });
+    }
 
+    function get_direccion() {
+        var tipo = IdCliente.GetValue();
 
+        var datos = {
+            IdCliente: tipo
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("get_direcciones", "GuiaRemision",new { Area = "Facturacion"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#Direccion_Origen").val(data.Direccion_emp);
+                $("#Direccion_Destino").val(data.Direccion);
+                get_info_termino_pago();
+            },
+            error: function (error) {
+                alert(error);
+            }
+
+        });
+    }
 
 </script>
 

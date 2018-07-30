@@ -26,6 +26,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         tb_sis_Documento_Tipo_Talonario_Bus bus_talonario = new tb_sis_Documento_Tipo_Talonario_Bus();
         fa_factura_Bus bus_factura = new fa_factura_Bus();
         fa_guia_remision_det_Info_lst detalle_info = new fa_guia_remision_det_Info_lst();
+        fa_cliente_contactos_Bus bus_contacto = new fa_cliente_contactos_Bus();
+
         #endregion
         #region Metodos ComboBox bajo demanda cliente
         public ActionResult CmbCliente_Guia()
@@ -249,12 +251,25 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             return Json("", JsonRequestBehavior.AllowGet);
         }
-
+        public JsonResult get_direcciones(decimal IdCliente = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);          
+            var resultado = bus_contacto.get_list(IdEmpresa, IdCliente).FirstOrDefault();
+            resultado.Direccion_emp = SessionFixed.em_direccion.ToString();
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult Get_placa(int Idtransportista = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            var resultado = bus_transportista.get_info(IdEmpresa, Idtransportista);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        
         #endregion
 
 
         #region funciones del detalle
-   
+
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_guia_remision_det_Info info_det)
         {

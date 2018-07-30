@@ -144,7 +144,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.gi_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_oc" })
+                        @Html.TextBoxFor(q => q.gi_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "gi_fecha" })
                         @Html.ValidationMessageFor(q => q.gi_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -168,7 +168,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            @Html.TextBoxFor(q => q.gi_FechaInicioTraslado, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_oc" })
+                            @Html.TextBoxFor(q => q.gi_FechaInicioTraslado, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "gi_FechaInicioTraslado" })
                             @Html.ValidationMessageFor(q => q.gi_FechaInicioTraslado, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -191,7 +191,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            @Html.TextBoxFor(q => q.gi_FechaFinTraslado, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_oc" })
+                            @Html.TextBoxFor(q => q.gi_FechaFinTraslado, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "gi_FechaFinTraslado" })
                             @Html.ValidationMessageFor(q => q.gi_FechaFinTraslado, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -239,7 +239,6 @@
                         @Html.Action("GridViewPartial_FacturasSinGuia")
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="seleccionar_aprobacion();">Aceptar</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
@@ -265,7 +264,6 @@
 
     $(function () {
         CargarPuntosDeVenta();
-        GetUltimoDocumento();
         //Date picker
         $('#vt_fecha').datepicker({
             autoclose: true
@@ -273,10 +271,8 @@
 
         $("#IdSucursal").change(function () {
             CargarPuntosDeVenta();
-            GetUltimoDocumento();
         });
         $("#IdPuntoVta").change(function () {
-            GetUltimoDocumento();
         });
 
     });

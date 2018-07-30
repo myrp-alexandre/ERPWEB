@@ -22,5 +22,6 @@ namespace Core.Erp.Info.Facturacion
         public string IdCiudad { get; set; }
         [Required(ErrorMessage = ("El campo parroquia es obligatorio"))]
         public string IdParroquia { get; set; }
+        public string Direccion_emp { get; set; }
     }
 }

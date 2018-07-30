@@ -11,6 +11,7 @@ namespace Core.Erp.Web.Helps
         string IdProducto_padre_dist { get; set; }
         string IdSucursal { get; set; }
         string IdEntidad { get; set; }
+        string em_direccion { get; set; }
 
     }
 
@@ -60,6 +61,11 @@ namespace Core.Erp.Web.Helps
             get { return _sessionValueProvider.IdEntidad; }
             set { _sessionValueProvider.IdEntidad = value; }
         }
+        public static string em_direccion
+        {
+            get { return _sessionValueProvider.em_direccion; }
+            set { _sessionValueProvider.em_direccion = value; }
+        }
     }
 
     public class WebSessionValueProvider : ISessionValueProvider
@@ -71,6 +77,8 @@ namespace Core.Erp.Web.Helps
         private const string _IdProducto_padre_dist = "IdProducto_padre_dist";
         private const string _IdEntidad = "IdEntidadParam";
         private const string _IdSucursal = "IdSucursal";
+        private const string _em_direccion = "em_direccion";
+
         public string TipoPersona
         {
             get { return (string)HttpContext.Current.Session[_IdTipoPersona]; }
@@ -106,6 +114,11 @@ namespace Core.Erp.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_IdEntidad]; }
             set { HttpContext.Current.Session[_IdEntidad] = value; }
+        }
+        public string em_direccion
+        {
+            get { return (string)HttpContext.Current.Session[_em_direccion]; }
+            set { HttpContext.Current.Session[_em_direccion] = value; }
         }
     }
 }

@@ -30,5 +30,10 @@ namespace Core.Erp.Data
         public string ca_Categoria { get; set; }
         public string nom_presentacion { get; set; }
         public decimal IdGuiaRemision { get; set; }
+        public Nullable<int> IdEmpresa_fact { get; set; }
+        public Nullable<int> IdSucursal_fact { get; set; }
+        public Nullable<int> IdBodega_fact { get; set; }
+        public Nullable<decimal> IdCbteVta_fact { get; set; }
+        public Nullable<int> Secuencia_fact { get; set; }
     }
 }

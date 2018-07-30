@@ -187,13 +187,16 @@ namespace Core.Erp.Data.Facturacion
                         });
                         Context.fa_guia_remision_det_x_factura.Add(new fa_guia_remision_det_x_factura
                         {
-                            IdEmpresa_fact=info.IdEmpresa,
-                            IdSucursal_fact=info.IdSucursal,
-                            IdBodega_fact=info.IdBodega,
-                            IdCbteVta_fact=item.IdCbteVta,
-                            IdGuiaRemision_guia=info.IdGuiaRemision,
-                             Secuencia_fact=item.Secuencia,
-                             Secuencia_guia=item.Secuencia
+                            IdEmpresa_fact = info.IdEmpresa,
+                            IdSucursal_fact = info.IdSucursal,
+                            IdBodega_fact = info.IdBodega,
+                            IdCbteVta_fact = Convert.ToDecimal(item.IdCbteVta),
+                            IdGuiaRemision_guia = info.IdGuiaRemision,
+                            Secuencia_fact = Convert.ToInt32(item.Secuencia_fact),
+                            Secuencia_guia = item.Secuencia,
+                            IdBodega_guia = info.IdBodega,
+                            IdSucursal_guia = info.IdSucursal,
+                            IdEmpresa_guia = info.IdEmpresa
                         });
                         secuencia++;
                     }
@@ -257,10 +260,14 @@ namespace Core.Erp.Data.Facturacion
                             IdEmpresa_fact = info.IdEmpresa,
                             IdSucursal_fact = info.IdSucursal,
                             IdBodega_fact = info.IdBodega,
-                            IdCbteVta_fact = item.IdCbteVta,
+                            IdCbteVta_fact = Convert.ToDecimal(item.IdCbteVta),
                             IdGuiaRemision_guia = info.IdGuiaRemision,
-                            Secuencia_fact = item.Secuencia,
-                            Secuencia_guia = item.Secuencia
+                            Secuencia_fact = Convert.ToInt32(item.Secuencia_fact),
+                            Secuencia_guia = item.Secuencia,
+                            IdBodega_guia = info.IdBodega,
+                            IdSucursal_guia=info.IdSucursal,
+                            IdEmpresa_guia=info.IdEmpresa
+                        
                         });
                         secuencia++;
                     }
@@ -268,7 +275,7 @@ namespace Core.Erp.Data.Facturacion
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;
