@@ -12,31 +12,23 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class vwfa_factura_det_x_productos
+    public partial class vwfa_guia_remision_det
     {
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public int IdBodega { get; set; }
-        public decimal IdCbteVta { get; set; }
         public int Secuencia { get; set; }
         public decimal IdProducto { get; set; }
-        public double vt_cantidad { get; set; }
-        public double vt_Precio { get; set; }
-        public double vt_PorDescUnitario { get; set; }
-        public double vt_DescUnitario { get; set; }
-        public double vt_PrecioFinal { get; set; }
-        public double vt_Subtotal { get; set; }
-        public double vt_iva { get; set; }
-        public double vt_total { get; set; }
-        public string vt_estado { get; set; }
-        public string vt_detallexItems { get; set; }
-        public double vt_por_iva { get; set; }
-        public Nullable<int> IdPunto_cargo_grupo { get; set; }
-        public string IdCod_Impuesto_Iva { get; set; }
+        public double gi_cantidad { get; set; }
+        public string gi_detallexItems { get; set; }
         public string pr_descripcion { get; set; }
         public string pr_descripcion_2 { get; set; }
+        public string pr_codigo { get; set; }
         public Nullable<System.DateTime> lote_fecha_fab { get; set; }
         public Nullable<System.DateTime> lote_fecha_vcto { get; set; }
         public string lote_num_lote { get; set; }
+        public string ca_Categoria { get; set; }
+        public string nom_presentacion { get; set; }
+        public decimal IdGuiaRemision { get; set; }
     }
 }

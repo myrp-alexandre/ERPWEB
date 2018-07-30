@@ -77,9 +77,9 @@
         <EntityTypeShape EntityType="Model_facturacion.vwfa_notaCreDeb_det" Width="1.5" PointX="14.375" PointY="16.75" />
         <EntityTypeShape EntityType="Model_facturacion.vwfa_notaCreDeb_x_fa_factura_NotaDeb" Width="1.5" PointX="8.375" PointY="17.75" />
         <EntityTypeShape EntityType="Model_facturacion.vwfa_proforma_det_por_facturar" Width="1.5" PointX="10.375" PointY="10.75" />
-        <EntityTypeShape EntityType="Model_facturacion.vwfa_factura_det_x_productos" Width="1.5" PointX="19.75" PointY="20.75" />
         <EntityTypeShape EntityType="Model_facturacion.vwfa_factura_sin_guia" Width="1.5" PointX="10.375" PointY="16.75" />
-        <EntityTypeShape EntityType="Model_facturacion.vwfa_guia_remision" Width="1.5" PointX="0.75" PointY="21.75" />
+        <EntityTypeShape EntityType="Model_facturacion.vwfa_guia_remision" Width="1.5" PointX="19.375" PointY="20.75" />
+        <EntityTypeShape EntityType="Model_facturacion.vwfa_guia_remision_det" Width="1.5" PointX="0.75" PointY="21.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

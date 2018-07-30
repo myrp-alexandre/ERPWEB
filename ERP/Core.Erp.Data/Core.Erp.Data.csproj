@@ -1497,13 +1497,13 @@
     <Compile Include="vwfa_factura_det.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>
-    <Compile Include="vwfa_factura_det_x_productos.cs">
-      <DependentUpon>Model_facturacion.tt</DependentUpon>
-    </Compile>
     <Compile Include="vwfa_factura_sin_guia.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>
     <Compile Include="vwfa_guia_remision.cs">
+      <DependentUpon>Model_facturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwfa_guia_remision_det.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>
     <Compile Include="vwfa_notaCreDeb.cs">

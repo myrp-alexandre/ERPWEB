@@ -16,7 +16,7 @@ namespace Core.Erp.Data.Facturacion
                 List<fa_guia_remision_det_Info> Lista;
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
-                    Lista = (from q in Context.fa_guia_remision_det
+                    Lista = (from q in Context.vwfa_guia_remision_det
                              where q.IdEmpresa == IdEmpresa
                              && q.IdGuiaRemision == IdGuiaRemision
                              select new fa_guia_remision_det_Info
@@ -28,7 +28,8 @@ namespace Core.Erp.Data.Facturacion
                                  IdGuiaRemision = q.IdGuiaRemision,
                                  Secuencia = q.Secuencia,
                                  gi_cantidad = q.gi_cantidad,
-                                 gi_detallexItems = q.gi_detallexItems
+                                 gi_detallexItems = q.gi_detallexItems,
+                                 pr_descripcion=q.pr_descripcion,
                                  
 
                              }).ToList();
