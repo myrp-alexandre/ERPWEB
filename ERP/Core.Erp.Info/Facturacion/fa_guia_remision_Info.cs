@@ -15,9 +15,11 @@ namespace Core.Erp.Info.Facturacion
         public decimal IdGuiaRemision { get; set; }
         public string CodGuiaRemision { get; set; }
         public string CodDocumentoTipo { get; set; }
+      
         [RegularExpression(@"\d{3}", ErrorMessage = "El formato debe ser 000")]
         [Required(ErrorMessage = "El campo establecimiento es obligatorio")]
         public string Serie1 { get; set; }
+
         [RegularExpression(@"\d{3}", ErrorMessage = "El formato debe ser 000")]
         [Required(ErrorMessage = "El campo punto de emisión es obligatorio")]
         public string Serie2 { get; set; }
@@ -26,11 +28,13 @@ namespace Core.Erp.Info.Facturacion
         public string NumGuia_Preimpresa { get; set; }
         public string NUAutorizacion { get; set; }
         public Nullable<System.DateTime> Fecha_Autorizacion { get; set; }
-        [Required(ErrorMessage = "El campo cliente es obligatorio")]
-        [Range(1, int.MaxValue, ErrorMessage = "El campo cliente es obligatorio")]
-        public decimal IdCliente { get; set; }
+        
         [Required(ErrorMessage = "El campo cliente es obligatorio")]
         [Range(1, int.MaxValue, ErrorMessage = "El campo transportista es obligatorio")]
+        public decimal IdCliente { get; set; }
+        [Required(ErrorMessage = "El campo contacto es obligatorio")]
+        public int IdContacto { get; set; }
+
         public decimal IdTransportista { get; set; }
         public System.DateTime gi_fecha { get; set; }
         public Nullable<decimal> gi_plazo { get; set; }
@@ -61,5 +65,7 @@ namespace Core.Erp.Info.Facturacion
         public string pe_cedulaRuc { get; set; }
         public string pe_nombreCompleto { get; set; }
         public List<fa_guia_remision_det_Info> lst_detalle { get; set; }
+        public List<fa_factura_x_fa_guia_remision_Info> lst_detalle_x_factura { get; set; }
+
     }
 }

@@ -27,6 +27,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_factura_Bus bus_factura = new fa_factura_Bus();
         fa_guia_remision_det_Info_lst detalle_info = new fa_guia_remision_det_Info_lst();
         fa_cliente_contactos_Bus bus_contacto = new fa_cliente_contactos_Bus();
+        fa_factura_x_fa_guia_remision_Bus bus_detalle_x_factura = new fa_factura_x_fa_guia_remision_Bus();
 
         #endregion
 
@@ -129,6 +130,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdUsuario = Session["IdUsuario"].ToString();
             model.CodGuiaRemision= (model.CodGuiaRemision == null) ? "" : model.CodGuiaRemision;
+            model.lst_detalle_x_factura= Session["fa_guia_remision_det_x_factura_Info"] as List<fa_factura_x_fa_guia_remision_Info>;
             model.CodDocumentoTipo = "GUIA";
             string mensaje = bus_guia.validar(model);
             if (mensaje != "")
@@ -151,7 +153,13 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             fa_guia_remision_Info model = bus_guia.get_info(IdEmpresa, IdGuiaRemision);
             var lst_detalle = bus_detalle.get_list(IdEmpresa, IdGuiaRemision);
+            if (lst_detalle == null)
+                lst_detalle = new List<fa_guia_remision_det_Info>();
+            var lst_detalle_x_factura = bus_detalle_x_factura.get_list(IdEmpresa, IdGuiaRemision);
+            if (lst_detalle_x_factura == null)
+                lst_detalle_x_factura = new List<fa_factura_x_fa_guia_remision_Info>();
             Session["fa_guia_remision_det_Info"] = lst_detalle;
+            Session["fa_guia_remision_det_x_factura_Info"] = lst_detalle_x_factura;
             if (model == null)
                 return RedirectToAction("Index");
             cargar_combos(model);
@@ -161,6 +169,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult Modificar(fa_guia_remision_Info model)
         {
             model.lst_detalle = Session["fa_guia_remision_det_Info"] as List<fa_guia_remision_det_Info>;
+            model.lst_detalle_x_factura = Session["fa_guia_remision_det_x_factura_Info"] as List<fa_factura_x_fa_guia_remision_Info>;
             model.IdUsuario = Session["IdUsuario"].ToString();
             model.CodGuiaRemision = (model.CodGuiaRemision == null) ? "" : model.CodGuiaRemision;
             model.CodDocumentoTipo = "GUIA";
@@ -242,34 +251,70 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             if (Ids != null)
             {
+                var facturas_x_seleccionar = Session["fa_factura_Info"] as List<fa_factura_Info>;
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 fa_guia_remision_det_Bus detalle_guia = new fa_guia_remision_det_Bus();
                 string[] array = Ids.Split(',');
                 var output = array.GroupBy(q => q).ToList();
-                List<fa_guia_remision_det_Info> list_facturas_seleccionadas = new List<fa_guia_remision_det_Info>();
-                list_facturas_seleccionadas = Session["fa_guia_remision_det_Info"] as List<fa_guia_remision_det_Info>;
+                List<fa_guia_remision_det_Info> lst_detalle_guia = new List<fa_guia_remision_det_Info>();
+                lst_detalle_guia = Session["fa_guia_remision_det_Info"] as List<fa_guia_remision_det_Info>;
+                if (lst_detalle_guia == null)
+                    lst_detalle_guia = new List<fa_guia_remision_det_Info>();
+
+                List<fa_guia_remision_det_x_factura_Info> list_facturas_seleccionadas = new List<fa_guia_remision_det_x_factura_Info>();
+                list_facturas_seleccionadas = Session["fa_guia_remision_det_x_factura_Info"] as List<fa_guia_remision_det_x_factura_Info>;
                 if (list_facturas_seleccionadas == null)
-                    list_facturas_seleccionadas = new List<fa_guia_remision_det_Info>();
+                    list_facturas_seleccionadas = new List<fa_guia_remision_det_x_factura_Info>();
+
+
+
                 foreach (var item in output)
                 {
                     if (item.Key != "")
                     {
-                        if (list_facturas_seleccionadas.Where(q => q.IdCbteVta == Convert.ToDecimal(Ids)).Count() == 0)
+                        if (lst_detalle_guia.Where(q => q.IdCbteVta == Convert.ToDecimal(item.Key)).Count() == 0)
                         {
                             var lst_tmp = bus_detalle.get_list_x_factura(IdEmpresa, IdSucursal, IdPuntoVta, Convert.ToDecimal(item.Key));
-                            list_facturas_seleccionadas.AddRange(lst_tmp);
+                            lst_detalle_guia.AddRange(lst_tmp);
+                        }
+
+                        if (facturas_x_seleccionar.Where(q => q.IdCbteVta == Convert.ToDecimal(Ids)).Count() >0)
+                        {
+
+                            var factura = facturas_x_seleccionar.Where(q => q.IdCbteVta == Convert.ToDecimal(item.Key)).FirstOrDefault();
+                            if (factura != null)
+                            {
+                                if(list_facturas_seleccionadas.Where(q => q.IdCbteVta == Convert.ToDecimal(item.Key)).Count()==0)
+                                list_facturas_seleccionadas.Add(new fa_guia_remision_det_x_factura_Info
+                                {
+                                    IdEmpresa=factura.IdEmpresa,
+                                    IdSucursal=factura.IdSucursal,
+                                    IdBodega=factura.IdBodega,
+                                    IdCbteVta=factura.IdCbteVta,
+                                    vt_serie1=factura.vt_serie1,
+                                    vt_serie2=factura.vt_serie2,
+                                    vt_NumFactura=factura.vt_NumFactura,
+                                    vt_tipoDoc="FAC",
+
+                                });
+                                Session["fa_guia_remision_det_x_factura_Info"] = list_facturas_seleccionadas;
+                            }
+
                         }
                     }
                 }
-                Session["fa_guia_remision_det_Info"] = list_facturas_seleccionadas;
+                Session["fa_guia_remision_det_Info"] = lst_detalle_guia;
             }
             return Json("", JsonRequestBehavior.AllowGet);
         }
-        public JsonResult get_direcciones(decimal IdCliente = 0)
+        public JsonResult get_direcciones(decimal IdCliente = 0, int IdContacto=0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);          
-            var resultado = bus_contacto.get_list(IdEmpresa, IdCliente).FirstOrDefault();
-            resultado.Direccion_emp = SessionFixed.em_direccion.ToString();
+            var resultado = bus_contacto.get_info(IdEmpresa, IdCliente, IdContacto);
+            if (resultado != null)
+                resultado.Direccion_emp = SessionFixed.em_direccion.ToString();
+            else
+                resultado = new fa_cliente_contactos_Info();
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         public JsonResult Get_placa(int Idtransportista = 0)

@@ -11,7 +11,7 @@ namespace Core.Erp.Bus.Facturacion
   public  class fa_factura_x_fa_guia_remision_Bus
     {
         fa_factura_x_fa_guia_remision_Data odata = new fa_factura_x_fa_guia_remision_Data();
-        public List<fa_guia_remision_det_x_factura_Info> get_list(int IdEmpresa,decimal gi_IdGuiaRemision)
+        public List<fa_factura_x_fa_guia_remision_Info> get_list(int IdEmpresa,decimal gi_IdGuiaRemision)
         {
             try
             {
