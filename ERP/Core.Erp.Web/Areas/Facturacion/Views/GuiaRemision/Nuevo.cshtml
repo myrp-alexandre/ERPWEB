@@ -33,6 +33,8 @@
 
                 $("#myform").submit();
                 GridViewPartial_guias_remision_det.PerformCallback();
+                GridViewPartial_Facturas_x_guia.PerformCallback();
+                selectedIDs = "";
                 $("#OpModal").modal("hide");
 
             },
@@ -112,8 +114,8 @@
             <div class="col-md-5">
                 <div class="form-group">
                     <label for="IdClienteContacto">Contacto</label>
-                    @Html.DropDownListFor(q => q.IdCliente, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres"), new { @class = "form-control", @id = "IdContacto" })
-                    @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(q => q.IdContacto, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres"), new { @class = "form-control", @id = "IdContacto" })
+                    @Html.ValidationMessageFor(q => q.IdContacto, "", new { @class = "text-danger" })
                 </div>
             </div>
            
@@ -306,6 +308,7 @@
     $(function () {
         CargarPuntosDeVenta();
         GetUltimoDocumento();
+        get_direccion();
         get_placa();
         //Date picker
         $('#gi_FechaFinTraslado').datepicker({
@@ -324,7 +327,9 @@
         $("#IdPuntoVta").change(function () {
             GetUltimoDocumento();
         });
-
+        $("#IdContacto").change(function () {
+            get_direccion();
+        });
     });
 
     function MostrarModal() {
@@ -418,10 +423,10 @@
     }
 
     function get_direccion() {
-        var tipo = IdCliente.GetValue();
-
+       
         var datos = {
-            IdCliente: tipo
+             IdCliente : IdCliente.GetValue(),
+            IdContacto:$("#IdContacto").val()
         }
         $.ajax({
             type: 'POST',
@@ -431,9 +436,10 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $("#Direccion_Origen").val(data.Direccion_emp);
-                $("#Direccion_Destino").val(data.Direccion);
-                get_info_termino_pago();
+                if (data != null) {
+                    $("#Direccion_Origen").val(data.Direccion_emp);
+                    $("#Direccion_Destino").val(data.Direccion);
+                }
             },
             error: function (error) {
                 alert(error);

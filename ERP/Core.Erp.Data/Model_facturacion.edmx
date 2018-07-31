@@ -312,6 +312,7 @@
           <Property Name="NUAutorizacion" Type="varchar" MaxLength="50" />
           <Property Name="Fecha_Autorizacion" Type="datetime" />
           <Property Name="IdCliente" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdContacto" Type="int" Nullable="false" />
           <Property Name="IdTransportista" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="gi_fecha" Type="datetime" Nullable="false" />
           <Property Name="gi_plazo" Type="numeric" Precision="10" Scale="0" />
@@ -995,6 +996,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_guia_remision
             <PropertyRef Name="pe_cedulaRuc" />
             <PropertyRef Name="pe_nombreCompleto" />
             <PropertyRef Name="Estado" />
+            <PropertyRef Name="Nombres" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
@@ -1023,6 +1025,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_guia_remision
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="1000" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_guia_remision_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1577,6 +1580,22 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_fa_guia_remision_fa_cliente_contactos">
+          <End Role="fa_cliente_contactos" Type="Self.fa_cliente_contactos" Multiplicity="1" />
+          <End Role="fa_guia_remision" Type="Self.fa_guia_remision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_cliente_contactos">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+              <PropertyRef Name="IdContacto" />
+            </Principal>
+            <Dependent Role="fa_guia_remision">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+              <PropertyRef Name="IdContacto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_fa_notaCreDeb_det_fa_notaCreDeb">
           <End Role="fa_notaCreDeb" Type="Self.fa_notaCreDeb" Multiplicity="1" />
           <End Role="fa_notaCreDeb_det" Type="Self.fa_notaCreDeb_det" Multiplicity="*" />
@@ -2018,7 +2037,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
     [vwfa_guia_remision].[Direccion_Destino] AS [Direccion_Destino], 
     [vwfa_guia_remision].[pe_cedulaRuc] AS [pe_cedulaRuc], 
     [vwfa_guia_remision].[pe_nombreCompleto] AS [pe_nombreCompleto], 
-    [vwfa_guia_remision].[Estado] AS [Estado]
+    [vwfa_guia_remision].[Estado] AS [Estado], 
+    [vwfa_guia_remision].[Nombres] AS [Nombres]
     FROM [web].[vwfa_guia_remision] AS [vwfa_guia_remision]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_guia_remision_det" EntityType="Self.vwfa_guia_remision_det" store:Type="Views" store:Schema="web">
@@ -2221,6 +2241,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
             <End Role="fa_cliente" EntitySet="fa_cliente" />
             <End Role="fa_guia_remision" EntitySet="fa_guia_remision" />
           </AssociationSet>
+          <AssociationSet Name="FK_fa_guia_remision_fa_cliente_contactos" Association="Self.FK_fa_guia_remision_fa_cliente_contactos">
+            <End Role="fa_cliente_contactos" EntitySet="fa_cliente_contactos" />
+            <End Role="fa_guia_remision" EntitySet="fa_guia_remision" />
+          </AssociationSet>
           <AssociationSet Name="FK_fa_notaCreDeb_det_fa_notaCreDeb" Association="Self.FK_fa_notaCreDeb_det_fa_notaCreDeb">
             <End Role="fa_notaCreDeb" EntitySet="fa_notaCreDeb" />
             <End Role="fa_notaCreDeb_det" EntitySet="fa_notaCreDeb_det" />
@@ -2414,7 +2438,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
           <EntitySet Name="vwfa_notaCreDeb_x_fa_factura_NotaDeb" EntityType="Model_facturacion.vwfa_notaCreDeb_x_fa_factura_NotaDeb" />
           <EntitySet Name="vwfa_proforma_det_por_facturar" EntityType="Model_facturacion.vwfa_proforma_det_por_facturar" />
           <EntitySet Name="vwfa_factura_sin_guia" EntityType="Model_facturacion.vwfa_factura_sin_guia" />
-          <EntitySet Name="vwfa_guia_remision" EntityType="Model_facturacion.vwfa_guia_remision" />
           <EntitySet Name="vwfa_guia_remision_det" EntityType="Model_facturacion.vwfa_guia_remision_det" />
           <EntitySet Name="fa_TipoNota" EntityType="Model_facturacion.fa_TipoNota" />
           <AssociationSet Name="FK_fa_parametro_fa_TipoNota" Association="Model_facturacion.FK_fa_parametro_fa_TipoNota">
@@ -2457,11 +2480,17 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
           <EntitySet Name="fa_catalogo" EntityType="Model_facturacion.fa_catalogo" />
           <EntitySet Name="fa_catalogo_tipo" EntityType="Model_facturacion.fa_catalogo_tipo" />
           <EntitySet Name="fa_factura_x_fa_guia_remision" EntityType="Model_facturacion.fa_factura_x_fa_guia_remision" />
-          <EntitySet Name="fa_guia_remision" EntityType="Model_facturacion.fa_guia_remision" />
           <AssociationSet Name="FK_fa_catalogo_fa_catalogo_tipo" Association="Model_facturacion.FK_fa_catalogo_fa_catalogo_tipo">
             <End Role="fa_catalogo_tipo" EntitySet="fa_catalogo_tipo" />
             <End Role="fa_catalogo" EntitySet="fa_catalogo" />
           </AssociationSet>
+          <AssociationSet Name="FK_fa_factura_x_fa_guia_remision_fa_factura" Association="Model_facturacion.FK_fa_factura_x_fa_guia_remision_fa_factura">
+            <End Role="fa_factura" EntitySet="fa_factura" />
+            <End Role="fa_factura_x_fa_guia_remision" EntitySet="fa_factura_x_fa_guia_remision" />
+          </AssociationSet>
+          <EntitySet Name="vwfa_factura_x_fa_guia_remision" EntityType="Model_facturacion.vwfa_factura_x_fa_guia_remision" />
+          <EntitySet Name="fa_guia_remision" EntityType="Model_facturacion.fa_guia_remision" />
+          <EntitySet Name="vwfa_guia_remision" EntityType="Model_facturacion.vwfa_guia_remision" />
           <AssociationSet Name="FK_fa_guia_remision_fa_catalogo" Association="Model_facturacion.FK_fa_guia_remision_fa_catalogo">
             <End Role="fa_catalogo" EntitySet="fa_catalogo" />
             <End Role="fa_guia_remision" EntitySet="fa_guia_remision" />
@@ -2470,9 +2499,9 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
             <End Role="fa_cliente" EntitySet="fa_cliente" />
             <End Role="fa_guia_remision" EntitySet="fa_guia_remision" />
           </AssociationSet>
-          <AssociationSet Name="FK_fa_factura_x_fa_guia_remision_fa_factura" Association="Model_facturacion.FK_fa_factura_x_fa_guia_remision_fa_factura">
-            <End Role="fa_factura" EntitySet="fa_factura" />
-            <End Role="fa_factura_x_fa_guia_remision" EntitySet="fa_factura_x_fa_guia_remision" />
+          <AssociationSet Name="FK_fa_guia_remision_fa_cliente_contactos" Association="Model_facturacion.FK_fa_guia_remision_fa_cliente_contactos">
+            <End Role="fa_cliente_contactos" EntitySet="fa_cliente_contactos" />
+            <End Role="fa_guia_remision" EntitySet="fa_guia_remision" />
           </AssociationSet>
           <AssociationSet Name="FK_fa_factura_x_fa_guia_remision_fa_guia_remision" Association="Model_facturacion.FK_fa_factura_x_fa_guia_remision_fa_guia_remision">
             <End Role="fa_guia_remision" EntitySet="fa_guia_remision" />
@@ -2482,7 +2511,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
             <End Role="fa_guia_remision" EntitySet="fa_guia_remision" />
             <End Role="fa_guia_remision_det" EntitySet="fa_guia_remision_det" />
           </AssociationSet>
-          <EntitySet Name="vwfa_factura_x_fa_guia_remision" EntityType="Model_facturacion.vwfa_factura_x_fa_guia_remision" />
           </EntityContainer>
         <EntityType Name="fa_cliente_tipo">
           <Key>
@@ -2682,6 +2710,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
           <NavigationProperty Name="fa_cliente" Relationship="Model_facturacion.FK_fa_cliente_contactos_fa_cliente" FromRole="fa_cliente_contactos" ToRole="fa_cliente" />
           <NavigationProperty Name="fa_factura" Relationship="Model_facturacion.FK_fa_factura_fa_cliente_contactos" FromRole="fa_cliente_contactos" ToRole="fa_factura" />
           <NavigationProperty Name="fa_notaCreDeb" Relationship="Model_facturacion.FK_fa_notaCreDeb_fa_cliente_contactos" FromRole="fa_cliente_contactos" ToRole="fa_notaCreDeb" />
+          <NavigationProperty Name="fa_guia_remision" Relationship="Model_facturacion.FK_fa_guia_remision_fa_cliente_contactos" FromRole="fa_cliente_contactos" ToRole="fa_guia_remision" />
         </EntityType>
         <Association Name="FK_fa_cliente_contactos_fa_cliente">
           <End Type="Model_facturacion.fa_cliente" Role="fa_cliente" Multiplicity="1" />
@@ -3812,52 +3841,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
           <Property Name="vt_Observacion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityType Name="vwfa_guia_remision">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdBodega" />
-            <PropertyRef Name="IdGuiaRemision" />
-            <PropertyRef Name="CodGuiaRemision" />
-            <PropertyRef Name="IdCliente" />
-            <PropertyRef Name="IdTransportista" />
-            <PropertyRef Name="gi_fecha" />
-            <PropertyRef Name="gi_FechaFinTraslado" />
-            <PropertyRef Name="gi_FechaInicioTraslado" />
-            <PropertyRef Name="placa" />
-            <PropertyRef Name="Direccion_Origen" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="Estado" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdBodega" Type="Int32" Nullable="false" />
-          <Property Name="IdGuiaRemision" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="CodGuiaRemision" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="CodDocumentoTipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="Serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="NumGuia_Preimpresa" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="NUAutorizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Autorizacion" Type="DateTime" Precision="3" />
-          <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdTransportista" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="gi_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="gi_plazo" Type="Decimal" Precision="10" Scale="0" />
-          <Property Name="gi_fech_venc" Type="DateTime" Precision="3" />
-          <Property Name="gi_Observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Impreso" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="gi_FechaFinTraslado" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="gi_FechaInicioTraslado" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="placa" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="ruta" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="Direccion_Origen" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="Direccion_Destino" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-        </EntityType>
         <EntityType Name="vwfa_guia_remision_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -4152,6 +4135,56 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
           <NavigationProperty Name="fa_factura" Relationship="Model_facturacion.FK_fa_factura_x_fa_guia_remision_fa_factura" FromRole="fa_factura_x_fa_guia_remision" ToRole="fa_factura" />
           <NavigationProperty Name="fa_guia_remision" Relationship="Model_facturacion.FK_fa_factura_x_fa_guia_remision_fa_guia_remision" FromRole="fa_factura_x_fa_guia_remision" ToRole="fa_guia_remision" />
         </EntityType>
+        <Association Name="FK_fa_catalogo_fa_catalogo_tipo">
+          <End Type="Model_facturacion.fa_catalogo_tipo" Role="fa_catalogo_tipo" Multiplicity="1" />
+          <End Type="Model_facturacion.fa_catalogo" Role="fa_catalogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_catalogo_tipo">
+              <PropertyRef Name="IdCatalogo_tipo" />
+            </Principal>
+            <Dependent Role="fa_catalogo">
+              <PropertyRef Name="IdCatalogo_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_factura_x_fa_guia_remision_fa_factura">
+          <End Type="Model_facturacion.fa_factura" Role="fa_factura" Multiplicity="1" />
+          <End Type="Model_facturacion.fa_factura_x_fa_guia_remision" Role="fa_factura_x_fa_guia_remision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_factura">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdCbteVta" />
+            </Principal>
+            <Dependent Role="fa_factura_x_fa_guia_remision">
+              <PropertyRef Name="fa_IdEmpresa" />
+              <PropertyRef Name="fa_IdSucursal" />
+              <PropertyRef Name="fa_IdBodega" />
+              <PropertyRef Name="fa_IdCbteVta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwfa_factura_x_fa_guia_remision">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+            <PropertyRef Name="vt_tipoDoc" />
+            <PropertyRef Name="gi_IdGuiaRemision" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CodCbteVta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="vt_tipoDoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="vt_serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="vt_serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="gi_IdGuiaRemision" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+        </EntityType>
         <EntityType Name="fa_guia_remision">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -4171,6 +4204,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
           <Property Name="NUAutorizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_Autorizacion" Type="DateTime" Precision="3" />
           <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdContacto" Type="Int32" Nullable="false" />
           <Property Name="IdTransportista" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="gi_fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="gi_plazo" Type="Decimal" Precision="10" Scale="0" />
@@ -4197,21 +4231,58 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
           <Property Name="IdCatalogo_traslado" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="fa_catalogo" Relationship="Model_facturacion.FK_fa_guia_remision_fa_catalogo" FromRole="fa_guia_remision" ToRole="fa_catalogo" />
           <NavigationProperty Name="fa_cliente" Relationship="Model_facturacion.FK_fa_guia_remision_fa_cliente" FromRole="fa_guia_remision" ToRole="fa_cliente" />
+          <NavigationProperty Name="fa_cliente_contactos" Relationship="Model_facturacion.FK_fa_guia_remision_fa_cliente_contactos" FromRole="fa_guia_remision" ToRole="fa_cliente_contactos" />
           <NavigationProperty Name="fa_factura_x_fa_guia_remision" Relationship="Model_facturacion.FK_fa_factura_x_fa_guia_remision_fa_guia_remision" FromRole="fa_guia_remision" ToRole="fa_factura_x_fa_guia_remision" />
           <NavigationProperty Name="fa_guia_remision_det" Relationship="Model_facturacion.FK_fa_guia_remision_det_fa_guia_remision" FromRole="fa_guia_remision" ToRole="fa_guia_remision_det" />
         </EntityType>
-        <Association Name="FK_fa_catalogo_fa_catalogo_tipo">
-          <End Type="Model_facturacion.fa_catalogo_tipo" Role="fa_catalogo_tipo" Multiplicity="1" />
-          <End Type="Model_facturacion.fa_catalogo" Role="fa_catalogo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="fa_catalogo_tipo">
-              <PropertyRef Name="IdCatalogo_tipo" />
-            </Principal>
-            <Dependent Role="fa_catalogo">
-              <PropertyRef Name="IdCatalogo_tipo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="vwfa_guia_remision">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdGuiaRemision" />
+            <PropertyRef Name="CodGuiaRemision" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="IdTransportista" />
+            <PropertyRef Name="gi_fecha" />
+            <PropertyRef Name="gi_FechaFinTraslado" />
+            <PropertyRef Name="gi_FechaInicioTraslado" />
+            <PropertyRef Name="placa" />
+            <PropertyRef Name="Direccion_Origen" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Nombres" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdGuiaRemision" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CodGuiaRemision" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CodDocumentoTipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="NumGuia_Preimpresa" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NUAutorizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Autorizacion" Type="DateTime" Precision="3" />
+          <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTransportista" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="gi_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="gi_plazo" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="gi_fech_venc" Type="DateTime" Precision="3" />
+          <Property Name="gi_Observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Impreso" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="gi_FechaFinTraslado" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="gi_FechaInicioTraslado" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="placa" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ruta" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion_Origen" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion_Destino" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
         <Association Name="FK_fa_guia_remision_fa_catalogo">
           <End Type="Model_facturacion.fa_catalogo" Role="fa_catalogo" Multiplicity="0..1" />
           <End Type="Model_facturacion.fa_guia_remision" Role="fa_guia_remision" Multiplicity="*" />
@@ -4238,21 +4309,19 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_fa_factura_x_fa_guia_remision_fa_factura">
-          <End Type="Model_facturacion.fa_factura" Role="fa_factura" Multiplicity="1" />
-          <End Type="Model_facturacion.fa_factura_x_fa_guia_remision" Role="fa_factura_x_fa_guia_remision" Multiplicity="*" />
+        <Association Name="FK_fa_guia_remision_fa_cliente_contactos">
+          <End Type="Model_facturacion.fa_cliente_contactos" Role="fa_cliente_contactos" Multiplicity="1" />
+          <End Type="Model_facturacion.fa_guia_remision" Role="fa_guia_remision" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="fa_factura">
+            <Principal Role="fa_cliente_contactos">
               <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSucursal" />
-              <PropertyRef Name="IdBodega" />
-              <PropertyRef Name="IdCbteVta" />
+              <PropertyRef Name="IdCliente" />
+              <PropertyRef Name="IdContacto" />
             </Principal>
-            <Dependent Role="fa_factura_x_fa_guia_remision">
-              <PropertyRef Name="fa_IdEmpresa" />
-              <PropertyRef Name="fa_IdSucursal" />
-              <PropertyRef Name="fa_IdBodega" />
-              <PropertyRef Name="fa_IdCbteVta" />
+            <Dependent Role="fa_guia_remision">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+              <PropertyRef Name="IdContacto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4292,26 +4361,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="vwfa_factura_x_fa_guia_remision">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdBodega" />
-            <PropertyRef Name="IdCbteVta" />
-            <PropertyRef Name="vt_tipoDoc" />
-            <PropertyRef Name="gi_IdGuiaRemision" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdBodega" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="CodCbteVta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="vt_tipoDoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="vt_serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="vt_serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="gi_IdGuiaRemision" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5054,39 +5103,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwfa_guia_remision">
-            <EntityTypeMapping TypeName="Model_facturacion.vwfa_guia_remision">
-              <MappingFragment StoreEntitySet="vwfa_guia_remision">
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="Direccion_Destino" ColumnName="Direccion_Destino" />
-                <ScalarProperty Name="Direccion_Origen" ColumnName="Direccion_Origen" />
-                <ScalarProperty Name="ruta" ColumnName="ruta" />
-                <ScalarProperty Name="placa" ColumnName="placa" />
-                <ScalarProperty Name="gi_FechaInicioTraslado" ColumnName="gi_FechaInicioTraslado" />
-                <ScalarProperty Name="gi_FechaFinTraslado" ColumnName="gi_FechaFinTraslado" />
-                <ScalarProperty Name="Impreso" ColumnName="Impreso" />
-                <ScalarProperty Name="gi_Observacion" ColumnName="gi_Observacion" />
-                <ScalarProperty Name="gi_fech_venc" ColumnName="gi_fech_venc" />
-                <ScalarProperty Name="gi_plazo" ColumnName="gi_plazo" />
-                <ScalarProperty Name="gi_fecha" ColumnName="gi_fecha" />
-                <ScalarProperty Name="IdTransportista" ColumnName="IdTransportista" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="Fecha_Autorizacion" ColumnName="Fecha_Autorizacion" />
-                <ScalarProperty Name="NUAutorizacion" ColumnName="NUAutorizacion" />
-                <ScalarProperty Name="NumGuia_Preimpresa" ColumnName="NumGuia_Preimpresa" />
-                <ScalarProperty Name="Serie2" ColumnName="Serie2" />
-                <ScalarProperty Name="Serie1" ColumnName="Serie1" />
-                <ScalarProperty Name="CodDocumentoTipo" ColumnName="CodDocumentoTipo" />
-                <ScalarProperty Name="CodGuiaRemision" ColumnName="CodGuiaRemision" />
-                <ScalarProperty Name="IdGuiaRemision" ColumnName="IdGuiaRemision" />
-                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwfa_guia_remision_det">
             <EntityTypeMapping TypeName="Model_facturacion.vwfa_guia_remision_det">
               <MappingFragment StoreEntitySet="vwfa_guia_remision_det">
@@ -5216,6 +5232,22 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="vwfa_factura_x_fa_guia_remision">
+            <EntityTypeMapping TypeName="Model_facturacion.vwfa_factura_x_fa_guia_remision">
+              <MappingFragment StoreEntitySet="vwfa_factura_x_fa_guia_remision">
+                <ScalarProperty Name="gi_IdGuiaRemision" ColumnName="gi_IdGuiaRemision" />
+                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
+                <ScalarProperty Name="vt_serie2" ColumnName="vt_serie2" />
+                <ScalarProperty Name="vt_serie1" ColumnName="vt_serie1" />
+                <ScalarProperty Name="vt_tipoDoc" ColumnName="vt_tipoDoc" />
+                <ScalarProperty Name="CodCbteVta" ColumnName="CodCbteVta" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="fa_guia_remision">
             <EntityTypeMapping TypeName="Model_facturacion.fa_guia_remision">
               <MappingFragment StoreEntitySet="fa_guia_remision">
@@ -5243,6 +5275,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
                 <ScalarProperty Name="gi_plazo" ColumnName="gi_plazo" />
                 <ScalarProperty Name="gi_fecha" ColumnName="gi_fecha" />
                 <ScalarProperty Name="IdTransportista" ColumnName="IdTransportista" />
+                <ScalarProperty Name="IdContacto" ColumnName="IdContacto" />
                 <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
                 <ScalarProperty Name="Fecha_Autorizacion" ColumnName="Fecha_Autorizacion" />
                 <ScalarProperty Name="NUAutorizacion" ColumnName="NUAutorizacion" />
@@ -5258,16 +5291,34 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwfa_factura_x_fa_guia_remision">
-            <EntityTypeMapping TypeName="Model_facturacion.vwfa_factura_x_fa_guia_remision">
-              <MappingFragment StoreEntitySet="vwfa_factura_x_fa_guia_remision">
-                <ScalarProperty Name="gi_IdGuiaRemision" ColumnName="gi_IdGuiaRemision" />
-                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
-                <ScalarProperty Name="vt_serie2" ColumnName="vt_serie2" />
-                <ScalarProperty Name="vt_serie1" ColumnName="vt_serie1" />
-                <ScalarProperty Name="vt_tipoDoc" ColumnName="vt_tipoDoc" />
-                <ScalarProperty Name="CodCbteVta" ColumnName="CodCbteVta" />
-                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+          <EntitySetMapping Name="vwfa_guia_remision">
+            <EntityTypeMapping TypeName="Model_facturacion.vwfa_guia_remision">
+              <MappingFragment StoreEntitySet="vwfa_guia_remision">
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="Direccion_Destino" ColumnName="Direccion_Destino" />
+                <ScalarProperty Name="Direccion_Origen" ColumnName="Direccion_Origen" />
+                <ScalarProperty Name="ruta" ColumnName="ruta" />
+                <ScalarProperty Name="placa" ColumnName="placa" />
+                <ScalarProperty Name="gi_FechaInicioTraslado" ColumnName="gi_FechaInicioTraslado" />
+                <ScalarProperty Name="gi_FechaFinTraslado" ColumnName="gi_FechaFinTraslado" />
+                <ScalarProperty Name="Impreso" ColumnName="Impreso" />
+                <ScalarProperty Name="gi_Observacion" ColumnName="gi_Observacion" />
+                <ScalarProperty Name="gi_fech_venc" ColumnName="gi_fech_venc" />
+                <ScalarProperty Name="gi_plazo" ColumnName="gi_plazo" />
+                <ScalarProperty Name="gi_fecha" ColumnName="gi_fecha" />
+                <ScalarProperty Name="IdTransportista" ColumnName="IdTransportista" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Fecha_Autorizacion" ColumnName="Fecha_Autorizacion" />
+                <ScalarProperty Name="NUAutorizacion" ColumnName="NUAutorizacion" />
+                <ScalarProperty Name="NumGuia_Preimpresa" ColumnName="NumGuia_Preimpresa" />
+                <ScalarProperty Name="Serie2" ColumnName="Serie2" />
+                <ScalarProperty Name="Serie1" ColumnName="Serie1" />
+                <ScalarProperty Name="CodDocumentoTipo" ColumnName="CodDocumentoTipo" />
+                <ScalarProperty Name="CodGuiaRemision" ColumnName="CodGuiaRemision" />
+                <ScalarProperty Name="IdGuiaRemision" ColumnName="IdGuiaRemision" />
                 <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />

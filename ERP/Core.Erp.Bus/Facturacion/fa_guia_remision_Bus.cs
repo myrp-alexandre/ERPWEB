@@ -17,6 +17,7 @@ namespace Core.Erp.Bus.Facturacion
         fa_guia_remision_det_x_factura_Data odata_guia_x_fac = new fa_guia_remision_det_x_factura_Data();
         tb_sis_Documento_Tipo_Talonario_Data data_talonario = new tb_sis_Documento_Tipo_Talonario_Data();
         tb_sis_Documento_Tipo_Talonario_Info info_talonario = new tb_sis_Documento_Tipo_Talonario_Info();
+        fa_factura_x_fa_guia_remision_Data odata_fac_x_guia = new fa_factura_x_fa_guia_remision_Data();
         public List<fa_guia_remision_Info> get_list(int IdEmpresa, DateTime fecha_inicio, DateTime fecha_fin)
         {
             try
@@ -71,6 +72,7 @@ namespace Core.Erp.Bus.Facturacion
         {
             try
             {
+                odata_guia_x_fac.eliminar(info.IdEmpresa,info.IdGuiaRemision);
                 odata_det.eliminar(info.IdEmpresa, info.IdGuiaRemision);
                 odata_guia_x_fac.eliminar(info.IdEmpresa, info.IdGuiaRemision);
                 return odata.modificarDB(info);

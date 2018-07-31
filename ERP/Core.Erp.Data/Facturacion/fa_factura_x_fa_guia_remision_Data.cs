@@ -9,17 +9,17 @@ namespace Core.Erp.Data.Facturacion
 {
   public  class fa_factura_x_fa_guia_remision_Data
     {
-        public List<fa_guia_remision_det_x_factura_Info> get_list(int IdEmpresa,decimal IdGuiaRemision)
+        public List<fa_factura_x_fa_guia_remision_Info> get_list(int IdEmpresa,decimal IdGuiaRemision)
         {
             try
             {
-                List<fa_guia_remision_det_x_factura_Info> Lista;
+                List<fa_factura_x_fa_guia_remision_Info> Lista;
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
                     Lista = (from q in Context.vwfa_factura_x_fa_guia_remision
                              where q.IdEmpresa == IdEmpresa
                              && q.gi_IdGuiaRemision==IdGuiaRemision
-                             select new fa_guia_remision_det_x_factura_Info
+                             select new fa_factura_x_fa_guia_remision_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdSucursal = q.IdSucursal,
@@ -43,6 +43,24 @@ namespace Core.Erp.Data.Facturacion
             }
         }
 
+        public bool eliminar(int IdEmpresa, decimal IdGuiaRemision)
+        {
+            try
+            {
+                using (Entities_importacion context = new Entities_importacion())
+                {
+                    string sql = "delete fa_factura_x_fa_guia_remision where fa_IdEmpresa='" + IdEmpresa + "' and gi_IdGuiaRemision='" + IdGuiaRemision + "'";
+                    context.Database.ExecuteSqlCommand(sql);
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
 
     }

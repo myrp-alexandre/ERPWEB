@@ -50,7 +50,7 @@ namespace Core.Erp.Data.Facturacion
                 fa_cliente_contactos_Info info = new fa_cliente_contactos_Info();
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
-                    fa_cliente_contactos Entity = Context.fa_cliente_contactos.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdCliente == IdContacto && q.IdContacto == IdContacto);
+                    fa_cliente_contactos Entity = Context.fa_cliente_contactos.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdCliente == IdCliente && q.IdContacto == IdContacto);
                     if (Entity == null) return null;
                     info = new fa_cliente_contactos_Info
                     {

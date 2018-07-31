@@ -36,6 +36,24 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
+
+        public ActionResult cmb_vacaciones()
+        {
+            try
+            {
+                IdEmpresa = GetIdEmpresa();
+                List<ro_historico_vacaciones_x_empleado_Info> model = new List<ro_historico_vacaciones_x_empleado_Info>();
+                model=Session["lst_vacaciones"] as List<ro_historico_vacaciones_x_empleado_Info>;
+                if (model == null)
+                    model = new List<ro_historico_vacaciones_x_empleado_Info>();
+                return PartialView("_cmb_vacaciones", model);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         [HttpPost]
         public ActionResult Nuevo(ro_Solicitud_Vacaciones_x_empleado_Info info)
         {
