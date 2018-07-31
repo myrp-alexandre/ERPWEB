@@ -24,7 +24,6 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdTipoSRI">Tipo código*</label>
-                    @Html.HiddenFor(q => q.IdTipoSRI)
                     @Html.DevExpress().ComboBoxFor(q => q.IdTipoSRI, settings =>
                {
                    settings.Name = "IdTipoSRI";
@@ -37,10 +36,8 @@
                    settings.Properties.ValueType = typeof(string);
                    settings.Properties.TextField = "descripcion";
                    settings.Properties.NullText = "== Seleccione ==";
-
-                   settings.Properties.DropDownButton.Enabled = false;
+                   
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                   settings.ReadOnly = true;
                }).BindList(ViewBag.lst_tipo).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdTipoSRI, "", new { @class = "text-danger" })
                 </div>
