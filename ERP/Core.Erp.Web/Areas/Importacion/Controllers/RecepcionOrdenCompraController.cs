@@ -36,7 +36,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         imp_ordencompra_ext_det_Bus bus_detalle = new imp_ordencompra_ext_det_Bus();
         imp_catalogo_Bus bus_catalogo = new imp_catalogo_Bus();
         #endregion
-       
+
         #region vistas
 
         public ActionResult Index()
@@ -76,12 +76,12 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         #endregion
 
         #region acciones
-        public ActionResult Nuevo( decimal IdOrdenCompra_ext=0)
+        public ActionResult Nuevo(decimal IdOrdenCompra_ext = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
             imp_orden_compra_ext_recepcion_Info model = new imp_orden_compra_ext_recepcion_Info();
-            model=  bus_recepcion.get_rcepcion_mercancia(IdEmpresa, IdOrdenCompra_ext);
+            model = bus_recepcion.get_rcepcion_mercancia(IdEmpresa, IdOrdenCompra_ext);
             if (model != null)
                 Session["imp_ordencompra_ext_det_Info"] = model.lst_detalle;
             cargar_combos();
@@ -116,7 +116,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             Session["imp_ordencompra_ext_det_Info"] = null;
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(decimal IdRecepcion=0)
+        public ActionResult Modificar(decimal IdRecepcion = 0)
         {
 
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -134,7 +134,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         {
             model.lst_detalle = Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
 
-            if(model.lst_detalle==null)
+            if (model.lst_detalle == null)
             {
                 ViewBag.mensaje = "no existe detalle";
                 cargar_combos();
@@ -158,7 +158,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             Session["imp_ordencompra_ext_det_Info"] = null;
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(decimal IdRecepcion=0)
+        public ActionResult Anular(decimal IdRecepcion = 0)
         {
 
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
