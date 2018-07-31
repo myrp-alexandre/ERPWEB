@@ -66,6 +66,9 @@ namespace Core.Erp.Info.Helps
             fecha_ini = DateTime.Now.Date.AddMonths(-1);
             fecha_fin = DateTime.Now.Date;
         }
+        public int IdAnio { get; set; }
+        public int IdNivel { get; set; }
+        public string balance { get; set; }
 
     }
 
@@ -86,6 +89,8 @@ namespace Core.Erp.Info.Helps
 
         public decimal IdProforma { get; set; }
         public bool formato_hoja_membretada { get; set; }
+
+
 
         public cl_filtros_facturacion_Info()
         {

@@ -70,5 +70,51 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
+
+        public ActionResult CONTA_003( DateTime? fechaIni,DateTime? fechaFin, int IdAnio = 0, string IdUsuario = "", int IdNivel = 0,bool mostrarSaldo0 = false, string balance = "")
+        {
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                fecha_ini = fechaIni == null ? DateTime.Now : Convert.ToDateTime(fechaIni),
+                fecha_fin = fechaFin == null ? DateTime.Now : Convert.ToDateTime(fechaFin),
+                IdUsuario = IdUsuario,
+                mostrar_saldos_en_0 = mostrarSaldo0,
+                IdAnio = IdAnio,
+                balance = balance
+            };
+            CONTA_003_BG_Rpt report = new CONTA_003_BG_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_fechaIni.Value = model.fecha_ini;
+            report.p_fechaFin.Value = model.fecha_fin;
+            report.p_IdUsuario.Value = model.IdUsuario;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_mostrarSaldo0.Value = model.mostrar_saldos_en_0;
+            report.p_balance.Value = model.balance;
+            report.usuario = Session["IdUsuario"].ToString();
+            report.empresa = Session["nom_empresa"].ToString();
+            report.RequestParameters = false;
+            ViewBag.Report = report;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult CONTA_003(cl_filtros_Info model)
+        {
+            CONTA_003_BG_Rpt report = new CONTA_003_BG_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_fechaIni.Value = model.fecha_ini;
+            report.p_fechaFin.Value = model.fecha_fin;
+            report.p_IdUsuario.Value =model. IdUsuario;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_mostrarSaldo0.Value = model.mostrar_saldos_en_0;
+            report.p_balance.Value = model.balance;
+            report.usuario = Session["IdUsuario"].ToString();
+            report.empresa = Session["nom_empresa"].ToString();
+            report.RequestParameters = false;
+            ViewBag.Report = report;
+            return View(model);
+        }
     }
 }
