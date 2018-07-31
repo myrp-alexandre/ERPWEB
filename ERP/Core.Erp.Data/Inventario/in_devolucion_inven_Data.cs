@@ -121,8 +121,9 @@ namespace Core.Erp.Data.Inventario
                     in_Ing_Egr_Inven_Data odata_inv = new in_Ing_Egr_Inven_Data();
                     var parametros = Context.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                     var motivo = Context.in_Motivo_Inven.Where(q => q.IdEmpresa == info.IdEmpresa && q.Genera_Movi_Inven == "S" && q.Tipo_Ing_Egr == (info.dev_signo == "+" ? "ING" : "EGR")).FirstOrDefault();
+
                     #region Creo movimiento de devolución
-                    in_Ing_Egr_Inven_Info dev = armar_movi(info, info.dev_signo == "+" ? Convert.ToInt32(parametros.IdMovi_Inven_tipo_x_Dev_Inv_x_Ing) : Convert.ToInt32(parametros.IdMovi_Inven_tipo_x_Dev_Inv_x_Erg), motivo.IdMotivo_Inv);
+                    in_Ing_Egr_Inven_Info dev = armar_movi(info, info.dev_signo == "+" ? Convert.ToInt32(parametros.IdMovi_Inven_tipo_x_Dev_Inv_x_Erg) : Convert.ToInt32(parametros.IdMovi_Inven_tipo_x_Dev_Inv_x_Ing), motivo.IdMotivo_Inv);
 
                     if (odata_inv.guardarDB(dev, info.dev_signo))
                     {
@@ -193,6 +194,7 @@ namespace Core.Erp.Data.Inventario
                 {
                     IdEmpresa = info.IdEmpresa_inv,
                     IdSucursal = info.IdSucursal_inv,
+                    IdBodega = info.lst_det[0].IdBodega,
                     IdMovi_inven_tipo = IdMoviInven_tipo,
                     IdNumMovi = 0,
                     signo = info.dev_signo,
@@ -241,7 +243,7 @@ namespace Core.Erp.Data.Inventario
 
                     #region Creo movimiento de devolución
 
-                    in_Ing_Egr_Inven_Info dev = armar_movi(info, info.dev_signo == "+" ? Convert.ToInt32(parametros.IdMovi_Inven_tipo_x_Dev_Inv_x_Ing) : Convert.ToInt32(parametros.IdMovi_Inven_tipo_x_Dev_Inv_x_Erg), motivo.IdMotivo_Inv);
+                    in_Ing_Egr_Inven_Info dev = armar_movi(info, info.IdMovi_inven_tipo_inv, motivo.IdMotivo_Inv);
                     dev.IdNumMovi = info.dev_IdNumMovi;
                     if (odata_inv.modificarDB(dev))
                     {

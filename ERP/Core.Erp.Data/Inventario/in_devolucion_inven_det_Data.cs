@@ -33,7 +33,7 @@ namespace Core.Erp.Data.Inventario
                                  IdUnidadMedida = q.IdUnidadMedida_sinConversion,
                                  dm_cantidad = q.dm_cantidad_sinConversion,
                                  mv_costo = q.mv_costo_sinConversion,
-                                 IdBodega = q.IdBodega,
+                                 IdBodega = q.IdBodega,                                 
                                  lote_num_lote = q.lote_num_lote,
                                  NomUnidad = q.NomUnidad,
                                  lote_fecha_vcto = q.lote_fecha_vcto,

@@ -3,6 +3,7 @@ using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Helps;
 using Core.Erp.Info.Inventario;
 using Core.Erp.Web.Helps;
+using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         in_devolucion_inven_det_List List_det = new in_devolucion_inven_det_List();
         in_Ing_Egr_Inven_Bus bus_inv = new in_Ing_Egr_Inven_Bus();
         in_devolucion_inven_det_Bus bus_det = new in_devolucion_inven_det_Bus();
+        string mensaje = string.Empty;
         #endregion
 
         #region Index
@@ -54,6 +56,18 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
         }
+
+        private bool validar(in_devolucion_inven_Info i_validar, ref string msg)
+        {
+            i_validar.lst_det = List_det.get_list().Where(q=>q.cant_devuelta > 0).ToList();
+            if (i_validar.lst_det.Count == 0)
+            {
+                msg = "No ha ingresado detalles a la devolución";
+                return false;
+            }
+            
+            return true;
+        }
         #endregion
 
         #region Acciones
@@ -71,6 +85,24 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             set_list(new List<in_Ing_Egr_Inven_Info>());
             cargar_combos();
             return View(model);
+        }
+        [HttpPost]
+        public ActionResult Nuevo(in_devolucion_inven_Info model)
+        {
+            if (!validar(model,ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
+            if (!bus_devolucion.guardarDB(model))
+            {
+                ViewBag.mensaje = "No se ha podido guardar el registro";
+                cargar_combos();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
         }
 
         public ActionResult Modificar(decimal IdDev_Inven = 0)
@@ -130,6 +162,21 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public void set_list(List<in_Ing_Egr_Inven_Info> list)
         {
             Session["in_Ing_Egr_Inven_x_devolver_Info"] = list;
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] in_devolucion_inven_det_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            if (info_det != null)
+                List_det.UpdateRow(info_det);
+            var model = List_det.get_list();
+            return PartialView("_GridViewPartial_devolucion_det", model);
+        }
+        public ActionResult EditingDelete(int secuencia)
+        {
+            List_det.DeleteRow(secuencia);
+            var model = List_det.get_list();
+            return PartialView("_GridViewPartial_devolucion_det", model);
         }
         #endregion
     }
