@@ -519,6 +519,12 @@
     <Compile Include="Reportes\Contabilidad\CONTA_002_Rpt.Designer.cs">
       <DependentUpon>CONTA_002_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Contabilidad\CONTA_003_BC_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Contabilidad\CONTA_003_BC_Rpt.Designer.cs">
+      <DependentUpon>CONTA_003_BC_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Contabilidad\CONTA_003_BG_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9083,6 +9089,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Contabilidad\CONTA_002_Rpt.resx">
       <DependentUpon>CONTA_002_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Contabilidad\CONTA_003_BC_Rpt.resx">
+      <DependentUpon>CONTA_003_BC_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Contabilidad\CONTA_003_BG_Rpt.resx">
       <DependentUpon>CONTA_003_BG_Rpt.cs</DependentUpon>

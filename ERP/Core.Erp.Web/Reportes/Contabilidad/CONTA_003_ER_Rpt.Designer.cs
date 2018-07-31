@@ -574,11 +574,13 @@
             // 
             // xrTableCell11
             // 
+            this.xrTableCell11.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell11.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([SaldoFinal])")});
             this.xrTableCell11.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell11.Name = "xrTableCell11";
             this.xrTableCell11.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
+            this.xrTableCell11.StylePriority.UseBorders = false;
             this.xrTableCell11.StylePriority.UseFont = false;
             this.xrTableCell11.StylePriority.UsePadding = false;
             this.xrTableCell11.StylePriority.UseTextAlignment = false;
@@ -624,11 +626,13 @@
             // 
             // xrTableCell14
             // 
+            this.xrTableCell14.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell14.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([SaldoFinal])")});
             this.xrTableCell14.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell14.Name = "xrTableCell14";
             this.xrTableCell14.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
+            this.xrTableCell14.StylePriority.UseBorders = false;
             this.xrTableCell14.StylePriority.UseFont = false;
             this.xrTableCell14.StylePriority.UsePadding = false;
             this.xrTableCell14.StylePriority.UseTextAlignment = false;
