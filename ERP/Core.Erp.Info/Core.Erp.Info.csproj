@@ -244,6 +244,7 @@
     <Compile Include="Reportes\Caja\CAJ_002_Info.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_ingresos_Info.cs" />
     <Compile Include="Reportes\Contabilidad\CONTA_002_Info.cs" />
+    <Compile Include="Reportes\Contabilidad\CONTA_003_balances_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_diario_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_002_diario_Info.cs" />
