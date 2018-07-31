@@ -3,6 +3,7 @@ using Core.Erp.Web.Reportes.Contabilidad;
 using Core.Erp.Bus.Contabilidad;
 using System;
 using System.Web.Mvc;
+using System.Collections.Generic;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
@@ -32,6 +33,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ct_plancta_Bus bus_cta = new ct_plancta_Bus();
             var lst_cta = bus_cta.get_list(IdEmpresa, false, false);
             ViewBag.lst_cta = lst_cta;
+
+            Dictionary<int, string> lst_nivel = new Dictionary<int, string>();
+            lst_nivel.Add(6, "Nivel 6");
+            lst_nivel.Add(5, "Nivel 5");
+            lst_nivel.Add(4, "Nivel 4");
+            lst_nivel.Add(3, "Nivel 3");
+            lst_nivel.Add(2, "Nivel 2");
+            lst_nivel.Add(1, "Nivel 1");
+            ViewBag.lst_nivel = lst_nivel;
+
         }
 
         public ActionResult CONTA_002(DateTime? fechaIni, DateTime? fechaFin, string IdCtaCble = "")

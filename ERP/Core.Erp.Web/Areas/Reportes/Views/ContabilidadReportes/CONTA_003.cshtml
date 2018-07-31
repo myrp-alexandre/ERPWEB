@@ -52,6 +52,20 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="IdNivel">Nivel</label>
+                            @Html.DropDownListFor(q => q.IdNivel, new SelectList(ViewBag.lst_nivel, "Key", "Value"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "form", @role = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="mostrar_saldos_en_0">@Html.CheckBoxFor(q=>q.mostrar_saldos_en_0) Mostrar saldos en 0</label>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /.box-body -->
