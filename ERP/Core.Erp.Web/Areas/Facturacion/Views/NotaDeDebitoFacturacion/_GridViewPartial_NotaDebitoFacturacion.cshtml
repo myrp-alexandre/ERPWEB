@@ -7,31 +7,31 @@
         settings.CallbackRouteValues = new { Controller = "NotaDeDebitoFacturacion", Action = "GridViewPartial_NotaDebitoFacturacion", Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin };
         settings.KeyFieldName = "IdNota";
         settings.Width = Unit.Percentage(100);
-//Configuración para que la grilla no muestre texto completo
-settings.SettingsBehavior.AllowEllipsisInText = true;
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
-//CConfiguracion responsive
-settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
+        //CConfiguracion responsive
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
 
-//Configuración scrolling y pager
-settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Hidden;
+        //Configuración scrolling y pager
+        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Hidden;
         settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
         settings.Settings.VerticalScrollableHeight = 400;
         settings.SettingsPager.Visible = true;
         settings.SettingsPager.PageSize = 10;
         settings.SettingsPager.Mode = GridViewPagerMode.ShowPager;
         settings.SettingsPager.AlwaysShowPager = true;
-//Configuración filtro por columna
-settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        //Configuración filtro por columna
+        settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
         settings.Settings.ShowFilterRow = true;
         settings.Settings.ShowHeaderFilterButton = true;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
-//Configuracion exportacion
-settings.SettingsExport.EnableClientSideExportAPI = true;
+        //Configuracion exportacion
+        settings.SettingsExport.EnableClientSideExportAPI = true;
         settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
         settings.Toolbars.Add(t =>
         {
@@ -48,8 +48,8 @@ settings.SettingsExport.EnableClientSideExportAPI = true;
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-//Evento para pintar de rojo las filas anuladas
-settings.HtmlRowPrepared = (s, e) =>
+        //Evento para pintar de rojo las filas anuladas
+        settings.HtmlRowPrepared = (s, e) =>
         {
             if (Convert.ToString(e.GetValue("Estado")) == "I")
             {
@@ -114,6 +114,15 @@ settings.HtmlRowPrepared = (s, e) =>
         });
 
         settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(5);
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("FAC_008", "FacturacionReportes", new { Area = "Reportes", IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(c.DataItem, "IdBodega"), IdNota = DataBinder.Eval(c.DataItem, "IdNota") }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

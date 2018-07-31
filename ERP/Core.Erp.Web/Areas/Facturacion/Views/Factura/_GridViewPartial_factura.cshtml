@@ -126,6 +126,17 @@
             });
             column.Width = Unit.Percentage(5);
         });
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Factura";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("FAC_007", "FacturacionReportes", new { Area = "Reportes", IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(c.DataItem, "IdBodega"), IdCbteVta = DataBinder.Eval(c.DataItem, "IdCbteVta") }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
+        });
+
     });
 }
 @grid.Bind(Model).GetHtml()

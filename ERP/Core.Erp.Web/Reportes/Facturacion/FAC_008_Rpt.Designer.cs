@@ -662,14 +662,13 @@
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.Subreporte_apliaciones,
             this.xrTable5});
-            this.ReportFooter.HeightF = 152.0833F;
+            this.ReportFooter.HeightF = 139.0833F;
             this.ReportFooter.Name = "ReportFooter";
             // 
             // Subreporte_apliaciones
             // 
             this.Subreporte_apliaciones.LocationFloat = new DevExpress.Utils.PointFloat(0F, 119.0833F);
             this.Subreporte_apliaciones.Name = "Subreporte_apliaciones";
-            this.Subreporte_apliaciones.ReportSource = new Core.Erp.Web.Reportes.Facturacion.FAC_008_aplicaciones_Rpt();
             this.Subreporte_apliaciones.SizeF = new System.Drawing.SizeF(750F, 20F);
             this.Subreporte_apliaciones.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Subreporte_apliaciones_BeforePrint);
             // 

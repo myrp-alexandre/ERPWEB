@@ -34,6 +34,11 @@ namespace Core.Erp.Web.Reportes.Facturacion
         private void Subreporte_apliaciones_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
 
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa_nt"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdSucursal_nt"].Value = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdBodega_nt"].Value = p_IdBodega.Value == null ? 0 : Convert.ToInt32(p_IdBodega.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdNota_nt"].Value = p_IdNota.Value == null ? 0 : Convert.ToDecimal(p_IdNota.Value);
+            ((XRSubreport)sender).ReportSource.RequestParameters = false;
         }
     }
 }

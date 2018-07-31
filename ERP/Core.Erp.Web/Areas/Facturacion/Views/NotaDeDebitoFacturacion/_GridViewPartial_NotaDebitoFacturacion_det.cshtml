@@ -59,7 +59,7 @@ settings.InitNewRow = (s, e) =>
             column.SetEditItemTemplateContent(c =>
             {
                 ViewContext.Writer.Write("<div id='ajaxDiv'>");
-                Html.RenderPartial("_CmbProducto_NotaCrebitoFacturacion", DataBinder.Eval(c.DataItem, "IdProducto"));
+                Html.RenderPartial("_CmbProducto_NotaDebitoFacturacion", DataBinder.Eval(c.DataItem, "IdProducto"));
                 ViewContext.Writer.Write("</div>");
             });
         });
