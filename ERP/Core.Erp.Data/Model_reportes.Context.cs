@@ -517,5 +517,42 @@ namespace Core.Erp.Data
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPROL_012_Result>("SPROL_012", idEmpresaParameter, fecha_desdeParameter, fecha_hastaParameter);
         }
+    
+        public virtual ObjectResult<SPCONTA_003_balances_Result> SPCONTA_003_balances(Nullable<int> idEmpresa, Nullable<int> idAnio, Nullable<System.DateTime> fechaIni, Nullable<System.DateTime> fechaFin, string idUsuario, Nullable<int> idNivel, Nullable<bool> mostrarSaldo0, string balance)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idAnioParameter = idAnio.HasValue ?
+                new ObjectParameter("IdAnio", idAnio) :
+                new ObjectParameter("IdAnio", typeof(int));
+    
+            var fechaIniParameter = fechaIni.HasValue ?
+                new ObjectParameter("FechaIni", fechaIni) :
+                new ObjectParameter("FechaIni", typeof(System.DateTime));
+    
+            var fechaFinParameter = fechaFin.HasValue ?
+                new ObjectParameter("FechaFin", fechaFin) :
+                new ObjectParameter("FechaFin", typeof(System.DateTime));
+    
+            var idUsuarioParameter = idUsuario != null ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(string));
+    
+            var idNivelParameter = idNivel.HasValue ?
+                new ObjectParameter("IdNivel", idNivel) :
+                new ObjectParameter("IdNivel", typeof(int));
+    
+            var mostrarSaldo0Parameter = mostrarSaldo0.HasValue ?
+                new ObjectParameter("MostrarSaldo0", mostrarSaldo0) :
+                new ObjectParameter("MostrarSaldo0", typeof(bool));
+    
+            var balanceParameter = balance != null ?
+                new ObjectParameter("Balance", balance) :
+                new ObjectParameter("Balance", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPCONTA_003_balances_Result>("SPCONTA_003_balances", idEmpresaParameter, idAnioParameter, fechaIniParameter, fechaFinParameter, idUsuarioParameter, idNivelParameter, mostrarSaldo0Parameter, balanceParameter);
+        }
     }
 }

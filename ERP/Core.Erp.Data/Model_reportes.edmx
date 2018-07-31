@@ -2586,6 +2586,16 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Parameter Name="FechaIni" Type="datetime" Mode="In" />
           <Parameter Name="FechaFin" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="SPCONTA_003_balances" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdAnio" Type="int" Mode="In" />
+          <Parameter Name="FechaIni" Type="datetime" Mode="In" />
+          <Parameter Name="FechaFin" Type="datetime" Mode="In" />
+          <Parameter Name="IdUsuario" Type="varchar" Mode="In" />
+          <Parameter Name="IdNivel" Type="int" Mode="In" />
+          <Parameter Name="MostrarSaldo0" Type="bit" Mode="In" />
+          <Parameter Name="Balance" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SPCXP_007" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="Fecha_ini" Type="datetime" Mode="In" />
@@ -4295,6 +4305,16 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <EntitySet Name="VWFAC_008" EntityType="Model_reportes.VWFAC_008" />
           <EntitySet Name="VWIMP_001" EntityType="Model_reportes.VWIMP_001" />
           <EntitySet Name="VWFAC_008_aplicaciones" EntityType="Model_reportes.VWFAC_008_aplicaciones" />
+          <FunctionImport Name="SPCONTA_003_balances" ReturnType="Collection(Model_reportes.SPCONTA_003_balances_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdAnio" Mode="In" Type="Int32" />
+            <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="IdUsuario" Mode="In" Type="String" />
+            <Parameter Name="IdNivel" Mode="In" Type="Int32" />
+            <Parameter Name="MostrarSaldo0" Mode="In" Type="Boolean" />
+            <Parameter Name="Balance" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Af_SPACTF_004_detalle">
           <Key>
@@ -7067,6 +7087,28 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Property Name="NumFactura" Type="String" MaxLength="49" FixedLength="false" Unicode="false" />
           <Property Name="vt_fecha" Type="DateTime" Precision="3" />
         </EntityType>
+        <ComplexType Name="SPCONTA_003_balances_Result">
+          <Property Type="String" Name="IdUsuario" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="String" Name="IdCtaCble" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="pc_Cuenta" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="IdCtaCblePadre" Nullable="true" MaxLength="20" />
+          <Property Type="Boolean" Name="EsCtaUtilidad" Nullable="false" />
+          <Property Type="Int32" Name="IdNivelCta" Nullable="false" />
+          <Property Type="String" Name="IdGrupoCble" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="gc_GrupoCble" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="gc_estado_financiero" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="gc_Orden" Nullable="false" />
+          <Property Type="Double" Name="DebitosSaldoInicial" Nullable="false" />
+          <Property Type="Double" Name="CreditosSaldoInicial" Nullable="false" />
+          <Property Type="Double" Name="SaldoInicial" Nullable="false" />
+          <Property Type="Double" Name="Debitos" Nullable="false" />
+          <Property Type="Double" Name="Creditos" Nullable="false" />
+          <Property Type="Double" Name="SaldoDebitosCreditos" Nullable="false" />
+          <Property Type="Double" Name="SaldoDebitos" Nullable="false" />
+          <Property Type="Double" Name="SaldoCreditos" Nullable="false" />
+          <Property Type="Double" Name="SaldoFinal" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9044,6 +9086,32 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPCONTA_003_balances" FunctionName="Model_reportes.Store.SPCONTA_003_balances">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_reportes.SPCONTA_003_balances_Result">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
+                <ScalarProperty Name="IdCtaCblePadre" ColumnName="IdCtaCblePadre" />
+                <ScalarProperty Name="EsCtaUtilidad" ColumnName="EsCtaUtilidad" />
+                <ScalarProperty Name="IdNivelCta" ColumnName="IdNivelCta" />
+                <ScalarProperty Name="IdGrupoCble" ColumnName="IdGrupoCble" />
+                <ScalarProperty Name="gc_GrupoCble" ColumnName="gc_GrupoCble" />
+                <ScalarProperty Name="gc_estado_financiero" ColumnName="gc_estado_financiero" />
+                <ScalarProperty Name="gc_Orden" ColumnName="gc_Orden" />
+                <ScalarProperty Name="DebitosSaldoInicial" ColumnName="DebitosSaldoInicial" />
+                <ScalarProperty Name="CreditosSaldoInicial" ColumnName="CreditosSaldoInicial" />
+                <ScalarProperty Name="SaldoInicial" ColumnName="SaldoInicial" />
+                <ScalarProperty Name="Debitos" ColumnName="Debitos" />
+                <ScalarProperty Name="Creditos" ColumnName="Creditos" />
+                <ScalarProperty Name="SaldoDebitosCreditos" ColumnName="SaldoDebitosCreditos" />
+                <ScalarProperty Name="SaldoDebitos" ColumnName="SaldoDebitos" />
+                <ScalarProperty Name="SaldoCreditos" ColumnName="SaldoCreditos" />
+                <ScalarProperty Name="SaldoFinal" ColumnName="SaldoFinal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
