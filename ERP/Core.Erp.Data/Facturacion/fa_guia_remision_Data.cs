@@ -96,7 +96,8 @@ namespace Core.Erp.Data.Facturacion
                         ruta = Entity.ruta,
                         Direccion_Destino = Entity.Direccion_Destino,
                         Direccion_Origen = Entity.Direccion_Origen,
-                        Estado = Entity.Estado
+                        Estado = Entity.Estado,
+                        IdCatalogo_traslado=Entity.IdCatalogo_traslado
                     };
                 }
                 return info;
@@ -152,6 +153,7 @@ namespace Core.Erp.Data.Facturacion
                         NUAutorizacion = info.NUAutorizacion,
                         Fecha_Autorizacion = info.Fecha_Autorizacion,
                         IdCliente = info.IdCliente,
+                        IdContacto=info.IdContacto,
                         IdTransportista = info.IdTransportista,
                         gi_fecha = info.gi_fecha,
                         gi_plazo = info.gi_plazo,
@@ -164,6 +166,7 @@ namespace Core.Erp.Data.Facturacion
                         ruta = info.ruta,
                         Direccion_Destino = info.Direccion_Destino,
                         Direccion_Origen = info.Direccion_Origen,
+                        IdCatalogo_traslado=info.IdCatalogo_traslado,
                         Estado = info.Estado="A",
                         IdUsuario=info.IdUsuario,
                         nom_pc=info.nom_pc,
@@ -254,6 +257,7 @@ namespace Core.Erp.Data.Facturacion
                         Entity.ruta = info.ruta;
                         Entity.Direccion_Destino = info.Direccion_Destino;
                         Entity.Direccion_Origen = info.Direccion_Origen;
+                    Entity.IdCatalogo_traslado = info.IdCatalogo_traslado;
                         Entity.Fecha_UltMod = info.Fecha_UltMod=DateTime.Now;
                         Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     foreach (var item in info.lst_detalle)

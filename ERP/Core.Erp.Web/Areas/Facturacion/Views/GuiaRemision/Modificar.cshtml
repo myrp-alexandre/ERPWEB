@@ -33,6 +33,8 @@
 
                 $("#myform").submit();
                 GridViewPartial_guias_remision_det.PerformCallback();
+                GridViewPartial_Facturas_x_guia.PerformCallback();
+                selectedIDs = "";
                 $("#OpModal").modal("hide");
 
             },
@@ -45,7 +47,7 @@
 </script>
 @model Core.Erp.Info.Facturacion.fa_guia_remision_Info
 @{
-    ViewBag.Title = "Modificar";
+    ViewBag.Title = "Modificar guia";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -69,7 +71,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-8">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal*</label>
                     @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal" })
@@ -77,26 +79,14 @@
                 </div>
 
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdPuntoVta">Punto de venta*</label>
                     @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_punto_venta, "IdPuntoVta", "nom_PuntoVta"), new { @class = "form-control", @id = "IdPuntoVta" })
                     @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="IdCliente">Cliente*</label>
-                    @Html.Partial("_CmbCliente_Guia", Model)
-                    @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdVendedor">Transportista*</label>
                     @Html.DropDownListFor(q => q.IdTransportista, new SelectList(ViewBag.lst_transportista, "IdTransportista", "Nombre"), new { @class = "form-control", @id = "IdTransportista" })
@@ -113,74 +103,94 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label for="IdCliente">Cliente*</label>
+                    @Html.Partial("_CmbCliente_Guia", Model)
+                    @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="IdClienteContacto">Contacto</label>
+                    @Html.DropDownListFor(q => q.IdContacto, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres"), new { @class = "form-control", @id = "IdContacto" })
+                    @Html.ValidationMessageFor(q => q.IdContacto, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label for="vt_serie1">Establecimiento*</label>
-                        @Html.TextBoxFor(q => q.Serie1, new { @class = "form-control", @id = "Serie1" })
-                        @Html.ValidationMessageFor(q => q.Serie1, "", new { @class = "text-danger" })
-                    </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="vt_serie1">Establecimiento*</label>
+                    @Html.TextBoxFor(q => q.Serie1, new { @class = "form-control", @id = "Serie1" })
+                    @Html.ValidationMessageFor(q => q.Serie1, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label for="vt_serie2">Pto. Emisión*</label>
-                        @Html.TextBoxFor(q => q.Serie2, new { @class = "form-control", @id = "Serie2" })
-                        @Html.ValidationMessageFor(q => q.Serie2, "", new { @class = "text-danger" })
-                    </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="vt_serie2">Pto. Emisión*</label>
+                    @Html.TextBoxFor(q => q.Serie2, new { @class = "form-control", @id = "Serie2" })
+                    @Html.ValidationMessageFor(q => q.Serie2, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="vt_NumFactura"># Documento*</label>
-                        @Html.TextBoxFor(q => q.NumGuia_Preimpresa, new { @class = "form-control", @id = "NumGuia_Preimpresa" })
-                        @Html.ValidationMessageFor(q => q.NumGuia_Preimpresa, "", new { @class = "text-danger" })
-                    </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="vt_NumFactura"># Documento*</label>
+                    @Html.TextBoxFor(q => q.NumGuia_Preimpresa, new { @class = "form-control", @id = "NumGuia_Preimpresa" })
+                    @Html.ValidationMessageFor(q => q.NumGuia_Preimpresa, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label for="">Fecha</label>
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            @Html.TextBoxFor(q => q.gi_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "gi_fecha" })
-                            @Html.ValidationMessageFor(q => q.gi_fecha, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="">Fecha</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
                         </div>
+                        @Html.TextBoxFor(q => q.gi_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "gi_fecha" })
+                        @Html.ValidationMessageFor(q => q.gi_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-8">
-                    <div class="form-group">
-                        <label for="pf_observacion">Direcion origen</label>
-                        @Html.TextBoxFor(q => q.Direccion_Origen, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(q => q.Direccion_Origen, "", new { @class = "text-danger" })
-                    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="pf_observacion">Direcion origen</label>
+                    @Html.TextBoxFor(q => q.Direccion_Origen, new { @class = "form-control", @id = "Direccion_Origen" })
+                    @Html.ValidationMessageFor(q => q.Direccion_Origen, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label for="">Inicio traslado</label>
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            @Html.TextBoxFor(q => q.gi_FechaInicioTraslado, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "gi_FechaInicioTraslado" })
-                            @Html.ValidationMessageFor(q => q.gi_FechaInicioTraslado, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="">Inicio traslado</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
                         </div>
+                        @Html.TextBoxFor(q => q.gi_FechaInicioTraslado, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "gi_FechaInicioTraslado" })
+                        @Html.ValidationMessageFor(q => q.gi_FechaInicioTraslado, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
         </div>
+    </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-8">
                     <div class="form-group">
                         <label for="pf_observacion">Direcion destino</label>
-                        @Html.TextBoxFor(q => q.Direccion_Destino, new { @class = "form-control" })
+                        @Html.TextBoxFor(q => q.Direccion_Destino, new { @class = "form-control", @id = "Direccion_Destino" })
                         @Html.ValidationMessageFor(q => q.Direccion_Destino, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -200,6 +210,17 @@
         </div>
         <div class="row">
             <div class="col-md-12">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="IdClienteContacto">Tipo de traslado</label>
+                        @Html.DropDownListFor(q => q.IdCatalogo_traslado, new SelectList(ViewBag.lst_tipo_traslado, "IdCatalogo", "Nombre"), new { @class = "form-control", @id = "IdContacto" })
+                        @Html.ValidationMessageFor(q => q.IdCatalogo_traslado, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="pf_observacion">Observación</label>
@@ -209,23 +230,57 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <button type="button" class="btn btn-primary" onclick="MostrarModal()">
-                    <i class="fa fa-search"></i>
-                </button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="pf_observacion">Detalle</label>
-                        @Html.Action("GridViewPartial_guias_remision_det")
+
+
+
+
+
+        <div id="Tabs" role="tabpanel">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active">
+                    <a href="#detalle_guia" aria-controls="informacion_general" role="tab" data-toggle="tab">Detalle guia</a>
+                </li>
+                <li>
+                    <a href="#tab_documentos_relacionados" aria-controls="contactos_telefonos" role="tab" data-toggle="tab">Documentos relacionados</a>
+                </li>
+
+            </ul>
+            <div class="tab-content" style="padding-top: 20px">
+                <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="detalle_guia">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-primary" onclick="MostrarModal()">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    @Html.Action("GridViewPartial_guias_remision_det")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_documentos_relacionados">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    @Html.Action("GridViewPartial_Facturas_x_guia")
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
+
+
 
         <div class="modal fade" id="OpModal" role="dialog">
             <div class="modal-dialog modal-lg">
@@ -248,13 +303,13 @@
         </div>
 
 
-        <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a class="btn btn-default" href="@Url.Action("Index","GuiaRemision",new { Area = "Facturacion" },null)">Cancelar</a>
-        </div>
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a class="btn btn-default" href="@Url.Action("Index","GuiaRemision",new { Area = "Facturacion" },null)">Cancelar</a>
+                </div>
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }
 }
 
 
@@ -265,6 +320,9 @@
 
     $(function () {
         CargarPuntosDeVenta();
+        GetUltimoDocumento();
+        get_direccion();
+        get_placa();
         //Date picker
         $('#gi_FechaFinTraslado').datepicker({
             autoclose: true
@@ -275,13 +333,16 @@
         $('#gi_fecha').datepicker({
             autoclose: true
         })
-
         $("#IdSucursal").change(function () {
             CargarPuntosDeVenta();
+            GetUltimoDocumento();
         });
         $("#IdPuntoVta").change(function () {
+            GetUltimoDocumento();
         });
-
+        $("#IdContacto").change(function () {
+            get_direccion();
+        });
     });
 
     function MostrarModal() {
@@ -332,7 +393,7 @@
         });
     }
 
-       function GetUltimoDocumento() {
+    function GetUltimoDocumento() {
         var datos = {
             IdSucursal: $("#IdSucursal").val(),
             IdPuntoVta: $("#IdPuntoVta").val()
@@ -352,14 +413,33 @@
             error: function (error) {
             }
         });
-        }
+    }
 
+    function get_placa() {
+        var datos = {
+            IdTransportista: $("#IdTransportista").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("Get_placa", "GuiaRemision",new { Area = "Facturacion"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#placa").val(data.Placa);
+
+            },
+            error: function (error) {
+            }
+        });
+    }
 
     function get_direccion() {
-        var tipo = IdCliente.GetValue();
 
         var datos = {
-            IdCliente: tipo
+            IdCliente: IdCliente.GetValue(),
+            IdContacto: $("#IdContacto").val()
         }
         $.ajax({
             type: 'POST',
@@ -369,9 +449,10 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $("#Direccion_Origen").val(data.Direccion_emp);
-                $("#Direccion_Destino").val(data.Direccion);
-                get_info_termino_pago();
+                if (data != null) {
+                    $("#Direccion_Origen").val(data.Direccion_emp);
+                    $("#Direccion_Destino").val(data.Direccion);
+                }
             },
             error: function (error) {
                 alert(error);
@@ -380,6 +461,31 @@
         });
     }
 
+
+    function cargar_contactos() {
+
+        $("#IdContacto").empty();
+        var codigo = IdCliente.GetValue();
+
+        var datos = {
+            IdCliente: codigo
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("cargar_contactos", "Factura",new { Area = "Facturacion"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdContacto").append("<option value=" + row.IdContacto + ">" + row.Nombres + "</option>");
+                });
+            },
+            error: function (error) {
+            }
+        });
+    }
 </script>
 
 

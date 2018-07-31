@@ -95,10 +95,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
         public ActionResult GridViewPartial_Facturas_x_guia()
         {
-            List<fa_guia_remision_det_x_factura_Info> model = new List<fa_guia_remision_det_x_factura_Info>();
-            model = Session["fa_guia_remision_det_x_factura_Info"] as List<fa_guia_remision_det_x_factura_Info>;
+            List<fa_factura_x_fa_guia_remision_Info> model = new List<fa_factura_x_fa_guia_remision_Info>();
+            model = Session["fa_factura_x_fa_guia_remision_Info"] as List<fa_factura_x_fa_guia_remision_Info>;
             if (model == null)
-                model = new List<fa_guia_remision_det_x_factura_Info>();
+                model = new List<fa_factura_x_fa_guia_remision_Info>();
             return PartialView("_GridViewPartial_Facturas_x_guia", model);
         }
 
@@ -131,7 +131,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdUsuario = Session["IdUsuario"].ToString();
             model.CodGuiaRemision= (model.CodGuiaRemision == null) ? "" : model.CodGuiaRemision;
-            model.lst_detalle_x_factura= Session["fa_guia_remision_det_x_factura_Info"] as List<fa_factura_x_fa_guia_remision_Info>;
+            model.lst_detalle_x_factura= Session["fa_factura_x_fa_guia_remision_Info"] as List<fa_factura_x_fa_guia_remision_Info>;
             model.CodDocumentoTipo = "GUIA";
             string mensaje = bus_guia.validar(model);
             if (mensaje != "")
@@ -150,7 +150,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         public ActionResult Modificar(decimal IdGuiaRemision=0)
         {
-
+            bus_guia = new fa_guia_remision_Bus();
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             fa_guia_remision_Info model = bus_guia.get_info(IdEmpresa, IdGuiaRemision);
             var lst_detalle = bus_detalle.get_list(IdEmpresa, IdGuiaRemision);
@@ -160,7 +160,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             if (lst_detalle_x_factura == null)
                 lst_detalle_x_factura = new List<fa_factura_x_fa_guia_remision_Info>();
             Session["fa_guia_remision_det_Info"] = lst_detalle;
-            Session["fa_guia_remision_det_x_factura_Info"] = lst_detalle_x_factura;
+            Session["fa_factura_x_fa_guia_remision_Info"] = lst_detalle_x_factura;
             if (model == null)
                 return RedirectToAction("Index");
             cargar_combos(model);
@@ -262,10 +262,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 if (lst_detalle_guia == null)
                     lst_detalle_guia = new List<fa_guia_remision_det_Info>();
 
-                List<fa_guia_remision_det_x_factura_Info> list_facturas_seleccionadas = new List<fa_guia_remision_det_x_factura_Info>();
-                list_facturas_seleccionadas = Session["fa_guia_remision_det_x_factura_Info"] as List<fa_guia_remision_det_x_factura_Info>;
+                List<fa_factura_x_fa_guia_remision_Info> list_facturas_seleccionadas = new List<fa_factura_x_fa_guia_remision_Info>();
+                list_facturas_seleccionadas = Session["fa_factura_x_fa_guia_remision_Info"] as List<fa_factura_x_fa_guia_remision_Info>;
                 if (list_facturas_seleccionadas == null)
-                    list_facturas_seleccionadas = new List<fa_guia_remision_det_x_factura_Info>();
+                    list_facturas_seleccionadas = new List<fa_factura_x_fa_guia_remision_Info>();
 
 
 
@@ -286,7 +286,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                             if (factura != null)
                             {
                                 if(list_facturas_seleccionadas.Where(q => q.IdCbteVta == Convert.ToDecimal(item.Key)).Count()==0)
-                                list_facturas_seleccionadas.Add(new fa_guia_remision_det_x_factura_Info
+                                list_facturas_seleccionadas.Add(new fa_factura_x_fa_guia_remision_Info
                                 {
                                     IdEmpresa=factura.IdEmpresa,
                                     IdSucursal=factura.IdSucursal,
@@ -298,7 +298,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                                     vt_tipoDoc="FAC",
 
                                 });
-                                Session["fa_guia_remision_det_x_factura_Info"] = list_facturas_seleccionadas;
+                                Session["fa_factura_x_fa_guia_remision_Info"] = list_facturas_seleccionadas;
                             }
 
                         }
@@ -371,7 +371,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var lst_contacto = bus_contacto.get_list(model.IdEmpresa, model.IdCliente);
             ViewBag.lst_contacto = lst_contacto;
 
-            var lst_tipo_traslado = bus_catalogo.get_list(1,false);
+            var lst_tipo_traslado = bus_catalogo.get_list(14,false);
             ViewBag.lst_tipo_traslado = lst_tipo_traslado;
 
         }

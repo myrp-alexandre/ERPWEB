@@ -61,6 +61,7 @@ namespace Core.Erp.Info.Facturacion
         [Required(ErrorMessage = "El campo dirección destino es obligatorio")]
 
         public string Direccion_Destino { get; set; }
+        public string IdCatalogo_traslado { get; set; }
 
         public string pe_cedulaRuc { get; set; }
         public string pe_nombreCompleto { get; set; }

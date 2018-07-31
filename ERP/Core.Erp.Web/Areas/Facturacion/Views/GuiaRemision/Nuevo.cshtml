@@ -100,7 +100,7 @@
                 </div>
             </div>
         </div>
-     </div>
+    </div>
 
     <div class="row">
         <div class="col-md-12">
@@ -118,9 +118,9 @@
                     @Html.ValidationMessageFor(q => q.IdContacto, "", new { @class = "text-danger" })
                 </div>
             </div>
-           
-            </div>
+
         </div>
+    </div>
 
 
     <div class="row">
@@ -158,15 +158,15 @@
                     </div>
                 </div>
             </div>
-            </div>
         </div>
+    </div>
 
-    <div class="row">
+        <div class="row">
             <div class="col-md-12">
                 <div class="col-md-8">
                     <div class="form-group">
                         <label for="pf_observacion">Direcion origen</label>
-                        @Html.TextBoxFor(q => q.Direccion_Origen, new { @class = "form-control",@id= "Direccion_Origen" })
+                        @Html.TextBoxFor(q => q.Direccion_Origen, new { @class = "form-control", @id = "Direccion_Origen" })
                         @Html.ValidationMessageFor(q => q.Direccion_Origen, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -184,12 +184,12 @@
                 </div>
             </div>
         </div>
-    <div class="row">
+        <div class="row">
             <div class="col-md-12">
                 <div class="col-md-8">
                     <div class="form-group">
                         <label for="pf_observacion">Direcion destino</label>
-                        @Html.TextBoxFor(q => q.Direccion_Destino, new { @class = "form-control" ,@id= "Direccion_Destino" })
+                        @Html.TextBoxFor(q => q.Direccion_Destino, new { @class = "form-control", @id = "Direccion_Destino" })
                         @Html.ValidationMessageFor(q => q.Direccion_Destino, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -207,97 +207,109 @@
                 </div>
             </div>
         </div>
-    <div class="row">
-        <div class="col-md-12">
+        <div class="row">
             <div class="col-md-12">
-                <div class="form-group">
-                    <label for="pf_observacion">Observación</label>
-                    @Html.TextAreaFor(q => q.gi_Observacion, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.gi_Observacion, "", new { @class = "text-danger" })
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="IdClienteContacto">Tipo de traslado</label>
+                        @Html.DropDownListFor(q => q.IdCatalogo_traslado, new SelectList(ViewBag.lst_tipo_traslado, "IdCatalogo", "Nombre"), new { @class = "form-control", @id = "IdContacto" })
+                        @Html.ValidationMessageFor(q => q.IdCatalogo_traslado, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="pf_observacion">Observación</label>
+                        @Html.TextAreaFor(q => q.gi_Observacion, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(q => q.gi_Observacion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
-    </div>
-   
+        </div>
+       
     
 
 
-    <div id="Tabs" role="tabpanel">
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="active">
-                <a href="#detalle_guia" aria-controls="informacion_general" role="tab" data-toggle="tab">Detalle guia</a>
-            </li>
-            <li>
-                <a href="#tab_documentos_relacionados" aria-controls="contactos_telefonos" role="tab" data-toggle="tab">Documentos relacionados</a>
-            </li>
-           
-        </ul>
-        <div class="tab-content" style="padding-top: 20px">
-            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="detalle_guia">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-primary" onclick="MostrarModal()">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="row">
+
+        <div id="Tabs" role="tabpanel">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active">
+                    <a href="#detalle_guia" aria-controls="informacion_general" role="tab" data-toggle="tab">Detalle guia</a>
+                </li>
+                <li>
+                    <a href="#tab_documentos_relacionados" aria-controls="contactos_telefonos" role="tab" data-toggle="tab">Documentos relacionados</a>
+                </li>
+
+            </ul>
+            <div class="tab-content" style="padding-top: 20px">
+                <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="detalle_guia">
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            <div class="form-group">
-                                @Html.Action("GridViewPartial_guias_remision_det")
+                            <button type="button" class="btn btn-primary" onclick="MostrarModal()">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    @Html.Action("GridViewPartial_guias_remision_det")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_documentos_relacionados">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    @Html.Action("GridViewPartial_Facturas_x_guia")
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-             
+
             </div>
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_documentos_relacionados">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                @Html.Action("GridViewPartial_Facturas_x_guia")
+        </div>
+
+
+
+                <div class="modal fade" id="OpModal" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Facturas sin guias</h4>
+                            </div>
+                            <div class="modal-body">
+                                @Html.Action("GridViewPartial_FacturasSinGuia")
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" onclick="seleccionar_aprobacion();">Aceptar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-           
-        </div>
-    </div>
 
-
-
-    <div class="modal fade" id="OpModal" role="dialog">
-            <div class="modal-dialog modal-lg">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Facturas sin guias</h4>
-                    </div>
-                    <div class="modal-body">
-                        @Html.Action("GridViewPartial_FacturasSinGuia")
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="seleccionar_aprobacion();">Aceptar</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
 
-            </div>
-        </div>
 
-
-        <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a class="btn btn-default" href="@Url.Action("Index","GuiaRemision",new { Area = "Facturacion" },null)">Cancelar</a>
-        </div>
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
-        }
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a class="btn btn-default" href="@Url.Action("Index","GuiaRemision",new { Area = "Facturacion" },null)">Cancelar</a>
+                </div>
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }
+}
 
 
 
@@ -380,7 +392,7 @@
         });
     }
 
-       function GetUltimoDocumento() {
+    function GetUltimoDocumento() {
         var datos = {
             IdSucursal: $("#IdSucursal").val(),
             IdPuntoVta: $("#IdPuntoVta").val()
@@ -400,7 +412,7 @@
             error: function (error) {
             }
         });
-       }
+    }
 
     function get_placa() {
         var datos = {
@@ -415,7 +427,7 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 $("#placa").val(data.Placa);
-               
+
             },
             error: function (error) {
             }
@@ -423,10 +435,10 @@
     }
 
     function get_direccion() {
-       
+
         var datos = {
-             IdCliente : IdCliente.GetValue(),
-            IdContacto:$("#IdContacto").val()
+            IdCliente: IdCliente.GetValue(),
+            IdContacto: $("#IdContacto").val()
         }
         $.ajax({
             type: 'POST',
