@@ -74,7 +74,7 @@ namespace Core.Erp.Bus.Facturacion
             {
                 odata_guia_x_fac.eliminar(info.IdEmpresa,info.IdGuiaRemision);
                 odata_det.eliminar(info.IdEmpresa, info.IdGuiaRemision);
-                odata_guia_x_fac.eliminar(info.IdEmpresa, info.IdGuiaRemision);
+                odata_fac_x_guia.eliminar(info.IdEmpresa, info.IdGuiaRemision);
                 return odata.modificarDB(info);
             }
             catch (Exception)
@@ -97,7 +97,7 @@ namespace Core.Erp.Bus.Facturacion
                 if (odata.anularDB(info))
                 {
                     odata_guia_x_fac.eliminar(info.IdEmpresa, info.IdGuiaRemision);
-
+                    odata_fac_x_guia.eliminar(info.IdEmpresa, info.IdGuiaRemision);
                     data_talonario.modificar_estado_usadoDB(info_talonario);
                     return true;
                 }

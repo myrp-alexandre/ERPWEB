@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Importacion.Controllers
 {
-    public class LiquidacionImportacionController : Controller
+    public class AsignacionDeGastosController : Controller
     {
         #region variables
         imp_liquidacion_det_x_imp_orden_compra_ext_Bus bus_liquidacion_oc = new imp_liquidacion_det_x_imp_orden_compra_ext_Bus();
@@ -46,7 +46,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             ViewBag.IdSucursal = IdSucursal;
 
             List<imp_liquidacion_det_x_imp_orden_compra_ext_Info> model = new List<imp_liquidacion_det_x_imp_orden_compra_ext_Info>();
-            //model = bus_liquidacion_oc.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
+            model = bus_liquidacion_oc.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_liquidacion_importacion", model);
         }
         public ActionResult GridViewPartial_liquidacion_importacion_det()
