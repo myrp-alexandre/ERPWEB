@@ -28,6 +28,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_guia_remision_det_Info_lst detalle_info = new fa_guia_remision_det_Info_lst();
         fa_cliente_contactos_Bus bus_contacto = new fa_cliente_contactos_Bus();
         fa_factura_x_fa_guia_remision_Bus bus_detalle_x_factura = new fa_factura_x_fa_guia_remision_Bus();
+        fa_catalogo_Bus bus_catalogo = new fa_catalogo_Bus();
 
         #endregion
 
@@ -369,6 +370,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             var lst_contacto = bus_contacto.get_list(model.IdEmpresa, model.IdCliente);
             ViewBag.lst_contacto = lst_contacto;
+
+            var lst_tipo_traslado = bus_catalogo.get_list(1,false);
+            ViewBag.lst_tipo_traslado = lst_tipo_traslado;
 
         }
        
