@@ -9,8 +9,8 @@ namespace Core.Erp.Bus.Inventario
     {
         in_Ing_Egr_Inven_Data odata = new in_Ing_Egr_Inven_Data();
         in_Ing_Egr_Inven_det_Data odata_det = new in_Ing_Egr_Inven_det_Data();
-    
-        public List<in_Ing_Egr_Inven_Info> get_list(int IdEmpresa,  string signo, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
+
+        public List<in_Ing_Egr_Inven_Info> get_list(int IdEmpresa, string signo, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace Core.Erp.Bus.Inventario
         {
             try
             {
-                return odata.guardarDB(info,  signo);
+                return odata.guardarDB(info, signo);
             }
             catch (Exception)
             {
@@ -53,7 +53,7 @@ namespace Core.Erp.Bus.Inventario
         {
             try
             {
-                return odata.modificarDB(info);                
+                return odata.modificarDB(info);
             }
             catch (Exception)
             {
@@ -78,7 +78,7 @@ namespace Core.Erp.Bus.Inventario
         {
             try
             {
-               return odata.Reversar_Aprobacion(IdEmpresa,IdSucursal,IdMovi_inve_tipo,IdNumMovi, Genera_movi_inven);
+                return odata.Reversar_Aprobacion(IdEmpresa, IdSucursal, IdMovi_inve_tipo, IdNumMovi, Genera_movi_inven);
             }
             catch (Exception)
             {
@@ -86,6 +86,16 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
-
+        public List<in_Ing_Egr_Inven_Info> get_list_por_devolver(int IdEmpresa, string signo, DateTime Fecha_ini, DateTime Fecha_fin)
+        {
+            try
+            {
+                return odata.get_list_por_devolver(IdEmpresa, signo, Fecha_ini, Fecha_fin);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
+}

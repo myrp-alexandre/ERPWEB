@@ -35,6 +35,8 @@ namespace Core.Erp.Info.Inventario
 
         #region Campos que no existen en la tabla
         public List<in_devolucion_inven_det_Info> lst_det { get; set; }
+        public System.DateTime Fecha_ini { get; set; }
+        public System.DateTime Fecha_fin { get; set; }
         #endregion
 
     }

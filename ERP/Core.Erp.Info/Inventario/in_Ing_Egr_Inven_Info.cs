@@ -13,18 +13,20 @@ namespace Core.Erp.Info.Inventario
         [Required(ErrorMessage = ("El campo sucursal es obligatorio"))]
         public int IdSucursal { get; set; }
         [Required(ErrorMessage = ("El campo tipo es obligatorio"))]
-
         public int IdMovi_inven_tipo { get; set; }
-
         public decimal IdNumMovi { get; set; }
-
         public Nullable<int> IdBodega { get; set; }
         public string signo { get; set; }
         public string CodMoviInven { get; set; }
         public string cm_observacion { get; set; }
-        public System.DateTime cm_fecha { get; set; }
-        public string IdUsuario { get; set; }
+        public System.DateTime cm_fecha { get; set; }        
         public string Estado { get; set; }
+        public Nullable<int> IdMotivo_Inv { get; set; }
+        [Required(ErrorMessage = ("El campo motivo es obligatorio"))]
+        public Nullable<decimal> IdResponsable { get; set; }
+
+        #region Campos de auditoria
+        public string IdUsuario { get; set; }
         public string MotivoAnulacion { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltModi { get; set; }
@@ -33,16 +35,14 @@ namespace Core.Erp.Info.Inventario
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string nom_pc { get; set; }
         public string ip { get; set; }
-        [Required(ErrorMessage = ("El campo motivo es obligatorio"))]
-
-        public Nullable<int> IdMotivo_Inv { get; set; }
-        public Nullable<decimal> IdResponsable { get; set; }
-
+        #endregion
 
         #region Campos que no existen en la tabla
         public List<in_Ing_Egr_Inven_det_Info> lst_in_Ing_Egr_Inven_det { get; set; }
-        public decimal IdProducto { get; set; }
+        
         public string tm_descripcion { get; set; }
+        public string Su_Descripcion { get; set; }
+        public string SecuencialID { get; set; }
         #endregion
 
         public in_Ing_Egr_Inven_Info()
@@ -50,4 +50,5 @@ namespace Core.Erp.Info.Inventario
             lst_in_Ing_Egr_Inven_det = new List<in_Ing_Egr_Inven_det_Info>();
         }
     }
+    
 }
