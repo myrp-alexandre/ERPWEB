@@ -319,7 +319,7 @@
     <Compile Include="Areas\Importacion\Controllers\CatalogoImportacionController.cs" />
     <Compile Include="Areas\Importacion\Controllers\CatalogoTipoImportacionController.cs" />
     <Compile Include="Areas\Importacion\Controllers\GastosImportacionController.cs" />
-    <Compile Include="Areas\Importacion\Controllers\LiquidacionImportacionController.cs" />
+    <Compile Include="Areas\Importacion\Controllers\AsignacionDeGastosController.cs" />
     <Compile Include="Areas\Importacion\Controllers\OrdenCompraExteriorController.cs" />
     <Compile Include="Areas\Importacion\Controllers\ParametrosImportacionController.cs" />
     <Compile Include="Areas\Importacion\Controllers\RecepcionOrdenCompraController.cs" />
@@ -8867,14 +8867,14 @@
     <Content Include="Areas\Importacion\Views\ParametrosImportacion\_CmbCuenta_contable.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDeCreditoFacturacion\_GridViewPartial_CruceNC.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDeCreditoFacturacion\_GridViewPartial_CruceNC_x_cruzar.cshtml" />
-    <Content Include="Areas\Importacion\Views\LiquidacionImportacion\Nuevo.cshtml" />
-    <Content Include="Areas\Importacion\Views\LiquidacionImportacion\Modificar.cshtml" />
-    <Content Include="Areas\Importacion\Views\LiquidacionImportacion\Index.cshtml" />
-    <Content Include="Areas\Importacion\Views\LiquidacionImportacion\Anular.cshtml" />
-    <Content Include="Areas\Importacion\Views\LiquidacionImportacion\_GridViewPartial_liquidacion_importacion_det.cshtml" />
-    <Content Include="Areas\Importacion\Views\LiquidacionImportacion\_GridViewPartial_liquidacion_importacion.cshtml" />
-    <Content Include="Areas\Importacion\Views\LiquidacionImportacion\_GridViewPartial_gastos_asignados.cshtml" />
-    <Content Include="Areas\Importacion\Views\LiquidacionImportacion\_GridViewPartial_gastos_por_asignar.cshtml" />
+    <Content Include="Areas\Importacion\Views\AsignacionDeGastos\Nuevo.cshtml" />
+    <Content Include="Areas\Importacion\Views\AsignacionDeGastos\Modificar.cshtml" />
+    <Content Include="Areas\Importacion\Views\AsignacionDeGastos\Index.cshtml" />
+    <Content Include="Areas\Importacion\Views\AsignacionDeGastos\Anular.cshtml" />
+    <Content Include="Areas\Importacion\Views\AsignacionDeGastos\_GridViewPartial_liquidacion_importacion_det.cshtml" />
+    <Content Include="Areas\Importacion\Views\AsignacionDeGastos\_GridViewPartial_liquidacion_importacion.cshtml" />
+    <Content Include="Areas\Importacion\Views\AsignacionDeGastos\_GridViewPartial_gastos_asignados.cshtml" />
+    <Content Include="Areas\Importacion\Views\AsignacionDeGastos\_GridViewPartial_gastos_por_asignar.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\Ordencompra_por_liquidar.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_GridViewPartial_orden_compra_por_liquidar.cshtml" />
     <Content Include="Areas\Facturacion\Views\GuiaRemision\Nuevo.cshtml" />
@@ -9019,7 +9019,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

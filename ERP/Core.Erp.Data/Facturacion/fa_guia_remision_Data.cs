@@ -289,6 +289,20 @@ namespace Core.Erp.Data.Facturacion
                         });
                         secuencia++;
                     }
+                    foreach (var item in info.lst_detalle_x_factura)
+                    {
+                        Context.fa_factura_x_fa_guia_remision.Add(new fa_factura_x_fa_guia_remision
+                        {
+                            fa_IdEmpresa = info.IdEmpresa,
+                            fa_IdSucursal = info.IdSucursal,
+                            fa_IdBodega = info.IdBodega,
+                            fa_IdCbteVta = item.IdCbteVta,
+                            gi_IdEmpresa = info.IdEmpresa,
+                            gi_IdSucursal = info.IdSucursal,
+                            gi_IdBodega = info.IdBodega,
+                            gi_IdGuiaRemision = info.IdGuiaRemision
+                        });
+                    }
                     Context.SaveChanges();
                 }
                 return true;

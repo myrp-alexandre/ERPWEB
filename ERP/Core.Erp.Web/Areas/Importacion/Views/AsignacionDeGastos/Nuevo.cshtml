@@ -97,14 +97,12 @@
             <li>
                 <a href="#tab_detalle_gastos" aria-controls="gastos" role="tab" data-toggle="tab">Detalle de gastos incurridos</a>
             </li>
-            <li>
-                <a href="#tab_diarios" aria-controls="diarios" role="tab" data-toggle="tab">Diarios contables</a>
-            </li>
+           
 
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_detalle_items">
-                @Html.Action("GridViewPartial_orden_compra_ext_det")
+                @Html.Action("GridViewPartial_liquidacion_importacion_det")
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle_gastos">
                 <div class="row">
@@ -121,10 +119,7 @@
                 </div>
 
             </div>
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_diarios">
-
-
-            </div>
+           
         </div>
     </div>
 

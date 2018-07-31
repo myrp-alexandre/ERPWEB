@@ -170,9 +170,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult Modificar(fa_guia_remision_Info model)
         {
             model.lst_detalle = Session["fa_guia_remision_det_Info"] as List<fa_guia_remision_det_Info>;
-            model.lst_detalle_x_factura = Session["fa_guia_remision_det_x_factura_Info"] as List<fa_factura_x_fa_guia_remision_Info>;
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdUsuario = Session["IdUsuario"].ToString();
             model.CodGuiaRemision = (model.CodGuiaRemision == null) ? "" : model.CodGuiaRemision;
+            model.lst_detalle_x_factura = Session["fa_factura_x_fa_guia_remision_Info"] as List<fa_factura_x_fa_guia_remision_Info>;
             model.CodDocumentoTipo = "GUIA";
             string mensaje = bus_guia.validar(model);
             if (mensaje != "")
