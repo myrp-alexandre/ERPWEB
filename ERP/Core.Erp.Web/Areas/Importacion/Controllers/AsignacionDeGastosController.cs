@@ -14,11 +14,12 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
     public class AsignacionDeGastosController : Controller
     {
         #region variables
-        imp_liquidacion_det_x_imp_orden_compra_ext_Bus bus_liquidacion_oc = new imp_liquidacion_det_x_imp_orden_compra_ext_Bus();
+        imp_ordencompra_ext_Bus bus_liquidacion_oc = new imp_ordencompra_ext_Bus();
         imp_orden_compra_ext_recepcion_det_lst detalle = new imp_orden_compra_ext_recepcion_det_lst();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         in_UnidadMedida_Bus bus_unidad_medida = new in_UnidadMedida_Bus();
         imp_ordencompra_ext_det_Bus bus_detalle = new imp_ordencompra_ext_det_Bus();
+        imp_orden_compra_ext_ct_cbteble_det_gastos_Bus bus_gastos = new imp_orden_compra_ext_ct_cbteble_det_gastos_Bus();
         imp_catalogo_Bus bus_catalogo = new imp_catalogo_Bus();
         #endregion
 
@@ -45,16 +46,16 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
             ViewBag.IdSucursal = IdSucursal;
 
-            List<imp_liquidacion_det_x_imp_orden_compra_ext_Info> model = new List<imp_liquidacion_det_x_imp_orden_compra_ext_Info>();
+            List<imp_ordencompra_ext_Info> model = new List<imp_ordencompra_ext_Info>();
             model = bus_liquidacion_oc.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_liquidacion_importacion", model);
         }
         public ActionResult GridViewPartial_liquidacion_importacion_det()
         {
-            List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> model = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
-            model = Session["lst_detalle_oc"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
+            List<imp_ordencompra_ext_Info> model = new List<imp_ordencompra_ext_Info>();
+            model = Session["lst_detalle_oc"] as List<imp_ordencompra_ext_Info>;
             if (model == null)
-                model = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
+                model = new List<imp_ordencompra_ext_Info>();
             return PartialView("_GridViewPartial_liquidacion_importacion_det", model);
         }
 
@@ -81,18 +82,18 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
-            imp_liquidacion_det_x_imp_orden_compra_ext_Info model = new imp_liquidacion_det_x_imp_orden_compra_ext_Info();
+            imp_ordencompra_ext_Info model = new imp_ordencompra_ext_Info();
             //model = bus_liquidacion_oc.get_rcepcion_mercancia(IdEmpresa, IdOrdenCompra_ext);
             if (model != null)
-                Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] = model.lst_gastos_asignados;
+                Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info_Info"] = model.lst_gastos_asignados;
             cargar_combos();
             return View(model);
         }
         [HttpPost]
-        public ActionResult Nuevo(imp_liquidacion_det_x_imp_orden_compra_ext_Info model)
+        public ActionResult Nuevo(imp_ordencompra_ext_Info model)
         {
-            model.lst_gastos_asignados = Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
-            if (model.lst_detalle_oc == null)
+            model.lst_gastos_asignados = Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info_Info"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
+            if (model.lst_gastos_asignados == null)
             {
                 ViewBag.mensaje = "no existe detalle";
                 cargar_combos();
@@ -114,16 +115,16 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 cargar_combos();
                 return View(model);
             }
-            Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] = null;
+            Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info_Info"] = null;
             return RedirectToAction("Index");
         }
         public ActionResult Modificar(decimal IdRecepcion = 0)
         {
 
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            imp_liquidacion_det_x_imp_orden_compra_ext_Info model = bus_liquidacion_oc.get_info(IdEmpresa, IdRecepcion);
+            imp_ordencompra_ext_Info model = bus_liquidacion_oc.get_info(IdEmpresa, IdRecepcion);
             var lst_detalle = bus_detalle.get_list(IdEmpresa, IdRecepcion);
-            Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] = lst_detalle;
+            Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info_Info"] = lst_detalle;
             if (model == null)
                 return RedirectToAction("Index");
             cargar_combos();
@@ -131,9 +132,9 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Modificar(imp_liquidacion_det_x_imp_orden_compra_ext_Info model)
+        public ActionResult Modificar(imp_ordencompra_ext_Info model)
         {
-            model.lst_gastos_asignados = Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
+            model.lst_gastos_asignados = Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info_Info"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
 
             if (model.lst_gastos_asignados == null)
             {
@@ -156,16 +157,16 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 cargar_combos();
                 return View(model);
             }
-            Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] = null;
+            Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info_Info"] = null;
             return RedirectToAction("Index");
         }
         public ActionResult Anular(decimal IdRecepcion = 0)
         {
 
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            imp_liquidacion_det_x_imp_orden_compra_ext_Info model = bus_liquidacion_oc.get_info(IdEmpresa, IdRecepcion);
+            imp_ordencompra_ext_Info model = bus_liquidacion_oc.get_info(IdEmpresa, IdRecepcion);
             var lst_detalle = bus_detalle.get_list(IdEmpresa, IdRecepcion);
-            Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] = lst_detalle;
+            Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info_Info"] = lst_detalle;
             if (model == null)
                 return RedirectToAction("Index");
             cargar_combos();
@@ -173,15 +174,15 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         }
 
         [HttpPost]
-        public ActionResult Anular(imp_liquidacion_det_x_imp_orden_compra_ext_Info model)
+        public ActionResult Anular(imp_ordencompra_ext_Info model)
         {
-            model.lst_gastos_asignados = Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
+            model.lst_gastos_asignados = Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info_Info"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
             if (!bus_liquidacion_oc.anularDB(model))
             {
                 cargar_combos();
                 return View(model);
             }
-            Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] = null;
+            Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info_Info"] = null;
             return RedirectToAction("Index");
         }
         #endregion
@@ -202,6 +203,46 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         {
             var lst_undades = bus_unidad_medida.get_list(false);
             ViewBag.lst_undades = lst_undades;
+        }
+    }
+
+
+    public class imp_orden_compra_ext_ct_cbteble_det_gastos_Info_lst
+    {
+        public List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> get_list()
+        {
+            if (HttpContext.Current.Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] == null)
+            {
+                List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> list = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
+
+                HttpContext.Current.Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] = list;
+            }
+            return (List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>)HttpContext.Current.Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"];
+        }
+
+        public void set_list(List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> list)
+        {
+            HttpContext.Current.Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info"] = list;
+        }
+
+        public void AddRow(imp_orden_compra_ext_ct_cbteble_det_gastos_Info info_det)
+        {
+            List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> list = get_list();
+            info_det.secuencia_ct = list.Count == 0 ? 1 : list.Max(q => q.secuencia_ct) + 1;
+            list.Add(info_det);
+        }
+
+        public void UpdateRow(imp_orden_compra_ext_ct_cbteble_det_gastos_Info info_det)
+        {
+            imp_orden_compra_ext_ct_cbteble_det_gastos_Info edited_info = get_list().Where(m => m.secuencia_ct == info_det.secuencia_ct).First();
+            edited_info.IdCbteCble = info_det.IdCbteCble;
+
+        }
+
+        public void DeleteRow(int Secuencia)
+        {
+            List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> list = get_list();
+            list.Remove(list.Where(m => m.secuencia_ct == Secuencia).First());
         }
     }
 }

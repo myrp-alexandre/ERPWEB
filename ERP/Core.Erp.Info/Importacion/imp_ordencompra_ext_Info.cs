@@ -40,6 +40,8 @@ namespace Core.Erp.Info.Importacion
         public Nullable<int> IdMoneda_origen { get; set; }
         public Nullable<int> IdMoneda_destino { get; set; }
         public List<imp_ordencompra_ext_det_Info> lst_detalle { get; set; }
+        public List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> lst_gastos_asignados { get; set; }
+        public List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> lst_gastos_por_asignar { get; set; }
 
         #region campos de vistas
         public decimal IdProducto { get; set; }
