@@ -58,7 +58,7 @@ namespace Core.Erp.Bus.Importacion
         {
             try
             {
-                info_oc = odata.get_info(IdEmpresa, IdOrdenCompra_ext);
+                info_oc = odata.get_info_recepcion_merca(IdEmpresa, IdOrdenCompra_ext);
                 info_oc.lst_gastos_por_asignar = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
                 info_oc.lst_gastos_asignados = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
                 info_oc.lst_gastos_asignados = data_gastos.get_list_gastos_asignados(IdEmpresa, IdOrdenCompra_ext);

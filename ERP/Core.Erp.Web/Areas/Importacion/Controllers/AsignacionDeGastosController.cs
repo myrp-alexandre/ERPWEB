@@ -153,8 +153,6 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         }
         public JsonResult EditingNew(int secuencia = 0, decimal IdTransaccionSession=0)
         {
-
-           // var info_gasto=imp_gasto_x_ct_plancta_bus.get_info()
            
             List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> model = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
             model = Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info_x_asignar"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
