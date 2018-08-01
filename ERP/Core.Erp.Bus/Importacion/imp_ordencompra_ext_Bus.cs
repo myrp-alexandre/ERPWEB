@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Info.Importacion;
 using Core.Erp.Data.Importacion;
+using Core.Erp.Data.Contabilidad;
 namespace Core.Erp.Bus.Importacion
 {
   public  class imp_ordencompra_ext_Bus
     {
         imp_ordencompra_ext_Data odata = new imp_ordencompra_ext_Data();
         imp_ordencompra_ext_det_Data odata_det = new imp_ordencompra_ext_det_Data();
-
+        imp_ordencompra_ext_Info info_oc = new imp_ordencompra_ext_Info();
+        ct_cbtecble_det_Data comprobante_data = new ct_cbtecble_det_Data();
         public List<imp_ordencompra_ext_Info> get_list(int IdEmpresa)
         {
             try
@@ -41,6 +43,20 @@ namespace Core.Erp.Bus.Importacion
             try
             {
                 return odata.get_list_oc_con_recepcion_mercaderia(IdEmpresa, fecha_inicio, Fecha_fin);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public imp_ordencompra_ext_Info get_asignar_gastos(int IdEmpresa, decimal IdOrdenCompra_ext)
+        {
+            try
+            {
+                info_oc = odata.get_info(IdEmpresa, IdOrdenCompra_ext);
+                return info_oc;
             }
             catch (Exception)
             {
@@ -97,7 +113,6 @@ namespace Core.Erp.Bus.Importacion
                 throw;
             }
         }
-
         public string validar(imp_ordencompra_ext_Info info)
         {
             try
@@ -122,6 +137,8 @@ namespace Core.Erp.Bus.Importacion
                 throw;
             }
         }
+
+
 
     }
 }

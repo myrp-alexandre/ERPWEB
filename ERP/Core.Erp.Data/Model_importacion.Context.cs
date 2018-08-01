@@ -41,6 +41,7 @@ namespace Core.Erp.Data
         public virtual DbSet<vwimp_orden_compra_ext_det> vwimp_orden_compra_ext_det { get; set; }
         public virtual DbSet<vwimp_orden_compra_ext_recepcion> vwimp_orden_compra_ext_recepcion { get; set; }
         public virtual DbSet<vwimp_liquidacion_det_x_imp_orden_compra_ext> vwimp_liquidacion_det_x_imp_orden_compra_ext { get; set; }
+        public virtual DbSet<vwimp_gastos_no_asignados> vwimp_gastos_no_asignados { get; set; }
         public virtual DbSet<imp_liquidacion_det_x_imp_orden_compra_ext> imp_liquidacion_det_x_imp_orden_compra_ext { get; set; }
     }
 }

@@ -1554,6 +1554,9 @@
     <Compile Include="VWIMP_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwimp_gastos_no_asignados.cs">
+      <DependentUpon>Model_importacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwimp_liquidacion_det_x_imp_orden_compra_ext.cs">
       <DependentUpon>Model_importacion.tt</DependentUpon>
     </Compile>

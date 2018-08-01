@@ -125,7 +125,6 @@ namespace Core.Erp.Data.Importacion
                         IdEmpresa_oe = info.IdEmpresa_oe,
                         IdOrdenCompra_ext = info.IdOrdenCompra_ext,
                         observacion = info.observacion,                      
-                        estado = true
 
                     };
                     Context.imp_liquidacion_det_x_imp_orden_compra_ext.Add(Entity);
@@ -163,7 +162,6 @@ namespace Core.Erp.Data.Importacion
                     imp_liquidacion_det_x_imp_orden_compra_ext Entity = Context.imp_liquidacion_det_x_imp_orden_compra_ext.FirstOrDefault(q => q.IdLiquidacion == info.IdLiquidacion);
                     if (Entity == null) return false;
                     Entity.observacion = info.observacion;
-                    Entity.fecha_modificacion = DateTime.Now;
 
                     foreach (var item in info.lst_gastos_asignados)
                     {
@@ -198,8 +196,6 @@ namespace Core.Erp.Data.Importacion
                     imp_liquidacion_det_x_imp_orden_compra_ext Entity = Context.imp_liquidacion_det_x_imp_orden_compra_ext.FirstOrDefault(q => q.IdLiquidacion == info.IdLiquidacion);
                     if (Entity == null)
                         return false;
-                    Entity.estado = info.estado = false;
-                    Entity.fecha_anulacion = DateTime.Now;
                     Context.SaveChanges();
                     string sql = "delete imp_orden_compra_ext_ct_cbteble_det_gastos where IdEmpresa='"+info.IdEmpresa+ "' and IdLiquidacion='"+info.IdLiquidacion+"'";
                     Context.Database.ExecuteSqlCommand(sql);  

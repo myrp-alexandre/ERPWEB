@@ -98,7 +98,20 @@
             });
         });
         settings.Columns.Add("oe_observacion", "Obaservación").Width = Unit.Percentage(30);
-       
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Asignar";
+            column.Width = Unit.Pixel(100);
+            column.SetDataItemTemplateContent(container =>
+            {
+                Html.DevExpress().HyperLink(hyperlink =>
+                {
+                    var IdOrdenCompra_ext = DataBinder.Eval(container.DataItem, "IdOrdenCompra_ext");
+                    hyperlink.Properties.Text = "Gastos";
+                    hyperlink.NavigateUrl = Url.Action("Nuevo", "AsignacionDeGastos", new { Area = "Importacion", IdOrdenCompra_ext = IdOrdenCompra_ext });
+                }).Render();
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()
