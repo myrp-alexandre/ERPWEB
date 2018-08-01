@@ -110,13 +110,14 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
                 model.cr_fecha = model.lst_det[0].cr_fecha;
                 model.cr_NumDocumento = model.lst_det[0].cr_NumDocumento;
             }
-            List_det.set_list(model.lst_det);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            List_det.set_list(model.lst_det, model.IdTransaccionSession);
             return View(model);
         }
         [HttpPost]
         public ActionResult AplicarRetencion(cxc_cobro_Info model)
         {
-            model.lst_det = List_det.get_list();
+            model.lst_det = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             if (!validar(model,ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
@@ -154,8 +155,8 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] cxc_cobro_det_Info info_det)
         {
             if (ModelState.IsValid)
-                List_det.AddRow(info_det);
-            var model = List_det.get_list();
+                List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_cobranza_ret_det", model);
         }
@@ -164,16 +165,16 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] cxc_cobro_det_Info info_det)
         {
             if (ModelState.IsValid)
-                List_det.UpdateRow(info_det);
-            var model = List_det.get_list();
+                List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_cobranza_ret_det", model);
         }
 
         public ActionResult EditingDelete(int secuencial)
         {
-            List_det.DeleteRow(secuencial);
-            var model = List_det.get_list();
+            List_det.DeleteRow(secuencial, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_cobranza_ret_det", model);
         }
@@ -182,7 +183,8 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_cobranza_ret_det()
         {
-            var model = List_det.get_list();
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_cobranza_ret_det", model);
         }
@@ -190,39 +192,40 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 
     public class cxc_cobro_det_ret_List
     {
-        public List<cxc_cobro_det_Info> get_list()
+        string Variable = "cxc_cobro_det_Info";
+        public List<cxc_cobro_det_Info> get_list(decimal IdTransaccionSession)
         {
-            if (HttpContext.Current.Session["cxc_cobro_det_ret"] == null)
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
             {
                 List<cxc_cobro_det_Info> list = new List<cxc_cobro_det_Info>();
 
                 HttpContext.Current.Session["cxc_cobro_det_ret"] = list;
             }
-            return (List<cxc_cobro_det_Info>)HttpContext.Current.Session["cxc_cobro_det_ret"];
+            return (List<cxc_cobro_det_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<cxc_cobro_det_Info> list)
+        public void set_list(List<cxc_cobro_det_Info> list, decimal IdTransaccionSession)
         {
-            HttpContext.Current.Session["cxc_cobro_det_ret"] = list;
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }
 
-        public void AddRow(cxc_cobro_det_Info info_det)
+        public void AddRow(cxc_cobro_det_Info info_det, decimal IdTransaccionSession)
         {
-            List<cxc_cobro_det_Info> list = get_list();
+            List<cxc_cobro_det_Info> list = get_list(IdTransaccionSession);
             info_det.secuencial = list.Count == 0 ? 1 : list.Max(q => q.secuencial) + 1;
             list.Add(info_det);
         }
 
-        public void UpdateRow(cxc_cobro_det_Info info_det)
+        public void UpdateRow(cxc_cobro_det_Info info_det, decimal IdTransaccionSession)
         {
-            cxc_cobro_det_Info edited_info = get_list().Where(m => m.secuencial == info_det.secuencial).First();
+            cxc_cobro_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.secuencial == info_det.secuencial).First();
             edited_info.IdCobro_tipo_det = info_det.IdCobro_tipo_det;
             edited_info.dc_ValorPago = info_det.dc_ValorPago;
         }
 
-        public void DeleteRow(int secuencial)
+        public void DeleteRow(int secuencial, decimal IdTransaccionSession)
         {
-            List<cxc_cobro_det_Info> list = get_list();
+            List<cxc_cobro_det_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.secuencial == secuencial).First());
         }
     }

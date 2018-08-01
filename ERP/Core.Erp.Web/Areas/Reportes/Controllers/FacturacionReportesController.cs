@@ -315,5 +315,17 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+        public ActionResult FAC_009(int IdSucursal = 0, int IdBodega = 0, decimal IdGuiaRemision = 0)
+        {
+            FAC_009_Rpt model = new FAC_009_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdBodega.Value = IdBodega;
+            model.p_IdSucursal.Value = IdSucursal;
+            model.p_IdGuiaRemision.Value = IdGuiaRemision;
+            model.RequestParameters = false;
+            return View(model);
+        }
+
+
     }
 }
