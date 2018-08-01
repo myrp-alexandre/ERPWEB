@@ -37,7 +37,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         }
 
 
-        public ActionResult GridViewPartial_liquidacion_importacion(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
+        public ActionResult GridViewPartial_asignacion_gastos(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
@@ -48,15 +48,15 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
             List<imp_ordencompra_ext_Info> model = new List<imp_ordencompra_ext_Info>();
             model = bus_liquidacion_oc.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
-            return PartialView("_GridViewPartial_liquidacion_importacion", model);
+            return PartialView("_GridViewPartial_asignacion_gastos", model);
         }
-        public ActionResult GridViewPartial_liquidacion_importacion_det()
+        public ActionResult GridViewPartial_asignacion_gastos_det()
         {
             List<imp_ordencompra_ext_Info> model = new List<imp_ordencompra_ext_Info>();
             model = Session["lst_detalle_oc"] as List<imp_ordencompra_ext_Info>;
             if (model == null)
                 model = new List<imp_ordencompra_ext_Info>();
-            return PartialView("_GridViewPartial_liquidacion_importacion_det", model);
+            return PartialView("_GridViewPartial_asignacion_gastos_det", model);
         }
 
         public ActionResult GridViewPartial_gastos_asignados()

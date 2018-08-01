@@ -87,7 +87,7 @@
         settings.Columns.Add("pe_nombreCompleto", "Proveedor").Width = Unit.Percentage(30);
         settings.Columns.Add(column =>
         {
-            column.FieldName = "or_fecha";
+            column.FieldName = "oe_fecha";
             column.Caption = "Fecha";
             column.Width = Unit.Percentage(10);
             column.PropertiesEdit.DisplayFormatString = "d";
@@ -97,7 +97,7 @@
                 sp.Width = Unit.Percentage(100);
             });
         });
-        settings.Columns.Add("or_observacion", "Obaservación").Width = Unit.Percentage(30);
+        settings.Columns.Add("oe_observacion", "Obaservación").Width = Unit.Percentage(30);
        
     });
 }

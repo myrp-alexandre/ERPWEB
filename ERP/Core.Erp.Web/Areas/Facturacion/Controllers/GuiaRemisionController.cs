@@ -353,6 +353,15 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
         public ActionResult EditingDelete(int Secuencia)
         {
+
+            decimal IdComprobante =Convert.ToDecimal( detalle_info.get_list().Where(v => v.Secuencia == Secuencia).FirstOrDefault().IdCbteVta);
+            if(detalle_info.get_list().Where(v => v.IdCbteVta == IdComprobante).Count()==1)
+            {
+               var list_facturas_seleccionadas  = Session["fa_factura_x_fa_guia_remision_Info"] as List<fa_factura_x_fa_guia_remision_Info>;
+               var Info = list_facturas_seleccionadas.Where(v => v.IdCbteVta == IdComprobante).FirstOrDefault();
+               list_facturas_seleccionadas.Remove(Info);
+                Session["fa_factura_x_fa_guia_remision_Info"] = list_facturas_seleccionadas;
+            }
             detalle_info.DeleteRow(Secuencia);
             var model = detalle_info.get_list();
             return PartialView("_GridViewPartial_guias_remision_det", model);
