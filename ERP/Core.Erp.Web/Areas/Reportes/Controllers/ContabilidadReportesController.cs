@@ -88,15 +88,15 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-        public ActionResult CONTA_003(bool mostrar_balance = false)
+        public ActionResult CONTA_003(bool balance = false)
         {
             cl_filtros_contabilidad_Info model = new cl_filtros_contabilidad_Info
             {
                 IdNivel = 6
             };
-            cargar_combos();
-                   if(mostrar_balance)
+           if(model.balance == "BG")
             {
+                cargar_combos();
                 CONTA_003_BG_Rpt report = new CONTA_003_BG_Rpt();
                 report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
                 report.p_IdAnio.Value = model.IdAnio;
@@ -113,6 +113,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             }
                 else
             {
+                cargar_combos();
                 CONTA_003_ER_Rpt report = new CONTA_003_ER_Rpt();
                 report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
                 report.p_IdAnio.Value = model.IdAnio;
@@ -131,9 +132,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
 
         [HttpPost]
-        public ActionResult CONTA_003(cl_filtros_contabilidad_Info model, bool mostrar_balance = false)
+        public ActionResult CONTA_003(cl_filtros_contabilidad_Info model, bool balance = false)
         {
-            if (mostrar_balance)
+            if (model.balance == "BG")
             {
                 CONTA_003_BG_Rpt report = new CONTA_003_BG_Rpt();
                 report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
@@ -147,6 +148,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.usuario = Session["IdUsuario"].ToString();
                 report.empresa = Session["nom_empresa"].ToString();
                 report.RequestParameters = false;
+                cargar_combos();
                 ViewBag.Report = report;
             }
             else
@@ -163,6 +165,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.usuario = Session["IdUsuario"].ToString();
                 report.empresa = Session["nom_empresa"].ToString();
                 report.RequestParameters = false;
+                cargar_combos();
                 ViewBag.Report = report;
             }
 

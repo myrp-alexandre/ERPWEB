@@ -451,12 +451,12 @@
             // 
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable7});
-            this.ReportFooter.HeightF = 50F;
+            this.ReportFooter.HeightF = 73.95834F;
             this.ReportFooter.Name = "ReportFooter";
             // 
             // xrTable7
             // 
-            this.xrTable7.LocationFloat = new DevExpress.Utils.PointFloat(0.0001192093F, 0F);
+            this.xrTable7.LocationFloat = new DevExpress.Utils.PointFloat(3.178914E-05F, 23.95833F);
             this.xrTable7.Name = "xrTable7";
             this.xrTable7.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow5,
@@ -636,7 +636,7 @@
             this.xrTableCell11.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell11.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum(Iif([EsCuentaMovimiento]= 1,[SaldoFinal] ,0 )\n)")});
-            this.xrTableCell11.Font = new System.Drawing.Font("Verdana", 7F);
+            this.xrTableCell11.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.xrTableCell11.Name = "xrTableCell11";
             this.xrTableCell11.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
             this.xrTableCell11.StylePriority.UseBorders = false;
