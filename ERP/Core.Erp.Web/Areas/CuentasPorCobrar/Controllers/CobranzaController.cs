@@ -243,6 +243,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             cxc_cobro_Info model = bus_cobro.get_info(IdEmpresa, IdSucursal, IdCobro);
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdCobro);
             list_det.set_list(model.lst_det, model.IdTransaccionSession);
             model.IdEntidad = model.IdCliente;
@@ -283,6 +284,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             cxc_cobro_Info model = bus_cobro.get_info(IdEmpresa, IdSucursal, IdCobro);
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdCobro);
             list_det.set_list(model.lst_det, model.IdTransaccionSession);
             model.IdEntidad = model.IdCliente;

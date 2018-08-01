@@ -905,6 +905,7 @@
     <Compile Include="Reportes\Facturacion\FAC_007_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_008_aplicaciones_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_008_Data.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_009_Data.cs" />
     <Compile Include="Reportes\Importacion\IMP_001_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Data.cs" />
