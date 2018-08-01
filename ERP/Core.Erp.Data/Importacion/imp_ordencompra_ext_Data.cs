@@ -56,6 +56,38 @@ namespace Core.Erp.Data.Importacion
                 throw;
             }
         }
+        public List<imp_ordencompra_ext_Info> get_list_oc_con_recepcion_mercaderia(int IdEmpresa, DateTime fecha_inicio, DateTime Fecha_fin)
+        {
+            try
+            {
+                List<imp_ordencompra_ext_Info> Lista;
+                using (Entities_importacion Context = new Entities_importacion())
+                {
+                    Lista = (from q in Context.vwimp_orden_compra_ext_recepcion
+                             where q.IdEmpresa == IdEmpresa
+                             && q.or_fecha >= fecha_inicio
+                             && q.or_fecha <= Fecha_fin
+                             select new imp_ordencompra_ext_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdOrdenCompra_ext = q.IdOrdenCompraExt,
+                                 oe_fecha = q.oe_fecha,
+                                 oe_observacion = q.or_observacion,
+                                 pe_cedulaRuc = q.pe_cedulaRuc,
+                                 pe_nombreCompleto = q.pe_nombreCompleto,
+                                 estado = q.estado
+
+                             }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<imp_ordencompra_ext_Info> get_list(int IdEmpresa)
         {
             try

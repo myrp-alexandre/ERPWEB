@@ -47,7 +47,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             ViewBag.IdSucursal = IdSucursal;
 
             List<imp_ordencompra_ext_Info> model = new List<imp_ordencompra_ext_Info>();
-            model = bus_liquidacion_oc.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
+            model = bus_liquidacion_oc.get_list_oc_con_recepcion_mercaderia(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_asignacion_gastos", model);
         }
         public ActionResult GridViewPartial_asignacion_gastos_det()

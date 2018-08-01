@@ -36,7 +36,18 @@ namespace Core.Erp.Bus.Importacion
                 throw;
             }
         }
+        public List<imp_ordencompra_ext_Info> get_list_oc_con_recepcion_mercaderia(int IdEmpresa, DateTime fecha_inicio, DateTime Fecha_fin)
+        {
+            try
+            {
+                return odata.get_list_oc_con_recepcion_mercaderia(IdEmpresa, fecha_inicio, Fecha_fin);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
         public imp_ordencompra_ext_Info get_info(int IdEmpresa, decimal IdOrdenCompra_ext)
         {
             try
