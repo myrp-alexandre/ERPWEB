@@ -45,7 +45,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_egr_inv_det()
         {
-            var model = List_in_Ing_Egr_Inven_det.get_list();
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = List_in_Ing_Egr_Inven_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_egr_inv_det", model);
         }
@@ -76,25 +77,32 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         public ActionResult Nuevo()
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_parametro_Info i_param = bus_in_param.get_info(IdEmpresa);
             if (i_param == null)
                 return RedirectToAction("Index");
             in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info
             {
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
                 IdEmpresa = IdEmpresa,
                 cm_fecha = DateTime.Now,
                 signo = "-",
                 IdMovi_inven_tipo = i_param.P_IdMovi_inven_tipo_default_egr == null ? 0 : Convert.ToInt32(i_param.P_IdMovi_inven_tipo_default_egr)
             };
-            Session["in_Ing_Egr_Inven_det_Info"] = null;
+            List_in_Ing_Egr_Inven_det.set_list(new List<in_Ing_Egr_Inven_det_Info>(), model.IdTransaccionSession);
             cargar_combos();
             return View(model);
         }
         [HttpPost]
         public ActionResult Nuevo(in_Ing_Egr_Inven_Info model)
-        {
-            model.lst_in_Ing_Egr_Inven_det = List_in_Ing_Egr_Inven_det.get_list();
+        {            
+            model.lst_in_Ing_Egr_Inven_det = List_in_Ing_Egr_Inven_det.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
                 cargar_combos();
@@ -112,15 +120,22 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         public ActionResult Modificar(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             bus_ing_inv = new in_Ing_Egr_Inven_Bus();
             bus_det_ing_inv = new in_Ing_Egr_Inven_det_Bus();
-            Session["in_Ing_Egr_Inven_det_Info"] = null;
+            
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_Ing_Egr_Inven_Info model = bus_ing_inv.get_info(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_in_Ing_Egr_Inven_det = bus_det_ing_inv.get_list(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
-            Session["in_Ing_Egr_Inven_det_Info"] = model.lst_in_Ing_Egr_Inven_det;
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            List_in_Ing_Egr_Inven_det.set_list(model.lst_in_Ing_Egr_Inven_det,model.IdTransaccionSession);
             cargar_combos();
             return View(model);
         }
@@ -128,7 +143,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost]
         public ActionResult Modificar(in_Ing_Egr_Inven_Info model)
         {
-            model.lst_in_Ing_Egr_Inven_det = List_in_Ing_Egr_Inven_det.get_list();
+            model.lst_in_Ing_Egr_Inven_det = List_in_Ing_Egr_Inven_det.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
                 cargar_combos();
@@ -145,6 +160,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         public ActionResult Anular(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             bus_ing_inv = new in_Ing_Egr_Inven_Bus();
             bus_det_ing_inv = new in_Ing_Egr_Inven_det_Bus();
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -152,7 +173,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_in_Ing_Egr_Inven_det = bus_det_ing_inv.get_list(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
-            Session["in_Ing_Egr_Inven_det_Info"] = model.lst_in_Ing_Egr_Inven_det;
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            List_in_Ing_Egr_Inven_det.set_list(model.lst_in_Ing_Egr_Inven_det, model.IdTransaccionSession);
             cargar_combos();
             return View(model);
         }
@@ -160,7 +182,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost]
         public ActionResult Anular(in_Ing_Egr_Inven_Info model)
         {
-            model.lst_in_Ing_Egr_Inven_det = List_in_Ing_Egr_Inven_det.get_list();
+            model.lst_in_Ing_Egr_Inven_det = List_in_Ing_Egr_Inven_det.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
                 cargar_combos();
@@ -231,8 +253,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                     }
                 }
 
-            List_in_Ing_Egr_Inven_det.AddRow(info_det);
-            var model = List_in_Ing_Egr_Inven_det.get_list();
+            List_in_Ing_Egr_Inven_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_in_Ing_Egr_Inven_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_egr_inv_det", model);
         }
@@ -253,16 +275,16 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                     }
                 }
 
-            List_in_Ing_Egr_Inven_det.UpdateRow(info_det);
-            var model = List_in_Ing_Egr_Inven_det.get_list();
+            List_in_Ing_Egr_Inven_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_in_Ing_Egr_Inven_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_egr_inv_det", model);
         }
 
         public ActionResult EditingDelete(int Secuencia)
         {
-            List_in_Ing_Egr_Inven_det.DeleteRow(Secuencia);
-            var model = List_in_Ing_Egr_Inven_det.get_list();
+            List_in_Ing_Egr_Inven_det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_in_Ing_Egr_Inven_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_egr_inv_det", model);
         }

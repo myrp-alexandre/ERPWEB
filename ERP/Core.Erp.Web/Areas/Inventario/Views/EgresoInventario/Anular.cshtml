@@ -10,6 +10,7 @@
 
 @using (Html.BeginForm("Anular", "EgresoInventario", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdSucursal)
     @Html.HiddenFor(q => q.IdBodega)

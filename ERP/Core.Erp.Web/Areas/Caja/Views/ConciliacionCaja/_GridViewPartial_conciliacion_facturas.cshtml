@@ -102,7 +102,6 @@
         });
         settings.ClientSideEvents.EndCallback = "Calcular";
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
-        settings.ClientSideEvents.Init = "function(s, e) {GridView_conciliacion_facturas.PerformCallback();}";
     });
 }
 @grid.Bind(Model.lst_det_fact).GetHtml()

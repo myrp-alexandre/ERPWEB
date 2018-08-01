@@ -9,6 +9,7 @@ namespace Core.Erp.Info.Inventario
 {
     public class in_Ing_Egr_Inven_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         [Required(ErrorMessage = ("El campo sucursal es obligatorio"))]
         public int IdSucursal { get; set; }
