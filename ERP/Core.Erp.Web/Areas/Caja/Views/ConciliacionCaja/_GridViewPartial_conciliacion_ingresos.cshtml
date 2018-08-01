@@ -53,6 +53,8 @@
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
         });
         settings.ClientSideEvents.EndCallback = "Calcular";
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+        settings.ClientSideEvents.Init = "function(s, e) {GridView_conciliacion_ingresos.PerformCallback();}";
     });
 }
 @grid.Bind(Model.lst_det_ing).GetHtml()

@@ -12,6 +12,8 @@ namespace Core.Erp.Web.Helps
         string IdSucursal { get; set; }
         string IdEntidad { get; set; }
         string em_direccion { get; set; }
+        string IdTransaccionSession { get; set; }
+        string IdTransaccionSessionActual { get; set; }
 
     }
 
@@ -66,6 +68,16 @@ namespace Core.Erp.Web.Helps
             get { return _sessionValueProvider.em_direccion; }
             set { _sessionValueProvider.em_direccion = value; }
         }
+        public static string IdTransaccionSession
+        {
+            get { return _sessionValueProvider.IdTransaccionSession; }
+            set { _sessionValueProvider.IdTransaccionSession = value; }
+        }
+        public static string IdTransaccionSessionActual
+        {
+            get { return _sessionValueProvider.IdTransaccionSessionActual; }
+            set { _sessionValueProvider.IdTransaccionSessionActual = value; }
+        }
     }
 
     public class WebSessionValueProvider : ISessionValueProvider
@@ -78,6 +90,8 @@ namespace Core.Erp.Web.Helps
         private const string _IdEntidad = "IdEntidadParam";
         private const string _IdSucursal = "IdSucursal";
         private const string _em_direccion = "em_direccion";
+        private const string _IdTransaccionSession = "IdTransaccionSesssion";
+        private const string _IdTransaccionSessionActual = "IdTransaccionSessionActual";
 
         public string TipoPersona
         {
@@ -119,6 +133,16 @@ namespace Core.Erp.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_em_direccion]; }
             set { HttpContext.Current.Session[_em_direccion] = value; }
+        }
+        public string IdTransaccionSession
+        {
+            get { return (string)HttpContext.Current.Session[_IdTransaccionSession]; }
+            set { HttpContext.Current.Session[_IdTransaccionSession] = value; }
+        }
+        public string IdTransaccionSessionActual
+        {
+            get { return (string)HttpContext.Current.Session[_IdTransaccionSessionActual]; }
+            set { HttpContext.Current.Session[_IdTransaccionSessionActual] = value; }
         }
     }
 }

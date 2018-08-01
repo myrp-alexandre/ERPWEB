@@ -76,10 +76,11 @@
     var selectedIDs;
     function OnBeginCallback(s, e) {
             //Pass all selected keys to GridView callback action
-            e.customArgs["selectedIDs"] = selectedIDs;
+        e.customArgs["selectedIDs"] = selectedIDs;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
         }
     function OnSelectionChanged(s, e) {
-        s.GetSelectedFieldValues("IdCbteCble_Ogiro", GetSelectedFieldValuesCallback);
+        s.GetSelectedFieldValues("IdCbteCble_Ogiro", GetSelectedFieldValuesCallback);        
         }
     function GetSelectedFieldValuesCallback(values) {
             //Capture all selected keys
@@ -96,7 +97,8 @@
     function AddFacturas() {
 
         var datos = {
-            IDs: selectedIDs
+            IDs: selectedIDs,
+            IdTransaccionFixed: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -213,7 +215,8 @@
 
     function Calcular() {
         var datos = {
-            SaldoContableAnterior: $("#Saldo_cont_al_periodo").val()
+            SaldoContableAnterior: $("#Saldo_cont_al_periodo").val(),
+            IdTransaccionFixed: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -243,7 +246,8 @@
 
     function armar_diario() {
         var datos = {
-            IdCtaCble: $("#IdCtaCble").val()
+            IdCtaCble: $("#IdCtaCble").val(),
+            IdTransaccionFixed: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -276,6 +280,7 @@
         </div>
 
     }
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.Saldo_cont_al_periodo, new { @id = "Saldo_cont_al_periodo" })
     @Html.HiddenFor(q => q.Ingresos, new { @id = "Ingresos" })
     @Html.HiddenFor(q => q.Total_Ing, new { @id = "Total_Ing" })
