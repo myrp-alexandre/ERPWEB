@@ -38,7 +38,8 @@ namespace Core.Erp.Data.Reportes.Contabilidad
                                  CreditosSaldoInicial = q.CreditosSaldoInicial,
                                  SaldoCreditos = q.SaldoCreditos,
                                  SaldoFinal = q.SaldoFinal,
-                                 SaldoInicial = q.SaldoInicial
+                                 SaldoInicial = q.SaldoInicial,
+                                 EsCuentaMovimiento = q.EsCuentaMovimiento
                              }).ToList();
                 }
                 return Lista;

@@ -33,5 +33,6 @@ namespace Core.Erp.Data
         public double SaldoDebitos { get; set; }
         public double SaldoCreditos { get; set; }
         public double SaldoFinal { get; set; }
+        public bool EsCuentaMovimiento { get; set; }
     }
 }
