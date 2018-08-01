@@ -9,6 +9,7 @@ namespace Core.Erp.Info.Importacion
 {
   public  class imp_ordencompra_ext_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdOrdenCompra_ext { get; set; }
         [Required(ErrorMessage = "Seleccione el proveedor")]

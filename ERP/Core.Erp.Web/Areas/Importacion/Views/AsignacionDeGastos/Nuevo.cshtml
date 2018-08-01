@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.Importacion.imp_liquidacion_det_x_imp_orden_compra_ext_Info
+﻿@model Core.Erp.Info.Importacion.imp_ordencompra_ext_Info
 @{
     ViewBag.Title = "Recepcion de ordene de compra";
     //if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -18,6 +18,7 @@
 
 @using (Html.BeginForm("Nuevo", "LiquidacionImportacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    @Html.HiddenFor(q => q.IdTransaccionSession)
     @Html.HiddenFor(q => q.IdLiquidacion)
     @Html.HiddenFor(q => q.IdEmpresa)
 
@@ -80,7 +81,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="or_observacion">Observación recepcion de mercaderia</label>
-                    @Html.TextAreaFor(q => q.observacion, new { @class = "form-control" })
+                    @Html.TextAreaFor(q => q.oe_observacion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.oe_observacion, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -102,7 +103,7 @@
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_detalle_items">
-                @Html.Action("GridViewPartial_liquidacion_importacion_det")
+                @Html.Action("GridViewPartial_asignacion_gastos_det", new { Model.IdCtaCble_importacion})
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle_gastos">
                 <div class="row">

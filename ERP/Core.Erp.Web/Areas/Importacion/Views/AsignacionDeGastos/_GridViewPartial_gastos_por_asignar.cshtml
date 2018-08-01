@@ -9,7 +9,7 @@
 
         //Configuracion cabecera
         settings.Settings.ShowTitlePanel = true;
-        settings.SettingsText.Title = "Gastos asignados";
+        settings.SettingsText.Title = "Gastos por asignar";
 
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -35,7 +35,13 @@
         settings.Columns.Add(column =>
         {
             column.FieldName = "pc_Cuenta";
-            column.Caption = "Descripción";
+            column.Caption = "Cuenta contable";
+            column.Width = Unit.Percentage(90);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "dc_Observacion";
+            column.Caption = "Observación";
             column.Width = Unit.Percentage(90);
         });
         settings.Columns.Add(column =>

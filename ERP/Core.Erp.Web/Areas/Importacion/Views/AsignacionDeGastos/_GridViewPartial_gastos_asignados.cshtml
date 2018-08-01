@@ -35,7 +35,13 @@
         settings.Columns.Add(column =>
         {
             column.FieldName = "pc_Cuenta";
-            column.Caption = "Descripción";
+            column.Caption = "Cuenta contable";
+            column.Width = Unit.Percentage(90);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "dc_Observacion";
+            column.Caption = "Observación";
             column.Width = Unit.Percentage(90);
         });
         settings.Columns.Add(column =>
@@ -44,7 +50,22 @@
             column.FieldName = "dc_Valor";
             column.Caption = "Costo";
         });
-       
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdGasto_tipo";
+            column.Caption = "Tipo de gastos";
+            column.Width = Unit.Percentage(20);
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("ct_descripcion", "Gatos").Width = Unit.Percentage(100);
+                p.TextField = "ct_descripcion";
+                p.ValueField = "IdCatalogo_tipo";
+                p.ValueType = typeof(int);
+                p.DataSource = ViewBag.lst_gastos;
+            });
+        });
+
         settings.Columns.Add(column =>
         {
             column.Caption = "*";

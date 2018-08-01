@@ -1,8 +1,8 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridViewPartial_liquidacion_importacion_det";
-        settings.CallbackRouteValues = new { Controller = "LiquidacionImportacion", Action = "GridViewPartial_liquidacion_importacion_det", Area = "Importacion" };
+        settings.Name = "GridViewPartial_asignacion_gastos_det";
+        settings.CallbackRouteValues = new { Controller = "AsignacionDeGastos", Action = "GridViewPartial_asignacion_gastos_det", Area = "Importacion" };
         settings.KeyFieldName = "Secuencia";
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
