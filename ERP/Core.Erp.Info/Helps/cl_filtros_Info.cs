@@ -66,10 +66,27 @@ namespace Core.Erp.Info.Helps
             fecha_ini = DateTime.Now.Date.AddMonths(-1);
             fecha_fin = DateTime.Now.Date;
         }
+       
+
+    }
+
+    public class cl_filtros_contabilidad_Info
+    {
         public int IdAnio { get; set; }
         public int IdNivel { get; set; }
         public string balance { get; set; }
-
+        [Required(ErrorMessage = "El campo fecha inicio es obligatorio")]
+        [DataType(DataType.Date, ErrorMessage = "El campo fecha inicio debe ser una fecha en formato dd/MM/yyyy")]
+        public DateTime fecha_ini { get; set; }
+        [Required(ErrorMessage = "El campo fecha fin es obligatorio")]
+        [DataType(DataType.Date, ErrorMessage = "El campo fecha fin debe ser una fecha en formato dd/MM/yyyy")]
+        public DateTime fecha_fin { get; set; }
+        public bool mostrar_saldos_en_0 { get; set; }
+        public cl_filtros_contabilidad_Info()
+        {
+            fecha_ini = DateTime.Now.Date.AddMonths(-1);
+            fecha_fin = DateTime.Now.Date;
+        }
     }
 
     public class cl_filtros_facturacion_Info

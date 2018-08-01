@@ -4,6 +4,7 @@ using Core.Erp.Bus.Contabilidad;
 using System;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
@@ -42,8 +43,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             lst_nivel.Add(2, "Nivel 2");
             lst_nivel.Add(1, "Nivel 1");
             ViewBag.lst_nivel = lst_nivel;
-            
 
+            Dictionary<string, string> lst_balance = new Dictionary<string, string>();
+            lst_balance.Add("BG", "Balance general");
+            lst_balance.Add("ER", "Estado de resultado");
+            lst_balance.Add("", "Balance de comprobación");
+            ViewBag.lst_balance = lst_balance;
         }
 
         public ActionResult CONTA_002(DateTime? fechaIni, DateTime? fechaFin, string IdCtaCble = "")
@@ -83,17 +88,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-        public ActionResult CONTA_003( DateTime? fechaIni,DateTime? fechaFin, int IdAnio = 0, string IdUsuario = "", int IdNivel = 0,bool mostrarSaldo0 = false, string balance = "")
+        public ActionResult CONTA_003()
         {
-            cl_filtros_Info model = new cl_filtros_Info
+            cl_filtros_contabilidad_Info model = new cl_filtros_contabilidad_Info
             {
-                fecha_ini = fechaIni == null ? DateTime.Now : Convert.ToDateTime(fechaIni),
-                fecha_fin = fechaFin == null ? DateTime.Now : Convert.ToDateTime(fechaFin),
-                IdUsuario = IdUsuario,
-                mostrar_saldos_en_0 = mostrarSaldo0,
-                IdAnio = IdAnio,
-                balance = balance,
-                IdNivel = IdNivel
+                IdNivel = 6
             };
             cargar_combos();
             CONTA_003_BG_Rpt report = new CONTA_003_BG_Rpt();
@@ -101,7 +100,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdAnio.Value = model.IdAnio;
             report.p_fechaIni.Value = model.fecha_ini;
             report.p_fechaFin.Value = model.fecha_fin;
-            report.p_IdUsuario.Value = model.IdUsuario;
+            report.p_IdUsuario.Value = SessionFixed.IdUsuario;
             report.p_IdNivel.Value = model.IdNivel;
             report.p_mostrarSaldo0.Value = model.mostrar_saldos_en_0;
             report.p_balance.Value = model.balance;
@@ -113,14 +112,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
 
         [HttpPost]
-        public ActionResult CONTA_003(cl_filtros_Info model)
+        public ActionResult CONTA_003(cl_filtros_contabilidad_Info model)
         {
             CONTA_003_BG_Rpt report = new CONTA_003_BG_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             report.p_IdAnio.Value = model.IdAnio;
             report.p_fechaIni.Value = model.fecha_ini;
             report.p_fechaFin.Value = model.fecha_fin;
-            report.p_IdUsuario.Value =model. IdUsuario;
+            report.p_IdUsuario.Value = SessionFixed.IdUsuario;
             report.p_IdNivel.Value = model.IdNivel;
             report.p_mostrarSaldo0.Value = model.mostrar_saldos_en_0;
             report.p_balance.Value = model.balance;

@@ -25,9 +25,10 @@ namespace Core.Erp.Web.Reportes.Contabilidad
             lbl_empresa.Text = empresa;
             lbl_usuario.Text = usuario;
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            int IdAnio = p_IdAnio.Value == null ? 0 : Convert.ToInt32(p_IdAnio.Value);
+            
             DateTime fechaIni = p_fechaIni.Value == null ? DateTime.Now : Convert.ToDateTime(p_fechaIni.Value);
             DateTime fechaFin = p_fechaFin.Value == null ? DateTime.Now: Convert.ToDateTime(p_fechaFin.Value);
+            int IdAnio = fechaFin.Year;
             string IdUsuario = p_IdUsuario.Value == null ? "" : Convert.ToString(p_IdUsuario.Value);
             int IdNivel = p_IdNivel.Value == null ? 0 : Convert.ToInt32(p_IdNivel.Value);
             bool mostrarSaldo0 = p_mostrarSaldo0.Value == null ? false : Convert.ToBoolean(p_mostrarSaldo0.Value);
