@@ -3,6 +3,7 @@ using Core.Erp.Data.CuentasPorCobrar;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.CuentasPorCobrar;
 using Core.Erp.Info.Facturacion;
+using Core.Erp.Info.Inventario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -714,7 +715,7 @@ namespace Core.Erp.Data.Facturacion
 
                 throw;
             }
-        }
+        }       
     }
 }
 

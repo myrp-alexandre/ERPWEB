@@ -22,5 +22,17 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
+
+        public List<in_devolucion_inven_det_Info> get_list(int IdEmpresa, decimal IdDev_Inven)
+        {
+            try
+            {
+                return odata.get_list(IdEmpresa, IdDev_Inven);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -118,14 +118,14 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal*</label>
-                    @Html.DropDownListFor(q => q.IdSucursal_inv, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @id = "IdSucursal_inv", @class = "form-control" })
+                    @Html.DropDownListFor(q => q.IdSucursal_inv, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @id = "IdSucursal_inv", @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdSucursal_inv, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="dev_signo">Tipo*</label>
-                    @Html.DropDownListFor(q => q.dev_signo, new SelectList(ViewBag.lst_signo, "Key", "Value"), new { @id = "dev_signo", @class = "form-control" })
+                    @Html.DropDownListFor(q => q.dev_signo, new SelectList(ViewBag.lst_signo, "Key", "Value"), new { @id = "dev_signo", @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.dev_signo, "", new { @class = "text-danger" })
                 </div>
             </div>

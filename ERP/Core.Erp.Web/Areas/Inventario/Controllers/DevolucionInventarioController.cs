@@ -107,11 +107,56 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         public ActionResult Modificar(decimal IdDev_Inven = 0)
         {
-            return View();
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            in_devolucion_inven_Info model = bus_devolucion.get_info(IdEmpresa, IdDev_Inven);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.lst_det = bus_det.get_list(IdEmpresa, IdDev_Inven);
+            List_det.set_list(model.lst_det);
+            cargar_combos();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Modificar(in_devolucion_inven_Info model)
+        {
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
+            if (!bus_devolucion.modificarDB(model))
+            {
+                ViewBag.mensaje = "No se ha podido modificar el registro";
+                cargar_combos();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
         }
         public ActionResult Anular(decimal IdDev_Inven = 0)
         {
-            return View();
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            in_devolucion_inven_Info model = bus_devolucion.get_info(IdEmpresa, IdDev_Inven);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.lst_det = bus_det.get_list(IdEmpresa, IdDev_Inven);
+            List_det.set_list(model.lst_det);
+            cargar_combos();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Anular(in_devolucion_inven_Info model)
+        {
+            model.IdusuarioUltAnu = SessionFixed.IdUsuario;
+            if (!bus_devolucion.anularDB(model))
+            {
+                ViewBag.mensaje = "No se ha podido modificar el registro";
+                cargar_combos();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
         }
         #endregion
 

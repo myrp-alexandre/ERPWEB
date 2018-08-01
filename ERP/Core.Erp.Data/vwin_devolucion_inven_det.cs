@@ -25,11 +25,13 @@ namespace Core.Erp.Data
         public double cant_devuelta { get; set; }
         public string pr_descripcion { get; set; }
         public string nom_presentacion { get; set; }
-        public Nullable<double> dm_cantidad_sinConversion { get; set; }
+        public double dm_cantidad_sinConversion { get; set; }
         public Nullable<System.DateTime> lote_fecha_vcto { get; set; }
         public string lote_num_lote { get; set; }
-        public Nullable<int> IdBodega { get; set; }
+        public int IdBodega { get; set; }
         public string NomUnidad { get; set; }
-        public Nullable<double> mv_costo_sinConversion { get; set; }
+        public double mv_costo_sinConversion { get; set; }
+        public string IdUnidadMedida_sinConversion { get; set; }
+        public decimal IdProducto { get; set; }
     }
 }
