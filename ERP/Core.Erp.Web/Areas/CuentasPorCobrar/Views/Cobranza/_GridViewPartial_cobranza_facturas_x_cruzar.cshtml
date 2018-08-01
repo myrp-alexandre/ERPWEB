@@ -76,7 +76,7 @@
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
         });
 
-        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdClienteCobranza'] = IdCliente.GetValue(); e.customArgs['IdSucursalCobranza'] = $('#IdSucursal').val(); OnBeginCallback(s,e);}";
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdClienteCobranza'] = IdCliente.GetValue(); e.customArgs['IdSucursalCobranza'] = $('#IdSucursal').val();  e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); OnBeginCallback(s,e);}";
         settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
     });
 }

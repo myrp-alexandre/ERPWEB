@@ -118,6 +118,7 @@
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_ValorPago").DisplayFormat = "Total: {0:n2}";
         settings.Settings.ShowFooter = true;
         settings.ClientSideEvents.EndCallback = "function (s,e){CalcularSaldo();}";
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }
 @grid.Bind(Model).GetHtml()

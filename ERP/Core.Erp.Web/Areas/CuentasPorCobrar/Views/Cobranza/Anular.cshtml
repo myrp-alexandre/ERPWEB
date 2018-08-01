@@ -64,11 +64,12 @@
         $("#FacturasModal").modal("show");
     }
 
-    function AddFacturas() {
+      function AddFacturas() {
 
         var datos = {
             IDs: selectedIDs,
-            TotalACobrar: $("#cr_TotalCobro").val()
+            TotalACobrar: $("#cr_TotalCobro").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -95,7 +96,8 @@
     function CalcularSaldo() {
 
         var datos = {
-            TotalACobrar: $("#cr_TotalCobro").val()
+            TotalACobrar: $("#cr_TotalCobro").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -117,6 +119,7 @@
     function VaciarLista() {
 
         var datos = {
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -140,6 +143,7 @@
 
 @using (Html.BeginForm("Anular", "Cobranza", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     if (@ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">

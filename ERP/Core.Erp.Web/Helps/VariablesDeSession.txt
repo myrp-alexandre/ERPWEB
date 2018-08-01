@@ -19,3 +19,6 @@ public decimal IdTransaccionSession { get; set; }
 
 //AGREGAR AL FINAL EN GRILLAS QUE UTILICEN SESSION PARA LAS LISTAS, REVISAR QUE YA NO EXISTA
 settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+
+//AGREGAR EN AJAX 
+IdTransaccionSession: $("#IdTransaccionSession").val()

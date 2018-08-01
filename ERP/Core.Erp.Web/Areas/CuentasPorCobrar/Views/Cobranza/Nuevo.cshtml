@@ -70,7 +70,8 @@
 
         var datos = {
             IDs: selectedIDs,
-            TotalACobrar: $("#cr_TotalCobro").val()
+            TotalACobrar: $("#cr_TotalCobro").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -97,7 +98,8 @@
     function CalcularSaldo() {
 
         var datos = {
-            TotalACobrar: $("#cr_TotalCobro").val()
+            TotalACobrar: $("#cr_TotalCobro").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -118,7 +120,8 @@
 
         function VaciarLista() {
 
-        var datos = {
+            var datos = {
+                IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -130,7 +133,7 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                
+
             },
             error: function (error) {
             }
@@ -142,6 +145,7 @@
 
 @using (Html.BeginForm("Nuevo", "Cobranza", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     if (@ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -177,8 +181,8 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal*</label>
-                    @Html.DropDownListFor(q=>q.IdSucursal,new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"),new { @class = "form-control", @id = "IdSucursal"})
-                    @Html.ValidationMessageFor(q=>q.IdSucursal,"",new { @class = "text-danger"})
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-12">
@@ -271,10 +275,10 @@
                     <i class="fa fa-search"></i>
                 </button>
             </div>
-        </div>        
+        </div>
     </div>
     <br />
-    
+
     @Html.Action("GridViewPartial_cobranza_det")
 
 
