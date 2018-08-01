@@ -8883,8 +8883,8 @@
     <Content Include="Areas\Importacion\Views\AsignacionDeGastos\Modificar.cshtml" />
     <Content Include="Areas\Importacion\Views\AsignacionDeGastos\Index.cshtml" />
     <Content Include="Areas\Importacion\Views\AsignacionDeGastos\Anular.cshtml" />
-    <Content Include="Areas\Importacion\Views\AsignacionDeGastos\_GridViewPartial_liquidacion_importacion_det.cshtml" />
-    <Content Include="Areas\Importacion\Views\AsignacionDeGastos\_GridViewPartial_liquidacion_importacion.cshtml" />
+    <Content Include="Areas\Importacion\Views\AsignacionDeGastos\_GridViewPartial_asignacion_gastos_det.cshtml" />
+    <Content Include="Areas\Importacion\Views\AsignacionDeGastos\_GridViewPartial_asignacion_gastos.cshtml" />
     <Content Include="Areas\Importacion\Views\AsignacionDeGastos\_GridViewPartial_gastos_asignados.cshtml" />
     <Content Include="Areas\Importacion\Views\AsignacionDeGastos\_GridViewPartial_gastos_por_asignar.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\Ordencompra_por_liquidar.cshtml" />
