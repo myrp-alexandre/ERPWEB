@@ -31,6 +31,7 @@ namespace Core.Erp.Web.Reportes.Facturacion
 
             FAC_008_Bus bus_rpt = new FAC_008_Bus();
             List<FAC_008_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdBodega, IdNota);
+            lst_rpt.ForEach(q => q.nomReporte = q.CreDeb == "C" ? "NOTA DE CRÉDITO" : "NOTA DE DÉBITO");
             this.DataSource = lst_rpt;
         }
 

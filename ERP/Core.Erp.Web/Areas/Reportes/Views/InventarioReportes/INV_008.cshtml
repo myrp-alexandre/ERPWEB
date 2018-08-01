@@ -90,3 +90,42 @@
         <!-- /.box-footer-->
     </div>
 }
+
+<script type="text/javascript">
+    $(function () {
+        $("#IdSucursal").change(function () {
+            cargar_bodega();
+        });
+
+        cargar_bodega();
+    });
+
+
+    function cargar_bodega() {
+        $("#IdBodega").empty();
+
+        var sucursal = $("#IdSucursal").val();
+
+        var datos = {
+            IdSucursal: sucursal
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("cargar_bodega", "InventarioReportes", new { Area = "Reportes" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdBodega").append("<option value=" + row.IdBodega + ">" + row.bo_Descripcion + "</option>");
+                });
+            },
+            error: function (error) {
+            }
+        });
+    };
+</script>

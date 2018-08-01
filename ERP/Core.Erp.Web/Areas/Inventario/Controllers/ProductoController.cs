@@ -433,5 +433,18 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             HttpContext.Current.Session["in_Producto_Info"] = list;
         }
+
+        public void AddRow(in_Producto_Info info_det)
+        {
+            List<in_Producto_Info> list = get_list();
+            if (list.Where(q=>q.IdProducto == info_det.IdProducto).Count() == 0)
+               list.Add(info_det);
+        }
+
+        public void DeleteRow(decimal IdProducto)
+        {
+            List<in_Producto_Info> list = get_list();
+            list.Remove(list.Where(m => m.IdProducto == IdProducto).First());
+        }
     }
 }

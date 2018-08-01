@@ -437,11 +437,11 @@
             this.xrTable4.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
-            this.xrTable4.LocationFloat = new DevExpress.Utils.PointFloat(450F, 0F);
+            this.xrTable4.LocationFloat = new DevExpress.Utils.PointFloat(0.5F, 0F);
             this.xrTable4.Name = "xrTable4";
             this.xrTable4.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow5});
-            this.xrTable4.SizeF = new System.Drawing.SizeF(300F, 20F);
+            this.xrTable4.SizeF = new System.Drawing.SizeF(749.5F, 20F);
             this.xrTable4.StylePriority.UseBorders = false;
             // 
             // xrTableRow5
@@ -470,7 +470,7 @@
             this.xrTableCell17.StylePriority.UseTextAlignment = false;
             this.xrTableCell17.Text = "TOTAL";
             this.xrTableCell17.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell17.Weight = 1D;
+            this.xrTableCell17.Weight = 3.9966666666666666D;
             // 
             // xrTableCell18
             // 
@@ -493,7 +493,7 @@
             this.GroupHeader1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable5});
             this.GroupHeader1.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
-            new DevExpress.XtraReports.UI.GroupField("IdProducto", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
+            new DevExpress.XtraReports.UI.GroupField("IdProducto_padre", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
             this.GroupHeader1.HeightF = 20F;
             this.GroupHeader1.Level = 2;
             this.GroupHeader1.Name = "GroupHeader1";
@@ -641,11 +641,11 @@
             this.xrTable10.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
-            this.xrTable10.LocationFloat = new DevExpress.Utils.PointFloat(450F, 0F);
+            this.xrTable10.LocationFloat = new DevExpress.Utils.PointFloat(0.5F, 0F);
             this.xrTable10.Name = "xrTable10";
             this.xrTable10.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow12});
-            this.xrTable10.SizeF = new System.Drawing.SizeF(300F, 20F);
+            this.xrTable10.SizeF = new System.Drawing.SizeF(749.5F, 20F);
             this.xrTable10.StylePriority.UseBorders = false;
             // 
             // xrTableRow12
@@ -679,7 +679,7 @@
             this.xrTableCell23.Text = "TOTAL";
             this.xrTableCell23.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell23.TextFormatString = "{0:n2}";
-            this.xrTableCell23.Weight = 1D;
+            this.xrTableCell23.Weight = 3.9966666666666666D;
             // 
             // xrTableCell24
             // 
@@ -710,11 +710,11 @@
             this.xrTable9.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
-            this.xrTable9.LocationFloat = new DevExpress.Utils.PointFloat(450F, 0F);
+            this.xrTable9.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrTable9.Name = "xrTable9";
             this.xrTable9.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow11});
-            this.xrTable9.SizeF = new System.Drawing.SizeF(300F, 20F);
+            this.xrTable9.SizeF = new System.Drawing.SizeF(750F, 20F);
             this.xrTable9.StylePriority.UseBorders = false;
             // 
             // xrTableRow11
@@ -748,7 +748,7 @@
             this.xrTableCell21.Text = "TOTAL";
             this.xrTableCell21.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell21.TextFormatString = "{0:n2}";
-            this.xrTableCell21.Weight = 1D;
+            this.xrTableCell21.Weight = 4D;
             // 
             // xrTableCell22
             // 
@@ -778,11 +778,11 @@
             this.xrTable8.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
-            this.xrTable8.LocationFloat = new DevExpress.Utils.PointFloat(450F, 0F);
+            this.xrTable8.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrTable8.Name = "xrTable8";
             this.xrTable8.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow10});
-            this.xrTable8.SizeF = new System.Drawing.SizeF(300F, 20F);
+            this.xrTable8.SizeF = new System.Drawing.SizeF(750F, 20F);
             this.xrTable8.StylePriority.UseBorders = false;
             // 
             // xrTableRow10
@@ -813,7 +813,7 @@
             this.xrTableCell19.StylePriority.UseTextAlignment = false;
             this.xrTableCell19.Text = "TOTAL";
             this.xrTableCell19.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell19.Weight = 1D;
+            this.xrTableCell19.Weight = 4D;
             // 
             // xrTableCell20
             // 

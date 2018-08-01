@@ -38,5 +38,6 @@ namespace Core.Erp.Info.Reportes.Facturacion
         public string sc_observacion { get; set; }
         public double sc_total { get; set; }
         public string No_Descripcion { get; set; }
+        public string nomReporte { get; set; }
     }
 }
