@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.Importacion.imp_ordencompra_ext_Info
 @{
-    ViewBag.Title = "Recepcion de ordene de compra";
+    ViewBag.Title = "Asignacion de gastos";
     //if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     //{
     //    Response.Redirect("~/Account/Login");
@@ -16,49 +16,17 @@
     }
 }
 
-@using (Html.BeginForm("Nuevo", "LiquidacionImportacion", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "AsignacionDeGastos", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdTransaccionSession)
     @Html.HiddenFor(q => q.IdLiquidacion)
     @Html.HiddenFor(q => q.IdEmpresa)
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="IdOrdenCompraExt">Id Orden compra</label>
-                    @Html.TextBoxFor(q => q.IdOrdenCompra_ext, new { @class = "form-control", @disabled = "disabled" })
-                    @Html.ValidationMessageFor(q => q.IdOrdenCompra_ext, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="IdCatalogo_via">Tipo de embarque*</label>
-                    @Html.DropDownListFor(q => q.IdCatalogo_via, new SelectList(ViewBag.lst_catalogos, "IdCatalogo", "ca_descripcion"), new { @class = "form-control" , @disabled = "disabled" })
-                    @Html.ValidationMessageFor(q => q.IdCatalogo_via, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-offset-10 col-med-2">
-                <div class="form-group">
-                    <label for="">Fecha O.C</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.TextBoxFor(q => q.oe_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_oc" , @disabled = "disabled" })
-                        @Html.ValidationMessageFor(q => q.oe_fecha, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdProveedor">Proveedor*</label>
-                    @Html.TextBoxFor(q => q.pe_nombreCompleto, new { @class = "form-control", @disabled="disabled" })
+                    @Html.TextBoxFor(q => q.pe_nombreCompleto, new { @class = "form-control", @disabled = "disabled" })
                 </div>
             </div>
             <div class="col-md-offset-10 col-med-2">
@@ -88,42 +56,48 @@
 
         </div>
     </div>
+    @Html.DevExpress().PageControl(
+    settings =>
+    {
+        settings.Name = "Detalle";
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        settings.ControlStyle.CssClass = "dxtcFixed";
 
+        settings.TabPages.Add("Detalle de gastos").SetContent(() =>
+        {
+            @Html.DevExpress().Splitter(settings_ =>
+            {
+                settings_.Name = "Splitter";
+                settings_.Height = 500;
+                settings_.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                settings_.AllowResize = true;
 
-    <div id="Tabs" role="tabpanel">
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="active">
-                <a href="#tab_detalle_items" aria-controls="informacion_items" role="tab" data-toggle="tab">Detalle de productos</a>
-            </li>
-            <li>
-                <a href="#tab_detalle_gastos" aria-controls="gastos" role="tab" data-toggle="tab">Detalle de gastos incurridos</a>
-            </li>
-           
+                settings_.Panes.Add(pane =>
+                {
+                    pane.SetContent(() =>
+                    {
+                        @Html.RenderAction("GridViewPartial_gastos_por_asignar", new { Model.IdCtaCble_importacion });
 
-        </ul>
-        <div class="tab-content" style="padding-top: 20px">
-            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_detalle_items">
-                @Html.Action("GridViewPartial_asignacion_gastos_det", new { Model.IdCtaCble_importacion})
-            </div>
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle_gastos">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="col-md-12">
-                            @Html.Action("GridViewPartial_gastos_por_asignar")
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="col-md-12">
-                            @Html.Action("GridViewPartial_gastos_asignados")
-                        </div>
-                    </div>
-                </div>
+                    });
+                    pane.AutoHeight = true;
+                });
+                settings_.Panes.Add(pane =>
+                {
+                    pane.SetContent(() =>
+                    {
+                        Html.RenderAction("GridViewPartial_gastos_asignados");
+                    });
+                });
+            }).GetHtml();
 
-            </div>
-           
-        </div>
-    </div>
+        });
 
+        settings.TabPages.Add("Detalle de orden de compra").SetContent(() =>
+        {
+            Html.RenderAction("GridViewPartial_asignacion_gastos_det", new { Model.IdCtaCble_importacion });
+        });
+
+    }).GetHtml()
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
@@ -137,15 +111,35 @@
 
 <script>
 
+
     $(function () {
 
 
         $('#or_fecha').datepicker({
             autoclose: true
         });
-       
-        
+
+
     });
+    function EditingUpdate(ID) {
+        var datos = {
+            CodReporte: ID
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("EditingUpdate", "AsignacionDeGastos",new { Area = "Importacion"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+    }
 
 
 </script>

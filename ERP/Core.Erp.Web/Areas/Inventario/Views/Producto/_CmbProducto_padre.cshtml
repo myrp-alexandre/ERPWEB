@@ -20,7 +20,7 @@
         settings.Properties.Columns.Add("pr_descripcion", "Producto", 65);
         settings.Properties.Columns.Add("nom_categoria", "Categoria", 15);
         settings.Properties.Columns.Add("nom_presentacion", "Presentación", 15);
-        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){ValidarTabImagen();get_info_padre() ;}";
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){ValidarTabImagen();get_info_padre();}";
     })
     .BindList(new Core.Erp.Web.Areas.Inventario.Controllers.ProductoController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Inventario.Controllers.ProductoController().get_info_bajo_demanda)
     .Bind(Model.IdProducto);

@@ -17,6 +17,7 @@ namespace Core.Erp.Info.Importacion
         public Nullable<int> IdGasto_tipo { get; set; }
         public double dc_Valor { get; set; }
         public string pc_Cuenta { get; set; }
+        public int secuencia { get; set; }
 
         public string dc_Observacion { get; set; }
     }

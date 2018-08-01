@@ -31,6 +31,8 @@ namespace Core.Erp.Data.Importacion
 
                              }).ToList();
                 }
+
+                Lista.ForEach(v => v.secuencia++);
                 return Lista;
             }
             catch (Exception)

@@ -433,6 +433,8 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+
+
 <script>
         $(function () {
             $('#lote_fecha_vcto').datepicker({
@@ -441,6 +443,10 @@
             $('#lote_fecha_fab').datepicker({
                 autoclose: true
             })
+
+            cargar_lineas();
+            cargar_grupos();
+            cargar_subgrupos();
             get_info_producto_tipo();
             ValidarTabImagen();
         });
@@ -793,7 +799,8 @@
             success: function (data) {
                 if (data == '') {
                     //No hago nada
-                } else {
+                } else
+                {
                     $("#link_general").click();
                     if (data.tp_EsCombo == "S") {
                         $("#link_composicion").show();
@@ -806,6 +813,10 @@
                     } else {
                         $("#link_lote").hide();
                     }
+
+                    $("#Aparece_modu_Ventas").attr("checked", data.Aparece_modu_Ventas);
+                    $("#Aparece_modu_Compras").attr("checked", data.Aparece_modu_Compras);
+                    $("#Aparece_modu_Inventario").attr("checked", data.Aparece_modu_Inventario);
                 }
             },
             error: function (error) {
@@ -814,6 +825,28 @@
         });
     }
 
+    function ValidarTabImagen() {
+        var ID = IdProducto_padre.GetValue();
+        if (ID > 0) {
+            $("#link_imagen").hide();
+            $("#link_general").click();
+
+        } else {
+            $("#link_imagen").show();
+            $("#link_general").click();
+        }
+    }
+
+    function set_camp_modulo() {
+        var ID = IdProducto_padre.GetValue();
+        if (ID > 0) {
+            $("#Aparece_modu_Ventas").attr("checked", false);
+            $("#Aparece_modu_Compras").attr("checked", false);
+            $("#Aparece_modu_Inventario").attr("checked", false);
+        } else {
+            get_info_producto_tipo();
+        }
+    }
     function get_info_padre() {
         var IPadre = IdProducto_padre.GetValue();
         if (IPadre != "") {
@@ -876,15 +909,7 @@
         }
     }
 
-    function ValidarTabImagen() {
-        var ID = IdProducto_padre.GetValue();
-        if (ID > 0) {
-            $("#link_imagen").hide();
-            $("#link_general").click();
-        } else {
-            $("#link_imagen").show();
-            $("#link_general").click();
-        }
-    }
+
+
 
 </script>

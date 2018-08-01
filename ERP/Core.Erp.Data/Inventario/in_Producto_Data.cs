@@ -534,6 +534,11 @@ namespace Core.Erp.Data.Inventario
                 case cl_enumeradores.eTipoBusquedaProducto.TODOS:
                     Lista = get_list(IdEmpresa, skip, take, args.Filter);
                     break;
+                case cl_enumeradores.eTipoBusquedaProducto.TODOS_MENOS_PADRES:
+                    Lista = get_list_todos_menos_padres(IdEmpresa, skip, take, args.Filter);
+
+                    
+                    break;
             }
             
             
@@ -833,8 +838,75 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
+        public List<in_Producto_Info> get_list_todos_menos_padres(int IdEmpresa, int skip, int take, string filter)
+        {
+            try
+            {
+                List<in_Producto_Info> Lista = new List<in_Producto_Info>();
+
+                Entities_inventario Context = new Entities_inventario();
+
+                var lst = (from
+                          p in Context.in_Producto
+                           join c in Context.in_categorias
+                           on new { p.IdEmpresa, p.IdCategoria } equals new { c.IdEmpresa, c.IdCategoria }
+                           join pr in Context.in_presentacion
+                          
+                           on new { p.IdEmpresa, p.IdPresentacion } equals new { pr.IdEmpresa, pr.IdPresentacion }
+
+                           where
+                            p.IdEmpresa == IdEmpresa
+                            && c.IdEmpresa == IdEmpresa
+                            && pr.IdEmpresa == IdEmpresa
+                            && p.Estado == "A"
+                            && p.IdProducto_padre!=null
+                            && (p.IdProducto.ToString() + " " + p.pr_descripcion).Contains(filter)
+                           select new
+                           {
+                               p.IdEmpresa,
+                               p.IdProducto,
+                               p.pr_descripcion,
+                               p.pr_descripcion_2,
+                               p.pr_codigo,
+                               p.lote_num_lote,
+                               p.lote_fecha_vcto,
+                               c.ca_Categoria,
+                               pr.nom_presentacion
+                           })
+                             .OrderBy(p => p.IdProducto)
+                             .Skip(skip)
+                             .Take(take)
+                             .ToList();
+
+
+                foreach (var q in lst)
+                {
+                    Lista.Add(new in_Producto_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdProducto = q.IdProducto,
+                        pr_descripcion = q.pr_descripcion,
+                        pr_descripcion_2 = q.pr_descripcion_2,
+                        pr_codigo = q.pr_codigo,
+                        lote_num_lote = q.lote_num_lote,
+                        lote_fecha_vcto = q.lote_fecha_vcto,
+                        nom_categoria = q.ca_Categoria,
+                        nom_presentacion = q.nom_presentacion
+                    });
+                }
+
+                Context.Dispose();
+                Lista = get_list_nombre_combo(Lista);
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         #endregion
-        
+
     }
 }

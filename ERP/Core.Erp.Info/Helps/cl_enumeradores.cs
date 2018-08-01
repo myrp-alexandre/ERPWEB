@@ -37,7 +37,8 @@
             SOLOPADRES,
             SOLOHIJOS,
             PORMODULO,
-            TODOS
+            TODOS,
+            TODOS_MENOS_PADRES
         }        
 
         public enum eTipoCatalogoInventario
