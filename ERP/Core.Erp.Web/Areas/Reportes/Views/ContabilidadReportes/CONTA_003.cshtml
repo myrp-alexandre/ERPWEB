@@ -62,7 +62,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="IdNivel">Balance</label>
+                            <label for="balance">Balance</label>
                             @Html.DropDownListFor(q => q.balance, new SelectList(ViewBag.lst_balance, "Key", "Value"), new { @class = "form-control" })
                             @Html.ValidationMessageFor(q => q.balance, "", new { @class = "form", @role = "text-danger" })
                         </div>

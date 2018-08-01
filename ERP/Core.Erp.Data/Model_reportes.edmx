@@ -2618,6 +2618,16 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Parameter Name="IdClienteContactoFin" Type="int" Mode="In" />
           <Parameter Name="fechaCorte" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="SPFAC_005" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdSucursal_ini" Type="int" Mode="In" />
+          <Parameter Name="IdSucursal_fin" Type="int" Mode="In" />
+          <Parameter Name="IdCliente_ini" Type="numeric" Mode="In" />
+          <Parameter Name="IdCliente_fin" Type="numeric" Mode="In" />
+          <Parameter Name="Fecha_ini" Type="datetime" Mode="In" />
+          <Parameter Name="fecha_fin" Type="datetime" Mode="In" />
+          <Parameter Name="MostrarSaldo0" Type="bit" Mode="In" />
+        </Function>
         <Function Name="SPINV_003" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="IdSucursal_ini" Type="int" Mode="In" />
@@ -4271,16 +4281,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
             <Parameter Name="IdClienteContactoFin" Mode="In" Type="Int32" />
             <Parameter Name="fechaCorte" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="SPFAC_005" ReturnType="Collection(Model_reportes.SPFAC_005_Result)">
-            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
-            <Parameter Name="IdSucursal_ini" Mode="In" Type="Int32" />
-            <Parameter Name="IdSucursal_fin" Mode="In" Type="Int32" />
-            <Parameter Name="IdCliente_ini" Mode="In" Type="Decimal" />
-            <Parameter Name="IdCliente_fin" Mode="In" Type="Decimal" />
-            <Parameter Name="Fecha_ini" Mode="In" Type="DateTime" />
-            <Parameter Name="fecha_fin" Mode="In" Type="DateTime" />
-            <Parameter Name="MostrarSaldo0" Mode="In" Type="Boolean" />
-          </FunctionImport>
           <FunctionImport Name="SPROL_013" ReturnType="Collection(Model_reportes.SPROL_013_Result1)">
             <Parameter Name="idempresa" Mode="In" Type="Int32" />
             <Parameter Name="idnomina" Mode="In" Type="Int32" />
@@ -4305,7 +4305,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <EntitySet Name="VWFAC_008" EntityType="Model_reportes.VWFAC_008" />
           <EntitySet Name="VWIMP_001" EntityType="Model_reportes.VWIMP_001" />
           <EntitySet Name="VWFAC_008_aplicaciones" EntityType="Model_reportes.VWFAC_008_aplicaciones" />
-          <FunctionImport Name="SPCONTA_003_balances" ReturnType="Collection(Model_reportes.SPCONTA_003_balances_Result)">
+          <FunctionImport Name="SPCONTA_003_balances" ReturnType="Collection(Model_reportes.SPCONTA_003_balances_Result1)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdAnio" Mode="In" Type="Int32" />
             <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
@@ -4314,6 +4314,16 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
             <Parameter Name="IdNivel" Mode="In" Type="Int32" />
             <Parameter Name="MostrarSaldo0" Mode="In" Type="Boolean" />
             <Parameter Name="Balance" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SPFAC_005" ReturnType="Collection(Model_reportes.SPFAC_005_Result1)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursal_ini" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursal_fin" Mode="In" Type="Int32" />
+            <Parameter Name="IdCliente_ini" Mode="In" Type="Decimal" />
+            <Parameter Name="IdCliente_fin" Mode="In" Type="Decimal" />
+            <Parameter Name="Fecha_ini" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha_fin" Mode="In" Type="DateTime" />
+            <Parameter Name="MostrarSaldo0" Mode="In" Type="Boolean" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Af_SPACTF_004_detalle">
@@ -7109,6 +7119,51 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Property Type="Double" Name="SaldoCreditos" Nullable="false" />
           <Property Type="Double" Name="SaldoFinal" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="SPCONTA_003_balances_Result1">
+          <Property Type="String" Name="IdUsuario" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="String" Name="IdCtaCble" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="pc_Cuenta" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="IdCtaCblePadre" Nullable="true" MaxLength="20" />
+          <Property Type="Boolean" Name="EsCtaUtilidad" Nullable="false" />
+          <Property Type="Int32" Name="IdNivelCta" Nullable="false" />
+          <Property Type="String" Name="IdGrupoCble" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="gc_GrupoCble" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="gc_estado_financiero" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="gc_Orden" Nullable="false" />
+          <Property Type="Double" Name="DebitosSaldoInicial" Nullable="false" />
+          <Property Type="Double" Name="CreditosSaldoInicial" Nullable="false" />
+          <Property Type="Double" Name="SaldoInicial" Nullable="false" />
+          <Property Type="Double" Name="Debitos" Nullable="false" />
+          <Property Type="Double" Name="Creditos" Nullable="false" />
+          <Property Type="Double" Name="SaldoDebitosCreditos" Nullable="false" />
+          <Property Type="Double" Name="SaldoDebitos" Nullable="false" />
+          <Property Type="Double" Name="SaldoCreditos" Nullable="false" />
+          <Property Type="Double" Name="SaldoFinal" Nullable="false" />
+          <Property Type="Boolean" Name="EsCuentaMovimiento" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SPFAC_005_Result1">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
+          <Property Type="Decimal" Name="IdCliente" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="IdContacto" Nullable="true" />
+          <Property Type="String" Name="NomCliente" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="NomContacto" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="TipoDocumento" Nullable="false" MaxLength="14" />
+          <Property Type="Boolean" Name="EsExportacion" Nullable="true" />
+          <Property Type="String" Name="Su_Descripcion" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="Su_CodigoEstablecimiento" Nullable="true" MaxLength="30" />
+          <Property Type="Double" Name="SubtotalIVA0" Nullable="true" />
+          <Property Type="Double" Name="SubtotalIVA" Nullable="true" />
+          <Property Type="Double" Name="vt_iva" Nullable="true" />
+          <Property Type="Double" Name="Total" Nullable="true" />
+          <Property Type="Double" Name="VRetenIVA" Nullable="true" />
+          <Property Type="Double" Name="VRetenFTE" Nullable="true" />
+          <Property Type="Double" Name="ValorACobrar" Nullable="true" />
+          <Property Type="Double" Name="VCobrado" Nullable="false" />
+          <Property Type="Double" Name="Saldo" Nullable="false" />
+          <Property Type="Int32" Name="CantFactContacto" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9088,7 +9143,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SPCONTA_003_balances" FunctionName="Model_reportes.Store.SPCONTA_003_balances">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Model_reportes.SPCONTA_003_balances_Result">
+              <ComplexTypeMapping TypeName="Model_reportes.SPCONTA_003_balances_Result1">
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
                 <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
@@ -9109,6 +9164,33 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
                 <ScalarProperty Name="SaldoDebitos" ColumnName="SaldoDebitos" />
                 <ScalarProperty Name="SaldoCreditos" ColumnName="SaldoCreditos" />
                 <ScalarProperty Name="SaldoFinal" ColumnName="SaldoFinal" />
+                <ScalarProperty Name="EsCuentaMovimiento" ColumnName="EsCuentaMovimiento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPFAC_005" FunctionName="Model_reportes.Store.SPFAC_005">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_reportes.SPFAC_005_Result1">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdContacto" ColumnName="IdContacto" />
+                <ScalarProperty Name="NomCliente" ColumnName="NomCliente" />
+                <ScalarProperty Name="NomContacto" ColumnName="NomContacto" />
+                <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
+                <ScalarProperty Name="EsExportacion" ColumnName="EsExportacion" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="Su_CodigoEstablecimiento" ColumnName="Su_CodigoEstablecimiento" />
+                <ScalarProperty Name="SubtotalIVA0" ColumnName="SubtotalIVA0" />
+                <ScalarProperty Name="SubtotalIVA" ColumnName="SubtotalIVA" />
+                <ScalarProperty Name="vt_iva" ColumnName="vt_iva" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="VRetenIVA" ColumnName="VRetenIVA" />
+                <ScalarProperty Name="VRetenFTE" ColumnName="VRetenFTE" />
+                <ScalarProperty Name="ValorACobrar" ColumnName="ValorACobrar" />
+                <ScalarProperty Name="VCobrado" ColumnName="VCobrado" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="CantFactContacto" ColumnName="CantFactContacto" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
