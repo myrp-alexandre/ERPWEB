@@ -42,6 +42,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             lst_nivel.Add(2, "Nivel 2");
             lst_nivel.Add(1, "Nivel 1");
             ViewBag.lst_nivel = lst_nivel;
+            
 
         }
 
@@ -91,8 +92,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdUsuario = IdUsuario,
                 mostrar_saldos_en_0 = mostrarSaldo0,
                 IdAnio = IdAnio,
-                balance = balance
+                balance = balance,
+                IdNivel = IdNivel
             };
+            cargar_combos();
             CONTA_003_BG_Rpt report = new CONTA_003_BG_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             report.p_IdAnio.Value = model.IdAnio;
@@ -124,6 +127,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.usuario = Session["IdUsuario"].ToString();
             report.empresa = Session["nom_empresa"].ToString();
             report.RequestParameters = false;
+            cargar_combos();
             ViewBag.Report = report;
             return View(model);
         }
