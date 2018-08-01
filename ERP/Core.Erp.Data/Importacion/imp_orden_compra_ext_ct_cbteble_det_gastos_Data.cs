@@ -12,6 +12,7 @@ namespace Core.Erp.Data.Importacion
         {
             try
             {
+                int secuencia=0;
                 List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> Lista;
                 using (Entities_importacion Context = new Entities_importacion())
                 {
@@ -32,7 +33,7 @@ namespace Core.Erp.Data.Importacion
                              }).ToList();
                 }
 
-                Lista.ForEach(v => v.secuencia++);
+                Lista.ForEach(v => v.secuencia  =secuencia++);
                 return Lista;
             }
             catch (Exception)

@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridViewPartial_gastos_por_asignar";
-        settings.CallbackRouteValues = new { Controller = "LiquidacionImportacion", Action = "_GridViewPartial_gastos_por_asignar" };
+        settings.CallbackRouteValues = new { Controller = "AsignacionDeGastos", Action = "GridViewPartial_gastos_por_asignar" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "secuencia";
 
@@ -35,14 +35,14 @@
         settings.Columns.Add(column =>
         {
             column.FieldName = "pc_Cuenta";
-            column.Caption = "Cuenta contable";
-            column.Width = Unit.Percentage(90);
+            column.Caption = "Cuenta";
+            column.Width = Unit.Percentage(40);
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "dc_Observacion";
             column.Caption = "Observación";
-            column.Width = Unit.Percentage(90);
+            column.Width = Unit.Percentage(40);
         });
         settings.Columns.Add(column =>
         {
@@ -54,8 +54,8 @@
         settings.Columns.Add(column =>
         {
             column.Caption = "*";
-            column.FieldName = "Secuencia";
-            column.Width = Unit.Percentage(10);
+            column.FieldName = "secuencia";
+            column.Width = Unit.Percentage(15);
             column.UnboundType = DevExpress.Data.UnboundColumnType.String;
             column.SetDataItemTemplateContent(c =>
             {
@@ -63,7 +63,7 @@
                 {
                     settingsBtn.Name = "btn" + c.KeyValue;
                     settingsBtn.Text = "Asignar";
-                    settingsBtn.ClientSideEvents.Click = "function(s, e) {EditingUpdate('" + c.KeyValue + "');}";
+                    settingsBtn.ClientSideEvents.Click = "function(s, e) {EditingNew('" + c.KeyValue + "');}";
                 }).Render();
             });
         });

@@ -76,5 +76,30 @@ namespace Core.Erp.Data.Importacion
             }
         }
 
+        public imp_gasto_x_ct_plancta_Info get_info(int IdEmpresa, string IdCtaCble)
+        {
+            try
+            {
+                imp_gasto_x_ct_plancta_Info info = new imp_gasto_x_ct_plancta_Info();
+                using (Entities_importacion Context = new Entities_importacion())
+                {
+                    imp_gasto_x_ct_plancta Entity = Context.imp_gasto_x_ct_plancta.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdCtaCble == IdCtaCble);
+                    if (Entity == null) return null;
+                    info = new imp_gasto_x_ct_plancta_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdGasto_tipo = Entity.IdGasto_tipo,
+                        IdCtaCble = Entity.IdCtaCble
+                    };
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

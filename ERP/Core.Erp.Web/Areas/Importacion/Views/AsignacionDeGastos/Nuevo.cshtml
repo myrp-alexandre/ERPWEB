@@ -18,7 +18,7 @@
 
 @using (Html.BeginForm("Nuevo", "AsignacionDeGastos", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdTransaccionSession)
+    @Html.HiddenFor(q => q.IdTransaccionSession, new {@id= "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdLiquidacion)
     @Html.HiddenFor(q => q.IdEmpresa)
     <div class="row">
@@ -121,20 +121,25 @@
 
 
     });
-    function EditingUpdate(ID) {
+    function EditingNew(ID) {
         var datos = {
-            CodReporte: ID
+            secuencia: ID,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+            
         }
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("EditingUpdate", "AsignacionDeGastos",new { Area = "Importacion"})',
+            url: '@Url.Action("EditingNew", "AsignacionDeGastos",new { Area = "Importacion"})',
             async: false,
             bDeferRender: true,
             bProcessing: true,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
+                GridViewPartial_gastos_asignados.PerformCallback();
+                GridViewPartial_gastos_por_asignar.PerformCallback("");
+
             },
             error: function (error) {
             }

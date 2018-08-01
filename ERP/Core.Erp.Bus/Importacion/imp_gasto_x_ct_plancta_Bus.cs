@@ -24,7 +24,18 @@ namespace Core.Erp.Bus.Importacion
                 throw;
             }
         }
+        public imp_gasto_x_ct_plancta_Info get_info(int IdEmpresa, string IdCtaCble)
+        {
+            try
+            {
+                return odata.get_info(IdEmpresa, IdCtaCble);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
         public bool guardarDB(imp_gasto_x_ct_plancta_Info info)
         {
             try

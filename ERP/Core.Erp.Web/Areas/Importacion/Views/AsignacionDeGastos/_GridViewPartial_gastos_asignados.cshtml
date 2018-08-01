@@ -3,10 +3,14 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridViewPartial_gastos_asignados";
-        settings.CallbackRouteValues = new { Controller = "LiquidacionImportacion", Action = "GridViewPartial_gastos_asignados" };
+        settings.CallbackRouteValues = new { Controller = "AsignacionDeGastos", Action = "GridViewPartial_gastos_asignados" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdCbteCble";
+        settings.KeyFieldName = "secuencia";
 
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "AsignacionDeGastos", Action = "EditingUpdate", Area = "Importacion" };
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowEditButton = true;
         //Configuracion cabecera
         settings.Settings.ShowTitlePanel = true;
         settings.SettingsText.Title = "Gastos asignados";
@@ -36,19 +40,24 @@
         {
             column.FieldName = "pc_Cuenta";
             column.Caption = "Cuenta contable";
-            column.Width = Unit.Percentage(90);
+            column.Width = Unit.Percentage(20);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "dc_Observacion";
             column.Caption = "Observación";
-            column.Width = Unit.Percentage(90);
+            column.Width = Unit.Percentage(30);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(10);
             column.FieldName = "dc_Valor";
-            column.Caption = "Costo";
+            column.Caption = "Valor";
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
         });
 
         settings.Columns.Add(column =>
@@ -69,18 +78,20 @@
         settings.Columns.Add(column =>
         {
             column.Caption = "*";
-            column.FieldName = "Secuencia";
-            column.Width = Unit.Percentage(10);
+            column.FieldName = "secuencia";
+            column.Width = Unit.Percentage(15);
             column.UnboundType = DevExpress.Data.UnboundColumnType.String;
             column.SetDataItemTemplateContent(c =>
             {
                 Html.DevExpress().Button(settingsBtn =>
                 {
-                    settingsBtn.Name = "btn" + c.KeyValue;
+                    settingsBtn.Name = "btn_elimi" + c.KeyValue;
                     settingsBtn.Text = "Eliminar";
                     settingsBtn.ClientSideEvents.Click = "function(s, e) {EditingUpdate('" + c.KeyValue + "');}";
                 }).Render();
             });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
         });
         settings.PreRender = (sender, e) =>
         {
