@@ -8,6 +8,7 @@ namespace Core.Erp.Info.Caja
 {
     public class cp_conciliacion_Caja_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdConciliacion_Caja { get; set; }
         [Required(ErrorMessage = "El campo periodo es obligatorio")]

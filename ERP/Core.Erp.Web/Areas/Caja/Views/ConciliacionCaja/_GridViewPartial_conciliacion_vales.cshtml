@@ -84,8 +84,8 @@
                 p.DisplayFormatString = "dd/MM/yyyy";
                 p.EditFormatString = "dd/MM/yyyy";
             });
-        });        
-        
+        });
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "valor";
@@ -112,6 +112,8 @@
             });
         });
         settings.ClientSideEvents.EndCallback = "Calcular";
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+        settings.ClientSideEvents.Init = "function(s, e) {GridView_conciliacion_vales.PerformCallback();}";
     });
 }
 @grid.Bind(Model.lst_det_vale).GetHtml()

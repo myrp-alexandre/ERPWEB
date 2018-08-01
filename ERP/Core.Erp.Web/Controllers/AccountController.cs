@@ -26,7 +26,8 @@ namespace Core.Erp.Web.Controllers
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();       
         [AllowAnonymous]
         public ActionResult Login()
-        {            
+        {
+            Session.Contents.RemoveAll();
             LoginModel model = new LoginModel();
             return View(model);
         }
@@ -90,7 +91,8 @@ namespace Core.Erp.Web.Controllers
             SessionFixed.IdEmpresa = model.IdEmpresa.ToString();
             SessionFixed.IdSucursal = model.IdSucursal.ToString();
             SessionFixed.em_direccion = info_empresa.em_direccion.ToString();
-
+            SessionFixed.IdTransaccionSession = model.IdEmpresa.ToString() + "000000000";
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             return RedirectToAction("Index","Home");
         }
 
