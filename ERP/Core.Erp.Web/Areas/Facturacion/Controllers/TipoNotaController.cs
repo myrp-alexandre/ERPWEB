@@ -187,9 +187,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public void AddRow(fa_TipoNota_x_Empresa_x_Sucursal_Info info_det)
         {
             List<fa_TipoNota_x_Empresa_x_Sucursal_Info> list = get_list();
-            info_det.IdSucursal = list.Count == 0 ? 1 : list.Max(q => q.IdTipoNota) + 1;
+            info_det.secuencia = list.Count == 0 ? 1 : list.Max(q => q.secuencia) + 1;
             info_det.IdEmpresa = info_det.IdEmpresa;
             info_det.IdSucursal = info_det.IdSucursal;
+            info_det.IdTipoNota = info_det.IdTipoNota;
             info_det.IdCtaCble = info_det.IdCtaCble;
 
             list.Add(info_det);
@@ -204,10 +205,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
         }
 
-        public void DeleteRow(int IdTipoNota)
+        public void DeleteRow(int secuencia)
         {
             List<fa_TipoNota_x_Empresa_x_Sucursal_Info> list = get_list();
-            list.Remove(list.Where(m => m.IdTipoNota == IdTipoNota).First());
+            list.Remove(list.Where(m => m.secuencia == secuencia).First());
         }
     }
     #endregion

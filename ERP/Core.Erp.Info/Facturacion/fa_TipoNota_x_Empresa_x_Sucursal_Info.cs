@@ -12,5 +12,6 @@ namespace Core.Erp.Info.Facturacion
         public int IdSucursal { get; set; }
         public int IdTipoNota { get; set; }
         public string IdCtaCble { get; set; }
+        public int secuencia { get; set; }
     }
 }

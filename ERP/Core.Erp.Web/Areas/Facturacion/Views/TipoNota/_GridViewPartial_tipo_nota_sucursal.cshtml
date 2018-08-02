@@ -5,7 +5,7 @@
     {
         settings.Name = "GridView_tipo_nota_sucursal";
         settings.CallbackRouteValues = new { Controller = "TipoNota", Action = "GridViewPartial_tipo_nota_sucursal", IdTipoNota = Model == null ? "" : Model.IdTipoNota };
-        settings.KeyFieldName = "IdTipoNota";
+        settings.KeyFieldName = "secuencia";
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "TipoNota", Action = "Editing_AddNew", Area = "Facturacion" };

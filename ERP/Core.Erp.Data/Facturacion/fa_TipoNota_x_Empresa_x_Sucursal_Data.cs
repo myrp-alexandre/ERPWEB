@@ -27,6 +27,7 @@ namespace Core.Erp.Data.Facturacion
                                  IdCtaCble = q.IdCtaCble
                              }).ToList();
                 }
+                Lista.ForEach(v => v.secuencia = v.secuencia + 1);
                 return Lista;
             }
             catch (Exception)
