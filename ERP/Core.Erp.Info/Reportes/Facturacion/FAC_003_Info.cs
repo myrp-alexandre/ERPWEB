@@ -56,5 +56,6 @@ namespace Core.Erp.Info.Reportes.Facturacion
         public Nullable<System.DateTime> lote_fecha_vcto { get; set; }
         public string lote_num_lote { get; set; }
         public string pe_razonSocial { get; set; }
+        public int orden { get; set; }
     }
 }

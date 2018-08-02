@@ -134,8 +134,8 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                      lote_fecha_vcto = q.lote_fecha_vcto,
                                      lote_num_lote = q.lote_num_lote,
                                      subtotal_0 = q.subtotal_0,
-                                     subtotal_iva = q.subtotal_iva
-
+                                     subtotal_iva = q.subtotal_iva,
+                                     orden = q.orden
 
 
                                  }).ToList();

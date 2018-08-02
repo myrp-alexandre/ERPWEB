@@ -71,6 +71,10 @@ namespace Core.Erp.Data.Inventario
                         tp_ManejaInven = Entity.tp_ManejaInven,
                         tp_es_lote = Entity.tp_es_lote == null ? false : Convert.ToBoolean(Entity.tp_es_lote),
                         Estado = Entity.Estado,
+                        Aparece_modu_Activo_F = Entity.Aparece_modu_Activo_F,
+                        Aparece_modu_Compras = Entity.Aparece_modu_Compras,
+                        Aparece_modu_Inventario = Entity.Aparece_modu_Inventario,
+                        Aparece_modu_Ventas = Entity.Aparece_modu_Ventas
                     };
                 }
 
@@ -124,6 +128,10 @@ namespace Core.Erp.Data.Inventario
                         tp_ManejaLote = info.tp_ManejaLote,
                         tp_es_lote = info.tp_es_lote,
                         Estado = "A",
+                        Aparece_modu_Activo_F = info.Aparece_modu_Activo_F,
+                        Aparece_modu_Compras = info.Aparece_modu_Compras,
+                        Aparece_modu_Inventario = info.Aparece_modu_Inventario,
+                        Aparece_modu_Ventas = info.Aparece_modu_Ventas,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
                     };
@@ -153,6 +161,10 @@ namespace Core.Erp.Data.Inventario
                     Entity.tp_EsCombo = info.tp_EsCombo_bool == true ? "S" : "N";
                     Entity.tp_ManejaLote = info.tp_ManejaLote;
                     Entity.tp_es_lote = info.tp_es_lote;
+                    Entity.Aparece_modu_Activo_F = info.Aparece_modu_Activo_F;
+                    Entity.Aparece_modu_Compras = info.Aparece_modu_Compras;
+                    Entity.Aparece_modu_Inventario = info.Aparece_modu_Inventario;
+                    Entity.Aparece_modu_Ventas = info.Aparece_modu_Ventas;
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;

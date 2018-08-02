@@ -478,7 +478,7 @@
           <Property Name="tp_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="tp_EsCombo" Type="char" MaxLength="1" />
           <Property Name="tp_ManejaInven" Type="char" MaxLength="1" />
-          <Property Name="tp_ManejaLote" Type="bit" />
+          <Property Name="tp_ManejaLote" Type="bit" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_Transac" Type="datetime" />
@@ -489,7 +489,11 @@
           <Property Name="nom_pc" Type="varchar" MaxLength="50" />
           <Property Name="ip" Type="varchar" MaxLength="25" />
           <Property Name="MotivoAnulacion" Type="varchar" MaxLength="200" />
-          <Property Name="tp_es_lote" Type="bit" />
+          <Property Name="tp_es_lote" Type="bit" Nullable="false" />
+          <Property Name="Aparece_modu_Ventas" Type="bit" Nullable="false" />
+          <Property Name="Aparece_modu_Compras" Type="bit" Nullable="false" />
+          <Property Name="Aparece_modu_Inventario" Type="bit" Nullable="false" />
+          <Property Name="Aparece_modu_Activo_F" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="in_subgrupo">
           <Key>
@@ -599,8 +603,8 @@
           <Property Name="valor_equiv" Type="float" Nullable="false" />
           <Property Name="interpretacion" Type="varchar" MaxLength="500" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_devolucion_inven_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwin_devolucion_inven_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_devolucion_inven_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -637,8 +641,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_devolucion_in
           <Property Name="IdUnidadMedida_sinConversion" Type="varchar" MaxLength="25" />
           <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Ing_Egr_Inven_distribucion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwin_Ing_Egr_Inven_distribucion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_Ing_Egr_Inven_distribucion">
           <Key>
             <PropertyRef Name="IdRow" />
@@ -670,8 +674,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Ing_Egr_Inven
           <Property Name="vt_NumFactura" Type="varchar" MaxLength="20" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Ing_Egr_Inven_distribucion_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwin_Ing_Egr_Inven_distribucion_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_Ing_Egr_Inven_distribucion_det">
           <Key>
             <PropertyRef Name="IdRow" />
@@ -700,8 +704,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Ing_Egr_Inven
           <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
           <Property Name="lote_fecha_fab" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Ing_Egr_Inven_distribucion_x_distribuir' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwin_Ing_Egr_Inven_distribucion_x_distribuir' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_Ing_Egr_Inven_distribucion_x_distribuir">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -730,8 +734,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Ing_Egr_Inven
           <Property Name="IdCategoria" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="IdPresentacion" Type="varchar" MaxLength="25" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_producto_x_tb_bodega_stock_x_lote' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwin_producto_x_tb_bodega_stock_x_lote' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_producto_x_tb_bodega_stock_x_lote">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -754,8 +758,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_producto_x_tb
           <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
           <Property Name="stock" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencias' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencias' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_Transferencias">
           <Key>
             <PropertyRef Name="SucuOrigen" />
@@ -803,8 +807,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencia
           <Property Name="IdEstadoAproba_ing" Type="varchar" MaxLength="15" />
           <Property Name="IdEstadoAproba_egr" Type="varchar" MaxLength="15" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_Ing_Egr_Inven_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwin_Ing_Egr_Inven_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_Ing_Egr_Inven_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -856,8 +860,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_Ing_Egr_Inven
           <Property Name="lote_fecha_vcto" Type="datetime" />
           <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_Ing_Egr_Inven_det_x_devolver' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwin_Ing_Egr_Inven_det_x_devolver' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_Ing_Egr_Inven_det_x_devolver">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -890,8 +894,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_Ing_Egr_Inven
           <Property Name="NomUnidad" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_Ing_Egr_Inven_por_devolver' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwin_Ing_Egr_Inven_por_devolver' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_Ing_Egr_Inven_por_devolver">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -911,8 +915,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_Ing_Egr_Inven
           <Property Name="cm_fecha" Type="datetime" Nullable="false" />
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_hijo_combo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwin_producto_hijo_combo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_producto_hijo_combo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -933,8 +937,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_hijo
           <Property Name="lote_fecha_vcto" Type="datetime" />
           <Property Name="IdUnidadMedida" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padre_combo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padre_combo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_producto_padre_combo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2328,11 +2332,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
             <End Role="in_UnidadMedida" EntitySet="in_UnidadMedida" />
             <End Role="in_Producto_Composicion" EntitySet="in_Producto_Composicion" />
           </AssociationSet>
-          <EntitySet Name="in_ProductoTipo" EntityType="Model_inventario.in_ProductoTipo" />
-          <AssociationSet Name="FK_in_parametro_in_ProductoTipo" Association="Model_inventario.FK_in_parametro_in_ProductoTipo">
-            <End Role="in_ProductoTipo" EntitySet="in_ProductoTipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
           <EntitySet Name="in_producto_x_tb_bodega" EntityType="Model_inventario.in_producto_x_tb_bodega" />
           <EntitySet Name="in_Ing_Egr_Inven" EntityType="Model_inventario.in_Ing_Egr_Inven" />
           <AssociationSet Name="FK_in_Ing_Egr_Inven_in_Motivo_Inven" Association="Model_inventario.FK_in_Ing_Egr_Inven_in_Motivo_Inven">
@@ -2437,10 +2436,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
             <End Role="in_Producto" EntitySet="in_Producto" />
             <End Role="in_Producto1" EntitySet="in_Producto" />
           </AssociationSet>
-          <AssociationSet Name="FK_in_Producto_in_ProductoTipo" Association="Model_inventario.FK_in_Producto_in_ProductoTipo">
-            <End Role="in_ProductoTipo" EntitySet="in_ProductoTipo" />
-            <End Role="in_Producto" EntitySet="in_Producto" />
-          </AssociationSet>
           <AssociationSet Name="FK_in_Producto_in_subgrupo" Association="Model_inventario.FK_in_Producto_in_subgrupo">
             <End Role="in_subgrupo" EntitySet="in_subgrupo" />
             <End Role="in_Producto" EntitySet="in_Producto" />
@@ -2484,6 +2479,15 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
           <EntitySet Name="vwin_Ing_Egr_Inven_por_devolver" EntityType="Model_inventario.vwin_Ing_Egr_Inven_por_devolver" />
           <EntitySet Name="vwin_Ing_Egr_Inven_det_x_devolver" EntityType="Model_inventario.vwin_Ing_Egr_Inven_det_x_devolver" />
           <EntitySet Name="vwin_devolucion_inven_det" EntityType="Model_inventario.vwin_devolucion_inven_det" />
+          <EntitySet Name="in_ProductoTipo" EntityType="Model_inventario.in_ProductoTipo" />
+          <AssociationSet Name="FK_in_parametro_in_ProductoTipo" Association="Model_inventario.FK_in_parametro_in_ProductoTipo">
+            <End Role="in_ProductoTipo" EntitySet="in_ProductoTipo" />
+            <End Role="in_parametro" EntitySet="in_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_Producto_in_ProductoTipo" Association="Model_inventario.FK_in_Producto_in_ProductoTipo">
+            <End Role="in_ProductoTipo" EntitySet="in_ProductoTipo" />
+            <End Role="in_Producto" EntitySet="in_Producto" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="in_CatalogoTipo">
           <Key>
@@ -3161,45 +3165,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="in_ProductoTipo">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdProductoTipo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdProductoTipo" Type="Int32" Nullable="false" />
-          <Property Name="tp_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="tp_EsCombo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="tp_ManejaInven" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="tp_ManejaLote" Type="Boolean" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="tp_es_lote" Type="Boolean" />
-          <NavigationProperty Name="in_parametro" Relationship="Model_inventario.FK_in_parametro_in_ProductoTipo" FromRole="in_ProductoTipo" ToRole="in_parametro" />
-          <NavigationProperty Name="in_Producto" Relationship="Model_inventario.FK_in_Producto_in_ProductoTipo" FromRole="in_ProductoTipo" ToRole="in_Producto" />
-        </EntityType>
-        <Association Name="FK_in_parametro_in_ProductoTipo">
-          <End Type="Model_inventario.in_ProductoTipo" Role="in_ProductoTipo" Multiplicity="0..1" />
-          <End Type="Model_inventario.in_parametro" Role="in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_ProductoTipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdProductoTipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="P_IdProductoTipo_para_lote_0" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="in_producto_x_tb_bodega">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3862,12 +3827,12 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
           <NavigationProperty Name="in_Producto_Composicion1" Relationship="Model_inventario.FK_in_Producto_Composicion_in_Producto1" FromRole="in_Producto" ToRole="in_Producto_Composicion" />
           <NavigationProperty Name="in_Producto1" Relationship="Model_inventario.FK_in_Producto_in_Producto" FromRole="in_Producto" ToRole="in_Producto1" />
           <NavigationProperty Name="in_Producto2" Relationship="Model_inventario.FK_in_Producto_in_Producto" FromRole="in_Producto1" ToRole="in_Producto" />
-          <NavigationProperty Name="in_ProductoTipo" Relationship="Model_inventario.FK_in_Producto_in_ProductoTipo" FromRole="in_Producto" ToRole="in_ProductoTipo" />
           <NavigationProperty Name="in_subgrupo" Relationship="Model_inventario.FK_in_Producto_in_subgrupo" FromRole="in_Producto" ToRole="in_subgrupo" />
           <NavigationProperty Name="in_UnidadMedida" Relationship="Model_inventario.FK_in_Producto_in_UnidadMedida" FromRole="in_Producto" ToRole="in_UnidadMedida" />
           <NavigationProperty Name="in_UnidadMedida1" Relationship="Model_inventario.FK_in_Producto_in_UnidadMedida1" FromRole="in_Producto" ToRole="in_UnidadMedida" />
           <NavigationProperty Name="in_producto_x_tb_bodega" Relationship="Model_inventario.FK_in_producto_x_tb_bodega_in_Producto" FromRole="in_Producto" ToRole="in_producto_x_tb_bodega" />
           <NavigationProperty Name="in_transferencia_det" Relationship="Model_inventario.FK_in_transferencia_det_in_Producto" FromRole="in_Producto" ToRole="in_transferencia_det" />
+          <NavigationProperty Name="in_ProductoTipo" Relationship="Model_inventario.FK_in_Producto_in_ProductoTipo" FromRole="in_Producto" ToRole="in_ProductoTipo" />
         </EntityType>
         <Association Name="FK_in_Producto_in_categorias">
           <End Type="Model_inventario.in_categorias" Role="in_categorias" Multiplicity="1" />
@@ -3964,20 +3929,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
             <Dependent Role="in_Producto1">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdProducto_padre" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_Producto_in_ProductoTipo">
-          <End Type="Model_inventario.in_ProductoTipo" Role="in_ProductoTipo" Multiplicity="1" />
-          <End Type="Model_inventario.in_Producto" Role="in_Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_ProductoTipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdProductoTipo" />
-            </Principal>
-            <Dependent Role="in_Producto">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdProductoTipo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4332,6 +4283,63 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
           <Property Name="IdUnidadMedida_sinConversion" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
         </EntityType>
+        <EntityType Name="in_ProductoTipo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProductoTipo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdProductoTipo" Type="Int32" Nullable="false" />
+          <Property Name="tp_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tp_EsCombo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="tp_ManejaInven" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="tp_ManejaLote" Type="Boolean" Nullable="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="tp_es_lote" Type="Boolean" Nullable="false" />
+          <Property Name="Aparece_modu_Ventas" Type="Boolean" Nullable="false" />
+          <Property Name="Aparece_modu_Compras" Type="Boolean" Nullable="false" />
+          <Property Name="Aparece_modu_Inventario" Type="Boolean" Nullable="false" />
+          <Property Name="Aparece_modu_Activo_F" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="in_parametro" Relationship="Model_inventario.FK_in_parametro_in_ProductoTipo" FromRole="in_ProductoTipo" ToRole="in_parametro" />
+          <NavigationProperty Name="in_Producto" Relationship="Model_inventario.FK_in_Producto_in_ProductoTipo" FromRole="in_ProductoTipo" ToRole="in_Producto" />
+        </EntityType>
+        <Association Name="FK_in_parametro_in_ProductoTipo">
+          <End Type="Model_inventario.in_ProductoTipo" Role="in_ProductoTipo" Multiplicity="0..1" />
+          <End Type="Model_inventario.in_parametro" Role="in_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_ProductoTipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProductoTipo" />
+            </Principal>
+            <Dependent Role="in_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="P_IdProductoTipo_para_lote_0" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_Producto_in_ProductoTipo">
+          <End Type="Model_inventario.in_ProductoTipo" Role="in_ProductoTipo" Multiplicity="1" />
+          <End Type="Model_inventario.in_Producto" Role="in_Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_ProductoTipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProductoTipo" />
+            </Principal>
+            <Dependent Role="in_Producto">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProductoTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4615,29 +4623,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
                 <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
                 <ScalarProperty Name="IdProductoHijo" ColumnName="IdProductoHijo" />
                 <ScalarProperty Name="IdProductoPadre" ColumnName="IdProductoPadre" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="in_ProductoTipo">
-            <EntityTypeMapping TypeName="Model_inventario.in_ProductoTipo">
-              <MappingFragment StoreEntitySet="in_ProductoTipo">
-                <ScalarProperty Name="tp_es_lote" ColumnName="tp_es_lote" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="ip" ColumnName="ip" />
-                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="tp_ManejaLote" ColumnName="tp_ManejaLote" />
-                <ScalarProperty Name="tp_ManejaInven" ColumnName="tp_ManejaInven" />
-                <ScalarProperty Name="tp_EsCombo" ColumnName="tp_EsCombo" />
-                <ScalarProperty Name="tp_descripcion" ColumnName="tp_descripcion" />
-                <ScalarProperty Name="IdProductoTipo" ColumnName="IdProductoTipo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -5184,6 +5169,33 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padr
                 <ScalarProperty Name="inv_IdEmpresa" ColumnName="inv_IdEmpresa" />
                 <ScalarProperty Name="secuencia" ColumnName="secuencia" />
                 <ScalarProperty Name="IdDev_Inven" ColumnName="IdDev_Inven" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="in_ProductoTipo">
+            <EntityTypeMapping TypeName="Model_inventario.in_ProductoTipo">
+              <MappingFragment StoreEntitySet="in_ProductoTipo">
+                <ScalarProperty Name="Aparece_modu_Activo_F" ColumnName="Aparece_modu_Activo_F" />
+                <ScalarProperty Name="Aparece_modu_Inventario" ColumnName="Aparece_modu_Inventario" />
+                <ScalarProperty Name="Aparece_modu_Compras" ColumnName="Aparece_modu_Compras" />
+                <ScalarProperty Name="Aparece_modu_Ventas" ColumnName="Aparece_modu_Ventas" />
+                <ScalarProperty Name="tp_es_lote" ColumnName="tp_es_lote" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="tp_ManejaLote" ColumnName="tp_ManejaLote" />
+                <ScalarProperty Name="tp_ManejaInven" ColumnName="tp_ManejaInven" />
+                <ScalarProperty Name="tp_EsCombo" ColumnName="tp_EsCombo" />
+                <ScalarProperty Name="tp_descripcion" ColumnName="tp_descripcion" />
+                <ScalarProperty Name="IdProductoTipo" ColumnName="IdProductoTipo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

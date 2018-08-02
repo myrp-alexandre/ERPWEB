@@ -44,8 +44,6 @@
         <AssociationConnector Association="Model_inventario.FK_in_Motivo_Inven_in_Catalogo1" />
         <EntityTypeShape EntityType="Model_inventario.in_Producto_Composicion" Width="1.5" PointX="18.875" PointY="7.75" />
         <AssociationConnector Association="Model_inventario.FK_in_Producto_Composicion_in_UnidadMedida" />
-        <EntityTypeShape EntityType="Model_inventario.in_ProductoTipo" Width="1.5" PointX="10.375" PointY="14" />
-        <AssociationConnector Association="Model_inventario.FK_in_parametro_in_ProductoTipo" />
         <EntityTypeShape EntityType="Model_inventario.in_producto_x_tb_bodega" Width="1.5" PointX="15.875" PointY="13.75" />
         <EntityTypeShape EntityType="Model_inventario.in_Ing_Egr_Inven" Width="1.5" PointX="12.125" PointY="19.625" />
         <AssociationConnector Association="Model_inventario.FK_in_Ing_Egr_Inven_in_Motivo_Inven" />
@@ -79,7 +77,6 @@
         <AssociationConnector Association="Model_inventario.FK_in_Producto_Composicion_in_Producto" />
         <AssociationConnector Association="Model_inventario.FK_in_Producto_Composicion_in_Producto1" />
         <AssociationConnector Association="Model_inventario.FK_in_Producto_in_Producto" />
-        <AssociationConnector Association="Model_inventario.FK_in_Producto_in_ProductoTipo" />
         <AssociationConnector Association="Model_inventario.FK_in_Producto_in_subgrupo" />
         <AssociationConnector Association="Model_inventario.FK_in_Producto_in_UnidadMedida" />
         <AssociationConnector Association="Model_inventario.FK_in_Producto_in_UnidadMedida1" />
@@ -96,6 +93,9 @@
         <EntityTypeShape EntityType="Model_inventario.vwin_Ing_Egr_Inven_por_devolver" Width="1.5" PointX="7.375" PointY="23.75" />
         <EntityTypeShape EntityType="Model_inventario.vwin_Ing_Egr_Inven_det_x_devolver" Width="1.5" PointX="21.375" PointY="16.75" />
         <EntityTypeShape EntityType="Model_inventario.vwin_devolucion_inven_det" Width="1.5" PointX="9.375" PointY="23.75" />
+        <EntityTypeShape EntityType="Model_inventario.in_ProductoTipo" Width="1.5" PointX="23.375" PointY="17.125" />
+        <AssociationConnector Association="Model_inventario.FK_in_parametro_in_ProductoTipo" />
+        <AssociationConnector Association="Model_inventario.FK_in_Producto_in_ProductoTipo" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

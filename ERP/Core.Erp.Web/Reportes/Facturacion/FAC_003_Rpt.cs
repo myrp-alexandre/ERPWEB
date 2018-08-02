@@ -6,6 +6,7 @@ using DevExpress.XtraReports.UI;
 using Core.Erp.Bus.Reportes.Facturacion;
 using Core.Erp.Info.Reportes.Facturacion;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Core.Erp.Web.Reportes.Facturacion
 {
@@ -27,6 +28,14 @@ namespace Core.Erp.Web.Reportes.Facturacion
 
             FAC_003_Bus bus_rpt = new FAC_003_Bus();
             List<FAC_003_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, mostrar_cuotas);
+
+            if (lst_rpt.Where(q => q.orden > 0).Count() > 0)
+            {
+                float Height = tbl_factura.Rows[1].HeightF;
+                tbl_factura.Rows.Remove(tbl_factura.Rows[1]);
+                tbl_factura.HeightF -= Height;
+                Detail.HeightF = 16;
+            }
             this.DataSource = lst_rpt;
         }
     }
