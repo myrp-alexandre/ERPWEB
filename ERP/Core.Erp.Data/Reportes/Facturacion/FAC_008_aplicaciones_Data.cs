@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
 {
    public class FAC_008_aplicaciones_Data
     {
-        public List<FAC_008_aplicaciones_Info> get_list(int IdEmpresa_nt, int IdSucursal_nt, int IdBodega_nt, decimal IdNota_nt, int secuencia )
+        public List<FAC_008_aplicaciones_Info> get_list(int IdEmpresa_nt, int IdSucursal_nt, int IdBodega_nt, decimal IdNota_nt)
         {
             try
             {
@@ -21,7 +21,6 @@ namespace Core.Erp.Data.Reportes.Facturacion
                              && q.IdSucursal_nt == IdSucursal_nt
                              && q.IdBodega_nt == IdBodega_nt
                              && q.IdNota_nt == IdNota_nt
-                             && q.secuencia == secuencia
                              select new FAC_008_aplicaciones_Info
                              {
                                  IdEmpresa_nt = q.IdEmpresa_nt,

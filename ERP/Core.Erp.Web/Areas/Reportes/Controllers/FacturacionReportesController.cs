@@ -302,6 +302,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdBodega.Value = IdBodega;
             model.p_IdSucursal.Value = IdSucursal;
             model.p_IdCbteVta.Value = IdCbteVta;
+            model.usuario = SessionFixed.IdUsuario;
+            model.empresa = SessionFixed.NomEmpresa;
             model.RequestParameters = false;
             return View(model);
         }
@@ -312,6 +314,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdBodega.Value = IdBodega;
             model.p_IdSucursal.Value = IdSucursal;
             model.p_IdNota.Value = IdNota;
+            model.usuario = SessionFixed.IdUsuario;
+            model.empresa = SessionFixed.NomEmpresa;
             model.RequestParameters = false;
             return View(model);
         }
