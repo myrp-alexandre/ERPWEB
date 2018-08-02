@@ -34,8 +34,47 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         imp_ordencompra_ext_Info_diario_contable info_diarios = new imp_ordencompra_ext_Info_diario_contable();
         imp_orden_compra_ext_ct_cbteble_det_gastos_Bus bus_gastos = new imp_orden_compra_ext_ct_cbteble_det_gastos_Bus();
         imp_orden_compra_ext_ct_cbteble_det_gastos_Info_lst info_gastos_lst = new imp_orden_compra_ext_ct_cbteble_det_gastos_Info_lst();
-   
+        imp_parametro_Bus bus_param = new imp_parametro_Bus();
+        imp_parametro_Info param = new imp_parametro_Info();
+        #endregion
 
+
+        #region Metodos ComboBox bajo demanda
+        public ActionResult CmbProveedor_exterior()
+        {
+            cp_proveedor_Info model = new cp_proveedor_Info();
+            return PartialView("_CmbProveedor_exterior", model);
+        }
+        public List<cp_proveedor_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_proveedor.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public cp_proveedor_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_proveedor.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+
+
+        public ActionResult CmbCuenta_contable_liquidacion()
+        {
+            imp_ordencompra_ext_Info model = new imp_ordencompra_ext_Info();
+
+            return PartialView("_CmbCuenta_contable_liquidacion", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda_cta(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda_cta(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+
+
+      
+        #endregion
+
+        #region vistas
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -53,7 +92,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
-           
+
 
             List<imp_ordencompra_ext_Info> model = new List<imp_ordencompra_ext_Info>();
             model = bus_orden.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
@@ -62,15 +101,24 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         public ActionResult GridViewPartial_liquidacion_oc_det()
         {
             List<imp_ordencompra_ext_det_Info> model = new List<imp_ordencompra_ext_det_Info>();
-            model =info_detalle.get_list();
+            model = info_detalle.get_list();
             if (model == null)
                 model = new List<imp_ordencompra_ext_det_Info>();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_liquidacion_oc_det", model);
         }
-
+        public ActionResult GridViewPartial_liqidacion_dc()
+        {
+            List<ct_cbtecble_det_Info> model = new List<ct_cbtecble_det_Info>();
+            model = info_diarios.get_list();
+            if (model == null)
+                model = new List<ct_cbtecble_det_Info>();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_liqidacion_dc", model);
+        }
 
         #endregion
+
 
         #region acciones
         public ActionResult Nuevo( decimal IdOrdenCompra_ext=0)
@@ -122,9 +170,9 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         public JsonResult calcular_costo(decimal IdTransaccionSession=0, decimal IdOrdenCompra_ext = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-
+            param = bus_param.get_info(IdEmpresa);
            info_detalle.set_list( bus_orden.calcular_costos(IdEmpresa, IdOrdenCompra_ext));
-           
+           info_diarios.delete_detail_New_details(info_detalle.get_list(), info_gastos_lst.get_list(IdTransaccionSession), param);
             return Json("", JsonRequestBehavior.AllowGet);
         }
     
@@ -233,6 +281,15 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             {
               
                 set_list(new List<ct_cbtecble_det_Info>());
+                double costo_total = Convert.ToDouble(detalle.Sum(v => v.od_costo_total));
+                ct_cbtecble_det_Info info_total = new ct_cbtecble_det_Info();
+                info_total.IdEmpresa = param.IdEmpresa;
+                info_total.IdTipoCbte = param.IdTipoCbte_liquidacion;
+                info_total.IdCtaCble = param.IdCtaCble;
+                info_total.dc_Valor = costo_total * -1;
+                info_total.dc_Valor_debe = costo_total ;
+                info_total.dc_Observacion = "Ingreso a inventario por importación";
+                AddRow(info_total);
 
                 foreach (var item in detalle_costo)
                 {
@@ -241,7 +298,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                     info_g.IdTipoCbte = param.IdTipoCbte_liquidacion;
                     info_g.IdCtaCble = item.IdCtaCble;
                     info_g.dc_Valor = item.dc_Valor;
-                    info_g.dc_Valor_debe = item.dc_Valor;
+                    info_g.dc_Valor_haber = item.dc_Valor;
                     info_g.dc_Observacion = item.dc_Observacion;
                    AddRow(info_g);
 
@@ -252,17 +309,11 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 info_merca.IdTipoCbte = param.IdTipoCbte_liquidacion;
                 info_merca.IdCtaCble = param.IdCtaCble;
                 info_merca.dc_Valor = valor_compra;
-                info_merca.dc_Valor_debe = valor_compra;
+                info_merca.dc_Valor_haber = valor_compra;
                 info_merca.dc_Observacion ="Costo delamercancia antes de gastos por traslados";
+                AddRow(info_merca);
 
-                double costo_total = Convert.ToDouble(detalle.Sum(v => v.od_total_fob));
-                ct_cbtecble_det_Info info_total = new ct_cbtecble_det_Info();
-                info_total.IdEmpresa = param.IdEmpresa;
-                info_total.IdTipoCbte = param.IdTipoCbte_liquidacion;
-                info_total.IdCtaCble = param.IdCtaCble;
-                info_total.dc_Valor = valor_compra;
-                info_total.dc_Valor_debe = valor_compra;
-                info_total.dc_Observacion = "Ingreso a inventario por importación";
+              
 
             }
             catch (Exception)

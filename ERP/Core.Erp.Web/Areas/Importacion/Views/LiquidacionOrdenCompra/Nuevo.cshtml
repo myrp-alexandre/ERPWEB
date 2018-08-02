@@ -123,6 +123,8 @@
                 @Html.Action("GridViewPartial_gastos_asignados", new {Area="Importacion",Controller="AsignacionDeGastos", IdOrdenCompra_ext =Model.IdOrdenCompra_ext})
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_diario_contable">
+                @Html.Action("GridViewPartial_liqidacion_dc")
+
 
             </div>
         </div>
@@ -187,7 +189,7 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 GridViewPartial_liquidacion_oc_det.PerformCallback();
-
+                GridViewPartial_liqidacion_dc.PerformCallback();
             },
             error: function (error) {
             }

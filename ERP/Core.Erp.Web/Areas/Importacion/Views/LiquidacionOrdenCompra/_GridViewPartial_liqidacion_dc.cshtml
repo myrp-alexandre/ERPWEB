@@ -1,9 +1,8 @@
 @using System.Web.UI.WebControls;
-@model  Core.Erp.Info.Contabilidad.ct_cbtecble_Info
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "_GridViewPartial_liqidacion_dc";
-        settings.CallbackRouteValues = new { Controller = "LiquidacionOrdenCompra", Action = "_GridViewPartial_liqidacion_dc", Area = "Importacion" };
+        settings.Name = "GridViewPartial_liqidacion_dc";
+        settings.CallbackRouteValues = new { Controller = "LiquidacionOrdenCompra", Action = "GridViewPartial_liqidacion_dc", Area = "Importacion" };
         settings.KeyFieldName = "secuencia";
         settings.Width = Unit.Percentage(100);
 
@@ -40,16 +39,22 @@
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdCtaCble";
-            column.Caption = "Cuenta contable";
+            column.FieldName = "pc_Cuenta";
+            column.Caption = "cuenta";
             column.Width = Unit.Percentage(60);
-            column.EditorProperties().ComboBox(p =>
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdCtaCble";
+            column.Caption = "Cuenta";
+            column.Width = Unit.Percentage(30);
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
             {
-                p.Columns.Add("IdCtaCble", "Código").Width = Unit.Percentage(30);
-                p.Columns.Add("pc_Cuenta", "Cuenta").Width = Unit.Percentage(70);
-                p.ValueField = "IdCtaCble";
-                p.ValueType = typeof(string);
-                p.DataSource = ViewBag.lst_cuentas;
+                Html.RenderPartial("_CmbCuenta_contable_liquidacion", DataBinder.Eval(c.DataItem, "IdCtaCble"));
             });
         });
         settings.Columns.Add(column =>
@@ -89,4 +94,4 @@
     });
 
 }
-@grid.Bind(Model.lst_ct_cbtecble_det).GetHtml()
+@grid.Bind(Model).GetHtml()
