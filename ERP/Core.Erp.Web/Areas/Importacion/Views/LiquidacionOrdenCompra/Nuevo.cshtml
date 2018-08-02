@@ -1,10 +1,11 @@
 ﻿@model Core.Erp.Info.Importacion.imp_ordencompra_ext_Info
 @{
-    ViewBag.Title = "Asignacion de gastos";
-    //if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
-    //{
-    //    Response.Redirect("~/Account/Login");
-    //}
+    ViewBag.Title = "Nueva orden compra al exterior";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+
     Layout = "~/Views/Shared/_Layout.cshtml";
     if (ViewBag.mensaje != null)
     {
@@ -15,28 +16,36 @@
         </div>
     }
 }
-
-@using (Html.BeginForm("Nuevo", "AsignacionDeGastos", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "LiquidacionOrdenCompra", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdTransaccionSession, new {@id= "IdTransaccionSession" })
-    @Html.HiddenFor(q => q.IdLiquidacion)
+    @Html.HiddenFor(q => q.IdOrdenCompra_ext)
     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdTransaccionSession)
+
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="form-group">
-                    <label for="IdProveedor">Proveedor*</label>
-                    @Html.TextBoxFor(q => q.pe_nombreCompleto, new { @class = "form-control", @disabled = "disabled" })
+                    <label for="CodMoviInven">Código</label>
+                    @Html.TextBoxFor(q => q.oe_codigo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.oe_codigo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="rub_grupo">Tipo de embarque*</label>
+                    @Html.DropDownListFor(q => q.IdCatalogo_via, new SelectList(ViewBag.lst_catalogos, "IdCatalogo", "ca_descripcion"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdCatalogo_via, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-offset-10 col-med-2">
                 <div class="form-group">
-                    <label for="">Fecha recepcion</label>
+                    <label for="">Fecha O.C</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.oe_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "or_fecha" })
+                        @Html.TextBoxFor(q => q.oe_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_oc" })
                         @Html.ValidationMessageFor(q => q.oe_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -46,62 +55,105 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="form-group">
-                    <label for="or_observacion">Observación recepcion de mercaderia</label>
-                    @Html.TextAreaFor(q => q.oe_observacion, new { @class = "form-control" })
+                    <label for="IdProveedor">Proveedor*</label>
+                    @Html.Partial("_CmbProveedor_exterior", Model)
+                    @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-10 col-med-2">
+                <div class="form-group">
+                    <label for="">Fecha embarque</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.oe_fecha_embarque, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_embarque" })
+                        @Html.ValidationMessageFor(q => q.oe_fecha_embarque, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="IdCtaCble_importacion">Cuenta contable*</label>
+                    @Html.Partial("_CmbCuenta_contable", Model)
+                    @Html.ValidationMessageFor(q => q.IdCtaCble_importacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-10 col-med-2">
+                <div class="form-group">
+                    <label for="">Fecha llegada</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.oe_fecha_llegada, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_llegada" })
+                        @Html.ValidationMessageFor(q => q.oe_fecha_llegada, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="IdCtaCble_importacion">Observación*</label>
+                    @Html.TextAreaFor(q => q.oe_observacion, new { @class = "form-control", @rows = 2 })
                     @Html.ValidationMessageFor(q => q.oe_observacion, "", new { @class = "text-danger" })
                 </div>
             </div>
-
+            <div class="col-md-offset-10 col-med-2">
+                <div class="form-group">
+                    <label for="">Fecha desanualización</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.oe_fecha_desaduanizacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_desanualizacion" })
+                        @Html.ValidationMessageFor(q => q.oe_fecha_llegada, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    @Html.DevExpress().PageControl(
-    settings =>
-    {
-        settings.Name = "Detalle";
-        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-        settings.ControlStyle.CssClass = "dxtcFixed";
 
-        settings.TabPages.Add("Detalle de gastos").SetContent(() =>
-        {
-            @Html.DevExpress().Splitter(settings_ =>
-            {
-                settings_.Name = "Splitter";
-                settings_.Height = 500;
-                settings_.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                settings_.AllowResize = true;
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_detalle" aria-controls="informacion_items" role="tab" data-toggle="tab">Detalle de items</a>
+            </li>
+            <li>
+                <a href="#tab_gastos" aria-controls="otros" role="tab" data-toggle="tab">Detalle de gastos</a>
+            </li>
+            <li>
+                <a href="#tab_diario_contable" aria-controls="otros" role="tab" data-toggle="tab">Diario contable</a>
+            </li>
 
-                settings_.Panes.Add(pane =>
-                {
-                    pane.SetContent(() =>
-                    {
-                        @Html.RenderAction("GridViewPartial_gastos_por_asignar", new { Model.IdCtaCble_importacion });
+        </ul>
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_detalle">
+                @Html.Action("GridViewPartial_orden_compra_ext_det")
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_gastos">
+                @Html.Action("GridViewPartial_orden_compra_ext_det", new { IdOrdenCompra_ext =Model.IdOrdenCompra_ext})
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_gastos">
 
-                    });
-                    pane.AutoHeight = true;
-                });
-                settings_.Panes.Add(pane =>
-                {
-                    pane.SetContent(() =>
-                    {
-                        Html.RenderAction("GridViewPartial_gastos_asignados");
-                    });
-                });
-            }).GetHtml();
-
-        });
-
-        settings.TabPages.Add("Detalle de orden de compra").SetContent(() =>
-        {
-            Html.RenderAction("GridViewPartial_asignacion_gastos_det", new { Model.IdCtaCble_importacion });
-        });
-
-    }).GetHtml()
+            </div>
+        </div>
+    </div>
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index", "LiquidacionImportacion", new { Area ="Importacion" }, null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index", "LiquidacionOrdenCompra", new { Area ="Importacion" }, null)">Cancelar</a>
     </div>
 
     @section Scripts {
@@ -111,40 +163,25 @@
 
 <script>
 
-
     $(function () {
 
 
-        $('#or_fecha').datepicker({
+        $('#fecha_oc').datepicker({
+            autoclose: true
+        });
+        $('#fecha_llegada').datepicker({
+            autoclose: true
+        });
+
+        $('#fecha_embarque').datepicker({
+            autoclose: true
+        });
+        $('#fecha_desanualizacion').datepicker({
             autoclose: true
         });
 
 
     });
-    function EditingNew(ID) {
-        var datos = {
-            secuencia: ID,
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-            
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("EditingNew", "AsignacionDeGastos",new { Area = "Importacion"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                GridViewPartial_gastos_asignados.PerformCallback();
-                GridViewPartial_gastos_por_asignar.PerformCallback("");
-
-            },
-            error: function (error) {
-            }
-        });
-    }
 
 
 </script>
