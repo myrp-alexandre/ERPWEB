@@ -13,23 +13,24 @@ using Core.Erp.Info.Reportes.Inventario;
 using Core.Erp.Info.Inventario;
 using DevExpress.Web;
 using Core.Erp.Web.Helps;
+using Core.Erp.Web.Areas.Inventario.Controllers;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
     public class InventarioReportesController : Controller
     {
         in_Producto_Bus bus_producto = new in_Producto_Bus();
-        decimal_List List_decimal = new decimal_List();
+        in_Producto_List List_decimal = new in_Producto_List();
 
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbProducto_Inventario()
         {
-            INV_008_Info model = new INV_008_Info();
+            var model = new in_Producto_Info();
             return PartialView("_CmbProducto_Inventario", model);
         }
         public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa),cl_enumeradores.eTipoBusquedaProducto.TODOS,cl_enumeradores.eModulo.INV,0);
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa),cl_enumeradores.eTipoBusquedaProducto.SOLOPADRES,cl_enumeradores.eModulo.INV,0);
         }
         public in_Producto_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
         {
@@ -442,15 +443,15 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdBodega = IdBodega,
                 mostrar_saldos_en_0 = mostrar_saldos_en_0
             };
-
+            List_decimal.set_list(new List<in_Producto_Info>());
             cargar_combos(model);
             INV_008_Rpt report = new INV_008_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdBodega.Value = model.IdBodega;
             report.p_mostrar_saldos_en_0.Value = model.mostrar_saldos_en_0;
-            report.usuario = Session["IdUsuario"].ToString();
-            report.empresa = Session["nom_empresa"].ToString();
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
                 report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
@@ -460,7 +461,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         public ActionResult INV_008(cl_filtros_Info model)
         {
-            model.lst_decimal = List_decimal.get_list();
             INV_008_Rpt report = new INV_008_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             report.p_IdSucursal.Value = model.IdSucursal;
@@ -468,6 +468,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_mostrar_saldos_en_0.Value = model.mostrar_saldos_en_0;
             report.usuario = Session["IdUsuario"].ToString();
             report.empresa = Session["nom_empresa"].ToString();
+            report.lst_producto = List_decimal.get_list();
             cargar_combos(model);
             report.RequestParameters = false;
             ViewBag.Report = report;
@@ -483,35 +484,15 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] INV_008_Info info_det)
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] in_Producto_Info info_det)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (info_det != null)
                 if (info_det.IdProducto != 0)
                 {
-                    in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
-                    if (info_producto != null)
-                        info_det.pr_descripcion = info_producto.pr_descripcion;
+                    info_det = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
                 }
-
             List_decimal.AddRow(info_det);
-            var model = List_decimal.get_list();
-            return PartialView("_GridViewPartial_producto_lst", model);
-        }
-
-        [HttpPost, ValidateInput(false)]
-        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] INV_008_Info info_det)
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            if (info_det != null)
-                if (info_det.IdProducto != 0)
-                {
-                    in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
-                    if (info_producto != null)
-                        info_det.pr_descripcion = info_producto.pr_descripcion;
-                }
-
-            List_decimal.UpdateRow(info_det);
             var model = List_decimal.get_list();
             return PartialView("_GridViewPartial_producto_lst", model);
         }
@@ -522,44 +503,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return PartialView("_GridViewPartial_producto_lst", model);
         }
 
-    }
-    public class decimal_List
-    {
-        public List<INV_008_Info> get_list()
-        {
-            if (HttpContext.Current.Session["INV_008_Info"] == null)
-            {
-                List<INV_008_Info> list = new List<INV_008_Info>();
-
-                HttpContext.Current.Session["INV_008_Info"] = list;
-            }
-            return (List<INV_008_Info>)HttpContext.Current.Session["INV_008_Info"];
-        }
-
-        public void set_list(List<INV_008_Info> list)
-        {
-            HttpContext.Current.Session["INV_008_Info"] = list;
-        }
-
-        public void AddRow(INV_008_Info info_det)
-        {
-            List<INV_008_Info> list = get_list();
-            info_det.IdProducto = list.Count == 0 ? 1 : list.Max(q => q.IdProducto) + 1;
-            info_det.IdProducto = info_det.IdProducto;
-            list.Add(info_det);
-        }
-
-        public void UpdateRow(INV_008_Info info_det)
-        {
-            INV_008_Info edited_info = get_list().Where(m => m.IdProducto == info_det.IdProducto).First();
-            edited_info.IdProducto = info_det.IdProducto;
-        }
-
-        public void DeleteRow(decimal IdProducto)
-        {
-            List<INV_008_Info> list = get_list();
-            list.Remove(list.Where(m => m.IdProducto == IdProducto).First());
-        }
     }
 
 }
