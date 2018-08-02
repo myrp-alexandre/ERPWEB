@@ -57,31 +57,7 @@
             }
 
         };
-        settings.Columns.Add(c =>
-        {
-            c.Caption = "#";
-            c.SetDataItemTemplateContent(tc =>
-            {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true )
-                {
 
-                    ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdLiquidacion = DataBinder.Eval(tc.DataItem, "IdLiquidacion") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdLiquidacion = DataBinder.Eval(tc.DataItem, "IdLiquidacion") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
-                }
-            });
-            c.SetHeaderTemplateContent(tc =>
-            {
-                ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "OrdencompraPorLiquidar", "LiquidacionImportacion").ToHtmlString()
-                );
-            });
-            c.Settings.AllowDragDrop = DefaultBoolean.False;
-            c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = Unit.Pixel(150);
-        });
         settings.Columns.Add("IdLiquidacion", "ID").Width = Unit.Percentage(5);
         settings.Columns.Add("pe_cedulaRuc", "Cédula/Ruc").Width = Unit.Percentage(10);
         settings.Columns.Add("pe_nombreCompleto", "Proveedor").Width = Unit.Percentage(30);

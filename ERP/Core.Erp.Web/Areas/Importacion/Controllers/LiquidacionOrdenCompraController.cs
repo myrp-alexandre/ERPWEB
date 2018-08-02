@@ -159,21 +159,24 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost]
         public ActionResult Nuevo(imp_ordencompra_ext_Info model)
         {
-            model.lst_detalle = Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
+            model.lst_detalle = info_detalle.get_list();
+            model.lst_comprobante = info_diarios.get_list();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            string mensaje = bus_orden.validar(model);
+            string mensaje = "";
+
+            mensaje = bus_orden.validar_liquidacion(model);
+
             if (mensaje != "")
             {
                 cargar_combos();
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
-            if (!bus_orden.guardarDB(model))
+            if (!bus_orden.guardarLiquidacionDB(model))
             {
                 cargar_combos();
                 return View(model);
             }
-            Session["imp_ordencompra_ext_det_Info"] = null;
             return RedirectToAction("Index");
         }
 

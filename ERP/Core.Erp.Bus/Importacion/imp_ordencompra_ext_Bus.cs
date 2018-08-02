@@ -172,14 +172,74 @@ namespace Core.Erp.Bus.Importacion
             }
         }
 
+        public string validar_liquidacion(imp_ordencompra_ext_Info model)
+        {
+            try
+            {
+                string mensaje = "";
+                if (model.lst_comprobante == null)
+
+                    mensaje = "No existe diario contable";
+                else
+                {
+                    if (model.lst_comprobante.Count() == 0)
+                    {
+                        mensaje = "No existe diario contable";
+
+                    }
+                    else
+                    {
+                        foreach (var item in model.lst_comprobante)
+                        {
+                            if (item.IdCtaCble == "" | item.IdCtaCble == null)
+                                mensaje = "Faltan cuentas contables";
+                        }
+                    }
+
+                    double sum = model.lst_comprobante.Sum(v => v.dc_Valor);
+                    if (sum>1| sum <0)
+                        mensaje = "El diario esta descuadrado";
+
+                }
+
+                if (model.lst_detalle == null)
+                    mensaje = "No existe detalle";
+                else
+                {
+                    if (model.lst_comprobante.Count() == 0)
+                    {
+                        mensaje = "No existe detalle";
+                    }
+                    else
+                    {
+                        foreach (var item in model.lst_detalle)
+                        {
+                            if (item.od_costo_total == 0 | item.od_costo_total == null)
+                                mensaje = "Faltan costo en uno de los registros";
+                        }
+                    }
+
+                  
+
+                }
+                return mensaje;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         #region funciones de liquidacion de oc
         public bool guardarLiquidacionDB(imp_ordencompra_ext_Info info)
         {
             try
             {
+                odata = new imp_ordencompra_ext_Data();
                 info.info_comrobante = new Info.Contabilidad.ct_cbtecble_Info();
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
-                info.info_comrobante.cb_Fecha = (DateTime)info.oe_fecha;
+                info.info_comrobante.cb_Fecha = (DateTime)info.oe_fecha_desaduanizacion;
                 info.info_comrobante.cb_Anio = info.info_comrobante.cb_Fecha.Year;
                 info.info_comrobante.cb_mes = info.info_comrobante.cb_Fecha.Month;
                 info.info_comrobante.cb_Estado = "A";
@@ -189,6 +249,8 @@ namespace Core.Erp.Bus.Importacion
                 info.info_comrobante.lst_ct_cbtecble_det = info.lst_comprobante;
 
                 var info_inventario = get_ingreso(info);
+                info_inventario.cm_fecha =Convert.ToDateTime( info.oe_fecha_desaduanizacion);
+                info.info_comrobante.IdTipoCbte = param.IdTipoCbte_liquidacion;
                 bus_ingreso.guardarDB(info_inventario,"+");
                 bus_contabilidad.guardarDB(info.info_comrobante);
 
@@ -268,8 +330,8 @@ namespace Core.Erp.Bus.Importacion
                     info_det.IdProducto = item.IdProducto;
                     info_det.dm_cantidad = item.od_cantidad_recepcion;
                     info_det.dm_observacion = "Ingreso por orden de compra del exterior";
-                    info_det.mv_costo = item.od_costo_total;
-                    info_det.mv_costo_sinConversion = item.od_costo_final;
+                    info_det.mv_costo = item.od_costo_total / item.od_cantidad_recepcion;
+                    info_det.mv_costo_sinConversion = item.od_costo_total/item.od_cantidad_recepcion;
                     info_det.dm_cantidad_sinConversion = item.od_cantidad_recepcion;
                     info_det.dm_cantidad = item.od_cantidad_recepcion;
                     info_det.IdUnidadMedida = item.IdUnidadMedida;
