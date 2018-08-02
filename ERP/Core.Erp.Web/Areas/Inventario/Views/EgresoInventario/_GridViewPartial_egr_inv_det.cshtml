@@ -57,6 +57,9 @@
                 Html.RenderPartial("_CmbProducto_EgresoInventario", DataBinder.Eval(c.DataItem, "IdProducto"));
             });
         });
+
+
+
          settings.Columns.Add(column =>
          {
              column.FieldName = "IdUnidadMedida_sinConversion";

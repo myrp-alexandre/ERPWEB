@@ -5,7 +5,7 @@
         settings.CallbackRouteValues = new { Controller = "Cliente", Action = "GridViewPartial_cliente_contacto" };
         settings.KeyFieldName = "IdContacto";
         settings.Width = Unit.Percentage(100);
-        
+
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Cliente", Action = "EditingAddNew", Area = "Facturacion" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Cliente", Action = "EditingUpdate", Area = "Facturacion" };
@@ -85,15 +85,28 @@
                 p.ClientSideEvents.SelectedIndexChanged = "OnSelectedCiudadChanged";
             });
         });
+
+
+
+
         settings.Columns.Add(column =>
         {
-            column.Name = "IdParroquia";
             column.FieldName = "nom_parroquia";
             column.Caption = "Parroquia*";
             column.Width = Unit.Percentage(20);
+            column.Visible = true;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdParroquia";
+            column.Caption = "Parroquia*";
+            column.Visible = false;
+            column.Width = Unit.Percentage(20);
+            column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().ComboBox(p =>
             {
-                p.CallbackRouteValues = new { Controller = "Cliente", Action = "get_parroquias"};
+                p.CallbackRouteValues = new { Controller = "Cliente", Action = "get_parroquias" };
                 p.TextField = "nom_parroquia";
                 p.ValueField = "IdParroquia";
                 p.ValueType = typeof(string);
@@ -101,6 +114,7 @@
                 p.ClientSideEvents.BeginCallback = "ParroquiaComboBox_BeginCallBack";
             });
         });
+
         settings.CellEditorInitialize = (sender, e) =>
         {
             ASPxEdit editor = (ASPxEdit)e.Editor;

@@ -232,6 +232,7 @@
             this.xrTableCell14.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell14.Name = "xrTableCell14";
             this.xrTableCell14.StylePriority.UseFont = false;
+            this.xrTableCell14.TextFormatString = "{0:dd-MM-yy}";
             this.xrTableCell14.Weight = 0.38724189969273015D;
             // 
             // xrTableCell15
