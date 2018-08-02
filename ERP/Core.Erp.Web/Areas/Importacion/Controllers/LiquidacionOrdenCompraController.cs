@@ -36,6 +36,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         imp_orden_compra_ext_ct_cbteble_det_gastos_Info_lst info_gastos_lst = new imp_orden_compra_ext_ct_cbteble_det_gastos_Info_lst();
         imp_parametro_Bus bus_param = new imp_parametro_Bus();
         imp_parametro_Info param = new imp_parametro_Info();
+        imp_gasto_Bus bus_gastos_tipo = new imp_gasto_Bus();
         #endregion
 
 
@@ -199,6 +200,9 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
+
+            var lst_gastos = bus_gastos_tipo.get_list();
+            ViewBag.lst_gastos = lst_gastos;
         }
 
         #region Diario contable

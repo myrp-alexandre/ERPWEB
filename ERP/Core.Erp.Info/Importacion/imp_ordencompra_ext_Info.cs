@@ -41,6 +41,14 @@ namespace Core.Erp.Info.Importacion
         public Nullable<System.DateTime> oe_fecha_desaduanizacion { get; set; }
         public Nullable<int> IdMoneda_origen { get; set; }
         public Nullable<int> IdMoneda_destino { get; set; }
+        public Nullable<int> IdEmpresa_inv { get; set; }
+        public Nullable<int> IdSucursal_inv { get; set; }
+        public Nullable<int> IdMovi_inven_tipo_inv { get; set; }
+        public Nullable<decimal> IdNumMovi_inv { get; set; }
+        public Nullable<int> IdEmpresa_ct { get; set; }
+        public Nullable<int> IdTipoCbte_ct { get; set; }
+        public Nullable<decimal> IdCbteCble_ct { get; set; }
+
         public List<imp_ordencompra_ext_det_Info> lst_detalle { get; set; }
         public List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> lst_gastos_asignados { get; set; }
         public List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> lst_gastos_por_asignar { get; set; }

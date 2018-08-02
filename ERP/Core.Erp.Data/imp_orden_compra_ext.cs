@@ -17,10 +17,10 @@ namespace Core.Erp.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public imp_orden_compra_ext()
         {
+            this.imp_liquidacion_det_x_imp_orden_compra_ext = new HashSet<imp_liquidacion_det_x_imp_orden_compra_ext>();
             this.imp_orden_compra_ext_ct_cbteble_det_gastos = new HashSet<imp_orden_compra_ext_ct_cbteble_det_gastos>();
             this.imp_orden_compra_ext_det = new HashSet<imp_orden_compra_ext_det>();
             this.imp_orden_compra_ext_recepcion = new HashSet<imp_orden_compra_ext_recepcion>();
-            this.imp_liquidacion_det_x_imp_orden_compra_ext = new HashSet<imp_liquidacion_det_x_imp_orden_compra_ext>();
         }
     
         public int IdEmpresa { get; set; }
@@ -52,17 +52,24 @@ namespace Core.Erp.Data
         public Nullable<int> IdMoneda_origen { get; set; }
         public Nullable<int> IdMoneda_destino { get; set; }
         public bool Estado_cierre { get; set; }
+        public Nullable<int> IdEmpresa_inv { get; set; }
+        public Nullable<int> IdSucursal_inv { get; set; }
+        public Nullable<int> IdMovi_inven_tipo_inv { get; set; }
+        public Nullable<decimal> IdNumMovi_inv { get; set; }
+        public Nullable<int> IdEmpresa_ct { get; set; }
+        public Nullable<int> IdTipoCbte_ct { get; set; }
+        public Nullable<decimal> IdCbteCble_ct { get; set; }
     
         public virtual imp_catalogo imp_catalogo { get; set; }
         public virtual imp_catalogo imp_catalogo1 { get; set; }
         public virtual imp_liquidacion imp_liquidacion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<imp_liquidacion_det_x_imp_orden_compra_ext> imp_liquidacion_det_x_imp_orden_compra_ext { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imp_orden_compra_ext_ct_cbteble_det_gastos> imp_orden_compra_ext_ct_cbteble_det_gastos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imp_orden_compra_ext_det> imp_orden_compra_ext_det { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imp_orden_compra_ext_recepcion> imp_orden_compra_ext_recepcion { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<imp_liquidacion_det_x_imp_orden_compra_ext> imp_liquidacion_det_x_imp_orden_compra_ext { get; set; }
     }
 }

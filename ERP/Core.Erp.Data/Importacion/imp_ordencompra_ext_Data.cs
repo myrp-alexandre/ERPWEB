@@ -406,6 +406,61 @@ namespace Core.Erp.Data.Importacion
             }
         }
 
-       
+        public bool guardarLiquidacionDB(imp_ordencompra_ext_Info info)
+        {
+            int secuancia = 1;
+            try
+            {
+                using (Entities_importacion Context = new Entities_importacion())
+                {
+                    imp_orden_compra_ext Entity = Context.imp_orden_compra_ext.FirstOrDefault(q => q.IdOrdenCompra_ext == info.IdOrdenCompra_ext&q.IdEmpresa==info.IdEmpresa);
+                    if (Entity == null) return false;
+                    Entity.Estado_cierre = true;
+                    Entity.IdEmpresa_ct = info.IdEmpresa_ct;
+                    Entity.IdTipoCbte_ct = info.IdTipoCbte_ct;
+                    Entity.IdCbteCble_ct = info.IdCbteCble_ct;
+
+                    Entity.IdEmpresa_inv = info.IdEmpresa_inv;
+                    Entity.IdSucursal_inv = info.IdSucursal_inv;
+                    Entity.IdMovi_inven_tipo_inv = info.IdMovi_inven_tipo_inv;
+                    Entity.IdNumMovi_inv = info.IdNumMovi_inv;
+
+                    var detalle = Context.imp_orden_compra_ext_det.Where(q => q.IdOrdenCompra_ext == info.IdOrdenCompra_ext& q.IdEmpresa==info.IdEmpresa);
+                    Context.imp_orden_compra_ext_det.RemoveRange(detalle);
+                    foreach (var item in info.lst_detalle)
+                    {
+                        Context.imp_orden_compra_ext_det.Add(new imp_orden_compra_ext_det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdOrdenCompra_ext = info.IdOrdenCompra_ext,
+                            Secuencia = secuancia,
+                            IdProducto = item.IdProducto,
+                            IdUnidadMedida = item.IdUnidadMedida,
+                            od_cantidad = item.od_cantidad,
+                            od_costo = item.od_costo,
+                            od_por_descuento = item.od_por_descuento,
+                            od_descuento = item.od_descuento,
+                            od_costo_final = item.od_costo_final,
+                            od_subtotal = item.od_subtotal,
+                            od_cantidad_recepcion = item.od_cantidad_recepcion,
+                            od_costo_convertido = item.od_costo_convertido,
+                            od_total_fob = Convert.ToDouble(item.od_total_fob),
+                            od_factor_costo = item.od_factor_costo,
+                            od_costo_bodega = item.od_costo_bodega,
+                            od_costo_total = item.od_costo_total
+                        });
+                        secuancia++;
+                    }
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }
