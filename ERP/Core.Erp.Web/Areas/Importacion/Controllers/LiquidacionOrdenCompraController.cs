@@ -34,56 +34,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         imp_ordencompra_ext_Info_diario_contable info_diarios = new imp_ordencompra_ext_Info_diario_contable();
         imp_orden_compra_ext_ct_cbteble_det_gastos_Bus bus_gastos = new imp_orden_compra_ext_ct_cbteble_det_gastos_Bus();
         imp_orden_compra_ext_ct_cbteble_det_gastos_Info_lst info_gastos_lst = new imp_orden_compra_ext_ct_cbteble_det_gastos_Info_lst();
-        #endregion
-
-        #region Metodos ComboBox bajo demanda
-        public ActionResult CmbProveedor_exterior()
-        {
-            cp_proveedor_Info model = new cp_proveedor_Info();
-            return PartialView("_CmbProveedor_exterior", model);
-        }
-        public List<cp_proveedor_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
-        {
-            return bus_proveedor.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
-        }
-        public cp_proveedor_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
-        {
-            return bus_proveedor.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
-        }
-
-
-        public ActionResult CmbCuenta_cta_contable()
-        {
-            imp_ordencompra_ext_Info model = new imp_ordencompra_ext_Info();
-
-            return PartialView("_CmbCuenta_contable", model);
-        }
-        public List<ct_plancta_Info> get_list_bajo_demanda_cta(ListEditItemsRequestedByFilterConditionEventArgs args)
-        {
-            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
-        }
-        public ct_plancta_Info get_info_bajo_demanda_cta(ListEditItemRequestedByValueEventArgs args)
-        {
-            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
-        }
-
-
-        public ActionResult CmbProducto_importacion()
-        {
-            imp_ordencompra_ext_Info model = new imp_ordencompra_ext_Info();
-            return PartialView("_CmbProducto_importacion", model);
-        }
-        public List<in_Producto_Info> get_list_bajo_demanda_productos(ListEditItemsRequestedByFilterConditionEventArgs args)
-        {
-            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.PORMODULO, cl_enumeradores.eModulo.INV, 0);
-        }
-        public in_Producto_Info get_info_bajo_demanda_productos(ListEditItemRequestedByValueEventArgs args)
-        {
-            return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
-        }
-        #endregion
-
-        #region vistas
+   
 
         public ActionResult Index()
         {
@@ -122,7 +73,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            imp_ordencompra_ext_Info model = bus_orden.get_info(IdEmpresa, IdOrdenCompra_ext);
+            imp_ordencompra_ext_Info model = bus_orden.get_liquidar_oc(IdEmpresa, IdOrdenCompra_ext);
             if (model != null)
                 model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             var lst_detalle = bus_detalle.get_list(IdEmpresa, IdOrdenCompra_ext);

@@ -55,6 +55,19 @@ namespace Core.Erp.Bus.Importacion
                 throw;
             }
         }
+        public imp_ordencompra_ext_Info get_liquidar_oc(int IdEmpresa, decimal IdOrdenCompra_ext)
+        {
+            try
+            {
+                info_oc = odata.get_info_recepcion_merca(IdEmpresa, IdOrdenCompra_ext);
+                return info_oc;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public imp_ordencompra_ext_Info get_asignar_gastos(int IdEmpresa, decimal IdOrdenCompra_ext)
         {
