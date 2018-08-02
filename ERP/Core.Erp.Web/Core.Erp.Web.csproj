@@ -8888,9 +8888,7 @@
     <Content Include="Areas\Facturacion\Views\NotaDeCreditoFacturacion\_GridViewPartial_CruceNC.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDeCreditoFacturacion\_GridViewPartial_CruceNC_x_cruzar.cshtml" />
     <Content Include="Areas\Importacion\Views\AsignacionDeGastos\Nuevo.cshtml" />
-    <Content Include="Areas\Importacion\Views\AsignacionDeGastos\Modificar.cshtml" />
     <Content Include="Areas\Importacion\Views\AsignacionDeGastos\Index.cshtml" />
-    <Content Include="Areas\Importacion\Views\AsignacionDeGastos\Anular.cshtml" />
     <Content Include="Areas\Importacion\Views\AsignacionDeGastos\_GridViewPartial_asignacion_gastos_det.cshtml" />
     <Content Include="Areas\Importacion\Views\AsignacionDeGastos\_GridViewPartial_asignacion_gastos.cshtml" />
     <Content Include="Areas\Importacion\Views\AsignacionDeGastos\_GridViewPartial_gastos_asignados.cshtml" />

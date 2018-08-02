@@ -10,6 +10,7 @@ namespace Core.Erp.Bus.Importacion
 {
   public  class imp_ordencompra_ext_Bus
     {
+        #region variables
         imp_ordencompra_ext_Data odata = new imp_ordencompra_ext_Data();
         imp_ordencompra_ext_det_Data odata_det = new imp_ordencompra_ext_det_Data();
         imp_ordencompra_ext_Info info_oc = new imp_ordencompra_ext_Info();
@@ -17,6 +18,7 @@ namespace Core.Erp.Bus.Importacion
         List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> lst_gastos_nos_asignados = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
         List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> lst_gastos_asignados = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
         imp_orden_compra_ext_ct_cbteble_det_gastos_Data data_gastos = new imp_orden_compra_ext_ct_cbteble_det_gastos_Data();
+        #endregion
         public List<imp_ordencompra_ext_Info> get_list(int IdEmpresa)
         {
             try
@@ -61,6 +63,8 @@ namespace Core.Erp.Bus.Importacion
                 info_oc = odata.get_info_recepcion_merca(IdEmpresa, IdOrdenCompra_ext);
                 info_oc.lst_gastos_por_asignar = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
                 info_oc.lst_gastos_asignados = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
+                info_oc.lst_detalle = new List<imp_ordencompra_ext_det_Info>();
+                info_oc.lst_detalle = odata_det.get_list(IdEmpresa, IdOrdenCompra_ext);
                 info_oc.lst_gastos_asignados = data_gastos.get_list_gastos_asignados(IdEmpresa, IdOrdenCompra_ext);
                 info_oc.lst_gastos_por_asignar = data_gastos.get_list_gastos_no_asignados(IdEmpresa,  info_oc.IdCtaCble_importacion);
                 return info_oc;
@@ -144,7 +148,6 @@ namespace Core.Erp.Bus.Importacion
                 throw;
             }
         }
-
 
 
     }

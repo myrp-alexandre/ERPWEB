@@ -276,31 +276,25 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra_ext_ct_cbteble_det_gastos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwimp_orden_compra_ext_ct_cbteble_det_gastos">
           <Key>
-            <PropertyRef Name="IdRow" />
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdOrdenCompra_ext" />
             <PropertyRef Name="IdEmpresa_ct" />
             <PropertyRef Name="IdTipoCbte" />
             <PropertyRef Name="IdCbteCble" />
             <PropertyRef Name="secuencia_ct" />
-            <PropertyRef Name="IdCtaCble" />
-            <PropertyRef Name="cb_Fecha" />
             <PropertyRef Name="dc_Valor" />
-            <PropertyRef Name="seleccionado" />
+            <PropertyRef Name="pc_Cuenta" />
           </Key>
-          <Property Name="IdRow" Type="bigint" Nullable="false" />
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdOrdenCompra_ext" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdEmpresa_ct" Type="int" Nullable="false" />
           <Property Name="IdTipoCbte" Type="int" Nullable="false" />
           <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="secuencia_ct" Type="int" Nullable="false" />
-          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="cb_Fecha" Type="datetime" Nullable="false" />
-          <Property Name="dc_Valor" Type="float" Nullable="false" />
-          <Property Name="cb_Observacion" Type="varchar(max)" />
           <Property Name="IdGasto_tipo" Type="int" />
-          <Property Name="seleccionado" Type="bit" Nullable="false" />
+          <Property Name="dc_Valor" Type="float" Nullable="false" />
+          <Property Name="pc_Cuenta" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="dc_Observacion" Type="varchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra_ext_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -616,19 +610,16 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwimp_gastos_no_as
           </EntitySet>
           <EntitySet Name="vwimp_orden_compra_ext_ct_cbteble_det_gastos" EntityType="Self.vwimp_orden_compra_ext_ct_cbteble_det_gastos" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [vwimp_orden_compra_ext_ct_cbteble_det_gastos].[IdRow] AS [IdRow], 
     [vwimp_orden_compra_ext_ct_cbteble_det_gastos].[IdEmpresa] AS [IdEmpresa], 
     [vwimp_orden_compra_ext_ct_cbteble_det_gastos].[IdOrdenCompra_ext] AS [IdOrdenCompra_ext], 
     [vwimp_orden_compra_ext_ct_cbteble_det_gastos].[IdEmpresa_ct] AS [IdEmpresa_ct], 
     [vwimp_orden_compra_ext_ct_cbteble_det_gastos].[IdTipoCbte] AS [IdTipoCbte], 
     [vwimp_orden_compra_ext_ct_cbteble_det_gastos].[IdCbteCble] AS [IdCbteCble], 
     [vwimp_orden_compra_ext_ct_cbteble_det_gastos].[secuencia_ct] AS [secuencia_ct], 
-    [vwimp_orden_compra_ext_ct_cbteble_det_gastos].[IdCtaCble] AS [IdCtaCble], 
-    [vwimp_orden_compra_ext_ct_cbteble_det_gastos].[cb_Fecha] AS [cb_Fecha], 
-    [vwimp_orden_compra_ext_ct_cbteble_det_gastos].[dc_Valor] AS [dc_Valor], 
-    [vwimp_orden_compra_ext_ct_cbteble_det_gastos].[cb_Observacion] AS [cb_Observacion], 
     [vwimp_orden_compra_ext_ct_cbteble_det_gastos].[IdGasto_tipo] AS [IdGasto_tipo], 
-    [vwimp_orden_compra_ext_ct_cbteble_det_gastos].[seleccionado] AS [seleccionado]
+    [vwimp_orden_compra_ext_ct_cbteble_det_gastos].[dc_Valor] AS [dc_Valor], 
+    [vwimp_orden_compra_ext_ct_cbteble_det_gastos].[pc_Cuenta] AS [pc_Cuenta], 
+    [vwimp_orden_compra_ext_ct_cbteble_det_gastos].[dc_Observacion] AS [dc_Observacion]
     FROM [dbo].[vwimp_orden_compra_ext_ct_cbteble_det_gastos] AS [vwimp_orden_compra_ext_ct_cbteble_det_gastos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwimp_orden_compra_ext_det" EntityType="Self.vwimp_orden_compra_ext_det" store:Type="Views" store:Schema="dbo">
@@ -749,7 +740,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwimp_gastos_no_as
           <EntitySet Name="imp_parametro" EntityType="Model_importacion.imp_parametro" />
           <EntitySet Name="vwimp_orden_compra_ext" EntityType="Model_importacion.vwimp_orden_compra_ext" />
           <EntitySet Name="vwimp_orden_compra_ext_con_saldo" EntityType="Model_importacion.vwimp_orden_compra_ext_con_saldo" />
-          <EntitySet Name="vwimp_orden_compra_ext_ct_cbteble_det_gastos" EntityType="Model_importacion.vwimp_orden_compra_ext_ct_cbteble_det_gastos" />
           <EntitySet Name="vwimp_orden_compra_ext_det" EntityType="Model_importacion.vwimp_orden_compra_ext_det" />
           <EntitySet Name="vwimp_orden_compra_ext_recepcion" EntityType="Model_importacion.vwimp_orden_compra_ext_recepcion" />
           <AssociationSet Name="FK_imp_catalogo_imp_catalogo_tipo" Association="Model_importacion.FK_imp_catalogo_imp_catalogo_tipo">
@@ -799,6 +789,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwimp_gastos_no_as
             <End Role="imp_orden_compra_ext" EntitySet="imp_orden_compra_ext" />
             <End Role="imp_liquidacion_det_x_imp_orden_compra_ext" EntitySet="imp_liquidacion_det_x_imp_orden_compra_ext" />
           </AssociationSet>
+          <EntitySet Name="vwimp_orden_compra_ext_ct_cbteble_det_gastos" EntityType="Model_importacion.vwimp_orden_compra_ext_ct_cbteble_det_gastos" />
         </EntityContainer>
         <EntityType Name="imp_catalogo">
           <Key>
@@ -1035,34 +1026,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwimp_gastos_no_as
           <Property Name="IdOrdenCompra_ext" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="cantidad_x_recibir" Type="Double" />
           <Property Name="cantidad_global" Type="Double" />
-        </EntityType>
-        <EntityType Name="vwimp_orden_compra_ext_ct_cbteble_det_gastos">
-          <Key>
-            <PropertyRef Name="IdRow" />
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdOrdenCompra_ext" />
-            <PropertyRef Name="IdEmpresa_ct" />
-            <PropertyRef Name="IdTipoCbte" />
-            <PropertyRef Name="IdCbteCble" />
-            <PropertyRef Name="secuencia_ct" />
-            <PropertyRef Name="IdCtaCble" />
-            <PropertyRef Name="cb_Fecha" />
-            <PropertyRef Name="dc_Valor" />
-            <PropertyRef Name="seleccionado" />
-          </Key>
-          <Property Name="IdRow" Type="Int64" Nullable="false" />
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdOrdenCompra_ext" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdEmpresa_ct" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="secuencia_ct" Type="Int32" Nullable="false" />
-          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="cb_Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="dc_Valor" Type="Double" Nullable="false" />
-          <Property Name="cb_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdGasto_tipo" Type="Int32" />
-          <Property Name="seleccionado" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="vwimp_orden_compra_ext_det">
           <Key>
@@ -1347,6 +1310,28 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwimp_gastos_no_as
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwimp_orden_compra_ext_ct_cbteble_det_gastos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenCompra_ext" />
+            <PropertyRef Name="IdEmpresa_ct" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="secuencia_ct" />
+            <PropertyRef Name="dc_Valor" />
+            <PropertyRef Name="pc_Cuenta" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa_ct" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="secuencia_ct" Type="Int32" Nullable="false" />
+          <Property Name="IdGasto_tipo" Type="Int32" />
+          <Property Name="dc_Valor" Type="Double" Nullable="false" />
+          <Property Name="pc_Cuenta" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="dc_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1557,25 +1542,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwimp_gastos_no_as
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwimp_orden_compra_ext_ct_cbteble_det_gastos">
-            <EntityTypeMapping TypeName="Model_importacion.vwimp_orden_compra_ext_ct_cbteble_det_gastos">
-              <MappingFragment StoreEntitySet="vwimp_orden_compra_ext_ct_cbteble_det_gastos">
-                <ScalarProperty Name="seleccionado" ColumnName="seleccionado" />
-                <ScalarProperty Name="IdGasto_tipo" ColumnName="IdGasto_tipo" />
-                <ScalarProperty Name="cb_Observacion" ColumnName="cb_Observacion" />
-                <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
-                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
-                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
-                <ScalarProperty Name="secuencia_ct" ColumnName="secuencia_ct" />
-                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
-                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
-                <ScalarProperty Name="IdEmpresa_ct" ColumnName="IdEmpresa_ct" />
-                <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdRow" ColumnName="IdRow" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwimp_orden_compra_ext_det">
             <EntityTypeMapping TypeName="Model_importacion.vwimp_orden_compra_ext_det">
               <MappingFragment StoreEntitySet="vwimp_orden_compra_ext_det">
@@ -1667,6 +1633,22 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwimp_gastos_no_as
                 <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
                 <ScalarProperty Name="IdEmpresa_oe" ColumnName="IdEmpresa_oe" />
                 <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwimp_orden_compra_ext_ct_cbteble_det_gastos">
+            <EntityTypeMapping TypeName="Model_importacion.vwimp_orden_compra_ext_ct_cbteble_det_gastos">
+              <MappingFragment StoreEntitySet="vwimp_orden_compra_ext_ct_cbteble_det_gastos">
+                <ScalarProperty Name="dc_Observacion" ColumnName="dc_Observacion" />
+                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
+                <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
+                <ScalarProperty Name="IdGasto_tipo" ColumnName="IdGasto_tipo" />
+                <ScalarProperty Name="secuencia_ct" ColumnName="secuencia_ct" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdEmpresa_ct" ColumnName="IdEmpresa_ct" />
+                <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

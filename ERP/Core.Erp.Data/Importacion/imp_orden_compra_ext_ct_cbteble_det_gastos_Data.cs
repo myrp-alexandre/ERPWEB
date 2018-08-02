@@ -46,10 +46,11 @@ namespace Core.Erp.Data.Importacion
         {
             try
             {
+                int secuancia = 0;
                 List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> Lista;
                 using (Entities_importacion Context = new Entities_importacion())
                 {
-                    Lista = (from q in Context.imp_orden_compra_ext_ct_cbteble_det_gastos
+                    Lista = (from q in Context.vwimp_orden_compra_ext_ct_cbteble_det_gastos
                              where q.IdEmpresa == IdEmpresa
                              && q.IdOrdenCompra_ext == IdOrdenCompra_ext
                              select new imp_orden_compra_ext_ct_cbteble_det_gastos_Info
@@ -60,16 +61,51 @@ namespace Core.Erp.Data.Importacion
                                  IdTipoCbte = q.IdTipoCbte,
                                  IdCbteCble = q.IdCbteCble,
                                  secuencia_ct = q.secuencia_ct,
-                                 IdGasto_tipo = q.IdGasto_tipo
-                                 //dc_Valor = q.dc_Valor,
-                                 //pc_Cuenta=q.pc_Cuenta,
-                                 //dc_Observacion=q.dc_Observacion
+                                 IdGasto_tipo = q.IdGasto_tipo,
+                                 dc_Valor = q.dc_Valor,
+                                 pc_Cuenta=q.pc_Cuenta,
+                                 dc_Observacion=q.dc_Observacion
 
                              }).ToList();
                 }
+                Lista.ForEach(v => v.secuencia = secuancia++);
                 return Lista;
             }
             catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool guardarDB(imp_ordencompra_ext_Info info)
+        {
+            try
+            {
+                int secuancia = 1;
+                using (Entities_importacion Context = new Entities_importacion())
+                {
+                    var datos = Context.imp_orden_compra_ext_ct_cbteble_det_gastos.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdOrdenCompra_ext == info.IdOrdenCompra_ext);
+                    Context.imp_orden_compra_ext_ct_cbteble_det_gastos.RemoveRange(datos);
+                    foreach (var item in info.lst_gastos_asignados)
+                    {
+                        Context.imp_orden_compra_ext_ct_cbteble_det_gastos.Add(new imp_orden_compra_ext_ct_cbteble_det_gastos
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdOrdenCompra_ext = info.IdOrdenCompra_ext,
+                            IdEmpresa_ct = info.IdEmpresa,
+                            IdTipoCbte = item.IdTipoCbte,
+                            IdCbteCble=item.IdCbteCble,
+                            secuencia_ct=item.secuencia_ct,
+                            IdGasto_tipo=item.IdGasto_tipo
+
+                        });
+                        secuancia++;
+                    }
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception e)
             {
 
                 throw;

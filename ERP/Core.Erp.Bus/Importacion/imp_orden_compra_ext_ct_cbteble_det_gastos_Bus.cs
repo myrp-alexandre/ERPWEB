@@ -36,5 +36,18 @@ namespace Core.Erp.Bus.Importacion
                 throw;
             }
         }
+        public bool guardarDB(imp_ordencompra_ext_Info info)
+        {
+            try
+            {
+                return odata.guardarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }
