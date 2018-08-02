@@ -194,6 +194,11 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         {
             var lst_undades = bus_unidad_medida.get_list(false);
             ViewBag.lst_undades = lst_undades;
+
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
+            var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
+            ViewBag.lst_cuentas = lst_cuentas;
         }
 
         #region Diario contable
@@ -206,7 +211,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             ct_cbtecble_Info model = new ct_cbtecble_Info();
             model.lst_ct_cbtecble_det = info_diarios.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_liqidacion_dc", model);
+            return PartialView("_GridViewPartial_liqidacion_dc", model.lst_ct_cbtecble_det);
         }
 
         [HttpPost, ValidateInput(false)]
@@ -217,7 +222,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             ct_cbtecble_Info model = new ct_cbtecble_Info();
             model.lst_ct_cbtecble_det = info_diarios.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_liqidacion_dc", model);
+            return PartialView("_GridViewPartial_liqidacion_dc", model.lst_ct_cbtecble_det);
         }
 
         public ActionResult EditingDelete(int secuencia)
@@ -226,7 +231,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             ct_cbtecble_Info model = new ct_cbtecble_Info();
             model.lst_ct_cbtecble_det = info_diarios.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_liqidacion_dc", model);
+            return PartialView("_GridViewPartial_liqidacion_dc", model.lst_ct_cbtecble_det);
         }
 
         #endregion
@@ -279,7 +284,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         {
             try
             {
-              
+                int secuencia = 1;
                 set_list(new List<ct_cbtecble_det_Info>());
                 double costo_total = Convert.ToDouble(detalle.Sum(v => v.od_costo_total));
                 ct_cbtecble_det_Info info_total = new ct_cbtecble_det_Info();
@@ -289,10 +294,12 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 info_total.dc_Valor = costo_total * -1;
                 info_total.dc_Valor_debe = costo_total ;
                 info_total.dc_Observacion = "Ingreso a inventario por importación";
+                info_total.secuencia = secuencia;
                 AddRow(info_total);
 
                 foreach (var item in detalle_costo)
                 {
+                    secuencia++;
                     ct_cbtecble_det_Info info_g = new ct_cbtecble_det_Info();
                     info_g.IdEmpresa = param.IdEmpresa;
                     info_g.IdTipoCbte = param.IdTipoCbte_liquidacion;
@@ -300,6 +307,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                     info_g.dc_Valor = item.dc_Valor;
                     info_g.dc_Valor_haber = item.dc_Valor;
                     info_g.dc_Observacion = item.dc_Observacion;
+                    info_g.secuencia = secuencia;
                    AddRow(info_g);
 
                 }
@@ -311,6 +319,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 info_merca.dc_Valor = valor_compra;
                 info_merca.dc_Valor_haber = valor_compra;
                 info_merca.dc_Observacion ="Costo delamercancia antes de gastos por traslados";
+                info_merca.secuencia = secuencia + 1;
                 AddRow(info_merca);
 
               

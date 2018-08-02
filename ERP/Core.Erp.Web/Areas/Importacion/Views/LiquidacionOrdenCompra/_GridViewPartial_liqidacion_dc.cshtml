@@ -8,9 +8,9 @@
 
 
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Deudas", Action = "EditingAddNew", Area = "CuentasPorPagar" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Deudas", Action = "EditingUpdate", Area = "CuentasPorPagar" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Deudas", Action = "EditingDelete", Area = "CuentasPorPagar" };
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "LiquidacionOrdencompra", Action = "EditingAddNew", Area = "Importacion" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "LiquidacionOrdencompra", Action = "EditingUpdate", Area = "Importacion" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "LiquidacionOrdencompra", Action = "EditingDelete", Area = "Importacion" };
 
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = true;
@@ -37,24 +37,38 @@
             e.NewValues["dc_para_conciliar"] = false;
         };
 
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "pc_Cuenta";
-            column.Caption = "cuenta";
-            column.Width = Unit.Percentage(60);
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-        });
+        //settings.Columns.Add(column =>
+        //{
+        //    column.FieldName = "pc_Cuenta";
+        //    column.Caption = "cuenta";
+        //    column.Width = Unit.Percentage(60);
+        //    column.EditFormSettings.Visible = DefaultBoolean.False;
+        //});
 
+        //settings.Columns.Add(column =>
+        //{
+        //    column.FieldName = "IdCtaCble";
+        //    column.Caption = "Cuenta";
+        //    column.Width = Unit.Percentage(30);
+        //    column.Visible = false;
+        //    column.EditFormSettings.Visible = DefaultBoolean.True;
+        //    column.SetEditItemTemplateContent(c =>
+        //    {
+        //        Html.RenderPartial("_CmbCuenta_contable_liquidacion", DataBinder.Eval(c.DataItem, "IdCtaCble"));
+        //    });
+        //});
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdCtaCble";
-            column.Caption = "Cuenta";
-            column.Width = Unit.Percentage(30);
-            column.Visible = false;
-            column.EditFormSettings.Visible = DefaultBoolean.True;
-            column.SetEditItemTemplateContent(c =>
+            column.Caption = "Cuenta contable";
+            column.Width = Unit.Percentage(60);
+            column.EditorProperties().ComboBox(p =>
             {
-                Html.RenderPartial("_CmbCuenta_contable_liquidacion", DataBinder.Eval(c.DataItem, "IdCtaCble"));
+                p.Columns.Add("IdCtaCble", "Código").Width = Unit.Percentage(30);
+                p.Columns.Add("pc_Cuenta", "Cuenta").Width = Unit.Percentage(70);
+                p.ValueField = "IdCtaCble";
+                p.ValueType = typeof(string);
+                p.DataSource = ViewBag.lst_cuentas;
             });
         });
         settings.Columns.Add(column =>
