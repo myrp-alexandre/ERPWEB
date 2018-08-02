@@ -129,7 +129,7 @@
     </div>
 
     <div class="box-footer">
-        <button type="button" class="btn btn-primary">Calcular</button>
+        <button type="button" class="btn btn-primary" onclick="calclar_costo();">Calcular</button>
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index", "LiquidacionOrdenCompra", new { Area ="Importacion" }, null)">Cancelar</a>
     </div>
@@ -170,16 +170,16 @@
 
 
     });
-    function calclar_costo(IdTransaccionSession) {
+    function calclar_costo() {
         var datos = {
-            IdTransaccionSession: IdTransaccionSession,
-            IdOrdenCompra_ext: IdOrdenCompra_ext
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            IdOrdenCompra_ext: $("#IdOrdenCompra_ext").val()
 
         }
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("calcular_costos", "LiquidacionOrdenCompra",new { Area = "Importacion"})',
+            url: '@Url.Action("calcular_costo", "LiquidacionOrdenCompra",new { Area = "Importacion"})',
             async: false,
             bDeferRender: true,
             bProcessing: true,

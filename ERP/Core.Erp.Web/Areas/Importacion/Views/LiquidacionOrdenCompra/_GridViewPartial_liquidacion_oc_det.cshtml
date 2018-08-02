@@ -6,7 +6,7 @@
         settings.KeyFieldName = "Secuencia";
 
         settings.Width = Unit.Percentage(100);
-       
+
 
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
@@ -19,14 +19,6 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
         //Funcion para inicializar fila al presionar nuevo
-        settings.InitNewRow = (s, e) =>
-        {
-            e.NewValues["IdProducto"] = 0;
-            e.NewValues["IdUnidadMedida"] = null;
-            e.NewValues["od_cantidad"] = "";
-            e.NewValues["od_costo"] = "";
-        };
-
         settings.Columns.Add(column =>
         {
             column.FieldName = "pr_descripcion";
@@ -37,51 +29,48 @@
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdProducto";
-            column.Caption = "Producto";
-            column.Width = Unit.Percentage(30);
-            column.Visible = false;
-            column.EditFormSettings.Visible = DefaultBoolean.True;
-            column.SetEditItemTemplateContent(c =>
-            {
-                Html.RenderPartial("_CmbProducto_Importacion", DataBinder.Eval(c.DataItem, "IdProducto"));
-            });
-        });
-        //settings.Columns.Add(column =>
-        //{
-        //    column.FieldName = "IdUnidadMedida";
-        //    column.Caption = "Unidad de medida";
-        //    column.Width = Unit.Percentage(20);
-        //    column.EditorProperties().ComboBox(p =>
-        //    {
-        //        p.Columns.Add("descripcion", "Descripción").Width = Unit.Percentage(100);
-        //        p.TextField = "descripcion";
-        //        p.ValueField = "IdUnidadMedida";
-        //        p.ValueType = typeof(string);
-        //        p.DataSource = ViewBag.lst_undades;
-        //    });
-        //});
-        settings.Columns.Add(column =>
-        {
             column.FieldName = "od_cantidad";
-            column.Caption = "cantidad";
+            column.Caption = "cantidad O.C";
             column.Width = Unit.Percentage(15);
-
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "od_costo";
-            column.Caption = "P.U";
+            column.FieldName = "od_cantidad_recepcion";
+            column.Caption = "Cantidad recibida";
             column.Width = Unit.Percentage(15);
 
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "od_total_fob";
+            column.Caption = "Valor FOB";
+            column.Width = Unit.Percentage(15);
+
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "od_factor_costo";
+            column.Caption = "Factor";
+            column.Width = Unit.Percentage(15);
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "od_costo_bodega";
+            column.Caption = "Costo";
+            column.Width = Unit.Percentage(15);
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "od_costo_total";
             column.Caption = "Total";
             column.Width = Unit.Percentage(15);
 
         });
+
     });
 }
 @grid.Bind(Model).GetHtml()

@@ -62,13 +62,13 @@ namespace Core.Erp.Data.Importacion
                                  IdCbteCble = q.IdCbteCble,
                                  secuencia_ct = q.secuencia_ct,
                                  IdGasto_tipo = q.IdGasto_tipo,
-                                 dc_Valor = q.dc_Valor,
+                                 dc_Valor = (q.dc_Valor),
                                  pc_Cuenta=q.pc_Cuenta,
                                  dc_Observacion=q.dc_Observacion
 
                              }).ToList();
                 }
-                Lista.ForEach(v => v.secuencia = secuancia++);
+                Lista.ForEach(v => { v.secuencia = secuancia++;if (v.dc_Valor < 0) v.dc_Valor = v.dc_Valor * -1; });
                 return Lista;
             }
             catch (Exception)

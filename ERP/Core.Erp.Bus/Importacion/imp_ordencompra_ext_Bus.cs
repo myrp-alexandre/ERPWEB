@@ -178,11 +178,12 @@ namespace Core.Erp.Bus.Importacion
                 if (lst_gastos_asignados != null)
                     costo_incurridos = lst_gastos_asignados.Sum(v=>v.dc_Valor);
                 if (lst_gastos_asignados != null)
-                    valor_compra = lst_detalle.Sum(v => v.od_subtotal);
+                    valor_compra =Convert.ToDouble( lst_detalle.Sum(v => v.od_total_fob));
                 foreach (var item in lst_detalle)
                 {
                     item.od_factor_costo = (costo_incurridos + valor_compra) / valor_compra;
-                    item.od_costo_total = item.od_costo * item.od_factor_costo;
+                    item.od_costo_bodega = item.od_costo * item.od_factor_costo;
+                    item.od_costo_total = item.od_costo_bodega * item.od_cantidad_recepcion;
                 }
               return lst_detalle;
             }

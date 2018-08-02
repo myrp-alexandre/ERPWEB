@@ -59,8 +59,17 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             model = bus_orden.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_liquidacion_oc", model);
         }
-       
-      
+        public ActionResult GridViewPartial_liquidacion_oc_det()
+        {
+            List<imp_ordencompra_ext_det_Info> model = new List<imp_ordencompra_ext_det_Info>();
+            model =info_detalle.get_list();
+            if (model == null)
+                model = new List<imp_ordencompra_ext_det_Info>();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_liquidacion_oc_det", model);
+        }
+
+
         #endregion
 
         #region acciones
@@ -110,11 +119,12 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
         #endregion
         #region json
-        public JsonResult calclar_costo(decimal IdTransaccionSession=0, decimal IdOrdenCompraExter)
+        public JsonResult calcular_costo(decimal IdTransaccionSession=0, decimal IdOrdenCompra_ext = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
-           info_detalle.set_list( bus_orden.calcular_costos(IdEmpresa, IdOrdenCompraExter));
+           info_detalle.set_list( bus_orden.calcular_costos(IdEmpresa, IdOrdenCompra_ext));
+           
             return Json("", JsonRequestBehavior.AllowGet);
         }
     
@@ -217,53 +227,42 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             list.Remove(list.Where(m => m.secuencia == secuencia).First());
         }
 
-        public void delete_detail_New_details(cp_proveedor_Info info_proveedor, cp_parametros_Info info_parametro, double co_subtotal_iva = 0,
-            double co_subtotal_siniva = 0, double co_valoriva = 0, double co_total = 0, string observacion = "")
+        public void delete_detail_New_details(List<imp_ordencompra_ext_det_Info> detalle, List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> detalle_costo, imp_parametro_Info param)
         {
             try
             {
-                if (info_proveedor == null)
-                {
-                    return;
-                }
+              
                 set_list(new List<ct_cbtecble_det_Info>());
 
-                // cuenta total
-                ct_cbtecble_det_Info cbtecble_det_total_Info = new ct_cbtecble_det_Info();
-                cbtecble_det_total_Info.secuencia = 3;
-                cbtecble_det_total_Info.IdEmpresa = 0;
-                cbtecble_det_total_Info.IdTipoCbte = 1;
-                cbtecble_det_total_Info.IdCtaCble = info_proveedor.IdCtaCble_CXP;
-                cbtecble_det_total_Info.dc_Valor_haber = co_total;
-                cbtecble_det_total_Info.dc_Valor = co_total * -1;
-                cbtecble_det_total_Info.dc_Observacion = observacion;
-                AddRow(cbtecble_det_total_Info);
-
-                if (co_valoriva != 0)
+                foreach (var item in detalle_costo)
                 {
-                    // cuenta iva
-                    ct_cbtecble_det_Info cbtecble_det_iva_Info = new ct_cbtecble_det_Info();
-                    cbtecble_det_iva_Info.secuencia = 2;
-                    cbtecble_det_iva_Info.IdEmpresa = 0;
-                    cbtecble_det_iva_Info.IdTipoCbte = 1;
-                    cbtecble_det_iva_Info.IdCtaCble = info_parametro.pa_ctacble_iva;
-                    cbtecble_det_iva_Info.dc_Valor_debe = co_valoriva;
-                    cbtecble_det_iva_Info.dc_Valor = co_valoriva;
-                    cbtecble_det_iva_Info.dc_Observacion = observacion;
-                    AddRow(cbtecble_det_iva_Info);
+                    ct_cbtecble_det_Info info_g = new ct_cbtecble_det_Info();
+                    info_g.IdEmpresa = param.IdEmpresa;
+                    info_g.IdTipoCbte = param.IdTipoCbte_liquidacion;
+                    info_g.IdCtaCble = item.IdCtaCble;
+                    info_g.dc_Valor = item.dc_Valor;
+                    info_g.dc_Valor_debe = item.dc_Valor;
+                    info_g.dc_Observacion = item.dc_Observacion;
+                   AddRow(info_g);
+
                 }
-                // cuenta sbtotal
-                ct_cbtecble_det_Info cbtecble_det_sub_Info = new ct_cbtecble_det_Info();
-                cbtecble_det_sub_Info.secuencia = 1;
-                cbtecble_det_sub_Info.IdEmpresa = 0;
-                cbtecble_det_sub_Info.IdTipoCbte = 1;
-                cbtecble_det_sub_Info.IdCtaCble = info_parametro.pa_ctacble_deudora;
-                cbtecble_det_sub_Info.dc_Valor_debe = co_subtotal_iva + co_subtotal_siniva;
-                cbtecble_det_sub_Info.dc_Valor = co_subtotal_iva + co_subtotal_siniva;
-                cbtecble_det_sub_Info.dc_Observacion = observacion;
-                AddRow(cbtecble_det_sub_Info);
+                double valor_compra= Convert.ToDouble(detalle.Sum(v => v.od_total_fob));
+                ct_cbtecble_det_Info info_merca = new ct_cbtecble_det_Info();
+                info_merca.IdEmpresa = param.IdEmpresa;
+                info_merca.IdTipoCbte = param.IdTipoCbte_liquidacion;
+                info_merca.IdCtaCble = param.IdCtaCble;
+                info_merca.dc_Valor = valor_compra;
+                info_merca.dc_Valor_debe = valor_compra;
+                info_merca.dc_Observacion ="Costo delamercancia antes de gastos por traslados";
 
-
+                double costo_total = Convert.ToDouble(detalle.Sum(v => v.od_total_fob));
+                ct_cbtecble_det_Info info_total = new ct_cbtecble_det_Info();
+                info_total.IdEmpresa = param.IdEmpresa;
+                info_total.IdTipoCbte = param.IdTipoCbte_liquidacion;
+                info_total.IdCtaCble = param.IdCtaCble;
+                info_total.dc_Valor = valor_compra;
+                info_total.dc_Valor_debe = valor_compra;
+                info_total.dc_Observacion = "Ingreso a inventario por importación";
 
             }
             catch (Exception)
