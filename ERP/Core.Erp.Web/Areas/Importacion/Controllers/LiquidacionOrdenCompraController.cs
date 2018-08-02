@@ -117,6 +117,17 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_liqidacion_dc", model);
         }
+        public ActionResult GridViewPartial_liquidacion_gastos( decimal IdTransaccionSession=0)
+        {
+            List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> model = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
+            model = info_gastos_lst.get_list(IdTransaccionSession);
+            if (model == null)
+                model = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_liquidacion_gastos", model);
+        }
+
+        
 
         #endregion
 
@@ -181,9 +192,16 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
         private void cargar_combos()
         {
-           
 
-           
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+
+            tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+            var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
+            ViewBag.lst_bodega = lst_bodega;
 
             var lst_catalogos = bus_catalogo.get_list(1);
             ViewBag.lst_catalogos = lst_catalogos;

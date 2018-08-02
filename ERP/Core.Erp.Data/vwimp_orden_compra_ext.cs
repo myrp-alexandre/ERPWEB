@@ -40,5 +40,14 @@ namespace Core.Erp.Data
         public int IdCatalogo_forma_pago { get; set; }
         public Nullable<int> IdMoneda_origen { get; set; }
         public Nullable<int> IdMoneda_destino { get; set; }
+        public bool Estado_cierre { get; set; }
+        public Nullable<int> IdEmpresa_inv { get; set; }
+        public Nullable<int> IdSucursal_inv { get; set; }
+        public Nullable<int> IdMovi_inven_tipo_inv { get; set; }
+        public Nullable<decimal> IdNumMovi_inv { get; set; }
+        public Nullable<int> IdEmpresa_ct { get; set; }
+        public Nullable<int> IdTipoCbte_ct { get; set; }
+        public Nullable<decimal> IdCbteCble_ct { get; set; }
+        public Nullable<int> IdBodega_inv { get; set; }
     }
 }

@@ -215,8 +215,18 @@ namespace Core.Erp.Data.Importacion
                         IdMoneda_origen = Entity.IdMoneda_destino,
                         pe_cedulaRuc=Entity.pe_cedulaRuc,
                         pe_nombreCompleto=Entity.pe_nombreCompleto,
-                        
-                    };
+
+                        IdEmpresa_ct = Entity.IdEmpresa_ct,
+                        IdTipoCbte_ct = Entity.IdTipoCbte_ct,
+                        IdCbteCble_ct = Entity.IdCbteCble_ct,
+
+                        IdEmpresa_inv = Entity.IdEmpresa_inv,
+                        IdSucursal_inv = Entity.IdSucursal_inv,
+                        IdMovi_inven_tipo_inv = Entity.IdMovi_inven_tipo_inv,
+                        IdNumMovi_inv = Entity.IdNumMovi_inv,
+                        IdBodega_inv = Entity.IdBodega_inv
+
+                };
                 }
                 return info;
             }
@@ -424,6 +434,7 @@ namespace Core.Erp.Data.Importacion
                     Entity.IdSucursal_inv = info.IdSucursal_inv;
                     Entity.IdMovi_inven_tipo_inv = info.IdMovi_inven_tipo_inv;
                     Entity.IdNumMovi_inv = info.IdNumMovi_inv;
+                    Entity.IdBodega_inv = info.IdBodega_inv;
 
                     var detalle = Context.imp_orden_compra_ext_det.Where(q => q.IdOrdenCompra_ext == info.IdOrdenCompra_ext& q.IdEmpresa==info.IdEmpresa);
                     Context.imp_orden_compra_ext_det.RemoveRange(detalle);

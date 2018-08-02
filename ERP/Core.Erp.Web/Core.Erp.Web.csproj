@@ -8934,6 +8934,7 @@
     <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\_GridViewPartial_liqidacion_dc.cshtml" />
     <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\_GridViewPartial_liquidacion_oc_det.cshtml" />
     <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\_CmbCuenta_contable_liquidacion.cshtml" />
+    <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\_GridViewPartial_liquidacion_gastos.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

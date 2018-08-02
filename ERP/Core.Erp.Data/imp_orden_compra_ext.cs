@@ -59,6 +59,7 @@ namespace Core.Erp.Data
         public Nullable<int> IdEmpresa_ct { get; set; }
         public Nullable<int> IdTipoCbte_ct { get; set; }
         public Nullable<decimal> IdCbteCble_ct { get; set; }
+        public Nullable<int> IdBodega_inv { get; set; }
     
         public virtual imp_catalogo imp_catalogo { get; set; }
         public virtual imp_catalogo imp_catalogo1 { get; set; }

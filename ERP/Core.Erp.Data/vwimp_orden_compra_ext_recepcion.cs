@@ -29,5 +29,14 @@ namespace Core.Erp.Data
         public System.DateTime oe_fecha { get; set; }
         public Nullable<System.DateTime> oe_fecha_llegada_est { get; set; }
         public Nullable<System.DateTime> oe_fecha_embarque_est { get; set; }
+        public bool Estado_cierre { get; set; }
+        public Nullable<int> IdEmpresa_inv { get; set; }
+        public Nullable<int> IdSucursal_inv { get; set; }
+        public Nullable<int> IdMovi_inven_tipo_inv { get; set; }
+        public Nullable<decimal> IdNumMovi_inv { get; set; }
+        public Nullable<int> IdEmpresa_ct { get; set; }
+        public Nullable<int> IdTipoCbte_ct { get; set; }
+        public Nullable<decimal> IdCbteCble_ct { get; set; }
+        public Nullable<int> IdBodega_inv { get; set; }
     }
 }
