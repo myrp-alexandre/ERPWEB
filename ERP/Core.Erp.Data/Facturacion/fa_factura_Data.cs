@@ -854,6 +854,30 @@ namespace Core.Erp.Data.Facturacion
             }
         }
 
+        public bool MostrarCuotasRpt(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta)
+        {
+            try
+            {
+                using (Entities_facturacion Context = new Entities_facturacion())
+                {
+                    var fa = (from f in Context.fa_factura
+                             join t in Context.fa_TerminoPago
+                             on new { IdTerminoPago = f.vt_tipo_venta } equals new { t.IdTerminoPago }
+                             select new
+                             {
+                                 Num_Coutas = t.Num_Coutas
+                             }).FirstOrDefault();
+                    if (fa.Num_Coutas > 0)
+                        return true;
+                }
+                return false;
+               
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
     }
 }

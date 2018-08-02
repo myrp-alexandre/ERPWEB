@@ -1,7 +1,6 @@
 ﻿@model Core.Erp.Info.Inventario.in_ProductoTipo_Info
 @{
     ViewBag.Title = "Nuevo tipo";
-    ViewBag.Title = "Anular clase";
 
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
@@ -10,15 +9,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Nuevo","ProductoTipo",FormMethod.Post,new { @class = "form", @role = "form"}))
+@using (Html.BeginForm("Nuevo", "ProductoTipo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="tp_descripcion">Descripción*</label>
-                    @Html.TextBoxFor(q=> q.tp_descripcion,new { @class = "form-control"})
-                    @Html.ValidationMessageFor(q=> q.tp_descripcion, "", new { @class = "text-danger"})
+                    @Html.TextBoxFor(q => q.tp_descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.tp_descripcion, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -27,7 +26,7 @@
         <div class="col-md-12">
             <div class="col-md-2">
                 <div class="checkbox">
-                    <label for="tp_EsCombo_bool">@Html.CheckBoxFor(q=>q.tp_EsCombo_bool) Es combo</label>
+                    <label for="tp_EsCombo_bool">@Html.CheckBoxFor(q => q.tp_EsCombo_bool) Es combo</label>
                 </div>
             </div>
             <div class="col-md-2">
@@ -45,7 +44,31 @@
                     <label for="tp_es_lote">@Html.CheckBoxFor(q => q.tp_es_lote) Es lote</label>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="checkbox">
+                    <label for="Aparece_modu_Activo_F">@Html.CheckBoxFor(q => q.Aparece_modu_Activo_F) Aparece módulo activo</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="checkbox">
+                    <label for="Aparece_modu_Compras">@Html.CheckBoxFor(q => q.Aparece_modu_Compras) Aparece módulo compras</label>
+                </div>
+            </div>
 
+            <div class="col-md-2">
+                <div class="checkbox">
+                    <label for="Aparece_modu_Inventario">@Html.CheckBoxFor(q => q.Aparece_modu_Inventario) Aparece módulo inventario</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="checkbox">
+                    <label for="Aparece_modu_Ventas">@Html.CheckBoxFor(q => q.Aparece_modu_Ventas) Aparece módulo ventas</label>
+                </div>
+            </div>
         </div>
     </div>
 

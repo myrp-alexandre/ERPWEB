@@ -22,6 +22,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     {
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
+        fa_factura_Bus bus_factura = new fa_factura_Bus();
 
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbCliente_Facturacion()
@@ -204,14 +205,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult FAC_003(int IdSucursal = 0, int IdBodega= 0, decimal IdCbteVta= 0, bool mostrar_cuotas = false)
+        public ActionResult FAC_003(int IdSucursal = 0, int IdBodega= 0, decimal IdCbteVta= 0)
         {
             FAC_003_Rpt model = new FAC_003_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_IdBodega.Value = IdBodega;
             model.p_IdSucursal.Value = IdSucursal;
             model.p_IdCbteVta.Value = IdCbteVta;
-            model.p_mostrar_cuotas.Value = mostrar_cuotas;
+            model.p_mostrar_cuotas.Value = bus_factura.MostrarCuotasRpt(Convert.ToInt32(Session["IdEmpresa"]),IdSucursal,IdBodega,IdCbteVta);
             model.RequestParameters = false;
             return View(model);
         }

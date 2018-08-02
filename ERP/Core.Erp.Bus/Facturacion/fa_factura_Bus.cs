@@ -96,5 +96,17 @@ namespace Core.Erp.Bus.Facturacion
             }
         }
 
+        public bool MostrarCuotasRpt(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta)
+        {
+            try
+            {
+                return odata.MostrarCuotasRpt(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

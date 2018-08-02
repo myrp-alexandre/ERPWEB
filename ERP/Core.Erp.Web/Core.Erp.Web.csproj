@@ -8145,11 +8145,11 @@
     <Content Include="Areas\Inventario\Views\TipoMovimiento\Nuevo.cshtml" />
     <Content Include="Areas\Inventario\Views\TipoMovimiento\Modificar.cshtml" />
     <Content Include="Areas\Inventario\Views\TipoMovimiento\Anular.cshtml" />
-    <Content Include="Areas\Inventario\Views\CatalogoTipoInventario\Index.cshtml" />
-    <Content Include="Areas\Inventario\Views\CatalogoTipoInventario\_GridViewPartial_catalogotipo_inventario.cshtml" />
-    <Content Include="Areas\Inventario\Views\CatalogoTipoInventario\Nuevo.cshtml" />
-    <Content Include="Areas\Inventario\Views\CatalogoTipoInventario\Modificar.cshtml" />
-    <Content Include="Areas\Inventario\Views\CatalogoTipoInventario\Anular.cshtml" />
+    <Content Include="Areas\Inventario\Views\IngresoInventario\CatalogoTipoInventario\Index.cshtml" />
+    <Content Include="Areas\Inventario\Views\IngresoInventario\CatalogoTipoInventario\_GridViewPartial_catalogotipo_inventario.cshtml" />
+    <Content Include="Areas\Inventario\Views\IngresoInventario\CatalogoTipoInventario\Nuevo.cshtml" />
+    <Content Include="Areas\Inventario\Views\IngresoInventario\CatalogoTipoInventario\Modificar.cshtml" />
+    <Content Include="Areas\Inventario\Views\IngresoInventario\CatalogoTipoInventario\Anular.cshtml" />
     <Content Include="Areas\Inventario\Views\CatalogoInventario\Index.cshtml" />
     <Content Include="Areas\Inventario\Views\CatalogoInventario\_GridViewPartial_catalogo_inventario.cshtml" />
     <Content Include="Areas\Inventario\Views\CatalogoInventario\Nuevo.cshtml" />

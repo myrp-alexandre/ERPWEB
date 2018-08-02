@@ -11,8 +11,8 @@
 
 @using (Html.BeginForm("Modificar", "ProductoTipo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q=>q.IdEmpresa)
-    @Html.HiddenFor(q=>q.IdProductoTipo)
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdProductoTipo)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -44,6 +44,31 @@
             <div class="col-md-2">
                 <div class="checkbox">
                     <label for="tp_es_lote">@Html.CheckBoxFor(q => q.tp_es_lote) Es lote</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="checkbox">
+                    <label for="Aparece_modu_Activo_F">@Html.CheckBoxFor(q => q.Aparece_modu_Activo_F) Aparece módulo activo</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="checkbox">
+                    <label for="Aparece_modu_Compras">@Html.CheckBoxFor(q => q.Aparece_modu_Compras) Aparece módulo compras</label>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="checkbox">
+                    <label for="Aparece_modu_Inventario">@Html.CheckBoxFor(q => q.Aparece_modu_Inventario) Aparece módulo inventario</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="checkbox">
+                    <label for="Aparece_modu_Ventas">@Html.CheckBoxFor(q => q.Aparece_modu_Ventas) Aparece módulo ventas</label>
                 </div>
             </div>
         </div>

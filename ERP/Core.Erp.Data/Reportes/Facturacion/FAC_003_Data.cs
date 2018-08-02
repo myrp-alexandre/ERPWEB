@@ -16,7 +16,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
                 List<FAC_003_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
-                    if(mostrar_cuotas==true)
+                    if(!mostrar_cuotas)
                     {
 
                         Lista = (from q in Context.VWFAC_003
