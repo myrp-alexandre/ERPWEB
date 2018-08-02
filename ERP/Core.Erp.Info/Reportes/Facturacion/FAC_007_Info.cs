@@ -36,5 +36,6 @@ namespace Core.Erp.Info.Reportes.Facturacion
         public string Ve_Vendedor { get; set; }
         public string nom_TerminoPago { get; set; }
         public int Num_Coutas { get; set; }
+        public string vt_Observacion { get; set; }
     }
 }

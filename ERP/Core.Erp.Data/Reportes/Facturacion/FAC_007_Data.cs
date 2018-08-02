@@ -50,7 +50,8 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                  nom_TerminoPago = q.nom_TerminoPago,
                                  Num_Coutas = q.Num_Coutas,
                                  Su_Descripcion = q.Su_Descripcion,
-                                 Ve_Vendedor = q.Ve_Vendedor
+                                 Ve_Vendedor = q.Ve_Vendedor,
+                                 vt_Observacion = q.vt_Observacion
                              }).ToList();
                 }
                 return Lista;

@@ -35,5 +35,8 @@ namespace Core.Erp.Info.Reportes.Facturacion
         public System.DateTime no_fecha { get; set; }
         public System.DateTime no_fecha_venc { get; set; }
         public string CreDeb { get; set; }
+        public string sc_observacion { get; set; }
+        public double sc_total { get; set; }
+        public string No_Descripcion { get; set; }
     }
 }

@@ -57,8 +57,8 @@
           <Property Name="IdNominaTipoLiqui" Type="int" Nullable="false" />
           <Property Name="Valor" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWACTF_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWACTF_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWACTF_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -99,8 +99,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWACTF_001' no tie
           <Property Name="dc_Valor_Haber" Type="float" />
           <Property Name="pc_Cuenta" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWACTF_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWACTF_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWACTF_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -140,8 +140,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWACTF_002' no tie
           <Property Name="dc_Valor_Haber" Type="float" />
           <Property Name="pc_Cuenta" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWACTF_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWACTF_003' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWACTF_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -179,8 +179,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWACTF_003' no tie
           <Property Name="dc_Valor_Haber" Type="float" />
           <Property Name="pc_Cuenta" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWBAN_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWBAN_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWBAN_001">
           <Key>
             <PropertyRef Name="CodTipoCbteBan" />
@@ -217,8 +217,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWBAN_001' no tien
           <Property Name="dc_Valor_Debe" Type="float" Nullable="false" />
           <Property Name="dc_Valor_Haber" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWBAN_001_cancelaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWBAN_001_cancelaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWBAN_001_cancelaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -242,8 +242,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWBAN_001_cancelac
           <Property Name="IdTipoCbte_pago" Type="int" Nullable="false" />
           <Property Name="IdCbteCble_pago" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWBAN_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWBAN_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWBAN_002">
           <Key>
             <PropertyRef Name="CodTipoCbteBan" />
@@ -280,8 +280,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWBAN_002' no tien
           <Property Name="dc_Valor_Debe" Type="float" Nullable="false" />
           <Property Name="dc_Valor_Haber" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWBAN_002_cancelaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWBAN_002_cancelaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWBAN_002_cancelaciones">
           <Key>
             <PropertyRef Name="mba_IdEmpresa" />
@@ -300,8 +300,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWBAN_002_cancelac
           <Property Name="Observacion" Type="varchar(max)" />
           <Property Name="monto" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWBAN_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWBAN_003' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWBAN_003">
           <Key>
             <PropertyRef Name="CodTipoCbteBan" />
@@ -338,8 +338,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWBAN_003' no tien
           <Property Name="cb_Cheque" Type="varchar" MaxLength="50" />
           <Property Name="cb_giradoA" Type="varchar" MaxLength="150" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWBAN_005' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWBAN_005' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWBAN_005">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -358,8 +358,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWBAN_005' no tien
           <Property Name="cb_Valor" Type="float" Nullable="false" />
           <Property Name="cb_Fecha" Type="date" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWBAN_006' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWBAN_006' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWBAN_006">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -391,8 +391,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWBAN_006' no tien
           <Property Name="dc_Valor_Haber" Type="float" />
           <Property Name="cb_Cheque" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCAJ_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCAJ_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCAJ_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -437,8 +437,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCAJ_001' no tien
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCAJ_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCAJ_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCAJ_002">
           <Key>
             <PropertyRef Name="IdRow" />
@@ -485,8 +485,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCAJ_002' no tien
           <Property Name="Fecha_fin" Type="datetime" Nullable="false" />
           <Property Name="valor_a_reponer" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCAJ_002_ingresos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCAJ_002_ingresos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCAJ_002_ingresos">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -509,8 +509,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCAJ_002_ingresos
           <Property Name="cm_observacion" Type="varchar(max)" />
           <Property Name="cm_fecha" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCONTA_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCONTA_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCONTA_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -539,8 +539,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCONTA_001' no ti
           <Property Name="tc_TipoCbte" Type="char" MaxLength="50" Nullable="false" />
           <Property Name="dc_Observacion" Type="varchar(max)" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXC_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXC_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCXC_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -587,8 +587,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXC_001' no tien
           <Property Name="cr_NumDocumento" Type="varchar" MaxLength="100" />
           <Property Name="cr_TotalCobro" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXC_001_diario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXC_001_diario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCXC_001_diario">
           <Key>
             <PropertyRef Name="cbr_IdEmpresa" />
@@ -616,8 +616,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXC_001_diario' 
           <Property Name="dc_Valor_Debe" Type="float" Nullable="false" />
           <Property Name="dc_Valor_Haber" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXC_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXC_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCXC_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -654,8 +654,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXC_002' no tien
           <Property Name="vt_total" Type="float" />
           <Property Name="PorcentajeRet" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXC_002_diario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXC_002_diario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCXC_002_diario">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -687,8 +687,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXC_002_diario' 
           <Property Name="dc_Valor_Debe" Type="float" Nullable="false" />
           <Property Name="dc_Valor_Haber" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCXP_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -762,8 +762,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_001' no tien
           <Property Name="IdPunto_cargo_grupo" Type="int" />
           <Property Name="nom_punto_cargo_grupo" Type="varchar" MaxLength="150" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCXP_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -796,8 +796,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_002' no tien
           <Property Name="re_Porcen_retencion" Type="float" Nullable="false" />
           <Property Name="re_valor_retencion" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_002_diario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_002_diario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCXP_002_diario">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -822,8 +822,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_002_diario' 
           <Property Name="dc_Valor_Debe" Type="float" Nullable="false" />
           <Property Name="dc_Valor_Haber" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_003' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCXP_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -871,8 +871,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_003' no tien
           <Property Name="Tipo_doc" Type="varchar" MaxLength="7" Nullable="false" />
           <Property Name="num_documento" Type="varchar" MaxLength="15" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_003_cancelaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_003_cancelaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCXP_003_cancelaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -896,8 +896,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_003_cancelac
           <Property Name="IdTipoCbte_pago" Type="int" Nullable="false" />
           <Property Name="IdCbteCble_pago" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_004' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCXP_004">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -944,8 +944,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_004' no tien
           <Property Name="IdEstadoAprobacion" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="estado_apro" Type="varchar" MaxLength="250" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_005' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_005' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCXP_005">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -975,8 +975,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_005' no tien
           <Property Name="Observacion" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_005_cancelaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_005_cancelaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCXP_005_cancelaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -998,8 +998,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_005_cancelac
           <Property Name="IdEmpresa_conciliacion" Type="int" Nullable="false" />
           <Property Name="IdConciliacion" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_006' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_006' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCXP_006">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1039,8 +1039,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_006' no tien
           <Property Name="co_valoriva" Type="float" Nullable="false" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_006_diario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_006_diario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCXP_006_diario">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1067,8 +1067,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_006_diario' 
           <Property Name="dc_Valor_Debe" Type="float" Nullable="false" />
           <Property Name="dc_Valor_Haber" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_007' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCXP_007">
           <Key>
             <PropertyRef Name="IdRow" />
@@ -1127,8 +1127,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_007' no tien
           <Property Name="re_tipoRet" Type="char" MaxLength="3" />
           <Property Name="Num_Autorizacion_OG" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_009' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_009' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCXP_009">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1185,8 +1185,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_009' no tien
           <Property Name="co_descripcion" Type="varchar" MaxLength="350" Nullable="false" />
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWFAC_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWFAC_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1242,8 +1242,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_001' no tien
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
           <Property Name="vt_fecha" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWFAC_003' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWFAC_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1329,8 +1329,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_003' no tien
           <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
           <Property Name="pe_razonSocial" Type="varchar" MaxLength="150" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_003_cuotas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWFAC_003_cuotas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWFAC_003_cuotas">
           <Key>
             <PropertyRef Name="IdRow" />
@@ -1418,8 +1418,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_003_cuotas' 
           <Property Name="pe_razonSocial" Type="varchar" MaxLength="150" />
           <Property Name="orden" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWFAC_004' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWFAC_004">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1473,8 +1473,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_004' no tien
           <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_005' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWFAC_005' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWFAC_005">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1518,8 +1518,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_005' no tien
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" />
           <Property Name="Su_CodigoEstablecimiento" Type="varchar" MaxLength="30" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_006' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWFAC_006' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWFAC_006">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1574,8 +1574,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_006' no tien
           <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="pr_dias_entrega" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWFAC_007' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWFAC_007">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1603,6 +1603,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_007' no tien
             <PropertyRef Name="Ve_Vendedor" />
             <PropertyRef Name="nom_TerminoPago" />
             <PropertyRef Name="Num_Coutas" />
+            <PropertyRef Name="vt_Observacion" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
@@ -1632,9 +1633,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_007' no tien
           <Property Name="Ve_Vendedor" Type="nchar" MaxLength="200" Nullable="false" />
           <Property Name="nom_TerminoPago" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Num_Coutas" Type="int" Nullable="false" />
+          <Property Name="vt_Observacion" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_008' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWFAC_008' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWFAC_008">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1661,6 +1663,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_008' no tien
             <PropertyRef Name="no_fecha" />
             <PropertyRef Name="no_fecha_venc" />
             <PropertyRef Name="CreDeb" />
+            <PropertyRef Name="sc_total" />
+            <PropertyRef Name="No_Descripcion" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
@@ -1689,9 +1693,12 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_008' no tien
           <Property Name="no_fecha" Type="datetime" Nullable="false" />
           <Property Name="no_fecha_venc" Type="datetime" Nullable="false" />
           <Property Name="CreDeb" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="sc_observacion" Type="varchar" MaxLength="1000" />
+          <Property Name="sc_total" Type="float" Nullable="false" />
+          <Property Name="No_Descripcion" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_008_aplicaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWFAC_008_aplicaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWFAC_008_aplicaciones">
           <Key>
             <PropertyRef Name="IdEmpresa_nt" />
@@ -1712,8 +1719,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_008_aplicaci
           <Property Name="NumFactura" Type="varchar" MaxLength="49" />
           <Property Name="vt_fecha" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_009' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWFAC_009' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWFAC_009">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1751,8 +1758,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_009' no tien
           <Property Name="gi_cantidad" Type="float" Nullable="false" />
           <Property Name="pr_descripcion" Type="nvarchar" MaxLength="702" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWIMP_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWIMP_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWIMP_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1799,8 +1806,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWIMP_001' no tien
           <Property Name="NomUnidad" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="Descripcion_Ciudad" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWINV_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWINV_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1850,8 +1857,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_001' no tien
           <Property Name="signo" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="tm_descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWINV_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWINV_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1901,8 +1908,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_002' no tien
           <Property Name="signo" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="tm_descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWINV_004' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWINV_004">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1960,8 +1967,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_004' no tien
           <Property Name="pr_descripcion_padre" Type="nvarchar" MaxLength="500" />
           <Property Name="IdBodega" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWINV_007' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWINV_007">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2007,8 +2014,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_007' no tien
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Codigo" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_008' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWINV_008' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWINV_008">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2043,8 +2050,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_008' no tien
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" />
           <Property Name="bo_Descripcion" Type="nchar" MaxLength="100" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWROL_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2112,8 +2119,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_001' no tien
           <Property Name="Periodo" Type="varchar" MaxLength="64" />
           <Property Name="em_ruc" Type="nvarchar" MaxLength="13" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWROL_002">
           <Key>
             <PropertyRef Name="NombreCompleto" />
@@ -2151,8 +2158,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_002' no tien
           <Property Name="ru_orden" Type="int" Nullable="false" />
           <Property Name="em_ruc" Type="nvarchar" MaxLength="13" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_003' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWROL_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2189,8 +2196,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_003' no tien
           <Property Name="EstadoCobro" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="TotalValor" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_004' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWROL_004">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2227,8 +2234,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_004' no tien
           <Property Name="em_codigo" Type="varchar" MaxLength="50" />
           <Property Name="IdUtilidad" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_005' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_005' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWROL_005">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2279,8 +2286,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_005' no tien
           <Property Name="ca_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ru_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_006' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_006' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWROL_006">
           <Key>
             <PropertyRef Name="pe_cedulaRuc" />
@@ -2341,8 +2348,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_006' no tien
           <Property Name="Valor_Cancelar" Type="float" Nullable="false" />
           <Property Name="Iess" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_007' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWROL_007">
           <Key>
             <PropertyRef Name="pe_cedulaRuc" />
@@ -2388,8 +2395,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_007' no tien
           <Property Name="em_fechaIngaRol" Type="datetime" />
           <Property Name="ca_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_008' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_008' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWROL_008">
           <Key>
             <PropertyRef Name="CedulaRuc" />
@@ -2443,8 +2450,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_008' no tien
           <Property Name="descuento_quincena" Type="bit" Nullable="false" />
           <Property Name="descuento_men_quin" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_009' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_009' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWROL_009">
           <Key>
             <PropertyRef Name="CedulaRuc" />
@@ -2479,8 +2486,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_009' no tien
           <Property Name="Num_Horas" Type="float" />
           <Property Name="ca_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_010' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_010' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWROL_010">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2503,8 +2510,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_010' no tien
           <Property Name="em_fechaIngaRol" Type="datetime" />
           <Property Name="antiguedad_string" Type="varchar" MaxLength="57" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_011' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_011' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWROL_011">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2561,8 +2568,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_011' no tien
           <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWROL_014">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3643,7 +3650,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
     [VWFAC_007].[vt_fech_venc] AS [vt_fech_venc], 
     [VWFAC_007].[Ve_Vendedor] AS [Ve_Vendedor], 
     [VWFAC_007].[nom_TerminoPago] AS [nom_TerminoPago], 
-    [VWFAC_007].[Num_Coutas] AS [Num_Coutas]
+    [VWFAC_007].[Num_Coutas] AS [Num_Coutas], 
+    [VWFAC_007].[vt_Observacion] AS [vt_Observacion]
     FROM [web].[VWFAC_007] AS [VWFAC_007]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWFAC_008" EntityType="Self.VWFAC_008" store:Type="Views" store:Schema="web">
@@ -3674,7 +3682,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
     [VWFAC_008].[NumNota_Impresa] AS [NumNota_Impresa], 
     [VWFAC_008].[no_fecha] AS [no_fecha], 
     [VWFAC_008].[no_fecha_venc] AS [no_fecha_venc], 
-    [VWFAC_008].[CreDeb] AS [CreDeb]
+    [VWFAC_008].[CreDeb] AS [CreDeb], 
+    [VWFAC_008].[sc_observacion] AS [sc_observacion], 
+    [VWFAC_008].[sc_total] AS [sc_total], 
+    [VWFAC_008].[No_Descripcion] AS [No_Descripcion]
     FROM [web].[VWFAC_008] AS [VWFAC_008]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWFAC_008_aplicaciones" EntityType="Self.VWFAC_008_aplicaciones" store:Type="Views" store:Schema="web">
@@ -4359,8 +4370,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
           <EntitySet Name="VWFAC_004" EntityType="Model_reportes.VWFAC_004" />
           <EntitySet Name="VWFAC_005" EntityType="Model_reportes.VWFAC_005" />
           <EntitySet Name="VWFAC_006" EntityType="Model_reportes.VWFAC_006" />
-          <EntitySet Name="VWFAC_007" EntityType="Model_reportes.VWFAC_007" />
-          <EntitySet Name="VWFAC_008" EntityType="Model_reportes.VWFAC_008" />
           <EntitySet Name="VWIMP_001" EntityType="Model_reportes.VWIMP_001" />
           <EntitySet Name="VWFAC_008_aplicaciones" EntityType="Model_reportes.VWFAC_008_aplicaciones" />
           <FunctionImport Name="SPCONTA_003_balances" ReturnType="Collection(Model_reportes.SPCONTA_003_balances_Result)">
@@ -4390,6 +4399,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
             <Parameter Name="fecha_inicio" Mode="In" Type="DateTime" />
             <Parameter Name="fecha_fin" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="VWFAC_007" EntityType="Model_reportes.VWFAC_007" />
+          <EntitySet Name="VWFAC_008" EntityType="Model_reportes.VWFAC_008" />
         </EntityContainer>
         <EntityType Name="Af_SPACTF_004_detalle">
           <Key>
@@ -6926,118 +6937,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
           <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="pr_dias_entrega" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="VWFAC_007">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdBodega" />
-            <PropertyRef Name="IdCbteVta" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="IdProducto" />
-            <PropertyRef Name="pr_descripcion" />
-            <PropertyRef Name="nom_presentacion" />
-            <PropertyRef Name="vt_cantidad" />
-            <PropertyRef Name="vt_Precio" />
-            <PropertyRef Name="vt_PorDescUnitario" />
-            <PropertyRef Name="vt_Subtotal" />
-            <PropertyRef Name="DescTotal" />
-            <PropertyRef Name="vt_SubtotalIVA" />
-            <PropertyRef Name="vt_Subtotal0" />
-            <PropertyRef Name="vt_iva" />
-            <PropertyRef Name="vt_total" />
-            <PropertyRef Name="vt_por_iva" />
-            <PropertyRef Name="Nombres" />
-            <PropertyRef Name="Su_Descripcion" />
-            <PropertyRef Name="vt_fecha" />
-            <PropertyRef Name="vt_fech_venc" />
-            <PropertyRef Name="Ve_Vendedor" />
-            <PropertyRef Name="nom_TerminoPago" />
-            <PropertyRef Name="Num_Coutas" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdBodega" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="nom_presentacion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="lote_num_lote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="lote_fecha_vcto" Type="DateTime" Precision="3" />
-          <Property Name="vt_cantidad" Type="Double" Nullable="false" />
-          <Property Name="vt_Precio" Type="Double" Nullable="false" />
-          <Property Name="vt_PorDescUnitario" Type="Double" Nullable="false" />
-          <Property Name="vt_Subtotal" Type="Double" Nullable="false" />
-          <Property Name="DescTotal" Type="Double" Nullable="false" />
-          <Property Name="vt_SubtotalIVA" Type="Double" Nullable="false" />
-          <Property Name="vt_Subtotal0" Type="Double" Nullable="false" />
-          <Property Name="vt_iva" Type="Double" Nullable="false" />
-          <Property Name="vt_total" Type="Double" Nullable="false" />
-          <Property Name="vt_por_iva" Type="Double" Nullable="false" />
-          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
-          <Property Name="vt_NumFactura" Type="String" MaxLength="28" FixedLength="false" Unicode="false" />
-          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="vt_fech_venc" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Ve_Vendedor" Type="String" Nullable="false" MaxLength="200" FixedLength="true" Unicode="true" />
-          <Property Name="nom_TerminoPago" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Num_Coutas" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="VWFAC_008">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdBodega" />
-            <PropertyRef Name="IdNota" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="IdProducto" />
-            <PropertyRef Name="pr_descripcion" />
-            <PropertyRef Name="nom_presentacion" />
-            <PropertyRef Name="sc_cantidad" />
-            <PropertyRef Name="sc_Precio" />
-            <PropertyRef Name="sc_descUni" />
-            <PropertyRef Name="sc_PordescUni" />
-            <PropertyRef Name="sc_precioFinal" />
-            <PropertyRef Name="DescTotal" />
-            <PropertyRef Name="sc_subtotal" />
-            <PropertyRef Name="sc_subtotalIVA" />
-            <PropertyRef Name="sc_subtotal0" />
-            <PropertyRef Name="sc_iva" />
-            <PropertyRef Name="vt_por_iva" />
-            <PropertyRef Name="Nombres" />
-            <PropertyRef Name="Su_Descripcion" />
-            <PropertyRef Name="no_fecha" />
-            <PropertyRef Name="no_fecha_venc" />
-            <PropertyRef Name="CreDeb" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdBodega" Type="Int32" Nullable="false" />
-          <Property Name="IdNota" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="nom_presentacion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="lote_num_lote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="lote_fecha_vcto" Type="DateTime" Precision="3" />
-          <Property Name="sc_cantidad" Type="Double" Nullable="false" />
-          <Property Name="sc_Precio" Type="Double" Nullable="false" />
-          <Property Name="sc_descUni" Type="Double" Nullable="false" />
-          <Property Name="sc_PordescUni" Type="Double" Nullable="false" />
-          <Property Name="sc_precioFinal" Type="Double" Nullable="false" />
-          <Property Name="DescTotal" Type="Double" Nullable="false" />
-          <Property Name="sc_subtotal" Type="Double" Nullable="false" />
-          <Property Name="sc_subtotalIVA" Type="Double" Nullable="false" />
-          <Property Name="sc_subtotal0" Type="Double" Nullable="false" />
-          <Property Name="sc_iva" Type="Double" Nullable="false" />
-          <Property Name="vt_por_iva" Type="Double" Nullable="false" />
-          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
-          <Property Name="NumNota_Impresa" Type="String" MaxLength="28" FixedLength="false" Unicode="false" />
-          <Property Name="no_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="no_fecha_venc" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreDeb" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
-        </EntityType>
         <EntityType Name="VWIMP_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -7204,6 +7103,125 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
           <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="1" />
           <Property Type="Double" Name="Valor" Nullable="false" />
         </ComplexType>
+        <EntityType Name="VWFAC_007">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="nom_presentacion" />
+            <PropertyRef Name="vt_cantidad" />
+            <PropertyRef Name="vt_Precio" />
+            <PropertyRef Name="vt_PorDescUnitario" />
+            <PropertyRef Name="vt_Subtotal" />
+            <PropertyRef Name="DescTotal" />
+            <PropertyRef Name="vt_SubtotalIVA" />
+            <PropertyRef Name="vt_Subtotal0" />
+            <PropertyRef Name="vt_iva" />
+            <PropertyRef Name="vt_total" />
+            <PropertyRef Name="vt_por_iva" />
+            <PropertyRef Name="Nombres" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="vt_fecha" />
+            <PropertyRef Name="vt_fech_venc" />
+            <PropertyRef Name="Ve_Vendedor" />
+            <PropertyRef Name="nom_TerminoPago" />
+            <PropertyRef Name="Num_Coutas" />
+            <PropertyRef Name="vt_Observacion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="nom_presentacion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="lote_num_lote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lote_fecha_vcto" Type="DateTime" Precision="3" />
+          <Property Name="vt_cantidad" Type="Double" Nullable="false" />
+          <Property Name="vt_Precio" Type="Double" Nullable="false" />
+          <Property Name="vt_PorDescUnitario" Type="Double" Nullable="false" />
+          <Property Name="vt_Subtotal" Type="Double" Nullable="false" />
+          <Property Name="DescTotal" Type="Double" Nullable="false" />
+          <Property Name="vt_SubtotalIVA" Type="Double" Nullable="false" />
+          <Property Name="vt_Subtotal0" Type="Double" Nullable="false" />
+          <Property Name="vt_iva" Type="Double" Nullable="false" />
+          <Property Name="vt_total" Type="Double" Nullable="false" />
+          <Property Name="vt_por_iva" Type="Double" Nullable="false" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="vt_NumFactura" Type="String" MaxLength="28" FixedLength="false" Unicode="false" />
+          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="vt_fech_venc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Ve_Vendedor" Type="String" Nullable="false" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="nom_TerminoPago" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Num_Coutas" Type="Int32" Nullable="false" />
+          <Property Name="vt_Observacion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VWFAC_008">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdNota" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="nom_presentacion" />
+            <PropertyRef Name="sc_cantidad" />
+            <PropertyRef Name="sc_Precio" />
+            <PropertyRef Name="sc_descUni" />
+            <PropertyRef Name="sc_PordescUni" />
+            <PropertyRef Name="sc_precioFinal" />
+            <PropertyRef Name="DescTotal" />
+            <PropertyRef Name="sc_subtotal" />
+            <PropertyRef Name="sc_subtotalIVA" />
+            <PropertyRef Name="sc_subtotal0" />
+            <PropertyRef Name="sc_iva" />
+            <PropertyRef Name="vt_por_iva" />
+            <PropertyRef Name="Nombres" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="no_fecha" />
+            <PropertyRef Name="no_fecha_venc" />
+            <PropertyRef Name="CreDeb" />
+            <PropertyRef Name="sc_total" />
+            <PropertyRef Name="No_Descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdNota" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="nom_presentacion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="lote_num_lote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lote_fecha_vcto" Type="DateTime" Precision="3" />
+          <Property Name="sc_cantidad" Type="Double" Nullable="false" />
+          <Property Name="sc_Precio" Type="Double" Nullable="false" />
+          <Property Name="sc_descUni" Type="Double" Nullable="false" />
+          <Property Name="sc_PordescUni" Type="Double" Nullable="false" />
+          <Property Name="sc_precioFinal" Type="Double" Nullable="false" />
+          <Property Name="DescTotal" Type="Double" Nullable="false" />
+          <Property Name="sc_subtotal" Type="Double" Nullable="false" />
+          <Property Name="sc_subtotalIVA" Type="Double" Nullable="false" />
+          <Property Name="sc_subtotal0" Type="Double" Nullable="false" />
+          <Property Name="sc_iva" Type="Double" Nullable="false" />
+          <Property Name="vt_por_iva" Type="Double" Nullable="false" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="NumNota_Impresa" Type="String" MaxLength="28" FixedLength="false" Unicode="false" />
+          <Property Name="no_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="no_fecha_venc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreDeb" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="sc_observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="sc_total" Type="Double" Nullable="false" />
+          <Property Name="No_Descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9048,73 +9066,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VWFAC_007">
-            <EntityTypeMapping TypeName="Model_reportes.VWFAC_007">
-              <MappingFragment StoreEntitySet="VWFAC_007">
-                <ScalarProperty Name="Num_Coutas" ColumnName="Num_Coutas" />
-                <ScalarProperty Name="nom_TerminoPago" ColumnName="nom_TerminoPago" />
-                <ScalarProperty Name="Ve_Vendedor" ColumnName="Ve_Vendedor" />
-                <ScalarProperty Name="vt_fech_venc" ColumnName="vt_fech_venc" />
-                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
-                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
-                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
-                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-                <ScalarProperty Name="vt_por_iva" ColumnName="vt_por_iva" />
-                <ScalarProperty Name="vt_total" ColumnName="vt_total" />
-                <ScalarProperty Name="vt_iva" ColumnName="vt_iva" />
-                <ScalarProperty Name="vt_Subtotal0" ColumnName="vt_Subtotal0" />
-                <ScalarProperty Name="vt_SubtotalIVA" ColumnName="vt_SubtotalIVA" />
-                <ScalarProperty Name="DescTotal" ColumnName="DescTotal" />
-                <ScalarProperty Name="vt_Subtotal" ColumnName="vt_Subtotal" />
-                <ScalarProperty Name="vt_PorDescUnitario" ColumnName="vt_PorDescUnitario" />
-                <ScalarProperty Name="vt_Precio" ColumnName="vt_Precio" />
-                <ScalarProperty Name="vt_cantidad" ColumnName="vt_cantidad" />
-                <ScalarProperty Name="lote_fecha_vcto" ColumnName="lote_fecha_vcto" />
-                <ScalarProperty Name="lote_num_lote" ColumnName="lote_num_lote" />
-                <ScalarProperty Name="nom_presentacion" ColumnName="nom_presentacion" />
-                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
-                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VWFAC_008">
-            <EntityTypeMapping TypeName="Model_reportes.VWFAC_008">
-              <MappingFragment StoreEntitySet="VWFAC_008">
-                <ScalarProperty Name="CreDeb" ColumnName="CreDeb" />
-                <ScalarProperty Name="no_fecha_venc" ColumnName="no_fecha_venc" />
-                <ScalarProperty Name="no_fecha" ColumnName="no_fecha" />
-                <ScalarProperty Name="NumNota_Impresa" ColumnName="NumNota_Impresa" />
-                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
-                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-                <ScalarProperty Name="vt_por_iva" ColumnName="vt_por_iva" />
-                <ScalarProperty Name="sc_iva" ColumnName="sc_iva" />
-                <ScalarProperty Name="sc_subtotal0" ColumnName="sc_subtotal0" />
-                <ScalarProperty Name="sc_subtotalIVA" ColumnName="sc_subtotalIVA" />
-                <ScalarProperty Name="sc_subtotal" ColumnName="sc_subtotal" />
-                <ScalarProperty Name="DescTotal" ColumnName="DescTotal" />
-                <ScalarProperty Name="sc_precioFinal" ColumnName="sc_precioFinal" />
-                <ScalarProperty Name="sc_PordescUni" ColumnName="sc_PordescUni" />
-                <ScalarProperty Name="sc_descUni" ColumnName="sc_descUni" />
-                <ScalarProperty Name="sc_Precio" ColumnName="sc_Precio" />
-                <ScalarProperty Name="sc_cantidad" ColumnName="sc_cantidad" />
-                <ScalarProperty Name="lote_fecha_vcto" ColumnName="lote_fecha_vcto" />
-                <ScalarProperty Name="lote_num_lote" ColumnName="lote_num_lote" />
-                <ScalarProperty Name="nom_presentacion" ColumnName="nom_presentacion" />
-                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdNota" ColumnName="IdNota" />
-                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VWIMP_001">
             <EntityTypeMapping TypeName="Model_reportes.VWIMP_001">
               <MappingFragment StoreEntitySet="VWIMP_001">
@@ -9261,6 +9212,77 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="VWFAC_007">
+            <EntityTypeMapping TypeName="Model_reportes.VWFAC_007">
+              <MappingFragment StoreEntitySet="VWFAC_007">
+                <ScalarProperty Name="vt_Observacion" ColumnName="vt_Observacion" />
+                <ScalarProperty Name="Num_Coutas" ColumnName="Num_Coutas" />
+                <ScalarProperty Name="nom_TerminoPago" ColumnName="nom_TerminoPago" />
+                <ScalarProperty Name="Ve_Vendedor" ColumnName="Ve_Vendedor" />
+                <ScalarProperty Name="vt_fech_venc" ColumnName="vt_fech_venc" />
+                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
+                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="vt_por_iva" ColumnName="vt_por_iva" />
+                <ScalarProperty Name="vt_total" ColumnName="vt_total" />
+                <ScalarProperty Name="vt_iva" ColumnName="vt_iva" />
+                <ScalarProperty Name="vt_Subtotal0" ColumnName="vt_Subtotal0" />
+                <ScalarProperty Name="vt_SubtotalIVA" ColumnName="vt_SubtotalIVA" />
+                <ScalarProperty Name="DescTotal" ColumnName="DescTotal" />
+                <ScalarProperty Name="vt_Subtotal" ColumnName="vt_Subtotal" />
+                <ScalarProperty Name="vt_PorDescUnitario" ColumnName="vt_PorDescUnitario" />
+                <ScalarProperty Name="vt_Precio" ColumnName="vt_Precio" />
+                <ScalarProperty Name="vt_cantidad" ColumnName="vt_cantidad" />
+                <ScalarProperty Name="lote_fecha_vcto" ColumnName="lote_fecha_vcto" />
+                <ScalarProperty Name="lote_num_lote" ColumnName="lote_num_lote" />
+                <ScalarProperty Name="nom_presentacion" ColumnName="nom_presentacion" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWFAC_008">
+            <EntityTypeMapping TypeName="Model_reportes.VWFAC_008">
+              <MappingFragment StoreEntitySet="VWFAC_008">
+                <ScalarProperty Name="No_Descripcion" ColumnName="No_Descripcion" />
+                <ScalarProperty Name="sc_total" ColumnName="sc_total" />
+                <ScalarProperty Name="sc_observacion" ColumnName="sc_observacion" />
+                <ScalarProperty Name="CreDeb" ColumnName="CreDeb" />
+                <ScalarProperty Name="no_fecha_venc" ColumnName="no_fecha_venc" />
+                <ScalarProperty Name="no_fecha" ColumnName="no_fecha" />
+                <ScalarProperty Name="NumNota_Impresa" ColumnName="NumNota_Impresa" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="vt_por_iva" ColumnName="vt_por_iva" />
+                <ScalarProperty Name="sc_iva" ColumnName="sc_iva" />
+                <ScalarProperty Name="sc_subtotal0" ColumnName="sc_subtotal0" />
+                <ScalarProperty Name="sc_subtotalIVA" ColumnName="sc_subtotalIVA" />
+                <ScalarProperty Name="sc_subtotal" ColumnName="sc_subtotal" />
+                <ScalarProperty Name="DescTotal" ColumnName="DescTotal" />
+                <ScalarProperty Name="sc_precioFinal" ColumnName="sc_precioFinal" />
+                <ScalarProperty Name="sc_PordescUni" ColumnName="sc_PordescUni" />
+                <ScalarProperty Name="sc_descUni" ColumnName="sc_descUni" />
+                <ScalarProperty Name="sc_Precio" ColumnName="sc_Precio" />
+                <ScalarProperty Name="sc_cantidad" ColumnName="sc_cantidad" />
+                <ScalarProperty Name="lote_fecha_vcto" ColumnName="lote_fecha_vcto" />
+                <ScalarProperty Name="lote_num_lote" ColumnName="lote_num_lote" />
+                <ScalarProperty Name="nom_presentacion" ColumnName="nom_presentacion" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdNota" ColumnName="IdNota" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

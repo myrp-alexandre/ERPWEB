@@ -49,7 +49,10 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                  no_fecha = q.no_fecha,
                                  no_fecha_venc = q.no_fecha_venc,
                                  NumNota_Impresa = q.NumNota_Impresa,
-                                 vt_por_iva = q.vt_por_iva
+                                 vt_por_iva = q.vt_por_iva,
+                                 No_Descripcion = q.No_Descripcion,
+                                 sc_observacion = q.sc_observacion,
+                                  sc_total = q.sc_total
 
                              }).ToList();
                 }

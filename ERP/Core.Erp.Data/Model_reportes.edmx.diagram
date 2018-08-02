@@ -61,11 +61,11 @@
         <EntityTypeShape EntityType="Model_reportes.VWFAC_004" Width="1.5" PointX="13.375" PointY="25.75" />
         <EntityTypeShape EntityType="Model_reportes.VWFAC_005" Width="1.5" PointX="15.375" PointY="25.75" />
         <EntityTypeShape EntityType="Model_reportes.VWFAC_006" Width="1.5" PointX="26.375" PointY="14.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWFAC_007" Width="1.5" PointX="26.375" PointY="21.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWFAC_008" Width="1.5" PointX="28.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_reportes.VWIMP_001" Width="1.5" PointX="28.375" PointY="11.75" />
         <EntityTypeShape EntityType="Model_reportes.VWFAC_008_aplicaciones" Width="1.5" PointX="28.375" PointY="7.75" />
         <EntityTypeShape EntityType="Model_reportes.VWFAC_009" Width="1.5" PointX="28.375" PointY="18.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWFAC_007" Width="1.5" PointX="26.375" PointY="24.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWFAC_008" Width="1.5" PointX="22.375" PointY="28.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
