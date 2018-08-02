@@ -260,6 +260,7 @@ namespace Core.Erp.Data.Facturacion
                     Entity.IdCatalogo_traslado = info.IdCatalogo_traslado;
                         Entity.Fecha_UltMod = info.Fecha_UltMod=DateTime.Now;
                         Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
+                    Entity.gi_Observacion = info.gi_Observacion;
                     foreach (var item in info.lst_detalle)
                     {
                         Context.fa_guia_remision_det.Add(new fa_guia_remision_det
