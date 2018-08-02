@@ -8932,6 +8932,7 @@
     <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\Index.cshtml" />
     <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\_GridViewPartial_liquidacion_oc.cshtml" />
     <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\_GridViewPartial_liqidacion_dc.cshtml" />
+    <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\_GridViewPartial_liquidacion_oc_det.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

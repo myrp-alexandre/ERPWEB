@@ -18,6 +18,9 @@ namespace Core.Erp.Bus.Importacion
         List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> lst_gastos_nos_asignados = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
         List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> lst_gastos_asignados = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
         imp_orden_compra_ext_ct_cbteble_det_gastos_Data data_gastos = new imp_orden_compra_ext_ct_cbteble_det_gastos_Data();
+        List<imp_ordencompra_ext_det_Info> lst_detalle = new List<imp_ordencompra_ext_det_Info>();
+
+
         #endregion
         public List<imp_ordencompra_ext_Info> get_list(int IdEmpresa)
         {
@@ -158,6 +161,34 @@ namespace Core.Erp.Bus.Importacion
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+
+        public List<imp_ordencompra_ext_det_Info> calcular_costos(int IdEmpresa, decimal IdOrdenCompraExter)
+        {
+            try
+            {
+              double costo_incurridos = 0;
+              double valor_compra = 0;
+
+                lst_detalle =  odata_det.get_list(IdEmpresa, IdOrdenCompraExter);
+                lst_gastos_asignados = data_gastos.get_list_gastos_asignados(IdEmpresa, IdOrdenCompraExter);
+                if (lst_gastos_asignados != null)
+                    costo_incurridos = lst_gastos_asignados.Sum(v=>v.dc_Valor);
+                if (lst_gastos_asignados != null)
+                    valor_compra = lst_detalle.Sum(v => v.od_subtotal);
+                foreach (var item in lst_detalle)
+                {
+                    item.od_factor_costo = (costo_incurridos + valor_compra) / valor_compra;
+                    item.od_costo_total = item.od_costo * item.od_factor_costo;
+                }
+              return lst_detalle;
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

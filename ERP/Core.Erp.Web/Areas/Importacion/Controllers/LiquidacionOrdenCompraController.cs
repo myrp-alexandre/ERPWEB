@@ -107,7 +107,17 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             Session["imp_ordencompra_ext_det_Info"] = null;
             return RedirectToAction("Index");
         }
-       
+
+        #endregion
+        #region json
+        public JsonResult calclar_costo(decimal IdTransaccionSession=0, decimal IdOrdenCompraExter)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+           info_detalle.set_list( bus_orden.calcular_costos(IdEmpresa, IdOrdenCompraExter));
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+    
         #endregion
 
         private void cargar_combos()
