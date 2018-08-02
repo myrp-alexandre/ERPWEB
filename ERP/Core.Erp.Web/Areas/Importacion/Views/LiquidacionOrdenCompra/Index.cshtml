@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.Helps.cl_filtros_Info
 @{
-    ViewBag.Title = "Asignación de gastos";
+    ViewBag.Title = "Liquidación de orden de compra";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -73,7 +73,7 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_asignacion_gastos", new { Fecha_ini = Model.fecha_ini, Fecha_fin = Model.fecha_fin })
+            @Html.Action("GridViewPartial_liquidacion_oc", new { Fecha_ini = Model.fecha_ini, Fecha_fin = Model.fecha_fin })
 
 
         </div>
