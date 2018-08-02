@@ -8,12 +8,11 @@
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "InventarioReportes", Action = "EditingAddNew", Area = "Reportes" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "InventarioReportes", Action = "EditingUpdate", Area = "Reportes" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "InventarioReportes", Action = "EditingDelete", Area = "Reportes" };
 
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = true;
-        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowEditButton = false;
         settings.CommandColumn.ShowDeleteButton = true;
 
         settings.SettingsContextMenu.Enabled = true;
@@ -33,9 +32,9 @@
         };
         settings.Columns.Add(column =>
         {
-            column.FieldName = "pr_descripcion";
+            column.FieldName = "pr_descripcion_combo";
             column.Caption = "Producto";
-            column.Width = Unit.Percentage(60);
+            column.Width = Unit.Percentage(90);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
@@ -43,7 +42,7 @@
         {
             column.FieldName = "IdProducto";
             column.Caption = "Producto";
-            column.Width = Unit.Percentage(30);
+            column.Width = Unit.Percentage(90);
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>

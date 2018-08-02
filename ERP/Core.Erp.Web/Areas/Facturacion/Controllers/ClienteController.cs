@@ -20,6 +20,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_cliente_contactos_List List_fa_cliente_contactos = new fa_cliente_contactos_List();
         fa_cliente_x_fa_Vendedor_x_sucursal_list List_fa_cliente_x_fa_Vendedor_x_sucursal = new fa_cliente_x_fa_Vendedor_x_sucursal_list();
         fa_cliente_x_fa_Vendedor_x_sucursal_Bus bus_fa_vendedor = new fa_cliente_x_fa_Vendedor_x_sucursal_Bus();
+        tb_parroquia_Bus bus_parroquia = new tb_parroquia_Bus();
         string mensaje = string.Empty;
 
         public ActionResult Index()
@@ -184,7 +185,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
         public ActionResult get_parroquias(string IdCiudad = "")
         {
-            tb_parroquia_Bus bus_parroquia = new tb_parroquia_Bus();
+            
             return GridViewExtension.GetComboBoxCallbackResult(p =>
             {
                 p.TextField = "nom_parroquia";
@@ -258,7 +259,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_cliente_contactos_Info info_det)
         {
             if (ModelState.IsValid)
+            {
+                var parroquia = bus_parroquia.get_info(info_det.IdParroquia);
+                info_det.nom_parroquia = parroquia == null ? "" : parroquia.nom_parroquia;
                 List_fa_cliente_contactos.AddRow(info_det);
+            }
             fa_cliente_Info model = new fa_cliente_Info();
             model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list();
             cargar_combos_det();
@@ -269,7 +274,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_cliente_contactos_Info info_det)
         {
             if (ModelState.IsValid)
+            {
+                var parroquia = bus_parroquia.get_info(info_det.IdParroquia);
+                info_det.nom_parroquia = parroquia == null ? "" : parroquia.nom_parroquia;
                 List_fa_cliente_contactos.UpdateRow(info_det);
+            }
             fa_cliente_Info model = new fa_cliente_Info();
             model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list();
             cargar_combos_det();
@@ -359,6 +368,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             edited_info.Telefono = info_det.Telefono;
             edited_info.Direccion = info_det.Direccion;
             edited_info.Nombres = info_det.Nombres;
+            edited_info.nom_parroquia = info_det.nom_parroquia;
         }
 
     }

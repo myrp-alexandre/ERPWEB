@@ -23,5 +23,9 @@ namespace Core.Erp.Info.Facturacion
         [Required(ErrorMessage = ("El campo parroquia es obligatorio"))]
         public string IdParroquia { get; set; }
         public string Direccion_emp { get; set; }
+
+        #region Campos que no existen en la tabla
+        public string nom_parroquia { get; set; }
+        #endregion
     }
 }

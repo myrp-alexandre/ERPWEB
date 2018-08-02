@@ -690,6 +690,29 @@
           <Property Name="MotivoAnula" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwfa_cliente_contactos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwfa_cliente_contactos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="IdContacto" />
+            <PropertyRef Name="Nombres" />
+            <PropertyRef Name="IdCiudad" />
+            <PropertyRef Name="IdParroquia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCliente" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdContacto" Type="int" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="200" />
+          <Property Name="Celular" Type="varchar" MaxLength="200" />
+          <Property Name="Correo" Type="varchar" MaxLength="1000" />
+          <Property Name="Direccion" Type="varchar" MaxLength="1000" />
+          <Property Name="IdCiudad" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdParroquia" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="nom_parroquia" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwfa_proforma' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwfa_proforma">
           <Key>
@@ -1832,6 +1855,21 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
           <EntitySet Name="fa_TipoNota" EntityType="Self.fa_TipoNota" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_TipoNota_x_Empresa_x_Sucursal" EntityType="Self.fa_TipoNota_x_Empresa_x_Sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_Vendedor" EntityType="Self.fa_Vendedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwfa_cliente_contactos" EntityType="Self.vwfa_cliente_contactos" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwfa_cliente_contactos].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_cliente_contactos].[IdCliente] AS [IdCliente], 
+    [vwfa_cliente_contactos].[IdContacto] AS [IdContacto], 
+    [vwfa_cliente_contactos].[Nombres] AS [Nombres], 
+    [vwfa_cliente_contactos].[Telefono] AS [Telefono], 
+    [vwfa_cliente_contactos].[Celular] AS [Celular], 
+    [vwfa_cliente_contactos].[Correo] AS [Correo], 
+    [vwfa_cliente_contactos].[Direccion] AS [Direccion], 
+    [vwfa_cliente_contactos].[IdCiudad] AS [IdCiudad], 
+    [vwfa_cliente_contactos].[IdParroquia] AS [IdParroquia], 
+    [vwfa_cliente_contactos].[nom_parroquia] AS [nom_parroquia]
+    FROM [dbo].[vwfa_cliente_contactos] AS [vwfa_cliente_contactos]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwfa_proforma" EntityType="Self.vwfa_proforma" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwfa_proforma].[IdEmpresa] AS [IdEmpresa], 
@@ -2511,6 +2549,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
             <End Role="fa_guia_remision" EntitySet="fa_guia_remision" />
             <End Role="fa_guia_remision_det" EntitySet="fa_guia_remision_det" />
           </AssociationSet>
+          <EntitySet Name="vwfa_cliente_contactos" EntityType="Model_facturacion.vwfa_cliente_contactos" />
           </EntityContainer>
         <EntityType Name="fa_cliente_tipo">
           <Key>
@@ -4361,6 +4400,27 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwfa_cliente_contactos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="IdContacto" />
+            <PropertyRef Name="Nombres" />
+            <PropertyRef Name="IdCiudad" />
+            <PropertyRef Name="IdParroquia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdContacto" Type="Int32" Nullable="false" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IdCiudad" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdParroquia" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="nom_parroquia" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5321,6 +5381,23 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
                 <ScalarProperty Name="IdGuiaRemision" ColumnName="IdGuiaRemision" />
                 <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwfa_cliente_contactos">
+            <EntityTypeMapping TypeName="Model_facturacion.vwfa_cliente_contactos">
+              <MappingFragment StoreEntitySet="vwfa_cliente_contactos">
+                <ScalarProperty Name="nom_parroquia" ColumnName="nom_parroquia" />
+                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="IdContacto" ColumnName="IdContacto" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

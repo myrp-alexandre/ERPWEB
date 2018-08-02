@@ -50,7 +50,6 @@ namespace Core.Erp.Info.Helps
         public bool no_mostrar_saldo_en_0 { get; set; }
         
         #endregion
-        public List<INV_008_Info> lst_decimal { get; set; }
 
         #region filtros de RRHH
         public int IdTipoNomina { get; set; }

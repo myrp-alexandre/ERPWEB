@@ -7,6 +7,7 @@ using Core.Erp.Bus.Reportes.Inventario;
 using Core.Erp.Info.Reportes.Inventario;
 using System.Collections.Generic;
 using Core.Erp.Web.Areas.Reportes.Controllers;
+using Core.Erp.Info.Inventario;
 
 namespace Core.Erp.Web.Reportes.Inventario
 {
@@ -14,7 +15,7 @@ namespace Core.Erp.Web.Reportes.Inventario
     {
         public string usuario { get; set; }
         public string empresa { get; set; }
-        public List<decimal> lst_producto { get; set; }
+        public List<in_Producto_Info> lst_producto { get; set; }
         public INV_008_Rpt()
         {
             InitializeComponent();
