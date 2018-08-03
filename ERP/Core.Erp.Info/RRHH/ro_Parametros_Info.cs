@@ -38,6 +38,8 @@ namespace Core.Erp.Info.RRHH
         public double Porcentaje_aporte_patr { get; set; }
         [Required(ErrorMessage = "El campo rubro gasto acta finiquito es obligatorio")]
         public string IdRubro_acta_finiquito { get; set; }
+        public bool genera_op_x_pago { get; set; }
+        public bool Genera_op_x_pago_x_empleao { get; set; }
         public List<ro_Config_Param_contable_Info> lst_cta_x_rubros { get; set; }
         public List<ro_Config_Param_contable_Info> lst_cta_x_provisiones { get; set; }
 

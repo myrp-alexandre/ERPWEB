@@ -28,8 +28,36 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #endregion
         public ActionResult Index()
         {
-            return View();
+            ro_Parametros_Info model = new ro_Parametros_Info
+            {
+                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
+                IdTipoCbte_AsientoSueldoXPagar = 1,
+            };
+            model.lst_cta_x_rubros = new List<ro_Config_Param_contable_Info>();
+            lst_cta_rubro.set_list_cta_rubros(model.lst_cta_x_rubros);
+            cargar_combos();
+            cargar_combos_detalle();
+            return View(model);
         }
+        [HttpPost]
+        public ActionResult Index( ro_Parametros_Info model)
+        {
+            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            model.lst_cta_x_rubros = lst_cta_rubro.get_list_cta_rubros();
+            model.lst_cta_x_sueldo_pagar = lst_cta_rubro.get_list_sueldo_x_pagar();
+            if (!bus_parametros.guardarDB(model))
+            {
+                cargar_combos();
+                return View(model);
+            }
+            else
+            {
+                cargar_combos();
+                return View(model);
+            }
+
+        }
+
         [ValidateInput(false)]
         public ActionResult GridViewPartial_parametros()
         {
@@ -46,59 +74,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ViewBag.lst_comprobante_tipo = bus_comprobante_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_rubro = bus_rubro.get_list_rub_concepto(IdEmpresa);
         }
-        public ActionResult Nuevo()
-        {
-            ro_Parametros_Info model = new ro_Parametros_Info
-            {
-                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
-                IdTipoCbte_AsientoSueldoXPagar = 1,
-            };
-            model.lst_cta_x_rubros = new List<ro_Config_Param_contable_Info>();
-            lst_cta_rubro.set_list_cta_rubros(model.lst_cta_x_rubros);
-            cargar_combos();
-            cargar_combos_detalle();
-            return View(model);
-        }
-        [HttpPost]
-        public ActionResult Nuevo(ro_Parametros_Info model)
-        {
-            
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.lst_cta_x_rubros = lst_cta_rubro.get_list_cta_rubros();
-            model.lst_cta_x_sueldo_pagar=lst_cta_rubro.get_list_sueldo_x_pagar();
-            if (!bus_parametros.guardarDB(model))
-            {
-                cargar_combos();
-                return View(model);
-            }
-            return RedirectToAction("Index");
-        }
-        public ActionResult Modificar()
-        {
-            cargar_combos();
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            ro_Parametros_Info model = bus_parametros.get_info(IdEmpresa);
-            lst_cta_rubro.set_list_cta_rubros(model.lst_cta_x_rubros);
-            lst_cta_rubro.set_list_sueldo_x_pagar(model.lst_cta_x_sueldo_pagar);
-            if (model == null)
-                return RedirectToAction("Index");
-            return View(model);
-        }
-        [HttpPost]
-        public ActionResult Modificar(ro_Parametros_Info model)
-        {
-
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.lst_cta_x_rubros = lst_cta_rubro.get_list_cta_rubros();
-            model.lst_cta_x_sueldo_pagar = lst_cta_rubro.get_list_sueldo_x_pagar();
-            if (!bus_parametros.modificarDB(model))
-            {
-                cargar_combos();
-                return View(model);
-            }
-            return RedirectToAction("Index");
-
-        }     
         [ValidateInput(false)]
         public ActionResult GridViewPartial_cta_ctble_rubros()
         {

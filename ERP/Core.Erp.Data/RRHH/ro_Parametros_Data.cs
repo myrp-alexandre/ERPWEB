@@ -144,7 +144,9 @@ namespace Core.Erp.Data.RRHH
                         Porcentaje_aporte_patr = info.Porcentaje_aporte_patr,
                         Porcentaje_aporte_pers = info.Porcentaje_aporte_pers,
                         IdRubro_acta_finiquito = info.IdRubro_acta_finiquito,
-                    };
+                        genera_op_x_pago = info.genera_op_x_pago,
+                        Genera_op_x_pago_x_empleao = info.Genera_op_x_pago_x_empleao
+                };
                     Context.ro_Parametros.Add(Entity);
                     Context.SaveChanges();
                 }
@@ -182,6 +184,8 @@ namespace Core.Erp.Data.RRHH
                     Entity.Porcentaje_aporte_pers = info.Porcentaje_aporte_pers;
                     Entity.Porcentaje_aporte_patr = info.Porcentaje_aporte_patr;
                     Entity.IdRubro_acta_finiquito = info.IdRubro_acta_finiquito;
+                    Entity.genera_op_x_pago = info.genera_op_x_pago;
+                    Entity.Genera_op_x_pago_x_empleao = info.Genera_op_x_pago_x_empleao;
                     Context.SaveChanges();
                 }
 
