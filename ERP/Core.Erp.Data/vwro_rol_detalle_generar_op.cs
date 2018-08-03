@@ -12,7 +12,7 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ro_rol_detalle
+    public partial class vwro_rol_detalle_generar_op
     {
         public int IdEmpresa { get; set; }
         public int IdNominaTipo { get; set; }
@@ -20,19 +20,9 @@ namespace Core.Erp.Data
         public int IdPeriodo { get; set; }
         public decimal IdEmpleado { get; set; }
         public string IdRubro { get; set; }
-        public int Orden { get; set; }
         public double Valor { get; set; }
-        public Nullable<bool> rub_visible_reporte { get; set; }
-        public string Observacion { get; set; }
-        public string TipoMovimiento { get; set; }
-        public string IdCentroCosto { get; set; }
-        public string IdCentroCosto_sub_centro_costo { get; set; }
-        public Nullable<int> IdPunto_cargo { get; set; }
-    
-        public virtual ro_rol ro_rol { get; set; }
-        public virtual ro_rol_detalle_x_rubro_acumulado ro_rol_detalle_x_rubro_acumulado { get; set; }
-        public virtual ro_empleado ro_empleado { get; set; }
-        public virtual ro_rubro_tipo ro_rubro_tipo { get; set; }
-        public virtual ro_periodo_x_ro_Nomina_TipoLiqui ro_periodo_x_ro_Nomina_TipoLiqui { get; set; }
+        public System.DateTime pe_FechaIni { get; set; }
+        public System.DateTime pe_FechaFin { get; set; }
+        public decimal IdPersona { get; set; }
     }
 }

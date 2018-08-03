@@ -154,8 +154,13 @@
 
         public enum eTipoOrdenPago
         {
+            ANTI_EMPLE,
+            ANTI_PROVEE,
             FACT_PROVEE,
-            OTROS_CONC
+            LIQ_HAB,
+            OTROS_CONC,
+            PRESTAMOS,
+            VACACIONES
         }
 
         public enum eEstadoAprobacionOrdenPago

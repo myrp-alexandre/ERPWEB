@@ -99,6 +99,7 @@ namespace Core.Erp.Data
         public virtual DbSet<vwRo_ActaFiniquito> vwRo_ActaFiniquito { get; set; }
         public virtual DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
         public virtual DbSet<ro_Parametros> ro_Parametros { get; set; }
+        public virtual DbSet<vwro_rol_detalle_generar_op> vwro_rol_detalle_generar_op { get; set; }
     
         public virtual ObjectResult<spro_nomina_x_pago_utilidad_Result> spro_nomina_x_pago_utilidad(Nullable<int> idempresa, Nullable<int> idNomina, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
         {

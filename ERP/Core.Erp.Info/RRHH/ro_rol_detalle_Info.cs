@@ -28,6 +28,11 @@ namespace Core.Erp.Info.RRHH
         public int IdDepartamento { get; set; }
         public Nullable<int> IdCargo { get; set; }
 
+        public decimal IdPersona { get; set; }
+        public decimal IdEntidad { get; set; }
+        public System.DateTime pe_FechaFin { get; set; }
+
+
 
     }
 }

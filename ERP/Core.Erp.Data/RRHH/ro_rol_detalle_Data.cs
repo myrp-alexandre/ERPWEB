@@ -61,6 +61,42 @@ namespace Core.Erp.Data.RRHH
                 throw ;
             }
         }
+        public List<ro_rol_detalle_Info> Get_lst_detalle_genear_op(int idEmpresa, int idNominaTipo, int idNominaTipoLiqui, int idPeriodo)
+        {
+
+            try
+            {
+                List<ro_rol_detalle_Info> oListado = new List<ro_rol_detalle_Info>();
+
+                using (Entities_rrhh db = new Entities_rrhh())
+                {
+                    oListado = (from a in db.vwro_rol_detalle_generar_op
+                                where a.IdEmpresa==idEmpresa
+                                && a.IdNominaTipo==idNominaTipo
+                                && a.IdNominaTipoLiqui==idNominaTipoLiqui
+                                &&a.IdPeriodo==idPeriodo
+                                select new ro_rol_detalle_Info
+                                {
+                                    IdEmpresa = a.IdEmpresa,
+                                    IdNominaTipo = a.IdNominaTipo,
+                                    IdNominaTipoLiqui = a.IdNominaTipoLiqui,
+                                    IdPeriodo = a.IdPeriodo,
+                                    IdEmpleado = a.IdEmpleado,
+                                    IdRubro = a.IdRubro,
+                                    Valor = a.Valor,
+                                    IdEntidad=a.IdEmpleado,
+                                    IdPersona=a.IdPersona,
+                                    pe_FechaFin=a.pe_FechaFin
+                                }).ToList();
+                }
+                return oListado;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
     }
 }

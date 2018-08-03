@@ -8,7 +8,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Nuevo", "ParametrosContable", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Index", "ParametrosContable", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
 
     @Html.HiddenFor(q => q.IdEmpresa);
@@ -36,7 +36,7 @@
 
                    //Campo ID
                    settings.Properties.ValueField = "IdTipoCbte";
-                   settings.Properties.ValueType = typeof(decimal);
+                   settings.Properties.ValueType = typeof(int);
                    settings.Properties.TextField = "tc_TipoCbte";
                    //Boton para seleccionar ningun registro
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
@@ -85,12 +85,12 @@
                                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                                        settings.Properties.DisplayFormatString = "[{0}] - {1}";
                                        settings.Properties.Columns.Add("ru_codRolGen", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                       settings.Properties.Columns.Add("ru_descripcion", "Rubro").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                       settings.Properties.Columns.Add("ru_tipo", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                       settings.Properties.Columns.Add("ru_descripcion", "Rubro").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                       settings.Properties.Columns.Add("ru_tipo", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(10);
 
                                        //Campo ID
                                        settings.Properties.ValueField = "IdRubro";
-                                       settings.Properties.ValueType = typeof(decimal);
+                                       settings.Properties.ValueType = typeof(string);
                                        settings.Properties.TextField = "ru_descripcion";
                                        //Boton para seleccionar ningun registro
                                        settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
@@ -127,6 +127,30 @@
                                 @Html.ValidationMessageFor(q => q.Porcentaje_aporte_pers, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="genera_op_x_pago">Genera op al cerrar la nomina</label>
+                              @Html.DevExpress().CheckBoxFor(q => q.genera_op_x_pago, settings =>
+                                   {
+                                       settings.Name = "genera_op_x_pago";
+                                   }).GetHtml()
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Genera_op_x_pago_x_empleao">Genera orden de pago por empleado</label>
+                                @Html.DevExpress().CheckBoxFor(q => q.Genera_op_x_pago_x_empleao, settings =>
+                                   {
+                                       settings.Name = "Genera_op_x_pago_x_empleao";
+                                   }).GetHtml()
+                            </div>
+                        </div>
+                      
                     </div>
                 </div>
             </div>

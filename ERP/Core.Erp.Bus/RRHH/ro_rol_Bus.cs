@@ -5,6 +5,8 @@ using Core.Erp.Info.RRHH;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Erp.Info.CuentasPorPagar;
+using Core.Erp.Info.Helps;
 namespace Core.Erp.Bus.RRHH
 {
     public class ro_rol_Bus
@@ -75,6 +77,8 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
+                var lst_rol_x_empleado = bus_detalle.Get_lst_detalle_genear_op(info.IdEmpresa, info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo);
+                var lst_op = get_op_x_empleados(lst_rol_x_empleado, info);
                 return odata.CerrarPeriodo(info);
             }
             catch (Exception)
@@ -351,9 +355,6 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
-
-
-
         // funciones para decimos
         public bool Decimos(ro_rol_Info info)
         {
@@ -368,6 +369,57 @@ namespace Core.Erp.Bus.RRHH
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+        // generar ordenes de pagos
+        public List<cp_orden_pago_Info> get_op_x_empleados(List<ro_rol_detalle_Info> lista_rol_detalle, ro_rol_Info rol)
+        {
+            try
+            {
+                List<cp_orden_pago_Info> lista_op = new List<cp_orden_pago_Info>();
+                lista_rol_detalle.ForEach(item =>
+
+                {
+
+                    lista_op.Add(
+                        new cp_orden_pago_Info
+                        {
+
+                            IdEmpresa = item.IdEmpresa,
+                            Observacion = item.Observacion,
+                            IdTipo_op = cl_enumeradores.eTipoOrdenPago.ANTI_EMPLE.ToString(),
+                            IdTipo_Persona = cl_enumeradores.eTipoPersona.EMPLEA.ToString(),
+                            IdPersona = item.IdPersona,
+                            IdEntidad = item.IdEntidad,
+                            Fecha = item.pe_FechaFin,
+                            Fecha_Pago = item.pe_FechaFin,
+                            IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString(),
+                            IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.CHEQUE.ToString(),
+                            Estado = "A",
+                            Fecha_Transac = DateTime.Now,
+                            detalle = new List<cp_orden_pago_det_Info>
+                            {
+                                new cp_orden_pago_det_Info
+                                {
+                                    IdEmpresa=item.IdEmpresa,
+                                    Secuencia=1,
+                                    Valor_a_pagar=item.Valor,
+                                    Referencia="Periodo "+item.IdPeriodo,
+                                    Fecha_Pago=item.pe_FechaFin,
+                                    IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString(),
+                                    IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.CHEQUE.ToString(),
+                                }
+                            }
+                            
+                        });
+                });
+                return lista_op;
+            }
+            catch (Exception)
+            {
+
+                
                 throw;
             }
         }

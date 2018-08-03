@@ -19,6 +19,7 @@ namespace Core.Erp.Data
         {
             this.ro_participacion_utilidad = new HashSet<ro_participacion_utilidad>();
             this.ro_nomina_x_horas_extras = new HashSet<ro_nomina_x_horas_extras>();
+            this.ro_rol_detalle = new HashSet<ro_rol_detalle>();
         }
     
         public int IdEmpresa { get; set; }
@@ -36,5 +37,7 @@ namespace Core.Erp.Data
         public virtual ro_rol ro_rol { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ro_nomina_x_horas_extras> ro_nomina_x_horas_extras { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ro_rol_detalle> ro_rol_detalle { get; set; }
     }
 }

@@ -28,11 +28,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #endregion
         public ActionResult Index()
         {
-            ro_Parametros_Info model = new ro_Parametros_Info
-            {
-                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
-                IdTipoCbte_AsientoSueldoXPagar = 1,
-            };
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+
+            ro_Parametros_Info model = new ro_Parametros_Info();
+            model = bus_parametros.get_info(IdEmpresa);
+           
             model.lst_cta_x_rubros = new List<ro_Config_Param_contable_Info>();
             lst_cta_rubro.set_list_cta_rubros(model.lst_cta_x_rubros);
             cargar_combos();
