@@ -9,6 +9,7 @@ namespace Core.Erp.Info.Facturacion
 {
     public class fa_proforma_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         [Required(ErrorMessage = "El campo sucursal es obligatorio")]
 
