@@ -110,11 +110,11 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
                 if (model.lst_gastos_asignados == null)
                     model.lst_gastos_asignados = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
-                info_gastos_lst.set_list(model.lst_gastos_asignados, model.IdTransaccionSession);
+                   info_gastos_lst.set_list(model.lst_gastos_asignados, model.IdTransaccionSession);
 
                 if (model.lst_detalle == null)
                     model.lst_detalle = new List<imp_ordencompra_ext_det_Info>();
-                info_detalle_lst.set_list(model.lst_detalle);
+                  info_detalle_lst.set_list(model.lst_detalle);
             }
             else
                 model = new imp_ordencompra_ext_Info();
@@ -126,7 +126,6 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         public ActionResult Nuevo(imp_ordencompra_ext_Info model)
         {
             model.lst_gastos_asignados = info_gastos_lst.get_list(model.IdTransaccionSession);
-            model.lst_gastos_asignados = Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info_Info"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
             if (model.lst_gastos_asignados == null)
             {
                 ViewBag.mensaje = "no existe detalle";
@@ -144,7 +143,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
             }
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            if (!bus_liquidacion_oc.guardarDB(model))
+            if (!bus_gastos.guardarDB(model))
             {
                 cargar_combos();
                 return View(model);

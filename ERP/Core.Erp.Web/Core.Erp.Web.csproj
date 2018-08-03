@@ -8888,9 +8888,7 @@
     <Content Include="Areas\Facturacion\Views\NotaDeCreditoFacturacion\_GridViewPartial_CruceNC.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDeCreditoFacturacion\_GridViewPartial_CruceNC_x_cruzar.cshtml" />
     <Content Include="Areas\Importacion\Views\AsignacionDeGastos\Nuevo.cshtml" />
-    <Content Include="Areas\Importacion\Views\AsignacionDeGastos\Modificar.cshtml" />
     <Content Include="Areas\Importacion\Views\AsignacionDeGastos\Index.cshtml" />
-    <Content Include="Areas\Importacion\Views\AsignacionDeGastos\Anular.cshtml" />
     <Content Include="Areas\Importacion\Views\AsignacionDeGastos\_GridViewPartial_asignacion_gastos_det.cshtml" />
     <Content Include="Areas\Importacion\Views\AsignacionDeGastos\_GridViewPartial_asignacion_gastos.cshtml" />
     <Content Include="Areas\Importacion\Views\AsignacionDeGastos\_GridViewPartial_gastos_asignados.cshtml" />
@@ -8930,6 +8928,12 @@
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_008.cshtml" />
     <Content Include="Areas\Reportes\Views\ContabilidadReportes\CONTA_003.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_009.cshtml" />
+    <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\Nuevo.cshtml" />
+    <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\Index.cshtml" />
+    <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\_GridViewPartial_liquidacion_oc.cshtml" />
+    <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\_GridViewPartial_liqidacion_dc.cshtml" />
+    <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\_GridViewPartial_liquidacion_oc_det.cshtml" />
+    <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\_CmbCuenta_contable_liquidacion.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -9004,7 +9008,6 @@
     <Folder Include="Areas\Facturacion\Models\" />
     <Folder Include="Areas\General\Models\" />
     <Folder Include="Areas\Importacion\Models\" />
-    <Folder Include="Areas\Importacion\Views\LiquidacionOrdenCompra\" />
     <Folder Include="Areas\Inventario\Models\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
@@ -9042,7 +9045,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

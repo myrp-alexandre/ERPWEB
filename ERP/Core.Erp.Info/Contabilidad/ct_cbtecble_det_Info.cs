@@ -29,6 +29,7 @@ namespace Core.Erp.Info.Contabilidad
         public double dc_Valor_debe { get; set; }
         [Required(ErrorMessage = "El campo cuenta valor haber es obligatorio")]
         public double dc_Valor_haber { get; set; }
+        public string pc_Cuenta { get; set; }
 
 
     }

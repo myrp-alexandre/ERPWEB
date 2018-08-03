@@ -133,6 +133,26 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             fa_TerminoPago_Info model = new fa_TerminoPago_Info();
             return PartialView("_GridViewPartial_pago_dist", model);
         }
+
+        public void CargarCuotas(int NumeroCuotas = 0, int DiasVcto = 0)
+        {
+            List<fa_TerminoPago_Distribucion_Info> lst_distribucion = new List<fa_TerminoPago_Distribucion_Info>();
+            if (NumeroCuotas != 0 & DiasVcto != 0 && DiasVcto > NumeroCuotas)
+            {
+                int Dias = DiasVcto / NumeroCuotas;
+                int DiasAcum = Dias;
+                for (int i = 0; i < NumeroCuotas; i++)
+                {
+                    lst_distribucion.Add(new fa_TerminoPago_Distribucion_Info
+                    {
+                        Num_Dias_Vcto = DiasAcum,
+                        Por_distribucion = (float)NumeroCuotas / DiasVcto
+                    });
+                    DiasAcum += Dias;
+                }
+            }
+            List_fa_TerminoPago_Distribucion.set_list(lst_distribucion);
+        }
     }
        public class fa_TerminoPago_Distribucion_list
     {

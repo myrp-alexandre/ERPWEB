@@ -38,14 +38,14 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="Num_Coutas">Cuotas*</label>
-                    @Html.TextBoxFor(q => q.Num_Coutas, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.Num_Coutas, new { @class = "form-control", @id = "Num_Coutas" })
                     @Html.ValidationMessageFor(q => q.Num_Coutas, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="Dias_Vct">Días*</label>
-                    @Html.TextBoxFor(q => q.Dias_Vct, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.Dias_Vct, new { @class = "form-control", @id = "Dias_Vct" })
                     @Html.ValidationMessageFor(q => q.Dias_Vct, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -72,3 +72,39 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+
+<script type="text/javascript">
+
+    $(function () {
+        $("#Num_Coutas").change(function () {
+            CargarCuotas();
+        });
+        $("#Dias_Vct").change(function () {
+            CargarCuotas();
+        });
+    });
+
+    function CargarCuotas() {
+        var datos = {
+            NumeroCuotas: $("#Num_Coutas").val(),
+            DiasVcto: $("#Dias_Vct").val()
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CargarCuotas", "TerminoPago", new { Area = "Facturacion" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+            },
+            error: function (error) {
+            }
+        });
+        GridView_pago_dist.PerformCallback();
+    };
+</script>

@@ -10,6 +10,7 @@ namespace Core.Erp.Bus.Importacion
 {
   public  class imp_ordencompra_ext_Bus
     {
+        #region variables
         imp_ordencompra_ext_Data odata = new imp_ordencompra_ext_Data();
         imp_ordencompra_ext_det_Data odata_det = new imp_ordencompra_ext_det_Data();
         imp_ordencompra_ext_Info info_oc = new imp_ordencompra_ext_Info();
@@ -17,6 +18,10 @@ namespace Core.Erp.Bus.Importacion
         List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> lst_gastos_nos_asignados = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
         List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> lst_gastos_asignados = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
         imp_orden_compra_ext_ct_cbteble_det_gastos_Data data_gastos = new imp_orden_compra_ext_ct_cbteble_det_gastos_Data();
+        List<imp_ordencompra_ext_det_Info> lst_detalle = new List<imp_ordencompra_ext_det_Info>();
+
+
+        #endregion
         public List<imp_ordencompra_ext_Info> get_list(int IdEmpresa)
         {
             try
@@ -53,6 +58,19 @@ namespace Core.Erp.Bus.Importacion
                 throw;
             }
         }
+        public imp_ordencompra_ext_Info get_liquidar_oc(int IdEmpresa, decimal IdOrdenCompra_ext)
+        {
+            try
+            {
+                info_oc = odata.get_info_recepcion_merca(IdEmpresa, IdOrdenCompra_ext);
+                return info_oc;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public imp_ordencompra_ext_Info get_asignar_gastos(int IdEmpresa, decimal IdOrdenCompra_ext)
         {
@@ -61,6 +79,8 @@ namespace Core.Erp.Bus.Importacion
                 info_oc = odata.get_info_recepcion_merca(IdEmpresa, IdOrdenCompra_ext);
                 info_oc.lst_gastos_por_asignar = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
                 info_oc.lst_gastos_asignados = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
+                info_oc.lst_detalle = new List<imp_ordencompra_ext_det_Info>();
+                info_oc.lst_detalle = odata_det.get_list(IdEmpresa, IdOrdenCompra_ext);
                 info_oc.lst_gastos_asignados = data_gastos.get_list_gastos_asignados(IdEmpresa, IdOrdenCompra_ext);
                 info_oc.lst_gastos_por_asignar = data_gastos.get_list_gastos_no_asignados(IdEmpresa,  info_oc.IdCtaCble_importacion);
                 return info_oc;
@@ -145,6 +165,34 @@ namespace Core.Erp.Bus.Importacion
             }
         }
 
+
+        public List<imp_ordencompra_ext_det_Info> calcular_costos(int IdEmpresa, decimal IdOrdenCompraExter)
+        {
+            try
+            {
+              double costo_incurridos = 0;
+              double valor_compra = 0;
+
+                lst_detalle =  odata_det.get_list(IdEmpresa, IdOrdenCompraExter);
+                lst_gastos_asignados = data_gastos.get_list_gastos_asignados(IdEmpresa, IdOrdenCompraExter);
+                if (lst_gastos_asignados != null)
+                    costo_incurridos = lst_gastos_asignados.Sum(v=>v.dc_Valor);
+                if (lst_gastos_asignados != null)
+                    valor_compra =Convert.ToDouble( lst_detalle.Sum(v => v.od_total_fob));
+                foreach (var item in lst_detalle)
+                {
+                    item.od_factor_costo = (costo_incurridos + valor_compra) / valor_compra;
+                    item.od_costo_bodega = item.od_costo * item.od_factor_costo;
+                    item.od_costo_total = item.od_costo_bodega * item.od_cantidad_recepcion;
+                }
+              return lst_detalle;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
 
     }

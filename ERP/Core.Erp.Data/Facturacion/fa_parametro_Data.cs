@@ -17,7 +17,7 @@ namespace Core.Erp.Data.Facturacion
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
                     fa_parametro Entity = Context.fa_parametro.FirstOrDefault(q => q.IdEmpresa == IdEmpresa);
-                    if (Entity == null)
+                    if (Entity != null)
                         info = new fa_parametro_Info
                         {
                             IdEmpresa = Entity.IdEmpresa,

@@ -350,6 +350,7 @@ namespace Core.Erp.Data.Facturacion
                 if (!string.IsNullOrEmpty(cliente.IdCtaCble_cxc_Credito) && parametro.IdTipoCbteCble_Factura != null)
                 {
                     ct_cbtecble_Info diario = armar_diario(info, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito);
+                    if(diario != null)
                     if (data_ct.guardarDB(diario))
                     {
                         db_f.fa_factura_x_ct_cbtecble.Add(new fa_factura_x_ct_cbtecble

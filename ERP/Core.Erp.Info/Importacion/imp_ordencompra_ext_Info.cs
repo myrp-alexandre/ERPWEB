@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Erp.Info.Contabilidad;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -43,6 +44,9 @@ namespace Core.Erp.Info.Importacion
         public List<imp_ordencompra_ext_det_Info> lst_detalle { get; set; }
         public List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> lst_gastos_asignados { get; set; }
         public List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> lst_gastos_por_asignar { get; set; }
+        public ct_cbtecble_Info info_comrobante { get; set; }
+        public List<ct_cbtecble_det_Info> lst_comprobante { get; set; }
+
 
         #region campos de vistas
         public decimal IdProducto { get; set; }
