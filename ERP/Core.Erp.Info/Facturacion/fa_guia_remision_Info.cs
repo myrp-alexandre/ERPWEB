@@ -9,6 +9,7 @@ namespace Core.Erp.Info.Facturacion
 {
    public class fa_guia_remision_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public int IdBodega { get; set; }

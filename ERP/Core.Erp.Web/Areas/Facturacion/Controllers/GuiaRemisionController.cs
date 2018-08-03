@@ -113,6 +113,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             int IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             fa_guia_remision_Info model = new fa_guia_remision_Info
             {
                 gi_fecha = DateTime.Now,
