@@ -96,7 +96,6 @@
         <EntityTypeShape EntityType="Model_rrhh.ro_Historico_Liquidacion_Vacaciones_Det" Width="1.5" PointX="30.625" PointY="33.375" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Historico_Liquidacion_Vacaciones_Det_ro_Historico_Liquidacion_Vacaciones" />
         <EntityTypeShape EntityType="Model_rrhh.ro_historico_vacaciones_x_empleado" Width="1.5" PointX="23.875" PointY="59.125" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_Parametros" Width="1.5" PointX="13.375" PointY="25.75" />
         <EntityTypeShape EntityType="Model_rrhh.ro_rol_detalle_x_rubro_acumulado" Width="1.5" PointX="32.125" PointY="20.5" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rol_detalle_x_rubro_acumulado" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_rol" Width="1.5" PointX="20.375" PointY="25.75" />
@@ -156,6 +155,7 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo5" />
         <EntityTypeShape EntityType="Model_rrhh.vwRo_ActaFiniquito" Width="1.5" PointX="11.375" PointY="15.75" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_combo" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_Parametros" Width="1.5" PointX="29.375" PointY="25.5" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -32,5 +32,7 @@ namespace Core.Erp.Data
         public double Porcentaje_aporte_pers { get; set; }
         public double Porcentaje_aporte_patr { get; set; }
         public string IdRubro_acta_finiquito { get; set; }
+        public bool genera_op_x_pago { get; set; }
+        public bool Genera_op_x_pago_x_empleao { get; set; }
     }
 }

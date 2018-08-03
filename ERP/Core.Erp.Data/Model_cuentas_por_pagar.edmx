@@ -363,6 +363,25 @@
           <Property Name="IdCtaCble_Credito" Type="varchar" MaxLength="20" />
           <Property Name="Dispara_Alerta" Type="bit" />
         </EntityType>
+        <EntityType Name="cp_orden_pago_x_nomina">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdNominaTipoLiqui" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdRubro" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="int" Nullable="false" />
+          <Property Name="IdNominaTipoLiqui" Type="int" Nullable="false" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdRubro" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdEmpresa_op" Type="int" Nullable="false" />
+          <Property Name="IdOrdenPago" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Observacion" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="cp_pagos_sri">
           <Key>
             <PropertyRef Name="codigo_pago_sri" />
@@ -1283,6 +1302,20 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' no
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_cp_orden_pago_x_nomina_cp_orden_pago">
+          <End Role="cp_orden_pago" Type="Self.cp_orden_pago" Multiplicity="1" />
+          <End Role="cp_orden_pago_x_nomina" Type="Self.cp_orden_pago_x_nomina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_orden_pago">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenPago" />
+            </Principal>
+            <Dependent Role="cp_orden_pago_x_nomina">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_cp_proveedor_cp_codigo_SRI">
           <End Role="cp_codigo_SRI" Type="Self.cp_codigo_SRI" Multiplicity="0..1" />
           <End Role="cp_proveedor" Type="Self.cp_proveedor" Multiplicity="*" />
@@ -1422,6 +1455,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' no
           <EntitySet Name="cp_orden_pago_formapago" EntityType="Self.cp_orden_pago_formapago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cp_orden_pago_tipo" EntityType="Self.cp_orden_pago_tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cp_orden_pago_tipo_x_empresa" EntityType="Self.cp_orden_pago_tipo_x_empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cp_orden_pago_x_nomina" EntityType="Self.cp_orden_pago_x_nomina" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cp_pagos_sri" EntityType="Self.cp_pagos_sri" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cp_pais_sri" EntityType="Self.cp_pais_sri" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cp_parametros" EntityType="Self.cp_parametros" Schema="dbo" store:Type="Tables" />
@@ -1789,6 +1823,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' no
             <End Role="cp_orden_pago_tipo" EntitySet="cp_orden_pago_tipo" />
             <End Role="cp_orden_pago_tipo_x_empresa" EntitySet="cp_orden_pago_tipo_x_empresa" />
           </AssociationSet>
+          <AssociationSet Name="FK_cp_orden_pago_x_nomina_cp_orden_pago" Association="Self.FK_cp_orden_pago_x_nomina_cp_orden_pago">
+            <End Role="cp_orden_pago" EntitySet="cp_orden_pago" />
+            <End Role="cp_orden_pago_x_nomina" EntitySet="cp_orden_pago_x_nomina" />
+          </AssociationSet>
           <AssociationSet Name="FK_cp_proveedor_cp_codigo_SRI" Association="Self.FK_cp_proveedor_cp_codigo_SRI">
             <End Role="cp_codigo_SRI" EntitySet="cp_codigo_SRI" />
             <End Role="cp_proveedor" EntitySet="cp_proveedor" />
@@ -1992,6 +2030,11 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' no
             <Parameter Name="IdCbteCble_pago" Mode="In" Type="Decimal" />
             <Parameter Name="IdUsuario" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="cp_orden_pago_x_nomina" EntityType="Model_cuentas_por_pagar.cp_orden_pago_x_nomina" />
+          <AssociationSet Name="FK_cp_orden_pago_x_nomina_cp_orden_pago" Association="Model_cuentas_por_pagar.FK_cp_orden_pago_x_nomina_cp_orden_pago">
+            <End Role="cp_orden_pago" EntitySet="cp_orden_pago" />
+            <End Role="cp_orden_pago_x_nomina" EntitySet="cp_orden_pago_x_nomina" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="cp_codigo_SRI_tipo">
           <Key>
@@ -2525,6 +2568,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' no
           <NavigationProperty Name="cp_orden_pago_det" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_det_cp_orden_pago" FromRole="cp_orden_pago" ToRole="cp_orden_pago_det" />
           <NavigationProperty Name="cp_orden_pago_formapago" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_cp_orden_pago_formapago" FromRole="cp_orden_pago" ToRole="cp_orden_pago_formapago" />
           <NavigationProperty Name="cp_orden_pago_tipo" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_cp_orden_pago_tipo" FromRole="cp_orden_pago" ToRole="cp_orden_pago_tipo" />
+          <NavigationProperty Name="cp_orden_pago_x_nomina" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_x_nomina_cp_orden_pago" FromRole="cp_orden_pago" ToRole="cp_orden_pago_x_nomina" />
         </EntityType>
         <EntityType Name="cp_orden_pago_det">
           <Key>
@@ -3491,6 +3535,40 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' no
           <Property Type="Decimal" Name="IdCbteCble_cxp" Nullable="true" Precision="18" Scale="0" />
           <Property Type="Int32" Name="IdBanco" Nullable="true" />
         </ComplexType>
+        <EntityType Name="cp_orden_pago_x_nomina">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdNominaTipoLiqui" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdRubro" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipoLiqui" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa_op" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenPago" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Observacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cp_orden_pago" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_x_nomina_cp_orden_pago" FromRole="cp_orden_pago_x_nomina" ToRole="cp_orden_pago" />
+        </EntityType>
+        <Association Name="FK_cp_orden_pago_x_nomina_cp_orden_pago">
+          <End Type="Model_cuentas_por_pagar.cp_orden_pago" Role="cp_orden_pago" Multiplicity="1" />
+          <End Type="Model_cuentas_por_pagar.cp_orden_pago_x_nomina" Role="cp_orden_pago_x_nomina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_orden_pago">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenPago" />
+            </Principal>
+            <Dependent Role="cp_orden_pago_x_nomina">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4433,6 +4511,21 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="cp_orden_pago_x_nomina">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_orden_pago_x_nomina">
+              <MappingFragment StoreEntitySet="cp_orden_pago_x_nomina">
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="IdOrdenPago" ColumnName="IdOrdenPago" />
+                <ScalarProperty Name="IdEmpresa_op" ColumnName="IdEmpresa_op" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
+                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

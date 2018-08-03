@@ -85,7 +85,6 @@ namespace Core.Erp.Data
         public virtual DbSet<ro_Historico_Liquidacion_Vacaciones> ro_Historico_Liquidacion_Vacaciones { get; set; }
         public virtual DbSet<ro_Historico_Liquidacion_Vacaciones_Det> ro_Historico_Liquidacion_Vacaciones_Det { get; set; }
         public virtual DbSet<ro_historico_vacaciones_x_empleado> ro_historico_vacaciones_x_empleado { get; set; }
-        public virtual DbSet<ro_Parametros> ro_Parametros { get; set; }
         public virtual DbSet<ro_rol_detalle_x_rubro_acumulado> ro_rol_detalle_x_rubro_acumulado { get; set; }
         public virtual DbSet<vwro_rol> vwro_rol { get; set; }
         public virtual DbSet<ro_Comprobantes_Contables> ro_Comprobantes_Contables { get; set; }
@@ -99,6 +98,7 @@ namespace Core.Erp.Data
         public virtual DbSet<ro_rubro_tipo> ro_rubro_tipo { get; set; }
         public virtual DbSet<vwRo_ActaFiniquito> vwRo_ActaFiniquito { get; set; }
         public virtual DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
+        public virtual DbSet<ro_Parametros> ro_Parametros { get; set; }
     
         public virtual ObjectResult<spro_nomina_x_pago_utilidad_Result> spro_nomina_x_pago_utilidad(Nullable<int> idempresa, Nullable<int> idNomina, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
         {
