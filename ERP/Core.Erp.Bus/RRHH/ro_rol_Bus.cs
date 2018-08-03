@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Info.Helps;
+using Core.Erp.Data.CuentasPorPagar;
+
 namespace Core.Erp.Bus.RRHH
 {
     public class ro_rol_Bus
@@ -22,6 +24,8 @@ namespace Core.Erp.Bus.RRHH
         ct_cbtecble_Data odata_comprobante = new ct_cbtecble_Data();
         ro_Parametros_Data ro_parametro = new ro_Parametros_Data();
         ro_Parametros_Info info_parametro = new ro_Parametros_Info();
+        cp_orden_pago_tipo_x_empresa_Data data_tipo_op = new cp_orden_pago_tipo_x_empresa_Data();
+        cp_orden_pago_tipo_x_empresa_Info info_tipo_op = new cp_orden_pago_tipo_x_empresa_Info();
 
         ro_Comprobantes_Contables_Data ro_comprobante = new ro_Comprobantes_Contables_Data();
         #endregion
@@ -77,8 +81,9 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
+                info_tipo_op = data_tipo_op.get_info(info.IdEmpresa, cl_enumeradores.eTipoOrdenPago.ANTI_EMPLE.ToString());
                 var lst_rol_x_empleado = bus_detalle.Get_lst_detalle_genear_op(info.IdEmpresa, info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo);
-                var lst_op = get_op_x_empleados(lst_rol_x_empleado, info);
+                var lst_op = get_op_x_empleados(lst_rol_x_empleado, info_tipo_op);
                 return odata.CerrarPeriodo(info);
             }
             catch (Exception)
@@ -373,7 +378,7 @@ namespace Core.Erp.Bus.RRHH
             }
         }
         // generar ordenes de pagos
-        public List<cp_orden_pago_Info> get_op_x_empleados(List<ro_rol_detalle_Info> lista_rol_detalle, ro_rol_Info rol)
+        public List<cp_orden_pago_Info> get_op_x_empleados(List<ro_rol_detalle_Info> lista_rol_detalle, cp_orden_pago_tipo_x_empresa_Info tipo_op)
         {
             try
             {
@@ -410,9 +415,44 @@ namespace Core.Erp.Bus.RRHH
                                     IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString(),
                                     IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.CHEQUE.ToString(),
                                 }
-                            }
-                            
+                            },
+                            info_comprobante=new ct_cbtecble_Info
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                cb_Fecha = item.pe_FechaFin,
+                                cb_Anio = item.pe_FechaFin.Year,
+                                cb_mes = item.pe_FechaFin.Month,
+                                IdTipoCbte=1,
+                                cb_Estado = "A",
+                                IdPeriodo = Convert.ToInt32(item.pe_FechaFin.Year.ToString() + item.pe_FechaFin.Month.ToString().PadLeft(2, '0')),
+                                cb_Observacion = "Cancelación de sueldo del "+item.IdPeriodo+" ha "+item.pe_nombreCompleato,
+                                lst_ct_cbtecble_det=new List<ct_cbtecble_det_Info>
+                                {
+                                    new ct_cbtecble_det_Info
+                                    {
+                                        IdEmpresa=item.IdEmpresa,
+                                        IdTipoCbte=1,
+                                        IdCtaCble=info_tipo_op.IdCtaCble,
+                                        dc_Valor=item.Valor,
+                                        dc_Observacion="Cancelación de sueldo del "+item.IdPeriodo+" ha "+item.pe_nombreCompleato,
+                                        secuencia=1,
+                                    },
+                                    new ct_cbtecble_det_Info
+                                    {
+                                         IdEmpresa=item.IdEmpresa,
+                                        IdTipoCbte=1,
+                                        IdCtaCble=info_tipo_op.IdCtaCble,
+                                        dc_Valor=item.Valor*-1,
+                                        dc_Observacion="Cancelación de sueldo del "+item.IdPeriodo+" ha "+item.pe_nombreCompleato,
+                                        secuencia=2,
+                                    }
+                                     
+                                }
+                                 
+                             }
+                           
                         });
+                    
                 });
                 return lista_op;
             }

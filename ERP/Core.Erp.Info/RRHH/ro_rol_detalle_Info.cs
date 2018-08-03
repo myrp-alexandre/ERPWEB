@@ -31,6 +31,7 @@ namespace Core.Erp.Info.RRHH
         public decimal IdPersona { get; set; }
         public decimal IdEntidad { get; set; }
         public System.DateTime pe_FechaFin { get; set; }
+        public string pe_nombreCompleato { get; set; }
 
 
 
