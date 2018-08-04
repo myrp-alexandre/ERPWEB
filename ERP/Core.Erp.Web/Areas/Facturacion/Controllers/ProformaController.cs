@@ -96,7 +96,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         private bool validar(fa_proforma_Info i_validar, ref string msg)
         {
             i_validar.IdEntidad = i_validar.IdCliente;
-            i_validar.lst_det = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            i_validar.lst_det = List_det.get_list(Convert.ToDecimal(i_validar.IdTransaccionSession));
             if (i_validar.lst_det.Count == 0)
             {
                 msg = "No ha ingresado registros en el detalle de la proforma";
@@ -147,7 +147,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 pf_fecha = DateTime.Now,
                 pf_fecha_vcto = DateTime.Now,
-                lst_det = new List<fa_proforma_det_Info>()
+                lst_det = new List<fa_proforma_det_Info>(),
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
             cargar_combos();
@@ -158,8 +159,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult Nuevo(fa_proforma_Info model)
         {
             model.lst_det = List_det.get_list(model.IdTransaccionSession);
+            
             if (!validar(model, ref mensaje))
             {
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 ViewBag.mensaje = mensaje;
                 cargar_combos();
                 return View(model);
@@ -167,6 +170,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             model.IdUsuario_creacion = Session["IdUsuario"].ToString();
             if (!bus_proforma.guardarDB(model))
             {
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 ViewBag.mensaje = mensaje;
                 cargar_combos();
                 return View(model);
