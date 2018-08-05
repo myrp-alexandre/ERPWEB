@@ -320,10 +320,19 @@ namespace Core.Erp.Data.Facturacion
             {
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
-                    fa_guia_remision Entity = Context.fa_guia_remision.FirstOrDefault(q => q.IdGuiaRemision == info.IdGuiaRemision);
+                    fa_guia_remision Entity = Context.fa_guia_remision.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdGuiaRemision == info.IdGuiaRemision);
                     if (Entity == null) return false;
                     Entity.Estado = info.Estado = "I";
+                    Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                     Entity.Fecha_UltAnu = DateTime.Now;
+                    Entity.MotiAnula = info.MotiAnula;
+
+                    var lst_det = Context.fa_guia_remision_det_x_factura.Where(q => q.IdEmpresa_guia == info.IdEmpresa && q.IdGuiaRemision_guia == info.IdGuiaRemision).ToList();
+                    Context.fa_guia_remision_det_x_factura.RemoveRange(lst_det);
+
+                    var lst_fac = Context.fa_factura_x_fa_guia_remision.Where(q => q.gi_IdEmpresa == info.IdEmpresa && q.gi_IdGuiaRemision == info.IdGuiaRemision).ToList();
+                    Context.fa_factura_x_fa_guia_remision.RemoveRange(lst_fac);
+
                     Context.SaveChanges();
 
                     

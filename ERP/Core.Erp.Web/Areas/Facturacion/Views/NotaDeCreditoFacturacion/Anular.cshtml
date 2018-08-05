@@ -379,14 +379,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-12">
-                    @Html.TextAreaFor(q => q.MotiAnula, new { @class = "form-control", @rows = 3 })
-                    @Html.ValidationMessageFor(q => q.MotiAnula, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+
         <div class="col-md-6">
             <div id="Tabs" role="tabpanel">
                 <ul class="nav nav-tabs" role="tablist">
@@ -461,6 +454,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_cuotas">
 
                         <div class="col-md-12">
@@ -474,6 +468,17 @@
                             @Html.Action("GridViewPartial_CruceNC")
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="MotiAnula">Motivo anulación*</label>
+                    @Html.TextAreaFor(q => q.MotiAnula, new { @class = "form-control", @rows = 3 })
+                    @Html.ValidationMessageFor(q => q.MotiAnula, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

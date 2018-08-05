@@ -58,6 +58,7 @@ namespace Core.Erp.Info.Facturacion
         public string nom_pc { get; set; }
         public string ip { get; set; }
         public string Estado { get; set; }
+        [Required(ErrorMessage = "El campo motivo de anulación es obligatorio")]
         public string MotiAnula { get; set; }
         [Required(ErrorMessage = "El campo dirección destino es obligatorio")]
 

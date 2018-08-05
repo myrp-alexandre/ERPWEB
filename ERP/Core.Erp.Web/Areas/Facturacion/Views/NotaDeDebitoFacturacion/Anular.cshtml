@@ -382,14 +382,7 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-12">
-                    @Html.TextAreaFor(q => q.MotiAnula, new { @class = "form-control", @rows = 3 })
-                    @Html.ValidationMessageFor(q => q.MotiAnula, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+
 
         <div class="col-md-6">
             <div id="Tabs" role="tabpanel">
@@ -478,6 +471,17 @@
                             @Html.Action("GridViewPartial_CruceND")
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="MotiAnula">Motivo anulación*</label>
+                    @Html.TextAreaFor(q => q.MotiAnula, new { @class = "form-control", @rows = 3 })
+                    @Html.ValidationMessageFor(q => q.MotiAnula, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
