@@ -5,6 +5,7 @@ using Core.Erp.Info.CuentasPorPagar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Erp.Info.Helps;
 namespace Core.Erp.Bus.CuentasPorPagar
 {
     public class cp_orden_pago_Bus
@@ -75,8 +76,11 @@ namespace Core.Erp.Bus.CuentasPorPagar
         {
             try
             {
-                info_proveedore = bus_proveedor.get_info(info.IdEmpresa,Convert.ToInt32( info.IdEntidad));
-                info.IdPersona = info_proveedore.IdPersona;
+                if (info.IdTipo_op.ToString() != cl_enumeradores.eTipoOrdenPago.ANTI_EMPLE.ToString())
+                {
+                    info_proveedore = bus_proveedor.get_info(info.IdEmpresa, Convert.ToInt32(info.IdEntidad));
+                    info.IdPersona = info_proveedore.IdPersona;
+                }
 
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
                 info.info_comprobante.cb_Fecha = (DateTime)info.Fecha_Pago;

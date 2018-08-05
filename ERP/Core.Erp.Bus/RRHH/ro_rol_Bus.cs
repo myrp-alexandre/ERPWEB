@@ -8,7 +8,7 @@ using System.Linq;
 using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Info.Helps;
 using Core.Erp.Data.CuentasPorPagar;
-
+using Core.Erp.Bus.CuentasPorPagar;
 namespace Core.Erp.Bus.RRHH
 {
     public class ro_rol_Bus
@@ -26,8 +26,11 @@ namespace Core.Erp.Bus.RRHH
         ro_Parametros_Info info_parametro = new ro_Parametros_Info();
         cp_orden_pago_tipo_x_empresa_Data data_tipo_op = new cp_orden_pago_tipo_x_empresa_Data();
         cp_orden_pago_tipo_x_empresa_Info info_tipo_op = new cp_orden_pago_tipo_x_empresa_Info();
-
+        cp_orden_pago_Bus bus_op = new cp_orden_pago_Bus();
         ro_Comprobantes_Contables_Data ro_comprobante = new ro_Comprobantes_Contables_Data();
+        cp_orden_pago_x_nomina_Data data_op_x_empleado = new cp_orden_pago_x_nomina_Data();
+        List<cp_orden_pago_x_nomina_Info> lst_op_x_nomina = new List<cp_orden_pago_x_nomina_Info>();
+
         #endregion
         public List< ro_rol_Info> get_list_nominas(int IdEmpresa )
         {
@@ -81,9 +84,28 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
+                
                 info_tipo_op = data_tipo_op.get_info(info.IdEmpresa, cl_enumeradores.eTipoOrdenPago.ANTI_EMPLE.ToString());
                 var lst_rol_x_empleado = bus_detalle.Get_lst_detalle_genear_op(info.IdEmpresa, info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo);
                 var lst_op = get_op_x_empleados(lst_rol_x_empleado, info_tipo_op);
+                foreach (var item in lst_op)
+                {
+                    bus_op.guardarDB(item);
+                    lst_op_x_nomina.Add(
+                        new cp_orden_pago_x_nomina_Info
+                        {
+                            IdEmpresa=item.IdEmpresa,
+                            IdEmpleado=item.IdEmpleado,
+                            IdNominaTipo=info.IdNomina_Tipo,
+                            IdNominaTipoLiqui=info.IdNomina_TipoLiqui,
+                            IdPeriodo=info.IdPeriodo,
+                            IdEmpresa_op=item.IdEmpresa,
+                            IdOrdenPago=item.IdOrdenPago
+                        }
+                        );
+                }
+                data_op_x_empleado.guardarDB(lst_op_x_nomina, info);
+
                 return odata.CerrarPeriodo(info);
             }
             catch (Exception)
@@ -392,17 +414,20 @@ namespace Core.Erp.Bus.RRHH
                         {
 
                             IdEmpresa = item.IdEmpresa,
-                            Observacion = item.Observacion,
+                            Observacion = "Cancelacion sueldo y salarios de " + (item.pe_nombreCompleato)==null?" ":item.pe_nombreCompleato,
                             IdTipo_op = cl_enumeradores.eTipoOrdenPago.ANTI_EMPLE.ToString(),
                             IdTipo_Persona = cl_enumeradores.eTipoPersona.EMPLEA.ToString(),
                             IdPersona = item.IdPersona,
-                            IdEntidad = item.IdEntidad,
+                            IdEntidad = item.IdEmpleado,
                             Fecha = item.pe_FechaFin,
                             Fecha_Pago = item.pe_FechaFin,
                             IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString(),
                             IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.CHEQUE.ToString(),
                             Estado = "A",
                             Fecha_Transac = DateTime.Now,
+                            IdEmpleado=item.IdEmpleado,
+                            
+                            
                             detalle = new List<cp_orden_pago_det_Info>
                             {
                                 new cp_orden_pago_det_Info

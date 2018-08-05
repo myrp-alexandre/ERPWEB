@@ -24,5 +24,6 @@ namespace Core.Erp.Data
         public System.DateTime pe_FechaIni { get; set; }
         public System.DateTime pe_FechaFin { get; set; }
         public decimal IdPersona { get; set; }
+        public string pe_nombreCompleto { get; set; }
     }
 }

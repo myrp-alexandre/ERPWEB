@@ -1965,6 +1965,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_rol_detalle_g
             <PropertyRef Name="pe_FechaIni" />
             <PropertyRef Name="pe_FechaFin" />
             <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="pe_nombreCompleto" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdNominaTipo" Type="int" Nullable="false" />
@@ -1976,6 +1977,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_rol_detalle_g
           <Property Name="pe_FechaIni" Type="smalldatetime" Nullable="false" />
           <Property Name="pe_FechaFin" Type="smalldatetime" Nullable="false" />
           <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <Association Name="FK_ro_Acta_Finiquito_Detalle_ro_Acta_Finiquito">
           <End Role="ro_Acta_Finiquito" Type="Self.ro_Acta_Finiquito" Multiplicity="1" />
@@ -3678,7 +3680,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_rol_detalle_g
     [vwro_rol_detalle_generar_op].[Valor] AS [Valor], 
     [vwro_rol_detalle_generar_op].[pe_FechaIni] AS [pe_FechaIni], 
     [vwro_rol_detalle_generar_op].[pe_FechaFin] AS [pe_FechaFin], 
-    [vwro_rol_detalle_generar_op].[IdPersona] AS [IdPersona]
+    [vwro_rol_detalle_generar_op].[IdPersona] AS [IdPersona], 
+    [vwro_rol_detalle_generar_op].[pe_nombreCompleto] AS [pe_nombreCompleto]
     FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_ro_Acta_Finiquito_Detalle_ro_Acta_Finiquito" Association="Self.FK_ro_Acta_Finiquito_Detalle_ro_Acta_Finiquito">
@@ -4441,11 +4444,11 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_rol_detalle_g
           <EntitySet Name="vwRo_ActaFiniquito" EntityType="Model_rrhh.vwRo_ActaFiniquito" />
           <EntitySet Name="vwro_empleado_combo" EntityType="Model_rrhh.vwro_empleado_combo" />
           <EntitySet Name="ro_Parametros" EntityType="Model_rrhh.ro_Parametros" />
-          <EntitySet Name="vwro_rol_detalle_generar_op" EntityType="Model_rrhh.vwro_rol_detalle_generar_op" />
           <AssociationSet Name="FK_ro_rol_detalle_ro_periodo_x_ro_Nomina_TipoLiqui" Association="Model_rrhh.FK_ro_rol_detalle_ro_periodo_x_ro_Nomina_TipoLiqui">
             <End Role="ro_periodo_x_ro_Nomina_TipoLiqui" EntitySet="ro_periodo_x_ro_Nomina_TipoLiqui" />
             <End Role="ro_rol_detalle" EntitySet="ro_rol_detalle" />
           </AssociationSet>
+          <EntitySet Name="vwro_rol_detalle_generar_op" EntityType="Model_rrhh.vwro_rol_detalle_generar_op" />
           </EntityContainer>
         <EntityType Name="ro_cargo">
           <Key>
@@ -7669,30 +7672,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_rol_detalle_g
           <Property Name="genera_op_x_pago" Type="Boolean" Nullable="false" />
           <Property Name="Genera_op_x_pago_x_empleao" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="vwro_rol_detalle_generar_op">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdNominaTipo" />
-            <PropertyRef Name="IdNominaTipoLiqui" />
-            <PropertyRef Name="IdPeriodo" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="IdRubro" />
-            <PropertyRef Name="Valor" />
-            <PropertyRef Name="pe_FechaIni" />
-            <PropertyRef Name="pe_FechaFin" />
-            <PropertyRef Name="IdPersona" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
-          <Property Name="IdNominaTipoLiqui" Type="Int32" Nullable="false" />
-          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Valor" Type="Double" Nullable="false" />
-          <Property Name="pe_FechaIni" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="pe_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-        </EntityType>
         <Association Name="FK_ro_rol_detalle_ro_periodo_x_ro_Nomina_TipoLiqui">
           <End Type="Model_rrhh.ro_periodo_x_ro_Nomina_TipoLiqui" Role="ro_periodo_x_ro_Nomina_TipoLiqui" Multiplicity="1" />
           <End Type="Model_rrhh.ro_rol_detalle" Role="ro_rol_detalle" Multiplicity="*" />
@@ -7711,6 +7690,32 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_rol_detalle_g
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwro_rol_detalle_generar_op">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdNominaTipoLiqui" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="pe_FechaIni" />
+            <PropertyRef Name="pe_FechaFin" />
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="pe_nombreCompleto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipoLiqui" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="pe_FechaIni" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="pe_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9404,6 +9409,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_rol_detalle_g
           <EntitySetMapping Name="vwro_rol_detalle_generar_op">
             <EntityTypeMapping TypeName="Model_rrhh.vwro_rol_detalle_generar_op">
               <MappingFragment StoreEntitySet="vwro_rol_detalle_generar_op">
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
                 <ScalarProperty Name="pe_FechaFin" ColumnName="pe_FechaFin" />
                 <ScalarProperty Name="pe_FechaIni" ColumnName="pe_FechaIni" />

@@ -86,7 +86,8 @@ namespace Core.Erp.Data.RRHH
                                     Valor = a.Valor,
                                     IdEntidad=a.IdEmpleado,
                                     IdPersona=a.IdPersona,
-                                    pe_FechaFin=a.pe_FechaFin
+                                    pe_FechaFin=a.pe_FechaFin,
+                                    pe_nombreCompleato=a.pe_nombreCompleto
                                 }).ToList();
                 }
                 return oListado;
