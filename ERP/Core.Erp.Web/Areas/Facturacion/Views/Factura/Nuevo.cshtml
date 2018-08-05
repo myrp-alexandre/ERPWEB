@@ -228,7 +228,8 @@
             var datos = {
                 FechaPrimerPago: $("#fecha_primera_cuota").val(),
                     IdTerminoPago: $("#vt_tipo_venta").val(),
-                ValorPrimerPago: $("#valor_abono").val()
+                ValorPrimerPago: $("#valor_abono").val(),
+                IdTransaccionSession: $("#IdTransaccionSession").val()
             }
             $.ajax({
                 type: 'POST',
@@ -287,7 +288,8 @@
     function AddProformas() {
 
         var datos = {
-            IDs: selectedIDs
+            IDs: selectedIDs,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -316,7 +318,7 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.vt_tipoDoc)
-
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -429,11 +431,11 @@
                     <label for="pf_observacion">Observación</label>
                     @Html.TextBoxFor(q => q.vt_Observacion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.vt_Observacion, "", new { @class = "text-danger" })
-                </div>                
+                </div>
             </div>
-            
-                
-            
+
+
+
         </div>
 
         <div class="col-md-6">
@@ -497,7 +499,7 @@
                             <button type="button" class="btn btn-primary" id="btn_buscar" onclick="MostrarModalProformas();">
                                 <i class="fa fa-search"></i> Proformas
                             </button>
-                        </div>                        
+                        </div>
                     </div>
                     <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_cuotas">
                         <div class="row">

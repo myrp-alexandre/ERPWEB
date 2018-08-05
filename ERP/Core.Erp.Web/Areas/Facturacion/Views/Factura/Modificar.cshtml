@@ -15,7 +15,7 @@
     @Html.HiddenFor(q => q.IdBodega)
     @Html.HiddenFor(q => q.IdCbteVta)
     @Html.HiddenFor(q => q.IdPuntoVta)
-
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -426,12 +426,12 @@
         });
         }
 
-
-        function CargarCuotas() {
+    function CargarCuotas() {
             var datos = {
                 FechaPrimerPago: $("#fecha_primera_cuota").val(),
                     IdTerminoPago: $("#vt_tipo_venta").val(),
-                ValorPrimerPago: $("#valor_abono").val()
+                ValorPrimerPago: $("#valor_abono").val(),
+                IdTransaccionSession: $("#IdTransaccionSession").val()
             }
             $.ajax({
                 type: 'POST',
@@ -446,6 +446,6 @@
                 }
             });
             GridView_factura_cuotas.PerformCallback();
-        }
+    }
 
 </script>

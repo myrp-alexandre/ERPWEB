@@ -58,6 +58,7 @@ namespace Core.Erp.Info.Facturacion
         public double pd_iva { get; set; }
         public double pd_subtotal { get; set; }
         public decimal IdProductoSeleccionado { get; set; }
+        public string EstadoCierre { get; set; }
         #endregion
 
 

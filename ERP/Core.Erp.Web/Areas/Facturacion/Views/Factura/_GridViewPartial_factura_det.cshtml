@@ -150,7 +150,7 @@
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
-        settings.ClientSideEvents.BeginCallback = "function(s,e){e.customArgs['IdCliente'] = IdCliente.GetValue(); }";
+        settings.ClientSideEvents.BeginCallback = "function(s,e){e.customArgs['IdCliente'] = IdCliente.GetValue(); e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();}";
         settings.ClientSideEvents.EndCallback = "function(s,e){CargarCuotas();}";
 
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "vt_Subtotal").DisplayFormat = "{0:n2}";

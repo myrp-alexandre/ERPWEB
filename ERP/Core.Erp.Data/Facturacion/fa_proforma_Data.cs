@@ -34,7 +34,8 @@ namespace Core.Erp.Data.Facturacion
                                  pe_nombreCompleto = q.pe_nombreCompleto,
                                  pd_subtotal = q.pd_subtotal,
                                  pd_iva = q.pd_iva,
-                                 pd_total = q.pd_total
+                                 pd_total = q.pd_total,
+                                 EstadoCierre = q.EstadoCierre
                              }).ToList();
                 }
                 return Lista;

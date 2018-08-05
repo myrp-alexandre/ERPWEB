@@ -71,6 +71,17 @@ namespace Core.Erp.Bus.Facturacion
                 throw;
             }
         }
+        public bool modificarEstadoImpresion(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, bool estado_impresion)
+        {
+            try
+            {
+                return odata.modificarEstadoImpresion(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, estado_impresion);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public bool modificarDB(fa_factura_Info info)
         {
             try

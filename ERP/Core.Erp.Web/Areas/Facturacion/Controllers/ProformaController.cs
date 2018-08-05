@@ -148,7 +148,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 pf_fecha = DateTime.Now,
                 pf_fecha_vcto = DateTime.Now,
                 lst_det = new List<fa_proforma_det_Info>(),
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
             cargar_combos();
@@ -192,7 +192,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 return RedirectToAction("Index");
             model.IdEntidad = model.IdCliente;
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdProforma);
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
             cargar_combos();
             return View(model);
@@ -232,7 +232,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 return RedirectToAction("Index");
             model.IdEntidad = model.IdCliente;
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdProforma);
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
             cargar_combos();
             return View(model);

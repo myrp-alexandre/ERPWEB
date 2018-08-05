@@ -126,7 +126,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         private bool validar(fa_factura_Info i_validar, ref string msg)
         {
-            i_validar.lst_det = List_det.get_list();
+            i_validar.lst_det = List_det.get_list(i_validar.IdTransaccionSession);
             if (i_validar.lst_det.Count == 0)
             {
                 msg = "No ha ingresado registros en el detalle de la proforma";
@@ -143,7 +143,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 return false;
             }
 
-            i_validar.lst_cuota = List_cuotas.get_list();
+            i_validar.lst_cuota = List_cuotas.get_list(i_validar.IdTransaccionSession);
             i_validar.IdBodega = (int)bus_punto_venta.get_info(i_validar.IdEmpresa, i_validar.IdSucursal, Convert.ToInt32(i_validar.IdPuntoVta)).IdBodega;
             i_validar.IdPeriodo = Convert.ToInt32(i_validar.vt_fecha.ToString("yyyyMM"));
             i_validar.vt_mes = i_validar.vt_fecha.Month;
@@ -261,7 +261,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        public void CargarCuotas(DateTime? FechaPrimerPago, string IdTerminoPago = "", double ValorPrimerPago = 0)
+        public void CargarCuotas(DateTime? FechaPrimerPago, string IdTerminoPago = "", double ValorPrimerPago = 0, decimal IdTransaccionSession = 0)
         {
             List<fa_cuotas_x_doc_Info> lst_cuotas = new List<fa_cuotas_x_doc_Info>();
             if (FechaPrimerPago != null)
@@ -269,7 +269,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 var lst_distribucion = bus_termino_pago_distribucion.get_list(IdTerminoPago);
                 int Secuencia = 1;
                 int NumCuotas = lst_distribucion.Count;
-                double totalAux = Math.Round(List_det.get_list().Sum(q => q.vt_total) - ValorPrimerPago, 2, MidpointRounding.AwayFromZero);
+                double totalAux = Math.Round(List_det.get_list(IdTransaccionSession).Sum(q => q.vt_total) - ValorPrimerPago, 2, MidpointRounding.AwayFromZero);
                 DateTime FechaPagosAcum = Convert.ToDateTime(FechaPrimerPago);
                 foreach (var item in lst_distribucion)
                 {
@@ -304,13 +304,19 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                         });
                 }
             }
-            List_cuotas.set_list(lst_cuotas);
+            List_cuotas.set_list(lst_cuotas,IdTransaccionSession);
         }
         #endregion
 
         #region Acciones
         public ActionResult Nuevo()
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             fa_factura_Info model = new fa_factura_Info
             {
                 IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
@@ -319,10 +325,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 vt_fech_venc = DateTime.Now,
                 lst_det = new List<fa_factura_det_Info>(),
                 lst_cuota = new List<fa_cuotas_x_doc_Info>(),
-                vt_tipoDoc = "FACT"
+                vt_tipoDoc = "FACT",
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
-            List_det.set_list(model.lst_det);
-            List_cuotas.set_list(model.lst_cuota);
+            List_det.set_list(model.lst_det, model.IdTransaccionSession);
+            List_cuotas.set_list(model.lst_cuota, model.IdTransaccionSession);
             cargar_combos(model);
             return View(model);
         }
@@ -348,17 +355,22 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult Modificar(int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             fa_factura_Info model = bus_factura.get_info(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
             if(model == null)
                 return RedirectToAction("Index");
             if (model.esta_impresa == null ? false : Convert.ToBoolean(model.esta_impresa))
-            {
                 return RedirectToAction("Index");
-            }
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_cuota = bus_cuotas.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
-            List_det.set_list(model.lst_det);            
-            List_cuotas.set_list(model.lst_cuota);
+            List_det.set_list(model.lst_det,model.IdTransaccionSession);            
+            List_cuotas.set_list(model.lst_cuota, model.IdTransaccionSession);
             cargar_combos(model);
             return View(model);
         }
@@ -384,13 +396,20 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult Anular(int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             fa_factura_Info model = bus_factura.get_info(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_cuota = bus_cuotas.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
-            List_det.set_list(model.lst_det);
-            List_cuotas.set_list(model.lst_cuota);
+            List_det.set_list(model.lst_det, model.IdTransaccionSession);
+            List_cuotas.set_list(model.lst_cuota, model.IdTransaccionSession);
             cargar_combos(model);
             return View(model);
         }
@@ -412,21 +431,22 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #region Cuotas
         public ActionResult GridViewPartial_factura_cuotas()
         {
-            var model = List_cuotas.get_list();
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = List_cuotas.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_factura_cuotas", model);
         }
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdateCuota([ModelBinder(typeof(DevExpressEditorsBinder))] fa_cuotas_x_doc_Info info_det)
         {
-            List_cuotas.UpdateRow(info_det);
-            var model = List_cuotas.get_list();
+            List_cuotas.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_cuotas.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_factura_cuotas", model);
         }
 
         public ActionResult EditingDeleteCuota(int Secuencia)
         {
-            List_cuotas.DeleteRow(Secuencia);
-            var model = List_cuotas.get_list();
+            List_cuotas.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_cuotas.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_factura_cuotas", model);
         }
         #endregion
@@ -448,7 +468,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_factura_det()
         {
-            var model = List_det.get_list();
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["IdCliente"]) ? Request.Params["IdCliente"].ToString() : "-1";
             return PartialView("_GridViewPartial_factura_det", model);
@@ -490,8 +511,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     }
                 }
             }
-            List_det.AddRow(info_det);
-            var model = List_det.get_list();
+            List_det.AddRow(info_det,Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_factura_det", model);
         }
@@ -532,16 +553,16 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     }
                 }
             }
-            List_det.UpdateRow(info_det);
-            var model = List_det.get_list();
+            List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_factura_det", model);
         }
 
         public ActionResult EditingDelete(int Secuencia)
         {
-            List_det.DeleteRow(Secuencia);
-            var model = List_det.get_list();
+            List_det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_factura_det", model);
         }
@@ -554,13 +575,13 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var model = get_list_proformas();
             return PartialView("_GridViewPartial_PFactura_det", model);
         }
-        public void AddProformas(string IDs = "")
+        public void AddProformas(string IDs = "", decimal IdTransaccionSession =0)
         {
             if (!string.IsNullOrEmpty(IDs))
             {
                 string[] array = IDs.Split(',');
                 var lst = get_list_proformas();
-                var lst_det_f = List_det.get_list();
+                var lst_det_f = List_det.get_list(IdTransaccionSession);
                 foreach (var item in array)
                 {
                     var pf = lst.Where(q => q.secuencial == item).FirstOrDefault();
@@ -568,7 +589,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                         if (lst_det_f.Where(q=>q.IdEmpresa_pf == pf.IdEmpresa_pf && q.IdSucursal_pf == pf.IdSucursal_pf && q.IdProforma == pf.IdProforma && q.Secuencia_pf == pf.Secuencia_pf).Count() == 0)
                             lst_det_f.Add(pf);
                 }
-                List_det.set_list(lst_det_f);
+                List_det.set_list(lst_det_f,IdTransaccionSession);
             }
         }
         public List<fa_factura_det_Info> get_list_proformas()
@@ -593,25 +614,25 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
     {
         tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
-        public List<fa_factura_det_Info> get_list()
+        string variable = "fa_factura_det_Info";
+        public List<fa_factura_det_Info> get_list(decimal IdTransaccionSession)
         {
-            if (HttpContext.Current.Session["fa_factura_det_Info"] == null)
+            if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)
             {
                 List<fa_factura_det_Info> list = new List<fa_factura_det_Info>();
 
-                HttpContext.Current.Session["fa_factura_det_Info"] = list;
+                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<fa_factura_det_Info>)HttpContext.Current.Session["fa_factura_det_Info"];
+            return (List<fa_factura_det_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
+        }
+        public void set_list(List<fa_factura_det_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
         }
 
-        public void set_list(List<fa_factura_det_Info> list)
+        public void AddRow(fa_factura_det_Info info_det, decimal IdTransaccionSession)
         {
-            HttpContext.Current.Session["fa_factura_det_Info"] = list;
-        }
-
-        public void AddRow(fa_factura_det_Info info_det)
-        {
-            List<fa_factura_det_Info> list = get_list();
+            List<fa_factura_det_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
             info_det.IdProducto = info_det.IdProducto;
             info_det.pr_descripcion = info_det.pr_descripcion;
@@ -626,9 +647,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             list.Add(info_det);
         }
 
-        public void UpdateRow(fa_factura_det_Info info_det)
+        public void UpdateRow(fa_factura_det_Info info_det, decimal IdTransaccionSession)
         {
-            fa_factura_det_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();
+            fa_factura_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdProducto = info_det.IdProducto;
             edited_info.pr_descripcion = info_det.pr_descripcion;
             edited_info.vt_cantidad = info_det.vt_cantidad;
@@ -647,46 +668,47 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             edited_info.vt_total = Math.Round(edited_info.vt_Subtotal + edited_info.vt_iva, 2, MidpointRounding.AwayFromZero);
         }
 
-        public void DeleteRow(int Secuencia)
+        public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
         {
-            List<fa_factura_det_Info> list = get_list();
+            List<fa_factura_det_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
         }
     }
 
     public class fa_cuotas_x_doc_List
     {
-        public List<fa_cuotas_x_doc_Info> get_list()
+        string variable = "fa_cuotas_x_doc_Info";
+        public List<fa_cuotas_x_doc_Info> get_list(decimal IdTransaccionSession)
         {
-            if (HttpContext.Current.Session["fa_cuotas_x_doc_Info"] == null)
+            if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)
             {
                 List<fa_cuotas_x_doc_Info> list = new List<fa_cuotas_x_doc_Info>();
 
-                HttpContext.Current.Session["fa_cuotas_x_doc_Info"] = list;
+                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<fa_cuotas_x_doc_Info>)HttpContext.Current.Session["fa_cuotas_x_doc_Info"];
+            return (List<fa_cuotas_x_doc_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<fa_cuotas_x_doc_Info> list)
+        public void set_list(List<fa_cuotas_x_doc_Info> list, decimal IdTransaccionSession)
         {
-            HttpContext.Current.Session["fa_cuotas_x_doc_Info"] = list;
+            HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
         }
 
-        public void AddRow(fa_cuotas_x_doc_Info info_det)
+        public void AddRow(fa_cuotas_x_doc_Info info_det, decimal IdTransaccionSession)
         {
-            List<fa_cuotas_x_doc_Info> list = get_list();
+            List<fa_cuotas_x_doc_Info> list = get_list(IdTransaccionSession);
             info_det.secuencia = list.Count == 0 ? 1 : list.Max(q => q.secuencia) + 1;
             list.Add(info_det);
         }
 
-        public void UpdateRow(fa_cuotas_x_doc_Info info_det)
+        public void UpdateRow(fa_cuotas_x_doc_Info info_det, decimal IdTransaccionSession)
         {
-            fa_cuotas_x_doc_Info edited_info = get_list().Where(m => m.secuencia == info_det.secuencia).First();
+            fa_cuotas_x_doc_Info edited_info = get_list(IdTransaccionSession).Where(m => m.secuencia == info_det.secuencia).First();
         }
 
-        public void DeleteRow(int secuencia)
+        public void DeleteRow(int secuencia, decimal IdTransaccionSession)
         {
-            List<fa_cuotas_x_doc_Info> list = get_list();
+            List<fa_cuotas_x_doc_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.secuencia == secuencia).First());
         }
     }

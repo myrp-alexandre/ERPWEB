@@ -815,6 +815,28 @@ namespace Core.Erp.Data.Facturacion
             }
         }
 
+        public bool modificarEstadoImpresion(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, bool estado_impresion)
+        {
+            try
+            {
+                using (Entities_facturacion Context = new Entities_facturacion())
+                {
+                    var Entity = Context.fa_factura.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdCbteVta == IdCbteVta).FirstOrDefault();
+                    if (Entity != null)
+                    {
+                        Entity.esta_impresa = estado_impresion;
+                        Context.SaveChanges();
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool anularDB(fa_factura_Info info)
         {
             try

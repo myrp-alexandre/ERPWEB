@@ -52,13 +52,17 @@
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
+            if (Convert.ToString(e.GetValue("EstadoCierre")) == "FACTURADO")
+            {
+                e.Row.ForeColor = System.Drawing.Color.Blue;
+            }
         };
         settings.Columns.Add(c =>
         {
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true)
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true && Convert.ToString(DataBinder.Eval(tc.DataItem, "EstadoCierre")) == "ABIERTO")
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdProforma = DataBinder.Eval(tc.DataItem, "IdProforma") }) + "&nbsp;" +
@@ -79,29 +83,6 @@
         });
 
         settings.Columns.Add("IdProforma", "ID").Width = Unit.Percentage(5);
-        settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = Unit.Percentage(30);
-        settings.Columns.Add("pf_observacion", "Observación").Width = Unit.Percentage(15);
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "pd_subtotal";
-            column.Caption = "Subtotal";
-            column.PropertiesEdit.DisplayFormatString = "{0:c2}";
-            column.Width = Unit.Percentage(10);
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "pd_iva";
-            column.Caption = "I.V.A.";
-            column.PropertiesEdit.DisplayFormatString = "{0:c2}";
-            column.Width = Unit.Percentage(10);
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "pd_total";
-            column.Caption = "Total";
-            column.PropertiesEdit.DisplayFormatString = "{0:c2}";
-            column.Width = Unit.Percentage(10);
-        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "pf_fecha";
@@ -109,6 +90,30 @@
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = Unit.Percentage(10);
         });
+        settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = Unit.Percentage(30);
+        settings.Columns.Add("pf_observacion", "Observación").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pd_subtotal";
+            column.Caption = "Subtotal";
+            column.PropertiesEdit.DisplayFormatString = "{0:c2}";
+            column.Width = Unit.Percentage(7);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pd_iva";
+            column.Caption = "I.V.A.";
+            column.PropertiesEdit.DisplayFormatString = "{0:c2}";
+            column.Width = Unit.Percentage(7);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pd_total";
+            column.Caption = "Total";
+            column.PropertiesEdit.DisplayFormatString = "{0:c2}";
+            column.Width = Unit.Percentage(7);
+        });        
+        settings.Columns.Add("EstadoCierre", "Estado").Width = Unit.Percentage(7);
         settings.Columns.Add("estado", "Estado").Width = Unit.Percentage(5);
         settings.Columns.Add(column =>
         {
