@@ -196,7 +196,7 @@ namespace Core.Erp.Data.Facturacion
                             IdCbteVta_fact = Convert.ToDecimal(item.IdCbteVta),
                             IdGuiaRemision_guia = info.IdGuiaRemision,
                             Secuencia_fact = Convert.ToInt32(item.Secuencia_fact),
-                            Secuencia_guia = item.Secuencia,
+                            Secuencia_guia = secuencia,
                             IdBodega_guia = info.IdBodega,
                             IdSucursal_guia = info.IdSucursal,
                             IdEmpresa_guia = info.IdEmpresa
@@ -282,7 +282,7 @@ namespace Core.Erp.Data.Facturacion
                             IdCbteVta_fact = Convert.ToDecimal(item.IdCbteVta),
                             IdGuiaRemision_guia = info.IdGuiaRemision,
                             Secuencia_fact = Convert.ToInt32(item.Secuencia_fact),
-                            Secuencia_guia = item.Secuencia,
+                            Secuencia_guia = secuencia,
                             IdBodega_guia = info.IdBodega,
                             IdSucursal_guia=info.IdSucursal,
                             IdEmpresa_guia=info.IdEmpresa

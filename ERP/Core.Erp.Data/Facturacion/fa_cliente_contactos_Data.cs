@@ -17,7 +17,7 @@ namespace Core.Erp.Data.Facturacion
                 List<fa_cliente_contactos_Info> Lista;
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
-                    Lista = (from q in Context.vwfa_cliente_contactos
+                    Lista = (from q in Context.fa_cliente_contactos
                              where q.IdEmpresa == IdEmpresa
                              && q.IdCliente == IdCliente
                              select new fa_cliente_contactos_Info
@@ -32,7 +32,6 @@ namespace Core.Erp.Data.Facturacion
                                  Direccion = q.Direccion,
                                  Nombres = q.Nombres,
                                  Telefono = q.Telefono,
-                                 nom_parroquia = q.nom_parroquia
                              }).ToList();
                 }
                 return Lista;

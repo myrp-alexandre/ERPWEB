@@ -69,6 +69,5 @@ namespace Core.Erp.Data
         public virtual DbSet<vwfa_factura_x_fa_guia_remision> vwfa_factura_x_fa_guia_remision { get; set; }
         public virtual DbSet<fa_guia_remision> fa_guia_remision { get; set; }
         public virtual DbSet<vwfa_guia_remision> vwfa_guia_remision { get; set; }
-        public virtual DbSet<vwfa_cliente_contactos> vwfa_cliente_contactos { get; set; }
     }
 }

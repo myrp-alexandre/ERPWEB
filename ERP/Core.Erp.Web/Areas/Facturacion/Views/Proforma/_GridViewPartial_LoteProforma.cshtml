@@ -47,13 +47,6 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "lote_fecha_fab";
-            column.Caption = "Fecha fab.";
-            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
-            column.Width = Unit.Percentage(10);
-        });
-        settings.Columns.Add(column =>
-        {
             column.FieldName = "lote_fecha_vcto";
             column.Caption = "Fecha vcto";
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
@@ -64,7 +57,7 @@
             column.FieldName = "stock";
             column.Caption = "Stock";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Width = Unit.Percentage(5);
+            column.Width = Unit.Percentage(10);
         });
         settings.Columns.Add(column =>
         {

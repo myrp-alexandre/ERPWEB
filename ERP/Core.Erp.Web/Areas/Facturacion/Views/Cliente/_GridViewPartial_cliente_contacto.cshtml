@@ -6,7 +6,7 @@
         settings.KeyFieldName = "IdContacto";
         settings.Width = Unit.Percentage(100);
 
-        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Cliente", Action = "EditingAddNew", Area = "Facturacion" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Cliente", Action = "EditingUpdate", Area = "Facturacion" };
 
@@ -40,27 +40,31 @@
             column.Caption = "Nombre*";
             column.Width = Unit.Percentage(20);
             column.ColumnType = MVCxGridViewColumnType.TextBox;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "Telefono";
             column.Caption = "Teléfono";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(7);
             column.ColumnType = MVCxGridViewColumnType.TextBox;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "Celular";
             column.Caption = "Celular";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(7);
             column.ColumnType = MVCxGridViewColumnType.TextBox;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "Correo";
             column.Caption = "Correo";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.ColumnType = MVCxGridViewColumnType.TextBox;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
         {
@@ -68,6 +72,7 @@
             column.Caption = "Dirección";
             column.Width = Unit.Percentage(10);
             column.ColumnType = MVCxGridViewColumnType.TextBox;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
         {
@@ -75,6 +80,7 @@
             column.FieldName = "IdCiudad";
             column.Caption = "Ciudad*";
             column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().ComboBox(p =>
             {
                 p.Columns.Add("Descripcion_Ciudad", "Descripción").Width = Unit.Percentage(100);
@@ -85,23 +91,10 @@
                 p.ClientSideEvents.SelectedIndexChanged = "OnSelectedCiudadChanged";
             });
         });
-
-
-
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "nom_parroquia";
-            column.Caption = "Parroquia*";
-            column.Width = Unit.Percentage(20);
-            column.Visible = true;
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdParroquia";
             column.Caption = "Parroquia*";
-            column.Visible = false;
             column.Width = Unit.Percentage(20);
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().ComboBox(p =>
@@ -110,6 +103,7 @@
                 p.TextField = "nom_parroquia";
                 p.ValueField = "IdParroquia";
                 p.ValueType = typeof(string);
+                //p.ClientSideEvents.Init = "function(s,e){s.PerformCallback();}";
                 p.BindList(ViewBag.lst_parroquia);
                 p.ClientSideEvents.BeginCallback = "ParroquiaComboBox_BeginCallBack";
             });

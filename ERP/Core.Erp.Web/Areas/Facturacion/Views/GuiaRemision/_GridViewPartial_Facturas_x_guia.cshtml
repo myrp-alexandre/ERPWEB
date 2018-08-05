@@ -28,11 +28,6 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
 
-
-
-
-
-
         settings.Columns.Add(column =>
         {
             column.FieldName = "vt_tipoDoc";
@@ -57,8 +52,8 @@
             column.Caption = "# documento";
             column.Width = Unit.Percentage(10);
         });
-      
 
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
 
         settings.PreRender = (sender, e) =>
         {

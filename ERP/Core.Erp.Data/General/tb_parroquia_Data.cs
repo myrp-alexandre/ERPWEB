@@ -17,19 +17,34 @@ namespace Core.Erp.Data.General
 
                 using (Entities_general Context = new Entities_general())
                 {
-                    if(mostrar_anulados)
-                    Lista = (from q in Context.tb_parroquia
-                             where q.IdCiudad_Canton == IdCiudad
-                             select new tb_parroquia_Info
-                             {
-                                 IdCiudad_Canton=q.IdCiudad_Canton,
-                                 IdParroquia = q.IdParroquia,
-                                 cod_parroquia = q.cod_parroquia,
-                                 nom_parroquia = q.nom_parroquia,
-                                 estado = q.estado
-                             }).ToList();
-                    else
+                    if (mostrar_anulados)
+                    {
+                        if(!string.IsNullOrEmpty(IdCiudad))
                         Lista = (from q in Context.tb_parroquia
+                                 where q.IdCiudad_Canton == IdCiudad
+                                 select new tb_parroquia_Info
+                                 {
+                                     IdCiudad_Canton = q.IdCiudad_Canton,
+                                     IdParroquia = q.IdParroquia,
+                                     cod_parroquia = q.cod_parroquia,
+                                     nom_parroquia = q.nom_parroquia,
+                                     estado = q.estado
+                                 }).ToList();
+                        else
+                            Lista = (from q in Context.tb_parroquia
+                                     select new tb_parroquia_Info
+                                     {
+                                         IdCiudad_Canton = q.IdCiudad_Canton,
+                                         IdParroquia = q.IdParroquia,
+                                         cod_parroquia = q.cod_parroquia,
+                                         nom_parroquia = q.nom_parroquia,
+                                         estado = q.estado
+                                     }).ToList();
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(IdCiudad))
+                            Lista = (from q in Context.tb_parroquia
                                  where q.IdCiudad_Canton == IdCiudad
                                  && q.estado == true
                                  select new tb_parroquia_Info
@@ -40,6 +55,18 @@ namespace Core.Erp.Data.General
                                      nom_parroquia = q.nom_parroquia,
                                      estado = q.estado,
                                  }).ToList();
+                        else
+                            Lista = (from q in Context.tb_parroquia
+                                     where q.estado == true
+                                     select new tb_parroquia_Info
+                                     {
+                                         IdCiudad_Canton = q.IdCiudad_Canton,
+                                         IdParroquia = q.IdParroquia,
+                                         cod_parroquia = q.cod_parroquia,
+                                         nom_parroquia = q.nom_parroquia,
+                                         estado = q.estado,
+                                     }).ToList();
+                    }
                 }
 
                 return Lista;

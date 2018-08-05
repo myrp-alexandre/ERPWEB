@@ -4,6 +4,7 @@
     function OnBeginCallback(s, e) {
         //Pass all selected keys to GridView callback action
         e.customArgs["selectedIDs"] = selectedIDs;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
     }
     function OnSelectionChanged(s, e) {
         s.GetSelectedFieldValues("IdCbteVta", GetSelectedFieldValuesCallback);
@@ -17,7 +18,8 @@
         var datos = {
             Ids: selectedIDs,
             IdSucursal: $("#IdSucursal").val(),
-            IdPuntoVta: $("#IdPuntoVta").val()
+            IdPuntoVta: $("#IdPuntoVta").val(),
+            IdTransaccionSession: $('#IdTransaccionSession').val()
         }
         $("#btn_guardar").disabled = true;
         $.ajax({
