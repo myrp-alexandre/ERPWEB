@@ -20,7 +20,13 @@ namespace Core.Erp.Data.RRHH
                     string sql = " select * from vwRo_Division_Area_dep_rubro where IdEmpresa='"+IdEmpresa+"' ";
                     var result = Context.Database.SqlQuery<ro_Config_Param_contable_Info>(sql).ToList();
                     Lista = result;
-                    Lista.ForEach(v => v.Secuencia = secuencia++);
+                    Lista.ForEach(v =>
+                    {
+                        v.Secuencia = secuencia++;
+                        if (v.IdCtaCble == null | v.IdCtaCble == "")
+                            v.IdCtaCble = v.rub_ctacon;
+
+                        });
 
                 }
 
