@@ -62,8 +62,9 @@ namespace Core.Erp.Info.Facturacion
         public Nullable<System.DateTime> Fecha_Transaccion { get; set; }
         public string IdUsuarioUltModi { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
-        public string IdUsuarioUltAnu { get; set; }
+        public string IdUsuarioUltAnu { get; set; }        
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
+        [Required(ErrorMessage = "El campo motivo anulación es obligatorio")]
         public string MotivoAnulacion { get; set; }
         #endregion
 

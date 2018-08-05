@@ -246,7 +246,14 @@ namespace Core.Erp.Data.Facturacion
                     Entity.estado = info.estado = false;
 
                     Entity.IdUsuario_anulacion = info.IdUsuario_anulacion;
+                    Entity.MotivoAnulacion = info.MotivoAnulacion;
                     Entity.fecha_anulacion = DateTime.Now;
+
+                    var lst = Context.fa_proforma_det.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdProforma == info.IdProforma).ToList();
+                    foreach (var item in lst)
+                    {
+                        item.anulado = true;
+                    }
 
                     Context.SaveChanges();
 

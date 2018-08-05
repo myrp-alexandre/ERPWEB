@@ -19,10 +19,10 @@ namespace Core.Erp.Data
         {
             this.fa_cliente_contactos = new HashSet<fa_cliente_contactos>();
             this.fa_cliente_x_fa_Vendedor_x_sucursal = new HashSet<fa_cliente_x_fa_Vendedor_x_sucursal>();
-            this.fa_proforma = new HashSet<fa_proforma>();
             this.fa_factura = new HashSet<fa_factura>();
             this.fa_notaCreDeb = new HashSet<fa_notaCreDeb>();
             this.fa_guia_remision = new HashSet<fa_guia_remision>();
+            this.fa_proforma = new HashSet<fa_proforma>();
         }
     
         public int IdEmpresa { get; set; }
@@ -55,12 +55,12 @@ namespace Core.Erp.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_cliente_x_fa_Vendedor_x_sucursal> fa_cliente_x_fa_Vendedor_x_sucursal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<fa_proforma> fa_proforma { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_factura> fa_factura { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_notaCreDeb> fa_notaCreDeb { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_guia_remision> fa_guia_remision { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fa_proforma> fa_proforma { get; set; }
     }
 }

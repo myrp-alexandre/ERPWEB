@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.Erp.Info.Facturacion
 {
@@ -37,6 +38,7 @@ namespace Core.Erp.Info.Facturacion
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
+        [Required(ErrorMessage = "El campo motivo anulación es obligatorio")]
         public string MotiAnula { get; set; }
         #endregion
 

@@ -271,7 +271,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 int NumCuotas = lst_distribucion.Count;
                 double totalAux = Math.Round(List_det.get_list(IdTransaccionSession).Sum(q => q.vt_total) - ValorPrimerPago, 2, MidpointRounding.AwayFromZero);
                 DateTime FechaPagosAcum = Convert.ToDateTime(FechaPrimerPago);
-                int diasAnt = 0;
                 foreach (var item in lst_distribucion)
                 {
                     if (Secuencia == 1)

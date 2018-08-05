@@ -33,12 +33,17 @@ namespace Core.Erp.Info.Facturacion
 
         public System.DateTime pf_fecha_vcto { get; set; }
         public bool estado { get; set; }
+        #region Campos de auditoria
         public string IdUsuario_creacion { get; set; }
         public Nullable<System.DateTime> fecha_creacion { get; set; }
         public string IdUsuario_modificacion { get; set; }
         public Nullable<System.DateTime> fecha_modificacion { get; set; }
         public string IdUsuario_anulacion { get; set; }
         public Nullable<System.DateTime> fecha_anulacion { get; set; }
+        [Required(ErrorMessage = "El campo motivo anulación es obligatorio")]
+        public string MotivoAnulacion { get; set; }
+        #endregion
+        
         [Required(ErrorMessage = "El campo bodega es obligatorio")]
 
         public int IdBodega { get; set; }

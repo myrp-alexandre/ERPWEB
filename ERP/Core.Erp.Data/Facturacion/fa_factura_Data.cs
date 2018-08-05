@@ -851,18 +851,29 @@ namespace Core.Erp.Data.Facturacion
                 {
                     fa_factura Entity = Context.fa_factura.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdCbteVta == info.IdCbteVta);
                     if (Entity == null) return false;
-
-                    Entity.Estado = "I";
+                    {
+                        Entity.MotivoAnulacion = info.MotivoAnulacion;
+                        Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
+                        Entity.Estado = "I";
+                    }
                     
                     var conta = Context.fa_factura_x_ct_cbtecble.Where(q => q.vt_IdEmpresa == info.IdEmpresa && q.vt_IdSucursal == info.IdSucursal && q.vt_IdBodega == info.IdBodega && q.vt_IdCbteVta == info.IdCbteVta).FirstOrDefault();
-                    if(conta != null)
-                        if (!odata_ct.anularDB(new ct_cbtecble_Info { IdEmpresa = conta.ct_IdEmpresa, IdTipoCbte = conta.ct_IdTipoCbte, IdCbteCble = conta.ct_IdCbteCble, IdUsuarioAnu = info.IdUsuarioUltAnu}))
+                    if (conta != null)
+                        if (!odata_ct.anularDB(new ct_cbtecble_Info { IdEmpresa = conta.ct_IdEmpresa, IdTipoCbte = conta.ct_IdTipoCbte, IdCbteCble = conta.ct_IdCbteCble, IdUsuarioAnu = info.IdUsuarioUltAnu, cb_MotivoAnu = info.MotivoAnulacion }))
+                        {
+                            Entity.MotivoAnulacion = null;
+                            Entity.IdUsuarioUltAnu = null;
                             Entity.Estado = "A";
+                        }
 
                     var inv = Context.fa_factura_x_in_Ing_Egr_Inven.Where(q => q.IdEmpresa_fa == info.IdEmpresa && q.IdSucursal_fa == info.IdSucursal && q.IdBodega_fa == info.IdBodega && q.IdCbteVta_fa == info.IdCbteVta).FirstOrDefault();
                     if(inv != null)
-                        if(!odata_inv.anularDB(new in_Ing_Egr_Inven_Info { IdEmpresa = inv.IdEmpresa_in_eg_x_inv, IdSucursal = inv.IdSucursal_in_eg_x_inv, IdMovi_inven_tipo = inv.IdMovi_inven_tipo_in_eg_x_inv, IdNumMovi = inv.IdNumMovi_in_eg_x_inv, IdusuarioUltAnu = info.IdUsuarioUltAnu }))
+                        if(!odata_inv.anularDB(new in_Ing_Egr_Inven_Info { IdEmpresa = inv.IdEmpresa_in_eg_x_inv, IdSucursal = inv.IdSucursal_in_eg_x_inv, IdMovi_inven_tipo = inv.IdMovi_inven_tipo_in_eg_x_inv, IdNumMovi = inv.IdNumMovi_in_eg_x_inv, IdusuarioUltAnu = info.IdUsuarioUltAnu, MotivoAnulacion = info.MotivoAnulacion }))
+                        {
+                            Entity.MotivoAnulacion = null;
+                            Entity.IdUsuarioUltAnu = null;
                             Entity.Estado = "A";
+                        }
 
                     Context.SaveChanges();
                 }

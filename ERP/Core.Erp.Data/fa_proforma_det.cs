@@ -37,8 +37,8 @@ namespace Core.Erp.Data
         public double pd_total { get; set; }
         public bool anulado { get; set; }
     
-        public virtual fa_proforma fa_proforma { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_factura_det> fa_factura_det { get; set; }
+        public virtual fa_proforma fa_proforma { get; set; }
     }
 }

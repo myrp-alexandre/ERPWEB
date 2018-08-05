@@ -37,6 +37,7 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> fecha_modificacion { get; set; }
         public string IdUsuario_anulacion { get; set; }
         public Nullable<System.DateTime> fecha_anulacion { get; set; }
+        public string MotivoAnulacion { get; set; }
         public int IdBodega { get; set; }
         public int IdVendedor { get; set; }
         public string pf_atencion_a { get; set; }
