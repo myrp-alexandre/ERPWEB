@@ -25,6 +25,7 @@ namespace Core.Erp.Data.Facturacion
                     Lista = (from q in Context.vwfa_factura
                              where q.IdEmpresa == IdEmpresa
                              && Fecha_ini <= q.vt_fecha && q.vt_fecha <= Fecha_fin
+                             orderby q.IdCbteVta descending
                              select new fa_factura_consulta_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

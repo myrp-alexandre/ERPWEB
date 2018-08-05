@@ -190,35 +190,11 @@
             $("#divNaturaleza").hide();
     }
 
-        function AddFACT() {
-        var datos = {
-            IDs: selectedIDs
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("EditingAddNewCruce", "NotaDeCreditoFacturacion",new { Area = "Facturacion"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-            },
-            error: function (error) {
-            }
-        });
-        selectedIDs = "";
-        GridView_CruceNC_x_cruzar.PerformCallback();
-        GridView_CruceNC_x_cruzar.UnselectRows();
-            GridView_CruceNC.PerformCallback();
-            GridView_notaCredito_det.PerformCallback();
-        $("#FacturasModal").modal("hide");
-    }
     var selectedIDs;
     function OnBeginCallback(s, e) {
         //Pass all selected keys to GridView callback action
         e.customArgs["selectedIDs"] = selectedIDs;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
     }
     function OnSelectionChanged(s, e) {
         s.GetSelectedFieldValues("secuencial", GetSelectedFieldValuesCallback);
@@ -233,7 +209,8 @@
 
             var datos = {
                 IdSucursal: $("#IdSucursal").val(),
-                IdCliente: IdCliente.GetValue()
+                IdCliente: IdCliente.GetValue(),
+                IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -247,7 +224,7 @@
             success: function (data) {
                 selectedIDs = "";
                 GridView_CruceNC_x_cruzar.PerformCallback();
-                GridView_CruceNC_x_cruzar.UnselectRows();                
+                GridView_CruceNC_x_cruzar.UnselectRows();
                 $("#FacturasModal").modal("show");
             },
             error: function (error) {
@@ -259,7 +236,8 @@
         function AddFacturas() {
 
         var datos = {
-            IDs: selectedIDs
+            IDs: selectedIDs,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -287,7 +265,7 @@
      function VaciarListas() {
 
         var datos = {
-            IDs: selectedIDs
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -314,7 +292,7 @@
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.CodDocumentoTipo)
     @Html.HiddenFor(q => q.CreDeb)
-
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">

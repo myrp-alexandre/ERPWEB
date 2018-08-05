@@ -271,6 +271,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 int NumCuotas = lst_distribucion.Count;
                 double totalAux = Math.Round(List_det.get_list(IdTransaccionSession).Sum(q => q.vt_total) - ValorPrimerPago, 2, MidpointRounding.AwayFromZero);
                 DateTime FechaPagosAcum = Convert.ToDateTime(FechaPrimerPago);
+                int diasAnt = 0;
                 foreach (var item in lst_distribucion)
                 {
                     if (Secuencia == 1)
@@ -282,6 +283,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                             valor_a_cobrar = Math.Round(totalAux * (item.Por_distribucion / 100), 2, MidpointRounding.AwayFromZero),
                             fecha_vcto_cuota = FechaPagosAcum
                         });
+                        lst_distribucion.ForEach(q => q.Num_Dias_Vcto  =- item.Num_Dias_Vcto);
                     }
                     else
                     if (Secuencia == NumCuotas)
@@ -291,7 +293,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                             secuencia = Secuencia,
                             num_cuota = Secuencia++,
                             valor_a_cobrar = Math.Round(totalAux - lst_cuotas.Sum(q => q.valor_a_cobrar), 2, MidpointRounding.AwayFromZero),
-                            fecha_vcto_cuota = (item.Num_Dias_Vcto == 30 ? FechaPagosAcum.AddMonths(1) : FechaPagosAcum.AddDays(item.Num_Dias_Vcto))
+                            fecha_vcto_cuota = FechaPagosAcum = (item.Num_Dias_Vcto == 30 ? FechaPagosAcum.AddMonths(1) : FechaPagosAcum.AddDays(item.Num_Dias_Vcto))
                         });
                     }
                     else
@@ -300,7 +302,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                             secuencia = Secuencia,
                             num_cuota = Secuencia++,
                             valor_a_cobrar = Math.Round(totalAux * (item.Por_distribucion / 100), 2, MidpointRounding.AwayFromZero),
-                            fecha_vcto_cuota = (item.Num_Dias_Vcto == 30 ? FechaPagosAcum.AddMonths(1) : FechaPagosAcum.AddDays(item.Num_Dias_Vcto))
+                            fecha_vcto_cuota = FechaPagosAcum = (item.Num_Dias_Vcto == 30 ? FechaPagosAcum.AddMonths(1) : FechaPagosAcum.AddDays(item.Num_Dias_Vcto))
                         });
                 }
             }

@@ -173,11 +173,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 resultado = new tb_sis_Documento_Tipo_Talonario_Info();
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult GetDocumentosPorCobrar(int IdSucursal = 0, decimal IdCliente = 0)
+        public JsonResult GetDocumentosPorCobrar(int IdSucursal = 0, decimal IdCliente = 0, decimal IdTransaccionSession = 0)
         {
             bool resultado = true;
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var List = List_cruce.get_list().Where(q=>q.seleccionado == true).ToList();
+            var List = List_cruce.get_list(IdTransaccionSession).Where(q=>q.seleccionado == true).ToList();
             var ListPorCruzar = bus_cruce.get_list_cartera(IdEmpresa, IdSucursal, IdCliente, false);
 
             foreach (var item in List)
@@ -186,15 +186,15 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
 
             List.AddRange(ListPorCruzar);
-            List_cruce.set_list(List);
+            List_cruce.set_list(List, IdTransaccionSession);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult VaciarListas()
+        public JsonResult VaciarListas(decimal IdTransaccionSession = 0)
         {
             bool resultado = true;
-            List_cruce.set_list(new List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>());
-            List_det.set_list(new List<fa_notaCreDeb_det_Info>());
+            List_cruce.set_list(new List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>(), IdTransaccionSession);
+            List_det.set_list(new List<fa_notaCreDeb_det_Info>(), IdTransaccionSession);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -202,48 +202,50 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #region Grillas de cruce
         public ActionResult GridViewPartial_CruceNC_x_cruzar()
         {
-            var model = List_cruce.get_list().Where(q=>q.seleccionado == false).ToList();
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = List_cruce.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q=>q.seleccionado == false).ToList();
             return PartialView("_GridViewPartial_CruceNC_x_cruzar", model);
         }
 
         public ActionResult GridViewPartial_CruceNC()
         {
-            var model = List_cruce.get_list().Where(q => q.seleccionado == true).ToList();
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = List_cruce.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.seleccionado == true).ToList();
             return PartialView("_GridViewPartial_CruceNC", model);
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult EditingAddNewFacturas(string IDs = "")
+        public ActionResult EditingAddNewFacturas(string IDs = "", decimal IdTransaccionSession = 0)
         {
             if (IDs != "")
             {
                 string[] array = IDs.Split(',');
                 foreach (var item in array)
                 {
-                    List_cruce.DeleteRow(item);
+                    List_cruce.DeleteRow(item,IdTransaccionSession);
                 }
             }
-            var list = List_cruce.get_list().Where(q => q.seleccionado == true).ToList();
+            var list = List_cruce.get_list(IdTransaccionSession).Where(q => q.seleccionado == true).ToList();
             var lst_det = new List<fa_notaCreDeb_det_Info>();
             foreach (var item in list)
             {
                 lst_det.AddRange(bus_det.get_list(item.IdEmpresa_fac_nd_doc_mod, item.IdSucursal_fac_nd_doc_mod, item.IdBodega_fac_nd_doc_mod, item.IdCbteVta_fac_nd_doc_mod,item.vt_tipoDoc));                
             }
-            List_det.set_list(lst_det);
+            List_det.set_list(lst_det, IdTransaccionSession);
             var model = list;
             return PartialView("_GridViewPartial_CruceNC", model);
         }
 
         public ActionResult EditingUpdateFactura([ModelBinder(typeof(DevExpressEditorsBinder))] fa_notaCreDeb_x_fa_factura_NotaDeb_Info info_det)
         {
-            List_cruce.UpdateRow(info_det);
-            var model = List_cruce.get_list().Where(q=>q.seleccionado == true).ToList();
+            List_cruce.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_cruce.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q=>q.seleccionado == true).ToList();
             return PartialView("_GridViewPartial_CruceNC", model);
         }
         public ActionResult EditingDeleteFactura(string secuencial)
         {
-            List_cruce.DeleteRow(secuencial);
-            var model = List_cruce.get_list().Where(q => q.seleccionado == true).ToList();
+            List_cruce.DeleteRow(secuencial, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_cruce.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.seleccionado == true).ToList();
             return PartialView("_GridViewPartial_CruceNC", model);
         }
 
@@ -266,7 +268,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_notaCredito_det()
         {
-            var model = List_det.get_list();
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_NotaCrebitoFacturacion_det", model);
         }
@@ -275,8 +278,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_notaCreDeb_det_Info info_det)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List_det.AddRow(info_det);
-            var model = List_det.get_list();
+            List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_NotaCrebitoFacturacion_det", model);
         }
@@ -285,16 +288,16 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_notaCreDeb_det_Info info_det)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List_det.UpdateRow(info_det);
-            var model = List_det.get_list();
+            List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_NotaCrebitoFacturacion_det", model);
         }
 
         public ActionResult EditingDelete(int Secuencia)
         {
-            List_det.DeleteRow(Secuencia);
-            var model = List_det.get_list();
+            List_det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_NotaCrebitoFacturacion_det", model);
         }
@@ -322,8 +325,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         private bool validar(fa_notaCreDeb_Info i_validar, ref string msg)
         {
-            i_validar.lst_det = List_det.get_list();
-            i_validar.lst_cruce = List_cruce.get_list().Where(q=>q.seleccionado == true).ToList();
+            i_validar.lst_det = List_det.get_list(i_validar.IdTransaccionSession);
+            i_validar.lst_cruce = List_cruce.get_list(i_validar.IdTransaccionSession).Where(q=>q.seleccionado == true).ToList();
             if (i_validar.lst_det.Count == 0)
             {
                 msg = "No ha ingresado registros en el detalle";
@@ -393,6 +396,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #region Acciones
         public ActionResult Nuevo()
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             fa_notaCreDeb_Info model = new fa_notaCreDeb_Info
             {
                 IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
@@ -402,10 +411,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 lst_det = new List<fa_notaCreDeb_det_Info>(),
                 lst_cruce = new List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>(),
                 CodDocumentoTipo = "NTCR",
-                CreDeb = "C"
+                CreDeb = "C",
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
-            List_det.set_list(model.lst_det);
-            List_cruce.set_list(model.lst_cruce);
+            List_det.set_list(model.lst_det, model.IdTransaccionSession);
+            List_cruce.set_list(model.lst_cruce, model.IdTransaccionSession);
             cargar_combos(model);
             return View(model);
         }
@@ -431,13 +441,20 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult Modificar(int IdSucursal = 0, int IdBodega = 0, decimal IdNota = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             fa_notaCreDeb_Info model = bus_nota.get_info(IdEmpresa, IdSucursal, IdBodega, IdNota);
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdBodega, IdNota);
-            List_det.set_list(model.lst_det);
+            List_det.set_list(model.lst_det, model.IdTransaccionSession);
             model.lst_cruce = bus_cruce.get_list(IdEmpresa, IdSucursal, IdBodega, IdNota);
-            List_cruce.set_list(model.lst_cruce);
+            List_cruce.set_list(model.lst_cruce, model.IdTransaccionSession);
             cargar_combos(model);
             return View(model);
         }
@@ -463,13 +480,20 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult Anular(int IdSucursal = 0, int IdBodega = 0, decimal IdNota = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             fa_notaCreDeb_Info model = bus_nota.get_info(IdEmpresa, IdSucursal, IdBodega, IdNota);
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdBodega, IdNota);
-            List_det.set_list(model.lst_det);
+            List_det.set_list(model.lst_det, model.IdTransaccionSession);
             model.lst_cruce = bus_cruce.get_list(IdEmpresa, IdSucursal, IdBodega, IdNota);
-            List_cruce.set_list(model.lst_cruce);
+            List_cruce.set_list(model.lst_cruce, model.IdTransaccionSession);
             cargar_combos(model);
             return View(model);
         }
@@ -493,25 +517,26 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
     {
         tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
-        public List<fa_notaCreDeb_det_Info> get_list()
+        string variable = "fa_notaCreDeb_det_Info";
+        public List<fa_notaCreDeb_det_Info> get_list(decimal IdTransaccion)
         {
-            if (HttpContext.Current.Session["fa_notaCreDeb_det_Info"] == null)
+            if (HttpContext.Current.Session[variable + IdTransaccion.ToString()] == null)
             {
                 List<fa_notaCreDeb_det_Info> list = new List<fa_notaCreDeb_det_Info>();
 
-                HttpContext.Current.Session["fa_notaCreDeb_det_Info"] = list;
+                HttpContext.Current.Session[variable + IdTransaccion.ToString()] = list;
             }
-            return (List<fa_notaCreDeb_det_Info>)HttpContext.Current.Session["fa_notaCreDeb_det_Info"];
+            return (List<fa_notaCreDeb_det_Info>)HttpContext.Current.Session[variable + IdTransaccion.ToString()];
         }
 
-        public void set_list(List<fa_notaCreDeb_det_Info> list)
+        public void set_list(List<fa_notaCreDeb_det_Info> list, decimal IdTransaccion)
         {
-            HttpContext.Current.Session["fa_notaCreDeb_det_Info"] = list;
+            HttpContext.Current.Session[variable + IdTransaccion.ToString()] = list;
         }
 
-        public void AddRow(fa_notaCreDeb_det_Info info_det)
+        public void AddRow(fa_notaCreDeb_det_Info info_det, decimal IdTransaccion)
         {
-            List<fa_notaCreDeb_det_Info> list = get_list();
+            List<fa_notaCreDeb_det_Info> list = get_list(IdTransaccion);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
             info_det.IdProducto = info_det.IdProducto;            
             var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProducto);
@@ -530,9 +555,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             list.Add(info_det);
         }
 
-        public void UpdateRow(fa_notaCreDeb_det_Info info_det)
+        public void UpdateRow(fa_notaCreDeb_det_Info info_det, decimal IdTransaccion)
         {
-            fa_notaCreDeb_det_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();
+            fa_notaCreDeb_det_Info edited_info = get_list(IdTransaccion).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdProducto = info_det.IdProducto;
             var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProducto);
             if (producto != null && info_det.IdProducto != edited_info.IdProducto)
@@ -556,48 +581,49 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             edited_info.sc_total = Math.Round(edited_info.sc_subtotal + edited_info.sc_iva, 2, MidpointRounding.AwayFromZero);
         }
 
-        public void DeleteRow(int Secuencia)
+        public void DeleteRow(int Secuencia, decimal IdTransaccion)
         {
-            List<fa_notaCreDeb_det_Info> list = get_list();
+            List<fa_notaCreDeb_det_Info> list = get_list(IdTransaccion);
             list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
         }
     }
 
     public class fa_notaCreDeb_x_fa_factura_NotaDeb_List
     {
-        public List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> get_list()
+        string variable = "fa_notaCreDeb_x_fa_factura_NotaDeb_Info";
+        public List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> get_list(decimal IdTransaccion)
         {
-            if (HttpContext.Current.Session["fa_notaCreDeb_x_fa_factura_NotaDeb_Info"] == null)
+            if (HttpContext.Current.Session[variable + IdTransaccion.ToString()] == null)
             {
                 List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> list = new List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>();
 
-                HttpContext.Current.Session["fa_notaCreDeb_x_fa_factura_NotaDeb_Info"] = list;
+                HttpContext.Current.Session[variable + IdTransaccion.ToString()] = list;
             }
-            return (List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>)HttpContext.Current.Session["fa_notaCreDeb_x_fa_factura_NotaDeb_Info"];
+            return (List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>)HttpContext.Current.Session[variable + IdTransaccion.ToString()];
         }
 
-        public void set_list(List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> list)
+        public void set_list(List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> list, decimal IdTransaccion)
         {
-            HttpContext.Current.Session["fa_notaCreDeb_x_fa_factura_NotaDeb_Info"] = list;
+            HttpContext.Current.Session[variable + IdTransaccion.ToString()] = list;
         }
 
-        public void AddRow(fa_notaCreDeb_x_fa_factura_NotaDeb_Info info_det)
+        public void AddRow(fa_notaCreDeb_x_fa_factura_NotaDeb_Info info_det, decimal IdTransaccion)
         {
-            List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> list = get_list();
+            List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> list = get_list(IdTransaccion);
             list.Add(info_det);            
         }
 
-        public void UpdateRow(fa_notaCreDeb_x_fa_factura_NotaDeb_Info info_det)
+        public void UpdateRow(fa_notaCreDeb_x_fa_factura_NotaDeb_Info info_det, decimal IdTransaccion)
         {
-            List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> list = get_list();
+            List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> list = get_list(IdTransaccion);
             fa_notaCreDeb_x_fa_factura_NotaDeb_Info edited_info = list.Where(m => m.secuencial == info_det.secuencial).FirstOrDefault();
             edited_info.Saldo_final = Convert.ToDouble(edited_info.Saldo) - info_det.Valor_Aplicado;
             edited_info.Valor_Aplicado = info_det.Valor_Aplicado;
         }
 
-        public void DeleteRow(string secuencial)
+        public void DeleteRow(string secuencial, decimal IdTransaccion)
         {
-            List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> list = get_list();
+            List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> list = get_list(IdTransaccion);
             fa_notaCreDeb_x_fa_factura_NotaDeb_Info info = list.Where(m => m.secuencial == secuencial).FirstOrDefault();
             if (info != null)
                 info.seleccionado = !info.seleccionado;

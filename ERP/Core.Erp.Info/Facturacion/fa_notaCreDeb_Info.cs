@@ -5,6 +5,7 @@ namespace Core.Erp.Info.Facturacion
 {
     public class fa_notaCreDeb_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public int IdBodega { get; set; }

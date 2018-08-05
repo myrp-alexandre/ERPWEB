@@ -22,3 +22,9 @@ settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['Transa
 
 //AGREGAR EN AJAX 
 IdTransaccionSession: $("#IdTransaccionSession").val()
+
+//AGREGAR EN ACTIONRESULT DE GRILLAS PARA AGREGAR, EDITAR O ELIMINAR
+Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+
+//AGREGAR EN FUNCIONES PARA VALIDAR
+i_validar.IdTransaccionSession
