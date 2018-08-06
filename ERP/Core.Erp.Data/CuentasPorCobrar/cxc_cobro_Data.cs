@@ -35,7 +35,8 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  cr_fecha = q.cr_fecha,
                                  cr_TotalCobro = q.cr_TotalCobro,
                                  cr_estado = q.cr_estado,
-                                 Su_Descripcion = q.Su_Descripcion
+                                 Su_Descripcion = q.Su_Descripcion,
+                                 cr_observacion = q.cr_observacion
                              }).ToList();
                 }
 

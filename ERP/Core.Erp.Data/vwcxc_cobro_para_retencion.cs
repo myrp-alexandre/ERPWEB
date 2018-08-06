@@ -24,7 +24,7 @@ namespace Core.Erp.Data
         public double vt_total { get; set; }
         public string Nombres { get; set; }
         public System.DateTime vt_fecha { get; set; }
-        public Nullable<System.DateTime> vt_fech_venc { get; set; }
+        public System.DateTime vt_fech_venc { get; set; }
         public string vt_Observacion { get; set; }
         public string vt_NumFactura { get; set; }
         public string Su_Descripcion { get; set; }

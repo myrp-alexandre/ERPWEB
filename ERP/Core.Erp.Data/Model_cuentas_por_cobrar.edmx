@@ -188,18 +188,19 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_cartera_x_co
             <PropertyRef Name="IdSucursal" />
             <PropertyRef Name="IdBodega" />
             <PropertyRef Name="vt_tipoDoc" />
-            <PropertyRef Name="Referencia" />
             <PropertyRef Name="IdComprobante" />
             <PropertyRef Name="Su_Descripcion" />
             <PropertyRef Name="IdCliente" />
             <PropertyRef Name="vt_fecha" />
             <PropertyRef Name="TotalxCobrado" />
             <PropertyRef Name="Bodega" />
+            
             <PropertyRef Name="dc_ValorRetFu" />
             <PropertyRef Name="dc_ValorRetIva" />
             <PropertyRef Name="NomCliente" />
             <PropertyRef Name="em_nombre" />
             <PropertyRef Name="Estado" />
+            <PropertyRef Name="Referencia" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
@@ -218,7 +219,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_cartera_x_co
           <Property Name="Bodega" Type="nchar" MaxLength="100" Nullable="false" />
           <Property Name="vt_Subtotal" Type="float" />
           <Property Name="vt_iva" Type="float" />
-          <Property Name="vt_fech_venc" Type="datetime" />
+          <Property Name="vt_fech_venc" Type="datetime" Nullable="false" />
           <Property Name="dc_ValorRetFu" Type="float" Nullable="false" />
           <Property Name="dc_ValorRetIva" Type="float" Nullable="false" />
           <Property Name="CodCliente" Type="varchar" MaxLength="50" />
@@ -238,6 +239,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro' no ti
             <PropertyRef Name="cr_fecha" />
             <PropertyRef Name="cr_TotalCobro" />
             <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="cr_observacion" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
@@ -249,6 +251,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro' no ti
           <Property Name="cr_TotalCobro" Type="float" Nullable="false" />
           <Property Name="cr_estado" Type="nvarchar" MaxLength="1" />
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="cr_observacion" Type="varchar" MaxLength="700" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -335,9 +338,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
             <PropertyRef Name="vt_total" />
             <PropertyRef Name="Nombres" />
             <PropertyRef Name="vt_fecha" />
-            <PropertyRef Name="vt_Observacion" />
+            
             <PropertyRef Name="Su_Descripcion" />
             <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="vt_Observacion" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
@@ -349,7 +353,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
           <Property Name="vt_total" Type="float" Nullable="false" />
           <Property Name="Nombres" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="vt_fecha" Type="datetime" Nullable="false" />
-          <Property Name="vt_fech_venc" Type="datetime" />
+          <Property Name="vt_fech_venc" Type="datetime" Nullable="false" />
           <Property Name="vt_Observacion" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="vt_NumFactura" Type="varchar" MaxLength="71" />
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
@@ -520,7 +524,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
     [vwcxc_cobro].[cr_fecha] AS [cr_fecha], 
     [vwcxc_cobro].[cr_TotalCobro] AS [cr_TotalCobro], 
     [vwcxc_cobro].[cr_estado] AS [cr_estado], 
-    [vwcxc_cobro].[Su_Descripcion] AS [Su_Descripcion]
+    [vwcxc_cobro].[Su_Descripcion] AS [Su_Descripcion], 
+    [vwcxc_cobro].[cr_observacion] AS [cr_observacion]
     FROM [web].[vwcxc_cobro] AS [vwcxc_cobro]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcxc_cobro_det" EntityType="Self.vwcxc_cobro_det" store:Type="Views" store:Schema="web">
@@ -856,7 +861,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
           <Property Name="Bodega" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Name="vt_Subtotal" Type="Double" />
           <Property Name="vt_iva" Type="Double" />
-          <Property Name="vt_fech_venc" Type="DateTime" Precision="3" />
+          <Property Name="vt_fech_venc" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="dc_ValorRetFu" Type="Double" Nullable="false" />
           <Property Name="dc_ValorRetIva" Type="Double" Nullable="false" />
           <Property Name="CodCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -1040,7 +1045,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
           <Property Name="vt_total" Type="Double" Nullable="false" />
           <Property Name="Nombres" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="vt_fech_venc" Type="DateTime" Precision="3" />
+          <Property Name="vt_fech_venc" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="vt_Observacion" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="vt_NumFactura" Type="String" MaxLength="71" FixedLength="false" Unicode="false" />
           <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
@@ -1142,6 +1147,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
             <PropertyRef Name="cr_fecha" />
             <PropertyRef Name="cr_TotalCobro" />
             <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="cr_observacion" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdSucursal" Type="Int32" Nullable="false" />
@@ -1153,6 +1159,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
           <Property Name="cr_TotalCobro" Type="Double" Nullable="false" />
           <Property Name="cr_estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="cr_observacion" Type="String" Nullable="false" MaxLength="700" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1435,6 +1442,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
           <EntitySetMapping Name="vwcxc_cobro">
             <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.vwcxc_cobro">
               <MappingFragment StoreEntitySet="vwcxc_cobro">
+                <ScalarProperty Name="cr_observacion" ColumnName="cr_observacion" />
                 <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
                 <ScalarProperty Name="cr_estado" ColumnName="cr_estado" />
                 <ScalarProperty Name="cr_TotalCobro" ColumnName="cr_TotalCobro" />

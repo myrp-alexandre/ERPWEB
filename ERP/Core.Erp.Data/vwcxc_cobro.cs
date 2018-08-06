@@ -24,5 +24,6 @@ namespace Core.Erp.Data
         public double cr_TotalCobro { get; set; }
         public string cr_estado { get; set; }
         public string Su_Descripcion { get; set; }
+        public string cr_observacion { get; set; }
     }
 }

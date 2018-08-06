@@ -66,6 +66,9 @@ namespace Core.Erp.Info.Facturacion
         public string EstadoCierre { get; set; }
         #endregion
 
+        #region Campos de desbloqueo
+        public string ContraseniaAdministrador { get; set; }
+        #endregion
 
     }
 }

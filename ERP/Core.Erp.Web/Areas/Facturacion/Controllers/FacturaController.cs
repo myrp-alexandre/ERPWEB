@@ -41,6 +41,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         tb_sis_Documento_Tipo_Talonario_Bus bus_talonario = new tb_sis_Documento_Tipo_Talonario_Bus();
         fa_cuotas_x_doc_Bus bus_cuotas = new fa_cuotas_x_doc_Bus();
         fa_factura_det_Bus bus_det = new fa_factura_det_Bus();
+        fa_parametro_Bus bus_param = new fa_parametro_Bus();
         #endregion
 
         #region Index
@@ -177,6 +178,43 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #endregion
 
         #region Json
+        public JsonResult Desbloquear(string Contrasenia = "")
+        {
+            string EstadoDesbloqueo = "";
+
+            var param = bus_param.get_info(Convert.ToInt32(SessionFixed.IdEmpresa));
+            if(param != null)
+            {
+                if (Contrasenia.ToLower() == param.clave_desbloqueo_precios.ToLower())
+                {
+                    EstadoDesbloqueo = "DESBLOQUEADO";
+                }
+            }
+
+            return Json(EstadoDesbloqueo, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetLineaDetalle(int Secuencia = 0, decimal IdTransaccionSession = 0)
+        {
+            fa_factura_det_Info lineaF = new fa_factura_det_Info();
+
+            var linea = List_det.get_list(IdTransaccionSession).Where(q => q.Secuencia == Secuencia).FirstOrDefault();
+            if(linea != null)
+                lineaF = linea;
+            return Json(linea, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ModificarLinea(int Secuencia = 0, decimal IdTransaccionSession = 0, double Precio = 0, double PorDescuento = 0)
+        {
+            fa_factura_det_Info lineaF = new fa_factura_det_Info();
+            var linea = List_det.get_list(IdTransaccionSession).Where(q => q.Secuencia == Secuencia).FirstOrDefault();
+            if (linea != null)
+            {
+                linea.vt_Precio = Precio;
+                linea.vt_PorDescUnitario = PorDescuento;
+                List_det.UpdateRow(linea, IdTransaccionSession);
+            }
+            return Json(linea, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult cargar_contactos(decimal IdCliente = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);

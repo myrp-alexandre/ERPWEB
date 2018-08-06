@@ -68,6 +68,10 @@ namespace Core.Erp.Info.Facturacion
         public string MotivoAnulacion { get; set; }
         #endregion
 
+        #region Campos de usuario super admin
+        public string ContraseniaAdministrador { get; set; }
+        #endregion
+
         #region Campos que no existen en la tabla
         public List<fa_factura_det_Info> lst_det { get; set; }
         public List<fa_cuotas_x_doc_Info> lst_cuota { get; set; }

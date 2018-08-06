@@ -12,7 +12,64 @@
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdProforma)
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    <div class="modal fade" id="ModalDesbloqueo" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ingrese la contraseña de desbloqueo</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group has-feedback">
+                                @Html.PasswordFor(q => q.ContraseniaAdministrador, new { @class = "form-control", @placeholder = "Contraseña desbloqueo", @id = "ContraseniaAdministrador" })
+                                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary" onclick="Desbloquear();">Desbloquear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="modal fade" id="ModalPrecios" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Linea #<label id="Secuencia">0</label></h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="col-md-6 form-group">
+                        <label for="txtPrecio">Precio</label>
+                        <input type="text" id="txtPrecio" class="form-control" />
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="txtPorDescuento">% Descuento</label>
+                        <input type="text" id="txtPorDescuento" class="form-control" />
+                    </div>
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary" onclick="ModificarLinea();">Aceptar</button>
+                    </div>
+                </div>               
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="OpModal" role="dialog">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
@@ -126,6 +183,15 @@
             </div>
         </div>
     </div>
+
+    <div class="col-md-12">
+        <button type="button" class="btn btn-primary" id="btn_desbloquear" onclick="MostrarModalDesbloqueo();">
+            <i class="fa fa-lock"></i> Desbloquear
+        </button>
+        <label id="EstadoDesbloqueo" class="text-danger" style="margin-left:10px;" hidden></label>
+    </div>
+    <br />
+    <br />
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -264,5 +330,90 @@
                     alert(error);
                 }
             });
+        }
+
+    function MostrarModalDesbloqueo() {
+        $("#ContraseniaAdministrador").val("");
+        $("#ModalDesbloqueo").modal("show");
+    }
+
+    function Desbloquear() {
+        var datos = {
+            Contrasenia: $("#ContraseniaAdministrador").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("Desbloquear", "Proforma", new { Area = "Facturacion"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data == "DESBLOQUEADO") {
+                    $("#EstadoDesbloqueo").text(data);
+                    $("#EstadoDesbloqueo").show();
+                    $("#btn_desbloquear").hide();
+                } else
+                    $("#EstadoDesbloqueo").hide();
+            },
+            error: function (error) {
+            }
+        });
+        $("#ModalDesbloqueo").modal("hide");
+    }
+
+    function MostrarModalPrecios(Secuencia) {
+        if ($("#EstadoDesbloqueo").text() == "DESBLOQUEADO") {
+            var datos = {
+                IdTransaccionSession: $("#IdTransaccionSession").val(),
+                Secuencia: Secuencia
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("GetLineaDetalle", "Proforma", new { Area = "Facturacion"})',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $("#Secuencia").text(data.Secuencia);
+                    $("#txtPrecio").val(data.pd_precio);
+                    $("#txtPorDescuento").val(data.pd_por_descuento_uni);
+                    $("#ModalPrecios").modal("show");
+                },
+                error: function (error) {
+                }
+            });
+
+        }
+    }
+
+    function ModificarLinea() {
+        var datos = {
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            Secuencia: $("#Secuencia").text(),
+            Precio: $("#txtPrecio").val(),
+            PorDescuento: $("#txtPorDescuento").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ModificarLinea", "Proforma",new { Area = "Facturacion"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridView_proforma_det.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+        $("#ModalPrecios").modal("hide");
     }
 </script>
