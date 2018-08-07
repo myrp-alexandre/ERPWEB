@@ -36,6 +36,7 @@ namespace Core.Erp.Web.Reportes.Facturacion
                 tbl_factura.HeightF -= Height;
                 Detail.HeightF = 16;
             }
+            
             this.DataSource = lst_rpt;
         }
     }

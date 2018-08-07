@@ -214,7 +214,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                info.lst_sueldo_x_pagar= Session["lst_sueldo_pagar"] as List<ct_cbtecble_det_Info>; 
                info.lst_provisiones= Session["lst_provisiones"] as List<ct_cbtecble_det_Info>;
                 info.UsuarioCierre = Session["IdUsuario"].ToString();
-                
+
+                foreach (var item in info.lst_sueldo_x_pagar)
+                {
+                    if (item.IdCtaCble == null)
+                    {
+
+                    }
+                }
                     info.IdEmpresa = GetIdEmpresa();
                     if (!bus_rol.ContabilizarPeriodo(info))
                     {
