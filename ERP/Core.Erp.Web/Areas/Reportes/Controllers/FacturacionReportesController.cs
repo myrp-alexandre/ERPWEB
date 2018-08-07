@@ -214,7 +214,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdCbteVta.Value = IdCbteVta;
             model.p_mostrar_cuotas.Value = bus_factura.MostrarCuotasRpt(Convert.ToInt32(Session["IdEmpresa"]),IdSucursal,IdBodega,IdCbteVta);
             model.RequestParameters = false;
-
+            model.DefaultPrinterSettingsUsing.UsePaperKind = false;
             bus_factura.modificarEstadoImpresion(Convert.ToInt32(SessionFixed.IdEmpresa), IdSucursal, IdBodega, IdCbteVta, true);
             return View(model);
         }

@@ -48,8 +48,9 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                  IdProducto = q.IdProducto,
                                  nom_marca = q.nom_marca,
                                  nom_modelo = q.nom_modelo,
-                                 pr_observacion = q.pr_observacion
-
+                                 pr_observacion = q.pr_observacion,
+                                 lote_fecha_vcto = q.lote_fecha_vcto,
+                                 lote_num_lote = q.lote_num_lote
                              }).ToList();
                 }
                 return Lista;
