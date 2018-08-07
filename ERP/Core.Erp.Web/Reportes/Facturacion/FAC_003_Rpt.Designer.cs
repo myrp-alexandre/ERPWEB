@@ -427,7 +427,7 @@
             this.xrTable3,
             this.xrTable4});
             this.PageFooter.Dpi = 96F;
-            this.PageFooter.HeightF = 191F;
+            this.PageFooter.HeightF = 190F;
             this.PageFooter.Name = "PageFooter";
             // 
             // xrTable2
@@ -708,8 +708,7 @@
             this.xrLabel1,
             this.xrLabel4});
             this.ReportHeader.Dpi = 96F;
-            this.ReportHeader.HeightF = 260F;
-            this.ReportHeader.HeightF = 228F;
+            this.ReportHeader.HeightF = 250F;
             this.ReportHeader.Name = "ReportHeader";
             // 
             // FAC_003_Rpt
