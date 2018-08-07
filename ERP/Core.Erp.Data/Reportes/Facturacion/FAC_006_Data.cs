@@ -50,8 +50,25 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                  nom_modelo = q.nom_modelo,
                                  pr_observacion = q.pr_observacion,
                                  lote_fecha_vcto = q.lote_fecha_vcto,
-                                 lote_num_lote = q.lote_num_lote
+                                 lote_num_lote = q.lote_num_lote,
+                                 pf_observacion = q.pf_observacion,
+                                 IdProducto_padre = q.IdProducto_padre
                              }).ToList();
+                }
+                if (mostrar_imagen)
+                {
+                    using (Entities_inventario Context = new Entities_inventario())
+                    {
+                        foreach (var item in Lista)
+                        {
+                            var producto = Context.in_Producto.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdProducto == (item.IdProducto_padre == null ? item.IdProducto : item.IdProducto_padre)).FirstOrDefault();
+                            if (producto != null && producto.pr_imagen != null)
+                            {
+                                item.pr_imagen = producto.pr_imagen;
+                                item.Detalle ="MARCA: " + item.nom_marca + " \r\nMODELO: " + item.nom_modelo + (producto.pr_observacion == null ? "" : "\r\nCARACTERISTICAS:\r\n" + producto.pr_observacion);
+                            }
+                        }
+                    }
                 }
                 return Lista;
             }

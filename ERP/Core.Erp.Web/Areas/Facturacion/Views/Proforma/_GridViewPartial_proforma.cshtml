@@ -90,37 +90,46 @@
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = Unit.Percentage(10);
         });
-        settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = Unit.Percentage(30);
+        settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = Unit.Percentage(20);
         settings.Columns.Add("pf_observacion", "Observación").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.FieldName = "pd_subtotal";
             column.Caption = "Subtotal";
             column.PropertiesEdit.DisplayFormatString = "{0:c2}";
-            column.Width = Unit.Percentage(7);
+            column.Width = Unit.Percentage(10);
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "pd_iva";
             column.Caption = "I.V.A.";
             column.PropertiesEdit.DisplayFormatString = "{0:c2}";
-            column.Width = Unit.Percentage(7);
+            column.Width = Unit.Percentage(10);
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "pd_total";
             column.Caption = "Total";
             column.PropertiesEdit.DisplayFormatString = "{0:c2}";
-            column.Width = Unit.Percentage(7);
-        });        
-        settings.Columns.Add("EstadoCierre", "Estado").Width = Unit.Percentage(7);
+            column.Width = Unit.Percentage(10);
+        });
+        settings.Columns.Add("EstadoCierre", "Estado").Width = Unit.Percentage(10);
         settings.Columns.Add("estado", "Estado").Width = Unit.Percentage(5);
         settings.Columns.Add(column =>
         {
             column.Caption = "*";
             column.SetDataItemTemplateContent(c =>
             {
-                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("FAC_006", "FacturacionReportes", new { Area = "Reportes", IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdProforma = DataBinder.Eval(c.DataItem, "IdProforma") }, Request.Url.Scheme) + "');\"></span>");
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("FAC_006", "FacturacionReportes", new { Area = "Reportes", IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdProforma = DataBinder.Eval(c.DataItem, "IdProforma"), mostrar_imagen = false }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "*";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("FAC_006", "FacturacionReportes", new { Area = "Reportes", IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdProforma = DataBinder.Eval(c.DataItem, "IdProforma"), mostrar_imagen = true }, Request.Url.Scheme) + "');\"></span>");
             });
             column.Width = Unit.Percentage(5);
         });

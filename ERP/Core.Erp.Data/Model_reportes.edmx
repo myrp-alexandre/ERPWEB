@@ -1576,6 +1576,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_006' no tien
           <Property Name="pf_observacion" Type="varchar" MaxLength="1000" />
           <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
           <Property Name="lote_fecha_vcto" Type="datetime" />
+          <Property Name="IdProducto_padre" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWFAC_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -3624,7 +3625,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
     [VWFAC_006].[pr_dias_entrega] AS [pr_dias_entrega], 
     [VWFAC_006].[pf_observacion] AS [pf_observacion], 
     [VWFAC_006].[lote_num_lote] AS [lote_num_lote], 
-    [VWFAC_006].[lote_fecha_vcto] AS [lote_fecha_vcto]
+    [VWFAC_006].[lote_fecha_vcto] AS [lote_fecha_vcto], 
+    [VWFAC_006].[IdProducto_padre] AS [IdProducto_padre]
     FROM [web].[VWFAC_006] AS [VWFAC_006]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWFAC_007" EntityType="Self.VWFAC_007" store:Type="Views" store:Schema="web">
@@ -7230,6 +7232,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
           <Property Name="pf_observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="lote_num_lote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="lote_fecha_vcto" Type="DateTime" Precision="3" />
+          <Property Name="IdProducto_padre" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -9262,6 +9265,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
           <EntitySetMapping Name="VWFAC_006">
             <EntityTypeMapping TypeName="Model_reportes.VWFAC_006">
               <MappingFragment StoreEntitySet="VWFAC_006">
+                <ScalarProperty Name="IdProducto_padre" ColumnName="IdProducto_padre" />
                 <ScalarProperty Name="lote_fecha_vcto" ColumnName="lote_fecha_vcto" />
                 <ScalarProperty Name="lote_num_lote" ColumnName="lote_num_lote" />
                 <ScalarProperty Name="pf_observacion" ColumnName="pf_observacion" />

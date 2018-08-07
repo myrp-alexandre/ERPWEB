@@ -273,17 +273,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-        public ActionResult FAC_006(int IdSucursal = 0, decimal IdProforma = 0, bool formato_hoja_membretada = false, bool mostrar_imagen = false)
+        public ActionResult FAC_006(int IdSucursal = 0, decimal IdProforma = 0, bool mostrar_imagen = false)
         {
             if(mostrar_imagen)
             {
-                //FAC_006_imagen_Rpt model_ = new FAC_006_imagen_Rpt();
-                //model_.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
-                //model_.p_IdSucursal.Value = IdSucursal;
-                //model_.p_IdProforma.Value = IdProforma;
-                //model_.p_formato_hoja_membretada.Value = formato_hoja_membretada;
-                //model_.RequestParameters = false;
-                return View();
+                FAC_006_imagen_Rpt model_ = new FAC_006_imagen_Rpt();
+                model_.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+                model_.p_IdSucursal.Value = IdSucursal;
+                model_.p_IdProforma.Value = IdProforma;
+                model_.RequestParameters = false;
+                return View(model_);
             }
             else
             {
@@ -291,7 +290,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
                 model.p_IdSucursal.Value = IdSucursal;
                 model.p_IdProforma.Value = IdProforma;
-                model.p_formato_hoja_membretada.Value = formato_hoja_membretada;
                 model.RequestParameters = false;
                 return View(model);
             }
