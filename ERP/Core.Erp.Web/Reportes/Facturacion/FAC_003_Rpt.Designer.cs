@@ -111,7 +111,7 @@
             this.Detail.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.tbl_factura});
             this.Detail.Dpi = 96F;
-            this.Detail.HeightF = 28.8F;
+            this.Detail.HeightF = 29F;
             this.Detail.Name = "Detail";
             this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 96F);
             this.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -214,7 +214,7 @@
             // 
             this.xrTableCell13.Dpi = 96F;
             this.xrTableCell13.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([vt_cantidad] = 0, \'\' , \'Lote:\' )")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(IsNull([lote_num_lote]),\'\' , Iif([vt_cantidad] = 0, \'\' , \'Lote:\' ))")});
             this.xrTableCell13.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell13.Name = "xrTableCell13";
             this.xrTableCell13.StylePriority.UseFont = false;
@@ -225,7 +225,7 @@
             // 
             this.xrTableCell17.Dpi = 96F;
             this.xrTableCell17.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([vt_cantidad] = 0, \'\' , [lote_num_lote] )")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(IsNull([lote_num_lote]),\'\' , Iif([vt_cantidad] = 0, \'\' , [lote_num_lote] ))")});
             this.xrTableCell17.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell17.Name = "xrTableCell17";
             this.xrTableCell17.StylePriority.UseFont = false;
@@ -282,7 +282,7 @@
             this.xrLabel29.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pe_nombreCompleto]")});
             this.xrLabel29.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrLabel29.LocationFloat = new DevExpress.Utils.PointFloat(44.3984F, 112.0032F);
+            this.xrLabel29.LocationFloat = new DevExpress.Utils.PointFloat(45.3984F, 100.0032F);
             this.xrLabel29.Name = "xrLabel29";
             this.xrLabel29.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 96F);
             this.xrLabel29.SizeF = new System.Drawing.SizeF(673.9968F, 22.08F);
@@ -299,10 +299,10 @@
             this.xrLabel30.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pe_direccion]")});
             this.xrLabel30.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrLabel30.LocationFloat = new DevExpress.Utils.PointFloat(44.39841F, 138.8832F);
+            this.xrLabel30.LocationFloat = new DevExpress.Utils.PointFloat(45.3984F, 126.8832F);
             this.xrLabel30.Name = "xrLabel30";
             this.xrLabel30.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 96F);
-            this.xrLabel30.SizeF = new System.Drawing.SizeF(480.8384F, 22.07999F);
+            this.xrLabel30.SizeF = new System.Drawing.SizeF(358.8384F, 22.07999F);
             this.xrLabel30.StylePriority.UseBorders = false;
             this.xrLabel30.StylePriority.UseFont = false;
             this.xrLabel30.StylePriority.UsePadding = false;
@@ -316,7 +316,7 @@
             this.xrLabel31.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pe_cedulaRuc]")});
             this.xrLabel31.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrLabel31.LocationFloat = new DevExpress.Utils.PointFloat(44.3984F, 165.7632F);
+            this.xrLabel31.LocationFloat = new DevExpress.Utils.PointFloat(45.3984F, 153.7632F);
             this.xrLabel31.Name = "xrLabel31";
             this.xrLabel31.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 96F);
             this.xrLabel31.SizeF = new System.Drawing.SizeF(153.8784F, 22.08F);
@@ -333,7 +333,7 @@
             this.xrLabel40.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pe_telefonoOfic]")});
             this.xrLabel40.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrLabel40.LocationFloat = new DevExpress.Utils.PointFloat(44.3984F, 193.1232F);
+            this.xrLabel40.LocationFloat = new DevExpress.Utils.PointFloat(45.3984F, 180.6432F);
             this.xrLabel40.Name = "xrLabel40";
             this.xrLabel40.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 96F);
             this.xrLabel40.SizeF = new System.Drawing.SizeF(153.8784F, 22.08F);
@@ -349,7 +349,7 @@
             this.xrLabel2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[vt_fecha]")});
             this.xrLabel2.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(339.2432F, 192.6432F);
+            this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(340.2432F, 180.6432F);
             this.xrLabel2.Name = "xrLabel2";
             this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 96F);
             this.xrLabel2.SizeF = new System.Drawing.SizeF(96F, 22.08F);
@@ -365,7 +365,7 @@
             this.xrLabel3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Ve_Vendedor]")});
             this.xrLabel3.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(408.1616F, 165.7632F);
+            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(409.1616F, 153.7632F);
             this.xrLabel3.Name = "xrLabel3";
             this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 96F);
             this.xrLabel3.SizeF = new System.Drawing.SizeF(98.00006F, 22.08F);
@@ -380,7 +380,7 @@
             this.xrLabel4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[vt_fech_venc]")});
             this.xrLabel4.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(556.0784F, 192.6432F);
+            this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(557.0784F, 180.6432F);
             this.xrLabel4.Name = "xrLabel4";
             this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 96F);
             this.xrLabel4.SizeF = new System.Drawing.SizeF(83.00165F, 22.08F);
@@ -396,7 +396,7 @@
             this.xrLabel1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Descripcion_Ciudad]")});
             this.xrLabel1.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(598.0016F, 134.0832F);
+            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(599.0016F, 122.0832F);
             this.xrLabel1.Name = "xrLabel1";
             this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 96F);
             this.xrLabel1.SizeF = new System.Drawing.SizeF(124.2432F, 22.07999F);
@@ -709,6 +709,7 @@
             this.xrLabel4});
             this.ReportHeader.Dpi = 96F;
             this.ReportHeader.HeightF = 260F;
+            this.ReportHeader.HeightF = 228F;
             this.ReportHeader.Name = "ReportHeader";
             // 
             // FAC_003_Rpt
@@ -728,6 +729,7 @@
             this.PageHeight = 1120;
             this.PageWidth = 794;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
+            this.PaperName = "CUSTOM";
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this.p_IdEmpresa,
             this.p_IdSucursal,
