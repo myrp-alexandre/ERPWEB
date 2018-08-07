@@ -896,6 +896,10 @@ namespace Core.Erp.Data.Facturacion
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
                     var fa = (from f in Context.fa_factura
+                              where f.IdEmpresa == IdEmpresa
+                              && f.IdSucursal == IdSucursal
+                              && f.IdBodega == IdBodega
+                              && f.IdCbteVta == IdCbteVta
                              join t in Context.fa_TerminoPago
                              on new { IdTerminoPago = f.vt_tipo_venta } equals new { t.IdTerminoPago }
                              select new

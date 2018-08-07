@@ -21,11 +21,25 @@ namespace Core.Erp.Web.Reportes.Facturacion
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
             decimal IdProforma = p_IdProforma.Value == null ? 0 : Convert.ToDecimal(p_IdProforma.Value);
-            bool formato_hoja_membretada = p_formato_hoja_membretada.Value == null ? false : Convert.ToBoolean(p_formato_hoja_membretada.Value);
+            
 
             FAC_006_Bus bus_rpt = new FAC_006_Bus();
             List<FAC_006_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdProforma, true, true);
             this.DataSource = lst_rpt;
+        }
+
+        private void xrPictureBox2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            var picture = (XRPictureBox)sender;
+            if (picture.Image == null)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                picture.HeightF = 150f;
+            }
+
         }
     }
 }

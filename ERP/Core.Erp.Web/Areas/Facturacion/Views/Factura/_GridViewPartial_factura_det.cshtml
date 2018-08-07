@@ -81,7 +81,7 @@
             column.FieldName = "vt_Precio";
             column.Caption = "Precio";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(7);
             column.EditorProperties().SpinEdit(q =>
             {
                 q.MinValue = 0;
@@ -99,7 +99,7 @@
                 q.MinValue = 0;
                 q.Width = Unit.Percentage(100);
             });
-            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
@@ -149,7 +149,18 @@
             column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
-
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "*";
+            column.FieldName = "Secuencia";
+            column.Width = Unit.Percentage(5);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-lock\" onclick=\"MostrarModalPrecios('" +c.KeyValue+ "');\"></span>");
+            });
+        });
         settings.ClientSideEvents.BeginCallback = "function(s,e){e.customArgs['IdCliente'] = IdCliente.GetValue(); e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();}";
         settings.ClientSideEvents.EndCallback = "function(s,e){CargarCuotas();}";
 

@@ -30,6 +30,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_proforma_det_Bus bus_det = new fa_proforma_det_Bus();
         in_Producto_List List_producto = new in_Producto_List();
         string mensaje = string.Empty;
+        fa_parametro_Bus bus_param = new fa_parametro_Bus();
         #endregion
 
 
@@ -259,6 +260,43 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var resultado = bus_termino_pago.get_info(IdTerminoPago);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Desbloquear(string Contrasenia = "")
+        {
+            string EstadoDesbloqueo = "";
+
+            var param = bus_param.get_info(Convert.ToInt32(SessionFixed.IdEmpresa));
+            if (param != null)
+            {
+                if (Contrasenia.ToLower() == param.clave_desbloqueo_precios.ToLower())
+                {
+                    EstadoDesbloqueo = "DESBLOQUEADO";
+                }
+            }
+
+            return Json(EstadoDesbloqueo, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetLineaDetalle(int Secuencia = 0, decimal IdTransaccionSession = 0)
+        {
+            fa_proforma_det_Info lineaF = new fa_proforma_det_Info();
+
+            var linea = List_det.get_list(IdTransaccionSession).Where(q => q.Secuencia == Secuencia).FirstOrDefault();
+            if (linea != null)
+                lineaF = linea;
+            return Json(linea, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ModificarLinea(int Secuencia = 0, decimal IdTransaccionSession = 0, double Precio = 0, double PorDescuento = 0)
+        {
+            fa_factura_det_Info lineaF = new fa_factura_det_Info();
+            var linea = List_det.get_list(IdTransaccionSession).Where(q => q.Secuencia == Secuencia).FirstOrDefault();
+            if (linea != null)
+            {
+                linea.pd_precio = Precio;
+                linea.pd_por_descuento_uni = PorDescuento;
+                List_det.UpdateRow(linea, IdTransaccionSession);
+            }
+            return Json(linea, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult get_info_cliente(decimal IdCliente = 0, int IdSucursal = 0)

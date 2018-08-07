@@ -35,5 +35,11 @@ namespace Core.Erp.Info.Reportes.Facturacion
         public string pr_observacion { get; set; }
         public decimal IdProducto { get; set; }
         public int pr_dias_entrega { get; set; }
+        public string pf_observacion { get; set; }
+        public string lote_num_lote { get; set; }
+        public Nullable<System.DateTime> lote_fecha_vcto { get; set; }
+        public Nullable<decimal> IdProducto_padre { get; set; }
+        public byte[] pr_imagen { get; set; }
+        public string Detalle { get; set; }
     }
 }

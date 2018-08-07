@@ -142,7 +142,7 @@
             // 
             this.xrTableCell5.Dpi = 96F;
             this.xrTableCell5.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[vt_cantidad]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([vt_cantidad] = 0,\'\' ,[vt_cantidad] )")});
             this.xrTableCell5.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.xrTableCell5.Name = "xrTableCell5";
             this.xrTableCell5.StylePriority.UseFont = false;
@@ -162,7 +162,7 @@
             // 
             this.xrTableCell2.Dpi = 96F;
             this.xrTableCell2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[vt_PorDescUnitario]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([vt_cantidad]=0\t,\'\' ,[vt_PorDescUnitario])")});
             this.xrTableCell2.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.xrTableCell2.Name = "xrTableCell2";
             this.xrTableCell2.StylePriority.UseFont = false;
@@ -172,7 +172,7 @@
             // 
             this.xrTableCell3.Dpi = 96F;
             this.xrTableCell3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[vt_Precio]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([vt_cantidad] = 0,\'\' ,[vt_Precio] )")});
             this.xrTableCell3.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.xrTableCell3.Name = "xrTableCell3";
             this.xrTableCell3.StylePriority.UseFont = false;
@@ -183,7 +183,7 @@
             this.xrTableCell4.CanShrink = true;
             this.xrTableCell4.Dpi = 96F;
             this.xrTableCell4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[vt_Subtotal]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([vt_cantidad]=0,\'\' , [vt_Subtotal])")});
             this.xrTableCell4.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.xrTableCell4.Name = "xrTableCell4";
             this.xrTableCell4.StylePriority.UseFont = false;
@@ -213,6 +213,8 @@
             // xrTableCell13
             // 
             this.xrTableCell13.Dpi = 96F;
+            this.xrTableCell13.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([vt_cantidad] = 0, \'\' , \'Lote:\' )")});
             this.xrTableCell13.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell13.Name = "xrTableCell13";
             this.xrTableCell13.StylePriority.UseFont = false;
@@ -223,7 +225,7 @@
             // 
             this.xrTableCell17.Dpi = 96F;
             this.xrTableCell17.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[lote_num_lote]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([vt_cantidad] = 0, \'\' , [lote_num_lote] )")});
             this.xrTableCell17.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell17.Name = "xrTableCell17";
             this.xrTableCell17.StylePriority.UseFont = false;
@@ -232,6 +234,8 @@
             // xrTableCell18
             // 
             this.xrTableCell18.Dpi = 96F;
+            this.xrTableCell18.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([vt_cantidad] = 0, \'\' , \'Fecha vcto:\' )")});
             this.xrTableCell18.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell18.Name = "xrTableCell18";
             this.xrTableCell18.StylePriority.UseFont = false;
@@ -242,7 +246,7 @@
             // 
             this.xrTableCell14.Dpi = 96F;
             this.xrTableCell14.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[lote_fecha_vcto]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([vt_cantidad] = 0, \'\' , [lote_fecha_vcto])")});
             this.xrTableCell14.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell14.Name = "xrTableCell14";
             this.xrTableCell14.StylePriority.UseFont = false;
