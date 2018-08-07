@@ -50,7 +50,7 @@
                 p.ValueType = typeof(string);
                 p.DataSource = ViewBag.lst_codigo_retencion;
                 p.Width = Unit.Percentage(100);
-                p.ClientSideEvents.ValueChanged = "function(s,e,){llamar_partial()}";
+                //  p.ClientSideEvents.ValueChanged = "function(s,e,){armar_diario()}";
             });
         });
 
@@ -78,8 +78,10 @@
 
         });
 
-        settings.ClientSideEvents.BatchEditChangesSaving= "function(s,e,){llamar_partial()}";
-        settings.ClientSideEvents.SelectionChanged = "function(s,e,){llamar_partial()}";
+        settings.ClientSideEvents.BatchEditChangesSaving= "function(s,e,){armar_diario()}";
+        settings.ClientSideEvents.BatchEditRowDeleting = "function(s,e,){armar_diario()}";
+        settings.ClientSideEvents.EndCallback = "function (s,e){armar_diario();}";
+
     });
 
 }
