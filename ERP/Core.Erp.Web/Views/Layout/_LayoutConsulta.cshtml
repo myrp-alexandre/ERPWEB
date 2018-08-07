@@ -78,6 +78,9 @@
                                 <span class="hidden-xs">@Session["IdUsuario"]</span>
                             </a>
                         </li>
+                        <li>
+                            <a @*class="btn btn-default"*@ href="@Url.Action("Login","Account",new { Area = "" },null)">Salir</a>
+                        </li>
                     </ul>
                 </div>
             </nav>

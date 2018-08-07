@@ -67,9 +67,10 @@ namespace Core.Erp.Web.Controllers
             ViewBag.lst_empresas = lst;
             LoginModel model = new LoginModel
             {
-                IdUsuario = IdUsuario
+                IdUsuario = IdUsuario,
+                IdEmpresa = 1
             };
-            return View();
+            return View(model);
         }
         [HttpPost]
         public ActionResult LoginEmpresa(LoginModel model)
@@ -102,8 +103,8 @@ namespace Core.Erp.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            Session["IdUsuario"] = null;
-            return RedirectToAction("Index", "Home");
+            Session.Contents.RemoveAll();
+            return RedirectToAction("Login");
         }
 
         public ActionResult CambiarContrasena(string IdUsuario = "")
