@@ -341,10 +341,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     detalle_retencion_info.AddRow(info_det);
                     model.detalle = detalle_retencion_info.get_list();
 
-                    // armando diario contable
-                    var detalle = detalle_retencion_info.get_list();
-                    info_param_op = Session["info_param_op"] as cp_parametros_Info;
-                    comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
+                    //// armando diario contable
+                    //var detalle = detalle_retencion_info.get_list();
+                    //info_param_op = Session["info_param_op"] as cp_parametros_Info;
+                    //comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
 
                 }
             }
@@ -360,10 +360,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     detalle_retencion_info.AddRow(info_det);
                     model.detalle = detalle_retencion_info.get_list();
 
-                    // armando diario contable
-                    var detalle = detalle_retencion_info.get_list();
-                    info_param_op = Session["info_param_op"] as cp_parametros_Info;
-                    comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
+                    //// armando diario contable
+                    //var detalle = detalle_retencion_info.get_list();
+                    //info_param_op = Session["info_param_op"] as cp_parametros_Info;
+                    //comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
                 }
 
 
@@ -397,10 +397,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     detalle_retencion_info.UpdateRow(info_det);
                     model.detalle = detalle_retencion_info.get_list();
 
-                    // armando diario contable
-                    var detalle = detalle_retencion_info.get_list();
-                    info_param_op = Session["info_param_op"] as cp_parametros_Info;
-                    comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
+                    //// armando diario contable
+                    //var detalle = detalle_retencion_info.get_list();
+                    //info_param_op = Session["info_param_op"] as cp_parametros_Info;
+                    //comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
 
                 }
             }
@@ -417,10 +417,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     detalle_retencion_info.UpdateRow(info_det);
                     model.detalle = detalle_retencion_info.get_list();
 
-                    // armando diario contable
-                    var detalle = detalle_retencion_info.get_list();
-                    info_param_op = Session["info_param_op"] as cp_parametros_Info;
-                    comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
+                    //// armando diario contable
+                    //var detalle = detalle_retencion_info.get_list();
+                    //info_param_op = Session["info_param_op"] as cp_parametros_Info;
+                    //comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
                 }
 
 
@@ -440,10 +440,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.detalle = detalle_retencion_info.get_list();
 
 
-            // armando diario contable
-            var detalle = detalle_retencion_info.get_list();
-            info_param_op = Session["info_param_op"] as cp_parametros_Info;
-            comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
+            //// armando diario contable
+            //var detalle = detalle_retencion_info.get_list();
+            //info_param_op = Session["info_param_op"] as cp_parametros_Info;
+            //comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
 
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_retencion_det", model);
