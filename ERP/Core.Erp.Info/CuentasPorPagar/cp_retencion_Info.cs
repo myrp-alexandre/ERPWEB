@@ -8,6 +8,7 @@ namespace Core.Erp.Info.CuentasPorPagar
 {
   public  class cp_retencion_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdProveedor { get; set; }
         public decimal IdRetencion { get; set; }

@@ -1,6 +1,4 @@
 @using System.Web.UI.WebControls;
-@model Core.Erp.Info.CuentasPorPagar.cp_retencion_Info
-
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
@@ -81,11 +79,11 @@
         settings.ClientSideEvents.BatchEditChangesSaving= "function(s,e,){armar_diario()}";
         settings.ClientSideEvents.BatchEditRowDeleting = "function(s,e,){armar_diario()}";
         settings.ClientSideEvents.EndCallback = "function (s,e){armar_diario();}";
-
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 
 }
-@grid.Bind(Model.detalle).GetHtml()
+@grid.Bind(Model).GetHtml()
 
 
 <script>

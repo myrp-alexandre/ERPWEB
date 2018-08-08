@@ -18,7 +18,7 @@
 
 @using (Html.BeginForm("Modificar", "Retencion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdRetencion)
     @Html.HiddenFor(q => q.ct_IdCbteCble)
@@ -212,6 +212,27 @@
                 })
                
             });
-          
+            function armar_diario() {
+
+                var datos = {
+                    IdProveedor: $("#IdProveedor").val()
+                }
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(datos),
+                    url: '@Url.Action("armar_diario", "Retencion", new { Area = "CuentasPorPagar" })',
+                    async: false,
+                    bDeferRender: true,
+                    bProcessing: true,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        GridViewPartial_retencio_dc.PerformCallback();
+                    },
+                    error: function (error) {
+                    }
+                });
+
+            };
 
         </script>

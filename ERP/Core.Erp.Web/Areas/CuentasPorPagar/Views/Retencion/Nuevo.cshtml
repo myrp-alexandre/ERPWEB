@@ -18,7 +18,7 @@
 
 @using (Html.BeginForm("Nuevo", "Retencion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdProveedor, new  {@id= "IdProveedor" })
     @Html.HiddenFor(q => q.IdRetencion)
@@ -166,8 +166,6 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="co_observacion">Detalle retención*</label>
-
-
                                     @Html.Action("GridViewPartial_retencion_det")
 
                                 </div>
@@ -214,7 +212,6 @@
 
                 var datos = {
                     IdProveedor: $("#IdProveedor").val()
-
                 }
                 $.ajax({
                     type: 'POST',
