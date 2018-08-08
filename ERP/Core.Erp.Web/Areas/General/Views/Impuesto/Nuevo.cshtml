@@ -22,7 +22,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdTipoImpuesto">Tipo impuesto</label>
+                    <label for="IdTipoImpuesto">Tipo impuesto*</label>
                     @Html.DropDownListFor(q => q.IdTipoImpuesto, new SelectList(ViewBag.lst_tipo, "IdTipoImpuesto", "nom_tipoImpuesto"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.IdTipoImpuesto, "", new { @class = "text-danger" })
                 </div>
@@ -55,7 +55,7 @@
         <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form">
-                    <label for="porcentaje">Porcentaje</label>
+                    <label for="porcentaje">Porcentaje*</label>
                     @Html.TextBoxFor(q => q.porcentaje, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.porcentaje, "", new { @class = "text-danger" })
                 </div>
