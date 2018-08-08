@@ -6,12 +6,22 @@
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdCobro";
 
-        //CConfiguracion responsive
-        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
+
+        //Configuración click derecho
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+        settings.SettingsContextMenu.EnableRowMenu = DefaultBoolean.False;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
+
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+
         //Configuración scrolling y pager
         settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Hidden;
         settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
@@ -75,9 +85,9 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(10);        
-        settings.Columns.Add("IdCobro", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = Unit.Percentage(30);
+        settings.Columns.Add("nom_Motivo_tipo_cobro", "Motivo").Width = Unit.Percentage(10);
+        settings.Columns.Add("cr_NumDocumento", "# Doc/Cheque").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdCobro", "ID").Width = Unit.Percentage(7);
         settings.Columns.Add(column =>
         {
             column.FieldName = "cr_fecha";
@@ -85,6 +95,8 @@
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = Unit.Percentage(10);
         });
+        settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = Unit.Percentage(30);
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "cr_TotalCobro";
@@ -92,7 +104,7 @@
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
             column.Width = Unit.Percentage(10);
         });
-        settings.Columns.Add("cr_observacion", "Observación").Width = Unit.Percentage(20);
+        settings.Columns.Add("cr_observacion", "Observación").Width = Unit.Percentage(15);
         settings.Columns.Add("cr_estado", "Estado").Width = Unit.Percentage(5);
         settings.Columns.Add(column =>
         {

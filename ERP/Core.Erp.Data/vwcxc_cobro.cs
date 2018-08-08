@@ -25,5 +25,7 @@ namespace Core.Erp.Data
         public string cr_estado { get; set; }
         public string Su_Descripcion { get; set; }
         public string cr_observacion { get; set; }
+        public string cr_NumDocumento { get; set; }
+        public string nom_Motivo_tipo_cobro { get; set; }
     }
 }
