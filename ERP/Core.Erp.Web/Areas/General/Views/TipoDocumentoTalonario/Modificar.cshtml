@@ -24,7 +24,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="CodDocumentoTipo">Tipo Documento</label>
+                    <label for="CodDocumentoTipo">Tipo Documento*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.CodDocumentoTipo, settings =>
                {
                    settings.Name = "CodDocumentoTipo";
@@ -79,21 +79,21 @@
         <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="Establecimiento">Establecimiento</label>
+                    <label for="Establecimiento">Establecimiento*</label>
                     @Html.TextBoxFor(q => q.Establecimiento, new { @class = "form-control", @id = "Establecimiento", @readonly = "readonly" })
                     @Html.ValidationMessageFor(m => m.Establecimiento, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="PuntoEmision">Punto de Emisión</label>
+                    <label for="PuntoEmision">Punto de Emisión*</label>
                     @Html.TextBoxFor(q => q.PuntoEmision, new { @class = "form-control", @id = "PuntoEmision", @readonly = "readonly" })
                     @Html.ValidationMessageFor(m => m.PuntoEmision, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="NumDocumento">Documento inicial</label>
+                    <label for="NumDocumento">Documento inicial*</label>
                     @Html.TextBoxFor(q => q.NumDocumento, new { @class = "form-control", @id = "NumDocumento", @readonly = "readonly" })
                     @Html.ValidationMessageFor(m => m.NumDocumento, "", new { @class = "text-danger" })
                 </div>
