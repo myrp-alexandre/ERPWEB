@@ -18,13 +18,13 @@
 
 @using (Html.BeginForm("Modificar", "Deudas", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdCbteCble_Ogiro)
     @Html.HiddenFor(q => q.IdTipoCbte_Ogiro)
 
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdCbteCble_Ogiro)
+
 
     <div class="row">
         <div class="col-md-6">
@@ -123,14 +123,16 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="IdOrden_giro_Tipo">Sustento tributario*</label>
-                        @Html.DropDownListFor(q => q.IdOrden_giro_Tipo, new SelectList(ViewBag.lst_codigos_sri, "codigoSRI", "co_descripcion"), new { @class = "form-control", @id = "cmb_idtCredito" })
-                        @Html.ValidationMessageFor(q => q.IdOrden_giro_Tipo, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(q => q.IdIden_credito, new SelectList(ViewBag.lst_codigos_sri, "IdCodigo_SRI", "co_descripcion"), new { @class = "form-control", @id = "IdIden_credito" })
+                        @Html.ValidationMessageFor(q => q.IdIden_credito, "", new { @class = "text-danger" })
+                    
+
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="IdOrden_giro_Tipo">Tipo documento*</label>
-                        @Html.DropDownListFor(q => q.IdOrden_giro_Tipo, new SelectList(ViewBag.lst_tipo_doc, "CodTipoDocumento", "Descripcion"), new { @class = "form-control", @id = "cmbTipoDocu" })
+                        @Html.DropDownListFor(q => q.IdOrden_giro_Tipo, new SelectList(ViewBag.lst_tipo_doc, "CodTipoDocumento", "Descripcion"), new { @class = "form-control", @id = "IdOrden_giro_Tipo" })
                         @Html.ValidationMessageFor(q => q.IdOrden_giro_Tipo, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -464,8 +466,8 @@
     $("#co_factura").change(function () {
         rellenar_ceros_izquierda();
     });
-    $("#cmb_idtCredito").change(function () {
-        $("#cmbTipoDocu").empty();
+    $("#IdIden_credito").change(function () {
+        $("#IdOrden_giro_Tipo").empty(); 
         $("#cmbTipoDocu_modif").empty();
         if (IdProveedor.GetValue() == 0) {
             alert("Seleccione el proveedor");
@@ -481,9 +483,9 @@
         };
     });
 
-    $("#cmbTipoDocu").change(function () {
+    $("#IdIden_credito").change(function () {
 
-        var tipo_doc = $("#cmbTipoDocu").val();
+        var tipo_doc = $("#IdIden_credito").val();
 
         if (tipo_doc == "04")
         {
@@ -593,10 +595,10 @@
 
 
         get_info_proveedor();
-        if (IdProveedor.GetValue() > 0 && $("#cmb_idtCredito").val() != "") {
+        if (IdProveedor.GetValue() > 0 && $("#IdIden_credito").val() != "") {
             var datos = {
                 IdProveedor:  IdProveedor.GetValue(),
-                codigoSRI: $("#cmb_idtCredito").val()
+                codigoSRI: $("#IdIden_credito").val()
 
             }
             $.ajax({
@@ -610,7 +612,7 @@
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
                     $.each(data, function (i, row) {
-                        $("#cmbTipoDocu").append("<option value=" + row.CodTipoDocumento + ">" + row.Descripcion + "</option>");
+                        $("#IdOrden_giro_Tipo").append("<option value=" + row.CodTipoDocumento + ">" + row.Descripcion + "</option>");
                         $("#cmbTipoDocu_modif").append("<option value=" + row.CodTipoDocumento + ">" + row.Descripcion + "</option>");
                     });
                 },

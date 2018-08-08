@@ -9,6 +9,7 @@ using Core.Erp.Info.Contabilidad;
 using Core.Erp.Bus.Contabilidad;
 using DevExpress.Web.Mvc;
 using Core.Erp.Web.Helps;
+using Core.Erp.Info.Helps;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
@@ -16,7 +17,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
     {
 
        
-            #region variables
+          #region variables
             cp_retencion_Bus bus_retencion = new cp_retencion_Bus();
             cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
             ct_cbtecble_det_List_re List_ct_cbtecble_det_List = new ct_cbtecble_det_List_re();
@@ -29,53 +30,61 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             List<cp_codigo_SRI_Info> lst_codigo_retencion = new List<cp_codigo_SRI_Info>();
             cp_codigo_SRI_Bus bus_codigo_ret = new cp_codigo_SRI_Bus();
             int IdEmpresa = 0;
-            #endregion
-            public ActionResult Index()
+        #endregion
+
+          #region vistas
+           public ActionResult Index()
+        {
+            cl_filtros_Info model = new cl_filtros_Info
             {
-                return View();
-            }
-            public ActionResult GridViewPartial_retenciones()
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            return View(model);
+        }
+
+        public ActionResult GridViewPartial_retenciones(DateTime? Fecha_ini, DateTime? Fecha_fin)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
+            ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
+            List<cp_retencion_Info> model = new List<cp_retencion_Info>();
+            model = bus_retencion.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
+            return PartialView("_GridViewPartial_retenciones", model);
+        }
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_retencion_det()
+        {
+            try
             {
-                int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-                lst_retenciones = bus_retencion.get_list(IdEmpresa, DateTime.Now, DateTime.Now);
-                return PartialView("_GridViewPartial_retenciones", lst_retenciones);
-            }
-            [ValidateInput(false)]
-            public ActionResult GridViewPartial_retencion_det()
-            {
-                try
-                {
                 cargar_combos_detalle();
                 SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-                var model = List_cp_retencion_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));               
+                var model = List_cp_retencion_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
                 return PartialView("_GridViewPartial_retencion_det", model);
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
             }
-            public ActionResult GridViewPartial_retencio_dc()
+            catch (Exception)
             {
-                int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-                ct_cbtecble_Info model = new ct_cbtecble_Info();
-                model.lst_ct_cbtecble_det = List_ct_cbtecble_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                cargar_combos_detalle();
-                return PartialView("_GridViewPartial_retencio_dc", model);
+
+                throw;
             }
-            private void cargar_combos(string TipoPersona = "")
-            {
-                int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-                var lst_proveedores = bus_proveedor.get_list(IdEmpresa, false);
-                ViewBag.lst_proveedores = lst_proveedores;
-
-          
-
-
         }
-            public ActionResult Nuevo(int IdTipoCbte_Ogiro = 0, decimal IdCbteCble_Ogiro = 0)
-          {
+        public ActionResult GridViewPartial_retencio_dc()
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            ct_cbtecble_Info model = new ct_cbtecble_Info();
+            model.lst_ct_cbtecble_det = List_ct_cbtecble_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_retencio_dc", model);
+        }
+        #endregion
+           
+          #region Acciones
+        public ActionResult Nuevo(int IdTipoCbte_Ogiro = 0, decimal IdCbteCble_Ogiro = 0)
+        {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
@@ -83,40 +92,40 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
-                  cp_retencion_Info model = new cp_retencion_Info();
-                  model.fecha = DateTime.Now;
-                 IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            cp_retencion_Info model = new cp_retencion_Info();
+            model.fecha = DateTime.Now;
+            IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
-                 Session["info_param_op"] = bus_parametros.get_info(IdEmpresa);
-                 model= bus_retencion.get_info_factura( IdEmpresa, IdTipoCbte_Ogiro, IdCbteCble_Ogiro);
-                model.fecha = DateTime.Now;
-               if (model.co_valoriva > 0)
+            Session["info_param_op"] = bus_parametros.get_info(IdEmpresa);
+            model = bus_retencion.get_info_factura(IdEmpresa, IdTipoCbte_Ogiro, IdCbteCble_Ogiro);
+            model.fecha = DateTime.Now;
+            if (model.co_valoriva > 0)
                 Session["co_valoriva"] = model.co_valoriva;
-                 cargar_combos();
-                 cargar_combos_detalle();
-                 return View(model);
-            }
-            [HttpPost]
-            public ActionResult Nuevo(cp_retencion_Info model)
-            {
-                bus_retencion = new cp_retencion_Bus();
-                model.IdUsuario = Session["IdUsuario"].ToString();
-                model.detalle = Session["detalle_retencion"] as List<cp_retencion_det_Info>;
-                model.info_comprobante.lst_ct_cbtecble_det = Session["ct_cbtecble_det_Info"] as List<ct_cbtecble_det_Info>;
-                info_param_op = Session["info_param_op"] as cp_parametros_Info;
-                model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-                model.info_comprobante.IdTipoCbte = (int)info_param_op.pa_IdTipoCbte_x_Retencion;
+            cargar_combos();
+            cargar_combos_detalle();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Nuevo(cp_retencion_Info model)
+        {
+            bus_retencion = new cp_retencion_Bus();
+            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.detalle = List_cp_retencion_det.get_list(Convert.ToDecimal(model.IdTransaccionSession));
+            model.info_comprobante.lst_ct_cbtecble_det = List_ct_cbtecble_det_List.get_list(Convert.ToDecimal(model.IdTransaccionSession));
+            info_param_op = Session["info_param_op"] as cp_parametros_Info;
+            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            model.info_comprobante.IdTipoCbte = (int)info_param_op.pa_IdTipoCbte_x_Retencion;
 
-                string mensaje = bus_retencion.validar(model);
-                if (mensaje != "")
-                {
-                    cargar_combos();
-                    ViewBag.mensaje = mensaje;
-                    cargar_combos_detalle();
-                    return View(model);
-                }
-                else
-                {
+            string mensaje = bus_retencion.validar(model);
+            if (mensaje != "")
+            {
+                cargar_combos();
+                ViewBag.mensaje = mensaje;
+                cargar_combos_detalle();
+                return View(model);
+            }
+            else
+            {
                 lst_codigo_retencion = Session["lst_codigo_retencion"] as List<cp_codigo_SRI_Info>;
                 model.detalle.ForEach(item =>
                 {
@@ -134,45 +143,45 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     }
                 });
 
-                    if (bus_retencion.guardarDB(model))
-                        return RedirectToAction("Index");
-                    else
-                    {
-                        ViewBag.mensaje = mensaje;
-                        cargar_combos();
-                        cargar_combos_detalle();
-                        return View(model);
-                    }
+                if (bus_retencion.guardarDB(model))
+                    return RedirectToAction("Index");
+                else
+                {
+                    ViewBag.mensaje = mensaje;
+                    cargar_combos();
+                    cargar_combos_detalle();
+                    return View(model);
                 }
             }
-            public ActionResult Modificar(int IdRetencion = 0)
-             {
-                #region Validar Session
-                if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
-                    return RedirectToAction("Login", new { Area = "", Controller = "Account" });
-                SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
-                SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
-                #endregion
+        }
+        public ActionResult Modificar(int IdRetencion = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
 
-                cargar_combos();
-                cargar_combos_detalle();
-                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-                Session["info_param_op"] = bus_parametros.get_info(IdEmpresa);
-                cp_retencion_Info model = new cp_retencion_Info();
-                model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
-                model = bus_retencion.get_info(IdEmpresa, IdRetencion);
-                List_ct_cbtecble_det_List.set_list(  model.info_comprobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
-                List_cp_retencion_det.set_list( model.detalle, model.IdTransaccionSession);
-                return View(model);
-            }
-            [HttpPost]
-            public ActionResult Modificar(cp_retencion_Info model)
-            {
+            cargar_combos();
+            cargar_combos_detalle();
+            IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            Session["info_param_op"] = bus_parametros.get_info(IdEmpresa);
+            cp_retencion_Info model = new cp_retencion_Info();
+            model = bus_retencion.get_info(IdEmpresa, IdRetencion);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            List_ct_cbtecble_det_List.set_list(model.info_comprobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
+            List_cp_retencion_det.set_list(model.detalle, model.IdTransaccionSession);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Modificar(cp_retencion_Info model)
+        {
 
             bus_retencion = new cp_retencion_Bus();
             model.IdUsuario = Session["IdUsuario"].ToString();
-            model.detalle = Session["detalle_retencion"] as List<cp_retencion_det_Info>;
-            model.info_comprobante.lst_ct_cbtecble_det = Session["ct_cbtecble_det_Info"] as List<ct_cbtecble_det_Info>;
+            model.detalle = List_cp_retencion_det.get_list(Convert.ToDecimal(model.IdTransaccionSession));
+            model.info_comprobante.lst_ct_cbtecble_det = List_ct_cbtecble_det_List.get_list(Convert.ToDecimal(model.IdTransaccionSession));
             info_param_op = Session["info_param_op"] as cp_parametros_Info;
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             model.info_comprobante.IdTipoCbte = (int)info_param_op.pa_IdTipoCbte_x_Retencion;
@@ -215,7 +224,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 }
             }
         }
-            public ActionResult Anular(int IdRetencion = 0)
+        public ActionResult Anular(int IdRetencion = 0)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -229,20 +238,20 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             Session["info_param_op"] = bus_parametros.get_info(IdEmpresa);
             cp_retencion_Info model = new cp_retencion_Info();
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model = bus_retencion.get_info(IdEmpresa, IdRetencion);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             List_ct_cbtecble_det_List.set_list(model.info_comprobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
             List_cp_retencion_det.set_list(model.detalle, model.IdTransaccionSession);
             return View(model);
         }
-            [HttpPost]
-            public ActionResult Anular(cp_retencion_Info model)
-            {
+        [HttpPost]
+        public ActionResult Anular(cp_retencion_Info model)
+        {
 
             bus_retencion = new cp_retencion_Bus();
             model.IdUsuario = Session["IdUsuario"].ToString();
-            model.detalle = Session["detalle_retencion"] as List<cp_retencion_det_Info>;
-            model.info_comprobante.lst_ct_cbtecble_det = Session["ct_cbtecble_det_Info"] as List<ct_cbtecble_det_Info>;
+            model.detalle = List_cp_retencion_det.get_list(Convert.ToDecimal(model.IdTransaccionSession));
+            model.info_comprobante.lst_ct_cbtecble_det = List_ct_cbtecble_det_List.get_list(Convert.ToDecimal(model.IdTransaccionSession));
             info_param_op = Session["info_param_op"] as cp_parametros_Info;
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             model.info_comprobante.IdTipoCbte = (int)info_param_op.pa_IdTipoCbte_x_Retencion;
@@ -285,58 +294,52 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 }
             }
         }
-            [ValidateInput(false)]
-            public ActionResult GridViewPartial_deudas()
-            {
-                int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-                List<cp_retencion_Info> model = new List<cp_retencion_Info>();
 
-                return PartialView("_GridViewPartial_deudas", model);
-            }
-            private void cargar_combos_detalle()
-            {
-                int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-                ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
-                var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
-                ViewBag.lst_cuentas = lst_cuentas;
-                lst_codigo_retencion = bus_codigo_ret.get_list_cod_ret(false);
-                ViewBag.lst_codigo_retencion = lst_codigo_retencion;
-                Session["lst_codigo_retencion"] = lst_codigo_retencion;
+        #endregion
+
+          #region Acciones collback diario contable
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_deudas()
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            List<cp_retencion_Info> model = new List<cp_retencion_Info>();
+
+            return PartialView("_GridViewPartial_deudas", model);
         }
-            [HttpPost, ValidateInput(false)]
-            public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
-            {
-                if (ModelState.IsValid)
-                List_ct_cbtecble_det_List.AddRow(info_det,Convert.ToDecimal( SessionFixed.IdTransaccionSessionActual));
-                ct_cbtecble_Info model = new ct_cbtecble_Info();
-                model.lst_ct_cbtecble_det = List_ct_cbtecble_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                cargar_combos_detalle();
-                return PartialView("_GridViewPartial_retencio_dc", model);
-            }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_ct_cbtecble_det_List.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ct_cbtecble_Info model = new ct_cbtecble_Info();
+            model.lst_ct_cbtecble_det = List_ct_cbtecble_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_retencio_dc", model);
+        }
 
-            [HttpPost, ValidateInput(false)]
-            public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
-            {
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
+        {
             Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
-                if (ModelState.IsValid)
+            if (ModelState.IsValid)
                 List_ct_cbtecble_det_List.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                ct_cbtecble_Info model = new ct_cbtecble_Info();
-                model.lst_ct_cbtecble_det = List_ct_cbtecble_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                cargar_combos_detalle();
-                return PartialView("_GridViewPartial_retencio_dc", model);
-            }
+            ct_cbtecble_Info model = new ct_cbtecble_Info();
+            model.lst_ct_cbtecble_det = List_ct_cbtecble_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_retencio_dc", model);
+        }
 
-            public ActionResult EditingDelete(int secuencia)
-            {
-                List_ct_cbtecble_det_List.DeleteRow(secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                ct_cbtecble_Info model = new ct_cbtecble_Info();
-                model.lst_ct_cbtecble_det = List_ct_cbtecble_det_List.get_list( Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                cargar_combos_detalle();
-                return PartialView("_GridViewPartial_retencio_dc", model);
-            }
+        public ActionResult EditingDelete(int secuencia)
+        {
+            List_ct_cbtecble_det_List.DeleteRow(secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ct_cbtecble_Info model = new ct_cbtecble_Info();
+            model.lst_ct_cbtecble_det = List_ct_cbtecble_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_retencio_dc", model);
+        }
+        #endregion
 
-
-        // grid de retencion
+          #region Acciones collbak retenciones
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew_ret([ModelBinder(typeof(DevExpressEditorsBinder))]  cp_retencion_det_Info info_det)
         {
@@ -361,7 +364,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
             else
             {
-                if (info_codifo_sri.co_porRetencion!=0 & info_det.re_baseRetencion!=null & info_det.re_baseRetencion!=0)
+                if (info_codifo_sri.co_porRetencion != 0 & info_det.re_baseRetencion != null & info_det.re_baseRetencion != 0)
                 {
                     info_det.re_valor_retencion = (info_det.re_baseRetencion * info_codifo_sri.co_porRetencion) / 100;
                     info_det.IdCtacble = info_codifo_sri.info_codigo_ctacble.IdCtaCble;
@@ -371,13 +374,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     List_cp_retencion_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                     model = List_cp_retencion_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-                 
+
                 }
 
 
             }
 
-           
+
 
             cargar_combos_detalle();
             model = List_cp_retencion_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -400,7 +403,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     info_det.re_valor_retencion = (info_det.re_baseRetencion * info_codifo_sri.co_porRetencion) / 100;
                     info_det.IdCtacble = info_codifo_sri.info_codigo_ctacble.IdCtaCble;
                     List_cp_retencion_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                    model = List_cp_retencion_det.get_list( Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                    model = List_cp_retencion_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                 }
             }
             else
@@ -411,7 +414,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     info_det.IdCtacble = info_codifo_sri.info_codigo_ctacble.IdCtaCble;
                     info_det.re_Codigo_impuesto = info_det.re_Codigo_impuesto;
                     List_cp_retencion_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                    model = List_cp_retencion_det.get_list( Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                    model = List_cp_retencion_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                 }
 
 
@@ -420,7 +423,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
 
             cargar_combos_detalle();
-            model = List_cp_retencion_det.get_list( Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            model = List_cp_retencion_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_retencion_det", model);
         }
 
@@ -433,13 +436,17 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return PartialView("_GridViewPartial_retencion_det", model);
         }
 
-        #region json
+        #endregion
+
+         #region json
 
         public JsonResult armar_diario(decimal IdProveedor=0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
 
             var datos = bus_proveedor.get_info(IdEmpresa, IdProveedor);
+            if (datos == null)
+                datos = new cp_proveedor_Info();
             var detalle_ret = List_cp_retencion_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var param_op = bus_parametros.get_info(IdEmpresa);
             List_ct_cbtecble_det_List.delete_detail_New_details(param_op,detalle_ret, datos.IdCtaCble_CXP);
@@ -447,7 +454,30 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
-       
+
+        #endregion
+
+        #region Cargar combos
+        private void cargar_combos(string TipoPersona = "")
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            var lst_proveedores = bus_proveedor.get_list(IdEmpresa, false);
+            ViewBag.lst_proveedores = lst_proveedores;
+
+
+
+
+        }
+        private void cargar_combos_detalle()
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
+            var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
+            ViewBag.lst_cuentas = lst_cuentas;
+            lst_codigo_retencion = bus_codigo_ret.get_list_cod_ret(false);
+            ViewBag.lst_codigo_retencion = lst_codigo_retencion;
+            Session["lst_codigo_retencion"] = lst_codigo_retencion;
+        }
         #endregion
     }
 
@@ -513,7 +543,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     cbtecble_debe_Info.dc_Valor =(double) item.re_valor_retencion;
                     cbtecble_debe_Info.dc_Observacion = "";
                     sec++;
-                    AddRow(cbtecble_debe_Info, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                    AddRow(cbtecble_debe_Info, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
                 }
 
                         ct_cbtecble_det_Info cbtecble_haber_Info = new ct_cbtecble_det_Info();
@@ -524,7 +554,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                         cbtecble_haber_Info.dc_Valor_haber = detalle_retencion.Sum( v => Convert.ToDouble( v.re_valor_retencion));
                         cbtecble_haber_Info.dc_Valor = detalle_retencion.Sum(v => Convert.ToDouble(v.re_valor_retencion))*-1;
                         cbtecble_haber_Info.dc_Observacion = "";
-                        AddRow(cbtecble_haber_Info, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                        AddRow(cbtecble_haber_Info, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
 
                 }
@@ -536,9 +566,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
 
 
-        }
-
-    
+        }  
     public class cp_retencion_det_lst
     {
         string variable = " cp_retencion_det_Info";

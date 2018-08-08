@@ -19,6 +19,7 @@
 @using (Html.BeginForm("Modificar", "Retencion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.IdProveedor, new { @id = "IdProveedor" })
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdRetencion)
     @Html.HiddenFor(q => q.ct_IdCbteCble)

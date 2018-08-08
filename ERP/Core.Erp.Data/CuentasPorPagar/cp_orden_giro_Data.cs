@@ -133,6 +133,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.IdIden_credito = info.IdIden_credito;
                         Entity.IdCod_101 = info.IdCod_101;
                         Entity.IdTipoFlujo = info.IdTipoFlujo;
+                        Entity.IdOrden_giro_Tipo = info.IdOrden_giro_Tipo;
                         Entity.IdTipoServicio = info.IdTipoServicio;
                         Entity.IdCtaCble_Gasto = info.IdCtaCble_Gasto;
                         Entity.IdCtaCble_IVA = info.IdCtaCble_IVA;
@@ -160,14 +161,12 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.IdTipoMovi = info.IdTipoMovi;
 
 
-
-
                     };
                     Context.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;

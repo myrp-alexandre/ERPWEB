@@ -252,7 +252,11 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     return mensaje;
                 }
                
-               
+               if(info.info_comprobante.lst_ct_cbtecble_det==null)
+                {
+                    mensaje = "No existe detalle";
+                }
+                else
                 info.info_comprobante.lst_ct_cbtecble_det.ForEach(item =>
                 {
                     if (item.IdCtaCble == null | item.IdCtaCble == "")

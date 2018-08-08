@@ -136,7 +136,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     info.co_FechaFactura_vct = info.co_FechaFactura;
                 else
                 {
-                    info.co_FechaFactura_vct = info.info_cuota.Fecha_inicio;
+                    info.co_FechaFactura_vct = info.co_FechaFactura.AddDays(info.co_plazo);
                 }
                 info.co_fechaOg = info.co_FechaFactura;
                 if (bus_contabilidad.modificarDB(info.info_comrobante))

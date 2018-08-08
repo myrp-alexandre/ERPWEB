@@ -39,7 +39,8 @@ namespace Core.Erp.Data.CuentasPorPagar
             Boolean res = false;
             try
             {
-
+                if (info.Observacion.Length > 50)
+                    info.Observacion = info.Observacion.Substring(0, 50);
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
                     cp_retencion_x_ct_cbtecble Entity = new cp_retencion_x_ct_cbtecble
@@ -58,7 +59,7 @@ namespace Core.Erp.Data.CuentasPorPagar
 
                 return res;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw;
 

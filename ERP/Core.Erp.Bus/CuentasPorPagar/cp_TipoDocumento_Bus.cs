@@ -25,7 +25,12 @@ namespace Core.Erp.Bus.CuentasPorPagar
         {
             try
             {
+                odata = new cp_TipoDocumento_Data();
+                cp_codigo_SRI_Data data_codigo = new cp_codigo_SRI_Data();
+                var lst_data = data_codigo.get_info(Convert.ToInt32( codigoSRI));
                 cp_proveedor_Info info_proveedor = new cp_proveedor_Info();
+                if(lst_data!=null)
+                codigoSRI = lst_data.codigoSRI;
                 info_proveedor = bus_proveedor.get_info(IdEmpresa, IdProveddor);
                 List<cp_TipoDocumento_Info> lista = new List<cp_TipoDocumento_Info>();
                 List<cp_TipoDocumento_Info> lista_retorna = new List<cp_TipoDocumento_Info>();

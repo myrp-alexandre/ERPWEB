@@ -22,6 +22,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                 {
                     lista = (from item in Context.vwcp_retencion
                              where item.IdEmpresa == IdEmpresa
+                             && item.fecha>=Fechaini
+                             && item.fecha<=FechaFin
                              select new cp_retencion_Info
                              {
 
