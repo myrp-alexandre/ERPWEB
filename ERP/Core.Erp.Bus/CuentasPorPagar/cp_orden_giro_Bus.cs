@@ -326,7 +326,9 @@ namespace Core.Erp.Bus.CuentasPorPagar
                         mensaje = "Falta cuenta contable " + item.dc_Observacion;
                 });
 
-                if(Convert.ToDouble( info.info_comrobante.lst_ct_cbtecble_det.Sum(v => v.dc_Valor))!=0)
+                double valor = info.info_comrobante.lst_ct_cbtecble_det.Sum(v => v.dc_Valor);
+                valor =Math.Round( Convert.ToDouble(valor),2);
+                if (valor!=0)
                     mensaje = "El diario contable esta descuadrado ";
 
                 if(info.info_cuota.Total_a_pagar!=0 && info.info_cuota.Num_cuotas!=0&& info.info_cuota.Dias_plazo!=0)
