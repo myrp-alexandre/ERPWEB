@@ -246,6 +246,21 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     mensaje = "Ingrese seri del documento";
                     return mensaje;
                 }
+                if (info.serie1 == "" | info.serie1 == null)
+                {
+                    mensaje = "Ingrese seri de la retención";
+                    return mensaje;
+                }
+                if (info.serie2 == "" | info.serie2 == null)
+                {
+                    mensaje = "Ingrese seri de la retención";
+                    return mensaje;
+                }
+                if (info.NumRetencion == "" | info.NumRetencion == null)
+                {
+                    mensaje = "No existe numero de la retención";
+                    return mensaje;
+                }
                 if (info.co_factura == "" | info.co_factura == null)
                 {
                     mensaje = "Ingrese el número del documento";
