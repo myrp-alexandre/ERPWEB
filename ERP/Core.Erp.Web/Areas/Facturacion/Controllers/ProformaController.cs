@@ -261,7 +261,34 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult ModificarLineaProducto(int Secuencia = 0, decimal IdTransaccionSession = 0, decimal IdProducto = 0)
+        {
+            var linea = List_det.get_list(IdTransaccionSession).Where(q => q.Secuencia == Secuencia).FirstOrDefault();
+            if (linea != null)
+            {
+                var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), IdProducto);
+                if (producto != null)
+                {
+                    linea.IdProducto = IdProducto;
+                    linea.pr_descripcion = producto.pr_descripcion_combo;
+                }
+                List_det.UpdateRow(linea, IdTransaccionSession);
+            }
+            return Json(linea, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult BuscarProducto(int IdSucursal = 0, int IdBodega = 0, int Secuencia = 0, decimal IdTransaccionSession = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var linea = List_det.get_list(IdTransaccionSession).Where(q => q.Secuencia == Secuencia).FirstOrDefault();
 
+            var resultado = bus_producto.get_info(IdEmpresa, linea == null ? 0 : linea.IdProducto);
+            if (resultado == null)
+                resultado = new in_Producto_Info();
+
+            if (resultado.IdProducto_padre > 0)
+                List_producto.set_list(bus_producto.get_list_stock_lotes(IdEmpresa, IdSucursal, IdBodega, Convert.ToDecimal(resultado.IdProducto_padre)));
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult Desbloquear(string Contrasenia = "")
         {
             string EstadoDesbloqueo = "";

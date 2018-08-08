@@ -40,7 +40,18 @@
             e.NewValues["vt_Precio"] = 0;
             e.NewValues["vt_PorDescUnitario"] = 0;
         };
-
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "*";
+            column.FieldName = "Secuencia";
+            column.Width = Unit.Percentage(5);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-search\" onclick=\"BuscarProducto('" + c.KeyValue + "');\"></span>");
+            });
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "pr_descripcion";

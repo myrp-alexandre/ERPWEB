@@ -105,20 +105,13 @@
                     @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCliente">Cliente*</label>
                     @Html.Partial("_CmbCliente_Proforma", Model)
                     @Html.ValidationMessageFor(q => q.IdEntidad, "", new { @class = "text-danger" })
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="pr_dias_entrega">Días de entrega*</label>
-                    @Html.TextBoxFor(q => q.pr_dias_entrega, new { @class = "form-control", @id = "pr_dias_entrega" })
-                    @Html.ValidationMessageFor(q => q.pr_dias_entrega, "", new { @class = "text-danger" })
-                </div>
-            </div>
+            </div>            
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="pf_atencion_a">Atención a</label>
@@ -136,11 +129,18 @@
         </div>
 
         <div class="col-md-6">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="form-group">
                     <label for="IdTerminoPago">Termino pago*</label>
                     @Html.DropDownListFor(q => q.IdTerminoPago, new SelectList(ViewBag.lst_pago, "IdTerminoPago", "nom_TerminoPago"), new { @class = "form-control", @id = "IdTerminoPago" })
                     @Html.ValidationMessageFor(q => q.IdTerminoPago, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="pr_dias_entrega">Días de entrega*</label>
+                    @Html.TextBoxFor(q => q.pr_dias_entrega, new { @class = "form-control", @id = "pr_dias_entrega" })
+                    @Html.ValidationMessageFor(q => q.pr_dias_entrega, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-4">
@@ -238,24 +238,46 @@
     }
 
     function SetLoteDetalle(ID) {
-
-        $.ajax({
-            url: '@Url.Action("ChangeValuePartial", "Proforma",new { Area = "Facturacion"})',
-            type: "GET",
-            data: { value: ID },
-            success: function (data) {
-                $('#ajaxDiv').html(data);
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                alert('Request Status: ' + xhr.status + '; Status Text: ' + textStatus + '; Error: ' + errorThrown);
+        if (Number($("#Secuencia").text()) > 0) {
+            var datos = {
+                Secuencia: $("#Secuencia").text(),
+                IdTransaccionSession: $("#IdTransaccionSession").val(),                
+                IdProducto: ID
             }
-        });
-
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("ModificarLineaProducto", "Proforma",new { Area = "Facturacion"})',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    GridView_proforma_det.PerformCallback();
+                },
+                error: function (error) {
+                }
+            });                
+        } else {
+            $.ajax({
+                url: '@Url.Action("ChangeValuePartial", "Proforma",new { Area = "Facturacion"})',
+                type: "GET",
+                data: { value: ID },
+                success: function (data) {
+                    $('#ajaxDiv').html(data);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert('Request Status: ' + xhr.status + '; Status Text: ' + textStatus + '; Error: ' + errorThrown);
+                }
+            });
+        }
+        $("#Secuencia").text(0);
         $("#OpModal").modal("hide");
-
     }
 
-    function SeleccionarLote(s,e) {
+    function SeleccionarLote(s, e) {
+        $("#Secuencia").text(0);
         var datos = {
             IdSucursal: $("#IdSucursal").val(),
             IdBodega: $("#IdBodega").val(),
@@ -415,5 +437,32 @@
             }
         });
         $("#ModalPrecios").modal("hide");
+    }
+
+     function BuscarProducto(Secuencia) {
+        $("#Secuencia").text(Secuencia);
+        var datos = {
+            IdSucursal: $("#IdSucursal").val(),
+            IdBodega: $("#IdBodega").val(),
+            Secuencia: Secuencia,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("BuscarProducto", "Proforma",new { Area = "Facturacion"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.IdProducto_padre > 0) {
+                    MostrarModal();
+                }
+            },
+            error: function (error) {
+            }
+        });
     }
 </script>

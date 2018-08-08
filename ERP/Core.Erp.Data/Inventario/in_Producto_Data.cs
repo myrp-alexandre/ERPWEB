@@ -274,7 +274,7 @@ namespace Core.Erp.Data.Inventario
 
                 using (Entities_inventario Context = new Entities_inventario())
                 {
-                    in_Producto Entity = Context.in_Producto.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdProducto == IdProducto);
+                    in_Producto Entity = Context.in_Producto.Include("in_presentacion").FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdProducto == IdProducto);
                     if (Entity == null) return null;
                     info = new in_Producto_Info
                     {
@@ -321,8 +321,9 @@ namespace Core.Erp.Data.Inventario
                         se_distribuye = Entity.se_distribuye == null ? false : Convert.ToBoolean(Entity.se_distribuye),
                         pr_imagen=Entity.pr_imagen
                     };
+                    info.pr_descripcion_combo = info.pr_descripcion + " " + Entity.in_presentacion.nom_presentacion + " - " + info.lote_num_lote + " - " + (info.lote_fecha_vcto != null ? Convert.ToDateTime(info.lote_fecha_vcto).ToString("dd/MM/yyyy") : "");
                 }
-                info.pr_descripcion_combo = info.pr_descripcion + " " + info.nom_presentacion + " - " + info.lote_num_lote + " - " + (info.lote_fecha_vcto != null ? Convert.ToDateTime(info.lote_fecha_vcto).ToString("dd/MM/yyyy") : "");
+                
                 return info;
             }
             catch (Exception)

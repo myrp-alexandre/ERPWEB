@@ -215,6 +215,22 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return Json(linea, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult ModificarLineaProducto(int Secuencia = 0, decimal IdTransaccionSession = 0, decimal IdProducto = 0)
+        {
+            var linea = List_det.get_list(IdTransaccionSession).Where(q => q.Secuencia == Secuencia).FirstOrDefault();
+            if (linea != null)
+            {
+                var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), IdProducto);
+                if (producto != null)
+                {
+                    linea.IdProducto = IdProducto;
+                    linea.pr_descripcion = producto.pr_descripcion_combo;
+                }                    
+                List_det.UpdateRow(linea, IdTransaccionSession);
+            }
+            return Json(linea, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult cargar_contactos(decimal IdCliente = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -227,6 +243,26 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var resultado = bus_punto_venta.get_list(IdEmpresa, IdSucursal, false);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult BuscarProducto(int IdSucursal = 0, int IdPuntoVta = 0, int Secuencia = 0,decimal IdTransaccionSession = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var linea = List_det.get_list(IdTransaccionSession).Where(q => q.Secuencia == Secuencia).FirstOrDefault();
+            
+            var resultado = bus_producto.get_info(IdEmpresa, linea == null ? 0 : linea.IdProducto);
+            if (resultado == null)
+                resultado = new in_Producto_Info();
+
+            var punto_venta = bus_punto_venta.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
+            if (punto_venta != null)
+            {
+                if (resultado.IdProducto_padre > 0)
+                    List_producto.set_list(bus_producto.get_list_stock_lotes(IdEmpresa, IdSucursal, Convert.ToInt32(punto_venta.IdBodega), Convert.ToDecimal(resultado.IdProducto_padre)));
+            }
+            else
+                List_producto.set_list(new List<in_Producto_Info>());
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        
         public JsonResult GetLotesPorProducto(int IdSucursal = 0, int IdPuntoVta = 0, decimal IdProducto = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);

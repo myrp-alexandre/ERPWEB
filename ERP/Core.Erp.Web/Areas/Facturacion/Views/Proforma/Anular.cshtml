@@ -30,18 +30,11 @@
                     @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCliente">Cliente*</label>
                     @Html.Partial("_CmbCliente_Proforma", Model)
                     @Html.ValidationMessageFor(q => q.IdEntidad, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="pr_dias_entrega">Días de entrega*</label>
-                    @Html.TextBoxFor(q => q.pr_dias_entrega, new { @class = "form-control", @id = "pr_dias_entrega" })
-                    @Html.ValidationMessageFor(q => q.pr_dias_entrega, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-6">
@@ -61,11 +54,18 @@
         </div>
 
         <div class="col-md-6">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="form-group">
                     <label for="IdTerminoPago">Termino pago*</label>
                     @Html.DropDownListFor(q => q.IdTerminoPago, new SelectList(ViewBag.lst_pago, "IdTerminoPago", "nom_TerminoPago"), new { @class = "form-control", @id = "IdTerminoPago" })
                     @Html.ValidationMessageFor(q => q.IdTerminoPago, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="pr_dias_entrega">Días de entrega*</label>
+                    @Html.TextBoxFor(q => q.pr_dias_entrega, new { @class = "form-control", @id = "pr_dias_entrega" })
+                    @Html.ValidationMessageFor(q => q.pr_dias_entrega, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-4">
