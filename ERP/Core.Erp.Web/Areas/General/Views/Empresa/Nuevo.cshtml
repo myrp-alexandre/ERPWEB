@@ -1,25 +1,27 @@
 ﻿@model Core.Erp.Info.General.tb_empresa_Info
 @{
     ViewBag.Title = "Nueva empresa";
-    //if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
-    //{
-    //    Response.Redirect("~/Account/Login");
-    //}
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @using (Html.BeginForm("Nuevo", "Empresa", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-4">
+            <div class="form-group">
+                <div class="col-md-4">
                     <label for="codigo">Logo*</label>
                     @*@Html.DevExpress().BinaryImageFor(m => m.em_logo, settings =>
-                   {
-                   }).GetHtml()*@
+                        {
+                        }).GetHtml()*@
 
                     @Html.Action("Imagenes", new { Area = "General", Controller = "Imagenes" })
+                </div>
             </div>
-
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="codigo">Código*</label>
