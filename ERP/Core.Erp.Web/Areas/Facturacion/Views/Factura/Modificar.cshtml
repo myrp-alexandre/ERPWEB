@@ -119,20 +119,13 @@
                     @Html.ValidationMessageFor(q => q.IdPuntoVta, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCliente">Cliente*</label>
                     @Html.Partial("_CmbCliente_Factura", Model)
                     @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="IdVendedor">Vendedor*</label>
-                    @Html.DropDownListFor(q => q.IdVendedor, new SelectList(ViewBag.lst_vendedor, "IdVendedor", "Ve_Vendedor"), new { @class = "form-control", @id = "IdVendedor" })
-                    @Html.ValidationMessageFor(q => q.IdVendedor, "", new { @class = "text-danger" })
-                </div>
-            </div>
+            </div>            
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdClienteContacto">Contacto</label>
@@ -182,11 +175,18 @@
                 </ul>
                 <div class="tab-content" style="padding-top: 5px">
                     <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_general">
-                        <div class="col-md-12">
+                        <div class="col-md-8">
                             <div class="form-group">
                                 <label for="IdFormaPago">Forma de pago*</label>
                                 @Html.DropDownListFor(q => q.IdFormaPago, new SelectList(ViewBag.lst_forma_pago, "IdFormaPago", "nom_FormaPago"), new { @class = "form-control", @id = "IdFormaPago" })
                                 @Html.ValidationMessageFor(q => q.IdFormaPago, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdVendedor">Vendedor*</label>
+                                @Html.DropDownListFor(q => q.IdVendedor, new SelectList(ViewBag.lst_vendedor, "IdVendedor", "Ve_Vendedor"), new { @class = "form-control", @id = "IdVendedor" })
+                                @Html.ValidationMessageFor(q => q.IdVendedor, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -232,7 +232,7 @@
                                 <i class="fa fa-lock"></i> Desbloquear
                             </button>
                             <label id="EstadoDesbloqueo" class="text-danger" style="margin-left:10px;" hidden></label>
-                        </div>                        
+                        </div>
                     </div>
                     <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_cuotas">
                         <div class="row">
@@ -313,6 +313,33 @@
             CargarCuotas();
         });
     });
+
+        function BuscarProducto(Secuencia) {
+        $("#Secuencia").text(Secuencia);
+        var datos = {
+            IdSucursal: $("#IdSucursal").val(),
+            IdPuntoVta: $("#IdPuntoVta").val(),
+            Secuencia: Secuencia,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("BuscarProducto", "Factura",new { Area = "Facturacion"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.IdProducto_padre > 0) {
+                    MostrarModal();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
 
     function MostrarModal() {
         GridView_LoteFactura.PerformCallback();
@@ -403,24 +430,46 @@
         $("#ModalPrecios").modal("hide");
     }
     function SetLoteDetalle(ID) {
-
-        $.ajax({
-            url: '@Url.Action("ChangeValuePartial", "Factura",new { Area = "Facturacion"})',
-            type: "GET",
-            data: { value: ID },
-            success: function (data) {
-                $('#ajaxDiv').html(data);
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                alert('Request Status: ' + xhr.status + '; Status Text: ' + textStatus + '; Error: ' + errorThrown);
+        if (Number($("#Secuencia").text()) > 0) {
+            var datos = {
+                Secuencia: $("#Secuencia").text(),
+                IdTransaccionSession: $("#IdTransaccionSession").val(),                
+                IdProducto: ID
             }
-        });
-
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("ModificarLineaProducto", "Factura",new { Area = "Facturacion"})',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    GridView_factura_det.PerformCallback();
+                },
+                error: function (error) {
+                }
+            });                
+        } else {
+            $.ajax({
+                url: '@Url.Action("ChangeValuePartial", "Factura",new { Area = "Facturacion"})',
+                type: "GET",
+                data: { value: ID },
+                success: function (data) {
+                    $('#ajaxDiv').html(data);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert('Request Status: ' + xhr.status + '; Status Text: ' + textStatus + '; Error: ' + errorThrown);
+                }
+            });
+        }
+        $("#Secuencia").text(0);
         $("#OpModal").modal("hide");
-
     }
 
-    function SeleccionarLote(s,e) {
+    function SeleccionarLote(s, e) {
+        $("#Secuencia").text(0);
         var datos = {
             IdSucursal: $("#IdSucursal").val(),
             IdPuntoVta: $("#IdPuntoVta").val(),

@@ -61,20 +61,13 @@
                     @Html.ValidationMessageFor(q => q.IdPuntoVta, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCliente">Cliente*</label>
                     @Html.Partial("_CmbCliente_Factura", Model)
                     @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="IdVendedor">Vendedor*</label>
-                    @Html.DropDownListFor(q => q.IdVendedor, new SelectList(ViewBag.lst_vendedor, "IdVendedor", "Ve_Vendedor"), new { @class = "form-control", @id = "IdVendedor" })
-                    @Html.ValidationMessageFor(q => q.IdVendedor, "", new { @class = "text-danger" })
-                </div>
-            </div>
+            </div>            
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdClienteContacto">Contacto</label>
@@ -124,11 +117,18 @@
                 </ul>
                 <div class="tab-content" style="padding-top: 5px">
                     <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_general">
-                        <div class="col-md-12">
+                        <div class="col-md-8">
                             <div class="form-group">
                                 <label for="IdFormaPago">Forma de pago*</label>
                                 @Html.DropDownListFor(q => q.IdFormaPago, new SelectList(ViewBag.lst_forma_pago, "IdFormaPago", "nom_FormaPago"), new { @class = "form-control", @id = "IdFormaPago" })
                                 @Html.ValidationMessageFor(q => q.IdFormaPago, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdVendedor">Vendedor*</label>
+                                @Html.DropDownListFor(q => q.IdVendedor, new SelectList(ViewBag.lst_vendedor, "IdVendedor", "Ve_Vendedor"), new { @class = "form-control", @id = "IdVendedor" })
+                                @Html.ValidationMessageFor(q => q.IdVendedor, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-12">
