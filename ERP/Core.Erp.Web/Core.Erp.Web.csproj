@@ -730,6 +730,12 @@
     <Compile Include="Reportes\Importacion\IMP_001_Rpt.Designer.cs">
       <DependentUpon>IMP_001_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Importacion\IMP_002_Rpt_gastos.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Importacion\IMP_002_Rpt_gastos.Designer.cs">
+      <DependentUpon>IMP_002_Rpt_gastos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Inventario\INV_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
