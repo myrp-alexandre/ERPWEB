@@ -7,11 +7,13 @@ using Core.Erp.Bus.Reportes.Facturacion;
 using Core.Erp.Info.Reportes.Facturacion;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Erp.Info.Helps;
 
 namespace Core.Erp.Web.Reportes.Facturacion
 {
     public partial class FAC_003_Rpt : DevExpress.XtraReports.UI.XtraReport
     {
+        cl_funciones funciones = new cl_funciones();
         public FAC_003_Rpt()
         {
             InitializeComponent();
@@ -28,7 +30,10 @@ namespace Core.Erp.Web.Reportes.Facturacion
 
             FAC_003_Bus bus_rpt = new FAC_003_Bus();
             List<FAC_003_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, mostrar_cuotas);
-
+            if (lst_rpt.Count > 0)
+            {
+                lbl_valorenletras.Text = funciones.NumeroALetras(lst_rpt[0].vt_total.ToString());
+            }
             if (lst_rpt.Where(q => q.orden > 0).Count() > 0)
             {
                 float Height = tbl_factura.Rows[1].HeightF;
