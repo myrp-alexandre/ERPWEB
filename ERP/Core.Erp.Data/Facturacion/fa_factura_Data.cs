@@ -310,6 +310,9 @@ namespace Core.Erp.Data.Facturacion
                 #endregion
 
                 #endregion
+
+                var contacto = db_f.fa_cliente_contactos.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente && q.IdContacto == info.IdContacto).FirstOrDefault();
+
                 db_f.SaveChanges();
 
                 #region Talonario
@@ -326,7 +329,8 @@ namespace Core.Erp.Data.Facturacion
                 var parametro = db_f.fa_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                 if (parametro.IdMovi_inven_tipo_Factura != null)
                 {
-                    in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, Convert.ToInt32(parametro.IdMovi_inven_tipo_Factura));
+                    
+                    in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, Convert.ToInt32(parametro.IdMovi_inven_tipo_Factura),contacto == null ? "" : contacto.Nombres);
                     if(data_inv.guardarDB(movimiento, "-"))
                     {
                         db_f.fa_factura_x_in_Ing_Egr_Inven.Add(new fa_factura_x_in_Ing_Egr_Inven
@@ -350,7 +354,7 @@ namespace Core.Erp.Data.Facturacion
                 var cliente = db_f.fa_cliente.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente).FirstOrDefault();
                 if (!string.IsNullOrEmpty(cliente.IdCtaCble_cxc_Credito) && parametro.IdTipoCbteCble_Factura != null)
                 {
-                    ct_cbtecble_Info diario = armar_diario(info, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito);
+                    ct_cbtecble_Info diario = armar_diario(info, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito,contacto == null ? "" : contacto.Nombres);
                     if(diario != null)
                     if (data_ct.guardarDB(diario))
                     {
@@ -378,7 +382,7 @@ namespace Core.Erp.Data.Facturacion
             }
         }
 
-        public ct_cbtecble_Info armar_diario(fa_factura_Info info, int IdTipoCbte, string IdCtaCble_Cliente)
+        public ct_cbtecble_Info armar_diario(fa_factura_Info info, int IdTipoCbte, string IdCtaCble_Cliente, string nomContacto)
         {
             try
             {
@@ -426,7 +430,7 @@ namespace Core.Erp.Data.Facturacion
                     IdPeriodo = info.IdPeriodo,
                     IdUsuario = info.IdUsuario,
                     IdUsuarioUltModi = info.IdUsuarioUltModi,
-                    cb_Observacion = "FACT# " + info.vt_serie1 + "-" + info.vt_serie2 + "-" + info.vt_NumFactura + " " + info.vt_Observacion,
+                    cb_Observacion = "FACT# " + info.vt_serie1 + "-" + info.vt_serie2 + "-" + info.vt_NumFactura + " " + "CLIENTE: " + nomContacto + " " + info.vt_Observacion,
                     CodCbteCble = "FACT# " + info.vt_NumFactura,
                     cb_Valor = 0,
                     lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>()
@@ -499,7 +503,7 @@ namespace Core.Erp.Data.Facturacion
             }
         }
 
-        public in_Ing_Egr_Inven_Info armar_movi_inven(fa_factura_Info info, int IdMoviInven_tipo)
+        public in_Ing_Egr_Inven_Info armar_movi_inven(fa_factura_Info info, int IdMoviInven_tipo, string nomContacto)
         {
             try
             {
@@ -523,7 +527,7 @@ namespace Core.Erp.Data.Facturacion
                         IdMovi_inven_tipo = IdMoviInven_tipo,
                         IdNumMovi = 0,
                         cm_fecha = info.vt_fecha.Date,
-                        cm_observacion = "FACT# " + info.vt_serie1 + "-" + info.vt_serie2 + "-" + info.vt_NumFactura + " " + info.vt_Observacion,
+                        cm_observacion = "FACT# " + info.vt_serie1 + "-" + info.vt_serie2 + "-" + info.vt_NumFactura + " " + "CLIENTE: "+nomContacto+" "+ info.vt_Observacion,
                         IdUsuario = info.IdUsuario,
                         IdUsuarioUltModi = info.IdUsuarioUltModi,
                         IdMotivo_Inv = motivo.IdMotivo_Inv,
@@ -641,9 +645,9 @@ namespace Core.Erp.Data.Facturacion
                 Entity.IdUsuarioUltModi = info.IdUsuarioUltModi;
                 Entity.Fecha_UltMod = DateTime.Now;
 
-                
-                #endregion
 
+                #endregion
+                var contacto = db_f.fa_cliente_contactos.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente && q.IdContacto == info.IdContacto).FirstOrDefault();
                 #region Detalle
                 var lst_det = db_f.fa_factura_det.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdCbteVta == info.IdCbteVta).ToList();
                 db_f.fa_factura_det.RemoveRange(lst_det);
@@ -686,10 +690,7 @@ namespace Core.Erp.Data.Facturacion
 
                 #region Forma de pago
                 var fp = db_f.fa_factura_x_formaPago.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdCbteVta == info.IdCbteVta).FirstOrDefault();
-                if(fp != null)
-                {
-                    fp.IdFormaPago = info.IdFormaPago;
-                }else
+                db_f.fa_factura_x_formaPago.Remove(fp);
                 db_f.fa_factura_x_formaPago.Add(new fa_factura_x_formaPago
                 {
                     IdEmpresa = info.IdEmpresa,
@@ -734,7 +735,7 @@ namespace Core.Erp.Data.Facturacion
                     var egr = db_f.fa_factura_x_in_Ing_Egr_Inven.Where(q => q.IdEmpresa_fa == info.IdEmpresa && q.IdSucursal_fa == info.IdSucursal && q.IdBodega_fa == info.IdBodega && q.IdCbteVta_fa == info.IdCbteVta).FirstOrDefault();
                     if (egr == null)
                     {
-                        in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, Convert.ToInt32(parametro.IdMovi_inven_tipo_Factura));
+                        in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, Convert.ToInt32(parametro.IdMovi_inven_tipo_Factura),contacto == null ? "" : contacto.Nombres);
                         if (movimiento != null)
                         {
                             if (data_inv.guardarDB(movimiento, "-"))
@@ -758,7 +759,7 @@ namespace Core.Erp.Data.Facturacion
                     else
                     {
                         
-                        in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, Convert.ToInt32(parametro.IdMovi_inven_tipo_Factura));
+                        in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, Convert.ToInt32(parametro.IdMovi_inven_tipo_Factura), contacto == null ? "" : contacto.Nombres);
                         if (movimiento != null)
                         {
                             movimiento.IdNumMovi = egr.IdNumMovi_in_eg_x_inv;
@@ -775,7 +776,7 @@ namespace Core.Erp.Data.Facturacion
                     var conta = db_f.fa_factura_x_ct_cbtecble.Where(q => q.vt_IdEmpresa == info.IdEmpresa && q.vt_IdSucursal == info.IdSucursal && q.vt_IdBodega == info.IdBodega && q.vt_IdCbteVta == info.IdCbteVta).FirstOrDefault();
                     if (conta == null)
                     {
-                        ct_cbtecble_Info diario = armar_diario(info, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito);
+                        ct_cbtecble_Info diario = armar_diario(info, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito, contacto == null ? "" : contacto.Nombres);
                         if (diario != null)
                         {
                             if (data_ct.guardarDB(diario))
@@ -796,7 +797,7 @@ namespace Core.Erp.Data.Facturacion
                         }                       
                     } else
                     {
-                        ct_cbtecble_Info diario = armar_diario(info, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito);
+                        ct_cbtecble_Info diario = armar_diario(info, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito, contacto == null ? "" : contacto.Nombres);
                         if (diario != null)
                         {
                             diario.IdCbteCble = conta.ct_IdCbteCble;
@@ -805,6 +806,7 @@ namespace Core.Erp.Data.Facturacion
                     }                    
                 }
                 #endregion
+
                 db_f.Dispose();                
                 
                 return true;

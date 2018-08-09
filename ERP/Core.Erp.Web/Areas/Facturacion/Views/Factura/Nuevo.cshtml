@@ -53,10 +53,10 @@
     }
     function MostrarModalDesbloqueo() {
         $("#ContraseniaAdministrador").val("");
-        $("#ModalDesbloqueo").modal("show");        
+        $("#ModalDesbloqueo").modal("show");
     }
 
-    function Desbloquear() {        
+    function Desbloquear() {
             var datos = {
                 Contrasenia: $("#ContraseniaAdministrador").val()
             }
@@ -107,8 +107,8 @@
                 error: function (error) {
                 }
             });
-            
-        }        
+
+        }
     }
 
     function ModificarLinea() {
@@ -137,21 +137,20 @@
     }
 
     function SetLoteDetalle(ID) {
-
-        $.ajax({
-            url: '@Url.Action("ChangeValuePartial", "Factura",new { Area = "Facturacion"})',
-            type: "GET",
-            data: { value: ID },
-            success: function (data) {
-                $('#ajaxDiv').html(data);
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                alert('Request Status: ' + xhr.status + '; Status Text: ' + textStatus + '; Error: ' + errorThrown);
-            }
-        });
-
+        
+            $.ajax({
+                url: '@Url.Action("ChangeValuePartial", "Factura",new { Area = "Facturacion"})',
+                type: "GET",
+                data: { value: ID },
+                success: function (data) {
+                    $('#ajaxDiv').html(data);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert('Request Status: ' + xhr.status + '; Status Text: ' + textStatus + '; Error: ' + errorThrown);
+                }
+            });
+            
         $("#OpModal").modal("hide");
-
     }
 
     function SeleccionarLote(s,e) {
