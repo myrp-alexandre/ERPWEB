@@ -696,8 +696,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_001' no tien
             <PropertyRef Name="IdTipoCbte_Ogiro" />
             <PropertyRef Name="Codigo" />
             <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="codigoSRI" />
-            <PropertyRef Name="co_descripcion" />
             <PropertyRef Name="em_nombre" />
             <PropertyRef Name="Su_Descripcion" />
             <PropertyRef Name="pr_nombre" />
@@ -721,6 +719,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWCXP_001' no tien
             <PropertyRef Name="idCentroCosto_sub_centro_costo" />
             <PropertyRef Name="dc_Valor" />
             <PropertyRef Name="dc_Valor_Debe" />
+            <PropertyRef Name="codigoSRI" />
+            <PropertyRef Name="co_descripcion" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdCbteCble_Ogiro" Type="numeric" Precision="18" Scale="0" Nullable="false" />
@@ -1809,6 +1809,67 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWIMP_001' no tien
           <Property Name="NomFormaPago" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="NomUnidad" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="Descripcion_Ciudad" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWIMP_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWIMP_002">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenCompra_ext" />
+            <PropertyRef Name="IdProveedor" />
+            <PropertyRef Name="IdPais_origen" />
+            <PropertyRef Name="IdPais_embarque" />
+            <PropertyRef Name="IdCiudad_destino" />
+            <PropertyRef Name="IdCatalogo_via" />
+            <PropertyRef Name="IdCatalogo_forma_pago" />
+            <PropertyRef Name="oe_fecha" />
+            <PropertyRef Name="IdCtaCble_importacion" />
+            <PropertyRef Name="estado" />
+            <PropertyRef Name="Paisembarque" />
+            <PropertyRef Name="PaisOrigen" />
+            <PropertyRef Name="FormaPago" />
+            <PropertyRef Name="ViaEmbarque" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdProveedor" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdPais_origen" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdPais_embarque" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdCiudad_destino" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdCatalogo_via" Type="int" Nullable="false" />
+          <Property Name="IdCatalogo_forma_pago" Type="int" Nullable="false" />
+          <Property Name="oe_fecha" Type="datetime" Nullable="false" />
+          <Property Name="oe_fecha_llegada_est" Type="datetime" />
+          <Property Name="oe_fecha_embarque_est" Type="datetime" />
+          <Property Name="oe_fecha_desaduanizacion_est" Type="datetime" />
+          <Property Name="IdCtaCble_importacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="oe_observacion" Type="varchar" MaxLength="100" />
+          <Property Name="oe_codigo" Type="varchar" MaxLength="30" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+          <Property Name="oe_fecha_llegada" Type="datetime" />
+          <Property Name="oe_fecha_embarque" Type="datetime" />
+          <Property Name="oe_fecha_desaduanizacion" Type="datetime" />
+          <Property Name="IdMoneda_origen" Type="int" />
+          <Property Name="IdMoneda_destino" Type="int" />
+          <Property Name="Paisembarque" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PaisOrigen" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FormaPago" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ViaEmbarque" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWIMP_002_gastos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWIMP_002_gastos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenCompra_ext" />
+            <PropertyRef Name="gt_descripcion" />
+            <PropertyRef Name="dc_Valor" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="gt_descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="dc_Valor" Type="float" Nullable="false" />
+          <Property Name="dc_Observacion" Type="varchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWINV_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -3761,6 +3822,44 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
     [VWIMP_001].[Descripcion_Ciudad] AS [Descripcion_Ciudad]
     FROM [web].[VWIMP_001] AS [VWIMP_001]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VWIMP_002" EntityType="Self.VWIMP_002" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWIMP_002].[IdEmpresa] AS [IdEmpresa], 
+    [VWIMP_002].[IdOrdenCompra_ext] AS [IdOrdenCompra_ext], 
+    [VWIMP_002].[IdProveedor] AS [IdProveedor], 
+    [VWIMP_002].[IdPais_origen] AS [IdPais_origen], 
+    [VWIMP_002].[IdPais_embarque] AS [IdPais_embarque], 
+    [VWIMP_002].[IdCiudad_destino] AS [IdCiudad_destino], 
+    [VWIMP_002].[IdCatalogo_via] AS [IdCatalogo_via], 
+    [VWIMP_002].[IdCatalogo_forma_pago] AS [IdCatalogo_forma_pago], 
+    [VWIMP_002].[oe_fecha] AS [oe_fecha], 
+    [VWIMP_002].[oe_fecha_llegada_est] AS [oe_fecha_llegada_est], 
+    [VWIMP_002].[oe_fecha_embarque_est] AS [oe_fecha_embarque_est], 
+    [VWIMP_002].[oe_fecha_desaduanizacion_est] AS [oe_fecha_desaduanizacion_est], 
+    [VWIMP_002].[IdCtaCble_importacion] AS [IdCtaCble_importacion], 
+    [VWIMP_002].[oe_observacion] AS [oe_observacion], 
+    [VWIMP_002].[oe_codigo] AS [oe_codigo], 
+    [VWIMP_002].[estado] AS [estado], 
+    [VWIMP_002].[oe_fecha_llegada] AS [oe_fecha_llegada], 
+    [VWIMP_002].[oe_fecha_embarque] AS [oe_fecha_embarque], 
+    [VWIMP_002].[oe_fecha_desaduanizacion] AS [oe_fecha_desaduanizacion], 
+    [VWIMP_002].[IdMoneda_origen] AS [IdMoneda_origen], 
+    [VWIMP_002].[IdMoneda_destino] AS [IdMoneda_destino], 
+    [VWIMP_002].[Paisembarque] AS [Paisembarque], 
+    [VWIMP_002].[PaisOrigen] AS [PaisOrigen], 
+    [VWIMP_002].[FormaPago] AS [FormaPago], 
+    [VWIMP_002].[ViaEmbarque] AS [ViaEmbarque]
+    FROM [web].[VWIMP_002] AS [VWIMP_002]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VWIMP_002_gastos" EntityType="Self.VWIMP_002_gastos" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWIMP_002_gastos].[IdEmpresa] AS [IdEmpresa], 
+    [VWIMP_002_gastos].[IdOrdenCompra_ext] AS [IdOrdenCompra_ext], 
+    [VWIMP_002_gastos].[gt_descripcion] AS [gt_descripcion], 
+    [VWIMP_002_gastos].[dc_Valor] AS [dc_Valor], 
+    [VWIMP_002_gastos].[dc_Observacion] AS [dc_Observacion]
+    FROM [web].[VWIMP_002_gastos] AS [VWIMP_002_gastos]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VWINV_001" EntityType="Self.VWINV_001" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
     [VWINV_001].[IdEmpresa] AS [IdEmpresa], 
@@ -4409,6 +4508,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
           <EntitySet Name="VWFAC_007" EntityType="Model_reportes.VWFAC_007" />
           <EntitySet Name="VWFAC_008" EntityType="Model_reportes.VWFAC_008" />
           <EntitySet Name="VWFAC_006" EntityType="Model_reportes.VWFAC_006" />
+          <EntitySet Name="VWIMP_002" EntityType="Model_reportes.VWIMP_002" />
+          <EntitySet Name="VWIMP_002_gastos" EntityType="Model_reportes.VWIMP_002_gastos" />
         </EntityContainer>
         <EntityType Name="Af_SPACTF_004_detalle">
           <Key>
@@ -7234,6 +7335,63 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
           <Property Name="lote_fecha_vcto" Type="DateTime" Precision="3" />
           <Property Name="IdProducto_padre" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
+        <EntityType Name="VWIMP_002">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenCompra_ext" />
+            <PropertyRef Name="IdProveedor" />
+            <PropertyRef Name="IdPais_origen" />
+            <PropertyRef Name="IdPais_embarque" />
+            <PropertyRef Name="IdCiudad_destino" />
+            <PropertyRef Name="IdCatalogo_via" />
+            <PropertyRef Name="IdCatalogo_forma_pago" />
+            <PropertyRef Name="oe_fecha" />
+            <PropertyRef Name="IdCtaCble_importacion" />
+            <PropertyRef Name="estado" />
+            <PropertyRef Name="Paisembarque" />
+            <PropertyRef Name="PaisOrigen" />
+            <PropertyRef Name="FormaPago" />
+            <PropertyRef Name="ViaEmbarque" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdProveedor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdPais_origen" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdPais_embarque" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdCiudad_destino" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdCatalogo_via" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogo_forma_pago" Type="Int32" Nullable="false" />
+          <Property Name="oe_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="oe_fecha_llegada_est" Type="DateTime" Precision="3" />
+          <Property Name="oe_fecha_embarque_est" Type="DateTime" Precision="3" />
+          <Property Name="oe_fecha_desaduanizacion_est" Type="DateTime" Precision="3" />
+          <Property Name="IdCtaCble_importacion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="oe_observacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="oe_codigo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="oe_fecha_llegada" Type="DateTime" Precision="3" />
+          <Property Name="oe_fecha_embarque" Type="DateTime" Precision="3" />
+          <Property Name="oe_fecha_desaduanizacion" Type="DateTime" Precision="3" />
+          <Property Name="IdMoneda_origen" Type="Int32" />
+          <Property Name="IdMoneda_destino" Type="Int32" />
+          <Property Name="Paisembarque" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PaisOrigen" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FormaPago" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ViaEmbarque" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VWIMP_002_gastos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenCompra_ext" />
+            <PropertyRef Name="gt_descripcion" />
+            <PropertyRef Name="dc_Valor" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="gt_descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="dc_Valor" Type="Double" Nullable="false" />
+          <Property Name="dc_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9295,6 +9453,48 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdProforma" ColumnName="IdProforma" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWIMP_002">
+            <EntityTypeMapping TypeName="Model_reportes.VWIMP_002">
+              <MappingFragment StoreEntitySet="VWIMP_002">
+                <ScalarProperty Name="ViaEmbarque" ColumnName="ViaEmbarque" />
+                <ScalarProperty Name="FormaPago" ColumnName="FormaPago" />
+                <ScalarProperty Name="PaisOrigen" ColumnName="PaisOrigen" />
+                <ScalarProperty Name="Paisembarque" ColumnName="Paisembarque" />
+                <ScalarProperty Name="IdMoneda_destino" ColumnName="IdMoneda_destino" />
+                <ScalarProperty Name="IdMoneda_origen" ColumnName="IdMoneda_origen" />
+                <ScalarProperty Name="oe_fecha_desaduanizacion" ColumnName="oe_fecha_desaduanizacion" />
+                <ScalarProperty Name="oe_fecha_embarque" ColumnName="oe_fecha_embarque" />
+                <ScalarProperty Name="oe_fecha_llegada" ColumnName="oe_fecha_llegada" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="oe_codigo" ColumnName="oe_codigo" />
+                <ScalarProperty Name="oe_observacion" ColumnName="oe_observacion" />
+                <ScalarProperty Name="IdCtaCble_importacion" ColumnName="IdCtaCble_importacion" />
+                <ScalarProperty Name="oe_fecha_desaduanizacion_est" ColumnName="oe_fecha_desaduanizacion_est" />
+                <ScalarProperty Name="oe_fecha_embarque_est" ColumnName="oe_fecha_embarque_est" />
+                <ScalarProperty Name="oe_fecha_llegada_est" ColumnName="oe_fecha_llegada_est" />
+                <ScalarProperty Name="oe_fecha" ColumnName="oe_fecha" />
+                <ScalarProperty Name="IdCatalogo_forma_pago" ColumnName="IdCatalogo_forma_pago" />
+                <ScalarProperty Name="IdCatalogo_via" ColumnName="IdCatalogo_via" />
+                <ScalarProperty Name="IdCiudad_destino" ColumnName="IdCiudad_destino" />
+                <ScalarProperty Name="IdPais_embarque" ColumnName="IdPais_embarque" />
+                <ScalarProperty Name="IdPais_origen" ColumnName="IdPais_origen" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWIMP_002_gastos">
+            <EntityTypeMapping TypeName="Model_reportes.VWIMP_002_gastos">
+              <MappingFragment StoreEntitySet="VWIMP_002_gastos">
+                <ScalarProperty Name="dc_Observacion" ColumnName="dc_Observacion" />
+                <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
+                <ScalarProperty Name="gt_descripcion" ColumnName="gt_descripcion" />
+                <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

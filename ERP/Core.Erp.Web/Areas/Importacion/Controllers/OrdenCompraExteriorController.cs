@@ -75,7 +75,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         }
         public List<in_Producto_Info> get_list_bajo_demanda_productos(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.PORMODULO, cl_enumeradores.eModulo.INV, 0);
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.PORMODULO, cl_enumeradores.eModulo.COM, 0);
         }
         public in_Producto_Info get_info_bajo_demanda_productos(ListEditItemRequestedByValueEventArgs args)
         {
@@ -281,7 +281,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                     in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
                     if (info_producto != null)
                     {
-                        info_det.pr_descripcion = info_producto.pr_descripcion;
+                        info_det.pr_descripcion = info_producto.pr_descripcion_combo;
                         info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
                         info_det.od_total_fob = info_det.od_cantidad * info_det.od_costo;
                         detalle.AddRow(info_det);
@@ -304,7 +304,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                     in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
                     if (info_producto != null)
                     {
-                        info_det.pr_descripcion = info_producto.pr_descripcion;
+                        info_det.pr_descripcion = info_producto.pr_descripcion_combo;
                         info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
                         info_det.od_total_fob = info_det.od_cantidad * info_det.od_costo;
 
@@ -365,6 +365,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             edited_info.IdUnidadMedida = info_det.IdUnidadMedida;
             edited_info.od_costo = info_det.od_costo;
             edited_info.od_cantidad = info_det.od_cantidad;
+            edited_info.pr_descripcion = info_det.pr_descripcion;
 
         }
 

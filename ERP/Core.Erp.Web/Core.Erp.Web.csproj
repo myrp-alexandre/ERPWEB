@@ -718,6 +718,12 @@
     <Compile Include="Reportes\Facturacion\FAC_009_Rpt.Designer.cs">
       <DependentUpon>FAC_009_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Importacion\IMP_002_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Importacion\IMP_002_Rpt.Designer.cs">
+      <DependentUpon>IMP_002_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Importacion\IMP_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -8933,6 +8939,7 @@
     <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\_GridViewPartial_liquidacion_oc_det.cshtml" />
     <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\_CmbCuenta_contable_liquidacion.cshtml" />
     <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\_GridViewPartial_liquidacion_gastos.cshtml" />
+    <Content Include="Areas\Reportes\Views\ImportacionReportes\IMP_002.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -9200,6 +9207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Facturacion\FAC_009_Rpt.resx">
       <DependentUpon>FAC_009_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Importacion\IMP_002_Rpt.resx">
+      <DependentUpon>IMP_002_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Importacion\IMP_001_Rpt.resx">
       <DependentUpon>IMP_001_Rpt.cs</DependentUpon>

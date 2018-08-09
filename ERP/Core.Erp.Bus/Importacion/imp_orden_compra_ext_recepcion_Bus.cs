@@ -86,7 +86,7 @@ namespace Core.Erp.Bus.Importacion
             {
                 imp_orden_compra_ext_recepcion_Info info = new imp_orden_compra_ext_recepcion_Info();
                 var orden = odata_oc.get_info_recepcion_merca(IdEmpresa, IdOrdenCompra_ext);
-                var detalle_oc = odta_det_oc.get_list(IdEmpresa, IdOrdenCompra_ext);
+                var detalle_oc = odta_det_oc.get_list_recepcion(IdEmpresa, IdOrdenCompra_ext);
                 if(orden!=null & detalle_oc!=null)
                 {
                     info.pe_cedulaRuc = orden.pe_cedulaRuc;

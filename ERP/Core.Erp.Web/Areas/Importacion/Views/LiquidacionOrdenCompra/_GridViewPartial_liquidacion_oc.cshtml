@@ -83,7 +83,7 @@
                 Html.DevExpress().HyperLink(hyperlink =>
                 {
                     var IdOrdenCompra_ext = DataBinder.Eval(container.DataItem, "IdOrdenCompra_ext");
-                    hyperlink.Properties.Text = "Orden compra";
+                    hyperlink.Properties.Text = "Liquidar";
                     hyperlink.NavigateUrl = Url.Action("Nuevo", "LiquidacionOrdenCompra", new { Area = "Importacion", IdOrdenCompra_ext = IdOrdenCompra_ext });
                 }).Render();
             });

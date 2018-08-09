@@ -230,7 +230,7 @@ namespace Core.Erp.Data.RRHH
             {
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    Context.spROL_DecimoCuarto(info.IdEmpresa, info.IdPeriodo, info.region, info.UsuarioIngresa, info.Observacion);
+                    Context.spROL_DecimoCuarto(info.IdEmpresa, info.Anio, info.region, info.UsuarioIngresa, info.Observacion);
                 }
                 return true;
             }

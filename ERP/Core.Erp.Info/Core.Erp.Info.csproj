@@ -276,6 +276,7 @@
     <Compile Include="Reportes\Facturacion\FAC_008_Info.cs" />
     <Compile Include="Reportes\Facturacion\FAC_009_Info.cs" />
     <Compile Include="Reportes\Importacion\IMP_001_Info.cs" />
+    <Compile Include="Reportes\Importacion\IMP_002_Info.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Info.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Info.cs" />
     <Compile Include="Reportes\Inventario\INV_007_Info.cs" />

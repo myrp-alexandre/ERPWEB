@@ -51,14 +51,12 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         }
 
 
-        public ActionResult GridViewPartial_recepcion_oc_ext(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
+        public ActionResult GridViewPartial_recepcion_oc_ext(DateTime? Fecha_ini, DateTime? Fecha_fin)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
-            if (IdSucursal == 0)
-                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
-            ViewBag.IdSucursal = IdSucursal;
+         
 
             List<imp_orden_compra_ext_recepcion_Info> model = new List<imp_orden_compra_ext_recepcion_Info>();
             model = bus_recepcion.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
