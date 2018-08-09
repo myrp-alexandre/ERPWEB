@@ -217,7 +217,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
         public JsonResult ModificarLineaProducto(int Secuencia = 0, decimal IdTransaccionSession = 0, decimal IdProducto = 0)
         {
-            fa_factura_det_Info lineaF = new fa_factura_det_Info();
             var linea = List_det.get_list(IdTransaccionSession).Where(q => q.Secuencia == Secuencia).FirstOrDefault();
             if (linea != null)
             {
