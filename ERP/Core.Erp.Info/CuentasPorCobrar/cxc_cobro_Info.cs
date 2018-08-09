@@ -65,6 +65,7 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public DateTime? vt_fech_venc { get; set; }
         public DateTime vt_fecha { get; set; }
         public string vt_tipoDoc { get; set; }
+        public string nom_Motivo_tipo_cobro { get; set; }
         #endregion
     }
 }

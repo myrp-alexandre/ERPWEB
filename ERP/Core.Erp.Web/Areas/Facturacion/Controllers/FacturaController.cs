@@ -442,6 +442,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 return RedirectToAction("Index");
             if (model.esta_impresa == null ? false : Convert.ToBoolean(model.esta_impresa))
                 return RedirectToAction("Index");
+            
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_cuota = bus_cuotas.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);

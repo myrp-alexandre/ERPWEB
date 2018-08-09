@@ -17,6 +17,7 @@ namespace Core.Erp.Info.General
         [Required(ErrorMessage = "El campo nombre es obligatorio")]
         [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo nombre debe tener mínimo 1 caracter y máximo 50")]
         public string nom_impuesto { get; set; }
+        [Required(ErrorMessage = "El campo porcentaje es obligatorio")]
         public double porcentaje { get; set; }
         public bool Usado_en_Ventas { get; set; }
         public bool Usado_en_Compras { get; set; }

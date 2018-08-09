@@ -341,10 +341,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     detalle_retencion_info.AddRow(info_det);
                     model.detalle = detalle_retencion_info.get_list();
 
-                    // armando diario contable
-                    var detalle = detalle_retencion_info.get_list();
-                    info_param_op = Session["info_param_op"] as cp_parametros_Info;
-                    comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
+                    //// armando diario contable
+                    //var detalle = detalle_retencion_info.get_list();
+                    //info_param_op = Session["info_param_op"] as cp_parametros_Info;
+                    //comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
 
                 }
             }
@@ -360,10 +360,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     detalle_retencion_info.AddRow(info_det);
                     model.detalle = detalle_retencion_info.get_list();
 
-                    // armando diario contable
-                    var detalle = detalle_retencion_info.get_list();
-                    info_param_op = Session["info_param_op"] as cp_parametros_Info;
-                    comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
+                    //// armando diario contable
+                    //var detalle = detalle_retencion_info.get_list();
+                    //info_param_op = Session["info_param_op"] as cp_parametros_Info;
+                    //comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
                 }
 
 
@@ -397,10 +397,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     detalle_retencion_info.UpdateRow(info_det);
                     model.detalle = detalle_retencion_info.get_list();
 
-                    // armando diario contable
-                    var detalle = detalle_retencion_info.get_list();
-                    info_param_op = Session["info_param_op"] as cp_parametros_Info;
-                    comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
+                    //// armando diario contable
+                    //var detalle = detalle_retencion_info.get_list();
+                    //info_param_op = Session["info_param_op"] as cp_parametros_Info;
+                    //comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
 
                 }
             }
@@ -410,17 +410,17 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 {
                     info_det.re_valor_retencion = (info_det.re_baseRetencion * info_codifo_sri.co_porRetencion) / 100;
                     info_det.IdCtacble = info_codifo_sri.info_codigo_ctacble.IdCtaCble;
-
+                    info_det.re_Codigo_impuesto = info_det.re_Codigo_impuesto;
 
 
                     // calculando valores retencion
                     detalle_retencion_info.UpdateRow(info_det);
                     model.detalle = detalle_retencion_info.get_list();
 
-                    // armando diario contable
-                    var detalle = detalle_retencion_info.get_list();
-                    info_param_op = Session["info_param_op"] as cp_parametros_Info;
-                    comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
+                    //// armando diario contable
+                    //var detalle = detalle_retencion_info.get_list();
+                    //info_param_op = Session["info_param_op"] as cp_parametros_Info;
+                    //comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
                 }
 
 
@@ -440,16 +440,31 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.detalle = detalle_retencion_info.get_list();
 
 
-            // armando diario contable
-            var detalle = detalle_retencion_info.get_list();
-            info_param_op = Session["info_param_op"] as cp_parametros_Info;
-            comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
+            //// armando diario contable
+            //var detalle = detalle_retencion_info.get_list();
+            //info_param_op = Session["info_param_op"] as cp_parametros_Info;
+            //comprobante_contable_rt.delete_detail_New_details(info_param_op, detalle);
 
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_retencion_det", model);
         }
 
+        #region json
 
+        public JsonResult armar_diario(decimal IdProveedor=0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+
+            var datos = bus_proveedor.get_info(IdEmpresa, IdProveedor);
+            var detalle_ret = detalle_retencion_info.get_list();
+            var param_op = bus_parametros.get_info(IdEmpresa);
+            comprobante_contable_rt.delete_detail_New_details(param_op,detalle_ret, datos.IdCtaCble_CXP);
+
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+
+       
+        #endregion
     }
 
     public class ct_cbtecble_det_List_re
@@ -494,7 +509,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 list.Remove(list.Where(m => m.secuencia == secuencia).First());
             }
 
-            public void delete_detail_New_details(cp_parametros_Info info_param_op, List<cp_retencion_det_Info> detalle_retencion)
+            public void delete_detail_New_details(cp_parametros_Info info_param_op, List<cp_retencion_det_Info> detalle_retencion, string IdCtaCble="")
             {
             try
             {
@@ -520,7 +535,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                         cbtecble_haber_Info.secuencia = 2;
                         cbtecble_haber_Info.IdEmpresa = info_param_op.IdEmpresa;
                         cbtecble_haber_Info.IdTipoCbte = (int)info_param_op.pa_IdTipoCbte_x_Retencion;
-                        cbtecble_haber_Info.IdCtaCble = info_param_op.pa_ctacble_deudora;
+                        cbtecble_haber_Info.IdCtaCble = IdCtaCble;
                         cbtecble_haber_Info.dc_Valor_haber = detalle_retencion.Sum( v => Convert.ToDouble( v.re_valor_retencion));
                         cbtecble_haber_Info.dc_Valor = detalle_retencion.Sum(v => Convert.ToDouble(v.re_valor_retencion))*-1;
                         cbtecble_haber_Info.dc_Observacion = "";

@@ -252,6 +252,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro' no ti
           <Property Name="cr_estado" Type="nvarchar" MaxLength="1" />
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
           <Property Name="cr_observacion" Type="varchar" MaxLength="700" Nullable="false" />
+          <Property Name="cr_NumDocumento" Type="varchar" MaxLength="100" />
+          <Property Name="nom_Motivo_tipo_cobro" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -525,7 +527,9 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
     [vwcxc_cobro].[cr_TotalCobro] AS [cr_TotalCobro], 
     [vwcxc_cobro].[cr_estado] AS [cr_estado], 
     [vwcxc_cobro].[Su_Descripcion] AS [Su_Descripcion], 
-    [vwcxc_cobro].[cr_observacion] AS [cr_observacion]
+    [vwcxc_cobro].[cr_observacion] AS [cr_observacion], 
+    [vwcxc_cobro].[cr_NumDocumento] AS [cr_NumDocumento], 
+    [vwcxc_cobro].[nom_Motivo_tipo_cobro] AS [nom_Motivo_tipo_cobro]
     FROM [web].[vwcxc_cobro] AS [vwcxc_cobro]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcxc_cobro_det" EntityType="Self.vwcxc_cobro_det" store:Type="Views" store:Schema="web">
@@ -1160,6 +1164,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
           <Property Name="cr_estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
           <Property Name="cr_observacion" Type="String" Nullable="false" MaxLength="700" FixedLength="false" Unicode="false" />
+          <Property Name="cr_NumDocumento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nom_Motivo_tipo_cobro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1442,6 +1448,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
           <EntitySetMapping Name="vwcxc_cobro">
             <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.vwcxc_cobro">
               <MappingFragment StoreEntitySet="vwcxc_cobro">
+                <ScalarProperty Name="nom_Motivo_tipo_cobro" ColumnName="nom_Motivo_tipo_cobro" />
+                <ScalarProperty Name="cr_NumDocumento" ColumnName="cr_NumDocumento" />
                 <ScalarProperty Name="cr_observacion" ColumnName="cr_observacion" />
                 <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
                 <ScalarProperty Name="cr_estado" ColumnName="cr_estado" />

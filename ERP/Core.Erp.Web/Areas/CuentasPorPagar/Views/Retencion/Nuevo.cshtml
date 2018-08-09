@@ -20,6 +20,7 @@
 {
 
     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdProveedor, new  {@id= "IdProveedor" })
     @Html.HiddenFor(q => q.IdRetencion)
     @Html.HiddenFor(q => q.IdTipoCbte_Ogiro)
     @Html.HiddenFor(q => q.IdCbteCble_Ogiro)
@@ -154,14 +155,12 @@
                     <a href="#tab_detalle" aria-controls="detalle" role="tab" data-toggle="tab">Detalle retención</a>
                 </li>
                 <li>
-                    <a href="#tab_diario_contable" aria-controls="diario_contable" role="tab" data-toggle="tab" onclick="llamar_partial();">Diario contable</a>
+                    <a href="#tab_diario_contable" aria-controls="diario_contable" role="tab" data-toggle="tab" >Diario contable</a>
                 </li>
 
             </ul>
             <div class="tab-content" style="padding-top: 20px">
                 <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_detalle">
-
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="col-md-12">
@@ -211,5 +210,27 @@
                
             });
           
+            function armar_diario() {
 
+                var datos = {
+                    IdProveedor: $("#IdProveedor").val()
+
+                }
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(datos),
+                    url: '@Url.Action("armar_diario", "Retencion", new { Area = "CuentasPorPagar" })',
+                    async: false,
+                    bDeferRender: true,
+                    bProcessing: true,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        GridViewPartial_retencio_dc.PerformCallback();
+                    },
+                    error: function (error) {
+                    }
+                });
+
+            };
         </script>

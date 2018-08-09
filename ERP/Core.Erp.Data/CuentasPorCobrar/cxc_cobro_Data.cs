@@ -23,7 +23,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                              where q.IdEmpresa == IdEmpresa
                              && q.IdSucursal == IdSucursal
                              && Fecha_ini <= q.cr_fecha && q.cr_fecha <= Fecha_fin
-                             orderby q.IdCobro
+                             orderby q.IdCobro descending
                              select new cxc_cobro_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -36,7 +36,9 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  cr_TotalCobro = q.cr_TotalCobro,
                                  cr_estado = q.cr_estado,
                                  Su_Descripcion = q.Su_Descripcion,
-                                 cr_observacion = q.cr_observacion
+                                 cr_observacion = q.cr_observacion,
+                                 nom_Motivo_tipo_cobro = q.nom_Motivo_tipo_cobro,
+                                cr_NumDocumento = q.cr_NumDocumento
                              }).ToList();
                 }
 

@@ -221,15 +221,17 @@ namespace Core.Erp.Bus.RRHH
                 int secuecia = 0;
                 info_cta_sueldo_x_pagar = bus_cta_sueldo_x_pagar.get_info(idEmpresa, idNominaTipo, idNominaTipoLiqui);
                 oListro_rol_detalle_Info = bus_detalle.Get_lst_detalle_contabilizar(idEmpresa, idNominaTipo, idNominaTipoLiqui, idPeriodo, false);
-               
+
                 foreach (ro_Config_Param_contable_Info item in lst_confn_param_contables)
                 {
 
                     double valorTotal = 0;
-                        valorTotal = oListro_rol_detalle_Info.Where(v => v.IdDivision == Convert.ToInt32(item.IdDivision) 
-                                                                    && v.IdArea == item.IdArea 
-                                                                    && v.IdDepartamento == item.IdDepartamento 
-                                                                    && v.IdRubro == item.IdRubro ).Sum(v =>v.Valor);
+                    valorTotal = oListro_rol_detalle_Info.Where(v => v.IdDivision == Convert.ToInt32(item.IdDivision)
+                                                                && v.IdArea == item.IdArea
+                                                                && v.IdDepartamento == item.IdDepartamento
+                                                                && v.IdRubro == item.IdRubro).Sum(v => v.Valor);
+                    if (valorTotal < 0)
+                        valorTotal = valorTotal * -1;
                     if (valorTotal > 0)
                     {
                         secuecia++;
@@ -242,13 +244,14 @@ namespace Core.Erp.Bus.RRHH
                         if (item.DebCre == "C")
                         {
                             egreso = egreso + valorTotal;
+                            oct_cbtecble_det_Info.dc_Valor_haber = valorTotal;
                             valorTotal = valorTotal * -1;
-                            oct_cbtecble_det_Info.dc_Valor_debe = valorTotal;
+
                         }
                         else if (item.DebCre == "D")
                         {
                             ingreso = ingreso + valorTotal;
-                            oct_cbtecble_det_Info.dc_Valor_haber = valorTotal;
+                            oct_cbtecble_det_Info.dc_Valor_debe = valorTotal;
                         }
                         oct_cbtecble_det_Info.dc_Valor = valorTotal;
                         oct_cbtecble_det_Info.dc_Observacion = item.ru_descripcion.Trim() + " " + item.DescripcionDiv.Trim() + " " + item.DescripcionArea.Trim() + " " + item.de_descripcion.Trim();
@@ -266,7 +269,7 @@ namespace Core.Erp.Bus.RRHH
                 oct_cbtecble_det_Info2.IdTipoCbte =1; //DIARIO CONTABLE                                
                 oct_cbtecble_det_Info2.IdCtaCble = info_cta_sueldo_x_pagar.IdCtaCble;
                 oct_cbtecble_det_Info2.dc_Valor = valorSueldoXPagar * -1;
-                oct_cbtecble_det_Info2.dc_Valor_debe = valorSueldoXPagar * -1;
+                oct_cbtecble_det_Info2.dc_Valor_haber = valorSueldoXPagar ;
                 oct_cbtecble_det_Info2.dc_Observacion = "Sueldo por Pagar Neto a Recibir al " + idPeriodo;
                 lst_detalle_diario.Add(oct_cbtecble_det_Info2);
 
@@ -304,6 +307,7 @@ namespace Core.Erp.Bus.RRHH
                         oct_cbtecble_det_Info.IdTipoCbte = 1;
                         oct_cbtecble_det_Info.IdCtaCble = item.IdCtaCble.Trim();
                         oct_cbtecble_det_Info.dc_Valor_debe = valorTotal;
+                        oct_cbtecble_det_Info.dc_Valor = valorTotal;
                         oct_cbtecble_det_Info.dc_Observacion = item.ru_descripcion.Trim() + " " + item.DescripcionDiv.Trim() + " " + item.DescripcionArea.Trim() + " " + item.de_descripcion.Trim();
                         lst_detalle_diario.Add(oct_cbtecble_det_Info);
 
@@ -313,7 +317,9 @@ namespace Core.Erp.Bus.RRHH
                         oct_cbtecble_det_Info2.IdEmpresa = idEmpresa;
                         oct_cbtecble_det_Info2.IdTipoCbte = 1;
                         oct_cbtecble_det_Info2.IdCtaCble = item.IdCtaCble_Haber.Trim(); 
-                        oct_cbtecble_det_Info2.dc_Valor_haber = valorTotal * -1;
+                        oct_cbtecble_det_Info2.dc_Valor = valorTotal * -1;
+                        oct_cbtecble_det_Info2.dc_Valor_haber = valorTotal ;
+
                         oct_cbtecble_det_Info2.dc_Observacion = item.ru_descripcion.Trim() + " " + item.DescripcionDiv.Trim() + " " + item.DescripcionArea.Trim() + " " + item.de_descripcion.Trim();
                         lst_detalle_diario.Add(oct_cbtecble_det_Info2);
                     }
