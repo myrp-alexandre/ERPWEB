@@ -833,7 +833,7 @@
             // 
             // objectDataSource1
             // 
-            this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.Importacion.IMP_002_Info);
+            this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.Importacion.IMP_001_gastos_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
             // IMP_002_Rpt

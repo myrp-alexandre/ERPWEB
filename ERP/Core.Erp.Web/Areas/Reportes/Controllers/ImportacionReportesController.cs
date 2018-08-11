@@ -19,5 +19,17 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.RequestParameters = false;
             return View(model);
         }
+
+
+        public ActionResult IMP_002(int IdOrdenCompra_ext = 0)
+        {
+            IMP_002_Rpt model = new IMP_002_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdOrdenCompra_ext.Value = IdOrdenCompra_ext;
+            model.usuario = Session["IdUsuario"].ToString();
+            model.empresa = Session["nom_empresa"].ToString();
+            model.RequestParameters = false;
+            return View(model);
+        }
     }
 }

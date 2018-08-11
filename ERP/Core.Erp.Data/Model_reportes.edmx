@@ -1833,6 +1833,22 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWIMP_002' no tien
             <PropertyRef Name="ViaEmbarque" />
             <PropertyRef Name="pe_cedulaRuc" />
             <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="od_cantidad" />
+            <PropertyRef Name="od_costo" />
+            <PropertyRef Name="od_por_descuento" />
+            <PropertyRef Name="od_descuento" />
+            <PropertyRef Name="od_costo_final" />
+            <PropertyRef Name="od_subtotal" />
+            <PropertyRef Name="od_cantidad_recepcion" />
+            <PropertyRef Name="od_costo_convertido" />
+            <PropertyRef Name="od_total_fob" />
+            <PropertyRef Name="od_factor_costo" />
+            <PropertyRef Name="od_costo_bodega" />
+            <PropertyRef Name="od_costo_total" />
+            <PropertyRef Name="IdUnidadMedida" />
+            <PropertyRef Name="Descripcion_Ciudad" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdOrdenCompra_ext" Type="decimal" Precision="18" Scale="0" Nullable="false" />
@@ -1862,6 +1878,25 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWIMP_002' no tien
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="pr_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="Expr1" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="lote_fecha_fab" Type="datetime" />
+          <Property Name="lote_fecha_vcto" Type="datetime" />
+          <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
+          <Property Name="od_cantidad" Type="float" Nullable="false" />
+          <Property Name="od_costo" Type="float" Nullable="false" />
+          <Property Name="od_por_descuento" Type="float" Nullable="false" />
+          <Property Name="od_descuento" Type="float" Nullable="false" />
+          <Property Name="od_costo_final" Type="float" Nullable="false" />
+          <Property Name="od_subtotal" Type="float" Nullable="false" />
+          <Property Name="od_cantidad_recepcion" Type="float" Nullable="false" />
+          <Property Name="od_costo_convertido" Type="float" Nullable="false" />
+          <Property Name="od_total_fob" Type="float" Nullable="false" />
+          <Property Name="od_factor_costo" Type="float" Nullable="false" />
+          <Property Name="od_costo_bodega" Type="float" Nullable="false" />
+          <Property Name="od_costo_total" Type="float" Nullable="false" />
+          <Property Name="IdUnidadMedida" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Descripcion_Ciudad" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWIMP_002_gastos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -3859,7 +3894,26 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
     [VWIMP_002].[ViaEmbarque] AS [ViaEmbarque], 
     [VWIMP_002].[pe_cedulaRuc] AS [pe_cedulaRuc], 
     [VWIMP_002].[pe_nombreCompleto] AS [pe_nombreCompleto], 
-    [VWIMP_002].[pr_codigo] AS [pr_codigo]
+    [VWIMP_002].[pr_codigo] AS [pr_codigo], 
+    [VWIMP_002].[Expr1] AS [Expr1], 
+    [VWIMP_002].[pr_descripcion] AS [pr_descripcion], 
+    [VWIMP_002].[lote_fecha_fab] AS [lote_fecha_fab], 
+    [VWIMP_002].[lote_fecha_vcto] AS [lote_fecha_vcto], 
+    [VWIMP_002].[lote_num_lote] AS [lote_num_lote], 
+    [VWIMP_002].[od_cantidad] AS [od_cantidad], 
+    [VWIMP_002].[od_costo] AS [od_costo], 
+    [VWIMP_002].[od_por_descuento] AS [od_por_descuento], 
+    [VWIMP_002].[od_descuento] AS [od_descuento], 
+    [VWIMP_002].[od_costo_final] AS [od_costo_final], 
+    [VWIMP_002].[od_subtotal] AS [od_subtotal], 
+    [VWIMP_002].[od_cantidad_recepcion] AS [od_cantidad_recepcion], 
+    [VWIMP_002].[od_costo_convertido] AS [od_costo_convertido], 
+    [VWIMP_002].[od_total_fob] AS [od_total_fob], 
+    [VWIMP_002].[od_factor_costo] AS [od_factor_costo], 
+    [VWIMP_002].[od_costo_bodega] AS [od_costo_bodega], 
+    [VWIMP_002].[od_costo_total] AS [od_costo_total], 
+    [VWIMP_002].[IdUnidadMedida] AS [IdUnidadMedida], 
+    [VWIMP_002].[Descripcion_Ciudad] AS [Descripcion_Ciudad]
     FROM [web].[VWIMP_002] AS [VWIMP_002]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWIMP_002_gastos" EntityType="Self.VWIMP_002_gastos" store:Type="Views" store:Schema="web">
@@ -4519,8 +4573,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
           <EntitySet Name="VWFAC_008" EntityType="Model_reportes.VWFAC_008" />
           <EntitySet Name="VWFAC_006" EntityType="Model_reportes.VWFAC_006" />
           <EntitySet Name="VWIMP_001" EntityType="Model_reportes.VWIMP_001" />
-          <EntitySet Name="VWIMP_002" EntityType="Model_reportes.VWIMP_002" />
           <EntitySet Name="VWIMP_002_gastos" EntityType="Model_reportes.VWIMP_002_gastos" />
+          <EntitySet Name="VWIMP_002" EntityType="Model_reportes.VWIMP_002" />
         </EntityContainer>
         <EntityType Name="Af_SPACTF_004_detalle">
           <Key>
@@ -7348,6 +7402,19 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
           <Property Name="Descripcion_Ciudad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="od_total_fob" Type="Double" Nullable="false" />
         </EntityType>
+        <EntityType Name="VWIMP_002_gastos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenCompra_ext" />
+            <PropertyRef Name="gt_descripcion" />
+            <PropertyRef Name="dc_Valor" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="gt_descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="dc_Valor" Type="Double" Nullable="false" />
+          <Property Name="dc_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="VWIMP_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -7367,6 +7434,22 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
             <PropertyRef Name="ViaEmbarque" />
             <PropertyRef Name="pe_cedulaRuc" />
             <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="od_cantidad" />
+            <PropertyRef Name="od_costo" />
+            <PropertyRef Name="od_por_descuento" />
+            <PropertyRef Name="od_descuento" />
+            <PropertyRef Name="od_costo_final" />
+            <PropertyRef Name="od_subtotal" />
+            <PropertyRef Name="od_cantidad_recepcion" />
+            <PropertyRef Name="od_costo_convertido" />
+            <PropertyRef Name="od_total_fob" />
+            <PropertyRef Name="od_factor_costo" />
+            <PropertyRef Name="od_costo_bodega" />
+            <PropertyRef Name="od_costo_total" />
+            <PropertyRef Name="IdUnidadMedida" />
+            <PropertyRef Name="Descripcion_Ciudad" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdOrdenCompra_ext" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
@@ -7396,19 +7479,25 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
           <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="pr_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="VWIMP_002_gastos">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdOrdenCompra_ext" />
-            <PropertyRef Name="gt_descripcion" />
-            <PropertyRef Name="dc_Valor" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdOrdenCompra_ext" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="gt_descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="dc_Valor" Type="Double" Nullable="false" />
-          <Property Name="dc_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Expr1" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="lote_fecha_fab" Type="DateTime" Precision="3" />
+          <Property Name="lote_fecha_vcto" Type="DateTime" Precision="3" />
+          <Property Name="lote_num_lote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="od_cantidad" Type="Double" Nullable="false" />
+          <Property Name="od_costo" Type="Double" Nullable="false" />
+          <Property Name="od_por_descuento" Type="Double" Nullable="false" />
+          <Property Name="od_descuento" Type="Double" Nullable="false" />
+          <Property Name="od_costo_final" Type="Double" Nullable="false" />
+          <Property Name="od_subtotal" Type="Double" Nullable="false" />
+          <Property Name="od_cantidad_recepcion" Type="Double" Nullable="false" />
+          <Property Name="od_costo_convertido" Type="Double" Nullable="false" />
+          <Property Name="od_total_fob" Type="Double" Nullable="false" />
+          <Property Name="od_factor_costo" Type="Double" Nullable="false" />
+          <Property Name="od_costo_bodega" Type="Double" Nullable="false" />
+          <Property Name="od_costo_total" Type="Double" Nullable="false" />
+          <Property Name="IdUnidadMedida" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion_Ciudad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -9476,9 +9565,39 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="VWIMP_002_gastos">
+            <EntityTypeMapping TypeName="Model_reportes.VWIMP_002_gastos">
+              <MappingFragment StoreEntitySet="VWIMP_002_gastos">
+                <ScalarProperty Name="dc_Observacion" ColumnName="dc_Observacion" />
+                <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
+                <ScalarProperty Name="gt_descripcion" ColumnName="gt_descripcion" />
+                <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="VWIMP_002">
             <EntityTypeMapping TypeName="Model_reportes.VWIMP_002">
               <MappingFragment StoreEntitySet="VWIMP_002">
+                <ScalarProperty Name="Descripcion_Ciudad" ColumnName="Descripcion_Ciudad" />
+                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
+                <ScalarProperty Name="od_costo_total" ColumnName="od_costo_total" />
+                <ScalarProperty Name="od_costo_bodega" ColumnName="od_costo_bodega" />
+                <ScalarProperty Name="od_factor_costo" ColumnName="od_factor_costo" />
+                <ScalarProperty Name="od_total_fob" ColumnName="od_total_fob" />
+                <ScalarProperty Name="od_costo_convertido" ColumnName="od_costo_convertido" />
+                <ScalarProperty Name="od_cantidad_recepcion" ColumnName="od_cantidad_recepcion" />
+                <ScalarProperty Name="od_subtotal" ColumnName="od_subtotal" />
+                <ScalarProperty Name="od_costo_final" ColumnName="od_costo_final" />
+                <ScalarProperty Name="od_descuento" ColumnName="od_descuento" />
+                <ScalarProperty Name="od_por_descuento" ColumnName="od_por_descuento" />
+                <ScalarProperty Name="od_costo" ColumnName="od_costo" />
+                <ScalarProperty Name="od_cantidad" ColumnName="od_cantidad" />
+                <ScalarProperty Name="lote_num_lote" ColumnName="lote_num_lote" />
+                <ScalarProperty Name="lote_fecha_vcto" ColumnName="lote_fecha_vcto" />
+                <ScalarProperty Name="lote_fecha_fab" ColumnName="lote_fecha_fab" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
                 <ScalarProperty Name="pr_codigo" ColumnName="pr_codigo" />
                 <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
                 <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
@@ -9505,17 +9624,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
                 <ScalarProperty Name="IdPais_embarque" ColumnName="IdPais_embarque" />
                 <ScalarProperty Name="IdPais_origen" ColumnName="IdPais_origen" />
                 <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
-                <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VWIMP_002_gastos">
-            <EntityTypeMapping TypeName="Model_reportes.VWIMP_002_gastos">
-              <MappingFragment StoreEntitySet="VWIMP_002_gastos">
-                <ScalarProperty Name="dc_Observacion" ColumnName="dc_Observacion" />
-                <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
-                <ScalarProperty Name="gt_descripcion" ColumnName="gt_descripcion" />
                 <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>

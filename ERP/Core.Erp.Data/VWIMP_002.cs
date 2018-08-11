@@ -42,5 +42,24 @@ namespace Core.Erp.Data
         public string pe_cedulaRuc { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string pr_codigo { get; set; }
+        public string Expr1 { get; set; }
+        public string pr_descripcion { get; set; }
+        public Nullable<System.DateTime> lote_fecha_fab { get; set; }
+        public Nullable<System.DateTime> lote_fecha_vcto { get; set; }
+        public string lote_num_lote { get; set; }
+        public double od_cantidad { get; set; }
+        public double od_costo { get; set; }
+        public double od_por_descuento { get; set; }
+        public double od_descuento { get; set; }
+        public double od_costo_final { get; set; }
+        public double od_subtotal { get; set; }
+        public double od_cantidad_recepcion { get; set; }
+        public double od_costo_convertido { get; set; }
+        public double od_total_fob { get; set; }
+        public double od_factor_costo { get; set; }
+        public double od_costo_bodega { get; set; }
+        public double od_costo_total { get; set; }
+        public string IdUnidadMedida { get; set; }
+        public string Descripcion_Ciudad { get; set; }
     }
 }
