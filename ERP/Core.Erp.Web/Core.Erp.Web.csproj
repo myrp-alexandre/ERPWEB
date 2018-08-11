@@ -718,6 +718,12 @@
     <Compile Include="Reportes\Facturacion\FAC_009_Rpt.Designer.cs">
       <DependentUpon>FAC_009_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Importacion\IMP_002_gastos_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Importacion\IMP_002_gastos_Rpt.Designer.cs">
+      <DependentUpon>IMP_002_gastos_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Importacion\IMP_002_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -729,12 +735,6 @@
     </Compile>
     <Compile Include="Reportes\Importacion\IMP_001_Rpt.Designer.cs">
       <DependentUpon>IMP_001_Rpt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\Importacion\IMP_002_Rpt_gastos.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\Importacion\IMP_002_Rpt_gastos.Designer.cs">
-      <DependentUpon>IMP_002_Rpt_gastos.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\Inventario\INV_001_Rpt.cs">
       <SubType>Component</SubType>
@@ -9213,6 +9213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Facturacion\FAC_009_Rpt.resx">
       <DependentUpon>FAC_009_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Importacion\IMP_002_gastos_Rpt.resx">
+      <DependentUpon>IMP_002_gastos_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Importacion\IMP_002_Rpt.resx">
       <DependentUpon>IMP_002_Rpt.cs</DependentUpon>

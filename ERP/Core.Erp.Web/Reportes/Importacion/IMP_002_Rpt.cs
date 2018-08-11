@@ -13,6 +13,8 @@ namespace Core.Erp.Web.Reportes.Importacion
     {
         public string usuario { get; set; }
         public string empresa { get; set; }
+        List<IMP_002_gastos_Info> lst_resumen = new List<IMP_002_gastos_Info>();
+
         public IMP_002_Rpt()
         {
             InitializeComponent();
@@ -26,9 +28,15 @@ namespace Core.Erp.Web.Reportes.Importacion
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdOrdenCompra_ext = p_IdOrdenCompra_ext.Value == null ? 0 : Convert.ToInt32(p_IdOrdenCompra_ext.Value);
 
-            //IMP_002_Bus bus_rpt = new IMP_002_Bus();
-            //List<IMP_002_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdOrdenCompra_ext);
-          //  this.DataSource = lst_rpt;
+            IMP_002_Bus bus_rpt = new IMP_002_Bus();
+            List<IMP_002_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdOrdenCompra_ext, ref lst_resumen);
+            this.DataSource = lst_rpt;
+        }
+
+        private void xrSubreport1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            //((XRSubreport)sender).ReportSource.DataSource = lst_resumen;
+            //((XRSubreport)sender).ReportSource.FillDataSource();
         }
     }
 }

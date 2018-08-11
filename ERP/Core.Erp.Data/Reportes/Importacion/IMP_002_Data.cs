@@ -44,9 +44,14 @@ namespace Core.Erp.Data.Reportes.Importacion
                                      pe_nombreCompleto = q.pe_nombreCompleto,
                                      od_total_fob = q.od_total_fob,
                                      IdUnidadMedida=q.IdUnidadMedida,
-                                     Descripcion_Ciudad=q.Descripcion_Ciudad
+                                     Descripcion_Ciudad=q.Descripcion_Ciudad,
+                                     od_cantidad_recepcion=q.od_cantidad_recepcion,
+                                     oe_fecha_llegada=q.oe_fecha_llegada,
+                                     oe_fecha_embarque=q.oe_fecha_embarque
 
                                  }).ToList();
+
+
                     }
                     return Lista;
                 }

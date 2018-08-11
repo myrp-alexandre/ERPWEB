@@ -56,48 +56,29 @@
 
         </div>
     </div>
-    @Html.DevExpress().PageControl(
-    settings =>
-    {
-        settings.Name = "Detalle";
-        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-        settings.ControlStyle.CssClass = "dxtcFixed";
 
-        settings.TabPages.Add("Detalle de gastos").SetContent(() =>
-        {
-            @Html.DevExpress().Splitter(settings_ =>
-            {
-                settings_.Name = "Splitter";
-                settings_.Height = 500;
-                settings_.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                settings_.AllowResize = true;
 
-                settings_.Panes.Add(pane =>
-                {
-                    pane.SetContent(() =>
-                    {
-                        @Html.RenderAction("GridViewPartial_gastos_por_asignar", new { Model.IdCtaCble_importacion });
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_detalle" aria-controls="informacion_items" role="tab" data-toggle="tab">Detalle de items</a>
+            </li>
+            <li>
+                <a href="#tab_otros" aria-controls="otros" role="tab" data-toggle="tab">Datos adicionales</a>
+            </li>
 
-                    });
-                    pane.AutoHeight = true;
-                });
-                settings_.Panes.Add(pane =>
-                {
-                    pane.SetContent(() =>
-                    {
-                        Html.RenderAction("GridViewPartial_gastos_asignados");
-                    });
-                });
-            }).GetHtml();
 
-        });
+        </ul>
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_detalle">
+                @Html.Action("GridViewPartial_gastos_por_asignar", new { Model.IdCtaCble_importacion })
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_otros">
+                @Html.Action("GridViewPartial_asignacion_gastos_det", new { Model.IdCtaCble_importacion })
 
-        settings.TabPages.Add("Detalle de orden de compra").SetContent(() =>
-        {
-            Html.RenderAction("GridViewPartial_asignacion_gastos_det", new { Model.IdCtaCble_importacion });
-        });
-
-    }).GetHtml()
+            </div>
+        </div>
+    </div>
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>

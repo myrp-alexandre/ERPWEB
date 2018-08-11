@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.Reportes.Importacion
 {
-    public class IMP_001_gastos_Info
+    public class IMP_002_gastos_Info
     {
         public int IdEmpresa { get; set; }
         public decimal IdOrdenCompra_ext { get; set; }

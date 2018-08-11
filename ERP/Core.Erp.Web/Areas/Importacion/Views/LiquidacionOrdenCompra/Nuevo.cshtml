@@ -151,6 +151,7 @@
 
     <div class="box-footer">
         <button type="button" class="btn btn-primary" onclick="calclar_costo();">Calcular</button>
+        @Html.ActionLink("Imprimir", "IMP_002",  new { Area = "Reportes", Controller = "ImportacionReportes", IdOrdenCompra_ext = Model.IdOrdenCompra_ext }, new { @class = "btn btn-primary", target = "_blank" })
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index", "LiquidacionOrdenCompra", new { Area ="Importacion" }, null)">Cancelar</a>
     </div>

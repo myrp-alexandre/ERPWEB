@@ -11,17 +11,17 @@ namespace Core.Erp.Data.Reportes.Importacion
    
         public class IMP_002_gastos_Data
     {
-            public List<IMP_001_gastos_Info> get_list(int IdEmpresa, int IdOrdenCompra_ext)
+            public List<IMP_002_gastos_Info> get_list(int IdEmpresa, int IdOrdenCompra_ext)
             {
                 try
                 {
-                    List<IMP_001_gastos_Info> Lista;
+                    List<IMP_002_gastos_Info> Lista;
                     using (Entities_reportes Context = new Entities_reportes())
                     {
                         Lista = (from q in Context.VWIMP_002_gastos
                                  where q.IdEmpresa == IdEmpresa
                                  && q.IdOrdenCompra_ext == IdOrdenCompra_ext
-                                 select new IMP_001_gastos_Info
+                                 select new IMP_002_gastos_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
                                      IdOrdenCompra_ext = q.IdOrdenCompra_ext,
