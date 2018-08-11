@@ -102,6 +102,16 @@
             });
         });
         settings.Columns.Add("oe_observacion", "Obaservación").Width = Unit.Percentage(30);
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Pre-impreso";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("IMP_001", "ImportacionReportes", new { Area = "Reportes", IdOrdenCompra_ext = DataBinder.Eval(c.DataItem, "IdOrdenCompra_ext") }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

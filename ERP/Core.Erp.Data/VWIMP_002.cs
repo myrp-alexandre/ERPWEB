@@ -39,5 +39,8 @@ namespace Core.Erp.Data
         public string PaisOrigen { get; set; }
         public string FormaPago { get; set; }
         public string ViaEmbarque { get; set; }
+        public string pe_cedulaRuc { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public string pr_codigo { get; set; }
     }
 }

@@ -82,12 +82,12 @@ namespace Core.Erp.Data
         public virtual DbSet<VWFAC_003_cuotas> VWFAC_003_cuotas { get; set; }
         public virtual DbSet<VWFAC_004> VWFAC_004 { get; set; }
         public virtual DbSet<VWFAC_005> VWFAC_005 { get; set; }
-        public virtual DbSet<VWIMP_001> VWIMP_001 { get; set; }
         public virtual DbSet<VWFAC_008_aplicaciones> VWFAC_008_aplicaciones { get; set; }
         public virtual DbSet<VWFAC_009> VWFAC_009 { get; set; }
         public virtual DbSet<VWFAC_007> VWFAC_007 { get; set; }
         public virtual DbSet<VWFAC_008> VWFAC_008 { get; set; }
         public virtual DbSet<VWFAC_006> VWFAC_006 { get; set; }
+        public virtual DbSet<VWIMP_001> VWIMP_001 { get; set; }
         public virtual DbSet<VWIMP_002> VWIMP_002 { get; set; }
         public virtual DbSet<VWIMP_002_gastos> VWIMP_002_gastos { get; set; }
     

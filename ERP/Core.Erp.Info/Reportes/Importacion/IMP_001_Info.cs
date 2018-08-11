@@ -31,5 +31,7 @@ namespace Core.Erp.Info.Reportes.Importacion
         public string NomFormaPago { get; set; }
         public string NomUnidad { get; set; }
         public string Descripcion_Ciudad { get; set; }
+        public double od_total_fob { get; set; }
+
     }
 }
