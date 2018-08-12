@@ -1,18 +1,20 @@
-﻿using DevExpress.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Core.Erp.Info.ActivoFijo;
-using Core.Erp.Bus.ActivoFijo;
+﻿using Core.Erp.Bus.ActivoFijo;
 using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Info.ActivoFijo;
+using Core.Erp.Web.Helps;
+using System;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 {
     public class TipoAFController : Controller
     {
+        #region Variables
         Af_Activo_fijo_tipo_Bus bus_tipoactivo = new Af_Activo_fijo_tipo_Bus();
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        #endregion
+
+        #region Index
         public ActionResult Index()
         {
             return View();
@@ -21,45 +23,48 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_tipoactivo()
         {
-
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<Af_Activo_fijo_tipo_Info> model = new List<Af_Activo_fijo_tipo_Info>();
-            model = bus_tipoactivo.get_list(IdEmpresa, true);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var model = bus_tipoactivo.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_tipoactivo", model);
         }
-        private void cargar_combos()
+        #endregion
+
+        #region Metodos
+        private void cargar_combos(int IdEmpresa)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
             var lst_cuentas = bus_plancta.get_list(IdEmpresa, false, false);
             ViewBag.lst_cuentas = lst_cuentas;
         }
-        public ActionResult Nuevo()
+        #endregion
+
+        #region Acciones
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
-            Af_Activo_fijo_tipo_Info model = new Af_Activo_fijo_tipo_Info();
-            cargar_combos();
+            Af_Activo_fijo_tipo_Info model = new Af_Activo_fijo_tipo_Info
+            {
+                IdEmpresa = IdEmpresa
+            };
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Nuevo(Af_Activo_fijo_tipo_Info model)
-        {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+        {            
             if (!bus_tipoactivo.guardarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdActivoFijoTipo = 0)
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+        public ActionResult Modificar(int IdEmpresa = 0, int IdActivoFijoTipo = 0)
+        {            
             Af_Activo_fijo_tipo_Info model = bus_tipoactivo.get_info(IdEmpresa, IdActivoFijoTipo);
             if (model == null)
                 return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -67,19 +72,18 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         {
             if (!bus_tipoactivo.modificarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult Anular(int IdActivoFijoTipo = 0)
+        public ActionResult Anular(int IdEmpresa = 0, int IdActivoFijoTipo = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             Af_Activo_fijo_tipo_Info model = bus_tipoactivo.get_info(IdEmpresa, IdActivoFijoTipo);
             if (model == null)
                 return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(model.IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -87,10 +91,11 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         {
             if (!bus_tipoactivo.anularDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
+        #endregion
     }
 }

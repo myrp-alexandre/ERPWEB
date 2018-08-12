@@ -19,9 +19,8 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_categoria_activo(int IdActivoFijoTipo = 0)
+        public ActionResult GridViewPartial_categoria_activo(int IdEmpresa = 0, int IdActivoFijoTipo = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             List<Af_Activo_fijo_Categoria_Info> model = new List<Af_Activo_fijo_Categoria_Info>();
             model = bus_categoria.get_list(IdEmpresa, IdActivoFijoTipo, true);
             ViewBag.IdActivoFijoTipo = IdActivoFijoTipo;
