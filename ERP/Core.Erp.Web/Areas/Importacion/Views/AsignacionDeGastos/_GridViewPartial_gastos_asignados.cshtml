@@ -87,7 +87,7 @@
                 {
                     settingsBtn.Name = "btn_elimi" + c.KeyValue;
                     settingsBtn.Text = "Eliminar";
-                    settingsBtn.ClientSideEvents.Click = "function(s, e) {EditingUpdate('" + c.KeyValue + "');}";
+                    settingsBtn.ClientSideEvents.Click = "function(s, e) {Editingdelete('" + c.KeyValue + "');}";
                 }).Render();
             });
             column.EditFormSettings.Visible = DefaultBoolean.False;

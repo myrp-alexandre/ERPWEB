@@ -127,5 +127,28 @@
         });
     }
 
+    function Editingdelete(ID) {
+        var datos = {
+            secuencia: ID,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
 
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("Editingdelete", "AsignacionDeGastos",new { Area = "Importacion"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_gastos_asignados.PerformCallback();
+                GridViewPartial_gastos_por_asignar.PerformCallback("");
+
+            },
+            error: function (error) {
+            }
+        });
+    }
 </script>
