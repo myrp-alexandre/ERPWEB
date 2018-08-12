@@ -20,8 +20,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_catalogotipo_af()
         {
-            List<Af_CatalogoTipo_Info> model = new List<Af_CatalogoTipo_Info>();
-            model = bus_catalogo.get_list();
+            var model = bus_catalogo.get_list();
             return PartialView("_GridViewPartial_catalogotipo_af", model);
         }
         public ActionResult Nuevo()

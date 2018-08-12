@@ -11,6 +11,7 @@ namespace Core.Erp.Info.Inventario
     {
         public int IdEmpresa { get; set; }
         public decimal IdProducto { get; set; }
+        [StringLength(80,MinimumLength =0, ErrorMessage = "El campo código debe tener máximo 80 caracteres")]
         public string pr_codigo { get; set; }
         [StringLength(80, MinimumLength = 0, ErrorMessage = "El campo código 2 debe tener máximo 80 caracteres")]
         public string pr_codigo2 { get; set; }

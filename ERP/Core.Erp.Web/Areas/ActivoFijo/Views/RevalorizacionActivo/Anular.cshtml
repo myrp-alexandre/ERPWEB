@@ -35,7 +35,7 @@ if (ViewBag.mensaje != null)
         <div class="col-md-2">
             <div class="form-group">
                 <label for="Id_Tipo">Tipo</label>
-                @Html.DropDownListFor(q => q.Id_Tipo, new SelectList(ViewBag.lst_activo, "Key", "Value"), new { @class = "form-control", @id = "Id_Tipo" })
+                @Html.DropDownListFor(q => q.Id_Tipo, new SelectList(ViewBag.lst_activo, "Key", "Value"), new { @class = "form-control", @id = "Id_Tipo", @disabled = "disabled" })
                 @Html.ValidationMessageFor(q => q.Id_Tipo, "", new { @class = "text-danger" })
             </div>
         </div>
