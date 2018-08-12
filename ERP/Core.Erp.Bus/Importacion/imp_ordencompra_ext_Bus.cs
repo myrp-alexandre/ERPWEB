@@ -278,7 +278,6 @@ namespace Core.Erp.Bus.Importacion
             {
                 double costo_incurridos = 0;
                 double valor_compra = 0;
-
                 lst_detalle = odata_det.get_list(IdEmpresa, IdOrdenCompraExter);
                 lst_gastos_asignados = data_gastos.get_list_gastos_asignados(IdEmpresa, IdOrdenCompraExter);
                 if (lst_gastos_asignados != null)
