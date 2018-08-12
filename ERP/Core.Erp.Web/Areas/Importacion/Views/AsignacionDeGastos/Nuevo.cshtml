@@ -61,20 +61,20 @@
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
-                <a href="#tab_detalle" aria-controls="informacion_items" role="tab" data-toggle="tab">Detalle de items</a>
+                <a href="#tab_gastos_por_asignados" aria-controls="informacion_items" role="tab" data-toggle="tab">Gastos no asignados</a>
             </li>
             <li>
-                <a href="#tab_otros" aria-controls="otros" role="tab" data-toggle="tab">Datos adicionales</a>
+                <a href="#tab_gastos_asignados" aria-controls="otros" role="tab" data-toggle="tab">Gastos asignados</a>
             </li>
 
 
         </ul>
         <div class="tab-content" style="padding-top: 20px">
-            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_detalle">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_gastos_por_asignados">
                 @Html.Action("GridViewPartial_gastos_por_asignar", new { Model.IdCtaCble_importacion })
             </div>
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_otros">
-                @Html.Action("GridViewPartial_asignacion_gastos_det", new { Model.IdCtaCble_importacion })
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_gastos_asignados">
+                @Html.Action("GridViewPartial_gastos_asignados", new { Model.IdCtaCble_importacion })
 
             </div>
         </div>

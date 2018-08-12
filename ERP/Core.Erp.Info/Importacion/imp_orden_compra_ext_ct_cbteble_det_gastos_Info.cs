@@ -22,5 +22,6 @@ namespace Core.Erp.Info.Importacion
         public string dc_Observacion { get; set; }
         public string IdCtaCble { get; set; }
 
+
     }
 }

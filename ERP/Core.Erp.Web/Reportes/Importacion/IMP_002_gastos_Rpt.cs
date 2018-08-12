@@ -21,8 +21,8 @@ namespace Core.Erp.Web.Reportes.Importacion
         private void IMP_002_gastos_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             lbl_usuario.Text = usuario;
-            int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            int IdOrdenCompra_ext = p_IdOrdenCompra_ext.Value == null ? 0 : Convert.ToInt32(p_IdOrdenCompra_ext.Value);
+            //int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            //int IdOrdenCompra_ext = p_IdOrdenCompra_ext.Value == null ? 0 : Convert.ToInt32(p_IdOrdenCompra_ext.Value);
 
             //IMP_002_Bus bus_rpt = new IMP_002_Bus();
             //List<IMP_002_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdOrdenCompra_ext);

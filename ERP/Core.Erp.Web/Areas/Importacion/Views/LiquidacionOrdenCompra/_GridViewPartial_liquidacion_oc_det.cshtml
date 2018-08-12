@@ -10,6 +10,7 @@
 
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
+        settings.Settings.ShowFooter = true;
 
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
@@ -61,6 +62,7 @@
             column.FieldName = "od_costo_bodega";
             column.Caption = "Costo";
             column.Width = Unit.Percentage(15);
+            column.PropertiesEdit.DisplayFormatString = "n6";
 
         });
         settings.Columns.Add(column =>
@@ -68,9 +70,15 @@
             column.FieldName = "od_costo_total";
             column.Caption = "Total";
             column.Width = Unit.Percentage(15);
+            column.PropertiesEdit.DisplayFormatString = "n6";
+
 
         });
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "od_total_fob");
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "od_costo_bodega");
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "od_costo_total");
 
     });
+
 }
 @grid.Bind(Model).GetHtml()

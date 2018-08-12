@@ -64,7 +64,8 @@ namespace Core.Erp.Data.Importacion
                                  IdGasto_tipo = q.IdGasto_tipo,
                                  dc_Valor = (q.dc_Valor),
                                  pc_Cuenta=q.pc_Cuenta,
-                                 dc_Observacion=q.dc_Observacion
+                                 dc_Observacion=q.dc_Observacion,
+                                 IdCtaCble=q.IdCtaCble
 
                              }).ToList();
                 }

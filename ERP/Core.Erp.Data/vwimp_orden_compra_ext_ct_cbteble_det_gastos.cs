@@ -24,5 +24,6 @@ namespace Core.Erp.Data
         public double dc_Valor { get; set; }
         public string pc_Cuenta { get; set; }
         public string dc_Observacion { get; set; }
+        public string IdCtaCble { get; set; }
     }
 }

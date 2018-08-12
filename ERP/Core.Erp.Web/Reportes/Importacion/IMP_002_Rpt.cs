@@ -35,8 +35,8 @@ namespace Core.Erp.Web.Reportes.Importacion
 
         private void xrSubreport1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            //((XRSubreport)sender).ReportSource.DataSource = lst_resumen;
-            //((XRSubreport)sender).ReportSource.FillDataSource();
+            ((XRSubreport)sender).ReportSource = new Core.Erp.Web.Reportes.Importacion.IMP_002_gastos_Rpt(); 
+            ((XRSubreport)sender).ReportSource.DataSource = lst_resumen;
         }
     }
 }
