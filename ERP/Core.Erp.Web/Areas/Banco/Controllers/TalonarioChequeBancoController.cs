@@ -6,13 +6,19 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.Banco;
 using Core.Erp.Info.Banco;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Banco.Controllers
 {
     public class TalonarioChequeBancoController : Controller
     {
+        #region Variables
         ba_Talonario_cheques_x_banco_Bus bus_talonario = new ba_Talonario_cheques_x_banco_Bus();
         ba_Banco_Cuenta_Bus bus_bco_cuenta = new ba_Banco_Cuenta_Bus();
+        ba_Banco_Cuenta_Bus bus_banco = new ba_Banco_Cuenta_Bus();
+        #endregion
+
+        #region Index
         public ActionResult Index()
         {
             return View();
@@ -21,35 +27,36 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_talonario_cheque()
         {
-            List<ba_Talonario_cheques_x_banco_Info> model = new List<ba_Talonario_cheques_x_banco_Info>();
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model = bus_talonario.get_list(IdEmpresa, true);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var model = bus_talonario.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_talonario_cheque", model);
         }
 
-        private void cargar_combos()
+        #endregion
+
+        #region Metodos
+        private void cargar_combos(int IdEmpresa )
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            ba_Banco_Cuenta_Bus bus_banco = new ba_Banco_Cuenta_Bus();
             var lst_banco = bus_banco.get_list(IdEmpresa, false);
             ViewBag.lst_banco = lst_banco;
         }
 
-        public ActionResult Nuevo()
+        #endregion
+
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
             ba_Talonario_cheques_x_banco_Info model = new ba_Talonario_cheques_x_banco_Info
             {
-               IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
+               IdEmpresa = IdEmpresa,
                Estado_bool = true
             };
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Nuevo(ba_Talonario_cheques_x_banco_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             decimal documento_inicial = Convert.ToDecimal(model.Num_cheque);
             decimal documento_final = Convert.ToDecimal(model.Documentofinal);
             int length = model.Num_cheque.Length;
@@ -73,6 +80,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 };
                 if (!bus_talonario.guardarDB(info))
                 {
+                    cargar_combos(model.IdEmpresa);
                     return View(model);
                 }
                 secuencia++;
@@ -80,13 +88,12 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdBanco = 0, string Num_cheque = "")
+        public ActionResult Modificar(int IdEmpresa = 0, int IdBanco = 0, string Num_cheque = "")
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ba_Talonario_cheques_x_banco_Info model = bus_talonario.get_info(IdEmpresa, IdBanco, Num_cheque);
                 if (model == null) 
             return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -95,7 +102,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         {
             if(!bus_talonario.modificarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -103,9 +110,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         #region Json
 
-        public JsonResult get_id(int IdBanco = 0)
+        public JsonResult get_id(int IdEmpresa = 0, int IdBanco = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             var banco_cuenta = bus_bco_cuenta.get_info(IdEmpresa, IdBanco);
             var Numerocheque = bus_talonario.get_id(IdEmpresa, IdBanco, banco_cuenta.ba_num_digito_cheq);
 
@@ -113,10 +119,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         }
 
-        public JsonResult get_num_x_bco(int IdBanco= 0)
+        public JsonResult get_num_x_bco(int IdEmpresa = 0, int IdBanco= 0)
         {
-
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             var banco_cuenta = bus_bco_cuenta.get_info(IdEmpresa, IdBanco);
             string relleno = string.Empty;
             for (int i = 0; i < banco_cuenta.ba_num_digito_cheq; i++)
