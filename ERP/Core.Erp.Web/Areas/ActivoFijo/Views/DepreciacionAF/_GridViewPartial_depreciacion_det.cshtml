@@ -3,7 +3,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_depreciacion_det";
-        settings.CallbackRouteValues = new { Controller = "DepreciacionAF", Action = "GridViewPartial_depreciacion_det", IdDepreciacion = Model == null ? 0 : Model.IdDepreciacion };
+        settings.CallbackRouteValues = new { Controller = "DepreciacionAF", Action = "GridViewPartial_depreciacion_det", IdEmpresa = Model == null ? 0 : Model.IdEmpresa, IdDepreciacion = Model == null ? 0 : Model.IdDepreciacion };
         settings.KeyFieldName = "Secuencia";
         settings.Width = Unit.Percentage(100);
 
