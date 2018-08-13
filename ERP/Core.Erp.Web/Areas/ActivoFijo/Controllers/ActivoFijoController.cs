@@ -32,7 +32,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_activo_fijo()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = bus_activo.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_activo_fijo", model);
         }
