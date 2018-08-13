@@ -9,8 +9,8 @@
 }
 @using (Html.BeginForm())
 {
-    @Html.Action("GridViewPartial_categoria_activo", new { IdActivoFijoTipo = ViewBag.IdActivoFijoTipo })
+    @Html.Action("GridViewPartial_categoria_activo", new { IdEmpresa = ViewBag.IdEmpresa, IdActivoFijoTipo = ViewBag.IdActivoFijoTipo })
     <div class="box-footer">
-        <a class="btn btn-default" href="@Url.Action("Index","TipoAF",new {  IdActivoFijoTipo = ViewBag.IdActivoFijoTipo, Area = "ActivoFijo" },null)">Volver</a>
+        <a class="btn btn-default" href="@Url.Action("Index","TipoAF",new { IdEmpresa = ViewBag.IdEmpresa, IdActivoFijoTipo = ViewBag.IdActivoFijoTipo, Area = "ActivoFijo" },null)">Volver</a>
     </div>
 }
