@@ -367,7 +367,7 @@ namespace Core.Erp.Data.Inventario
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdProducto = info.IdProducto = get_id(info.IdEmpresa),
-                        pr_codigo = info.pr_codigo,
+                        pr_codigo = string.IsNullOrEmpty(info.pr_codigo) ? ("PROD"+info.IdProducto.ToString("0000000")) : info.pr_codigo,
                         pr_codigo2 = info.pr_codigo2,
                         pr_descripcion = info.pr_descripcion,
                         pr_descripcion_2 = info.pr_descripcion_2,
@@ -430,7 +430,7 @@ namespace Core.Erp.Data.Inventario
                 {
                     in_Producto Entity = Context.in_Producto.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdProducto == info.IdProducto);
                     if (Entity == null) return false;
-                    Entity.pr_codigo = info.pr_codigo;
+                    Entity.pr_codigo = string.IsNullOrEmpty(info.pr_codigo) ? ("PROD" + info.IdProducto.ToString("0000000")) : info.pr_codigo;
                     Entity.pr_codigo2 = info.pr_codigo2;
                     Entity.pr_descripcion = info.pr_descripcion;
                     Entity.pr_descripcion_2 = info.pr_descripcion_2;
