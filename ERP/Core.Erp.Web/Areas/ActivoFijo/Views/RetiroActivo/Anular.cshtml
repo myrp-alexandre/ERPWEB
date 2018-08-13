@@ -81,35 +81,35 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="ValorActivo">V. activo*</label>
-                    @Html.TextBoxFor(q => q.ValorActivo, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.ValorActivo, new { @class = "form-control", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.ValorActivo, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="Valor_Tot_Bajas">V. baja*</label>
-                    @Html.TextBoxFor(q => q.Valor_Tot_Bajas, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.Valor_Tot_Bajas, new { @class = "form-control", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.Valor_Tot_Bajas, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="Valor_Tot_Mejora">V. mejora*</label>
-                    @Html.TextBoxFor(q => q.Valor_Tot_Mejora, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.Valor_Tot_Mejora, new { @class = "form-control", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.Valor_Tot_Mejora, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="Valor_Depre_Acu">V. Depr. Acum.*</label>
-                    @Html.TextBoxFor(q => q.Valor_Depre_Acu, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.Valor_Depre_Acu, new { @class = "form-control", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.Valor_Depre_Acu, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="Valor_Neto">V. neto*</label>
-                    @Html.TextBoxFor(q => q.Valor_Neto, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.Valor_Neto, new { @class = "form-control", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.Valor_Neto, "", new { @class = "text-danger" })
                 </div>
             </div>

@@ -95,7 +95,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 
         public void Get_list_activos_a_depreciar(int IdPeriodo = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             string IdUsuario = Session["IdUsuario"].ToString();
             var lst = bus_depreciacion_det.get_list_a_depreciar(IdEmpresa, IdPeriodo, IdUsuario);
             lst_depreciacion_det.set_list(lst);
@@ -227,8 +227,9 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_depreciacion_det(int IdEmpresa = 0 ,decimal IdDepreciacion = 0)
+        public ActionResult GridViewPartial_depreciacion_det(decimal IdDepreciacion = 0)
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             Af_Depreciacion_Info model = new Af_Depreciacion_Info();
             model.lst_detalle = bus_depreciacion_det.get_list(IdEmpresa, IdDepreciacion);
             if (model.lst_detalle.Count == 0)

@@ -3,6 +3,7 @@ using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.ActivoFijo;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Web.Areas.Contabilidad.Controllers;
+using Core.Erp.Web.Helps;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,17 +15,33 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 {
     public class RetiroActivoController : Controller
     {
+        #region Variables
         Af_Retiro_Activo_Bus bus_retiro = new Af_Retiro_Activo_Bus();
         ct_cbtecble_det_List list_ct_cbtecble_det = new ct_cbtecble_det_List();
         ct_cbtecble_det_Bus bus_comprobante_detalle = new ct_cbtecble_det_Bus();
+        Af_Activo_fijo_Bus bus_fijo = new Af_Activo_fijo_Bus();
+        ct_cbtecble_tipo_Bus bus_tipo = new ct_cbtecble_tipo_Bus();
+        ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
         string mensaje = string.Empty;
+
+        #endregion
+
+        #region Index
 
         public ActionResult Index()
         {
             return View();
         }
+        public ActionResult GridViewPartial_retiro_activo()
+        {
 
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var model = bus_retiro.get_list(IdEmpresa, true);
+            return PartialView("_GridViewPartial_retiro_activo", model);
+        }
+        #endregion
 
+        #region Metodos
         private bool validar(Af_Retiro_Activo_Info i_validar, ref string msg)
         {
             if (i_validar.lst_ct_cbtecble_det.Count == 0)
@@ -54,22 +71,11 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_retiro_activo()
+        private void cargar_combos(int IdEmpresa)
         {
-
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<Af_Retiro_Activo_Info> model = new List<Af_Retiro_Activo_Info>();
-            model = bus_retiro.get_list(IdEmpresa, true);
-            return PartialView("_GridViewPartial_retiro_activo", model);
-        }
-        private void cargar_combos()
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            Af_Activo_fijo_Bus bus_fijo = new Af_Activo_fijo_Bus();
             var lst_fijo = bus_fijo.get_list(IdEmpresa, false);
             ViewBag.lst_fijo = lst_fijo;
 
-            ct_cbtecble_tipo_Bus bus_tipo = new ct_cbtecble_tipo_Bus();
             var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_tipo = lst_tipo;
 
@@ -77,22 +83,25 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 
         private void cargar_combos_detalle()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
         }
-        public ActionResult Nuevo()
+        #endregion
+
+        #region Acciones
+
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
             Af_Retiro_Activo_Info model = new Af_Retiro_Activo_Info
             {
-                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
+                IdEmpresa = IdEmpresa,
                 Fecha_Retiro = DateTime.Now
             };
             model.lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>();
             list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det);
             cargar_combos_detalle();
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -102,7 +111,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list();
             if (!validar(model, ref mensaje))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
@@ -110,21 +119,20 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_retiro.guardarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(decimal IdRetiroActivo = 0)
+        public ActionResult Modificar(int IdEmpresa = 0, decimal IdRetiroActivo = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             Af_Retiro_Activo_Info model = bus_retiro.get_info(IdEmpresa, IdRetiroActivo);
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_ct_cbtecble_det = bus_comprobante_detalle.get_list(IdEmpresa, model.IdTipoCbte == null ? 0 : Convert.ToInt32(model.IdTipoCbte), model.IdCbteCble == null ? 0 : Convert.ToDecimal(model.IdCbteCble));
             list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det);
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -133,28 +141,27 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list();
             if (!validar(model, ref mensaje))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
             model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
             if (!bus_retiro.modificarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult Anular(decimal IdRetiroActivo = 0)
+        public ActionResult Anular(int IdEmpresa = 0, decimal IdRetiroActivo = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             Af_Retiro_Activo_Info model = bus_retiro.get_info(IdEmpresa, IdRetiroActivo);
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_ct_cbtecble_det = bus_comprobante_detalle.get_list(IdEmpresa, model.IdTipoCbte == null ? 0 : Convert.ToInt32(model.IdTipoCbte), model.IdCbteCble == null ? 0 : Convert.ToDecimal(model.IdCbteCble));
             list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det);
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -163,15 +170,18 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
             if (!bus_retiro.anularDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
+        #endregion
+
+
         #region
         public JsonResult get_valores(int IdActivoFijo = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             Af_Activo_fijo_Bus bus_activo = new Af_Activo_fijo_Bus();
             var resultado = bus_activo.get_valores(IdEmpresa, IdActivoFijo);
 
