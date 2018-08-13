@@ -21,6 +21,7 @@ namespace Core.Erp.Data.Reportes.Importacion
                         Lista = (from q in Context.VWIMP_002_gastos
                                  where q.IdEmpresa == IdEmpresa
                                  && q.IdOrdenCompra_ext == IdOrdenCompra_ext
+                                 orderby q.gt_orden ascending
                                  select new IMP_002_gastos_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,

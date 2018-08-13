@@ -19,6 +19,7 @@ namespace Core.Erp.Data.Importacion
                     Lista = (from q in Context.vwimp_gastos_no_asignados
                              where q.IdEmpresa == IdEmpresa
                              && q.IdCtaCble == IdCtaCble
+                             
                              select new imp_orden_compra_ext_ct_cbteble_det_gastos_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
