@@ -18,6 +18,8 @@ namespace Core.Erp.Info.Helps
         public DateTime fecha_fin { get; set; }
         public bool mostrar_registros_0 { get; set; }
         public string IdCtaCble { get; set; }
+        public decimal IdCliente { get; set; }
+
 
         #region Filtros inventario
         public int IdSucursal { get; set; }
