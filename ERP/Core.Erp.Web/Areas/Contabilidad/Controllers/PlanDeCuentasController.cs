@@ -31,7 +31,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
             Dictionary<string, string> lst_naturaleza = new Dictionary<string, string>();
             lst_naturaleza.Add("D","Deudora");
-            lst_naturaleza.Add("A", "Acreedora");
+            lst_naturaleza.Add("C", "Acreedora");
             ViewBag.lst_naturaleza = lst_naturaleza;
 
             ct_grupocble_Bus bus_grupo_contable = new ct_grupocble_Bus();

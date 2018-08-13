@@ -19,5 +19,6 @@ namespace Core.Erp.Data
         public string gt_descripcion { get; set; }
         public double dc_Valor { get; set; }
         public string dc_Observacion { get; set; }
+        public Nullable<int> gt_orden { get; set; }
     }
 }

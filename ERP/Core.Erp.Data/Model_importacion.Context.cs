@@ -27,7 +27,6 @@ namespace Core.Erp.Data
     
         public virtual DbSet<imp_catalogo> imp_catalogo { get; set; }
         public virtual DbSet<imp_catalogo_tipo> imp_catalogo_tipo { get; set; }
-        public virtual DbSet<imp_gasto> imp_gasto { get; set; }
         public virtual DbSet<imp_gasto_x_ct_plancta> imp_gasto_x_ct_plancta { get; set; }
         public virtual DbSet<imp_liquidacion> imp_liquidacion { get; set; }
         public virtual DbSet<imp_orden_compra_ext_ct_cbteble_det_gastos> imp_orden_compra_ext_ct_cbteble_det_gastos { get; set; }
@@ -43,5 +42,6 @@ namespace Core.Erp.Data
         public virtual DbSet<imp_orden_compra_ext> imp_orden_compra_ext { get; set; }
         public virtual DbSet<vwimp_orden_compra_ext> vwimp_orden_compra_ext { get; set; }
         public virtual DbSet<vwimp_orden_compra_ext_ct_cbteble_det_gastos> vwimp_orden_compra_ext_ct_cbteble_det_gastos { get; set; }
+        public virtual DbSet<imp_gasto> imp_gasto { get; set; }
     }
 }

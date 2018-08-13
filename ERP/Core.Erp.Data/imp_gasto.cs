@@ -25,6 +25,7 @@ namespace Core.Erp.Data
         public string gt_descripcion { get; set; }
         public bool estado { get; set; }
         public string observacion { get; set; }
+        public Nullable<int> gt_orden { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imp_gasto_x_ct_plancta> imp_gasto_x_ct_plancta { get; set; }

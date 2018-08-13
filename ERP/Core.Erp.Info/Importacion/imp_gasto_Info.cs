@@ -16,6 +16,8 @@ namespace Core.Erp.Info.Importacion
         public string gt_descripcion { get; set; }
         public bool estado { get; set; }
         public string observacion { get; set; }
+        public Nullable<int> gt_orden { get; set; }
+
 
         #region Campos que no existen en la tabla
 

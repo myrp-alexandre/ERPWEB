@@ -22,6 +22,7 @@ namespace Core.Erp.Data.Importacion
                                  IdGasto_tipo = q.IdGasto_tipo,
                                  gt_descripcion = q.gt_descripcion,
                                  observacion = q.observacion,
+                                 gt_orden=q.gt_orden,
                                  estado = q.estado==true
                              }).ToList();
                 }
@@ -48,6 +49,7 @@ namespace Core.Erp.Data.Importacion
                             IdGasto_tipo = Entity.IdGasto_tipo,
                             gt_descripcion = Entity.gt_descripcion,
                             observacion = Entity.observacion,
+                            gt_orden=Entity.gt_orden,
                             estado = Entity.estado
                         };
                 }
@@ -92,6 +94,7 @@ namespace Core.Erp.Data.Importacion
                         IdGasto_tipo = info.IdGasto_tipo=get_id(),
                         gt_descripcion = info.gt_descripcion,
                         observacion = info.observacion,
+                        gt_orden=info.gt_orden,
                         estado = info.estado = true,                        
                     };
                     Context.imp_gasto.Add(Entity);
@@ -125,6 +128,7 @@ namespace Core.Erp.Data.Importacion
                     //Modificar los campos si encuentra un gasto - OK
                     Entity.gt_descripcion = info.gt_descripcion;
                     Entity.observacion = info.observacion;
+                    Entity.gt_orden = info.gt_orden;
                     //aqui tienes que hacer la parte del detalle
                     //Primero busco si este gasto tiene cuenta en esta empresa
                     var Entity_cta = Context.imp_gasto_x_ct_plancta.Where(q => q.IdEmpresa == info.info_gasto_cta.IdEmpresa && q.IdGasto_tipo == info.IdGasto_tipo).FirstOrDefault();

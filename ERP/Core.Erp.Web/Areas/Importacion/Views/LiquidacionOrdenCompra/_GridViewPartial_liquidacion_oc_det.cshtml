@@ -44,6 +44,13 @@
         });
         settings.Columns.Add(column =>
         {
+            column.FieldName = "od_costo";
+            column.Caption = "Valor U.";
+            column.Width = Unit.Percentage(15);
+
+        });
+        settings.Columns.Add(column =>
+        {
             column.FieldName = "od_total_fob";
             column.Caption = "Valor FOB";
             column.Width = Unit.Percentage(15);

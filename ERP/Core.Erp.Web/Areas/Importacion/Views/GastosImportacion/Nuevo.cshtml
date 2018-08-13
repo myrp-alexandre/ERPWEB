@@ -33,7 +33,17 @@
             </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="gt_descripcion">Orden</label>
+                    @Html.TextBoxFor(q => q.gt_orden, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.gt_orden, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
