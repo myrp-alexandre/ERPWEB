@@ -77,17 +77,14 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdActijoFijoTipo">Tipo activo*</label>
                     @Html.DropDownListFor(q => q.IdActivoFijoTipo, new SelectList(ViewBag.lst_tipo, "IdActivoFijoTipo", "Af_Descripcion"), new { @class = "form-control", @id = "IdActivoFijoTipo" })
                     @Html.ValidationMessageFor(q => q.IdActivoFijoTipo, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
+
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdCategoriaAF">Categoría*</label>
@@ -95,7 +92,11 @@
                     @Html.ValidationMessageFor(q => q.IdCategoriaAF, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-6">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="Af_Nombre">Nombre*</label>
                     @Html.TextBoxFor(q => q.Af_Nombre, new { @class = "form-control" })

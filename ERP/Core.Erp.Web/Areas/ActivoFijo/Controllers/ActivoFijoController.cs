@@ -8,6 +8,8 @@ using Core.Erp.Bus.General;
 using Core.Erp.Bus.ActivoFijo;
 using Core.Erp.Info.ActivoFijo;
 using Core.Erp.Info.Helps;
+using Core.Erp.Web.Helps;
+
 namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 {
     public class ActivoFijoController : Controller
@@ -84,7 +86,6 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Nuevo(Af_Activo_fijo_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_activo.guardarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -135,16 +136,18 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         #endregion
 
         #region Json
-        public JsonResult cargar_categoria(int IdEmpresa = 0, int IdActivoFijoTipo = 0)
+        public JsonResult cargar_categoria( int IdActivoFijoTipo = 0)
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             Af_Activo_fijo_Categoria_Bus bus_categoria = new Af_Activo_fijo_Categoria_Bus();
             var resultado = bus_categoria.get_list(IdEmpresa, IdActivoFijoTipo, false);
             
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult get_info_tipo(int IdEmpresa = 0, int IdActivoFijoTipo = 0)
+        public JsonResult get_info_tipo( int IdActivoFijoTipo = 0)
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             Af_Activo_fijo_tipo_Bus bus_tipo  = new Af_Activo_fijo_tipo_Bus();
             var resultado = bus_tipo.get_info(IdEmpresa, IdActivoFijoTipo);
 
