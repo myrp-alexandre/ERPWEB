@@ -192,7 +192,5 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         }
 
         #endregion
-
-
     }
 }

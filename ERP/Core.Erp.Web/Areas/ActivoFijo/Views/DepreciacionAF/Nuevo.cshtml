@@ -10,6 +10,7 @@
 
 @using (Html.BeginForm("Nuevo", "DepreciacionAF", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdEmpresa)
     if (ViewBag.mensaje != null)
     {
@@ -61,7 +62,7 @@
     <div class="box-footer">
         <button type="button" class="btn btn-primary" id="btn_refrescar" onclick="Get_list_activos_a_depreciar();">
             <i class="fa fa-refresh"></i>
-        </button> 
+        </button>
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index", "DepreciacionAF", new { Area = "ActivoFijo" }, null)">Cancelar</a>
     </div>
@@ -79,17 +80,17 @@
 
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tab_detalle">
-                    @Html.Action("GridViewPartial_depreciacion_det")                
+                @Html.Action("GridViewPartial_depreciacion_det")
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tab_contable">
-                    @Html.Action("GridViewPartial_comprobante_detalle_readonly", new { Area = "Contabilidad", Controller = "ComprobanteContable" })                    
+                @Html.Action("GridViewPartial_comprobante_detalle_readonly", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
             </div>
         </div>
     </div>
 
-            @section Scripts {
-                @Scripts.Render("~/bundles/jqueryval")
-            }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }
 <script>
     $(function () {
@@ -108,7 +109,8 @@
         var periodo = $("#IdPeriodo").val();
 
         var datos = {
-            IdPeriodo: periodo
+            IdPeriodo: periodo,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',

@@ -109,7 +109,9 @@
         var periodo = $("#IdPeriodo").val();
 
         var datos = {
-            IdPeriodo: periodo
+            IdPeriodo: periodo,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+
         }
         $.ajax({
             type: 'POST',
