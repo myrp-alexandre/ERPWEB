@@ -9,16 +9,21 @@ namespace Core.Erp.Data.RRHH
 {
   public  class ro_empleado_novedad_Data
     {
-        public List<ro_empleado_novedad_Info> get_list(int IdEmpresa)
+        public List<ro_empleado_novedad_Info> get_list(int IdEmpresa, DateTime fecha_inicio, DateTime fecha_fin)
         {
             try
             {
+                fecha_inicio = Convert.ToDateTime(fecha_inicio.ToShortDateString());
+                fecha_fin = Convert.ToDateTime(fecha_fin.ToShortDateString());
+
                 List<ro_empleado_novedad_Info> Lista;
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                         Lista = (from q in Context.vwro_empleado_Novedad
                                  where q.IdEmpresa == IdEmpresa
+                                 && q.Fecha_PrimerPago>=fecha_inicio
+                                 && q.Fecha_PrimerPago<=fecha_fin
                                  select new ro_empleado_novedad_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,

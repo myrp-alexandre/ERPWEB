@@ -9,11 +9,11 @@ namespace Core.Erp.Bus.RRHH
     {
         ro_empleado_novedad_Data odata = new ro_empleado_novedad_Data();
         ro_empleado_novedad_det_Data odata_det = new ro_empleado_novedad_det_Data();
-        public List<ro_empleado_novedad_Info> get_list(int IdEmpresa)
+        public List<ro_empleado_novedad_Info> get_list(int IdEmpresa, DateTime fecha_inicio, DateTime fecha_fin)
         {
             try
             {
-                return odata.get_list(IdEmpresa);
+                return odata.get_list(IdEmpresa, fecha_inicio, fecha_fin);
             }
             catch (Exception)
             {

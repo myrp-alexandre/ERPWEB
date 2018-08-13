@@ -219,10 +219,23 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {
                     if (item.IdCtaCble == null)
                     {
-
+                        ViewBag.mensaje = " Falta cueta contable de:" +item.dc_Observacion;
+                        cargar_combos(info.IdNomina_Tipo, info.IdNomina_TipoLiqui);
+                        cargar_combo_detalle();
+                        return View(info);
                     }
                 }
-                    info.IdEmpresa = GetIdEmpresa();
+                foreach (var item in info.lst_provisiones)
+                {
+                    if (item.IdCtaCble == null)
+                    {
+                        ViewBag.mensaje = " Falta cueta contable de:" + item.dc_Observacion;
+                        cargar_combos(info.IdNomina_Tipo, info.IdNomina_TipoLiqui);
+                        cargar_combo_detalle();
+                        return View(info);
+                    }
+                }
+                info.IdEmpresa = GetIdEmpresa();
                     if (!bus_rol.ContabilizarPeriodo(info))
                     {
                         cargar_combos(info.IdNomina_Tipo,info.IdNomina_TipoLiqui);

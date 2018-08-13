@@ -5,7 +5,15 @@
     {
         Response.Redirect("~/Account/Login");
     }
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml"; if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
+
 }
 @using (Html.BeginForm("ContabilizarPeriodo", "ProcesarRol", FormMethod.Post, new { @class = "form", @role = "form" }))
 {

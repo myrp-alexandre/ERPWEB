@@ -340,7 +340,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 ct_cbtecble_det_Info info_merca = new ct_cbtecble_det_Info();
                 info_merca.IdEmpresa = param.IdEmpresa;
                 info_merca.IdTipoCbte = param.IdTipoCbte_liquidacion;
-                info_merca.IdCtaCble = param.IdCtaCble;
+                info_merca.IdCtaCble = "";
                 info_merca.dc_Valor = valor_compra;
                 info_merca.dc_Valor_haber = valor_compra;
                 info_merca.dc_Observacion ="Costo delamercancia antes de gastos por traslados";

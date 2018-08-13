@@ -224,7 +224,7 @@ namespace Core.Erp.Bus.RRHH
 
                 foreach (ro_Config_Param_contable_Info item in lst_confn_param_contables)
                 {
-
+                   
                     double valorTotal = 0;
                     valorTotal = oListro_rol_detalle_Info.Where(v => v.IdDivision == Convert.ToInt32(item.IdDivision)
                                                                 && v.IdArea == item.IdArea
@@ -234,6 +234,10 @@ namespace Core.Erp.Bus.RRHH
                         valorTotal = valorTotal * -1;
                     if (valorTotal > 0)
                     {
+                        if (item.IdRubro == "1035")
+                        {
+
+                        }
                         secuecia++;
                         ct_cbtecble_det_Info oct_cbtecble_det_Info = new ct_cbtecble_det_Info();
                         oct_cbtecble_det_Info.secuencia = secuecia;
@@ -328,7 +332,7 @@ namespace Core.Erp.Bus.RRHH
               
                 return lst_detalle_diario;
             }
-            catch (Exception )
+            catch (Exception e)
             {
                 throw;
             }
