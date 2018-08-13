@@ -409,7 +409,16 @@ namespace Core.Erp.Data.Inventario
                         pr_imagen = info.pr_imagen,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
-                    });                    
+                    });
+
+                    Context.in_producto_x_tb_bodega.Add(new in_producto_x_tb_bodega
+                    {
+                        IdEmpresa=info.IdEmpresa,
+                        IdProducto=info.IdProducto,
+                        IdSucursal=1,
+                        IdBodega=1
+
+                    });                
                     Context.SaveChanges();
                 }
 
