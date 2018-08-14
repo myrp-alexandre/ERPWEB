@@ -177,7 +177,6 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         }
         #endregion
 
-
         #region
         public JsonResult get_valores(int IdActivoFijo = 0)
         {

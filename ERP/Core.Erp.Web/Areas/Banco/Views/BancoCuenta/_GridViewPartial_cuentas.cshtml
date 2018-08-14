@@ -1,6 +1,6 @@
 @using System.Web.UI.WebControls;
 @{
-	var grid = Html.DevExpress().GridView(settings => {
+    var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_cuentas";
         settings.CallbackRouteValues = new { Controller = "BancoCuenta", Action = "GridViewPartial_cuentas" };
         settings.KeyFieldName = "IdBanco";
@@ -59,8 +59,8 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdBanco = DataBinder.Eval(tc.DataItem, "IdBanco") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdBanco = DataBinder.Eval(tc.DataItem, "IdBanco") },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdBanco = DataBinder.Eval(tc.DataItem, "IdBanco") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdBanco = DataBinder.Eval(tc.DataItem, "IdBanco") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -68,7 +68,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;

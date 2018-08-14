@@ -76,10 +76,10 @@
             this.xrLabel3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[cb_giradoA]")});
             this.xrLabel3.Font = new System.Drawing.Font("Verdana", 8.5F);
-            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(29.08335F, 54.95828F);
+            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(30.91669F, 54.95828F);
             this.xrLabel3.Name = "xrLabel3";
             this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel3.SizeF = new System.Drawing.SizeF(345.8333F, 23F);
+            this.xrLabel3.SizeF = new System.Drawing.SizeF(344F, 23F);
             this.xrLabel3.StylePriority.UseFont = false;
             // 
             // xrLabel5

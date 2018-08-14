@@ -10,6 +10,7 @@ namespace Core.Erp.Info.ActivoFijo
 {
     public class Af_Depreciacion_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdDepreciacion { get; set; }
         [StringLength(20, ErrorMessage = "el campo código debe tener máximo 20 caracteres")]

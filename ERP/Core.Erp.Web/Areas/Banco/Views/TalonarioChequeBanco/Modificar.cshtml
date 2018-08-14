@@ -11,7 +11,7 @@
 
 @using (Html.BeginForm("Modificar", "TalonarioChequeBanco", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id="IdEmpresa"} )
     @Html.HiddenFor(q => q.IdBanco)
     @Html.HiddenFor(q => q.Num_cheque)
     <div class="row">
