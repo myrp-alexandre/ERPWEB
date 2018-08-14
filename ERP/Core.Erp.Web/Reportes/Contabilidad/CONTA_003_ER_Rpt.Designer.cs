@@ -164,7 +164,7 @@
             // 
             this.xrTableCell36.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTableCell36.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SaldoFinal]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SaldoFinalNaturaleza]")});
             this.xrTableCell36.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell36.Name = "xrTableCell36";
             this.xrTableCell36.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
@@ -490,7 +490,8 @@
             // 
             this.xrTableCell14.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell14.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([SaldoFinal])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum(Iif([EsCuentaMovimiento] = 1, \nIif([IdGrupoCble] = \'INGRE\',[SaldoFinalNatu" +
+                    "raleza]\n ,[SaldoFinalNaturaleza]\n*-1 ),0))")});
             this.xrTableCell14.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell14.Name = "xrTableCell14";
             this.xrTableCell14.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
@@ -588,7 +589,7 @@
             // 
             this.xrTableCell11.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell11.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([SaldoFinal])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum(Iif([EsCuentaMovimiento]=1, [SaldoFinalNaturaleza],0 ))")});
             this.xrTableCell11.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell11.Name = "xrTableCell11";
             this.xrTableCell11.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);

@@ -29,5 +29,11 @@ namespace Core.Erp.Info.Reportes.Contabilidad
         public double SaldoCreditos { get; set; }
         public double SaldoFinal { get; set; }
         public bool EsCuentaMovimiento { get; set; }
+        public string Naturaleza { get; set; }
+        public double SaldoInicialNaturaleza { get; set; }
+        public double SaldoDebitosCreditosNaturaleza { get; set; }
+        public double SaldoDebitosNaturaleza { get; set; }
+        public double SaldoCreditosNaturaleza { get; set; }
+        public double SaldoFinalNaturaleza { get; set; }
     }
 }

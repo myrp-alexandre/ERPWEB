@@ -8952,8 +8952,6 @@
     <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\_CmbCuenta_contable_liquidacion.cshtml" />
     <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\_GridViewPartial_liquidacion_gastos.cshtml" />
     <Content Include="Areas\Reportes\Views\ImportacionReportes\IMP_002.cshtml" />
-    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_003.cshtml" />
-    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\_CmbCliente_CXC.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

@@ -39,7 +39,13 @@ namespace Core.Erp.Data.Reportes.Contabilidad
                                  SaldoCreditos = q.SaldoCreditos,
                                  SaldoFinal = q.SaldoFinal,
                                  SaldoInicial = q.SaldoInicial,
-                                 EsCuentaMovimiento = q.EsCuentaMovimiento
+                                 EsCuentaMovimiento = q.EsCuentaMovimiento,
+                                 Naturaleza = q.Naturaleza,
+                                 SaldoCreditosNaturaleza = q.SaldoCreditosNaturaleza,
+                                 SaldoDebitosCreditosNaturaleza = q.SaldoDebitosCreditosNaturaleza,
+                                 SaldoDebitosNaturaleza = q.SaldoDebitosNaturaleza,
+                                 SaldoFinalNaturaleza = q.SaldoFinalNaturaleza,
+                                 SaldoInicialNaturaleza = q.SaldoInicialNaturaleza
                              }).ToList();
                 }
                 return Lista;

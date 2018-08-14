@@ -168,7 +168,7 @@
             // 
             this.xrTableCell20.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTableCell20.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SaldoInicial]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SaldoInicialNaturaleza]")});
             this.xrTableCell20.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell20.Name = "xrTableCell20";
             this.xrTableCell20.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
@@ -184,7 +184,7 @@
             // 
             this.xrTableCell21.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTableCell21.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SaldoDebitos]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SaldoDebitosNaturaleza]")});
             this.xrTableCell21.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell21.Name = "xrTableCell21";
             this.xrTableCell21.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
@@ -200,7 +200,7 @@
             // 
             this.xrTableCell22.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTableCell22.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SaldoCreditos]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SaldoCreditosNaturaleza]")});
             this.xrTableCell22.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell22.Name = "xrTableCell22";
             this.xrTableCell22.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
@@ -216,7 +216,7 @@
             // 
             this.xrTableCell23.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTableCell23.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SaldoFinal]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SaldoFinalNaturaleza]")});
             this.xrTableCell23.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell23.Name = "xrTableCell23";
             this.xrTableCell23.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
@@ -659,7 +659,7 @@
             // 
             this.xrTableCell12.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell12.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([SaldoInicial])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum(Iif([EsCuentaMovimiento]=1, [SaldoInicial],0 ))")});
             this.xrTableCell12.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell12.Name = "xrTableCell12";
             this.xrTableCell12.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
@@ -677,7 +677,7 @@
             // 
             this.xrTableCell13.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell13.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([SaldoDebitos])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "abs(sumSum(Iif([EsCuentaMovimiento]=1,[Debitos],0)))")});
             this.xrTableCell13.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell13.Name = "xrTableCell13";
             this.xrTableCell13.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
@@ -695,7 +695,7 @@
             // 
             this.xrTableCell15.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell15.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([SaldoCreditos])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "abs(sumSum(Iif([EsCuentaMovimiento]=1,[Creditos],0)))")});
             this.xrTableCell15.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell15.Name = "xrTableCell15";
             this.xrTableCell15.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
@@ -713,7 +713,7 @@
             // 
             this.xrTableCell24.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell24.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([SaldoFinal])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum(Iif([EsCuentaMovimiento]=1,[SaldoFinal] ,0 ))")});
             this.xrTableCell24.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell24.Name = "xrTableCell24";
             this.xrTableCell24.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
