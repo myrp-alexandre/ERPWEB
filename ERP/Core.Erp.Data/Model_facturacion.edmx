@@ -564,7 +564,7 @@
           <Property Name="IdTerminoPago" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="pf_plazo" Type="int" Nullable="false" />
           <Property Name="pf_codigo" Type="varchar" MaxLength="30" />
-          <Property Name="pf_observacion" Type="varchar" MaxLength="1000" />
+          <Property Name="pf_observacion" Type="varchar(max)" />
           <Property Name="pf_fecha" Type="datetime" Nullable="false" />
           <Property Name="pf_fecha_vcto" Type="datetime" Nullable="false" />
           <Property Name="estado" Type="bit" Nullable="false" />
@@ -4289,7 +4289,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
           <Property Name="IdTerminoPago" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="pf_plazo" Type="Int32" Nullable="false" />
           <Property Name="pf_codigo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="pf_observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="pf_observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="pf_fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="pf_fecha_vcto" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="estado" Type="Boolean" Nullable="false" />

@@ -7,7 +7,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
-    <link href="~/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="~/AdminLTE/bower_components/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -57,32 +57,20 @@
             new Script { ExtensionSuite = ExtensionSuite.TreeList }
         )
 </head>
-<body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
+<body class="skin-blue layout-top-nav">
     <div class="wrapper">
         <header class="main-header">
-            <!-- Logo -->
-            <a href="#myModal" class="logo" data-toggle="modal">
-                <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>FX</b></span>
-                <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><strong>Fixed</strong> ERP</span>
-            </a>
-            <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top">
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
-                        <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="hidden-xs">@Core.Erp.Web.Helps.SessionFixed.IdUsuario</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a @*class="btn btn-default"*@ href="@Url.Action("Login","Account",new { Area = "" },null)">Salir</a>
-                        </li>
-                    </ul>
+
+            <nav class="navbar navbar-inverse navbar-static-top">
+                <div class="container">
+                    <a class="navbar-brand text-center center-block" href="#myModal" data-toggle="modal">
+                        <span class="logo-lg"><strong>Fixed</strong> ERP</span>
+                    </a>
                 </div>
             </nav>
+            <!-- Logo -->
+
+
         </header>
         <!-- =============================================== -->
         <!-- Content Wrapper. Contains page content -->
@@ -120,7 +108,7 @@
                                    }).GetHtml()
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                        <a class="btn btn-default" href="@Url.Action("Login","Account",new { Area = "" },null)">Cerrar sesión @Session["IdUsuario"]</a>
                                     </div>
                                 </div>
 

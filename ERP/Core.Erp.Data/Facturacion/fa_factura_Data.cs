@@ -50,6 +50,7 @@ namespace Core.Erp.Data.Facturacion
 
                              }).ToList();
                 }
+                
                 return Lista;
             }
             catch (Exception)
@@ -285,7 +286,7 @@ namespace Core.Erp.Data.Facturacion
                     IdBodega = info.IdBodega,
                     IdCbteVta = info.IdCbteVta,
                     IdFormaPago = info.IdFormaPago,
-                    observacion = "FACT# " + info.vt_serie1 + "-" + info.vt_serie2 + "-" + info.vt_NumFactura + " " + info.vt_Observacion
+                    observacion = "FACT# " + info.vt_serie1 + "-" + info.vt_serie2 + "-" + info.vt_NumFactura
                 });
                 #endregion
 
@@ -698,7 +699,7 @@ namespace Core.Erp.Data.Facturacion
                     IdBodega = info.IdBodega,
                     IdCbteVta = info.IdCbteVta,
                     IdFormaPago = info.IdFormaPago,
-                    observacion = "FACT# " + info.vt_serie1 + "-" + info.vt_serie2 + "-" + info.vt_NumFactura + " " + info.vt_Observacion
+                    observacion = "FACT# " + info.vt_serie1 + "-" + info.vt_serie2 + "-" + info.vt_NumFactura 
                 });
                 #endregion
 

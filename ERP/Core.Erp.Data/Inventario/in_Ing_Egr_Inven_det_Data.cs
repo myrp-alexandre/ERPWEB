@@ -2,12 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Data.Inventario
 {
-   public class in_Ing_Egr_Inven_det_Data
+    public class in_Ing_Egr_Inven_det_Data
     {
         public List<in_Ing_Egr_Inven_det_Info> get_list(int IdEmpresa, int IdSucursal, int IdMovi_inven_tipo, decimal IdNumMovi)
         {
@@ -16,12 +14,9 @@ namespace Core.Erp.Data.Inventario
                 List<in_Ing_Egr_Inven_det_Info> Lista;
                 using (Entities_inventario Context = new Entities_inventario())
                 {
-                    Lista = (from q in Context.in_Ing_Egr_Inven_det
-
-                             join p in Context.in_Producto
-                             on new {q.IdEmpresa, q.IdProducto} equals new {p.IdEmpresa, p.IdProducto }
+                    Lista = (from q in Context.vwin_Ing_Egr_Inven_det
                              where q.IdEmpresa == IdEmpresa
-                             && p.IdEmpresa==IdEmpresa
+                             && q.IdEmpresa==IdEmpresa
                              && q.IdSucursal == IdSucursal
                              && q.IdMovi_inven_tipo == IdMovi_inven_tipo
                              && q.IdNumMovi == IdNumMovi
@@ -57,15 +52,22 @@ namespace Core.Erp.Data.Inventario
                                  mv_costo_sinConversion = q.mv_costo_sinConversion,
                                  secuencia_inv = q.secuencia_inv,
                                  Secuencia_oc = q.Secuencia_oc,
-                                 pr_descripcion=p.pr_descripcion
+                                 pr_descripcion = q.pr_descripcion,
+
+                                 lote_fecha_vcto = q.lote_fecha_vcto,
+                                 lote_num_lote = q.lote_num_lote,
+                                 nom_presentacion = q.nom_presentacion
 
                              }).ToList();
                 }
+                Lista.ForEach(V =>
+                {
+                    V.pr_descripcion = V.pr_descripcion + " " + V.nom_presentacion + " - " + V.lote_num_lote + " - " + (V.lote_fecha_vcto != null ? Convert.ToDateTime(V.lote_fecha_vcto).ToString("dd/MM/yyyy") : "");
+                });
                 return Lista;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

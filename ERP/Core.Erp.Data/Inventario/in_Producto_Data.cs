@@ -363,11 +363,11 @@ namespace Core.Erp.Data.Inventario
             {
                 using (Entities_inventario Context = new Entities_inventario())
                 {
-                    in_Producto Entity = new in_Producto
+                    Context.in_Producto.Add(new in_Producto
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdProducto = info.IdProducto = get_id(info.IdEmpresa),
-                        pr_codigo = string.IsNullOrEmpty(info.pr_codigo) ? ("PROD"+info.IdProducto.ToString("0000000")) : info.pr_codigo,
+                        pr_codigo = string.IsNullOrEmpty(info.pr_codigo) ? ("PROD" + info.IdProducto.ToString("0000000")) : info.pr_codigo,
                         pr_codigo2 = info.pr_codigo2,
                         pr_descripcion = info.pr_descripcion,
                         pr_descripcion_2 = info.pr_descripcion_2,
@@ -406,11 +406,10 @@ namespace Core.Erp.Data.Inventario
                         signo_5 = info.signo_5,
                         porcentaje_5 = info.porcentaje_5,
                         se_distribuye = info.se_distribuye,
-                        pr_imagen=info.pr_imagen,
+                        pr_imagen = info.pr_imagen,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
-                    };
-                    Context.in_Producto.Add(Entity);
+                    });                    
                     Context.SaveChanges();
                 }
 
