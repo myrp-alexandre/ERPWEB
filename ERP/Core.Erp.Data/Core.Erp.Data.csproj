@@ -887,6 +887,7 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_diario_Data.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Data.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_002_diario_Data.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_003_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_002_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_002_diario_Data.cs" />
@@ -1436,6 +1437,9 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="VWCXC_002_diario.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWCXC_003.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="vwcxc_cartera_x_cobrar.cs">
