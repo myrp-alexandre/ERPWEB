@@ -13,7 +13,6 @@ using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Banco.Controllers
@@ -51,9 +50,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #endregion
 
         #region Metodos
-        private void cargar_combos()
+        private void cargar_combos(int IdEmpresa)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
 
@@ -169,11 +167,13 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return PartialView("_GridViewPartial_DebitoBanco", model);
         }
         #endregion
-        public ActionResult Nuevo()
+
+        #region Acciones
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
             ba_Cbte_Ban_Info model = new ba_Cbte_Ban_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdEmpresa = IdEmpresa,
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 CodTipoCbteBan = cl_enumeradores.eTipoCbteBancario.NDBA.ToString(),
                 IdTipo_Persona = cl_enumeradores.eTipoPersona.PROVEE.ToString(),
@@ -185,7 +185,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             SessionFixed.TipoPersona = model.IdTipo_Persona;
             List_ct.set_list(model.lst_det_ct);
             List_op.set_list(model.lst_det_canc_op);
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -196,18 +196,31 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             {
                 ViewBag.mensaje = mensaje;
                 SessionFixed.TipoPersona = model.IdTipo_Persona;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             if (!bus_cbteban.guardarDB(model, cl_enumeradores.eTipoCbteBancario.NDBA))
             {
                 ViewBag.mensaje = "No se pudo guardar el registro";
                 SessionFixed.TipoPersona = model.IdTipo_Persona;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
 
             return RedirectToAction("Index");
+        }
+        public ActionResult Modificar(int IdEmpresa = 0, int IdTipocbte = 0, decimal IdCbteCble = 0)
+        {
+            ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            List_ct.set_list(model.lst_det_ct);
+            model.lst_det_canc_op = bus_cancelaciones.get_list_x_pago(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble, SessionFixed.IdUsuario);
+            List_op.set_list(model.lst_det_canc_op);
+            cargar_combos(IdEmpresa);
+            SessionFixed.TipoPersona = model.IdTipo_Persona;
+            return View(model);
         }
 
         [HttpPost]
@@ -216,22 +229,21 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             if (!bus_cbteban.modificarDB(model, cl_enumeradores.eTipoCbteBancario.NDBA))
             {
                 ViewBag.mensaje = "No se pudo modificar el registro";
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
 
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdTipocbte = 0, decimal IdCbteCble = 0)
+        public ActionResult Anular(int IdEmpresa = 0, int IdTipocbte = 0, decimal IdCbteCble = 0)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
             if (model == null)
                 return RedirectToAction("Index");
@@ -239,22 +251,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             List_ct.set_list(model.lst_det_ct);
             model.lst_det_canc_op = bus_cancelaciones.get_list_x_pago(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble, SessionFixed.IdUsuario);
             List_op.set_list(model.lst_det_canc_op);
-            cargar_combos();
-            SessionFixed.TipoPersona = model.IdTipo_Persona;
-            return View(model);
-        }
-
-        public ActionResult Anular(int IdTipocbte = 0, decimal IdCbteCble = 0)
-        {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
-            if (model == null)
-                return RedirectToAction("Index");
-            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
-            List_ct.set_list(model.lst_det_ct);
-            model.lst_det_canc_op = bus_cancelaciones.get_list_x_pago(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble, SessionFixed.IdUsuario);
-            List_op.set_list(model.lst_det_canc_op);
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -265,12 +262,14 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (!bus_cbteban.anularDB(model))
             {
                 ViewBag.mensaje = "No se pudo anular el registro";
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
 
             return RedirectToAction("Index");
         }
+
+        #endregion
 
         #region Grillas
         public ActionResult GridViewPartial_DebitoBanco_op_x_cruzar()

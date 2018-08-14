@@ -115,6 +115,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
         #endregion
 
+        #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
             ba_Cbte_Ban_Info model = new ba_Cbte_Ban_Info
@@ -151,6 +152,20 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Modificar(int IdEmpresa = 0, int IdTipocbte = 0, decimal IdCbteCble = 0)
+        {
+            ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            model.lst_det_ing = bus_det.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            List_ct.set_list(model.lst_det_ct);
+            List_ing.set_list(model.lst_det_ing);
+            cargar_combos(IdEmpresa);
+            SessionFixed.TipoPersona = model.IdTipo_Persona;
+            return View(model);
+        }
+
         [HttpPost]
         public ActionResult Modificar(ba_Cbte_Ban_Info model)
         {
@@ -170,19 +185,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdEmpresa= 0 ,int IdTipocbte = 0, decimal IdCbteCble = 0)
-        {
-            ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
-            if (model == null)
-                return RedirectToAction("Index");
-            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
-            model.lst_det_ing = bus_det.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
-            List_ct.set_list(model.lst_det_ct);
-            List_ing.set_list(model.lst_det_ing);
-            cargar_combos(IdEmpresa);
-            SessionFixed.TipoPersona = model.IdTipo_Persona;
-            return View(model);
-        }
 
         public ActionResult Anular(int IdEmpresa = 0, int IdTipocbte = 0, decimal IdCbteCble = 0)
         {
@@ -210,6 +212,10 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
             return RedirectToAction("Index");
         }
+
+        #endregion
+
+        #region Detalles
 
         public ActionResult GridViewPartial_DepositoBanco_x_cruzar()
         {
@@ -251,6 +257,9 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             var model = List_ing.get_list();
             return PartialView("_GridViewPartial_DepositoBanco_det", model);
         }
+        #endregion
+
+
         #region Json
         public JsonResult armar_diario(int IdBanco = 0)
         {
