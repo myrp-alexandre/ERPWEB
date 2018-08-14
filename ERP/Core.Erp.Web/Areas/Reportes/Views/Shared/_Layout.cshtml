@@ -77,38 +77,19 @@
 <body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
     <div class="wrapper">
         <header class="main-header">
-            <!-- Logo -->
-            <a href="#myModal" class="logo" data-toggle="modal">
-                <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>FX</b></span>
-                <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><strong>Fixed</strong> ERP</span>
-            </a>
-            <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
-                        <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="hidden-xs">@Session["IdUsuario"]</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a @*class="btn btn-default"*@ href="@Url.Action("Login","Account",new { Area = "" },null)">Salir</a>
-                        </li>
-                    </ul>
+
+            <nav class="navbar navbar-inverse navbar-static-top">
+                <div class="container">
+                    <a class="navbar-brand text-center center-block" href="#myModal" data-toggle="modal">
+                        <span class="logo-lg"><strong>Fixed</strong> ERP</span>
+                    </a>
                 </div>
             </nav>
+            <!-- Logo -->
+
+
         </header>
-     
+
         <!-- =============================================== -->
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -146,7 +127,8 @@
                                    }).GetHtml()
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <a class="btn btn-danger" href="@Url.Action("Login","Account",new { Area = "" },null)">Cerrar sesión @Session["IdUsuario"]</a>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                     </div>
                                 </div>
 
@@ -171,7 +153,7 @@
         </footer>
         <!-- /.control-sidebar -->
         <!-- Add the sidebar's background. This div must be placed
-             immediately after the control sidebar -->
+         immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>
     </div>
 
