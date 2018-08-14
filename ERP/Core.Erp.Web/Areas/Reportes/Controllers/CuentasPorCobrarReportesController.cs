@@ -2,6 +2,7 @@
 using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
+using Core.Erp.Info.Reportes.CuentasPorCobrar;
 using Core.Erp.Web.Helps;
 using Core.Erp.Web.Reportes.CuentasPorCobrar;
 using DevExpress.Web;
@@ -13,13 +14,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
     public class CuentasPorCobrarReportesController : Controller
     {
-
-        #region Metodos ComboBox bajo demanda
         tb_persona_Bus bus_persona = new tb_persona_Bus();
+         #region Metodos ComboBox bajo demanda
 
         public ActionResult CmbCliente_CXC()
         {
-            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
+            CXC_003_Info model = new CXC_003_Info();
             return PartialView("_CmbCliente_CXC", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -61,16 +61,17 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult CXC_003()
         {
             cl_filtros_Info model = new cl_filtros_Info();
+
             CXC_003_Rpt report = new CXC_003_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             report.p_IdCliente.Value = model.IdCliente;
             report.p_Fecha_ini.Value = model.fecha_ini;
             report.p_Fecha_fin.Value = model.fecha_fin;
-            report.usuario = Session["IdUsuario"].ToString();
-            report.empresa = Session["nom_empresa"].ToString();
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
 
-            return View();
+            return View(model);
         }
         [HttpPost]
         public ActionResult CXC_003(cl_filtros_Info model)
@@ -81,8 +82,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdCliente.Value = model.IdCliente;
             report.p_Fecha_ini.Value = model.fecha_ini;
             report.p_Fecha_fin.Value = model.fecha_fin;
-            report.usuario = Session["IdUsuario"].ToString();
-            report.empresa = Session["nom_empresa"].ToString();
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
             
             return View(model);

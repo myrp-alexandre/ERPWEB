@@ -8,7 +8,7 @@
     }
 }
 @using (Html.BeginForm("CXC_003", "CuentasPorCobrarReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
-    {
+{
 <div class="box">
     <div class="box-header with-border">
         <div class="row">
@@ -34,13 +34,9 @@
                     <div class="form-group">
                         <label for="IdCliente">Cliente</label>
                         @Html.Partial("_CmbCliente_CXC", Model)
-                        @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger"})
+                        @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger", @id = "IdCliente"})
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="">Fecha inicio*</label>

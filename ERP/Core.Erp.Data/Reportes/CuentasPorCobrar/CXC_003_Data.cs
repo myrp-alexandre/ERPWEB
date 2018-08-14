@@ -32,7 +32,7 @@ namespace Core.Erp.Data.Reportes.CuentasPorCobrar
                                  IdCliente = q.IdCliente,
                                  ValorRteFTE = q.ValorRteFTE,
                                  ValorRteIVA = q.ValorRteIVA,
-                                 PorcentajeRetIVA = q.ValorRteIVA,
+                                 PorcentajeRetIVA = q.PorcentajeRetIVA,
                                  cr_fecha = q.cr_fecha,
                                  PorcentajeRetFTE = q.PorcentajeRetFTE,
                                  TotalRTE = q.TotalRTE
