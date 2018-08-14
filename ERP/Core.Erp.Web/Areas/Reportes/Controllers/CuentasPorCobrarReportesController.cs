@@ -31,9 +31,17 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.CLIENTE.ToString());
         }
 
-        
+
         #endregion
 
+        private void cargar_combos()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
+            var lst_cliente = bus_cliente.get_list(IdEmpresa, false);
+            ViewBag.lst_cliente = lst_cliente;
+
+        }
         public ActionResult CXC_001(int IdSucursal = 0, decimal IdCobro = 0)
         {
             CXC_001_Rpt model = new CXC_001_Rpt();
@@ -58,10 +66,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.RequestParameters = false;
             return View(model);
         }
-        public ActionResult CXC_003()
+        public ActionResult CXC_003(DateTime? Fecha_ini, DateTime? Fecha_fin, decimal IdCliente = 0 )
         {
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                fecha_ini = Fecha_ini == null ? DateTime.Now : Convert.ToDateTime(Fecha_ini),
+                fecha_fin = Fecha_fin == null ? DateTime.Now : Convert.ToDateTime(Fecha_fin),
+                IdCliente = IdCliente
 
+            };
+            cargar_combos();
             CXC_003_Rpt report = new CXC_003_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             report.p_IdCliente.Value = model.IdCliente;
@@ -84,8 +98,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_Fecha_fin.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa;
+            cargar_combos();
             ViewBag.Report = report;
-            
             return View(model);
         }
     }
