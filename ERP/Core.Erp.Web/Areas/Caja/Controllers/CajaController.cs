@@ -3,6 +3,7 @@ using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.General;
 using Core.Erp.Bus.SeguridadAcceso;
 using Core.Erp.Info.Caja;
+using Core.Erp.Web.Helps;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,15 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 {
     public class CajaController : Controller
     {
+        #region Variables
         caj_Caja_Bus bus_caja = new caj_Caja_Bus();
         seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+
+        #endregion
+
+        #region Index
         public ActionResult Index()
         {
             return View();
@@ -24,19 +32,19 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_caja()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<caj_Caja_Info> model = bus_caja.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_caja", model);
         }
 
-        private void cargar_combos()
+        #endregion
+
+        #region Metodos
+        private void cargar_combos(int IdEmpresa)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
             var lst_cuentas = bus_plancta.get_list(IdEmpresa, false, false);
             ViewBag.lst_cuentas = lst_cuentas;
 
-            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
 
@@ -44,30 +52,34 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             ViewBag.lst_responsable = lst_responsable;
         }
 
-        public ActionResult Nuevo()
+        #endregion
+
+        #region Acciones
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
-            caj_Caja_Info model = new caj_Caja_Info();
-            cargar_combos();
+            caj_Caja_Info model = new caj_Caja_Info
+            {
+                IdEmpresa = IdEmpresa
+            };
+            cargar_combos(IdEmpresa);
             return View(model);
         }
         [HttpPost]
         public ActionResult Nuevo(caj_Caja_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_caja.guardarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(int IdCaja = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 ,int IdCaja = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             caj_Caja_Info model = bus_caja.get_info(IdEmpresa, IdCaja);
             if (model == null)
                 return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -75,18 +87,17 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         {
             if (!bus_caja.modificarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(int IdCaja = 0)
+        public ActionResult Anular(int IdEmpresa = 0 , int IdCaja = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             caj_Caja_Info model = bus_caja.get_info(IdEmpresa, IdCaja);
             if (model == null)
                 return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -94,10 +105,12 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         {
             if (!bus_caja.anularDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }
