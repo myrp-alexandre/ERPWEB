@@ -162,32 +162,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             }
             return RedirectToAction("Index");
         }
-        public JsonResult EditingNew(int secuencia = 0, decimal IdTransaccionSession=0)
-        {
-           
-            List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> model = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
-            model = Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info_x_asignar"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
-            imp_orden_compra_ext_ct_cbteble_det_gastos_Info new_gasto = new imp_orden_compra_ext_ct_cbteble_det_gastos_Info();
-            new_gasto = model.Where(v=>v.secuencia==Convert.ToInt32( secuencia)).FirstOrDefault();
-            Lis_imp_orden_compra_ext_ct_cbteble_det_gastos_Info_lst.AddRow(new_gasto, IdTransaccionSession);
-            
-
-            List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> imp_orden_compra_ext_ct_cbteble_det_gastos_Info_x_asignar = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
-            imp_orden_compra_ext_ct_cbteble_det_gastos_Info_x_asignar = Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info_x_asignar"] as List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>;
-            var delete = imp_orden_compra_ext_ct_cbteble_det_gastos_Info_x_asignar.Where(q => q.secuencia == new_gasto.secuencia).FirstOrDefault();
-           imp_orden_compra_ext_ct_cbteble_det_gastos_Info_x_asignar.Remove(delete);
-            Session["imp_orden_compra_ext_ct_cbteble_det_gastos_Info_x_asignar"] = imp_orden_compra_ext_ct_cbteble_det_gastos_Info_x_asignar;
-
-            return Json("", JsonRequestBehavior.AllowGet);
-
-        }
-        public JsonResult Editingdelete(int secuencia = 0, decimal IdTransaccionSession = 0)
-        {
-            Lis_imp_orden_compra_ext_ct_cbteble_det_gastos_Info_lst.DeleteRow(secuencia, IdTransaccionSession);
-            return Json("", JsonRequestBehavior.AllowGet);
-
-        }
-
+       
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] imp_orden_compra_ext_ct_cbteble_det_gastos_Info info_det)
         {

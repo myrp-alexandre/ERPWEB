@@ -11,9 +11,9 @@
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "AsignacionDeGastos", Action = "EditingUpdate", Area = "Importacion" };
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowEditButton = true;
-        //Configuracion cabecera
-        settings.Settings.ShowTitlePanel = true;
-        settings.SettingsText.Title = "Gastos asignados";
+        ////Configuracion cabecera
+        //settings.Settings.ShowTitlePanel = true;
+        //settings.SettingsText.Title = "Gastos asignados";
 
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -75,35 +75,8 @@
             });
         });
 
-        settings.Columns.Add(column =>
-        {
-            column.Caption = "*";
-            column.FieldName = "secuencia";
-            column.Width = Unit.Percentage(20);
-            column.UnboundType = DevExpress.Data.UnboundColumnType.String;
-            column.SetDataItemTemplateContent(c =>
-            {
-                Html.DevExpress().Button(settingsBtn =>
-                {
-                    settingsBtn.Name = "btn_elimi" + c.KeyValue;
-                    settingsBtn.Text = "Eliminar";
-                    settingsBtn.ClientSideEvents.Click = "function(s, e) {Editingdelete('" + c.KeyValue + "');}";
-                }).Render();
-            });
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-
-        });
-        settings.PreRender = (sender, e) =>
-        {
-            MVCxGridView gridView = (MVCxGridView)sender;
-            gridView.ExpandAll();
-        };
-
-        settings.BeforeGetCallbackResult = (sender, e) =>
-        {
-            MVCxGridView gridView = (MVCxGridView)sender;
-            gridView.ExpandAll();
-        };
+       
+       
     });
 }
 @grid.Bind(Model).GetHtml()

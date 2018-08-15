@@ -56,27 +56,16 @@
 
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="or_observacion">Detalle de gastos</label>
+                    @Html.Action("GridViewPartial_gastos_asignados", new { Model.IdCtaCble_importacion })
 
-
-    <div id="Tabs" role="tabpanel">
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="active">
-                <a href="#tab_gastos_por_asignados" aria-controls="informacion_items" role="tab" data-toggle="tab">Gastos no asignados</a>
-            </li>
-            <li>
-                <a href="#tab_gastos_asignados" aria-controls="otros" role="tab" data-toggle="tab">Gastos asignados</a>
-            </li>
-
-
-        </ul>
-        <div class="tab-content" style="padding-top: 20px">
-            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_gastos_por_asignados">
-                @Html.Action("GridViewPartial_gastos_por_asignar", new { Model.IdCtaCble_importacion })
+                </div>
             </div>
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_gastos_asignados">
-                @Html.Action("GridViewPartial_gastos_asignados", new { Model.IdCtaCble_importacion })
 
-            </div>
         </div>
     </div>
 

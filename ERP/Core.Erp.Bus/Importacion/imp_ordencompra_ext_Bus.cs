@@ -329,8 +329,8 @@ namespace Core.Erp.Bus.Importacion
                     info_det.IdProducto = item.IdProducto;
                     info_det.dm_cantidad = item.od_cantidad_recepcion;
                     info_det.dm_observacion = "Ingreso por orden de compra del exterior";
-                    info_det.mv_costo = item.od_costo_total / item.od_cantidad_recepcion;
-                    info_det.mv_costo_sinConversion = item.od_costo_total/item.od_cantidad_recepcion;
+                    info_det.mv_costo =Math.Round( item.od_costo_total / item.od_cantidad_recepcion,2);
+                    info_det.mv_costo_sinConversion =Math.Round( item.od_costo_total/item.od_cantidad_recepcion,2);
                     info_det.dm_cantidad_sinConversion = item.od_cantidad_recepcion;
                     info_det.dm_cantidad = item.od_cantidad_recepcion;
                     info_det.IdUnidadMedida = item.IdUnidadMedida;
