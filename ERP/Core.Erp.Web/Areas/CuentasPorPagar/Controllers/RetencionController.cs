@@ -350,9 +350,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             info_det.re_Porcen_retencion = info_codifo_sri.co_porRetencion;
             if (info_codifo_sri.IdTipoSRI == "COD_RET_IVA")
             {
-                if (Session["co_valoriva"] != null)
-                {
-                    info_det.re_baseRetencion = Convert.ToDouble(Session["co_valoriva"]);
+                if (info_det.re_baseRetencion != 0)
+                {                    
                     info_det.re_valor_retencion = (info_det.re_baseRetencion * info_codifo_sri.co_porRetencion) / 100;
                     info_det.IdCtacble = info_codifo_sri.info_codigo_ctacble.IdCtaCble;
 
@@ -397,9 +396,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             info_det.re_Porcen_retencion = info_codifo_sri.co_porRetencion;
             if (info_codifo_sri.IdTipoSRI == "COD_RET_IVA")
             {
-                if (Session["co_valoriva"] != null)
+                if (info_det.re_baseRetencion != 0)
                 {
-                    info_det.re_baseRetencion = Convert.ToDouble(Session["co_valoriva"]);
+                    info_det.re_baseRetencion = info_det.re_baseRetencion;
                     info_det.re_valor_retencion = (info_det.re_baseRetencion * info_codifo_sri.co_porRetencion) / 100;
                     info_det.IdCtacble = info_codifo_sri.info_codigo_ctacble.IdCtaCble;
                     List_cp_retencion_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -416,11 +415,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     List_cp_retencion_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                     model = List_cp_retencion_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                 }
-
-
             }
-
-
 
             cargar_combos_detalle();
             model = List_cp_retencion_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -482,55 +477,65 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
     }
 
     public class ct_cbtecble_det_List_re
-        {
+    {
         string variable = "ct_cbtecble_det_Info";
-            public List<ct_cbtecble_det_Info> get_list(decimal IdTransaccionSession)
+        public List<ct_cbtecble_det_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)
             {
-                if (HttpContext.Current.Session[variable+IdTransaccionSession.ToString()] == null)
-                {
-                    List<ct_cbtecble_det_Info> list = new List<ct_cbtecble_det_Info>();
+                List<ct_cbtecble_det_Info> list = new List<ct_cbtecble_det_Info>();
 
-                    HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
-                }
-                return (List<ct_cbtecble_det_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
-            }
-
-            public void set_list(List<ct_cbtecble_det_Info> list, decimal IdTransaccionSession)
-            {
                 HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
             }
+            return (List<ct_cbtecble_det_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
+        }
 
-            public void AddRow(ct_cbtecble_det_Info info_det, decimal  IdTransaccionSession)
-            {
-                List<ct_cbtecble_det_Info> list = get_list(IdTransaccionSession);
-                info_det.secuencia = list.Count == 0 ? 1 : list.Max(q => q.secuencia) + 1;
-                info_det.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * -1;
-                list.Add(info_det);
-            }
+        public void set_list(List<ct_cbtecble_det_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
+        }
 
-            public void UpdateRow(ct_cbtecble_det_Info info_det, decimal IdTransaccionSession)
-            {
-                ct_cbtecble_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.secuencia == info_det.secuencia).First();
-                edited_info.IdCtaCble = info_det.IdCtaCble;
-                edited_info.dc_para_conciliar = info_det.dc_para_conciliar;
-                edited_info.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * -1;
-                edited_info.dc_Valor_debe = info_det.dc_Valor_debe;
-                edited_info.dc_Valor_haber = info_det.dc_Valor_haber;
-            }
+        public void AddRow(ct_cbtecble_det_Info info_det, decimal IdTransaccionSession)
+        {
+            List<ct_cbtecble_det_Info> list = get_list(IdTransaccionSession);
+            info_det.secuencia = list.Count == 0 ? 1 : list.Max(q => q.secuencia) + 1;
+            info_det.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * -1;
+            list.Add(info_det);
+        }
 
-            public void DeleteRow(int secuencia, decimal IdTransaccionSession)
-            {
-                List<ct_cbtecble_det_Info> list = get_list(IdTransaccionSession);
-                list.Remove(list.Where(m => m.secuencia == secuencia).First());
-            }
+        public void UpdateRow(ct_cbtecble_det_Info info_det, decimal IdTransaccionSession)
+        {
+            ct_cbtecble_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.secuencia == info_det.secuencia).First();
+            edited_info.IdCtaCble = info_det.IdCtaCble;
+            edited_info.dc_para_conciliar = info_det.dc_para_conciliar;
+            edited_info.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * -1;
+            edited_info.dc_Valor_debe = info_det.dc_Valor_debe;
+            edited_info.dc_Valor_haber = info_det.dc_Valor_haber;
+        }
 
-            public void delete_detail_New_details(cp_parametros_Info info_param_op, List<cp_retencion_det_Info> detalle_retencion, string IdCtaCble="")
-            {
+        public void DeleteRow(int secuencia, decimal IdTransaccionSession)
+        {
+            List<ct_cbtecble_det_Info> list = get_list(IdTransaccionSession);
+            list.Remove(list.Where(m => m.secuencia == secuencia).First());
+        }
+
+        public void delete_detail_New_details(cp_parametros_Info info_param_op, List<cp_retencion_det_Info> detalle_retencion, string IdCtaCble = "")
+        {
             try
             {
-                int sec = 1;
+                int sec = 2;
 
-                set_list(new List<ct_cbtecble_det_Info>(),Convert.ToDecimal( SessionFixed.IdTransaccionSession));
+                set_list(new List<ct_cbtecble_det_Info>(), Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+
+                ct_cbtecble_det_Info cbtecble_haber_Info = new ct_cbtecble_det_Info();
+                cbtecble_haber_Info.secuencia = 1;
+                cbtecble_haber_Info.IdEmpresa = info_param_op.IdEmpresa;
+                cbtecble_haber_Info.IdTipoCbte = (int)info_param_op.pa_IdTipoCbte_x_Retencion;
+                cbtecble_haber_Info.IdCtaCble = IdCtaCble;
+                cbtecble_haber_Info.dc_Valor_debe = Math.Round(detalle_retencion.Sum(v => Convert.ToDouble(v.re_valor_retencion)),2,MidpointRounding.AwayFromZero);
+                cbtecble_haber_Info.dc_Valor = Math.Round(detalle_retencion.Sum(v => Convert.ToDouble(v.re_valor_retencion)),2,MidpointRounding.AwayFromZero);
+                cbtecble_haber_Info.dc_Observacion = "";
+                AddRow(cbtecble_haber_Info, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
                 foreach (var item in detalle_retencion)
                 {
@@ -539,34 +544,20 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     cbtecble_debe_Info.IdEmpresa = info_param_op.IdEmpresa;
                     cbtecble_debe_Info.IdTipoCbte = (int)info_param_op.pa_IdTipoCbte_x_Retencion;
                     cbtecble_debe_Info.IdCtaCble = item.IdCtacble;
-                    cbtecble_debe_Info.dc_Valor_debe =(double) item.re_valor_retencion;
-                    cbtecble_debe_Info.dc_Valor =(double) item.re_valor_retencion;
+                    cbtecble_debe_Info.dc_Valor_haber = Math.Round((double)item.re_valor_retencion,2,MidpointRounding.AwayFromZero);
+                    cbtecble_debe_Info.dc_Valor = Math.Round((double)item.re_valor_retencion,2,MidpointRounding.AwayFromZero) *-1;
                     cbtecble_debe_Info.dc_Observacion = "";
                     sec++;
                     AddRow(cbtecble_debe_Info, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
                 }
-
-                        ct_cbtecble_det_Info cbtecble_haber_Info = new ct_cbtecble_det_Info();
-                        cbtecble_haber_Info.secuencia = 2;
-                        cbtecble_haber_Info.IdEmpresa = info_param_op.IdEmpresa;
-                        cbtecble_haber_Info.IdTipoCbte = (int)info_param_op.pa_IdTipoCbte_x_Retencion;
-                        cbtecble_haber_Info.IdCtaCble = IdCtaCble;
-                        cbtecble_haber_Info.dc_Valor_haber = detalle_retencion.Sum( v => Convert.ToDouble( v.re_valor_retencion));
-                        cbtecble_haber_Info.dc_Valor = detalle_retencion.Sum(v => Convert.ToDouble(v.re_valor_retencion))*-1;
-                        cbtecble_haber_Info.dc_Observacion = "";
-                        AddRow(cbtecble_haber_Info, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-
-
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
             }
+            catch (Exception)
+            {
 
-
-        }  
+                throw;
+            }
+        }
+    }
     public class cp_retencion_det_lst
     {
         string variable = " cp_retencion_det_Info";
@@ -589,14 +580,19 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         public void AddRow(cp_retencion_det_Info info_det, decimal IdTransaccionSession)
         {
             List<cp_retencion_det_Info> list = get_list(IdTransaccionSession);
-            info_det.Idsecuencia = list.Count() + 1;        
+            info_det.Idsecuencia = list.Count() + 1;
+            info_det.re_valor_retencion = Math.Round((double)info_det.re_valor_retencion, 2, MidpointRounding.AwayFromZero);
             list.Add(info_det);
         }
 
         public void UpdateRow(cp_retencion_det_Info info_det, decimal IdTransaccionSession)
         {
             cp_retencion_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Idsecuencia == info_det.Idsecuencia).First();
-            
+            edited_info.re_Codigo_impuesto = info_det.re_Codigo_impuesto;
+            edited_info.IdCodigo_SRI = info_det.IdCodigo_SRI;
+            edited_info.re_baseRetencion = info_det.re_baseRetencion;
+            edited_info.re_Porcen_retencion = info_det.re_Porcen_retencion;
+            edited_info.re_valor_retencion = Math.Round((double)info_det.re_valor_retencion, 2, MidpointRounding.AwayFromZero);
         }
 
         public void DeleteRow(int secuencia)

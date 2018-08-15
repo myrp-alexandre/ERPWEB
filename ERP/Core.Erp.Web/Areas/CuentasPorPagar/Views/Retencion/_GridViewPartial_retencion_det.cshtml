@@ -14,12 +14,18 @@
         settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = true;
 
-        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Retencion", Action = "EditingAddNew_ret", Area = "CuentasPorPagar" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Retencion", Action = "EditingUpdate_ret", Area = "CuentasPorPagar" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Retencion", Action = "EditingDelete_ret", Area = "CuentasPorPagar" };
 
         settings.KeyFieldName = "Idsecuencia";
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
 
         settings.SettingsPager.Visible = false;
         settings.Settings.ShowGroupPanel = false;
@@ -66,6 +72,7 @@
             column.Caption = "Porcentaje";
             //column.ReadOnly = true;
             column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
@@ -73,7 +80,7 @@
             column.Caption = "Valor retenido";
             //column.ReadOnly = true;
             column.Width = Unit.Percentage(15);
-
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
         settings.ClientSideEvents.BatchEditChangesSaving= "function(s,e,){armar_diario()}";
