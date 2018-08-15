@@ -172,7 +172,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-
         public bool anularDB(cp_orden_giro_Info info)
         {
             try
@@ -474,7 +473,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-
         public cp_orden_giro_Info get_info(int IdEmpresa, int IdTipoCbte_Ogiro,decimal IdCbteCble_Ogiro)
         {
             try
@@ -559,7 +557,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-
         public cp_orden_giro_Info get_info_retencion(int IdEmpresa, int IdTipoCbte_Ogiro, decimal IdCbteCble_Ogiro)
         {
             try
@@ -653,11 +650,10 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-
         public bool si_existe(cp_orden_giro_Info info)
         {
             try
-            {
+            {                
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
                     var lst = from q in Context.cp_orden_giro
@@ -666,6 +662,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                              && q.co_serie==info.co_serie
                               && q.co_factura==info.co_factura
                               && q.IdProveedor==info.IdProveedor
+                              && q.Estado == "A"
                               select q;
                     if (lst.Count() > 0)
                         return true;
