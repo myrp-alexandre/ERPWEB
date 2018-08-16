@@ -49,12 +49,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         public ActionResult GridViewPartial_ordenes_pagos(DateTime? Fecha_ini, DateTime? Fecha_fin)
         {
-
-
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
-
             lst_ordenes_pagos = bus_orden_pago.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_ordenes_pagos", lst_ordenes_pagos);
         }
@@ -76,16 +73,15 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
         public ActionResult GridViewPartial_orden_pago_dc()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ct_cbtecble_Info model = new ct_cbtecble_Info();
             model.lst_ct_cbtecble_det = Session["ct_cbtecble_det_Info"] as List<ct_cbtecble_det_Info>;
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_orden_pago_dc", model);
         }
 
-        private void cargar_combos(string TipoPersona="")
+        private void cargar_combos(int IdEmpresa )
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             var lst_proveedores = bus_proveedor.get_list(IdEmpresa, false);
             ViewBag.lst_proveedores = lst_proveedores;
 
@@ -108,18 +104,17 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
         }
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0 )
         {
-           
             (Session["ct_cbtecble_det_Info"]) = null;
             cp_orden_pago_Info model = new cp_orden_pago_Info
             {
-                Fecha_Pago = DateTime.Now.Date,
-                Fecha=DateTime.Now.Date
-            
+                IdEmpresa = IdEmpresa,
+                Fecha=DateTime.Now.Date,
+                Fecha_Pago = DateTime.Now.Date
 
             };
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -129,13 +124,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.detalle = Session["lst_detalle"] as List<cp_orden_pago_det_Info>;
             model.info_comprobante.lst_ct_cbtecble_det = Session["ct_cbtecble_det_Info"] as List<ct_cbtecble_det_Info>;
             info_param_op = Session["info_param_op"] as cp_orden_pago_tipo_x_empresa_Info;
-            model.IdEmpresa =Convert.ToInt32( Session["IdEmpresa"]);
+            model.IdEmpresa =Convert.ToInt32( SessionFixed.IdEmpresa);
             model.info_comprobante.IdTipoCbte =(int) info_param_op.IdTipoCbte_OP;
             model.IdEstadoAprobacion = info_param_op.IdEstadoAprobacion;
             string mensaje = bus_orden_pago.validar(model);
             if (mensaje != "")
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 ViewBag.mensaje = mensaje;
                 cargar_combos_detalle();
                 return View(model);
@@ -147,16 +142,16 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 else
                 {
                     ViewBag.mensaje = mensaje;
-                    cargar_combos();
+                    cargar_combos(model.IdEmpresa);
                     cargar_combos_detalle();
                     return View(model);
                 }
             }
         }
 
-        public ActionResult Modificar(int IdOrdenPago = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 , int IdOrdenPago = 0)
         {
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             cargar_combos_detalle();
             IdEmpresa =Convert.ToInt32( Session["IdEmpresa"]);
             cp_orden_pago_Info model = new cp_orden_pago_Info();
@@ -186,7 +181,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if (bus_cancelacion.si_existe_cancelacion(IdEmpresa, model.IdOrdenPago))
             {
                 mensaje = "La orden de pago tiene cancelaciones no se puede modificar";
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 cargar_combos_detalle();
                 ViewBag.mensaje = mensaje;
                 return View(model);
@@ -194,7 +189,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if (model.IdTipo_op==cl_enumeradores.eTipoOrdenPago.FACT_PROVEE.ToString())
             {
                 mensaje = "No se puede modificar una orden de pago de tipo factura por proveedor";
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 cargar_combos_detalle();
                 ViewBag.mensaje = mensaje;
                 return View(model);
@@ -211,7 +206,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             mensaje = bus_orden_pago.validar(model);
             if (mensaje != "")
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 ViewBag.mensaje = mensaje;
                 cargar_combos_detalle();
                 return View(model);
@@ -223,18 +218,18 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 else
                 {
                     ViewBag.mensaje = mensaje;
-                    cargar_combos();
+                    cargar_combos(model.IdEmpresa);
                     cargar_combos_detalle();
                     return View(model);
                 }
             }
         }
-        public ActionResult Anular(int IdOrdenPago =0)
+        public ActionResult Anular(int IdEmpresa= 0, int IdOrdenPago =0)
         {
             
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             cargar_combos_detalle();
-            IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             cp_orden_pago_Info model = new cp_orden_pago_Info();
             model = bus_orden_pago.get_info(IdEmpresa, IdOrdenPago);
             Session["ct_cbtecble_Info"] = model.info_comprobante;
@@ -251,7 +246,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if (bus_cancelacion.si_existe_cancelacion(IdEmpresa, model.IdOrdenPago))
             {
                 mensaje = "La orden de pago tiene cancelaciones no se puede anular";
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 cargar_combos_detalle();
                 ViewBag.mensaje = mensaje;
                 return View(model);
@@ -264,7 +259,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     return RedirectToAction("Index");
                 else
                 {
-                    cargar_combos();
+                    cargar_combos(model.IdEmpresa);
                     cargar_combos_detalle();
                     return View(model);
                 }
@@ -312,7 +307,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_deudas()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<cp_orden_pago_Info> model = new List<cp_orden_pago_Info>();
          
             return PartialView("_GridViewPartial_deudas", model);
@@ -320,7 +315,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         private void cargar_combos_detalle()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
