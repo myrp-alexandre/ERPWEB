@@ -1,6 +1,7 @@
 ﻿using Core.Erp.Bus.Caja;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.Caja;
+using Core.Erp.Web.Helps;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,12 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 {
     public class TipoMovimientoCajaController : Controller
     {
+        #region variables
         caj_Caja_Movimiento_Tipo_Bus bus_tipomovimiento = new caj_Caja_Movimiento_Tipo_Bus();
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        #endregion
+
+        #region Index
         public ActionResult Index()
         {
             return View();
@@ -21,15 +27,17 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_tipomovimientocaja()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<caj_Caja_Movimiento_Tipo_Info> model = bus_tipomovimiento.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_tipomovimientocaja", model);
         }
 
-        private void cargar_combos()
+
+        #endregion
+
+        #region Metodos
+        private void cargar_combos(int IdEmpresa)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
             var lst_cuentas = bus_plancta.get_list(IdEmpresa, false, false);
             ViewBag.lst_cuentas = lst_cuentas;
 
@@ -39,32 +47,37 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             ViewBag.lst_signo = lst_signo;
         }
 
-        public ActionResult Nuevo()
+
+        #endregion
+
+        #region Acciones
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
-            caj_Caja_Movimiento_Tipo_Info model = new caj_Caja_Movimiento_Tipo_Info();
-            cargar_combos();
+            caj_Caja_Movimiento_Tipo_Info model = new caj_Caja_Movimiento_Tipo_Info
+            {
+                IdEmpresa = IdEmpresa
+            };
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Nuevo(caj_Caja_Movimiento_Tipo_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_tipomovimiento.guardarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdTipoMovi = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 , int IdTipoMovi = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             caj_Caja_Movimiento_Tipo_Info model = bus_tipomovimiento.get_info(IdEmpresa, IdTipoMovi);
             if (model == null)
                 return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -72,19 +85,18 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         {
             if (!bus_tipomovimiento.modificarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult Anular(int IdTipoMovi = 0)
+        public ActionResult Anular(int IdEmpresa = 0, int IdTipoMovi = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             caj_Caja_Movimiento_Tipo_Info model = bus_tipomovimiento.get_info(IdEmpresa, IdTipoMovi);
             if (model == null)
                 return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -92,10 +104,12 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         {
             if (!bus_tipomovimiento.anularDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

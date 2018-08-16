@@ -60,14 +60,14 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "IdEstadoCierre")) == "EST_CIE_ABI")
                 {
                     ViewContext.Writer.Write(
-                    Html.ActionLink("Modificar", "Modificar", new { IdConciliacion_caja = DataBinder.Eval(tc.DataItem, "IdConciliacion_caja")})
+                    Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdConciliacion_caja = DataBinder.Eval(tc.DataItem, "IdConciliacion_caja")})
                     );
                 }
             });
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;

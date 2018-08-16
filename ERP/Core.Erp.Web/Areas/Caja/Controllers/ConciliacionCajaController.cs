@@ -66,9 +66,8 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         {
             return View(model);
         }
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
@@ -96,7 +95,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             list_vale.set_list(model.lst_det_vale,model.IdTransaccionSession);
             list_ing.set_list(model.lst_det_ing,model.IdTransaccionSession);
             list_ct.set_list(model.lst_det_ct);
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -107,23 +106,22 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             if (!validar(model,ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_conciliacion.guardarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
 
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(decimal IdConciliacion_caja = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 ,decimal IdConciliacion_caja = 0)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             cp_conciliacion_Caja_Info model = bus_conciliacion.get_info(IdEmpresa, IdConciliacion_caja);
             if(model == null)
                 return RedirectToAction("Index");
@@ -140,7 +138,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             list_vale.set_list(model.lst_det_vale, model.IdTransaccionSession);
             model.lst_det_ing = bus_ing.get_list_ingresos_x_conciliar(IdEmpresa, model.Fecha_fin, model.IdCaja);
             list_ing.set_list(model.lst_det_ing, model.IdTransaccionSession);
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -151,14 +149,14 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_conciliacion.modificarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido modificar el registro";
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
 
@@ -167,9 +165,8 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         #endregion
 
         #region Metodos
-        private void cargar_combos()
+        private void cargar_combos(int IdEmpresa)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_periodo = bus_periodo.get_list(IdEmpresa, false);
             ViewBag.lst_periodo = lst_periodo;
 
