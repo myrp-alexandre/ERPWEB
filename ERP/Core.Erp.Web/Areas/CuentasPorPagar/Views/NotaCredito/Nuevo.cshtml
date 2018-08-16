@@ -78,7 +78,7 @@
 @using (Html.BeginForm("Nuevo", "NotaCredito", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
 
-        @Html.HiddenFor(q => q.IdEmpresa)
+        @Html.HiddenFor(q => q.IdEmpresa, new { @id="IdEmpresa"} )
         @Html.HiddenFor(q => q.IdCbteCble_Nota)
 
         <div class="row">
@@ -503,7 +503,8 @@
                         if (IdProveedor.GetValue() > 0 && $("#cmb_idtCredito").val() != "") {
                             var datos = {
                                 IdProveedor: IdProveedor.GetValue(),
-                                codigoSRI: $("#cmb_idtCredito").val()
+                                codigoSRI: $("#cmb_idtCredito").val(),
+                                    IdEmpresa : $("#IdEmpresa").val()
 
                             }
                             $.ajax({
@@ -568,7 +569,8 @@
                     function Buscar_op() {
 
                         var datos = {
-                            IdProveedor: IdProveedor.GetValue()
+                            IdProveedor: IdProveedor.GetValue(),
+                            IdEmpresa: $("#IdEmpresa").val()
 
 
                         }

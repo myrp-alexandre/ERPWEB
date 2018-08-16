@@ -10,6 +10,8 @@ using Core.Erp.Info.Contabilidad;
 using Core.Erp.Bus.General;
 using DevExpress.Web.Mvc;
 using Core.Erp.Info.Helps;
+using Core.Erp.Web.Helps;
+
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
     public class NotaCreditoController : Controller
@@ -72,22 +74,20 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
          #endregion
         #region funciones
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0 )
         {
             (Session["ct_cbtecble_det_Info"]) = null;
             Session["list_op_por_proveedor"] = null;
             Session["list_op_seleccionadas"] = null;
-
-            IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             cp_nota_DebCre_Info model = new cp_nota_DebCre_Info
             {
+                IdEmpresa = IdEmpresa,
                 Fecha_contable = DateTime.Now,
                 cn_fecha = DateTime.Now,
                 cn_Fecha_vcto = DateTime.Now,
                 PaisPago = "593"
             };
-
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -107,7 +107,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             else
             {
                 ViewBag.mensaje = "Falta diario contable";
-                cargar_combos(model.IdProveedor, model.IdTipoNota);
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
                 cargar_combos_detalle();
                 return View(model);
 
@@ -120,14 +120,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             else
             {
                 ViewBag.mensaje = "Falta parametros del modulo cuenta por pagar";
-                cargar_combos(model.IdProveedor, model.IdTipoNota);
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
                 cargar_combos_detalle();
                 return View(model);
             }
             string mensaje = bus_orden_giro.validar(model);
             if (mensaje != "")
             {
-                cargar_combos(model.IdProveedor, model.IdTipoNota);
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
                 cargar_combos_detalle();
                 ViewBag.mensaje = mensaje;
                 return View(model);
@@ -139,19 +139,18 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             if (!bus_orden_giro.guardarDB(model))
             {
-                cargar_combos(model.IdProveedor, model.IdTipoNota);
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdTipoCbte_Nota = 0, decimal IdCbteCble_Nota = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 , int IdTipoCbte_Nota = 0, decimal IdCbteCble_Nota = 0)
         {
             (Session["ct_cbtecble_det_Info"]) = null;
             Session["list_op_por_proveedor"] = null;
             Session["list_op_seleccionadas"] = null;
-
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            
             cp_nota_DebCre_Info model = bus_orden_giro.get_info(IdEmpresa, IdTipoCbte_Nota, IdCbteCble_Nota);
             if (model == null)
                 return RedirectToAction("Index");
@@ -163,7 +162,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if (list_op_seleccionadas == null)
                 list_op_seleccionadas = new List<cp_orden_pago_det_Info>();
                 Session["list_op_seleccionadas"] = list_op_seleccionadas;
-            cargar_combos(model.IdProveedor, model.IdTipoNota);
+            cargar_combos(IdEmpresa, model.IdProveedor, model.IdTipoNota);
             cargar_combos_detalle();
             return View(model);
         }
@@ -183,7 +182,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             else
             {
                 ViewBag.mensaje = "Falta diario contable";
-                cargar_combos(model.IdProveedor, model.IdTipoNota);
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
                 cargar_combos_detalle();
                 return View(model);
 
@@ -195,7 +194,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             else
             {
                 ViewBag.mensaje = "Falta detalle  de pago";
-                cargar_combos(model.IdProveedor, model.IdTipoNota);
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
                 cargar_combos_detalle();
                 return View(model);
 
@@ -204,7 +203,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             string mensaje = bus_orden_giro.validar(model);
             if (mensaje != "")
             {
-                cargar_combos(model.IdProveedor, model.IdTipoNota);
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
                 cargar_combos_detalle();
                 ViewBag.mensaje = mensaje;
                 return View(model);
@@ -216,18 +215,16 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             if (!bus_orden_giro.modificarDB(model))
             {
-                cargar_combos(model.IdProveedor, model.IdTipoNota);
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(int IdTipoCbte_Nota = 0, decimal IdCbteCble_Nota = 0)
+        public ActionResult Anular(int IdEmpresa = 0 , int IdTipoCbte_Nota = 0, decimal IdCbteCble_Nota = 0)
         {
             (Session["ct_cbtecble_det_Info"]) = null;
             Session["list_op_por_proveedor"] = null;
             Session["list_op_seleccionadas"] = null;
-
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             cp_nota_DebCre_Info model = bus_orden_giro.get_info(IdEmpresa, IdTipoCbte_Nota, IdCbteCble_Nota);
             if (model == null)
                 return RedirectToAction("Index");
@@ -238,23 +235,21 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if (list_op_seleccionadas == null)
                 list_op_seleccionadas = new List<cp_orden_pago_det_Info>();
             Session["list_op_seleccionadas"] = list_op_seleccionadas;
-            cargar_combos(model.IdProveedor, model.IdTipoNota);
+            cargar_combos(IdEmpresa, model.IdProveedor, model.IdTipoNota);
             cargar_combos_detalle();
             return View(model);
         }
-
-
         [HttpPost]
         public ActionResult Anular(cp_nota_DebCre_Info model)
         {
 
             bus_orden_giro = new cp_nota_DebCre_Bus();
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdUsuario = SessionFixed.IdUsuario.ToString();
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
 
             if (!bus_orden_giro.anularDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -262,9 +257,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #endregion
         #region json
 
-        public JsonResult get_list_tipo_doc(decimal IdProveedor = 0, string codigoSRI = "")
+        public JsonResult get_list_tipo_doc(int IdEmpresa =0,decimal IdProveedor = 0, string codigoSRI = "")
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             var list_tipo_doc = bus_tipo_documento.get_list(IdEmpresa, IdProveedor, codigoSRI);
             return Json(list_tipo_doc, JsonRequestBehavior.AllowGet);
         }
@@ -295,14 +289,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult Buscar_op(decimal IdProveedor)
+        public JsonResult Buscar_op(int IdEmpresa , decimal IdProveedor)
         {
             try
             {
                 string IdTipo_op = cl_enumeradores.eTipoOrdenPago.FACT_PROVEE.ToString();
                 string IdEstado_Aprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString();
                 string IdUsuario = Session["IdUsuario"].ToString();
-                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
                 lst_detalle_op = bus_orden_pago.Get_List_orden_pago_con_saldo(IdEmpresa, IdTipo_op, IdProveedor, IdEstado_Aprobacion, IdUsuario);
                 Session["list_op_por_proveedor"] = lst_detalle_op as List<cp_orden_pago_det_Info>;
                 return Json("", JsonRequestBehavior.AllowGet);
@@ -342,9 +335,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         #endregion
         #region cargar combos
-        private void cargar_combos(decimal IdProveedor = 0, string IdTipoSRI = "")
+        private void cargar_combos(int IdEmpresa, decimal IdProveedor = 0, string IdTipoSRI = "")
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             var lst_proveedores = bus_proveedor.get_list(IdEmpresa, false);
             ViewBag.lst_proveedores = lst_proveedores;
 
@@ -391,7 +383,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         private void cargar_combos_detalle()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
@@ -429,8 +421,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return PartialView("_GridViewPartial_nota_credito_dc", model);
         }
         #endregion
-
-
         #region Editar y eliminar detalle
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate_op([ModelBinder(typeof(DevExpressEditorsBinder))] cp_orden_pago_det_Info info_det)
@@ -464,11 +454,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return PartialView("_GridViewPartial_nota_credito_det", model);
         }
         #endregion
-
-
+        
     }
-
-
     public class ct_cbtecble_det_List_nc
     {
         public List<ct_cbtecble_det_Info> get_list()
