@@ -5,7 +5,9 @@
         settings.CallbackRouteValues = new { Controller = "ComprobanteContable", Action = "GridViewPartial_comprobante_contable", fecha_ini = ViewBag.fecha_ini, fecha_fin = ViewBag.fecha_fin };
         settings.KeyFieldName = "IdCbteCble";
         settings.Width = Unit.Percentage(100);
-
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
@@ -76,7 +78,7 @@
             c.Width = Unit.Pixel(150);
         });
 
-        settings.Columns.Add("IdTipoCbte", "Tipo").Width = Unit.Percentage(10);
+        settings.Columns.Add("tc_TipoCbte", "Tipo").Width = Unit.Percentage(20);
         settings.Columns.Add("IdCbteCble", "ID").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
@@ -85,8 +87,16 @@
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = Unit.Percentage(10);
         });
-        settings.Columns.Add("cb_Observacion", "Descripción").Width = Unit.Percentage(60);
-        settings.Columns.Add("cb_Estado", "Estado").Width = Unit.Percentage(10);
+        settings.Columns.Add("cb_Observacion", "Descripción").Width = Unit.Percentage(50);
+        settings.Columns.Add("cb_Estado", "Estado").Width = Unit.Percentage(5);
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CONTA_001", "ContabilidadReportes", new { Area = "Reportes", IdTipoCbte = DataBinder.Eval(c.DataItem, "IdTipoCbte").ToString(), IdCbteCble = DataBinder.Eval(c.DataItem, "IdCbteCble").ToString() }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

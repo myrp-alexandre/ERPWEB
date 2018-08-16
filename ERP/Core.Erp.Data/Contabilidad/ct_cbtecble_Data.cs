@@ -20,8 +20,11 @@ namespace Core.Erp.Data.Contabilidad
                 {
                     if(mostrar_anulados)
                     Lista = (from q in Context.ct_cbtecble
+                             join t in Context.ct_cbtecble_tipo
+                             on new { q.IdEmpresa, q.IdTipoCbte} equals new {t.IdEmpresa,t.IdTipoCbte}
                              where q.IdEmpresa == IdEmpresa
                              && fecha_ini <= q.cb_Fecha && q.cb_Fecha <= fecha_fin
+                             orderby q.cb_Fecha descending
                              select new ct_cbtecble_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -34,15 +37,18 @@ namespace Core.Erp.Data.Contabilidad
                                  CodCbteCble = q.CodCbteCble,
                                  IdCbteCble = q.IdCbteCble,
                                  IdPeriodo = q.IdPeriodo,
-                                 IdTipoCbte = q.IdTipoCbte
-                             
+                                 IdTipoCbte = q.IdTipoCbte,
+                                 tc_TipoCbte = t.tc_TipoCbte
                              }).ToList();
 
                     else
                         Lista = (from q in Context.ct_cbtecble
+                                 join t in Context.ct_cbtecble_tipo
+                                 on new { q.IdEmpresa, q.IdTipoCbte } equals new { t.IdEmpresa, t.IdTipoCbte }
                                  where q.IdEmpresa == IdEmpresa
                                  && fecha_ini <= q.cb_Fecha && q.cb_Fecha <= fecha_fin
                                  && q.cb_Estado == "A"
+                                 orderby q.cb_Fecha descending
                                  select new ct_cbtecble_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
@@ -55,8 +61,8 @@ namespace Core.Erp.Data.Contabilidad
                                      CodCbteCble = q.CodCbteCble,
                                      IdCbteCble = q.IdCbteCble,
                                      IdPeriodo = q.IdPeriodo,
-                                     IdTipoCbte = q.IdTipoCbte
-
+                                     IdTipoCbte = q.IdTipoCbte,
+                                     tc_TipoCbte = t.tc_TipoCbte
                                  }).ToList();
                 }
                 return Lista;

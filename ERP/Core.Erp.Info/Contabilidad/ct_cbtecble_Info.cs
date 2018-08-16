@@ -33,6 +33,7 @@ namespace Core.Erp.Info.Contabilidad
 
         //Campos que no existen en la tabla
         public List<ct_cbtecble_det_Info> lst_ct_cbtecble_det { get; set; }
+        public string tc_TipoCbte { get; set; }
 
         public ct_cbtecble_Info()
         {
