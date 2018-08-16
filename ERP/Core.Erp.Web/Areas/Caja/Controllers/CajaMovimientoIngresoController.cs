@@ -1,25 +1,24 @@
-﻿using DevExpress.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Core.Erp.Bus.Caja;
-using Core.Erp.Info.Caja;
-using Core.Erp.Info.Helps;
+﻿using Core.Erp.Bus.Caja;
 using Core.Erp.Bus.Contabilidad;
-using Core.Erp.Bus.General;
 using Core.Erp.Bus.CuentasPorCobrar;
+using Core.Erp.Bus.General;
+using Core.Erp.Info.Caja;
 using Core.Erp.Info.Contabilidad;
+using Core.Erp.Info.General;
+using Core.Erp.Info.Helps;
 using Core.Erp.Web.Areas.Contabilidad.Controllers;
 using Core.Erp.Web.Helps;
 using DevExpress.Web;
-using Core.Erp.Info.General;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Caja.Controllers
 {
     public class CajaMovimientoIngresoController : Controller
     {
+        #region Variables
         caj_Caja_Movimiento_Bus bus_caja_mov = new caj_Caja_Movimiento_Bus();
         caj_Caja_Movimiento_det_Bus bus_caja_mov_det = new caj_Caja_Movimiento_det_Bus();
         ct_cbtecble_det_Bus bus_comprobante_detalle = new ct_cbtecble_det_Bus();
@@ -29,13 +28,35 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         caj_Caja_Movimiento_Tipo_Bus bus_tipo = new caj_Caja_Movimiento_Tipo_Bus();
         string mensaje = string.Empty;
         tb_persona_Bus bus_persona = new tb_persona_Bus();
+        cxc_cobro_tipo_Bus bus_cobro = new cxc_cobro_tipo_Bus();
 
+        #endregion
+
+        #region Index
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            return View(model);
+        }
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_movimiento(DateTime? fecha_ini, DateTime? fecha_fin)
+        {
+            ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
+            ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            List<caj_Caja_Movimiento_Info> model = bus_caja_mov.get_list(IdEmpresa, "+", true, ViewBag.fecha_ini, ViewBag.fecha_fin);
+            return PartialView("_GridViewPartial_movimiento", model);
+        }
+
+        #endregion
+
+        #region Metodos
         private bool validar(caj_Caja_Movimiento_Info i_validar, ref string msg)
         {
             if (i_validar.lst_ct_cbtecble_det.Count == 0)
@@ -82,31 +103,14 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
             return true;
         }
-
-        [HttpPost]
-        public ActionResult Index(cl_filtros_Info model)
+        private void cargar_combos(int IdEmpresa)
         {
-            return View(model);
-        }
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_movimiento(DateTime? fecha_ini, DateTime? fecha_fin)
-        {
-            ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
-            ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<caj_Caja_Movimiento_Info> model = bus_caja_mov.get_list(IdEmpresa, "+", true, ViewBag.fecha_ini, ViewBag.fecha_fin);
-            return PartialView("_GridViewPartial_movimiento", model);
-        }
-        private void cargar_combos()
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);            
             var lst_tipo = bus_tipo.get_list(IdEmpresa,"+", false, true);
             ViewBag.lst_tipo = lst_tipo;
             
             var lst_caja = bus_caja.get_list(IdEmpresa, false);
             ViewBag.lst_caja = lst_caja;
             
-            cxc_cobro_tipo_Bus bus_cobro = new cxc_cobro_tipo_Bus();
             var lst_cobro = bus_cobro.get_list(false);
             ViewBag.lst_cobro = lst_cobro;
 
@@ -117,7 +121,6 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.CLIENTE.ToString(), "Cliente");
             ViewBag.lst_tipo_personas = lst_tipo_personas;
         }
-
         private void cargar_combos_detalle()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -125,11 +128,15 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
         }
-        public ActionResult Nuevo()
+
+        #endregion
+
+        #region Acciones
+        public ActionResult Nuevo(int IdEmpresa = 0 )
         {
             caj_Caja_Movimiento_Info model = new caj_Caja_Movimiento_Info
             {
-                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
+                IdEmpresa = IdEmpresa,
                 IdTipo_Persona = "PERSONA",
                 info_caj_Caja_Movimiento_det = new caj_Caja_Movimiento_det_Info
                 {
@@ -140,7 +147,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             model.lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>();
             list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det);
             cargar_combos_detalle();
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -151,7 +158,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list();
             if (!validar(model, ref mensaje))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
@@ -159,7 +166,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             caj_parametro_Info i_parametro = bus_caj_param.get_info(model.IdEmpresa);
             if (i_parametro == null)
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 ViewBag.mensaje = "Debe ingresar los parámetros para usar el módulo";
                 return View(model);
             }
@@ -170,7 +177,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             #region guardar
             if (!bus_caja_mov.guardarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             #endregion
@@ -178,9 +185,8 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             return RedirectToAction("Index");
         }
         
-        public ActionResult Modificar(int IdTipocbte = 0, decimal IdCbteCble = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 , int IdTipocbte = 0, decimal IdCbteCble = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             caj_Caja_Movimiento_Info model = bus_caja_mov.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
             if (model == null)
                 return RedirectToAction("Index");
@@ -192,7 +198,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             model.lst_ct_cbtecble_det = bus_comprobante_detalle.get_list(IdEmpresa, IdTipocbte, IdCbteCble);
             list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det);
 
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -202,22 +208,21 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list();
             if (!validar(model, ref mensaje))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
             model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
             if (!bus_caja_mov.modificarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult Anular(int IdTipocbte = 0, decimal IdCbteCble = 0)
+        public ActionResult Anular(int IdEmpresa = 0 , int IdTipocbte = 0, decimal IdCbteCble = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             caj_Caja_Movimiento_Info model = bus_caja_mov.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
             if (model == null)
                 return RedirectToAction("Index");
@@ -228,7 +233,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
             model.lst_ct_cbtecble_det = bus_comprobante_detalle.get_list(IdEmpresa, IdTipocbte, IdCbteCble);
             list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det);
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -238,12 +243,13 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             model.IdUsuario_Anu = Session["IdUsuario"].ToString();
             if (!bus_caja_mov.anularDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
 
+        #endregion
 
         public ActionResult armar_diario(int IdCaja = 0, int IdTipoMovi = 0, double valor = 0)
         {
