@@ -1,24 +1,31 @@
-﻿using Core.Erp.Bus.CuentasPorCobrar;
-using Core.Erp.Bus.Contabilidad;
+﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Bus.CuentasPorCobrar;
+using Core.Erp.Bus.General;
 using Core.Erp.Info.CuentasPorCobrar;
+using Core.Erp.Web.Helps;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Core.Erp.Info.Helps;
-using Core.Erp.Bus.General;
-using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 {
     public class TipoCobroController : Controller
     {
+        #region Variables
+
         cxc_cobro_tipo_Bus bus_tipocobro = new cxc_cobro_tipo_Bus();
         cxc_cobro_tipo_Param_conta_x_sucursal_Bus bus_tipo_param = new cxc_cobro_tipo_Param_conta_x_sucursal_Bus();
         tipo_param_det_List List_tipo_param_det = new tipo_param_det_List();
+        cxc_cobro_tipo_motivo_Bus bus_motivocobro = new cxc_cobro_tipo_motivo_Bus();
+        cxc_CatalogoTipo_Bus bus_catalogotipo = new cxc_CatalogoTipo_Bus();
 
+
+        #endregion
+
+        #region Index
         public ActionResult Index()
         {
             return View();
@@ -32,13 +39,14 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             return PartialView("_GridViewPartial_tipocobro", model);
         }
 
+        #endregion
+
+        #region Metodos
         private void cargar_combos()
         {
-            cxc_cobro_tipo_motivo_Bus bus_motivocobro = new cxc_cobro_tipo_motivo_Bus();
             var lst_motivo_cobro = bus_motivocobro.get_list();
             ViewBag.lst_motivo_cobro = lst_motivo_cobro;
 
-            cxc_CatalogoTipo_Bus bus_catalogotipo = new cxc_CatalogoTipo_Bus();
             var lst_catalogotipo = bus_catalogotipo.get_list();
             ViewBag.lst_catalogotipo = lst_catalogotipo;
 
@@ -47,9 +55,12 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             lst_cta.Add("TIPO_COBRO", "TIPO COBRO");
             ViewBag.lst_cta = lst_cta;
         }
-        public ActionResult Nuevo()
+
+        #endregion
+
+        #region Acciones
+        public ActionResult Nuevo(int IdEmpresa = 0 )
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             cxc_cobro_tipo_Info model = new cxc_cobro_tipo_Info
             {
                 IdEmpresa = IdEmpresa
@@ -79,9 +90,8 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(string IdCobro_tipo = "")
+        public ActionResult Modificar(int IdEmpresa = 0 , string IdCobro_tipo = "")
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             cxc_cobro_tipo_Info model = bus_tipocobro.get_info(IdCobro_tipo);
             if (model == null)
                 return RedirectToAction("Index");
@@ -121,6 +131,10 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
+
+        #region Detalle
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial_tipo_param(string IdCobro_tipo = "")
@@ -176,6 +190,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_tipo_param", model);
         }
+        #endregion
     }
 
     public class tipo_param_det_List
