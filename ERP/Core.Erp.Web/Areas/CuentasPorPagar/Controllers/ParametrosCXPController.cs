@@ -36,12 +36,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             ViewBag.lst_cuenta_contable = bus_pla_cuenta.get_list(IdEmpresa, false,true);
         }
        
-        public ActionResult Modificar(int IdEmpresa = 0)
+        public ActionResult Modificar()
         {
-            cargar_combos(IdEmpresa);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             cp_parametros_Info model = bus_parametros.get_info(IdEmpresa);
             if (model == null)
                 return RedirectToAction("Index");
+            cargar_combos(IdEmpresa);
+
             return View(model);
         }
         [HttpPost]

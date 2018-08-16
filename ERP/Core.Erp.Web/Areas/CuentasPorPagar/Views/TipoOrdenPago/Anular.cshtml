@@ -11,7 +11,7 @@
 @using (Html.BeginForm("Anular", "TipoOrdenPago", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdTipo_op)
-
+    @Html.HiddenFor(q => q.IdEmpresa)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">

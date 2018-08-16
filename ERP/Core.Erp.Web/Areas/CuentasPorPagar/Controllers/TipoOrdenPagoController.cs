@@ -1,44 +1,64 @@
-﻿using DevExpress.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Core.Erp.Info.CuentasPorPagar;
+﻿using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.CuentasPorPagar;
-using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Info.CuentasPorPagar;
+using Core.Erp.Web.Helps;
+using System;
+using System.Web.Mvc;
+
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
     public class TipoOrdenPagoController : Controller
     {
-
-
+        #region Variables
         cp_orden_pago_tipo_x_empresa_Bus bus_tipo_op = new cp_orden_pago_tipo_x_empresa_Bus();
         ct_plancta_Bus bus_pla_cuenta = new ct_plancta_Bus();
         ct_cbtecble_tipo_Bus bus_tipo_comprobante = new ct_cbtecble_tipo_Bus();
         cp_orden_pago_estado_aprob_Bus bus_estado_op = new cp_orden_pago_estado_aprob_Bus();
-        int IdEmpresa = 0;
+
+        #endregion
+
+        #region Index
         public ActionResult Index()
         {
             return View();
         }
 
-      
-        public ActionResult Nuevo()
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_tipo_orden_pago()
         {
-            cargar_combos();
-            cp_orden_pago_tipo_x_empresa_Info model = new cp_orden_pago_tipo_x_empresa_Info();
+            bus_tipo_op = new cp_orden_pago_tipo_x_empresa_Bus();
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var model = bus_tipo_op.get_list(IdEmpresa);
+            return PartialView("_GridViewPartial_tipo_orden_pago", model);
+        }
+        private void cargar_combos(int IdEmpresa)
+        {
+            ViewBag.lst_tipo_comprobante = bus_tipo_comprobante.get_list(IdEmpresa, false);
+            ViewBag.lst_cuenta_contable = bus_pla_cuenta.get_list(IdEmpresa, false, true);
+            ViewBag.lst_estado = bus_estado_op.get_list();
+        }
+
+
+        #endregion
+
+        #region Acciones
+        public ActionResult Nuevo(int IdEmpresa = 0 )
+        {
+            cargar_combos(IdEmpresa);
+            cp_orden_pago_tipo_x_empresa_Info model = new cp_orden_pago_tipo_x_empresa_Info
+            {
+                IdEmpresa = IdEmpresa
+            };
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Nuevo(cp_orden_pago_tipo_x_empresa_Info model)
         {
-            IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdEmpresa = IdEmpresa;
+            model.IdEmpresa = model.IdEmpresa;
             if (bus_tipo_op.si_existe(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
 
                 ViewBag.mensaje = "El código ya se encuentra registrado";
                 return View(model);
@@ -46,17 +66,16 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             if (!bus_tipo_op.guardarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
 
                 return View(model);
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(string IdTipo_op = "")
+        public ActionResult Modificar(int IdEmpresa = 0, string IdTipo_op = "")
         {
-            IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             cp_orden_pago_tipo_x_empresa_Info model = bus_tipo_op.get_info(IdEmpresa, IdTipo_op);
             if (model == null)
             {
@@ -70,17 +89,16 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             if (!bus_tipo_op.modificarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult Anular(string IdTipo_op = "")
+        public ActionResult Anular(int IdEmpresa = 0 , string IdTipo_op = "")
         {
-            IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
 
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             cp_orden_pago_tipo_x_empresa_Info model = bus_tipo_op.get_info(IdEmpresa, IdTipo_op);
             if (model == null)
             {
@@ -94,30 +112,15 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             if (!bus_tipo_op.anularDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
 
                 return View(model);
             }
             return RedirectToAction("Index");
         }
 
-        private void cargar_combos()
-        {
-            IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            ViewBag.lst_tipo_comprobante = bus_tipo_comprobante.get_list(IdEmpresa, false);
-            ViewBag.lst_cuenta_contable = bus_pla_cuenta.get_list(IdEmpresa, false, true);
-            ViewBag.lst_estado = bus_estado_op.get_list();
-        }
+        #endregion
 
-
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_tipo_orden_pago()
-        {
-            bus_tipo_op = new cp_orden_pago_tipo_x_empresa_Bus();
-            IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<cp_orden_pago_tipo_x_empresa_Info> model = new List<cp_orden_pago_tipo_x_empresa_Info>();
-            model = bus_tipo_op.get_list(IdEmpresa);
-            return PartialView("_GridViewPartial_tipo_orden_pago", model);
-        }
+        
     }
 }

@@ -11,13 +11,14 @@
 @using (Html.BeginForm("Modificar", "TipoOrdenPago", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdTipo_op)
+    @Html.HiddenFor(q => q.IdEmpresa)
 
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="codigoSRI">Código*</label>
-                    @Html.TextBoxFor(q => q.IdTipo_op, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.IdTipo_op, new { @class = "form-control", @disabled= "disabled" })
                     @Html.ValidationMessageFor(m => m.IdTipo_op, "", new { @class = "text-danger" })
                 </div>
             </div>
