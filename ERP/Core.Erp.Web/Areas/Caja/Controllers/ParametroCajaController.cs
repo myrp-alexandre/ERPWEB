@@ -1,6 +1,7 @@
 ﻿using Core.Erp.Bus.Caja;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.Caja;
+using Core.Erp.Web.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,9 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
         #region Index
 
-        public ActionResult Index(int IdEmpresa =0 )
+        public ActionResult Index()
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             caj_parametro_Info model = bus_parametro.get_info(IdEmpresa);
             if (model == null)
                 model = new caj_parametro_Info();

@@ -29,7 +29,6 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
-               
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
             cargar_combos(IdEmpresa);
@@ -96,8 +95,10 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         #endregion
 
         #region Aplicar retención
-        public ActionResult AplicarRetencion(int IdEmpresa = 0 ,int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0, string CodTipoDocumento = "")
+        public ActionResult AplicarRetencion(int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0, string CodTipoDocumento = "")
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
             cxc_cobro_Info model = bus_cobro.get_info_para_retencion(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, CodTipoDocumento);
             if (model == null)            
                 return RedirectToAction("Index");            

@@ -3,6 +3,8 @@ using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.CuentasPorCobrar;
 using Core.Erp.Bus.Facturacion;
 using Core.Erp.Info.CuentasPorCobrar;
+using Core.Erp.Web.Helps;
+using System;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
@@ -19,8 +21,9 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         #endregion
 
         #region Index
-        public ActionResult Index(int IdEmpresa = 0 )
+        public ActionResult Index( )
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             cxc_Parametro_Info model = bus_parametro.get_info(IdEmpresa);
             if (model == null)
                 model = new cxc_Parametro_Info { IdEmpresa = IdEmpresa };
