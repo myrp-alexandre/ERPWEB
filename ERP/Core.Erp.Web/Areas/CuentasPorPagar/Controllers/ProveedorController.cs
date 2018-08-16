@@ -16,13 +16,16 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
     public class ProveedorController : Controller
     {
-
-
-
+        #region Variables
         cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
+        tb_Catalogo_Bus bus_catalogo = new tb_Catalogo_Bus();
+        ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
+        tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
+        cp_codigo_SRI_Bus bus_codigo = new cp_codigo_SRI_Bus();
+        cp_proveedor_clase_Bus bus_clase = new cp_proveedor_clase_Bus();
+        #endregion
 
-
-  
+        #region Index
         public ActionResult Index()
         {
             return View();
@@ -31,16 +34,17 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_proveedor()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<cp_proveedor_Info> model = new List<cp_proveedor_Info>();
-            model = bus_proveedor.get_list(IdEmpresa, true);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var model = bus_proveedor.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_proveedor", model);
         }
 
-        private void cargar_combos(string IdTipoSRI = "")
+        #endregion
+
+        #region Metodos
+
+        private void cargar_combos(int IdEmpresa, string IdTipoSRI = "")
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            tb_Catalogo_Bus bus_catalogo = new tb_Catalogo_Bus();
             var lst_tipo_cta = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIP_CTA_AC), false);
             ViewBag.lst_tipo_cta = lst_tipo_cta;
             var lst_tipo_doc = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPODOC), false);
@@ -48,30 +52,30 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_tipo_naturaleza = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPONATPER), false);
             ViewBag.lst_tipo_naturaleza = lst_tipo_naturaleza;
 
-            ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
+            
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
 
-            tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
             var lst_ciudad = bus_ciudad.get_list("",false);
             ViewBag.lst_ciudad = lst_ciudad;
 
-            cp_codigo_SRI_Bus bus_codigo = new cp_codigo_SRI_Bus();
             var lst_codigo = bus_codigo.get_list(IdTipoSRI, false);
             ViewBag.lst_codigo = lst_codigo;
 
-            cp_proveedor_clase_Bus bus_clase = new cp_proveedor_clase_Bus();
             var lst_clase = bus_clase.get_list(IdEmpresa, false);
             ViewBag.lst_clase = lst_clase;
 
 
         }
+        #endregion
 
-        public ActionResult Nuevo()
+        #region Acciones
+
+        public ActionResult Nuevo(int IdEmpresa = 0 )
         {
             cp_proveedor_Info model = new cp_proveedor_Info
             {
-                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
+                IdEmpresa = IdEmpresa,
                 IdClaseProveedor = 1,
                 info_persona = new Info.General.tb_persona_Info
                 {
@@ -79,7 +83,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     IdTipoDocumento = "CED"
                 }
             };
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -89,40 +93,38 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.IdUsuario = Session["IdUsuario"].ToString();
             if (!bus_proveedor.guardarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(decimal IdProveedor = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 , decimal IdProveedor = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             cp_proveedor_Info model = bus_proveedor.get_info(IdEmpresa, IdProveedor);
             if (model == null)
                 return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Modificar(cp_proveedor_Info model)
         {
-            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario.ToString();
             if(!bus_proveedor.modificarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(decimal IdProveedor = 0)
+        public ActionResult Anular(int IdEmpresa = 0 , decimal IdProveedor = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             cp_proveedor_Info model = bus_proveedor.get_info(IdEmpresa, IdProveedor);
             if (model == null)
                 return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -132,21 +134,21 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
             if (!bus_proveedor.anularDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
+        #endregion
+
         #region json
-        public JsonResult get_info_x_num_cedula(string pe_cedulaRuc = "")
+        public JsonResult get_info_x_num_cedula(int IdEmpresa = 0 , string pe_cedulaRuc = "")
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             var resultado = bus_proveedor.get_info_x_num_cedula(IdEmpresa, pe_cedulaRuc);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult get_info_clase_proveedor(int IdClaseProveedor = 0)
+        public JsonResult get_info_clase_proveedor(int IdEmpresa = 0 , int IdClaseProveedor = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             cp_proveedor_clase_Bus bus_clase = new cp_proveedor_clase_Bus();
             cp_proveedor_clase_Info resultado = bus_clase.get_info(IdEmpresa, IdClaseProveedor);
             if (resultado == null)
@@ -154,9 +156,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult get_info(decimal IdProveedor)
+        public JsonResult get_info(int IdEmpresa = 0 , decimal IdProveedor = 0 )
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             var resultado = bus_proveedor.get_info(IdEmpresa, IdProveedor);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }

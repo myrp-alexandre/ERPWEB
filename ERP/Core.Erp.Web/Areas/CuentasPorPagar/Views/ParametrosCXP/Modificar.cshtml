@@ -20,9 +20,7 @@
 }
 @using (Html.BeginForm("Modificar", "ParametrosCXP", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-
-
-
+    @Html.HiddenFor(q=>q.IdEmpresa)
     <div class="row">
         <div class="container-fluid">
 

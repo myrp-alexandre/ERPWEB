@@ -60,8 +60,8 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "pr_estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdProveedor = DataBinder.Eval(tc.DataItem, "IdProveedor") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdProveedor = DataBinder.Eval(tc.DataItem, "IdProveedor") },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"),  IdProveedor = DataBinder.Eval(tc.DataItem, "IdProveedor") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdProveedor = DataBinder.Eval(tc.DataItem, "IdProveedor") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -69,14 +69,14 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        
+
         settings.Columns.Add("IdProveedor", "Código").Width = Unit.Percentage(10);
         settings.Columns.Add("info_persona.pe_cedulaRuc", "Cédula/Ruc").Width = Unit.Percentage(20);
         settings.Columns.Add("descripcion_clas_prove", "Clase proveedor").Width = Unit.Percentage(30);

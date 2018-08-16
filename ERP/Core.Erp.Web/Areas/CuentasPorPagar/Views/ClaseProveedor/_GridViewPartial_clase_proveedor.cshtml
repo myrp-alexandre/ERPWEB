@@ -59,8 +59,8 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdClaseProveedor = DataBinder.Eval(tc.DataItem, "IdClaseProveedor") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdClaseProveedor = DataBinder.Eval(tc.DataItem, "IdClaseProveedor") },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdClaseProveedor = DataBinder.Eval(tc.DataItem, "IdClaseProveedor") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdClaseProveedor = DataBinder.Eval(tc.DataItem, "IdClaseProveedor") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -68,14 +68,14 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        
+
         settings.Columns.Add("cod_clase_proveedor", "Código").Width = Unit.Percentage(20);
         settings.Columns.Add("descripcion_clas_prove", "Descripción").Width = Unit.Percentage(60);
         settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(20);

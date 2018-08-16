@@ -18,6 +18,8 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 {
     public class CobranzaController : Controller
     {
+        #region Variables
+
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         cxc_cobro_Bus bus_cobro = new cxc_cobro_Bus();
         caj_Caja_Bus bus_caja = new caj_Caja_Bus();
@@ -29,6 +31,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         cxc_cobro_det_Bus bus_det = new cxc_cobro_det_Bus();
         cxc_cobro_det_List list_det = new cxc_cobro_det_List();
         string mensaje = string.Empty;
+        #endregion
 
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbCliente_Cobranza()
@@ -46,6 +49,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         }
         #endregion
 
+        #region Index
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info
@@ -62,6 +66,8 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             return View(model);
         }
 
+        #endregion
+
         #region Metodos
         private void cargar_combos_consulta()
         {
@@ -69,9 +75,8 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
         }
-        private void cargar_combos()
+        private void cargar_combos(int IdEmpresa)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
 
@@ -185,9 +190,10 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             return true;
         }
         #endregion
-        public ActionResult Nuevo()
+
+        #region Acciones
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             int IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
             var param_caja = bus_param_caja.get_info(IdEmpresa);
             #region Validar Session
@@ -207,7 +213,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
                 lst_det = new List<cxc_cobro_det_Info>(),
             };
             list_det.set_list(new List<cxc_cobro_det_Info>(), model.IdTransaccionSession);
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -217,23 +223,22 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             if (!validar(model,ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_cobro.guardarDB(model))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
 
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdSucursal = 0, decimal IdCobro = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 , int IdSucursal = 0, decimal IdCobro = 0)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
@@ -247,7 +252,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdCobro);
             list_det.set_list(model.lst_det, model.IdTransaccionSession);
             model.IdEntidad = model.IdCliente;
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -258,23 +263,22 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_cobro.modificarDB(model))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
 
             return RedirectToAction("Index");
         }
 
-        public ActionResult Anular(int IdSucursal = 0, decimal IdCobro = 0)
+        public ActionResult Anular(int IdEmpresa = 0 , int IdSucursal = 0, decimal IdCobro = 0)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
@@ -288,7 +292,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdCobro);
             list_det.set_list(model.lst_det, model.IdTransaccionSession);
             model.IdEntidad = model.IdCliente;
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -299,12 +303,14 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             if (!bus_cobro.anularDB(model))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
 
             return RedirectToAction("Index");
         }
+
+        #endregion
 
         #region Grids
         [ValidateInput(false)]

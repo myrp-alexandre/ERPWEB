@@ -10,7 +10,7 @@
 
 @using (Html.BeginForm("Modificar", "Proveedor", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdProveedor)
     @Html.HiddenFor(q => q.IdPersona)
 
@@ -465,7 +465,9 @@
             }
 
         var datos = {
-            pe_cedulaRuc: cedula
+            pe_cedulaRuc: cedula,
+            IdEmpresa: $("#IdEmpresa").val()
+
         }
         $.ajax({
             type: 'POST',
@@ -526,7 +528,9 @@
 
         if (clase != null) {
             var datos = {
-                IdClaseProveedor: clase
+                IdClaseProveedor: clase,
+                IdEmpresa: $("#IdEmpresa").val()
+
             }
             $.ajax({
                 type: 'POST',
