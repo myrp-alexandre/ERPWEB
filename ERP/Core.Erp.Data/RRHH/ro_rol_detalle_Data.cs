@@ -50,7 +50,9 @@ namespace Core.Erp.Data.RRHH
                                      IdDivision = b.IdDivision,
                                      IdArea = b.IdArea,
                                      IdDepartamento = b.IdDepartamento,
-                                     IdCargo = b.IdCargo
+                                     IdCargo = b.IdCargo,
+                                     ru_tipo=c.ru_tipo
+                                     
                                  }).ToList();
                 }
                 return oListado;

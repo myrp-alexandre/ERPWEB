@@ -234,7 +234,7 @@ namespace Core.Erp.Bus.RRHH
                         valorTotal = valorTotal * -1;
                     if (valorTotal > 0)
                     {
-                        if (item.IdRubro == "1035")
+                        if (item.IdRubro == "1051")
                         {
 
                         }
@@ -242,17 +242,16 @@ namespace Core.Erp.Bus.RRHH
                         ct_cbtecble_det_Info oct_cbtecble_det_Info = new ct_cbtecble_det_Info();
                         oct_cbtecble_det_Info.secuencia = secuecia;
                         oct_cbtecble_det_Info.IdEmpresa = idEmpresa;
-                        oct_cbtecble_det_Info.IdTipoCbte = 1;
                         oct_cbtecble_det_Info.IdCtaCble = item.IdCtaCble;
                         oct_cbtecble_det_Info.IdCentroCosto = item.IdCentroCosto;
-                        if (item.DebCre == "C")
+                        if (item.ru_tipo == "E")
                         {
                             egreso = egreso + valorTotal;
                             oct_cbtecble_det_Info.dc_Valor_haber = valorTotal;
                             valorTotal = valorTotal * -1;
 
                         }
-                        else if (item.DebCre == "D")
+                        else 
                         {
                             ingreso = ingreso + valorTotal;
                             oct_cbtecble_det_Info.dc_Valor_debe = valorTotal;
@@ -270,7 +269,6 @@ namespace Core.Erp.Bus.RRHH
                 ct_cbtecble_det_Info oct_cbtecble_det_Info2 = new ct_cbtecble_det_Info();
                 oct_cbtecble_det_Info2.secuencia = secuecia;
                 oct_cbtecble_det_Info2.IdEmpresa = idEmpresa;
-                oct_cbtecble_det_Info2.IdTipoCbte =1; //DIARIO CONTABLE                                
                 oct_cbtecble_det_Info2.IdCtaCble = info_cta_sueldo_x_pagar.IdCtaCble;
                 oct_cbtecble_det_Info2.dc_Valor = valorSueldoXPagar * -1;
                 oct_cbtecble_det_Info2.dc_Valor_haber = valorSueldoXPagar ;
