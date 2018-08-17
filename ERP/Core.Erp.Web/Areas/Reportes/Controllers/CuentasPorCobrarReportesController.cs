@@ -42,6 +42,34 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.lst_cliente = lst_cliente;
 
         }
+
+        private void cargar_cliente_contacto(cl_filtros_Info model)
+        {
+            
+            fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
+            var lst_cliente = bus_cliente.get_list(model.IdEmpresa, false);
+            ViewBag.lst_cliente = lst_cliente;
+
+            fa_cliente_contactos_Bus bus_contacto = new fa_cliente_contactos_Bus();
+            var lst_contacto = bus_contacto.get_list(model.IdEmpresa, model.IdCliente );
+            lst_contacto.Add(new Info.Facturacion.fa_cliente_contactos_Info
+            {
+                IdContacto = 0,
+                Nombres = "Todos"
+            });
+            ViewBag.lst_contacto = lst_contacto;
+        }
+        public JsonResult cargar_cliente(int IdEmpresa = 0 , decimal IdCliente = 0)
+        {
+            fa_cliente_contactos_Bus bus_contacto = new fa_cliente_contactos_Bus();
+            var resultado = bus_contacto.get_list(IdEmpresa, IdCliente);
+            resultado.Add(new Info.Facturacion.fa_cliente_contactos_Info
+            {
+                IdContacto = 0,
+                Nombres = "Todos"
+            });
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult CXC_001(int IdSucursal = 0, decimal IdCobro = 0)
         {
             CXC_001_Rpt model = new CXC_001_Rpt();
@@ -109,7 +137,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
             };
-            cargar_combos();
+            cargar_cliente_contacto(model);
             CXC_004_Rpt report = new CXC_004_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             report.p_IdCliente.Value = model.IdCliente;
@@ -132,7 +160,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_fecha_corte.Value = model.fecha_corte;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa;
-            cargar_combos();
+            cargar_cliente_contacto(model);
             ViewBag.Report = report;
 
             return View(model);
