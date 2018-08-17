@@ -45,6 +45,7 @@ namespace Core.Erp.Data.Caja
         {
             try
             {
+                Fecha_fin = Fecha_fin.Date;
                 List<cp_conciliacion_Caja_det_Ing_Caja_Info> Lista;
 
                 using (Entities_caja Context = new Entities_caja())
