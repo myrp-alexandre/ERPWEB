@@ -26,7 +26,7 @@ namespace Core.Erp.Web.Reportes.Inventario
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
             int IdBodega = p_IdBodega.Value == null ? 0 : Convert.ToInt32(p_IdBodega.Value);
-            int IdProducto = p_IdProducto.Value == null ? 0 : Convert.ToInt32(p_IdProducto.Value);
+            decimal IdProducto = string.IsNullOrEmpty(p_IdProducto.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdProducto.Value);
             string IdCategoria = p_IdCategoria.Value == null ? "" : Convert.ToString(p_IdCategoria.Value);
             int IdLinea = p_IdLinea.Value == null ? 0 : Convert.ToInt32(p_IdLinea.Value);
             int IdGrupo = p_IdGrupo.Value == null ? 0 : Convert.ToInt32(p_IdGrupo.Value);

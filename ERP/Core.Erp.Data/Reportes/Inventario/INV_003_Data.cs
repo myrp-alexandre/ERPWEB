@@ -24,7 +24,7 @@ namespace Core.Erp.Data.Reportes.Inventario
                 List<INV_003_Info> Lista=null;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
-                    /*
+                    
                     Lista = (from q in Context.SPINV_003(IdEmpresa, IdSucursal_ini, IdSucursal_fin, IdBodega_ini, IdBodega_fin, IdProducto_ini, IdProducto_fin, IdCategoria, IdLinea, IdGrupo, IdSubgrupo, fecha_corte, mostrar_stock_0)
                              select new INV_003_Info
                              {
@@ -53,7 +53,7 @@ namespace Core.Erp.Data.Reportes.Inventario
                                  nom_presentacion = q.nom_presentacion
                                  
                              }).ToList();
-                             */
+                             
                 }
                 
                 return Lista;

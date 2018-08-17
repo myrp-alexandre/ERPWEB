@@ -10,6 +10,8 @@ namespace Core.Erp.Info.Helps
 {
     public class cl_filtros_Info
     {
+        public int IdEmpresa { get; set; }
+
         [Required(ErrorMessage = "El campo fecha inicio es obligatorio")]
         [DataType(DataType.Date, ErrorMessage = "El campo fecha inicio debe ser una fecha en formato dd/MM/yyyy")]
         public DateTime fecha_ini { get; set; }

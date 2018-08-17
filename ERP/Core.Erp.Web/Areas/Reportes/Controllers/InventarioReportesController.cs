@@ -66,50 +66,37 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-        public ActionResult INV_003(DateTime? fecha_corte, int IdSucursal= 0,int IdBodega= 0,decimal IdProducto =0,string IdCategoria ="",int IdLinea =0,int IdGrupo =0,int IdSubgrupo =0, bool mostrar_stock_0 = false)
+        public ActionResult INV_003()
         {
 
-            cl_filtros_Info model = new cl_filtros_Info
-            {
-                IdSucursal = IdSucursal,
-                IdBodega = IdBodega,
-                IdProducto = IdProducto,
-                IdCategoria = IdCategoria,
-                IdLinea = IdLinea,
-                IdGrupo = IdGrupo,
-                IdSubGrupo =IdSubgrupo,
-                fecha_fin = fecha_corte == null ? DateTime.Now : Convert.ToDateTime(fecha_corte),
-                mostrar_registros_0 = mostrar_stock_0
-            };
+            cl_filtros_Info model = new cl_filtros_Info { IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)};
 
             cargar_combos(model);
             INV_003_Rpt report = new INV_003_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdBodega.Value = model.IdBodega;
+            report.p_IdProducto.Value = model.IdProducto;
             report.p_IdCategoria.Value = model.IdCategoria;
             report.p_IdLinea.Value = model.IdLinea;
             report.p_IdGrupo.Value = model.IdGrupo;
             report.p_IdSubgrupo.Value = model.IdSubGrupo;
             report.p_fecha_corte.Value = model.fecha_fin;
             report.p_mostrar_stock_0.Value = model.mostrar_registros_0;
-            report.p_IdProducto.Value = model.IdProducto;
-            report.usuario = Session["IdUsuario"].ToString();
-            report.empresa = Session["nom_empresa"].ToString();
-
-            if (IdProducto == 0)
-                report.RequestParameters = false;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+            
             ViewBag.Report = report;
             return View(model);
         }
         [HttpPost]
         public ActionResult INV_003(cl_filtros_Info model)
         {
-
             INV_003_Rpt report = new INV_003_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdBodega.Value = model.IdBodega;
+            report.p_IdProducto.Value = model.IdProducto;
             report.p_IdCategoria.Value = model.IdCategoria;
             report.p_IdLinea.Value = model.IdLinea;
             report.p_IdGrupo.Value = model.IdGrupo;
@@ -118,11 +105,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_mostrar_stock_0.Value = model.mostrar_registros_0;
             cargar_combos(model);
 
-            report.usuario = Session["IdUsuario"].ToString();
-            report.empresa = Session["nom_empresa"].ToString();
-
-            if (model.IdProducto == 0)
-                report.RequestParameters = false;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+            
             ViewBag.Report = report;
             return View(model);
         }
@@ -385,35 +370,31 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         #region json
 
-        public JsonResult cargar_bodega(int IdSucursal = 0)
+        public JsonResult cargar_bodega(int IdEmpresa= 0 , int IdSucursal = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
             var resultado = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult cargar_lineas(string IdCategoria = "")
+        public JsonResult cargar_lineas(int IdEmpresa = 0, string IdCategoria = "")
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_linea_Bus bus_linea = new in_linea_Bus();
             var resultado = bus_linea.get_list(IdEmpresa, IdCategoria, false);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult cargar_grupos(string IdCategoria = "", int IdLinea = 0)
+        public JsonResult cargar_grupos(int IdEmpresa = 0, string IdCategoria = "", int IdLinea = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_grupo_Bus bus_grupo = new in_grupo_Bus();
             var resultado = bus_grupo.get_list(IdEmpresa, IdCategoria, IdLinea, false);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult cargar_subgrupos(string IdCategoria = "", int IdLinea = 0, int IdGrupo = 0)
+        public JsonResult cargar_subgrupos(int IdEmpresa = 0, string IdCategoria = "", int IdLinea = 0, int IdGrupo = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_subgrupo_Bus bus_subgrupo = new in_subgrupo_Bus();
             var resultado = bus_subgrupo.get_list(IdEmpresa, IdCategoria, IdLinea, IdGrupo, false);
 
