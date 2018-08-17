@@ -70,7 +70,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo","Index2", "Deudas", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
+                    Html.ActionLink("Nuevo","Index2", "Deudas").ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;

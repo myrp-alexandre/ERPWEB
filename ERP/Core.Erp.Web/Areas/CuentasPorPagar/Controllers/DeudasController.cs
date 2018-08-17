@@ -78,7 +78,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_deudas_sin_ret()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa =Convert.ToInt32( SessionFixed.IdEmpresa);
             List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
             model = bus_orden_giro.get_lst_sin_ret(IdEmpresa, DateTime.Now, DateTime.Now);
             return PartialView("_GridViewPartial_deudas_sin_ret", model);
