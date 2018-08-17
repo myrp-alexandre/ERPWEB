@@ -102,5 +102,41 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
+
+        public ActionResult CXC_004()
+        {
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+            };
+            cargar_combos();
+            CXC_004_Rpt report = new CXC_004_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            report.p_IdCliente.Value = model.IdCliente;
+            report.p_IdContacto.Value = model.IdContacto;
+            report.p_fecha_corte.Value = model.fecha_corte;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult CXC_004(cl_filtros_Info model)
+        {
+            CXC_004_Rpt report = new CXC_004_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            report.p_IdCliente.Value = model.IdCliente;
+            report.p_IdContacto.Value = model.IdContacto;
+            report.p_fecha_corte.Value = model.fecha_corte;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa;
+            cargar_combos();
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+
     }
 }
