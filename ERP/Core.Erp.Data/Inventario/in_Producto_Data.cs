@@ -516,7 +516,7 @@ namespace Core.Erp.Data.Inventario
         public List<in_Producto_Info> get_list_nombre_combo(List<in_Producto_Info> Lista)
         {
             Lista.ForEach(V => {
-                V.pr_descripcion = V.pr_descripcion + " " + V.nom_presentacion + " - " + V.lote_num_lote + " - " + (V.lote_fecha_vcto != null ? Convert.ToDateTime(V.lote_fecha_vcto).ToString("dd/MM/yyyy") : "");
+                V.pr_descripcion = V.pr_descripcion + " " + V.nom_presentacion + " - " + V.lote_num_lote + " - " + (V.lote_fecha_vcto != null ? Convert.ToDateTime(V.lote_fecha_vcto).ToString("dd/MM/yyyy") : " - "+ V.ca_descripcion);
                 V.pr_descripcion_combo = V.pr_descripcion;
             });
             return Lista;
@@ -916,6 +916,27 @@ namespace Core.Erp.Data.Inventario
         }
 
         #endregion
+
+        public bool validar_anulacion(int IdEmpresa, decimal IdProducto, ref string mensaje)
+        {
+            try
+            {
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    var prod = Context.spin_Producto_validar_anulacion(IdEmpresa, IdProducto);
+                    foreach (var item in prod)
+                    {
+                        mensaje = item;
+                    }
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
     }
 }

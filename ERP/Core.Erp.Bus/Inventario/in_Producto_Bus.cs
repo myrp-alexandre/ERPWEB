@@ -23,6 +23,19 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
+
+        public bool validar_anulacion(int IdEmpresa, decimal IdProducto, ref string mensaje)
+        {
+            try
+            {
+                return odata.validar_anulacion(IdEmpresa, IdProducto, ref mensaje);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<in_Producto_Info> get_list_stock_lotes(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdProducto_padre)
         {
             try

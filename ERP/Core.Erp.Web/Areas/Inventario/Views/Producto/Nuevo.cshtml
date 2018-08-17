@@ -1,10 +1,10 @@
 ﻿@model Core.Erp.Info.Inventario.in_Producto_Info
 @{
     ViewBag.Title = "Nuevo producto";
-    //if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
-    //{
-    //    Response.Redirect("~/Account/Login");
-    //}
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -12,6 +12,15 @@
 @using (Html.BeginForm("Nuevo", "Producto", FormMethod.Post, new { @class = "form", @rolw = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+
+    }
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
@@ -111,7 +120,7 @@
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
                 <a href="#tab_general" aria-controls="general" role="tab" data-toggle="tab" id="link_general">Datos generales</a>
-            </li>            
+            </li>
             <li hidden>
                 <a href="#tab_lote" aria-controls="lote" role="tab" data-toggle="tab" id="link_lote">Lote</a>
             </li>
@@ -394,8 +403,8 @@
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_imagen">
                 <div class="row">
-                   
-                   
+
+
                     @Html.DevExpress().BinaryImage(
                     settings =>
                     {
@@ -403,17 +412,17 @@
                         settings.CallbackRouteValues = new { Controller = "Producto", Action = "get_imagen" };
                     }).Bind((Model.pr_imagen).ToArray()).GetHtml()
 
-                   
-                        @Html.DevExpress().UploadControl(settings =>
-                   {
-                     
-                       settings.Name = "UploadControl";
-                       settings.CallbackRouteValues = new { Controller = "Producto", Action = "UploadControlUpload" };
-                       settings.ShowUploadButton = true;
-                       settings.ShowProgressPanel = true;
-                   }).GetHtml()
-                    
-                </div>                
+
+                    @Html.DevExpress().UploadControl(settings =>
+               {
+
+                   settings.Name = "UploadControl";
+                   settings.CallbackRouteValues = new { Controller = "Producto", Action = "UploadControlUpload" };
+                   settings.ShowUploadButton = true;
+                   settings.ShowProgressPanel = true;
+               }).GetHtml()
+
+                </div>
             </div>
         </div>
     </div>
@@ -508,7 +517,7 @@
             $("#IdGrupo").empty();
             $("#IdSubGrupo").empty();
 
-            var categoria = $("#IdCategoria").val();           
+            var categoria = $("#IdCategoria").val();
 
             var datos = {
                 IdCategoria: categoria
@@ -821,13 +830,13 @@
         if (ID > 0) {
             $("#link_imagen").hide();
             $("#link_general").click();
-           
+
         } else {
             $("#link_imagen").show();
             $("#link_general").click();
         }
     }
-    
+
     function set_camp_modulo() {
         var ID = IdProducto_padre.GetValue();
         if (ID > 0) {
@@ -891,6 +900,7 @@
                         $("#precio_5").val(data.precio_5);
                         $("#signo_5").val(data.signo_5);
                         $("#porcentaje_5").val(data.porcentaje_5);
+                        get_info_producto_tipo();
                     }
                 },
                 error: function (error) {

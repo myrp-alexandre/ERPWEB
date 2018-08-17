@@ -27,6 +27,7 @@ namespace Core.Erp.Data.Caja
                              orderby q.IdConciliacion_Caja descending
                              select new cp_conciliacion_Caja_Info
                              {
+                                 IdEmpresa = q.IdEmpresa,
                                  IdConciliacion_Caja = q.IdConciliacion_Caja,
                                  Observacion = q.Observacion,
                                  Fecha = q.Fecha,

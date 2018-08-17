@@ -10,10 +10,18 @@
 
 @using (Html.BeginForm("Modificar", "Producto", FormMethod.Post, new { @class = "form", @rolw = "form" }))
 {
-  
+
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdProducto)
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
 
+    }
     if (Model.pr_imagen == null)
     {
         Model.pr_imagen = new byte[0];
@@ -395,7 +403,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         @Html.Action("GridViewPartial_producto_composicion")
-                    </div>                    
+                    </div>
                 </div>
             </div>
 
@@ -407,16 +415,16 @@
                         settings.CallbackRouteValues = new { Controller = "Producto", Action = "get_imagen" };
                     }).Bind((Model.pr_imagen).ToArray()).GetHtml()
 
-               
-                    @Html.DevExpress().UploadControl(settings =>
-               {
-                   settings.Name = "UploadControl";
-                   settings.CallbackRouteValues = new { Controller = "Producto", Action = "UploadControlUpload" };
-                   settings.ShowUploadButton = true;
-                   settings.ShowProgressPanel = false;
-                   settings.ValidationSettings.Assign(Core.Erp.Web.Areas.Inventario.Controllers.Producto_imagen.UploadValidationSettings);
-               }).GetHtml()
-                
+
+                @Html.DevExpress().UploadControl(settings =>
+           {
+               settings.Name = "UploadControl";
+               settings.CallbackRouteValues = new { Controller = "Producto", Action = "UploadControlUpload" };
+               settings.ShowUploadButton = true;
+               settings.ShowProgressPanel = false;
+               settings.ValidationSettings.Assign(Core.Erp.Web.Areas.Inventario.Controllers.Producto_imagen.UploadValidationSettings);
+           }).GetHtml()
+
 
 
 

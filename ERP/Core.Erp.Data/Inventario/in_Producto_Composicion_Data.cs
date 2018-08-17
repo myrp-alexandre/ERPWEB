@@ -17,7 +17,7 @@ namespace Core.Erp.Data.Inventario
 
                 using (Entities_inventario Context = new Entities_inventario())
                 {
-                    Lista = (from q in Context.in_Producto_Composicion
+                    Lista = (from q in Context.vwin_Producto_Composicion                             
                              where q.IdEmpresa == IdEmpresa
                              && q.IdProductoPadre == IdProducto
                              select new in_Producto_Composicion_Info
@@ -27,10 +27,20 @@ namespace Core.Erp.Data.Inventario
                                  IdProductoHijo = q.IdProductoHijo,
                                  IdUnidadMedida = q.IdUnidadMedida,
                                  Cantidad = q.Cantidad,
+
+                                 ca_Categoria = q.ca_Categoria,
+                                 lote_fecha_fab = q.lote_fecha_fab,
+                                 lote_fecha_vcto = q.lote_fecha_vcto,
+                                 nom_presentacion = q.nom_presentacion,
+                                 lote_num_lote = q.lote_num_lote,
+                                 pr_descripcion = q.pr_descripcion
                              }).ToList();
 
-                    int secuencia = 0;
-                    Lista.ForEach(q => q.secuencia = secuencia++);
+                    int secuencia = 1;
+                    Lista.ForEach(V => {
+                        V.secuencia = secuencia++;
+                        V.pr_descripcion = V.pr_descripcion + " " + V.nom_presentacion + " - " + V.lote_num_lote + " - " + (V.lote_fecha_vcto != null ? Convert.ToDateTime(V.lote_fecha_vcto).ToString("dd/MM/yyyy") : "")+ " - "+V.ca_Categoria;
+                    });
                 }
 
                 return Lista;

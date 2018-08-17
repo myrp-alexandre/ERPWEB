@@ -20,6 +20,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         in_Producto_Composicion_List list_producto_composicion = new in_Producto_Composicion_List();
         in_Producto_Composicion_Bus bus_producto_composicion = new in_Producto_Composicion_Bus();
+        in_ProductoTipo_Bus bus_producto_tipo = new in_ProductoTipo_Bus();
+        private string mensaje;
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -86,6 +88,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             model.IdUsuario = Session["IdUsuario"].ToString();
             model.pr_imagen = Producto_imagen.pr_imagen;
+            if (!validar(model, ref mensaje))
+            {
+                if (model.pr_imagen == null)
+                    model.pr_imagen = new byte[0];
+                cargar_combos(model);
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
             if (!bus_producto.guardarDB(model))
             {
                 if (model.pr_imagen == null)
@@ -113,6 +123,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
             model.pr_imagen = Producto_imagen.pr_imagen;
+            if (!validar(model,ref mensaje))
+            {
+                if (model.pr_imagen == null)
+                    model.pr_imagen = new byte[0];
+                cargar_combos(model);
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }            
             if (!bus_producto.modificarDB(model))
             {
                 if (model.pr_imagen == null)
@@ -147,6 +165,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public ActionResult Anular(in_Producto_Info model)
         {
             model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            if (!bus_producto.validar_anulacion(model.IdEmpresa, model.IdProducto, ref mensaje))
+            {
+                cargar_combos(model);
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
             if (!bus_producto.anularDB(model))
             {
                 cargar_combos(model);
@@ -205,7 +229,27 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #endregion
 
         #region cargar combo
+        private bool validar(in_Producto_Info i_validar, ref string msg)
+        {
+            var tipo = bus_producto_tipo.get_info(i_validar.IdEmpresa, i_validar.IdProductoTipo);
+            if(tipo == null)
+            {
+                msg = "Seleccion el tipo de producto";
+                return false;
+            }
+            if (tipo.tp_es_lote && string.IsNullOrEmpty(i_validar.lote_num_lote) )
+            {
+                msg = "Ingrese el código del lote";
+                return false;
+            }
+            if (tipo.tp_es_lote && i_validar.lote_fecha_vcto == null)
+            {
+                msg = "Ingrese la fecha de vencimiento del lote";
+                return false;
+            }
 
+            return true;
+        }
         private void cargar_combos()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -217,7 +261,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         private void cargar_combos(in_Producto_Info model)
         {
-            in_ProductoTipo_Bus bus_producto_tipo = new in_ProductoTipo_Bus();
+            
             var lst_producto_tipo = bus_producto_tipo.get_list(model.IdEmpresa, false);
             ViewBag.lst_producto_tipo = lst_producto_tipo;
 
@@ -378,6 +422,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
     public class in_Producto_Composicion_List
     {
+        in_Producto_Bus bus_producto = new in_Producto_Bus();
         public List<in_Producto_Composicion_Info> get_list()
         {
             if (HttpContext.Current.Session["in_Producto_Composicion_Info"] == null)
@@ -397,13 +442,19 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public void AddRow(in_Producto_Composicion_Info info_det)
         {
             List<in_Producto_Composicion_Info> list = get_list();
+            
             info_det.secuencia = list.Count == 0 ? 1 : list.Max(q => q.secuencia)+1;
+            info_det.pr_descripcion = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProductoHijo).pr_descripcion_combo;
             list.Add(info_det);
         }
 
         public void UpdateRow(in_Producto_Composicion_Info info_det)
         {
             in_Producto_Composicion_Info edited_info = get_list().Where(m => m.secuencia == info_det.secuencia).First();
+            if (edited_info.IdProductoHijo != info_det.IdProductoHijo)
+            {
+                edited_info.pr_descripcion = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProductoHijo).pr_descripcion_combo;
+            }
             edited_info.IdProductoHijo = info_det.IdProductoHijo;
             edited_info.IdUnidadMedida = info_det.IdUnidadMedida;
             edited_info.Cantidad = info_det.Cantidad;

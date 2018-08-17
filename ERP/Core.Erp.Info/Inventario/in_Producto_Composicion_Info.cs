@@ -22,6 +22,10 @@ namespace Core.Erp.Info.Inventario
         //Campos que no existen en la tabla
         public int secuencia { get; set; }
         public string pr_descripcion { get; set; }
-
+        public string ca_Categoria { get; set; }
+        public DateTime? lote_fecha_fab { get; set; }
+        public DateTime? lote_fecha_vcto { get; set; }
+        public string nom_presentacion { get; set; }
+        public string lote_num_lote { get; set; }
     }
 }

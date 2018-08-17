@@ -64,6 +64,7 @@ namespace Core.Erp.Data
         public virtual DbSet<vwin_devolucion_inven_det> vwin_devolucion_inven_det { get; set; }
         public virtual DbSet<in_ProductoTipo> in_ProductoTipo { get; set; }
         public virtual DbSet<in_Producto> in_Producto { get; set; }
+        public virtual DbSet<vwin_Producto_Composicion> vwin_Producto_Composicion { get; set; }
     
         public virtual int spINV_aprobacion_ing_egr(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idBodega, Nullable<int> idMovi_inven_tipo, Nullable<decimal> idNumMovi)
         {
@@ -113,6 +114,19 @@ namespace Core.Erp.Data
                 new ObjectParameter("Borar", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSys_inv_Reversar_aprobacion_Result>("spSys_inv_Reversar_aprobacion", idEmpresaParameter, idSucursalParameter, idMovi_inven_tipoParameter, idNumMoviParameter, borarParameter);
+        }
+    
+        public virtual ObjectResult<string> spin_Producto_validar_anulacion(Nullable<int> idEmpresa, Nullable<decimal> idProducto)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spin_Producto_validar_anulacion", idEmpresaParameter, idProductoParameter);
         }
     }
 }
