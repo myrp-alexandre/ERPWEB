@@ -29,13 +29,13 @@
     <div class="box-body">
         <div class="row">
             <div class="col-md-12">
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="form-group">
                         <label for="IdCliente">Cliente</label>
                         @Html.Partial("_CmbCliente_CXC", Model)
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="form-group">
                         <label for="IdContacto">Contacto</label>
                         @Html.TextBoxFor(q => q.IdContacto, new { @class = "form-control", @id = "IdContacto" })
