@@ -19,7 +19,7 @@ namespace Core.Erp.Info.General
         [StringLength(3, MinimumLength = 1, ErrorMessage = "el campo punto de emisión debe tener mínimo 1 caracter y máximo 3")]
         public string PuntoEmision { get; set; }
         [Required(ErrorMessage = "El campo número de documento es obligatorio")]
-        [StringLength(3, MinimumLength = 1, ErrorMessage = "el campo número de documento debe tener mínimo 1 caracter y máximo 3")]
+        [StringLength(9, MinimumLength = 1, ErrorMessage = "el campo número de documento debe tener mínimo 1 caracter y máximo 9")]
         public string NumDocumento { get; set; }
         public Nullable<System.DateTime> FechaCaducidad { get; set; }
         public bool Usado { get; set; }
