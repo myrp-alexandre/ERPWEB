@@ -440,7 +440,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
             model.lst_det_ing = list_ing.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_conciliacion_ingresos", model);
+            return PartialView("_GridViewPartial_conciliacion_ingresos", model); 
         }
         public void GetIngresos(DateTime? FechaFin, int IdCaja = 0, decimal IdTransaccionFixed = 0)
         {

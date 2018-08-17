@@ -11,7 +11,7 @@
 @using (Html.BeginForm("INV_003", "InventarioReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q=>q.IdEmpresa, new { @id="IdEmpresa"})
-    <div class="box collapsed-box">
+    <div class="box">
         <div class="box-header with-border">
             <div class="row">
                 <div class="col-md-12">
@@ -140,7 +140,7 @@
 <script>
     $(function () {
         cargar_bodega();
-
+        cargar_lineas();
         $('#fecha_ini').datepicker({
             autoclose: true
         })
@@ -214,6 +214,8 @@
                     $.each(data, function (i, row) {
                         $("#IdLinea").append("<option value=" + row.IdLinea + ">" + row.nom_linea + "</option>");
                     });
+                    $("#IdLinea").val("0");
+                    cargar_grupos();
                 },
                 error: function (error) {
                 }
@@ -244,6 +246,8 @@
                 $.each(data, function (i, row) {
                     $("#IdGrupo").append("<option value=" + row.IdGrupo + ">" + row.nom_grupo + "</option>");
                 });
+                $("#IdGrupo").val("0");
+                cargar_subgrupos();
             },
             error: function (error) {
             }
@@ -274,6 +278,7 @@
                 $.each(data, function (i, row) {
                     $("#IdSubGrupo").append("<option value=" + row.IdSubgrupo + ">" + row.nom_subgrupo + "</option>");
                 });
+                $("#IdSubGrupo").val("0");
             },
             error: function (error) {
             }

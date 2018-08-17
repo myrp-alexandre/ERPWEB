@@ -69,7 +69,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult INV_003()
         {
 
-            cl_filtros_Info model = new cl_filtros_Info { IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)};
+            cl_filtros_Info model = new cl_filtros_Info { IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa), IdCategoria = ""};
 
             cargar_combos(model);
             INV_003_Rpt report = new INV_003_Rpt();
@@ -130,6 +130,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             in_categorias_Bus bus_categoria = new in_categorias_Bus();
             var lst_categoria = bus_categoria.get_list(IdEmpresa, false);
+            lst_categoria.Add(new in_categorias_Info
+            {
+                IdEmpresa = model.IdEmpresa,
+                IdCategoria = "",
+                ca_Categoria = "Todos"
+            });
             ViewBag.lst_categoria = lst_categoria;
 
             in_linea_Bus bus_linea = new in_linea_Bus();
@@ -381,7 +387,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             in_linea_Bus bus_linea = new in_linea_Bus();
             var resultado = bus_linea.get_list(IdEmpresa, IdCategoria, false);
-
+            resultado.Add(new in_linea_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdCategoria = IdCategoria,
+                IdLinea = 0,
+                nom_linea = "Todos"
+            });
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
@@ -389,7 +401,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             in_grupo_Bus bus_grupo = new in_grupo_Bus();
             var resultado = bus_grupo.get_list(IdEmpresa, IdCategoria, IdLinea, false);
-
+            resultado.Add(new in_grupo_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdCategoria = IdCategoria,
+                IdLinea = IdLinea,
+                IdGrupo = 0,
+                nom_grupo = "Todos"
+            });
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
@@ -397,7 +416,15 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             in_subgrupo_Bus bus_subgrupo = new in_subgrupo_Bus();
             var resultado = bus_subgrupo.get_list(IdEmpresa, IdCategoria, IdLinea, IdGrupo, false);
-
+            resultado.Add(new in_subgrupo_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdCategoria = IdCategoria,
+                IdLinea = IdLinea,
+                IdGrupo = IdGrupo,
+                IdSubgrupo = 0,
+                nom_subgrupo = "Todos"
+            });
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
     

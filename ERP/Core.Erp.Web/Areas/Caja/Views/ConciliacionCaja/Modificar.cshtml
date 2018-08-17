@@ -28,7 +28,7 @@
         $("#Fecha_ini").change(function () {
             GetSaldoAnterior();
         });
-        $("#Fecha_ini").change(function () {
+        $("#Fecha_fin").change(function () {
             GetSaldoAnterior();
             GetIngresos();
         });
@@ -193,7 +193,8 @@
     function GetIngresos() {
         var datos = {
             FechaFin: $("#Fecha_fin").val(),
-            IdCaja: $("#IdCaja").val()
+            IdCaja: $("#IdCaja").val(),
+            IdTransaccionFixed: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
