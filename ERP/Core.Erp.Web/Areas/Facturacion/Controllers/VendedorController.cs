@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Bus.Facturacion;
 using Core.Erp.Info.Facturacion;
+using Core.Erp.Web.Helps;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,33 +21,33 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_vendedor()
         {
-
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<fa_Vendedor_Info> model = bus_vendedor.get_list(IdEmpresa, true);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var model = bus_vendedor.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_vendedor", model);
         }
 
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0 )
         {
-            fa_Vendedor_Info model = new fa_Vendedor_Info();
+            fa_Vendedor_Info model = new fa_Vendedor_Info
+            {
+                IdEmpresa = IdEmpresa
+            };
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Nuevo(fa_Vendedor_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdUsuario = SessionFixed.IdUsuario.ToString();
             if (!bus_vendedor.guardarDB(model))
             {
                 return View(model);
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(int IdVendedor = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 , int IdVendedor = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            fa_Vendedor_Info model = bus_vendedor.get_info(Convert.ToInt32(Session["IdEmpresa"]), IdVendedor);
+            fa_Vendedor_Info model = bus_vendedor.get_info(IdEmpresa, IdVendedor);
             if (model == null)
             {
                 return RedirectToAction("Index");
@@ -57,17 +58,16 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Modificar(fa_Vendedor_Info model)
         {
-            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario.ToString();
             if (!bus_vendedor.modificarDB(model))
             {
                 return View(model);
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(int IdVendedor = 0)
+        public ActionResult Anular(int IdEmpresa = 0, int IdVendedor = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            fa_Vendedor_Info model = bus_vendedor.get_info(Convert.ToInt32(Session["IdEmpresa"]), IdVendedor);
+            fa_Vendedor_Info model = bus_vendedor.get_info(IdEmpresa, IdVendedor);
             if (model == null)
             {
                 return RedirectToAction("Index");
@@ -78,7 +78,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Anular(fa_Vendedor_Info model)
         {
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario.ToString();
             if (!bus_vendedor.anularDB(model))
             {
                 return View(model);
