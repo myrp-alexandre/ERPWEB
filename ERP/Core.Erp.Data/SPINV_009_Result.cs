@@ -30,5 +30,7 @@ namespace Core.Erp.Data
         public Nullable<double> dm_cantidad { get; set; }
         public Nullable<double> CostoTotal { get; set; }
         public decimal IdProducto_padre { get; set; }
+        public string Su_Descripcion { get; set; }
+        public string bo_Descripcion { get; set; }
     }
 }

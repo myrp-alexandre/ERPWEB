@@ -47,7 +47,9 @@ namespace Core.Erp.Data.Reportes.Inventario
                                  nom_presentacion = q.nom_presentacion,
                                  precio_1 = q.precio_1,
                                  pr_descripcion = q.pr_descripcion,
-                                 tp_descripcion = q.tp_descripcion
+                                 tp_descripcion = q.tp_descripcion,
+                                 bo_Descripcion = q.bo_Descripcion,
+                                 Su_Descripcion = q.Su_Descripcion
                              }).ToList();
                 }
                 return Lista;
