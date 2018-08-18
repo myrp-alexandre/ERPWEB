@@ -8966,6 +8966,7 @@
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\_CmbCliente_CXC.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_003.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_004.cshtml" />
+    <Content Include="Areas\Reportes\Views\BancoReportes\BAN_007.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -9119,6 +9120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Banco\BAN_006_Rpt.resx">
       <DependentUpon>BAN_006_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Banco\BAN_007_Rpt.resx">
+      <DependentUpon>BAN_007_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Caja\CAJ_001_Rpt.resx">
       <DependentUpon>CAJ_001_Rpt.cs</DependentUpon>

@@ -1,4 +1,5 @@
-﻿using Core.Erp.Web.Reportes.Banco;
+﻿using Core.Erp.Web.Helps;
+using Core.Erp.Web.Reportes.Banco;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,6 +69,18 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_IdTipoCbte.Value = IdTipoCbte;
             model.p_IdCbteCble.Value = IdCbteCble;
+            model.RequestParameters = false;
+            return View(model);
+        }
+
+        public ActionResult BAN_007(int IdTipoCbte = 0, decimal IdCbteCble = 0)
+        {
+            BAN_007_Rpt model = new BAN_007_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.p_IdTipoCbte.Value = IdTipoCbte;
+            model.p_IdCbteCble.Value = IdCbteCble;
+            model.usuario = SessionFixed.IdUsuario.ToString();
+            model.empresa = SessionFixed.NomEmpresa.ToString();
             model.RequestParameters = false;
             return View(model);
         }
