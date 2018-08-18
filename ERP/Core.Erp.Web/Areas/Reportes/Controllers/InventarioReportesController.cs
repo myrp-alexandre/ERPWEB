@@ -36,8 +36,26 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
+
+        #region ProductoPadre
+        public ActionResult CmbProductoPadre_Inventario()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            return PartialView("_CmbProductoPadre_Inventario", model);
+        }
+
+        public List<in_Producto_Info> get_list_ProductoPadre_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.SOLOPADRES, cl_enumeradores.eModulo.INV, 0);
+        }
+        public in_Producto_Info get_info_producto_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
         #endregion
-        
+
+        #endregion
+
 
         public ActionResult INV_001(int IdSucursal =0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
         {
@@ -149,6 +167,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             in_subgrupo_Bus bus_subgrupo = new in_subgrupo_Bus();
             var lst_subgrupo = bus_subgrupo.get_list(IdEmpresa, model.IdCategoria, model.IdLinea, model.IdGrupo, false);
             ViewBag.lst_subgrupo = lst_subgrupo;
+
+            in_Marca_Bus bus_marca = new in_Marca_Bus();
+            var lst_marca = bus_marca.get_list(IdEmpresa, false);
+            ViewBag.lst_marca = lst_marca;
         }
 
         public ActionResult INV_005(DateTime? fecha_ini, DateTime? fecha_fin, int IdEmpresa = 0, int IdSucursal= 0, int IdBodega = 0, int IdProducto= 0, string IdUsuario = "", bool no_mostrar_valores_en_0 = false, bool mostrar_detallado = false )
