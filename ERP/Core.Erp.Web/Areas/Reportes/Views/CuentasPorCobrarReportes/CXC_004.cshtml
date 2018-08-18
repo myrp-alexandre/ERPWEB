@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.Helps.cl_filtros_Info
+﻿@model Core.Erp.Info.Helps.cl_filtros_facturacion_Info
 @{
     Layout = "~/Areas/Reportes/Views/Layout/_Layout_filtros.cshtml";
     ViewBag.Title = "CXC_004";
@@ -37,9 +37,9 @@
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
-                        <label for="IdContacto">Contacto</label>
-                        @Html.DropDownListFor(q => q.IdContacto, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres"), new { @class = "form-control", @id = "IdContacto" })
-                        @Html.ValidationMessageFor(q => q.IdContacto, "", new { @class = "text-danger" })
+                        <label for="IdClienteContacto">Contacto</label>
+                        @Html.DropDownListFor(q => q.IdClienteContacto, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres", Model.IdClienteContacto), new { @class = "form-control", @id = "IdClienteContacto" })
+                        @Html.ValidationMessageFor(q => q.IdClienteContacto, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -95,7 +95,7 @@
             });
 
         function cargar_cliente() {
-                $("#IdContacto").empty();
+            $("#IdClienteContacto").empty();
                 var codigo = IdCliente.GetValue();
 
             var datos = {
@@ -111,8 +111,8 @@
                         contentType: 'application/json; charset=utf-8',
                         success: function (data) {
                             $.each(data, function (i, row) {
-                                $("#IdContacto").append("<option value=" + row.IdContacto + ">" + row.Nombres + "</option>");
-                                $("#IdContacto").val("0");
+                                $("#IdClienteContacto").append("<option value=" + row.IdContacto + ">" + row.Nombres + "</option>");
+                                $("#IdClienteContacto").val("0");
                         });
                     },
                     error: function (error) {

@@ -21,8 +21,6 @@ namespace Core.Erp.Info.Helps
         public bool mostrar_registros_0 { get; set; }
         public string IdCtaCble { get; set; }
         public decimal IdCliente { get; set; }
-        public int IdContacto { get; set; }
-        public DateTime fecha_corte { get; set; }
 
 
         #region Filtros inventario
@@ -96,6 +94,7 @@ namespace Core.Erp.Info.Helps
 
     public class cl_filtros_facturacion_Info
     {
+        public int IdEmpresa { get; set; }
         public DateTime fecha_fin { get; set; }
         public decimal? IdProducto { get; set; }
         public decimal? IdCliente { get; set; }
@@ -107,7 +106,8 @@ namespace Core.Erp.Info.Helps
         public int IdSucursal { get; set; }
         public bool Check1 { get; set; }
         public bool Check2 { get; set; }
-
+        public DateTime fecha_corte { get; set; }
+        public int IdContacto { get; set; }
 
         public decimal IdProforma { get; set; }
         public bool formato_hoja_membretada { get; set; }

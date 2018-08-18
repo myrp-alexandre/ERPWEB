@@ -43,7 +43,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         }
 
-        private void cargar_cliente_contacto(cl_filtros_Info model)
+        private void cargar_cliente_contacto(cl_filtros_facturacion_Info model)
         {
             
             fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
@@ -51,7 +51,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.lst_cliente = lst_cliente;
 
             fa_cliente_contactos_Bus bus_contacto = new fa_cliente_contactos_Bus();
-            var lst_contacto = bus_contacto.get_list(model.IdEmpresa, model.IdCliente );
+            var lst_contacto = bus_contacto.get_list(model.IdEmpresa, model.IdCliente == null ? 0 : Convert.ToDecimal(model.IdCliente));
             lst_contacto.Add(new Info.Facturacion.fa_cliente_contactos_Info
             {
                 IdContacto = 0,
@@ -133,15 +133,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         public ActionResult CXC_004()
         {
-            cl_filtros_Info model = new cl_filtros_Info
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+
             };
             cargar_cliente_contacto(model);
             CXC_004_Rpt report = new CXC_004_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             report.p_IdCliente.Value = model.IdCliente;
-            report.p_IdContacto.Value = model.IdContacto;
+            report.p_IdContacto.Value = model.IdClienteContacto;
             report.p_fecha_corte.Value = model.fecha_corte;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa;
@@ -151,12 +152,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
 
         [HttpPost]
-        public ActionResult CXC_004(cl_filtros_Info model)
+        public ActionResult CXC_004(cl_filtros_facturacion_Info model)
         {
             CXC_004_Rpt report = new CXC_004_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             report.p_IdCliente.Value = model.IdCliente;
-            report.p_IdContacto.Value = model.IdContacto;
+            report.p_IdContacto.Value = model.IdClienteContacto;
             report.p_fecha_corte.Value = model.fecha_corte;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa;

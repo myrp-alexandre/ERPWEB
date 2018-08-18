@@ -26,9 +26,9 @@ namespace Core.Erp.Web.Reportes.CuentasPorCobrar
             lbl_usuario.Text = usuario;
 
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            decimal IdCliente = p_IdCliente.Value == null ? 0 : Convert.ToDecimal(p_IdCliente.Value);
+            decimal IdCliente = string.IsNullOrEmpty(p_IdCliente.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdCliente.Value);
             int IdContacto = p_IdContacto.Value == null ? 0 : Convert.ToInt32(p_IdContacto.Value);
-            DateTime fecha_corte = p_fecha_corte.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_corte.Value);
+            DateTime fecha_corte = string.IsNullOrEmpty(p_fecha_corte.Value.ToString()) ? DateTime.Now : Convert.ToDateTime(p_fecha_corte.Value);
 
             CXC_004_Bus bus_rpt = new CXC_004_Bus();
             List<CXC_004_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdCliente, IdContacto, fecha_corte);
