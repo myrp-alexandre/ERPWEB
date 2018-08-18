@@ -24,6 +24,7 @@ namespace Core.Erp.Info.Helps
 
 
         #region Filtros inventario
+
         public int IdSucursal { get; set; }
         public int IdBodega { get; set; }
         public string IdCategoria { get; set; }
@@ -36,6 +37,10 @@ namespace Core.Erp.Info.Helps
         public bool no_mostrar_valores_en_0 { get; set; }
         public bool mostrar_saldos_en_0 { get; set; }
         public bool mostrar_detallado { get; set; }
+        public decimal? IdProductoPadre { get; set; }
+        public DateTime fecha_corte { get; set; }
+        public int IdMarca { get; set; }
+
 
         #endregion
 
@@ -68,8 +73,10 @@ namespace Core.Erp.Info.Helps
         {
             fecha_ini = DateTime.Now.Date.AddMonths(-1);
             fecha_fin = DateTime.Now.Date;
+            fecha_corte = DateTime.Now.Date;
+
         }
-        
+
     }
     public class cl_filtros_banco_Info
     {

@@ -467,7 +467,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
 
         [HttpPost]
-
         public ActionResult INV_008(cl_filtros_Info model)
         {
             INV_008_Rpt report = new INV_008_Rpt();
@@ -510,6 +509,42 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             List_decimal.DeleteRow(IdProducto);
             var model = List_decimal.get_list();
             return PartialView("_GridViewPartial_producto_lst", model);
+        }
+
+        public ActionResult INV_009()
+        {
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+            };
+            List_decimal.set_list(new List<in_Producto_Info>());
+            cargar_combos(model);
+            INV_009_Rpt report = new INV_009_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdBodega.Value = model.IdBodega;
+            report.p_IdMarca.Value = model.IdMarca;
+            report.p_IdProductoPadre.Value = model.IdProductoPadre;
+            report.p_fechaCorte.Value = model.fecha_corte;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult INV_009(cl_filtros_Info model)
+        {
+            INV_009_Rpt report = new INV_009_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdBodega.Value = model.IdBodega;
+            report.p_IdMarca.Value = model.IdMarca;
+            report.p_IdProductoPadre.Value = model.IdProductoPadre;
+            report.p_fechaCorte.Value = model.fecha_corte;
+            cargar_combos(model);
+            ViewBag.Report = report;
+            return View(model);
         }
 
     }

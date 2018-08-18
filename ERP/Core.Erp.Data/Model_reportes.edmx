@@ -7762,6 +7762,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Property Type="Decimal" Name="IdProducto_padre" Nullable="false" Precision="18" Scale="0" />
           <Property Type="String" Name="Su_Descripcion" Nullable="true" MaxLength="60" />
           <Property Type="String" Name="bo_Descripcion" Nullable="true" MaxLength="100" />
+          <Property Type="Double" Name="PrecioTotal" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -9998,6 +9999,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
                 <ScalarProperty Name="IdProducto_padre" ColumnName="IdProducto_padre" />
                 <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
                 <ScalarProperty Name="bo_Descripcion" ColumnName="bo_Descripcion" />
+                <ScalarProperty Name="PrecioTotal" ColumnName="PrecioTotal" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
