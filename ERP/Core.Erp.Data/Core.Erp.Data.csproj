@@ -920,6 +920,7 @@
     <Compile Include="Reportes\Inventario\INV_005_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_007_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_008_Data.cs" />
+    <Compile Include="Reportes\Inventario\INV_009_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_001_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_001_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_002_Data.cs" />
@@ -1244,6 +1245,9 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="SPINV_005_Result.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPINV_009_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="SPROL_012_Result.cs">

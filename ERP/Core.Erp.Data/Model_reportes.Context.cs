@@ -588,5 +588,50 @@ namespace Core.Erp.Data
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPCXC_004_Result>("SPCXC_004", idEmpresaParameter, idCliente_iniParameter, idCliente_finParameter, idContacto_iniParameter, idContacto_finParameter, fecha_corteParameter);
         }
+    
+        public virtual ObjectResult<SPINV_009_Result> SPINV_009(Nullable<int> idEmpresa, Nullable<int> idSucursalIni, Nullable<int> idSucursalFin, Nullable<int> idBodegaIni, Nullable<int> idBodegaFin, Nullable<int> idMarcaIni, Nullable<int> idMarcaFin, Nullable<decimal> idProductoPadreIni, Nullable<decimal> idProductoPadreFin, Nullable<System.DateTime> fechaCorte)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idSucursalIniParameter = idSucursalIni.HasValue ?
+                new ObjectParameter("IdSucursalIni", idSucursalIni) :
+                new ObjectParameter("IdSucursalIni", typeof(int));
+    
+            var idSucursalFinParameter = idSucursalFin.HasValue ?
+                new ObjectParameter("IdSucursalFin", idSucursalFin) :
+                new ObjectParameter("IdSucursalFin", typeof(int));
+    
+            var idBodegaIniParameter = idBodegaIni.HasValue ?
+                new ObjectParameter("IdBodegaIni", idBodegaIni) :
+                new ObjectParameter("IdBodegaIni", typeof(int));
+    
+            var idBodegaFinParameter = idBodegaFin.HasValue ?
+                new ObjectParameter("IdBodegaFin", idBodegaFin) :
+                new ObjectParameter("IdBodegaFin", typeof(int));
+    
+            var idMarcaIniParameter = idMarcaIni.HasValue ?
+                new ObjectParameter("IdMarcaIni", idMarcaIni) :
+                new ObjectParameter("IdMarcaIni", typeof(int));
+    
+            var idMarcaFinParameter = idMarcaFin.HasValue ?
+                new ObjectParameter("IdMarcaFin", idMarcaFin) :
+                new ObjectParameter("IdMarcaFin", typeof(int));
+    
+            var idProductoPadreIniParameter = idProductoPadreIni.HasValue ?
+                new ObjectParameter("IdProductoPadreIni", idProductoPadreIni) :
+                new ObjectParameter("IdProductoPadreIni", typeof(decimal));
+    
+            var idProductoPadreFinParameter = idProductoPadreFin.HasValue ?
+                new ObjectParameter("IdProductoPadreFin", idProductoPadreFin) :
+                new ObjectParameter("IdProductoPadreFin", typeof(decimal));
+    
+            var fechaCorteParameter = fechaCorte.HasValue ?
+                new ObjectParameter("FechaCorte", fechaCorte) :
+                new ObjectParameter("FechaCorte", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPINV_009_Result>("SPINV_009", idEmpresaParameter, idSucursalIniParameter, idSucursalFinParameter, idBodegaIniParameter, idBodegaFinParameter, idMarcaIniParameter, idMarcaFinParameter, idProductoPadreIniParameter, idProductoPadreFinParameter, fechaCorteParameter);
+        }
     }
 }

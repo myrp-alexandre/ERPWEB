@@ -2883,6 +2883,18 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Parameter Name="No_Mostrar_valores_en_0" Type="bit" Mode="In" />
           <Parameter Name="Mostrar_detallado" Type="bit" Mode="In" />
         </Function>
+        <Function Name="SPINV_009" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdSucursalIni" Type="int" Mode="In" />
+          <Parameter Name="IdSucursalFin" Type="int" Mode="In" />
+          <Parameter Name="IdBodegaIni" Type="int" Mode="In" />
+          <Parameter Name="IdBodegaFin" Type="int" Mode="In" />
+          <Parameter Name="IdMarcaIni" Type="int" Mode="In" />
+          <Parameter Name="IdMarcaFin" Type="int" Mode="In" />
+          <Parameter Name="IdProductoPadreIni" Type="numeric" Mode="In" />
+          <Parameter Name="IdProductoPadreFin" Type="numeric" Mode="In" />
+          <Parameter Name="FechaCorte" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="SPROL_002" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="idempresa" Type="int" Mode="In" />
           <Parameter Name="idnomina_tipo" Type="int" Mode="In" />
@@ -4699,6 +4711,18 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
             <Parameter Name="Fecha_corte" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="VWBAN_007" EntityType="Model_reportes.VWBAN_007" />
+          <FunctionImport Name="SPINV_009" ReturnType="Collection(Model_reportes.SPINV_009_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursalIni" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursalFin" Mode="In" Type="Int32" />
+            <Parameter Name="IdBodegaIni" Mode="In" Type="Int32" />
+            <Parameter Name="IdBodegaFin" Mode="In" Type="Int32" />
+            <Parameter Name="IdMarcaIni" Mode="In" Type="Int32" />
+            <Parameter Name="IdMarcaFin" Mode="In" Type="Int32" />
+            <Parameter Name="IdProductoPadreIni" Mode="In" Type="Decimal" />
+            <Parameter Name="IdProductoPadreFin" Mode="In" Type="Decimal" />
+            <Parameter Name="FechaCorte" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Af_SPACTF_004_detalle">
           <Key>
@@ -7718,6 +7742,25 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="IdCatalogo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="SPINV_009_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
+          <Property Type="Int32" Name="IdBodega" Nullable="false" />
+          <Property Type="Decimal" Name="IdProducto" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="pr_descripcion" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="IdMarca" Nullable="true" />
+          <Property Type="String" Name="NomMarca" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="IdPresentacion" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="nom_presentacion" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="IdProductoTipo" Nullable="true" />
+          <Property Type="String" Name="tp_descripcion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lote_num_lote" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="lote_fecha_vcto" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="precio_1" Nullable="true" />
+          <Property Type="Double" Name="dm_cantidad" Nullable="true" />
+          <Property Type="Double" Name="CostoTotal" Nullable="true" />
+          <Property Type="Decimal" Name="IdProducto_padre" Nullable="false" Precision="18" Scale="0" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9931,6 +9974,29 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPINV_009" FunctionName="Model_reportes.Store.SPINV_009">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_reportes.SPINV_009_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+                <ScalarProperty Name="NomMarca" ColumnName="NomMarca" />
+                <ScalarProperty Name="IdPresentacion" ColumnName="IdPresentacion" />
+                <ScalarProperty Name="nom_presentacion" ColumnName="nom_presentacion" />
+                <ScalarProperty Name="IdProductoTipo" ColumnName="IdProductoTipo" />
+                <ScalarProperty Name="tp_descripcion" ColumnName="tp_descripcion" />
+                <ScalarProperty Name="lote_num_lote" ColumnName="lote_num_lote" />
+                <ScalarProperty Name="lote_fecha_vcto" ColumnName="lote_fecha_vcto" />
+                <ScalarProperty Name="precio_1" ColumnName="precio_1" />
+                <ScalarProperty Name="dm_cantidad" ColumnName="dm_cantidad" />
+                <ScalarProperty Name="CostoTotal" ColumnName="CostoTotal" />
+                <ScalarProperty Name="IdProducto_padre" ColumnName="IdProducto_padre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
