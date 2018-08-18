@@ -91,6 +91,7 @@ namespace Core.Erp.Data
         public virtual DbSet<VWIMP_002> VWIMP_002 { get; set; }
         public virtual DbSet<VWIMP_002_gastos> VWIMP_002_gastos { get; set; }
         public virtual DbSet<VWIMP_001> VWIMP_001 { get; set; }
+        public virtual DbSet<VWBAN_007> VWBAN_007 { get; set; }
     
         public virtual int SPROL_002(Nullable<int> idempresa, Nullable<int> idnomina_tipo, Nullable<int> idnomina_Tipo_liq, Nullable<int> idperiodo)
         {

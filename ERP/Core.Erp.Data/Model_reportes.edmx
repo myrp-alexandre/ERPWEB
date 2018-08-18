@@ -392,6 +392,42 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWBAN_006' does not have
           <Property Name="cb_Cheque" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWBAN_007' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VWBAN_007">
+          <Key>
+            <PropertyRef Name="IdRow" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="IdTipocbte" />
+            <PropertyRef Name="cb_FechaCheque" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="cb_Valor" />
+            <PropertyRef Name="ca_descripcion" />
+            <PropertyRef Name="cb_Fecha" />
+            <PropertyRef Name="IdBanco" />
+            <PropertyRef Name="ba_descripcion" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="IdCatalogo" />
+          </Key>
+          <Property Name="IdRow" Type="bigint" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdTipocbte" Type="int" Nullable="false" />
+          <Property Name="cb_FechaCheque" Type="datetime" Nullable="false" />
+          <Property Name="cb_Cheque" Type="varchar" MaxLength="50" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="cb_Valor" Type="float" Nullable="false" />
+          <Property Name="ca_descripcion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="cb_Fecha" Type="date" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="cb_Observacion" Type="varchar(max)" />
+          <Property Name="IdPersona_Girado_a" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdBanco" Type="int" Nullable="false" />
+          <Property Name="ba_descripcion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdCatalogo" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCAJ_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWCAJ_001">
           <Key>
@@ -3063,6 +3099,27 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
     [VWBAN_006].[cb_Cheque] AS [cb_Cheque]
     FROM [web].[VWBAN_006] AS [VWBAN_006]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VWBAN_007" EntityType="Self.VWBAN_007" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWBAN_007].[IdRow] AS [IdRow], 
+    [VWBAN_007].[IdEmpresa] AS [IdEmpresa], 
+    [VWBAN_007].[IdCbteCble] AS [IdCbteCble], 
+    [VWBAN_007].[IdTipocbte] AS [IdTipocbte], 
+    [VWBAN_007].[cb_FechaCheque] AS [cb_FechaCheque], 
+    [VWBAN_007].[cb_Cheque] AS [cb_Cheque], 
+    [VWBAN_007].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [VWBAN_007].[cb_Valor] AS [cb_Valor], 
+    [VWBAN_007].[ca_descripcion] AS [ca_descripcion], 
+    [VWBAN_007].[cb_Fecha] AS [cb_Fecha], 
+    [VWBAN_007].[Nombre] AS [Nombre], 
+    [VWBAN_007].[cb_Observacion] AS [cb_Observacion], 
+    [VWBAN_007].[IdPersona_Girado_a] AS [IdPersona_Girado_a], 
+    [VWBAN_007].[IdBanco] AS [IdBanco], 
+    [VWBAN_007].[ba_descripcion] AS [ba_descripcion], 
+    [VWBAN_007].[Estado] AS [Estado], 
+    [VWBAN_007].[IdCatalogo] AS [IdCatalogo]
+    FROM [web].[VWBAN_007] AS [VWBAN_007]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VWCAJ_001" EntityType="Self.VWCAJ_001" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
     [VWCAJ_001].[IdEmpresa] AS [IdEmpresa], 
@@ -4641,6 +4698,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
             <Parameter Name="IdContacto_fin" Mode="In" Type="Int32" />
             <Parameter Name="Fecha_corte" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="VWBAN_007" EntityType="Model_reportes.VWBAN_007" />
         </EntityContainer>
         <EntityType Name="Af_SPACTF_004_detalle">
           <Key>
@@ -7626,6 +7684,40 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Property Type="Int32" Name="IdContacto" Nullable="true" />
           <Property Type="String" Name="NomContacto" Nullable="true" MaxLength="1000" />
         </ComplexType>
+        <EntityType Name="VWBAN_007">
+          <Key>
+            <PropertyRef Name="IdRow" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="IdTipocbte" />
+            <PropertyRef Name="cb_FechaCheque" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="cb_Valor" />
+            <PropertyRef Name="ca_descripcion" />
+            <PropertyRef Name="cb_Fecha" />
+            <PropertyRef Name="IdBanco" />
+            <PropertyRef Name="ba_descripcion" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="IdCatalogo" />
+          </Key>
+          <Property Name="IdRow" Type="Int64" Nullable="false" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipocbte" Type="Int32" Nullable="false" />
+          <Property Name="cb_FechaCheque" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cb_Cheque" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="cb_Valor" Type="Double" Nullable="false" />
+          <Property Name="ca_descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="cb_Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cb_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdPersona_Girado_a" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdBanco" Type="Int32" Nullable="false" />
+          <Property Name="ba_descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdCatalogo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9816,6 +9908,29 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="VWBAN_007">
+            <EntityTypeMapping TypeName="Model_reportes.VWBAN_007">
+              <MappingFragment StoreEntitySet="VWBAN_007">
+                <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ba_descripcion" ColumnName="ba_descripcion" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="IdPersona_Girado_a" ColumnName="IdPersona_Girado_a" />
+                <ScalarProperty Name="cb_Observacion" ColumnName="cb_Observacion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
+                <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
+                <ScalarProperty Name="cb_Valor" ColumnName="cb_Valor" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="cb_Cheque" ColumnName="cb_Cheque" />
+                <ScalarProperty Name="cb_FechaCheque" ColumnName="cb_FechaCheque" />
+                <ScalarProperty Name="IdTipocbte" ColumnName="IdTipocbte" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdRow" ColumnName="IdRow" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

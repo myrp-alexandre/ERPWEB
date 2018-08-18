@@ -214,6 +214,7 @@
     <Compile Include="Reportes\Banco\BAN_004_Bus.cs" />
     <Compile Include="Reportes\Banco\BAN_005_Bus.cs" />
     <Compile Include="Reportes\Banco\BAN_006_Bus.cs" />
+    <Compile Include="Reportes\Banco\BAN_007_Bus.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_Bus.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_ingresos_Bus.cs" />
     <Compile Include="Reportes\Contabilidad\CONTA_002_Bus.cs" />
