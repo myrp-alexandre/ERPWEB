@@ -262,7 +262,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 List_producto.set_list(new List<in_Producto_Info>());
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        
         public JsonResult GetLotesPorProducto(int IdSucursal = 0, int IdPuntoVta = 0, decimal IdProducto = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);

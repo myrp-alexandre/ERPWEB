@@ -33,6 +33,8 @@
                     <div class="form-group">
                         <label for="IdCliente">Cliente</label>
                         @Html.Partial("_CmbCliente_CXC", Model)
+                        @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger"})
+
                     </div>
                 </div>
                 <div class="col-md-5">
@@ -92,15 +94,17 @@
                 $('#fecha_corte').datepicker({
                     autoclose: true
                 })
+                cargar_cliente();
             });
 
         function cargar_cliente() {
             $("#IdClienteContacto").empty();
-                var codigo = IdCliente.GetValue();
 
             var datos = {
+
                 IdEmpresa: $("#IdEmpresa").val(),
-                        IdCliente: codigo
+                IdCliente: IdCliente.GetValue()
+
                     }
                     $.ajax({
                         type: 'POST',
