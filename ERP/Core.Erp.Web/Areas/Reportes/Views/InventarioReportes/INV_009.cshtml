@@ -9,7 +9,8 @@
 }
 @using (Html.BeginForm("INV_009", "InventarioReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    <div class="box collapsed-box">
+    @Html.HiddenFor(q=>q.IdEmpresa, new { @id="IdEmpresa"})
+    <div class="box ">
         <div class="box-header with-border">
             <div class="row">
                 <div class="col-md-12">
@@ -45,7 +46,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdMarca">Marca</label>
-                            @Html.DropDownListFor(q => q.IdMarca, new SelectList(ViewBag.lst_marca, "IdMarca", "NomMarca"), new { @class = "form-control", @id = "IdMarca" })
+                            @Html.DropDownListFor(q => q.IdMarca, new SelectList(ViewBag.lst_marca, "IdMarca", "Descripcion"), new { @class = "form-control", @id = "IdMarca" })
                             @Html.ValidationMessageFor(q => q.IdMarca, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -112,7 +113,7 @@
         $('#fecha_corte').datepicker({
             autoclose: true
         })
-        $("#IdSucursal").change(function () {
+   $("#IdSucursal").change(function () {
             cargar_bodega();
         });
 
@@ -123,10 +124,9 @@
     function cargar_bodega() {
         $("#IdBodega").empty();
 
-        var sucursal = $("#IdSucursal").val();
-
         var datos = {
-            IdSucursal: sucursal
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursal").val()
         }
 
         $.ajax({

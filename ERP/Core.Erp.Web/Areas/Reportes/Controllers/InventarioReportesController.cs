@@ -170,6 +170,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             in_Marca_Bus bus_marca = new in_Marca_Bus();
             var lst_marca = bus_marca.get_list(IdEmpresa, false);
+            lst_marca.Add(new Info.Inventario.in_Marca_Info
+            {
+                IdMarca = 0,
+                Descripcion = "Todas"
+            });
             ViewBag.lst_marca = lst_marca;
         }
 
