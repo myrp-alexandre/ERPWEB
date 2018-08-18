@@ -76,7 +76,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public ActionResult Nuevo()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_Producto_Info model = new in_Producto_Info { IdEmpresa = IdEmpresa };
+            in_Producto_Info model = new in_Producto_Info { IdEmpresa = IdEmpresa, IdCod_Impuesto_Iva = "IVA12" };
             model.pr_imagen = new byte[0];
             model.lst_producto_composicion = new List<in_Producto_Composicion_Info>();
             list_producto_composicion.set_list(model.lst_producto_composicion);
