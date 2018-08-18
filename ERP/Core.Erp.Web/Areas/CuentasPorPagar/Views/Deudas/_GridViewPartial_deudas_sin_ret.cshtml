@@ -119,7 +119,7 @@
                     var IdTipoCbte_Ogiro = DataBinder.Eval(container.DataItem, "IdTipoCbte_Ogiro");
                     var IdCbteCble_Ogiro = DataBinder.Eval(container.DataItem, "IdCbteCble_Ogiro");
                     hyperlink.Properties.Text = "Retención";
-                    hyperlink.NavigateUrl = Url.Action("Nuevo", "Retencion", new { Area = "CuentasPorPagar", IdTipoCbte_Ogiro = IdTipoCbte_Ogiro, IdCbteCble_Ogiro = IdCbteCble_Ogiro });
+                    hyperlink.NavigateUrl = Url.Action("Nuevo", "Retencion", new { Area = "CuentasPorPagar", IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa, IdTipoCbte_Ogiro = IdTipoCbte_Ogiro, IdCbteCble_Ogiro = IdCbteCble_Ogiro });
                 }).Render();
             });
         });
