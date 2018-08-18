@@ -25,11 +25,14 @@ namespace Core.Erp.Web.Reportes.Banco
             lbl_empresa.Text = empresa;
             lbl_usuario.Text = usuario;
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            int IdTipoCbte = p_IdTipoCbte.Value == null ? 0 : Convert.ToInt32(p_IdTipoCbte.Value);
-            decimal IdCbteCble = p_IdCbteCble.Value == null ? 0 : Convert.ToDecimal(p_IdCbteCble.Value);
+            int IdBanco = p_IdBanco.Value == null ? 0 : Convert.ToInt32(p_IdBanco.Value);
+            decimal IdPersona = p_IdPersona.Value == null ? 0 : Convert.ToDecimal(p_IdPersona.Value);
+            DateTime fecha_ini = string.IsNullOrEmpty(p_fecha_ini.Value.ToString()) ? DateTime.Now : Convert.ToDateTime(p_fecha_ini.Value);
+            DateTime fecha_fin = string.IsNullOrEmpty(p_fecha_fin.Value.ToString()) ? DateTime.Now : Convert.ToDateTime(p_fecha_fin.Value);
+            string Estado = p_Estado.Value == null ? "" : Convert.ToString(p_Estado.Value);
 
             BAN_007_Bus bus_rpt = new BAN_007_Bus();
-            List<BAN_007_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdTipoCbte, IdCbteCble);
+            List<BAN_007_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdBanco, IdPersona, fecha_ini, fecha_fin, Estado);
             this.DataSource = lst_rpt;
         }
     }

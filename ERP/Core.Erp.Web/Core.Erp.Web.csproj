@@ -8967,6 +8967,7 @@
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_003.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_004.cshtml" />
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_007.cshtml" />
+    <Content Include="Areas\Reportes\Views\BancoReportes\_CmbPersona_Banco.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

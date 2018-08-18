@@ -69,8 +69,22 @@ namespace Core.Erp.Info.Helps
             fecha_ini = DateTime.Now.Date.AddMonths(-1);
             fecha_fin = DateTime.Now.Date;
         }
-       
+        
+    }
+    public class cl_filtros_banco_Info
+    {
+        public int IdEmpresa { get; set; }
 
+        public int IdBanco { get; set; }
+        public decimal IdPersona { get; set; }
+        public string Estado { get; set; }
+        public DateTime fecha_ini { get; set; }
+        public DateTime fecha_fin { get; set; }
+        public cl_filtros_banco_Info()
+        {
+            fecha_ini = DateTime.Now.Date.AddMonths(-1);
+            fecha_fin = DateTime.Now.Date;
+        }
     }
 
     public class cl_filtros_contabilidad_Info

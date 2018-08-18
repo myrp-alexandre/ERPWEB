@@ -9,17 +9,26 @@ namespace Core.Erp.Data.Reportes.Banco
 {
     public class BAN_007_Data
     {
-        public List<BAN_007_Info> get_list(int IdEmpresa, int IdTipoCbte, decimal IdCbteCble)
+        public List<BAN_007_Info> get_list(int IdEmpresa, int IdBanco, decimal IdPersona, DateTime fecha_ini, DateTime fecha_fin, string Estado)
         {
             try
             {
+
+                int IdBanco_ini = IdBanco;
+                int IdBanco_fin = IdBanco == 0 ? 9999 : IdBanco;
+                decimal IdPersona_ini = IdPersona;
+                decimal IdPersona_fin = IdPersona == 0 ? 99999 : IdPersona;
+
                 List<BAN_007_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
-                {
+
                     Lista = (from q in Context.VWBAN_007
                              where q.IdEmpresa == IdEmpresa
-                             && q.IdTipocbte == IdTipoCbte
-                             && q.IdCbteCble == IdCbteCble
+                             && IdBanco_ini <= q.IdBanco && q.IdBanco <= IdBanco_fin
+                             && IdPersona_ini <= q.IdPersona_Girado_a && q.IdPersona_Girado_a <= IdPersona_fin
+                             && q.cb_Fecha >= fecha_ini
+                             && q.cb_Fecha <= fecha_fin
+                             && q.IdCatalogo.Contains(Estado)
                              select new BAN_007_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -40,7 +49,7 @@ namespace Core.Erp.Data.Reportes.Banco
                                  IdRow = q.IdRow,
                                  Nombre = q.Nombre
                              }).ToList();
-                }
+            
                 return Lista;
             }
             catch (Exception)
