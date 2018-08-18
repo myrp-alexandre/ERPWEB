@@ -76,7 +76,7 @@ namespace Core.Erp.Info.Helps
         public int IdEmpresa { get; set; }
 
         public int IdBanco { get; set; }
-        public decimal IdPersona { get; set; }
+        public decimal? IdPersona { get; set; }
         public string Estado { get; set; }
         public DateTime fecha_ini { get; set; }
         public DateTime fecha_fin { get; set; }

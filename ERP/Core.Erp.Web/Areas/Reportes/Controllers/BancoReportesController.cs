@@ -84,7 +84,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         public ActionResult CmbPersona_Banco()
         {
-            BAN_007_Info model = new BAN_007_Info();
+            cl_filtros_banco_Info model = new cl_filtros_banco_Info();
             return PartialView("_CmbPersona_Banco", model);
         }
         tb_persona_Bus bus_persona = new tb_persona_Bus();
