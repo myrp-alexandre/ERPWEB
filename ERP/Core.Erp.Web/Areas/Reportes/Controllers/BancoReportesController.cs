@@ -100,10 +100,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         #endregion
 
-        private void cargar_banco()
+        private void cargar_banco(int IdEmpresa)
         {
-            tb_banco_Bus bus_banco = new tb_banco_Bus();
-            var lst_banco = bus_banco.get_list(false);
+            ba_Banco_Cuenta_Bus bus_banco = new ba_Banco_Cuenta_Bus();
+            var lst_banco = bus_banco.get_list(IdEmpresa, false);
             ViewBag.lst_banco = lst_banco;
 
             tb_persona_Bus bus_persona = new tb_persona_Bus();
@@ -116,7 +116,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
             };
-            cargar_banco();
+            cargar_banco(model.IdEmpresa);
             BAN_007_Rpt report = new BAN_007_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdBanco.Value = model.IdBanco;
@@ -142,7 +142,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_Estado.Value = model.Estado;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
-            cargar_banco();
+            cargar_banco(model.IdEmpresa);
             ViewBag.Report = report;
 
             return View(model);
