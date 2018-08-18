@@ -7,8 +7,8 @@
         Response.Redirect("~/Account/Login");
     }
 }
-@using (Html.BeginForm("BAN_007", "Banco" +
-    "Reportes", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("BAN_007", "BancoReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
+
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     <div class="box">
@@ -120,15 +120,15 @@
     </div>
 }
 <script>
-            $(function () {
-                //Date picker
-                $('#fecha_ini').datepicker({
-                    autoclose: true
-                })
-                $('#fecha_fin').datepicker({
-                    autoclose: true
-                })
-            });
-    
+    $(function () {
+        //Date picker
+        $('#fecha_ini').datepicker({
+            autoclose: true
+        })
+        $('#fecha_fin').datepicker({
+            autoclose: true
+        })
+    });
+
 </script>
 
