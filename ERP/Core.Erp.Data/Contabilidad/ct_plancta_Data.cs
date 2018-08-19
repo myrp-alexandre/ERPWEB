@@ -19,7 +19,14 @@ namespace Core.Erp.Data.Contabilidad
             Lista = get_list(IdEmpresa, skip, take, args.Filter, MostrarCtaMovimiento);
             return Lista;
         }
-
+        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, bool MostrarCtaMovimiento, string cta_padre)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<ct_plancta_Info> Lista = new List<ct_plancta_Info>();
+            Lista = get_list(IdEmpresa, skip, take, args.Filter, MostrarCtaMovimiento, cta_padre);
+            return Lista;
+        }
         public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
         {
             //La variable args del devexpress ya trae el ID seleccionado en la propiedad Value, se pasa el IdEmpresa porque es un filtro que no tiene
@@ -47,6 +54,38 @@ namespace Core.Erp.Data.Contabilidad
                                 pc_Cuenta = q.pc_Cuenta
                             });
                         }
+                }
+
+                context_g.Dispose();
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public List<ct_plancta_Info> get_list(int IdEmpresa, int skip, int take, string filter, bool MostrarCtaMovimiento, string cta_padre)
+        {
+            try
+            {
+                List<ct_plancta_Info> Lista = new List<ct_plancta_Info>();
+
+                Entities_contabilidad context_g = new Entities_contabilidad();
+
+                {
+                    List<ct_plancta> lstg;
+                    if (!MostrarCtaMovimiento)
+                        lstg = context_g.ct_plancta.Where(q => q.IdEmpresa == IdEmpresa && q.pc_EsMovimiento == "S" && q.pc_Estado == "A" && (q.IdCtaCble + " " + q.pc_Cuenta).Contains(filter)&& q.IdCtaCble.Contains(cta_padre)).OrderBy(q => q.IdCtaCble).Skip(skip).Take(take).ToList();
+                    else
+                        lstg = context_g.ct_plancta.Where(q => q.IdEmpresa == IdEmpresa && q.pc_Estado == "A" && (q.IdCtaCble + " " + q.pc_Cuenta).Contains(filter) && q.IdCtaCble.Contains(cta_padre)).OrderBy(q => q.IdCtaCble).Skip(skip).Take(take).ToList();
+                    foreach (var q in lstg)
+                    {
+                        Lista.Add(new ct_plancta_Info
+                        {
+                            IdCtaCble = q.IdCtaCble,
+                            pc_Cuenta = q.pc_Cuenta
+                        });
+                    }
                 }
 
                 context_g.Dispose();

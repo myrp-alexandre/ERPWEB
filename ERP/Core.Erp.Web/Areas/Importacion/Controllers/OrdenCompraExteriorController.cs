@@ -34,6 +34,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         imp_ordencompra_ext_det_Bus bus_detalle = new imp_ordencompra_ext_det_Bus();
         imp_catalogo_Bus bus_catalogo = new imp_catalogo_Bus();
         tb_moneda_Bus bus_moneda = new tb_moneda_Bus();
+        imp_parametro_Bus param_bus = new imp_parametro_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -59,8 +60,13 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             return PartialView("_CmbCuenta_contable", model);
         }
         public List<ct_plancta_Info> get_list_bajo_demanda_cta(ListEditItemsRequestedByFilterConditionEventArgs args)
-       {
-            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        {
+            string cta_padre = "";
+            var param = param_bus.get_info(Convert.ToInt32(SessionFixed.IdEmpresa));
+            if (param != null)
+             cta_padre = param.IdCtaCble;
+
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false, cta_padre);
         }
         public ct_plancta_Info get_info_bajo_demanda_cta(ListEditItemRequestedByValueEventArgs args)
         {
