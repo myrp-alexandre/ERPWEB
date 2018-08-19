@@ -916,6 +916,7 @@
     <Compile Include="Reportes\Importacion\IMP_001_Data.cs" />
     <Compile Include="Reportes\Importacion\IMP_002_gastos_Data.cs" />
     <Compile Include="Reportes\Importacion\IMP_002_Data.cs" />
+    <Compile Include="Reportes\Importacion\IMP_003_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_007_Data.cs" />
@@ -1581,6 +1582,9 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="VWIMP_002_gastos.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWIMP_003.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="vwimp_gastos_no_asignados.cs">

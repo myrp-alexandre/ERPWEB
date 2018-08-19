@@ -1979,6 +1979,51 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWIMP_002_gastos' does n
           <Property Name="gt_orden" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWIMP_003' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VWIMP_003">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenCompra_ext" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="IdMarca" />
+            <PropertyRef Name="IdProveedor" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="IdPais_embarque" />
+            <PropertyRef Name="NomPais" />
+            <PropertyRef Name="od_cantidad_recepcion" />
+            <PropertyRef Name="od_costo_final" />
+            <PropertyRef Name="od_total_fob" />
+            <PropertyRef Name="od_costo_bodega" />
+            <PropertyRef Name="od_costo_total" />
+            <PropertyRef Name="od_por_descuento" />
+            <PropertyRef Name="od_costo" />
+            <PropertyRef Name="oe_fecha" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="IdPresentacion" Type="varchar" MaxLength="25" />
+          <Property Name="nom_presentacion" Type="varchar" MaxLength="150" />
+          <Property Name="IdMarca" Type="int" Nullable="false" />
+          <Property Name="NomMarca" Type="varchar" MaxLength="100" />
+          <Property Name="IdProveedor" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="IdPais_embarque" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NomPais" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="oe_observacion" Type="varchar" MaxLength="100" />
+          <Property Name="od_cantidad_recepcion" Type="float" Nullable="false" />
+          <Property Name="od_costo_final" Type="float" Nullable="false" />
+          <Property Name="od_total_fob" Type="float" Nullable="false" />
+          <Property Name="od_costo_bodega" Type="float" Nullable="false" />
+          <Property Name="od_costo_total" Type="float" Nullable="false" />
+          <Property Name="od_por_descuento" Type="float" Nullable="false" />
+          <Property Name="od_costo" Type="float" Nullable="false" />
+          <Property Name="oe_fecha" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWINV_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWINV_001">
           <Key>
@@ -4051,6 +4096,32 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
     [VWIMP_002_gastos].[gt_orden] AS [gt_orden]
     FROM [web].[VWIMP_002_gastos] AS [VWIMP_002_gastos]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VWIMP_003" EntityType="Self.VWIMP_003" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWIMP_003].[IdEmpresa] AS [IdEmpresa], 
+    [VWIMP_003].[IdOrdenCompra_ext] AS [IdOrdenCompra_ext], 
+    [VWIMP_003].[Secuencia] AS [Secuencia], 
+    [VWIMP_003].[IdProducto] AS [IdProducto], 
+    [VWIMP_003].[pr_descripcion] AS [pr_descripcion], 
+    [VWIMP_003].[IdPresentacion] AS [IdPresentacion], 
+    [VWIMP_003].[nom_presentacion] AS [nom_presentacion], 
+    [VWIMP_003].[IdMarca] AS [IdMarca], 
+    [VWIMP_003].[NomMarca] AS [NomMarca], 
+    [VWIMP_003].[IdProveedor] AS [IdProveedor], 
+    [VWIMP_003].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [VWIMP_003].[IdPais_embarque] AS [IdPais_embarque], 
+    [VWIMP_003].[NomPais] AS [NomPais], 
+    [VWIMP_003].[oe_observacion] AS [oe_observacion], 
+    [VWIMP_003].[od_cantidad_recepcion] AS [od_cantidad_recepcion], 
+    [VWIMP_003].[od_costo_final] AS [od_costo_final], 
+    [VWIMP_003].[od_total_fob] AS [od_total_fob], 
+    [VWIMP_003].[od_costo_bodega] AS [od_costo_bodega], 
+    [VWIMP_003].[od_costo_total] AS [od_costo_total], 
+    [VWIMP_003].[od_por_descuento] AS [od_por_descuento], 
+    [VWIMP_003].[od_costo] AS [od_costo], 
+    [VWIMP_003].[oe_fecha] AS [oe_fecha]
+    FROM [web].[VWIMP_003] AS [VWIMP_003]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VWINV_001" EntityType="Self.VWINV_001" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
     [VWINV_001].[IdEmpresa] AS [IdEmpresa], 
@@ -4723,6 +4794,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
             <Parameter Name="IdProductoPadreFin" Mode="In" Type="Decimal" />
             <Parameter Name="FechaCorte" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="VWIMP_003" EntityType="Model_reportes.VWIMP_003" />
         </EntityContainer>
         <EntityType Name="Af_SPACTF_004_detalle">
           <Key>
@@ -7764,6 +7836,49 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Property Type="String" Name="bo_Descripcion" Nullable="true" MaxLength="100" />
           <Property Type="Double" Name="PrecioTotal" Nullable="true" />
         </ComplexType>
+        <EntityType Name="VWIMP_003">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenCompra_ext" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="IdMarca" />
+            <PropertyRef Name="IdProveedor" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="IdPais_embarque" />
+            <PropertyRef Name="NomPais" />
+            <PropertyRef Name="od_cantidad_recepcion" />
+            <PropertyRef Name="od_costo_final" />
+            <PropertyRef Name="od_total_fob" />
+            <PropertyRef Name="od_costo_bodega" />
+            <PropertyRef Name="od_costo_total" />
+            <PropertyRef Name="od_por_descuento" />
+            <PropertyRef Name="od_costo" />
+            <PropertyRef Name="oe_fecha" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenCompra_ext" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IdPresentacion" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="nom_presentacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IdMarca" Type="Int32" Nullable="false" />
+          <Property Name="NomMarca" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdProveedor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdPais_embarque" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NomPais" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="oe_observacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="od_cantidad_recepcion" Type="Double" Nullable="false" />
+          <Property Name="od_costo_final" Type="Double" Nullable="false" />
+          <Property Name="od_total_fob" Type="Double" Nullable="false" />
+          <Property Name="od_costo_bodega" Type="Double" Nullable="false" />
+          <Property Name="od_costo_total" Type="Double" Nullable="false" />
+          <Property Name="od_por_descuento" Type="Double" Nullable="false" />
+          <Property Name="od_costo" Type="Double" Nullable="false" />
+          <Property Name="oe_fecha" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10003,6 +10118,34 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="VWIMP_003">
+            <EntityTypeMapping TypeName="Model_reportes.VWIMP_003">
+              <MappingFragment StoreEntitySet="VWIMP_003">
+                <ScalarProperty Name="oe_fecha" ColumnName="oe_fecha" />
+                <ScalarProperty Name="od_costo" ColumnName="od_costo" />
+                <ScalarProperty Name="od_por_descuento" ColumnName="od_por_descuento" />
+                <ScalarProperty Name="od_costo_total" ColumnName="od_costo_total" />
+                <ScalarProperty Name="od_costo_bodega" ColumnName="od_costo_bodega" />
+                <ScalarProperty Name="od_total_fob" ColumnName="od_total_fob" />
+                <ScalarProperty Name="od_costo_final" ColumnName="od_costo_final" />
+                <ScalarProperty Name="od_cantidad_recepcion" ColumnName="od_cantidad_recepcion" />
+                <ScalarProperty Name="oe_observacion" ColumnName="oe_observacion" />
+                <ScalarProperty Name="NomPais" ColumnName="NomPais" />
+                <ScalarProperty Name="IdPais_embarque" ColumnName="IdPais_embarque" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="NomMarca" ColumnName="NomMarca" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+                <ScalarProperty Name="nom_presentacion" ColumnName="nom_presentacion" />
+                <ScalarProperty Name="IdPresentacion" ColumnName="IdPresentacion" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
