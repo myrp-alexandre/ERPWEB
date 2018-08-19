@@ -40,6 +40,7 @@ namespace Core.Erp.Info.Helps
         public decimal? IdProductoPadre { get; set; }
         public DateTime fecha_corte { get; set; }
         public int IdMarca { get; set; }
+        public string IdPais_embarque { get; set; }
 
 
         #endregion

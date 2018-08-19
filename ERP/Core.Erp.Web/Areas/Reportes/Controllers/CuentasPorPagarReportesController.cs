@@ -22,7 +22,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbProveedor_CXP()
         {
-           CXP_008_Info model = new CXP_008_Info();
+           cl_filtros_Info model = new cl_filtros_Info();
             return PartialView("_CmbProveedor_CXP", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
