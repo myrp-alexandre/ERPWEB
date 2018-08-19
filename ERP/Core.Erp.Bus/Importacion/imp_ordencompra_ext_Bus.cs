@@ -236,7 +236,8 @@ namespace Core.Erp.Bus.Importacion
         {
             try
             {
-                odata = new imp_ordencompra_ext_Data();
+                imp_liquidacion_det_x_imp_orden_compra_ext_Bus bus_liquidacion = new imp_liquidacion_det_x_imp_orden_compra_ext_Bus();
+                   odata = new imp_ordencompra_ext_Data();
                 info.info_comrobante = new Info.Contabilidad.ct_cbtecble_Info();
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
                 info.info_comrobante.cb_Fecha = (DateTime)info.oe_fecha_desaduanizacion;
@@ -264,6 +265,12 @@ namespace Core.Erp.Bus.Importacion
                 info.IdNumMovi_inv =Convert.ToInt32( info_inventario.IdNumMovi);
 
                 odata.guardarLiquidacionDB(info);
+                imp_liquidacion_det_x_imp_orden_compra_ext_Info info_liq = new imp_liquidacion_det_x_imp_orden_compra_ext_Info();
+                info_liq.IdEmpresa = info.IdEmpresa;
+                info_liq.IdOrdenCompra_ext = info.IdOrdenCompra_ext;
+                info_liq.IdEmpresa_oe = info.IdEmpresa;
+                info_liq.observacion = info.oe_observacion;
+                bus_liquidacion.guardarDB(info_liq);
                 return true;
             }
             catch (Exception)

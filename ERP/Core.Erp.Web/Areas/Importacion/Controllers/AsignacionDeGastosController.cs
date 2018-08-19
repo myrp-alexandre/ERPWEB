@@ -107,14 +107,21 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             if (model != null)
             {
-
+                List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> gastos_asig_no_asig = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
                 if (model.lst_gastos_asignados == null)
                     model.lst_gastos_asignados = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
-                   Lis_imp_orden_compra_ext_ct_cbteble_det_gastos_Info_lst.set_list(model.lst_gastos_asignados, model.IdTransaccionSession);
-
-                if (model.lst_detalle == null)
-                    model.lst_detalle = new List<imp_ordencompra_ext_det_Info>();
-                  info_detalle_lst.set_list(model.lst_detalle);
+                gastos_asig_no_asig.AddRange(model.lst_gastos_asignados);
+                if (model.lst_gastos_asignados == null)
+                    model.lst_gastos_asignados = new List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info>();
+                gastos_asig_no_asig.AddRange(model.lst_gastos_por_asignar);
+                int secuencia = 0;
+                foreach (var item in gastos_asig_no_asig)
+                {
+                    secuencia++;
+                    item.secuencia = secuencia;
+                }
+                Lis_imp_orden_compra_ext_ct_cbteble_det_gastos_Info_lst.set_list(gastos_asig_no_asig, model.IdTransaccionSession);
+               
             }
             else
                 model = new imp_ordencompra_ext_Info();

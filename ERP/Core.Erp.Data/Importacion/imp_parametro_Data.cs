@@ -27,7 +27,8 @@ namespace Core.Erp.Data.Importacion
                         IdSucursal=Entity.IdSucursal,
                         IdBodega=Entity.IdBodega,
                         IdMotivo_Inv_ing=Entity.IdMotivo_Inv_ing,
-                        IdMovi_inven_tipo_ing=Entity.IdMovi_inven_tipo_ing
+                        IdMovi_inven_tipo_ing=Entity.IdMovi_inven_tipo_ing,
+                        IdCtaCble_invntario=Entity.IdCtaCble_invntario
                     };
                 }
                 return info;

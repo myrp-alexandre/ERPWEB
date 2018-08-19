@@ -128,19 +128,7 @@ namespace Core.Erp.Data.Importacion
 
                     };
                     Context.imp_liquidacion_det_x_imp_orden_compra_ext.Add(Entity);
-                    foreach (var item in info.lst_gastos_asignados)
-                    {
-                        Context.imp_orden_compra_ext_ct_cbteble_det_gastos.Add(new imp_orden_compra_ext_ct_cbteble_det_gastos
-                        {
-                            IdEmpresa = item.IdEmpresa,
-                            IdCbteCble = item.IdCbteCble,
-                            IdEmpresa_ct = item.IdEmpresa_ct,
-                            IdGasto_tipo = item.IdGasto_tipo,
-                            IdOrdenCompra_ext = item.IdOrdenCompra_ext,
-                            IdTipoCbte = item.IdTipoCbte
-                        });
-                      
-                    }
+                  
                     Context.SaveChanges();
 
                 }

@@ -316,7 +316,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 ct_cbtecble_det_Info info_total = new ct_cbtecble_det_Info();
                 info_total.IdEmpresa = param.IdEmpresa;
                 info_total.IdTipoCbte = param.IdTipoCbte_liquidacion;
-                info_total.IdCtaCble = param.IdCtaCble;
+                info_total.IdCtaCble = CuentacontableImp;
                 info_total.dc_Valor = costo_total * -1;
                 info_total.dc_Valor_debe = costo_total ;
                 info_total.dc_Observacion = "Ingreso a inventario por importación";
@@ -324,13 +324,12 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 AddRow(info_total);
 
                 
-                double valor_compra= Convert.ToDouble(detalle.Sum(v => v.od_total_fob));
                 ct_cbtecble_det_Info info_merca = new ct_cbtecble_det_Info();
                 info_merca.IdEmpresa = param.IdEmpresa;
                 info_merca.IdTipoCbte = param.IdTipoCbte_liquidacion;
-                info_merca.IdCtaCble = CuentacontableImp;
-                info_merca.dc_Valor = valor_compra;
-                info_merca.dc_Valor_haber = valor_compra;
+                info_merca.IdCtaCble = param.IdCtaCble_invntario;
+                info_merca.dc_Valor = costo_total;
+                info_merca.dc_Valor_haber = costo_total;
                 info_merca.dc_Observacion = "Ingreso a inventario por importación";
                 info_merca.secuencia = secuencia + 1;
                 AddRow(info_merca);
