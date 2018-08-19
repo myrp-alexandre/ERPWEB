@@ -57,6 +57,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             tb_pais_Bus bus_pais = new tb_pais_Bus();
             var lst_pais = bus_pais.get_list(false);
+            lst_pais.Add(new Info.General.tb_pais_Info
+            {
+                IdPais = "",
+                Nombre = "Todos"
+            });
             ViewBag.lst_pais = lst_pais;
 
             in_Marca_Bus bus_marca = new in_Marca_Bus();

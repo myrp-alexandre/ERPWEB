@@ -31,31 +31,14 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdBanco">Banco</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdBanco, settings =>
-                                          {
-                                              settings.Name = "IdBanco";
-                                              settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                              settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                              settings.Properties.Columns.Add("IdBanco", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                              settings.Properties.Columns.Add("ba_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-
-                                              //Campo ID
-                                              settings.Properties.ValueField = "IdBanco";
-                                              settings.Properties.ValueType = typeof(int);
-                                              settings.Properties.TextField = "ba_descripcion";
-                                              //Boton para seleccionar ningun registro
-                                              settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                              settings.Properties.NullText = "== Seleccione ==";
-                                              settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-                                          }).BindList(ViewBag.lst_banco).GetHtml()
+                            @Html.DropDownListFor(q => q.IdBanco, new SelectList(ViewBag.lst_banco, "IdBanco", "ba_descripcion"), new { @class = "form-control" })
                             @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdPersona">Beneficiario</label>
                             @Html.Partial("_CmbPersona_Banco", Model)
@@ -63,6 +46,13 @@
                         </div>
                     </div>
 
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="Estado">Estado</label>
+                            @Html.DropDownListFor(q => q.Estado, new SelectList(ViewBag.lst_catalogo, "IdCatalogo", "ca_descripcion"), new { @class = "form-control"})
+                            @Html.ValidationMessageFor(q => q.Estado, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Fecha inicio</label>

@@ -104,11 +104,27 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             ba_Banco_Cuenta_Bus bus_banco = new ba_Banco_Cuenta_Bus();
             var lst_banco = bus_banco.get_list(IdEmpresa, false);
+            lst_banco.Add(new Info.Banco.ba_Banco_Cuenta_Info
+            {
+                IdBanco = 0,
+                ba_descripcion = "Todos"
+
+            });
             ViewBag.lst_banco = lst_banco;
 
             tb_persona_Bus bus_persona = new tb_persona_Bus();
             var lst_persona = bus_persona.get_list(false);
             ViewBag.lst_persona = lst_persona;
+
+            ba_Catalogo_Bus bus_catalogo = new ba_Catalogo_Bus();
+            var lst_catalogo = bus_catalogo.get_list(Convert.ToString(cl_enumeradores.eTipoCatalogoBanco.EST_CB_BA.ToString()), false);
+            lst_catalogo.Add(new Info.Banco.ba_Catalogo_Info
+            {
+                IdCatalogo = "",
+                ca_descripcion = "Todos"
+
+            });
+            ViewBag.lst_catalogo = lst_catalogo;
         }
         public ActionResult BAN_007()
         {

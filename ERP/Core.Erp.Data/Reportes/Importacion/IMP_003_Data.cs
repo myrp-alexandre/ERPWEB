@@ -22,7 +22,8 @@ namespace Core.Erp.Data.Reportes.Importacion
                              where q.IdEmpresa == IdEmpresa
                              && q.IdProveedor == IdProveedor
                              && q.IdProducto == IdProducto
-                             && q.IdMarca == IdMarca
+                             && IdMarca <= q.IdMarca && q.IdMarca <= IdMarca
+
                              select new IMP_003_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

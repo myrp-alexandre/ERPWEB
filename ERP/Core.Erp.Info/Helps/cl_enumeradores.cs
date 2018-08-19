@@ -31,7 +31,14 @@
             TIPONATPER = 5,
             TIP_CTA_AC = 27
         }
-
+        public enum eTipoCatalogoBanco
+        {
+            CALTAMOR = 1,
+            EST_CB_BA = 2,
+            EST_CH = 3,
+            EST_CONCI = 4,
+            EST_PAG = 5
+        }
         public enum eTipoBusquedaProducto
         {
             SOLOPADRES,
