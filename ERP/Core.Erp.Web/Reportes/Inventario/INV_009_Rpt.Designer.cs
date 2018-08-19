@@ -481,7 +481,7 @@
             // xrTableCell4
             // 
             this.xrTableCell4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Su_Descripcion]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([IdSucursal]=0,\'TODOS\' ,[Su_Descripcion])")});
             this.xrTableCell4.Name = "xrTableCell4";
             this.xrTableCell4.Weight = 2.1225981384335268D;
             // 
@@ -496,7 +496,7 @@
             // xrTableCell6
             // 
             this.xrTableCell6.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[bo_Descripcion]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([IdBodega]=0,\'TODOS\' ,[bo_Descripcion])")});
             this.xrTableCell6.Name = "xrTableCell6";
             this.xrTableCell6.Weight = 1.2918575492103572D;
             // 
@@ -521,7 +521,7 @@
             // xrTableCell12
             // 
             this.xrTableCell12.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NomMarca]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([IdMarca]=0,\'TODOS\' ,[NomMarca]\n )")});
             this.xrTableCell12.Name = "xrTableCell12";
             this.xrTableCell12.Weight = 2.1225981384335268D;
             // 
@@ -560,7 +560,7 @@
             // xrTableCell16
             // 
             this.xrTableCell16.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pr_descripcion]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([IdProducto_padre]=0,\'TODOS\' ,[pr_descripcion]\n )")});
             this.xrTableCell16.Name = "xrTableCell16";
             this.xrTableCell16.Weight = 3.7255261012097911D;
             // 

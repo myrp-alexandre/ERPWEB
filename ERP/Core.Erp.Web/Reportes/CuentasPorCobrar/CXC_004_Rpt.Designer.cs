@@ -109,11 +109,11 @@
             this.Total_Cliente = new DevExpress.XtraReports.UI.CalculatedField();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.GroupHeader2 = new DevExpress.XtraReports.UI.GroupHeaderBand();
-            this.GroupHeader3 = new DevExpress.XtraReports.UI.GroupHeaderBand();
-            this.GroupHeader4 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrTable8 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow11 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell37 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.GroupHeader3 = new DevExpress.XtraReports.UI.GroupHeaderBand();
+            this.GroupHeader4 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.GroupFooter2 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.xrTable9 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow12 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -357,7 +357,7 @@
             // 
             // TopMargin
             // 
-            this.TopMargin.HeightF = 31F;
+            this.TopMargin.HeightF = 31.00001F;
             this.TopMargin.Name = "TopMargin";
             this.TopMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -434,7 +434,7 @@
             // xrTableCell15
             // 
             this.xrTableCell15.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pe_nombreCompleto]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([IdCliente]=0,\'TODOS\' ,[pe_nombreCompleto] )")});
             this.xrTableCell15.Name = "xrTableCell15";
             this.xrTableCell15.Weight = 1.0781670062261344D;
             // 
@@ -449,7 +449,7 @@
             // xrTableCell17
             // 
             this.xrTableCell17.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NomContacto]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([IdContacto]=0,\'TODOS\' ,[NomContacto]\n)")});
             this.xrTableCell17.Name = "xrTableCell17";
             this.xrTableCell17.Weight = 0.91644222190255908D;
             // 
@@ -987,21 +987,6 @@
             this.GroupHeader2.Level = 2;
             this.GroupHeader2.Name = "GroupHeader2";
             // 
-            // GroupHeader3
-            // 
-            this.GroupHeader3.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
-            new DevExpress.XtraReports.UI.GroupField("vt_tipoDoc", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
-            this.GroupHeader3.HeightF = 0F;
-            this.GroupHeader3.Level = 1;
-            this.GroupHeader3.Name = "GroupHeader3";
-            // 
-            // GroupHeader4
-            // 
-            this.GroupHeader4.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
-            new DevExpress.XtraReports.UI.GroupField("IdCbteVta", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
-            this.GroupHeader4.HeightF = 0F;
-            this.GroupHeader4.Name = "GroupHeader4";
-            // 
             // xrTable8
             // 
             this.xrTable8.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
@@ -1033,6 +1018,21 @@
             this.xrTableCell37.StylePriority.UseFont = false;
             this.xrTableCell37.StylePriority.UsePadding = false;
             this.xrTableCell37.Weight = 1D;
+            // 
+            // GroupHeader3
+            // 
+            this.GroupHeader3.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
+            new DevExpress.XtraReports.UI.GroupField("vt_tipoDoc", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
+            this.GroupHeader3.HeightF = 0F;
+            this.GroupHeader3.Level = 1;
+            this.GroupHeader3.Name = "GroupHeader3";
+            // 
+            // GroupHeader4
+            // 
+            this.GroupHeader4.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
+            new DevExpress.XtraReports.UI.GroupField("IdCbteVta", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
+            this.GroupHeader4.HeightF = 0F;
+            this.GroupHeader4.Name = "GroupHeader4";
             // 
             // GroupFooter2
             // 
