@@ -2940,6 +2940,20 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Parameter Name="IdProductoPadreFin" Type="numeric" Mode="In" />
           <Parameter Name="FechaCorte" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="SPINV_010" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdProductoPadreIni" Type="numeric" Mode="In" />
+          <Parameter Name="IdProductoPadreFin" Type="numeric" Mode="In" />
+          <Parameter Name="IdCategoria" Type="varchar" Mode="In" />
+          <Parameter Name="IdLinea" Type="int" Mode="In" />
+          <Parameter Name="IdGrupo" Type="int" Mode="In" />
+          <Parameter Name="IdSubGrupo" Type="int" Mode="In" />
+          <Parameter Name="IdUsuario" Type="varchar" Mode="In" />
+          <Parameter Name="IdMarca" Type="varchar" Mode="In" />
+          <Parameter Name="FechaIni" Type="datetime" Mode="In" />
+          <Parameter Name="FechaFin" Type="datetime" Mode="In" />
+          <Parameter Name="MostrarSinMovimiento" Type="bit" Mode="In" />
+        </Function>
         <Function Name="SPROL_002" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="idempresa" Type="int" Mode="In" />
           <Parameter Name="idnomina_tipo" Type="int" Mode="In" />
@@ -4795,6 +4809,20 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
             <Parameter Name="FechaCorte" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="VWIMP_003" EntityType="Model_reportes.VWIMP_003" />
+          <FunctionImport Name="SPINV_010" ReturnType="Collection(Model_reportes.SPINV_010_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdProductoPadreIni" Mode="In" Type="Decimal" />
+            <Parameter Name="IdProductoPadreFin" Mode="In" Type="Decimal" />
+            <Parameter Name="IdCategoria" Mode="In" Type="String" />
+            <Parameter Name="IdLinea" Mode="In" Type="Int32" />
+            <Parameter Name="IdGrupo" Mode="In" Type="Int32" />
+            <Parameter Name="IdSubGrupo" Mode="In" Type="Int32" />
+            <Parameter Name="IdUsuario" Mode="In" Type="String" />
+            <Parameter Name="IdMarca" Mode="In" Type="String" />
+            <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="MostrarSinMovimiento" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Af_SPACTF_004_detalle">
           <Key>
@@ -7879,6 +7907,38 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Property Name="od_costo" Type="Double" Nullable="false" />
           <Property Name="oe_fecha" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <ComplexType Name="SPINV_010_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="String" Name="IdUsuario" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IdAnio" Nullable="false" />
+          <Property Type="Decimal" Name="IdProducto" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="IdCategoria" Nullable="false" MaxLength="25" />
+          <Property Type="Int32" Name="IdLinea" Nullable="false" />
+          <Property Type="Int32" Name="IdGrupo" Nullable="false" />
+          <Property Type="Int32" Name="IdSubGrupo" Nullable="false" />
+          <Property Type="Int32" Name="IdMarca" Nullable="false" />
+          <Property Type="Double" Name="Enero" Nullable="false" />
+          <Property Type="Double" Name="Febrero" Nullable="false" />
+          <Property Type="Double" Name="Marzo" Nullable="false" />
+          <Property Type="Double" Name="Abril" Nullable="false" />
+          <Property Type="Double" Name="Mayo" Nullable="false" />
+          <Property Type="Double" Name="Junio" Nullable="false" />
+          <Property Type="Double" Name="Julio" Nullable="false" />
+          <Property Type="Double" Name="Agosto" Nullable="false" />
+          <Property Type="Double" Name="Septiembre" Nullable="false" />
+          <Property Type="Double" Name="Octubre" Nullable="false" />
+          <Property Type="Double" Name="Noviembre" Nullable="false" />
+          <Property Type="Double" Name="Diciembre" Nullable="false" />
+          <Property Type="Double" Name="Total" Nullable="false" />
+          <Property Type="Double" Name="StockActual" Nullable="false" />
+          <Property Type="String" Name="ca_Categoria" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="nom_linea" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="nom_grupo" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="nom_subgrupo" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="NomMarca" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="IdPresentacion" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="nom_presentacion" Nullable="false" MaxLength="150" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10146,6 +10206,42 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPINV_010" FunctionName="Model_reportes.Store.SPINV_010">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_reportes.SPINV_010_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="IdLinea" ColumnName="IdLinea" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="IdSubGrupo" ColumnName="IdSubGrupo" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+                <ScalarProperty Name="Enero" ColumnName="Enero" />
+                <ScalarProperty Name="Febrero" ColumnName="Febrero" />
+                <ScalarProperty Name="Marzo" ColumnName="Marzo" />
+                <ScalarProperty Name="Abril" ColumnName="Abril" />
+                <ScalarProperty Name="Mayo" ColumnName="Mayo" />
+                <ScalarProperty Name="Junio" ColumnName="Junio" />
+                <ScalarProperty Name="Julio" ColumnName="Julio" />
+                <ScalarProperty Name="Agosto" ColumnName="Agosto" />
+                <ScalarProperty Name="Septiembre" ColumnName="Septiembre" />
+                <ScalarProperty Name="Octubre" ColumnName="Octubre" />
+                <ScalarProperty Name="Noviembre" ColumnName="Noviembre" />
+                <ScalarProperty Name="Diciembre" ColumnName="Diciembre" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="StockActual" ColumnName="StockActual" />
+                <ScalarProperty Name="ca_Categoria" ColumnName="ca_Categoria" />
+                <ScalarProperty Name="nom_linea" ColumnName="nom_linea" />
+                <ScalarProperty Name="nom_grupo" ColumnName="nom_grupo" />
+                <ScalarProperty Name="nom_subgrupo" ColumnName="nom_subgrupo" />
+                <ScalarProperty Name="NomMarca" ColumnName="NomMarca" />
+                <ScalarProperty Name="IdPresentacion" ColumnName="IdPresentacion" />
+                <ScalarProperty Name="nom_presentacion" ColumnName="nom_presentacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

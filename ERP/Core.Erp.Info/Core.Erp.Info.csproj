@@ -287,6 +287,7 @@
     <Compile Include="Reportes\Inventario\INV_007_Info.cs" />
     <Compile Include="Reportes\Inventario\INV_008_Info.cs" />
     <Compile Include="Reportes\Inventario\INV_009_Info.cs" />
+    <Compile Include="Reportes\Inventario\INV_010_Info.cs" />
     <Compile Include="Reportes\RRHH\ROL_001_Info.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_001_Info.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_002_Info.cs" />
