@@ -480,6 +480,8 @@ namespace Core.Erp.Data.Inventario
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
                     Context.SaveChanges();
+
+                    int row = Context.Database.ExecuteSqlCommand("UPDATE in_Producto SET pr_descripcion = '" + info.pr_descripcion + "', precio_1 = " + info.precio_1 + ", precio_2 = " + info.precio_2 + ", precio_3 = " + info.precio_3 + ", precio_4 = " + info.precio_4 + ", precio_5 = " + info.precio_5 + ", signo_2 = '" + info.signo_2 + "', signo_3 = '" + info.signo_3 + "', signo_4 = '" + info.signo_4 + "', signo_5 = '" + info.signo_5 + "', porcentaje_2 = " + info.porcentaje_2 + ", porcentaje_3 = " + info.porcentaje_3 + ", porcentaje_4 = " + info.porcentaje_4 + ", porcentaje_5 = " + info.porcentaje_5 + ", IdCod_Impuesto_Iva = '" + info.IdCod_Impuesto_Iva + "', pr_codigo = '" + info.pr_codigo + "', pr_codigo_barra = '" + info.pr_codigo_barra + "', pr_codigo2 = '" + info.pr_codigo2 + "' where in_Producto.IdEmpresa = " + info.IdEmpresa + " AND in_Producto.IdProducto_padre = " + info.IdProducto);
                 }
                 return true;
             }
