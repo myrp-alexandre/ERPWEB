@@ -14,10 +14,12 @@ namespace Core.Erp.Data.Reportes.CuentasPorCobrar
             try
             {
                 decimal IdCliente_ini = IdCliente;
-                decimal IdCliente_fin = IdCliente == 0 ? 9999 :  IdCliente;
+                decimal IdCliente_fin = IdCliente == 0 ? 999999 :  IdCliente;
 
                 int IdContacto_ini = IdContacto;
                 int IdContacto_fin = IdContacto == 0 ? 9999 : IdContacto;
+
+                fecha_corte = fecha_corte.Date;
                 List<CXC_004_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {

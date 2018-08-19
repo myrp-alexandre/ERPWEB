@@ -18,7 +18,7 @@ namespace Core.Erp.Web.Reportes.Inventario
             InitializeComponent();
         }
 
-        private void INV_009_Rpt_BandHeightChanged(object sender, BandEventArgs e)
+        private void INV_009_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
 
             lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");

@@ -26,7 +26,7 @@ namespace Core.Erp.Web.Reportes.Banco
             lbl_usuario.Text = usuario;
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdBanco = p_IdBanco.Value == null ? 0 : Convert.ToInt32(p_IdBanco.Value);
-            decimal IdPersona = p_IdPersona.Value == null ? 0 : Convert.ToDecimal(p_IdPersona.Value);
+            decimal IdPersona = string.IsNullOrEmpty(p_IdPersona.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdPersona.Value);
             DateTime fecha_ini = string.IsNullOrEmpty(p_fecha_ini.Value.ToString()) ? DateTime.Now : Convert.ToDateTime(p_fecha_ini.Value);
             DateTime fecha_fin = string.IsNullOrEmpty(p_fecha_fin.Value.ToString()) ? DateTime.Now : Convert.ToDateTime(p_fecha_fin.Value);
             string Estado = p_Estado.Value == null ? "" : Convert.ToString(p_Estado.Value);

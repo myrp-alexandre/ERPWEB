@@ -18,7 +18,8 @@ namespace Core.Erp.Data.Reportes.Banco
                 int IdBanco_fin = IdBanco == 0 ? 9999 : IdBanco;
                 decimal IdPersona_ini = IdPersona;
                 decimal IdPersona_fin = IdPersona == 0 ? 99999 : IdPersona;
-
+                fecha_ini = fecha_ini.Date;
+                fecha_fin = fecha_fin.Date;
                 List<BAN_007_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
 

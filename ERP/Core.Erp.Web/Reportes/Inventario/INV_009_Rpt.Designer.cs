@@ -1563,7 +1563,7 @@
             this.p_IdProductoPadre,
             this.p_fechaCorte});
             this.Version = "17.2";
-            this.BandHeightChanged += new DevExpress.XtraReports.UI.BandEventHandler(this.INV_009_Rpt_BandHeightChanged);
+            this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.INV_009_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
