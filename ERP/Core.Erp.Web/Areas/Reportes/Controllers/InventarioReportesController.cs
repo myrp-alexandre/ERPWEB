@@ -574,6 +574,53 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+
+        public ActionResult INV_010()
+        {
+
+            cl_filtros_Info model = new cl_filtros_Info { IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa), IdCategoria = "" };
+
+            cargar_combos(model);
+            INV_010_Rpt report = new INV_010_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdMarca.Value = model.IdMarca;
+            report.p_IdUsuario.Value = model.IdUsuario;
+            report.p_IdProducto.Value = model.IdProducto;
+            report.p_IdCategoria.Value = model.IdCategoria;
+            report.p_IdLinea.Value = model.IdLinea;
+            report.p_IdGrupo.Value = model.IdGrupo;
+            report.p_IdSubGrupo.Value = model.IdSubGrupo;
+            report.p_fechaIni.Value = model.fecha_ini;
+            report.p_fechaFin.Value = model.fecha_fin;
+            report.p_mostrarSinMovimiento.Value = model.mostrarSinMovimiento;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+            ViewBag.Report = report;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult INV_010(cl_filtros_Info model)
+        {
+            INV_010_Rpt report = new INV_010_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdMarca.Value = model.IdMarca;
+            report.p_IdUsuario.Value = model.IdUsuario;
+            report.p_IdProducto.Value = model.IdProducto;
+            report.p_IdCategoria.Value = model.IdCategoria;
+            report.p_IdLinea.Value = model.IdLinea;
+            report.p_IdGrupo.Value = model.IdGrupo;
+            report.p_IdSubGrupo.Value = model.IdSubGrupo;
+            report.p_fechaIni.Value = model.fecha_ini;
+            report.p_fechaFin.Value = model.fecha_fin;
+            report.p_mostrarSinMovimiento.Value = model.mostrarSinMovimiento;
+            cargar_combos(model);
+
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+
+            ViewBag.Report = report;
+            return View(model);
+        }
     }
 
 }

@@ -8991,6 +8991,7 @@
     <Content Include="Areas\Reportes\Views\ImportacionReportes\IMP_003.cshtml" />
     <Content Include="Areas\Reportes\Views\ImportacionReportes\_CmbProductoPadre_Importacion.cshtml" />
     <Content Include="Areas\Reportes\Views\ImportacionReportes\_CmbProveedor_Importacion.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_010.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -9309,6 +9310,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Inventario\INV_009_Rpt.resx">
       <DependentUpon>INV_009_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Inventario\INV_010_Rpt.resx">
+      <DependentUpon>INV_010_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_001_Rpt.resx">
       <DependentUpon>ROL_001_Rpt.cs</DependentUpon>
