@@ -58,7 +58,8 @@ namespace Core.Erp.Data.Importacion
                             IdSucursal = info.IdSucursal,
                             IdBodega = info.IdBodega,
                             IdMotivo_Inv_ing = info.IdMotivo_Inv_ing,
-                            IdMovi_inven_tipo_ing = info.IdMovi_inven_tipo_ing
+                            IdMovi_inven_tipo_ing = info.IdMovi_inven_tipo_ing,
+                            IdCtaCble_invntario = info.IdCtaCble_invntario
                         };
                         Context.imp_parametro.Add(Entity);
                     }
@@ -71,6 +72,7 @@ namespace Core.Erp.Data.Importacion
                         Entity.IdMotivo_Inv_ing = info.IdMotivo_Inv_ing;
                         Entity.IdMovi_inven_tipo_ing = info.IdMovi_inven_tipo_ing;
                         Entity.IdCtaCble = info.IdCtaCble;
+                        Entity.IdCtaCble_invntario = info.IdCtaCble_invntario;
                     }
                     Context.SaveChanges();
                 }

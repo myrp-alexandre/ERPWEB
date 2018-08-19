@@ -21,11 +21,17 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
 
-        public ActionResult CmbCuenta_cta_contable()
+        public ActionResult CmbCuenta_cta_contable_inv()
         {
             imp_parametro_Info model = new imp_parametro_Info();
 
-            return PartialView("_CmbCuenta_contable", model);
+            return PartialView("_CmbCuenta_contable_inv", model);
+        }
+        public ActionResult CmbCuenta_cta_contable_imp()
+        {
+            imp_parametro_Info model = new imp_parametro_Info();
+
+            return PartialView("_CmbCuenta_contable_imp", model);
         }
         public List<ct_plancta_Info> get_list_bajo_demanda_cta(ListEditItemsRequestedByFilterConditionEventArgs args)
         {

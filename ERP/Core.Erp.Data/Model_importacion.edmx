@@ -189,6 +189,7 @@
           <Property Name="IdMovi_inven_tipo_ing" Type="int" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
           <Property Name="IdBodega" Type="int" Nullable="false" />
+          <Property Name="IdCtaCble_invntario" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_liquidacion_det_x_imp_orden_compra_ext' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -784,7 +785,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwimp_gastos_no_as
           <EntitySet Name="imp_liquidacion" EntityType="Model_importacion.imp_liquidacion" />
           <EntitySet Name="imp_orden_compra_ext_ct_cbteble_det_gastos" EntityType="Model_importacion.imp_orden_compra_ext_ct_cbteble_det_gastos" />
           <EntitySet Name="imp_orden_compra_ext_recepcion" EntityType="Model_importacion.imp_orden_compra_ext_recepcion" />
-          <EntitySet Name="imp_parametro" EntityType="Model_importacion.imp_parametro" />
           <EntitySet Name="vwimp_orden_compra_ext_con_saldo" EntityType="Model_importacion.vwimp_orden_compra_ext_con_saldo" />
           <EntitySet Name="vwimp_orden_compra_ext_det" EntityType="Model_importacion.vwimp_orden_compra_ext_det" />
           <EntitySet Name="vwimp_orden_compra_ext_recepcion" EntityType="Model_importacion.vwimp_orden_compra_ext_recepcion" />
@@ -840,6 +840,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwimp_gastos_no_as
             <End Role="imp_gasto" EntitySet="imp_gasto" />
             <End Role="imp_orden_compra_ext_ct_cbteble_det_gastos" EntitySet="imp_orden_compra_ext_ct_cbteble_det_gastos" />
           </AssociationSet>
+          <EntitySet Name="imp_parametro" EntityType="Model_importacion.imp_parametro" />
           </EntityContainer>
         <EntityType Name="imp_catalogo">
           <Key>
@@ -932,19 +933,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwimp_gastos_no_as
           <Property Name="IdUsuario_anulacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="fecha_anulacion" Type="DateTime" Precision="3" />
           <NavigationProperty Name="imp_orden_compra_ext" Relationship="Model_importacion.FK_imp_orden_compra_ext_recepcion_imp_orden_compra_ext" FromRole="imp_orden_compra_ext_recepcion" ToRole="imp_orden_compra_ext" />
-        </EntityType>
-        <EntityType Name="imp_parametro">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoCbte_liquidacion" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbte_liquidacion_anu" Type="Int32" Nullable="false" />
-          <Property Name="IdMotivo_Inv_ing" Type="Int32" Nullable="false" />
-          <Property Name="IdMovi_inven_tipo_ing" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdBodega" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="vwimp_orden_compra_ext_con_saldo">
           <Key>
@@ -1413,6 +1401,20 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwimp_gastos_no_as
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="imp_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoCbte_liquidacion" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte_liquidacion_anu" Type="Int32" Nullable="false" />
+          <Property Name="IdMotivo_Inv_ing" Type="Int32" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_ing" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble_invntario" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1495,20 +1497,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwimp_gastos_no_as
                 <ScalarProperty Name="or_observacion" ColumnName="or_observacion" />
                 <ScalarProperty Name="or_fecha" ColumnName="or_fecha" />
                 <ScalarProperty Name="IdRecepcion" ColumnName="IdRecepcion" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="imp_parametro">
-            <EntityTypeMapping TypeName="Model_importacion.imp_parametro">
-              <MappingFragment StoreEntitySet="imp_parametro">
-                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdMovi_inven_tipo_ing" ColumnName="IdMovi_inven_tipo_ing" />
-                <ScalarProperty Name="IdMotivo_Inv_ing" ColumnName="IdMotivo_Inv_ing" />
-                <ScalarProperty Name="IdTipoCbte_liquidacion_anu" ColumnName="IdTipoCbte_liquidacion_anu" />
-                <ScalarProperty Name="IdTipoCbte_liquidacion" ColumnName="IdTipoCbte_liquidacion" />
-                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1759,6 +1747,21 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwimp_gastos_no_as
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="gt_descripcion" ColumnName="gt_descripcion" />
                 <ScalarProperty Name="IdGasto_tipo" ColumnName="IdGasto_tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imp_parametro">
+            <EntityTypeMapping TypeName="Model_importacion.imp_parametro">
+              <MappingFragment StoreEntitySet="imp_parametro">
+                <ScalarProperty Name="IdCtaCble_invntario" ColumnName="IdCtaCble_invntario" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdMovi_inven_tipo_ing" ColumnName="IdMovi_inven_tipo_ing" />
+                <ScalarProperty Name="IdMotivo_Inv_ing" ColumnName="IdMotivo_Inv_ing" />
+                <ScalarProperty Name="IdTipoCbte_liquidacion_anu" ColumnName="IdTipoCbte_liquidacion_anu" />
+                <ScalarProperty Name="IdTipoCbte_liquidacion" ColumnName="IdTipoCbte_liquidacion" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

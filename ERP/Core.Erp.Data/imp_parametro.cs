@@ -22,5 +22,6 @@ namespace Core.Erp.Data
         public int IdMovi_inven_tipo_ing { get; set; }
         public int IdSucursal { get; set; }
         public int IdBodega { get; set; }
+        public string IdCtaCble_invntario { get; set; }
     }
 }

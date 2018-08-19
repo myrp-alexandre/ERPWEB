@@ -21,6 +21,8 @@
     @Html.HiddenFor(q => q.IdOrdenCompra_ext, new { @id = "IdOrdenCompra_ext" })
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdTransaccionSession, new  { @id= "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.IdCtaCble_importacion, new { @id = "IdCtaCble_importacion" })
+
 
     <div class="row">
         <div class="col-md-12">
@@ -76,6 +78,7 @@
             </div>
         </div>
     </div>
+   
 
     <div class="row">
         <div class="col-md-12">
@@ -195,7 +198,8 @@
     function calclar_costo() {
         var datos = {
             IdTransaccionSession: $("#IdTransaccionSession").val(),
-            IdOrdenCompra_ext: $("#IdOrdenCompra_ext").val()
+            IdOrdenCompra_ext: $("#IdOrdenCompra_ext").val(),
+            IdCtaCble_importacion: $("#IdCtaCble_importacion").val(),
 
         }
         $.ajax({

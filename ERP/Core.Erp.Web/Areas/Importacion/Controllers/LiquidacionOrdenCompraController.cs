@@ -182,12 +182,12 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
         #endregion
         #region json
-        public JsonResult calcular_costo(decimal IdTransaccionSession=0, decimal IdOrdenCompra_ext = 0)
+        public JsonResult calcular_costo(decimal IdTransaccionSession=0, decimal IdOrdenCompra_ext = 0, string IdCtaCble_importacion="")
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             param = bus_param.get_info(IdEmpresa);
            info_detalle.set_list( bus_orden.calcular_costos(IdEmpresa, IdOrdenCompra_ext));
-           info_diarios.delete_detail_New_details(info_detalle.get_list(), info_gastos_lst.get_list(IdTransaccionSession), param);
+           info_diarios.delete_detail_New_details(info_detalle.get_list(), info_gastos_lst.get_list(IdTransaccionSession), param, IdCtaCble_importacion);
             return Json("", JsonRequestBehavior.AllowGet);
         }
     
@@ -305,10 +305,11 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             list.Remove(list.Where(m => m.secuencia == secuencia).First());
         }
 
-        public void delete_detail_New_details(List<imp_ordencompra_ext_det_Info> detalle, List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> detalle_costo, imp_parametro_Info param)
+        public void delete_detail_New_details(List<imp_ordencompra_ext_det_Info> detalle, List<imp_orden_compra_ext_ct_cbteble_det_gastos_Info> detalle_costo, imp_parametro_Info param, string CuentacontableImp)
         {
             try
             {
+
                 int secuencia = 1;
                 set_list(new List<ct_cbtecble_det_Info>());
                 double costo_total = Convert.ToDouble(detalle.Sum(v => v.od_costo_total));
@@ -322,28 +323,15 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 info_total.secuencia = secuencia;
                 AddRow(info_total);
 
-                foreach (var item in detalle_costo)
-                {
-                    secuencia++;
-                    ct_cbtecble_det_Info info_g = new ct_cbtecble_det_Info();
-                    info_g.IdEmpresa = param.IdEmpresa;
-                    info_g.IdTipoCbte = param.IdTipoCbte_liquidacion;
-                    info_g.IdCtaCble = item.IdCtaCble;
-                    info_g.dc_Valor = item.dc_Valor;
-                    info_g.dc_Valor_haber = item.dc_Valor;
-                    info_g.dc_Observacion = item.dc_Observacion;
-                    info_g.secuencia = secuencia;
-                   AddRow(info_g);
-
-                }
+                
                 double valor_compra= Convert.ToDouble(detalle.Sum(v => v.od_total_fob));
                 ct_cbtecble_det_Info info_merca = new ct_cbtecble_det_Info();
                 info_merca.IdEmpresa = param.IdEmpresa;
                 info_merca.IdTipoCbte = param.IdTipoCbte_liquidacion;
-                info_merca.IdCtaCble = "";
+                info_merca.IdCtaCble = CuentacontableImp;
                 info_merca.dc_Valor = valor_compra;
                 info_merca.dc_Valor_haber = valor_compra;
-                info_merca.dc_Observacion ="Costo delamercancia antes de gastos por traslados";
+                info_merca.dc_Observacion = "Ingreso a inventario por importación";
                 info_merca.secuencia = secuencia + 1;
                 AddRow(info_merca);
 
