@@ -635,7 +635,7 @@ namespace Core.Erp.Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPINV_009_Result>("SPINV_009", idEmpresaParameter, idSucursalIniParameter, idSucursalFinParameter, idBodegaIniParameter, idBodegaFinParameter, idMarcaIniParameter, idMarcaFinParameter, idProductoPadreIniParameter, idProductoPadreFinParameter, fechaCorteParameter);
         }
     
-        public virtual ObjectResult<SPINV_010_Result> SPINV_010(Nullable<int> idEmpresa, Nullable<decimal> idProductoPadreIni, Nullable<decimal> idProductoPadreFin, string idCategoria, Nullable<int> idLinea, Nullable<int> idGrupo, Nullable<int> idSubGrupo, string idUsuario, string idMarca, Nullable<System.DateTime> fechaIni, Nullable<System.DateTime> fechaFin, Nullable<bool> mostrarSinMovimiento)
+        public virtual ObjectResult<SPINV_010_Result> SPINV_010(Nullable<int> idEmpresa, Nullable<decimal> idProductoPadreIni, Nullable<decimal> idProductoPadreFin, string idCategoria, Nullable<int> idLinea, Nullable<int> idGrupo, Nullable<int> idSubGrupo, string idUsuario, Nullable<int> idMarcaIni, Nullable<int> idMarcaFin, Nullable<System.DateTime> fechaIni, Nullable<System.DateTime> fechaFin, Nullable<bool> mostrarSinMovimiento)
         {
             var idEmpresaParameter = idEmpresa.HasValue ?
                 new ObjectParameter("IdEmpresa", idEmpresa) :
@@ -669,9 +669,13 @@ namespace Core.Erp.Data
                 new ObjectParameter("IdUsuario", idUsuario) :
                 new ObjectParameter("IdUsuario", typeof(string));
     
-            var idMarcaParameter = idMarca != null ?
-                new ObjectParameter("IdMarca", idMarca) :
-                new ObjectParameter("IdMarca", typeof(string));
+            var idMarcaIniParameter = idMarcaIni.HasValue ?
+                new ObjectParameter("IdMarcaIni", idMarcaIni) :
+                new ObjectParameter("IdMarcaIni", typeof(int));
+    
+            var idMarcaFinParameter = idMarcaFin.HasValue ?
+                new ObjectParameter("IdMarcaFin", idMarcaFin) :
+                new ObjectParameter("IdMarcaFin", typeof(int));
     
             var fechaIniParameter = fechaIni.HasValue ?
                 new ObjectParameter("FechaIni", fechaIni) :
@@ -685,7 +689,7 @@ namespace Core.Erp.Data
                 new ObjectParameter("MostrarSinMovimiento", mostrarSinMovimiento) :
                 new ObjectParameter("MostrarSinMovimiento", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPINV_010_Result>("SPINV_010", idEmpresaParameter, idProductoPadreIniParameter, idProductoPadreFinParameter, idCategoriaParameter, idLineaParameter, idGrupoParameter, idSubGrupoParameter, idUsuarioParameter, idMarcaParameter, fechaIniParameter, fechaFinParameter, mostrarSinMovimientoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPINV_010_Result>("SPINV_010", idEmpresaParameter, idProductoPadreIniParameter, idProductoPadreFinParameter, idCategoriaParameter, idLineaParameter, idGrupoParameter, idSubGrupoParameter, idUsuarioParameter, idMarcaIniParameter, idMarcaFinParameter, fechaIniParameter, fechaFinParameter, mostrarSinMovimientoParameter);
         }
     }
 }

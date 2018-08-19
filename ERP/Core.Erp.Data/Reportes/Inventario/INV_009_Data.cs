@@ -24,7 +24,8 @@ namespace Core.Erp.Data.Reportes.Inventario
 
                 decimal IdProductoPadreIni = IdProductoPadre;
                 decimal IdProductoPadreFin = IdProductoPadre == 0 ? 9999 : IdProductoPadre;
-                
+
+                fechaCorte = fechaCorte.Date;
                 List<INV_009_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {

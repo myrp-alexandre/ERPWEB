@@ -8,7 +8,7 @@ using Core.Erp.Info.Reportes.Inventario;
 using System.Collections.Generic;
 
 namespace Core.Erp.Web.Reportes.Inventario
-{
+{ 
     public partial class INV_009_Rpt : DevExpress.XtraReports.UI.XtraReport
     {
         public string usuario { get; set; }

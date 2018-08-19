@@ -30,7 +30,7 @@ namespace Core.Erp.Web.Reportes.Inventario
             int IdLinea = p_IdLinea.Value == null ? 0 : Convert.ToInt32(p_IdLinea.Value);
             int IdGrupo = p_IdGrupo.Value == null ? 0 : Convert.ToInt32(p_IdGrupo.Value);
             int IdSubGrupo = p_IdSubGrupo.Value == null ? 0 : Convert.ToInt32(p_IdSubGrupo.Value);
-            string IdMarca = p_IdMarca.Value == null ? "" : Convert.ToString(p_IdMarca.Value);
+            int IdMarca = p_IdMarca.Value == null ? 0 : Convert.ToInt32(p_IdMarca.Value);
             string IdUsuario = p_IdUsuario.Value == null ? "" : Convert.ToString(p_IdUsuario.Value);
             DateTime fechaIni = p_fechaIni.Value == null ? DateTime.Now : Convert.ToDateTime(p_fechaIni.Value);
             DateTime fechaFin = p_fechaFin.Value == null ? DateTime.Now : Convert.ToDateTime(p_fechaFin.Value);

@@ -9,18 +9,22 @@ namespace Core.Erp.Data.Reportes.Inventario
 {
     public class INV_010_Data
     {
-        public List<INV_010_Info> get_list(int IdEmpresa, decimal IdProducto, string IdCategoria, int IdLinea, int IdGrupo, int IdSubGrupo, string IdMarca, string IdUsuario, DateTime fechaIni, DateTime fechaFin, bool mostrarSinMovimiento)
+        public List<INV_010_Info> get_list(int IdEmpresa, decimal IdProducto, string IdCategoria, int IdLinea, int IdGrupo, int IdSubGrupo, int IdMarca, string IdUsuario, DateTime fechaIni, DateTime fechaFin, bool mostrarSinMovimiento)
 
         {
             try
             {
                 decimal IdProductoIni = IdProducto;
                 decimal IdProductoFin = IdProducto == 0 ? 9999 : IdProducto;
-                
+
+
+                int IdMarcaIni = IdMarca;
+                int IdMarcaFin = IdMarca == 0 ? 9999 : IdMarca;
+
                 List<INV_010_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
-                    Lista = (from q in Context.SPINV_010(IdEmpresa, IdProductoIni, IdProductoFin, IdCategoria, IdLinea, IdGrupo, IdSubGrupo, IdUsuario, IdMarca, fechaIni, fechaFin, mostrarSinMovimiento)
+                    Lista = (from q in Context.SPINV_010(IdEmpresa, IdProductoIni, IdProductoFin, IdCategoria, IdLinea, IdGrupo, IdSubGrupo, IdUsuario, IdMarcaIni, IdMarcaFin, fechaIni, fechaFin, mostrarSinMovimiento)
                              select new INV_010_Info
                              { 
                                  IdEmpresa = q.IdEmpresa,

@@ -11,7 +11,7 @@ namespace Core.Erp.Bus.Reportes.Inventario
     public class INV_010_Bus
     {
         INV_010_Data odata = new INV_010_Data();
-        public List<INV_010_Info> get_list(int IdEmpresa, decimal IdProducto, string IdCategoria, int IdLinea, int IdGrupo, int IdSubGrupo, string IdMarca, string IdUsuario, DateTime fechaIni, DateTime fechaFin, bool mostrarSinMovimiento)
+        public List<INV_010_Info> get_list(int IdEmpresa, decimal IdProducto, string IdCategoria, int IdLinea, int IdGrupo, int IdSubGrupo, int IdMarca, string IdUsuario, DateTime fechaIni, DateTime fechaFin, bool mostrarSinMovimiento)
         {
             try
             {

@@ -2949,7 +2949,8 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Parameter Name="IdGrupo" Type="int" Mode="In" />
           <Parameter Name="IdSubGrupo" Type="int" Mode="In" />
           <Parameter Name="IdUsuario" Type="varchar" Mode="In" />
-          <Parameter Name="IdMarca" Type="varchar" Mode="In" />
+          <Parameter Name="IdMarcaIni" Type="int" Mode="In" />
+          <Parameter Name="IdMarcaFin" Type="int" Mode="In" />
           <Parameter Name="FechaIni" Type="datetime" Mode="In" />
           <Parameter Name="FechaFin" Type="datetime" Mode="In" />
           <Parameter Name="MostrarSinMovimiento" Type="bit" Mode="In" />
@@ -4818,7 +4819,8 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
             <Parameter Name="IdGrupo" Mode="In" Type="Int32" />
             <Parameter Name="IdSubGrupo" Mode="In" Type="Int32" />
             <Parameter Name="IdUsuario" Mode="In" Type="String" />
-            <Parameter Name="IdMarca" Mode="In" Type="String" />
+            <Parameter Name="IdMarcaIni" Mode="In" Type="Int32" />
+            <Parameter Name="IdMarcaFin" Mode="In" Type="Int32" />
             <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
             <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
             <Parameter Name="MostrarSinMovimiento" Mode="In" Type="Boolean" />
