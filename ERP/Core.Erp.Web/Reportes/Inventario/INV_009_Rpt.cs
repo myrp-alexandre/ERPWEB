@@ -29,7 +29,7 @@ namespace Core.Erp.Web.Reportes.Inventario
             int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
             int IdBodega = p_IdBodega.Value == null ? 0 : Convert.ToInt32(p_IdBodega.Value);
             int IdMarca = p_IdMarca.Value == null ? 0 : Convert.ToInt32(p_IdMarca.Value);
-            decimal IdProductoPadre = p_IdProductoPadre.Value == null ? 0 : Convert.ToDecimal(p_IdProductoPadre.Value);
+            decimal IdProductoPadre = string.IsNullOrEmpty(p_IdProductoPadre.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdProductoPadre.Value);
             DateTime fechaCorte = string.IsNullOrEmpty(p_fechaCorte.Value.ToString()) ? DateTime.Now : Convert.ToDateTime(p_fechaCorte.Value);
 
             INV_009_Bus bus_rpt = new INV_009_Bus();

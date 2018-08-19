@@ -13,6 +13,8 @@ namespace Core.Erp.Data.Reportes.Importacion
         {
             try
             {
+                fecha_ini = fecha_ini.Date;
+                fecha_fin = fecha_fin.Date;
                 List<IMP_003_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
