@@ -75,7 +75,7 @@
             new Script { ExtensionSuite = ExtensionSuite.Report }
         )
 </head>
-<body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
+<body class="skin-blue layout-top-nav">
     <div class="wrapper">
         <header class="main-header">
 
@@ -92,7 +92,7 @@
         </header>
         <!-- =============================================== -->
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">            
+        <div class="content-wrapper">
             <!-- Main content -->
             <section class="content">
                 <div class="modal fade" id="myModal" role="dialog">
@@ -104,7 +104,8 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
-                                @Html.DevExpress().TreeView(settings => {
+                                @Html.DevExpress().TreeView(settings =>
+                           {
                                settings.Name = "treeViewMenu";
                                settings.EnableHotTrack = true;
                                var Nodes = new List<Core.Erp.Info.SeguridadAcceso.seg_Menu_x_Empresa_x_Usuario_Info>();
