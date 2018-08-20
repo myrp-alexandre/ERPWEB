@@ -20,7 +20,6 @@ namespace Core.Erp.Info.Inventario
         [Required(ErrorMessage = ("El campo cantidad es obligatorio"))]
         public double dm_cantidad { get; set; }
         public string dm_observacion { get; set; }
-        [Required(ErrorMessage = ("El campo costo es obligatorio"))]
         public double mv_costo { get; set; }
         public string IdCentroCosto { get; set; }
         public string IdCentroCosto_sub_centro_costo { get; set; }
