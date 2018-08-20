@@ -568,8 +568,8 @@
                 Fecha_inicio: Fecha_i,
                 Num_cuotas: Num_cuot,
                 Dias_plazo: Dias_plaz,
-                Total_a_pagar: Total_a_pag
-
+                Total_a_pagar: Total_a_pag,
+                IdTransaccionSession: $("#IdTransaccionSession").val()
             }
             $.ajax({
                 type: 'POST',
@@ -630,7 +630,8 @@
             co_subtotal_siniva : $("#co_subtotal_siniva").val(),
             co_valoriva : $("#co_valoriva").val(),
             co_total : $("#co_total").val(),
-            observacion : $("#observacion").val()
+            observacion: $("#observacion").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
             }
             $.ajax({
                 type: 'POST',

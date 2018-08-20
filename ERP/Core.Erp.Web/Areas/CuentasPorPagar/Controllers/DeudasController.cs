@@ -113,7 +113,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             try
             {
-                lst_detalle_cuotas = Session["lst_cuotas"] as List<cp_cuotas_x_doc_det_Info>;
+                lst_detalle_cuotas = Lis_cp_cuotas_x_doc_det_Info.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                 return PartialView("_GridViewPartial_documento_cuotas_det", lst_detalle_cuotas);
             }
             catch (Exception)
@@ -127,7 +127,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = Session["ct_cbtecble_det_Info"] as List<ct_cbtecble_det_Info>;
+            model.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_deudas_dc", model);
         }
@@ -452,11 +452,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #endregion
 
         #region json
-        public JsonResult calcular_cuotas(DateTime Fecha_inicio,int Num_cuotas=0, int Dias_plazo = 0, double Total_a_pagar=0)
+        public JsonResult calcular_cuotas(DateTime Fecha_inicio,int Num_cuotas=0, int Dias_plazo = 0, double Total_a_pagar=0, decimal IdTransaccionSession = 0)
         {
 
             lst_detalle_cuotas = bus_detalle_cuotas.calcular_cuotas(Fecha_inicio, Num_cuotas,Dias_plazo, Total_a_pagar);
-            Session["lst_cuotas"]=lst_detalle_cuotas;
+            Lis_cp_cuotas_x_doc_det_Info.set_list(lst_detalle_cuotas,IdTransaccionSession);
 
             return Json("", JsonRequestBehavior.AllowGet);
         }
@@ -466,7 +466,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return Json(list_tipo_doc, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult armar_diario(decimal IdProveedor = 0, double co_subtotal_iva = 0, double co_subtotal_siniva = 0, double co_valoriva = 0, double co_total = 0, string observacion="")
+        public JsonResult armar_diario(decimal IdProveedor = 0, double co_subtotal_iva = 0, double co_subtotal_siniva = 0, double co_valoriva = 0, double co_total = 0, string observacion="", decimal IdTransaccionSession = 0)
         {
             int IdEmpresa=Convert.ToInt32( SessionFixed.IdEmpresa);
             if (Session["info_proveedor"] == null)
@@ -489,7 +489,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             info_parametro = bus_param.get_info(IdEmpresa);
 
 
-            Lis_ct_cbtecble_det_List.delete_detail_New_details(info_proveedor, info_parametro, co_subtotal_iva, co_subtotal_siniva, co_valoriva, co_total, observacion);
+            Lis_ct_cbtecble_det_List.delete_detail_New_details(info_proveedor, info_parametro, co_subtotal_iva, co_subtotal_siniva, co_valoriva, co_total, observacion, IdTransaccionSession);
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
