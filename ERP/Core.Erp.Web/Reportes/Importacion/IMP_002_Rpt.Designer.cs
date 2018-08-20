@@ -522,7 +522,7 @@
             this.xrTableCell2.Name = "xrTableCell2";
             this.xrTableCell2.StylePriority.UseFont = false;
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
-            this.xrTableCell2.Text = "ORDEN DE COMPRA EXT.";
+            this.xrTableCell2.Text = "LIQUIDACIÓN DE ORDEN DE COMPRA EXT.";
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell2.Weight = 3.00000024381556D;
             // 

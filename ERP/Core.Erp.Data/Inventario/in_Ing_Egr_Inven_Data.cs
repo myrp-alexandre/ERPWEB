@@ -200,13 +200,13 @@ namespace Core.Erp.Data.Inventario
                             IdNumMovi_inv = item.IdNumMovi_inv,
                             secuencia_inv = item.secuencia_inv,
 
-                            dm_cantidad_sinConversion = item.dm_cantidad_sinConversion,
+                            dm_cantidad_sinConversion = item.dm_cantidad,
                             dm_cantidad = item.dm_cantidad ,
                             IdUnidadMedida  = (item.IdUnidadMedida)==null? "UNID":item.IdUnidadMedida,
                             IdUnidadMedida_sinConversion = (item.IdUnidadMedida_sinConversion) == null ? "UNID" : item.IdUnidadMedida_sinConversion,
 
                             mv_costo_sinConversion = (item.mv_costo_sinConversion)==null?0:item.mv_costo_sinConversion,
-                            mv_costo =(double)(item.mv_costo) == null ? 0 : item.mv_costo,
+                            mv_costo = item.mv_costo,
 
                         };
                         Context.in_Ing_Egr_Inven_det.Add(entity_det);

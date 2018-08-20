@@ -228,7 +228,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                     in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
                     if (info_producto != null)
                     {
-                        info_det.pr_descripcion = info_producto.pr_descripcion;
+                        info_det.pr_descripcion = info_producto.pr_descripcion_combo;
                         info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
                         info_det.IdUnidadMedida_sinConversion = info_producto.IdUnidadMedida;
                     }
@@ -322,6 +322,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             edited_info.IdUnidadMedida = info_det.IdUnidadMedida;
             edited_info.mv_costo = info_det.mv_costo;
             edited_info.dm_cantidad = info_det.dm_cantidad;
+            edited_info.pr_descripcion = info_det.pr_descripcion;
+            edited_info.IdProducto = info_det.IdProducto;
 
         }
 
