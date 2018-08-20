@@ -60,6 +60,8 @@
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor_cuota");
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Count, "Num_cuota");
 
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+
     });
 }
 @grid.Bind(Model).GetHtml()

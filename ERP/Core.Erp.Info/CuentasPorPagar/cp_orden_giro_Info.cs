@@ -9,6 +9,7 @@ namespace Core.Erp.Info.CuentasPorPagar
 {
   public  class cp_orden_giro_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdCbteCble_Ogiro { get; set; }
         public int IdTipoCbte_Ogiro { get; set; }
