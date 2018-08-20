@@ -58,6 +58,7 @@ namespace Core.Erp.Data
         public string Direccion_Destino { get; set; }
         public string Num_declaracion_aduanera { get; set; }
         public string IdCatalogo_traslado { get; set; }
+        public bool aprobada_enviar_sri { get; set; }
     
         public virtual fa_catalogo fa_catalogo { get; set; }
         public virtual fa_cliente fa_cliente { get; set; }

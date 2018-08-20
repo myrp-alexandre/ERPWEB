@@ -52,6 +52,7 @@ namespace Core.Erp.Data
         public string NaturalezaNota { get; set; }
         public string IdCtaCble_TipoNota { get; set; }
         public Nullable<int> IdPuntoVta { get; set; }
+        public bool aprobada_enviar_sri { get; set; }
     
         public virtual fa_cliente fa_cliente { get; set; }
         public virtual fa_cliente_contactos fa_cliente_contactos { get; set; }

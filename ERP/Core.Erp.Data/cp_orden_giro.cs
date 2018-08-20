@@ -17,8 +17,8 @@ namespace Core.Erp.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public cp_orden_giro()
         {
-            this.cp_retencion = new HashSet<cp_retencion>();
             this.cp_orden_giro_pagos_sri = new HashSet<cp_orden_giro_pagos_sri>();
+            this.cp_retencion = new HashSet<cp_retencion>();
         }
     
         public int IdEmpresa { get; set; }
@@ -96,9 +96,9 @@ namespace Core.Erp.Data
         public virtual cp_codigo_SRI cp_codigo_SRI2 { get; set; }
         public virtual cp_proveedor cp_proveedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cp_retencion> cp_retencion { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cp_orden_giro_pagos_sri> cp_orden_giro_pagos_sri { get; set; }
         public virtual cp_pais_sri cp_pais_sri { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cp_retencion> cp_retencion { get; set; }
     }
 }

@@ -235,7 +235,6 @@ namespace Core.Erp.Bus.Importacion
                 info.info_comrobante.IdCbteCble = (info.IdCbteCble_ct) == null ? 0 : Convert.ToInt32(info.IdCbteCble_ct);
 
                 bus_contabilidad.anularDB(info.info_comrobante);
-                odata.guardarDB
                 bus_liquidacion.Anular(info);
               
                 return true;

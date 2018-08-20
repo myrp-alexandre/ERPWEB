@@ -40,6 +40,8 @@ namespace Core.Erp.Info.Facturacion
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         [Required(ErrorMessage = "El campo motivo anulación es obligatorio")]
         public string MotiAnula { get; set; }
+        public bool aprobada_enviar_sri { get; set; }
+
         #endregion
 
         #region Campos auditoria

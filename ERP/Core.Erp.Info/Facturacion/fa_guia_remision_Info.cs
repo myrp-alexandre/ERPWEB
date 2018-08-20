@@ -61,6 +61,7 @@ namespace Core.Erp.Info.Facturacion
         [Required(ErrorMessage = "El campo motivo de anulación es obligatorio")]
         public string MotiAnula { get; set; }
         [Required(ErrorMessage = "El campo dirección destino es obligatorio")]
+        public bool aprobada_enviar_sri { get; set; }
 
         public string Direccion_Destino { get; set; }
         public string IdCatalogo_traslado { get; set; }

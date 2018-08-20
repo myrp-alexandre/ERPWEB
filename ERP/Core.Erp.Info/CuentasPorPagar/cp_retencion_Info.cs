@@ -39,6 +39,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string ip { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotivoAnulacion { get; set; }
+        public bool aprobada_enviar_sri { get; set; }
 
 
 

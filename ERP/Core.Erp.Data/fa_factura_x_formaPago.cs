@@ -21,7 +21,7 @@ namespace Core.Erp.Data
         public string IdFormaPago { get; set; }
         public string observacion { get; set; }
     
-        public virtual fa_factura fa_factura { get; set; }
         public virtual fa_formaPago fa_formaPago { get; set; }
+        public virtual fa_factura fa_factura { get; set; }
     }
 }

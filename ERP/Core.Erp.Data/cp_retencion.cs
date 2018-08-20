@@ -50,6 +50,7 @@ namespace Core.Erp.Data
         public string ip { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotivoAnulacion { get; set; }
+        public bool aprobada_enviar_sri { get; set; }
     
         public virtual cp_orden_giro cp_orden_giro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
