@@ -537,7 +537,7 @@
             // xrTableCell4
             // 
             this.xrTableCell4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([IdProducto]=0,\'TODOS\' ,[IdProducto])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([Parameters].[p_IdProducto]=0,\'TODOS\' ,[IdProducto])")});
             this.xrTableCell4.Name = "xrTableCell4";
             this.xrTableCell4.Weight = 2.1061790327760495D;
             // 
@@ -554,7 +554,7 @@
             // xrTableCell6
             // 
             this.xrTableCell6.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([IdCategoria]=0,\'TODOS\' ,[ca_Categoria])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([Parameters].[p_IdCategoria]=0,\'TODOS\' ,[ca_Categoria])")});
             this.xrTableCell6.Name = "xrTableCell6";
             this.xrTableCell6.Weight = 1.2671891761800955D;
             // 
@@ -579,7 +579,7 @@
             // xrTableCell8
             // 
             this.xrTableCell8.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([IdMarca]=0,\'TODOS\' ,[NomMarca])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([Parameters].[p_IdMarca]=0,\'TODOS\' ,[NomMarca])")});
             this.xrTableCell8.Name = "xrTableCell8";
             this.xrTableCell8.Weight = 2.1061790457037644D;
             // 
@@ -596,7 +596,7 @@
             // xrTableCell10
             // 
             this.xrTableCell10.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([IdLinea]=0,\'TODOS\' ,[nom_linea])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([Parameters].[p_IdLinea]=0,\'TODOS\' ,[nom_linea])")});
             this.xrTableCell10.Name = "xrTableCell10";
             this.xrTableCell10.Weight = 1.2671891761800955D;
             // 
@@ -639,7 +639,7 @@
             // xrTableCell14
             // 
             this.xrTableCell14.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([IdGrupo]=0,\'TODOS\' ,[nom_grupo])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([Parameters].[p_IdGrupo]=0,\'TODOS\' ,[nom_grupo])")});
             this.xrTableCell14.Name = "xrTableCell14";
             this.xrTableCell14.Weight = 1.2671891761800955D;
             // 
@@ -682,7 +682,7 @@
             // xrTableCell18
             // 
             this.xrTableCell18.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([IdSubGrupo]=0,\'TODOS\' ,[nom_subgrupo])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([Parameters].[p_IdSubGrupo]=0,\'TODOS\' ,[nom_subgrupo])")});
             this.xrTableCell18.Name = "xrTableCell18";
             this.xrTableCell18.Weight = 1.2671891761800955D;
             // 
