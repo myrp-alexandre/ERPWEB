@@ -14,11 +14,19 @@ namespace Core.Erp.Data.Reportes.CuentasPorCobrar
             try
             {
                 List<CXC_003_Info> Lista;
+                Fecha_ini = Fecha_ini.Date;
+                Fecha_fin = Fecha_fin.Date;
+
+                decimal IdClienteIni = IdCliente;
+                decimal IdClienteFin = IdCliente == 0 ? 999999 : IdCliente;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = (from q in Context.VWCXC_003
                              where q.IdEmpresa == IdEmpresa
-                             && q.IdCliente == IdCliente
+                             && q.IdCliente >= IdClienteIni
+                             && q.IdCliente <= IdClienteFin
+                             && q.vt_fecha >= Fecha_ini
+                             && q.vt_fecha <= Fecha_fin
                              select new CXC_003_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
