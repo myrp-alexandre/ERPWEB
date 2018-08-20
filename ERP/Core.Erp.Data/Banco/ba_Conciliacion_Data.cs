@@ -154,6 +154,12 @@ namespace Core.Erp.Data.Banco
                             Estado = "A",
                             @checked = item.seleccionado
                         });
+                        if (info.IdEstado_Concil_Cat == "CONCILIADO")
+                        {
+                            var cbte = Context.ba_Cbte_Ban.Where(q => q.IdEmpresa == info.IdEmpresa && item.IdTipocbte == q.IdTipocbte && q.IdCbteCble == item.IdCbteCble).FirstOrDefault();
+                            if (cbte != null)
+                                cbte.IdEstado_cheque_cat = "ESTCBCOB";
+                        }
                     }
                     Context.SaveChanges();
                 }
@@ -202,6 +208,12 @@ namespace Core.Erp.Data.Banco
                             Estado = "A",
                             @checked = item.seleccionado
                         });
+                        if (info.IdEstado_Concil_Cat == "CONCILIADO")
+                        {
+                            var cbte = Context.ba_Cbte_Ban.Where(q => q.IdEmpresa == info.IdEmpresa && item.IdTipocbte == q.IdTipocbte && q.IdCbteCble == item.IdCbteCble).FirstOrDefault();
+                            if (cbte != null)
+                                cbte.IdEstado_cheque_cat = "ESTCBCOB";
+                        }
                     }
                     Context.SaveChanges();
                 }

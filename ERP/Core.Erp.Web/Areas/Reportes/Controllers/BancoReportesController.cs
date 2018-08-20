@@ -16,7 +16,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
     public class BancoReportesController : Controller
     {
-
+        ba_Cbte_Ban_Bus bus_cbte = new ba_Cbte_Ban_Bus();
         public ActionResult BAN_001( int IdTipoCbte = 0, decimal IdCbteCble = 0)
         {
             BAN_001_Rpt model = new BAN_001_Rpt();
@@ -68,15 +68,21 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdTipocbte.Value = IdTipocbte;
             model.p_IdCbteCble.Value = IdCbteCble;
             model.RequestParameters = false;
+
+            bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), IdTipocbte, IdCbteCble, "ESTCBENT");
+
             return View(model);
         }
         public ActionResult BAN_006(int IdTipoCbte = 0, decimal IdCbteCble = 0)
         {
             BAN_006_Rpt model = new BAN_006_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.p_IdTipoCbte.Value = IdTipoCbte;
             model.p_IdCbteCble.Value = IdCbteCble;
             model.RequestParameters = false;
+
+            bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), IdTipoCbte, IdCbteCble, "ESTCBENT");
+
             return View(model);
         }
 
@@ -130,6 +136,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             cl_filtros_banco_Info model = new cl_filtros_banco_Info
             {
+                Estado = "",
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
             };
             cargar_banco(model.IdEmpresa);

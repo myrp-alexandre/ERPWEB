@@ -209,7 +209,7 @@ namespace Core.Erp.Data.Banco
                     IdSucursal = info.IdSucursal,
                     IdEstado_Cbte_Ban_cat = info.IdEstado_Cbte_Ban_cat,
                     IdEstado_Preaviso_ch_cat = info.IdEstado_Preaviso_ch_cat,
-                    IdEstado_cheque_cat = info.IdEstado_cheque_cat,
+                    IdEstado_cheque_cat = info.IdEstado_cheque_cat = "ESTCBEMI",
                     IdPersona = info.IdPersona,
                     IdEntidad = info.IdEntidad,
                     IdTipo_Persona = info.IdTipo_Persona,
@@ -332,6 +332,27 @@ namespace Core.Erp.Data.Banco
                 Context_ct.Dispose();
                 Context_b.Dispose();
                 Context_cxp.Dispose();
+                throw;
+            }
+        }
+
+        public bool modificarDB_EstadoCheque(int IdEmpresa, int IdTipoCbte, decimal IdCbteCble, string EstadoCheque)
+        {
+            try
+            {
+                using (Entities_banco Context = new Entities_banco())
+                {
+                    var cbte = Context.ba_Cbte_Ban.Where(q => q.IdEmpresa == IdEmpresa && q.IdTipocbte == IdTipoCbte && q.IdCbteCble == IdCbteCble).FirstOrDefault();
+                    if (cbte != null)
+                        cbte.IdEstado_cheque_cat = EstadoCheque;
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }
@@ -565,6 +586,7 @@ namespace Core.Erp.Data.Banco
                 Entity.MotivoAnulacion = info.MotivoAnulacion;
                 Entity.IdUsuario_Anu = info.IdUsuario_Anu;
                 Entity.FechaAnulacion = DateTime.Now;
+                Entity.IdEstado_cheque_cat = "ESTCBANU";
                 Entity.Estado = "I";
 
                 var lst_ing = Context.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.Where(q => q.mba_IdEmpresa == info.IdEmpresa && q.mba_IdTipocbte == info.IdTipocbte && q.mba_IdCbteCble == info.IdCbteCble).ToList();

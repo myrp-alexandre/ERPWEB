@@ -56,37 +56,8 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "co_FechaFactura_vct";
-            column.Caption = "Vence";
-            column.Width = Unit.Percentage(10);
-            column.PropertiesEdit.DisplayFormatString = "d";
-            column.EditorProperties().DateEdit(sp =>
-            {
-                column.PropertiesEdit.DisplayFormatString = "d";
-                sp.Width = Unit.Percentage(100);
-                column.ReadOnly = false;
-
-            });
-        });
-        settings.Columns.Add(column =>
-        {
             column.FieldName = "co_total";
             column.Caption = "Total";
-            column.Width = Unit.Percentage(5);
-            column.EditorProperties().SpinEdit(sp =>
-            {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
-                sp.Width = Unit.Percentage(100);
-                column.PropertiesEdit.DisplayFormatString = "n2";
-                column.ReadOnly = false;
-
-            });
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Total_Pagado";
-            column.Caption = "Cancelado";
             column.Width = Unit.Percentage(10);
             column.EditorProperties().SpinEdit(sp =>
             {
@@ -94,6 +65,7 @@
                 sp.MaxValue = 999999999;
                 sp.Width = Unit.Percentage(100);
                 column.PropertiesEdit.DisplayFormatString = "n2";
+                column.ReadOnly = false;
 
             });
         });
@@ -101,7 +73,7 @@
         {
             column.FieldName = "Saldo_OG";
             column.Caption = "Saldo";
-            column.Width = Unit.Percentage(5);
+            column.Width = Unit.Percentage(10);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -111,7 +83,7 @@
 
             });
         });
-        settings.Columns.Add("Tipo_Vcto", "Estado").Width = Unit.Percentage(5);
+        settings.Columns.Add("Tipo_Vcto", "Estado").Width = Unit.Percentage(10);
         settings.Columns.Add("Dias_Vencidos", "Vencido").Width = Unit.Percentage(5);
 
         settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";

@@ -60,6 +60,18 @@ namespace Core.Erp.Bus.Banco
             }
         }
 
+        public bool modificarDB_EstadoCheque(int IdEmpresa, int IdTipoCbte, decimal IdCbteCble, string EstadoCheque)
+        {
+            try
+            {
+                return odata.modificarDB_EstadoCheque(IdEmpresa, IdTipoCbte, IdCbteCble, EstadoCheque);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool anularDB(ba_Cbte_Ban_Info info)
         {
             try
