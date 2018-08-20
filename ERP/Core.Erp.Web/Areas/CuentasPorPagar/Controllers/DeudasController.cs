@@ -283,6 +283,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
             cp_orden_giro_Info model = bus_orden_giro.get_info(IdEmpresa, IdTipoCbte_Ogiro, IdCbteCble_Ogiro);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             if (model == null)
                 return RedirectToAction("Index");
             if (model.info_comrobante.lst_ct_cbtecble_det == null)
@@ -290,7 +291,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             Lis_ct_cbtecble_det_List.set_list( model.info_comrobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
             if (model.info_cuota.lst_cuotas_det == null)
                 model.info_cuota.lst_cuotas_det = new List<cp_cuotas_x_doc_det_Info>();
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             Lis_cp_cuotas_x_doc_det_Info.set_list( model.info_cuota.lst_cuotas_det, model.IdTransaccionSession);
             cargar_combos(IdEmpresa, model.IdProveedor, model.IdOrden_giro_Tipo);
             cargar_combos_detalle();
