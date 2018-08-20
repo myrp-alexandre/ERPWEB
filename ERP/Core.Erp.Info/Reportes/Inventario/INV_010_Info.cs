@@ -12,6 +12,7 @@ namespace Core.Erp.Info.Reportes.Inventario
         public string IdUsuario { get; set; }
         public int IdAnio { get; set; }
         public decimal IdProducto { get; set; }
+        public string pr_descripcion { get; set; }
         public string IdCategoria { get; set; }
         public int IdLinea { get; set; }
         public int IdGrupo { get; set; }

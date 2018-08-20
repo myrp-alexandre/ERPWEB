@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.CuentasPorCobrar
 {
     public class CXC_004_Data
     {
-        public List<CXC_004_Info> get_list(int IdEmpresa, decimal IdCliente, int IdContacto, DateTime fecha_corte)
+        public List<CXC_004_Info> get_list(int IdEmpresa, decimal IdCliente, int IdContacto, DateTime fecha_corte, string Estado)
         {
             try
             {
@@ -24,6 +24,7 @@ namespace Core.Erp.Data.Reportes.CuentasPorCobrar
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = (from q in Context.SPCXC_004(IdEmpresa, IdCliente_ini, IdCliente_fin, IdContacto_ini, IdContacto_fin, fecha_corte)
+                             where q.Estado_documento.Contains(Estado)
                              select new CXC_004_Info
                              {
                                  IdRow = q.IdRow,

@@ -140,6 +140,7 @@
             this.xrTableCell63 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell64 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell65 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.p_MostrarSaldo0 = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -1401,6 +1402,11 @@
             this.xrTableCell65.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.xrTableCell65.Weight = 1.06738538990552D;
             // 
+            // p_MostrarSaldo0
+            // 
+            this.p_MostrarSaldo0.Name = "p_MostrarSaldo0";
+            this.p_MostrarSaldo0.Visible = false;
+            // 
             // CXC_004_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -1431,7 +1437,8 @@
             this.p_IdEmpresa,
             this.p_IdCliente,
             this.p_IdContacto,
-            this.p_fecha_corte});
+            this.p_fecha_corte,
+            this.p_MostrarSaldo0});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.CXC_004_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
@@ -1559,5 +1566,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell63;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell64;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell65;
+        public DevExpress.XtraReports.Parameters.Parameter p_MostrarSaldo0;
     }
 }

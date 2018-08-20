@@ -30,15 +30,15 @@
     <div class="box-body">
         <div class="row">
             <div class="col-md-12">
-                <div class="col-md-5">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="IdCliente">Cliente</label>
                         @Html.Partial("_CmbCliente_CXC", Model)
-                        @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger"})
+                        @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
 
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="IdClienteContacto">Contacto</label>
                         @Html.DropDownListFor(q => q.IdClienteContacto, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres", Model.IdClienteContacto), new { @class = "form-control", @id = "IdClienteContacto" })
@@ -54,6 +54,13 @@
                             </div>
                             @Html.TextBoxFor(q => q.fecha_corte, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_corte" })
                             @Html.ValidationMessageFor(q => q.fecha_corte, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label for="Check1">@Html.CheckBoxFor(q => q.Check1) Mostrar cancelados</label>
                         </div>
                     </div>
                 </div>

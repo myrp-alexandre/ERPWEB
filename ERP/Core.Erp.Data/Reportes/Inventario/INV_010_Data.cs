@@ -56,7 +56,8 @@ namespace Core.Erp.Data.Reportes.Inventario
                                  Octubre = q.Octubre,
                                  Noviembre = q.Noviembre,
                                  Diciembre = q.Diciembre,
-                                 IdAnio = q.IdAnio
+                                 IdAnio = q.IdAnio,
+                                 pr_descripcion = q.pr_descripcion
                              }).ToList();
                 }
                 return Lista;

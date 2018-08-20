@@ -9,7 +9,7 @@ namespace Core.Erp.Bus.Reportes.Inventario
     {
         INV_005_Data odata = new INV_005_Data();
     
-        public List<INV_005_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, int IdProducto, DateTime fecha_ini, DateTime fecha_fin, string IdUsuario, bool no_mostrar_valores_en_0, bool mostrar_detallado)
+        public List<INV_005_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdProducto, DateTime fecha_ini, DateTime fecha_fin, string IdUsuario, bool no_mostrar_valores_en_0, bool mostrar_detallado)
         {
             try
             {

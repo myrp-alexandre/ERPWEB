@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.Inventario
 {
     public class INV_005_Data
     {
-        public List<INV_005_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, int IdProducto, DateTime fecha_ini, DateTime fecha_fin, string IdUsuario, bool no_mostrar_valores_en_0, bool mostrar_detallado)
+        public List<INV_005_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdProducto, DateTime fecha_ini, DateTime fecha_fin, string IdUsuario, bool no_mostrar_valores_en_0, bool mostrar_detallado)
         {
             try
             {
@@ -19,8 +19,8 @@ namespace Core.Erp.Data.Reportes.Inventario
                 int IdBodega_ini = IdBodega;
                 int IdBodega_fin = IdBodega == 0 ? 9999 : IdBodega;
 
-                int IdProducto_ini = IdProducto;
-                int IdProducto_fin = IdProducto == 0 ? 9999 : IdProducto;
+                decimal IdProducto_ini = IdProducto;
+                decimal IdProducto_fin = IdProducto == 0 ? 999999 : IdProducto;
                 
                 List<INV_005_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())

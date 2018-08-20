@@ -202,7 +202,6 @@
             this.xrTableCell85 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell86 = new DevExpress.XtraReports.UI.XRTableCell();
             this.GroupHeader3 = new DevExpress.XtraReports.UI.GroupHeaderBand();
-            this.GroupFooter3 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.xrTable9 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow14 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell87 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -227,6 +226,7 @@
             this.xrTableRow17 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell76 = new DevExpress.XtraReports.UI.XRTableCell();
             this.p_IdUsuario = new DevExpress.XtraReports.Parameters.Parameter();
+            this.GroupFooter4 = new DevExpress.XtraReports.UI.GroupFooterBand();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
@@ -244,7 +244,7 @@
             // 
             this.Detail.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable4});
-            this.Detail.HeightF = 20.00001F;
+            this.Detail.HeightF = 16F;
             this.Detail.Name = "Detail";
             this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -256,7 +256,7 @@
             this.xrTable4.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
             this.xrTable4.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow10});
-            this.xrTable4.SizeF = new System.Drawing.SizeF(1149F, 20.00001F);
+            this.xrTable4.SizeF = new System.Drawing.SizeF(1149F, 16F);
             this.xrTable4.StylePriority.UsePadding = false;
             this.xrTable4.StylePriority.UseTextAlignment = false;
             this.xrTable4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
@@ -298,6 +298,8 @@
             // xrTableCell41
             // 
             this.xrTableCell41.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell41.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pr_descripcion]")});
             this.xrTableCell41.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell41.Name = "xrTableCell41";
             this.xrTableCell41.StylePriority.UseBorders = false;
@@ -483,7 +485,7 @@
             // 
             // BottomMargin
             // 
-            this.BottomMargin.HeightF = 11.87496F;
+            this.BottomMargin.HeightF = 15.62494F;
             this.BottomMargin.Name = "BottomMargin";
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -498,7 +500,7 @@
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable2,
             this.xrTable1});
-            this.ReportHeader.HeightF = 150F;
+            this.ReportHeader.HeightF = 133F;
             this.ReportHeader.Name = "ReportHeader";
             // 
             // xrTable2
@@ -506,13 +508,13 @@
             this.xrTable2.Font = new System.Drawing.Font("Verdana", 8F);
             this.xrTable2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 49.99997F);
             this.xrTable2.Name = "xrTable2";
-            this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
+            this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 5, 0, 100F);
             this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow3,
             this.xrTableRow4,
             this.xrTableRow5,
             this.xrTableRow6});
-            this.xrTable2.SizeF = new System.Drawing.SizeF(1149F, 100F);
+            this.xrTable2.SizeF = new System.Drawing.SizeF(1149F, 83F);
             this.xrTable2.StylePriority.UseFont = false;
             this.xrTable2.StylePriority.UsePadding = false;
             // 
@@ -554,7 +556,7 @@
             // xrTableCell6
             // 
             this.xrTableCell6.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([Parameters].[p_IdCategoria]=0,\'TODOS\' ,[ca_Categoria])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([Parameters].[p_IdCategoria]=\'\',\'TODOS\' ,[ca_Categoria])")});
             this.xrTableCell6.Name = "xrTableCell6";
             this.xrTableCell6.Weight = 1.2671891761800955D;
             // 
@@ -1080,7 +1082,7 @@
             this.xrTable5});
             this.GroupHeader1.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
             new DevExpress.XtraReports.UI.GroupField("IdAnio", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
-            this.GroupHeader1.HeightF = 20F;
+            this.GroupHeader1.HeightF = 16F;
             this.GroupHeader1.Level = 5;
             this.GroupHeader1.Name = "GroupHeader1";
             // 
@@ -1092,7 +1094,7 @@
             this.xrTable5.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
             this.xrTable5.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow9});
-            this.xrTable5.SizeF = new System.Drawing.SizeF(1149F, 20F);
+            this.xrTable5.SizeF = new System.Drawing.SizeF(1149F, 16F);
             this.xrTable5.StylePriority.UseFont = false;
             this.xrTable5.StylePriority.UsePadding = false;
             this.xrTable5.StylePriority.UseTextAlignment = false;
@@ -1118,7 +1120,7 @@
             // 
             this.GroupFooter1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable7});
-            this.GroupFooter1.HeightF = 20.00001F;
+            this.GroupFooter1.HeightF = 16F;
             this.GroupFooter1.Level = 5;
             this.GroupFooter1.Name = "GroupFooter1";
             // 
@@ -1129,7 +1131,7 @@
             this.xrTable7.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
             this.xrTable7.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow12});
-            this.xrTable7.SizeF = new System.Drawing.SizeF(1149F, 20.00001F);
+            this.xrTable7.SizeF = new System.Drawing.SizeF(1149F, 16F);
             this.xrTable7.StylePriority.UsePadding = false;
             this.xrTable7.StylePriority.UseTextAlignment = false;
             this.xrTable7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
@@ -1159,7 +1161,7 @@
             // 
             this.xrTableCell58.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTableCell58.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat(\'TOTAL\',[IdAnio] )")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat(\'TOTAL \',[IdAnio] )")});
             this.xrTableCell58.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.xrTableCell58.Name = "xrTableCell58";
             this.xrTableCell58.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
@@ -1172,7 +1174,7 @@
             // 
             // xrTableCell59
             // 
-            this.xrTableCell59.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell59.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell59.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Enero])")});
             this.xrTableCell59.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1185,7 +1187,7 @@
             // 
             // xrTableCell60
             // 
-            this.xrTableCell60.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell60.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell60.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Febrero])")});
             this.xrTableCell60.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1198,7 +1200,7 @@
             // 
             // xrTableCell61
             // 
-            this.xrTableCell61.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell61.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell61.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Marzo])")});
             this.xrTableCell61.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1211,7 +1213,7 @@
             // 
             // xrTableCell62
             // 
-            this.xrTableCell62.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell62.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell62.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Abril])")});
             this.xrTableCell62.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1224,7 +1226,7 @@
             // 
             // xrTableCell63
             // 
-            this.xrTableCell63.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell63.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell63.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Mayo])")});
             this.xrTableCell63.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1237,7 +1239,7 @@
             // 
             // xrTableCell64
             // 
-            this.xrTableCell64.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell64.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell64.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Junio])")});
             this.xrTableCell64.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1250,7 +1252,7 @@
             // 
             // xrTableCell65
             // 
-            this.xrTableCell65.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell65.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell65.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Julio])")});
             this.xrTableCell65.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1263,7 +1265,7 @@
             // 
             // xrTableCell66
             // 
-            this.xrTableCell66.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell66.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell66.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Agosto])")});
             this.xrTableCell66.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1276,7 +1278,7 @@
             // 
             // xrTableCell67
             // 
-            this.xrTableCell67.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell67.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell67.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Septiembre])")});
             this.xrTableCell67.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1289,7 +1291,7 @@
             // 
             // xrTableCell68
             // 
-            this.xrTableCell68.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell68.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell68.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Octubre])")});
             this.xrTableCell68.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1302,7 +1304,7 @@
             // 
             // xrTableCell69
             // 
-            this.xrTableCell69.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell69.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell69.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Noviembre])")});
             this.xrTableCell69.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1315,7 +1317,7 @@
             // 
             // xrTableCell70
             // 
-            this.xrTableCell70.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell70.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell70.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Diciembre])")});
             this.xrTableCell70.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1328,7 +1330,7 @@
             // 
             // xrTableCell71
             // 
-            this.xrTableCell71.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell71.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell71.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Total])")});
             this.xrTableCell71.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1342,7 +1344,7 @@
             // 
             // xrTableCell72
             // 
-            this.xrTableCell72.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell72.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell72.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([StockActual])")});
             this.xrTableCell72.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1363,7 +1365,7 @@
             this.xrTable6});
             this.GroupHeader2.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
             new DevExpress.XtraReports.UI.GroupField("IdMarca", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
-            this.GroupHeader2.HeightF = 20F;
+            this.GroupHeader2.HeightF = 16F;
             this.GroupHeader2.Level = 4;
             this.GroupHeader2.Name = "GroupHeader2";
             // 
@@ -1375,7 +1377,7 @@
             this.xrTable6.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
             this.xrTable6.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow11});
-            this.xrTable6.SizeF = new System.Drawing.SizeF(1149F, 20F);
+            this.xrTable6.SizeF = new System.Drawing.SizeF(1149F, 16F);
             this.xrTable6.StylePriority.UseFont = false;
             this.xrTable6.StylePriority.UsePadding = false;
             this.xrTable6.StylePriority.UseTextAlignment = false;
@@ -1392,7 +1394,7 @@
             // 
             this.xrTableCell37.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NomMarca]")});
-            this.xrTableCell37.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell37.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.xrTableCell37.Name = "xrTableCell37";
             this.xrTableCell37.StylePriority.UseFont = false;
             this.xrTableCell37.Weight = 11.1D;
@@ -1401,18 +1403,18 @@
             // 
             this.GroupFooter2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable8});
-            this.GroupFooter2.HeightF = 20.00001F;
+            this.GroupFooter2.HeightF = 16F;
             this.GroupFooter2.Level = 4;
             this.GroupFooter2.Name = "GroupFooter2";
             // 
             // xrTable8
             // 
-            this.xrTable8.LocationFloat = new DevExpress.Utils.PointFloat(0.500061F, 0F);
+            this.xrTable8.LocationFloat = new DevExpress.Utils.PointFloat(1.000063F, 0F);
             this.xrTable8.Name = "xrTable8";
             this.xrTable8.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
             this.xrTable8.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow13});
-            this.xrTable8.SizeF = new System.Drawing.SizeF(1149F, 20.00001F);
+            this.xrTable8.SizeF = new System.Drawing.SizeF(1149F, 16F);
             this.xrTable8.StylePriority.UsePadding = false;
             this.xrTable8.StylePriority.UseTextAlignment = false;
             this.xrTable8.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
@@ -1442,8 +1444,8 @@
             // 
             this.xrTableCell39.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTableCell39.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat(\'TOTAL\',[NomMarca] )")});
-            this.xrTableCell39.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat(\'TOTAL \',[NomMarca] )")});
+            this.xrTableCell39.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.xrTableCell39.Name = "xrTableCell39";
             this.xrTableCell39.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
             this.xrTableCell39.StylePriority.UseBorders = false;
@@ -1455,7 +1457,7 @@
             // 
             // xrTableCell57
             // 
-            this.xrTableCell57.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell57.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell57.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Enero])")});
             this.xrTableCell57.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1468,7 +1470,7 @@
             // 
             // xrTableCell73
             // 
-            this.xrTableCell73.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell73.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell73.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Febrero])")});
             this.xrTableCell73.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1481,7 +1483,7 @@
             // 
             // xrTableCell74
             // 
-            this.xrTableCell74.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell74.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell74.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Marzo])")});
             this.xrTableCell74.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1494,7 +1496,7 @@
             // 
             // xrTableCell75
             // 
-            this.xrTableCell75.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell75.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell75.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Abril])")});
             this.xrTableCell75.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1507,7 +1509,7 @@
             // 
             // xrTableCell77
             // 
-            this.xrTableCell77.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell77.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell77.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Mayo])")});
             this.xrTableCell77.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1520,7 +1522,7 @@
             // 
             // xrTableCell78
             // 
-            this.xrTableCell78.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell78.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell78.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Junio])")});
             this.xrTableCell78.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1533,7 +1535,7 @@
             // 
             // xrTableCell79
             // 
-            this.xrTableCell79.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell79.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell79.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Julio])")});
             this.xrTableCell79.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1546,7 +1548,7 @@
             // 
             // xrTableCell80
             // 
-            this.xrTableCell80.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell80.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell80.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Agosto])")});
             this.xrTableCell80.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1559,7 +1561,7 @@
             // 
             // xrTableCell81
             // 
-            this.xrTableCell81.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell81.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell81.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Septiembre])")});
             this.xrTableCell81.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1572,7 +1574,7 @@
             // 
             // xrTableCell82
             // 
-            this.xrTableCell82.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell82.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell82.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Octubre])")});
             this.xrTableCell82.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1585,7 +1587,7 @@
             // 
             // xrTableCell83
             // 
-            this.xrTableCell83.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell83.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell83.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Noviembre])")});
             this.xrTableCell83.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1598,7 +1600,7 @@
             // 
             // xrTableCell84
             // 
-            this.xrTableCell84.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell84.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell84.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Diciembre])")});
             this.xrTableCell84.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1611,7 +1613,7 @@
             // 
             // xrTableCell85
             // 
-            this.xrTableCell85.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell85.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell85.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Total])")});
             this.xrTableCell85.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1625,7 +1627,7 @@
             // 
             // xrTableCell86
             // 
-            this.xrTableCell86.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell86.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell86.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([StockActual])")});
             this.xrTableCell86.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1648,22 +1650,14 @@
             this.GroupHeader3.Level = 3;
             this.GroupHeader3.Name = "GroupHeader3";
             // 
-            // GroupFooter3
-            // 
-            this.GroupFooter3.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrTable9});
-            this.GroupFooter3.HeightF = 24.75727F;
-            this.GroupFooter3.Level = 3;
-            this.GroupFooter3.Name = "GroupFooter3";
-            // 
             // xrTable9
             // 
-            this.xrTable9.LocationFloat = new DevExpress.Utils.PointFloat(0.500061F, 2.378631F);
+            this.xrTable9.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrTable9.Name = "xrTable9";
             this.xrTable9.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
             this.xrTable9.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow14});
-            this.xrTable9.SizeF = new System.Drawing.SizeF(1149F, 20.00001F);
+            this.xrTable9.SizeF = new System.Drawing.SizeF(1149F, 16F);
             this.xrTable9.StylePriority.UsePadding = false;
             this.xrTable9.StylePriority.UseTextAlignment = false;
             this.xrTable9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
@@ -1695,7 +1689,7 @@
             this.xrTableCell87.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat(\'Total \',[ca_Categoria],\' - \',[nom_linea],\' - \', [nom_grupo], \' - \', [nom_" +
                     "subgrupo] )")});
-            this.xrTableCell87.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell87.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.xrTableCell87.Name = "xrTableCell87";
             this.xrTableCell87.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
             this.xrTableCell87.StylePriority.UseBorders = false;
@@ -1707,7 +1701,7 @@
             // 
             // xrTableCell88
             // 
-            this.xrTableCell88.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell88.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell88.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Enero])")});
             this.xrTableCell88.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1720,7 +1714,7 @@
             // 
             // xrTableCell89
             // 
-            this.xrTableCell89.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell89.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell89.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Febrero])")});
             this.xrTableCell89.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1733,7 +1727,7 @@
             // 
             // xrTableCell90
             // 
-            this.xrTableCell90.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell90.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell90.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Marzo])")});
             this.xrTableCell90.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1746,7 +1740,7 @@
             // 
             // xrTableCell91
             // 
-            this.xrTableCell91.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell91.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell91.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Abril])")});
             this.xrTableCell91.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1759,7 +1753,7 @@
             // 
             // xrTableCell92
             // 
-            this.xrTableCell92.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell92.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell92.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Mayo])")});
             this.xrTableCell92.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1772,7 +1766,7 @@
             // 
             // xrTableCell93
             // 
-            this.xrTableCell93.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell93.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell93.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Junio])")});
             this.xrTableCell93.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1785,7 +1779,7 @@
             // 
             // xrTableCell94
             // 
-            this.xrTableCell94.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell94.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell94.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Julio])")});
             this.xrTableCell94.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1798,7 +1792,7 @@
             // 
             // xrTableCell95
             // 
-            this.xrTableCell95.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell95.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell95.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Agosto])")});
             this.xrTableCell95.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1811,7 +1805,7 @@
             // 
             // xrTableCell96
             // 
-            this.xrTableCell96.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell96.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell96.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Septiembre])")});
             this.xrTableCell96.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1824,7 +1818,7 @@
             // 
             // xrTableCell97
             // 
-            this.xrTableCell97.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell97.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell97.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Octubre])")});
             this.xrTableCell97.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1837,7 +1831,7 @@
             // 
             // xrTableCell98
             // 
-            this.xrTableCell98.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell98.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell98.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Noviembre])")});
             this.xrTableCell98.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1850,7 +1844,7 @@
             // 
             // xrTableCell99
             // 
-            this.xrTableCell99.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell99.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell99.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Diciembre])")});
             this.xrTableCell99.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1863,7 +1857,7 @@
             // 
             // xrTableCell100
             // 
-            this.xrTableCell100.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell100.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell100.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Total])")});
             this.xrTableCell100.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1877,7 +1871,7 @@
             // 
             // xrTableCell101
             // 
-            this.xrTableCell101.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell101.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell101.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([StockActual])")});
             this.xrTableCell101.Font = new System.Drawing.Font("Verdana", 7F);
@@ -1942,7 +1936,7 @@
             this.xrTableCell76.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat([ca_Categoria],\' - \',[nom_linea],\' - \', [nom_grupo], \' - \', [nom_subgrupo]" +
                     " )")});
-            this.xrTableCell76.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell76.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.xrTableCell76.Name = "xrTableCell76";
             this.xrTableCell76.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 5, 0, 100F);
             this.xrTableCell76.StylePriority.UseBorders = false;
@@ -1957,6 +1951,14 @@
             this.p_IdUsuario.Name = "p_IdUsuario";
             this.p_IdUsuario.Visible = false;
             // 
+            // GroupFooter4
+            // 
+            this.GroupFooter4.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrTable9});
+            this.GroupFooter4.HeightF = 16F;
+            this.GroupFooter4.Level = 1;
+            this.GroupFooter4.Name = "GroupFooter4";
+            // 
             // INV_010_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -1970,16 +1972,16 @@
             this.GroupHeader2,
             this.GroupFooter2,
             this.GroupHeader3,
-            this.GroupFooter3,
             this.GroupHeader4,
             this.GroupHeader5,
-            this.GroupHeader6});
+            this.GroupHeader6,
+            this.GroupFooter4});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.objectDataSource1});
             this.DataSource = this.objectDataSource1;
             this.Font = new System.Drawing.Font("Verdana", 8F);
             this.Landscape = true;
-            this.Margins = new System.Drawing.Printing.Margins(9, 10, 10, 12);
+            this.Margins = new System.Drawing.Printing.Margins(9, 10, 10, 16);
             this.PageHeight = 827;
             this.PageWidth = 1169;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
@@ -2105,7 +2107,6 @@
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader2;
         private DevExpress.XtraReports.UI.GroupFooterBand GroupFooter2;
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader3;
-        private DevExpress.XtraReports.UI.GroupFooterBand GroupFooter3;
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader4;
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader5;
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader6;
@@ -2170,5 +2171,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell99;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell100;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell101;
+        private DevExpress.XtraReports.UI.GroupFooterBand GroupFooter4;
     }
 }

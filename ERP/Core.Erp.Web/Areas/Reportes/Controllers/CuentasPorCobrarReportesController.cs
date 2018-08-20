@@ -141,6 +141,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdCliente.Value = model.IdCliente;
             report.p_IdContacto.Value = model.IdClienteContacto;
             report.p_fecha_corte.Value = model.fecha_corte;
+            report.p_MostrarSaldo0.Value = model.Check1;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
@@ -156,6 +157,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdCliente.Value = model.IdCliente;
             report.p_IdContacto.Value = model.IdClienteContacto;
             report.p_fecha_corte.Value = model.fecha_corte;
+            report.p_MostrarSaldo0.Value = model.Check1;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa;
             cargar_cliente_contacto(model);
