@@ -617,7 +617,7 @@ namespace Core.Erp.Data.Inventario
                           && c.IdEmpresa == IdEmpresa
                           && pr.IdEmpresa == IdEmpresa
                           && p.Estado=="A"
-                          &&(p.IdProducto.ToString() + " " + p.pr_descripcion).Contains(filter)
+                          &&(p.IdProducto.ToString() + " " + p.pr_descripcion + " " + p.lote_num_lote).Contains(filter)
                          select new {
                              p.IdEmpresa,
                              p.IdProducto,
@@ -694,7 +694,7 @@ namespace Core.Erp.Data.Inventario
                     else
                         Lista = (from p in Context.vwin_producto_padre_combo
                                  where p.IdEmpresa == IdEmpresa
-                                 && (p.IdProducto.ToString() + " " + p.pr_descripcion).Contains(filter)
+                                 && (p.IdProducto.ToString() + " " + p.pr_descripcion ).Contains(filter)
                                  select new in_Producto_Info
                                  {
                                      IdEmpresa = p.IdEmpresa,
@@ -871,7 +871,7 @@ namespace Core.Erp.Data.Inventario
                             && pr.IdEmpresa == IdEmpresa
                             && p.Estado == "A"
                             && p.IdProducto_padre!=null
-                            && (p.IdProducto.ToString() + " " + p.pr_descripcion).Contains(filter)
+                            && (p.IdProducto.ToString() + " " + p.pr_descripcion + " " + p.lote_num_lote).Contains(filter)
                            select new
                            {
                                p.IdEmpresa,
