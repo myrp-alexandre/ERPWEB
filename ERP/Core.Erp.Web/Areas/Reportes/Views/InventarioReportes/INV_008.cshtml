@@ -9,7 +9,8 @@
 }
 @using (Html.BeginForm("INV_008", "InventarioReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    <div class="box collapsed-box">
+    @Html.HiddenFor(q=>q.IdEmpresa, new { @id="IdEmpresa"})
+    <div class="box">
         <div class="box-header with-border">
             <div class="row">
                 <div class="col-md-12">
@@ -90,10 +91,10 @@
         <!-- /.box-footer-->
     </div>
 }
-
-<script type="text/javascript">
+    <script type="text/javascript">
     $(function () {
-        $("#IdSucursal").change(function () {
+       
+   $("#IdSucursal").change(function () {
             cargar_bodega();
         });
 
@@ -104,10 +105,9 @@
     function cargar_bodega() {
         $("#IdBodega").empty();
 
-        var sucursal = $("#IdSucursal").val();
-
         var datos = {
-            IdSucursal: sucursal
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursal").val()
         }
 
         $.ajax({
@@ -128,4 +128,4 @@
             }
         });
     };
-</script>
+    </script>

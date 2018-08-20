@@ -18,24 +18,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdCbteCble.Value = IdCbteCble;
             model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
-            if (IdCbteCble != 0)
-            {
-                model.p_IdEmpresa.Visible = false;
-                model.p_IdTipoCbte.Visible = false;
-                model.p_IdCbteCble.Visible = false;
-            }
-            else
-                model.RequestParameters = false;
             return View(model);
         }
-        private void cargar_combos()
+        private void cargar_combos(int IdEmpresa)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ct_plancta_Bus bus_cta = new ct_plancta_Bus();
             var lst_cta = bus_cta.get_list(IdEmpresa, false, false);
             ViewBag.lst_cta = lst_cta;
-
-            
         }
 
         private void cargar_nivel()
@@ -56,22 +45,20 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.lst_balance = lst_balance;
         }
 
-        public ActionResult CONTA_002(DateTime? fechaIni, DateTime? fechaFin, string IdCtaCble = "")
+        public ActionResult CONTA_002()
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
-                fecha_ini = fechaIni == null ? DateTime.Now : Convert.ToDateTime(fechaIni),
-                fecha_fin = fechaFin == null ? DateTime.Now : Convert.ToDateTime(fechaFin),
-                IdCtaCble = IdCtaCble
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
             };
-            cargar_combos();
+            cargar_combos(model.IdEmpresa);
             CONTA_002_Rpt report = new CONTA_002_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdCtaCble.Value = model.IdCtaCble;
             report.p_fechaIni.Value = model.fecha_ini;
             report.p_fechaFin.Value = model.fecha_fin;
-            report.usuario = Session["IdUsuario"].ToString();
-            report.empresa = Session["nom_empresa"].ToString();
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
                 report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
@@ -85,10 +72,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdCtaCble.Value = model.IdCtaCble;
             report.p_fechaIni.Value = model.fecha_ini;
             report.p_fechaFin.Value = model.fecha_fin;
-            report.usuario = Session["IdUsuario"].ToString();
-            report.empresa = Session["nom_empresa"].ToString();
-            cargar_combos();
-                report.RequestParameters = false;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+            cargar_combos(model.IdEmpresa);
             ViewBag.Report = report;
             return View(model);
         }

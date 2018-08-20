@@ -19,6 +19,7 @@ namespace Core.Erp.Data.Reportes.ActivoFijo
                 int IdCategoriaAF_ini = IdCategoriaAF;
                 int IdCategoriaAF_fin = IdCategoriaAF == 0 ? 9999 : IdCategoriaAF;
 
+                fecha_corte = fecha_corte.Date;
                 List<ACTF_004_detalle_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {

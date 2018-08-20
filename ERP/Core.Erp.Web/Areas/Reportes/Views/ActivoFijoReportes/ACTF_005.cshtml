@@ -10,7 +10,9 @@
 }
 @using (Html.BeginForm("ACTF_005", "ActivofijoReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    <div class="box collapsed-box">
+    @Html.HiddenFor(q => q.IdEmpresa, new {@id= "IdEmpresa" })
+
+    <div class="box ">
         <div class="box-header with-border">
             <div class="row">
                 <div class="col-md-12">
@@ -56,13 +58,13 @@
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="">fecha corte</label>
+                            <label for="">Fecha corte</label>
                             <div class="input-group date">
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                @Html.TextBoxFor(q => q.fechaCorte, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechaCorte" })
-                                @Html.ValidationMessageFor(q => q.fechaCorte, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.fecha_corte, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_corte" })
+                                @Html.ValidationMessageFor(q => q.fecha_corte, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -97,12 +99,40 @@
         <!-- /.box-footer-->
     </div>
 }
-<script>
-                        $(function () {
-                            //Date picker
-                            $('#fechaCorte').datepicker({
-                                autoclose: true
-                            })
+    <script>
+    $(function () {
+        //Date picker
+        $('#fecha_corte').datepicker({
+            autoclose: true
+        })
+        
+        cargar_categoria();
+    });
 
-                        });
-</script>
+    function cargar_categoria() {
+        $("#IdCategoriaAF").empty();
+        var activo = $("#IdActivoFijoTipo").val();
+
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            activo: IdActivoFijoTipo
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("cargar_categoria", "ActivoFijoReportes", new { Area = "Reportes" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdCategoriaAF").append("<option value=" + row.IdCategoriaAF + ">" + row.Descripcion + "</option>");
+                });
+            },
+            error: function (error) {
+            }
+        });
+    };
+    </script>

@@ -8,6 +8,7 @@ using Core.Erp.Info.Reportes.ActivoFijo;
 using Core.Erp.Info.Helps;
 using Core.Erp.Bus.ActivoFijo;
 using Core.Erp.Info.ActivoFijo;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
@@ -68,31 +69,26 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         }
 
-        public ActionResult ACTF_004(DateTime? fecha_corte, int IdActivoFijoTipo = 0,int  IdCategoriaAF= 0, string Estado_Proceso ="",string IdUsuario="", bool  mostrar_detallado = false)
+        public ActionResult ACTF_004( bool  mostrar_detallado = false)
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
-                IdActivoFijoTipo = IdActivoFijoTipo,
-                IdCategoriaAF = IdCategoriaAF,
-                Estado_Proceso = Estado_Proceso,
-                IdUsuario = IdUsuario,
-                fecha_fin = fecha_corte == null ? DateTime.Now : Convert.ToDateTime(fecha_corte),
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
             };
 
             if (mostrar_detallado)
             {
                 ACTF_004_detalle_Rpt model_detalle = new ACTF_004_detalle_Rpt();
-                model_detalle.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+                model_detalle.p_IdEmpresa.Value = model.IdEmpresa;
                 model_detalle.p_IdActivoFijoTipo.Value = model.IdActivoFijoTipo;
                 model_detalle.p_IdCategoriaAF.Value = model.IdCategoriaAF;
-                model_detalle.p_fecha_corte.Value = model.fecha_fin;
+                model_detalle.p_fecha_corte.Value = model.fecha_corte;
                 model_detalle.p_Estado_Proceso.Value = model.Estado_Proceso;
                 model_detalle.p_IdUsuario.Value = model.IdUsuario;
                 cargar_combos(model);
 
-                model_detalle.usuario = Session["IdUsuario"].ToString();
-                model_detalle.empresa = Session["nom_empresa"].ToString();
-                    model_detalle.RequestParameters = false;
+                model_detalle.usuario = SessionFixed.IdUsuario.ToString();
+                model_detalle.empresa = SessionFixed.NomEmpresa.ToString();
                 ViewBag.report = model_detalle;
             }
             else
@@ -106,14 +102,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model_resumen.p_IdUsuario.Value = model.IdUsuario;
                 cargar_combos(model);
 
-                model_resumen.usuario = Session["IdUsuario"].ToString();
-                model_resumen.empresa = Session["nom_empresa"].ToString();
-                if (IdActivoFijoTipo != 0)
-                {
-                    model_resumen.p_IdEmpresa.Visible = false;
-                }
-                else
-                    model_resumen.RequestParameters = false;
+                model_resumen.usuario = SessionFixed.IdUsuario.ToString();
+                model_resumen.empresa = SessionFixed.NomEmpresa.ToString();
                 ViewBag.report = model_resumen;
             }
             cargar_combos(model);
@@ -131,7 +121,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.p_IdCategoriaAF.Value = model.IdCategoriaAF;
                 report.p_Estado_Proceso.Value = model.Estado_Proceso;
                 report.p_IdUsuario.Value = model.IdUsuario;
-                report.p_fecha_corte.Value = model.fecha_fin;
+                report.p_fecha_corte.Value = model.fecha_corte;
                 report.usuario = Session["IdUsuario"].ToString();
                 report.empresa = Session["nom_empresa"].ToString();
                 cargar_combos(model);
@@ -158,10 +148,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         private void cargar_combos(cl_filtros_Info model)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
 
             Af_Activo_fijo_Categoria_Bus bus_categoria = new Af_Activo_fijo_Categoria_Bus();
-            var lst_categoria = bus_categoria.get_list(IdEmpresa, model.IdActivoFijoTipo, false);
+            var lst_categoria = bus_categoria.get_list(model.IdEmpresa, model.IdActivoFijoTipo, false);
             ViewBag.lst_categoria = lst_categoria;
 
             Af_Catalogo_Bus bus_catalogo = new Af_Catalogo_Bus();
@@ -169,30 +158,35 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.lst_estado = lst_estado;
             
             Af_Activo_fijo_tipo_Bus bus_activo = new Af_Activo_fijo_tipo_Bus();
-            var lst_activo = bus_activo.get_list(IdEmpresa, false);
+            var lst_activo = bus_activo.get_list(model.IdEmpresa, false);
             ViewBag.lst_activo = lst_activo;
 
 
         }
-        public ActionResult ACTF_005(DateTime? fecha_corte, int IdActivoFijoTipo = 0, int IdCategoriaAF = 0, string Estado_Proceso = "")
+        #region Json
+        public JsonResult cargar_categoria(int IdEmpresa = 0 , int IdActivoFijoTipo = 0)
+        {
+            Af_Activo_fijo_Categoria_Bus bus_categoria = new Af_Activo_fijo_Categoria_Bus();
+            var resultado = bus_categoria.get_list(IdEmpresa, IdActivoFijoTipo, false);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+        public ActionResult ACTF_005()
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
-                IdActivoFijoTipo = IdActivoFijoTipo,
-                IdCategoriaAF = IdCategoriaAF,
-                Estado_Proceso = Estado_Proceso,
-                fecha_fin = fecha_corte == null ? DateTime.Now : Convert.ToDateTime(fecha_corte),
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+
             };
             ACTF_005_Rpt report = new ACTF_005_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdActivoFijoTipo.Value = model.IdActivoFijoTipo;
             report.p_IdCategoriaAF.Value = model.IdCategoriaAF;
-            report.p_fecha_corte.Value = model.fecha_fin;
+            report.p_fecha_corte.Value = model.fecha_corte;
             report.p_Estado_Proceso.Value = model.Estado_Proceso;
-
-            report.usuario = Session["IdUsuario"].ToString();
-            report.empresa = Session["nom_empresa"].ToString();
-                report.RequestParameters = false;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
             cargar_combos(model);
             return View();
@@ -201,15 +195,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult ACTF_005(cl_filtros_Info model)
         {
             ACTF_005_Rpt report = new ACTF_005_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdActivoFijoTipo.Value = model.IdActivoFijoTipo;
             report.p_IdCategoriaAF.Value = model.IdCategoriaAF;
             report.p_Estado_Proceso.Value = model.Estado_Proceso;
-            report.p_fecha_corte.Value = model.fecha_fin;
+            report.p_fecha_corte.Value = model.fecha_corte;
             cargar_combos(model);
-            report.usuario = Session["IdUsuario"].ToString();
-            report.empresa = Session["nom_empresa"].ToString();
-                report.RequestParameters = false;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
             return View();
         }

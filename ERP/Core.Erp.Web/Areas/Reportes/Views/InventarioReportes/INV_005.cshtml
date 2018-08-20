@@ -10,7 +10,7 @@
 }
 @using (Html.BeginForm("INV_005", "InventarioReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-<div class="box collapsed-box">
+<div class="box ">
     <div class="box-header with-border">
         <div class="row">
             <div class="col-md-12">
@@ -29,18 +29,25 @@
     <div class="box-body">
         <div class="row">
             <div class="col-md-12">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="IdSucursal">Sucursal</label>
                         @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
                         @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="IdBodega">Bodega</label>
                         @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodega" })
                         @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="IdProducto">Producto </label>
+                        @Html.Partial("_CmbProducto_Inventario", Model)
+                        @Html.ValidationMessageFor(q => q.IdProducto, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
