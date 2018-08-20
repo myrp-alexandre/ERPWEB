@@ -94,14 +94,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.RequestParameters = false;
             return View(model);
         }
-        public ActionResult CXC_003(DateTime? Fecha_ini, DateTime? Fecha_fin, decimal IdCliente = 0 )
+        public ActionResult CXC_003()
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
-                fecha_ini = Fecha_ini == null ? DateTime.Now : Convert.ToDateTime(Fecha_ini),
-                fecha_fin = Fecha_fin == null ? DateTime.Now : Convert.ToDateTime(Fecha_fin),
-                IdCliente = IdCliente
-
+                IdCliente = 0
             };
             cargar_combos();
             CXC_003_Rpt report = new CXC_003_Rpt();
