@@ -167,7 +167,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             string mensaje = "";
 
             mensaje = bus_liquidacion.validar_liquidacion(model);
-
+            model.IdUsuario_creacion = SessionFixed.IdUsuario.ToString();
             if (mensaje != "")
             {
                 cargar_combos();
@@ -214,7 +214,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             model.lst_detalle = info_detalle.get_list();
             model.lst_comprobante = Lis_imp_liquidacion_Info_diario_contable.get_list();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-           
+            model.IdUsuario_anulacion = SessionFixed.IdUsuario.ToString();
             if (!bus_liquidacion.Anular(model))
             {
                 cargar_combos();
