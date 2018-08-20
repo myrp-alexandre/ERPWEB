@@ -22,7 +22,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
     public class LiquidacionOrdenCompraController : Controller
     {
         #region variables
-        imp_ordencompra_ext_Bus bus_orden = new imp_ordencompra_ext_Bus();
+        imp_liquidacion_Bus bus_liquidacion = new imp_liquidacion_Bus();
         cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus(); 
         imp_ordencompra_ext_det_Info_lst info_detalle = new imp_ordencompra_ext_det_Info_lst();
@@ -31,12 +31,14 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         imp_ordencompra_ext_det_Bus bus_detalle = new imp_ordencompra_ext_det_Bus();
         imp_catalogo_Bus bus_catalogo = new imp_catalogo_Bus();
         tb_moneda_Bus bus_moneda = new tb_moneda_Bus();
-        imp_ordencompra_ext_Info_diario_contable info_diarios = new imp_ordencompra_ext_Info_diario_contable();
+        imp_liquidacion_Info_diario_contable Lis_imp_liquidacion_Info_diario_contable = new imp_liquidacion_Info_diario_contable();
         imp_orden_compra_ext_ct_cbteble_det_gastos_Bus bus_gastos = new imp_orden_compra_ext_ct_cbteble_det_gastos_Bus();
         imp_orden_compra_ext_ct_cbteble_det_gastos_Info_lst info_gastos_lst = new imp_orden_compra_ext_ct_cbteble_det_gastos_Info_lst();
         imp_parametro_Bus bus_param = new imp_parametro_Bus();
         imp_parametro_Info param = new imp_parametro_Info();
         imp_gasto_Bus bus_gastos_tipo = new imp_gasto_Bus();
+
+        ct_cbtecble_det_Bus bus_comprobante_det = new ct_cbtecble_det_Bus();
         #endregion
 
 
@@ -95,8 +97,8 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
 
 
-            List<imp_ordencompra_ext_Info> model = new List<imp_ordencompra_ext_Info>();
-            model = bus_orden.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
+            List<imp_liquidacion_Info> model = new List<imp_liquidacion_Info>();
+            model = bus_liquidacion.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_liquidacion_oc", model);
         }
         public ActionResult GridViewPartial_liquidacion_oc_det()
@@ -111,7 +113,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         public ActionResult GridViewPartial_liqidacion_dc()
         {
             List<ct_cbtecble_det_Info> model = new List<ct_cbtecble_det_Info>();
-            model = info_diarios.get_list();
+            model = Lis_imp_liquidacion_Info_diario_contable.get_list();
             if (model == null)
                 model = new List<ct_cbtecble_det_Info>();
             cargar_combos_detalle();
@@ -142,7 +144,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            imp_ordencompra_ext_Info model = bus_orden.get_liquidar_oc(IdEmpresa, IdOrdenCompra_ext);
+            imp_liquidacion_Info model = bus_liquidacion.get_liquidar_oc(IdEmpresa, IdOrdenCompra_ext);
             if (model != null)
                 model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             var lst_detalle = bus_detalle.get_list(IdEmpresa, IdOrdenCompra_ext);
@@ -157,14 +159,14 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Nuevo(imp_ordencompra_ext_Info model)
+        public ActionResult Nuevo(imp_liquidacion_Info model)
         {
             model.lst_detalle = info_detalle.get_list();
-            model.lst_comprobante = info_diarios.get_list();
+            model.lst_comprobante = Lis_imp_liquidacion_Info_diario_contable.get_list();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             string mensaje = "";
 
-            mensaje = bus_orden.validar_liquidacion(model);
+            mensaje = bus_liquidacion.validar_liquidacion(model);
 
             if (mensaje != "")
             {
@@ -172,7 +174,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
-            if (!bus_orden.guardarLiquidacionDB(model))
+            if (!bus_liquidacion.guardarDB(model))
             {
                 cargar_combos();
                 return View(model);
@@ -180,14 +182,57 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Anular(decimal IdOrdenCompra_ext = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            imp_liquidacion_Info model = bus_liquidacion.get_info(IdEmpresa, IdOrdenCompra_ext);
+            if (model != null)
+                model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            var lst_detalle = bus_detalle.get_list(IdEmpresa, IdOrdenCompra_ext);
+            var lst_gastos = bus_gastos.get_list_gastos_asignados(IdEmpresa, IdOrdenCompra_ext);
+
+            info_gastos_lst.set_list(lst_gastos, model.IdTransaccionSession);
+            info_detalle.set_list(lst_detalle);
+
+            var lst_diario = bus_comprobante_det.get_list(model.IdEmpresa, model.IdTipoCbte_ct == null ? 0: Convert.ToInt32( model.IdTipoCbte_ct),model.IdCbteCble_ct==null?0: Convert.ToDecimal( model.IdCbteCble_ct));
+            Lis_imp_liquidacion_Info_diario_contable.set_list(lst_diario);
+            if (model == null)
+                return RedirectToAction("Index");
+            cargar_combos();
+            cargar_combos_detalle();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Anular(imp_liquidacion_Info model)
+        {
+            model.lst_detalle = info_detalle.get_list();
+            model.lst_comprobante = Lis_imp_liquidacion_Info_diario_contable.get_list();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+           
+            if (!bus_liquidacion.Anular(model))
+            {
+                cargar_combos();
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
+
+
         #endregion
+
         #region json
         public JsonResult calcular_costo(decimal IdTransaccionSession=0, decimal IdOrdenCompra_ext = 0, string IdCtaCble_importacion="")
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             param = bus_param.get_info(IdEmpresa);
-           info_detalle.set_list( bus_orden.calcular_costos(IdEmpresa, IdOrdenCompra_ext));
-           info_diarios.delete_detail_New_details(info_detalle.get_list(), info_gastos_lst.get_list(IdTransaccionSession), param, IdCtaCble_importacion);
+           info_detalle.set_list( bus_liquidacion.calcular_costos(IdEmpresa, IdOrdenCompra_ext));
+           Lis_imp_liquidacion_Info_diario_contable.delete_detail_New_details(info_detalle.get_list(), info_gastos_lst.get_list(IdTransaccionSession), param, IdCtaCble_importacion);
             return Json("", JsonRequestBehavior.AllowGet);
         }
     
@@ -232,9 +277,9 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
         {
             if (ModelState.IsValid)
-                info_diarios.AddRow(info_det);
+                Lis_imp_liquidacion_Info_diario_contable.AddRow(info_det);
             ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = info_diarios.get_list();
+            model.lst_ct_cbtecble_det = Lis_imp_liquidacion_Info_diario_contable.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_liqidacion_dc", model.lst_ct_cbtecble_det);
         }
@@ -243,18 +288,18 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
         {
             if (ModelState.IsValid)
-                info_diarios.UpdateRow(info_det);
+                Lis_imp_liquidacion_Info_diario_contable.UpdateRow(info_det);
             ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = info_diarios.get_list();
+            model.lst_ct_cbtecble_det = Lis_imp_liquidacion_Info_diario_contable.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_liqidacion_dc", model.lst_ct_cbtecble_det);
         }
 
         public ActionResult EditingDelete(int secuencia)
         {
-            info_diarios.DeleteRow(secuencia);
+            Lis_imp_liquidacion_Info_diario_contable.DeleteRow(secuencia);
             ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = info_diarios.get_list();
+            model.lst_ct_cbtecble_det = Lis_imp_liquidacion_Info_diario_contable.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_liqidacion_dc", model.lst_ct_cbtecble_det);
         }
@@ -263,7 +308,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
     }
     
-    public class imp_ordencompra_ext_Info_diario_contable
+    public class imp_liquidacion_Info_diario_contable
     {
         public List<ct_cbtecble_det_Info> get_list()
         {

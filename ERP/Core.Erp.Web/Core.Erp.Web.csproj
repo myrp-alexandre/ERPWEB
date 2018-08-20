@@ -8939,7 +8939,6 @@
     <Content Include="Areas\Importacion\Views\AsignacionDeGastos\_GridViewPartial_asignacion_gastos.cshtml" />
     <Content Include="Areas\Importacion\Views\AsignacionDeGastos\_GridViewPartial_gastos_asignados.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\Ordencompra_por_liquidar.cshtml" />
-    <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_GridViewPartial_orden_compra_por_liquidar.cshtml" />
     <Content Include="Areas\Facturacion\Views\GuiaRemision\Nuevo.cshtml" />
     <Content Include="Areas\Facturacion\Views\GuiaRemision\Modificar.cshtml" />
     <Content Include="Areas\Facturacion\Views\GuiaRemision\Index.cshtml" />
@@ -8993,6 +8992,8 @@
     <Content Include="Areas\Reportes\Views\ImportacionReportes\_CmbProveedor_Importacion.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_010.cshtml" />
     <Content Include="Areas\Importacion\Views\ParametrosImportacion\_CmbCuenta_contable_inv.cshtml" />
+    <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_GridViewPartial_orden_compra_por_liquidar.cshtml" />
+    <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

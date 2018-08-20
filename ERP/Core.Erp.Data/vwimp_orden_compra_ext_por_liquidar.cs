@@ -12,7 +12,7 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class vwimp_orden_compra_ext
+    public partial class vwimp_orden_compra_ext_por_liquidar
     {
         public int IdEmpresa { get; set; }
         public decimal IdOrdenCompra_ext { get; set; }
@@ -21,6 +21,7 @@ namespace Core.Erp.Data
         public string IdPais_embarque { get; set; }
         public string IdCiudad_destino { get; set; }
         public int IdCatalogo_via { get; set; }
+        public int IdCatalogo_forma_pago { get; set; }
         public System.DateTime oe_fecha { get; set; }
         public Nullable<System.DateTime> oe_fecha_llegada_est { get; set; }
         public Nullable<System.DateTime> oe_fecha_embarque_est { get; set; }
@@ -32,13 +33,7 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> oe_fecha_llegada { get; set; }
         public Nullable<System.DateTime> oe_fecha_embarque { get; set; }
         public Nullable<System.DateTime> oe_fecha_desaduanizacion { get; set; }
-        public string pe_nombreCompleto { get; set; }
         public string pe_cedulaRuc { get; set; }
-        public Nullable<double> cantidad_x_recibir { get; set; }
-        public Nullable<double> cantidad_global { get; set; }
-        public int IdCatalogo_forma_pago { get; set; }
-        public Nullable<int> IdMoneda_origen { get; set; }
-        public Nullable<int> IdMoneda_destino { get; set; }
-        public bool Estado_cierre { get; set; }
+        public string pe_nombreCompleto { get; set; }
     }
 }

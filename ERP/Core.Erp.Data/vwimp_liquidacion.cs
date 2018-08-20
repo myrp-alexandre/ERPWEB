@@ -12,33 +12,32 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class vwimp_orden_compra_ext
+    public partial class vwimp_liquidacion
     {
         public int IdEmpresa { get; set; }
+        public decimal IdLiquidacion { get; set; }
         public decimal IdOrdenCompra_ext { get; set; }
-        public decimal IdProveedor { get; set; }
-        public string IdPais_origen { get; set; }
-        public string IdPais_embarque { get; set; }
-        public string IdCiudad_destino { get; set; }
-        public int IdCatalogo_via { get; set; }
+        public string li_num_documento { get; set; }
+        public string li_codigo { get; set; }
+        public string li_num_DAU { get; set; }
+        public System.DateTime li_fecha { get; set; }
+        public string li_observacion { get; set; }
+        public bool estado { get; set; }
+        public Nullable<int> IdEmpresa_inv { get; set; }
+        public Nullable<int> IdSucursal_inv { get; set; }
+        public Nullable<int> IdMovi_inven_tipo_inv { get; set; }
+        public Nullable<decimal> IdNumMovi_inv { get; set; }
+        public Nullable<int> IdEmpresa_ct { get; set; }
+        public Nullable<int> IdTipoCbte_ct { get; set; }
+        public Nullable<decimal> IdCbteCble_ct { get; set; }
+        public Nullable<int> IdBodega_inv { get; set; }
         public System.DateTime oe_fecha { get; set; }
         public Nullable<System.DateTime> oe_fecha_llegada_est { get; set; }
         public Nullable<System.DateTime> oe_fecha_embarque_est { get; set; }
         public Nullable<System.DateTime> oe_fecha_desaduanizacion_est { get; set; }
         public string IdCtaCble_importacion { get; set; }
         public string oe_observacion { get; set; }
-        public string oe_codigo { get; set; }
-        public bool estado { get; set; }
-        public Nullable<System.DateTime> oe_fecha_llegada { get; set; }
-        public Nullable<System.DateTime> oe_fecha_embarque { get; set; }
-        public Nullable<System.DateTime> oe_fecha_desaduanizacion { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string pe_cedulaRuc { get; set; }
-        public Nullable<double> cantidad_x_recibir { get; set; }
-        public Nullable<double> cantidad_global { get; set; }
-        public int IdCatalogo_forma_pago { get; set; }
-        public Nullable<int> IdMoneda_origen { get; set; }
-        public Nullable<int> IdMoneda_destino { get; set; }
-        public bool Estado_cierre { get; set; }
     }
 }

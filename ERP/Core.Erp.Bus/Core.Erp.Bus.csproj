@@ -171,7 +171,7 @@
     <Compile Include="Importacion\imp_catalogo_tipo_Bus.cs" />
     <Compile Include="Importacion\imp_gasto_Bus.cs" />
     <Compile Include="Importacion\imp_gasto_x_ct_plancta_Bus.cs" />
-    <Compile Include="Importacion\imp_liquidacion_det_x_imp_orden_compra_ext_Bus.cs" />
+    <Compile Include="Importacion\imp_liquidacion_Bus.cs" />
     <Compile Include="Importacion\imp_ordencompra_ext_Bus.cs" />
     <Compile Include="Importacion\imp_ordencompra_ext_det_Bus.cs" />
     <Compile Include="Importacion\imp_orden_compra_ext_ct_cbteble_det_gastos_Bus.cs" />

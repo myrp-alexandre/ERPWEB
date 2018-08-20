@@ -22,7 +22,7 @@ namespace Core.Erp.Data
         public int secuencia_ct { get; set; }
         public Nullable<int> IdGasto_tipo { get; set; }
     
-        public virtual imp_orden_compra_ext imp_orden_compra_ext { get; set; }
         public virtual imp_gasto imp_gasto { get; set; }
+        public virtual imp_orden_compra_ext imp_orden_compra_ext { get; set; }
     }
 }

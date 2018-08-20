@@ -28,20 +28,20 @@ namespace Core.Erp.Data
         public virtual DbSet<imp_catalogo> imp_catalogo { get; set; }
         public virtual DbSet<imp_catalogo_tipo> imp_catalogo_tipo { get; set; }
         public virtual DbSet<imp_gasto_x_ct_plancta> imp_gasto_x_ct_plancta { get; set; }
-        public virtual DbSet<imp_liquidacion> imp_liquidacion { get; set; }
         public virtual DbSet<imp_orden_compra_ext_ct_cbteble_det_gastos> imp_orden_compra_ext_ct_cbteble_det_gastos { get; set; }
         public virtual DbSet<imp_orden_compra_ext_recepcion> imp_orden_compra_ext_recepcion { get; set; }
         public virtual DbSet<vwimp_orden_compra_ext_con_saldo> vwimp_orden_compra_ext_con_saldo { get; set; }
         public virtual DbSet<vwimp_orden_compra_ext_det> vwimp_orden_compra_ext_det { get; set; }
-        public virtual DbSet<vwimp_orden_compra_ext_recepcion> vwimp_orden_compra_ext_recepcion { get; set; }
-        public virtual DbSet<vwimp_liquidacion_det_x_imp_orden_compra_ext> vwimp_liquidacion_det_x_imp_orden_compra_ext { get; set; }
         public virtual DbSet<vwimp_gastos_no_asignados> vwimp_gastos_no_asignados { get; set; }
-        public virtual DbSet<imp_liquidacion_det_x_imp_orden_compra_ext> imp_liquidacion_det_x_imp_orden_compra_ext { get; set; }
         public virtual DbSet<imp_orden_compra_ext_det> imp_orden_compra_ext_det { get; set; }
-        public virtual DbSet<imp_orden_compra_ext> imp_orden_compra_ext { get; set; }
-        public virtual DbSet<vwimp_orden_compra_ext> vwimp_orden_compra_ext { get; set; }
         public virtual DbSet<vwimp_orden_compra_ext_ct_cbteble_det_gastos> vwimp_orden_compra_ext_ct_cbteble_det_gastos { get; set; }
         public virtual DbSet<imp_gasto> imp_gasto { get; set; }
         public virtual DbSet<imp_parametro> imp_parametro { get; set; }
+        public virtual DbSet<imp_orden_compra_ext> imp_orden_compra_ext { get; set; }
+        public virtual DbSet<vwimp_orden_compra_ext> vwimp_orden_compra_ext { get; set; }
+        public virtual DbSet<imp_liquidacion> imp_liquidacion { get; set; }
+        public virtual DbSet<vwimp_liquidacion> vwimp_liquidacion { get; set; }
+        public virtual DbSet<vwimp_orden_compra_ext_recepcion> vwimp_orden_compra_ext_recepcion { get; set; }
+        public virtual DbSet<vwimp_orden_compra_ext_por_liquidar> vwimp_orden_compra_ext_por_liquidar { get; set; }
     }
 }

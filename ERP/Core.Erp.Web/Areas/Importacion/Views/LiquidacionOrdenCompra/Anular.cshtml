@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.Importacion.imp_liquidacion_Info
 @{
-    ViewBag.Title = "Liquidacion de orden de compra";
+    ViewBag.Title = "Anular";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -16,13 +16,20 @@
         </div>
     }
 }
-@using (Html.BeginForm("Nuevo", "LiquidacionOrdenCompra", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Anular", "LiquidacionOrdenCompra", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdOrdenCompra_ext, new { @id = "IdOrdenCompra_ext" })
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdTransaccionSession, new  { @id= "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdCtaCble_importacion, new { @id = "IdCtaCble_importacion" })
 
+    @Html.HiddenFor(q => q.IdEmpresa_ct)
+    @Html.HiddenFor(q => q.IdTipoCbte_ct)
+    @Html.HiddenFor(q => q.IdCbteCble_ct)
+    @Html.HiddenFor(q => q.IdEmpresa_inv)
+    @Html.HiddenFor(q => q.IdSucursal_inv)
+    @Html.HiddenFor(q => q.IdBodega_inv)
+    @Html.HiddenFor(q => q.IdNumMovi_inv)
 
     <div class="row">
         <div class="col-md-12">
@@ -144,9 +151,7 @@
     </div>
 
     <div class="box-footer">
-        <button type="button" class="btn btn-primary" onclick="calclar_costo();">Calcular</button>
-        @Html.ActionLink("Imprimir", "IMP_002",  new { Area = "Reportes", Controller = "ImportacionReportes", IdOrdenCompra_ext = Model.IdOrdenCompra_ext }, new { @class = "btn btn-primary", target = "_blank" })
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index", "LiquidacionOrdenCompra", new { Area ="Importacion" }, null)">Cancelar</a>
     </div>
 

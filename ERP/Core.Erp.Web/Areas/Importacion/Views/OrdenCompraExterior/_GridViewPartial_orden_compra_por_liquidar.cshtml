@@ -3,8 +3,8 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "Ordencompra_por_liquidar";
-        settings.CallbackRouteValues = new { Controller = "OrdenCompraExterior", Action = "Ordencompra_por_liquidar" };
+        settings.Name = "GridViewPartial_orden_compra_por_liquidar";
+        settings.CallbackRouteValues = new { Controller = "OrdenCompraExterior", Action = "GridViewPartial_orden_compra_por_liquidar" };
         settings.KeyFieldName = "IdOrdenCompra_ext";
         settings.Width = Unit.Percentage(100);
 
@@ -72,15 +72,15 @@
 
         settings.Columns.Add(column =>
         {
-            column.Caption = "Registrar";
+            column.Caption = "Liquidar";
             column.Width = Unit.Pixel(100);
             column.SetDataItemTemplateContent(container =>
             {
                 Html.DevExpress().HyperLink(hyperlink =>
                 {
                     var IdOrdenCompra_ext = DataBinder.Eval(container.DataItem, "IdOrdenCompra_ext");
-                    hyperlink.Properties.Text = "Mercaderia";
-                    hyperlink.NavigateUrl = Url.Action("Nuevo", "RecepcionOrdenCompra", new { Area = "Importacion", IdOrdenCompra_ext = IdOrdenCompra_ext });
+                    hyperlink.Properties.Text = "Liquidar";
+                    hyperlink.NavigateUrl = Url.Action("Nuevo", "LiquidacionOrdenCompra", new { Area = "Importacion", IdOrdenCompra_ext = IdOrdenCompra_ext });
                 }).Render();
             });
         });
