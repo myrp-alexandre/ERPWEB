@@ -9,7 +9,8 @@
 }
 @using (Html.BeginForm("Anular", "Cliente", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdCliente)
     @Html.HiddenFor(q => q.IdPersona, new { @id = "IdPersona" })
     <div class="row">
@@ -410,6 +411,7 @@
 
         if (tipo != null) {
             var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
                 IdCliente_tipo: tipo
             }
             $.ajax({

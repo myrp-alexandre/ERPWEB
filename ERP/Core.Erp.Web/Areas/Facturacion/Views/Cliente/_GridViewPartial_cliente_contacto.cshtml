@@ -114,6 +114,8 @@
             ASPxEdit editor = (ASPxEdit)e.Editor;
             editor.ValidationSettings.Display = Display.Dynamic;
         };
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+
     });
 
 

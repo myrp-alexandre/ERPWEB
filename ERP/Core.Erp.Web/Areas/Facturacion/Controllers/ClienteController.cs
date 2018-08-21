@@ -10,11 +10,13 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
     public class ClienteController : Controller
     {
+        #region Variables
         fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
         fa_cliente_contactos_Bus bus_cliente_contacto = new fa_cliente_contactos_Bus();
         fa_cliente_contactos_List List_fa_cliente_contactos = new fa_cliente_contactos_List();
@@ -22,7 +24,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_cliente_x_fa_Vendedor_x_sucursal_Bus bus_fa_vendedor = new fa_cliente_x_fa_Vendedor_x_sucursal_Bus();
         tb_parroquia_Bus bus_parroquia = new tb_parroquia_Bus();
         string mensaje = string.Empty;
+        #endregion
 
+        #region Index
         public ActionResult Index()
         {
             return View();
@@ -40,21 +44,22 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_cliente()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<fa_cliente_Info> model = new List<fa_cliente_Info>();
-            model = bus_cliente.get_list(IdEmpresa, true);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var model = bus_cliente.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_cliente", model);
         }
+
+        #endregion
+
+        #region Metodos
         private void cargar_combos(fa_cliente_Info info)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-
             fa_formaPago_Bus bus_formapago = new fa_formaPago_Bus();
             var lst_formapago = bus_formapago.get_list();
             ViewBag.lst_formapago = lst_formapago;
 
             fa_cliente_tipo_Bus bus_clientetipo = new fa_cliente_tipo_Bus();
-            var lst_clientetipo = bus_clientetipo.get_list(IdEmpresa, false);
+            var lst_clientetipo = bus_clientetipo.get_list(info.IdEmpresa, false);
             ViewBag.lst_clientetipo = lst_clientetipo;
 
             Dictionary<int, string> lst_nivel_precio = new Dictionary<int, string>();
@@ -70,7 +75,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             ViewBag.lst_termino_pago = lst_termino_pago;
 
             ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
-            var lst_ctacble = bus_plancta.get_list(IdEmpresa, false, true);
+            var lst_ctacble = bus_plancta.get_list(info.IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_ctacble;
 
             tb_Catalogo_Bus bus_catalogo = new tb_Catalogo_Bus();
@@ -79,11 +84,20 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var lst_tipo_naturaleza = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPONATPER), false);
             ViewBag.lst_tipo_naturaleza = lst_tipo_naturaleza;
         }
-        public ActionResult Nuevo()
+
+        #endregion
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             fa_cliente_Info model = new fa_cliente_Info
             {
-                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
+                IdEmpresa = IdEmpresa,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
                 Idtipo_cliente = 1,
                 info_persona = new Info.General.tb_persona_Info
                 {
@@ -93,8 +107,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 lst_fa_cliente_contactos = new List<fa_cliente_contactos_Info>(),
                 Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>()
             };
-            List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos);
-            List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos, model.IdTransaccionSession);
+            List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal, model.IdTransaccionSession);
             cargar_combos(model);
             cargar_combos_det();
             return View(model);
@@ -102,8 +117,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Nuevo(fa_cliente_Info model)
         {
-            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list();
-            model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list();
+            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(model.IdTransaccionSession);
+            model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
                 cargar_combos(model);
@@ -118,25 +133,32 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(decimal IdCliente = 0)
+        public ActionResult Modificar(int IdEmpresa = 0, decimal IdCliente = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
             fa_cliente_Info model = bus_cliente.get_info(IdEmpresa, IdCliente);
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = bus_fa_vendedor.get_list(IdEmpresa, IdCliente);
-            List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal);
+            List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal, model.IdTransaccionSession);
             model.lst_fa_cliente_contactos = bus_cliente_contacto.get_list(IdEmpresa, IdCliente);
-            List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos);
+            List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos, model.IdTransaccionSession);
             cargar_combos(model);
             return View(model);
         }
         [HttpPost]
         public ActionResult Modificar(fa_cliente_Info model)
         {
-            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
-            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list();
-            model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list();
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario.ToString();
+            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(model.IdTransaccionSession);
+            model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
                 cargar_combos(model);
@@ -157,24 +179,30 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(decimal IdCliente = 0)
+        public ActionResult Anular(int IdEmpresa = 0 , decimal IdCliente = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
             fa_cliente_Info model = bus_cliente.get_info(IdEmpresa, IdCliente);
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_fa_cliente_contactos = bus_cliente_contacto.get_list(IdEmpresa, IdCliente);
-            List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos);
+            List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos, model.IdTransaccionSession);
 
             model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = bus_fa_vendedor.get_list(IdEmpresa, IdCliente);
-            List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal);
+            List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal, model.IdTransaccionSession);
             cargar_combos(model);
             return View(model);
         }
         [HttpPost]
         public ActionResult Anular(fa_cliente_Info model)
         {
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario.ToString();
             if (!bus_cliente.anularDB(model))
             {
                 cargar_combos(model);
@@ -204,9 +232,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult get_info_tipo_cliente(int IdCliente_tipo = 0)
+        public JsonResult get_info_tipo_cliente(int IdEmpresa = 0 , int IdCliente_tipo = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             fa_cliente_tipo_Bus bus_cliente_tipo = new fa_cliente_tipo_Bus();
             fa_cliente_tipo_Info resultado = bus_cliente_tipo.get_info(IdEmpresa, IdCliente_tipo);
             if (resultado == null)
@@ -214,9 +241,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult get_info_x_num_cedula(string pe_cedulaRuc = "")
+        public JsonResult get_info_x_num_cedula(int IdEmpresa = 0 , string pe_cedulaRuc = "")
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             var resultado = bus_cliente.get_info_x_num_cedula(IdEmpresa, pe_cedulaRuc);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
@@ -233,7 +259,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var lst_parroquia = bus_parroquia.get_list("", false);
             ViewBag.lst_parroquia = lst_parroquia;
 
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
@@ -246,11 +272,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_cliente_contacto(decimal IdCliente = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             fa_cliente_Info model = new fa_cliente_Info();
             model.lst_fa_cliente_contactos = bus_cliente_contacto.get_list(IdEmpresa, IdCliente);
             if (model.lst_fa_cliente_contactos.Count == 0)
-                model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list();
+                model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSession));
             cargar_combos_det();
             return PartialView("_GridViewPartial_cliente_contacto", model);
         }
@@ -262,10 +289,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             {
                 var parroquia = bus_parroquia.get_info(info_det.IdParroquia);
                 info_det.nom_parroquia = parroquia == null ? "" : parroquia.nom_parroquia;
-                List_fa_cliente_contactos.AddRow(info_det);
+                List_fa_cliente_contactos.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             }
             fa_cliente_Info model = new fa_cliente_Info();
-            model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list();
+            model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_cliente_contacto", model);
         }
@@ -277,10 +304,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             {
                 var parroquia = bus_parroquia.get_info(info_det.IdParroquia);
                 info_det.nom_parroquia = parroquia == null ? "" : parroquia.nom_parroquia;
-                List_fa_cliente_contactos.UpdateRow(info_det);
+                List_fa_cliente_contactos.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             }
             fa_cliente_Info model = new fa_cliente_Info();
-            model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list();
+            model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_cliente_contacto", model);
         }
@@ -289,11 +316,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_fa_vendedor(decimal IdCliente = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             fa_cliente_Info model = new fa_cliente_Info();
             model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = bus_fa_vendedor.get_list(IdEmpresa, IdCliente);
             if (model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal.Count == 0)
-                model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list();
+                model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_fa_vendedor", model);
         }
@@ -302,9 +330,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult Editing_AddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_cliente_x_fa_Vendedor_x_sucursal_Info info_det)
         {
             if (ModelState.IsValid)
-                List_fa_cliente_x_fa_Vendedor_x_sucursal.AddRow(info_det);
+                List_fa_cliente_x_fa_Vendedor_x_sucursal.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             fa_cliente_Info model = new fa_cliente_Info();
-            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list();
+            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_fa_vendedor", model);
         }
@@ -313,18 +341,18 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult Editing_Update([ModelBinder(typeof(DevExpressEditorsBinder))] fa_cliente_x_fa_Vendedor_x_sucursal_Info info_det)
         {
             if (ModelState.IsValid)
-                List_fa_cliente_x_fa_Vendedor_x_sucursal.UpdateRow(info_det);
+                List_fa_cliente_x_fa_Vendedor_x_sucursal.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             fa_cliente_Info model = new fa_cliente_Info();
-            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list();
+            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_fa_vendedor", model);
         }
 
         public ActionResult Editing_Delete(decimal IdCliente)
         {
-            List_fa_cliente_x_fa_Vendedor_x_sucursal.DeleteRow(IdCliente);
+            List_fa_cliente_x_fa_Vendedor_x_sucursal.DeleteRow(IdCliente, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             fa_cliente_Info model = new fa_cliente_Info();
-            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list();
+            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_fa_vendedor", model);
         }
@@ -336,31 +364,33 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
     public class fa_cliente_contactos_List
     {
-        public List<fa_cliente_contactos_Info> get_list()
+        string variable = "fa_cliente_contactos_Info";
+
+        public List<fa_cliente_contactos_Info> get_list(decimal IdTransaccionSession)
         {
-            if (HttpContext.Current.Session["fa_cliente_contactos_Info"] == null)
+            if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)
             {
                 List<fa_cliente_contactos_Info> list = new List<fa_cliente_contactos_Info>();
 
-                HttpContext.Current.Session["fa_cliente_contactos_Info"] = list;
+                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<fa_cliente_contactos_Info>)HttpContext.Current.Session["fa_cliente_contactos_Info"];
+            return (List<fa_cliente_contactos_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<fa_cliente_contactos_Info> list)
+        public void set_list(List<fa_cliente_contactos_Info> list, decimal IdTransaccionSession)
         {
-            HttpContext.Current.Session["fa_cliente_contactos_Info"] = list;
+            HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
         }
-        public void AddRow(fa_cliente_contactos_Info info_det)
+        public void AddRow(fa_cliente_contactos_Info info_det, decimal IdTransaccionSession)
         {
-            List<fa_cliente_contactos_Info> list = get_list();
+            List<fa_cliente_contactos_Info> list = get_list(IdTransaccionSession);
             info_det.IdContacto = list.Count == 0 ? 1 : list.Max(q => q.IdContacto) + 1;
             list.Add(info_det);
         }
 
-        public void UpdateRow(fa_cliente_contactos_Info info_det)
+        public void UpdateRow(fa_cliente_contactos_Info info_det, decimal IdTransaccionSession)
         {
-            fa_cliente_contactos_Info edited_info = get_list().Where(m => m.IdContacto == info_det.IdContacto).First();
+            fa_cliente_contactos_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdContacto == info_det.IdContacto).First();
             edited_info.IdCiudad = info_det.IdCiudad;
             edited_info.IdParroquia = info_det.IdParroquia;
             edited_info.Celular = info_det.Celular;
@@ -374,24 +404,25 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
     }
     public class fa_cliente_x_fa_Vendedor_x_sucursal_list
     {
-        public List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> get_list()
+        string variable = "fa_cliente_x_fa_Vendedor_x_sucursal_Info";
+        public List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> get_list(decimal IdTransaccionSession)
         {
-            if (HttpContext.Current.Session["fa_cliente_x_fa_Vendedor_x_sucursal_Info"] == null)
+            if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)
             {
                 List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> list = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>();
 
-                HttpContext.Current.Session["fa_cliente_x_fa_Vendedor_x_sucursal_Info"] = list;
+                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>)HttpContext.Current.Session["fa_cliente_x_fa_Vendedor_x_sucursal_Info"];
+            return (List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> list)
+        public void set_list(List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> list, decimal IdTransaccionSession)
         {
-            HttpContext.Current.Session["fa_cliente_x_fa_Vendedor_x_sucursal_Info"] = list;
+            HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
         }
-        public void AddRow(fa_cliente_x_fa_Vendedor_x_sucursal_Info info_det)
+        public void AddRow(fa_cliente_x_fa_Vendedor_x_sucursal_Info info_det, decimal IdTransaccionSession)
         {
-            List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> list = get_list();
+            List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> list = get_list(IdTransaccionSession);
             info_det.IdCliente = list.Count == 0 ? 1 : list.Max(q => q.IdCliente) + 1;
             info_det.IdEmpresa = info_det.IdEmpresa;
             info_det.IdSucursal = info_det.IdSucursal;
@@ -400,18 +431,18 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             list.Add(info_det);
         }
 
-        public void UpdateRow(fa_cliente_x_fa_Vendedor_x_sucursal_Info info_det)
+        public void UpdateRow(fa_cliente_x_fa_Vendedor_x_sucursal_Info info_det, decimal IdTransaccionSession)
         {
-            fa_cliente_x_fa_Vendedor_x_sucursal_Info edited_info = get_list().Where(m => m.IdCliente == info_det.IdCliente).First();
+            fa_cliente_x_fa_Vendedor_x_sucursal_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdCliente == info_det.IdCliente).First();
             info_det.IdEmpresa = info_det.IdEmpresa;
             info_det.IdSucursal = info_det.IdSucursal;
             edited_info.IdVendedor = info_det.IdVendedor;
 
         }
 
-        public void DeleteRow(decimal IdCliente)
+        public void DeleteRow(decimal IdCliente, decimal IdTransaccionSession)
         {
-            List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> list = get_list();
+            List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.IdCliente == IdCliente).First());
         }
     }
