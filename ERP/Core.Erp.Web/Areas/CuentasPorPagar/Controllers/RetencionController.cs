@@ -61,7 +61,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             {
                 cargar_combos_detalle();
                 SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-                var model = List_cp_retencion_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+                var model = List_cp_retencion_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                 return PartialView("_GridViewPartial_retencion_det", model);
             }
             catch (Exception)
@@ -73,8 +73,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         public ActionResult GridViewPartial_retencio_dc()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = List_ct_cbtecble_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+            model.lst_ct_cbtecble_det = List_ct_cbtecble_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_retencio_dc", model);
         }
@@ -297,7 +298,40 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         #endregion
 
-          #region Acciones collbak retenciones
+        #region Detalle diario
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_ct_cbtecble_det_List.AddRow(info_det,Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ct_cbtecble_Info model = new ct_cbtecble_Info();
+            model.lst_ct_cbtecble_det = List_ct_cbtecble_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_retencio_dc", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_ct_cbtecble_det_List.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ct_cbtecble_Info model = new ct_cbtecble_Info();
+            model.lst_ct_cbtecble_det = List_ct_cbtecble_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_retencio_dc", model);
+        }
+
+        public ActionResult EditingDelete(int secuencia)
+        {
+            List_ct_cbtecble_det_List.DeleteRow(secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ct_cbtecble_Info model = new ct_cbtecble_Info();
+            model.lst_ct_cbtecble_det = List_ct_cbtecble_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_retencio_dc", model);
+        }
+        #endregion
+
+        #region Acciones collbak retenciones
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew_ret([ModelBinder(typeof(DevExpressEditorsBinder))]  cp_retencion_det_Info info_det)
         {
@@ -393,16 +427,16 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
          #region json
 
-        public JsonResult armar_diario(decimal IdProveedor=0)
+        public JsonResult armar_diario(decimal IdProveedor=0, decimal IdTransaccionSession = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
 
             var datos = bus_proveedor.get_info(IdEmpresa, IdProveedor);
             if (datos == null)
                 datos = new cp_proveedor_Info();
-            var detalle_ret = List_cp_retencion_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var detalle_ret = List_cp_retencion_det.get_list(IdTransaccionSession);
             var param_op = bus_parametros.get_info(IdEmpresa);
-            List_ct_cbtecble_det_List.delete_detail_New_details(param_op,detalle_ret, datos.IdCtaCble_CXP);
+            List_ct_cbtecble_det_List.delete_detail_New_details(param_op,detalle_ret, IdTransaccionSession, datos.IdCtaCble_CXP);
 
             return Json("", JsonRequestBehavior.AllowGet);
         }
@@ -473,13 +507,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             list.Remove(list.Where(m => m.secuencia == secuencia).First());
         }
 
-        public void delete_detail_New_details(cp_parametros_Info info_param_op, List<cp_retencion_det_Info> detalle_retencion, string IdCtaCble = "")
+        public void delete_detail_New_details(cp_parametros_Info info_param_op, List<cp_retencion_det_Info> detalle_retencion, decimal IdTransaccionSession, string IdCtaCble = "")
         {
             try
             {
                 int sec = 2;
 
-                set_list(new List<ct_cbtecble_det_Info>(), Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+                set_list(new List<ct_cbtecble_det_Info>(), IdTransaccionSession);
 
                 ct_cbtecble_det_Info cbtecble_haber_Info = new ct_cbtecble_det_Info();
                 cbtecble_haber_Info.secuencia = 1;
@@ -489,7 +523,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 cbtecble_haber_Info.dc_Valor_debe = Math.Round(detalle_retencion.Sum(v => Convert.ToDouble(v.re_valor_retencion)),2,MidpointRounding.AwayFromZero);
                 cbtecble_haber_Info.dc_Valor = Math.Round(detalle_retencion.Sum(v => Convert.ToDouble(v.re_valor_retencion)),2,MidpointRounding.AwayFromZero);
                 cbtecble_haber_Info.dc_Observacion = "";
-                AddRow(cbtecble_haber_Info, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+                AddRow(cbtecble_haber_Info, IdTransaccionSession);
 
                 foreach (var item in detalle_retencion)
                 {
@@ -502,7 +536,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     cbtecble_debe_Info.dc_Valor = Math.Round((double)item.re_valor_retencion,2,MidpointRounding.AwayFromZero) *-1;
                     cbtecble_debe_Info.dc_Observacion = "";
                     sec++;
-                    AddRow(cbtecble_debe_Info, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+                    AddRow(cbtecble_debe_Info, IdTransaccionSession);
                 }
             }
             catch (Exception)

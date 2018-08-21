@@ -216,7 +216,8 @@
             function armar_diario() {
 
                 var datos = {
-                    IdProveedor: $("#IdProveedor").val()
+                    IdProveedor: $("#IdProveedor").val(),
+                    IdTransaccionSession: $("#IdTransaccionSession").val()
                 }
                 $.ajax({
                     type: 'POST',
