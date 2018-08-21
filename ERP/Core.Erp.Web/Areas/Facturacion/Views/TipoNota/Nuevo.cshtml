@@ -10,7 +10,8 @@
 
 @using (Html.BeginForm("Nuevo", "TipoNota", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q=>q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdTransaccionSession)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -38,10 +39,10 @@
                 <div class="form-group">
                     <label for="GeneraMoviInven">@Html.CheckBoxFor(q => q.GeneraMoviInven, new { @id = "GeneraMoviInven" }) Genera movimiento inventario</label>
                 </div>
-                </div>
             </div>
-
         </div>
+
+    </div>
 
     <div class="row">
         <div class="col-md-12">
@@ -54,7 +55,7 @@
             </div>
         </div>
     </div>
-        <div class="row">
+    <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
@@ -84,11 +85,10 @@
             ocultar_mostrar_div_movimiento();
         });
     })
-    
+
     function ocultar_mostrar_div_movimiento() {
         var tipo = ($("#Tipo").val());
-        if (tipo == "D")
-        {
+        if (tipo == "D") {
             $("#div_movimiento").hide();
         } else {
             $("#div_movimiento").show();

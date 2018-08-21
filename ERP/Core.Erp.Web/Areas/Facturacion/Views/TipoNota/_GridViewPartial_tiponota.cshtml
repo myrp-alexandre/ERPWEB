@@ -59,7 +59,7 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdTipoNota = DataBinder.Eval(tc.DataItem, "IdTipoNota") }) + "&nbsp;" +
+                Html.ActionLink("Modificar", "Modificar", new {  IdTipoNota = DataBinder.Eval(tc.DataItem, "IdTipoNota") }) + "&nbsp;" +
                         Html.ActionLink("Anular", "Anular", new { IdTipoNota = DataBinder.Eval(tc.DataItem, "IdTipoNota") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );

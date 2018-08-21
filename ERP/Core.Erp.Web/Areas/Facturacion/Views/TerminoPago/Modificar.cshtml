@@ -10,6 +10,7 @@
 
 @using (Html.BeginForm("Modificar", "TerminoPago", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdTerminoPago)
     <div class="row">
         <div class="col-md-12">
@@ -86,6 +87,7 @@
 
     function CargarCuotas() {
         var datos = {
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
             NumeroCuotas: $("#Num_Coutas").val(),
             DiasVcto: $("#Dias_Vct").val()
         }

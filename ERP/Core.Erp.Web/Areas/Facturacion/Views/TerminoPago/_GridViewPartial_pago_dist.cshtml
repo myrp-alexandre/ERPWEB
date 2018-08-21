@@ -53,6 +53,8 @@
         });
         //settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Por_distribucion").DisplayFormat = "{0:n2}";
         //settings.Settings.ShowFooter = true;
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+
     });
 }
 @grid.Bind(Model.Lst_fa_TerminoPago_Distribucion).GetHtml()

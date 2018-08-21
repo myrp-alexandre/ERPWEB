@@ -63,6 +63,8 @@
                 p.DataSource = ViewBag.lst_cuenta;
             });
         });
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+
     });
 }
 @grid.Bind(Model.Lst_fa_TipoNota_x_Empresa_x_Sucursal).GetHtml()

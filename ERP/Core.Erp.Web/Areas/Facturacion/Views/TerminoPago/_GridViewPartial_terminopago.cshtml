@@ -57,15 +57,15 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-            if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true)
-            {
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true)
+                {
 
-                ViewContext.Writer.Write(
-            Html.ActionLink("Modificar", "Modificar", new { IdTerminoPago = DataBinder.Eval(tc.DataItem, "IdTerminoPago") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdTerminoPago = DataBinder.Eval(tc.DataItem, "IdTerminoPago") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
-            }
+                    ViewContext.Writer.Write(
+                Html.ActionLink("Modificar", "Modificar", new {  IdTerminoPago = DataBinder.Eval(tc.DataItem, "IdTerminoPago") }) + "&nbsp;" +
+                            Html.ActionLink("Anular", "Anular", new { IdTerminoPago = DataBinder.Eval(tc.DataItem, "IdTerminoPago") },
+                                new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
+                        );
+                }
 
             });
             c.SetHeaderTemplateContent(tc =>
@@ -82,6 +82,7 @@
         settings.Columns.Add("nom_TerminoPago", "Descripción").Width = Unit.Percentage(50);
         settings.Columns.Add("Num_Coutas", "Cuotas").Width = Unit.Percentage(20);
         settings.Columns.Add("Dias_Vct", "Dias").Width = Unit.Percentage(10);
+
     });
 }
 @grid.Bind(Model).GetHtml()

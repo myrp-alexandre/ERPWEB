@@ -12,7 +12,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
     public class VendedorController : Controller
     {
+        #region Variables
         fa_Vendedor_Bus bus_vendedor = new fa_Vendedor_Bus();
+
+        #endregion
+
+        #region Index
         public ActionResult Index()
         {
             return View();
@@ -25,6 +30,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var model = bus_vendedor.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_vendedor", model);
         }
+
+        #endregion
+
+        #region Acciones
 
         public ActionResult Nuevo(int IdEmpresa = 0 )
         {
@@ -85,6 +94,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
 
     }
 }

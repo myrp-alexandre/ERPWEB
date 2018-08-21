@@ -9,6 +9,7 @@ namespace Core.Erp.Info.Facturacion
 {
    public class fa_TipoNota_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdTipoNota { get; set; }
 
         [StringLength(20, MinimumLength = 1, ErrorMessage = "el campo código debe tener mínimo 1 caracter y máximo 20")]
