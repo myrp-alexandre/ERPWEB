@@ -424,7 +424,7 @@ namespace Core.Erp.Data.Facturacion
                     if (parametros != null && parametros.IdTipoCbteCble_NC != null && parametros.IdTipoCbteCble_ND != null)
                     {
                         var rel_conta = db_f.fa_notaCreDeb_x_ct_cbtecble.Where(q => q.no_IdEmpresa == info.IdEmpresa && q.no_IdSucursal == info.IdSucursal && q.no_IdBodega == info.IdBodega && q.no_IdNota == info.IdNota).FirstOrDefault();
-                        ct_cbtecble_Info diario = armar_diario(info, info.CreDeb == "C" ? (int)parametros.IdTipoCbteCble_NC : (int)parametros.IdTipoCbteCble_ND, cliente.IdCtaCble_cxc_Credito, info.IdCtaCble_TipoNota);
+                        ct_cbtecble_Info diario = armar_diario(info, info.CreDeb == "C" ? (int)parametros.IdTipoCbteCble_ND : (int)parametros.IdTipoCbteCble_NC, cliente.IdCtaCble_cxc_Credito, info.IdCtaCble_TipoNota);
                         if (diario != null)
                         {
                             if (rel_conta == null)
@@ -702,7 +702,7 @@ namespace Core.Erp.Data.Facturacion
                 if (info.lst_det.Count == 0)
                     return null;
 
-                if (diario.lst_ct_cbtecble_det.Sum(q => q.dc_Valor) != 0)
+                if (Math.Round(diario.lst_ct_cbtecble_det.Sum(q => q.dc_Valor),2,MidpointRounding.AwayFromZero) != 0)
                     return null;
 
                 if (diario.lst_ct_cbtecble_det.Where(q=>q.dc_Valor == 0).Count() > 0)
