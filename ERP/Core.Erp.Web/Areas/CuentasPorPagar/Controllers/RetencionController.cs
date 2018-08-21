@@ -114,7 +114,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.detalle = List_cp_retencion_det.get_list(Convert.ToDecimal(model.IdTransaccionSession));
             model.info_comprobante.lst_ct_cbtecble_det = List_ct_cbtecble_det_List.get_list(Convert.ToDecimal(model.IdTransaccionSession));
             info_param_op = Session["info_param_op"] as cp_parametros_Info;
-            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.info_comprobante.IdTipoCbte = (int)info_param_op.pa_IdTipoCbte_x_Retencion;
 
             string mensaje = bus_retencion.validar(model);
@@ -184,7 +183,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.detalle = List_cp_retencion_det.get_list(Convert.ToDecimal(model.IdTransaccionSession));
             model.info_comprobante.lst_ct_cbtecble_det = List_ct_cbtecble_det_List.get_list(Convert.ToDecimal(model.IdTransaccionSession));
             info_param_op = Session["info_param_op"] as cp_parametros_Info;
-            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.info_comprobante.IdTipoCbte = (int)info_param_op.pa_IdTipoCbte_x_Retencion;
 
             string mensaje = bus_retencion.validar(model);

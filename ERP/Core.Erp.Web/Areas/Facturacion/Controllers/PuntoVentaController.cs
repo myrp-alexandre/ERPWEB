@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.General;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
@@ -21,15 +22,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_puntoventa()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<fa_PuntoVta_Info> model = bus_punto.get_list(IdEmpresa);
             return PartialView("_GridViewPartial_puntoventa", model);
         }
         private void cargar_combos( fa_PuntoVta_Info model)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
-            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            var lst_sucursal = bus_sucursal.get_list(model.IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
 
             tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
@@ -41,9 +41,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             lst_signos.Add("+", "+");
             ViewBag.lst_signos = lst_signos;
         }
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
-            fa_PuntoVta_Info model = new fa_PuntoVta_Info();
+            fa_PuntoVta_Info model = new fa_PuntoVta_Info
+            {
+                IdEmpresa = IdEmpresa
+            };
             cargar_combos(model);
             return View(model);
         }
@@ -51,7 +54,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Nuevo(fa_PuntoVta_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_punto.guardarDB(model))
             {
                 cargar_combos(model);
@@ -59,9 +61,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(int IdSucursal = 0, int IdPuntoVta = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 , int IdSucursal = 0, int IdPuntoVta = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             fa_PuntoVta_Info model = bus_punto.get_info(IdEmpresa,IdSucursal, IdPuntoVta);
             if (model == null)
             return RedirectToAction("Index");
@@ -72,7 +73,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Modificar(fa_PuntoVta_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_punto.modificarDB(model))
             {
                 cargar_combos(model);
@@ -80,9 +80,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(int IdSucursal = 0, int IdPuntoVta = 0)
+        public ActionResult Anular(int IdEmpresa = 0 , int IdSucursal = 0, int IdPuntoVta = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             fa_PuntoVta_Info model = bus_punto.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
             if (model == null)
             {
@@ -95,7 +94,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Anular(fa_PuntoVta_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_punto.anularDB(model))
             {
                 cargar_combos(model);
@@ -105,9 +103,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
 
         #region Json
-        public JsonResult cargar_bodega(int IdSucursal = 0)
+        public JsonResult cargar_bodega(int IdEmpresa = 0 , int IdSucursal = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
             var resultado = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
 

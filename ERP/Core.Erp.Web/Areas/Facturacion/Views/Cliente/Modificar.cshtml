@@ -9,7 +9,8 @@
 }
 @using (Html.BeginForm("Modificar", "Cliente", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdCliente)
     @Html.HiddenFor(q => q.IdPersona, new { @id = "IdPersona" })
     if (ViewBag.mensaje != null)
@@ -105,7 +106,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="info_persona.pe_nombreCompleto">Nombre completo</label>
-                    @Html.TextBoxFor(q => q.info_persona.pe_nombreCompleto, new { @class = "form-control", @id = "pe_nombreCompleto", @disabled = "disabled"})
+                    @Html.TextBoxFor(q => q.info_persona.pe_nombreCompleto, new { @class = "form-control", @id = "pe_nombreCompleto", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.info_persona.pe_nombreCompleto, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -451,6 +452,7 @@
 
         if (tipo != null) {
             var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
                 IdCliente_tipo: tipo
             }
             $.ajax({

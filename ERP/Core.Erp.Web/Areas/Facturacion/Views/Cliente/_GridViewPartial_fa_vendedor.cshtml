@@ -62,6 +62,8 @@
                 p.DataSource = ViewBag.lst_vendedor;
             });
         });
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+
     });
 }
 @grid.Bind(Model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal).GetHtml()
