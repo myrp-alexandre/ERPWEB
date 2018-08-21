@@ -310,7 +310,7 @@ namespace Core.Erp.Bus.RRHH
                         oct_cbtecble_det_Info.IdCtaCble = item.IdCtaCble.Trim();
                         oct_cbtecble_det_Info.dc_Valor_debe = valorTotal;
                         oct_cbtecble_det_Info.dc_Valor = valorTotal;
-                        oct_cbtecble_det_Info.dc_Observacion = item.ru_descripcion.Trim() + " " + item.DescripcionDiv.Trim() + " " + item.DescripcionArea.Trim() + " " + item.de_descripcion.Trim();
+                        oct_cbtecble_det_Info.dc_Observacion = item.ru_descripcion.Trim();
                         lst_detalle_diario.Add(oct_cbtecble_det_Info);
 
                         secuencia++;
