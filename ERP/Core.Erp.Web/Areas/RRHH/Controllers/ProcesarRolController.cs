@@ -366,6 +366,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_sueldo_x_pagar()
         {
+            cargar_combo_detalle();
             ro_rol_Info model = new ro_rol_Info();
             model.lst_sueldo_x_pagar = Session["lst_sueldo_pagar"] as List<ct_cbtecble_det_Info>;
             return PartialView("_GridViewPartial_sueldo_x_pagar", model);
@@ -373,6 +374,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public ActionResult GridViewPartial_provisiones()
         {
+            cargar_combo_detalle();
             ro_rol_Info model = new ro_rol_Info();
             model.lst_provisiones = Session["lst_provisiones"] as List<ct_cbtecble_det_Info>;
             return PartialView("_GridViewPartial_provisiones", model);

@@ -226,10 +226,10 @@ namespace Core.Erp.Bus.RRHH
                 {
                    
                     double valorTotal = 0;
-                    valorTotal = oListro_rol_detalle_Info.Where(v => v.IdDivision == Convert.ToInt32(item.IdDivision)
-                                                                && v.IdArea == item.IdArea
-                                                                && v.IdDepartamento == item.IdDepartamento
-                                                                && v.IdRubro == item.IdRubro).Sum(v => v.Valor);
+                    valorTotal = oListro_rol_detalle_Info.Where(v => /*v.IdDivision == Convert.ToInt32(item.IdDivision)*/
+                                                                //&& v.IdArea == item.IdArea
+                                                                //&& v.IdDepartamento == item.IdDepartamento
+                                                                 v.IdRubro == item.IdRubro).Sum(v => v.Valor);
                     if (valorTotal < 0)
                         valorTotal = valorTotal * -1;
                     if (valorTotal > 0)
@@ -257,7 +257,7 @@ namespace Core.Erp.Bus.RRHH
                             oct_cbtecble_det_Info.dc_Valor_debe = valorTotal;
                         }
                         oct_cbtecble_det_Info.dc_Valor = valorTotal;
-                        oct_cbtecble_det_Info.dc_Observacion = item.ru_descripcion.Trim() + " " + item.DescripcionDiv.Trim() + " " + item.DescripcionArea.Trim() + " " + item.de_descripcion.Trim();
+                        oct_cbtecble_det_Info.dc_Observacion = item.ru_descripcion.Trim();
                         lst_detalle_diario.Add(oct_cbtecble_det_Info);
                     }
                                                     
@@ -296,10 +296,10 @@ namespace Core.Erp.Bus.RRHH
                 foreach (ro_Config_Param_contable_Info item in lst_confn_param_contables)
                 {
                     double valorTotal = 0;
-                    valorTotal = oListro_rol_detalle_Info.Where(v => v.IdDivision == Convert.ToInt32(item.IdDivision)
-                                                                && v.IdArea == item.IdArea
-                                                                && v.IdDepartamento == item.IdDepartamento
-                                                                && v.IdRubro == item.IdRubro).Sum(v => v.Valor);
+                    valorTotal = oListro_rol_detalle_Info.Where(v => /*v.IdDivision == Convert.ToInt32(item.IdDivision)*/
+                                                                     //&& v.IdArea == item.IdArea
+                                                                     //&& v.IdDepartamento == item.IdDepartamento
+                                                                  v.IdRubro == item.IdRubro).Sum(v => v.Valor);
                     if (valorTotal > 0)
                     {
                         secuencia++;
@@ -322,7 +322,7 @@ namespace Core.Erp.Bus.RRHH
                         oct_cbtecble_det_Info2.dc_Valor = valorTotal * -1;
                         oct_cbtecble_det_Info2.dc_Valor_haber = valorTotal ;
 
-                        oct_cbtecble_det_Info2.dc_Observacion = item.ru_descripcion.Trim() + " " + item.DescripcionDiv.Trim() + " " + item.DescripcionArea.Trim() + " " + item.de_descripcion.Trim();
+                        oct_cbtecble_det_Info2.dc_Observacion = item.ru_descripcion.Trim();
                         lst_detalle_diario.Add(oct_cbtecble_det_Info2);
                     }
                 }
