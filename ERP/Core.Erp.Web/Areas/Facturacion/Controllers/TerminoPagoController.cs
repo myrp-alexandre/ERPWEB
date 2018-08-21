@@ -46,7 +46,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             fa_TerminoPago_Info model = new fa_TerminoPago_Info
             {
                 Lst_fa_TerminoPago_Distribucion = new List<fa_TerminoPago_Distribucion_Info>(),
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
             List_fa_TerminoPago_Distribucion.set_list(model.Lst_fa_TerminoPago_Distribucion, model.IdTransaccionSession);
             return View();
@@ -80,8 +80,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             fa_TerminoPago_Info model = bus_terminopago.get_info(IdTerminoPago);
             if (model == null)
                 return RedirectToAction("Index");
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.Lst_fa_TerminoPago_Distribucion = bus_termino_dist.get_list(IdTerminoPago);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             List_fa_TerminoPago_Distribucion.set_list(model.Lst_fa_TerminoPago_Distribucion, model.IdTransaccionSession);
             return View(model);
         }
@@ -133,13 +133,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #region GRids
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_pago_dist(string IdTerminoPago= "")
+        public ActionResult GridViewPartial_pago_dist()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            fa_TerminoPago_Info model = new fa_TerminoPago_Info();
-            model.Lst_fa_TerminoPago_Distribucion = bus_termino_dist.get_list( IdTerminoPago);
-            if (model.Lst_fa_TerminoPago_Distribucion.Count == 0)
-                model.Lst_fa_TerminoPago_Distribucion = List_fa_TerminoPago_Distribucion.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+            var model = List_fa_TerminoPago_Distribucion.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_pago_dist", model);
         }
 
@@ -147,9 +144,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_TerminoPago_Distribucion_Info info_det)
         {
             if (ModelState.IsValid)
-                List_fa_TerminoPago_Distribucion.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-            fa_TerminoPago_Info model = new fa_TerminoPago_Info();
-            model.Lst_fa_TerminoPago_Distribucion = List_fa_TerminoPago_Distribucion.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+            List_fa_TerminoPago_Distribucion.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_fa_TerminoPago_Distribucion.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            
             return PartialView("_GridViewPartial_pago_dist", model);
         }
 
@@ -157,16 +154,16 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_TerminoPago_Distribucion_Info info_det)
         {
             if (ModelState.IsValid)
-                List_fa_TerminoPago_Distribucion.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-            fa_TerminoPago_Info model = new fa_TerminoPago_Info();
-            model.Lst_fa_TerminoPago_Distribucion = List_fa_TerminoPago_Distribucion.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+                List_fa_TerminoPago_Distribucion.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_fa_TerminoPago_Distribucion.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_pago_dist", model);
         }
 
         public ActionResult EditingDelete(int Secuencia)
         {
-            List_fa_TerminoPago_Distribucion.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+            List_fa_TerminoPago_Distribucion.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             fa_TerminoPago_Info model = new fa_TerminoPago_Info();
+            model.Lst_fa_TerminoPago_Distribucion =  List_fa_TerminoPago_Distribucion.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_pago_dist", model);
         }
         public void CargarCuotas(int NumeroCuotas = 0, int DiasVcto = 0)

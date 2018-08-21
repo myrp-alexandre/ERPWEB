@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
@@ -24,7 +25,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
         public ActionResult GridViewPartial_impuesto(string IdCod_Impuesto = "")
         {
             List<tb_sis_Impuesto_Info> model = bus_impuesto.get_list(IdCod_Impuesto, true);
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             return PartialView("_GridViewPartial_impuesto", model);
         }
         private void cargar_combos()
@@ -66,12 +67,12 @@ namespace Core.Erp.Web.Areas.General.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(string IdCod_Impuesto = "")
+        public ActionResult Modificar( string IdCod_Impuesto = "")
         {
             tb_sis_Impuesto_Info model = bus_impuesto.get_info(IdCod_Impuesto);
             if (model == null)
                 return RedirectToAction("Index");
-            model.info_impuesto_ctacble = bus_impuesto_ctacble.get_info(IdCod_Impuesto, Convert.ToInt32(Session["IdEmpresa"]));
+            model.info_impuesto_ctacble = bus_impuesto_ctacble.get_info(IdCod_Impuesto, Convert.ToInt32(SessionFixed.IdEmpresa));
             if (model.info_impuesto_ctacble == null)
                 model.info_impuesto_ctacble = new tb_sis_Impuesto_x_ctacble_Info
                 {
@@ -99,7 +100,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             tb_sis_Impuesto_Info model = bus_impuesto.get_info(IdCod_Impuesto);
             if (model == null)
                 return RedirectToAction("Index");
-            model.info_impuesto_ctacble = bus_impuesto_ctacble.get_info(IdCod_Impuesto, Convert.ToInt32(Session["IdEmpresa"]));
+            model.info_impuesto_ctacble = bus_impuesto_ctacble.get_info(IdCod_Impuesto, Convert.ToInt32(SessionFixed.IdEmpresa));
             if (model.info_impuesto_ctacble == null)
                 model.info_impuesto_ctacble = new tb_sis_Impuesto_x_ctacble_Info();
             cargar_combos();

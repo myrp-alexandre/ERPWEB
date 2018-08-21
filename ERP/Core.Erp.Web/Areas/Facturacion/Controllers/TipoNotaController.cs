@@ -151,26 +151,20 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             ViewBag.lst_cuenta = lst_cuenta;
         }
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_tipo_nota_sucursal(int IdTipoNota = 0)
+        public ActionResult GridViewPartial_tipo_nota_sucursal()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            fa_TipoNota_Info model = new fa_TipoNota_Info();
-            model.Lst_fa_TipoNota_x_Empresa_x_Sucursal = bus_fa_tipo.get_list(IdEmpresa, IdTipoNota);
-            if (model.Lst_fa_TipoNota_x_Empresa_x_Sucursal.Count == 0)
-                model.Lst_fa_TipoNota_x_Empresa_x_Sucursal = List_fa_TipoNota_x_Empresa_x_Sucursal.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSession));
+            var model = List_fa_TipoNota_x_Empresa_x_Sucursal.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_tipo_nota_sucursal", model);
         }
-
-
+        
         [HttpPost, ValidateInput(false)]
         public ActionResult Editing_AddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_TipoNota_x_Empresa_x_Sucursal_Info info_det)
         {
             if (ModelState.IsValid)
-                List_fa_TipoNota_x_Empresa_x_Sucursal.AddRow(info_det, Convert.ToInt32(SessionFixed.IdTransaccionSession));
-            fa_TipoNota_Info model = new fa_TipoNota_Info();
-            model.Lst_fa_TipoNota_x_Empresa_x_Sucursal = List_fa_TipoNota_x_Empresa_x_Sucursal.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSession));
+                List_fa_TipoNota_x_Empresa_x_Sucursal.AddRow(info_det, Convert.ToInt32(SessionFixed.IdTransaccionSessionActual));
+            var model  = List_fa_TipoNota_x_Empresa_x_Sucursal.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_tipo_nota_sucursal", model);
         }
@@ -179,18 +173,16 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult Editing_Update([ModelBinder(typeof(DevExpressEditorsBinder))] fa_TipoNota_x_Empresa_x_Sucursal_Info info_det)
         {
             if (ModelState.IsValid)
-                List_fa_TipoNota_x_Empresa_x_Sucursal.UpdateRow(info_det, Convert.ToInt32(SessionFixed.IdTransaccionSession));
-            fa_TipoNota_Info model = new fa_TipoNota_Info();
-            model.Lst_fa_TipoNota_x_Empresa_x_Sucursal = List_fa_TipoNota_x_Empresa_x_Sucursal.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSession));
+                List_fa_TipoNota_x_Empresa_x_Sucursal.UpdateRow(info_det, Convert.ToInt32(SessionFixed.IdTransaccionSessionActual));
+            var model = List_fa_TipoNota_x_Empresa_x_Sucursal.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_tipo_nota_sucursal", model);
         }
 
         public ActionResult Editing_Delete(int IdSucursal)
         {
-            List_fa_TipoNota_x_Empresa_x_Sucursal.DeleteRow(IdSucursal, Convert.ToInt32(SessionFixed.IdTransaccionSession));
-            fa_TipoNota_Info model = new fa_TipoNota_Info();
-            model.Lst_fa_TipoNota_x_Empresa_x_Sucursal = List_fa_TipoNota_x_Empresa_x_Sucursal.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSession));
+            List_fa_TipoNota_x_Empresa_x_Sucursal.DeleteRow(IdSucursal, Convert.ToInt32(SessionFixed.IdTransaccionSessionActual));
+            var model= List_fa_TipoNota_x_Empresa_x_Sucursal.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_tipo_nota_sucursal", model);
         }

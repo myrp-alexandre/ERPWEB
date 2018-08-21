@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.General;
 using Core.Erp.Bus.General;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
@@ -20,21 +21,22 @@ namespace Core.Erp.Web.Areas.General.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_sucursal()
         {
-            List<tb_sucursal_Info> model = new List<tb_sucursal_Info>();
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model = bus_sucursal.get_list(IdEmpresa,true);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var model = bus_sucursal.get_list(IdEmpresa,true);
             return PartialView("_GridViewPartial_sucursal", model);
         }
 
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0 )
         {
-            tb_sucursal_Info model = new tb_sucursal_Info();
+            tb_sucursal_Info model = new tb_sucursal_Info
+            {
+                IdEmpresa = IdEmpresa
+            };
             return View(model);
         }
         [HttpPost]
         public ActionResult Nuevo(tb_sucursal_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_sucursal.guardarDB(model))
             {
                 return View(model);
@@ -42,9 +44,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdSucursal = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 , int IdSucursal = 0)
         {
-            tb_sucursal_Info model = bus_sucursal.get_info(Convert.ToInt32(Session["IdEmpresa"]), IdSucursal);
+            tb_sucursal_Info model = bus_sucursal.get_info(IdEmpresa, IdSucursal);
             if(model == null)
                 return RedirectToAction("Index");
             return View(model);
@@ -59,9 +61,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Anular(int IdSucursal = 0)
+        public ActionResult Anular(int IdEmpresa = 0 , int IdSucursal = 0)
         {
-            tb_sucursal_Info model = bus_sucursal.get_info(Convert.ToInt32(Session["IdEmpresa"]), IdSucursal);
+            tb_sucursal_Info model = bus_sucursal.get_info(IdEmpresa, IdSucursal);
             if (model == null)
                 return RedirectToAction("Index");
             return View(model);

@@ -60,8 +60,8 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { CodDocumentoTipo = DataBinder.Eval(tc.DataItem, "CodDocumentoTipo"), Establecimiento = DataBinder.Eval(tc.DataItem, "Establecimiento"), PuntoEmision = DataBinder.Eval(tc.DataItem, "PuntoEmision"), NumDocumento = DataBinder.Eval(tc.DataItem, "NumDocumento") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { CodDocumentoTipo = DataBinder.Eval(tc.DataItem, "CodDocumentoTipo"), Establecimiento = DataBinder.Eval(tc.DataItem, "Establecimiento"), PuntoEmision = DataBinder.Eval(tc.DataItem, "PuntoEmision"), NumDocumento = DataBinder.Eval(tc.DataItem, "NumDocumento") },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), CodDocumentoTipo = DataBinder.Eval(tc.DataItem, "CodDocumentoTipo"), Establecimiento = DataBinder.Eval(tc.DataItem, "Establecimiento"), PuntoEmision = DataBinder.Eval(tc.DataItem, "PuntoEmision"), NumDocumento = DataBinder.Eval(tc.DataItem, "NumDocumento") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), CodDocumentoTipo = DataBinder.Eval(tc.DataItem, "CodDocumentoTipo"), Establecimiento = DataBinder.Eval(tc.DataItem, "Establecimiento"), PuntoEmision = DataBinder.Eval(tc.DataItem, "PuntoEmision"), NumDocumento = DataBinder.Eval(tc.DataItem, "NumDocumento") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -69,7 +69,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa  = Core.Erp.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
@@ -77,10 +77,12 @@
             c.Width = Unit.Pixel(150);
         });
 
-        settings.Columns.Add("CodDocumentoTipo", "Código").Width = Unit.Percentage(20);
-        settings.Columns.Add("Establecimiento", "Establecimiento").Width = Unit.Percentage(20);
-        settings.Columns.Add("PuntoEmision", "Punto de emisión").Width = Unit.Percentage(20);
+        settings.Columns.Add("CodDocumentoTipo", "Código").Width = Unit.Percentage(10);
+        settings.Columns.Add("Establecimiento", "Establecimiento").Width = Unit.Percentage(10);
+        settings.Columns.Add("NumAutorizacion", "Número de autorización").Width = Unit.Percentage(15);
+        settings.Columns.Add("PuntoEmision", "Punto de emisión").Width = Unit.Percentage(10);
         settings.Columns.Add("NumDocumento", "Numero documento").Width = Unit.Percentage(30);
+        
         settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(10);
     });
 }

@@ -4,7 +4,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_tipo_nota_sucursal";
-        settings.CallbackRouteValues = new { Controller = "TipoNota", Action = "GridViewPartial_tipo_nota_sucursal", IdTipoNota = Model == null ? "" : Model.IdTipoNota };
+        settings.CallbackRouteValues = new { Controller = "TipoNota", Action = "GridViewPartial_tipo_nota_sucursal" };
         settings.KeyFieldName = "secuencia";
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
@@ -67,4 +67,4 @@
 
     });
 }
-@grid.Bind(Model.Lst_fa_TipoNota_x_Empresa_x_Sucursal).GetHtml()
+@grid.Bind(Model).GetHtml()

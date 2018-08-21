@@ -11,12 +11,15 @@
 
 @using (Html.BeginForm("Nuevo", "Transportista", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    @Html.HiddenFor(q=>q.IdEmpresa)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="cedula">Cédula</label>
+                    <label for="cedula">Cédula*</label>
                     @Html.TextBoxFor(q => q.Cedula, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Placa, "", new { @class = "text-danger" })
+
                 </div>
             </div>
 

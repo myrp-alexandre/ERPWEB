@@ -270,14 +270,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_cliente_contacto(decimal IdCliente = 0)
+        public ActionResult GridViewPartial_cliente_contacto()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            fa_cliente_Info model = new fa_cliente_Info();
-            model.lst_fa_cliente_contactos = bus_cliente_contacto.get_list(IdEmpresa, IdCliente);
-            if (model.lst_fa_cliente_contactos.Count == 0)
-                model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSession));
+            var model = List_fa_cliente_contactos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_cliente_contacto", model);
         }
@@ -291,8 +287,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 info_det.nom_parroquia = parroquia == null ? "" : parroquia.nom_parroquia;
                 List_fa_cliente_contactos.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             }
-            fa_cliente_Info model = new fa_cliente_Info();
-            model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model  = List_fa_cliente_contactos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_cliente_contacto", model);
         }
@@ -306,33 +301,25 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 info_det.nom_parroquia = parroquia == null ? "" : parroquia.nom_parroquia;
                 List_fa_cliente_contactos.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             }
-            fa_cliente_Info model = new fa_cliente_Info();
-            model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_fa_cliente_contactos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_cliente_contacto", model);
         }
 
-
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_fa_vendedor(decimal IdCliente = 0)
+        public ActionResult GridViewPartial_fa_vendedor()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            fa_cliente_Info model = new fa_cliente_Info();
-            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = bus_fa_vendedor.get_list(IdEmpresa, IdCliente);
-            if (model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal.Count == 0)
-                model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_fa_vendedor", model);
         }
-
         [HttpPost, ValidateInput(false)]
         public ActionResult Editing_AddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_cliente_x_fa_Vendedor_x_sucursal_Info info_det)
         {
             if (ModelState.IsValid)
                 List_fa_cliente_x_fa_Vendedor_x_sucursal.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            fa_cliente_Info model = new fa_cliente_Info();
-            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model  = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_fa_vendedor", model);
         }
@@ -342,8 +329,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             if (ModelState.IsValid)
                 List_fa_cliente_x_fa_Vendedor_x_sucursal.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            fa_cliente_Info model = new fa_cliente_Info();
-            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_fa_vendedor", model);
         }
@@ -351,8 +337,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult Editing_Delete(decimal IdCliente)
         {
             List_fa_cliente_x_fa_Vendedor_x_sucursal.DeleteRow(IdCliente, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            fa_cliente_Info model = new fa_cliente_Info();
-            model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_det();
             return PartialView("_GridViewPartial_fa_vendedor", model);
         }

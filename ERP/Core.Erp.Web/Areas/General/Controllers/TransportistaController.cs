@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.General;
 using Core.Erp.Bus.General;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
@@ -20,22 +21,23 @@ namespace Core.Erp.Web.Areas.General.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_transportista()
         {
-            List<tb_transportista_Info> model = new List<tb_transportista_Info>();
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model = bus_transportista.get_list(IdEmpresa, true);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var model = bus_transportista.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_transportista", model);
         }
 
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
-            tb_transportista_Info model = new tb_transportista_Info();
+            tb_transportista_Info model = new tb_transportista_Info
+            {
+                IdEmpresa = IdEmpresa
+            };
             return View();
         }
 
         [HttpPost]
         public ActionResult Nuevo(tb_transportista_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if(!bus_transportista.guardarDB(model))
             {
                 return View(model);
@@ -43,9 +45,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(decimal IdTransportista = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 , decimal IdTransportista = 0)
         {
-            tb_transportista_Info model = bus_transportista.get_info(Convert.ToInt32(Session["IdEmpresa"]), IdTransportista);
+            tb_transportista_Info model = bus_transportista.get_info(IdEmpresa, IdTransportista);
             if (model == null)
             {
                 return RedirectToAction("Index");
@@ -56,7 +58,6 @@ namespace Core.Erp.Web.Areas.General.Controllers
         [HttpPost]
         public ActionResult Modificar(tb_transportista_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_transportista.modificarDB(model))
             {
                 return View(model);
@@ -64,9 +65,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Anular(decimal IdTransportista = 0)
+        public ActionResult Anular(int IdEmpresa = 0 , decimal IdTransportista = 0)
         {
-            tb_transportista_Info model = bus_transportista.get_info(Convert.ToInt32(Session["IdEmpresa"]), IdTransportista);
+            tb_transportista_Info model = bus_transportista.get_info(IdEmpresa, IdTransportista);
             if (model == null)
             {
                 return RedirectToAction("Index");
@@ -77,7 +78,6 @@ namespace Core.Erp.Web.Areas.General.Controllers
         [HttpPost]
         public ActionResult Anular(tb_transportista_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_transportista.anularDB(model))
             {
                 return View(model);

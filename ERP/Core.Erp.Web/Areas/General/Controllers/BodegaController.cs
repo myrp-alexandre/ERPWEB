@@ -7,45 +7,57 @@ using System.Web.Mvc;
 using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
 using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
     public class BodegaController : Controller
     {
+        #region Variables
         tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
-        public ActionResult Index(int IdSucursal = 0)
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        #endregion
+
+        #region Index
+        public ActionResult Index(int IdEmpresa = 0 , int IdSucursal = 0)
         {
+            ViewBag.IdEmpresa = IdEmpresa;
             ViewBag.IdSucursal = IdSucursal;
             return View();
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_bodega(int IdSucursal = 0)
+        public ActionResult GridViewPartial_bodega(int IdEmpresa = 0 , int IdSucursal = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            ViewBag.IdEmpresa = IdEmpresa;
             ViewBag.IdSucursal = IdSucursal;
             List<tb_bodega_Info> model = bus_bodega.get_list(IdEmpresa, IdSucursal, true);
             return PartialView("_GridViewPartial_bodega", model);
         }
 
-        private void cargar_combos()
+        private void cargar_combos(int IdEmpresa)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
 
-            ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
             var lst_cuentas = bus_plancta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
 
         }
 
-        public ActionResult Nuevo(int IdSucursal = 0)
+        #endregion
+
+        #region Acciones
+        public ActionResult Nuevo(int  IdEmpresa = 0 , int IdSucursal = 0)
         {
-            tb_bodega_Info model = new tb_bodega_Info { IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]), IdSucursal = IdSucursal };
+            tb_bodega_Info model = new tb_bodega_Info {
+                IdEmpresa = IdEmpresa,
+                IdSucursal = IdSucursal
+            };
+            ViewBag.IdEmpresa = IdEmpresa;
             ViewBag.IdSucursal = IdSucursal;
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -53,22 +65,23 @@ namespace Core.Erp.Web.Areas.General.Controllers
         {            
             if (!bus_bodega.guardarDB(model))
             {
+                ViewBag.IdEmpresa = model.IdEmpresa;
                 ViewBag.IdSucursal = model.IdSucursal;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
 
-            return RedirectToAction("Index",new { IdSucursal = model.IdSucursal});
+            return RedirectToAction("Index", new { IdEmpresa = model.IdEmpresa, IdSucursal = model.IdSucursal });
         }
 
-        public ActionResult Modificar(int IdSucursal = 0, int IdBodega = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 , int IdSucursal = 0, int IdBodega = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             tb_bodega_Info model = bus_bodega.get_info(IdEmpresa, IdSucursal, IdBodega);
             if (model == null)
-                return RedirectToAction("Index", new { IdSucursal = IdSucursal });
+                return RedirectToAction("Index", new { IdEmpresa = IdEmpresa, IdSucursal = IdSucursal });
+            ViewBag.IdEmpresa = IdEmpresa;
             ViewBag.IdSucursal = IdSucursal;
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -77,22 +90,23 @@ namespace Core.Erp.Web.Areas.General.Controllers
         {
             if (!bus_bodega.modificarDB(model))
             {
+                ViewBag.IdEmpresa = model.IdEmpresa;
                 ViewBag.IdSucursal = model.IdSucursal;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
 
-            return RedirectToAction("Index", new { IdSucursal = model.IdSucursal });
+            return RedirectToAction("Index", new { IdEmpresa = model.IdEmpresa, IdSucursal = model.IdSucursal });
         }
 
-        public ActionResult Anular(int IdSucursal = 0, int IdBodega = 0)
+        public ActionResult Anular(int  IdEmpresa = 0 , int IdSucursal = 0, int IdBodega = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             tb_bodega_Info model = bus_bodega.get_info(IdEmpresa, IdSucursal, IdBodega);
             if (model == null)
-                return RedirectToAction("Index", new { IdSucursal = IdSucursal });
+                return RedirectToAction("Index", new { IdEmpresa = IdEmpresa, IdSucursal = IdSucursal });
+            ViewBag.IdEmpresa = IdEmpresa;
             ViewBag.IdSucursal = IdSucursal;
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -101,12 +115,15 @@ namespace Core.Erp.Web.Areas.General.Controllers
         {
             if (!bus_bodega.anularDB(model))
             {
+                ViewBag.IdEmpresa = model.IdEmpresa;
                 ViewBag.IdSucursal = model.IdSucursal;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
 
-            return RedirectToAction("Index", new { IdSucursal = model.IdSucursal });
+            return RedirectToAction("Index", new { IdEmpresa = model.IdEmpresa, IdSucursal = model.IdSucursal });
         }
+
+        #endregion
     }
 }

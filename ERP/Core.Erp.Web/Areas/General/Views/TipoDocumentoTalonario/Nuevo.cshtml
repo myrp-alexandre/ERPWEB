@@ -11,6 +11,7 @@
 
 @using (Html.BeginForm("Nuevo", "TipoDocumentoTalonario", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    @Html.HiddenFor(q=>q.IdEmpresa, new { @id="IdEmpresa"})
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -199,6 +200,7 @@
         var punto_emision = $("#PuntoEmision").val();
 
         var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
             CodDocumentoTipo: codigo,
             Establecimiento: establecimiento,
             PuntoEmision: punto_emision

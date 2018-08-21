@@ -18,7 +18,16 @@ namespace Core.Erp.Web.Areas.General.Controllers
         tb_sis_reporte_x_seg_usuario_Bus bus_reporte_x_usuario = new tb_sis_reporte_x_seg_usuario_Bus();
         public ActionResult Index()
         {
-            tb_sis_reporte_x_seg_usuario_Info model = new tb_sis_reporte_x_seg_usuario_Info();
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            tb_sis_reporte_x_seg_usuario_Info model = new tb_sis_reporte_x_seg_usuario_Info
+            {
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
+            };
             cargar_combos();
             return View(model);
         }
@@ -26,7 +35,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
         public ActionResult Index(tb_sis_reporte_x_seg_usuario_Info model)
         {
             cargar_combos();
-            List_det.set_list(bus_reporte_x_usuario.get_list(model.IdEmpresa, model.IdUsuario,true));
+            List_det.set_list(bus_reporte_x_usuario.get_list(model.IdEmpresa, model.IdUsuario,true), model.IdTransaccionSession);
             return View(model);
         }
         private void cargar_combos()
@@ -46,53 +55,58 @@ namespace Core.Erp.Web.Areas.General.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_ReportesPorUsuario()
         {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             var model = bus_reporte_x_usuario.get_list(Convert.ToInt32(SessionFixed.IdEmpresa),SessionFixed.IdUsuario,false);
             return PartialView("_GridViewPartial_ReportesPorUsuario", model);
         }
         public ActionResult GridViewPartial_ReportesPorAsignar()
         {
-            var model = List_det.get_list().Where(q => q.seleccionado == false).ToList();
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = List_det.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSessionActual)).Where(q => q.seleccionado == false).ToList();
             return PartialView("_GridViewPartial_ReportesPorAsignar", model);
         }
-
         public ActionResult GridViewPartial_ReportesAsignados()
         {
-            var model = List_det.get_list().Where(q => q.seleccionado == true).ToList();
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = List_det.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSessionActual)).Where(q => q.seleccionado == true).ToList();
             return PartialView("_GridViewPartial_ReportesAsignados", model);
         }
         public void EditingUpdate(string CodReporte = "")
         {
-            List_det.UpdateRow(CodReporte);
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            List_det.UpdateRow(CodReporte, Convert.ToInt32(SessionFixed.IdTransaccionSessionActual));
         }
         public JsonResult guardar(int IdEmpresa = 0, string IdUsuario = "")
         {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             bus_reporte_x_usuario.eliminarDB(IdEmpresa, IdUsuario);
-            var resultado = bus_reporte_x_usuario.guardarDB(List_det.get_list().Where(q => q.seleccionado == true).ToList(), IdEmpresa, IdUsuario);
+            var resultado = bus_reporte_x_usuario.guardarDB(List_det.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSessionActual)).Where(q => q.seleccionado == true).ToList(), IdEmpresa, IdUsuario);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
     }
 
     public class tb_sis_reporte_x_seg_usuario_List
     {
-        public List<tb_sis_reporte_x_seg_usuario_Info> get_list()
+        string variable = "tb_sis_reporte_x_seg_usuario_Info";
+        public List<tb_sis_reporte_x_seg_usuario_Info> get_list(decimal IdTransaccionSession)
         {
-            if (HttpContext.Current.Session["tb_sis_reporte_x_seg_usuario_Info"] == null)
+            if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)
             {
                 List<tb_sis_reporte_x_seg_usuario_Info> list = new List<tb_sis_reporte_x_seg_usuario_Info>();
 
-                HttpContext.Current.Session["tb_sis_reporte_x_seg_usuario_Info"] = list;
+                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<tb_sis_reporte_x_seg_usuario_Info>)HttpContext.Current.Session["tb_sis_reporte_x_seg_usuario_Info"];
+            return (List<tb_sis_reporte_x_seg_usuario_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<tb_sis_reporte_x_seg_usuario_Info> list)
+        public void set_list(List<tb_sis_reporte_x_seg_usuario_Info> list, decimal IdTransaccionSession)
         {
-            HttpContext.Current.Session["tb_sis_reporte_x_seg_usuario_Info"] = list;
+            HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
         }
 
-        public void UpdateRow(string CodReporte)
+        public void UpdateRow(string CodReporte, decimal IdTransaccionSession)
         {
-            tb_sis_reporte_x_seg_usuario_Info edited_info = get_list().Where(m => m.CodReporte == CodReporte).FirstOrDefault();
+            tb_sis_reporte_x_seg_usuario_Info edited_info = get_list(IdTransaccionSession).Where(m => m.CodReporte == CodReporte).FirstOrDefault();
             if (edited_info != null)
                 edited_info.seleccionado = !edited_info.seleccionado;
         }

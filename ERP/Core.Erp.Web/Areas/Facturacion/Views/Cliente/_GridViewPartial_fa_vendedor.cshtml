@@ -4,7 +4,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_fa_vendedor";
-        settings.CallbackRouteValues = new { Controller = "Cliente", Action = "GridViewPartial_fa_vendedor", IdEmpresa = Model == null ? 0 : Model.IdEmpresa, IdCliente = Model == null ? "" : Model.IdCliente };
+        settings.CallbackRouteValues = new { Controller = "Cliente", Action = "GridViewPartial_fa_vendedor" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdCliente";
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
@@ -66,4 +66,4 @@
 
     });
 }
-@grid.Bind(Model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal).GetHtml()
+@grid.Bind(Model).GetHtml()

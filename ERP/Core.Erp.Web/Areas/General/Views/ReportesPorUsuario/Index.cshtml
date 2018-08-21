@@ -58,7 +58,7 @@
 </script>
 
 @using (Html.BeginForm("Index", "ReportesPorUsuario", FormMethod.Post, new { role = "form", @class = "form", @id = "myform" }))
-{
+{@Html.HiddenFor(q=>q.IdTransaccionSession)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">

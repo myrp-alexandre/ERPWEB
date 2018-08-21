@@ -4,7 +4,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_pago_dist";
-        settings.CallbackRouteValues = new { Controller = "TerminoPago", Action = "GridViewPartial_pago_dist", IdTerminoPago = Model == null ? 0 : Model.IdTerminoPago };
+        settings.CallbackRouteValues = new { Controller = "TerminoPago", Action = "GridViewPartial_pago_dist"};
         settings.KeyFieldName = "IdTerminoPago";
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
@@ -57,4 +57,4 @@
 
     });
 }
-@grid.Bind(Model.Lst_fa_TerminoPago_Distribucion).GetHtml()
+@grid.Bind(Model).GetHtml()
