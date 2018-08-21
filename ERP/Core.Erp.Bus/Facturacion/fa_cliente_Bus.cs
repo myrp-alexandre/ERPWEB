@@ -22,6 +22,18 @@ namespace Core.Erp.Bus.Facturacion
                 throw;
             }
         }
+        public bool ValidarCupoCreditoCliente(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string vt_tipoDoc, decimal IdCliente, ref string mensaje)
+        {
+            try
+            {
+                return odata.ValidarCupoCreditoCliente(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, vt_tipoDoc, IdCliente, ref mensaje);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public fa_cliente_Info get_info(int IdEmpresa, decimal IdCliente)
         {
             try

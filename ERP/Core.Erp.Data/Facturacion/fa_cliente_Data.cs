@@ -356,5 +356,74 @@ namespace Core.Erp.Data.Facturacion
                 throw;
             }
         }
+
+        public bool ValidarCupoCreditoCliente(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string vt_tipoDoc, decimal IdCliente, ref string mensaje)
+        {
+            Entities_cuentas_por_cobrar db_cxc = new Entities_cuentas_por_cobrar();
+            Entities_facturacion db_fac = new Entities_facturacion();
+            try
+            {
+
+                #region variables
+                double ValorDocumento = 0;
+                double SaldoPorCobrar = 0;
+                #endregion
+
+                var cliente = db_fac.fa_cliente.Where(q => q.IdEmpresa == IdEmpresa && q.IdCliente == IdCliente).FirstOrDefault();
+                if (cliente == null)
+                {
+                    db_cxc.Dispose();
+                    db_fac.Dispose();
+                    mensaje = "Seleccione el cliente";
+                    return false;
+                }
+
+                if (cliente.cl_Cupo == 0)
+                {
+                    db_cxc.Dispose();
+                    db_fac.Dispose();
+                    return true;
+                }
+
+                if (IdCbteVta != 0)
+                {
+                    if (vt_tipoDoc == "FACT")
+                    {
+                        var fac = db_fac.vwfa_factura.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdCbteVta == IdCbteVta).FirstOrDefault();
+                        if (fac != null)
+                            ValorDocumento = fac.vt_total == null ? 0 : Convert.ToDouble(fac.vt_total);
+                    }
+                    else
+                    {
+                        var fac = db_fac.vwfa_notaCreDeb.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdNota == IdCbteVta).FirstOrDefault();
+                        if (fac != null)
+                            ValorDocumento = fac.sc_total == null ? 0 : Convert.ToDouble(fac.sc_total);
+                    }
+                }
+
+                var cartera = db_cxc.vwcxc_cartera_x_cobrar.Where(q => q.IdEmpresa == IdEmpresa && q.IdCliente == IdCliente).ToList();
+                if (cartera.Count > 0)
+                    SaldoPorCobrar = Convert.ToDouble(cartera.Sum(q => q.Saldo));
+
+                if (Math.Round(SaldoPorCobrar - ValorDocumento,2,MidpointRounding.AwayFromZero) > cliente.cl_Cupo)
+                {
+                    mensaje = "El cliente ha sobrepasado su cupo de crédito de: "+Math.Round(cliente.cl_Cupo,2,MidpointRounding.AwayFromZero)+", Actualmente tiene un crédito en documentos de :"+Math.Round(SaldoPorCobrar,2,MidpointRounding.AwayFromZero);
+                    db_cxc.Dispose();
+                    db_fac.Dispose();
+                    return false;
+                }
+
+                db_cxc.Dispose();
+                db_fac.Dispose();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                db_cxc.Dispose();
+                db_fac.Dispose();
+                throw;
+            }
+        }
     }
 }

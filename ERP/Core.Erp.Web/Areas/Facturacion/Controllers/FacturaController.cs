@@ -173,6 +173,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 }
             }
 
+            if (bus_cliente.ValidarCupoCreditoCliente(i_validar.IdEmpresa, i_validar.IdSucursal, i_validar.IdBodega, i_validar.IdCbteVta, "FACT", i_validar.IdCliente, ref mensaje))
+            {
+                msg = mensaje;
+                return false;
+            }
+
             return true;
         }
         #endregion
