@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Core.Erp.Bus.Facturacion;
 using Core.Erp.Info.Facturacion;
 using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
@@ -21,77 +22,77 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_clientetipo()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<fa_cliente_tipo_Info> model = bus_clientetipo.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_clientetipo", model);
         }
-        private void cargar_combos()
+        private void cargar_combos(int IdEmpresa)
         {
             ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
-            var lst_ctacble = bus_plancta.get_list(Convert.ToInt32(Session["IdEmpresa"]), false, false);
+            var lst_ctacble = bus_plancta.get_list(IdEmpresa, false, false);
             ViewBag.lst_cuentas = lst_ctacble;
         }
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
-            fa_cliente_tipo_Info model = new fa_cliente_tipo_Info();
-            cargar_combos();
+            fa_cliente_tipo_Info model = new fa_cliente_tipo_Info
+            {
+                IdEmpresa = IdEmpresa
+            };
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Nuevo(fa_cliente_tipo_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdUsuario = SessionFixed.IdEmpresa.ToString();
             if (!bus_clientetipo.guardarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(int Idtipo_cliente = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 , int Idtipo_cliente = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            fa_cliente_tipo_Info model = bus_clientetipo.get_info(Convert.ToInt32(Session["IdEmpresa"]), Idtipo_cliente);
+            fa_cliente_tipo_Info model = bus_clientetipo.get_info(IdEmpresa, Idtipo_cliente);
             if (model == null)
             {
                 return RedirectToAction("Index");
             }
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Modificar(fa_cliente_tipo_Info model)
         {
-            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltMod = SessionFixed.IdEmpresa.ToString();
             if (!bus_clientetipo.modificarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(int Idtipo_cliente = 0)
+        public ActionResult Anular(int IdEmpresa = 0 , int Idtipo_cliente = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            fa_cliente_tipo_Info model = bus_clientetipo.get_info(Convert.ToInt32(Session["IdEmpresa"]), Idtipo_cliente);
+            fa_cliente_tipo_Info model = bus_clientetipo.get_info(IdEmpresa, Idtipo_cliente);
             if (model == null)
             {
                 return RedirectToAction("Index");
             }
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Anular(fa_cliente_tipo_Info model)
         {
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltAnu = SessionFixed.IdEmpresa.ToString();
             if (!bus_clientetipo.anularDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");

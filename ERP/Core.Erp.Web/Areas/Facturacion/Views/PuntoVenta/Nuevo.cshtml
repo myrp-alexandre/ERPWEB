@@ -11,15 +11,29 @@
 @using (Html.BeginForm("Nuevo", "PuntoVenta", FormMethod.Post, new { @class = "form", @rolw = "form" }))
 {
 
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa , new { @id="IdEmpresa"})
     @Html.HiddenFor(q => q.IdPuntoVta)
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="cod_PuntoVta">Código*</label>
                     @Html.TextBoxFor(q => q.cod_PuntoVta, new { @class = "form-control", @id = "pr_codigo" })
                     @Html.ValidationMessageFor(q => q.cod_PuntoVta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdSucursal">Sucursal*</label>
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdBodega">Bodega*</label>
+                    @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodega" })
+                    @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -31,30 +45,6 @@
                     <label for="nom_PuntoVta">Descripción*</label>
                     @Html.TextBoxFor(q => q.nom_PuntoVta, new { @class = "form-control", @id = "pr_codigo" })
                     @Html.ValidationMessageFor(q => q.nom_PuntoVta, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="IdSucursal">Sucursal*</label>
-                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
-                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="IdBodega">Bodega*</label>
-                    @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodega" })
-                    @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -83,6 +73,7 @@
         var sucursal = $("#IdSucursal").val();
 
         var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
             IdSucursal: sucursal
         }
 
