@@ -22,7 +22,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         #region ProductoPadre
         public ActionResult CmbProductoPadre_Importacion()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_importacion_Info model = new cl_filtros_importacion_Info();
             return PartialView("_CmbProductoPadre_Importacion", model);
         }
 
@@ -39,7 +39,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbProveedor_Importacion()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_importacion_Info model = new cl_filtros_importacion_Info();
             return PartialView("_CmbProveedor_Importacion", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -97,7 +97,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         public ActionResult IMP_003()
         {
-            cl_filtros_Info model = new cl_filtros_Info
+            cl_filtros_importacion_Info model = new cl_filtros_importacion_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
             };
@@ -117,7 +117,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
 
         [HttpPost]
-        public ActionResult IMP_003(cl_filtros_Info model)
+        public ActionResult IMP_003(cl_filtros_importacion_Info model)
         {
             IMP_003_Rpt report = new IMP_003_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;

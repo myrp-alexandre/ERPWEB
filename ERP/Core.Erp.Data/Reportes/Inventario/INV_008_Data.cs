@@ -21,34 +21,66 @@ namespace Core.Erp.Data.Reportes.Inventario
                 {
                     foreach (var IdProducto in lst_producto)
                     {
-                        Lista.AddRange((from q in Context.VWINV_008
-                                        where q.IdEmpresa == IdEmpresa
-                                        && q.IdSucursal == IdSucursal
-                                        && q.IdBodega == IdBodega
-                                        && q.IdProducto_padre == IdProducto.IdProducto
-                                        select new INV_008_Info
-                                        {
-                                            IdEmpresa = q.IdEmpresa,
-                                            IdSucursal = q.IdSucursal,
-                                            IdBodega = q.IdBodega,
-                                            IdProducto = q.IdProducto,
-                                            pr_codigo = q.pr_codigo,
-                                            pr_descripcion = q.pr_descripcion,
-                                            IdProducto_padre = q.IdProducto_padre,
-                                            lote_fecha_fab = q.lote_fecha_fab,
-                                            lote_fecha_vcto = q.lote_fecha_vcto,
-                                            lote_num_lote = q.lote_num_lote,
-                                            stock = q.stock,
-                                            IdLinea = q.IdLinea,
-                                            IdGrupo = q.IdGrupo,
-                                            IdSubGrupo = q.IdSubGrupo,
-                                            IdCategoria = q.IdCategoria,
-                                            ca_Categoria = q.ca_Categoria,
-                                            bo_Descripcion = q.bo_Descripcion,
-                                            IdPresentacion = q.IdPresentacion,
-                                            nom_presentacion = q.nom_presentacion,
-                                            Su_Descripcion = q.Su_Descripcion
-                                        }).ToList());
+                        if (mostrar_saldos_en_0)
+                        {
+                            Lista.AddRange((from q in Context.VWINV_008
+                                            where q.IdEmpresa == IdEmpresa
+                                            && q.IdSucursal == IdSucursal
+                                            && q.IdBodega == IdBodega
+                                            && q.IdProducto_padre == IdProducto.IdProducto
+                                            select new INV_008_Info
+                                            {
+                                                IdEmpresa = q.IdEmpresa,
+                                                IdSucursal = q.IdSucursal,
+                                                IdBodega = q.IdBodega,
+                                                IdProducto = q.IdProducto,
+                                                pr_codigo = q.pr_codigo,
+                                                pr_descripcion = q.pr_descripcion,
+                                                IdProducto_padre = q.IdProducto_padre,
+                                                lote_fecha_fab = q.lote_fecha_fab,
+                                                lote_fecha_vcto = q.lote_fecha_vcto,
+                                                lote_num_lote = q.lote_num_lote,
+                                                stock = q.stock,
+                                                IdLinea = q.IdLinea,
+                                                IdGrupo = q.IdGrupo,
+                                                IdSubGrupo = q.IdSubGrupo,
+                                                IdCategoria = q.IdCategoria,
+                                                ca_Categoria = q.ca_Categoria,
+                                                bo_Descripcion = q.bo_Descripcion,
+                                                IdPresentacion = q.IdPresentacion,
+                                                nom_presentacion = q.nom_presentacion,
+                                                Su_Descripcion = q.Su_Descripcion
+                                            }).ToList());
+                        }else
+                            Lista.AddRange((from q in Context.VWINV_008
+                                            where q.IdEmpresa == IdEmpresa
+                                            && q.IdSucursal == IdSucursal
+                                            && q.IdBodega == IdBodega
+                                            && q.IdProducto_padre == IdProducto.IdProducto
+                                            && q.stock > 0
+                                            select new INV_008_Info
+                                            {
+                                                IdEmpresa = q.IdEmpresa,
+                                                IdSucursal = q.IdSucursal,
+                                                IdBodega = q.IdBodega,
+                                                IdProducto = q.IdProducto,
+                                                pr_codigo = q.pr_codigo,
+                                                pr_descripcion = q.pr_descripcion,
+                                                IdProducto_padre = q.IdProducto_padre,
+                                                lote_fecha_fab = q.lote_fecha_fab,
+                                                lote_fecha_vcto = q.lote_fecha_vcto,
+                                                lote_num_lote = q.lote_num_lote,
+                                                stock = q.stock,
+                                                IdLinea = q.IdLinea,
+                                                IdGrupo = q.IdGrupo,
+                                                IdSubGrupo = q.IdSubGrupo,
+                                                IdCategoria = q.IdCategoria,
+                                                ca_Categoria = q.ca_Categoria,
+                                                bo_Descripcion = q.bo_Descripcion,
+                                                IdPresentacion = q.IdPresentacion,
+                                                nom_presentacion = q.nom_presentacion,
+                                                Su_Descripcion = q.Su_Descripcion
+                                            }).ToList());
                     }                    
                 }
                 return Lista;

@@ -24,24 +24,10 @@ namespace Core.Erp.Info.Helps
 
 
         #region Filtros inventario
-
-        public int IdSucursal { get; set; }
-        public int IdBodega { get; set; }
-        public string IdCategoria { get; set; }
-        public int IdLinea { get; set; }
-        public int IdGrupo { get; set; }
-        public int IdSubGrupo { get; set; }
-        public decimal? IdProducto { get; set; }
-        public int IdMovi_inven_tipo { get; set; }
-        public string signo { get; set; }
-        public bool no_mostrar_valores_en_0 { get; set; }
-        public bool mostrar_saldos_en_0 { get; set; }
-        public bool mostrar_detallado { get; set; }
-        public decimal? IdProductoPadre { get; set; }
-        public DateTime fecha_corte { get; set; }
-        public int IdMarca { get; set; }
+        
+        
         public string IdPais_embarque { get; set; }
-        public bool mostrarSinMovimiento { get; set; }
+        
 
 
         #endregion
@@ -68,6 +54,8 @@ namespace Core.Erp.Info.Helps
         public bool mostrar_nov_can { get; set; }
         public bool mostrar_nov_pen { get; set; }
         public bool mostrar_todas_nov { get; set; }
+        public int IdSucursal { get; set; }
+        
 
         #endregion
 
@@ -75,10 +63,47 @@ namespace Core.Erp.Info.Helps
         {
             fecha_ini = DateTime.Now.Date.AddMonths(-1);
             fecha_fin = DateTime.Now.Date;
-            fecha_corte = DateTime.Now.Date;
 
         }
 
+    }
+
+    public class cl_filtros_importacion_Info
+    {
+        public DateTime fecha_fin { get; set; }
+        public DateTime fecha_ini { get; set; }
+        public int IdEmpresa { get; set; }
+        public int IdMarca { get; set; }
+        public string IdPais_embarque { get; set; }
+        public decimal? IdProducto { get; set; }
+        public decimal? IdProveedor { get; set; }
+    }
+
+    public class cl_filtros_inventario_Info
+    {
+        public int IdEmpresa { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdBodega { get; set; }
+        public decimal? IdProducto { get; set; }
+        public int IdMarca { get; set; }
+        public string IdCategoria { get; set; }
+        public int IdLinea { get; set; }
+        public int IdGrupo { get; set; }
+        public int IdSubGrupo { get; set; }
+        public DateTime fecha_ini { get; set; }
+        public DateTime fecha_fin { get; set; }
+        public bool mostrar_detallado { get; set; }
+        public decimal? IdProductoPadre { get; set; }
+        public bool mostrarSinMovimiento { get; set; }
+        public bool no_mostrar_valores_en_0 { get; set; }
+        public bool mostrar_saldos_en_0 { get; set; }
+        
+
+        public cl_filtros_inventario_Info()
+        {
+            fecha_ini = DateTime.Now.Date.AddMonths(-1);
+            fecha_fin = DateTime.Now.Date;
+        }
     }
     public class cl_filtros_banco_Info
     {
