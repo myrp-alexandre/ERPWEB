@@ -51,8 +51,8 @@
             column.Width = Unit.Percentage(50);
             column.ColumnType = MVCxGridViewColumnType.TextBox;
         });
-        //settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Por_distribucion").DisplayFormat = "{0:n2}";
-        //settings.Settings.ShowFooter = true;
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Por_distribucion").DisplayFormat = "{0:n2}";
+        settings.Settings.ShowFooter = true;
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
 
     });

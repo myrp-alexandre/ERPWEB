@@ -65,7 +65,7 @@
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) ==true && Convert.ToInt32(DataBinder.Eval(tc.DataItem, "can_x_distribuir")) >Convert.ToInt32(DataBinder.Eval(tc.DataItem, "can_distribuida")) )
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Distribuir", "Nuevo", new { IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdMovi_inven_tipo = DataBinder.Eval(tc.DataItem, "IdMovi_inven_tipo"), IdNumMovi = DataBinder.Eval(tc.DataItem, "IdNumMovi"), signo= DataBinder.Eval(tc.DataItem, "signo") })
+                Html.ActionLink("Distribuir", "Nuevo", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdMovi_inven_tipo = DataBinder.Eval(tc.DataItem, "IdMovi_inven_tipo"), IdNumMovi = DataBinder.Eval(tc.DataItem, "IdNumMovi"), signo= DataBinder.Eval(tc.DataItem, "signo") })
                     );
                 }
             });

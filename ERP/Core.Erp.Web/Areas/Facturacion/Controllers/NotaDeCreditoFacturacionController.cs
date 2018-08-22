@@ -542,7 +542,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProducto);
             if (producto != null)
             {
-                info_det.pr_descripcion = producto.pr_descripcion;
+                info_det.pr_descripcion = producto.pr_descripcion_combo;
             }
             info_det.sc_descUni = Math.Round(info_det.sc_Precio * (info_det.sc_PordescUni / 100), 2, MidpointRounding.AwayFromZero);
             info_det.sc_precioFinal = Math.Round(info_det.sc_Precio - info_det.sc_descUni, 2, MidpointRounding.AwayFromZero);
@@ -562,7 +562,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProducto);
             if (producto != null && info_det.IdProducto != edited_info.IdProducto)
             {
-                edited_info.pr_descripcion = producto.pr_descripcion;
+                edited_info.pr_descripcion = producto.pr_descripcion_combo;
             }
             edited_info.sc_cantidad = info_det.sc_cantidad;
             edited_info.sc_PordescUni = info_det.sc_PordescUni;

@@ -49,7 +49,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
             List_fa_TerminoPago_Distribucion.set_list(model.Lst_fa_TerminoPago_Distribucion, model.IdTransaccionSession);
-            return View();
+            return View(model);
         }
 
         [HttpPost]
@@ -166,7 +166,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             model.Lst_fa_TerminoPago_Distribucion =  List_fa_TerminoPago_Distribucion.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_pago_dist", model);
         }
-        public void CargarCuotas(int NumeroCuotas = 0, int DiasVcto = 0)
+        public void CargarCuotas(int NumeroCuotas = 0, int DiasVcto = 0, decimal IdTransaccionSession = 0)
         {
             List<fa_TerminoPago_Distribucion_Info> lst_distribucion = new List<fa_TerminoPago_Distribucion_Info>();
             if (NumeroCuotas != 0 & DiasVcto != 0 && DiasVcto > NumeroCuotas)
@@ -178,12 +178,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     lst_distribucion.Add(new fa_TerminoPago_Distribucion_Info
                     {
                         Num_Dias_Vcto = DiasAcum,
-                        Por_distribucion = (float)NumeroCuotas / DiasVcto
+                        Por_distribucion = (((float)DiasVcto / NumeroCuotas) / DiasVcto)*100
                     });
                     DiasAcum += Dias;
                 }
             }
-            List_fa_TerminoPago_Distribucion.set_list(lst_distribucion, Convert.ToInt32(SessionFixed.IdTransaccionSession));
+            List_fa_TerminoPago_Distribucion.set_list(lst_distribucion, IdTransaccionSession);
         }
         #endregion
 

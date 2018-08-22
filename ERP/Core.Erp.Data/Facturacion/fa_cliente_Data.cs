@@ -261,9 +261,9 @@ namespace Core.Erp.Data.Facturacion
                     {
                         fa_cliente_x_fa_Vendedor_x_sucursal det = new fa_cliente_x_fa_Vendedor_x_sucursal
                         {
-                            IdEmpresa = item.IdEmpresa,
+                            IdEmpresa = info.IdEmpresa,
                             IdSucursal = item.IdSucursal,
-                            IdCliente = item.IdCliente,
+                            IdCliente = info.IdCliente,
                             IdVendedor = item.IdVendedor,
                             observacion = item.observacion
                         };
@@ -357,7 +357,7 @@ namespace Core.Erp.Data.Facturacion
             }
         }
 
-        public bool ValidarCupoCreditoCliente(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string vt_tipoDoc, decimal IdCliente, ref string mensaje)
+        public bool ValidarCupoCreditoCliente(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string vt_tipoDoc, decimal IdCliente, double Total, ref string mensaje)
         {
             Entities_cuentas_por_cobrar db_cxc = new Entities_cuentas_por_cobrar();
             Entities_facturacion db_fac = new Entities_facturacion();
@@ -405,9 +405,9 @@ namespace Core.Erp.Data.Facturacion
                 if (cartera.Count > 0)
                     SaldoPorCobrar = Convert.ToDouble(cartera.Sum(q => q.Saldo));
 
-                if (Math.Round(SaldoPorCobrar - ValorDocumento,2,MidpointRounding.AwayFromZero) > cliente.cl_Cupo)
+                if (Math.Round(Total + SaldoPorCobrar - ValorDocumento,2,MidpointRounding.AwayFromZero) > cliente.cl_Cupo)
                 {
-                    mensaje = "El cliente ha sobrepasado su cupo de crédito de: "+Math.Round(cliente.cl_Cupo,2,MidpointRounding.AwayFromZero)+", Actualmente tiene un crédito en documentos de :"+Math.Round(SaldoPorCobrar,2,MidpointRounding.AwayFromZero);
+                    mensaje = "El cliente ha sobrepasado su cupo de crédito de: $"+Math.Round(cliente.cl_Cupo,2,MidpointRounding.AwayFromZero)+", Actualmente tiene un crédito en documentos de : $"+Math.Round(SaldoPorCobrar,2,MidpointRounding.AwayFromZero)+ " El total del documento actual es de $"+Math.Round(Total,2,MidpointRounding.AwayFromZero);
                     db_cxc.Dispose();
                     db_fac.Dispose();
                     return false;

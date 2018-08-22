@@ -173,7 +173,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 }
             }
 
-            if (bus_cliente.ValidarCupoCreditoCliente(i_validar.IdEmpresa, i_validar.IdSucursal, i_validar.IdBodega, i_validar.IdCbteVta, "FACT", i_validar.IdCliente, ref mensaje))
+            if (!bus_cliente.ValidarCupoCreditoCliente(i_validar.IdEmpresa, i_validar.IdSucursal, i_validar.IdBodega, i_validar.IdCbteVta, "FACT", i_validar.IdCliente, i_validar.lst_det.Sum(q=>q.vt_total),  ref mensaje))
             {
                 msg = mensaje;
                 return false;

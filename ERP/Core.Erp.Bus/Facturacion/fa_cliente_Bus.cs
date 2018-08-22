@@ -22,11 +22,11 @@ namespace Core.Erp.Bus.Facturacion
                 throw;
             }
         }
-        public bool ValidarCupoCreditoCliente(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string vt_tipoDoc, decimal IdCliente, ref string mensaje)
+        public bool ValidarCupoCreditoCliente(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string vt_tipoDoc, decimal IdCliente, double Total, ref string mensaje)
         {
             try
             {
-                return odata.ValidarCupoCreditoCliente(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, vt_tipoDoc, IdCliente, ref mensaje);
+                return odata.ValidarCupoCreditoCliente(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, vt_tipoDoc, IdCliente, Total, ref mensaje);
             }
             catch (Exception)
             {

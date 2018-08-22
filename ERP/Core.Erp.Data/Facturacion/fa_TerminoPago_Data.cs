@@ -113,7 +113,7 @@ namespace Core.Erp.Data.Facturacion
 
                     };
                     Context.fa_TerminoPago.Add(Entity);
-
+                    int secuencia = 1;
                     foreach (var item in info.Lst_fa_TerminoPago_Distribucion)
                     {
                         fa_TerminoPago_Distribucion det = new fa_TerminoPago_Distribucion
@@ -121,7 +121,7 @@ namespace Core.Erp.Data.Facturacion
                             IdTerminoPago = info.IdTerminoPago,
                             Num_Dias_Vcto = item.Num_Dias_Vcto,
                             Por_distribucion = item.Por_distribucion,
-                            Secuencia = item.Secuencia
+                            Secuencia = item.Secuencia = secuencia++
                         };
                         Context.fa_TerminoPago_Distribucion.Add(det);
                     }
