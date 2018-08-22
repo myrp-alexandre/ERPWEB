@@ -190,7 +190,7 @@ namespace Core.Erp.Bus.Importacion
 
                 info.IdEmpresa = info.IdEmpresa;
                 info.IdOrdenCompra_ext = info.IdOrdenCompra_ext;
-                guardarDB(info);
+                odata. guardarDB(info);
                 imp_ordencompra_ext_Info info_oc = new imp_ordencompra_ext_Info();
                 info_oc.IdEmpresa = info.IdEmpresa;
                 info_oc.IdOrdenCompra_ext = info.IdOrdenCompra_ext;

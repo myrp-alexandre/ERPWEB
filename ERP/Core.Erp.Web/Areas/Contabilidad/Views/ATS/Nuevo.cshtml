@@ -1,10 +1,10 @@
 ﻿@model Core.Erp.Info.Contabilidad.ATS.ATS_Info.ats_Info
 @{
-    ViewBag.Title = "Anexo trasnsacciona simplificado";
-    //if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
-    //{
-    //    Response.Redirect("~/Account/Login");
-    //}
+    ViewBag.Title = "Anexo trasnsaccional simplificado";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -18,9 +18,6 @@
             </h4>
         </div>
     }
-
-   
-
     <div class="row">
         <div class="col-md-12">
             
@@ -48,7 +45,7 @@
                 <div class="form-group">
                     <label for="info_periodo.IdanioFiscal"></label>
                     <div class="box-footer">
-                        <button type="button" class="btn btn-primary" onclick="dolowadATS();">Descargar</button>
+                        <button type="submit" class="btn btn-primary" >Descargar</button>
                     </div>
                 </div>
             </div>

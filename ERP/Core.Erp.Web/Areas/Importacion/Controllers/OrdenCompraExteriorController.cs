@@ -138,7 +138,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             List<imp_ordencompra_ext_Info> model = new List<imp_ordencompra_ext_Info>();
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model = bus_orden.get_list_oc_por_liquidar(IdEmpresa);
-            return View("_GridViewPartial_orden_compra_por_liquidar", model);
+            return PartialView("_GridViewPartial_orden_compra_por_liquidar", model);
         }
         
 
