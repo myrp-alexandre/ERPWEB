@@ -8996,6 +8996,10 @@
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_GridViewPartial_orden_compra_por_liquidar.cshtml" />
     <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\Anular.cshtml" />
     <Content Include="Areas\General\Views\VisorDeVideo\Index.cshtml" />
+    <Content Include="Areas\General\Views\VisorDeVideo\_GridViewPartial_visor_video.cshtml" />
+    <Content Include="Areas\General\Views\VisorDeVideo\Anular.cshtml" />
+    <Content Include="Areas\General\Views\VisorDeVideo\Modificar.cshtml" />
+    <Content Include="Areas\General\Views\VisorDeVideo\Nuevo.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
