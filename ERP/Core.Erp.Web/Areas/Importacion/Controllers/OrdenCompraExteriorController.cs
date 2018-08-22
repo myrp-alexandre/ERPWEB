@@ -156,6 +156,8 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             imp_parametro_Bus bus_para = new imp_parametro_Bus();
             var param = bus_para.get_info(IdEmpresa);
+            if (param == null)
+                param = new imp_parametro_Info();
             imp_ordencompra_ext_Info model = new imp_ordencompra_ext_Info
             {
                 fecha_creacion = DateTime.Now,
