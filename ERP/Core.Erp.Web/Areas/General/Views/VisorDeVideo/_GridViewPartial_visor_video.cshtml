@@ -5,7 +5,7 @@
         settings.Name = "GridViewPartial_visor_video";
         settings.CallbackRouteValues = new { Controller = "Pais", Action = "GridViewPartial_visor_video" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdPais";
+        settings.KeyFieldName = "Cod_video";
 
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
@@ -47,7 +47,7 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToString(e.GetValue("estado")) == "I")
+            if (Convert.ToBoolean(e.GetValue("Estado")) == false)
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
@@ -57,11 +57,11 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "estado")) == "A")
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdPais = DataBinder.Eval(tc.DataItem, "IdPais") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdPais = DataBinder.Eval(tc.DataItem, "IdPais") },
+                Html.ActionLink("Modificar", "Modificar", new { Cod_video = DataBinder.Eval(tc.DataItem, "Cod_video") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { Cod_video = DataBinder.Eval(tc.DataItem, "Cod_video") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
