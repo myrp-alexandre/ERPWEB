@@ -363,12 +363,19 @@
           <Property Name="MotivoAnulacion" Type="varchar" MaxLength="100" />
           <Property Name="Placa" Type="varchar" MaxLength="20" />
         </EntityType>
-        <EntityType Name="Visor_video">
+        <EntityType Name="tb_visor_video">
           <Key>
             <PropertyRef Name="Cod_video" />
           </Key>
           <Property Name="Cod_video" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Nombre_video" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="FechaTransaccion" Type="date" />
+          <Property Name="FechaModificacion" Type="date" />
+          <Property Name="FechaAnulacion" Type="date" />
+          <Property Name="IdUsuarioModifica" Type="varchar" MaxLength="50" />
+          <Property Name="IdUsuarioAnulacion" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tb_sis_reporte">
           <Key>
@@ -725,7 +732,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' no
           <EntitySet Name="tb_sis_Impuesto_x_ctacble" EntityType="Self.tb_sis_Impuesto_x_ctacble" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sucursal" EntityType="Self.tb_sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_transportista" EntityType="Self.tb_transportista" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Visor_video" EntityType="Self.Visor_video" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_visor_video" EntityType="Self.tb_visor_video" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_reporte" EntityType="Self.tb_sis_reporte" Schema="web" store:Type="Tables" />
           <EntitySet Name="tb_sis_reporte_x_seg_usuario" EntityType="Self.tb_sis_reporte_x_seg_usuario" Schema="web" store:Type="Tables" />
           <EntitySet Name="vwtb_ciudad_id" EntityType="Self.vwtb_ciudad_id" store:Type="Views" store:Schema="dbo">
@@ -988,7 +995,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' no
             <End Role="tb_sis_reporte_x_seg_usuario" EntitySet="tb_sis_reporte_x_seg_usuario" />
           </AssociationSet>
           <EntitySet Name="tb_moneda" EntityType="Model_general.tb_moneda" />
-          <EntitySet Name="Visor_video" EntityType="Model_general.Visor_video" />
+          <EntitySet Name="tb_visor_video" EntityType="Model_general.tb_visor_video" />
           </EntityContainer>
         <EntityType Name="tb_pais">
           <Key>
@@ -1687,12 +1694,19 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' no
           <Property Name="im_nemonico" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
-        <EntityType Name="Visor_video">
+        <EntityType Name="tb_visor_video">
           <Key>
             <PropertyRef Name="Cod_video" />
           </Key>
           <Property Name="Cod_video" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Nombre_video" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaTransaccion" Type="DateTime" Precision="0" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="0" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="0" />
+          <Property Name="IdUsuarioModifica" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2133,9 +2147,16 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' no
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Visor_video">
-            <EntityTypeMapping TypeName="Model_general.Visor_video">
-              <MappingFragment StoreEntitySet="Visor_video">
+          <EntitySetMapping Name="tb_visor_video">
+            <EntityTypeMapping TypeName="Model_general.tb_visor_video">
+              <MappingFragment StoreEntitySet="tb_visor_video">
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="IdUsuarioModifica" ColumnName="IdUsuarioModifica" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaTransaccion" ColumnName="FechaTransaccion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Nombre_video" ColumnName="Nombre_video" />
                 <ScalarProperty Name="Cod_video" ColumnName="Cod_video" />
               </MappingFragment>
