@@ -90,7 +90,7 @@
         {
             column.SetDataItemTemplateContent(c =>
             {
-                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ACTF_001", "ActivoFijoReportes", new { Area = "Reportes", Id_Mejora_Baja_Activo = DataBinder.Eval(c.DataItem, "Id_Mejora_Baja_Activo").ToString(), Id_Tipo = DataBinder.Eval(c.DataItem, "Id_Tipo").ToString() }, Request.Url.Scheme) + "');\"></span>");
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ACTF_001", "ActivoFijoReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), Id_Mejora_Baja_Activo = DataBinder.Eval(c.DataItem, "Id_Mejora_Baja_Activo").ToString(), Id_Tipo = DataBinder.Eval(c.DataItem, "Id_Tipo").ToString() }, Request.Url.Scheme) + "');\"></span>");
             });
             column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
         });

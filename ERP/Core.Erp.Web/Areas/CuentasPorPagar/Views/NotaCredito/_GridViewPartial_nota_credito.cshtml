@@ -113,7 +113,7 @@
         {
             column.SetDataItemTemplateContent(c =>
             {
-                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CXP_003", "CuentasPorPagarReportes", new { Area = "Reportes", IdTipoCbte = DataBinder.Eval(c.DataItem, "IdTipoCbte_Nota").ToString(), IdCbteCble = DataBinder.Eval(c.DataItem, "IdCbteCble_Nota").ToString() }, Request.Url.Scheme) + "');\"></span>");
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CXP_003", "CuentasPorPagarReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdTipoCbte = DataBinder.Eval(c.DataItem, "IdTipoCbte_Nota").ToString(), IdCbteCble = DataBinder.Eval(c.DataItem, "IdCbteCble_Nota").ToString() }, Request.Url.Scheme) + "');\"></span>");
             });
             column.Width = Unit.Percentage(5);
         });

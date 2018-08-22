@@ -117,7 +117,7 @@
         {
             column.SetDataItemTemplateContent(c =>
             {
-                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CAJ_002", "CajaReportes", new { Area = "Reportes", IdConciliacionCaja = DataBinder.Eval(c.DataItem, "IdConciliacion_caja").ToString()}, Request.Url.Scheme) + "');\"></span>");
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CAJ_002", "CajaReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdConciliacionCaja = DataBinder.Eval(c.DataItem, "IdConciliacion_caja").ToString()}, Request.Url.Scheme) + "');\"></span>");
             });
             column.Width = Unit.Percentage(5);
         });

@@ -89,7 +89,7 @@
         //{
         //    column.SetDataItemTemplateContent(c =>
         //    {
-        //        ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ACTF_003", "ActivoFijoReportes", new { Area = "Reportes", IdRetiroActivo = DataBinder.Eval(c.DataItem, "IdRetiroActivo").ToString()}, Request.Url.Scheme) + "');\"></span>");
+        //        ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ACTF_003", "ActivoFijoReportes", new { Area = "Reportes",IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdRetiroActivo = DataBinder.Eval(c.DataItem, "IdRetiroActivo").ToString()}, Request.Url.Scheme) + "');\"></span>");
         //    });
         //    column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
         //});
