@@ -76,11 +76,18 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        
         settings.Columns.Add("Cod_video", "Codigo").Width = Unit.Percentage(20);
         settings.Columns.Add("Nombre_video", "Nombre").Width = Unit.Percentage(35);
         settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(10);
-        
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-facetime-video\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ReproducirVideo", "VisorDeVideo", new { Area = "General", Cod_video = DataBinder.Eval(c.DataItem, "Cod_video").ToString() }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+        });
+
 
     });
 }

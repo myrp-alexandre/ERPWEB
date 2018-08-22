@@ -42,7 +42,7 @@ namespace Core.Erp.Data.Importacion
                 imp_catalogo_Info info = new imp_catalogo_Info();
                 using (Entities_importacion Context = new Entities_importacion())
                 {
-                    imp_catalogo Entity = Context.imp_catalogo.FirstOrDefault(q => q.IdCatalogo_tipo == IdCatalogo && q.IdCatalogo == IdCatalogo);
+                    imp_catalogo Entity = Context.imp_catalogo.FirstOrDefault(q => q.IdCatalogo_tipo == IdCatalogo_tipo && q.IdCatalogo == IdCatalogo);
                     if (Entity == null) return null;
                     info = new imp_catalogo_Info
                     {

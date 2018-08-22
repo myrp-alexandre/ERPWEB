@@ -43,10 +43,28 @@
             </div>
         </div>
     </div>
+        
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Nombre">Nombre*</label>
+                   @Html.DevExpress().UploadControl(settings =>
+               {
+
+                   settings.Name = "UploadControl";
+                   settings.CallbackRouteValues = new { Controller = "VisorDeVideo", Action = "UploadControlUpload" };
+                   settings.ShowUploadButton = true;
+                   settings.ShowProgressPanel = true;
+               }).GetHtml()
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","Pais",new { Area = "General" },null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","VisorDeVideo",new { Area = "General" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

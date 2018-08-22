@@ -77,6 +77,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         public ActionResult Nuevo(int IdEmpresa = 0, decimal IdOrdenCompra_ext = 0)
         {
             imp_orden_compra_ext_recepcion_Info model = new imp_orden_compra_ext_recepcion_Info();
+            IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model = bus_recepcion.get_rcepcion_mercancia(IdEmpresa, IdOrdenCompra_ext);
             if (model != null)
                 Session["imp_ordencompra_ext_det_Info"] = model.lst_detalle;

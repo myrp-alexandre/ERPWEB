@@ -1,0 +1,28 @@
+﻿@model Core.Erp.Info.General.tb_visor_video_Info
+<!DOCTYPE html>
+<html>
+
+
+    @{
+        ViewBag.Title = "Videos";
+        if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+        {
+            Response.Redirect("~/Account/Login");
+        }
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    @using (Html.BeginForm())
+    {
+    <body>
+        <video width="500" height="450"  controls>
+            <source src="~/Content/videos/@ViewBag.Cod_video" type="video/mp4">
+        </video>
+        <p>
+            @Model.Nombre_video
+        </p>
+
+    </body>
+    }
+   
+</html>

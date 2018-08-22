@@ -160,7 +160,6 @@ namespace Core.Erp.Bus.Importacion
         {
             try
             {
-                imp_liquidacion_Bus bus_liquidacion = new imp_liquidacion_Bus();
                 odata = new imp_liquidacion_Data();
                 info.info_comrobante = new Info.Contabilidad.ct_cbtecble_Info();
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
@@ -191,7 +190,7 @@ namespace Core.Erp.Bus.Importacion
 
                 info.IdEmpresa = info.IdEmpresa;
                 info.IdOrdenCompra_ext = info.IdOrdenCompra_ext;
-                bus_liquidacion.guardarDB(info);
+                guardarDB(info);
                 imp_ordencompra_ext_Info info_oc = new imp_ordencompra_ext_Info();
                 info_oc.IdEmpresa = info.IdEmpresa;
                 info_oc.IdOrdenCompra_ext = info.IdOrdenCompra_ext;
