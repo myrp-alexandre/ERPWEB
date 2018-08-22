@@ -11,6 +11,7 @@
     Html.DevExpress().WebDocumentViewer(settings =>
     {
         settings.MobileMode = false;
+        settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
         settings.Name = "webDocumentViewer";
     }).Bind(Model).GetHtml();
 }

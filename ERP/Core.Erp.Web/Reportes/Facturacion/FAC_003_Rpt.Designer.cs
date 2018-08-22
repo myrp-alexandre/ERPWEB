@@ -117,7 +117,7 @@
             // 
             // tbl_factura
             // 
-            this.tbl_factura.Font = new System.Drawing.Font("Arial", 9F);
+            this.tbl_factura.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.tbl_factura.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.tbl_factura.Name = "tbl_factura";
             this.tbl_factura.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -141,7 +141,7 @@
             // 
             this.xrTableCell5.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([vt_cantidad] = 0,\'\' ,[vt_cantidad] )")});
-            this.xrTableCell5.Font = new System.Drawing.Font("Arial", 8F);
+            this.xrTableCell5.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.xrTableCell5.Name = "xrTableCell5";
             this.xrTableCell5.StylePriority.UseFont = false;
             this.xrTableCell5.Weight = 0.10530969402239689D;
@@ -150,7 +150,7 @@
             // 
             this.xrTableCell1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pr_descripcion]")});
-            this.xrTableCell1.Font = new System.Drawing.Font("Arial", 8F);
+            this.xrTableCell1.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.xrTableCell1.Name = "xrTableCell1";
             this.xrTableCell1.StylePriority.UseFont = false;
             this.xrTableCell1.Weight = 1.6159189038229427D;
@@ -159,20 +159,22 @@
             // 
             this.xrTableCell2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([vt_cantidad]=0\t,\'\' ,[vt_PorDescUnitario])")});
-            this.xrTableCell2.Font = new System.Drawing.Font("Arial", 8F);
+            this.xrTableCell2.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.xrTableCell2.Name = "xrTableCell2";
             this.xrTableCell2.StylePriority.UseFont = false;
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            this.xrTableCell2.TextFormatString = "{0:n2}";
             this.xrTableCell2.Weight = 0.35559559825761611D;
             // 
             // xrTableCell3
             // 
             this.xrTableCell3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([vt_cantidad] = 0,\'\' ,[vt_Precio] )")});
-            this.xrTableCell3.Font = new System.Drawing.Font("Arial", 8F);
+            this.xrTableCell3.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.xrTableCell3.Name = "xrTableCell3";
             this.xrTableCell3.StylePriority.UseFont = false;
+            this.xrTableCell3.TextFormatString = "{0:n2}";
             this.xrTableCell3.Weight = 0.37884186881345705D;
             // 
             // xrTableCell4
@@ -180,9 +182,10 @@
             this.xrTableCell4.CanShrink = true;
             this.xrTableCell4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([vt_cantidad]=0,\'\' , [vt_Subtotal])")});
-            this.xrTableCell4.Font = new System.Drawing.Font("Arial", 8F);
+            this.xrTableCell4.Font = new System.Drawing.Font("Times New Roman", 9F);
             this.xrTableCell4.Name = "xrTableCell4";
             this.xrTableCell4.StylePriority.UseFont = false;
+            this.xrTableCell4.TextFormatString = "{0:n2}";
             this.xrTableCell4.Weight = 0.54433393508358707D;
             // 
             // xrTableRow8
@@ -208,7 +211,7 @@
             // 
             this.xrTableCell13.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(IsNull([lote_num_lote]),\'\' , Iif([vt_cantidad] = 0, \'\' , \'Lote:\' ))")});
-            this.xrTableCell13.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell13.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.xrTableCell13.Name = "xrTableCell13";
             this.xrTableCell13.StylePriority.UseFont = false;
             this.xrTableCell13.Text = "Lote:";
@@ -218,7 +221,7 @@
             // 
             this.xrTableCell17.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(IsNull([lote_num_lote]),\'\' , Iif([vt_cantidad] = 0, \'\' , [lote_num_lote] ))")});
-            this.xrTableCell17.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell17.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell17.Name = "xrTableCell17";
             this.xrTableCell17.StylePriority.UseFont = false;
             this.xrTableCell17.Weight = 0.80580660608849053D;
@@ -227,7 +230,7 @@
             // 
             this.xrTableCell18.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([vt_cantidad] = 0, \'\' , \'Fecha vcto:\' )")});
-            this.xrTableCell18.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell18.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.xrTableCell18.Name = "xrTableCell18";
             this.xrTableCell18.StylePriority.UseFont = false;
             this.xrTableCell18.Text = "Fecha Vcto:";
@@ -237,7 +240,7 @@
             // 
             this.xrTableCell14.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([vt_cantidad] = 0, \'\' , [lote_fecha_vcto])")});
-            this.xrTableCell14.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell14.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
             this.xrTableCell14.Name = "xrTableCell14";
             this.xrTableCell14.StylePriority.UseFont = false;
             this.xrTableCell14.TextFormatString = "{0:dd-MM-yy}";
@@ -267,10 +270,10 @@
             this.xrLabel29.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrLabel29.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pe_nombreCompleto]")});
-            this.xrLabel29.Font = new System.Drawing.Font("Arial", 9F);
+            this.xrLabel29.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.xrLabel29.LocationFloat = new DevExpress.Utils.PointFloat(47.29F, 104.17F);
             this.xrLabel29.Name = "xrLabel29";
-            this.xrLabel29.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
+            this.xrLabel29.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrLabel29.SizeF = new System.Drawing.SizeF(702.08F, 22.99998F);
             this.xrLabel29.StylePriority.UseBorders = false;
             this.xrLabel29.StylePriority.UseFont = false;
@@ -283,10 +286,10 @@
             this.xrLabel30.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrLabel30.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pe_direccion]")});
-            this.xrLabel30.Font = new System.Drawing.Font("Arial", 9F);
+            this.xrLabel30.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.xrLabel30.LocationFloat = new DevExpress.Utils.PointFloat(47.29F, 132.17F);
             this.xrLabel30.Name = "xrLabel30";
-            this.xrLabel30.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
+            this.xrLabel30.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrLabel30.SizeF = new System.Drawing.SizeF(373.79F, 22.99998F);
             this.xrLabel30.StylePriority.UseBorders = false;
             this.xrLabel30.StylePriority.UseFont = false;
@@ -299,10 +302,10 @@
             this.xrLabel31.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrLabel31.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pe_cedulaRuc]")});
-            this.xrLabel31.Font = new System.Drawing.Font("Arial", 9F);
+            this.xrLabel31.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.xrLabel31.LocationFloat = new DevExpress.Utils.PointFloat(47.29F, 160.29F);
             this.xrLabel31.Name = "xrLabel31";
-            this.xrLabel31.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
+            this.xrLabel31.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrLabel31.SizeF = new System.Drawing.SizeF(160.29F, 23F);
             this.xrLabel31.StylePriority.UseBorders = false;
             this.xrLabel31.StylePriority.UseFont = false;
@@ -315,10 +318,10 @@
             this.xrLabel40.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrLabel40.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pe_telefonoOfic]")});
-            this.xrLabel40.Font = new System.Drawing.Font("Arial", 9F);
+            this.xrLabel40.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.xrLabel40.LocationFloat = new DevExpress.Utils.PointFloat(47.29F, 188.17F);
             this.xrLabel40.Name = "xrLabel40";
-            this.xrLabel40.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
+            this.xrLabel40.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrLabel40.SizeF = new System.Drawing.SizeF(160.29F, 23.00002F);
             this.xrLabel40.StylePriority.UseBorders = false;
             this.xrLabel40.StylePriority.UseFont = false;
@@ -330,10 +333,10 @@
             // 
             this.xrLabel2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[vt_fecha]")});
-            this.xrLabel2.Font = new System.Drawing.Font("Arial", 9F);
+            this.xrLabel2.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(354.42F, 188.17F);
             this.xrLabel2.Name = "xrLabel2";
-            this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
+            this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrLabel2.SizeF = new System.Drawing.SizeF(100F, 23.00002F);
             this.xrLabel2.StylePriority.UseFont = false;
             this.xrLabel2.StylePriority.UsePadding = false;
@@ -345,10 +348,10 @@
             // 
             this.xrLabel3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Ve_Vendedor]")});
-            this.xrLabel3.Font = new System.Drawing.Font("Arial", 9F);
+            this.xrLabel3.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(426.21F, 160.17F);
             this.xrLabel3.Name = "xrLabel3";
-            this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
+            this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrLabel3.SizeF = new System.Drawing.SizeF(102.0834F, 23F);
             this.xrLabel3.StylePriority.UseFont = false;
             this.xrLabel3.StylePriority.UsePadding = false;
@@ -359,10 +362,10 @@
             // 
             this.xrLabel4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[vt_fech_venc]")});
-            this.xrLabel4.Font = new System.Drawing.Font("Arial", 9F);
+            this.xrLabel4.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(580.29F, 188.17F);
             this.xrLabel4.Name = "xrLabel4";
-            this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
+            this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrLabel4.SizeF = new System.Drawing.SizeF(86.46008F, 23.00002F);
             this.xrLabel4.StylePriority.UseFont = false;
             this.xrLabel4.StylePriority.UsePadding = false;
@@ -374,10 +377,10 @@
             // 
             this.xrLabel1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Descripcion_Ciudad]")});
-            this.xrLabel1.Font = new System.Drawing.Font("Arial", 9F);
+            this.xrLabel1.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(623.96F, 127.17F);
             this.xrLabel1.Name = "xrLabel1";
-            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
+            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrLabel1.SizeF = new System.Drawing.SizeF(129.42F, 22.99998F);
             this.xrLabel1.StylePriority.UseFont = false;
             this.xrLabel1.StylePriority.UsePadding = false;
@@ -409,10 +412,10 @@
             // 
             // xrTable2
             // 
-            this.xrTable2.Font = new System.Drawing.Font("Arial", 9F);
+            this.xrTable2.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.xrTable2.LocationFloat = new DevExpress.Utils.PointFloat(39.98989F, 55.89828F);
             this.xrTable2.Name = "xrTable2";
-            this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
+            this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow2,
             this.xrTableRow4,
@@ -501,7 +504,7 @@
             // 
             // xrTable1
             // 
-            this.xrTable1.Font = new System.Drawing.Font("Arial", 9F);
+            this.xrTable1.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(627.5801F, 10F);
             this.xrTable1.Name = "xrTable1";
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -554,7 +557,7 @@
             // 
             // xrTable3
             // 
-            this.xrTable3.Font = new System.Drawing.Font("Arial", 9F);
+            this.xrTable3.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.xrTable3.LocationFloat = new DevExpress.Utils.PointFloat(629.5801F, 55.96995F);
             this.xrTable3.Name = "xrTable3";
             this.xrTable3.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -607,7 +610,7 @@
             // 
             // xrTable4
             // 
-            this.xrTable4.Font = new System.Drawing.Font("Arial", 9F);
+            this.xrTable4.Font = new System.Drawing.Font("Times New Roman", 9.75F);
             this.xrTable4.LocationFloat = new DevExpress.Utils.PointFloat(629.5801F, 102.4599F);
             this.xrTable4.Name = "xrTable4";
             this.xrTable4.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
