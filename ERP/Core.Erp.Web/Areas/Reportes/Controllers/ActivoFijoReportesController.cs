@@ -82,7 +82,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model_detalle.p_IdEmpresa.Value = model.IdEmpresa;
                 model_detalle.p_IdActivoFijoTipo.Value = model.IdActivoFijoTipo;
                 model_detalle.p_IdCategoriaAF.Value = model.IdCategoriaAF;
-                model_detalle.p_fecha_corte.Value = model.fecha_corte;
+                model_detalle.p_fecha_corte.Value = model.fecha_fin;
                 model_detalle.p_Estado_Proceso.Value = model.Estado_Proceso;
                 model_detalle.p_IdUsuario.Value = model.IdUsuario;
                 cargar_combos(model);
@@ -121,7 +121,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.p_IdCategoriaAF.Value = model.IdCategoriaAF;
                 report.p_Estado_Proceso.Value = model.Estado_Proceso;
                 report.p_IdUsuario.Value = model.IdUsuario;
-                report.p_fecha_corte.Value = model.fecha_corte;
+                report.p_fecha_corte.Value = model.fecha_fin;
                 report.usuario = Session["IdUsuario"].ToString();
                 report.empresa = Session["nom_empresa"].ToString();
                 cargar_combos(model);
@@ -183,7 +183,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdActivoFijoTipo.Value = model.IdActivoFijoTipo;
             report.p_IdCategoriaAF.Value = model.IdCategoriaAF;
-            report.p_fecha_corte.Value = model.fecha_corte;
+            report.p_fecha_corte.Value = model.fecha_fin;
             report.p_Estado_Proceso.Value = model.Estado_Proceso;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
@@ -199,7 +199,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdActivoFijoTipo.Value = model.IdActivoFijoTipo;
             report.p_IdCategoriaAF.Value = model.IdCategoriaAF;
             report.p_Estado_Proceso.Value = model.Estado_Proceso;
-            report.p_fecha_corte.Value = model.fecha_corte;
+            report.p_fecha_corte.Value = model.fecha_fin;
             cargar_combos(model);
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();

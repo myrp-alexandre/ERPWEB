@@ -20,7 +20,7 @@
         settings.Properties.NullText = "== Seleccione ==";
         settings.Properties.AllowNull = true;
     })
-    .BindList(new Core.Erp.Web.Areas.Reportes.Controllers.InventarioReportesController().get_list_bajo_demandaProducto,
-    new Core.Erp.Web.Areas.Reportes.Controllers.InventarioReportesController().get_info_bajo_demandaProducto).Bind(Model);
+    .BindList(new Core.Erp.Web.Areas.Reportes.Controllers.InventarioReportesController().get_list_bajo_demanda,
+    new Core.Erp.Web.Areas.Reportes.Controllers.InventarioReportesController().get_info_bajo_demanda).Bind(Model);
 }
 @comboBox.GetHtml()
