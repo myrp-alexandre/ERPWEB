@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.General.Visor_video_Info
+﻿@model Core.Erp.Info.General.tb_visor_video_Info
 @{
     ViewBag.Title = "Nuevo video";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -6,8 +6,16 @@
         Response.Redirect("~/Account/Login");
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
 }
-@using (Html.BeginForm("Nuevo", "Pais", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "VisorDeVideo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="row">
         <div class="col-md-12">

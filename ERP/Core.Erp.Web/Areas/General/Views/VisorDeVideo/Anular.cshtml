@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.General.Visor_video_Info
+﻿@model Core.Erp.Info.General.tb_visor_video_Info
 @{
     ViewBag.Title = "Anular video";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -16,7 +16,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="CodPais">Código*</label>
-                    @Html.TextBoxFor(q => q.Cod_video, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.Cod_video, new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(m => m.Cod_video, "", new { @class = "text-danger" })
 
 

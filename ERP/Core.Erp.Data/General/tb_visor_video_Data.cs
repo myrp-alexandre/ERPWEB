@@ -20,7 +20,8 @@ namespace Core.Erp.Data.General
                                  select new tb_visor_video_Info
                                  {
                                      Cod_video = q.Cod_video,
-                                     Nombre_video = q.Nombre_video
+                                     Nombre_video = q.Nombre_video,
+                                     Estado=q.Estado
                                  }).ToList();
                     
                 }
@@ -44,7 +45,8 @@ namespace Core.Erp.Data.General
                     {
                         Cod_video = info.Cod_video,
                         Nombre_video = info.Nombre_video,
-                        IdUsuario = info.IdUsuario
+                        IdUsuario = info.IdUsuario,
+                        Estado=true
                     };
                     Context.tb_visor_video.Add(Entity);
                     Context.SaveChanges();
@@ -83,6 +85,28 @@ namespace Core.Erp.Data.General
             }
         }
 
+        public bool si_existe(string Cod_video)
+        {
+            try
+            {
+                tb_visor_video_Info info = new tb_visor_video_Info();
+                using (Entities_general Context = new Entities_general())
+                {
+                    tb_visor_video Entity = Context.tb_visor_video.FirstOrDefault(q => q.Cod_video == Cod_video);
+                    if (Entity == null)
+                        return false;
+                    else
+                        return true;
+
+                   
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public bool modificarDB(tb_visor_video_Info info)
         {

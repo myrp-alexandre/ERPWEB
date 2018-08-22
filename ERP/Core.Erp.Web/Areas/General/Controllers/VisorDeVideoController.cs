@@ -33,6 +33,11 @@ namespace Core.Erp.Web.Areas.General.Controllers
         [HttpPost]
         public ActionResult Nuevo(tb_visor_video_Info model)
         {
+            if( bus_pais.si_existe(model.Cod_video))
+            {
+                ViewBag.mensaje = "El código ya se encuentra registrado";
+                return View(model);
+            }
             if (!bus_pais.guardarDB(model))
             {
                 return View(model);

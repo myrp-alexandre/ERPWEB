@@ -49,6 +49,18 @@ namespace Core.Erp.Bus.General
                 throw;
             }
         }
+        public bool si_existe(string Cod_video)
+        {
+            try
+            {
+                return odata.si_existe(Cod_video);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public bool modificarDB(tb_visor_video_Info info)
         {

@@ -16,7 +16,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="CodVisorDeVideo">Código*</label>
-                    @Html.TextBoxFor(q => q.Cod_video, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.Cod_video, new { @class = "form-control",@disabled="disabled" })
                     @Html.ValidationMessageFor(m => m.Cod_video, "", new { @class = "text-danger" })
 
 
