@@ -62,6 +62,8 @@
             column.FieldName = "od_factor_costo";
             column.Caption = "Factor";
             column.Width = Unit.Percentage(15);
+            column.PropertiesEdit.DisplayFormatString = "n6";
+
 
         });
         settings.Columns.Add(column =>
@@ -69,7 +71,7 @@
             column.FieldName = "od_costo_bodega";
             column.Caption = "Costo";
             column.Width = Unit.Percentage(15);
-            column.PropertiesEdit.DisplayFormatString = "n6";
+            column.PropertiesEdit.DisplayFormatString = "n2";
 
         });
         settings.Columns.Add(column =>
@@ -77,7 +79,7 @@
             column.FieldName = "od_costo_total";
             column.Caption = "Total";
             column.Width = Unit.Percentage(15);
-            column.PropertiesEdit.DisplayFormatString = "n6";
+            column.PropertiesEdit.DisplayFormatString = "n2";
 
 
         });
