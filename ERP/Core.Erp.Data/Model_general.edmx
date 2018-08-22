@@ -363,6 +363,13 @@
           <Property Name="MotivoAnulacion" Type="varchar" MaxLength="100" />
           <Property Name="Placa" Type="varchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="Visor_video">
+          <Key>
+            <PropertyRef Name="Cod_video" />
+          </Key>
+          <Property Name="Cod_video" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre_video" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
         <EntityType Name="tb_sis_reporte">
           <Key>
             <PropertyRef Name="CodReporte" />
@@ -718,6 +725,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' no
           <EntitySet Name="tb_sis_Impuesto_x_ctacble" EntityType="Self.tb_sis_Impuesto_x_ctacble" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sucursal" EntityType="Self.tb_sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_transportista" EntityType="Self.tb_transportista" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Visor_video" EntityType="Self.Visor_video" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_reporte" EntityType="Self.tb_sis_reporte" Schema="web" store:Type="Tables" />
           <EntitySet Name="tb_sis_reporte_x_seg_usuario" EntityType="Self.tb_sis_reporte_x_seg_usuario" Schema="web" store:Type="Tables" />
           <EntitySet Name="vwtb_ciudad_id" EntityType="Self.vwtb_ciudad_id" store:Type="Views" store:Schema="dbo">
@@ -980,6 +988,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' no
             <End Role="tb_sis_reporte_x_seg_usuario" EntitySet="tb_sis_reporte_x_seg_usuario" />
           </AssociationSet>
           <EntitySet Name="tb_moneda" EntityType="Model_general.tb_moneda" />
+          <EntitySet Name="Visor_video" EntityType="Model_general.Visor_video" />
           </EntityContainer>
         <EntityType Name="tb_pais">
           <Key>
@@ -1678,6 +1687,13 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' no
           <Property Name="im_nemonico" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
+        <EntityType Name="Visor_video">
+          <Key>
+            <PropertyRef Name="Cod_video" />
+          </Key>
+          <Property Name="Cod_video" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre_video" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2114,6 +2130,14 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_provincia' no
                 <ScalarProperty Name="im_simbolo" ColumnName="im_simbolo" />
                 <ScalarProperty Name="im_descripcion" ColumnName="im_descripcion" />
                 <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Visor_video">
+            <EntityTypeMapping TypeName="Model_general.Visor_video">
+              <MappingFragment StoreEntitySet="Visor_video">
+                <ScalarProperty Name="Nombre_video" ColumnName="Nombre_video" />
+                <ScalarProperty Name="Cod_video" ColumnName="Cod_video" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
