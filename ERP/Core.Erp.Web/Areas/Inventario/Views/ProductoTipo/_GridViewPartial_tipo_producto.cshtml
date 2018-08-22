@@ -58,8 +58,8 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdProductoTipo = DataBinder.Eval(tc.DataItem, "IdProductoTipo") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdProductoTipo = DataBinder.Eval(tc.DataItem, "IdProductoTipo") },
+                Html.ActionLink("Modificar", "Modificar", new  { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdProductoTipo = DataBinder.Eval(tc.DataItem, "IdProductoTipo") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdProductoTipo = DataBinder.Eval(tc.DataItem, "IdProductoTipo") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -67,7 +67,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa  = Core.Erp.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;

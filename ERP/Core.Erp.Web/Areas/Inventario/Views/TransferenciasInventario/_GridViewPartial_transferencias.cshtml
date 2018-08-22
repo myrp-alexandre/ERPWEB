@@ -66,8 +66,8 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdSucursalOrigen= DataBinder.Eval(tc.DataItem, "IdSucursalOrigen"), IdBodegaOrigen = DataBinder.Eval(tc.DataItem, "IdBodegaOrigen"), IdTransferencia = DataBinder.Eval(tc.DataItem, "IdTransferencia") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdSucursalOrigen = DataBinder.Eval(tc.DataItem, "IdSucursalOrigen"), IdBodegaOrigen = DataBinder.Eval(tc.DataItem, "IdBodegaOrigen"), IdTransferencia = DataBinder.Eval(tc.DataItem, "IdTransferencia") },
+                Html.ActionLink("Modificar", "Modificar", new  { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursalOrigen = DataBinder.Eval(tc.DataItem, "IdSucursalOrigen"), IdBodegaOrigen = DataBinder.Eval(tc.DataItem, "IdBodegaOrigen"), IdTransferencia = DataBinder.Eval(tc.DataItem, "IdTransferencia") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursalOrigen  = DataBinder.Eval(tc.DataItem, "IdSucursalOrigen"), IdBodegaOrigen = DataBinder.Eval(tc.DataItem, "IdBodegaOrigen"), IdTransferencia = DataBinder.Eval(tc.DataItem, "IdTransferencia") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -75,7 +75,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa  = Core.Erp.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
                 );
 
             });

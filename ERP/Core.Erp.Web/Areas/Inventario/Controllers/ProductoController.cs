@@ -73,9 +73,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #endregion
 
         #region Acciones
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_Producto_Info model = new in_Producto_Info { IdEmpresa = IdEmpresa, IdCod_Impuesto_Iva = "IVA12" };
             model.pr_imagen = new byte[0];
             model.lst_producto_composicion = new List<in_Producto_Composicion_Info>();
@@ -86,7 +85,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost]
         public ActionResult Nuevo(in_Producto_Info model)
         {
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdUsuario = SessionFixed.IdUsuario.ToString();
             model.pr_imagen = Producto_imagen.pr_imagen;
             if (!validar(model, ref mensaje))
             {
@@ -106,9 +105,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             Producto_imagen.pr_imagen = null;
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(decimal IdProducto = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 , decimal IdProducto = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_Producto_Info model = bus_producto.get_info(IdEmpresa, IdProducto);
             if (model == null)
                 return RedirectToAction("Index");
@@ -121,7 +119,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public ActionResult Modificar(in_Producto_Info model)
 
         {
-            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario.ToString();
             model.pr_imagen = Producto_imagen.pr_imagen;
             if (!validar(model,ref mensaje))
             {
@@ -150,9 +148,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             Producto_imagen.pr_imagen = null;
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(decimal IdProducto = 0)
+        public ActionResult Anular(int IdEmpresa = 0 , decimal IdProducto = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_Producto_Info model = bus_producto.get_info(IdEmpresa, IdProducto);
             if (model == null)
                 return RedirectToAction("Index");
@@ -164,7 +161,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost]
         public ActionResult Anular(in_Producto_Info model)
         {
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario.ToString();
             if (!bus_producto.validar_anulacion(model.IdEmpresa, model.IdProducto, ref mensaje))
             {
                 cargar_combos(model);
@@ -252,7 +249,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         private void cargar_combos()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             in_UnidadMedida_Bus bus_unidad_medida = new in_UnidadMedida_Bus();
             var lst_unidad_medida = bus_unidad_medida.get_list(false);
             ViewBag.lst_unidad_medida = lst_unidad_medida;
@@ -378,7 +375,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         const string UploadDirectory = "~/Content/imagenes/";
 
-
         public UploadedFile UploadControlUpload()
         {
             UploadControlExtension.GetUploadedFiles("UploadControl", Producto_imagen.UploadValidationSettings, Producto_imagen.FileUploadComplete);
@@ -396,7 +392,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 model = new byte[0];
             return PartialView("_Producto_imagen",model);
         }
-
 
     }
     public class Producto_imagen
@@ -416,10 +411,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
         }
      }
-
-
-
-
+    
     public class in_Producto_Composicion_List
     {
         in_Producto_Bus bus_producto = new in_Producto_Bus();

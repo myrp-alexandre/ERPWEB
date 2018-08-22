@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Inventario;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
@@ -20,15 +21,17 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_presentacion()
         {
-            List<in_presentacion_Info> model = new List<in_presentacion_Info>();
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model = bus_presentacion.get_list(IdEmpresa, true);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var model = bus_presentacion.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_presentacion", model);
         }
 
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
-            in_presentacion_Info model = new in_presentacion_Info();
+            in_presentacion_Info model = new in_presentacion_Info
+            {
+                IdEmpresa = IdEmpresa
+            };
             return View(model);
         }
 
@@ -40,7 +43,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 ViewBag.mensaje = "El código ya se encuentra registrado";
                 return View(model);
             }
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_presentacion.guardarDB(model))
             {
                 return View(model);
@@ -48,9 +50,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(string IdPresentacion = "")
+        public ActionResult Modificar(int IdEmpresa = 0 , string IdPresentacion = "")
         {
-            in_presentacion_Info model = bus_presentacion.get_info(Convert.ToInt32(Session["IdEmpresa"]), IdPresentacion);
+            in_presentacion_Info model = bus_presentacion.get_info(IdEmpresa, IdPresentacion);
             if(model == null)
             {
                 return RedirectToAction("Index");
@@ -67,9 +69,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(string IdPresentacion = "")
+        public ActionResult Anular(int IdEmpresa = 0 , string IdPresentacion = "")
         {
-            in_presentacion_Info model = bus_presentacion.get_info(Convert.ToInt32(Session["IdEmpresa"]), IdPresentacion);
+            in_presentacion_Info model = bus_presentacion.get_info(IdEmpresa, IdPresentacion);
             if (model == null)
             {
                 return RedirectToAction("Index");

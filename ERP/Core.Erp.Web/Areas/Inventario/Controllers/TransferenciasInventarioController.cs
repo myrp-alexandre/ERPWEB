@@ -79,10 +79,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #endregion
 
         #region Acciones
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
             Session["in_transferencia_det_Info"] = null;
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_parametro_Info i_param = bus_in_param.get_info(IdEmpresa);
             if (i_param == null)
                 return RedirectToAction("Index");
@@ -94,40 +93,38 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 IdMovi_inven_tipo_SucuDest = i_param.P_IdMovi_inven_tipo_default_ing
 
             };
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Nuevo(in_transferencia_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             model.list_detalle = List_in_transferencia_det.get_list();
             string mensaje = bus_trnferencia.validar(model);
             if (mensaje != "")
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
             model.IdUsuario = Session["IdUsuario"].ToString();
             if (!bus_trnferencia.guardarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             Session["in_transferencia_det_Info"] = null;
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdSucursalOrigen = 0, int IdBodegaOrigen = 0, decimal IdTransferencia = 0)
+        public ActionResult Modificar(int IdEmpresa = 0, int IdSucursalOrigen = 0, int IdBodegaOrigen = 0, decimal IdTransferencia = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_transferencia_Info model = bus_trnferencia.get_info(IdEmpresa, IdSucursalOrigen, IdBodegaOrigen, IdTransferencia);
             Session["in_transferencia_det_Info"] = model.list_detalle;
             if (model == null)
                 return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -138,27 +135,26 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             string mensaje = bus_trnferencia.validar(model);
             if (mensaje != "")
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
             model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
             if (!bus_trnferencia.modificarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             Session["in_transferencia_det_Info"] = null;
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(int IdSucursalOrigen = 0, int IdBodegaOrigen = 0, decimal IdTransferencia = 0)
+        public ActionResult Anular(int IdEmpresa = 0, int IdSucursalOrigen = 0, int IdBodegaOrigen = 0, decimal IdTransferencia = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_transferencia_Info model = bus_trnferencia.get_info(IdEmpresa, IdSucursalOrigen, IdBodegaOrigen, IdTransferencia);
             Session["in_transferencia_det_Info"] = model.list_detalle;
             if (model == null)
                 return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -169,14 +165,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             string mensaje = bus_trnferencia.validar(model);
             if (mensaje != "")
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
             model.tr_userAnulo = Session["IdUsuario"].ToString();
             if (!bus_trnferencia.anularDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -248,9 +244,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var lst_unidad = bus_unidad.get_list(false);
             ViewBag.lst_unidad = lst_unidad;
         }
-        private void cargar_combos()
+        private void cargar_combos(int IdEmpresa)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_movi_inven_tipo_Bus bus_tipo = new in_movi_inven_tipo_Bus();
             var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_tipo = lst_tipo;
