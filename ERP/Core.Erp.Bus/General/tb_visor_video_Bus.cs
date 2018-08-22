@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.General
 {
-   public class Visor_video_Bus
+   public class tb_visor_video_Bus
     {
-        Visor_video_Data odata = new Visor_video_Data();
-        public List<Visor_video_Info> get_list(bool mostrar_anulados)
+        tb_visor_video_Data odata = new tb_visor_video_Data();
+        public List<tb_visor_video_Info> get_list(bool mostrar_anulados)
         {
             try
             {
@@ -24,11 +24,11 @@ namespace Core.Erp.Bus.General
             }
         }
 
-        public Visor_video_Info get_info(string IdPais)
+        public tb_visor_video_Info get_info(string Cod_video)
         {
             try
             {
-                return odata.get_info(IdPais);
+                return odata.get_info(Cod_video);
             }
             catch (Exception)
             {
@@ -37,7 +37,7 @@ namespace Core.Erp.Bus.General
             }
         }
 
-        public bool guardarDB(Visor_video_Info info)
+        public bool guardarDB(tb_visor_video_Info info)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace Core.Erp.Bus.General
             }
         }
 
-        public bool modificarDB(Visor_video_Info info)
+        public bool modificarDB(tb_visor_video_Info info)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace Core.Erp.Bus.General
             }
         }
 
-        public bool anularDB(Visor_video_Info info)
+        public bool anularDB(tb_visor_video_Info info)
         {
             try
             {

@@ -192,7 +192,7 @@
     <Compile Include="General\tb_sis_reporte_x_seg_usuario_Info.cs" />
     <Compile Include="General\tb_sucursal_Info.cs" />
     <Compile Include="General\tb_transportista_Info.cs" />
-    <Compile Include="General\Visor_video_Info.cs" />
+    <Compile Include="General\tb_visor_video_Info.cs" />
     <Compile Include="Helps\cl_enumeradores.cs" />
     <Compile Include="Helps\cl_filtros_Info.cs" />
     <Compile Include="Helps\cl_funciones.cs" />

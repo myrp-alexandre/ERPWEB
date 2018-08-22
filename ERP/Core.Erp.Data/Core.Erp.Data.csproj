@@ -523,7 +523,7 @@
     <Compile Include="General\tb_sis_reporte_x_seg_usuario_Data.cs" />
     <Compile Include="General\tb_sucursal_Data.cs" />
     <Compile Include="General\tb_transportista_Data.cs" />
-    <Compile Include="General\Visor_video_Data.cs" />
+    <Compile Include="General\tb_visor_video_Data.cs" />
     <Compile Include="generarATS_Result.cs">
       <DependentUpon>Model_contabilidad.tt</DependentUpon>
     </Compile>
@@ -1337,7 +1337,7 @@
     <Compile Include="tb_transportista.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
-    <Compile Include="Visor_video.cs">
+    <Compile Include="tb_visor_video.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
     <Compile Include="VWACTF_001.cs">
