@@ -315,6 +315,7 @@
     <Compile Include="Areas\General\Controllers\TipoDocumentoController.cs" />
     <Compile Include="Areas\General\Controllers\TipoDocumentoTalonarioController.cs" />
     <Compile Include="Areas\General\Controllers\TransportistaController.cs" />
+    <Compile Include="Areas\General\Controllers\VisorDeVideoController.cs" />
     <Compile Include="Areas\General\GeneralAreaRegistration.cs" />
     <Compile Include="Areas\Importacion\Controllers\CatalogoImportacionController.cs" />
     <Compile Include="Areas\Importacion\Controllers\CatalogoTipoImportacionController.cs" />
@@ -8994,6 +8995,7 @@
     <Content Include="Areas\Importacion\Views\ParametrosImportacion\_CmbCuenta_contable_inv.cshtml" />
     <Content Include="Areas\Importacion\Views\OrdenCompraExterior\_GridViewPartial_orden_compra_por_liquidar.cshtml" />
     <Content Include="Areas\Importacion\Views\LiquidacionOrdenCompra\Anular.cshtml" />
+    <Content Include="Areas\General\Views\VisorDeVideo\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
