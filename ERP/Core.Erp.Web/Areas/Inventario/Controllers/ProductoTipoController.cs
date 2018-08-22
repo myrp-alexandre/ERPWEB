@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.Inventario;
 using Core.Erp.Bus.Inventario;
-
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
@@ -21,21 +21,23 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_tipo_producto()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<in_ProductoTipo_Info> model = bus_producto_tipo.get_list(IdEmpresa, true);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+           var model = bus_producto_tipo.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_tipo_producto", model);
         }
 
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
-            in_ProductoTipo_Info model = new in_ProductoTipo_Info();
+            in_ProductoTipo_Info model = new in_ProductoTipo_Info
+            {
+                IdEmpresa = IdEmpresa
+            };
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Nuevo(in_ProductoTipo_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_producto_tipo.guardarDB(model))
             {
                 return View(model);
@@ -43,9 +45,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdProductoTipo = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 , int IdProductoTipo = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_ProductoTipo_Info model = bus_producto_tipo.get_info(IdEmpresa,IdProductoTipo);
             if (model == null)
                 return RedirectToAction("Index");
@@ -62,9 +63,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Anular(int IdProductoTipo = 0)
+        public ActionResult Anular(int IdEmpresa = 0 , int IdProductoTipo = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_ProductoTipo_Info model = bus_producto_tipo.get_info(IdEmpresa, IdProductoTipo);
             if (model == null)
                 return RedirectToAction("Index");
@@ -82,9 +82,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
 
         #region json
-        public JsonResult get_info_producto_tipo(int IdProductoTipo = 0)
+        public JsonResult get_info_producto_tipo( int IdProductoTipo = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             in_ProductoTipo_Bus bus_producto_tipo = new in_ProductoTipo_Bus();
             var resultado = bus_producto_tipo.get_info(IdEmpresa, IdProductoTipo);
 

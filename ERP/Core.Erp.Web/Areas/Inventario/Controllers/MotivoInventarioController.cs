@@ -8,6 +8,7 @@ using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Inventario;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.Helps;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
@@ -22,10 +23,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_motivoinven()
         {
-
-            List<in_Motivo_Inven_Info> model = new List<in_Motivo_Inven_Info>();
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model = bus_motivo.get_list(IdEmpresa, true);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var model = bus_motivo.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_motivoinven", model);
         }
 
@@ -35,9 +34,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var lst_tipo = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoInventario.ING_EGR), false);
             ViewBag.lst_tipos = lst_tipo;
         }
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0 )
         {
-            in_Motivo_Inven_Info model = new in_Motivo_Inven_Info();
+            in_Motivo_Inven_Info model = new in_Motivo_Inven_Info
+            {
+                IdEmpresa = IdEmpresa
+            };
             cargar_combos();
             return View(model);
         }
@@ -45,7 +47,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost]
         public ActionResult Nuevo(in_Motivo_Inven_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_motivo.guardarDB(model))
             {
                 cargar_combos();
@@ -53,10 +54,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(int IdMotivo_Inv = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 , int IdMotivo_Inv = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_Motivo_Inven_Info model = bus_motivo.get_info(Convert.ToInt32(Session["IdEmpresa"]), IdMotivo_Inv);
+            in_Motivo_Inven_Info model = bus_motivo.get_info(IdEmpresa, IdMotivo_Inv);
             if (model == null)
             {
                 return RedirectToAction("Index");
@@ -68,7 +68,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost]
         public ActionResult Modificar(in_Motivo_Inven_Info model)
         {
-            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario.ToString();
             if (!bus_motivo.modificarDB(model))
             {
                 cargar_combos();
@@ -76,10 +76,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(int IdMotivo_Inv = 0)
+        public ActionResult Anular(int IdEmpresa = 0 , int IdMotivo_Inv = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_Motivo_Inven_Info model = bus_motivo.get_info(Convert.ToInt32(Session["IdEmpresa"]), IdMotivo_Inv);
+            in_Motivo_Inven_Info model = bus_motivo.get_info(IdEmpresa, IdMotivo_Inv);
             if (model == null)
             {
                 return RedirectToAction("Index");
@@ -91,7 +90,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost]
         public ActionResult Anular(in_Motivo_Inven_Info model)
         {
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario.ToString();
             if (!bus_motivo.anularDB(model))
             {
                 cargar_combos();

@@ -8,6 +8,7 @@ using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Inventario;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.General;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
@@ -15,6 +16,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
     {
         in_movi_inven_tipo_Bus bus_tipo_movimiento = new in_movi_inven_tipo_Bus();
         in_movi_inven_tipo_x_tb_bodega_Bus bus_tipo_movimiento_x_bodega = new in_movi_inven_tipo_x_tb_bodega_Bus();
+            ct_cbtecble_tipo_Bus bus_tipo_comprobante = new ct_cbtecble_tipo_Bus();
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
         public ActionResult Index()
         {
             return View();
@@ -23,8 +27,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_tipo_movimiento()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<in_movi_inven_tipo_Info> model = bus_tipo_movimiento.get_list(IdEmpresa, true);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var model = bus_tipo_movimiento.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_tipo_movimiento", model);
         }
 
@@ -34,17 +38,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             lst_signo.Add("+", "+");
             lst_signo.Add("-", "-");
             ViewBag.lst_signo = lst_signo;
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            ct_cbtecble_tipo_Bus bus_tipo_comprobante = new ct_cbtecble_tipo_Bus();
-            var lst_tipo_comprobante = bus_tipo_comprobante.get_list(IdEmpresa, false);
+            
+            var lst_tipo_comprobante = bus_tipo_comprobante.get_list(model.IdEmpresa, false);
             ViewBag.lst_tipo_comprobante = lst_tipo_comprobante;
 
-            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
-            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
-            tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
-            var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
+            var lst_sucursal = bus_sucursal.get_list(model.IdEmpresa, false);
+            var lst_bodega = bus_bodega.get_list(model.IdEmpresa, false);
 
-            model.lst_tipo_mov_x_bodega = bus_tipo_movimiento_x_bodega.get_list(IdEmpresa, model.IdMovi_inven_tipo);
+            model.lst_tipo_mov_x_bodega = bus_tipo_movimiento_x_bodega.get_list(model.IdEmpresa, model.IdMovi_inven_tipo);
 
             model.lst_tipo_mov_x_bodega = (from b in lst_bodega
                                            join s in lst_sucursal
@@ -65,9 +66,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                                            }).ToList();
 
         }
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
-            in_movi_inven_tipo_Info model = new in_movi_inven_tipo_Info();
+            in_movi_inven_tipo_Info model = new in_movi_inven_tipo_Info
+            {
+                IdEmpresa = IdEmpresa
+            };
             cargar_combos(model);
             return View(model);
         }
@@ -75,7 +79,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost]
         public ActionResult Nuevo(in_movi_inven_tipo_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_tipo_movimiento.guardarDB(model))
             {
                 cargar_combos(model);
@@ -88,9 +91,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdMovi_inven_tipo = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 , int IdMovi_inven_tipo = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_movi_inven_tipo_Info model = bus_tipo_movimiento.get_info(IdEmpresa,IdMovi_inven_tipo);
             if (model == null)
                 return RedirectToAction("Index");
@@ -113,9 +115,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Anular(int IdMovi_inven_tipo = 0)
+        public ActionResult Anular(int IdEmpresa = 0 , int IdMovi_inven_tipo = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_movi_inven_tipo_Info model = bus_tipo_movimiento.get_info(IdEmpresa, IdMovi_inven_tipo);
             if (model == null)
                 return RedirectToAction("Index");

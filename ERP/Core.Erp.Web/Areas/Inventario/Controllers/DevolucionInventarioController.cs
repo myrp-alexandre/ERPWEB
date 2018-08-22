@@ -45,9 +45,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #endregion
 
         #region Metodos
-        private void cargar_combos()
+        private void cargar_combos(int IdEmpresa)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             Dictionary<string, string> lst_signo = new Dictionary<string, string>();
             lst_signo.Add("+", "Ingreso por devolución");
             lst_signo.Add("-", "Egreso por devolución");            
@@ -71,11 +70,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #endregion
 
         #region Acciones
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
             in_devolucion_inven_Info model = new in_devolucion_inven_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdEmpresa = IdEmpresa,
                 Fecha_ini = DateTime.Now.Date.AddMonths(-1),
                 Fecha_fin = DateTime.Now.Date,
                 Fecha = DateTime.Now.Date,
@@ -83,7 +82,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             };
             List_det.set_list(new List<in_devolucion_inven_det_Info>());
             set_list(new List<in_Ing_Egr_Inven_Info>());
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -92,28 +91,27 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             if (!validar(model,ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             if (!bus_devolucion.guardarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
 
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(decimal IdDev_Inven = 0)
+        public ActionResult Modificar(int IdEmpresa = 0 , decimal IdDev_Inven = 0)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             in_devolucion_inven_Info model = bus_devolucion.get_info(IdEmpresa, IdDev_Inven);
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_det = bus_det.get_list(IdEmpresa, IdDev_Inven);
             List_det.set_list(model.lst_det);
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -122,27 +120,26 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             if (!bus_devolucion.modificarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido modificar el registro";
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
 
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(decimal IdDev_Inven = 0)
+        public ActionResult Anular(int IdEmpresa = 0 , decimal IdDev_Inven = 0)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             in_devolucion_inven_Info model = bus_devolucion.get_info(IdEmpresa, IdDev_Inven);
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_det = bus_det.get_list(IdEmpresa, IdDev_Inven);
             List_det.set_list(model.lst_det);
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -152,7 +149,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             if (!bus_devolucion.anularDB(model))
             {
                 ViewBag.mensaje = "No se ha podido modificar el registro";
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
 

@@ -39,15 +39,15 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
             ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<in_Ing_Egr_Inven_distribucion_Info> model = bus_ing_inv.get_list(IdEmpresa);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var model = bus_ing_inv.get_list(IdEmpresa);
             return PartialView("_GridViewPartial_distribuion", model);
         }
 
         public ActionResult GridViewPartial_distribuidos(int IdSucursal=0, int IdMovi_inven_tipo=0, decimal IdNumMovi=0)
         {
             List<in_Ing_Egr_Inven_distribucion_Info> model = new List<in_Ing_Egr_Inven_distribucion_Info>();
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             if (IdSucursal != 0 & IdMovi_inven_tipo != 0 & IdNumMovi != 0 & Session["list_distribuida"] == null)
             {
                 model = bus_ing_inv.get_list_distribuido(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
@@ -63,7 +63,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public ActionResult GridViewPartial_por_distribuir(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
         {
             List<in_Ing_Egr_Inven_distribucion_Info> model = new List<in_Ing_Egr_Inven_distribucion_Info>();
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             if (IdSucursal != 0 & IdMovi_inven_tipo != 0 & IdNumMovi != 0 & Session["list_distribuida"] == null)
             {
                 model = bus_ing_inv.get_list_x_distribuir(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
@@ -81,15 +81,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             if (Session["IdProducto_padre"] != null)
                 IdProducto_padre = (decimal)Session["IdProducto_padre"];
             cargar_combos_detalle(IdProducto_padre);
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<in_Ing_Egr_Inven_distribucion_Info> model = new List<in_Ing_Egr_Inven_distribucion_Info>();
             return PartialView("_GridViewPartial_distribucion_det", model);
         }
 
         
-        private void cargar_combos()
+        private void cargar_combos(int IdEmpresa)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_movi_inven_tipo_Bus bus_tipo = new in_movi_inven_tipo_Bus();
             var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_tipo = lst_tipo;
@@ -99,11 +98,10 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             ViewBag.lst_motivo = lst_motivo;
 
         }
-        public ActionResult Nuevo(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0, string signo="")
+        public ActionResult Nuevo(int IdEmpresa = 0 , int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0, string signo="")
         {
             Session["list_distribuida"] = null;
             Session["lst_x_distribuir"] = null;
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             in_parametro_Info i_param = bus_in_param.get_info(IdEmpresa);
             if (i_param == null)
                 return RedirectToAction("Index");
@@ -118,7 +116,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 model.IdBodega =Convert.ToInt32( info_mov.IdBodega);
              
              }
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -129,11 +127,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
             model.lst_x_distribuir = Session["lst_x_distribuir"] as List<in_Ing_Egr_Inven_distribucion_Info>;
           
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdUsuario = SessionFixed.IdUsuario.ToString();
             model.IdEmpresa =Convert.ToInt32( SessionFixed.IdEmpresa);
             if (!bus_ing_inv.guardarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -141,7 +139,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         
         private void cargar_combos_detalle(decimal IdProducto_padre=0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             in_Producto_Bus bus_producto = new in_Producto_Bus();
             var lst_producto = bus_producto.get_list_combo_hijo(IdEmpresa, IdProducto_padre);
             ViewBag.lst_producto = lst_producto;
