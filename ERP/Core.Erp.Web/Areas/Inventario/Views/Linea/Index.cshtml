@@ -11,10 +11,10 @@
 @using (Html.BeginForm())
 {
 
-    @Html.Action("GridViewPartial_linea", new { IdCategoria = ViewBag.IdCategoria })
+    @Html.Action("GridViewPartial_linea", new { IdEmpresa = ViewBag.IdEmpresa, IdCategoria = ViewBag.IdCategoria })
 
     <div class="box-footer">
-        <a class="btn btn-default" href="@Url.Action("Index","Categoria",new { IdCategoria = ViewBag.IdCategoria, Area = "Inventario" },null)">Volver</a>
+        <a class="btn btn-default" href="@Url.Action("Index","Categoria",new {IdEmpresa = ViewBag.IdEmpresa, IdCategoria = ViewBag.IdCategoria, Area = "Inventario" },null)">Volver</a>
     </div>
 
 }

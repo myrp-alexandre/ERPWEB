@@ -107,7 +107,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 lst_fa_cliente_contactos = new List<fa_cliente_contactos_Info>(),
                 Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>()
             };
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos, model.IdTransaccionSession);
             List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal, model.IdTransaccionSession);
             cargar_combos(model);

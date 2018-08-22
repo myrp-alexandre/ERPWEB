@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Inventario;
+using Core.Erp.Web.Helps;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,36 +13,35 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
     public class LineaController : Controller
     {
         in_linea_Bus bus_linea = new in_linea_Bus();
-        public ActionResult Index(string IdCategoria = "")
+            in_categorias_Bus bus_categoria = new in_categorias_Bus();
+        public ActionResult Index(int IdEmpresa = 0, string IdCategoria = "")
         {
+            ViewBag.IdEmpresa = IdEmpresa;
             ViewBag.IdCategoria = IdCategoria;
             return View();
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_linea(string IdCategoria = "")
+        public ActionResult GridViewPartial_linea(int IdEmpresa = 0 , string IdCategoria = "")
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ViewBag.IdCategoria = IdCategoria;
             List<in_linea_Info> model = bus_linea.get_list(IdEmpresa, IdCategoria, true);
             return PartialView("_GridViewPartial_linea", model);
         }
 
-        private void cargar_combos()
+        private void cargar_combos(int IdEmpresa)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-
-            in_categorias_Bus bus_categoria = new in_categorias_Bus();
             var lst_categoria = bus_categoria.get_list(IdEmpresa, false);
             ViewBag.lst_categorias = lst_categoria;
         }
-        public ActionResult Nuevo(string IdCategoria = "")
+        public ActionResult Nuevo(int IdEmpresa = 0 , string IdCategoria = "")
         {
             in_linea_Info model = new in_linea_Info
             {
-                IdCategoria = IdCategoria
+                IdCategoria = IdCategoria,
+                IdEmpresa = IdEmpresa
             };
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -49,64 +49,61 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public ActionResult Nuevo(in_linea_Info model)
         {
             model.IdUsuario = Session["IdUsuario"].ToString();
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (!bus_linea.guardarDB(model))
             {
                 ViewBag.IdCategoria = model.IdCategoria;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-            return RedirectToAction("Index", new { IdCategoria = model.IdCategoria });
+            return RedirectToAction("Index", new { IdEmpresa = model.IdEmpresa, IdCategoria = model.IdCategoria });
         }
-        public ActionResult Modificar(int IdLinea = 0, string IdCategoria = "")
+        public ActionResult Modificar(int IdEmpresa = 0 , int IdLinea = 0, string IdCategoria = "")
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_linea_Info model = bus_linea.get_info(Convert.ToInt32(Session["IdEmpresa"]), IdCategoria, IdLinea);
+            in_linea_Info model = bus_linea.get_info(IdEmpresa, IdCategoria, IdLinea);
             if (model == null)
             {
                 ViewBag.IdCategoria = IdCategoria;
-                return RedirectToAction("Index", IdCategoria = model.IdCategoria);
+                return RedirectToAction("Index",new { IdEmpresa = IdEmpresa, IdCategoria = IdCategoria });
             }
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Modificar(in_linea_Info model)
         {
-            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario.ToString();
             if (!bus_linea.modificarDB(model))
             {
                 ViewBag.IdCategoria = model.IdCategoria;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-            return RedirectToAction("Index", new { IdCategoria = model.IdCategoria });
+            return RedirectToAction("Index", new { IdEmpresa = model.IdEmpresa, IdCategoria = model.IdCategoria });
         }
-        public ActionResult Anular(int IdLinea = 0, string IdCategoria = "")
+        public ActionResult Anular(int IdEmpresa = 0 , int IdLinea = 0, string IdCategoria = "")
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_linea_Info model = bus_linea.get_info(Convert.ToInt32(Session["IdEmpresa"]), IdCategoria, IdLinea);
+            in_linea_Info model = bus_linea.get_info(IdEmpresa, IdCategoria, IdLinea);
             if (model == null)
             {
                 ViewBag.IdCategoria = IdCategoria;
-                return RedirectToAction("Index", IdCategoria = model.IdCategoria);
+                return RedirectToAction("Index", new { IdEmpresa = IdEmpresa, IdCategoria = model.IdCategoria });
             }
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Anular(in_linea_Info model)
         {
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario.ToString();
             if (!bus_linea.anularDB(model))
             {
                 ViewBag.IdCategoria = model.IdCategoria;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-            return RedirectToAction("Index", new { IdCategoria = model.IdCategoria });
+            return RedirectToAction("Index", new { IdEmpresa = model.IdEmpresa,  IdCategoria = model.IdCategoria });
         }
     }
 }

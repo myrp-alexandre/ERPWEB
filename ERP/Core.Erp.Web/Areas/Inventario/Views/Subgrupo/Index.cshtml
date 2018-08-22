@@ -10,10 +10,10 @@
 @using (Html.BeginForm())
 {
 
-    @Html.Action("GridViewPartial_subgrupo", new { IdCategoria = ViewBag.IdCategoria, IdLinea = ViewBag.IdLinea, IdGrupo = ViewBag.IdGrupo })
+    @Html.Action("GridViewPartial_subgrupo", new { IdEmpresa = ViewBag.IdEmpresa, IdCategoria = ViewBag.IdCategoria, IdLinea = ViewBag.IdLinea, IdGrupo = ViewBag.IdGrupo })
 
     <div class="box-footer">
-        <a class="btn btn-default" href="@Url.Action("Index","Grupo",new {IdCategoria = ViewBag.IdCategoria, IdLinea = ViewBag.IdLinea, IdGrupo = ViewBag.IdGrupo, Area = "Inventario" },null)">Volver</a>
+        <a class="btn btn-default" href="@Url.Action("Index","Grupo",new {IdEmpresa = ViewBag.IdEmpresa,IdCategoria = ViewBag.IdCategoria, IdLinea = ViewBag.IdLinea, IdGrupo = ViewBag.IdGrupo, Area = "Inventario" },null)">Volver</a>
     </div>
 
 

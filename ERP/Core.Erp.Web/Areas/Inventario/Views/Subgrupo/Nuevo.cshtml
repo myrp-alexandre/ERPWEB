@@ -10,7 +10,7 @@
 
 @using (Html.BeginForm("Nuevo", "Subgrupo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-
+@Html.HiddenFor(q=>q.IdEmpresa)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-4">

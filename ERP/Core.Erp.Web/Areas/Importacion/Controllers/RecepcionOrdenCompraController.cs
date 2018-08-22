@@ -74,15 +74,13 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         #endregion
 
         #region acciones
-        public ActionResult Nuevo(decimal IdOrdenCompra_ext = 0)
+        public ActionResult Nuevo(int IdEmpresa = 0, decimal IdOrdenCompra_ext = 0)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-
             imp_orden_compra_ext_recepcion_Info model = new imp_orden_compra_ext_recepcion_Info();
             model = bus_recepcion.get_rcepcion_mercancia(IdEmpresa, IdOrdenCompra_ext);
             if (model != null)
                 Session["imp_ordencompra_ext_det_Info"] = model.lst_detalle;
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -92,7 +90,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             if (model.lst_detalle == null)
             {
                 ViewBag.mensaje = "no existe detalle";
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             else
@@ -100,7 +98,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 if (model.lst_detalle.Count() == 0)
                 {
                     ViewBag.mensaje = "no existe detalle";
-                    cargar_combos();
+                    cargar_combos(model.IdEmpresa);
                     return View(model);
                 }
 
@@ -108,22 +106,20 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             if (!bus_recepcion.guardarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             Session["imp_ordencompra_ext_det_Info"] = null;
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(decimal IdRecepcion = 0)
+        public ActionResult Modificar(int IdEmpresa =0, decimal IdRecepcion = 0)
         {
-
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             imp_orden_compra_ext_recepcion_Info model = bus_recepcion.get_info(IdEmpresa, IdRecepcion);
             var lst_detalle = bus_detalle.get_list(IdEmpresa, IdRecepcion);
             Session["imp_ordencompra_ext_det_Info"] = lst_detalle;
             if (model == null)
                 return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             cargar_combos_detalle();
             return View(model);
         }
@@ -135,7 +131,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             if (model.lst_detalle == null)
             {
                 ViewBag.mensaje = "no existe detalle";
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             else
@@ -143,29 +139,27 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 if (model.lst_detalle.Count() == 0)
                 {
                     ViewBag.mensaje = "no existe detalle";
-                    cargar_combos();
+                    cargar_combos(model.IdEmpresa);
                     return View(model);
                 }
 
             }
             if (!bus_recepcion.modificarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             Session["imp_ordencompra_ext_det_Info"] = null;
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(decimal IdRecepcion = 0)
+        public ActionResult Anular(int IdEmpresa = 0 , decimal IdRecepcion = 0)
         {
-
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             imp_orden_compra_ext_recepcion_Info model = bus_recepcion.get_info(IdEmpresa, IdRecepcion);
             var lst_detalle = bus_detalle.get_list(IdEmpresa, IdRecepcion);
             Session["imp_ordencompra_ext_det_Info"] = lst_detalle;
             if (model == null)
                 return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -175,7 +169,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             model.lst_detalle = Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
             if (!bus_recepcion.anularDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             Session["imp_ordencompra_ext_det_Info"] = null;
@@ -183,11 +177,8 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         }
         #endregion
 
-        private void cargar_combos()
+        private void cargar_combos(int IdEmpresa)
         {
-
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-
             var lst_catalogos = bus_catalogo.get_list(1);
             ViewBag.lst_catalogos = lst_catalogos;
 

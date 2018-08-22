@@ -48,11 +48,11 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         imp_parametro_Bus bus_parametro = new imp_parametro_Bus();
         public ActionResult Index()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             imp_parametro_Info model = bus_parametro.get_info(IdEmpresa);
             if (model == null)
                 model = new imp_parametro_Info { IdEmpresa = IdEmpresa };
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -60,13 +60,12 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         {
             if (!bus_parametro.guardarDB(model))
                 ViewBag.mensaje = "No se pudieron actualizar los registros";
-            cargar_combos();
+            cargar_combos(model.IdEmpresa);
             return View(model);
         }
 
-        private void cargar_combos()
+        private void cargar_combos(int IdEmpresa)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ct_cbtecble_tipo_Bus bus_comprobante_tipo = new ct_cbtecble_tipo_Bus();
             var lst_tipo = bus_comprobante_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_tipo = lst_tipo;
