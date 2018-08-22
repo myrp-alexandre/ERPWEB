@@ -40,7 +40,13 @@ namespace Core.Erp.Web.Areas.General.Controllers
             return RedirectToAction("Index");
         }
 
-       
+        public ActionResult Modificar(string Cod_video)
+        {
+            tb_visor_video_Info model = bus_pais.get_info(Cod_video);
+            if (model == null)
+                return RedirectToAction("Index");
+            return View(model);
+        }
         [HttpPost]
         public ActionResult Modificar(tb_visor_video_Info model)
         {
