@@ -100,7 +100,7 @@
         {
             column.SetDataItemTemplateContent(c =>
             {
-                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CXC_002", "CuentasPorCobrarReportes", new { Area = "Reportes", IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdBodega_Cbte = DataBinder.Eval(c.DataItem, "IdBodega"), IdCbte_vta_nota = DataBinder.Eval(c.DataItem, "IdCbteVta"), dc_TipoDocumento = DataBinder.Eval(c.DataItem, "vt_tipoDoc") }, Request.Url.Scheme) + "');\"></span>");
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CXC_002", "CuentasPorCobrarReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdBodega_Cbte = DataBinder.Eval(c.DataItem, "IdBodega"), IdCbte_vta_nota = DataBinder.Eval(c.DataItem, "IdCbteVta"), dc_TipoDocumento = DataBinder.Eval(c.DataItem, "vt_tipoDoc") }, Request.Url.Scheme) + "');\"></span>");
             });
             column.Width = Unit.Percentage(5);
         });
