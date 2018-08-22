@@ -57,7 +57,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_NotaCreditoFacturacion(DateTime? Fecha_ini, DateTime? Fecha_fin)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
             var model = bus_nota.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, "C");
@@ -105,13 +105,13 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #region Json
         public JsonResult cargar_contactos(decimal IdCliente = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var resultado = bus_contacto.get_list(IdEmpresa, IdCliente);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         public JsonResult CargarPuntosDeVenta(int IdSucursal = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var resultado = bus_punto_venta.get_list(IdEmpresa, IdSucursal, false);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
@@ -394,7 +394,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #endregion
 
         #region Acciones
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0 )
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -404,7 +404,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             #endregion
             fa_notaCreDeb_Info model = new fa_notaCreDeb_Info
             {
-                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
+                IdEmpresa = IdEmpresa,
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 no_fecha = DateTime.Now,
                 no_fecha_venc = DateTime.Now,
@@ -429,7 +429,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 cargar_combos(model);
                 return View(model);
             }
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdUsuario = SessionFixed.IdUsuario.ToString();
             if (!bus_nota.guardarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
@@ -438,9 +438,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             };
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(int IdSucursal = 0, int IdBodega = 0, decimal IdNota = 0)
+        public ActionResult Modificar(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdNota = 0)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
@@ -477,9 +476,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             };
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(int IdSucursal = 0, int IdBodega = 0, decimal IdNota = 0)
+        public ActionResult Anular(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdNota = 0)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
@@ -501,7 +499,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Anular(fa_notaCreDeb_Info model)
         {
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario.ToString();
             if (!bus_nota.anularDB(model))
             {
                 ViewBag.mensaje = "No se ha podido anular el registro";

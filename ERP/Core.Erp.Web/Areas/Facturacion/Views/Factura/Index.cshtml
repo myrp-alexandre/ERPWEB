@@ -9,6 +9,7 @@
 }
 @using (Html.BeginForm("Index", "Factura", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
+    @Html.HiddenFor(q=>q.IdEmpresa)
     <div class="box collapsed-box">
         <div class="box-header with-border">
             <div class="row">

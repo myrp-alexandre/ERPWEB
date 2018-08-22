@@ -99,9 +99,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #endregion
 
         #region acciones
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             int IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -111,6 +110,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             #endregion
             fa_guia_remision_Info model = new fa_guia_remision_Info
             {
+                
                 gi_fecha = DateTime.Now,
                 gi_FechaFinTraslado = DateTime.Now,
                 gi_FechaInicioTraslado = DateTime.Now,
@@ -128,8 +128,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Nuevo(fa_guia_remision_Info model)
         {
-            
-            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdUsuario = SessionFixed.IdUsuario;
             model.CodGuiaRemision= (model.CodGuiaRemision == null) ? "" : model.CodGuiaRemision;
             model.lst_detalle_x_factura = List_rel.get_list(model.IdTransaccionSession);
@@ -149,10 +147,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(decimal IdGuiaRemision=0)
+        public ActionResult Modificar(int IdEmpresa = 0, decimal IdGuiaRemision=0)
         {
             bus_guia = new fa_guia_remision_Bus();
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
@@ -172,8 +169,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Modificar(fa_guia_remision_Info model)
         {   
-            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdUsuario = SessionFixed.IdUsuario.ToString();
             model.CodGuiaRemision = (model.CodGuiaRemision == null) ? "" : model.CodGuiaRemision;
             model.CodDocumentoTipo = "GUIA";
             model.lst_detalle_x_factura = List_rel.get_list(model.IdTransaccionSession);
@@ -192,10 +188,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(decimal IdGuiaRemision=0)
+        public ActionResult Anular(int IdEmpresa = 0, decimal IdGuiaRemision=0)
         {
             bus_guia = new fa_guia_remision_Bus();
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });

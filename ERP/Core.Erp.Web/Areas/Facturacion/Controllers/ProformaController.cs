@@ -33,7 +33,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_parametro_Bus bus_param = new fa_parametro_Bus();
         #endregion
 
-
+        #region Index
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -48,13 +48,15 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_proforma(DateTime? Fecha_ini, DateTime? Fecha_fin)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<fa_proforma_Info> model = new List<fa_proforma_Info>();
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
             model = bus_proforma.get_list(IdEmpresa,ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_proforma", model);
         }
+
+        #endregion
 
         #region Metodos ComboBox bajo demanda cliente
         public ActionResult CmbCliente_Proforma()
@@ -115,9 +117,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             return true;
         }
-        private void cargar_combos()
+        private void cargar_combos(int IdEmpresa)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
@@ -134,7 +135,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var lst_pago = bus_pago.get_list(false);
             ViewBag.lst_pago = lst_pago;
         }
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0 )
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -144,7 +145,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             #endregion
             fa_proforma_Info model = new fa_proforma_Info
             {
-                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
+                IdEmpresa = IdEmpresa,
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 pf_fecha = DateTime.Now,
                 pf_fecha_vcto = DateTime.Now,
@@ -152,7 +153,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -165,7 +166,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             {
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 ViewBag.mensaje = mensaje;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             model.IdUsuario_creacion = Session["IdUsuario"].ToString();
@@ -173,15 +174,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             {
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 ViewBag.mensaje = mensaje;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             };
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdSucursal = 0, decimal IdProforma = 0)
+        public ActionResult Modificar(int IdEmpresa = 0, int IdSucursal = 0, decimal IdProforma = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
@@ -195,7 +195,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdProforma);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -206,7 +206,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             model.IdUsuario_modificacion = Session["IdUsuario"].ToString();
@@ -214,14 +214,13 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             if (!bus_proforma.modificarDB(model))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             };
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(int IdSucursal = 0, decimal IdProforma = 0)
+        public ActionResult Anular(int IdEmpresa = 0 , int IdSucursal = 0, decimal IdProforma = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
@@ -235,18 +234,18 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdProforma);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Anular(fa_proforma_Info model)
         {
-            model.IdUsuario_anulacion = Session["IdUsuario"].ToString();
+            model.IdUsuario_anulacion = SessionFixed.IdUsuario.ToString();
 
             if (!bus_proforma.anularDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             };
             return RedirectToAction("Index");
@@ -434,7 +433,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_proforma_det_Info info_det)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
             if (info_det != null && info_det.IdProducto != 0 && IdCliente > 0)
             {
