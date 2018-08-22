@@ -92,6 +92,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                      IdSucursal = q.IdSucursal,
                                      IdBodega = q.IdBodega,
                                      IdCbteVta = q.IdCbteVta,
+                                     Secuencia = q.Secuencia,
                                      vt_cantidad = q.vt_cantidad,
                                      vt_DescUnitario = q.vt_DescUnitario,
                                      vt_fecha = q.vt_fecha,
@@ -141,7 +142,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                  }).ToList();
                     }
                 }
-                return Lista;
+                return Lista.OrderBy(q => q.Secuencia).ThenBy(q => q.orden).ToList();
             }
             catch (Exception)
             {

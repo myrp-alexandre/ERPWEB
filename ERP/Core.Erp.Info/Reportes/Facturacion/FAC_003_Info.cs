@@ -12,7 +12,7 @@ namespace Core.Erp.Info.Reportes.Facturacion
         public int IdSucursal { get; set; }
         public int IdBodega { get; set; }
         public decimal IdCbteVta { get; set; }
-        public int Secuencia { get; set; }
+        public int? Secuencia { get; set; }
         public string vt_tipoDoc { get; set; }
         public string vt_serie1 { get; set; }
         public string vt_serie2 { get; set; }
