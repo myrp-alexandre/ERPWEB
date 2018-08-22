@@ -796,7 +796,7 @@
             this.xrTableCell20.Name = "xrTableCell20";
             this.xrTableCell20.StylePriority.UseBorders = false;
             this.xrTableCell20.StylePriority.UseFont = false;
-            this.xrTableCell20.Text = "Costo";
+            this.xrTableCell20.Text = "Costo U.";
             this.xrTableCell20.Weight = 1.0064043792682489D;
             // 
             // xrTableCell21
@@ -820,7 +820,7 @@
             this.xrTableCell22.Name = "xrTableCell22";
             this.xrTableCell22.StylePriority.UseBorders = false;
             this.xrTableCell22.StylePriority.UseFont = false;
-            this.xrTableCell22.Text = "Costo FOB";
+            this.xrTableCell22.Text = "Cst U. FOB";
             this.xrTableCell22.Weight = 0.85544365096567654D;
             // 
             // xrTableCell23
