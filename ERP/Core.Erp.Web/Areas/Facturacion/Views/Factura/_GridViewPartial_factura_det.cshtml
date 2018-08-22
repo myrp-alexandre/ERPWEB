@@ -34,11 +34,11 @@
         //Funcion para inicializar fila al presionar nuevo
         settings.InitNewRow = (s, e) =>
         {
-            e.NewValues["IdProducto"] = 0;
+            e.NewValues["IdProducto"] = "";
             e.NewValues["IdCod_Impuesto_Iva"] = "IVA0";
-            e.NewValues["vt_cantidad"] = 0;
-            e.NewValues["vt_Precio"] = 0;
-            e.NewValues["vt_PorDescUnitario"] = 0;
+            e.NewValues["vt_cantidad"] = "";
+            e.NewValues["vt_Precio"] = "";
+            e.NewValues["vt_PorDescUnitario"] = "";
         };
         settings.Columns.Add(column =>
         {

@@ -14,6 +14,8 @@
         settings.Properties.TextFormatString = "[{0}] {1}";
         settings.Properties.ValueField = "IdEntidad";
         settings.Properties.ValueType = typeof(decimal);
+        settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+        settings.Properties.NullText = "== Seleccione ==";
 
         settings.Properties.Columns.Add("IdEntidad", "ID", 10);
         settings.Properties.Columns.Add("pe_nombreCompleto", "Proveedor", 90);

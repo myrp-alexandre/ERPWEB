@@ -1,10 +1,5 @@
-﻿using Core.Erp.Info.Reportes.Inventario;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Info.Helps
 {
@@ -75,8 +70,14 @@ namespace Core.Erp.Info.Helps
         public int IdEmpresa { get; set; }
         public int IdMarca { get; set; }
         public string IdPais_embarque { get; set; }
-        public decimal? IdProducto { get; set; }
+        public decimal? IdProductoPadre { get; set; }
         public decimal? IdProveedor { get; set; }
+
+        public cl_filtros_importacion_Info()
+        {
+            fecha_ini = DateTime.Now.Date.AddMonths(-1);
+            fecha_fin = DateTime.Now.Date;
+        }
     }
 
     public class cl_filtros_inventario_Info
@@ -98,7 +99,6 @@ namespace Core.Erp.Info.Helps
         public bool no_mostrar_valores_en_0 { get; set; }
         public bool mostrar_saldos_en_0 { get; set; }
         
-
         public cl_filtros_inventario_Info()
         {
             fecha_ini = DateTime.Now.Date.AddMonths(-1);

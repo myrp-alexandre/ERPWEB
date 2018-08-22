@@ -99,13 +99,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             cl_filtros_importacion_Info model = new cl_filtros_importacion_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdPais_embarque = ""
             };
             cargar_combos();
             IMP_003_Rpt report = new IMP_003_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdProveedor.Value = model.IdProveedor;
-            report.p_IdProducto.Value = model.IdProducto;
+            report.p_IdProducto.Value = model.IdProductoPadre;
             report.p_IdMarca.Value = model.IdMarca;
             report.p_IdPais_embarque.Value = model.IdPais_embarque;
             report.p_fecha_ini.Value = model.fecha_ini;
@@ -122,7 +123,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             IMP_003_Rpt report = new IMP_003_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdProveedor.Value = model.IdProveedor;
-            report.p_IdProducto.Value = model.IdProducto;
+            report.p_IdProducto.Value = model.IdProductoPadre;
             report.p_IdMarca.Value = model.IdMarca;
             report.p_IdPais_embarque.Value = model.IdPais_embarque;
             report.p_fecha_ini.Value = model.fecha_ini;

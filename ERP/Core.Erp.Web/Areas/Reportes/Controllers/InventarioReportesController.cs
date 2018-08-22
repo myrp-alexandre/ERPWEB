@@ -37,6 +37,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
         #endregion
+
         #region ProductoPadre
         public ActionResult CmbProductoPadre_Inventario()
         {
@@ -109,6 +110,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
     
         #endregion
+
         #region GRids
         [ValidateInput(false)]
         public ActionResult GridViewPartial_producto_lst()
@@ -533,7 +535,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdMarca.Value = model.IdMarca;
             report.p_IdUsuario.Value = SessionFixed.IdUsuario;
-            report.p_IdProducto.Value = model.IdProducto;
+            report.p_IdProducto.Value = model.IdProductoPadre;
             report.p_IdCategoria.Value = model.IdCategoria;
             report.p_IdLinea.Value = model.IdLinea;
             report.p_IdGrupo.Value = model.IdGrupo;
@@ -553,7 +555,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdMarca.Value = model.IdMarca;
             report.p_IdUsuario.Value = SessionFixed.IdUsuario;
-            report.p_IdProducto.Value = model.IdProducto;
+            report.p_IdProducto.Value = model.IdProductoPadre;
             report.p_IdCategoria.Value = model.IdCategoria;
             report.p_IdLinea.Value = model.IdLinea;
             report.p_IdGrupo.Value = model.IdGrupo;

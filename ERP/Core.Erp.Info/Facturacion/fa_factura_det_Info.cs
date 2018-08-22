@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,11 @@ namespace Core.Erp.Info.Facturacion
         public int IdBodega { get; set; }
         public decimal IdCbteVta { get; set; }
         public int Secuencia { get; set; }
+        [Required(ErrorMessage ="El campo producto es obligatorio")]
+        [Range(1, int.MaxValue, ErrorMessage = "El campo cantidad es obligatorio")]
         public decimal IdProducto { get; set; }
+        [Required(ErrorMessage = "El campo cantidad es obligatorio")]
+        [Range(1,double.MaxValue,ErrorMessage ="El campo cantidad es obligatorio")]
         public double vt_cantidad { get; set; }
         public double vt_Precio { get; set; }
         public double vt_PorDescUnitario { get; set; }

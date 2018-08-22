@@ -26,7 +26,7 @@ namespace Core.Erp.Web.Reportes.Importacion
 
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             string IdPais_embarque = p_IdPais_embarque.Value == null ? "" : Convert.ToString(p_IdPais_embarque.Value);
-            decimal IdProveedor = p_IdProveedor.Value == null ? 0 : Convert.ToDecimal(p_IdProveedor.Value);
+            decimal IdProveedor = string.IsNullOrEmpty(p_IdProveedor.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdProveedor.Value);
             decimal IdProducto = string.IsNullOrEmpty(p_IdProducto.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdProducto.Value);
             int IdMarca = p_IdMarca.Value == null ? 0 : Convert.ToInt32(p_IdMarca.Value);
             DateTime fecha_ini = string.IsNullOrEmpty(p_fecha_ini.Value.ToString())? DateTime.Now : Convert.ToDateTime(p_fecha_ini.Value);
