@@ -53,5 +53,6 @@ namespace Core.Erp.Data
         public virtual DbSet<tb_sis_reporte_x_seg_usuario> tb_sis_reporte_x_seg_usuario { get; set; }
         public virtual DbSet<tb_sis_reporte> tb_sis_reporte { get; set; }
         public virtual DbSet<tb_moneda> tb_moneda { get; set; }
+        public virtual DbSet<Visor_video> Visor_video { get; set; }
     }
 }

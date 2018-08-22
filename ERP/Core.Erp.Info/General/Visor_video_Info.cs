@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.General
 {
-    class Visor_video_Info
+   public class Visor_video_Info
     {
     }
 }
