@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_deudas";
-        settings.CallbackRouteValues = new { Controller = "Deudas", Action = "GridViewPartial_deudas" };
+        settings.CallbackRouteValues = new { Controller = "Deudas", Action = "GridViewPartial_deudas", Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin, IdSucursal = ViewBag.IdSucursal };
 
 
         settings.KeyFieldName = "IdCbteCble_Ogiro";
