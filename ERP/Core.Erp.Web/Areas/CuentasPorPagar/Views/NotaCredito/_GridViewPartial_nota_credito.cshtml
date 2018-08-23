@@ -4,7 +4,9 @@
     {
         settings.Name = "GridViewPartial_nota_credito";
         settings.CallbackRouteValues = new { Controller = "NotaCredito", Action = "GridViewPartial_nota_credito" };
-
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
 
         settings.KeyFieldName = "IdCbteCble_Nota";
 

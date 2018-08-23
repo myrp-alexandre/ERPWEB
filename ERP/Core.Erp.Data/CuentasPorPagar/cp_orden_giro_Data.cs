@@ -211,7 +211,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  && q.IdSucursal==IdSucursal
                                  &&q.co_FechaFactura>=FechaInicio
                                   && q.co_FechaFactura <= FechaFin
-
+                                  orderby q.IdCbteCble_Ogiro descending
                     select new cp_orden_giro_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
