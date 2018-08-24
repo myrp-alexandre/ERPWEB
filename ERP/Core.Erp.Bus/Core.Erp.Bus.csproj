@@ -147,6 +147,7 @@
     <Compile Include="General\tb_CatalogoTipo_Bus.cs" />
     <Compile Include="General\tb_Catalogo_Bus.cs" />
     <Compile Include="General\tb_ciudad_Bus.cs" />
+    <Compile Include="General\tb_comprobantes_sin_autorizacion_Bus.cs" />
     <Compile Include="General\tb_empresa_Bus.cs" />
     <Compile Include="General\tb_mes_Bus.cs" />
     <Compile Include="General\tb_modulo_Bus.cs" />

@@ -503,6 +503,7 @@
     <Compile Include="General\tb_CatalogoTipo_Data.cs" />
     <Compile Include="General\tb_Catalogo_Data.cs" />
     <Compile Include="General\tb_ciudad_Data.cs" />
+    <Compile Include="General\tb_comprobantes_sin_autorizacion_Data.cs" />
     <Compile Include="General\tb_empresa_Data.cs" />
     <Compile Include="General\tb_mes_Data.cs" />
     <Compile Include="General\tb_modulo_Data.cs" />
