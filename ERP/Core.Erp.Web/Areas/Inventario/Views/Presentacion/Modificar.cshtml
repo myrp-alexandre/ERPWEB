@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "Presentacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q=>q.IdEmpresa)
@@ -41,18 +42,3 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
-
-<script type="text/javascript">
-    $(document).on('submit', 'form', function () {
-        var buttons = $(this).find('[type="submit"]');
-        if ($(this).valid()) {
-            buttons.each(function (btn) {
-                $(buttons[btn]).prop('disabled', true);
-            });
-        } else {
-            buttons.each(function (btn) {
-                $(buttons[btn]).prop('disabled', false);
-            });
-        }
-    });
-</script>

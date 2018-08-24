@@ -9041,6 +9041,7 @@
     <Content Include="Scripts\jquery-1.11.3.min.js" />
     <Content Include="Scripts\theme-ambiance.js" />
     <Content Include="Scripts\theme-dreamweaver.js" />
+    <Content Include="Scripts\ValidacionBotonSubmit.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

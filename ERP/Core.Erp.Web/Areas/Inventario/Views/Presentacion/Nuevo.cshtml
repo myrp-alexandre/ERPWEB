@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "Presentacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     if (ViewBag.mensaje != null)
@@ -49,17 +50,3 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
-<script type="text/javascript">
-    $(document).on('submit', 'form', function () {
-        var buttons = $(this).find('[type="submit"]');
-        if ($(this).valid()) {
-            buttons.each(function (btn) {
-                $(buttons[btn]).prop('disabled', true);
-            });
-        } else {
-            buttons.each(function (btn) {
-                $(buttons[btn]).prop('disabled', false);
-            });
-        }
-    });
-</script>
