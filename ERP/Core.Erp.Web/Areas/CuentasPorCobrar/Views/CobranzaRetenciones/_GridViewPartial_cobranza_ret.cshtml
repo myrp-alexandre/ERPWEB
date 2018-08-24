@@ -6,7 +6,9 @@
         settings.CallbackRouteValues = new { Controller = "CobranzaRetenciones", Action = "GridViewPartial_cobranza_ret", Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin, IdSucursal = ViewBag.IdSucursal  };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdCobro";
-
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
@@ -47,7 +49,7 @@
         settings.Columns.Add("IdCbteVta", "ID").Width = Unit.Percentage(5);
         settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(8);
         settings.Columns.Add("vt_NumFactura", "# Documento").Width = Unit.Percentage(10);
-        settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = Unit.Percentage(20);
+        settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = Unit.Percentage(25);
 
         settings.Columns.Add(column =>
         {
