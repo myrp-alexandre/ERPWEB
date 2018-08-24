@@ -54,5 +54,6 @@ namespace Core.Erp.Data
         public virtual DbSet<tb_sis_reporte> tb_sis_reporte { get; set; }
         public virtual DbSet<tb_moneda> tb_moneda { get; set; }
         public virtual DbSet<tb_visor_video> tb_visor_video { get; set; }
+        public virtual DbSet<vwtb_comprobantes_no_autorizados> vwtb_comprobantes_no_autorizados { get; set; }
     }
 }
