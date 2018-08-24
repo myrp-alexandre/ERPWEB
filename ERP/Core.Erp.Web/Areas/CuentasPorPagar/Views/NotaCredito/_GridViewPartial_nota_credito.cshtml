@@ -4,7 +4,9 @@
     {
         settings.Name = "GridViewPartial_nota_credito";
         settings.CallbackRouteValues = new { Controller = "NotaCredito", Action = "GridViewPartial_nota_credito" };
-
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
 
         settings.KeyFieldName = "IdCbteCble_Nota";
 
@@ -93,22 +95,7 @@
             });
         });
         settings.Columns.Add("cn_observacion", "Observación").Width = Unit.Percentage(50);
-
-        settings.Columns.Add(column =>
-        {
-            column.Caption = "#";
-            column.Width = Unit.Pixel(100);
-            column.SetDataItemTemplateContent(container =>
-            {
-                Html.DevExpress().HyperLink(hyperlink =>
-                {
-                    var IdTipoCbte_Nota = DataBinder.Eval(container.DataItem, "IdTipoCbte_Nota");
-                    var IdCbteCble_Nota = DataBinder.Eval(container.DataItem, "IdCbteCble_Nota");
-                    hyperlink.Properties.Text = "Retención";
-                    hyperlink.NavigateUrl = Url.Action("Nuevo", "Retencion", new { Area = "CuentasPorPagar", IdTipoCbte_Nota = IdTipoCbte_Nota, IdCbteCble_Nota = IdCbteCble_Nota });
-                }).Render();
-            });
-        });
+        
         settings.Columns.Add(column =>
         {
             column.SetDataItemTemplateContent(c =>

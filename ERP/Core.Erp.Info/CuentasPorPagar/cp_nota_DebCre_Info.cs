@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.CuentasPorPagar;
-    namespace Core.Erp.Info.CuentasPorPagar
+using System.ComponentModel.DataAnnotations;
+
+namespace Core.Erp.Info.CuentasPorPagar
 {
    public class cp_nota_DebCre_Info
     {
@@ -14,7 +16,9 @@ using Core.Erp.Info.CuentasPorPagar;
         public int IdTipoCbte_Nota { get; set; }
         public string DebCre { get; set; }
         public string IdTipoNota { get; set; }
+        [Required(ErrorMessage = "El campo proveedor es obligatorio")]
         public decimal IdProveedor { get; set; }
+        [Required(ErrorMessage = "El campo sucursal es obligatorio")]
         public int IdSucursal { get; set; }
         public System.DateTime cn_fecha { get; set; }
         public Nullable<System.DateTime> Fecha_contable { get; set; }
@@ -22,8 +26,11 @@ using Core.Erp.Info.CuentasPorPagar;
         public string cn_serie1 { get; set; }
         public string cn_serie2 { get; set; }
         public string cn_Nota { get; set; }
+        [Required(ErrorMessage ="El campo observación es obligatorio")]
         public string cn_observacion { get; set; }
+        [Required(ErrorMessage = "El campo subtotal IVA es obligatorio")]
         public double cn_subtotal_iva { get; set; }
+        [Required(ErrorMessage = "El campo subtotal 0 es obligatorio")]
         public double cn_subtotal_siniva { get; set; }
         public double cn_baseImponible { get; set; }
         public double cn_Por_iva { get; set; }

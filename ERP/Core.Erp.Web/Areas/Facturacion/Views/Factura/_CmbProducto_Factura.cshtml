@@ -14,6 +14,9 @@
         settings.Properties.ValueField = "IdProducto";
         settings.Properties.ValueType = typeof(decimal);
 
+        settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+        settings.Properties.AllowNull = true;
+
         settings.Properties.Columns.Add("IdProducto", "ID", 5);
         settings.Properties.Columns.Add("pr_descripcion", "Producto", 65);
         settings.Properties.Columns.Add("nom_categoria", "Categoria", 15);

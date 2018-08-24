@@ -395,6 +395,7 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
+                info.region = "COSTA";
                 if (info.decimoIII)
                     odata.procesarDIII(info);
                 else
