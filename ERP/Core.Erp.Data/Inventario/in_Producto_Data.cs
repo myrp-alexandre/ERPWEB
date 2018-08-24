@@ -930,6 +930,10 @@ namespace Core.Erp.Data.Inventario
                     {
                         mensaje = item;
                     }
+                    if (mensaje == "OK")
+                    {
+                        return true;
+                    }
                 }
                 return false;
             }

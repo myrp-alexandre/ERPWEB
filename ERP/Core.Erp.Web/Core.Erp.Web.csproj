@@ -7511,27 +7511,6 @@
     <Content Include="Content\bootstrap_imagenes.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\videos\ACCE_M.mp4" />
-    <Content Include="Content\videos\ACTF_P.mp4" />
-    <Content Include="Content\videos\ACTF_T.mp4" />
-    <Content Include="Content\videos\BANC_M.mp4" />
-    <Content Include="Content\videos\BANC_P.mp4" />
-    <Content Include="Content\videos\BANC_T.mp4" />
-    <Content Include="Content\videos\CAJA_M.mp4" />
-    <Content Include="Content\videos\CAJA_T.mp4" />
-    <Content Include="Content\videos\CXC_M.mp4" />
-    <Content Include="Content\videos\CXC_T.mp4" />
-    <Content Include="Content\videos\FAC_M.mp4" />
-    <Content Include="Content\videos\FAC_T.mp4" />
-    <Content Include="Content\videos\GENE.mp4" />
-    <Content Include="Content\videos\IMPO_M.mp4" />
-    <Content Include="Content\videos\IMPO_T.mp4" />
-    <Content Include="Content\videos\INV_M.mp4" />
-    <Content Include="Content\videos\INV_P.mp4" />
-    <Content Include="Content\videos\INV_T.mp4" />
-    <Content Include="Content\videos\RRHH_M.mp4" />
-    <Content Include="Content\videos\RRHH_P.mp4" />
-    <Content Include="Content\videos\RRHH_T.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -9107,6 +9086,7 @@
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
     <Folder Include="Content\imagenes\" />
+    <Folder Include="Content\videos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
