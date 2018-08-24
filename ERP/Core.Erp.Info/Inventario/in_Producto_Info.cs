@@ -77,6 +77,8 @@ namespace Core.Erp.Info.Inventario
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
+        [StringLength(100, MinimumLength = 1, ErrorMessage = "El campo motivo anulación debe tener máximo 100 caracteres")]
+        [Required(ErrorMessage ="El campo motivo anulación es obligatorio")]
         public string pr_motivoAnulacion { get; set; }
         public string nom_pc { get; set; }
         public string ip { get; set; }
