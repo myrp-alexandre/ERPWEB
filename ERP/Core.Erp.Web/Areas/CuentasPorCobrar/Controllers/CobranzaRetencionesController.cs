@@ -25,25 +25,25 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         #endregion
 
         #region Index
-        public ActionResult Index(int IdEmpresa = 0)
+        public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
-            cargar_combos(IdEmpresa);
+            cargar_combos();
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Index(cl_filtros_Info model, int IdEmpresa = 0)
+        public ActionResult Index(cl_filtros_Info model)
         {
-            cargar_combos(IdEmpresa);
+            cargar_combos();
             return View(model);
         }
-        private void cargar_combos(int IdEmpresa)
+        private void cargar_combos()
         {
-            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            var lst_sucursal = bus_sucursal.get_list(Convert.ToInt32(SessionFixed.IdEmpresa), false);
             ViewBag.lst_sucursal = lst_sucursal;
         }
 
