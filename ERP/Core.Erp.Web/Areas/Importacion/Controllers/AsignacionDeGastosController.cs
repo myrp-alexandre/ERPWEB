@@ -41,7 +41,6 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             return View(model);
         }
 
-
         public ActionResult GridViewPartial_asignacion_gastos(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -50,17 +49,14 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             if (IdSucursal == 0)
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
             ViewBag.IdSucursal = IdSucursal;
-
-            List<imp_ordencompra_ext_Info> model = new List<imp_ordencompra_ext_Info>();
-            model = bus_liquidacion_oc.get_list_oc_con_recepcion_mercaderia(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
+            var model = bus_liquidacion_oc.get_list_oc_con_recepcion_mercaderia(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_asignacion_gastos", model);
         }
         public ActionResult GridViewPartial_asignacion_gastos_det()
         {
-            List<imp_ordencompra_ext_det_Info> model = new List<imp_ordencompra_ext_det_Info>();
-            model = info_detalle_lst.get_list();
-            if (model == null)
-                model = new List<imp_ordencompra_ext_det_Info>();
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = info_detalle_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
             return PartialView("_GridViewPartial_asignacion_gastos_det", model);
         }
 
@@ -93,9 +89,8 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         }
         #endregion
 
-        public ActionResult Nuevo(decimal IdOrdenCompra_ext = 0)
+        public ActionResult Nuevo(int IdEmpresa = 0 , decimal IdOrdenCompra_ext = 0)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
@@ -125,7 +120,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             }
             else
                 model = new imp_ordencompra_ext_Info();
-            
+            cargar_combos(IdEmpresa);
             cargar_combos_detalle();
             return View(model);
         }
@@ -136,7 +131,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             if (model.lst_gastos_asignados == null)
             {
                 ViewBag.mensaje = "no existe detalle";
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             else
@@ -144,7 +139,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 if (model.lst_gastos_asignados.Count() == 0)
                 {
                     ViewBag.mensaje = "no existe detalle";
-                    cargar_combos();
+                    cargar_combos(model.IdEmpresa);
                     return View(model);
                 }
                 else
@@ -154,17 +149,16 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                         if (item.IdGasto_tipo == null)
                         {
                             ViewBag.mensaje = "No se ha especificado el tipo de gasto";
-                            cargar_combos();
+                            cargar_combos(model.IdEmpresa);
                             return View(model);
                         }
                     }
                 }
 
             }
-            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             if (!bus_gastos.guardarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -180,16 +174,10 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             return PartialView("_GridViewPartial_gastos_asignados", model);
         }
 
-        private void cargar_combos()
+        private void cargar_combos(int IdEmpresa)
         {
-
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_catalogos = bus_catalogo.get_list(1);
             ViewBag.lst_catalogos = lst_catalogos;
-
-
-
-
         }
         private void cargar_combos_detalle()
         {

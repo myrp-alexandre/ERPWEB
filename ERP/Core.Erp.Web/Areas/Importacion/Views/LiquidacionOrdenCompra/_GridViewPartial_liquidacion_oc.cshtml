@@ -62,18 +62,18 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-               
 
-                    ViewContext.Writer.Write(
-                        Html.ActionLink("Anular", "Anular", new { IdOrdenCompra_ext = DataBinder.Eval(tc.DataItem, "IdOrdenCompra_ext") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
-                
+
+                ViewContext.Writer.Write(
+                    Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdOrdenCompra_ext = DataBinder.Eval(tc.DataItem, "IdOrdenCompra_ext") },
+                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
+                );
+
             });
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "GridViewPartial_orden_compra_por_liquidar", "OrdenCompraExterior").ToHtmlString()
+                    Html.ActionLink("Nuevo", "GridViewPartial_orden_compra_por_liquidar", "OrdenCompraExterior", new { IdEmpresa  = Core.Erp.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;

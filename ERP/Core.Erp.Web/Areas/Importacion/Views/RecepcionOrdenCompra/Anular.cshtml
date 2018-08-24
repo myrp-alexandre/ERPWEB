@@ -12,8 +12,7 @@
     @Html.HiddenFor(q => q.IdOrdenCompraExt)
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdRecepcion)
-    
-
+    @Html.HiddenFor(q => q.IdTransaccionSession)
 
     <div class="row">
         <div class="col-md-12">
@@ -94,14 +93,14 @@
     </div>
 
 
-<div class="box-footer">
-    <button type="submit" class="btn btn-danger">Anular</button>
-    <a class="btn btn-default" href="@Url.Action("Index", "RecepcionOrdenCompra", new { Area ="Importacion" }, null)">Cancelar</a>
-</div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-danger">Anular</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "RecepcionOrdenCompra", new { Area ="Importacion" }, null)">Cancelar</a>
+    </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }
 
 <script>

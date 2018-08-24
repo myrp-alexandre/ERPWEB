@@ -66,8 +66,8 @@
                 {
 
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdRecepcion = DataBinder.Eval(tc.DataItem, "IdRecepcion") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdRecepcion = DataBinder.Eval(tc.DataItem, "IdRecepcion") },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa") , IdRecepcion = DataBinder.Eval(tc.DataItem, "IdRecepcion") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdRecepcion = DataBinder.Eval(tc.DataItem, "IdRecepcion") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -75,7 +75,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "OrdencompraConsaldos", "OrdenCompraExterior").ToHtmlString()
+                    Html.ActionLink("Nuevo", "OrdencompraConsaldos", "OrdenCompraExterior", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
@@ -98,7 +98,7 @@
             });
         });
         settings.Columns.Add("or_observacion", "Obaservación").Width = Unit.Percentage(30);
-       
+
     });
 }
 @grid.Bind(Model).GetHtml()

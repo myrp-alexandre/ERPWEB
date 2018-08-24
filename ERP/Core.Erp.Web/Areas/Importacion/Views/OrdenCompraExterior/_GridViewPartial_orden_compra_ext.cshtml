@@ -70,8 +70,8 @@
                 {
 
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdOrdenCompra_ext = DataBinder.Eval(tc.DataItem, "IdOrdenCompra_ext") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdOrdenCompra_ext = DataBinder.Eval(tc.DataItem, "IdOrdenCompra_ext") },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdOrdenCompra_ext = DataBinder.Eval(tc.DataItem, "IdOrdenCompra_ext") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdOrdenCompra_ext = DataBinder.Eval(tc.DataItem, "IdOrdenCompra_ext") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -79,7 +79,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
@@ -101,17 +101,19 @@
                 sp.Width = Unit.Percentage(100);
             });
         });
-        settings.Columns.Add("oe_observacion", "Obaservación").Width = Unit.Percentage(30);
+        settings.Columns.Add("oe_observacion", "Observación").Width = Unit.Percentage(30);
 
         settings.Columns.Add(column =>
         {
             column.Caption = "Pre-impreso";
             column.SetDataItemTemplateContent(c =>
             {
-                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("IMP_001", "ImportacionReportes", new { Area = "Reportes", IdOrdenCompra_ext = DataBinder.Eval(c.DataItem, "IdOrdenCompra_ext") }, Request.Url.Scheme) + "');\"></span>");
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("IMP_001", "ImportacionReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa"), IdOrdenCompra_ext = DataBinder.Eval(c.DataItem, "IdOrdenCompra_ext") }, Request.Url.Scheme) + "');\"></span>");
             });
             column.Width = Unit.Percentage(5);
         });
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+
     });
 }
 @grid.Bind(Model).GetHtml()

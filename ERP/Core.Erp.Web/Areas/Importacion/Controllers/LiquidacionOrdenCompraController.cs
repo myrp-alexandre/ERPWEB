@@ -41,7 +41,6 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         ct_cbtecble_det_Bus bus_comprobante_det = new ct_cbtecble_det_Bus();
         #endregion
 
-
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbProveedor_exterior()
         {
@@ -89,22 +88,18 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             return View(model);
         }
 
-
         public ActionResult GridViewPartial_liquidacion_oc(DateTime? Fecha_ini, DateTime? Fecha_fin)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
-
-
-            List<imp_liquidacion_Info> model = new List<imp_liquidacion_Info>();
-            model = bus_liquidacion.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
+            var model = bus_liquidacion.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_liquidacion_oc", model);
         }
         public ActionResult GridViewPartial_liquidacion_oc_det()
         {
             List<imp_ordencompra_ext_det_Info> model = new List<imp_ordencompra_ext_det_Info>();
-            model = info_detalle.get_list();
+            model = info_detalle.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             if (model == null)
                 model = new List<imp_ordencompra_ext_det_Info>();
             cargar_combos_detalle();
@@ -133,9 +128,8 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
         #endregion
 
-
         #region acciones
-        public ActionResult Nuevo( decimal IdOrdenCompra_ext=0)
+        public ActionResult Nuevo( int IdEmpresa = 0 , decimal IdOrdenCompra_ext=0)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -143,25 +137,24 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             imp_liquidacion_Info model = bus_liquidacion.get_liquidar_oc(IdEmpresa, IdOrdenCompra_ext);
             if (model != null)
                 model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             var lst_detalle = bus_detalle.get_list(IdEmpresa, IdOrdenCompra_ext);
             var lst_gastos = bus_gastos.get_list_gastos_asignados(IdEmpresa, IdOrdenCompra_ext);
-
+            model.IdEmpresa = IdEmpresa;
             info_gastos_lst.set_list(lst_gastos, model.IdTransaccionSession);
-           info_detalle.set_list(lst_detalle);
+           info_detalle.set_list(lst_detalle, model.IdTransaccionSession);
             if (model == null)
                 return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             cargar_combos_detalle();
             return View(model);
         }
         [HttpPost]
         public ActionResult Nuevo(imp_liquidacion_Info model)
         {
-            model.lst_detalle = info_detalle.get_list();
+            model.lst_detalle = info_detalle.get_list(model.IdTransaccionSession);
             model.lst_comprobante = Lis_imp_liquidacion_Info_diario_contable.get_list();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             string mensaje = "";
@@ -170,19 +163,19 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             model.IdUsuario_creacion = SessionFixed.IdUsuario.ToString();
             if (mensaje != "")
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
             if (!bus_liquidacion.guardarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult Anular(decimal IdOrdenCompra_ext = 0)
+        public ActionResult Anular(int IdEmpresa = 0 , decimal IdOrdenCompra_ext = 0)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -190,7 +183,6 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             imp_liquidacion_Info model = bus_liquidacion.get_info(IdEmpresa, IdOrdenCompra_ext);
             if (model != null)
                 model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
@@ -198,26 +190,25 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             var lst_gastos = bus_gastos.get_list_gastos_asignados(IdEmpresa, IdOrdenCompra_ext);
 
             info_gastos_lst.set_list(lst_gastos, model.IdTransaccionSession);
-            info_detalle.set_list(lst_detalle);
+            info_detalle.set_list(lst_detalle, model.IdTransaccionSession);
 
             var lst_diario = bus_comprobante_det.get_list(model.IdEmpresa, model.IdTipoCbte_ct == null ? 0: Convert.ToInt32( model.IdTipoCbte_ct),model.IdCbteCble_ct==null?0: Convert.ToDecimal( model.IdCbteCble_ct));
             Lis_imp_liquidacion_Info_diario_contable.set_list(lst_diario);
             if (model == null)
                 return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(IdEmpresa);
             cargar_combos_detalle();
             return View(model);
         }
         [HttpPost]
         public ActionResult Anular(imp_liquidacion_Info model)
         {
-            model.lst_detalle = info_detalle.get_list();
+            model.lst_detalle = info_detalle.get_list(model.IdTransaccionSession);
             model.lst_comprobante = Lis_imp_liquidacion_Info_diario_contable.get_list();
-            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdUsuario_anulacion = SessionFixed.IdUsuario.ToString();
             if (!bus_liquidacion.Anular(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -231,18 +222,15 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             param = bus_param.get_info(IdEmpresa);
-           info_detalle.set_list( bus_liquidacion.calcular_costos(IdEmpresa, IdOrdenCompra_ext));
-           Lis_imp_liquidacion_Info_diario_contable.delete_detail_New_details(info_detalle.get_list(), info_gastos_lst.get_list(IdTransaccionSession), param, IdCtaCble_importacion);
+           info_detalle.set_list( bus_liquidacion.calcular_costos(IdEmpresa, IdOrdenCompra_ext), IdTransaccionSession);
+           Lis_imp_liquidacion_Info_diario_contable.delete_detail_New_details(info_detalle.get_list(IdTransaccionSession), info_gastos_lst.get_list(IdTransaccionSession), param, IdCtaCble_importacion);
             return Json("", JsonRequestBehavior.AllowGet);
         }
     
         #endregion
 
-        private void cargar_combos()
+        private void cargar_combos(int IdEmpresa)
         {
-
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-
             tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
@@ -262,7 +250,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             var lst_undades = bus_unidad_medida.get_list(false);
             ViewBag.lst_undades = lst_undades;
 
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;

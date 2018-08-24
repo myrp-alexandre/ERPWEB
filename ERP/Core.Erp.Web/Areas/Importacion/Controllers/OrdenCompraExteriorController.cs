@@ -101,8 +101,6 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         {
             return View(model);
         }
-
-       
         public ActionResult GridViewPartial_orden_compra_ext(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -112,17 +110,13 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
             ViewBag.IdSucursal = IdSucursal;
 
-            List<imp_ordencompra_ext_Info> model = new List<imp_ordencompra_ext_Info>();
-            model = bus_orden.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
+            var model = bus_orden.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_orden_compra_ext", model);
         }
         public ActionResult GridViewPartial_orden_compra_ext_det()
         {
-            List<imp_ordencompra_ext_det_Info> model = new List<imp_ordencompra_ext_det_Info>();
-            model = Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
-            if (model == null)
-                model = new List<imp_ordencompra_ext_det_Info>();
-            cargar_combos_detalle();
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = detalle.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_orden_compra_ext_det", model);
         }
         
@@ -141,7 +135,6 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             return PartialView("_GridViewPartial_orden_compra_por_liquidar", model);
         }
         
-
          public ActionResult OrdencompraConsaldos()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -151,15 +144,15 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         #endregion
 
         #region acciones
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0 )
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             imp_parametro_Bus bus_para = new imp_parametro_Bus();
             var param = bus_para.get_info(IdEmpresa);
             if (param == null)
                 param = new imp_parametro_Info();
             imp_ordencompra_ext_Info model = new imp_ordencompra_ext_Info
             {
+                IdEmpresa = IdEmpresa,
                 fecha_creacion = DateTime.Now,
                 IdCtaCble_importacion=param.IdCtaCble,
                 oe_fecha = DateTime.Now,
@@ -180,7 +173,6 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         public ActionResult Nuevo(imp_ordencompra_ext_Info model)
         {
             model.lst_detalle = Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
-            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             string mensaje = bus_orden.validar(model);
             if(mensaje!="")
             {
@@ -196,10 +188,8 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             Session["imp_ordencompra_ext_det_Info"] = null;
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(decimal IdOrdenCompra_ext)
+        public ActionResult Modificar(int IdEmpresa = 0 , decimal IdOrdenCompra_ext = 0)
         {
-
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             imp_ordencompra_ext_Info model = bus_orden.get_info(IdEmpresa, IdOrdenCompra_ext);
             var lst_detalle = bus_detalle.get_list(IdEmpresa, IdOrdenCompra_ext);
             Session["imp_ordencompra_ext_det_Info"] = lst_detalle;
@@ -228,10 +218,8 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             Session["imp_ordencompra_ext_det_Info"] = null;
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(decimal IdOrdenCompra_ext)
+        public ActionResult Anular(int IdEmpresa = 0 , decimal IdOrdenCompra_ext = 0 )
         {
-
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             imp_ordencompra_ext_Info model = bus_orden.get_info(IdEmpresa, IdOrdenCompra_ext);
            var lst_detalle = bus_detalle.get_list(IdEmpresa, IdOrdenCompra_ext);
             Session["imp_ordencompra_ext_det_Info"] = lst_detalle;
@@ -282,7 +270,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] imp_ordencompra_ext_det_Info info_det)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             if (info_det != null)
                 if (info_det.IdProducto != 0)
                 {
@@ -292,12 +280,12 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                         info_det.pr_descripcion = info_producto.pr_descripcion_combo;
                         info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
                         info_det.od_total_fob = info_det.od_cantidad * info_det.od_costo;
-                        detalle.AddRow(info_det);
+                        detalle.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
                     }
                 }
 
-            var model = detalle.get_list();
+            var model = detalle.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_orden_compra_ext_det", model);
         }
@@ -305,7 +293,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] imp_ordencompra_ext_det_Info info_det)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             if (info_det != null)
                 if (info_det.IdProducto != 0)
                 {
@@ -319,44 +307,45 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                     }
                 }
 
-            detalle.UpdateRow(info_det);
-            var model = detalle.get_list();
+            detalle.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = detalle.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_orden_compra_ext_det", model);
         }
 
         public ActionResult EditingDelete(int Secuencia)
         {
-            detalle.DeleteRow(Secuencia);
-            var model = detalle.get_list();
+            detalle.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = detalle.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_orden_compra_ext_det", model);
         }
         #endregion
     }
-
+        
 
     public class imp_ordencompra_ext_det_Info_lst
     {
-        public List<imp_ordencompra_ext_det_Info> get_list()
+        string variable = "imp_ordencompra_ext_det_Info";
+        public List<imp_ordencompra_ext_det_Info> get_list(decimal IdTransaccionSession)
         {
-            if (HttpContext.Current.Session["imp_ordencompra_ext_det_Info"] == null)
+            if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)
             {
                 List<imp_ordencompra_ext_det_Info> list = new List<imp_ordencompra_ext_det_Info>();
 
-                HttpContext.Current.Session["imp_ordencompra_ext_det_Info"] = list;
+                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<imp_ordencompra_ext_det_Info>)HttpContext.Current.Session["imp_ordencompra_ext_det_Info"];
+            return (List<imp_ordencompra_ext_det_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<imp_ordencompra_ext_det_Info> list)
+        public void set_list(List<imp_ordencompra_ext_det_Info> list, decimal IdTransaccionSession)
         {
-            HttpContext.Current.Session["imp_ordencompra_ext_det_Info"] = list;
+            HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
         }
 
-        public void AddRow(imp_ordencompra_ext_det_Info info_det)
+        public void AddRow(imp_ordencompra_ext_det_Info info_det, decimal IdTransaccionSession)
         {
-            List<imp_ordencompra_ext_det_Info> list = get_list();
+            List<imp_ordencompra_ext_det_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
             info_det.IdProducto = info_det.IdProducto;
             info_det.IdUnidadMedida = info_det.IdUnidadMedida;
@@ -366,9 +355,9 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             list.Add(info_det);
         }
 
-        public void UpdateRow(imp_ordencompra_ext_det_Info info_det)
+        public void UpdateRow(imp_ordencompra_ext_det_Info info_det, decimal IdTransaccionSession)
         {
-            imp_ordencompra_ext_det_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();
+            imp_ordencompra_ext_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdProducto = info_det.IdProducto;
             edited_info.IdUnidadMedida = info_det.IdUnidadMedida;
             edited_info.od_costo = info_det.od_costo;
@@ -377,9 +366,9 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
         }
 
-        public void DeleteRow(int Secuencia)
+        public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
         {
-            List<imp_ordencompra_ext_det_Info> list = get_list();
+            List<imp_ordencompra_ext_det_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
         }
     }

@@ -45,7 +45,16 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
         #endregion
 
+        #region Variables
         imp_parametro_Bus bus_parametro = new imp_parametro_Bus();
+        ct_cbtecble_tipo_Bus bus_comprobante_tipo = new ct_cbtecble_tipo_Bus();
+        in_movi_inven_tipo_Bus bus_tipo = new in_movi_inven_tipo_Bus();
+        in_Motivo_Inven_Bus bus_motivo = new in_Motivo_Inven_Bus();
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+        #endregion
+
+        #region Index
         public ActionResult Index()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -66,25 +75,22 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
         private void cargar_combos(int IdEmpresa)
         {
-            ct_cbtecble_tipo_Bus bus_comprobante_tipo = new ct_cbtecble_tipo_Bus();
             var lst_tipo = bus_comprobante_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_tipo = lst_tipo;
 
-            in_movi_inven_tipo_Bus bus_tipo = new in_movi_inven_tipo_Bus();
             var lst_tipo_mov = bus_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_tipo_mov = lst_tipo_mov;
 
-            in_Motivo_Inven_Bus bus_motivo = new in_Motivo_Inven_Bus();
             var lst_motivo = bus_motivo.get_list(IdEmpresa, false);
             ViewBag.lst_motivo = lst_motivo;
 
-            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
 
-            tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
             var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
             ViewBag.lst_bodega = lst_bodega;
         }
+
+        #endregion
     }
 }

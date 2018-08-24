@@ -84,7 +84,7 @@
                 {
                     var IdOrdenCompra_ext = DataBinder.Eval(container.DataItem, "IdOrdenCompra_ext");
                     hyperlink.Properties.Text = "Gastos";
-                    hyperlink.NavigateUrl = Url.Action("Nuevo", "AsignacionDeGastos", new { Area = "Importacion", IdOrdenCompra_ext = IdOrdenCompra_ext });
+                    hyperlink.NavigateUrl = Url.Action("Nuevo", "AsignacionDeGastos", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa, Area = "Importacion", IdOrdenCompra_ext = IdOrdenCompra_ext });
                 }).Render();
             });
         });
