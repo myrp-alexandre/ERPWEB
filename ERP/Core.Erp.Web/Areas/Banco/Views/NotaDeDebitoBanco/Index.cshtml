@@ -8,6 +8,7 @@
     Layout = "~/Views/Layout/_LayoutConsulta.cshtml";
 }
 
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Index", "ChequeBanco", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     <div class="box collapsed-box">
@@ -92,15 +93,15 @@
 
 }
 <script>
-    $(function () {
-        //Date picker
-        $('#fecha_ini').datepicker({
-            autoclose: true
-        })
+        $(function () {
+            //Date picker
+            $('#fecha_ini').datepicker({
+                autoclose: true
+            })
 
-        $('#fecha_fin').datepicker({
-            autoclose: true
-        })
-    });
+            $('#fecha_fin').datepicker({
+                autoclose: true
+            })
+        });
 </script>
 

@@ -8,6 +8,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Anular", "PeriodoContable", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -111,21 +112,20 @@
 
 
 
-        function get_ultimo_dia()
-    {
-            var mes = $("#smes").val();
-            var anio = $("#IdanioFiscal").val();
-            var periodo = anio + '0' + mes;
-            $("#IdPeriodo").val(periodo)
+    function get_ultimo_dia() {
+        var mes = $("#smes").val();
+        var anio = $("#IdanioFiscal").val();
+        var periodo = anio + '0' + mes;
+        $("#IdPeriodo").val(periodo)
 
-            var inicio = $("#pe_FechaIni").val();
-            var fin = $("#pe_FechaFin").val();
+        var inicio = $("#pe_FechaIni").val();
+        var fin = $("#pe_FechaFin").val();
 
-            var mes = 0; 
-            var dia = new Date(2018, mes + 1, 0);
-            alert(dia)
+        var mes = 0;
+        var dia = new Date(2018, mes + 1, 0);
+        alert(dia)
 
-            $("#pe_FechaFin").val(dia)
+        $("#pe_FechaFin").val(dia)
 
-        }
+    }
 </script>

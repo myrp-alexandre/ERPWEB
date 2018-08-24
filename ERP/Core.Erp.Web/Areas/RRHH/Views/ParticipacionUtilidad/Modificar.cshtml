@@ -9,6 +9,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "ParticipacionUtilidad", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="row">
@@ -63,9 +64,9 @@
         <button type="submit" class="btn btn-primary">Aceptar</button>
         <a class="btn btn-default" href="@Url.Action("Index","ParticipacionUtilidad",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }
 
 <script>

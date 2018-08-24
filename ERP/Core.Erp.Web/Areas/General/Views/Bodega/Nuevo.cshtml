@@ -7,17 +7,18 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Nuevo","Bodega",FormMethod.Post,new { @role = "form", @class = "form"}))
+@using (Html.BeginForm("Nuevo", "Bodega", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
-    @Html.HiddenFor(q=>q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="cod_bodega">Código</label>
-                    @Html.TextBoxFor(q=>q.cod_bodega, new { @class = "form-control"})
-                    @Html.ValidationMessageFor(q=>q.cod_bodega,"",new { @class = "text-danger"})
+                    @Html.TextBoxFor(q => q.cod_bodega, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.cod_bodega, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -52,7 +53,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal*</label>
-                    @Html.HiddenFor(q=>q.IdSucursal)
+                    @Html.HiddenFor(q => q.IdSucursal)
                     @Html.DevExpress().ComboBoxFor(q => q.IdSucursal, settings =>
                {
                    settings.Name = "IdSucursal";
@@ -70,7 +71,7 @@
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
                    settings.ReadOnly = true;
                }).BindList(ViewBag.lst_sucursal).GetHtml()
-                    @Html.ValidationMessageFor(q=> q.IdSucursal,"",new { @class = "text-danger"})
+                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -147,8 +148,8 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","Bodega",new { Area = "General", IdSucursal = Model.IdSucursal },null)">Cancelar</a>
     </div>
-            @section Scripts {
-                @Scripts.Render("~/bundles/jqueryval")
-            }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 
 }

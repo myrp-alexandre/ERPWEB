@@ -15,13 +15,14 @@
         </div>
     }
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "HorasExtras", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdHorasExtras)
 
     <div class="box collapsed-box">
-        <div class="box-header with-border">         
+        <div class="box-header with-border">
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fa fa-plus"></i>
@@ -31,7 +32,7 @@
                 </button>
             </div>
         </div>
-        <div class="box-body">          
+        <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-2">
@@ -86,7 +87,7 @@
                 @Html.Action("GridViewPartial_horas_extras_det", new { IdNomina_Tipo = Model.IdNomina_Tipo, IdNomina_TipoLiqui = Model.IdNomina_TipoLiqui, IdPeriodo = Model.IdPeriodo, IdHorasExtras = Model.IdHorasExtras })
             </div>
         </div>
-      
+
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

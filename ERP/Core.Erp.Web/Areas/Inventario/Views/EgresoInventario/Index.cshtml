@@ -8,6 +8,7 @@
     }
     Layout = "~/Views/Layout/_LayoutConsulta.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm())
 {
@@ -74,7 +75,7 @@
             </div>
         </div>
         <div class="box-body">
-           @Html.Action("GridViewPartial_egreso_inventario", new { fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
+            @Html.Action("GridViewPartial_egreso_inventario", new { fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

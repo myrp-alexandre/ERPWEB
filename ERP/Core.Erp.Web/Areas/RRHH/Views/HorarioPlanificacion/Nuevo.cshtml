@@ -17,6 +17,7 @@
         </div>
     }
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "HorarioPlanificacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -119,7 +120,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-           
+
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdDepartamento">Deaprtamento</label>
@@ -230,7 +231,7 @@
                     </div>
                 </div>
             </div>
-           
+
         </div>
     </div>
     <div class="row">
@@ -242,27 +243,27 @@
                 </div>
             </div>
         </div>
-    </div>   
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }
 
 <script>
-            $(function () {
+    $(function () {
 
-                //Date picker
-                $('#fechai').datepicker({
-                    autoclose: true
-                })
-            });
-            $(function () {
+        //Date picker
+        $('#fechai').datepicker({
+            autoclose: true
+        })
+    });
+    $(function () {
 
-                //Date picker
-                $('#fechaf').datepicker({
-                    autoclose: true
-                })
-            });
+        //Date picker
+        $('#fechaf').datepicker({
+            autoclose: true
+        })
+    });
 </script>
 <script>
              function Buscar()
@@ -277,7 +278,7 @@
                      IdDepartamento: IdDepartamento.GetValue(),
                      IdCargo: IdCargo.GetValue(),
                      IdHorario: IdHorario.GetValue()
-                   
+
 
                 }
                 $.ajax({
@@ -291,7 +292,7 @@
                     contentType: 'application/json; charset=utf-8',
                     success: function (data)
                     {
-                       
+
                         GridViewPartial_horario_planificacion_det.PerformCallback();
 
                     },

@@ -7,9 +7,10 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "CajaMovimientoEgreso", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdCbteCble)
     @Html.HiddenFor(q => q.IdTipocbte)
 
@@ -96,7 +97,7 @@
                     @Html.ValidationMessageFor(q => q.IdEntidad, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
 
     <div class="row">

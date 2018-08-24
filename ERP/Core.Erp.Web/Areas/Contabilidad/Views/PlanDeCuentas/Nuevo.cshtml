@@ -7,8 +7,9 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Nuevo","PlanDeCuentas",FormMethod.Post,new { @class = "form", @role = "form"}))
+@using (Html.BeginForm("Nuevo", "PlanDeCuentas", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="row">
         <div class="col-md-12">
@@ -44,7 +45,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdCtaCble">Código cuenta*</label>
-                    @Html.TextBoxFor(q=>q.IdCtaCble,new { @class = "form-control", @id = "IdCtaCble" })
+                    @Html.TextBoxFor(q => q.IdCtaCble, new { @class = "form-control", @id = "IdCtaCble" })
                     @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -54,19 +55,19 @@
                     @Html.TextBoxFor(q => q.pc_clave_corta, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.pc_clave_corta, "", new { @class = "text-danger" })
                 </div>
-            </div> 
+            </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="IdNivelCta">Nivel</label>
                     @Html.TextBoxFor(q => q.IdNivelCta, new { @class = "form-control", @id = "IdNivelCta" })
                     @Html.ValidationMessageFor(q => q.IdNivelCta, "", new { @class = "text-danger" })
                 </div>
-            </div>            
+            </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <div class="checkbox">
                         <label for="pc_EsMovimiento_bool">@Html.CheckBoxFor(q => q.pc_EsMovimiento_bool) Es cuenta de movimiento</label>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,7 +78,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdGrupoCble">Grupo contable</label>
-                    @Html.DropDownListFor(q=> q.IdGrupoCble, new SelectList(ViewBag.lst_grupo_contabe, "IdGrupoCble", "gc_GrupoCble"), new { @class = "form-control", @id = "IdGrupoCble" })
+                    @Html.DropDownListFor(q => q.IdGrupoCble, new SelectList(ViewBag.lst_grupo_contabe, "IdGrupoCble", "gc_GrupoCble"), new { @class = "form-control", @id = "IdGrupoCble" })
                     @Html.ValidationMessageFor(q => q.IdGrupoCble, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -140,12 +141,12 @@
                         }
                         else {
                             $("#IdNivelCta").val(data.IdNivelCta);
-                        }                        
+                        }
                         $("#pc_Naturaleza").val(data.pc_Naturaleza);
                     }
                 },
                 error: function (error) {
-                    
+
                 }
             });
         }

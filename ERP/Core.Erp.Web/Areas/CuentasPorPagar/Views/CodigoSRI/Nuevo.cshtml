@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "CodigoSRI", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -36,7 +37,7 @@
                    settings.Properties.ValueType = typeof(string);
                    settings.Properties.TextField = "descripcion";
                    settings.Properties.NullText = "== Seleccione ==";
-                   
+
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
                }).BindList(ViewBag.lst_tipo).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdTipoSRI, "", new { @class = "text-danger" })
@@ -157,15 +158,15 @@
 }
 
 <script>
-    $(function () {
+        $(function () {
 
-        //Date picker
-        $('#co_f_valides_desde').datepicker({
-            autoclose: true
-        })
+            //Date picker
+            $('#co_f_valides_desde').datepicker({
+                autoclose: true
+            })
 
-        $('#co_f_valides_hasta').datepicker({
-            autoclose: true
+            $('#co_f_valides_hasta').datepicker({
+                autoclose: true
+            })
         })
-    })
 </script>

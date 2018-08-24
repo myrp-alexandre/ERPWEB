@@ -190,7 +190,7 @@
     function OnBeginCallback(s, e) {
         //Pass all selected keys to GridView callback action
         e.customArgs["selectedIDs"] = selectedIDs;
-        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); 
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
     }
     function OnSelectionChanged(s, e) {
         s.GetSelectedFieldValues("secuencial", GetSelectedFieldValuesCallback);
@@ -282,6 +282,7 @@
     }
 
 </script>
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Modificar", "NotaDeCreditoFacturacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {

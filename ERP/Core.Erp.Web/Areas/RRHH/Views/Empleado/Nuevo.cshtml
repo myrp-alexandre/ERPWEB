@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "Empleado", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -19,14 +20,14 @@
         </div>
     }
 
-    <div class="row" >
-        <div class="col-md-12" >
+    <div class="row">
+        <div class="col-md-12">
             @*<div class="col-md-2" height = "100"  width = "100"  style = "border:solid">
-                <label for="foto">Foto*</label>
-                <div class="form-group"> 
-                    @Html.EditorFor(q => q.em_foto,  new { @class = "form-control" })
-                </div>
-            </div>*@
+                    <label for="foto">Foto*</label>
+                    <div class="form-group">
+                        @Html.EditorFor(q => q.em_foto,  new { @class = "form-control" })
+                    </div>
+                </div>*@
 
             <div class="col-md-3">
                 <div class="form-group">
@@ -38,7 +39,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="info_persona.IdTipoDocumento">Tipo documento*</label>
-                    @Html.DropDownListFor(q => q.info_persona.IdTipoDocumento, new SelectList(ViewBag.lst_tipo_docu, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "IdTipoDocumento" } )
+                    @Html.DropDownListFor(q => q.info_persona.IdTipoDocumento, new SelectList(ViewBag.lst_tipo_docu, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "IdTipoDocumento" })
                     @Html.ValidationMessageFor(q => q.info_persona.IdTipoDocumento, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -61,7 +62,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            
+
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="info_persona.pe_apellido">Apellidos*</label>
@@ -392,7 +393,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdTipoEmpleado">Tipo empleado</label>
-                            @Html.DropDownListFor(q => q.IdTipoEmpleado, new SelectList(ViewBag.lst_tipo_empleado, "CodCatalogo", "ca_descripcion"), new { @class = "form-control"})
+                            @Html.DropDownListFor(q => q.IdTipoEmpleado, new SelectList(ViewBag.lst_tipo_empleado, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
                             @Html.ValidationMessageFor(q => q.IdTipoEmpleado, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -458,34 +459,34 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="Marca_Biometrico"></label>
-                       @Html.DevExpress().CheckBoxFor(q => q.Marca_Biometrico, settings =>
-                       {
-                           settings.Name = "Marca_Biometrico";
-                           settings.Text = "Marca biometrico";
+                            @Html.DevExpress().CheckBoxFor(q => q.Marca_Biometrico, settings =>
+                            {
+                                settings.Name = "Marca_Biometrico";
+                                settings.Text = "Marca biometrico";
 
-                       }).GetHtml() 
-                       @Html.ValidationMessageFor(q => q.Marca_Biometrico, "", new { @class = "text-danger" })
+                            }).GetHtml()
+                            @Html.ValidationMessageFor(q => q.Marca_Biometrico, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
 
-                    <div class="row">
+                <div class="row">
 
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="es_AcreditaHorasExtras">Goza horas extras</label>
-                        @Html.DevExpress().CheckBoxFor(q => q.es_AcreditaHorasExtras, settings =>
-                       {
-                           settings.Name = "es_AcreditaHorasExtras";
-                           settings.Text = "Goza horas extras";
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="es_AcreditaHorasExtras">Goza horas extras</label>
+                            @Html.DevExpress().CheckBoxFor(q => q.es_AcreditaHorasExtras, settings =>
+                           {
+                               settings.Name = "es_AcreditaHorasExtras";
+                               settings.Text = "Goza horas extras";
 
-                       }).GetHtml()
-                       @Html.ValidationMessageFor(q => q.es_AcreditaHorasExtras, "", new { @class = "text-danger" })
-                            </div>
+                           }).GetHtml()
+                            @Html.ValidationMessageFor(q => q.es_AcreditaHorasExtras, "", new { @class = "text-danger" })
                         </div>
-
                     </div>
-               
+
+                </div>
+
 
 
             </div>
@@ -515,7 +516,7 @@
                             @Html.ValidationMessageFor(q => q.IdCondicionDiscapacidadSRI, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                   
+
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="por_discapacidad">Porcentaje discapacidad</label>
@@ -555,7 +556,7 @@
                                }).BindList(ViewBag.lst_tipo_doc_sustutuido).GetHtml()
                             @Html.ValidationMessageFor(q => q.IdTipoIdentDiscapacitadoSustitutoSRI, "", new { @class = "text-danger" })
                         </div>
-                    </div> 
+                    </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="IdTipoIdentDiscapacitadoSustitutoSRI">Número identificación</label>
@@ -565,7 +566,7 @@
                     </div>
 
                 </div>
-            
+
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -591,7 +592,7 @@
                         </div>
                     </div>
 
-                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-md-4">
@@ -616,7 +617,7 @@
                             @Html.TextBoxFor(q => q.talla_zapato, new { @class = "form-control", @id = "pe_apellido" })
                             @Html.ValidationMessageFor(q => q.talla_zapato, "", new { @class = "text-danger" })
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
 
@@ -625,14 +626,14 @@
         </div>
     </div>
 
-        <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a class="btn btn-default" href="@Url.Action("Index", "Empleado", new { Area ="RRHH" }, null)">Cancelar</a>
-        </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "Empleado", new { Area ="RRHH" }, null)">Cancelar</a>
+    </div>
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 
 }
 
@@ -656,7 +657,7 @@
     $("#pe_cedulaRuc").keyup(function () {
         validar();
     });
-    function  validar() {
+    function validar() {
         var tipo_doc = $("#IdTipoDocumento").val();
         var cedula = $("#pe_cedulaRuc").val();
 
@@ -672,11 +673,11 @@
             if (tipo_doc == "CED") {
                 if (cedula.length > 10) {
                     var len = $("#pe_cedulaRuc").val();
-                    len = len.substring(0,10);
+                    len = len.substring(0, 10);
                     $("#pe_cedulaRuc").val(len);
                 }
             }
     }
 
-     
+
 </script>

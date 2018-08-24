@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "Factura", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
@@ -125,7 +126,7 @@
                     @Html.Partial("_CmbCliente_Factura", Model)
                     @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
                 </div>
-            </div>            
+            </div>
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdClienteContacto">Contacto</label>
@@ -433,7 +434,7 @@
         if (Number($("#Secuencia").text()) > 0) {
             var datos = {
                 Secuencia: $("#Secuencia").text(),
-                IdTransaccionSession: $("#IdTransaccionSession").val(),                
+                IdTransaccionSession: $("#IdTransaccionSession").val(),
                 IdProducto: ID
             }
             $.ajax({
@@ -450,7 +451,7 @@
                 },
                 error: function (error) {
                 }
-            });                
+            });
         } else {
             $.ajax({
                 url: '@Url.Action("ChangeValuePartial", "Factura",new { Area = "Facturacion"})',

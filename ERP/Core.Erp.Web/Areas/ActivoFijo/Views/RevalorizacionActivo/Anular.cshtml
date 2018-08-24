@@ -9,8 +9,10 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Anular", "RevalorizacionActivo", FormMethod.Post, new { @class = "form", @role = "form" }))
-{@Html.HiddenFor(q => q.IdEmpresa)
+{
+@Html.HiddenFor(q => q.IdEmpresa)
 @Html.HiddenFor(q => q.Id_Mejora_Baja_Activo)
 @Html.HiddenFor(q => q.Id_Tipo)
 

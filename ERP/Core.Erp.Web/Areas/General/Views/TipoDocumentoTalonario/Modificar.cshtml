@@ -8,10 +8,11 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Modificar", "TipoDocumentoTalonario", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q=>q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.Establecimiento)
     @Html.HiddenFor(q => q.Documentofinal)
     @Html.HiddenFor(q => q.NumDocumento)
@@ -142,13 +143,13 @@
             </div>
         </div>
     </div>
-            <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <a class="btn btn-default" href="@Url.Action("Index", "TipoDocumentoTalonario", new { Area ="General" }, null)">Cancelar</a>
-            </div>
-            @section Scripts {
-                @Scripts.Render("~/bundles/jqueryval")
-            }
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "TipoDocumentoTalonario", new { Area ="General" }, null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 
 }
 
@@ -170,7 +171,7 @@
 
         ocultar_mostrar_div_autorizacion();
     })
-    
+
     function ocultar_mostrar_div_autorizacion() {
         var doc_electronico = ($("#es_Documento_Electronico:checked").val());
         if (doc_electronico == "true") {

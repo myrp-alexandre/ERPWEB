@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Index", "ParametroInventario", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     if (ViewBag.mensaje != null)
@@ -17,7 +18,7 @@
             </h4>
         </div>
     }
-    @Html.HiddenFor(q=>q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdMovi_inven_tipo_egresoAjuste)
     @Html.HiddenFor(q => q.IdMovi_inven_tipo_ingresoAjuste)
     @Html.HiddenFor(q => q.IdMovi_Inven_tipo_Ing_Ajust_fis_x_defa)
@@ -28,7 +29,7 @@
 
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
-            <li class="active"> 
+            <li class="active">
                 <a href="#tab_general" aria-controls="general" role="tab" data-toggle="tab">Generales</a>
             </li>
             <li>
@@ -82,7 +83,7 @@
                             @Html.ValidationMessageFor(q => q.P_IdMovi_inven_tipo_default_egr, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="row">
                     <div class="col-md-2">
@@ -245,8 +246,8 @@
                 </div>
             </div>
 
-            <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tab_lote">                
-                <div class="row">                    
+            <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tab_lote">
+                <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="P_IdProductoTipo_para_lote_0">Tipo de producto para lote</label>
@@ -261,13 +262,13 @@
                             </div>
                         </div>
                     </div>
-                </div>  
-                
+                </div>
+
                 <div class="row">
                     <div class="col-md-2">
                         <div class="form-group has-warning">
                             <label for="P_Dias_menores_alerta_desde_fecha_actual_amarillo">Alerta amarilla en dias</label>
-                            @Html.TextBoxFor(q=>q.P_Dias_menores_alerta_desde_fecha_actual_amarillo, new { @class ="form-control"})
+                            @Html.TextBoxFor(q => q.P_Dias_menores_alerta_desde_fecha_actual_amarillo, new { @class = "form-control" })
                             @Html.ValidationMessageFor(q => q.P_Dias_menores_alerta_desde_fecha_actual_amarillo, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -278,7 +279,7 @@
                             @Html.ValidationMessageFor(q => q.P_Dias_menores_alerta_desde_fecha_actual_rojo, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                </div>                
+                </div>
             </div>
 
             <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tab_movimientos">

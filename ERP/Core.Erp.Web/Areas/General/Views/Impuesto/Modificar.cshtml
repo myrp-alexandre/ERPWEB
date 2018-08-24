@@ -8,6 +8,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "Impuesto", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="row">
@@ -43,7 +44,7 @@
             <div class="col-md-12">
                 <div class="form">
                     <label for="IdCod_Impuesto">Código*</label>
-                    @Html.TextBoxFor(q => q.IdCod_Impuesto, new { @class = "form-control",@readonly = "readonly" })
+                    @Html.TextBoxFor(q => q.IdCod_Impuesto, new { @class = "form-control", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.IdCod_Impuesto, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -81,17 +82,17 @@
                     </div>
                 </div>
             </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label for="">@Html.CheckBoxFor(q => q.Usado_en_Ventas) Usado en ventas</label>
-                        </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label for="">@Html.CheckBoxFor(q => q.Usado_en_Ventas) Usado en ventas</label>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-    @Html.HiddenFor(q=>q.info_impuesto_ctacble.IdEmpresa_cta)
+    @Html.HiddenFor(q => q.info_impuesto_ctacble.IdEmpresa_cta)
     @Html.HiddenFor(q => q.info_impuesto_ctacble.IdCod_Impuesto)
     <div class="row">
         <div class="col-md-12">

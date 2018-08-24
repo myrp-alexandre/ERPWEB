@@ -15,6 +15,7 @@
         </div>
     }
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "VisorDeVideo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="row">
@@ -43,20 +44,20 @@
             </div>
         </div>
     </div>
-        
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="Nombre">Nombre*</label>
-                   @Html.DevExpress().UploadControl(settings =>
-               {
+                    @Html.DevExpress().UploadControl(settings =>
+                {
 
-                   settings.Name = "UploadControl";
-                   settings.CallbackRouteValues = new { Controller = "VisorDeVideo", Action = "UploadControlUpload" };
-                   settings.ShowUploadButton = true;
-                   settings.ShowProgressPanel = true;
-               }).GetHtml()
+                    settings.Name = "UploadControl";
+                    settings.CallbackRouteValues = new { Controller = "VisorDeVideo", Action = "UploadControlUpload" };
+                    settings.ShowUploadButton = true;
+                    settings.ShowProgressPanel = true;
+                }).GetHtml()
                 </div>
             </div>
         </div>

@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "Banco", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -26,22 +27,22 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="ba_descripcion">Descripción*</label>
-                    @Html.TextBoxFor(q=>q.ba_descripcion, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q=>q.ba_descripcion, "", new { @class="text-danger"})
+                    @Html.TextBoxFor(q => q.ba_descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.ba_descripcion, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-        <div class="col-md-12">
-            <div class="form-group">
-                <div class="checkbox">
-                    <label for="">@Html.CheckBoxFor(q => q.TieneFormatoTransferencia) Tiene formato transferencia</label>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label for="">@Html.CheckBoxFor(q => q.TieneFormatoTransferencia) Tiene formato transferencia</label>
+                    </div>
                 </div>
             </div>
         </div>
-       </div>
     </div>
 
     <div class="box-footer">

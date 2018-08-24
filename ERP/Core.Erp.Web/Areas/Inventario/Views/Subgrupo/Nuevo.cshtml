@@ -7,10 +7,11 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "Subgrupo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-@Html.HiddenFor(q=>q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-4">
@@ -117,12 +118,12 @@
             </div>
         </div>
     </div>
-        <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a class="btn btn-default" href="@Url.Action("Index", "Subgrupo", new {IdCategoria = Model.IdCategoria, IdLinea = Model.IdLinea, IdGrupo = Model.IdGrupo , Area = "Inventario" }, null)">Cancelar</a>
-        </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "Subgrupo", new {IdCategoria = Model.IdCategoria, IdLinea = Model.IdLinea, IdGrupo = Model.IdGrupo , Area = "Inventario" }, null)">Cancelar</a>
+    </div>
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }

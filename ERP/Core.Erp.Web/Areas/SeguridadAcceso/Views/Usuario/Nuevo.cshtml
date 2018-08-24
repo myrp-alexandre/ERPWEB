@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "Usuario", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -25,8 +26,8 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdUsuario">Usuario*</label>
-                    @Html.TextBoxFor(q=> q.IdUsuario, new { @class = "form-control"})
-                    @Html.ValidationMessageFor(q=> q.IdUsuario,"",new { @class = "text-danger"})
+                    @Html.TextBoxFor(q => q.IdUsuario, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdUsuario, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -37,7 +38,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="">Contraseña</label>
-                    @Html.PasswordFor(q=> q.Contrasena, new { @class = "form-control", @id = "contrasenia_usuario"})
+                    @Html.PasswordFor(q => q.Contrasena, new { @class = "form-control", @id = "contrasenia_usuario" })
                 </div>
             </div>
         </div>
@@ -74,7 +75,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="col-md-12">
         <table class="table table-bordered table-striped dataTable" role="grid">
             <thead>
@@ -100,7 +101,7 @@
                             @Html.HiddenFor(q => q.lst_usuario_x_empresa[i].em_nombre)
                             @Html.HiddenFor(q => q.lst_usuario_x_empresa[i].IdEmpresa)
                             <td>
-                                @Html.CheckBoxFor(q => q.lst_usuario_x_empresa[i].seleccionado,new { @checked = "checked"})
+                                @Html.CheckBoxFor(q => q.lst_usuario_x_empresa[i].seleccionado, new { @checked = "checked" })
                             </td>
                             <td>
                                 @Model.lst_usuario_x_empresa[i].em_nombre

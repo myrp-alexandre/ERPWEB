@@ -15,6 +15,7 @@
         </div>
     }
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "EmpleadoNovedad", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -100,9 +101,9 @@
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
     </div>
-     <div class="row">
+    <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
@@ -113,19 +114,19 @@
             </div>
         </div>
     </div>
-   
-
-        <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a class="btn btn-default" href="@Url.Action("Index","EmpleadoNovedad",new { Area = "RRHH" },null)">Cancelar</a>
-        </div>
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
-        }
 
 
-        <script>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","EmpleadoNovedad",new { Area = "RRHH" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+
+
+<script>
 
 
             $("#IdNomina_Tipo").change(function () {
@@ -171,4 +172,4 @@
             });
 
 
-        </script>
+</script>

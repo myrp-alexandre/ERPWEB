@@ -16,8 +16,7 @@
         </div>
     }
 }
-
-
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "Prestamos", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="row">
@@ -135,20 +134,20 @@
                     @Html.ValidationMessageFor(q => q.NumCuotas, "", new { @class = "text-danger" })
                 </div>
             </div>
-                <div class="col-md-2">
+            <div class="col-md-2">
+                <div class="form-group">
                     <div class="form-group">
-                        <div class="form-group">
-                            <label for="descuento_mensual">Descuento</label>
-                            @Html.DevExpress().RadioButtonFor(q => q.descuento_mensual, settings =>
-                       {
-                           settings.Name = "descuento_mensual";
-                           settings.GroupName = "formapao";
-                           settings.Text = "Fin de mes";
+                        <label for="descuento_mensual">Descuento</label>
+                        @Html.DevExpress().RadioButtonFor(q => q.descuento_mensual, settings =>
+                   {
+                       settings.Name = "descuento_mensual";
+                       settings.GroupName = "formapao";
+                       settings.Text = "Fin de mes";
 
-                       }).GetHtml()
-                        </div>
+                   }).GetHtml()
                     </div>
                 </div>
+            </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <div class="form-group">

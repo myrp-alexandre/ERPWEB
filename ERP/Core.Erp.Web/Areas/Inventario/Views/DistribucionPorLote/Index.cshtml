@@ -9,6 +9,7 @@
     Layout = "~/Views/Layout/_LayoutConsulta.cshtml";
 }
 
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm())
 {
     <div class="box collapsed-box">
@@ -84,14 +85,14 @@
     </div>
 }
 <script>
-    $(function () {
-        //Date picker
-        $('#fecha_ini').datepicker({
-            autoclose: true
-        })
+        $(function () {
+            //Date picker
+            $('#fecha_ini').datepicker({
+                autoclose: true
+            })
 
-        $('#fecha_fin').datepicker({
-            autoclose: true
-        })
-    });
+            $('#fecha_fin').datepicker({
+                autoclose: true
+            })
+        });
 </script>

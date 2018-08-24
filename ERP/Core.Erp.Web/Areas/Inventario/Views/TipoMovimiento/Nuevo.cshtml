@@ -8,23 +8,24 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Nuevo","TipoMovimiento",FormMethod.Post, new { @class = "form", @role = "form"}))
+@using (Html.BeginForm("Nuevo", "TipoMovimiento", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q=>q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="Codigo">Código</label>
-                    @Html.TextBoxFor(q=>q.Codigo, new { @class = "form-control"})
-                    @Html.ValidationMessageFor(q=> q.Codigo,"", new { @class = "text-danger"})
+                    @Html.TextBoxFor(q => q.Codigo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Codigo, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="col-md-2">
                 <div class="checkbox">
-                    <label for="cm_interno_bool">@Html.CheckBoxFor(q=>q.cm_interno_bool) Es usado por el sistema</label>
+                    <label for="cm_interno_bool">@Html.CheckBoxFor(q => q.cm_interno_bool) Es usado por el sistema</label>
                 </div>
             </div>
 
@@ -48,7 +49,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="cm_tipo_movi">Signo</label>
-                    @Html.DropDownListFor(q => q.cm_tipo_movi, new SelectList(ViewBag.lst_signo,"Key","Value"), new { @class = "form-control" })
+                    @Html.DropDownListFor(q => q.cm_tipo_movi, new SelectList(ViewBag.lst_signo, "Key", "Value"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.cm_tipo_movi, "", new { @class = "text-danger" })
                 </div>
             </div>

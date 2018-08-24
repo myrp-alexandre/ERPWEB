@@ -7,10 +7,11 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Anular", "CatalogoRRHH", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-   @Html.HiddenFor(m => m.IdTipoCatalogo);
-   @Html.HiddenFor(m => m.IdCatalogo);
+    @Html.HiddenFor(m => m.IdTipoCatalogo);
+    @Html.HiddenFor(m => m.IdCatalogo);
 
 
     <div class="row">

@@ -44,7 +44,7 @@
             }
         });
         GridView_devolucion_det_x_cruzar.PerformCallback();
-        $("#Modal").modal("show");        
+        $("#Modal").modal("show");
     }
 
     function SetMovimiento(SecuencialID) {
@@ -70,6 +70,7 @@
         $("#Modal").modal("hide");
     }
 </script>
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "DevolucionInventario", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="modal fade" id="Modal" role="dialog">
@@ -106,8 +107,8 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal*</label>
-                    @Html.DropDownListFor(q=>q.IdSucursal_inv, new SelectList(ViewBag.lst_sucursal, "IdSucursal","Su_Descripcion"),new { @id = "IdSucursal_inv", @class = "form-control" })
-                    @Html.ValidationMessageFor(q=>q.IdSucursal_inv,"",new { @class = "text-danger"})
+                    @Html.DropDownListFor(q => q.IdSucursal_inv, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @id = "IdSucursal_inv", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdSucursal_inv, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-4">
@@ -158,11 +159,11 @@
                     </div>
                 </div>
             </div>
-                <div class="col-md-6" style="align-items:center">
-                    <button type="button" class="btn bottom btn-primary" id="btn_buscar" onclick="MostrarModal();">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </div>
+            <div class="col-md-6" style="align-items:center">
+                <button type="button" class="btn bottom btn-primary" id="btn_buscar" onclick="MostrarModal();">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -170,20 +171,20 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="observacion">Observación</label>
-                    @Html.TextAreaFor(q=>q.observacion,new { @class = "form-control", @rows = 2})
+                    @Html.TextAreaFor(q => q.observacion, new { @class = "form-control", @rows = 2 })
                     @Html.ValidationMessageFor(q => q.observacion, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
     @Html.Action("GridViewPartial_Devolucion_det")
-        <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a class="btn btn-default" href="@Url.Action("Index", "DevolucionInventario", null)">Cancelar</a>
-        </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "DevolucionInventario", null)">Cancelar</a>
+    </div>
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }
 

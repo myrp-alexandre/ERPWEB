@@ -7,17 +7,18 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Modificar", "TipoCobro", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa);
-    @Html.HiddenFor(q=>q.IdCobro_tipo)
+    @Html.HiddenFor(q => q.IdCobro_tipo)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdCobro_tipo">Código*</label>
-                    @Html.TextBoxFor(q => q.IdCobro_tipo, new { @class = "form-control", @readonly="readonly" })
+                    @Html.TextBoxFor(q => q.IdCobro_tipo, new { @class = "form-control", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.IdCobro_tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -99,7 +100,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="tc_Tomar_Cta_Cble_De">Se toma cuenta contable de </label>
-                    @Html.DropDownListFor(q => q.tc_Tomar_Cta_Cble_De, new SelectList(ViewBag.lst_cta, "Key", "Value"), new { @class = "form-control", @id = "tc_Tomar_Cta_Cble_De", @readonly="readonly" })
+                    @Html.DropDownListFor(q => q.tc_Tomar_Cta_Cble_De, new SelectList(ViewBag.lst_cta, "Key", "Value"), new { @class = "form-control", @id = "tc_Tomar_Cta_Cble_De", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.tc_Tomar_Cta_Cble_De, "", new { @class = "text-danger" })
                 </div>
             </div>

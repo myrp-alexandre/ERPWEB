@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Modificar", "Proveedor", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -61,7 +62,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="info_persona.pe_cedulaRuc">Número documento*</label>
-                    @Html.TextBoxFor(q => q.info_persona.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc"})
+                    @Html.TextBoxFor(q => q.info_persona.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc" })
                     @Html.ValidationMessageFor(q => q.info_persona.pe_cedulaRuc, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -93,7 +94,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="info_persona.pe_razonSocial">Razón social</label>
-                    @Html.TextBoxFor(q => q.info_persona.pe_razonSocial, new { @class = "form-control", @id = "pe_razonSocial"})
+                    @Html.TextBoxFor(q => q.info_persona.pe_razonSocial, new { @class = "form-control", @id = "pe_razonSocial" })
                     @Html.ValidationMessageFor(q => q.info_persona.pe_razonSocial, "", new { @class = "text-danger" })
                 </div>
             </div>

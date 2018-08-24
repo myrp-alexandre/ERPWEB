@@ -7,48 +7,49 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "ActivoFijo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdActivoFijo)
     @Html.HiddenFor(q => q.Estado_Proceso);
-<div class="row">
-    <div class="col-md-12">
-        <div class="col-md-2">
-            <div class="form-group">
-                <label for="CodActivoFijo">Código</label>
-                @Html.TextBoxFor(q => q.CodActivoFijo, new { @class = "form-control" })
-                @Html.ValidationMessageFor(q => q.CodActivoFijo, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="CodActivoFijo">Código</label>
+                    @Html.TextBoxFor(q => q.CodActivoFijo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.CodActivoFijo, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label for="Af_Codigo_Barra">Código de barra</label>
-                @Html.TextBoxFor(q => q.Af_Codigo_Barra, new { @class = "form-control" })
-                @Html.ValidationMessageFor(q => q.Af_Codigo_Barra, "", new { @class = "text-danger" })
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Af_Codigo_Barra">Código de barra</label>
+                    @Html.TextBoxFor(q => q.Af_Codigo_Barra, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Af_Codigo_Barra, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label for="Estado_Proceso">Estado de proceso</label>
-                @Html.DropDownListFor(q => q.Estado_Proceso, new SelectList(ViewBag.lst_estado, "IdCatalogo", "Descripcion"), new { @class = "form-control", @disabled = "disabled" })
-                @Html.ValidationMessageFor(q => q.Estado_Proceso, "", new { @class = "text-danger", @id = "pe_cedulaRuc" })
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Estado_Proceso">Estado de proceso</label>
+                    @Html.DropDownListFor(q => q.Estado_Proceso, new SelectList(ViewBag.lst_estado, "IdCatalogo", "Descripcion"), new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(q => q.Estado_Proceso, "", new { @class = "text-danger", @id = "pe_cedulaRuc" })
+                </div>
             </div>
-        </div>
-        <div class="col-md-offset-3 col-md-2">
-            <div class="form-group">
-                <label for="">Fecha de compra</label>
-                <div class="input-group date">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
+            <div class="col-md-offset-3 col-md-2">
+                <div class="form-group">
+                    <label for="">Fecha de compra</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.Af_fecha_compra, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Af_fecha_compra" })
+                        @Html.ValidationMessageFor(q => q.Af_fecha_compra, "", new { @class = "text-danger" })
                     </div>
-                    @Html.TextBoxFor(q => q.Af_fecha_compra, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Af_fecha_compra" })
-                    @Html.ValidationMessageFor(q => q.Af_fecha_compra, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
-</div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">

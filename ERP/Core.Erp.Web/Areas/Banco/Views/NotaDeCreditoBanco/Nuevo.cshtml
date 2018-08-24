@@ -8,6 +8,7 @@
     }
 }
 
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script type="text/javascript">
     $(function () {
         //Date picker
@@ -38,7 +39,7 @@
             bProcessing: true,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
-            success: function (data) {                
+            success: function (data) {
                 $("#cb_Valor").val(data);
             },
             error: function (error) {

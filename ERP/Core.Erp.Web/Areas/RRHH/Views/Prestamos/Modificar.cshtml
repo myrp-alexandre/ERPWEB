@@ -16,8 +16,7 @@
         </div>
     }
 }
-
-
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "Prestamos", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdPrestamo);
@@ -132,7 +131,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="Valor">Nímero cuotas*</label>
-                    @Html.TextBoxFor(q => q.NumCuotas, new { @class = "form-control" ,@id= "NumCuotas" })
+                    @Html.TextBoxFor(q => q.NumCuotas, new { @class = "form-control", @id = "NumCuotas" })
                     @Html.ValidationMessageFor(q => q.NumCuotas, "", new { @class = "text-danger" })
                 </div>
             </div>

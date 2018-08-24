@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "AnioFiscal", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdanioFiscal)
@@ -15,7 +16,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdanioFiscal">Año fiscal*</label>
-                    @Html.TextBoxFor(q => q.IdanioFiscal, new { @class = "form-control", @readonly = "readonly"})
+                    @Html.TextBoxFor(q => q.IdanioFiscal, new { @class = "form-control", @readonly = "readonly" })
                     @Html.ValidationMessageFor(m => m.IdanioFiscal, "", new { @class = "text-danger" })
                 </div>
             </div>

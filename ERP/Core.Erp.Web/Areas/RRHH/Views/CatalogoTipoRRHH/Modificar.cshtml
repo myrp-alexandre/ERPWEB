@@ -8,38 +8,41 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "CatalogoTipoRRHH", FormMethod.Post, new { @class = "form", @role = "form" }))
-{    @Html.HiddenFor(m => m.IdTipoCatalogo);
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Codigo">Código*</label>
-                    @Html.TextBoxFor(q => q.Codigo, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Codigo, "", new { @class = "text-danger" })
-                </div>
+{
+    @Html.HiddenFor(m => m.IdTipoCatalogo);
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="Codigo">Código*</label>
+                @Html.TextBoxFor(q => q.Codigo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Codigo, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
+</div>
 
-    <div class="row">
+<div class="row">
+    <div class="col-md-12">
         <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="tc_Descripcion">Descripción*</label>
-                    @Html.TextBoxFor(q => q.tc_Descripcion, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.tc_Descripcion, "", new { @class = "text-danger" })
-                </div>
+            <div class="form-group">
+                <label for="tc_Descripcion">Descripción*</label>
+                @Html.TextBoxFor(q => q.tc_Descripcion, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.tc_Descripcion, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
+</div>
 
-    <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","CatalogoTipoRRHH",new { Area = "RRHH" },null)">Cancelar</a>
-    </div>
+<div class="box-footer">
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a class="btn btn-default" href="@Url.Action("Index","CatalogoTipoRRHH",new { Area = "RRHH" },null)">Cancelar</a>
+</div>
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 }

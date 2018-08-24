@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "Menu", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
@@ -15,7 +16,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdMenuPadre">Menú padre</label>
-                    @Html.DropDownListFor(q => q.IdMenuPadre, new SelectList(ViewBag.lst_menu, "IdMenu", "DescripcionMenu_combo","0"), new { @class = "form-control"})
+                    @Html.DropDownListFor(q => q.IdMenuPadre, new SelectList(ViewBag.lst_menu, "IdMenu", "DescripcionMenu_combo", "0"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.IdMenuPadre, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -54,7 +55,7 @@
                     <div class="checkbox">
                         <label for="es_web">@Html.CheckBoxFor(q => q.es_web) Aparece en sistema web</label>
                     </div>
-                </div>                
+                </div>
             </div>
         </div>
     </div>

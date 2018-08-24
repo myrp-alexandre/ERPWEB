@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Anular", "Proveedor", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -386,26 +387,26 @@
 }
 <script>
 
-    $("#pe_apellido").keyup(function () {
-        actualizar_nombre_completo();
-    });
-    $("#pe_nombre").keyup(function () {
-        actualizar_nombre_completo();
-    });
-    $("#pe_razonSocial").keyup(function () {
-        actualizar_nombre_completo();
-    });
+        $("#pe_apellido").keyup(function () {
+            actualizar_nombre_completo();
+        });
+        $("#pe_nombre").keyup(function () {
+            actualizar_nombre_completo();
+        });
+        $("#pe_razonSocial").keyup(function () {
+            actualizar_nombre_completo();
+        });
 
-    function actualizar_nombre_completo() {
-        var apellido = $("#pe_apellido").val();
-        var nombre = $("#pe_nombre").val();
-        var razon_social = $("#pe_razonSocial").val();
+        function actualizar_nombre_completo() {
+            var apellido = $("#pe_apellido").val();
+            var nombre = $("#pe_nombre").val();
+            var razon_social = $("#pe_razonSocial").val();
 
-        if (razon_social == "") {
-            var nombre_completo = apellido + ' ' + nombre;
-            $("#pe_nombreCompleto").val(nombre_completo)
-        } else {
-            $("#pe_nombreCompleto").val(razon_social)
+            if (razon_social == "") {
+                var nombre_completo = apellido + ' ' + nombre;
+                $("#pe_nombreCompleto").val(nombre_completo)
+            } else {
+                $("#pe_nombreCompleto").val(razon_social)
+            }
         }
-    }
 </script>

@@ -16,11 +16,12 @@
         </div>
     }
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Anular", "LiquidacionOrdenCompra", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdOrdenCompra_ext, new { @id = "IdOrdenCompra_ext" })
     @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdTransaccionSession, new  { @id= "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdCtaCble_importacion, new { @id = "IdCtaCble_importacion" })
 
     @Html.HiddenFor(q => q.IdEmpresa_ct)
@@ -40,7 +41,7 @@
                     @Html.ValidationMessageFor(q => q.IdOrdenCompra_ext, "", new { @class = "text-danger" })
                 </div>
             </div>
-          
+
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdProveedor">Proveedor*</label>
@@ -105,10 +106,10 @@
                     @Html.ValidationMessageFor(q => q.IdBodega_inv, "", new { @class = "text-danger" })
                 </div>
             </div>
-           
+
         </div>
     </div>
-   
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -118,7 +119,7 @@
                     @Html.ValidationMessageFor(q => q.li_observacion, "", new { @class = "text-danger" })
                 </div>
             </div>
-           
+
         </div>
     </div>
 
@@ -140,7 +141,7 @@
                 @Html.Action("GridViewPartial_liquidacion_oc_det")
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_gastos">
-                @Html.Action("GridViewPartial_liquidacion_gastos", new  { IdTransaccionSession =Model.IdTransaccionSession})
+                @Html.Action("GridViewPartial_liquidacion_gastos", new { IdTransaccionSession = Model.IdTransaccionSession })
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_diario_contable">
                 @Html.Action("GridViewPartial_liqidacion_dc")

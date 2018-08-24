@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "Cargo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="row">
@@ -21,7 +22,7 @@
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","Cargo",new { Area = "RRHH" },null)">Cancelar</a>

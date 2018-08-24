@@ -6,6 +6,7 @@
         Response.Redirect("~/Account/Login");
     }
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "AnioFiscal", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     if (ViewBag.mensaje != null)
@@ -27,7 +28,7 @@
             </div>
         </div>
     </div>
-   
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">

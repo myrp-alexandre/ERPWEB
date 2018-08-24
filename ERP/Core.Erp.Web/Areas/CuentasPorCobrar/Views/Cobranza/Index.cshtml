@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Layout/_LayoutConsulta.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Index", "Cobranza", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
@@ -33,7 +34,7 @@
                         <div class="form-group">
                             <label for="IdSucursal">Sucursal*</label>
                             <div class="form-group">
-                                @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal,"IdSucursal","Su_Descripcion") ,new { @class = "form-control", @id = "IdSucursal" })
+                                @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
                                 @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                             </div>
                         </div>

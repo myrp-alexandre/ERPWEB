@@ -17,6 +17,7 @@
         </div>
     }
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Modificar", "OrdenPago", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -108,126 +109,126 @@
 
         </div>
     </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="IdFormaPago">Forma de pago*</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdFormaPago, settings =>
-                       {
-                           settings.Name = "IdFormaPago";
-                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                           settings.Properties.Columns.Add("IdFormaPago", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                           settings.Properties.Columns.Add("descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                           //Campo ID
-                           settings.Properties.ValueField = "IdFormaPago";
-                           settings.Properties.ValueType = typeof(string);
-                           settings.Properties.TextField = "Descripción";
-                           //Boton para seleccionar ningun registro
-                           settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                           settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdFormaPago">Forma de pago*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdFormaPago, settings =>
+               {
+                   settings.Name = "IdFormaPago";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdFormaPago", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                   settings.Properties.Columns.Add("descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdFormaPago";
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "Descripción";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
-                       }).BindList(ViewBag.lst_forma_pago).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdFormaPago, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+               }).BindList(ViewBag.lst_forma_pago).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdFormaPago, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="Fecha_PriPago">Fecha*</label>
-                            <div class="input-group date">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                @Html.TextBoxFor(q => q.Fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha" })
-                                @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
-                            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Fecha_PriPago">Fecha*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="Fecha_PriPago">Fecha pago*</label>
-                            <div class="input-group date">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                @Html.TextBoxFor(q => q.Fecha_Pago, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_Pago" })
-                                @Html.ValidationMessageFor(q => q.Fecha_Pago, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="Fecha_PriPago">Valor a cancelar*</label>
-                            @Html.TextBoxFor(q => q.Valor_a_pagar, new { @class = "form-control", @id = "Valor_a_pagar" })
-                            @Html.ValidationMessageFor(q => q.Valor_a_pagar, "", new { @class = "text-danger" })
-                        </div>
+                        @Html.TextBoxFor(q => q.Fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha" })
+                        @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Fecha_PriPago">Fecha pago*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.Fecha_Pago, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_Pago" })
+                        @Html.ValidationMessageFor(q => q.Fecha_Pago, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Fecha_PriPago">Valor a cancelar*</label>
+                    @Html.TextBoxFor(q => q.Valor_a_pagar, new { @class = "form-control", @id = "Valor_a_pagar" })
+                    @Html.ValidationMessageFor(q => q.Valor_a_pagar, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="co_observacion">Observación*</label>
+                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control", @id = "observacion" })
+                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_datos_generales" aria-controls="informacion_general" role="tab" data-toggle="tab">Datos deuda a cancelar</a>
+            </li>
+
+            <li>
+                <a href="#tab_asiento_contable" aria-controls="contabilidad" role="tab" data-toggle="tab">Asiento contable</a>
+            </li>
+
+        </ul>
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_datos_generales">
+
+                <div class="row">
                     <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="co_observacion">Observación*</label>
-                            @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control", @id = "observacion" })
-                            @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="Tabs" role="tabpanel">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="active">
-                        <a href="#tab_datos_generales" aria-controls="informacion_general" role="tab" data-toggle="tab">Datos deuda a cancelar</a>
-                    </li>
-
-                    <li>
-                        <a href="#tab_asiento_contable" aria-controls="contabilidad" role="tab" data-toggle="tab">Asiento contable</a>
-                    </li>
-
-                </ul>
-                <div class="tab-content" style="padding-top: 20px">
-                    <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_datos_generales">
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="co_observacion">Detalle de deudad a cancelar</label>
-                                        @Html.Action("GridViewPartial_detalle_op")
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_asiento_contable">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="co_observacion">Diario contable</label>
-                                        @Html.Action("GridViewPartial_orden_pago_dc")
-
-                                    </div>
-                                </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="co_observacion">Detalle de deudad a cancelar</label>
+                                @Html.Action("GridViewPartial_detalle_op")
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <a class="btn btn-default" href="@Url.Action("Index","OrdenPago",new { Area = "CuentasPorPagar" },null)">Cancelar</a>
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_asiento_contable">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="co_observacion">Diario contable</label>
+                                @Html.Action("GridViewPartial_orden_pago_dc")
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","OrdenPago",new { Area = "CuentasPorPagar" },null)">Cancelar</a>
+    </div>
 
 
 
 
-            @section Scripts {
-                @Scripts.Render("~/bundles/jqueryval")
-            }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }
 <script>
 

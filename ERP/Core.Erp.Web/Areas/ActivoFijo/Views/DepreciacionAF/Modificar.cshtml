@@ -8,6 +8,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "DepreciacionAF", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
@@ -33,7 +34,7 @@
                     @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            
+
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="Cod_Depreciacion">Código</label>
@@ -66,7 +67,7 @@
     <div class="box-footer">
         <button type="button" class="btn btn-primary" id="btn_refrescar" onclick="Get_list_activos_a_depreciar();">
             <i class="fa fa-refresh"></i>
-        </button> 
+        </button>
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index", "DepreciacionAF", new { Area = "ActivoFijo" }, null)">Cancelar</a>
     </div>
@@ -101,7 +102,7 @@
         //Date picker
         $('#Fecha_Depreciacion').datepicker({
             autoclose: true
-        })        
+        })
     });
 
     function Get_list_activos_a_depreciar() {

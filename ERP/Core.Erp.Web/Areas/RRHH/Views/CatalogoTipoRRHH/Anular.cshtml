@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Anular", "CatalogoTipoRRHH", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(m => m.IdTipoCatalogo);
@@ -15,7 +16,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="Codigo">Código*</label>
-                    @Html.TextBoxFor(q => q.Codigo, new { @class = "form-control", disabled="disabled"})
+                    @Html.TextBoxFor(q => q.Codigo, new { @class = "form-control", disabled = "disabled" })
                 </div>
             </div>
         </div>
@@ -26,7 +27,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="tc_Descripcion">Descripción*</label>
-                    @Html.TextBoxFor(q => q.tc_Descripcion, new { @class = "form-control",  disabled = "disabled" })
+                    @Html.TextBoxFor(q => q.tc_Descripcion, new { @class = "form-control", disabled = "disabled" })
                 </div>
             </div>
         </div>

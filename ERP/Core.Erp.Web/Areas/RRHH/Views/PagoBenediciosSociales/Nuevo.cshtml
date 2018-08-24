@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "PagoBenediciosSociales", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
 
@@ -16,7 +17,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="Anio">Año*</label>
-                    @Html.TextBoxFor(q => q.Anio, new { @class = "form-control"})
+                    @Html.TextBoxFor(q => q.Anio, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Anio, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -82,13 +83,11 @@
 
 
     function mostar() {
-       
-        if (decimoIII.GetValue())
-        {
+
+        if (decimoIII.GetValue()) {
 
         }
-        else
-        {
+        else {
 
         }
     };

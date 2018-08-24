@@ -8,8 +8,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "EmpleadoTitulo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
 
@@ -75,7 +74,7 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -86,7 +85,7 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
@@ -97,12 +96,12 @@
     }
 }
 <script>
-    $(function () {
+        $(function () {
 
-        //Date picker
-        $('#fecha').datepicker({
-            autoclose: true
+            //Date picker
+            $('#fecha').datepicker({
+                autoclose: true
+            })
+
         })
-
-    })
 </script>

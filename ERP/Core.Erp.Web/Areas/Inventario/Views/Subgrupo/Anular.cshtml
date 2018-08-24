@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Anular", "Subgrupo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -84,25 +85,25 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdGrupo">Grupo*</label>
-                 @Html.HiddenFor(q => q.IdGrupo)
-                @Html.DevExpress().ComboBoxFor(q => q.IdGrupo, settings =>
-               {
-                   settings.Name = "IdGrupo";
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                   settings.Properties.Columns.Add("IdGrupo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("nom_grupo", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                   //Campo ID
-                   settings.Properties.ValueField = "IdGrupo";
-                   settings.Properties.ValueType = typeof(int);
-                   settings.Properties.TextField = "nom_grupo";
-                   settings.Properties.NullText = "== Seleccione ==";
+                    @Html.HiddenFor(q => q.IdGrupo)
+                    @Html.DevExpress().ComboBoxFor(q => q.IdGrupo, settings =>
+                   {
+                       settings.Name = "IdGrupo";
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                       settings.Properties.Columns.Add("IdGrupo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                       settings.Properties.Columns.Add("nom_grupo", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                       //Campo ID
+                       settings.Properties.ValueField = "IdGrupo";
+                       settings.Properties.ValueType = typeof(int);
+                       settings.Properties.TextField = "nom_grupo";
+                       settings.Properties.NullText = "== Seleccione ==";
 
-                   settings.Properties.DropDownButton.Enabled = false;
-                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                   settings.ReadOnly = true;
-               }).BindList(ViewBag.lst_grupos).GetHtml()
-                @Html.ValidationMessageFor(q => q.IdGrupo, "", new { @class = "text-danger" })
+                       settings.Properties.DropDownButton.Enabled = false;
+                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                       settings.ReadOnly = true;
+                   }).BindList(ViewBag.lst_grupos).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdGrupo, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

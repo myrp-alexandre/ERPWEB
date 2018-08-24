@@ -15,6 +15,7 @@
         </div>
     }
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Aprobar", "HorasExtras", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
@@ -41,7 +42,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="FechaInicio">Nómina*</label>
-                            @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_Tipo", @disabled="disabled" })
+                            @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_Tipo", @disabled = "disabled" })
                             @Html.ValidationMessageFor(q => q.IdNomina_Tipo, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -87,7 +88,7 @@
             <div class="form-group">
                 <label for="cb_Observacion">Detalle horas extras</label>
                 @Html.Action("GridViewPartial_aprobacion_horas_extras_det", new { IdNomina_Tipo = Model.IdNomina_Tipo, IdNomina_TipoLiqui = Model.IdNomina_TipoLiqui, IdPeriodo = Model.IdPeriodo, IdHorasExtras = Model.IdHorasExtras })
-   
+
             </div>
         </div>
 

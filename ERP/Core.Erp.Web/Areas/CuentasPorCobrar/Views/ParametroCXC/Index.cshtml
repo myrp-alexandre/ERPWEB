@@ -7,15 +7,16 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Index", "ParametroCXC", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q=>q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="pa_tipoND_x_CheqProtestado">Tipo de nota de débito</label>
-                    @Html.DropDownListFor(q=>q.pa_tipoND_x_CheqProtestado, new SelectList(ViewBag.lst_tiponota, "IdTipoNota", "Tipo"), new { @class = "form-control"})
+                    @Html.DropDownListFor(q => q.pa_tipoND_x_CheqProtestado, new SelectList(ViewBag.lst_tiponota, "IdTipoNota", "Tipo"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.pa_tipoND_x_CheqProtestado, "", new { @class = "text-danger" })
                 </div>
             </div>

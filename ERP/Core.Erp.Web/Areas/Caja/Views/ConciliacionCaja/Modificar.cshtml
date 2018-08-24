@@ -8,6 +8,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 <script type="text/javascript">
 
@@ -80,7 +81,7 @@
         e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
         }
     function OnSelectionChanged(s, e) {
-        s.GetSelectedFieldValues("IdCbteCble_Ogiro", GetSelectedFieldValuesCallback);        
+        s.GetSelectedFieldValues("IdCbteCble_Ogiro", GetSelectedFieldValuesCallback);
         }
     function GetSelectedFieldValuesCallback(values) {
             //Capture all selected keys

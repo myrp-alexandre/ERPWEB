@@ -7,6 +7,7 @@
     //}
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "ATS", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -19,11 +20,11 @@
         </div>
     }
 
-   
+
 
     <div class="row">
         <div class="col-md-12">
-            
+
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="info_periodo.IdanioFiscal">Periodo*</label>
@@ -48,7 +49,7 @@
                 </div>
             </div>
 
-           
+
         </div>
     </div>
     <div id="Tabs" role="tabpanel">
@@ -74,19 +75,19 @@
         <div class="tab-content" style="padding-top: 20px">
 
             <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tb_ventas">
-               
+
                 @Html.Action("GridViewPartial_ventas")
 
             </div>
 
             <div role="tabpanel" class="tab-pane" id="tb_compras">
                 @Html.Action("GridViewPartial_compras")
-              
+
             </div>
 
 
             <div role="tabpanel" class="tab-pane" id="tb_importaciones">
-              
+
             </div>
 
             <div role="tabpanel" class="tab-pane" id="tb_retenciones">
@@ -101,14 +102,14 @@
         </div>
     </div>
 
-        <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a class="btn btn-default" href="@Url.Action("Index", "Empleado", new { Area ="RRHH" }, null)">Cancelar</a>
-        </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "Empleado", new { Area ="RRHH" }, null)">Cancelar</a>
+    </div>
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 
 }
 
@@ -132,7 +133,7 @@
     $("#pe_cedulaRuc").keyup(function () {
         validar();
     });
-    function  validar() {
+    function validar() {
         var tipo_doc = $("#IdTipoDocumento").val();
         var cedula = $("#pe_cedulaRuc").val();
 
@@ -148,11 +149,11 @@
             if (tipo_doc == "CED") {
                 if (cedula.length > 10) {
                     var len = $("#pe_cedulaRuc").val();
-                    len = len.substring(0,10);
+                    len = len.substring(0, 10);
                     $("#pe_cedulaRuc").val(len);
                 }
             }
     }
 
-     
+
 </script>

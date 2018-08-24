@@ -1,5 +1,4 @@
-﻿@model Core.Erp.Info.Inventario.in_Catalogo_Info
-@{
+﻿@{
     ViewBag.Title = "Catálogos";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
@@ -10,8 +9,6 @@
 
 @using (Html.BeginForm())
 {
-
-
     @Html.Action("GridViewPartial_catalogo_inventario", new { IdCatalogo_tipo = ViewBag.IdCatalogo_tipo })
 
     <div class="box-footer">

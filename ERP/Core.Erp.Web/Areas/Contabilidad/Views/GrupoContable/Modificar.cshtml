@@ -7,10 +7,11 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Modificar", "GrupoContable", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q=>q.IdGrupoCble)
+    @Html.HiddenFor(q => q.IdGrupoCble)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -55,7 +56,7 @@
             </div>
         </div>
     </div>
-   
+
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","GrupoContable",new { Area = "Contabilidad" },null)">Cancelar</a>

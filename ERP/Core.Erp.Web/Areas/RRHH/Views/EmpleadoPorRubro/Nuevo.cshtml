@@ -8,7 +8,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "EmpleadoPorRubro", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -57,7 +57,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdContrato_Tipo">Tipo liquidación de nómina*</label>
-                    @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), "== Seleccione ==", new { @class = "form-control", @id= "IdNomina_TipoLiqui" })
+                    @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
                     @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -121,7 +121,7 @@
 
         });
 
-      
+
 
 
         function cargar_tipo_liquidacion_nomina() {
@@ -149,6 +149,6 @@
             });
         };
 
-    
+
 
 </script>

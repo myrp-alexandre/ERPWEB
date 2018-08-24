@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Anular", "Factura", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
@@ -67,7 +68,7 @@
                     @Html.Partial("_CmbCliente_Factura", Model)
                     @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
                 </div>
-            </div>            
+            </div>
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdClienteContacto">Contacto</label>

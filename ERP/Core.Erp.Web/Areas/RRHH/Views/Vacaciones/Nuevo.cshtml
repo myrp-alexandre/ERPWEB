@@ -16,8 +16,7 @@
         </div>
     }
 }
-
-
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "Vacaciones", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="row">
@@ -93,19 +92,19 @@
             </div>
         </div>
     </div>
-   
+
 
     @*<div class="row">
-        <div class="col-md-12">
             <div class="col-md-12">
-                <div class="form-group">
-                    <label for="FechaInicio">Periodo*</label>
-                    @Html.DropDownListFor(q => q.IdVacacion, new SelectList(ViewBag.lst_vacaciones, "IdVacacion", "Descripcion"), new { @class = "form-control", @id = "vacaciones" })
-                    @Html.ValidationMessageFor(q => q.IdVacacion, "", new { @class = "text-danger" })
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="FechaInicio">Periodo*</label>
+                        @Html.DropDownListFor(q => q.IdVacacion, new SelectList(ViewBag.lst_vacaciones, "IdVacacion", "Descripcion"), new { @class = "form-control", @id = "vacaciones" })
+                        @Html.ValidationMessageFor(q => q.IdVacacion, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
 
     <div class="row">
         <div class="col-md-12">
@@ -160,7 +159,7 @@
     </div>
 
 
-    
+
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
