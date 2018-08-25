@@ -948,6 +948,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     Lista = (from q in Context.vwcxc_cobro_para_retencion
                              where q.IdEmpresa == IdEmpresa
                              && q.IdSucursal == IdSucursal
+                             && fecha_ini <= q.vt_fecha && q.vt_fecha <= fecha_fin
                              select new cxc_cobro_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
