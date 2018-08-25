@@ -1767,6 +1767,9 @@
     <Compile Include="vwtb_ciudad_id.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwtb_comprobantes_no_autorizados.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwtb_pais.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>

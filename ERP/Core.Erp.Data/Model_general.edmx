@@ -456,6 +456,9 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwtb_comprobantes_
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="Tipo_documento" Type="varchar" MaxLength="3" Nullable="false" />
           <Property Name="IdCbteVta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="vt_serie1" Type="varchar" MaxLength="3" />
+          <Property Name="vt_serie2" Type="varchar" MaxLength="3" />
+          <Property Name="DocumentoDoc" Type="varchar" MaxLength="20" />
           <Property Name="Documento" Type="varchar" MaxLength="28" />
           <Property Name="vt_fecha" Type="datetime" Nullable="false" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
@@ -779,6 +782,9 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwtb_comprobantes_
     [vwtb_comprobantes_no_autorizados].[IdEmpresa] AS [IdEmpresa], 
     [vwtb_comprobantes_no_autorizados].[Tipo_documento] AS [Tipo_documento], 
     [vwtb_comprobantes_no_autorizados].[IdCbteVta] AS [IdCbteVta], 
+    [vwtb_comprobantes_no_autorizados].[vt_serie1] AS [vt_serie1], 
+    [vwtb_comprobantes_no_autorizados].[vt_serie2] AS [vt_serie2], 
+    [vwtb_comprobantes_no_autorizados].[DocumentoDoc] AS [DocumentoDoc], 
     [vwtb_comprobantes_no_autorizados].[Documento] AS [Documento], 
     [vwtb_comprobantes_no_autorizados].[vt_fecha] AS [vt_fecha], 
     [vwtb_comprobantes_no_autorizados].[pe_nombreCompleto] AS [pe_nombreCompleto], 
@@ -1749,6 +1755,9 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwtb_comprobantes_
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="Tipo_documento" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="vt_serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="vt_serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="DocumentoDoc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Documento" Type="String" MaxLength="28" FixedLength="false" Unicode="false" />
           <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -2215,6 +2224,9 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwtb_comprobantes_
                 <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
                 <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
                 <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="DocumentoDoc" ColumnName="DocumentoDoc" />
+                <ScalarProperty Name="vt_serie2" ColumnName="vt_serie2" />
+                <ScalarProperty Name="vt_serie1" ColumnName="vt_serie1" />
                 <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
                 <ScalarProperty Name="Tipo_documento" ColumnName="Tipo_documento" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
