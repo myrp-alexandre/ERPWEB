@@ -33,9 +33,9 @@ namespace Core.Erp.Web.Reportes.Inventario
             int IdSubgrupo = p_IdSubgrupo.Value == null ? 0 : Convert.ToInt32(p_IdSubgrupo.Value);
             DateTime fecha_corte = p_fecha_corte.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_corte.Value);
             bool mostrar_stock_0 = p_mostrar_stock_0.Value == null ? false : Convert.ToBoolean(p_mostrar_stock_0.Value);
-
+            int IdMarca = string.IsNullOrEmpty(p_IdMarca.Value.ToString()) ? 0 : Convert.ToInt32(p_IdMarca.Value);
             INV_003_Bus bus_rpt = new INV_003_Bus();
-            List<INV_003_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdBodega, IdProducto, IdCategoria, IdLinea, IdGrupo, IdSubgrupo, fecha_corte, mostrar_stock_0);
+            List<INV_003_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdBodega, IdProducto, IdCategoria, IdLinea, IdGrupo, IdSubgrupo, fecha_corte, mostrar_stock_0, IdMarca);
             this.DataSource = lst_rpt;
         }
     }

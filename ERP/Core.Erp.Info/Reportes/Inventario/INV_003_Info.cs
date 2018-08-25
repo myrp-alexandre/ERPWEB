@@ -23,13 +23,15 @@ namespace Core.Erp.Info.Reportes.Inventario
         public Nullable<System.DateTime> lote_fecha_vcto { get; set; }
         public string IdCategoria { get; set; }
         public string ca_Categoria { get; set; }
-        public int IdLinea { get; set; }
+        public int? IdLinea { get; set; }
         public string nom_linea { get; set; }
-        public int IdGrupo { get; set; }
+        public int? IdGrupo { get; set; }
         public string nom_grupo { get; set; }
-        public int IdSubgrupo { get; set; }
+        public int? IdSubgrupo { get; set; }
         public string nom_subgrupo { get; set; }
         public string IdPresentacion { get; set; }
         public string nom_presentacion { get; set; }
+        public int IdMarca { get; set; }
+        public string NomMarca { get; set; }
     }
 }

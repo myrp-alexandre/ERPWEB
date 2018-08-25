@@ -170,7 +170,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult INV_003()
         {
 
-            cl_filtros_inventario_Info model = new cl_filtros_inventario_Info { IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa), IdCategoria = ""};
+            cl_filtros_inventario_Info model = new cl_filtros_inventario_Info { IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa), IdCategoria = "", IdMarca = 0};
 
             cargar_combos(model);
             INV_003_Rpt report = new INV_003_Rpt();
@@ -184,6 +184,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdSubgrupo.Value = model.IdSubGrupo;
             report.p_fecha_corte.Value = model.fecha_fin;
             report.p_mostrar_stock_0.Value = model.mostrar_saldos_en_0;
+            report.p_IdMarca.Value = model.IdMarca;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
             
@@ -204,6 +205,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdSubgrupo.Value = model.IdSubGrupo;
             report.p_fecha_corte.Value = model.fecha_fin;
             report.p_mostrar_stock_0.Value = model.mostrar_saldos_en_0;
+            report.p_IdMarca.Value = model.IdMarca;
             cargar_combos(model);
 
             report.usuario = SessionFixed.IdUsuario.ToString();

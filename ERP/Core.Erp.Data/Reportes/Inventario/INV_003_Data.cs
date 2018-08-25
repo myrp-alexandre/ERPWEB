@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.Inventario
 {
    public class INV_003_Data
     {
-        public List<INV_003_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdProducto, string IdCategoria, int IdLinea, int IdGrupo, int IdSubgrupo, DateTime fecha_corte, bool mostrar_stock_0)
+        public List<INV_003_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdProducto, string IdCategoria, int IdLinea, int IdGrupo, int IdSubgrupo, DateTime fecha_corte, bool mostrar_stock_0, int IdMarca)
         {
             try
             {
@@ -19,13 +19,14 @@ namespace Core.Erp.Data.Reportes.Inventario
                 int IdBodega_fin = IdBodega == 0 ? 9999 : IdBodega;
                 decimal IdProducto_ini = IdProducto;
                 decimal IdProducto_fin = IdProducto == 0 ? 9999 : IdProducto;
-
+                int IdMarca_ini = IdMarca;
+                int IdMarca_fin = IdMarca == 0 ? 99999 : IdMarca;
 
                 List<INV_003_Info> Lista=null;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     
-                    Lista = (from q in Context.SPINV_003(IdEmpresa, IdSucursal_ini, IdSucursal_fin, IdBodega_ini, IdBodega_fin, IdProducto_ini, IdProducto_fin, IdCategoria, IdLinea, IdGrupo, IdSubgrupo, fecha_corte, mostrar_stock_0)
+                    Lista = (from q in Context.SPINV_003(IdEmpresa, IdSucursal_ini, IdSucursal_fin, IdBodega_ini, IdBodega_fin, IdProducto_ini, IdProducto_fin, IdCategoria, IdLinea, IdGrupo, IdSubgrupo, fecha_corte, mostrar_stock_0,IdMarca_ini,IdMarca_fin)
                              select new INV_003_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -50,7 +51,9 @@ namespace Core.Erp.Data.Reportes.Inventario
                                  IdSubgrupo = q.IdSubgrupo,
                                  nom_subgrupo = q.nom_subgrupo,
                                  IdPresentacion = q.IdPresentacion,
-                                 nom_presentacion = q.nom_presentacion
+                                 nom_presentacion = q.nom_presentacion,
+                                 IdMarca = q.IdMarca,
+                                 NomMarca = q.NomMarca
                                  
                              }).ToList();
                              
