@@ -8,16 +8,15 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Consulta", "ReportesPorUsuario", FormMethod.Post, new { role = "form", @class = "form", @id = "myform" }))
 {
-  <div class="row">
-      <div class="col-md-12">
-          <div class="col-md-12">
-              @Html.Action("GridViewPartial_ReportesPorUsuario")
-          </div>
-      </div>
-  </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_ReportesPorUsuario")
+            </div>
+        </div>
+    </div>
 
 }

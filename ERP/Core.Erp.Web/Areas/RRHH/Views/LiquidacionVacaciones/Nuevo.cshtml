@@ -16,7 +16,7 @@
         </div>
     }
 }
-
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "LiquidacionVacaciones", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -99,21 +99,21 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="Dias_q_Corresponde">Días corresponde</label>
-                    @Html.TextBoxFor(q => q.Dias_q_Corresponde, new { @class = "form-control",@disabled="disabled" })
+                    @Html.TextBoxFor(q => q.Dias_q_Corresponde, new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.Dias_q_Corresponde, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="Dias_a_disfrutar">Días tomados*</label>
-                    @Html.TextBoxFor(q => q.Dias_a_disfrutar,  new { @class = "form-control", @disabled = "disabled" })
+                    @Html.TextBoxFor(q => q.Dias_a_disfrutar, new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.Dias_a_disfrutar, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="Fecha_Retorno">Días pendientes*</label>
-                    @Html.TextBoxFor(q => q.Dias_pendiente,  new { @class = "form-control", @disabled = "disabled" })
+                    @Html.TextBoxFor(q => q.Dias_pendiente, new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.Dias_pendiente, "", new { @class = "text-danger" })
                 </div>
             </div>

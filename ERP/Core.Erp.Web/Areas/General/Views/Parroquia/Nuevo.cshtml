@@ -7,10 +7,11 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "Parroquia", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q=>q.IdCiudad_Canton)
+    @Html.HiddenFor(q => q.IdCiudad_Canton)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -27,7 +28,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCiudad_Canton">Ciudad*</label>
-                    @Html.DropDownListFor(q => q.IdCiudad_Canton, new SelectList(ViewBag.lst_ciudades, "IdCiudad", "Descripcion_ciudad"), new { @class = "form-control", @disabled= "disabled" })
+                    @Html.DropDownListFor(q => q.IdCiudad_Canton, new SelectList(ViewBag.lst_ciudades, "IdCiudad", "Descripcion_ciudad"), new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdCiudad_Canton, "", new { @class = "text-danger" })
                 </div>
             </div>

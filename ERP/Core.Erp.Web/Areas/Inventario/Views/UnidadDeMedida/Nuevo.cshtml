@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "UnidadDeMedida", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -24,8 +25,8 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdUnidadMedida">Código*</label>
-                    @Html.TextBoxFor(q=>q.IdUnidadMedida,new { @class = "form-control"})
-                    @Html.ValidationMessageFor(q=> q.IdUnidadMedida, "", new { @class = "text-danger"})
+                    @Html.TextBoxFor(q => q.IdUnidadMedida, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdUnidadMedida, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
@@ -47,7 +48,7 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -55,7 +56,7 @@
             </div>
         </div>
     </div>
-    
+
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>

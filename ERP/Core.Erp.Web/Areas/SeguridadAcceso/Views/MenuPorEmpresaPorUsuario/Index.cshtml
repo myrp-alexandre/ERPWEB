@@ -21,7 +21,7 @@
     function GetSelectedNodeValuesCallback(values) {
         if (values != null) {
             selectedIDs = values.join(',');
-        }        
+        }
     }
     function guardar() {
         var datos = {
@@ -48,6 +48,7 @@
         $("#btn_guardar").disabled = false;
     }
 </script>
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Index", "MenuPorEmpresaPorUsuario", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
 {
     <div class="row">

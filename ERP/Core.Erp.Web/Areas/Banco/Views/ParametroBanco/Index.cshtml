@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Index", "ParametroBanco", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
@@ -60,114 +61,114 @@
             </div>
         </div>
     </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="IdTipoCbte_x_Prestamo">Tipo comprobante por préstamo</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbte_x_Prestamo, settings =>
-                       {
-                           settings.Name = "IdTipoCbte_x_Prestamo";
-                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                           settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                           settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                           //Campo ID
-                           settings.Properties.ValueField = "IdTipoCbte";
-                           settings.Properties.ValueType = typeof(int);
-                           settings.Properties.TextField = "tc_TipoCbte";
-                           //Boton para seleccionar ningun registro
-                           settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                           settings.Properties.NullText = "== Seleccione ==";
-                           settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                       }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdTipoCbte_x_Prestamo, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdTipoCbte_x_Prestamo">Tipo comprobante por préstamo</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbte_x_Prestamo, settings =>
+               {
+                   settings.Name = "IdTipoCbte_x_Prestamo";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdTipoCbte";
+                   settings.Properties.ValueType = typeof(int);
+                   settings.Properties.TextField = "tc_TipoCbte";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+               }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdTipoCbte_x_Prestamo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="IdTipoNota_ND_Can_Cuotas">Tipo nota débito</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdTipoNota_ND_Can_Cuotas, settings =>
-                       {
-                           settings.Name = "IdTipoNota_ND_Can_Cuotas";
-                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                           settings.Properties.Columns.Add("IdTipoNota", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                           settings.Properties.Columns.Add("No_Descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                           //Campo ID
-                           settings.Properties.ValueField = "IdTipoNota";
-                           settings.Properties.ValueType = typeof(int);
-                           settings.Properties.TextField = "No_Descripcion";
-                           //Boton para seleccionar ningun registro
-                           settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                           settings.Properties.NullText = "== Seleccione ==";
-                           settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                       }).BindList(ViewBag.lst_tipo).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdTipoNota_ND_Can_Cuotas, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdTipoNota_ND_Can_Cuotas">Tipo nota débito</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoNota_ND_Can_Cuotas, settings =>
+               {
+                   settings.Name = "IdTipoNota_ND_Can_Cuotas";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdTipoNota", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("No_Descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdTipoNota";
+                   settings.Properties.ValueType = typeof(int);
+                   settings.Properties.TextField = "No_Descripcion";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+               }).BindList(ViewBag.lst_tipo).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdTipoNota_ND_Can_Cuotas, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="IdCtaCble_prestamos">Cuenta contable por préstamo</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_prestamos, settings =>
-                       {
-                           settings.Name = "IdCtaCble_prestamos";
-                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                           settings.Properties.Columns.Add("IdCtaCble", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                           settings.Properties.Columns.Add("pc_Cuenta", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                           //Campo ID
-                           settings.Properties.ValueField = "IdCtaCble";
-                           settings.Properties.ValueType = typeof(int);
-                           settings.Properties.TextField = "pc_Cuenta";
-                           //Boton para seleccionar ningun registro
-                           settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                           settings.Properties.NullText = "== Seleccione ==";
-                           settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                       }).BindList(ViewBag.lst_cta).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdCtaCble_prestamos, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdCtaCble_prestamos">Cuenta contable por préstamo</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_prestamos, settings =>
+               {
+                   settings.Name = "IdCtaCble_prestamos";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdCtaCble", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("pc_Cuenta", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdCtaCble";
+                   settings.Properties.ValueType = typeof(int);
+                   settings.Properties.TextField = "pc_Cuenta";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+               }).BindList(ViewBag.lst_cta).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdCtaCble_prestamos, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="IdCtaCble_Interes">Cuenta contable por interés</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_Interes, settings =>
-                       {
-                           settings.Name = "IdCtaCble_Interes";
-                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                           settings.Properties.Columns.Add("IdCtaCble", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                           settings.Properties.Columns.Add("pc_Cuenta", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                           //Campo ID
-                           settings.Properties.ValueField = "IdCtaCble";
-                           settings.Properties.ValueType = typeof(int);
-                           settings.Properties.TextField = "pc_Cuenta";
-                           //Boton para seleccionar ningun registro
-                           settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                           settings.Properties.NullText = "== Seleccione ==";
-                           settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                       }).BindList(ViewBag.lst_cta).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdCtaCble_Interes, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdCtaCble_Interes">Cuenta contable por interés</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_Interes, settings =>
+               {
+                   settings.Name = "IdCtaCble_Interes";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdCtaCble", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("pc_Cuenta", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdCtaCble";
+                   settings.Properties.ValueType = typeof(int);
+                   settings.Properties.TextField = "pc_Cuenta";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+               }).BindList(ViewBag.lst_cta).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdCtaCble_Interes, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-            </div>
-            @section Scripts {
-                @Scripts.Render("~/bundles/jqueryval")
-            }
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }

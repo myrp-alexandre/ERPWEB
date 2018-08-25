@@ -16,8 +16,7 @@
         </div>
     }
 }
-
-
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Anular", "LiquidacionVacaciones", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdSolicitud);
@@ -150,19 +149,19 @@
     }
 }
 <script>
-    $(function () {
+        $(function () {
 
-        //Date picker
-        $('#FechaInicio').datepicker({
-            autoclose: true
-        })
+            //Date picker
+            $('#FechaInicio').datepicker({
+                autoclose: true
+            })
 
-        $('#FechaFin').datepicker({
-            autoclose: true
+            $('#FechaFin').datepicker({
+                autoclose: true
+            })
+            $('#FechaRetorno').datepicker({
+                autoclose: true
+            })
         })
-        $('#FechaRetorno').datepicker({
-            autoclose: true
-        })
-    })
 </script>
 

@@ -15,6 +15,7 @@
         </div>
     }
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "RecepcionOrdenCompra", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -34,7 +35,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdCatalogo_via">Tipo de embarque*</label>
-                    @Html.DropDownListFor(q => q.IdCatalogo_via, new SelectList(ViewBag.lst_catalogos, "IdCatalogo", "ca_descripcion"), new { @class = "form-control" , @disabled = "disabled" })
+                    @Html.DropDownListFor(q => q.IdCatalogo_via, new SelectList(ViewBag.lst_catalogos, "IdCatalogo", "ca_descripcion"), new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdCatalogo_via, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -45,7 +46,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.oe_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_oc" , @disabled = "disabled" })
+                        @Html.TextBoxFor(q => q.oe_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_oc", @disabled = "disabled" })
                         @Html.ValidationMessageFor(q => q.oe_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -58,7 +59,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdProveedor">Proveedor*</label>
-                    @Html.TextBoxFor(q => q.pe_nombreCompleto, new { @class = "form-control", @disabled="disabled" })
+                    @Html.TextBoxFor(q => q.pe_nombreCompleto, new { @class = "form-control", @disabled = "disabled" })
                 </div>
             </div>
             <div class="col-md-offset-10 col-med-2">
@@ -120,8 +121,8 @@
         $('#or_fecha').datepicker({
             autoclose: true
         });
-       
-        
+
+
     });
 
 

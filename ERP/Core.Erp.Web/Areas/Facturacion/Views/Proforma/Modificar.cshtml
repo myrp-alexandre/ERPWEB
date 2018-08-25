@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "Proforma", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
@@ -184,14 +185,14 @@
             </div>
         </div>
     </div>
-        <div class="col-md-12">
-            <button type="button" class="btn btn-primary" id="btn_desbloquear" onclick="MostrarModalDesbloqueo();">
-                <i class="fa fa-lock"></i> Desbloquear
-            </button>
-            <label id="EstadoDesbloqueo" class="text-danger" style="margin-left:10px;" hidden></label>
-        </div>
-        <br />
-        <br />
+    <div class="col-md-12">
+        <button type="button" class="btn btn-primary" id="btn_desbloquear" onclick="MostrarModalDesbloqueo();">
+            <i class="fa fa-lock"></i> Desbloquear
+        </button>
+        <label id="EstadoDesbloqueo" class="text-danger" style="margin-left:10px;" hidden></label>
+    </div>
+    <br />
+    <br />
 
     <div class="row">
         <div class="col-md-12">
@@ -238,7 +239,7 @@
         if (Number($("#Secuencia").text()) > 0) {
             var datos = {
                 Secuencia: $("#Secuencia").text(),
-                IdTransaccionSession: $("#IdTransaccionSession").val(),                
+                IdTransaccionSession: $("#IdTransaccionSession").val(),
                 IdProducto: ID
             }
             $.ajax({
@@ -255,7 +256,7 @@
                 },
                 error: function (error) {
                 }
-            });                
+            });
         } else {
             $.ajax({
                 url: '@Url.Action("ChangeValuePartial", "Proforma",new { Area = "Facturacion"})',

@@ -8,7 +8,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Modificar", "EmpleadoTitulo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -80,17 +80,17 @@
             </div>
         </div>
     </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="FechaFin">Fecha fin*</label>
-                        @Html.TextBoxFor(q => q.fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha" })
-                        @Html.ValidationMessageFor(q => q.fecha, "", new { @class = "text-danger" })
-                    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="FechaFin">Fecha fin*</label>
+                    @Html.TextBoxFor(q => q.fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha" })
+                    @Html.ValidationMessageFor(q => q.fecha, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
+    </div>
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
@@ -108,6 +108,6 @@
             autoclose: true
         })
 
-        
+
     })
 </script>

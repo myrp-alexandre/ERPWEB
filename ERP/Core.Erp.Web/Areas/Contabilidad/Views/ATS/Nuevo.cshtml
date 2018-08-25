@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "ATS", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -20,7 +21,7 @@
     }
     <div class="row">
         <div class="col-md-12">
-            
+
             <div class="col-md-10">
                 <div class="form-group">
                     <label for="info_periodo.IdanioFiscal">Periodo*</label>
@@ -45,12 +46,12 @@
                 <div class="form-group">
                     <label for="info_periodo.IdanioFiscal"></label>
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary" >Descargar</button>
+                        <button type="submit" class="btn btn-primary">Descargar</button>
                     </div>
                 </div>
             </div>
 
-           
+
         </div>
     </div>
     <div id="Tabs" role="tabpanel">
@@ -76,14 +77,14 @@
         <div class="tab-content" style="padding-top: 20px">
 
             <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tb_ventas">
-               
+
                 @Html.Action("GridViewPartial_ventas")
 
             </div>
 
             <div role="tabpanel" class="tab-pane" id="tb_compras">
                 @Html.Action("GridViewPartial_compras")
-              
+
             </div>
 
 
@@ -107,11 +108,11 @@
         </div>
     </div>
 
-       
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 
 }
 

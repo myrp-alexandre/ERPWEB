@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Modificar", "TipoOrdenPago", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -18,7 +19,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="codigoSRI">Código*</label>
-                    @Html.TextBoxFor(q => q.IdTipo_op, new { @class = "form-control", @disabled= "disabled" })
+                    @Html.TextBoxFor(q => q.IdTipo_op, new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(m => m.IdTipo_op, "", new { @class = "text-danger" })
                 </div>
             </div>

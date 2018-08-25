@@ -8,161 +8,162 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "ActaFiniquito", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpleado);
     @Html.HiddenFor(q => q.IdActaFiniquito);
 
-<div class="row">
-    <div class="col-md-12">
+    <div class="row">
         <div class="col-md-12">
-            <div class="form-group">
-                <label for="IdCtaCblePadre">Empleado*</label>
-                @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado, settings =>
-           {
-               settings.Name = "IdEmpleado";
-               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-               settings.Properties.DisplayFormatString = "[{0}] - {2}";
-               settings.Properties.Columns.Add("IdEmpleado", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-               settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-               settings.Properties.Columns.Add("Empleado", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdCtaCblePadre">Empleado*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado, settings =>
+               {
+                   settings.Name = "IdEmpleado";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
+                   settings.Properties.Columns.Add("IdEmpleado", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("Empleado", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(80);
 
-               //Campo ID
-               settings.Properties.ValueField = "IdEmpleado";
-               settings.Properties.ValueType = typeof(decimal);
-               settings.Properties.TextField = "Empleado";
-               //Boton para seleccionar ningun registro
-               settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-               settings.Properties.NullText = "== Seleccione ==";
-               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-               settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){get_info()}";
+                   //Campo ID
+                   settings.Properties.ValueField = "IdEmpleado";
+                   settings.Properties.ValueType = typeof(decimal);
+                   settings.Properties.TextField = "Empleado";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){get_info()}";
 
-           }).BindList(ViewBag.lst_empleado).GetHtml()
-                @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+               }).BindList(ViewBag.lst_empleado).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="col-md-3">
-            <div class="form-group">
-                <label for="IdContrato_Tipo">Tipo contrato*</label>
-                @Html.DropDownListFor(q => q.Contrato_tipo, new SelectList(ViewBag.lst_tipo_contrato, "CodCatalogo", "ca_descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdContrato_Tipo" })
-                @Html.ValidationMessageFor(q => q.Contrato_tipo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label for="FechaIngreso">Fecha ingreso*</label>
-                @Html.TextBoxFor(q => q.FechaIngreso, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaIngreso" })
-                @Html.ValidationMessageFor(q => q.FechaIngreso, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label for="FechaSalida">Fecha salida*</label>
-                @Html.TextBoxFor(q => q.FechaSalida, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaSalida" })
-                @Html.ValidationMessageFor(q => q.FechaSalida, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label for="Observacion">Ultima remuneración*</label>
-                @Html.TextBoxFor(q => q.UltimaRemuneracion, new { @class = "form-control", @id = "Sueldo" })
-                @Html.ValidationMessageFor(q => q.UltimaRemuneracion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="col-md-3">
-            <div class="form-group">
-                @Html.DevExpress().CheckBoxFor(q => q.EsMujerEmbarazada, settings =>
-           {
-               settings.Name = "EsMujerEmbarazada";
-               settings.Text = "¿Es mujer emabaraza?";
-
-           }).GetHtml()
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                @Html.DevExpress().CheckBoxFor(q => q.EsPorDiscapacidad, settings =>
-           {
-               settings.Name = "EsPorDiscapacidad";
-               settings.Text = "¿Por discapacidad?";
-
-           }).GetHtml()
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                @Html.DevExpress().CheckBoxFor(q => q.EsDirigenteSindical, settings =>
-           {
-               settings.Name = "EsDirigenteSindical";
-               settings.Text = "¿Es dirigente sindical?";
-
-           }).GetHtml()
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                @Html.DevExpress().CheckBoxFor(q => q.EsPorEnfermedadNoProfesional, settings =>
-           {
-               settings.Name = "EsPorEnfermedadNoProfesional";
-               settings.Text = "¿Por enfermedad no profesional?";
-
-           }).GetHtml()
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
+    <div class="row">
         <div class="col-md-12">
-            <div class="form-group">
-                <label for="IdContrato_Tipo">Termino de terminación del contrato*</label>
-                @Html.DropDownListFor(q => q.IdCausaTerminacion, new SelectList(ViewBag.lst_tipo_terminacion, "CodCatalogo", "ca_descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "idterminacion" })
-                @Html.ValidationMessageFor(q => q.IdCausaTerminacion, "", new { @class = "text-danger" })
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdContrato_Tipo">Tipo contrato*</label>
+                    @Html.DropDownListFor(q => q.Contrato_tipo, new SelectList(ViewBag.lst_tipo_contrato, "CodCatalogo", "ca_descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdContrato_Tipo" })
+                    @Html.ValidationMessageFor(q => q.Contrato_tipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="FechaIngreso">Fecha ingreso*</label>
+                    @Html.TextBoxFor(q => q.FechaIngreso, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaIngreso" })
+                    @Html.ValidationMessageFor(q => q.FechaIngreso, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="FechaSalida">Fecha salida*</label>
+                    @Html.TextBoxFor(q => q.FechaSalida, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaSalida" })
+                    @Html.ValidationMessageFor(q => q.FechaSalida, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Observacion">Ultima remuneración*</label>
+                    @Html.TextBoxFor(q => q.UltimaRemuneracion, new { @class = "form-control", @id = "Sueldo" })
+                    @Html.ValidationMessageFor(q => q.UltimaRemuneracion, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
+    <div class="row">
         <div class="col-md-12">
-            <div class="form-group">
-                <label for="Observacion">Observación*</label>
-                @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
-                @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.DevExpress().CheckBoxFor(q => q.EsMujerEmbarazada, settings =>
+               {
+                   settings.Name = "EsMujerEmbarazada";
+                   settings.Text = "¿Es mujer emabaraza?";
+
+               }).GetHtml()
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.DevExpress().CheckBoxFor(q => q.EsPorDiscapacidad, settings =>
+               {
+                   settings.Name = "EsPorDiscapacidad";
+                   settings.Text = "¿Por discapacidad?";
+
+               }).GetHtml()
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.DevExpress().CheckBoxFor(q => q.EsDirigenteSindical, settings =>
+               {
+                   settings.Name = "EsDirigenteSindical";
+                   settings.Text = "¿Es dirigente sindical?";
+
+               }).GetHtml()
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.DevExpress().CheckBoxFor(q => q.EsPorEnfermedadNoProfesional, settings =>
+               {
+                   settings.Name = "EsPorEnfermedadNoProfesional";
+                   settings.Text = "¿Por enfermedad no profesional?";
+
+               }).GetHtml()
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
+    <div class="row">
         <div class="col-md-12">
-            <div class="form-group">
-                <label for="GridViewPartial_liquidacion_empleado_det">Detalle Acta finiquito</label>
-                @Html.Action("GridViewPartial_liquidacion_empleado_det")
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdContrato_Tipo">Termino de terminación del contrato*</label>
+                    @Html.DropDownListFor(q => q.IdCausaTerminacion, new SelectList(ViewBag.lst_tipo_terminacion, "CodCatalogo", "ca_descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "idterminacion" })
+                    @Html.ValidationMessageFor(q => q.IdCausaTerminacion, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="box-footer">
-    <button type="button" onclick="Procesar_Liqui()" class="btn btn-primary" id="btnprocesar">Procesar</button>
-    <button type="submit" class="btn btn-primary">Guardar</button>
-    <a class="btn btn-default" href="@Url.Action("Index", "ActaFiniquito", new { Area = "RRHH" }, null)">Cancelar</a>
-</div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Observacion">Observación*</label>
+                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="GridViewPartial_liquidacion_empleado_det">Detalle Acta finiquito</label>
+                    @Html.Action("GridViewPartial_liquidacion_empleado_det")
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="button" onclick="Procesar_Liqui()" class="btn btn-primary" id="btnprocesar">Procesar</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "ActaFiniquito", new { Area = "RRHH" }, null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }
 <script>
     $(function () {

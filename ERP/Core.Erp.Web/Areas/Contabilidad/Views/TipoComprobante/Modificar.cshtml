@@ -6,6 +6,7 @@
         Response.Redirect("~/Account/Login");
     }
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "TipoComprobante", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
@@ -81,6 +82,6 @@
         <a class="btn btn-default" href="@Url.Action("Index","TipoComprobante",new { Area = "Contabilidad" },null)">Cancelar</a>
     </div>
     @section Scripts {
-     @Scripts.Render("~/bundles/jqueryval")
-}
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }

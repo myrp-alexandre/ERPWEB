@@ -7,10 +7,11 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "Reporte", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-@Html.HiddenFor(q=>q.CodReporte)
-@Html.HiddenFor(q => q.CodModulo)
+    @Html.HiddenFor(q => q.CodReporte)
+    @Html.HiddenFor(q => q.CodModulo)
 
     <div class="row">
         <div class="col-md-12">
@@ -55,7 +56,7 @@
             <div class=" col-md-3">
                 <div class="form-group">
                     <label for="CodReporte">Código*</label>
-                    @Html.TextBoxFor(q => q.CodReporte, new { @class = "form-control", @id = "CodReporte" ,@disabled="disabled"})
+                    @Html.TextBoxFor(q => q.CodReporte, new { @class = "form-control", @id = "CodReporte", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.CodReporte, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -175,9 +176,9 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","Reporte",new { Area = "General" },null)">Cancelar</a>
     </div>
-                    @section Scripts {
-                        @Scripts.Render("~/bundles/jqueryval")
-                    }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }
 <script>
 

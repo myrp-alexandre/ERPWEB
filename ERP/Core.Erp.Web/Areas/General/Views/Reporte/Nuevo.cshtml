@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "Reporte", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     if (ViewBag.mensaje != null)
@@ -60,7 +61,7 @@
             <div class=" col-md-3">
                 <div class="form-group">
                     <label for="CodReporte">Código*</label>
-                    @Html.TextBoxFor(q => q.CodReporte, new { @class = "form-control" ,@id="CodReporte"})
+                    @Html.TextBoxFor(q => q.CodReporte, new { @class = "form-control", @id = "CodReporte" })
                     @Html.ValidationMessageFor(q => q.CodReporte, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -91,7 +92,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="rpt_usa_store_procedure">@Html.CheckBoxFor(q => q.rpt_usa_store_procedure, new { @id = "rpt_usa_store_procedure" }) Usa store procedure</label>
-                    @Html.TextBoxFor(q => q.rpt_store_procedure, new { @class = "form-control", @id= "rpt_store_procedure" })
+                    @Html.TextBoxFor(q => q.rpt_store_procedure, new { @class = "form-control", @id = "rpt_store_procedure" })
                     @Html.ValidationMessageFor(q => q.rpt_store_procedure, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -110,7 +111,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="mvc_area">Área*</label>
-                    @Html.TextBoxFor(q => q.mvc_area, new { @class = "form-control"})
+                    @Html.TextBoxFor(q => q.mvc_area, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.mvc_area, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -174,13 +175,13 @@
         </div>
     </div>
 
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                        <a class="btn btn-default" href="@Url.Action("Index","Reporte",new { Area = "General" },null)">Cancelar</a>
-                    </div>
-                    @section Scripts {
-                        @Scripts.Render("~/bundles/jqueryval")
-                    }
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Reporte",new { Area = "General" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }
 <script>
 

@@ -8,11 +8,12 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    if (ViewBag.mensaje!=null)
+    if (ViewBag.mensaje != null)
     {
-        <h2 >@ViewBag.mensaje</h2>
+        <h2>@ViewBag.mensaje</h2>
     }
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "CatalogoRRHH", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="row">

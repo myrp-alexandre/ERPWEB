@@ -8,10 +8,11 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "ClaseProveedor", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q=>q.IdClaseProveedor)
+    @Html.HiddenFor(q => q.IdClaseProveedor)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">

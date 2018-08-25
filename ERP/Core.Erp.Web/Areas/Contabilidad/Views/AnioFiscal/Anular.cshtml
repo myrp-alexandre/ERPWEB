@@ -7,9 +7,10 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Anular", "AnioFiscal", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q=>q.IdanioFiscal)
+    @Html.HiddenFor(q => q.IdanioFiscal)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">

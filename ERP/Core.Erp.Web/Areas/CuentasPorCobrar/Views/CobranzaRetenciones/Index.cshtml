@@ -7,7 +7,8 @@
         Response.Redirect("~/Account/Login");
     }
 }
-@using (Html.BeginForm("Index","CobranzaRetenciones",FormMethod.Post, new { @class = "form", @role = "form"}))
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+@using (Html.BeginForm("Index", "CobranzaRetenciones", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     <div class="box collapsed-box">
         <div class="box-header with-border">
@@ -79,7 +80,7 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_cobranza_ret", new { Fecha_ini = Model.fecha_ini, Fecha_fin = Model.fecha_fin, IdSucursal = Model.IdSucursal})
+            @Html.Action("GridViewPartial_cobranza_ret", new { Fecha_ini = Model.fecha_ini, Fecha_fin = Model.fecha_fin, IdSucursal = Model.IdSucursal })
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
@@ -101,4 +102,4 @@
         })
 
     });
-    </script>
+</script>

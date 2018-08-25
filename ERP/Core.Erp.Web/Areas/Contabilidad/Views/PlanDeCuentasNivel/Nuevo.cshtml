@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "PlanDeCuentasNivel", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -24,8 +25,8 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="IdNivelCta">Nivel*</label>
-                    @Html.TextBoxFor(q=>q.IdNivelCta,new { @class = "form-control"})
-                    @Html.ValidationMessageFor(q=>q.IdNivelCta,"",new { @class = "text-danger"})
+                    @Html.TextBoxFor(q => q.IdNivelCta, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdNivelCta, "", new { @class = "text-danger" })
                 </div>
             </div>
 

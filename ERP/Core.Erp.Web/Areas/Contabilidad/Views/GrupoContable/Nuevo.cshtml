@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "GrupoContable", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -15,8 +16,8 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdGrupoCble">Código*</label>
-                    @Html.TextBoxFor(q=>q.IdGrupoCble, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.IdGrupoCble, "", new { @class = "form", @role="text-danger" })
+                    @Html.TextBoxFor(q => q.IdGrupoCble, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdGrupoCble, "", new { @class = "form", @role = "text-danger" })
                 </div>
             </div>
         </div>
@@ -54,7 +55,7 @@
             </div>
         </div>
     </div>
-  
+
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","GrupoContable",new { Area = "Contabilidad" },null)">Cancelar</a>

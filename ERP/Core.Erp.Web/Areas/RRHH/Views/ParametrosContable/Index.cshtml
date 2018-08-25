@@ -7,7 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Index", "ParametrosContable", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
 
@@ -135,10 +135,10 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="genera_op_x_pago">Genera op al cerrar la nomina</label>
-                              @Html.DevExpress().CheckBoxFor(q => q.genera_op_x_pago, settings =>
-                                   {
-                                       settings.Name = "genera_op_x_pago";
-                                   }).GetHtml()
+                                @Html.DevExpress().CheckBoxFor(q => q.genera_op_x_pago, settings =>
+                                     {
+                                         settings.Name = "genera_op_x_pago";
+                                     }).GetHtml()
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -150,7 +150,7 @@
                                    }).GetHtml()
                             </div>
                         </div>
-                      
+
                     </div>
                 </div>
             </div>

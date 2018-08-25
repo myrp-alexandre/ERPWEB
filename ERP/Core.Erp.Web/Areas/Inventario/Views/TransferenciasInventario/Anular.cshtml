@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Anular", "TransferenciasInventario", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -129,7 +130,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                   @Html.Action("GridViewPartial_transferencias_det")
+                    @Html.Action("GridViewPartial_transferencias_det")
                 </div>
             </div>
         </div>

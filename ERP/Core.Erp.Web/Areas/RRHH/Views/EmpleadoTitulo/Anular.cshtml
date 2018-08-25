@@ -8,8 +8,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Anular", "EmpleadoTitulo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpleado)
@@ -78,35 +77,35 @@
             </div>
         </div>
     </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="FechaFin">Fecha fin*</label>
-                        @Html.TextBoxFor(q => q.fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha" })
-                        @Html.ValidationMessageFor(q => q.fecha, "", new { @class = "text-danger" })
-                    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="FechaFin">Fecha fin*</label>
+                    @Html.TextBoxFor(q => q.fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha" })
+                    @Html.ValidationMessageFor(q => q.fecha, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="box-footer">
-            <button type="submit" class="btn btn-danger">Anular</button>
-            <a class="btn btn-default" href="@Url.Action("Index","EmpleadoTitulo",new { Area = "RRHH" },null)">Cancelar</a>
-        </div>
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+    <div class="box-footer">
+        <button type="submit" class="btn btn-danger">Anular</button>
+        <a class="btn btn-default" href="@Url.Action("Index","EmpleadoTitulo",new { Area = "RRHH" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 
-        }
-        <script>
-            $(function () {
+}
+<script>
+    $(function () {
 
-                //Date picker
-                $('#fecha').datepicker({
-                    autoclose: true
-                })
+        //Date picker
+        $('#fecha').datepicker({
+            autoclose: true
+        })
 
-              
-            })
-        </script>
+
+    })
+</script>

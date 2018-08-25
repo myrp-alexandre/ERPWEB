@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Anular", "Persona", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -191,9 +192,9 @@
         <a class="btn btn-default" href="@Url.Action("Index", "Persona", new { Area ="General" }, null)">Cancelar</a>
     </div>
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 
 }
 

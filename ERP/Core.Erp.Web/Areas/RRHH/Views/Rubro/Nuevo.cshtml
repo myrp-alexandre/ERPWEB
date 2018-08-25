@@ -8,12 +8,13 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "Rubro", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
 
 
-   @Html.HiddenFor(q => q.IdRubro)
+    @Html.HiddenFor(q => q.IdRubro)
     @Html.HiddenFor(q => q.IdEmpresa)
 
     <div class="row">

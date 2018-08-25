@@ -7,16 +7,17 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Modificar","Usuario",FormMethod.Post,new { @class = "form", @role = "form"}))
+@using (Html.BeginForm("Modificar", "Usuario", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q=>q.IdUsuario)
+    @Html.HiddenFor(q => q.IdUsuario)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdUsuario">Usuario*</label>
-                    @Html.TextBoxFor(q => q.IdUsuario, new { @class = "form-control" , @readonly = "readonly" })
+                    @Html.TextBoxFor(q => q.IdUsuario, new { @class = "form-control", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.IdUsuario, "", new { @class = "text-danger" })
                 </div>
             </div>

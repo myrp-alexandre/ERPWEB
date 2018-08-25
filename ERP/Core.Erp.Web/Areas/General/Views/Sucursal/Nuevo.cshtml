@@ -8,22 +8,22 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@using (Html.BeginForm("Nuevo","Sucursal",FormMethod.Post,new { @class = "form", @role = "form"}))
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>+  
+@using (Html.BeginForm("Nuevo", "Sucursal", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q=>q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="codigo">Código</label>
-                    @Html.TextBoxFor(q => q.codigo, new { @class = "form-control" })     
+                    @Html.TextBoxFor(q => q.codigo, new { @class = "form-control" })
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="Su_CodigoEstablecimiento">Establecimiento</label>
-                    @Html.TextBoxFor(q=> q.Su_CodigoEstablecimiento, new { @class = "form-control" })                    
+                    @Html.TextBoxFor(q => q.Su_CodigoEstablecimiento, new { @class = "form-control" })
                 </div>
             </div>
             <div class="col-md-8">
@@ -41,7 +41,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="Su_Descripcion">Descripción*</label>
-                    @Html.TextBoxFor(q => q.Su_Descripcion, new { @class = "form-control" })  
+                    @Html.TextBoxFor(q => q.Su_Descripcion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Su_Descripcion, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -53,7 +53,7 @@
                 <div class="form-group">
                     <label for="Su_Ruc">Ruc</label>
                     @Html.TextBoxFor(q => q.Su_Ruc, new { @class = "form-control" })
-                </div>                
+                </div>
             </div>
             <div class="col-md-9">
                 <div class="form-group">
@@ -88,14 +88,14 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="Su_Ubicacion">Ubicación</label>
-                    @Html.TextAreaFor(m=> m.Su_Ubicacion, new { @class = "form-control", @rows = 3})
+                    @Html.TextAreaFor(m => m.Su_Ubicacion, new { @class = "form-control", @rows = 3 })
                 </div>
             </div>
         </div>
     </div>
-    <div class="box-footer">        
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a class="btn btn-default" href="@Url.Action("Index","Sucursal",new { Area = "General" },null)">Cancelar</a>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Sucursal",new { Area = "General" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

@@ -13,6 +13,7 @@
         <h2>@ViewBag.mensaje</h2>
     }
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "CargaFamiliar", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpleado);
@@ -45,13 +46,13 @@
         </div>
     </div>
     <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="tc_Descripcion">Nombres*</label>
-                    @Html.TextBoxFor(q => q.Nombres, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Nombres, "", new { @class = "text-danger" })
-                </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="tc_Descripcion">Nombres*</label>
+                @Html.TextBoxFor(q => q.Nombres, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Nombres, "", new { @class = "text-danger" })
             </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-2">

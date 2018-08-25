@@ -8,6 +8,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Modificar", "TipoMovimientoCaja", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -73,7 +74,7 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","TipoMovimientoCaja",new { Area = "Caja" },null)">Cancelar</a>
     </div>
-            @section Scripts {
-                @Scripts.Render("~/bundles/jqueryval")
-            }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }

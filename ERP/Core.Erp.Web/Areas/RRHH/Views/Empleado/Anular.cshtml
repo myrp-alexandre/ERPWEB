@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Anular", "Empleado", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -24,11 +25,11 @@
     <div class="row">
         <div class="col-md-12">
             @*<div class="col-md-2" height="100" width="100" style="border:solid">
-                <label for="pe_Naturaleza">Foto*</label>
-                <div class="form-group">
-                    @Html.EditorFor(q => q.em_foto, new { @class = "form-control" })
-                </div>
-            </div>*@
+                    <label for="pe_Naturaleza">Foto*</label>
+                    <div class="form-group">
+                        @Html.EditorFor(q => q.em_foto, new { @class = "form-control" })
+                    </div>
+                </div>*@
 
             <div class="col-md-3">
                 <div class="form-group">

@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script>
     $(function () {
         CargarPuntosDeVenta();
@@ -167,7 +168,7 @@
         if (Number($("#Secuencia").text()) > 0) {
             var datos = {
                 Secuencia: $("#Secuencia").text(),
-                IdTransaccionSession: $("#IdTransaccionSession").val(),                
+                IdTransaccionSession: $("#IdTransaccionSession").val(),
                 IdProducto: ID
             }
             $.ajax({
@@ -184,7 +185,7 @@
                 },
                 error: function (error) {
                 }
-            });                
+            });
         } else {
             $.ajax({
                 url: '@Url.Action("ChangeValuePartial", "Factura",new { Area = "Facturacion"})',
@@ -453,7 +454,7 @@
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.vt_tipoDoc)
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
-    
+
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -582,7 +583,7 @@
                     @Html.Partial("_CmbCliente_Factura", Model)
                     @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
                 </div>
-            </div>           
+            </div>
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdClienteContacto">Contacto</label>

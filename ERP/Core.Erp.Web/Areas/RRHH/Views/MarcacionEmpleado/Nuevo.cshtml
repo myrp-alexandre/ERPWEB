@@ -8,11 +8,10 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "MarcacionEmpleado", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-   
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -110,6 +109,6 @@
             autoclose: true
         })
 
-      
+
     })
 </script>

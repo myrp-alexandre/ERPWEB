@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "Proforma", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
@@ -63,7 +64,7 @@
                     <div class="col-md-12">
                         <button type="button" class="btn btn-primary" onclick="ModificarLinea();">Aceptar</button>
                     </div>
-                </div>               
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
@@ -111,7 +112,7 @@
                     @Html.Partial("_CmbCliente_Proforma", Model)
                     @Html.ValidationMessageFor(q => q.IdEntidad, "", new { @class = "text-danger" })
                 </div>
-            </div>            
+            </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="pf_atencion_a">Atención a</label>
@@ -241,7 +242,7 @@
         if (Number($("#Secuencia").text()) > 0) {
             var datos = {
                 Secuencia: $("#Secuencia").text(),
-                IdTransaccionSession: $("#IdTransaccionSession").val(),                
+                IdTransaccionSession: $("#IdTransaccionSession").val(),
                 IdProducto: ID
             }
             $.ajax({
@@ -258,7 +259,7 @@
                 },
                 error: function (error) {
                 }
-            });                
+            });
         } else {
             $.ajax({
                 url: '@Url.Action("ChangeValuePartial", "Proforma",new { Area = "Facturacion"})',

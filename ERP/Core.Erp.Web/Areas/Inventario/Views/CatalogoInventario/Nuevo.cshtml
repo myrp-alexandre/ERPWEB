@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "CatalogoInventario", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
@@ -87,11 +88,11 @@
         </div>
     </div>
 
-            <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <a class="btn btn-default" href="@Url.Action("Index","CatalogoInventario", new { IdCatalogo_tipo = ViewBag.IdCatalogo_tipo, Area = "Inventario"  },null)">Cancelar</a>
-            </div>
-            @section Scripts {
-                @Scripts.Render("~/bundles/jqueryval")
-            }
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","CatalogoInventario", new { IdCatalogo_tipo = ViewBag.IdCatalogo_tipo, Area = "Inventario"  },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }

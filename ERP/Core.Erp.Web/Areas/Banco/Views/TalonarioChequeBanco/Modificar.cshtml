@@ -8,10 +8,10 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "TalonarioChequeBanco", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa, new { @id="IdEmpresa"} )
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdBanco)
     @Html.HiddenFor(q => q.Num_cheque)
     <div class="row">
@@ -31,7 +31,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="Estado_bool">Número de cheque*</label>
-                    @Html.TextBoxFor(q => q.Num_cheque, new { @class = "form-control", @id = "Num_cheque" , @readonly="readonly"})
+                    @Html.TextBoxFor(q => q.Num_cheque, new { @class = "form-control", @id = "Num_cheque", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.Num_cheque, "", new { @class = "text-danger" })
                 </div>
             </div>

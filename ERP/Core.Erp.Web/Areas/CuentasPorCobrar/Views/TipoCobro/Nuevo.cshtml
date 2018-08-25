@@ -7,7 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "TipoCobro", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     if (ViewBag.mensaje != null)

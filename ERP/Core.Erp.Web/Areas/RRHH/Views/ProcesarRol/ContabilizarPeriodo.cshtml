@@ -15,6 +15,7 @@
     }
 
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("ContabilizarPeriodo", "ProcesarRol", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdNomina_Tipo);
@@ -61,44 +62,44 @@
 
     <div class="row">
         <div class="col-md-12">
-                <div class="form-group">
+            <div class="form-group">
                 <label for="FechaInicio">Detalle diarios contables</label>
-                    <div id="Tabs" role="tabpanel">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="active">
-                                <a href="#tbl_diario" aria-controls="informacion" role="tab" data-toggle="tab">Diario contable de sueldo por pagar</a>
-                            </li>
-                            <li>
-                                <a href="#tbl_provisiones" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Diario contable de provisiones</a>
-                            </li>                            
-                        </ul>
-                        <!-- Tab panes -->
-                        <div class="tab-content" style="padding-top: 20px">
+                <div id="Tabs" role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active">
+                            <a href="#tbl_diario" aria-controls="informacion" role="tab" data-toggle="tab">Diario contable de sueldo por pagar</a>
+                        </li>
+                        <li>
+                            <a href="#tbl_provisiones" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Diario contable de provisiones</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content" style="padding-top: 20px">
 
-                            <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tbl_diario">
-                                    @Html.Action("GridViewPartial_sueldo_x_pagar")
-                           </div>
-                            <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tbl_provisiones">
-
-                                @Html.Action("GridViewPartial_provisiones")
-
-
-                            </div>
+                        <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tbl_diario">
+                            @Html.Action("GridViewPartial_sueldo_x_pagar")
                         </div>
-                        
+                        <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tbl_provisiones">
 
+                            @Html.Action("GridViewPartial_provisiones")
+
+
+                        </div>
                     </div>
+
+
                 </div>
             </div>
+        </div>
     </div>
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Contabilizar</button>
         <a class="btn btn-default" href="@Url.Action("Index","ProcesarRol",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
-            @section Scripts {
-                @Scripts.Render("~/bundles/jqueryval")
-            }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }
 
 

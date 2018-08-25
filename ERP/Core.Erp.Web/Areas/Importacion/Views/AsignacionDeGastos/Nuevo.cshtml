@@ -15,10 +15,11 @@
         </div>
     }
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "AsignacionDeGastos", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdTransaccionSession, new {@id= "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdOrdenCompra_ext)
     @Html.HiddenFor(q => q.IdEmpresa)
     <div class="row">
@@ -95,7 +96,7 @@
         var datos = {
             secuencia: ID,
             IdTransaccionSession: $("#IdTransaccionSession").val()
-            
+
         }
         $.ajax({
             type: 'POST',

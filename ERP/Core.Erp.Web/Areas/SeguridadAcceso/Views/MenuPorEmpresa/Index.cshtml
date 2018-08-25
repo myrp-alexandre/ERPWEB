@@ -9,7 +9,7 @@
 }
 <script>
     var selectedIDs;
-    
+
     function OnBeginCallback(s, e) {
         //Pass all selected keys to GridView callback action
         e.customArgs["selectedIDs"] = selectedIDs;
@@ -45,25 +45,27 @@
         $("#btn_guardar").disabled = false;
     }
 </script>
-@using (Html.BeginForm("Index","MenuPorEmpresa",FormMethod.Post, new { @role = "form", @class = "form", @id = "myform"}))
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+
+@using (Html.BeginForm("Index", "MenuPorEmpresa", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
 {
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdEmpresa">Empresa</label>
-                    @Html.DropDownListFor(q=>q.IdEmpresa, new SelectList(ViewBag.lst_empresa,"IdEmpresa", "em_nombre"),new { @class = "form-control", @id = "IdEmpresa"})
+                    @Html.DropDownListFor(q => q.IdEmpresa, new SelectList(ViewBag.lst_empresa, "IdEmpresa", "em_nombre"), new { @class = "form-control", @id = "IdEmpresa" })
                 </div>
             </div>
         </div>
     </div>
 
     <div class="box-footer">
-        <button type="submit" class="btn btn-default" id="btn_buscar">Buscar</button>        
+        <button type="submit" class="btn btn-default" id="btn_buscar">Buscar</button>
         <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardar();">Guardar</button>
     </div>
 
 
-    @Html.Action("TreeListPartial_menu_x_empresa",new { IdEmpresa = Model.IdEmpresa })
+    @Html.Action("TreeListPartial_menu_x_empresa", new { IdEmpresa = Model.IdEmpresa })
 
 }

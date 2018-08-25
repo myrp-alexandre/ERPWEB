@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Modificar", "PlanDeCuentas", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -48,7 +49,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdCtaCble">Código cuenta*</label>
-                    @Html.TextBoxFor(q => q.IdCtaCble, new { @class = "form-control", @id = "IdCtaCble", @readonly = "readonly"})
+                    @Html.TextBoxFor(q => q.IdCtaCble, new { @class = "form-control", @id = "IdCtaCble", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
                 </div>
             </div>

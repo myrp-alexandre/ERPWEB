@@ -8,9 +8,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "CatalogoAF", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
-   @Html.HiddenFor(q=>q.IdCatalogo)
+    @Html.HiddenFor(q => q.IdCatalogo)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -45,7 +46,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="ICatalogo">Código*</label>
-                    @Html.TextBoxFor(q => q.IdCatalogo, new { @class = "form-control", @readonly="readonly" })
+                    @Html.TextBoxFor(q => q.IdCatalogo, new { @class = "form-control", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.IdCatalogo, "", new { @class = "text-danger" })
                 </div>
             </div>

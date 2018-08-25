@@ -16,6 +16,7 @@
         </div>
     }
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "OrdenCompraExterior", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdOrdenCompra_ext)
@@ -275,25 +276,24 @@
 
 <script>
 
-    $(function () {
+        $(function () {
 
 
-        $('#fecha_oc').datepicker({
-            autoclose: true
-        });
-        $('#fecha_llegada').datepicker({
-            autoclose: true
-        });
+            $('#fecha_oc').datepicker({
+                autoclose: true
+            });
+            $('#fecha_llegada').datepicker({
+                autoclose: true
+            });
 
-        $('#fecha_embarque').datepicker({
-            autoclose: true
-        });
-        $('#fecha_desanualizacion').datepicker({
-            autoclose: true
-        });
+            $('#fecha_embarque').datepicker({
+                autoclose: true
+            });
+            $('#fecha_desanualizacion').datepicker({
+                autoclose: tru   });
 
-        
-    });
+
+        });
 
 
 </script>

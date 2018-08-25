@@ -7,9 +7,10 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Anular", "DepartamentoPorArea", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-   @Html.HiddenFor(q => q.IdDivision)
+    @Html.HiddenFor(q => q.IdDivision)
     @Html.HiddenFor(q => q.IdArea)
     @Html.HiddenFor(q => q.Secuencia)
     @Html.HiddenFor(q => q.IdDepartamento)

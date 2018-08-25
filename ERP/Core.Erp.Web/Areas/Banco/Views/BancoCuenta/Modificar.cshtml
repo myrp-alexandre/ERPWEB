@@ -7,10 +7,11 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Modificar", "BancoCuenta", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
-    @Html.HiddenFor(q=>q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdBanco)
     @Html.HiddenFor(q => q.IdBanco_Financiero)
 
@@ -48,7 +49,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="ba_Tipo">Tipo de cuenta*</label>
-                    @Html.DropDownListFor(q => q.ba_Tipo, new SelectList(ViewBag.lst_cta, "Key", "Value"), new { @class = "form-control", @id = "ba_Tipo", @readonly="readonly" })
+                    @Html.DropDownListFor(q => q.ba_Tipo, new SelectList(ViewBag.lst_cta, "Key", "Value"), new { @class = "form-control", @id = "ba_Tipo", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.ba_Tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -123,7 +124,7 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","BancoCuenta", new { Area = "Banco"  },null)">Cancelar</a>
     </div>
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }

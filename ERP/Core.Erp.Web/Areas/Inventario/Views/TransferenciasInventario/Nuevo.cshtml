@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "TransferenciasInventario", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -62,7 +63,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdMovi_inven_tipo_SucuOrig">Tipo movimiento origen*</label>
-                    @Html.DropDownListFor(q => q.IdMovi_inven_tipo_SucuOrig, new SelectList(ViewBag.lst_tipo, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control", @id = "IdMovi_inven_tipo"  })
+                    @Html.DropDownListFor(q => q.IdMovi_inven_tipo_SucuOrig, new SelectList(ViewBag.lst_tipo, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control", @id = "IdMovi_inven_tipo" })
                     @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_SucuOrig, "", new { @class = "text-danger" })
                 </div>
             </div>

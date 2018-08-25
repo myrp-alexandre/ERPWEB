@@ -7,10 +7,11 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Modificar","Menu",FormMethod.Post,new { @role = "form", @class = "form"}))
+@using (Html.BeginForm("Modificar", "Menu", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
-    @Html.HiddenFor(q=> q.IdMenu)
+    @Html.HiddenFor(q => q.IdMenu)
 
     <div class="row">
         <div class="col-md-12">
@@ -29,8 +30,8 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="DescripcionMenu">Descripción*</label>
-                    @Html.TextBoxFor(q=> q.DescripcionMenu, new { @class = "form-control"})
-                    @Html.ValidationMessageFor(q=> q.DescripcionMenu, "", new { @class = "text-danger"})
+                    @Html.TextBoxFor(q => q.DescripcionMenu, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.DescripcionMenu, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -41,7 +42,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="PosicionMenu">Posición</label>
-                    @Html.TextBoxFor(q=> q.PosicionMenu, new { @class = "form-control"})
+                    @Html.TextBoxFor(q => q.PosicionMenu, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.PosicionMenu, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -66,7 +67,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="web_nom_Area">Area</label>
-                    @Html.TextBoxFor(q=> q.web_nom_Area, new { @class = "form-control"})
+                    @Html.TextBoxFor(q => q.web_nom_Area, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.web_nom_Area, "", new { @class = "text-danger" })
                 </div>
             </div>

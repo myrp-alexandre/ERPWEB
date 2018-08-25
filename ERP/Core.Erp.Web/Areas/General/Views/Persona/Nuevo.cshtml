@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "Persona", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -26,7 +27,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="pe_Naturaleza">Naturaleza*</label>
-                    @Html.DropDownListFor(q => q.pe_Naturaleza, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control"})
+                    @Html.DropDownListFor(q => q.pe_Naturaleza, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.pe_Naturaleza, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -93,117 +94,117 @@
         </div>
     </div>
 
-    
-        <div id="Tabs" role="tabpanel">
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="active">
-                    <a href="#tb_general" aria-controls="informacion" role="tab" data-toggle="tab">Datos generales</a>
-                </li>
-                <li>
-                    <a href="#tb_otros" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Otros</a>
-                </li>
-            </ul>
-            <!-- Tab panes -->
-            <div class="tab-content" style="padding-top: 20px">
 
-                <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tb_general">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="pe_direccion">Dirección</label>
-                                @Html.TextAreaFor(q => q.pe_direccion, new { @class = "form-control", @rows = "2" })
-                                @Html.ValidationMessageFor(q => q.pe_direccion, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="pe_telfono_Contacto">Teléfono contacto</label>
-                                @Html.TextBoxFor(q => q.pe_telfono_Contacto, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.pe_telfono_Contacto, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+    <div id="Tabs" role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tb_general" aria-controls="informacion" role="tab" data-toggle="tab">Datos generales</a>
+            </li>
+            <li>
+                <a href="#tb_otros" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Otros</a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content" style="padding-top: 20px">
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="pe_celular">Celular</label>
-                                @Html.TextBoxFor(q => q.pe_celular, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.pe_celular, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="pe_correo">Correo</label>
-                                @Html.TextBoxFor(q => q.pe_correo, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.pe_correo, "", new { @class = "text-danger" })
-                            </div>
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tb_general">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="pe_direccion">Dirección</label>
+                            @Html.TextAreaFor(q => q.pe_direccion, new { @class = "form-control", @rows = "2" })
+                            @Html.ValidationMessageFor(q => q.pe_direccion, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
-
-                <div role="tabpanel" class="tab-pane" id="tb_otros">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="pe_sexo">Sexo</label>
-                                @Html.DropDownListFor(q => q.pe_sexo, new SelectList(ViewBag.lst_sexo, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.pe_sexo, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="IdEstadoCivil">Estado civil</label>
-                                @Html.DropDownListFor(q => q.IdEstadoCivil, new SelectList(ViewBag.lst_estado_civil, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.IdEstadoCivil, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="">Fecha de nacimiento</label>
-                                <div class="input-group date">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    @Html.TextBoxFor(q => q.pe_fechaNacimiento, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "pe_fechaNacimiento" })
-                                    @Html.ValidationMessageFor(q => q.pe_fechaNacimiento, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="pe_telfono_Contacto">Teléfono contacto</label>
+                            @Html.TextBoxFor(q => q.pe_telfono_Contacto, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.pe_telfono_Contacto, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="IdEstadoCivil">Tipo de cuenta</label>
-                                @Html.DropDownListFor(q => q.IdTipoCta_acreditacion_cat, new SelectList(ViewBag.lst_tipo_cta, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.IdTipoCta_acreditacion_cat, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="num_cta_acreditacion">Número de cuenta</label>
-                                @Html.TextBoxFor(q => q.num_cta_acreditacion, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.num_cta_acreditacion, "", new { @class = "text-danger" })
-                            </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="pe_celular">Celular</label>
+                            @Html.TextBoxFor(q => q.pe_celular, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.pe_celular, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
-
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="pe_correo">Correo</label>
+                            @Html.TextBoxFor(q => q.pe_correo, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.pe_correo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a class="btn btn-default" href="@Url.Action("Index", "Persona", new { Area ="General" }, null)">Cancelar</a>
-        </div>
+            <div role="tabpanel" class="tab-pane" id="tb_otros">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="pe_sexo">Sexo</label>
+                            @Html.DropDownListFor(q => q.pe_sexo, new SelectList(ViewBag.lst_sexo, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.pe_sexo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="IdEstadoCivil">Estado civil</label>
+                            @Html.DropDownListFor(q => q.IdEstadoCivil, new SelectList(ViewBag.lst_estado_civil, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.IdEstadoCivil, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Fecha de nacimiento</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.TextBoxFor(q => q.pe_fechaNacimiento, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "pe_fechaNacimiento" })
+                                @Html.ValidationMessageFor(q => q.pe_fechaNacimiento, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="IdEstadoCivil">Tipo de cuenta</label>
+                            @Html.DropDownListFor(q => q.IdTipoCta_acreditacion_cat, new SelectList(ViewBag.lst_tipo_cta, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.IdTipoCta_acreditacion_cat, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="num_cta_acreditacion">Número de cuenta</label>
+                            @Html.TextBoxFor(q => q.num_cta_acreditacion, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.num_cta_acreditacion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "Persona", new { Area ="General" }, null)">Cancelar</a>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 
 }
 

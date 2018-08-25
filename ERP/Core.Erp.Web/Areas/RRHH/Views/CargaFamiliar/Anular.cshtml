@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Anular", "CargaFamiliar", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(m => m.IdCargaFamiliar);
@@ -89,7 +90,7 @@
 
 <script>
 
-    
+
     $(function () {
 
         $('#pe_fechaNacimiento').datepicker({

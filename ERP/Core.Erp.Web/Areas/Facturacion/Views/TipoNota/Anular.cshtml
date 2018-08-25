@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Anular", "TipoNota", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -75,7 +76,7 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
-    <script>
+<script>
     $(function () {
         ocultar_mostrar_div_movimiento();
 
@@ -89,11 +90,10 @@
 
     function ocultar_mostrar_div_movimiento() {
         var tipo = ($("#Tipo").val());
-        if (tipo == "D")
-        {
+        if (tipo == "D") {
             $("#div_movimiento").hide();
         } else {
             $("#div_movimiento").show();
         }
     }
-    </script>
+</script>
