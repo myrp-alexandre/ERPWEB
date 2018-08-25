@@ -3,10 +3,22 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_documentos_pendientes_enviar_sri";
-        settings.CallbackRouteValues = new { Controller = "Pais", Action = "GridViewPartial_documentos_pendientes_enviar_sri", new { Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin } };
+        settings.CallbackRouteValues = new { Controller = "Pais", Action = "GridViewPartial_documentos_pendientes_enviar_sri"};
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdPais";
+        //Configuración checkbox
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowSelectCheckbox = true;
+        settings.CommandColumn.SelectAllCheckboxMode = GridViewSelectAllCheckBoxMode.AllPages;
 
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "*";
+            column.FieldName = "seleccionado";
+            column.ColumnType = MVCxGridViewColumnType.CheckBox;
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(2);
+            column.Visible = false;
+        });
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
@@ -51,8 +63,9 @@
         settings.Columns.Add("vt_fecha", "Fecha emisión").Width = Unit.Percentage(35);
         settings.Columns.Add("pe_nombreCompleto", "Beneficiario").Width = Unit.Percentage(35);
         settings.Columns.Add("vt_Observacion", "Observación").Width = Unit.Percentage(10);
-        
 
+        settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
+        settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
     });
 }
 @grid.Bind(Model).GetHtml()
