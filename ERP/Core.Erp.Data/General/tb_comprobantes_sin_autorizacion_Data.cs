@@ -9,16 +9,23 @@ namespace Core.Erp.Data.General
 {
    public class tb_comprobantes_sin_autorizacion_Data
     {
-        public List<tb_comprobantes_sin_autorizacion_Info> get_list(int IdEmpresa, string Tipo_doc)
+        public List<tb_comprobantes_sin_autorizacion_Info> get_list(int IdEmpresa, string Tipo_doc, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
-            { int sec = 0;
+            {
+                Fecha_fin = Convert.ToDateTime(Fecha_fin.ToShortDateString());
+                Fecha_ini = Convert.ToDateTime(Fecha_ini.ToShortDateString());
+
+                int sec = 0;
                 List<tb_comprobantes_sin_autorizacion_Info> Lista;
                 using (Entities_general Context=new Entities_general())
                 {
                    
                             if (Tipo_doc=="")
                                 Lista = (from q in Context.vwtb_comprobantes_no_autorizados
+                                         where q.IdEmpresa==IdEmpresa
+                                         && q.vt_fecha>=Fecha_ini
+                                         && q.vt_fecha<=Fecha_fin
                                          select new tb_comprobantes_sin_autorizacion_Info
                                          {
                                              IdEmpresa = q.IdEmpresa,
@@ -36,6 +43,8 @@ namespace Core.Erp.Data.General
                             else
                                 Lista = (from q in Context.vwtb_comprobantes_no_autorizados
                                          where q.Tipo_documento == Tipo_doc
+                                         where q.IdEmpresa == IdEmpresa
+                                         && q.vt_fecha >= Fecha_ini
                                          select new tb_comprobantes_sin_autorizacion_Info
                                          {
                                              IdEmpresa = q.IdEmpresa,
@@ -62,7 +71,6 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
-
         public bool modificarEstado(tb_comprobantes_sin_autorizacion_Info info)
         {
             try

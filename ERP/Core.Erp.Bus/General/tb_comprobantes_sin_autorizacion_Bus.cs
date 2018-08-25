@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.General
    public class tb_comprobantes_sin_autorizacion_Bus
     {
         tb_comprobantes_sin_autorizacion_Data odata = new tb_comprobantes_sin_autorizacion_Data();
-        public List<tb_comprobantes_sin_autorizacion_Info> get_list(int IdEmpresa, string Tipo_doc)
+        public List<tb_comprobantes_sin_autorizacion_Info> get_list(int IdEmpresa, string Tipo_doc, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
             {
-                return odata.get_list(IdEmpresa, Tipo_doc);
+                return odata.get_list(IdEmpresa, Tipo_doc, Fecha_ini, Fecha_fin);
 
             }
             catch (Exception)
