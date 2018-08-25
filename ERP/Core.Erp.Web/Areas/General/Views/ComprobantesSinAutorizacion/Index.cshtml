@@ -1,14 +1,31 @@
 ﻿@model Core.Erp.Info.Helps.cl_filtros_Info
 @{
-    ViewBag.Title = "Documentos pendientes deenviar al SRI";
+    ViewBag.Title = "Documentos pendientes de enviar al SRI";
     //if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     //{
     //    Response.Redirect("~/Account/Login");
     //}
     Layout = "~/Views/Layout/_LayoutConsulta.cshtml";
 }
-<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
+<script type="text/javascript">
+   
+     var selectedIDs;
+    function OnBeginCallback(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDs"] = selectedIDs;
+    }
+    function OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("secuencia", GetSelectedFieldValuesCallback);
+    }
+    function GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedIDs = values.join(',');
+    }
+
+   
+
+</script>
 @using (Html.BeginForm())
 {
     <div class="box collapsed-box">
@@ -16,7 +33,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-primary">Aplicar filtros</button>
-                        <button type="button" class="btn btn-primary" id="btn_guardar">Aprobar</button>
+                        <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardar_aprobacion();">Aprobar</button>
                 </div>
             </div>
             <div class="box-tools pull-right">
@@ -99,20 +116,9 @@
         })
     });
    
-     var selectedIDs;
-    function OnBeginCallback(s, e) {
-        //Pass all selected keys to GridView callback action
-        e.customArgs["selectedIDs"] = selectedIDs;
-    }
-    function OnSelectionChanged(s, e) {
-        s.GetSelectedFieldValues("IdCbteCble_Ogiro", GetSelectedFieldValuesCallback);
-    }
-    function GetSelectedFieldValuesCallback(values) {
-        //Capture all selected keys
-        selectedIDs = values.join(',');
-    }
 
-    function guardar() {
+
+    function guardar_aprobacion() {
         var datos = {
             Ids: selectedIDs
         }
@@ -120,31 +126,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("guardar_aprobacion", "Deudas", new { Area = "Generar" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                $("#myform").submit();
-                GridViewPartial_aprobacion_facturas.PerformCallback();
-            },
-            error: function (error) {
-            }
-        });
-        $("#btn_guardar").disabled = false;
-    }
-
-    function seleccionar_aprobacion() {
-        var datos = {
-            Ids: selectedIDs
-        }
-        $("#btn_guardar").disabled = true;
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("seleccionar_aprobacion", "ComprobantesSinAutorizacion", new { Area = "General" })',
+            url: '@Url.Action("guardar_aprobacion", "ComprobantesSinAutorizacion", new { Area = "General" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -153,8 +135,7 @@
             success: function (data) {
 
                 $("#myform").submit();
-                GridViewPartial_aprobacion_facturas.PerformCallback();
-                $("#fac_con_saldo").modal("hide");
+                GridViewPartial_documentos_pendientes_enviar_sri.PerformCallback();
 
             },
             error: function (error) {

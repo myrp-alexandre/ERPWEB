@@ -19,6 +19,7 @@ namespace Core.Erp.Info.General
         public string pe_nombreCompleto { get; set; }
         public string vt_Observacion { get; set; }
 
+        public bool seleccionado { get; set; }
 
         public int secuencia { get; set; }
     }
