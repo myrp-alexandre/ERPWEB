@@ -29,6 +29,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         string mensaje = string.Empty;
         in_Producto_List List_producto = new in_Producto_List();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
+        in_ProductoTipo_Bus bus_producto_tipo = new in_ProductoTipo_Bus();
         tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
         fa_cliente_contactos_Bus bus_contacto = new fa_cliente_contactos_Bus();
         fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
@@ -170,12 +171,29 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 {
                     msg = "Existe una factura con el talonario: " + i_validar.vt_serie1 + "-" + i_validar.vt_serie2 + "-" + i_validar.vt_NumFactura + " utilizado.";
                     return false;
-                }
+                }                
             }
 
             if (!bus_cliente.ValidarCupoCreditoCliente(i_validar.IdEmpresa, i_validar.IdSucursal, i_validar.IdBodega, i_validar.IdCbteVta, "FACT", i_validar.IdCliente, i_validar.lst_det.Sum(q=>q.vt_total),  ref mensaje))
             {
                 msg = mensaje;
+                return false;
+            }
+
+            var lst_validar = i_validar.lst_det.Select(q => new in_Producto_Stock_Info
+            {
+                IdEmpresa = i_validar.IdEmpresa,
+                IdSucursal = i_validar.IdSucursal,
+                IdBodega = i_validar.IdBodega,
+                IdProducto = q.IdProducto,
+                pr_descripcion = q.pr_descripcion,
+                Cantidad = q.vt_cantidad,
+                tp_manejaInven = q.tp_manejaInven,
+                CantidadAnterior = q.CantidadAnterior,
+                SeDestribuye = (bool)q.se_distribuye
+            }).ToList();
+            if (!bus_producto.validar_stock(lst_validar, ref msg))
+            {
                 return false;
             }
 
@@ -574,12 +592,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
-            if (info_det != null && info_det.IdProducto != 0 && IdCliente > 0)
+            if (info_det != null && info_det.IdProducto != 0)
             {
                 var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
                 if (producto != null)
                 {
                     info_det.pr_descripcion = producto.pr_descripcion_combo;
+                    info_det.se_distribuye = producto.se_distribuye;
+                    info_det.tp_manejaInven = bus_producto_tipo.get_info(IdEmpresa, producto.IdProductoTipo).tp_ManejaInven;
                     var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
                     if (cliente != null)
                     {
@@ -616,12 +636,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
-            if (info_det != null && info_det.IdProducto != 0 && IdCliente > 0)
+            if (info_det != null && info_det.IdProducto != 0)
             {
                 var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
                 if (producto != null)
                 {
                     info_det.pr_descripcion = producto.pr_descripcion_combo;
+                    info_det.tp_manejaInven = bus_producto_tipo.get_info(IdEmpresa, producto.IdProductoTipo).tp_ManejaInven;
+                    info_det.se_distribuye = producto.se_distribuye;
                     var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
                     if (cliente != null)
                     {
@@ -738,6 +760,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 info_det.vt_por_iva = impuesto.porcentaje;
             info_det.vt_iva = Math.Round(info_det.vt_Subtotal * (info_det.vt_por_iva / 100), 2, MidpointRounding.AwayFromZero);
             info_det.vt_total = Math.Round(info_det.vt_Subtotal + info_det.vt_iva, 2, MidpointRounding.AwayFromZero);
+            
             list.Add(info_det);
         }
 
@@ -752,6 +775,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             edited_info.vt_DescUnitario = Math.Round(info_det.vt_Precio * (info_det.vt_PorDescUnitario / 100), 2, MidpointRounding.AwayFromZero);
             edited_info.vt_PrecioFinal = Math.Round(info_det.vt_Precio - edited_info.vt_DescUnitario, 2, MidpointRounding.AwayFromZero);
             edited_info.vt_Subtotal = Math.Round(info_det.vt_cantidad * edited_info.vt_PrecioFinal, 2, MidpointRounding.AwayFromZero);
+            edited_info.tp_manejaInven = info_det.tp_manejaInven;
+            edited_info.se_distribuye = info_det.se_distribuye;
             if (!string.IsNullOrEmpty(info_det.IdCod_Impuesto_Iva) && info_det.IdCod_Impuesto_Iva != edited_info.IdCod_Impuesto_Iva)
             {
                 var impuesto = bus_impuesto.get_info(info_det.IdCod_Impuesto_Iva);

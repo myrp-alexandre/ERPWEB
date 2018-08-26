@@ -47,6 +47,9 @@ namespace Core.Erp.Info.Facturacion
         public string lote_num_lote { get; set; }
         public DateTime? lote_fecha_vcto { get; set; }
         public string secuencial { get; set; }
+        public string tp_manejaInven { get; set; }
+        public double CantidadAnterior { get; set; }
+        public bool? se_distribuye { get; set; }
         #endregion
 
     }

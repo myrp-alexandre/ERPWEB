@@ -944,5 +944,57 @@ namespace Core.Erp.Data.Inventario
             }
         }
 
+        public bool validar_stock(List<in_Producto_Stock_Info> Lista, ref string mensaje)
+        {
+            try
+            {
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    foreach (var item in Lista)
+                    {
+                        if (!item.SeDestribuye)
+                        {
+                            var stock = (from q in Context.vwin_producto_x_tb_bodega_stock_x_lote
+                                         where q.IdEmpresa == item.IdEmpresa && q.IdSucursal == item.IdSucursal
+                                         && q.IdBodega == item.IdBodega && q.IdProducto == item.IdProducto
+                                         select q).FirstOrDefault();
+                            if (stock == null)
+                            {
+                                if (item.tp_manejaInven == "S")
+                                {
+                                    var stock1 = (from q in Context.vwin_Producto_Stock
+                                                  where q.IdEmpresa == item.IdEmpresa && q.IdSucursal == item.IdSucursal
+                                                 && q.IdBodega == item.IdBodega && q.IdProducto == item.IdProducto
+                                                  select q).FirstOrDefault();
+                                    if (stock1 == null)
+                                    {
+                                        mensaje = "No existe stock para el producto: " + item.pr_descripcion;
+                                        return false;
+                                    }
+                                    else
+                                    if ((stock1.Stock + item.CantidadAnterior) < item.Cantidad)
+                                    {
+                                        mensaje = "El stock para el producto: " + item.pr_descripcion + " es: " + stock1.Stock + " e intenta egresar: " + item.Cantidad;
+                                        return false;
+                                    }
+                                }
+                            }
+                            else
+                            if ((stock.stock + item.CantidadAnterior) < item.Cantidad)
+                            {
+                                mensaje = "El stock para el producto: " + item.pr_descripcion + " es: " + stock.stock + " e intenta egresar: " + item.Cantidad;
+                                return false;
+                            }
+                        }                        
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

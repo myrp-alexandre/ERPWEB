@@ -100,4 +100,17 @@ namespace Core.Erp.Info.Inventario
         public int IdBodega { get; set; }
         #endregion
     }
+
+    public class in_Producto_Stock_Info
+    {
+        public int IdEmpresa { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdBodega { get; set; }
+        public decimal IdProducto { get; set; }
+        public string pr_descripcion { get; set; }
+        public double Cantidad { get; set; }
+        public string tp_manejaInven { get; set; }
+        public double CantidadAnterior { get; set; }
+        public bool SeDestribuye { get; set; }
+    }
 }

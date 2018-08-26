@@ -97,6 +97,7 @@
         <AssociationConnector Association="Model_inventario.FK_in_UnidadMedida_Equiv_conversion_in_UnidadMedida" ManuallyRouted="false" />
         <AssociationConnector Association="Model_inventario.FK_in_UnidadMedida_Equiv_conversion_in_UnidadMedida1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Model_inventario.vwin_producto_x_tb_bodega_stock_x_lote" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_inventario.vwin_Producto_Stock" Width="1.5" PointX="21.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

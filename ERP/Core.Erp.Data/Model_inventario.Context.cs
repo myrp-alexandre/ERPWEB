@@ -14,7 +14,7 @@ namespace Core.Erp.Data
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    
+
     public partial class Entities_inventario : DbContext
     {
         public Entities_inventario()
@@ -65,6 +65,7 @@ namespace Core.Erp.Data
         public DbSet<vwin_producto_hijo_combo> vwin_producto_hijo_combo { get; set; }
         public DbSet<vwin_producto_padre_combo> vwin_producto_padre_combo { get; set; }
         public DbSet<vwin_producto_x_tb_bodega_stock_x_lote> vwin_producto_x_tb_bodega_stock_x_lote { get; set; }
+        public DbSet<vwin_Producto_Stock> vwin_Producto_Stock { get; set; }
     
         public virtual ObjectResult<spSys_inv_Reversar_aprobacion_Result> spSys_inv_Reversar_aprobacion(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idMovi_inven_tipo, Nullable<decimal> idNumMovi, Nullable<bool> borar)
         {

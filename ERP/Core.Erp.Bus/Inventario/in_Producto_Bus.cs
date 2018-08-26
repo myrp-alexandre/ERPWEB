@@ -175,5 +175,18 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
+
+        public bool validar_stock(List<in_Producto_Stock_Info> Lista, ref string mensaje)
+        {
+            try
+            {
+                return odata.validar_stock(Lista, ref mensaje);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
