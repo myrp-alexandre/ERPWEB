@@ -344,7 +344,7 @@
   <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Core.Erp.Data\Core.Erp.Data.csproj">
-      <Project>{1e3fe2a0-1589-485f-9f71-9bb6c9968673}</Project>
+      <Project>{a52f3b91-b460-4ffb-aa55-a667dc60db43}</Project>
       <Name>Core.Erp.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core.Erp.Info\Core.Erp.Info.csproj">

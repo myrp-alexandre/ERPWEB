@@ -4,43 +4,43 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f54e603d40784ea2a012d783e6a46862" Name="Diagram1" >
-        <EntityTypeShape EntityType="Model_contabilidad.ct_grupocble" Width="1.5" PointX="0.75" PointY="8.5" />
-        <EntityTypeShape EntityType="Model_contabilidad.ct_periodo" Width="1.5" PointX="3.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Model_contabilidad.ct_anio_fiscal" Width="1.5" PointX="1.375" PointY="12.125" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_periodo_ct_anio_fiscal" />
-        <EntityTypeShape EntityType="Model_contabilidad.ct_parametro" Width="1.5" PointX="5.625" PointY="3.75" />
-        <EntityTypeShape EntityType="Model_contabilidad.ct_anio_fiscal_x_cuenta_utilidad" Width="1.5" PointX="5.625" PointY="7.125" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" />
-        <EntityTypeShape EntityType="Model_contabilidad.ct_plancta" Width="1.5" PointX="3" PointY="16" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_plancta_ct_grupocble" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_plancta_ct_plancta" />
-        <EntityTypeShape EntityType="Model_contabilidad.ct_plancta_nivel" Width="1.5" PointX="0.75" PointY="17.125" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_plancta_ct_plancta_nivel" />
-        <EntityTypeShape EntityType="Model_contabilidad.ct_cbtecble" Width="1.5" PointX="8.625" PointY="4.875" />
-        <EntityTypeShape EntityType="Model_contabilidad.ct_cbtecble_det" Width="1.5" PointX="10.875" PointY="11.625" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_ct_anio_fiscal" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_ct_periodo" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_det_ct_cbtecble" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_det_ct_plancta" />
-        <EntityTypeShape EntityType="Model_contabilidad.ct_punto_cargo" Width="1.5" PointX="0.75" PointY="1" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_det_ct_punto_cargo" />
-        <EntityTypeShape EntityType="Model_contabilidad.ct_cbtecble_tipo" Width="1.5" PointX="3.375" PointY="4.75" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_ct_cbtecble_tipo" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo1" />
-        <EntityTypeShape EntityType="Model_contabilidad.ct_cbtecble_Reversado" Width="1.5" PointX="10.875" PointY="6.375" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble1" />
-        <EntityTypeShape EntityType="Model_contabilidad.vwct_cbtecble_con_ctacble_acreedora" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="Model_contabilidad.ATS_compras" Width="1.5" PointX="5.375" PointY="11.75" />
-        <EntityTypeShape EntityType="Model_contabilidad.ATS_comprobantes_anulados" Width="1.5" PointX="8.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Model_contabilidad.ATS_ventas" Width="1.5" PointX="13.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Model_contabilidad.ATS_exportaciones" Width="1.5" PointX="13.375" PointY="6.75" />
-        <EntityTypeShape EntityType="Model_contabilidad.ATS_retenciones" Width="1.5" PointX="7.375" PointY="11.75" />
-        </Diagram>
+      <Diagram DiagramId="88d84dbdfe4b4df5b2a7f9d3b97864ff" Name="Diagram1">
+        <EntityTypeShape EntityType="Model_contabilidad.ct_anio_fiscal" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_anio_fiscal_x_cuenta_utilidad" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_cbtecble" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_cbtecble_det" Width="1.5" PointX="7.5" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_cbtecble_Reversado" Width="1.5" PointX="7.5" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_cbtecble_tipo" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_grupocble" Width="1.5" PointX="1.5" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_parametro" Width="1.5" PointX="5.25" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_periodo" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_plancta" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_plancta_nivel" Width="1.5" PointX="1.5" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_punto_cargo" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_contabilidad.ATS_compras" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_contabilidad.ATS_comprobantes_anulados" Width="1.5" PointX="2.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_contabilidad.ATS_exportaciones" Width="1.5" PointX="4.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_contabilidad.ATS_retenciones" Width="1.5" PointX="9.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_contabilidad.ATS_ventas" Width="1.5" PointX="9.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_contabilidad.vwct_cbtecble_con_ctacble_acreedora" Width="1.5" PointX="11.75" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_ct_anio_fiscal" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_periodo_ct_anio_fiscal" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_ct_cbtecble_tipo" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_ct_periodo" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_det_ct_cbtecble" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_det_ct_plancta" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_det_ct_punto_cargo" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_plancta_ct_grupocble" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_plancta_ct_plancta" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_plancta_ct_plancta_nivel" ManuallyRouted="false" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

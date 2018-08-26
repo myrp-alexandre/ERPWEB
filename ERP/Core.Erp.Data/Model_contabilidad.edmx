@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model_contabilidad.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model_contabilidad.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ct_anio_fiscal">
           <Key>
             <PropertyRef Name="IdanioFiscal" />
@@ -621,11 +621,11 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           <EntitySet Name="ATS_ventas" EntityType="Self.ATS_ventas" Schema="EntidadRegulatoria" store:Type="Tables" />
           <EntitySet Name="vwct_cbtecble_con_ctacble_acreedora" EntityType="Self.vwct_cbtecble_con_ctacble_acreedora" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [vwct_cbtecble_con_ctacble_acreedora].[IdEmpresa] AS [IdEmpresa], 
-    [vwct_cbtecble_con_ctacble_acreedora].[IdTipoCbte] AS [IdTipoCbte], 
-    [vwct_cbtecble_con_ctacble_acreedora].[IdCbteCble] AS [IdCbteCble], 
-    [vwct_cbtecble_con_ctacble_acreedora].[IdCtaCble_Acreedora] AS [IdCtaCble_Acreedora]
-    FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_acreedora]</DefiningQuery>
+[vwct_cbtecble_con_ctacble_acreedora].[IdEmpresa] AS [IdEmpresa], 
+[vwct_cbtecble_con_ctacble_acreedora].[IdTipoCbte] AS [IdTipoCbte], 
+[vwct_cbtecble_con_ctacble_acreedora].[IdCbteCble] AS [IdCbteCble], 
+[vwct_cbtecble_con_ctacble_acreedora].[IdCtaCble_Acreedora] AS [IdCtaCble_Acreedora]
+FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_acreedora]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" Association="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal">
             <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
@@ -700,127 +700,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model_contabilidad" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="Entities_contabilidad" annotation:LazyLoadingEnabled="true" >
-          <EntitySet Name="ct_grupocble" EntityType="Model_contabilidad.ct_grupocble" />
-          <EntitySet Name="ct_periodo" EntityType="Model_contabilidad.ct_periodo" />
-          <EntitySet Name="ct_anio_fiscal" EntityType="Model_contabilidad.ct_anio_fiscal" />
-          <AssociationSet Name="FK_ct_periodo_ct_anio_fiscal" Association="Model_contabilidad.FK_ct_periodo_ct_anio_fiscal">
-            <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
-            <End Role="ct_periodo" EntitySet="ct_periodo" />
-          </AssociationSet>
-          <EntitySet Name="ct_parametro" EntityType="Model_contabilidad.ct_parametro" />
-          <EntitySet Name="ct_anio_fiscal_x_cuenta_utilidad" EntityType="Model_contabilidad.ct_anio_fiscal_x_cuenta_utilidad" />
-          <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" Association="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal">
-            <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
-            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
-          </AssociationSet>
-          <EntitySet Name="ct_plancta" EntityType="Model_contabilidad.ct_plancta" />
-          <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" Association="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta">
-            <End Role="ct_plancta" EntitySet="ct_plancta" />
-            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_plancta_ct_grupocble" Association="Model_contabilidad.FK_ct_plancta_ct_grupocble">
-            <End Role="ct_grupocble" EntitySet="ct_grupocble" />
-            <End Role="ct_plancta" EntitySet="ct_plancta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_plancta_ct_plancta" Association="Model_contabilidad.FK_ct_plancta_ct_plancta">
-            <End Role="ct_plancta" EntitySet="ct_plancta" />
-            <End Role="ct_plancta1" EntitySet="ct_plancta" />
-          </AssociationSet>
-          <EntitySet Name="ct_plancta_nivel" EntityType="Model_contabilidad.ct_plancta_nivel" />
-          <AssociationSet Name="FK_ct_plancta_ct_plancta_nivel" Association="Model_contabilidad.FK_ct_plancta_ct_plancta_nivel">
-            <End Role="ct_plancta_nivel" EntitySet="ct_plancta_nivel" />
-            <End Role="ct_plancta" EntitySet="ct_plancta" />
-          </AssociationSet>
-          <EntitySet Name="ct_cbtecble" EntityType="Model_contabilidad.ct_cbtecble" />
-          <EntitySet Name="ct_cbtecble_det" EntityType="Model_contabilidad.ct_cbtecble_det" />
-          <AssociationSet Name="FK_ct_cbtecble_ct_anio_fiscal" Association="Model_contabilidad.FK_ct_cbtecble_ct_anio_fiscal">
-            <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
-            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble" Association="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble">
-            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
-            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_cbtecble_ct_periodo" Association="Model_contabilidad.FK_ct_cbtecble_ct_periodo">
-            <End Role="ct_periodo" EntitySet="ct_periodo" />
-            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_cbtecble_det_ct_cbtecble" Association="Model_contabilidad.FK_ct_cbtecble_det_ct_cbtecble">
-            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
-            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_cbtecble_det_ct_plancta" Association="Model_contabilidad.FK_ct_cbtecble_det_ct_plancta">
-            <End Role="ct_plancta" EntitySet="ct_plancta" />
-            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
-          </AssociationSet>
-          <EntitySet Name="ct_punto_cargo" EntityType="Model_contabilidad.ct_punto_cargo" />
-          <AssociationSet Name="FK_ct_cbtecble_det_ct_punto_cargo" Association="Model_contabilidad.FK_ct_cbtecble_det_ct_punto_cargo">
-            <End Role="ct_punto_cargo" EntitySet="ct_punto_cargo" />
-            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
-          </AssociationSet>
-          <EntitySet Name="ct_cbtecble_tipo" EntityType="Model_contabilidad.ct_cbtecble_tipo" />
-          <AssociationSet Name="FK_ct_cbtecble_ct_cbtecble_tipo" Association="Model_contabilidad.FK_ct_cbtecble_ct_cbtecble_tipo">
-            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
-            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_parametro_ct_cbtecble_tipo" Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo">
-            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
-            <End Role="ct_parametro" EntitySet="ct_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_parametro_ct_cbtecble_tipo1" Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo1">
-            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
-            <End Role="ct_parametro" EntitySet="ct_parametro" />
-          </AssociationSet>
-          <EntitySet Name="ct_cbtecble_Reversado" EntityType="Model_contabilidad.ct_cbtecble_Reversado" />
-          <AssociationSet Name="FK_ct_cbtecble_Reversado_ct_cbtecble" Association="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble">
-            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
-            <End Role="ct_cbtecble_Reversado" EntitySet="ct_cbtecble_Reversado" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_cbtecble_Reversado_ct_cbtecble1" Association="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble1">
-            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
-            <End Role="ct_cbtecble_Reversado" EntitySet="ct_cbtecble_Reversado" />
-          </AssociationSet>
-          <EntitySet Name="vwct_cbtecble_con_ctacble_acreedora" EntityType="Model_contabilidad.vwct_cbtecble_con_ctacble_acreedora" />
-          <EntitySet Name="ATS_compras" EntityType="Model_contabilidad.ATS_compras" />
-          <EntitySet Name="ATS_comprobantes_anulados" EntityType="Model_contabilidad.ATS_comprobantes_anulados" />
-          <EntitySet Name="ATS_ventas" EntityType="Model_contabilidad.ATS_ventas" />
-          <EntitySet Name="ATS_exportaciones" EntityType="Model_contabilidad.ATS_exportaciones" />
-          <EntitySet Name="ATS_retenciones" EntityType="Model_contabilidad.ATS_retenciones" />
-          <FunctionImport Name="generarATS" ReturnType="Collection(Model_contabilidad.generarATS_Result)">
-            <Parameter Name="idempresa" Mode="In" Type="Int32" />
-            <Parameter Name="idPeriodo" Mode="In" Type="Int32" />
-          </FunctionImport>
-          </EntityContainer>
-        <EntityType Name="ct_grupocble">
-          <Key>
-            <PropertyRef Name="IdGrupoCble" />
-          </Key>
-          <Property Name="IdGrupoCble" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="gc_GrupoCble" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
-          <Property Name="gc_Orden" Type="Byte" Nullable="false" />
-          <Property Name="gc_estado_financiero" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
-          <Property Name="gc_signo_operacion" Type="Int32" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="IdGrupo_Mayor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ct_plancta" Relationship="Model_contabilidad.FK_ct_plancta_ct_grupocble" FromRole="ct_grupocble" ToRole="ct_plancta" />
-        </EntityType>
-        <EntityType Name="ct_periodo">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdPeriodo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="IdanioFiscal" Type="Int32" Nullable="false" />
-          <Property Name="pe_mes" Type="Int32" Nullable="false" />
-          <Property Name="pe_FechaIni" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="pe_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="pe_cerrado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="pe_estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ct_anio_fiscal" Relationship="Model_contabilidad.FK_ct_periodo_ct_anio_fiscal" FromRole="ct_periodo" ToRole="ct_anio_fiscal" />
-          <NavigationProperty Name="ct_cbtecble" Relationship="Model_contabilidad.FK_ct_cbtecble_ct_periodo" FromRole="ct_periodo" ToRole="ct_cbtecble" />
-        </EntityType>
         <EntityType Name="ct_anio_fiscal">
           <Key>
             <PropertyRef Name="IdanioFiscal" />
@@ -828,34 +707,11 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           <Property Name="IdanioFiscal" Type="Int32" Nullable="false" />
           <Property Name="af_fechaIni" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="af_fechaFin" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="af_estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ct_periodo" Relationship="Model_contabilidad.FK_ct_periodo_ct_anio_fiscal" FromRole="ct_anio_fiscal" ToRole="ct_periodo" />
-          <NavigationProperty Name="ct_anio_fiscal_x_cuenta_utilidad" Relationship="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" FromRole="ct_anio_fiscal" ToRole="ct_anio_fiscal_x_cuenta_utilidad" />
-          <NavigationProperty Name="ct_cbtecble" Relationship="Model_contabilidad.FK_ct_cbtecble_ct_anio_fiscal" FromRole="ct_anio_fiscal" ToRole="ct_cbtecble" />
+          <Property Name="af_estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ct_anio_fiscal_x_cuenta_utilidad" Relationship="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" FromRole="ct_anio_fiscal" ToRole="ct_anio_fiscal_x_cuenta_utilidad" />
+          <NavigationProperty Name="ct_cbtecble" Relationship="Self.FK_ct_cbtecble_ct_anio_fiscal" FromRole="ct_anio_fiscal" ToRole="ct_cbtecble" />
+          <NavigationProperty Name="ct_periodo" Relationship="Self.FK_ct_periodo_ct_anio_fiscal" FromRole="ct_anio_fiscal" ToRole="ct_periodo" />
         </EntityType>
-        <Association Name="FK_ct_periodo_ct_anio_fiscal">
-          <End Type="Model_contabilidad.ct_anio_fiscal" Role="ct_anio_fiscal" Multiplicity="1" />
-          <End Type="Model_contabilidad.ct_periodo" Role="ct_periodo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_anio_fiscal">
-              <PropertyRef Name="IdanioFiscal" />
-            </Principal>
-            <Dependent Role="ct_periodo">
-              <PropertyRef Name="IdanioFiscal" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ct_parametro">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbte_SaldoInicial" Type="Int32" />
-          <Property Name="IdTipoCbte_AsientoCierre_Anual" Type="Int32" />
-          <Property Name="P_Se_Muestra_Todas_las_ctas_en_combos" Type="Boolean" />
-          <NavigationProperty Name="ct_cbtecble_tipo" Relationship="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo" FromRole="ct_parametro" ToRole="ct_cbtecble_tipo" />
-          <NavigationProperty Name="ct_cbtecble_tipo1" Relationship="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo1" FromRole="ct_parametro" ToRole="ct_cbtecble_tipo" />
-          </EntityType>
         <EntityType Name="ct_anio_fiscal_x_cuenta_utilidad">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -868,127 +724,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           <Property Name="IdEmpresa_cbte_cierre" Type="Int32" />
           <Property Name="IdTipoCbte_cbte_cierre" Type="Int32" />
           <Property Name="IdCbteCble_cbte_cierre" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="ct_anio_fiscal" Relationship="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" FromRole="ct_anio_fiscal_x_cuenta_utilidad" ToRole="ct_anio_fiscal" />
-          <NavigationProperty Name="ct_plancta" Relationship="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" FromRole="ct_anio_fiscal_x_cuenta_utilidad" ToRole="ct_plancta" />
-          <NavigationProperty Name="ct_cbtecble" Relationship="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble" FromRole="ct_anio_fiscal_x_cuenta_utilidad" ToRole="ct_cbtecble" />
+          <NavigationProperty Name="ct_anio_fiscal" Relationship="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" FromRole="ct_anio_fiscal_x_cuenta_utilidad" ToRole="ct_anio_fiscal" />
+          <NavigationProperty Name="ct_cbtecble" Relationship="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble" FromRole="ct_anio_fiscal_x_cuenta_utilidad" ToRole="ct_cbtecble" />
+          <NavigationProperty Name="ct_plancta" Relationship="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" FromRole="ct_anio_fiscal_x_cuenta_utilidad" ToRole="ct_plancta" />
         </EntityType>
-        <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal">
-          <End Type="Model_contabilidad.ct_anio_fiscal" Role="ct_anio_fiscal" Multiplicity="1" />
-          <End Type="Model_contabilidad.ct_anio_fiscal_x_cuenta_utilidad" Role="ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_anio_fiscal">
-              <PropertyRef Name="IdanioFiscal" />
-            </Principal>
-            <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
-              <PropertyRef Name="IdanioFiscal" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ct_plancta">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdCtaCble" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pc_Cuenta" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="IdCtaCblePadre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pc_Naturaleza" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="IdNivelCta" Type="Int32" Nullable="false" />
-          <Property Name="IdGrupoCble" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="pc_Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="pc_EsMovimiento" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="pc_clave_corta" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipo_Gasto" Type="Int32" />
-          <NavigationProperty Name="ct_anio_fiscal_x_cuenta_utilidad" Relationship="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" FromRole="ct_plancta" ToRole="ct_anio_fiscal_x_cuenta_utilidad" />
-          <NavigationProperty Name="ct_grupocble" Relationship="Model_contabilidad.FK_ct_plancta_ct_grupocble" FromRole="ct_plancta" ToRole="ct_grupocble" />
-          <NavigationProperty Name="ct_plancta1" Relationship="Model_contabilidad.FK_ct_plancta_ct_plancta" FromRole="ct_plancta" ToRole="ct_plancta1" />
-          <NavigationProperty Name="ct_plancta2" Relationship="Model_contabilidad.FK_ct_plancta_ct_plancta" FromRole="ct_plancta1" ToRole="ct_plancta" />
-          <NavigationProperty Name="ct_plancta_nivel" Relationship="Model_contabilidad.FK_ct_plancta_ct_plancta_nivel" FromRole="ct_plancta" ToRole="ct_plancta_nivel" />
-          <NavigationProperty Name="ct_cbtecble_det" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_plancta" FromRole="ct_plancta" ToRole="ct_cbtecble_det" />
-        </EntityType>
-        <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta">
-          <End Type="Model_contabilidad.ct_plancta" Role="ct_plancta" Multiplicity="0..1" />
-          <End Type="Model_contabilidad.ct_anio_fiscal_x_cuenta_utilidad" Role="ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_plancta">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCble" />
-            </Principal>
-            <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCble" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_plancta_ct_grupocble">
-          <End Type="Model_contabilidad.ct_grupocble" Role="ct_grupocble" Multiplicity="1" />
-          <End Type="Model_contabilidad.ct_plancta" Role="ct_plancta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_grupocble">
-              <PropertyRef Name="IdGrupoCble" />
-            </Principal>
-            <Dependent Role="ct_plancta">
-              <PropertyRef Name="IdGrupoCble" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_plancta_ct_plancta">
-          <End Type="Model_contabilidad.ct_plancta" Role="ct_plancta" Multiplicity="0..1" />
-          <End Type="Model_contabilidad.ct_plancta" Role="ct_plancta1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_plancta">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCble" />
-            </Principal>
-            <Dependent Role="ct_plancta1">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCblePadre" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ct_plancta_nivel">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdNivelCta" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdNivelCta" Type="Int32" Nullable="false" />
-          <Property Name="nv_NumDigitos" Type="Int32" Nullable="false" />
-          <Property Name="nv_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transaccion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltModi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ct_plancta" Relationship="Model_contabilidad.FK_ct_plancta_ct_plancta_nivel" FromRole="ct_plancta_nivel" ToRole="ct_plancta" />
-        </EntityType>
-        <Association Name="FK_ct_plancta_ct_plancta_nivel">
-          <End Type="Model_contabilidad.ct_plancta_nivel" Role="ct_plancta_nivel" Multiplicity="1" />
-          <End Type="Model_contabilidad.ct_plancta" Role="ct_plancta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_plancta_nivel">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdNivelCta" />
-            </Principal>
-            <Dependent Role="ct_plancta">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdNivelCta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="ct_cbtecble">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -997,13 +736,13 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdCbteCble" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="CodCbteCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
           <Property Name="cb_Fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="cb_Valor" Type="Double" Nullable="false" />
           <Property Name="cb_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="cb_Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="cb_Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="cb_Anio" Type="Int32" Nullable="false" />
           <Property Name="cb_mes" Type="Int32" Nullable="false" />
           <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -1013,13 +752,13 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           <Property Name="cb_FechaAnu" Type="DateTime" Precision="3" />
           <Property Name="cb_FechaTransac" Type="DateTime" Precision="3" />
           <Property Name="cb_FechaUltModi" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ct_anio_fiscal" Relationship="Model_contabilidad.FK_ct_cbtecble_ct_anio_fiscal" FromRole="ct_cbtecble" ToRole="ct_anio_fiscal" />
-          <NavigationProperty Name="ct_anio_fiscal_x_cuenta_utilidad" Relationship="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_anio_fiscal_x_cuenta_utilidad" />
-          <NavigationProperty Name="ct_periodo" Relationship="Model_contabilidad.FK_ct_cbtecble_ct_periodo" FromRole="ct_cbtecble" ToRole="ct_periodo" />
-          <NavigationProperty Name="ct_cbtecble_det" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_cbtecble_det" />
-          <NavigationProperty Name="ct_cbtecble_tipo" Relationship="Model_contabilidad.FK_ct_cbtecble_ct_cbtecble_tipo" FromRole="ct_cbtecble" ToRole="ct_cbtecble_tipo" />
-          <NavigationProperty Name="ct_cbtecble_Reversado" Relationship="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_cbtecble_Reversado" />
-          <NavigationProperty Name="ct_cbtecble_Reversado1" Relationship="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble1" FromRole="ct_cbtecble" ToRole="ct_cbtecble_Reversado" />
+          <NavigationProperty Name="ct_anio_fiscal" Relationship="Self.FK_ct_cbtecble_ct_anio_fiscal" FromRole="ct_cbtecble" ToRole="ct_anio_fiscal" />
+          <NavigationProperty Name="ct_anio_fiscal_x_cuenta_utilidad" Relationship="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_anio_fiscal_x_cuenta_utilidad" />
+          <NavigationProperty Name="ct_cbtecble_tipo" Relationship="Self.FK_ct_cbtecble_ct_cbtecble_tipo" FromRole="ct_cbtecble" ToRole="ct_cbtecble_tipo" />
+          <NavigationProperty Name="ct_periodo" Relationship="Self.FK_ct_cbtecble_ct_periodo" FromRole="ct_cbtecble" ToRole="ct_periodo" />
+          <NavigationProperty Name="ct_cbtecble_det" Relationship="Self.FK_ct_cbtecble_det_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_cbtecble_det" />
+          <NavigationProperty Name="ct_cbtecble_Reversado" Relationship="Self.FK_ct_cbtecble_Reversado_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_cbtecble_Reversado" />
+          <NavigationProperty Name="ct_cbtecble_Reversado1" Relationship="Self.FK_ct_cbtecble_Reversado_ct_cbtecble1" FromRole="ct_cbtecble" ToRole="ct_cbtecble_Reversado" />
         </EntityType>
         <EntityType Name="ct_cbtecble_det">
           <Key>
@@ -1030,9 +769,9 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdCbteCble" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IdCentroCosto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdCentroCosto_sub_centro_costo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="dc_Valor" Type="Double" Nullable="false" />
@@ -1040,175 +779,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           <Property Name="IdPunto_cargo" Type="Int32" />
           <Property Name="IdPunto_cargo_grupo" Type="Int32" />
           <Property Name="dc_para_conciliar" Type="Boolean" />
-          <NavigationProperty Name="ct_cbtecble" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_cbtecble" FromRole="ct_cbtecble_det" ToRole="ct_cbtecble" />
-          <NavigationProperty Name="ct_plancta" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_plancta" FromRole="ct_cbtecble_det" ToRole="ct_plancta" />
-          <NavigationProperty Name="ct_punto_cargo" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_punto_cargo" FromRole="ct_cbtecble_det" ToRole="ct_punto_cargo" />
+          <NavigationProperty Name="ct_cbtecble" Relationship="Self.FK_ct_cbtecble_det_ct_cbtecble" FromRole="ct_cbtecble_det" ToRole="ct_cbtecble" />
+          <NavigationProperty Name="ct_plancta" Relationship="Self.FK_ct_cbtecble_det_ct_plancta" FromRole="ct_cbtecble_det" ToRole="ct_plancta" />
+          <NavigationProperty Name="ct_punto_cargo" Relationship="Self.FK_ct_cbtecble_det_ct_punto_cargo" FromRole="ct_cbtecble_det" ToRole="ct_punto_cargo" />
         </EntityType>
-        <Association Name="FK_ct_cbtecble_ct_anio_fiscal">
-          <End Type="Model_contabilidad.ct_anio_fiscal" Role="ct_anio_fiscal" Multiplicity="1" />
-          <End Type="Model_contabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_anio_fiscal">
-              <PropertyRef Name="IdanioFiscal" />
-            </Principal>
-            <Dependent Role="ct_cbtecble">
-              <PropertyRef Name="cb_Anio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble">
-          <End Type="Model_contabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="0..1" />
-          <End Type="Model_contabilidad.ct_anio_fiscal_x_cuenta_utilidad" Role="ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_cbtecble">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-              <PropertyRef Name="IdCbteCble" />
-            </Principal>
-            <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
-              <PropertyRef Name="IdEmpresa_cbte_cierre" />
-              <PropertyRef Name="IdTipoCbte_cbte_cierre" />
-              <PropertyRef Name="IdCbteCble_cbte_cierre" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_cbtecble_ct_periodo">
-          <End Type="Model_contabilidad.ct_periodo" Role="ct_periodo" Multiplicity="1" />
-          <End Type="Model_contabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_periodo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdPeriodo" />
-            </Principal>
-            <Dependent Role="ct_cbtecble">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdPeriodo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_cbtecble_det_ct_cbtecble">
-          <End Type="Model_contabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="1" />
-          <End Type="Model_contabilidad.ct_cbtecble_det" Role="ct_cbtecble_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_cbtecble">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-              <PropertyRef Name="IdCbteCble" />
-            </Principal>
-            <Dependent Role="ct_cbtecble_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-              <PropertyRef Name="IdCbteCble" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_cbtecble_det_ct_plancta">
-          <End Type="Model_contabilidad.ct_plancta" Role="ct_plancta" Multiplicity="1" />
-          <End Type="Model_contabilidad.ct_cbtecble_det" Role="ct_cbtecble_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_plancta">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCble" />
-            </Principal>
-            <Dependent Role="ct_cbtecble_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCble" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ct_punto_cargo">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdPunto_cargo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdPunto_cargo" Type="Int32" Nullable="false" />
-          <Property Name="codPunto_cargo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="nom_punto_cargo" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="IdPunto_cargo_grupo" Type="Int32" />
-          <NavigationProperty Name="ct_cbtecble_det" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_punto_cargo" FromRole="ct_punto_cargo" ToRole="ct_cbtecble_det" />
-        </EntityType>
-        <Association Name="FK_ct_cbtecble_det_ct_punto_cargo">
-          <End Type="Model_contabilidad.ct_punto_cargo" Role="ct_punto_cargo" Multiplicity="0..1" />
-          <End Type="Model_contabilidad.ct_cbtecble_det" Role="ct_cbtecble_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_punto_cargo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdPunto_cargo" />
-            </Principal>
-            <Dependent Role="ct_cbtecble_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdPunto_cargo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ct_cbtecble_tipo">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdTipoCbte" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
-          <Property Name="CodTipoCbte" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="tc_TipoCbte" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
-          <Property Name="tc_Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="tc_Interno" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="tc_Nemonico" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="IdTipoCbte_Anul" Type="Int32" Nullable="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="MotiAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ct_cbtecble" Relationship="Model_contabilidad.FK_ct_cbtecble_ct_cbtecble_tipo" FromRole="ct_cbtecble_tipo" ToRole="ct_cbtecble" />
-          <NavigationProperty Name="ct_parametro" Relationship="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo" FromRole="ct_cbtecble_tipo" ToRole="ct_parametro" />
-          <NavigationProperty Name="ct_parametro1" Relationship="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo1" FromRole="ct_cbtecble_tipo" ToRole="ct_parametro" />
-        </EntityType>
-        <Association Name="FK_ct_cbtecble_ct_cbtecble_tipo">
-          <End Type="Model_contabilidad.ct_cbtecble_tipo" Role="ct_cbtecble_tipo" Multiplicity="1" />
-          <End Type="Model_contabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_cbtecble_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-            </Principal>
-            <Dependent Role="ct_cbtecble">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_parametro_ct_cbtecble_tipo">
-          <End Type="Model_contabilidad.ct_cbtecble_tipo" Role="ct_cbtecble_tipo" Multiplicity="0..1" />
-          <End Type="Model_contabilidad.ct_parametro" Role="ct_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_cbtecble_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-            </Principal>
-            <Dependent Role="ct_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte_SaldoInicial" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_parametro_ct_cbtecble_tipo1">
-          <End Type="Model_contabilidad.ct_cbtecble_tipo" Role="ct_cbtecble_tipo" Multiplicity="0..1" />
-          <End Type="Model_contabilidad.ct_parametro" Role="ct_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_cbtecble_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-            </Principal>
-            <Dependent Role="ct_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte_AsientoCierre_Anual" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="ct_cbtecble_Reversado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1220,56 +794,141 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdCbteCble" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdEmpresa_Anu" Type="Int32" Nullable="false" />
           <Property Name="IdTipoCbte_Anu" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteCble_Anu" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdCbteCble_Anu" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ip" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="ct_cbtecble" Relationship="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble" FromRole="ct_cbtecble_Reversado" ToRole="ct_cbtecble" />
-          <NavigationProperty Name="ct_cbtecble1" Relationship="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble1" FromRole="ct_cbtecble_Reversado" ToRole="ct_cbtecble" />
+          <NavigationProperty Name="ct_cbtecble" Relationship="Self.FK_ct_cbtecble_Reversado_ct_cbtecble" FromRole="ct_cbtecble_Reversado" ToRole="ct_cbtecble" />
+          <NavigationProperty Name="ct_cbtecble1" Relationship="Self.FK_ct_cbtecble_Reversado_ct_cbtecble1" FromRole="ct_cbtecble_Reversado" ToRole="ct_cbtecble" />
         </EntityType>
-        <Association Name="FK_ct_cbtecble_Reversado_ct_cbtecble">
-          <End Type="Model_contabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="1" />
-          <End Type="Model_contabilidad.ct_cbtecble_Reversado" Role="ct_cbtecble_Reversado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_cbtecble">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-              <PropertyRef Name="IdCbteCble" />
-            </Principal>
-            <Dependent Role="ct_cbtecble_Reversado">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-              <PropertyRef Name="IdCbteCble" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_cbtecble_Reversado_ct_cbtecble1">
-          <End Type="Model_contabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="1" />
-          <End Type="Model_contabilidad.ct_cbtecble_Reversado" Role="ct_cbtecble_Reversado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_cbtecble">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-              <PropertyRef Name="IdCbteCble" />
-            </Principal>
-            <Dependent Role="ct_cbtecble_Reversado">
-              <PropertyRef Name="IdEmpresa_Anu" />
-              <PropertyRef Name="IdTipoCbte_Anu" />
-              <PropertyRef Name="IdCbteCble_Anu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="vwct_cbtecble_con_ctacble_acreedora">
+        <EntityType Name="ct_cbtecble_tipo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdTipoCbte" />
-            <PropertyRef Name="IdCbteCble" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdCtaCble_Acreedora" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CodTipoCbte" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="tc_TipoCbte" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="tc_Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="tc_Interno" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="tc_Nemonico" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IdTipoCbte_Anul" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotiAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ct_cbtecble" Relationship="Self.FK_ct_cbtecble_ct_cbtecble_tipo" FromRole="ct_cbtecble_tipo" ToRole="ct_cbtecble" />
+          <NavigationProperty Name="ct_parametro" Relationship="Self.FK_ct_parametro_ct_cbtecble_tipo" FromRole="ct_cbtecble_tipo" ToRole="ct_parametro" />
+          <NavigationProperty Name="ct_parametro1" Relationship="Self.FK_ct_parametro_ct_cbtecble_tipo1" FromRole="ct_cbtecble_tipo" ToRole="ct_parametro" />
+        </EntityType>
+        <EntityType Name="ct_grupocble">
+          <Key>
+            <PropertyRef Name="IdGrupoCble" />
+          </Key>
+          <Property Name="IdGrupoCble" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gc_GrupoCble" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="gc_Orden" Type="Byte" Nullable="false" />
+          <Property Name="gc_estado_financiero" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="gc_signo_operacion" Type="Int32" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IdGrupo_Mayor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ct_plancta" Relationship="Self.FK_ct_plancta_ct_grupocble" FromRole="ct_grupocble" ToRole="ct_plancta" />
+        </EntityType>
+        <EntityType Name="ct_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte_SaldoInicial" Type="Int32" />
+          <Property Name="IdTipoCbte_AsientoCierre_Anual" Type="Int32" />
+          <Property Name="P_Se_Muestra_Todas_las_ctas_en_combos" Type="Boolean" />
+          <NavigationProperty Name="ct_cbtecble_tipo" Relationship="Self.FK_ct_parametro_ct_cbtecble_tipo" FromRole="ct_parametro" ToRole="ct_cbtecble_tipo" />
+          <NavigationProperty Name="ct_cbtecble_tipo1" Relationship="Self.FK_ct_parametro_ct_cbtecble_tipo1" FromRole="ct_parametro" ToRole="ct_cbtecble_tipo" />
+        </EntityType>
+        <EntityType Name="ct_periodo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPeriodo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="IdanioFiscal" Type="Int32" Nullable="false" />
+          <Property Name="pe_mes" Type="Int32" Nullable="false" />
+          <Property Name="pe_FechaIni" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="pe_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="pe_cerrado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pe_estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ct_anio_fiscal" Relationship="Self.FK_ct_periodo_ct_anio_fiscal" FromRole="ct_periodo" ToRole="ct_anio_fiscal" />
+          <NavigationProperty Name="ct_cbtecble" Relationship="Self.FK_ct_cbtecble_ct_periodo" FromRole="ct_periodo" ToRole="ct_cbtecble" />
+        </EntityType>
+        <EntityType Name="ct_plancta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCtaCble" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pc_Cuenta" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdCtaCblePadre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pc_Naturaleza" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IdNivelCta" Type="Int32" Nullable="false" />
+          <Property Name="IdGrupoCble" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pc_Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="pc_EsMovimiento" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="pc_clave_corta" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipo_Gasto" Type="Int32" />
+          <NavigationProperty Name="ct_anio_fiscal_x_cuenta_utilidad" Relationship="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" FromRole="ct_plancta" ToRole="ct_anio_fiscal_x_cuenta_utilidad" />
+          <NavigationProperty Name="ct_cbtecble_det" Relationship="Self.FK_ct_cbtecble_det_ct_plancta" FromRole="ct_plancta" ToRole="ct_cbtecble_det" />
+          <NavigationProperty Name="ct_grupocble" Relationship="Self.FK_ct_plancta_ct_grupocble" FromRole="ct_plancta" ToRole="ct_grupocble" />
+          <NavigationProperty Name="ct_plancta1" Relationship="Self.FK_ct_plancta_ct_plancta" FromRole="ct_plancta" ToRole="ct_plancta1" />
+          <NavigationProperty Name="ct_plancta2" Relationship="Self.FK_ct_plancta_ct_plancta" FromRole="ct_plancta1" ToRole="ct_plancta" />
+          <NavigationProperty Name="ct_plancta_nivel" Relationship="Self.FK_ct_plancta_ct_plancta_nivel" FromRole="ct_plancta" ToRole="ct_plancta_nivel" />
+        </EntityType>
+        <EntityType Name="ct_plancta_nivel">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdNivelCta" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdNivelCta" Type="Int32" Nullable="false" />
+          <Property Name="nv_NumDigitos" Type="Int32" Nullable="false" />
+          <Property Name="nv_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transaccion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltModi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ct_plancta" Relationship="Self.FK_ct_plancta_ct_plancta_nivel" FromRole="ct_plancta_nivel" ToRole="ct_plancta" />
+        </EntityType>
+        <EntityType Name="ct_punto_cargo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPunto_cargo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPunto_cargo" Type="Int32" Nullable="false" />
+          <Property Name="codPunto_cargo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nom_punto_cargo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IdPunto_cargo_grupo" Type="Int32" />
+          <NavigationProperty Name="ct_cbtecble_det" Relationship="Self.FK_ct_cbtecble_det_ct_punto_cargo" FromRole="ct_punto_cargo" ToRole="ct_cbtecble_det" />
         </EntityType>
         <EntityType Name="ATS_compras">
           <Key>
@@ -1280,26 +939,26 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
           <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="codSustento" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="tpIdProv" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="idProv" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="tipoComprobante" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="parteRel" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="tipoProv" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="denopr" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="codSustento" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tpIdProv" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idProv" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipoComprobante" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="parteRel" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipoProv" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="denopr" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fechaRegistro" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="establecimiento" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="puntoEmision" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="secuencial" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="establecimiento" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="puntoEmision" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="secuencial" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fechaEmision" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="autorizacion" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="baseNoGraIva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="baseImponible" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="baseImpGrav" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="baseImpExe" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="montoIce" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="montoIva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="pagoLocExt" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="autorizacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="baseNoGraIva" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="baseImponible" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="baseImpGrav" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="baseImpExe" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="montoIce" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="montoIva" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="pagoLocExt" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="denopago" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="paisEfecPago" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="formaPago" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
@@ -1318,41 +977,12 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
           <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="tipoComprobante" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="Establecimiento" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="puntoEmision" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="secuencialInicio" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="secuencialFin" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="Autorización" Type="String" Nullable="false" MaxLength="49" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="ATS_ventas">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdPeriodo" />
-            <PropertyRef Name="Secuencia" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="tpIdCliente" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="idCliente" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
-          <Property Name="parteRel" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="tipoCliente" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="DenoCli" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="tipoComprobante" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="tipoEm" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="numeroComprobantes" Type="Int32" Nullable="false" />
-          <Property Name="baseNoGraIva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="baseImponible" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="baseImpGrav" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="montoIva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="montoIce" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="valorRetIva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="valorRetRenta" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="formaPago" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="codEstab" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="ventasEstab" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="ivaComp" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="tipoComprobante" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Establecimiento" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="puntoEmision" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="secuencialInicio" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="secuencialFin" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Autorización" Type="String" MaxLength="49" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="ATS_exportaciones">
           <Key>
@@ -1390,9 +1020,9 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
           <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="co_serie" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="co_factura" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Cedula_ruc" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="co_serie" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="co_factura" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cedula_ruc" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="valRetBien10" Type="Decimal" Precision="12" Scale="2" />
           <Property Name="valRetServ20" Type="Decimal" Precision="12" Scale="2" />
           <Property Name="valorRetBienes" Type="Decimal" Precision="12" Scale="2" />
@@ -1413,9 +1043,379 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           <Property Name="ptoEmiModificado" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="secModificado" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
           <Property Name="autModificado" Type="String" MaxLength="49" FixedLength="false" Unicode="false" />
-          <Property Name="re_tipo_Ret" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="re_tipo_Ret" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="denopr" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="ATS_ventas">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="tpIdCliente" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idCliente" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="parteRel" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipoCliente" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DenoCli" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipoComprobante" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipoEm" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="numeroComprobantes" Type="Int32" Nullable="false" />
+          <Property Name="baseNoGraIva" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="baseImponible" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="baseImpGrav" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="montoIva" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="montoIce" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="valorRetIva" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="valorRetRenta" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="formaPago" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="codEstab" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ventasEstab" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="ivaComp" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwct_cbtecble_con_ctacble_acreedora">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdCtaCble_Acreedora" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal">
+          <End Role="ct_anio_fiscal" Type="Self.ct_anio_fiscal" Multiplicity="1" />
+          <End Role="ct_anio_fiscal_x_cuenta_utilidad" Type="Self.ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_anio_fiscal">
+              <PropertyRef Name="IdanioFiscal" />
+            </Principal>
+            <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
+              <PropertyRef Name="IdanioFiscal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_ct_anio_fiscal">
+          <End Role="ct_anio_fiscal" Type="Self.ct_anio_fiscal" Multiplicity="1" />
+          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_anio_fiscal">
+              <PropertyRef Name="IdanioFiscal" />
+            </Principal>
+            <Dependent Role="ct_cbtecble">
+              <PropertyRef Name="cb_Anio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_periodo_ct_anio_fiscal">
+          <End Role="ct_anio_fiscal" Type="Self.ct_anio_fiscal" Multiplicity="1" />
+          <End Role="ct_periodo" Type="Self.ct_periodo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_anio_fiscal">
+              <PropertyRef Name="IdanioFiscal" />
+            </Principal>
+            <Dependent Role="ct_periodo">
+              <PropertyRef Name="IdanioFiscal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble">
+          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="0..1" />
+          <End Role="ct_anio_fiscal_x_cuenta_utilidad" Type="Self.ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Principal>
+            <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
+              <PropertyRef Name="IdEmpresa_cbte_cierre" />
+              <PropertyRef Name="IdTipoCbte_cbte_cierre" />
+              <PropertyRef Name="IdCbteCble_cbte_cierre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta">
+          <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="0..1" />
+          <End Role="ct_anio_fiscal_x_cuenta_utilidad" Type="Self.ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Principal>
+            <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_ct_cbtecble_tipo">
+          <End Role="ct_cbtecble_tipo" Type="Self.ct_cbtecble_tipo" Multiplicity="1" />
+          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+            </Principal>
+            <Dependent Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_ct_periodo">
+          <End Role="ct_periodo" Type="Self.ct_periodo" Multiplicity="1" />
+          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_periodo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPeriodo" />
+            </Principal>
+            <Dependent Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_det_ct_cbtecble">
+          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="1" />
+          <End Role="ct_cbtecble_det" Type="Self.ct_cbtecble_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Principal>
+            <Dependent Role="ct_cbtecble_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_Reversado_ct_cbtecble">
+          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="1" />
+          <End Role="ct_cbtecble_Reversado" Type="Self.ct_cbtecble_Reversado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Principal>
+            <Dependent Role="ct_cbtecble_Reversado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_Reversado_ct_cbtecble1">
+          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="1" />
+          <End Role="ct_cbtecble_Reversado" Type="Self.ct_cbtecble_Reversado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Principal>
+            <Dependent Role="ct_cbtecble_Reversado">
+              <PropertyRef Name="IdEmpresa_Anu" />
+              <PropertyRef Name="IdTipoCbte_Anu" />
+              <PropertyRef Name="IdCbteCble_Anu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_det_ct_plancta">
+          <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="1" />
+          <End Role="ct_cbtecble_det" Type="Self.ct_cbtecble_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Principal>
+            <Dependent Role="ct_cbtecble_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_det_ct_punto_cargo">
+          <End Role="ct_punto_cargo" Type="Self.ct_punto_cargo" Multiplicity="0..1" />
+          <End Role="ct_cbtecble_det" Type="Self.ct_cbtecble_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_punto_cargo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPunto_cargo" />
+            </Principal>
+            <Dependent Role="ct_cbtecble_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPunto_cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_parametro_ct_cbtecble_tipo">
+          <End Role="ct_cbtecble_tipo" Type="Self.ct_cbtecble_tipo" Multiplicity="0..1" />
+          <End Role="ct_parametro" Type="Self.ct_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+            </Principal>
+            <Dependent Role="ct_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte_SaldoInicial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_parametro_ct_cbtecble_tipo1">
+          <End Role="ct_cbtecble_tipo" Type="Self.ct_cbtecble_tipo" Multiplicity="0..1" />
+          <End Role="ct_parametro" Type="Self.ct_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+            </Principal>
+            <Dependent Role="ct_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte_AsientoCierre_Anual" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_plancta_ct_grupocble">
+          <End Role="ct_grupocble" Type="Self.ct_grupocble" Multiplicity="1" />
+          <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_grupocble">
+              <PropertyRef Name="IdGrupoCble" />
+            </Principal>
+            <Dependent Role="ct_plancta">
+              <PropertyRef Name="IdGrupoCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_plancta_ct_plancta">
+          <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="0..1" />
+          <End Role="ct_plancta1" Type="Self.ct_plancta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Principal>
+            <Dependent Role="ct_plancta1">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCblePadre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_plancta_ct_plancta_nivel">
+          <End Role="ct_plancta_nivel" Type="Self.ct_plancta_nivel" Multiplicity="1" />
+          <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta_nivel">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivelCta" />
+            </Principal>
+            <Dependent Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivelCta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities_contabilidad" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ct_anio_fiscal" EntityType="Self.ct_anio_fiscal" />
+          <EntitySet Name="ct_anio_fiscal_x_cuenta_utilidad" EntityType="Self.ct_anio_fiscal_x_cuenta_utilidad" />
+          <EntitySet Name="ct_cbtecble" EntityType="Self.ct_cbtecble" />
+          <EntitySet Name="ct_cbtecble_det" EntityType="Self.ct_cbtecble_det" />
+          <EntitySet Name="ct_cbtecble_Reversado" EntityType="Self.ct_cbtecble_Reversado" />
+          <EntitySet Name="ct_cbtecble_tipo" EntityType="Self.ct_cbtecble_tipo" />
+          <EntitySet Name="ct_grupocble" EntityType="Self.ct_grupocble" />
+          <EntitySet Name="ct_parametro" EntityType="Self.ct_parametro" />
+          <EntitySet Name="ct_periodo" EntityType="Self.ct_periodo" />
+          <EntitySet Name="ct_plancta" EntityType="Self.ct_plancta" />
+          <EntitySet Name="ct_plancta_nivel" EntityType="Self.ct_plancta_nivel" />
+          <EntitySet Name="ct_punto_cargo" EntityType="Self.ct_punto_cargo" />
+          <EntitySet Name="ATS_compras" EntityType="Self.ATS_compras" />
+          <EntitySet Name="ATS_comprobantes_anulados" EntityType="Self.ATS_comprobantes_anulados" />
+          <EntitySet Name="ATS_exportaciones" EntityType="Self.ATS_exportaciones" />
+          <EntitySet Name="ATS_retenciones" EntityType="Self.ATS_retenciones" />
+          <EntitySet Name="ATS_ventas" EntityType="Self.ATS_ventas" />
+          <EntitySet Name="vwct_cbtecble_con_ctacble_acreedora" EntityType="Self.vwct_cbtecble_con_ctacble_acreedora" />
+          <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" Association="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal">
+            <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
+            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_ct_anio_fiscal" Association="Self.FK_ct_cbtecble_ct_anio_fiscal">
+            <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_periodo_ct_anio_fiscal" Association="Self.FK_ct_periodo_ct_anio_fiscal">
+            <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
+            <End Role="ct_periodo" EntitySet="ct_periodo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble" Association="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble">
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" Association="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta">
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_ct_cbtecble_tipo" Association="Self.FK_ct_cbtecble_ct_cbtecble_tipo">
+            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_ct_periodo" Association="Self.FK_ct_cbtecble_ct_periodo">
+            <End Role="ct_periodo" EntitySet="ct_periodo" />
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_det_ct_cbtecble" Association="Self.FK_ct_cbtecble_det_ct_cbtecble">
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_Reversado_ct_cbtecble" Association="Self.FK_ct_cbtecble_Reversado_ct_cbtecble">
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+            <End Role="ct_cbtecble_Reversado" EntitySet="ct_cbtecble_Reversado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_Reversado_ct_cbtecble1" Association="Self.FK_ct_cbtecble_Reversado_ct_cbtecble1">
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+            <End Role="ct_cbtecble_Reversado" EntitySet="ct_cbtecble_Reversado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_det_ct_plancta" Association="Self.FK_ct_cbtecble_det_ct_plancta">
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_det_ct_punto_cargo" Association="Self.FK_ct_cbtecble_det_ct_punto_cargo">
+            <End Role="ct_punto_cargo" EntitySet="ct_punto_cargo" />
+            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_parametro_ct_cbtecble_tipo" Association="Self.FK_ct_parametro_ct_cbtecble_tipo">
+            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
+            <End Role="ct_parametro" EntitySet="ct_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_parametro_ct_cbtecble_tipo1" Association="Self.FK_ct_parametro_ct_cbtecble_tipo1">
+            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
+            <End Role="ct_parametro" EntitySet="ct_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_plancta_ct_grupocble" Association="Self.FK_ct_plancta_ct_grupocble">
+            <End Role="ct_grupocble" EntitySet="ct_grupocble" />
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_plancta_ct_plancta" Association="Self.FK_ct_plancta_ct_plancta">
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+            <End Role="ct_plancta1" EntitySet="ct_plancta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_plancta_ct_plancta_nivel" Association="Self.FK_ct_plancta_ct_plancta_nivel">
+            <End Role="ct_plancta_nivel" EntitySet="ct_plancta_nivel" />
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+          </AssociationSet>
+          <FunctionImport Name="generarATS" ReturnType="Collection(Model_contabilidad.generarATS_Result)">
+            <Parameter Name="idempresa" Mode="In" Type="Int32" />
+            <Parameter Name="idPeriodo" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
         <ComplexType Name="generarATS_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
           <Property Type="Int32" Name="IdPeriodo" Nullable="false" />
@@ -1438,351 +1438,351 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           <Property Type="DateTime" Name="fechaEmision" Nullable="true" />
           <Property Type="String" Name="denoExpCli" Nullable="true" MaxLength="500" />
         </ComplexType>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Model_contabilidadStoreContainer" CdmEntityContainer="Entities_contabilidad" >
-          <EntitySetMapping Name="ct_grupocble">
-            <EntityTypeMapping TypeName="Model_contabilidad.ct_grupocble">
-              <MappingFragment StoreEntitySet="ct_grupocble">
-                <ScalarProperty Name="IdGrupo_Mayor" ColumnName="IdGrupo_Mayor" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="gc_signo_operacion" ColumnName="gc_signo_operacion" />
-                <ScalarProperty Name="gc_estado_financiero" ColumnName="gc_estado_financiero" />
-                <ScalarProperty Name="gc_Orden" ColumnName="gc_Orden" />
-                <ScalarProperty Name="gc_GrupoCble" ColumnName="gc_GrupoCble" />
-                <ScalarProperty Name="IdGrupoCble" ColumnName="IdGrupoCble" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ct_periodo">
-            <EntityTypeMapping TypeName="Model_contabilidad.ct_periodo">
-              <MappingFragment StoreEntitySet="ct_periodo">
-                <ScalarProperty Name="pe_estado" ColumnName="pe_estado" />
-                <ScalarProperty Name="pe_cerrado" ColumnName="pe_cerrado" />
-                <ScalarProperty Name="pe_FechaFin" ColumnName="pe_FechaFin" />
-                <ScalarProperty Name="pe_FechaIni" ColumnName="pe_FechaIni" />
-                <ScalarProperty Name="pe_mes" ColumnName="pe_mes" />
-                <ScalarProperty Name="IdanioFiscal" ColumnName="IdanioFiscal" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="Model_contabilidadStoreContainer" CdmEntityContainer="Entities_contabilidad">
           <EntitySetMapping Name="ct_anio_fiscal">
             <EntityTypeMapping TypeName="Model_contabilidad.ct_anio_fiscal">
               <MappingFragment StoreEntitySet="ct_anio_fiscal">
-                <ScalarProperty Name="af_estado" ColumnName="af_estado" />
-                <ScalarProperty Name="af_fechaFin" ColumnName="af_fechaFin" />
-                <ScalarProperty Name="af_fechaIni" ColumnName="af_fechaIni" />
                 <ScalarProperty Name="IdanioFiscal" ColumnName="IdanioFiscal" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ct_parametro">
-            <EntityTypeMapping TypeName="Model_contabilidad.ct_parametro">
-              <MappingFragment StoreEntitySet="ct_parametro">
-                <ScalarProperty Name="P_Se_Muestra_Todas_las_ctas_en_combos" ColumnName="P_Se_Muestra_Todas_las_ctas_en_combos" />
-                <ScalarProperty Name="IdTipoCbte_AsientoCierre_Anual" ColumnName="IdTipoCbte_AsientoCierre_Anual" />
-                <ScalarProperty Name="IdTipoCbte_SaldoInicial" ColumnName="IdTipoCbte_SaldoInicial" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="af_fechaIni" ColumnName="af_fechaIni" />
+                <ScalarProperty Name="af_fechaFin" ColumnName="af_fechaFin" />
+                <ScalarProperty Name="af_estado" ColumnName="af_estado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ct_anio_fiscal_x_cuenta_utilidad">
             <EntityTypeMapping TypeName="Model_contabilidad.ct_anio_fiscal_x_cuenta_utilidad">
               <MappingFragment StoreEntitySet="ct_anio_fiscal_x_cuenta_utilidad">
-                <ScalarProperty Name="IdCbteCble_cbte_cierre" ColumnName="IdCbteCble_cbte_cierre" />
-                <ScalarProperty Name="IdTipoCbte_cbte_cierre" ColumnName="IdTipoCbte_cbte_cierre" />
-                <ScalarProperty Name="IdEmpresa_cbte_cierre" ColumnName="IdEmpresa_cbte_cierre" />
-                <ScalarProperty Name="observacion" ColumnName="observacion" />
-                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
                 <ScalarProperty Name="IdanioFiscal" ColumnName="IdanioFiscal" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ct_plancta">
-            <EntityTypeMapping TypeName="Model_contabilidad.ct_plancta">
-              <MappingFragment StoreEntitySet="ct_plancta">
-                <ScalarProperty Name="IdTipo_Gasto" ColumnName="IdTipo_Gasto" />
-                <ScalarProperty Name="ip" ColumnName="ip" />
-                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="pc_clave_corta" ColumnName="pc_clave_corta" />
-                <ScalarProperty Name="pc_EsMovimiento" ColumnName="pc_EsMovimiento" />
-                <ScalarProperty Name="pc_Estado" ColumnName="pc_Estado" />
-                <ScalarProperty Name="IdGrupoCble" ColumnName="IdGrupoCble" />
-                <ScalarProperty Name="IdNivelCta" ColumnName="IdNivelCta" />
-                <ScalarProperty Name="pc_Naturaleza" ColumnName="pc_Naturaleza" />
-                <ScalarProperty Name="IdCtaCblePadre" ColumnName="IdCtaCblePadre" />
-                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
                 <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ct_plancta_nivel">
-            <EntityTypeMapping TypeName="Model_contabilidad.ct_plancta_nivel">
-              <MappingFragment StoreEntitySet="ct_plancta_nivel">
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
-                <ScalarProperty Name="Fecha_Transaccion" ColumnName="Fecha_Transaccion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="nv_Descripcion" ColumnName="nv_Descripcion" />
-                <ScalarProperty Name="nv_NumDigitos" ColumnName="nv_NumDigitos" />
-                <ScalarProperty Name="IdNivelCta" ColumnName="IdNivelCta" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="IdEmpresa_cbte_cierre" ColumnName="IdEmpresa_cbte_cierre" />
+                <ScalarProperty Name="IdTipoCbte_cbte_cierre" ColumnName="IdTipoCbte_cbte_cierre" />
+                <ScalarProperty Name="IdCbteCble_cbte_cierre" ColumnName="IdCbteCble_cbte_cierre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ct_cbtecble">
             <EntityTypeMapping TypeName="Model_contabilidad.ct_cbtecble">
               <MappingFragment StoreEntitySet="ct_cbtecble">
-                <ScalarProperty Name="cb_FechaUltModi" ColumnName="cb_FechaUltModi" />
-                <ScalarProperty Name="cb_FechaTransac" ColumnName="cb_FechaTransac" />
-                <ScalarProperty Name="cb_FechaAnu" ColumnName="cb_FechaAnu" />
-                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
-                <ScalarProperty Name="cb_MotivoAnu" ColumnName="cb_MotivoAnu" />
-                <ScalarProperty Name="IdUsuarioAnu" ColumnName="IdUsuarioAnu" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="cb_mes" ColumnName="cb_mes" />
-                <ScalarProperty Name="cb_Anio" ColumnName="cb_Anio" />
-                <ScalarProperty Name="cb_Estado" ColumnName="cb_Estado" />
-                <ScalarProperty Name="cb_Observacion" ColumnName="cb_Observacion" />
-                <ScalarProperty Name="cb_Valor" ColumnName="cb_Valor" />
-                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-                <ScalarProperty Name="CodCbteCble" ColumnName="CodCbteCble" />
-                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
-                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="CodCbteCble" ColumnName="CodCbteCble" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
+                <ScalarProperty Name="cb_Valor" ColumnName="cb_Valor" />
+                <ScalarProperty Name="cb_Observacion" ColumnName="cb_Observacion" />
+                <ScalarProperty Name="cb_Estado" ColumnName="cb_Estado" />
+                <ScalarProperty Name="cb_Anio" ColumnName="cb_Anio" />
+                <ScalarProperty Name="cb_mes" ColumnName="cb_mes" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdUsuarioAnu" ColumnName="IdUsuarioAnu" />
+                <ScalarProperty Name="cb_MotivoAnu" ColumnName="cb_MotivoAnu" />
+                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
+                <ScalarProperty Name="cb_FechaAnu" ColumnName="cb_FechaAnu" />
+                <ScalarProperty Name="cb_FechaTransac" ColumnName="cb_FechaTransac" />
+                <ScalarProperty Name="cb_FechaUltModi" ColumnName="cb_FechaUltModi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ct_cbtecble_det">
             <EntityTypeMapping TypeName="Model_contabilidad.ct_cbtecble_det">
               <MappingFragment StoreEntitySet="ct_cbtecble_det">
-                <ScalarProperty Name="dc_para_conciliar" ColumnName="dc_para_conciliar" />
-                <ScalarProperty Name="IdPunto_cargo_grupo" ColumnName="IdPunto_cargo_grupo" />
-                <ScalarProperty Name="IdPunto_cargo" ColumnName="IdPunto_cargo" />
-                <ScalarProperty Name="dc_Observacion" ColumnName="dc_Observacion" />
-                <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
-                <ScalarProperty Name="IdCentroCosto_sub_centro_costo" ColumnName="IdCentroCosto_sub_centro_costo" />
-                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
-                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
-                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
                 <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
-                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ct_punto_cargo">
-            <EntityTypeMapping TypeName="Model_contabilidad.ct_punto_cargo">
-              <MappingFragment StoreEntitySet="ct_punto_cargo">
-                <ScalarProperty Name="IdPunto_cargo_grupo" ColumnName="IdPunto_cargo_grupo" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="nom_punto_cargo" ColumnName="nom_punto_cargo" />
-                <ScalarProperty Name="codPunto_cargo" ColumnName="codPunto_cargo" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
+                <ScalarProperty Name="IdCentroCosto_sub_centro_costo" ColumnName="IdCentroCosto_sub_centro_costo" />
+                <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
+                <ScalarProperty Name="dc_Observacion" ColumnName="dc_Observacion" />
                 <ScalarProperty Name="IdPunto_cargo" ColumnName="IdPunto_cargo" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ct_cbtecble_tipo">
-            <EntityTypeMapping TypeName="Model_contabilidad.ct_cbtecble_tipo">
-              <MappingFragment StoreEntitySet="ct_cbtecble_tipo">
-                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="IdTipoCbte_Anul" ColumnName="IdTipoCbte_Anul" />
-                <ScalarProperty Name="tc_Nemonico" ColumnName="tc_Nemonico" />
-                <ScalarProperty Name="tc_Interno" ColumnName="tc_Interno" />
-                <ScalarProperty Name="tc_Estado" ColumnName="tc_Estado" />
-                <ScalarProperty Name="tc_TipoCbte" ColumnName="tc_TipoCbte" />
-                <ScalarProperty Name="CodTipoCbte" ColumnName="CodTipoCbte" />
-                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdPunto_cargo_grupo" ColumnName="IdPunto_cargo_grupo" />
+                <ScalarProperty Name="dc_para_conciliar" ColumnName="dc_para_conciliar" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ct_cbtecble_Reversado">
             <EntityTypeMapping TypeName="Model_contabilidad.ct_cbtecble_Reversado">
               <MappingFragment StoreEntitySet="ct_cbtecble_Reversado">
-                <ScalarProperty Name="ip" ColumnName="ip" />
-                <ScalarProperty Name="IdCbteCble_Anu" ColumnName="IdCbteCble_Anu" />
-                <ScalarProperty Name="IdTipoCbte_Anu" ColumnName="IdTipoCbte_Anu" />
-                <ScalarProperty Name="IdEmpresa_Anu" ColumnName="IdEmpresa_Anu" />
-                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
-                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdEmpresa_Anu" ColumnName="IdEmpresa_Anu" />
+                <ScalarProperty Name="IdTipoCbte_Anu" ColumnName="IdTipoCbte_Anu" />
+                <ScalarProperty Name="IdCbteCble_Anu" ColumnName="IdCbteCble_Anu" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwct_cbtecble_con_ctacble_acreedora">
-            <EntityTypeMapping TypeName="Model_contabilidad.vwct_cbtecble_con_ctacble_acreedora">
-              <MappingFragment StoreEntitySet="vwct_cbtecble_con_ctacble_acreedora">
-                <ScalarProperty Name="IdCtaCble_Acreedora" ColumnName="IdCtaCble_Acreedora" />
-                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
-                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+          <EntitySetMapping Name="ct_cbtecble_tipo">
+            <EntityTypeMapping TypeName="Model_contabilidad.ct_cbtecble_tipo">
+              <MappingFragment StoreEntitySet="ct_cbtecble_tipo">
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="CodTipoCbte" ColumnName="CodTipoCbte" />
+                <ScalarProperty Name="tc_TipoCbte" ColumnName="tc_TipoCbte" />
+                <ScalarProperty Name="tc_Estado" ColumnName="tc_Estado" />
+                <ScalarProperty Name="tc_Interno" ColumnName="tc_Interno" />
+                <ScalarProperty Name="tc_Nemonico" ColumnName="tc_Nemonico" />
+                <ScalarProperty Name="IdTipoCbte_Anul" ColumnName="IdTipoCbte_Anul" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_grupocble">
+            <EntityTypeMapping TypeName="Model_contabilidad.ct_grupocble">
+              <MappingFragment StoreEntitySet="ct_grupocble">
+                <ScalarProperty Name="IdGrupoCble" ColumnName="IdGrupoCble" />
+                <ScalarProperty Name="gc_GrupoCble" ColumnName="gc_GrupoCble" />
+                <ScalarProperty Name="gc_Orden" ColumnName="gc_Orden" />
+                <ScalarProperty Name="gc_estado_financiero" ColumnName="gc_estado_financiero" />
+                <ScalarProperty Name="gc_signo_operacion" ColumnName="gc_signo_operacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdGrupo_Mayor" ColumnName="IdGrupo_Mayor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_parametro">
+            <EntityTypeMapping TypeName="Model_contabilidad.ct_parametro">
+              <MappingFragment StoreEntitySet="ct_parametro">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdTipoCbte_SaldoInicial" ColumnName="IdTipoCbte_SaldoInicial" />
+                <ScalarProperty Name="IdTipoCbte_AsientoCierre_Anual" ColumnName="IdTipoCbte_AsientoCierre_Anual" />
+                <ScalarProperty Name="P_Se_Muestra_Todas_las_ctas_en_combos" ColumnName="P_Se_Muestra_Todas_las_ctas_en_combos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_periodo">
+            <EntityTypeMapping TypeName="Model_contabilidad.ct_periodo">
+              <MappingFragment StoreEntitySet="ct_periodo">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdanioFiscal" ColumnName="IdanioFiscal" />
+                <ScalarProperty Name="pe_mes" ColumnName="pe_mes" />
+                <ScalarProperty Name="pe_FechaIni" ColumnName="pe_FechaIni" />
+                <ScalarProperty Name="pe_FechaFin" ColumnName="pe_FechaFin" />
+                <ScalarProperty Name="pe_cerrado" ColumnName="pe_cerrado" />
+                <ScalarProperty Name="pe_estado" ColumnName="pe_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_plancta">
+            <EntityTypeMapping TypeName="Model_contabilidad.ct_plancta">
+              <MappingFragment StoreEntitySet="ct_plancta">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
+                <ScalarProperty Name="IdCtaCblePadre" ColumnName="IdCtaCblePadre" />
+                <ScalarProperty Name="pc_Naturaleza" ColumnName="pc_Naturaleza" />
+                <ScalarProperty Name="IdNivelCta" ColumnName="IdNivelCta" />
+                <ScalarProperty Name="IdGrupoCble" ColumnName="IdGrupoCble" />
+                <ScalarProperty Name="pc_Estado" ColumnName="pc_Estado" />
+                <ScalarProperty Name="pc_EsMovimiento" ColumnName="pc_EsMovimiento" />
+                <ScalarProperty Name="pc_clave_corta" ColumnName="pc_clave_corta" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="IdTipo_Gasto" ColumnName="IdTipo_Gasto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_plancta_nivel">
+            <EntityTypeMapping TypeName="Model_contabilidad.ct_plancta_nivel">
+              <MappingFragment StoreEntitySet="ct_plancta_nivel">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdNivelCta" ColumnName="IdNivelCta" />
+                <ScalarProperty Name="nv_NumDigitos" ColumnName="nv_NumDigitos" />
+                <ScalarProperty Name="nv_Descripcion" ColumnName="nv_Descripcion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Fecha_Transaccion" ColumnName="Fecha_Transaccion" />
+                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_punto_cargo">
+            <EntityTypeMapping TypeName="Model_contabilidad.ct_punto_cargo">
+              <MappingFragment StoreEntitySet="ct_punto_cargo">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdPunto_cargo" ColumnName="IdPunto_cargo" />
+                <ScalarProperty Name="codPunto_cargo" ColumnName="codPunto_cargo" />
+                <ScalarProperty Name="nom_punto_cargo" ColumnName="nom_punto_cargo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdPunto_cargo_grupo" ColumnName="IdPunto_cargo_grupo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ATS_compras">
             <EntityTypeMapping TypeName="Model_contabilidad.ATS_compras">
               <MappingFragment StoreEntitySet="ATS_compras">
-                <ScalarProperty Name="autModificado" ColumnName="autModificado" />
-                <ScalarProperty Name="secModificado" ColumnName="secModificado" />
-                <ScalarProperty Name="ptoEmiModificado" ColumnName="ptoEmiModificado" />
-                <ScalarProperty Name="estabModificado" ColumnName="estabModificado" />
-                <ScalarProperty Name="docModificado" ColumnName="docModificado" />
-                <ScalarProperty Name="formaPago" ColumnName="formaPago" />
-                <ScalarProperty Name="paisEfecPago" ColumnName="paisEfecPago" />
-                <ScalarProperty Name="denopago" ColumnName="denopago" />
-                <ScalarProperty Name="pagoLocExt" ColumnName="pagoLocExt" />
-                <ScalarProperty Name="montoIva" ColumnName="montoIva" />
-                <ScalarProperty Name="montoIce" ColumnName="montoIce" />
-                <ScalarProperty Name="baseImpExe" ColumnName="baseImpExe" />
-                <ScalarProperty Name="baseImpGrav" ColumnName="baseImpGrav" />
-                <ScalarProperty Name="baseImponible" ColumnName="baseImponible" />
-                <ScalarProperty Name="baseNoGraIva" ColumnName="baseNoGraIva" />
-                <ScalarProperty Name="autorizacion" ColumnName="autorizacion" />
-                <ScalarProperty Name="fechaEmision" ColumnName="fechaEmision" />
-                <ScalarProperty Name="secuencial" ColumnName="secuencial" />
-                <ScalarProperty Name="puntoEmision" ColumnName="puntoEmision" />
-                <ScalarProperty Name="establecimiento" ColumnName="establecimiento" />
-                <ScalarProperty Name="fechaRegistro" ColumnName="fechaRegistro" />
-                <ScalarProperty Name="denopr" ColumnName="denopr" />
-                <ScalarProperty Name="tipoProv" ColumnName="tipoProv" />
-                <ScalarProperty Name="parteRel" ColumnName="parteRel" />
-                <ScalarProperty Name="tipoComprobante" ColumnName="tipoComprobante" />
-                <ScalarProperty Name="idProv" ColumnName="idProv" />
-                <ScalarProperty Name="tpIdProv" ColumnName="tpIdProv" />
-                <ScalarProperty Name="codSustento" ColumnName="codSustento" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="codSustento" ColumnName="codSustento" />
+                <ScalarProperty Name="tpIdProv" ColumnName="tpIdProv" />
+                <ScalarProperty Name="idProv" ColumnName="idProv" />
+                <ScalarProperty Name="tipoComprobante" ColumnName="tipoComprobante" />
+                <ScalarProperty Name="parteRel" ColumnName="parteRel" />
+                <ScalarProperty Name="tipoProv" ColumnName="tipoProv" />
+                <ScalarProperty Name="denopr" ColumnName="denopr" />
+                <ScalarProperty Name="fechaRegistro" ColumnName="fechaRegistro" />
+                <ScalarProperty Name="establecimiento" ColumnName="establecimiento" />
+                <ScalarProperty Name="puntoEmision" ColumnName="puntoEmision" />
+                <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+                <ScalarProperty Name="fechaEmision" ColumnName="fechaEmision" />
+                <ScalarProperty Name="autorizacion" ColumnName="autorizacion" />
+                <ScalarProperty Name="baseNoGraIva" ColumnName="baseNoGraIva" />
+                <ScalarProperty Name="baseImponible" ColumnName="baseImponible" />
+                <ScalarProperty Name="baseImpGrav" ColumnName="baseImpGrav" />
+                <ScalarProperty Name="baseImpExe" ColumnName="baseImpExe" />
+                <ScalarProperty Name="montoIce" ColumnName="montoIce" />
+                <ScalarProperty Name="montoIva" ColumnName="montoIva" />
+                <ScalarProperty Name="pagoLocExt" ColumnName="pagoLocExt" />
+                <ScalarProperty Name="denopago" ColumnName="denopago" />
+                <ScalarProperty Name="paisEfecPago" ColumnName="paisEfecPago" />
+                <ScalarProperty Name="formaPago" ColumnName="formaPago" />
+                <ScalarProperty Name="docModificado" ColumnName="docModificado" />
+                <ScalarProperty Name="estabModificado" ColumnName="estabModificado" />
+                <ScalarProperty Name="ptoEmiModificado" ColumnName="ptoEmiModificado" />
+                <ScalarProperty Name="secModificado" ColumnName="secModificado" />
+                <ScalarProperty Name="autModificado" ColumnName="autModificado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ATS_comprobantes_anulados">
             <EntityTypeMapping TypeName="Model_contabilidad.ATS_comprobantes_anulados">
               <MappingFragment StoreEntitySet="ATS_comprobantes_anulados">
-                <ScalarProperty Name="Autorización" ColumnName="Autorización" />
-                <ScalarProperty Name="secuencialFin" ColumnName="secuencialFin" />
-                <ScalarProperty Name="secuencialInicio" ColumnName="secuencialInicio" />
-                <ScalarProperty Name="puntoEmision" ColumnName="puntoEmision" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="tipoComprobante" ColumnName="tipoComprobante" />
                 <ScalarProperty Name="Establecimiento" ColumnName="Establecimiento" />
-                <ScalarProperty Name="tipoComprobante" ColumnName="tipoComprobante" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ATS_ventas">
-            <EntityTypeMapping TypeName="Model_contabilidad.ATS_ventas">
-              <MappingFragment StoreEntitySet="ATS_ventas">
-                <ScalarProperty Name="ivaComp" ColumnName="ivaComp" />
-                <ScalarProperty Name="ventasEstab" ColumnName="ventasEstab" />
-                <ScalarProperty Name="codEstab" ColumnName="codEstab" />
-                <ScalarProperty Name="formaPago" ColumnName="formaPago" />
-                <ScalarProperty Name="valorRetRenta" ColumnName="valorRetRenta" />
-                <ScalarProperty Name="valorRetIva" ColumnName="valorRetIva" />
-                <ScalarProperty Name="montoIce" ColumnName="montoIce" />
-                <ScalarProperty Name="montoIva" ColumnName="montoIva" />
-                <ScalarProperty Name="baseImpGrav" ColumnName="baseImpGrav" />
-                <ScalarProperty Name="baseImponible" ColumnName="baseImponible" />
-                <ScalarProperty Name="baseNoGraIva" ColumnName="baseNoGraIva" />
-                <ScalarProperty Name="numeroComprobantes" ColumnName="numeroComprobantes" />
-                <ScalarProperty Name="tipoEm" ColumnName="tipoEm" />
-                <ScalarProperty Name="tipoComprobante" ColumnName="tipoComprobante" />
-                <ScalarProperty Name="DenoCli" ColumnName="DenoCli" />
-                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
-                <ScalarProperty Name="parteRel" ColumnName="parteRel" />
-                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-                <ScalarProperty Name="tpIdCliente" ColumnName="tpIdCliente" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="puntoEmision" ColumnName="puntoEmision" />
+                <ScalarProperty Name="secuencialInicio" ColumnName="secuencialInicio" />
+                <ScalarProperty Name="secuencialFin" ColumnName="secuencialFin" />
+                <ScalarProperty Name="Autorización" ColumnName="Autorización" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ATS_exportaciones">
             <EntityTypeMapping TypeName="Model_contabilidad.ATS_exportaciones">
               <MappingFragment StoreEntitySet="ATS_exportaciones">
-                <ScalarProperty Name="denoExpCli" ColumnName="denoExpCli" />
-                <ScalarProperty Name="fechaEmision" ColumnName="fechaEmision" />
-                <ScalarProperty Name="autorizacion" ColumnName="autorizacion" />
-                <ScalarProperty Name="secuencial" ColumnName="secuencial" />
-                <ScalarProperty Name="puntoEmision" ColumnName="puntoEmision" />
-                <ScalarProperty Name="establecimiento" ColumnName="establecimiento" />
-                <ScalarProperty Name="valorFOBComprobante" ColumnName="valorFOBComprobante" />
-                <ScalarProperty Name="valorFOB" ColumnName="valorFOB" />
-                <ScalarProperty Name="fechaEmbarque" ColumnName="fechaEmbarque" />
-                <ScalarProperty Name="tipoComprobante" ColumnName="tipoComprobante" />
-                <ScalarProperty Name="exportacionDe" ColumnName="exportacionDe" />
-                <ScalarProperty Name="paisEfecExp" ColumnName="paisEfecExp" />
-                <ScalarProperty Name="paisEfecPagoGen" ColumnName="paisEfecPagoGen" />
-                <ScalarProperty Name="tipoRegi" ColumnName="tipoRegi" />
-                <ScalarProperty Name="parteRel" ColumnName="parteRel" />
-                <ScalarProperty Name="idClienteEx" ColumnName="idClienteEx" />
-                <ScalarProperty Name="tpIdClienteEx" ColumnName="tpIdClienteEx" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="tpIdClienteEx" ColumnName="tpIdClienteEx" />
+                <ScalarProperty Name="idClienteEx" ColumnName="idClienteEx" />
+                <ScalarProperty Name="parteRel" ColumnName="parteRel" />
+                <ScalarProperty Name="tipoRegi" ColumnName="tipoRegi" />
+                <ScalarProperty Name="paisEfecPagoGen" ColumnName="paisEfecPagoGen" />
+                <ScalarProperty Name="paisEfecExp" ColumnName="paisEfecExp" />
+                <ScalarProperty Name="exportacionDe" ColumnName="exportacionDe" />
+                <ScalarProperty Name="tipoComprobante" ColumnName="tipoComprobante" />
+                <ScalarProperty Name="fechaEmbarque" ColumnName="fechaEmbarque" />
+                <ScalarProperty Name="valorFOB" ColumnName="valorFOB" />
+                <ScalarProperty Name="valorFOBComprobante" ColumnName="valorFOBComprobante" />
+                <ScalarProperty Name="establecimiento" ColumnName="establecimiento" />
+                <ScalarProperty Name="puntoEmision" ColumnName="puntoEmision" />
+                <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+                <ScalarProperty Name="autorizacion" ColumnName="autorizacion" />
+                <ScalarProperty Name="fechaEmision" ColumnName="fechaEmision" />
+                <ScalarProperty Name="denoExpCli" ColumnName="denoExpCli" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ATS_retenciones">
             <EntityTypeMapping TypeName="Model_contabilidad.ATS_retenciones">
               <MappingFragment StoreEntitySet="ATS_retenciones">
-                <ScalarProperty Name="denopr" ColumnName="denopr" />
-                <ScalarProperty Name="re_tipo_Ret" ColumnName="re_tipo_Ret" />
-                <ScalarProperty Name="autModificado" ColumnName="autModificado" />
-                <ScalarProperty Name="secModificado" ColumnName="secModificado" />
-                <ScalarProperty Name="ptoEmiModificado" ColumnName="ptoEmiModificado" />
-                <ScalarProperty Name="estabModificado" ColumnName="estabModificado" />
-                <ScalarProperty Name="docModificado" ColumnName="docModificado" />
-                <ScalarProperty Name="fechaEmiRet1" ColumnName="fechaEmiRet1" />
-                <ScalarProperty Name="autRetencion1" ColumnName="autRetencion1" />
-                <ScalarProperty Name="secRetencion1" ColumnName="secRetencion1" />
-                <ScalarProperty Name="ptoEmiRetencion1" ColumnName="ptoEmiRetencion1" />
-                <ScalarProperty Name="estabRetencion1" ColumnName="estabRetencion1" />
-                <ScalarProperty Name="valRetAir" ColumnName="valRetAir" />
-                <ScalarProperty Name="porcentajeAir" ColumnName="porcentajeAir" />
-                <ScalarProperty Name="baseImpAir" ColumnName="baseImpAir" />
-                <ScalarProperty Name="codRetAir" ColumnName="codRetAir" />
-                <ScalarProperty Name="valRetServ100" ColumnName="valRetServ100" />
-                <ScalarProperty Name="valorRetServicios" ColumnName="valorRetServicios" />
-                <ScalarProperty Name="valRetServ50" ColumnName="valRetServ50" />
-                <ScalarProperty Name="valorRetBienes" ColumnName="valorRetBienes" />
-                <ScalarProperty Name="valRetServ20" ColumnName="valRetServ20" />
-                <ScalarProperty Name="valRetBien10" ColumnName="valRetBien10" />
-                <ScalarProperty Name="Cedula_ruc" ColumnName="Cedula_ruc" />
-                <ScalarProperty Name="co_factura" ColumnName="co_factura" />
-                <ScalarProperty Name="co_serie" ColumnName="co_serie" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="co_serie" ColumnName="co_serie" />
+                <ScalarProperty Name="co_factura" ColumnName="co_factura" />
+                <ScalarProperty Name="Cedula_ruc" ColumnName="Cedula_ruc" />
+                <ScalarProperty Name="valRetBien10" ColumnName="valRetBien10" />
+                <ScalarProperty Name="valRetServ20" ColumnName="valRetServ20" />
+                <ScalarProperty Name="valorRetBienes" ColumnName="valorRetBienes" />
+                <ScalarProperty Name="valRetServ50" ColumnName="valRetServ50" />
+                <ScalarProperty Name="valorRetServicios" ColumnName="valorRetServicios" />
+                <ScalarProperty Name="valRetServ100" ColumnName="valRetServ100" />
+                <ScalarProperty Name="codRetAir" ColumnName="codRetAir" />
+                <ScalarProperty Name="baseImpAir" ColumnName="baseImpAir" />
+                <ScalarProperty Name="porcentajeAir" ColumnName="porcentajeAir" />
+                <ScalarProperty Name="valRetAir" ColumnName="valRetAir" />
+                <ScalarProperty Name="estabRetencion1" ColumnName="estabRetencion1" />
+                <ScalarProperty Name="ptoEmiRetencion1" ColumnName="ptoEmiRetencion1" />
+                <ScalarProperty Name="secRetencion1" ColumnName="secRetencion1" />
+                <ScalarProperty Name="autRetencion1" ColumnName="autRetencion1" />
+                <ScalarProperty Name="fechaEmiRet1" ColumnName="fechaEmiRet1" />
+                <ScalarProperty Name="docModificado" ColumnName="docModificado" />
+                <ScalarProperty Name="estabModificado" ColumnName="estabModificado" />
+                <ScalarProperty Name="ptoEmiModificado" ColumnName="ptoEmiModificado" />
+                <ScalarProperty Name="secModificado" ColumnName="secModificado" />
+                <ScalarProperty Name="autModificado" ColumnName="autModificado" />
+                <ScalarProperty Name="re_tipo_Ret" ColumnName="re_tipo_Ret" />
+                <ScalarProperty Name="denopr" ColumnName="denopr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ATS_ventas">
+            <EntityTypeMapping TypeName="Model_contabilidad.ATS_ventas">
+              <MappingFragment StoreEntitySet="ATS_ventas">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="tpIdCliente" ColumnName="tpIdCliente" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="parteRel" ColumnName="parteRel" />
+                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
+                <ScalarProperty Name="DenoCli" ColumnName="DenoCli" />
+                <ScalarProperty Name="tipoComprobante" ColumnName="tipoComprobante" />
+                <ScalarProperty Name="tipoEm" ColumnName="tipoEm" />
+                <ScalarProperty Name="numeroComprobantes" ColumnName="numeroComprobantes" />
+                <ScalarProperty Name="baseNoGraIva" ColumnName="baseNoGraIva" />
+                <ScalarProperty Name="baseImponible" ColumnName="baseImponible" />
+                <ScalarProperty Name="baseImpGrav" ColumnName="baseImpGrav" />
+                <ScalarProperty Name="montoIva" ColumnName="montoIva" />
+                <ScalarProperty Name="montoIce" ColumnName="montoIce" />
+                <ScalarProperty Name="valorRetIva" ColumnName="valorRetIva" />
+                <ScalarProperty Name="valorRetRenta" ColumnName="valorRetRenta" />
+                <ScalarProperty Name="formaPago" ColumnName="formaPago" />
+                <ScalarProperty Name="codEstab" ColumnName="codEstab" />
+                <ScalarProperty Name="ventasEstab" ColumnName="ventasEstab" />
+                <ScalarProperty Name="ivaComp" ColumnName="ivaComp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwct_cbtecble_con_ctacble_acreedora">
+            <EntityTypeMapping TypeName="Model_contabilidad.vwct_cbtecble_con_ctacble_acreedora">
+              <MappingFragment StoreEntitySet="vwct_cbtecble_con_ctacble_acreedora">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdCtaCble_Acreedora" ColumnName="IdCtaCble_Acreedora" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1828,7 +1828,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>

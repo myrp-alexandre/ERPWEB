@@ -4,28 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bd222bae0290432fb2c83f8e9f1f1240" Name="Diagram1" >
-        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu" Width="1.5" PointX="0.75" PointY="10" />
-        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu_Categoria" Width="1.5" PointX="5.75" PointY="1.25" />
-        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu_Grupo" Width="1.5" PointX="10.25" PointY="1" />
-        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu_Grupo_x_seg_Menu_Item" Width="1.5" PointX="12.5" PointY="1.5" />
-        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu_Item" Width="1.5" PointX="10.25" PointY="7.5" />
-        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu_Item_Tipo" Width="1.5" PointX="8" PointY="8.875" />
-        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu_Pagina" Width="1.5" PointX="8" PointY="1" />
-        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu_x_Empresa" Width="1.5" PointX="3" PointY="11.125" />
-        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu_x_Empresa_x_Usuario" Width="1.5" PointX="3" PointY="1.25" />
-        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_usuario" Width="1.5" PointX="0.75" PointY="3" />
-        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Usuario_x_Empresa" Width="1.5" PointX="3" PointY="4.25" />
-        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_usuario_x_tb_sis_reporte" Width="1.5" PointX="3" PointY="6.875" />
-        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_seg_Menu" />
-        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Menu_Pagina_seg_Menu_Categoria" />
-        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Menu_Grupo_seg_Menu_Pagina" />
-        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Menu_Grupo_x_seg_Menu_Item_seg_Menu_Grupo" />
-        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Menu_Grupo_x_seg_Menu_Item_seg_Menu_Item" />
-        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Menu_Item_seg_Menu_Item_Tipo" />
-        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" />
-        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Usuario_x_Empresa_seg_usuario" />
-        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_usuario_x_tb_sis_reporte_seg_usuario" />
+      <Diagram DiagramId="8f543fdfe4204fcfbd9800d786ff2899" Name="Diagram1">
+        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu_x_Empresa" Width="1.5" PointX="8" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu_x_Empresa_x_Usuario" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_usuario" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Usuario_x_Empresa" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_usuario_x_tb_sis_reporte" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_seg_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Usuario_x_Empresa_seg_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_usuario_x_tb_sis_reporte_seg_usuario" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

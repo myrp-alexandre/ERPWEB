@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1E3FE2A0-1589-485F-9F71-9BB6C9968673}</ProjectGuid>
+    <ProjectGuid>{A52F3B91-B460-4FFB-AA55-A667DC60DB43}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Core.Erp.Data</RootNamespace>
@@ -33,11 +33,9 @@
     <Reference Include="DevExpress.Web.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -92,12 +90,6 @@
     </Compile>
     <Compile Include="Af_Retiro_Activo.cs">
       <DependentUpon>Model_activo_fijo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Af_SPACTF_004_detalle.cs">
-      <DependentUpon>Model_reportes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Af_SPACTF_004_resumen.cs">
-      <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="Af_Venta_Activo.cs">
       <DependentUpon>Model_activo_fijo.tt</DependentUpon>
@@ -280,17 +272,6 @@
     <Compile Include="cp_retencion_x_ct_cbtecble.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
-    <Compile Include="CuentasPorCobrar\cxc_cobro_Data.cs" />
-    <Compile Include="CuentasPorCobrar\cxc_cobro_det_Data.cs" />
-    <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Param_conta_x_sucursal_Data.cs" />
-    <Compile Include="CuentasPorPagar\cp_nota_DebCre_Data.cs" />
-    <Compile Include="CuentasPorPagar\cp_orden_giro_pagos_sri_Data.cs" />
-    <Compile Include="CuentasPorPagar\cp_orden_pago_cancelaciones_Data.cs" />
-    <Compile Include="CuentasPorPagar\cp_orden_pago_estado_aprob_Data.cs" />
-    <Compile Include="CuentasPorPagar\cp_orden_pago_tipo_Data.cs" />
-    <Compile Include="CuentasPorPagar\cp_orden_pago_x_nomina_Data.cs" />
-    <Compile Include="CuentasPorPagar\cp_pais_sri_Data.cs" />
-    <Compile Include="CuentasPorPagar\cp_retencion_x_ct_cbtecble_Data.cs" />
     <Compile Include="cp_TipoDocumento.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
@@ -332,25 +313,36 @@
     </Compile>
     <Compile Include="CuentasPorCobrar\cxc_CatalogoTipo_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_Catalogo_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_cobro_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_cobro_det_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_motivo_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Param_conta_x_sucursal_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_Parametro_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_tipo_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_x_CtaCble_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_cuotas_x_doc_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_cuotas_x_doc_det_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_nota_DebCre_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_orden_giro_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_orden_giro_pagos_sri_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_orden_pago_cancelaciones_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_orden_pago_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_orden_pago_det_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_orden_pago_estado_aprob_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_orden_pago_formapago_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_orden_pago_tipo_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_orden_pago_tipo_x_empresa_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_orden_pago_x_nomina_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_pagos_sri_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_pais_sri_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_parametros_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_proveedor_clase_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_proveedor_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_retencion_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_retencion_det_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_retencion_x_ct_cbtecble_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_TipoDocumento_Data.cs" />
     <Compile Include="cxc_Catalogo.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
@@ -716,6 +708,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model_caja.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model_compras.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_compras.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model_compras.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_compras.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model_compras.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_compras.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Model_contabilidad.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -760,6 +767,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model_cuentas_por_pagar.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model_entidades_regulatorias.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_entidades_regulatorias.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model_entidades_regulatorias.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_entidades_regulatorias.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model_entidades_regulatorias.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_entidades_regulatorias.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model_facturacion.Context.cs">
       <AutoGen>True</AutoGen>
@@ -867,6 +889,9 @@
       <DependentUpon>Model_seguridad_acceso.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reportes\ActivoFijo\ACTF_001_Data.cs" />
+    <Compile Include="Reportes\ActivoFijo\ACTF_002_Data.cs" />
+    <Compile Include="Reportes\ActivoFijo\ACTF_003_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_004_detalle_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_004_resumen_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_005_Data.cs" />
@@ -879,8 +904,10 @@
     <Compile Include="Reportes\Banco\BAN_005_Data.cs" />
     <Compile Include="Reportes\Banco\BAN_006_Data.cs" />
     <Compile Include="Reportes\Banco\BAN_007_Data.cs" />
+    <Compile Include="Reportes\Caja\CAJ_001_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_ingresos_Data.cs" />
+    <Compile Include="Reportes\Contabilidad\CONTA_001_Data.cs" />
     <Compile Include="Reportes\Contabilidad\CONTA_002_Data.cs" />
     <Compile Include="Reportes\Contabilidad\CONTA_003_balances_Data.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_Data.cs" />
@@ -913,9 +940,12 @@
     <Compile Include="Reportes\Facturacion\FAC_008_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_009_Data.cs" />
     <Compile Include="Reportes\Importacion\IMP_001_Data.cs" />
-    <Compile Include="Reportes\Importacion\IMP_002_gastos_Data.cs" />
     <Compile Include="Reportes\Importacion\IMP_002_Data.cs" />
+    <Compile Include="Reportes\Importacion\IMP_002_gastos_Data.cs" />
     <Compile Include="Reportes\Importacion\IMP_003_Data.cs" />
+    <Compile Include="Reportes\Inventario\INV_001_Data.cs" />
+    <Compile Include="Reportes\Inventario\INV_002_Data.cs" />
+    <Compile Include="Reportes\Inventario\INV_003_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_005_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_007_Data.cs" />
@@ -923,14 +953,6 @@
     <Compile Include="Reportes\Inventario\INV_009_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_010_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_001_Data.cs" />
-    <Compile Include="Reportes\ActivoFijo\ACTF_001_Data.cs" />
-    <Compile Include="Reportes\ActivoFijo\ACTF_002_Data.cs" />
-    <Compile Include="Reportes\ActivoFijo\ACTF_003_Data.cs" />
-    <Compile Include="Reportes\Caja\CAJ_001_Data.cs" />
-    <Compile Include="Reportes\Contabilidad\CONTA_001_Data.cs" />
-    <Compile Include="Reportes\Inventario\INV_003_Data.cs" />
-    <Compile Include="Reportes\Inventario\INV_001_Data.cs" />
-    <Compile Include="Reportes\Inventario\INV_002_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_002_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_003_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_004_Data.cs" />
@@ -1165,24 +1187,6 @@
     <Compile Include="SeguridadAcceso\seg_usuario_Data.cs" />
     <Compile Include="SeguridadAcceso\seg_Usuario_x_Empresa_Data.cs" />
     <Compile Include="seg_Menu.cs">
-      <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
-    </Compile>
-    <Compile Include="seg_Menu_Categoria.cs">
-      <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
-    </Compile>
-    <Compile Include="seg_Menu_Grupo.cs">
-      <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
-    </Compile>
-    <Compile Include="seg_Menu_Grupo_x_seg_Menu_Item.cs">
-      <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
-    </Compile>
-    <Compile Include="seg_Menu_Item.cs">
-      <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
-    </Compile>
-    <Compile Include="seg_Menu_Item_Tipo.cs">
-      <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
-    </Compile>
-    <Compile Include="seg_Menu_Pagina.cs">
       <DependentUpon>Model_seguridad_acceso.tt</DependentUpon>
     </Compile>
     <Compile Include="seg_Menu_x_Empresa.cs">
@@ -1781,12 +1785,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core.Erp.Info\Core.Erp.Info.csproj">
-      <Project>{b08cccbc-a2ed-4505-89e2-dccfc4abbd46}</Project>
-      <Name>Core.Erp.Info</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EntityDeploy Include="Model_general.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model_general.Designer.cs</LastGenOutput>
@@ -1819,6 +1817,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model_contabilidad.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="Model_compras.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model_compras.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model_compras.edmx.diagram">
+      <DependentUpon>Model_compras.edmx</DependentUpon>
+    </None>
     <None Include="Model_contabilidad.edmx.diagram">
       <DependentUpon>Model_contabilidad.edmx</DependentUpon>
     </None>
@@ -1840,6 +1845,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model_facturacion.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="Model_entidades_regulatorias.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model_entidades_regulatorias.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model_entidades_regulatorias.edmx.diagram">
+      <DependentUpon>Model_entidades_regulatorias.edmx</DependentUpon>
+    </None>
     <None Include="Model_facturacion.edmx.diagram">
       <DependentUpon>Model_facturacion.edmx</DependentUpon>
     </None>
@@ -1860,10 +1872,6 @@
     <None Include="Model_inventario.edmx.diagram">
       <DependentUpon>Model_inventario.edmx</DependentUpon>
     </None>
-    <EntityDeploy Include="Model_rrhh.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model_rrhh.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <EntityDeploy Include="Model_reportes.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model_reportes.Designer.cs</LastGenOutput>
@@ -1871,6 +1879,10 @@
     <None Include="Model_reportes.edmx.diagram">
       <DependentUpon>Model_reportes.edmx</DependentUpon>
     </None>
+    <EntityDeploy Include="Model_rrhh.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model_rrhh.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <None Include="Model_rrhh.edmx.diagram">
       <DependentUpon>Model_rrhh.edmx</DependentUpon>
     </None>
@@ -1914,6 +1926,16 @@
       <DependentUpon>Model_caja.edmx</DependentUpon>
       <LastGenOutput>Model_caja.cs</LastGenOutput>
     </Content>
+    <Content Include="Model_compras.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model_compras.edmx</DependentUpon>
+      <LastGenOutput>Model_compras.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model_compras.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model_compras.edmx</DependentUpon>
+      <LastGenOutput>Model_compras.cs</LastGenOutput>
+    </Content>
     <Content Include="Model_contabilidad.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model_contabilidad.edmx</DependentUpon>
@@ -1944,6 +1966,16 @@
       <DependentUpon>Model_cuentas_por_pagar.edmx</DependentUpon>
       <LastGenOutput>Model_cuentas_por_pagar.cs</LastGenOutput>
     </Content>
+    <Content Include="Model_entidades_regulatorias.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model_entidades_regulatorias.edmx</DependentUpon>
+      <LastGenOutput>Model_entidades_regulatorias.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model_entidades_regulatorias.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model_entidades_regulatorias.edmx</DependentUpon>
+      <LastGenOutput>Model_entidades_regulatorias.cs</LastGenOutput>
+    </Content>
     <Content Include="Model_facturacion.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model_facturacion.edmx</DependentUpon>
@@ -1956,8 +1988,8 @@
     </Content>
     <Content Include="Model_general.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model_general.edmx</DependentUpon>
       <LastGenOutput>Model_general.Context.cs</LastGenOutput>
+      <DependentUpon>Model_general.edmx</DependentUpon>
     </Content>
     <Content Include="Model_general.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2018,13 +2050,11 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Erp.Info\Core.Erp.Info.csproj">
+      <Project>{b08cccbc-a2ed-4505-89e2-dccfc4abbd46}</Project>
+      <Name>Core.Erp.Info</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
