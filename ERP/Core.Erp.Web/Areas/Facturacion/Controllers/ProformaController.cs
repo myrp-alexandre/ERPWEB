@@ -312,17 +312,32 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 lineaF = linea;
             return Json(linea, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult ModificarLinea(int Secuencia = 0, decimal IdTransaccionSession = 0, double Precio = 0, double PorDescuento = 0)
+        public JsonResult ModificarLinea(int Secuencia = 0, decimal IdTransaccionSession = 0, double Precio = 0, double PorDescuento = 0, bool AplicarTodaFactura = false)
         {
-            fa_factura_det_Info lineaF = new fa_factura_det_Info();
-            var linea = List_det.get_list(IdTransaccionSession).Where(q => q.Secuencia == Secuencia).FirstOrDefault();
-            if (linea != null)
+
+            var lista = List_det.get_list(IdTransaccionSession);
+            if (AplicarTodaFactura)
             {
-                linea.pd_precio = Precio;
-                linea.pd_por_descuento_uni = PorDescuento;
-                List_det.UpdateRow(linea, IdTransaccionSession);
+                foreach (var linea in lista)
+                {
+                    if (linea.Secuencia == Secuencia)
+                        linea.pd_precio = Precio;
+
+                    linea.pd_por_descuento_uni = PorDescuento;
+                    List_det.UpdateRow(linea, IdTransaccionSession);
+                }
             }
-            return Json(linea, JsonRequestBehavior.AllowGet);
+            else
+            {
+                var linea = lista.Where(q => q.Secuencia == Secuencia).FirstOrDefault();
+                if (linea != null)
+                {
+                    linea.pd_precio = Precio;
+                    linea.pd_por_descuento_uni = PorDescuento;
+                    List_det.UpdateRow(linea, IdTransaccionSession);
+                }
+            }
+            return Json(1, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult get_info_cliente(decimal IdCliente = 0, int IdSucursal = 0)

@@ -81,7 +81,10 @@
                         <label for="txtPorDescuento">% Descuento</label>
                         <input type="text" id="txtPorDescuento" class="form-control" />
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6 form-group">
+                        <label for="chk_aplicar_todo"><input type="checkbox" id="chk_aplicar_todo" value="true|false" /> Aplicar descuento a toda la proforma</label>
+                    </div>
+                    <div class="col-md-6">
                         <button type="button" class="btn btn-primary" onclick="ModificarLinea();">Aceptar</button>
                     </div>
                 </div>
@@ -96,7 +99,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal*</label>
-                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control" })
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -413,11 +416,16 @@
     }
 
     function ModificarLinea() {
+        var AplicarDscto = false;
+        if ($("#chk_aplicar_todo").is(":checked")) {
+            AplicarDscto = true;
+        }
         var datos = {
             IdTransaccionSession: $("#IdTransaccionSession").val(),
             Secuencia: $("#Secuencia").text(),
             Precio: $("#txtPrecio").val(),
-            PorDescuento: $("#txtPorDescuento").val()
+            PorDescuento: $("#txtPorDescuento").val(),
+            AplicarTodaFactura: AplicarDscto
         }
         $.ajax({
             type: 'POST',
