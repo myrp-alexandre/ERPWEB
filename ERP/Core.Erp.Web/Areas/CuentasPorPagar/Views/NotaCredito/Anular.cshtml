@@ -82,32 +82,32 @@
     @Html.HiddenFor(q => q.IdCbteCble_Nota)
     @Html.HiddenFor(q => q.IdTipoCbte_Nota)
 
-    <div class="row">
-        <div class="col-md-6">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdSucursal">Sucursal*</label>
-                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursales, "IdSucursal", "Su_descripcion"), new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdProveedor">Proveedor</label>
-                    @Html.Partial("_CmbProveedor_CXP", Model)
-                    @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
-                </div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="IdSucursal">Sucursal*</label>
+                @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursales, "IdSucursal", "Su_descripcion"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="col-md-3">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="IdProveedor">Proveedor</label>
+                @Html.Partial("_CmbProveedor_CXP", Model)
+                @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="IdOrden_giro_Tipo">Tipo nota*</label>
                 @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_tipo_nota, "Key", "Value"), new { @class = "form-control", @id = "IdTipoNota" })
                 @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="cn_fecha">Fecha documentos*</label>
                 <div class="input-group date">
@@ -119,7 +119,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="Fecha_contable">Fecha contabilización*</label>
                 <div class="input-group date">
@@ -131,7 +133,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="cn_Fecha_vcto">Fecha vencimiento*</label>
                 <div class="input-group date">
@@ -144,6 +146,7 @@
             </div>
         </div>
     </div>
+</div>
     <div class="row" id="div_tipo">
         <div class="col-md-12">
             <div class="col-md-2">

@@ -20,7 +20,7 @@
         settings.Properties.Columns.Add("info_persona.pe_nombreCompleto", "Provedor", 80);
     })
     .BindList(new Core.Erp.Web.Areas.Importacion.Controllers.OrdenCompraExteriorController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Importacion.Controllers.OrdenCompraExteriorController().get_info_bajo_demanda)
-    .Bind(Model.IdProveedor);
+    .Bind(Model.IdProveedor == 0 ? "" : Model.IdProveedor);
 
 }
 @comboBox.GetHtml()

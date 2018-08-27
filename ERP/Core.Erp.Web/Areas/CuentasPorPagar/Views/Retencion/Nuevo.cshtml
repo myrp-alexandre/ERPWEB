@@ -38,14 +38,14 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="co_observacion">Proveedor</label>
-                    @Html.TextBoxFor(q => q.pe_razonSocial, new { @class = "form-control", @id = "observacion", @disabled = "disabled" })
+                    @Html.TextBoxFor(q => q.pe_razonSocial, new { @class = "form-control", @id = "pe_razonSocial", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.pe_razonSocial, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="IdOrden_giro_Tipo">Tipo documento*</label>
-                    @Html.TextBoxFor(q => q.Descripcion, new { @class = "form-control", @id = "co_valoriva", @disabled = "disabled" })
+                    @Html.TextBoxFor(q => q.Descripcion, new { @class = "form-control", @id = "Descripcion", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.Descripcion, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -98,28 +98,28 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="co_total">Total</label>
-                    @Html.TextBoxFor(q => q.co_baseImponible, new { @class = "form-control", @id = "co_total", @disabled = "disabled" })
+                    @Html.TextBoxFor(q => q.co_baseImponible, new { @class = "form-control", @id = "co_baseImponible", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.co_baseImponible, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-1">
                 <div class="form-group">
                     <label for="co_total">Estb.</label>
-                    @Html.TextBoxFor(q => q.serie1, new { @class = "form-control", @id = "co_total" })
+                    @Html.TextBoxFor(q => q.serie1, new { @class = "form-control", @id = "serie1" })
                     @Html.ValidationMessageFor(q => q.co_baseImponible, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-1">
                 <div class="form-group">
                     <label for="co_total">Pto.</label>
-                    @Html.TextBoxFor(q => q.serie2, new { @class = "form-control", @id = "co_total" })
+                    @Html.TextBoxFor(q => q.serie2, new { @class = "form-control", @id = "serie2" })
                     @Html.ValidationMessageFor(q => q.co_baseImponible, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="co_total"># Retención</label>
-                    @Html.TextBoxFor(q => q.NumRetencion, new { @class = "form-control", @id = "co_total" })
+                    @Html.TextBoxFor(q => q.NumRetencion, new { @class = "form-control", @id = "NumRetencion" })
                     @Html.ValidationMessageFor(q => q.co_baseImponible, "", new { @class = "text-danger" })
                 </div>
             </div>

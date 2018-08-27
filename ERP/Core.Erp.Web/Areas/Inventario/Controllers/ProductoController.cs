@@ -21,6 +21,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         in_Producto_Composicion_List list_producto_composicion = new in_Producto_Composicion_List();
         in_Producto_Composicion_Bus bus_producto_composicion = new in_Producto_Composicion_Bus();
         in_ProductoTipo_Bus bus_producto_tipo = new in_ProductoTipo_Bus();
+        in_producto_x_tb_bodega_Info_List Lis_in_producto_x_tb_bodega_Info_List = new in_producto_x_tb_bodega_Info_List();
         private string mensaje;
         #endregion
 
@@ -59,22 +60,39 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_producto()
         {
+
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             List<in_Producto_Info> model = bus_producto.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_producto", model);
         }
-
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_producto_por_bodega()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            return PartialView("_GridViewPartial_producto_por_bodega", model);
+        }
+        
         public List<in_Producto_Info> get_lst_productos()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             List<in_Producto_Info> model = bus_producto.get_list(IdEmpresa, true);
             return model;
         }
+
+
         #endregion
 
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             in_Producto_Info model = new in_Producto_Info { IdEmpresa = IdEmpresa, IdCod_Impuesto_Iva = "IVA12" };
             model.pr_imagen = new byte[0];
             model.lst_producto_composicion = new List<in_Producto_Composicion_Info>();
@@ -107,6 +125,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         public ActionResult Modificar(int IdEmpresa = 0 , decimal IdProducto = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             in_Producto_Info model = bus_producto.get_info(IdEmpresa, IdProducto);
             if (model == null)
                 return RedirectToAction("Index");
@@ -150,6 +174,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         public ActionResult Anular(int IdEmpresa = 0 , decimal IdProducto = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             in_Producto_Info model = bus_producto.get_info(IdEmpresa, IdProducto);
             if (model == null)
                 return RedirectToAction("Index");
@@ -461,6 +491,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
     public class in_Producto_List
     {
+        string Variable = "in_producto_x_tb_bodega_Info";
         public List<in_Producto_Info> get_list()
         {
             if (HttpContext.Current.Session["in_Producto_Info"] == null)
@@ -490,4 +521,52 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             list.Remove(list.Where(m => m.IdProducto == IdProducto).First());
         }
     }
+
+
+
+    public class in_producto_x_tb_bodega_Info_List
+    {
+        string Variable = "in_producto_x_tb_bodega_Info";
+        public List<in_producto_x_tb_bodega_Info> get_list(decimal IdTransaccionSession)
+        {
+
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<in_producto_x_tb_bodega_Info> list = new List<in_producto_x_tb_bodega_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<in_producto_x_tb_bodega_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<in_producto_x_tb_bodega_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+
+        public void AddRow(in_producto_x_tb_bodega_Info info_det, decimal IdTransaccionSession)
+        {
+            List<in_producto_x_tb_bodega_Info> list = get_list(IdTransaccionSession);
+            info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+            info_det.IdBodega = info_det.IdBodega;
+            info_det.IdSucursal = info_det.IdSucursal;
+            list.Add(info_det);
+        }
+
+        public void UpdateRow(in_producto_x_tb_bodega_Info info_det, decimal IdTransaccionSession)
+        {
+            in_producto_x_tb_bodega_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
+            edited_info.IdProducto = info_det.IdProducto;
+            edited_info.IdBodega = info_det.IdBodega;
+            edited_info.IdSucursal = info_det.IdSucursal;
+
+        }
+
+        public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
+        {
+            List<in_producto_x_tb_bodega_Info> list = get_list(IdTransaccionSession);
+            list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
+        }
+    }
+
 }

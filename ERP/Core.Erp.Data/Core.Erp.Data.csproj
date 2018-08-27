@@ -583,6 +583,7 @@
     <Compile Include="Inventario\in_Producto_Composicion_Data.cs" />
     <Compile Include="Inventario\in_Producto_Data.cs" />
     <Compile Include="Inventario\in_producto_x_tb_bodega_Costo_Historico_Data.cs" />
+    <Compile Include="Inventario\in_producto_x_tb_bodega_Data.cs" />
     <Compile Include="Inventario\in_subgrupo_Data.cs" />
     <Compile Include="Inventario\in_transferencia_Data.cs" />
     <Compile Include="Inventario\in_transferencia_det_Data.cs" />
@@ -1776,6 +1777,9 @@
     </Compile>
     <Compile Include="vwRo_Solicitud_Vacaciones.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwtb_bodega_x_sucursal.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
     <Compile Include="vwtb_ciudad_id.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
