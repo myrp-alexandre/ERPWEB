@@ -77,7 +77,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             });
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-
         public JsonResult cargar_grupos(int IdEmpresa = 0, string IdCategoria = "", int IdLinea = 0)
         {
             in_grupo_Bus bus_grupo = new in_grupo_Bus();

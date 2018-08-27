@@ -94,25 +94,8 @@
             </div>
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdProveedor">Proveedor*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdProveedor, settings =>
-               {
-                   settings.Name = "IdProveedor";
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                   settings.Properties.Columns.Add("IdProveedor", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("info_persona.pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                   settings.Properties.Columns.Add("info_persona.pe_nombreCompleto", "Proveedor").Width = System.Web.UI.WebControls.Unit.Percentage(70);
-                   settings.Properties.CallbackPageSize = 10;
-                   //Campo ID
-                   settings.Properties.ValueField = "IdProveedor";
-                   settings.Properties.ValueType = typeof(decimal);
-                   settings.Properties.TextField = "info_persona.pe_nombreCompleto";
-                   //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-               }).BindList(ViewBag.lst_proveedores).GetHtml()
+                    <label for="IdProveedor">Proveedor</label>
+                    @Html.Partial("_CmbProveedor_CXP", Model)
                     @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
                 </div>
             </div>

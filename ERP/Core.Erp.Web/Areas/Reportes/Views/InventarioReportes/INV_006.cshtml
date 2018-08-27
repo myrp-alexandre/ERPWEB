@@ -47,6 +47,24 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="IdProductoPadre">Producto padre</label>
+                            @Html.Partial("_CmbProductoPadre_Inventario", Model)
+                            @Html.ValidationMessageFor(q => q.IdProductoPadre, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="IdProducto">Producto </label>
+                            @Html.Partial("_CmbProducto_Inventario", Model)
+                            @Html.ValidationMessageFor(q => q.IdProducto, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Fecha inicio*</label>
@@ -78,13 +96,13 @@
                             </div>
                             <div class="checkbox">
                                 <label for="no_mostrar_valores_en_0">@Html.CheckBoxFor(q => q.no_mostrar_valores_en_0) No mostrar saldo 0</label>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <!-- /.box-body -->
         </div>
-        <!-- /.box-body -->
-    </div>
     </div>
 
     <div class="box">

@@ -11,6 +11,8 @@ using Core.Erp.Bus.General;
 using DevExpress.Web.Mvc;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
+using Core.Erp.Info.General;
+using DevExpress.Web;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
@@ -37,6 +39,23 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
 
         #endregion
+        #region Metodos ComboBox bajo demanda
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        public ActionResult CmbProveedor_CXP()
+        {
+            cp_nota_DebCre_Info model = new cp_nota_DebCre_Info();
+            return PartialView("_CmbProveedor_CXP", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROVEE.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROVEE.ToString());
+        }
+        #endregion
+
         #region vistas partial
         public ActionResult Index()
         {
