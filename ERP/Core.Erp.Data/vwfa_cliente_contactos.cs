@@ -12,15 +12,19 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class vwfa_cliente_consulta
+    public partial class vwfa_cliente_contactos
     {
         public int IdEmpresa { get; set; }
         public decimal IdCliente { get; set; }
-        public string Codigo { get; set; }
-        public decimal IdPersona { get; set; }
-        public string pe_nombreCompleto { get; set; }
-        public int Idtipo_cliente { get; set; }
-        public string pe_cedulaRuc { get; set; }
-        public string Estado { get; set; }
+        public int IdContacto { get; set; }
+        public string Nombres { get; set; }
+        public string Telefono { get; set; }
+        public string Celular { get; set; }
+        public string Correo { get; set; }
+        public string Direccion { get; set; }
+        public string IdCiudad { get; set; }
+        public string IdParroquia { get; set; }
+        public string nom_parroquia { get; set; }
+        public string Descripcion_Ciudad { get; set; }
     }
 }

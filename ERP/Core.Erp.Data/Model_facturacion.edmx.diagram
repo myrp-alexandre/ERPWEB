@@ -89,6 +89,7 @@
         <AssociationConnector Association="Model_facturacion.FK_fa_TerminoPago_Distribucion_fa_TerminoPago" ManuallyRouted="false" />
         <AssociationConnector Association="Model_facturacion.FK_fa_TipoNota_x_Empresa_x_Sucursal_fa_TipoNota" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Model_facturacion.vwfa_factura_det" Width="1.5" PointX="13.375" PointY="7.75" />
+        <EntityTypeShape EntityType="Model_facturacion.vwfa_cliente_contactos" Width="1.5" PointX="5.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

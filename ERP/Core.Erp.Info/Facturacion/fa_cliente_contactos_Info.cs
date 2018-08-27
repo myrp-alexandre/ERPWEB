@@ -26,6 +26,8 @@ namespace Core.Erp.Info.Facturacion
 
         #region Campos que no existen en la tabla
         public string nom_parroquia { get; set; }
+        public string nom_ciudad { get; set; }
+        public string Nombres_combo { get; set; }
         #endregion
     }
 }

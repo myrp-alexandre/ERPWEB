@@ -309,7 +309,7 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 $.each(data, function (i, row) {
-                    $("#IdContacto").append("<option value=" + row.IdContacto + ">" + row.Nombres + "</option>");
+                    $("#IdContacto").append("<option value=" + row.IdContacto + ">" + row.Nombres_combo + "</option>");
                 });
             },
             error: function (error) {
@@ -595,7 +595,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdClienteContacto">Contacto</label>
-                    @Html.DropDownListFor(q => q.IdContacto, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres"), new { @class = "form-control", @id = "IdContacto" })
+                    @Html.DropDownListFor(q => q.IdContacto, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres_combo"), new { @class = "form-control", @id = "IdContacto" })
                     @Html.ValidationMessageFor(q => q.IdContacto, "", new { @class = "text-danger" })
                 </div>
             </div>
