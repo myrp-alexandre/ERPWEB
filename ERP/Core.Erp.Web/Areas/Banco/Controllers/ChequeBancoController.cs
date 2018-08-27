@@ -108,7 +108,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         private bool validar(ba_Cbte_Ban_Info i_validar, ref string msg)
         {
             i_validar.lst_det_canc_op = List_op.get_list();
-            i_validar.lst_det_ct = List_ct.get_list();
+            i_validar.lst_det_ct = List_ct.get_list(i_validar.IdTransaccionSession);
 
             if (i_validar.IdEntidad == 0)
             {
@@ -182,6 +182,12 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0 )
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             ba_Cbte_Ban_Info model = new ba_Cbte_Ban_Info
             {
                 IdEmpresa = IdEmpresa,
@@ -192,10 +198,11 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 cb_Fecha = DateTime.Now.Date,
                 IdEntidad = 0,
                 lst_det_canc_op = new List<cp_orden_pago_cancelaciones_Info>(),
-                lst_det_ct = new List<ct_cbtecble_det_Info>()
+                lst_det_ct = new List<ct_cbtecble_det_Info>(),
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
             SessionFixed.TipoPersona = model.IdTipo_Persona;
-            List_ct.set_list(model.lst_det_ct);
+            List_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
             List_op.set_list(model.lst_det_canc_op);
             cargar_combos(IdEmpresa);
             return View(model);
@@ -241,11 +248,18 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         public ActionResult Modificar(int IdEmpresa = 0 , int IdTipocbte = 0, decimal IdCbteCble = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
             if(model == null)
                 return RedirectToAction("Index");
             model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
-            List_ct.set_list(model.lst_det_ct);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            List_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
             model.lst_det_canc_op = bus_cancelaciones.get_list_x_pago(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble, SessionFixed.IdUsuario);
             List_op.set_list(model.lst_det_canc_op);
             cargar_combos(IdEmpresa);
@@ -255,11 +269,18 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         public ActionResult Anular(int IdEmpresa = 0 , int IdTipocbte = 0, decimal IdCbteCble = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
-            List_ct.set_list(model.lst_det_ct);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            List_ct.set_list(model.lst_det_ct, model.IdTransaccionSession);
             model.lst_det_canc_op = bus_cancelaciones.get_list_x_pago(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble, SessionFixed.IdUsuario);
             List_op.set_list(model.lst_det_canc_op);
             cargar_combos(IdEmpresa);
@@ -337,9 +358,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #endregion
 
         #region Json
-        public JsonResult armar_diario(int IdBanco = 0)
+        public JsonResult armar_diario(int IdEmpresa = 0, int IdBanco = 0, decimal IdTransaccionSession = 0)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var bco = bus_banco_cuenta.get_info(IdEmpresa, IdBanco);
             var lst_op = List_op.get_list();
 
@@ -364,21 +384,20 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 dc_Valor_haber = Math.Round(lst_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero),
                 dc_para_conciliar = true
             });
-            List_ct.set_list(lst_ct);
+            List_ct.set_list(lst_ct,IdTransaccionSession);
             return Json(Math.Round(lst_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetNumCheque(int IdBanco = 0)
-        {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+        public JsonResult GetNumCheque(int IdEmpresa = 0, int IdBanco = 0)
+        {            
             var resultado = bus_talonario.get_ult_NumCheque_no_usado(IdEmpresa, IdBanco);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
-        public void vaciar_detalle()
+        public void vaciar_detalle(decimal IdTransaccionSession = 0)
         {
             List_op.set_list(new List<cp_orden_pago_cancelaciones_Info>());
-            List_ct.set_list(new List<ct_cbtecble_det_Info>());
+            List_ct.set_list(new List<ct_cbtecble_det_Info>(),IdTransaccionSession);
         }
         #endregion
     }

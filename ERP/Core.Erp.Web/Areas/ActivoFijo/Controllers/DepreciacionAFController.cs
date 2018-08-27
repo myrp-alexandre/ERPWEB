@@ -65,7 +65,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 msg = "No existen activos a depreciarse";
                 return false;
             }
-            i_validar.lst_detalle_ct = lst_comprobante_detalle.get_list();
+            i_validar.lst_detalle_ct = lst_comprobante_detalle.get_list(i_validar.IdTransaccionSession);
             if (i_validar.lst_detalle_ct.Count == 0)
             {
                 mensaje = "Debe ingresar registros en el detalle, por favor verifique";
@@ -96,7 +96,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         public void Get_list_activos_a_depreciar(int IdPeriodo = 0, decimal IdTransaccionSession = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            string IdUsuario = Session["IdUsuario"].ToString();
+            string IdUsuario = SessionFixed.IdUsuario;
             var lst = bus_depreciacion_det.get_list_a_depreciar(IdEmpresa, IdPeriodo, IdUsuario);
             lst_depreciacion_det.set_list(lst, IdTransaccionSession);
 
@@ -122,7 +122,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                     dc_Valor_haber = Math.Round(item.Valor_Depreciacion, 2, MidpointRounding.AwayFromZero)
                 });
             }
-            lst_comprobante_detalle.set_list(lst_ct);
+            lst_comprobante_detalle.set_list(lst_ct, IdTransaccionSession);
         }
 
         #endregion
@@ -143,10 +143,11 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 Fecha_Depreciacion = DateTime.Now.Date,
                 IdPeriodo = Convert.ToInt32(DateTime.Now.Date.ToString("yyyyMM")),
                 lst_detalle = new List<Af_Depreciacion_Det_Info>(),
-                lst_detalle_ct = new List<ct_cbtecble_det_Info>()
+                lst_detalle_ct = new List<ct_cbtecble_det_Info>(),
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
             lst_depreciacion_det.set_list(model.lst_detalle, model.IdTransaccionSession);
-            lst_comprobante_detalle.set_list(model.lst_detalle_ct);
+            lst_comprobante_detalle.set_list(model.lst_detalle_ct,model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -184,9 +185,9 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 return RedirectToAction("Index");
             model.lst_detalle = bus_depreciacion_det.get_list(IdEmpresa, IdDepreciacion);
             model.lst_detalle_ct = bus_comprobante_detalle.get_list(IdEmpresa, Convert.ToInt32(model.IdTipoCbte), Convert.ToInt32(model.IdCbteCble));
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             lst_depreciacion_det.set_list(model.lst_detalle, model.IdTransaccionSession);
-            lst_comprobante_detalle.set_list(model.lst_detalle_ct);
+            lst_comprobante_detalle.set_list(model.lst_detalle_ct,model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -224,9 +225,9 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 return RedirectToAction("Index");
             model.lst_detalle = bus_depreciacion_det.get_list(IdEmpresa, IdDepreciacion);
             model.lst_detalle_ct = bus_comprobante_detalle.get_list(IdEmpresa, Convert.ToInt32(model.IdTipoCbte), Convert.ToInt32(model.IdCbteCble));
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             lst_depreciacion_det.set_list(model.lst_detalle, model.IdTransaccionSession);
-            lst_comprobante_detalle.set_list(model.lst_detalle_ct);
+            lst_comprobante_detalle.set_list(model.lst_detalle_ct,model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -235,7 +236,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         public ActionResult Anular(Af_Depreciacion_Info model)
         {
             model.lst_detalle = lst_depreciacion_det.get_list(model.IdTransaccionSession);
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
             if (!bus_depreciacion.anularDB(model))
             {
                 cargar_combos(model.IdEmpresa);

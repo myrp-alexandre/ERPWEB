@@ -75,7 +75,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
         private bool validar(ba_Cbte_Ban_Info i_validar, ref string msg)
         {
-            i_validar.lst_det_ct = List_ct.get_list();
+            i_validar.lst_det_ct = List_ct.get_list(i_validar.IdTransaccionSession);
 
             if (i_validar.lst_det_ct.Count == 0)
             {
@@ -117,6 +117,13 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
             ba_Cbte_Ban_Info model = new ba_Cbte_Ban_Info
             {
                 IdEmpresa = IdEmpresa,
@@ -125,10 +132,11 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 cb_Fecha = DateTime.Now.Date,
                 lst_det_ct = new List<ct_cbtecble_det_Info>(),
                 IdBanco = 1,
-                IdTipoNota = 2
+                IdTipoNota = 2,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
             SessionFixed.TipoPersona = model.IdTipo_Persona;
-            List_ct.set_list(model.lst_det_ct);
+            List_ct.set_list(model.lst_det_ct, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -173,11 +181,18 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         public ActionResult Modificar(int IdEmpresa = 0, int IdTipocbte = 0, decimal IdCbteCble = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
-            List_ct.set_list(model.lst_det_ct);
+            List_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             SessionFixed.TipoPersona = model.IdTipo_Persona;
             return View(model);
@@ -185,11 +200,18 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         public ActionResult Anular(int IdEmpresa = 0 , int IdTipocbte = 0, decimal IdCbteCble = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
-            List_ct.set_list(model.lst_det_ct);
+            List_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -210,14 +232,13 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #endregion
 
         #region Json
-        public JsonResult GetValorTotal()
+        public JsonResult GetValorTotal(decimal IdTransaccionSession = 0)
         {
-            var lst_ct = List_ct.get_list();
+            var lst_ct = List_ct.get_list(IdTransaccionSession);
             return Json(Math.Round(lst_ct.Sum(q => q.dc_Valor_debe),2,MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
         }
-        public JsonResult armar_diario(int IdBanco = 0, int IdTipoNota = 0)
+        public JsonResult armar_diario(int IdEmpresa = 0, int IdBanco = 0, int IdTipoNota = 0, decimal IdTransaccionSession = 0)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var bco = bus_banco_cuenta.get_info(IdEmpresa, IdBanco);
             var tipo_nota = bus_tipo_nota.get_info(IdEmpresa, IdTipoNota);
             List<ct_cbtecble_det_Info> lst_ct = new List<ct_cbtecble_det_Info>();
@@ -257,7 +278,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             }
 
             
-            List_ct.set_list(lst_ct);
+            List_ct.set_list(lst_ct,IdTransaccionSession);
             return Json(0, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -266,8 +287,9 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_comprobante_detalle_Credito()
         {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = List_ct.get_list();
+            model.lst_ct_cbtecble_det = List_ct.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_comprobante_detalle_Credito", model);
         }
@@ -284,9 +306,9 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
         {
             if (ModelState.IsValid)
-                List_ct.AddRow(info_det);
+                List_ct.AddRow(info_det,Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = List_ct.get_list();
+            model.lst_ct_cbtecble_det = List_ct.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_comprobante_detalle_Credito", model);
         }
@@ -295,18 +317,18 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
         {
             if (ModelState.IsValid)
-                List_ct.UpdateRow(info_det);
+                List_ct.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = List_ct.get_list();
+            model.lst_ct_cbtecble_det = List_ct.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_comprobante_detalle_Credito", model);
         }
 
         public ActionResult EditingDelete(int secuencia)
         {
-            List_ct.DeleteRow(secuencia);
+            List_ct.DeleteRow(secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = List_ct.get_list();
+            model.lst_ct_cbtecble_det = List_ct.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_comprobante_detalle_Credito", model);
         }

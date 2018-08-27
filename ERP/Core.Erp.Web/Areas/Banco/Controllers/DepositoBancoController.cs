@@ -73,7 +73,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
         private bool validar(ba_Cbte_Ban_Info i_validar, ref string msg)
         {
-            i_validar.lst_det_ct = List_ct.get_list();
+            i_validar.lst_det_ct = List_ct.get_list(i_validar.IdTransaccionSession);
             i_validar.lst_det_ing = List_ing.get_list();
             if (i_validar.lst_det_ing.Count == 0)
             {
@@ -118,6 +118,12 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             ba_Cbte_Ban_Info model = new ba_Cbte_Ban_Info
             {
                 IdEmpresa = IdEmpresa,
@@ -125,9 +131,10 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 CodTipoCbteBan = cl_enumeradores.eTipoCbteBancario.DEPO.ToString(),
                 cb_Fecha = DateTime.Now.Date,
                 lst_det_ct = new List<ct_cbtecble_det_Info>(),
-                lst_det_ing = new List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info>()
+                lst_det_ing = new List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info>(),
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
-            List_ct.set_list(model.lst_det_ct);
+            List_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
             List_ing.set_list(model.lst_det_ing);
             cargar_combos(IdEmpresa);
             return View(model);
@@ -154,12 +161,19 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         public ActionResult Modificar(int IdEmpresa = 0, int IdTipocbte = 0, decimal IdCbteCble = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
             model.lst_det_ing = bus_det.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
-            List_ct.set_list(model.lst_det_ct);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            List_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
             List_ing.set_list(model.lst_det_ing);
             cargar_combos(IdEmpresa);
             SessionFixed.TipoPersona = model.IdTipo_Persona;
@@ -188,11 +202,18 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         public ActionResult Anular(int IdEmpresa = 0, int IdTipocbte = 0, decimal IdCbteCble = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
-            List_ct.set_list(model.lst_det_ct);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            List_ct.set_list(model.lst_det_ct, model.IdTransaccionSession);
             model.lst_det_ing = bus_det.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
             List_ing.set_list(model.lst_det_ing);
             cargar_combos(IdEmpresa);
@@ -261,9 +282,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
 
         #region Json
-        public JsonResult armar_diario(int IdBanco = 0)
+        public JsonResult armar_diario(int IdEmpresa = 0, int IdBanco = 0, decimal IdTransaccionSession = 0)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var bco = bus_banco_cuenta.get_info(IdEmpresa, IdBanco);
             var lst_op = List_ing.get_list();
 
@@ -288,7 +308,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 dc_Valor_debe = Math.Round(lst_op.Sum(q => q.cr_Valor), 2, MidpointRounding.AwayFromZero),
                 dc_para_conciliar = true
             });
-            List_ct.set_list(lst_ct);
+            List_ct.set_list(lst_ct,IdTransaccionSession);
             return Json(Math.Round(lst_op.Sum(q => q.cr_Valor), 2, MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
         }
         #endregion

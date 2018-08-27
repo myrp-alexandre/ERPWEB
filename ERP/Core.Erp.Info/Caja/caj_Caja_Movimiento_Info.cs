@@ -10,6 +10,8 @@ namespace Core.Erp.Info.Caja
 {
     public class caj_Caja_Movimiento_Info
     {
+        public decimal IdTransaccionSession { get; set; }
+
         public int IdEmpresa { get; set; }
         public decimal IdCbteCble { get; set; }
         public int IdTipocbte { get; set; }

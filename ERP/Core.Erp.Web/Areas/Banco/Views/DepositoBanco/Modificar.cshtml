@@ -64,7 +64,9 @@
 
     function armar_diario() {
         var datos = {
-            IdBanco: $("#IdBanco").val()
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdBanco: $("#IdBanco").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -87,7 +89,8 @@
 
 @using (Html.BeginForm("Modificar", "DepositoBanco", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdTipocbte)
     @Html.HiddenFor(q => q.IdCbteCble)
 

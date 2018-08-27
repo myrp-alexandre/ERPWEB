@@ -9,6 +9,7 @@ namespace Core.Erp.Info.Contabilidad
 {
     public class ct_cbtecble_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdTipoCbte { get; set; }
         public decimal IdCbteCble { get; set; }

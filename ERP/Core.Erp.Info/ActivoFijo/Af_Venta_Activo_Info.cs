@@ -2,14 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Info.ActivoFijo
 {
     public class Af_Venta_Activo_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdVtaActivo { get; set; }
         public string Cod_VtaActivo { get; set; }

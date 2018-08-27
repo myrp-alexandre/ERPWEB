@@ -76,7 +76,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             #endregion
             cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info
             {
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
 
                 IdEmpresa = IdEmpresa,
                 Fecha = DateTime.Now.Date,
@@ -94,7 +94,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             list_det.set_list(model.lst_det_fact, model.IdTransaccionSession);
             list_vale.set_list(model.lst_det_vale,model.IdTransaccionSession);
             list_ing.set_list(model.lst_det_ing,model.IdTransaccionSession);
-            list_ct.set_list(model.lst_det_ct);
+            list_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -131,7 +131,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_det_fact = bus_det.get_list(model.IdEmpresa, model.IdConciliacion_Caja);
             list_det.set_list(model.lst_det_fact, model.IdTransaccionSession);
             model.lst_det_vale = bus_vales.get_list(model.IdEmpresa, model.IdConciliacion_Caja);
@@ -188,7 +188,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
         private bool validar(cp_conciliacion_Caja_Info i_validar, ref string msg)
         {
-            i_validar.lst_det_ct = list_ct.get_list();
+            i_validar.lst_det_ct = list_ct.get_list(i_validar.IdTransaccionSession);
 
             i_validar.lst_det_ing = list_ing.get_list(i_validar.IdTransaccionSession);
             i_validar.lst_det_vale = list_vale.get_list(i_validar.IdTransaccionSession);
@@ -429,7 +429,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                     secuencia = 2
                 }
             };
-            list_ct.set_list(lst_det);
+            list_ct.set_list(lst_det, IdTransaccionFixed);
         }
         #endregion
 

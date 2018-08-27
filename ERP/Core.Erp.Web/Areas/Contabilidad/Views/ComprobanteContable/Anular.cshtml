@@ -11,9 +11,11 @@
 
 @using (Html.BeginForm("Anular", "ComprobanteContable", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdTipoCbte)
     @Html.HiddenFor(q => q.IdCbteCble)
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">

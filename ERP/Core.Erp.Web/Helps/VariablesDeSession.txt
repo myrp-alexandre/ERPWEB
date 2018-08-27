@@ -8,6 +8,7 @@
  #endregion
 
 //AGREGAR A LA VISTA NUEVO - MODIFICAR - ANULAR
+@Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
 @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
 //AGREGAR EN EVENTOS CALLBACK DE LAS GRILLAS 1 x GRILLA
@@ -21,6 +22,7 @@ public decimal IdTransaccionSession { get; set; }
 settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
 
 //AGREGAR EN AJAX 
+IdEmpresa: $("#IdEmpresa").val()
 IdTransaccionSession: $("#IdTransaccionSession").val()
 
 //AGREGAR EN ACTIONRESULT DE GRILLAS PARA AGREGAR, EDITAR O ELIMINAR

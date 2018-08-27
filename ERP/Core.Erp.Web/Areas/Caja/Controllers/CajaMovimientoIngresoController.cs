@@ -134,6 +134,12 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0 )
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             caj_Caja_Movimiento_Info model = new caj_Caja_Movimiento_Info
             {
                 IdEmpresa = IdEmpresa,
@@ -142,10 +148,11 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                 {
                     IdCobro_tipo = "EFEC"
                 },
-                cm_fecha = DateTime.Now
+                cm_fecha = DateTime.Now,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
             model.lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>();
-            list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det);
+            list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det,model.IdTransaccionSession);
             cargar_combos_detalle();
             cargar_combos(IdEmpresa);
             return View(model);
@@ -155,7 +162,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         public ActionResult Nuevo(caj_Caja_Movimiento_Info model)
         {
             #region Validaciones
-            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list();
+            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
                 cargar_combos(model.IdEmpresa);
@@ -187,6 +194,12 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         
         public ActionResult Modificar(int IdEmpresa = 0 , int IdTipocbte = 0, decimal IdCbteCble = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             caj_Caja_Movimiento_Info model = bus_caja_mov.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
             if (model == null)
                 return RedirectToAction("Index");
@@ -194,9 +207,9 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             model.info_caj_Caja_Movimiento_det = bus_caja_mov_det.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
             if (model.info_caj_Caja_Movimiento_det == null)
                 return RedirectToAction("Index");
-
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_ct_cbtecble_det = bus_comprobante_detalle.get_list(IdEmpresa, IdTipocbte, IdCbteCble);
-            list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det);
+            list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det,model.IdTransaccionSession);
 
             cargar_combos(IdEmpresa);
             return View(model);
@@ -205,7 +218,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         [HttpPost]
         public ActionResult Modificar(caj_Caja_Movimiento_Info model)
         {
-            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list();
+            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
                 cargar_combos(model.IdEmpresa);
@@ -223,6 +236,12 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
         public ActionResult Anular(int IdEmpresa = 0 , int IdTipocbte = 0, decimal IdCbteCble = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             caj_Caja_Movimiento_Info model = bus_caja_mov.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
             if (model == null)
                 return RedirectToAction("Index");
@@ -230,9 +249,9 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             model.info_caj_Caja_Movimiento_det = bus_caja_mov_det.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
             if (model.info_caj_Caja_Movimiento_det == null)
                 return RedirectToAction("Index");
-
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_ct_cbtecble_det = bus_comprobante_detalle.get_list(IdEmpresa, IdTipocbte, IdCbteCble);
-            list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det);
+            list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det,model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -251,9 +270,8 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
         #endregion
 
-        public ActionResult armar_diario(int IdCaja = 0, int IdTipoMovi = 0, double valor = 0)
+        public ActionResult armar_diario(int IdEmpresa = 0, int IdCaja = 0, int IdTipoMovi = 0, double valor = 0, decimal IdTransaccionSession = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             var i_caja = bus_caja.get_info(IdEmpresa, IdCaja);
             var i_tipo_movi = bus_tipo.get_info(IdEmpresa, IdTipoMovi);
 
@@ -277,7 +295,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                     secuencia = 2
                 }
             };
-            list_ct_cbtecble_det.set_list(lst_ct_cbtecble_det);
+            list_ct_cbtecble_det.set_list(lst_ct_cbtecble_det, IdTransaccionSession);
             return Json("", JsonRequestBehavior.AllowGet);
         }
 

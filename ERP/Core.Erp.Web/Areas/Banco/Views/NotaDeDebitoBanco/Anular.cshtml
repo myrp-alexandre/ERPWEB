@@ -66,7 +66,10 @@
 
     function armar_diario() {
         var datos = {
-            IdBanco: $("#IdBanco").val()
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdBanco: $("#IdBanco").val(),
+            IdTipoNota: $("#IdTipoNota").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -88,6 +91,7 @@
 
     function vaciar_detalles() {
         var datos = {
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -107,31 +111,12 @@
         GridView_cheque_op.PerformCallback();
     }
 
-    function GetNumCheque() {
-        var datos = {
-            IdBanco: $("#IdBanco").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetNumCheque", "ChequeBanco",new { Area = "Banco"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                $("#cb_Cheque").val(data);
-            },
-            error: function (error) {
-            }
-        });
-    }
 </script>
 
 @using (Html.BeginForm("Anular", "NotaDeDebitoBanco", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdTipocbte)
     @Html.HiddenFor(q => q.IdCbteCble)
 

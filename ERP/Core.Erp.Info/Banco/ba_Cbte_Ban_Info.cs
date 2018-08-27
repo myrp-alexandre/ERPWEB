@@ -8,6 +8,8 @@ namespace Core.Erp.Info.Banco
 {
     public class ba_Cbte_Ban_Info
     {
+        public decimal IdTransaccionSession { get; set; }
+
         public int IdEmpresa { get; set; }
         public decimal IdCbteCble { get; set; }
         public int IdTipocbte { get; set; }

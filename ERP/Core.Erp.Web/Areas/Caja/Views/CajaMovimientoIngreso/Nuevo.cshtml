@@ -11,7 +11,8 @@
 
 @using (Html.BeginForm("Nuevo", "CajaMovimientoIngreso", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdCbteCble)
     @Html.HiddenFor(q => q.IdTipocbte)
     if (ViewBag.mensaje != null)
@@ -161,9 +162,11 @@
         var monto = $("#cr_Valor").val();
 
         var datos = {
+            IdEmpresa = $("#IdEmpresa").val(),
             IdCaja: caja,
             IdTipoMovi: tipo_movimiento,
-            valor: monto
+            valor: monto,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',

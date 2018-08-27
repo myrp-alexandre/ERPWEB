@@ -91,13 +91,20 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             Af_Venta_Activo_Info model = new Af_Venta_Activo_Info
             {
                 IdEmpresa = IdEmpresa,
-                Fecha_Venta = DateTime.Now
+                Fecha_Venta = DateTime.Now,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
             model.lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>();
-            list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det);
+            list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det,model.IdTransaccionSession);
             cargar_combos_detalle();
             cargar_combos(IdEmpresa);
             return View(model);
@@ -106,14 +113,14 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Nuevo(Af_Venta_Activo_Info model)
         {
-            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list();
+            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
                 cargar_combos(model.IdEmpresa);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_venta.guardarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -124,18 +131,25 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 
         public ActionResult Modificar(int IdEmpresa = 0 , decimal IdVtaActivo = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             Af_Venta_Activo_Info model = bus_venta.get_info(IdEmpresa, IdVtaActivo);
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_ct_cbtecble_det = bus_comprobante_detalle.get_list(IdEmpresa, model.IdTipoCbte == null ? 0 : Convert.ToInt32(model.IdTipoCbte), model.IdCbteCble == null ? 0 : Convert.ToDecimal(model.IdCbteCble));
-            list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det);
+            list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det,model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }
         [HttpPost]
         public ActionResult Modificar(Af_Venta_Activo_Info model)
         {
-            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list();
+            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
                 cargar_combos(model.IdEmpresa);
@@ -153,18 +167,25 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 
         public ActionResult Anular(int IdEmpresa = 0, decimal IdVtaActivo = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             Af_Venta_Activo_Info model = bus_venta.get_info(IdEmpresa, IdVtaActivo);
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_ct_cbtecble_det = bus_comprobante_detalle.get_list(IdEmpresa, model.IdTipoCbte == null ? 0 : Convert.ToInt32(model.IdTipoCbte), model.IdCbteCble == null ? 0 : Convert.ToDecimal(model.IdCbteCble));
-            list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det);
+            list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det,model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }
         [HttpPost]
         public ActionResult Anular(Af_Venta_Activo_Info model)
         {
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
             if (!bus_venta.anularDB(model))
             {
                 cargar_combos(model.IdEmpresa);

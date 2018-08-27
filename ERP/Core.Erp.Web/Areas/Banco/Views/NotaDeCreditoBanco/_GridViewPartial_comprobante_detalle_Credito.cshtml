@@ -86,6 +86,7 @@
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_Valor_haber").DisplayFormat = "Haber {0:c2}";
         settings.Settings.ShowFooter = true;
         settings.ClientSideEvents.Init = "function(s,e){armar_diario();}";
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 
 }

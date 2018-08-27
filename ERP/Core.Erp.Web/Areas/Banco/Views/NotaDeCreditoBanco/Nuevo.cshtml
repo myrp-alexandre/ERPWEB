@@ -27,8 +27,10 @@
 
     function armar_diario() {
         var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
             IdBanco: $("#IdBanco").val(),
-            IdTipoNota : $("#IdTipoNota").val()
+            IdTipoNota: $("#IdTipoNota").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -50,6 +52,7 @@
 
     function GetValorTotal() {
         var datos = {
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -73,7 +76,8 @@
 
 @using (Html.BeginForm("Nuevo", "NotaDeCreditoBanco", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
     if (ViewBag.mensaje != null)
     {

@@ -74,7 +74,9 @@
 
     function armar_diario() {
         var datos = {
-            IdBanco: $("#IdBanco").val()
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdBanco: $("#IdBanco").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -96,6 +98,7 @@
 
     function vaciar_detalles() {
         var datos = {
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -117,6 +120,7 @@
 
     function GetNumCheque() {
         var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
             IdBanco: $("#IdBanco").val()
         }
         $.ajax({
@@ -148,7 +152,8 @@
         </div>
 
     }
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     <div class="modal fade" id="OpModal" role="dialog">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->

@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.Helps;
-
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 {
@@ -56,7 +56,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         {
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
             ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<ct_cbtecble_Info> model = bus_comprobante.get_list(IdEmpresa, true, ViewBag.fecha_ini, ViewBag.fecha_fin);
             return PartialView("_GridViewPartial_comprobante_contable", model);
         }
@@ -70,16 +70,23 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
         }
 
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             ct_cbtecble_Info model = new ct_cbtecble_Info
             {
-                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
+                IdEmpresa = IdEmpresa,
                 cb_Fecha = DateTime.Now,
-                IdTipoCbte = 1
+                IdTipoCbte = 1,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
             model.lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>();
-            list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det);
+            list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det, model.IdTransaccionSession);
             cargar_combos();
             cargar_combos_detalle();
             return View(model);
@@ -88,15 +95,14 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         [HttpPost]
         public ActionResult Nuevo(ct_cbtecble_Info model)
         {
-            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list();
+            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list(model.IdTransaccionSession);
             if (!validar(model,ref mensaje))
             {
                 cargar_combos();
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_comprobante.guardarDB(model))
             {
                 cargar_combos();
@@ -105,14 +111,21 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdTipoCbte, decimal IdCbteCble)
-        {   
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+        public ActionResult Modificar(int IdEmpresa = 0, int IdTipoCbte = 0, decimal IdCbteCble = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            
             ct_cbtecble_Info model = bus_comprobante.get_info(IdEmpresa, IdTipoCbte, IdCbteCble);
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_ct_cbtecble_det = bus_comprobante_detalle.get_list(IdEmpresa, IdTipoCbte, IdCbteCble);
-            list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det);
+            list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det,model.IdTransaccionSession);
             cargar_combos();
             return View(model);
         }
@@ -120,7 +133,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         [HttpPost]
         public ActionResult Modificar(ct_cbtecble_Info model)
         {
-            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list();
+            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
                 cargar_combos();
@@ -137,21 +150,28 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
         }
 
-        public ActionResult Anular(int IdTipoCbte, decimal IdCbteCble)
+        public ActionResult Anular(int IdEmpresa = 0, int IdTipoCbte = 0, decimal IdCbteCble = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
             ct_cbtecble_Info model = bus_comprobante.get_info(IdEmpresa, IdTipoCbte, IdCbteCble);
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_ct_cbtecble_det = bus_comprobante_detalle.get_list(IdEmpresa, IdTipoCbte, IdCbteCble);
-            list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det);
+            list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det, model.IdTransaccionSession);
             cargar_combos();
             return View(model);
         }
         [HttpPost]
         public ActionResult Anular(ct_cbtecble_Info model)
         {
-            model.IdUsuarioAnu = Session["IdUsuario"].ToString();
+            model.IdUsuarioAnu = SessionFixed.IdUsuario;
             if (!bus_comprobante.anularDB(model))
             {
                 cargar_combos();
@@ -162,25 +182,24 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_comprobante_detalle(int IdTipoCbte = 0, decimal IdCbteCble = 0)
+        public ActionResult GridViewPartial_comprobante_detalle()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+
             ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = bus_comprobante_detalle.get_list(IdEmpresa, IdTipoCbte, IdCbteCble);
-            if (model.lst_ct_cbtecble_det.Count == 0)
-                model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list();
+            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_comprobante_detalle", model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_comprobante_detalle_readonly(int IdTipoCbte = 0, decimal IdCbteCble = 0)
+        public ActionResult GridViewPartial_comprobante_detalle_readonly()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = bus_comprobante_detalle.get_list(IdEmpresa, IdTipoCbte, IdCbteCble);
-            if (model.lst_ct_cbtecble_det.Count == 0)
-                model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list();
+            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_comprobante_detalle_readonly", model);
         }
@@ -197,9 +216,9 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
         {
             if (ModelState.IsValid)
-                list_ct_cbtecble_det.AddRow(info_det);
+                list_ct_cbtecble_det.AddRow(info_det,Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list();
+            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_comprobante_detalle", model);
         }
@@ -208,18 +227,18 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
         {
             if (ModelState.IsValid)
-                list_ct_cbtecble_det.UpdateRow(info_det);
+                list_ct_cbtecble_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list();
+            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_comprobante_detalle", model);
         }
 
         public ActionResult EditingDelete(int secuencia)
         {
-            list_ct_cbtecble_det.DeleteRow(secuencia);
+            list_ct_cbtecble_det.DeleteRow(secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list();
+            model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_comprobante_detalle", model);
         }
@@ -227,33 +246,34 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
     
 public class ct_cbtecble_det_List
     {
-        public List<ct_cbtecble_det_Info> get_list()
+        string variable = "ct_cbtecble_det_Info";
+        public List<ct_cbtecble_det_Info> get_list(decimal IdTransaccionSession)
         {
-            if (HttpContext.Current.Session["ct_cbtecble_det_Info"] == null)
+            if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)
             {
                 List<ct_cbtecble_det_Info> list = new List<ct_cbtecble_det_Info>();
 
-                HttpContext.Current.Session["ct_cbtecble_det_Info"] = list;
+                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<ct_cbtecble_det_Info>)HttpContext.Current.Session["ct_cbtecble_det_Info"];
+            return (List<ct_cbtecble_det_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<ct_cbtecble_det_Info> list)
+        public void set_list(List<ct_cbtecble_det_Info> list, decimal IdTransaccionSession)
         {
-            HttpContext.Current.Session["ct_cbtecble_det_Info"] = list;
+            HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
         }
 
-        public void AddRow(ct_cbtecble_det_Info info_det)
+        public void AddRow(ct_cbtecble_det_Info info_det, decimal IdTransaccionSession)
         {
-            List<ct_cbtecble_det_Info> list = get_list();
+            List<ct_cbtecble_det_Info> list = get_list(IdTransaccionSession);
             info_det.secuencia = list.Count == 0 ? 1 : list.Max(q => q.secuencia) + 1;
             info_det.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * -1;
             list.Add(info_det);
         }
 
-        public void UpdateRow(ct_cbtecble_det_Info info_det)
+        public void UpdateRow(ct_cbtecble_det_Info info_det, decimal IdTransaccionSession)
         {
-            ct_cbtecble_det_Info edited_info = get_list().Where(m => m.secuencia == info_det.secuencia).First();
+            ct_cbtecble_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.secuencia == info_det.secuencia).First();
             edited_info.IdCtaCble = info_det.IdCtaCble;
             edited_info.dc_para_conciliar = info_det.dc_para_conciliar;
             edited_info.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * - 1;
@@ -261,9 +281,9 @@ public class ct_cbtecble_det_List
             edited_info.dc_Valor_haber = info_det.dc_Valor_haber;
         }
 
-        public void DeleteRow(int secuencia)
+        public void DeleteRow(int secuencia, decimal IdTransaccionSession)
         {
-            List<ct_cbtecble_det_Info> list = get_list();
+            List<ct_cbtecble_det_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.secuencia == secuencia).First());
         }
     }
