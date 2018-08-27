@@ -198,6 +198,7 @@
     <Compile Include="Inventario\in_ProductoTipo_Bus.cs" />
     <Compile Include="Inventario\in_Producto_Bus.cs" />
     <Compile Include="Inventario\in_Producto_Composicion_Bus.cs" />
+    <Compile Include="Inventario\in_producto_x_tb_bodega_Bus.cs" />
     <Compile Include="Inventario\in_producto_x_tb_bodega_Costo_Historico_Bus.cs" />
     <Compile Include="Inventario\in_subgrupo_Bus.cs" />
     <Compile Include="Inventario\in_transferencia_Bus.cs" />
