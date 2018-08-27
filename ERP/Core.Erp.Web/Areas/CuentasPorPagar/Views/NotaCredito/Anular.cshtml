@@ -260,9 +260,9 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="IdOrden_giro_Tipo">Sustento tributario*</label>
-                                @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_codigos_sri, "codigoSRI", "co_descripcion"), new { @class = "form-control", @id = "cmb_idtCredito" })
-                                @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
-                            </div>
+                                @Html.DropDownListFor(q => q.IdIden_credito, new SelectList(ViewBag.lst_codigos_sri, "IdCodigo_SRI", "co_descripcion"), new { @class = "form-control", @id = "cmb_idtCredito" })
+                                @Html.ValidationMessageFor(q => q.IdIden_credito, "", new { @class = "text-danger" })
+                </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">

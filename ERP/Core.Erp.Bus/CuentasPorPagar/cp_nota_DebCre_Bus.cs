@@ -58,7 +58,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     info.DebCre = "C";
                     info.Estado = "A";
                     info.cn_vaCoa = "N";
-                    info.IdTipoNota = "T_TIP_NOTA_INT";
+                    info.IdTipoNota = info.IdTipoNota;
                     info.nom_pc = " ";
                     info.ip = " ";
                    if( data.guardarDB(info))

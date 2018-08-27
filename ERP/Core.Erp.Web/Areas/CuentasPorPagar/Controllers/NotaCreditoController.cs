@@ -72,7 +72,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = Session["ct_cbtecble_det_Info"] as List<ct_cbtecble_det_Info>;
+            model.lst_ct_cbtecble_det =Lis_ct_cbtecble_det_List_nc.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_nota_credito_dc", model);
         }
@@ -112,15 +112,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             model.info_comrobante = new ct_cbtecble_Info();
 
-            if (Session["list_op_seleccionadas"] != null)
-            {
-                model.lst_detalle_op = Session["list_op_seleccionadas"] as List<cp_orden_pago_det_Info>;
-            }
-            if (Session["ct_cbtecble_det_Info"] != null)
-            {
-                model.info_comrobante.lst_ct_cbtecble_det = Session["ct_cbtecble_det_Info"] as List<ct_cbtecble_det_Info>;
-            }
-            else
+            model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List_nc.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            if(model.info_comrobante.lst_ct_cbtecble_det==null)
             {
                 ViewBag.mensaje = "Falta diario contable";
                 cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
@@ -180,7 +174,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return RedirectToAction("Index");
             if (model.info_comrobante.lst_ct_cbtecble_det == null)
                 model.info_comrobante.lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>();
-            Session["ct_cbtecble_det_Info"] = model.info_comrobante.lst_ct_cbtecble_det;
+            Lis_ct_cbtecble_det_List_nc.set_list( = model.info_comrobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
 
              list_op_seleccionadas = bus_orden_pago_cancelaciones.Get_list_Cancelacion_x_CXP(IdEmpresa,IdTipoCbte_Nota,IdCbteCble_Nota);
             if (list_op_seleccionadas == null)
@@ -199,23 +193,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
            
             model.info_comrobante = new ct_cbtecble_Info();
 
-            if (Session["ct_cbtecble_det_Info"] != null)
-            {
-                model.info_comrobante.lst_ct_cbtecble_det = Session["ct_cbtecble_det_Info"] as List<ct_cbtecble_det_Info>;
-            }
-            else
-            {
-                ViewBag.mensaje = "Falta diario contable";
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
-                cargar_combos_detalle();
-                return View(model);
+            model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List_nc.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-            }
             if (Session["list_op_seleccionadas"] != null)
             {
                 model.lst_detalle_op = Session["list_op_seleccionadas"] as List<cp_orden_pago_det_Info>;
             }
-            else
+            if (model.info_comrobante.lst_ct_cbtecble_det == null)
             {
                 ViewBag.mensaje = "Falta detalle  de pago";
                 cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
@@ -529,7 +513,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             try
             {
 
-                HttpContext.Current.Session["ct_cbtecble_det_Info"] = null;
+                HttpContext.Current.Session["ct_cbtecble_det_Info"+Convert.ToString(SessionFixed.IdTransaccionSessionActual)] = null;
 
                 // cuenta total
                 ct_cbtecble_det_Info cbtecble_det_total_Info = new ct_cbtecble_det_Info();

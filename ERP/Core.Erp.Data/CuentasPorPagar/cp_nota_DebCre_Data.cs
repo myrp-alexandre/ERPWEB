@@ -46,7 +46,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                         cn_Autorizacion = info.cn_Autorizacion,
                         cn_Autorizacion_Imprenta = info.cn_Autorizacion_Imprenta,
                         cn_num_doc_modificado = info.cn_num_doc_modificado,
-                        IdCod_ICE = info.IdCod_ICE,
                         IdIden_credito = info.IdIden_credito,
                         IdCtaCble_Acre = info.IdCtaCble_Acre,
                         IdTipoFlujo = info.IdTipoFlujo,
@@ -58,15 +57,14 @@ namespace Core.Erp.Data.CuentasPorPagar
                         ip=info.ip,
                         nom_pc=info.nom_pc,
                         ConvenioTributacion = info.ConvenioTributacion_bool == true ? "SI" : "NO",
-                        PagoSujetoRetencion = info.PagoSujetoRetencion_bool == true ? "SI" : "NO"
-
+                        PagoSujetoRetencion = info.PagoSujetoRetencion_bool == true ? "SI" : "NO",
                     };
                     Context.cp_nota_DebCre.Add(Entity);
                     Context.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;
