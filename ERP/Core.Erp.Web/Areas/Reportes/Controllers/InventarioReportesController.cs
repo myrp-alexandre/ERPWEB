@@ -373,8 +373,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model_detalle.p_mostrar_detallado.Value = model.mostrar_detallado;
                 model_detalle.p_no_mostrar_valores_en_0.Value = model.no_mostrar_valores_en_0;
                 model_detalle.P_IdProductoPadre.Value = model.IdProductoPadre;
-                model_detalle.usuario = SessionFixed.IdUsuario.ToString();
-                model_detalle.empresa = SessionFixed.NomEmpresa.ToString();
+                model_detalle.usuario = SessionFixed.IdUsuario;
+                model_detalle.empresa = SessionFixed.NomEmpresa;
 
                 ViewBag.report = model_detalle;
             }
@@ -391,8 +391,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model_resumen.p_mostrar_detallado.Value = model.mostrar_detallado;
                 model_resumen.p_no_mostrar_valores_en_0.Value = model.no_mostrar_valores_en_0;
                 model_resumen.P_IdProductoPadre.Value = model.IdProductoPadre;
-                model_resumen.usuario = SessionFixed.IdUsuario.ToString();
-                model_resumen.empresa = SessionFixed.NomEmpresa.ToString();
+                model_resumen.usuario = SessionFixed.IdUsuario;
+                model_resumen.empresa = SessionFixed.NomEmpresa;
 
                 ViewBag.report = model_resumen;
             }
@@ -416,8 +416,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.p_no_mostrar_valores_en_0.Value = model.no_mostrar_valores_en_0;
                 cargar_combos(model);
 
-                report.usuario = SessionFixed.IdUsuario.ToString();
-                report.empresa = SessionFixed.NomEmpresa.ToString();
+                report.usuario = SessionFixed.IdUsuario;
+                report.empresa = SessionFixed.NomEmpresa;
                 
                     report.RequestParameters = false;
                 ViewBag.Report = report;
@@ -436,8 +436,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.p_no_mostrar_valores_en_0.Value = model.no_mostrar_valores_en_0;
                 cargar_combos(model);
 
-                report.usuario = SessionFixed.IdUsuario.ToString();
-                report.empresa = SessionFixed.NomEmpresa.ToString();
+                report.usuario = SessionFixed.IdUsuario;
+                report.empresa = SessionFixed.NomEmpresa;
                 report.RequestParameters = false;
                 ViewBag.Report = report;
             }
