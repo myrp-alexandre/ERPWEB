@@ -275,6 +275,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model_detalle.p_IdEmpresa.Value = model.IdEmpresa;
                 model_detalle.p_IdSucursal.Value = model.IdSucursal;
                 model_detalle.p_IdBodega.Value = model.IdBodega;
+                model_detalle.P_IdProductoPadre.Value = model.IdProductoPadre;
                 model_detalle.p_IdProducto.Value = model.IdProducto;
                 model_detalle.p_IdUsuario.Value = SessionFixed.IdUsuario;
                 model_detalle.p_fecha_ini.Value = model.fecha_ini;
@@ -292,6 +293,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model_resumen.p_IdEmpresa.Value = model.IdEmpresa;
                 model_resumen.p_IdSucursal.Value = model.IdSucursal;
                 model_resumen.p_IdBodega.Value = model.IdBodega;
+                model_resumen.P_IdProductoPadre.Value = model.IdProductoPadre;
                 model_resumen.p_IdProducto.Value = model.IdProducto;
                 model_resumen.p_IdUsuario.Value = SessionFixed.IdUsuario;
                 model_resumen.p_fecha_ini.Value = model.fecha_ini;
@@ -316,6 +318,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.p_IdEmpresa.Value = model.IdEmpresa;
                 report.p_IdSucursal.Value = model.IdSucursal;
                 report.p_IdBodega.Value = model.IdBodega;
+                report.P_IdProductoPadre.Value = model.IdProductoPadre;
                 report.p_IdProducto.Value = model.IdProducto;
                 report.p_IdUsuario.Value = SessionFixed.IdUsuario;
                 report.p_fecha_ini.Value = model.fecha_ini;
@@ -335,6 +338,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.p_IdEmpresa.Value = model.IdEmpresa;
                 report.p_IdSucursal.Value = model.IdSucursal;
                 report.p_IdBodega.Value = model.IdBodega;
+                report.P_IdProductoPadre.Value = model.IdProductoPadre;
                 report.p_IdProducto.Value = model.IdProducto;
                 report.p_IdUsuario.Value = SessionFixed.IdUsuario;
                 report.p_fecha_ini.Value = model.fecha_ini;
