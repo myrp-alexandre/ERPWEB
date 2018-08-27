@@ -42,6 +42,7 @@ namespace Core.Erp.Data.Reportes.Inventario
                                  IdNumMovi = q.IdNumMovi,
                                  Secuencia = q.Secuencia,
                                  IdProducto = q.IdProducto,
+                                 IdProductoPadre = q.IdProductoPadre,
                                  Saldo_ini_cant = q.Saldo_ini_cant,
                                  Cost_prom_ini = q.Cost_prom_ini,
                                  Saldo_ini_cost = q.Saldo_ini_cost,

@@ -1911,7 +1911,7 @@
             this.xrTableCell63.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pr_descripcion]")});
             this.xrTableCell63.Name = "xrTableCell63";
-            this.xrTableCell63.Weight = 0.79535299374441448D;
+            this.xrTableCell63.Weight = 1.143878353824564D;
             // 
             // xrTableCell7
             // 
@@ -1923,7 +1923,7 @@
             this.xrTableCell7.StylePriority.UseTextAlignment = false;
             this.xrTableCell7.Text = "Saldo inicial:";
             this.xrTableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell7.Weight = 0.34852514190264733D;
+            this.xrTableCell7.Weight = 0.32886494899882696D;
             // 
             // xrTableCell113
             // 
@@ -1935,7 +1935,7 @@
             this.xrTableCell113.StylePriority.UseTextAlignment = false;
             this.xrTableCell113.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell113.TextFormatString = "{0:n2}";
-            this.xrTableCell113.Weight = 0.21805215925910407D;
+            this.xrTableCell113.Weight = 0.11617526547838469D;
             // 
             // xrTableCell114
             // 
@@ -1947,7 +1947,7 @@
             this.xrTableCell114.StylePriority.UseTextAlignment = false;
             this.xrTableCell114.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell114.TextFormatString = "{0:n2}";
-            this.xrTableCell114.Weight = 0.22698827339560984D;
+            this.xrTableCell114.Weight = 0.11617504730088243D;
             // 
             // xrTableCell115
             // 
@@ -1959,7 +1959,7 @@
             this.xrTableCell115.StylePriority.UseTextAlignment = false;
             this.xrTableCell115.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell115.TextFormatString = "{0:n2}";
-            this.xrTableCell115.Weight = 0.23235042186801824D;
+            this.xrTableCell115.Weight = 0.11617537456713578D;
             // 
             // GroupFooter3
             // 
