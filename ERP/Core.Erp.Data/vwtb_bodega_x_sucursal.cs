@@ -12,9 +12,16 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_persona_tipo
+    public partial class vwtb_bodega_x_sucursal
     {
-        public string IdTipo_Persona { get; set; }
-        public string Descricpion { get; set; }
+        public int IdEmpresa { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdBodega { get; set; }
+        public string cod_bodega { get; set; }
+        public string bo_Descripcion { get; set; }
+        public string cod_punto_emision { get; set; }
+        public string bo_manejaFacturacion { get; set; }
+        public string codigo { get; set; }
+        public string Su_Descripcion { get; set; }
     }
 }

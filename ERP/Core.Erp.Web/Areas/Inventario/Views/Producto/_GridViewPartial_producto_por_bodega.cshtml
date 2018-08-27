@@ -2,8 +2,8 @@
 @model Core.Erp.Info.Inventario.in_Producto_Info
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "lst_producto_composicion";
-        settings.CallbackRouteValues = new { Controller = "Producto", Action = "GridViewPartial_producto_composicion", IdProducto = Model == null ? 0 : Model.IdProducto };
+        settings.Name = "GridViewPartial_producto_por_bodega";
+        settings.CallbackRouteValues = new { Controller = "Producto", Action = "GridViewPartial_producto_por_bodega", IdProducto = Model == null ? 0 : Model.IdProducto };
         settings.KeyFieldName = "secuencia";
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Producto", Action = "EditingAddNew" };
@@ -38,47 +38,36 @@
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "pr_descripcion";
-            column.Caption = "Producto";
-            column.Width = Unit.Percentage(60);
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "IdProductoHijo";
-            column.Caption = "Producto";
-            column.Width = Unit.Percentage(30);
-            column.Visible = false;
-            column.EditFormSettings.Visible = DefaultBoolean.True;
-            column.SetEditItemTemplateContent(c =>
+            column.FieldName = "IdSucursal";
+            column.Caption = "Sucursal";
+            column.Width = Unit.Percentage(35);
+            column.EditorProperties().ComboBox(p =>
             {
-                Html.RenderPartial("_CmbProducto_composicion", DataBinder.Eval(c.DataItem, "IdProductoHijo"));
+                p.Columns.Add("IdSucursal", "ID").Width = Unit.Percentage(20);
+                p.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(70);
+                p.ValueField = "IdSucursal";
+                p.ValueType = typeof(int);
+                p.DataSource = ViewBag.lst_rubro;
+                p.Width = Unit.Percentage(100);
             });
         });
-         settings.Columns.Add(column =>
-         {
-             column.FieldName = "IdUnidadMedida";
-             column.Caption = "Unidad de medida";
-             column.Width = Unit.Percentage(30);
-             column.EditorProperties().ComboBox(p =>
-             {
-                 p.TextField = "Descripcion";
-                 p.ValueField = "IdUnidadMedida";
-                 p.ValueType = typeof(string);
-                 p.DataSource = ViewBag.lst_unidad_medida;
-             });
-         });
+
         settings.Columns.Add(column =>
         {
-            column.FieldName = "Cantidad";
-            column.Caption = "Cantidad";
-            column.Width = Unit.Percentage(20);
-            column.EditorProperties().SpinEdit(sp =>
+            column.FieldName = "IdBodega";
+            column.Caption = "Sucursal";
+            column.Width = Unit.Percentage(35);
+            column.EditorProperties().ComboBox(p =>
             {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
+                p.Columns.Add("IdBodega", "ID").Width = Unit.Percentage(20);
+                p.Columns.Add("bo_Descripcion", "Bodega").Width = Unit.Percentage(70);
+                p.ValueField = "IdBodega";
+                p.ValueType = typeof(int);
+                p.DataSource = ViewBag.lst_rubro;
+                p.Width = Unit.Percentage(100);
             });
         });
+
     });
     if (ViewData["EditError"] != null){
         grid.SetEditErrorText((string)ViewData["EditError"]);
