@@ -30,7 +30,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa),cl_enumeradores.eTipoBusquedaProducto.SOLOPADRES,cl_enumeradores.eModulo.INV,0);
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.SOLOPADRES, cl_enumeradores.eModulo.INV, 0);
         }
         public in_Producto_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
         {
@@ -54,10 +54,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
         #endregion
-        
+
         #region json
 
-        public JsonResult cargar_bodega(int IdEmpresa= 0 , int IdSucursal = 0)
+        public JsonResult cargar_bodega(int IdEmpresa = 0, int IdSucursal = 0)
         {
             tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
             var resultado = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
@@ -108,7 +108,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             });
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-    
+
         #endregion
 
         #region GRids
@@ -140,7 +140,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
 
         #endregion
-        public ActionResult INV_001(int IdSucursal =0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
+        public ActionResult INV_001(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
         {
             INV_001_Rpt model = new INV_001_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
@@ -149,7 +149,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdNumMovi.Value = IdNumMovi;
             model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
-                model.RequestParameters = false;
+            model.RequestParameters = false;
             return View(model);
         }
 
@@ -170,7 +170,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult INV_003()
         {
 
-            cl_filtros_inventario_Info model = new cl_filtros_inventario_Info { IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa), IdCategoria = "", IdMarca = 0};
+            cl_filtros_inventario_Info model = new cl_filtros_inventario_Info { IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa), IdCategoria = "", IdMarca = 0 };
 
             cargar_combos(model);
             INV_003_Rpt report = new INV_003_Rpt();
@@ -187,7 +187,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdMarca.Value = model.IdMarca;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
-            
+
             ViewBag.Report = report;
             return View(model);
         }
@@ -210,7 +210,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
-            
+
             ViewBag.Report = report;
             return View(model);
         }
@@ -309,9 +309,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
 
         [HttpPost]
-        public ActionResult INV_005(cl_filtros_inventario_Info model, bool mostrar_detallado = false)
+        public ActionResult INV_005(cl_filtros_inventario_Info model)
         {
-            if (mostrar_detallado)
+            if (model.mostrar_detallado)
             {
                 INV_005_detalle_Rpt report = new INV_005_detalle_Rpt();
                 report.p_IdEmpresa.Value = model.IdEmpresa;
@@ -323,6 +323,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.p_fecha_fin.Value = model.fecha_fin;
                 report.p_mostrar_detallado.Value = model.mostrar_detallado;
                 report.p_no_mostrar_valores_en_0.Value = model.no_mostrar_valores_en_0;
+                report.P_IdProductoPadre.Value = model.IdProductoPadre;
                 cargar_combos(model);
 
                 report.usuario = SessionFixed.IdUsuario.ToString();
@@ -341,6 +342,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.p_fecha_fin.Value = model.fecha_fin;
                 report.p_mostrar_detallado.Value = model.mostrar_detallado;
                 report.p_no_mostrar_valores_en_0.Value = model.no_mostrar_valores_en_0;
+                report.P_IdProductoPadre.Value = model.IdProductoPadre;
                 cargar_combos(model);
 
                 report.usuario = SessionFixed.IdUsuario.ToString();
@@ -350,7 +352,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-        public ActionResult INV_006( bool mostrar_detallado = false)
+        public ActionResult INV_006()
         {
             cl_filtros_inventario_Info model = new cl_filtros_inventario_Info
             {
@@ -358,7 +360,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             };
 
             cargar_combos(model);
-            if (mostrar_detallado)
+            if (model.mostrar_detallado)
             {
                 INV_006_detalle_Rpt model_detalle = new INV_006_detalle_Rpt();
                 model_detalle.p_IdEmpresa.Value = model.IdEmpresa;
@@ -370,7 +372,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model_detalle.p_fecha_fin.Value = model.fecha_fin;
                 model_detalle.p_mostrar_detallado.Value = model.mostrar_detallado;
                 model_detalle.p_no_mostrar_valores_en_0.Value = model.no_mostrar_valores_en_0;
-
+                model_detalle.P_IdProductoPadre.Value = model.IdProductoPadre;
                 model_detalle.usuario = SessionFixed.IdUsuario.ToString();
                 model_detalle.empresa = SessionFixed.NomEmpresa.ToString();
 
@@ -388,19 +390,19 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model_resumen.p_fecha_fin.Value = model.fecha_fin;
                 model_resumen.p_mostrar_detallado.Value = model.mostrar_detallado;
                 model_resumen.p_no_mostrar_valores_en_0.Value = model.no_mostrar_valores_en_0;
-
+                model_resumen.P_IdProductoPadre.Value = model.IdProductoPadre;
                 model_resumen.usuario = SessionFixed.IdUsuario.ToString();
                 model_resumen.empresa = SessionFixed.NomEmpresa.ToString();
 
                 ViewBag.report = model_resumen;
             }
 
-            return View();
+            return View(model);
         }
-
-        public ActionResult INV_006(cl_filtros_inventario_Info model, bool mostrar_detallado = false)
+        [HttpPost]
+        public ActionResult INV_006(cl_filtros_inventario_Info model)
         {
-            if (mostrar_detallado)
+            if (model.mostrar_detallado)
             {
                 INV_006_detalle_Rpt report = new INV_006_detalle_Rpt();
                 report.p_IdEmpresa.Value = model.IdEmpresa;

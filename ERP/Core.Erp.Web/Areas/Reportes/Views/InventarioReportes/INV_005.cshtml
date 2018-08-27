@@ -20,7 +20,7 @@
         </div>
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i class="fa fa-plus"></i>
+                <i class="fa fa-minus"></i>
             </button>
             <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
                 <i class="fa fa-times"></i>
@@ -30,21 +30,21 @@
     <div class="box-body">
         <div class="row">
             <div class="col-md-12">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="form-group">
                         <label for="IdSucursal">Sucursal</label>
                         @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
                         @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="form-group">
                         <label for="IdBodega">Bodega</label>
                         @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodega" })
                         @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="IdProducto">Producto </label>
                         @Html.Partial("_CmbProductoPadre_Inventario", Model)
@@ -76,6 +76,16 @@
                             </div>
                             @Html.TextBoxFor(q => q.fecha_fin, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_fin" })
                             @Html.ValidationMessageFor(q => q.fecha_fin, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label for="mostrar_detallado">@Html.CheckBoxFor(q => q.mostrar_detallado) Mostrar detallado</label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="no_mostrar_valores_en_0">@Html.CheckBoxFor(q => q.no_mostrar_valores_en_0) Mostrar saldo 0</label>
                         </div>
                     </div>
                 </div>
