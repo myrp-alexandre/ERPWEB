@@ -21,6 +21,6 @@
         settings.Properties.AllowNull = true;
     })
     .BindList(new Core.Erp.Web.Areas.Reportes.Controllers.InventarioReportesController().get_list_bajo_demanda,
-    new Core.Erp.Web.Areas.Reportes.Controllers.InventarioReportesController().get_info_bajo_demanda).Bind(Model);
+    new Core.Erp.Web.Areas.Reportes.Controllers.InventarioReportesController().get_info_bajo_demanda).Bind(Model.IdProducto);
 }
 @comboBox.GetHtml()
