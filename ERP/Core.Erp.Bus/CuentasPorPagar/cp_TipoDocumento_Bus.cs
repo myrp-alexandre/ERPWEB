@@ -27,7 +27,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
             {
                 odata = new cp_TipoDocumento_Data();
                 cp_codigo_SRI_Data data_codigo = new cp_codigo_SRI_Data();
-                var lst_data = data_codigo.get_info(Convert.ToInt32( codigoSRI));
+                var lst_data = data_codigo.get_info(Convert.ToInt32(codigoSRI));
                 cp_proveedor_Info info_proveedor = new cp_proveedor_Info();
                 if(lst_data!=null)
                 codigoSRI = lst_data.codigoSRI;
