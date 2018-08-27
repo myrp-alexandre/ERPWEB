@@ -32,13 +32,14 @@
                     @Html.ValidationMessageFor(q => q.Codigo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-6">
                 <div class="form-group">
                     <div class="checkbox">
                         <label for="es_empresa_relacionada">@Html.CheckBoxFor(q => q.es_empresa_relacionada) Es empresa relacionada</label>
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
 
@@ -66,6 +67,9 @@
                     @Html.TextBoxFor(q => q.info_persona.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.info_persona.pe_cedulaRuc, "", new { @class = "text-danger" })
                 </div>
+            </div>
+            <div class="col-md-3">
+                <a class="btn btn-primary" href="@Url.Action("Modificar","Persona",new { Area = "General", IdPersona = Model.IdPersona },null)">Modificar datos persona</a>
             </div>
         </div>
     </div>

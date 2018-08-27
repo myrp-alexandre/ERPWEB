@@ -203,8 +203,6 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 if (bus_contabilidad.anularDB(info.info_comrobante))
                 {
                     data = new cp_orden_giro_Data();
-                    info.IdTipoCbte_Anulacion = info.info_comrobante.IdTipoCbte;
-                    info.IdCbteCble_Anulacion = info.info_comrobante.IdCbteCble;
                     data.anularDB(info);
                 }
 

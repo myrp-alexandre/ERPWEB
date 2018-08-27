@@ -30,14 +30,6 @@ namespace Core.Erp.Info.CuentasPorPagar
         public double co_Por_iva { get; set; }
         public double co_valoriva { get; set; }
         public Nullable<int> IdCod_ICE { get; set; }
-        public double co_Ice_base { get; set; }
-        public double co_Ice_por { get; set; }
-        public double co_Ice_valor { get; set; }
-        public double co_Serv_por { get; set; }
-        public double co_Serv_valor { get; set; }
-        public double co_OtroValor_a_descontar { get; set; }
-        public double co_OtroValor_a_Sumar { get; set; }
-        public double co_BaseSeguro { get; set; }
         public double co_total { get; set; }
         public double co_valorpagar { get; set; }
         public string co_vaCoa { get; set; }
@@ -45,8 +37,6 @@ namespace Core.Erp.Info.CuentasPorPagar
         public Nullable<int> IdCod_101 { get; set; }
         public Nullable<decimal> IdTipoFlujo { get; set; }
         public string IdTipoServicio { get; set; }
-        public string IdCtaCble_Gasto { get; set; }
-        public string IdCtaCble_IVA { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string Estado { get; set; }
@@ -54,13 +44,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public string MotivoAnu { get; set; }
-        public string nom_pc { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
-        public string ip { get; set; }
-        public string co_retencionManual { get; set; }
-        public Nullable<decimal> IdCbteCble_Anulacion { get; set; }
-        public Nullable<int> IdTipoCbte_Anulacion { get; set; }
-        public string IdCentroCosto { get; set; }
         public Nullable<int> IdSucursal { get; set; }
         public string PagoLocExt { get; set; }
         public string PaisPago { get; set; }
@@ -70,9 +54,6 @@ namespace Core.Erp.Info.CuentasPorPagar
         public Nullable<System.DateTime> fecha_autorizacion { get; set; }
         public string Num_Autorizacion { get; set; }
         public string Num_Autorizacion_Imprenta { get; set; }
-        public double co_propina { get; set; }
-        public double co_IRBPNR { get; set; }
-        public Nullable<bool> es_retencion_electronica { get; set; }
         public Nullable<bool> cp_es_comprobante_electronico { get; set; }
         public string Tipodoc_a_Modificar { get; set; }
         public string estable_a_Modificar { get; set; }

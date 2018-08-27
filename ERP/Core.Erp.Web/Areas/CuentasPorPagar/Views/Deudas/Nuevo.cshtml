@@ -263,7 +263,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="Num_Autorizacion">Autorización*</label>
-                                @Html.TextBoxFor(q => q.Num_Autorizacion, new { @class = "form-control" })
+                                @Html.TextBoxFor(q => q.aut_doc_Modificar, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(q => q.aut_doc_Modificar, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -634,9 +634,6 @@
 
 
     function get_info_proveedor() {
-
-
-
         if (IdProveedor.GetValue() > 0)  {
             var datos = {
                 IdProveedor: IdProveedor.GetValue()
