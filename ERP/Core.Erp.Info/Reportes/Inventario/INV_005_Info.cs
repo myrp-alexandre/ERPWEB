@@ -48,5 +48,6 @@ namespace Core.Erp.Info.Reportes.Inventario
         public string IdUnidadMedida { get; set; }
         public string nom_unidad_consumo { get; set; }
         public string cod_unidad_consumo { get; set; }
+        public decimal IdProductoPadre { get; set; }
     }
 }

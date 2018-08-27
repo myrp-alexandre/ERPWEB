@@ -31,12 +31,12 @@ namespace Core.Erp.Web.Reportes.Inventario
             string IdUsuario = p_IdUsuario.Value == null ? "" : Convert.ToString(p_IdUsuario.Value);
             DateTime fecha_ini = p_fecha_ini.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_ini.Value);
             DateTime fecha_fin = p_fecha_fin.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_fin.Value);
-            bool no_mostrar_valores_en_0 = p_no_mostrar_valores_en_0 == null ? false : Convert.ToBoolean(p_no_mostrar_valores_en_0.Value);
-            bool mostrar_detallado = p_mostrar_detallado == null ? false : Convert.ToBoolean(p_mostrar_detallado.Value);
-
+            bool no_mostrar_valores_en_0 = p_no_mostrar_valores_en_0.Value == null ? false : Convert.ToBoolean(p_no_mostrar_valores_en_0.Value);
+            bool mostrar_detallado = p_mostrar_detallado.Value == null ? false : Convert.ToBoolean(p_mostrar_detallado.Value);
+            decimal IdProductoPadre = string.IsNullOrEmpty(P_IdProductoPadre.Value.ToString()) ? 0 : Convert.ToDecimal(P_IdProductoPadre.Value);
 
             INV_005_Bus bus_rpt = new INV_005_Bus();
-            List<INV_005_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdBodega, IdProducto, fecha_ini, fecha_fin, IdUsuario, no_mostrar_valores_en_0, mostrar_detallado);
+            List<INV_005_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdBodega, IdProducto, fecha_ini, fecha_fin, IdUsuario, no_mostrar_valores_en_0, mostrar_detallado,IdProductoPadre);
             this.DataSource = lst_rpt;
         }
     }

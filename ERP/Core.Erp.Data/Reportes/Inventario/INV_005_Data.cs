@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.Inventario
 {
     public class INV_005_Data
     {
-        public List<INV_005_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdProducto, DateTime fecha_ini, DateTime fecha_fin, string IdUsuario, bool no_mostrar_valores_en_0, bool mostrar_detallado)
+        public List<INV_005_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdProducto, DateTime fecha_ini, DateTime fecha_fin, string IdUsuario, bool no_mostrar_valores_en_0, bool mostrar_detallado, decimal IdProductoPadre)
         {
             try
             {
@@ -22,6 +22,9 @@ namespace Core.Erp.Data.Reportes.Inventario
                 decimal IdProducto_ini = IdProducto;
                 decimal IdProducto_fin = IdProducto == 0 ? 999999 : IdProducto;
 
+                decimal IdProductoPadre_ini = IdProductoPadre;
+                decimal IdProductoPadre_fin = IdProductoPadre == 0 ? 99999 : IdProductoPadre;
+
                 fecha_ini = fecha_ini.Date;
                 fecha_fin = fecha_fin.Date;
 
@@ -29,7 +32,7 @@ namespace Core.Erp.Data.Reportes.Inventario
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = (from q in Context.SPINV_005(IdEmpresa, IdSucursal_ini, IdSucursal_fin, IdBodega_ini, IdBodega_fin, IdProducto_ini
-                             , IdProducto_fin, fecha_ini, fecha_fin, IdUsuario, no_mostrar_valores_en_0, mostrar_detallado)
+                             , IdProducto_fin, fecha_ini, fecha_fin, IdUsuario, no_mostrar_valores_en_0, mostrar_detallado, IdProductoPadre_ini, IdProductoPadre_fin)
                              select new INV_005_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

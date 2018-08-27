@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model_reportes.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model_reportes.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ro_SPROL_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2884,6 +2884,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_014' no tien
           <Parameter Name="IdUsuario" Type="varchar" Mode="In" />
           <Parameter Name="No_Mostrar_valores_en_0" Type="bit" Mode="In" />
           <Parameter Name="Mostrar_detallado" Type="bit" Mode="In" />
+          <Parameter Name="IdProductoPadre_ini" Type="numeric" Mode="In" />
+          <Parameter Name="IdProductoPadre_fin" Type="numeric" Mode="In" />
         </Function>
         <Function Name="SPINV_009" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
@@ -4546,8 +4548,7 @@ FROM [web].[VWROL_011] AS [VWROL_011]</DefiningQuery>
 FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model_reportes" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -7356,20 +7357,6 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
             <Parameter Name="IdMarcaIni" Mode="In" Type="Int32" />
             <Parameter Name="IdMarcaFin" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="SPINV_005" ReturnType="Collection(Model_reportes.SPINV_005_Result)">
-            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
-            <Parameter Name="IdSucursal_ini" Mode="In" Type="Int32" />
-            <Parameter Name="IdSucursal_fin" Mode="In" Type="Int32" />
-            <Parameter Name="IdBodega_ini" Mode="In" Type="Int32" />
-            <Parameter Name="IdBodega_fin" Mode="In" Type="Int32" />
-            <Parameter Name="IdProducto_ini" Mode="In" Type="Decimal" />
-            <Parameter Name="IdProducto_fin" Mode="In" Type="Decimal" />
-            <Parameter Name="Fecha_ini" Mode="In" Type="DateTime" />
-            <Parameter Name="Fecha_fin" Mode="In" Type="DateTime" />
-            <Parameter Name="IdUsuario" Mode="In" Type="String" />
-            <Parameter Name="No_Mostrar_valores_en_0" Mode="In" Type="Boolean" />
-            <Parameter Name="Mostrar_detallado" Mode="In" Type="Boolean" />
-          </FunctionImport>
           <FunctionImport Name="SPINV_009" ReturnType="Collection(Model_reportes.SPINV_009_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdSucursalIni" Mode="In" Type="Int32" />
@@ -7413,6 +7400,22 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
             <Parameter Name="idnomina" Mode="In" Type="Int32" />
             <Parameter Name="fecha_inicio" Mode="In" Type="DateTime" />
             <Parameter Name="fecha_fin" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SPINV_005" ReturnType="Collection(Model_reportes.SPINV_005_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursal_ini" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursal_fin" Mode="In" Type="Int32" />
+            <Parameter Name="IdBodega_ini" Mode="In" Type="Int32" />
+            <Parameter Name="IdBodega_fin" Mode="In" Type="Int32" />
+            <Parameter Name="IdProducto_ini" Mode="In" Type="Decimal" />
+            <Parameter Name="IdProducto_fin" Mode="In" Type="Decimal" />
+            <Parameter Name="Fecha_ini" Mode="In" Type="DateTime" />
+            <Parameter Name="Fecha_fin" Mode="In" Type="DateTime" />
+            <Parameter Name="IdUsuario" Mode="In" Type="String" />
+            <Parameter Name="No_Mostrar_valores_en_0" Mode="In" Type="Boolean" />
+            <Parameter Name="Mostrar_detallado" Mode="In" Type="Boolean" />
+            <Parameter Name="IdProductoPadre_ini" Mode="In" Type="Decimal" />
+            <Parameter Name="IdProductoPadre_fin" Mode="In" Type="Decimal" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPACTF_004_detalle_Result">
@@ -7725,48 +7728,6 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
           <Property Type="Int32" Name="IdMarca" Nullable="false" />
           <Property Type="String" Name="NomMarca" Nullable="true" MaxLength="100" />
         </ComplexType>
-        <ComplexType Name="SPINV_005_Result">
-          <Property Type="Int32" Name="IdEmpresa" Nullable="true" />
-          <Property Type="Int32" Name="IdSucursal" Nullable="true" />
-          <Property Type="Int32" Name="IdBodega" Nullable="true" />
-          <Property Type="Int32" Name="IdMovi_inven_tipo" Nullable="true" />
-          <Property Type="Decimal" Name="IdNumMovi" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="Int32" Name="Secuencia" Nullable="true" />
-          <Property Type="Decimal" Name="IdProducto" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="Double" Name="Saldo_ini_cant" Nullable="false" />
-          <Property Type="Double" Name="Cost_prom_ini" Nullable="false" />
-          <Property Type="Double" Name="Saldo_ini_cost" Nullable="false" />
-          <Property Type="Double" Name="cant_ing" Nullable="false" />
-          <Property Type="Double" Name="cost_ing" Nullable="false" />
-          <Property Type="Double" Name="total_ing" Nullable="false" />
-          <Property Type="Double" Name="cant_egr" Nullable="false" />
-          <Property Type="Double" Name="cost_egr" Nullable="false" />
-          <Property Type="Double" Name="total_egr" Nullable="false" />
-          <Property Type="Double" Name="Saldo_cant" Nullable="true" />
-          <Property Type="Double" Name="Saldo_cost_prom" Nullable="true" />
-          <Property Type="Double" Name="Saldo_cost" Nullable="true" />
-          <Property Type="Double" Name="Saldo_fin_cant" Nullable="false" />
-          <Property Type="Double" Name="Cost_prom_fin" Nullable="false" />
-          <Property Type="Double" Name="Saldo_fin_cost" Nullable="false" />
-          <Property Type="String" Name="IdUsuario" Nullable="false" MaxLength="20" />
-          <Property Type="String" Name="dm_observacion" Nullable="true" MaxLength="1000" />
-          <Property Type="DateTime" Name="cm_fecha" Nullable="true" Precision="23" />
-          <Property Type="String" Name="tipo_movi" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="cod_bodega" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="nom_bodega" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="cod_sucursal" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="nom_sucursal" Nullable="true" MaxLength="60" />
-          <Property Type="Int32" Name="IdEmpresa_oc" Nullable="true" />
-          <Property Type="Int32" Name="IdSucursal_oc" Nullable="true" />
-          <Property Type="Decimal" Name="IdOrdenCompra" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="String" Name="num_factura" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="nom_proveedor" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="pr_codigo" Nullable="false" MaxLength="40" />
-          <Property Type="String" Name="pr_descripcion" Nullable="false" MaxLength="500" />
-          <Property Type="String" Name="IdUnidadMedida" Nullable="false" MaxLength="25" />
-          <Property Type="String" Name="nom_unidad_consumo" Nullable="false" MaxLength="500" />
-          <Property Type="String" Name="cod_unidad_consumo" Nullable="true" MaxLength="25" />
-        </ComplexType>
         <ComplexType Name="SPINV_009_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
           <Property Type="Int32" Name="IdSucursal" Nullable="false" />
@@ -7856,6 +7817,49 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
           <Property Type="DateTime" Name="em_fechaIngaRol" Nullable="true" Precision="23" />
           <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="1" />
           <Property Type="Double" Name="Valor" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SPINV_005_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="true" />
+          <Property Type="Int32" Name="IdSucursal" Nullable="true" />
+          <Property Type="Int32" Name="IdBodega" Nullable="true" />
+          <Property Type="Int32" Name="IdMovi_inven_tipo" Nullable="true" />
+          <Property Type="Decimal" Name="IdNumMovi" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="Secuencia" Nullable="true" />
+          <Property Type="Decimal" Name="IdProducto" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Double" Name="Saldo_ini_cant" Nullable="false" />
+          <Property Type="Double" Name="Cost_prom_ini" Nullable="false" />
+          <Property Type="Double" Name="Saldo_ini_cost" Nullable="false" />
+          <Property Type="Double" Name="cant_ing" Nullable="false" />
+          <Property Type="Double" Name="cost_ing" Nullable="false" />
+          <Property Type="Double" Name="total_ing" Nullable="false" />
+          <Property Type="Double" Name="cant_egr" Nullable="false" />
+          <Property Type="Double" Name="cost_egr" Nullable="false" />
+          <Property Type="Double" Name="total_egr" Nullable="false" />
+          <Property Type="Double" Name="Saldo_cant" Nullable="true" />
+          <Property Type="Double" Name="Saldo_cost_prom" Nullable="true" />
+          <Property Type="Double" Name="Saldo_cost" Nullable="true" />
+          <Property Type="Double" Name="Saldo_fin_cant" Nullable="false" />
+          <Property Type="Double" Name="Cost_prom_fin" Nullable="false" />
+          <Property Type="Double" Name="Saldo_fin_cost" Nullable="false" />
+          <Property Type="String" Name="IdUsuario" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="dm_observacion" Nullable="true" MaxLength="1000" />
+          <Property Type="DateTime" Name="cm_fecha" Nullable="true" Precision="23" />
+          <Property Type="String" Name="tipo_movi" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="cod_bodega" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="nom_bodega" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="cod_sucursal" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="nom_sucursal" Nullable="true" MaxLength="60" />
+          <Property Type="Int32" Name="IdEmpresa_oc" Nullable="true" />
+          <Property Type="Int32" Name="IdSucursal_oc" Nullable="true" />
+          <Property Type="Decimal" Name="IdOrdenCompra" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="num_factura" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="nom_proveedor" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="pr_codigo" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="pr_descripcion" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="IdUnidadMedida" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="nom_unidad_consumo" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="cod_unidad_consumo" Nullable="true" MaxLength="25" />
+          <Property Type="Decimal" Name="IdProductoPadre" Nullable="false" Precision="18" Scale="0" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -9974,52 +9978,6 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SPINV_005" FunctionName="Model_reportes.Store.SPINV_005">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model_reportes.SPINV_005_Result">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
-                <ScalarProperty Name="IdMovi_inven_tipo" ColumnName="IdMovi_inven_tipo" />
-                <ScalarProperty Name="IdNumMovi" ColumnName="IdNumMovi" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="Saldo_ini_cant" ColumnName="Saldo_ini_cant" />
-                <ScalarProperty Name="Cost_prom_ini" ColumnName="Cost_prom_ini" />
-                <ScalarProperty Name="Saldo_ini_cost" ColumnName="Saldo_ini_cost" />
-                <ScalarProperty Name="cant_ing" ColumnName="cant_ing" />
-                <ScalarProperty Name="cost_ing" ColumnName="cost_ing" />
-                <ScalarProperty Name="total_ing" ColumnName="total_ing" />
-                <ScalarProperty Name="cant_egr" ColumnName="cant_egr" />
-                <ScalarProperty Name="cost_egr" ColumnName="cost_egr" />
-                <ScalarProperty Name="total_egr" ColumnName="total_egr" />
-                <ScalarProperty Name="Saldo_cant" ColumnName="Saldo_cant" />
-                <ScalarProperty Name="Saldo_cost_prom" ColumnName="Saldo_cost_prom" />
-                <ScalarProperty Name="Saldo_cost" ColumnName="Saldo_cost" />
-                <ScalarProperty Name="Saldo_fin_cant" ColumnName="Saldo_fin_cant" />
-                <ScalarProperty Name="Cost_prom_fin" ColumnName="Cost_prom_fin" />
-                <ScalarProperty Name="Saldo_fin_cost" ColumnName="Saldo_fin_cost" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="dm_observacion" ColumnName="dm_observacion" />
-                <ScalarProperty Name="cm_fecha" ColumnName="cm_fecha" />
-                <ScalarProperty Name="tipo_movi" ColumnName="tipo_movi" />
-                <ScalarProperty Name="cod_bodega" ColumnName="cod_bodega" />
-                <ScalarProperty Name="nom_bodega" ColumnName="nom_bodega" />
-                <ScalarProperty Name="cod_sucursal" ColumnName="cod_sucursal" />
-                <ScalarProperty Name="nom_sucursal" ColumnName="nom_sucursal" />
-                <ScalarProperty Name="IdEmpresa_oc" ColumnName="IdEmpresa_oc" />
-                <ScalarProperty Name="IdSucursal_oc" ColumnName="IdSucursal_oc" />
-                <ScalarProperty Name="IdOrdenCompra" ColumnName="IdOrdenCompra" />
-                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
-                <ScalarProperty Name="nom_proveedor" ColumnName="nom_proveedor" />
-                <ScalarProperty Name="pr_codigo" ColumnName="pr_codigo" />
-                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
-                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
-                <ScalarProperty Name="nom_unidad_consumo" ColumnName="nom_unidad_consumo" />
-                <ScalarProperty Name="cod_unidad_consumo" ColumnName="cod_unidad_consumo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SPINV_009" FunctionName="Model_reportes.Store.SPINV_009">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Model_reportes.SPINV_009_Result">
@@ -10124,6 +10082,53 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
                 <ScalarProperty Name="em_fechaIngaRol" ColumnName="em_fechaIngaRol" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPINV_005" FunctionName="Model_reportes.Store.SPINV_005">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_reportes.SPINV_005_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdMovi_inven_tipo" ColumnName="IdMovi_inven_tipo" />
+                <ScalarProperty Name="IdNumMovi" ColumnName="IdNumMovi" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Saldo_ini_cant" ColumnName="Saldo_ini_cant" />
+                <ScalarProperty Name="Cost_prom_ini" ColumnName="Cost_prom_ini" />
+                <ScalarProperty Name="Saldo_ini_cost" ColumnName="Saldo_ini_cost" />
+                <ScalarProperty Name="cant_ing" ColumnName="cant_ing" />
+                <ScalarProperty Name="cost_ing" ColumnName="cost_ing" />
+                <ScalarProperty Name="total_ing" ColumnName="total_ing" />
+                <ScalarProperty Name="cant_egr" ColumnName="cant_egr" />
+                <ScalarProperty Name="cost_egr" ColumnName="cost_egr" />
+                <ScalarProperty Name="total_egr" ColumnName="total_egr" />
+                <ScalarProperty Name="Saldo_cant" ColumnName="Saldo_cant" />
+                <ScalarProperty Name="Saldo_cost_prom" ColumnName="Saldo_cost_prom" />
+                <ScalarProperty Name="Saldo_cost" ColumnName="Saldo_cost" />
+                <ScalarProperty Name="Saldo_fin_cant" ColumnName="Saldo_fin_cant" />
+                <ScalarProperty Name="Cost_prom_fin" ColumnName="Cost_prom_fin" />
+                <ScalarProperty Name="Saldo_fin_cost" ColumnName="Saldo_fin_cost" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="dm_observacion" ColumnName="dm_observacion" />
+                <ScalarProperty Name="cm_fecha" ColumnName="cm_fecha" />
+                <ScalarProperty Name="tipo_movi" ColumnName="tipo_movi" />
+                <ScalarProperty Name="cod_bodega" ColumnName="cod_bodega" />
+                <ScalarProperty Name="nom_bodega" ColumnName="nom_bodega" />
+                <ScalarProperty Name="cod_sucursal" ColumnName="cod_sucursal" />
+                <ScalarProperty Name="nom_sucursal" ColumnName="nom_sucursal" />
+                <ScalarProperty Name="IdEmpresa_oc" ColumnName="IdEmpresa_oc" />
+                <ScalarProperty Name="IdSucursal_oc" ColumnName="IdSucursal_oc" />
+                <ScalarProperty Name="IdOrdenCompra" ColumnName="IdOrdenCompra" />
+                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
+                <ScalarProperty Name="nom_proveedor" ColumnName="nom_proveedor" />
+                <ScalarProperty Name="pr_codigo" ColumnName="pr_codigo" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
+                <ScalarProperty Name="nom_unidad_consumo" ColumnName="nom_unidad_consumo" />
+                <ScalarProperty Name="cod_unidad_consumo" ColumnName="cod_unidad_consumo" />
+                <ScalarProperty Name="IdProductoPadre" ColumnName="IdProductoPadre" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
