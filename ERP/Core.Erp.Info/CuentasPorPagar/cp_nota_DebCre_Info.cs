@@ -11,6 +11,7 @@ namespace Core.Erp.Info.CuentasPorPagar
 {
    public class cp_nota_DebCre_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdCbteCble_Nota { get; set; }
         public int IdTipoCbte_Nota { get; set; }
