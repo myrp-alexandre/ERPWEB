@@ -23,7 +23,7 @@
         settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e) {$('#cb_giradoA').val(s.GetText()); vaciar_detalles();}";
     })
     .BindList(new Core.Erp.Web.Areas.Banco.Controllers.ChequeBancoController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Banco.Controllers.ChequeBancoController().get_info_bajo_demanda)
-    .Bind(Model.IdEntidad == 0 ? "" : Model.IdEntidad);
+    .Bind(Model.IdEntidad);
 
 }
 @comboBox.GetHtml()
