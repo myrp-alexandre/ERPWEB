@@ -9015,6 +9015,9 @@
     <Content Include="Areas\Compras\Views\CatalogoTipoCompras\Index.cshtml" />
     <Content Include="Areas\Compras\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Compras\Views\CatalogoTipoCompras\_GridViewPartial_catipocompras.cshtml" />
+    <Content Include="Areas\Compras\Views\CatalogoTipoCompras\Nuevo.cshtml" />
+    <Content Include="Areas\Compras\Views\CatalogoTipoCompras\Modificar.cshtml" />
+    <Content Include="Areas\Compras\Views\CatalogoTipoCompras\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

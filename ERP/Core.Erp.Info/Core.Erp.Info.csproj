@@ -71,6 +71,7 @@
     <Compile Include="Caja\cp_conciliacion_Caja_det_Ing_Caja_Info.cs" />
     <Compile Include="Caja\cp_conciliacion_Caja_det_x_ValeCaja_Info.cs" />
     <Compile Include="Caja\cp_conciliacion_Caja_Info.cs" />
+    <Compile Include="Compras\com_catalogo_Info.cs" />
     <Compile Include="Compras\com_catalogo_tipo_Info.cs" />
     <Compile Include="Contabilidad\ATS\ATS_Info\ats_Info.cs" />
     <Compile Include="Contabilidad\ATS\ATS_Info\compras_Info.cs" />
