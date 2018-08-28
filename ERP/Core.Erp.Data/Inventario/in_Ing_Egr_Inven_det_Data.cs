@@ -63,6 +63,8 @@ namespace Core.Erp.Data.Inventario
                 Lista.ForEach(V =>
                 {
                     V.pr_descripcion = V.pr_descripcion + " " + V.nom_presentacion + " - " + V.lote_num_lote + " - " + (V.lote_fecha_vcto != null ? Convert.ToDateTime(V.lote_fecha_vcto).ToString("dd/MM/yyyy") : "");
+                    V.dm_cantidad_sinConversion = Math.Abs(V.dm_cantidad_sinConversion);
+                    V.dm_cantidad = Math.Abs(V.dm_cantidad);
                 });
                 return Lista;
             }

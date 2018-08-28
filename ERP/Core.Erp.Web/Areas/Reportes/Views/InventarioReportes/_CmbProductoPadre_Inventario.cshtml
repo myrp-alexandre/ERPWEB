@@ -15,7 +15,7 @@
         settings.Properties.TextField = "pr_descripcion";
         settings.Properties.TextFormatString = "[{0}] {1}";
 
-        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdProducto.PerformCallback(); IdProducto.SetValue(0); }";
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdProducto.PerformCallback(); IdProducto.SetValue(''); }";
 
         settings.Properties.Columns.Add("IdProducto", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
         settings.Properties.Columns.Add("pr_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
