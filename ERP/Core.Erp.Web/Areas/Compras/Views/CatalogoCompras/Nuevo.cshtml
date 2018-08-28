@@ -51,21 +51,28 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
-                    <label for="ICatalogo">Código*</label>
+                    <label for="ICatalogo">ID*</label>
                     @Html.TextBoxFor(q => q.IdCatalogocompra, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.IdCatalogocompra, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="ICatalogo">Código</label>
+                    @Html.TextBoxFor(q => q.CodCatalogo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.CodCatalogo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="Abrebiatura">Abreviatura</label>
                     @Html.TextBoxFor(q => q.Abrebiatura, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Abrebiatura, "", new { @class = "form", @role = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="Orden">Orden</label>
                     @Html.TextBoxFor(q => q.Orden, new { @class = "form-control" })

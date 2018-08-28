@@ -155,6 +155,7 @@ namespace Core.Erp.Data.Compras
                     Entity.CodCatalogo = info.CodCatalogo;
                     Entity.Nombre = info.Nombre;
                     Entity.Abrebiatura = info.Abrebiatura;
+                    Entity.Orden  = info.Orden;
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.FechaUltMod = DateTime.Now;
