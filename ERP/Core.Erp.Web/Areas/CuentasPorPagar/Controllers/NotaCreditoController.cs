@@ -174,7 +174,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return RedirectToAction("Index");
             if (model.info_comrobante.lst_ct_cbtecble_det == null)
                 model.info_comrobante.lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>();
-            Lis_ct_cbtecble_det_List_nc.set_list( = model.info_comrobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
+            Lis_ct_cbtecble_det_List_nc.set_list(  model.info_comrobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
 
              list_op_seleccionadas = bus_orden_pago_cancelaciones.Get_list_Cancelacion_x_CXP(IdEmpresa,IdTipoCbte_Nota,IdCbteCble_Nota);
             if (list_op_seleccionadas == null)
