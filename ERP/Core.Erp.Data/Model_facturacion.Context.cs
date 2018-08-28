@@ -58,7 +58,6 @@ namespace Core.Erp.Data
         public DbSet<fa_Vendedor> fa_Vendedor { get; set; }
         public DbSet<vwfa_proforma> vwfa_proforma { get; set; }
         public DbSet<vwfa_proforma_det> vwfa_proforma_det { get; set; }
-        public DbSet<vwfa_proforma_det_por_facturar> vwfa_proforma_det_por_facturar { get; set; }
         public DbSet<vwfa_cliente_consulta> vwfa_cliente_consulta { get; set; }
         public DbSet<vwfa_factura> vwfa_factura { get; set; }
         public DbSet<vwfa_factura_sin_guia> vwfa_factura_sin_guia { get; set; }
@@ -70,5 +69,6 @@ namespace Core.Erp.Data
         public DbSet<vwfa_notaCreDeb_x_fa_factura_NotaDeb> vwfa_notaCreDeb_x_fa_factura_NotaDeb { get; set; }
         public DbSet<vwfa_factura_det> vwfa_factura_det { get; set; }
         public DbSet<vwfa_cliente_contactos> vwfa_cliente_contactos { get; set; }
+        public DbSet<vwfa_proforma_det_por_facturar> vwfa_proforma_det_por_facturar { get; set; }
     }
 }
