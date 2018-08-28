@@ -178,6 +178,7 @@
     </Compile>
     <Compile Include="Compras\com_catalogo_Data.cs" />
     <Compile Include="Compras\com_catalogo_tipo_Data.cs" />
+    <Compile Include="Compras\com_comprador_Data.cs" />
     <Compile Include="com_catalogo.cs">
       <DependentUpon>Model_compras.tt</DependentUpon>
     </Compile>
