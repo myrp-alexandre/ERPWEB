@@ -14,9 +14,13 @@
         settings.Properties.TextFormatString = "[{0}] {1}";
         settings.Properties.ValueField = "IdEntidad";
         settings.Properties.ValueType = typeof(decimal);
+        settings.Properties.NullText = "== Seleccione ==";
+        settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
 
         settings.Properties.Columns.Add("IdEntidad", "ID", 10);
-        settings.Properties.Columns.Add("pe_nombreCompleto", "Proveedor", 90);
+        settings.Properties.Columns.Add("pe_cedulaRuc", "RUC", 20);
+        settings.Properties.Columns.Add("pe_nombreCompleto", "Proveedor", 70);
+        settings.Properties.FilterMinLength = 3;
     })
     .BindList(new Core.Erp.Web.Areas.Reportes.Controllers.CuentasPorPagarReportesController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Reportes.Controllers.CuentasPorPagarReportesController().get_info_bajo_demanda)
     .Bind(Model.IdProveedor);
