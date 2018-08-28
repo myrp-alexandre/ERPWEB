@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ namespace Core.Erp.Info.Compras
         public int IdEmpresa { get; set; }
         public decimal IdComprador { get; set; }
         public string IdUsuario_com { get; set; }
+        [Required(ErrorMessage = ("el campo descripción es obligatorio"))]
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 50")]
         public string Descripcion { get; set; }
         public string Estado { get; set; }
         public string IdUsuario { get; set; }
