@@ -14,14 +14,16 @@
         settings.Properties.ValueField = "IdEntidad";
         settings.Properties.ValueType = typeof(decimal);
         settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+
         settings.Properties.Columns.Add("IdEntidad", "ID", 10);
-        settings.Properties.Columns.Add("pe_nombreCompleto", "Persona", 80);
-        settings.Properties.Columns.Add("IdPersona", "ID Persona", 10);
+        settings.Properties.Columns.Add("pe_cedulaRUC", "RUC", 20);
+        settings.Properties.Columns.Add("pe_nombreCompleto", "Persona", 70);
+        settings.Properties.FilterMinLength = 3;
 
         settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdTipo_Persona'] = $('#IdTipo_Persona').val(); }";
     })
     .BindList(new Core.Erp.Web.Areas.Banco.Controllers.NotaDeDebitoBancoController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Banco.Controllers.NotaDeDebitoBancoController().get_info_bajo_demanda)
-    .Bind(Model.IdEntidad);
+    .Bind(Model.IdEntidad == 0 ? "" : Model.IdEntidad);
 
 }
 @comboBox.GetHtml()

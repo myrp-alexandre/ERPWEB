@@ -15,8 +15,9 @@
         settings.Properties.ValueType = typeof(decimal);
 
         settings.Properties.Columns.Add("IdEntidad", "ID", 10);
-        settings.Properties.Columns.Add("pe_nombreCompleto", "Persona", 80);
-        settings.Properties.Columns.Add("IdPersona", "ID Persona", 10);
+        settings.Properties.Columns.Add("pe_cedulaRUC", "RUC", 20);
+        settings.Properties.Columns.Add("pe_nombreCompleto", "Persona", 70);
+        settings.Properties.FilterMinLength = 3;
 
         settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdTipoPersona'] = $('#IdTipoPersona').val(); }";
     })
