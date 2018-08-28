@@ -775,8 +775,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 cbtecble_det_total_Info.IdEmpresa = 0;
                 cbtecble_det_total_Info.IdTipoCbte = 1;
                 cbtecble_det_total_Info.IdCtaCble = info_proveedor.IdCtaCble_CXP;
-                cbtecble_det_total_Info.dc_Valor_haber = co_total;
-                cbtecble_det_total_Info.dc_Valor = co_total * -1;
+                cbtecble_det_total_Info.dc_Valor_haber = Math.Round(co_total, 2);
+                cbtecble_det_total_Info.dc_Valor =Math.Round( co_total * -1,2);
                 cbtecble_det_total_Info.dc_Observacion = observacion;
                 AddRow(cbtecble_det_total_Info, IdTransaccionSession);
 
@@ -788,8 +788,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     cbtecble_det_iva_Info.IdEmpresa = 0;
                     cbtecble_det_iva_Info.IdTipoCbte = 1;
                     cbtecble_det_iva_Info.IdCtaCble = info_parametro.pa_ctacble_iva;
-                    cbtecble_det_iva_Info.dc_Valor_debe = co_valoriva;
-                    cbtecble_det_iva_Info.dc_Valor = co_valoriva;
+                    cbtecble_det_iva_Info.dc_Valor_debe =  Math.Round(co_valoriva, 2);
+                    cbtecble_det_iva_Info.dc_Valor =Math.Round( co_valoriva,2);
                     cbtecble_det_iva_Info.dc_Observacion = observacion;
                     AddRow(cbtecble_det_iva_Info, IdTransaccionSession);
                 }
@@ -799,8 +799,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 cbtecble_det_sub_Info.IdEmpresa = 0;
                 cbtecble_det_sub_Info.IdTipoCbte = 1;
                 cbtecble_det_sub_Info.IdCtaCble = info_parametro.pa_ctacble_deudora;
-                cbtecble_det_sub_Info.dc_Valor_debe = co_subtotal_iva + co_subtotal_siniva;              
-                cbtecble_det_sub_Info.dc_Valor = co_subtotal_iva+co_subtotal_siniva;
+                cbtecble_det_sub_Info.dc_Valor_debe =Math.Round( co_subtotal_iva + co_subtotal_siniva,2);              
+                cbtecble_det_sub_Info.dc_Valor = Math.Round(co_subtotal_iva + co_subtotal_siniva, 2);
                 cbtecble_det_sub_Info.dc_Observacion = observacion;
                 AddRow(cbtecble_det_sub_Info, IdTransaccionSession);
                

@@ -92,6 +92,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
             foreach (var item in model.lst_novedad_det)
             {
+                item.Valor = Math.Round(item.Valor,2);
                 lst_rubros = Session["rubros"] as List<ro_rubro_tipo_Info>;
                 if(lst_rubros.Count() >0)
                 {

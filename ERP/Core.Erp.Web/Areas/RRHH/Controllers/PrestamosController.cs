@@ -73,6 +73,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             model.IdUsuario = Session["IdUsuario"].ToString();
             model.lst_detalle = lst_prestamo.get_list();
+            foreach (var item in model.lst_detalle)
+            {
+                item.TotalCuota = Math.Round(item.TotalCuota,2);
+            }
             if (!bus_prestamos.guardarDB(model))
             {
                 cargar_combos();
@@ -117,6 +121,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 return View(model);
             }
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            foreach (var item in model.lst_detalle)
+            {
+                item.TotalCuota = Math.Round(item.TotalCuota, 2);
+            }
             if (!bus_prestamos.modificarDB(model))
             {
                 cargar_combos();
