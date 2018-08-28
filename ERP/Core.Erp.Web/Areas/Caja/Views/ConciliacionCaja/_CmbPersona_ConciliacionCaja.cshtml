@@ -20,10 +20,10 @@
 
         settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdTipoPersona'] = $('#IdTipoPersona').val(); }";
     })
-    .BindList(new Core.Erp.Web.Areas.Caja.Controllers.ConciliacionCajaController().get_list_bajo_demanda, 
+    .BindList(new Core.Erp.Web.Areas.Caja.Controllers.ConciliacionCajaController().get_list_bajo_demanda,
     new Core.Erp.Web.Areas.Caja.Controllers.ConciliacionCajaController().get_info_bajo_demanda)
     //.BindList(ViewBag.lst_persona)
-    .Bind(Model.IdEntidad);
+    .Bind(Model.IdEntidad == 0 ? "" : Model.IdEntidad);
 
 }
 @comboBox.GetHtml()
