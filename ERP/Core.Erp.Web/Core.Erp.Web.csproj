@@ -9008,6 +9008,7 @@
     <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\_CmbProveedor_CXP.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_producto_por_bodega.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\Deudas\_GridViewPartial_deudas_det.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Deudas\_CmbProducto_deudas.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -9121,7 +9122,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

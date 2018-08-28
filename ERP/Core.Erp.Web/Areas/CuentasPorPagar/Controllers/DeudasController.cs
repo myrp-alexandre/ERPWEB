@@ -14,6 +14,7 @@ using Core.Erp.Web.Helps;
 using DevExpress.Web;
 using Core.Erp.Info.General;
 using Core.Erp.Bus.Inventario;
+using Core.Erp.Info.Inventario;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
@@ -57,19 +58,18 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #endregion
 
         #region Metodos ComboBox bajo demanda de producto
-        tb_persona_Bus bus_persona = new tb_persona_Bus();
-        public ActionResult CmbProveedor_CXP()
+        public ActionResult CmbProducto_deudas()
         {
-            cp_proveedor_Info model = new cp_proveedor_Info();
-            return PartialView("_CmbProveedor_CXP", model);
+            cp_orden_giro_det_Info model = new cp_orden_giro_det_Info();
+            return PartialView("_CmbProducto_deudas", model);
         }
-        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        public List<in_Producto_Info> get_list_bajo_demanda_producto(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROVEE.ToString());
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.PORMODULO, cl_enumeradores.eModulo.COM, 0);
         }
-        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        public in_Producto_Info get_info_bajo_demanda_producto(ListEditItemRequestedByValueEventArgs args)
         {
-            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROVEE.ToString());
+            return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
         #endregion
 

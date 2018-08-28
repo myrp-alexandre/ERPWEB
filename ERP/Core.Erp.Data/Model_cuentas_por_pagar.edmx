@@ -230,6 +230,7 @@
           <Property Name="ing_IdNumMovi" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ing_Secuencia" Type="int" Nullable="false" />
           <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdUnidadMedida" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Cantidad" Type="float" Nullable="false" />
           <Property Name="CostoUni" Type="float" Nullable="false" />
           <Property Name="PorDescuento" Type="float" Nullable="false" />
@@ -2901,7 +2902,6 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
             <End Role="cp_proveedor_clase" EntitySet="cp_proveedor_clase" />
             <End Role="cp_proveedor" EntitySet="cp_proveedor" />
           </AssociationSet>
-          <EntitySet Name="cp_orden_giro_det" EntityType="Model_cuentas_por_pagar.cp_orden_giro_det" />
           <EntitySet Name="vwcp_orden_giro" EntityType="Model_cuentas_por_pagar.vwcp_orden_giro" />
           <EntitySet Name="vwcp_orden_pago_con_cancelacion" EntityType="Model_cuentas_por_pagar.vwcp_orden_pago_con_cancelacion" />
           <EntitySet Name="vwcp_orden_giro_x_pagar" EntityType="Model_cuentas_por_pagar.vwcp_orden_giro_x_pagar" />
@@ -2926,10 +2926,6 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
             <End Role="cp_proveedor" EntitySet="cp_proveedor" />
             <End Role="cp_orden_giro" EntitySet="cp_orden_giro" />
           </AssociationSet>
-          <AssociationSet Name="FK_cp_orden_giro_det_cp_orden_giro" Association="Model_cuentas_por_pagar.FK_cp_orden_giro_det_cp_orden_giro">
-            <End Role="cp_orden_giro" EntitySet="cp_orden_giro" />
-            <End Role="cp_orden_giro_det" EntitySet="cp_orden_giro_det" />
-          </AssociationSet>
           <AssociationSet Name="FK_cp_orden_giro_pagos_sri_cp_orden_giro" Association="Model_cuentas_por_pagar.FK_cp_orden_giro_pagos_sri_cp_orden_giro">
             <End Role="cp_orden_giro" EntitySet="cp_orden_giro" />
             <End Role="cp_orden_giro_pagos_sri" EntitySet="cp_orden_giro_pagos_sri" />
@@ -2937,6 +2933,11 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
           <AssociationSet Name="FK_cp_retencion_cp_orden_giro" Association="Model_cuentas_por_pagar.FK_cp_retencion_cp_orden_giro">
             <End Role="cp_orden_giro" EntitySet="cp_orden_giro" />
             <End Role="cp_retencion" EntitySet="cp_retencion" />
+          </AssociationSet>
+          <EntitySet Name="cp_orden_giro_det" EntityType="Model_cuentas_por_pagar.cp_orden_giro_det" />
+          <AssociationSet Name="FK_cp_orden_giro_det_cp_orden_giro" Association="Model_cuentas_por_pagar.FK_cp_orden_giro_det_cp_orden_giro">
+            <End Role="cp_orden_giro" EntitySet="cp_orden_giro" />
+            <End Role="cp_orden_giro_det" EntitySet="cp_orden_giro_det" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="spcp_Get_Data_orden_pago_con_cancelacion_data_Result">
@@ -3176,36 +3177,6 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="cp_orden_giro_det">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdCbteCble_Ogiro" />
-            <PropertyRef Name="IdTipoCbte_Ogiro" />
-            <PropertyRef Name="Secuencia" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteCble_Ogiro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdTipoCbte_Ogiro" Type="Int32" Nullable="false" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="ing_IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="ing_IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="ing_IdMovi_inven_tipo" Type="Int32" Nullable="false" />
-          <Property Name="ing_IdNumMovi" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="ing_Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Cantidad" Type="Double" Nullable="false" />
-          <Property Name="CostoUni" Type="Double" Nullable="false" />
-          <Property Name="PorDescuento" Type="Double" Nullable="false" />
-          <Property Name="DescuentoUni" Type="Double" Nullable="false" />
-          <Property Name="CostoUniFinal" Type="Double" Nullable="false" />
-          <Property Name="Subtotal" Type="Double" Nullable="false" />
-          <Property Name="IdCod_Impuesto_Iva" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="PorIva" Type="Double" Nullable="false" />
-          <Property Name="ValorIva" Type="Double" Nullable="false" />
-          <Property Name="Total" Type="Double" Nullable="false" />
-          <Property Name="IdCtaCbleGasto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="cp_orden_giro" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_det_cp_orden_giro" FromRole="cp_orden_giro_det" ToRole="cp_orden_giro" />
-        </EntityType>
         <EntityType Name="vwcp_orden_giro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3450,9 +3421,9 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
           <NavigationProperty Name="cp_codigo_SRI2" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_cp_codigo_SRI2" FromRole="cp_orden_giro" ToRole="cp_codigo_SRI" />
           <NavigationProperty Name="cp_pais_sri" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_cp_pais_sri" FromRole="cp_orden_giro" ToRole="cp_pais_sri" />
           <NavigationProperty Name="cp_proveedor" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_cp_proveedor" FromRole="cp_orden_giro" ToRole="cp_proveedor" />
-          <NavigationProperty Name="cp_orden_giro_det" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_det_cp_orden_giro" FromRole="cp_orden_giro" ToRole="cp_orden_giro_det" />
           <NavigationProperty Name="cp_orden_giro_pagos_sri" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_pagos_sri_cp_orden_giro" FromRole="cp_orden_giro" ToRole="cp_orden_giro_pagos_sri" />
           <NavigationProperty Name="cp_retencion" Relationship="Model_cuentas_por_pagar.FK_cp_retencion_cp_orden_giro" FromRole="cp_orden_giro" ToRole="cp_retencion" />
+          <NavigationProperty Name="cp_orden_giro_det" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_det_cp_orden_giro" FromRole="cp_orden_giro" ToRole="cp_orden_giro_det" />
         </EntityType>
         <Association Name="FK_cp_orden_giro_cp_codigo_SRI">
           <End Type="Model_cuentas_por_pagar.cp_codigo_SRI" Role="cp_codigo_SRI" Multiplicity="0..1" />
@@ -3516,22 +3487,6 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_cp_orden_giro_det_cp_orden_giro">
-          <End Type="Model_cuentas_por_pagar.cp_orden_giro" Role="cp_orden_giro" Multiplicity="1" />
-          <End Type="Model_cuentas_por_pagar.cp_orden_giro_det" Role="cp_orden_giro_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cp_orden_giro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCbteCble_Ogiro" />
-              <PropertyRef Name="IdTipoCbte_Ogiro" />
-            </Principal>
-            <Dependent Role="cp_orden_giro_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCbteCble_Ogiro" />
-              <PropertyRef Name="IdTipoCbte_Ogiro" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_cp_orden_giro_pagos_sri_cp_orden_giro">
           <End Type="Model_cuentas_por_pagar.cp_orden_giro" Role="cp_orden_giro" Multiplicity="1" />
           <End Type="Model_cuentas_por_pagar.cp_orden_giro_pagos_sri" Role="cp_orden_giro_pagos_sri" Multiplicity="*" />
@@ -3559,6 +3514,53 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
             </Principal>
             <Dependent Role="cp_retencion">
               <PropertyRef Name="IdEmpresa_Ogiro" />
+              <PropertyRef Name="IdCbteCble_Ogiro" />
+              <PropertyRef Name="IdTipoCbte_Ogiro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="cp_orden_giro_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCbteCble_Ogiro" />
+            <PropertyRef Name="IdTipoCbte_Ogiro" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble_Ogiro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipoCbte_Ogiro" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="ing_IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="ing_IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="ing_IdMovi_inven_tipo" Type="Int32" Nullable="false" />
+          <Property Name="ing_IdNumMovi" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ing_Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdUnidadMedida" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Double" Nullable="false" />
+          <Property Name="CostoUni" Type="Double" Nullable="false" />
+          <Property Name="PorDescuento" Type="Double" Nullable="false" />
+          <Property Name="DescuentoUni" Type="Double" Nullable="false" />
+          <Property Name="CostoUniFinal" Type="Double" Nullable="false" />
+          <Property Name="Subtotal" Type="Double" Nullable="false" />
+          <Property Name="IdCod_Impuesto_Iva" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PorIva" Type="Double" Nullable="false" />
+          <Property Name="ValorIva" Type="Double" Nullable="false" />
+          <Property Name="Total" Type="Double" Nullable="false" />
+          <Property Name="IdCtaCbleGasto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cp_orden_giro" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_det_cp_orden_giro" FromRole="cp_orden_giro_det" ToRole="cp_orden_giro" />
+        </EntityType>
+        <Association Name="FK_cp_orden_giro_det_cp_orden_giro">
+          <End Type="Model_cuentas_por_pagar.cp_orden_giro" Role="cp_orden_giro" Multiplicity="1" />
+          <End Type="Model_cuentas_por_pagar.cp_orden_giro_det" Role="cp_orden_giro_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_orden_giro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCbteCble_Ogiro" />
+              <PropertyRef Name="IdTipoCbte_Ogiro" />
+            </Principal>
+            <Dependent Role="cp_orden_giro_det">
+              <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdCbteCble_Ogiro" />
               <PropertyRef Name="IdTipoCbte_Ogiro" />
             </Dependent>
@@ -4305,33 +4307,6 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="cp_orden_giro_det">
-            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_orden_giro_det">
-              <MappingFragment StoreEntitySet="cp_orden_giro_det">
-                <ScalarProperty Name="IdCtaCbleGasto" ColumnName="IdCtaCbleGasto" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="ValorIva" ColumnName="ValorIva" />
-                <ScalarProperty Name="PorIva" ColumnName="PorIva" />
-                <ScalarProperty Name="IdCod_Impuesto_Iva" ColumnName="IdCod_Impuesto_Iva" />
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="CostoUniFinal" ColumnName="CostoUniFinal" />
-                <ScalarProperty Name="DescuentoUni" ColumnName="DescuentoUni" />
-                <ScalarProperty Name="PorDescuento" ColumnName="PorDescuento" />
-                <ScalarProperty Name="CostoUni" ColumnName="CostoUni" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="ing_Secuencia" ColumnName="ing_Secuencia" />
-                <ScalarProperty Name="ing_IdNumMovi" ColumnName="ing_IdNumMovi" />
-                <ScalarProperty Name="ing_IdMovi_inven_tipo" ColumnName="ing_IdMovi_inven_tipo" />
-                <ScalarProperty Name="ing_IdSucursal" ColumnName="ing_IdSucursal" />
-                <ScalarProperty Name="ing_IdEmpresa" ColumnName="ing_IdEmpresa" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdTipoCbte_Ogiro" ColumnName="IdTipoCbte_Ogiro" />
-                <ScalarProperty Name="IdCbteCble_Ogiro" ColumnName="IdCbteCble_Ogiro" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwcp_orden_giro">
             <EntityTypeMapping TypeName="Model_cuentas_por_pagar.vwcp_orden_giro">
               <MappingFragment StoreEntitySet="vwcp_orden_giro">
@@ -4508,6 +4483,34 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
                 <ScalarProperty Name="co_fechaOg" ColumnName="co_fechaOg" />
                 <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
                 <ScalarProperty Name="IdOrden_giro_Tipo" ColumnName="IdOrden_giro_Tipo" />
+                <ScalarProperty Name="IdTipoCbte_Ogiro" ColumnName="IdTipoCbte_Ogiro" />
+                <ScalarProperty Name="IdCbteCble_Ogiro" ColumnName="IdCbteCble_Ogiro" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cp_orden_giro_det">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_orden_giro_det">
+              <MappingFragment StoreEntitySet="cp_orden_giro_det">
+                <ScalarProperty Name="IdCtaCbleGasto" ColumnName="IdCtaCbleGasto" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="ValorIva" ColumnName="ValorIva" />
+                <ScalarProperty Name="PorIva" ColumnName="PorIva" />
+                <ScalarProperty Name="IdCod_Impuesto_Iva" ColumnName="IdCod_Impuesto_Iva" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="CostoUniFinal" ColumnName="CostoUniFinal" />
+                <ScalarProperty Name="DescuentoUni" ColumnName="DescuentoUni" />
+                <ScalarProperty Name="PorDescuento" ColumnName="PorDescuento" />
+                <ScalarProperty Name="CostoUni" ColumnName="CostoUni" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="ing_Secuencia" ColumnName="ing_Secuencia" />
+                <ScalarProperty Name="ing_IdNumMovi" ColumnName="ing_IdNumMovi" />
+                <ScalarProperty Name="ing_IdMovi_inven_tipo" ColumnName="ing_IdMovi_inven_tipo" />
+                <ScalarProperty Name="ing_IdSucursal" ColumnName="ing_IdSucursal" />
+                <ScalarProperty Name="ing_IdEmpresa" ColumnName="ing_IdEmpresa" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdTipoCbte_Ogiro" ColumnName="IdTipoCbte_Ogiro" />
                 <ScalarProperty Name="IdCbteCble_Ogiro" ColumnName="IdCbteCble_Ogiro" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />

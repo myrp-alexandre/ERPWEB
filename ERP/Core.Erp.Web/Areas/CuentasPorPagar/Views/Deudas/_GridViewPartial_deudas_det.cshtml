@@ -31,9 +31,9 @@
         settings.InitNewRow = (s, e) =>
         {
             e.NewValues["IdProducto"] = "";
-            e.NewValues["IdUnidadMedida_sinConversion"] = "UNID";
-            e.NewValues["dm_cantidad_sinConversion"] = "";
-            e.NewValues["mv_costo_sinConversion"] = "";
+            e.NewValues["IdUnidadMedida"] = "UNID";
+            e.NewValues["Cantidad"] = "";
+            e.NewValues["CostoUni"] = "";
         };
 
         settings.Columns.Add(column =>
@@ -53,12 +53,12 @@
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
             {
-                Html.RenderPartial("_CmbProducto_IngresoInventario", DataBinder.Eval(c.DataItem, "IdProducto"));
+                Html.RenderPartial("_CmbProducto_deudas", DataBinder.Eval(c.DataItem, "IdProducto"));
             });
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdUnidadMedida_sinConversion";
+            column.FieldName = "IdUnidadMedida";
             column.Caption = "Unidad de medida";
             column.Width = Unit.Percentage(20);
             column.EditorProperties().ComboBox(p =>
@@ -72,14 +72,14 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "dm_cantidad_sinConversion";
+            column.FieldName = "Cantidad";
             column.Caption = "cantidad";
             column.Width = Unit.Percentage(15);
 
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "mv_costo_sinConversion";
+            column.FieldName = "CostoUni";
             column.Caption = "Costo";
             column.Width = Unit.Percentage(15);
 

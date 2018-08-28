@@ -12,6 +12,7 @@
         public decimal ing_IdNumMovi { get; set; }
         public int ing_Secuencia { get; set; }
         public decimal IdProducto { get; set; }
+        public string IdUnidadMedida { get; set; }
         public double Cantidad { get; set; }
         public double CostoUni { get; set; }
         public double PorDescuento { get; set; }
