@@ -22,6 +22,6 @@
 
     })
     .BindList(new Core.Erp.Web.Areas.CuentasPorPagar.Controllers.DeudasController().get_list_bajo_demanda_producto,
-    new Core.Erp.Web.Areas.CuentasPorPagar.Controllers.DeudasController().get_info_bajo_demanda_producto).Bind(Model);
+    new Core.Erp.Web.Areas.CuentasPorPagar.Controllers.DeudasController().get_info_bajo_demanda_producto).Bind(Model.GetType() == typeof(Core.Erp.Info.CuentasPorPagar.cp_orden_giro_Info) ? "" : (String.IsNullOrEmpty(Model.ToString()) ? "" : Model));
 }
 @comboBox.GetHtml()

@@ -35,7 +35,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdProveedor">Proveedor</label>
-                    @Html.Partial("_CmbProveedor_CXP", Model)
+                    @Html.Partial("_CmbProveedor_CXP",Model)
                     @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -159,9 +159,9 @@
             <li class="active">
                 <a href="#tab_datos_generales" aria-controls="informacion_general" role="tab" data-toggle="tab">Datos contables</a>
             </li>
-            @*<li>
-        <a href="#tab_detalle" aria-controls="detalle" role="tab" data-toggle="tab">Detalle de ingreso</a>
-    </li>*@
+           <li>
+                <a href="#tab_detalle" aria-controls="detalle" role="tab" data-toggle="tab">Detalle de ingreso</a>
+            </li>
             <li>
                 <a href="#tab_documento_modificado" aria-controls="contactos_telefonos" role="tab" data-toggle="tab">Documento modificado</a>
             </li>
@@ -273,19 +273,19 @@
                     </div>
                 </div>
             </div>
-            @*
-    <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="co_observacion">Detalle</label>
-                        @Html.Action("GridViewPartial_deudas_det")
+            
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="co_observacion">Detalle</label>
+                                @Html.Action("GridViewPartial_deudas_det")
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>*@
 
                 <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_informacion_pago">
                     <div class="row">

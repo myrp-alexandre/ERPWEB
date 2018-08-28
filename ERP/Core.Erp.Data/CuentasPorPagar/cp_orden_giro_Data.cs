@@ -88,7 +88,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                     && q.IdCbteCble_Ogiro == info.IdCbteCble_Ogiro);
                     if (Entity == null) return false;
                     {
-
+                        Entity.IdProveedor = info.IdProveedor;
                         Entity.co_fechaOg = info.co_fechaOg;
                         Entity.co_serie = info.co_serie;
                         Entity.co_factura = info.co_factura;

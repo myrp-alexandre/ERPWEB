@@ -691,8 +691,8 @@
             // 
             // PASPAT
             // 
-            this.PASPAT.Expression = "Iif([EsCuentaMovimiento] = 1, \nIif([IdGrupoCble] = \'PATRI\',[SaldoFinalNaturaleza]" +
-    ", Iif([IdGrupoCble] = \'PASIV\', [SaldoFinalNaturaleza],0 ) )\n, 0)";
+            this.PASPAT.Expression = "Iif([EsCuentaMovimiento] = 1, \nIif([IdGrupoCble] = \'PATRI\',[SaldoFinal], Iif([IdG" +
+    "rupoCble] = \'PASIV\', [SaldoFinal],0 ) ), 0)";
             this.PASPAT.Name = "PASPAT";
             // 
             // ACT

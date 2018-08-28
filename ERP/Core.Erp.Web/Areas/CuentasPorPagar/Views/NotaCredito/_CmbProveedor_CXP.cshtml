@@ -11,7 +11,7 @@
         settings.Properties.CallbackPageSize = 15;
         settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
         settings.Properties.TextField = "pe_nombreCompleto";
-        settings.Properties.TextFormatString = "[{0}] {1}";
+        settings.Properties.TextFormatString = "[{0}] {1} {2}";
         settings.Properties.ValueField = "IdEntidad";
         settings.Properties.ValueType = typeof(decimal);
         settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
@@ -23,7 +23,7 @@
         settings.Properties.FilterMinLength = 3;
     })
     .BindList(new Core.Erp.Web.Areas.CuentasPorPagar.Controllers.DeudasController().get_list_bajo_demanda, new Core.Erp.Web.Areas.CuentasPorPagar.Controllers.DeudasController().get_info_bajo_demanda)
-    .Bind(Model.IdProveedor == 0 ? "" : Model.IdProveedor);
+    .Bind(Model.IdProveedor);
 
 }
 @comboBox.GetHtml()

@@ -44,7 +44,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         public ActionResult CmbProveedor_CXP()
         {
-            cp_proveedor_Info model = new cp_proveedor_Info();
+            cp_orden_giro_Info model = new cp_orden_giro_Info();
             return PartialView("_CmbProveedor_CXP", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -60,7 +60,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #region Metodos ComboBox bajo demanda de producto
         public ActionResult CmbProducto_deudas()
         {
-            cp_orden_giro_det_Info model = new cp_orden_giro_det_Info();
+            decimal model = new decimal();
             return PartialView("_CmbProducto_deudas", model);
         }
         public List<in_Producto_Info> get_list_bajo_demanda_producto(ListEditItemsRequestedByFilterConditionEventArgs args)
