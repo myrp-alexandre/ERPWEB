@@ -27,5 +27,6 @@ namespace Core.Erp.Data
     
         public DbSet<com_catalogo> com_catalogo { get; set; }
         public DbSet<com_catalogo_tipo> com_catalogo_tipo { get; set; }
+        public DbSet<com_comprador> com_comprador { get; set; }
     }
 }

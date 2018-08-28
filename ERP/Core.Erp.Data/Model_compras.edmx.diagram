@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="Model_compras.com_catalogo" Width="1.5" PointX="3" PointY="1" />
         <EntityTypeShape EntityType="Model_compras.com_catalogo_tipo" Width="1.5" PointX="0.75" PointY="2.25" />
         <AssociationConnector Association="Model_compras.FK_com_catalogo_com_catalogo_tipo" />
+        <EntityTypeShape EntityType="Model_compras.com_comprador" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

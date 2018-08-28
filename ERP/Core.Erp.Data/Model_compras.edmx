@@ -34,6 +34,24 @@
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
+        <EntityType Name="com_comprador">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdComprador" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdComprador" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdUsuario_com" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotiAnula" Type="varchar" MaxLength="100" />
+        </EntityType>
         <Association Name="FK_com_catalogo_com_catalogo_tipo">
           <End Role="com_catalogo_tipo" Type="Self.com_catalogo_tipo" Multiplicity="1" />
           <End Role="com_catalogo" Type="Self.com_catalogo" Multiplicity="*" />
@@ -49,6 +67,7 @@
         <EntityContainer Name="Model_comprasStoreContainer">
           <EntitySet Name="com_catalogo" EntityType="Self.com_catalogo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="com_catalogo_tipo" EntityType="Self.com_catalogo_tipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="com_comprador" EntityType="Self.com_comprador" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_com_catalogo_com_catalogo_tipo" Association="Self.FK_com_catalogo_com_catalogo_tipo">
             <End Role="com_catalogo_tipo" EntitySet="com_catalogo_tipo" />
             <End Role="com_catalogo" EntitySet="com_catalogo" />
@@ -65,6 +84,7 @@
             <End Role="com_catalogo_tipo" EntitySet="com_catalogo_tipo" />
             <End Role="com_catalogo" EntitySet="com_catalogo" />
           </AssociationSet>
+          <EntitySet Name="com_comprador" EntityType="Model_compras.com_comprador" />
         </EntityContainer>
         <EntityType Name="com_catalogo">
           <Key>
@@ -109,6 +129,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="com_comprador">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdComprador" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdComprador" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdUsuario_com" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotiAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -143,6 +181,24 @@
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdCatalogocompra_tipo" ColumnName="IdCatalogocompra_tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="com_comprador">
+            <EntityTypeMapping TypeName="Model_compras.com_comprador">
+              <MappingFragment StoreEntitySet="com_comprador">
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdUsuario_com" ColumnName="IdUsuario_com" />
+                <ScalarProperty Name="IdComprador" ColumnName="IdComprador" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
