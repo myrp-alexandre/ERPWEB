@@ -19,7 +19,10 @@
         settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){get_list_tipo_doc();}";
 
         settings.Properties.Columns.Add("IdEntidad", "ID", 10);
-        settings.Properties.Columns.Add("pe_nombreCompleto", "Proveedor", 90);
+        settings.Properties.Columns.Add("pe_cedulaRuc", "RUC", 20);
+        settings.Properties.Columns.Add("pe_nombreCompleto", "Proveedor", 70);
+        settings.Properties.FilterMinLength = 3;
+
     })
     .BindList(new Core.Erp.Web.Areas.CuentasPorPagar.Controllers.DeudasController().get_list_bajo_demanda, new Core.Erp.Web.Areas.CuentasPorPagar.Controllers.DeudasController().get_info_bajo_demanda)
     .Bind(Model.IdProveedor == 0 ? "" : Model.IdProveedor);

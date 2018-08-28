@@ -4,20 +4,149 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model_compras.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="Model_comprasStoreContainer" />
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="Model_compras.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="com_catalogo">
+          <Key>
+            <PropertyRef Name="IdCatalogocompra" />
+          </Key>
+          <Property Name="IdCatalogocompra" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdCatalogocompra_tipo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="CodCatalogo" Type="varchar" MaxLength="15" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Abrebiatura" Type="varchar" MaxLength="10" />
+          <Property Name="NombreIngles" Type="varchar" MaxLength="50" />
+          <Property Name="Orden" Type="int" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="FechaUltMod" Type="datetime" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="25" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="com_catalogo_tipo">
+          <Key>
+            <PropertyRef Name="IdCatalogocompra_tipo" />
+          </Key>
+          <Property Name="IdCatalogocompra_tipo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_com_catalogo_com_catalogo_tipo">
+          <End Role="com_catalogo_tipo" Type="Self.com_catalogo_tipo" Multiplicity="1" />
+          <End Role="com_catalogo" Type="Self.com_catalogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="com_catalogo_tipo">
+              <PropertyRef Name="IdCatalogocompra_tipo" />
+            </Principal>
+            <Dependent Role="com_catalogo">
+              <PropertyRef Name="IdCatalogocompra_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Model_comprasStoreContainer">
+          <EntitySet Name="com_catalogo" EntityType="Self.com_catalogo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="com_catalogo_tipo" EntityType="Self.com_catalogo_tipo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_com_catalogo_com_catalogo_tipo" Association="Self.FK_com_catalogo_com_catalogo_tipo">
+            <End Role="com_catalogo_tipo" EntitySet="com_catalogo_tipo" />
+            <End Role="com_catalogo" EntitySet="com_catalogo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model_compras" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="Entities_compras" annotation:LazyLoadingEnabled="true" />
+        <EntityContainer Name="Entities_compras" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="com_catalogo" EntityType="Model_compras.com_catalogo" />
+          <EntitySet Name="com_catalogo_tipo" EntityType="Model_compras.com_catalogo_tipo" />
+          <AssociationSet Name="FK_com_catalogo_com_catalogo_tipo" Association="Model_compras.FK_com_catalogo_com_catalogo_tipo">
+            <End Role="com_catalogo_tipo" EntitySet="com_catalogo_tipo" />
+            <End Role="com_catalogo" EntitySet="com_catalogo" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="com_catalogo">
+          <Key>
+            <PropertyRef Name="IdCatalogocompra" />
+          </Key>
+          <Property Name="IdCatalogocompra" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdCatalogocompra_tipo" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CodCatalogo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Abrebiatura" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NombreIngles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="com_catalogo_tipo" Relationship="Model_compras.FK_com_catalogo_com_catalogo_tipo" FromRole="com_catalogo" ToRole="com_catalogo_tipo" />
+        </EntityType>
+        <EntityType Name="com_catalogo_tipo">
+          <Key>
+            <PropertyRef Name="IdCatalogocompra_tipo" />
+          </Key>
+          <Property Name="IdCatalogocompra_tipo" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="com_catalogo" Relationship="Model_compras.FK_com_catalogo_com_catalogo_tipo" FromRole="com_catalogo_tipo" ToRole="com_catalogo" />
+        </EntityType>
+        <Association Name="FK_com_catalogo_com_catalogo_tipo">
+          <End Type="Model_compras.com_catalogo_tipo" Role="com_catalogo_tipo" Multiplicity="1" />
+          <End Type="Model_compras.com_catalogo" Role="com_catalogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="com_catalogo_tipo">
+              <PropertyRef Name="IdCatalogocompra_tipo" />
+            </Principal>
+            <Dependent Role="com_catalogo">
+              <PropertyRef Name="IdCatalogocompra_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Model_comprasStoreContainer" CdmEntityContainer="Entities_compras" />
+        <EntityContainerMapping StorageEntityContainer="Model_comprasStoreContainer" CdmEntityContainer="Entities_compras" >
+          <EntitySetMapping Name="com_catalogo">
+            <EntityTypeMapping TypeName="Model_compras.com_catalogo">
+              <MappingFragment StoreEntitySet="com_catalogo">
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="NombreIngles" ColumnName="NombreIngles" />
+                <ScalarProperty Name="Abrebiatura" ColumnName="Abrebiatura" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="CodCatalogo" ColumnName="CodCatalogo" />
+                <ScalarProperty Name="IdCatalogocompra_tipo" ColumnName="IdCatalogocompra_tipo" />
+                <ScalarProperty Name="IdCatalogocompra" ColumnName="IdCatalogocompra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="com_catalogo_tipo">
+            <EntityTypeMapping TypeName="Model_compras.com_catalogo_tipo">
+              <MappingFragment StoreEntitySet="com_catalogo_tipo">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdCatalogocompra_tipo" ColumnName="IdCatalogocompra_tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
@@ -33,7 +162,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>
