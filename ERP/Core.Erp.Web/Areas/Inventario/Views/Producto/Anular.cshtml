@@ -13,6 +13,8 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdProducto)
+    @Html.HiddenFor(q => q.IdTransaccionSession)
+
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -141,8 +143,9 @@
             <li>
                 <a href="#tab_composicion" aria-controls="Composicion" role="tab" data-toggle="tab">Composición</a>
             </li>
+           
             <li>
-                <a href="#tab_imagen" aria-controls="Imágen" role="tab" data-toggle="tab">Imágen</a>
+                <a href="#tab_producto_x_bodega" aria-controls="Imágen" role="tab" data-toggle="tab">Producto por bodega</a>
             </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
@@ -413,9 +416,21 @@
                 </div>
             </div>
 
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_imagen">
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_producto_x_bodega">
+                <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_producto_x_bodega">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.Action("GridViewPartial_producto_por_bodega")
 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 

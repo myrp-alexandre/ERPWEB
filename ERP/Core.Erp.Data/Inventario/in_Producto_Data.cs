@@ -410,14 +410,17 @@ namespace Core.Erp.Data.Inventario
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
                     });
-
-                    Context.in_producto_x_tb_bodega.Add(new in_producto_x_tb_bodega
+                    foreach (var item in info.lst_producto_x_bodega)
                     {
-                        IdEmpresa = info.IdEmpresa,
-                        IdProducto = info.IdProducto,
-                        IdSucursal = 1,
-                        IdBodega = 1
-                    });
+                        Context.in_producto_x_tb_bodega.Add(new in_producto_x_tb_bodega
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdProducto = info.IdProducto,
+                            IdSucursal = item.IdSucursal,
+                            IdBodega = item.IdBodega
+                        });
+
+                    }
 
                     var parametros = Context.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                     if (parametros.P_se_crea_lote_0_al_crear_producto_matriz == true)
@@ -474,14 +477,17 @@ namespace Core.Erp.Data.Inventario
                                 IdUsuario = info.IdUsuario,
                                 Fecha_Transac = DateTime.Now
                             });
-                            Context.in_producto_x_tb_bodega.Add(new in_producto_x_tb_bodega
+                            foreach (var item in info.lst_producto_x_bodega)
                             {
-                                IdEmpresa = info.IdEmpresa,
-                                IdProducto = info.IdProducto +1,
-                                IdSucursal = 1,
-                                IdBodega = 1
+                                Context.in_producto_x_tb_bodega.Add(new in_producto_x_tb_bodega
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdProducto = info.IdProducto,
+                                    IdSucursal = item.IdSucursal,
+                                    IdBodega = item.IdBodega
+                                });
 
-                            });
+                            }
                         }
                     }
                     
@@ -575,13 +581,27 @@ namespace Core.Erp.Data.Inventario
                         "', pr_codigo_barra = '" + info.pr_codigo_barra +
                         "' where in_Producto.IdEmpresa = " + info.IdEmpresa + " AND in_Producto.IdProducto_padre = " + info.IdProducto;
                     int row = Context.Database.ExecuteSqlCommand(SQL);
+                    var lst_prod_x_bod = Context.in_producto_x_tb_bodega.Where(v=>v.IdProducto==info.IdProducto);
+                    Context.in_producto_x_tb_bodega.RemoveRange(lst_prod_x_bod);
+                    
+                    foreach (var item in info.lst_producto_x_bodega)
+                    {
+                        Context.in_producto_x_tb_bodega.Add(new in_producto_x_tb_bodega
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdProducto = info.IdProducto,
+                            IdSucursal = item.IdSucursal,
+                            IdBodega = item.IdBodega
+                        });
+
+                    }
                     Context.SaveChanges();
 
                     
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw;
             }

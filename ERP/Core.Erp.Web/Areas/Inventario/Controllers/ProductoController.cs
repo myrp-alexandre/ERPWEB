@@ -103,7 +103,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             model.pr_imagen = new byte[0];
             model.lst_producto_composicion = new List<in_Producto_Composicion_Info>();
             list_producto_composicion.set_list(model.lst_producto_composicion);
-            Lis_in_producto_x_tb_bodega_Info_List.set_list(lst_producto_x_bodega, model.IdTransaccionSession);
+            Lis_in_producto_x_tb_bodega_Info_List.set_list(bus_producto_x_bodega.get_list(Convert.ToInt32(SessionFixed.IdEmpresa)), model.IdTransaccionSession);
             cargar_combos(model);
             return View(model);
         }
@@ -112,6 +112,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             model.IdUsuario = SessionFixed.IdUsuario.ToString();
             model.pr_imagen = Producto_imagen.pr_imagen;
+            model.lst_producto_x_bodega = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToInt32(model.IdTransaccionSession));
+            if (model.lst_producto_x_bodega == null)
+                model.lst_producto_x_bodega = new List<in_producto_x_tb_bodega_Info>();
             if (!validar(model, ref mensaje))
             {
                 if (model.pr_imagen == null)
@@ -142,7 +145,10 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             if (model == null)
                 return RedirectToAction("Index");
             cargar_combos(model);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.lst_producto_composicion = bus_producto_composicion.get_list(model.IdEmpresa, model.IdProducto);
+            model.lst_producto_x_bodega = bus_producto_x_bodega.get_list(IdEmpresa, model.IdProducto);
+            Lis_in_producto_x_tb_bodega_Info_List.set_list(model.lst_producto_x_bodega, model.IdTransaccionSession);
             list_producto_composicion.set_list(model.lst_producto_composicion);
             return View(model);
         }
@@ -150,6 +156,10 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public ActionResult Modificar(in_Producto_Info model)
 
         {
+            bus_producto = new in_Producto_Bus();
+            model.lst_producto_x_bodega = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToInt32(model.IdTransaccionSession));
+            if (model.lst_producto_x_bodega == null)
+                model.lst_producto_x_bodega = new List<in_producto_x_tb_bodega_Info>();
             model.IdUsuarioUltMod = SessionFixed.IdUsuario.ToString();
             model.pr_imagen = Producto_imagen.pr_imagen;
             if (!validar(model,ref mensaje))
@@ -345,17 +355,16 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         private void cargar_combos_detalle()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            in_UnidadMedida_Bus bus_unidad_medida = new in_UnidadMedida_Bus();
-            var lst_unidad_medida = bus_unidad_medida.get_list(false);
-            ViewBag.lst_unidad_medida = lst_unidad_medida;
+           
             var lst_susucrsal = bus_sucursal.get_list(IdEmpresa, false);
             var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
-
+            ViewBag.lst_susucrsal = lst_susucrsal;
+            ViewBag.lst_bodega = lst_bodega;
 
         }
         #endregion
 
-        #region funciones del detalle
+        #region funciones del detalle composicion
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial_producto_composicion(decimal IdProducto = 0)
@@ -423,6 +432,55 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         #endregion
 
+
+        #region funciones del detalle producto por bodega
+
+     
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew_pro_x_bod([ModelBinder(typeof(DevExpressEditorsBinder))] in_producto_x_tb_bodega_Info info_det )
+        {
+            in_Producto_Info model = new in_Producto_Info();
+            if (ModelState.IsValid)
+            {
+                in_producto_x_tb_bodega_Info info_pro_x_bode = new in_producto_x_tb_bodega_Info();
+                info_pro_x_bode.IdSucursal = info_det.IdSucursal;
+                info_pro_x_bode.IdBodega = info_det.IdBodega;
+                var lista = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                if(lista.Where(v=>v.IdSucursal==info_det.IdSucursal && v.IdBodega==info_det.IdBodega).Count()==0)                  
+                Lis_in_producto_x_tb_bodega_Info_List.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            }
+            cargar_combos_detalle();
+            model.lst_producto_x_bodega = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_producto_por_bodega", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate_pro_x_bod([ModelBinder(typeof(DevExpressEditorsBinder))] in_producto_x_tb_bodega_Info info_det)
+        {
+            in_Producto_Info model = new in_Producto_Info();
+            if (ModelState.IsValid)
+            {
+                in_producto_x_tb_bodega_Info info_pro_x_bod = new in_producto_x_tb_bodega_Info();
+                info_pro_x_bod.IdSucursal = info_det.IdSucursal;
+                info_pro_x_bod.IdBodega = info_det.IdBodega;
+                Lis_in_producto_x_tb_bodega_Info_List.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            }
+            model.lst_producto_x_bodega = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_producto_por_bodega", model);
+        }
+
+        public ActionResult EditingDelete_pro_x_bod(int secuencia)
+        {
+            in_Producto_Info model = new in_Producto_Info();
+            cargar_combos_detalle();
+            Lis_in_producto_x_tb_bodega_Info_List.DeleteRow(secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            model.lst_producto_x_bodega = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_producto_por_bodega", model);
+        }
+        #endregion
 
         const string UploadDirectory = "~/Content/imagenes/";
 

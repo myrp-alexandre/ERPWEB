@@ -11,7 +11,10 @@
 
 @using (Html.BeginForm("Nuevo", "Producto", FormMethod.Post, new { @class = "form", @rolw = "form" }))
 {
+
     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdTransaccionSession)
+
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">

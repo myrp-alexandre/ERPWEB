@@ -16,7 +16,7 @@ namespace Core.Erp.Info.Inventario
         public string IdCtaCble_Costo { get; set; }
         public string IdCtaCble_Gasto_x_cxp { get; set; }
         public string IdCtaCble_Vta { get; set; }
-
+        public bool seleccionado { get; set; }
         public int Secuencia { get; set; }
 
     }
