@@ -1180,32 +1180,26 @@
             // 
             // xrTableCell113
             // 
-            this.xrTableCell113.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Saldo_ini_cant]")});
             this.xrTableCell113.Name = "xrTableCell113";
             this.xrTableCell113.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
             this.xrTableCell113.StylePriority.UsePadding = false;
             this.xrTableCell113.StylePriority.UseTextAlignment = false;
             this.xrTableCell113.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell113.TextFormatString = "{0:n2}";
             this.xrTableCell113.Weight = 0.16085779975843384D;
             // 
             // xrTableCell114
             // 
-            this.xrTableCell114.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Cost_prom_ini]")});
             this.xrTableCell114.Name = "xrTableCell114";
             this.xrTableCell114.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
             this.xrTableCell114.StylePriority.UsePadding = false;
             this.xrTableCell114.StylePriority.UseTextAlignment = false;
             this.xrTableCell114.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell114.TextFormatString = "{0:n2}";
             this.xrTableCell114.Weight = 0.16085801793593607D;
             // 
             // xrTableCell115
             // 
             this.xrTableCell115.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Saldo_ini_cost]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Saldo_ini_cant]")});
             this.xrTableCell115.Name = "xrTableCell115";
             this.xrTableCell115.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
             this.xrTableCell115.StylePriority.UsePadding = false;
