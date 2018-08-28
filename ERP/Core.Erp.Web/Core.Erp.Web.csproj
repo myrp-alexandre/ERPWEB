@@ -9027,6 +9027,9 @@
     <Content Include="Areas\Compras\Views\CatalogoCompras\Anular.cshtml" />
     <Content Include="Areas\Compras\Views\Comprador\Index.cshtml" />
     <Content Include="Areas\Compras\Views\Comprador\_GridViewPartial_comprador.cshtml" />
+    <Content Include="Areas\Compras\Views\Comprador\Nuevo.cshtml" />
+    <Content Include="Areas\Compras\Views\Comprador\Modificar.cshtml" />
+    <Content Include="Areas\Compras\Views\Comprador\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

@@ -17,7 +17,6 @@ namespace Core.Erp.Data.Compras
                 using (Entities_compras Context = new Entities_compras())
                 {
                     if(mostrar_anulados)
-                    {
                         Lista=(from q in Context.com_comprador
                                where q.IdEmpresa == IdEmpresa
                                select new com_comprador_Info
@@ -28,9 +27,8 @@ namespace Core.Erp.Data.Compras
                                    Descripcion = q.Descripcion,
                                    IdUsuario_com = q.IdUsuario_com
                                }).ToList();
-                    }
+                   
                     else
-                    {
                         Lista = (from q in Context.com_comprador
                                  where q.IdEmpresa == IdEmpresa
                                  && q.Estado == "A"
@@ -42,7 +40,7 @@ namespace Core.Erp.Data.Compras
                                      Descripcion = q.Descripcion,
                                      IdUsuario_com = q.IdUsuario_com
                                  }).ToList();
-                    }
+                  
                 }
                 return Lista;
             }
@@ -112,7 +110,7 @@ namespace Core.Erp.Data.Compras
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdComprador = info.IdComprador = get_id(info.IdEmpresa),
-                        Estado = info.Estado="A",
+                        Estado = "A",
                         Descripcion = info.Descripcion,
                         IdUsuario_com = info.IdUsuario_com,
 
@@ -167,7 +165,7 @@ namespace Core.Erp.Data.Compras
                     com_comprador Entity = Context.com_comprador.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdComprador == info.IdComprador).FirstOrDefault();
                     if (Entity == null) return false;
 
-                    Entity.Estado = info.Estado="I";
+                    Entity.Estado = "I";
 
                     Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                     Entity.Fecha_UltAnu = DateTime.Now;
