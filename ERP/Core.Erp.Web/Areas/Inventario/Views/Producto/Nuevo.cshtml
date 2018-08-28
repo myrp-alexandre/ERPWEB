@@ -133,6 +133,9 @@
             <li>
                 <a href="#tab_imagen" aria-controls="Imágen" role="tab" data-toggle="tab" id="link_imagen">Imágen</a>
             </li>
+            <li>
+                <a href="#tab_producto_x_bodega" aria-controls="Imágen" role="tab" data-toggle="tab" id="link_imagen">Producto por bodega</a>
+            </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_general">
@@ -421,6 +424,13 @@
                    settings.ShowUploadButton = true;
                    settings.ShowProgressPanel = true;
                }).GetHtml()
+
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_producto_x_bodega">
+                <div class="row">
+                    @Html.Action("GridViewPartial_producto_por_bodega")
 
                 </div>
             </div>

@@ -11,7 +11,6 @@ using DevExpress.Web;
 using System.Web.UI;
 using Core.Erp.Web.Helps;
 using Core.Erp.Info.Helps;
-
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
     public class ProductoController : Controller
@@ -22,6 +21,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         in_Producto_Composicion_Bus bus_producto_composicion = new in_Producto_Composicion_Bus();
         in_ProductoTipo_Bus bus_producto_tipo = new in_ProductoTipo_Bus();
         in_producto_x_tb_bodega_Info_List Lis_in_producto_x_tb_bodega_Info_List = new in_producto_x_tb_bodega_Info_List();
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
         private string mensaje;
         #endregion
 
@@ -283,8 +284,10 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             in_UnidadMedida_Bus bus_unidad_medida = new in_UnidadMedida_Bus();
             var lst_unidad_medida = bus_unidad_medida.get_list(false);
             ViewBag.lst_unidad_medida = lst_unidad_medida;
+            var lst_susucrsal = bus_sucursal.get_list(IdEmpresa, false);
+            var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
 
-          
+
         }
         private void cargar_combos(in_Producto_Info model)
         {

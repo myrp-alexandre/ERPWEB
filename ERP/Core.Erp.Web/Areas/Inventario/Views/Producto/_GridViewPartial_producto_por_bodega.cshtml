@@ -47,7 +47,7 @@
                 p.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(70);
                 p.ValueField = "IdSucursal";
                 p.ValueType = typeof(int);
-                p.DataSource = ViewBag.lst_rubro;
+                p.DataSource = ViewBag.lst_susucrsal;
                 p.Width = Unit.Percentage(100);
             });
         });
@@ -63,7 +63,7 @@
                 p.Columns.Add("bo_Descripcion", "Bodega").Width = Unit.Percentage(70);
                 p.ValueField = "IdBodega";
                 p.ValueType = typeof(int);
-                p.DataSource = ViewBag.lst_rubro;
+                p.DataSource = ViewBag.lst_bodega;
                 p.Width = Unit.Percentage(100);
             });
         });
