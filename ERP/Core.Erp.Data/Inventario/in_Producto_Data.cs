@@ -413,12 +413,78 @@ namespace Core.Erp.Data.Inventario
 
                     Context.in_producto_x_tb_bodega.Add(new in_producto_x_tb_bodega
                     {
-                        IdEmpresa=info.IdEmpresa,
-                        IdProducto=info.IdProducto,
-                        IdSucursal=1,
-                        IdBodega=1
+                        IdEmpresa = info.IdEmpresa,
+                        IdProducto = info.IdProducto,
+                        IdSucursal = 1,
+                        IdBodega = 1
+                    });
 
-                    });                
+                    var parametros = Context.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                    if (parametros.P_se_crea_lote_0_al_crear_producto_matriz == true)
+                    {
+                        var tipo = Context.in_ProductoTipo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdProductoTipo == info.IdProductoTipo).FirstOrDefault();
+                        if (tipo == null)
+                            return false;
+                        if (tipo.tp_ManejaLote)
+                        {
+                            Context.in_Producto.Add(new in_Producto
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdProducto = info.IdProducto+1,
+                                pr_codigo = string.IsNullOrEmpty(info.pr_codigo) ? ("PROD" + info.IdProducto.ToString("0000000")) : info.pr_codigo,
+                                pr_codigo2 = info.pr_codigo2,
+                                pr_descripcion = info.pr_descripcion,
+                                pr_descripcion_2 = info.pr_descripcion_2,
+                                IdProductoTipo = (int)parametros.P_IdProductoTipo_para_lote_0,
+                                IdMarca = info.IdMarca,
+                                IdPresentacion = info.IdPresentacion,
+                                IdCategoria = info.IdCategoria,
+                                IdLinea = info.IdLinea,
+                                IdGrupo = info.IdGrupo,
+                                IdSubGrupo = info.IdSubGrupo,
+                                IdUnidadMedida = info.IdUnidadMedida,
+                                IdUnidadMedida_Consumo = info.IdUnidadMedida_Consumo,
+                                pr_codigo_barra = info.pr_codigo_barra,
+                                pr_observacion = info.pr_observacion,
+                                Estado = info.Estado = "A",
+                                IdCod_Impuesto_Iva = info.IdCod_Impuesto_Iva,
+                                Aparece_modu_Ventas = true,
+                                Aparece_modu_Compras = true,
+                                Aparece_modu_Inventario = true,
+                                Aparece_modu_Activo_F = false,
+                                IdProducto_padre = info.IdProducto,
+                                lote_fecha_fab = null,
+                                lote_fecha_vcto = DateTime.Now.AddYears(100),
+                                lote_num_lote = "LOTE0",
+                                precio_1 = info.precio_1,
+                                precio_2 = info.precio_2,
+                                signo_2 = info.signo_2,
+                                porcentaje_2 = info.porcentaje_2,
+                                precio_3 = info.precio_3,
+                                signo_3 = info.signo_3,
+                                porcentaje_3 = info.porcentaje_3,
+                                precio_4 = info.precio_4,
+                                signo_4 = info.signo_4,
+                                porcentaje_4 = info.porcentaje_4,
+                                precio_5 = info.precio_5,
+                                signo_5 = info.signo_5,
+                                porcentaje_5 = info.porcentaje_5,
+                                se_distribuye = true,
+                                pr_imagen = null,
+                                IdUsuario = info.IdUsuario,
+                                Fecha_Transac = DateTime.Now
+                            });
+                            Context.in_producto_x_tb_bodega.Add(new in_producto_x_tb_bodega
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdProducto = info.IdProducto +1,
+                                IdSucursal = 1,
+                                IdBodega = 1
+
+                            });
+                        }
+                    }
+                    
                     Context.SaveChanges();
                 }
 
@@ -479,9 +545,39 @@ namespace Core.Erp.Data.Inventario
                     Entity.pr_imagen = info.pr_imagen;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
+                    string SQL = "UPDATE in_Producto SET pr_descripcion = '" + info.pr_descripcion +
+                        "', pr_descripcion_2 = '" + info.pr_descripcion_2 +
+                        "', precio_1 = " + info.precio_1 +
+                        ", precio_2 = " + info.precio_2 +
+                        ", precio_3 = " + info.precio_3 +
+                        ", precio_4 = " + info.precio_4 +
+                        ", precio_5 = " + info.precio_5 +
+                        ", signo_2 = '" + info.signo_2 +
+                        "', signo_3 = '" + info.signo_3 +
+                        "', signo_4 = '" + info.signo_4 +
+                        "', signo_5 = '" + info.signo_5 +
+                        "', porcentaje_2 = " + info.porcentaje_2 +
+                        ", porcentaje_3 = " + info.porcentaje_3 +
+                        ", porcentaje_4 = " + info.porcentaje_4 +
+                        ", porcentaje_5 = " + info.porcentaje_5 +
+                        ", IdCod_Impuesto_Iva = '" + info.IdCod_Impuesto_Iva +
+                        "', pr_codigo = '" + info.pr_codigo +
+                        "', pr_codigo2 = '" + info.pr_codigo2 +
+                        "', IdPresentacion = '" + info.IdPresentacion +
+                        "', IdMarca = " + info.IdMarca +
+                        ", IdUnidadMedida = '" + info.IdUnidadMedida +
+                        "', IdUnidadMedida_Consumo = '" + info.IdUnidadMedida_Consumo +
+                        "', IdCategoria = '" + info.IdCategoria +
+                        "', IdLinea = " + info.IdLinea +
+                        ", IdGrupo = " + info.IdGrupo +
+                        ", IdSubGrupo = " + info.IdSubGrupo +
+                        ", pr_observacion = '" + info.pr_observacion +
+                        "', pr_codigo_barra = '" + info.pr_codigo_barra +
+                        "' where in_Producto.IdEmpresa = " + info.IdEmpresa + " AND in_Producto.IdProducto_padre = " + info.IdProducto;
+                    int row = Context.Database.ExecuteSqlCommand(SQL);
                     Context.SaveChanges();
 
-                    int row = Context.Database.ExecuteSqlCommand("UPDATE in_Producto SET pr_descripcion = '" + info.pr_descripcion + "', precio_1 = " + info.precio_1 + ", precio_2 = " + info.precio_2 + ", precio_3 = " + info.precio_3 + ", precio_4 = " + info.precio_4 + ", precio_5 = " + info.precio_5 + ", signo_2 = '" + info.signo_2 + "', signo_3 = '" + info.signo_3 + "', signo_4 = '" + info.signo_4 + "', signo_5 = '" + info.signo_5 + "', porcentaje_2 = " + info.porcentaje_2 + ", porcentaje_3 = " + info.porcentaje_3 + ", porcentaje_4 = " + info.porcentaje_4 + ", porcentaje_5 = " + info.porcentaje_5 + ", IdCod_Impuesto_Iva = '" + info.IdCod_Impuesto_Iva + "', pr_codigo = '" + info.pr_codigo + "', pr_codigo_barra = '" + info.pr_codigo_barra + "', pr_codigo2 = '" + info.pr_codigo2 + "' where in_Producto.IdEmpresa = " + info.IdEmpresa + " AND in_Producto.IdProducto_padre = " + info.IdProducto);
+                    
                 }
                 return true;
             }
