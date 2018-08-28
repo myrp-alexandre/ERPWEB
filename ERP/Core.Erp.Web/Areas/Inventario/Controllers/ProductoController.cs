@@ -23,6 +23,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         in_producto_x_tb_bodega_Info_List Lis_in_producto_x_tb_bodega_Info_List = new in_producto_x_tb_bodega_Info_List();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+        in_producto_x_tb_bodega_Bus bus_producto_x_bodega = new in_producto_x_tb_bodega_Bus();
         private string mensaje;
         #endregion
 
@@ -69,8 +70,10 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_producto_por_bodega()
         {
+            cargar_combos_detalle();
+            in_Producto_Info model = new in_Producto_Info();
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            var model = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            model.lst_producto_x_bodega = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             return PartialView("_GridViewPartial_producto_por_bodega", model);
         }
@@ -95,9 +98,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
             in_Producto_Info model = new in_Producto_Info { IdEmpresa = IdEmpresa, IdCod_Impuesto_Iva = "IVA12" };
+            model.IdTransaccionSession =Convert.ToDecimal( SessionFixed.IdTransaccionSession);
+            var lst_producto_x_bodega = bus_producto_x_bodega.get_list(Convert.ToInt32(SessionFixed.IdEmpresa));
             model.pr_imagen = new byte[0];
             model.lst_producto_composicion = new List<in_Producto_Composicion_Info>();
             list_producto_composicion.set_list(model.lst_producto_composicion);
+            Lis_in_producto_x_tb_bodega_Info_List.set_list(lst_producto_x_bodega, model.IdTransaccionSession);
             cargar_combos(model);
             return View(model);
         }
@@ -334,6 +340,18 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
             var lst_impuesto = bus_impuesto.get_list("IVA", false);
             ViewBag.lst_impuesto = lst_impuesto;
+        }
+
+        private void cargar_combos_detalle()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            in_UnidadMedida_Bus bus_unidad_medida = new in_UnidadMedida_Bus();
+            var lst_unidad_medida = bus_unidad_medida.get_list(false);
+            ViewBag.lst_unidad_medida = lst_unidad_medida;
+            var lst_susucrsal = bus_sucursal.get_list(IdEmpresa, false);
+            var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
+
+
         }
         #endregion
 

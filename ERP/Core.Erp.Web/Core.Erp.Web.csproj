@@ -250,6 +250,7 @@
     <Compile Include="Areas\Caja\Controllers\ParametroCajaController.cs" />
     <Compile Include="Areas\Caja\Controllers\TipoMovimientoCajaController.cs" />
     <Compile Include="Areas\Compras\ComprasAreaRegistration.cs" />
+    <Compile Include="Areas\Compras\Controllers\CatalogoComprasController.cs" />
     <Compile Include="Areas\Compras\Controllers\CatalogoTipoComprasController.cs" />
     <Compile Include="Areas\Contabilidad\ContabilidadAreaRegistration.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\AnioFiscalController.cs" />
@@ -9015,6 +9016,14 @@
     <Content Include="Areas\Compras\Views\CatalogoTipoCompras\Index.cshtml" />
     <Content Include="Areas\Compras\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Compras\Views\CatalogoTipoCompras\_GridViewPartial_catipocompras.cshtml" />
+    <Content Include="Areas\Compras\Views\CatalogoTipoCompras\Nuevo.cshtml" />
+    <Content Include="Areas\Compras\Views\CatalogoTipoCompras\Modificar.cshtml" />
+    <Content Include="Areas\Compras\Views\CatalogoTipoCompras\Anular.cshtml" />
+    <Content Include="Areas\Compras\Views\CatalogoCompras\Index.cshtml" />
+    <Content Include="Areas\Compras\Views\CatalogoCompras\_GridViewPartial_cat_compras.cshtml" />
+    <Content Include="Areas\Compras\Views\CatalogoCompras\Nuevo.cshtml" />
+    <Content Include="Areas\Compras\Views\CatalogoCompras\Modificar.cshtml" />
+    <Content Include="Areas\Compras\Views\CatalogoCompras\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

@@ -9,6 +9,7 @@ namespace Core.Erp.Info.Inventario
 {
     public class in_Producto_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdProducto { get; set; }
         [StringLength(80,MinimumLength =0, ErrorMessage = "El campo código debe tener máximo 80 caracteres")]
@@ -88,6 +89,7 @@ namespace Core.Erp.Info.Inventario
 
         #region Campos que no existen en la tabla
         public List<in_Producto_Composicion_Info> lst_producto_composicion { get; set; }
+        public List<in_producto_x_tb_bodega_Info> lst_producto_x_bodega { get; set; }
         public string nom_presentacion { get; set; }
         public string nom_categoria { get; set; }
 
