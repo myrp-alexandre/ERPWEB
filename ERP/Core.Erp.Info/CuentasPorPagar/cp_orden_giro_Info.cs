@@ -71,18 +71,12 @@ namespace Core.Erp.Info.CuentasPorPagar
         public Nullable<double> Saldo_OG { get; set; }
         public cp_orden_giro_pagos_sri_Info info_forma_pago { get; set; }
 
-        public bool seleccionado { get; set; }
-        public cp_orden_giro_Info ()
-        {
-            info_cuota = new cp_cuotas_x_doc_Info();
-            info_comrobante = new ct_cbtecble_Info();
-            info_proveedor = new cp_proveedor_Info();
-            info_forma_pago = new cp_orden_giro_pagos_sri_Info();
-        }
+        public bool seleccionado { get; set; }        
 
         //campos que no existen en la tabla
 
         public bool ConvenioTributacion_bool { get; set; }
         public bool PagoSujetoRetencion_bool { get; set; }
+        public List<cp_orden_giro_det_Info> lst_det { get; set; }
     }
 }

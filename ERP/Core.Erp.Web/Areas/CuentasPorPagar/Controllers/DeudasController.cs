@@ -13,6 +13,7 @@ using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
 using DevExpress.Web;
 using Core.Erp.Info.General;
+using Core.Erp.Bus.Inventario;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
@@ -34,11 +35,28 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         cp_parametros_Bus bus_param = new cp_parametros_Bus();
         ct_cbtecble_det_List_fp Lis_ct_cbtecble_det_List = new ct_cbtecble_det_List_fp();
         cp_cuotas_x_doc_det_Info_lst Lis_cp_cuotas_x_doc_det_Info = new cp_cuotas_x_doc_det_Info_lst();
-
-
+        cp_orden_giro_det_Info_List List_det = new cp_orden_giro_det_Info_List();
+        in_Producto_Bus bus_producto = new in_Producto_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        public ActionResult CmbProveedor_CXP()
+        {
+            cp_proveedor_Info model = new cp_proveedor_Info();
+            return PartialView("_CmbProveedor_CXP", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROVEE.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROVEE.ToString());
+        }
+        #endregion
+
+        #region Metodos ComboBox bajo demanda de producto
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         public ActionResult CmbProveedor_CXP()
         {
@@ -555,6 +573,46 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
         #endregion
 
+        #region Detalle de inventario
+        public ActionResult GridViewPartial_deudas_det()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            cp_orden_giro_Info model = new cp_orden_giro_Info();
+            model.lst_det = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_deudas_det", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNewDetalle([ModelBinder(typeof(DevExpressEditorsBinder))] cp_orden_giro_det_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cp_orden_giro_Info model = new cp_orden_giro_Info();
+            model.lst_det = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_deudas_det", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdateDetalle([ModelBinder(typeof(DevExpressEditorsBinder))] cp_orden_giro_det_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cp_orden_giro_Info model = new cp_orden_giro_Info();
+            model.lst_det = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_deudas_det", model);
+        }
+
+        public ActionResult EditingDeleteDetalle(int secuencia)
+        {
+            List_det.DeleteRow(secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cp_orden_giro_Info model = new cp_orden_giro_Info();
+            model.lst_det = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_deudas_det", model);
+        }
+        #endregion
+
         #region Diario contable
 
         [HttpPost, ValidateInput(false)]
@@ -754,6 +812,44 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 
                 throw;
             }
+        }
+    }
+
+    public class cp_orden_giro_det_Info_List
+    {
+        string Variable = "cp_orden_giro_det_Info";
+        public List<cp_orden_giro_det_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<cp_orden_giro_det_Info> list = new List<cp_orden_giro_det_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<cp_orden_giro_det_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<cp_orden_giro_det_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+
+        public void AddRow(cp_orden_giro_det_Info info_det, decimal IdTransaccionSession)
+        {
+            List<cp_orden_giro_det_Info> list = get_list(IdTransaccionSession);
+            info_det.Secuencia = list.Count == 0 ? 1 : (list.Max(q => q.Secuencia) + 1);
+            list.Add(info_det);
+        }
+
+        public void UpdateRow(cp_orden_giro_det_Info info_det, decimal IdTransaccionSession)
+        {
+            cp_orden_giro_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
+        }
+
+        public void DeleteRow(int secuencia, decimal IdTransaccionSession)
+        {
+            List<cp_orden_giro_det_Info> list = get_list(IdTransaccionSession);
+            list.Remove(list.Where(m => m.Secuencia == secuencia).First());
         }
     }
 
