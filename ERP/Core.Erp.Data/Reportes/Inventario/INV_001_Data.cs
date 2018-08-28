@@ -47,7 +47,8 @@ namespace Core.Erp.Data.Reportes.Inventario
                                  lote_fecha_vcto = q.lote_fecha_vcto,
                                  nom_presentacion = q.nom_presentacion,
                                  signo = q.signo,
-                                 tm_descripcion = q.tm_descripcion
+                                 tm_descripcion = q.tm_descripcion,
+                                 NomUsuario = q.NomUsuario
                              }).ToList();
                 }
                 return Lista;

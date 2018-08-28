@@ -39,5 +39,6 @@ namespace Core.Erp.Data
         public string nom_presentacion { get; set; }
         public string signo { get; set; }
         public string tm_descripcion { get; set; }
+        public string NomUsuario { get; set; }
     }
 }
