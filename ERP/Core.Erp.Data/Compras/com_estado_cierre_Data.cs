@@ -127,6 +127,8 @@ namespace Core.Erp.Data.Compras
                     Entity.Descripcion = info.Descripcion;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
+
+                    Context.SaveChanges();
                 }
                 return true;
             }
@@ -149,6 +151,8 @@ namespace Core.Erp.Data.Compras
                     Entity.estado = "I";
                     Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                     Entity.FechaHoraAnul = DateTime.Now;
+                    Context.SaveChanges();
+
                 }
                 return true;
             }

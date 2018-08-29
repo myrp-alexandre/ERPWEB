@@ -9033,6 +9033,9 @@
     <Content Include="Areas\Compras\Views\Comprador\Anular.cshtml" />
     <Content Include="Areas\Compras\Views\EstadoCierreCompras\Index.cshtml" />
     <Content Include="Areas\Compras\Views\EstadoCierreCompras\_GridViewPartial_estadocierre.cshtml" />
+    <Content Include="Areas\Compras\Views\EstadoCierreCompras\Nuevo.cshtml" />
+    <Content Include="Areas\Compras\Views\EstadoCierreCompras\Modificar.cshtml" />
+    <Content Include="Areas\Compras\Views\EstadoCierreCompras\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

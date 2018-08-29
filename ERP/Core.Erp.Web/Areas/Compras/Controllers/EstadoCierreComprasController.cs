@@ -20,8 +20,64 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_estadocierre()
         {
-            var model = new object[0];
+            var model = bus_estado.get_list(true);
             return PartialView("_GridViewPartial_estadocierre", model);
+        }
+
+        public ActionResult Nuevo()
+        {
+            com_estado_cierre_Info model = new com_estado_cierre_Info();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Nuevo(com_estado_cierre_Info model)
+        {
+            if (bus_estado.validar_existe_IdEstado(model.IdEstado_cierre))
+            {
+                ViewBag.mensaje = "El código ya se encuentra registrado";
+                return View(model);
+            }
+            if (!bus_estado.guardarDB(model))
+            {
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
+        public ActionResult Modificar(string IdEstado_cierre = "")
+        {
+            com_estado_cierre_Info model = bus_estado.get_info( IdEstado_cierre);
+            if (model == null)
+                return RedirectToAction("Index");
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Modificar(com_estado_cierre_Info model)
+        {
+            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            if (!bus_estado.modificarDB(model))
+            {
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Anular(string IdEstado_cierre = "")
+        {
+            com_estado_cierre_Info model = bus_estado.get_info(IdEstado_cierre);
+            if (model == null)
+                return RedirectToAction("Index");
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Anular(com_estado_cierre_Info model)
+        {
+            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            if (!bus_estado.anularDB(model))
+            {
+                return View(model);
+            }
+            return RedirectToAction("Index");
         }
     }
 }
