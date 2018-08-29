@@ -205,6 +205,11 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
             if (i_validar.IdEstadoCierre == cl_enumeradores.eEstadoCierreCaja.EST_CIE_CER.ToString())
             {
+                if (i_validar.IdEntidad == null)
+                {
+                    msg = "Seleccione el beneficiario";
+                    return false;
+                }
                 if (i_validar.lst_det_ct.Count == 0)
                 {
                     msg = "Debe ingresar registros en el detalle del diario";
@@ -221,7 +226,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                     msg = "Existen detalles con valor 0 en el debe o haber";
                     return false;
                 }
-                var persona = bus_persona.get_info(i_validar.IdEmpresa, i_validar.IdTipoPersona, i_validar.IdEntidad);
+                var persona = bus_persona.get_info(i_validar.IdEmpresa, i_validar.IdTipoPersona, (decimal)i_validar.IdEntidad);
                 if (persona == null)
                 {
                     msg = "La persona seleccionada no corresponde al tipo asignado";

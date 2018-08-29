@@ -234,10 +234,7 @@ namespace Core.Erp.Bus.RRHH
                         valorTotal = valorTotal * -1;
                     if (valorTotal > 0)
                     {
-                        if (item.IdRubro == "1051")
-                        {
-
-                        }
+                        valorTotal = Math.Round(valorTotal, 2);
                         secuecia++;
                         ct_cbtecble_det_Info oct_cbtecble_det_Info = new ct_cbtecble_det_Info();
                         oct_cbtecble_det_Info.secuencia = secuecia;
@@ -302,6 +299,7 @@ namespace Core.Erp.Bus.RRHH
                                                                   v.IdRubro == item.IdRubro).Sum(v => v.Valor);
                     if (valorTotal > 0)
                     {
+                        valorTotal = Math.Round(valorTotal);
                         secuencia++;
                         ct_cbtecble_det_Info oct_cbtecble_det_Info = new ct_cbtecble_det_Info();
                         oct_cbtecble_det_Info.secuencia = secuencia;

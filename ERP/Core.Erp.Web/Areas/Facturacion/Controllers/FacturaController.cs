@@ -91,7 +91,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         public ActionResult CmbProducto_Factura()
         {
-            fa_factura_det_Info model = new fa_factura_det_Info();
+            decimal model = new decimal();
             return PartialView("_CmbProducto_Factura", model);
         }
         public List<in_Producto_Info> get_list_bajo_demandaProducto(ListEditItemsRequestedByFilterConditionEventArgs args)

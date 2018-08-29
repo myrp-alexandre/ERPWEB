@@ -62,9 +62,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Estado = "A",
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = info.Fecha_Transac = DateTime.Now,
-
-
-
+                        IdBodega = info.IdBodega
                     };
                     Context.cp_orden_giro.Add(Entity);
                     Context.SaveChanges();
@@ -127,7 +125,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.num_docu_Modificar = info.num_docu_Modificar;
                         Entity.aut_doc_Modificar = info.aut_doc_Modificar;
                         Entity.IdTipoMovi = info.IdTipoMovi;
-
+                        Entity.IdBodega = info.IdBodega;
 
                     };
                     Context.SaveChanges();
@@ -463,9 +461,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         aut_doc_Modificar = Entity.aut_doc_Modificar,
                         IdTipoMovi = Entity.IdTipoMovi,
                         Estado = Entity.Estado,
-
-
-
+                        IdBodega = Entity.IdBodega
                     };
                 }
                 return info;
