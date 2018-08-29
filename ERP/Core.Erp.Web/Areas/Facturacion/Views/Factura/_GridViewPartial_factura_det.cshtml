@@ -173,7 +173,7 @@
             });
         });
         settings.ClientSideEvents.BeginCallback = "function(s,e){e.customArgs['IdCliente'] = IdCliente.GetValue(); e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();}";
-        settings.ClientSideEvents.EndCallback = "function(s,e){CargarCuotas();}";
+        settings.ClientSideEvents.EndCallback = "function(s,e){CargarCuotas(); ValidarGrid();}";
 
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "vt_Subtotal").DisplayFormat = "{0:n2}";
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "vt_iva").DisplayFormat = "{0:n2}";

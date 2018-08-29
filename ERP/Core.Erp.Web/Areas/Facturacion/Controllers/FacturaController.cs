@@ -226,6 +226,17 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 lineaF = linea;
             return Json(linea, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult ValidarGrid(decimal IdTransaccionSession = 0)
+        {
+            string mensaje = "";
+            var lista = List_det.get_list(IdTransaccionSession);
+            if (lista.Where(q=>q.vt_Precio == 0).Count() > 0)
+            {
+                mensaje = "Existen items con precio 0 en el detalle";
+            }
+            return Json(mensaje, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult ModificarLinea(int Secuencia = 0, decimal IdTransaccionSession = 0, double Precio = 0, double PorDescuento = 0, bool AplicarTodaFactura = false)
         {            
             var lista = List_det.get_list(IdTransaccionSession);
