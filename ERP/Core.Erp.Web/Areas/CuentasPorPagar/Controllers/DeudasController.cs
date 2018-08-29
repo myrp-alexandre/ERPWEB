@@ -48,7 +48,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return PartialView("_CmbProveedor_CXP", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
-        {
+       {
             return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROVEE.ToString());
         }
         public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
