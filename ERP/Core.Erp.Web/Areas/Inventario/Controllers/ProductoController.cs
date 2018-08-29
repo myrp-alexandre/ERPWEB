@@ -469,11 +469,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return PartialView("_GridViewPartial_producto_por_bodega", model);
         }
 
-        public ActionResult EditingDelete_pro_x_bod(int secuencia)
+        public ActionResult EditingDelete_pro_x_bod(int Secuencia=0)
         {
             in_Producto_Info model = new in_Producto_Info();
             cargar_combos_detalle();
-            Lis_in_producto_x_tb_bodega_Info_List.DeleteRow(secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            Lis_in_producto_x_tb_bodega_Info_List.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             model.lst_producto_x_bodega = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_producto_por_bodega", model);
