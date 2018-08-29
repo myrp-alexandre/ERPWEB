@@ -483,7 +483,7 @@ namespace Core.Erp.Data.Inventario
                                 Context.in_producto_x_tb_bodega.Add(new in_producto_x_tb_bodega
                                 {
                                     IdEmpresa = info.IdEmpresa,
-                                    IdProducto = info.IdProducto,
+                                    IdProducto = info.IdProducto+1,
                                     IdSucursal = item.IdSucursal,
                                     IdBodega = item.IdBodega,
                                     Stock_minimo = item.Stock_minimo

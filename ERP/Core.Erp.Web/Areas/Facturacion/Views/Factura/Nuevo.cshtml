@@ -14,6 +14,7 @@
         get_info_termino_pago();
         get_info_cliente();
         GetUltimoDocumento();
+        ValidarGrid();
         //Date picker
         $('#vt_fecha').datepicker({
             autoclose: true
@@ -169,7 +170,6 @@
         });
         $("#ModalPrecios").modal("hide");
     }
-
     function SetLoteDetalle(ID) {
         if (Number($("#Secuencia").text()) > 0) {
             var datos = {
@@ -452,7 +452,31 @@
         GridView_factura_det.PerformCallback();
             $("#ProformasModal").modal("hide");
     }
-
+    function ValidarGrid() {
+        var datos = {
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ValidarGrid", "Factura",new { Area = "Facturacion"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#txtMensaje").text(data);
+                if (data.length > 0) {
+                    $("#divMensaje").show();
+                } else {
+                    $("#divMensaje").hide();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
 </script>
 
 @using (Html.BeginForm("Nuevo", "Factura", FormMethod.Post, new { @class = "form", @role = "form" }))
@@ -735,6 +759,19 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible" id="divMensaje" hidden>
+                    <h4>
+                        <i class="icon fa fa-warning"></i> <label id="txtMensaje">MENSAJE</label>
+                    </h4>
+                </div>
+            </div>            
+        </div>        
+    </div>
+    
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
