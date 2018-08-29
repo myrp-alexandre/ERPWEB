@@ -1,0 +1,25 @@
+@{
+	var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridView_estadocierre";
+        settings.CallbackRouteValues = new { Controller = "EstadoCierreCompras", Action = "GridViewPartial_estadocierre" };
+
+
+		settings.KeyFieldName = "IdEstado_cierre";
+
+		settings.SettingsPager.Visible = true;
+		settings.Settings.ShowGroupPanel = true;
+		settings.Settings.ShowFilterRow = true;
+		settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+		settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+		settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+		settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+		settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+		settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+				settings.Columns.Add("IdEstado_cierre");
+				settings.Columns.Add("Descripcion");
+				settings.Columns.Add("estado");
+			});
+}
+@grid.Bind(Model).GetHtml()
