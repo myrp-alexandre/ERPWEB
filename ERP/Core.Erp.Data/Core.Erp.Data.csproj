@@ -179,6 +179,8 @@
     <Compile Include="Compras\com_catalogo_Data.cs" />
     <Compile Include="Compras\com_catalogo_tipo_Data.cs" />
     <Compile Include="Compras\com_comprador_Data.cs" />
+    <Compile Include="Compras\com_departamento_Data.cs" />
+    <Compile Include="Compras\com_estado_cierre_Data.cs" />
     <Compile Include="com_catalogo.cs">
       <DependentUpon>Model_compras.tt</DependentUpon>
     </Compile>
@@ -186,6 +188,12 @@
       <DependentUpon>Model_compras.tt</DependentUpon>
     </Compile>
     <Compile Include="com_comprador.cs">
+      <DependentUpon>Model_compras.tt</DependentUpon>
+    </Compile>
+    <Compile Include="com_departamento.cs">
+      <DependentUpon>Model_compras.tt</DependentUpon>
+    </Compile>
+    <Compile Include="com_estado_cierre.cs">
       <DependentUpon>Model_compras.tt</DependentUpon>
     </Compile>
     <Compile Include="Contabilidad\ats_Data.cs" />
@@ -536,6 +544,7 @@
     <Compile Include="generarATS_Result.cs">
       <DependentUpon>Model_contabilidad.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helps\FilesHelper.cs" />
     <Compile Include="Importacion\imp_catalogo_Data.cs" />
     <Compile Include="Importacion\imp_catalogo_tipo_Data.cs" />
     <Compile Include="Importacion\imp_gasto_Data.cs" />
@@ -2082,5 +2091,6 @@
       <Name>Core.Erp.Info</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

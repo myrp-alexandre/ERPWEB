@@ -261,7 +261,7 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="IdOrden_giro_Tipo">Sustento tributario*</label>
-                                @Html.DropDownListFor(q => q.IdIden_credito, new SelectList(ViewBag.lst_codigos_sri, "IdCodigo_SRI", "co_descripcion"), new { @class = "form-control", @id = "cmb_idtCredito" })
+                                @Html.DropDownListFor(q => q.IdIden_credito, new SelectList(ViewBag.lst_codigos_sri, "IdCodigo_SRI", "co_descripcion"), new { @class = "form-control", @id = "IdIden_credito" })
                                 @Html.ValidationMessageFor(q => q.IdIden_credito, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -490,7 +490,7 @@
                         if (IdProveedor.GetValue() > 0 && $("#cmb_idtCredito").val() != "") {
                             var datos = {
                                 IdProveedor: IdProveedor.GetValue(),
-                                codigoSRI: $("#cmb_idtCredito").val(),
+                                codigoSRI: $("#IdIden_credito").val(),
                                 IdEmpresa: $("#IdEmpresa").val()
 
                             }
