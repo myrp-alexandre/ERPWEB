@@ -44,5 +44,30 @@ namespace Core.Erp.Web.Reportes.Facturacion
             
             this.DataSource = lst_rpt;
         }
+
+        private void xrTable4_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
+        }
+
+        private void xrTable3_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
+        }
+
+        private void xrTable1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
+        }
+
+        private void lbl_valorenletras_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
+        }
+
+        private void xrTable2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
+        }
     }
 }
