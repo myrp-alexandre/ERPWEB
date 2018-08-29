@@ -15,6 +15,7 @@
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = true;
         settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
 
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
@@ -28,7 +29,7 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
 
-      
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdSucursal";
@@ -60,7 +61,13 @@
                 p.Width = Unit.Percentage(100);
             });
         });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Stock_minimo";
+            column.Caption = "Stock minimo";
+            column.Width = Unit.Percentage(15);
 
+        });
     });
     if (ViewData["EditError"] != null){
         grid.SetEditErrorText((string)ViewData["EditError"]);

@@ -12,6 +12,7 @@ namespace Core.Erp.Data.Inventario
         public List<in_producto_x_tb_bodega_Info> get_lis(int IdEmpresa, decimal IdProducto)
         {
             List<in_producto_x_tb_bodega_Info> lista=null;
+            int secuancia = 0;
             try
             {
                 using (Entities_inventario Context=new Entities_inventario())
@@ -25,12 +26,14 @@ namespace Core.Erp.Data.Inventario
                                 IdEmpresa=q.IdEmpresa,
                                 IdSucursal=q.IdSucursal,
                                 IdBodega=q.IdBodega,
-                                 IdProducto=q.IdProducto 
+                                 IdProducto=q.IdProducto,
+                                 Stock_minimo=q.Stock_minimo
                                 
 
                              }).ToList();
                         
                 }
+                lista.ForEach(v => v.Secuencia = secuancia++);
                 return lista;
             }
             catch (Exception)
@@ -41,6 +44,7 @@ namespace Core.Erp.Data.Inventario
         }
         public List<in_producto_x_tb_bodega_Info> get_lis(int IdEmpresa)
         {
+            int secuancia = 0;
             List<in_producto_x_tb_bodega_Info> lista = null;
             try
             {
@@ -57,6 +61,7 @@ namespace Core.Erp.Data.Inventario
                              }).ToList();
 
                 }
+                lista.ForEach(v => v.Secuencia = secuancia++);
                 return lista;
             }
             catch (Exception)
