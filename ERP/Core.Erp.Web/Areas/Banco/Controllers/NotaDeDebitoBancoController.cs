@@ -36,7 +36,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public ActionResult CmbPersona_DebitoBanco()
         {
             SessionFixed.TipoPersona = Request.Params["IdTipo_Persona"] != null ? Request.Params["IdTipo_Persona"].ToString() : SessionFixed.TipoPersona;
-            ba_Cbte_Ban_Info model = new ba_Cbte_Ban_Info();
+            decimal model = 0;
             return PartialView("_CmbPersona_DebitoBanco", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)

@@ -285,7 +285,7 @@
                     <div class="col-md-9">
                         <div class="form-group">
                             <label for="IdEntidad">Beneficiario:*</label>
-                            @Html.Partial("_CmbPersona_ChequeBanco", Model)
+                            @Html.Partial("_CmbPersona_ChequeBanco", Model.IdEntidad)
                             @Html.ValidationMessageFor(q => q.IdEntidad, "", new { @class = "text-danger" })
                         </div>
                     </div>
