@@ -25,7 +25,8 @@ namespace Core.Erp.Data.Inventario
                                 IdEmpresa=q.IdEmpresa,
                                 IdSucursal=q.IdSucursal,
                                 IdBodega=q.IdBodega,
-                                 IdProducto=q.IdProducto 
+                                 IdProducto=q.IdProducto,
+                                 Stock_minimo=q.Stock_minimo
                                 
 
                              }).ToList();

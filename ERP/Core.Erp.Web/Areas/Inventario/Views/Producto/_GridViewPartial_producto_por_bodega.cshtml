@@ -60,7 +60,13 @@
                 p.Width = Unit.Percentage(100);
             });
         });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Stock_minimo";
+            column.Caption = "Stock minimo";
+            column.Width = Unit.Percentage(15);
 
+        });
     });
     if (ViewData["EditError"] != null){
         grid.SetEditErrorText((string)ViewData["EditError"]);
