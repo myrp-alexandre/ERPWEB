@@ -52,6 +52,20 @@
           <Property Name="Fecha_UltAnu" Type="datetime" />
           <Property Name="MotiAnula" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="com_estado_cierre">
+          <Key>
+            <PropertyRef Name="IdEstado_cierre" />
+          </Key>
+          <Property Name="IdEstado_cierre" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="25" />
+          <Property Name="FechaHoraAnul" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="25" />
+          <Property Name="MotivoAnulacion" Type="varchar" MaxLength="100" />
+        </EntityType>
         <Association Name="FK_com_catalogo_com_catalogo_tipo">
           <End Role="com_catalogo_tipo" Type="Self.com_catalogo_tipo" Multiplicity="1" />
           <End Role="com_catalogo" Type="Self.com_catalogo" Multiplicity="*" />
@@ -68,6 +82,7 @@
           <EntitySet Name="com_catalogo" EntityType="Self.com_catalogo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="com_catalogo_tipo" EntityType="Self.com_catalogo_tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="com_comprador" EntityType="Self.com_comprador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="com_estado_cierre" EntityType="Self.com_estado_cierre" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_com_catalogo_com_catalogo_tipo" Association="Self.FK_com_catalogo_com_catalogo_tipo">
             <End Role="com_catalogo_tipo" EntitySet="com_catalogo_tipo" />
             <End Role="com_catalogo" EntitySet="com_catalogo" />
@@ -85,6 +100,7 @@
             <End Role="com_catalogo" EntitySet="com_catalogo" />
           </AssociationSet>
           <EntitySet Name="com_comprador" EntityType="Model_compras.com_comprador" />
+          <EntitySet Name="com_estado_cierre" EntityType="Model_compras.com_estado_cierre" />
         </EntityContainer>
         <EntityType Name="com_catalogo">
           <Key>
@@ -147,6 +163,20 @@
           <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
           <Property Name="MotiAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="com_estado_cierre">
+          <Key>
+            <PropertyRef Name="IdEstado_cierre" />
+          </Key>
+          <Property Name="IdEstado_cierre" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="FechaHoraAnul" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -199,6 +229,21 @@
                 <ScalarProperty Name="IdUsuario_com" ColumnName="IdUsuario_com" />
                 <ScalarProperty Name="IdComprador" ColumnName="IdComprador" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="com_estado_cierre">
+            <EntityTypeMapping TypeName="Model_compras.com_estado_cierre">
+              <MappingFragment StoreEntitySet="com_estado_cierre">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="FechaHoraAnul" ColumnName="FechaHoraAnul" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdEstado_cierre" ColumnName="IdEstado_cierre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
