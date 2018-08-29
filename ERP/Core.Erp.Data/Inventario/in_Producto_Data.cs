@@ -584,7 +584,8 @@ namespace Core.Erp.Data.Inventario
                         "', pr_codigo_barra = '" + info.pr_codigo_barra +
                         "' where in_Producto.IdEmpresa = " + info.IdEmpresa + " AND in_Producto.IdProducto_padre = " + info.IdProducto;
                     int row = Context.Database.ExecuteSqlCommand(SQL);
-                    var lst_prod_x_bod = Context.in_producto_x_tb_bodega.Where(v=>v.IdProducto==info.IdProducto);
+
+                    var lst_prod_x_bod = Context.in_producto_x_tb_bodega.Where(v=>v.IdEmpresa == info.IdEmpresa && v.IdProducto==info.IdProducto);
                     Context.in_producto_x_tb_bodega.RemoveRange(lst_prod_x_bod);
                     
                     foreach (var item in info.lst_producto_x_bodega)
@@ -596,13 +597,9 @@ namespace Core.Erp.Data.Inventario
                             IdSucursal = item.IdSucursal,
                             IdBodega = item.IdBodega,
                             Stock_minimo = item.Stock_minimo
-
                         });
-
                     }
                     Context.SaveChanges();
-
-                    
                 }
                 return true;
             }
