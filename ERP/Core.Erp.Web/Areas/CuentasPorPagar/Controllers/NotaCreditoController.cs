@@ -180,7 +180,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if (list_op_seleccionadas == null)
                 list_op_seleccionadas = new List<cp_orden_pago_det_Info>();
                 Session["list_op_seleccionadas"] = list_op_seleccionadas;
-            cargar_combos(IdEmpresa, model.IdProveedor, model.IdTipoNota);
+            cargar_combos(IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
             cargar_combos_detalle();
             return View(model);
         }
@@ -345,8 +345,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #region cargar combos
         private void cargar_combos(int IdEmpresa, decimal IdProveedor = 0, string IdTipoSRI = "")
         {
-            var lst_proveedores = bus_proveedor.get_list(IdEmpresa, false);
-            ViewBag.lst_proveedores = lst_proveedores;
+          
 
             var lst_codigos_sri = bus_codigo_sri.get_list(IdEmpresa);
             ViewBag.lst_codigos_sri = lst_codigos_sri;
@@ -361,6 +360,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             ViewBag.lst_sucursales = lst_sucursales;
             if (IdProveedor != 0)
             {
+                if (IdTipoSRI == "")
+                    IdTipoSRI = "01";
                 var list_tipo_doc = bus_tipo_documento.get_list(IdEmpresa, IdProveedor, IdTipoSRI);
                 ViewBag.lst_tipo_doc = list_tipo_doc;
             }
