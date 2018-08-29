@@ -424,16 +424,53 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                                 info_det.pd_precio = producto.precio_1;
                                 break;
                             case 2:
-                                info_det.pd_precio = producto.precio_2 == 0 ? producto.precio_1 : producto.precio_2;
+                                if (producto.signo_2 == "+")
+                                {
+                                    info_det.pd_precio = producto.precio_2 == 0 ? producto.precio_1 : producto.precio_2;
+                                    info_det.pd_por_descuento_uni = 0;
+                                }
+                                else
+                                {
+                                    info_det.pd_precio = producto.precio_1;
+                                    info_det.pd_por_descuento_uni = producto.porcentaje_2;
+                                }                                
                                 break;
                             case 3:
-                                info_det.pd_precio = producto.precio_3 == 0 ? producto.precio_1 : producto.precio_3;
+                                if (producto.signo_3 == "+")
+                                {
+                                    info_det.pd_precio = producto.precio_3 == 0 ? producto.precio_1 : producto.precio_3;
+                                    info_det.pd_por_descuento_uni = 0;
+                                }
+                                else
+                                {
+                                    info_det.pd_precio = producto.precio_1;
+                                    info_det.pd_por_descuento_uni = producto.porcentaje_3;
+                                }
                                 break;
                             case 4:
-                                info_det.pd_precio = producto.precio_4 == 0 ? producto.precio_1 : producto.precio_4;
+                                if (producto.signo_4 == "+")
+                                {
+                                    info_det.pd_precio = producto.precio_4 == 0 ? producto.precio_1 : producto.precio_4;
+                                    info_det.pd_por_descuento_uni = 0;
+                                }
+                                else
+                                {
+                                    info_det.pd_precio = producto.precio_1;
+                                    info_det.pd_por_descuento_uni = producto.porcentaje_4;
+                                }
+                                
                                 break;
                             case 5:
-                                info_det.pd_precio = producto.precio_5 == 0 ? producto.precio_1 : producto.precio_5;
+                                if (producto.signo_5 == "+")
+                                {
+                                    info_det.pd_precio = producto.precio_5 == 0 ? producto.precio_1 : producto.precio_5;
+                                    info_det.pd_por_descuento_uni = 0;
+                                }
+                                else
+                                {
+                                    info_det.pd_precio = producto.precio_1;
+                                    info_det.pd_por_descuento_uni = producto.porcentaje_5;
+                                }
                                 break;
                         }
                     }
@@ -466,16 +503,53 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                                 info_det.pd_precio = producto.precio_1;
                                 break;
                             case 2:
-                                info_det.pd_precio = producto.precio_2 == 0 ? producto.precio_1 : producto.precio_2;
+                                if (producto.signo_2 == "+")
+                                {
+                                    info_det.pd_precio = producto.precio_2 == 0 ? producto.precio_1 : producto.precio_2;
+                                    info_det.pd_por_descuento_uni = 0;
+                                }
+                                else
+                                {
+                                    info_det.pd_precio = producto.precio_1;
+                                    info_det.pd_por_descuento_uni = producto.porcentaje_2;
+                                }
                                 break;
                             case 3:
-                                info_det.pd_precio = producto.precio_3 == 0 ? producto.precio_1 : producto.precio_3;
+                                if (producto.signo_3 == "+")
+                                {
+                                    info_det.pd_precio = producto.precio_3 == 0 ? producto.precio_1 : producto.precio_3;
+                                    info_det.pd_por_descuento_uni = 0;
+                                }
+                                else
+                                {
+                                    info_det.pd_precio = producto.precio_1;
+                                    info_det.pd_por_descuento_uni = producto.porcentaje_3;
+                                }
                                 break;
                             case 4:
-                                info_det.pd_precio = producto.precio_4 == 0 ? producto.precio_1 : producto.precio_4;
+                                if (producto.signo_4 == "+")
+                                {
+                                    info_det.pd_precio = producto.precio_4 == 0 ? producto.precio_1 : producto.precio_4;
+                                    info_det.pd_por_descuento_uni = 0;
+                                }
+                                else
+                                {
+                                    info_det.pd_precio = producto.precio_1;
+                                    info_det.pd_por_descuento_uni = producto.porcentaje_4;
+                                }
+
                                 break;
                             case 5:
-                                info_det.pd_precio = producto.precio_5 == 0 ? producto.precio_1 : producto.precio_5;
+                                if (producto.signo_5 == "+")
+                                {
+                                    info_det.pd_precio = producto.precio_5 == 0 ? producto.precio_1 : producto.precio_5;
+                                    info_det.pd_por_descuento_uni = 0;
+                                }
+                                else
+                                {
+                                    info_det.pd_precio = producto.precio_1;
+                                    info_det.pd_por_descuento_uni = producto.porcentaje_5;
+                                }
                                 break;
                         }
                     }
