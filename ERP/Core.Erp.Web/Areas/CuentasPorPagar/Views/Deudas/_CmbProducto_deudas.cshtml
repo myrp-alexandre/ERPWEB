@@ -10,7 +10,7 @@
         settings.Properties.CallbackPageSize = 15;
         settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
         settings.Properties.TextField = "pr_descripcion";
-        settings.Properties.TextFormatString = "[{1}] {2}";
+        settings.Properties.TextFormatString = "[{0}] {1}";
         settings.Properties.ValueField = "IdProducto";
         settings.Properties.ValueType = typeof(decimal);
         settings.Properties.FilterMinLength = 3;
@@ -22,6 +22,6 @@
 
     })
     .BindList(new Core.Erp.Web.Areas.CuentasPorPagar.Controllers.DeudasController().get_list_bajo_demanda_producto,
-    new Core.Erp.Web.Areas.CuentasPorPagar.Controllers.DeudasController().get_info_bajo_demanda_producto).Bind(Model.GetType() == typeof(Core.Erp.Info.CuentasPorPagar.cp_orden_giro_Info) ? "" : (String.IsNullOrEmpty(Model.ToString()) ? "" : Model));
+    new Core.Erp.Web.Areas.CuentasPorPagar.Controllers.DeudasController().get_info_bajo_demanda_producto).Bind(Model.GetType() == typeof(Core.Erp.Info.CuentasPorPagar.cp_orden_giro_Info) ? "" : Model);
 }
 @comboBox.GetHtml()

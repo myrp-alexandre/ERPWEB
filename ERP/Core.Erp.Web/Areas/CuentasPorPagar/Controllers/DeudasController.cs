@@ -38,6 +38,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         cp_cuotas_x_doc_det_Info_lst Lis_cp_cuotas_x_doc_det_Info = new cp_cuotas_x_doc_det_Info_lst();
         cp_orden_giro_det_Info_List List_det = new cp_orden_giro_det_Info_List();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
+        tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -172,12 +173,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #endregion
 
         #region Funciones cargar combos
-        private void cargar_combos(int IdEmpresa, decimal IdProveedor = 0, string IdTipoSRI = "")
+        private void cargar_combos(cp_orden_giro_Info model)
         {
-            var lst_proveedores = bus_proveedor.get_list(IdEmpresa, false);
-            ViewBag.lst_proveedores = lst_proveedores;
-
-            var lst_codigos_sri = bus_codigo_sri.get_list(IdEmpresa);
+            var lst_codigos_sri = bus_codigo_sri.get_list(model.IdEmpresa);
             ViewBag.lst_codigos_sri = lst_codigos_sri;
 
             var lst_forma_pago = bus_forma_paogo.get_list();
@@ -189,11 +187,15 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_doc_tipo = bus_tipo_documento.get_list(false);
             ViewBag.lst_doc_tipo = lst_doc_tipo;
 
-            var lst_sucursales = bus_sucursal.get_list(IdEmpresa, false);
+            var lst_sucursales = bus_sucursal.get_list(model.IdEmpresa, false);
             ViewBag.lst_sucursales = lst_sucursales;
-            if (IdProveedor != 0)
+
+            var lst_bodega = bus_bodega.get_list(model.IdEmpresa, model.IdSucursal == null ? 0 : (int)model.IdSucursal, false);
+            ViewBag.lst_bodega = lst_bodega;
+
+            if (model.IdProveedor != 0)
             {
-                var list_tipo_doc = bus_tipo_documento.get_list(IdEmpresa, IdProveedor, IdTipoSRI);
+                var list_tipo_doc = bus_tipo_documento.get_list(model.IdEmpresa, model.IdProveedor, model.IdOrden_giro_Tipo);
                 ViewBag.lst_tipo_doc = list_tipo_doc;
             }
             else
@@ -240,20 +242,20 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             {
                 IdEmpresa = IdEmpresa,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
-                co_FechaFactura = DateTime.Now,
-                co_FechaContabilizacion = DateTime.Now,
-                co_FechaFactura_vct = DateTime.Now,
+                co_FechaFactura = DateTime.Now.Date,
+                co_FechaContabilizacion = DateTime.Now.Date,
+                co_FechaFactura_vct = DateTime.Now.Date,
                 PaisPago = "593",
                 IdTipoServicio = cl_enumeradores.eTipoServicioCXP.SERVI.ToString(),
                 info_cuota = new cp_cuotas_x_doc_Info
                 {
-                    Fecha_inicio = DateTime.Now
+                    Fecha_inicio = DateTime.Now.Date
                 },
 
             };
             Lis_ct_cbtecble_det_List.set_list(new List<ct_cbtecble_det_Info>(), model.IdTransaccionSession);
             Lis_cp_cuotas_x_doc_det_Info.set_list(new List<cp_cuotas_x_doc_det_Info>(), model.IdTransaccionSession);
-            cargar_combos(IdEmpresa);
+            cargar_combos(model);
             return View(model);
         }
 
@@ -263,7 +265,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if(bus_orden_giro.si_existe(model))
             {
                 ViewBag.mensaje = "El documento "+model.co_serie+" "+ model.co_factura+", ya se encuentra registrado";
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdOrden_giro_Tipo);
+                cargar_combos(model);
                 cargar_combos_detalle();
                 return View(model);
             }
@@ -273,7 +275,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if(Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession).Count()==0)
             {
                 ViewBag.mensaje = "Falta diario contable";
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdOrden_giro_Tipo);
+                cargar_combos(model);
                 cargar_combos_detalle();
                 return View(model);
 
@@ -286,14 +288,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             else
             {
                 ViewBag.mensaje = "Falta parametros del modulo cuenta por pagar";
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdOrden_giro_Tipo);
+                cargar_combos(model);
                 cargar_combos_detalle();
                 return View(model);
             }
             string mensaje = bus_orden_giro.validar(model);
             if (mensaje != "")
             {
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdOrden_giro_Tipo);
+                cargar_combos(model);
                 cargar_combos_detalle();
                 ViewBag.mensaje = mensaje;
                 return View(model);
@@ -305,7 +307,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             if (!bus_orden_giro.guardarDB(model))
             {
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdOrden_giro_Tipo);
+                cargar_combos(model);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -329,7 +331,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if (model.info_cuota.lst_cuotas_det == null)
                 model.info_cuota.lst_cuotas_det = new List<cp_cuotas_x_doc_det_Info>();
             Lis_cp_cuotas_x_doc_det_Info.set_list( model.info_cuota.lst_cuotas_det, model.IdTransaccionSession);
-            cargar_combos(IdEmpresa, model.IdProveedor, model.IdOrden_giro_Tipo);
+            cargar_combos(model);
             cargar_combos_detalle();
             return View(model);
         }
@@ -365,7 +367,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if(model.info_comrobante.lst_ct_cbtecble_det.Count()==0)
             {
                 ViewBag.mensaje = "Falta diario contable";
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdOrden_giro_Tipo);
+                cargar_combos(model);
                 cargar_combos_detalle();
                 return View(model);
 
@@ -378,14 +380,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             else
             {
                 ViewBag.mensaje = "Falta parametros del modulo cuenta por pagar";
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdOrden_giro_Tipo);
+                cargar_combos(model);
                 cargar_combos_detalle();
                 return View(model);
             }
             string mensaje = bus_orden_giro.validar(model);
             if (mensaje != "")
             {
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdOrden_giro_Tipo);
+                cargar_combos(model);
                 cargar_combos_detalle();
                 ViewBag.mensaje = mensaje;
                 return View(model);
@@ -397,7 +399,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             if (!bus_orden_giro.modificarDB(model))
             {
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdOrden_giro_Tipo);
+                cargar_combos(model);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -421,7 +423,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 model.info_cuota.lst_cuotas_det = new List<cp_cuotas_x_doc_det_Info>();
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             Lis_cp_cuotas_x_doc_det_Info.set_list(model.info_cuota.lst_cuotas_det, model.IdTransaccionSession);
-            cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdOrden_giro_Tipo);
+            cargar_combos(model);
             cargar_combos_detalle();
             return View(model);
         }
@@ -462,14 +464,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             else
             {
                 ViewBag.mensaje = "Falta parametros del modulo cuenta por pagar";
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model);
                 cargar_combos_detalle();
                 return View(model);
             }
             string mensaje = bus_orden_giro.validar(model);
             if (mensaje != "")
             {
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model);
                 cargar_combos_detalle();
                 ViewBag.mensaje = mensaje;
                 return View(model);
@@ -481,7 +483,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             if (!bus_orden_giro.anularDB(model))
             {
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model);
                 return View(model);
             }
             return RedirectToAction("Index");

@@ -25,7 +25,7 @@
 
     })
     .BindList(new Core.Erp.Web.Areas.CuentasPorPagar.Controllers.DeudasController().get_list_bajo_demanda, new Core.Erp.Web.Areas.CuentasPorPagar.Controllers.DeudasController().get_info_bajo_demanda)
-    .Bind(Model.IdProveedor);
+    .Bind(Model.GetType() == typeof(Core.Erp.Info.CuentasPorPagar.cp_orden_giro_Info) ? "" : (Model == 0 ? "" : Model));
 
 }
 @comboBox.GetHtml()

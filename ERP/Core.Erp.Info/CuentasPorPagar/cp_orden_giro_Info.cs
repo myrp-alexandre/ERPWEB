@@ -69,6 +69,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public int Dias_Vencidos { get; set; }
         public double Total_Pagado { get; set; }
         public Nullable<double> Saldo_OG { get; set; }
+        public Nullable<int> IdBodega { get; set; }
         public cp_orden_giro_pagos_sri_Info info_forma_pago { get; set; }
 
         public bool seleccionado { get; set; }        

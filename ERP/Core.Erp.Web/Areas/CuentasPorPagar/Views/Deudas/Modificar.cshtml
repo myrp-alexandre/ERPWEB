@@ -28,17 +28,24 @@
 
     <div class="row">
         <div class="col-md-6">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal*</label>
-                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursales, "IdSucursal", "Su_descripcion"), new { @class = "form-control" })
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursales, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal" })
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdBodega">Bodega</label>
+                    @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodega" })
+                    @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdProveedor">Proveedor</label>
-                    @Html.Partial("_CmbProveedor_CXP", Model)
+                    @Html.Partial("_CmbProveedor_CXP", Model.IdProveedor)
                     @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -47,11 +54,12 @@
             <div class="form-group">
                 <label for="IdTipoServicio">Tipo de servicio</label>
                 @Html.DevExpress().ComboBoxFor(q => q.IdTipoServicio, setting =>
-               {
-                   setting.Properties.Items.Add("BIEN");
-                   setting.Properties.Items.Add("SERVI");
-                   setting.Properties.Items.Add("AMBAS");
-               }).GetHtml()
+           {
+               setting.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+               setting.Properties.Items.Add("BIENES", "BIEN");
+               setting.Properties.Items.Add("SERVICIOS", "SERVI");
+               setting.Properties.Items.Add("MIXTO", "AMBAS");
+           }).GetHtml()
                 @Html.ValidationMessageFor(q => q.IdTipoServicio, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -419,7 +427,9 @@
             autoclose: true
         })
 
-
+        $("#IdSucursal").change(function () {
+            cargar_bodega();
+        });
     });
 
 
@@ -670,6 +680,35 @@
                 }
             });
         }
+    };
+
+    function cargar_bodega() {
+        $("#IdBodega").empty();
+
+        var sucursal = $("#IdSucursal").val();
+
+            var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: sucursal            
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("cargar_bodega", "InventarioReportes", new { Area = "Reportes" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdBodega").append("<option value=" + row.IdBodega + ">" + row.bo_Descripcion + "</option>");
+                });
+            },
+            error: function (error) {
+            }
+        });
     };
 
 </script>
