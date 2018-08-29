@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.Compras;
 using Core.Erp.Info.Compras;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Compras.Controllers
 {
@@ -54,7 +55,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         [HttpPost]
         public ActionResult Modificar(com_estado_cierre_Info model)
         {
-            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_estado.modificarDB(model))
             {
                 return View(model);
@@ -72,7 +73,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         [HttpPost]
         public ActionResult Anular(com_estado_cierre_Info model)
         {
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
             if (!bus_estado.anularDB(model))
             {
                 return View(model);

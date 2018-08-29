@@ -9038,6 +9038,10 @@
     <Content Include="Areas\Compras\Views\EstadoCierreCompras\Modificar.cshtml" />
     <Content Include="Areas\Compras\Views\EstadoCierreCompras\Anular.cshtml" />
     <Content Include="Areas\Compras\Views\DepartamentoCompras\Index.cshtml" />
+    <Content Include="Areas\Compras\Views\DepartamentoCompras\_GridViewPartial_departamento.cshtml" />
+    <Content Include="Areas\Compras\Views\DepartamentoCompras\Nuevo.cshtml" />
+    <Content Include="Areas\Compras\Views\DepartamentoCompras\Modificar.cshtml" />
+    <Content Include="Areas\Compras\Views\DepartamentoCompras\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
