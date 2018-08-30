@@ -14,7 +14,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
     public class ParametrosCXPController : Controller
     {
         #region MyRegion
-        int IdEmpresa = 0;
         cp_parametros_Bus bus_parametros = new cp_parametros_Bus();
         ct_plancta_Bus bus_pla_cuenta = new ct_plancta_Bus();
         ct_cbtecble_tipo_Bus bus_tipo_comprobante = new ct_cbtecble_tipo_Bus();

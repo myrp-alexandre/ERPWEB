@@ -13,17 +13,16 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
-                fecha_inicio = Convert.ToDateTime(fecha_inicio.ToShortDateString());
-                fecha_fin = Convert.ToDateTime(fecha_fin.ToShortDateString());
-
+                fecha_inicio = fecha_inicio.Date;
+                fecha_fin = fecha_fin.Date;
                 List<ro_empleado_novedad_Info> Lista;
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                         Lista = (from q in Context.vwro_empleado_Novedad
                                  where q.IdEmpresa == IdEmpresa
-                                 && q.Fecha_PrimerPago>=fecha_inicio
-                                 && q.Fecha_PrimerPago<=fecha_fin
+                                 && q.Fecha_PrimerPago >= fecha_inicio
+                                 && q.Fecha_PrimerPago <= fecha_fin
                                  select new ro_empleado_novedad_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
@@ -34,14 +33,14 @@ namespace Core.Erp.Data.RRHH
                                      Fecha = q.Fecha,
                                      Fecha_PrimerPago = q.Fecha_PrimerPago,
                                      Estado = q.Estado,
-                                     Descripcion=q.Descripcion,
-                                     DescripcionProcesoNomina=q.DescripcionProcesoNomina,
-                                     pe_cedulaRuc=q.pe_cedulaRuc,
-                                     pe_nombreCompleto=q.pe_apellido+" "+q.pe_nombre,
-                                     Observacion=q.Observacion,
-                                     TotalValor=q.TotalValor
+                                     Descripcion = q.Descripcion,
+                                     DescripcionProcesoNomina = q.DescripcionProcesoNomina,
+                                     pe_cedulaRuc = q.pe_cedulaRuc,
+                                     pe_nombreCompleto = q.pe_apellido + " " + q.pe_nombre,
+                                     Observacion = q.Observacion,
+                                     TotalValor = q.TotalValor
                                  }).ToList();
-                    
+
                 }
 
                 return Lista;

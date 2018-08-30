@@ -47,7 +47,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         [HttpPost]
         public ActionResult Nuevo(com_comprador_Info model)
         {
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_comprador.guardarDB(model))
             {
                 cargar_combos();
@@ -66,7 +66,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         [HttpPost]
         public ActionResult Modificar(com_comprador_Info model)
         {
-            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
 
             if (!bus_comprador.modificarDB(model))
             {
@@ -86,7 +86,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         [HttpPost]
         public ActionResult Anular(com_comprador_Info model)
         {
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
 
             if (!bus_comprador.anularDB(model))
             {

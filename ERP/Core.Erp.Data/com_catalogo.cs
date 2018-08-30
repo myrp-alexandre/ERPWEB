@@ -14,6 +14,12 @@ namespace Core.Erp.Data
     
     public partial class com_catalogo
     {
+        public com_catalogo()
+        {
+            this.com_parametro = new HashSet<com_parametro>();
+            this.com_parametro1 = new HashSet<com_parametro>();
+        }
+    
         public string IdCatalogocompra { get; set; }
         public string IdCatalogocompra_tipo { get; set; }
         public string CodCatalogo { get; set; }
@@ -32,5 +38,7 @@ namespace Core.Erp.Data
         public string MotiAnula { get; set; }
     
         public virtual com_catalogo_tipo com_catalogo_tipo { get; set; }
+        public virtual ICollection<com_parametro> com_parametro { get; set; }
+        public virtual ICollection<com_parametro> com_parametro1 { get; set; }
     }
 }

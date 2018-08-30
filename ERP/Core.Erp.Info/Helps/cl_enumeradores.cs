@@ -132,7 +132,13 @@
             TIP_MARCA,
             TIP_UBICACION
         }
-        
+        public enum eTipoCatalogoCOM
+        {
+            EST_ANU = 1,
+            EST_APRO = 3
+        }
+
+
         public enum eTipoMejBajAF
         {
             Mejo_Acti,
