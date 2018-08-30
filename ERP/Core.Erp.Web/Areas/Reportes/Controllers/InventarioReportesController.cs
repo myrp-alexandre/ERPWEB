@@ -180,7 +180,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdBodega.Value = model.IdBodega;
-            report.p_IdProducto.Value = model.IdProducto;
+            report.p_IdProducto.Value = model.IdProducto == null ? 0 : model.IdProducto;
             report.p_IdCategoria.Value = model.IdCategoria;
             report.p_IdLinea.Value = model.IdLinea;
             report.p_IdGrupo.Value = model.IdGrupo;
@@ -201,7 +201,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdBodega.Value = model.IdBodega;
-            report.p_IdProducto.Value = model.IdProducto;
+            report.p_IdProducto.Value = model.IdProducto == null ? 0 : model.IdProducto ;
             report.p_IdCategoria.Value = model.IdCategoria;
             report.p_IdLinea.Value = model.IdLinea;
             report.p_IdGrupo.Value = model.IdGrupo;
@@ -232,6 +232,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             in_Producto_Bus bus_producto = new in_Producto_Bus();
             var lst_producto = bus_producto.get_list(IdEmpresa, false);
+            lst_producto.Add(new in_Producto_Info
+            {
+                IdEmpresa = model.IdEmpresa,
+                IdProducto = 0,
+                pr_descripcion = "Todos"
+            });
             ViewBag.lst_producto = lst_producto;
 
             in_categorias_Bus bus_categoria = new in_categorias_Bus();

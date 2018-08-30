@@ -30,23 +30,70 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdSucursal">Sucursal</label>
                             @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
                             @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdBodega">Bodega</label>
                             @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodega" })
                             @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
                         </div>
                     </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">Fecha inicio*</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.TextBoxFor(q => q.fecha_ini, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_ini" })
+                                @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">Fecha fin*</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.TextBoxFor(q => q.fecha_fin, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_fin" })
+                                @Html.ValidationMessageFor(q => q.fecha_fin, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="mostrar_saldos_en_0">@Html.CheckBoxFor(q => q.mostrar_saldos_en_0) Mostrar stock 0</label>
+                        </div>
+                    </div>
                 </div>
             </div>
-
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="IdProducto">Producto </label>
+                            @Html.DropDownListFor(q => q.IdProducto, new SelectList(ViewBag.lst_producto, "IdProducto", "pr_descripcion"), new { @class = "form-control", @id = "IdProducto" })
+                            @Html.ValidationMessageFor(q => q.IdProducto, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="IdMarca">Marca</label>
+                            @Html.DropDownListFor(q => q.IdMarca, new SelectList(ViewBag.lst_marca, "IdMarca", "Descripcion"), new { @class = "form-control", @id = "IdMarca" })
+                            @Html.ValidationMessageFor(q => q.IdMarca, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-3">
@@ -79,41 +126,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="IdMarca">Marca</label>
-                            @Html.DropDownListFor(q => q.IdMarca, new SelectList(ViewBag.lst_marca, "IdMarca", "Descripcion"), new { @class = "form-control", @id = "IdMarca" })
-                            @Html.ValidationMessageFor(q => q.IdMarca, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Fecha inicio*</label>
-                            <div class="input-group date">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                @Html.TextBoxFor(q => q.fecha_ini, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_ini" })
-                                @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Fecha fin*</label>
-                            <div class="input-group date">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                @Html.TextBoxFor(q => q.fecha_fin, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_fin" })
-                                @Html.ValidationMessageFor(q => q.fecha_fin, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <!-- /.box-body -->
         </div>
     </div>
