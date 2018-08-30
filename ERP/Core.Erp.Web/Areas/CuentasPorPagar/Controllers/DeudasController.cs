@@ -227,7 +227,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
 
         #endregion
-
+        
         #region Funciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
@@ -582,7 +582,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             cp_orden_giro_Info model = new cp_orden_giro_Info();
             model.lst_det = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();
+            cargar_combos_detalle();            
             return PartialView("_GridViewPartial_deudas_det", model);
         }
 
@@ -846,6 +846,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         public void UpdateRow(cp_orden_giro_det_Info info_det, decimal IdTransaccionSession)
         {
             cp_orden_giro_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
+            edited_info.IdProducto = info_det.IdProducto;
+            edited_info.pr_descripcion = info_det.pr_descripcion;
+            edited_info.Cantidad = info_det.Cantidad;
+            edited_info.CostoUni = info_det.CostoUni;
+            edited_info.PorDescuento = info_det.PorDescuento;
+
+            
         }
 
         public void DeleteRow(int secuencia, decimal IdTransaccionSession)

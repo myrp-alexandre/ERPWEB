@@ -34,6 +34,7 @@
             e.NewValues["IdUnidadMedida"] = "UNID";
             e.NewValues["Cantidad"] = "";
             e.NewValues["CostoUni"] = "";
+            e.NewValues["PorDescuento"] = "";
         };
 
         settings.Columns.Add(column =>
@@ -59,30 +60,101 @@
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdUnidadMedida";
-            column.Caption = "Unidad de medida";
+            column.Caption = "U. de medida";
             column.Width = Unit.Percentage(20);
+            column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().ComboBox(p =>
             {
                 p.Columns.Add("descripcion", "Descripción").Width = Unit.Percentage(100);
                 p.TextField = "descripcion";
                 p.ValueField = "IdUnidadMedida";
                 p.ValueType = typeof(string);
-                p.DataSource = ViewBag.lst_unidad;
+                p.DataSource = new Core.Erp.Bus.Inventario.in_UnidadMedida_Bus().get_list(false);
             });
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "Cantidad";
-            column.Caption = "cantidad";
+            column.Caption = "Cantidad";
             column.Width = Unit.Percentage(15);
-
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.EditorProperties().SpinEdit(p =>
+            {
+                p.Width = Unit.Percentage(100);
+                p.MinValue = 0;
+            });
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "CostoUni";
             column.Caption = "Costo";
             column.Width = Unit.Percentage(15);
-
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.EditorProperties().SpinEdit(p =>
+            {
+                p.Width = Unit.Percentage(100);
+                p.MinValue = 0;
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "PorDescuento";
+            column.Caption = "% Dscto.";
+            column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.EditorProperties().SpinEdit(p =>
+            {
+                p.Width = Unit.Percentage(100);
+                p.MinValue = 0;
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdCod_Impuesto_Iva";
+            column.Caption = "Impuesto";
+            column.Width = Unit.Percentage(60);
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("nom_impuesto", "Descripción").Width = Unit.Percentage(100);
+                p.TextField = "nom_impuesto";
+                p.ValueField = "IdCod_Impuesto";
+                p.ValueType = typeof(string);
+                p.DataSource = new Core.Erp.Bus.General.tb_sis_Impuesto_Bus().get_list("IVA",false);
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "CostoUniFinal";
+            column.Caption = "Costo final";
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+            column.Width = Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Subtotal";
+            column.Caption = "Subtotal";
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+            column.Width = Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ValorIva";
+            column.Caption = "I.V.A.";
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+            column.Width = Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Total";
+            column.Caption = "Total";
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+            column.Width = Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.SettingsBehavior.AllowSort = false;
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
