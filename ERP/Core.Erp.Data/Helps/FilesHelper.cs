@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Data.General;
 using System.IO;
+using Core.Erp.Info.General;
 
 namespace Core.Erp.Data.Helps
 {
@@ -17,8 +18,12 @@ namespace Core.Erp.Data.Helps
         {
             try
             {
+                tbl_usuario_ftp_Info info_ftp = new tbl_usuario_ftp_Info();
+                tbl_usuario_ftp_Data data_ftp = new tbl_usuario_ftp_Data();
 
-              
+                info_ftp = data_ftp.get_info();
+                if (info_ftp == null)
+                    info_ftp = new tbl_usuario_ftp_Info();
                 string ftpurl = String.Format("{0}/{1}/{2}", ftp_url, nom_archivo, nom_archivo);
 
                 #region Crear directorio

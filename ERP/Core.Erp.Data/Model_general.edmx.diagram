@@ -58,6 +58,7 @@
         <AssociationConnector Association="Model_general.FK_tb_sis_Impuesto_x_ctacble_tb_sis_Impuesto" ManuallyRouted="false" />
         <AssociationConnector Association="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_sis_reporte" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Model_general.vwtb_bodega_x_sucursal" Width="1.5" PointX="17.375" PointY="10.75" />
+        <EntityTypeShape EntityType="Model_general.tbl_usuario_ftp" Width="1.5" PointX="19.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
