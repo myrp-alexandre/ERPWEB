@@ -14,6 +14,11 @@ namespace Core.Erp.Data
     
     public partial class com_estado_cierre
     {
+        public com_estado_cierre()
+        {
+            this.com_parametro = new HashSet<com_parametro>();
+        }
+    
         public string IdEstado_cierre { get; set; }
         public string Descripcion { get; set; }
         public string estado { get; set; }
@@ -23,5 +28,7 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> FechaHoraAnul { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public string MotivoAnulacion { get; set; }
+    
+        public virtual ICollection<com_parametro> com_parametro { get; set; }
     }
 }
