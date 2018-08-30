@@ -98,6 +98,8 @@
             this.p_IdCbteVta = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_mostrar_cuotas = new DevExpress.XtraReports.Parameters.Parameter();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+            this.subtotalIVA_sinDscto = new DevExpress.XtraReports.UI.CalculatedField();
+            this.Subtotal0_sinDscto = new DevExpress.XtraReports.UI.CalculatedField();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_factura)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
@@ -229,7 +231,7 @@
             // xrTableCell18
             // 
             this.xrTableCell18.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([vt_cantidad] = 0, \'\' , \'Fecha vcto:\' )")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(IsNull([lote_num_lote]),\'\' , Iif([vt_cantidad] = 0, \'\' , \'Fecha vcto:\' ))")});
             this.xrTableCell18.Font = new System.Drawing.Font("Verdana", 9F);
             this.xrTableCell18.Name = "xrTableCell18";
             this.xrTableCell18.StylePriority.UseFont = false;
@@ -438,7 +440,7 @@
             // xrTableCell6
             // 
             this.xrTableCell6.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[forma_pago_EFECTIVO]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([forma_pago_EFECTIVO])")});
             this.xrTableCell6.Name = "xrTableCell6";
             xrSummary1.FormatString = "{0:n2}";
             xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
@@ -455,7 +457,7 @@
             // xrTableCell8
             // 
             this.xrTableCell8.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[forma_pago_DINERO_ELECTRONICO]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([forma_pago_DINERO_ELECTRONICO])")});
             this.xrTableCell8.Name = "xrTableCell8";
             xrSummary2.FormatString = "{0:n2}";
             xrSummary2.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
@@ -472,7 +474,7 @@
             // xrTableCell9
             // 
             this.xrTableCell9.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[forma_pago_TARJETA_CRE_DEB]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([forma_pago_TARJETA_CRE_DEB])")});
             this.xrTableCell9.Name = "xrTableCell9";
             xrSummary3.FormatString = "{0:n2}";
             xrSummary3.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
@@ -489,7 +491,7 @@
             // xrTableCell7
             // 
             this.xrTableCell7.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[forma_pago_CHEQUE_TRANSFERENCIA]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([forma_pago_CHEQUE_TRANSFERENCIA])")});
             this.xrTableCell7.Name = "xrTableCell7";
             xrSummary4.FormatString = "{0:n2}";
             xrSummary4.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
@@ -528,7 +530,7 @@
             // xrTableCell24
             // 
             this.xrTableCell24.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([subtotal_iva])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([subtotalIVA_sinDscto])")});
             this.xrTableCell24.Name = "xrTableCell24";
             this.xrTableCell24.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 20, 0, 0, 100F);
             this.xrTableCell24.StylePriority.UsePadding = false;
@@ -549,7 +551,7 @@
             // xrTableCell25
             // 
             this.xrTableCell25.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([subtotal_0])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Subtotal0_sinDscto])")});
             this.xrTableCell25.Name = "xrTableCell25";
             this.xrTableCell25.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 20, 0, 0, 100F);
             this.xrTableCell25.StylePriority.UsePadding = false;
@@ -708,6 +710,16 @@
             this.ReportHeader.HeightF = 266.2915F;
             this.ReportHeader.Name = "ReportHeader";
             // 
+            // subtotalIVA_sinDscto
+            // 
+            this.subtotalIVA_sinDscto.Expression = "Iif([subtotal_iva] > 0, [vt_cantidad]*[vt_Precio],0 )";
+            this.subtotalIVA_sinDscto.Name = "subtotalIVA_sinDscto";
+            // 
+            // Subtotal0_sinDscto
+            // 
+            this.Subtotal0_sinDscto.Expression = "Iif([subtotal_iva] = 0,[vt_cantidad]*[vt_Precio] ,0 )";
+            this.Subtotal0_sinDscto.Name = "Subtotal0_sinDscto";
+            // 
             // FAC_003_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -716,6 +728,9 @@
             this.BottomMargin,
             this.PageFooter,
             this.ReportHeader});
+            this.CalculatedFields.AddRange(new DevExpress.XtraReports.UI.CalculatedField[] {
+            this.subtotalIVA_sinDscto,
+            this.Subtotal0_sinDscto});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.objectDataSource1});
             this.DataSource = this.objectDataSource1;
@@ -805,5 +820,7 @@
         public DevExpress.XtraReports.Parameters.Parameter p_IdCbteVta;
         public DevExpress.XtraReports.Parameters.Parameter p_mostrar_cuotas;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
+        private DevExpress.XtraReports.UI.CalculatedField subtotalIVA_sinDscto;
+        private DevExpress.XtraReports.UI.CalculatedField Subtotal0_sinDscto;
     }
 }
