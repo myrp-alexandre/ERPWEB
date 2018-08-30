@@ -11,6 +11,10 @@
         <EntityTypeShape EntityType="Model_compras.com_comprador" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_compras.com_estado_cierre" Width="1.5" PointX="5.375" PointY="5.75" />
         <EntityTypeShape EntityType="Model_compras.com_departamento" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Model_compras.com_parametro" Width="1.5" PointX="7.625" PointY="3.625" />
+        <AssociationConnector Association="Model_compras.FK_com_parametro_com_catalogo" />
+        <AssociationConnector Association="Model_compras.FK_com_parametro_com_catalogo1" />
+        <AssociationConnector Association="Model_compras.FK_com_parametro_com_estado_cierre" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
