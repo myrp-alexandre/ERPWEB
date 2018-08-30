@@ -30,11 +30,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #endregion
         public ActionResult Index()
         {
-            cl_filtros_Info model = new cl_filtros_Info
-            {
-                IdEmpresa = IdEmpresa,
-                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
-            };
+            cl_filtros_Info model = new cl_filtros_Info();
             return View(model);
         }
         [HttpPost]
