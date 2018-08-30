@@ -32,7 +32,7 @@ namespace Core.Erp.Web.Reportes.Facturacion
             List<FAC_003_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, mostrar_cuotas);
             if (lst_rpt.Count > 0)
             {
-                lbl_valorenletras.Text = funciones.NumeroALetras(lst_rpt[0].vt_total.ToString());
+                lbl_valorenletras.Text = funciones.NumeroALetras(lst_rpt.Sum(q=>q.vt_total).ToString());
             }
             if (lst_rpt.Where(q => q.orden > 0).Count() > 0)
             {
