@@ -18,6 +18,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdCbteCble.Value = IdCbteCble;
             model.usuario = Session["IdUsuario"].ToString();
             model.empresa = Session["nom_empresa"].ToString();
+            model.RequestParameters = false;
             return View(model);
         }
         private void cargar_combos(int IdEmpresa)
