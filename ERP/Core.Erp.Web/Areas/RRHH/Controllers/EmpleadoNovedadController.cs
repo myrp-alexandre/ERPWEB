@@ -8,6 +8,7 @@ using Core.Erp.Bus.RRHH;
 using DevExpress.Web.Mvc;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
+using Core.Erp.Bus.General;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -23,6 +24,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
         ro_contrato_Bus bus_contrato = new ro_contrato_Bus();
         List<ro_rubro_tipo_Info> lst_rubros = new List<ro_rubro_tipo_Info>();
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
 
         int IdEmpresa = 0;
         #endregion
@@ -30,6 +32,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
+                IdEmpresa = IdEmpresa,
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
             return View(model);
@@ -38,27 +41,26 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult Index(cl_filtros_Info model)
         {
             return View(model);
-        }
 
+        }
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial_empleado_novedad(DateTime? Fecha_ini, DateTime? Fecha_fin)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
-            List<ro_empleado_novedad_Info> model = bus_novedad.get_list(IdEmpresa,Convert.ToDateTime( Fecha_ini),Convert.ToDateTime( Fecha_fin));
+
+            var model = bus_novedad.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_empleado_novedad", model);
         }
-
      
         private void cargar_combos(int IdNomina)
         {
-            IdEmpresa =Convert.ToInt32( Session["IdEmpresa"]);
+            IdEmpresa =Convert.ToInt32( SessionFixed.IdEmpresa);
             ViewBag.lst_nomina = bus_nomina.get_list(IdEmpresa, false);
             ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, IdNomina);
             ViewBag.lst_empleado = bus_empleado.get_list_combo(IdEmpresa);
-
         }
 
         public ActionResult Nuevo()

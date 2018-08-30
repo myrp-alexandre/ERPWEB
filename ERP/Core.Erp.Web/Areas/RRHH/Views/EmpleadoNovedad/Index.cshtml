@@ -30,16 +30,6 @@
         </div>
         <div class="box-body">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="IdSucursal">Sucursal*</label>
-                            <div class="form-group">
-                                @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
-                                @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Fecha inicio*</label>
@@ -64,7 +54,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
         <!-- /.box-body -->

@@ -255,6 +255,7 @@
     <Compile Include="Areas\Compras\Controllers\CompradorController.cs" />
     <Compile Include="Areas\Compras\Controllers\DepartamentoComprasController.cs" />
     <Compile Include="Areas\Compras\Controllers\EstadoCierreComprasController.cs" />
+    <Compile Include="Areas\Compras\Controllers\ParametrosComprasController.cs" />
     <Compile Include="Areas\Contabilidad\ContabilidadAreaRegistration.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\AnioFiscalController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\ATSController.cs" />
@@ -9042,6 +9043,7 @@
     <Content Include="Areas\Compras\Views\DepartamentoCompras\Nuevo.cshtml" />
     <Content Include="Areas\Compras\Views\DepartamentoCompras\Modificar.cshtml" />
     <Content Include="Areas\Compras\Views\DepartamentoCompras\Anular.cshtml" />
+    <Content Include="Areas\Compras\Views\ParametrosCompras\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
