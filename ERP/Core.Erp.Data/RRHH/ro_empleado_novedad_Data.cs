@@ -21,8 +21,8 @@ namespace Core.Erp.Data.RRHH
                 {
                         Lista = (from q in Context.vwro_empleado_Novedad
                                  where q.IdEmpresa == IdEmpresa
-                                 && q.Fecha_PrimerPago >= fecha_inicio
-                                 && q.Fecha_PrimerPago <= fecha_fin
+                                 && q.Fecha >= fecha_inicio
+                                 && q.Fecha <= fecha_fin
                                  select new ro_empleado_novedad_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
