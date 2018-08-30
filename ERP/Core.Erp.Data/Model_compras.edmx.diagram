@@ -15,6 +15,7 @@
         <AssociationConnector Association="Model_compras.FK_com_parametro_com_catalogo" />
         <AssociationConnector Association="Model_compras.FK_com_parametro_com_catalogo1" />
         <AssociationConnector Association="Model_compras.FK_com_parametro_com_estado_cierre" />
+        <EntityTypeShape EntityType="Model_compras.com_TerminoPago" Width="1.5" PointX="7.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -77,6 +77,7 @@
     <Compile Include="Compras\com_departamento_Bus.cs" />
     <Compile Include="Compras\com_estado_cierre_Bus.cs" />
     <Compile Include="Compras\com_parametro_Bus.cs" />
+    <Compile Include="Compras\com_TerminoPago_Bus.cs" />
     <Compile Include="Contabilidad\ats_Bus.cs" />
     <Compile Include="Contabilidad\ct_anio_fiscal_Bus.cs" />
     <Compile Include="Contabilidad\ct_anio_fiscal_x_cuenta_utilidad_Bus.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Facturacion\fa_TipoNota_Bus.cs" />
     <Compile Include="Facturacion\fa_TipoNota_x_Empresa_x_Sucursal_Bus.cs" />
     <Compile Include="Facturacion\fa_Vendedor_Bus.cs" />
+    <Compile Include="General\tbl_usuario_ftp_Bus.cs" />
     <Compile Include="General\tb_banco_Bus.cs" />
     <Compile Include="General\tb_bodega_Bus.cs" />
     <Compile Include="General\tb_CatalogoTipo_Bus.cs" />

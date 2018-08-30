@@ -77,6 +77,7 @@
     <Compile Include="Compras\com_departamento_Info.cs" />
     <Compile Include="Compras\com_estado_cierre_Info.cs" />
     <Compile Include="Compras\com_parametro_Info.cs" />
+    <Compile Include="Compras\com_TerminoPago_Info.cs" />
     <Compile Include="Contabilidad\ATS\ATS_Info\ats_Info.cs" />
     <Compile Include="Contabilidad\ATS\ATS_Info\compras_Info.cs" />
     <Compile Include="Contabilidad\ATS\ATS_Info\comprobantesAnulados_info.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Facturacion\fa_TipoNota_Info.cs" />
     <Compile Include="Facturacion\fa_TipoNota_x_Empresa_x_Sucursal_Info.cs" />
     <Compile Include="Facturacion\fa_Vendedor_Info.cs" />
+    <Compile Include="General\tbl_usuario_ftp_Info.cs" />
     <Compile Include="General\tb_banco_Info.cs" />
     <Compile Include="General\tb_bodega_Info.cs" />
     <Compile Include="General\tb_CatalogoTipo_Info.cs" />

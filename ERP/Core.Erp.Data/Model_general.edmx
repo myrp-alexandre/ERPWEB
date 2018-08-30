@@ -377,6 +377,15 @@
           <Property Name="IdUsuarioModifica" Type="varchar" MaxLength="50" />
           <Property Name="IdUsuarioAnulacion" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="tbl_usuario_ftp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ftp_usuario" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ftp_contrasenia" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ftp_url" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
         <EntityType Name="tb_sis_reporte">
           <Key>
             <PropertyRef Name="CodReporte" />
@@ -774,6 +783,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwtb_comprobantes_
           <EntitySet Name="tb_sucursal" EntityType="Self.tb_sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_transportista" EntityType="Self.tb_transportista" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_visor_video" EntityType="Self.tb_visor_video" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_usuario_ftp" EntityType="Self.tbl_usuario_ftp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_reporte" EntityType="Self.tb_sis_reporte" Schema="web" store:Type="Tables" />
           <EntitySet Name="tb_sis_reporte_x_seg_usuario" EntityType="Self.tb_sis_reporte_x_seg_usuario" Schema="web" store:Type="Tables" />
           <EntitySet Name="vwtb_ciudad_id" EntityType="Self.vwtb_ciudad_id" store:Type="Views" store:Schema="dbo">
@@ -1796,6 +1806,7 @@ FROM [web].[vwtb_comprobantes_no_autorizados] AS [vwtb_comprobantes_no_autorizad
             <End Role="tb_sis_reporte_x_seg_usuario" EntitySet="tb_sis_reporte_x_seg_usuario" />
           </AssociationSet>
           <EntitySet Name="vwtb_bodega_x_sucursal" EntityType="Model_general.vwtb_bodega_x_sucursal" />
+          <EntitySet Name="tbl_usuario_ftp" EntityType="Model_general.tbl_usuario_ftp" />
         </EntityContainer>
         <EntityType Name="vwtb_bodega_x_sucursal">
           <Key>
@@ -1814,6 +1825,15 @@ FROM [web].[vwtb_comprobantes_no_autorizados] AS [vwtb_comprobantes_no_autorizad
           <Property Name="bo_manejaFacturacion" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
           <Property Name="codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_usuario_ftp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ftp_usuario" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ftp_contrasenia" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ftp_url" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2297,6 +2317,16 @@ FROM [web].[vwtb_comprobantes_no_autorizados] AS [vwtb_comprobantes_no_autorizad
                 <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_usuario_ftp">
+            <EntityTypeMapping TypeName="Model_general.tbl_usuario_ftp">
+              <MappingFragment StoreEntitySet="tbl_usuario_ftp">
+                <ScalarProperty Name="ftp_url" ColumnName="ftp_url" />
+                <ScalarProperty Name="ftp_contrasenia" ColumnName="ftp_contrasenia" />
+                <ScalarProperty Name="ftp_usuario" ColumnName="ftp_usuario" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
