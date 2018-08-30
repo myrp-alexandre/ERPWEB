@@ -93,6 +93,23 @@
           <Property Name="IdEstadoAnulacion_OC" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="IdEstado_cierre" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
+        <EntityType Name="com_TerminoPago">
+          <Key>
+            <PropertyRef Name="IdTerminoPago" />
+          </Key>
+          <Property Name="IdTerminoPago" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Dias" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="50" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="50" />
+          <Property Name="FechaUltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotiAnula" Type="varchar" MaxLength="50" />
+        </EntityType>
         <Association Name="FK_com_catalogo_com_catalogo_tipo">
           <End Role="com_catalogo_tipo" Type="Self.com_catalogo_tipo" Multiplicity="1" />
           <End Role="com_catalogo" Type="Self.com_catalogo" Multiplicity="*" />
@@ -148,6 +165,7 @@
           <EntitySet Name="com_departamento" EntityType="Self.com_departamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="com_estado_cierre" EntityType="Self.com_estado_cierre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="com_parametro" EntityType="Self.com_parametro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="com_TerminoPago" EntityType="Self.com_TerminoPago" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_com_catalogo_com_catalogo_tipo" Association="Self.FK_com_catalogo_com_catalogo_tipo">
             <End Role="com_catalogo_tipo" EntitySet="com_catalogo_tipo" />
             <End Role="com_catalogo" EntitySet="com_catalogo" />
@@ -192,6 +210,7 @@
             <End Role="com_estado_cierre" EntitySet="com_estado_cierre" />
             <End Role="com_parametro" EntitySet="com_parametro" />
           </AssociationSet>
+          <EntitySet Name="com_TerminoPago" EntityType="Model_compras.com_TerminoPago" />
         </EntityContainer>
         <EntityType Name="com_catalogo">
           <Key>
@@ -337,6 +356,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="com_TerminoPago">
+          <Key>
+            <PropertyRef Name="IdTerminoPago" />
+          </Key>
+          <Property Name="IdTerminoPago" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Dias" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotiAnula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -432,6 +468,24 @@
                 <ScalarProperty Name="IdMovi_inven_tipo_OC" ColumnName="IdMovi_inven_tipo_OC" />
                 <ScalarProperty Name="IdEstadoAprobacion_OC" ColumnName="IdEstadoAprobacion_OC" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="com_TerminoPago">
+            <EntityTypeMapping TypeName="Model_compras.com_TerminoPago">
+              <MappingFragment StoreEntitySet="com_TerminoPago">
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Dias" ColumnName="Dias" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdTerminoPago" ColumnName="IdTerminoPago" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
