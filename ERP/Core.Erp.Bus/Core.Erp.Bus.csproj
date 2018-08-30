@@ -149,6 +149,7 @@
     <Compile Include="Facturacion\fa_TipoNota_Bus.cs" />
     <Compile Include="Facturacion\fa_TipoNota_x_Empresa_x_Sucursal_Bus.cs" />
     <Compile Include="Facturacion\fa_Vendedor_Bus.cs" />
+    <Compile Include="General\tbl_usuario_ftp_Bus.cs" />
     <Compile Include="General\tb_banco_Bus.cs" />
     <Compile Include="General\tb_bodega_Bus.cs" />
     <Compile Include="General\tb_CatalogoTipo_Bus.cs" />

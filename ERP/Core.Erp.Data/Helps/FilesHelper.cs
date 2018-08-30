@@ -1,31 +1,32 @@
-﻿using System;
+﻿using DevExpress.Web;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Erp.Data.General;
+using System.IO;
 
 namespace Core.Erp.Data.Helps
 {
    public class FilesHelper
     {
-        /*
-        public static void FtpUploadFile(UploadedFile file, string nom_archivo, string IdQueja)
+        
+        public static void Guardar_xml(UploadedFile file, string nom_archivo,string ftp_url, string ftp_usuario, string ftp_contrasenia)
         {
             try
             {
-                tbl_parametros_correo_Data odata = new tbl_parametros_correo_Data();
-                tbl_parametros_correo_Info info = odata.get_info();
-                if (info == null)
-                    return;
 
-                string ftpurl = String.Format("{0}/{1}/{2}", info.ftp_url, IdQueja, nom_archivo);
+              
+                string ftpurl = String.Format("{0}/{1}/{2}", ftp_url, nom_archivo, nom_archivo);
 
                 #region Crear directorio
                 try
                 {
-                    WebRequest request = WebRequest.Create(String.Format("{0}/{1}/", info.ftp_url, IdQueja));
+                    WebRequest request = WebRequest.Create(String.Format("{0}/{1}/", ftp_url, nom_archivo));
                     request.Method = WebRequestMethods.Ftp.MakeDirectory;
-                    request.Credentials = new NetworkCredential(info.ftp_usuario, info.ftp_contrasenia);
+                    request.Credentials = new NetworkCredential(ftp_usuario, ftp_contrasenia);
                     WebResponse response = request.GetResponse();
                 }
                 catch (Exception)
@@ -42,7 +43,7 @@ namespace Core.Erp.Data.Helps
                 streamObj = null;
                 var requestObj = FtpWebRequest.Create(ftpurl) as FtpWebRequest;
                 requestObj.Method = WebRequestMethods.Ftp.UploadFile;
-                requestObj.Credentials = new NetworkCredential(info.ftp_usuario, info.ftp_contrasenia);
+                requestObj.Credentials = new NetworkCredential(ftp_usuario, ftp_contrasenia);
                 Stream requestStream = requestObj.GetRequestStream();
                 requestStream.Write(buffer, 0, buffer.Length);
                 requestStream.Flush();
@@ -55,49 +56,19 @@ namespace Core.Erp.Data.Helps
                 throw new Exception(ex.Message);
             }
         }
-        public static List<tbl_queja_imagen> get_list_directory(decimal IdQueja)
+        public static string  get_list_directory(string nom_archivo)
         {
             try
             {
-                List<tbl_queja_imagen> Lista = new List<tbl_queja_imagen>();
-                tbl_parametros_correo_Data odata = new tbl_parametros_correo_Data();
-                tbl_parametros_correo_Info info = odata.get_info();
-                if (info == null)
-                    return new List<tbl_queja_imagen>();
-
-                string url_pagina_web = "http://quejas.degeremcia.com";
-
-                string ftpurl = String.Format("{0}/{1}", info.ftp_url, IdQueja);
-                FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create(ftpurl);
-                ftpRequest.Credentials = new NetworkCredential(info.ftp_usuario, info.ftp_contrasenia);
-                ftpRequest.Method = WebRequestMethods.Ftp.ListDirectory;
-                try
-                {
-                    FtpWebResponse response = (FtpWebResponse)ftpRequest.GetResponse();
-                    StreamReader streamReader = new StreamReader(response.GetResponseStream());
-
-                    string line = streamReader.ReadLine();
-                    string url_imagen = "";
-                    while (!string.IsNullOrEmpty(line))
-                    {
-                        url_imagen = String.Format("{0}/Content/Documentos/{1}/{2}", url_pagina_web, IdQueja, line);
-                        Lista.Add(new tbl_queja_imagen { MediumImageUrl = url_imagen, ThumbnailUrl = url_imagen });
-                        line = streamReader.ReadLine();
-                    }
-                    streamReader.Close();
-                }
-                catch (Exception)
-                {
-
-                }
-
-                return Lista;
+                string xml = "";
+               
+                return xml;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-        */
+        
     }
 }
