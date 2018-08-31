@@ -15,13 +15,14 @@ using System.Text;
 using DevExpress.Web.Mvc;
 using DevExpress.Web;
 using DevExpress.Utils;
+using Core.Erp.Bus.Helps;
 
 namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 {
     public class ATSController : Controller
     {
         ats_Bus bus_ats = new ats_Bus();
-        
+        FilesHelper_Bus FilesHelper_B = new FilesHelper_Bus();
         // GET: CuentasPorPagar/ATS
         public ActionResult Index()
         {
@@ -79,7 +80,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
                 file.WriteLine(xml);
                 file.Close();
                 byte[] fileBytes = System.IO.File.ReadAllBytes(patch + ".xml");
-                
+                FilesHelper_B.Guardar_xml(fileBytes, nombre_file,"","","");
                 patch = patch + ".xml";
                 return File(Encoding.UTF8.GetBytes(xml), "application/xml", nombre_file+".xml");
             }
@@ -177,6 +178,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             {
                 xml = sr.ReadToEnd();
                 byte[] byt = Convert.FromBase64String(xml);
+                
             }
 
                 return File(Encoding.UTF8.GetBytes(xml), "application/xml", "");
