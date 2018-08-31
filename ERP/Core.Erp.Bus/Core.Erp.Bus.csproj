@@ -178,6 +178,7 @@
     <Compile Include="General\tb_sucursal_Bus.cs" />
     <Compile Include="General\tb_transportista_Bus.cs" />
     <Compile Include="General\tb_visor_video_Bus.cs" />
+    <Compile Include="Helps\FilesHelper.cs" />
     <Compile Include="Importacion\imp_catalogo_Bus.cs" />
     <Compile Include="Importacion\imp_catalogo_tipo_Bus.cs" />
     <Compile Include="Importacion\imp_gasto_Bus.cs" />
