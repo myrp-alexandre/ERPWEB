@@ -11,10 +11,10 @@ using Core.Erp.Info.General;
 
 namespace Core.Erp.Data.Helps
 {
-   public class FilesHelper
+   public class FilesHelper_Data
     {
         
-        public  void Guardar_xml(byte[] buffer, string nom_archivo,string ftp_url, string ftp_usuario, string ftp_contrasenia)
+        public  bool Guardar_xml(byte[] buffer, string nom_archivo,string ftp_url, string ftp_usuario, string ftp_contrasenia)
         {
             try
             {
@@ -53,6 +53,8 @@ namespace Core.Erp.Data.Helps
                 requestStream.Flush();
                 requestStream.Close();
                 requestObj = null;
+
+                return true;
                 #endregion
             }
             catch (Exception ex)
@@ -64,9 +66,8 @@ namespace Core.Erp.Data.Helps
         {
             try
             {
-                string xml = "";
-               
-                return xml;
+                return "";
+                
             }
             catch (Exception ex)
             {
