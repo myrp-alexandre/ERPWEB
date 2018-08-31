@@ -65,7 +65,7 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if ((DataBinder.Eval(tc.DataItem, "Estado") == null ? false : Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "esta_impresa"))) != true && Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
+               if ((DataBinder.Eval(tc.DataItem, "Estado") == null ? false : Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "esta_impresa"))) != true && Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
                     ViewContext.Writer.Write(
                     Html.ActionLink("Modificar", "Modificar", new  { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(tc.DataItem, "IdBodega"), IdCbteVta = DataBinder.Eval(tc.DataItem, "IdCbteVta") }) + "&nbsp;" +

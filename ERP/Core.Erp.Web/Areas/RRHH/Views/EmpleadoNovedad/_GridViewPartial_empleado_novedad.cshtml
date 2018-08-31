@@ -2,11 +2,13 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_empleado_novedad";
-        settings.CallbackRouteValues = new { Controller = "EmpleadoNovedad", Action = "GridViewPartial_empleado_novedad" };
+        settings.CallbackRouteValues = new { Controller = "EmpleadoNovedad", Action = "GridViewPartial_empleado_novedad", Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin };
 
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdNovedad";
-
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;

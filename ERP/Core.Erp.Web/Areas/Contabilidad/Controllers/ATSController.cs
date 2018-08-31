@@ -12,12 +12,14 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
 using System.Text;
+using DevExpress.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 {
     public class ATSController : Controller
     {
         ats_Bus bus_ats = new ats_Bus();
+
         // GET: CuentasPorPagar/ATS
         public ActionResult Index()
         {
@@ -38,6 +40,8 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         [HttpPost]
         public ActionResult Nuevo(ats_Info model)
         {
+
+            var files = UploadControlExtension.GetUploadedFiles("UploadControl", HomeControllerControllerUploadControlSettings.UploadControlValidationSettings, FileUploadComplete);
 
             model.info_periodo.IdPeriodo =Convert.ToInt32( Session["IdPeriodo"]) ;
             bus_ats = new ats_Bus();
@@ -192,5 +196,20 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         }
         #endregion
 
+        public class HomeControllerControllerUploadControlSettings
+        {
+            public static DevExpress.Web.UploadControlValidationSettings UploadControlValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+            {
+                MaxFileSize = 4194304
+            };
+        }
+
+        public void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            if (e.UploadedFile.IsValid)
+            {
+                //Por ahora no se como funciona esto
+            }
+        }
     }
 }

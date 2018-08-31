@@ -148,7 +148,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 return View(model);
             }
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
             if (!bus_novedad.modificarDB(model))
             {
                 cargar_combos(model.IdNomina_Tipo);
@@ -175,7 +175,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.lst_novedad_det = lst_novedad_det.get_list();
             
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.Fecha_UltAnu = DateTime.Now;
             if (!bus_novedad.anularDB(model))
             {
                 cargar_combos(model.IdNomina_Tipo);
