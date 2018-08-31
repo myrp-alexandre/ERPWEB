@@ -9047,6 +9047,9 @@
     <Content Include="Areas\Compras\Views\ParametrosCompras\Index.cshtml" />
     <Content Include="Areas\Compras\Views\TerminoPagoCompras\Index.cshtml" />
     <Content Include="Areas\Compras\Views\TerminoPagoCompras\_GridViewPartial_terminopago_com.cshtml" />
+    <Content Include="Areas\Compras\Views\TerminoPagoCompras\Nuevo.cshtml" />
+    <Content Include="Areas\Compras\Views\TerminoPagoCompras\Modificar.cshtml" />
+    <Content Include="Areas\Compras\Views\TerminoPagoCompras\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

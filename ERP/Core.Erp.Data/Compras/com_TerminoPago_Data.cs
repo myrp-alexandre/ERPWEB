@@ -156,7 +156,7 @@ namespace Core.Erp.Data.Compras
                     com_TerminoPago Entity = Context.com_TerminoPago.Where(q => q.IdTerminoPago == info.IdTerminoPago).FirstOrDefault();
                     if (Entity == null) return false;
 
-                    Entity.Descripcion = "I";
+                    Entity.Estado = "I";
                     Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                     Entity.Fecha_UltAnu = DateTime.Now;
 
