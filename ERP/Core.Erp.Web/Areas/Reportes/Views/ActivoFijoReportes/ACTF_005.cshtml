@@ -10,8 +10,7 @@
 }
 @using (Html.BeginForm("ACTF_005", "ActivofijoReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa, new {@id= "IdEmpresa" })
-
+    @Html.HiddenFor(q=>q.IdEmpresa, new { @id="IdEmpresa"})
     <div class="box ">
         <div class="box-header with-border">
             <div class="row">
@@ -63,8 +62,8 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                @Html.TextBoxFor(q => q.fecha_corte, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_corte" })
-                                @Html.ValidationMessageFor(q => q.fecha_corte, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.fecha_fin, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_fin" })
+                                @Html.ValidationMessageFor(q => q.fecha_fin, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -101,22 +100,24 @@
     </div>
 }
     <script>
-    $(function () {
+        $(function () {
         //Date picker
-        $('#fecha_corte').datepicker({
+            $('#fecha_fin').datepicker({
             autoclose: true
-        })
-        
-        cargar_categoria();
-    });
+            })
+
+            cargar_categoria();
+            $("#IdActivoFijoTipo").change(function () {
+                cargar_categoria();
+            });
+        });
 
     function cargar_categoria() {
         $("#IdCategoriaAF").empty();
-        var activo = $("#IdActivoFijoTipo").val();
-
+        
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
-            activo: IdActivoFijoTipo
+            IdActivoFijoTipo: $("#IdActivoFijoTipo").val()
         }
         $.ajax({
             type: 'POST',

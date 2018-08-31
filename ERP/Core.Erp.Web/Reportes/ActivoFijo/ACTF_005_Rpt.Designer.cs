@@ -406,7 +406,7 @@
             // xrTableCell5
             // 
             this.xrTableCell5.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[nom_tipo]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([Parameters].[p_IdActivoFijoTipo]=0,\'Todos\' ,[nom_tipo])")});
             this.xrTableCell5.Name = "xrTableCell5";
             this.xrTableCell5.Weight = 1.5412841796875D;
             // 
@@ -447,7 +447,7 @@
             // xrTableCell29
             // 
             this.xrTableCell29.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[nom_categoria]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([Parameters].[p_IdCategoriaAF]=0,\'Todos\' ,[nom_categoria])")});
             this.xrTableCell29.Name = "xrTableCell29";
             this.xrTableCell29.Weight = 1.5412837317230506D;
             // 
@@ -462,7 +462,7 @@
             // xrTableCell31
             // 
             this.xrTableCell31.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[nom_estado_proceso]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([Parameters].[p_Estado_Proceso]=0,\'Todos\' ,[nom_estado_proceso])")});
             this.xrTableCell31.Name = "xrTableCell31";
             this.xrTableCell31.Weight = 1.5596326915495986D;
             // 
