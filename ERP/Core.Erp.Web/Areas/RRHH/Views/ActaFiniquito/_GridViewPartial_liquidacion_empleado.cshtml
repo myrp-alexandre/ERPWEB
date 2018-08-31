@@ -9,6 +9,10 @@
         settings.Width = Unit.Percentage(100);
 
 
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
@@ -122,13 +126,13 @@
             {
                 if (Convert.ToString(DataBinder.Eval(container.DataItem, "Estado")) == "A")
                 {
-                        Html.DevExpress().HyperLink(hyperlink =>
-                        {
-                            var IdActaFiniquito = DataBinder.Eval(container.DataItem, "IdActaFiniquito");
-                           
-                            hyperlink.Properties.Text = "Liquidar A.F";
-                            hyperlink.NavigateUrl = Url.Action("Liquidar", "ActaFiniquito", new {  IdActaFiniquito = IdActaFiniquito });
-                        }).Render();
+                    Html.DevExpress().HyperLink(hyperlink =>
+                    {
+                        var IdActaFiniquito = DataBinder.Eval(container.DataItem, "IdActaFiniquito");
+
+                        hyperlink.Properties.Text = "Liquidar A.F";
+                        hyperlink.NavigateUrl = Url.Action("Liquidar", "ActaFiniquito", new {  IdActaFiniquito = IdActaFiniquito });
+                    }).Render();
 
                 }
             });

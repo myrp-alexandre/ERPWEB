@@ -1,10 +1,13 @@
 @using System.Web.UI.WebControls;
 @{
-        var grid = Html.DevExpress().GridView(settings => {
+    var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_impuesto";
         settings.CallbackRouteValues = new { Controller = "Impuesto", Action = "GridViewPartial_impuesto" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdCod_Impuesto";
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;

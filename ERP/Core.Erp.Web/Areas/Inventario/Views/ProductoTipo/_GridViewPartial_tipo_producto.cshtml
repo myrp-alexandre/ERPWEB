@@ -4,7 +4,9 @@
         settings.CallbackRouteValues = new { Controller = "ProductoTipo", Action = "GridViewPartial_tipo_producto" };
         settings.KeyFieldName = "IdProductoTipo";
         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;

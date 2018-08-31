@@ -5,12 +5,11 @@
     {
         settings.Name = "GridView_egreso_inventario";
         settings.CallbackRouteValues = new { Controller = "EgresoInventario", Action = "GridViewPartial_egreso_inventario" };
-
-
         settings.KeyFieldName = "IdNumMovi";
-
         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;

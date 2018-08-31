@@ -5,7 +5,9 @@
         settings.CallbackRouteValues = new { Controller = "Sucursal", Action = "GridViewPartial_sucursal" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdSucursal";
-
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;

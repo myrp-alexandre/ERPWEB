@@ -3,10 +3,10 @@
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_ordenes_pagos";
         settings.CallbackRouteValues = new { Controller = "OrdenPago", Action = "GridViewPartial_ordenes_pagos" };
-
-
         settings.KeyFieldName = "IdOrdenPago";
-
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         settings.Width = Unit.Percentage(100);
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;

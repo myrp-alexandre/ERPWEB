@@ -5,7 +5,9 @@
         settings.CallbackRouteValues = new { Controller = "Cobranza", Action = "GridViewPartial_cobranza", Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin, IdSucursal = ViewBag.IdSucursal };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdCobro";
-
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
 
         //Configuración click derecho
         settings.SettingsContextMenu.Enabled = true;

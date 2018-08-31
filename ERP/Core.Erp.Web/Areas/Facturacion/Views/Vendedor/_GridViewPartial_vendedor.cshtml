@@ -5,7 +5,9 @@
         settings.CallbackRouteValues = new { Controller = "Vendedor", Action = "GridViewPartial_vendedor" };
         settings.KeyFieldName = "IdVendedor";
         settings.Width = Unit.Percentage(100);
-
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
@@ -80,7 +82,7 @@
 
         settings.Columns.Add("Codigo", "Código").Width = Unit.Percentage(10);
         settings.Columns.Add("Ve_Vendedor", "Vendedor").Width = Unit.Percentage(70);
-        settings.Columns.Add("Estado", "Estadp").Width = Unit.Percentage(10);
+        settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(10);
     });
 }
 @grid.Bind(Model).GetHtml()
