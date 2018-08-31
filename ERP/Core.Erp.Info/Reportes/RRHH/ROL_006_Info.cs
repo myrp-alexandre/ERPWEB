@@ -38,5 +38,8 @@ namespace Core.Erp.Info.Reportes.RRHH
         public double Total_Vacaciones { get; set; }
         public double Valor_Cancelar { get; set; }
         public Nullable<double> Iess { get; set; }
+
+        public string periodo { get; set; }
+
     }
 }
