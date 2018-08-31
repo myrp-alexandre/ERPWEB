@@ -13,13 +13,15 @@ using System.Xml.Serialization;
 using System.Xml;
 using System.Text;
 using DevExpress.Web.Mvc;
+using DevExpress.Web;
+using DevExpress.Utils;
 
 namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 {
     public class ATSController : Controller
     {
         ats_Bus bus_ats = new ats_Bus();
-
+        
         // GET: CuentasPorPagar/ATS
         public ActionResult Index()
         {
@@ -41,8 +43,6 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         public ActionResult Nuevo(ats_Info model)
         {
 
-            var files = UploadControlExtension.GetUploadedFiles("UploadControl", HomeControllerControllerUploadControlSettings.UploadControlValidationSettings, FileUploadComplete);
-
             model.info_periodo.IdPeriodo =Convert.ToInt32( Session["IdPeriodo"]) ;
             bus_ats = new ats_Bus();
             string nombre_file = model.info_periodo.IdPeriodo.ToString();
@@ -58,7 +58,6 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             var ms = new MemoryStream();
             var xw = XmlWriter.Create(ms);
             string patch = Path.Combine(Server.MapPath("~/Content/file"), nombre_file);
-
 
 
             var serializer = new XmlSerializer(ats.GetType());
@@ -80,6 +79,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
                 file.WriteLine(xml);
                 file.Close();
                 byte[] fileBytes = System.IO.File.ReadAllBytes(patch + ".xml");
+                
                 patch = patch + ".xml";
                 return File(Encoding.UTF8.GetBytes(xml), "application/xml", nombre_file+".xml");
             }
@@ -157,7 +157,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             string nombre_file = info.info_periodo.IdPeriodo.ToString();
             if (info.info_periodo.IdPeriodo.ToString().Length == 6)
             {
-              nombre_file = "AT-" + info.info_periodo.IdPeriodo.ToString().Substring(4, 2) + info.info_periodo.IdPeriodo.ToString().Substring(0, 4);
+                nombre_file = "AT-" + info.info_periodo.IdPeriodo.ToString().Substring(4, 2) + info.info_periodo.IdPeriodo.ToString().Substring(0, 4);
             }
             string xml = "";
             iva ats = new iva();
@@ -166,34 +166,23 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             ats = bus_ats.get_ats(IdEmpresa, info.info_periodo.IdPeriodo, IdSucursal);
             var ms = new MemoryStream();
             var xw = XmlWriter.Create(ms);
-            string patch = Path.Combine(Server.MapPath("~/Content/file"), nombre_file);
-
-
 
             var serializer = new XmlSerializer(ats.GetType());
             XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
             ns.Add("", "");
-            serializer.Serialize(xw, ats,ns);
+            serializer.Serialize(xw, ats, ns);
             xw.Flush();
             ms.Seek(0, SeekOrigin.Begin);
             using (var sr = new StreamReader(ms, Encoding.UTF8))
-             {
-               xml=  sr.ReadToEnd();
-              }
-
-
-            if (System.IO.File.Exists(patch + ".xml"))
-                System.IO.File.Delete(patch + ".xml");
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(patch + ".xml", true))
             {
-                file.WriteLine(xml);
-                file.Close();
-                byte[] fileBytes = System.IO.File.ReadAllBytes(patch  + ".xml");
-                patch= patch + ".xml";
-                return File(Encoding.UTF8.GetBytes(xml), "application/xml", patch);
+                xml = sr.ReadToEnd();
+                byte[] byt = Convert.FromBase64String(xml);
             }
 
-        }
+                return File(Encoding.UTF8.GetBytes(xml), "application/xml", "");
+            }
+
+        
         #endregion
 
         public class HomeControllerControllerUploadControlSettings
@@ -203,13 +192,6 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
                 MaxFileSize = 4194304
             };
         }
-
-        public void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
-        {
-            if (e.UploadedFile.IsValid)
-            {
-                //Por ahora no se como funciona esto
-            }
-        }
+    
     }
 }

@@ -14,7 +14,7 @@ namespace Core.Erp.Data.Helps
    public class FilesHelper
     {
         
-        public static void Guardar_xml(UploadedFile file, string nom_archivo,string ftp_url, string ftp_usuario, string ftp_contrasenia)
+        public  void Guardar_xml(byte[] buffer, string nom_archivo,string ftp_url, string ftp_usuario, string ftp_contrasenia)
         {
             try
             {
@@ -41,8 +41,7 @@ namespace Core.Erp.Data.Helps
                 #endregion
 
                 #region Enviar imágen
-                Stream streamObj = file.FileContent;
-                byte[] buffer = new byte[file.ContentLength];
+                Stream streamObj = System.IO.Stream.Null;
                 streamObj.Read(buffer, 0, buffer.Length);
                 streamObj.Close();
                 streamObj = null;
@@ -61,7 +60,7 @@ namespace Core.Erp.Data.Helps
                 throw new Exception(ex.Message);
             }
         }
-        public static string  get_list_directory(string nom_archivo)
+        public  string  Get_ATS(string nom_archivo)
         {
             try
             {
