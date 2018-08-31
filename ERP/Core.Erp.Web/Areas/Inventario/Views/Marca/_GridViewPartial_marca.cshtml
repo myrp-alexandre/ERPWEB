@@ -6,7 +6,9 @@
         settings.CallbackRouteValues = new { Controller = "Marca", Action = "GridViewPartial_marca" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdMarca";
-
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;

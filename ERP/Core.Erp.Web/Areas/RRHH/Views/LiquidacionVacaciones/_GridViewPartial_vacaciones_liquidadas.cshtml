@@ -8,6 +8,10 @@
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdLiquidacion";
 
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
@@ -91,7 +95,15 @@
         });
         settings.Columns.Add("Periodo","Periodo").Width = Unit.Percentage(20);
 
-
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Reporte";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ROL_006", "RRHHReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdEmpleado = DataBinder.Eval(c.DataItem, "IdEmpleado")  }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
+        });
 
     });
 }

@@ -6,7 +6,9 @@
         settings.CallbackRouteValues = new { Controller = "TipoComprobante", Action = "GridViewPartial_comprobante_tipo" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdTipoCbte";
-
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;

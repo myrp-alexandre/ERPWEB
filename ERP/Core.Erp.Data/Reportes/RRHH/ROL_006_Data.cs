@@ -51,6 +51,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  Iess = q.Iess
                              }).ToList();
                 }
+                Lista.ForEach(v => v.periodo = v.Anio.ToString() + "-" + v.Mes.ToString());
                 return Lista;
             }
             catch (Exception)

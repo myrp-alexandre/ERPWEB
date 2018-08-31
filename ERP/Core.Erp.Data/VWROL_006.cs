@@ -44,5 +44,7 @@ namespace Core.Erp.Data
         public double Total_Vacaciones { get; set; }
         public double Valor_Cancelar { get; set; }
         public Nullable<double> Iess { get; set; }
+
+
     }
 }
