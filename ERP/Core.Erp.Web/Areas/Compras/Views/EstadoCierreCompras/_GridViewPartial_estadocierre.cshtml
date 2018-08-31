@@ -6,7 +6,9 @@
         settings.CallbackRouteValues = new { Controller = "EstadoCierreCompras", Action = "GridViewPartial_estadocierre" };
         settings.KeyFieldName = "IdEstado_cierre";
         settings.Width = Unit.Percentage(100);
-
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;

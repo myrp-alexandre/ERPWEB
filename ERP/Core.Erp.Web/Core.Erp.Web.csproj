@@ -8800,7 +8800,7 @@
     <Content Include="Areas\Banco\Views\ChequeBanco\_CmbPersona_ChequeBanco.cshtml" />
     <Content Include="Areas\Banco\Views\ChequeBanco\_GridViewPartial_cheque_op_x_cruzar.cshtml" />
     <Content Include="Areas\Banco\Views\ChequeBanco\_GridViewPartial_cheque_op.cshtml" />
-    <Content Include="Areas\Reportes\Views\RRHHReportes\ROl_014.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_014.cshtml" />
     <Content Include="Areas\Banco\Views\NotaDeDebitoBanco\Nuevo.cshtml" />
     <Content Include="Areas\Banco\Views\NotaDeDebitoBanco\Modificar.cshtml" />
     <Content Include="Areas\Banco\Views\NotaDeDebitoBanco\Index.cshtml" />
@@ -9164,7 +9164,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
