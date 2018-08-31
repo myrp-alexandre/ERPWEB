@@ -30,25 +30,21 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdActijoFijoTipo">Tipo activo*</label>
                             @Html.DropDownListFor(q => q.IdActivoFijoTipo, new SelectList(ViewBag.lst_activo, "IdActivoFijoTipo", "Af_Descripcion"), new { @class = "form-control", @id = "IdActivoFijoTipo" })
                             @Html.ValidationMessageFor(q => q.IdActivoFijoTipo, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdCategoriaAF">Categoría*</label>
                             @Html.DropDownListFor(q => q.IdCategoriaAF, new SelectList(ViewBag.lst_categoria, "IdCategoriaAF", "Descripcion"), new { @class = "form-control", @id = "IdCategoriaAF" })
                             @Html.ValidationMessageFor(q => q.IdCategoriaAF, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="Estado_Proceso">Estado proceso</label>
                             @Html.DropDownListFor(q => q.Estado_Proceso, new SelectList(ViewBag.lst_estado, "IdCatalogo", "Descripcion"), new { @class = "form-control" })

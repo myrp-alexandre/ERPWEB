@@ -16,7 +16,6 @@ namespace Core.Erp.Info.Helps
         public bool mostrar_registros_0 { get; set; }
         public string IdCtaCble { get; set; }
         public decimal IdCliente { get; set; }
-        public DateTime fecha_corte { get; set; }
 
 
         #region Filtros inventario
@@ -59,7 +58,6 @@ namespace Core.Erp.Info.Helps
         {
             fecha_ini = DateTime.Now.Date.AddMonths(-1);
             fecha_fin = DateTime.Now.Date;
-            fecha_corte = DateTime.Now.Date;
         }
 
     }
