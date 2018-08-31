@@ -7,7 +7,10 @@
         settings.CallbackRouteValues = new { Controller = "TipoNotaBanco", Action = "GridViewPartial_tipo_nota" };
         settings.KeyFieldName = "IdTipoNota";
         settings.Width = Unit.Percentage(100);
-        //CConfiguracion responsive
+
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;//CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;

@@ -6,7 +6,9 @@
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdanioFiscal";
 
-
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
@@ -60,7 +62,7 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "af_estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdanioFiscal = DataBinder.Eval(tc.DataItem, "IdanioFiscal") }) + "&nbsp;" + 
+                Html.ActionLink("Modificar", "Modificar", new { IdanioFiscal = DataBinder.Eval(tc.DataItem, "IdanioFiscal") }) + "&nbsp;" +
                         Html.ActionLink("Anular", "Anular", new { IdanioFiscal = DataBinder.Eval(tc.DataItem, "IdanioFiscal") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );

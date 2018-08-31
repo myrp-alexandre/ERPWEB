@@ -6,6 +6,9 @@
         settings.Name = "GridView_talonario_cheque";
         settings.CallbackRouteValues = new { Controller = "TalonarioChequeBanco", Action = "GridViewPartial_talonario_cheque" };
 
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         settings.KeyFieldName = "IdBanco";
         settings.Width = Unit.Percentage(100);
         //CConfiguracion responsive

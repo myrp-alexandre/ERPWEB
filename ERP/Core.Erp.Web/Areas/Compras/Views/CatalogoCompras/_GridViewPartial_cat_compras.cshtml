@@ -6,6 +6,9 @@
         settings.CallbackRouteValues = new { Controller = "CatalogoCompras", Action = "GridViewPartial_cat_compras", IdCatalogocompra_tipo = ViewBag.IdCatalogocompra_tipo };
         settings.KeyFieldName = "IdCatalogocompra";
         settings.Width = Unit.Percentage(100);
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
 
         //CConfiguracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
