@@ -10,5 +10,6 @@ namespace Core.Erp.Bus.General
     class tbl_usuario_ftp_Bus
     {
         tbl_usuario_ftp_Data odata = new tbl_usuario_ftp_Data();
+
     }
 }
