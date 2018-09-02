@@ -1,10 +1,6 @@
-﻿using System;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
-using DevExpress.XtraReports.UI;
-using Core.Erp.Bus.Reportes.Contabilidad;
+﻿using Core.Erp.Bus.Reportes.Contabilidad;
 using Core.Erp.Info.Reportes.Contabilidad;
+using System;
 using System.Collections.Generic;
 
 namespace Core.Erp.Web.Reportes.Contabilidad

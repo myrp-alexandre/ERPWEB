@@ -122,6 +122,7 @@ namespace Core.Erp.Info.Helps
 
     public class cl_filtros_contabilidad_Info
     {
+        public int IdEmpresa { get; set; }
         public int IdAnio { get; set; }
         public int IdNivel { get; set; }
         public string balance { get; set; }
