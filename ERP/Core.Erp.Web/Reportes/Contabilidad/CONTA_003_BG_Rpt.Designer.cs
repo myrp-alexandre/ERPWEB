@@ -36,8 +36,8 @@
             this.xrTable4 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow10 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell34 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell35 = new DevExpress.XtraReports.UI.XRTableCell();
             this.fr_negrita = new DevExpress.XtraReports.UI.FormattingRule();
+            this.xrTableCell35 = new DevExpress.XtraReports.UI.XRTableCell();
             this.fr_padding = new DevExpress.XtraReports.UI.FormattingRule();
             this.xrTableCell19 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell36 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -158,6 +158,12 @@
             this.xrTableCell34.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.xrTableCell34.Weight = 0.4D;
             // 
+            // fr_negrita
+            // 
+            this.fr_negrita.Condition = "[EsCuentaMovimiento]=0";
+            this.fr_negrita.Formatting.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fr_negrita.Name = "fr_negrita";
+            // 
             // xrTableCell35
             // 
             this.xrTableCell35.Borders = DevExpress.XtraPrinting.BorderSide.None;
@@ -174,12 +180,6 @@
             this.xrTableCell35.StylePriority.UseTextAlignment = false;
             this.xrTableCell35.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.xrTableCell35.Weight = 1.8D;
-            // 
-            // fr_negrita
-            // 
-            this.fr_negrita.Condition = "[EsCuentaMovimiento]=0";
-            this.fr_negrita.Formatting.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fr_negrita.Name = "fr_negrita";
             // 
             // fr_padding
             // 
@@ -587,6 +587,8 @@
             // xrTableCell17
             // 
             this.xrTableCell17.Borders = DevExpress.XtraPrinting.BorderSide.Top;
+            this.xrTableCell17.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "PASPAT")});
             this.xrTableCell17.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([PASPAT])")});
             this.xrTableCell17.Font = new System.Drawing.Font("Verdana", 7F);
@@ -742,8 +744,8 @@
             // 
             // PASPAT
             // 
-            this.PASPAT.Expression = "Iif([EsCuentaMovimiento] = 1, \nIif([IdGrupoCble] = \'PATRI\',[SaldoFinal], Iif([IdG" +
-    "rupoCble] = \'PASIV\', [SaldoFinal],0 ) ), 0)";
+            this.PASPAT.Expression = "Iif([EsCuentaMovimiento] = 1, \nIif([IdGrupoCble] = \'PATRI\',[SaldoFinalNaturaleza]" +
+    ", Iif([IdGrupoCble] = \'PASIV\', [SaldoFinalNaturaleza],0 ) ), 0)";
             this.PASPAT.Name = "PASPAT";
             // 
             // ACT
