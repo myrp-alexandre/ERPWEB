@@ -9074,6 +9074,7 @@
     <Content Include="Areas\Compras\Views\MotivoCompra\Nuevo.cshtml" />
     <Content Include="Areas\Compras\Views\MotivoCompra\Modificar.cshtml" />
     <Content Include="Areas\Compras\Views\MotivoCompra\Anular.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_011.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -9188,6 +9189,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

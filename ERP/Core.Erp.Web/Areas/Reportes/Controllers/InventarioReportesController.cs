@@ -594,6 +594,22 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
+
+
+        public ActionResult INV_011(int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0)
+        {
+            INV_011_Rpt model = new INV_011_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdSucursal.Value = IdSucursal;
+            model.p_IdMovi_inven_tipo.Value = IdMovi_inven_tipo;
+            model.p_IdNumMovi.Value = IdNumMovi;
+            model.usuario = Session["IdUsuario"].ToString();
+            model.empresa = Session["nom_empresa"].ToString();
+            if (IdNumMovi == 0)
+                model.RequestParameters = false;
+            return View(model);
+        }
+
     }
 
 }
