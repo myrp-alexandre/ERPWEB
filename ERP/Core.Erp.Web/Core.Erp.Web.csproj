@@ -9058,7 +9058,7 @@
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionComisiones\Modificar.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionComisiones\Anular.cshtml" />
     <Content Include="Areas\Compras\Views\OrdenCompraLocal\Index.cshtml" />
-    <Content Include="Areas\Compras\Views\OrdenCompraLocal\_GridViewPartial_ordenCompra.cshtml" />
+    <Content Include="Areas\Compras\Views\OrdenCompraLocal\_GridViewPartial_ordencompralocal.cshtml" />
     <Content Include="Areas\Compras\Views\OrdenCompraLocal\Nuevo.cshtml" />
     <Content Include="Areas\Compras\Views\OrdenCompraLocal\Modificar.cshtml" />
     <Content Include="Areas\Compras\Views\OrdenCompraLocal\Anular.cshtml" />

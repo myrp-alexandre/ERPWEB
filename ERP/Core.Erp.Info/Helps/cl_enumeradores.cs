@@ -135,7 +135,8 @@
         public enum eTipoCatalogoCOM
         {
             EST_ANU = 1,
-            EST_APRO = 3
+            EST_APRO = 3,
+            EST_REC= 18
         }
 
 
