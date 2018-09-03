@@ -272,6 +272,7 @@
     <Compile Include="Areas\CuentasPorCobrar\Controllers\CatalogoTipoCXCController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\CobranzaController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\CobranzaRetencionesController.cs" />
+    <Compile Include="Areas\CuentasPorCobrar\Controllers\LiquidacionComisionesController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\ParametroCXCController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\TipoCobroController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\CuentasPorCobrarAreaRegistration.cs" />
@@ -9050,6 +9051,11 @@
     <Content Include="Areas\Compras\Views\TerminoPagoCompras\Nuevo.cshtml" />
     <Content Include="Areas\Compras\Views\TerminoPagoCompras\Modificar.cshtml" />
     <Content Include="Areas\Compras\Views\TerminoPagoCompras\Anular.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionComisiones\Index.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionComisiones\_GridViewPartial_liquidacion_com.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionComisiones\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionComisiones\Modificar.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionComisiones\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
