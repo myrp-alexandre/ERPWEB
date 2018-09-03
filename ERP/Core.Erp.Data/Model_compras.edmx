@@ -85,6 +85,23 @@
           <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="25" />
           <Property Name="MotivoAnulacion" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="com_Motivo_Orden_Compra">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMotivo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdMotivo" Type="int" Nullable="false" />
+          <Property Name="Cod_Motivo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="FechaHoraAnul" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="MotivoAnulacion" Type="varchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="com_ordencompra_local">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -227,6 +244,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_com_ordencompra_local_com_Motivo_Orden_Compra">
+          <End Role="com_Motivo_Orden_Compra" Type="Self.com_Motivo_Orden_Compra" Multiplicity="0..1" />
+          <End Role="com_ordencompra_local" Type="Self.com_ordencompra_local" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="com_Motivo_Orden_Compra">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMotivo" />
+            </Principal>
+            <Dependent Role="com_ordencompra_local">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMotivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_com_ordencompra_local_com_TerminoPago">
           <End Role="com_TerminoPago" Type="Self.com_TerminoPago" Multiplicity="1" />
           <End Role="com_ordencompra_local" Type="Self.com_ordencompra_local" Multiplicity="*" />
@@ -281,6 +312,7 @@
           <EntitySet Name="com_comprador" EntityType="Self.com_comprador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="com_departamento" EntityType="Self.com_departamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="com_estado_cierre" EntityType="Self.com_estado_cierre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="com_Motivo_Orden_Compra" EntityType="Self.com_Motivo_Orden_Compra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="com_ordencompra_local" EntityType="Self.com_ordencompra_local" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="com_parametro" EntityType="Self.com_parametro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="com_TerminoPago" EntityType="Self.com_TerminoPago" Schema="dbo" store:Type="Tables" />
@@ -306,6 +338,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_com_ordencompra_local_com_estado_cierre" Association="Self.FK_com_ordencompra_local_com_estado_cierre">
             <End Role="com_estado_cierre" EntitySet="com_estado_cierre" />
+            <End Role="com_ordencompra_local" EntitySet="com_ordencompra_local" />
+          </AssociationSet>
+          <AssociationSet Name="FK_com_ordencompra_local_com_Motivo_Orden_Compra" Association="Self.FK_com_ordencompra_local_com_Motivo_Orden_Compra">
+            <End Role="com_Motivo_Orden_Compra" EntitySet="com_Motivo_Orden_Compra" />
             <End Role="com_ordencompra_local" EntitySet="com_ordencompra_local" />
           </AssociationSet>
           <AssociationSet Name="FK_com_ordencompra_local_com_TerminoPago" Association="Self.FK_com_ordencompra_local_com_TerminoPago">
@@ -376,6 +412,11 @@
           <EntitySet Name="com_TerminoPago" EntityType="Model_compras.com_TerminoPago" />
           <AssociationSet Name="FK_com_ordencompra_local_com_TerminoPago" Association="Model_compras.FK_com_ordencompra_local_com_TerminoPago">
             <End Role="com_TerminoPago" EntitySet="com_TerminoPago" />
+            <End Role="com_ordencompra_local" EntitySet="com_ordencompra_local" />
+          </AssociationSet>
+          <EntitySet Name="com_Motivo_Orden_Compra" EntityType="Model_compras.com_Motivo_Orden_Compra" />
+          <AssociationSet Name="FK_com_ordencompra_local_com_Motivo_Orden_Compra" Association="Model_compras.FK_com_ordencompra_local_com_Motivo_Orden_Compra">
+            <End Role="com_Motivo_Orden_Compra" EntitySet="com_Motivo_Orden_Compra" />
             <End Role="com_ordencompra_local" EntitySet="com_ordencompra_local" />
           </AssociationSet>
         </EntityContainer>
@@ -576,6 +617,7 @@
           <NavigationProperty Name="com_departamento" Relationship="Model_compras.FK_com_ordencompra_local_com_departamento" FromRole="com_ordencompra_local" ToRole="com_departamento" />
           <NavigationProperty Name="com_estado_cierre" Relationship="Model_compras.FK_com_ordencompra_local_com_estado_cierre" FromRole="com_ordencompra_local" ToRole="com_estado_cierre" />
           <NavigationProperty Name="com_TerminoPago" Relationship="Model_compras.FK_com_ordencompra_local_com_TerminoPago" FromRole="com_ordencompra_local" ToRole="com_TerminoPago" />
+          <NavigationProperty Name="com_Motivo_Orden_Compra" Relationship="Model_compras.FK_com_ordencompra_local_com_Motivo_Orden_Compra" FromRole="com_ordencompra_local" ToRole="com_Motivo_Orden_Compra" />
         </EntityType>
         <Association Name="FK_com_ordencompra_local_com_catalogo">
           <End Type="Model_compras.com_catalogo" Role="com_catalogo" Multiplicity="1" />
@@ -666,6 +708,38 @@
             </Principal>
             <Dependent Role="com_ordencompra_local">
               <PropertyRef Name="IdTerminoPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="com_Motivo_Orden_Compra">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMotivo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMotivo" Type="Int32" Nullable="false" />
+          <Property Name="Cod_Motivo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaHoraAnul" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="com_ordencompra_local" Relationship="Model_compras.FK_com_ordencompra_local_com_Motivo_Orden_Compra" FromRole="com_Motivo_Orden_Compra" ToRole="com_ordencompra_local" />
+        </EntityType>
+        <Association Name="FK_com_ordencompra_local_com_Motivo_Orden_Compra">
+          <End Type="Model_compras.com_Motivo_Orden_Compra" Role="com_Motivo_Orden_Compra" Multiplicity="0..1" />
+          <End Type="Model_compras.com_ordencompra_local" Role="com_ordencompra_local" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="com_Motivo_Orden_Compra">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMotivo" />
+            </Principal>
+            <Dependent Role="com_ordencompra_local">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMotivo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -822,6 +896,23 @@
                 <ScalarProperty Name="Dias" ColumnName="Dias" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdTerminoPago" ColumnName="IdTerminoPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="com_Motivo_Orden_Compra">
+            <EntityTypeMapping TypeName="Model_compras.com_Motivo_Orden_Compra">
+              <MappingFragment StoreEntitySet="com_Motivo_Orden_Compra">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="FechaHoraAnul" ColumnName="FechaHoraAnul" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Cod_Motivo" ColumnName="Cod_Motivo" />
+                <ScalarProperty Name="IdMotivo" ColumnName="IdMotivo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

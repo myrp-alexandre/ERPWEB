@@ -23,6 +23,8 @@
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_com_estado_cierre" />
         <EntityTypeShape EntityType="Model_compras.com_TerminoPago" Width="1.5" PointX="0.75" PointY="9" />
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_com_TerminoPago" />
+        <EntityTypeShape EntityType="Model_compras.com_Motivo_Orden_Compra" Width="1.5" PointX="5.375" PointY="11" />
+        <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_com_Motivo_Orden_Compra" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
