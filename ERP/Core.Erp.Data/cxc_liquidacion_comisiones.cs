@@ -12,19 +12,20 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class cxc_Catalogo
+    public partial class cxc_liquidacion_comisiones
     {
-        public string IdCatalogo { get; set; }
-        public string IdCatalogo_tipo { get; set; }
-        public string Nombre { get; set; }
-        public string Estado { get; set; }
-        public Nullable<int> Orden { get; set; }
+        public int IdEmpresa { get; set; }
+        public decimal IdLiquidacion { get; set; }
+        public System.DateTime Fecha { get; set; }
+        public string Observacion { get; set; }
+        public Nullable<int> IdVendedor { get; set; }
+        public bool Estado { get; set; }
         public string IdUsuario { get; set; }
+        public Nullable<System.DateTime> FechaTransac { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> FechaUltMod { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
-    
-        public virtual cxc_CatalogoTipo cxc_CatalogoTipo { get; set; }
+        public string IdUsuarioUltAnu { get; set; }
+        public Nullable<System.DateTime> FechaUltAnu { get; set; }
+        public string MotivoAnulacion { get; set; }
     }
 }

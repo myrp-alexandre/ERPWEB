@@ -122,6 +122,7 @@
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_motivo_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Param_conta_x_sucursal_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_liquidacion_comisiones_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_Parametro_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_tipo_Info.cs" />

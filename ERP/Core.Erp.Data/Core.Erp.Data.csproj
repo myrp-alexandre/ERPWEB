@@ -352,6 +352,7 @@
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_motivo_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Param_conta_x_sucursal_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_liquidacion_comisiones_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_Parametro_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_tipo_Data.cs" />
@@ -401,6 +402,9 @@
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="cxc_cobro_x_ct_cbtecble.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cxc_liquidacion_comisiones.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="cxc_Parametro.cs">
