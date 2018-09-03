@@ -8,11 +8,6 @@ namespace Core.Erp.Info.CuentasPorPagar
         public decimal IdCbteCble_Ogiro { get; set; }
         public int IdTipoCbte_Ogiro { get; set; }
         public int Secuencia { get; set; }
-        public int ing_IdEmpresa { get; set; }
-        public int ing_IdSucursal { get; set; }
-        public int ing_IdMovi_inven_tipo { get; set; }
-        public decimal ing_IdNumMovi { get; set; }
-        public int ing_Secuencia { get; set; }
         [Required(ErrorMessage = "El campo producto es obligatorio")]
         [Range(0.01,long.MaxValue, ErrorMessage = "El campo producto es obligatorio")]
         public decimal IdProducto { get; set; }

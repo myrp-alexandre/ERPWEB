@@ -131,17 +131,22 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             i_validar.lst_det = List_det.get_list(i_validar.IdTransaccionSession);
             if (i_validar.lst_det.Count == 0)
             {
-                msg = "No ha ingresado registros en el detalle de la proforma";
+                msg = "No ha ingresado registros en el detalle de la factura";
                 return false;
             }
             if (i_validar.lst_det.Where(q => q.vt_cantidad == 0).Count() > 0)
             {
-                msg = "Existen registros con cantidad 0 en el detalle de la proforma";
+                msg = "Existen registros con cantidad 0 en el detalle de la factura";
                 return false;
             }
             if (i_validar.lst_det.Where(q => q.IdProducto == 0).Count() > 0)
             {
-                msg = "Existen registros sin producto en el detalle de la proforma";
+                msg = "Existen registros sin producto en el detalle de la factura";
+                return false;
+            }
+            if (i_validar.lst_det.Sum(q=>q.vt_total) == 0)
+            {
+                msg = "La factura no tiene valor, por favor revise";
                 return false;
             }
 
@@ -169,7 +174,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 }
                 if (bus_factura.factura_existe(i_validar.IdEmpresa,i_validar.vt_serie1,i_validar.vt_serie2,i_validar.vt_NumFactura))
                 {
-                    msg = "Existe una factura con el talonario: " + i_validar.vt_serie1 + "-" + i_validar.vt_serie2 + "-" + i_validar.vt_NumFactura + " utilizado.";
+                    msg = "Existe una factura registrada con el número: " + i_validar.vt_serie1 + "-" + i_validar.vt_serie2 + "-" + i_validar.vt_NumFactura + ".";
                     return false;
                 }                
             }

@@ -68,8 +68,11 @@
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_giro_cp_proveedor" />
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_giro_pagos_sri_cp_orden_giro" />
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_retencion_cp_orden_giro" />
-        <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_orden_giro_det" Width="1.5" PointX="12.75" PointY="29.25" />
+        <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_orden_giro_det" Width="1.5" PointX="12.75" PointY="47.5" />
+        <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_orden_giro_x_in_Ing_Egr_Inven" Width="1.5" PointX="12.75" PointY="32.125" />
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_giro_det_cp_orden_giro" />
+        <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_giro_x_in_Ing_Egr_Inven_cp_orden_giro" />
+        <EntityTypeShape EntityType="Model_cuentas_por_pagar.vwcp_orden_giro_det" Width="1.5" PointX="16.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

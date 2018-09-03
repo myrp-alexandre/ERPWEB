@@ -15,7 +15,7 @@ namespace Core.Erp.Data.CuentasPorPagar
 
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
-                    Lista = (from q in Context.cp_orden_giro_det
+                    Lista = (from q in Context.vwcp_orden_giro_det
                              where q.IdEmpresa == IdEmpresa
                               && q.IdTipoCbte_Ogiro == IdTipoCbte_Ogiro
                               && q.IdCbteCble_Ogiro == IdCbteCble_Ogiro
@@ -25,11 +25,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  IdCbteCble_Ogiro = q.IdCbteCble_Ogiro,
                                  IdTipoCbte_Ogiro = q.IdTipoCbte_Ogiro,
                                  Secuencia = q.Secuencia,
-                                 ing_IdEmpresa = q.ing_IdEmpresa,
-                                 ing_IdSucursal = q.ing_IdSucursal,
-                                 ing_IdMovi_inven_tipo = q.ing_IdMovi_inven_tipo,
-                                 ing_IdNumMovi = q.ing_IdNumMovi,
-                                 ing_Secuencia = q.ing_Secuencia,
                                  IdProducto = q.IdProducto,
                                  Cantidad = q.Cantidad,
                                  CostoUni = q.CostoUni,
@@ -42,7 +37,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  ValorIva = q.ValorIva,
                                  Total = q.Total,
                                  IdCtaCbleGasto = q.IdCtaCbleGasto,
-                                 IdUnidadMedida = q.IdUnidadMedida
+                                 IdUnidadMedida = q.IdUnidadMedida,
+                                 pr_descripcion = q.pr_descripcion
                              }).ToList();
                 }
 

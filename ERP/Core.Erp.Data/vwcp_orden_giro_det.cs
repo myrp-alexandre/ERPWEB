@@ -12,7 +12,7 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class cp_orden_giro_det
+    public partial class vwcp_orden_giro_det
     {
         public int IdEmpresa { get; set; }
         public decimal IdCbteCble_Ogiro { get; set; }
@@ -31,7 +31,6 @@ namespace Core.Erp.Data
         public double ValorIva { get; set; }
         public double Total { get; set; }
         public string IdCtaCbleGasto { get; set; }
-    
-        public virtual cp_orden_giro cp_orden_giro { get; set; }
+        public string pr_descripcion { get; set; }
     }
 }
