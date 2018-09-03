@@ -76,6 +76,7 @@
     <Compile Include="Compras\com_comprador_Bus.cs" />
     <Compile Include="Compras\com_departamento_Bus.cs" />
     <Compile Include="Compras\com_estado_cierre_Bus.cs" />
+    <Compile Include="Compras\com_ordencompra_local_Bus.cs" />
     <Compile Include="Compras\com_parametro_Bus.cs" />
     <Compile Include="Compras\com_TerminoPago_Bus.cs" />
     <Compile Include="Contabilidad\ats_Bus.cs" />
