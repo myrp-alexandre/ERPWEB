@@ -1,0 +1,69 @@
+﻿@model Core.Erp.Info.CuentasPorCobrar.cxc_liquidacion_comisiones_Info
+@{
+    ViewBag.Title = "Nueva liquidación";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+
+@using (Html.BeginForm("Nuevo", "LiquidacionComisiones", FormMethod.Post, new { @role = "form", @class = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdLiquidacion)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdVendedor">Vendedor*</label>
+                    @Html.DropDownListFor(q => q.IdVendedor, new SelectList(ViewBag.lst_vendedor, "IdVendedor", "Ve_Vendedor"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdVendedor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class=" col-md-offset-4 col-md-2 ">
+                <div class="form-group">
+                    <label for="">Fecha*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.Fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha" })
+                        @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Observacion">Observación</label>
+                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","LiquidacionComisiones", new {  Area = "CuentasPorCobrar"  },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+<script>
+    $(function () {
+        //Date picker
+        $('#Fecha').datepicker({
+            autoclose: true
+        })
+
+    });
+</script>

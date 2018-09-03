@@ -14,6 +14,11 @@ namespace Core.Erp.Data
     
     public partial class com_departamento
     {
+        public com_departamento()
+        {
+            this.com_ordencompra_local = new HashSet<com_ordencompra_local>();
+        }
+    
         public int IdEmpresa { get; set; }
         public decimal IdDepartamento { get; set; }
         public string nom_departamento { get; set; }
@@ -25,5 +30,7 @@ namespace Core.Erp.Data
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotiAnula { get; set; }
+    
+        public virtual ICollection<com_ordencompra_local> com_ordencompra_local { get; set; }
     }
 }

@@ -80,74 +80,42 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-        public ActionResult CONTA_003(bool balance = false)
+        public ActionResult CONTA_003()
         {
             cl_filtros_contabilidad_Info model = new cl_filtros_contabilidad_Info
             {
-                IdNivel = 6
+                IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdNivel = 6,
+                balance = "ER"
             };
             model.IdAnio = model.fecha_fin.Year;
-            if (model.balance == "BG")
-            {
-                CONTA_003_BG_Rpt report = new CONTA_003_BG_Rpt();
-                report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
-                report.p_IdAnio.Value = model.IdAnio;
-                report.p_fechaIni.Value = model.fecha_ini;
-                report.p_fechaFin.Value = model.fecha_fin;
-                report.p_IdUsuario.Value = SessionFixed.IdUsuario;
-                report.p_IdNivel.Value = model.IdNivel;
-                report.p_mostrarSaldo0.Value = model.mostrar_saldos_en_0;
-                report.p_balance.Value = model.balance;
-                report.usuario = Session["IdUsuario"].ToString();
-                report.empresa = Session["nom_empresa"].ToString();
-                report.RequestParameters = false;
-                ViewBag.Report = report;
-            }
-            if (model.balance == "ER")
-            {
-                CONTA_003_ER_Rpt report = new CONTA_003_ER_Rpt();
-                report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
-                report.p_IdAnio.Value = model.IdAnio;
-                report.p_fechaIni.Value = model.fecha_ini;
-                report.p_fechaFin.Value = model.fecha_fin;
-                report.p_IdUsuario.Value = SessionFixed.IdUsuario;
-                report.p_IdNivel.Value = model.IdNivel;
-                report.p_mostrarSaldo0.Value = model.mostrar_saldos_en_0;
-                report.p_balance.Value = model.balance;
-                report.usuario = Session["IdUsuario"].ToString();
-                report.empresa = Session["nom_empresa"].ToString();
-                report.RequestParameters = false;
-                ViewBag.Report = report;
-            }
 
-            if (string.IsNullOrEmpty(model.balance))
-            {               
-                CONTA_003_BC_Rpt report = new CONTA_003_BC_Rpt();
-                report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
-                report.p_IdAnio.Value = model.IdAnio;
-                report.p_fechaIni.Value = model.fecha_ini;
-                report.p_fechaFin.Value = model.fecha_fin;
-                report.p_IdUsuario.Value = SessionFixed.IdUsuario;
-                report.p_IdNivel.Value = model.IdNivel;
-                report.p_mostrarSaldo0.Value = model.mostrar_saldos_en_0;
-                report.p_balance.Value = model.balance;
-                report.usuario = Session["IdUsuario"].ToString();
-                report.empresa = Session["nom_empresa"].ToString();
-                report.RequestParameters = false;
-                ViewBag.Report = report;
-            }
+            CONTA_003_ER_Rpt report = new CONTA_003_ER_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_fechaIni.Value = model.fecha_ini;
+            report.p_fechaFin.Value = model.fecha_fin;
+            report.p_IdUsuario.Value = SessionFixed.IdUsuario;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_mostrarSaldo0.Value = model.mostrar_saldos_en_0;
+            report.p_balance.Value = model.balance;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            report.RequestParameters = false;
+            ViewBag.Report = report;
+
             cargar_nivel();
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult CONTA_003(cl_filtros_contabilidad_Info model, bool balance = false)
+        public ActionResult CONTA_003(cl_filtros_contabilidad_Info model)
         {
             model.IdAnio = model.fecha_fin.Year;
             if (model.balance == "BG")
             {
                 CONTA_003_BG_Rpt report = new CONTA_003_BG_Rpt();
-                report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+                report.p_IdEmpresa.Value = model.IdEmpresa;
                 report.p_IdAnio.Value = model.IdAnio;
                 report.p_fechaIni.Value = model.fecha_ini;
                 report.p_fechaFin.Value = model.fecha_fin;
@@ -155,15 +123,15 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.p_IdNivel.Value = model.IdNivel;
                 report.p_mostrarSaldo0.Value = model.mostrar_saldos_en_0;
                 report.p_balance.Value = model.balance;
-                report.usuario = Session["IdUsuario"].ToString();
-                report.empresa = Session["nom_empresa"].ToString();
+                report.usuario = SessionFixed.IdUsuario;
+                report.empresa = SessionFixed.NomEmpresa;
                 report.RequestParameters = false;
                 ViewBag.Report = report;
             }
             if (model.balance == "ER")
             {
                 CONTA_003_ER_Rpt report = new CONTA_003_ER_Rpt();
-                report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+                report.p_IdEmpresa.Value = model.IdEmpresa;
                 report.p_IdAnio.Value = model.IdAnio;
                 report.p_fechaIni.Value = model.fecha_ini;
                 report.p_fechaFin.Value = model.fecha_fin;
@@ -171,8 +139,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.p_IdNivel.Value = model.IdNivel;
                 report.p_mostrarSaldo0.Value = model.mostrar_saldos_en_0;
                 report.p_balance.Value = model.balance;
-                report.usuario = Session["IdUsuario"].ToString();
-                report.empresa = Session["nom_empresa"].ToString();
+                report.usuario = SessionFixed.IdUsuario;
+                report.empresa = SessionFixed.NomEmpresa;
                 report.RequestParameters = false;
                 ViewBag.Report = report;
             }
@@ -180,7 +148,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             if (string.IsNullOrEmpty(model.balance))
             {
                 CONTA_003_BC_Rpt report = new CONTA_003_BC_Rpt();
-                report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+                report.p_IdEmpresa.Value = model.IdEmpresa;
                 report.p_IdAnio.Value = model.IdAnio;
                 report.p_fechaIni.Value = model.fecha_ini;
                 report.p_fechaFin.Value = model.fecha_fin;
@@ -188,8 +156,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.p_IdNivel.Value = model.IdNivel;
                 report.p_mostrarSaldo0.Value = model.mostrar_saldos_en_0;
                 report.p_balance.Value = model.balance;
-                report.usuario = Session["IdUsuario"].ToString();
-                report.empresa = Session["nom_empresa"].ToString();
+                report.usuario = SessionFixed.IdUsuario;
+                report.empresa = SessionFixed.NomEmpresa;
                 report.RequestParameters = false;
                 ViewBag.Report = report;
             }

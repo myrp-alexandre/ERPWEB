@@ -76,6 +76,8 @@
     <Compile Include="Compras\com_comprador_Info.cs" />
     <Compile Include="Compras\com_departamento_Info.cs" />
     <Compile Include="Compras\com_estado_cierre_Info.cs" />
+    <Compile Include="Compras\com_Motivo_Orden_Compra_Info.cs" />
+    <Compile Include="Compras\com_ordencompra_local_Info.cs" />
     <Compile Include="Compras\com_parametro_Info.cs" />
     <Compile Include="Compras\com_TerminoPago_Info.cs" />
     <Compile Include="Contabilidad\ATS\ATS_Info\ats_Info.cs" />
@@ -122,6 +124,7 @@
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_motivo_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Param_conta_x_sucursal_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_liquidacion_comisiones_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_Parametro_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_tipo_Info.cs" />

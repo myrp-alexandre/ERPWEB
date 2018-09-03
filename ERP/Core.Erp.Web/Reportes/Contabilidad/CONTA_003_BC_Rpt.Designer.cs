@@ -37,7 +37,9 @@
             this.xrTable4 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow9 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell18 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.fr_negrita = new DevExpress.XtraReports.UI.FormattingRule();
             this.xrTableCell19 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.fr_padding = new DevExpress.XtraReports.UI.FormattingRule();
             this.xrTableCell20 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell21 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell22 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -140,6 +142,7 @@
             this.xrTableCell18.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[IdCtaCble]")});
             this.xrTableCell18.Font = new System.Drawing.Font("Verdana", 7F);
+            this.xrTableCell18.FormattingRules.Add(this.fr_negrita);
             this.xrTableCell18.Name = "xrTableCell18";
             this.xrTableCell18.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
             this.xrTableCell18.StylePriority.UseBorders = false;
@@ -149,12 +152,20 @@
             this.xrTableCell18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.xrTableCell18.Weight = 0.41999998779296877D;
             // 
+            // fr_negrita
+            // 
+            this.fr_negrita.Condition = "[EsCuentaMovimiento]=0";
+            this.fr_negrita.Formatting.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fr_negrita.Name = "fr_negrita";
+            // 
             // xrTableCell19
             // 
             this.xrTableCell19.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTableCell19.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pc_Cuenta]")});
             this.xrTableCell19.Font = new System.Drawing.Font("Verdana", 7F);
+            this.xrTableCell19.FormattingRules.Add(this.fr_negrita);
+            this.xrTableCell19.FormattingRules.Add(this.fr_padding);
             this.xrTableCell19.Name = "xrTableCell19";
             this.xrTableCell19.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
             this.xrTableCell19.StylePriority.UseBorders = false;
@@ -164,12 +175,19 @@
             this.xrTableCell19.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.xrTableCell19.Weight = 1.8480000610351564D;
             // 
+            // fr_padding
+            // 
+            this.fr_padding.Condition = "[EsCuentaMovimiento]=1";
+            this.fr_padding.Formatting.Padding = new DevExpress.XtraPrinting.PaddingInfo(20, 0, 0, 0, 100F);
+            this.fr_padding.Name = "fr_padding";
+            // 
             // xrTableCell20
             // 
             this.xrTableCell20.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTableCell20.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SaldoInicialNaturaleza]")});
             this.xrTableCell20.Font = new System.Drawing.Font("Verdana", 7F);
+            this.xrTableCell20.FormattingRules.Add(this.fr_negrita);
             this.xrTableCell20.Name = "xrTableCell20";
             this.xrTableCell20.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
             this.xrTableCell20.StylePriority.UseBorders = false;
@@ -186,6 +204,7 @@
             this.xrTableCell21.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SaldoDebitosNaturaleza]")});
             this.xrTableCell21.Font = new System.Drawing.Font("Verdana", 7F);
+            this.xrTableCell21.FormattingRules.Add(this.fr_negrita);
             this.xrTableCell21.Name = "xrTableCell21";
             this.xrTableCell21.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
             this.xrTableCell21.StylePriority.UseBorders = false;
@@ -202,6 +221,7 @@
             this.xrTableCell22.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SaldoCreditosNaturaleza]")});
             this.xrTableCell22.Font = new System.Drawing.Font("Verdana", 7F);
+            this.xrTableCell22.FormattingRules.Add(this.fr_negrita);
             this.xrTableCell22.Name = "xrTableCell22";
             this.xrTableCell22.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
             this.xrTableCell22.StylePriority.UseBorders = false;
@@ -218,6 +238,7 @@
             this.xrTableCell23.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SaldoFinalNaturaleza]")});
             this.xrTableCell23.Font = new System.Drawing.Font("Verdana", 7F);
+            this.xrTableCell23.FormattingRules.Add(this.fr_negrita);
             this.xrTableCell23.Name = "xrTableCell23";
             this.xrTableCell23.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
             this.xrTableCell23.StylePriority.UseBorders = false;
@@ -739,6 +760,9 @@
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.objectDataSource1});
             this.DataSource = this.objectDataSource1;
+            this.FormattingRuleSheet.AddRange(new DevExpress.XtraReports.UI.FormattingRule[] {
+            this.fr_negrita,
+            this.fr_padding});
             this.Margins = new System.Drawing.Printing.Margins(38, 38, 38, 38);
             this.PageHeight = 1169;
             this.PageWidth = 827;
@@ -826,5 +850,7 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell13;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell15;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell24;
+        private DevExpress.XtraReports.UI.FormattingRule fr_negrita;
+        private DevExpress.XtraReports.UI.FormattingRule fr_padding;
     }
 }

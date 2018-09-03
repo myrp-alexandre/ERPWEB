@@ -5,7 +5,9 @@
         settings.Name = "GridView_deuda_det";
         settings.CallbackRouteValues = new { Controller = "Deudas", Action = "GridViewPartial_deudas_det", Area = "CuentasPorPagar" };
         settings.KeyFieldName = "Secuencia";
-
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Deudas", Action = "EditingAddNewDetalle", Area = "CuentasPorPagar" };
@@ -34,14 +36,14 @@
             e.NewValues["IdUnidadMedida"] = "UNID";
             e.NewValues["Cantidad"] = "";
             e.NewValues["CostoUni"] = "";
-            e.NewValues["PorDescuento"] = "";
+            e.NewValues["PorDescuento"] = "0";
         };
 
         settings.Columns.Add(column =>
         {
             column.FieldName = "pr_descripcion";
             column.Caption = "Producto";
-            column.Width = Unit.Percentage(60);
+            column.Width = Unit.Percentage(40);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
@@ -49,7 +51,7 @@
         {
             column.FieldName = "IdProducto";
             column.Caption = "Producto";
-            column.Width = Unit.Percentage(30);
+            column.Width = Unit.Percentage(40);
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
@@ -61,7 +63,7 @@
         {
             column.FieldName = "IdUnidadMedida";
             column.Caption = "U. de medida";
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().ComboBox(p =>
             {
@@ -76,7 +78,7 @@
         {
             column.FieldName = "Cantidad";
             column.Caption = "Cantidad";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().SpinEdit(p =>
             {
@@ -88,7 +90,7 @@
         {
             column.FieldName = "CostoUni";
             column.Caption = "Costo";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().SpinEdit(p =>
             {
@@ -100,7 +102,7 @@
         {
             column.FieldName = "PorDescuento";
             column.Caption = "% Dscto.";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().SpinEdit(p =>
             {
@@ -112,7 +114,7 @@
         {
             column.FieldName = "IdCod_Impuesto_Iva";
             column.Caption = "Impuesto";
-            column.Width = Unit.Percentage(60);
+            column.Width = Unit.Percentage(10);
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().ComboBox(p =>
@@ -158,6 +160,10 @@
         });
         settings.SettingsBehavior.AllowSort = false;
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Subtotal").DisplayFormat = "{0:n2}";
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "ValorIva").DisplayFormat = "{0:n2}";
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Total").DisplayFormat = "{0:n2}";
+        settings.Settings.ShowFooter = true;
     });
 }
 @grid.Bind(Model.lst_det).GetHtml()

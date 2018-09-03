@@ -81,7 +81,14 @@
 
 
         settings.Columns.Add("Codigo", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("Ve_Vendedor", "Vendedor").Width = Unit.Percentage(70);
+        settings.Columns.Add("Ve_Vendedor", "Vendedor").Width = Unit.Percentage(60);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "PorComision";
+            column.Caption = "% Comisión";
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+            column.Width = Unit.Percentage(10);
+        });
         settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(10);
     });
 }

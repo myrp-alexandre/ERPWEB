@@ -173,7 +173,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult INV_003()
         {
 
-            cl_filtros_inventario_Info model = new cl_filtros_inventario_Info { IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa), IdCategoria = "", IdMarca = 0 };
+            cl_filtros_inventario_Info model = new cl_filtros_inventario_Info {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdCategoria = "",
+                IdMarca = 0,
+                IdProducto = 0
+            };
 
             cargar_combos(model);
             INV_003_Rpt report = new INV_003_Rpt();

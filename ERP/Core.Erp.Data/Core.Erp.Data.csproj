@@ -181,6 +181,8 @@
     <Compile Include="Compras\com_comprador_Data.cs" />
     <Compile Include="Compras\com_departamento_Data.cs" />
     <Compile Include="Compras\com_estado_cierre_Data.cs" />
+    <Compile Include="Compras\com_Motivo_Orden_Compra_Data.cs" />
+    <Compile Include="Compras\com_ordencompra_local_Data.cs" />
     <Compile Include="Compras\com_parametro_Data.cs" />
     <Compile Include="Compras\com_TerminoPago_Data.cs" />
     <Compile Include="com_catalogo.cs">
@@ -196,6 +198,12 @@
       <DependentUpon>Model_compras.tt</DependentUpon>
     </Compile>
     <Compile Include="com_estado_cierre.cs">
+      <DependentUpon>Model_compras.tt</DependentUpon>
+    </Compile>
+    <Compile Include="com_Motivo_Orden_Compra.cs">
+      <DependentUpon>Model_compras.tt</DependentUpon>
+    </Compile>
+    <Compile Include="com_ordencompra_local.cs">
       <DependentUpon>Model_compras.tt</DependentUpon>
     </Compile>
     <Compile Include="com_parametro.cs">
@@ -253,6 +261,9 @@
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
     <Compile Include="cp_orden_giro_pagos_sri.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cp_orden_giro_x_in_Ing_Egr_Inven.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
     <Compile Include="cp_orden_pago.cs">
@@ -349,6 +360,7 @@
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_motivo_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Param_conta_x_sucursal_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_liquidacion_comisiones_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_Parametro_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_tipo_Data.cs" />
@@ -398,6 +410,9 @@
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="cxc_cobro_x_ct_cbtecble.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cxc_liquidacion_comisiones.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="cxc_Parametro.cs">
@@ -1469,6 +1484,9 @@
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
     <Compile Include="vwcp_orden_giro.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwcp_orden_giro_det.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
     <Compile Include="vwcp_orden_giro_x_pagar.cs">

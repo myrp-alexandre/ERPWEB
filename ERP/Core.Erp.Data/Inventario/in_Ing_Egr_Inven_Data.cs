@@ -25,7 +25,7 @@ namespace Core.Erp.Data.Inventario
                                  where q.IdEmpresa == IdEmpresa
                                  && q.signo == signo 
                                  && fecha_ini <= q.cm_fecha && q.cm_fecha <= fecha_fin
-                                 orderby new { q.IdMovi_inven_tipo, q.IdNumMovi } descending
+                                 orderby new { q.cm_fecha } descending
                                  select new in_Ing_Egr_Inven_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
@@ -51,7 +51,7 @@ namespace Core.Erp.Data.Inventario
                                  && q.signo == signo
                                  && fecha_ini <= q.cm_fecha && q.cm_fecha <= fecha_fin
                                  && q.Estado == "A"
-                                 orderby new { q.IdMovi_inven_tipo, q.IdNumMovi } descending
+                                 orderby new { q.cm_fecha } descending
                                  select new in_Ing_Egr_Inven_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,

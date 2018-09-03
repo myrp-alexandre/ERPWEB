@@ -17,6 +17,7 @@ namespace Core.Erp.Data
         public com_estado_cierre()
         {
             this.com_parametro = new HashSet<com_parametro>();
+            this.com_ordencompra_local = new HashSet<com_ordencompra_local>();
         }
     
         public string IdEstado_cierre { get; set; }
@@ -30,5 +31,6 @@ namespace Core.Erp.Data
         public string MotivoAnulacion { get; set; }
     
         public virtual ICollection<com_parametro> com_parametro { get; set; }
+        public virtual ICollection<com_ordencompra_local> com_ordencompra_local { get; set; }
     }
 }

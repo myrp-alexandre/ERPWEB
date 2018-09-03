@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Liquidación de comisiones";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Layout/_LayoutConsulta.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.Action("GridViewPartial_liquidacion_com")
+}
+

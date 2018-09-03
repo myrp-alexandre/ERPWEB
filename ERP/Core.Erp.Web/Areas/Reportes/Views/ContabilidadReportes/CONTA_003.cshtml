@@ -9,7 +9,8 @@
 }
 @using (Html.BeginForm("CONTA_003", "ContabilidadReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    <div class="box collapsed-box">
+    @Html.HiddenFor(q=>q.IdEmpresa, new { @id = "IdEmpresa"})
+    <div class="box">
         <div class="box-header with-border">
             <div class="row">
                 <div class="col-md-12">
@@ -18,7 +19,7 @@
             </div>
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fa fa-plus"></i>
+                    <i class="fa fa-minus"></i>
                 </button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
                     <i class="fa fa-times"></i>
@@ -53,7 +54,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="IdNivel">Nivel</label>
                             @Html.DropDownListFor(q => q.IdNivel, new SelectList(ViewBag.lst_nivel, "Key", "Value"), new { @class = "form-control" })
@@ -67,9 +68,11 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="mostrar_saldos_en_0">@Html.CheckBoxFor(q => q.mostrar_saldos_en_0) Mostrar saldos en 0</label>
-                        </div>
+                        <div class="checkbox">
+                            <div class="form-group">
+                                <label for="mostrar_saldos_en_0">@Html.CheckBoxFor(q => q.mostrar_saldos_en_0) Mostrar saldos en 0</label>
+                            </div>
+                        </div>                        
                     </div>
                 </div>
             </div>

@@ -39,6 +39,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         cp_orden_giro_det_Info_List List_det = new cp_orden_giro_det_Info_List();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+        cp_orden_giro_det_Bus bus_det = new cp_orden_giro_det_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -228,7 +229,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         #endregion
         
-        #region Funciones
+        #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
             #region Validar Session
@@ -255,6 +256,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             };
             Lis_ct_cbtecble_det_List.set_list(new List<ct_cbtecble_det_Info>(), model.IdTransaccionSession);
             Lis_cp_cuotas_x_doc_det_Info.set_list(new List<cp_cuotas_x_doc_det_Info>(), model.IdTransaccionSession);
+            List_det.set_list(new List<cp_orden_giro_det_Info>(), model.IdTransaccionSession);
             cargar_combos(model);
             return View(model);
         }
@@ -270,7 +272,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return View(model);
             }
              model.info_comrobante = new ct_cbtecble_Info();
-                model.info_cuota.lst_cuotas_det = Lis_cp_cuotas_x_doc_det_Info.get_list(model.IdTransaccionSession);
+             model.info_cuota.lst_cuotas_det = Lis_cp_cuotas_x_doc_det_Info.get_list(model.IdTransaccionSession);
             model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
             if(Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession).Count()==0)
             {
@@ -287,7 +289,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
             else
             {
-                ViewBag.mensaje = "Falta parametros del modulo cuenta por pagar";
+                ViewBag.mensaje = "Falta parametrizar el módulo de cuentas por pagar";
                 cargar_combos(model);
                 cargar_combos_detalle();
                 return View(model);
@@ -301,10 +303,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return View(model);
             }
 
-
-            model.IdUsuario = Session["IdUsuario"].ToString();
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-
+            model.IdUsuario = SessionFixed.IdUsuario;
+            model.lst_det = List_det.get_list(model.IdTransaccionSession);
             if (!bus_orden_giro.guardarDB(model))
             {
                 cargar_combos(model);
@@ -331,6 +331,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if (model.info_cuota.lst_cuotas_det == null)
                 model.info_cuota.lst_cuotas_det = new List<cp_cuotas_x_doc_det_Info>();
             Lis_cp_cuotas_x_doc_det_Info.set_list( model.info_cuota.lst_cuotas_det, model.IdTransaccionSession);
+            List_det.set_list(bus_det.get_list(model.IdEmpresa, model.IdTipoCbte_Ogiro, model.IdCbteCble_Ogiro), model.IdTransaccionSession);
             cargar_combos(model);
             cargar_combos_detalle();
             return View(model);
@@ -394,8 +395,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
 
 
-            model.IdUsuario = Session["IdUsuario"].ToString();
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            model.IdUsuario = SessionFixed.IdUsuario;
+            model.lst_det = List_det.get_list(model.IdTransaccionSession);
 
             if (!bus_orden_giro.modificarDB(model))
             {
@@ -423,6 +424,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 model.info_cuota.lst_cuotas_det = new List<cp_cuotas_x_doc_det_Info>();
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             Lis_cp_cuotas_x_doc_det_Info.set_list(model.info_cuota.lst_cuotas_det, model.IdTransaccionSession);
+            List_det.set_list(bus_det.get_list(model.IdEmpresa, model.IdTipoCbte_Ogiro, model.IdCbteCble_Ogiro), model.IdTransaccionSession);
             cargar_combos(model);
             cargar_combos_detalle();
             return View(model);
@@ -478,8 +480,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
 
 
-            model.IdUsuario = Session["IdUsuario"].ToString();
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            model.IdUsuario = SessionFixed.IdUsuario;
+            model.lst_det = List_det.get_list(model.IdTransaccionSession);
 
             if (!bus_orden_giro.anularDB(model))
             {
@@ -589,6 +591,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNewDetalle([ModelBinder(typeof(DevExpressEditorsBinder))] cp_orden_giro_det_Info info_det)
         {
+            var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProducto);
+            if (producto != null)
+                info_det.pr_descripcion = producto.pr_descripcion_combo;
+
             if (ModelState.IsValid)
                 List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cp_orden_giro_Info model = new cp_orden_giro_Info();
@@ -599,6 +605,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdateDetalle([ModelBinder(typeof(DevExpressEditorsBinder))] cp_orden_giro_det_Info info_det)
         {
+            var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProducto);
+            if (producto != null)
+                info_det.pr_descripcion = producto.pr_descripcion_combo;
+
             if (ModelState.IsValid)
                 List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cp_orden_giro_Info model = new cp_orden_giro_Info();
@@ -819,6 +829,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
     public class cp_orden_giro_det_Info_List
     {
+        tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
         string Variable = "cp_orden_giro_det_Info";
         public List<cp_orden_giro_det_Info> get_list(decimal IdTransaccionSession)
         {
@@ -840,6 +851,16 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             List<cp_orden_giro_det_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : (list.Max(q => q.Secuencia) + 1);
+            info_det.DescuentoUni = Math.Round(info_det.CostoUni * (info_det.PorDescuento / 100), 2, MidpointRounding.AwayFromZero);
+            info_det.CostoUniFinal = Math.Round(info_det.CostoUni - info_det.DescuentoUni,2,MidpointRounding.AwayFromZero);
+            info_det.Subtotal = Math.Round(info_det.Cantidad * info_det.CostoUniFinal, 2, MidpointRounding.AwayFromZero);
+            var impuesto = bus_impuesto.get_info(info_det.IdCod_Impuesto_Iva);
+            if (impuesto != null)
+                info_det.PorIva = impuesto.porcentaje;                
+            else
+                info_det.PorIva = 0;
+            info_det.ValorIva = Math.Round(info_det.Subtotal * (info_det.PorIva / 100), 2, MidpointRounding.AwayFromZero);
+            info_det.Total = Math.Round(info_det.Subtotal + info_det.ValorIva,2,MidpointRounding.AwayFromZero);
             list.Add(info_det);
         }
 
@@ -851,8 +872,20 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             edited_info.Cantidad = info_det.Cantidad;
             edited_info.CostoUni = info_det.CostoUni;
             edited_info.PorDescuento = info_det.PorDescuento;
+            edited_info.IdCod_Impuesto_Iva = info_det.IdCod_Impuesto_Iva;
+            edited_info.pr_descripcion = info_det.pr_descripcion;
+            edited_info.DescuentoUni = Math.Round(info_det.CostoUni * (info_det.PorDescuento / 100), 2, MidpointRounding.AwayFromZero);
+            edited_info.CostoUniFinal = Math.Round(info_det.CostoUni - info_det.DescuentoUni, 2, MidpointRounding.AwayFromZero);
+            edited_info.Subtotal = Math.Round(info_det.Cantidad * edited_info.CostoUniFinal, 2, MidpointRounding.AwayFromZero);
+            var impuesto = bus_impuesto.get_info(edited_info.IdCod_Impuesto_Iva);
+            if (impuesto != null)
+                edited_info.PorIva = impuesto.porcentaje;
+            else
+                edited_info.PorIva = 0;
+            edited_info.ValorIva = Math.Round(edited_info.Subtotal * (edited_info.PorIva / 100), 2, MidpointRounding.AwayFromZero);
+            edited_info.Total = Math.Round(edited_info.Subtotal + edited_info.ValorIva, 2, MidpointRounding.AwayFromZero);
 
-            
+
         }
 
         public void DeleteRow(int secuencia, decimal IdTransaccionSession)

@@ -14,17 +14,22 @@ namespace Core.Erp.Data
     
     public partial class com_TerminoPago
     {
+        public com_TerminoPago()
+        {
+            this.com_ordencompra_local = new HashSet<com_ordencompra_local>();
+        }
+    
         public string IdTerminoPago { get; set; }
         public string Descripcion { get; set; }
         public int Dias { get; set; }
         public string Estado { get; set; }
         public string IdUsuario { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> FechaUltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotiAnula { get; set; }
+    
+        public virtual ICollection<com_ordencompra_local> com_ordencompra_local { get; set; }
     }
 }

@@ -137,7 +137,11 @@
             // 
             this.xrTableCell34.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTableCell34.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[IdCtaCble]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[IdCtaCble]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Font.Size", "Iif([EsCuentaMovimiento]=0, \'6.75\', ?)"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Font.Bold", "Iif([EsCuentaMovimiento]=0, \'True\', ?)"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Font.Size", "Iif([EsCuentaMovimiento] = 0, \'6.75\', ?)"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Font.Bold", "Iif([EsCuentaMovimiento] = 0, \'True\', ?)")});
             this.xrTableCell34.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell34.Name = "xrTableCell34";
             this.xrTableCell34.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
@@ -152,7 +156,10 @@
             // 
             this.xrTableCell35.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTableCell35.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pc_Cuenta]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pc_Cuenta]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Font.Size", "Iif([EsCuentaMovimiento] = 0, \'6.75\', ?)"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Font.Bold", "Iif([EsCuentaMovimiento] = 0, \'True\', ?)"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Padding.Left", "Iif([EsCuentaMovimiento] = 1, \'20\', ?)")});
             this.xrTableCell35.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell35.Name = "xrTableCell35";
             this.xrTableCell35.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
@@ -167,7 +174,11 @@
             // 
             this.xrTableCell16.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTableCell16.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([EsCuentaMovimiento]=1,[SaldoFinalNaturaleza] ,\'\')")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([EsCuentaMovimiento]=1,[SaldoFinalNaturaleza] ,\'\')"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Font.Size", "Iif([EsCuentaMovimiento]=0, \'6.75\', ?)"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Font.Bold", "Iif([EsCuentaMovimiento]=0, \'True\', ?)"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Font.Size", "Iif([EsCuentaMovimiento] = 0, \'6.75\', ?)"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Font.Bold", "Iif([EsCuentaMovimiento] = 0, \'True\', ?)")});
             this.xrTableCell16.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell16.Name = "xrTableCell16";
             this.xrTableCell16.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
@@ -176,14 +187,19 @@
             this.xrTableCell16.StylePriority.UsePadding = false;
             this.xrTableCell16.StylePriority.UseTextAlignment = false;
             this.xrTableCell16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrTableCell16.TextFormatString = "{0:n2}";
             this.xrTableCell16.Weight = 0.4D;
             // 
             // xrTableCell36
             // 
             this.xrTableCell36.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTableCell36.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([EsCuentaMovimiento]=0,[SaldoFinalNaturaleza] ,\'\')")});
-            this.xrTableCell36.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([EsCuentaMovimiento]=0,[SaldoFinalNaturaleza] ,\'\')"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Font.Size", "Iif([EsCuentaMovimiento]=0, \'6.75\', ?)"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Font.Bold", "Iif([EsCuentaMovimiento]=0, \'True\', ?)"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Font.Size", "Iif([EsCuentaMovimiento] = 0, \'6.75\', ?)"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Font.Bold", "Iif([EsCuentaMovimiento] = 0, \'True\', ?)")});
+            this.xrTableCell36.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell36.Name = "xrTableCell36";
             this.xrTableCell36.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
             this.xrTableCell36.StylePriority.UseBorders = false;
@@ -521,7 +537,7 @@
             // 
             this.xrTableCell14.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell14.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum(Iif([EsCuentaMovimiento] = 1,[SaldoFinal],0))")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum(Iif([EsCuentaMovimiento] = 1,[SaldoFinal]*-1,0))")});
             this.xrTableCell14.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell14.Name = "xrTableCell14";
             this.xrTableCell14.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);

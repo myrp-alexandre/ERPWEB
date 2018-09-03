@@ -26,8 +26,8 @@ namespace Core.Erp.Data.Facturacion
                                      Codigo = q.Codigo,
                                      ve_cedula = q.ve_cedula,
                                      Ve_Vendedor = q.Ve_Vendedor,
-                                     Estado = q.Estado
-                                 
+                                     PorComision = q.PorComision,
+                                     Estado = q.Estado                                 
                                  }).ToList();
                     else Lista = (from q in Context.fa_Vendedor
                                   where q.IdEmpresa == IdEmpresa
@@ -39,8 +39,8 @@ namespace Core.Erp.Data.Facturacion
                                       Codigo = q.Codigo,
                                       ve_cedula = q.ve_cedula,
                                       Ve_Vendedor = q.Ve_Vendedor,
-                                      Estado = q.Estado
-
+                                      Estado = q.Estado,
+                                      PorComision = q.PorComision,
                                   }).ToList();
                 }
                 return Lista;
@@ -68,6 +68,8 @@ namespace Core.Erp.Data.Facturacion
                         Codigo = Entity.Codigo,
                         ve_cedula = Entity.ve_cedula,
                         Ve_Vendedor = Entity.Ve_Vendedor,
+                        NomInterno = Entity.NomInterno,
+                        PorComision = Entity.PorComision,
                         Estado = Entity.Estado
                     };
                 }
@@ -117,7 +119,8 @@ namespace Core.Erp.Data.Facturacion
                         ve_cedula = info.ve_cedula,
                         Ve_Vendedor = info.Ve_Vendedor,
                         Estado = info.Estado="A",
-
+                        NomInterno = info.NomInterno,
+                        PorComision = info.PorComision,
 
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
@@ -146,8 +149,9 @@ namespace Core.Erp.Data.Facturacion
                     Entity.Codigo = info.Codigo;
                     Entity.ve_cedula = info.ve_cedula;
                     Entity.Ve_Vendedor = info.Ve_Vendedor;
-
+                    Entity.PorComision = info.PorComision;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
+                    Entity.NomInterno = info.NomInterno;
                     Entity.Fecha_UltMod = DateTime.Now;
                     Context.SaveChanges();
                 }
@@ -170,7 +174,6 @@ namespace Core.Erp.Data.Facturacion
                     if (Entity == null) return false;
 
                     Entity.Estado = info.Estado="I";
-
                     Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                     Entity.Fecha_UltAnu = DateTime.Now;
                     Context.SaveChanges();

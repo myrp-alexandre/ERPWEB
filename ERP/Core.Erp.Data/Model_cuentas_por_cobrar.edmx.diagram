@@ -28,6 +28,7 @@
         <AssociationConnector Association="Model_cuentas_por_cobrar.FK_cxc_Parametro_cxc_cobro_tipo" ManuallyRouted="false" />
         <AssociationConnector Association="Model_cuentas_por_cobrar.FK_cxc_Parametro_cxc_cobro_tipo1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Model_cuentas_por_cobrar.vwcxc_cartera_x_cobrar" Width="1.5" PointX="12.375" PointY="10.75" />
+        <EntityTypeShape EntityType="Model_cuentas_por_cobrar.cxc_liquidacion_comisiones" Width="1.5" PointX="14.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
