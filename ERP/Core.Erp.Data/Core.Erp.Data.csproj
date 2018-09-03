@@ -979,6 +979,7 @@
     <Compile Include="Reportes\Importacion\IMP_002_gastos_Data.cs" />
     <Compile Include="Reportes\Importacion\IMP_003_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_001_Data.cs" />
+    <Compile Include="Reportes\Inventario\INV_011_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_002_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_003_Data.cs" />
     <Compile Include="Reportes\Inventario\INV_004_Data.cs" />
