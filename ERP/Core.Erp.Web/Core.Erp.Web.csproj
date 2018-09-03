@@ -9064,6 +9064,10 @@
     <Content Include="Areas\Compras\Views\OrdenCompraLocal\Modificar.cshtml" />
     <Content Include="Areas\Compras\Views\OrdenCompraLocal\Anular.cshtml" />
     <Content Include="Areas\Compras\Views\MotivoCompra\Index.cshtml" />
+    <Content Include="Areas\Compras\Views\MotivoCompra\_GridViewPartial_motivocompra.cshtml" />
+    <Content Include="Areas\Compras\Views\MotivoCompra\Nuevo.cshtml" />
+    <Content Include="Areas\Compras\Views\MotivoCompra\Modificar.cshtml" />
+    <Content Include="Areas\Compras\Views\MotivoCompra\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

@@ -99,7 +99,7 @@ namespace Core.Erp.Data.Compras
             }
         }
 
-        public bool guardardB(com_Motivo_Orden_Compra_Info info)
+        public bool guardarDB(com_Motivo_Orden_Compra_Info info)
         {
             try
             {
