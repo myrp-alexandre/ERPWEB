@@ -24,8 +24,6 @@ namespace Core.Erp.Data
         public int Dias { get; set; }
         public string Estado { get; set; }
         public string IdUsuario { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> FechaUltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }

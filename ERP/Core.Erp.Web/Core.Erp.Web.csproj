@@ -255,6 +255,7 @@
     <Compile Include="Areas\Compras\Controllers\CompradorController.cs" />
     <Compile Include="Areas\Compras\Controllers\DepartamentoComprasController.cs" />
     <Compile Include="Areas\Compras\Controllers\EstadoCierreComprasController.cs" />
+    <Compile Include="Areas\Compras\Controllers\OrdenCompraLocalController.cs" />
     <Compile Include="Areas\Compras\Controllers\ParametrosComprasController.cs" />
     <Compile Include="Areas\Compras\Controllers\TerminoPagoComprasController.cs" />
     <Compile Include="Areas\Contabilidad\ContabilidadAreaRegistration.cs" />
@@ -9056,6 +9057,11 @@
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionComisiones\Nuevo.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionComisiones\Modificar.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionComisiones\Anular.cshtml" />
+    <Content Include="Areas\Compras\Views\OrdenCompraLocal\Index.cshtml" />
+    <Content Include="Areas\Compras\Views\OrdenCompraLocal\_GridViewPartial_ordenCompra.cshtml" />
+    <Content Include="Areas\Compras\Views\OrdenCompraLocal\Nuevo.cshtml" />
+    <Content Include="Areas\Compras\Views\OrdenCompraLocal\Modificar.cshtml" />
+    <Content Include="Areas\Compras\Views\OrdenCompraLocal\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

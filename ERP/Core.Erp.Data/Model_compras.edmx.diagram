@@ -15,13 +15,13 @@
         <AssociationConnector Association="Model_compras.FK_com_parametro_com_catalogo" />
         <AssociationConnector Association="Model_compras.FK_com_parametro_com_catalogo1" />
         <AssociationConnector Association="Model_compras.FK_com_parametro_com_estado_cierre" />
-        <EntityTypeShape EntityType="Model_compras.com_TerminoPago" Width="1.5" PointX="13" PointY="7.75" />
         <EntityTypeShape EntityType="Model_compras.com_ordencompra_local" Width="1.5" PointX="10.625" PointY="1.625" />
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_com_catalogo" />
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_com_catalogo1" />
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_com_comprador" />
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_com_departamento" />
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_com_estado_cierre" />
+        <EntityTypeShape EntityType="Model_compras.com_TerminoPago" Width="1.5" PointX="0.75" PointY="9" />
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_com_TerminoPago" />
       </Diagram>
     </edmx:Diagrams>

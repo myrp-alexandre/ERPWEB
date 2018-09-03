@@ -352,7 +352,6 @@
             <End Role="com_estado_cierre" EntitySet="com_estado_cierre" />
             <End Role="com_parametro" EntitySet="com_parametro" />
           </AssociationSet>
-          <EntitySet Name="com_TerminoPago" EntityType="Model_compras.com_TerminoPago" />
           <EntitySet Name="com_ordencompra_local" EntityType="Model_compras.com_ordencompra_local" />
           <AssociationSet Name="FK_com_ordencompra_local_com_catalogo" Association="Model_compras.FK_com_ordencompra_local_com_catalogo">
             <End Role="com_catalogo" EntitySet="com_catalogo" />
@@ -374,6 +373,7 @@
             <End Role="com_estado_cierre" EntitySet="com_estado_cierre" />
             <End Role="com_ordencompra_local" EntitySet="com_ordencompra_local" />
           </AssociationSet>
+          <EntitySet Name="com_TerminoPago" EntityType="Model_compras.com_TerminoPago" />
           <AssociationSet Name="FK_com_ordencompra_local_com_TerminoPago" Association="Model_compras.FK_com_ordencompra_local_com_TerminoPago">
             <End Role="com_TerminoPago" EntitySet="com_TerminoPago" />
             <End Role="com_ordencompra_local" EntitySet="com_ordencompra_local" />
@@ -530,24 +530,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="com_TerminoPago">
-          <Key>
-            <PropertyRef Name="IdTerminoPago" />
-          </Key>
-          <Property Name="IdTerminoPago" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Dias" Type="Int32" Nullable="false" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="MotiAnula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="com_ordencompra_local" Relationship="Model_compras.FK_com_ordencompra_local_com_TerminoPago" FromRole="com_TerminoPago" ToRole="com_ordencompra_local" />
-        </EntityType>
         <EntityType Name="com_ordencompra_local">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -659,6 +641,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="com_TerminoPago">
+          <Key>
+            <PropertyRef Name="IdTerminoPago" />
+          </Key>
+          <Property Name="IdTerminoPago" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Dias" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotiAnula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="com_ordencompra_local" Relationship="Model_compras.FK_com_ordencompra_local_com_TerminoPago" FromRole="com_TerminoPago" ToRole="com_ordencompra_local" />
+        </EntityType>
         <Association Name="FK_com_ordencompra_local_com_TerminoPago">
           <End Type="Model_compras.com_TerminoPago" Role="com_TerminoPago" Multiplicity="1" />
           <End Type="Model_compras.com_ordencompra_local" Role="com_ordencompra_local" Multiplicity="*" />
@@ -771,22 +769,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="com_TerminoPago">
-            <EntityTypeMapping TypeName="Model_compras.com_TerminoPago">
-              <MappingFragment StoreEntitySet="com_TerminoPago">
-                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Dias" ColumnName="Dias" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdTerminoPago" ColumnName="IdTerminoPago" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="com_ordencompra_local">
             <EntityTypeMapping TypeName="Model_compras.com_ordencompra_local">
               <MappingFragment StoreEntitySet="com_ordencompra_local">
@@ -824,6 +806,22 @@
                 <ScalarProperty Name="IdOrdenCompra" ColumnName="IdOrdenCompra" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="com_TerminoPago">
+            <EntityTypeMapping TypeName="Model_compras.com_TerminoPago">
+              <MappingFragment StoreEntitySet="com_TerminoPago">
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Dias" ColumnName="Dias" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdTerminoPago" ColumnName="IdTerminoPago" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
