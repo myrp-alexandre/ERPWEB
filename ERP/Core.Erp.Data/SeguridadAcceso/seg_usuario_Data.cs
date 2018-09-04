@@ -110,6 +110,8 @@ namespace Core.Erp.Data.SeguridadAcceso
                         Contrasena = Entity.Contrasena,
                         estado = Entity.estado,
                         Nombre = Entity.Nombre,
+                        es_super_admin = Entity.es_super_admin,
+                        contrasena_admin = Entity.contrasena_admin,
                         ExigirDirectivaContrasenia = Entity.ExigirDirectivaContrasenia == null ? false : Convert.ToBoolean(Entity.ExigirDirectivaContrasenia),
                         CambiarContraseniaSgtSesion = Entity.CambiarContraseniaSgtSesion == null ? false : Convert.ToBoolean(Entity.CambiarContraseniaSgtSesion)
                     };
@@ -137,6 +139,8 @@ namespace Core.Erp.Data.SeguridadAcceso
                         ExigirDirectivaContrasenia = info.ExigirDirectivaContrasenia,
                         CambiarContraseniaSgtSesion = info.CambiarContraseniaSgtSesion,
                         Nombre = info.Nombre,
+                        es_super_admin=info.es_super_admin,
+                        contrasena_admin=info.contrasena_admin,
                         estado = info.estado = "A",
 
                         Fecha_Transaccion = info.Fecha_Transaccion
@@ -165,7 +169,8 @@ namespace Core.Erp.Data.SeguridadAcceso
                     Entity.Nombre = info.Nombre;
                     Entity.CambiarContraseniaSgtSesion = info.CambiarContraseniaSgtSesion;
                     Entity.ExigirDirectivaContrasenia = info.ExigirDirectivaContrasenia;
-
+                    Entity.contrasena_admin = info.contrasena_admin;
+                    Entity.es_super_admin = info.es_super_admin;
                     Entity.IdUsuarioUltModi = info.IdUsuarioUltModi;
                     Entity.Fecha_UltMod = info.Fecha_UltMod;
                     Context.SaveChanges();

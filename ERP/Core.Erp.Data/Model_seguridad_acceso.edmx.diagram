@@ -8,14 +8,14 @@
         <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu_x_Empresa" Width="1.5" PointX="8" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu_x_Empresa_x_Usuario" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_usuario" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Usuario_x_Empresa" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_seguridad_acceso.seg_usuario_x_tb_sis_reporte" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
         <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_seg_Menu" ManuallyRouted="false" />
-        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Usuario_x_Empresa_seg_usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_usuario_x_tb_sis_reporte_seg_usuario" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_usuario" Width="1.5" PointX="0.75" PointY="2.875" />
+        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" />
+        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Usuario_x_Empresa_seg_usuario" />
+        <AssociationConnector Association="Model_seguridad_acceso.FK_seg_usuario_x_tb_sis_reporte_seg_usuario" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
