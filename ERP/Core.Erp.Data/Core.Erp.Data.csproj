@@ -206,6 +206,9 @@
     <Compile Include="com_ordencompra_local.cs">
       <DependentUpon>Model_compras.tt</DependentUpon>
     </Compile>
+    <Compile Include="com_ordencompra_local_det.cs">
+      <DependentUpon>Model_compras.tt</DependentUpon>
+    </Compile>
     <Compile Include="com_parametro.cs">
       <DependentUpon>Model_compras.tt</DependentUpon>
     </Compile>

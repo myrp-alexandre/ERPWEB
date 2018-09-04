@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9d7c2729eaaa4c81a13cf3a0d0406433" Name="Diagram1" ZoomLevel="64" >
-        <EntityTypeShape EntityType="Model_compras.com_catalogo" Width="1.5" PointX="5.625" PointY="0.875" />
-        <EntityTypeShape EntityType="Model_compras.com_catalogo_tipo" Width="1.5" PointX="2.75" PointY="1.25" />
+      <Diagram DiagramId="9d7c2729eaaa4c81a13cf3a0d0406433" Name="Diagram1" ZoomLevel="53" >
+        <EntityTypeShape EntityType="Model_compras.com_catalogo" Width="1.5" PointX="7.625" PointY="2.125" />
+        <EntityTypeShape EntityType="Model_compras.com_catalogo_tipo" Width="1.5" PointX="5" PointY="2.125" />
         <AssociationConnector Association="Model_compras.FK_com_catalogo_com_catalogo_tipo" />
-        <EntityTypeShape EntityType="Model_compras.com_estado_cierre" Width="1.5" PointX="3.375" PointY="7.875" />
-        <EntityTypeShape EntityType="Model_compras.com_departamento" Width="1.5" PointX="7.25" PointY="6.625" />
-        <EntityTypeShape EntityType="Model_compras.com_parametro" Width="1.5" PointX="0.75" PointY="4.875" />
+        <EntityTypeShape EntityType="Model_compras.com_estado_cierre" Width="1.5" PointX="7.625" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model_compras.com_departamento" Width="1.5" PointX="15.25" PointY="1.5" />
+        <EntityTypeShape EntityType="Model_compras.com_parametro" Width="1.5" PointX="4.125" PointY="7.375" />
         <AssociationConnector Association="Model_compras.FK_com_parametro_com_catalogo" />
         <AssociationConnector Association="Model_compras.FK_com_parametro_com_catalogo1" />
         <AssociationConnector Association="Model_compras.FK_com_parametro_com_estado_cierre" />
@@ -19,12 +19,14 @@
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_com_catalogo1" />
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_com_departamento" />
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_com_estado_cierre" />
-        <EntityTypeShape EntityType="Model_compras.com_TerminoPago" Width="1.5" PointX="0.75" PointY="9" />
+        <EntityTypeShape EntityType="Model_compras.com_TerminoPago" Width="1.5" PointX="13" PointY="1.375" />
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_com_TerminoPago" />
-        <EntityTypeShape EntityType="Model_compras.com_Motivo_Orden_Compra" Width="1.5" PointX="5.375" PointY="11" />
+        <EntityTypeShape EntityType="Model_compras.com_Motivo_Orden_Compra" Width="1.5" PointX="0.5" PointY="3.875" />
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_com_Motivo_Orden_Compra" />
-        <EntityTypeShape EntityType="Model_compras.com_comprador" Width="1.5" PointX="7.375" PointY="11" />
+        <EntityTypeShape EntityType="Model_compras.com_comprador" Width="1.5" PointX="13" PointY="5.125" />
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_com_comprador" />
+        <EntityTypeShape EntityType="Model_compras.com_ordencompra_local_det" Width="1.5" PointX="10.625" PointY="11.625" />
+        <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_det_com_ordencompra_local" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

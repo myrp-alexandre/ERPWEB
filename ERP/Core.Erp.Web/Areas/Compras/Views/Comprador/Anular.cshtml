@@ -23,6 +23,22 @@
                     @Html.ValidationMessageFor(q => q.IdUsuario_com, "", new { @class = "text-danger" })
                 </div>
             </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdPersona">Beneficiario*</label>
+                    @Html.Partial("_CmbPersona_Compras", Model)
+                    @Html.ValidationMessageFor(q => q.IdPersona, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="cedula">Cédula</label>
+                    @Html.TextBoxFor(q => q.cedula, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.cedula, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
 
