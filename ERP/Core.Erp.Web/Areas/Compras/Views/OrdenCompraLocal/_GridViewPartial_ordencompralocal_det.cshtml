@@ -1,0 +1,41 @@
+@{
+	var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridView_ordencompralocal_det";
+        settings.CallbackRouteValues = new { Controller = "OrdenCompraLocal", Action = "GridViewPartial_ordencompralocal_det" };
+
+
+		settings.KeyFieldName = "IdOrdenCompra";
+
+		settings.SettingsPager.Visible = true;
+		settings.Settings.ShowGroupPanel = true;
+		settings.Settings.ShowFilterRow = true;
+		settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+		settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+		settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+		settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+		settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+		settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+				settings.Columns.Add("IdSucursal");
+				settings.Columns.Add("IdOrdenCompra");
+				settings.Columns.Add("Secuencia");
+				settings.Columns.Add("IdProducto");
+				settings.Columns.Add("do_Cantidad");
+				settings.Columns.Add("do_precioCompra");
+				settings.Columns.Add("do_porc_des");
+				settings.Columns.Add("do_descuento");
+				settings.Columns.Add("do_precioFinal");
+				settings.Columns.Add("do_subtotal");
+				settings.Columns.Add("do_iva");
+				settings.Columns.Add("do_total");
+				settings.Columns.Add("do_ManejaIva");
+				settings.Columns.Add("do_Costeado");
+				settings.Columns.Add("do_peso");
+				settings.Columns.Add("do_observacion");
+				settings.Columns.Add("IdUnidadMedida");
+				settings.Columns.Add("Por_Iva");
+				settings.Columns.Add("IdCod_Impuesto");
+			});
+}
+@grid.Bind(Model).GetHtml()

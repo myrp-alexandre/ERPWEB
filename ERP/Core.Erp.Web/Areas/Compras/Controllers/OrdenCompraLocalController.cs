@@ -148,5 +148,12 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_ordencompralocal_det()
+        {
+            var model = new object[0];
+            return PartialView("_GridViewPartial_ordencompralocal_det", model);
+        }
     }
 }

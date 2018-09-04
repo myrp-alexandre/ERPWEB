@@ -23,7 +23,26 @@ namespace Core.Erp.Data.Compras
                              && q.Secuencia == Secuencia
                              select new com_ordencompra_local_det_Info
                              {
-
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdOrdenCompra = q.IdOrdenCompra,
+                                 IdSucursal = q.IdSucursal,
+                                 IdProducto = q.IdProducto,
+                                 IdCod_Impuesto = q.IdCod_Impuesto,
+                                 IdUnidadMedida = q.IdUnidadMedida,
+                                 do_Cantidad = q.do_Cantidad,
+                                 do_Costeado = q.do_Costeado,
+                                 do_descuento = q.do_descuento,
+                                 do_iva = q.do_iva,
+                                 do_ManejaIva = q.do_ManejaIva,
+                                 do_observacion = q.do_observacion,
+                                 do_peso = q.do_peso,
+                                 do_porc_des = q.do_porc_des,
+                                 do_precioCompra = q.do_precioCompra,
+                                 do_precioFinal = q.do_precioFinal,
+                                 do_subtotal = q.do_subtotal,
+                                 do_total = q.do_total,
+                                 Por_Iva = q.Por_Iva,
+                                 Secuencia = q.Secuencia
                              }).ToList();
                 }
                 return Lista;
