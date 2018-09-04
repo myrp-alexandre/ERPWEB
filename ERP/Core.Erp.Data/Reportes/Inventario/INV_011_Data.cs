@@ -16,7 +16,7 @@ namespace Core.Erp.Data.Reportes.Inventario
                 List<INV_011_Info> Lista;
                 using (Entities_reportes  Context = new Entities_reportes())
                 {
-                    Lista = (from q in Context.VWINV_002
+                    Lista = (from q in Context.VWINV_011
                              where q.IdEmpresa == IdEmpresa
                              && q.IdSucursal == idSucursal
                              && q.IdMovi_inven_tipo == IdMovi_inven_tipo

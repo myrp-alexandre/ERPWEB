@@ -1696,6 +1696,9 @@
     <Compile Include="VWINV_008.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="VWINV_011.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwin_devolucion_inven_det.cs">
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
