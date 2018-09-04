@@ -60,7 +60,10 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
 
         public ActionResult Nuevo()
         {
-            com_comprador_Info model = new com_comprador_Info();
+            com_comprador_Info model = new com_comprador_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+            };
             cargar_combos();
             return View(model);
         }

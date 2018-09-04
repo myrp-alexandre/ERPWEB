@@ -149,7 +149,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdComprador">Comprador*</label>
-                    @Html.DropDownListFor(q => q.IdComprador, new SelectList(ViewBag.lst_dep, "IdComprador", "Descripcion"), new { @class = "form-control" })
+                    @Html.DropDownListFor(q => q.IdComprador, new SelectList(ViewBag.lst_comprador, "IdComprador", "Descripcion"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.IdComprador, "", new { @class = "text-danger" })
                 </div>
             </div>
