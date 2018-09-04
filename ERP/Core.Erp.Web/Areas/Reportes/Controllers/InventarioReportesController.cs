@@ -237,12 +237,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             in_Producto_Bus bus_producto = new in_Producto_Bus();
             var lst_producto = bus_producto.get_list(IdEmpresa, false);
-            lst_producto.Add(new in_Producto_Info
-            {
-                IdEmpresa = model.IdEmpresa,
-                IdProducto = 0,
-                pr_descripcion = "Todos"
-            });
             ViewBag.lst_producto = lst_producto;
 
             in_categorias_Bus bus_categoria = new in_categorias_Bus();
@@ -257,14 +251,32 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             in_linea_Bus bus_linea = new in_linea_Bus();
             var lst_linea = bus_linea.get_list(IdEmpresa, model.IdCategoria, false);
+            lst_linea.Add(new in_linea_Info
+            {
+                IdEmpresa = model.IdEmpresa,
+                IdLinea = 0,
+                nom_linea = "Todos"
+            });
             ViewBag.lst_linea = lst_linea;
 
             in_grupo_Bus bus_grupo = new in_grupo_Bus();
             var lst_grupo = bus_grupo.get_list(IdEmpresa, model.IdCategoria, model.IdLinea, false);
+            lst_grupo.Add(new in_grupo_Info
+            {
+                IdEmpresa = model.IdEmpresa,
+                IdGrupo = 0,
+                nom_grupo = "Todos"
+            });
             ViewBag.lst_grupo = lst_grupo;
 
             in_subgrupo_Bus bus_subgrupo = new in_subgrupo_Bus();
             var lst_subgrupo = bus_subgrupo.get_list(IdEmpresa, model.IdCategoria, model.IdLinea, model.IdGrupo, false);
+            lst_subgrupo.Add(new in_subgrupo_Info
+            {
+                IdEmpresa = model.IdEmpresa,
+                IdSubgrupo = 0,
+                nom_subgrupo = "Todos"
+            });
             ViewBag.lst_subgrupo = lst_subgrupo;
 
             in_Marca_Bus bus_marca = new in_Marca_Bus();

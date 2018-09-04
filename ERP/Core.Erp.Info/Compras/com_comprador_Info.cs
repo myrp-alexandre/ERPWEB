@@ -9,6 +9,7 @@ namespace Core.Erp.Info.Compras
 {
    public class com_comprador_Info
     {
+
         public int IdEmpresa { get; set; }
         public decimal IdComprador { get; set; }
         public string IdUsuario_com { get; set; }
@@ -16,6 +17,8 @@ namespace Core.Erp.Info.Compras
         [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 50")]
         public string Descripcion { get; set; }
         public string Estado { get; set; }
+        public Nullable<decimal> IdPersona { get; set; }
+        public string cedula { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }

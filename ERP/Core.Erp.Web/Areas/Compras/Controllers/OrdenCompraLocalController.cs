@@ -87,7 +87,11 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         {
             com_ordencompra_local_Info model = new com_ordencompra_local_Info
             {
-                IdEmpresa = IdEmpresa
+                IdEmpresa = IdEmpresa,
+                oc_fecha = DateTime.Now,
+                oc_fechaVencimiento = DateTime.Now,
+                co_fechaReproba = DateTime.Now,
+                co_fecha_aprobacion = DateTime.Now
             };
             cargar_combos(IdEmpresa);
             return View(model);

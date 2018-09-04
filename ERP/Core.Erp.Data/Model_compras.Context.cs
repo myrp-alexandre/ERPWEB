@@ -27,12 +27,12 @@ namespace Core.Erp.Data
     
         public DbSet<com_catalogo> com_catalogo { get; set; }
         public DbSet<com_catalogo_tipo> com_catalogo_tipo { get; set; }
-        public DbSet<com_comprador> com_comprador { get; set; }
         public DbSet<com_estado_cierre> com_estado_cierre { get; set; }
         public DbSet<com_departamento> com_departamento { get; set; }
         public DbSet<com_parametro> com_parametro { get; set; }
         public DbSet<com_ordencompra_local> com_ordencompra_local { get; set; }
         public DbSet<com_TerminoPago> com_TerminoPago { get; set; }
         public DbSet<com_Motivo_Orden_Compra> com_Motivo_Orden_Compra { get; set; }
+        public DbSet<com_comprador> com_comprador { get; set; }
     }
 }

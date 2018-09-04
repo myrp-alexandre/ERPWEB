@@ -12,6 +12,164 @@
 @using (Html.BeginForm("Modificar", "OrdenCompraLocal", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
 
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdSucursal)
+    @Html.HiddenFor(q => q.IdOrdenCompra)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdSucursal">Sucursal</label>
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="oc_fecha">Fecha*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.oc_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "oc_fecha" })
+                        @Html.ValidationMessageFor(q => q.oc_fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="oc_fechaVencimiento">Fecha vencimiento*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.oc_fechaVencimiento, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "oc_fechaVencimiento" })
+                        @Html.ValidationMessageFor(q => q.oc_fechaVencimiento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="co_fecha_aprobacion">Fecha aprobación*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.co_fecha_aprobacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "co_fecha_aprobacion" })
+                        @Html.ValidationMessageFor(q => q.co_fecha_aprobacion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="co_fechaReproba">Fecha reprobación*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.co_fechaReproba, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "co_fechaReproba" })
+                        @Html.ValidationMessageFor(q => q.co_fechaReproba, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdProveedor">Proveedor*</label>
+                    @Html.Partial("_CmbProveedor_COM", Model)
+                    @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEstadoAprobacion_cat">Estado de aprobación*</label>
+                    @Html.DropDownListFor(q => q.IdEstadoAprobacion_cat, new SelectList(ViewBag.lst_apro, "IdCatalogocompra", "Nombre"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdEstadoAprobacion_cat, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEstadoRecepcion_cat">Estado de recepción*</label>
+                    @Html.DropDownListFor(q => q.IdEstadoRecepcion_cat, new SelectList(ViewBag.lst_rec, "IdCatalogocompra", "Nombre"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdEstadoRecepcion_cat, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEstado_cierre">Estado de cierre*</label>
+                    @Html.DropDownListFor(q => q.IdEstado_cierre, new SelectList(ViewBag.lst_estado, "IdEstado_cierre", "Descripcion"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdEstado_cierre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="oc_NumDocumento">Número de documento*</label>
+                    @Html.TextBoxFor(q => q.oc_NumDocumento, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.oc_NumDocumento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Tipo">Tipo*</label>
+                    @Html.TextBoxFor(q => q.Tipo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Tipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdTerminoPago">Termino pago*</label>
+                    @Html.DropDownListFor(q => q.IdTerminoPago, new SelectList(ViewBag.lst_termino, "IdTerminoPago", "Descripcion"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdTerminoPago, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="oc_plazo">Plazo*</label>
+                    @Html.TextBoxFor(q => q.oc_plazo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.oc_plazo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdComprador">Comprador*</label>
+                    @Html.DropDownListFor(q => q.IdComprador, new SelectList(ViewBag.lst_comprador, "IdComprador", "Descripcion"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdComprador, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdDepartamento">Departamento*</label>
+                    @Html.DropDownListFor(q => q.IdDepartamento, new SelectList(ViewBag.lst_dep, "IdDepartamento", "nom_departamento"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdDepartamento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="oc_flete">Flete*</label>
+                    @Html.TextBoxFor(q => q.oc_flete, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.oc_flete, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-12">
@@ -34,3 +192,20 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+<script type="text/javascript">
+    $(function () {
+        //Date picker
+        $('#oc_fecha').datepicker({
+            autoclose: true
+        })
+        $('#oc_fechaVencimiento').datepicker({
+            autoclose: true
+
+        })        $('#co_fecha_aprobacion').datepicker({
+            autoclose: true
+
+        })        $('#co_fechaReproba').datepicker({
+            autoclose: true
+        })
+    });
+</script>

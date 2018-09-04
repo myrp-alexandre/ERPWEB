@@ -16,7 +16,7 @@
     @Html.HiddenFor(q => q.IdOrdenCompra)
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal</label>
                     @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control" })
@@ -79,7 +79,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdProveedor">Proveedor*</label>
-                    @Html.Partial("_CmbProveedor_COM", Model.IdProveedor)
+                    @Html.Partial("_CmbProveedor_COM", Model)
                     @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -149,7 +149,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdComprador">Comprador*</label>
-                    @Html.DropDownListFor(q => q.IdComprador, new SelectList(ViewBag.lst_dep, "IdComprador", "Descripcion"), new { @class = "form-control" })
+                    @Html.DropDownListFor(q => q.IdComprador, new SelectList(ViewBag.lst_comprador, "IdComprador", "Descripcion"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.IdComprador, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -191,3 +191,20 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+<script type="text/javascript">
+    $(function () {
+        //Date picker
+        $('#oc_fecha').datepicker({
+            autoclose: true
+        })
+        $('#oc_fechaVencimiento').datepicker({
+            autoclose: true
+
+        })        $('#co_fecha_aprobacion').datepicker({
+            autoclose: true
+
+        })        $('#co_fechaReproba').datepicker({
+            autoclose: true
+        })
+    });
+    </script>
