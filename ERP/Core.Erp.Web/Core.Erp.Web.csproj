@@ -779,6 +779,12 @@
     <Compile Include="Reportes\Inventario\INV_001_Rpt.Designer.cs">
       <DependentUpon>INV_001_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Inventario\INV_011_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Inventario\INV_011_Rpt.Designer.cs">
+      <DependentUpon>INV_011_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Inventario\INV_002_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9069,6 +9075,7 @@
     <Content Include="Areas\Compras\Views\MotivoCompra\Modificar.cshtml" />
     <Content Include="Areas\Compras\Views\MotivoCompra\Anular.cshtml" />
     <Content Include="Areas\Compras\Views\OrdenCompraLocal\_CmbProveedor_COM.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_011.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -9183,6 +9190,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -9362,6 +9370,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Inventario\INV_001_Rpt.resx">
       <DependentUpon>INV_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Inventario\INV_011_Rpt.resx">
+      <DependentUpon>INV_011_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Inventario\INV_002_Rpt.resx">
       <DependentUpon>INV_002_Rpt.cs</DependentUpon>
