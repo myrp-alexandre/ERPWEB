@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model_seguridad_acceso.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model_seguridad_acceso.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="seg_Menu">
           <Key>
             <PropertyRef Name="IdMenu" />
@@ -62,6 +62,8 @@
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
           <Property Name="ExigirDirectivaContrasenia" Type="bit" />
           <Property Name="CambiarContraseniaSgtSesion" Type="bit" />
+          <Property Name="es_super_admin" Type="bit" Nullable="false" />
+          <Property Name="contrasena_admin" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="seg_Usuario_x_Empresa">
           <Key>
@@ -153,8 +155,7 @@
             <End Role="seg_usuario_x_tb_sis_reporte" EntitySet="seg_usuario_x_tb_sis_reporte" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model_seguridad_acceso" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -200,27 +201,7 @@
           <Property Name="Lectura" Type="Boolean" Nullable="false" />
           <Property Name="Escritura" Type="Boolean" Nullable="false" />
           <Property Name="Eliminacion" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="seg_usuario" Relationship="Self.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" FromRole="seg_Menu_x_Empresa_x_Usuario" ToRole="seg_usuario" />
-        </EntityType>
-        <EntityType Name="seg_usuario">
-          <Key>
-            <PropertyRef Name="IdUsuario" />
-          </Key>
-          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Contrasena" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha_Transaccion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltModi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ExigirDirectivaContrasenia" Type="Boolean" />
-          <Property Name="CambiarContraseniaSgtSesion" Type="Boolean" />
-          <NavigationProperty Name="seg_Menu_x_Empresa_x_Usuario" Relationship="Self.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" FromRole="seg_usuario" ToRole="seg_Menu_x_Empresa_x_Usuario" />
-          <NavigationProperty Name="seg_Usuario_x_Empresa" Relationship="Self.FK_seg_Usuario_x_Empresa_seg_usuario" FromRole="seg_usuario" ToRole="seg_Usuario_x_Empresa" />
-          <NavigationProperty Name="seg_usuario_x_tb_sis_reporte" Relationship="Self.FK_seg_usuario_x_tb_sis_reporte_seg_usuario" FromRole="seg_usuario" ToRole="seg_usuario_x_tb_sis_reporte" />
+          <NavigationProperty Name="seg_usuario" Relationship="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" FromRole="seg_Menu_x_Empresa_x_Usuario" ToRole="seg_usuario" />
         </EntityType>
         <EntityType Name="seg_Usuario_x_Empresa">
           <Key>
@@ -230,7 +211,7 @@
           <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="Observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="seg_usuario" Relationship="Self.FK_seg_Usuario_x_Empresa_seg_usuario" FromRole="seg_Usuario_x_Empresa" ToRole="seg_usuario" />
+          <NavigationProperty Name="seg_usuario" Relationship="Model_seguridad_acceso.FK_seg_Usuario_x_Empresa_seg_usuario" FromRole="seg_Usuario_x_Empresa" ToRole="seg_usuario" />
         </EntityType>
         <EntityType Name="seg_usuario_x_tb_sis_reporte">
           <Key>
@@ -240,7 +221,7 @@
           <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CodReporte" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="seg_usuario" Relationship="Self.FK_seg_usuario_x_tb_sis_reporte_seg_usuario" FromRole="seg_usuario_x_tb_sis_reporte" ToRole="seg_usuario" />
+          <NavigationProperty Name="seg_usuario" Relationship="Model_seguridad_acceso.FK_seg_usuario_x_tb_sis_reporte_seg_usuario" FromRole="seg_usuario_x_tb_sis_reporte" ToRole="seg_usuario" />
         </EntityType>
         <Association Name="FK_seg_Menu_x_Empresa_seg_Menu">
           <End Role="seg_Menu" Type="Self.seg_Menu" Multiplicity="1" />
@@ -254,9 +235,55 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="Entities_seguridad_acceso" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="seg_Menu" EntityType="Self.seg_Menu" />
+          <EntitySet Name="seg_Menu_x_Empresa" EntityType="Self.seg_Menu_x_Empresa" />
+          <EntitySet Name="seg_Menu_x_Empresa_x_Usuario" EntityType="Self.seg_Menu_x_Empresa_x_Usuario" />
+          <EntitySet Name="seg_Usuario_x_Empresa" EntityType="Self.seg_Usuario_x_Empresa" />
+          <EntitySet Name="seg_usuario_x_tb_sis_reporte" EntityType="Self.seg_usuario_x_tb_sis_reporte" />
+          <AssociationSet Name="FK_seg_Menu_x_Empresa_seg_Menu" Association="Self.FK_seg_Menu_x_Empresa_seg_Menu">
+            <End Role="seg_Menu" EntitySet="seg_Menu" />
+            <End Role="seg_Menu_x_Empresa" EntitySet="seg_Menu_x_Empresa" />
+          </AssociationSet>
+          <EntitySet Name="seg_usuario" EntityType="Model_seguridad_acceso.seg_usuario" />
+          <AssociationSet Name="FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario">
+            <End Role="seg_usuario" EntitySet="seg_usuario" />
+            <End Role="seg_Menu_x_Empresa_x_Usuario" EntitySet="seg_Menu_x_Empresa_x_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_seg_Usuario_x_Empresa_seg_usuario" Association="Model_seguridad_acceso.FK_seg_Usuario_x_Empresa_seg_usuario">
+            <End Role="seg_usuario" EntitySet="seg_usuario" />
+            <End Role="seg_Usuario_x_Empresa" EntitySet="seg_Usuario_x_Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_seg_usuario_x_tb_sis_reporte_seg_usuario" Association="Model_seguridad_acceso.FK_seg_usuario_x_tb_sis_reporte_seg_usuario">
+            <End Role="seg_usuario" EntitySet="seg_usuario" />
+            <End Role="seg_usuario_x_tb_sis_reporte" EntitySet="seg_usuario_x_tb_sis_reporte" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="seg_usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha_Transaccion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltModi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExigirDirectivaContrasenia" Type="Boolean" />
+          <Property Name="CambiarContraseniaSgtSesion" Type="Boolean" />
+          <Property Name="es_super_admin" Type="Boolean" Nullable="false" />
+          <Property Name="contrasena_admin" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="seg_Menu_x_Empresa_x_Usuario" Relationship="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" FromRole="seg_usuario" ToRole="seg_Menu_x_Empresa_x_Usuario" />
+          <NavigationProperty Name="seg_Usuario_x_Empresa" Relationship="Model_seguridad_acceso.FK_seg_Usuario_x_Empresa_seg_usuario" FromRole="seg_usuario" ToRole="seg_Usuario_x_Empresa" />
+          <NavigationProperty Name="seg_usuario_x_tb_sis_reporte" Relationship="Model_seguridad_acceso.FK_seg_usuario_x_tb_sis_reporte_seg_usuario" FromRole="seg_usuario" ToRole="seg_usuario_x_tb_sis_reporte" />
+        </EntityType>
         <Association Name="FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario">
-          <End Role="seg_usuario" Type="Self.seg_usuario" Multiplicity="1" />
-          <End Role="seg_Menu_x_Empresa_x_Usuario" Type="Self.seg_Menu_x_Empresa_x_Usuario" Multiplicity="*" />
+          <End Type="Model_seguridad_acceso.seg_usuario" Role="seg_usuario" Multiplicity="1" />
+          <End Type="Model_seguridad_acceso.seg_Menu_x_Empresa_x_Usuario" Role="seg_Menu_x_Empresa_x_Usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="seg_usuario">
               <PropertyRef Name="IdUsuario" />
@@ -267,8 +294,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_seg_Usuario_x_Empresa_seg_usuario">
-          <End Role="seg_usuario" Type="Self.seg_usuario" Multiplicity="1" />
-          <End Role="seg_Usuario_x_Empresa" Type="Self.seg_Usuario_x_Empresa" Multiplicity="*" />
+          <End Type="Model_seguridad_acceso.seg_usuario" Role="seg_usuario" Multiplicity="1" />
+          <End Type="Model_seguridad_acceso.seg_Usuario_x_Empresa" Role="seg_Usuario_x_Empresa" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="seg_usuario">
               <PropertyRef Name="IdUsuario" />
@@ -279,8 +306,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_seg_usuario_x_tb_sis_reporte_seg_usuario">
-          <End Role="seg_usuario" Type="Self.seg_usuario" Multiplicity="1" />
-          <End Role="seg_usuario_x_tb_sis_reporte" Type="Self.seg_usuario_x_tb_sis_reporte" Multiplicity="*" />
+          <End Type="Model_seguridad_acceso.seg_usuario" Role="seg_usuario" Multiplicity="1" />
+          <End Type="Model_seguridad_acceso.seg_usuario_x_tb_sis_reporte" Role="seg_usuario_x_tb_sis_reporte" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="seg_usuario">
               <PropertyRef Name="IdUsuario" />
@@ -290,30 +317,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities_seguridad_acceso" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="seg_Menu" EntityType="Self.seg_Menu" />
-          <EntitySet Name="seg_Menu_x_Empresa" EntityType="Self.seg_Menu_x_Empresa" />
-          <EntitySet Name="seg_Menu_x_Empresa_x_Usuario" EntityType="Self.seg_Menu_x_Empresa_x_Usuario" />
-          <EntitySet Name="seg_usuario" EntityType="Self.seg_usuario" />
-          <EntitySet Name="seg_Usuario_x_Empresa" EntityType="Self.seg_Usuario_x_Empresa" />
-          <EntitySet Name="seg_usuario_x_tb_sis_reporte" EntityType="Self.seg_usuario_x_tb_sis_reporte" />
-          <AssociationSet Name="FK_seg_Menu_x_Empresa_seg_Menu" Association="Self.FK_seg_Menu_x_Empresa_seg_Menu">
-            <End Role="seg_Menu" EntitySet="seg_Menu" />
-            <End Role="seg_Menu_x_Empresa" EntitySet="seg_Menu_x_Empresa" />
-          </AssociationSet>
-          <AssociationSet Name="FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" Association="Self.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario">
-            <End Role="seg_usuario" EntitySet="seg_usuario" />
-            <End Role="seg_Menu_x_Empresa_x_Usuario" EntitySet="seg_Menu_x_Empresa_x_Usuario" />
-          </AssociationSet>
-          <AssociationSet Name="FK_seg_Usuario_x_Empresa_seg_usuario" Association="Self.FK_seg_Usuario_x_Empresa_seg_usuario">
-            <End Role="seg_usuario" EntitySet="seg_usuario" />
-            <End Role="seg_Usuario_x_Empresa" EntitySet="seg_Usuario_x_Empresa" />
-          </AssociationSet>
-          <AssociationSet Name="FK_seg_usuario_x_tb_sis_reporte_seg_usuario" Association="Self.FK_seg_usuario_x_tb_sis_reporte_seg_usuario">
-            <End Role="seg_usuario" EntitySet="seg_usuario" />
-            <End Role="seg_usuario_x_tb_sis_reporte" EntitySet="seg_usuario_x_tb_sis_reporte" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -361,24 +364,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="seg_usuario">
-            <EntityTypeMapping TypeName="Model_seguridad_acceso.seg_usuario">
-              <MappingFragment StoreEntitySet="seg_usuario">
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="Fecha_Transaccion" ColumnName="Fecha_Transaccion" />
-                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ExigirDirectivaContrasenia" ColumnName="ExigirDirectivaContrasenia" />
-                <ScalarProperty Name="CambiarContraseniaSgtSesion" ColumnName="CambiarContraseniaSgtSesion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="seg_Usuario_x_Empresa">
             <EntityTypeMapping TypeName="Model_seguridad_acceso.seg_Usuario_x_Empresa">
               <MappingFragment StoreEntitySet="seg_Usuario_x_Empresa">
@@ -394,6 +379,26 @@
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="CodReporte" ColumnName="CodReporte" />
                 <ScalarProperty Name="observacion" ColumnName="observacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="seg_usuario">
+            <EntityTypeMapping TypeName="Model_seguridad_acceso.seg_usuario">
+              <MappingFragment StoreEntitySet="seg_usuario">
+                <ScalarProperty Name="contrasena_admin" ColumnName="contrasena_admin" />
+                <ScalarProperty Name="es_super_admin" ColumnName="es_super_admin" />
+                <ScalarProperty Name="CambiarContraseniaSgtSesion" ColumnName="CambiarContraseniaSgtSesion" />
+                <ScalarProperty Name="ExigirDirectivaContrasenia" ColumnName="ExigirDirectivaContrasenia" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
+                <ScalarProperty Name="Fecha_Transaccion" ColumnName="Fecha_Transaccion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -34,7 +34,25 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
 
+            <div class="col-md-2">
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label for="es_super_admin">@Html.CheckBoxFor(q => q.es_super_admin, new { @id = "es_super_admin" }) ¿Es usuario Administrador?</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <div class="form-group" id="div_admin">
+                    <label for="contrasena_admin">Contraseña Administrador</label>
+                    @Html.PasswordFor(q => q.contrasena_admin, new { @class = "form-control", @id = "contrasena_admin" })
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
 
@@ -101,3 +119,16 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+<script>
+
+    $("#es_super_admin").change(function () {
+
+        if ($("#es_super_admin").is(":checked")) {
+            $("#div_admin").show();
+        }else
+            $("#div_admin").hide();
+    });
+
+
+  
+</script>
