@@ -895,7 +895,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
     }
 
-
     public class cp_cuotas_x_doc_det_Info_lst
     {
         string Variable = "lst_cuotas";

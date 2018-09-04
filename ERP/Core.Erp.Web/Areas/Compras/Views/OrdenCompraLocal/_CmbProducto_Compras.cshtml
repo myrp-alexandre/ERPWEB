@@ -24,6 +24,7 @@
                 settings.Properties.FilterMinLength = 2;
             })
             .BindList(new Core.Erp.Web.Areas.Compras.Controllers.OrdenCompraLocalController().get_list_bajo_demandaProducto,
-            new Core.Erp.Web.Areas.Compras.Controllers.OrdenCompraLocalController().get_info_bajo_demandaProducto).Bind((Model.GetType() == typeof(Core.Erp.Info.Compras.com_ordencompra_local_Info) || Model.GetType() == typeof(List<Core.Erp.Info.Compras.com_ordencompra_local_Info>)) ? "" : (Model == 0 ? "" : Model));
+            new Core.Erp.Web.Areas.Compras.Controllers.OrdenCompraLocalController().get_info_bajo_demandaProducto)
+            .Bind(Model);
 }
 @comboBox.GetHtml()

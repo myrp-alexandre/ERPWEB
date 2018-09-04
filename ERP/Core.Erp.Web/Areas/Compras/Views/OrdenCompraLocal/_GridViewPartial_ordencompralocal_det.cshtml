@@ -8,9 +8,9 @@
 
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Factura", Action = "EditingAddNew", Area = "Facturacion" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Factura", Action = "EditingUpdate", Area = "Facturacion" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Factura", Action = "EditingDelete", Area = "Facturacion" };
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "OrdenCompraLocal", Action = "EditingAddNew", Area = "Compras" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "OrdenCompraLocal", Action = "EditingUpdate", Area = "Compras" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "OrdenCompraLocal", Action = "EditingDelete", Area = "Compras" };
 
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -34,11 +34,12 @@
         //Funcion para inicializar fila al presionar nuevo
         settings.InitNewRow = (s, e) =>
         {
-            e.NewValues["IdProducto"] = 0;
-            e.NewValues["IdCod_Impuesto_Iva"] = "IVA0";
-            e.NewValues["do_Cantidad"] = "";
-            e.NewValues["do_precioCompra"] = "";
-            e.NewValues["do_porc_des"] = "";
+            e.NewValues["IdProducto"] = "";
+            e.NewValues["IdUnidadMedida"] = "UNID";
+            e.NewValues["IdCod_Impuesto"] = "";
+            e.NewValues["Cantidad"] = "";
+            e.NewValues["CostoUni"] = "";
+            e.NewValues["PorDescuento"] = "0";
         };
         settings.Columns.Add(column =>
         {
@@ -71,7 +72,21 @@
                 ViewContext.Writer.Write("</div>");
             });
         });
-
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdUnidadMedida";
+            column.Caption = "U. de medida";
+            column.Width = Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("descripcion", "Descripción").Width = Unit.Percentage(100);
+                p.TextField = "descripcion";
+                p.ValueField = "IdUnidadMedida";
+                p.ValueType = typeof(string);
+                p.DataSource = new Core.Erp.Bus.Inventario.in_UnidadMedida_Bus().get_list(false);
+            });
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "do_Cantidad";
@@ -95,7 +110,7 @@
                 q.MinValue = 0;
                 q.Width = Unit.Percentage(100);
             });
-            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
         {
@@ -107,7 +122,7 @@
                 q.MinValue = 0;
                 q.Width = Unit.Percentage(100);
             });
-            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
         {
@@ -122,8 +137,11 @@
                 p.ValueField = "IdCod_Impuesto";
                 p.ValueType = typeof(string);
                 p.DataSource = ViewBag.lst_impuesto;
+                p.DataSource = new Core.Erp.Bus.General.tb_sis_Impuesto_Bus().get_list("IVA", false);
+
             });
             column.EditFormSettings.Visible = DefaultBoolean.True;
+
         });
         settings.Columns.Add(column =>
         {
@@ -132,6 +150,7 @@
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.False;
+
         });
         settings.Columns.Add(column =>
         {
@@ -148,7 +167,7 @@
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.False;
-        }); 
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "do_total";
@@ -157,10 +176,12 @@
             column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
-
-
+        settings.SettingsBehavior.AllowSort = false;
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
-
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "do_subtotal").DisplayFormat = "{0:n2}";
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "do_iva").DisplayFormat = "{0:n2}";
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "do_total").DisplayFormat = "{0:n2}";
+        settings.Settings.ShowFooter = true;
     });
 }
 @grid.Bind(Model).GetHtml()

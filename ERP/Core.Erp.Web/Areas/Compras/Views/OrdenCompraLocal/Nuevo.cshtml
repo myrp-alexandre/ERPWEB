@@ -137,7 +137,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="oc_plazo">Plazo*</label>
-                    @Html.TextBoxFor(q => q.oc_plazo, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.oc_plazo, new { @class = "form-control" , @id="oc_plazo"})
                     @Html.ValidationMessageFor(q => q.oc_plazo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -203,16 +203,19 @@
 <script type="text/javascript">
     $(function () {
         //Date picker
+
         $('#oc_fecha').datepicker({
             autoclose: true
         })
         $('#oc_fechaVencimiento').datepicker({
             autoclose: true
 
-        })        $('#co_fecha_aprobacion').datepicker({
+        })
+        $('#co_fecha_aprobacion').datepicker({
             autoclose: true
 
-        })        $('#co_fechaReproba').datepicker({
+        })
+        $('#co_fechaReproba').datepicker({
             autoclose: true
         })
     });

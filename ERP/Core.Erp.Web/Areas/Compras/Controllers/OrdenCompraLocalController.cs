@@ -138,6 +138,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         public ActionResult Nuevo(com_ordencompra_local_Info model)
         {
             model.IdUsuario = SessionFixed.IdUsuario;
+            model.lst_det = List_det.get_list(model.IdTransaccionSession);
             if (!bus_ordencompra.guardarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -166,7 +167,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         public ActionResult Modificar(com_ordencompra_local_Info model)
         {
             model.IdUsuarioUltMod = SessionFixed.IdUsuario;
-
+            model.lst_det = List_det.get_list(model.IdTransaccionSession);
             if (!bus_ordencompra.modificarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -195,7 +196,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         public ActionResult Anular(com_ordencompra_local_Info model)
         {
             model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
-
+            model.lst_det = List_det.get_list(model.IdTransaccionSession);
             if (!bus_ordencompra.anularDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -218,8 +219,14 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] com_ordencompra_local_det_Info info_det)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProducto);
+            if (producto != null)
+                         info_det.pr_descripcion = producto.pr_descripcion_combo;
+
+                if (ModelState.IsValid)
+                    List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_ordencompralocal_det", model);
         }
@@ -227,8 +234,15 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] com_ordencompra_local_det_Info info_det)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProducto);
+            if (producto != null)
+               info_det.pr_descripcion = producto.pr_descripcion_combo;
+
+            if (ModelState.IsValid)
+                List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_ordencompralocal_det", model);
         }
@@ -267,7 +281,16 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         {
             List<com_ordencompra_local_det_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
-            info_det.IdProducto = info_det.IdProducto;
+            info_det.do_descuento = Math.Round(info_det.do_precioCompra * (info_det.do_porc_des / 100), 2, MidpointRounding.AwayFromZero);
+            info_det.do_precioFinal = Math.Round(info_det.do_precioCompra - info_det.do_descuento, 2, MidpointRounding.AwayFromZero);
+            info_det.do_subtotal = Math.Round(info_det.do_Cantidad * info_det.do_precioFinal, 2, MidpointRounding.AwayFromZero);
+            var impuesto = bus_impuesto.get_info(info_det.IdCod_Impuesto);
+            if (impuesto != null)
+                info_det.Por_Iva = impuesto.porcentaje;
+            else
+                info_det.Por_Iva = 0;
+            info_det.do_iva = Math.Round(info_det.do_subtotal * (info_det.Por_Iva / 100), 2, MidpointRounding.AwayFromZero);
+            info_det.do_total = Math.Round(info_det.do_subtotal + info_det.do_iva, 2, MidpointRounding.AwayFromZero);
             list.Add(info_det);
         }
 
@@ -275,6 +298,22 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         {
             com_ordencompra_local_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdProducto = info_det.IdProducto;
+            edited_info.pr_descripcion = info_det.pr_descripcion;
+            edited_info.do_Cantidad = info_det.do_Cantidad;
+            edited_info.do_precioCompra = info_det.do_precioCompra;
+            edited_info.do_porc_des = info_det.do_porc_des;
+            edited_info.IdCod_Impuesto = info_det.IdCod_Impuesto;
+            edited_info.do_descuento = Math.Round(info_det.do_precioCompra * (info_det.do_porc_des / 100), 2, MidpointRounding.AwayFromZero);
+            edited_info.do_precioFinal = Math.Round(info_det.do_precioCompra - info_det.do_descuento, 2, MidpointRounding.AwayFromZero);
+            edited_info.do_subtotal = Math.Round(info_det.do_Cantidad * edited_info.do_precioFinal, 2, MidpointRounding.AwayFromZero);
+            var impuesto = bus_impuesto.get_info(edited_info.IdCod_Impuesto);
+            if (impuesto != null)
+                edited_info.Por_Iva = impuesto.porcentaje;
+            else
+                edited_info.Por_Iva = 0;
+            edited_info.do_iva = Math.Round(edited_info.do_subtotal * (edited_info.Por_Iva / 100), 2, MidpointRounding.AwayFromZero);
+            edited_info.do_total = Math.Round(edited_info.do_subtotal + edited_info.do_iva, 2, MidpointRounding.AwayFromZero);
+
         }
 
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)

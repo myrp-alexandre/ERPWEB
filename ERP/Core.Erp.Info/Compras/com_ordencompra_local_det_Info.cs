@@ -32,5 +32,6 @@ namespace Core.Erp.Info.Compras
         public string IdUnidadMedida { get; set; }
         public double Por_Iva { get; set; }
         public string IdCod_Impuesto { get; set; }
+        public string pr_descripcion { get; set; }
     }
 }
