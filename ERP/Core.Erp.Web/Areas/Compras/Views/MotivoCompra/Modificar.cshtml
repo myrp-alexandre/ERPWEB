@@ -18,8 +18,8 @@
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="Cod_Motivo">Código</label>
-                    @Html.DropDownListFor(q => q.Cod_Motivo, new SelectList(ViewBag.lst_usuario, "IdUsuario", "Nombre"), new { @class = "form-control" })
+                    <label for="Cod_Motivo">Código*</label>
+                    @Html.TextBoxFor(q => q.Cod_Motivo, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Cod_Motivo, "", new { @class = "text-danger" })
                 </div>
             </div>

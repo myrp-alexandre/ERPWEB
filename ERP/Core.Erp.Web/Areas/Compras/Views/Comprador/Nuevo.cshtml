@@ -11,15 +11,32 @@
 
 @using (Html.BeginForm("Nuevo", "Comprador", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
- 
-    @Html.HiddenFor(q=>q.IdEmpresa)
+
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdComprador)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdUsuario_com">Usuario</label>
-                    @Html.DropDownListFor(q=>q.IdUsuario_com, new  SelectList(ViewBag.lst_usuario, "IdUsuario", "Nombre"), new { @class = "form-control" })
+                    @Html.DropDownListFor(q => q.IdUsuario_com, new SelectList(ViewBag.lst_usuario, "IdUsuario", "Nombre"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.IdUsuario_com, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdPersona">Beneficiario*</label>
+                    @Html.Partial("_CmbPersona_Compras", Model)
+                    @Html.ValidationMessageFor(q => q.IdPersona, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="cedula">Cédula</label>
+                    @Html.TextBoxFor(q => q.cedula, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.cedula, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

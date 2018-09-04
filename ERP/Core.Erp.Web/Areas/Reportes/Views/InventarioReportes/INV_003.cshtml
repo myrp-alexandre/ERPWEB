@@ -80,9 +80,9 @@
                 <div class="col-md-12">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="IdProducto">Producto </label>
-                            @Html.DropDownListFor(q => q.IdProducto, new SelectList(ViewBag.lst_producto, "IdProducto", "pr_descripcion"), new { @class = "form-control", @id = "IdProducto" })
-                            @Html.ValidationMessageFor(q => q.IdProducto, "", new { @class = "text-danger" })
+                            <label for="IdProductoPadre">Producto padre</label>
+                            @Html.Partial("_CmbProductoPadre_Inventario", Model)
+                            @Html.ValidationMessageFor(q => q.IdProductoPadre, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -162,7 +162,6 @@
 <script>
     $(function () {
         cargar_bodega();
-        cargar_lineas();
         $('#fecha_ini').datepicker({
             autoclose: true
         })

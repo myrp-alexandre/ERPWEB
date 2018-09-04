@@ -372,7 +372,6 @@
             <End Role="com_catalogo_tipo" EntitySet="com_catalogo_tipo" />
             <End Role="com_catalogo" EntitySet="com_catalogo" />
           </AssociationSet>
-          <EntitySet Name="com_comprador" EntityType="Model_compras.com_comprador" />
           <EntitySet Name="com_estado_cierre" EntityType="Model_compras.com_estado_cierre" />
           <EntitySet Name="com_departamento" EntityType="Model_compras.com_departamento" />
           <EntitySet Name="com_parametro" EntityType="Model_compras.com_parametro" />
@@ -397,10 +396,6 @@
             <End Role="com_catalogo" EntitySet="com_catalogo" />
             <End Role="com_ordencompra_local" EntitySet="com_ordencompra_local" />
           </AssociationSet>
-          <AssociationSet Name="FK_com_ordencompra_local_com_comprador" Association="Model_compras.FK_com_ordencompra_local_com_comprador">
-            <End Role="com_comprador" EntitySet="com_comprador" />
-            <End Role="com_ordencompra_local" EntitySet="com_ordencompra_local" />
-          </AssociationSet>
           <AssociationSet Name="FK_com_ordencompra_local_com_departamento" Association="Model_compras.FK_com_ordencompra_local_com_departamento">
             <End Role="com_departamento" EntitySet="com_departamento" />
             <End Role="com_ordencompra_local" EntitySet="com_ordencompra_local" />
@@ -417,6 +412,11 @@
           <EntitySet Name="com_Motivo_Orden_Compra" EntityType="Model_compras.com_Motivo_Orden_Compra" />
           <AssociationSet Name="FK_com_ordencompra_local_com_Motivo_Orden_Compra" Association="Model_compras.FK_com_ordencompra_local_com_Motivo_Orden_Compra">
             <End Role="com_Motivo_Orden_Compra" EntitySet="com_Motivo_Orden_Compra" />
+            <End Role="com_ordencompra_local" EntitySet="com_ordencompra_local" />
+          </AssociationSet>
+          <EntitySet Name="com_comprador" EntityType="Model_compras.com_comprador" />
+          <AssociationSet Name="FK_com_ordencompra_local_com_comprador" Association="Model_compras.FK_com_ordencompra_local_com_comprador">
+            <End Role="com_comprador" EntitySet="com_comprador" />
             <End Role="com_ordencompra_local" EntitySet="com_ordencompra_local" />
           </AssociationSet>
         </EntityContainer>
@@ -467,27 +467,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="com_comprador">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdComprador" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdComprador" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdUsuario_com" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="MotiAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IdPersona" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="cedula" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="com_ordencompra_local" Relationship="Model_compras.FK_com_ordencompra_local_com_comprador" FromRole="com_comprador" ToRole="com_ordencompra_local" />
-        </EntityType>
         <EntityType Name="com_estado_cierre">
           <Key>
             <PropertyRef Name="IdEstado_cierre" />
@@ -613,11 +592,11 @@
           <Property Name="IdComprador" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <NavigationProperty Name="com_catalogo" Relationship="Model_compras.FK_com_ordencompra_local_com_catalogo" FromRole="com_ordencompra_local" ToRole="com_catalogo" />
           <NavigationProperty Name="com_catalogo1" Relationship="Model_compras.FK_com_ordencompra_local_com_catalogo1" FromRole="com_ordencompra_local" ToRole="com_catalogo" />
-          <NavigationProperty Name="com_comprador" Relationship="Model_compras.FK_com_ordencompra_local_com_comprador" FromRole="com_ordencompra_local" ToRole="com_comprador" />
           <NavigationProperty Name="com_departamento" Relationship="Model_compras.FK_com_ordencompra_local_com_departamento" FromRole="com_ordencompra_local" ToRole="com_departamento" />
           <NavigationProperty Name="com_estado_cierre" Relationship="Model_compras.FK_com_ordencompra_local_com_estado_cierre" FromRole="com_ordencompra_local" ToRole="com_estado_cierre" />
           <NavigationProperty Name="com_TerminoPago" Relationship="Model_compras.FK_com_ordencompra_local_com_TerminoPago" FromRole="com_ordencompra_local" ToRole="com_TerminoPago" />
           <NavigationProperty Name="com_Motivo_Orden_Compra" Relationship="Model_compras.FK_com_ordencompra_local_com_Motivo_Orden_Compra" FromRole="com_ordencompra_local" ToRole="com_Motivo_Orden_Compra" />
+          <NavigationProperty Name="com_comprador" Relationship="Model_compras.FK_com_ordencompra_local_com_comprador" FromRole="com_ordencompra_local" ToRole="com_comprador" />
         </EntityType>
         <Association Name="FK_com_ordencompra_local_com_catalogo">
           <End Type="Model_compras.com_catalogo" Role="com_catalogo" Multiplicity="1" />
@@ -640,20 +619,6 @@
             </Principal>
             <Dependent Role="com_ordencompra_local">
               <PropertyRef Name="IdEstadoRecepcion_cat" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_com_ordencompra_local_com_comprador">
-          <End Type="Model_compras.com_comprador" Role="com_comprador" Multiplicity="1" />
-          <End Type="Model_compras.com_ordencompra_local" Role="com_ordencompra_local" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="com_comprador">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdComprador" />
-            </Principal>
-            <Dependent Role="com_ordencompra_local">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdComprador" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -743,6 +708,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="com_comprador">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdComprador" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdComprador" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdUsuario_com" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IdPersona" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="cedula" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotiAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="com_ordencompra_local" Relationship="Model_compras.FK_com_ordencompra_local_com_comprador" FromRole="com_comprador" ToRole="com_ordencompra_local" />
+        </EntityType>
+        <Association Name="FK_com_ordencompra_local_com_comprador">
+          <End Type="Model_compras.com_comprador" Role="com_comprador" Multiplicity="1" />
+          <End Type="Model_compras.com_ordencompra_local" Role="com_ordencompra_local" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="com_comprador">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdComprador" />
+            </Principal>
+            <Dependent Role="com_ordencompra_local">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdComprador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -777,26 +777,6 @@
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdCatalogocompra_tipo" ColumnName="IdCatalogocompra_tipo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="com_comprador">
-            <EntityTypeMapping TypeName="Model_compras.com_comprador">
-              <MappingFragment StoreEntitySet="com_comprador">
-                <ScalarProperty Name="cedula" ColumnName="cedula" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdUsuario_com" ColumnName="IdUsuario_com" />
-                <ScalarProperty Name="IdComprador" ColumnName="IdComprador" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -912,6 +892,26 @@
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Cod_Motivo" ColumnName="Cod_Motivo" />
                 <ScalarProperty Name="IdMotivo" ColumnName="IdMotivo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="com_comprador">
+            <EntityTypeMapping TypeName="Model_compras.com_comprador">
+              <MappingFragment StoreEntitySet="com_comprador">
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdUsuario_com" ColumnName="IdUsuario_com" />
+                <ScalarProperty Name="IdComprador" ColumnName="IdComprador" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
