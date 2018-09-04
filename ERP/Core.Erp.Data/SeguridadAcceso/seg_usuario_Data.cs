@@ -139,8 +139,8 @@ namespace Core.Erp.Data.SeguridadAcceso
                         ExigirDirectivaContrasenia = info.ExigirDirectivaContrasenia,
                         CambiarContraseniaSgtSesion = info.CambiarContraseniaSgtSesion,
                         Nombre = info.Nombre,
-                        es_super_admin=info.es_super_admin,
-                        contrasena_admin=info.contrasena_admin,
+                        es_super_admin = info.es_super_admin,
+                        contrasena_admin = info.contrasena_admin,
                         estado = info.estado = "A",
 
                         Fecha_Transaccion = info.Fecha_Transaccion

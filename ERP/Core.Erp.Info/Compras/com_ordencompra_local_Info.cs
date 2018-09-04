@@ -8,6 +8,7 @@ namespace Core.Erp.Info.Compras
 {
     public class com_ordencompra_local_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public decimal IdOrdenCompra { get; set; }
@@ -42,5 +43,10 @@ namespace Core.Erp.Info.Compras
         public Nullable<System.DateTime> oc_fechaVencimiento { get; set; }
         public string IdEstado_cierre { get; set; }
         public decimal IdComprador { get; set; }
+
+        //campos que no existen en la tabla
+
+
+        public List<com_ordencompra_local_det_Info> lst_det { get; set; }
     }
 }
