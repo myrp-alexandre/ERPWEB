@@ -110,7 +110,7 @@ namespace Core.Erp.Data.Compras
                     {
 
                         IdEmpresa = info.IdEmpresa,
-                        IdMotivo = info.IdMotivo=get_id(info.IdMotivo),
+                        IdMotivo = info.IdMotivo=get_id(info.IdEmpresa),
                         Cod_Motivo = info.Cod_Motivo,
                         Descripcion = info.Descripcion,
                         estado = "A",

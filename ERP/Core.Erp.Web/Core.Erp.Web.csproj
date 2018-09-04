@@ -9068,6 +9068,7 @@
     <Content Include="Areas\Compras\Views\MotivoCompra\Nuevo.cshtml" />
     <Content Include="Areas\Compras\Views\MotivoCompra\Modificar.cshtml" />
     <Content Include="Areas\Compras\Views\MotivoCompra\Anular.cshtml" />
+    <Content Include="Areas\Compras\Views\OrdenCompraLocal\_CmbProveedor_COM.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
