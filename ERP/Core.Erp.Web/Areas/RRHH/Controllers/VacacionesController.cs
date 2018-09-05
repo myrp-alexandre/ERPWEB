@@ -44,8 +44,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 IdEmpresa = GetIdEmpresa();
                 List<ro_historico_vacaciones_x_empleado_Info> model = new List<ro_historico_vacaciones_x_empleado_Info>();
                 model=Session["lst_vacaciones"] as List<ro_historico_vacaciones_x_empleado_Info>;
-                if (model == null)
-                    model = new List<ro_historico_vacaciones_x_empleado_Info>();
+               
                 return PartialView("_cmb_vacaciones", model);
             }
             catch (Exception)
