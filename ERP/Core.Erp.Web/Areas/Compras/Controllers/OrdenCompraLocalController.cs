@@ -146,7 +146,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(int IdEmpresa = 0, int IdSucursal = 0 ,  decimal IdOrdenCompra = 0, int Secuencia = 0)
+        public ActionResult Modificar(int IdEmpresa = 0, int IdSucursal = 0 ,  decimal IdOrdenCompra  = 0)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -158,7 +158,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             if (model == null)
                 return RedirectToAction("Index");
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
-            model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdOrdenCompra, Secuencia);
+            model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdOrdenCompra);
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
@@ -175,7 +175,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(int IdEmpresa = 0, int IdSucursal = 0, decimal IdOrdenCompra = 0, int Secuencia = 0)
+        public ActionResult Anular(int IdEmpresa = 0, int IdSucursal = 0, decimal IdOrdenCompra = 0)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -187,7 +187,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             if (model == null)
                 return RedirectToAction("Index");
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
-            model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdOrdenCompra, Secuencia);
+            model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdOrdenCompra);
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);

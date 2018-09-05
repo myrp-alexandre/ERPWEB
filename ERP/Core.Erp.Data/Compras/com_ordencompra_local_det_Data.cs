@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Compras
 {
    public class com_ordencompra_local_det_Data
     {
-        public List<com_ordencompra_local_det_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdOrdenCompra, int Secuencia)
+        public List<com_ordencompra_local_det_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdOrdenCompra)
         {
             try
             {
@@ -20,7 +20,6 @@ namespace Core.Erp.Data.Compras
                              where q.IdEmpresa == IdEmpresa
                              && q.IdSucursal == IdSucursal
                              && q.IdOrdenCompra == IdOrdenCompra
-                             && q.Secuencia == Secuencia
                              select new com_ordencompra_local_det_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

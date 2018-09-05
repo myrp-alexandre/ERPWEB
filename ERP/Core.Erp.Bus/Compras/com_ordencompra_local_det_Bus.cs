@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.Compras
     public class com_ordencompra_local_det_Bus
     {
         com_ordencompra_local_det_Data odata = new com_ordencompra_local_det_Data();
-        public List<com_ordencompra_local_det_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdOrdenCompra, int Secuencia)
+        public List<com_ordencompra_local_det_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdOrdenCompra)
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdSucursal, IdOrdenCompra, Secuencia);
+                return odata.get_list(IdEmpresa, IdSucursal, IdOrdenCompra);
             }
             catch (Exception)
             {
