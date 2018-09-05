@@ -9,6 +9,8 @@ using DevExpress.Web.Mvc;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
 using Core.Erp.Bus.General;
+using Core.Erp.Info.General;
+using DevExpress.Web;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -28,6 +30,25 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         int IdEmpresa = 0;
         #endregion
+
+
+        #region Metodos ComboBox bajo demanda
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        public ActionResult CmbProveedor_CXP()
+        {
+            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
+            return PartialView("_CmbProveedor_CXP", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        #endregion
+
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
