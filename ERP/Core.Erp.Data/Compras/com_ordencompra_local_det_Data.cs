@@ -16,7 +16,7 @@ namespace Core.Erp.Data.Compras
                 List<com_ordencompra_local_det_Info> Lista;
                 using (Entities_compras Context = new Entities_compras())
                 {
-                    Lista = (from q in Context.com_ordencompra_local_det
+                    Lista = (from q in Context.vwcom_ordencompra_local_det
                              where q.IdEmpresa == IdEmpresa
                              && q.IdSucursal == IdSucursal
                              && q.IdOrdenCompra == IdOrdenCompra
@@ -38,7 +38,8 @@ namespace Core.Erp.Data.Compras
                                  do_subtotal = q.do_subtotal,
                                  do_total = q.do_total,
                                  Por_Iva = q.Por_Iva,
-                                 Secuencia = q.Secuencia
+                                 Secuencia = q.Secuencia,
+                                 pr_descripcion = q.pr_descripcion
                              }).ToList();
                 }
                 return Lista;

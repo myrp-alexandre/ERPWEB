@@ -245,14 +245,15 @@ namespace Core.Erp.Data.Compras
 
                      Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                      Entity.Fecha_UltMod = DateTime.Now;
-
+                    var det = Context.com_ordencompra_local_det.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdSucursal == info.IdSucursal && v.IdOrdenCompra == info.IdOrdenCompra);
+                    Context.com_ordencompra_local_det.RemoveRange(det);
                     foreach (var item in info.lst_det)
                     {
                         com_ordencompra_local_det Entity_det = new com_ordencompra_local_det
                         {
                             IdEmpresa = info.IdEmpresa,
-                            IdOrdenCompra = info.IdOrdenCompra,
                             IdSucursal = info.IdSucursal,
+                            IdOrdenCompra = info.IdOrdenCompra,
                             IdProducto = item.IdProducto,
                             IdCod_Impuesto = item.IdCod_Impuesto,
                             IdUnidadMedida = item.IdUnidadMedida,

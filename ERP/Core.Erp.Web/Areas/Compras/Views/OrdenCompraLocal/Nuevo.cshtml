@@ -15,7 +15,7 @@
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdOrdenCompra)
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
-    <div class="row">
+     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
@@ -80,7 +80,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdProveedor">Proveedor*</label>
-                    @Html.Partial("_CmbProveedor_COM", Model)
+                    @Html.Partial("_CmbProveedor_COM", Model.IdProveedor)
                     @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -91,13 +91,7 @@
                     @Html.ValidationMessageFor(q => q.IdEstadoAprobacion_cat, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdEstadoRecepcion_cat">Estado de recepción*</label>
-                    @Html.DropDownListFor(q => q.IdEstadoRecepcion_cat, new SelectList(ViewBag.lst_rec, "IdCatalogocompra", "Nombre"), new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.IdEstadoRecepcion_cat, "", new { @class = "text-danger" })
-                </div>
-            </div>
+
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="IdEstado_cierre">Estado de cierre*</label>
@@ -105,48 +99,18 @@
                     @Html.ValidationMessageFor(q => q.IdEstado_cierre, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
-                    <label for="oc_NumDocumento">Número de documento*</label>
-                    @Html.TextBoxFor(q => q.oc_NumDocumento, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.oc_NumDocumento, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Tipo">Tipo*</label>
-                    @Html.TextBoxFor(q => q.Tipo, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.Tipo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="IdTerminoPago">Termino pago*</label>
-                    @Html.DropDownListFor(q => q.IdTerminoPago, new SelectList(ViewBag.lst_termino, "IdTerminoPago", "Descripcion"), new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.IdTerminoPago, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="oc_plazo">Plazo*</label>
-                    @Html.TextBoxFor(q => q.oc_plazo, new { @class = "form-control" , @id="oc_plazo"})
-                    @Html.ValidationMessageFor(q => q.oc_plazo, "", new { @class = "text-danger" })
+                    <label for="IdMotivo">Motivo</label>
+                    @Html.DropDownListFor(q => q.IdMotivo, new SelectList(ViewBag.lst_motivo, "IdMotivo", "Descripcion"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdMotivo, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
-
+    
     <div class="row">
         <div class="col-md-12">
-
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdComprador">Comprador*</label>
@@ -156,16 +120,32 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="IdDepartamento">Departamento*</label>
+                    <label for="IdDepartamento">Departamento</label>
                     @Html.DropDownListFor(q => q.IdDepartamento, new SelectList(ViewBag.lst_dep, "IdDepartamento", "nom_departamento"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.IdDepartamento, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
-                    <label for="oc_flete">Flete*</label>
-                    @Html.TextBoxFor(q => q.oc_flete, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.oc_flete, "", new { @class = "text-danger" })
+                    <label for="oc_NumDocumento">Número de documento*</label>
+                    @Html.TextBoxFor(q => q.oc_NumDocumento, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.oc_NumDocumento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdTerminoPago">Termino pago*</label>
+                    @Html.DropDownListFor(q => q.IdTerminoPago, new SelectList(ViewBag.lst_termino, "IdTerminoPago", "Descripcion"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdTerminoPago, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="oc_plazo">Plazo*</label>
+                    @Html.TextBoxFor(q => q.oc_plazo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.oc_plazo, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -175,14 +155,13 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="oc_observacion">Observación*</label>
+                    <label for="oc_observacion">Observación</label>
                     @Html.TextBoxFor(q => q.oc_observacion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.oc_observacion, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">

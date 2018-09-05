@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,13 +13,19 @@ namespace Core.Erp.Info.Compras
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public decimal IdOrdenCompra { get; set; }
+        [Required(ErrorMessage = ("el campo Proveedor es obligatorio"))]
         public decimal IdProveedor { get; set; }
+        [Required(ErrorMessage = ("el campo número de documento es obligatorio"))]
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo número de documento debe tener mínimo 1 caracter y máximo 50")]
         public string oc_NumDocumento { get; set; }
+        [Required(ErrorMessage = ("el campo termino pago es obligatorio"))]
         public string IdTerminoPago { get; set; }
+        [Required(ErrorMessage = ("el campo plazo es obligatorio"))]
         public int oc_plazo { get; set; }
         public System.DateTime oc_fecha { get; set; }
         public string oc_observacion { get; set; }
         public string Estado { get; set; }
+        [Required(ErrorMessage = ("el campo estado de aprobación es obligatorio"))]
         public string IdEstadoAprobacion_cat { get; set; }
         public Nullable<System.DateTime> co_fecha_aprobacion { get; set; }
         public string IdUsuario_Aprueba { get; set; }
@@ -31,11 +38,13 @@ namespace Core.Erp.Info.Compras
         public string IdUsuarioUltAnu { get; set; }
         public string MotivoAnulacion { get; set; }
         public string MotivoReprobacion { get; set; }
+
         public Nullable<decimal> IdDepartamento { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<int> IdMotivo { get; set; }
         public System.DateTime oc_fechaVencimiento { get; set; }
         public string IdEstado_cierre { get; set; }
+        [Required(ErrorMessage = ("el campo comprador es obligatorio"))]
         public decimal IdComprador { get; set; }
 
         //campos que no existen en la tabla

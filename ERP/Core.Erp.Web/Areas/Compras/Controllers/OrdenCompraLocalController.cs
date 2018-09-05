@@ -28,6 +28,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             com_comprador_Bus bus_comprador = new com_comprador_Bus();
             com_departamento_Bus bus_departamento = new com_departamento_Bus();
             tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        com_Motivo_Orden_Compra_Bus bus_motivo = new com_Motivo_Orden_Compra_Bus();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         com_ordencompra_local_det_List List_det = new com_ordencompra_local_det_List();
         com_ordencompra_local_det_Bus bus_det = new com_ordencompra_local_det_Bus();
@@ -91,9 +92,6 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             var lst_apro = bus_catalogo.get_list(Convert.ToString(cl_enumeradores.eTipoCatalogoCOM.EST_APRO), false);
             ViewBag.lst_apro = lst_apro;
 
-            var lst_rec = bus_catalogo.get_list(Convert.ToString(cl_enumeradores.eTipoCatalogoCOM.EST_REC), false);
-            ViewBag.lst_rec = lst_rec;
-
             var lst_estado = bus_estado.get_list(false);
             ViewBag.lst_estado = lst_estado;
 
@@ -105,6 +103,9 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
 
             var lst_dep = bus_departamento.get_list(IdEmpresa, false);
             ViewBag.lst_dep = lst_dep;
+
+            var lst_motivo = bus_motivo.get_list(IdEmpresa, false);
+            ViewBag.lst_motivo = lst_motivo;
         }
 
         #endregion
