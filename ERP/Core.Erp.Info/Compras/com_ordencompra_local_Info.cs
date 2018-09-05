@@ -14,11 +14,9 @@ namespace Core.Erp.Info.Compras
         public decimal IdOrdenCompra { get; set; }
         public decimal IdProveedor { get; set; }
         public string oc_NumDocumento { get; set; }
-        public string Tipo { get; set; }
         public string IdTerminoPago { get; set; }
         public int oc_plazo { get; set; }
         public System.DateTime oc_fecha { get; set; }
-        public double oc_flete { get; set; }
         public string oc_observacion { get; set; }
         public string Estado { get; set; }
         public string IdEstadoAprobacion_cat { get; set; }
@@ -31,16 +29,12 @@ namespace Core.Erp.Info.Compras
         public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> FechaHoraAnul { get; set; }
         public string IdUsuarioUltAnu { get; set; }
-        public string IdEstadoRecepcion_cat { get; set; }
-        public string AfectaCosto { get; set; }
         public string MotivoAnulacion { get; set; }
         public string MotivoReprobacion { get; set; }
-        public string Solicitante { get; set; }
-        public Nullable<decimal> IdSolicitante { get; set; }
         public Nullable<decimal> IdDepartamento { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<int> IdMotivo { get; set; }
-        public Nullable<System.DateTime> oc_fechaVencimiento { get; set; }
+        public System.DateTime oc_fechaVencimiento { get; set; }
         public string IdEstado_cierre { get; set; }
         public decimal IdComprador { get; set; }
 

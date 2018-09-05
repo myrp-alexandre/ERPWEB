@@ -19,7 +19,6 @@ namespace Core.Erp.Data
             this.com_parametro = new HashSet<com_parametro>();
             this.com_parametro1 = new HashSet<com_parametro>();
             this.com_ordencompra_local = new HashSet<com_ordencompra_local>();
-            this.com_ordencompra_local1 = new HashSet<com_ordencompra_local>();
         }
     
         public string IdCatalogocompra { get; set; }
@@ -43,6 +42,5 @@ namespace Core.Erp.Data
         public virtual ICollection<com_parametro> com_parametro { get; set; }
         public virtual ICollection<com_parametro> com_parametro1 { get; set; }
         public virtual ICollection<com_ordencompra_local> com_ordencompra_local { get; set; }
-        public virtual ICollection<com_ordencompra_local> com_ordencompra_local1 { get; set; }
     }
 }
