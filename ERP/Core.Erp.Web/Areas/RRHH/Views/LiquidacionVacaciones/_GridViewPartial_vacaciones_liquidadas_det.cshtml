@@ -25,13 +25,45 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
         //Funcion para inicializar fila al presionar nuevo
-
-        settings.Columns.Add("Sec","Secuencia");
-        settings.Columns.Add("Anio","Año");
-        settings.Columns.Add("Mes","Mes");
-        settings.Columns.Add("Total_Remuneracion","$Remuneración");
-        settings.Columns.Add("Total_Vacaciones","$Vacaciones");
-        settings.Columns.Add("Valor_Cancelar","$Valor cancelar");
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Sec";
+            column.Caption = "Secuencia";
+            column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Anio";
+            column.Caption = "Año";
+            column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Mes";
+            column.Caption = "Mes";
+            column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Total_Remuneracion";
+            column.Caption = "$Remuneración";
+            column.Width = Unit.Percentage(15);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Total_Vacaciones";
+            column.Caption = "$Vacaciones";
+            column.Width = Unit.Percentage(15);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Valor_Cancelar";
+            column.Caption = "$Valor cancela";
+            column.Width = Unit.Percentage(15);
+        });
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Total_Remuneracion");
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Total_Vacaciones");
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor_Cancelar");

@@ -84,7 +84,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdVacacion">Periodo de vacaciones*</label>
-                    @Html.Action("cmb_vacaciones")
+                    @Html.Action("cmb_vacaciones", Model)
                     @Html.ValidationMessageFor(q => q.IdVacacion, "", new { @class = "text-danger" })
 
 
@@ -93,41 +93,45 @@
         </div>
     </div>
 
-
-    @*<div class="row">
-            <div class="col-md-12">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="FechaInicio">Periodo*</label>
-                        @Html.DropDownListFor(q => q.IdVacacion, new SelectList(ViewBag.lst_vacaciones, "IdVacacion", "Descripcion"), new { @class = "form-control", @id = "vacaciones" })
-                        @Html.ValidationMessageFor(q => q.IdVacacion, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>*@
-
     <div class="row">
         <div class="col-md-12">
 
             <div class="col-md-3">
+               
                 <div class="form-group">
-                    <label for="Fecha_Desde">Fecha desde*</label>
-                    @Html.TextBoxFor(q => q.Fecha_Desde, new { @class = "form-control", @id = "FechaInicio" })
-                    @Html.ValidationMessageFor(q => q.Fecha_Desde, "", new { @class = "text-danger" })
+                    <label for="Fecha">Fecha desde*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.Fecha_Desde, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_Desde" })
+                        @Html.ValidationMessageFor(q => q.Fecha_Desde, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Fecha">Fecha hasta*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.Fecha_Hasta, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_Hasta" })
+                        @Html.ValidationMessageFor(q => q.Fecha_Hasta, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="Fecha_Hasta">Fecha hasta*</label>
-                    @Html.TextBoxFor(q => q.Fecha_Hasta, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaFin" })
-                    @Html.ValidationMessageFor(q => q.Fecha_Hasta, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Fecha_Retorno">Fecha retorno*</label>
-                    @Html.TextBoxFor(q => q.Fecha_Retorno, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaRetorno" })
-                    @Html.ValidationMessageFor(q => q.Fecha_Retorno, "", new { @class = "text-danger" })
+                    <label for="Fecha">Fecha retorno*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.Fecha_Retorno, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_Retorno" })
+                        @Html.ValidationMessageFor(q => q.Fecha_Retorno, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
             <div class="col-md-2">
@@ -173,14 +177,14 @@
     $(function () {
 
         //Date picker
-        $('#FechaInicio').datepicker({
+        $('#Fecha_Desde').datepicker({
             autoclose: true
         })
 
-        $('#FechaFin').datepicker({
+        $('#Fecha_Hasta').datepicker({
             autoclose: true
         })
-        $('#FechaRetorno').datepicker({
+        $('#Fecha_Retorno').datepicker({
             autoclose: true
         })
     })

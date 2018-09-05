@@ -13,6 +13,7 @@
     function MostarPrecios() {
         $("#contrasena_admin").val("");
         $("#ModalMostrarPrecios").modal("show");
+
     }
 
 </script>
@@ -143,24 +144,23 @@
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
-                <a href="#tab_general" aria-controls="general" role="tab" data-toggle="tab">Datos generales</a>
+                <a href="#tab_general" aria-controls="general" role="tab" data-toggle="tab" id="link_general">Datos generales</a>
+            </li>
+            <li hidden>
+                <a href="#tab_lote" aria-controls="lote" role="tab" data-toggle="tab" id="link_lote">Lote</a>
+            </li>
+            <li hidden>
+                <a href="#tab_precios" aria-controls="Precios" role="tab" data-toggle="tab" id="link_precios">Precios</a>
+            </li>
+            <li hidden>
+                <a href="#tab_composicion" aria-controls="Composicion" role="tab" data-toggle="tab" id="link_composicion">Composición</a>
             </li>
             <li>
-                <a href="#tab_lote" aria-controls="lote" role="tab" data-toggle="tab">Lote</a>
+                <a href="#tab_imagen" aria-controls="Imágen" role="tab" data-toggle="tab" id="link_imagen">Imágen</a>
             </li>
             <li>
-                <a href="#tab_precios" aria-controls="Precios" role="tab" data-toggle="tab">Precios</a>
+                <a href="#tab_producto_x_bodega" aria-controls="Imágen" role="tab" data-toggle="tab" id="link_imagen">Producto por bodega</a>
             </li>
-            <li>
-                <a href="#tab_composicion" aria-controls="Composicion" role="tab" data-toggle="tab">Composición</a>
-            </li>
-            <li>
-                <a href="#tab_imagen" aria-controls="Imágen" role="tab" data-toggle="tab">Imágen</a>
-            </li>
-            <li>
-                <a href="#tab_producto_x_bodega" aria-controls="Producto?bodega" role="tab" data-toggle="tab">Producto por bodega</a>
-            </li>
-            
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_general">
@@ -516,7 +516,7 @@
             $('#lote_fecha_fab').datepicker({
                 autoclose: true
             })
-
+            $("#link_precios").hide();
             cargar_lineas();
             cargar_grupos();
             cargar_subgrupos();
@@ -981,6 +981,7 @@
 
 
     function MostrarPrecios() {
+        
         var datos = {
             Contrasenia: $("#contrasena_admin").val()
         }
@@ -995,13 +996,14 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data == "AUTORIZADO") {
-                    $("#link_precios").hide();
+                    $("#link_precios").show();
                     $("#link_general").click();
                 }
                 else
                 {
-                    $("#link_precios").show();
+                    $("#link_precios").hide();
                     $("#link_general").click();
+                   
                 }
                
             },
