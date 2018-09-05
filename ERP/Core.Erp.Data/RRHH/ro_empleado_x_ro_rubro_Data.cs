@@ -137,6 +137,7 @@ namespace Core.Erp.Data.RRHH
                     && q.IdRubroFijo == info.IdRubroFijo);
                     if (Entity == null)
                         return false;
+                    Entity.IdEmpleado = info.IdEmpleado;
                     Entity.IdRubro = info.IdRubro;
                     Entity.IdNomina_Tipo = info.IdNomina_Tipo;
                     Entity.IdNomina_TipoLiqui = info.IdNomina_TipoLiqui;
