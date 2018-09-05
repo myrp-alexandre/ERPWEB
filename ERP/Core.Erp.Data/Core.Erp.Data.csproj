@@ -183,6 +183,7 @@
     <Compile Include="Compras\com_estado_cierre_Data.cs" />
     <Compile Include="Compras\com_Motivo_Orden_Compra_Data.cs" />
     <Compile Include="Compras\com_ordencompra_local_Data.cs" />
+    <Compile Include="Compras\com_ordencompra_local_det_Data.cs" />
     <Compile Include="Compras\com_parametro_Data.cs" />
     <Compile Include="Compras\com_TerminoPago_Data.cs" />
     <Compile Include="com_catalogo.cs">
@@ -204,6 +205,9 @@
       <DependentUpon>Model_compras.tt</DependentUpon>
     </Compile>
     <Compile Include="com_ordencompra_local.cs">
+      <DependentUpon>Model_compras.tt</DependentUpon>
+    </Compile>
+    <Compile Include="com_ordencompra_local_det.cs">
       <DependentUpon>Model_compras.tt</DependentUpon>
     </Compile>
     <Compile Include="com_parametro.cs">

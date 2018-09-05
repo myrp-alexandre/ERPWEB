@@ -201,7 +201,37 @@ namespace Core.Erp.Data.Compras
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
                     };
+
                     Context.com_ordencompra_local.Add(Entity);
+
+                    foreach (var item in info.lst_det)
+                        {
+                            com_ordencompra_local_det Entity_det = new com_ordencompra_local_det
+                             {
+                                IdEmpresa = info.IdEmpresa,
+                                IdOrdenCompra = info.IdOrdenCompra,
+                                IdSucursal = info.IdSucursal,
+                                IdProducto = item.IdProducto,
+                                IdCod_Impuesto = item.IdCod_Impuesto,
+                                IdUnidadMedida = item.IdUnidadMedida,
+                                do_Cantidad = item.do_Cantidad,
+                                do_Costeado = item.do_Costeado,
+                                do_descuento = item.do_descuento,
+                                do_iva = item.do_iva,
+                                do_ManejaIva = item.do_ManejaIva,
+                                do_observacion = item.do_observacion,
+                                do_peso = item.do_peso,
+                                do_porc_des = item.do_porc_des,
+                                do_precioCompra = item.do_precioCompra,
+                                do_precioFinal = item.do_precioFinal,
+                                do_subtotal = item.do_subtotal,
+                                do_total = item.do_total,
+                                Por_Iva = item.Por_Iva,
+                                Secuencia = item.Secuencia
+                            };
+                        Context.com_ordencompra_local_det.Add(Entity_det);
+
+                    }
                     Context.SaveChanges();
                 }
                 return true;
@@ -248,8 +278,36 @@ namespace Core.Erp.Data.Compras
 
                      Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                      Entity.Fecha_UltMod = DateTime.Now;
-                        
-                        Context.SaveChanges();
+
+                    foreach (var item in info.lst_det)
+                    {
+                        com_ordencompra_local_det Entity_det = new com_ordencompra_local_det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdOrdenCompra = info.IdOrdenCompra,
+                            IdSucursal = info.IdSucursal,
+                            IdProducto = item.IdProducto,
+                            IdCod_Impuesto = item.IdCod_Impuesto,
+                            IdUnidadMedida = item.IdUnidadMedida,
+                            do_Cantidad = item.do_Cantidad,
+                            do_Costeado = item.do_Costeado,
+                            do_descuento = item.do_descuento,
+                            do_iva = item.do_iva,
+                            do_ManejaIva = item.do_ManejaIva,
+                            do_observacion = item.do_observacion,
+                            do_peso = item.do_peso,
+                            do_porc_des = item.do_porc_des,
+                            do_precioCompra = item.do_precioCompra,
+                            do_precioFinal = item.do_precioFinal,
+                            do_subtotal = item.do_subtotal,
+                            do_total = item.do_total,
+                            Por_Iva = item.Por_Iva,
+                            Secuencia = item.Secuencia
+                        };
+                        Context.com_ordencompra_local_det.Add(Entity_det);
+
+                    }
+                    Context.SaveChanges();
 
             }
                 return true;

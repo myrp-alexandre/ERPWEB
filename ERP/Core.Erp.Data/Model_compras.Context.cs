@@ -34,5 +34,6 @@ namespace Core.Erp.Data
         public DbSet<com_TerminoPago> com_TerminoPago { get; set; }
         public DbSet<com_Motivo_Orden_Compra> com_Motivo_Orden_Compra { get; set; }
         public DbSet<com_comprador> com_comprador { get; set; }
+        public DbSet<com_ordencompra_local_det> com_ordencompra_local_det { get; set; }
     }
 }

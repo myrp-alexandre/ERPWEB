@@ -14,6 +14,7 @@
 
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdOrdenCompra)
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
@@ -136,7 +137,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="oc_plazo">Plazo*</label>
-                    @Html.TextBoxFor(q => q.oc_plazo, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.oc_plazo, new { @class = "form-control" , @id="oc_plazo"})
                     @Html.ValidationMessageFor(q => q.oc_plazo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -182,7 +183,15 @@
         </div>
     </div>
 
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.Action("GridViewPartial_ordencompralocal_det")
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","OrdenCompraLocal", new { Area = "Compras"  },null)">Cancelar</a>
@@ -194,17 +203,20 @@
 <script type="text/javascript">
     $(function () {
         //Date picker
+
         $('#oc_fecha').datepicker({
             autoclose: true
         })
         $('#oc_fechaVencimiento').datepicker({
             autoclose: true
 
-        })        $('#co_fecha_aprobacion').datepicker({
+        })
+        $('#co_fecha_aprobacion').datepicker({
             autoclose: true
 
-        })        $('#co_fechaReproba').datepicker({
+        })
+        $('#co_fechaReproba').datepicker({
             autoclose: true
         })
     });
-    </script>
+</script>
