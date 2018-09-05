@@ -84,6 +84,7 @@ namespace Core.Erp.Info.Inventario
         public string nom_pc { get; set; }
         public string ip { get; set; }
         public byte[] pr_imagen { get; set; }
+        public string contrasena_admin { get; set; }
 
         #endregion
 

@@ -11,6 +11,7 @@ using DevExpress.Web;
 using System.Web.UI;
 using Core.Erp.Web.Helps;
 using Core.Erp.Info.Helps;
+using Core.Erp.Bus.SeguridadAcceso;
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
     public class ProductoController : Controller
@@ -24,6 +25,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
         in_producto_x_tb_bodega_Bus bus_producto_x_bodega = new in_producto_x_tb_bodega_Bus();
+        seg_usuario_Bus bus_usuarios = new seg_usuario_Bus();
         private string mensaje;
         #endregion
 
@@ -269,6 +271,23 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             bus_producto.guardar_loteDB(IdEmpresa, IdProducto_padre, fecha_fab == null ? DateTime.MinValue : Convert.ToDateTime(fecha_fab), Convert.ToDateTime( fecha_ven), lote);
             return Json("", JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult MostrarPrecios(string Contrasenia = "")
+        {
+            string EstadoDesbloqueo = "";
+
+            var usuario = bus_usuarios.get_info(Convert.ToString(SessionFixed.IdUsuario));
+            if (usuario != null)
+            {
+                if (Contrasenia.ToLower() == usuario.contrasena_admin.ToLower())
+                {
+                    EstadoDesbloqueo = "AUTORIZADO";
+                }
+            }
+
+            return Json(EstadoDesbloqueo, JsonRequestBehavior.AllowGet);
         }
         #endregion
 

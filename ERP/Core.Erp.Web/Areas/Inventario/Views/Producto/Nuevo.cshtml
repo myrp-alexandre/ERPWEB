@@ -9,6 +9,7 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
+
 @using (Html.BeginForm("Nuevo", "Producto", FormMethod.Post, new { @class = "form", @rolw = "form" }))
 {
 
@@ -74,6 +75,7 @@
                             @Html.ValidationMessageFor(q => q.pr_descripcion, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                   
                 </div>
             </div>
             <div class="row">
@@ -116,6 +118,7 @@
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
 
@@ -244,7 +247,14 @@
                             @Html.ValidationMessageFor(q => q.pr_observacion, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                   
                 </div>
+
+
+               
+
+
+
             </div>
 
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_lote">
@@ -447,7 +457,7 @@
         </div>
     </div>
 
-    <div class="box-footer">
+     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index", "Producto", new { Area = "Inventario" }, null)">Cancelar</a>
     </div>
@@ -478,7 +488,6 @@
             cargar_grupos();
             cargar_subgrupos();
         });
-
         $("#IdLinea").change(function () {
             cargar_grupos();
             cargar_subgrupos();
@@ -495,7 +504,6 @@
         $("#precio_2").keyup(function () {
             calcular_precio_2("VALOR");
         });
-
         $("#signo_3").change(function () {
             calcular_precio_3("SIGNO");
         });
@@ -929,6 +937,8 @@
             });
         }
     }
+
+
 
 
 
