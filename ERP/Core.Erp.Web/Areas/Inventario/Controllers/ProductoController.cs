@@ -281,10 +281,16 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var usuario = bus_usuarios.get_info(Convert.ToString(SessionFixed.IdUsuario));
             if (usuario != null)
             {
-                if (Contrasenia.ToLower() == usuario.contrasena_admin.ToLower())
+                if (usuario.es_super_admin)
                 {
-                    EstadoDesbloqueo = "AUTORIZADO";
+                    if (Contrasenia.ToLower() == usuario.contrasena_admin.ToLower())
+                    {
+                        EstadoDesbloqueo = "AUTORIZADO";
+                    }
                 }
+                else
+                    EstadoDesbloqueo = "NOAUTORIZADO";
+
             }
 
             return Json(EstadoDesbloqueo, JsonRequestBehavior.AllowGet);
