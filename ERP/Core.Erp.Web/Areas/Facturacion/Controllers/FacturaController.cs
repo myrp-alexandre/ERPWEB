@@ -842,14 +842,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
             info_det.IdProducto = info_det.IdProducto;
             info_det.pr_descripcion = info_det.pr_descripcion;
-            info_det.vt_DescUnitario = Math.Round(info_det.vt_Precio * (info_det.vt_PorDescUnitario / 100), 2, MidpointRounding.AwayFromZero);
-            info_det.vt_PrecioFinal = Math.Round(info_det.vt_Precio - info_det.vt_DescUnitario, 2, MidpointRounding.AwayFromZero);
-            info_det.vt_Subtotal = Math.Round(info_det.vt_cantidad * info_det.vt_PrecioFinal, 2, MidpointRounding.AwayFromZero);
+            info_det.vt_DescUnitario = info_det.vt_Precio * (info_det.vt_PorDescUnitario / 100);
+            info_det.vt_PrecioFinal = info_det.vt_Precio - info_det.vt_DescUnitario;
+            info_det.vt_Subtotal =info_det.vt_cantidad * info_det.vt_PrecioFinal;
             var impuesto = bus_impuesto.get_info(info_det.IdCod_Impuesto_Iva);
             if (impuesto != null)
                 info_det.vt_por_iva = impuesto.porcentaje;
-            info_det.vt_iva = Math.Round(info_det.vt_Subtotal * (info_det.vt_por_iva / 100), 2, MidpointRounding.AwayFromZero);
-            info_det.vt_total = Math.Round(info_det.vt_Subtotal + info_det.vt_iva, 2, MidpointRounding.AwayFromZero);
+            info_det.vt_iva = info_det.vt_Subtotal * (info_det.vt_por_iva / 100);
+            info_det.vt_total = info_det.vt_Subtotal + info_det.vt_iva;
             
             list.Add(info_det);
         }
@@ -862,9 +862,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             edited_info.vt_cantidad = info_det.vt_cantidad;
             edited_info.vt_PorDescUnitario = info_det.vt_PorDescUnitario;
             edited_info.vt_Precio = info_det.vt_Precio;
-            edited_info.vt_DescUnitario = Math.Round(info_det.vt_Precio * (info_det.vt_PorDescUnitario / 100), 2, MidpointRounding.AwayFromZero);
-            edited_info.vt_PrecioFinal = Math.Round(info_det.vt_Precio - edited_info.vt_DescUnitario, 2, MidpointRounding.AwayFromZero);
-            edited_info.vt_Subtotal = Math.Round(info_det.vt_cantidad * edited_info.vt_PrecioFinal, 2, MidpointRounding.AwayFromZero);
+            edited_info.vt_DescUnitario = info_det.vt_Precio * (info_det.vt_PorDescUnitario / 100);
+            edited_info.vt_PrecioFinal = info_det.vt_Precio - edited_info.vt_DescUnitario;
+            edited_info.vt_Subtotal = info_det.vt_cantidad * edited_info.vt_PrecioFinal;
             edited_info.tp_manejaInven = info_det.tp_manejaInven;
             edited_info.se_distribuye = info_det.se_distribuye;
             if (!string.IsNullOrEmpty(info_det.IdCod_Impuesto_Iva) && info_det.IdCod_Impuesto_Iva != edited_info.IdCod_Impuesto_Iva)
@@ -873,8 +873,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 if (impuesto != null)
                     edited_info.vt_por_iva = impuesto.porcentaje;
             }
-            edited_info.vt_iva = Math.Round(edited_info.vt_Subtotal * (edited_info.vt_por_iva / 100), 2, MidpointRounding.AwayFromZero);
-            edited_info.vt_total = Math.Round(edited_info.vt_Subtotal + edited_info.vt_iva, 2, MidpointRounding.AwayFromZero);
+            edited_info.vt_iva = edited_info.vt_Subtotal * (edited_info.vt_por_iva / 100);
+            edited_info.vt_total = edited_info.vt_Subtotal + edited_info.vt_iva;
         }
 
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
