@@ -16,10 +16,12 @@
     @Html.HiddenFor(q => q.IdNovedad)
     <div class="row">
         <div class="col-md-12">
-            <div class="form-group">
-                <label for="IdProveedor">Empleado</label>
-                @Html.Partial("_CmbEmpleado_novedades", Model.IdEmpleado)
-                @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdProveedor">Empleado</label>
+                    @Html.Partial("_CmbEmpleado_novedades", Model.IdEmpleado)
+                    @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
     </div>

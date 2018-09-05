@@ -6,16 +6,43 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Bus.RRHH;
+using Core.Erp.Info.General;
+using Core.Erp.Bus.General;
+using DevExpress.Web;
+using Core.Erp.Web.Helps;
+using Core.Erp.Info.Helps;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class EmpleadoPorRubroController : Controller
     {
+        #region variables
         ro_empleado_x_ro_rubro_Bus bus_rubro_fijos = new ro_empleado_x_ro_rubro_Bus();
         ro_rubro_tipo_Bus bus_rubro = new ro_rubro_tipo_Bus();
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
         ro_nomina_tipo_Bus bus_nomina = new ro_nomina_tipo_Bus();
         ro_Nomina_Tipoliquiliqui_Bus bus_nomina_tipo = new ro_Nomina_Tipoliquiliqui_Bus();
         int IdEmpresa = 0;
+        #endregion
+
+        #region Metodos ComboBox bajo demanda
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        public ActionResult CmbEmpleado_rubros_fijos()
+        {
+            ro_empleado_x_ro_rubro_Info model = new ro_empleado_x_ro_rubro_Info();
+            return PartialView("_CmbEmpleado_rubros_fijos", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        #endregion
+
+        #region Vistas
         public ActionResult Index()
         {
             return View();
@@ -37,6 +64,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
+        #endregion
+
+        #region Acciones
         [HttpPost]
         public ActionResult Nuevo(ro_empleado_x_ro_rubro_Info info)
         {
@@ -112,7 +142,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
         }
 
-        public ActionResult Modificar(int IdNomina_Tipo=0, int IdRubroFijo = 0)
+        public ActionResult Modificar(int IdNomina_Tipo = 0, int IdRubroFijo = 0)
         {
             try
             {
@@ -120,10 +150,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 ro_empleado_x_ro_rubro_Info model = new ro_empleado_x_ro_rubro_Info();
                 model = bus_rubro_fijos.get_info(IdEmpresa, IdRubroFijo);
                 cargar_combos(IdNomina_Tipo);
-                
+
                 return View(model);
-                
-    }
+
+            }
             catch (Exception)
             {
 
@@ -171,6 +201,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
+        #endregion
 
         private void cargar_combos(int IdNominaTipo)
         {

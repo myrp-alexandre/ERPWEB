@@ -17,30 +17,13 @@
     @Html.HiddenFor(q => q.IdRubroFijo);
     @Html.HiddenFor(q => q.IdEmpresa);
 
-
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
-                <div class="form-group">
-                    <label for="Empleado">Empleado*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado, settings =>
-               {
-                   settings.Name = "IdEmpleado";
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
-                   settings.Properties.Columns.Add("IdEmpleado", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("Empleado", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(80);
 
-                   //Campo ID
-                   settings.Properties.ValueField = "IdEmpleado";
-                   settings.Properties.ValueType = typeof(decimal);
-                   settings.Properties.TextField = "Empleado";
-                   //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                   settings.Properties.NullText = "== Seleccione ==";
-                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-               }).BindList(ViewBag.lst_empleado).GetHtml()
+                <div class="form-group">
+                    <label for="IdProveedor">Empleado</label>
+                    @Html.Partial("_CmbEmpleado_rubros_fijos", Model.IdEmpleado)
                     @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -120,17 +103,10 @@
 
 
 <script>
-
-
        $("#IdNomina_Tipo").change(function () {
            $("#IdNomina_TipoLiqui").empty();
              cargar_tipo_liquidacion_nomina();
-
         });
-
-
-
-
         function cargar_tipo_liquidacion_nomina() {
             var datos = {
                 IdNomina: $("#IdNomina_Tipo").val()

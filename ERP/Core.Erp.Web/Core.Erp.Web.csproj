@@ -9078,6 +9078,7 @@
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_011.cshtml" />
     <Content Include="Areas\Compras\Views\Comprador\_CmbPersona_Compras.cshtml" />
     <Content Include="Areas\RRHH\Views\EmpleadoNovedad\_CmbEmpleado_novedades.cshtml" />
+    <Content Include="Areas\RRHH\Views\EmpleadoPorRubro\_CmbEmpleado_rubros_fijos.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
