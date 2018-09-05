@@ -725,5 +725,26 @@
             }
         });
     };
+            function GetInfo_Producto(s, e) {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdProducto: s.GetValue()
 
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetInfo_Producto", "Deudas",new { Area = "CuentasPorPagar"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridView_deuda_det.GetEditor('IdCod_Impuesto_Iva').SetValue(data.IdCod_Impuesto_Iva);
+            },
+            error: function (error) {
+            }
+        });
+    };
 </script>

@@ -182,6 +182,8 @@
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "do_iva").DisplayFormat = "{0:n2}";
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "do_total").DisplayFormat = "{0:n2}";
         settings.Settings.ShowFooter = true;
+
+
     });
 }
 @grid.Bind(Model).GetHtml()

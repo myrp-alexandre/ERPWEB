@@ -533,7 +533,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             Lis_ct_cbtecble_det_List.delete_detail_New_details(info_proveedor, info_parametro, co_subtotal_iva, co_subtotal_siniva, co_valoriva, co_total, observacion, IdTransaccionSession);
             return Json("", JsonRequestBehavior.AllowGet);
         }
-
         public JsonResult guardar_aprobacion(string Ids)
         {
            
@@ -574,6 +573,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 Session["list_facturas_seleccionadas"] = list_facturas_seleccionadas;
             }
             return Json("", JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetInfo_Producto(int IdEmpresa = 0, decimal IdProducto = 0)
+        {
+            in_Producto_Bus bus_producto = new in_Producto_Bus();
+            var resultado = bus_producto.get_info(IdEmpresa, IdProducto);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         #endregion
 

@@ -256,6 +256,18 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         }
         #endregion
 
+        #region Json
+
+        public JsonResult GetInfoProducto(int IdEmpresa = 0 ,decimal IdProducto = 0)
+        {
+            in_Producto_Bus bus_producto = new in_Producto_Bus();
+            var resultado = bus_producto.get_info(IdEmpresa, IdProducto);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
     }
 
     public class com_ordencompra_local_det_List
