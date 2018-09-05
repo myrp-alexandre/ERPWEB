@@ -34,10 +34,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         #region Metodos ComboBox bajo demanda
         tb_persona_Bus bus_persona = new tb_persona_Bus();
-        public ActionResult CmbProveedor_CXP()
+        public ActionResult CmbEmpleado_novedades()
         {
             ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
-            return PartialView("_CmbProveedor_CXP", model);
+            return PartialView("_CmbEmpleado_novedades", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
