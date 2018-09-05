@@ -27,9 +27,6 @@ namespace Core.Erp.Data
         public double do_subtotal { get; set; }
         public double do_iva { get; set; }
         public double do_total { get; set; }
-        public bool do_ManejaIva { get; set; }
-        public string do_Costeado { get; set; }
-        public double do_peso { get; set; }
         public string do_observacion { get; set; }
         public string IdCentroCosto { get; set; }
         public string IdCentroCosto_sub_centro_costo { get; set; }

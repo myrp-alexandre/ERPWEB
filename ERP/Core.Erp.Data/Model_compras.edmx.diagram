@@ -25,7 +25,7 @@
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_com_Motivo_Orden_Compra" />
         <EntityTypeShape EntityType="Model_compras.com_comprador" Width="1.5" PointX="13" PointY="5.125" />
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_com_comprador" />
-        <EntityTypeShape EntityType="Model_compras.com_ordencompra_local_det" Width="1.5" PointX="10.625" PointY="11.625" />
+        <EntityTypeShape EntityType="Model_compras.com_ordencompra_local_det" Width="1.5" PointX="12.875" PointY="10.5" />
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_det_com_ordencompra_local" />
       </Diagram>
     </edmx:Diagrams>

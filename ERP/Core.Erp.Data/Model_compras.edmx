@@ -163,10 +163,7 @@
           <Property Name="do_subtotal" Type="float" Nullable="false" />
           <Property Name="do_iva" Type="float" Nullable="false" />
           <Property Name="do_total" Type="float" Nullable="false" />
-          <Property Name="do_ManejaIva" Type="bit" Nullable="false" />
-          <Property Name="do_Costeado" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="do_peso" Type="float" Nullable="false" />
-          <Property Name="do_observacion" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="do_observacion" Type="varchar" MaxLength="1000" />
           <Property Name="IdCentroCosto" Type="varchar" MaxLength="20" />
           <Property Name="IdCentroCosto_sub_centro_costo" Type="varchar" MaxLength="20" />
           <Property Name="IdPunto_cargo_grupo" Type="int" />
@@ -822,10 +819,7 @@
           <Property Name="do_subtotal" Type="Double" Nullable="false" />
           <Property Name="do_iva" Type="Double" Nullable="false" />
           <Property Name="do_total" Type="Double" Nullable="false" />
-          <Property Name="do_ManejaIva" Type="Boolean" Nullable="false" />
-          <Property Name="do_Costeado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="do_peso" Type="Double" Nullable="false" />
-          <Property Name="do_observacion" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="do_observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="IdCentroCosto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdCentroCosto_sub_centro_costo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdPunto_cargo_grupo" Type="Int32" />
@@ -1035,9 +1029,6 @@
                 <ScalarProperty Name="IdCentroCosto_sub_centro_costo" ColumnName="IdCentroCosto_sub_centro_costo" />
                 <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
                 <ScalarProperty Name="do_observacion" ColumnName="do_observacion" />
-                <ScalarProperty Name="do_peso" ColumnName="do_peso" />
-                <ScalarProperty Name="do_Costeado" ColumnName="do_Costeado" />
-                <ScalarProperty Name="do_ManejaIva" ColumnName="do_ManejaIva" />
                 <ScalarProperty Name="do_total" ColumnName="do_total" />
                 <ScalarProperty Name="do_iva" ColumnName="do_iva" />
                 <ScalarProperty Name="do_subtotal" ColumnName="do_subtotal" />
