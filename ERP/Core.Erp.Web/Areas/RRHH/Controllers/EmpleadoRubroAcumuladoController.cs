@@ -6,14 +6,40 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.RRHH;
 using Core.Erp.Info.RRHH;
+using Core.Erp.Web.Helps;
+using Core.Erp.Bus.General;
+using Core.Erp.Info.General;
+using DevExpress.Web;
+using Core.Erp.Info.Helps;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class EmpleadoRubroAcumuladoController : Controller
     {
+        #region variables
         ro_empleado_x_rubro_acumulado_Bus bus_rubro_acumulados = new ro_empleado_x_rubro_acumulado_Bus();
         ro_rubro_tipo_Bus bus_rubro = new ro_rubro_tipo_Bus();
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
-        int IdEmpresa = 0;
+        #endregion
+
+        #region Metodos ComboBox bajo demanda
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        public ActionResult CmbEmpleado_novedades()
+        {
+            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
+            return PartialView("_CmbEmpleado_rubros_acumulados", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        #endregion
+
+        #region vistas
         public ActionResult Index()
         {
             return View();
@@ -24,7 +50,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                IdEmpresa = GetIdEmpresa();
+                int  IdEmpresa= Convert.ToInt32(SessionFixed.IdEmpresa);
                 ViewBag.IdEmpleado = IdEmpleado;
                 bus_rubro_acumulados = new ro_empleado_x_rubro_acumulado_Bus();
                 List<ro_empleado_x_rubro_acumulado_Info> model = bus_rubro_acumulados.get_list(IdEmpresa);
@@ -36,6 +62,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
+        #endregion
+
+        #region acciones
         [HttpPost]
         public ActionResult Nuevo(ro_empleado_x_rubro_acumulado_Info info)
         {
@@ -43,8 +72,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
 
                 ViewBag.IdEmpleado = info.IdEmpleado;
-                IdEmpresa = GetIdEmpresa();
-                info.IdEmpresa = IdEmpresa;
+                info.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 info.UsuarioIngresa = Session["IdUsuario"].ToString();
                 if (ModelState.IsValid)
                 {
@@ -87,12 +115,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
         }
         [HttpPost]
-     
+
         public ActionResult Anular(ro_empleado_x_rubro_acumulado_Info info)
         {
             try
             {
-                info.IdEmpresa = GetIdEmpresa();
+                info.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 if (!bus_rubro_acumulados.anularDB(info))
                 {
                     cargar_combos();
@@ -114,7 +142,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 cargar_combos();
-                IdEmpresa = GetIdEmpresa();
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 return View(bus_rubro_acumulados.get_info(IdEmpresa, Idempleado, IdRubro));
 
             }
@@ -125,13 +153,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
         }
 
+        #endregion
         private void cargar_combos()
         {
             try
             {
-                IdEmpresa = GetIdEmpresa();
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 ViewBag.lst_rubro = bus_rubro.get_list_rub_acumula(IdEmpresa);
-                ViewBag.lst_empleado = bus_empleado.get_list_combo(IdEmpresa);
             }
             catch (Exception)
             {
@@ -139,21 +167,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        private int GetIdEmpresa()
-        {
-            try
-            {
-                if (Session["IdEmpresa"] != null)
-                    return Convert.ToInt32(Session["IdEmpresa"]);
-                else
-                    return 0;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
+       
     }
 }
