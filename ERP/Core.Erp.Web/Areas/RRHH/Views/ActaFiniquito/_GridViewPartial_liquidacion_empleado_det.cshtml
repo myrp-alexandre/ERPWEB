@@ -6,7 +6,7 @@
         settings.CallbackRouteValues = new { Controller = "ActaFiniquito", Action = "GridViewPartial_liquidacion_empleado_det" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdSecuencia";
-        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "ActaFiniquito", Action = "EditingAddNew", Area = "RRHH" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ActaFiniquito", Action = "EditingUpdate", Area = "RRHH" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ActaFiniquito", Action = "EditingDelete", Area = "RRHH" };
@@ -30,10 +30,14 @@
         settings.InitNewRow = (s, e) =>
         {
             e.NewValues["IdRubro"] = null;
-
-
         };
-        settings.Columns.Add("IdSecuencia","ID").Width=Unit.Percentage(5);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdSecuencia";
+            column.Caption = "ID";
+            column.Width = Unit.Percentage(5);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdRubro";
@@ -50,10 +54,14 @@
                 p.Width = Unit.Percentage(100);
             });
         });
-        settings.Columns.Add("Observacion", "Descripción").Width = Unit.Percentage(45);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Observacion";
+            column.Caption = "Descripción";
+            column.Width = Unit.Percentage(60);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
         settings.Columns.Add("Valor","$ Valor").Width = Unit.Percentage(5);
-
-
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor");
         settings.Settings.ShowFooter = true;
 

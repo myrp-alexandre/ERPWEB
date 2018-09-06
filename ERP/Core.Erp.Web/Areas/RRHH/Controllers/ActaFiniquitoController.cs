@@ -6,6 +6,11 @@ using System.Web.Mvc;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Bus.RRHH;
 using DevExpress.Web.Mvc;
+using Core.Erp.Bus.General;
+using Core.Erp.Info.General;
+using DevExpress.Web;
+using Core.Erp.Web.Helps;
+using Core.Erp.Info.Helps;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -20,6 +25,37 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_catalogo_Bus bus_catalogo = new ro_catalogo_Bus();
         ro_Acta_Finiquito_Info info = new ro_Acta_Finiquito_Info();
         int IdEmpresa = 0;
+        #endregion
+
+        #region Metodos ComboBox bajo demanda
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+
+        public tb_persona_Bus Bus_persona
+        {
+            get
+            {
+                return bus_persona;
+            }
+
+            set
+            {
+                bus_persona = value;
+            }
+        }
+
+        public ActionResult CmbEmpleado_acta_finiquito()
+        {
+            ro_Acta_Finiquito_Info model = new ro_Acta_Finiquito_Info();
+            return PartialView("_CmbEmpleado_acta_finiquito", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return Bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return Bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
         #endregion
         public ActionResult Index()
         {

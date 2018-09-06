@@ -9078,7 +9078,6 @@
     <Content Include="Areas\Compras\Views\OrdenCompraLocal\_CmbProveedor_COM.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_011.cshtml" />
     <Content Include="Areas\Compras\Views\Comprador\_CmbPersona_Compras.cshtml" />
-    <Content Include="Areas\RRHH\Views\EmpleadoNovedad\_CmbEmpleado_novedades.cshtml" />
     <Content Include="Areas\RRHH\Views\EmpleadoPorRubro\_CmbEmpleado_rubros_fijos.cshtml" />
     <Content Include="Areas\RRHH\Views\EmpleadoRubroAcumulado\_CmbEmpleado_rubros_acumulados.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />

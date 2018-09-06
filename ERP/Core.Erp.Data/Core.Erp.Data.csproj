@@ -541,6 +541,7 @@
     <Compile Include="fa_Vendedor.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="General\tbl_TransaccionesAutorizadas_Data.cs" />
     <Compile Include="General\tbl_usuario_ftp_Data.cs" />
     <Compile Include="General\tb_banco_Data.cs" />
     <Compile Include="General\tb_bodega_Data.cs" />
@@ -1324,6 +1325,9 @@
     </Compile>
     <Compile Include="spSys_inv_Reversar_aprobacion_Result.cs">
       <DependentUpon>Model_inventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_TransaccionesAutorizadas.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
     <Compile Include="tbl_usuario_ftp.cs">
       <DependentUpon>Model_general.tt</DependentUpon>

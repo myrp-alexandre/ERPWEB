@@ -419,6 +419,18 @@
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="CodReporte" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbl_TransaccionesAutorizadas">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTransaccion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTransaccion" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdUsuarioLog" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdUsuarioAut" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Observacion" Type="varchar" MaxLength="1000" />
+          <Property Name="FechaTransaccion" Type="date" Nullable="false" />
+        </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwtb_ciudad_id' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_ciudad_id">
@@ -786,6 +798,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwtb_comprobantes_
           <EntitySet Name="tbl_usuario_ftp" EntityType="Self.tbl_usuario_ftp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_reporte" EntityType="Self.tb_sis_reporte" Schema="web" store:Type="Tables" />
           <EntitySet Name="tb_sis_reporte_x_seg_usuario" EntityType="Self.tb_sis_reporte_x_seg_usuario" Schema="web" store:Type="Tables" />
+          <EntitySet Name="tbl_TransaccionesAutorizadas" EntityType="Self.tbl_TransaccionesAutorizadas" Schema="web" store:Type="Tables" />
           <EntitySet Name="vwtb_ciudad_id" EntityType="Self.vwtb_ciudad_id" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [vwtb_ciudad_id].[IdCiudad] AS [IdCiudad]
@@ -1807,6 +1820,7 @@ FROM [web].[vwtb_comprobantes_no_autorizados] AS [vwtb_comprobantes_no_autorizad
           </AssociationSet>
           <EntitySet Name="vwtb_bodega_x_sucursal" EntityType="Model_general.vwtb_bodega_x_sucursal" />
           <EntitySet Name="tbl_usuario_ftp" EntityType="Model_general.tbl_usuario_ftp" />
+          <EntitySet Name="tbl_TransaccionesAutorizadas" EntityType="Model_general.tbl_TransaccionesAutorizadas" />
         </EntityContainer>
         <EntityType Name="vwtb_bodega_x_sucursal">
           <Key>
@@ -1834,6 +1848,18 @@ FROM [web].[vwtb_comprobantes_no_autorizados] AS [vwtb_comprobantes_no_autorizad
           <Property Name="ftp_usuario" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ftp_contrasenia" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ftp_url" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_TransaccionesAutorizadas">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTransaccion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTransaccion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdUsuarioLog" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioAut" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="FechaTransaccion" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2327,6 +2353,18 @@ FROM [web].[vwtb_comprobantes_no_autorizados] AS [vwtb_comprobantes_no_autorizad
                 <ScalarProperty Name="ftp_contrasenia" ColumnName="ftp_contrasenia" />
                 <ScalarProperty Name="ftp_usuario" ColumnName="ftp_usuario" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_TransaccionesAutorizadas">
+            <EntityTypeMapping TypeName="Model_general.tbl_TransaccionesAutorizadas">
+              <MappingFragment StoreEntitySet="tbl_TransaccionesAutorizadas">
+                <ScalarProperty Name="FechaTransaccion" ColumnName="FechaTransaccion" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="IdUsuarioAut" ColumnName="IdUsuarioAut" />
+                <ScalarProperty Name="IdUsuarioLog" ColumnName="IdUsuarioLog" />
+                <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

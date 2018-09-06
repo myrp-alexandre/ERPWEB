@@ -57,5 +57,6 @@ namespace Core.Erp.Data
         public DbSet<vwtb_comprobantes_no_autorizados> vwtb_comprobantes_no_autorizados { get; set; }
         public DbSet<vwtb_bodega_x_sucursal> vwtb_bodega_x_sucursal { get; set; }
         public DbSet<tbl_usuario_ftp> tbl_usuario_ftp { get; set; }
+        public DbSet<tbl_TransaccionesAutorizadas> tbl_TransaccionesAutorizadas { get; set; }
     }
 }
