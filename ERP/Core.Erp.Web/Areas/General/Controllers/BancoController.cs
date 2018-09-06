@@ -1,16 +1,16 @@
 ﻿using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
-using DevExpress.Web.Mvc;
-using System;
+using Core.Erp.Web.Helps;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
     public class BancoController : Controller
     {
+        #region Index
+
         tb_banco_Bus bus_banco = new tb_banco_Bus();
         public ActionResult Index()
         {
@@ -24,6 +24,10 @@ namespace Core.Erp.Web.Areas.General.Controllers
             model = bus_banco.get_list(true);
             return PartialView("_GridViewPartial_banco", model);
         }
+        #endregion
+
+        #region Acciones
+
         public ActionResult Nuevo()
         {
             tb_banco_Info model = new tb_banco_Info();
@@ -66,5 +70,6 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 return View(model);
             return RedirectToAction("Index");
         }
+        #endregion
     }
 }
