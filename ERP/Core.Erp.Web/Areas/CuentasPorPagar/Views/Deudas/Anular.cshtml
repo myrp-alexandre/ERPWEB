@@ -62,7 +62,16 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    @Html.TextBoxFor(q => q.co_FechaFactura, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "co_FechaFactura" })
+                    @Html.DevExpress().DateEditFor(q => q.co_FechaFactura, settings =>
+                   {
+                       settings.Name = "co_FechaFactura";
+                       settings.Properties.UseMaskBehavior = true;
+                       settings.Properties.EditFormat = EditFormat.Date;
+                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       settings.Properties.ClientSideEvents.DateChanged = "function(s,e){co_FechaContabilizacion.SetValue(s.GetValue());}";
+                   }).GetHtml()
                     @Html.ValidationMessageFor(q => q.co_FechaFactura, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -74,7 +83,15 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    @Html.TextBoxFor(q => q.co_FechaContabilizacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "co_FechaContabilizacion" })
+                    @Html.DevExpress().DateEditFor(q => q.co_FechaContabilizacion, settings =>
+                   {
+                       settings.Name = "co_FechaContabilizacion";
+                       settings.Properties.UseMaskBehavior = true;
+                       settings.Properties.EditFormat = EditFormat.Date;
+                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   }).GetHtml()
                     @Html.ValidationMessageFor(q => q.co_FechaContabilizacion, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -93,7 +110,15 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    @Html.TextBoxFor(q => q.co_FechaFactura_vct, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "co_FechaFactura_vct" })
+                    @Html.DevExpress().DateEditFor(q => q.co_FechaFactura_vct, settings =>
+                   {
+                       settings.Name = "co_FechaFactura_vct";
+                       settings.Properties.UseMaskBehavior = true;
+                       settings.Properties.EditFormat = EditFormat.Date;
+                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   }).GetHtml()
                     @Html.ValidationMessageFor(q => q.co_FechaFactura_vct, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -382,7 +407,16 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(q => q.info_cuota.Fecha_inicio, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_inicio" })
+                                    @Html.DevExpress().DateEditFor(q => q.info_cuota.Fecha_inicio, settings =>
+                                       {
+                                           settings.Name = "Fecha_inicio";
+                                           settings.Properties.UseMaskBehavior = true;
+                                           settings.Properties.EditFormat = EditFormat.Date;
+                                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                           settings.Properties.ClientSideEvents.DateChanged = "function(s,e){get_cuotas();}";
+                                       }).GetHtml()
                                     @Html.ValidationMessageFor(q => q.info_cuota.Fecha_inicio, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -415,30 +449,6 @@
     }
 }
 <script>
-
-
-    $(function () {
-        //Date picker
-        $('#co_FechaFactura').datepicker({
-            autoclose: true
-        })
-        $('#co_FechaContabilizacion').datepicker({
-            autoclose: true
-        })
-        $('#Fecha_inicio').datepicker({
-            autoclose: true
-        })
-        $('#co_FechaFactura_vct').datepicker({
-            autoclose: true
-        })
-    });
-    // funciones calcular total
-    $("#co_FechaFactura").change(function ()
-    {
-        var d = new  Date($("#co_FechaFactura").val());
-        $('#co_FechaContabilizacion').datepicker("setDate", moment(d).format("DD/MM/YYYY"));
-
-    });
     $("#num_docu_Modificar").change(function () {
         rellenar_ceros_izq();
     });
@@ -496,10 +506,6 @@
         $("#num_docu_Modificar").val(doc);
     }
 
-    // funciones calcular cuotas
-    $("#Fecha_inicio").change(function () {
-        get_cuotas();
-    });
     $("#Num_cuotas").keyup(function () {
         get_cuotas();
     });
@@ -513,7 +519,7 @@
     function get_cuotas()
     {
 
-        var Fecha_i = $("#Fecha_inicio").val();
+        var Fecha_i = Fecha_inicio.GetDate();
         var Num_cuot = $("#Num_cuotas").val();
         var Dias_plaz = $("#Dias_plazo").val();
         var Total_a_pag = $("#Total_a_pagar").val();
