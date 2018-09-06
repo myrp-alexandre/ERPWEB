@@ -31,7 +31,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         int IdEmpresa = 0;
         #endregion
 
-
         #region Metodos ComboBox bajo demanda
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         public ActionResult CmbEmpleado_novedades()
@@ -49,6 +48,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
         #endregion
 
+        #region Vistas
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -71,18 +71,24 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             var model = bus_novedad.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_empleado_novedad", model);
         }
-     
-        private void cargar_combos(int IdNomina)
-        {
-            IdEmpresa =Convert.ToInt32( SessionFixed.IdEmpresa);
-            ViewBag.lst_nomina = bus_nomina.get_list(IdEmpresa, false);
-            ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, IdNomina);
-            ViewBag.lst_empleado = bus_empleado.get_list_combo(IdEmpresa);
-        }
 
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_empleado_novedad_det(int IdEmpleado = 0, decimal IdNovedad = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
+            model.lst_novedad_det = bus_novedad_detalle_bus.get_list(IdEmpresa, IdEmpleado, IdNovedad);
+            if (model.lst_novedad_det.Count == 0)
+                model.lst_novedad_det = lst_novedad_det.get_list();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_empleado_novedad_det", model);
+        }
+        #endregion
+
+        #region acciones
         public ActionResult Nuevo()
         {
-             ro_empleado_novedad_Info model = new  ro_empleado_novedad_Info
+            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info
             {
                 IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
                 Fecha = DateTime.Now,
@@ -96,13 +102,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [HttpPost]
-        public ActionResult Nuevo( ro_empleado_novedad_Info model)
+        public ActionResult Nuevo(ro_empleado_novedad_Info model)
         {
 
 
 
-            model.lst_novedad_det =lst_novedad_det.get_list();
-            if (model.lst_novedad_det==null || model.lst_novedad_det.Count()==0)
+            model.lst_novedad_det = lst_novedad_det.get_list();
+            if (model.lst_novedad_det == null || model.lst_novedad_det.Count() == 0)
             {
                 ViewBag.mensaje = "No existe detalle para la novedad";
                 cargar_combos(model.IdNomina_Tipo);
@@ -111,9 +117,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
             foreach (var item in model.lst_novedad_det)
             {
-                item.Valor = Math.Round(item.Valor,2);
+                item.Valor = Math.Round(item.Valor, 2);
                 lst_rubros = Session["rubros"] as List<ro_rubro_tipo_Info>;
-                if(lst_rubros.Count() >0)
+                if (lst_rubros.Count() > 0)
                 {
                     if (lst_rubros.Where(v => v.IdRubro == item.IdRubro).FirstOrDefault().rub_acumula_descuento)
                     {
@@ -123,7 +129,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                         DateTime fechaf = fechai.AddMonths(1).AddDays(-1);
                         valor_acumulado = (double)bus_novedad_detalle_bus.get_valor_acumulado_del_mes_x_rubro(model.IdEmpresa, model.IdEmpleado, item.IdRubro, fechai, fechaf);
                         sueldo = (double)bus_contrato.get_sueldo_actual(model.IdEmpresa, model.IdEmpleado);
-                        if ((valor_acumulado+item.Valor) > (sueldo) * 0.10)
+                        if ((valor_acumulado + item.Valor) > (sueldo) * 0.10)
                         {
                             ViewBag.mensaje = "Ha excedido el valor de multa permitido por la ley";
                             cargar_combos(model.IdNomina_Tipo);
@@ -131,7 +137,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                         }
 
                     }
-                 }
+                }
             }
 
 
@@ -148,7 +154,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult Modificar(int IdEmpleado, decimal IdNovedad)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-             ro_empleado_novedad_Info model = bus_novedad.get_info(IdEmpresa, IdEmpleado, IdNovedad);
+            ro_empleado_novedad_Info model = bus_novedad.get_info(IdEmpresa, IdEmpleado, IdNovedad);
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_novedad_det = bus_novedad_detalle_bus.get_list(IdEmpresa, IdEmpleado, IdNovedad);
@@ -159,7 +165,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [HttpPost]
-        public ActionResult Modificar( ro_empleado_novedad_Info model)
+        public ActionResult Modificar(ro_empleado_novedad_Info model)
         {
             model.lst_novedad_det = lst_novedad_det.get_list();
             if (model.lst_novedad_det == null || model.lst_novedad_det.Count() == 0)
@@ -182,7 +188,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult Anular(int IdEmpleado, decimal IdNovedad)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-             ro_empleado_novedad_Info model = bus_novedad.get_info(IdEmpresa, IdEmpleado, IdNovedad);
+            ro_empleado_novedad_Info model = bus_novedad.get_info(IdEmpresa, IdEmpleado, IdNovedad);
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_novedad_det = bus_novedad_detalle_bus.get_list(IdEmpresa, IdEmpleado, IdNovedad);
@@ -191,10 +197,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Anular( ro_empleado_novedad_Info model)
+        public ActionResult Anular(ro_empleado_novedad_Info model)
         {
             model.lst_novedad_det = lst_novedad_det.get_list();
-            
+
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
             model.Fecha_UltAnu = DateTime.Now;
@@ -205,33 +211,25 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
 
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_empleado_novedad_det(int IdEmpleado = 0, decimal IdNovedad = 0)
+        #region cargar combos
+
+        private void cargar_combos(int IdNomina)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-             ro_empleado_novedad_Info model = new  ro_empleado_novedad_Info();
-            model.lst_novedad_det = bus_novedad_detalle_bus.get_list(IdEmpresa, IdEmpleado, IdNovedad);
-            if (model.lst_novedad_det.Count == 0)
-                model.lst_novedad_det = lst_novedad_det.get_list();
-            cargar_combos_detalle();
-            return PartialView("_GridViewPartial_empleado_novedad_det", model);
+            IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ViewBag.lst_nomina = bus_nomina.get_list(IdEmpresa, false);
+            ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, IdNomina);
         }
+        #endregion
 
-        private void cargar_combos_detalle()
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            lst_rubros= bus_rubro.get_list_rub_concepto(IdEmpresa);
-            ViewBag.lst_rubro = lst_rubros;
-            Session["rubros"]=lst_rubros;
-        }
-
+        #region funciones del detalle
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_novedad_det_Info info_det)
         {
             if (ModelState.IsValid)
                 lst_novedad_det.AddRow(info_det);
-             ro_empleado_novedad_Info model = new  ro_empleado_novedad_Info();
+            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
             model.lst_novedad_det = lst_novedad_det.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_empleado_novedad_det", model);
@@ -242,7 +240,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             if (ModelState.IsValid)
                 lst_novedad_det.UpdateRow(info_det);
-             ro_empleado_novedad_Info model = new  ro_empleado_novedad_Info();
+            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
             model.lst_novedad_det = lst_novedad_det.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_empleado_novedad_det", model);
@@ -251,11 +249,21 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult EditingDelete([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_novedad_det_Info info_det)
         {
             lst_novedad_det.DeleteRow(info_det.Secuencia);
-             ro_empleado_novedad_Info model = new  ro_empleado_novedad_Info();
+            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
             model.lst_novedad_det = lst_novedad_det.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_empleado_novedad_det", model);
         }
+        #endregion
+        private void cargar_combos_detalle()
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            lst_rubros= bus_rubro.get_list_rub_concepto(IdEmpresa);
+            ViewBag.lst_rubro = lst_rubros;
+            Session["rubros"]=lst_rubros;
+        }
+
+       
     }
 
     public class ro_empleado_novedad_det_lst

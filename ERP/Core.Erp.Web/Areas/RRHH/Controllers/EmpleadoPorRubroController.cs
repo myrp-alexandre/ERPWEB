@@ -209,7 +209,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 IdEmpresa = GetIdEmpresa();
                 ViewBag.lst_rubro = bus_rubro.get_list_rub_concepto(IdEmpresa);
-                ViewBag.lst_empleado = bus_empleado.get_list_combo(IdEmpresa);
                 ViewBag.lst_nomina = bus_nomina.get_list(IdEmpresa, false);
                 ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, IdNominaTipo);
             }
