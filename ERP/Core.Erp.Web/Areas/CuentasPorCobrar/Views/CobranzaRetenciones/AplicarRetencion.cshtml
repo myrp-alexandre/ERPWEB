@@ -11,14 +11,6 @@
 
 <script type="text/javascript">
 
-    $(function () {
-        //Date picker
-        $('#cr_fecha').datepicker({
-            autoclose: true
-        })
-    })
-
-
     function SetValorRetencion(s,e)
     {
         var datos = {
@@ -83,7 +75,15 @@
             <div class="col-md-offset-7 col-md-2">
                 <div class="form-group">
                     <label for="cr_fecha">Fecha*</label>
-                    @Html.TextBoxFor(q => q.cr_fecha, "{0:dd/MM/yyyy}", new { @id = "cr_fecha", @class = "form-control" })
+                    @Html.DevExpress().DateEditFor(q=> q.cr_fecha, settings =>
+                {
+                    settings.Name = "cr_fecha";
+                    settings.Properties.UseMaskBehavior = true;
+                    settings.Properties.EditFormat = EditFormat.Date;
+                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                }).GetHtml()
                     @Html.ValidationMessageFor(q => q.cr_fecha, "", new { @class = "text-danger" })
                 </div>
             </div>

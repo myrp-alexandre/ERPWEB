@@ -13,10 +13,6 @@
     var selectedIDs;
 
     $(function () {
-        //Date picker
-        $('#cr_fecha').datepicker({
-            autoclose: true
-        })
 
         $("#IdCobro_tipo").change(function () {
             SetCobroTipo();
@@ -206,7 +202,15 @@
             <div class="col-md-offset-6 col-md-6">
                 <div class="form-group">
                     <label for="cr_fecha">Fecha*</label>
-                    @Html.TextBoxFor(q => q.cr_fecha, "{0:dd/MM/yyyy}", new { @id = "cr_fecha", @class = "form-control" })
+                    @Html.DevExpress().DateEditFor(q=> q.cr_fecha, settings =>
+                {
+                    settings.Name = "cr_fecha";
+                    settings.Properties.UseMaskBehavior = true;
+                    settings.Properties.EditFormat = EditFormat.Date;
+                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                }).GetHtml()
                     @Html.ValidationMessageFor(q => q.cr_fecha, "", new { @class = "text-danger" })
                 </div>
             </div>

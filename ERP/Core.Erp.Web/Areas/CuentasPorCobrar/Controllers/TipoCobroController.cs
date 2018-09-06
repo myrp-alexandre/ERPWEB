@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 {
+    [SessionTimeout]
     public class TipoCobroController : Controller
     {
         #region Variables

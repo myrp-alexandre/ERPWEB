@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
+    [SessionTimeout]
     public class CodigoSRIController : Controller
     {
         #region Variables
