@@ -1,16 +1,15 @@
-﻿using DevExpress.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Core.Erp.Bus.CuentasPorPagar;
+﻿using Core.Erp.Bus.CuentasPorPagar;
 using Core.Erp.Info.CuentasPorPagar;
+using Core.Erp.Web.Helps;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
+    [SessionTimeout]
     public class TipoCodigoSRIController : Controller
     {
+        #region Index
         cp_codigo_SRI_tipo_Bus bus_tipo_codigo = new cp_codigo_SRI_tipo_Bus();
         public ActionResult Index()
         {
@@ -24,6 +23,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model = bus_tipo_codigo.get_list(true);
             return PartialView("_GridViewPartial_tipo_codigo_sri", model);
         }
+
+        #endregion
+        #region Acciones
         public ActionResult Nuevo()
         {
             cp_codigo_SRI_tipo_Info model = new cp_codigo_SRI_tipo_Info();
@@ -85,5 +87,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
+
     }
 }

@@ -14,10 +14,13 @@ namespace Core.Erp.Info.CuentasPorPagar
         public decimal IdCbteCble_Ogiro { get; set; }
         public int IdTipoCbte_Ogiro { get; set; }
         public string IdOrden_giro_Tipo { get; set; }
+        [Required(ErrorMessage = "El proveedor es obligatorio")]
         public decimal IdProveedor { get; set; }
         public System.DateTime co_fechaOg { get; set; }
         [RegularExpression(@"\d{3}-\d{3}", ErrorMessage = "El formato de la serie debe ser 000-000")]
+        [Required(ErrorMessage = "Serie del documento es obligatorio")]
         public string co_serie { get; set; }
+        [Required(ErrorMessage = "El numero del documento es obligatorio")]
         public string co_factura { get; set; }
         public System.DateTime co_FechaFactura { get; set; }
         public Nullable<System.DateTime> co_FechaContabilizacion { get; set; }

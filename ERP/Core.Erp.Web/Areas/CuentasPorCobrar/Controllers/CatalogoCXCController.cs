@@ -1,16 +1,16 @@
 ﻿using Core.Erp.Bus.CuentasPorCobrar;
 using Core.Erp.Info.CuentasPorCobrar;
-using DevExpress.Web.Mvc;
-using System;
+using Core.Erp.Web.Helps;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 {
+    [SessionTimeout]
     public class CatalogoCXCController : Controller
     {
+        #region Index
+
         cxc_Catalogo_Bus bus_catalogo = new cxc_Catalogo_Bus();
 
         public ActionResult Index(string IdCatalogo_tipo = "")
@@ -41,6 +41,8 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             lst_orden.Add(5, "5");
             ViewBag.lst_orden = lst_orden;
         }
+        #endregion
+        #region Acciones
 
         public ActionResult Nuevo(string IdCatalogo_tipo = "")
         {
@@ -119,5 +121,6 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             return RedirectToAction("Index", new { IdCatalogo_tipo = model.IdCatalogo_tipo });
 
         }
+        #endregion
     }
 }

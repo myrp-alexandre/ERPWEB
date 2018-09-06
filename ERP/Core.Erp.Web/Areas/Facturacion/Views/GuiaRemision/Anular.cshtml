@@ -96,7 +96,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdCliente">Cliente*</label>
-                    @Html.Partial("_CmbCliente_Guia", Model)
+                    @Html.Partial("_CmbCliente_Guia", Model.IdCliente)
                     @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
                 </div>
             </div>

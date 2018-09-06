@@ -24,7 +24,7 @@
         settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){get_info_cliente();}";
     })
     .BindList(new Core.Erp.Web.Areas.Facturacion.Controllers.FacturaController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Facturacion.Controllers.FacturaController().get_info_bajo_demanda)
-    .Bind(Model.IdCliente == 0 ? "" : Model.IdCliente);
+    .Bind(Model.GetType() == typeof(Core.Erp.Info.Facturacion.fa_factura_Info) ? "" : (Model == 0 ? "" : Model));
 
 }
 @comboBox.GetHtml()

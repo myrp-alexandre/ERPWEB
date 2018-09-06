@@ -73,7 +73,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 if (info.info_cuota.Total_a_pagar == 0)
                     info.co_FechaFactura_vct = info.co_FechaFactura;
                 else
-                    info.co_FechaFactura_vct = info.info_cuota.Fecha_inicio;
+                    info.co_FechaFactura_vct = info.co_FechaFactura_vct;
                 info.co_fechaOg = info.co_FechaFactura;
                 if (bus_contabilidad.guardarDB(info.info_comrobante))
                 {

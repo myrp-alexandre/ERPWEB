@@ -11,8 +11,11 @@ using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
+    [SessionTimeout]
     public class PuntoVentaController : Controller
     {
+        #region Index
+
         fa_PuntoVta_Bus bus_punto = new fa_PuntoVta_Bus();
         public ActionResult Index()
         {
@@ -41,6 +44,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             lst_signos.Add("+", "+");
             ViewBag.lst_signos = lst_signos;
         }
+        #endregion
+        #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
             fa_PuntoVta_Info model = new fa_PuntoVta_Info
@@ -101,7 +106,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        #endregion
         #region Json
         public JsonResult cargar_bodega(int IdEmpresa = 0 , int IdSucursal = 0)
         {
