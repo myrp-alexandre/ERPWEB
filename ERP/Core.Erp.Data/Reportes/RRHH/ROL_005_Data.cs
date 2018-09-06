@@ -47,6 +47,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  ru_descripcion = q.ru_descripcion
                              }).ToList();
                 }
+
+               
                 return Lista;
             }
             catch (Exception)
