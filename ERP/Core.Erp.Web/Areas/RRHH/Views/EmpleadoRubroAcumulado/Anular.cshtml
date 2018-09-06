@@ -30,12 +30,13 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdCtaCblePadre">Rubro*</label>
+                    <label for="IdRubro">Rubro*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdRubro, settings =>
                {
                    settings.Name = "IdRubro";
                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("ru_codRolGen", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
                    settings.Properties.Columns.Add("ru_descripcion", "Rubro").Width = System.Web.UI.WebControls.Unit.Percentage(10);
                    settings.Properties.Columns.Add("ru_tipo", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(80);
 
@@ -54,32 +55,38 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="pe_fechaNacimiento">Fecha solicitud acumulación*</label>
-            <div class="input-group date">
-                <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                </div>
-                @Html.TextBoxFor(q => q.Fec_Inicio_Acumulacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechai" })
-                @Html.ValidationMessageFor(q => q.Fec_Inicio_Acumulacion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="pe_fechaNacimiento">Fecha de nacimiento*</label>
-            <div class="input-group date">
-                <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                </div>
-                @Html.TextBoxFor(q => q.Fec_Fin_Acumulacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechaf" })
-                @Html.ValidationMessageFor(q => q.Fec_Fin_Acumulacion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-    <div class="box-footer">
+    <div class="row">
 
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Fec_Inicio_Acumulacion">Fecha solicitud acumulación*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.Fec_Inicio_Acumulacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechai" })
+                        @Html.ValidationMessageFor(q => q.Fec_Inicio_Acumulacion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Fec_Fin_Acumulacion">Fecha fin acumulación*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.Fec_Fin_Acumulacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechaf" })
+                        @Html.ValidationMessageFor(q => q.Fec_Fin_Acumulacion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index","EmpleadoRubroAcumulado",new { Area = "RRHH" },null)">Cancelar</a>
     </div>

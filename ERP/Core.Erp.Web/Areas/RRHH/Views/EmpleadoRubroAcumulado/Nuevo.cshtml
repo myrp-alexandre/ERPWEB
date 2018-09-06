@@ -52,57 +52,62 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="Fec_Inicio_Acumulacion">Fecha solicitud acumulación*</label>
-            <div class="input-group date">
-                <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Fec_Inicio_Acumulacion">Fecha solicitud acumulación*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.Fec_Inicio_Acumulacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechai" })
+                        @Html.ValidationMessageFor(q => q.Fec_Inicio_Acumulacion, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-                @Html.TextBoxFor(q => q.Fec_Inicio_Acumulacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechai" })
-                @Html.ValidationMessageFor(q => q.Fec_Inicio_Acumulacion, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Fec_Fin_Acumulacion">Fecha fin acumulación*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.TextBoxFor(q => q.Fec_Fin_Acumulacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechaf" })
+                        @Html.ValidationMessageFor(q => q.Fec_Fin_Acumulacion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="Fec_Fin_Acumulacion">Fecha fin acumulación*</label>
-            <div class="input-group date">
-                <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                </div>
-                @Html.TextBoxFor(q => q.Fec_Fin_Acumulacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechaf" })
-                @Html.ValidationMessageFor(q => q.Fec_Fin_Acumulacion, "", new { @class = "text-danger" })
-            </div>
+
+        <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a class="btn btn-default" href="@Url.Action("Index","EmpleadoRubroAcumulado",new { Area = "RRHH" },null)">Cancelar</a>
         </div>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+        }
 
-    </div>
+        <script>
 
-    <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","EmpleadoRubroAcumulado",new { Area = "RRHH" },null)">Cancelar</a>
-    </div>
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
-}
+            $(function () {
 
-<script>
+                $('#fechai').datepicker({
+                    autoclose: true
+                })
+            })
 
-    $(function () {
+            $(function () {
 
-        $('#fechai').datepicker({
-            autoclose: true
-        })
-    })
-
-    $(function () {
-
-        $('#fechaf').datepicker({
-            autoclose: true
-        })
-    })
+                $('#fechaf').datepicker({
+                    autoclose: true
+                })
+            })
 
 
 
-</script>
+        </script>
