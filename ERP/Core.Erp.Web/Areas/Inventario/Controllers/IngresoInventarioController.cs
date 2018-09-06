@@ -13,6 +13,7 @@ using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class IngresoInventarioController : Controller
     {
         #region variables

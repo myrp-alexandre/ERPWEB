@@ -18,6 +18,7 @@ using Core.Erp.Info.Inventario;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
+    [SessionTimeout]
     public class DeudasController : Controller
     {
         #region variables

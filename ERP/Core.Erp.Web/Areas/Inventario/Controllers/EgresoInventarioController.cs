@@ -14,6 +14,7 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class EgresoInventarioController : Controller
     {
         #region Variables

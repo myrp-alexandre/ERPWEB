@@ -17,6 +17,7 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Banco.Controllers
 {
+    [SessionTimeout]
     public class NotaDeDebitoBancoController : Controller
     {
         #region Variables

@@ -4,15 +4,13 @@ using Core.Erp.Bus.General;
 using Core.Erp.Bus.SeguridadAcceso;
 using Core.Erp.Info.Caja;
 using Core.Erp.Web.Helps;
-using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Caja.Controllers
 {
+    [SessionTimeout]
     public class CajaController : Controller
     {
         #region Variables

@@ -14,6 +14,7 @@ using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
+    [SessionTimeout]
     public class ClienteController : Controller
     {
         #region Variables

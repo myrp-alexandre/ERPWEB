@@ -13,6 +13,7 @@ using Core.Erp.Info.Helps;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
+    [SessionTimeout]
     public class RetencionController : Controller
     {
           #region variables

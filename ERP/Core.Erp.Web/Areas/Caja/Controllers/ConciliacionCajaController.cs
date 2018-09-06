@@ -16,6 +16,7 @@ using System.Web;
 using System.Web.Mvc;
 namespace Core.Erp.Web.Areas.Caja.Controllers
 {
+    [SessionTimeout]
     public class ConciliacionCajaController : Controller
     {
         #region Variables
