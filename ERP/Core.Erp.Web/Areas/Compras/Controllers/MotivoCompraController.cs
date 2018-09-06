@@ -1,17 +1,16 @@
-﻿using DevExpress.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Core.Erp.Bus.Compras;
+﻿using Core.Erp.Bus.Compras;
 using Core.Erp.Info.Compras;
 using Core.Erp.Web.Helps;
+using System;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Compras.Controllers
 {
+    [SessionTimeout]
+
     public class MotivoCompraController : Controller
     {
+        #region Index
         com_Motivo_Orden_Compra_Bus bus_motivo = new com_Motivo_Orden_Compra_Bus();
         public ActionResult Index()
         {
@@ -24,6 +23,11 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             var model = bus_motivo.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_motivocompra", model);
         }
+
+        #endregion
+
+        #region Acciones
+
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
             com_Motivo_Orden_Compra_Info model = new com_Motivo_Orden_Compra_Info
@@ -76,5 +80,6 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
     }
 }

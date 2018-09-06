@@ -1,17 +1,14 @@
-﻿using DevExpress.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Core.Erp.Bus.Compras;
+﻿using Core.Erp.Bus.Compras;
 using Core.Erp.Info.Compras;
 using Core.Erp.Web.Helps;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Compras.Controllers
 {
+    [SessionTimeout]
     public class EstadoCierreComprasController : Controller
     {
+        #region Index
         com_estado_cierre_Bus bus_estado = new com_estado_cierre_Bus();
         public ActionResult Index()
         {
@@ -25,6 +22,9 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             return PartialView("_GridViewPartial_estadocierre", model);
         }
 
+        #endregion
+
+        #region Acciones
         public ActionResult Nuevo()
         {
             com_estado_cierre_Info model = new com_estado_cierre_Info();
@@ -80,5 +80,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

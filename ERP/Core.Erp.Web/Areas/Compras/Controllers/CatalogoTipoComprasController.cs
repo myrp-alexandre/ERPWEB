@@ -6,11 +6,14 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.Compras;
 using Core.Erp.Info.Compras;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Compras.Controllers
 {
+    [SessionTimeout]
     public class CatalogoTipoComprasController : Controller
     {
+        #region Index
         com_catalogo_tipo_Bus bus_catalogotipo = new com_catalogo_tipo_Bus();
         public ActionResult Index()
         {
@@ -23,6 +26,11 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             var model = bus_catalogotipo.get_list(true);
             return PartialView("_GridViewPartial_catipocompras", model);
         }
+
+        #endregion
+
+        #region Acciones
+
         public ActionResult Nuevo()
         {
             com_catalogo_tipo_Info model = new com_catalogo_tipo_Info();
@@ -67,7 +75,6 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
                 return RedirectToAction("Index");
             return View(model);
         }
-
         [HttpPost]
         public ActionResult Anular(com_catalogo_tipo_Info model)
         {
@@ -77,5 +84,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
+
     }
 }
