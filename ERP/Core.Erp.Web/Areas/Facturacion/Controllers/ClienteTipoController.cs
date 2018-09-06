@@ -1,18 +1,17 @@
-﻿using DevExpress.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.Facturacion;
 using Core.Erp.Info.Facturacion;
-using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Web.Helps;
+using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
+    [SessionTimeout]
     public class ClienteTipoController : Controller
     {
+        #region Index
         fa_cliente_tipo_Bus bus_clientetipo = new fa_cliente_tipo_Bus();
         public ActionResult Index()
         {
@@ -26,12 +25,19 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             List<fa_cliente_tipo_Info> model = bus_clientetipo.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_clientetipo", model);
         }
+
+        #endregion
+        #region Metodos
         private void cargar_combos(int IdEmpresa)
         {
             ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
             var lst_ctacble = bus_plancta.get_list(IdEmpresa, false, false);
             ViewBag.lst_cuentas = lst_ctacble;
         }
+
+        #endregion
+        #region Acciones
+
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
             fa_cliente_tipo_Info model = new fa_cliente_tipo_Info
@@ -97,5 +103,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
     }
 }

@@ -362,7 +362,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCliente">Cliente*</label>
-                    @Html.Partial("_CmbCliente_NotaDebitoFacturacion", Model)
+                    @Html.Partial("_CmbCliente_NotaDebitoFacturacion", Model.IdCliente)
                     @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
                 </div>
             </div>

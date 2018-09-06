@@ -20,7 +20,6 @@
 
     })
     .BindList(new Core.Erp.Web.Areas.Facturacion.Controllers.GuiaRemisionController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Facturacion.Controllers.GuiaRemisionController().get_info_bajo_demanda)
-    .Bind(Model.IdCliente);
-
+    .Bind(Model.GetType() == typeof(Core.Erp.Info.Facturacion.fa_guia_remision_Info) ? "" : (Model == 0 ? "" : Model));
 }
 @comboBox.GetHtml()
