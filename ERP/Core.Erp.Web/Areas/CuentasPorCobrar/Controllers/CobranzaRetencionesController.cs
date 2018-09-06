@@ -1,6 +1,7 @@
 ﻿using Core.Erp.Bus.CuentasPorCobrar;
 using Core.Erp.Bus.General;
 using Core.Erp.Info.CuentasPorCobrar;
+using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
 using DevExpress.Web.Mvc;
@@ -43,7 +44,15 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         }
         private void cargar_combos()
         {
-            var lst_sucursal = bus_sucursal.get_list(Convert.ToInt32(SessionFixed.IdEmpresa), false);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            lst_sucursal.Add(new tb_sucursal_Info
+            {
+                IdEmpresa = IdEmpresa,
+            IdSucursal = 0, 
+            Su_Descripcion = "Todos"
+
+            });
             ViewBag.lst_sucursal = lst_sucursal;
         }
 
@@ -184,6 +193,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         }
         #endregion
 
+        #region Grids
         [ValidateInput(false)]
         public ActionResult GridViewPartial_cobranza_ret_det()
         {
@@ -192,6 +202,8 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             cargar_combos_det();
             return PartialView("_GridViewPartial_cobranza_ret_det", model);
         }
+
+        #endregion
     }
 
     public class cxc_cobro_det_ret_List

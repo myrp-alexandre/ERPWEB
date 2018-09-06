@@ -12,6 +12,7 @@ using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 {
+    [SessionTimeout]
     public class ActivoFijoController : Controller
     {
         #region Variables

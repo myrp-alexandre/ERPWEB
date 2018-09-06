@@ -13,15 +13,19 @@
     function MostarPrecios() {
         $("#contrasena_admin").val("");
         $("#ModalMostrarPrecios").modal("show");
-
+       
+       // $('#IdUsuarioAut').focus();
+        //document.getElementById("IdUsuarioAut").focus();
+      
     }
-
+    
+   
 </script>
 @using (Html.BeginForm("Modificar", "Producto", FormMethod.Post, new { @class = "form", @rolw = "form" }))
 {
 
     @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdProducto)
+    @Html.HiddenFor(q => q.IdProducto, new {@id= "IdProducto" })
     @Html.HiddenFor(q => q.IdTransaccionSession)
 
     if (ViewBag.mensaje != null)
@@ -479,6 +483,10 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
+                            <div class="form-group has-feedback">
+                                @Html.TextBoxFor(q => q.IdUsuarioAut, new { @class = "form-control", @placeholder = "Usuario", @id = "IdUsuarioAut" })
+                                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                            </div>
                             <div class="form-group has-feedback">
                                 @Html.PasswordFor(q => q.contrasena_admin, new { @class = "form-control", @placeholder = "Contraseña desbloqueo", @id = "contrasena_admin" })
                                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
@@ -983,7 +991,9 @@
     function MostrarPrecios() {
         
         var datos = {
-            Contrasenia: $("#contrasena_admin").val()
+            IdUsuarioAut: $("#IdUsuarioAut").val(),
+            contrasena_admin: $("#contrasena_admin").val(),
+            IdProducto: $("#IdProducto").val(),
         }
         $.ajax({
             type: 'POST',
@@ -997,12 +1007,10 @@
             success: function (data) {
                 if (data == "AUTORIZADO") {
                     $("#link_precios").show();
-                    $("#link_general").click();
                 }
                 else
                 {
                     $("#link_precios").hide();
-                    $("#link_general").click();
                    
                 }
                

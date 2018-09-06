@@ -5,6 +5,7 @@
     {
         Response.Redirect("~/Account/Login");
     }
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "AnioFiscal", FormMethod.Post, new { @class = "form", @role = "form" }))
@@ -38,7 +39,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.af_fechaIni, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "af_fechaIni" })
+                        @Html.DevExpress().DateEditFor(q=> q.af_fechaIni, settings =>
+                    {
+                        settings.Name = "af_fechaIni";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.af_fechaIni, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -51,7 +60,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.af_fechaFin, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "af_fechaFin" })
+                        @Html.DevExpress().DateEditFor(q=> q.af_fechaFin, settings =>
+                    {
+                        settings.Name = "af_fechaFin";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.af_fechaFin, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -79,17 +96,4 @@
     }
 }
 
-<script>
-    $(function () {
 
-        //Date picker
-        $('#af_fechaIni').datepicker({
-            autoclose: true
-        })
-
-        $('#af_fechaFin').datepicker({
-            autoclose: true
-        })
-    });
-
-</script>

@@ -12,6 +12,7 @@ using System.Web.UI;
 using Core.Erp.Web.Helps;
 using Core.Erp.Info.Helps;
 using Core.Erp.Bus.SeguridadAcceso;
+using Core.Erp.Info.General;
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
     public class ProductoController : Controller
@@ -26,6 +27,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
         in_producto_x_tb_bodega_Bus bus_producto_x_bodega = new in_producto_x_tb_bodega_Bus();
         seg_usuario_Bus bus_usuarios = new seg_usuario_Bus();
+        tbl_TransaccionesAutorizadas_Bus bus_transacciones_aut = new tbl_TransaccionesAutorizadas_Bus();
         private string mensaje;
         #endregion
 
@@ -274,17 +276,22 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
 
 
-        public JsonResult MostrarPrecios(string Contrasenia = "")
+        public JsonResult MostrarPrecios(string IdUsuarioAut = "", string contrasena_admin = "", decimal IdProducto=0)
         {
-            string EstadoDesbloqueo = "";
-
-            var usuario = bus_usuarios.get_info(Convert.ToString(SessionFixed.IdUsuario));
-            if (usuario != null)
+            string EstadoDesbloqueo = ""; 
+             var info_usuarios = bus_usuarios.get_info(Convert.ToString(SessionFixed.IdUsuario));
+            if (info_usuarios != null)
             {
-                if (usuario.es_super_admin)
+                if (info_usuarios.es_super_admin)
                 {
-                    if (Contrasenia.ToLower() == usuario.contrasena_admin.ToLower())
+                    if (contrasena_admin.ToLower() == info_usuarios.contrasena_admin.ToLower())
                     {
+                        tbl_TransaccionesAutorizadas_info info_trasnsaccion_aut = new tbl_TransaccionesAutorizadas_info();
+                        info_trasnsaccion_aut.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                        info_trasnsaccion_aut.IdUsuarioAut = IdUsuarioAut;
+                        info_trasnsaccion_aut.IdUsuarioLog = SessionFixed.IdUsuario.ToString();
+                        info_trasnsaccion_aut.Observacion = "Autorizacion de visualizacion de precios IdProducto #"+ IdProducto.ToString();
+                        bus_transacciones_aut.guardarDB(info_trasnsaccion_aut);
                         EstadoDesbloqueo = "AUTORIZADO";
                     }
                 }

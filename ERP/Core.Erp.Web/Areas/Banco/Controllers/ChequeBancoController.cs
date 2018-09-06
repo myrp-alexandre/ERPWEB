@@ -18,6 +18,7 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Banco.Controllers
 {
+    [SessionTimeout]
     public class ChequeBancoController : Controller
     {
         #region Variables
@@ -56,6 +57,12 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            lst_sucursal.Add(new tb_sucursal_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdSucursal = 0,
+                Su_Descripcion = "Todos"
+            });
             ViewBag.lst_sucursal = lst_sucursal;
         }
         public ActionResult GridViewPartial_cheque(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
@@ -73,7 +80,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public ActionResult CmbPersona_ChequeBanco()
         {
             SessionFixed.TipoPersona = Request.Params["IdTipo_Persona"] != null ? Request.Params["IdTipo_Persona"].ToString() : SessionFixed.TipoPersona;
-            ba_Cbte_Ban_Info model = new ba_Cbte_Ban_Info();
+            decimal model = new decimal();
             return PartialView("_CmbPersona_ChequeBanco", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)

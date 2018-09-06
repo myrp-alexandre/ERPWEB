@@ -1,17 +1,17 @@
 ﻿using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.Contabilidad;
-using DevExpress.Web.Mvc;
-using System;
+using Core.Erp.Web.Helps;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 
 namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 {
+
+    [SessionTimeout]
     public class GrupoContableController : Controller
     {
+        #region Index
         ct_grupocble_Bus bus_grupo_cble = new ct_grupocble_Bus();
         public ActionResult Index()
         {
@@ -34,6 +34,9 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             ViewBag.lst_balances = lst_balances;
         }
 
+        #endregion
+
+        #region Acciones
         public ActionResult Nuevo()
         {
             ct_grupocble_Info model = new ct_grupocble_Info();
@@ -93,5 +96,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

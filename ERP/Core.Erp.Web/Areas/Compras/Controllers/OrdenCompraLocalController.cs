@@ -17,9 +17,11 @@ using Core.Erp.Bus.Inventario;
 
 namespace Core.Erp.Web.Areas.Compras.Controllers
 {
+    [SessionTimeout]
+
     public class OrdenCompraLocalController : Controller
     {
-        #region Varibales
+        #region Variables
             com_ordencompra_local_Bus bus_ordencompra = new com_ordencompra_local_Bus();
             cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
             com_TerminoPago_Bus bus_termino = new com_TerminoPago_Bus();
@@ -39,7 +41,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         public ActionResult CmbProveedor_COM()
         {
-            com_ordencompra_local_Info model = new com_ordencompra_local_Info();
+            decimal model = new decimal();
             return PartialView("_CmbProveedor_COM", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)

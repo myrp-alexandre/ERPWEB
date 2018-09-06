@@ -19,8 +19,11 @@ namespace Core.Erp.Data.Banco
             {
                 Fecha_ini = Fecha_ini.Date;
                 Fecha_fin = Fecha_fin.Date;
-                List<ba_Cbte_Ban_Info> Lista;
 
+                int IdSucursal_ini = IdSucursal;
+                int IdSucursal_fin = IdSucursal == 0 ? 9999 : IdSucursal;
+
+                List<ba_Cbte_Ban_Info> Lista;
                 using (Entities_banco Context = new Entities_banco())
                 {
                     if(mostrar_anulados)
@@ -29,7 +32,7 @@ namespace Core.Erp.Data.Banco
                              && Fecha_ini <= q.cb_Fecha
                              && q.cb_Fecha <= Fecha_fin
                              && q.CodTipoCbteBan == CodCbte
-                             && q.IdSucursal == IdSucursal
+                             && IdSucursal_ini <= q.IdSucursal && q.IdSucursal <= IdSucursal_fin
                              orderby q.IdCbteCble descending
                              select new ba_Cbte_Ban_Info
                              {
@@ -54,7 +57,7 @@ namespace Core.Erp.Data.Banco
                                  && Fecha_ini <= q.cb_Fecha
                                  && q.cb_Fecha <= Fecha_fin
                                  && q.CodTipoCbteBan == CodCbte
-                                 && q.IdSucursal == IdSucursal
+                                 && IdSucursal_ini <= q.IdSucursal && q.IdSucursal <= IdSucursal_fin
                                  && q.Estado == "A"
                                  orderby q.IdCbteCble descending
                                  select new ba_Cbte_Ban_Info

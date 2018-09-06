@@ -15,13 +15,15 @@ namespace Core.Erp.Data.CuentasPorCobrar
         {
             try
             {
+                int IdSucursal_ini = IdSucursal;
+                int IdSucursal_fin = IdSucursal == 0 ? 9999 : IdSucursal;
                 List<cxc_cobro_Info> Lista;
 
                 using (Entities_cuentas_por_cobrar Context = new Entities_cuentas_por_cobrar())
                 {
                     Lista = (from q in Context.vwcxc_cobro
                              where q.IdEmpresa == IdEmpresa
-                             && q.IdSucursal == IdSucursal
+                             && IdSucursal_ini <= q.IdSucursal && q.IdSucursal <= IdSucursal_fin
                              && Fecha_ini <= q.cr_fecha && q.cr_fecha <= Fecha_fin
                              orderby q.IdCobro descending
                              select new cxc_cobro_Info
@@ -44,7 +46,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
 
                 return Lista;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }

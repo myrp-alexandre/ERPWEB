@@ -1,16 +1,14 @@
-﻿using DevExpress.Web.Mvc;
-using Core.Erp.Bus.Compras;
+﻿using Core.Erp.Bus.Compras;
 using Core.Erp.Info.Compras;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using Core.Erp.Web.Helps;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Compras.Controllers
 {
+    [SessionTimeout]
     public class CatalogoComprasController : Controller
     {
+        #region Index
         com_catalogo_Bus bus_catalogo = new com_catalogo_Bus();
         public ActionResult Index(string IdCatalogocompra_tipo = "")
         {
@@ -31,6 +29,11 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             var lst_catalogo_tipo = bus_catalogotipo.get_list(false);
             ViewBag.lst_tipos = lst_catalogo_tipo;
         }
+
+        #endregion
+
+        #region Acciones
+
         public ActionResult Nuevo(string IdCatalogocompra_tipo = "")
         {
             com_catalogo_Info model = new com_catalogo_Info
@@ -108,5 +111,6 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             return RedirectToAction("Index", new { IdCatalogocompra_tipo = model.IdCatalogocompra_tipo });
 
         }
+        #endregion
     }
 }

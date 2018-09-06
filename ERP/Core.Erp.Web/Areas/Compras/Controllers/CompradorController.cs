@@ -1,30 +1,31 @@
-﻿using DevExpress.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Core.Erp.Bus.Compras;
-using Core.Erp.Web.Helps;
-using Core.Erp.Bus.SeguridadAcceso;
+﻿using Core.Erp.Bus.Compras;
 using Core.Erp.Bus.General;
+using Core.Erp.Bus.SeguridadAcceso;
 using Core.Erp.Info.Compras;
 using Core.Erp.Info.General;
+using Core.Erp.Web.Helps;
 using DevExpress.Web;
+using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Compras.Controllers
 {
+    [SessionTimeout]
     public class CompradorController : Controller
     {
+        #region Variables
         com_comprador_Bus bus_comprador = new com_comprador_Bus();
         seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
         tb_persona_Bus bus_persona = new tb_persona_Bus();
 
+
+        #endregion
         #region Combo box bajo demanda
         public ActionResult CmbPersona_Compras()
         {
             SessionFixed.TipoPersona = Request.Params["IdTipoPersona"] != null ? Request.Params["IdTipoPersona"].ToString() : "PERSONA";
-            com_comprador_Info model = new com_comprador_Info();
+            decimal model = new decimal();
             return PartialView("_CmbPersona_Compras", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -37,7 +38,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         }
 
         #endregion
-
+        #region Index
         public ActionResult Index()
         {
             return View();
@@ -58,6 +59,8 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             
         }
 
+        #endregion
+        #region Acciones
         public ActionResult Nuevo()
         {
             com_comprador_Info model = new com_comprador_Info
@@ -119,5 +122,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

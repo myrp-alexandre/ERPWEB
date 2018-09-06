@@ -49,7 +49,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.Fecha_MejBaj, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_MejBaj" })
+                        @Html.DevExpress().DateEditFor(q=> q.Fecha_MejBaj, settings =>
+                    {
+                        settings.Name = "Fecha_MejBaj";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.Fecha_MejBaj, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -203,14 +211,10 @@
 }
 <script>
     $(function () {
-        //Date picker
-        $('#Fecha_MejBaj').datepicker({
-            autoclose: true
-        })
-    })
      $("#IdActivoFijo").change(function () {
             get_valores();
         });
+    })
 
     function get_valores(){
 

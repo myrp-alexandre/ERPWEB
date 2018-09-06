@@ -101,6 +101,7 @@ namespace Core.Erp.Info.Inventario
         public double stock { get; set; }
         public int IdSucursal { get; set; }
         public int IdBodega { get; set; }
+        public string IdUsuarioAut { get; set; }
         #endregion
     }
 

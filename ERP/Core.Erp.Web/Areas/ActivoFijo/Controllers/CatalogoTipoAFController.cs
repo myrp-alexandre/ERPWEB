@@ -6,11 +6,14 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.ActivoFijo;
 using Core.Erp.Info.ActivoFijo;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 {
+    [SessionTimeout]
     public class CatalogoTipoAFController : Controller
     {
+        #region Index
         Af_CatalogoTipo_Bus bus_catalogo = new Af_CatalogoTipo_Bus();
         public ActionResult Index()
         {
@@ -23,6 +26,9 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             var model = bus_catalogo.get_list();
             return PartialView("_GridViewPartial_catalogotipo_af", model);
         }
+        #endregion
+
+        #region Acciones
         public ActionResult Nuevo()
         {
             Af_CatalogoTipo_Info model = new Af_CatalogoTipo_Info();
@@ -61,5 +67,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

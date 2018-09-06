@@ -42,7 +42,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         public ActionResult CmbPersona_ConciliacionCaja()
         {
             SessionFixed.TipoPersona = Request.Params["IdTipoPersona"] != null ? Request.Params["IdTipoPersona"].ToString() : "PERSONA";
-            cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
+            decimal model = new decimal();
             return PartialView("_CmbPersona_ConciliacionCaja", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)

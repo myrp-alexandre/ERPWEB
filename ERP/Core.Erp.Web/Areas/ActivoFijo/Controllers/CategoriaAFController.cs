@@ -1,10 +1,12 @@
 ﻿using Core.Erp.Bus.ActivoFijo;
 using Core.Erp.Info.ActivoFijo;
+using Core.Erp.Web.Helps;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 {
+    [SessionTimeout]
 
     public class CategoriaAFController : Controller
     {

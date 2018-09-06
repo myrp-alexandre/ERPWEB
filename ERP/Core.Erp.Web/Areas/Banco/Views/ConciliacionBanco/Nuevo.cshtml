@@ -157,7 +157,15 @@
             <div class="col-md-offset-4 col-md-2">
                 <div class="form-group">
                     <label for="co_Fecha">Fecha*</label>
-                    @Html.TextBoxFor(q => q.co_Fecha, "{0:dd/MM/yyyy}", new { @id = "co_Fecha", @class = "form-control" })
+                    @Html.DevExpress().DateEditFor(q=> q.co_Fecha, settings =>
+                {
+                    settings.Name = "co_Fecha";
+                    settings.Properties.UseMaskBehavior = true;
+                    settings.Properties.EditFormat = EditFormat.Date;
+                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                }).GetHtml()
                     @Html.ValidationMessageFor(q => q.co_Fecha, "", new { @class = "text-danger" })
                 </div>
             </div>

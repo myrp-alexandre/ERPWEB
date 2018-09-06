@@ -1,16 +1,16 @@
 ﻿using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.Contabilidad;
-using DevExpress.Web.Mvc;
+using Core.Erp.Web.Helps;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 {
+    [SessionTimeout]
     public class TipoComprobanteController : Controller
     {
+        #region Index
         ct_cbtecble_tipo_Bus bus_comprobante_tipo = new ct_cbtecble_tipo_Bus();
         public ActionResult Index()
         {
@@ -32,6 +32,8 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_tipo = lst_tipo;
         }
+        #endregion
+        #region Acciones
 
         public ActionResult Nuevo()
         {
@@ -94,5 +96,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

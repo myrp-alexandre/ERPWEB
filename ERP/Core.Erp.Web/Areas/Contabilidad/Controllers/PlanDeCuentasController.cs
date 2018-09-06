@@ -1,16 +1,16 @@
-﻿using DevExpress.Web.Mvc;
+﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Info.Contabilidad;
+using Core.Erp.Web.Helps;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Core.Erp.Info.Contabilidad;
-using Core.Erp.Bus.Contabilidad;
 
 namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 {
+    [SessionTimeout]
     public class PlanDeCuentasController : Controller
     {
+        #region Index
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
         public ActionResult Index()
         {
@@ -38,6 +38,9 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             var lst_grupo_contabe = bus_grupo_contable.get_list(false);
             ViewBag.lst_grupo_contabe = lst_grupo_contabe;
         }
+
+        #endregion
+        #region Acciones
         public ActionResult Nuevo()
         {
             ct_plancta_Info model = new ct_plancta_Info();
@@ -99,6 +102,8 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
 
         public JsonResult get_info_nuevo(string IdCtaCble_padre = "")
         {

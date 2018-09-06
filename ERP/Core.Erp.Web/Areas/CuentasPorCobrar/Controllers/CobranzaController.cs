@@ -16,6 +16,7 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 {
+    [SessionTimeout]
     public class CobranzaController : Controller
     {
         #region Variables
@@ -73,6 +74,12 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            lst_sucursal.Add(new tb_sucursal_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdSucursal = 0,
+                Su_Descripcion = "Todos"
+            });
             ViewBag.lst_sucursal = lst_sucursal;
         }
         private void cargar_combos(int IdEmpresa)

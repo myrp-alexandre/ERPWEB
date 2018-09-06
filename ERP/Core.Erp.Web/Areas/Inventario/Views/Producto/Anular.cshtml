@@ -8,11 +8,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script>
 
+    function MostarPrecios() {
+        $("#contrasena_admin").val("");
+        $("#ModalMostrarPrecios").modal("show");
+
+    }
+
+</script>
 @using (Html.BeginForm("Anular", "Producto", FormMethod.Post, new { @class = "form", @rolw = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdProducto)
+    @Html.HiddenFor(q => q.IdProducto, new  { @id = "IdProducto" })
     @Html.HiddenFor(q => q.IdTransaccionSession)
 
     if (ViewBag.mensaje != null)
@@ -126,6 +134,14 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+
+                    <button type="button" class="btn btn-primary" id="btn_desbloquear" onclick="MostarPrecios();">
+                        <i class="fa fa-lock"></i> Mostrar precios
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -138,7 +154,7 @@
                 <a href="#tab_lote" aria-controls="lote" role="tab" data-toggle="tab">Lote</a>
             </li>
             <li>
-                <a href="#tab_precios" aria-controls="Precios" role="tab" data-toggle="tab">Precios</a>
+                <a href="#link_precios" aria-controls="Precios" role="tab" data-toggle="tab" id="link_precios">Precios</a>
             </li>
             <li>
                 <a href="#tab_composicion" aria-controls="Composicion" role="tab" data-toggle="tab">Composición</a>
@@ -304,7 +320,7 @@
                 </div>
             </div>
 
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_precios">
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="link_precios">
                 <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
@@ -434,6 +450,39 @@
         </div>
     </div>
 
+    <div class="modal fade" id="ModalMostrarPrecios" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ingrese la contraseña Administrador</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group has-feedback">
+                                @Html.TextBoxFor(q => q.IdUsuarioAut, new { @class = "form-control", @placeholder = "Usuario", @id = "IdUsuarioAut" })
+                                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                            </div>
+                            <div class="form-group has-feedback">
+                                @Html.PasswordFor(q => q.contrasena_admin, new { @class = "form-control", @placeholder = "Contraseña desbloqueo", @id = "contrasena_admin" })
+                                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary" onclick="MostrarPrecios();">Mostrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index", "Producto", new { Area = "Inventario" }, null)">Cancelar</a>
@@ -450,6 +499,7 @@
             $('#lote_fecha_fab').datepicker({
                 autoclose: true
             })
+            $("#link_precios").hide();
             get_info_producto_tipo();
             ValidarTabImagen();
         });
@@ -893,5 +943,39 @@
             $("#link_imagen").show();
             $("#link_general").click();
         }
+    }
+
+    function MostrarPrecios() {
+
+        var datos = {
+            IdUsuarioAut: $("#IdUsuarioAut").val(),
+            contrasena_admin: $("#contrasena_admin").val(),
+            IdProducto: $("#IdProducto").val(),
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("MostrarPrecios", "Producto",new { Area = "Inventario"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data == "AUTORIZADO") {
+                    $("#link_precios").show();
+                    $("#link_general").click();
+                }
+                else {
+                    $("#link_precios").hide();
+                    $("#link_general").click();
+
+                }
+
+            },
+            error: function (error) {
+            }
+        });
+        $("#ModalMostrarPrecios").modal("hide");
     }
 </script>

@@ -1,17 +1,15 @@
-﻿using DevExpress.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Core.Erp.Bus.Compras;
+﻿using Core.Erp.Bus.Compras;
 using Core.Erp.Info.Compras;
 using Core.Erp.Web.Helps;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Compras.Controllers
 {
+    [SessionTimeout]
     public class TerminoPagoComprasController : Controller
     {
+        #region Index
+
         com_TerminoPago_Bus bus_termino = new com_TerminoPago_Bus();
         public ActionResult Index()
         {
@@ -24,7 +22,9 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             var model = bus_termino.get_list(true);
             return PartialView("_GridViewPartial_terminopago_com", model);
         }
+        #endregion
 
+        #region Acciones
         public ActionResult Nuevo ()
         {
             com_TerminoPago_Info model = new com_TerminoPago_Info();
@@ -80,5 +80,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

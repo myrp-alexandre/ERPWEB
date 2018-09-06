@@ -1,16 +1,17 @@
-﻿using DevExpress.Web.Mvc;
+﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Info.Contabilidad;
+using Core.Erp.Web.Helps;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Core.Erp.Bus.Contabilidad;
-using Core.Erp.Info.Contabilidad;
 
 namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 {
+    [SessionTimeout]
     public class AnioFiscalController : Controller
     {
+        #region Index
+
         ct_anio_fiscal_Bus bus_anio_fiscal = new ct_anio_fiscal_Bus();
         ct_anio_fiscal_x_cuenta_utilidad_Bus bus_aniocta = new ct_anio_fiscal_x_cuenta_utilidad_Bus();
         public ActionResult Index()
@@ -31,10 +32,15 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             var lst_ctacble = bus_plancta.get_list(Convert.ToInt32(Session["IdEmpresa"]), false, false);
             ViewBag.lst_cuentas = lst_ctacble;
         }
+        #endregion
+
+        #region Acciones
         public ActionResult Nuevo(int IdanioFiscal = 0)
         {
             ct_anio_fiscal_Info model = new ct_anio_fiscal_Info
             {
+                af_fechaIni = DateTime.Now,
+                af_fechaFin = DateTime.Now,
                 info_anio_ctautil = new ct_anio_fiscal_x_cuenta_utilidad_Info()
             };
             cargar_combos();
@@ -109,5 +115,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

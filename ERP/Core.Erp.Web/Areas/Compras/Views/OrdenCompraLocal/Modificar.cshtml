@@ -32,7 +32,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.oc_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "oc_fecha" })
+                        @Html.DevExpress().DateEditFor(q=> q.oc_fecha, settings =>
+                    {
+                        settings.Name = "oc_fecha";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.oc_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -44,7 +52,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.oc_fechaVencimiento, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "oc_fechaVencimiento" })
+                        @Html.DevExpress().DateEditFor(q=> q.oc_fechaVencimiento, settings =>
+                    {
+                        settings.Name = "oc_fechaVencimiento";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.oc_fechaVencimiento, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -56,7 +72,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.co_fecha_aprobacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "co_fecha_aprobacion" })
+                        @Html.DevExpress().DateEditFor(q=> q.co_fecha_aprobacion, settings =>
+                    {
+                        settings.Name = "co_fecha_aprobacion";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.co_fecha_aprobacion, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -68,7 +92,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.co_fechaReproba, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "co_fechaReproba" })
+                        @Html.DevExpress().DateEditFor(q=> q.co_fechaReproba, settings =>
+                    {
+                        settings.Name = "co_fechaReproba";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.co_fechaReproba, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -182,23 +214,7 @@
     }
 }
 <script type="text/javascript">
-    $(function () {
-        //Date picker
-        $('#oc_fecha').datepicker({
-            autoclose: true
-        })
-        $('#oc_fechaVencimiento').datepicker({
-            autoclose: true
 
-        })
-        $('#co_fecha_aprobacion').datepicker({
-            autoclose: true
-
-        })
-        $('#co_fechaReproba').datepicker({
-            autoclose: true
-        })
-    });
         function GetInfoProducto(s, e) {
         $("#Secuencia").text(0);
         var datos = {

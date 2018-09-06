@@ -1,16 +1,14 @@
 ﻿using Core.Erp.Bus.Compras;
+using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Compras;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Core.Erp.Bus.Inventario;
 
 namespace Core.Erp.Web.Areas.Compras.Controllers
 {
+    [SessionTimeout]
     public class ParametrosComprasController : Controller
     {
         #region Variables

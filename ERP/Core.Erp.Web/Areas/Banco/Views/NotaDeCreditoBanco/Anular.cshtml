@@ -11,10 +11,6 @@
 
 <script type="text/javascript">
     $(function () {
-        //Date picker
-        $('#cb_Fecha').datepicker({
-            autoclose: true
-        })
         $("#IdBanco").change(function () {
             armar_diario();
         });
@@ -114,7 +110,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.cb_Fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "cb_Fecha" })
+                        @Html.DevExpress().DateEditFor(q=> q.cb_Fecha, settings =>
+                    {
+                        settings.Name = "cb_Fecha";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.cb_Fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
