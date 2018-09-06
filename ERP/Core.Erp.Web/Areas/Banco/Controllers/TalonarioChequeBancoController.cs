@@ -10,6 +10,7 @@ using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Banco.Controllers
 {
+    [SessionTimeout]
     public class TalonarioChequeBancoController : Controller
     {
         #region Variables
@@ -43,6 +44,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         #endregion
 
+        #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
             ba_Talonario_cheques_x_banco_Info model = new ba_Talonario_cheques_x_banco_Info
@@ -107,6 +109,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
 
         #region Json
 

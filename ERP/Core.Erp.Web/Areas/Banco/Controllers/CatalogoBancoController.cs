@@ -6,11 +6,15 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.Banco;
 using Core.Erp.Info.Banco;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Banco.Controllers
 {
+    [SessionTimeout]
     public class CatalogoBancoController : Controller
     {
+        #region Index
+
         ba_Catalogo_Bus bus_catalogo = new ba_Catalogo_Bus();
 
         public ActionResult Index(string IdTipoCatalogo = "")
@@ -33,6 +37,9 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             var lst_catalogo_tipo = bus_catalogotipo.get_list();
             ViewBag.lst_tipos = lst_catalogo_tipo;
         }
+        #endregion
+
+        #region Acciones
 
         public ActionResult Nuevo(string IdTipoCatalogo = "")
         {
@@ -109,6 +116,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return RedirectToAction("Index", new { IdTipoCatalogo = model.IdTipoCatalogo });
 
         }
+        #endregion
 
     }
 }

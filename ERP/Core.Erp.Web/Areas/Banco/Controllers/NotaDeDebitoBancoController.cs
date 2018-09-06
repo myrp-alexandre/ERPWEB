@@ -156,6 +156,12 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            lst_sucursal.Add(new tb_sucursal_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdSucursal = 0, 
+                Su_Descripcion = "Todos"
+            });
             ViewBag.lst_sucursal = lst_sucursal;
         }
         public ActionResult GridViewPartial_DebitoBanco(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)

@@ -3,6 +3,7 @@ using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.General;
 using Core.Erp.Info.Banco;
 using Core.Erp.Info.Contabilidad;
+using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Areas.Contabilidad.Controllers;
 using Core.Erp.Web.Helps;
@@ -14,6 +15,7 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Banco.Controllers
 {
+    [SessionTimeout]
     public class DepositoBancoController : Controller
     {
         #region Variables
@@ -49,6 +51,12 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            lst_sucursal.Add(new tb_sucursal_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdSucursal = 0,
+                Su_Descripcion = "Todos"
+            });
             ViewBag.lst_sucursal = lst_sucursal;
         }
         public ActionResult GridViewPartial_DepositoBanco(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
@@ -66,6 +74,12 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         private void cargar_combos(int IdEmpresa)
         {
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            lst_sucursal.Add(new tb_sucursal_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdSucursal = 0,
+                Su_Descripcion = "Todos"
+            });
             ViewBag.lst_sucursal = lst_sucursal;
 
             var lst_banco_cuenta = bus_banco_cuenta.get_list(IdEmpresa, false);
@@ -279,7 +293,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return PartialView("_GridViewPartial_DepositoBanco_det", model);
         }
         #endregion
-
 
         #region Json
         public JsonResult armar_diario(int IdEmpresa = 0, int IdBanco = 0, decimal IdTransaccionSession = 0)

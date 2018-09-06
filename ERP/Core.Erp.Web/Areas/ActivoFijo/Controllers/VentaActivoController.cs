@@ -13,6 +13,7 @@ using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 {
+    [SessionTimeout]
     public class VentaActivoController : Controller
     {
         #region Variables

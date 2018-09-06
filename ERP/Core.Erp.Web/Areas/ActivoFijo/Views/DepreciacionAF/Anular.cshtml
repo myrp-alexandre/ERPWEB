@@ -44,7 +44,15 @@
             <div class="col-md-offset-5 col-md-2">
                 <div class="form-group">
                     <label for="Cod_Depreciacion">Fecha*</label>
-                    @Html.TextBoxFor(q => q.Fecha_Depreciacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_Depreciacion" })
+                    @Html.DevExpress().DateEditFor(q=> q.Fecha_Depreciacion, settings =>
+                {
+                    settings.Name = "Fecha_Depreciacion";
+                    settings.Properties.UseMaskBehavior = true;
+                    settings.Properties.EditFormat = EditFormat.Date;
+                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                }).GetHtml()
                     @Html.ValidationMessageFor(q => q.Fecha_Depreciacion, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -92,11 +100,3 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
-<script>
-    $(function () {
-        //Date picker
-        $('#Fecha_Depreciacion').datepicker({
-            autoclose: true
-        })
-    });
-</script>

@@ -43,7 +43,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.Fecha_Venta, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_Venta" })
+                        @Html.DevExpress().DateEditFor(q=> q.Fecha_Venta, settings =>
+                    {
+                        settings.Name = "Fecha_Venta";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.Fecha_Venta, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -191,11 +199,3 @@
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
-}
-<script>
-    $(function () {
-        //Date picker
-        $('#Fecha_Venta').datepicker({
-            autoclose: true
-        })
-</script>

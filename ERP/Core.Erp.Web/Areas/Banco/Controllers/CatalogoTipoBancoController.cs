@@ -6,11 +6,14 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.Banco;
 using Core.Erp.Info.Banco;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Banco.Controllers
 {
+    [SessionTimeout]
     public class CatalogoTipoBancoController : Controller
     {
+        #region Index
         ba_CatalogoTipo_Bus bus_catalogotipo = new ba_CatalogoTipo_Bus();
         public ActionResult Index()
         {
@@ -24,6 +27,10 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             model = bus_catalogotipo.get_list();
             return PartialView("_GridViewPartial_catalogotipo_banco", model);
         }
+
+        #endregion
+
+        #region Acciones
         public ActionResult Nuevo()
         {
             ba_CatalogoTipo_Info model = new ba_CatalogoTipo_Info();
@@ -62,5 +69,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

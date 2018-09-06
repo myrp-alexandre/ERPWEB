@@ -11,6 +11,8 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 {
+    [SessionTimeout]
+
     public class RevalorizacionActivoController : Controller
     {
         #region Variables

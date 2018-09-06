@@ -40,7 +40,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.Fecha_Retiro, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_Retiro" })
+                        @Html.DevExpress().DateEditFor(q=> q.Fecha_Retiro, settings =>
+                    {
+                        settings.Name = "Fecha_Retiro";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.Fecha_Retiro, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -176,11 +184,7 @@
 }
 <script>
     $(function () {
-        //Date picker
-        $('#Fecha_Retiro').datepicker({
-            autoclose: true
-        })
-    })
+
     $("#IdActivoFijo").change(function () {
             get_valores();
         });

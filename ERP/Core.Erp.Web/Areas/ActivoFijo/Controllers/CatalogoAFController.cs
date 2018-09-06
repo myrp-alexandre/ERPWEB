@@ -1,16 +1,17 @@
-﻿using DevExpress.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Core.Erp.Bus.ActivoFijo;
+﻿using Core.Erp.Bus.ActivoFijo;
 using Core.Erp.Info.ActivoFijo;
+using Core.Erp.Web.Helps;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 {
+    [SessionTimeout]
+
     public class CatalogoAFController : Controller
     {
+        #region Index
+
         Af_Catalogo_Bus bus_catalogo = new Af_Catalogo_Bus();
         public ActionResult Index(string IdTipoCatalogo = "")
         {
@@ -32,7 +33,9 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             var lst_catalogo_tipo = bus_catalogotipo.get_list();
             ViewBag.lst_tipos = lst_catalogo_tipo;
         }
+        #endregion
 
+        #region Acciones
         public ActionResult Nuevo(string IdTipoCatalogo = "")
         {
             Af_Catalogo_Info model = new Af_Catalogo_Info
@@ -108,6 +111,8 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             return RedirectToAction("Index", new { IdTipoCatalogo = model.IdTipoCatalogo });
 
         }
+
+        #endregion
 
     }
 }

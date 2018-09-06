@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Banco.Controllers
 {
+    [SessionTimeout]
     public class BancoCuentaController : Controller
     {
         #region Variables
