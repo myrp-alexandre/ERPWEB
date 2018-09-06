@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
+    [SessionTimeout]
     public class TerminoPagoController : Controller
     {
         #region Variables
