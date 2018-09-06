@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
+using Core.Erp.Web.Helps;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,12 +10,17 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
-
+    [SessionTimeout]
     public class CatalogoController : Controller
     {
+        #region Variables
         tb_Catalogo_Bus bus_catalogo = new tb_Catalogo_Bus();
         tb_CatalogoTipo_Bus bus_catalogo_tipo = new tb_CatalogoTipo_Bus();
-        
+
+        #endregion
+
+        #region Index
+
         public ActionResult Index(int IdTipoCatalogo = 0)
         {
             ViewBag.IdTipoCatalogo = IdTipoCatalogo;
@@ -35,7 +41,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
             var lst_catalogo_tipo = bus_catalogo_tipo.get_list();
             ViewBag.lst_tipos = lst_catalogo_tipo;
         }
+        #endregion
 
+        #region Acciones
         public ActionResult Nuevo(int IdTipoCatalogo = 0)
         {
             tb_Catalogo_Info model = new tb_Catalogo_Info
@@ -65,10 +73,10 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Index",new { IdTipoCatalogo = model.IdTipoCatalogo});
+            return RedirectToAction("Index", new { IdTipoCatalogo = model.IdTipoCatalogo });
         }
 
-       public ActionResult Modificar(string CodCatalogo = "", int IdTipoCatalogo = 0)
+        public ActionResult Modificar(string CodCatalogo = "", int IdTipoCatalogo = 0)
         {
             tb_Catalogo_Info model = bus_catalogo.get_info(CodCatalogo);
             if (model == null)
@@ -112,5 +120,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             return RedirectToAction("Index", new { IdTipoCatalogo = model.IdTipoCatalogo });
 
         }
+        #endregion
+
     }
 }

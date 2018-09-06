@@ -5,10 +5,15 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.General;
 using Core.Erp.Bus.General;
+using Core.Erp.Web.Helps;
+
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
     public class CiudadController : Controller
     {
+        #region Inex
+
         tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
         tb_provincia_Bus bus_provincia = new tb_provincia_Bus();
 
@@ -31,7 +36,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
          var  lst_provincia = bus_provincia.get_list("1", false);
             ViewBag.lst_provincia = lst_provincia;
         }
+        #endregion
 
+        #region Acciones
         public ActionResult Nuevo(string IdProvincia)
         {
             tb_ciudad_Info model = new tb_ciudad_Info
@@ -114,6 +121,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 throw;
             }
         }
+        #endregion
 
     }
 }
