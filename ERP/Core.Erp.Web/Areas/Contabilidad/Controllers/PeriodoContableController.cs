@@ -1,21 +1,23 @@
-﻿using DevExpress.Web.Mvc;
+﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Bus.General;
+using Core.Erp.Info.Contabilidad;
+using Core.Erp.Web.Helps;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Core.Erp.Bus.Contabilidad;
-using Core.Erp.Info.Contabilidad;
-
-using Core.Erp.Bus.General;
 
 namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 {
+    [SessionTimeout]
     public class PeriodoContableController : Controller
     {
+        #region Variables
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         ct_anio_fiscal_Bus bus_anio = new ct_anio_fiscal_Bus();
         tb_mes_Bus bus_mes = new tb_mes_Bus();
+
+        #endregion
+        #region Index
         public ActionResult Index(int IdanioFiscal = 0)
         {
             ViewBag.IdanioFiscal = IdanioFiscal;
@@ -39,6 +41,10 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             var lst_mes = bus_mes.get_list();
             ViewBag.lst_Mes = lst_mes;
         }
+
+        #endregion
+        #region Acciones
+
         public ActionResult Nuevo(int IdPeriodo = 0)
         {
             cargar_combos();
@@ -96,5 +102,6 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
     }
 }

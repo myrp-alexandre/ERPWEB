@@ -1,22 +1,27 @@
-﻿using DevExpress.Web.Mvc;
+﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Info.Contabilidad;
+using Core.Erp.Info.Helps;
+using Core.Erp.Web.Helps;
+using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Core.Erp.Bus.Contabilidad;
-using Core.Erp.Info.Contabilidad;
-using Core.Erp.Info.Helps;
-using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 {
+    [SessionTimeout]
     public class ComprobanteContableController : Controller
     {
+        #region Variables
         ct_cbtecble_Bus bus_comprobante = new ct_cbtecble_Bus();
         ct_cbtecble_det_Bus bus_comprobante_detalle = new ct_cbtecble_det_Bus();
         ct_cbtecble_det_List list_ct_cbtecble_det = new ct_cbtecble_det_List();
         string mensaje = string.Empty;
+        #endregion
+
+        #region Index
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -28,6 +33,19 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             return View(model);
         }
 
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_comprobante_contable(DateTime? fecha_ini, DateTime? fecha_fin)
+        {
+            ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
+            ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            List<ct_cbtecble_Info> model = bus_comprobante.get_list(IdEmpresa, true, ViewBag.fecha_ini, ViewBag.fecha_fin);
+            return PartialView("_GridViewPartial_comprobante_contable", model);
+        }
+
+        #endregion
+
+        #region Metodos
         private bool validar(ct_cbtecble_Info i_validar, ref string msg)
         {
             if (i_validar.lst_ct_cbtecble_det.Count == 0)
@@ -50,17 +68,6 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
             return true;
         }
-
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_comprobante_contable(DateTime? fecha_ini, DateTime? fecha_fin)
-        {
-            ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
-            ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            List<ct_cbtecble_Info> model = bus_comprobante.get_list(IdEmpresa, true, ViewBag.fecha_ini, ViewBag.fecha_fin);
-            return PartialView("_GridViewPartial_comprobante_contable", model);
-        }
-
         private void cargar_combos()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -70,6 +77,9 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
         }
 
+        #endregion
+
+        #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
             #region Validar Session
@@ -181,6 +191,10 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
         }
 
+        #endregion
+
+        #region GRids
+
         [ValidateInput(false)]
         public ActionResult GridViewPartial_comprobante_detalle()
         {
@@ -242,6 +256,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_comprobante_detalle", model);
         }
+        #endregion
     }
     
 public class ct_cbtecble_det_List

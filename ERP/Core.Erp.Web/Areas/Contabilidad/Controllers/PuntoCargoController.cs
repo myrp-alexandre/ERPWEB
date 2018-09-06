@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.Contabilidad;
-using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Web.Helps;
+using System;
+using System.Web.Mvc;
+
 namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 {
+    [SessionTimeout]
     public class PuntoCargoController : Controller
     {
+        #region Index
         ct_punto_cargo_Bus bus_comprobante_tipo = new ct_punto_cargo_Bus();
         int IdEmpresa;
 
@@ -17,6 +18,8 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             return View();
         }
 
+        #endregion
+        #region Acciones
         public ActionResult Nuevo()
         {
             ct_punto_cargo_Info model = new ct_punto_cargo_Info();
@@ -72,5 +75,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

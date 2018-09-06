@@ -1,16 +1,16 @@
-﻿using DevExpress.Web.Mvc;
+﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Info.Contabilidad;
+using Core.Erp.Web.Helps;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Core.Erp.Info.Contabilidad;
-using Core.Erp.Bus.Contabilidad;
 
 namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 {
+    [SessionTimeout]
     public class PlanDeCuentasNivelController : Controller
     {
+        #region Index
         ct_plancta_nivel_Bus bus_plancta_nivel = new ct_plancta_nivel_Bus();
         public ActionResult Index()
         {
@@ -25,6 +25,8 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             return PartialView("_GridViewPartial_plancta_nivel", model);
         }
 
+        #endregion
+        #region Acciones
         public ActionResult Nuevo()
         {
             ct_plancta_nivel_Info model = new ct_plancta_nivel_Info();
@@ -84,5 +86,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.Contabilidad;
+using Core.Erp.Web.Helps;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 {
+    [SessionTimeout]
     public class ParametroContableController : Controller
     {
         ct_parametro_Bus bus_parametro = new ct_parametro_Bus();

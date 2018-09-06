@@ -19,11 +19,12 @@ using Core.Erp.Bus.Helps;
 
 namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 {
+    [SessionTimeout]
     public class ATSController : Controller
     {
+        #region Acciones
         ats_Bus bus_ats = new ats_Bus();
         FilesHelper_Bus FilesHelper_B = new FilesHelper_Bus();
-        // GET: CuentasPorPagar/ATS
         public ActionResult Index()
         {
             return View();
@@ -31,12 +32,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
         public ActionResult Nuevo()
         {
-
-            ats_Info model = new ats_Info
-            {
-             
-            };
-
+            ats_Info model = new ats_Info();
             cargar_combos();
             return View(model);
         }
@@ -87,6 +83,10 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
         }
 
+        #endregion
+
+        #region Grids
+
         public ActionResult GridViewPartial_ventas()
         {
             List<ventas_Info> model = new List<ventas_Info>();
@@ -122,19 +122,22 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             return PartialView("_GridViewPartial_anulados", model);
         }
 
+        #endregion
 
+        #region Metodos
         private void cargar_combos()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
-            var lst_periodos = bus_periodo.get_list(IdEmpresa,false);
-           
-              
+            var lst_periodos = bus_periodo.get_list(IdEmpresa, false);
+
+
             ViewBag.lst_periodos = lst_periodos;
 
         }
 
-        
+        #endregion
+
         #region json
         public JsonResult get_ats(int IdPeriodo)
         {
