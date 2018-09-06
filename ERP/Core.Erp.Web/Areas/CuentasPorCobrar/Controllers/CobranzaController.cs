@@ -36,7 +36,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbCliente_Cobranza()
         {
-            cxc_cobro_Info model = new cxc_cobro_Info();
+            decimal model = new decimal();
             return PartialView("_CmbCliente_Cobranza", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
