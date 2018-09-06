@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Caja.Controllers
 {
+    [SessionTimeout]
     public class ParametroCajaController : Controller
     {
         #region MyRegion

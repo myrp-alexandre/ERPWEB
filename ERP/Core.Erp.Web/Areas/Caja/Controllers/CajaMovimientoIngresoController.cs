@@ -305,7 +305,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         public ActionResult CmbPersona_MovimientoIngreso()
         {
             SessionFixed.TipoPersona = Request.Params["IdTipoPersona"] != null ? Request.Params["IdTipoPersona"].ToString() : "PERSONA";
-            caj_Caja_Movimiento_Info model = new caj_Caja_Movimiento_Info();
+            decimal model = new decimal();
             return PartialView("_CmbPersona_MovimientoIngreso", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)

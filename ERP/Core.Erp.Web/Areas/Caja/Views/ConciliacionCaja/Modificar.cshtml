@@ -20,12 +20,7 @@
         $('#Fecha_fin').datepicker({
             autoclose: true
         })
-        $('#Fecha').datepicker({
-            autoclose: true
-        })
-        $('#Fecha_op').datepicker({
-            autoclose: true
-        })
+
         $("#Fecha_ini").change(function () {
             GetSaldoAnterior();
         });
@@ -324,7 +319,15 @@
             <div class="col-md-offset-6 col-md-2">
                 <div class="form-group">
                     <label for="Fecha_fin">Fecha*</label>
-                    @Html.TextBoxFor(q => q.Fecha, "{0:dd/MM/yyyy}", new { @id = "Fecha", @class = "form-control" })
+                    @Html.DevExpress().DateEditFor(q=> q.Fecha, settings =>
+                {
+                    settings.Name = "Fecha";
+                    settings.Properties.UseMaskBehavior = true;
+                    settings.Properties.EditFormat = EditFormat.Date;
+                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                }).GetHtml()
                     @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -457,7 +460,15 @@
                     <div class="col-md-offset-10 col-md-2">
                         <div class="form-group">
                             <label for="FechaOP">Fecha*</label>
-                            @Html.TextBoxFor(q => q.FechaOP, "{0:dd/MM/yyyy}", new { @id = "FechaOP", @class = "form-control" })
+                            @Html.DevExpress().DateEditFor(q=> q.FechaOP, settings =>
+                        {
+                            settings.Name = "FechaOP";
+                            settings.Properties.UseMaskBehavior = true;
+                            settings.Properties.EditFormat = EditFormat.Date;
+                            settings.Properties.EditFormatString = "dd/MM/yyyy";
+                            settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        }).GetHtml()
                             @Html.ValidationMessageFor(q => q.FechaOP, "", new { @class = "text-danger" })
                         </div>
                     </div>

@@ -40,7 +40,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.cm_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "cm_fecha" })
+                        @Html.DevExpress().DateEditFor(q=> q.cm_fecha, settings =>
+                    {
+                        settings.Name = "cm_fecha";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.cm_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -95,7 +103,7 @@
             <div class="col-md-9">
                 <div class="form-group">
                     <label for="IdEntidad">Beneficiario*</label>
-                    @Html.Partial("_CmbPersona_MovimientoIngreso", Model)
+                    @Html.Partial("_CmbPersona_MovimientoIngreso", Model.IdEntidad)
                     @Html.ValidationMessageFor(q => q.IdEntidad, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -133,12 +141,7 @@
     }
 }
 <script>
-    $(function () {
-        //Date picker
-        $('#cm_fecha').datepicker({
-            autoclose: true
-        })
-    });
+
 
     $("#IdTipoPersona").change(function () {
         IdEntidad.SetValue(null);

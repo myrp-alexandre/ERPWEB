@@ -21,6 +21,6 @@
         settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdTipoPersona'] = $('#IdTipoPersona').val(); }";
     })
     .BindList(new Core.Erp.Web.Areas.Caja.Controllers.CajaMovimientoIngresoController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Caja.Controllers.CajaMovimientoIngresoController().get_info_bajo_demanda)
-    .Bind(Model.IdEntidad);
+    .Bind(Model.GetType() == typeof(Core.Erp.Info.Caja.caj_Caja_Movimiento_Info) ? "" : (Model == 0 ? "" : Model));
 }
 @comboBox.GetHtml()
