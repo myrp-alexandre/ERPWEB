@@ -24,9 +24,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         #region Metodos ComboBox bajo demanda
         tb_persona_Bus bus_persona = new tb_persona_Bus();
-        public ActionResult CmbEmpleado_novedades()
+        public ActionResult CmbEmpleado_rubros_acumulados()
         {
-            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
+            ro_rubro_acumulados_Info model = new ro_rubro_acumulados_Info();
             return PartialView("_CmbEmpleado_rubros_acumulados", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
