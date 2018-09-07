@@ -176,7 +176,7 @@ namespace Core.Erp.Bus.RRHH
                     default:
                         break;
                 }
-               
+                ObtenerIndemnizacionXDesahucio();
                 Obtenersueldo_no_pagados();
                 ObtenerAportePersonal();
                 ObtenerProvisionDecimoIII();
