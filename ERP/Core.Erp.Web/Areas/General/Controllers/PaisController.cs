@@ -1,16 +1,15 @@
-﻿using DevExpress.Web.Mvc;
-using Core.Erp.Bus.General;
+﻿using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
-using System;
+using Core.Erp.Web.Helps;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
     public class PaisController : Controller
     {
+        #region Index
         tb_pais_Bus bus_pais = new tb_pais_Bus();
         public ActionResult Index()
         {
@@ -24,6 +23,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
             model = bus_pais.get_list(true);
             return PartialView("_GridViewPartial_pais", model);
         }
+
+        #endregion
+        #region Acciones
 
         public ActionResult Nuevo()
         {
@@ -76,5 +78,6 @@ namespace Core.Erp.Web.Areas.General.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
     }
 }

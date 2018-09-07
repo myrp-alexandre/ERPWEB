@@ -1,17 +1,16 @@
-﻿using DevExpress.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
-using Core.Erp.Bus.General;
 using Core.Erp.Web.Helps;
+using System;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
     public class TransportistaController : Controller
     {
+        #region Index
+
         tb_transportista_Bus bus_transportista = new tb_transportista_Bus();
         public ActionResult Index()
         {
@@ -25,7 +24,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
             var model = bus_transportista.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_transportista", model);
         }
-
+        #endregion
+        #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
             tb_transportista_Info model = new tb_transportista_Info
@@ -84,6 +84,6 @@ namespace Core.Erp.Web.Areas.General.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        #endregion
     }
 }

@@ -14,11 +14,15 @@ using Core.Erp.Info.Contabilidad;
 
 namespace Core.Erp.Web.Areas.Importacion.Controllers
 {
+    [SessionTimeout]
     public class GastosImportacionController : Controller
     {
+        #region Variables
+
         imp_gasto_Bus bus_gasto = new imp_gasto_Bus();
         imp_gasto_x_ct_plancta_Bus bus_gasto_ct = new imp_gasto_x_ct_plancta_Bus();
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        #endregion
 
         #region Metodos ComboBox bajo demanda
 
@@ -41,8 +45,10 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         }
         #endregion
 
+        #region Index /  Metodos
         public ActionResult Index()
         {
+            ViewBag.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             return View();
         }
 
@@ -58,8 +64,13 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             ViewBag.lst_cuentas = lst_ctacble;
         }
 
-        public ActionResult Nuevo(int IdEmpresa = 0 , int IdGasto_tipo = 0)
+        #endregion
+
+        #region Acciones
+
+        public ActionResult Nuevo(int IdGasto_tipo = 0)
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             imp_gasto_Info model = new imp_gasto_Info
             {
                 info_gasto_cta = new imp_gasto_x_ct_plancta_Info()
@@ -77,22 +88,24 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost]
         public ActionResult Nuevo(imp_gasto_Info model)
         {
-            if (!bus_gasto.guardarDB(model))
+            if (bus_gasto.guardarDB(model))
             {
                 model.info_gasto_cta.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 model.info_gasto_cta.IdGasto_tipo = model.IdGasto_tipo;
+                model.info_gasto_cta.IdCtaCble = model.IdCtaCble;
                 bus_gasto_ct.guardarDB(model.info_gasto_cta);
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdEmpresa = 0, int IdGasto_tipo = 0)
+        public ActionResult Modificar( int IdGasto_tipo = 0)
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             imp_gasto_Info model = bus_gasto.get_info(IdGasto_tipo);
             if (model == null)
                 return RedirectToAction("Index");
-            model.info_gasto_cta = bus_gasto_ct.get_info(IdGasto_tipo, IdEmpresa);
+            model.info_gasto_cta = bus_gasto_ct.get_info(IdEmpresa, IdGasto_tipo);
             if (model.info_gasto_cta == null)
                 model.info_gasto_cta = new imp_gasto_x_ct_plancta_Info
                 {
@@ -116,8 +129,9 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(int IdEmpresa = 0 , int IdGasto_tipo = 0)
+        public ActionResult Anular( int IdGasto_tipo = 0)
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             imp_gasto_Info model = bus_gasto.get_info(IdGasto_tipo);
             if (model == null)
                 return RedirectToAction("Index");
@@ -145,5 +159,6 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
     }
 }

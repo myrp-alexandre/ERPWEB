@@ -1,16 +1,15 @@
-﻿using DevExpress.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Core.Erp.Bus.Importacion;
+﻿using Core.Erp.Bus.Importacion;
 using Core.Erp.Info.Importacion;
+using Core.Erp.Web.Helps;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Importacion.Controllers
 {
+    [SessionTimeout]
     public class CatalogoTipoImportacionController : Controller
     {
+        #region Index
         imp_catalogo_tipo_Bus bus_catalogo_tipo = new imp_catalogo_tipo_Bus();
         public ActionResult Index()
         {
@@ -24,6 +23,8 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             return PartialView("_GridViewPartial_cat_tipo_imp", model);
         }
 
+        #endregion
+        #region Acciones
         public ActionResult Nuevo()
         {
             imp_catalogo_tipo_Info model = new imp_catalogo_tipo_Info
@@ -77,5 +78,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

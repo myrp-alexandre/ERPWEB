@@ -1,17 +1,18 @@
-﻿using DevExpress.Web.Mvc;
+﻿using Core.Erp.Bus.General;
+using Core.Erp.Info.General;
+using Core.Erp.Info.Helps;
+using Core.Erp.Web.Helps;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Core.Erp.Info.General;
-using Core.Erp.Bus.General;
-using Core.Erp.Info.Helps;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
     public class PersonaController : Controller
     {
+        #region Index
+
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         public ActionResult Index()
         {
@@ -33,7 +34,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
             ViewBag.lst_tipo_cta = lst_tipo_cta;
             ViewBag.lst_tipo_naturaleza = lst_tipo_naturaleza;
         }
-
+        #endregion
+        #region Acciones
         public ActionResult Nuevo()
         {
             tb_persona_Info model = new tb_persona_Info();
@@ -102,5 +104,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             }
             return RedirectToAction("Index", "Persona");
         }
+
+        #endregion
     }
 }

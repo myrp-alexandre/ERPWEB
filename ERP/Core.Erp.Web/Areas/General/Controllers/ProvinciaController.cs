@@ -1,16 +1,17 @@
-﻿using DevExpress.Web.Mvc;
+﻿using Core.Erp.Bus.General;
+using Core.Erp.Info.General;
+using Core.Erp.Web.Helps;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Core.Erp.Info.General;
-using Core.Erp.Bus.General;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
     public class ProvinciaController : Controller
     {
+        #region Index/ Metodo
+
         tb_provincia_Bus bus_provincia = new tb_provincia_Bus();
         tb_pais_Bus bus_pais = new tb_pais_Bus();
         tb_region_Bus bus_region = new tb_region_Bus();
@@ -18,6 +19,15 @@ namespace Core.Erp.Web.Areas.General.Controllers
         {
             ViewBag.IdPais = IdPais;
             return View();
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_provincia(string IdPais = "")
+        {
+            List<tb_provincia_Info> model = new List<tb_provincia_Info>();
+            model = bus_provincia.get_list(IdPais, true);
+            ViewBag.IdPais = IdPais;
+            return PartialView("_GridViewPartial_provincia", model);
         }
 
         private void cargar_combos(string IdPais)
@@ -28,6 +38,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
             var lst_region = bus_region.get_list("1",false);
             ViewBag.lst_region = lst_region;
         }
+        #endregion
+
+        #region Acciones
 
         public ActionResult Nuevo(string IdPais)
         {
@@ -96,16 +109,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
             }
             return RedirectToAction("Index", new { IdPais = model.IdPais });
         }
+        #endregion
 
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_provincia(string IdPais = "")
-        {
-            List<tb_provincia_Info> model = new List<tb_provincia_Info>();
-            model = bus_provincia.get_list(IdPais, true);
-            ViewBag.IdPais = IdPais;
-            return PartialView("_GridViewPartial_provincia", model);
-        }
-
+        #region Json
         public JsonResult get_lst_provincia_pais(string IdPais)
         {
             try
@@ -121,6 +127,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 throw;
             }
         }
+
+        #endregion
 
     }
 }

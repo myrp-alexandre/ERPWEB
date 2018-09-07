@@ -11,10 +11,12 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
     public class ReportesPorUsuarioController : Controller
     {
-        tb_sis_reporte_x_seg_usuario_List List_det = new tb_sis_reporte_x_seg_usuario_List();
+        #region Index / Metodo
 
+        tb_sis_reporte_x_seg_usuario_List List_det = new tb_sis_reporte_x_seg_usuario_List();
         tb_sis_reporte_x_seg_usuario_Bus bus_reporte_x_usuario = new tb_sis_reporte_x_seg_usuario_Bus();
         public ActionResult Index()
         {
@@ -48,10 +50,16 @@ namespace Core.Erp.Web.Areas.General.Controllers
             var lst_usuario = bus_usuario.get_list(false);
             ViewBag.lst_usuario = lst_usuario;
         }
+        #endregion
+        #region Acciones
         public ActionResult Consulta()
         {
             return View();
         }
+
+        #endregion
+        #region Grids
+
         [ValidateInput(false)]
         public ActionResult GridViewPartial_ReportesPorUsuario()
         {
@@ -76,6 +84,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             List_det.UpdateRow(CodReporte, Convert.ToInt32(SessionFixed.IdTransaccionSessionActual));
         }
+        #endregion
+        #region Json
         public JsonResult guardar(int IdEmpresa = 0, string IdUsuario = "")
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
@@ -83,6 +93,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
             var resultado = bus_reporte_x_usuario.guardarDB(List_det.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSessionActual)).Where(q => q.seleccionado == true).ToList(), IdEmpresa, IdUsuario);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
     }
 
     public class tb_sis_reporte_x_seg_usuario_List

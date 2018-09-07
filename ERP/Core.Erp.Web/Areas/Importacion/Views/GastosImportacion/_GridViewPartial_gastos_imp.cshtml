@@ -4,7 +4,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_gastos_imp";
-        settings.CallbackRouteValues = new { Controller = "GastosImportacion", Action = "GridViewPartial_gastos_imp" };
+        settings.CallbackRouteValues = new { Controller = "GastosImportacion", Action = "GridViewPartial_gastos_imp", IdEmpresa = ViewBag.IdEmpresa };
         settings.KeyFieldName = "IdGasto_tipo";
         settings.Width = Unit.Percentage(100);
 
@@ -64,8 +64,8 @@
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdGasto_tipo = DataBinder.Eval(tc.DataItem, "IdGasto_tipo") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdGasto_tipo = DataBinder.Eval(tc.DataItem, "IdGasto_tipo") },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = ViewBag.IdEmpresa, IdGasto_tipo = DataBinder.Eval(tc.DataItem, "IdGasto_tipo") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = ViewBag.IdEmpresa, IdGasto_tipo = DataBinder.Eval(tc.DataItem, "IdGasto_tipo") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -73,7 +73,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;

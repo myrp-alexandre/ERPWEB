@@ -1,20 +1,20 @@
 ﻿using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
 using Core.Erp.Web.Helps;
-using DevExpress.Web.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
     public class TipoDocumentoTalonarioController : Controller
     {
+        #region Variables
         tb_sis_Documento_Tipo_Talonario_Bus bus_talonario = new tb_sis_Documento_Tipo_Talonario_Bus();
             tb_sis_Documento_Tipo_Bus bus_tipodoc = new tb_sis_Documento_Tipo_Bus();
             tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        #endregion
+        #region Index / Metodos
         public ActionResult Index()
         {
             return View();
@@ -36,6 +36,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
             ViewBag.lst_sucursal = lst_sucursal;
         }
 
+        #endregion
+        #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0 )
         {
             tb_sis_Documento_Tipo_Talonario_Info model = new tb_sis_Documento_Tipo_Talonario_Info
@@ -118,11 +120,15 @@ namespace Core.Erp.Web.Areas.General.Controllers
             return RedirectToAction("Index");
         }
 
+        #endregion
+        #region Json
         public JsonResult get_NumeroDocumentoInicial (int IdEmpresa = 0 , string CodDocumentoTipo="", string Establecimiento="", string PuntoEmision = "")
         {
             var NumeroDocumento = bus_talonario.get_NumeroDocumentoInicial(IdEmpresa, CodDocumentoTipo, Establecimiento, PuntoEmision);
 
             return Json(NumeroDocumento, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
     }
 }

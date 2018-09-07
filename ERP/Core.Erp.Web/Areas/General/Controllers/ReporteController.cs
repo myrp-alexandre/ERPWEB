@@ -1,16 +1,16 @@
-﻿using DevExpress.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Core.Erp.Bus.General;
+﻿using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
+using Core.Erp.Web.Helps;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
     public class ReporteController : Controller
     {
+        #region Index / Metodo
+
         tb_sis_reporte_Bus bus_reporte = new tb_sis_reporte_Bus();
         public ActionResult Index()
         {
@@ -29,6 +29,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
             var lst_modulo = bus_modulo.get_list();
             ViewBag.lst_modulo = lst_modulo;
         }
+        #endregion
+
+        #region Acciones
         public ActionResult Nuevo()
         {
             tb_sis_reporte_Info model = new tb_sis_reporte_Info();
@@ -74,6 +77,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
             return RedirectToAction("Index");
 
         }
+
+        #endregion
 
         #region json
 

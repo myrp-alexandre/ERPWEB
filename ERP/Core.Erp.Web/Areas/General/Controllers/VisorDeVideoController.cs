@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
+using Core.Erp.Web.Helps;
 using DevExpress.Web;
 using DevExpress.Web.Mvc;
 using System;
@@ -11,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
     public class VisorDeVideoController : Controller
     {
         tb_visor_video_Bus bus_pais = new tb_visor_video_Bus();

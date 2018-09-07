@@ -20,9 +20,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
         tb_sis_Impuesto_x_ctacble_Bus bus_impuesto_ctacble = new tb_sis_Impuesto_x_ctacble_Bus();
 
         #endregion
-        #region MyRegion
-
-        #endregion
+        #region Index
         public ActionResult Index()
         {
             return View();
@@ -44,6 +42,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
             var lst_ctacble = bus_plancta.get_list(Convert.ToInt32(Session["IdEmpresa"]), false, false);
             ViewBag.lst_cuentas = lst_ctacble;
         }
+
+        #endregion
+        #region Acciones
         public ActionResult Nuevo(string IdCod_Impuesto = "")
         {
             tb_sis_Impuesto_Info model = new tb_sis_Impuesto_Info
@@ -124,5 +125,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

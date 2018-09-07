@@ -1,16 +1,16 @@
-﻿using DevExpress.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Core.Erp.Bus.General;
+﻿using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
+using Core.Erp.Web.Helps;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
     public class RegionController : Controller
     {
+        #region Index / Metodos
+
         tb_region_Bus bus_region = new tb_region_Bus();
         tb_pais_Bus bus_pais = new tb_pais_Bus();
         public ActionResult Index(string IdPais = "")
@@ -32,6 +32,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
             var lst_pais = bus_pais.get_list( false);
             ViewBag.lst_pais = lst_pais;
         }
+        #endregion
+        #region Acciones
         public ActionResult Nuevo(string IdPais = "")
         {
             tb_region_Info model = new tb_region_Info
@@ -99,5 +101,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             }
             return RedirectToAction("Index", new { IdPais = model.IdPais });
         }
+
+        #endregion
     }
 }

@@ -1,16 +1,15 @@
 ﻿using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
-using DevExpress.Web.Mvc;
-using System;
+using Core.Erp.Web.Helps;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
     public class TipoDocumentoController : Controller
     {
+        #region Index
         tb_sis_Documento_Tipo_Bus bus_tipodocumento = new tb_sis_Documento_Tipo_Bus();
         public ActionResult Index()
         {
@@ -24,6 +23,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
             return PartialView("_GridViewPartial_tipodocumento", model);
         }
 
+        #endregion
+        #region Acciones
         public ActionResult Nuevo()
         {
             tb_sis_Documento_Tipo_Info model = new tb_sis_Documento_Tipo_Info();
@@ -86,6 +87,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
 
     }
 }

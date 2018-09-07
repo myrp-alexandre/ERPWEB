@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
-using Core.Erp.Bus.General;
+using Core.Erp.Web.Helps;
+using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
+
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
     public class ParroquiaController : Controller
     {
+        #region Index / Metodos
+
         tb_parroquia_Bus bus_parroquia = new tb_parroquia_Bus();
         tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
 
@@ -33,7 +36,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
             var lst_ciudades = bus_ciudad.get_list("",false);
             ViewBag.lst_ciudades = lst_ciudades;
         }
-
+        #endregion
+        #region Acciones
         public ActionResult Nuevo(string IdCiudad = "")
         {
             tb_parroquia_Info model = new tb_parroquia_Info
@@ -102,6 +106,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
             }
             return RedirectToAction("Index", new { IdCiudad_Canton = model.IdCiudad_Canton });
         }
+
+        #endregion
 
    public JsonResult get_lst_ciudad_x_provincia(string IdCiudad)
         {

@@ -10,8 +10,11 @@ using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
     public class SucursalController : Controller
     {
+        #region Index / Metodo
+
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         public ActionResult Index()
         {
@@ -25,7 +28,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
             var model = bus_sucursal.get_list(IdEmpresa,true);
             return PartialView("_GridViewPartial_sucursal", model);
         }
-
+        #endregion
+        #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0 )
         {
             tb_sucursal_Info model = new tb_sucursal_Info
@@ -77,5 +81,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

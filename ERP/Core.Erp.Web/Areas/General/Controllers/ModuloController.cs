@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
+using Core.Erp.Web.Helps;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,12 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
+
     public class ModuloController : Controller
     {
+        #region Index
+
         tb_modulo_Bus bus_modulo = new tb_modulo_Bus();
         public ActionResult Index()
         {
@@ -24,6 +29,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
             model = bus_modulo.get_list();
             return PartialView("_GridViewPartial_modulo", model);
         }
+        #endregion
+        #region Acciones
+
         public ActionResult Nuevo()
         {
             tb_modulo_Info model = new tb_modulo_Info();
@@ -64,6 +72,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
         
     }
 }

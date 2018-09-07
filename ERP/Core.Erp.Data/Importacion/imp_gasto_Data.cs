@@ -98,13 +98,7 @@ namespace Core.Erp.Data.Importacion
                         estado = info.estado = true,                        
                     };
                     Context.imp_gasto.Add(Entity);
-                    Context.imp_gasto_x_ct_plancta.Add(new imp_gasto_x_ct_plancta
-                    {
-                        IdEmpresa = info.info_gasto_cta.IdEmpresa,
-                        IdCtaCble = info.IdCtaCble,
-                        IdGasto_tipo = info.IdGasto_tipo
-                    });
-
+                    
                     Context.SaveChanges();
                 }
                 return true;
