@@ -124,6 +124,8 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         public ActionResult Modificar(int IdEmpresa = 0 ,decimal IdConciliacion_caja = 0)
         {
             cp_conciliacion_Caja_Info model = bus_conciliacion.get_info(IdEmpresa, IdConciliacion_caja);
+            if (model.FechaOP.Year == 1)
+                model.FechaOP = DateTime.Now;
             if(model == null)
                 return RedirectToAction("Index");
             #region Validar Session

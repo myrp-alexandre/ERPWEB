@@ -11,11 +11,18 @@ using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
     public class ImpuestoController : Controller
     {
+        #region Variables
         tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
         tb_sis_Impuesto_Tipo_Bus bus_impuesto_tipo = new tb_sis_Impuesto_Tipo_Bus();
         tb_sis_Impuesto_x_ctacble_Bus bus_impuesto_ctacble = new tb_sis_Impuesto_x_ctacble_Bus();
+
+        #endregion
+        #region MyRegion
+
+        #endregion
         public ActionResult Index()
         {
             return View();
