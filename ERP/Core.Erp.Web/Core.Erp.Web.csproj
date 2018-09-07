@@ -401,6 +401,7 @@
     <Compile Include="Areas\RRHH\Controllers\PeriodosPorNominaController.cs" />
     <Compile Include="Areas\RRHH\Controllers\PrestamosController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ProcesarRolController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\ProyeccionDeGastosController.cs" />
     <Compile Include="Areas\RRHH\Controllers\RubroController.cs" />
     <Compile Include="Areas\RRHH\Controllers\RubrosCalculadosController.cs" />
     <Compile Include="Areas\RRHH\Controllers\TipoPrestamoController.cs" />
@@ -9170,6 +9171,7 @@
     <Folder Include="Areas\RRHH\Views\EmpleadoDocumento\" />
     <Folder Include="Areas\RRHH\Views\EmpleadoHistorialSueldo\" />
     <Folder Include="Areas\RRHH\Views\PeriodosPorNomina\" />
+    <Folder Include="Areas\RRHH\Views\ProyeccionDeGastos\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
     <Folder Include="Content\imagenes\" />

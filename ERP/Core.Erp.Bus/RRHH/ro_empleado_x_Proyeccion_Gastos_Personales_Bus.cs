@@ -19,7 +19,7 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
-        public ro_empleado_x_Proyeccion_Gastos_Personales_Info get_info(int IdEmpresa, int IdEmpleado, int Anio)
+        public ro_empleado_x_Proyeccion_Gastos_Personales_Info get_info(int IdEmpresa, decimal IdEmpleado, int Anio)
         {
             try
             {
