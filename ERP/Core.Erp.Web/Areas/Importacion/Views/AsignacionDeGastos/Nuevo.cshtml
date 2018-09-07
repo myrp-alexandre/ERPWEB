@@ -37,7 +37,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.oe_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "or_fecha" })
+                        @Html.DevExpress().DateEditFor(q=> q.oe_fecha, settings =>
+                    {
+                        settings.Name = "oe_fecha";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.oe_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -82,16 +90,6 @@
 
 <script>
 
-
-    $(function () {
-
-
-        $('#or_fecha').datepicker({
-            autoclose: true
-        });
-
-
-    });
     function EditingNew(ID) {
         var datos = {
             secuencia: ID,

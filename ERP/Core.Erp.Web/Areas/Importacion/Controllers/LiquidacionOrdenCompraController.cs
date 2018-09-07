@@ -19,6 +19,7 @@ using DevExpress.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Importacion.Controllers
 {
+    [SessionTimeout]
     public class LiquidacionOrdenCompraController : Controller
     {
         #region variables

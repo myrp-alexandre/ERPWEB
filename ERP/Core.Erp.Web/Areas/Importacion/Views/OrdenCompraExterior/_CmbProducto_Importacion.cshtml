@@ -14,7 +14,7 @@
         settings.Properties.TextFormatString = "[{1}] {2}";
         settings.Properties.ValueField = "IdProducto";
         settings.Properties.ValueType = typeof(decimal);
-
+        settings.Properties.FilterMinLength = 3;
         settings.Properties.Columns.Add("IdProducto", "ID", 5);
         settings.Properties.Columns.Add("pr_descripcion", "Producto", 65);
         settings.Properties.Columns.Add("nom_categoria", "Categoria", 15);
@@ -23,7 +23,8 @@
 
     })
     .BindList(new Core.Erp.Web.Areas.Importacion.Controllers.OrdenCompraExteriorController().get_list_bajo_demanda_productos,
-    new Core.Erp.Web.Areas.Importacion.Controllers.OrdenCompraExteriorController().get_info_bajo_demanda_productos).Bind(Model);
+    new Core.Erp.Web.Areas.Importacion.Controllers.OrdenCompraExteriorController().get_info_bajo_demanda_productos)
+    .Bind(Model.GetType() == typeof(Core.Erp.Info.Importacion.imp_ordencompra_ext_Info) ? "" : (Model == 0 ? "" : Model));
 }
 @comboBox.GetHtml()
 

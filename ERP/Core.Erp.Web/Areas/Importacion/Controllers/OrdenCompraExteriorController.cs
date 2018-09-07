@@ -19,7 +19,7 @@ using DevExpress.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Importacion.Controllers
 {
-    
+    [SessionTimeout]
     public class OrdenCompraExteriorController : Controller
     {
         #region variables
@@ -40,7 +40,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbProveedor_exterior()
         {
-            cp_proveedor_Info model = new cp_proveedor_Info();
+            decimal model = new decimal();
             return PartialView("_CmbProveedor_exterior", model);
         }
         public List<cp_proveedor_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -76,7 +76,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
 
         public ActionResult CmbProducto_importacion()
         {
-            imp_ordencompra_ext_Info model = new imp_ordencompra_ext_Info();
+            decimal model = new decimal();
             return PartialView("_CmbProducto_importacion", model);
         }
         public List<in_Producto_Info> get_list_bajo_demanda_productos(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -172,7 +172,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost]
         public ActionResult Nuevo(imp_ordencompra_ext_Info model)
         {
-            model.lst_detalle = Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
+            model.lst_detalle = detalle.get_list(model.IdTransaccionSession);
             string mensaje = bus_orden.validar(model);
             if(mensaje!="")
             {
@@ -190,9 +190,16 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         }
         public ActionResult Modificar(int IdEmpresa = 0 , decimal IdOrdenCompra_ext = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             imp_ordencompra_ext_Info model = bus_orden.get_info(IdEmpresa, IdOrdenCompra_ext);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             var lst_detalle = bus_detalle.get_list(IdEmpresa, IdOrdenCompra_ext);
-            Session["imp_ordencompra_ext_det_Info"] = lst_detalle;
+            detalle.set_list(lst_detalle, model.IdTransaccionSession);
             if (model == null)
                 return RedirectToAction("Index");
             cargar_combos();
@@ -202,7 +209,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost]
         public ActionResult Modificar(imp_ordencompra_ext_Info model)
         {
-            model.lst_detalle= Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
+            model.lst_detalle = detalle.get_list(model.IdTransaccionSession);
             string mensaje = bus_orden.validar(model);
             if (mensaje != "")
             {
@@ -220,13 +227,21 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         }
         public ActionResult Anular(int IdEmpresa = 0 , decimal IdOrdenCompra_ext = 0 )
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             imp_ordencompra_ext_Info model = bus_orden.get_info(IdEmpresa, IdOrdenCompra_ext);
-           var lst_detalle = bus_detalle.get_list(IdEmpresa, IdOrdenCompra_ext);
-            Session["imp_ordencompra_ext_det_Info"] = lst_detalle;
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            var lst_detalle = bus_detalle.get_list(IdEmpresa, IdOrdenCompra_ext);
+            detalle.set_list(lst_detalle, model.IdTransaccionSession);
             if (model == null)
                 return RedirectToAction("Index");
             cargar_combos();
-            return View(model);
+            cargar_combos_detalle();
+            return View(model); ;
         }
 
         [HttpPost]

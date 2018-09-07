@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Importacion.Controllers
 {
+    [SessionTimeout]
     public class AsignacionDeGastosController : Controller
     {
         #region variables

@@ -44,7 +44,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.oe_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_oc" })
+                        @Html.DevExpress().DateEditFor(q=> q.oe_fecha, settings =>
+                    {
+                        settings.Name = "oe_fecha";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.oe_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -57,7 +65,7 @@
             <div class="col-md-8">
                 <div class="form-group">
                     <label for="IdProveedor">Proveedor*</label>
-                    @Html.Partial("_CmbProveedor_exterior", Model)
+                    @Html.Partial("_CmbProveedor_exterior", Model.IdProveedor)
                     @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -68,7 +76,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.oe_fecha_embarque, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_embarque" })
+                        @Html.DevExpress().DateEditFor(q=> q.oe_fecha_embarque, settings =>
+                    {
+                        settings.Name = "oe_fecha_embarque";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.oe_fecha_embarque, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -92,7 +108,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.oe_fecha_llegada, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_llegada" })
+                        @Html.DevExpress().DateEditFor(q=> q.oe_fecha_llegada, settings =>
+                    {
+                        settings.Name = "oe_fecha_llegada";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.oe_fecha_llegada, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -116,7 +140,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.oe_fecha_desaduanizacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_desanualizacion" })
+                        @Html.DevExpress().DateEditFor(q=> q.oe_fecha_desaduanizacion, settings =>
+                    {
+                        settings.Name = "oe_fecha_desaduanizacion";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.oe_fecha_llegada, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -272,28 +304,3 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
-
-<script>
-
-    $(function () {
-
-
-        $('#fecha_oc').datepicker({
-            autoclose: true
-        });
-        $('#fecha_llegada').datepicker({
-            autoclose: true
-        });
-
-        $('#fecha_embarque').datepicker({
-            autoclose: true
-        });
-        $('#fecha_desanualizacion').datepicker({
-            autoclose: true
-        });
-
-
-    });
-
-
-</script>

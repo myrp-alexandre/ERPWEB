@@ -14,13 +14,14 @@
         settings.Properties.TextFormatString = "[{1}] {2}";
         settings.Properties.ValueField = "IdProveedor";
         settings.Properties.ValueType = typeof(decimal);
+        settings.Properties.FilterMinLength = 3;
 
         settings.Properties.Columns.Add("IdProveedor", "ID", 5);
         settings.Properties.Columns.Add("info_persona.pe_cedulaRuc", "Cedula", 15);
         settings.Properties.Columns.Add("info_persona.pe_nombreCompleto", "Provedor", 80);
     })
     .BindList(new Core.Erp.Web.Areas.Importacion.Controllers.OrdenCompraExteriorController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Importacion.Controllers.OrdenCompraExteriorController().get_info_bajo_demanda)
-    .Bind(Model.IdProveedor == 0 ? "" : Model.IdProveedor);
+    .Bind(Model.GetType() == typeof(Core.Erp.Info.Importacion.imp_ordencompra_ext_Info) ? "" : (Model == 0 ? "" : Model));
 
 }
 @comboBox.GetHtml()
