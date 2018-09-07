@@ -11,6 +11,7 @@ using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
     public class BodegaController : Controller
     {
         #region Variables

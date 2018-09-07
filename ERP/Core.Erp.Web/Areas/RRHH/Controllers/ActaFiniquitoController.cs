@@ -182,8 +182,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         private void cargar_combos_detalle()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            ViewBag.lst_rubro = bus_rubro.get_list_rub_concepto(IdEmpresa);
-            Session["lst_rubro"] = ViewBag.lst_rubro;
+            ViewBag.lst_rubro = bus_rubro.get_list(IdEmpresa, false);
         }
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ro_Acta_Finiquito_Detalle_Info info_det)

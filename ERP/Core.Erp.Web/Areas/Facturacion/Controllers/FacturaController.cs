@@ -72,7 +72,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #region Metodos ComboBox bajo demanda cliente
         public ActionResult CmbCliente_Factura()
         {
-            fa_proforma_Info model = new fa_proforma_Info();
+            decimal model = new decimal();
             return PartialView("_CmbCliente_Factura", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)

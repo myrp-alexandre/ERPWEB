@@ -344,7 +344,7 @@
             this.xrLabel2.StylePriority.UsePadding = false;
             this.xrLabel2.StylePriority.UseTextAlignment = false;
             this.xrLabel2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrLabel2.TextFormatString = "{0:dd-MM-yyyy}";
+            this.xrLabel2.TextFormatString = "{0:dd/MM/yyyy}";
             // 
             // xrLabel3
             // 
@@ -373,7 +373,7 @@
             this.xrLabel4.StylePriority.UsePadding = false;
             this.xrLabel4.StylePriority.UseTextAlignment = false;
             this.xrLabel4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrLabel4.TextFormatString = "{0:dd-MM-yy}";
+            this.xrLabel4.TextFormatString = "{0:dd/MM/yyyy}";
             // 
             // xrLabel1
             // 

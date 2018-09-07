@@ -14,6 +14,8 @@ using DevExpress.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
+    [SessionTimeout]
+
     public class GuiaRemisionController : Controller
     {
         #region variables
@@ -35,7 +37,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #region Metodos ComboBox bajo demanda cliente
         public ActionResult CmbCliente_Guia()
         {
-            fa_guia_remision_Info model = new fa_guia_remision_Info();
+            decimal model = new decimal();
             return PartialView("_CmbCliente_Guia", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)

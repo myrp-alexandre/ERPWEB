@@ -26,7 +26,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         tb_parroquia_Bus bus_parroquia = new tb_parroquia_Bus();
         string mensaje = string.Empty;
         #endregion
-
         #region Index
         public ActionResult Index()
         {
@@ -51,7 +50,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
 
         #endregion
-
         #region Metodos
         private void cargar_combos(fa_cliente_Info info)
         {
@@ -87,6 +85,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
 
         #endregion
+        #region Acciones
+
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
             #region Validar Session
@@ -210,7 +210,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        #endregion
+        #region Json
         public ActionResult get_parroquias(string IdCiudad = "")
         {
             
@@ -222,8 +223,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 p.BindList(bus_parroquia.get_list(IdCiudad, false));
             });
         }
-
-        #region Json
 
         public JsonResult get_info_termino_pago(string IdTerminoPago = "")
         {
@@ -247,7 +246,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         #endregion
-
         #region detalle
         private void cargar_combos_det()
         {

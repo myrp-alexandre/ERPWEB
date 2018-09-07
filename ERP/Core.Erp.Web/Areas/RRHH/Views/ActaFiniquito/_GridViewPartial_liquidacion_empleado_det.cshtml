@@ -59,9 +59,16 @@
             column.FieldName = "Observacion";
             column.Caption = "Descripción";
             column.Width = Unit.Percentage(60);
-            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
         });
-        settings.Columns.Add("Valor","$ Valor").Width = Unit.Percentage(5);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Valor";
+            column.Caption = "$ Valor";
+            column.Width = Unit.Percentage(60);
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor");
         settings.Settings.ShowFooter = true;
 

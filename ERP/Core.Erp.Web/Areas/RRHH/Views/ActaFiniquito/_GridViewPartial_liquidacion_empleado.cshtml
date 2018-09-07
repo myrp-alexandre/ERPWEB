@@ -84,7 +84,6 @@
         });
 
         settings.Columns.Add("IdActaFiniquito","ID").Width=Unit.Percentage(5);
-        settings.Columns.Add("em_codigo", "Código").Width = Unit.Percentage(12);
         settings.Columns.Add("pe_nombre_completo", "Empleado").Width = Unit.Percentage(30);
         settings.Columns.Add("Contrato", "Contrato").Width = Unit.Percentage(20);
         settings.Columns.Add("ca_descripcion", "Tipo liquidación").Width = Unit.Percentage(20);
@@ -138,6 +137,14 @@
             });
         });
 
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ROL_005", "RRHHReportes", new { Area = "Reportes", IdEmpleado = DataBinder.Eval(c.DataItem, "IdEmpleado"), IdActaFiniquito = DataBinder.Eval(c.DataItem, "IdActaFiniquito") }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
+        });
 
     });
 }

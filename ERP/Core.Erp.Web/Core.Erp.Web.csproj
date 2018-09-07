@@ -371,6 +371,7 @@
     <Compile Include="Areas\Reportes\ReportesAreaRegistration.cs" />
     <Compile Include="Areas\RRHH\Controllers\ActaFiniquitoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\AreaController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\BaseImpuestoRentaController.cs" />
     <Compile Include="Areas\RRHH\Controllers\CargaFamiliarController.cs" />
     <Compile Include="Areas\RRHH\Controllers\CargoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\CatalogoRRHHController.cs" />
@@ -400,6 +401,7 @@
     <Compile Include="Areas\RRHH\Controllers\PeriodosPorNominaController.cs" />
     <Compile Include="Areas\RRHH\Controllers\PrestamosController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ProcesarRolController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\ProyeccionDeGastosController.cs" />
     <Compile Include="Areas\RRHH\Controllers\RubroController.cs" />
     <Compile Include="Areas\RRHH\Controllers\RubrosCalculadosController.cs" />
     <Compile Include="Areas\RRHH\Controllers\TipoPrestamoController.cs" />
@@ -9080,6 +9082,11 @@
     <Content Include="Areas\Compras\Views\Comprador\_CmbPersona_Compras.cshtml" />
     <Content Include="Areas\RRHH\Views\EmpleadoPorRubro\_CmbEmpleado_rubros_fijos.cshtml" />
     <Content Include="Areas\RRHH\Views\EmpleadoRubroAcumulado\_CmbEmpleado_rubros_acumulados.cshtml" />
+    <Content Include="Areas\RRHH\Views\BaseImpuestoRenta\_GridViewPartial_base_impuesto_renta.cshtml" />
+    <Content Include="Areas\RRHH\Views\BaseImpuestoRenta\Anular.cshtml" />
+    <Content Include="Areas\RRHH\Views\BaseImpuestoRenta\Index.cshtml" />
+    <Content Include="Areas\RRHH\Views\BaseImpuestoRenta\Modificar.cshtml" />
+    <Content Include="Areas\RRHH\Views\BaseImpuestoRenta\Nuevo.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -9164,6 +9171,7 @@
     <Folder Include="Areas\RRHH\Views\EmpleadoDocumento\" />
     <Folder Include="Areas\RRHH\Views\EmpleadoHistorialSueldo\" />
     <Folder Include="Areas\RRHH\Views\PeriodosPorNomina\" />
+    <Folder Include="Areas\RRHH\Views\ProyeccionDeGastos\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
     <Folder Include="Content\imagenes\" />
@@ -9194,7 +9202,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

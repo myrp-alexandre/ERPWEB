@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
+using Core.Erp.Web.Helps;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,11 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
     public class CatalogoTipoController : Controller
     {
+        #region Index
+
         tb_CatalogoTipo_Bus bus_catalogo_tipo = new tb_CatalogoTipo_Bus();
         public ActionResult Index()
         {
@@ -24,7 +28,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
             model = bus_catalogo_tipo.get_list();
             return PartialView("_GridViewPartial_catalogo_tipo", model);
         }
+        #endregion
 
+        #region Acciones
         public ActionResult Nuevo()
         {
             tb_CatalogoTipo_Info model = new tb_CatalogoTipo_Info();
@@ -58,5 +64,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Core.Erp.Info.General;
+using Core.Erp.Web.Helps;
 using System.Web.Mvc;
-using Core.Erp.Info.General;
+
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
+
     public class DisenadorReporteController : Controller
     {
+        #region Index
         public ActionResult Index()
         {
             return View();
@@ -20,6 +21,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
             return PartialView();
         }
 
+        #endregion
+        #region Acciones
         public ActionResult Nuevo()
         {
             return View();
@@ -55,5 +58,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             return View();
 
         }
+
+        #endregion
     }
 }

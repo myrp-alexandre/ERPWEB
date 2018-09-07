@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using Core.Erp.Bus.Facturacion;
 using Core.Erp.Info.Facturacion;
-using Core.Erp.Bus.Facturacion;
-
+using Core.Erp.Web.Helps;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
+    [SessionTimeout]
     public class CatalogoFacturacionController : Controller
     {
+        #region Index
+
         fa_catalogo_Bus bus_catalogo = new fa_catalogo_Bus();
 
         public ActionResult Index(int IdCatalogo_tipo = 0)
@@ -29,6 +29,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var lst_tipo = bus_tipo.get_list(false);
             ViewBag.lst_tipo = lst_tipo;
         }
+        #endregion
+        #region Acciones
+
         public ActionResult Nuevo(int IdCatalogo_tipo = 0)
         {
             fa_catalogo_Info model = new fa_catalogo_Info
@@ -99,6 +102,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             return RedirectToAction("Index", new { IdCatalogo_tipo = model.IdCatalogo_tipo });
         }
-
+        #endregion
     }
 }

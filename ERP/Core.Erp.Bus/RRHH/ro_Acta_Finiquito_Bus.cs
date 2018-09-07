@@ -176,11 +176,12 @@ namespace Core.Erp.Bus.RRHH
                     default:
                         break;
                 }
-               
+                ObtenerIndemnizacionXDesahucio();
                 Obtenersueldo_no_pagados();
                 ObtenerAportePersonal();
                 ObtenerProvisionDecimoIII();
                 ObtenerProvisionDecimoIV();
+                ObtenerProvisionFondoReserva();
                 ObtenerProvisionVacaciones();
                 ObtenerCuotasPrestamosPendientes();
                 ObtenerNovedadesPendientes();
@@ -234,7 +235,7 @@ namespace Core.Erp.Bus.RRHH
                     item.IdEmpleado = _Info.IdEmpleado;
                     item.IdActaFiniquito = _Info.IdActaFiniquito;
                     item.Observacion = "Bonificación por Desahucio según Art.185";
-                    item.Valor = totalRubroAcumulado;
+                    item.Valor =Math.Round( totalRubroAcumulado,2);
                     item.IdRubro = info_parametro.IdRubro_acta_finiquito;
                     item.IdRubro = info_parametro.IdRubro_acta_finiquito;
                     lst_valores_x_indegnizacion.Add(item);
@@ -283,7 +284,7 @@ namespace Core.Erp.Bus.RRHH
                     item.IdEmpleado = _Info.IdEmpleado;
                     item.IdActaFiniquito = _Info.IdActaFiniquito;
                     item.Observacion = "Indemnización por Despido Intempestivo según Art.188";
-                    item.Valor = totalRubroAcumulado;
+                    item.Valor =Math.Round( totalRubroAcumulado,2);
                     item.IdRubro = info_parametro.IdRubro_acta_finiquito;
                     lst_valores_x_indegnizacion.Add(item);
 
@@ -320,7 +321,7 @@ namespace Core.Erp.Bus.RRHH
                         item.IdEmpleado = _Info.IdEmpleado;
                         item.IdActaFiniquito = _Info.IdActaFiniquito;
                         item.Observacion = "Indemnización por Garantía Dirigentes Sindicales según Art.187";
-                        item.Valor = totalRubroAcumulado;
+                        item.Valor =Math.Round( totalRubroAcumulado,2);
                         item.IdRubro = info_parametro.IdRubro_acta_finiquito;
                         lst_valores_x_indegnizacion.Add(item);
 
@@ -356,7 +357,7 @@ namespace Core.Erp.Bus.RRHH
                         item.IdEmpleado = _Info.IdEmpleado;
                         item.IdActaFiniquito = _Info.IdActaFiniquito;
                         item.Observacion = "Indemnización por despido y declaratoria de ineficaz de la trabajadora embarazada";
-                        item.Valor = totalRubroAcumulado;
+                        item.Valor =Math.Round( totalRubroAcumulado,2);
                         item.IdRubro = info_parametro.IdRubro_acta_finiquito;
                         lst_valores_x_indegnizacion.Add(item);
                     }
@@ -391,7 +392,7 @@ namespace Core.Erp.Bus.RRHH
                         item.IdEmpleado = _Info.IdEmpleado;
                         item.IdActaFiniquito = _Info.IdActaFiniquito;
                         item.Observacion = "Indemnización por Estabilidad Laboral Art.51 - Ley de Discapacidad";
-                        item.Valor = totalRubroAcumulado;
+                        item.Valor =Math.Round( totalRubroAcumulado,2);
                         item.IdRubro = info_parametro.IdRubro_acta_finiquito;
 
                         lst_valores_x_indegnizacion.Add(item);
@@ -427,7 +428,7 @@ namespace Core.Erp.Bus.RRHH
                         item.IdEmpleado = _Info.IdEmpleado;
                         item.IdActaFiniquito = _Info.IdActaFiniquito;
                         item.Observacion = "Indemnización por NO recibir al trabajador en caso de enfermedad no Profesional según Art.175 y 179";
-                        item.Valor = totalRubroAcumulado;
+                        item.Valor =Math.Round( totalRubroAcumulado,2);
                         item.IdRubro = info_parametro.IdRubro_acta_finiquito;
                         lst_valores_x_indegnizacion.Add(item);
 
@@ -449,14 +450,17 @@ namespace Core.Erp.Bus.RRHH
             {
                 double prestamo = 0;
                  prestamo = bus_prestamo.get_valor_cuotas_pendientes(_Info.IdEmpresa, _Info.IdEmpleado);
+                if (prestamo > 0)
+                {
                     ro_Acta_Finiquito_Detalle_Info item = new ro_Acta_Finiquito_Detalle_Info();
                     item.IdEmpresa = _Info.IdEmpresa;
                     item.IdEmpleado = _Info.IdEmpleado;
                     item.IdActaFiniquito = _Info.IdActaFiniquito;
-                    item.Observacion ="Cuotas de prestamos pendientes de cobors ";
-                    item.Valor = prestamo*-1;
-                    item.IdRubro ="277";
+                    item.Observacion = "Cuotas de prestamos pendientes de cobors ";
+                    item.Valor = prestamo * -1;
+                    item.IdRubro = "277";
                     lst_valores_x_indegnizacion.Add(item);
+                }
                 
                 return true;
             }
@@ -480,9 +484,9 @@ namespace Core.Erp.Bus.RRHH
                     item.IdActaFiniquito = _Info.IdActaFiniquito;
                     item.Observacion = item_nov.Observacion;
                     if(item_nov.rub_tipo=="E")
-                        item.Valor = item_nov.Valor*-1;
+                        item.Valor =Math.Round( item_nov.Valor*-1,2);
                     else
-                        item.Valor = item_nov.Valor;
+                        item.Valor = Math.Round(item_nov.Valor * -1, 2);
                     item.IdRubro = item_nov.IdRubro;
                     lst_valores_x_indegnizacion.Add(item);
                 }
@@ -505,7 +509,7 @@ namespace Core.Erp.Bus.RRHH
                     item.IdEmpleado = _Info.IdEmpleado;
                     item.IdActaFiniquito = _Info.IdActaFiniquito;
                     item.Observacion = "Vacaciones no gozadas";
-                    item.Valor = vacaciones+(sueldo_base/24);
+                    item.Valor =Math.Round( vacaciones+(sueldo_base/24), 2);
                     item.IdRubro = "998";
                     lst_valores_x_indegnizacion.Add(item);
                 
@@ -527,7 +531,7 @@ namespace Core.Erp.Bus.RRHH
                 item.IdEmpleado = _Info.IdEmpleado;
                 item.IdActaFiniquito = _Info.IdActaFiniquito;
                 item.Observacion = "Decima tercera remuneracón";
-                item.Valor = vacaciones+(sueldo_base/12);
+                item.Valor =Math.Round( vacaciones+(sueldo_base/12),2);
                 item.IdRubro = info_rubros_calculados.IdRubro_prov_DIII;
                 lst_valores_x_indegnizacion.Add(item);
 
@@ -549,9 +553,32 @@ namespace Core.Erp.Bus.RRHH
                 item.IdEmpleado = _Info.IdEmpleado;
                 item.IdActaFiniquito = _Info.IdActaFiniquito;
                 item.Observacion = "Decima cuarta remuneracón";
-                item.Valor = vacaciones+((info_parametro.Sueldo_basico/360)*dias_trabajados);
+                item.Valor =Math.Round( vacaciones+((info_parametro.Sueldo_basico/360)*dias_trabajados),2);
                 item.IdRubro = info_rubros_calculados.IdRubro_prov_DIV;
                 lst_valores_x_indegnizacion.Add(item);
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+        }
+
+        private Boolean ObtenerProvisionFondoReserva()
+        {
+            try
+            {
+              
+                ro_Acta_Finiquito_Detalle_Info item = new ro_Acta_Finiquito_Detalle_Info();
+                item.IdEmpresa = _Info.IdEmpresa;
+                item.IdEmpleado = _Info.IdEmpleado;
+                item.IdActaFiniquito = _Info.IdActaFiniquito;
+                item.Observacion = "Provision de fondo de reserva";
+                item.Valor = Math.Round( (sueldo_base  *0.0833),2);
+                item.IdRubro = info_rubros_calculados.IdRubro_fondo_reserva;
+                lst_valores_x_indegnizacion.Add(item);
+
                 return true;
             }
             catch (Exception)
@@ -570,7 +597,7 @@ namespace Core.Erp.Bus.RRHH
                 dias_trabajados =(int) (Convert.ToDateTime(_Info.FechaSalida) - fecha_inicio).TotalDays;
                 dias_trabajados = dias_trabajados + 1;
                 sueldo =(double) bus_contrato.get_sueldo_actual(_Info.IdEmpresa, _Info.IdEmpleado);
-                sueldo_base = (sueldo / 30) * dias_trabajados;
+                sueldo_base =Math.Round( (sueldo / 30) * dias_trabajados,2);
                 ro_Acta_Finiquito_Detalle_Info item = new ro_Acta_Finiquito_Detalle_Info();
                 item.IdEmpresa = _Info.IdEmpresa;
                 item.IdEmpleado = _Info.IdEmpleado;
@@ -596,7 +623,7 @@ namespace Core.Erp.Bus.RRHH
                 item.IdEmpleado = _Info.IdEmpleado;
                 item.IdActaFiniquito = _Info.IdActaFiniquito;
                 item.Observacion = "Aporte personal";
-                item.Valor = (sueldo_base*info_parametro.Porcentaje_aporte_pers)*-1;
+                item.Valor =Math.Round( (sueldo_base*info_parametro.Porcentaje_aporte_pers)*-1,2);
                 item.IdRubro = info_rubros_calculados.IdRubro_iess_perso;
                 lst_valores_x_indegnizacion.Add(item);
                 return true;

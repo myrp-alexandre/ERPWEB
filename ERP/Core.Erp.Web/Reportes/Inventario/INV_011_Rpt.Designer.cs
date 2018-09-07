@@ -253,7 +253,7 @@
             // TopMargin
             // 
             this.TopMargin.Dpi = 96F;
-            this.TopMargin.HeightF = 16F;
+            this.TopMargin.HeightF = 22F;
             this.TopMargin.Name = "TopMargin";
             this.TopMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 96F);
             this.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -993,8 +993,8 @@
             this.DataSource = this.objectDataSource1;
             this.Dpi = 96F;
             this.Landscape = true;
-            this.Margins = new System.Drawing.Printing.Margins(0, 0, 16, 36);
-            this.PageHeight = 548;
+            this.Margins = new System.Drawing.Printing.Margins(0, 0, 22, 36);
+            this.PageHeight = 540;
             this.PageWidth = 888;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {

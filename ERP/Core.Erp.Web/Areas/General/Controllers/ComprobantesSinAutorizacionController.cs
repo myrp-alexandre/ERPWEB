@@ -10,6 +10,8 @@ using Core.Erp.Bus.General;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
+
     public class ComprobantesSinAutorizacionController : Controller
     {
         tb_comprobantes_sin_autorizacion_Bus bus_comprobantes = new tb_comprobantes_sin_autorizacion_Bus();
