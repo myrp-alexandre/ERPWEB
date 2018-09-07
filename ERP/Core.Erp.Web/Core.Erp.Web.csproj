@@ -371,6 +371,7 @@
     <Compile Include="Areas\Reportes\ReportesAreaRegistration.cs" />
     <Compile Include="Areas\RRHH\Controllers\ActaFiniquitoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\AreaController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\BaseImpuestoRentaController.cs" />
     <Compile Include="Areas\RRHH\Controllers\CargaFamiliarController.cs" />
     <Compile Include="Areas\RRHH\Controllers\CargoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\CatalogoRRHHController.cs" />
@@ -9159,6 +9160,7 @@
     <Folder Include="Areas\Inventario\Models\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
+    <Folder Include="Areas\RRHH\Views\BaseImpuestoRenta\" />
     <Folder Include="Areas\RRHH\Views\CapacitacionesEmpleado\" />
     <Folder Include="Areas\RRHH\Views\DocumentoEmpleado\" />
     <Folder Include="Areas\RRHH\Views\EmpleadoDocumento\" />

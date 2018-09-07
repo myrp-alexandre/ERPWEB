@@ -1235,6 +1235,7 @@
     <Compile Include="RRHH\ro_rubros_calculados_Data.cs" />
     <Compile Include="RRHH\ro_rubro_tipo_Data.cs" />
     <Compile Include="RRHH\ro_Solicitud_Vacaciones_x_empleado_Data.cs" />
+    <Compile Include="RRHH\ro_tabla_Impu_Renta_Data.cs" />
     <Compile Include="RRHH\ro_tipo_prestamo_Data.cs" />
     <Compile Include="RRHH\ro_turno_Data.cs" />
     <Compile Include="SeguridadAcceso\seg_Menu_Data.cs" />
