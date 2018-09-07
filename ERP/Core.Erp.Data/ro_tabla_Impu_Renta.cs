@@ -12,15 +12,13 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar
+    public partial class ro_tabla_Impu_Renta
     {
-        public int IdEmpresa { get; set; }
-        public int IdNomina { get; set; }
-        public int IdNominaTipo { get; set; }
-        public string IdCtaCble { get; set; }
-        public string Observacion { get; set; }
-        public Nullable<decimal> IdTipoFlujo { get; set; }
-    
-        public virtual ro_Nomina_Tipoliqui ro_Nomina_Tipoliqui { get; set; }
+        public int AnioFiscal { get; set; }
+        public int Secuencia { get; set; }
+        public Nullable<double> FraccionBasica { get; set; }
+        public Nullable<double> ExcesoHasta { get; set; }
+        public Nullable<double> ImpFraccionBasica { get; set; }
+        public Nullable<double> Por_ImpFraccion_Exce { get; set; }
     }
 }

@@ -1178,6 +1178,9 @@
     <Compile Include="ro_SPROL_002.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="ro_tabla_Impu_Renta.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="ro_Tipo_Prestamo.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>

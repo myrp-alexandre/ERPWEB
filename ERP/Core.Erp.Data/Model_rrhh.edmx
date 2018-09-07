@@ -1153,6 +1153,18 @@
           <Property Name="Gozadas_Pgadas" Type="bit" Nullable="false" />
           <Property Name="Canceladas" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="ro_tabla_Impu_Renta">
+          <Key>
+            <PropertyRef Name="AnioFiscal" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="AnioFiscal" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="FraccionBasica" Type="float" />
+          <Property Name="ExcesoHasta" Type="float" />
+          <Property Name="ImpFraccionBasica" Type="float" />
+          <Property Name="Por_ImpFraccion_Exce" Type="float" />
+        </EntityType>
         <EntityType Name="ro_Tipo_Prestamo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3221,6 +3233,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_rol_detalle_g
           <EntitySet Name="ro_rubro_tipo" EntityType="Self.ro_rubro_tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_rubros_calculados" EntityType="Self.ro_rubros_calculados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_Solicitud_Vacaciones_x_empleado" EntityType="Self.ro_Solicitud_Vacaciones_x_empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ro_tabla_Impu_Renta" EntityType="Self.ro_tabla_Impu_Renta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_Tipo_Prestamo" EntityType="Self.ro_Tipo_Prestamo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_turno" EntityType="Self.ro_turno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vwRo_ActaFiniquito" EntityType="Self.vwRo_ActaFiniquito" store:Type="Views" store:Schema="dbo">
@@ -7676,6 +7689,7 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             <Parameter Name="observacion" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="vwro_rol" EntityType="Model_rrhh.vwro_rol" />
+          <EntitySet Name="ro_tabla_Impu_Renta" EntityType="Model_rrhh.ro_tabla_Impu_Renta" />
         </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -7717,6 +7731,18 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="pe_FechaIni" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="pe_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="ro_tabla_Impu_Renta">
+          <Key>
+            <PropertyRef Name="AnioFiscal" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="AnioFiscal" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="FraccionBasica" Type="Double" />
+          <Property Name="ExcesoHasta" Type="Double" />
+          <Property Name="ImpFraccionBasica" Type="Double" />
+          <Property Name="Por_ImpFraccion_Exce" Type="Double" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -9422,6 +9448,18 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
                 <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
                 <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_tabla_Impu_Renta">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_tabla_Impu_Renta">
+              <MappingFragment StoreEntitySet="ro_tabla_Impu_Renta">
+                <ScalarProperty Name="Por_ImpFraccion_Exce" ColumnName="Por_ImpFraccion_Exce" />
+                <ScalarProperty Name="ImpFraccionBasica" ColumnName="ImpFraccionBasica" />
+                <ScalarProperty Name="ExcesoHasta" ColumnName="ExcesoHasta" />
+                <ScalarProperty Name="FraccionBasica" ColumnName="FraccionBasica" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="AnioFiscal" ColumnName="AnioFiscal" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
