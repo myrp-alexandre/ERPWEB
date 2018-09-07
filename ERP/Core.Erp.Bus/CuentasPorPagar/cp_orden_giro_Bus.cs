@@ -238,7 +238,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comrobante.lst_ct_cbtecble_det = bus_comrpbante_det.get_list(IdEmpresa, IdTipoCbte_Ogiro, IdCbteCble_Ogiro);
                 info.info_cuota = bus_cuotas.get_info(IdEmpresa, IdTipoCbte_Ogiro, IdCbteCble_Ogiro);
                 if (info.info_cuota == null)
-                    info.info_cuota = new cp_cuotas_x_doc_Info();
+                    info.info_cuota = new cp_cuotas_x_doc_Info { Fecha_inicio = info.co_FechaFactura};
 
                 info.info_forma_pago = bus_forma_pago.get_info(info.IdEmpresa, info.IdTipoCbte_Ogiro, info.IdCbteCble_Ogiro);
                 if (info.info_forma_pago == null)

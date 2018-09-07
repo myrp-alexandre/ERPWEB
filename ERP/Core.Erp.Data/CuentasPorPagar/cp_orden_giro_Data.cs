@@ -632,7 +632,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                         aut_doc_Modificar = Entity.aut_doc_Modificar,
                         IdTipoMovi = Entity.IdTipoMovi,
                         Estado = Entity.Estado,
-                        IdBodega = Entity.IdBodega
+                        IdBodega = Entity.IdBodega,
+                        
                     };
                 }
                 return info;

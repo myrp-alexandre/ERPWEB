@@ -7,11 +7,15 @@ using System.Web.Mvc;
 using Core.Erp.Info.General;
 using Core.Erp.Bus.General;
 using DevExpress.Web;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
+    [SessionTimeout]
+
     public class EmpresaController : Controller
     {
+        #region Index
         tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
         public ActionResult Index()
         {
@@ -24,6 +28,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
             List<tb_empresa_Info> model = bus_empresa.get_list(true);
             return PartialView("_GridViewPartial_empresa", model);
         }
+
+        #endregion
+        #region Acciones
 
         public ActionResult Nuevo()
         {
@@ -80,9 +87,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             }
             return RedirectToAction("Index");
         }
-
-
-
+        #endregion
     }
   
 }
