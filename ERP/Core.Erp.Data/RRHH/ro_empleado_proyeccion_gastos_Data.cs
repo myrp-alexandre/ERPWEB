@@ -53,6 +53,9 @@ namespace Core.Erp.Data.RRHH
                         IdEmpresa = Entity.IdEmpresa,
                         IdEmpleado = Entity.IdEmpleado,
                         AnioFiscal = Entity.AnioFiscal,
+                        Observacion=Entity.Observacion,
+
+                        
                     };
                 }
 
@@ -75,6 +78,7 @@ namespace Core.Erp.Data.RRHH
                         IdEmpresa = info.IdEmpresa,
                         IdEmpleado = info.IdEmpleado,
                         AnioFiscal = info.AnioFiscal,
+                        Observacion=info.Observacion,
                         estado = true,
                         Fecha_Transac=DateTime.Now
                         
@@ -97,7 +101,11 @@ namespace Core.Erp.Data.RRHH
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     ro_empleado_proyeccion_gastos Entity = Context.ro_empleado_proyeccion_gastos.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleado == info.IdEmpleado && q.AnioFiscal==info.AnioFiscal);
-                    Context.Database.ExecuteSqlCommand("delete ro_empleado_x_Proyeccion_Gastos_Personales where idEmpresa='" + info.IdEmpresa + "' and IdEmpleado='" + info.IdEmpleado + "' and AnioFiscal='" + info.AnioFiscal + "'");
+                    if (Entity == null)
+                        return  false;
+                    Entity.AnioFiscal = info.AnioFiscal;
+                    Entity.Observacion = info.Observacion;
+                    Entity.IdEmpleado = info.IdEmpleado;
                     Context.SaveChanges();
                 }
 

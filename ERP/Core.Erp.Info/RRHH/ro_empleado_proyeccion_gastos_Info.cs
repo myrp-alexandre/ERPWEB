@@ -9,18 +9,18 @@ namespace Core.Erp.Info.RRHH
    public class ro_empleado_proyeccion_gastos_Info
     {
         public int IdEmpresa { get; set; }
+        public decimal IdTransaccion { get; set; }
         public decimal IdEmpleado { get; set; }
-        public string IdTipoGasto { get; set; }
         public int AnioFiscal { get; set; }
-        public double Valor { get; set; }
-        public System.DateTime FechaIngresa { get; set; }
-        public string UsuarioIngresa { get; set; }
-        public Nullable<System.DateTime> FechaModifica { get; set; }
-        public string UsuarioModifica { get; set; }
-
-        public string pe_cedulaRuc { get; set; }
-        public string pe_nombreCompleto { get; set; }
-        public List<ro_empleado_proyeccion_gastos_Info> list_detalle { get; set; }
+        public string Observacion { get; set; }
+        public bool estado { get; set; }
+        public string IdUsuario { get; set; }
+        public Nullable<System.DateTime> Fecha_Transac { get; set; }
+        public string IdUsuarioUltMod { get; set; }
+        public Nullable<System.DateTime> Fecha_UltMod { get; set; }
+        public string IdUsuarioUltAnu { get; set; }
+        public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
+        public string MotiAnula { get; set; }
 
     }
 }
