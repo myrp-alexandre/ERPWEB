@@ -65,8 +65,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 cargar_combo();
                 ro_empleado_proyeccion_gastos_Info model = new ro_empleado_proyeccion_gastos_Info();
-                List<ro_empleado_proyeccion_gastos_det_Info> lst_det = bus_det.get_list(IdEmpresa, IdTransaccion);
-                model.list_proyeciones = lst_det;
+                SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+                model.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                 return PartialView("_GridViewPartial_proyeccion_gastos_det", model);
             }
             catch (Exception)
