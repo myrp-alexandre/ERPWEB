@@ -9310,6 +9310,9 @@
     <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_004_Rpt.resx">
       <DependentUpon>CXC_004_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_005_Rpt.resx">
+      <DependentUpon>CXC_005_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorPagar\CXP_001_Rpt.resx">
       <DependentUpon>CXP_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
