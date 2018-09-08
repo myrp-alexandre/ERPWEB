@@ -26,7 +26,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdProducto = q.IdProducto, 
-                                 IdCategoria = q.IdCatgeoria,
+                                 IdCategoria = q.IdCategoria,
                                  IdLinea = q.IdLinea, 
                                  IdGrupo = q.IdGrupo,
                                  IdSubGrupo = q.IdSubGrupo,
