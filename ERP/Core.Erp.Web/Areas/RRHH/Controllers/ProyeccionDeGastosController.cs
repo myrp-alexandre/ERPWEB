@@ -26,7 +26,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         public ActionResult CmbEmpleado_proyeccion()
         {
-            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
+            ro_empleado_proyeccion_gastos_Info model = new ro_empleado_proyeccion_gastos_Info();
             return PartialView("_CmbEmpleado_proyeccion", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -219,7 +219,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_empleado_proyeccion_gastos_Info model = new ro_empleado_proyeccion_gastos_Info();
             model.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combo();
-            return PartialView("_GridViewPartial_empleado_novedad_det", model);
+            return PartialView("_GridViewPartial_proyeccion_gastos_det", model);
         }
 
         [HttpPost, ValidateInput(false)]
@@ -230,7 +230,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_empleado_proyeccion_gastos_Info model = new ro_empleado_proyeccion_gastos_Info();
             model.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combo();
-            return PartialView("_GridViewPartial_empleado_novedad_det", model);
+            return PartialView("_GridViewPartial_proyeccion_gastos_det", model);
         }
 
         public ActionResult EditingDelete([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_proyeccion_gastos_det_Info info_det)
@@ -239,7 +239,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_empleado_proyeccion_gastos_Info model = new ro_empleado_proyeccion_gastos_Info();
             model.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combo();
-            return PartialView("_GridViewPartial_empleado_novedad_det", model);
+            return PartialView("_GridViewPartial_proyeccion_gastos_det", model);
         }
         #endregion
     }
