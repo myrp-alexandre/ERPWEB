@@ -19,11 +19,11 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
-        public ro_empleado_proyeccion_gastos_Info get_info(int IdEmpresa, decimal IdEmpleado, int Anio)
+        public ro_empleado_proyeccion_gastos_Info get_info(int IdEmpresa, decimal IdEmpleado, int IdTransaccion)
         {
             try
             {
-                return odata.get_info(IdEmpresa, IdEmpleado, Anio);
+                return odata.get_info(IdEmpresa, IdEmpleado, IdTransaccion);
             }
             catch (Exception)
             {

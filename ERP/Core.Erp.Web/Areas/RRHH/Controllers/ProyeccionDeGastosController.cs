@@ -87,6 +87,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    info.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list(info.IdTransaccion);
                     int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                     if (!bus_proyeccion.guardarDB(info))
 
@@ -108,7 +109,17 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                ro_empleado_proyeccion_gastos_Info info = new ro_empleado_proyeccion_gastos_Info();
+                #region Validar Session
+                if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                    return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+                SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+                SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+                #endregion
+                ro_empleado_proyeccion_gastos_Info info = new ro_empleado_proyeccion_gastos_Info
+                {
+                    AnioFiscal = DateTime.Now.Year,
+                    IdTransaccion = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
+                };
                 cargar_combo();
                 return View(info);
 
@@ -142,13 +153,23 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        public ActionResult Modificar(decimal IdEmpleado, int Anio = 0)
+        public ActionResult Modificar(decimal IdEmpleado=0, int IdTransaccion = 0)
         {
             try
             {
+                #region Validar Session
+                if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                    return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+                SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+                SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+                #endregion
+                
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-
-                return View(bus_proyeccion.get_info(IdEmpresa, IdEmpleado, Anio));
+                ro_empleado_proyeccion_gastos_Info model = bus_proyeccion.get_info(IdEmpresa, IdEmpleado, IdTransaccion);
+               model.list_proyeciones= bus_det.get_list(IdEmpresa, model.IdTransaccion);
+                ro_empleado_proyeccion_gastos_det_Info_lis.set_list(model.list_proyeciones, Convert.ToDecimal(model.IdTransaccionSession));
+                model.IdTransaccion = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+                return View(model);
 
             }
             catch (Exception)
@@ -175,14 +196,23 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        public ActionResult Anular(decimal IdEmpleado, int Anio = 0)
+        public ActionResult Anular(decimal IdEmpleado=0, int IdTransaccion = 0)
         {
             try
             {
+                #region Validar Session
+                if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                    return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+                SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+                SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+                #endregion
+
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-
-                return View(bus_proyeccion.get_info(IdEmpresa, IdEmpleado, Anio));
-
+                ro_empleado_proyeccion_gastos_Info model = bus_proyeccion.get_info(IdEmpresa, IdEmpleado, IdTransaccion);
+                model.list_proyeciones = bus_det.get_list(IdEmpresa, model.IdTransaccion);
+                ro_empleado_proyeccion_gastos_det_Info_lis.set_list(model.list_proyeciones, Convert.ToDecimal(model.IdTransaccionSession));
+                model.IdTransaccion = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+                return View(model);
             }
             catch (Exception)
             {
@@ -214,10 +244,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_proyeccion_gastos_det_Info info_det)
         {
-            if (ModelState.IsValid)
-                ro_empleado_proyeccion_gastos_det_Info_lis.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ro_empleado_proyeccion_gastos_Info model = new ro_empleado_proyeccion_gastos_Info();
-            model.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            if (ModelState.IsValid)
+            {
+                var lista_tmp = ro_empleado_proyeccion_gastos_det_Info_lis.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                if(lista_tmp.Where(v=>v.IdTipoGasto==info_det.IdTipoGasto).Count()==0)
+                ro_empleado_proyeccion_gastos_det_Info_lis.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                model.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            }
             cargar_combo();
             return PartialView("_GridViewPartial_proyeccion_gastos_det", model);
         }

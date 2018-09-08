@@ -31,7 +31,7 @@
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
         //Funcion para inicializar fila al presionar nuevo
 
-   
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdTipoGasto";
@@ -41,13 +41,14 @@
             {
                 p.Columns.Add("IdTipoGasto", "Código").Width = Unit.Percentage(20);
                 p.Columns.Add("nom_tipo_gasto", "Descripción").Width = Unit.Percentage(70);
-              
+                p.ValueField = "IdTipoGasto";
+
                 p.ValueType = typeof(string);
                 p.DataSource = ViewBag.list_tipo_gasto;
                 p.Width = Unit.Percentage(100);
             });
         });
-       
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "Valor";
