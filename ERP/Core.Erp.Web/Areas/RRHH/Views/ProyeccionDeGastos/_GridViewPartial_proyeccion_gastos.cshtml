@@ -47,19 +47,28 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
+        settings.HtmlRowPrepared = (s, e) =>
+        {
+            if (Convert.ToBoolean(e.GetValue("estado")) == false)
+            {
+                e.Row.ForeColor = System.Drawing.Color.Red;
+            }
+        };
+    
 
         settings.Columns.Add(c =>
         {
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-
-                ViewContext.Writer.Write(
-            Html.ActionLink("Modificar", "Modificar", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), IdTransaccion = DataBinder.Eval(tc.DataItem, "IdTransaccion") }) + "&nbsp;" +
-                    Html.ActionLink("Anular", "Anular", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), IdTransaccion = DataBinder.Eval(tc.DataItem, "IdTransaccion") },
-                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                );
-
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true)
+                {
+                    ViewContext.Writer.Write(
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), IdNovedad = DataBinder.Eval(tc.DataItem, "IdTransaccion") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), IdNovedad = DataBinder.Eval(tc.DataItem, "IdTransaccion") },
+                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
+                    );
+                }
             });
             c.SetHeaderTemplateContent(tc =>
             {
@@ -69,10 +78,10 @@
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = Unit.Pixel(150);
+            c.Width = Unit.Pixel(120);
         });
 
-        settings.Columns.Add("IdEmpleado", "ID").Width = Unit.Percentage(20);
+        settings.Columns.Add("IdTransaccion", "ID").Width = Unit.Percentage(20);
         settings.Columns.Add("AnioFiscal","Año").Width = Unit.Percentage(5);
         settings.Columns.Add("pe_cedulaRuc", "Cédula").Width = Unit.Percentage(20);
         settings.Columns.Add("pe_nombreCompleto", "Empleado").Width = Unit.Percentage(20);
