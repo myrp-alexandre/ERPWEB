@@ -159,7 +159,13 @@ namespace Core.Erp.Info.Helps
 
         public decimal IdProforma { get; set; }
         public bool formato_hoja_membretada { get; set; }
-        
+
+        public int IdMarca { get; set; }
+        public string IdCategoria { get; set; }
+        public int IdLinea { get; set; }
+        public int IdGrupo { get; set; }
+        public int IdSubGrupo { get; set; }
+
         public cl_filtros_facturacion_Info()
         {
             fecha_ini = DateTime.Now.Date.AddMonths(-1);
