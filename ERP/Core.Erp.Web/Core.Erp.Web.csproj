@@ -9094,6 +9094,7 @@
     <Content Include="Areas\RRHH\Views\ProyeccionDeGastos\Nuevo.cshtml" />
     <Content Include="Areas\RRHH\Views\ProyeccionDeGastos\_GridViewPartial_proyeccion_gastos_det.cshtml" />
     <Content Include="Areas\RRHH\Views\ProyeccionDeGastos\_CmbEmpleado_proyeccion.cshtml" />
+    <Content Include="Areas\RRHH\Views\EmpleadoNovedad\_CmbEmpleado_novedades.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
