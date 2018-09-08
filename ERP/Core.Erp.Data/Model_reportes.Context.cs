@@ -12,10 +12,10 @@ namespace Core.Erp.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using System.Linq;
-
-
+    
     public partial class Entities_reportes : DbContext
     {
         public Entities_reportes()
@@ -710,6 +710,47 @@ namespace Core.Erp.Data
                 new ObjectParameter("MostrarContactos", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPFAC_005_Result>("SPFAC_005", idEmpresaParameter, idSucursal_iniParameter, idSucursal_finParameter, idCliente_iniParameter, idCliente_finParameter, fecha_iniParameter, fecha_finParameter, mostrarSaldo0Parameter, mostrarContactosParameter);
+        }
+    
+        public virtual ObjectResult<SPFAC_010_Result> SPFAC_010(Nullable<int> idEmpresa, Nullable<decimal> idProducto_ini, Nullable<decimal> idProducto_fin, string idCategoria, Nullable<int> idLinea, Nullable<int> idGrupo, Nullable<int> idSubGrupo, Nullable<int> idMarcaIni, Nullable<int> idMarcaFin)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idProducto_iniParameter = idProducto_ini.HasValue ?
+                new ObjectParameter("IdProducto_ini", idProducto_ini) :
+                new ObjectParameter("IdProducto_ini", typeof(decimal));
+    
+            var idProducto_finParameter = idProducto_fin.HasValue ?
+                new ObjectParameter("IdProducto_fin", idProducto_fin) :
+                new ObjectParameter("IdProducto_fin", typeof(decimal));
+    
+            var idCategoriaParameter = idCategoria != null ?
+                new ObjectParameter("IdCategoria", idCategoria) :
+                new ObjectParameter("IdCategoria", typeof(string));
+    
+            var idLineaParameter = idLinea.HasValue ?
+                new ObjectParameter("IdLinea", idLinea) :
+                new ObjectParameter("IdLinea", typeof(int));
+    
+            var idGrupoParameter = idGrupo.HasValue ?
+                new ObjectParameter("IdGrupo", idGrupo) :
+                new ObjectParameter("IdGrupo", typeof(int));
+    
+            var idSubGrupoParameter = idSubGrupo.HasValue ?
+                new ObjectParameter("IdSubGrupo", idSubGrupo) :
+                new ObjectParameter("IdSubGrupo", typeof(int));
+    
+            var idMarcaIniParameter = idMarcaIni.HasValue ?
+                new ObjectParameter("IdMarcaIni", idMarcaIni) :
+                new ObjectParameter("IdMarcaIni", typeof(int));
+    
+            var idMarcaFinParameter = idMarcaFin.HasValue ?
+                new ObjectParameter("IdMarcaFin", idMarcaFin) :
+                new ObjectParameter("IdMarcaFin", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPFAC_010_Result>("SPFAC_010", idEmpresaParameter, idProducto_iniParameter, idProducto_finParameter, idCategoriaParameter, idLineaParameter, idGrupoParameter, idSubGrupoParameter, idMarcaIniParameter, idMarcaFinParameter);
         }
     }
 }
