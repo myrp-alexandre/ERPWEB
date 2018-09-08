@@ -64,6 +64,108 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         #endregion
 
+        #region Json
+
+        public JsonResult cargar_lineas(int IdEmpresa = 0, string IdCategoria = "")
+        {
+            in_linea_Bus bus_linea = new in_linea_Bus();
+            var resultado = bus_linea.get_list(IdEmpresa, IdCategoria, false);
+            resultado.Add(new in_linea_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdCategoria = IdCategoria,
+                IdLinea = 0,
+                nom_linea = "Todos"
+            });
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult cargar_grupos(int IdEmpresa = 0, string IdCategoria = "", int IdLinea = 0)
+        {
+            in_grupo_Bus bus_grupo = new in_grupo_Bus();
+            var resultado = bus_grupo.get_list(IdEmpresa, IdCategoria, IdLinea, false);
+            resultado.Add(new in_grupo_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdCategoria = IdCategoria,
+                IdLinea = IdLinea,
+                IdGrupo = 0,
+                nom_grupo = "Todos"
+            });
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult cargar_subgrupos(int IdEmpresa = 0, string IdCategoria = "", int IdLinea = 0, int IdGrupo = 0)
+        {
+            in_subgrupo_Bus bus_subgrupo = new in_subgrupo_Bus();
+            var resultado = bus_subgrupo.get_list(IdEmpresa, IdCategoria, IdLinea, IdGrupo, false);
+            resultado.Add(new in_subgrupo_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdCategoria = IdCategoria,
+                IdLinea = IdLinea,
+                IdGrupo = IdGrupo,
+                IdSubgrupo = 0,
+                nom_subgrupo = "Todos"
+            });
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+        private void cargar_FAC010(cl_filtros_facturacion_Info model)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            in_Producto_Bus bus_producto = new in_Producto_Bus();
+            var lst_producto = bus_producto.get_list(IdEmpresa, false);
+            ViewBag.lst_producto = lst_producto;
+
+            in_categorias_Bus bus_categoria = new in_categorias_Bus();
+            var lst_categoria = bus_categoria.get_list(IdEmpresa, false);
+            lst_categoria.Add(new in_categorias_Info
+            {
+                IdEmpresa = model.IdEmpresa,
+                IdCategoria = "",
+                ca_Categoria = "Todos"
+            });
+            ViewBag.lst_categoria = lst_categoria;
+
+            in_linea_Bus bus_linea = new in_linea_Bus();
+            var lst_linea = bus_linea.get_list(IdEmpresa, model.IdCategoria, false);
+            lst_linea.Add(new in_linea_Info
+            {
+                IdEmpresa = model.IdEmpresa,
+                IdLinea = 0,
+                nom_linea = "Todos"
+            });
+            ViewBag.lst_linea = lst_linea;
+
+            in_grupo_Bus bus_grupo = new in_grupo_Bus();
+            var lst_grupo = bus_grupo.get_list(IdEmpresa, model.IdCategoria, model.IdLinea, false);
+            lst_grupo.Add(new in_grupo_Info
+            {
+                IdEmpresa = model.IdEmpresa,
+                IdGrupo = 0,
+                nom_grupo = "Todos"
+            });
+            ViewBag.lst_grupo = lst_grupo;
+
+            in_subgrupo_Bus bus_subgrupo = new in_subgrupo_Bus();
+            var lst_subgrupo = bus_subgrupo.get_list(IdEmpresa, model.IdCategoria, model.IdLinea, model.IdGrupo, false);
+            lst_subgrupo.Add(new in_subgrupo_Info
+            {
+                IdEmpresa = model.IdEmpresa,
+                IdSubgrupo = 0,
+                nom_subgrupo = "Todos"
+            });
+            ViewBag.lst_subgrupo = lst_subgrupo;
+
+            in_Marca_Bus bus_marca = new in_Marca_Bus();
+            var lst_marca = bus_marca.get_list(IdEmpresa, false);
+            lst_marca.Add(new Info.Inventario.in_Marca_Info
+            {
+                IdMarca = 0,
+                Descripcion = "Todas"
+            });
+            ViewBag.lst_marca = lst_marca;
+        }
         private void cargar_combos(cl_filtros_facturacion_Info model)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -331,6 +433,50 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+        public ActionResult FAC_010()
+        {
 
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdCategoria = "",
+                IdMarca = 0,
+                IdProducto = 0
+            };
+
+            cargar_FAC010(model);
+            FAC_010_Rpt report = new FAC_010_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdProducto.Value = model.IdProductoPadre == null ? 0 : model.IdProductoPadre;
+            report.p_IdCategoria.Value = model.IdCategoria;
+            report.p_IdLinea.Value = model.IdLinea;
+            report.p_IdGrupo.Value = model.IdGrupo;
+            report.p_IdSubGrupo.Value = model.IdSubGrupo;
+            report.p_IdMarca.Value = model.IdMarca;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+
+            ViewBag.Report = report;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult FAC_010(cl_filtros_facturacion_Info model)
+        {
+            FAC_010_Rpt report = new FAC_010_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdProducto.Value = model.IdProductoPadre == null ? 0 : model.IdProductoPadre;
+            report.p_IdCategoria.Value = model.IdCategoria;
+            report.p_IdLinea.Value = model.IdLinea;
+            report.p_IdGrupo.Value = model.IdGrupo;
+            report.p_IdSubGrupo.Value = model.IdSubGrupo;
+            report.p_IdMarca.Value = model.IdMarca;
+            cargar_FAC010(model);
+
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+
+            ViewBag.Report = report;
+            return View(model);
+        }
     }
 }
