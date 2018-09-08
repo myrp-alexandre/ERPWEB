@@ -1,7 +1,6 @@
 ﻿@model Core.Erp.Info.RRHH.ro_tabla_Impu_Renta_Info
-
 @{
-    ViewBag.Title = "Nueva base impuesto renta";
+    ViewBag.Title = "Anular Proyección";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -9,8 +8,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Nuevo", "BaseImpuestoRenta", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Anular", "BaseImpuestoRenta", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    @Html.HiddenFor(q => q.AnioFiscal)
+    @Html.HiddenFor(q => q.Secuencia)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -67,7 +68,7 @@
         </div>
     </div>
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index","BaseImpuestoRenta",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {

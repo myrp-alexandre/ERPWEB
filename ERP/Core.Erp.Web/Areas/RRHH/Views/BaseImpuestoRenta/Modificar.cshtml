@@ -12,7 +12,17 @@
 {
     @Html.HiddenFor(q => q.AnioFiscal)
     @Html.HiddenFor(q => q.Secuencia)
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="ca_descripcion">Año fiscal*</label>
+                    @Html.TextBoxFor(q => q.AnioFiscal, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.AnioFiscal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">

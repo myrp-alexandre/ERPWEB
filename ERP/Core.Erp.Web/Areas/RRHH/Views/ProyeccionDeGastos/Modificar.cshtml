@@ -1,7 +1,6 @@
 ﻿@model Core.Erp.Info.RRHH.ro_tabla_Impu_Renta_Info
-
 @{
-    ViewBag.Title = "Nueva base impuesto renta";
+    ViewBag.Title = "Modificar proyección";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -9,8 +8,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Nuevo", "BaseImpuestoRenta", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Modificar", "BaseImpuestoRenta", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    @Html.HiddenFor(q => q.AnioFiscal)
+    @Html.HiddenFor(q => q.Secuencia)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">

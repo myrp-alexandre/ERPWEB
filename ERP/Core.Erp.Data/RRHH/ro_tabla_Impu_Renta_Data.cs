@@ -134,6 +134,7 @@ namespace Core.Erp.Data.RRHH
                     Entity.FraccionBasica = info.FraccionBasica;
                     Entity.ImpFraccionBasica = info.ImpFraccionBasica;
                     Entity.Por_ImpFraccion_Exce = info.Por_ImpFraccion_Exce;
+                    Entity.ExcesoHasta = info.ExcesoHasta;
                     Context.SaveChanges();
                 }
 

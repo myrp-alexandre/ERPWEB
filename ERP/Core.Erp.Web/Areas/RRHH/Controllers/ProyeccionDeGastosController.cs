@@ -19,13 +19,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_division()
+        public ActionResult GridViewPartial_proyeccion_gastos_det()
         {
             try
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 List<ro_empleado_x_Proyeccion_Gastos_Personales_Info> model = bus_division.get_list(IdEmpresa);
-                return PartialView("_GridViewPartial_base_impuesto_renta", model);
+                return PartialView("_GridViewPartial_proyeccion_gastos_det", model);
             }
             catch (Exception)
             {

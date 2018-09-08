@@ -9087,6 +9087,13 @@
     <Content Include="Areas\RRHH\Views\BaseImpuestoRenta\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\BaseImpuestoRenta\Modificar.cshtml" />
     <Content Include="Areas\RRHH\Views\BaseImpuestoRenta\Nuevo.cshtml" />
+    <Content Include="Areas\RRHH\Views\ProyeccionDeGastos\_GridViewPartial_proyeccion_gastos.cshtml" />
+    <Content Include="Areas\RRHH\Views\ProyeccionDeGastos\Anular.cshtml" />
+    <Content Include="Areas\RRHH\Views\ProyeccionDeGastos\Index.cshtml" />
+    <Content Include="Areas\RRHH\Views\ProyeccionDeGastos\Modificar.cshtml" />
+    <Content Include="Areas\RRHH\Views\ProyeccionDeGastos\Nuevo.cshtml" />
+    <Content Include="Areas\RRHH\Views\ProyeccionDeGastos\_GridViewPartial_proyeccion_gastos_det.cshtml" />
+    <Content Include="Areas\RRHH\Views\ProyeccionDeGastos\_CmbEmpleado_proyeccion.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -9171,7 +9178,6 @@
     <Folder Include="Areas\RRHH\Views\EmpleadoDocumento\" />
     <Folder Include="Areas\RRHH\Views\EmpleadoHistorialSueldo\" />
     <Folder Include="Areas\RRHH\Views\PeriodosPorNomina\" />
-    <Folder Include="Areas\RRHH\Views\ProyeccionDeGastos\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
     <Folder Include="Content\imagenes\" />
@@ -9202,7 +9208,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

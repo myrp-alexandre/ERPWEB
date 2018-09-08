@@ -1,0 +1,56 @@
+﻿@model Core.Erp.Info.RRHH.ro_empleado_x_Proyeccion_Gastos_Personales_Info
+
+@{
+    ViewBag.Title = "Proyecciones de gastos";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+@using (Html.BeginForm("Nuevo", "ProyeccionDeGastos", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="ca_descripcion">Año fiscal*</label>
+                    @Html.TextBoxFor(q => q.AnioFiscal, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.AnioFiscal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdProveedor">Empleado</label>
+                    @Html.Partial("_CmbEmpleado_proyeccion", Model.IdEmpleado)
+                    @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdProveedor">Detalle de gastos de deducibles</label>
+                    @Html.Action("GridViewPartial_proyeccion_gastos_det", new { IdEmpleado = Model.IdEmpleado, AnioFiscal = Model.AnioFiscal })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","ProyeccionDeGastos",new { Area = "RRHH" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

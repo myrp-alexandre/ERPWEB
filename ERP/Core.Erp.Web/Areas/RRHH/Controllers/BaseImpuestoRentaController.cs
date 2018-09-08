@@ -20,7 +20,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_division()
+        public ActionResult GridViewPartial_base_impuesto_renta()
         {
             try
             {
@@ -126,12 +126,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        public ActionResult Anular(int AnioFiscal, int IdDivision = 0)
+        public ActionResult Anular(int AnioFiscal, int Secuencia = 0)
         {
             try
             {
 
-                return View(bus_division.get_info(AnioFiscal, IdDivision));
+                return View(bus_division.get_info(AnioFiscal, Secuencia));
 
             }
             catch (Exception)
