@@ -1,10 +1,10 @@
 @using System.Web.UI.WebControls;
-@model Core.Erp.Info.RRHH.ro_empleado_proyeccion_gastos_det_Info
+@model Core.Erp.Info.RRHH.ro_empleado_proyeccion_gastos_Info
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridViewPartial_proyeccion_gastos_det";
-        settings.CallbackRouteValues = new { Controller = "ProyeccionDeGastos", Action = "GridViewPartial_proyeccion_gastos_det", IdEmpleado = Model == null ? 0 : Model.IdEmpleado, IdNovedad = Model == null ? 0 : Model.IdNovedad };
+        settings.CallbackRouteValues = new { Controller = "ProyeccionDeGastos", Action = "GridViewPartial_proyeccion_gastos_det", IdEmpresa = Model == null ? 0 : Model.IdEmpresa, IdTransaccion = Model == null ? 0 : Model.IdTransaccion };
         settings.KeyFieldName = "Secuencia";
         settings.Width = Unit.Percentage(100);
 
@@ -75,4 +75,4 @@
     });
 
 }
-@grid.Bind(Model.lst_novedad_det).GetHtml()
+@grid.Bind(Model.list_proyeciones).GetHtml()

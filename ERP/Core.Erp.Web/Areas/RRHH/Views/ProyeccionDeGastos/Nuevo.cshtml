@@ -39,7 +39,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdProveedor">Detalle de gastos de deducibles</label>
-                    @Html.Action("GridViewPartial_proyeccion_gastos_det", new { IdEmpleado = Model.IdEmpleado, AnioFiscal = Model.AnioFiscal })
+                    @Html.Action("GridViewPartial_proyeccion_gastos_det", new { IdEmpresa = Model.IdEmpresa, IdTransaccion = Model.IdTransaccion })
                 </div>
             </div>
         </div>

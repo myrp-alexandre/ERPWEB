@@ -44,7 +44,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 cargar_combo();
-                List<ro_empleado_proyeccion_gastos_det_Info> model = bus_det.get_list(IdEmpresa, IdTransaccion);
+                ro_empleado_proyeccion_gastos_Info model = new ro_empleado_proyeccion_gastos_Info();
+                List<ro_empleado_proyeccion_gastos_det_Info> lst_det = bus_det.get_list(IdEmpresa, IdTransaccion);
+                model.list_proyeciones = lst_det;
                 return PartialView("_GridViewPartial_proyeccion_gastos_det", model);
             }
             catch (Exception)
