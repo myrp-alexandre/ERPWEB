@@ -318,9 +318,10 @@
     <Compile Include="RRHH\ro_empleado_historial_Sueldo_Bus.cs" />
     <Compile Include="RRHH\ro_empleado_novedad_Bus.cs" />
     <Compile Include="RRHH\ro_empleado_novedad_det_Bus.cs" />
+    <Compile Include="RRHH\ro_empleado_proyeccion_gastos_det_Bus.cs" />
     <Compile Include="RRHH\ro_empleado_x_centro_costo_Bus.cs" />
     <Compile Include="RRHH\ro_empleado_x_horario_Bus.cs" />
-    <Compile Include="RRHH\ro_empleado_x_Proyeccion_Gastos_Personales_Bus.cs" />
+    <Compile Include="RRHH\ro_empleado_proyeccion_gastos_Bus.cs" />
     <Compile Include="RRHH\ro_empleado_x_ro_rubro_Bus.cs" />
     <Compile Include="RRHH\ro_empleado_x_ro_tipoNomina_Bus.cs" />
     <Compile Include="RRHH\ro_empleado_x_rubro_acumulado_Bus.cs" />

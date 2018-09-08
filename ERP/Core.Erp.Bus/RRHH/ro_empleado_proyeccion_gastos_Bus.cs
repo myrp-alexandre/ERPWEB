@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 namespace Core.Erp.Bus.RRHH
 {
-    public  class ro_empleado_x_Proyeccion_Gastos_Personales_Bus
+    public  class ro_empleado_proyeccion_gastos_Bus
     {
-        ro_empleado_x_Proyeccion_Gastos_Personales_Data odata = new ro_empleado_x_Proyeccion_Gastos_Personales_Data();
-        public List<ro_empleado_x_Proyeccion_Gastos_Personales_Info> get_list(int IdEmpresa)
+        ro_empleado_proyeccion_gastos_Data odata = new ro_empleado_proyeccion_gastos_Data();
+        public List<ro_empleado_proyeccion_gastos_Info> get_list(int IdEmpresa)
         {
             try
             {
@@ -19,7 +19,7 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
-        public ro_empleado_x_Proyeccion_Gastos_Personales_Info get_info(int IdEmpresa, decimal IdEmpleado, int Anio)
+        public ro_empleado_proyeccion_gastos_Info get_info(int IdEmpresa, decimal IdEmpleado, int Anio)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
-        public bool guardarDB(ro_empleado_x_Proyeccion_Gastos_Personales_Info info)
+        public bool guardarDB(ro_empleado_proyeccion_gastos_Info info)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
-        public bool anularDB(ro_empleado_x_Proyeccion_Gastos_Personales_Info info)
+        public bool anularDB(ro_empleado_proyeccion_gastos_Info info)
         {
             try
             {

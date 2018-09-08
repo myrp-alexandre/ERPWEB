@@ -11,20 +11,37 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class ProyeccionDeGastosController : Controller
     {
-        ro_empleado_x_Proyeccion_Gastos_Personales_Bus bus_division = new ro_empleado_x_Proyeccion_Gastos_Personales_Bus();
-        // GET: RRHH/Division
+        #region variable
+        ro_empleado_proyeccion_gastos_Bus bus_division = new ro_empleado_proyeccion_gastos_Bus();
+        #endregion
+
+        #region vistas
         public ActionResult Index()
         {
             return View();
         }
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_proyeccion_gastos()
+        {
+            try
+            {
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                List<ro_empleado_proyeccion_gastos_Info> model = bus_division.get_list(IdEmpresa);
+                return PartialView("_GridViewPartial_proyeccion_gastos", model);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
         [ValidateInput(false)]
         public ActionResult GridViewPartial_proyeccion_gastos_det()
         {
             try
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-                List<ro_empleado_x_Proyeccion_Gastos_Personales_Info> model = bus_division.get_list(IdEmpresa);
+                List<ro_empleado_proyeccion_gastos_Info> model = bus_division.get_list(IdEmpresa);
                 return PartialView("_GridViewPartial_proyeccion_gastos_det", model);
             }
             catch (Exception)
@@ -34,8 +51,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
         }
 
+        #endregion
+
+        #region acciones
         [HttpPost]
-        public ActionResult Nuevo(ro_empleado_x_Proyeccion_Gastos_Personales_Info info)
+        public ActionResult Nuevo(ro_empleado_proyeccion_gastos_Info info)
         {
             try
             {
@@ -61,7 +81,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                ro_empleado_x_Proyeccion_Gastos_Personales_Info info = new ro_empleado_x_Proyeccion_Gastos_Personales_Info();
+                ro_empleado_proyeccion_gastos_Info info = new ro_empleado_proyeccion_gastos_Info();
                 return View(info);
 
             }
@@ -73,7 +93,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [HttpPost]
-        public ActionResult Modificar(ro_empleado_x_Proyeccion_Gastos_Personales_Info info)
+        public ActionResult Modificar(ro_empleado_proyeccion_gastos_Info info)
         {
             try
             {
@@ -111,7 +131,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [HttpPost]
-        public ActionResult Anular(ro_empleado_x_Proyeccion_Gastos_Personales_Info info)
+        public ActionResult Anular(ro_empleado_proyeccion_gastos_Info info)
         {
             try
             {
@@ -133,7 +153,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
-                return View(bus_division.get_info(IdEmpresa,IdEmpleado, Anio));
+                return View(bus_division.get_info(IdEmpresa, IdEmpleado, Anio));
 
             }
             catch (Exception)
@@ -142,5 +162,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
+        #endregion
     }
 }

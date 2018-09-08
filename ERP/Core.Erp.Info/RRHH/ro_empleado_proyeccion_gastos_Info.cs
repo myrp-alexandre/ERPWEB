@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.RRHH
 {
-   public class ro_empleado_x_Proyeccion_Gastos_Personales_Info
+   public class ro_empleado_proyeccion_gastos_Info
     {
         public int IdEmpresa { get; set; }
         public decimal IdEmpleado { get; set; }
@@ -17,5 +17,10 @@ namespace Core.Erp.Info.RRHH
         public string UsuarioIngresa { get; set; }
         public Nullable<System.DateTime> FechaModifica { get; set; }
         public string UsuarioModifica { get; set; }
+
+        public string pe_cedulaRuc { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public List<ro_empleado_proyeccion_gastos_Info> list_detalle { get; set; }
+
     }
 }

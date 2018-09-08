@@ -26,7 +26,6 @@
         <EntityTypeShape EntityType="Model_rrhh.ro_empleado_novedad_det" Width="1.5" PointX="22.5" PointY="56.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.ro_empleado_x_centro_costo" Width="1.5" PointX="11.25" PointY="86.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.ro_empleado_x_horario" Width="1.5" PointX="20.25" PointY="49" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_empleado_x_Proyeccion_Gastos_Personales" Width="1.5" PointX="11.25" PointY="90.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.ro_empleado_x_ro_rubro" Width="1.5" PointX="14.25" PointY="67.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.ro_empleado_x_ro_tipoNomina" Width="1.5" PointX="11.25" PointY="57.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.ro_empleado_x_rubro_acumulado" Width="1.5" PointX="17.25" PointY="58.125" IsExpanded="true" />
@@ -105,7 +104,6 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_empleado" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_centro_costo_ro_empleado" ManuallyRouted="false" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_empleado" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_empleado" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_ro_tipoNomina_ro_empleado" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_rubro_acumulado" ManuallyRouted="false" />
@@ -158,6 +156,11 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo5" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_rol" Width="1.5" PointX="9.375" PointY="17.75" />
         <EntityTypeShape EntityType="Model_rrhh.ro_tabla_Impu_Renta" Width="1.5" PointX="17.375" PointY="11.75" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_empleado_proyeccion_gastos" Width="1.5" PointX="11.25" PointY="31.75" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_empleado_proyeccion_gastos_det" Width="1.5" PointX="13.5" PointY="32.5" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_x_Proyeccion_Gastos_Personales" Width="1.5" PointX="17.375" PointY="14.75" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_proyeccion_gastos_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_proyeccion_gastos_det_ro_empleado_proyeccion_gastos" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

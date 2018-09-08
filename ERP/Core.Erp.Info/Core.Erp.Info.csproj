@@ -347,9 +347,10 @@
     <Compile Include="RRHH\ro_empleado_Info.cs" />
     <Compile Include="RRHH\ro_empleado_novedad_det_Info.cs" />
     <Compile Include="RRHH\ro_empleado_novedad_Info.cs" />
+    <Compile Include="RRHH\ro_empleado_proyeccion_gastos_det_Info.cs" />
     <Compile Include="RRHH\ro_empleado_x_centro_costo_Info.cs" />
     <Compile Include="RRHH\ro_empleado_x_horario_Info.cs" />
-    <Compile Include="RRHH\ro_empleado_x_Proyeccion_Gastos_Personales_Info.cs" />
+    <Compile Include="RRHH\ro_empleado_proyeccion_gastos_Info.cs" />
     <Compile Include="RRHH\ro_empleado_x_ro_rubro_Info.cs" />
     <Compile Include="RRHH\ro_empleado_x_ro_tipoNomina_Info.cs" />
     <Compile Include="RRHH\ro_empleado_x_rubro_acumulado_Info.cs" />

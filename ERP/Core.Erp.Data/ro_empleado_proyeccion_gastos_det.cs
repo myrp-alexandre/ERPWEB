@@ -12,18 +12,15 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ro_empleado_x_Proyeccion_Gastos_Personales
+    public partial class ro_empleado_proyeccion_gastos_det
     {
         public int IdEmpresa { get; set; }
-        public decimal IdEmpleado { get; set; }
+        public decimal IdTransaccion { get; set; }
+        public int Secuencia { get; set; }
         public string IdTipoGasto { get; set; }
-        public int AnioFiscal { get; set; }
         public double Valor { get; set; }
-        public System.DateTime FechaIngresa { get; set; }
-        public string UsuarioIngresa { get; set; }
-        public Nullable<System.DateTime> FechaModifica { get; set; }
-        public string UsuarioModifica { get; set; }
+        public string Observacion { get; set; }
     
-        public virtual ro_empleado ro_empleado { get; set; }
+        public virtual ro_empleado_proyeccion_gastos ro_empleado_proyeccion_gastos { get; set; }
     }
 }

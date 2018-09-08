@@ -6,12 +6,9 @@
         settings.CallbackRouteValues = new { Controller = "ProyeccionDeGastos", Action = "GridViewPartial_proyeccion_gastos_personales" };
 
 
-        settings.KeyFieldName = "Secuancia";
+        settings.KeyFieldName = "IdEmpleado";
 
         settings.Width = Unit.Percentage(100);
-
-
-
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
@@ -58,8 +55,8 @@
             {
 
                 ViewContext.Writer.Write(
-            Html.ActionLink("Modificar", "Modificar", new { AnioFiscal = DataBinder.Eval(tc.DataItem, "AnioFiscal"), Secuencia = DataBinder.Eval(tc.DataItem, "Secuencia") }) + "&nbsp;" +
-                    Html.ActionLink("Anular", "Anular", new { AnioFiscal = DataBinder.Eval(tc.DataItem, "AnioFiscal"), Secuencia = DataBinder.Eval(tc.DataItem, "Secuencia") },
+            Html.ActionLink("Modificar", "Modificar", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), AnioFiscal = DataBinder.Eval(tc.DataItem, "AnioFiscal") }) + "&nbsp;" +
+                    Html.ActionLink("Anular", "Anular", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), AnioFiscal = DataBinder.Eval(tc.DataItem, "AnioFiscal") },
                         new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                 );
 
@@ -75,13 +72,12 @@
             c.Width = Unit.Pixel(150);
         });
 
+        settings.Columns.Add("IdEmpleado", "ID").Width = Unit.Percentage(20);
         settings.Columns.Add("AnioFiscal","Año").Width = Unit.Percentage(5);
-        settings.Columns.Add("FraccionBasica", "Fraccion basica").Width = Unit.Percentage(20);
-        settings.Columns.Add("ExcesoHasta", "Exceso hasta").Width = Unit.Percentage(20);
-        settings.Columns.Add("ImpFraccionBasica", "impuesto fraccion basica").Width = Unit.Percentage(20);
-        settings.Columns.Add("Por_ImpFraccion_Exce", "% imp. fraccion exed.").Width = Unit.Percentage(20);
+        settings.Columns.Add("pe_cedulaRuc", "Cédula").Width = Unit.Percentage(20);
+        settings.Columns.Add("pe_nombreCompleato", "Empleado").Width = Unit.Percentage(20);
 
-        
+
     });
 }
 @grid.Bind(Model).GetHtml()

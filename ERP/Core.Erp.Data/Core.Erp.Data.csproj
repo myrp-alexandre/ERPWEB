@@ -1079,13 +1079,16 @@
     <Compile Include="ro_empleado_novedad_det.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="ro_empleado_proyeccion_gastos.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ro_empleado_proyeccion_gastos_det.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="ro_empleado_x_centro_costo.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="ro_empleado_x_horario.cs">
-      <DependentUpon>Model_rrhh.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ro_empleado_x_Proyeccion_Gastos_Personales.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="ro_empleado_x_ro_rubro.cs">
@@ -1206,9 +1209,10 @@
     <Compile Include="RRHH\ro_empleado_historial_Sueldo_Data.cs" />
     <Compile Include="RRHH\ro_empleado_novedad_Data.cs" />
     <Compile Include="RRHH\ro_empleado_novedad_det_Data.cs" />
+    <Compile Include="RRHH\ro_empleado_proyeccion_gastos_det_Data.cs" />
     <Compile Include="RRHH\ro_empleado_x_centro_costo_Data.cs" />
     <Compile Include="RRHH\ro_empleado_x_horario_Data.cs" />
-    <Compile Include="RRHH\ro_empleado_x_Proyeccion_Gastos_Personales_Data.cs" />
+    <Compile Include="RRHH\ro_empleado_proyeccion_gastos_Data.cs" />
     <Compile Include="RRHH\ro_empleado_x_ro_rubro_Data.cs" />
     <Compile Include="RRHH\ro_empleado_x_ro_tipoNomina_Data.cs" />
     <Compile Include="RRHH\ro_empleado_x_rubro_acumulado_Data.cs" />
@@ -1802,6 +1806,9 @@
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="vwro_empleado_Novedad.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwro_empleado_x_Proyeccion_Gastos_Personales.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="vwro_empleado_x_ro_rubro.cs">

@@ -23,7 +23,6 @@ namespace Core.Erp.Data
             this.ro_empleado_historial_Sueldo = new HashSet<ro_empleado_historial_Sueldo>();
             this.ro_empleado_Novedad = new HashSet<ro_empleado_Novedad>();
             this.ro_empleado1 = new HashSet<ro_empleado>();
-            this.ro_empleado_x_Proyeccion_Gastos_Personales = new HashSet<ro_empleado_x_Proyeccion_Gastos_Personales>();
             this.ro_empleado_x_ro_rubro = new HashSet<ro_empleado_x_ro_rubro>();
             this.ro_empleado_x_ro_tipoNomina = new HashSet<ro_empleado_x_ro_tipoNomina>();
             this.ro_empleado_x_rubro_acumulado = new HashSet<ro_empleado_x_rubro_acumulado>();
@@ -37,6 +36,7 @@ namespace Core.Erp.Data
             this.ro_prestamo = new HashSet<ro_prestamo>();
             this.ro_rol_detalle = new HashSet<ro_rol_detalle>();
             this.ro_Solicitud_Vacaciones_x_empleado = new HashSet<ro_Solicitud_Vacaciones_x_empleado>();
+            this.ro_empleado_proyeccion_gastos = new HashSet<ro_empleado_proyeccion_gastos>();
         }
     
         public int IdEmpresa { get; set; }
@@ -133,7 +133,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_empleado> ro_empleado1 { get; set; }
         public virtual ro_empleado ro_empleado2 { get; set; }
         public virtual ro_empleado_x_centro_costo ro_empleado_x_centro_costo { get; set; }
-        public virtual ICollection<ro_empleado_x_Proyeccion_Gastos_Personales> ro_empleado_x_Proyeccion_Gastos_Personales { get; set; }
         public virtual ICollection<ro_empleado_x_ro_rubro> ro_empleado_x_ro_rubro { get; set; }
         public virtual ICollection<ro_empleado_x_ro_tipoNomina> ro_empleado_x_ro_tipoNomina { get; set; }
         public virtual ICollection<ro_empleado_x_rubro_acumulado> ro_empleado_x_rubro_acumulado { get; set; }
@@ -147,5 +146,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_prestamo> ro_prestamo { get; set; }
         public virtual ICollection<ro_rol_detalle> ro_rol_detalle { get; set; }
         public virtual ICollection<ro_Solicitud_Vacaciones_x_empleado> ro_Solicitud_Vacaciones_x_empleado { get; set; }
+        public virtual ICollection<ro_empleado_proyeccion_gastos> ro_empleado_proyeccion_gastos { get; set; }
     }
 }
