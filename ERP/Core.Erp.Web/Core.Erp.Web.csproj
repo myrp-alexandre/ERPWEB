@@ -402,6 +402,7 @@
     <Compile Include="Areas\RRHH\Controllers\PrestamosController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ProcesarRolController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ProyeccionDeGastosController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\RdepController.cs" />
     <Compile Include="Areas\RRHH\Controllers\RubroController.cs" />
     <Compile Include="Areas\RRHH\Controllers\RubrosCalculadosController.cs" />
     <Compile Include="Areas\RRHH\Controllers\TipoPrestamoController.cs" />
@@ -9193,6 +9194,7 @@
     <Folder Include="Areas\RRHH\Views\EmpleadoDocumento\" />
     <Folder Include="Areas\RRHH\Views\EmpleadoHistorialSueldo\" />
     <Folder Include="Areas\RRHH\Views\PeriodosPorNomina\" />
+    <Folder Include="Areas\RRHH\Views\Rdep\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
     <Folder Include="Content\imagenes\" />
@@ -9223,7 +9225,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
