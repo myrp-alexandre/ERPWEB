@@ -382,6 +382,7 @@
     <Compile Include="RRHH\ro_rubro_tipo_Info.cs" />
     <Compile Include="RRHH\ro_Solicitud_Vacaciones_x_empleado_Info.cs" />
     <Compile Include="RRHH\ro_tabla_Impu_Renta_Info.cs" />
+    <Compile Include="RRHH\ro_tipo_gastos_personales_Info.cs" />
     <Compile Include="RRHH\ro_tipo_prestamo_Info.cs" />
     <Compile Include="RRHH\ro_turno_Info.cs" />
     <Compile Include="SeguridadAcceso\seg_Menu_Info.cs" />

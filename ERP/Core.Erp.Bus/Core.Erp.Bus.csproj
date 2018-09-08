@@ -352,6 +352,7 @@
     <Compile Include="RRHH\ro_rubro_tipo_Bus.cs" />
     <Compile Include="RRHH\ro_Solicitud_Vacaciones_x_empleado_Bus.cs" />
     <Compile Include="RRHH\ro_tabla_Impu_Renta_Bus.cs" />
+    <Compile Include="RRHH\ro_tipo_gastos_personales_Bus.cs" />
     <Compile Include="RRHH\ro_tipo_prestamo_Bus.cs" />
     <Compile Include="RRHH\ro_turno_Bus.cs" />
     <Compile Include="SeguridadAcceso\seg_Menu_Bus.cs" />

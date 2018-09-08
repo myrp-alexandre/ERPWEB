@@ -1180,6 +1180,15 @@
           <Property Name="ImpFraccionBasica" Type="float" />
           <Property Name="Por_ImpFraccion_Exce" Type="float" />
         </EntityType>
+        <EntityType Name="ro_tipo_gastos_personales">
+          <Key>
+            <PropertyRef Name="IdTipoGasto" />
+          </Key>
+          <Property Name="IdTipoGasto" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="nom_tipo_gasto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="orden" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ro_Tipo_Prestamo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2478,6 +2487,18 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_rol_detalle_g
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales">
+          <End Role="ro_tipo_gastos_personales" Type="Self.ro_tipo_gastos_personales" Multiplicity="1" />
+          <End Role="ro_empleado_proyeccion_gastos_det" Type="Self.ro_empleado_proyeccion_gastos_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_tipo_gastos_personales">
+              <PropertyRef Name="IdTipoGasto" />
+            </Principal>
+            <Dependent Role="ro_empleado_proyeccion_gastos_det">
+              <PropertyRef Name="IdTipoGasto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ro_empleado_x_ro_rubro_ro_empleado">
           <End Role="ro_empleado" Type="Self.ro_empleado" Multiplicity="1" />
           <End Role="ro_empleado_x_ro_rubro" Type="Self.ro_empleado_x_ro_rubro" Multiplicity="*" />
@@ -3280,6 +3301,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_rol_detalle_g
           <EntitySet Name="ro_rubros_calculados" EntityType="Self.ro_rubros_calculados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_Solicitud_Vacaciones_x_empleado" EntityType="Self.ro_Solicitud_Vacaciones_x_empleado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_tabla_Impu_Renta" EntityType="Self.ro_tabla_Impu_Renta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ro_tipo_gastos_personales" EntityType="Self.ro_tipo_gastos_personales" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_Tipo_Prestamo" EntityType="Self.ro_Tipo_Prestamo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_turno" EntityType="Self.ro_turno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vwRo_ActaFiniquito" EntityType="Self.vwRo_ActaFiniquito" store:Type="Views" store:Schema="dbo">
@@ -3909,6 +3931,10 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <AssociationSet Name="FK_ro_empleado_x_horario_ro_horario" Association="Self.FK_ro_empleado_x_horario_ro_horario">
             <End Role="ro_horario" EntitySet="ro_horario" />
             <End Role="ro_empleado_x_horario" EntitySet="ro_empleado_x_horario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales" Association="Self.FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales">
+            <End Role="ro_tipo_gastos_personales" EntitySet="ro_tipo_gastos_personales" />
+            <End Role="ro_empleado_proyeccion_gastos_det" EntitySet="ro_empleado_proyeccion_gastos_det" />
           </AssociationSet>
           <AssociationSet Name="FK_ro_empleado_x_ro_rubro_ro_empleado" Association="Self.FK_ro_empleado_x_ro_rubro_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
@@ -7723,6 +7749,11 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             <End Role="ro_empleado_proyeccion_gastos" EntitySet="ro_empleado_proyeccion_gastos" />
             <End Role="ro_empleado_proyeccion_gastos_det" EntitySet="ro_empleado_proyeccion_gastos_det" />
           </AssociationSet>
+          <EntitySet Name="ro_tipo_gastos_personales" EntityType="Model_rrhh.ro_tipo_gastos_personales" />
+          <AssociationSet Name="FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales" Association="Model_rrhh.FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales">
+            <End Role="ro_tipo_gastos_personales" EntitySet="ro_tipo_gastos_personales" />
+            <End Role="ro_empleado_proyeccion_gastos_det" EntitySet="ro_empleado_proyeccion_gastos_det" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -7811,6 +7842,7 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <Property Name="Valor" Type="Double" Nullable="false" />
           <Property Name="Observacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ro_empleado_proyeccion_gastos" Relationship="Model_rrhh.FK_ro_empleado_proyeccion_gastos_det_ro_empleado_proyeccion_gastos" FromRole="ro_empleado_proyeccion_gastos_det" ToRole="ro_empleado_proyeccion_gastos" />
+          <NavigationProperty Name="ro_tipo_gastos_personales" Relationship="Model_rrhh.FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales" FromRole="ro_empleado_proyeccion_gastos_det" ToRole="ro_tipo_gastos_personales" />
         </EntityType>
         <EntityType Name="vwro_empleado_x_Proyeccion_Gastos_Personales">
           <Key>
@@ -7851,6 +7883,28 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             <Dependent Role="ro_empleado_proyeccion_gastos_det">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdTransaccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ro_tipo_gastos_personales">
+          <Key>
+            <PropertyRef Name="IdTipoGasto" />
+          </Key>
+          <Property Name="IdTipoGasto" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="nom_tipo_gasto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="orden" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ro_empleado_proyeccion_gastos_det" Relationship="Model_rrhh.FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales" FromRole="ro_tipo_gastos_personales" ToRole="ro_empleado_proyeccion_gastos_det" />
+        </EntityType>
+        <Association Name="FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales">
+          <End Type="Model_rrhh.ro_tipo_gastos_personales" Role="ro_tipo_gastos_personales" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_empleado_proyeccion_gastos_det" Role="ro_empleado_proyeccion_gastos_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_tipo_gastos_personales">
+              <PropertyRef Name="IdTipoGasto" />
+            </Principal>
+            <Dependent Role="ro_empleado_proyeccion_gastos_det">
+              <PropertyRef Name="IdTipoGasto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9597,6 +9651,16 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
                 <ScalarProperty Name="AnioFiscal" ColumnName="AnioFiscal" />
                 <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_tipo_gastos_personales">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_tipo_gastos_personales">
+              <MappingFragment StoreEntitySet="ro_tipo_gastos_personales">
+                <ScalarProperty Name="orden" ColumnName="orden" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="nom_tipo_gasto" ColumnName="nom_tipo_gasto" />
+                <ScalarProperty Name="IdTipoGasto" ColumnName="IdTipoGasto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

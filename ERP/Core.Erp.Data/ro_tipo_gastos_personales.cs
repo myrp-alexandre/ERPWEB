@@ -12,16 +12,18 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ro_empleado_proyeccion_gastos_det
+    public partial class ro_tipo_gastos_personales
     {
-        public int IdEmpresa { get; set; }
-        public decimal IdTransaccion { get; set; }
-        public int Secuencia { get; set; }
-        public string IdTipoGasto { get; set; }
-        public double Valor { get; set; }
-        public string Observacion { get; set; }
+        public ro_tipo_gastos_personales()
+        {
+            this.ro_empleado_proyeccion_gastos_det = new HashSet<ro_empleado_proyeccion_gastos_det>();
+        }
     
-        public virtual ro_empleado_proyeccion_gastos ro_empleado_proyeccion_gastos { get; set; }
-        public virtual ro_tipo_gastos_personales ro_tipo_gastos_personales { get; set; }
+        public string IdTipoGasto { get; set; }
+        public string nom_tipo_gasto { get; set; }
+        public string estado { get; set; }
+        public int orden { get; set; }
+    
+        public virtual ICollection<ro_empleado_proyeccion_gastos_det> ro_empleado_proyeccion_gastos_det { get; set; }
     }
 }

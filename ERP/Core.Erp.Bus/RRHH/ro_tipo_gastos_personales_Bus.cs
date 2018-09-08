@@ -8,14 +8,16 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.RRHH
 {
-  public  class ro_empleado_proyeccion_gastos_det_Bus
+  public  class ro_tipo_gastos_personales_Bus
     {
-        ro_empleado_proyeccion_gastos_det_Data odata = new ro_empleado_proyeccion_gastos_det_Data();
-        public List<ro_empleado_proyeccion_gastos_det_Info> get_list(int IdEmpresa, decimal IdTransaccion)
+        ro_tipo_gastos_personales_Data odata = new ro_tipo_gastos_personales_Data();
+
+        public List<ro_tipo_gastos_personales_Info> get_list()
         {
+
             try
             {
-                return odata.get_list(IdEmpresa, IdTransaccion);
+                return odata.get_list();
             }
             catch (Exception)
             {
@@ -24,4 +26,4 @@ namespace Core.Erp.Bus.RRHH
             }
         }
     }
-}
+    }

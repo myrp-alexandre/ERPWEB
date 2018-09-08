@@ -1,11 +1,11 @@
 @using System.Web.UI.WebControls;
-@model Core.Erp.Info.RRHH.ro_empleado_novedad_Info
+@model Core.Erp.Info.RRHH.ro_empleado_proyeccion_gastos_det_Info
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridViewPartial_empleado_novedad_det";
-        settings.CallbackRouteValues = new { Controller = "EmpleadoNovedad", Action = "GridViewPartial_empleado_novedad_det", IdEmpleado = Model == null ? 0 : Model.IdEmpleado, IdNovedad = Model == null ? 0 : Model.IdNovedad };
-        settings.KeyFieldName = "IdNovedad";
+        settings.Name = "GridViewPartial_proyeccion_gastos_det";
+        settings.CallbackRouteValues = new { Controller = "ProyeccionDeGastos", Action = "GridViewPartial_proyeccion_gastos_det", IdEmpleado = Model == null ? 0 : Model.IdEmpleado, IdNovedad = Model == null ? 0 : Model.IdNovedad };
+        settings.KeyFieldName = "Secuencia";
         settings.Width = Unit.Percentage(100);
 
 
@@ -31,47 +31,23 @@
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
         //Funcion para inicializar fila al presionar nuevo
 
-        //settings.Columns.Add(column =>
-        //{
-        //    column.FieldName = "Secuencia";
-        //    column.Caption = "Nº";
-        //    column.Width = Unit.Percentage(5);
-        //    column.Visible = true;
-        //    column.ReadOnly = true;
-        //    column.EditorProperties().TextBox(sp =>
-        //    {
-
-        //    });
-        //});
-
+   
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdRubro";
-            column.Caption = "Rubro";
+            column.FieldName = "IdTipoGasto";
+            column.Caption = "Tipo gasto";
             column.Width = Unit.Percentage(35);
             column.EditorProperties().ComboBox(p =>
             {
-                p.Columns.Add("IdRubro", "Código").Width = Unit.Percentage(20);
-                p.Columns.Add("ru_descripcion", "Descripción").Width = Unit.Percentage(70);
-                p.Columns.Add("ru_tipo", "Tipo").Width = Unit.Percentage(10);
-                p.ValueField = "IdRubro";
+                p.Columns.Add("IdTipoGasto", "Código").Width = Unit.Percentage(20);
+                p.Columns.Add("nom_tipo_gasto", "Descripción").Width = Unit.Percentage(70);
+              
                 p.ValueType = typeof(string);
-                p.DataSource = ViewBag.lst_rubro;
+                p.DataSource = ViewBag.list_tipo_gasto;
                 p.Width = Unit.Percentage(100);
             });
         });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "FechaPago";
-            column.Caption = "Fecha pago";
-            column.Width = Unit.Percentage(15);
-            column.PropertiesEdit.DisplayFormatString = "d";
-            column.EditorProperties().DateEdit(sp =>
-            {
-                column.PropertiesEdit.DisplayFormatString = "d";
-                sp.Width = Unit.Percentage(100);
-            });
-        });
+       
         settings.Columns.Add(column =>
         {
             column.FieldName = "Valor";

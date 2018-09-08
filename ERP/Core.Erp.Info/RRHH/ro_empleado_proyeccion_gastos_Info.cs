@@ -22,5 +22,8 @@ namespace Core.Erp.Info.RRHH
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotiAnula { get; set; }
 
+
+        public List<ro_empleado_proyeccion_gastos_det_Info> list_proyeciones { get; set; }
+
     }
 }
