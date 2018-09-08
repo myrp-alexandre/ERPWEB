@@ -1,6 +1,10 @@
-﻿using Core.Erp.Bus.RRHH;
+﻿using Core.Erp.Bus.General;
+using Core.Erp.Bus.RRHH;
+using Core.Erp.Info.General;
+using Core.Erp.Info.Helps;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Web.Helps;
+using DevExpress.Web;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,6 +22,22 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_empleado_proyeccion_gastos_det_Info_lis ro_empleado_proyeccion_gastos_det_Info_lis = new ro_empleado_proyeccion_gastos_det_Info_lis();
         #endregion
 
+        #region Metodos ComboBox bajo demanda
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        public ActionResult CmbEmpleado_proyeccion()
+        {
+            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
+            return PartialView("_CmbEmpleado_proyeccion", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        #endregion
         #region vistas
         public ActionResult Index()
         {
@@ -195,9 +215,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_proyeccion_gastos_det_Info info_det)
         {
             if (ModelState.IsValid)
-                ro_empleado_proyeccion_gastos_det_Info_lis.AddRow(info_det);
+                ro_empleado_proyeccion_gastos_det_Info_lis.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ro_empleado_proyeccion_gastos_Info model = new ro_empleado_proyeccion_gastos_Info();
-            model.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list();
+            model.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combo();
             return PartialView("_GridViewPartial_empleado_novedad_det", model);
         }
@@ -206,18 +226,18 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_proyeccion_gastos_det_Info info_det)
         {
             if (ModelState.IsValid)
-                ro_empleado_proyeccion_gastos_det_Info_lis.UpdateRow(info_det);
+                ro_empleado_proyeccion_gastos_det_Info_lis.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ro_empleado_proyeccion_gastos_Info model = new ro_empleado_proyeccion_gastos_Info();
-            model.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list();
+            model.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combo();
             return PartialView("_GridViewPartial_empleado_novedad_det", model);
         }
 
         public ActionResult EditingDelete([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_proyeccion_gastos_det_Info info_det)
         {
-            ro_empleado_proyeccion_gastos_det_Info_lis.DeleteRow(info_det.Secuencia);
+            ro_empleado_proyeccion_gastos_det_Info_lis.DeleteRow(info_det.Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ro_empleado_proyeccion_gastos_Info model = new ro_empleado_proyeccion_gastos_Info();
-            model.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list();
+            model.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combo();
             return PartialView("_GridViewPartial_empleado_novedad_det", model);
         }
@@ -227,39 +247,40 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
     public class ro_empleado_proyeccion_gastos_det_Info_lis
     {
-        public List<ro_empleado_proyeccion_gastos_det_Info> get_list()
+        string variable = "ro_empleado_proyeccion_gastos_det_Info";
+        public List<ro_empleado_proyeccion_gastos_det_Info> get_list(decimal IdTransaccionSession)
         {
-            if (HttpContext.Current.Session["ro_novedad_detalle_info"] == null)
+            if (HttpContext.Current.Session[variable+ IdTransaccionSession.ToString()] == null)
             {
                 List<ro_empleado_proyeccion_gastos_det_Info> list = new List<ro_empleado_proyeccion_gastos_det_Info>();
 
-                HttpContext.Current.Session["ro_novedad_detalle_info"] = list;
+                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<ro_empleado_proyeccion_gastos_det_Info>)HttpContext.Current.Session["ro_novedad_detalle_info"];
+            return (List<ro_empleado_proyeccion_gastos_det_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<ro_empleado_proyeccion_gastos_det_Info> list)
+        public void set_list(List<ro_empleado_proyeccion_gastos_det_Info> list, decimal IdTransaccionSession)
         {
-            HttpContext.Current.Session["ro_novedad_detalle_info"] = list;
+            HttpContext.Current.Session[variable+ IdTransaccionSession.ToString()] = list;
         }
 
-        public void AddRow(ro_empleado_proyeccion_gastos_det_Info info_det)
+        public void AddRow(ro_empleado_proyeccion_gastos_det_Info info_det, decimal IdTransaccionSession)
         {
-            List<ro_empleado_proyeccion_gastos_det_Info> list = get_list();
+            List<ro_empleado_proyeccion_gastos_det_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
             list.Add(info_det);
         }
 
-        public void UpdateRow(ro_empleado_proyeccion_gastos_det_Info info_det)
+        public void UpdateRow(ro_empleado_proyeccion_gastos_det_Info info_det, decimal IdTransaccionSession)
         {
-            ro_empleado_proyeccion_gastos_det_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();
+            ro_empleado_proyeccion_gastos_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.Valor = info_det.Valor;
             edited_info.IdTipoGasto = info_det.IdTipoGasto;
         }
 
-        public void DeleteRow(int Secuencia)
+        public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
         {
-            List<ro_empleado_proyeccion_gastos_det_Info> list = get_list();
+            List<ro_empleado_proyeccion_gastos_det_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
         }
     }
