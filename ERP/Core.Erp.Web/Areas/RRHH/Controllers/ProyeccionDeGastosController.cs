@@ -87,8 +87,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    info.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list(info.IdTransaccion);
+                    info.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list(info.IdTransaccionSession);
                     int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                    info.IdEmpresa = IdEmpresa;
                     if (!bus_proyeccion.guardarDB(info))
 
                         return View(info);
@@ -118,7 +119,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 ro_empleado_proyeccion_gastos_Info info = new ro_empleado_proyeccion_gastos_Info
                 {
                     AnioFiscal = DateTime.Now.Year,
-                    IdTransaccion = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
+                    IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
                 };
                 cargar_combo();
                 return View(info);

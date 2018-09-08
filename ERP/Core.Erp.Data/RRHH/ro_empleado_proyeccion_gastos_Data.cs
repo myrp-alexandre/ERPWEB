@@ -76,7 +76,7 @@ namespace Core.Erp.Data.RRHH
                     ro_empleado_proyeccion_gastos Entity = new ro_empleado_proyeccion_gastos
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdEmpleado = info.IdEmpleado,
+                        IdEmpleado = info.IdEmpleado=get_id(info.IdEmpresa),
                         AnioFiscal = info.AnioFiscal,
                         Observacion=info.Observacion,
                         estado = true,
@@ -84,6 +84,20 @@ namespace Core.Erp.Data.RRHH
                         
                     };
                     Context.ro_empleado_proyeccion_gastos.Add(Entity);
+
+                    foreach (var item in info.list_proyeciones)
+                    {
+                        ro_empleado_proyeccion_gastos_det Entity_det  = new ro_empleado_proyeccion_gastos_det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdTransaccion = info.IdTransaccion,
+                            IdTipoGasto = item.IdTipoGasto,
+                            Valor = item.Valor,
+                            Observacion = item.Observacion,
+                            Secuencia = item.Secuencia
+                        };
+                        Context.ro_empleado_proyeccion_gastos_det.Add(Entity_det);
+                    }
                     Context.SaveChanges();
                 }
                 return true;
@@ -100,16 +114,55 @@ namespace Core.Erp.Data.RRHH
             {
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    ro_empleado_proyeccion_gastos Entity = Context.ro_empleado_proyeccion_gastos.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleado == info.IdEmpleado && q.AnioFiscal==info.AnioFiscal);
+                    ro_empleado_proyeccion_gastos Entity = Context.ro_empleado_proyeccion_gastos.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdTransaccion==info.IdTransaccion);
                     if (Entity == null)
                         return  false;
                     Entity.AnioFiscal = info.AnioFiscal;
                     Entity.Observacion = info.Observacion;
                     Entity.IdEmpleado = info.IdEmpleado;
+
+                    var select = Context.ro_empleado_proyeccion_gastos_det.Where(q => q.IdEmpresa==info.IdEmpresa&& q.IdTransaccion==info.IdTransaccion);
+                    Context.ro_empleado_proyeccion_gastos_det.RemoveRange(select);
+                    foreach (var item in info.list_proyeciones)
+                    {
+                        ro_empleado_proyeccion_gastos_det Entity_det = new ro_empleado_proyeccion_gastos_det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdTransaccion = info.IdTransaccion,
+                            IdTipoGasto = item.IdTipoGasto,
+                            Valor = item.Valor,
+                            Observacion = item.Observacion,
+                            Secuencia = item.Secuencia
+                        };
+                        Context.ro_empleado_proyeccion_gastos_det.Add(Entity_det);
+                    }
                     Context.SaveChanges();
                 }
 
                 return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        private decimal get_id(int IdEmpresa)
+        {
+            try
+            {
+                decimal ID = 1;
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    var lst = from q in Context.ro_empleado_proyeccion_gastos
+                              where q.IdEmpresa == IdEmpresa
+                              select q;
+                    if (lst.Count() > 0)
+                        ID = lst.Max(q => q.IdTransaccion) + 1;
+                }
+                return ID;
             }
             catch (Exception)
             {

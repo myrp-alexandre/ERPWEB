@@ -12,7 +12,9 @@
 @using (Html.BeginForm("Nuevo", "ProyeccionDeGastos", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdTransaccionSession)    <div class="row">
+    @Html.HiddenFor(q => q.IdTransaccionSession) 
+      
+     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
@@ -35,6 +37,7 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
