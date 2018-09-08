@@ -16,14 +16,17 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                        Lista = (from q in Context.ro_empleado_proyeccion_gastos
+                        Lista = (from q in Context.vwro_empleado_x_Proyeccion_Gastos_Personales
                                  where q.IdEmpresa == IdEmpresa
                                  select new ro_empleado_proyeccion_gastos_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
+                                     IdTransaccion=q.IdTransaccion,
                                      IdEmpleado = q.IdEmpleado,
                                      AnioFiscal = q.AnioFiscal,
-                                     
+                                     pe_cedulaRuc=q.pe_cedulaRuc,
+                                     pe_nombreCompleto=q.pe_nombreCompleto,
+                                     estado=q.estado
                                     
                                  }).ToList();
                   
@@ -51,6 +54,7 @@ namespace Core.Erp.Data.RRHH
                     info = new ro_empleado_proyeccion_gastos_Info
                     {
                         IdEmpresa = Entity.IdEmpresa,
+                        IdTransaccion=Entity.IdTransaccion,
                         IdEmpleado = Entity.IdEmpleado,
                         AnioFiscal = Entity.AnioFiscal,
                         Observacion=Entity.Observacion,
@@ -76,7 +80,8 @@ namespace Core.Erp.Data.RRHH
                     ro_empleado_proyeccion_gastos Entity = new ro_empleado_proyeccion_gastos
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdEmpleado = info.IdEmpleado=get_id(info.IdEmpresa),
+                        IdTransaccion =info.IdTransaccion= get_id(info.IdEmpresa),
+                        IdEmpleado = info.IdEmpleado,
                         AnioFiscal = info.AnioFiscal,
                         Observacion=info.Observacion,
                         estado = true,
@@ -108,7 +113,7 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
-       public bool anularDB(ro_empleado_proyeccion_gastos_Info info)
+       public bool modificarDB(ro_empleado_proyeccion_gastos_Info info)
         {
             try
             {
@@ -117,9 +122,10 @@ namespace Core.Erp.Data.RRHH
                     ro_empleado_proyeccion_gastos Entity = Context.ro_empleado_proyeccion_gastos.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdTransaccion==info.IdTransaccion);
                     if (Entity == null)
                         return  false;
-                    Entity.AnioFiscal = info.AnioFiscal;
+                    Entity.estado = info.estado=false;
                     Entity.Observacion = info.Observacion;
                     Entity.IdEmpleado = info.IdEmpleado;
+                    Entity.AnioFiscal = info.AnioFiscal;
 
                     var select = Context.ro_empleado_proyeccion_gastos_det.Where(q => q.IdEmpresa==info.IdEmpresa&& q.IdTransaccion==info.IdTransaccion);
                     Context.ro_empleado_proyeccion_gastos_det.RemoveRange(select);
@@ -147,6 +153,33 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+        public bool anularDB(ro_empleado_proyeccion_gastos_Info info)
+        {
+            try
+            {
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    ro_empleado_proyeccion_gastos Entity = Context.ro_empleado_proyeccion_gastos.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdTransaccion == info.IdTransaccion);
+                    if (Entity == null)
+                        return false;
+                    Entity.estado = info.estado = false;
+                    Entity.Fecha_UltAnu = info.Fecha_UltAnu = DateTime.Now;
+                    Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
+
+
+                   
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
 
         private decimal get_id(int IdEmpresa)

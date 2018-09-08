@@ -15,9 +15,11 @@ namespace Core.Erp.Data
     public partial class vwro_empleado_x_Proyeccion_Gastos_Personales
     {
         public int IdEmpresa { get; set; }
+        public decimal IdTransaccion { get; set; }
         public decimal IdEmpleado { get; set; }
         public int AnioFiscal { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string pe_nombreCompleto { get; set; }
+        public bool estado { get; set; }
     }
 }

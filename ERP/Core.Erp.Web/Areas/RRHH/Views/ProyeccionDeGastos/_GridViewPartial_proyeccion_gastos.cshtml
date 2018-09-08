@@ -55,8 +55,8 @@
             {
 
                 ViewContext.Writer.Write(
-            Html.ActionLink("Modificar", "Modificar", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), AnioFiscal = DataBinder.Eval(tc.DataItem, "AnioFiscal") }) + "&nbsp;" +
-                    Html.ActionLink("Anular", "Anular", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), AnioFiscal = DataBinder.Eval(tc.DataItem, "AnioFiscal") },
+            Html.ActionLink("Modificar", "Modificar", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), IdTransaccion = DataBinder.Eval(tc.DataItem, "IdTransaccion") }) + "&nbsp;" +
+                    Html.ActionLink("Anular", "Anular", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), IdTransaccion = DataBinder.Eval(tc.DataItem, "IdTransaccion") },
                         new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                 );
 

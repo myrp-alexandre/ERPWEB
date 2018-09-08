@@ -139,7 +139,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (!bus_proyeccion.anularDB(info))
+                    info.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list(info.IdTransaccionSession);
+                    if (!bus_proyeccion.modificarDB(info))
                         return View(info);
                     else
                         return RedirectToAction("Index");
@@ -167,6 +168,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 ro_empleado_proyeccion_gastos_Info model = bus_proyeccion.get_info(IdEmpresa, IdEmpleado, IdTransaccion);
+                model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
                model.list_proyeciones= bus_det.get_list(IdEmpresa, model.IdTransaccion);
                 ro_empleado_proyeccion_gastos_det_Info_lis.set_list(model.list_proyeciones, Convert.ToDecimal(model.IdTransaccionSession));
                 model.IdTransaccion = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
