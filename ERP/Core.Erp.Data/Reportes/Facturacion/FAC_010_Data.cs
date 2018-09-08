@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace Core.Erp.Data.Reportes.Facturacion
 {
     public class FAC_010_Data
-    {public List<FAC_010_Info> get_list(int IdEmpresa, decimal IdProducto, string IdCategoria, int IdLinea, int IdGrupo, int IdSubGrupo, int IdMarca)
+    {
+        public List<FAC_010_Info> get_list(int IdEmpresa, decimal IdProducto, string IdCategoria, int IdLinea, int IdGrupo, int IdSubGrupo, int IdMarca)
         {
             try
             {
@@ -30,6 +31,24 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                  IdLinea = q.IdLinea, 
                                  IdGrupo = q.IdGrupo,
                                  IdSubGrupo = q.IdSubGrupo,
+                                 Estado =q.Estado,
+                                 IdMarca = q.IdMarca,
+                                 IdPresentacion = q.IdPresentacion,
+                                 IdProductoTipo = q.IdProductoTipo,
+                                 NomCategoria = q.NomCategoria,
+                                 NomGrupo = q.NomGrupo,
+                                 NomLinea = q.NomLinea,
+                                 NomMarca = q.NomMarca,
+                                 NomPresentacion = q.NomPresentacion,
+                                NomProducto = q.NomProducto,
+                                 NomSubGrupo = q.NomSubGrupo,
+                                 NomTipoProducto = q.NomTipoProducto,
+                                 PRECIO1 = q.PRECIO1,
+                                 PRECIO2 = q.PRECIO2,
+                                 PRECIO3 = q.PRECIO3,
+                                 PRECIO4 =q.PRECIO4,
+                                 PRECIO5 = q.PRECIO5
+                                 
 
                              }).ToList();
                 }
