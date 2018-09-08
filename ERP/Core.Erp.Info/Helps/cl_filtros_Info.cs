@@ -165,6 +165,7 @@ namespace Core.Erp.Info.Helps
         public int IdLinea { get; set; }
         public int IdGrupo { get; set; }
         public int IdSubGrupo { get; set; }
+        public bool mostrarSaldo0 { get; set; }
 
         public cl_filtros_facturacion_Info()
         {

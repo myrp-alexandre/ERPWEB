@@ -844,7 +844,7 @@
             this.xrTableCell23.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat([NomCategoria],\' - \',[NomLinea],\' - \', [NomGrupo], \' - \', [NomSubGrupo] )")});
             this.xrTableCell23.Name = "xrTableCell23";
-            this.xrTableCell23.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 0, 0, 0, 100F);
+            this.xrTableCell23.Padding = new DevExpress.XtraPrinting.PaddingInfo(100, 0, 0, 0, 100F);
             this.xrTableCell23.StylePriority.UsePadding = false;
             this.xrTableCell23.Weight = 1D;
             // 

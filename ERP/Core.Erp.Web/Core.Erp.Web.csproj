@@ -9108,6 +9108,7 @@
     <Content Include="Areas\RRHH\Views\ProyeccionDeGastos\_CmbEmpleado_proyeccion.cshtml" />
     <Content Include="Areas\RRHH\Views\EmpleadoNovedad\_CmbEmpleado_novedades.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_010.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_005.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
