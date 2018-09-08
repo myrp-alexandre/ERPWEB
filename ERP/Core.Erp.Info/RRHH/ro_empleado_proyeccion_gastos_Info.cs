@@ -24,6 +24,9 @@ namespace Core.Erp.Info.RRHH
         public string MotiAnula { get; set; }
 
 
+        public string pe_cedulaRuc { get; set; }
+        public string pe_nombreCompleto { get; set; }
+
         public List<ro_empleado_proyeccion_gastos_det_Info> list_proyeciones { get; set; }
 
     }
