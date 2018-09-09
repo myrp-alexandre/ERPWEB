@@ -140,7 +140,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdCliente = 0
 
             };
             cargar_cliente_contacto(model);
@@ -179,7 +180,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdCliente = 0
 
             };
             cargar_cliente_contacto(model);
