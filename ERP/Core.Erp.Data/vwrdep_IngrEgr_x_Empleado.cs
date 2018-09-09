@@ -26,6 +26,7 @@ namespace Core.Erp.Data
         public Nullable<decimal> DecimoTercerSueldo { get; set; }
         public Nullable<double> DecimoCuartoSueldo { get; set; }
         public Nullable<decimal> Vacaciones { get; set; }
+        public Nullable<double> AportePErsonal { get; set; }
         public double GastoAlimentacion { get; set; }
         public double GastoEucacion { get; set; }
         public double GastoSalud { get; set; }

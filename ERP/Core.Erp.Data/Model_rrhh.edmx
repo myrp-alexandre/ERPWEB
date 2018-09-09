@@ -2011,6 +2011,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.EntidadRegulatoria.vwr
           <Property Name="DecimoTercerSueldo" Type="numeric" Precision="10" Scale="2" />
           <Property Name="DecimoCuartoSueldo" Type="float" />
           <Property Name="Vacaciones" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="AportePErsonal" Type="float" />
           <Property Name="GastoAlimentacion" Type="float" Nullable="false" />
           <Property Name="GastoEucacion" Type="float" Nullable="false" />
           <Property Name="GastoSalud" Type="float" Nullable="false" />
@@ -3828,6 +3829,7 @@ FROM [dbo].[vwRo_Solicitud_Vacaciones] AS [vwRo_Solicitud_Vacaciones]</DefiningQ
 [vwrdep_IngrEgr_x_Empleado].[DecimoTercerSueldo] AS [DecimoTercerSueldo], 
 [vwrdep_IngrEgr_x_Empleado].[DecimoCuartoSueldo] AS [DecimoCuartoSueldo], 
 [vwrdep_IngrEgr_x_Empleado].[Vacaciones] AS [Vacaciones], 
+[vwrdep_IngrEgr_x_Empleado].[AportePErsonal] AS [AportePErsonal], 
 [vwrdep_IngrEgr_x_Empleado].[GastoAlimentacion] AS [GastoAlimentacion], 
 [vwrdep_IngrEgr_x_Empleado].[GastoEucacion] AS [GastoEucacion], 
 [vwrdep_IngrEgr_x_Empleado].[GastoSalud] AS [GastoSalud], 
@@ -8000,6 +8002,7 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <Property Name="DecimoTercerSueldo" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="DecimoCuartoSueldo" Type="Double" />
           <Property Name="Vacaciones" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AportePErsonal" Type="Double" />
           <Property Name="GastoAlimentacion" Type="Double" Nullable="false" />
           <Property Name="GastoEucacion" Type="Double" Nullable="false" />
           <Property Name="GastoSalud" Type="Double" Nullable="false" />
@@ -9776,6 +9779,7 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
                 <ScalarProperty Name="GastoSalud" ColumnName="GastoSalud" />
                 <ScalarProperty Name="GastoEucacion" ColumnName="GastoEucacion" />
                 <ScalarProperty Name="GastoAlimentacion" ColumnName="GastoAlimentacion" />
+                <ScalarProperty Name="AportePErsonal" ColumnName="AportePErsonal" />
                 <ScalarProperty Name="Vacaciones" ColumnName="Vacaciones" />
                 <ScalarProperty Name="DecimoCuartoSueldo" ColumnName="DecimoCuartoSueldo" />
                 <ScalarProperty Name="DecimoTercerSueldo" ColumnName="DecimoTercerSueldo" />
