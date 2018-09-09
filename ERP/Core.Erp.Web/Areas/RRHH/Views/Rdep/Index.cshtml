@@ -1,6 +1,7 @@
-﻿
+﻿@model Core.Erp.Info.RRHH.RDEP.Rdep_Info
+
 @{
-    ViewBag.Title = "rubros";
+    ViewBag.Title = "RDEP";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -9,7 +10,68 @@
 }
 @using (Html.BeginForm())
 {
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="ca_descripcion">Año fiscal*</label>
+                    @Html.TextBoxFor(q => q.pe_anio, new { @class = "form-control", @id= "pe_anio" })
+                    @Html.ValidationMessageFor(m => m.pe_anio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
 
-    @Html.Action("GridViewPartial_rubro")
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdProveedor">Empleado</label>
+                    @Html.Partial("_CmbEmpleado_proyeccion", Model.IdEmpleado)
+                    @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="button" class="btn btn-default" id="btn_buscar">Buscar</button>
+        <button type="submit" class="btn btn-primary" id="btn_guardar" onclick="Descargar();">Descargar</button>
+    </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdProveedor">Detalle de rdep</label>
+                    @Html.Action("GridViewPartial_rdep_det")
+                </div>
+            </div>
+        </div>
+    </div>
 }
+<script>
+
+    function Buscar() {
+        var datos = {
+            IdEmpresa: $("#pe_anio").val(),
+            IdUsuario: IdEmpleado.GetValue()
+        }
+        $("#btn_guardar").disabled = true;
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("Buscar", "Rdep", new { Area = "RRHH" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_rdep_det.PerformanceCalback();
+            },
+            error: function (error) {
+            }
+        });
+        $("#btn_guardar").disabled = false;
+    }
+</script>
