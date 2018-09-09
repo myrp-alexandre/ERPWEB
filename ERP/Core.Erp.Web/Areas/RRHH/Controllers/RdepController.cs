@@ -15,8 +15,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class RdepController : Controller
     {
-        // GET: RRHH/Rdep
-
+        Rdep_Info_lis Lis_Rdep_Info_lis = new Rdep_Info_lis();
         #region Metodos ComboBox bajo demanda
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         public ActionResult CmbEmpleado_rdep()
@@ -37,5 +36,38 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult Index(Rdep_Info model)
+        {
+            return View();
+        }
+        public ActionResult GridViewPartial_rdep_det()
+        {
+            return View();
+        }
+
+
+    }
+
+
+  public class  Rdep_Info_lis
+  {
+        string variable = "Rdep_Info";
+        public List<ro_empleado_novedad_det_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[variable+IdTransaccionSession.ToString()] == null)
+            {
+                List<ro_empleado_novedad_det_Info> list = new List<ro_empleado_novedad_det_Info>();
+
+                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<ro_empleado_novedad_det_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<ro_empleado_novedad_det_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[variable+IdTransaccionSession.ToString()] = list;
+        }
+
     }
 }
