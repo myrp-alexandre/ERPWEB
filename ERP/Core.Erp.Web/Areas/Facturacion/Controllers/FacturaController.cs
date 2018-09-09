@@ -194,7 +194,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                         IdEmpresa = i_validar.IdEmpresa,
                         IdUsuarioAut = i_validar.IdUsuarioAut,
                         IdUsuarioLog = SessionFixed.IdUsuario,
-                        Observacion = "Desbloqueo de facturación para cartera vencida para FACT #" + i_validar.vt_NumFactura,
+                        Observacion = (i_validar.IdCbteVta == 0 ? "**NUEVO**" : "**MODIFICAR**") + "Desbloqueo de facturación para cupo de crédito excedido para FACT #" + i_validar.vt_NumFactura,
                     };
                     bus_transaccionesAut.guardarDB(info_trasnsaccion_aut);
                 }
@@ -216,7 +216,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                         IdEmpresa = i_validar.IdEmpresa,
                         IdUsuarioAut = i_validar.IdUsuarioAut,
                         IdUsuarioLog = SessionFixed.IdUsuario,
-                        Observacion = "Desbloqueo de facturación para cartera vencida para FACT #" + i_validar.vt_NumFactura,
+                        Observacion = (i_validar.IdCbteVta == 0 ? "**NUEVO**" : "**MODIFICAR**") + "Desbloqueo de facturación para cartera vencida para FACT #" + i_validar.vt_NumFactura,
                     };
                     bus_transaccionesAut.guardarDB(info_trasnsaccion_aut);
                 }
