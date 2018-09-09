@@ -241,6 +241,7 @@ namespace Core.Erp.Data.Inventario
                     Lista = (from q in Context.vwin_producto_x_tb_bodega_stock_x_lote
                              where q.IdEmpresa == IdEmpresa && q.IdProducto_padre == IdProducto_padre
                              && q.stock > 0
+                             orderby q.lote_fecha_vcto ascending
                              select new in_Producto_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -639,9 +640,11 @@ namespace Core.Erp.Data.Inventario
 
         public List<in_Producto_Info> get_list_nombre_combo(List<in_Producto_Info> Lista)
         {
+            int OrdenVcto = 1;
             Lista.ForEach(V => {
                 V.pr_descripcion = V.pr_descripcion + " " + V.nom_presentacion + " - " + V.lote_num_lote + " - " + (V.lote_fecha_vcto != null ? Convert.ToDateTime(V.lote_fecha_vcto).ToString("dd/MM/yyyy") : " - "+ V.ca_descripcion);
                 V.pr_descripcion_combo = V.pr_descripcion;
+                V.OrdenVcto = OrdenVcto++;
             });
             return Lista;
         }

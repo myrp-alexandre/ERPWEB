@@ -233,6 +233,17 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return Json(linea, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult ValidarSeleccionLote(decimal IdProducto = 0)
+        {
+            string mensaje = "";
+            var producto = List_producto.get_list().Where(q=>q.IdProducto == IdProducto).FirstOrDefault();
+            if (producto != null && producto.OrdenVcto != 1)
+            {
+                mensaje = "Ha escogido un producto con fecha de vencimiento diferente al recomendado";
+            }
+            return Json(mensaje, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult ValidarGrid(decimal IdTransaccionSession = 0)
         {
             string mensaje = "";
