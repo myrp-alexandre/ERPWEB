@@ -104,6 +104,7 @@ namespace Core.Erp.Data
         public DbSet<ro_empleado_proyeccion_gastos_det> ro_empleado_proyeccion_gastos_det { get; set; }
         public DbSet<ro_tipo_gastos_personales> ro_tipo_gastos_personales { get; set; }
         public DbSet<vwro_empleado_x_Proyeccion_Gastos_Personales> vwro_empleado_x_Proyeccion_Gastos_Personales { get; set; }
+        public DbSet<vwrdep_IngrEgr_x_Empleado> vwrdep_IngrEgr_x_Empleado { get; set; }
     
         public virtual int spRo_Cierre_Rol(Nullable<int> idEmpresa, Nullable<int> idPeriodo, Nullable<int> idNomina_Tipo, Nullable<int> idNomina_TipoLiqui)
         {

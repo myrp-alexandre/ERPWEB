@@ -163,6 +163,7 @@
         <EntityTypeShape EntityType="Model_rrhh.ro_tipo_gastos_personales" Width="1.5" PointX="17.375" PointY="17.875" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_x_Proyeccion_Gastos_Personales" Width="1.5" PointX="17.375" PointY="14.75" />
+        <EntityTypeShape EntityType="Model_rrhh.vwrdep_IngrEgr_x_Empleado" Width="1.5" PointX="19.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

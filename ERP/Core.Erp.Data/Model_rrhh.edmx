@@ -1986,6 +1986,40 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwRo_Solicitud_Vac
           <Property Name="em_codigo" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.EntidadRegulatoria.vwrdep_IngrEgr_x_Empleado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwrdep_IngrEgr_x_Empleado">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="GastoAlimentacion" />
+            <PropertyRef Name="GastoEucacion" />
+            <PropertyRef Name="GastoSalud" />
+            <PropertyRef Name="GastoVestimenta" />
+            <PropertyRef Name="GastoVivienda" />
+            <PropertyRef Name="Utilidades" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pe_anio" Type="int" />
+          <Property Name="Su_CodigoEstablecimiento" Type="varchar" MaxLength="30" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
+          <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
+          <Property Name="Sueldo" Type="float" />
+          <Property Name="FondosReserva" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="DecimoTercerSueldo" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="DecimoCuartoSueldo" Type="float" />
+          <Property Name="Vacaciones" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="GastoAlimentacion" Type="float" Nullable="false" />
+          <Property Name="GastoEucacion" Type="float" Nullable="false" />
+          <Property Name="GastoSalud" Type="float" Nullable="false" />
+          <Property Name="GastoVestimenta" Type="float" Nullable="false" />
+          <Property Name="GastoVivienda" Type="float" Nullable="false" />
+          <Property Name="Utilidades" Type="float" Nullable="false" />
+          <Property Name="IngresoVarios" Type="float" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_empleado_x_Proyeccion_Gastos_Personales' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwro_empleado_x_Proyeccion_Gastos_Personales">
           <Key>
@@ -3779,6 +3813,29 @@ FROM [dbo].[vwro_rubro_tipo] AS [vwro_rubro_tipo]</DefiningQuery>
 [vwRo_Solicitud_Vacaciones].[pe_cedulaRuc] AS [pe_cedulaRuc], 
 [vwRo_Solicitud_Vacaciones].[em_codigo] AS [em_codigo]
 FROM [dbo].[vwRo_Solicitud_Vacaciones] AS [vwRo_Solicitud_Vacaciones]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwrdep_IngrEgr_x_Empleado" EntityType="Self.vwrdep_IngrEgr_x_Empleado" store:Type="Views" store:Schema="EntidadRegulatoria">
+            <DefiningQuery>SELECT 
+[vwrdep_IngrEgr_x_Empleado].[IdEmpresa] AS [IdEmpresa], 
+[vwrdep_IngrEgr_x_Empleado].[IdEmpleado] AS [IdEmpleado], 
+[vwrdep_IngrEgr_x_Empleado].[pe_anio] AS [pe_anio], 
+[vwrdep_IngrEgr_x_Empleado].[Su_CodigoEstablecimiento] AS [Su_CodigoEstablecimiento], 
+[vwrdep_IngrEgr_x_Empleado].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+[vwrdep_IngrEgr_x_Empleado].[pe_nombre] AS [pe_nombre], 
+[vwrdep_IngrEgr_x_Empleado].[pe_apellido] AS [pe_apellido], 
+[vwrdep_IngrEgr_x_Empleado].[Sueldo] AS [Sueldo], 
+[vwrdep_IngrEgr_x_Empleado].[FondosReserva] AS [FondosReserva], 
+[vwrdep_IngrEgr_x_Empleado].[DecimoTercerSueldo] AS [DecimoTercerSueldo], 
+[vwrdep_IngrEgr_x_Empleado].[DecimoCuartoSueldo] AS [DecimoCuartoSueldo], 
+[vwrdep_IngrEgr_x_Empleado].[Vacaciones] AS [Vacaciones], 
+[vwrdep_IngrEgr_x_Empleado].[GastoAlimentacion] AS [GastoAlimentacion], 
+[vwrdep_IngrEgr_x_Empleado].[GastoEucacion] AS [GastoEucacion], 
+[vwrdep_IngrEgr_x_Empleado].[GastoSalud] AS [GastoSalud], 
+[vwrdep_IngrEgr_x_Empleado].[GastoVestimenta] AS [GastoVestimenta], 
+[vwrdep_IngrEgr_x_Empleado].[GastoVivienda] AS [GastoVivienda], 
+[vwrdep_IngrEgr_x_Empleado].[Utilidades] AS [Utilidades], 
+[vwrdep_IngrEgr_x_Empleado].[IngresoVarios] AS [IngresoVarios]
+FROM [EntidadRegulatoria].[vwrdep_IngrEgr_x_Empleado] AS [vwrdep_IngrEgr_x_Empleado]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_empleado_x_Proyeccion_Gastos_Personales" EntityType="Self.vwro_empleado_x_Proyeccion_Gastos_Personales" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
@@ -7760,6 +7817,7 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             <End Role="ro_empleado_proyeccion_gastos_det" EntitySet="ro_empleado_proyeccion_gastos_det" />
           </AssociationSet>
           <EntitySet Name="vwro_empleado_x_Proyeccion_Gastos_Personales" EntityType="Model_rrhh.vwro_empleado_x_Proyeccion_Gastos_Personales" />
+          <EntitySet Name="vwrdep_IngrEgr_x_Empleado" EntityType="Model_rrhh.vwrdep_IngrEgr_x_Empleado" />
         </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -7917,6 +7975,38 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwrdep_IngrEgr_x_Empleado">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="GastoAlimentacion" />
+            <PropertyRef Name="GastoEucacion" />
+            <PropertyRef Name="GastoSalud" />
+            <PropertyRef Name="GastoVestimenta" />
+            <PropertyRef Name="GastoVivienda" />
+            <PropertyRef Name="Utilidades" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pe_anio" Type="Int32" />
+          <Property Name="Su_CodigoEstablecimiento" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Sueldo" Type="Double" />
+          <Property Name="FondosReserva" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="DecimoTercerSueldo" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="DecimoCuartoSueldo" Type="Double" />
+          <Property Name="Vacaciones" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="GastoAlimentacion" Type="Double" Nullable="false" />
+          <Property Name="GastoEucacion" Type="Double" Nullable="false" />
+          <Property Name="GastoSalud" Type="Double" Nullable="false" />
+          <Property Name="GastoVestimenta" Type="Double" Nullable="false" />
+          <Property Name="GastoVivienda" Type="Double" Nullable="false" />
+          <Property Name="Utilidades" Type="Double" Nullable="false" />
+          <Property Name="IngresoVarios" Type="Double" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -9672,6 +9762,31 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
                 <ScalarProperty Name="AnioFiscal" ColumnName="AnioFiscal" />
                 <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwrdep_IngrEgr_x_Empleado">
+            <EntityTypeMapping TypeName="Model_rrhh.vwrdep_IngrEgr_x_Empleado">
+              <MappingFragment StoreEntitySet="vwrdep_IngrEgr_x_Empleado">
+                <ScalarProperty Name="IngresoVarios" ColumnName="IngresoVarios" />
+                <ScalarProperty Name="Utilidades" ColumnName="Utilidades" />
+                <ScalarProperty Name="GastoVivienda" ColumnName="GastoVivienda" />
+                <ScalarProperty Name="GastoVestimenta" ColumnName="GastoVestimenta" />
+                <ScalarProperty Name="GastoSalud" ColumnName="GastoSalud" />
+                <ScalarProperty Name="GastoEucacion" ColumnName="GastoEucacion" />
+                <ScalarProperty Name="GastoAlimentacion" ColumnName="GastoAlimentacion" />
+                <ScalarProperty Name="Vacaciones" ColumnName="Vacaciones" />
+                <ScalarProperty Name="DecimoCuartoSueldo" ColumnName="DecimoCuartoSueldo" />
+                <ScalarProperty Name="DecimoTercerSueldo" ColumnName="DecimoTercerSueldo" />
+                <ScalarProperty Name="FondosReserva" ColumnName="FondosReserva" />
+                <ScalarProperty Name="Sueldo" ColumnName="Sueldo" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="Su_CodigoEstablecimiento" ColumnName="Su_CodigoEstablecimiento" />
+                <ScalarProperty Name="pe_anio" ColumnName="pe_anio" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
