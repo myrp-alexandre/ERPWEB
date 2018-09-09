@@ -487,6 +487,21 @@
                 }
             });
         }
+
+         $.ajax({
+                url: '@Url.Action("ValidarSeleccionLote", "Factura",new { Area = "Facturacion"})',
+                type: "GET",
+                data: { IdProducto: ID },
+                success: function (data) {
+                    if (data != "") {
+                        alert(data);
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    
+                }
+        });
+
         $("#Secuencia").text(0);
         $("#OpModal").modal("hide");
     }
