@@ -899,19 +899,19 @@
       <DependentUpon>Model_inventario.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model_reportes.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>Model_reportes.Context.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Model_reportes.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>Model_reportes.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Model_reportes.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>Model_reportes.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Model_rrhh.Context.cs">
       <AutoGen>True</AutoGen>
@@ -1983,13 +1983,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model_reportes.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model_reportes.edmx.diagram">
-      <DependentUpon>Model_reportes.edmx</DependentUpon>
-    </None>
     <EntityDeploy Include="Model_rrhh.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model_rrhh.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Model_reportes.edmx.diagram">
+      <DependentUpon>Model_reportes.edmx</DependentUpon>
+    </None>
     <None Include="Model_rrhh.edmx.diagram">
       <DependentUpon>Model_rrhh.edmx</DependentUpon>
     </None>
@@ -2124,13 +2124,13 @@
       <LastGenOutput>Model_inventario.cs</LastGenOutput>
     </Content>
     <Content Include="Model_reportes.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model_reportes.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model_reportes.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Model_reportes.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model_reportes.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model_reportes.cs</LastGenOutput>
     </Content>
     <Content Include="Model_rrhh.Context.tt">
