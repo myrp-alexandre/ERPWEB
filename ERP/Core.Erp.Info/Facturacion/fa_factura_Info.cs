@@ -78,6 +78,12 @@ namespace Core.Erp.Info.Facturacion
         public List<fa_cuotas_x_doc_Info> lst_cuota { get; set; }
         public string IdFormaPago { get; set; }
         #endregion
+
+        #region Campos super admin
+        public string IdUsuarioAut { get; set; }
+        public string contrasena_admin { get; set; }
+        public bool PedirDesbloqueo { get; set; }
+        #endregion
     }
 
     public class fa_factura_consulta_Info

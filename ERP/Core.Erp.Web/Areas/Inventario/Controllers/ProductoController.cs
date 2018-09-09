@@ -278,19 +278,21 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         public JsonResult MostrarPrecios(string IdUsuarioAut = "", string contrasena_admin = "", decimal IdProducto=0)
         {
-            string EstadoDesbloqueo = ""; 
-             var info_usuarios = bus_usuarios.get_info(Convert.ToString(SessionFixed.IdUsuario));
+            string EstadoDesbloqueo = "NOAUTORIZADO"; 
+             var info_usuarios = bus_usuarios.get_info(IdUsuarioAut);
             if (info_usuarios != null)
             {
                 if (info_usuarios.es_super_admin)
                 {
                     if (contrasena_admin.ToLower() == info_usuarios.contrasena_admin.ToLower())
                     {
-                        tbl_TransaccionesAutorizadas_info info_trasnsaccion_aut = new tbl_TransaccionesAutorizadas_info();
-                        info_trasnsaccion_aut.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-                        info_trasnsaccion_aut.IdUsuarioAut = IdUsuarioAut;
-                        info_trasnsaccion_aut.IdUsuarioLog = SessionFixed.IdUsuario.ToString();
-                        info_trasnsaccion_aut.Observacion = "Autorizacion de visualizacion de precios IdProducto #"+ IdProducto.ToString();
+                        tbl_TransaccionesAutorizadas_info info_trasnsaccion_aut = new tbl_TransaccionesAutorizadas_info
+                        {
+                            IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                            IdUsuarioAut = IdUsuarioAut,
+                            IdUsuarioLog = SessionFixed.IdUsuario,
+                            Observacion = "Desbloqueo de pestaña de precio para el producto con ID #" + IdProducto.ToString(),
+                        };
                         bus_transacciones_aut.guardarDB(info_trasnsaccion_aut);
                         EstadoDesbloqueo = "AUTORIZADO";
                     }
