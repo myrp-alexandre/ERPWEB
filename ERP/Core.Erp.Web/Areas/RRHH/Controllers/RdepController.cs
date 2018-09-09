@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Bus.General;
+using Core.Erp.Bus.Helps;
 using Core.Erp.Bus.RRHH;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
@@ -8,9 +9,13 @@ using Core.Erp.Web.Helps;
 using DevExpress.Web;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -19,6 +24,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #region variables
         Rdep_Info_lis Lis_Rdep_Info_lis = new Rdep_Info_lis();
         Rdep_Bus bus_rpde = new Rdep_Bus();
+        FilesHelper_Bus FilesHelper_B = new FilesHelper_Bus();
+
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -52,7 +59,41 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         [HttpPost]
         public ActionResult Index(Rdep_Info model)
         {
-            return View();
+            string nombre_file ="RDEP";
+            
+            string xml = "";
+            rdep rdep = new rdep();
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            int IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
+            rdep = bus_rpde.get_list(IdEmpresa,Convert.ToInt32( model.pe_anio), " ");
+            var ms = new MemoryStream();
+            var xw = XmlWriter.Create(ms);
+            string patch = Path.Combine(Server.MapPath("~/Content/file"), nombre_file);
+
+
+            var serializer = new XmlSerializer(rdep.GetType());
+            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            ns.Add("", "");
+            serializer.Serialize(xw, rdep, ns);
+            xw.Flush();
+            ms.Seek(0, SeekOrigin.Begin);
+            using (var sr = new StreamReader(ms, Encoding.UTF8))
+            {
+                xml = sr.ReadToEnd();
+            }
+
+
+            if (System.IO.File.Exists(patch + ".xml"))
+                System.IO.File.Delete(patch + ".xml");
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(patch + ".xml", true))
+            {
+                file.WriteLine(xml);
+                file.Close();
+                byte[] fileBytes = System.IO.File.ReadAllBytes(patch + ".xml");
+                FilesHelper_B.Guardar_xml(fileBytes, nombre_file, "", "", "");
+                patch = patch + ".xml";
+                return File(Encoding.UTF8.GetBytes(xml), "application/xml", nombre_file + ".xml");
+            }
         }
         public ActionResult GridViewPartial_rdep_det()
         {

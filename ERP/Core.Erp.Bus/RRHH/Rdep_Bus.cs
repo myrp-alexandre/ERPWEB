@@ -11,15 +11,14 @@ namespace Core.Erp.Bus.RRHH
     public  class Rdep_Bus
     {
         Rdep_Data odata = new Rdep_Data();
-        List<rdep> list_rdep = new List<rdep>();
+        rdep rdp = new rdep();
         List<ro_tabla_Impu_Renta_Info> list_base_calculo = new List<ro_tabla_Impu_Renta_Info>();
         ro_tabla_Impu_Renta_Data odata_base_Calculo = new ro_tabla_Impu_Renta_Data();
-        public List<rdep> get_list(int IdEmpresa, int Anio, string Ruc)
+        public rdep get_list(int IdEmpresa, int Anio, string Ruc)
              {
             try
             {
                 list_base_calculo = odata_base_Calculo.get_list(Anio).OrderByDescending(v => v.Secuencia).ToList();
-                rdep rdp = new rdep();
                 rdp.anio = Anio.ToString();
                 rdp.numRuc = Ruc;
                 datRetRelDepTyp detalle = new datRetRelDepTyp();
@@ -76,7 +75,7 @@ namespace Core.Erp.Bus.RRHH
 
 
                 });
-               return list_rdep;
+               return rdp;
             }
             catch (Exception)
             {
