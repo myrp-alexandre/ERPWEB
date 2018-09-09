@@ -9,7 +9,6 @@
 
 namespace Core.Erp.Data
 {
-
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -75,7 +74,6 @@ namespace Core.Erp.Data
         public DbSet<VWIMP_002> VWIMP_002 { get; set; }
         public DbSet<VWIMP_002_gastos> VWIMP_002_gastos { get; set; }
         public DbSet<VWIMP_003> VWIMP_003 { get; set; }
-        public DbSet<VWINV_004> VWINV_004 { get; set; }
         public DbSet<VWINV_007> VWINV_007 { get; set; }
         public DbSet<VWINV_008> VWINV_008 { get; set; }
         public DbSet<VWROL_001> VWROL_001 { get; set; }
