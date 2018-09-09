@@ -27,7 +27,7 @@ namespace Core.Erp.Web.Reportes.CuentasPorCobrar
 
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             decimal IdCLiente = string.IsNullOrEmpty(p_IdCliente.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdCliente.Value);
-            int IdContacto = p_IdContacto.Value == null ? 0 : Convert.ToInt32(p_IdContacto.Value);
+            int IdContacto = string.IsNullOrEmpty(p_IdContacto.Value.ToString()) ? 0 : Convert.ToInt32(p_IdContacto.Value);
             DateTime fecha_corte = p_fecha_corte.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_corte.Value);
             bool mostrarSaldo0 = p_mostrarSaldo0.Value == null ? false : Convert.ToBoolean(p_mostrarSaldo0.Value);
 

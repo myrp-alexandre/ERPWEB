@@ -20,7 +20,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         public ActionResult CmbCliente_CXC()
         {
-            CXC_003_Info model = new CXC_003_Info();
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
             return PartialView("_CmbCliente_CXC", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -187,7 +187,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cargar_cliente_contacto(model);
             CXC_005_Rpt report = new CXC_005_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdCliente.Value = model.IdCliente;
+            report.p_IdCliente.Value = model.IdCliente == null ? 0 : Convert.ToDecimal(model.IdCliente);
             report.p_IdContacto.Value = model.IdClienteContacto;
             report.p_fecha_corte.Value = model.fecha_corte;
             report.p_mostrarSaldo0.Value = model.mostrarSaldo0;
@@ -203,7 +203,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             CXC_005_Rpt report = new CXC_005_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdCliente.Value = model.IdCliente;
+            report.p_IdCliente.Value = model.IdCliente == null ? 0 : Convert.ToDecimal(model.IdCliente);
             report.p_IdContacto.Value = model.IdClienteContacto;
             report.p_fecha_corte.Value = model.fecha_corte;
             report.p_mostrarSaldo0.Value = model.mostrarSaldo0;
