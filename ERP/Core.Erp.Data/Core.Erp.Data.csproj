@@ -1771,7 +1771,7 @@
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
     <Compile Include="vwrdep_IngrEgr_x_Empleado.cs">
-      <DependentUpon>Model_reportes.tt</DependentUpon>
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="VWROL_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
