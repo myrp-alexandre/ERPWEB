@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Data.RRHH;
+using Core.Erp.Info.RRHH;
 using Core.Erp.Info.RRHH.RDEP;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,13 @@ namespace Core.Erp.Bus.RRHH
     {
         Rdep_Data odata = new Rdep_Data();
         List<rdep> list_rdep = new List<rdep>();
-       public List<rdep> gett_list(int IdEmpresa, int Anio, string Ruc)
+        List<ro_tabla_Impu_Renta_Info> list_base_calculo = new List<ro_tabla_Impu_Renta_Info>();
+        ro_tabla_Impu_Renta_Data odata_base_Calculo = new ro_tabla_Impu_Renta_Data();
+        public List<rdep> get_list(int IdEmpresa, int Anio, string Ruc)
              {
             try
             {
+                list_base_calculo = odata_base_Calculo.get_list(Anio).OrderByDescending(v => v.Secuencia).ToList();
                 rdep rdp = new rdep();
                 rdp.anio = Anio.ToString();
                 rdp.numRuc = Ruc;
@@ -41,7 +45,7 @@ namespace Core.Erp.Bus.RRHH
 
                     info_det.suelSal = ( item.Sueldo)==null?Convert.ToDecimal(0.00):Convert.ToDecimal(item.Sueldo);
                     info_det.sobSuelComRemu = (item.IngresoVarios) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.IngresoVarios);
-                    info_det.partUtil = (item.Utilidades) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.Utilidades);
+                    info_det.partUtil =  Convert.ToDecimal(item.Utilidades);
                     info_det.intGrabGen = (item.Sueldo) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.Sueldo);
                     info_det.impRentEmpl = (item.Sueldo) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.Sueldo);
                     info_det.decimTer = (item.DecimoTercerSueldo) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.DecimoTercerSueldo);
@@ -49,9 +53,9 @@ namespace Core.Erp.Bus.RRHH
                     info_det.fondoReserva = (item.FondosReserva) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.FondosReserva);
                     info_det.salarioDigno = 0;
                     info_det.otrosIngRenGrav = 0;
-                    info_det.ingGravConEsteEmpl = 0;
+                    info_det.ingGravConEsteEmpl = (item.Sueldo) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.Sueldo);
                     info_det.sisSalNet = "1";
-                    info_det.apoPerIess = 0;
+                    info_det.apoPerIess =Convert.ToDecimal( item.AportePErsonal);
                     info_det.aporPerIessConOtrosEmpls = 0;
                     info_det.deducVivienda =  Convert.ToDecimal(item.GastoVivienda);
                     info_det.deducSalud =  Convert.ToDecimal(item.GastoSalud);
@@ -61,8 +65,8 @@ namespace Core.Erp.Bus.RRHH
                     info_det.deducArtycult = 0;
                     info_det.exoDiscap = 0;
                     info_det.exoTerEd = 0;
-                    info_det.basImp = 0;
-                    info_det.impRentCaus = (item.DecimoTercerSueldo) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.DecimoTercerSueldo);
+                    info_det.basImp =Convert.ToDecimal( item.Sueldo-item.AportePErsonal);
+                    info_det.impRentCaus = CalcularImpuestoRenta(info_det);
                     info_det.valRetAsuOtrosEmpls = (item.DecimoTercerSueldo) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.DecimoTercerSueldo);
                     info_det.valImpAsuEsteEmpl = (item.DecimoTercerSueldo) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.DecimoTercerSueldo);
                     info_det.valRet = (item.DecimoTercerSueldo) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.DecimoTercerSueldo);
@@ -80,5 +84,41 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
-   }
+
+        public decimal CalcularImpuestoRenta(datRetRelDepTyp item)
+        {
+            try
+            {
+
+
+                double BaseImponible = 0;
+                BaseImponible =Convert.ToDouble( item.suelSal + item.decimCuar + item.decimCuar + item.fondoReserva + item.partUtil + item.otrosIngRenGrav)-
+                    Convert.ToDouble(item.deducSalud+item.deducAliement+item.deducVivienda+item.deducEduca+item.deducVestim);
+                double exedente = 0;
+                double fraccionBasica = 0;
+                double porcentajeFraccionExedente = 0;
+                double impuestoFraccionBasica = 0;
+                double valorIR = 0;
+                foreach (ro_tabla_Impu_Renta_Info item_ in list_base_calculo)
+                {
+                    if (BaseImponible >= item_.FraccionBasica)
+                    {
+                        fraccionBasica = Convert.ToDouble(item_.FraccionBasica);
+                        porcentajeFraccionExedente = Convert.ToDouble(item_.Por_ImpFraccion_Exce);
+                        impuestoFraccionBasica = Convert.ToDouble(item_.ImpFraccionBasica);
+                        break;
+                    }
+                }
+                exedente = BaseImponible - fraccionBasica;
+                valorIR = impuestoFraccionBasica + (exedente * porcentajeFraccionExedente * 0.01);
+                return Convert.ToDecimal( valorIR);
+            }
+            catch (Exception )
+            {
+                return 0;
+            }
+
+        }
+
+    }
 }

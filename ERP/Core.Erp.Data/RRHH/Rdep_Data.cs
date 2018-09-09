@@ -31,6 +31,7 @@ namespace Core.Erp.Data.RRHH
                                  DecimoTercerSueldo = q.DecimoTercerSueldo,
                                  DecimoCuartoSueldo = q.DecimoCuartoSueldo,
                                  Vacaciones = q.Vacaciones,
+                                 AportePErsonal=q.AportePErsonal,
                                  GastoAlimentacion = q.GastoAlimentacion,
                                  GastoEucacion = q.GastoEucacion,
                                  GastoSalud = q.GastoSalud,

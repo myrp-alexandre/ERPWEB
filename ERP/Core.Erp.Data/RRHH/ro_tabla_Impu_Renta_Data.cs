@@ -38,6 +38,37 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+        public List<ro_tabla_Impu_Renta_Info> get_list(int AnioFiscal)
+        {
+            try
+            {
+                List<ro_tabla_Impu_Renta_Info> Lista;
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    Lista = (from q in Context.ro_tabla_Impu_Renta
+                             where q.AnioFiscal==AnioFiscal
+                             select new ro_tabla_Impu_Renta_Info
+                             {
+                                 AnioFiscal = q.AnioFiscal,
+                                 Secuencia = q.Secuencia,
+                                 FraccionBasica = q.FraccionBasica,
+                                 ExcesoHasta = q.ExcesoHasta,
+                                 ImpFraccionBasica = q.ImpFraccionBasica,
+                                 Por_ImpFraccion_Exce = q.Por_ImpFraccion_Exce
+                             }).ToList();
+
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public ro_tabla_Impu_Renta_Info get_info(int AnioFiscal, int Secuencia)
         {
             try
