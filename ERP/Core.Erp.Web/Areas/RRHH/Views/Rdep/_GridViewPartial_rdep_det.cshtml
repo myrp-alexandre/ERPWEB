@@ -1,7 +1,7 @@
 @using System.Web.UI.WebControls
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView_rubro";
+        settings.Name = "GridViewPartial_rdep_det";
         settings.CallbackRouteValues = new { Controller = "Rdep", Action = "GridViewPartial_rdep_det" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdEmpleado";

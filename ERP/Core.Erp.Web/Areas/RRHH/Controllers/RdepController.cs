@@ -54,7 +54,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-            return View();
+            Rdep_Info model = new Rdep_Info();
+            return View(model);
         }
         [HttpPost]
         public ActionResult Index(Rdep_Info model)
@@ -101,7 +102,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
             List<Rdep_Info> model = new List<Rdep_Info>();
             model = Lis_Rdep_Info_lis.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return View(model);
+            return PartialView("_GridViewPartial_rdep_det", model);
         }
         #endregion
 
