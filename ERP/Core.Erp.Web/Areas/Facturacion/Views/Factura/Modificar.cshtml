@@ -18,6 +18,27 @@
     @Html.HiddenFor(q => q.IdCbteVta)
     @Html.HiddenFor(q => q.IdPuntoVta)
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+
+    if (Model.PedirDesbloqueo)
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">Usuario administrador</label>
+                        @Html.TextBoxFor(q => q.IdUsuarioAut, new { @class = "form-control", @id = "IdUsuarioAut" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">Contraseña</label>
+                        @Html.PasswordFor(q => q.contrasena_admin, new { @class = "form-control", @id = "contrasena_admin" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -498,7 +519,7 @@
                     }
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    
+
                 }
         });
 

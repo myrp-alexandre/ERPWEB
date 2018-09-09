@@ -1,6 +1,7 @@
 ﻿using Core.Erp.Bus.Facturacion;
 using Core.Erp.Bus.General;
 using Core.Erp.Bus.Inventario;
+using Core.Erp.Bus.SeguridadAcceso;
 using Core.Erp.Info.Facturacion;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
@@ -44,6 +45,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_cuotas_x_doc_Bus bus_cuotas = new fa_cuotas_x_doc_Bus();
         fa_factura_det_Bus bus_det = new fa_factura_det_Bus();
         fa_parametro_Bus bus_param = new fa_parametro_Bus();
+        seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
+        tbl_TransaccionesAutorizadas_Bus bus_transaccionesAut = new tbl_TransaccionesAutorizadas_Bus();
         #endregion
 
         #region Index
@@ -129,6 +132,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         private bool validar(fa_factura_Info i_validar, ref string msg)
         {
+            i_validar.PedirDesbloqueo = false;
             i_validar.lst_det = List_det.get_list(i_validar.IdTransaccionSession);
             if (i_validar.lst_det.Count == 0)
             {
@@ -180,10 +184,48 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 }                
             }
 
-            if (!bus_cliente.ValidarCupoCreditoCliente(i_validar.IdEmpresa, i_validar.IdSucursal, i_validar.IdBodega, i_validar.IdCbteVta, "FACT", i_validar.IdCliente, i_validar.lst_det.Sum(q=>q.vt_total),  ref mensaje))
+            if (!bus_cliente.ValidarCupoCreditoCliente(i_validar.IdEmpresa, i_validar.IdSucursal, i_validar.IdBodega, i_validar.IdCbteVta, "FACT", i_validar.IdCliente, i_validar.lst_det.Sum(q => q.vt_total), ref mensaje))
             {
-                msg = mensaje;
-                return false;
+                var info_usuarios = bus_usuario.get_info(i_validar.IdUsuarioAut);
+                if (info_usuarios != null && info_usuarios.es_super_admin && i_validar.contrasena_admin.Trim().ToLower() == info_usuarios.contrasena_admin.Trim().ToLower())
+                {
+                    tbl_TransaccionesAutorizadas_info info_trasnsaccion_aut = new tbl_TransaccionesAutorizadas_info
+                    {
+                        IdEmpresa = i_validar.IdEmpresa,
+                        IdUsuarioAut = i_validar.IdUsuarioAut,
+                        IdUsuarioLog = SessionFixed.IdUsuario,
+                        Observacion = "Desbloqueo de facturación para cartera vencida para FACT #" + i_validar.vt_NumFactura,
+                    };
+                    bus_transaccionesAut.guardarDB(info_trasnsaccion_aut);
+                }
+                else
+                {
+                    i_validar.PedirDesbloqueo = true;
+                    msg = mensaje;
+                    return false;
+                }
+            }
+
+            if (bus_factura.ValidarCarteraVencida(i_validar.IdEmpresa,i_validar.IdCliente,ref mensaje))
+            {
+                var info_usuarios = bus_usuario.get_info(i_validar.IdUsuarioAut);
+                if (info_usuarios != null && info_usuarios.es_super_admin && i_validar.contrasena_admin.Trim().ToLower() == info_usuarios.contrasena_admin.Trim().ToLower())
+                {
+                    tbl_TransaccionesAutorizadas_info info_trasnsaccion_aut = new tbl_TransaccionesAutorizadas_info
+                    {
+                        IdEmpresa = i_validar.IdEmpresa,
+                        IdUsuarioAut = i_validar.IdUsuarioAut,
+                        IdUsuarioLog = SessionFixed.IdUsuario,
+                        Observacion = "Desbloqueo de facturación para cartera vencida para FACT #" + i_validar.vt_NumFactura,
+                    };
+                    bus_transaccionesAut.guardarDB(info_trasnsaccion_aut);
+                }
+                else
+                {
+                    i_validar.PedirDesbloqueo = true;
+                    msg = mensaje;
+                    return false;
+                }
             }
 
             var lst_validar = i_validar.lst_det.Select(q => new in_Producto_Stock_Info

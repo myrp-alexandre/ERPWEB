@@ -107,6 +107,19 @@ namespace Core.Erp.Bus.Facturacion
             }
         }
 
+        public bool ValidarCarteraVencida(int IdEmpresa, decimal IdCliente, ref string mensaje)
+        {
+            try
+            {
+                return odata.ValidarCarteraVencida(IdEmpresa, IdCliente, ref mensaje);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool MostrarCuotasRpt(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta)
         {
             try

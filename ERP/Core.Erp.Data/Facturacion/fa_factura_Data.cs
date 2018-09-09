@@ -921,5 +921,27 @@ namespace Core.Erp.Data.Facturacion
                 throw;
             }
         }
+
+        public bool ValidarCarteraVencida (int IdEmpresa, decimal IdCliente, ref string mensaje)
+        {
+            try
+            {
+                using (Entities_cuentas_por_cobrar Context = new Entities_cuentas_por_cobrar())
+                {
+                    DateTime FechaCorte = DateTime.Now.Date;
+                    var cartera = Context.vwcxc_cartera_x_cobrar.Where(q => q.IdEmpresa == IdEmpresa && q.IdCliente == IdCliente && q.vt_fech_venc < FechaCorte && q.Saldo > 0 && q.Estado == "A").ToList();
+                    if (cartera.Count > 0)
+                    {
+                        mensaje = "El cliente "+cartera.First().NomCliente.Trim()+" adeuda $"+Math.Round((double)cartera.Sum(q=>q.Saldo),2,MidpointRounding.AwayFromZero)+" en cartera vencida";
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
