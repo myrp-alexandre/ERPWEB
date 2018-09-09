@@ -67,9 +67,9 @@ namespace Core.Erp.Bus.RRHH
                     info_det.exoTerEd = 0;
                     info_det.basImp =Convert.ToDecimal( item.Sueldo-item.AportePErsonal);
                     info_det.impRentCaus = CalcularImpuestoRenta(info_det);
-                    info_det.valRetAsuOtrosEmpls = (item.DecimoTercerSueldo) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.DecimoTercerSueldo);
-                    info_det.valImpAsuEsteEmpl = (item.DecimoTercerSueldo) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.DecimoTercerSueldo);
-                    info_det.valRet = (item.DecimoTercerSueldo) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.DecimoTercerSueldo);
+                    info_det.valRetAsuOtrosEmpls = 0;
+                    info_det.valImpAsuEsteEmpl = 0;
+                    info_det.valRet = 0;
 
                     
                     rdp.retRelDep.Add(info_det);
