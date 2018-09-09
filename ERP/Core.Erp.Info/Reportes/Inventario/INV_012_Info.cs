@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.Reportes.Inventario
 {
-    class INV_004_Info
+    class INV_012_Info
     {
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Erp.Info.Reportes.Inventario
+namespace Core.Erp.Data.Reportes.Inventario
 {
-    class INV_004_Info
+    class INV_012_Data
     {
     }
 }
