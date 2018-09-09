@@ -6471,63 +6471,6 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
           <Property Name="od_costo" Type="Double" Nullable="false" />
           <Property Name="oe_fecha" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityType Name="VWINV_004">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdMovi_inven_tipo" />
-            <PropertyRef Name="IdNumMovi" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="mv_tipo_movi" />
-            <PropertyRef Name="tm_descripcion" />
-            <PropertyRef Name="IdProducto" />
-            <PropertyRef Name="pr_codigo" />
-            <PropertyRef Name="pr_descripcion" />
-            <PropertyRef Name="nom_presentacion" />
-            <PropertyRef Name="cm_fecha" />
-            <PropertyRef Name="Su_Descripcion" />
-            <PropertyRef Name="bo_Descripcion" />
-            <PropertyRef Name="dm_cantidad" />
-            <PropertyRef Name="mv_costo" />
-            <PropertyRef Name="IdUnidadMedida" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="IdCategoria" />
-            <PropertyRef Name="IdLinea" />
-            <PropertyRef Name="IdGrupo" />
-            <PropertyRef Name="IdSubGrupo" />
-            <PropertyRef Name="IdBodega" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdMovi_inven_tipo" Type="Int32" Nullable="false" />
-          <Property Name="IdNumMovi" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="mv_tipo_movi" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="tm_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IdProducto" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="pr_codigo" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="pr_descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="nom_presentacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="lote_fecha_vcto" Type="DateTime" Precision="3" />
-          <Property Name="lote_num_lote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cm_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="cm_observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Su_Descripcion" Type="String" MaxLength="60" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="bo_Descripcion" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="dm_cantidad" Type="Double" Nullable="false" />
-          <Property Name="mv_costo" Type="Double" Nullable="false" />
-          <Property Name="IdUnidadMedida" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdCategoria" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdLinea" Type="Int32" Nullable="false" />
-          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
-          <Property Name="IdSubGrupo" Type="Int32" Nullable="false" />
-          <Property Name="anio" Type="Int32" />
-          <Property Name="mes" Type="Int32" />
-          <Property Name="IdProducto_padre" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="pr_descripcion_padre" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="IdBodega" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="VWINV_007">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -7173,7 +7116,6 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
           <EntitySet Name="VWIMP_002" EntityType="Self.VWIMP_002" />
           <EntitySet Name="VWIMP_002_gastos" EntityType="Self.VWIMP_002_gastos" />
           <EntitySet Name="VWIMP_003" EntityType="Self.VWIMP_003" />
-          <EntitySet Name="VWINV_004" EntityType="Self.VWINV_004" />
           <EntitySet Name="VWINV_007" EntityType="Self.VWINV_007" />
           <EntitySet Name="VWINV_008" EntityType="Self.VWINV_008" />
           <EntitySet Name="VWROL_001" EntityType="Self.VWROL_001" />
