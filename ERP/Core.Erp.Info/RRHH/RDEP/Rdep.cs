@@ -22,7 +22,7 @@ namespace Core.Erp.Info.RRHH.RDEP
 
         private string anioField;
 
-        private datRetRelDepTyp[] retRelDepField;
+        private List<datRetRelDepTyp> retRelDepField;
 
         /// <remarks/>
         public string numRuc
@@ -53,7 +53,7 @@ namespace Core.Erp.Info.RRHH.RDEP
 
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("datRetRelDep", IsNullable = false)]
-        public datRetRelDepTyp[] retRelDep
+        public List< datRetRelDepTyp> retRelDep
         {
             get
             {
