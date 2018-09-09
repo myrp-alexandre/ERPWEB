@@ -120,5 +120,17 @@ namespace Core.Erp.Bus.RRHH
 
         }
 
+        public List<Rdep_Info> get_list(int IdEmpresa, int Anio)
+        {
+            try
+            {
+                return  odata.gett_list(IdEmpresa, Anio);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
-}
+    }
