@@ -662,6 +662,51 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+        public ActionResult INV_012()
+        {
+
+            cl_filtros_inventario_Info model = new cl_filtros_inventario_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdMarca = 0,
+                IdProducto = 0
+            };
+
+            cargar_combos(model);
+            INV_012_Rpt report = new INV_012_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdBodega.Value = model.IdBodega;
+            report.p_IdProducto.Value = model.IdProductoPadre == null ? 0 : model.IdProductoPadre;
+            report.p_IdMarca.Value = model.IdMarca;
+            report.p_fechaIni.Value = model.fecha_ini;
+            report.p_dIAS.Value = model.dIAS;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+
+            ViewBag.Report = report;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult INV_012(cl_filtros_inventario_Info model)
+        {
+            INV_012_Rpt report = new INV_012_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdBodega.Value = model.IdBodega;
+            report.p_IdProducto.Value = model.IdProductoPadre == null ? 0 : model.IdProductoPadre;
+            report.p_IdMarca.Value = model.IdMarca;
+            report.p_fechaIni.Value = model.fecha_ini;
+            report.p_dIAS.Value = model.dIAS;
+            cargar_combos(model);
+
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+
+            ViewBag.Report = report;
+            return View(model);
+        }
+
     }
 
 }

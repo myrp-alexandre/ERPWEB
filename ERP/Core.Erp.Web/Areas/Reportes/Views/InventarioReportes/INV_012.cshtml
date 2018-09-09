@@ -2,13 +2,13 @@
 @model Core.Erp.Info.Helps.cl_filtros_inventario_Info
 @{
     Layout = "~/Areas/Reportes/Views/Layout/_Layout_filtros.cshtml";
-    ViewBag.Title = "INV_004";
+    ViewBag.Title = "INV_012";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
     }
 }
-@using (Html.BeginForm("INV_004", "InventarioReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("INV_012", "InventarioReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q=>q.IdEmpresa, new { @id="IdEmpresa"})
     <div class="box">
@@ -42,6 +42,33 @@
                             <label for="IdBodega">Bodega</label>
                             @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodega" })
                             @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="dIAS">Días</label>
+                            @Html.TextBoxFor(q => q.dIAS, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.dIAS, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">Fecha inicio*</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.DevExpress().DateEditFor(q=> q.fecha_ini, settings =>
+                            {
+                                settings.Name = "fecha_ini";
+                                settings.Properties.UseMaskBehavior = true;
+                                settings.Properties.EditFormat = EditFormat.Date;
+                                settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                            }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -98,9 +125,11 @@
 }
 <script>
 
+
     $("#IdSucursal").change(function () {
         cargar_bodega();
     });
+
 
 
     function cargar_bodega() {
@@ -132,4 +161,5 @@
         });
     };
     
+
 </script>

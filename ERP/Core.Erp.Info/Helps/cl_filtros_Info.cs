@@ -97,7 +97,8 @@ namespace Core.Erp.Info.Helps
         public bool mostrarSinMovimiento { get; set; }
         public bool no_mostrar_valores_en_0 { get; set; }
         public bool mostrar_saldos_en_0 { get; set; }
-        
+
+        public int dIAS { get; set; }
         public cl_filtros_inventario_Info()
         {
             fecha_ini = DateTime.Now.Date.AddMonths(-1);

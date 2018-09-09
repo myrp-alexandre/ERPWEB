@@ -9126,6 +9126,7 @@
     <Content Include="Areas\RRHH\Views\Rdep\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\Rdep\_CmbEmpleado_rdep.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_004.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_012.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
