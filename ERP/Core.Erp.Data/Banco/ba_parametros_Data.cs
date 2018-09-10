@@ -22,12 +22,7 @@ namespace Core.Erp.Data.Banco
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         CiudadDefaultParaCrearCheques = Entity.CiudadDefaultParaCrearCheques,
-                        El_Diario_Contable_es_modificable = Entity.El_Diario_Contable_es_modificable,
-                        IdCtaCble_Interes = Entity.IdCtaCble_Interes,
-                        IdCtaCble_prestamos = Entity.IdCtaCble_prestamos,
-                        IdTipoCbte_x_Prestamo = Entity.IdTipoCbte_x_Prestamo,
-                        IdTipoNota_ND_Can_Cuotas = Entity.IdTipoNota_ND_Can_Cuotas,
-                        Ruta_descarga_fila_x_PreAviso_cheq = Entity.Ruta_descarga_fila_x_PreAviso_cheq
+                        DiasTransaccionesAFuturo = Entity.DiasTransaccionesAFuturo,
                     };
                 }
                 return info;
@@ -52,28 +47,19 @@ namespace Core.Erp.Data.Banco
 
                             IdEmpresa = info.IdEmpresa,
                             CiudadDefaultParaCrearCheques = info.CiudadDefaultParaCrearCheques,
-                            El_Diario_Contable_es_modificable = info.El_Diario_Contable_es_modificable,
-                            IdCtaCble_Interes = info.IdCtaCble_Interes,
-                            IdCtaCble_prestamos = info.IdCtaCble_prestamos,
-                            IdTipoCbte_x_Prestamo = info.IdTipoCbte_x_Prestamo,
-                            IdTipoNota_ND_Can_Cuotas = info.IdTipoNota_ND_Can_Cuotas,
-                            Ruta_descarga_fila_x_PreAviso_cheq = info.Ruta_descarga_fila_x_PreAviso_cheq,
-                            IdUsuario = info.IdUsuario
+                            DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo,
+                            IdUsuario = info.IdUsuario,
+                            FechaTransac = DateTime.Now
                         };
                         Context.ba_parametros.Add(Entity);
                     }
                         else
                         {
                         Entity.CiudadDefaultParaCrearCheques = info.CiudadDefaultParaCrearCheques;
-                        Entity.El_Diario_Contable_es_modificable = info.El_Diario_Contable_es_modificable;
-                        Entity.IdCtaCble_Interes = info.IdCtaCble_Interes;
-                        Entity.IdCtaCble_prestamos = info.IdCtaCble_prestamos;
-                        Entity.IdTipoCbte_x_Prestamo = info.IdTipoCbte_x_Prestamo;
-                        Entity.IdTipoNota_ND_Can_Cuotas = info.IdTipoNota_ND_Can_Cuotas;
-                        Entity.Ruta_descarga_fila_x_PreAviso_cheq = info.Ruta_descarga_fila_x_PreAviso_cheq;
-
+                        Entity.DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo;
+                        
                         Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
-
+                        Entity.FechaUltMod = DateTime.Now;
                     }
                     Context.SaveChanges();
                 }

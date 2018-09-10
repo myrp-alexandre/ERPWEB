@@ -34,6 +34,8 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         [HttpPost]
         public ActionResult Index(cxc_Parametro_Info model)
         {
+            model.IdUsuario = SessionFixed.IdUsuario;
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_parametro.guardarDB(model))
                 ViewBag.mensaje = "No se pudieron actualizar los registros";
             cargar_combos(model.IdEmpresa);

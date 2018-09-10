@@ -1,9 +1,6 @@
 ﻿using Core.Erp.Info.Contabilidad;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Data.Contabilidad
 {
@@ -23,7 +20,8 @@ namespace Core.Erp.Data.Contabilidad
                         IdEmpresa = Entity.IdEmpresa,
                         IdTipoCbte_AsientoCierre_Anual = Entity.IdTipoCbte_AsientoCierre_Anual,
                         IdTipoCbte_SaldoInicial = Entity.IdTipoCbte_SaldoInicial,
-                        P_Se_Muestra_Todas_las_ctas_en_combos = Entity.P_Se_Muestra_Todas_las_ctas_en_combos == null ? false : Convert.ToBoolean(Entity.P_Se_Muestra_Todas_las_ctas_en_combos)
+                        P_Se_Muestra_Todas_las_ctas_en_combos = Entity.P_Se_Muestra_Todas_las_ctas_en_combos,
+                        DiasTransaccionesAFuturo = Entity.DiasTransaccionesAFuturo
                     };
                 }
                 return info;
@@ -49,7 +47,8 @@ namespace Core.Erp.Data.Contabilidad
                             IdEmpresa = info.IdEmpresa,
                             IdTipoCbte_SaldoInicial = info.IdTipoCbte_SaldoInicial,
                             IdTipoCbte_AsientoCierre_Anual = info.IdTipoCbte_AsientoCierre_Anual,
-                            P_Se_Muestra_Todas_las_ctas_en_combos = info.P_Se_Muestra_Todas_las_ctas_en_combos
+                            P_Se_Muestra_Todas_las_ctas_en_combos = info.P_Se_Muestra_Todas_las_ctas_en_combos,
+                            DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo
                         };
                     Context.ct_parametro.Add(Entity);
                     }
@@ -58,6 +57,7 @@ namespace Core.Erp.Data.Contabilidad
                         Entity.IdTipoCbte_SaldoInicial = info.IdTipoCbte_SaldoInicial;
                         Entity.IdTipoCbte_AsientoCierre_Anual = info.IdTipoCbte_AsientoCierre_Anual;
                         Entity.P_Se_Muestra_Todas_las_ctas_en_combos = info.P_Se_Muestra_Todas_las_ctas_en_combos;
+                        Entity.DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo;
                     }
                     Context.SaveChanges();
                 }

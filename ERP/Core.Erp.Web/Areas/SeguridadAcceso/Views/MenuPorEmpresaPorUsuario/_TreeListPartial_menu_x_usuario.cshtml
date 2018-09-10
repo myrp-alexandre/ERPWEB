@@ -23,9 +23,7 @@
             column.FieldName = "info_menu.DescripcionMenu";
             column.Width = System.Web.UI.WebControls.Unit.Percentage(90);
         });
-
-        //settings.SettingsCookies.Enabled = true;
-        //settings.SettingsCookies.StoreExpandedNodes = true;
+        
         settings.SettingsCookies.StoreSelection = true;
         settings.Settings.GridLines = System.Web.UI.WebControls.GridLines.Both;
         settings.SettingsPager.Visible = true;
@@ -36,7 +34,6 @@
         settings.SettingsSelection.AllowSelectAll = true;
         settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
         settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
-
         settings.DataBound = (s, e) =>
         {
             MVCxTreeList tree = s as MVCxTreeList;

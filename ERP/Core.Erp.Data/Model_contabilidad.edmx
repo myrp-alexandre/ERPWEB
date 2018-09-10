@@ -127,9 +127,10 @@
             <PropertyRef Name="IdEmpresa" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
-          <Property Name="IdTipoCbte_SaldoInicial" Type="int" />
-          <Property Name="IdTipoCbte_AsientoCierre_Anual" Type="int" />
-          <Property Name="P_Se_Muestra_Todas_las_ctas_en_combos" Type="bit" />
+          <Property Name="IdTipoCbte_SaldoInicial" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte_AsientoCierre_Anual" Type="int" Nullable="false" />
+          <Property Name="P_Se_Muestra_Todas_las_ctas_en_combos" Type="bit" Nullable="false" />
+          <Property Name="DiasTransaccionesAFuturo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ct_periodo">
           <Key>
@@ -518,7 +519,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ct_parametro_ct_cbtecble_tipo">
-          <End Role="ct_cbtecble_tipo" Type="Self.ct_cbtecble_tipo" Multiplicity="0..1" />
+          <End Role="ct_cbtecble_tipo" Type="Self.ct_cbtecble_tipo" Multiplicity="1" />
           <End Role="ct_parametro" Type="Self.ct_parametro" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ct_cbtecble_tipo">
@@ -532,7 +533,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ct_parametro_ct_cbtecble_tipo1">
-          <End Role="ct_cbtecble_tipo" Type="Self.ct_cbtecble_tipo" Multiplicity="0..1" />
+          <End Role="ct_cbtecble_tipo" Type="Self.ct_cbtecble_tipo" Multiplicity="1" />
           <End Role="ct_parametro" Type="Self.ct_parametro" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ct_cbtecble_tipo">
@@ -823,9 +824,9 @@ FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_a
           <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
           <Property Name="MotiAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ct_cbtecble" Relationship="Self.FK_ct_cbtecble_ct_cbtecble_tipo" FromRole="ct_cbtecble_tipo" ToRole="ct_cbtecble" />
-          <NavigationProperty Name="ct_parametro" Relationship="Self.FK_ct_parametro_ct_cbtecble_tipo" FromRole="ct_cbtecble_tipo" ToRole="ct_parametro" />
-          <NavigationProperty Name="ct_parametro1" Relationship="Self.FK_ct_parametro_ct_cbtecble_tipo1" FromRole="ct_cbtecble_tipo" ToRole="ct_parametro" />
-        </EntityType>
+          <NavigationProperty Name="ct_parametro" Relationship="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo" FromRole="ct_cbtecble_tipo" ToRole="ct_parametro" />
+          <NavigationProperty Name="ct_parametro1" Relationship="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo1" FromRole="ct_cbtecble_tipo" ToRole="ct_parametro" />
+          </EntityType>
         <EntityType Name="ct_grupocble">
           <Key>
             <PropertyRef Name="IdGrupoCble" />
@@ -838,17 +839,6 @@ FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_a
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="IdGrupo_Mayor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ct_plancta" Relationship="Self.FK_ct_plancta_ct_grupocble" FromRole="ct_grupocble" ToRole="ct_plancta" />
-        </EntityType>
-        <EntityType Name="ct_parametro">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbte_SaldoInicial" Type="Int32" />
-          <Property Name="IdTipoCbte_AsientoCierre_Anual" Type="Int32" />
-          <Property Name="P_Se_Muestra_Todas_las_ctas_en_combos" Type="Boolean" />
-          <NavigationProperty Name="ct_cbtecble_tipo" Relationship="Self.FK_ct_parametro_ct_cbtecble_tipo" FromRole="ct_parametro" ToRole="ct_cbtecble_tipo" />
-          <NavigationProperty Name="ct_cbtecble_tipo1" Relationship="Self.FK_ct_parametro_ct_cbtecble_tipo1" FromRole="ct_parametro" ToRole="ct_cbtecble_tipo" />
         </EntityType>
         <EntityType Name="ct_periodo">
           <Key>
@@ -1256,34 +1246,6 @@ FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ct_parametro_ct_cbtecble_tipo">
-          <End Role="ct_cbtecble_tipo" Type="Self.ct_cbtecble_tipo" Multiplicity="0..1" />
-          <End Role="ct_parametro" Type="Self.ct_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_cbtecble_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-            </Principal>
-            <Dependent Role="ct_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte_SaldoInicial" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_parametro_ct_cbtecble_tipo1">
-          <End Role="ct_cbtecble_tipo" Type="Self.ct_cbtecble_tipo" Multiplicity="0..1" />
-          <End Role="ct_parametro" Type="Self.ct_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_cbtecble_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-            </Principal>
-            <Dependent Role="ct_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte_AsientoCierre_Anual" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ct_plancta_ct_grupocble">
           <End Role="ct_grupocble" Type="Self.ct_grupocble" Multiplicity="1" />
           <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="*" />
@@ -1332,7 +1294,6 @@ FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_a
           <EntitySet Name="ct_cbtecble_Reversado" EntityType="Self.ct_cbtecble_Reversado" />
           <EntitySet Name="ct_cbtecble_tipo" EntityType="Self.ct_cbtecble_tipo" />
           <EntitySet Name="ct_grupocble" EntityType="Self.ct_grupocble" />
-          <EntitySet Name="ct_parametro" EntityType="Self.ct_parametro" />
           <EntitySet Name="ct_periodo" EntityType="Self.ct_periodo" />
           <EntitySet Name="ct_plancta" EntityType="Self.ct_plancta" />
           <EntitySet Name="ct_plancta_nivel" EntityType="Self.ct_plancta_nivel" />
@@ -1391,14 +1352,6 @@ FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_a
             <End Role="ct_punto_cargo" EntitySet="ct_punto_cargo" />
             <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
           </AssociationSet>
-          <AssociationSet Name="FK_ct_parametro_ct_cbtecble_tipo" Association="Self.FK_ct_parametro_ct_cbtecble_tipo">
-            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
-            <End Role="ct_parametro" EntitySet="ct_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_parametro_ct_cbtecble_tipo1" Association="Self.FK_ct_parametro_ct_cbtecble_tipo1">
-            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
-            <End Role="ct_parametro" EntitySet="ct_parametro" />
-          </AssociationSet>
           <AssociationSet Name="FK_ct_plancta_ct_grupocble" Association="Self.FK_ct_plancta_ct_grupocble">
             <End Role="ct_grupocble" EntitySet="ct_grupocble" />
             <End Role="ct_plancta" EntitySet="ct_plancta" />
@@ -1415,6 +1368,15 @@ FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_a
             <Parameter Name="idempresa" Mode="In" Type="Int32" />
             <Parameter Name="idPeriodo" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="ct_parametro" EntityType="Model_contabilidad.ct_parametro" />
+          <AssociationSet Name="FK_ct_parametro_ct_cbtecble_tipo" Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo">
+            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
+            <End Role="ct_parametro" EntitySet="ct_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_parametro_ct_cbtecble_tipo1" Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo1">
+            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
+            <End Role="ct_parametro" EntitySet="ct_parametro" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="generarATS_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -1438,6 +1400,46 @@ FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_a
           <Property Type="DateTime" Name="fechaEmision" Nullable="true" />
           <Property Type="String" Name="denoExpCli" Nullable="true" MaxLength="500" />
         </ComplexType>
+        <EntityType Name="ct_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte_SaldoInicial" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte_AsientoCierre_Anual" Type="Int32" Nullable="false" />
+          <Property Name="P_Se_Muestra_Todas_las_ctas_en_combos" Type="Boolean" Nullable="false" />
+          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ct_cbtecble_tipo" Relationship="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo" FromRole="ct_parametro" ToRole="ct_cbtecble_tipo" />
+          <NavigationProperty Name="ct_cbtecble_tipo1" Relationship="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo1" FromRole="ct_parametro" ToRole="ct_cbtecble_tipo" />
+        </EntityType>
+        <Association Name="FK_ct_parametro_ct_cbtecble_tipo">
+          <End Type="Model_contabilidad.ct_cbtecble_tipo" Role="ct_cbtecble_tipo" Multiplicity="1" />
+          <End Type="Model_contabilidad.ct_parametro" Role="ct_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+            </Principal>
+            <Dependent Role="ct_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte_SaldoInicial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_parametro_ct_cbtecble_tipo1">
+          <End Type="Model_contabilidad.ct_cbtecble_tipo" Role="ct_cbtecble_tipo" Multiplicity="1" />
+          <End Type="Model_contabilidad.ct_parametro" Role="ct_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+            </Principal>
+            <Dependent Role="ct_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte_AsientoCierre_Anual" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1553,16 +1555,6 @@ FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_a
                 <ScalarProperty Name="gc_signo_operacion" ColumnName="gc_signo_operacion" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="IdGrupo_Mayor" ColumnName="IdGrupo_Mayor" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ct_parametro">
-            <EntityTypeMapping TypeName="Model_contabilidad.ct_parametro">
-              <MappingFragment StoreEntitySet="ct_parametro">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdTipoCbte_SaldoInicial" ColumnName="IdTipoCbte_SaldoInicial" />
-                <ScalarProperty Name="IdTipoCbte_AsientoCierre_Anual" ColumnName="IdTipoCbte_AsientoCierre_Anual" />
-                <ScalarProperty Name="P_Se_Muestra_Todas_las_ctas_en_combos" ColumnName="P_Se_Muestra_Todas_las_ctas_en_combos" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1812,6 +1804,17 @@ FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_a
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="ct_parametro">
+            <EntityTypeMapping TypeName="Model_contabilidad.ct_parametro">
+              <MappingFragment StoreEntitySet="ct_parametro">
+                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
+                <ScalarProperty Name="P_Se_Muestra_Todas_las_ctas_en_combos" ColumnName="P_Se_Muestra_Todas_las_ctas_en_combos" />
+                <ScalarProperty Name="IdTipoCbte_AsientoCierre_Anual" ColumnName="IdTipoCbte_AsientoCierre_Anual" />
+                <ScalarProperty Name="IdTipoCbte_SaldoInicial" ColumnName="IdTipoCbte_SaldoInicial" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

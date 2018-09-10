@@ -26,7 +26,7 @@
             IdEmpresa: $("#IdEmpresa").val(),
             IDs: selectedIDs
         }
-        $("#btn_guardar").disabled = true;
+        $("#btn_guardar").attr("disabled", true);
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
@@ -42,10 +42,8 @@
             error: function (error) {
             }
         });
-        $("#btn_guardar").disabled = false;
     }
 </script>
-<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Index", "MenuPorEmpresa", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
 {

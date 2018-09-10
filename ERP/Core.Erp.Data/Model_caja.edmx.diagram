@@ -9,7 +9,6 @@
         <EntityTypeShape EntityType="Model_caja.caj_Caja_Movimiento" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_caja.caj_Caja_Movimiento_det" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_caja.caj_Caja_Movimiento_Tipo" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_caja.caj_parametro" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_caja.cp_conciliacion_Caja" Width="1.5" PointX="8.25" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_caja.cp_conciliacion_Caja_det" Width="1.5" PointX="10.5" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_caja.cp_conciliacion_Caja_det_Ing_Caja" Width="1.5" PointX="13.5" PointY="7.875" IsExpanded="true" />
@@ -28,6 +27,7 @@
         <AssociationConnector Association="Model_caja.FK_cp_conciliacion_Caja_det_x_ValeCaja_cp_conciliacion_Caja" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Model_caja.vwcp_conciliacion_Caja_det_x_ValeCaja" Width="1.5" PointX="9.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_caja.vwcp_conciliacion_Caja_det" Width="1.5" PointX="5.375" PointY="11.75" />
+        <EntityTypeShape EntityType="Model_caja.caj_parametro" Width="1.5" PointX="10.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -13,5 +13,6 @@ namespace Core.Erp.Info.Compras
         public int IdMovi_inven_tipo_OC { get; set; }
         public string IdEstadoAnulacion_OC { get; set; }
         public string IdEstado_cierre { get; set; }
+        public int DiasTransaccionesAFuturo { get; set; }
     }
 }

@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="Model_contabilidad.ct_cbtecble_Reversado" Width="1.5" PointX="7.5" PointY="17.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_contabilidad.ct_cbtecble_tipo" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_contabilidad.ct_grupocble" Width="1.5" PointX="1.5" PointY="22.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_contabilidad.ct_parametro" Width="1.5" PointX="5.25" PointY="18.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_contabilidad.ct_periodo" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_contabilidad.ct_plancta" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_contabilidad.ct_plancta_nivel" Width="1.5" PointX="1.5" PointY="25.375" IsExpanded="true" />
@@ -35,11 +34,12 @@
         <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble1" ManuallyRouted="false" />
         <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_det_ct_plancta" ManuallyRouted="false" />
         <AssociationConnector Association="Model_contabilidad.FK_ct_cbtecble_det_ct_punto_cargo" ManuallyRouted="false" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo" ManuallyRouted="false" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo1" ManuallyRouted="false" />
         <AssociationConnector Association="Model_contabilidad.FK_ct_plancta_ct_grupocble" ManuallyRouted="false" />
         <AssociationConnector Association="Model_contabilidad.FK_ct_plancta_ct_plancta" ManuallyRouted="false" />
         <AssociationConnector Association="Model_contabilidad.FK_ct_plancta_ct_plancta_nivel" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_parametro" Width="1.5" PointX="5.25" PointY="18.375" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

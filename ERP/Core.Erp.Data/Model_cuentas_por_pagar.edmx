@@ -427,34 +427,21 @@
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="pa_TipoCbte_OG" Type="int" />
-          <Property Name="pa_TipoCbte_OG_anulacion" Type="int" />
           <Property Name="pa_ctacble_deudora" Type="varchar" MaxLength="20" />
           <Property Name="pa_ctacble_iva" Type="varchar" MaxLength="20" />
           <Property Name="pa_ctacble_Proveedores_default" Type="varchar" MaxLength="20" />
           <Property Name="pa_IdTipoCbte_x_Retencion" Type="int" />
-          <Property Name="pa_IdTipoCbte_x_Anu_Retencion" Type="int" />
           <Property Name="IdTipoMoviCaja" Type="int" />
           <Property Name="pa_TipoEgrMoviCaja_Conciliacion" Type="int" />
           <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
           <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
           <Property Name="FechaUltMod" Type="datetime" />
-          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
-          <Property Name="ip" Type="varchar" MaxLength="25" />
           <Property Name="pa_TipoCbte_NC" Type="int" />
-          <Property Name="pa_TipoCbte_NC_anulacion" Type="int" />
-          <Property Name="pa_obligaOC" Type="varchar" MaxLength="1" />
           <Property Name="pa_TipoCbte_ND" Type="int" />
-          <Property Name="pa_TipoCbte_ND_anulacion" Type="int" />
-          <Property Name="pa_xsd_de_atsSRI" Type="varbinary(max)" />
-          <Property Name="pa_Formulario103_104" Type="varbinary(max)" />
-          <Property Name="pa_TipoCbte_para_conci_anulacion_x_antcipo" Type="int" />
           <Property Name="pa_TipoCbte_para_conci_x_antcipo" Type="int" />
-          <Property Name="pa_ruta_descarga_xml_fac_elct" Type="varchar" MaxLength="500" />
           <Property Name="pa_ctacble_x_RetIva_default" Type="varchar" MaxLength="20" />
           <Property Name="pa_ctacble_x_RetFte_default" Type="varchar" MaxLength="20" />
-          <Property Name="archivo_diseño_reporte" Type="varbinary(max)" />
-          <Property Name="pa_IdBancoCuenta_default_para_OP" Type="int" />
-          <Property Name="pa_X_Defecto_la_Retencion_es_cbte_elect" Type="bit" />
+          <Property Name="DiasTransaccionesAFuturo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="cp_proveedor">
           <Key>
@@ -2304,41 +2291,6 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
           <Property Name="Pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="cp_orden_giro" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_cp_pais_sri" FromRole="cp_pais_sri" ToRole="cp_orden_giro" />
         </EntityType>
-        <EntityType Name="cp_parametros">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="pa_TipoCbte_OG" Type="Int32" />
-          <Property Name="pa_TipoCbte_OG_anulacion" Type="Int32" />
-          <Property Name="pa_ctacble_deudora" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pa_ctacble_iva" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pa_ctacble_Proveedores_default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pa_IdTipoCbte_x_Retencion" Type="Int32" />
-          <Property Name="pa_IdTipoCbte_x_Anu_Retencion" Type="Int32" />
-          <Property Name="IdTipoMoviCaja" Type="Int32" />
-          <Property Name="pa_TipoEgrMoviCaja_Conciliacion" Type="Int32" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
-          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="pa_TipoCbte_NC" Type="Int32" />
-          <Property Name="pa_TipoCbte_NC_anulacion" Type="Int32" />
-          <Property Name="pa_obligaOC" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="pa_TipoCbte_ND" Type="Int32" />
-          <Property Name="pa_TipoCbte_ND_anulacion" Type="Int32" />
-          <Property Name="pa_xsd_de_atsSRI" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="pa_Formulario103_104" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="pa_TipoCbte_para_conci_anulacion_x_antcipo" Type="Int32" />
-          <Property Name="pa_TipoCbte_para_conci_x_antcipo" Type="Int32" />
-          <Property Name="pa_ruta_descarga_xml_fac_elct" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="pa_ctacble_x_RetIva_default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pa_ctacble_x_RetFte_default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="archivo_diseño_reporte" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="pa_IdBancoCuenta_default_para_OP" Type="Int32" />
-          <Property Name="pa_X_Defecto_la_Retencion_es_cbte_elect" Type="Boolean" />
-        </EntityType>
         <EntityType Name="cp_proveedor">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2877,7 +2829,6 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
           <EntitySet Name="cp_orden_pago_x_nomina" EntityType="Self.cp_orden_pago_x_nomina" />
           <EntitySet Name="cp_pagos_sri" EntityType="Self.cp_pagos_sri" />
           <EntitySet Name="cp_pais_sri" EntityType="Self.cp_pais_sri" />
-          <EntitySet Name="cp_parametros" EntityType="Self.cp_parametros" />
           <EntitySet Name="cp_proveedor" EntityType="Self.cp_proveedor" />
           <EntitySet Name="cp_retencion" EntityType="Self.cp_retencion" />
           <EntitySet Name="cp_retencion_det" EntityType="Self.cp_retencion_det" />
@@ -3041,6 +2992,7 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
             <End Role="cp_orden_giro_x_in_Ing_Egr_Inven" EntitySet="cp_orden_giro_x_in_Ing_Egr_Inven" />
           </AssociationSet>
           <EntitySet Name="vwcp_orden_giro_det" EntityType="Model_cuentas_por_pagar.vwcp_orden_giro_det" />
+          <EntitySet Name="cp_parametros" EntityType="Model_cuentas_por_pagar.cp_parametros" />
         </EntityContainer>
         <ComplexType Name="spcp_Get_Data_orden_pago_con_cancelacion_data_Result">
           <Property Type="Int64" Name="IdRow" Nullable="false" />
@@ -3737,6 +3689,28 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
           <Property Name="IdCtaCbleGasto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="pr_descripcion" Type="String" MaxLength="713" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="cp_parametros">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="pa_TipoCbte_OG" Type="Int32" />
+          <Property Name="pa_ctacble_deudora" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pa_ctacble_iva" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pa_ctacble_Proveedores_default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pa_IdTipoCbte_x_Retencion" Type="Int32" />
+          <Property Name="IdTipoMoviCaja" Type="Int32" />
+          <Property Name="pa_TipoEgrMoviCaja_Conciliacion" Type="Int32" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
+          <Property Name="pa_TipoCbte_NC" Type="Int32" />
+          <Property Name="pa_TipoCbte_ND" Type="Int32" />
+          <Property Name="pa_TipoCbte_para_conci_x_antcipo" Type="Int32" />
+          <Property Name="pa_ctacble_x_RetIva_default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pa_ctacble_x_RetFte_default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4052,42 +4026,6 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
               <MappingFragment StoreEntitySet="cp_pais_sri">
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Pais" ColumnName="Pais" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="cp_parametros">
-            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_parametros">
-              <MappingFragment StoreEntitySet="cp_parametros">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="pa_TipoCbte_OG" ColumnName="pa_TipoCbte_OG" />
-                <ScalarProperty Name="pa_TipoCbte_OG_anulacion" ColumnName="pa_TipoCbte_OG_anulacion" />
-                <ScalarProperty Name="pa_ctacble_deudora" ColumnName="pa_ctacble_deudora" />
-                <ScalarProperty Name="pa_ctacble_iva" ColumnName="pa_ctacble_iva" />
-                <ScalarProperty Name="pa_ctacble_Proveedores_default" ColumnName="pa_ctacble_Proveedores_default" />
-                <ScalarProperty Name="pa_IdTipoCbte_x_Retencion" ColumnName="pa_IdTipoCbte_x_Retencion" />
-                <ScalarProperty Name="pa_IdTipoCbte_x_Anu_Retencion" ColumnName="pa_IdTipoCbte_x_Anu_Retencion" />
-                <ScalarProperty Name="IdTipoMoviCaja" ColumnName="IdTipoMoviCaja" />
-                <ScalarProperty Name="pa_TipoEgrMoviCaja_Conciliacion" ColumnName="pa_TipoEgrMoviCaja_Conciliacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
-                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
-                <ScalarProperty Name="ip" ColumnName="ip" />
-                <ScalarProperty Name="pa_TipoCbte_NC" ColumnName="pa_TipoCbte_NC" />
-                <ScalarProperty Name="pa_TipoCbte_NC_anulacion" ColumnName="pa_TipoCbte_NC_anulacion" />
-                <ScalarProperty Name="pa_obligaOC" ColumnName="pa_obligaOC" />
-                <ScalarProperty Name="pa_TipoCbte_ND" ColumnName="pa_TipoCbte_ND" />
-                <ScalarProperty Name="pa_TipoCbte_ND_anulacion" ColumnName="pa_TipoCbte_ND_anulacion" />
-                <ScalarProperty Name="pa_xsd_de_atsSRI" ColumnName="pa_xsd_de_atsSRI" />
-                <ScalarProperty Name="pa_Formulario103_104" ColumnName="pa_Formulario103_104" />
-                <ScalarProperty Name="pa_TipoCbte_para_conci_anulacion_x_antcipo" ColumnName="pa_TipoCbte_para_conci_anulacion_x_antcipo" />
-                <ScalarProperty Name="pa_TipoCbte_para_conci_x_antcipo" ColumnName="pa_TipoCbte_para_conci_x_antcipo" />
-                <ScalarProperty Name="pa_ruta_descarga_xml_fac_elct" ColumnName="pa_ruta_descarga_xml_fac_elct" />
-                <ScalarProperty Name="pa_ctacble_x_RetIva_default" ColumnName="pa_ctacble_x_RetIva_default" />
-                <ScalarProperty Name="pa_ctacble_x_RetFte_default" ColumnName="pa_ctacble_x_RetFte_default" />
-                <ScalarProperty Name="archivo_diseño_reporte" ColumnName="archivo_diseño_reporte" />
-                <ScalarProperty Name="pa_IdBancoCuenta_default_para_OP" ColumnName="pa_IdBancoCuenta_default_para_OP" />
-                <ScalarProperty Name="pa_X_Defecto_la_Retencion_es_cbte_elect" ColumnName="pa_X_Defecto_la_Retencion_es_cbte_elect" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4716,6 +4654,29 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdTipoCbte_Ogiro" ColumnName="IdTipoCbte_Ogiro" />
                 <ScalarProperty Name="IdCbteCble_Ogiro" ColumnName="IdCbteCble_Ogiro" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cp_parametros">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_parametros">
+              <MappingFragment StoreEntitySet="cp_parametros">
+                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
+                <ScalarProperty Name="pa_ctacble_x_RetFte_default" ColumnName="pa_ctacble_x_RetFte_default" />
+                <ScalarProperty Name="pa_ctacble_x_RetIva_default" ColumnName="pa_ctacble_x_RetIva_default" />
+                <ScalarProperty Name="pa_TipoCbte_para_conci_x_antcipo" ColumnName="pa_TipoCbte_para_conci_x_antcipo" />
+                <ScalarProperty Name="pa_TipoCbte_ND" ColumnName="pa_TipoCbte_ND" />
+                <ScalarProperty Name="pa_TipoCbte_NC" ColumnName="pa_TipoCbte_NC" />
+                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="pa_TipoEgrMoviCaja_Conciliacion" ColumnName="pa_TipoEgrMoviCaja_Conciliacion" />
+                <ScalarProperty Name="IdTipoMoviCaja" ColumnName="IdTipoMoviCaja" />
+                <ScalarProperty Name="pa_IdTipoCbte_x_Retencion" ColumnName="pa_IdTipoCbte_x_Retencion" />
+                <ScalarProperty Name="pa_ctacble_Proveedores_default" ColumnName="pa_ctacble_Proveedores_default" />
+                <ScalarProperty Name="pa_ctacble_iva" ColumnName="pa_ctacble_iva" />
+                <ScalarProperty Name="pa_ctacble_deudora" ColumnName="pa_ctacble_deudora" />
+                <ScalarProperty Name="pa_TipoCbte_OG" ColumnName="pa_TipoCbte_OG" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

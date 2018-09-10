@@ -19,8 +19,6 @@ namespace Core.Erp.Data
             this.cxc_cobro = new HashSet<cxc_cobro>();
             this.cxc_cobro_det = new HashSet<cxc_cobro_det>();
             this.cxc_cobro_tipo_Param_conta_x_sucursal = new HashSet<cxc_cobro_tipo_Param_conta_x_sucursal>();
-            this.cxc_Parametro = new HashSet<cxc_Parametro>();
-            this.cxc_Parametro1 = new HashSet<cxc_Parametro>();
         }
     
         public string IdCobro_tipo { get; set; }
@@ -58,7 +56,5 @@ namespace Core.Erp.Data
         public virtual ICollection<cxc_cobro_det> cxc_cobro_det { get; set; }
         public virtual cxc_cobro_tipo_motivo cxc_cobro_tipo_motivo { get; set; }
         public virtual ICollection<cxc_cobro_tipo_Param_conta_x_sucursal> cxc_cobro_tipo_Param_conta_x_sucursal { get; set; }
-        public virtual ICollection<cxc_Parametro> cxc_Parametro { get; set; }
-        public virtual ICollection<cxc_Parametro> cxc_Parametro1 { get; set; }
     }
 }

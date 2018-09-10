@@ -33,12 +33,12 @@ namespace Core.Erp.Data
         public DbSet<cxc_cobro_tipo_motivo> cxc_cobro_tipo_motivo { get; set; }
         public DbSet<cxc_cobro_tipo_Param_conta_x_sucursal> cxc_cobro_tipo_Param_conta_x_sucursal { get; set; }
         public DbSet<cxc_cobro_x_ct_cbtecble> cxc_cobro_x_ct_cbtecble { get; set; }
-        public DbSet<cxc_Parametro> cxc_Parametro { get; set; }
         public DbSet<vwcxc_cobro> vwcxc_cobro { get; set; }
         public DbSet<vwcxc_cobro_det> vwcxc_cobro_det { get; set; }
         public DbSet<vwcxc_cobro_det_retencion> vwcxc_cobro_det_retencion { get; set; }
         public DbSet<vwcxc_cobro_para_retencion> vwcxc_cobro_para_retencion { get; set; }
         public DbSet<vwcxc_cartera_x_cobrar> vwcxc_cartera_x_cobrar { get; set; }
         public DbSet<cxc_liquidacion_comisiones> cxc_liquidacion_comisiones { get; set; }
+        public DbSet<cxc_Parametro> cxc_Parametro { get; set; }
     }
 }

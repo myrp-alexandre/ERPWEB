@@ -8686,8 +8686,6 @@
     <Content Include="Areas\General\Views\Parroquia\Modificar.cshtml" />
     <Content Include="Areas\General\Views\Parroquia\Nuevo.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\ParametrosCXP\Index.cshtml" />
-    <Content Include="Areas\CuentasPorPagar\Views\ParametrosCXP\Modificar.cshtml" />
-    <Content Include="Areas\CuentasPorPagar\Views\ParametrosCXP\_GridViewPartial_parametros.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\Nuevo.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\_GridViewPartial_detalle_op.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\_GridViewPartial_orden_pago_dc.cshtml" />

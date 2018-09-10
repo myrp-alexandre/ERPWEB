@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model_banco.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model_banco.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ba_Banco_Cuenta">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -184,18 +184,12 @@
             <PropertyRef Name="IdEmpresa" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
-          <Property Name="El_Diario_Contable_es_modificable" Type="bit" Nullable="false" />
           <Property Name="CiudadDefaultParaCrearCheques" Type="varchar" MaxLength="25" />
+          <Property Name="DiasTransaccionesAFuturo" Type="int" Nullable="false" />
           <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="FechaTransac" Type="datetime" />
           <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
           <Property Name="FechaUltMod" Type="datetime" />
-          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
-          <Property Name="ip" Type="varchar" MaxLength="25" />
-          <Property Name="IdTipoCbte_x_Prestamo" Type="int" />
-          <Property Name="IdTipoNota_ND_Can_Cuotas" Type="int" />
-          <Property Name="Ruta_descarga_fila_x_PreAviso_cheq" Type="varchar" MaxLength="200" />
-          <Property Name="IdCtaCble_Interes" Type="varchar" MaxLength="20" />
-          <Property Name="IdCtaCble_prestamos" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="ba_Talonario_cheques_x_banco">
           <Key>
@@ -761,8 +755,7 @@ FROM [web].[vwba_Talonario_cheques_x_banco_ID] AS [vwba_Talonario_cheques_x_banc
             <End Role="ba_Talonario_cheques_x_banco" EntitySet="ba_Talonario_cheques_x_banco" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model_banco" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -957,24 +950,6 @@ FROM [web].[vwba_Talonario_cheques_x_banco_ID] AS [vwba_Talonario_cheques_x_banc
           <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ba_Conciliacion" Relationship="Self.FK_ba_Conciliacion_det_IngEgr_ba_Conciliacion" FromRole="ba_Conciliacion_det_IngEgr" ToRole="ba_Conciliacion" />
-        </EntityType>
-        <EntityType Name="ba_parametros">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="El_Diario_Contable_es_modificable" Type="Boolean" Nullable="false" />
-          <Property Name="CiudadDefaultParaCrearCheques" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
-          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoCbte_x_Prestamo" Type="Int32" />
-          <Property Name="IdTipoNota_ND_Can_Cuotas" Type="Int32" />
-          <Property Name="Ruta_descarga_fila_x_PreAviso_cheq" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IdCtaCble_Interes" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdCtaCble_prestamos" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ba_Talonario_cheques_x_banco">
           <Key>
@@ -1358,7 +1333,6 @@ FROM [web].[vwba_Talonario_cheques_x_banco_ID] AS [vwba_Talonario_cheques_x_banc
           <EntitySet Name="ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo" EntityType="Self.ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo" />
           <EntitySet Name="ba_Conciliacion" EntityType="Self.ba_Conciliacion" />
           <EntitySet Name="ba_Conciliacion_det_IngEgr" EntityType="Self.ba_Conciliacion_det_IngEgr" />
-          <EntitySet Name="ba_parametros" EntityType="Self.ba_parametros" />
           <EntitySet Name="ba_Talonario_cheques_x_banco" EntityType="Self.ba_Talonario_cheques_x_banco" />
           <EntitySet Name="ba_tipo_nota" EntityType="Self.ba_tipo_nota" />
           <EntitySet Name="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" EntityType="Self.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" />
@@ -1408,7 +1382,20 @@ FROM [web].[vwba_Talonario_cheques_x_banco_ID] AS [vwba_Talonario_cheques_x_banc
             <End Role="ba_Conciliacion" EntitySet="ba_Conciliacion" />
             <End Role="ba_Conciliacion_det_IngEgr" EntitySet="ba_Conciliacion_det_IngEgr" />
           </AssociationSet>
+          <EntitySet Name="ba_parametros" EntityType="Model_banco.ba_parametros" />
         </EntityContainer>
+        <EntityType Name="ba_parametros">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="CiudadDefaultParaCrearCheques" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaTransac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1584,25 +1571,6 @@ FROM [web].[vwba_Talonario_cheques_x_banco_ID] AS [vwba_Talonario_cheques_x_banc
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ba_parametros">
-            <EntityTypeMapping TypeName="Model_banco.ba_parametros">
-              <MappingFragment StoreEntitySet="ba_parametros">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="El_Diario_Contable_es_modificable" ColumnName="El_Diario_Contable_es_modificable" />
-                <ScalarProperty Name="CiudadDefaultParaCrearCheques" ColumnName="CiudadDefaultParaCrearCheques" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
-                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
-                <ScalarProperty Name="ip" ColumnName="ip" />
-                <ScalarProperty Name="IdTipoCbte_x_Prestamo" ColumnName="IdTipoCbte_x_Prestamo" />
-                <ScalarProperty Name="IdTipoNota_ND_Can_Cuotas" ColumnName="IdTipoNota_ND_Can_Cuotas" />
-                <ScalarProperty Name="Ruta_descarga_fila_x_PreAviso_cheq" ColumnName="Ruta_descarga_fila_x_PreAviso_cheq" />
-                <ScalarProperty Name="IdCtaCble_Interes" ColumnName="IdCtaCble_Interes" />
-                <ScalarProperty Name="IdCtaCble_prestamos" ColumnName="IdCtaCble_prestamos" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ba_Talonario_cheques_x_banco">
             <EntityTypeMapping TypeName="Model_banco.ba_Talonario_cheques_x_banco">
               <MappingFragment StoreEntitySet="ba_Talonario_cheques_x_banco">
@@ -1772,6 +1740,19 @@ FROM [web].[vwba_Talonario_cheques_x_banco_ID] AS [vwba_Talonario_cheques_x_banc
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
                 <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
                 <ScalarProperty Name="Num_cheque" ColumnName="Num_cheque" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ba_parametros">
+            <EntityTypeMapping TypeName="Model_banco.ba_parametros">
+              <MappingFragment StoreEntitySet="ba_parametros">
+                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="FechaTransac" ColumnName="FechaTransac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
+                <ScalarProperty Name="CiudadDefaultParaCrearCheques" ColumnName="CiudadDefaultParaCrearCheques" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -219,11 +219,7 @@
           <Property Name="IdCtaCble_Dep_Acum" Type="varchar" MaxLength="20" />
           <Property Name="IdCtaCble_Gastos_Depre" Type="varchar" MaxLength="20" />
           <Property Name="FormaContabiliza" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="IdTipoCbteMejora_Anulacion" Type="int" Nullable="false" />
-          <Property Name="IdTipoCbteBaja_Anulacion" Type="int" Nullable="false" />
-          <Property Name="IdTipoCbteVenta_Anulacion" Type="int" Nullable="false" />
-          <Property Name="IdTipoCbteRetiro_Anulacion" Type="int" Nullable="false" />
-          <Property Name="IdTipoCbteDep_Acum_Anulacion" Type="int" Nullable="false" />
+          <Property Name="DiasTransaccionesAFuturo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Af_Retiro_Activo">
           <Key>
@@ -758,26 +754,6 @@
           <Property Name="Fecha_MejBaj" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Af_Activo_fijo" Relationship="Self.FK_Af_Mej_Baj_Activo_Af_Activo_fijo" FromRole="Af_Mej_Baj_Activo" ToRole="Af_Activo_fijo" />
         </EntityType>
-        <EntityType Name="Af_Parametros">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbteMejora" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbteBaja" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbteVenta" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbteRetiro" Type="Int32" Nullable="false" />
-          <Property Name="IdCtaCble_Activo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdCtaCble_Dep_Acum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdCtaCble_Gastos_Depre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="FormaContabiliza" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdTipoCbteMejora_Anulacion" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbteBaja_Anulacion" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbteVenta_Anulacion" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbteRetiro_Anulacion" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbteDep_Acum_Anulacion" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="Af_Retiro_Activo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1023,7 +999,6 @@
           <EntitySet Name="Af_Depreciacion" EntityType="Self.Af_Depreciacion" />
           <EntitySet Name="Af_Depreciacion_Det" EntityType="Self.Af_Depreciacion_Det" />
           <EntitySet Name="Af_Mej_Baj_Activo" EntityType="Self.Af_Mej_Baj_Activo" />
-          <EntitySet Name="Af_Parametros" EntityType="Self.Af_Parametros" />
           <EntitySet Name="Af_Retiro_Activo" EntityType="Self.Af_Retiro_Activo" />
           <EntitySet Name="Af_Venta_Activo" EntityType="Self.Af_Venta_Activo" />
           <AssociationSet Name="FK_Af_Activo_fijo_Af_Activo_fijo_Categoria" Association="Self.FK_Af_Activo_fijo_Af_Activo_fijo_Categoria">
@@ -1084,6 +1059,7 @@
             <Parameter Name="Fecha_fin" Mode="In" Type="DateTime" />
             <Parameter Name="IdUsuario" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Af_Parametros" EntityType="Model_activo_fijo.Af_Parametros" />
         </EntityContainer>
         <ComplexType Name="spACTF_activos_a_depreciar_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -1104,6 +1080,22 @@
           <Property Type="String" Name="IdCtaCble_Dep_Acum" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="IdCtaCble_Gastos_Depre" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <EntityType Name="Af_Parametros">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbteMejora" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbteBaja" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbteVenta" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbteRetiro" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble_Activo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_Dep_Acum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_Gastos_Depre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FormaContabiliza" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1310,27 +1302,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Af_Parametros">
-            <EntityTypeMapping TypeName="Model_activo_fijo.Af_Parametros">
-              <MappingFragment StoreEntitySet="Af_Parametros">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
-                <ScalarProperty Name="IdTipoCbteMejora" ColumnName="IdTipoCbteMejora" />
-                <ScalarProperty Name="IdTipoCbteBaja" ColumnName="IdTipoCbteBaja" />
-                <ScalarProperty Name="IdTipoCbteVenta" ColumnName="IdTipoCbteVenta" />
-                <ScalarProperty Name="IdTipoCbteRetiro" ColumnName="IdTipoCbteRetiro" />
-                <ScalarProperty Name="IdCtaCble_Activo" ColumnName="IdCtaCble_Activo" />
-                <ScalarProperty Name="IdCtaCble_Dep_Acum" ColumnName="IdCtaCble_Dep_Acum" />
-                <ScalarProperty Name="IdCtaCble_Gastos_Depre" ColumnName="IdCtaCble_Gastos_Depre" />
-                <ScalarProperty Name="FormaContabiliza" ColumnName="FormaContabiliza" />
-                <ScalarProperty Name="IdTipoCbteMejora_Anulacion" ColumnName="IdTipoCbteMejora_Anulacion" />
-                <ScalarProperty Name="IdTipoCbteBaja_Anulacion" ColumnName="IdTipoCbteBaja_Anulacion" />
-                <ScalarProperty Name="IdTipoCbteVenta_Anulacion" ColumnName="IdTipoCbteVenta_Anulacion" />
-                <ScalarProperty Name="IdTipoCbteRetiro_Anulacion" ColumnName="IdTipoCbteRetiro_Anulacion" />
-                <ScalarProperty Name="IdTipoCbteDep_Acum_Anulacion" ColumnName="IdTipoCbteDep_Acum_Anulacion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Af_Retiro_Activo">
             <EntityTypeMapping TypeName="Model_activo_fijo.Af_Retiro_Activo">
               <MappingFragment StoreEntitySet="Af_Retiro_Activo">
@@ -1418,6 +1389,23 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Af_Parametros">
+            <EntityTypeMapping TypeName="Model_activo_fijo.Af_Parametros">
+              <MappingFragment StoreEntitySet="Af_Parametros">
+                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
+                <ScalarProperty Name="FormaContabiliza" ColumnName="FormaContabiliza" />
+                <ScalarProperty Name="IdCtaCble_Gastos_Depre" ColumnName="IdCtaCble_Gastos_Depre" />
+                <ScalarProperty Name="IdCtaCble_Dep_Acum" ColumnName="IdCtaCble_Dep_Acum" />
+                <ScalarProperty Name="IdCtaCble_Activo" ColumnName="IdCtaCble_Activo" />
+                <ScalarProperty Name="IdTipoCbteRetiro" ColumnName="IdTipoCbteRetiro" />
+                <ScalarProperty Name="IdTipoCbteVenta" ColumnName="IdTipoCbteVenta" />
+                <ScalarProperty Name="IdTipoCbteBaja" ColumnName="IdTipoCbteBaja" />
+                <ScalarProperty Name="IdTipoCbteMejora" ColumnName="IdTipoCbteMejora" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

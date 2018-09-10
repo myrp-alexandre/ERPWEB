@@ -27,14 +27,10 @@ namespace Core.Erp.Data.ActivoFijo
                         IdCtaCble_Gastos_Depre = Entity.IdCtaCble_Gastos_Depre,
                         IdTipoCbte = Entity.IdTipoCbte,
                         IdTipoCbteBaja =Entity.IdTipoCbteBaja,
-                        IdTipoCbteBaja_Anulacion = Entity.IdTipoCbteBaja_Anulacion,
-                        IdTipoCbteDep_Acum_Anulacion = Entity.IdTipoCbteDep_Acum_Anulacion,
-                        IdTipoCbteMejora_Anulacion = Entity.IdTipoCbteMejora_Anulacion,
                         IdTipoCbteMejora = Entity.IdTipoCbteMejora,
                         IdTipoCbteRetiro = Entity.IdTipoCbteRetiro,
-                        IdTipoCbteRetiro_Anulacion = Entity.IdTipoCbteRetiro_Anulacion,
                         IdTipoCbteVenta =Entity.IdTipoCbteVenta,
-                        IdTipoCbteVenta_Anulacion = Entity.IdTipoCbteVenta_Anulacion
+                        DiasTransaccionesAFuturo = Entity.DiasTransaccionesAFuturo
                     };
                 }
                 return info;
@@ -56,7 +52,7 @@ namespace Core.Erp.Data.ActivoFijo
                     if (Entity == null)
                     {
                         Entity = new Af_Parametros
-                            {
+                        {
 
                             IdEmpresa = info.IdEmpresa,
                             IdCtaCble_Activo = info.IdCtaCble_Activo,
@@ -65,14 +61,10 @@ namespace Core.Erp.Data.ActivoFijo
                             IdCtaCble_Gastos_Depre = info.IdCtaCble_Gastos_Depre,
                             IdTipoCbte = info.IdTipoCbte,
                             IdTipoCbteBaja = info.IdTipoCbteBaja,
-                            IdTipoCbteBaja_Anulacion = info.IdTipoCbteBaja_Anulacion,
-                            IdTipoCbteDep_Acum_Anulacion = info.IdTipoCbteDep_Acum_Anulacion,
-                            IdTipoCbteMejora_Anulacion = info.IdTipoCbteMejora_Anulacion,
                             IdTipoCbteMejora = info.IdTipoCbteMejora,
                             IdTipoCbteRetiro = info.IdTipoCbteRetiro,
-                            IdTipoCbteRetiro_Anulacion = info.IdTipoCbteRetiro_Anulacion,
                             IdTipoCbteVenta = info.IdTipoCbteVenta,
-                            IdTipoCbteVenta_Anulacion = info.IdTipoCbteVenta_Anulacion
+                            DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo
                         };
                         Context.Af_Parametros.Add(Entity);
                     }
@@ -84,15 +76,11 @@ namespace Core.Erp.Data.ActivoFijo
                         Entity.IdCtaCble_Gastos_Depre = info.IdCtaCble_Gastos_Depre;
                         Entity.IdTipoCbte = info.IdTipoCbte;
                         Entity.IdTipoCbteBaja = info.IdTipoCbteBaja;
-                        Entity.IdTipoCbteBaja_Anulacion = info.IdTipoCbteBaja_Anulacion;
-                        Entity.IdTipoCbteDep_Acum_Anulacion = info.IdTipoCbteDep_Acum_Anulacion;
-                        Entity.IdTipoCbteMejora_Anulacion = info.IdTipoCbteMejora_Anulacion;
                         Entity.IdTipoCbteMejora = info.IdTipoCbteMejora;
                         Entity.IdTipoCbteRetiro = info.IdTipoCbteRetiro;
-                        Entity.IdTipoCbteRetiro_Anulacion = info.IdTipoCbteRetiro_Anulacion;
                         Entity.IdTipoCbteVenta = info.IdTipoCbteVenta;
-                        Entity.IdTipoCbteVenta_Anulacion = info.IdTipoCbteVenta_Anulacion;
-                    };
+                        Entity.DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo;
+                    }
                     Context.SaveChanges();
                 }
                 return true;

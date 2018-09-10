@@ -19,6 +19,7 @@ namespace Core.Erp.Data
         public int IdMovi_inven_tipo_OC { get; set; }
         public string IdEstadoAnulacion_OC { get; set; }
         public string IdEstado_cierre { get; set; }
+        public int DiasTransaccionesAFuturo { get; set; }
     
         public virtual com_catalogo com_catalogo { get; set; }
         public virtual com_catalogo com_catalogo1 { get; set; }

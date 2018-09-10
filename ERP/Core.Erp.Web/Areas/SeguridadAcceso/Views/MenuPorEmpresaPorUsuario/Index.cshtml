@@ -16,12 +16,9 @@
     }
     function OnSelectionChanged(s, e) {
         s.GetSelectedNodeValues("IdMenu", GetSelectedNodeValuesCallback);
-        s.GetSelectedNodeValues("info_menu.IdMenuPadre", GetSelectedNodeValuesCallback);
     }
     function GetSelectedNodeValuesCallback(values) {
-        if (values != null) {
             selectedIDs = values.join(',');
-        }
     }
     function guardar() {
         var datos = {
@@ -29,7 +26,7 @@
             IdUsuario: $("#IdUsuario").val(),
             IDs: selectedIDs
         }
-        $("#btn_guardar").disabled = true;
+        $("#btn_guardar").attr("disabled", true);
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
@@ -45,10 +42,8 @@
             error: function (error) {
             }
         });
-        $("#btn_guardar").disabled = false;
     }
 </script>
-<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Index", "MenuPorEmpresaPorUsuario", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
 {
     <div class="row">

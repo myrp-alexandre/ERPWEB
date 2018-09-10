@@ -18,10 +18,6 @@ namespace Core.Erp.Info.ActivoFijo
         public string IdCtaCble_Dep_Acum { get; set; }
         public string IdCtaCble_Gastos_Depre { get; set; }
         public string FormaContabiliza { get; set; }
-        public int IdTipoCbteMejora_Anulacion { get; set; }
-        public int IdTipoCbteBaja_Anulacion { get; set; }
-        public int IdTipoCbteVenta_Anulacion { get; set; }
-        public int IdTipoCbteRetiro_Anulacion { get; set; }
-        public int IdTipoCbteDep_Acum_Anulacion { get; set; }
+        public int DiasTransaccionesAFuturo { get; set; }
     }
 }

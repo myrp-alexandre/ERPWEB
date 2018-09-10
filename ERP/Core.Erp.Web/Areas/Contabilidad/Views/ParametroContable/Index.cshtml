@@ -16,7 +16,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdTipoCbte_SaldoInicial">Comprobante contable para saldo inicial</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdEmpresa, settings =>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbte_SaldoInicial, settings =>
                {
                    settings.Name = "IdTipoCbte_SaldoInicial";
                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
@@ -25,11 +25,9 @@
                    settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
                    //Campo ID
                    settings.Properties.ValueField = "IdTipoCbte";
-                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.ValueType = typeof(int);
                    settings.Properties.TextField = "CodTipoCbte";
                    //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                   settings.Properties.NullText = "== Seleccione ==";
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
                }).BindList(ViewBag.lst_parametrocontable).GetHtml()
 
@@ -43,7 +41,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdTipoCbte_AsientoCierre_Anual">Comprobante contable para cierre anual</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdEmpresa, settings =>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbte_AsientoCierre_Anual, settings =>
                {
                    settings.Name = "IdTipoCbte_AsientoCierre_Anual";
                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
@@ -52,11 +50,9 @@
                    settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
                    //Campo ID
                    settings.Properties.ValueField = "IdTipoCbte";
-                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.ValueType = typeof(int);
                    settings.Properties.TextField = "CodTipoCbte";
                    //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                   settings.Properties.NullText = "== Seleccione ==";
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
                }).BindList(ViewBag.lst_parametrocontable).GetHtml()
 
@@ -67,10 +63,17 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-4">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="DiasTransaccionesAFuturo">Dias máximos para transacciones a futuro</label>
+                    @Html.TextBoxFor(q => q.DiasTransaccionesAFuturo, new { @class = "form-control", @id = "DiasTransaccionesAFuturo" })
+                    @Html.ValidationMessageFor(q => q.DiasTransaccionesAFuturo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-9">
                 <div class="form-group">
                     <div class="checkbox">
-                        <label for="P_Se_Muestra_Todas_las_ctas_en_combos">@Html.CheckBoxFor(q => q.P_Se_Muestra_Todas_las_ctas_en_combos) Este comprobante es usado solo por contabilidad </label>
+                        <label for="P_Se_Muestra_Todas_las_ctas_en_combos">@Html.CheckBoxFor(q => q.P_Se_Muestra_Todas_las_ctas_en_combos) Mostrar cuentas que no son de movimiento en combos </label>
                     </div>
                 </div>
             </div>

@@ -18,7 +18,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         private void cargar_combos()
         {
             ct_cbtecble_tipo_Bus bus_comprobante = new ct_cbtecble_tipo_Bus();
-            var lst_parametro = bus_comprobante.get_list(Convert.ToInt32(Session["IdEmpresa"]), true);
+            var lst_parametro = bus_comprobante.get_list(Convert.ToInt32(SessionFixed.IdEmpresa), false);
             ViewBag.lst_parametrocontable = lst_parametro;
             
         }

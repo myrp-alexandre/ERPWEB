@@ -17,7 +17,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         ct_cbtecble_tipo_Bus bus_tipo_comprobante = new ct_cbtecble_tipo_Bus();
         fa_TipoNota_Bus bus_tipo = new fa_TipoNota_Bus();
         ct_plancta_Bus bus_cta = new ct_plancta_Bus();
-        tb_provincia_Bus bus_provincia = new tb_provincia_Bus();
+        tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
         #endregion
 
         #region Index
@@ -33,6 +33,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost]
         public ActionResult Index(ba_parametros_Info model)
         {
+            model.IdUsuario = SessionFixed.IdUsuario;
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_parametro.guardarDB(model))
                 ViewBag.mensaje = "No se pudieron actualizar los registros";
             cargar_combos(model.IdEmpresa);
@@ -53,8 +55,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             var lst_cta = bus_cta.get_list(IdEmpresa, false, false);
             ViewBag.lst_cta = lst_cta;
 
-            var lst_provincia = bus_provincia.get_list("1", false);
-            ViewBag.lst_provincia = lst_provincia;
+            var lst_ciudad = bus_ciudad.get_list("", false);
+            ViewBag.lst_ciudad = lst_ciudad;
         }
 
         #endregion

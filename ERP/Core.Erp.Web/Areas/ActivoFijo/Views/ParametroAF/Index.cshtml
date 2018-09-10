@@ -25,7 +25,7 @@
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_datos_generales">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="IdCtaCble_Activo">Cuenta contable para activo</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_Activo, settings =>
@@ -52,7 +52,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="IdCtaCble_Dep_Acum">Cuenta contable depreciación acumulada</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_Dep_Acum, settings =>
@@ -80,7 +80,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="IdCtaCble_Gastos_Depre">Cuenta contable gastos de depreciación</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_Gastos_Depre, settings =>
@@ -107,11 +107,18 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="FormaContabiliza">Forma de contabilizar</label>
                                 @Html.DropDownListFor(q => q.FormaContabiliza, new SelectList(ViewBag.lst_forma, "Key", "Value"), new { @class = "form-control", @id = "FormaContabiliza" })
                                 @Html.ValidationMessageFor(q => q.FormaContabiliza, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="DiasTransaccionesAFuturo">Dias máximos para transacciones a futuro</label>
+                                @Html.TextBoxFor(q => q.DiasTransaccionesAFuturo, new { @class = "form-control", @id = "DiasTransaccionesAFuturo" })
+                                @Html.ValidationMessageFor(q => q.DiasTransaccionesAFuturo, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -123,7 +130,7 @@
                     <div class="col-md-12">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="IdTipoCbte">Comprobante contable para acumulación</label>
+                                <label for="IdTipoCbte">Comprobante contable para depreciación</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbte, settings =>
                    {
                        settings.Name = "IdTipoCbte";
@@ -141,28 +148,6 @@
                        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
                    }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
                                 @Html.ValidationMessageFor(q => q.IdTipoCbte, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="IdTipoCbteDep_Acum_Anulacion">Comprobante contable por anulación de acumulación</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbteDep_Acum_Anulacion, settings =>
-                   {
-                       settings.Name = "IdTipoCbteDep_Acum_Anulacion";
-                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                       settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                       settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                       //Campo ID
-                       settings.Properties.ValueField = "IdTipoCbte";
-                       settings.Properties.ValueType = typeof(int);
-                       settings.Properties.TextField = "tc_TipoCbte";
-                       //Boton para seleccionar ningun registro
-                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                       settings.Properties.NullText = "== Seleccione ==";
-                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                   }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
-                                @Html.ValidationMessageFor(q => q.IdTipoCbteDep_Acum_Anulacion, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -192,28 +177,7 @@
                                 @Html.ValidationMessageFor(q => q.IdTipoCbteMejora, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="IdTipoCbteMejora_Anulacion">Comprobante contable por anulación de mejora</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbteMejora_Anulacion, settings =>
-                   {
-                       settings.Name = "IdTipoCbteMejora_Anulacion";
-                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                       settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                       settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                       //Campo ID
-                       settings.Properties.ValueField = "IdTipoCbte";
-                       settings.Properties.ValueType = typeof(int);
-                       settings.Properties.TextField = "tc_TipoCbte";
-                       //Boton para seleccionar ningun registro
-                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                       settings.Properties.NullText = "== Seleccione ==";
-                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                   }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
-                                @Html.ValidationMessageFor(q => q.IdTipoCbteMejora_Anulacion, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -239,28 +203,6 @@
                        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
                    }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
                                 @Html.ValidationMessageFor(q => q.IdTipoCbteBaja, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="IdTipoCbteBaja_Anulacion">Comprobante contable por anulación de baja </label>
-                                @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbteBaja_Anulacion, settings =>
-                   {
-                       settings.Name = "IdTipoCbteBaja_Anulacion";
-                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                       settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                       settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                       //Campo ID
-                       settings.Properties.ValueField = "IdTipoCbte";
-                       settings.Properties.ValueType = typeof(int);
-                       settings.Properties.TextField = "tc_TipoCbte";
-                       //Boton para seleccionar ningun registro
-                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                       settings.Properties.NullText = "== Seleccione ==";
-                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                   }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
-                                @Html.ValidationMessageFor(q => q.IdTipoCbteBaja_Anulacion, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -290,28 +232,6 @@
                                 @Html.ValidationMessageFor(q => q.IdTipoCbteVenta, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="IdTipoCbteVenta_Anulacion">Comprobante contable por anulación de venta</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbteVenta_Anulacion, settings =>
-                   {
-                       settings.Name = "IdTipoCbteVenta_Anulacion";
-                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                       settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                       settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                       //Campo ID
-                       settings.Properties.ValueField = "IdTipoCbte";
-                       settings.Properties.ValueType = typeof(int);
-                       settings.Properties.TextField = "tc_TipoCbte";
-                       //Boton para seleccionar ningun registro
-                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                       settings.Properties.NullText = "== Seleccione ==";
-                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                   }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
-                                @Html.ValidationMessageFor(q => q.IdTipoCbteVenta_Anulacion, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -336,28 +256,6 @@
                        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
                    }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
                                 @Html.ValidationMessageFor(q => q.IdTipoCbteRetiro, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="IdTipoCbteRetiro_Anulacion">Comprobante contable por anulación de retiro</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbteRetiro_Anulacion, settings =>
-                   {
-                       settings.Name = "IdTipoCbteRetiro_Anulacion";
-                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                       settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                       settings.Properties.Columns.Add("tc_TipoCbte", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                       //Campo ID
-                       settings.Properties.ValueField = "IdTipoCbte";
-                       settings.Properties.ValueType = typeof(int);
-                       settings.Properties.TextField = "tc_TipoCbte";
-                       //Boton para seleccionar ningun registro
-                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                       settings.Properties.NullText = "== Seleccione ==";
-                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                   }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
-                                @Html.ValidationMessageFor(q => q.IdTipoCbteRetiro_Anulacion, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>

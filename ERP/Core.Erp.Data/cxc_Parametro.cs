@@ -15,19 +15,13 @@ namespace Core.Erp.Data
     public partial class cxc_Parametro
     {
         public int IdEmpresa { get; set; }
-        public int pa_tipoND_x_CheqProtestado { get; set; }
-        public Nullable<int> pa_IdCaja_x_cobros_x_CXC { get; set; }
-        public Nullable<int> pa_IdTipoMoviCaja_x_Cobros_x_cliente { get; set; }
-        public Nullable<int> pa_IdTipoCbteCble_CxC { get; set; }
-        public Nullable<int> pa_IdTipoCbteCble_CxC_ANU { get; set; }
+        public int pa_IdCaja_x_cobros_x_CXC { get; set; }
+        public int pa_IdTipoMoviCaja_x_Cobros_x_cliente { get; set; }
+        public int pa_IdTipoCbteCble_CxC { get; set; }
+        public int DiasTransaccionesAFuturo { get; set; }
+        public string IdUsuario { get; set; }
+        public Nullable<System.DateTime> FechaTransac { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> FechaUltMod { get; set; }
-        public Nullable<int> pa_IdCaja_x_Default { get; set; }
-        public Nullable<int> pa_IdTipoCbte_x_conciliacion { get; set; }
-        public string pa_IdCobro_tipo_Comision_TC { get; set; }
-        public string pa_IdCobro_tipo_default { get; set; }
-    
-        public virtual cxc_cobro_tipo cxc_cobro_tipo { get; set; }
-        public virtual cxc_cobro_tipo cxc_cobro_tipo1 { get; set; }
     }
 }

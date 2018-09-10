@@ -1,9 +1,6 @@
 ﻿using Core.Erp.Info.Caja;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Data.Caja
 {
@@ -22,11 +19,9 @@ namespace Core.Erp.Data.Caja
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         IdTipoCbteCble_MoviCaja_Egr = Entity.IdTipoCbteCble_MoviCaja_Egr,
-                        IdTipoCbteCble_MoviCaja_Egr_Anu = Entity.IdTipoCbteCble_MoviCaja_Egr_Anu,
-                        IdTipoCbteCble_MoviCaja_Ing_Anu = Entity.IdTipoCbteCble_MoviCaja_Ing_Anu,
                         IdTipoCbteCble_MoviCaja_Ing = Entity.IdTipoCbteCble_MoviCaja_Ing,
-                        IdTipo_movi_ing_x_reposicion = Entity.IdTipo_movi_ing_x_reposicion
-
+                        IdTipo_movi_ing_x_reposicion = Entity.IdTipo_movi_ing_x_reposicion,
+                        DiasTransaccionesAFuturo = Entity.DiasTransaccionesAFuturo
                     };
                 }
                 return info;
@@ -51,11 +46,9 @@ namespace Core.Erp.Data.Caja
                         {
                             IdEmpresa = info.IdEmpresa,
                             IdTipoCbteCble_MoviCaja_Egr = info.IdTipoCbteCble_MoviCaja_Egr,
-                            IdTipoCbteCble_MoviCaja_Egr_Anu = info.IdTipoCbteCble_MoviCaja_Egr_Anu,
                             IdTipoCbteCble_MoviCaja_Ing = info.IdTipoCbteCble_MoviCaja_Ing,
-                            IdTipoCbteCble_MoviCaja_Ing_Anu = info.IdTipoCbteCble_MoviCaja_Ing_Anu,
                             IdTipo_movi_ing_x_reposicion = info.IdTipo_movi_ing_x_reposicion,
-
+                            DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo,
                             IdUsuario = info.IdUsuario,
                             Fecha_Transac = DateTime.Now
                         };
@@ -64,11 +57,10 @@ namespace Core.Erp.Data.Caja
                     else
                     {
                         Entity.IdTipoCbteCble_MoviCaja_Egr = info.IdTipoCbteCble_MoviCaja_Egr;
-                        Entity.IdTipoCbteCble_MoviCaja_Egr_Anu = info.IdTipoCbteCble_MoviCaja_Egr_Anu;
                         Entity.IdTipoCbteCble_MoviCaja_Ing = info.IdTipoCbteCble_MoviCaja_Ing;
-                        Entity.IdTipoCbteCble_MoviCaja_Ing_Anu = info.IdTipoCbteCble_MoviCaja_Ing_Anu;
                         Entity.IdTipo_movi_ing_x_reposicion = info.IdTipo_movi_ing_x_reposicion;
-
+                        Entity.DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo;
+                        Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                         Entity.FechaUltMod = info.FechaUltMod;
                     }
                     Context.SaveChanges();

@@ -102,9 +102,8 @@
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdTipoCbteCble_MoviCaja_Ing" Type="int" Nullable="false" />
           <Property Name="IdTipoCbteCble_MoviCaja_Egr" Type="int" Nullable="false" />
-          <Property Name="IdTipoCbteCble_MoviCaja_Ing_Anu" Type="int" Nullable="false" />
-          <Property Name="IdTipoCbteCble_MoviCaja_Egr_Anu" Type="int" Nullable="false" />
           <Property Name="IdTipo_movi_ing_x_reposicion" Type="int" />
+          <Property Name="DiasTransaccionesAFuturo" Type="int" Nullable="false" />
           <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_Transac" Type="datetime" />
           <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
@@ -269,7 +268,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_conciliacion_
             <PropertyRef Name="IdProveedor" />
             <PropertyRef Name="co_Por_iva" />
             <PropertyRef Name="co_FechaFactura" />
-            <PropertyRef Name="co_observacion" />
             <PropertyRef Name="co_baseImponible" />
             <PropertyRef Name="co_valoriva" />
             <PropertyRef Name="co_valorpagar" />
@@ -277,6 +275,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_conciliacion_
             <PropertyRef Name="Valor_a_aplicar" />
             <PropertyRef Name="co_factura" />
             <PropertyRef Name="co_total" />
+            <PropertyRef Name="co_observacion" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdConciliacion_Caja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
@@ -292,7 +291,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_conciliacion_
           <Property Name="IdSucursal" Type="int" />
           <Property Name="co_Por_iva" Type="float" Nullable="false" />
           <Property Name="co_FechaFactura" Type="datetime" Nullable="false" />
-          <Property Name="co_observacion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="co_observacion" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="co_baseImponible" Type="float" Nullable="false" />
           <Property Name="co_valoriva" Type="float" Nullable="false" />
           <Property Name="co_valorpagar" Type="float" Nullable="false" />
@@ -714,21 +713,6 @@ FROM [web].[vwcp_conciliacion_Caja_det_x_ValeCaja] AS [vwcp_conciliacion_Caja_de
           <Property Name="IdTipoMovi_grupo" Type="Int32" />
           <NavigationProperty Name="caj_Caja_Movimiento" Relationship="Self.FK_caj_Caja_Movimiento_caj_Caja_Movimiento_Tipo" FromRole="caj_Caja_Movimiento_Tipo" ToRole="caj_Caja_Movimiento" />
         </EntityType>
-        <EntityType Name="caj_parametro">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbteCble_MoviCaja_Ing" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbteCble_MoviCaja_Egr" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbteCble_MoviCaja_Ing_Anu" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbteCble_MoviCaja_Egr_Anu" Type="Int32" Nullable="false" />
-          <Property Name="IdTipo_movi_ing_x_reposicion" Type="Int32" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="cp_conciliacion_Caja">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1031,7 +1015,6 @@ FROM [web].[vwcp_conciliacion_Caja_det_x_ValeCaja] AS [vwcp_conciliacion_Caja_de
           <EntitySet Name="caj_Caja_Movimiento" EntityType="Self.caj_Caja_Movimiento" />
           <EntitySet Name="caj_Caja_Movimiento_det" EntityType="Self.caj_Caja_Movimiento_det" />
           <EntitySet Name="caj_Caja_Movimiento_Tipo" EntityType="Self.caj_Caja_Movimiento_Tipo" />
-          <EntitySet Name="caj_parametro" EntityType="Self.caj_parametro" />
           <EntitySet Name="cp_conciliacion_Caja" EntityType="Self.cp_conciliacion_Caja" />
           <EntitySet Name="cp_conciliacion_Caja_det" EntityType="Self.cp_conciliacion_Caja_det" />
           <EntitySet Name="cp_conciliacion_Caja_det_Ing_Caja" EntityType="Self.cp_conciliacion_Caja_det_Ing_Caja" />
@@ -1080,6 +1063,7 @@ FROM [web].[vwcp_conciliacion_Caja_det_x_ValeCaja] AS [vwcp_conciliacion_Caja_de
           </AssociationSet>
           <EntitySet Name="vwcp_conciliacion_Caja_det_x_ValeCaja" EntityType="Model_caja.vwcp_conciliacion_Caja_det_x_ValeCaja" />
           <EntitySet Name="vwcp_conciliacion_Caja_det" EntityType="Model_caja.vwcp_conciliacion_Caja_det" />
+          <EntitySet Name="caj_parametro" EntityType="Model_caja.caj_parametro" />
         </EntityContainer>
         <EntityType Name="vwcp_conciliacion_Caja_det_x_ValeCaja">
           <Key>
@@ -1147,7 +1131,7 @@ FROM [web].[vwcp_conciliacion_Caja_det_x_ValeCaja] AS [vwcp_conciliacion_Caja_de
           <Property Name="IdSucursal" Type="Int32" />
           <Property Name="co_Por_iva" Type="Double" Nullable="false" />
           <Property Name="co_FechaFactura" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="co_observacion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="co_observacion" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="co_baseImponible" Type="Double" Nullable="false" />
           <Property Name="co_valoriva" Type="Double" Nullable="false" />
           <Property Name="co_valorpagar" Type="Double" Nullable="false" />
@@ -1157,6 +1141,20 @@ FROM [web].[vwcp_conciliacion_Caja_det_x_ValeCaja] AS [vwcp_conciliacion_Caja_de
           <Property Name="IdOrdenPago_OP" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="co_factura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="co_total" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="caj_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbteCble_MoviCaja_Ing" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbteCble_MoviCaja_Egr" Type="Int32" Nullable="false" />
+          <Property Name="IdTipo_movi_ing_x_reposicion" Type="Int32" />
+          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1248,22 +1246,6 @@ FROM [web].[vwcp_conciliacion_Caja_det_x_ValeCaja] AS [vwcp_conciliacion_Caja_de
                 <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
                 <ScalarProperty Name="SeDeposita" ColumnName="SeDeposita" />
                 <ScalarProperty Name="IdTipoMovi_grupo" ColumnName="IdTipoMovi_grupo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="caj_parametro">
-            <EntityTypeMapping TypeName="Model_caja.caj_parametro">
-              <MappingFragment StoreEntitySet="caj_parametro">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdTipoCbteCble_MoviCaja_Ing" ColumnName="IdTipoCbteCble_MoviCaja_Ing" />
-                <ScalarProperty Name="IdTipoCbteCble_MoviCaja_Egr" ColumnName="IdTipoCbteCble_MoviCaja_Egr" />
-                <ScalarProperty Name="IdTipoCbteCble_MoviCaja_Ing_Anu" ColumnName="IdTipoCbteCble_MoviCaja_Ing_Anu" />
-                <ScalarProperty Name="IdTipoCbteCble_MoviCaja_Egr_Anu" ColumnName="IdTipoCbteCble_MoviCaja_Egr_Anu" />
-                <ScalarProperty Name="IdTipo_movi_ing_x_reposicion" ColumnName="IdTipo_movi_ing_x_reposicion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1430,6 +1412,21 @@ FROM [web].[vwcp_conciliacion_Caja_det_x_ValeCaja] AS [vwcp_conciliacion_Caja_de
                 <ScalarProperty Name="IdEmpresa_OGiro" ColumnName="IdEmpresa_OGiro" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdConciliacion_Caja" ColumnName="IdConciliacion_Caja" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="caj_parametro">
+            <EntityTypeMapping TypeName="Model_caja.caj_parametro">
+              <MappingFragment StoreEntitySet="caj_parametro">
+                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
+                <ScalarProperty Name="IdTipo_movi_ing_x_reposicion" ColumnName="IdTipo_movi_ing_x_reposicion" />
+                <ScalarProperty Name="IdTipoCbteCble_MoviCaja_Egr" ColumnName="IdTipoCbteCble_MoviCaja_Egr" />
+                <ScalarProperty Name="IdTipoCbteCble_MoviCaja_Ing" ColumnName="IdTipoCbteCble_MoviCaja_Ing" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
