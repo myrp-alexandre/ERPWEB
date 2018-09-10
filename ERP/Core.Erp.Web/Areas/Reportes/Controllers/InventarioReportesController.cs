@@ -669,7 +669,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdMarca = 0,
-                IdProducto = 0
+                IdProducto = 0,
+                dIAS = 40
             };
 
             cargar_combos(model);
@@ -679,7 +680,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdBodega.Value = model.IdBodega;
             report.p_IdProducto.Value = model.IdProductoPadre == null ? 0 : model.IdProductoPadre;
             report.p_IdMarca.Value = model.IdMarca;
-            report.p_fechaIni.Value = model.fecha_ini;
+            report.p_fechaIni.Value = model.fecha_fin;
             report.p_dIAS.Value = model.dIAS;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
@@ -696,7 +697,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdBodega.Value = model.IdBodega;
             report.p_IdProducto.Value = model.IdProductoPadre == null ? 0 : model.IdProductoPadre;
             report.p_IdMarca.Value = model.IdMarca;
-            report.p_fechaIni.Value = model.fecha_ini;
+            report.p_fechaIni.Value = model.fecha_fin;
             report.p_dIAS.Value = model.dIAS;
             cargar_combos(model);
 
