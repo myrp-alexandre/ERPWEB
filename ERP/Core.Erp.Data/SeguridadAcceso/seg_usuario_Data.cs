@@ -113,7 +113,8 @@ namespace Core.Erp.Data.SeguridadAcceso
                         es_super_admin = Entity.es_super_admin,
                         contrasena_admin = Entity.contrasena_admin,
                         ExigirDirectivaContrasenia = Entity.ExigirDirectivaContrasenia == null ? false : Convert.ToBoolean(Entity.ExigirDirectivaContrasenia),
-                        CambiarContraseniaSgtSesion = Entity.CambiarContraseniaSgtSesion == null ? false : Convert.ToBoolean(Entity.CambiarContraseniaSgtSesion)
+                        CambiarContraseniaSgtSesion = Entity.CambiarContraseniaSgtSesion == null ? false : Convert.ToBoolean(Entity.CambiarContraseniaSgtSesion),
+                        IdMenu = Entity.IdMenu
                     };
                 }
 
@@ -142,6 +143,7 @@ namespace Core.Erp.Data.SeguridadAcceso
                         es_super_admin = info.es_super_admin,
                         contrasena_admin = info.contrasena_admin,
                         estado = info.estado = "A",
+                        IdMenu = info.IdMenu == 0 ? null : info.IdMenu,
 
                         Fecha_Transaccion = info.Fecha_Transaccion
                     };
@@ -173,6 +175,7 @@ namespace Core.Erp.Data.SeguridadAcceso
                     Entity.es_super_admin = info.es_super_admin;
                     Entity.IdUsuarioUltModi = info.IdUsuarioUltModi;
                     Entity.Fecha_UltMod = info.Fecha_UltMod;
+                    Entity.IdMenu = info.IdMenu == 0 ? null : info.IdMenu;
                     Context.SaveChanges();
                 }               
 

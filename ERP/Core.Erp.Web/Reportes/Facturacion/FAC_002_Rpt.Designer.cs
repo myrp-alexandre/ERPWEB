@@ -169,6 +169,7 @@
             this.xrTableCell69 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell70 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell71 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.p_MostrarSoloCarteraVencida = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
@@ -1401,6 +1402,11 @@
             this.xrTableCell71.TextFormatString = "{0:n2}";
             this.xrTableCell71.Weight = 2.5806728391996603D;
             // 
+            // p_MostrarSoloCarteraVencida
+            // 
+            this.p_MostrarSoloCarteraVencida.Name = "p_MostrarSoloCarteraVencida";
+            this.p_MostrarSoloCarteraVencida.Visible = false;
+            // 
             // FAC_002_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -1428,7 +1434,8 @@
             this.p_IdSucursal,
             this.p_IdCliente,
             this.p_IdClienteContacto,
-            this.p_fechaCorte});
+            this.p_fechaCorte,
+            this.p_MostrarSoloCarteraVencida});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.FAC_002_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
@@ -1556,5 +1563,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell72;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell73;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell74;
+        public DevExpress.XtraReports.Parameters.Parameter p_MostrarSoloCarteraVencida;
     }
 }

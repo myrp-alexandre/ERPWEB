@@ -24,6 +24,7 @@ namespace Core.Erp.Info.SeguridadAcceso
         public bool CambiarContraseniaSgtSesion { get; set; }
         public bool es_super_admin { get; set; }
         public string contrasena_admin { get; set; }
+        public Nullable<int> IdMenu { get; set; }
         public List<seg_Usuario_x_Empresa_Info> lst_usuario_x_empresa { get; set; }
     }
 }

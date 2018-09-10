@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
 {
     public class FAC_002_Data
     {
-        public List<FAC_002_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdCliente, int IdClienteContacto, DateTime fechaCorte)
+        public List<FAC_002_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdCliente, int IdClienteContacto, DateTime fechaCorte, bool MostrarSoloCarteraVencida)
         {
             try
             {
@@ -27,7 +27,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
                 List<FAC_002_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
-                    Lista = (from q in Context.SPFAC_002(IdEmpresa, IdSucursalIni, IdSucursalFin, IdClienteIni, IdClienteFin, IdClienteContactoIni, IdClienteContactoFin, fechaCorte)
+                    Lista = (from q in Context.SPFAC_002(IdEmpresa, IdSucursalIni, IdSucursalFin, IdClienteIni, IdClienteFin, IdClienteContactoIni, IdClienteContactoFin, fechaCorte,MostrarSoloCarteraVencida)
                              select new FAC_002_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

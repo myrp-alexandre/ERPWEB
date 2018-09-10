@@ -23,7 +23,8 @@ namespace Core.Erp.Web.Controllers
         seg_Usuario_x_Empresa_Bus bus_usuario_x_empresa = new seg_Usuario_x_Empresa_Bus();
         seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
         tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
-        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();       
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        seg_Menu_Bus bus_menu = new seg_Menu_Bus();    
         [AllowAnonymous]
         public ActionResult Login()
         {
@@ -94,10 +95,16 @@ namespace Core.Erp.Web.Controllers
             SessionFixed.em_direccion = info_empresa.em_direccion.ToString();
             SessionFixed.IdTransaccionSession = model.IdEmpresa.ToString() + "000000000";
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
-            return RedirectToAction("Index","Home");
-        }
 
-        
+            var usuario = bus_usuario.get_info(model.IdUsuario);
+            if (usuario != null && usuario.IdMenu != null)
+            {
+                var menu = bus_menu.get_info((int)usuario.IdMenu);
+                if (menu != null && !string.IsNullOrEmpty(menu.web_nom_Action))
+                    return RedirectToAction(menu.web_nom_Action, menu.web_nom_Controller, new { Area = menu.web_nom_Area });                
+            }
+            return RedirectToAction("Index","Home");
+        }        
 
         [HttpPost]
         [ValidateAntiForgeryToken]

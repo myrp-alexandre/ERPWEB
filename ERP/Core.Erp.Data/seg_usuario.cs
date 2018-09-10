@@ -35,7 +35,9 @@ namespace Core.Erp.Data
         public Nullable<bool> CambiarContraseniaSgtSesion { get; set; }
         public bool es_super_admin { get; set; }
         public string contrasena_admin { get; set; }
+        public Nullable<int> IdMenu { get; set; }
     
+        public virtual seg_Menu seg_Menu { get; set; }
         public virtual ICollection<seg_Menu_x_Empresa_x_Usuario> seg_Menu_x_Empresa_x_Usuario { get; set; }
         public virtual ICollection<seg_Usuario_x_Empresa> seg_Usuario_x_Empresa { get; set; }
         public virtual ICollection<seg_usuario_x_tb_sis_reporte> seg_usuario_x_tb_sis_reporte { get; set; }

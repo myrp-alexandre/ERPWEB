@@ -29,9 +29,10 @@ namespace Core.Erp.Web.Reportes.Facturacion
             decimal IdCliente = string.IsNullOrEmpty(p_IdCliente.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdCliente.Value);
             int IdClienteContacto = string.IsNullOrEmpty(p_IdClienteContacto.Value.ToString()) ? 0 : Convert.ToInt32(p_IdClienteContacto.Value);
             DateTime fechaCorte = p_fechaCorte.Value == null ? DateTime.Now : Convert.ToDateTime(p_fechaCorte.Value);
+            bool MostrarSoloCarteraVencida = p_MostrarSoloCarteraVencida.Value == null ? false : Convert.ToBoolean(p_MostrarSoloCarteraVencida.Value);
 
             FAC_002_Bus bus_rpt = new FAC_002_Bus();
-            List<FAC_002_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdCliente, IdClienteContacto, fechaCorte);
+            List<FAC_002_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdCliente, IdClienteContacto, fechaCorte,MostrarSoloCarteraVencida);
             this.DataSource = lst_rpt;
         }
     }
