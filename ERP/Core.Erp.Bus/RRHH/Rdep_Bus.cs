@@ -42,9 +42,10 @@ namespace Core.Erp.Bus.RRHH
                     info_det.empleado.residenciaTrab = resciTyp.Item01;
                     info_det.empleado.paisResidencia = "593";
                     info_det.empleado.aplicaConvenio = convImposTyp.NA;
-                    info_det.empleado.tipoTrabajDiscap = discapTyp.Item01;
+                    info_det.empleado.tipIdDiscap = tipIdDiscapTyp.N;
+                    info_det.empleado.tipoTrabajDiscap = discapTyp.Item00;
                     info_det.empleado.porcentajeDiscap = "0";
-                    info_det.empleado.tipoTrabajDiscap = discapTyp.Item01;
+                    info_det.empleado.idDiscap = "999";
                     info_det.deducAliementSpecified = true;
                     info_det.deducVestimSpecified = true;
                     info_det.deducSaludSpecified = true;
@@ -56,16 +57,15 @@ namespace Core.Erp.Bus.RRHH
                     info_det.sobSuelComRemu = (item.IngresoVarios) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.IngresoVarios);
                     info_det.partUtil =  Convert.ToDecimal(item.Utilidades);
                     info_det.intGrabGen = 0;
-                    info_det.impRentEmpl = (item.Sueldo) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.Sueldo);
+                    info_det.impRentEmpl = 0;
                     info_det.decimTer = (item.DecimoTercerSueldo) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.DecimoTercerSueldo);
                     info_det.decimCuar = (item.DecimoCuartoSueldo) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.DecimoCuartoSueldo);
                     info_det.fondoReserva = (item.FondosReserva) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.FondosReserva);
                     info_det.salarioDigno = 0;
                     info_det.otrosIngRenGrav = 0;
-                    info_det.ingGravConEsteEmpl = (item.Sueldo) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.Sueldo);
                     info_det.sisSalNet = "1";
                     info_det.apoPerIess =Convert.ToDecimal( item.AportePErsonal);
-                    info_det.aporPerIessConOtrosEmpls = (item.AportePErsonal) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.AportePErsonal);
+                    info_det.aporPerIessConOtrosEmpls = 0;
                     info_det.deducVivienda =  Convert.ToDecimal(item.GastoVivienda);
                     info_det.deducSalud =  Convert.ToDecimal(item.GastoSalud);
                     info_det.deducEduca =  Convert.ToDecimal(item.GastoEucacion);
@@ -80,6 +80,7 @@ namespace Core.Erp.Bus.RRHH
                     info_det.valImpAsuEsteEmpl = 0;
                     info_det.valRet = 0;
                     info_det.ingGravConEsteEmpl = info_det.suelSal + info_det.sobSuelComRemu;
+                    info_det.intGrabGen = info_det.ingGravConEsteEmpl;
                     
                     rdp.retRelDep.Add(info_det);
 
