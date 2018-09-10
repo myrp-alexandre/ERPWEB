@@ -31,19 +31,28 @@ namespace Core.Erp.Bus.RRHH
                var lis = odata.gett_list(IdEmpresa, Anio, IdEmpleado);
                 lis.ForEach(item=>
                 {
+                    if(item.pe_cedulaRuc== "0927181131")
+                    {
+
+                    }
                     datRetRelDepTyp info_det = new datRetRelDepTyp();
                     info_det.empleado = new datEmpTyp();
                     info_det.empleado.benGalpg = benGalpgType.NO;
                     info_det.empleado.tipIdRet = datEmpTypTipIdRet.C;
                     info_det.empleado.idRet = item.pe_cedulaRuc;
-                    info_det.empleado.apellidoTrab = item.pe_apellido.Replace("Ñ","N");
-                    info_det.empleado.nombreTrab = item.pe_nombre.Replace("Ñ", "N");
+                    info_det.empleado.apellidoTrab = item.pe_apellido.Replace("Ñ","N").Trim();
+                    info_det.empleado.nombreTrab = item.pe_nombre.Replace("Ñ", "N").Trim();
+
+                    info_det.empleado.apellidoTrab = info_det.empleado.apellidoTrab.Replace("  ", " ").Trim();
+                    info_det.empleado.nombreTrab = info_det.empleado.nombreTrab.Replace("  ", " ").Trim();
+
+
                     info_det.empleado.estab = item.Su_CodigoEstablecimiento;
                     info_det.empleado.residenciaTrab = resciTyp.Item01;
                     info_det.empleado.paisResidencia = "593";
                     info_det.empleado.aplicaConvenio = convImposTyp.NA;
                     info_det.empleado.tipIdDiscap = tipIdDiscapTyp.N;
-                    info_det.empleado.tipoTrabajDiscap = discapTyp.Item00;
+                    info_det.empleado.tipoTrabajDiscap = discapTyp.Item01;
                     info_det.empleado.porcentajeDiscap = "0";
                     info_det.empleado.idDiscap = "999";
                     info_det.deducAliementSpecified = true;
@@ -74,13 +83,13 @@ namespace Core.Erp.Bus.RRHH
                     info_det.deducArtycult = 0;
                     info_det.exoDiscap = 0;
                     info_det.exoTerEd = 0;
-                    info_det.basImp = Convert.ToDecimal( item.Sueldo-item.AportePErsonal);
+                    info_det.basImp = Convert.ToDecimal(( info_det.suelSal+ info_det.sobSuelComRemu) -(info_det.deducVivienda+ info_det.deducSalud+ info_det.deducEduca+ info_det.deducAliement+ info_det.deducVestim+info_det.apoPerIess));
                     info_det.impRentCaus = CalcularImpuestoRenta(info_det);
                     info_det.valRetAsuOtrosEmpls = 0;
                     info_det.valImpAsuEsteEmpl = 0;
                     info_det.valRet = 0;
                     info_det.ingGravConEsteEmpl = info_det.suelSal + info_det.sobSuelComRemu;
-                    info_det.intGrabGen = info_det.ingGravConEsteEmpl;
+                    info_det.intGrabGen = 0;
                     
                     rdp.retRelDep.Add(info_det);
 
