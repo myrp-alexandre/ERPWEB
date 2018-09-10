@@ -17,6 +17,7 @@ namespace Core.Erp.Data
         public seg_Menu()
         {
             this.seg_Menu_x_Empresa = new HashSet<seg_Menu_x_Empresa>();
+            this.seg_usuario = new HashSet<seg_usuario>();
         }
     
         public int IdMenu { get; set; }
@@ -35,5 +36,6 @@ namespace Core.Erp.Data
         public bool es_desktop { get; set; }
     
         public virtual ICollection<seg_Menu_x_Empresa> seg_Menu_x_Empresa { get; set; }
+        public virtual ICollection<seg_usuario> seg_usuario { get; set; }
     }
 }

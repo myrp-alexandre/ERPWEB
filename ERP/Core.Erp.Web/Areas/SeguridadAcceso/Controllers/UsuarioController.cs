@@ -14,6 +14,7 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
     {
         seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
         seg_Usuario_x_Empresa_Bus bus_usuario_x_empresa = new seg_Usuario_x_Empresa_Bus();
+        seg_Menu_Bus bus_menu = new seg_Menu_Bus();
         public ActionResult Index()
         {
             return View();
@@ -54,6 +55,9 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
                                                    seleccionado =  pp == null ? false : true                                                  
                                                }).ToList();
             }
+            var lst_menu = bus_menu.get_list_combo(false);
+            lst_menu.Add(new seg_Menu_Info { IdMenu = 0, DescripcionMenu_combo = "== Seleccione ==" });
+            ViewBag.lst_menu = lst_menu;
         }
 
         public ActionResult Nuevo()
