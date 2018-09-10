@@ -8,7 +8,6 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 <script>
     function EditingUpdate(ID) {
@@ -38,7 +37,7 @@
             IdEmpresa: $("#IdEmpresa").val(),
             IdUsuario: $("#IdUsuario").val(),
         }
-        $("#btn_guardar").disabled = true;
+        $("#btn_guardar").attr("disabled", true);
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
@@ -49,12 +48,12 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
+                alert("Registros actualizados exitósamente")
                 $("#myform").submit();
             },
             error: function (error) {
             }
         });
-        $("#btn_guardar").disabled = false;
     }
 </script>
 
