@@ -1,4 +1,6 @@
-﻿using Core.Erp.Data.RRHH;
+﻿using Core.Erp.Bus.General;
+using Core.Erp.Data.RRHH;
+using Core.Erp.Info.General;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Info.RRHH.RDEP;
 using System;
@@ -14,13 +16,16 @@ namespace Core.Erp.Bus.RRHH
         rdep rdp = new rdep();
         List<ro_tabla_Impu_Renta_Info> list_base_calculo = new List<ro_tabla_Impu_Renta_Info>();
         ro_tabla_Impu_Renta_Data odata_base_Calculo = new ro_tabla_Impu_Renta_Data();
+        tb_empresa_Info info_empresa = new tb_empresa_Info();
+        tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
         public rdep get_list(int IdEmpresa, int Anio, decimal IdEmpleado)
              {
             try
             {
+                info_empresa = bus_empresa.get_info(IdEmpresa);
                 list_base_calculo = odata_base_Calculo.get_list(Anio).OrderByDescending(v => v.Secuencia).ToList();
                 rdp.anio = Anio.ToString();
-                rdp.numRuc = "";
+                rdp.numRuc = info_empresa.em_ruc;
                 datRetRelDepTyp detalle = new datRetRelDepTyp();
                 rdp.retRelDep =new List<datRetRelDepTyp>();
                var lis = odata.gett_list(IdEmpresa, Anio, IdEmpleado);
@@ -40,8 +45,12 @@ namespace Core.Erp.Bus.RRHH
                     info_det.empleado.tipoTrabajDiscap = discapTyp.Item01;
                     info_det.empleado.porcentajeDiscap = "0";
                     info_det.empleado.tipoTrabajDiscap = discapTyp.Item01;
-                    info_det.empleado.idDiscap = "";
-
+                    info_det.deducAliementSpecified = true;
+                    info_det.deducVestimSpecified = true;
+                    info_det.deducSaludSpecified = true;
+                    info_det.deducEducaSpecified = true;
+                    info_det.deducViviendaSpecified = true;
+                    
                     info_det.suelSal = ( item.Sueldo)==null?Convert.ToDecimal(0.00):Convert.ToDecimal(item.Sueldo);
                     info_det.sobSuelComRemu = (item.IngresoVarios) == null ? Convert.ToDecimal(0.00) : Convert.ToDecimal(item.IngresoVarios);
                     info_det.partUtil =  Convert.ToDecimal(item.Utilidades);
