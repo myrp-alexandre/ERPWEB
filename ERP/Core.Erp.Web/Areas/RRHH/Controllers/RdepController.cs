@@ -66,7 +66,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             rdep rdep = new rdep();
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             int IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
-            rdep = bus_rpde.get_list(IdEmpresa,Convert.ToInt32( model.pe_anio), " ");
+            rdep = bus_rpde.get_list(IdEmpresa,Convert.ToInt32( model.pe_anio), model.IdEmpleado);
             var ms = new MemoryStream();
             var xw = XmlWriter.Create(ms);
             string patch = Path.Combine(Server.MapPath("~/Content/file"), nombre_file);
@@ -108,12 +108,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         #region Funciones Json
 
-        public JsonResult Mostrar(int Anio, decimal IdEmpleado)
+        public JsonResult Buscar(int Anio=0, decimal IdEmpleado=0)
         {
 
             int IdEmpresa= Convert.ToInt32( SessionFixed.IdEmpresa);
             List<Rdep_Info> model = new List<Rdep_Info>();
-            model = bus_rpde.get_list(IdEmpresa, Anio);
+            model = bus_rpde.get_list_rdep(IdEmpresa, Anio,Convert.ToDecimal( IdEmpleado));
             Lis_Rdep_Info_lis.set_list(model,Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual) );
             return Json("", JsonRequestBehavior.AllowGet);
         }

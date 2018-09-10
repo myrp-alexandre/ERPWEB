@@ -8,15 +8,21 @@ namespace Core.Erp.Data.RRHH
 {
    public class Rdep_Data
     {
-        public List<Rdep_Info> gett_list(int IdEmpresa, int Anio)
+        public List<Rdep_Info> gett_list(int IdEmpresa, int Anio, decimal IdEmpleado)
         {
             List<Rdep_Info> Lista = new List<Rdep_Info>();
+         decimal IdEmpleadoIni=   IdEmpleado == 0 ? 0 : IdEmpleado;
+         decimal IdEmpleadoFin = IdEmpleado == 0 ? 99999 : IdEmpleado;
 
             try
             {
                 using (Entities_rrhh context=new Entities_rrhh())
                 {
                     Lista = (from q in context.vwrdep_IngrEgr_x_Empleado
+                             where q.IdEmpresa==IdEmpresa
+                             && q.pe_anio==Anio
+                             && q.IdEmpleado>= IdEmpleadoIni
+                             && q.IdEmpleado<= IdEmpleadoFin
                              select new Rdep_Info
                              {
                                  IdEmpresa=q.IdEmpresa,

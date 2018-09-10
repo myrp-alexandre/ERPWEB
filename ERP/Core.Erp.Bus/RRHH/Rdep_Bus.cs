@@ -14,16 +14,16 @@ namespace Core.Erp.Bus.RRHH
         rdep rdp = new rdep();
         List<ro_tabla_Impu_Renta_Info> list_base_calculo = new List<ro_tabla_Impu_Renta_Info>();
         ro_tabla_Impu_Renta_Data odata_base_Calculo = new ro_tabla_Impu_Renta_Data();
-        public rdep get_list(int IdEmpresa, int Anio, string Ruc)
+        public rdep get_list(int IdEmpresa, int Anio, decimal IdEmpleado)
              {
             try
             {
                 list_base_calculo = odata_base_Calculo.get_list(Anio).OrderByDescending(v => v.Secuencia).ToList();
                 rdp.anio = Anio.ToString();
-                rdp.numRuc = Ruc;
+                rdp.numRuc = "";
                 datRetRelDepTyp detalle = new datRetRelDepTyp();
                 rdp.retRelDep =new List<datRetRelDepTyp>();
-               var lis = odata.gett_list(IdEmpresa, Anio);
+               var lis = odata.gett_list(IdEmpresa, Anio, IdEmpleado);
                 lis.ForEach(item=>
                 {
                     datRetRelDepTyp info_det = new datRetRelDepTyp();
@@ -119,11 +119,11 @@ namespace Core.Erp.Bus.RRHH
 
         }
 
-        public List<Rdep_Info> get_list(int IdEmpresa, int Anio)
+        public List<Rdep_Info> get_list_rdep(int IdEmpresa, int Anio, decimal IdEmpleado)
         {
             try
             {
-                return  odata.gett_list(IdEmpresa, Anio);
+                return  odata.gett_list(IdEmpresa, Anio, IdEmpleado);
             }
             catch (Exception)
             {
