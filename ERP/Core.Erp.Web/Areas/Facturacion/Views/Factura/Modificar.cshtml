@@ -11,33 +11,42 @@
 
 @using (Html.BeginForm("Modificar", "Factura", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.vt_tipoDoc)
-    @Html.HiddenFor(q => q.IdSucursal)
+    @Html.HiddenFor(q => q.IdSucursal, new { @id = "IdSucursal"})
     @Html.HiddenFor(q => q.IdBodega)
     @Html.HiddenFor(q => q.IdCbteVta)
-    @Html.HiddenFor(q => q.IdPuntoVta)
+    @Html.HiddenFor(q => q.IdPuntoVta, new { @id = "IdPuntoVta"})
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
-    if (Model.PedirDesbloqueo)
-    {
-        <div class="row">
+    <div class="row" id="DivSuperAdmin" hidden>
+        <div class="col-md-6">
             <div class="col-md-6">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="">Usuario administrador</label>
-                        @Html.TextBoxFor(q => q.IdUsuarioAut, new { @class = "form-control", @id = "IdUsuarioAut" })
-                    </div>
+                <div class="form-group">
+                    <label for="">Usuario administrador</label>
+                    @Html.TextBoxFor(q => q.IdUsuarioAut, new { @class = "form-control", @id = "IdUsuarioAut" })
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="">Contraseña</label>
-                        @Html.PasswordFor(q => q.contrasena_admin, new { @class = "form-control", @id = "contrasena_admin" })
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Contraseña</label>
+                    @Html.PasswordFor(q => q.contrasena_admin, new { @class = "form-control", @id = "contrasena_admin" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="alert alert-warning alert-dismissible" id="DivMensajeCliente" hidden>
+                        <h4>
+                            <i class="icon fa fa-warning"></i> <label id="txtMensajeCliente">MENSAJE</label>
+                        </h4>
                     </div>
                 </div>
             </div>
         </div>
-    }
 
     if (ViewBag.mensaje != null)
     {
@@ -134,14 +143,14 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal*</label>
-                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal", @disabled = "disabled" })
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control",  @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdPuntoVta">Punto de venta*</label>
-                    @Html.DropDownListFor(q => q.IdPuntoVta, new SelectList(ViewBag.lst_punto_venta, "IdPuntoVta", "nom_PuntoVta"), new { @class = "form-control", @id = "IdPuntoVta", @disabled = "disabled" })
+                    @Html.DropDownListFor(q => q.IdPuntoVta, new SelectList(ViewBag.lst_punto_venta, "IdPuntoVta", "nom_PuntoVta"), new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdPuntoVta, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -318,6 +327,7 @@
 <script>
     $(function () {
         ValidarGrid();
+        ValidarCliente();
         //Date picker
         $('#vt_fecha').datepicker({
             autoclose: true
@@ -721,6 +731,35 @@
                     $("#divMensaje").show();
                 } else {
                     $("#divMensaje").hide();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function ValidarCliente() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdCliente: IdCliente.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ValidarCliente", "Factura",new { Area = "Facturacion"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#txtMensajeCliente").text(data);
+                if (data.length > 0) {
+                    $("#DivMensajeCliente").show();
+                    $("#DivSuperAdmin").show();
+                } else {
+                    $("#DivMensajeCliente").hide();
+                    $("#DivSuperAdmin").hide();
                 }
             },
             error: function (error) {

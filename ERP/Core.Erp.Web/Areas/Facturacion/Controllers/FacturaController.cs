@@ -132,6 +132,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         private bool validar(fa_factura_Info i_validar, ref string msg)
         {
+            string MsgValidaciones = string.Empty;
             i_validar.PedirDesbloqueo = false;
             i_validar.lst_det = List_det.get_list(i_validar.IdTransaccionSession);
             if (i_validar.lst_det.Count == 0)
@@ -184,7 +185,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 }                
             }
 
-            if (!bus_cliente.ValidarCupoCreditoCliente(i_validar.IdEmpresa, i_validar.IdSucursal, i_validar.IdBodega, i_validar.IdCbteVta, "FACT", i_validar.IdCliente, i_validar.lst_det.Sum(q => q.vt_total), ref mensaje))
+            if (!bus_cliente.ValidarCupoCreditoCliente(i_validar.IdEmpresa, i_validar.IdSucursal, i_validar.IdBodega, i_validar.IdCbteVta, "FACT", i_validar.IdCliente, i_validar.lst_det.Sum(q => q.vt_total), ref MsgValidaciones))
             {
                 var info_usuarios = bus_usuario.get_info(i_validar.IdUsuarioAut);
                 if (info_usuarios != null && info_usuarios.es_super_admin && i_validar.contrasena_admin.Trim().ToLower() == info_usuarios.contrasena_admin.Trim().ToLower())
@@ -201,12 +202,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 else
                 {
                     i_validar.PedirDesbloqueo = true;
-                    msg = mensaje;
+                    msg = MsgValidaciones;
                     return false;
                 }
             }
 
-            if (bus_factura.ValidarCarteraVencida(i_validar.IdEmpresa,i_validar.IdCliente,ref mensaje))
+            if (bus_factura.ValidarCarteraVencida(i_validar.IdEmpresa,i_validar.IdCliente,ref MsgValidaciones))
             {
                 var info_usuarios = bus_usuario.get_info(i_validar.IdUsuarioAut);
                 if (info_usuarios != null && info_usuarios.es_super_admin && i_validar.contrasena_admin.Trim().ToLower() == info_usuarios.contrasena_admin.Trim().ToLower())
@@ -223,7 +224,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 else
                 {
                     i_validar.PedirDesbloqueo = true;
-                    msg = mensaje;
+                    msg = null;
                     return false;
                 }
             }
@@ -265,6 +266,15 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             return Json(EstadoDesbloqueo, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult ValidarCliente(int IdEmpresa = 0, decimal IdCliente = 0)
+        {
+            string mensaje = string.Empty;
+
+            bus_factura.ValidarCarteraVencida(IdEmpresa, IdCliente, ref mensaje);
+
+            return Json(mensaje, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult GetLineaDetalle(int Secuencia = 0, decimal IdTransaccionSession = 0)
         {
             fa_factura_det_Info lineaF = new fa_factura_det_Info();

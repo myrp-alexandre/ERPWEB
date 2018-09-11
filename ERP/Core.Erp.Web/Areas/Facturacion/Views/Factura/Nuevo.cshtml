@@ -15,6 +15,7 @@
         get_info_termino_pago();
         GetUltimoDocumento();
         ValidarGrid();
+        ValidarCliente();
         //Date picker
         $('#vt_fecha').datepicker({
             autoclose: true
@@ -49,6 +50,35 @@
             CargarCuotas();
         });
     });
+
+    function ValidarCliente() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdCliente: IdCliente.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ValidarCliente", "Factura",new { Area = "Facturacion"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#txtMensajeCliente").text(data);
+                if (data.length > 0) {
+                    $("#DivMensajeCliente").show();
+                    $("#DivSuperAdmin").show();
+                } else {
+                    $("#DivMensajeCliente").hide();
+                    $("#DivSuperAdmin").hide();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
 
     function BuscarProducto(Secuencia) {
         $("#Secuencia").text(Secuencia);
@@ -496,13 +526,11 @@
 
 @using (Html.BeginForm("Nuevo", "Factura", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa"})
     @Html.HiddenFor(q => q.vt_tipoDoc)
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
-
-    if (Model.PedirDesbloqueo)
-    {
-        <div class="row">
+    
+        <div class="row" id="DivSuperAdmin" hidden>
             <div class="col-md-6">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -518,7 +546,19 @@
                 </div>
             </div>
         </div>
-    }
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="alert alert-warning alert-dismissible" id="DivMensajeCliente" hidden>
+                        <h4>
+                            <i class="icon fa fa-warning"></i> <label id="txtMensajeCliente">MENSAJE</label>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     if (ViewBag.mensaje != null)
     {
