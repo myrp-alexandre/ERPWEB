@@ -13,6 +13,7 @@ using Core.Erp.Web.Reportes.Inventario;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class RevisionController : Controller
     {
         #region Variables

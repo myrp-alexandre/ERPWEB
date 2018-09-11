@@ -14,6 +14,7 @@ using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class TransferenciasInventarioController : Controller
     {
         #region variables
@@ -28,7 +29,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbProducto_TransferenciaInventario()
         {
-            in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info();
+            decimal model = new decimal();
             return PartialView("_CmbProducto_TransferenciaInventario", model);
         }
         public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)

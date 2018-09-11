@@ -10,8 +10,11 @@ using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class ProductoTipoController : Controller
     {
+        #region Index
+
         in_ProductoTipo_Bus bus_producto_tipo = new in_ProductoTipo_Bus();
         public ActionResult Index()
         {
@@ -25,7 +28,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
            var model = bus_producto_tipo.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_tipo_producto", model);
         }
-
+        #endregion
+        #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
             in_ProductoTipo_Info model = new in_ProductoTipo_Info
@@ -81,6 +85,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return RedirectToAction("Index");
         }
 
+        #endregion
         #region json
         public JsonResult get_info_producto_tipo( int IdProductoTipo = 0)
         {

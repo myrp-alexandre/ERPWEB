@@ -15,6 +15,7 @@ using Core.Erp.Bus.SeguridadAcceso;
 using Core.Erp.Info.General;
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class ProductoController : Controller
     {
         #region variables

@@ -1,17 +1,15 @@
-﻿using DevExpress.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Core.Erp.Bus.Inventario;
+﻿using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Inventario;
 using Core.Erp.Web.Helps;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class GrupoController : Controller
     {
+        #region Index /Metodos
+
         in_grupo_Bus bus_grupo = new in_grupo_Bus();
             in_categorias_Bus bus_categoria = new in_categorias_Bus();
             in_linea_Bus bus_linea = new in_linea_Bus();
@@ -42,7 +40,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
 
         }
-        
+        #endregion
+        #region Acciones
+
         public ActionResult Nuevo(int IdEmpresa = 0 , string IdCategoria ="", int IdLinea = 0)
         {
             in_grupo_Info model = new in_grupo_Info
@@ -120,5 +120,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index", new { IdEmpresa = model.IdEmpresa, IdCategoria = model.IdCategoria, IdLinea = model.IdLinea });
         }
+        #endregion
     }
 }

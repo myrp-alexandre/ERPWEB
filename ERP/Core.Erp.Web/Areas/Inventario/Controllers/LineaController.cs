@@ -1,17 +1,15 @@
 ﻿using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Inventario;
 using Core.Erp.Web.Helps;
-using DevExpress.Web.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class LineaController : Controller
     {
+        #region Index / Metodos
         in_linea_Bus bus_linea = new in_linea_Bus();
             in_categorias_Bus bus_categoria = new in_categorias_Bus();
         public ActionResult Index(int IdEmpresa = 0, string IdCategoria = "")
@@ -34,6 +32,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var lst_categoria = bus_categoria.get_list(IdEmpresa, false);
             ViewBag.lst_categorias = lst_categoria;
         }
+
+        #endregion
+        #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0 , string IdCategoria = "")
         {
             in_linea_Info model = new in_linea_Info
@@ -105,5 +106,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index", new { IdEmpresa = model.IdEmpresa,  IdCategoria = model.IdCategoria });
         }
+
+        #endregion
     }
 }

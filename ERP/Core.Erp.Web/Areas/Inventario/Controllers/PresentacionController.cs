@@ -1,17 +1,15 @@
-﻿using DevExpress.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Core.Erp.Bus.Inventario;
+﻿using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Inventario;
 using Core.Erp.Web.Helps;
+using System;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class PresentacionController : Controller
     {
+        #region Index / metodos
         in_presentacion_Bus bus_presentacion = new in_presentacion_Bus();
         public ActionResult Index()
         {
@@ -25,6 +23,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var model = bus_presentacion.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_presentacion", model);
         }
+
+        #endregion
+        #region Acciones
 
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
@@ -88,5 +89,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
     }
 }

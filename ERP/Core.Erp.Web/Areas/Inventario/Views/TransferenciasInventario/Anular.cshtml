@@ -36,12 +36,20 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="">tr_fecha</label>
+                    <label for="tr_fecha">Fecha</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.tr_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "tr_fecha" })
+                        @Html.DevExpress().DateEditFor(q=> q.tr_fecha, settings =>
+                    {
+                        settings.Name = "tr_fecha";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.tr_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -144,11 +152,3 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
-<script>
-    $(function () {
-        //Date picker
-        $('#tr_fecha').datepicker({
-            autoclose: true
-        })
-    });
-</script>

@@ -289,7 +289,15 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                @Html.TextBoxFor(q => q.lote_fecha_fab, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "lote_fecha_fab" })
+                                @Html.DevExpress().DateEditFor(q=> q.lote_fecha_fab, settings =>
+                            {
+                                settings.Name = "lote_fecha_fab";
+                                settings.Properties.UseMaskBehavior = true;
+                                settings.Properties.EditFormat = EditFormat.Date;
+                                settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                            }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.lote_fecha_fab, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -303,7 +311,15 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                @Html.TextBoxFor(q => q.lote_fecha_vcto, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "lote_fecha_vcto" })
+                                @Html.DevExpress().DateEditFor(q=> q.lote_fecha_vcto, settings =>
+                            {
+                                settings.Name = "lote_fecha_vcto";
+                                settings.Properties.UseMaskBehavior = true;
+                                settings.Properties.EditFormat = EditFormat.Date;
+                                settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                            }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.lote_fecha_vcto, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -493,12 +509,7 @@
 }
 <script>
         $(function () {
-            $('#lote_fecha_vcto').datepicker({
-                autoclose: true
-            })
-            $('#lote_fecha_fab').datepicker({
-                autoclose: true
-            })
+
             $("#link_precios").hide();
             get_info_producto_tipo();
             ValidarTabImagen();

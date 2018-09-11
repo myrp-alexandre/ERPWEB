@@ -11,12 +11,17 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class SubgrupoController : Controller
     {
+        #region Variables
         in_subgrupo_Bus bus_subgrupo = new in_subgrupo_Bus();
             in_categorias_Bus bus_categoria = new in_categorias_Bus();
             in_linea_Bus bus_linea = new in_linea_Bus();
             in_grupo_Bus bus_grupo = new in_grupo_Bus();
+        #endregion
+        #region Index/Metodos
+
         public ActionResult Index(int IdEmpresa = 0 , string IdCategoria = "", int IdLinea = 0, int IdGrupo = 0)
         {
             ViewBag.IdEmpresa = IdEmpresa;
@@ -47,6 +52,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var lst_grupo = bus_grupo.get_list(IdEmpresa, IdCategoria, IdLinea, true);
             ViewBag.lst_grupos = lst_grupo;
         }
+        #endregion
+        #region Acciones
 
         public ActionResult Nuevo(int IdEmpresa = 0 , string IdCategoria = "", int IdLinea = 0, int IdGrupo = 0)
         {
@@ -133,5 +140,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index", new { IdEmpresa = model.IdEmpresa, IdCategoria = model.IdCategoria, IdLinea = model.IdLinea, IdGrupo = model.IdGrupo });
         }
+        #endregion
     }
 }

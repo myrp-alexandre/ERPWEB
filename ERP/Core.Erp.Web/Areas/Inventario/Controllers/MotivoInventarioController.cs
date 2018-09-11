@@ -1,19 +1,17 @@
-﻿using DevExpress.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Core.Erp.Bus.Inventario;
-using Core.Erp.Info.Inventario;
-using Core.Erp.Bus.Contabilidad;
+﻿using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Helps;
+using Core.Erp.Info.Inventario;
 using Core.Erp.Web.Helps;
+using System;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class MotivoInventarioController : Controller
     {
+        #region Index /  Metodos
+
         in_Motivo_Inven_Bus bus_motivo = new Bus.Inventario.in_Motivo_Inven_Bus();
         public ActionResult Index()
         {
@@ -34,6 +32,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var lst_tipo = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoInventario.ING_EGR), false);
             ViewBag.lst_tipos = lst_tipo;
         }
+        #endregion
+        #region Acciones
+
         public ActionResult Nuevo(int IdEmpresa = 0 )
         {
             in_Motivo_Inven_Info model = new in_Motivo_Inven_Info
@@ -98,5 +99,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
     }
 }

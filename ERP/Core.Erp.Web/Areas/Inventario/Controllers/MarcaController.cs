@@ -1,17 +1,15 @@
 ﻿using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Inventario;
 using Core.Erp.Web.Helps;
-using DevExpress.Web.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class MarcaController : Controller
     {
+        #region Index
         in_Marca_Bus bus_marca = new in_Marca_Bus();
         public ActionResult Index()
         {
@@ -26,6 +24,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return PartialView("_GridViewPartial_marca", model);
         }
 
+        #endregion
+        #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
             in_Marca_Info model = new in_Marca_Info
@@ -88,5 +88,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

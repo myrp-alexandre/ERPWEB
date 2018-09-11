@@ -12,6 +12,7 @@ using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class ParametroInventarioController : Controller
     {
         #region Variables
@@ -22,8 +23,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
         in_ProductoTipo_Bus bus_producto_tipo = new in_ProductoTipo_Bus();
         #endregion
-
-
+        #region Index / Metodos
         public ActionResult Index()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -65,5 +65,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var lst_producto_tipo = bus_producto_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_producto_tipo = lst_producto_tipo;
         }
+
+        #endregion
     }
 }

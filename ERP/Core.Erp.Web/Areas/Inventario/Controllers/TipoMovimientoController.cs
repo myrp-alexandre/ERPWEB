@@ -1,24 +1,28 @@
-﻿using DevExpress.Web.Mvc;
+﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Bus.General;
+using Core.Erp.Bus.Inventario;
+using Core.Erp.Info.Inventario;
+using Core.Erp.Web.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Core.Erp.Bus.Inventario;
-using Core.Erp.Info.Inventario;
-using Core.Erp.Bus.Contabilidad;
-using Core.Erp.Bus.General;
-using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class TipoMovimientoController : Controller
     {
+        #region Variables
+
         in_movi_inven_tipo_Bus bus_tipo_movimiento = new in_movi_inven_tipo_Bus();
         in_movi_inven_tipo_x_tb_bodega_Bus bus_tipo_movimiento_x_bodega = new in_movi_inven_tipo_x_tb_bodega_Bus();
             ct_cbtecble_tipo_Bus bus_tipo_comprobante = new ct_cbtecble_tipo_Bus();
             tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
             tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+        #endregion
+        #region Index/Metodos
+
         public ActionResult Index()
         {
             return View();
@@ -66,6 +70,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                                            }).ToList();
 
         }
+        #endregion
+        #region Acciones
+
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
             in_movi_inven_tipo_Info model = new in_movi_inven_tipo_Info
@@ -133,5 +140,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
     }
 }
