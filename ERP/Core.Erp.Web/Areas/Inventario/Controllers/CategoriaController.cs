@@ -11,8 +11,11 @@ using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class CategoriaController : Controller
     {
+        #region Index / Metodos
+
         in_categorias_Bus bus_categoria = new in_categorias_Bus();
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
         public ActionResult Index()
@@ -32,7 +35,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var lst_ctacble = bus_plancta.get_list(IdEmpresa, false, false);
             ViewBag.lst_cuentas = lst_ctacble;
         }
-
+        #endregion
+        #region Variables
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
             in_categorias_Info model = new in_categorias_Info
@@ -104,5 +108,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
+
     }
 }

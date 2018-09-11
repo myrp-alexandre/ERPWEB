@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class DevolucionInventarioController : Controller
     {
         #region Variables

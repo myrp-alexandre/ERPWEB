@@ -10,8 +10,10 @@ using DevExpress.Web.Mvc;
 using Core.Erp.Web.Helps;
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class DistribucionPorLoteController : Controller
     {
+        #region Variables
         in_Ing_Egr_Inven_distribucion_Bus bus_ing_inv = new in_Ing_Egr_Inven_distribucion_Bus();
         in_Ing_Egr_Inven_det_Bus bus_det_ing_inv = new in_Ing_Egr_Inven_det_Bus();
         in_Ing_Egr_Inven_distribucion_lst List_in_Ing_Egr_Inven_det = new in_Ing_Egr_Inven_distribucion_lst();
@@ -21,6 +23,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         decimal IdProducto_padre = 0;
         List<in_Producto_Info> list_productos = new List<in_Producto_Info>();
 
+        #endregion
+
+        #region Index / Metodos
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -32,9 +37,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             return View(model);
         }
-
-       
-        [ValidateInput(false)]
         public ActionResult GridViewPartial_distribuion(DateTime? fecha_ini, DateTime? fecha_fin)
         {
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
@@ -43,6 +45,23 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var model = bus_ing_inv.get_list(IdEmpresa);
             return PartialView("_GridViewPartial_distribuion", model);
         }
+        private void cargar_combos(int IdEmpresa)
+        {
+            in_movi_inven_tipo_Bus bus_tipo = new in_movi_inven_tipo_Bus();
+            var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
+            ViewBag.lst_tipo = lst_tipo;
+
+            in_Motivo_Inven_Bus bus_motivo = new in_Motivo_Inven_Bus();
+            var lst_motivo = bus_motivo.get_list(IdEmpresa, cl_enumeradores.eTipoIngEgr.ING.ToString(), false);
+            ViewBag.lst_motivo = lst_motivo;
+
+        }
+
+        #endregion
+
+        #region Grids
+
+        [ValidateInput(false)]
 
         public ActionResult GridViewPartial_distribuidos(int IdSucursal=0, int IdMovi_inven_tipo=0, decimal IdNumMovi=0)
         {
@@ -85,19 +104,20 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             List<in_Ing_Egr_Inven_distribucion_Info> model = new List<in_Ing_Egr_Inven_distribucion_Info>();
             return PartialView("_GridViewPartial_distribucion_det", model);
         }
-
-        
-        private void cargar_combos(int IdEmpresa)
+        private void cargar_combos_detalle(decimal IdProducto_padre=0)
         {
-            in_movi_inven_tipo_Bus bus_tipo = new in_movi_inven_tipo_Bus();
-            var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
-            ViewBag.lst_tipo = lst_tipo;
-
-            in_Motivo_Inven_Bus bus_motivo = new in_Motivo_Inven_Bus();
-            var lst_motivo = bus_motivo.get_list(IdEmpresa, cl_enumeradores.eTipoIngEgr.ING.ToString(), false);
-            ViewBag.lst_motivo = lst_motivo;
-
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            in_Producto_Bus bus_producto = new in_Producto_Bus();
+            var lst_producto = bus_producto.get_list_combo_hijo(IdEmpresa, IdProducto_padre);
+            ViewBag.lst_producto = lst_producto;
+            Session["list_productos"] = lst_producto;
+            in_UnidadMedida_Bus bus_unidad = new in_UnidadMedida_Bus();
+            var lst_unidad = bus_unidad.get_list(false);
+            ViewBag.lst_unidad = lst_unidad;
         }
+        #endregion
+
+        #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0 , int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0, string signo="")
         {
             Session["list_distribuida"] = null;
@@ -136,19 +156,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index");
         }
-        
-        private void cargar_combos_detalle(decimal IdProducto_padre=0)
-        {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            in_Producto_Bus bus_producto = new in_Producto_Bus();
-            var lst_producto = bus_producto.get_list_combo_hijo(IdEmpresa, IdProducto_padre);
-            ViewBag.lst_producto = lst_producto;
-            Session["list_productos"] = lst_producto;
-            in_UnidadMedida_Bus bus_unidad = new in_UnidadMedida_Bus();
-            var lst_unidad = bus_unidad.get_list(false);
-            ViewBag.lst_unidad = lst_unidad;
-        }
 
+        #endregion
+        
         #region update and delete fila distribuida
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate_list_dis([ModelBinder(typeof(DevExpressEditorsBinder))] in_Ing_Egr_Inven_distribucion_Info info_det)
@@ -226,6 +236,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return PartialView("_GridViewPartial_distribuidos", model.lst_distribuido);
         }
         #endregion
+
         #region Funciones new, update, delete, agregar distribucion
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] in_Ing_Egr_Inven_distribucion_Info info_det)

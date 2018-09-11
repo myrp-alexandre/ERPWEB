@@ -28,7 +28,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbProducto_IngresoInventario()
         {
-            in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info();
+            decimal model = new decimal();
             return PartialView("_CmbProducto_IngresoInventario", model);
         }
         public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
