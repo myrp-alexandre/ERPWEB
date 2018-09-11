@@ -57,8 +57,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         #endregion
 
-
-
         #region json
 
         public JsonResult cargar_bodega(int IdEmpresa = 0, int IdSucursal = 0)
