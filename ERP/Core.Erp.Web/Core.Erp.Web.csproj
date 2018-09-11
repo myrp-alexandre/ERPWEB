@@ -9128,6 +9128,7 @@
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_012.cshtml" />
     <Content Include="Areas\Inventario\Views\Revision\Index.cshtml" />
     <Content Include="Areas\Inventario\Views\Revision\_CmbProductoPadre_Revision.cshtml" />
+    <Content Include="Areas\RRHH\Views\Prestamos\_CmbEmpleado_prestamos.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -9242,7 +9243,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
