@@ -880,7 +880,7 @@ namespace Core.Erp.Data.Inventario
                                     .Take(take)
                                     .ToList();
                             break;
-                        case cl_enumeradores.eModulo.VTA:
+                        case cl_enumeradores.eModulo.FAC:
                             Lista = (from p in Context.in_Producto
                                      join c in Context.in_categorias
                                      on new { p.IdEmpresa, p.IdCategoria } equals new { c.IdEmpresa, c.IdCategoria }
