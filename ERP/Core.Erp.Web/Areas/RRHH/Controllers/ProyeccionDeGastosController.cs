@@ -213,7 +213,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 ro_empleado_proyeccion_gastos_Info model = bus_proyeccion.get_info(IdEmpresa, IdEmpleado, IdTransaccion);
                 model.list_proyeciones = bus_det.get_list(IdEmpresa, model.IdTransaccion);
-                ro_empleado_proyeccion_gastos_det_Info_lis.set_list(model.list_proyeciones, Convert.ToDecimal(model.IdTransaccionSession));
+                ro_empleado_proyeccion_gastos_det_Info_lis.set_list(model.list_proyeciones, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                 model.IdTransaccion = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
                 return View(model);
             }

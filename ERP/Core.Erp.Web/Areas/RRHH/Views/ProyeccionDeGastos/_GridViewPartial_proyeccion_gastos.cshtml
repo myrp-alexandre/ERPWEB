@@ -64,8 +64,8 @@
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), IdNovedad = DataBinder.Eval(tc.DataItem, "IdTransaccion") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), IdNovedad = DataBinder.Eval(tc.DataItem, "IdTransaccion") },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), IdTransaccion = DataBinder.Eval(tc.DataItem, "IdTransaccion") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), IdTransaccion = DataBinder.Eval(tc.DataItem, "IdTransaccion") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -81,10 +81,10 @@
             c.Width = Unit.Pixel(120);
         });
 
-        settings.Columns.Add("IdTransaccion", "ID").Width = Unit.Percentage(20);
-        settings.Columns.Add("AnioFiscal","Año").Width = Unit.Percentage(5);
+        settings.Columns.Add("IdTransaccion", "ID").Width = Unit.Percentage(5);
+        settings.Columns.Add("AnioFiscal","Año").Width = Unit.Percentage(10);
         settings.Columns.Add("pe_cedulaRuc", "Cédula").Width = Unit.Percentage(20);
-        settings.Columns.Add("pe_nombreCompleto", "Empleado").Width = Unit.Percentage(20);
+        settings.Columns.Add("pe_nombreCompleto", "Empleado").Width = Unit.Percentage(40);
 
 
     });
