@@ -517,41 +517,20 @@
             <PropertyRef Name="IdEmpresa" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
-          <Property Name="IdMovi_inven_tipo_Factura" Type="int" />
-          <Property Name="pa_porc_max_total_item_x_despa_Guia" Type="float" />
-          <Property Name="IdMovi_inven_tipo_Dev_Vta" Type="int" />
-          <Property Name="IdMovi_inven_tipo_Factura_Anulacion" Type="int" />
-          <Property Name="IdMovi_inven_tipo_Dev_Vta_Anulacion" Type="int" />
-          <Property Name="Tipo_NC_x_DevVta" Type="int" />
-          <Property Name="IdDepartamento_x_DevVta" Type="int" />
-          <Property Name="IdTipoCbteCble_Factura" Type="int" />
-          <Property Name="IdTipoCbteCble_Factura_Reverso" Type="int" />
-          <Property Name="IdTipoCbteCble_Factura_Costo_VTA" Type="int" />
-          <Property Name="IdTipoCbteCble_Factura_Costo_VTA_Reverso" Type="int" />
-          <Property Name="IdTipoCbteCble_NC" Type="int" />
-          <Property Name="IdTipoCbteCble_NC_Reverso" Type="int" />
-          <Property Name="IdTipoCbteCble_ND" Type="int" />
-          <Property Name="IdTipoCbteCble_ND_Reverso" Type="int" />
-          <Property Name="SeImprimiGuiaRemiAuto" Type="char" MaxLength="1" />
-          <Property Name="NumeroDeItemFact" Type="int" />
-          <Property Name="TipoCobroDafaultFactu" Type="varchar" MaxLength="20" />
-          <Property Name="IdCaja_Default_Factura" Type="int" />
-          <Property Name="IdCtaCble_x_anticipo_cliente" Type="varchar" MaxLength="20" />
-          <Property Name="pa_IdTipoNota_NC_x_Anulacion" Type="int" />
-          <Property Name="pa_ruta_descarga_xml_fac_elct" Type="varchar" MaxLength="500" />
-          <Property Name="File_Reporte_FacturaDiseño" Type="varbinary(max)" />
-          <Property Name="File_Reporte_Nota_CRED_DEB" Type="varbinary(max)" />
+          <Property Name="IdMovi_inven_tipo_Factura" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbteCble_Factura" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbteCble_NC" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbteCble_ND" Type="int" Nullable="false" />
+          <Property Name="NumeroDeItemFact" Type="int" Nullable="false" />
+          <Property Name="IdCaja_Default_Factura" Type="int" Nullable="false" />
           <Property Name="IdCtaCble_IVA" Type="varchar" MaxLength="20" />
           <Property Name="IdCtaCble_SubTotal_Vtas_x_Default" Type="varchar" MaxLength="20" />
           <Property Name="IdCtaCble_CXC_Vtas_x_Default" Type="varchar" MaxLength="20" />
-          <Property Name="pa_X_Defecto_la_factura_es_cbte_elect" Type="bit" />
-          <Property Name="pa_X_Defecto_la_guia_es_cbte_elect" Type="bit" />
-          <Property Name="pa_X_Defecto_la_ND_es_cbte_elect" Type="bit" />
-          <Property Name="pa_X_Defecto_la_NC_es_cbte_elect" Type="bit" />
-          <Property Name="pa_Contabiliza_descuento" Type="bit" />
+          <Property Name="pa_Contabiliza_descuento" Type="bit" Nullable="false" />
           <Property Name="pa_IdCtaCble_descuento" Type="varchar" MaxLength="20" />
-          <Property Name="NumeroDeItemProforma" Type="int" />
+          <Property Name="NumeroDeItemProforma" Type="int" Nullable="false" />
           <Property Name="clave_desbloqueo_precios" Type="varchar" MaxLength="200" />
+          <Property Name="DiasTransaccionesAFuturo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="fa_proforma">
           <Key>
@@ -895,7 +874,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_factura' no t
           <Property Name="vt_NumFactura" Type="varchar" MaxLength="20" />
           <Property Name="vt_fecha" Type="datetime" Nullable="false" />
           <Property Name="Nombres" Type="varchar" MaxLength="1000" />
-          <Property Name="Ve_Vendedor" Type="nchar" MaxLength="200" Nullable="false" />
+          <Property Name="Ve_Vendedor" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="vt_Subtotal" Type="float" />
           <Property Name="vt_iva" Type="float" />
           <Property Name="vt_total" Type="float" />
@@ -1739,18 +1718,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_fa_parametro_fa_TipoNota">
-          <End Role="fa_TipoNota" Type="Self.fa_TipoNota" Multiplicity="0..1" />
-          <End Role="fa_parametro" Type="Self.fa_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="fa_TipoNota">
-              <PropertyRef Name="IdTipoNota" />
-            </Principal>
-            <Dependent Role="fa_parametro">
-              <PropertyRef Name="pa_IdTipoNota_NC_x_Anulacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_fa_proforma_det_fa_proforma">
           <End Role="fa_proforma" Type="Self.fa_proforma" Multiplicity="1" />
           <End Role="fa_proforma_det" Type="Self.fa_proforma_det" Multiplicity="*" />
@@ -2325,10 +2292,6 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <AssociationSet Name="FK_fa_notaCreDeb_x_cxc_cobro_fa_notaCreDeb" Association="Self.FK_fa_notaCreDeb_x_cxc_cobro_fa_notaCreDeb">
             <End Role="fa_notaCreDeb" EntitySet="fa_notaCreDeb" />
             <End Role="fa_notaCreDeb_x_cxc_cobro" EntitySet="fa_notaCreDeb_x_cxc_cobro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_fa_parametro_fa_TipoNota" Association="Self.FK_fa_parametro_fa_TipoNota">
-            <End Role="fa_TipoNota" EntitySet="fa_TipoNota" />
-            <End Role="fa_parametro" EntitySet="fa_parametro" />
           </AssociationSet>
           <AssociationSet Name="FK_fa_proforma_det_fa_proforma" Association="Self.FK_fa_proforma_det_fa_proforma">
             <End Role="fa_proforma" EntitySet="fa_proforma" />
@@ -2926,48 +2889,6 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <Property Name="Valor_Aplicado" Type="Double" Nullable="false" />
           <Property Name="fecha_cruce" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
-        <EntityType Name="fa_parametro">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdMovi_inven_tipo_Factura" Type="Int32" />
-          <Property Name="pa_porc_max_total_item_x_despa_Guia" Type="Double" />
-          <Property Name="IdMovi_inven_tipo_Dev_Vta" Type="Int32" />
-          <Property Name="IdMovi_inven_tipo_Factura_Anulacion" Type="Int32" />
-          <Property Name="IdMovi_inven_tipo_Dev_Vta_Anulacion" Type="Int32" />
-          <Property Name="Tipo_NC_x_DevVta" Type="Int32" />
-          <Property Name="IdDepartamento_x_DevVta" Type="Int32" />
-          <Property Name="IdTipoCbteCble_Factura" Type="Int32" />
-          <Property Name="IdTipoCbteCble_Factura_Reverso" Type="Int32" />
-          <Property Name="IdTipoCbteCble_Factura_Costo_VTA" Type="Int32" />
-          <Property Name="IdTipoCbteCble_Factura_Costo_VTA_Reverso" Type="Int32" />
-          <Property Name="IdTipoCbteCble_NC" Type="Int32" />
-          <Property Name="IdTipoCbteCble_NC_Reverso" Type="Int32" />
-          <Property Name="IdTipoCbteCble_ND" Type="Int32" />
-          <Property Name="IdTipoCbteCble_ND_Reverso" Type="Int32" />
-          <Property Name="SeImprimiGuiaRemiAuto" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="NumeroDeItemFact" Type="Int32" />
-          <Property Name="TipoCobroDafaultFactu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdCaja_Default_Factura" Type="Int32" />
-          <Property Name="IdCtaCble_x_anticipo_cliente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pa_IdTipoNota_NC_x_Anulacion" Type="Int32" />
-          <Property Name="pa_ruta_descarga_xml_fac_elct" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="File_Reporte_FacturaDiseño" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="File_Reporte_Nota_CRED_DEB" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="IdCtaCble_IVA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdCtaCble_SubTotal_Vtas_x_Default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdCtaCble_CXC_Vtas_x_Default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pa_X_Defecto_la_factura_es_cbte_elect" Type="Boolean" />
-          <Property Name="pa_X_Defecto_la_guia_es_cbte_elect" Type="Boolean" />
-          <Property Name="pa_X_Defecto_la_ND_es_cbte_elect" Type="Boolean" />
-          <Property Name="pa_X_Defecto_la_NC_es_cbte_elect" Type="Boolean" />
-          <Property Name="pa_Contabiliza_descuento" Type="Boolean" />
-          <Property Name="pa_IdCtaCble_descuento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="NumeroDeItemProforma" Type="Int32" />
-          <Property Name="clave_desbloqueo_precios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="fa_TipoNota" Relationship="Self.FK_fa_parametro_fa_TipoNota" FromRole="fa_parametro" ToRole="fa_TipoNota" />
-        </EntityType>
         <EntityType Name="fa_proforma">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3087,7 +3008,6 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="fa_notaCreDeb" Relationship="Self.FK_fa_notaCreDeb_fa_TipoNota" FromRole="fa_TipoNota" ToRole="fa_notaCreDeb" />
-          <NavigationProperty Name="fa_parametro" Relationship="Self.FK_fa_parametro_fa_TipoNota" FromRole="fa_TipoNota" ToRole="fa_parametro" />
           <NavigationProperty Name="fa_TipoNota_x_Empresa_x_Sucursal" Relationship="Self.FK_fa_TipoNota_x_Empresa_x_Sucursal_fa_TipoNota" FromRole="fa_TipoNota" ToRole="fa_TipoNota_x_Empresa_x_Sucursal" />
         </EntityType>
         <EntityType Name="fa_TipoNota_x_Empresa_x_Sucursal">
@@ -3227,7 +3147,7 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Nombres" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Ve_Vendedor" Type="String" MaxLength="200" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Ve_Vendedor" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="vt_Subtotal" Type="Double" />
           <Property Name="vt_iva" Type="Double" />
           <Property Name="vt_total" Type="Double" />
@@ -3987,18 +3907,6 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_fa_parametro_fa_TipoNota">
-          <End Role="fa_TipoNota" Type="Self.fa_TipoNota" Multiplicity="0..1" />
-          <End Role="fa_parametro" Type="Self.fa_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="fa_TipoNota">
-              <PropertyRef Name="IdTipoNota" />
-            </Principal>
-            <Dependent Role="fa_parametro">
-              <PropertyRef Name="pa_IdTipoNota_NC_x_Anulacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_fa_proforma_det_fa_proforma">
           <End Role="fa_proforma" Type="Self.fa_proforma" Multiplicity="1" />
           <End Role="fa_proforma_det" Type="Self.fa_proforma_det" Multiplicity="*" />
@@ -4074,7 +3982,6 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <EntitySet Name="fa_notaCreDeb_x_ct_cbtecble" EntityType="Self.fa_notaCreDeb_x_ct_cbtecble" />
           <EntitySet Name="fa_notaCreDeb_x_cxc_cobro" EntityType="Self.fa_notaCreDeb_x_cxc_cobro" />
           <EntitySet Name="fa_notaCreDeb_x_fa_factura_NotaDeb" EntityType="Self.fa_notaCreDeb_x_fa_factura_NotaDeb" />
-          <EntitySet Name="fa_parametro" EntityType="Self.fa_parametro" />
           <EntitySet Name="fa_proforma" EntityType="Self.fa_proforma" />
           <EntitySet Name="fa_proforma_det" EntityType="Self.fa_proforma_det" />
           <EntitySet Name="fa_PuntoVta" EntityType="Self.fa_PuntoVta" />
@@ -4221,10 +4128,6 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
             <End Role="fa_notaCreDeb" EntitySet="fa_notaCreDeb" />
             <End Role="fa_notaCreDeb_x_cxc_cobro" EntitySet="fa_notaCreDeb_x_cxc_cobro" />
           </AssociationSet>
-          <AssociationSet Name="FK_fa_parametro_fa_TipoNota" Association="Self.FK_fa_parametro_fa_TipoNota">
-            <End Role="fa_TipoNota" EntitySet="fa_TipoNota" />
-            <End Role="fa_parametro" EntitySet="fa_parametro" />
-          </AssociationSet>
           <AssociationSet Name="FK_fa_proforma_det_fa_proforma" Association="Self.FK_fa_proforma_det_fa_proforma">
             <End Role="fa_proforma" EntitySet="fa_proforma" />
             <End Role="fa_proforma_det" EntitySet="fa_proforma_det" />
@@ -4257,6 +4160,7 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
             <End Role="fa_Vendedor" EntitySet="fa_Vendedor" />
             <End Role="fa_proforma" EntitySet="fa_proforma" />
           </AssociationSet>
+          <EntitySet Name="fa_parametro" EntityType="Model_facturacion.fa_parametro" />
           </EntityContainer>
         <EntityType Name="vwfa_factura_det">
           <Key>
@@ -4444,6 +4348,26 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="fa_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_Factura" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbteCble_Factura" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbteCble_NC" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbteCble_ND" Type="Int32" Nullable="false" />
+          <Property Name="NumeroDeItemFact" Type="Int32" Nullable="false" />
+          <Property Name="IdCaja_Default_Factura" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble_IVA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_SubTotal_Vtas_x_Default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_CXC_Vtas_x_Default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pa_Contabiliza_descuento" Type="Boolean" Nullable="false" />
+          <Property Name="pa_IdCtaCble_descuento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroDeItemProforma" Type="Int32" Nullable="false" />
+          <Property Name="clave_desbloqueo_precios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4895,48 +4819,6 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
                 <ScalarProperty Name="vt_tipoDoc" ColumnName="vt_tipoDoc" />
                 <ScalarProperty Name="Valor_Aplicado" ColumnName="Valor_Aplicado" />
                 <ScalarProperty Name="fecha_cruce" ColumnName="fecha_cruce" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="fa_parametro">
-            <EntityTypeMapping TypeName="Model_facturacion.fa_parametro">
-              <MappingFragment StoreEntitySet="fa_parametro">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdMovi_inven_tipo_Factura" ColumnName="IdMovi_inven_tipo_Factura" />
-                <ScalarProperty Name="pa_porc_max_total_item_x_despa_Guia" ColumnName="pa_porc_max_total_item_x_despa_Guia" />
-                <ScalarProperty Name="IdMovi_inven_tipo_Dev_Vta" ColumnName="IdMovi_inven_tipo_Dev_Vta" />
-                <ScalarProperty Name="IdMovi_inven_tipo_Factura_Anulacion" ColumnName="IdMovi_inven_tipo_Factura_Anulacion" />
-                <ScalarProperty Name="IdMovi_inven_tipo_Dev_Vta_Anulacion" ColumnName="IdMovi_inven_tipo_Dev_Vta_Anulacion" />
-                <ScalarProperty Name="Tipo_NC_x_DevVta" ColumnName="Tipo_NC_x_DevVta" />
-                <ScalarProperty Name="IdDepartamento_x_DevVta" ColumnName="IdDepartamento_x_DevVta" />
-                <ScalarProperty Name="IdTipoCbteCble_Factura" ColumnName="IdTipoCbteCble_Factura" />
-                <ScalarProperty Name="IdTipoCbteCble_Factura_Reverso" ColumnName="IdTipoCbteCble_Factura_Reverso" />
-                <ScalarProperty Name="IdTipoCbteCble_Factura_Costo_VTA" ColumnName="IdTipoCbteCble_Factura_Costo_VTA" />
-                <ScalarProperty Name="IdTipoCbteCble_Factura_Costo_VTA_Reverso" ColumnName="IdTipoCbteCble_Factura_Costo_VTA_Reverso" />
-                <ScalarProperty Name="IdTipoCbteCble_NC" ColumnName="IdTipoCbteCble_NC" />
-                <ScalarProperty Name="IdTipoCbteCble_NC_Reverso" ColumnName="IdTipoCbteCble_NC_Reverso" />
-                <ScalarProperty Name="IdTipoCbteCble_ND" ColumnName="IdTipoCbteCble_ND" />
-                <ScalarProperty Name="IdTipoCbteCble_ND_Reverso" ColumnName="IdTipoCbteCble_ND_Reverso" />
-                <ScalarProperty Name="SeImprimiGuiaRemiAuto" ColumnName="SeImprimiGuiaRemiAuto" />
-                <ScalarProperty Name="NumeroDeItemFact" ColumnName="NumeroDeItemFact" />
-                <ScalarProperty Name="TipoCobroDafaultFactu" ColumnName="TipoCobroDafaultFactu" />
-                <ScalarProperty Name="IdCaja_Default_Factura" ColumnName="IdCaja_Default_Factura" />
-                <ScalarProperty Name="IdCtaCble_x_anticipo_cliente" ColumnName="IdCtaCble_x_anticipo_cliente" />
-                <ScalarProperty Name="pa_IdTipoNota_NC_x_Anulacion" ColumnName="pa_IdTipoNota_NC_x_Anulacion" />
-                <ScalarProperty Name="pa_ruta_descarga_xml_fac_elct" ColumnName="pa_ruta_descarga_xml_fac_elct" />
-                <ScalarProperty Name="File_Reporte_FacturaDiseño" ColumnName="File_Reporte_FacturaDiseño" />
-                <ScalarProperty Name="File_Reporte_Nota_CRED_DEB" ColumnName="File_Reporte_Nota_CRED_DEB" />
-                <ScalarProperty Name="IdCtaCble_IVA" ColumnName="IdCtaCble_IVA" />
-                <ScalarProperty Name="IdCtaCble_SubTotal_Vtas_x_Default" ColumnName="IdCtaCble_SubTotal_Vtas_x_Default" />
-                <ScalarProperty Name="IdCtaCble_CXC_Vtas_x_Default" ColumnName="IdCtaCble_CXC_Vtas_x_Default" />
-                <ScalarProperty Name="pa_X_Defecto_la_factura_es_cbte_elect" ColumnName="pa_X_Defecto_la_factura_es_cbte_elect" />
-                <ScalarProperty Name="pa_X_Defecto_la_guia_es_cbte_elect" ColumnName="pa_X_Defecto_la_guia_es_cbte_elect" />
-                <ScalarProperty Name="pa_X_Defecto_la_ND_es_cbte_elect" ColumnName="pa_X_Defecto_la_ND_es_cbte_elect" />
-                <ScalarProperty Name="pa_X_Defecto_la_NC_es_cbte_elect" ColumnName="pa_X_Defecto_la_NC_es_cbte_elect" />
-                <ScalarProperty Name="pa_Contabiliza_descuento" ColumnName="pa_Contabiliza_descuento" />
-                <ScalarProperty Name="pa_IdCtaCble_descuento" ColumnName="pa_IdCtaCble_descuento" />
-                <ScalarProperty Name="NumeroDeItemProforma" ColumnName="NumeroDeItemProforma" />
-                <ScalarProperty Name="clave_desbloqueo_precios" ColumnName="clave_desbloqueo_precios" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5431,6 +5313,27 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
                 <ScalarProperty Name="Ve_Vendedor" ColumnName="Ve_Vendedor" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="IdVendedor" ColumnName="IdVendedor" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_parametro">
+            <EntityTypeMapping TypeName="Model_facturacion.fa_parametro">
+              <MappingFragment StoreEntitySet="fa_parametro">
+                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
+                <ScalarProperty Name="clave_desbloqueo_precios" ColumnName="clave_desbloqueo_precios" />
+                <ScalarProperty Name="NumeroDeItemProforma" ColumnName="NumeroDeItemProforma" />
+                <ScalarProperty Name="pa_IdCtaCble_descuento" ColumnName="pa_IdCtaCble_descuento" />
+                <ScalarProperty Name="pa_Contabiliza_descuento" ColumnName="pa_Contabiliza_descuento" />
+                <ScalarProperty Name="IdCtaCble_CXC_Vtas_x_Default" ColumnName="IdCtaCble_CXC_Vtas_x_Default" />
+                <ScalarProperty Name="IdCtaCble_SubTotal_Vtas_x_Default" ColumnName="IdCtaCble_SubTotal_Vtas_x_Default" />
+                <ScalarProperty Name="IdCtaCble_IVA" ColumnName="IdCtaCble_IVA" />
+                <ScalarProperty Name="IdCaja_Default_Factura" ColumnName="IdCaja_Default_Factura" />
+                <ScalarProperty Name="NumeroDeItemFact" ColumnName="NumeroDeItemFact" />
+                <ScalarProperty Name="IdTipoCbteCble_ND" ColumnName="IdTipoCbteCble_ND" />
+                <ScalarProperty Name="IdTipoCbteCble_NC" ColumnName="IdTipoCbteCble_NC" />
+                <ScalarProperty Name="IdTipoCbteCble_Factura" ColumnName="IdTipoCbteCble_Factura" />
+                <ScalarProperty Name="IdMovi_inven_tipo_Factura" ColumnName="IdMovi_inven_tipo_Factura" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

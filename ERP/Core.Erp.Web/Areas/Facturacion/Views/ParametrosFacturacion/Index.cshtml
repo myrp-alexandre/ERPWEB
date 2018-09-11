@@ -25,9 +25,6 @@
                 <a href="#tab_parametros" aria-controls="parametros" role="tab" data-toggle="tab">Parámetros de factura</a>
             </li>
             <li>
-                <a href="#tab_devolucion" aria-controls="devolucion" role="tab" data-toggle="tab">Devolución en ventas</a>
-            </li>
-            <li>
                 <a href="#tab_nota" aria-controls="nota" role="tab" data-toggle="tab">Nota de crédito / débito</a>
             </li>
         </ul>
@@ -97,10 +94,13 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="IdCtaCble_SubTotal_Vtas_x_Default">Cta. Cble. default para el descuento en ventas</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_SubTotal_Vtas_x_Default, settings =>
+                            <div class="checkbox">
+                                <label for="pa_Contabiliza_descuento">@Html.CheckBoxFor(q=>q.pa_Contabiliza_descuento) Se contabiliza el descuento</label>
+                            </div>                            
+                            <label for="IdCtaCble_SubTotal_Vtas_x_Default">Cuenta contable defecto para descuento</label>
+                            @Html.DevExpress().ComboBoxFor(q => q.pa_IdCtaCble_descuento, settings =>
                             {
-                                settings.Name = "IdCtaCble_SubTotal_Vtas_x_Default";
+                                settings.Name = "pa_IdCtaCble_descuento";
                                 settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                                 settings.Properties.DisplayFormatString = "[{0}] - {1}";
                                 settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
@@ -114,36 +114,20 @@
                                 settings.Properties.NullText = "== Seleccione ==";
                                 settings.Properties.DropDownStyle = DropDownStyle.DropDown;
                             }).BindList(ViewBag.lst_cuentas).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdCtaCble_SubTotal_Vtas_x_Default, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.pa_IdCtaCble_descuento, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
 
-
-
-
-            </div>
-
-            <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tab_devolucion">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="IdMovi_inven_tipo_Dev_Vta">Tipo movimiento inventario por devolución en venta</label>
-                            @Html.DropDownListFor(q => q.IdMovi_inven_tipo_Dev_Vta, new SelectList(ViewBag.lst_tipo_movimiento_ing, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control" })
-                            @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_Dev_Vta, "", new { @class = "text-danger" })
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="DiasTransaccionesAFuturo">Dias máximos para transacciones a futuro</label>
+                                @Html.TextBoxFor(q => q.DiasTransaccionesAFuturo, new { @class = "form-control", @id = "DiasTransaccionesAFuturo" })
+                                @Html.ValidationMessageFor(q => q.DiasTransaccionesAFuturo, "", new { @class = "text-danger" })
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Tipo_NC_x_DevVta">Tipo nota crédito por devolución en venta</label>
-                            @Html.DropDownListFor(q => q.Tipo_NC_x_DevVta, new SelectList(ViewBag.lst_nota, "IdTipoNota", "No_Descripcion"), new { @class = "form-control" })
-                            @Html.ValidationMessageFor(q => q.Tipo_NC_x_DevVta, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
 
             </div>
 
@@ -197,12 +181,7 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
             </div>
-
         </div>
     </div>
 
