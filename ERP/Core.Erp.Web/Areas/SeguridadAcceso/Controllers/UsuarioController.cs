@@ -7,11 +7,14 @@ using System.Web.Mvc;
 using Core.Erp.Info.SeguridadAcceso;
 using Core.Erp.Bus.SeguridadAcceso;
 using Core.Erp.Bus.General;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
 {
+    [SessionTimeout]
     public class UsuarioController : Controller
     {
+        #region Index/Metodos
         seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
         seg_Usuario_x_Empresa_Bus bus_usuario_x_empresa = new seg_Usuario_x_Empresa_Bus();
         seg_Menu_Bus bus_menu = new seg_Menu_Bus();
@@ -59,6 +62,9 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
             lst_menu.Add(new seg_Menu_Info { IdMenu = 0, DescripcionMenu_combo = "== Seleccione ==" });
             ViewBag.lst_menu = lst_menu;
         }
+
+        #endregion
+        #region Acciones
 
         public ActionResult Nuevo()
         {
@@ -129,5 +135,6 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
 
             return RedirectToAction("Index");
         }
+        #endregion
     }
 }

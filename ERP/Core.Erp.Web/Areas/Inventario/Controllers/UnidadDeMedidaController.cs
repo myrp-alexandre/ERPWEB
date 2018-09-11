@@ -6,11 +6,15 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.Inventario;
 using Core.Erp.Bus.Inventario;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class UnidadDeMedidaController : Controller
     {
+        #region Index/Metodos
+
         in_UnidadMedida_Bus bus_unidad_medida = new in_UnidadMedida_Bus();
         in_UnidadMedida_Equiv_conversion_Bus bus_unidad_medida_equiv = new in_UnidadMedida_Equiv_conversion_Bus();
         in_UnidadMedida_Equiv_conversion_List list_unidad_medida_equiv = new in_UnidadMedida_Equiv_conversion_List();
@@ -25,6 +29,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             List<in_UnidadMedida_Info> model = bus_unidad_medida.get_list(true);
             return PartialView("_GridViewPartial_unidad_medida", model);
         }
+        private void cargar_combos()
+        {
+            var lst_unidad_medida = bus_unidad_medida.get_list(false);
+            ViewBag.lst_unidad_medida = lst_unidad_medida;
+        }
+        #endregion
+
+        #region Acciones
 
         public ActionResult Nuevo()
         {
@@ -100,6 +112,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
+
+        #region Grids
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial_unidad_medida_det(string IdUnidadMedida = "")
@@ -112,11 +127,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return PartialView("_GridViewPartial_unidad_medida_det", model);
         }
 
-        private void cargar_combos()
-        {
-            var lst_unidad_medida = bus_unidad_medida.get_list(false);
-            ViewBag.lst_unidad_medida = lst_unidad_medida;
-        }
 
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] in_UnidadMedida_Equiv_conversion_Info info_det)
@@ -148,6 +158,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             cargar_combos();
             return PartialView("_GridViewPartial_unidad_medida_det", model);
         }
+        #endregion
     }
 
     public class in_UnidadMedida_Equiv_conversion_List

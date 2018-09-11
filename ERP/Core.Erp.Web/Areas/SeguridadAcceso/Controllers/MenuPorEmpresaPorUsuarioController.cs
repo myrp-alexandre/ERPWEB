@@ -1,6 +1,7 @@
 ﻿using Core.Erp.Bus.General;
 using Core.Erp.Bus.SeguridadAcceso;
 using Core.Erp.Info.SeguridadAcceso;
+using Core.Erp.Web.Helps;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,11 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
 {
+    [SessionTimeout]
     public class MenuPorEmpresaPorUsuarioController : Controller
     {
+        #region Index
+
         static seg_Menu_x_Empresa_x_Usuario_Bus bus_menu_x_empresa_x_usuario = new seg_Menu_x_Empresa_x_Usuario_Bus();
         public ActionResult Index()
         {
@@ -47,6 +51,7 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
             var lst_usuario = bus_usuario.get_list(false);
             ViewBag.lst_usuario = lst_usuario;
         }
+        #endregion
 
         [ValidateInput(false)]
         public ActionResult TreeListPartial_menu_x_usuario(int IdEmpresa = 0, string IdUsuario = "")

@@ -46,6 +46,7 @@
                                 settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
                                 settings.Width = Unit.Percentage(100);
                             }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -65,6 +66,8 @@
                                 settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
                                 settings.Width = Unit.Percentage(100);
                             }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
+
                             </div>
                         </div>
                     </div>
