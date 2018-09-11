@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Inventario;
+using Core.Erp.Web.Helps;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,14 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class CatalogoInventarioController : Controller
     {
-
+        #region Variables
         in_Catalogo_Bus bus_catalogo = new in_Catalogo_Bus();
         in_CatalogoTipo_Bus bus_catalogo_tipo = new in_CatalogoTipo_Bus();
+        #endregion
+        #region Index
         public ActionResult Index(int IdCatalogo_tipo = 0)
         {
             ViewBag.IdCatalogo_tipo = IdCatalogo_tipo;
@@ -34,6 +38,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var lst_catalogo_tipo = bus_catalogo_tipo.get_list(false);
             ViewBag.lst_tipos = lst_catalogo_tipo;
         }
+
+        #endregion
+        #region Acciones
         public ActionResult Nuevo(int IdCatalogo_tipo = 0)
         {
             in_Catalogo_Info model = new in_Catalogo_Info
@@ -105,5 +112,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return RedirectToAction("Index", new { IdCatalogo_tipo = model.IdCatalogo_tipo });
 
         }
+
+        #endregion
     }
 }

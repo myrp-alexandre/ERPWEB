@@ -6,11 +6,14 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Inventario;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
+    [SessionTimeout]
     public class CatalogoTipoInventarioController : Controller
     {
+        #region Index
         in_CatalogoTipo_Bus bus_catalogotipo = new in_CatalogoTipo_Bus();      
             public ActionResult Index()
         {
@@ -24,6 +27,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             model = bus_catalogotipo.get_list(false);
             return PartialView("_GridViewPartial_catalogotipo_inventario", model);
         }
+
+        #endregion
+        #region Acciones
         public ActionResult Nuevo()
         {
             in_CatalogoTipo_Info model = new in_CatalogoTipo_Info();
@@ -79,5 +85,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

@@ -353,6 +353,7 @@
     <Compile Include="Areas\Inventario\Controllers\PresentacionController.cs" />
     <Compile Include="Areas\Inventario\Controllers\ProductoController.cs" />
     <Compile Include="Areas\Inventario\Controllers\ProductoTipoController.cs" />
+    <Compile Include="Areas\Inventario\Controllers\RevisionController.cs" />
     <Compile Include="Areas\Inventario\Controllers\SubgrupoController.cs" />
     <Compile Include="Areas\Inventario\Controllers\TipoMovimientoController.cs" />
     <Compile Include="Areas\Inventario\Controllers\TransferenciasInventarioController.cs" />
@@ -9125,6 +9126,7 @@
     <Content Include="Areas\RRHH\Views\Rdep\_CmbEmpleado_rdep.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_004.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_012.cshtml" />
+    <Content Include="Areas\Inventario\Views\Revision\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
