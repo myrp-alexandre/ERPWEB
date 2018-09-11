@@ -106,9 +106,16 @@
         public enum eModulo
         {
             INV,
-            VTA,
+            FAC,
             COM,
-            ACF
+            ACF,
+            RRHH,
+            IMP,
+            CONTA,
+            CAJA,
+            BANCO,
+            CXC,
+            CXP
         }
 
         public enum eCobroTipoMotivoCuentasPorCobrar
