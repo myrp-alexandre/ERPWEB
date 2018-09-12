@@ -332,7 +332,7 @@ namespace Core.Erp.Data.Facturacion
                     if (entity == null) return false;
 
                     entity.IdPuntoVta = info.IdPuntoVta;
-                    entity.CodNota = info.CodNota;
+                    //entity.CodNota = info.CodNota;
                     entity.CreDeb = info.CreDeb;
                     entity.CodDocumentoTipo = info.CodDocumentoTipo;
                     entity.Serie1 = info.Serie1;
@@ -424,7 +424,7 @@ namespace Core.Erp.Data.Facturacion
                     if (parametros != null && parametros.IdTipoCbteCble_NC != null && parametros.IdTipoCbteCble_ND != null)
                     {
                         var rel_conta = db_f.fa_notaCreDeb_x_ct_cbtecble.Where(q => q.no_IdEmpresa == info.IdEmpresa && q.no_IdSucursal == info.IdSucursal && q.no_IdBodega == info.IdBodega && q.no_IdNota == info.IdNota).FirstOrDefault();
-                        ct_cbtecble_Info diario = armar_diario(info, info.CreDeb == "C" ? (int)parametros.IdTipoCbteCble_ND : (int)parametros.IdTipoCbteCble_NC, cliente.IdCtaCble_cxc_Credito, info.IdCtaCble_TipoNota);
+                        ct_cbtecble_Info diario = armar_diario(info, info.CreDeb.Trim() == "C" ? (int)parametros.IdTipoCbteCble_NC : (int)parametros.IdTipoCbteCble_ND, cliente.IdCtaCble_cxc_Credito, info.IdCtaCble_TipoNota);
                         if (diario != null)
                         {
                             if (rel_conta == null)
@@ -571,7 +571,7 @@ namespace Core.Erp.Data.Facturacion
                     IdEmpresa = info.IdEmpresa,
                     IdSucursal = info.IdSucursal,
                     IdCobro = 0,
-                    IdCobro_tipo = info.CreDeb == "C" ? "NTCR" : "NTDB",
+                    IdCobro_tipo = info.CreDeb.Trim() == "C" ? "NTCR" : "NTDB",
                     cr_fecha = info.no_fecha,
                     cr_fechaCobro = info.no_fecha,
                     cr_fechaDocu = info.no_fecha,
@@ -664,7 +664,7 @@ namespace Core.Erp.Data.Facturacion
                         IdCbteCble = diario.IdCbteCble,
                         secuencia = secuencia++,
                         IdCtaCble = IdCtaCble_cliente,
-                        dc_Valor = Math.Round(info.lst_det.Sum(q => q.sc_total), 2, MidpointRounding.AwayFromZero) * (info.CreDeb == "C" ? -1 : 1),
+                        dc_Valor = Math.Round(info.lst_det.Sum(q => q.sc_total), 2, MidpointRounding.AwayFromZero) * (info.CreDeb.Trim() == "C" ? -1 : 1),
                         dc_para_conciliar = false
                     });
                 }
@@ -679,7 +679,7 @@ namespace Core.Erp.Data.Facturacion
                         IdCbteCble = diario.IdCbteCble,
                         secuencia = secuencia++,
                         IdCtaCble = IdCtaCble_IVA,
-                        dc_Valor = Math.Round(info.lst_det.Where(q => q.vt_por_iva > 0).Sum(q => q.sc_iva), 2, MidpointRounding.AwayFromZero) * (info.CreDeb == "C" ? 1 : -1)
+                        dc_Valor = Math.Round(info.lst_det.Where(q => q.vt_por_iva > 0).Sum(q => q.sc_iva), 2, MidpointRounding.AwayFromZero) * (info.CreDeb.Trim() == "C" ? 1 : -1)
                     });
                 #endregion
 
@@ -693,7 +693,7 @@ namespace Core.Erp.Data.Facturacion
                         IdCbteCble = diario.IdCbteCble,
                         secuencia = secuencia++,
                         IdCtaCble = IdCtaCble_tipoNota,
-                        dc_Valor = Math.Round(info.lst_det.Sum(q => q.sc_subtotal), 2, MidpointRounding.AwayFromZero) * (info.CreDeb == "C" ? 1 : -1),
+                        dc_Valor = Math.Round(info.lst_det.Sum(q => q.sc_subtotal), 2, MidpointRounding.AwayFromZero) * (info.CreDeb.Trim() == "C" ? 1 : -1),
                         dc_para_conciliar = false,
                     });
                 }
