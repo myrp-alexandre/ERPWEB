@@ -21,6 +21,7 @@ namespace Core.Erp.Data.Facturacion
                     Lista = (from q in Context.vwfa_proforma
                              where q.IdEmpresa == IdEmpresa
                              && Fecha_ini <= q.pf_fecha && q.pf_fecha <= Fecha_fin
+                             orderby q.IdProforma descending
                              select new fa_proforma_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

@@ -120,7 +120,7 @@
         settings.Columns.Add("estado", "Estado").Width = Unit.Percentage(5);
         settings.Columns.Add(column =>
         {
-            column.Caption = "*";
+            column.Caption = "Lotes";
             column.SetDataItemTemplateContent(c =>
             {
                 ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("FAC_006", "FacturacionReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdProforma = DataBinder.Eval(c.DataItem, "IdProforma"), mostrar_imagen = false }, Request.Url.Scheme) + "');\"></span>");
@@ -129,7 +129,7 @@
         });
         settings.Columns.Add(column =>
         {
-            column.Caption = "*";
+            column.Caption = "Equipos";
             column.SetDataItemTemplateContent(c =>
             {
                 ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("FAC_006", "FacturacionReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdProforma = DataBinder.Eval(c.DataItem, "IdProforma"), mostrar_imagen = true }, Request.Url.Scheme) + "');\"></span>");
