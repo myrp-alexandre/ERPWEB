@@ -377,7 +377,7 @@ namespace Core.Erp.Data.Facturacion
                 db_f.Dispose();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw;
             }
