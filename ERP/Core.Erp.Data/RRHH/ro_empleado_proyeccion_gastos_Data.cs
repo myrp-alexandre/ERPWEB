@@ -122,7 +122,6 @@ namespace Core.Erp.Data.RRHH
                     ro_empleado_proyeccion_gastos Entity = Context.ro_empleado_proyeccion_gastos.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdTransaccion==info.IdTransaccion);
                     if (Entity == null)
                         return  false;
-                    Entity.estado = info.estado=false;
                     Entity.Observacion = info.Observacion;
                     Entity.IdEmpleado = info.IdEmpleado;
                     Entity.AnioFiscal = info.AnioFiscal;

@@ -3,11 +3,11 @@
 @{
     var comboBox = Html.DevExpress().ComboBox(settings =>
     {
-        settings.Name = "IdEmpleado";
+        settings.Name = "IdEmpleado_Aprueba";
         settings.Width = Unit.Percentage(100);
         settings.Properties.DropDownWidth = Unit.Percentage(100);
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-        settings.CallbackRouteValues = new { Controller = "Prestamos", Action = "CmbEmpleado_prestamos", Area = "RRHH" };
+        settings.CallbackRouteValues = new { Controller = "Prestamos", Action = "CmbEmpleado_autoriza", Area = "RRHH" };
         settings.Properties.CallbackPageSize = 15;
         settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
         settings.Properties.TextField = "pe_nombreCompleto";

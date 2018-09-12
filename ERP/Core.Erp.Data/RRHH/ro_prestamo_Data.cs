@@ -8,16 +8,22 @@ namespace Core.Erp.Data.RRHH
 {
   public  class ro_prestamo_Data
     {
-        public List<ro_prestamo_Info> get_list(int IdEmpresa)
+        public List<ro_prestamo_Info> get_list(int IdEmpresa, DateTime fechaInicio, DateTime fechaFin)
         {
             try
             {
+
+                DateTime fi = Convert.ToDateTime(fechaInicio.ToShortDateString());
+                DateTime ff = Convert.ToDateTime(fechaFin.ToShortDateString());
+
                 List<ro_prestamo_Info> Lista;
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     Lista = (from q in Context.vwRo_Prestamo
                              where q.IdEmpresa == IdEmpresa
+                             && q.Fecha>=fi
+                             &&q.Fecha<=ff
                              select new ro_prestamo_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

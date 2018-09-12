@@ -2,10 +2,15 @@
     @{
         var grid = Html.DevExpress().GridView(settings => {
             settings.Name = "GridView_prestamos";
-            settings.CallbackRouteValues = new { Controller = "Prestamos", Action = "GridViewPartial_prestamos" };
+            settings.CallbackRouteValues = new { Controller = "Prestamos", Action = "GridViewPartial_prestamos", Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin };
 
             settings.Width = Unit.Percentage(100);
             settings.KeyFieldName = "IdPrestamo";
+
+            //Configuración para que la grilla no muestre texto completo
+            settings.SettingsBehavior.AllowEllipsisInText = true;
+            settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+            settings.Width = Unit.Percentage(100);
 
             settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
             settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
@@ -65,7 +70,7 @@
                                 new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                         );
                     }
-                   
+
                 });
                 c.SetHeaderTemplateContent(tc =>
                 {

@@ -12,60 +12,29 @@
 @using (Html.BeginForm("Anular", "Prestamos", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdPrestamo);
+    @Html.HiddenFor(q => q.IdTransaccionSession);
+    @Html.HiddenFor(q => q.IdEmpresa);
 
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
+
                 <div class="form-group">
-                    <label for="IdEmpleado">Empleado*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado, settings =>
-               {
-                   settings.Name = "IdEmpleado";
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
-                   settings.Properties.Columns.Add("IdEmpleado", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("Empleado", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-
-                   //Campo ID
-                   settings.Properties.ValueField = "IdEmpleado";
-                   settings.Properties.ValueType = typeof(decimal);
-                   settings.Properties.TextField = "Empleado";
-                   //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                   settings.Properties.NullText = "== Seleccione ==";
-                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-               }).BindList(ViewBag.lst_empleado).GetHtml()
+                    <label for="IdProveedor">Empleado*</label>
+                    @Html.Partial("_CmbEmpleado_prestamos", Model.IdEmpleado)
                     @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
+
                 <div class="form-group">
-                    <label for="IdEmpleado_Aprueba">Empleado autoriza*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado_Aprueba, settings =>
-               {
-                   settings.Name = "IdEmpleado_Aprueba";
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
-                   settings.Properties.Columns.Add("IdEmpleado", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("Empleado", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-
-                   //Campo ID
-                   settings.Properties.ValueField = "IdEmpleado";
-                   settings.Properties.ValueType = typeof(decimal);
-                   settings.Properties.TextField = "Empleado";
-                   //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                   settings.Properties.NullText = "== Seleccione ==";
-                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-               }).BindList(ViewBag.lst_empleado).GetHtml()
+                    <label for="IdProveedor">Empleado aprueba</label>
+                    @Html.Partial("_CmbEmpleado_autoriza", Model.IdEmpleado_Aprueba)
                     @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -198,7 +167,7 @@
 
     </div>
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index","Prestamos",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
 
