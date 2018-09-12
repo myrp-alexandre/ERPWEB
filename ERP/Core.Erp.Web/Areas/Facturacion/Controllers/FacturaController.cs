@@ -209,15 +209,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             if (bus_factura.ValidarCarteraVencida(i_validar.IdEmpresa,i_validar.IdCliente,ref MsgValidaciones))
             {
-<<<<<<< HEAD
-                var info_usuarios = bus_usuario.get_info(i_validar.IdUsuarioAut);
-                if (info_usuarios.contrasena_admin == null)
-                    info_usuarios.contrasena_admin = "";
-                if (info_usuarios != null && info_usuarios.es_super_admin && i_validar.contrasena_admin.Trim().ToLower() == info_usuarios.contrasena_admin.Trim().ToLower())
-=======
-                var info_usuarios = bus_usuario.get_info(string.IsNullOrEmpty(i_validar.IdUsuarioAut) ? "" : i_validar.IdUsuarioAut);
-                if (info_usuarios != null && info_usuarios.es_super_admin && !string.IsNullOrEmpty(i_validar.contrasena_admin) && !string.IsNullOrEmpty(info_usuarios.contrasena_admin) && i_validar.contrasena_admin.Trim().ToLower() == info_usuarios.contrasena_admin.Trim().ToLower())
->>>>>>> 9c283975717dea1136dc96e2be41331be06f6d1c
+                var info_usuario = bus_usuario.get_info(i_validar.IdUsuarioAut);
+                if (info_usuario.contrasena_admin == null)
+                    info_usuario.contrasena_admin = "";
+                if (info_usuario != null && info_usuario.es_super_admin && i_validar.contrasena_admin.Trim().ToLower() == info_usuario.contrasena_admin.Trim().ToLower())
+
+                if (info_usuario != null && info_usuario.es_super_admin && !string.IsNullOrEmpty(i_validar.contrasena_admin) && !string.IsNullOrEmpty(info_usuario.contrasena_admin) && i_validar.contrasena_admin.Trim().ToLower() == info_usuario.contrasena_admin.Trim().ToLower())
                 {
                     tbl_TransaccionesAutorizadas_info info_trasnsaccion_aut = new tbl_TransaccionesAutorizadas_info
                     {
