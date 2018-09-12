@@ -18,6 +18,7 @@
         settings.CommandColumn.ShowNewButton = true;
         settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = true;
+        settings.Settings.ShowFooter = true;
 
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
@@ -73,6 +74,8 @@
 
             });
         });
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor");
+
     });
 
 }

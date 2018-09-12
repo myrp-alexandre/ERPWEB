@@ -209,8 +209,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             if (bus_factura.ValidarCarteraVencida(i_validar.IdEmpresa,i_validar.IdCliente,ref MsgValidaciones))
             {
-                var info_usuarios = bus_usuario.get_info(string.IsNullOrEmpty(i_validar.IdUsuarioAut) ? "" : i_validar.IdUsuarioAut);
-                if (info_usuarios != null && info_usuarios.es_super_admin && !string.IsNullOrEmpty(i_validar.contrasena_admin) && !string.IsNullOrEmpty(info_usuarios.contrasena_admin) && i_validar.contrasena_admin.Trim().ToLower() == info_usuarios.contrasena_admin.Trim().ToLower())
+                var info_usuario = bus_usuario.get_info(i_validar.IdUsuarioAut);
+                if (info_usuario == null)
+                    info_usuario = new Info.SeguridadAcceso.seg_usuario_Info();
+                if (info_usuario.contrasena_admin == null)
+                    info_usuario.contrasena_admin = "";
+                if (info_usuario != null && info_usuario.es_super_admin && i_validar.contrasena_admin.Trim().ToLower() == info_usuario.contrasena_admin.Trim().ToLower())
+
+                if (info_usuario != null && info_usuario.es_super_admin && !string.IsNullOrEmpty(i_validar.contrasena_admin) && !string.IsNullOrEmpty(info_usuario.contrasena_admin) && i_validar.contrasena_admin.Trim().ToLower() == info_usuario.contrasena_admin.Trim().ToLower())
                 {
                     tbl_TransaccionesAutorizadas_info info_trasnsaccion_aut = new tbl_TransaccionesAutorizadas_info
                     {
