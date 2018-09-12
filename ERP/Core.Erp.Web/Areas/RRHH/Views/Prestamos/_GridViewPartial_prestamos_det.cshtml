@@ -1,10 +1,9 @@
 @using System.Web.UI.WebControls;
-@model Core.Erp.Info.RRHH.ro_prestamo_Info
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridViewPartial_prestamos_det";
-        settings.CallbackRouteValues = new { Controller = "Prestamos", Action = "GridViewPartial_prestamos_det", IdEmpleado = Model == null ? 0 : Model.IdEmpleado, IdPrestamo = Model == null ? 0 : Model.IdPrestamo };
+        settings.CallbackRouteValues = new { Controller = "Prestamos", Action = "GridViewPartial_prestamos_det" };
         settings.KeyFieldName = "NumCuota";
         settings.Width = Unit.Percentage(100);
 
@@ -116,4 +115,4 @@
 
     });
 }
-    @grid.Bind(Model.lst_detalle).GetHtml()
+    @grid.Bind(Model).GetHtml()
