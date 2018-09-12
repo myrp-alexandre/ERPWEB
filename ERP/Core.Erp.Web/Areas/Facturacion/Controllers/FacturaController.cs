@@ -210,6 +210,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             if (bus_factura.ValidarCarteraVencida(i_validar.IdEmpresa,i_validar.IdCliente,ref MsgValidaciones))
             {
                 var info_usuarios = bus_usuario.get_info(i_validar.IdUsuarioAut);
+                if (info_usuarios.contrasena_admin == null)
+                    info_usuarios.contrasena_admin = "";
                 if (info_usuarios != null && info_usuarios.es_super_admin && i_validar.contrasena_admin.Trim().ToLower() == info_usuarios.contrasena_admin.Trim().ToLower())
                 {
                     tbl_TransaccionesAutorizadas_info info_trasnsaccion_aut = new tbl_TransaccionesAutorizadas_info
