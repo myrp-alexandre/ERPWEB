@@ -419,6 +419,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             if (!validar(model, ref mensaje))
             {
+                List_det.set_list(List_det.get_list(model.IdTransaccionSession), model.IdTransaccionSession);
                 ViewBag.mensaje = mensaje;
                 cargar_combos(model);
                 return View(model);
@@ -426,6 +427,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             model.IdUsuario = SessionFixed.IdUsuario.ToString();
             if (!bus_nota.guardarDB(model))
             {
+                List_det.set_list(List_det.get_list(model.IdTransaccionSession), model.IdTransaccionSession);
                 ViewBag.mensaje = "No se ha podido guardar el registro";
                 cargar_combos(model);
                 return View(model);
