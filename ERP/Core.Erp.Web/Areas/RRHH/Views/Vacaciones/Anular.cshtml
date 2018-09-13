@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.RRHH.ro_Solicitud_Vacaciones_x_empleado_Info
 @{
-    ViewBag.Title = "Anular contrato";
+    ViewBag.Title = "Anular solicitud vacaciones";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -8,16 +8,107 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Anular", "Contrato", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Anular", "Vacaciones", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdSolicitud)
     @Html.HiddenFor(q => q.IdEmpleado)
     @Html.HiddenFor(q => q.IdEmpresa)
 
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+
+                <div class="form-group">
+                    <label for="IdProveedor">Empleado*</label>
+                    @Html.Partial("_CmbEmpleado_vacaciones", Model.IdEmpleado)
+                    @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+
+                <div class="form-group">
+                    <label for="IdProveedor">Empleado autoriza</label>
+                    @Html.Partial("_CmbEmpleado_autoriza_vacaciones", Model.IdEmpleado)
+                    @Html.ValidationMessageFor(q => q.IdEmpleado_aprue, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdVacacion">Periodo de vacaciones*</label>
+                    @Html.Action("cmb_vacaciones", Model.IdVacacion)
+                    @Html.ValidationMessageFor(q => q.IdVacacion, "", new { @class = "text-danger" })
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Fecha_Desde">Fecha desde*</label>
+                    @Html.TextBoxFor(q => q.Fecha_Desde, new { @class = "form-control", @id = "FechaInicio" })
+                    @Html.ValidationMessageFor(q => q.Fecha_Desde, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Fecha_Hasta">Fecha hasta*</label>
+                    @Html.TextBoxFor(q => q.Fecha_Hasta, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaFin" })
+                    @Html.ValidationMessageFor(q => q.Fecha_Hasta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Fecha_Retorno">Fecha retorno*</label>
+                    @Html.TextBoxFor(q => q.Fecha_Retorno, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaRetorno" })
+                    @Html.ValidationMessageFor(q => q.Fecha_Retorno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="Gozadas_Pgadas"></label>
+                        @Html.DevExpress().CheckBoxFor(q => q.Gozadas_Pgadas, settings =>
+                       {
+                           settings.Name = "Gozadas_Pgadas";
+                           settings.Text = "Vacaciones gozadas";
+
+                       }).GetHtml()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Observacion">Observación*</label>
+                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
-        <a class="btn btn-default" href="@Url.Action("Index","Contrato",new { Area = "RRHH" },null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","Vacaciones",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

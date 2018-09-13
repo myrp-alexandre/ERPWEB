@@ -6,15 +6,45 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Bus.RRHH;
+using Core.Erp.Bus.General;
+using Core.Erp.Info.General;
+using DevExpress.Web;
+using Core.Erp.Web.Helps;
+using Core.Erp.Info.Helps;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class VacacionesController : Controller
     {
+        #region variables
         ro_historico_vacaciones_x_empleado_Bus bus_vacaciones = new ro_historico_vacaciones_x_empleado_Bus();
         List<ro_historico_vacaciones_x_empleado_Info> lst_vacaciones = new List<ro_historico_vacaciones_x_empleado_Info>();
         ro_Solicitud_Vacaciones_x_empleado_Bus bus_solicitud = new ro_Solicitud_Vacaciones_x_empleado_Bus();
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
+        #endregion
 
+
+        #region Metodos ComboBox bajo demanda
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        public ActionResult CmbEmpleado_vacaciones()
+        {
+            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
+            return PartialView("_CmbEmpleado_vacaciones", model);
+        }
+        public ActionResult CmbEmpleado_autoriza_vacaciones()
+        {
+            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
+            return PartialView("_CmbEmpleado_autoriza_vacaciones", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        #endregion
         int IdEmpresa = 0;
         public ActionResult Index()
         {
@@ -53,6 +83,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
+        #region acciones
         [HttpPost]
         public ActionResult Nuevo(ro_Solicitud_Vacaciones_x_empleado_Info info)
         {
@@ -65,7 +96,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     ro_historico_vacaciones_x_empleado_Info info_historico = null;
                     lst_vacaciones = Session["lst_vacaciones"] as List<ro_historico_vacaciones_x_empleado_Info>;
                     info_historico = lst_vacaciones.Where(v => v.IdVacacion == info.IdVacacion).FirstOrDefault();
-                    info.Dias_a_disfrutar =Convert.ToInt32( (info.Fecha_Hasta - info.Fecha_Desde).TotalDays);
+                    info.Dias_a_disfrutar = Convert.ToInt32((info.Fecha_Hasta - info.Fecha_Desde).TotalDays);
                     info.Dias_q_Corresponde = info_historico.DiasGanado;
                     info.Dias_pendiente = info_historico.DiasGanado - info.Dias_a_disfrutar;
                     info.Anio_Desde = info_historico.FechaIni.Date;
@@ -73,7 +104,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     info.IdVacacion = info_historico.IdVacacion;
                     info.Fecha_Desde = info.Fecha_Desde.Date;
                     info.Fecha_Hasta = info.Fecha_Hasta.Date;
-                    mensaje =bus_solicitud. validar(info);
+                    mensaje = bus_solicitud.validar(info);
                     if (mensaje != "")
                     {
                         ViewBag.mensaje = mensaje;
@@ -107,8 +138,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {
                     Fecha_Desde = DateTime.Now,
                     Fecha_Hasta = DateTime.Now,
-                    Fecha_Retorno=DateTime.Now,
-                    IdVacacion=1
+                    Fecha_Retorno = DateTime.Now,
+                    IdVacacion = 1
                 };
                 cargar_combo();
                 return View(info);
@@ -167,7 +198,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
         }
 
-        public ActionResult Modificar(decimal IdEmpleado=0, decimal IdSolicitud = 0)
+        public ActionResult Modificar(decimal IdEmpleado = 0, decimal IdSolicitud = 0)
         {
             try
             {
@@ -176,7 +207,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 Session["lst_vacaciones"] = lst_vacaciones;
 
                 cargar_combo();
-                return View(bus_solicitud.get_info(GetIdEmpresa(),IdEmpleado, IdSolicitud));
+                return View(bus_solicitud.get_info(GetIdEmpresa(), IdEmpleado, IdSolicitud));
 
             }
             catch (Exception)
@@ -210,7 +241,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 IdEmpresa = GetIdEmpresa();
-                return View(bus_solicitud.get_info(IdEmpresa,IdEmpleado, IdSolicitud));
+                return View(bus_solicitud.get_info(IdEmpresa, IdEmpleado, IdSolicitud));
 
             }
             catch (Exception)
@@ -219,6 +250,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
+        #endregion
         private int GetIdEmpresa()
         {
             try

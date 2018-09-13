@@ -9130,6 +9130,8 @@
     <Content Include="Areas\Inventario\Views\Revision\_CmbProductoPadre_Revision.cshtml" />
     <Content Include="Areas\RRHH\Views\Prestamos\_CmbEmpleado_prestamos.cshtml" />
     <Content Include="Areas\RRHH\Views\Prestamos\_CmbEmpleado_autoriza.cshtml" />
+    <Content Include="Areas\RRHH\Views\Vacaciones\_CmbEmpleado_vacaciones.cshtml" />
+    <Content Include="Areas\RRHH\Views\Vacaciones\_CmbEmpleado_autoriza_vacaciones.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
