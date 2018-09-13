@@ -189,6 +189,13 @@ namespace Core.Erp.Data.RRHH
                         Fecha_Transac = info.Fecha_Transac = DateTime.Now.Date
                     };
                     Context.ro_Solicitud_Vacaciones_x_empleado.Add(Entity);
+                    ro_historico_vacaciones_x_empleado Entity_his = Context.ro_historico_vacaciones_x_empleado.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa
+                      && q.IdEmpleado == info.IdEmpleado
+                      && q.IdVacacion == info.IdVacacion);
+                    Entity_his.DiasTomados = info.Dias_a_disfrutar;
+
+                    if (Entity_his == null)
+                        return false;
                     Context.SaveChanges();
                 }
                 return true;
@@ -225,7 +232,16 @@ namespace Core.Erp.Data.RRHH
                          Entity.Gozadas_Pgadas = info.Gozadas_Pgadas;
                         Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                         Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
-                        Context.SaveChanges();
+
+                    ro_historico_vacaciones_x_empleado Entity_his = Context.ro_historico_vacaciones_x_empleado.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa
+                   && q.IdEmpleado == info.IdEmpleado
+                   && q.IdVacacion == info.IdVacacion);
+                    Entity_his.DiasTomados = info.Dias_a_disfrutar;
+             
+                    if (Entity_his == null)
+                        return false;
+                    Context.SaveChanges();
+
                 }
 
                 return true;
@@ -250,6 +266,13 @@ namespace Core.Erp.Data.RRHH
                     Entity.Estado = info.Estado = "I";
                     Entity.IdUsuario_Anu = info.IdUsuario_Anu;
                     Entity.FechaAnulacion = info.FechaAnulacion = DateTime.Now;
+                    ro_historico_vacaciones_x_empleado Entity_his = Context.ro_historico_vacaciones_x_empleado.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa
+                      && q.IdEmpleado == info.IdEmpleado
+                      && q.IdVacacion == info.IdVacacion);
+                    Entity_his.DiasTomados = 0;
+
+                    if (Entity_his == null)
+                        return false;
                     Context.SaveChanges();
                 }
 

@@ -21,6 +21,7 @@
         settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula", 20);
         settings.Properties.Columns.Add("pe_nombreCompleto", "Empleado", 70);
         settings.Properties.FilterMinLength = 3;
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){calcular_vacaciones();}";
 
     })
      .BindList(new Core.Erp.Web.Areas.RRHH.Controllers.VacacionesController().get_list_bajo_demanda, new Core.Erp.Web.Areas.RRHH.Controllers.VacacionesController().get_info_bajo_demanda)

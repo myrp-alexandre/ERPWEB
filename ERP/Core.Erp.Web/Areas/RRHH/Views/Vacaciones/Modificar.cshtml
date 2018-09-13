@@ -41,7 +41,7 @@
 
                 <div class="form-group">
                     <label for="IdProveedor">Empleado autoriza</label>
-                    @Html.Partial("_CmbEmpleado_autoriza_vacaciones", Model.IdEmpleado)
+                    @Html.Partial("_CmbEmpleado_autoriza_vacaciones", Model.IdEmpleado_aprue)
                     @Html.ValidationMessageFor(q => q.IdEmpleado_aprue, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -68,7 +68,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="Fecha_Desde">Fecha desde*</label>
-                    @Html.TextBoxFor(q => q.Fecha_Desde, new { @class = "form-control", @id = "FechaInicio" })
+                    @Html.TextBoxFor(q => q.Fecha_Desde, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaInicio" })
                     @Html.ValidationMessageFor(q => q.Fecha_Desde, "", new { @class = "text-danger" })
                 </div>
             </div>

@@ -55,37 +55,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
-
-        <div class="col-md-12">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="Fec_Inicio_Acumulacion">Fecha solicitud acumulación*</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.TextBoxFor(q => q.Fec_Inicio_Acumulacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechai" })
-                        @Html.ValidationMessageFor(q => q.Fec_Inicio_Acumulacion, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="Fec_Fin_Acumulacion">Fecha fin acumulación*</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.TextBoxFor(q => q.Fec_Fin_Acumulacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechaf" })
-                        @Html.ValidationMessageFor(q => q.Fec_Fin_Acumulacion, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
+   
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index","EmpleadoRubroAcumulado",new { Area = "RRHH" },null)">Cancelar</a>
