@@ -28,12 +28,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         public ActionResult CmbEmpleado_vacaciones()
         {
-            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
+            ro_Solicitud_Vacaciones_x_empleado_Info model = new ro_Solicitud_Vacaciones_x_empleado_Info();
             return PartialView("_CmbEmpleado_vacaciones", model);
         }
         public ActionResult CmbEmpleado_autoriza_vacaciones()
         {
-            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
+            ro_Solicitud_Vacaciones_x_empleado_Info model = new ro_Solicitud_Vacaciones_x_empleado_Info();
             return PartialView("_CmbEmpleado_autoriza_vacaciones", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -163,7 +163,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     ro_historico_vacaciones_x_empleado_Info info_historico = null;
                     lst_vacaciones = Session["lst_vacaciones"] as List<ro_historico_vacaciones_x_empleado_Info>;
                     info_historico = lst_vacaciones.Where(v => v.IdVacacion == info.IdVacacion).FirstOrDefault();
-                    info.Dias_a_disfrutar = Convert.ToInt32((info.Fecha_Hasta - info.Fecha_Desde).TotalDays);
+                    info.Dias_a_disfrutar = Convert.ToInt32((info.Fecha_Hasta - info.Fecha_Desde).TotalDays)+1;
                     info.Dias_q_Corresponde = info_historico.DiasGanado;
                     info.Dias_pendiente = info_historico.DiasGanado - info.Dias_a_disfrutar;
                     info.Anio_Desde = info_historico.FechaIni.Date;

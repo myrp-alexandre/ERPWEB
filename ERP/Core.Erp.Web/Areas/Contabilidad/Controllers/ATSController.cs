@@ -76,7 +76,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
                 file.WriteLine(xml);
                 file.Close();
                 byte[] fileBytes = System.IO.File.ReadAllBytes(patch + ".xml");
-                FilesHelper_B.Guardar_xml(fileBytes, nombre_file,"","","");
+               // FilesHelper_B.Guardar_xml(fileBytes, nombre_file,"","","");
                 patch = patch + ".xml";
                 return File(Encoding.UTF8.GetBytes(xml), "application/xml", nombre_file+".xml");
             }
