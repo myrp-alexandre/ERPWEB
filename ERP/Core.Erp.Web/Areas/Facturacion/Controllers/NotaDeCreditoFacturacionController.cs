@@ -570,7 +570,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             edited_info.sc_precioFinal = Math.Round(info_det.sc_Precio - edited_info.sc_descUni, 2, MidpointRounding.AwayFromZero);
             edited_info.sc_subtotal = Math.Round(info_det.sc_cantidad * edited_info.sc_precioFinal, 2, MidpointRounding.AwayFromZero);
             edited_info.IdCod_Impuesto_Iva = info_det.IdCod_Impuesto_Iva;
-            if (!string.IsNullOrEmpty(info_det.IdCod_Impuesto_Iva) && info_det.IdCod_Impuesto_Iva != edited_info.IdCod_Impuesto_Iva)
+            if (!string.IsNullOrEmpty(info_det.IdCod_Impuesto_Iva))
             {
                 var impuesto = bus_impuesto.get_info(info_det.IdCod_Impuesto_Iva);
                 if (impuesto != null)
