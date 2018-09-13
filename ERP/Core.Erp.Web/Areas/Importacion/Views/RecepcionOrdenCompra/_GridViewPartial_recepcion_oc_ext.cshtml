@@ -75,7 +75,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "OrdencompraConsaldos", "OrdenCompraExterior", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
+                    Html.ActionLink("Nuevo", "OrdencompraConsaldos", "OrdenCompraExterior").ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;

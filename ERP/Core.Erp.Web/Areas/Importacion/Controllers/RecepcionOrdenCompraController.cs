@@ -80,24 +80,25 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             #endregion
 
             imp_orden_compra_ext_recepcion_Info model = new imp_orden_compra_ext_recepcion_Info
             {
-                IdEmpresa = IdEmpresa,
-                IdTransaccionSession = Convert.ToInt32(SessionFixed.IdTransaccionSession)
+                
             };
             model = bus_recepcion.get_rcepcion_mercancia(IdEmpresa, IdOrdenCompra_ext);
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             if (model != null)
-                Session["imp_ordencompra_ext_det_Info"] = model.lst_detalle;
-            detalle.set_list(model.lst_detalle, model.IdTransaccionSession);
+                detalle.set_list(  model.lst_detalle, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             cargar_combos(IdEmpresa);
             return View(model);
         }
         [HttpPost]
         public ActionResult Nuevo(imp_orden_compra_ext_recepcion_Info model)
         {
-            model.lst_detalle = Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
+            model.lst_detalle = detalle.get_list(model.IdTransaccionSession);
             if (model.lst_detalle == null)
             {
                 ViewBag.mensaje = "no existe detalle";
