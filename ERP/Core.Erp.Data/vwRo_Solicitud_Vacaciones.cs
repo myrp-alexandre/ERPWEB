@@ -40,5 +40,6 @@ namespace Core.Erp.Data
         public int IdVacacion { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string em_codigo { get; set; }
+        public Nullable<int> IdLiquidacion { get; set; }
     }
 }

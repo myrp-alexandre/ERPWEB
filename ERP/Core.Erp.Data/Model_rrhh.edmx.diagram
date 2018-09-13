@@ -74,7 +74,6 @@
         <EntityTypeShape EntityType="Model_rrhh.vwro_participacion_utilidad_empleado" Width="1.5" PointX="2.75" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.vwRo_Prestamo" Width="1.5" PointX="14.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_rubro_tipo" Width="1.5" PointX="14.75" PointY="15.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_rrhh.vwRo_Solicitud_Vacaciones" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_rol_detalle_generar_op" Width="1.5" PointX="16.75" PointY="7.75" IsExpanded="true" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Acta_Finiquito_Detalle_ro_Acta_Finiquito" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Acta_Finiquito_ro_cargo" ManuallyRouted="false" />
@@ -164,6 +163,7 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_x_Proyeccion_Gastos_Personales" Width="1.5" PointX="17.375" PointY="14.75" />
         <EntityTypeShape EntityType="Model_rrhh.vwrdep_IngrEgr_x_Empleado" Width="1.5" PointX="19.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_rrhh.vwRo_Solicitud_Vacaciones" Width="1.5" PointX="19.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

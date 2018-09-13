@@ -14,7 +14,6 @@ namespace Core.Erp.Data
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-
     public partial class Entities_rrhh : DbContext
     {
         public Entities_rrhh()
@@ -96,7 +95,6 @@ namespace Core.Erp.Data
         public DbSet<vwro_participacion_utilidad_empleado> vwro_participacion_utilidad_empleado { get; set; }
         public DbSet<vwRo_Prestamo> vwRo_Prestamo { get; set; }
         public DbSet<vwro_rubro_tipo> vwro_rubro_tipo { get; set; }
-        public DbSet<vwRo_Solicitud_Vacaciones> vwRo_Solicitud_Vacaciones { get; set; }
         public DbSet<vwro_rol_detalle_generar_op> vwro_rol_detalle_generar_op { get; set; }
         public DbSet<vwro_rol> vwro_rol { get; set; }
         public DbSet<ro_tabla_Impu_Renta> ro_tabla_Impu_Renta { get; set; }
@@ -105,6 +103,7 @@ namespace Core.Erp.Data
         public DbSet<ro_tipo_gastos_personales> ro_tipo_gastos_personales { get; set; }
         public DbSet<vwro_empleado_x_Proyeccion_Gastos_Personales> vwro_empleado_x_Proyeccion_Gastos_Personales { get; set; }
         public DbSet<vwrdep_IngrEgr_x_Empleado> vwrdep_IngrEgr_x_Empleado { get; set; }
+        public DbSet<vwRo_Solicitud_Vacaciones> vwRo_Solicitud_Vacaciones { get; set; }
     
         public virtual int spRo_Cierre_Rol(Nullable<int> idEmpresa, Nullable<int> idPeriodo, Nullable<int> idNomina_Tipo, Nullable<int> idNomina_TipoLiqui)
         {

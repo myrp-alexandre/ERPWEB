@@ -43,10 +43,11 @@ namespace Core.Erp.Data.RRHH
                                      em_codigo=q.em_codigo,
                                      pe_cedulaRuc=q.pe_cedulaRuc,
                                      pe_nombre_completo=q.pe_apellido+" "+q.pe_nombre,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+                                     IdLiquidacion=q.IdLiquidacion
                                  }).ToList();
                     else
-                        Lista = (from q in Context.ro_Solicitud_Vacaciones_x_empleado
+                        Lista = (from q in Context.vwRo_Solicitud_Vacaciones
                                  where q.IdEmpresa == IdEmpresa
                                  && q.Estado == "A"
                                  select new ro_Solicitud_Vacaciones_x_empleado_Info
@@ -70,13 +71,15 @@ namespace Core.Erp.Data.RRHH
                                      Fecha_Retorno = q.Fecha_Retorno,
                                      Observacion = q.Observacion,
                                      Gozadas_Pgadas = q.Gozadas_Pgadas,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+                                     IdLiquidacion = q.IdLiquidacion
+
                                  }).ToList();
                 }
 
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;

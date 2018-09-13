@@ -51,17 +51,22 @@
             column.FieldName = "Total_Remuneracion";
             column.Caption = "$Remuneración";
             column.Width = Unit.Percentage(15);
+            column.PropertiesEdit.DisplayFormatString = "n2";
+
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "Total_Vacaciones";
             column.Caption = "$Vacaciones";
             column.Width = Unit.Percentage(15);
+            column.PropertiesEdit.DisplayFormatString = "n2";
+
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "Valor_Cancelar";
             column.Caption = "$Valor cancela";
+            column.PropertiesEdit.DisplayFormatString = "n2";
             column.Width = Unit.Percentage(15);
         });
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Total_Remuneracion");

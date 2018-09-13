@@ -55,6 +55,10 @@
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
+            if (Convert.ToInt32(e.GetValue( "IdLiquidacion")) != 0)
+            {
+                e.Row.ForeColor = System.Drawing.Color.Blue;
+            }
         };
         settings.Columns.Add(c =>
         {
@@ -62,7 +66,7 @@
             c.Width = Unit.Percentage(5);
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A" )
+                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A" && Convert.ToInt32(DataBinder.Eval(tc.DataItem, "IdLiquidacion"))==0)
                 {
                     ViewContext.Writer.Write(
                          Html.ActionLink("Modificar", "Modificar", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), IdSolicitud = DataBinder.Eval(tc.DataItem, "IdSolicitud") }) + "&nbsp;" +
@@ -172,13 +176,20 @@
             column.Width = Unit.Pixel(100);
             column.SetDataItemTemplateContent(container =>
             {
-                Html.DevExpress().HyperLink(hyperlink =>
+
+                if (Convert.ToString(DataBinder.Eval(container.DataItem, "Estado")) == "A" && Convert.ToInt32(DataBinder.Eval(container.DataItem, "IdLiquidacion")) == 0)
                 {
-                    var IdEmpleado = DataBinder.Eval(container.DataItem, "IdEmpleado");
-                    var IdSolicitud = DataBinder.Eval(container.DataItem, "IdSolicitud");
-                    hyperlink.Properties.Text = "Liquidar";
-                    hyperlink.NavigateUrl = Url.Action("Nuevo", "LiquidacionVacaciones", new { Area = "RRHH", IdEmpleado = IdEmpleado, IdSolicitud = IdSolicitud });
-                }).Render();
+
+
+                    Html.DevExpress().HyperLink(hyperlink =>
+                    {
+                        var IdEmpleado = DataBinder.Eval(container.DataItem, "IdEmpleado");
+                        var IdSolicitud = DataBinder.Eval(container.DataItem, "IdSolicitud");
+                        hyperlink.Properties.Text = "Liquidar";
+                        hyperlink.NavigateUrl = Url.Action("Nuevo", "LiquidacionVacaciones", new { Area = "RRHH", IdEmpleado = IdEmpleado, IdSolicitud = IdSolicitud });
+                    }).Render();
+                }
+
             });
         });
 
