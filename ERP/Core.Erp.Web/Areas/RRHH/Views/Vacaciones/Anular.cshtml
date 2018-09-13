@@ -33,7 +33,7 @@
 
                 <div class="form-group">
                     <label for="IdProveedor">Empleado autoriza</label>
-                    @Html.Partial("_CmbEmpleado_autoriza_vacaciones", Model.IdEmpleado)
+                    @Html.Partial("_CmbEmpleado_autoriza_vacaciones", Model.IdEmpleado_aprue)
                     @Html.ValidationMessageFor(q => q.IdEmpleado_aprue, "", new { @class = "text-danger" })
                 </div>
             </div>

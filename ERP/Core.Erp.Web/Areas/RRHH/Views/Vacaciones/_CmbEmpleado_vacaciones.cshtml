@@ -23,8 +23,8 @@
         settings.Properties.FilterMinLength = 3;
 
     })
-    .BindList(new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoPorRubroController().get_list_bajo_demanda, new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoPorRubroController().get_info_bajo_demanda)
-    .Bind(Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_empleado_x_ro_rubro_Info) ? "" : (Model == 0 ? "" : Model));
+     .BindList(new Core.Erp.Web.Areas.RRHH.Controllers.VacacionesController().get_list_bajo_demanda, new Core.Erp.Web.Areas.RRHH.Controllers.VacacionesController().get_info_bajo_demanda)
+    .Bind(Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_Solicitud_Vacaciones_x_empleado_Info) ? "" : (Model == 0 ? "" : Model));
 
 }
 @comboBox.GetHtml()
