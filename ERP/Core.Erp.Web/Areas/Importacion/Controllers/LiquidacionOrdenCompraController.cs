@@ -138,6 +138,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
+            IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             imp_liquidacion_Info model = bus_liquidacion.get_liquidar_oc(IdEmpresa, IdOrdenCompra_ext);
             if (model != null)
                 model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
@@ -155,6 +156,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost]
         public ActionResult Nuevo(imp_liquidacion_Info model)
         {
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.lst_detalle = info_detalle.get_list(model.IdTransaccionSession);
             model.lst_comprobante = Lis_imp_liquidacion_Info_diario_contable.get_list();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);

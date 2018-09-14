@@ -37,7 +37,6 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
-
         public cp_retencion_Info get_info(int IdEmpresa,decimal IdRetencion)
         {
             try
@@ -56,7 +55,6 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
-
         public cp_retencion_Info get_info_factura(int IdEmpresa, int IdTipoCbte_Ogiro, decimal IdCbteCble_Ogiro)
         {
             try
@@ -73,7 +71,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info_retencion.NumRetencion = info_talonario.NumDocumento;
                 info_retencion.IdTipoCbte_Ogiro = info_orden_giro.IdTipoCbte_Ogiro;
                 info_retencion.IdCbteCble_Ogiro = info_orden_giro.IdCbteCble_Ogiro;
-                info_retencion.co_baseImponible = info_orden_giro.co_baseImponible;
+                info_retencion.co_baseImponible = info_orden_giro.co_total;
                 info_retencion.co_serie = info_orden_giro.co_serie;
                 info_retencion.co_factura = info_orden_giro.co_factura;
                 info_retencion.co_subtotal_iva = info_orden_giro.co_subtotal_iva;
@@ -229,8 +227,6 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
-
-
         public string validar(cp_retencion_Info info)
         {
             try

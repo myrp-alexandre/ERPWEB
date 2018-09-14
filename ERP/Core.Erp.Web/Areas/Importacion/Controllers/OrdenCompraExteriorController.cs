@@ -132,7 +132,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             List<imp_ordencompra_ext_Info> model = new List<imp_ordencompra_ext_Info>();
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model = bus_orden.get_list_oc_por_liquidar(IdEmpresa);
-            return PartialView("_GridViewPartial_orden_compra_por_liquidar", model);
+            return View("_GridViewPartial_orden_compra_por_liquidar", model);
         }
         
          public ActionResult OrdencompraConsaldos()
@@ -146,6 +146,13 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         #region acciones
         public ActionResult Nuevo(int IdEmpresa = 0 )
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
             imp_parametro_Bus bus_para = new imp_parametro_Bus();
             var param = bus_para.get_info(IdEmpresa);
             if (param == null)
@@ -154,15 +161,18 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             {
                 IdEmpresa = IdEmpresa,
                 fecha_creacion = DateTime.Now,
-                IdCtaCble_importacion=param.IdCtaCble,
+                IdCtaCble_importacion = param.IdCtaCble,
                 oe_fecha = DateTime.Now,
                 oe_fecha_llegada = DateTime.Now,
                 oe_fecha_embarque = DateTime.Now,
                 oe_fecha_desaduanizacion = DateTime.Now,
-                IdPais_origen="1",
-                IdCiudad_destino="09",
-                IdCatalogo_forma_pago=1
-                
+                IdPais_origen = "1",
+                IdCiudad_destino = "09",
+                IdPais_embarque = "1",
+                IdCatalogo_forma_pago=1,
+                IdTransaccionSession= Convert.ToDecimal(SessionFixed.IdTransaccionSession)
+
+
 
             };
             cargar_combos_detalle();
