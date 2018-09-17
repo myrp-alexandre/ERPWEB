@@ -22,6 +22,7 @@
         settings.Properties.ClientSideEvents.SelectedIndexChanged = "SeleccionarLote";
     })
     .BindList(new Core.Erp.Web.Areas.Facturacion.Controllers.NotaDeDebitoFacturacionController().get_list_bajo_demandaProducto,
-    new Core.Erp.Web.Areas.Facturacion.Controllers.NotaDeDebitoFacturacionController().get_info_bajo_demandaProducto).Bind(Model);
+    new Core.Erp.Web.Areas.Facturacion.Controllers.NotaDeDebitoFacturacionController().get_info_bajo_demandaProducto)
+    .Bind(Model.GetType() == typeof(Core.Erp.Info.Facturacion.fa_notaCreDeb_Info) ? "" : (Model == 0 ? "" : Model));
 }
 @comboBox.GetHtml()

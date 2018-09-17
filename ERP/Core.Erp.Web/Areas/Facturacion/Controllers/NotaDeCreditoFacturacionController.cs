@@ -69,7 +69,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #region Metodos ComboBox bajo demanda cliente
         public ActionResult CmbCliente_NotaCredito()
         {
-            fa_proforma_Info model = new fa_proforma_Info();
+            decimal model = new decimal();
             return PartialView("_CmbCliente_NotaCrebitoFacturacion", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -89,7 +89,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         public ActionResult CmbProducto_NotaCredito()
         {
-            fa_notaCreDeb_det_Info model = new fa_notaCreDeb_det_Info();
+            decimal model = new decimal ();
             return PartialView("_CmbProducto_NotaCrebitoFacturacion", model);
         }
         public List<in_Producto_Info> get_list_bajo_demandaProducto(ListEditItemsRequestedByFilterConditionEventArgs args)
