@@ -270,6 +270,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 ViewBag.mensaje = "El documento "+model.co_serie+" "+ model.co_factura+", ya se encuentra registrado";
                 cargar_combos(model);
                 cargar_combos_detalle();
+                if (model.info_cuota.Fecha_inicio.Year == 1)
+                    model.info_cuota.Fecha_inicio = DateTime.Now;
                 return View(model);
             }
              model.info_comrobante = new ct_cbtecble_Info();
@@ -280,6 +282,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 ViewBag.mensaje = "Falta diario contable";
                 cargar_combos(model);
                 cargar_combos_detalle();
+                if (model.info_cuota.Fecha_inicio.Year == 1)
+                    model.info_cuota.Fecha_inicio = DateTime.Now;
                 return View(model);
 
             }
@@ -293,6 +297,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 ViewBag.mensaje = "Falta parametrizar el módulo de cuentas por pagar";
                 cargar_combos(model);
                 cargar_combos_detalle();
+                if (model.info_cuota.Fecha_inicio.Year == 1)
+                    model.info_cuota.Fecha_inicio = DateTime.Now;
                 return View(model);
             }
             string mensaje = bus_orden_giro.validar(model);
@@ -301,6 +307,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 cargar_combos(model);
                 cargar_combos_detalle();
                 ViewBag.mensaje = mensaje;
+                if (model.info_cuota.Fecha_inicio.Year == 1)
+                    model.info_cuota.Fecha_inicio = DateTime.Now;
                 return View(model);
             }
 
@@ -309,6 +317,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if (!bus_orden_giro.guardarDB(model))
             {
                 cargar_combos(model);
+                if (model.info_cuota.Fecha_inicio.Year == 1)
+                    model.info_cuota.Fecha_inicio = DateTime.Now;
                 return View(model);
             }
             return RedirectToAction("Index");
