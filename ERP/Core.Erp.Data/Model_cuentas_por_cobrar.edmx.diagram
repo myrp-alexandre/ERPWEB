@@ -27,6 +27,8 @@
         <EntityTypeShape EntityType="Model_cuentas_por_cobrar.vwcxc_cartera_x_cobrar" Width="1.5" PointX="12.375" PointY="10.75" />
         <EntityTypeShape EntityType="Model_cuentas_por_cobrar.cxc_liquidacion_comisiones" Width="1.5" PointX="14.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_cuentas_por_cobrar.cxc_Parametro" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="Model_cuentas_por_cobrar.vwcxc_liquidacion_comisiones_det" Width="1.5" PointX="3.375" PointY="13.75" />
+        <EntityTypeShape EntityType="Model_cuentas_por_cobrar.vwcxc_liquidacion_comisiones_det_x_comisionar" Width="1.5" PointX="5.375" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
