@@ -11,8 +11,9 @@
 
 @using (Html.BeginForm("Nuevo", "LiquidacionComisiones", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdLiquidacion)
+    @Html.HiddenFor(q => q.IdEmpresa, new { id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdLiquidacion, new { id = "IdLiquidacion" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { id = "IdTransaccionSession" })
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
@@ -22,7 +23,13 @@
                     @Html.ValidationMessageFor(q => q.IdVendedor, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class=" col-md-offset-4 col-md-2 ">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary" id="btn_buscar_op">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+
+            <div class=" col-md-offset-2 col-md-2 ">
                 <div class="form-group">
                     <label for="">Fecha*</label>
                     <div class="input-group date">
@@ -56,7 +63,15 @@
             </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.Action("GridViewPartial_liquidacion_det")
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
@@ -67,3 +82,35 @@
     }
 }
 
+<script>
+    function get_list(Secuencia){
+
+        $("#Secuencia").text(Secuencia);
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdLiquidacion: $("#IdLiquidacion").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            Secuencia: Secuencia
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("get_list", "LiquidacionComisiones",new { Area = "CuentasPorCobrar"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.IdProducto_padre > 0) {
+                    MostrarModal();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
+    function MostrarModal() {
+        GridView_liquidacion_det.PerformCallback();
+    }
+</script>

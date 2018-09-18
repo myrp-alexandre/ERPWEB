@@ -222,8 +222,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             fa_TerminoPago_Distribucion_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdTerminoPago = info_det.IdTerminoPago;
-            info_det.Por_distribucion = info_det.Por_distribucion;
-            info_det.Num_Dias_Vcto = info_det.Num_Dias_Vcto;
+            edited_info.Por_distribucion = info_det.Por_distribucion;
+            edited_info.Num_Dias_Vcto = info_det.Num_Dias_Vcto;
 
         }
 

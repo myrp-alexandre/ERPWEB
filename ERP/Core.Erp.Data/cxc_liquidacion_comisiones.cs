@@ -14,6 +14,11 @@ namespace Core.Erp.Data
     
     public partial class cxc_liquidacion_comisiones
     {
+        public cxc_liquidacion_comisiones()
+        {
+            this.cxc_liquidacion_comisiones_det = new HashSet<cxc_liquidacion_comisiones_det>();
+        }
+    
         public int IdEmpresa { get; set; }
         public decimal IdLiquidacion { get; set; }
         public System.DateTime Fecha { get; set; }
@@ -27,5 +32,7 @@ namespace Core.Erp.Data
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> FechaUltAnu { get; set; }
         public string MotivoAnulacion { get; set; }
+    
+        public virtual ICollection<cxc_liquidacion_comisiones_det> cxc_liquidacion_comisiones_det { get; set; }
     }
 }

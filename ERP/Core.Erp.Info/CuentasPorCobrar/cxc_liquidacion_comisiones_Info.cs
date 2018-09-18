@@ -9,6 +9,7 @@ namespace Core.Erp.Info.CuentasPorCobrar
 {
     public class cxc_liquidacion_comisiones_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdLiquidacion { get; set; }
         [Required(ErrorMessage = "El campo fecha  es obligatorio")]
@@ -23,5 +24,9 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> FechaUltAnu { get; set; }
         public string MotivoAnulacion { get; set; }
+
+        // campos que no existen en la tabla
+        public List<cxc_liquidacion_comisiones_det_Info> lst_det { get; set; }
+
     }
 }
