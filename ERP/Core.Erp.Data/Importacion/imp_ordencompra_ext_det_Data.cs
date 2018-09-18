@@ -46,7 +46,7 @@ namespace Core.Erp.Data.Importacion
                 }
                 foreach (var item in Lista)
                 {
-                   item. pr_descripcion = item.pr_descripcion + "" + item.lote_num_lote;
+                    item.pr_descripcion = item.pr_descripcion + "" + (item.lote_num_lote) == null ? "" : item.lote_num_lote;
                 }
                 return Lista;
             }
@@ -89,6 +89,10 @@ namespace Core.Erp.Data.Importacion
 
 
                              }).ToList();
+                }
+                foreach (var item in Lista)
+                {
+                    item.pr_descripcion = item.pr_descripcion + "" + (item.lote_num_lote)==null?"": item.lote_num_lote;
                 }
                 return Lista;
             }
