@@ -28,7 +28,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
         tb_pais_Bus bus_paises = new tb_pais_Bus();
         tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
-        imp_ordencompra_ext_det_Info_lst detalle = new imp_ordencompra_ext_det_Info_lst();
+        imp_ordencompra_ext_det_Info_lst Lis_imp_ordencompra_ext_det_Info_lst = new imp_ordencompra_ext_det_Info_lst();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         in_UnidadMedida_Bus bus_unidad_medida = new in_UnidadMedida_Bus();
         imp_ordencompra_ext_det_Bus bus_detalle = new imp_ordencompra_ext_det_Bus();
@@ -116,7 +116,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         public ActionResult GridViewPartial_orden_compra_ext_det()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            var model = detalle.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = Lis_imp_ordencompra_ext_det_Info_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_orden_compra_ext_det", model);
         }
         
@@ -182,7 +182,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost]
         public ActionResult Nuevo(imp_ordencompra_ext_Info model)
         {
-            model.lst_detalle = detalle.get_list(model.IdTransaccionSession);
+            model.lst_detalle = Lis_imp_ordencompra_ext_det_Info_lst.get_list(model.IdTransaccionSession);
             string mensaje = bus_orden.validar(model);
             if(mensaje!="")
             {
@@ -195,7 +195,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 cargar_combos();
                 return View(model);
             }
-            Session["imp_ordencompra_ext_det_Info"] = null;
+            Lis_imp_ordencompra_ext_det_Info_lst.set_list(new List<imp_ordencompra_ext_det_Info>(),model.IdTransaccionSession);
             return RedirectToAction("Index");
         }
         public ActionResult Modificar(int IdEmpresa = 0 , decimal IdOrdenCompra_ext = 0)
@@ -209,7 +209,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             imp_ordencompra_ext_Info model = bus_orden.get_info(IdEmpresa, IdOrdenCompra_ext);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             var lst_detalle = bus_detalle.get_list(IdEmpresa, IdOrdenCompra_ext);
-            detalle.set_list(lst_detalle, model.IdTransaccionSession);
+            Lis_imp_ordencompra_ext_det_Info_lst.set_list(lst_detalle, model.IdTransaccionSession);
             if (model == null)
                 return RedirectToAction("Index");
             cargar_combos();
@@ -219,7 +219,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost]
         public ActionResult Modificar(imp_ordencompra_ext_Info model)
         {
-            model.lst_detalle = detalle.get_list(model.IdTransaccionSession);
+            model.lst_detalle = Lis_imp_ordencompra_ext_det_Info_lst.get_list(model.IdTransaccionSession);
             string mensaje = bus_orden.validar(model);
             if (mensaje != "")
             {
@@ -232,7 +232,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 cargar_combos();
                 return View(model);
             }
-            Session["imp_ordencompra_ext_det_Info"] = null;
+            Lis_imp_ordencompra_ext_det_Info_lst.set_list(new List<imp_ordencompra_ext_det_Info>(), model.IdTransaccionSession);
             return RedirectToAction("Index");
         }
         public ActionResult Anular(int IdEmpresa = 0 , decimal IdOrdenCompra_ext = 0 )
@@ -246,7 +246,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             imp_ordencompra_ext_Info model = bus_orden.get_info(IdEmpresa, IdOrdenCompra_ext);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             var lst_detalle = bus_detalle.get_list(IdEmpresa, IdOrdenCompra_ext);
-            detalle.set_list(lst_detalle, model.IdTransaccionSession);
+            Lis_imp_ordencompra_ext_det_Info_lst.set_list(lst_detalle, model.IdTransaccionSession);
             if (model == null)
                 return RedirectToAction("Index");
             cargar_combos();
@@ -262,7 +262,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 cargar_combos();
                 return View(model);
             }
-            Session["imp_ordencompra_ext_det_Info"] = null;
+            Lis_imp_ordencompra_ext_det_Info_lst.set_list(new List<imp_ordencompra_ext_det_Info>(), model.IdTransaccionSession);
             return RedirectToAction("Index");
         }
         #endregion
@@ -305,12 +305,12 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                         info_det.pr_descripcion = info_producto.pr_descripcion_combo;
                         info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
                         info_det.od_total_fob = info_det.od_cantidad * info_det.od_costo;
-                        detalle.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                        Lis_imp_ordencompra_ext_det_Info_lst.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
                     }
                 }
 
-            var model = detalle.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = Lis_imp_ordencompra_ext_det_Info_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_orden_compra_ext_det", model);
         }
@@ -332,16 +332,16 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                     }
                 }
 
-            detalle.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var model = detalle.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            Lis_imp_ordencompra_ext_det_Info_lst.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = Lis_imp_ordencompra_ext_det_Info_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_orden_compra_ext_det", model);
         }
 
         public ActionResult EditingDelete(int Secuencia)
         {
-            detalle.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var model = detalle.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            Lis_imp_ordencompra_ext_det_Info_lst.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = Lis_imp_ordencompra_ext_det_Info_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_orden_compra_ext_det", model);
         }
