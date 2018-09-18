@@ -14,6 +14,7 @@
         settings.Properties.ValueType = typeof(decimal);
         settings.Properties.TextField = "pr_descripcion";
         settings.Properties.TextFormatString = "[{0}] {1}";
+        settings.Properties.FilterMinLength = 3;
 
         settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdProducto.PerformCallback(); IdProducto.SetValue(''); }";
 

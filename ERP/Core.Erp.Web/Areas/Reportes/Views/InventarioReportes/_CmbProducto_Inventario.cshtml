@@ -16,6 +16,7 @@
         settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdProductoPadre'] = IdProductoPadre.GetValue(); }";
         settings.Properties.Columns.Add("IdProducto", "ID", 5);
         settings.Properties.Columns.Add("pr_descripcion", "Producto", 65);
+        settings.Properties.FilterMinLength = 3;
 
         settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
         settings.Properties.NullText = "== Seleccione ==";
