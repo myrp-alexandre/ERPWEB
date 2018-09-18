@@ -32,6 +32,8 @@ namespace Core.Erp.Info.Importacion
 
         #region campos de vistas
         public string pr_descripcion { get; set; }
+        public Nullable<System.DateTime> lote_fecha_vcto { get; set; }
+        public string lote_num_lote { get; set; }
         #endregion
     }
 }

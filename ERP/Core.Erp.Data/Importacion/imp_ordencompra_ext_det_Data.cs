@@ -38,9 +38,15 @@ namespace Core.Erp.Data.Importacion
                                  od_costo_bodega = q.od_costo_bodega,
                                  od_costo_total = q.od_costo_total,
                                  pr_descripcion=q.pr_descripcion,
+                                 lote_fecha_vcto=q.lote_fecha_vcto,
+                                 lote_num_lote=q.lote_num_lote
                                  
 
                              }).ToList();
+                }
+                foreach (var item in Lista)
+                {
+                   item. pr_descripcion = item.pr_descripcion + "" + item.lote_num_lote;
                 }
                 return Lista;
             }
