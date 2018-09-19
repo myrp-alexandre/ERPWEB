@@ -420,6 +420,9 @@
     <Compile Include="cxc_liquidacion_comisiones.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
+    <Compile Include="cxc_liquidacion_comisiones_det.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
     <Compile Include="cxc_Parametro.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>

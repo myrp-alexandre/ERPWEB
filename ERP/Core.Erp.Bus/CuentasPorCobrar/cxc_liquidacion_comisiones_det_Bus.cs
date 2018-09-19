@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Core.Erp.Data.CuentasPorCobrar;
+using Core.Erp.Info.CuentasPorCobrar;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,20 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.CuentasPorCobrar
 {
-    class cxc_liquidacion_comisiones_det_Bus
+  public  class cxc_liquidacion_comisiones_det_Bus
     {
+        cxc_liquidacion_comisiones_det_Data odata = new cxc_liquidacion_comisiones_det_Data();
+        public List<cxc_liquidacion_comisiones_det_Info> get_list(int IdEmpresa, decimal IdLiquidacion)
+        {
+            try
+            {
+                return odata.get_list(IdEmpresa, IdLiquidacion);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

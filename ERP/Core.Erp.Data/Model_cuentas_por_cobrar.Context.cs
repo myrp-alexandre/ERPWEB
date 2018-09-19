@@ -42,5 +42,6 @@ namespace Core.Erp.Data
         public DbSet<cxc_Parametro> cxc_Parametro { get; set; }
         public DbSet<vwcxc_liquidacion_comisiones_det> vwcxc_liquidacion_comisiones_det { get; set; }
         public DbSet<vwcxc_liquidacion_comisiones_det_x_comisionar> vwcxc_liquidacion_comisiones_det_x_comisionar { get; set; }
+        public DbSet<cxc_liquidacion_comisiones_det> cxc_liquidacion_comisiones_det { get; set; }
     }
 }

@@ -182,6 +182,31 @@
           <Property Name="FechaUltAnu" Type="datetime" />
           <Property Name="MotivoAnulacion" Type="varchar" MaxLength="1000" />
         </EntityType>
+        <EntityType Name="cxc_liquidacion_comisiones_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdLiquidacion" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdLiquidacion" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdVendedor" Type="int" Nullable="false" />
+          <Property Name="fa_IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="fa_IdSucursal" Type="int" Nullable="false" />
+          <Property Name="fa_IdBodega" Type="int" Nullable="false" />
+          <Property Name="fa_IdCbteVta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SubtotalFactura" Type="float" Nullable="false" />
+          <Property Name="IvaFactura" Type="float" Nullable="false" />
+          <Property Name="TotalFactura" Type="float" Nullable="false" />
+          <Property Name="TotalCobrado" Type="float" Nullable="false" />
+          <Property Name="BaseComision" Type="float" Nullable="false" />
+          <Property Name="PorcentajeComision" Type="float" Nullable="false" />
+          <Property Name="TotalAComisionar" Type="float" Nullable="false" />
+          <Property Name="TotalComisionado" Type="float" Nullable="false" />
+          <Property Name="TotalLiquidacion" Type="float" Nullable="false" />
+          <Property Name="NoComisiona" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="cxc_Parametro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -563,6 +588,20 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_retenci
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_cxc_liquidacion_comisiones_det_cxc_liquidacion_comisiones">
+          <End Role="cxc_liquidacion_comisiones" Type="Self.cxc_liquidacion_comisiones" Multiplicity="1" />
+          <End Role="cxc_liquidacion_comisiones_det" Type="Self.cxc_liquidacion_comisiones_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cxc_liquidacion_comisiones">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdLiquidacion" />
+            </Principal>
+            <Dependent Role="cxc_liquidacion_comisiones_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdLiquidacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Model_cuentas_por_cobrarStoreContainer">
           <EntitySet Name="cxc_Catalogo" EntityType="Self.cxc_Catalogo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cxc_CatalogoTipo" EntityType="Self.cxc_CatalogoTipo" Schema="dbo" store:Type="Tables" />
@@ -573,6 +612,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_retenci
           <EntitySet Name="cxc_cobro_tipo_Param_conta_x_sucursal" EntityType="Self.cxc_cobro_tipo_Param_conta_x_sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cxc_cobro_x_ct_cbtecble" EntityType="Self.cxc_cobro_x_ct_cbtecble" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cxc_liquidacion_comisiones" EntityType="Self.cxc_liquidacion_comisiones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cxc_liquidacion_comisiones_det" EntityType="Self.cxc_liquidacion_comisiones_det" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cxc_Parametro" EntityType="Self.cxc_Parametro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vwcxc_cartera_x_cobrar" EntityType="Self.vwcxc_cartera_x_cobrar" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -772,6 +812,10 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
           <AssociationSet Name="FK_cxc_cobro_x_ct_cbtecble_cxc_cobro" Association="Self.FK_cxc_cobro_x_ct_cbtecble_cxc_cobro">
             <End Role="cxc_cobro" EntitySet="cxc_cobro" />
             <End Role="cxc_cobro_x_ct_cbtecble" EntitySet="cxc_cobro_x_ct_cbtecble" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cxc_liquidacion_comisiones_det_cxc_liquidacion_comisiones" Association="Self.FK_cxc_liquidacion_comisiones_det_cxc_liquidacion_comisiones">
+            <End Role="cxc_liquidacion_comisiones" EntitySet="cxc_liquidacion_comisiones" />
+            <End Role="cxc_liquidacion_comisiones_det" EntitySet="cxc_liquidacion_comisiones_det" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1213,6 +1257,11 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
           <EntitySet Name="cxc_Parametro" EntityType="Model_cuentas_por_cobrar.cxc_Parametro" />
           <EntitySet Name="vwcxc_liquidacion_comisiones_det" EntityType="Model_cuentas_por_cobrar.vwcxc_liquidacion_comisiones_det" />
           <EntitySet Name="vwcxc_liquidacion_comisiones_det_x_comisionar" EntityType="Model_cuentas_por_cobrar.vwcxc_liquidacion_comisiones_det_x_comisionar" />
+          <EntitySet Name="cxc_liquidacion_comisiones_det" EntityType="Model_cuentas_por_cobrar.cxc_liquidacion_comisiones_det" />
+          <AssociationSet Name="FK_cxc_liquidacion_comisiones_det_cxc_liquidacion_comisiones" Association="Model_cuentas_por_cobrar.FK_cxc_liquidacion_comisiones_det_cxc_liquidacion_comisiones">
+            <End Role="cxc_liquidacion_comisiones" EntitySet="cxc_liquidacion_comisiones" />
+            <End Role="cxc_liquidacion_comisiones_det" EntitySet="cxc_liquidacion_comisiones_det" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="vwcxc_cartera_x_cobrar">
           <Key>
@@ -1276,6 +1325,7 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
           <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="FechaUltAnu" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cxc_liquidacion_comisiones_det" Relationship="Model_cuentas_por_cobrar.FK_cxc_liquidacion_comisiones_det_cxc_liquidacion_comisiones" FromRole="cxc_liquidacion_comisiones" ToRole="cxc_liquidacion_comisiones_det" />
         </EntityType>
         <EntityType Name="cxc_Parametro">
           <Key>
@@ -1383,6 +1433,46 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
           <Property Name="IdVendedor" Type="Int32" Nullable="false" />
           <Property Name="PorComision" Type="Double" Nullable="false" />
         </EntityType>
+        <EntityType Name="cxc_liquidacion_comisiones_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdLiquidacion" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdLiquidacion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdVendedor" Type="Int32" Nullable="false" />
+          <Property Name="fa_IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="fa_IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="fa_IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="fa_IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="SubtotalFactura" Type="Double" Nullable="false" />
+          <Property Name="IvaFactura" Type="Double" Nullable="false" />
+          <Property Name="TotalFactura" Type="Double" Nullable="false" />
+          <Property Name="TotalCobrado" Type="Double" Nullable="false" />
+          <Property Name="BaseComision" Type="Double" Nullable="false" />
+          <Property Name="PorcentajeComision" Type="Double" Nullable="false" />
+          <Property Name="TotalAComisionar" Type="Double" Nullable="false" />
+          <Property Name="TotalComisionado" Type="Double" Nullable="false" />
+          <Property Name="TotalLiquidacion" Type="Double" Nullable="false" />
+          <Property Name="NoComisiona" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="cxc_liquidacion_comisiones" Relationship="Model_cuentas_por_cobrar.FK_cxc_liquidacion_comisiones_det_cxc_liquidacion_comisiones" FromRole="cxc_liquidacion_comisiones_det" ToRole="cxc_liquidacion_comisiones" />
+        </EntityType>
+        <Association Name="FK_cxc_liquidacion_comisiones_det_cxc_liquidacion_comisiones">
+          <End Type="Model_cuentas_por_cobrar.cxc_liquidacion_comisiones" Role="cxc_liquidacion_comisiones" Multiplicity="1" />
+          <End Type="Model_cuentas_por_cobrar.cxc_liquidacion_comisiones_det" Role="cxc_liquidacion_comisiones_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cxc_liquidacion_comisiones">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdLiquidacion" />
+            </Principal>
+            <Dependent Role="cxc_liquidacion_comisiones_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdLiquidacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1758,6 +1848,30 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
                 <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
                 <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cxc_liquidacion_comisiones_det">
+            <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.cxc_liquidacion_comisiones_det">
+              <MappingFragment StoreEntitySet="cxc_liquidacion_comisiones_det">
+                <ScalarProperty Name="NoComisiona" ColumnName="NoComisiona" />
+                <ScalarProperty Name="TotalLiquidacion" ColumnName="TotalLiquidacion" />
+                <ScalarProperty Name="TotalComisionado" ColumnName="TotalComisionado" />
+                <ScalarProperty Name="TotalAComisionar" ColumnName="TotalAComisionar" />
+                <ScalarProperty Name="PorcentajeComision" ColumnName="PorcentajeComision" />
+                <ScalarProperty Name="BaseComision" ColumnName="BaseComision" />
+                <ScalarProperty Name="TotalCobrado" ColumnName="TotalCobrado" />
+                <ScalarProperty Name="TotalFactura" ColumnName="TotalFactura" />
+                <ScalarProperty Name="IvaFactura" ColumnName="IvaFactura" />
+                <ScalarProperty Name="SubtotalFactura" ColumnName="SubtotalFactura" />
+                <ScalarProperty Name="fa_IdCbteVta" ColumnName="fa_IdCbteVta" />
+                <ScalarProperty Name="fa_IdBodega" ColumnName="fa_IdBodega" />
+                <ScalarProperty Name="fa_IdSucursal" ColumnName="fa_IdSucursal" />
+                <ScalarProperty Name="fa_IdEmpresa" ColumnName="fa_IdEmpresa" />
+                <ScalarProperty Name="IdVendedor" ColumnName="IdVendedor" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
