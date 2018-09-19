@@ -134,6 +134,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             string MsgValidaciones = string.Empty;
             i_validar.PedirDesbloqueo = false;
+            
             i_validar.lst_det = List_det.get_list(i_validar.IdTransaccionSession);
             if (i_validar.lst_det.Count == 0)
             {

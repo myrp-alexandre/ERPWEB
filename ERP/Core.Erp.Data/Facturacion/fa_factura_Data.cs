@@ -220,8 +220,8 @@ namespace Core.Erp.Data.Facturacion
                     Fecha_Autorizacion = info.Fecha_Autorizacion,
                     vt_anio = info.vt_anio,
                     vt_autorizacion = info.vt_autorizacion,
-                    vt_fecha = info.vt_fecha,
-                    vt_fech_venc = info.vt_fech_venc,
+                    vt_fecha = info.vt_fecha.Date,
+                    vt_fech_venc = info.vt_fech_venc.Date,
                     vt_mes = info.vt_mes,
                     IdCliente = info.IdCliente,
                     IdContacto = info.IdContacto,
@@ -630,8 +630,8 @@ namespace Core.Erp.Data.Facturacion
                 if (Entity == null) return false;
 
                 Entity.vt_anio = info.vt_anio;
-                Entity.vt_fecha = info.vt_fecha;
-                Entity.vt_fech_venc = info.vt_fech_venc;
+                Entity.vt_fecha = info.vt_fecha.Date;
+                Entity.vt_fech_venc = info.vt_fech_venc.Date;
                 Entity.vt_mes = info.vt_mes;
                 Entity.IdCliente = info.IdCliente;
                 Entity.IdContacto = info.IdContacto;
