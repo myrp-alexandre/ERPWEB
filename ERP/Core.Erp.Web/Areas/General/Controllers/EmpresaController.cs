@@ -36,16 +36,17 @@ namespace Core.Erp.Web.Areas.General.Controllers
         {
             tb_empresa_Info model = new tb_empresa_Info
             {
-                em_fechaInicioContable = DateTime.Now.Date
-            };
+                em_fechaInicioContable = DateTime.Now.Date,
+                em_logo = new byte[0]
+        };
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Nuevo(tb_empresa_Info model)
         {
-
-            if(Session["imagen"]!=null)
+            model.em_logo = empresa_imagen.pr_imagen;
+            if (Session["imagen"]!=null)
             model.em_logo = Session["imagen"] as byte[];
             if (!bus_empresa.guardarDB(model))
             {
@@ -57,6 +58,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
         public ActionResult Modificar(int IdEmpresa = 0)
         {
             tb_empresa_Info model = bus_empresa.get_info(IdEmpresa);
+            if (model.em_logo == null)
+                model.em_logo = new byte[0];
             if (model == null)
                 return RedirectToAction("Index");
             return View(model);
@@ -64,6 +67,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
         [HttpPost]
         public ActionResult Modificar(tb_empresa_Info model)
         {
+            model.em_logo = empresa_imagen.pr_imagen;
             if (!bus_empresa.modificarDB(model))
             {
                 return View(model);
@@ -74,6 +78,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
         public ActionResult Anular(int IdEmpresa = 0)
         {
             tb_empresa_Info model = bus_empresa.get_info(IdEmpresa);
+            if (model.em_logo == null)
+                model.em_logo = new byte[0];
             if (model == null)
                 return RedirectToAction("Index");
             return View(model);
@@ -88,6 +94,44 @@ namespace Core.Erp.Web.Areas.General.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+
+        const string UploadDirectory = "~/Content/imagenes/";
+
+        public UploadedFile UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControl", empresa_imagen.UploadValidationSettings, empresa_imagen.FileUploadComplete);
+
+            byte[] model = empresa_imagen.pr_imagen;
+            UploadedFile file = new UploadedFile();
+            return file;
+        }
+
+        public ActionResult get_imagen()
+        {
+
+            byte[] model = empresa_imagen.pr_imagen;
+            if (model == null)
+                model = new byte[0];
+            return PartialView("_Empresa_imagen", model);
+        }
+
+        public class empresa_imagen
+        {
+            public static byte[] pr_imagen { get; set; }
+            public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+            {
+                AllowedFileExtensions = new string[] { ".jpg", ".jpeg" },
+                MaxFileSize = 4000000
+            };
+            public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+            {
+
+                if (e.UploadedFile.IsValid)
+                {
+                    pr_imagen = e.UploadedFile.FileBytes;
+                }
+            }
+        }
     }
   
 }

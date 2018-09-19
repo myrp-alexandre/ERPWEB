@@ -72,7 +72,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 {
                     if (info.co_observacion == null)
                         info.co_observacion = "";
-                    info.info_comrobante.cb_Observacion ="Prov: "+ prov.info_persona.pe_nombreCompleto + " FAC# " + info.co_serie + "-" + info.co_factura + " OBSEV: " + info.co_observacion;
+                    info.info_comrobante.cb_Observacion ="Prov: "+ prov.info_persona.pe_nombreCompleto + " FAC# " + info.co_serie + "-" + info.co_factura + " OBS: " + info.co_observacion;
                     
                 }
                 else
