@@ -89,8 +89,15 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comprobante.cb_Estado = "A";
                 info.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comprobante.cb_Fecha.Year.ToString() + info.info_comprobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
-                info.info_comprobante.cb_Observacion = info.Observacion;
+                if (info_proveedore != null)
+                {
+                    if (info.Observacion == null)
+                        info.Observacion = "";
+                    info.info_comprobante.cb_Observacion = "Orden pago al Prov: " + info_proveedore.info_persona.pe_nombreCompleto + " "+ info.Observacion;
 
+                }
+                else
+                    info.info_comprobante.cb_Observacion = info.Observacion;
                 if (bus_contabilidad.guardarDB(info.info_comprobante))
                 {
 

@@ -26,6 +26,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public Nullable<decimal> IdEntidad { get; set; }
         public System.DateTime Fecha { get; set; }
         public string IdEstadoAprobacion { get; set; }
+        [Required(ErrorMessage = "El campo forma de pago es obligatorio")]
         public string IdFormaPago { get; set; }
         public System.DateTime Fecha_Pago { get; set; }
         public Nullable<int> IdBanco { get; set; }

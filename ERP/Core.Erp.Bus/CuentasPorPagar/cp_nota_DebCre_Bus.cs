@@ -41,6 +41,9 @@ namespace Core.Erp.Bus.CuentasPorPagar
         {
             try
             {
+                cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
+                var prov = bus_proveedor.get_info(info.IdEmpresa, info.IdProveedor);
+
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
                 info.info_comrobante.cb_Fecha = (DateTime)info.Fecha_contable;
                 info.info_comrobante.cb_Anio = info.info_comrobante.cb_Fecha.Year;
@@ -48,8 +51,15 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comrobante.cb_Estado = "A";
                 info.info_comrobante.IdPeriodo = Convert.ToInt32(info.info_comrobante.cb_Fecha.Year.ToString() + info.info_comrobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
-                info.info_comrobante.cb_Observacion = info.cn_observacion;
+                if (prov != null)
+                {
+                    if (info.cn_observacion == null)
+                        info.cn_observacion = "";
+                    info.info_comrobante.cb_Observacion = "Prov: " + prov.info_persona.pe_nombreCompleto + " "+ info.cn_observacion;
 
+                }
+                else
+                    info.info_comrobante.cb_Observacion = info.cn_observacion;
                 if (bus_contabilidad.guardarDB(info.info_comrobante))
                 {
                     data = new cp_nota_DebCre_Data();
