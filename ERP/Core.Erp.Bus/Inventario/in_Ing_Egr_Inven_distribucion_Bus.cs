@@ -35,11 +35,11 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
-        public List<in_Ing_Egr_Inven_distribucion_Info> get_list(int IdEmpresa)
+        public List<in_Ing_Egr_Inven_distribucion_Info> get_list(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin)
         {
             try
             {
-                return oData.get_list(IdEmpresa);
+                return oData.get_list(IdEmpresa, FechaInicio,FechaFin);
             }
             catch (Exception)
             {

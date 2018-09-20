@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridViewPartial_distribuion    ";
-        settings.CallbackRouteValues = new { Controller = "DistribucionPorLote", Action = "GridViewPartial_distribuion" };
+        settings.CallbackRouteValues = new { Controller = "DistribucionPorLote", Action = "GridViewPartial_distribuion", Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin };
 
 
         settings.KeyFieldName = "IdNumMovi";

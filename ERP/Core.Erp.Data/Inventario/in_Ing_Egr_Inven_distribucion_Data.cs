@@ -226,17 +226,22 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
-        public List<in_Ing_Egr_Inven_distribucion_Info> get_list(int IdEmpresa)
+        public List<in_Ing_Egr_Inven_distribucion_Info> get_list(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin)
         {
             try
             {
+                FechaInicio = Convert.ToDateTime(FechaInicio.ToShortDateString());
+                FechaFin = Convert.ToDateTime(FechaFin.ToShortDateString());
+
                 List<in_Ing_Egr_Inven_distribucion_Info> Lista = new List<in_Ing_Egr_Inven_distribucion_Info>();
 
                 using (Entities_inventario Context = new Entities_inventario())
                 {
                     Lista = (from q in Context.vwin_Ing_Egr_Inven_distribucion
-                             where q.IdEmpresa == IdEmpresa
 
+                             where q.IdEmpresa == IdEmpresa
+                             && q.cm_fecha>=FechaInicio
+                             && q.cm_fecha<=FechaFin
                              select new in_Ing_Egr_Inven_distribucion_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
