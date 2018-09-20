@@ -283,6 +283,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 // actualizar lista distribuidas
                 List<in_Ing_Egr_Inven_distribucion_Info> lst_x_distribuir;
                 lst_x_distribuir = Session["lst_x_distribuir"] as List<in_Ing_Egr_Inven_distribucion_Info>;
+                if(lst_x_distribuir!=null)
                 foreach (var item in lst_x_distribuir)
                 {
                     item.can_distribuida = model.lst_distribuido.Sum(v => v.dm_cantidad);
