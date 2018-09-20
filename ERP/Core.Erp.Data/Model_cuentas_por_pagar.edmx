@@ -1024,6 +1024,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' no
             <PropertyRef Name="ct_IdCbteCble" />
             <PropertyRef Name="IdProveedor" />
             <PropertyRef Name="Estado" />
+            <PropertyRef Name="pe_nombreCompleto" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdRetencion" Type="numeric" Precision="18" Scale="0" Nullable="false" />
@@ -1050,6 +1051,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' no
           <Property Name="ct_IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdProveedor" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <Association Name="FK_cp_codigo_SRI_cp_codigo_SRI_tipo">
           <End Role="cp_codigo_SRI_tipo" Type="Self.cp_codigo_SRI_tipo" Multiplicity="1" />
@@ -1800,7 +1802,8 @@ FROM [web].[vwcp_proveedor_consulta] AS [vwcp_proveedor_consulta]</DefiningQuery
 [vwcp_retencion].[ct_IdTipoCbte] AS [ct_IdTipoCbte], 
 [vwcp_retencion].[ct_IdCbteCble] AS [ct_IdCbteCble], 
 [vwcp_retencion].[IdProveedor] AS [IdProveedor], 
-[vwcp_retencion].[Estado] AS [Estado]
+[vwcp_retencion].[Estado] AS [Estado], 
+[vwcp_retencion].[pe_nombreCompleto] AS [pe_nombreCompleto]
 FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_cp_codigo_SRI_cp_codigo_SRI_tipo" Association="Self.FK_cp_codigo_SRI_cp_codigo_SRI_tipo">
@@ -2943,7 +2946,6 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
             <Parameter Name="IdUsuario" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="vwcp_nota_DebCre" EntityType="Model_cuentas_por_pagar.vwcp_nota_DebCre" />
-          <EntitySet Name="vwcp_retencion" EntityType="Model_cuentas_por_pagar.vwcp_retencion" />
           <EntitySet Name="cp_proveedor_clase" EntityType="Model_cuentas_por_pagar.cp_proveedor_clase" />
           <AssociationSet Name="FK_cp_proveedor_cp_proveedor_clase" Association="Model_cuentas_por_pagar.FK_cp_proveedor_cp_proveedor_clase">
             <End Role="cp_proveedor_clase" EntitySet="cp_proveedor_clase" />
@@ -2993,6 +2995,7 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
           </AssociationSet>
           <EntitySet Name="vwcp_orden_giro_det" EntityType="Model_cuentas_por_pagar.vwcp_orden_giro_det" />
           <EntitySet Name="cp_parametros" EntityType="Model_cuentas_por_pagar.cp_parametros" />
+          <EntitySet Name="vwcp_retencion" EntityType="Model_cuentas_por_pagar.vwcp_retencion" />
         </EntityContainer>
         <ComplexType Name="spcp_Get_Data_orden_pago_con_cancelacion_data_Result">
           <Property Type="Int64" Name="IdRow" Nullable="false" />
@@ -3147,51 +3150,6 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
           <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="pe_razonSocial" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="vwcp_retencion">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdRetencion" />
-            <PropertyRef Name="fecha" />
-            <PropertyRef Name="observacion" />
-            <PropertyRef Name="re_Tiene_RTiva" />
-            <PropertyRef Name="co_serie" />
-            <PropertyRef Name="co_factura" />
-            <PropertyRef Name="co_subtotal_iva" />
-            <PropertyRef Name="co_subtotal_siniva" />
-            <PropertyRef Name="co_baseImponible" />
-            <PropertyRef Name="co_valoriva" />
-            <PropertyRef Name="re_Tiene_RFuente" />
-            <PropertyRef Name="ct_IdTipoCbte" />
-            <PropertyRef Name="ct_IdCbteCble" />
-            <PropertyRef Name="IdProveedor" />
-            <PropertyRef Name="Estado" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdRetencion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="CodDocumentoTipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="NumRetencion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="NAutorizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Autorizacion" Type="DateTime" Precision="3" />
-          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="observacion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="re_Tiene_RTiva" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="co_serie" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="co_factura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="co_subtotal_iva" Type="Double" Nullable="false" />
-          <Property Name="co_subtotal_siniva" Type="Double" Nullable="false" />
-          <Property Name="co_baseImponible" Type="Double" Nullable="false" />
-          <Property Name="co_valoriva" Type="Double" Nullable="false" />
-          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_razonSocial" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="re_Tiene_RFuente" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="ct_IdTipoCbte" Type="Int32" Nullable="false" />
-          <Property Name="ct_IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdProveedor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="cp_proveedor_clase">
           <Key>
@@ -3710,6 +3668,53 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
           <Property Name="pa_ctacble_x_RetIva_default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="pa_ctacble_x_RetFte_default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwcp_retencion">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdRetencion" />
+            <PropertyRef Name="fecha" />
+            <PropertyRef Name="observacion" />
+            <PropertyRef Name="re_Tiene_RTiva" />
+            <PropertyRef Name="co_serie" />
+            <PropertyRef Name="co_factura" />
+            <PropertyRef Name="co_subtotal_iva" />
+            <PropertyRef Name="co_subtotal_siniva" />
+            <PropertyRef Name="co_baseImponible" />
+            <PropertyRef Name="co_valoriva" />
+            <PropertyRef Name="re_Tiene_RFuente" />
+            <PropertyRef Name="ct_IdTipoCbte" />
+            <PropertyRef Name="ct_IdCbteCble" />
+            <PropertyRef Name="IdProveedor" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="pe_nombreCompleto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdRetencion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CodDocumentoTipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="NumRetencion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NAutorizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Autorizacion" Type="DateTime" Precision="3" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="observacion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="re_Tiene_RTiva" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="co_serie" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="co_factura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="co_subtotal_iva" Type="Double" Nullable="false" />
+          <Property Name="co_subtotal_siniva" Type="Double" Nullable="false" />
+          <Property Name="co_baseImponible" Type="Double" Nullable="false" />
+          <Property Name="co_valoriva" Type="Double" Nullable="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_razonSocial" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="re_Tiene_RFuente" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ct_IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="ct_IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdProveedor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4362,37 +4367,6 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwcp_retencion">
-            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.vwcp_retencion">
-              <MappingFragment StoreEntitySet="vwcp_retencion">
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
-                <ScalarProperty Name="ct_IdCbteCble" ColumnName="ct_IdCbteCble" />
-                <ScalarProperty Name="ct_IdTipoCbte" ColumnName="ct_IdTipoCbte" />
-                <ScalarProperty Name="re_Tiene_RFuente" ColumnName="re_Tiene_RFuente" />
-                <ScalarProperty Name="pe_razonSocial" ColumnName="pe_razonSocial" />
-                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
-                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
-                <ScalarProperty Name="co_valoriva" ColumnName="co_valoriva" />
-                <ScalarProperty Name="co_baseImponible" ColumnName="co_baseImponible" />
-                <ScalarProperty Name="co_subtotal_siniva" ColumnName="co_subtotal_siniva" />
-                <ScalarProperty Name="co_subtotal_iva" ColumnName="co_subtotal_iva" />
-                <ScalarProperty Name="co_factura" ColumnName="co_factura" />
-                <ScalarProperty Name="co_serie" ColumnName="co_serie" />
-                <ScalarProperty Name="re_Tiene_RTiva" ColumnName="re_Tiene_RTiva" />
-                <ScalarProperty Name="observacion" ColumnName="observacion" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="Fecha_Autorizacion" ColumnName="Fecha_Autorizacion" />
-                <ScalarProperty Name="NAutorizacion" ColumnName="NAutorizacion" />
-                <ScalarProperty Name="NumRetencion" ColumnName="NumRetencion" />
-                <ScalarProperty Name="serie2" ColumnName="serie2" />
-                <ScalarProperty Name="serie1" ColumnName="serie1" />
-                <ScalarProperty Name="CodDocumentoTipo" ColumnName="CodDocumentoTipo" />
-                <ScalarProperty Name="IdRetencion" ColumnName="IdRetencion" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="cp_proveedor_clase">
             <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_proveedor_clase">
               <MappingFragment StoreEntitySet="cp_proveedor_clase">
@@ -4677,6 +4651,38 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
                 <ScalarProperty Name="pa_ctacble_iva" ColumnName="pa_ctacble_iva" />
                 <ScalarProperty Name="pa_ctacble_deudora" ColumnName="pa_ctacble_deudora" />
                 <ScalarProperty Name="pa_TipoCbte_OG" ColumnName="pa_TipoCbte_OG" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwcp_retencion">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.vwcp_retencion">
+              <MappingFragment StoreEntitySet="vwcp_retencion">
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="ct_IdCbteCble" ColumnName="ct_IdCbteCble" />
+                <ScalarProperty Name="ct_IdTipoCbte" ColumnName="ct_IdTipoCbte" />
+                <ScalarProperty Name="re_Tiene_RFuente" ColumnName="re_Tiene_RFuente" />
+                <ScalarProperty Name="pe_razonSocial" ColumnName="pe_razonSocial" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="co_valoriva" ColumnName="co_valoriva" />
+                <ScalarProperty Name="co_baseImponible" ColumnName="co_baseImponible" />
+                <ScalarProperty Name="co_subtotal_siniva" ColumnName="co_subtotal_siniva" />
+                <ScalarProperty Name="co_subtotal_iva" ColumnName="co_subtotal_iva" />
+                <ScalarProperty Name="co_factura" ColumnName="co_factura" />
+                <ScalarProperty Name="co_serie" ColumnName="co_serie" />
+                <ScalarProperty Name="re_Tiene_RTiva" ColumnName="re_Tiene_RTiva" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="Fecha_Autorizacion" ColumnName="Fecha_Autorizacion" />
+                <ScalarProperty Name="NAutorizacion" ColumnName="NAutorizacion" />
+                <ScalarProperty Name="NumRetencion" ColumnName="NumRetencion" />
+                <ScalarProperty Name="serie2" ColumnName="serie2" />
+                <ScalarProperty Name="serie1" ColumnName="serie1" />
+                <ScalarProperty Name="CodDocumentoTipo" ColumnName="CodDocumentoTipo" />
+                <ScalarProperty Name="IdRetencion" ColumnName="IdRetencion" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

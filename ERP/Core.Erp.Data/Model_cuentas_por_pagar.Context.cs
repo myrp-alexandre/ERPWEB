@@ -15,6 +15,7 @@ namespace Core.Erp.Data
     using System.Data.Entity.Core.Objects;
     using System.Linq;
 
+
     public partial class Entities_cuentas_por_pagar : DbContext
     {
         public Entities_cuentas_por_pagar()
@@ -53,7 +54,6 @@ namespace Core.Erp.Data
         public DbSet<vwcp_orden_pago> vwcp_orden_pago { get; set; }
         public DbSet<vwcp_proveedor_consulta> vwcp_proveedor_consulta { get; set; }
         public DbSet<vwcp_nota_DebCre> vwcp_nota_DebCre { get; set; }
-        public DbSet<vwcp_retencion> vwcp_retencion { get; set; }
         public DbSet<cp_proveedor_clase> cp_proveedor_clase { get; set; }
         public DbSet<vwcp_orden_giro> vwcp_orden_giro { get; set; }
         public DbSet<vwcp_orden_pago_con_cancelacion> vwcp_orden_pago_con_cancelacion { get; set; }
@@ -63,6 +63,7 @@ namespace Core.Erp.Data
         public DbSet<cp_orden_giro_x_in_Ing_Egr_Inven> cp_orden_giro_x_in_Ing_Egr_Inven { get; set; }
         public DbSet<vwcp_orden_giro_det> vwcp_orden_giro_det { get; set; }
         public DbSet<cp_parametros> cp_parametros { get; set; }
+        public DbSet<vwcp_retencion> vwcp_retencion { get; set; }
     
         public virtual ObjectResult<spcp_Get_Data_orden_pago_con_cancelacion_data_Result> spcp_Get_Data_orden_pago_con_cancelacion_data(Nullable<int> idEmpresa, Nullable<decimal> idPersona_ini, Nullable<decimal> idPersona_fin, string idTipoPersona, Nullable<decimal> idEntidad_ini, Nullable<decimal> idEntidad_fin, string idEstado_Aprobacion, string idUsuario, Nullable<bool> mostrar_saldo_0)
         {

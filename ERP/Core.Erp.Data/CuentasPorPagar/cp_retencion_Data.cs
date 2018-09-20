@@ -38,7 +38,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  co_serie = item.co_serie,
                                  co_factura = item.co_factura,
                                  co_baseImponible = item.co_baseImponible,
-                                 Estado = item.Estado
+                                 Estado = item.Estado,
+                                 pe_nombreCompleto=item.pe_nombreCompleto
 
                              }).ToList();
                 }

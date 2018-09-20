@@ -39,5 +39,6 @@ namespace Core.Erp.Data
         public decimal ct_IdCbteCble { get; set; }
         public decimal IdProveedor { get; set; }
         public string Estado { get; set; }
+        public string pe_nombreCompleto { get; set; }
     }
 }

@@ -59,6 +59,8 @@ namespace Core.Erp.Info.CuentasPorPagar
 
         public List<cp_retencion_det_Info> detalle { get; set; }
         public ct_cbtecble_Info info_comprobante { get; set; }
+        public string pe_nombreCompleto { get; set; }
+
         public cp_retencion_Info()
         {
             detalle = new List<cp_retencion_det_Info>();

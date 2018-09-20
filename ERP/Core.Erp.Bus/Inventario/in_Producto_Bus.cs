@@ -141,7 +141,8 @@ namespace Core.Erp.Bus.Inventario
                     info_new_lote.Estado = "A";
                     info_new_lote.Fecha_Transac = DateTime.Now;
                     info_new_lote.Aparece_modu_Ventas = false;
-                    info_new_lote.Aparece_modu_Inventario = true;                    
+                    info_new_lote.Aparece_modu_Inventario = true;
+                    info_new_lote.IdProductoTipo = 4;                 
                 }
                 return odata.guardarDB(info_new_lote);
             }
