@@ -117,5 +117,19 @@ namespace Core.Erp.Bus.SeguridadAcceso
                 throw;
             }
         }
+
+        public bool ResetearContrasenia(string IdUsuario, string Contrasena)
+        {
+            try
+            {
+                Contrasena = cl_funciones.convertir_string_MD5Hash(Contrasena == null ? "" : Contrasena);
+                return odata.ResetearContrasenia(IdUsuario, Contrasena);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

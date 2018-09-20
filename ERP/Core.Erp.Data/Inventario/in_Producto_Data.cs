@@ -411,18 +411,22 @@ namespace Core.Erp.Data.Inventario
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
                     });
-                    foreach (var item in info.lst_producto_x_bodega)
+                    if (info.lst_producto_x_bodega != null)
                     {
-                        Context.in_producto_x_tb_bodega.Add(new in_producto_x_tb_bodega
+                        foreach (var item in info.lst_producto_x_bodega)
                         {
-                            IdEmpresa = info.IdEmpresa,
-                            IdProducto = info.IdProducto,
-                            IdSucursal = item.IdSucursal,
-                            IdBodega = item.IdBodega,
-                            Stock_minimo=item.Stock_minimo
-                        });
+                            Context.in_producto_x_tb_bodega.Add(new in_producto_x_tb_bodega
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdProducto = info.IdProducto,
+                                IdSucursal = item.IdSucursal,
+                                IdBodega = item.IdBodega,
+                                Stock_minimo = item.Stock_minimo
+                            });
 
+                        }
                     }
+                    
 
                     var parametros = Context.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                     if (parametros.P_se_crea_lote_0_al_crear_producto_matriz == true)
@@ -479,19 +483,23 @@ namespace Core.Erp.Data.Inventario
                                 IdUsuario = info.IdUsuario,
                                 Fecha_Transac = DateTime.Now
                             });
-                            foreach (var item in info.lst_producto_x_bodega)
+                            if (info.lst_producto_x_bodega != null)
                             {
-                                Context.in_producto_x_tb_bodega.Add(new in_producto_x_tb_bodega
+                                foreach (var item in info.lst_producto_x_bodega)
                                 {
-                                    IdEmpresa = info.IdEmpresa,
-                                    IdProducto = info.IdProducto+1,
-                                    IdSucursal = item.IdSucursal,
-                                    IdBodega = item.IdBodega,
-                                    Stock_minimo = item.Stock_minimo
+                                    Context.in_producto_x_tb_bodega.Add(new in_producto_x_tb_bodega
+                                    {
+                                        IdEmpresa = info.IdEmpresa,
+                                        IdProducto = info.IdProducto + 1,
+                                        IdSucursal = item.IdSucursal,
+                                        IdBodega = item.IdBodega,
+                                        Stock_minimo = item.Stock_minimo
 
-                                });
+                                    });
 
+                                }
                             }
+                            
                         }
                     }
                     

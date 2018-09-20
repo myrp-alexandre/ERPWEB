@@ -11,7 +11,7 @@
 
 @using (Html.BeginForm("Modificar", "Usuario", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdUsuario)
+    @Html.HiddenFor(q => q.IdUsuario, new { @id = "IdUsuario" })
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -106,8 +106,9 @@
     </div>
 
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-primary" id="btn_guardar">Guardar</button>        
         <a class="btn btn-default" href="@Url.Action("Index","Usuario",new { Area = "SeguridadAcceso" },null)">Cancelar</a>
+        <button type="button" class="btn btn-danger" onclick="ResetearContrasena();" id="btn_resetear">Resetear contraseña</button>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
@@ -123,6 +124,38 @@
             $("#div_admin").hide();
     });
 
+    function ResetearContrasena() {
+        var r = confirm("A continuación se reseteará la contraseña del usuario " + $("#IdUsuario").val() + ", se le asignará la contraseña por defecto: 1234, ¿Desea continuar?");
+        if (r == true) {
+            $("#btn_guardar").attr("disabled", true);
+            $("#btn_resetear").attr("disabled", true);
+            var datos = {
+                IdUsuario: $("#IdUsuario").val()
+            }
 
-  
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("ResetearContrasena", "Usuario",new { Area = "SeguridadAcceso"})',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data = 1) {
+                        alert("Se ha reseteado la contraseña del usuario " + $("#IdUsuario").val() + " exitósamente.");
+                        window.location.href = '@Url.Action("Index", "Usuario", new { Area = "SeguridadAcceso" })'
+                    } else {
+                        alert("No se ha reseteado la contraseña del usuario " + $("#IdUsuario").val());
+                        $("#btn_guardar").attr("disabled", false);
+                        $("#btn_resetear").attr("disabled", false);
+                    }
+                },
+                error: function (error) {
+                }
+            });
+        }        
+    }
+
 </script>

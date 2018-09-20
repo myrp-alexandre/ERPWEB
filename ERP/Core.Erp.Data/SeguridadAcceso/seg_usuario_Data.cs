@@ -232,5 +232,27 @@ namespace Core.Erp.Data.SeguridadAcceso
                 throw;
             }
         }
+
+        public bool ResetearContrasenia(string IdUsuario, string Contrasena)
+        {
+            try
+            {
+                using (Entities_seguridad_acceso Context = new Entities_seguridad_acceso())
+                {
+                    var usuario = Context.seg_usuario.Where(q => q.IdUsuario == IdUsuario).FirstOrDefault();
+                    if (usuario == null) return false;
+                    usuario.Contrasena = Contrasena;
+                    usuario.CambiarContraseniaSgtSesion = true;
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

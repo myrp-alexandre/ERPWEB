@@ -136,5 +136,16 @@ namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+        #region Json
+        public JsonResult ResetearContrasena(string IdUsuario = "")
+        {
+            int resultado = 0;
+
+            if(bus_usuario.ResetearContrasenia(IdUsuario,"1234"))
+                resultado = 1;
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }
