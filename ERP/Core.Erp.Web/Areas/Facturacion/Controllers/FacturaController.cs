@@ -867,9 +867,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 foreach (var item in array)
                 {
                     var pf = lst.Where(q => q.secuencial == item).FirstOrDefault();
-                    if(pf != null)
-                        if (lst_det_f.Where(q=>q.IdEmpresa_pf == pf.IdEmpresa_pf && q.IdSucursal_pf == pf.IdSucursal_pf && q.IdProforma == pf.IdProforma && q.Secuencia_pf == pf.Secuencia_pf).Count() == 0)
+                    if (pf != null)
+                        if (lst_det_f.Where(q => q.IdEmpresa_pf == pf.IdEmpresa_pf && q.IdSucursal_pf == pf.IdSucursal_pf && q.IdProforma == pf.IdProforma && q.Secuencia_pf == pf.Secuencia_pf).Count() == 0)
+                        {
+                            pf.Secuencia = lst_det_f.Count == 0 ? 1 : lst_det_f.Max(q => q.Secuencia) + 1;
                             lst_det_f.Add(pf);
+                        }
                 }
                 List_det.set_list(lst_det_f,IdTransaccionSession);
             }
