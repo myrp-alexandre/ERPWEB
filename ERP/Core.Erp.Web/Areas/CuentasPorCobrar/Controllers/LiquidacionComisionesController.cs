@@ -159,10 +159,10 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 
         #endregion
 
-        public JsonResult get_list(int IdEmpresa = 0 ,  int IdLiquidacion = 0, decimal IdTransaccionSession = 0)
+        public JsonResult get_list_x_liquidar(int IdEmpresa = 0 , decimal IdTransaccionSession = 0, int IdVendedor = 0)
         {
-            var resultado = bus_det.get_list(IdEmpresa, IdLiquidacion);
-            List_det.set_list(new List<cxc_liquidacion_comisiones_det_Info>(), IdTransaccionSession);
+            var resultado = bus_det.get_list_x_liquidar(IdEmpresa, IdVendedor);
+            List_det.set_list(resultado, IdTransaccionSession);
             return Json(resultado, JsonRequestBehavior.AllowGet);
                 
        }

@@ -23,5 +23,18 @@ namespace Core.Erp.Bus.CuentasPorCobrar
                 throw;
             }
         }
+
+        public List<cxc_liquidacion_comisiones_det_Info> get_list_x_liquidar(int IdEmpresa, int IdVendedor)
+        {
+            try
+            {
+                return odata.get_list_x_liquidar(IdEmpresa, IdVendedor);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

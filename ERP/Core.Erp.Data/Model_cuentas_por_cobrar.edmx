@@ -221,8 +221,8 @@
           <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
           <Property Name="FechaUltMod" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_cartera_x_cobrar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_cartera_x_cobrar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcxc_cartera_x_cobrar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -267,13 +267,16 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_cartera_x_cobrar' 
           <Property Name="em_nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_liquidacion_comisiones_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_liquidacion_comisiones_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcxc_liquidacion_comisiones_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdLiquidacion" />
             <PropertyRef Name="Ve_Vendedor" />
+            <PropertyRef Name="vt_Subtotal" />
+            <PropertyRef Name="vt_iva" />
+            <PropertyRef Name="vt_total" />
             <PropertyRef Name="IdVendedor" />
             <PropertyRef Name="PorComision" />
             <PropertyRef Name="SubtotalFactura" />
@@ -302,9 +305,9 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_liquidacion_comisi
           <Property Name="nom_TerminoPago" Type="varchar" MaxLength="50" />
           <Property Name="vt_fecha" Type="datetime" />
           <Property Name="vt_fech_venc" Type="datetime" />
-          <Property Name="vt_Subtotal" Type="float" />
-          <Property Name="vt_iva" Type="float" />
-          <Property Name="vt_total" Type="float" />
+          <Property Name="vt_Subtotal" Type="float" Nullable="false" />
+          <Property Name="vt_iva" Type="float" Nullable="false" />
+          <Property Name="vt_total" Type="float" Nullable="false" />
           <Property Name="IdVendedor" Type="int" Nullable="false" />
           <Property Name="PorComision" Type="float" Nullable="false" />
           <Property Name="SubtotalFactura" Type="float" Nullable="false" />
@@ -318,8 +321,8 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_liquidacion_comisi
           <Property Name="TotalLiquidacion" Type="float" Nullable="false" />
           <Property Name="NoComisiona" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_liquidacion_comisiones_det_x_comisionar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_liquidacion_comisiones_det_x_comisionar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcxc_liquidacion_comisiones_det_x_comisionar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -332,9 +335,14 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_liquidacion_comisi
             <PropertyRef Name="nom_TerminoPago" />
             <PropertyRef Name="vt_fecha" />
             <PropertyRef Name="vt_fech_venc" />
+            <PropertyRef Name="vt_Subtotal" />
+            <PropertyRef Name="vt_iva" />
+            <PropertyRef Name="vt_total" />
             <PropertyRef Name="valor_cobro" />
             <PropertyRef Name="ESTADO_COBRO" />
+            <PropertyRef Name="TotalAComisionar" />
             <PropertyRef Name="TotalComisionado" />
+            <PropertyRef Name="SaldoPorComisionar" />
             <PropertyRef Name="IdVendedor" />
             <PropertyRef Name="PorComision" />
           </Key>
@@ -352,19 +360,19 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_liquidacion_comisi
           <Property Name="nom_TerminoPago" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="vt_fecha" Type="datetime" Nullable="false" />
           <Property Name="vt_fech_venc" Type="datetime" Nullable="false" />
-          <Property Name="vt_Subtotal" Type="float" />
-          <Property Name="vt_iva" Type="float" />
-          <Property Name="vt_total" Type="float" />
+          <Property Name="vt_Subtotal" Type="float" Nullable="false" />
+          <Property Name="vt_iva" Type="float" Nullable="false" />
+          <Property Name="vt_total" Type="float" Nullable="false" />
           <Property Name="valor_cobro" Type="float" Nullable="false" />
           <Property Name="ESTADO_COBRO" Type="varchar" MaxLength="9" Nullable="false" />
-          <Property Name="TotalAComisionar" Type="float" />
+          <Property Name="TotalAComisionar" Type="float" Nullable="false" />
           <Property Name="TotalComisionado" Type="float" Nullable="false" />
-          <Property Name="SaldoPorComisionar" Type="float" />
+          <Property Name="SaldoPorComisionar" Type="float" Nullable="false" />
           <Property Name="IdVendedor" Type="int" Nullable="false" />
           <Property Name="PorComision" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcxc_cobro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -391,8 +399,8 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro' does not ha
           <Property Name="cr_NumDocumento" Type="varchar" MaxLength="100" />
           <Property Name="nom_Motivo_tipo_cobro" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcxc_cobro_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -432,8 +440,8 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_det' does no
           <Property Name="IdCliente" Type="numeric" Precision="18" Scale="0" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="1000" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_det_retencion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_det_retencion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcxc_cobro_det_retencion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -463,8 +471,8 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_det_retencio
           <Property Name="cr_NumDocumento" Type="varchar" MaxLength="100" />
           <Property Name="cr_fecha" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_retencion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_retencion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcxc_cobro_para_retencion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1255,13 +1263,13 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
           <EntitySet Name="vwcxc_cartera_x_cobrar" EntityType="Model_cuentas_por_cobrar.vwcxc_cartera_x_cobrar" />
           <EntitySet Name="cxc_liquidacion_comisiones" EntityType="Model_cuentas_por_cobrar.cxc_liquidacion_comisiones" />
           <EntitySet Name="cxc_Parametro" EntityType="Model_cuentas_por_cobrar.cxc_Parametro" />
-          <EntitySet Name="vwcxc_liquidacion_comisiones_det" EntityType="Model_cuentas_por_cobrar.vwcxc_liquidacion_comisiones_det" />
-          <EntitySet Name="vwcxc_liquidacion_comisiones_det_x_comisionar" EntityType="Model_cuentas_por_cobrar.vwcxc_liquidacion_comisiones_det_x_comisionar" />
           <EntitySet Name="cxc_liquidacion_comisiones_det" EntityType="Model_cuentas_por_cobrar.cxc_liquidacion_comisiones_det" />
           <AssociationSet Name="FK_cxc_liquidacion_comisiones_det_cxc_liquidacion_comisiones" Association="Model_cuentas_por_cobrar.FK_cxc_liquidacion_comisiones_det_cxc_liquidacion_comisiones">
             <End Role="cxc_liquidacion_comisiones" EntitySet="cxc_liquidacion_comisiones" />
             <End Role="cxc_liquidacion_comisiones_det" EntitySet="cxc_liquidacion_comisiones_det" />
           </AssociationSet>
+          <EntitySet Name="vwcxc_liquidacion_comisiones_det" EntityType="Model_cuentas_por_cobrar.vwcxc_liquidacion_comisiones_det" />
+          <EntitySet Name="vwcxc_liquidacion_comisiones_det_x_comisionar" EntityType="Model_cuentas_por_cobrar.vwcxc_liquidacion_comisiones_det_x_comisionar" />
         </EntityContainer>
         <EntityType Name="vwcxc_cartera_x_cobrar">
           <Key>
@@ -1341,98 +1349,6 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
           <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="vwcxc_liquidacion_comisiones_det">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdLiquidacion" />
-            <PropertyRef Name="Ve_Vendedor" />
-            <PropertyRef Name="IdVendedor" />
-            <PropertyRef Name="PorComision" />
-            <PropertyRef Name="SubtotalFactura" />
-            <PropertyRef Name="IvaFactura" />
-            <PropertyRef Name="TotalFactura" />
-            <PropertyRef Name="TotalCobrado" />
-            <PropertyRef Name="BaseComision" />
-            <PropertyRef Name="PorcentajeComision" />
-            <PropertyRef Name="TotalAComisionar" />
-            <PropertyRef Name="TotalComisionado" />
-            <PropertyRef Name="TotalLiquidacion" />
-            <PropertyRef Name="NoComisiona" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdLiquidacion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdSucursal" Type="Int32" />
-          <Property Name="IdBodega" Type="Int32" />
-          <Property Name="IdCbteVta" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="vt_tipoDoc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="vt_serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="vt_serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Nombres" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Ve_Vendedor" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomInterno" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="nom_TerminoPago" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="vt_fecha" Type="DateTime" Precision="3" />
-          <Property Name="vt_fech_venc" Type="DateTime" Precision="3" />
-          <Property Name="vt_Subtotal" Type="Double" />
-          <Property Name="vt_iva" Type="Double" />
-          <Property Name="vt_total" Type="Double" />
-          <Property Name="IdVendedor" Type="Int32" Nullable="false" />
-          <Property Name="PorComision" Type="Double" Nullable="false" />
-          <Property Name="SubtotalFactura" Type="Double" Nullable="false" />
-          <Property Name="IvaFactura" Type="Double" Nullable="false" />
-          <Property Name="TotalFactura" Type="Double" Nullable="false" />
-          <Property Name="TotalCobrado" Type="Double" Nullable="false" />
-          <Property Name="BaseComision" Type="Double" Nullable="false" />
-          <Property Name="PorcentajeComision" Type="Double" Nullable="false" />
-          <Property Name="TotalAComisionar" Type="Double" Nullable="false" />
-          <Property Name="TotalComisionado" Type="Double" Nullable="false" />
-          <Property Name="TotalLiquidacion" Type="Double" Nullable="false" />
-          <Property Name="NoComisiona" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="vwcxc_liquidacion_comisiones_det_x_comisionar">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdBodega" />
-            <PropertyRef Name="IdCbteVta" />
-            <PropertyRef Name="vt_tipoDoc" />
-            <PropertyRef Name="Nombres" />
-            <PropertyRef Name="Ve_Vendedor" />
-            <PropertyRef Name="nom_TerminoPago" />
-            <PropertyRef Name="vt_fecha" />
-            <PropertyRef Name="vt_fech_venc" />
-            <PropertyRef Name="valor_cobro" />
-            <PropertyRef Name="ESTADO_COBRO" />
-            <PropertyRef Name="TotalComisionado" />
-            <PropertyRef Name="IdVendedor" />
-            <PropertyRef Name="PorComision" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdBodega" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="vt_tipoDoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="vt_serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="vt_serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Ve_Vendedor" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomInterno" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="nom_TerminoPago" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="vt_fech_venc" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="vt_Subtotal" Type="Double" />
-          <Property Name="vt_iva" Type="Double" />
-          <Property Name="vt_total" Type="Double" />
-          <Property Name="valor_cobro" Type="Double" Nullable="false" />
-          <Property Name="ESTADO_COBRO" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="TotalAComisionar" Type="Double" />
-          <Property Name="TotalComisionado" Type="Double" Nullable="false" />
-          <Property Name="SaldoPorComisionar" Type="Double" />
-          <Property Name="IdVendedor" Type="Int32" Nullable="false" />
-          <Property Name="PorComision" Type="Double" Nullable="false" />
-        </EntityType>
         <EntityType Name="cxc_liquidacion_comisiones_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1473,6 +1389,106 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwcxc_liquidacion_comisiones_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdLiquidacion" />
+            <PropertyRef Name="Ve_Vendedor" />
+            <PropertyRef Name="vt_Subtotal" />
+            <PropertyRef Name="vt_iva" />
+            <PropertyRef Name="vt_total" />
+            <PropertyRef Name="IdVendedor" />
+            <PropertyRef Name="PorComision" />
+            <PropertyRef Name="SubtotalFactura" />
+            <PropertyRef Name="IvaFactura" />
+            <PropertyRef Name="TotalFactura" />
+            <PropertyRef Name="TotalCobrado" />
+            <PropertyRef Name="BaseComision" />
+            <PropertyRef Name="PorcentajeComision" />
+            <PropertyRef Name="TotalAComisionar" />
+            <PropertyRef Name="TotalComisionado" />
+            <PropertyRef Name="TotalLiquidacion" />
+            <PropertyRef Name="NoComisiona" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdLiquidacion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdSucursal" Type="Int32" />
+          <Property Name="IdBodega" Type="Int32" />
+          <Property Name="IdCbteVta" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="vt_tipoDoc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="vt_serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="vt_serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Nombres" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Ve_Vendedor" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomInterno" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="nom_TerminoPago" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="vt_fecha" Type="DateTime" Precision="3" />
+          <Property Name="vt_fech_venc" Type="DateTime" Precision="3" />
+          <Property Name="vt_Subtotal" Type="Double" Nullable="false" />
+          <Property Name="vt_iva" Type="Double" Nullable="false" />
+          <Property Name="vt_total" Type="Double" Nullable="false" />
+          <Property Name="IdVendedor" Type="Int32" Nullable="false" />
+          <Property Name="PorComision" Type="Double" Nullable="false" />
+          <Property Name="SubtotalFactura" Type="Double" Nullable="false" />
+          <Property Name="IvaFactura" Type="Double" Nullable="false" />
+          <Property Name="TotalFactura" Type="Double" Nullable="false" />
+          <Property Name="TotalCobrado" Type="Double" Nullable="false" />
+          <Property Name="BaseComision" Type="Double" Nullable="false" />
+          <Property Name="PorcentajeComision" Type="Double" Nullable="false" />
+          <Property Name="TotalAComisionar" Type="Double" Nullable="false" />
+          <Property Name="TotalComisionado" Type="Double" Nullable="false" />
+          <Property Name="TotalLiquidacion" Type="Double" Nullable="false" />
+          <Property Name="NoComisiona" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwcxc_liquidacion_comisiones_det_x_comisionar">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+            <PropertyRef Name="vt_tipoDoc" />
+            <PropertyRef Name="Nombres" />
+            <PropertyRef Name="Ve_Vendedor" />
+            <PropertyRef Name="nom_TerminoPago" />
+            <PropertyRef Name="vt_fecha" />
+            <PropertyRef Name="vt_fech_venc" />
+            <PropertyRef Name="vt_Subtotal" />
+            <PropertyRef Name="vt_iva" />
+            <PropertyRef Name="vt_total" />
+            <PropertyRef Name="valor_cobro" />
+            <PropertyRef Name="ESTADO_COBRO" />
+            <PropertyRef Name="TotalAComisionar" />
+            <PropertyRef Name="TotalComisionado" />
+            <PropertyRef Name="SaldoPorComisionar" />
+            <PropertyRef Name="IdVendedor" />
+            <PropertyRef Name="PorComision" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="vt_tipoDoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="vt_serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="vt_serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Ve_Vendedor" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomInterno" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="nom_TerminoPago" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="vt_fech_venc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="vt_Subtotal" Type="Double" Nullable="false" />
+          <Property Name="vt_iva" Type="Double" Nullable="false" />
+          <Property Name="vt_total" Type="Double" Nullable="false" />
+          <Property Name="valor_cobro" Type="Double" Nullable="false" />
+          <Property Name="ESTADO_COBRO" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="TotalAComisionar" Type="Double" Nullable="false" />
+          <Property Name="TotalComisionado" Type="Double" Nullable="false" />
+          <Property Name="SaldoPorComisionar" Type="Double" Nullable="false" />
+          <Property Name="IdVendedor" Type="Int32" Nullable="false" />
+          <Property Name="PorComision" Type="Double" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1786,6 +1802,30 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="cxc_liquidacion_comisiones_det">
+            <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.cxc_liquidacion_comisiones_det">
+              <MappingFragment StoreEntitySet="cxc_liquidacion_comisiones_det">
+                <ScalarProperty Name="NoComisiona" ColumnName="NoComisiona" />
+                <ScalarProperty Name="TotalLiquidacion" ColumnName="TotalLiquidacion" />
+                <ScalarProperty Name="TotalComisionado" ColumnName="TotalComisionado" />
+                <ScalarProperty Name="TotalAComisionar" ColumnName="TotalAComisionar" />
+                <ScalarProperty Name="PorcentajeComision" ColumnName="PorcentajeComision" />
+                <ScalarProperty Name="BaseComision" ColumnName="BaseComision" />
+                <ScalarProperty Name="TotalCobrado" ColumnName="TotalCobrado" />
+                <ScalarProperty Name="TotalFactura" ColumnName="TotalFactura" />
+                <ScalarProperty Name="IvaFactura" ColumnName="IvaFactura" />
+                <ScalarProperty Name="SubtotalFactura" ColumnName="SubtotalFactura" />
+                <ScalarProperty Name="fa_IdCbteVta" ColumnName="fa_IdCbteVta" />
+                <ScalarProperty Name="fa_IdBodega" ColumnName="fa_IdBodega" />
+                <ScalarProperty Name="fa_IdSucursal" ColumnName="fa_IdSucursal" />
+                <ScalarProperty Name="fa_IdEmpresa" ColumnName="fa_IdEmpresa" />
+                <ScalarProperty Name="IdVendedor" ColumnName="IdVendedor" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="vwcxc_liquidacion_comisiones_det">
             <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.vwcxc_liquidacion_comisiones_det">
               <MappingFragment StoreEntitySet="vwcxc_liquidacion_comisiones_det">
@@ -1848,30 +1888,6 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
                 <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
                 <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="cxc_liquidacion_comisiones_det">
-            <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.cxc_liquidacion_comisiones_det">
-              <MappingFragment StoreEntitySet="cxc_liquidacion_comisiones_det">
-                <ScalarProperty Name="NoComisiona" ColumnName="NoComisiona" />
-                <ScalarProperty Name="TotalLiquidacion" ColumnName="TotalLiquidacion" />
-                <ScalarProperty Name="TotalComisionado" ColumnName="TotalComisionado" />
-                <ScalarProperty Name="TotalAComisionar" ColumnName="TotalAComisionar" />
-                <ScalarProperty Name="PorcentajeComision" ColumnName="PorcentajeComision" />
-                <ScalarProperty Name="BaseComision" ColumnName="BaseComision" />
-                <ScalarProperty Name="TotalCobrado" ColumnName="TotalCobrado" />
-                <ScalarProperty Name="TotalFactura" ColumnName="TotalFactura" />
-                <ScalarProperty Name="IvaFactura" ColumnName="IvaFactura" />
-                <ScalarProperty Name="SubtotalFactura" ColumnName="SubtotalFactura" />
-                <ScalarProperty Name="fa_IdCbteVta" ColumnName="fa_IdCbteVta" />
-                <ScalarProperty Name="fa_IdBodega" ColumnName="fa_IdBodega" />
-                <ScalarProperty Name="fa_IdSucursal" ColumnName="fa_IdSucursal" />
-                <ScalarProperty Name="fa_IdEmpresa" ColumnName="fa_IdEmpresa" />
-                <ScalarProperty Name="IdVendedor" ColumnName="IdVendedor" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

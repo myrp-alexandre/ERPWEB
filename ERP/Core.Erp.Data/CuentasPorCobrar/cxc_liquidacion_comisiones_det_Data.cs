@@ -50,5 +50,46 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 throw;
             }
         }
+
+        public List<cxc_liquidacion_comisiones_det_Info> get_list_x_liquidar(int IdEmpresa, int IdVendedor)
+        {
+            try
+            {
+                List<cxc_liquidacion_comisiones_det_Info> Lista;
+                using (Entities_cuentas_por_cobrar Context = new Entities_cuentas_por_cobrar())
+                {
+                    Lista = (from q in Context.vwcxc_liquidacion_comisiones_det_x_comisionar
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdVendedor == IdVendedor
+                             select new cxc_liquidacion_comisiones_det_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdVendedor = q.IdVendedor,
+                                 PorcentajeComision = q.PorComision,
+                                 SubtotalFactura = q.vt_Subtotal,
+                                 IvaFactura = q.vt_iva,
+                                 TotalFactura = q.vt_total,
+                                 TotalCobrado = q.valor_cobro,
+                                 BaseComision = q.vt_Subtotal,
+                                 TotalAComisionar = q.TotalAComisionar,
+                                 TotalComisionado = q.TotalComisionado,
+                                 TotalLiquidacion = q.SaldoPorComisionar,
+                                 NoComisiona = false,
+                                 fa_IdBodega = q.IdBodega,
+                                 fa_IdCbteVta = q.IdCbteVta,
+                                 fa_IdEmpresa = q.IdEmpresa,
+                                 fa_IdSucursal = q.IdSucursal
+                             }).ToList();
+                    int Secuencia = 1;
+                    Lista.ForEach(q => q.Secuencia = Secuencia++);
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
