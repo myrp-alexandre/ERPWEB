@@ -27,6 +27,6 @@
         settings.Properties.AllowNull = true;
     })
     .BindList(new Core.Erp.Web.Areas.Reportes.Controllers.CuentasPorCobrarReportesController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Reportes.Controllers.CuentasPorCobrarReportesController().get_info_bajo_demanda)
-    .Bind(Model.IdCliente);
+    .Bind(Model);
 }
 @comboBox.GetHtml()

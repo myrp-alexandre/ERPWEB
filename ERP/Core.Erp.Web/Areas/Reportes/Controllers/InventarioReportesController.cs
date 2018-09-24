@@ -384,7 +384,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.p_IdSucursal.Value = model.IdSucursal;
                 report.p_IdBodega.Value = model.IdBodega;
                 report.P_IdProductoPadre.Value = model.IdProductoPadre == null ? 0 : model.IdProductoPadre;
-                report.p_IdProducto.Value = model.IdProducto == null ? 0 : model.IdProducto;
+                report.p_IdProducto.Value = model.IdProducto;
                 report.p_IdUsuario.Value = SessionFixed.IdUsuario;
                 report.p_fecha_ini.Value = model.fecha_ini;
                 report.p_fecha_fin.Value = model.fecha_fin;
@@ -403,7 +403,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.p_IdSucursal.Value = model.IdSucursal;
                 report.p_IdBodega.Value = model.IdBodega;
                 report.P_IdProductoPadre.Value = model.IdProductoPadre == null ? 0 : model.IdProductoPadre;
-                report.p_IdProducto.Value = model.IdProducto == null ? 0 : model.IdProducto;
+                report.p_IdProducto.Value = model.IdProducto;
                 report.p_IdUsuario.Value = SessionFixed.IdUsuario;
                 report.p_fecha_ini.Value = model.fecha_ini;
                 report.p_fecha_fin.Value = model.fecha_fin;
@@ -422,7 +422,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             cl_filtros_inventario_Info model = new cl_filtros_inventario_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdProducto = 0,
+                IdProductoPadre = 0
             };
 
             cargar_combos(model);
@@ -433,7 +435,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model_detalle.p_IdSucursal.Value = model.IdSucursal;
                 model_detalle.p_IdBodega.Value = model.IdBodega;
                 model_detalle.P_IdProductoPadre.Value = model.IdProductoPadre == null ? 0 : model.IdProductoPadre;
-                model_detalle.p_IdProducto.Value = model.IdProducto == null ? 0 : model.IdProducto;
+                model_detalle.p_IdProducto.Value = model.IdProducto;
                 model_detalle.p_IdUsuario.Value = SessionFixed.IdUsuario;
                 model_detalle.p_fecha_ini.Value = model.fecha_ini;
                 model_detalle.p_fecha_fin.Value = model.fecha_fin;
@@ -451,7 +453,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model_resumen.p_IdSucursal.Value = model.IdSucursal;
                 model_resumen.p_IdBodega.Value = model.IdBodega;
                 model_resumen.P_IdProductoPadre.Value = model.IdProductoPadre == null ? 0 : model.IdProductoPadre;
-                model_resumen.p_IdProducto.Value = model.IdProducto == null ? 0 : model.IdProducto;
+                model_resumen.p_IdProducto.Value = model.IdProducto;
                 model_resumen.p_IdUsuario.Value = SessionFixed.IdUsuario;
                 model_resumen.p_fecha_ini.Value = model.fecha_ini;
                 model_resumen.p_fecha_fin.Value = model.fecha_fin;

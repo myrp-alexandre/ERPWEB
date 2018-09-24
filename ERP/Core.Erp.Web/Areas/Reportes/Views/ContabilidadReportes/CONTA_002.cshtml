@@ -31,23 +31,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="IdCtaCble">Cuenta contable</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble, settings =>
-                       {
-                           settings.Name = "IdCtaCble";
-                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                           settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                           settings.Properties.Columns.Add("pc_Cuenta", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                           //Campo ID
-                           settings.Properties.ValueField = "IdCtaCble";
-                           settings.Properties.ValueType = typeof(string);
-                           settings.Properties.TextField = "pc_Cuenta";
-                           //Boton para seleccionar ningun registro
-                           settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                           settings.Properties.NullText = "== Seleccione ==";
-                           settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                           settings.Properties.AllowNull = true;
-                       }).BindList(ViewBag.lst_cta).GetHtml()
+                            @Html.Partial("_CmbCuenta_contable_Conta", Model)
                             @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
                         </div>
                     </div>

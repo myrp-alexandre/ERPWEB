@@ -104,7 +104,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         public ActionResult CXC_003()
         {
-            cl_filtros_Info model = new cl_filtros_Info
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
             {
                 IdCliente = 0
             };
@@ -121,7 +121,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult CXC_003(cl_filtros_Info model)
+        public ActionResult CXC_003(cl_filtros_facturacion_Info model)
         {
 
             CXC_003_Rpt report = new CXC_003_Rpt();

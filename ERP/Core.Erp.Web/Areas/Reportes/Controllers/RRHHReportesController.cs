@@ -115,9 +115,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
-                fecha_ini = fecha_ini == null ? DateTime.Now : Convert.ToDateTime(fecha_ini),
-                fecha_fin = fecha_fin == null ? DateTime.Now : Convert.ToDateTime(fecha_fin),
-                
+                IdEmpresa = IdEmpresa
                 
             };
             cargar_combos();

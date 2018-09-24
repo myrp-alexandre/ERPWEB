@@ -33,7 +33,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="IdCliente">Cliente</label>
-                        @Html.Partial("_CmbCliente_CXC", Model)
+                        @Html.Partial("_CmbCliente_CXC", Model.IdCliente)
                         @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
 
                     </div>
@@ -65,7 +65,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <div class="form-group">
                         <div class="checkbox">
                             <label for="Check1">@Html.CheckBoxFor(q => q.Check1) Mostrar cancelados</label>
@@ -106,10 +106,6 @@
             </div>
             }
         <script>
-            $(function () {
-                cargar_cliente();
-            });
-
         function cargar_cliente() {
             $("#IdClienteContacto").empty();
 

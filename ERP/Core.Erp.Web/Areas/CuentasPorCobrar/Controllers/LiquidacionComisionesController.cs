@@ -68,6 +68,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         [HttpPost]
         public ActionResult Nuevo(cxc_liquidacion_comisiones_Info model)
         {
+            model.IdUsuario = Session["IdUsuario"].ToString();
             model.lst_det = List_det.get_list(model.IdTransaccionSession);
             if (!bus_liq.guardarDB(model))
             {
@@ -99,6 +100,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         [HttpPost]
         public ActionResult Modificar(cxc_liquidacion_comisiones_Info model)
         {
+            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
             model.lst_det = List_det.get_list(model.IdTransaccionSession);
 
             if (!bus_liq.modificarDB(model))
@@ -129,7 +131,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         [HttpPost]
         public ActionResult Anular(cxc_liquidacion_comisiones_Info model)
         {
-
+            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
             if (!bus_liq.anularDB(model))
             {
                 cargar_combos(model.IdEmpresa);

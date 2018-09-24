@@ -9135,6 +9135,7 @@
     <Content Include="Areas\Compras\Views\OrdenCompraLocal\_CmbProducto_Compras.cshtml" />
     <Content Include="Areas\Compras\Views\OrdenCompraLocal\_GridViewPartial_ordencompralocal_det.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionComisiones\_GridViewPartial_liquidacion_det.cshtml" />
+    <Content Include="Areas\Reportes\Views\ContabilidadReportes\_CmbCuenta_contable_Conta.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -9249,6 +9250,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
