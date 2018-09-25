@@ -37,6 +37,7 @@ namespace Core.Erp.Web.Reportes.CuentasPorCobrar
             ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             ((XRSubreport)sender).ReportSource.Parameters["p_IdLiquidacion"].Value = p_IdLiquidacion.Value == null ? 0 : Convert.ToDecimal(p_IdLiquidacion.Value);
             ((XRSubreport)sender).ReportSource.RequestParameters = false;
+
         }
     }
 }
