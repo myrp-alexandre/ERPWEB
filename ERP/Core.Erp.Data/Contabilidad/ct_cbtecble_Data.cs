@@ -134,8 +134,13 @@ namespace Core.Erp.Data.Contabilidad
         {
             try
             {
+                info.IdPeriodo = Convert.ToInt32(info.cb_Fecha.Year.ToString() + info.cb_Fecha.Month.ToString("00"));
                 using (Entities_contabilidad Context = new Entities_contabilidad())
                 {
+                    var periodo = Context.ct_periodo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdPeriodo == info.IdPeriodo).FirstOrDefault();
+                    if (periodo == null)
+                        return false;
+
                     ct_cbtecble Entity = new ct_cbtecble
                     {
 
