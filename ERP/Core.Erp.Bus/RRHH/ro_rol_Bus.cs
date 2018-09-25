@@ -254,7 +254,7 @@ namespace Core.Erp.Bus.RRHH
                             oct_cbtecble_det_Info.dc_Valor_debe = valorTotal;
                         }
                         oct_cbtecble_det_Info.dc_Valor = valorTotal;
-                        oct_cbtecble_det_Info.dc_Observacion = item.ru_descripcion.Trim();
+                        oct_cbtecble_det_Info.dc_Observacion = item.ru_descripcion;
                         lst_detalle_diario.Add(oct_cbtecble_det_Info);
                     }
                                                     
@@ -305,10 +305,10 @@ namespace Core.Erp.Bus.RRHH
                         oct_cbtecble_det_Info.secuencia = secuencia;
                         oct_cbtecble_det_Info.IdEmpresa = idEmpresa;
                         oct_cbtecble_det_Info.IdTipoCbte = 1;
-                        oct_cbtecble_det_Info.IdCtaCble = item.IdCtaCble.Trim();
+                        oct_cbtecble_det_Info.IdCtaCble = item.IdCtaCble;
                         oct_cbtecble_det_Info.dc_Valor_debe = valorTotal;
                         oct_cbtecble_det_Info.dc_Valor = valorTotal;
-                        oct_cbtecble_det_Info.dc_Observacion = item.ru_descripcion.Trim();
+                        oct_cbtecble_det_Info.dc_Observacion = item.ru_descripcion;
                         lst_detalle_diario.Add(oct_cbtecble_det_Info);
 
                         secuencia++;
@@ -316,11 +316,11 @@ namespace Core.Erp.Bus.RRHH
                         oct_cbtecble_det_Info2.secuencia = secuencia;
                         oct_cbtecble_det_Info2.IdEmpresa = idEmpresa;
                         oct_cbtecble_det_Info2.IdTipoCbte = 1;
-                        oct_cbtecble_det_Info2.IdCtaCble = item.IdCtaCble_Haber.Trim(); 
+                        oct_cbtecble_det_Info2.IdCtaCble = item.IdCtaCble_Haber; 
                         oct_cbtecble_det_Info2.dc_Valor = valorTotal * -1;
                         oct_cbtecble_det_Info2.dc_Valor_haber = valorTotal ;
 
-                        oct_cbtecble_det_Info2.dc_Observacion = item.ru_descripcion.Trim();
+                        oct_cbtecble_det_Info2.dc_Observacion = item.ru_descripcion;
                         lst_detalle_diario.Add(oct_cbtecble_det_Info2);
                     }
                 }
