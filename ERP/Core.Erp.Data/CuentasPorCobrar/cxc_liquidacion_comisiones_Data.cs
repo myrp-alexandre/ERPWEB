@@ -111,7 +111,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         IdLiquidacion = info.IdLiquidacion=get_id(info.IdEmpresa),
                         IdVendedor = info.IdVendedor,
                         Observacion = info.Observacion,
-                        Fecha = info.Fecha,
+                        Fecha = info.Fecha.Date,
                         Estado = true,
                         IdUsuario = info.IdUsuario,
                         FechaTransac = DateTime.Now
@@ -165,7 +165,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     if (Entity == null) return false;
                     
                     Entity.Observacion = info.Observacion;
-                    Entity.Fecha = info.Fecha;
+                    Entity.Fecha = info.Fecha.Date;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.FechaUltMod = DateTime.Now;
 

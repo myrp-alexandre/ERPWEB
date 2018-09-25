@@ -604,6 +604,12 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_005_Rpt.Designer.cs">
       <DependentUpon>CXC_005_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_006_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_006_Rpt.Designer.cs">
+      <DependentUpon>CXC_006_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9340,6 +9346,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_005_Rpt.resx">
       <DependentUpon>CXC_005_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_006_Rpt.resx">
+      <DependentUpon>CXC_006_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorPagar\CXP_001_Rpt.resx">
       <DependentUpon>CXP_001_Rpt.cs</DependentUpon>

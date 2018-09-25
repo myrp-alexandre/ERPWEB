@@ -81,9 +81,25 @@
         });
 
         settings.Columns.Add("IdLiquidacion", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("Fecha", "Fecha").Width = Unit.Percentage(20);
-        settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(20);
-        settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(20);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Fecha";
+            column.Caption = "Fecha";
+            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
+            column.Width = Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(40);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Estado";
+            column.Caption = "Estado";
+            column.Width = Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()
