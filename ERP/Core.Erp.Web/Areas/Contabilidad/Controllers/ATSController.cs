@@ -37,7 +37,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Nuevo(ats_Info model)
+        public FileResult Nuevo(ats_Info model)
         {
 
             model.info_periodo.IdPeriodo =Convert.ToInt32( Session["IdPeriodo"]) ;
@@ -54,7 +54,6 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             ats = bus_ats.get_ats(IdEmpresa, model.info_periodo.IdPeriodo, IdSucursal);
             var ms = new MemoryStream();
             var xw = XmlWriter.Create(ms);
-            string patch = Path.Combine(Server.MapPath("~/Content/file"), nombre_file);
 
 
             var serializer = new XmlSerializer(ats.GetType());
@@ -67,19 +66,9 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             {
                 xml = sr.ReadToEnd();
             }
+            byte[] fileBytes = ms.ToArray();         
+            return File(fileBytes, "application/xml", nombre_file+".xml");
 
-
-            if (System.IO.File.Exists(patch + ".xml"))
-                System.IO.File.Delete(patch + ".xml");
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(patch + ".xml", true))
-            {
-                file.WriteLine(xml);
-                file.Close();
-                byte[] fileBytes = System.IO.File.ReadAllBytes(patch + ".xml");
-               // FilesHelper_B.Guardar_xml(fileBytes, nombre_file,"","","");
-                patch = patch + ".xml";
-                return File(Encoding.UTF8.GetBytes(xml), "application/xml", nombre_file+".xml");
-            }
 
         }
 
@@ -154,40 +143,6 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
             return Json("", JsonRequestBehavior.AllowGet);
         }
-        [HttpPost]
-        public FileResult dolowadATS(ats_Info info)
-        {
-            bus_ats = new ats_Bus();
-            string nombre_file = info.info_periodo.IdPeriodo.ToString();
-            if (info.info_periodo.IdPeriodo.ToString().Length == 6)
-            {
-                nombre_file = "AT-" + info.info_periodo.IdPeriodo.ToString().Substring(4, 2) + info.info_periodo.IdPeriodo.ToString().Substring(0, 4);
-            }
-            string xml = "";
-            iva ats = new iva();
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            int IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
-            ats = bus_ats.get_ats(IdEmpresa, info.info_periodo.IdPeriodo, IdSucursal);
-            var ms = new MemoryStream();
-            var xw = XmlWriter.Create(ms);
-
-            var serializer = new XmlSerializer(ats.GetType());
-            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-            ns.Add("", "");
-            serializer.Serialize(xw, ats, ns);
-            xw.Flush();
-            ms.Seek(0, SeekOrigin.Begin);
-            using (var sr = new StreamReader(ms, Encoding.UTF8))
-            {
-                xml = sr.ReadToEnd();
-                byte[] byt = Convert.FromBase64String(xml);
-                
-            }
-
-                return File(Encoding.UTF8.GetBytes(xml), "application/xml", "");
-            }
-
-        
         #endregion
 
         public class HomeControllerControllerUploadControlSettings
