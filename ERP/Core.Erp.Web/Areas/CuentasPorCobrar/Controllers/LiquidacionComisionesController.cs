@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Erp.Info.Helps;
 
 namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 {
@@ -23,8 +24,15 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         #region Index
         public ActionResult Index()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info();
+            return View(model);
         }
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            return View(model);
+        }
+        
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial_liquidacion_com()
