@@ -26,5 +26,10 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public double TotalComisionado { get; set; }
         public double TotalLiquidacion { get; set; }
         public bool NoComisiona { get; set; }
+
+        public string vt_NumFactura { get; set; }
+        public string Nombres { get; set; }
+        public DateTime vt_fecha { get; set; }
+        public DateTime vt_fecha_venc { get; set; }
     }
 }

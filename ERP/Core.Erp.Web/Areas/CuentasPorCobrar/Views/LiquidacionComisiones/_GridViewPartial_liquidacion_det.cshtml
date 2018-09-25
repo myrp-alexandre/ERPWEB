@@ -7,7 +7,11 @@
         settings.KeyFieldName = "Secuencia";
         settings.Width = Unit.Percentage(100);
 
-        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "LiquidacionComisiones", Action = "EditingUpdate", Area = "CuentasPorCobrar" };
 
         settings.CommandColumn.Visible = true;
@@ -31,7 +35,37 @@
 
         settings.Columns.Add(column =>
         {
+            column.FieldName = "Nombres";
+            column.Caption = "Cliente";
             column.Width = Unit.Percentage(20);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "vt_NumFactura";
+            column.Caption = "Factura";
+            column.Width = Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "vt_fecha";
+            column.Caption = "Fecha";
+            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
+            column.Width = Unit.Percentage(7);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "vt_fecha_venc";
+            column.Caption = "Fecha vcto.";
+            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
+            column.Width = Unit.Percentage(7);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Width = Unit.Percentage(10);
             column.FieldName = "BaseComision";
             column.Caption = "Base comision";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
@@ -42,11 +76,24 @@
                 p.DisplayFormatString = "N2";
             });
         });
-        settings.Settings.ShowFooter = true;
+        settings.Columns.Add(column =>
+        {
+            column.Width = Unit.Percentage(7);
+            column.FieldName = "TotalCobrado";
+            column.Caption = "Cobrado";
+            column.PropertiesEdit.DisplayFormatString = "{0:N2}";
+            column.EditorProperties().SpinEdit(p =>
+            {
+                p.MinValue = 0;
+                p.DisplayFormatInEditMode = true;
+                p.DisplayFormatString = "N2";
+            });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
 
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(5);
             column.FieldName = "PorcentajeComision";
             column.Caption = "%";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
@@ -61,9 +108,9 @@
 
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(7);
             column.FieldName = "TotalAComisionar";
-            column.Caption = "Total a comisionar";
+            column.Caption = "Comisión total";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
             column.EditorProperties().SpinEdit(p =>
             {
@@ -78,9 +125,9 @@
 
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(7);
             column.FieldName = "TotalComisionado";
-            column.Caption = "Total comisionado";
+            column.Caption = "Comisionado";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
             column.EditorProperties().SpinEdit(p =>
             {
@@ -88,14 +135,14 @@
                 p.DisplayFormatInEditMode = true;
                 p.DisplayFormatString = "N2";
             });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
-        settings.Settings.ShowFooter = true;
 
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(7);
             column.FieldName = "TotalLiquidacion";
-            column.Caption = "Total liquidación";
+            column.Caption = "V. Liquidar";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
             column.EditorProperties().SpinEdit(p =>
             {
@@ -108,8 +155,8 @@
         settings.Columns.Add(column =>
         {
             column.FieldName = "NoComisiona";
-            column.Caption = "No comisiona";
-            column.Width = Unit.Percentage(10);
+            column.Caption = "No considerar";
+            column.Width = Unit.Percentage(5);
             column.EditorProperties().CheckBox(sp =>
             {
 

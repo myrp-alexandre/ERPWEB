@@ -16,7 +16,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 List<cxc_liquidacion_comisiones_det_Info> Lista;
                 using (Entities_cuentas_por_cobrar Context = new Entities_cuentas_por_cobrar())
                 {
-                    Lista = (from q in Context.cxc_liquidacion_comisiones_det
+                    Lista = (from q in Context.vwcxc_liquidacion_comisiones_det
                              where q.IdEmpresa == IdEmpresa
                              && q.IdLiquidacion == IdLiquidacion
                              select new cxc_liquidacion_comisiones_det_Info
@@ -35,11 +35,16 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  TotalComisionado = q.TotalComisionado,
                                  TotalLiquidacion = q.TotalLiquidacion,
                                  NoComisiona = q.NoComisiona,
-                                 fa_IdBodega = q.fa_IdBodega,
-                                 fa_IdCbteVta = q.fa_IdCbteVta,
-                                fa_IdEmpresa = q.fa_IdEmpresa,
-                                fa_IdSucursal = q.fa_IdSucursal
-                                 
+                                 fa_IdBodega = q.IdBodega,
+                                 fa_IdCbteVta = q.IdCbteVta,
+                                fa_IdEmpresa = q.IdEmpresa,
+                                fa_IdSucursal = q.IdSucursal,
+
+                                 vt_NumFactura = q.vt_NumFactura,
+                                 Nombres = q.Nombres,
+                                 vt_fecha = q.vt_fecha,
+                                 vt_fecha_venc = q.vt_fech_venc
+
                              }).ToList();
                 }
                 return Lista;
@@ -73,12 +78,17 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  BaseComision = q.vt_Subtotal,
                                  TotalAComisionar = q.TotalAComisionar,
                                  TotalComisionado = q.TotalComisionado,
-                                 TotalLiquidacion = q.SaldoPorComisionar,
+                                 TotalLiquidacion = 0,
                                  NoComisiona = false,
                                  fa_IdBodega = q.IdBodega,
                                  fa_IdCbteVta = q.IdCbteVta,
                                  fa_IdEmpresa = q.IdEmpresa,
-                                 fa_IdSucursal = q.IdSucursal
+                                 fa_IdSucursal = q.IdSucursal,
+
+                                 vt_NumFactura = q.vt_NumFactura,
+                                 Nombres = q.Nombres,
+                                 vt_fecha = q.vt_fecha,
+                                 vt_fecha_venc = q.vt_fech_venc
                              }).ToList();
                     int Secuencia = 1;
                     Lista.ForEach(q => q.Secuencia = Secuencia++);
