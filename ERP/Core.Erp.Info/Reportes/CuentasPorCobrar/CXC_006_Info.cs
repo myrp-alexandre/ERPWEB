@@ -4,18 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Erp.Info.CuentasPorCobrar
+namespace Core.Erp.Info.Reportes.CuentasPorCobrar
 {
-    public class cxc_liquidacion_comisiones_det_Info
+   public class CXC_006_Info
     {
         public int IdEmpresa { get; set; }
         public decimal IdLiquidacion { get; set; }
-        public int Secuencia { get; set; }
-        public int IdVendedor { get; set; }
-        public int fa_IdEmpresa { get; set; }
-        public int fa_IdSucursal { get; set; }
-        public int fa_IdBodega { get; set; }
-        public decimal fa_IdCbteVta { get; set; }
+        public System.DateTime Fecha { get; set; }
+        public string Observacion { get; set; }
+        public Nullable<int> IdVendedor { get; set; }
+        public bool Estado { get; set; }
+        public string Ve_Vendedor { get; set; }
+        public string vt_tipoDoc { get; set; }
+        public string vt_NumFactura { get; set; }
         public double SubtotalFactura { get; set; }
         public double IvaFactura { get; set; }
         public double TotalFactura { get; set; }
@@ -26,10 +27,7 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public double TotalComisionado { get; set; }
         public double TotalLiquidacion { get; set; }
         public bool NoComisiona { get; set; }
-
-        public string vt_NumFactura { get; set; }
-        public string Nombres { get; set; }
-        public DateTime vt_fecha { get; set; }
-        public DateTime vt_fecha_venc { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public double Saldo { get; set; }
     }
 }

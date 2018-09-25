@@ -29,6 +29,7 @@ namespace Core.Erp.Data
         public Nullable<double> IVA { get; set; }
         public Nullable<double> Total { get; set; }
         public double Cobrado { get; set; }
+        public double NotaCredito { get; set; }
         public Nullable<double> Saldo { get; set; }
     }
 }

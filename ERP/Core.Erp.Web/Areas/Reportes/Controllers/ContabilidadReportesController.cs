@@ -5,11 +5,33 @@ using System;
 using System.Web.Mvc;
 using System.Collections.Generic;
 using Core.Erp.Web.Helps;
+using Core.Erp.Info.Contabilidad;
+using DevExpress.Web;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
     public class ContabilidadReportesController : Controller
     {
+        #region Combos
+
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        public ActionResult CmbCuenta_contable_Conta()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+
+            return PartialView("_CmbCuenta_contable_Conta", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda_cta(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda_cta(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+
+
+        #endregion
         public ActionResult CONTA_001(int IdTipoCbte = 0, decimal IdCbteCble = 0)
         {
             CONTA_001_Rpt model = new CONTA_001_Rpt();
@@ -50,7 +72,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdCtaCble = "",
+                
             };
             cargar_combos(model.IdEmpresa);
             CONTA_002_Rpt report = new CONTA_002_Rpt();
@@ -60,7 +84,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_fechaFin.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
-                report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
         }

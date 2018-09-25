@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Erp.Info.Helps;
 
 namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 {
@@ -23,8 +24,15 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         #region Index
         public ActionResult Index()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info();
+            return View(model);
         }
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            return View(model);
+        }
+        
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial_liquidacion_com()
@@ -68,6 +76,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         [HttpPost]
         public ActionResult Nuevo(cxc_liquidacion_comisiones_Info model)
         {
+            model.IdUsuario = Session["IdUsuario"].ToString();
             model.lst_det = List_det.get_list(model.IdTransaccionSession);
             if (!bus_liq.guardarDB(model))
             {
@@ -99,6 +108,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         [HttpPost]
         public ActionResult Modificar(cxc_liquidacion_comisiones_Info model)
         {
+            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
             model.lst_det = List_det.get_list(model.IdTransaccionSession);
 
             if (!bus_liq.modificarDB(model))
@@ -129,7 +139,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         [HttpPost]
         public ActionResult Anular(cxc_liquidacion_comisiones_Info model)
         {
-
+            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
             if (!bus_liq.anularDB(model))
             {
                 cargar_combos(model.IdEmpresa);

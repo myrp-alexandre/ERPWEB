@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.Helps.cl_filtros_Info
+﻿@model Core.Erp.Info.Helps.cl_filtros_facturacion_Info
 @{
     Layout = "~/Areas/Reportes/Views/Layout/_Layout_filtros.cshtml";
     ViewBag.Title = "CXC_003";
@@ -33,7 +33,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="IdCliente">Cliente</label>
-                        @Html.Partial("_CmbCliente_CXC", Model)
+                        @Html.Partial("_CmbCliente_CXC", Model.IdCliente)
                     </div>
                 </div>
                 <div class="col-md-2">

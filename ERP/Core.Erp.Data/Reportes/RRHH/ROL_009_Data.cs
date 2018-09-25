@@ -13,8 +13,8 @@ namespace Core.Erp.Data.Reportes.RRHH
         {
             try
             {
-
-             
+                fecha_inicio = fecha_inicio.Date;
+                fecha_fin = fecha_fin.Date;
 
                 List<ROL_009_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())

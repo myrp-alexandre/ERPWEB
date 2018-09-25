@@ -273,7 +273,16 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_liquidacion_
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdLiquidacion" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+            <PropertyRef Name="vt_tipoDoc" />
+            <PropertyRef Name="Nombres" />
             <PropertyRef Name="Ve_Vendedor" />
+            <PropertyRef Name="nom_TerminoPago" />
+            <PropertyRef Name="vt_fecha" />
+            <PropertyRef Name="vt_fech_venc" />
             <PropertyRef Name="vt_Subtotal" />
             <PropertyRef Name="vt_iva" />
             <PropertyRef Name="vt_total" />
@@ -281,6 +290,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_liquidacion_
             <PropertyRef Name="PorComision" />
             <PropertyRef Name="SubtotalFactura" />
             <PropertyRef Name="IvaFactura" />
+            <PropertyRef Name="Expr1" />
             <PropertyRef Name="TotalFactura" />
             <PropertyRef Name="TotalCobrado" />
             <PropertyRef Name="BaseComision" />
@@ -292,19 +302,20 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_liquidacion_
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdLiquidacion" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdSucursal" Type="int" />
-          <Property Name="IdBodega" Type="int" />
-          <Property Name="IdCbteVta" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="vt_tipoDoc" Type="varchar" MaxLength="20" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdBodega" Type="int" Nullable="false" />
+          <Property Name="IdCbteVta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="vt_tipoDoc" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="vt_serie1" Type="varchar" MaxLength="3" />
           <Property Name="vt_serie2" Type="varchar" MaxLength="3" />
           <Property Name="vt_NumFactura" Type="varchar" MaxLength="20" />
-          <Property Name="Nombres" Type="varchar" MaxLength="1000" />
+          <Property Name="Nombres" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="Ve_Vendedor" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="NomInterno" Type="varchar" MaxLength="500" />
-          <Property Name="nom_TerminoPago" Type="varchar" MaxLength="50" />
-          <Property Name="vt_fecha" Type="datetime" />
-          <Property Name="vt_fech_venc" Type="datetime" />
+          <Property Name="nom_TerminoPago" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="vt_fecha" Type="datetime" Nullable="false" />
+          <Property Name="vt_fech_venc" Type="datetime" Nullable="false" />
           <Property Name="vt_Subtotal" Type="float" Nullable="false" />
           <Property Name="vt_iva" Type="float" Nullable="false" />
           <Property Name="vt_total" Type="float" Nullable="false" />
@@ -312,6 +323,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_liquidacion_
           <Property Name="PorComision" Type="float" Nullable="false" />
           <Property Name="SubtotalFactura" Type="float" Nullable="false" />
           <Property Name="IvaFactura" Type="float" Nullable="false" />
+          <Property Name="Expr1" Type="int" Nullable="false" />
           <Property Name="TotalFactura" Type="float" Nullable="false" />
           <Property Name="TotalCobrado" Type="float" Nullable="false" />
           <Property Name="BaseComision" Type="float" Nullable="false" />
@@ -342,7 +354,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_liquidacion_
             <PropertyRef Name="ESTADO_COBRO" />
             <PropertyRef Name="TotalAComisionar" />
             <PropertyRef Name="TotalComisionado" />
-            <PropertyRef Name="SaldoPorComisionar" />
             <PropertyRef Name="IdVendedor" />
             <PropertyRef Name="PorComision" />
           </Key>
@@ -367,7 +378,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_liquidacion_
           <Property Name="ESTADO_COBRO" Type="varchar" MaxLength="9" Nullable="false" />
           <Property Name="TotalAComisionar" Type="float" Nullable="false" />
           <Property Name="TotalComisionado" Type="float" Nullable="false" />
-          <Property Name="SaldoPorComisionar" Type="float" Nullable="false" />
+          <Property Name="SaldoPorComisionar" Type="float" />
           <Property Name="IdVendedor" Type="int" Nullable="false" />
           <Property Name="PorComision" Type="float" Nullable="false" />
         </EntityType>
@@ -654,6 +665,7 @@ FROM [dbo].[vwcxc_cartera_x_cobrar] AS [vwcxc_cartera_x_cobrar]</DefiningQuery>
             <DefiningQuery>SELECT 
 [vwcxc_liquidacion_comisiones_det].[IdEmpresa] AS [IdEmpresa], 
 [vwcxc_liquidacion_comisiones_det].[IdLiquidacion] AS [IdLiquidacion], 
+[vwcxc_liquidacion_comisiones_det].[Secuencia] AS [Secuencia], 
 [vwcxc_liquidacion_comisiones_det].[IdSucursal] AS [IdSucursal], 
 [vwcxc_liquidacion_comisiones_det].[IdBodega] AS [IdBodega], 
 [vwcxc_liquidacion_comisiones_det].[IdCbteVta] AS [IdCbteVta], 
@@ -674,6 +686,7 @@ FROM [dbo].[vwcxc_cartera_x_cobrar] AS [vwcxc_cartera_x_cobrar]</DefiningQuery>
 [vwcxc_liquidacion_comisiones_det].[PorComision] AS [PorComision], 
 [vwcxc_liquidacion_comisiones_det].[SubtotalFactura] AS [SubtotalFactura], 
 [vwcxc_liquidacion_comisiones_det].[IvaFactura] AS [IvaFactura], 
+[vwcxc_liquidacion_comisiones_det].[Expr1] AS [Expr1], 
 [vwcxc_liquidacion_comisiones_det].[TotalFactura] AS [TotalFactura], 
 [vwcxc_liquidacion_comisiones_det].[TotalCobrado] AS [TotalCobrado], 
 [vwcxc_liquidacion_comisiones_det].[BaseComision] AS [BaseComision], 
@@ -1393,7 +1406,16 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdLiquidacion" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+            <PropertyRef Name="vt_tipoDoc" />
+            <PropertyRef Name="Nombres" />
             <PropertyRef Name="Ve_Vendedor" />
+            <PropertyRef Name="nom_TerminoPago" />
+            <PropertyRef Name="vt_fecha" />
+            <PropertyRef Name="vt_fech_venc" />
             <PropertyRef Name="vt_Subtotal" />
             <PropertyRef Name="vt_iva" />
             <PropertyRef Name="vt_total" />
@@ -1401,6 +1423,7 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
             <PropertyRef Name="PorComision" />
             <PropertyRef Name="SubtotalFactura" />
             <PropertyRef Name="IvaFactura" />
+            <PropertyRef Name="Expr1" />
             <PropertyRef Name="TotalFactura" />
             <PropertyRef Name="TotalCobrado" />
             <PropertyRef Name="BaseComision" />
@@ -1412,19 +1435,20 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdLiquidacion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdSucursal" Type="Int32" />
-          <Property Name="IdBodega" Type="Int32" />
-          <Property Name="IdCbteVta" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="vt_tipoDoc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="vt_tipoDoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="vt_serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="vt_serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Nombres" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Ve_Vendedor" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="NomInterno" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="nom_TerminoPago" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="vt_fecha" Type="DateTime" Precision="3" />
-          <Property Name="vt_fech_venc" Type="DateTime" Precision="3" />
+          <Property Name="nom_TerminoPago" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="vt_fech_venc" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="vt_Subtotal" Type="Double" Nullable="false" />
           <Property Name="vt_iva" Type="Double" Nullable="false" />
           <Property Name="vt_total" Type="Double" Nullable="false" />
@@ -1432,6 +1456,7 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
           <Property Name="PorComision" Type="Double" Nullable="false" />
           <Property Name="SubtotalFactura" Type="Double" Nullable="false" />
           <Property Name="IvaFactura" Type="Double" Nullable="false" />
+          <Property Name="Expr1" Type="Int32" Nullable="false" />
           <Property Name="TotalFactura" Type="Double" Nullable="false" />
           <Property Name="TotalCobrado" Type="Double" Nullable="false" />
           <Property Name="BaseComision" Type="Double" Nullable="false" />
@@ -1460,7 +1485,6 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
             <PropertyRef Name="ESTADO_COBRO" />
             <PropertyRef Name="TotalAComisionar" />
             <PropertyRef Name="TotalComisionado" />
-            <PropertyRef Name="SaldoPorComisionar" />
             <PropertyRef Name="IdVendedor" />
             <PropertyRef Name="PorComision" />
           </Key>
@@ -1485,7 +1509,7 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
           <Property Name="ESTADO_COBRO" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
           <Property Name="TotalAComisionar" Type="Double" Nullable="false" />
           <Property Name="TotalComisionado" Type="Double" Nullable="false" />
-          <Property Name="SaldoPorComisionar" Type="Double" Nullable="false" />
+          <Property Name="SaldoPorComisionar" Type="Double" />
           <Property Name="IdVendedor" Type="Int32" Nullable="false" />
           <Property Name="PorComision" Type="Double" Nullable="false" />
         </EntityType>
@@ -1837,6 +1861,7 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
                 <ScalarProperty Name="BaseComision" ColumnName="BaseComision" />
                 <ScalarProperty Name="TotalCobrado" ColumnName="TotalCobrado" />
                 <ScalarProperty Name="TotalFactura" ColumnName="TotalFactura" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
                 <ScalarProperty Name="IvaFactura" ColumnName="IvaFactura" />
                 <ScalarProperty Name="SubtotalFactura" ColumnName="SubtotalFactura" />
                 <ScalarProperty Name="PorComision" ColumnName="PorComision" />
@@ -1857,6 +1882,7 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
                 <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
                 <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>

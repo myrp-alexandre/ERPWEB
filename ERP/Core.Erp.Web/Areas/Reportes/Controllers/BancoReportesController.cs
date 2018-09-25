@@ -137,7 +137,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cl_filtros_banco_Info model = new cl_filtros_banco_Info
             {
                 Estado = "",
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdPersona = 0,
+                IdBanco = 0
             };
             cargar_banco(model.IdEmpresa);
             BAN_007_Rpt report = new BAN_007_Rpt();

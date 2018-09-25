@@ -111,12 +111,39 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         IdLiquidacion = info.IdLiquidacion=get_id(info.IdEmpresa),
                         IdVendedor = info.IdVendedor,
                         Observacion = info.Observacion,
-                        Fecha = info.Fecha,
+                        Fecha = info.Fecha.Date,
                         Estado = true,
                         IdUsuario = info.IdUsuario,
                         FechaTransac = DateTime.Now
                     };
                     Context.cxc_liquidacion_comisiones.Add(Entity);
+
+                    foreach (var item in info.lst_det)
+                    {
+                        cxc_liquidacion_comisiones_det det = new cxc_liquidacion_comisiones_det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdLiquidacion = info.IdLiquidacion,
+                            Secuencia = item.Secuencia,
+                            IdVendedor = item.IdVendedor,
+                            PorcentajeComision = item.PorcentajeComision,
+                            SubtotalFactura = item.SubtotalFactura,
+                            IvaFactura = item.IvaFactura,
+                            TotalFactura = item.TotalFactura,
+                            TotalCobrado = item.TotalCobrado,
+                            BaseComision = item.BaseComision,
+                            TotalAComisionar = item.TotalAComisionar,
+                            TotalComisionado = item.TotalComisionado,
+                            TotalLiquidacion = item.TotalLiquidacion,
+                            NoComisiona = item.NoComisiona,
+                            fa_IdBodega = item.fa_IdBodega,
+                            fa_IdCbteVta = item.fa_IdCbteVta,
+                            fa_IdEmpresa = item.fa_IdEmpresa,
+                            fa_IdSucursal = item.fa_IdSucursal
+
+                        };
+                        Context.cxc_liquidacion_comisiones_det.Add(det);
+                    }
                     Context.SaveChanges();
                 }
                 return true;
@@ -136,14 +163,43 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 {
                     cxc_liquidacion_comisiones Entity = Context.cxc_liquidacion_comisiones.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdLiquidacion == info.IdLiquidacion).FirstOrDefault();
                     if (Entity == null) return false;
-
-                    Entity.IdVendedor = info.IdVendedor;
+                    
                     Entity.Observacion = info.Observacion;
-                    Entity.Fecha = info.Fecha;
+                    Entity.Fecha = info.Fecha.Date;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.FechaUltMod = DateTime.Now;
+
+                    var lst = Context.cxc_liquidacion_comisiones_det.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdLiquidacion == info.IdLiquidacion);
+                    Context.cxc_liquidacion_comisiones_det.RemoveRange(lst);
+
+                    foreach (var item in info.lst_det)
+                    {
+                        cxc_liquidacion_comisiones_det det = new cxc_liquidacion_comisiones_det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdLiquidacion = info.IdLiquidacion,
+                            Secuencia = item.Secuencia,
+                            IdVendedor = item.IdVendedor,
+                            PorcentajeComision = item.PorcentajeComision,
+                            SubtotalFactura = item.SubtotalFactura,
+                            IvaFactura = item.IvaFactura,
+                            TotalFactura = item.TotalFactura,
+                            TotalCobrado = item.TotalCobrado,
+                            BaseComision = item.BaseComision,
+                            TotalAComisionar = item.TotalAComisionar,
+                            TotalComisionado = item.TotalComisionado,
+                            TotalLiquidacion = item.TotalLiquidacion,
+                            NoComisiona = item.NoComisiona,
+                            fa_IdBodega = item.fa_IdBodega,
+                            fa_IdCbteVta = item.fa_IdCbteVta,
+                            fa_IdEmpresa = item.fa_IdEmpresa,
+                            fa_IdSucursal = item.fa_IdSucursal
+
+                        };
+                        Context.cxc_liquidacion_comisiones_det.Add(det);
+                    }
                     Context.SaveChanges();
-            }
+                }
                 return true;
             }
             catch (Exception)

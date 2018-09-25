@@ -90,7 +90,8 @@ namespace Core.Erp.Info.Facturacion
     {
         public string NomContacto { get; set; }
         public string Ve_Vendedor { get; set; }
-        public Nullable<double> vt_Subtotal { get; set; }
+        public Nullable<double> vt_Subtotal0 { get; set; }
+        public Nullable<double> vt_SubtotalIVA { get; set; }
         public Nullable<double> vt_iva { get; set; }
         public Nullable<double> vt_total { get; set; }
         public Nullable<int> IdEmpresa_in_eg_x_inv { get; set; }

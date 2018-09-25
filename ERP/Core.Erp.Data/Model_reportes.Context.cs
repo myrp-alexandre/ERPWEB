@@ -91,6 +91,8 @@ namespace Core.Erp.Data
         public DbSet<VWINV_001> VWINV_001 { get; set; }
         public DbSet<VWINV_002> VWINV_002 { get; set; }
         public DbSet<VWINV_011> VWINV_011 { get; set; }
+        public DbSet<VWCXC_006> VWCXC_006 { get; set; }
+        public DbSet<VWCXC_006_sin_comision> VWCXC_006_sin_comision { get; set; }
     
         public virtual ObjectResult<SPACTF_004_detalle_Result> SPACTF_004_detalle(Nullable<int> idEmpresa, Nullable<System.DateTime> fecha_corte, string idUsuario, Nullable<int> idActivoFijoTipo_ini, Nullable<int> idActivoFijoTipo_fin, Nullable<int> idCategoria_ini, Nullable<int> idCategoria_fin, string estado_Proceso)
         {
@@ -632,39 +634,6 @@ namespace Core.Erp.Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPINV_005_Result>("SPINV_005", idEmpresaParameter, idSucursal_iniParameter, idSucursal_finParameter, idBodega_iniParameter, idBodega_finParameter, idProducto_iniParameter, idProducto_finParameter, fecha_iniParameter, fecha_finParameter, idUsuarioParameter, no_Mostrar_valores_en_0Parameter, mostrar_detalladoParameter, idProductoPadre_iniParameter, idProductoPadre_finParameter);
         }
     
-        public virtual ObjectResult<SPCXC_005_Result> SPCXC_005(Nullable<int> idEmpresa, Nullable<decimal> idClienteIni, Nullable<decimal> idClienteFin, Nullable<int> idContactoIni, Nullable<int> idContactoFin, Nullable<System.DateTime> fechaCorte, Nullable<bool> mostrarSaldo0)
-        {
-            var idEmpresaParameter = idEmpresa.HasValue ?
-                new ObjectParameter("IdEmpresa", idEmpresa) :
-                new ObjectParameter("IdEmpresa", typeof(int));
-    
-            var idClienteIniParameter = idClienteIni.HasValue ?
-                new ObjectParameter("IdClienteIni", idClienteIni) :
-                new ObjectParameter("IdClienteIni", typeof(decimal));
-    
-            var idClienteFinParameter = idClienteFin.HasValue ?
-                new ObjectParameter("IdClienteFin", idClienteFin) :
-                new ObjectParameter("IdClienteFin", typeof(decimal));
-    
-            var idContactoIniParameter = idContactoIni.HasValue ?
-                new ObjectParameter("IdContactoIni", idContactoIni) :
-                new ObjectParameter("IdContactoIni", typeof(int));
-    
-            var idContactoFinParameter = idContactoFin.HasValue ?
-                new ObjectParameter("IdContactoFin", idContactoFin) :
-                new ObjectParameter("IdContactoFin", typeof(int));
-    
-            var fechaCorteParameter = fechaCorte.HasValue ?
-                new ObjectParameter("FechaCorte", fechaCorte) :
-                new ObjectParameter("FechaCorte", typeof(System.DateTime));
-    
-            var mostrarSaldo0Parameter = mostrarSaldo0.HasValue ?
-                new ObjectParameter("MostrarSaldo0", mostrarSaldo0) :
-                new ObjectParameter("MostrarSaldo0", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPCXC_005_Result>("SPCXC_005", idEmpresaParameter, idClienteIniParameter, idClienteFinParameter, idContactoIniParameter, idContactoFinParameter, fechaCorteParameter, mostrarSaldo0Parameter);
-        }
-    
         public virtual ObjectResult<SPFAC_005_Result> SPFAC_005(Nullable<int> idEmpresa, Nullable<int> idSucursal_ini, Nullable<int> idSucursal_fin, Nullable<decimal> idCliente_ini, Nullable<decimal> idCliente_fin, Nullable<System.DateTime> fecha_ini, Nullable<System.DateTime> fecha_fin, Nullable<bool> mostrarSaldo0, Nullable<bool> mostrarContactos)
         {
             var idEmpresaParameter = idEmpresa.HasValue ?
@@ -876,6 +845,39 @@ namespace Core.Erp.Data
                 new ObjectParameter("MostrarSoloCarteraVencida", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPFAC_002_Result>("SPFAC_002", idEmpresaParameter, sucursalIniParameter, sucursalFinParameter, idClienteIniParameter, idClienteFinParameter, idClienteContactoIniParameter, idClienteContactoFinParameter, fechaCorteParameter, mostrarSoloCarteraVencidaParameter);
+        }
+    
+        public virtual ObjectResult<SPCXC_005_Result> SPCXC_005(Nullable<int> idEmpresa, Nullable<decimal> idClienteIni, Nullable<decimal> idClienteFin, Nullable<int> idContactoIni, Nullable<int> idContactoFin, Nullable<System.DateTime> fechaCorte, Nullable<bool> mostrarSaldo0)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idClienteIniParameter = idClienteIni.HasValue ?
+                new ObjectParameter("IdClienteIni", idClienteIni) :
+                new ObjectParameter("IdClienteIni", typeof(decimal));
+    
+            var idClienteFinParameter = idClienteFin.HasValue ?
+                new ObjectParameter("IdClienteFin", idClienteFin) :
+                new ObjectParameter("IdClienteFin", typeof(decimal));
+    
+            var idContactoIniParameter = idContactoIni.HasValue ?
+                new ObjectParameter("IdContactoIni", idContactoIni) :
+                new ObjectParameter("IdContactoIni", typeof(int));
+    
+            var idContactoFinParameter = idContactoFin.HasValue ?
+                new ObjectParameter("IdContactoFin", idContactoFin) :
+                new ObjectParameter("IdContactoFin", typeof(int));
+    
+            var fechaCorteParameter = fechaCorte.HasValue ?
+                new ObjectParameter("FechaCorte", fechaCorte) :
+                new ObjectParameter("FechaCorte", typeof(System.DateTime));
+    
+            var mostrarSaldo0Parameter = mostrarSaldo0.HasValue ?
+                new ObjectParameter("MostrarSaldo0", mostrarSaldo0) :
+                new ObjectParameter("MostrarSaldo0", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPCXC_005_Result>("SPCXC_005", idEmpresaParameter, idClienteIniParameter, idClienteFinParameter, idContactoIniParameter, idContactoFinParameter, fechaCorteParameter, mostrarSaldo0Parameter);
         }
     }
 }

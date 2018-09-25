@@ -2,12 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Data.Reportes.CuentasPorCobrar
 {
-  public class CXC_005_Data
+    public class CXC_005_Data
     {
         public List<CXC_005_Info> get_list(int IdEmpresa, decimal IdCLiente, int IdContacto, DateTime? fecha_corte, bool mostrarSaldo0)
         {
@@ -31,6 +29,7 @@ namespace Core.Erp.Data.Reportes.CuentasPorCobrar
                                 IdCbteVta = q.IdCbteVta,
                                 IdCliente = q.IdCliente,
                                 Cobrado = q.Cobrado,
+                                NotaCredito = q.NotaCredito,
                                 IVA = q.IVA,
                                 NomCliente = q.NomCliente,
                                 NomContacto = q.NomContacto,

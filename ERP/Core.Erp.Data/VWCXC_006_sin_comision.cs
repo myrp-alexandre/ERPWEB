@@ -12,27 +12,28 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class cxc_liquidacion_comisiones
+    public partial class VWCXC_006_sin_comision
     {
-        public cxc_liquidacion_comisiones()
-        {
-            this.cxc_liquidacion_comisiones_det = new HashSet<cxc_liquidacion_comisiones_det>();
-        }
-    
         public int IdEmpresa { get; set; }
         public decimal IdLiquidacion { get; set; }
         public System.DateTime Fecha { get; set; }
         public string Observacion { get; set; }
         public Nullable<int> IdVendedor { get; set; }
         public bool Estado { get; set; }
-        public string IdUsuario { get; set; }
-        public Nullable<System.DateTime> FechaTransac { get; set; }
-        public string IdUsuarioUltMod { get; set; }
-        public Nullable<System.DateTime> FechaUltMod { get; set; }
-        public string IdUsuarioUltAnu { get; set; }
-        public Nullable<System.DateTime> FechaUltAnu { get; set; }
-        public string MotivoAnulacion { get; set; }
-    
-        public virtual ICollection<cxc_liquidacion_comisiones_det> cxc_liquidacion_comisiones_det { get; set; }
+        public string Ve_Vendedor { get; set; }
+        public string vt_tipoDoc { get; set; }
+        public string vt_NumFactura { get; set; }
+        public double SubtotalFactura { get; set; }
+        public double IvaFactura { get; set; }
+        public double TotalFactura { get; set; }
+        public double TotalCobrado { get; set; }
+        public double BaseComision { get; set; }
+        public double PorcentajeComision { get; set; }
+        public double TotalAComisionar { get; set; }
+        public double TotalComisionado { get; set; }
+        public double TotalLiquidacion { get; set; }
+        public bool NoComisiona { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public double Saldo { get; set; }
     }
 }
