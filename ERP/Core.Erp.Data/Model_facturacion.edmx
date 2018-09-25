@@ -875,7 +875,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_factura' no t
           <Property Name="vt_fecha" Type="datetime" Nullable="false" />
           <Property Name="Nombres" Type="varchar" MaxLength="1000" />
           <Property Name="Ve_Vendedor" Type="varchar" MaxLength="500" Nullable="false" />
-          <Property Name="vt_Subtotal" Type="float" />
+          <Property Name="vt_Subtotal0" Type="float" />
+          <Property Name="vt_SubtotalIVA" Type="float" />
           <Property Name="vt_iva" Type="float" />
           <Property Name="vt_total" Type="float" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
@@ -1950,7 +1951,8 @@ FROM [web].[vwfa_cliente_consulta] AS [vwfa_cliente_consulta]</DefiningQuery>
 [vwfa_factura].[vt_fecha] AS [vt_fecha], 
 [vwfa_factura].[Nombres] AS [Nombres], 
 [vwfa_factura].[Ve_Vendedor] AS [Ve_Vendedor], 
-[vwfa_factura].[vt_Subtotal] AS [vt_Subtotal], 
+[vwfa_factura].[vt_Subtotal0] AS [vt_Subtotal0], 
+[vwfa_factura].[vt_SubtotalIVA] AS [vt_SubtotalIVA], 
 [vwfa_factura].[vt_iva] AS [vt_iva], 
 [vwfa_factura].[vt_total] AS [vt_total], 
 [vwfa_factura].[Estado] AS [Estado], 
@@ -3130,34 +3132,6 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <Property Name="pe_cedulaRuc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="vwfa_factura">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdBodega" />
-            <PropertyRef Name="IdCbteVta" />
-            <PropertyRef Name="vt_fecha" />
-            <PropertyRef Name="Ve_Vendedor" />
-            <PropertyRef Name="Estado" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdBodega" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteVta" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Nombres" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Ve_Vendedor" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="vt_Subtotal" Type="Double" />
-          <Property Name="vt_iva" Type="Double" />
-          <Property Name="vt_total" Type="Double" />
-          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="esta_impresa" Type="Boolean" />
-          <Property Name="IdEmpresa_in_eg_x_inv" Type="Int32" />
-          <Property Name="IdSucursal_in_eg_x_inv" Type="Int32" />
-          <Property Name="IdMovi_inven_tipo_in_eg_x_inv" Type="Int32" />
-          <Property Name="IdNumMovi_in_eg_x_inv" Type="Decimal" Precision="18" Scale="0" />
-        </EntityType>
         <EntityType Name="vwfa_factura_sin_guia">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3992,7 +3966,6 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <EntitySet Name="vwfa_proforma" EntityType="Self.vwfa_proforma" />
           <EntitySet Name="vwfa_proforma_det" EntityType="Self.vwfa_proforma_det" />
           <EntitySet Name="vwfa_cliente_consulta" EntityType="Self.vwfa_cliente_consulta" />
-          <EntitySet Name="vwfa_factura" EntityType="Self.vwfa_factura" />
           <EntitySet Name="vwfa_factura_sin_guia" EntityType="Self.vwfa_factura_sin_guia" />
           <EntitySet Name="vwfa_factura_x_fa_guia_remision" EntityType="Self.vwfa_factura_x_fa_guia_remision" />
           <EntitySet Name="vwfa_guia_remision" EntityType="Self.vwfa_guia_remision" />
@@ -4161,6 +4134,7 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
             <End Role="fa_proforma" EntitySet="fa_proforma" />
           </AssociationSet>
           <EntitySet Name="fa_parametro" EntityType="Model_facturacion.fa_parametro" />
+          <EntitySet Name="vwfa_factura" EntityType="Model_facturacion.vwfa_factura" />
           </EntityContainer>
         <EntityType Name="vwfa_factura_det">
           <Key>
@@ -4367,6 +4341,35 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <Property Name="NumeroDeItemProforma" Type="Int32" Nullable="false" />
           <Property Name="clave_desbloqueo_precios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwfa_factura">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+            <PropertyRef Name="vt_fecha" />
+            <PropertyRef Name="Ve_Vendedor" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Nombres" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Ve_Vendedor" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="vt_Subtotal0" Type="Double" />
+          <Property Name="vt_SubtotalIVA" Type="Double" />
+          <Property Name="vt_iva" Type="Double" />
+          <Property Name="vt_total" Type="Double" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="esta_impresa" Type="Boolean" />
+          <Property Name="IdEmpresa_in_eg_x_inv" Type="Int32" />
+          <Property Name="IdSucursal_in_eg_x_inv" Type="Int32" />
+          <Property Name="IdMovi_inven_tipo_in_eg_x_inv" Type="Int32" />
+          <Property Name="IdNumMovi_in_eg_x_inv" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -5010,29 +5013,6 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwfa_factura">
-            <EntityTypeMapping TypeName="Model_facturacion.vwfa_factura">
-              <MappingFragment StoreEntitySet="vwfa_factura">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
-                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
-                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
-                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
-                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-                <ScalarProperty Name="Ve_Vendedor" ColumnName="Ve_Vendedor" />
-                <ScalarProperty Name="vt_Subtotal" ColumnName="vt_Subtotal" />
-                <ScalarProperty Name="vt_iva" ColumnName="vt_iva" />
-                <ScalarProperty Name="vt_total" ColumnName="vt_total" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="esta_impresa" ColumnName="esta_impresa" />
-                <ScalarProperty Name="IdEmpresa_in_eg_x_inv" ColumnName="IdEmpresa_in_eg_x_inv" />
-                <ScalarProperty Name="IdSucursal_in_eg_x_inv" ColumnName="IdSucursal_in_eg_x_inv" />
-                <ScalarProperty Name="IdMovi_inven_tipo_in_eg_x_inv" ColumnName="IdMovi_inven_tipo_in_eg_x_inv" />
-                <ScalarProperty Name="IdNumMovi_in_eg_x_inv" ColumnName="IdNumMovi_in_eg_x_inv" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwfa_factura_sin_guia">
             <EntityTypeMapping TypeName="Model_facturacion.vwfa_factura_sin_guia">
               <MappingFragment StoreEntitySet="vwfa_factura_sin_guia">
@@ -5334,6 +5314,30 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
                 <ScalarProperty Name="IdTipoCbteCble_NC" ColumnName="IdTipoCbteCble_NC" />
                 <ScalarProperty Name="IdTipoCbteCble_Factura" ColumnName="IdTipoCbteCble_Factura" />
                 <ScalarProperty Name="IdMovi_inven_tipo_Factura" ColumnName="IdMovi_inven_tipo_Factura" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwfa_factura">
+            <EntityTypeMapping TypeName="Model_facturacion.vwfa_factura">
+              <MappingFragment StoreEntitySet="vwfa_factura">
+                <ScalarProperty Name="IdNumMovi_in_eg_x_inv" ColumnName="IdNumMovi_in_eg_x_inv" />
+                <ScalarProperty Name="IdMovi_inven_tipo_in_eg_x_inv" ColumnName="IdMovi_inven_tipo_in_eg_x_inv" />
+                <ScalarProperty Name="IdSucursal_in_eg_x_inv" ColumnName="IdSucursal_in_eg_x_inv" />
+                <ScalarProperty Name="IdEmpresa_in_eg_x_inv" ColumnName="IdEmpresa_in_eg_x_inv" />
+                <ScalarProperty Name="esta_impresa" ColumnName="esta_impresa" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="vt_total" ColumnName="vt_total" />
+                <ScalarProperty Name="vt_iva" ColumnName="vt_iva" />
+                <ScalarProperty Name="vt_SubtotalIVA" ColumnName="vt_SubtotalIVA" />
+                <ScalarProperty Name="vt_Subtotal0" ColumnName="vt_Subtotal0" />
+                <ScalarProperty Name="Ve_Vendedor" ColumnName="Ve_Vendedor" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
+                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

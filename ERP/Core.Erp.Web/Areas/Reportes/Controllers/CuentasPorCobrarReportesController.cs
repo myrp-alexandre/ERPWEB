@@ -20,7 +20,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         public ActionResult CmbCliente_CXC()
         {
-            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
+            decimal model = new decimal();
             return PartialView("_CmbCliente_CXC", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
