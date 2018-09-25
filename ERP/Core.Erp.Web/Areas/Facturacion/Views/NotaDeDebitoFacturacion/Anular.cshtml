@@ -12,16 +12,7 @@
     $(function () {
         CargarPuntosDeVenta();
         SetNaturalezaNota();
-        //Date picker
-        $('#vt_fecha').datepicker({
-            autoclose: true
-        })
-        $('#vt_fech_venc').datepicker({
-            autoclose: true
-        })
-        $("#vt_fecha").change(function () {
-            cargar_fecha_vencimiento();
-        });
+
         $("#IdSucursal").change(function () {
             CargarPuntosDeVenta();
             GetUltimoDocumento();
@@ -404,7 +395,15 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(q => q.no_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "vt_fecha" })
+                                    @Html.DevExpress().DateEditFor(q=> q.no_fecha, settings =>
+                                {
+                                    settings.Name = "no_fecha";
+                                    settings.Properties.UseMaskBehavior = true;
+                                    settings.Properties.EditFormat = EditFormat.Date;
+                                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                }).GetHtml()
                                     @Html.ValidationMessageFor(q => q.no_fecha, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -416,7 +415,15 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(q => q.no_fecha_venc, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "vt_fech_venc" })
+                                    @Html.DevExpress().DateEditFor(q=> q.no_fecha_venc, settings =>
+                                {
+                                    settings.Name = "no_fecha_venc";
+                                    settings.Properties.UseMaskBehavior = true;
+                                    settings.Properties.EditFormat = EditFormat.Date;
+                                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                }).GetHtml()
                                     @Html.ValidationMessageFor(q => q.no_fecha_venc, "", new { @class = "text-danger" })
                                 </div>
                             </div>
