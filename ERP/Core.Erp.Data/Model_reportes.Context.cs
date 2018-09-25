@@ -9,7 +9,6 @@
 
 namespace Core.Erp.Data
 {
-
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -93,6 +92,7 @@ namespace Core.Erp.Data
         public DbSet<VWINV_002> VWINV_002 { get; set; }
         public DbSet<VWINV_011> VWINV_011 { get; set; }
         public DbSet<VWCXC_006> VWCXC_006 { get; set; }
+        public DbSet<VWCXC_006_sin_comision> VWCXC_006_sin_comision { get; set; }
     
         public virtual ObjectResult<SPACTF_004_detalle_Result> SPACTF_004_detalle(Nullable<int> idEmpresa, Nullable<System.DateTime> fecha_corte, string idUsuario, Nullable<int> idActivoFijoTipo_ini, Nullable<int> idActivoFijoTipo_fin, Nullable<int> idCategoria_ini, Nullable<int> idCategoria_fin, string estado_Proceso)
         {
