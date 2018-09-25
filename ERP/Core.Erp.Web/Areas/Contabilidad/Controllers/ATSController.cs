@@ -66,11 +66,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             {
                 xml = sr.ReadToEnd();
             }
-
-
-            byte[] fileBytes = ms.ToArray();
-
-           
+            byte[] fileBytes = ms.ToArray();         
             return File(fileBytes, "application/xml", nombre_file+".xml");
 
 
