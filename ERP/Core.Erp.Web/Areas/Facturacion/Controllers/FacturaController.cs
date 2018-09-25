@@ -928,7 +928,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             if (impuesto != null)
                 info_det.vt_por_iva = impuesto.porcentaje;
             info_det.vt_iva = info_det.vt_Subtotal * (info_det.vt_por_iva / 100);
-            info_det.vt_total = info_det.vt_Subtotal + info_det.vt_iva;
+            info_det.vt_total = Math.Round(info_det.vt_Subtotal + info_det.vt_iva,2,MidpointRounding.AwayFromZero);
             
             list.Add(info_det);
         }
@@ -953,7 +953,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     edited_info.vt_por_iva = impuesto.porcentaje;
             }
             edited_info.vt_iva = edited_info.vt_Subtotal * (edited_info.vt_por_iva / 100);
-            edited_info.vt_total = edited_info.vt_Subtotal + edited_info.vt_iva;
+            edited_info.vt_total = Math.Round(edited_info.vt_Subtotal + edited_info.vt_iva,2,MidpointRounding.AwayFromZero);
         }
 
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
