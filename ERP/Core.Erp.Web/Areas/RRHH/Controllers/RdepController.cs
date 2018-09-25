@@ -69,9 +69,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             rdep = bus_rpde.get_list(IdEmpresa,Convert.ToInt32( model.pe_anio), model.IdEmpleado);
             var ms = new MemoryStream();
             var xw = XmlWriter.Create(ms);
-            string patch = Path.Combine(Server.MapPath("~/Content/file"), nombre_file);
-
-
             var serializer = new XmlSerializer(rdep.GetType());
             XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
             ns.Add("", "");
@@ -82,19 +79,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 xml = sr.ReadToEnd();
             }
+            byte[] fileBytes = ms.ToArray();
+            return File(fileBytes, "application/xml", nombre_file + ".xml");
 
-
-            if (System.IO.File.Exists(patch + ".xml"))
-                System.IO.File.Delete(patch + ".xml");
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(patch + ".xml", true))
-            {
-                file.WriteLine(xml);
-                file.Close();
-                byte[] fileBytes = System.IO.File.ReadAllBytes(patch + ".xml");
-               // FilesHelper_B.Guardar_xml(fileBytes, nombre_file, "", "", "");
-                patch = patch + ".xml";
-                return File(Encoding.UTF8.GetBytes(xml), "application/xml", nombre_file + ".xml");
-            }
         }
         public ActionResult GridViewPartial_rdep_det()
         {
