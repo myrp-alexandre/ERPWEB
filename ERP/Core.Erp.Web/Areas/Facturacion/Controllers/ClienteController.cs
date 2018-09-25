@@ -234,9 +234,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public JsonResult get_info_tipo_cliente(int IdEmpresa = 0 , int IdCliente_tipo = 0)
         {
             fa_cliente_tipo_Bus bus_cliente_tipo = new fa_cliente_tipo_Bus();
-            fa_cliente_tipo_Info resultado = bus_cliente_tipo.get_info(IdEmpresa, IdCliente_tipo);
-            if (resultado == null)
-                resultado = new fa_cliente_tipo_Info();
+            var resultado = bus_cliente_tipo.get_info(IdEmpresa, IdCliente_tipo);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
