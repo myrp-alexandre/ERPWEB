@@ -168,6 +168,7 @@ namespace Core.Erp.Info.Helps
         public int IdSubGrupo { get; set; }
         public bool mostrarSaldo0 { get; set; }
 
+        public decimal IdLiquidacion { get; set; }
         public cl_filtros_facturacion_Info()
         {
             fecha_ini = DateTime.Now.Date.AddMonths(-1);

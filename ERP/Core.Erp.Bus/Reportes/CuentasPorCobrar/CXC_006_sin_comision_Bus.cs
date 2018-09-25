@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Reportes.CuentasPorCobrar
 {
-   public class CXC_006_Bus
+   public class CXC_006_sin_comision_Bus
     {
-        CXC_006_Data odata = new CXC_006_Data();
-        public List<CXC_006_Info> get_list(int IdEmpresa, decimal IdLiquidacion)
+        CXC_006_sin_comision_Data odata = new CXC_006_sin_comision_Data();
+        public List<CXC_006_sin_comision_Info> get_list(int IdEmpresa, decimal IdLiquidacion)
         {
             try
             {

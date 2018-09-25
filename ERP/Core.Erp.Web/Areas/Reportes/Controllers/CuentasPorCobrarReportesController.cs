@@ -42,6 +42,15 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             var lst_cliente = bus_cliente.get_list(IdEmpresa, false);
             ViewBag.lst_cliente = lst_cliente;
 
+            fa_Vendedor_Bus bus_vendedor = new fa_Vendedor_Bus();
+            var lst_vendedor = bus_vendedor.get_list(IdEmpresa, false);
+            lst_vendedor.Add(new fa_Vendedor_Info
+            {
+            IdEmpresa = IdEmpresa,
+            IdVendedor = 0,
+            Ve_Vendedor = "Todos"
+            });
+            ViewBag.lst_vendedor = lst_vendedor;
         }
 
         private void cargar_cliente_contacto(cl_filtros_facturacion_Info model)
@@ -215,5 +224,15 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+        public ActionResult CXC_006(int IdEmpresa, decimal IdLiquidacion)
+        {
+            CXC_006_Rpt report = new CXC_006_Rpt();
+            report.p_IdEmpresa.Value = IdEmpresa;
+            report.p_IdLiquidacion.Value = IdLiquidacion;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+            return View(report);
+        }
     }
 }
