@@ -17,7 +17,7 @@ namespace Core.Erp.Data.CuentasPorPagar
 
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
-                    Lista = (from q in Context.cp_retencion_det
+                    Lista = (from q in Context.vwcp_retencion_det
                              where q.IdEmpresa == IdEmpresa
                              && q.IdRetencion == IdRetencion
                              select new cp_retencion_det_Info
@@ -30,9 +30,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  IdCodigo_SRI = q.IdCodigo_SRI,
                                  re_Codigo_impuesto = q.re_Codigo_impuesto,
                                  re_valor_retencion = q.re_valor_retencion,
-                                  re_Porcen_retencion=q.re_Porcen_retencion
-                                   
-                                  
+                                  re_Porcen_retencion=q.re_Porcen_retencion,
+                                  IdCtacble = q.IdCtaCble
                              }).ToList();
                 }
 
@@ -80,7 +79,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                             re_baseRetencion = (double)item.re_baseRetencion,
                             IdCodigo_SRI = item.IdCodigo_SRI,
                             re_Codigo_impuesto = item.re_Codigo_impuesto,
-                            re_valor_retencion = (double)item.re_valor_retencion,
+                            re_valor_retencion = Math.Round((double)item.re_valor_retencion,2,MidpointRounding.AwayFromZero),
                             re_Porcen_retencion =(double) item.re_Porcen_retencion,
                             re_estado="A"
                         };

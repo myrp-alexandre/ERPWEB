@@ -12,19 +12,18 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class cp_orden_pago_tipo_x_empresa
+    public partial class vwcp_retencion_det
     {
         public int IdEmpresa { get; set; }
-        public string IdTipo_op { get; set; }
+        public decimal IdRetencion { get; set; }
+        public int Idsecuencia { get; set; }
+        public string re_tipoRet { get; set; }
+        public double re_baseRetencion { get; set; }
+        public int IdCodigo_SRI { get; set; }
+        public string re_Codigo_impuesto { get; set; }
+        public double re_Porcen_retencion { get; set; }
+        public double re_valor_retencion { get; set; }
+        public string re_estado { get; set; }
         public string IdCtaCble { get; set; }
-        public string IdCentroCosto { get; set; }
-        public Nullable<int> IdTipoCbte_OP { get; set; }
-        public Nullable<int> IdTipoCbte_OP_anulacion { get; set; }
-        public string IdEstadoAprobacion { get; set; }
-        public string Buscar_FactxPagar { get; set; }
-        public string IdCtaCble_Credito { get; set; }
-        public Nullable<bool> Dispara_Alerta { get; set; }
-    
-        public virtual cp_orden_pago_tipo cp_orden_pago_tipo { get; set; }
     }
 }

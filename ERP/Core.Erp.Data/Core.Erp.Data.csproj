@@ -1549,6 +1549,9 @@
     <Compile Include="vwcp_retencion.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwcp_retencion_det.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwct_cbtecble_con_ctacble_acreedora.cs">
       <DependentUpon>Model_contabilidad.tt</DependentUpon>
     </Compile>

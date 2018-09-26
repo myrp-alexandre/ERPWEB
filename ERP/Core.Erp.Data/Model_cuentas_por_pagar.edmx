@@ -1020,8 +1020,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' no
             <PropertyRef Name="co_baseImponible" />
             <PropertyRef Name="co_valoriva" />
             <PropertyRef Name="re_Tiene_RFuente" />
-            <PropertyRef Name="ct_IdTipoCbte" />
-            <PropertyRef Name="ct_IdCbteCble" />
             <PropertyRef Name="IdProveedor" />
             <PropertyRef Name="Estado" />
             <PropertyRef Name="pe_nombreCompleto" />
@@ -1047,11 +1045,38 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion' no
           <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
           <Property Name="pe_razonSocial" Type="varchar" MaxLength="150" />
           <Property Name="re_Tiene_RFuente" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="ct_IdTipoCbte" Type="int" Nullable="false" />
-          <Property Name="ct_IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ct_IdTipoCbte" Type="int" />
+          <Property Name="ct_IdCbteCble" Type="numeric" Precision="18" Scale="0" />
           <Property Name="IdProveedor" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcp_retencion_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwcp_retencion_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdRetencion" />
+            <PropertyRef Name="Idsecuencia" />
+            <PropertyRef Name="re_tipoRet" />
+            <PropertyRef Name="re_baseRetencion" />
+            <PropertyRef Name="IdCodigo_SRI" />
+            <PropertyRef Name="re_Codigo_impuesto" />
+            <PropertyRef Name="re_Porcen_retencion" />
+            <PropertyRef Name="re_valor_retencion" />
+            <PropertyRef Name="re_estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdRetencion" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Idsecuencia" Type="int" Nullable="false" />
+          <Property Name="re_tipoRet" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="re_baseRetencion" Type="float" Nullable="false" />
+          <Property Name="IdCodigo_SRI" Type="int" Nullable="false" />
+          <Property Name="re_Codigo_impuesto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="re_Porcen_retencion" Type="float" Nullable="false" />
+          <Property Name="re_valor_retencion" Type="float" Nullable="false" />
+          <Property Name="re_estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
         </EntityType>
         <Association Name="FK_cp_codigo_SRI_cp_codigo_SRI_tipo">
           <End Role="cp_codigo_SRI_tipo" Type="Self.cp_codigo_SRI_tipo" Multiplicity="1" />
@@ -1805,6 +1830,21 @@ FROM [web].[vwcp_proveedor_consulta] AS [vwcp_proveedor_consulta]</DefiningQuery
 [vwcp_retencion].[Estado] AS [Estado], 
 [vwcp_retencion].[pe_nombreCompleto] AS [pe_nombreCompleto]
 FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwcp_retencion_det" EntityType="Self.vwcp_retencion_det" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+[vwcp_retencion_det].[IdEmpresa] AS [IdEmpresa], 
+[vwcp_retencion_det].[IdRetencion] AS [IdRetencion], 
+[vwcp_retencion_det].[Idsecuencia] AS [Idsecuencia], 
+[vwcp_retencion_det].[re_tipoRet] AS [re_tipoRet], 
+[vwcp_retencion_det].[re_baseRetencion] AS [re_baseRetencion], 
+[vwcp_retencion_det].[IdCodigo_SRI] AS [IdCodigo_SRI], 
+[vwcp_retencion_det].[re_Codigo_impuesto] AS [re_Codigo_impuesto], 
+[vwcp_retencion_det].[re_Porcen_retencion] AS [re_Porcen_retencion], 
+[vwcp_retencion_det].[re_valor_retencion] AS [re_valor_retencion], 
+[vwcp_retencion_det].[re_estado] AS [re_estado], 
+[vwcp_retencion_det].[IdCtaCble] AS [IdCtaCble]
+FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_cp_codigo_SRI_cp_codigo_SRI_tipo" Association="Self.FK_cp_codigo_SRI_cp_codigo_SRI_tipo">
             <End Role="cp_codigo_SRI_tipo" EntitySet="cp_codigo_SRI_tipo" />
@@ -2995,6 +3035,7 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
           </AssociationSet>
           <EntitySet Name="vwcp_orden_giro_det" EntityType="Model_cuentas_por_pagar.vwcp_orden_giro_det" />
           <EntitySet Name="cp_parametros" EntityType="Model_cuentas_por_pagar.cp_parametros" />
+          <EntitySet Name="vwcp_retencion_det" EntityType="Model_cuentas_por_pagar.vwcp_retencion_det" />
           <EntitySet Name="vwcp_retencion" EntityType="Model_cuentas_por_pagar.vwcp_retencion" />
         </EntityContainer>
         <ComplexType Name="spcp_Get_Data_orden_pago_con_cancelacion_data_Result">
@@ -3669,6 +3710,31 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
           <Property Name="pa_ctacble_x_RetFte_default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="vwcp_retencion_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdRetencion" />
+            <PropertyRef Name="Idsecuencia" />
+            <PropertyRef Name="re_tipoRet" />
+            <PropertyRef Name="re_baseRetencion" />
+            <PropertyRef Name="IdCodigo_SRI" />
+            <PropertyRef Name="re_Codigo_impuesto" />
+            <PropertyRef Name="re_Porcen_retencion" />
+            <PropertyRef Name="re_valor_retencion" />
+            <PropertyRef Name="re_estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdRetencion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Idsecuencia" Type="Int32" Nullable="false" />
+          <Property Name="re_tipoRet" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="re_baseRetencion" Type="Double" Nullable="false" />
+          <Property Name="IdCodigo_SRI" Type="Int32" Nullable="false" />
+          <Property Name="re_Codigo_impuesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="re_Porcen_retencion" Type="Double" Nullable="false" />
+          <Property Name="re_valor_retencion" Type="Double" Nullable="false" />
+          <Property Name="re_estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="vwcp_retencion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3683,8 +3749,6 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
             <PropertyRef Name="co_baseImponible" />
             <PropertyRef Name="co_valoriva" />
             <PropertyRef Name="re_Tiene_RFuente" />
-            <PropertyRef Name="ct_IdTipoCbte" />
-            <PropertyRef Name="ct_IdCbteCble" />
             <PropertyRef Name="IdProveedor" />
             <PropertyRef Name="Estado" />
             <PropertyRef Name="pe_nombreCompleto" />
@@ -3710,8 +3774,8 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
           <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="pe_razonSocial" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="re_Tiene_RFuente" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="ct_IdTipoCbte" Type="Int32" Nullable="false" />
-          <Property Name="ct_IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ct_IdTipoCbte" Type="Int32" />
+          <Property Name="ct_IdCbteCble" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IdProveedor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -4651,6 +4715,23 @@ FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
                 <ScalarProperty Name="pa_ctacble_iva" ColumnName="pa_ctacble_iva" />
                 <ScalarProperty Name="pa_ctacble_deudora" ColumnName="pa_ctacble_deudora" />
                 <ScalarProperty Name="pa_TipoCbte_OG" ColumnName="pa_TipoCbte_OG" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwcp_retencion_det">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.vwcp_retencion_det">
+              <MappingFragment StoreEntitySet="vwcp_retencion_det">
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="re_estado" ColumnName="re_estado" />
+                <ScalarProperty Name="re_valor_retencion" ColumnName="re_valor_retencion" />
+                <ScalarProperty Name="re_Porcen_retencion" ColumnName="re_Porcen_retencion" />
+                <ScalarProperty Name="re_Codigo_impuesto" ColumnName="re_Codigo_impuesto" />
+                <ScalarProperty Name="IdCodigo_SRI" ColumnName="IdCodigo_SRI" />
+                <ScalarProperty Name="re_baseRetencion" ColumnName="re_baseRetencion" />
+                <ScalarProperty Name="re_tipoRet" ColumnName="re_tipoRet" />
+                <ScalarProperty Name="Idsecuencia" ColumnName="Idsecuencia" />
+                <ScalarProperty Name="IdRetencion" ColumnName="IdRetencion" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

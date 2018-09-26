@@ -69,7 +69,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCtaCble">Cuenta contable padre importacion*</label>
-                    @Html.Partial("_CmbCuenta_contable_imp", Model)
+                    @Html.Partial("_CmbCuenta_contable_imp", Model.IdCtaCble)
                     @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -81,7 +81,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCtaCble_invntario">Cuenta contable inventario*</label>
-                    @Html.Partial("_CmbCuenta_contable_inv", Model)
+                    @Html.Partial("_CmbCuenta_contable_inv", Model.IdCtaCble_invntario)
                     @Html.ValidationMessageFor(q => q.IdCtaCble_invntario, "", new { @class = "text-danger" })
                 </div>
             </div>

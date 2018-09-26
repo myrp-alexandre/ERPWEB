@@ -45,8 +45,15 @@ namespace Core.Erp.Bus.CuentasPorPagar
 
                 info= odata.get_info(IdEmpresa,IdRetencion);
                 info.detalle = data_retencion_der.get_list(info.IdEmpresa, info.IdRetencion);
-                info.info_comprobante = bus_comprobante.get_info(info.IdEmpresa, info.ct_IdTipoCbte, info.ct_IdCbteCble);
-                info.info_comprobante.lst_ct_cbtecble_det = bus_comprobante_det.get_list(info.IdEmpresa, info.ct_IdTipoCbte, info.ct_IdCbteCble);
+                if (info.ct_IdCbteCble != null)
+                    info.info_comprobante = bus_comprobante.get_info(info.IdEmpresa, (int)info.ct_IdTipoCbte, (decimal)info.ct_IdCbteCble);
+                else
+                    info.info_comprobante = new Info.Contabilidad.ct_cbtecble_Info();
+
+                if (info.ct_IdCbteCble != null)
+                    info.info_comprobante.lst_ct_cbtecble_det = bus_comprobante_det.get_list(info.IdEmpresa, (int)info.ct_IdTipoCbte, (decimal)info.ct_IdCbteCble);
+                else
+                    info.info_comprobante.lst_ct_cbtecble_det = new List<Info.Contabilidad.ct_cbtecble_det_Info>();
                 return info;
             }
             catch (Exception)
@@ -163,20 +170,47 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comprobante.cb_Fecha.Year.ToString() + info.info_comprobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
                 info.info_comprobante.cb_Observacion = info.observacion;
-                if (bus_comprobante.modificarDB(info.info_comprobante))
+                if (info.info_comprobante.IdCbteCble != 0)
                 {
-                    if (odata.modificarDB(info))
+                    if (bus_comprobante.modificarDB(info.info_comprobante))
                     {
-                        data_retencion_der.eliminarDB(info.IdEmpresa,info.IdRetencion);
-                        data_retencion_der.guardarDB(info);
-                        return true;
+                        if (odata.modificarDB(info))
+                        {
+                            data_retencion_der.eliminarDB(info.IdEmpresa, info.IdRetencion);
+                            data_retencion_der.guardarDB(info);
+                            return true;
+                        }
+                        else
+                            return false;
+
                     }
                     else
                         return false;
-
                 }
                 else
-                    return false;
+                {
+                    if (bus_comprobante.guardarDB(info.info_comprobante))
+                    {
+                            info_comp_x_retencion.ct_IdEmpresa = info.IdEmpresa;
+                            info_comp_x_retencion.rt_IdRetencion = info.IdRetencion;
+                            info_comp_x_retencion.ct_IdTipoCbte = info.info_comprobante.IdTipoCbte;
+                            info_comp_x_retencion.ct_IdCbteCble = info.info_comprobante.IdCbteCble;
+                            info_comp_x_retencion.Observacion = info.observacion;
+                            data_comp_x_retencion.guardarDB(info_comp_x_retencion);
+
+
+                            info_talonario.IdEmpresa = info.IdEmpresa;
+                            info_talonario.Establecimiento = info.serie1;
+                            info_talonario.PuntoEmision = info.serie2;
+                            info_talonario.NumDocumento = info.NumRetencion;
+                            info_talonario.Usado = true;
+                            info_talonario.CodDocumentoTipo = "RETEN";
+                            data_talonario.modificar_estado_usadoDB(info_talonario);
+                            return true;
+                    }
+                    else
+                        return false;
+                }       
 
             }
             catch (Exception )

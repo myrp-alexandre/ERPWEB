@@ -51,8 +51,8 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string pe_apellido { get; set; }
         public string pe_nombre { get; set; }
         public string pe_razonSocial { get; set; }
-        public int ct_IdTipoCbte { get; set; }
-        public decimal ct_IdCbteCble { get; set; }
+        public int? ct_IdTipoCbte { get; set; }
+        public decimal? ct_IdCbteCble { get; set; }
         public string co_serie { get; set; }
         public string co_factura { get; set; }
         public string Descripcion { get; set; }
