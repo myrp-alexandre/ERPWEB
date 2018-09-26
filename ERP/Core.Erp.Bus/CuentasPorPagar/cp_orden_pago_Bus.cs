@@ -93,7 +93,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 {
                     if (info.Observacion == null)
                         info.Observacion = "";
-                    info.info_comprobante.cb_Observacion = "Orden pago al Prov: " + info_proveedore.info_persona.pe_nombreCompleto + " "+ info.Observacion;
+                    info.info_comprobante.cb_Observacion = "Orden pago al Prov: " + (info_proveedore.info_persona.pe_nombreCompleto)==null?"": info_proveedore.info_persona.pe_nombreCompleto + " "+ info.Observacion;
 
                 }
                 else
