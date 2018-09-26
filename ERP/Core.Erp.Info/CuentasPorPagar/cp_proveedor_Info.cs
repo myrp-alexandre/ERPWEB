@@ -64,6 +64,10 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string descripcion_clas_prove { get; set; }
 
         public decimal IdEntidad { get; set; }
+        public cp_proveedor_Info()
+        {
+            info_persona = new tb_persona_Info();
+        }
 
     }
 }
