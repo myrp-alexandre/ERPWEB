@@ -82,7 +82,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
                 IdEmpleado = 1,
-                FechaSalida=DateTime.Now,
+                FechaIngreso = DateTime.Now,
+                FechaSalida =DateTime.Now,
                IdCausaTerminacion= "CTL_02"
 
             };

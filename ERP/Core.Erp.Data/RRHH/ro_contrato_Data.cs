@@ -165,9 +165,9 @@ namespace Core.Erp.Data.RRHH
                         IdContrato = get_id(info.IdEmpresa, info.IdEmpleado),
                         IdContrato_Tipo = info.IdContrato_Tipo,
                         Observacion = info.Observacion,
-                        FechaInicio = info.FechaInicio,
+                        FechaInicio = info.FechaInicio.Date,
                         NumDocumento = info.NumDocumento,
-                        FechaFin = info.FechaFin,
+                        FechaFin = info.FechaFin.Date,
                         Sueldo=info.Sueldo,
                         IdNomina=info.IdNomina,
                         Estado = info.Estado = "A",
@@ -197,8 +197,8 @@ namespace Core.Erp.Data.RRHH
                     if (Entity == null)
                         return false;
                     Entity.Observacion = info.Observacion;
-                    Entity.FechaInicio = info.FechaInicio;
-                    Entity.FechaFin = info.FechaFin;
+                    Entity.FechaInicio = info.FechaInicio.Date;
+                    Entity.FechaFin = info.FechaFin.Date;
                     Entity.NumDocumento = info.NumDocumento;
                     Entity.Sueldo = info.Sueldo;
                     Entity.IdNomina = info.IdNomina;
