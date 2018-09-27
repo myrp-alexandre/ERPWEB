@@ -125,7 +125,7 @@ namespace Core.Erp.Data.ActivoFijo
                         Cod_VtaActivo = info.Cod_VtaActivo,
                         Concepto_Vta = info.Concepto_Vta,
                         Estado = info.Estado="A",
-                        Fecha_Venta = info.Fecha_Venta,
+                        Fecha_Venta = info.Fecha_Venta.Date,
                         IdActivoFijo = info.IdActivoFijo,
                         IdCbteCble = info.IdCbteCble,
                         IdEmpresa_ct = info.IdEmpresa_ct,
@@ -172,7 +172,7 @@ namespace Core.Erp.Data.ActivoFijo
 
                     Entity.Cod_VtaActivo = info.Cod_VtaActivo;
                     Entity.Concepto_Vta = info.Concepto_Vta;
-                    Entity.Fecha_Venta = info.Fecha_Venta;
+                    Entity.Fecha_Venta = info.Fecha_Venta.Date;
                     Entity.IdCbteCble = info.IdCbteCble;
                     Entity.IdEmpresa_ct = info.IdEmpresa_ct;
                     Entity.IdTipoCbte = info.IdTipoCbte;
