@@ -187,7 +187,7 @@ namespace Core.Erp.Data.Importacion
                         IdCiudad_destino = info.IdCiudad_destino,
                         IdCatalogo_via = info.IdCatalogo_via,
                         IdCatalogo_forma_pago = info.IdCatalogo_forma_pago,
-                        oe_fecha = info.oe_fecha,
+                        oe_fecha = info.oe_fecha.Date,
                         oe_fecha_llegada_est = info.oe_fecha_llegada_est,
                         oe_fecha_embarque = info.oe_fecha_embarque,
                         oe_fecha_desaduanizacion_est = info.oe_fecha_desaduanizacion_est,
@@ -256,7 +256,7 @@ namespace Core.Erp.Data.Importacion
                     Entity.IdCiudad_destino = info.IdCiudad_destino;
                     Entity.IdCatalogo_via = info.IdCatalogo_via;
                     Entity.IdCatalogo_forma_pago = info.IdCatalogo_forma_pago;
-                    Entity.oe_fecha = info.oe_fecha;
+                    Entity.oe_fecha = info.oe_fecha.Date;
                     Entity.oe_fecha_llegada_est = info.oe_fecha_llegada_est;
                     Entity.oe_fecha_embarque = info.oe_fecha_embarque;
                     Entity.oe_fecha_desaduanizacion_est = info.oe_fecha_desaduanizacion_est;

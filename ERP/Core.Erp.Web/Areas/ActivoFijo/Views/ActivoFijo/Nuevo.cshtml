@@ -334,6 +334,7 @@
     $(function () {
         cargar_categoria();
         get_info_tipo();
+        calcular_fechas();
     });
 
     $("#IdActivoFijoTipo").change(function () {
@@ -396,8 +397,6 @@
             }
         });
     };
-
-
 
     function calcular_fechas() {
         var fecha_inicio = Af_fecha_compra.GetValue();

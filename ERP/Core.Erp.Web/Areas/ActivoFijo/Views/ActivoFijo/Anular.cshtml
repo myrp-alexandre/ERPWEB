@@ -346,12 +346,14 @@
     $(function () {
         cargar_categoria();
         get_info_tipo();
+        calcular_fechas();
 
     });
 
     $("#IdActivoFijoTipo").change(function () {
         cargar_categoria();
         get_info_tipo();
+        calcular_fechas();
     });
 
     function get_info_tipo() {
@@ -406,6 +408,15 @@
             error: function (error) {
             }
         });
+    };
+    function calcular_fechas() {
+        var fecha_inicio = Af_fecha_compra.GetValue();
+        Af_fecha_ini_depre.SetValue(fecha_inicio);
+        var Af_Meses_depreciar = $("#Af_Meses_depreciar").val();
+        var date = new Date(moment(Af_fecha_ini_depre.GetValue(), "DD/MM/YYYY").add(Af_Meses_depreciar, 'month'));
+
+        Af_fecha_fin_depre.SetValue(date);
+
     };
 </script>
 
