@@ -43,14 +43,16 @@
                             <i class="fa fa-calendar"></i>
                         </div>
                         @Html.DevExpress().DateEditFor(q=> q.Af_fecha_compra, settings =>
-                    {
-                        settings.Name = "Af_fecha_compra";
-                        settings.Properties.UseMaskBehavior = true;
-                        settings.Properties.EditFormat = EditFormat.Date;
-                        settings.Properties.EditFormatString = "dd/MM/yyyy";
-                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                    }).GetHtml()
+                   {
+                       settings.Name = "Af_fecha_compra";
+                       settings.Properties.UseMaskBehavior = true;
+                       settings.Properties.EditFormat = EditFormat.Date;
+                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       settings.Properties.ClientSideEvents.DateChanged = "function(s,e){calcular_fechas();}";
+
+                   }).GetHtml()
                         @Html.ValidationMessageFor(q => q.Af_fecha_compra, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -337,12 +339,13 @@
     $("#IdActivoFijoTipo").change(function () {
         cargar_categoria();
         get_info_tipo();
+        calcular_fechas();
+
     });
 
 
     function get_info_tipo() {
         var activo = $("#IdActivoFijoTipo").val();
-
         var datos = {
             IdActivoFijoTipo: activo
         }
@@ -393,4 +396,16 @@
             }
         });
     };
+
+
+
+    function calcular_fechas() {
+        var fecha_inicio = Af_fecha_compra.GetValue();
+        Af_fecha_ini_depre.SetValue(fecha_inicio);
+        var Af_Meses_depreciar = $("#Af_Meses_depreciar").val();
+        var date = new Date(moment(Af_fecha_ini_depre.GetValue(), "DD/MM/YYYY").add(Af_Meses_depreciar, 'month'));
+       
+        Af_fecha_fin_depre.SetValue(date);
+
+        };
 </script>
