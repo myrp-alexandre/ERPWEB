@@ -149,12 +149,12 @@ namespace Core.Erp.Data.RRHH
                         IdEmpleado = info.IdEmpleado,
                         IdRubro = info.IdRubro,
                         IdEmpleado_Aprueba = info.IdEmpleado_Aprueba,
-                        Fecha=info.Fecha,
+                        Fecha=info.Fecha.Date,
                         MontoSol=info.MontoSol,
                         TasaInteres=info.TasaInteres,
                         TotalPrestamo=info.TotalPrestamo,
                         NumCuotas=info.NumCuotas,
-                        Fecha_PriPago=info.Fecha_PriPago,
+                        Fecha_PriPago=info.Fecha_PriPago.Date,
                         Observacion=info.Observacion,
                         Tipo_Calculo=info.Tipo_Calculo,
                         Estado = info.Estado = "A",
@@ -187,12 +187,12 @@ namespace Core.Erp.Data.RRHH
                         Entity.IdEmpleado = info.IdEmpleado;
                         Entity.IdRubro = info.IdRubro;
                         Entity.IdEmpleado_Aprueba = info.IdEmpleado_Aprueba;
-                        Entity.Fecha = info.Fecha;
+                        Entity.Fecha = info.Fecha.Date;
                         Entity.MontoSol = info.MontoSol;
                         Entity.TasaInteres = info.TasaInteres;
                         Entity.TotalPrestamo = info.TotalPrestamo;
                         Entity.NumCuotas = info.NumCuotas;
-                        Entity.Fecha_PriPago = info.Fecha_PriPago;
+                        Entity.Fecha_PriPago = info.Fecha_PriPago.Date;
                         Entity.Observacion = info.Observacion;
                         Entity.Tipo_Calculo = info.Tipo_Calculo;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;

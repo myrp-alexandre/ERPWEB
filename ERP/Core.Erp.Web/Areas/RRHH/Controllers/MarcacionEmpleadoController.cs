@@ -6,6 +6,12 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.RRHH;
 using Core.Erp.Info.RRHH;
+using Core.Erp.Bus.General;
+using Core.Erp.Info.General;
+using DevExpress.Web;
+using Core.Erp.Web.Helps;
+using Core.Erp.Info.Helps;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class MarcacionEmpleadoController : Controller
@@ -14,6 +20,25 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_marcaciones_x_empleado_Bus bus_marcaciones = new ro_marcaciones_x_empleado_Bus();
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
         int IdEmpresa = 0;
+
+
+        #region Metodos ComboBox bajo demanda
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        public ActionResult CmbEmpleado_marcacion()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbEmpleado_marcacion", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        #endregion
+
         public ActionResult Index()
         {
             return View();

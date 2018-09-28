@@ -16,15 +16,31 @@
         <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="FechaInicio">Fecha inicio*</label>
-                    @Html.TextBoxFor(q => q.pe_FechaIni, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "pe_FechaIni" })
+                    <label for="pe_FechaIni">Fecha inicio*</label>
+                    @Html.DevExpress().DateEditFor(q => q.pe_FechaIni, settings =>
+                   {
+                       settings.Name = "pe_FechaIni";
+                       settings.Properties.UseMaskBehavior = true;
+                       settings.Properties.EditFormat = EditFormat.Date;
+                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   }).GetHtml()
                     @Html.ValidationMessageFor(q => q.pe_FechaIni, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="FechaFin">Fecha fin*</label>
-                    @Html.TextBoxFor(q => q.pe_FechaFin, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "pe_FechaFin" })
+                    <label for="pe_FechaFin">Fecha fin*</label>
+                    @Html.DevExpress().DateEditFor(q => q.pe_FechaFin, settings =>
+                   {
+                       settings.Name = "pe_FechaFin";
+                       settings.Properties.UseMaskBehavior = true;
+                       settings.Properties.EditFormat = EditFormat.Date;
+                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   }).GetHtml()
                     @Html.ValidationMessageFor(q => q.pe_FechaFin, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -66,19 +82,3 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
-
-<script>
-    $(function () {
-
-        //Date picker
-        $('#pe_FechaIni').datepicker({
-            autoclose: true
-        })
-
-        $('#pe_FechaFin').datepicker({
-            autoclose: true
-        })
-    })
-
-
-</script>

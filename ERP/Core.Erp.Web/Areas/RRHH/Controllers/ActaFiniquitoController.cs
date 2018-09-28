@@ -45,7 +45,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public ActionResult CmbEmpleado_acta_finiquito()
         {
-            ro_Acta_Finiquito_Info model = new ro_Acta_Finiquito_Info();
+            decimal model = new decimal();
             return PartialView("_CmbEmpleado_acta_finiquito", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -81,7 +81,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_Acta_Finiquito_Info model = new ro_Acta_Finiquito_Info
             {
                 IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
-                IdEmpleado = 1,
                 FechaIngreso = DateTime.Now,
                 FechaSalida =DateTime.Now,
                IdCausaTerminacion= "CTL_02"

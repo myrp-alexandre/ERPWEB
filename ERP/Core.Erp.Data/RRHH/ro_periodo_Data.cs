@@ -124,8 +124,8 @@ namespace Core.Erp.Data.RRHH
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdPeriodo = get_id(info.IdEmpresa),
-                        pe_FechaIni = info.pe_FechaIni,
-                        pe_FechaFin = info.pe_FechaFin,
+                        pe_FechaIni = info.pe_FechaIni.Date,
+                        pe_FechaFin = info.pe_FechaFin.Date,
                         pe_anio = info.pe_anio,
                         pe_mes = info.pe_mes,
                         Carga_Todos_Empleados = info.Carga_Todos_Empleados,
@@ -157,8 +157,8 @@ namespace Core.Erp.Data.RRHH
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdPeriodo = info.IdPeriodo,
-                        pe_FechaIni = info.pe_FechaIni,
-                        pe_FechaFin = info.pe_FechaFin,
+                        pe_FechaIni = info.pe_FechaIni.Date,
+                        pe_FechaFin = info.pe_FechaFin.Date,
                         Carga_Todos_Empleados = info.Carga_Todos_Empleados,
                         pe_anio=info.pe_anio,
                         pe_mes=info.pe_mes,
@@ -190,8 +190,8 @@ namespace Core.Erp.Data.RRHH
                         return false;
                     Entity.IdEmpresa = info.IdEmpresa;
                     Entity.IdPeriodo = info.IdPeriodo;
-                    Entity.pe_FechaIni = info.pe_FechaIni;
-                    Entity.pe_FechaFin = info.pe_FechaFin;
+                    Entity.pe_FechaIni = info.pe_FechaIni.Date;
+                    Entity.pe_FechaFin = info.pe_FechaFin.Date;
                     Entity.Carga_Todos_Empleados = info.Carga_Todos_Empleados;
                     Entity.Cod_region = info.Cod_region;
                     Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;

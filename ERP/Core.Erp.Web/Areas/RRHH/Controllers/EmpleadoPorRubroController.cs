@@ -29,7 +29,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         public ActionResult CmbEmpleado_rubros_fijos()
         {
-            ro_empleado_x_ro_rubro_Info model = new ro_empleado_x_ro_rubro_Info();
+            decimal model = new decimal();
             return PartialView("_CmbEmpleado_rubros_fijos", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
