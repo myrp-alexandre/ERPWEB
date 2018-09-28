@@ -248,7 +248,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                         info_det.IdUnidadMedida_sinConversion = info_producto.IdUnidadMedida;
                     }
                 }
-
+            if(info_det.dm_cantidad_sinConversion>0 && info_det.IdProducto!=0)
             List_in_Ing_Egr_Inven_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_in_Ing_Egr_Inven_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
@@ -270,8 +270,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                         info_det.IdUnidadMedida_sinConversion = info_producto.IdUnidadMedida;
                     }
                 }
-
-            List_in_Ing_Egr_Inven_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            if (info_det.dm_cantidad_sinConversion > 0)
+                List_in_Ing_Egr_Inven_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_in_Ing_Egr_Inven_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_egr_inv_det", model);
