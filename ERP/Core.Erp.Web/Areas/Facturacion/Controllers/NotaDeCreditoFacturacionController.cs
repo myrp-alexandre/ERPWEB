@@ -279,7 +279,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_notaCreDeb_det_Info info_det)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            if(ModelState.IsValid)
+                List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_NotaCrebitoFacturacion_det", model);
@@ -289,7 +290,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_notaCreDeb_det_Info info_det)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            if (ModelState.IsValid)
+                List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_NotaCrebitoFacturacion_det", model);

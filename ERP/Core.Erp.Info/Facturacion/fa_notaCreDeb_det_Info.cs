@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.Erp.Info.Facturacion
 {
@@ -9,10 +10,17 @@ namespace Core.Erp.Info.Facturacion
         public int IdBodega { get; set; }
         public decimal IdNota { get; set; }
         public int Secuencia { get; set; }
+        [Required(ErrorMessage ="El campo producto es obligatorio")]
+        [Range(1,int.MaxValue,ErrorMessage ="El campo producto es obligatorio")]
         public decimal IdProducto { get; set; }
+        [Required(ErrorMessage = "El campo cantidad es obligatorio")]
+        [Range(1, int.MaxValue, ErrorMessage = "El campo cantidad es obligatorio")]
         public double sc_cantidad { get; set; }
+        [Required(ErrorMessage = "El campo precio es obligatorio")]
+        [Range(1, int.MaxValue, ErrorMessage = "El campo precio es obligatorio")]
         public double sc_Precio { get; set; }
         public double sc_descUni { get; set; }
+        [Required(ErrorMessage = "El campo % descuento es obligatorio")]
         public double sc_PordescUni { get; set; }
         public double sc_precioFinal { get; set; }
         public double sc_subtotal { get; set; }
