@@ -63,14 +63,21 @@
         <div class="col-md-12">
 
             <div class="col-md-3">
-               
                 <div class="form-group">
-                    <label for="Fecha">Fecha desde*</label>
+                    <label for="Fecha_Desde">Fecha desde*</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.Fecha_Desde, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_Desde" })
+                        @Html.DevExpress().DateEditFor(q => q.Fecha_Desde, settings =>
+                       {
+                           settings.Name = "Fecha_Desde";
+                           settings.Properties.UseMaskBehavior = true;
+                           settings.Properties.EditFormat = EditFormat.Date;
+                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       }).GetHtml()
                         @Html.ValidationMessageFor(q => q.Fecha_Desde, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -78,24 +85,40 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="Fecha">Fecha hasta*</label>
+                    <label for="Fecha_Hasta">Fecha hasta*</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.Fecha_Hasta, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_Hasta" })
+                        @Html.DevExpress().DateEditFor(q => q.Fecha_Hasta, settings =>
+                       {
+                           settings.Name = "Fecha_Hasta";
+                           settings.Properties.UseMaskBehavior = true;
+                           settings.Properties.EditFormat = EditFormat.Date;
+                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       }).GetHtml()
                         @Html.ValidationMessageFor(q => q.Fecha_Hasta, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="Fecha">Fecha retorno*</label>
+                    <label for="Fecha_Retorno">Fecha retorno*</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.Fecha_Retorno, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_Retorno" })
+                        @Html.DevExpress().DateEditFor(q => q.Fecha_Retorno, settings =>
+                       {
+                           settings.Name = "Fecha_Retorno";
+                           settings.Properties.UseMaskBehavior = true;
+                           settings.Properties.EditFormat = EditFormat.Date;
+                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       }).GetHtml()
                         @Html.ValidationMessageFor(q => q.Fecha_Retorno, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -139,21 +162,7 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
-<script>
-    $(function () {
 
-        //Date picker
-        $('#Fecha_Desde').datepicker({
-            autoclose: true
-        })
-
-        $('#Fecha_Hasta').datepicker({
-            autoclose: true
-        })
-        $('#Fecha_Retorno').datepicker({
-            autoclose: true
-        })
-    })
 </script>
 
 <script>

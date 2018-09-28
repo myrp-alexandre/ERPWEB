@@ -9158,6 +9158,8 @@
     <Content Include="Areas\RRHH\Views\MarcacionEmpleado\_CmbEmpleado_marcacion.cshtml" />
     <Content Include="Areas\RRHH\Views\ActaFiniquito\_CmbEmpleado_acta.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_013.cshtml" />
+    <Content Include="Areas\RRHH\Views\Contrato\_CmbEmpleado_contrato.cshtml" />
+    <Content Include="Areas\RRHH\Views\LiquidacionVacaciones\_CmbEmpleado_vaca.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
