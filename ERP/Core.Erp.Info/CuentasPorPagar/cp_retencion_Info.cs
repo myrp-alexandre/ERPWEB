@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,12 +14,18 @@ namespace Core.Erp.Info.CuentasPorPagar
         public decimal IdProveedor { get; set; }
         public decimal IdRetencion { get; set; }
         public string CodDocumentoTipo { get; set; }
+        [StringLength(3, MinimumLength = 1, ErrorMessage = "el campo serie1 debe tener 3 caracteres")]
         public string serie1 { get; set; }
+        [StringLength(3, MinimumLength = 1, ErrorMessage = "el campo serie2 debe tener 3 caracteres")]
         public string serie2 { get; set; }
+        [StringLength(20, MinimumLength = 1, ErrorMessage = "el campo número de retención debe tener mínimo 1 caracter y máximo 20")]
+
         public string NumRetencion { get; set; }
         public string NAutorizacion { get; set; }
         public Nullable<System.DateTime> Fecha_Autorizacion { get; set; }
+        [Required(ErrorMessage = "El campo fecha es obligatorio")]
         public System.DateTime fecha { get; set; }
+        [StringLength(500, MinimumLength = 1, ErrorMessage = "el campo Observación debe tener mínimo 1 caracter y máximo 500")]
         public string observacion { get; set; }
         public string re_Tiene_RTiva { get; set; }
         public string re_Tiene_RFuente { get; set; }
