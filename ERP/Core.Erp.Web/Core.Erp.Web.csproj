@@ -9150,6 +9150,7 @@
     <Content Include="Areas\Reportes\Views\ContabilidadReportes\_CmbCuenta_contable_Conta.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_006.cshtml" />
     <Content Include="Areas\RRHH\Views\MarcacionEmpleado\_CmbEmpleado_marcacion.cshtml" />
+    <Content Include="Areas\RRHH\Views\ActaFiniquito\_CmbEmpleado_acta.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

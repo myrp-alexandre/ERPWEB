@@ -43,10 +43,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
         }
 
-        public ActionResult CmbEmpleado_acta_finiquito()
+        public ActionResult CmbEmpleado_acta()
         {
             decimal model = new decimal();
-            return PartialView("_CmbEmpleado_acta_finiquito", model);
+            return PartialView("_CmbEmpleado_acta", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
