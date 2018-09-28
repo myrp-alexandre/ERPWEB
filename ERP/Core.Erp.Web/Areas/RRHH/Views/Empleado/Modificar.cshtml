@@ -169,7 +169,15 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                @Html.TextBoxFor(q => q.info_persona.pe_fechaNacimiento, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "pe_fechaNacimiento" })
+                                @Html.DevExpress().DateEditFor(q=> q.info_persona.pe_fechaNacimiento, settings =>
+                            {
+                                settings.Name = "pe_fechaNacimiento";
+                                settings.Properties.UseMaskBehavior = true;
+                                settings.Properties.EditFormat = EditFormat.Date;
+                                settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                            }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.info_persona.pe_fechaNacimiento, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -407,7 +415,15 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                @Html.TextBoxFor(q => q.em_fechaIngaRol, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechaingreso" })
+                                @Html.DevExpress().DateEditFor(q=> q.em_fechaIngaRol, settings =>
+                            {
+                                settings.Name = "em_fechaIngaRol";
+                                settings.Properties.UseMaskBehavior = true;
+                                settings.Properties.EditFormat = EditFormat.Date;
+                                settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                            }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.em_fechaIngaRol, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -419,7 +435,15 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                @Html.TextBoxFor(q => q.em_fechaSalida, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechasalida" })
+                                @Html.DevExpress().DateEditFor(q=> q.em_fechaSalida, settings =>
+                            {
+                                settings.Name = "em_fechaSalida";
+                                settings.Properties.UseMaskBehavior = true;
+                                settings.Properties.EditFormat = EditFormat.Date;
+                                settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                            }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.em_fechaSalida, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -632,20 +656,7 @@
 
 
 <script>
-    $(function () {
 
-
-        $('#fechaingreso').datepicker({
-            autoclose: true
-        });
-        $('#fechasalida').datepicker({
-            autoclose: true
-        });
-
-        $('#pe_fechaNacimiento').datepicker({
-            autoclose: true
-        });
-    });
 
     $("#pe_cedulaRuc").keyup(function () {
         validar();

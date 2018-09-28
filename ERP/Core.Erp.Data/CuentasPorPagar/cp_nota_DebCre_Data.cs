@@ -26,7 +26,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdSucursal = info.IdSucursal,
                         cn_fecha = info.cn_fecha,
                         Fecha_contable = info.Fecha_contable,
-                        cn_Fecha_vcto = info.cn_Fecha_vcto,
+                        cn_Fecha_vcto = info.cn_Fecha_vcto.Date,
                         cn_serie1 = info.cn_serie1,
                         cn_serie2 = info.cn_serie2,
                         cn_Nota = info.cn_Nota,
@@ -88,7 +88,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.IdSucursal = info.IdSucursal;
                         Entity.cn_fecha = info.cn_fecha;
                         Entity.Fecha_contable = info.Fecha_contable;
-                        Entity.cn_Fecha_vcto = info.cn_Fecha_vcto;
+                        Entity.cn_Fecha_vcto = info.cn_Fecha_vcto.Date;
                         Entity.cn_Nota = info.cn_Nota;
                         Entity.cn_observacion = info.cn_observacion;
                         Entity.cn_subtotal_iva = info.cn_subtotal_iva;

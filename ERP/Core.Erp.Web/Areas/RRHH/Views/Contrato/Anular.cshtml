@@ -90,14 +90,30 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="FechaInicio">Fecha inicio*</label>
-                    @Html.TextBoxFor(q => q.FechaInicio, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaInicio" })
+                    @Html.DevExpress().DateEditFor(q=> q.FechaInicio, settings =>
+                {
+                    settings.Name = "FechaInicio";
+                    settings.Properties.UseMaskBehavior = true;
+                    settings.Properties.EditFormat = EditFormat.Date;
+                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                }).GetHtml()
                     @Html.ValidationMessageFor(q => q.FechaInicio, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="FechaFin">Fecha fin*</label>
-                    @Html.TextBoxFor(q => q.FechaFin, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaFin" })
+                    @Html.DevExpress().DateEditFor(q=> q.FechaFin, settings =>
+                {
+                    settings.Name = "FechaFin";
+                    settings.Properties.UseMaskBehavior = true;
+                    settings.Properties.EditFormat = EditFormat.Date;
+                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                }).GetHtml()
                     @Html.ValidationMessageFor(q => q.FechaFin, "", new { @class = "text-danger" })
                 </div>
             </div>

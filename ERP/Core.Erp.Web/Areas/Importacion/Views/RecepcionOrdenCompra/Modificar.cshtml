@@ -47,7 +47,16 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.oe_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_oc", @disabled = "disabled" })
+                        @Html.DevExpress().DateEditFor(q=> q.oe_fecha, settings =>
+                    {
+                        settings.Name = "oe_fecha";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        settings.Enabled = false;
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.oe_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -70,8 +79,16 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.or_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "or_fecha" })
-                        @Html.ValidationMessageFor(q => q.oe_fecha_embarque, "", new { @class = "text-danger" })
+                        @Html.DevExpress().DateEditFor(q=> q.or_fecha, settings =>
+                    {
+                        settings.Name = "or_fecha";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.or_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>

@@ -160,10 +160,10 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdTipo_Persona = info.IdTipo_Persona,
                         IdPersona = info.IdPersona,
                         IdEntidad = info.IdEntidad,
-                        Fecha = info.Fecha,
+                        Fecha = info.Fecha.Date,
                         IdEstadoAprobacion = info.IdEstadoAprobacion,
                         IdFormaPago = info.IdFormaPago,
-                        Fecha_Pago = info.Fecha_Pago,
+                        Fecha_Pago = info.Fecha_Pago.Date,
                         IdBanco = info.IdBanco,
                         IdTipoFlujo = info.IdTipoFlujo,
                         IdTipoMovi = info.IdTipoMovi,
@@ -226,10 +226,10 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.IdTipo_Persona = info.IdTipo_Persona;
                         Entity.IdPersona = info.IdPersona;
                         Entity.IdEntidad = info.IdEntidad;
-                        Entity.Fecha = info.Fecha;
+                        Entity.Fecha = info.Fecha.Date;
                         Entity.IdEstadoAprobacion = info.IdEstadoAprobacion;
                         Entity.IdFormaPago = info.IdFormaPago;
-                        Entity.Fecha_Pago = info.Fecha_Pago;
+                        Entity.Fecha_Pago = info.Fecha_Pago.Date;
                         Entity.IdBanco = info.IdBanco;
                         Entity.IdTipoFlujo = info.IdTipoFlujo;
                         Entity.IdTipoMovi = info.IdTipoMovi;

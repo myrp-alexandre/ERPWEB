@@ -57,14 +57,30 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="FechaIngreso">Fecha ingreso*</label>
-                    @Html.TextBoxFor(q => q.FechaIngreso, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaIngreso" })
+                    @Html.DevExpress().DateEditFor(q=> q.FechaIngreso, settings =>
+                   {
+                       settings.Name = "FechaIngreso";
+                       settings.Properties.UseMaskBehavior = true;
+                       settings.Properties.EditFormat = EditFormat.Date;
+                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   }).GetHtml()
                     @Html.ValidationMessageFor(q => q.FechaIngreso, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="FechaSalida">Fecha salida*</label>
-                    @Html.TextBoxFor(q => q.FechaSalida, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaSalida" })
+                    @Html.DevExpress().DateEditFor(q=> q.FechaSalida, settings =>
+                {
+                    settings.Name = "FechaSalida";
+                    settings.Properties.UseMaskBehavior = true;
+                    settings.Properties.EditFormat = EditFormat.Date;
+                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                }).GetHtml()
                     @Html.ValidationMessageFor(q => q.FechaSalida, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -166,20 +182,6 @@
     }
 }
 <script>
-    $(function () {
-
-        //Date picker
-        $('#FechaIngreso').datepicker({
-            autoclose: true
-        })
-
-        $('#FechaSalida').datepicker({
-            autoclose: true
-        })
-    })
-</script>
-
-<script>
     function get_info()
     {
 
@@ -199,8 +201,8 @@
                     } else {
                         $("#IdContrato_Tipo").val(data.IdContrato_Tipo);
                         $("#IdContrato").val(data.IdContrato);
-                        $("#FechaInicio").val(data.FechaInicio);
-                        $("#FechaSalida").val('dd/MM/yyyy',data.em_fechaSalida);
+                        FechaIngreso.GetValue(data.FechaInicio);
+                        FechaSalida.GetValue('dd/MM/yyyy', data.em_fechaSalida);
                         $("#Sueldo").val(data.Sueldo);
 
                     }
@@ -217,8 +219,8 @@
     function Procesar_Liqui()
             {
         var datos = {
-                        FechaIngreso: $("#FechaIngreso").val(),
-                        FechaSalida: $("#FechaSalida").val(),
+                        FechaIngreso: FechaIngreso.GetValue(),
+                        FechaSalida: FechaSalida.GetValue(),
                         IdEmpleado: IdEmpleado.GetValue(),
                         UltimaRemuneracion: $("#Sueldo").val(),
                         idterminacion: $("#idterminacion").val(),

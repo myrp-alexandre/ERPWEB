@@ -163,7 +163,7 @@ namespace Core.Erp.Data.Banco
                     IdEmpresa = info.IdEmpresa,
                     IdTipoCbte = info.IdTipocbte,
                     IdCbteCble = info.IdCbteCble,
-                    cb_Fecha = info.cb_Fecha,
+                    cb_Fecha = info.cb_Fecha.Date,
                     cb_Observacion = info.cb_Observacion,
                     IdPeriodo = info.IdPeriodo,
                     cb_Anio = info.cb_Fecha.Year,
@@ -378,7 +378,7 @@ namespace Core.Erp.Data.Banco
                 if (diario == null)
                     return false;
                 
-                diario.cb_Fecha = info.cb_Fecha;
+                diario.cb_Fecha = info.cb_Fecha.Date;
                 diario.cb_Observacion = info.cb_Observacion;
                 diario.IdPeriodo = info.IdPeriodo;
                 diario.cb_Anio = info.cb_Fecha.Year;

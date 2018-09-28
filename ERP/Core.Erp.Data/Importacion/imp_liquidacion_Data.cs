@@ -122,7 +122,7 @@ namespace Core.Erp.Data.Importacion
                         IdOrdenCompra_ext = info.IdOrdenCompra_ext,
                         li_codigo = info.li_codigo,
                         li_num_DAU = info.li_num_DAU,
-                        li_fecha = info.li_fecha,
+                        li_fecha = info.li_fecha.Date,
                         li_observacion = info.li_observacion,
                         IdEmpresa_ct=info.IdEmpresa,
                         IdTipoCbte_ct=info.IdTipoCbte_ct,
