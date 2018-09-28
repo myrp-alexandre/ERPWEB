@@ -49,5 +49,21 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
                 e.Cancel = true;
             }
         }
+
+        private void GroupHeader_TipoCbte_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            if (Convert.ToBoolean(p_mostrar_agrupado.Value))
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void GroupFooter_TipoCbte_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            if (Convert.ToBoolean(p_mostrar_agrupado.Value))
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

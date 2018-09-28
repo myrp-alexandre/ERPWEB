@@ -42,9 +42,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_IdTipoCbte_Ogiro.Value = IdTipoCbte_Ogiro;
             model.p_IdCbteCble_Ogiro.Value = IdCbteCble_Ogiro;
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
-                model.RequestParameters = false;
+            model.usuario = SessionFixed.IdUsuario;
+            model.empresa = SessionFixed.NomEmpresa;
+            model.RequestParameters = false;
             return View(model);
         }
         public ActionResult CXP_002(int IdEmpresa_Ogiro = 0, int IdTipoCbte_Ogiro = 0, decimal IdCbteCble_Ogiro = 0)
@@ -62,9 +62,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_IdTipoCbte.Value = IdTipoCbte;
             model.p_IdCbteCble.Value = IdCbteCble;
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
-                model.RequestParameters = false;
+            model.usuario = SessionFixed.IdUsuario;
+            model.empresa = SessionFixed.NomEmpresa;
+            model.RequestParameters = false;
             return View(model);
         }
         public ActionResult CXP_004( int IdTipoCbte = 0, decimal IdCbteCble = 0)
@@ -73,9 +73,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_IdTipoCbte.Value = IdTipoCbte;
             model.p_IdCbteCble.Value = IdCbteCble;
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
-                model.RequestParameters = false;
+            model.usuario = SessionFixed.IdUsuario;
+            model.empresa = SessionFixed.NomEmpresa;
+            model.RequestParameters = false;
             return View(model);
         }
         public ActionResult CXP_005( decimal IdConciliacion = 0)
@@ -83,36 +83,31 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             CXP_005_Rpt model = new CXP_005_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             model.p_IdConciliacion.Value = IdConciliacion;
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
-                model.RequestParameters = false;
+            model.usuario = SessionFixed.IdUsuario;
+            model.empresa = SessionFixed.NomEmpresa;
+            model.RequestParameters = false;
             return View(model);
         }
         public ActionResult CXP_006( decimal IdRetencion = 0)
         {
             CXP_006_Rpt model = new CXP_006_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdEmpresa.Value = SessionFixed.IdEmpresa;
             model.p_IdRetencion.Value = IdRetencion;
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
-                model.RequestParameters = false;
+            model.usuario = SessionFixed.IdUsuario;
+            model.empresa = SessionFixed.NomEmpresa;
+            model.RequestParameters = false;
             return View(model);
         }
-        public ActionResult CXP_007( DateTime? fecha_ini, DateTime? fecha_fin, bool mostrar_agrupado = false)
+        public ActionResult CXP_007()
         {
-            cl_filtros_Info model = new cl_filtros_Info
-            {
-                fecha_ini = fecha_ini == null ? DateTime.Now : Convert.ToDateTime(fecha_ini),
-                fecha_fin = fecha_fin == null ? DateTime.Now : Convert.ToDateTime(fecha_fin),
-                mostrar_agrupado = mostrar_agrupado 
-            };
+            cl_filtros_Info model = new cl_filtros_Info();
             CXP_007_Rpt report = new CXP_007_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdEmpresa.Value = SessionFixed.IdEmpresa;
             report.p_fecha_ini.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
             report.p_mostrar_agrupado.Value = model.mostrar_agrupado;
-            report.usuario = Session["IdUsuario"].ToString();
-            report.empresa = Session["nom_empresa"].ToString();
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
             report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
@@ -122,12 +117,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult CXP_007(cl_filtros_Info model)
         {
             CXP_007_Rpt report = new CXP_007_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             report.p_fecha_ini.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
             report.p_mostrar_agrupado.Value = model.mostrar_agrupado;
-            report.usuario = Session["IdUsuario"].ToString();
-            report.empresa = Session["nom_empresa"].ToString();
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
             report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
@@ -153,13 +148,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             };
             cargar_combos();
             CXP_008_Rpt report = new CXP_008_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdEmpresa.Value = SessionFixed.IdEmpresa;
             report.p_fecha.Value = model.fecha;
             report.p_IdProveedor.Value = model.IdProveedor;
             report.p_no_mostrar_en_conciliacion.Value = model.no_mostrar_en_conciliacion;
             report.p_no_mostrar_saldo_0.Value = model.no_mostrar_saldo_en_0;
-            report.usuario = Session["IdUsuario"].ToString();
-            report.empresa = Session["nom_empresa"].ToString();
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
             report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
@@ -169,13 +164,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult CXP_008(cl_filtros_Info model)
         {
             CXP_008_Rpt report = new CXP_008_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdEmpresa.Value = SessionFixed.IdEmpresa;
             report.p_fecha.Value = model.fecha;
             report.p_IdProveedor.Value = model.IdProveedor;
             report.p_no_mostrar_en_conciliacion.Value = model.no_mostrar_en_conciliacion;
             report.p_no_mostrar_saldo_0.Value = model.no_mostrar_saldo_en_0;
-            report.usuario = Session["IdUsuario"].ToString();
-            report.empresa = Session["nom_empresa"].ToString();
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
             cargar_combos();
             report.RequestParameters = false;
                 ViewBag.Report = report;

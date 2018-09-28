@@ -886,6 +886,12 @@
     <Compile Include="Reportes\Inventario\INV_012_Rpt.Designer.cs">
       <DependentUpon>INV_012_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Inventario\INV_013_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Inventario\INV_013_Rpt.Designer.cs">
+      <DependentUpon>INV_013_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\RRHH\ROL_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9151,6 +9157,7 @@
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_006.cshtml" />
     <Content Include="Areas\RRHH\Views\MarcacionEmpleado\_CmbEmpleado_marcacion.cshtml" />
     <Content Include="Areas\RRHH\Views\ActaFiniquito\_CmbEmpleado_acta.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_013.cshtml" />
     <Content Include="Areas\RRHH\Views\Contrato\_CmbEmpleado_contrato.cshtml" />
     <Content Include="Areas\RRHH\Views\LiquidacionVacaciones\_CmbEmpleado_vaca.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
@@ -9267,6 +9274,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -9497,6 +9505,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Inventario\INV_012_Rpt.resx">
       <DependentUpon>INV_012_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Inventario\INV_013_Rpt.resx">
+      <DependentUpon>INV_013_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_001_Rpt.resx">
       <DependentUpon>ROL_001_Rpt.cs</DependentUpon>
