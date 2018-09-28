@@ -46,7 +46,12 @@ namespace Core.Erp.Data.Importacion
                 }
                 foreach (var item in Lista)
                 {
-                    item.pr_descripcion = item.pr_descripcion + "" + (item.lote_num_lote) == null ? "" : item.lote_num_lote;
+                    string fecha = "";
+                    if (item.lote_num_lote == null)
+                        item.lote_num_lote = "";
+                    if (item.lote_fecha_vcto != null)
+                        fecha=item.lote_fecha_vcto.ToString().Substring(0,10);
+                    item.pr_descripcion = item.pr_descripcion + " " + (item.lote_num_lote) +" "+fecha;
                 }
                 return Lista;
             }
@@ -92,7 +97,12 @@ namespace Core.Erp.Data.Importacion
                 }
                 foreach (var item in Lista)
                 {
-                    item.pr_descripcion = item.pr_descripcion + "" + (item.lote_num_lote)==null?"": item.lote_num_lote;
+                    string fecha = "";
+                    if (item.lote_num_lote == null)
+                        item.lote_num_lote = "";
+                    if (item.lote_fecha_vcto != null)
+                        fecha = item.lote_fecha_vcto.ToString().Substring(0, 10);
+                    item.pr_descripcion = item.pr_descripcion + " " + (item.lote_num_lote) + " " + fecha;
                 }
                 return Lista;
             }

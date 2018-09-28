@@ -61,8 +61,8 @@ namespace Core.Erp.Data.Importacion
                         or_observacion = Entity.or_observacion,
                         IdEmpresa_oc = Entity.IdEmpresa_oc,
                         IdOrdenCompraExt = Entity.IdOrdenCompraExt,
-                       
-                        IdCatalogo_via=Entity.IdCatalogo_via,
+                        oe_fecha = Entity.oe_fecha,
+                        IdCatalogo_via =Entity.IdCatalogo_via,
                         pe_nombreCompleto=Entity.pe_nombreCompleto
                         
                         

@@ -302,7 +302,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                     in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
                     if (info_producto != null)
                     {
-                        if (info_det.IdProducto != 0 & info_det.od_cantidad > 0)
+                        if (info_det.IdProducto != 0 & info_det.od_cantidad > 0 && info_det.od_costo > 0)
                         {
                             info_det.pr_descripcion = info_producto.pr_descripcion_combo;
                             info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
@@ -328,7 +328,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                     in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
                     if (info_producto != null)
                     {
-                        if (info_det.IdProducto != 0 & info_det.od_cantidad > 0)
+                        if (info_det.IdProducto != 0 & info_det.od_cantidad > 0 && info_det.od_costo > 0)
                         {
                             info_det.pr_descripcion = info_producto.pr_descripcion_combo;
                             info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
