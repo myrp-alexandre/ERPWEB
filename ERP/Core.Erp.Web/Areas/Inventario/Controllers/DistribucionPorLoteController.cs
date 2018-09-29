@@ -17,11 +17,15 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         in_Ing_Egr_Inven_distribucion_Bus bus_ing_inv = new in_Ing_Egr_Inven_distribucion_Bus();
         in_Ing_Egr_Inven_det_Bus bus_det_ing_inv = new in_Ing_Egr_Inven_det_Bus();
         in_Ing_Egr_Inven_distribucion_lst List_in_Ing_Egr_Inven_det = new in_Ing_Egr_Inven_distribucion_lst();
+        lst_x_distribuir lst_x_distribuir_lis = new lst_x_distribuir();
         in_parametro_Bus bus_in_param = new in_parametro_Bus();
         in_Ing_Egr_Inven_Bus bus_ingreso = new in_Ing_Egr_Inven_Bus();
         string mensaje = string.Empty;
         decimal IdProducto_padre = 0;
         List<in_Producto_Info> list_productos = new List<in_Producto_Info>();
+        List<in_Ing_Egr_Inven_distribucion_Info> lst_x_distribuir = new List<in_Ing_Egr_Inven_distribucion_Info>();
+        in_Producto_Bus bus_producto = new in_Producto_Bus();
+        string NombreProducto = "";
 
         #endregion
 
@@ -70,12 +74,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             if (IdSucursal != 0 & IdMovi_inven_tipo != 0 & IdNumMovi != 0 & Session["list_distribuida"] == null)
             {
                 model = bus_ing_inv.get_list_distribuido(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
-                Session["list_distribuida"] = model;
+               List_in_Ing_Egr_Inven_det.set_list( model, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
             }
             else
             {
-                model = Session["list_distribuida"] as List<in_Ing_Egr_Inven_distribucion_Info>;
+                model = List_in_Ing_Egr_Inven_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             }
             return PartialView("_GridViewPartial_distribuidos", model);
         }
@@ -83,31 +87,31 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             List<in_Ing_Egr_Inven_distribucion_Info> model = new List<in_Ing_Egr_Inven_distribucion_Info>();
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            if (IdSucursal != 0 & IdMovi_inven_tipo != 0 & IdNumMovi != 0 & Session["list_distribuida"] == null)
+            if (IdSucursal != 0 & IdMovi_inven_tipo != 0 & IdNumMovi != 0 &lst_x_distribuir_lis.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession)).Count() == 0)
             {
                 model = bus_ing_inv.get_list_x_distribuir(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
-                Session["lst_x_distribuir"] = model;
+               lst_x_distribuir_lis.set_list(  model, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
             }
             else
             {
-                model = Session["lst_x_distribuir"] as List<in_Ing_Egr_Inven_distribucion_Info>;
+                model = lst_x_distribuir_lis.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             }
             return PartialView("_GridViewPartial_por_distribuir", model);
         }
         public ActionResult GridViewPartial_distribucion_det()
         {
-            if (Session["IdProducto_padre"] != null)
-                IdProducto_padre = (decimal)Session["IdProducto_padre"];
+            if (SessionFixed.IdProducto_padre_dist != null)
+                IdProducto_padre = Convert.ToDecimal(SessionFixed.IdProducto_padre_dist);
             cargar_combos_detalle(IdProducto_padre);
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ViewBag.producto =Session["NombreProducto"];
             List<in_Ing_Egr_Inven_distribucion_Info> model = new List<in_Ing_Egr_Inven_distribucion_Info>();
             return PartialView("_GridViewPartial_distribucion_det", model);
         }
         private void cargar_combos_detalle(decimal IdProducto_padre=0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            in_Producto_Bus bus_producto = new in_Producto_Bus();
             var lst_producto = bus_producto.get_list_combo_hijo(IdEmpresa, IdProducto_padre);
             ViewBag.lst_producto = lst_producto;
             Session["list_productos"] = lst_producto;
@@ -120,8 +124,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0 , int IdSucursal = 0, int IdMovi_inven_tipo = 0, decimal IdNumMovi = 0, string signo="")
         {
-            Session["list_distribuida"] = null;
-            Session["lst_x_distribuir"] = null;
+            
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
             in_parametro_Info i_param = bus_in_param.get_info(IdEmpresa);
             if (i_param == null)
                 return RedirectToAction("Index");
@@ -144,8 +154,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public ActionResult Nuevo(in_Ing_Egr_Inven_distribucion_Info model)
         {
             bus_ing_inv = new in_Ing_Egr_Inven_distribucion_Bus();
-            model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
-            model.lst_x_distribuir = Session["lst_x_distribuir"] as List<in_Ing_Egr_Inven_distribucion_Info>;
+            model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list(model.IdTransaccionSession);
+            model.lst_x_distribuir = lst_x_distribuir_lis.get_list(model.IdTransaccionSession);
           
             model.IdUsuario = SessionFixed.IdUsuario.ToString();
             model.IdEmpresa =Convert.ToInt32( SessionFixed.IdEmpresa);
@@ -193,20 +203,19 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
                 }
                 List_in_Ing_Egr_Inven_det.UpdateRow(info_det);
-                model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
+                model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list(Convert.ToDecimal( SessionFixed.IdTransaccionSession));
 
                 // actualizar lista distribuidas
-                List<in_Ing_Egr_Inven_distribucion_Info> lst_x_distribuir;
-                lst_x_distribuir = Session["lst_x_distribuir"] as List<in_Ing_Egr_Inven_distribucion_Info>;
+                lst_x_distribuir =lst_x_distribuir_lis.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
                 foreach (var item in lst_x_distribuir)
                 {
                     item.can_distribuida = model.lst_distribuido.Sum(v => v.dm_cantidad);
                     item.can_x_distribuir = item.can_total - item.can_distribuida;
 
                 }
-                Session["lst_x_distribuir"] = lst_x_distribuir;
-                if (Session["IdProducto_padre"] != null)
-                    IdProducto_padre = (decimal)Session["IdProducto_padre"];
+                lst_x_distribuir_lis.set_list( lst_x_distribuir, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+                if (SessionFixed.IdProducto_padre_dist != null)
+                    IdProducto_padre = Convert.ToDecimal(SessionFixed.IdProducto_padre_dist);
                 cargar_combos_detalle(IdProducto_padre);
             }
             return PartialView("_GridViewPartial_distribuidos", model.lst_distribuido);
@@ -216,22 +225,21 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             List_in_Ing_Egr_Inven_det.DeleteRow(secuencia_distribucion);
             in_Ing_Egr_Inven_distribucion_Info model = new in_Ing_Egr_Inven_distribucion_Info();
-            model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
+            model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
             // actualizar lista distribuidas
-            List<in_Ing_Egr_Inven_distribucion_Info> lst_x_distribuir;
-            lst_x_distribuir = Session["lst_x_distribuir"] as List<in_Ing_Egr_Inven_distribucion_Info>;
+            lst_x_distribuir = lst_x_distribuir_lis.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             foreach (var item in lst_x_distribuir)
             {
                 item.can_distribuida = model.lst_distribuido.Sum(v => v.dm_cantidad);
                 item.can_x_distribuir = item.can_total - item.can_distribuida;
 
             }
-            Session["lst_x_distribuir"] = lst_x_distribuir;
+            lst_x_distribuir_lis.set_list(lst_x_distribuir, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
 
-            if (Session["IdProducto_padre"] != null)
-                IdProducto_padre = (decimal)Session["IdProducto_padre"];
+            if (SessionFixed.IdProducto_padre_dist != null)
+                IdProducto_padre = Convert.ToDecimal(SessionFixed.IdProducto_padre_dist);
             cargar_combos_detalle(IdProducto_padre);
             return PartialView("_GridViewPartial_distribuidos", model.lst_distribuido);
         }
@@ -269,7 +277,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
                 }
                 // si existe
-                var pro = List_in_Ing_Egr_Inven_det.get_list().Where(v => v.IdProducto == info_det.IdProducto).FirstOrDefault();
+                var pro = List_in_Ing_Egr_Inven_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession)).Where(v => v.IdProducto == info_det.IdProducto).FirstOrDefault();
                 if (pro == null)
                     List_in_Ing_Egr_Inven_det.AddRow(info_det);
                 else
@@ -278,21 +286,22 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                     List_in_Ing_Egr_Inven_det.UpdateRow(pro);
                 }
 
-                model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
+                model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
                 // actualizar lista distribuidas
-                List<in_Ing_Egr_Inven_distribucion_Info> lst_x_distribuir;
-                lst_x_distribuir = Session["lst_x_distribuir"] as List<in_Ing_Egr_Inven_distribucion_Info>;
-                if(lst_x_distribuir!=null)
+                lst_x_distribuir = lst_x_distribuir_lis.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+                if (lst_x_distribuir!=null)
                 foreach (var item in lst_x_distribuir)
                 {
                     item.can_distribuida = model.lst_distribuido.Sum(v => v.dm_cantidad);
                     item.can_x_distribuir = item.can_total - item.can_distribuida;
                 }
-                Session["lst_x_distribuir"] = lst_x_distribuir;
-                if (Session["IdProducto_padre"] != null)
-                    IdProducto_padre = (decimal)Session["IdProducto_padre"];
+                lst_x_distribuir_lis.set_list(lst_x_distribuir, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+                if (SessionFixed.IdProducto_padre_dist != null)
+                    IdProducto_padre = Convert.ToDecimal(SessionFixed.IdProducto_padre_dist);
                 cargar_combos_detalle(IdProducto_padre);
+                ViewBag.producto = Session["NombreProducto"];
+
             }
             return PartialView("_GridViewPartial_distribucion_det", model.lst_distribuido);
         }
@@ -327,20 +336,20 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
                 }
                 List_in_Ing_Egr_Inven_det.UpdateRow(info_det);
-                model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
+                model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
                 // actualizar lista distribuidas
                 List<in_Ing_Egr_Inven_distribucion_Info> lst_x_distribuir;
-                lst_x_distribuir = Session["lst_x_distribuir"] as List<in_Ing_Egr_Inven_distribucion_Info>;
+                lst_x_distribuir = lst_x_distribuir_lis.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
                 foreach (var item in lst_x_distribuir)
                 {
                     item.can_distribuida = model.lst_distribuido.Sum(v => v.dm_cantidad);
                     item.can_x_distribuir = item.can_total - item.can_distribuida;
 
                 }
-                Session["lst_x_distribuir"] = lst_x_distribuir;
-                if (Session["IdProducto_padre"] != null)
-                    IdProducto_padre = (decimal)Session["IdProducto_padre"];
+                lst_x_distribuir_lis.set_list(lst_x_distribuir, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+                if (SessionFixed.IdProducto_padre_dist != null)
+                    IdProducto_padre = Convert.ToDecimal(SessionFixed.IdProducto_padre_dist);
                 cargar_combos_detalle(IdProducto_padre);
             }
             return PartialView("_GridViewPartial_distribucion_det", model.lst_distribuido);
@@ -350,22 +359,21 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             List_in_Ing_Egr_Inven_det.DeleteRow(secuencia_distribucion);
             in_Ing_Egr_Inven_distribucion_Info model = new in_Ing_Egr_Inven_distribucion_Info();
-            model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list();
+            model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
             // actualizar lista distribuidas
-            List<in_Ing_Egr_Inven_distribucion_Info> lst_x_distribuir;
-            lst_x_distribuir = Session["lst_x_distribuir"] as List<in_Ing_Egr_Inven_distribucion_Info>;
+            lst_x_distribuir = lst_x_distribuir_lis.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             foreach (var item in lst_x_distribuir)
             {
                 item.can_distribuida = model.lst_distribuido.Sum(v => v.dm_cantidad);
                 item.can_x_distribuir = item.can_total - item.can_distribuida;
 
             }
-            Session["lst_x_distribuir"] = lst_x_distribuir;
+          lst_x_distribuir_lis.set_list( lst_x_distribuir,Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
 
-            if (Session["IdProducto_padre"] != null)
-                IdProducto_padre = (decimal)Session["IdProducto_padre"];
+            if (SessionFixed.IdProducto_padre_dist != null)
+                IdProducto_padre = Convert.ToDecimal(SessionFixed.IdProducto_padre_dist);
             cargar_combos_detalle(IdProducto_padre);
             return PartialView("_GridViewPartial_distribucion_det", model.lst_distribuido);
         }
@@ -375,7 +383,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         public JsonResult Mostrar(decimal IdProducto_padre = 0)
         {
-            Session["IdProducto_padre"] = IdProducto_padre;
+            var info_producto = bus_producto.get_info(Convert.ToInt32( SessionFixed.IdEmpresa),IdProducto_padre);
+
+            if (info_producto != null)
+               Session["NombreProducto"]= info_producto.pr_descripcion;
+            SessionFixed.IdProducto_padre_dist =IdProducto_padre.ToString();
+           
             cargar_combos_detalle(IdProducto_padre);
 
             return Json("", JsonRequestBehavior.AllowGet);
@@ -386,25 +399,26 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
     #region clase personalizada
     public class in_Ing_Egr_Inven_distribucion_lst
     {
-        public List<in_Ing_Egr_Inven_distribucion_Info> get_list()
+        string variable = "in_Ing_Egr_Inven_distribucion_Info";
+        public List<in_Ing_Egr_Inven_distribucion_Info> get_list(decimal IdTransaccionSession)//Convert.ToDecimal(SesIdTransaccionSessionsionFixed.)
         {
-            if (HttpContext.Current.Session["list_distribuida"] == null)
+            if (HttpContext.Current.Session[variable+IdTransaccionSession.ToString()] == null)
             {
                 List<in_Ing_Egr_Inven_distribucion_Info> list = new List<in_Ing_Egr_Inven_distribucion_Info>();
 
-                HttpContext.Current.Session["list_distribuida"] = list;
+                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<in_Ing_Egr_Inven_distribucion_Info>)HttpContext.Current.Session["list_distribuida"];
+            return (List<in_Ing_Egr_Inven_distribucion_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<in_Ing_Egr_Inven_distribucion_Info> list)
+        public void set_list(List<in_Ing_Egr_Inven_distribucion_Info> list, decimal IdTransaccionSession)
         {
-            HttpContext.Current.Session["list_distribuida"] = list;
+            HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
         }
 
         public void AddRow(in_Ing_Egr_Inven_distribucion_Info info_det)
         {
-            List<in_Ing_Egr_Inven_distribucion_Info> list = get_list();
+            List<in_Ing_Egr_Inven_distribucion_Info> list = get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             info_det.secuencia_distribucion = list.Count == 0 ? 1 : list.Max(q => q.secuencia_distribucion) + 1;
             info_det.IdProducto = info_det.IdProducto;
             info_det.IdUnidadMedida = info_det.IdUnidadMedida;
@@ -416,7 +430,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         public void UpdateRow(in_Ing_Egr_Inven_distribucion_Info info_det)
         {
-            in_Ing_Egr_Inven_distribucion_Info edited_info = get_list().Where(m => m.secuencia_distribucion == info_det.secuencia_distribucion).First();
+            in_Ing_Egr_Inven_distribucion_Info edited_info = get_list(Convert.ToDecimal( SessionFixed.IdTransaccionSession)).Where(m => m.secuencia_distribucion == info_det.secuencia_distribucion).First();
 
             edited_info.IdProducto = info_det.IdProducto;
             edited_info.IdUnidadMedida = info_det.IdUnidadMedida;
@@ -427,9 +441,30 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         public void DeleteRow(int secuencia_distribucion)
         {
-            List<in_Ing_Egr_Inven_distribucion_Info> list = get_list();
+            List<in_Ing_Egr_Inven_distribucion_Info> list = get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             list.Remove(list.Where(m => m.secuencia_distribucion == secuencia_distribucion).First());
         }
+    }
+
+  public class lst_x_distribuir
+    {
+        string variable = "lst_x_distribuir";
+        public List<in_Ing_Egr_Inven_distribucion_Info> get_list(decimal IdTransaccionSession)//Convert.ToDecimal(SesIdTransaccionSessionsionFixed.)
+        {
+            if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<in_Ing_Egr_Inven_distribucion_Info> list = new List<in_Ing_Egr_Inven_distribucion_Info>();
+
+                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<in_Ing_Egr_Inven_distribucion_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<in_Ing_Egr_Inven_distribucion_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
+        }
+
     }
     #endregion
 

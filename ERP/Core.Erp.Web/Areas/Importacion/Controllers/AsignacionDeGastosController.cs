@@ -128,7 +128,7 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost]
         public ActionResult Nuevo(imp_ordencompra_ext_Info model)
         {
-            model.lst_gastos_asignados = Lis_imp_orden_compra_ext_ct_cbteble_det_gastos_Info_lst.get_list(model.IdTransaccionSession);
+            model.lst_gastos_asignados = Lis_imp_orden_compra_ext_ct_cbteble_det_gastos_Info_lst.get_list(model.IdTransaccionSession).Where(v=>v.IdGasto_tipo!=null).ToList();
             if (model.lst_gastos_asignados == null)
             {
                 ViewBag.mensaje = "no existe detalle";

@@ -7,6 +7,8 @@
         settings.KeyFieldName = "secuencia_distribucion";
 
 
+        settings.Caption = ViewBag.producto;
+
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "DistribucionPorLote", Action = "EditingAddNew", Area = "Inventario" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "DistribucionPorLote", Action = "EditingUpdate", Area = "Inventario" };
@@ -20,7 +22,8 @@
         settings.SettingsPager.Visible = true;
         settings.SettingsBehavior.AllowSelectByRowClick = false;
 
-      
+        settings.Settings.ShowFooter = true;
+
 
         //Configuración click derecho
         settings.SettingsContextMenu.Enabled = true;
@@ -48,7 +51,7 @@
             });
 
         });
-       
+
         settings.Columns.Add("dm_cantidad", "Cantidad").Width = Unit.Percentage(20);
     });
 }
