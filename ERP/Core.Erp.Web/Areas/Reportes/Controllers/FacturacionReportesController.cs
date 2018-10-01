@@ -488,7 +488,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cargar_combos(model);
             FAC_011_Rpt report = new FAC_011_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdCliente.Value = model.IdCliente == null ? 0 : model.IdCliente;
+            report.p_IdCliente.Value = model.IdCliente;
             report.p_fechaIni.Value = model.fecha_ini;
             report.p_fechaFin.Value = model.fecha_fin;
             report.p_mostrarAnulados.Value = model.mostrarAnulados;
@@ -503,7 +503,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             FAC_011_Rpt report = new FAC_011_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdCliente.Value = model.IdCliente == null ? 0 : model.IdCliente;
+            report.p_IdCliente.Value = model.IdCliente;
             report.p_fechaIni.Value = model.fecha_ini;
             report.p_fechaFin.Value = model.fecha_fin;
             report.p_mostrarAnulados.Value = model.mostrarAnulados;
