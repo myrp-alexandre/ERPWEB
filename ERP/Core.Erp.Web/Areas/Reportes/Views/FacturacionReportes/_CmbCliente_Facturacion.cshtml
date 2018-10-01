@@ -26,7 +26,7 @@
         settings.Properties.AllowNull = true;
     })
     .BindList(new Core.Erp.Web.Areas.Reportes.Controllers.FacturacionReportesController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Reportes.Controllers.FacturacionReportesController().get_info_bajo_demanda)
-    .Bind(Model.IdCliente);
+    .Bind(Model.GetType() == typeof(Core.Erp.Info.Helps.cl_filtros_facturacion_Info) ? "" : (Model == 0 ? "" : Model));
 
 }
 @comboBox.GetHtml()
