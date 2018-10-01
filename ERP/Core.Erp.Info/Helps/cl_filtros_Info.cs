@@ -169,6 +169,8 @@ namespace Core.Erp.Info.Helps
         public bool mostrarSaldo0 { get; set; }
 
         public decimal IdLiquidacion { get; set; }
+        public bool mostrarAnulados { get; set; }
+        public bool mostrar_observacion_completa { get; set; }
         public cl_filtros_facturacion_Info()
         {
             fecha_ini = DateTime.Now.Date.AddMonths(-1);

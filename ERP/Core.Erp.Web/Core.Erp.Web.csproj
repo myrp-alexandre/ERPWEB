@@ -778,6 +778,12 @@
     <Compile Include="Reportes\Facturacion\FAC_010_Rpt.Designer.cs">
       <DependentUpon>FAC_010_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_011_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_011_Rpt.Designer.cs">
+      <DependentUpon>FAC_011_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Importacion\IMP_002_gastos_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9160,6 +9166,7 @@
     <Content Include="Areas\RRHH\Views\Contrato\_CmbEmpleado_contrato.cshtml" />
     <Content Include="Areas\RRHH\Views\LiquidacionVacaciones\_CmbEmpleado_vaca.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_013.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_011.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -9451,6 +9458,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Facturacion\FAC_010_Rpt.resx">
       <DependentUpon>FAC_010_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\FAC_011_Rpt.resx">
+      <DependentUpon>FAC_011_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Importacion\IMP_002_gastos_Rpt.resx">
       <DependentUpon>IMP_002_gastos_Rpt.cs</DependentUpon>
