@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Data.Contabilidad;
 using Core.Erp.Info.Contabilidad;
+using Core.Erp.Info.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,6 +70,19 @@ namespace Core.Erp.Bus.Contabilidad
             try
             {
                 return odata.anularDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool ValidarFechaTransaccion(int IdEmpresa, DateTime Fecha, cl_enumeradores.eModulo Modulo, ref string mensaje)
+        {
+            try
+            {
+                return odata.ValidarFechaTransaccion(IdEmpresa,Fecha, Modulo, ref mensaje);
             }
             catch (Exception)
             {

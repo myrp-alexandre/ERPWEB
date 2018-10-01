@@ -226,6 +226,7 @@ namespace Core.Erp.Data.Contabilidad
             Entities_general db_general = new Entities_general();
             try
             {
+                Fecha = Fecha.Date;
                 int Periodo = Convert.ToInt32(Fecha.ToString("yyyyMM"));
 
                 var empresa = db_general.tb_empresa.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
@@ -238,30 +239,86 @@ namespace Core.Erp.Data.Contabilidad
                     }
                 }
 
+                ct_periodo per = db_conta.ct_periodo.Where(q => q.IdEmpresa == IdEmpresa && q.IdPeriodo == Periodo).FirstOrDefault();
+
+                if(per == null)
+                {
+                    mensaje = "El periodo "+Periodo+" de la transacción no se encuentra registrado.";
+                    return false;
+                }
+
+                if (per.pe_cerrado == "S")
+                {
+                    mensaje = "El periodo " + Periodo + " se encuentra cerrado.";
+                    return false;
+                }
+
                 switch (Modulo)
                 {
                     case cl_enumeradores.eModulo.INV:
                         using (Entities_inventario db = new Entities_inventario())
                         {
-
+                            var param = db.in_parametro.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                            if (param == null)
+                            {
+                                mensaje = "No existen parámetros para el módulo de inventario";
+                                return false;
+                            }
+                            /*
+                            if (param.DiasTransaccionesAFuturo > 0 && DateTime.Now.Date.AddDays(param.DiasTransaccionesAFuturo) < Fecha)
+                            {
+                                mensaje = "La fecha de la transacción es superior a la fecha permitida por los parámetros del módulo de importación";
+                                return false;
+                            }
+                            */
                         }
                         break;
                     case cl_enumeradores.eModulo.FAC:
                         using (Entities_facturacion db = new Entities_facturacion())
                         {
-
+                            var param = db.fa_parametro.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                            if (param == null)
+                            {
+                                mensaje = "No existen parámetros para el módulo de facturación";
+                                return false;
+                            }
+                            if (param.DiasTransaccionesAFuturo > 0 && DateTime.Now.Date.AddDays(param.DiasTransaccionesAFuturo) < Fecha)
+                            {
+                                mensaje = "La fecha de la transacción es superior a la fecha permitida por los parámetros del módulo de facturación";
+                                return false;
+                            }
                         }
                         break;
                     case cl_enumeradores.eModulo.COM:
                         using (Entities_compras db = new Entities_compras())
                         {
-
+                            var param = db.com_parametro.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                            if (param == null)
+                            {
+                                mensaje = "No existen parámetros para el módulo de compras";
+                                return false;
+                            }
+                            if (param.DiasTransaccionesAFuturo > 0 && DateTime.Now.Date.AddDays(param.DiasTransaccionesAFuturo) < Fecha)
+                            {
+                                mensaje = "La fecha de la transacción es superior a la fecha permitida por los parámetros del módulo de compras";
+                                return false;
+                            }
                         }
                         break;
                     case cl_enumeradores.eModulo.ACF:
                         using (Entities_activo_fijo db = new Entities_activo_fijo())
                         {
-
+                            var param = db.Af_Parametros.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                            if (param == null)
+                            {
+                                mensaje = "No existen parámetros para el módulo de activo fijo";
+                                return false;
+                            }
+                            if (param.DiasTransaccionesAFuturo > 0 && DateTime.Now.Date.AddDays(param.DiasTransaccionesAFuturo) < Fecha)
+                            {
+                                mensaje = "La fecha de la transacción es superior a la fecha permitida por los parámetros del módulo de activo fijo";
+                                return false;
+                            }
                         }
                         break;
                     case cl_enumeradores.eModulo.RRHH:
@@ -273,37 +330,99 @@ namespace Core.Erp.Data.Contabilidad
                     case cl_enumeradores.eModulo.IMP:
                         using (Entities_importacion db = new Entities_importacion())
                         {
-
+                            var param = db.imp_parametro.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                            if (param == null)
+                            {
+                                mensaje = "No existen parámetros para el módulo de importación";
+                                return false;
+                            }
+                            /*
+                            if (param.DiasTransaccionesAFuturo > 0 && DateTime.Now.Date.AddDays(param.DiasTransaccionesAFuturo) < Fecha)
+                            {
+                                mensaje = "La fecha de la transacción es superior a la fecha permitida por los parámetros del módulo de importación";
+                                return false;
+                            }
+                            */
                         }
                         break;
                     case cl_enumeradores.eModulo.CONTA:
                         using (Entities_contabilidad db = new Entities_contabilidad())
                         {
-
+                            var param = db.ct_parametro.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                            if (param == null)
+                            {
+                                mensaje = "No existen parámetros para el módulo de contabilidad";
+                                return false;
+                            }
+                            if (param.DiasTransaccionesAFuturo > 0 && DateTime.Now.Date.AddDays(param.DiasTransaccionesAFuturo) < Fecha)
+                            {
+                                mensaje = "La fecha de la transacción es superior a la fecha permitida por los parámetros del módulo de contabilidad";
+                                return false;
+                            }
                         }
                         break;
                     case cl_enumeradores.eModulo.CAJA:
                         using (Entities_caja db = new Entities_caja())
                         {
-
+                            var param = db.caj_parametro.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                            if (param == null)
+                            {
+                                mensaje = "No existen parámetros para el módulo de caja";
+                                return false;
+                            }
+                            if (param.DiasTransaccionesAFuturo > 0 && DateTime.Now.Date.AddDays(param.DiasTransaccionesAFuturo) < Fecha)
+                            {
+                                mensaje = "La fecha de la transacción es superior a la fecha permitida por los parámetros del módulo de caja";
+                                return false;
+                            }
                         }
                         break;
                     case cl_enumeradores.eModulo.BANCO:
                         using (Entities_banco db = new Entities_banco())
                         {
-
+                            var param = db.ba_parametros.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                            if (param == null)
+                            {
+                                mensaje = "No existen parámetros para el módulo de bancos";
+                                return false;
+                            }
+                            if (param.DiasTransaccionesAFuturo > 0 && DateTime.Now.Date.AddDays(param.DiasTransaccionesAFuturo) < Fecha)
+                            {
+                                mensaje = "La fecha de la transacción es superior a la fecha permitida por los parámetros del módulo de bancos";
+                                return false;
+                            }
                         }
                         break;
                     case cl_enumeradores.eModulo.CXC:
                         using (Entities_cuentas_por_cobrar db = new Entities_cuentas_por_cobrar())
                         {
-
+                            var param = db.cxc_Parametro.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                            if (param == null)
+                            {
+                                mensaje = "No existen parámetros para el módulo de cuentas por cobrar";
+                                return false;
+                            }
+                            if (param.DiasTransaccionesAFuturo > 0 && DateTime.Now.Date.AddDays(param.DiasTransaccionesAFuturo) < Fecha)
+                            {
+                                mensaje = "La fecha de la transacción es superior a la fecha permitida por los parámetros del módulo de cuentas por cobrar";
+                                return false;
+                            }
                         }
                         break;
                     case cl_enumeradores.eModulo.CXP:
                         using (Entities_cuentas_por_pagar db = new Entities_cuentas_por_pagar())
                         {
-
+                            var param = db.cp_parametros.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                            if (param == null)
+                            {
+                                mensaje = "No existen parámetros para el módulo de cuentas por pagar";
+                                return false;
+                            }
+                            if (param.DiasTransaccionesAFuturo > 0 && DateTime.Now.Date.AddDays(param.DiasTransaccionesAFuturo) < Fecha)
+                            {
+                                mensaje = "La fecha de la transacción es superior a la fecha permitida por los parámetros del módulo de cuentas por pagar";
+                                return false;
+                            }
                         }
                         break;
                 }

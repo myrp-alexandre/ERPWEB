@@ -1,4 +1,5 @@
-﻿using Core.Erp.Bus.Facturacion;
+﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Bus.Facturacion;
 using Core.Erp.Bus.General;
 using Core.Erp.Bus.Inventario;
 using Core.Erp.Bus.SeguridadAcceso;
@@ -47,6 +48,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_parametro_Bus bus_param = new fa_parametro_Bus();
         seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
         tbl_TransaccionesAutorizadas_Bus bus_transaccionesAut = new tbl_TransaccionesAutorizadas_Bus();
+        ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         #endregion
 
         #region Index
@@ -134,7 +136,16 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             string MsgValidaciones = string.Empty;
             i_validar.PedirDesbloqueo = false;
-            
+
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa,i_validar.vt_fecha,cl_enumeradores.eModulo.FAC,ref msg))
+            {
+                return false;
+            }
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.vt_fecha, cl_enumeradores.eModulo.INV, ref msg))
+            {
+                return false;
+            }
+
             i_validar.lst_det = List_det.get_list(i_validar.IdTransaccionSession);
             if (i_validar.lst_det.Count == 0)
             {
