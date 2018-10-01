@@ -5,6 +5,14 @@
     {
         Response.Redirect("~/Account/Login");
     }
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
+}
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
@@ -252,10 +260,11 @@
 
             <div role="tabpanel" class="tab-pane" id="tb_info_laboral">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="IdDivision">División*</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdDivision, settings =>
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdDivision">División*</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdDivision, settings =>
                                {
                                    settings.Name = "IdDivision";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
@@ -272,14 +281,14 @@
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_division).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdDivision, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(q => q.IdDivision, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="IdArea">Área*</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdArea, settings =>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdArea">Área*</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdArea, settings =>
                                {
                                    settings.Name = "IdArea";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
@@ -296,14 +305,14 @@
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_area).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdArea, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(q => q.IdArea, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="IdDepartamento">Departamento*</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdDepartamento, settings =>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdDepartamento">Departamento*</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdDepartamento, settings =>
                                {
                                    settings.Name = "IdDepartamento";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
@@ -320,14 +329,14 @@
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_departamento).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdDepartamento, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(q => q.IdDepartamento, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="IdCargo">Cargo*</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdCargo, settings =>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdCargo">Cargo*</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdCargo, settings =>
                                {
                                    settings.Name = "IdCargo";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
@@ -344,14 +353,14 @@
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_cargo).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdCargo, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(q => q.IdCargo, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="IdPuntoCargo">Punto cargo</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdPuntoCargo, settings =>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdPuntoCargo">Punto cargo</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdPuntoCargo, settings =>
                                {
                                    settings.Name = "IdPunto_cargo";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
@@ -368,14 +377,14 @@
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_punto_cargo).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdPuntoCargo, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(q => q.IdPuntoCargo, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="IdEmpleado_Supervisor">Jefe inmediato</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado_Supervisor, settings =>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdEmpleado_Supervisor">Jefe inmediato</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado_Supervisor, settings =>
                                {
                                    settings.Name = "IdEmpleado_Supervisor";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
@@ -392,7 +401,8 @@
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_empleado).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdEmpleado_Supervisor, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(q => q.IdEmpleado_Supervisor, "", new { @class = "text-danger" })
+                            </div>
                         </div>
                     </div>
                 </div>

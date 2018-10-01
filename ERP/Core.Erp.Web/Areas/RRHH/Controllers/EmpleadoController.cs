@@ -56,18 +56,23 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                cargar_combos();
-                //if (ModelState.IsValid)
-                //{
+                string mensaje = "";
+                mensaje = Validar(info);
+                if(mensaje!="")
+                    {
+                    ViewBag.mensaje = mensaje;
+                    cargar_combos();
+                    return View(info);
+                }
                     info.IdEmpresa = GetIdEmpresa();
-                    if (!bus_empleado.guardarDB(info))
-                        return View(info);
-                    else
-                        return RedirectToAction("Index");
-                //}
-                //else
-                //    return View(info);
-
+                if (!bus_empleado.guardarDB(info))
+                {
+                    cargar_combos();
+                    return View(info);
+                }
+                
+               return RedirectToAction("Index");
+               
             }
             catch (Exception)
             {
@@ -79,6 +84,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+
                 cargar_combos();
                 ro_empleado_Info info = new ro_empleado_Info();
                 return View(info);
@@ -95,16 +101,22 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                string mensaje = "";
+                mensaje = Validar(info);
+                if (mensaje != "")
+                {
+                    ViewBag.mensaje = mensaje;
+                    cargar_combos();
+                    return View(info);
+                }
                 info.IdEmpresa = GetIdEmpresa();
-                    if (!bus_empleado.modificarDB(info))
-                    {
-                        cargar_combos();
-                        return View(info);
-                    }
-                    else
-                        return RedirectToAction("Index");
-                
-               
+                if (!bus_empleado.modificarDB(info))
+                {
+                    cargar_combos();
+                    return View(info);
+                }
+
+                return RedirectToAction("Index");
 
             }
             catch (Exception)
@@ -134,13 +146,22 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-
-                if (!bus_empleado.anularDB(info))
+                string mensaje = "";
+                mensaje = Validar(info);
+                if (mensaje != "")
+                {
+                    ViewBag.mensaje = mensaje;
+                    cargar_combos();
                     return View(info);
-                else
-                    return RedirectToAction("Index");
+                }
+                info.IdEmpresa = GetIdEmpresa();
+                if (!bus_empleado.anularDB(info))
+                {
+                    cargar_combos();
+                    return View(info);
+                }
 
-
+                return RedirectToAction("Index");
             }
             catch (Exception)
             {
@@ -148,12 +169,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        public ActionResult Anular(int IdCargo = 0)
+        public ActionResult Anular(int Idempleado = 0)
         {
             try
             {
                 IdEmpresa = GetIdEmpresa();
-                return View(bus_empleado.get_info(IdEmpresa, IdCargo));
+                cargar_combos();
+                return View(bus_empleado.get_info(IdEmpresa, Idempleado));
 
             }
             catch (Exception)
@@ -226,6 +248,45 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        private string Validar(ro_empleado_Info info)
+        {
+            try
+            {
+                string mensaje = "";
+                if(info.info_persona.pe_cedulaRuc=="")
+                {
+                    mensaje = "El campo cédula es obligatoria";
+                }
+                if (info.info_persona.pe_nombre == ""|info.info_persona.pe_nombre==null )
+                {
+                    mensaje = "El campo nombres es obligatoria";
+                }
+                if (info.info_persona.pe_apellido == "" | info.info_persona.pe_apellido==null)
+                {
+                    mensaje = "El campo apellidos es obligatoria";
+                }
+                if (info.info_persona.pe_correo == ""| info.info_persona.pe_correo==null)
+                {
+                    mensaje = "El campo correo es obligatoria";
+                }
+                if (info.info_persona.pe_fechaNacimiento == null)
+                {
+                    mensaje = "El campo fecha nacimiento es obligatoria";
+                }
+                if (info.info_persona.pe_celular == ""| info.info_persona.pe_celular==null)
+                {
+                    mensaje = "El campo fecha nacimiento es obligatoria";
+                }
+                
+                return mensaje;
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }
