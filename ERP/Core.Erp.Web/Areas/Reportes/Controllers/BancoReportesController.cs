@@ -1,19 +1,17 @@
-﻿using Core.Erp.Info.Helps;
+﻿using Core.Erp.Bus.Banco;
+using Core.Erp.Bus.General;
+using Core.Erp.Info.General;
+using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
 using Core.Erp.Web.Reportes.Banco;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Core.Erp.Bus.Banco;
-using Core.Erp.Bus.General;
-using Core.Erp.Info.Reportes.Banco;
-using Core.Erp.Info.General;
-using DevExpress.Web;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
+    [SessionTimeout]
     public class BancoReportesController : Controller
     {
         ba_Cbte_Ban_Bus bus_cbte = new ba_Cbte_Ban_Bus();

@@ -2,22 +2,19 @@
 using Core.Erp.Bus.Facturacion;
 using Core.Erp.Bus.General;
 using Core.Erp.Bus.Inventario;
-using Core.Erp.Info.CuentasPorCobrar;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
 using Core.Erp.Info.Inventario;
-using Core.Erp.Info.Reportes.Facturacion;
 using Core.Erp.Web.Helps;
 using Core.Erp.Web.Reportes.Facturacion;
 using DevExpress.Web;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
+    [SessionTimeout]
     public class FacturacionReportesController : Controller
     {
         tb_persona_Bus bus_persona = new tb_persona_Bus();

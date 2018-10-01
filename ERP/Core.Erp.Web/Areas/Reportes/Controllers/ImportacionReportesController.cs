@@ -8,12 +8,11 @@ using Core.Erp.Web.Reportes.Importacion;
 using DevExpress.Web;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
+    [SessionTimeout]
     public class ImportacionReportesController : Controller
     {
         in_Producto_Bus bus_producto = new in_Producto_Bus();

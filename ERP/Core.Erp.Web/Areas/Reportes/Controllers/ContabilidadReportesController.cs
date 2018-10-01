@@ -1,15 +1,16 @@
-﻿using Core.Erp.Info.Helps;
-using Core.Erp.Web.Reportes.Contabilidad;
-using Core.Erp.Bus.Contabilidad;
-using System;
-using System.Web.Mvc;
-using System.Collections.Generic;
-using Core.Erp.Web.Helps;
+﻿using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.Contabilidad;
+using Core.Erp.Info.Helps;
+using Core.Erp.Web.Helps;
+using Core.Erp.Web.Reportes.Contabilidad;
 using DevExpress.Web;
+using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
+    [SessionTimeout]
     public class ContabilidadReportesController : Controller
     {
         #region Combos

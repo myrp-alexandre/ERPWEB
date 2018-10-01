@@ -3,7 +3,6 @@ using Core.Erp.Bus.General;
 using Core.Erp.Info.Facturacion;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
-using Core.Erp.Info.Reportes.CuentasPorCobrar;
 using Core.Erp.Web.Helps;
 using Core.Erp.Web.Reportes.CuentasPorCobrar;
 using DevExpress.Web;
@@ -13,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
+    [SessionTimeout]
     public class CuentasPorCobrarReportesController : Controller
     {
         tb_persona_Bus bus_persona = new tb_persona_Bus();

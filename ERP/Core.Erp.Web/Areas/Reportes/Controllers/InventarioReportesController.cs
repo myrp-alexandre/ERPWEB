@@ -1,22 +1,19 @@
-﻿using DevExpress.Web.Mvc;
+﻿using Core.Erp.Bus.General;
+using Core.Erp.Bus.Inventario;
+using Core.Erp.Info.Helps;
+using Core.Erp.Info.Inventario;
+using Core.Erp.Web.Areas.Inventario.Controllers;
+using Core.Erp.Web.Helps;
 using Core.Erp.Web.Reportes.Inventario;
+using DevExpress.Web;
+using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Core.Erp.Info.Helps;
-using Core.Erp.Bus.General;
-using Core.Erp.Bus.Inventario;
-using Core.Erp.Bus.Reportes.Inventario;
-using Core.Erp.Info.Reportes.Inventario;
-using Core.Erp.Info.Inventario;
-using DevExpress.Web;
-using Core.Erp.Web.Helps;
-using Core.Erp.Web.Areas.Inventario.Controllers;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
+    [SessionTimeout]
     public class InventarioReportesController : Controller
     {
         in_Producto_Bus bus_producto = new in_Producto_Bus();

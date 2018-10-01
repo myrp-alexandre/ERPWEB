@@ -1,17 +1,14 @@
-﻿using Core.Erp.Web.Reportes.ActivoFijo;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Core.Erp.Info.Reportes.ActivoFijo;
-using Core.Erp.Info.Helps;
-using Core.Erp.Bus.ActivoFijo;
+﻿using Core.Erp.Bus.ActivoFijo;
 using Core.Erp.Info.ActivoFijo;
+using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
+using Core.Erp.Web.Reportes.ActivoFijo;
+using System;
+using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
+    [SessionTimeout]
     public class ActivoFijoReportesController : Controller
     {
 
