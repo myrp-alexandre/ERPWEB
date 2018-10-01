@@ -135,7 +135,7 @@ namespace Core.Erp.Data.RRHH
                         IdNomina = info.IdNomina,
                         IdPeriodo = info.IdPeriodo,
                         es_Hora = info.es_Hora,
-                        es_fechaRegistro = info.es_fechaRegistro,
+                        es_fechaRegistro = info.es_fechaRegistro.Date,
                         es_anio = info.es_anio,
                         es_mes = info.es_mes,
                         es_sdia = info.es_sdia,
@@ -172,7 +172,7 @@ namespace Core.Erp.Data.RRHH
                         Entity.IdNomina = info.IdNomina;
                         Entity.IdPeriodo = info.IdPeriodo;
                         Entity.es_Hora = info.es_Hora;
-                        Entity.es_fechaRegistro = info.es_fechaRegistro;
+                        Entity.es_fechaRegistro = info.es_fechaRegistro.Date;
                         Entity.es_anio = info.es_anio;
                         Entity.es_mes = info.es_mes;
                         Entity.es_sdia = info.es_sdia;

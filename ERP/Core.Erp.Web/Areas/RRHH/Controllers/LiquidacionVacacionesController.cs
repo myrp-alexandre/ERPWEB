@@ -6,6 +6,12 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Bus.RRHH;
+using Core.Erp.Bus.General;
+using Core.Erp.Info.General;
+using DevExpress.Web;
+using Core.Erp.Web.Helps;
+using Core.Erp.Info.Helps;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class LiquidacionVacacionesController : Controller
@@ -17,6 +23,39 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_Historico_Liquidacion_Vacaciones_Det_Info_lst lst_detalle_lst = new ro_Historico_Liquidacion_Vacaciones_Det_Info_lst();
         ro_Historico_Liquidacion_Vacaciones_Info info_liquidacion = new ro_Historico_Liquidacion_Vacaciones_Info();
         int IdEmpresa = 0;
+
+        #region Metodos ComboBox bajo demanda
+
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+
+        public tb_persona_Bus Bus_persona
+        {
+            get
+            {
+                return bus_persona;
+            }
+
+            set
+            {
+                bus_persona = value;
+            }
+        }
+
+        public ActionResult CmbEmpleado_vaca()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbEmpleado_vaca", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return Bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return Bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        #endregion
+
         public ActionResult Index()
         {
             return View();

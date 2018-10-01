@@ -35,7 +35,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         public ActionResult CmbEmpleado_novedades()
         {
-            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
+            decimal model = new decimal();
             return PartialView("_CmbEmpleado_novedades", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -91,8 +91,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_empleado_novedad_Info model = new ro_empleado_novedad_Info
             {
                 IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
-                Fecha = DateTime.Now,
-                IdEmpleado = 1
+                Fecha = DateTime.Now
             };
             model.lst_novedad_det = new List<ro_empleado_novedad_det_Info>();
             lst_novedad_det.set_list(model.lst_novedad_det);

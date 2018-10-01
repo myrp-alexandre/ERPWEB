@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,9 +10,15 @@ namespace Core.Erp.Info.General
    public class tb_ciudad_Info
     {
         public string IdCiudad { get; set; }
+        [Required(ErrorMessage = " el campo código es obligatorio")]
+        [StringLength(25, MinimumLength = 1, ErrorMessage = "el campo código debe tener mínimo 1 caracter y máximo 25")]
+
         public string Cod_Ciudad { get; set; }
+        [Required(ErrorMessage = " el campo descripción es obligatorio")]
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 50")]
         public string Descripcion_Ciudad { get; set; }
         public string Estado { get; set; }
+        [Required(ErrorMessage = " el campo provincia es obligatorio")]
         public string IdProvincia { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }

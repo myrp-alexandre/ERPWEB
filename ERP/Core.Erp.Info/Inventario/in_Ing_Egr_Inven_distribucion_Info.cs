@@ -8,6 +8,7 @@ namespace Core.Erp.Info.Inventario
 {
    public class in_Ing_Egr_Inven_distribucion_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public int IdMovi_inven_tipo { get; set; }

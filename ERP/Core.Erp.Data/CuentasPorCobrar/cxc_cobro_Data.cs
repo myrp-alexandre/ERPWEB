@@ -250,7 +250,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     IdCobro_tipo = info.IdCobro_tipo,
                     IdCliente = info.IdCliente,
                     cr_TotalCobro = info.cr_TotalCobro,
-                    cr_fecha = info.cr_fecha,
+                    cr_fecha = info.cr_fecha.Date,
                     cr_fechaDocu = info.cr_fechaDocu,
                     cr_fechaCobro = info.cr_fechaCobro,
                     cr_observacion = info.cr_observacion,
@@ -452,7 +452,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 Entity.IdCobro_tipo = info.IdCobro_tipo;
                 Entity.IdCliente = info.IdCliente;
                 Entity.cr_TotalCobro = info.cr_TotalCobro;
-                Entity.cr_fecha = info.cr_fecha;
+                Entity.cr_fecha = info.cr_fecha.Date;
                 Entity.cr_fechaDocu = info.cr_fechaDocu;
                 Entity.cr_fechaCobro = info.cr_fechaCobro;
                 Entity.cr_observacion = info.cr_observacion;

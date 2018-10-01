@@ -132,7 +132,12 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             List<imp_ordencompra_ext_Info> model = new List<imp_ordencompra_ext_Info>();
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model = bus_orden.get_list_oc_por_liquidar(IdEmpresa);
-            return View("_GridViewPartial_orden_compra_por_liquidar", model);
+            return PartialView("_GridViewPartial_orden_compra_por_liquidar", model);
+        }
+        public ActionResult Ordencompra_por_liquidar()
+        {
+           
+            return View("Ordencompra_por_liquidar");
         }
         
          public ActionResult OrdencompraConsaldos()
@@ -302,10 +307,13 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                     in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
                     if (info_producto != null)
                     {
-                        info_det.pr_descripcion = info_producto.pr_descripcion_combo;
-                        info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
-                        info_det.od_total_fob = info_det.od_cantidad * info_det.od_costo;
-                        Lis_imp_ordencompra_ext_det_Info_lst.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                        if (info_det.IdProducto != 0 & info_det.od_cantidad > 0 && info_det.od_costo > 0)
+                        {
+                            info_det.pr_descripcion = info_producto.pr_descripcion_combo;
+                            info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
+                            info_det.od_total_fob = info_det.od_cantidad * info_det.od_costo;
+                            Lis_imp_ordencompra_ext_det_Info_lst.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                        }
 
                     }
                 }
@@ -325,14 +333,16 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                     in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
                     if (info_producto != null)
                     {
-                        info_det.pr_descripcion = info_producto.pr_descripcion_combo;
-                        info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
-                        info_det.od_total_fob = info_det.od_cantidad * info_det.od_costo;
-
+                        if (info_det.IdProducto != 0 & info_det.od_cantidad > 0 && info_det.od_costo > 0)
+                        {
+                            info_det.pr_descripcion = info_producto.pr_descripcion_combo;
+                            info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
+                            info_det.od_total_fob = info_det.od_cantidad * info_det.od_costo;
+                            Lis_imp_ordencompra_ext_det_Info_lst.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                        }
                     }
                 }
 
-            Lis_imp_ordencompra_ext_det_Info_lst.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = Lis_imp_ordencompra_ext_det_Info_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_orden_compra_ext_det", model);

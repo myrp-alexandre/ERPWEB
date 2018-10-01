@@ -16,25 +16,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCtaCblePadre">Empleado*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado, settings =>
-               {
-                   settings.Name = "IdEmpleado";
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
-                   settings.Properties.Columns.Add("IdEmpleado", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("Empleado", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-
-                   //Campo ID
-                   settings.Properties.ValueField = "IdEmpleado";
-                   settings.Properties.ValueType = typeof(decimal);
-                   settings.Properties.TextField = "Empleado";
-                   //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                   settings.Properties.NullText = "== Seleccione ==";
-                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-               }).BindList(ViewBag.lst_empleado).GetHtml()
+                    @Html.Partial("_CmbEmpleado_contrato", Model.IdEmpleado)
                     @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -86,20 +68,33 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="FechaInicio">Fecha inicio*</label>
-                    @Html.TextBoxFor(q => q.FechaInicio, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaInicio" })
+                    @Html.DevExpress().DateEditFor(q=> q.FechaInicio, settings =>
+                {
+                    settings.Name = "FechaInicio";
+                    settings.Properties.UseMaskBehavior = true;
+                    settings.Properties.EditFormat = EditFormat.Date;
+                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                }).GetHtml()
                     @Html.ValidationMessageFor(q => q.FechaInicio, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="FechaFin">Fecha fin*</label>
-                    @Html.TextBoxFor(q => q.FechaFin, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaFin" })
+                    @Html.DevExpress().DateEditFor(q=> q.FechaFin, settings =>
+                {
+                    settings.Name = "FechaFin";
+                    settings.Properties.UseMaskBehavior = true;
+                    settings.Properties.EditFormat = EditFormat.Date;
+                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                }).GetHtml()
                     @Html.ValidationMessageFor(q => q.FechaFin, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-
-
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="Observacion">Sueldo*</label>
@@ -130,16 +125,3 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
-<script>
-    $(function () {
-
-        //Date picker
-        $('#FechaInicio').datepicker({
-            autoclose: true
-        })
-
-        $('#FechaFin').datepicker({
-            autoclose: true
-        })
-    })
-</script>

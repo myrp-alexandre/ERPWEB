@@ -22,9 +22,10 @@
 
 
     })
-    .BindList(new Core.Erp.Web.Areas.Inventario.Controllers.EgresoInventarioController().get_list_bajo_demanda,
-    new Core.Erp.Web.Areas.Inventario.Controllers.EgresoInventarioController().get_info_bajo_demanda)
-    .Bind(Model.GetType() == typeof(Core.Erp.Info.Inventario.in_Ing_Egr_Inven_Info) ? "" : (Model.ToString() == "0" ? "" : Model));
+
+     .BindList(new Core.Erp.Web.Areas.Inventario.Controllers.EgresoInventarioController().get_list_bajo_demanda,
+      new Core.Erp.Web.Areas.Inventario.Controllers.EgresoInventarioController().get_info_bajo_demanda).Bind((Model.GetType() == typeof(Core.Erp.Info.Inventario.in_Ing_Egr_Inven_det_Info) || Model.GetType() == typeof(List<Core.Erp.Info.Inventario.in_Ing_Egr_Inven_det_Info>)) ? "" : (Model == 0 ? "" : Model));
+
 
 }
 @comboBox.GetHtml()

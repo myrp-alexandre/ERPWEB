@@ -886,6 +886,12 @@
     <Compile Include="Reportes\Inventario\INV_012_Rpt.Designer.cs">
       <DependentUpon>INV_012_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Inventario\INV_013_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Inventario\INV_013_Rpt.Designer.cs">
+      <DependentUpon>INV_013_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\RRHH\ROL_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9149,6 +9155,11 @@
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionComisiones\_GridViewPartial_liquidacion_det.cshtml" />
     <Content Include="Areas\Reportes\Views\ContabilidadReportes\_CmbCuenta_contable_Conta.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_006.cshtml" />
+    <Content Include="Areas\RRHH\Views\MarcacionEmpleado\_CmbEmpleado_marcacion.cshtml" />
+    <Content Include="Areas\RRHH\Views\ActaFiniquito\_CmbEmpleado_acta.cshtml" />
+    <Content Include="Areas\RRHH\Views\Contrato\_CmbEmpleado_contrato.cshtml" />
+    <Content Include="Areas\RRHH\Views\LiquidacionVacaciones\_CmbEmpleado_vaca.cshtml" />
+    <Content Include="Areas\Reportes\Views\InventarioReportes\INV_013.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -9493,6 +9504,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Inventario\INV_012_Rpt.resx">
       <DependentUpon>INV_012_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Inventario\INV_013_Rpt.resx">
+      <DependentUpon>INV_013_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_001_Rpt.resx">
       <DependentUpon>ROL_001_Rpt.cs</DependentUpon>

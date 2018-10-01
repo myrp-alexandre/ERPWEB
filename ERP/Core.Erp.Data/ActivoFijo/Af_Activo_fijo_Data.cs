@@ -151,9 +151,9 @@ namespace Core.Erp.Data.ActivoFijo
                         Af_Depreciacion_acum = info.Af_Depreciacion_acum,
                         Af_DescripcionCorta = info.Af_DescripcionCorta,
                         Af_DescripcionTecnica = info.Af_DescripcionTecnica,
-                        Af_fecha_compra = info.Af_fecha_compra,
-                        Af_fecha_fin_depre = info.Af_fecha_fin_depre,
-                        Af_fecha_ini_depre = info.Af_fecha_ini_depre,
+                        Af_fecha_compra = info.Af_fecha_compra.Date,
+                        Af_fecha_fin_depre = info.Af_fecha_fin_depre.Date,
+                        Af_fecha_ini_depre = info.Af_fecha_ini_depre.Date,
                         Af_foto = info.Af_foto,
                         Af_Meses_depreciar = info.Af_Meses_depreciar,
                         Af_Nombre = info.Af_Nombre,
@@ -210,9 +210,9 @@ namespace Core.Erp.Data.ActivoFijo
                     Entity.Af_Depreciacion_acum = info.Af_Depreciacion_acum;
                     Entity.Af_DescripcionCorta = info.Af_DescripcionCorta;
                     Entity.Af_DescripcionTecnica = info.Af_DescripcionTecnica;
-                    Entity.Af_fecha_compra = info.Af_fecha_compra;
-                    Entity.Af_fecha_fin_depre = info.Af_fecha_fin_depre;
-                    Entity.Af_fecha_ini_depre = info.Af_fecha_ini_depre;
+                    Entity.Af_fecha_compra = info.Af_fecha_compra.Date;
+                    Entity.Af_fecha_fin_depre = info.Af_fecha_fin_depre.Date;
+                    Entity.Af_fecha_ini_depre = info.Af_fecha_ini_depre.Date;
                     Entity.Af_foto = info.Af_foto;
                     Entity.Af_Meses_depreciar = info.Af_Meses_depreciar;
                     Entity.Af_Nombre = info.Af_Nombre;

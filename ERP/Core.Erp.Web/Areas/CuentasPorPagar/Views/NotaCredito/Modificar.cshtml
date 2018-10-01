@@ -141,7 +141,15 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    @Html.TextBoxFor(q => q.cn_Fecha_vcto, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "cn_Fecha_vcto" })
+                    @Html.DevExpress().DateEditFor(q=> q.cn_Fecha_vcto, settings =>
+                {
+                    settings.Name = "cn_Fecha_vcto";
+                    settings.Properties.UseMaskBehavior = true;
+                    settings.Properties.EditFormat = EditFormat.Date;
+                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                }).GetHtml()
                     @Html.ValidationMessageFor(q => q.cn_Fecha_vcto, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -395,9 +403,7 @@
                         $('#Fecha_inicio').datepicker({
                             autoclose: true
                         })
-                        $('#cn_Fecha_vcto').datepicker({
-                            autoclose: true
-                        })
+
 
                         $("#cn_num_doc_modificado").change(function () {
                             rellenar_ceros();

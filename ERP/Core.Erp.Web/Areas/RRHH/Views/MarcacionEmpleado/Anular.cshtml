@@ -21,25 +21,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCtaCblePadre">Empleado*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado, settings =>
-               {
-                   settings.Name = "IdEmpleado";
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
-                   settings.Properties.Columns.Add("IdEmpleado", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("Empleado", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                   settings.Enabled = false;
-                   //Campo ID
-                   settings.Properties.ValueField = "IdEmpleado";
-                   settings.Properties.ValueType = typeof(decimal);
-                   settings.Properties.TextField = "Empleado";
-                   //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                   settings.Properties.NullText = "== Seleccione ==";
-                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-               }).BindList(ViewBag.lst_empleado).GetHtml()
+                    @Html.Partial("_CmbEmpleado_marcacion", Model.IdEmpleado)
                     @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -60,12 +42,18 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-
-
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="FechaInicio">Fecha marcación*</label>
-                    @Html.TextBoxFor(q => q.es_fechaRegistro, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_registro", @disabled = "disabled" })
+                    @Html.DevExpress().DateEditFor(q=> q.es_fechaRegistro, settings =>
+                {
+                    settings.Name = "es_fechaRegistro";
+                    settings.Properties.UseMaskBehavior = true;
+                    settings.Properties.EditFormat = EditFormat.Date;
+                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                }).GetHtml()
                     @Html.ValidationMessageFor(q => q.es_fechaRegistro, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -108,14 +96,3 @@
     }
 
 }
-<script>
-    $(function () {
-
-        //Date picker
-        $('#fecha_registro').datepicker({
-            autoclose: true
-        })
-
-
-    })
-</script>

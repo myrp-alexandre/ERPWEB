@@ -705,6 +705,32 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+        public ActionResult INV_013()
+        {
+            cl_filtros_inventario_Info model = new cl_filtros_inventario_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdProducto = 0,
+            };
+
+            INV_013_Rpt report = new INV_013_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdProducto.Value = model.IdProductoPadre == null ? 0 : model.IdProductoPadre;
+
+            ViewBag.Report = report;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult INV_013(cl_filtros_inventario_Info model)
+        {
+            INV_013_Rpt report = new INV_013_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdProducto.Value = model.IdProductoPadre == null ? 0 : model.IdProductoPadre;
+
+            ViewBag.Report = report;
+            return View(model);
+        }
+
     }
 
 }

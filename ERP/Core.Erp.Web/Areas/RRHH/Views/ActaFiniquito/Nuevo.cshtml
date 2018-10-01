@@ -15,26 +15,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCtaCblePadre">Empleado*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado, settings =>
-               {
-                   settings.Name = "IdEmpleado";
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
-                   settings.Properties.Columns.Add("IdEmpleado", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("Empleado", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-
-                   //Campo ID
-                   settings.Properties.ValueField = "IdEmpleado";
-                   settings.Properties.ValueType = typeof(decimal);
-                   settings.Properties.TextField = "Empleado";
-                   //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                   settings.Properties.NullText = "== Seleccione ==";
-                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){get_info()}";
-
-               }).BindList(ViewBag.lst_empleado).GetHtml()
+                    @Html.Partial("_CmbEmpleado_acta", Model.IdEmpleado)
                     @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -52,14 +33,30 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="FechaIngreso">Fecha ingreso*</label>
-                    @Html.TextBoxFor(q => q.FechaIngreso, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaIngreso" })
+                    @Html.DevExpress().DateEditFor(q=> q.FechaIngreso, settings =>
+                {
+                    settings.Name = "FechaIngreso";
+                    settings.Properties.UseMaskBehavior = true;
+                    settings.Properties.EditFormat = EditFormat.Date;
+                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                }).GetHtml()
                     @Html.ValidationMessageFor(q => q.FechaIngreso, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="FechaSalida">Fecha salida*</label>
-                    @Html.TextBoxFor(q => q.FechaSalida, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaSalida" })
+                    @Html.DevExpress().DateEditFor(q=> q.FechaSalida, settings =>
+                {
+                    settings.Name = "FechaSalida";
+                    settings.Properties.UseMaskBehavior = true;
+                    settings.Properties.EditFormat = EditFormat.Date;
+                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                }).GetHtml()
                     @Html.ValidationMessageFor(q => q.FechaSalida, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -157,23 +154,10 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
-<script>
-    $(function () {
 
-        //Date picker
-        $('#FechaIngreso').datepicker({
-            autoclose: true
-        })
-
-        $('#FechaSalida').datepicker({
-            autoclose: true
-        })
-    })
-</script>
 <script>
     function get_info()
     {
-
         var datos = {
             IdEmpleado:  IdEmpleado.GetValue(),
         }
@@ -190,9 +174,9 @@
                     } else {
                         $("#IdContrato_Tipo").val(data.IdContrato_Tipo);
                         $("#IdContrato").val(data.IdContrato);
-                        $("#FechaIngreso").val(data.FechaInicio);
-                        $('#FechaIngreso').datepicker("setDate", moment(data.FechaInicio).format("DD/MM/YYYY"));
-                        $('#FechaSalida').datepicker("setDate", moment(data.em_fechaSalida).format("DD/MM/YYYY"));
+                        FechaIngreso.GetValue(data.FechaInicio);
+                        FechaIngreso.datepicker("setDate", moment(data.FechaInicio).format("DD/MM/YYYY"));
+                        FechaSalida.datepicker("setDate", moment(data.em_fechaSalida).format("DD/MM/YYYY"));
                         $("#Sueldo").val(data.Sueldo);
 
                     }
@@ -208,8 +192,8 @@
     function Procesar_Liqui()
             {
         var datos = {
-                        FechaIngreso: $("#FechaIngreso").val(),
-                        FechaSalida: $("#FechaSalida").val(),
+                        FechaIngreso: FechaIngreso.GetValue(),
+                        FechaSalida: FechaSalida.GetValue(),
                         IdEmpleado: IdEmpleado.GetValue(),
                         UltimaRemuneracion: $("#Sueldo").val(),
                         idterminacion: $("#idterminacion").val(),

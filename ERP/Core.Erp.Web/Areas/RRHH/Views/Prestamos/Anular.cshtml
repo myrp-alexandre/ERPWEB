@@ -84,7 +84,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.Fecha_PriPago, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_PriPago" })
+                        @Html.DevExpress().DateEditFor(q=> q.Fecha_PriPago, settings =>
+                    {
+                        settings.Name = "Fecha_PriPago";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.Fecha_PriPago, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -177,25 +185,11 @@
 }
 
 <script>
-
-
-    $(function () {
-
-        $('#Fecha_PriPago').datepicker({
-            autoclose: true
-        })
-    })
-
-
-</script>
-
-
-<script>
     function Generar()
             {
                  var datos = {
                      MontoSol: $("#MontoSol").val(),
-                     Fecha_PriPago: $("#Fecha_PriPago").val(),
+                     Fecha_PriPago: Fecha_PriPago.GetValuel(),
                      NumCuotas: $("#NumCuotas").val(),
                      descuento_mensual: descuento_mensual.GetValue(),
                      descuento_quincena: descuento_quincena.GetValue(),

@@ -35,7 +35,7 @@
 
             <div class="col-md-offset-8 col-md-2">
                 <div class="form-group">
-                    <label for="">Fecha de venta</label>
+                    <label for="Fecha_Venta">Fecha de venta</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
@@ -196,10 +196,14 @@
     }
 }
 <script>
-        $(function () {
+    $(function () {
+        get_valores();
+
+
      $("#IdActivoFijo").change(function () {
             get_valores();
-        });
+            });
+
         })
 
 

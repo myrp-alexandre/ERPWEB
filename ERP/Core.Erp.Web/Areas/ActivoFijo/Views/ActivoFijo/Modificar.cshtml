@@ -38,12 +38,20 @@
             </div>
             <div class="col-md-offset-3 col-md-2">
                 <div class="form-group">
-                    <label for="">Fecha de compra</label>
+                    <label for="Af_fecha_compra">Fecha de compra</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.Af_fecha_compra, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Af_fecha_compra" })
+                        @Html.DevExpress().DateEditFor(q=> q.Af_fecha_compra, settings =>
+                    {
+                        settings.Name = "Af_fecha_compra";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.Af_fecha_compra, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -162,24 +170,40 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="">Fecha inicio depreciación</label>
+                                <label for="Af_fecha_ini_depre">Fecha inicio depreciación</label>
                                 <div class="input-group date">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(q => q.Af_fecha_ini_depre, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Af_fecha_ini_depre" })
+                                    @Html.DevExpress().DateEditFor(q=> q.Af_fecha_ini_depre, settings =>
+                                {
+                                    settings.Name = "Af_fecha_ini_depre";
+                                    settings.Properties.UseMaskBehavior = true;
+                                    settings.Properties.EditFormat = EditFormat.Date;
+                                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                }).GetHtml()
                                     @Html.ValidationMessageFor(q => q.Af_fecha_ini_depre, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="">Fecha fin depreciación</label>
+                                <label for="Af_fecha_fin_depre">Fecha fin depreciación</label>
                                 <div class="input-group date">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(q => q.Af_fecha_fin_depre, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Af_fecha_fin_depre" })
+                                    @Html.DevExpress().DateEditFor(q=> q.Af_fecha_fin_depre, settings =>
+                                {
+                                    settings.Name = "Af_fecha_fin_depre";
+                                    settings.Properties.UseMaskBehavior = true;
+                                    settings.Properties.EditFormat = EditFormat.Date;
+                                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                }).GetHtml()
                                     @Html.ValidationMessageFor(q => q.Af_fecha_fin_depre, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -322,12 +346,14 @@
     $(function () {
         cargar_categoria();
         get_info_tipo();
+        calcular_fechas();
 
     });
 
     $("#IdActivoFijoTipo").change(function () {
         cargar_categoria();
         get_info_tipo();
+        calcular_fechas();
     });
 
     function get_info_tipo() {
@@ -382,6 +408,15 @@
             error: function (error) {
             }
         });
+    };
+    function calcular_fechas() {
+        var fecha_inicio = Af_fecha_compra.GetValue();
+        Af_fecha_ini_depre.SetValue(fecha_inicio);
+        var Af_Meses_depreciar = $("#Af_Meses_depreciar").val();
+        var date = new Date(moment(Af_fecha_ini_depre.GetValue(), "DD/MM/YYYY").add(Af_Meses_depreciar, 'month'));
+
+        Af_fecha_fin_depre.SetValue(date);
+
     };
 </script>
 

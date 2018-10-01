@@ -137,7 +137,7 @@ namespace Core.Erp.Data.Inventario
                             IdEmpresa = info.IdEmpresa,
                             IdDev_Inven = info.IdDev_Inven = get_id(info.IdEmpresa),
                             cod_Dev_Inven = info.cod_Dev_Inven,
-                            Fecha = info.Fecha,
+                            Fecha = info.Fecha.Date,
                             IdEmpresa_inv = info.IdEmpresa_inv,
                             IdSucursal_inv = info.IdSucursal_inv,
                             IdMovi_inven_tipo_inv = info.IdMovi_inven_tipo_inv,
@@ -250,7 +250,7 @@ namespace Core.Erp.Data.Inventario
                         var Entity = Context.in_devolucion_inven.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdDev_Inven == info.IdDev_Inven).FirstOrDefault();
 
                         Entity.cod_Dev_Inven = info.cod_Dev_Inven;
-                        Entity.Fecha = info.Fecha;
+                        Entity.Fecha = info.Fecha.Date;
                         Entity.observacion = info.observacion;
 
                         Entity.IdUsuarioUltModi = info.IdUsuarioUltModi;

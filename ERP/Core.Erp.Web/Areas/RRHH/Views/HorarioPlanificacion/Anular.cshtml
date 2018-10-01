@@ -167,24 +167,40 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="pe_fechaNacimiento">Fecha desde*</label>
+                    <label for="FechaInicio">Fecha desde*</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.FechaInicio, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechai" })
+                        @Html.DevExpress().DateEditFor(q=> q.FechaInicio, settings =>
+                    {
+                        settings.Name = "FechaInicio";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.FechaInicio, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="pe_fechaNacimiento">Fecha hasta*</label>
+                    <label for="FechaFin">Fecha hasta*</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.FechaFin, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechaf" })
+                        @Html.DevExpress().DateEditFor(q=> q.FechaFin, settings =>
+                    {
+                        settings.Name = "FechaFin";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.FechaFin, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -249,27 +265,11 @@
 }
 
 <script>
-            $(function () {
-
-                //Date picker
-                $('#fechai').datepicker({
-                    autoclose: true
-                })
-            });
-            $(function () {
-
-                //Date picker
-                $('#fechaf').datepicker({
-                    autoclose: true
-                })
-            });
-</script>
-<script>
              function Buscar()
             {
                  var datos = {
-                     fi: $("#fechai").val(),
-                     ff: $("#fechaf").val(),
+                     fi: FechaInicio.GetValue(),
+                     ff: FechaFin.GetValue(),
                      IdNomina: IdNomina.GetValue(),
                      IdSucursal: IdSucursal.GetValue(),
                      IdDivision: IdDivision.GetValue(),

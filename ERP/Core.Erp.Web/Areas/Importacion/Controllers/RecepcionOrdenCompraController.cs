@@ -120,11 +120,12 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-            Session["imp_ordencompra_ext_det_Info"] = null;
             return RedirectToAction("Index");
         }
         public ActionResult Modificar(int IdEmpresa =0, decimal IdRecepcion = 0)
         {
+            bus_recepcion = new imp_orden_compra_ext_recepcion_Bus();
+            bus_detalle = new imp_ordencompra_ext_det_Bus();
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
@@ -133,9 +134,9 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             #endregion
             imp_orden_compra_ext_recepcion_Info model = bus_recepcion.get_info(IdEmpresa, IdRecepcion);
             var lst_detalle = bus_detalle.get_list(IdEmpresa, IdRecepcion);
-            Session["imp_ordencompra_ext_det_Info"] = lst_detalle;
             if (model == null)
                 return RedirectToAction("Index");
+            model.lst_detalle = lst_detalle;
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             detalle.set_list(model.lst_detalle, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
@@ -173,6 +174,8 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         }
         public ActionResult Anular(int IdEmpresa = 0 , decimal IdRecepcion = 0)
         {
+            bus_recepcion = new imp_orden_compra_ext_recepcion_Bus();
+            bus_detalle = new imp_ordencompra_ext_det_Bus();
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
@@ -181,9 +184,9 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
             #endregion
             imp_orden_compra_ext_recepcion_Info model = bus_recepcion.get_info(IdEmpresa, IdRecepcion);
             var lst_detalle = bus_detalle.get_list(IdEmpresa, IdRecepcion);
-            Session["imp_ordencompra_ext_det_Info"] = lst_detalle;
             if (model == null)
                 return RedirectToAction("Index");
+            model.lst_detalle = lst_detalle;
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             detalle.set_list(model.lst_detalle, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
@@ -193,13 +196,13 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost]
         public ActionResult Anular(imp_orden_compra_ext_recepcion_Info model)
         {
-            model.lst_detalle = Session["imp_ordencompra_ext_det_Info"] as List<imp_ordencompra_ext_det_Info>;
+            model.lst_detalle = detalle.get_list(model.IdTransaccionSession);
             if (!bus_recepcion.anularDB(model))
             {
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-            Session["imp_ordencompra_ext_det_Info"] = null;
+          
             return RedirectToAction("Index");
         }
         #endregion

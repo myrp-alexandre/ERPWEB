@@ -153,12 +153,20 @@
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="">Fecha</label>
+                    <label for="gi_fecha">Fecha</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.gi_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "gi_fecha" })
+                        @Html.DevExpress().DateEditFor(q=> q.gi_fecha, settings =>
+                    {
+                        settings.Name = "gi_fecha";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.gi_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -177,12 +185,20 @@
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="">Inicio traslado</label>
+                    <label for="gi_FechaInicioTraslado">Inicio traslado</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.gi_FechaInicioTraslado, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "gi_FechaInicioTraslado" })
+                        @Html.DevExpress().DateEditFor(q=> q.gi_FechaInicioTraslado, settings =>
+                    {
+                        settings.Name = "gi_FechaInicioTraslado";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.gi_FechaInicioTraslado, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -200,12 +216,20 @@
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="">Fin traslado</label>
+                    <label for="gi_FechaFinTraslado">Fin traslado</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.gi_FechaFinTraslado, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "gi_FechaFinTraslado" })
+                        @Html.DevExpress().DateEditFor(q=> q.gi_FechaFinTraslado, settings =>
+                    {
+                        settings.Name = "gi_FechaFinTraslado";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.gi_FechaFinTraslado, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -327,16 +351,7 @@
         GetUltimoDocumento();
         get_direccion();
         get_placa();
-        //Date picker
-        $('#gi_FechaFinTraslado').datepicker({
-            autoclose: true
-        })
-        $('#gi_FechaInicioTraslado').datepicker({
-            autoclose: true
-        })
-        $('#gi_fecha').datepicker({
-            autoclose: true
-        })
+
         $("#IdSucursal").change(function () {
             CargarPuntosDeVenta();
             GetUltimoDocumento();

@@ -122,7 +122,7 @@ namespace Core.Erp.Data.RRHH
                         IdNomina_Tipo = info.IdNomina_Tipo,
                         IdNomina_TipoLiqui=info.IdNomina_TipoLiqui,
                         IdEmpleado=info.IdEmpleado,
-                        Fecha=info.Fecha,
+                        Fecha=info.Fecha.Date,
                         TotalValor=info.TotalValor,
                         Fecha_PrimerPago=info.Fecha_PrimerPago,
                         Observacion=info.Observacion,                     
@@ -153,7 +153,7 @@ namespace Core.Erp.Data.RRHH
                     Entity.IdNomina_Tipo = info.IdNomina_Tipo;
                     Entity.IdNomina_TipoLiqui = info.IdNomina_TipoLiqui;
                     Entity.Observacion =( info.Observacion)==null?"": info.Observacion;
-                    Entity.Fecha = info.Fecha;
+                    Entity.Fecha = info.Fecha.Date;
                     Entity.NumCoutas = info.NumCoutas;
                     Entity.TotalValor = info.TotalValor;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;

@@ -146,7 +146,7 @@ namespace Core.Erp.Data.ActivoFijo
                         Cod_Depreciacion = info.Cod_Depreciacion,
                         Descripcion = info.Descripcion,
                         Estado = info.Estado="A",
-                        Fecha_Depreciacion = info.Fecha_Depreciacion,
+                        Fecha_Depreciacion = info.Fecha_Depreciacion.Date,
                         Num_Act_Depre = info.Num_Act_Depre,
                         Valor_Tot_Act = info.Valor_Tot_Act,
                         Valor_Tot_Depre = info.Valor_Tot_Depre,
@@ -202,7 +202,7 @@ namespace Core.Erp.Data.ActivoFijo
                     Entity.IdPeriodo = info.IdPeriodo;
                     Entity.Cod_Depreciacion = info.Cod_Depreciacion;
                     Entity.Descripcion = info.Descripcion;
-                    Entity.Fecha_Depreciacion = info.Fecha_Depreciacion;
+                    Entity.Fecha_Depreciacion = info.Fecha_Depreciacion.Date;
                     Entity.Num_Act_Depre = info.Num_Act_Depre;
                     Entity.Valor_Tot_Act = info.Valor_Tot_Act;
                     Entity.Valor_Tot_Depre = info.Valor_Tot_Depre;

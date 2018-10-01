@@ -268,9 +268,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             decimal IdProducto_padre = 0;
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            if (Session["IdProducto_padre"] != null)
+            if (SessionFixed.IdProducto_padre_dist!=null)
             {
-               IdProducto_padre = Convert.ToDecimal(Session["IdProducto_padre"]);
+               IdProducto_padre = Convert.ToDecimal(SessionFixed.IdProducto_padre_dist);
             }
             bus_producto.guardar_loteDB(IdEmpresa, IdProducto_padre, fecha_fab == null ? DateTime.MinValue : Convert.ToDateTime(fecha_fab), Convert.ToDateTime( fecha_ven), lote);
             return Json("", JsonRequestBehavior.AllowGet);

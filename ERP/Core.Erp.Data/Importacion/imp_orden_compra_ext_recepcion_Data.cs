@@ -61,8 +61,8 @@ namespace Core.Erp.Data.Importacion
                         or_observacion = Entity.or_observacion,
                         IdEmpresa_oc = Entity.IdEmpresa_oc,
                         IdOrdenCompraExt = Entity.IdOrdenCompraExt,
-                       
-                        IdCatalogo_via=Entity.IdCatalogo_via,
+                        oe_fecha = Entity.oe_fecha,
+                        IdCatalogo_via =Entity.IdCatalogo_via,
                         pe_nombreCompleto=Entity.pe_nombreCompleto
                         
                         
@@ -109,7 +109,7 @@ namespace Core.Erp.Data.Importacion
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdRecepcion = info.IdRecepcion = get_id(info.IdEmpresa),
-                        or_fecha = info.or_fecha,
+                        or_fecha = info.or_fecha.Date,
                         or_observacion = info.or_observacion,
                         IdEmpresa_oc = info.IdEmpresa,
                         IdOrdenCompraExt = info.IdOrdenCompraExt,
@@ -135,7 +135,7 @@ namespace Core.Erp.Data.Importacion
                 }
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 throw;
@@ -150,7 +150,7 @@ namespace Core.Erp.Data.Importacion
                 {
                     imp_orden_compra_ext_recepcion Entity = Context.imp_orden_compra_ext_recepcion.FirstOrDefault(q => q.IdRecepcion == info.IdRecepcion);
                     if (Entity == null) return false;
-                    Entity.or_fecha = info.or_fecha;
+                    Entity.or_fecha = info.or_fecha.Date;
                     Entity.or_observacion = info.or_observacion;
                     Entity.IdEmpresa_oc = info.IdEmpresa;
                     Entity.IdOrdenCompraExt = info.IdOrdenCompraExt;
