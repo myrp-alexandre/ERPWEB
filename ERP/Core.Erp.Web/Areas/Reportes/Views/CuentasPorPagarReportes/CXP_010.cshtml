@@ -1,13 +1,13 @@
-﻿@model Core.Erp.Info.Helps.cl_filtros_facturacion_Info
+﻿@model Core.Erp.Info.Helps.cl_filtros_Info
 @{
     Layout = "~/Areas/Reportes/Views/Layout/_Layout_filtros.cshtml";
-    ViewBag.Title = "FAC_005";
+    ViewBag.Title = "CXP_010";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
     }
 }
-@using (Html.BeginForm("FAC_005", "FacturacionReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("CXP_010", "CuentasPorPagarReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
     {
 <div class="box">
     <div class="box-header with-border">
@@ -24,40 +24,21 @@
                 <i class="fa fa-times"></i>
             </button>
         </div>
-
     </div>
     <div class="box-body">
         <div class="row">
             <div class="col-md-12">
-                <div class="col-md-5">
+                <div class="col-md-8">
                     <div class="form-group">
-                        <label for="IdCliente">Cliente</label>
-                        @Html.Partial("_CmbCliente_Facturacion", Model.IdCliente)
-                        @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger", @id = "IdCliente" })
+                        <label for="IdCliente">Proveedor</label>
+                        @Html.Partial("_CmbProveedor_CXP", Model.IdProveedor)
+                        @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="col-md-7">
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label for="Check1">@Html.CheckBoxFor(q => q.Check1) Mostrar Saldo 0</label>
-                        </div>
-                        <div class="checkbox">
-                            <label for="Check2">@Html.CheckBoxFor(q => q.Check2) Mostrar contactos</label>
-                        </div>                        
-                        </div>
-                    </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="IdSucursal">Sucursal</label>
-                        @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion",Model.IdSucursal), new { @class = "form-control" })
-                        @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="">Fecha inicio*</label>
@@ -98,6 +79,20 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label for="mostrarAnulados">@Html.CheckBoxFor(q => q.mostrarAnulados) Mostrar anulados</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label for="mostrar_observacion_completa">@Html.CheckBoxFor(q => q.mostrar_observacion_completa) Mostrar observación completa</label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- /.box-body -->
@@ -118,11 +113,11 @@
                 </div>
                 <div class="box-body">
                     @Html.DevExpress().WebDocumentViewer(settings =>
-                                       {
-                                           settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
-                                           settings.MobileMode = false;
-                                           settings.Name = "webDocumentViewer";
-                                       }).Bind(ViewBag.Report).GetHtml()
+                    {
+                        settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
+                        settings.MobileMode = false;
+                        settings.Name = "webDocumentViewer";
+                    }).Bind(ViewBag.Report).GetHtml()
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
@@ -131,35 +126,4 @@
                 <!-- /.box-footer-->
             </div>
             }
-        <script>
-            $(function () {
-                $("#IdCliente").change(function () {
-                    cargar_cliente();
-                });
-            });
-            function cargar_cliente() {
 
-                $("#IdClienteContacto").empty();
-                var codigo = IdCliente.GetValue();
-
-                    var datos = {
-                        IdCliente: codigo
-                    }
-                    $.ajax({
-                        type: 'POST',
-                        data: JSON.stringify(datos),
-                        url: '@Url.Action("cargar_cliente", "FacturacionReportes",new { Area = "Reportes"})',
-                        async: false,
-                        dataType: 'json',
-                        contentType: 'application/json; charset=utf-8',
-                        success: function (data) {
-                            $.each(data, function (i, row) {
-                                $("#IdClienteContacto").append("<option value=" + row.IdContacto + ">" + row.Nombres + "</option>");
-                                $("#IdClienteContacto").val("0");
-                        });
-                    },
-                    error: function (error) {
-                    }
-                });
-            };
-            </script>

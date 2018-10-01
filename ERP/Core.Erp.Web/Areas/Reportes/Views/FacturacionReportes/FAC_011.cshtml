@@ -24,7 +24,6 @@
                 <i class="fa fa-times"></i>
             </button>
         </div>
-
     </div>
     <div class="box-body">
         <div class="row">
@@ -32,8 +31,8 @@
                 <div class="col-md-8">
                     <div class="form-group">
                         <label for="IdCliente">Cliente</label>
-                        @Html.Partial("_CmbCliente_Facturacion", Model)
-                        @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger", @id = "IdCliente" })
+                        @Html.Partial("_CmbCliente_Facturacion", Model.IdCliente)
+                        @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>

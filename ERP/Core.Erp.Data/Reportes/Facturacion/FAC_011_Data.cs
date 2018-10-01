@@ -32,7 +32,8 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                  Referencia = q.Referencia,
                                  Saldo =q.Saldo,
                                  Secuencia =q.Secuencia,
-                                 Tipo =q.Tipo
+                                 Tipo =q.Tipo,
+                                 SaldoModulo =q.SaldoModulo
 
                              }).ToList();
                 }

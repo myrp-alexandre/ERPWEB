@@ -2928,6 +2928,14 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Parameter Name="idProveedorIni" Type="decimal" Mode="In" />
           <Parameter Name="idProveedorFIn" Type="decimal" Mode="In" />
         </Function>
+        <Function Name="SPCXP_010" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdProveedorIni" Type="numeric" Mode="In" />
+          <Parameter Name="IdProveedorFin" Type="numeric" Mode="In" />
+          <Parameter Name="FechaIni" Type="date" Mode="In" />
+          <Parameter Name="FechaFin" Type="date" Mode="In" />
+          <Parameter Name="MostrarAnulados" Type="bit" Mode="In" />
+        </Function>
         <Function Name="SPFAC_002" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="SucursalIni" Type="int" Mode="In" />
@@ -7497,6 +7505,14 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
           </FunctionImport>
           <EntitySet Name="VWCXC_006" EntityType="Model_reportes.VWCXC_006" />
           <EntitySet Name="VWCXC_006_sin_comision" EntityType="Model_reportes.VWCXC_006_sin_comision" />
+          <FunctionImport Name="SPCXP_010" ReturnType="Collection(Model_reportes.SPCXP_010_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdProveedorIni" Mode="In" Type="Decimal" />
+            <Parameter Name="IdProveedorFin" Mode="In" Type="Decimal" />
+            <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="MostrarAnulados" Mode="In" Type="Boolean" />
+          </FunctionImport>
           <FunctionImport Name="SPFAC_011" ReturnType="Collection(Model_reportes.SPFAC_011_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdClienteIni" Mode="In" Type="Decimal" />
@@ -8261,6 +8277,21 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Saldo" Type="Double" Nullable="false" />
         </EntityType>
+        <ComplexType Name="SPCXP_010_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Decimal" Name="IdProveedor" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="pe_nombreCompleto" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="Referencia" Nullable="true" MaxLength="61" />
+          <Property Type="String" Name="co_observacion" Nullable="true" />
+          <Property Type="Double" Name="Debito" Nullable="true" />
+          <Property Type="Double" Name="Credito" Nullable="false" />
+          <Property Type="Double" Name="Saldo" Nullable="true" />
+          <Property Type="Double" Name="SaldoModulo" Nullable="true" />
+          <Property Type="Int32" Name="Secuencia" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="SPFAC_011_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
           <Property Type="Decimal" Name="IdCliente" Nullable="false" Precision="18" Scale="0" />
@@ -8273,6 +8304,7 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
           <Property Type="Double" Name="Debitos" Nullable="false" />
           <Property Type="Double" Name="Creditos" Nullable="true" />
           <Property Type="Double" Name="Saldo" Nullable="true" />
+          <Property Type="Double" Name="SaldoModulo" Nullable="true" />
           <Property Type="Int32" Name="Secuencia" Nullable="true" />
         </ComplexType>
       </Schema>
@@ -10690,6 +10722,25 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPCXP_010" FunctionName="Model_reportes.Store.SPCXP_010">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_reportes.SPCXP_010_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="co_observacion" ColumnName="co_observacion" />
+                <ScalarProperty Name="Debito" ColumnName="Debito" />
+                <ScalarProperty Name="Credito" ColumnName="Credito" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="SaldoModulo" ColumnName="SaldoModulo" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SPFAC_011" FunctionName="Model_reportes.Store.SPFAC_011">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Model_reportes.SPFAC_011_Result">
@@ -10704,6 +10755,7 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
                 <ScalarProperty Name="Debitos" ColumnName="Debitos" />
                 <ScalarProperty Name="Creditos" ColumnName="Creditos" />
                 <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="SaldoModulo" ColumnName="SaldoModulo" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
               </ComplexTypeMapping>
             </ResultMapping>

@@ -16,7 +16,8 @@ namespace Core.Erp.Info.Helps
         public bool mostrar_registros_0 { get; set; }
         public string IdCtaCble { get; set; }
         public decimal IdCliente { get; set; }
-
+        public bool mostrarAnulados { get; set; }
+        public bool mostrar_observacion_completa { get; set; }
 
         #region Filtros inventario
 

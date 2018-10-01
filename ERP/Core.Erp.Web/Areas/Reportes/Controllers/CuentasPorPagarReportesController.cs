@@ -203,6 +203,45 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
+        public ActionResult CXP_010()
+        {
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdProveedor = 0
+            };
+            cargar_combos();
+            CXP_010_Rpt report = new CXP_010_Rpt();
+            report.p_IdEmpresa.Value = SessionFixed.IdEmpresa;
+            report.p_IdProveedor.Value = model.IdProveedor;
+            report.p_fechaIni.Value = model.fecha_ini;
+            report.p_fechaFin.Value = model.fecha_fin;
+            report.p_mostrarAnulados.Value = model.mostrarAnulados;
+            report.p_mostrar_observacion_completa.Value = model.mostrar_observacion_completa;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            report.RequestParameters = false;
+            ViewBag.Report = report;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult CXP_010(cl_filtros_Info model)
+        {
+            CXP_010_Rpt report = new CXP_010_Rpt();
+            report.p_IdEmpresa.Value = SessionFixed.IdEmpresa;
+            report.p_IdProveedor.Value = model.IdProveedor;
+            report.p_fechaIni.Value = model.fecha_ini;
+            report.p_fechaFin.Value = model.fecha_fin;
+            report.p_mostrarAnulados.Value = model.mostrarAnulados;
+            report.p_mostrar_observacion_completa.Value = model.mostrar_observacion_completa;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            cargar_combos();
+            report.RequestParameters = false;
+            ViewBag.Report = report;
+            return View(model);
+        }
 
 
     }
