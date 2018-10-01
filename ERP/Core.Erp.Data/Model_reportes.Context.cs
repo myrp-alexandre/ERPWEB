@@ -879,5 +879,34 @@ namespace Core.Erp.Data
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPCXC_005_Result>("SPCXC_005", idEmpresaParameter, idClienteIniParameter, idClienteFinParameter, idContactoIniParameter, idContactoFinParameter, fechaCorteParameter, mostrarSaldo0Parameter);
         }
+    
+        public virtual ObjectResult<SPFAC_011_Result> SPFAC_011(Nullable<int> idEmpresa, Nullable<decimal> idClienteIni, Nullable<decimal> idClienteFin, Nullable<System.DateTime> fechaIni, Nullable<System.DateTime> fechaFin, Nullable<bool> mostrarAnulados)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idClienteIniParameter = idClienteIni.HasValue ?
+                new ObjectParameter("IdClienteIni", idClienteIni) :
+                new ObjectParameter("IdClienteIni", typeof(decimal));
+    
+            var idClienteFinParameter = idClienteFin.HasValue ?
+                new ObjectParameter("IdClienteFin", idClienteFin) :
+                new ObjectParameter("IdClienteFin", typeof(decimal));
+    
+            var fechaIniParameter = fechaIni.HasValue ?
+                new ObjectParameter("FechaIni", fechaIni) :
+                new ObjectParameter("FechaIni", typeof(System.DateTime));
+    
+            var fechaFinParameter = fechaFin.HasValue ?
+                new ObjectParameter("FechaFin", fechaFin) :
+                new ObjectParameter("FechaFin", typeof(System.DateTime));
+    
+            var mostrarAnuladosParameter = mostrarAnulados.HasValue ?
+                new ObjectParameter("MostrarAnulados", mostrarAnulados) :
+                new ObjectParameter("MostrarAnulados", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPFAC_011_Result>("SPFAC_011", idEmpresaParameter, idClienteIniParameter, idClienteFinParameter, fechaIniParameter, fechaFinParameter, mostrarAnuladosParameter);
+        }
     }
 }
