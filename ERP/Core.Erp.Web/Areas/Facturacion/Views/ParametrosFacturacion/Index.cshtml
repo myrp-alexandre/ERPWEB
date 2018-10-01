@@ -93,7 +93,22 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="DiasTransaccionesAFuturo">Dias máximos para transacciones a futuro</label>
+                                @Html.TextBoxFor(q => q.DiasTransaccionesAFuturo, new { @class = "form-control", @id = "DiasTransaccionesAFuturo" })
+                                @Html.ValidationMessageFor(q => q.DiasTransaccionesAFuturo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="clave_desbloqueo_precios">Clave para desbloqueo de precios</label>
+                                @Html.TextBoxFor(q => q.clave_desbloqueo_precios, new { @class = "form-control", @id = "DiasTransaccionesAFuturo" })
+                                @Html.ValidationMessageFor(q => q.clave_desbloqueo_precios, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
@@ -257,22 +272,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="DiasTransaccionesAFuturo">Dias máximos para transacciones a futuro</label>
-                                @Html.TextBoxFor(q => q.DiasTransaccionesAFuturo, new { @class = "form-control", @id = "DiasTransaccionesAFuturo" })
-                                @Html.ValidationMessageFor(q => q.DiasTransaccionesAFuturo, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="clave_desbloqueo_precios">Clave para desbloqueo de precios</label>
-                                @Html.TextBoxFor(q => q.clave_desbloqueo_precios, new { @class = "form-control", @id = "DiasTransaccionesAFuturo" })
-                                @Html.ValidationMessageFor(q => q.clave_desbloqueo_precios, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
+                    
 
 
                 </div>
