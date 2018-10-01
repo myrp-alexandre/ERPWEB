@@ -21,15 +21,6 @@
 
 @using (Html.BeginForm("Nuevo", "Empleado", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    if (ViewBag.mensaje != null)
-    {
-        <div class="alert alert-warning alert-dismissible">
-            <h4>
-                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
-            </h4>
-        </div>
-    }
-
     <div class="row">
         <div class="col-md-12">
             @*<div class="col-md-2" height = "100"  width = "100"  style = "border:solid">
