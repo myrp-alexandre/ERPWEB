@@ -234,7 +234,7 @@ namespace Core.Erp.Data.Contabilidad
                 {
                     if(empresa.em_fechaInicioActividad > Fecha.Date)
                     {
-                        mensaje = "La fecha de la transacción es menor al inicio de actividades de la empresa en el sistema FIXED ERP";
+                        mensaje = "La fecha de la transacción es menor al inicio de actividades de la empresa en el sistema FIXED ERP: " + Fecha.Date.ToString("dd/MM/yyyy") ;
                         return false;
                     }
                 }
