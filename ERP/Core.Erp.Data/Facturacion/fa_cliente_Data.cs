@@ -401,8 +401,8 @@ namespace Core.Erp.Data.Facturacion
                     }
                 }
 
-                var cartera = db_cxc.vwcxc_cartera_x_cobrar.Where(q => q.IdEmpresa == IdEmpresa && q.IdCliente == IdCliente && q.Estado == "A").ToList();
-                if (cartera.Count > 0)
+                var cartera = db_cxc.vwcxc_cartera_x_cobrar.Where(q => q.IdEmpresa == IdEmpresa && q.IdCliente == IdCliente && q.Estado == "A");
+                if (cartera.Count() > 0)
                     SaldoPorCobrar = Convert.ToDouble(cartera.Sum(q => q.Saldo));
 
                 if (Math.Round(Total + SaldoPorCobrar - ValorDocumento,2,MidpointRounding.AwayFromZero) > cliente.cl_Cupo)
