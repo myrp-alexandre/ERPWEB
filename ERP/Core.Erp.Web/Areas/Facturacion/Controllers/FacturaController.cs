@@ -203,7 +203,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 else
                 {
                     i_validar.PedirDesbloqueo = true;
-                    msg = MsgValidaciones;
+                    msg = null;
                     return false;
                 }
             }
@@ -273,11 +273,18 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             return Json(EstadoDesbloqueo, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult ValidarCliente(int IdEmpresa = 0, decimal IdCliente = 0)
+        public JsonResult ValidarCliente(int IdEmpresa = 0, decimal IdCliente = 0, decimal IdTransaccionSession = 0)
         {
             string mensaje = string.Empty;
-
+            string mensaje_cupo = string.Empty;
             bus_factura.ValidarCarteraVencida(IdEmpresa, IdCliente, ref mensaje);
+
+            bus_cliente.ValidarCupoCreditoCliente(IdEmpresa, 0, 0, 0, "FACT", IdCliente, List_det.get_list(IdTransaccionSession).Sum(q => q.vt_total), ref mensaje_cupo);
+
+            if (string.IsNullOrEmpty(mensaje))
+                mensaje = mensaje_cupo;
+            else
+                mensaje += ", Además " + mensaje_cupo;
 
             return Json(mensaje, JsonRequestBehavior.AllowGet);
         }

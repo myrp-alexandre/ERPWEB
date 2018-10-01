@@ -15,7 +15,6 @@
         get_info_termino_pago();
         GetUltimoDocumento();
         ValidarGrid();
-        ValidarCliente();
         $("#vt_tipo_venta").change(function () {
             get_info_termino_pago();
             CargarCuotas();
@@ -38,7 +37,8 @@
     function ValidarCliente() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
-            IdCliente: IdCliente.GetValue()
+            IdCliente: IdCliente.GetValue(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',

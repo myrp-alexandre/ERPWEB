@@ -750,7 +750,8 @@
     function ValidarCliente() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
-            IdCliente: IdCliente.GetValue()
+            IdCliente: IdCliente.GetValue(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
