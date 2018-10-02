@@ -29,6 +29,12 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
             DateTime fechaIni = p_fechaIni.Value == null ? DateTime.Now : Convert.ToDateTime(p_fechaIni.Value);
             DateTime fechaFin = p_fechaFin.Value == null ? DateTime.Now : Convert.ToDateTime(p_fechaFin.Value);
             bool mostrarAnulados = p_mostrarAnulados.Value == null ? false : Convert.ToBoolean(p_mostrarAnulados.Value);
+            bool mostrarObservacion = string.IsNullOrEmpty(p_mostrar_observacion_completa.Value.ToString()) ? false : Convert.ToBoolean(p_mostrar_observacion_completa.Value);
+
+            if (mostrarObservacion)
+                CeldaObservacion.WordWrap = true;
+            else
+                CeldaObservacion.WordWrap = false;
 
             CXP_010_Bus bus_rpt = new CXP_010_Bus();
             List<CXP_010_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdProveedor, fechaIni, fechaFin, mostrarAnulados);

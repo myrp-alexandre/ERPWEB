@@ -29,6 +29,12 @@ namespace Core.Erp.Web.Reportes.Facturacion
             DateTime fechaIni = p_fechaIni.Value == null ? DateTime.Now : Convert.ToDateTime(p_fechaIni.Value);
             DateTime fechaFin = p_fechaFin.Value == null ? DateTime.Now : Convert.ToDateTime(p_fechaFin.Value);
             bool mostrarAnulados = p_mostrarAnulados.Value == null ? false : Convert.ToBoolean(p_mostrarAnulados.Value);
+            bool mostrarObservacion = string.IsNullOrEmpty(p_mostrar_observacion_completa.Value.ToString()) ? false : Convert.ToBoolean(p_mostrar_observacion_completa.Value);
+
+            if (mostrarObservacion)
+                CeldaObservacion.WordWrap = true;
+            else
+                CeldaObservacion.WordWrap = false;
 
             FAC_011_Bus bus_rpt = new FAC_011_Bus();
             List<FAC_011_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdCliente, fechaIni, fechaFin, mostrarAnulados);
