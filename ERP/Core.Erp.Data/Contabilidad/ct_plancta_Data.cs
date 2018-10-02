@@ -108,10 +108,11 @@ namespace Core.Erp.Data.Contabilidad
                     if (mostrar_anulados && mostrar_solo_cuentas_movimiento)
                         Lista = (from q in Context.ct_plancta
                                  join padre in Context.ct_plancta
-                                 on q.IdCtaCblePadre equals padre.IdCtaCble into temp_padre
+                                 on new { q.IdEmpresa, q.IdCtaCblePadre } equals new { padre.IdEmpresa, IdCtaCblePadre = padre.IdCtaCble } into temp_padre
                                  from padre in temp_padre.DefaultIfEmpty()
                                  where q.pc_EsMovimiento == "S"
                                  && q.IdEmpresa == IdEmpresa
+                                 orderby q.IdCtaCble
                                  select new ct_plancta_Info
                                  {
                                      IdCtaCble = q.IdCtaCble,
@@ -127,11 +128,12 @@ namespace Core.Erp.Data.Contabilidad
                         if (!mostrar_anulados && mostrar_solo_cuentas_movimiento)
                         Lista = (from q in Context.ct_plancta
                                  join padre in Context.ct_plancta
-                                 on q.IdCtaCblePadre equals padre.IdCtaCble into temp_padre
+                                 on new { q.IdEmpresa, q.IdCtaCblePadre } equals new { padre.IdEmpresa, IdCtaCblePadre = padre.IdCtaCble } into temp_padre
                                  from padre in temp_padre.DefaultIfEmpty()
                                  where q.pc_EsMovimiento == "S"
                                  && q.pc_Estado == "A"
                                  && q.IdEmpresa == IdEmpresa
+                                 orderby q.IdCtaCble
                                  select new ct_plancta_Info
                                  {
                                      IdCtaCble = q.IdCtaCble,
@@ -147,9 +149,10 @@ namespace Core.Erp.Data.Contabilidad
                         if (mostrar_anulados && !mostrar_solo_cuentas_movimiento)
                         Lista = (from q in Context.ct_plancta
                                  join padre in Context.ct_plancta
-                             on q.IdCtaCblePadre equals padre.IdCtaCble into temp_padre
+                             on new { q.IdEmpresa, q.IdCtaCblePadre } equals new { padre.IdEmpresa, IdCtaCblePadre = padre.IdCtaCble } into temp_padre
                                  from padre in temp_padre.DefaultIfEmpty()
                                  where q.IdEmpresa == IdEmpresa
+                                 orderby q.IdCtaCble
                                  select new ct_plancta_Info
                                  {
                                      IdCtaCble = q.IdCtaCble,
@@ -164,10 +167,11 @@ namespace Core.Erp.Data.Contabilidad
                     else
                         Lista = (from q in Context.ct_plancta
                                  join padre in Context.ct_plancta
-                             on q.IdCtaCblePadre equals padre.IdCtaCble into temp_padre
+                             on new { q.IdEmpresa, q.IdCtaCblePadre } equals new { padre.IdEmpresa, IdCtaCblePadre = padre.IdCtaCble } into temp_padre
                                  from padre in temp_padre.DefaultIfEmpty()
                                  where q.pc_Estado == "A"
                                  && q.IdEmpresa == IdEmpresa
+                                 orderby q.IdCtaCble
                                  select new ct_plancta_Info
                                  {
                                      IdCtaCble = q.IdCtaCble,

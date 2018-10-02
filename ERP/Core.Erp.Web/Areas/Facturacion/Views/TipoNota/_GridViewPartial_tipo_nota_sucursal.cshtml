@@ -59,7 +59,7 @@
                 p.Columns.Add("pc_Cuenta", "Cuenta").Width = Unit.Percentage(100);
                 p.TextField = "pc_Cuenta";
                 p.ValueField = "IdCtaCble";
-                p.ValueType = typeof(int);
+                p.ValueType = typeof(string);
                 p.DataSource = ViewBag.lst_cuenta;
             });
         });

@@ -18,7 +18,7 @@ namespace Core.Erp.Data.General
                 {
                     if (mostrar_anulados == true)
                         Lista = (from q in Context.tb_sis_Impuesto
-                                 where q.IdTipoImpuesto == IdTipoImpuesto
+                                 where q.IdTipoImpuesto.Contains(IdTipoImpuesto)
                              select new tb_sis_Impuesto_Info
                              {
                                  IdCod_Impuesto = q.IdCod_Impuesto,
@@ -29,7 +29,7 @@ namespace Core.Erp.Data.General
                              }).ToList();
                     else
                         Lista = (from q in Context.tb_sis_Impuesto
-                                 where q.IdTipoImpuesto == IdTipoImpuesto
+                                 where q.IdTipoImpuesto.Contains(IdTipoImpuesto)
                                  select new tb_sis_Impuesto_Info
                                  {
                                      IdCod_Impuesto = q.IdCod_Impuesto,

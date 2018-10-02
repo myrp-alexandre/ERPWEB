@@ -36,6 +36,8 @@ namespace Core.Erp.Data.Facturacion
                             clave_desbloqueo_precios = Entity.clave_desbloqueo_precios,
                             DiasTransaccionesAFuturo = Entity.DiasTransaccionesAFuturo
                         };
+                    else
+                        info = null;
                 }
                 return info;
             }
@@ -72,7 +74,6 @@ namespace Core.Erp.Data.Facturacion
                             pa_Contabiliza_descuento = info.pa_Contabiliza_descuento,
                             clave_desbloqueo_precios = info.clave_desbloqueo_precios,
                             DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo
-
                         };
                         Context.fa_parametro.Add(Entity);
                     }

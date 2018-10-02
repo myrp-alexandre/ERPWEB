@@ -221,12 +221,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             if (bus_factura.ValidarCarteraVencida(i_validar.IdEmpresa,i_validar.IdCliente,ref MsgValidaciones))
             {
-                var info_usuario = bus_usuario.get_info(i_validar.IdUsuarioAut);
-                if (info_usuario == null)
-                    info_usuario = new Info.SeguridadAcceso.seg_usuario_Info();
-                if (info_usuario.contrasena_admin == null)
-                    info_usuario.contrasena_admin = "";
-                if (info_usuario != null && info_usuario.es_super_admin && i_validar.contrasena_admin.Trim().ToLower() == info_usuario.contrasena_admin.Trim().ToLower())
+                var info_usuario = bus_usuario.get_info(string.IsNullOrEmpty(i_validar.IdUsuarioAut) ? "" : i_validar.IdUsuarioAut);
 
                 if (info_usuario != null && info_usuario.es_super_admin && !string.IsNullOrEmpty(i_validar.contrasena_admin) && !string.IsNullOrEmpty(info_usuario.contrasena_admin) && i_validar.contrasena_admin.Trim().ToLower() == info_usuario.contrasena_admin.Trim().ToLower())
                 {
@@ -288,14 +283,18 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             string mensaje = string.Empty;
             string mensaje_cupo = string.Empty;
-            bus_factura.ValidarCarteraVencida(IdEmpresa, IdCliente, ref mensaje);
 
-            bus_cliente.ValidarCupoCreditoCliente(IdEmpresa, 0, 0, 0, "FACT", IdCliente, List_det.get_list(IdTransaccionSession).Sum(q => q.vt_total), ref mensaje_cupo);
+            if (IdCliente != 0)
+            {
+                bus_factura.ValidarCarteraVencida(IdEmpresa, IdCliente, ref mensaje);
+
+                bus_cliente.ValidarCupoCreditoCliente(IdEmpresa, 0, 0, 0, "FACT", IdCliente, List_det.get_list(IdTransaccionSession).Sum(q => q.vt_total), ref mensaje_cupo);
+            }            
 
             if (string.IsNullOrEmpty(mensaje))
                 mensaje = mensaje_cupo;
             else
-                mensaje += ", Además " + mensaje_cupo;
+                mensaje += !string.IsNullOrEmpty(mensaje_cupo) ? (", Además " + mensaje_cupo) : "";
 
             return Json(mensaje, JsonRequestBehavior.AllowGet);
         }

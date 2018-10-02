@@ -28,7 +28,6 @@ namespace Core.Erp.Web.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
-            Session.Contents.RemoveAll();
             LoginModel model = new LoginModel();
             return View(model);
         }
@@ -92,8 +91,8 @@ namespace Core.Erp.Web.Controllers
             SessionFixed.IdUsuario = model.IdUsuario;
             SessionFixed.IdEmpresa = model.IdEmpresa.ToString();
             SessionFixed.IdSucursal = model.IdSucursal.ToString();
-            SessionFixed.em_direccion = info_empresa.em_direccion.ToString();
-            SessionFixed.IdTransaccionSession = model.IdEmpresa.ToString() + "000000000";
+            SessionFixed.em_direccion = info_empresa.em_direccion;
+            SessionFixed.IdTransaccionSession = string.IsNullOrEmpty(SessionFixed.IdTransaccionSession) ? "1" : SessionFixed.IdTransaccionSession;
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
 
             var usuario = bus_usuario.get_info(model.IdUsuario);
@@ -104,7 +103,7 @@ namespace Core.Erp.Web.Controllers
                     return RedirectToAction(menu.web_nom_Action, menu.web_nom_Controller, new { Area = menu.web_nom_Area });                
             }
             return RedirectToAction("Index","Home");
-        }        
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
