@@ -173,7 +173,7 @@
                                 </div>
                                 @Html.DevExpress().DateEditFor(q=> q.info_persona.pe_fechaNacimiento, settings =>
                             {
-                                settings.Name = "pe_fechaNacimiento";
+                                settings.Name = "info_persona.pe_fechaNacimiento";
                                 settings.Properties.UseMaskBehavior = true;
                                 settings.Properties.EditFormat = EditFormat.Date;
                                 settings.Properties.EditFormatString = "dd/MM/yyyy";
