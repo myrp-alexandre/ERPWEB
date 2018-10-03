@@ -49,6 +49,8 @@ namespace Core.Erp.Data.Facturacion
                                  IdMovi_inven_tipo_in_eg_x_inv = q.IdMovi_inven_tipo_in_eg_x_inv,
                                  IdNumMovi_in_eg_x_inv = q.IdNumMovi_in_eg_x_inv,
 
+                                 EstadoBool = q.Estado == "A" ? true : false
+
                              }).ToList();
                 }
                 

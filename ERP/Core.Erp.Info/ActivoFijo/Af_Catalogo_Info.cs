@@ -18,6 +18,7 @@ namespace Core.Erp.Info.ActivoFijo
         [StringLength(250, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 250")]
         public string Descripcion { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public int Orden { get; set; }
         public string IdUsuario { get; set; }
         public string nom_pc { get; set; }

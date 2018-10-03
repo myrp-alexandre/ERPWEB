@@ -222,6 +222,7 @@
     <Compile Include="Importacion\imp_orden_compra_ext_ct_cbteble_det_gastos_Info.cs" />
     <Compile Include="Importacion\imp_orden_compra_ext_recepcion_Info.cs" />
     <Compile Include="Importacion\imp_parametro_Info.cs" />
+    <Compile Include="Importacion\imp_partida_arancelaria_Info.cs" />
     <Compile Include="Inventario\in_CatalogoTipo_Info.cs" />
     <Compile Include="Inventario\in_Catalogo_Info.cs" />
     <Compile Include="Inventario\in_categorias_Info.cs" />

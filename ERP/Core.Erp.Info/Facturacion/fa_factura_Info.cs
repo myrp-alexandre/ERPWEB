@@ -104,6 +104,7 @@ namespace Core.Erp.Info.Facturacion
         public decimal IdCbteVta { get; set; }
         public DateTime vt_fecha { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public bool? esta_impresa { get; set; }
         public string vt_NumFactura { get; set; }
     }

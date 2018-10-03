@@ -28,7 +28,9 @@ namespace Core.Erp.Data.Banco
                                      IdCentroCosto = q.IdCentroCosto,
                                      IdCtaCble = q.IdCtaCble,
                                      Tipo = q.Tipo,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                  else
                         Lista = (from q in Context.ba_tipo_nota
@@ -43,7 +45,9 @@ namespace Core.Erp.Data.Banco
                                      IdCentroCosto = q.IdCentroCosto,
                                      IdCtaCble = q.IdCtaCble,
                                      Tipo = q.Tipo,
-                                     Estado = q.Estado                                     
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     
                 }

@@ -101,6 +101,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Cbt.IdEmpresa = IdEmpresa;
 
                     }
+
+                    if (selectBaParam.Count() == 0)
+                        Cbt = null;
                 }
                 return (Cbt);
             }

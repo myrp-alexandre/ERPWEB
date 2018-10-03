@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_catalogo_banco";
         settings.CallbackRouteValues = new { Controller = "CatalogoBanco", Action = "GridViewPartial_catalogo_banco", IdTipoCatalogo = ViewBag.IdTipoCatalogo };
-        
+
         settings.KeyFieldName = "IdCatalogo";
         settings.Width = Unit.Percentage(100);
 
@@ -83,8 +83,17 @@
 
         settings.Columns.Add("IdTipoCatalogo", "Código").Width = Unit.Percentage(20);
         settings.Columns.Add("ca_descripcion", "Descripción").Width = Unit.Percentage(60);
-        settings.Columns.Add("ca_estado", "Estado").Width = Unit.Percentage(10);
         settings.Columns.Add("ca_orden", "Orden").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "ca_estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

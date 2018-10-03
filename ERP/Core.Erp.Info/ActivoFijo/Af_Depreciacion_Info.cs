@@ -33,6 +33,7 @@ namespace Core.Erp.Info.ActivoFijo
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotivoAnula { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public Nullable<int> IdEmpresa_ct { get; set; }
         public Nullable<int> IdTipoCbte { get; set; }
         public Nullable<decimal> IdCbteCble { get; set; }

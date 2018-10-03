@@ -27,9 +27,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_tipo_orden_pago()
         {
-            bus_tipo_op = new cp_orden_pago_tipo_x_empresa_Bus();
+            cp_orden_pago_tipo_Bus bus_top = new cp_orden_pago_tipo_Bus();
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var model = bus_tipo_op.get_list(IdEmpresa);
+            var model = bus_top.get_list();
             return PartialView("_GridViewPartial_tipo_orden_pago", model);
         }
         private void cargar_combos(int IdEmpresa)

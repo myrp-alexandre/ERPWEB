@@ -24,7 +24,9 @@ namespace Core.Erp.Data.ActivoFijo
                                      IdTipoCatalogo = q.IdTipoCatalogo,
                                      Descripcion = q.Descripcion,
                                      Estado = q.Estado,
-                                     IdCatalogo = q.IdCatalogo
+                                     IdCatalogo = q.IdCatalogo,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.Af_Catalogo
@@ -35,7 +37,9 @@ namespace Core.Erp.Data.ActivoFijo
                                      IdTipoCatalogo = q.IdTipoCatalogo,
                                      Descripcion = q.Descripcion,
                                      Estado = q.Estado,
-                                     IdCatalogo = q.IdCatalogo
+                                     IdCatalogo = q.IdCatalogo,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

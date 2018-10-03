@@ -61,8 +61,8 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdTipo_op = DataBinder.Eval(tc.DataItem, "IdTipo_op"), IdTipoSRI = ViewBag.IdTipoSRI }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdTipo_op = DataBinder.Eval(tc.DataItem, "IdTipo_op"), IdTipoSRI = ViewBag.IdTipoSRI },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa, IdTipo_op = DataBinder.Eval(tc.DataItem, "IdTipo_op") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa, IdTipo_op = DataBinder.Eval(tc.DataItem, "IdTipo_op") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -70,7 +70,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdTipoSRI = ViewBag.IdTipoSRI, IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
@@ -80,7 +80,7 @@
 
 
         settings.Columns.Add("IdTipo_op","ID").Width=Unit.Percentage(20);
-        settings.Columns.Add("IdEstadoAprobacion","Estado aprobación").Width = Unit.Percentage(20);
+        //settings.Columns.Add("IdEstadoAprobacion","Estado aprobación").Width = Unit.Percentage(20);
         settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(60);
     });
 }

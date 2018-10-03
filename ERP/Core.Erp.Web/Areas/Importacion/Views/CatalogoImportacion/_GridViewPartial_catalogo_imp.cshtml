@@ -6,6 +6,7 @@
         settings.Name = "GridView_catalogo_imp";
         settings.CallbackRouteValues = new { Controller = "CatalogoImportacion", Action = "GridViewPartial_catalogo_imp" , IdCatalogo_tipo = ViewBag.IdCatalogo_tipo };
         settings.KeyFieldName = "IdCatalogo";
+        settings.Width = Unit.Percentage(100);
 
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;

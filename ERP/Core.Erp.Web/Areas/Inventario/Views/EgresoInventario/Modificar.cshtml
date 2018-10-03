@@ -67,17 +67,6 @@
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-offset-6 col-md-3">
-                <div class="form-group">
-                    <label for="IdMotivo_Inv">Motivo*</label>
-                    @Html.DropDownListFor(q => q.IdMotivo_Inv, new SelectList(ViewBag.lst_motivo, "IdMotivo_Inv", "Desc_mov_inv"), new { @class = "form-control", @id = "IdMotivo_Inv" })
-                    @Html.ValidationMessageFor(q => q.IdMotivo_Inv, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdBodega">Bodega</label>
@@ -85,7 +74,15 @@
                     @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-offset-6 col-md-3">
+            <div class=" col-md-3">
+                <div class="form-group">
+                    <label for="IdMotivo_Inv">Motivo*</label>
+                    @Html.DropDownListFor(q => q.IdMotivo_Inv, new SelectList(ViewBag.lst_motivo, "IdMotivo_Inv", "Desc_mov_inv"), new { @class = "form-control", @id = "IdMotivo_Inv" })
+                    @Html.ValidationMessageFor(q => q.IdMotivo_Inv, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class=" col-md-3">
                 <div class="form-group">
                     <label for="IdMovi_inven_tipo">Tipo movimiento*</label>
                     @Html.DropDownListFor(q => q.IdMovi_inven_tipo, new SelectList(ViewBag.lst_tipo, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control", @id = "IdMovi_inven_tipo", @disabled = "disabled" })

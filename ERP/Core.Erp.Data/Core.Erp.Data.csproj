@@ -588,6 +588,7 @@
     <Compile Include="Importacion\imp_orden_compra_ext_ct_cbteble_det_gastos_Data.cs" />
     <Compile Include="Importacion\imp_orden_compra_ext_recepcion_Data.cs" />
     <Compile Include="Importacion\imp_parametro_Data.cs" />
+    <Compile Include="Importacion\imp_partida_arancelaria_Data.cs" />
     <Compile Include="imp_catalogo.cs">
       <DependentUpon>Model_importacion.tt</DependentUpon>
     </Compile>
@@ -616,6 +617,9 @@
       <DependentUpon>Model_importacion.tt</DependentUpon>
     </Compile>
     <Compile Include="imp_parametro.cs">
+      <DependentUpon>Model_importacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="imp_partida_arancelaria.cs">
       <DependentUpon>Model_importacion.tt</DependentUpon>
     </Compile>
     <Compile Include="Inventario\in_CatalogoTipo_Data.cs" />

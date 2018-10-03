@@ -27,7 +27,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             caj_parametro_Info model = bus_parametro.get_info(IdEmpresa);
             if (model == null)
-                model = new caj_parametro_Info();
+                model = new caj_parametro_Info { IdEmpresa = IdEmpresa};
             cargar_combos(IdEmpresa);
             return View(model);
         }

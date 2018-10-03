@@ -32,6 +32,7 @@
         <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_ct_cbteble_det_gastos_imp_orden_compra_ext" />
         <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_det_imp_orden_compra_ext" />
         <AssociationConnector Association="Model_importacion.FK_imp_orden_compra_ext_recepcion_imp_orden_compra_ext" />
+        <EntityTypeShape EntityType="Model_importacion.imp_partida_arancelaria" Width="1.5" PointX="14.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

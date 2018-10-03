@@ -41,6 +41,7 @@ namespace Core.Erp.Info.ActivoFijo
         public string Af_NumPlaca { get; set; }
         public Nullable<int> Af_Anio_fabrica { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string MotiAnula { get; set; }
         public byte[] Af_foto { get; set; }
         public string Af_DescripcionCorta { get; set; }

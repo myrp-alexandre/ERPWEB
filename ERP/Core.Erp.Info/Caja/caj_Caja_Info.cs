@@ -26,6 +26,7 @@ namespace Core.Erp.Info.Caja
         public string nom_pc { get; set; }
         public string ip { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; } 
         public string IdUsuario_Responsable { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }

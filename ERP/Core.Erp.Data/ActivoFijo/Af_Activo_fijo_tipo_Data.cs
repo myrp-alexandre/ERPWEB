@@ -30,8 +30,10 @@ namespace Core.Erp.Data.ActivoFijo
                                      Estado = q.Estado,
                                      IdCtaCble_Activo = q.IdCtaCble_Activo,
                                      IdCtaCble_Dep_Acum = q.IdCtaCble_Dep_Acum,
-                                     IdCtaCble_Gastos_Depre = q.IdCtaCble_Gastos_Depre
-                                     
+                                     IdCtaCble_Gastos_Depre = q.IdCtaCble_Gastos_Depre,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
+
                                  }).ToList();
                     else
                         Lista = (from q in Context.Af_Activo_fijo_tipo
@@ -48,7 +50,9 @@ namespace Core.Erp.Data.ActivoFijo
                                      Estado = q.Estado,
                                      IdCtaCble_Activo = q.IdCtaCble_Activo,
                                      IdCtaCble_Dep_Acum = q.IdCtaCble_Dep_Acum,
-                                     IdCtaCble_Gastos_Depre = q.IdCtaCble_Gastos_Depre
+                                     IdCtaCble_Gastos_Depre = q.IdCtaCble_Gastos_Depre,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

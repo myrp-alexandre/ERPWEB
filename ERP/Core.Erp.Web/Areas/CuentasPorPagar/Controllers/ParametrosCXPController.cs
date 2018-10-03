@@ -29,7 +29,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             cp_parametros_Info model = bus_parametros.get_info(IdEmpresa);
             if (model == null)
-                model = new cp_parametros_Info();
+                model = new cp_parametros_Info { IdEmpresa = IdEmpresa };
             cargar_combos(IdEmpresa);
 
             return View(model);

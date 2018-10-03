@@ -456,7 +456,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
-            lst_codigo_retencion = bus_codigo_ret.get_list_cod_ret(false);
+            lst_codigo_retencion = bus_codigo_ret.get_list_cod_ret(false, IdEmpresa);
             ViewBag.lst_codigo_retencion = lst_codigo_retencion;
             Session["lst_codigo_retencion"] = lst_codigo_retencion;
         }

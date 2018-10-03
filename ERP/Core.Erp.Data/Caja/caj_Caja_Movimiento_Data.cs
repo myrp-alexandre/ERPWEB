@@ -38,7 +38,9 @@ namespace Core.Erp.Data.Caja
                                      ca_Descripcion = q.ca_Descripcion,
                                      pe_nombreCompleto = q.pe_nombreCompleto,
                                      tm_descripcion = q.tm_descripcion,
-                                     cm_valor = q.cm_valor
+                                     cm_valor = q.cm_valor,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.vwcaj_Caja_Movimiento
@@ -60,7 +62,9 @@ namespace Core.Erp.Data.Caja
                                      ca_Descripcion = q.ca_Descripcion,
                                      pe_nombreCompleto = q.pe_nombreCompleto,
                                      tm_descripcion = q.tm_descripcion,
-                                     cm_valor = q.cm_valor
+                                     cm_valor = q.cm_valor,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

@@ -9,6 +9,33 @@ namespace Core.Erp.Data.CuentasPorPagar
    public class cp_orden_pago_tipo_Data
     {
 
+        public List<cp_orden_pago_tipo_Info> get_list()
+        {
+            try
+            {
+                List<cp_orden_pago_tipo_Info> Lista;
+
+                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
+                {
+                    Lista = (from q in Context.cp_orden_pago_tipo
+                             select new cp_orden_pago_tipo_Info
+                             {
+                                 IdTipo_op = q.IdTipo_op,
+                                 Descripcion = q.Descripcion,
+                                 Estado = q.Estado,
+                                 GeneraDiario = q.GeneraDiario
+                             }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool guardarDB(cp_orden_pago_tipo_Info item)
         {
             try

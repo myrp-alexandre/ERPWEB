@@ -29,7 +29,9 @@ namespace Core.Erp.Data.Caja
                                       IdSucursal = q.IdSucursal,
                                      ca_Descripcion = q.ca_Descripcion,
                                      IdUsuario_Responsable = q.IdUsuario_Responsable,
-                                     
+
+                                     EstadoBool = q.Estado == "A" ? true : false
+
                                  }).ToList();
                     else
                         Lista = (from q in Context.caj_Caja
@@ -45,7 +47,9 @@ namespace Core.Erp.Data.Caja
                                      IdSucursal = q.IdSucursal,
                                      ca_Descripcion = q.ca_Descripcion,
                                      IdUsuario_Responsable = q.IdUsuario_Responsable,
-                                     
+
+                                     EstadoBool = q.Estado == "A" ? true : false
+
                                  }).ToList();
                 }
                 return Lista;

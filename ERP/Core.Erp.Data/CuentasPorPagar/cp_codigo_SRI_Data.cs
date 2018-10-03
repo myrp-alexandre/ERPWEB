@@ -50,7 +50,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-        public List<cp_codigo_SRI_Info> get_list_cod_ret( bool mostrar_anulados)
+        public List<cp_codigo_SRI_Info> get_list_cod_ret( bool mostrar_anulados, int IdEmpresa)
         {
             try
             {
@@ -60,6 +60,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                     if (mostrar_anulados == true)
                         Lista = (from q in Context.vwcp_codigo_SRI
                                  where (q.IdTipoSRI == "COD_RET_FUE" || q.IdTipoSRI == "COD_RET_IVA")
+                                 && (q.IdEmpresa == null || q.IdEmpresa == IdEmpresa)
                                  select new cp_codigo_SRI_Info
                                  {
                                      IdTipoSRI = q.IdTipoSRI,
@@ -69,17 +70,17 @@ namespace Core.Erp.Data.CuentasPorPagar
                                      co_codigoBase = q.co_codigoBase,
                                      co_porRetencion = q.co_porRetencion,
                                      co_estado = q.co_estado,
-                                     info_codigo_ctacble =new cp_codigo_SRI_x_CtaCble_Info
+                                     info_codigo_ctacble = new cp_codigo_SRI_x_CtaCble_Info
                                      {
-                                         IdCtaCble=q.IdCtaCble,
+                                         IdCtaCble = q.IdCtaCble,
                                      }
-                                     
+
                                  }).ToList();
                     else
                         Lista = (from q in Context.vwcp_codigo_SRI
                                  where q.co_estado == "A"
                                  && (q.IdTipoSRI == "COD_RET_FUE" || q.IdTipoSRI == "COD_RET_IVA")
-
+                                 && (q.IdEmpresa == null || q.IdEmpresa == IdEmpresa)
                                  select new cp_codigo_SRI_Info
                                  {
                                      IdCodigo_SRI = q.IdCodigo_SRI,
@@ -94,7 +95,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                                          IdCtaCble = q.IdCtaCble,
                                      }
                                  }).ToList();
-                }
+                }  
                 return Lista;
             }
             catch (Exception)
