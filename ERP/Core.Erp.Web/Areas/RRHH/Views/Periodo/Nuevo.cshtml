@@ -63,12 +63,16 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
-                    <label for="ca_descripcion">Consideran empleados pasivos</label>
-                    @Html.EditorFor(q => q.Carga_Todos_Empleados, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Carga_Todos_Empleados, "", new { @class = "text-danger" })
+                    <label for="ca_descripcion"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.Carga_Todos_Empleados, settings =>
+               {
+                   settings.Name = "Carga_Todos_Empleados";
+                   settings.Text = "Considerar empleados pasivos";
 
+               }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.Carga_Todos_Empleados, "", new { @class = "text-danger" })
 
                 </div>
             </div>

@@ -129,7 +129,7 @@ namespace Core.Erp.Data.RRHH
                     ro_turno Entity = new ro_turno
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdTurno = info.IdTurno,
+                        IdTurno = info.IdTurno=get_id(info.IdEmpresa),
                         tu_descripcion = info.tu_descripcion,
                         Lunes = info.Lunes,
                         Martes = info.Martes,

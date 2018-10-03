@@ -25,7 +25,7 @@ namespace Core.Erp.Data.RRHH
                                      IdPeriodo = q.IdPeriodo,
                                      pe_FechaIni = q.pe_FechaIni,
                                      pe_FechaFin = q.pe_FechaFin,
-                                     Carga_Todos_Empleados=q.Carga_Todos_Empleados,
+                                     Carga_Todos_Empl=q.Carga_Todos_Empleados,
                                      Cod_region=q.Cod_region,
                                      pe_mes=q.pe_mes,
                                      pe_anio=q.pe_anio,
@@ -41,14 +41,18 @@ namespace Core.Erp.Data.RRHH
                                      IdPeriodo = q.IdPeriodo,
                                      pe_FechaIni = q.pe_FechaIni,
                                      pe_FechaFin = q.pe_FechaFin,
-                                     Carga_Todos_Empleados = q.Carga_Todos_Empleados,
+                                     Carga_Todos_Empl = q.Carga_Todos_Empleados,
                                      Cod_region = q.Cod_region,
                                      pe_mes = q.pe_mes,
                                      pe_anio = q.pe_anio,
                                      pe_estado = q.pe_estado
                                  }).ToList();
                 }
+                foreach (var item in Lista)
+                {
+                   item.Carga_Todos_Empleados = item.Carga_Todos_Empl == null ? false : Convert.ToBoolean(item.Carga_Todos_Empl);
 
+                }
                 return Lista;
             }
             catch (Exception)
@@ -74,7 +78,7 @@ namespace Core.Erp.Data.RRHH
                         IdPeriodo = Entity.IdPeriodo,
                         pe_FechaIni = Entity.pe_FechaIni,
                         pe_FechaFin = Entity.pe_FechaFin,
-                        Carga_Todos_Empleados = Entity.Carga_Todos_Empleados,
+                        Carga_Todos_Empleados = (Entity.Carga_Todos_Empleados)==null?false:Convert.ToBoolean(Entity.Carga_Todos_Empleados),
                         Cod_region = Entity.Cod_region,
                         pe_mes = Entity.pe_mes,
                         pe_anio = Entity.pe_anio,

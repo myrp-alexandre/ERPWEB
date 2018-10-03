@@ -27,7 +27,9 @@ namespace Core.Erp.Info.RRHH
         public string IdUsuarioUltAnu { get; set; }
         public string MotivoAnulacion { get; set; }
         public string Cod_region { get; set; }
-        public Nullable<bool> Carga_Todos_Empleados { get; set; }
+        public bool Carga_Todos_Empleados { get; set; }
+        public Nullable<bool> Carga_Todos_Empl { get; set; }
+
         public string CodCatalogo { get; set; }
         public string IdUsuario { get; set; }
 

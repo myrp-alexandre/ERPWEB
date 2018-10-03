@@ -110,7 +110,7 @@ namespace Core.Erp.Data.RRHH
                     ro_area_x_departamento Entity = new ro_area_x_departamento
                     {
                         IdEmpresa = info.IdEmpresa,
-                        Secuencia = get_id(info.IdEmpresa),
+                        Secuencia =info.Secuencia= get_id(info.IdEmpresa),
                         IdDivision = info.IdDivision,
                         IdArea = info.IdArea,
                         IdDepartamento = info.IdDepartamento
