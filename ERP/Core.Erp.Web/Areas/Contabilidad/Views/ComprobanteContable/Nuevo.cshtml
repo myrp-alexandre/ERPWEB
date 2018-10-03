@@ -32,32 +32,7 @@
                     @Html.ValidationMessageFor(q => q.CodCbteCble, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-            <div class="col-md-offset-7 col-md-3">
-                <div class="form-group">
-                    <label for="">Fecha de comprobante</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.DevExpress().DateEditFor(q=> q.cb_Fecha, settings =>
-                    {
-                        settings.Name = "cb_Fecha";
-                        settings.Properties.UseMaskBehavior = true;
-                        settings.Properties.EditFormat = EditFormat.Date;
-                        settings.Properties.EditFormatString = "dd/MM/yyyy";
-                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                    }).GetHtml()
-                        @Html.ValidationMessageFor(q => q.cb_Fecha, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="form-group">
                     <label for="IdTipoCbte">Tipo comprobante</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbte, settings =>
@@ -79,13 +54,34 @@
                     @Html.ValidationMessageFor(q => q.IdTipoCbte, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="">Fecha de comprobante</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.DevExpress().DateEditFor(q=> q.cb_Fecha, settings =>
+                    {
+                        settings.Name = "cb_Fecha";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.cb_Fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="cb_Observacion">Observación</label>
+                    <label for="cb_Observacion">Observación*</label>
                     @Html.TextBoxFor(q => q.cb_Observacion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.cb_Observacion, "", new { @class = "text-danger" })
                 </div>
