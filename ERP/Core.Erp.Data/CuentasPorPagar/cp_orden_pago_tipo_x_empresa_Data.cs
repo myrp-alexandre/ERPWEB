@@ -19,11 +19,11 @@ namespace Core.Erp.Data.CuentasPorPagar
 
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
-                    Lista = (from q in Context.cp_orden_pago_tipo_x_empresa
-                             join p in Context.cp_orden_pago_tipo
-                             on new {q.IdTipo_op} equals new {p.IdTipo_op}
+
+                    Lista = (from p in Context.cp_orden_pago_tipo
+                             join q in Context.cp_orden_pago_tipo_x_empresa                             
+                             on new {p.IdTipo_op} equals new {q.IdTipo_op}
                              where q.IdEmpresa == IdEmpresa
-                             && q.IdTipo_op==p.IdTipo_op
                              select new cp_orden_pago_tipo_x_empresa_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
