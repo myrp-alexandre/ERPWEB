@@ -20,7 +20,8 @@ namespace Core.Erp.Info.Banco
         public string cb_Observacion { get; set; }
         public double cb_Valor { get; set; }
         public string cb_Cheque { get; set; }
-        public string Estado { get; set; }        
+        public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public Nullable<decimal> IdPersona_Girado_a { get; set; }
         public string cb_giradoA { get; set; }
         public string cb_ciudadChq { get; set; }

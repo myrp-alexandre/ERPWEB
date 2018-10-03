@@ -16,6 +16,7 @@ namespace Core.Erp.Info.Caja
         public string tm_descripcion { get; set; }
         public bool SeDeposita { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         [Required(ErrorMessage = "El campo es obligatorio")]
         public string tm_Signo { get; set; }
         public string IdCtaCble { get; set; }

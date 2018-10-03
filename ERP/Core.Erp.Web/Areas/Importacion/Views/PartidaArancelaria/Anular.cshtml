@@ -11,20 +11,13 @@
 @using (Html.BeginForm("Anular", "PartidaArancelaria", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdArancel)
-    if (ViewBag.mensaje != null)
-    {
-        <div class="alert alert-warning alert-dismissible">
-            <h4>
-                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
-            </h4>
-        </div>
-    }
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="CodigoPartidaArancelaria">Código*</label>
-                    @Html.TextBoxFor(q => q.CodigoPartidaArancelaria, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.CodigoPartidaArancelaria, new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(m => m.CodigoPartidaArancelaria, "", new { @class = "text-danger" })
                 </div>
             </div>

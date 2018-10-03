@@ -24,8 +24,10 @@ namespace Core.Erp.Data.Banco
                                      IdTipoCatalogo = q.IdTipoCatalogo,
                                      ca_descripcion =  q.ca_descripcion,
                                      ca_estado =q.ca_estado,
-                                     IdCatalogo = q.IdCatalogo
-                                     
+                                     IdCatalogo = q.IdCatalogo,
+
+                                     EstadoBool = q.ca_estado == "A" ? true : false
+
                                  }).ToList();
                     else
                         Lista = (from q in Context.ba_Catalogo
@@ -36,7 +38,9 @@ namespace Core.Erp.Data.Banco
                                      IdTipoCatalogo = q.IdTipoCatalogo,
                                      ca_descripcion = q.ca_descripcion,
                                      ca_estado = q.ca_estado,
-                                     IdCatalogo = q.IdCatalogo
+                                     IdCatalogo = q.IdCatalogo,
+
+                                     EstadoBool = q.ca_estado == "A" ? true : false
 
                                  }).ToList();
                 }

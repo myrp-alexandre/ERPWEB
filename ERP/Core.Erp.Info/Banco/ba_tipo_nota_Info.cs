@@ -19,5 +19,6 @@ namespace Core.Erp.Info.Banco
         public string IdCtaCble { get; set; }
         public string IdCentroCosto { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
     }
 }

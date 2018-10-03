@@ -29,7 +29,9 @@ namespace Core.Erp.Data.Caja
                                  SeDeposita = q.SeDeposita,
                                  tm_Signo = q.tm_Signo,
                                  IdTipoMovi_grupo = q.IdTipoMovi_grupo,
-                                 IdCtaCble = q.IdCtaCble
+                                 IdCtaCble = q.IdCtaCble,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                     else
                         Lista = (from q in Context.caj_Caja_Movimiento_Tipo
@@ -46,6 +48,8 @@ namespace Core.Erp.Data.Caja
                                      tm_Signo = q.tm_Signo,
                                      IdTipoMovi_grupo = q.IdTipoMovi_grupo,
                                      IdCtaCble = q.IdCtaCble,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
 
                                  }).ToList();
                 }

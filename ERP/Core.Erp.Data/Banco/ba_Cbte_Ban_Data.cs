@@ -49,7 +49,9 @@ namespace Core.Erp.Data.Banco
                                  cb_Cheque = q.cb_Cheque,
                                  cb_giradoA = q.cb_giradoA,
                                  cb_Valor = q.cb_Valor,
-                                 Imprimir_Solo_el_cheque = q.Imprimir_Solo_el_cheque
+                                 Imprimir_Solo_el_cheque = q.Imprimir_Solo_el_cheque,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                     else
                         Lista = (from q in Context.vwba_Cbte_Ban
@@ -75,7 +77,9 @@ namespace Core.Erp.Data.Banco
                                      cb_Cheque = q.cb_Cheque,
                                      cb_giradoA = q.cb_giradoA,
                                      cb_Valor = q.cb_Valor,
-                                     Imprimir_Solo_el_cheque = q.Imprimir_Solo_el_cheque
+                                     Imprimir_Solo_el_cheque = q.Imprimir_Solo_el_cheque,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 

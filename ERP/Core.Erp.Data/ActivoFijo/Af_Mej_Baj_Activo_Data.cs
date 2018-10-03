@@ -28,7 +28,9 @@ namespace Core.Erp.Data.ActivoFijo
                                      Id_Mejora_Baja_Activo = q.Id_Mejora_Baja_Activo,
                                      Id_Tipo = q.Id_Tipo,
                                      Fecha_MejBaj = q.Fecha_MejBaj,
-                                     Motivo = q.Motivo
+                                     Motivo = q.Motivo,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
 
                                  }).ToList();
                     else
@@ -43,7 +45,9 @@ namespace Core.Erp.Data.ActivoFijo
                                  Id_Mejora_Baja_Activo = q.Id_Mejora_Baja_Activo,
                                  Id_Tipo = q.Id_Tipo,
                                  Fecha_MejBaj = q.Fecha_MejBaj,
-                                 Motivo = q.Motivo
+                                 Motivo = q.Motivo,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
 
                              }).ToList();
                 }

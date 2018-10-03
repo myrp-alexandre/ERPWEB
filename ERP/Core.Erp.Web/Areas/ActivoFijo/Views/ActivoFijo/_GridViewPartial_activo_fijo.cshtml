@@ -61,7 +61,8 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A" && Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado_Proceso")) == "TIP_ESTADO_AF_ACTIVO")
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdActivoFijo = DataBinder.Eval(tc.DataItem, "IdActivoFijo")}) + "&nbsp;" +
+
+                        Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdActivoFijo = DataBinder.Eval(tc.DataItem, "IdActivoFijo")}) + "&nbsp;" +
                         Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdActivoFijo = DataBinder.Eval(tc.DataItem, "IdActivoFijo")},
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
@@ -81,8 +82,16 @@
         settings.Columns.Add("IdActivoFijo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
         settings.Columns.Add("Estado_Proceso_nombre", "Proceso").Width = System.Web.UI.WebControls.Unit.Percentage(10);
         settings.Columns.Add("Af_Nombre", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(70);
-        settings.Columns.Add("Estado", "Estado").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.EditorProperties().CheckBox(sp =>
+            {
 
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

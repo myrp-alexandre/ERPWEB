@@ -28,7 +28,9 @@ namespace Core.Erp.Data.ActivoFijo
                                      Af_Nombre = q.Af_Nombre,
                                      IdActivoFijo = q.IdActivoFijo,
                                      Estado_Proceso = q.Estado_Proceso,
-                                     Estado_Proceso_nombre = c.Descripcion
+                                     Estado_Proceso_nombre = c.Descripcion,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
 
                                  }).ToList();
                     else
@@ -44,7 +46,9 @@ namespace Core.Erp.Data.ActivoFijo
                                      Estado = q.Estado,
                                      IdActivoFijo = q.IdActivoFijo,
                                      Estado_Proceso = q.Estado_Proceso,
-                                     Estado_Proceso_nombre = c.Descripcion
+                                     Estado_Proceso_nombre = c.Descripcion,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

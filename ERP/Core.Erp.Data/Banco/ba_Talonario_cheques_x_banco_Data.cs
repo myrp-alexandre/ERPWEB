@@ -33,9 +33,11 @@ namespace Core.Erp.Data.Banco
                                      IdEmpresa_cbtecble_Usado = q.IdEmpresa_cbtecble_Usado,
                                      IdTipoCbte_cbtecble_Usado = q.IdTipoCbte_cbtecble_Usado,
                                      Fecha_uso= q.Fecha_uso,
-                                     ba_descripcion = p.ba_descripcion
+                                     ba_descripcion = p.ba_descripcion,
 
-                                     
+                                     Estado_bool = q.Estado == "A" ? true : false
+
+
                                  }).ToList();
                     else
                         Lista = (from q in Context.ba_Talonario_cheques_x_banco
@@ -55,7 +57,9 @@ namespace Core.Erp.Data.Banco
                                      IdEmpresa_cbtecble_Usado = q.IdEmpresa_cbtecble_Usado,
                                      IdTipoCbte_cbtecble_Usado = q.IdTipoCbte_cbtecble_Usado,
                                      Fecha_uso = q.Fecha_uso,
-                                     ba_descripcion = p.ba_descripcion
+                                     ba_descripcion = p.ba_descripcion,
+
+                                     Estado_bool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;
