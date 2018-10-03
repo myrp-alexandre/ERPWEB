@@ -20,7 +20,7 @@ namespace Core.Erp.Info.Contabilidad
         [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 50")]
         public string tc_TipoCbte { get; set; }
         public string tc_Estado { get; set; }
-
+        public bool EstadoBool { get; set; }
         [Required(ErrorMessage = "El campo nemonico es obligatorio")]
         public string tc_Interno { get; set; }
 

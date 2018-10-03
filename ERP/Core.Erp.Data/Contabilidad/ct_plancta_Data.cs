@@ -122,7 +122,9 @@ namespace Core.Erp.Data.Contabilidad
                                      pc_EsMovimiento = q.pc_EsMovimiento,
                                      IdGrupoCble = q.IdGrupoCble,
                                      pc_Cuenta_padre = padre.pc_Cuenta,
-                                     IdNivelCta = q.IdNivelCta
+                                     IdNivelCta = q.IdNivelCta,
+
+                                     EstadoBool = q.pc_Estado == "A" ? true : false
                                  }).ToList();
                     else
                         if (!mostrar_anulados && mostrar_solo_cuentas_movimiento)
@@ -143,7 +145,9 @@ namespace Core.Erp.Data.Contabilidad
                                      pc_EsMovimiento = q.pc_EsMovimiento,
                                      IdGrupoCble = q.IdGrupoCble,
                                      pc_Cuenta_padre = padre.pc_Cuenta,
-                                     IdNivelCta = q.IdNivelCta
+                                     IdNivelCta = q.IdNivelCta,
+
+                                     EstadoBool = q.pc_Estado == "A" ? true : false
                                  }).ToList();
                     else
                         if (mostrar_anulados && !mostrar_solo_cuentas_movimiento)
@@ -162,7 +166,9 @@ namespace Core.Erp.Data.Contabilidad
                                      pc_EsMovimiento = q.pc_EsMovimiento,
                                      IdGrupoCble = q.IdGrupoCble,
                                      IdNivelCta = q.IdNivelCta,
-                                     pc_Cuenta_padre = padre.pc_Cuenta
+                                     pc_Cuenta_padre = padre.pc_Cuenta,
+
+                                     EstadoBool = q.pc_Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.ct_plancta
@@ -181,7 +187,9 @@ namespace Core.Erp.Data.Contabilidad
                                      pc_EsMovimiento = q.pc_EsMovimiento,
                                      IdGrupoCble = q.IdGrupoCble,
                                      IdNivelCta = q.IdNivelCta,
-                                     pc_Cuenta_padre = padre.pc_Cuenta
+                                     pc_Cuenta_padre = padre.pc_Cuenta,
+
+                                     EstadoBool = q.pc_Estado == "A" ? true : false
                                  }).ToList();
 
                 }

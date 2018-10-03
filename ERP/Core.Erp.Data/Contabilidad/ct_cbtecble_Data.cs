@@ -38,7 +38,9 @@ namespace Core.Erp.Data.Contabilidad
                                  IdCbteCble = q.IdCbteCble,
                                  IdPeriodo = q.IdPeriodo,
                                  IdTipoCbte = q.IdTipoCbte,
-                                 tc_TipoCbte = t.tc_TipoCbte
+                                 tc_TipoCbte = t.tc_TipoCbte,
+
+                                 EstadoBool = q.cb_Estado == "A" ? true : false
                              }).ToList();
 
                     else
@@ -62,7 +64,9 @@ namespace Core.Erp.Data.Contabilidad
                                      IdCbteCble = q.IdCbteCble,
                                      IdPeriodo = q.IdPeriodo,
                                      IdTipoCbte = q.IdTipoCbte,
-                                     tc_TipoCbte = t.tc_TipoCbte
+                                     tc_TipoCbte = t.tc_TipoCbte,
+
+                                     EstadoBool = q.cb_Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

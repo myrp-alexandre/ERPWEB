@@ -84,7 +84,17 @@
         settings.Columns.Add("gc_GrupoCble", "Descripción").Width = Unit.Percentage(20);
         settings.Columns.Add("gc_Orden", "Orden").Width = Unit.Percentage(20);
         settings.Columns.Add("gc_estado_financiero", "Estado financiero").Width = Unit.Percentage(20);
-        settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(20);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
+
     });
 }
 @grid.Bind(Model).GetHtml()

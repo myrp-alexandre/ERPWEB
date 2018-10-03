@@ -18,6 +18,7 @@ namespace Core.Erp.Info.Contabilidad
         [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 50")]
         public string nv_Descripcion { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
 
         #region Campos auditoria
         public string IdUsuario { get; set; }

@@ -26,7 +26,9 @@ namespace Core.Erp.Data.Contabilidad
                                      IdNivelCta = q.IdNivelCta,
                                      nv_NumDigitos = q.nv_NumDigitos,
                                      nv_Descripcion = q.nv_Descripcion,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.ct_plancta_nivel
@@ -38,7 +40,9 @@ namespace Core.Erp.Data.Contabilidad
                                      IdNivelCta = q.IdNivelCta,
                                      nv_NumDigitos = q.nv_NumDigitos,
                                      nv_Descripcion = q.nv_Descripcion,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 
