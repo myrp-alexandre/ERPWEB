@@ -1,11 +1,10 @@
 @using System.Web.UI.WebControls;
-
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridView_catalogo_imp";
-        settings.CallbackRouteValues = new { Controller = "CatalogoImportacion", Action = "GridViewPartial_catalogo_imp" , IdCatalogo_tipo = ViewBag.IdCatalogo_tipo };
-        settings.KeyFieldName = "IdCatalogo";
+        settings.Name = "GridView_partida_arancelaria";
+        settings.CallbackRouteValues = new { Controller = "PartidaArancelaria", Action = "GridViewPartial_partida_arancelaria" };
+        settings.KeyFieldName = "IdArancel";
         settings.Width = Unit.Percentage(100);
 
         //Configuración para que la grilla no muestre texto completo
@@ -51,7 +50,7 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToBoolean(e.GetValue("estado")) == false )
+            if (Convert.ToBoolean(e.GetValue("Estado")) == false)
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
@@ -61,11 +60,11 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true)
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdCatalogo = DataBinder.Eval(tc.DataItem, "IdCatalogo"), IdCatalogo_tipo = ViewBag.IdCatalogo_tipo }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdCatalogo = DataBinder.Eval(tc.DataItem, "IdCatalogo"), IdCatalogo_tipo = ViewBag.IdCatalogo_tipo },
+                Html.ActionLink("Modificar", "Modificar", new { IdArancel = DataBinder.Eval(tc.DataItem, "IdArancel") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdArancel = DataBinder.Eval(tc.DataItem, "IdArancel") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -73,18 +72,29 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdCatalogo_tipo = ViewBag.IdCatalogo_tipo }).ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        
-        settings.Columns.Add("IdCatalogo", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("IdCatalogo_tipo", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("ca_descripcion", "Descripción").Width = Unit.Percentage(70);
-        settings.Columns.Add("estado", "Estado").Width = Unit.Percentage(10);
+
+        settings.Columns.Add("IdArancel", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("CodigoPartidaArancelaria", "Código").Width = Unit.Percentage(10);
+        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(30);
+        settings.Columns.Add("TarifaArancelaria", "Tarifa").Width = Unit.Percentage(10);
+        settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(30);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Estado";
+            column.Caption = "Estado";
+            column.Width = Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+            });
+        });
+
     });
 }
 @grid.Bind(Model).GetHtml()

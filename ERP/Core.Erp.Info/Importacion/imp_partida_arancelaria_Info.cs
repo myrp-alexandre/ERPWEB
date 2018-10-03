@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.Importacion
 {
-    class imp_partida_arancelaria_Info
+   public class imp_partida_arancelaria_Info
     {
+        public decimal IdArancel { get; set; }
+        public string CodigoPartidaArancelaria { get; set; }
+        public string Descripcion { get; set; }
+        public decimal TarifaArancelaria { get; set; }
+        public string Observacion { get; set; }
+        public bool Estado { get; set; }
     }
 }
