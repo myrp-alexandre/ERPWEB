@@ -216,7 +216,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult EditingAddNewFacturas(string IDs = "", decimal IdTransaccionSession = 0)
+        public ActionResult EditingAddNewFacturas(string IDs = "", decimal IdTransaccionSession = 0, int IdTipoNota = 0)
         {
             if (IDs != "")
             {
@@ -226,13 +226,17 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     List_cruce.DeleteRow(item,IdTransaccionSession);
                 }
             }
+            var tipo = bus_tipo_nota.get_info(IdTipoNota);
             var list = List_cruce.get_list(IdTransaccionSession).Where(q => q.seleccionado == true).ToList();
-            var lst_det = new List<fa_notaCreDeb_det_Info>();
-            foreach (var item in list)
+            if (tipo.GeneraMoviInven)
             {
-                lst_det.AddRange(bus_det.get_list(item.IdEmpresa_fac_nd_doc_mod, item.IdSucursal_fac_nd_doc_mod, item.IdBodega_fac_nd_doc_mod, item.IdCbteVta_fac_nd_doc_mod,item.vt_tipoDoc));                
+                var lst_det = new List<fa_notaCreDeb_det_Info>();
+                foreach (var item in list)
+                {
+                    lst_det.AddRange(bus_det.get_list(item.IdEmpresa_fac_nd_doc_mod, item.IdSucursal_fac_nd_doc_mod, item.IdBodega_fac_nd_doc_mod, item.IdCbteVta_fac_nd_doc_mod, item.vt_tipoDoc));
+                }
+                List_det.set_list(lst_det, IdTransaccionSession);
             }
-            List_det.set_list(lst_det, IdTransaccionSession);
             var model = list;
             return PartialView("_GridViewPartial_CruceNC", model);
         }
@@ -345,15 +349,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 msg = "Existen registros sin producto en el detalle";
                 return false;
             }
-            if (i_validar.lst_cruce.Count != 0)
+            if (i_validar.lst_det.Sum(q=>q.sc_total) < i_validar.lst_cruce.Sum(q=>q.Valor_Aplicado))
             {
-                if (Math.Round(i_validar.lst_cruce.Sum(q => q.Valor_Aplicado), 2, MidpointRounding.AwayFromZero) != Math.Round(i_validar.lst_det.Sum(q => q.sc_total), 2, MidpointRounding.AwayFromZero))
-                {
-                    msg = "El total del detalle de la nota de crédito es distinta al total aplicado en los documentos";
-                    return false;
-                }
-            }            
-
+                msg = "El valor aplicado en facturas es mayor al valor total de la nota de crédito";
+                return false;
+            }
+            
             i_validar.IdBodega = (int)bus_punto_venta.get_info(i_validar.IdEmpresa, i_validar.IdSucursal, Convert.ToInt32(i_validar.IdPuntoVta)).IdBodega;
             i_validar.IdUsuario = SessionFixed.IdUsuario;
             i_validar.IdUsuarioUltMod = SessionFixed.IdUsuario;
