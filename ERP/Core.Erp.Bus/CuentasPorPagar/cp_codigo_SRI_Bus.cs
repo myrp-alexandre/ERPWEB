@@ -24,11 +24,11 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
-        public List<cp_codigo_SRI_Info> get_list_cod_ret( bool mostrar_anulados)
+        public List<cp_codigo_SRI_Info> get_list_cod_ret( bool mostrar_anulados, int IdEmpresa)
         {
             try
             {
-                return odata.get_list_cod_ret( mostrar_anulados);
+                return odata.get_list_cod_ret( mostrar_anulados, IdEmpresa);
             }
             catch (Exception)
             {
