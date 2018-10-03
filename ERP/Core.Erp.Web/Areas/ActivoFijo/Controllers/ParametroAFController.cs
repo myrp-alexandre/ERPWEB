@@ -23,7 +23,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             Af_Parametros_Info model = bus_parametro.get_info(IdEmpresa);
             if (model == null)
-                model = new Af_Parametros_Info();
+                model = new Af_Parametros_Info { IdEmpresa =  IdEmpresa};
             cargar_combos(IdEmpresa);
             return View(model);
         }

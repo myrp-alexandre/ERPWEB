@@ -31,7 +31,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
         private void cargar_combos()
         {
-            var lst_ctacble = bus_plancta.get_list(Convert.ToInt32(Session["IdEmpresa"]), false, false);
+            var lst_ctacble = bus_plancta.get_list(Convert.ToInt32(Session["IdEmpresa"]), false, true);
             ViewBag.lst_cuentas = lst_ctacble;
         }
 
