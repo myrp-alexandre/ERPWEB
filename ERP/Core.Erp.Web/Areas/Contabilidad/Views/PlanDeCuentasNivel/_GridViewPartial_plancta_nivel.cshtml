@@ -80,7 +80,17 @@
         settings.Columns.Add("IdNivelCta","Nivel").Width = System.Web.UI.WebControls.Unit.Percentage(10);
         settings.Columns.Add("nv_NumDigitos","Dígitos").Width = System.Web.UI.WebControls.Unit.Percentage(10);
         settings.Columns.Add("nv_Descripcion","Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(70);
-        settings.Columns.Add("Estado").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
+
     });
 }
 @grid.Bind(Model).GetHtml()

@@ -23,7 +23,9 @@ namespace Core.Erp.Data.Contabilidad
                                      IdanioFiscal = q.IdanioFiscal,
                                      af_fechaIni = q.af_fechaIni,
                                      af_fechaFin = q.af_fechaFin,
-                                     af_estado = q.af_estado
+                                     af_estado = q.af_estado,
+
+                                     EstadoBool = q.af_estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.ct_anio_fiscal
@@ -33,7 +35,9 @@ namespace Core.Erp.Data.Contabilidad
                                      IdanioFiscal = q.IdanioFiscal,
                                      af_fechaIni = q.af_fechaIni,
                                      af_fechaFin = q.af_fechaFin,
-                                     af_estado = q.af_estado
+                                     af_estado = q.af_estado,
+
+                                     EstadoBool = q.af_estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

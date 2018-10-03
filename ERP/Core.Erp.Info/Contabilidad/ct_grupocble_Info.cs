@@ -22,6 +22,7 @@ namespace Core.Erp.Info.Contabilidad
         public string gc_estado_financiero { get; set; }
         public Nullable<int> gc_signo_operacion { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string IdGrupo_Mayor { get; set; }
     }
 }

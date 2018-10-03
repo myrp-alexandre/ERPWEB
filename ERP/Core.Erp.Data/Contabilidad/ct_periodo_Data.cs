@@ -41,6 +41,8 @@ namespace Core.Erp.Data.Contabilidad
                                        pe_mes = q.pe_mes,
                                        pe_cerrado = q.pe_cerrado,
                                        pe_estado = q.pe_estado,
+
+                                       EstadoBool = q.pe_estado == "A" ? true : false
                                    }).ToList();
 
 
@@ -59,7 +61,9 @@ namespace Core.Erp.Data.Contabilidad
                                  pe_mes = q.pe_mes,
                                  pe_cerrado = q.pe_cerrado,
                                  pe_estado = q.pe_estado,
-                                 smes = m.smes
+                                 smes = m.smes,
+
+                                 EstadoBool = q.pe_estado == "A" ? true : false
                              }).ToList();
                 else
                     Lista = (from q in lst_periodo
@@ -77,7 +81,9 @@ namespace Core.Erp.Data.Contabilidad
                                  pe_mes = q.pe_mes,
                                  pe_cerrado = q.pe_cerrado,
                                  pe_estado = q.pe_estado,
-                                 smes = m.smes
+                                 smes = m.smes,
+
+                                 EstadoBool = q.pe_estado == "A" ? true : false
                              }).ToList();
 
                 Lista.ForEach(q => q.nom_periodo_combo = q.IdanioFiscal + " " + q.smes);

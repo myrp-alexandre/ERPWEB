@@ -15,6 +15,7 @@ namespace Core.Erp.Info.Contabilidad
         public System.DateTime af_fechaIni { get; set; }
         public System.DateTime af_fechaFin { get; set; }
         public string af_estado { get; set; }
+        public bool EstadoBool { get; set; }
         //no existe en la tabla
         public ct_anio_fiscal_x_cuenta_utilidad_Info info_anio_ctautil { get; set; }
     }

@@ -81,7 +81,17 @@
         settings.Columns.Add("IdanioFiscal","Año fiscal").Width = Unit.Percentage(20);
         settings.Columns.Add("af_fechaIni","Fecha incio").Width = Unit.Percentage(20);
         settings.Columns.Add("af_fechaFin","Fecha fin").Width = Unit.Percentage(20);
-        settings.Columns.Add("af_estado","Estado").Width = Unit.Percentage(20);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
+
     });
 }
 @grid.Bind(Model).GetHtml()

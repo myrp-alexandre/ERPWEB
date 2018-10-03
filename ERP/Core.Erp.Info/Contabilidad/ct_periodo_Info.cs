@@ -22,7 +22,7 @@ namespace Core.Erp.Info.Contabilidad
         public System.DateTime pe_FechaFin { get; set; }
         public string pe_cerrado { get; set; }
         public string pe_estado { get; set; }
-
+        public bool EstadoBool { get; set; }
         //Campos que no existen en la tabla
         public bool pe_cerrado_bool { get; set; }
         public string nom_periodo_combo { get; set; }

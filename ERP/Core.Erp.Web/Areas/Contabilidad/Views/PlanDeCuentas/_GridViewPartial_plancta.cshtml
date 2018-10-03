@@ -84,7 +84,17 @@
         settings.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(30);
         settings.Columns.Add("IdNivelCta","Nivel").Width = System.Web.UI.WebControls.Unit.Percentage(5);
         settings.Columns.Add("pc_EsMovimiento", "Tiene movimiento").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add("pc_Estado","Estado").Width = System.Web.UI.WebControls.Unit.Percentage(5);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
+
     });
 }
 @grid.Bind(Model).GetHtml()

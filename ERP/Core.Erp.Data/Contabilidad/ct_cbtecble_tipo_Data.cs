@@ -26,6 +26,8 @@ namespace Core.Erp.Data.Contabilidad
                                      CodTipoCbte = q.CodTipoCbte,
                                      tc_TipoCbte = q.tc_TipoCbte,
                                      tc_Estado = q.tc_Estado,
+
+                                     EstadoBool = q.tc_Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.ct_cbtecble_tipo
@@ -38,6 +40,8 @@ namespace Core.Erp.Data.Contabilidad
                                      CodTipoCbte = q.CodTipoCbte,
                                      tc_TipoCbte = q.tc_TipoCbte,
                                      tc_Estado = q.tc_Estado,
+
+                                     EstadoBool = q.tc_Estado == "A" ? true : false
                                  }).ToList();
                 }
 

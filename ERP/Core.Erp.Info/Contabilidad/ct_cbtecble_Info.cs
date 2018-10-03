@@ -23,6 +23,7 @@ namespace Core.Erp.Info.Contabilidad
         [StringLength(5000, MinimumLength = 1, ErrorMessage = "el campo observación debe tener mínimo 1 caracter y máximo 5000")]
         public string cb_Observacion { get; set; }
         public string cb_Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public int cb_Anio { get; set; }
         public int cb_mes { get; set; }
         public string IdUsuario { get; set; }

@@ -228,7 +228,9 @@
 
         var datos = {
             IDs: selectedIDs,
-            IdTransaccionSession: $("#IdTransaccionSession").val()
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            IdTipoNota: $("#IdTipoNota").val(),
+            IdEmpresa: $("#IdEmpresa").val()
         }
         $.ajax({
             type: 'POST',
@@ -281,7 +283,7 @@
 
 @using (Html.BeginForm("Nuevo", "NotaDeCreditoFacturacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa"})
     @Html.HiddenFor(q => q.CodDocumentoTipo)
     @Html.HiddenFor(q => q.CreDeb)
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })

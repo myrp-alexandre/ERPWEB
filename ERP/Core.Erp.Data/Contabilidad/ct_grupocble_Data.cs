@@ -26,7 +26,9 @@ namespace Core.Erp.Data.Contabilidad
                                   gc_GrupoCble = q.gc_GrupoCble,
                                   gc_Orden = q.gc_Orden,
                                   gc_signo_operacion = q.gc_signo_operacion,
-                                  Estado = q.Estado
+                                  Estado = q.Estado,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                     else
                         Lista = (from q in Context.ct_grupocble
@@ -39,7 +41,9 @@ namespace Core.Erp.Data.Contabilidad
                                      gc_GrupoCble = q.gc_GrupoCble,
                                      gc_Orden = q.gc_Orden,
                                      gc_signo_operacion = q.gc_signo_operacion,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 

@@ -82,8 +82,18 @@
         settings.Columns.Add("CodTipoCbte", "Código").Width = Unit.Percentage(20);
         settings.Columns.Add("tc_TipoCbte", "Tipo").Width = Unit.Percentage(20);
         settings.Columns.Add("tc_Nemonico", "Nemonico").Width = Unit.Percentage(20);
-        settings.Columns.Add("tc_Estado", "Estado").Width = Unit.Percentage(20);
         settings.Columns.Add("tc_Interno", "Interno").Width = Unit.Percentage(20);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
+
     });
 }
 @grid.Bind(Model).GetHtml()
