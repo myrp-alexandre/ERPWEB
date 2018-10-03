@@ -43,5 +43,6 @@ namespace Core.Erp.Data
         public DbSet<vwimp_orden_compra_ext_recepcion> vwimp_orden_compra_ext_recepcion { get; set; }
         public DbSet<vwimp_gastos_no_asignados> vwimp_gastos_no_asignados { get; set; }
         public DbSet<imp_orden_compra_ext> imp_orden_compra_ext { get; set; }
+        public DbSet<imp_partida_arancelaria> imp_partida_arancelaria { get; set; }
     }
 }

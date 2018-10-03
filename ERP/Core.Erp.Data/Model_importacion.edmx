@@ -178,8 +178,19 @@
           <Property Name="IdBodega" Type="int" Nullable="false" />
           <Property Name="IdCtaCble_invntario" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_liquidacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="imp_partida_arancelaria">
+          <Key>
+            <PropertyRef Name="IdArancel" />
+          </Key>
+          <Property Name="IdArancel" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CodigoPartidaArancelaria" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="TarifaArancelaria" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwimp_liquidacion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwimp_liquidacion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -218,8 +229,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_liquidacion'
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra_ext' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra_ext' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwimp_orden_compra_ext">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -264,8 +275,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra
           <Property Name="IdMoneda_destino" Type="int" />
           <Property Name="Estado_cierre" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra_ext_con_saldo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra_ext_con_saldo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwimp_orden_compra_ext_con_saldo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -276,8 +287,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra
           <Property Name="cantidad_x_recibir" Type="float" />
           <Property Name="cantidad_global" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra_ext_ct_cbteble_det_gastos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra_ext_ct_cbteble_det_gastos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwimp_orden_compra_ext_ct_cbteble_det_gastos">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -301,8 +312,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra
           <Property Name="dc_Observacion" Type="varchar(max)" />
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra_ext_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra_ext_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwimp_orden_compra_ext_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -346,8 +357,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra
           <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
           <Property Name="lote_fecha_fab" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra_ext_por_liquidar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra_ext_por_liquidar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwimp_orden_compra_ext_por_liquidar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -386,8 +397,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra_ext_recepcion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra_ext_recepcion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwimp_orden_compra_ext_recepcion">
           <Key>
             <PropertyRef Name="IdRecepcion" />
@@ -420,8 +431,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwimp_orden_compra
           <Property Name="oe_fecha_embarque_est" Type="datetime" />
           <Property Name="Estado_cierre" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwimp_gastos_no_asignados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwimp_gastos_no_asignados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwimp_gastos_no_asignados">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -568,6 +579,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwimp_gastos_no_as
           <EntitySet Name="imp_orden_compra_ext_det" EntityType="Self.imp_orden_compra_ext_det" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="imp_orden_compra_ext_recepcion" EntityType="Self.imp_orden_compra_ext_recepcion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="imp_parametro" EntityType="Self.imp_parametro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="imp_partida_arancelaria" EntityType="Self.imp_partida_arancelaria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vwimp_liquidacion" EntityType="Self.vwimp_liquidacion" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [vwimp_liquidacion].[IdEmpresa] AS [IdEmpresa], 
@@ -1262,6 +1274,7 @@ FROM [web].[vwimp_gastos_no_asignados] AS [vwimp_gastos_no_asignados]</DefiningQ
             <End Role="imp_orden_compra_ext" EntitySet="imp_orden_compra_ext" />
             <End Role="imp_orden_compra_ext_recepcion" EntitySet="imp_orden_compra_ext_recepcion" />
           </AssociationSet>
+          <EntitySet Name="imp_partida_arancelaria" EntityType="Model_importacion.imp_partida_arancelaria" />
           </EntityContainer>
         <EntityType Name="imp_orden_compra_ext">
           <Key>
@@ -1383,6 +1396,17 @@ FROM [web].[vwimp_gastos_no_asignados] AS [vwimp_gastos_no_asignados]</DefiningQ
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="imp_partida_arancelaria">
+          <Key>
+            <PropertyRef Name="IdArancel" />
+          </Key>
+          <Property Name="IdArancel" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CodigoPartidaArancelaria" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TarifaArancelaria" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1738,6 +1762,18 @@ FROM [web].[vwimp_gastos_no_asignados] AS [vwimp_gastos_no_asignados]</DefiningQ
                 <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
                 <ScalarProperty Name="IdOrdenCompra_ext" ColumnName="IdOrdenCompra_ext" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imp_partida_arancelaria">
+            <EntityTypeMapping TypeName="Model_importacion.imp_partida_arancelaria">
+              <MappingFragment StoreEntitySet="imp_partida_arancelaria">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="TarifaArancelaria" ColumnName="TarifaArancelaria" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="CodigoPartidaArancelaria" ColumnName="CodigoPartidaArancelaria" />
+                <ScalarProperty Name="IdArancel" ColumnName="IdArancel" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
