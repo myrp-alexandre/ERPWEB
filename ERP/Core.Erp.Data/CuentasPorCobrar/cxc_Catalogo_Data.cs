@@ -25,7 +25,9 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                      IdCatalogo = q.IdCatalogo,
                                      Estado = q.Estado,
                                      Orden = q.Orden,
-                                     Nombre = q.Nombre
+                                     Nombre = q.Nombre,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.cxc_Catalogo
@@ -37,7 +39,9 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                      IdCatalogo = q.IdCatalogo,
                                      Estado = q.Estado,
                                      Orden = q.Orden,
-                                     Nombre = q.Nombre
+                                     Nombre = q.Nombre,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
 
                                  }).ToList();
                 }

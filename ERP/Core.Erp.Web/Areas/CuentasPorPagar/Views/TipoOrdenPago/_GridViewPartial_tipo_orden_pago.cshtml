@@ -82,6 +82,16 @@
         settings.Columns.Add("IdTipo_op","ID").Width=Unit.Percentage(20);
         //settings.Columns.Add("IdEstadoAprobacion","Estado aprobación").Width = Unit.Percentage(20);
         settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(60);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

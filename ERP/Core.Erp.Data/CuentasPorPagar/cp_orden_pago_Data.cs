@@ -39,7 +39,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  IdTipoMovi = q.IdTipoMovi,
                                  Estado =q.Estado,
                                  Nom_Beneficiario=q.pe_nombreCompleto,
-                                 Total_OP=q.Total_OP
+                                 Total_OP=q.Total_OP,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
 
                              }).ToList();
                 }

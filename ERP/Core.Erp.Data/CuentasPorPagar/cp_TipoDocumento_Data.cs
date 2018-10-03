@@ -63,6 +63,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                            GeneraRetencion = q.GeneraRetencion,
                            Codigo_Secuenciales_Transaccion = q.Codigo_Secuenciales_Transaccion,
                            Sustento_Tributario = q.Sustento_Tributario,
+
+                           EstadoBool = q.Estado == "A" ? true : false
                        }).ToList();
                 else
                     Lst = (from q in oEnti.cp_TipoDocumento
@@ -80,6 +82,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                                GeneraRetencion = q.GeneraRetencion,
                                Codigo_Secuenciales_Transaccion = q.Codigo_Secuenciales_Transaccion,
                                Sustento_Tributario = q.Sustento_Tributario,
+
+                               EstadoBool = q.Estado == "A" ? true : false
                            }).ToList();
 
                 return Lst;

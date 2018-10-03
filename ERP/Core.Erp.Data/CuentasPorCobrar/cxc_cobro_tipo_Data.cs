@@ -24,7 +24,9 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                      tc_abreviatura = q.tc_abreviatura,
                                      tc_Orden = q.tc_Orden,
                                      tc_descripcion = q.tc_descripcion,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.cxc_cobro_tipo
@@ -35,7 +37,9 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                      tc_abreviatura = q.tc_abreviatura,
                                      tc_Orden = q.tc_Orden,
                                      tc_descripcion = q.tc_descripcion,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

@@ -23,7 +23,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  IdTipo_op = q.IdTipo_op,
                                  Descripcion = q.Descripcion,
                                  Estado = q.Estado,
-                                 GeneraDiario = q.GeneraDiario
+                                 GeneraDiario = q.GeneraDiario,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                 }
 

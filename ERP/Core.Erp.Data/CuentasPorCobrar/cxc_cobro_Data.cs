@@ -40,7 +40,9 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  Su_Descripcion = q.Su_Descripcion,
                                  cr_observacion = q.cr_observacion,
                                  nom_Motivo_tipo_cobro = q.nom_Motivo_tipo_cobro,
-                                cr_NumDocumento = q.cr_NumDocumento
+                                cr_NumDocumento = q.cr_NumDocumento,
+
+                                 EstadoBool = q.cr_estado == "A" ? true : false
                              }).ToList();
                 }
 

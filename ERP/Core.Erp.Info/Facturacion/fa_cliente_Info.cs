@@ -32,6 +32,7 @@ namespace Core.Erp.Info.Facturacion
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string IdCtaCble_cxc_Credito { get; set; }
         public bool es_empresa_relacionada { get; set; }
         public Nullable<int> NivelPrecio { get; set; }

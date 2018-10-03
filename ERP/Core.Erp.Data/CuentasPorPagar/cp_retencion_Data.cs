@@ -39,7 +39,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  co_factura = item.co_factura,
                                  co_baseImponible = item.co_baseImponible,
                                  Estado = item.Estado,
-                                 pe_nombreCompleto=item.pe_nombreCompleto
+                                 pe_nombreCompleto=item.pe_nombreCompleto,
+
+                                 EstadoBool = item.Estado == "A" ? true : false
 
                              }).ToList();
                 }

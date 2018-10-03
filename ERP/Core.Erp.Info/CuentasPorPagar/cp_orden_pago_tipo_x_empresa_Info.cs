@@ -33,6 +33,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         [StringLength(500, MinimumLength = 5, ErrorMessage = "el campo descripción debe tener mínimo 5 caracter y máximo 500")]
         public string Descripcion { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string GeneraDiario { get; set; }
 
     }

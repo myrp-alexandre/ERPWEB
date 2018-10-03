@@ -24,6 +24,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string IdCentroCosto { get; set; }
         public string IdCentroCosto_sub_centro_costo { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string IdUsuario { get; set; }
         public string IdUsuarioAnu { get; set; }
         public string MotivoAnu { get; set; }

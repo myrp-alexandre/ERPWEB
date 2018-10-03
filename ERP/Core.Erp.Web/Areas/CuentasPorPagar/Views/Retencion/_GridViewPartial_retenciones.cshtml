@@ -85,7 +85,16 @@
         settings.Columns.Add("pe_nombreCompleto", "Proveedor").Width = Unit.Percentage(30);
         settings.Columns.Add("co_serie", "Serie documento").Width = Unit.Percentage(15);
         settings.Columns.Add("co_factura","#documento").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
 
+            });
+        });
         settings.Columns.Add(column =>
         {
             column.SetDataItemTemplateContent(c =>

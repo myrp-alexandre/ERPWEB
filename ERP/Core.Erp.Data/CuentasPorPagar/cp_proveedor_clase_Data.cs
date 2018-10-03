@@ -26,7 +26,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  IdClaseProveedor = q.IdClaseProveedor,
                                  cod_clase_proveedor = q.cod_clase_proveedor,
                                  descripcion_clas_prove = q.descripcion_clas_prove,
-                                 Estado = q.Estado
+                                 Estado = q.Estado,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                     else
                         Lista = (from q in Context.cp_proveedor_clase
@@ -38,7 +40,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                                      IdClaseProveedor = q.IdClaseProveedor,
                                      cod_clase_proveedor = q.cod_clase_proveedor,
                                      descripcion_clas_prove = q.descripcion_clas_prove,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
 
                 }

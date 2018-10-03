@@ -14,5 +14,6 @@ namespace Core.Erp.Info.Facturacion
         [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo descripción debe tener máximo 50")]
         public string Descripcion { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
     }
 }
