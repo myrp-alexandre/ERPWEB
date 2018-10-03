@@ -31,7 +31,8 @@ namespace Core.Erp.Info.Banco
         public string MotiAnula { get; set; }
         #endregion
 
-        public string Estado { get; set; }        
+        public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public byte[] Reporte { get; set; }
         public byte[] ReporteSolo_Cheque { get; set; }
         public Nullable<bool> MostrarVistaPreviaCheque { get; set; }

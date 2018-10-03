@@ -30,7 +30,9 @@ namespace Core.Erp.Data.ActivoFijo
                                      IdEmpresa_ct = q.IdEmpresa_ct,
                                      IdTipoCbte = q.IdTipoCbte,
                                      IdRetiroActivo = q.IdRetiroActivo,
-                                     Fecha_Retiro = q.Fecha_Retiro
+                                     Fecha_Retiro = q.Fecha_Retiro,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
 
                     else
@@ -48,7 +50,9 @@ namespace Core.Erp.Data.ActivoFijo
                                      IdEmpresa_ct = q.IdEmpresa_ct,
                                      IdTipoCbte = q.IdTipoCbte,
                                      IdRetiroActivo = q.IdRetiroActivo,
-                                     Fecha_Retiro = q.Fecha_Retiro
+                                     Fecha_Retiro = q.Fecha_Retiro,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

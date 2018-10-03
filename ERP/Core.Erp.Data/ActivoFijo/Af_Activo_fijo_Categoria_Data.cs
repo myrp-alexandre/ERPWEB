@@ -28,7 +28,9 @@ namespace Core.Erp.Data.ActivoFijo
                                      Descripcion = q.Descripcion,
                                      IdActivoFijoTipo = q.IdActivoFijoTipo,
                                      IdCategoriaAF = q.IdCategoriaAF,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.Af_Activo_fijo_Categoria
@@ -43,8 +45,11 @@ namespace Core.Erp.Data.ActivoFijo
                                       Descripcion = q.Descripcion,
                                       IdActivoFijoTipo = q.IdActivoFijoTipo,
                                       IdCategoriaAF = q.IdCategoriaAF,
-                                      Estado = q.Estado
+                                      Estado = q.Estado,
+
+                                      EstadoBool = q.Estado == "A" ? true : false
                                   }).ToList();
+
                 }
                 return Lista;
             }

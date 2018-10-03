@@ -40,7 +40,9 @@ namespace Core.Erp.Data.Banco
                                  co_Observacion = q.co_Observacion,
                                  ba_descripcion = q.ba_descripcion,
                                  IdCtaCble = q.IdCtaCble,
-                                 Periodo = q.Periodo
+                                 Periodo = q.Periodo,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                 }
 

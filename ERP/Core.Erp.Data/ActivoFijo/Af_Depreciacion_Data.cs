@@ -38,7 +38,9 @@ namespace Core.Erp.Data.ActivoFijo
                                     Valot_Tot_Importe = q.Valot_Tot_Importe,
                                     IdEmpresa_ct = q.IdEmpresa_ct,
                                     IdTipoCbte = q.IdTipoCbte,
-                                    IdCbteCble  = q.IdCbteCble
+                                    IdCbteCble  = q.IdCbteCble,
+
+                                   EstadoBool = q.Estado == "A" ? true : false
                                }).ToList();
                     else
                         Lista = (from q in Context.Af_Depreciacion
@@ -61,7 +63,9 @@ namespace Core.Erp.Data.ActivoFijo
                                      Valot_Tot_Importe = q.Valot_Tot_Importe,
                                      IdEmpresa_ct = q.IdEmpresa_ct,
                                      IdTipoCbte = q.IdTipoCbte,
-                                     IdCbteCble = q.IdCbteCble
+                                     IdCbteCble = q.IdCbteCble,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

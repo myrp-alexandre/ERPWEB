@@ -29,8 +29,10 @@ namespace Core.Erp.Data.Banco
                                       Estado = q.Estado,
                                       IdBanco = q.IdBanco,
                                       IdCtaCble = q.IdCtaCble,
-                                      ReporteSolo_Cheque = q.ReporteSolo_Cheque
-                                      
+                                      ReporteSolo_Cheque = q.ReporteSolo_Cheque,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
+
                                  }).ToList();
                     else
                         Lista = (from q in Context.ba_Banco_Cuenta
@@ -46,7 +48,9 @@ namespace Core.Erp.Data.Banco
                                      Estado = q.Estado,
                                      IdBanco = q.IdBanco,
                                      IdCtaCble = q.IdCtaCble,
-                                     ReporteSolo_Cheque = q.ReporteSolo_Cheque
+                                     ReporteSolo_Cheque = q.ReporteSolo_Cheque,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
 
                                  }).ToList();
                 }

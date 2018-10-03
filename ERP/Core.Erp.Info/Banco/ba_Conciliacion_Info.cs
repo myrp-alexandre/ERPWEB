@@ -19,6 +19,7 @@ namespace Core.Erp.Info.Banco
         public double co_SaldoBanco_anterior { get; set; }
         public string co_Observacion { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
 
         #region Campos de auditoria
         public string IdUsuario { get; set; }

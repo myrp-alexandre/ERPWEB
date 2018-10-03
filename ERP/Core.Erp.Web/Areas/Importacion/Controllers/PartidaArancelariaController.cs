@@ -58,11 +58,6 @@ namespace Core.Erp.Web.Areas.Importacion.Controllers
         [HttpPost]
         public ActionResult Modificar (imp_partida_arancelaria_Info model)
         {
-            if (bus_arancel.validar_si_existe_codigo(model.CodigoPartidaArancelaria))
-            {
-                ViewBag.mensaje = "El código ya se encuentra registrado";
-                return View(model);
-            }
             if (!bus_arancel.modificarDB(model))
                 {
                 return View(model);

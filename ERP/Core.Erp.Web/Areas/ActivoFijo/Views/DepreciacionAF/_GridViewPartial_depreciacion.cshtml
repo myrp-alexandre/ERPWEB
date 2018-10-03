@@ -90,7 +90,16 @@
         });
         settings.Columns.Add("Descripcion","Observación").Width = Unit.Percentage(50);
         settings.Columns.Add("IdCbteCble").Width = Unit.Percentage(10);
-        settings.Columns.Add("Estado").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
         settings.Columns.Add(column =>
         {
             column.SetDataItemTemplateContent(c =>

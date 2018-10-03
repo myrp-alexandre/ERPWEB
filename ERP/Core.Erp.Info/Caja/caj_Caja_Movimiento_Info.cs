@@ -38,6 +38,7 @@ namespace Core.Erp.Info.Caja
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string MotivoAnulacion { get; set; }
         public Nullable<decimal> IdTipoFlujo { get; set; }
         public string IdTipo_Persona { get; set; }

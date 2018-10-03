@@ -26,6 +26,7 @@ namespace Core.Erp.Info.ActivoFijo
         public string ip { get; set; }
         public string MotiAnula { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string cod_tipo { get; set; }
     }
 }

@@ -93,8 +93,16 @@
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
             column.Width = Unit.Percentage(8);
         });
-        settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(5);
         settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        }); settings.Columns.Add(column =>
         {
             column.SetDataItemTemplateContent(c =>
             {
