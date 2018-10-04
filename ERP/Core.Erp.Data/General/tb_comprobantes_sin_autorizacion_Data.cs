@@ -83,7 +83,7 @@ namespace Core.Erp.Data.General
                     && q.vt_serie1 == info.vt_serie1 
                     && q.vt_serie2==info.vt_serie2
                     && q.vt_NumFactura==info.DocumentoDoc).FirstOrDefault();
-                    Entity.esta_impresa = true;
+                    Entity.aprobada_enviar_sri = true;
                     Context.SaveChanges();
                 }
                 if (info.Tipo_documento == cl_enumeradores.eTipoDocumento.RETEN.ToString())
