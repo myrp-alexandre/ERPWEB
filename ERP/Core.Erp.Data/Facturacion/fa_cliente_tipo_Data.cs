@@ -28,7 +28,9 @@ namespace Core.Erp.Data.Facturacion
                                      estado = q.estado,
                                      IdCtaCble_CXC_Anticipo = q.IdCtaCble_CXC_Anticipo,
                                      IdCtaCble_CXC_Con = q.IdCtaCble_CXC_Con,
-                                     IdCtaCble_CXC_Cred = q.IdCtaCble_CXC_Cred
+                                     IdCtaCble_CXC_Cred = q.IdCtaCble_CXC_Cred,
+
+                                     EstadoBool = q.estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.fa_cliente_tipo
@@ -43,7 +45,9 @@ namespace Core.Erp.Data.Facturacion
                                      estado = q.estado,
                                      IdCtaCble_CXC_Anticipo = q.IdCtaCble_CXC_Anticipo,
                                      IdCtaCble_CXC_Con = q.IdCtaCble_CXC_Con,
-                                     IdCtaCble_CXC_Cred = q.IdCtaCble_CXC_Cred
+                                     IdCtaCble_CXC_Cred = q.IdCtaCble_CXC_Cred,
+
+                                     EstadoBool = q.estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

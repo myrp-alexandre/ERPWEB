@@ -40,6 +40,8 @@ namespace Core.Erp.Data.Facturacion
                                  sc_iva = q.sc_iva,
                                  sc_total = q.sc_total,
                                  Estado = q.Estado,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                 }
 

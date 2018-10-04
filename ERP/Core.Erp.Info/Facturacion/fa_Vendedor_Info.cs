@@ -22,6 +22,7 @@ namespace Core.Erp.Info.Facturacion
         public string ve_cedula { get; set; }
         public double PorComision { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }

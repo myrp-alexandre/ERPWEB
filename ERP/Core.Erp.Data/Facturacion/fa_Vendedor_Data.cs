@@ -27,7 +27,9 @@ namespace Core.Erp.Data.Facturacion
                                      ve_cedula = q.ve_cedula,
                                      Ve_Vendedor = q.Ve_Vendedor,
                                      PorComision = q.PorComision,
-                                     Estado = q.Estado                                 
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else Lista = (from q in Context.fa_Vendedor
                                   where q.IdEmpresa == IdEmpresa
@@ -41,6 +43,8 @@ namespace Core.Erp.Data.Facturacion
                                       Ve_Vendedor = q.Ve_Vendedor,
                                       Estado = q.Estado,
                                       PorComision = q.PorComision,
+
+                                      EstadoBool = q.Estado == "A" ? true : false
                                   }).ToList();
                 }
                 return Lista;

@@ -48,8 +48,10 @@ namespace Core.Erp.Data.Facturacion
                                 Direccion_Origen=q.Direccion_Origen,
                                 Estado=q.Estado,
                                 pe_nombreCompleto=q.pe_nombreCompleto,
-                                pe_cedulaRuc=q.pe_cedulaRuc
-                                
+                                pe_cedulaRuc=q.pe_cedulaRuc,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
+
                              }).ToList();
                 }
                 return Lista;

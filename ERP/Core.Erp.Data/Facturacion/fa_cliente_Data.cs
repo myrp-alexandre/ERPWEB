@@ -34,7 +34,9 @@ namespace Core.Erp.Data.Facturacion
                                          IdPersona = q.IdPersona,
                                          pe_nombreCompleto = q.pe_nombreCompleto,
                                          pe_cedulaRuc = q.pe_cedulaRuc
-                                     }
+                                     },
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
 
@@ -55,7 +57,9 @@ namespace Core.Erp.Data.Facturacion
                                          IdPersona = q.IdPersona,
                                          pe_nombreCompleto = q.pe_nombreCompleto,
                                          pe_cedulaRuc = q.pe_cedulaRuc
-                                     }
+                                     },
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
 
                 }

@@ -84,6 +84,17 @@
         settings.Columns.Add("nom_TerminoPago", "Descripción").Width = Unit.Percentage(50);
         settings.Columns.Add("Num_Coutas", "Cuotas").Width = Unit.Percentage(20);
         settings.Columns.Add("Dias_Vct", "Dias").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "estado";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
+
 
     });
 }

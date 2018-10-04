@@ -85,7 +85,16 @@
         settings.Columns.Add("NumGuia_Preimpresa", "#Guia").Width = Unit.Percentage(15);
         settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = Unit.Percentage(35);
         settings.Columns.Add("gi_Observacion", "Observación").Width = Unit.Percentage(30);
-        settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(5);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
 
         settings.Columns.Add(column =>
         {

@@ -25,7 +25,9 @@ namespace Core.Erp.Data.Facturacion
                                      IdCatalogo = q.IdCatalogo,
                                      Nombre = q.Nombre,
                                      Orden = q.Orden,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
 
@@ -38,7 +40,9 @@ namespace Core.Erp.Data.Facturacion
                                      IdCatalogo = q.IdCatalogo,
                                      Nombre = q.Nombre,
                                      Orden = q.Orden,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

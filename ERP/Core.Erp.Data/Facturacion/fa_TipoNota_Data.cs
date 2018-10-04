@@ -24,7 +24,9 @@ namespace Core.Erp.Data.Facturacion
                                      CodTipoNota = q.CodTipoNota,
                                      No_Descripcion = q.No_Descripcion,
                                      Tipo = q.Tipo,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
 
@@ -36,7 +38,9 @@ namespace Core.Erp.Data.Facturacion
                                      CodTipoNota = q.CodTipoNota,
                                      No_Descripcion = q.No_Descripcion,
                                      Tipo = q.Tipo,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;
@@ -63,7 +67,9 @@ namespace Core.Erp.Data.Facturacion
                                  CodTipoNota = q.CodTipoNota,
                                  No_Descripcion = q.No_Descripcion,
                                  Tipo = q.Tipo,
-                                 Estado = q.Estado
+                                 Estado = q.Estado,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                     else
                     {
@@ -76,7 +82,9 @@ namespace Core.Erp.Data.Facturacion
                                      CodTipoNota = q.CodTipoNota,
                                      No_Descripcion = q.No_Descripcion,
                                      Tipo = q.Tipo,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     }
                 }

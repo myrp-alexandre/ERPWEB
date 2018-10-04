@@ -117,7 +117,16 @@
             column.Width = Unit.Percentage(10);
         });
         settings.Columns.Add("EstadoCierre", "Estado").Width = Unit.Percentage(10);
-        settings.Columns.Add("estado", "Estado").Width = Unit.Percentage(5);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "estado";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
         settings.Columns.Add(column =>
         {
             column.Caption = "Lotes";

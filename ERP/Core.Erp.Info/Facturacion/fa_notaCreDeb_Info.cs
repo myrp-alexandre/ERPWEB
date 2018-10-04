@@ -64,5 +64,7 @@ namespace Core.Erp.Info.Facturacion
         public Nullable<double> sc_iva { get; set; }
         public Nullable<double> sc_total { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
+
     }
 }

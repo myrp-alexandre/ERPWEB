@@ -22,6 +22,7 @@ namespace Core.Erp.Info.Facturacion
         public string IdCtaCble_CXC_Con { get; set; }
         public string IdCtaCble_CXC_Cred { get; set; }
         public string estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }
