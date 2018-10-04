@@ -79,7 +79,6 @@ namespace Core.Erp.Data
         public DbSet<ro_Tipo_Prestamo> ro_Tipo_Prestamo { get; set; }
         public DbSet<ro_turno> ro_turno { get; set; }
         public DbSet<vwRo_ActaFiniquito> vwRo_ActaFiniquito { get; set; }
-        public DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
         public DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
         public DbSet<vwro_empleado_Novedad> vwro_empleado_Novedad { get; set; }
         public DbSet<vwro_empleado_x_ro_rubro> vwro_empleado_x_ro_rubro { get; set; }
@@ -104,6 +103,7 @@ namespace Core.Erp.Data
         public DbSet<vwro_empleado_x_Proyeccion_Gastos_Personales> vwro_empleado_x_Proyeccion_Gastos_Personales { get; set; }
         public DbSet<vwrdep_IngrEgr_x_Empleado> vwrdep_IngrEgr_x_Empleado { get; set; }
         public DbSet<vwRo_Solicitud_Vacaciones> vwRo_Solicitud_Vacaciones { get; set; }
+        public DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
     
         public virtual int spRo_Cierre_Rol(Nullable<int> idEmpresa, Nullable<int> idPeriodo, Nullable<int> idNomina_Tipo, Nullable<int> idNomina_TipoLiqui)
         {

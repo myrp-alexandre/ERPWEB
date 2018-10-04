@@ -14,11 +14,10 @@ namespace Core.Erp.Data
     
     public partial class vwro_empleado_combo
     {
-        public int IdEmpresa { get; set; }
-        public decimal IdEmpleado { get; set; }
-        public int IdTipoNomina { get; set; }
         public string Empleado { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string em_status { get; set; }
+        public int IdEmpresa { get; set; }
+        public decimal IdEmpleado { get; set; }
     }
 }

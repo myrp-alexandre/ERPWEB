@@ -1290,17 +1290,15 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwRo_ActaFiniquito
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_combo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwro_empleado_combo">
           <Key>
+            <PropertyRef Name="pe_cedulaRuc" />
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="IdTipoNomina" />
-            <PropertyRef Name="pe_cedulaRuc" />
           </Key>
-          <Property Name="IdEmpresa" Type="int" Nullable="false" />
-          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdTipoNomina" Type="int" Nullable="false" />
           <Property Name="Empleado" Type="varchar" MaxLength="201" />
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="em_status" Type="varchar" MaxLength="10" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_datos_generales' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -3378,12 +3376,11 @@ FROM [dbo].[vwRo_ActaFiniquito] AS [vwRo_ActaFiniquito]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_empleado_combo" EntityType="Self.vwro_empleado_combo" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwro_empleado_combo].[IdEmpresa] AS [IdEmpresa], 
-[vwro_empleado_combo].[IdEmpleado] AS [IdEmpleado], 
-[vwro_empleado_combo].[IdTipoNomina] AS [IdTipoNomina], 
 [vwro_empleado_combo].[Empleado] AS [Empleado], 
 [vwro_empleado_combo].[pe_cedulaRuc] AS [pe_cedulaRuc], 
-[vwro_empleado_combo].[em_status] AS [em_status]
+[vwro_empleado_combo].[em_status] AS [em_status], 
+[vwro_empleado_combo].[IdEmpresa] AS [IdEmpresa], 
+[vwro_empleado_combo].[IdEmpleado] AS [IdEmpleado]
 FROM [dbo].[vwro_empleado_combo] AS [vwro_empleado_combo]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_empleado_datos_generales" EntityType="Self.vwro_empleado_datos_generales" store:Type="Views" store:Schema="dbo">
@@ -5579,20 +5576,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <Property Name="CodCatalogo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="EstadoContrato" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="vwro_empleado_combo">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="IdTipoNomina" />
-            <PropertyRef Name="pe_cedulaRuc" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdTipoNomina" Type="Int32" Nullable="false" />
-          <Property Name="Empleado" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="em_status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="vwro_empleado_datos_generales">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -7365,7 +7348,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <EntitySet Name="ro_Tipo_Prestamo" EntityType="Self.ro_Tipo_Prestamo" />
           <EntitySet Name="ro_turno" EntityType="Self.ro_turno" />
           <EntitySet Name="vwRo_ActaFiniquito" EntityType="Self.vwRo_ActaFiniquito" />
-          <EntitySet Name="vwro_empleado_combo" EntityType="Self.vwro_empleado_combo" />
           <EntitySet Name="vwro_empleado_datos_generales" EntityType="Self.vwro_empleado_datos_generales" />
           <EntitySet Name="vwro_empleado_Novedad" EntityType="Self.vwro_empleado_Novedad" />
           <EntitySet Name="vwro_empleado_x_ro_rubro" EntityType="Self.vwro_empleado_x_ro_rubro" />
@@ -7772,6 +7754,7 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <EntitySet Name="vwro_empleado_x_Proyeccion_Gastos_Personales" EntityType="Model_rrhh.vwro_empleado_x_Proyeccion_Gastos_Personales" />
           <EntitySet Name="vwrdep_IngrEgr_x_Empleado" EntityType="Model_rrhh.vwrdep_IngrEgr_x_Empleado" />
           <EntitySet Name="vwRo_Solicitud_Vacaciones" EntityType="Model_rrhh.vwRo_Solicitud_Vacaciones" />
+          <EntitySet Name="vwro_empleado_combo" EntityType="Model_rrhh.vwro_empleado_combo" />
         </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -8013,6 +7996,18 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdLiquidacion" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vwro_empleado_combo">
+          <Key>
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="Empleado" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="em_status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -9187,18 +9182,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwro_empleado_combo">
-            <EntityTypeMapping TypeName="Model_rrhh.vwro_empleado_combo">
-              <MappingFragment StoreEntitySet="vwro_empleado_combo">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdTipoNomina" ColumnName="IdTipoNomina" />
-                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="em_status" ColumnName="em_status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwro_empleado_datos_generales">
             <EntityTypeMapping TypeName="Model_rrhh.vwro_empleado_datos_generales">
               <MappingFragment StoreEntitySet="vwro_empleado_datos_generales">
@@ -9796,6 +9779,17 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwro_empleado_combo">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_empleado_combo">
+              <MappingFragment StoreEntitySet="vwro_empleado_combo">
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="em_status" ColumnName="em_status" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

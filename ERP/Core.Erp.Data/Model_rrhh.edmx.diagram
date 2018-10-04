@@ -58,7 +58,6 @@
         <EntityTypeShape EntityType="Model_rrhh.ro_Tipo_Prestamo" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.ro_turno" Width="1.5" PointX="18" PointY="90.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.vwRo_ActaFiniquito" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_combo" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_datos_generales" Width="1.5" PointX="6.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_Novedad" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_x_ro_rubro" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
@@ -164,6 +163,7 @@
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_x_Proyeccion_Gastos_Personales" Width="1.5" PointX="17.375" PointY="14.75" />
         <EntityTypeShape EntityType="Model_rrhh.vwrdep_IngrEgr_x_Empleado" Width="1.5" PointX="19.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_rrhh.vwRo_Solicitud_Vacaciones" Width="1.5" PointX="19.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_combo" Width="1.5" PointX="11.375" PointY="19.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

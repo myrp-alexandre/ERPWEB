@@ -22,7 +22,6 @@ namespace Core.Erp.Data.RRHH
                                  {
                                      IdEmpresa = q.IdEmpresa,
                                      IdEmpleado = q.IdEmpleado,
-                                     IdTipoNomina=q.IdTipoNomina,
                                      Empleado=q.Empleado,
                                      pe_cedulaRuc=q.pe_cedulaRuc
                                  }).ToList();
@@ -53,7 +52,6 @@ namespace Core.Erp.Data.RRHH
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdEmpleado = q.IdEmpleado,
-                                 IdTipoNomina = q.IdTipoNomina,
                                  Empleado = q.Empleado,
                                  pe_cedulaRuc = q.pe_cedulaRuc
                              }).ToList();
@@ -265,7 +263,7 @@ namespace Core.Erp.Data.RRHH
                     ro_empleado Entity = new ro_empleado
                     {
                         IdEmpresa	=info.IdEmpresa	,
-                        IdEmpleado	=get_id(info.IdEmpresa)	,
+                        IdEmpleado	=info.IdEmpleado= get_id(info.IdEmpresa)	,
                         IdEmpleado_Supervisor=info.IdEmpleado_Supervisor,
                         IdPersona	=info.IdPersona,
                         IdSucursal	=info.IdSucursal,
@@ -338,6 +336,9 @@ namespace Core.Erp.Data.RRHH
 
                     };
                     Context.ro_empleado.Add(Entity);
+
+                   
+                    
                     Context.SaveChanges();
                 }
                 return true;
