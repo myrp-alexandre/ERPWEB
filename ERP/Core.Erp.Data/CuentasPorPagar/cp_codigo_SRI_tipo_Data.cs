@@ -22,7 +22,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                              {
                                  IdTipoSRI = q.IdTipoSRI,
                                  descripcion = q.descripcion,
-                                 estado = q.estado
+                                 estado = q.estado,
+
+                                 EstadoBool = q.estado == "A" ? true : false
                              }).ToList();
                     else
                         Lista = (from q in Context.cp_codigo_SRI_tipo
@@ -31,7 +33,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  {
                                      IdTipoSRI = q.IdTipoSRI,
                                      descripcion = q.descripcion,
-                                     estado = q.estado
+                                     estado = q.estado,
+
+                                     EstadoBool = q.estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

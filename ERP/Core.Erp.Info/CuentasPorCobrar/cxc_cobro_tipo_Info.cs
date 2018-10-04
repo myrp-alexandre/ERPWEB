@@ -19,6 +19,7 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public string tc_Afecha { get; set; }
         public string tc_interno { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string tc_generaNCAuto { get; set; }
         [Required(ErrorMessage = ("el campo abreviatura es obligatorio"))]
         [StringLength(5, MinimumLength = 1, ErrorMessage = "el campo abreviatura debe tener mínimo 1 caracter y máximo 5")]

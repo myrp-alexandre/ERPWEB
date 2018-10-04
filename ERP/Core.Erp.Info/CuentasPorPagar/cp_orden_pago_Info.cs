@@ -31,6 +31,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public System.DateTime Fecha_Pago { get; set; }
         public Nullable<int> IdBanco { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string IdUsuario { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public string MotivoAnu { get; set; }

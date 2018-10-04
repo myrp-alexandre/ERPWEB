@@ -28,6 +28,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public System.DateTime co_f_valides_desde { get; set; }
         public System.DateTime co_f_valides_hasta { get; set; }
         public string co_estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string IdTipoSRI { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }

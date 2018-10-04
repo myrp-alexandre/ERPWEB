@@ -36,7 +36,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                                          IdPersona = q.IdPersona,
                                          pe_nombreCompleto = q.pe_nombreCompleto,
                                          pe_cedulaRuc = q.pe_cedulaRuc
-                                     }
+                                     },
+
+                                     EstadoBool = q.pr_estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.vwcp_proveedor_consulta
@@ -55,7 +57,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                                          IdPersona = q.IdPersona,
                                          pe_nombreCompleto = q.pe_nombreCompleto,
                                          pe_cedulaRuc = q.pe_cedulaRuc
-                                     }
+                                     },
+
+                                     EstadoBool = q.pr_estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

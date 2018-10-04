@@ -11,6 +11,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string IdTipo_op { get; set; }
         public string Descripcion { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string GeneraDiario { get; set; }
     }
 }

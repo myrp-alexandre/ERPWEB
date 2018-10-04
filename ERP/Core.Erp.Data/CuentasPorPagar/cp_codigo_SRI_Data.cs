@@ -27,7 +27,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                                      co_descripcion = q.co_descripcion,
                                      co_codigoBase = q.co_codigoBase,
                                      co_porRetencion = q.co_porRetencion,
-                                     co_estado = q.co_estado
+                                     co_estado = q.co_estado,
+
+                                     EstadoBool = q.co_estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.cp_codigo_SRI
@@ -40,7 +42,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                                      co_codigoBase = q.co_codigoBase,
                                      co_porRetencion = q.co_porRetencion,
                                      co_estado = q.co_estado,
-                                     IdTipoSRI = q.IdTipoSRI
+                                     IdTipoSRI = q.IdTipoSRI,
+
+                                     EstadoBool = q.co_estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

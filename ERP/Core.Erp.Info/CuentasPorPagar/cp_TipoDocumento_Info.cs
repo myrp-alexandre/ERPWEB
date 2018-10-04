@@ -15,6 +15,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string DeclaraSRI { get; set; }
         public string CodSRI { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string IdUsuario { get; set; }
         public System.DateTime Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }

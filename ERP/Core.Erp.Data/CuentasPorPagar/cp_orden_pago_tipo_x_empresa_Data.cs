@@ -37,9 +37,11 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  IdCtaCble_Credito = q.IdCtaCble_Credito,
                                  Dispara_Alerta = q.Dispara_Alerta,
                                  Descripcion=p.Descripcion,
-                                 Estado=p.Estado
+                                 Estado=p.Estado,
 
-                                
+                                 EstadoBool = p.Estado == "A" ? true : false
+
+
                              }).ToList();
                 }
 

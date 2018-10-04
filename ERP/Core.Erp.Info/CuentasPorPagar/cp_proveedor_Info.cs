@@ -19,6 +19,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public Nullable<int> pr_plazo { get; set; }
         public string representante_legal { get; set; }
         public string pr_estado { get; set; }
+        public bool EstadoBool { get; set; }
         [Required(ErrorMessage = "El campo ciudad es obligatorio")]
 
         public string IdCiudad { get; set; }

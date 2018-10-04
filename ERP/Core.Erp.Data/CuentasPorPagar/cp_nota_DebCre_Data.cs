@@ -210,7 +210,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                                          pe_nombreCompleto = q.pe_nombreCompleto,
                                          pe_cedulaRuc = q.pe_cedulaRuc
                                      }
-                                 }
+                                 },
+
+                                 EstadoBool = q.Estado == "A" ? true : false
 
 
 
