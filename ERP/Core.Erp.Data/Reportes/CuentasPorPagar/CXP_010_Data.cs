@@ -13,6 +13,9 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
         {
             try
             {
+                fechaFin = Convert.ToDateTime(fechaFin.ToShortDateString());
+                fechaIni = Convert.ToDateTime(fechaIni.ToShortDateString());
+
                 decimal IdProveedorIni = IdProveedor;
                 decimal IdProveedorFin = IdProveedor == 0 ? 9999 : IdProveedor;
                 List<CXP_010_Info> Lista;

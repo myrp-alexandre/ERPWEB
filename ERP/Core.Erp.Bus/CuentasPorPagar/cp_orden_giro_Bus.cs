@@ -351,6 +351,14 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     mensaje = "Debe seleccionar la forma de pago";
 
                 }
+                if (info.Num_Autorizacion.Length==9 |info.Num_Autorizacion.Length == 37 | info.Num_Autorizacion.Length == 49)
+                {
+                    
+                }
+                else
+                {
+                    mensaje = "EL número de autorización no tiene la longitud correcta";
+                }
                 return mensaje;
 
             }
