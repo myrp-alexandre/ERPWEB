@@ -351,7 +351,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     mensaje = "Debe seleccionar la forma de pago";
 
                 }
-                if (info.Num_Autorizacion.Length==9 |info.Num_Autorizacion.Length == 37 | info.Num_Autorizacion.Length == 49)
+                if (info.Num_Autorizacion.Length==10 |info.Num_Autorizacion.Length == 37 | info.Num_Autorizacion.Length == 49)
                 {
                     
                 }
