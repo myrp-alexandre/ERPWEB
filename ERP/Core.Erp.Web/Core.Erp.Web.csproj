@@ -268,7 +268,7 @@
     <Compile Include="Areas\Contabilidad\Controllers\PeriodoContableController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\PlanDeCuentasController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\PlanDeCuentasNivelController.cs" />
-    <Compile Include="Areas\Contabilidad\Controllers\PuntoCargoController.cs" />
+    <Compile Include="Areas\Contabilidad\Controllers\RevisionContableController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\TipoComprobanteController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\CatalogoCXCController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\CatalogoTipoCXCController.cs" />
@@ -9180,6 +9180,8 @@
     <Content Include="Areas\Importacion\Views\PartidaArancelaria\Nuevo.cshtml" />
     <Content Include="Areas\Importacion\Views\PartidaArancelaria\Modificar.cshtml" />
     <Content Include="Areas\Importacion\Views\PartidaArancelaria\Anular.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\RevisionContable\Index.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\RevisionContable\_GridViewPartial_Facturacion.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -9250,7 +9252,6 @@
     <Folder Include="Areas\Caja\Models\" />
     <Folder Include="Areas\Compras\Models\" />
     <Folder Include="Areas\Contabilidad\Models\" />
-    <Folder Include="Areas\Contabilidad\Views\PuntoCargo\" />
     <Folder Include="Areas\CuentasPorCobrar\Models\" />
     <Folder Include="Areas\CuentasPorPagar\Models\" />
     <Folder Include="Areas\Facturacion\Models\" />

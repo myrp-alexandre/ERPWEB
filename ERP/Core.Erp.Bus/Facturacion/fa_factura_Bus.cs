@@ -132,5 +132,18 @@ namespace Core.Erp.Bus.Facturacion
             }
         }
 
+        public bool Contabilizar(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string NombreContacto)
+        {
+            try
+            {
+                return odata.Contabilizar(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, NombreContacto);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

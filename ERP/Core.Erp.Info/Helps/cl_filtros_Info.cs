@@ -5,6 +5,7 @@ namespace Core.Erp.Info.Helps
 {
     public class cl_filtros_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
 
         [Required(ErrorMessage = "El campo fecha inicio es obligatorio")]
