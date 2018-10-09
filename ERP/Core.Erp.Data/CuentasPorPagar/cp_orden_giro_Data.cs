@@ -426,6 +426,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                 {
                     Lista = (from q in Context.vwcp_orden_giro
                              where !(from o in Context.cp_retencion
+                                     where o.IdEmpresa == IdEmpresa
                                      select o.IdCbteCble_Ogiro)
                                     .Contains(q.IdCbteCble_Ogiro)
                                     && q.IdEmpresa == IdEmpresa
