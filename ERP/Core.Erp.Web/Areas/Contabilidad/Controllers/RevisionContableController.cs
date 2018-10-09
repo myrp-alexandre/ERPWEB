@@ -45,13 +45,14 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_Facturacion(decimal IdTransaccionSession = 0)
         {
+            ViewBag.IdTransaccionSession = IdTransaccionSession;
             var model = List_facturas.get_list(IdTransaccionSession);
             return PartialView("_GridViewPartial_Facturacion", model);
         }
         #endregion
 
         #region json
-        public JsonResult ContabilizarFactura(int IdSecuencia = 0, decimal IdTransaccionSession = 0)
+        public JsonResult ContabilizarFactura(decimal IdSecuencia = 0, decimal IdTransaccionSession = 0)
         {
             string resultado = string.Empty;
 
@@ -59,11 +60,26 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             if (factura != null)
             {
                 if (bus_factura.Contabilizar(factura.IdEmpresa, factura.IdSucursal, factura.IdBodega, factura.IdCbteVta, factura.Nombres))
-                    resultado = "Contabilización exitósa";
+                    resultado = "Contabilización exitosa";
             }
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult ContabilizarTodasFacturas(DateTime FechaIni, DateTime FechaFin, decimal IdTransaccionSession = 0, int IdEmpresa = 0)
+        {
+            string resultado = string.Empty;
+            var Lista = List_facturas.get_list(IdTransaccionSession);
+            foreach (var factura in Lista)
+            {
+                bus_factura.Contabilizar(factura.IdEmpresa, factura.IdSucursal, factura.IdBodega, factura.IdCbteVta, factura.Nombres);
+            }
+            List_facturas.set_list(bus_revision.get_list_facturas(IdEmpresa, FechaIni, FechaFin), IdTransaccionSession);
+            resultado = "Contabilización exitosa";            
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        
         #endregion
     }
 

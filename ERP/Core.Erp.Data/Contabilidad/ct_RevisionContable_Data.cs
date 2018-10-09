@@ -16,7 +16,7 @@ namespace Core.Erp.Data.Contabilidad
                 FechaFin = FechaFin.Date;
                 using (Entities_contabilidad db = new Entities_contabilidad())
                 {
-                    Lista = db.vwct_RevisionContableFacturas.Where(q => q.IdEmpresa == IdEmpresa && FechaIni <= q.vt_fecha && q.vt_fecha <= FechaIni).Select(q => new ct_RevisionContableFacturas_Info
+                    Lista = db.vwct_RevisionContableFacturas.Where(q => q.IdEmpresa == IdEmpresa && FechaIni <= q.vt_fecha && q.vt_fecha <= FechaFin).Select(q => new ct_RevisionContableFacturas_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdSucursal = q.IdSucursal,
@@ -33,7 +33,7 @@ namespace Core.Erp.Data.Contabilidad
                         Diferencia = q.Diferencia
                     }).ToList();
                 }
-
+                Lista.ForEach(q => q.IdSecuencia = Convert.ToDecimal(q.IdEmpresa.ToString("00") + q.IdSucursal.ToString("00") + q.IdBodega.ToString("00") + q.IdCbteVta.ToString("00000000")));
                 return Lista;
             }
             catch (Exception)

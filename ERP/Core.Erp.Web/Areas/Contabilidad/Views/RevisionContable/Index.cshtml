@@ -97,7 +97,18 @@
                 </ul>
                 <div class="tab-content" style="padding-top: 20px">
                     <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_facturacion">
-                        @Html.Action("GridViewPartial_Facturacion", new { IdTransaccionSession = Model.IdTransaccionSession })
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-primary form-group" onclick="ContabilizarTodasFacturas();">Contabilizar todo</button>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.Action("GridViewPartial_Facturacion", new { IdTransaccionSession = Model.IdTransaccionSession })
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -115,7 +126,7 @@
     function ContabilizarFactura(IdSecuencia)
     {
         var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
+            IdSecuencia: Number(IdSecuencia),
             IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
@@ -133,6 +144,36 @@
                     GridView_Facturacion.PerformCallback();
                 } else {
                     alert("No se ha podido contabilizar la factura");
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function ContabilizarTodasFacturas()
+    {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            FechaIni: fecha_ini.GetDate(),
+            FechaFin: fecha_fin.GetDate()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ContabilizarTodasFacturas", "RevisionContable",new { Area = "Contabilidad"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.length > 0) {
+                    alert(data);
+                    GridView_Facturacion.PerformCallback();
+                } else {
+                    alert("No se ha podido contabilizar las facturas");
                 }
             },
             error: function (error) {
