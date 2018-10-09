@@ -124,7 +124,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
                 msg = "Existen documentos con valor aplicado 0";
                 return false;
             }
-            if (i_validar.IdCobro > 0 && i_validar.lst_det.Where(q => q.dc_ValorPago > q.Saldo).Count() > 0)
+            if (i_validar.IdCobro > 0 && i_validar.lst_det.Where(q => Math.Round(q.dc_ValorPago,2,MidpointRounding.AwayFromZero) > Math.Round((double)q.Saldo,2,MidpointRounding.AwayFromZero)).Count() > 0)
             {
                 msg = "Existen documentos cuyo valor aplicado es mayor al saldo de la factura";
                 return false;
