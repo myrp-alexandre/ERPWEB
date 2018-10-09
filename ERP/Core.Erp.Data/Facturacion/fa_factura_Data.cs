@@ -358,7 +358,7 @@ namespace Core.Erp.Data.Facturacion
                 var cliente = db_f.fa_cliente.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente).FirstOrDefault();
                 if (!string.IsNullOrEmpty(cliente.IdCtaCble_cxc_Credito) && parametro.IdTipoCbteCble_Factura != null)
                 {
-                    ct_cbtecble_Info diario = armar_diario(info, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito,contacto == null ? "" : contacto.Nombres);
+                    ct_cbtecble_Info diario = armar_diario(info, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito, parametro.pa_IdCtaCble_descuento, contacto == null ? "" : contacto.Nombres);
                     if(diario != null)
                     if (data_ct.guardarDB(diario))
                     {
@@ -386,7 +386,7 @@ namespace Core.Erp.Data.Facturacion
             }
         }
 
-        public ct_cbtecble_Info armar_diario(fa_factura_Info info, int IdTipoCbte, string IdCtaCble_Cliente, string nomContacto)
+        public ct_cbtecble_Info armar_diario(fa_factura_Info info, int IdTipoCbte, string IdCtaCble_Cliente, string IdCtaCble_Dscto, string nomContacto)
         {
             try
             {
@@ -450,7 +450,7 @@ namespace Core.Erp.Data.Facturacion
                         IdCbteCble = diario.IdCbteCble,
                         secuencia = secuencia++,
                         IdCtaCble = IdCtaCble_VentasIVA,
-                        dc_Valor = Math.Round(info.lst_det.Where(q => q.vt_por_iva > 0).Sum(q => q.vt_Subtotal), 2, MidpointRounding.AwayFromZero) * -1
+                        dc_Valor = string.IsNullOrEmpty(IdCtaCble_Dscto) ? (Math.Round(info.lst_det.Where(q => q.vt_por_iva > 0).Sum(q => q.vt_Subtotal), 2, MidpointRounding.AwayFromZero) * -1) : (Math.Round(info.lst_det.Where(q => q.vt_por_iva > 0).Sum(q => q.vt_cantidad * q.vt_Precio), 2, MidpointRounding.AwayFromZero) * -1)
                     });
                 #endregion
 
@@ -463,7 +463,7 @@ namespace Core.Erp.Data.Facturacion
                         IdCbteCble = diario.IdCbteCble,
                         secuencia = secuencia++,
                         IdCtaCble = IdCtaCble_Ventas0,
-                        dc_Valor = Math.Round(info.lst_det.Where(q => q.vt_por_iva == 0).Sum(q => q.vt_Subtotal), 2, MidpointRounding.AwayFromZero) * -1
+                        dc_Valor = string.IsNullOrEmpty(IdCtaCble_Dscto) ? (Math.Round(info.lst_det.Where(q => q.vt_por_iva == 0).Sum(q => q.vt_Subtotal), 2, MidpointRounding.AwayFromZero) * -1) : (Math.Round(info.lst_det.Where(q => q.vt_por_iva == 0).Sum(q => q.vt_cantidad * q.vt_Precio), 2, MidpointRounding.AwayFromZero) * -1)
                     });
                 #endregion
 
@@ -493,10 +493,44 @@ namespace Core.Erp.Data.Facturacion
                     });
                 #endregion
 
+                #region Descuento
+                if (!string.IsNullOrEmpty(IdCtaCble_Dscto))
+                    diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
+                    {
+                        IdEmpresa = diario.IdEmpresa,
+                        IdTipoCbte = diario.IdTipoCbte,
+                        IdCbteCble = diario.IdCbteCble,
+                        secuencia = secuencia++,
+                        IdCtaCble = IdCtaCble_Dscto,
+                        dc_Valor = Math.Round(info.lst_det.Sum(q => q.vt_cantidad * q.vt_DescUnitario), 2, MidpointRounding.AwayFromZero)
+                    });
+                #endregion
+
                 if (info.lst_det.Count == 0)
                     return null;
 
-                if (diario.lst_ct_cbtecble_det.Sum(q => q.dc_Valor) != 0)
+                diario.lst_ct_cbtecble_det.RemoveAll(q=>q.dc_Valor == 0);
+
+                if (diario.lst_ct_cbtecble_det.Count == 0)
+                    return null;                
+
+                if (diario.lst_ct_cbtecble_det.Where(q=>q.dc_Valor == 0).Count() > 0)
+                    return null;
+
+                double descuadre = Math.Round(diario.lst_ct_cbtecble_det.Sum(q => q.dc_Valor), 2, MidpointRounding.AwayFromZero);
+                if (descuadre < -0.02 || 0.02 <= descuadre)
+                    return null;
+
+                if (descuadre <= 0.02 || -0.02 <= descuadre && descuadre != 0)
+                {
+                    if (descuadre > 0)
+                        diario.lst_ct_cbtecble_det.Where(q => q.dc_Valor < 0).FirstOrDefault().dc_Valor -= descuadre;
+                    else
+                        diario.lst_ct_cbtecble_det.Where(q => q.dc_Valor > 0).FirstOrDefault().dc_Valor += (descuadre*-1);
+                }
+
+                descuadre = Math.Round(diario.lst_ct_cbtecble_det.Sum(q => q.dc_Valor), 2, MidpointRounding.AwayFromZero);
+                if (descuadre != 0)
                     return null;
 
                 return diario;
@@ -780,7 +814,7 @@ namespace Core.Erp.Data.Facturacion
                     var conta = db_f.fa_factura_x_ct_cbtecble.Where(q => q.vt_IdEmpresa == info.IdEmpresa && q.vt_IdSucursal == info.IdSucursal && q.vt_IdBodega == info.IdBodega && q.vt_IdCbteVta == info.IdCbteVta).FirstOrDefault();
                     if (conta == null)
                     {
-                        ct_cbtecble_Info diario = armar_diario(info, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito, contacto == null ? "" : contacto.Nombres);
+                        ct_cbtecble_Info diario = armar_diario(info, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito, parametro.pa_IdCtaCble_descuento, contacto == null ? "" : contacto.Nombres);
                         if (diario != null)
                         {
                             if (data_ct.guardarDB(diario))
@@ -801,7 +835,7 @@ namespace Core.Erp.Data.Facturacion
                         }                       
                     } else
                     {
-                        ct_cbtecble_Info diario = armar_diario(info, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito, contacto == null ? "" : contacto.Nombres);
+                        ct_cbtecble_Info diario = armar_diario(info, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito, parametro.pa_IdCtaCble_descuento, contacto == null ? "" : contacto.Nombres);
                         if (diario != null)
                         {
                             diario.IdCbteCble = conta.ct_IdCbteCble;
@@ -943,6 +977,91 @@ namespace Core.Erp.Data.Facturacion
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public bool Contabilizar(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string NombreContacto)
+        {
+            Entities_facturacion db = new Entities_facturacion();
+            ct_cbtecble_Data data_ct = new ct_cbtecble_Data();
+            try
+            {
+                var factura = get_info(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
+                if (factura != null)
+                {
+                    fa_factura_det_Data odata_det = new fa_factura_det_Data();
+                    factura.lst_det = odata_det.get_list(factura.IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
+                }
+                var parametro = db.fa_parametro.Where(q => q.IdEmpresa == factura.IdEmpresa).FirstOrDefault();
+                var cliente = db.fa_cliente.Where(q => q.IdEmpresa == factura.IdEmpresa && q.IdCliente == factura.IdCliente).FirstOrDefault();
+                if (!string.IsNullOrEmpty(cliente.IdCtaCble_cxc_Credito) && parametro.IdTipoCbteCble_Factura != null)
+                {
+                    var conta = db.fa_factura_x_ct_cbtecble.Where(q => q.vt_IdEmpresa == factura.IdEmpresa && q.vt_IdSucursal == factura.IdSucursal && q.vt_IdBodega == factura.IdBodega && q.vt_IdCbteVta == factura.IdCbteVta).FirstOrDefault();
+                    if (conta == null)
+                    {
+                        ct_cbtecble_Info diario = armar_diario(factura, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito, parametro.pa_IdCtaCble_descuento, NombreContacto);
+                        if (diario != null)
+                        {
+                            if (data_ct.guardarDB(diario))
+                            {
+                                db.fa_factura_x_ct_cbtecble.Add(new fa_factura_x_ct_cbtecble
+                                {
+                                    vt_IdEmpresa = factura.IdEmpresa,
+                                    vt_IdSucursal = factura.IdSucursal,
+                                    vt_IdBodega = factura.IdBodega,
+                                    vt_IdCbteVta = factura.IdCbteVta,
+
+                                    ct_IdEmpresa = diario.IdEmpresa,
+                                    ct_IdTipoCbte = diario.IdTipoCbte,
+                                    ct_IdCbteCble = diario.IdCbteCble,
+                                });
+                                db.SaveChanges();
+                                return true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ct_cbtecble_Info diario = armar_diario(factura, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito, parametro.pa_IdCtaCble_descuento, NombreContacto);
+                        if (diario != null)
+                        {
+                            diario.IdCbteCble = conta.ct_IdCbteCble;
+                            data_ct.modificarDB(diario);
+                            return true;
+                        }
+                    }
+                }
+
+                db.Dispose();
+                return false;
+            }
+            catch (Exception)
+            {
+                db.Dispose();
+                throw;
+            }
+        }
+
+        public bool ValidarDocumentoAnulacion(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string vt_tipoDoc, ref string mensaje)
+        {
+            try
+            {
+                using (Entities_cuentas_por_cobrar db = new Entities_cuentas_por_cobrar())
+                {
+                    var obj = db.cxc_cobro_det.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega_Cbte == IdBodega && q.IdCbte_vta_nota == IdCbteVta && q.dc_TipoDocumento == vt_tipoDoc && q.estado == "A").Count();
+                    if (obj > 0)
+                    {
+                        mensaje = "El documento no puede ser anulado porque se encuentra parcial o totalmente cobrado";
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

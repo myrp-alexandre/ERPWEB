@@ -40,7 +40,9 @@ namespace Core.Erp.Data.Inventario
                                 IdEstadoAprobacion_cat = q.IdEstadoAprobacion_cat,
                                 IdMovi_inven_tipo_SucuDest = q.IdMovi_inven_tipo_SucuDest,
                                 IdMovi_inven_tipo_SucuOrig = q.IdMovi_inven_tipo_SucuOrig,
-                }).ToList();
+
+                                 EstadoBool = q.Estado == "A" ? true : false
+                             }).ToList();
 
                 }
 

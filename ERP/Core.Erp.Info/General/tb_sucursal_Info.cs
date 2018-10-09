@@ -36,6 +36,7 @@ namespace Core.Erp.Info.General
         public string nom_pc { get; set; }
         public string ip { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string MotiAnula { get; set; }
         public bool Es_establecimiento { get; set; }
     }

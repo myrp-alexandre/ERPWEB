@@ -26,8 +26,10 @@ namespace Core.Erp.Data.Inventario
                                      Abrebiatura = q.Abrebiatura,
                                      Nombre = q.Nombre,
                                      Estado = q.Estado,
-                                     Orden = q.Orden
-                                     
+                                     Orden = q.Orden,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
+
                                  }).ToList();
                     else
                         Lista = (from q in Context.in_Catalogo
@@ -40,7 +42,9 @@ namespace Core.Erp.Data.Inventario
                                      Abrebiatura = q.Abrebiatura,
                                      Nombre = q.Nombre,
                                      Estado = q.Estado,
-                                     Orden = q.Orden
+                                     Orden = q.Orden,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
 
                                  }).ToList();
                 }

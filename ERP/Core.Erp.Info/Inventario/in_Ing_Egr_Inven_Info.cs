@@ -22,6 +22,7 @@ namespace Core.Erp.Info.Inventario
         public string cm_observacion { get; set; }
         public System.DateTime cm_fecha { get; set; }        
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public Nullable<int> IdMotivo_Inv { get; set; }
         [Required(ErrorMessage = ("El campo motivo es obligatorio"))]
         public Nullable<decimal> IdResponsable { get; set; }

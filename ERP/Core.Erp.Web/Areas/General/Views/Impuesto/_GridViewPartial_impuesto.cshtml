@@ -82,7 +82,16 @@
         settings.Columns.Add("nom_impuesto", "Nombre").Width = Unit.Percentage(30);
         settings.Columns.Add("porcentaje","Porcentaje").Width = Unit.Percentage(10);
         settings.Columns.Add("IdTipoImpuesto","Tipo").Width = Unit.Percentage(15);
-        settings.Columns.Add("estado","Estado").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "estado";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

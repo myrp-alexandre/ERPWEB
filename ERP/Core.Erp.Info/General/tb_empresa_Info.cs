@@ -52,6 +52,7 @@ namespace Core.Erp.Info.General
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime em_fechaInicioContable { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public Nullable<System.DateTime> em_fechaInicioActividad { get; set; }
         [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo código entidad debe tener mínimo 0 caracter y máximo 50")]
         public string cod_entidad_dinardap { get; set; }

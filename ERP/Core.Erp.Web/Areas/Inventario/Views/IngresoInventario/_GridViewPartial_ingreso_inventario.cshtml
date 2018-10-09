@@ -87,8 +87,16 @@
             column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
         });
         settings.Columns.Add("cm_observacion", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(40);
-        settings.Columns.Add("Estado", "Estado").Width = System.Web.UI.WebControls.Unit.Percentage(5);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
 
+            });
+        });
         settings.Columns.Add(column =>
         {
             column.SetDataItemTemplateContent(c =>

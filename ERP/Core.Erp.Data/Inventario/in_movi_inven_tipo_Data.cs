@@ -27,7 +27,9 @@ namespace Core.Erp.Data.Inventario
                                      tm_descripcion = q.tm_descripcion,
                                      cm_descripcionCorta = q.cm_descripcionCorta,
                                      cm_tipo_movi = q.cm_tipo_movi,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.in_movi_inven_tipo
@@ -40,7 +42,9 @@ namespace Core.Erp.Data.Inventario
                                      tm_descripcion = q.tm_descripcion,
                                      cm_descripcionCorta = q.cm_descripcionCorta,
                                      cm_tipo_movi = q.cm_tipo_movi,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 

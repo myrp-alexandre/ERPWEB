@@ -85,7 +85,16 @@
         settings.Columns.Add("em_nombre","Nombre").Width = Unit.Percentage(30);
         settings.Columns.Add("em_ruc","RUC").Width = Unit.Percentage(10);
         settings.Columns.Add("em_direccion","Dirección").Width = Unit.Percentage(30);
-        settings.Columns.Add("Estado","Estado").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

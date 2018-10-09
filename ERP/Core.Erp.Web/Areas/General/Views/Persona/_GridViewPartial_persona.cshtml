@@ -82,7 +82,16 @@
         settings.Columns.Add("pe_nombreCompleto","Nombre completo").Width = System.Web.UI.WebControls.Unit.Percentage(50);
         settings.Columns.Add("IdTipoDocumento","Tipo documento").Width = System.Web.UI.WebControls.Unit.Percentage(10);
         settings.Columns.Add("pe_cedulaRuc","Cédula/RUC").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-        settings.Columns.Add("pe_estado","Estado").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

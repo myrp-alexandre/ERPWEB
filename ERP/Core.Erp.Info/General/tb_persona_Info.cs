@@ -41,6 +41,7 @@ namespace Core.Erp.Info.General
         public string IdEstadoCivil { get; set; }        
         public Nullable<System.DateTime> pe_fechaNacimiento { get; set; }
         public string pe_estado { get; set; }
+        public bool EstadoBool { get; set; }
         public Nullable<System.DateTime> pe_fechaCreacion { get; set; }
         public Nullable<System.DateTime> pe_fechaModificacion { get; set; }
         public string pe_UltUsuarioModi { get; set; }

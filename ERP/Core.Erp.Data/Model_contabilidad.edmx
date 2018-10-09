@@ -153,7 +153,7 @@
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="pc_Cuenta" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="pc_Cuenta" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="IdCtaCblePadre" Type="varchar" MaxLength="20" />
           <Property Name="pc_Naturaleza" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="IdNivelCta" Type="int" Nullable="false" />
@@ -359,6 +359,35 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
           <Property Name="IdTipoCbte" Type="int" Nullable="false" />
           <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdCtaCble_Acreedora" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwct_RevisionContableFacturas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwct_RevisionContableFacturas">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+            <PropertyRef Name="ct_IdEmpresa" />
+            <PropertyRef Name="ct_IdTipoCbte" />
+            <PropertyRef Name="ct_IdCbteCble" />
+            <PropertyRef Name="Nombres" />
+            <PropertyRef Name="vt_fecha" />
+            <PropertyRef Name="TotalContabilidad" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdBodega" Type="int" Nullable="false" />
+          <Property Name="IdCbteVta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ct_IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="ct_IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="ct_IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Referencia" Type="varchar" MaxLength="49" />
+          <Property Name="vt_fecha" Type="datetime" Nullable="false" />
+          <Property Name="TotalModulo" Type="float" />
+          <Property Name="TotalContabilidad" Type="float" Nullable="false" />
+          <Property Name="Diferencia" Type="float" />
         </EntityType>
         <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal">
           <End Role="ct_anio_fiscal" Type="Self.ct_anio_fiscal" Multiplicity="1" />
@@ -628,6 +657,23 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwct_cbtecble_con_
 [vwct_cbtecble_con_ctacble_acreedora].[IdCtaCble_Acreedora] AS [IdCtaCble_Acreedora]
 FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_acreedora]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwct_RevisionContableFacturas" EntityType="Self.vwct_RevisionContableFacturas" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+[vwct_RevisionContableFacturas].[IdEmpresa] AS [IdEmpresa], 
+[vwct_RevisionContableFacturas].[IdSucursal] AS [IdSucursal], 
+[vwct_RevisionContableFacturas].[IdBodega] AS [IdBodega], 
+[vwct_RevisionContableFacturas].[IdCbteVta] AS [IdCbteVta], 
+[vwct_RevisionContableFacturas].[ct_IdEmpresa] AS [ct_IdEmpresa], 
+[vwct_RevisionContableFacturas].[ct_IdTipoCbte] AS [ct_IdTipoCbte], 
+[vwct_RevisionContableFacturas].[ct_IdCbteCble] AS [ct_IdCbteCble], 
+[vwct_RevisionContableFacturas].[Nombres] AS [Nombres], 
+[vwct_RevisionContableFacturas].[Referencia] AS [Referencia], 
+[vwct_RevisionContableFacturas].[vt_fecha] AS [vt_fecha], 
+[vwct_RevisionContableFacturas].[TotalModulo] AS [TotalModulo], 
+[vwct_RevisionContableFacturas].[TotalContabilidad] AS [TotalContabilidad], 
+[vwct_RevisionContableFacturas].[Diferencia] AS [Diferencia]
+FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" Association="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal">
             <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
             <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
@@ -863,7 +909,7 @@ FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_a
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="pc_Cuenta" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pc_Cuenta" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IdCtaCblePadre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="pc_Naturaleza" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="IdNivelCta" Type="Int32" Nullable="false" />
@@ -1377,6 +1423,7 @@ FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_a
             <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
             <End Role="ct_parametro" EntitySet="ct_parametro" />
           </AssociationSet>
+          <EntitySet Name="vwct_RevisionContableFacturas" EntityType="Model_contabilidad.vwct_RevisionContableFacturas" />
         </EntityContainer>
         <ComplexType Name="generarATS_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -1440,6 +1487,33 @@ FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwct_RevisionContableFacturas">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+            <PropertyRef Name="ct_IdEmpresa" />
+            <PropertyRef Name="ct_IdTipoCbte" />
+            <PropertyRef Name="ct_IdCbteCble" />
+            <PropertyRef Name="Nombres" />
+            <PropertyRef Name="vt_fecha" />
+            <PropertyRef Name="TotalContabilidad" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ct_IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="ct_IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="ct_IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Referencia" Type="String" MaxLength="49" FixedLength="false" Unicode="false" />
+          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TotalModulo" Type="Double" />
+          <Property Name="TotalContabilidad" Type="Double" Nullable="false" />
+          <Property Name="Diferencia" Type="Double" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1811,6 +1885,25 @@ FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_a
                 <ScalarProperty Name="P_Se_Muestra_Todas_las_ctas_en_combos" ColumnName="P_Se_Muestra_Todas_las_ctas_en_combos" />
                 <ScalarProperty Name="IdTipoCbte_AsientoCierre_Anual" ColumnName="IdTipoCbte_AsientoCierre_Anual" />
                 <ScalarProperty Name="IdTipoCbte_SaldoInicial" ColumnName="IdTipoCbte_SaldoInicial" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwct_RevisionContableFacturas">
+            <EntityTypeMapping TypeName="Model_contabilidad.vwct_RevisionContableFacturas">
+              <MappingFragment StoreEntitySet="vwct_RevisionContableFacturas">
+                <ScalarProperty Name="Diferencia" ColumnName="Diferencia" />
+                <ScalarProperty Name="TotalContabilidad" ColumnName="TotalContabilidad" />
+                <ScalarProperty Name="TotalModulo" ColumnName="TotalModulo" />
+                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="ct_IdCbteCble" ColumnName="ct_IdCbteCble" />
+                <ScalarProperty Name="ct_IdTipoCbte" ColumnName="ct_IdTipoCbte" />
+                <ScalarProperty Name="ct_IdEmpresa" ColumnName="ct_IdEmpresa" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

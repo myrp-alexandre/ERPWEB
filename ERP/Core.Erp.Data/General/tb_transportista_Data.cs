@@ -26,7 +26,9 @@ namespace Core.Erp.Data.General
                                      Cedula = q.Cedula,
                                      Nombre = q.Nombre,
                                      Estado = q.Estado,
-                                     Placa = q.Placa
+                                     Placa = q.Placa,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
 
                                  }).ToList();
                     else
@@ -40,7 +42,9 @@ namespace Core.Erp.Data.General
                                      Cedula = q.Cedula,
                                      Nombre = q.Nombre,
                                      Estado = q.Estado,
-                                     Placa = q.Placa
+                                     Placa = q.Placa,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

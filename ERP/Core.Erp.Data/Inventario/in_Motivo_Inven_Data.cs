@@ -27,7 +27,9 @@ namespace Core.Erp.Data.Inventario
                                      Desc_mov_inv = q.Desc_mov_inv,
                                      estado = q.estado,
                                      Genera_Movi_Inven = q.Genera_Movi_Inven,
-                                     Tipo_Ing_Egr = q.Tipo_Ing_Egr
+                                     Tipo_Ing_Egr = q.Tipo_Ing_Egr,
+
+                                     EstadoBool = q.estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.in_Motivo_Inven
@@ -41,7 +43,9 @@ namespace Core.Erp.Data.Inventario
                                      Desc_mov_inv = q.Desc_mov_inv,
                                      estado = q.estado,
                                      Genera_Movi_Inven = q.Genera_Movi_Inven,
-                                     Tipo_Ing_Egr = q.Tipo_Ing_Egr
+                                     Tipo_Ing_Egr = q.Tipo_Ing_Egr,
+
+                                     EstadoBool = q.estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;
@@ -71,7 +75,9 @@ namespace Core.Erp.Data.Inventario
                                      Desc_mov_inv = q.Desc_mov_inv,
                                      estado = q.estado,
                                      Genera_Movi_Inven = q.Genera_Movi_Inven,
-                                     Tipo_Ing_Egr = q.Tipo_Ing_Egr
+                                     Tipo_Ing_Egr = q.Tipo_Ing_Egr,
+
+                                     EstadoBool = q.estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.in_Motivo_Inven
@@ -86,7 +92,9 @@ namespace Core.Erp.Data.Inventario
                                      Desc_mov_inv = q.Desc_mov_inv,
                                      estado = q.estado,
                                      Genera_Movi_Inven = q.Genera_Movi_Inven,
-                                     Tipo_Ing_Egr = q.Tipo_Ing_Egr
+                                     Tipo_Ing_Egr = q.Tipo_Ing_Egr,
+
+                                     EstadoBool = q.estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

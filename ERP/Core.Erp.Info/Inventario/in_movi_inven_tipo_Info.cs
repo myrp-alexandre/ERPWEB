@@ -22,6 +22,7 @@ namespace Core.Erp.Info.Inventario
         [Required(ErrorMessage = "El campo descripción corta es obligatorio")]
         public string cm_descripcionCorta { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public Nullable<int> IdTipoCbte { get; set; }
         public bool Genera_Movi_Inven { get; set; }
         public bool Genera_Diario_Contable { get; set; }

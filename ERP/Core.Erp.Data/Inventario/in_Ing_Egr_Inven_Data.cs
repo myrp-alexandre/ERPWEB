@@ -39,7 +39,9 @@ namespace Core.Erp.Data.Inventario
                                      cm_observacion = q.cm_observacion,
                                      CodMoviInven = q.CodMoviInven,
                                      cm_fecha = q.cm_fecha,
-                                     tm_descripcion = t.tm_descripcion
+                                     tm_descripcion = t.tm_descripcion,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
 
                                  }).ToList();
 
@@ -65,7 +67,9 @@ namespace Core.Erp.Data.Inventario
                                      cm_observacion = q.cm_observacion,
                                      CodMoviInven = q.CodMoviInven,
                                      cm_fecha = q.cm_fecha,
-                                     tm_descripcion = t.tm_descripcion
+                                     tm_descripcion = t.tm_descripcion,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

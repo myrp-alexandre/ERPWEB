@@ -99,6 +99,16 @@
         settings.Columns.Add("BodegaORIG", "Bod. orig").Width = Unit.Percentage(15);
         settings.Columns.Add("SucuDEST", "Sucu. dest").Width = Unit.Percentage(15);
         settings.Columns.Add("BodegDest", "Bod. dest").Width = Unit.Percentage(15);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
     });
     if (ViewData["EditError"] != null){
         grid.SetEditErrorText((string)ViewData["EditError"]);

@@ -82,7 +82,16 @@
         settings.Columns.Add("Cod_Motivo_Inv", "Código").Width = Unit.Percentage(10);
         settings.Columns.Add("Desc_mov_inv", "Descripción").Width = Unit.Percentage(40);
         settings.Columns.Add("Genera_Movi_Inven", "Genera movimiento de inventario").Width = Unit.Percentage(40);
-        settings.Columns.Add("estado", "Estado").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

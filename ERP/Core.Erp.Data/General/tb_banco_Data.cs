@@ -23,7 +23,9 @@ namespace Core.Erp.Data.General
                                  IdBanco = q.IdBanco,
                                  ba_descripcion = q.ba_descripcion,
                                  Estado = q.Estado,
-                                 CodigoLegal = q.CodigoLegal
+                                 CodigoLegal = q.CodigoLegal,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                     else
                         Lista = (from q in Context.tb_banco
@@ -33,7 +35,9 @@ namespace Core.Erp.Data.General
                                      IdBanco = q.IdBanco,
                                      ba_descripcion = q.ba_descripcion,
                                      Estado = q.Estado,
-                                     CodigoLegal = q.CodigoLegal
+                                     CodigoLegal = q.CodigoLegal,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;
