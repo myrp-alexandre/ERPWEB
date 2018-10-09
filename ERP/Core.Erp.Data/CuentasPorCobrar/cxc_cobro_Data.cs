@@ -1019,5 +1019,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 throw;
             }
         }
+
+        
     }
 }

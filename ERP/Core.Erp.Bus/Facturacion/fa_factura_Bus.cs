@@ -145,5 +145,17 @@ namespace Core.Erp.Bus.Facturacion
             }
         }
 
+        public bool ValidarDocumentoAnulacion(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string vt_tipoDoc, ref string mensaje)
+        {
+            try
+            {
+                return odata.ValidarDocumentoAnulacion(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, vt_tipoDoc, ref mensaje);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
