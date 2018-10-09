@@ -1,7 +1,9 @@
 ﻿using Core.Erp.Bus.Caja;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.Caja;
+using Core.Erp.Info.Contabilidad;
 using Core.Erp.Web.Helps;
+using DevExpress.Web;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,23 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         #region variables
         caj_Caja_Movimiento_Tipo_Bus bus_tipomovimiento = new caj_Caja_Movimiento_Tipo_Bus();
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        #endregion
+
+        #region Metodos ComboBox bajo demanda
+
+        public ActionResult CmbCuenta_Tipo_movimiento()
+        {
+            caj_Caja_Movimiento_Tipo_Info model = new caj_Caja_Movimiento_Tipo_Info();
+            return PartialView("_CmbCuenta_Tipo_movimiento", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
         #endregion
 
         #region Index

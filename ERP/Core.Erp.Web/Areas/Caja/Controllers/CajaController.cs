@@ -3,7 +3,9 @@ using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.General;
 using Core.Erp.Bus.SeguridadAcceso;
 using Core.Erp.Info.Caja;
+using Core.Erp.Info.Contabilidad;
 using Core.Erp.Web.Helps;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -19,6 +21,22 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
 
+        #endregion
+        #region Metodos ComboBox bajo demanda
+
+        public ActionResult CmbCuenta_Caja()
+        {
+            caj_Caja_Info model = new caj_Caja_Info();
+            return PartialView("_CmbCuenta_Caja", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
         #endregion
 
         #region Index
