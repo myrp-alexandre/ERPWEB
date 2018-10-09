@@ -25,7 +25,9 @@ namespace Core.Erp.Data.Inventario
                                      IdEmpresa = q.IdEmpresa,
                                      IdProductoTipo = q.IdProductoTipo,
                                      tp_descripcion = q.tp_descripcion,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.in_ProductoTipo
@@ -36,7 +38,9 @@ namespace Core.Erp.Data.Inventario
                                      IdEmpresa = q.IdEmpresa,
                                      IdProductoTipo = q.IdProductoTipo,
                                      tp_descripcion = q.tp_descripcion,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 

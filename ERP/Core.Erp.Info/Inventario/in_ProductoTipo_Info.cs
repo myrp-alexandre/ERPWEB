@@ -23,6 +23,7 @@ namespace Core.Erp.Info.Inventario
         public bool Aparece_modu_Inventario { get; set; }
         public bool Aparece_modu_Activo_F { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
 
         #region Campos auditoria
         public string IdUsuario { get; set; }

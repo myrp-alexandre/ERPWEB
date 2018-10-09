@@ -81,8 +81,16 @@
         settings.Columns.Add("IdCiudad","ID").Width = Unit.Percentage(10);
         settings.Columns.Add("Cod_Ciudad","Código").Width = Unit.Percentage(10);
         settings.Columns.Add("Descripcion_Ciudad", "Descripción").Width = Unit.Percentage(40);
-        settings.Columns.Add("Estado","Estado").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        }); settings.Columns.Add(column =>
         {
             column.Caption = "Parroquia";
             column.Width = Unit.Pixel(100);

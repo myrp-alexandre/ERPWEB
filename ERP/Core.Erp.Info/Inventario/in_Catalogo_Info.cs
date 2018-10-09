@@ -18,6 +18,7 @@ namespace Core.Erp.Info.Inventario
         [StringLength(100, MinimumLength =1, ErrorMessage =("El campo descripción debe tener mínimo 1 caracter máximo 100"))]
         public string Nombre { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
 
         [StringLength(10, MinimumLength = 1, ErrorMessage = ("El campo abreviatura debe tener mínimo 1 caracter máximo 10"))]
         public string Abrebiatura { get; set; }

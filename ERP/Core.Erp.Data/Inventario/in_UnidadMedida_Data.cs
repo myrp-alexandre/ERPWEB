@@ -24,7 +24,9 @@ namespace Core.Erp.Data.Inventario
                                  IdUnidadMedida = q.IdUnidadMedida,
                                  cod_alterno = q.cod_alterno,
                                  Descripcion = q.Descripcion,
-                                 Estado = q.Estado
+                                 Estado = q.Estado,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                     else
                         Lista = (from q in Context.in_UnidadMedida
@@ -34,7 +36,9 @@ namespace Core.Erp.Data.Inventario
                                      IdUnidadMedida = q.IdUnidadMedida,
                                      cod_alterno = q.cod_alterno,
                                      Descripcion = q.Descripcion,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 

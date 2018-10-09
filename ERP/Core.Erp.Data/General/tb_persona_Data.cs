@@ -44,7 +44,9 @@ namespace Core.Erp.Data.General
                                  pe_nombreCompleto = q.pe_nombreCompleto,
                                  IdTipoDocumento = q.IdTipoDocumento,
                                  pe_cedulaRuc = q.pe_cedulaRuc,
-                                 pe_estado = q.pe_estado
+                                 pe_estado = q.pe_estado,
+
+                                 EstadoBool = q.pe_estado == "A" ? true : false
                              }).ToList();
                     else
                         Lista = (from q in Context.tb_persona
@@ -55,7 +57,9 @@ namespace Core.Erp.Data.General
                                      pe_nombreCompleto = q.pe_nombreCompleto,
                                      IdTipoDocumento = q.IdTipoDocumento,
                                      pe_cedulaRuc = q.pe_cedulaRuc,
-                                     pe_estado = q.pe_estado
+                                     pe_estado = q.pe_estado,
+
+                                     EstadoBool = q.pe_estado == "A" ? true : false
                                  }).ToList();
                 }
 

@@ -29,7 +29,9 @@ namespace Core.Erp.Data.General
                                      cod_bodega = q.cod_bodega,
                                      bo_Descripcion = q.bo_Descripcion,
                                      cod_punto_emision = q.cod_punto_emision,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.tb_bodega
@@ -44,7 +46,9 @@ namespace Core.Erp.Data.General
                                      cod_bodega = q.cod_bodega,
                                      bo_Descripcion = q.bo_Descripcion,
                                      cod_punto_emision = q.cod_punto_emision,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 
@@ -76,7 +80,9 @@ namespace Core.Erp.Data.General
                                      cod_bodega = q.cod_bodega,
                                      bo_Descripcion = q.bo_Descripcion,
                                      cod_punto_emision = q.cod_punto_emision,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.tb_bodega
@@ -90,7 +96,9 @@ namespace Core.Erp.Data.General
                                      cod_bodega = q.cod_bodega,
                                      bo_Descripcion = q.bo_Descripcion,
                                      cod_punto_emision = q.cod_punto_emision,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 

@@ -82,8 +82,17 @@
         });
         settings.Columns.Add("IdGasto_tipo", "Código").Width = Unit.Percentage(20);
         settings.Columns.Add("gt_descripcion", "Descripción").Width = Unit.Percentage(30);
-        settings.Columns.Add("observacion", "Obaservación").Width = Unit.Percentage(30);
-        settings.Columns.Add("estado", "Estado").Width = Unit.Percentage(10);
+        settings.Columns.Add("observacion", "Observación").Width = Unit.Percentage(30);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "estado";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

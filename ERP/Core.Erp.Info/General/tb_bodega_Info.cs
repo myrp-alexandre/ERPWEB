@@ -30,6 +30,7 @@ namespace Core.Erp.Info.General
         public string nom_pc { get; set; }
         public string ip { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string IdEstadoAproba_x_Ing_Egr_Inven { get; set; }
         public string IdCentroCosto { get; set; }
         public string IdCtaCtble_Inve { get; set; }

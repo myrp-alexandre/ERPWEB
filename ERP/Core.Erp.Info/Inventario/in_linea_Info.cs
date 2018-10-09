@@ -20,6 +20,7 @@ namespace Core.Erp.Info.Inventario
         public string nom_linea { get; set; }
         public string observacion { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string nom_pc { get; set; }

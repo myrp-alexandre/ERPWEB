@@ -28,7 +28,9 @@ namespace Core.Erp.Data.Inventario
                                      Estado = q.Estado,
                                      IdCtaCble_venta = q.IdCtaCble_venta,
                                      IdCtaCtble_Costo = q.IdCtaCtble_Costo,
-                                     IdCtaCtble_Inve = q.IdCtaCtble_Inve
+                                     IdCtaCtble_Inve = q.IdCtaCtble_Inve,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.in_categorias
@@ -43,7 +45,9 @@ namespace Core.Erp.Data.Inventario
                                       Estado = q.Estado,
                                       IdCtaCble_venta = q.IdCtaCble_venta,
                                       IdCtaCtble_Costo = q.IdCtaCtble_Costo,
-                                      IdCtaCtble_Inve = q.IdCtaCtble_Inve
+                                      IdCtaCtble_Inve = q.IdCtaCtble_Inve,
+
+                                      EstadoBool = q.Estado == "A" ? true : false
                                   }).ToList();
                 }
                 return Lista;

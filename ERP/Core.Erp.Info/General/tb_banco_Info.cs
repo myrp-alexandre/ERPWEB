@@ -16,7 +16,7 @@ namespace Core.Erp.Info.General
         [StringLength(100, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 100")]
         public string ba_descripcion { get; set; }
         public string Estado { get; set; }
-
+        public bool EstadoBool { get; set; }
         [Required(ErrorMessage = "El campo código legal es obligatorio")]
         [StringLength(10, MinimumLength = 1, ErrorMessage = "el campo código debe tener mínimo 1 caracter y máximo 10")]
         public string CodigoLegal { get; set; }

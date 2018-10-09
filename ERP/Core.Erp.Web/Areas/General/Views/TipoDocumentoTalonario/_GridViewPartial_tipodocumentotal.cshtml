@@ -84,8 +84,17 @@
         settings.Columns.Add("NumAutorizacion", "Número de autorización").Width = Unit.Percentage(15);
         settings.Columns.Add("PuntoEmision", "Punto de emisión").Width = Unit.Percentage(10);
         settings.Columns.Add("NumDocumento", "Numero documento").Width = Unit.Percentage(30);
-        
-        settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(10);
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

@@ -27,7 +27,9 @@ namespace Core.Erp.Data.General
                                  Su_Descripcion = q.Su_Descripcion,
                                  Su_CodigoEstablecimiento = q.Su_CodigoEstablecimiento,
                                  Su_Ruc = q.Su_Ruc,
-                                 Estado = q.Estado
+                                 Estado = q.Estado,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                     else
                         Lista = (from q in Context.tb_sucursal
@@ -40,7 +42,9 @@ namespace Core.Erp.Data.General
                                      Su_Descripcion = q.Su_Descripcion,
                                      Su_CodigoEstablecimiento = q.Su_CodigoEstablecimiento,
                                      Su_Ruc = q.Su_Ruc,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 

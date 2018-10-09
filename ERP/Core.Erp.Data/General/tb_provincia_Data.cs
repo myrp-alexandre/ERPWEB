@@ -31,7 +31,9 @@ namespace Core.Erp.Data.General
                                  info_pais = new tb_pais_Info
                                  {
                                      Nombre = p.Nombre
-                                 }
+                                 },
+
+                                 EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                     else
                         Lista = (from q in Context.tb_provincia
@@ -48,7 +50,9 @@ namespace Core.Erp.Data.General
                                      info_pais = new tb_pais_Info
                                      {
                                          Nombre = p.Nombre
-                                     }
+                                     },
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 

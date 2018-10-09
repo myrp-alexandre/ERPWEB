@@ -29,7 +29,9 @@ namespace Core.Erp.Data.General
                                      NumAutorizacion = q.NumAutorizacion,
                                      NumDocumento = q.NumDocumento,
                                      PuntoEmision = q.PuntoEmision,
-                                     
+
+                                     EstadoBool = q.Estado == "A" ? true : false
+
                                  }).ToList();
                     else
                         Lista = (from q in Context.tb_sis_Documento_Tipo_Talonario
@@ -46,6 +48,8 @@ namespace Core.Erp.Data.General
                                      NumAutorizacion = q.NumAutorizacion,
                                      NumDocumento = q.NumDocumento,
                                      PuntoEmision = q.PuntoEmision,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
 
                                  }).ToList();
                 }

@@ -28,7 +28,9 @@ namespace Core.Erp.Data.Inventario
                                  cod_linea = q.cod_linea,
                                  nom_linea = q.nom_linea,
                                  Estado = q.Estado,
-                                
+
+                                 EstadoBool = q.Estado == "A" ? true : false
+
                              }).ToList();
                     else
                         Lista = (from q in Context.in_linea
@@ -42,7 +44,9 @@ namespace Core.Erp.Data.Inventario
                                      IdLinea = q.IdLinea,
                                      cod_linea = q.cod_linea,
                                      nom_linea = q.nom_linea,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
 
                                  }).ToList();
                 }

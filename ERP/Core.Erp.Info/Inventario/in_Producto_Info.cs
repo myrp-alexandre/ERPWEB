@@ -44,6 +44,7 @@ namespace Core.Erp.Info.Inventario
         [StringLength(2000, MinimumLength = 0, ErrorMessage = "El campo observación debe tener máximo 2000 caracteres")]
         public string pr_observacion { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         [Required(ErrorMessage = "El campo impuesto IVA es obligatorio")]
         public string IdCod_Impuesto_Iva { get; set; }
         public bool Aparece_modu_Ventas { get; set; }

@@ -112,6 +112,16 @@
             column.Width = Unit.Percentage(15);
 
         });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "estado";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
 
 
     });
