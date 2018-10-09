@@ -22,7 +22,9 @@ namespace Core.Erp.Data.Facturacion
                              {
                                  IdCatalogo_tipo = q.IdCatalogo_tipo,
                                  Descripcion = q.Descripcion,
-                                 Estado = q.Estado
+                                 Estado = q.Estado,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                     else
                         Lista = (from q in Context.fa_catalogo_tipo
@@ -31,7 +33,9 @@ namespace Core.Erp.Data.Facturacion
                                  {
                                      IdCatalogo_tipo = q.IdCatalogo_tipo,
                                      Descripcion = q.Descripcion,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
 
                 }

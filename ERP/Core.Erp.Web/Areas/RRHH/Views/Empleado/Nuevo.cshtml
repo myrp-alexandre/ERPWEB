@@ -55,7 +55,7 @@
                 <div class="form-group">
                     <label for="info_persona.pe_cedulaRuc">Número documento*</label>
                     @Html.TextBoxFor(q => q.info_persona.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc" })
-                    @Html.ValidationMessageFor(q => q.pe_cedulaRuc, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(q => q.info_persona.pe_cedulaRuc, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

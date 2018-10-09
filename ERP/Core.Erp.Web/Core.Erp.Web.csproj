@@ -9182,6 +9182,8 @@
     <Content Include="Areas\Importacion\Views\PartidaArancelaria\Anular.cshtml" />
     <Content Include="Areas\Contabilidad\Views\RevisionContable\Index.cshtml" />
     <Content Include="Areas\Contabilidad\Views\RevisionContable\_GridViewPartial_Facturacion.cshtml" />
+    <Content Include="Areas\Caja\Views\Caja\_CmbCuenta_Caja.cshtml" />
+    <Content Include="Areas\Caja\Views\TipoMovimientoCaja\_CmbCuenta_Tipo_movimiento.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
