@@ -79,7 +79,16 @@
 
         settings.Columns.Add("IdProductoTipo","ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
         settings.Columns.Add("tp_descripcion","Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-        settings.Columns.Add("Estado").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

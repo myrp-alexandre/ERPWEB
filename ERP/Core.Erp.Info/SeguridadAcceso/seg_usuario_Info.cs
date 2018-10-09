@@ -13,6 +13,7 @@ namespace Core.Erp.Info.SeguridadAcceso
         public string IdUsuario { get; set; }
         public string Contrasena { get; set; }
         public string estado { get; set; }
+        public bool EstadoBool { get; set; }
         public Nullable<System.DateTime> Fecha_Transaccion { get; set; }
         public string IdUsuarioUltModi { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }

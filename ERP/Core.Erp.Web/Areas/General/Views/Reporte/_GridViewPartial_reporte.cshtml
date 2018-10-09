@@ -68,8 +68,16 @@
 
         settings.Columns.Add("CodReporte", "Código").Width = Unit.Percentage(20);
         settings.Columns.Add("nom_reporte", "Nombre").Width = Unit.Percentage(60);
-        settings.Columns.Add("estado", "Estado").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
+        {
+            column.FieldName = "estado";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        }); settings.Columns.Add(column =>
         {
             column.SetDataItemTemplateContent(c =>
             {

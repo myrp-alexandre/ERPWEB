@@ -24,6 +24,8 @@ namespace Core.Erp.Data.SeguridadAcceso
                                  IdUsuario = q.IdUsuario,
                                  estado = q.estado,
                                  Nombre = q.Nombre,
+
+                                 EstadoBool = q.estado == "A" ? true : false
                              }).ToList();
                     else
                         Lista = (from q in Context.seg_usuario
@@ -33,6 +35,8 @@ namespace Core.Erp.Data.SeguridadAcceso
                                      IdUsuario = q.IdUsuario,
                                      estado = q.estado,
                                      Nombre = q.Nombre,
+
+                                     EstadoBool = q.estado == "A" ? true : false
                                  }).ToList();
                 }
 
