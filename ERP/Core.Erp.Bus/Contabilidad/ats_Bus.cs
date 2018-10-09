@@ -183,8 +183,21 @@ namespace Core.Erp.Bus.Contabilidad
                                                }
                                            }
                                        }
+                                       else// si no tiene retencion
+                                       {
+                                           comp_det.air = new List<detalleAir>();
+                                           comp_det.air.Add(new detalleAir
+                                           {
+                                               codRetAir = "332",
+                                               baseImpAir = "0.00",
+                                               porcentajeAir = "0",
+                                               valRetAir = "0.00",
+                                           });
+                                       }
                                    }
+                                  
                                }
+                              
                            }
                            #endregion
                            ats.compras.Add(comp_det);

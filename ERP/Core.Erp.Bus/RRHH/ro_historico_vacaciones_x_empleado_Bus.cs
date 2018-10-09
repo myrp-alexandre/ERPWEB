@@ -109,7 +109,7 @@ namespace Core.Erp.Bus.RRHH
                             info.DiasGanado = diasGanados;
                             info.DiasPendientes = diasGanados;
                             info.DiasTomados = 0;
-                            info.Descripcion = info.FechaIni.Date.ToString() + " " + info.FechaFin.Date.ToString() + " " + info.DiasGanado.ToString();
+                            info.Descripcion = info.FechaIni.Date.ToString().Substring(0,10) + " " + info.FechaFin.Date.ToString().Substring(0, 10) + " " + info.DiasGanado.ToString();
                             info.IdVacacion = IdVacacion;
                             info.IdPeriodo_Inicio =Convert.ToInt32( info.FechaIni.ToString("ddMMyyyy"));
                             info.IdPeriodo_Fin = Convert.ToInt32(info.FechaFin.ToString("ddMMyyyy"));
@@ -142,6 +142,9 @@ namespace Core.Erp.Bus.RRHH
                     {
                         odata.ModificarBD(item);
                     }
+                    item.FechaFin = item.FechaFin.Date;
+                    item.FechaIni = item.FechaIni.Date;
+
                 }
                 return lst_vacaciones;
             }
