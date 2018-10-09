@@ -51,10 +51,12 @@ namespace Core.Erp.Data.Inventario
                                      nom_presentacion = pr.nom_presentacion,
                                      ma_descripcion = m.Descripcion,
                                      nom_categoria = c.ca_Categoria,
-                                     pr_imagen = p.pr_imagen
+                                     pr_imagen = p.pr_imagen,
+
+                                     EstadoBool = p.Estado == "A" ? true : false
 
 
-                             }).ToList();
+                                 }).ToList();
                     else
                         Lista = (from t in Context.in_ProductoTipo
                                  join p in Context.in_Producto
@@ -89,6 +91,8 @@ namespace Core.Erp.Data.Inventario
                                      nom_categoria = c.ca_Categoria,
                                      pr_imagen = p.pr_imagen,
 
+                                     EstadoBool = p.Estado == "A" ? true : false
+
 
                                  }).ToList();
                 }
@@ -122,7 +126,9 @@ namespace Core.Erp.Data.Inventario
                                      pr_codigo = q.pr_codigo,
                                      pr_descripcion = q.pr_descripcion,
                                      Estado = q.Estado,
-                                     lote_fecha_vcto = q.lote_fecha_vcto
+                                     lote_fecha_vcto = q.lote_fecha_vcto,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.in_Producto
@@ -138,7 +144,9 @@ namespace Core.Erp.Data.Inventario
                                      pr_codigo = q.pr_codigo,
                                      pr_descripcion = q.pr_descripcion,
                                      Estado = q.Estado,
-                                     lote_fecha_vcto = q.lote_fecha_vcto
+                                     lote_fecha_vcto = q.lote_fecha_vcto,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 

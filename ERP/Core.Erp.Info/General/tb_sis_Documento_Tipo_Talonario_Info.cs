@@ -24,6 +24,7 @@ namespace Core.Erp.Info.General
         public Nullable<System.DateTime> FechaCaducidad { get; set; }
         public bool Usado { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         [Required(ErrorMessage = "El campo sucursal es obligatorio")]
         public int IdSucursal { get; set; }
         public string NumAutorizacion { get; set; }

@@ -18,6 +18,7 @@ namespace Core.Erp.Info.General
         [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 50")]
         public string Descripcion_Ciudad { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         [Required(ErrorMessage = " el campo provincia es obligatorio")]
         public string IdProvincia { get; set; }
         public string IdUsuario { get; set; }

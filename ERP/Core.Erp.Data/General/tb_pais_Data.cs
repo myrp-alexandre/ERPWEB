@@ -24,7 +24,9 @@ namespace Core.Erp.Data.General
                                  IdPais = q.IdPais,
                                  Nombre = q.Nombre,
                                  Nacionalidad = q.Nacionalidad,
-                                 estado = q.estado                                 
+                                 estado = q.estado,
+
+                                 EstadoBool = q.estado == "A" ? true : false
                              }).ToList();
                     else
                         Lista = (from q in Context.tb_pais
@@ -35,7 +37,9 @@ namespace Core.Erp.Data.General
                                      IdPais = q.IdPais,
                                      Nombre = q.Nombre,
                                      Nacionalidad = q.Nacionalidad,
-                                     estado = q.estado
+                                     estado = q.estado,
+
+                                     EstadoBool = q.estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

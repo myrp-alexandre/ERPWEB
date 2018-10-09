@@ -19,5 +19,6 @@ namespace Core.Erp.Info.Inventario
         [StringLength(50, MinimumLength = 1, ErrorMessage = ("El campo descripción debe tener mínimo 1 caracter máximo 50"))]
         public string Descripcion { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
     }
 }

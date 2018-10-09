@@ -27,7 +27,9 @@ namespace Core.Erp.Data.General
                                      IdCiudad = q.IdCiudad,
                                      Cod_Ciudad = q.Cod_Ciudad,
                                      Descripcion_Ciudad = q.Descripcion_Ciudad,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
 
                                  }).ToList();
                     else
@@ -42,7 +44,9 @@ namespace Core.Erp.Data.General
                                      IdCiudad = q.IdCiudad,
                                      Cod_Ciudad = q.Cod_Ciudad,
                                      Descripcion_Ciudad = q.Descripcion_Ciudad,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

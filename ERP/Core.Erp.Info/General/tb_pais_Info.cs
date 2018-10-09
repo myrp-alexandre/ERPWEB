@@ -21,6 +21,7 @@ namespace Core.Erp.Info.General
         [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo nacionalidad debe tener mínimo 1 caracteres y máximo 50")]
         public string Nacionalidad { get; set; }
         public string estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }

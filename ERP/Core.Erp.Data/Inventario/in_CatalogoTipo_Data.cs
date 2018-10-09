@@ -23,7 +23,9 @@ namespace Core.Erp.Data.Inventario
                                      IdCatalogo_tipo = q.IdCatalogo_tipo,
                                      cod_Catalogo_tipo = q.cod_Catalogo_tipo,
                                      Descripcion = q.Descripcion,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
 
                                  }).ToList();
                     else
@@ -34,7 +36,9 @@ namespace Core.Erp.Data.Inventario
                                      IdCatalogo_tipo = q.IdCatalogo_tipo,
                                      cod_Catalogo_tipo = q.cod_Catalogo_tipo,
                                      Descripcion = q.Descripcion,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
 
                                  }).ToList();
                  }

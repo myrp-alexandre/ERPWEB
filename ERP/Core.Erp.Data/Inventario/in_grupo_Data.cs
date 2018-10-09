@@ -29,7 +29,9 @@ namespace Core.Erp.Data.Inventario
                                    IdGrupo = q.IdGrupo,
                                    cod_grupo = q.cod_grupo,
                                   nom_grupo = q.nom_grupo,
-                                  Estado = q.Estado
+                                  Estado = q.Estado,
+
+                                  EstadoBool = q.Estado == "A" ? true : false
                               }).ToList();
                     else
                         Lista = (from q in Context.in_grupo
@@ -45,7 +47,9 @@ namespace Core.Erp.Data.Inventario
                                      IdGrupo = q.IdGrupo,
                                      cod_grupo = q.cod_grupo,
                                      nom_grupo = q.nom_grupo,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

@@ -21,6 +21,7 @@ namespace Core.Erp.Info.Inventario
         [StringLength(150, MinimumLength = 1, ErrorMessage = ("El campo descripción debe tener mínimo 1 caracter máximo 150"))]
         public string nom_grupo { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string observacion { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }

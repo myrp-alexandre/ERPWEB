@@ -27,7 +27,9 @@ namespace Core.Erp.Data.General
                                  em_ruc = q.em_ruc,
                                  Estado = q.Estado,
                                  em_direccion = q.em_direccion,
-                                 em_telefonos = q.em_telefonos
+                                 em_telefonos = q.em_telefonos,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                     else
                         Lista = (from q in Context.tb_empresa
@@ -40,7 +42,9 @@ namespace Core.Erp.Data.General
                                      em_ruc = q.em_ruc,
                                      Estado = q.Estado,
                                      em_direccion = q.em_direccion,
-                                     em_telefonos = q.em_telefonos
+                                     em_telefonos = q.em_telefonos,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 

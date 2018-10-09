@@ -31,6 +31,7 @@ namespace Core.Erp.Info.Inventario
         public Nullable<decimal> IdNumMovi_Ing_Egr_Inven_Destino { get; set; }
         public string IdUsuario { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string tr_userAnulo { get; set; }
         public Nullable<System.DateTime> tr_fechaAnulacion { get; set; }
         public Nullable<System.DateTime> tr_fecha_transaccion { get; set; }

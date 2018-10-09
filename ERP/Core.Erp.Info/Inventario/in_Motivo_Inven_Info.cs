@@ -19,6 +19,7 @@ namespace Core.Erp.Info.Inventario
         public string Desc_mov_inv { get; set; }
         public string Genera_Movi_Inven { get; set; }
         public string estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string Tipo_Ing_Egr { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }

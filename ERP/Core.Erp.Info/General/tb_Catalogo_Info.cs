@@ -21,6 +21,7 @@ namespace Core.Erp.Info.General
         [StringLength(250, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 250")]
         public string ca_descripcion { get; set; }
         public string ca_estado { get; set; }
+        public bool EstadoBool { get; set; }
         [Required(ErrorMessage = ("el campo orden es obligatorio"))]
         public int ca_orden { get; set; }
         public string IdUsuario { get; set; }

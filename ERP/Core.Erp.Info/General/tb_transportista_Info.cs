@@ -18,6 +18,7 @@ namespace Core.Erp.Info.General
         [StringLength(500, MinimumLength = 1, ErrorMessage = "el campo nombre debe tener mínimo 1 caracter y máximo 500")]
         public string Nombre { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transaccion { get; set; }
         public string IdUsuarioUltModi { get; set; }

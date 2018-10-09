@@ -26,7 +26,9 @@ namespace Core.Erp.Data.General
                                  ca_descripcion = q.ca_descripcion,
                                  ca_estado = q.ca_estado,
                                  ca_orden = q.ca_orden,
-                                 CodCatalogo = q.CodCatalogo
+                                 CodCatalogo = q.CodCatalogo,
+
+                                 EstadoBool = q.ca_estado == "A" ? true : false
                              }).ToList();
                     else
                         Lista = (from q in Context.tb_Catalogo
@@ -39,7 +41,9 @@ namespace Core.Erp.Data.General
                                      ca_descripcion = q.ca_descripcion,
                                      ca_estado = q.ca_estado,
                                      ca_orden = q.ca_orden,
-                                     CodCatalogo = q.CodCatalogo
+                                     CodCatalogo = q.CodCatalogo,
+
+                                     EstadoBool = q.ca_estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

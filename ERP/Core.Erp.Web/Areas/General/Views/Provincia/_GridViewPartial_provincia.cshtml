@@ -81,8 +81,16 @@
         settings.Columns.Add("IdProvincia", "Código").Width = Unit.Percentage(10);
         settings.Columns.Add("info_pais.Nombre", "País").Width = Unit.Percentage(30);
         settings.Columns.Add("Descripcion_Prov","Descripción").Width = Unit.Percentage(50);
-        settings.Columns.Add("Estado","Estado").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
 
+            });
+        });
         settings.Columns.Add(column =>
         {
             column.Caption = "Ciudad";

@@ -24,7 +24,9 @@ namespace Core.Erp.Data.Inventario
                                      IdEmpresa = q.IdEmpresa,
                                      IdPresentacion = q.IdPresentacion,
                                      nom_presentacion = q.nom_presentacion,
-                                     estado  = q.estado
+                                     estado  = q.estado,
+
+                                     EstadoBool = q.estado == "A" ? true : false
                                  }).ToList();
 
                     else Lista = (from q in Context.in_presentacion
@@ -35,7 +37,9 @@ namespace Core.Erp.Data.Inventario
                                       IdEmpresa = q.IdEmpresa,
                                       IdPresentacion = q.IdPresentacion,
                                       nom_presentacion = q.nom_presentacion,
-                                      estado = q.estado
+                                      estado = q.estado,
+
+                                      EstadoBool = q.estado == "A" ? true : false
                                   }).ToList();
                 }
                 return Lista;
