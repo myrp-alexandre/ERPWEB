@@ -21,73 +21,49 @@
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdHorasExtras)
 
-    <div class="box collapsed-box">
-        <div class="box-header with-border">
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fa fa-plus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                    <i class="fa fa-times"></i>
-                </button>
-            </div>
-        </div>
-        <div class="box-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="FechaInicio">Nómina*</label>
-                            @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_Tipo" })
-                            @Html.ValidationMessageFor(q => q.IdNomina_Tipo, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="FechaFin">Tipo liquidación nómina*</label>
-                            @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
-                            @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="FechaFin">Período*</label>
-                            @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodo, "IdPeriodo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdPeriodo" })
-                            @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="FechaInicio">Nómina*</label>
+                    @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_Tipo" })
+                    @Html.ValidationMessageFor(q => q.IdNomina_Tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-3">
-                        <button type="submit" class="btn btn-primary">Procesar</button>
-                        <a class="btn btn-default" href="@Url.Action("Index","HorasExtras",new { Area = "RRHH", @id="grid"},null)">Salir</a>
-                    </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="FechaFin">Tipo liquidación nómina*</label>
+                    @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
+                    @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="FechaFin">Período*</label>
+                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodo, "IdPeriodo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdPeriodo" })
+                    @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
-        <!-- /.box-body -->
     </div>
 
-    <div class="box">
-        <div class="box-header with-border">
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                    <i class="fa fa-times"></i>
-                </button>
-            </div>
-        </div>
-        <div class="box-body">
-            <div class="form-group">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
                 <label for="cb_Observacion">Detalle horas extras</label>
                 @Html.Action("GridViewPartial_horas_extras_det", new { IdNomina_Tipo = Model.IdNomina_Tipo, IdNomina_TipoLiqui = Model.IdNomina_TipoLiqui, IdPeriodo = Model.IdPeriodo, IdHorasExtras = Model.IdHorasExtras })
             </div>
         </div>
-
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary">Procesar</button>
+                <a class="btn btn-default" href="@Url.Action("Index","HorasExtras",new { Area = "RRHH", @id="grid"},null)">Salir</a>
+            </div>
+        </div>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
