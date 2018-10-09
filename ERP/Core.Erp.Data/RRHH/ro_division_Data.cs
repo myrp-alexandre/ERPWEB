@@ -24,7 +24,9 @@ namespace Core.Erp.Data.RRHH
                                  IdEmpresa = q.IdEmpresa,
                                  IdDivision = q.IdDivision,
                                  Descripcion = q.Descripcion,
-                                 estado = q.estado
+                                 estado = q.estado,
+
+                                 EstadoBool = q.estado == "A" ? true : false
                              }).ToList();
                     else
                         Lista = (from q in Context.ro_Division
@@ -35,7 +37,9 @@ namespace Core.Erp.Data.RRHH
                                      IdEmpresa = q.IdEmpresa,
                                      IdDivision = q.IdDivision,
                                      Descripcion = q.Descripcion,
-                                     estado = q.estado
+                                     estado = q.estado,
+
+                                     EstadoBool = q.estado == "A" ? true : false
                                  }).ToList();
                 }
 

@@ -25,6 +25,7 @@ namespace Core.Erp.Info.RRHH
         [Required(ErrorMessage = "El campo tipo de rubro es obligatorio")]
         public string ru_tipo { get; set; }
         public string ru_estado { get; set; }
+        public bool EstadoBool { get; set; }
         public int ru_orden { get; set; }
         public bool rub_concep { get; set; }
         [Required(ErrorMessage = "El tipo de campo es obligatorio")]

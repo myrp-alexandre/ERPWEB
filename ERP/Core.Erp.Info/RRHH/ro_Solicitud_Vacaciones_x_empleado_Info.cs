@@ -36,6 +36,7 @@ namespace Core.Erp.Info.RRHH
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string MotivoAnulacion { get; set; }
         public string ip { get; set; }
         public string nom_pc { get; set; }

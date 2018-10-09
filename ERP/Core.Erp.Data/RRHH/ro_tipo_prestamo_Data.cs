@@ -25,7 +25,9 @@ namespace Core.Erp.Data.RRHH
                                  IdTipoPrestamo = q.IdTipoPrestamo,
                                  tp_Descripcion = q.tp_Descripcion,
                                  tp_Monto=q.tp_Monto,
-                                 tp_Estado = q.tp_Estado
+                                 tp_Estado = q.tp_Estado,
+
+                                 EstadoBool = q.tp_Estado == "A" ? true : false
                              }).ToList();
                     else
                         Lista = (from q in Context.ro_Tipo_Prestamo
@@ -37,7 +39,9 @@ namespace Core.Erp.Data.RRHH
                                      IdTipoPrestamo = q.IdTipoPrestamo,
                                      tp_Descripcion = q.tp_Descripcion,
                                      tp_Monto = q.tp_Monto,
-                                     tp_Estado = q.tp_Estado
+                                     tp_Estado = q.tp_Estado,
+
+                                     EstadoBool = q.tp_Estado == "A" ? true : false
                                  }).ToList();
                 }
 

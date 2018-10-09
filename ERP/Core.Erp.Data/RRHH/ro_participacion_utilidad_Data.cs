@@ -33,8 +33,10 @@ namespace Core.Erp.Data.RRHH
                                      Procesado=q.Procesado,
                                      Cerrado=q.Cerrado,
                                      Estado=q.Estado,
-                                     Descripcion=q.Descripcion
-                                     
+                                     Descripcion=q.Descripcion,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
+
                                  }).ToList();
                     else
                         Lista = (from q in Context.vwro_participacion_utilidad
@@ -49,7 +51,9 @@ namespace Core.Erp.Data.RRHH
                                      pe_FechaFin = q.pe_FechaFin,
                                      Procesado = q.Procesado,
                                      Cerrado = q.Cerrado,
-                                     Descripcion = q.Descripcion
+                                     Descripcion = q.Descripcion,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 

@@ -81,8 +81,16 @@
         settings.Columns.Add("IdTipoPrestamo","ID").Width = Unit.Percentage(5);
         settings.Columns.Add("tp_Descripcion","Descripción").Width = Unit.Percentage(80);
         settings.Columns.Add("tp_Monto","Monto").Width = Unit.Percentage(10);
-        settings.Columns.Add("tp_Estado","Estado").Width = Unit.Percentage(5);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
 
+            });
+        });
 
     });
 }

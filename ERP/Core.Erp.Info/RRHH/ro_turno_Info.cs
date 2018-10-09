@@ -21,6 +21,7 @@ namespace Core.Erp.Info.RRHH
         public bool Sabado { get; set; }
         public bool Domingo { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }

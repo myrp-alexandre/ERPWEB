@@ -23,7 +23,9 @@ namespace Core.Erp.Data.RRHH
                                  IdEmpresa = q.IdEmpresa,
                                  IdNomina_Tipo = q.IdNomina_Tipo,
                                  Descripcion = q.Descripcion,
-                                 Estado = q.Estado
+                                 Estado = q.Estado,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                 else
                         Lista = (from q in Context.ro_Nomina_Tipo
@@ -34,7 +36,9 @@ namespace Core.Erp.Data.RRHH
                                      IdEmpresa = q.IdEmpresa,
                                      IdNomina_Tipo = q.IdNomina_Tipo,
                                      Descripcion = q.Descripcion,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 

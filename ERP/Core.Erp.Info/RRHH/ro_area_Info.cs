@@ -18,7 +18,7 @@ namespace Core.Erp.Info.RRHH
         public string Descripcion { get; set; }
         public string Division { get; set; }
 
-        
+        public bool EstadoBool { get; set; }
         public string estado { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }

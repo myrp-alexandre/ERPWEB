@@ -18,6 +18,7 @@ namespace Core.Erp.Info.RRHH
         [Required(ErrorMessage = "El campo Código reporte es obligatorio")]
         public string ca_descripcion { get; set; }
         public string ca_estado { get; set; }
+        public bool EstadoBool { get; set; }
         public int ca_orden { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }

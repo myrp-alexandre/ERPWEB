@@ -86,7 +86,16 @@
         settings.Columns.Add("SalLunch","Salida lunch").Width = Unit.Percentage(10);
         settings.Columns.Add("RegLunch","Regreso lunch").Width = Unit.Percentage(10);
         settings.Columns.Add("Descripcion","Horario").Width = Unit.Percentage(20);
-        settings.Columns.Add("Estado").Width = Unit.Percentage(5);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

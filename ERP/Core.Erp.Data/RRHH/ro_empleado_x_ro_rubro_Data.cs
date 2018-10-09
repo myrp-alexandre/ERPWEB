@@ -46,6 +46,7 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+
         public ro_empleado_x_ro_rubro_Info get_info(int IdEmpresa, int IdRubroFijo)
         {
             try

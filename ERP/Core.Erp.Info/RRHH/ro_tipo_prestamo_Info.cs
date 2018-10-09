@@ -19,6 +19,7 @@ namespace Core.Erp.Info.RRHH
         [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Ingrese solo numeros")]
         public Nullable<int> tp_Monto { get; set; }
         public string tp_Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string IdUsuario { get; set; }
 
         public Nullable<System.DateTime> Fecha_Transac { get; set; }

@@ -82,7 +82,16 @@
 
         settings.Columns.Add("IdNomina_Tipo","ID");
         settings.Columns.Add("Descripcion","Nómina");
-        settings.Columns.Add("Estado");
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

@@ -15,6 +15,7 @@ namespace Core.Erp.Info.RRHH
         [StringLength(100, MinimumLength = 4, ErrorMessage = "El campo descripción debe tener mínimo 4 caracteres y máximo 100")]
         public string Descripcion { get; set; }
         public string estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }

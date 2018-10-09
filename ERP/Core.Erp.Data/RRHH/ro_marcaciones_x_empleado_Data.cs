@@ -41,8 +41,10 @@ namespace Core.Erp.Data.RRHH
                                  cargo=q.cargo,
                                  pe_NombreCompleato=q.pe_apellido+" "+q.pe_nombre,
                                  pe_cedula=q.pe_cedulaRuc,
-                                 em_codigo=q.em_codigo
-                                 
+                                 em_codigo=q.em_codigo,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
+
                              }).ToList();
 
 

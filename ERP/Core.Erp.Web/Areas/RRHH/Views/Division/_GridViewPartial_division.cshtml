@@ -84,8 +84,16 @@
 
         settings.Columns.Add("IdDivision","ID").Width = Unit.Percentage(10);
         settings.Columns.Add("Descripcion","División").Width = Unit.Percentage(80);
-        settings.Columns.Add("estado","Estado").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
 
+            });
+        });
 
     });
 }

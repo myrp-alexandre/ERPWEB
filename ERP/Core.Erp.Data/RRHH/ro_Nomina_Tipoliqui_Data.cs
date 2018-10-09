@@ -31,7 +31,9 @@ namespace Core.Erp.Data.RRHH
                                      IdNomina_TipoLiqui = q.IdNomina_TipoLiqui,
                                      DescripcionProcesoNomina=q.DescripcionProcesoNomina,
                                      Estado = q.Estado,
-                                     Descripcion=p.Descripcion
+                                     Descripcion=p.Descripcion,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
 
                                  }).ToList();
                     else
@@ -48,7 +50,9 @@ namespace Core.Erp.Data.RRHH
                                      IdNomina_TipoLiqui = q.IdNomina_TipoLiqui,
                                      DescripcionProcesoNomina = q.DescripcionProcesoNomina,
                                      Descripcion = p.Descripcion,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 

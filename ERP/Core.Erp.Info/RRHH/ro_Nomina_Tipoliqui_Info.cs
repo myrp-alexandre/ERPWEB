@@ -25,7 +25,7 @@ namespace Core.Erp.Info.RRHH
         public System.DateTime FechaTransac { get; set; }
         public Nullable<System.DateTime> FechaUltModi { get; set; }
         public string Estado { get; set; }
-
+        public bool EstadoBool { get; set; }
         public string Descripcion { get; set; }
 
     }

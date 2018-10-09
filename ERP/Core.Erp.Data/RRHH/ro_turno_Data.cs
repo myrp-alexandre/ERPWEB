@@ -31,7 +31,9 @@ namespace Core.Erp.Data.RRHH
                                      Viernes=q.Viernes,
                                      Sabado=q.Sabado,
                                      Domingo=q.Domingo,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.ro_turno
@@ -49,7 +51,9 @@ namespace Core.Erp.Data.RRHH
                                      Viernes = q.Viernes,
                                      Sabado = q.Sabado,
                                      Domingo = q.Domingo,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 

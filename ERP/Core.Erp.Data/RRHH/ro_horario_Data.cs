@@ -30,8 +30,10 @@ namespace Core.Erp.Data.RRHH
                                      ToleranciaEnt=q.ToleranciaEnt,
                                      ToleranciaReg_lunh=q.ToleranciaReg_lunh,
                                      Estado=q.Estado,
-                                     Descripcion = q.Descripcion
-                                    
+                                     Descripcion = q.Descripcion,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
+
                                  }).ToList();
                     else
                         Lista = (from q in Context.ro_horario
@@ -48,7 +50,9 @@ namespace Core.Erp.Data.RRHH
                                      ToleranciaEnt = q.ToleranciaEnt,
                                      ToleranciaReg_lunh = q.ToleranciaReg_lunh,
                                      Estado = q.Estado,
-                                     Descripcion = q.Descripcion
+                                     Descripcion = q.Descripcion,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 

@@ -50,7 +50,9 @@ namespace Core.Erp.Data.RRHH
                                  pe_nombre_completo=q.pe_apellido+" "+q.pe_nombre,
                                  Valor_pendiente=q.Valor_pendiente,
                                  TotalCobrado=q.TotalCobrado,
-                                 ru_descripcion=q.ru_descripcion
+                                 ru_descripcion=q.ru_descripcion,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
 
 
                              }).ToList();

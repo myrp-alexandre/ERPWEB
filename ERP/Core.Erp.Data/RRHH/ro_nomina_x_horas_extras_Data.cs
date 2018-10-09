@@ -41,11 +41,13 @@ namespace Core.Erp.Data.RRHH
                                  DescripcionProcesoNomina=nt.DescripcionProcesoNomina,
                                  pe_FechaIni=p.pe_FechaIni,
                                  pe_FechaFin=p.pe_FechaFin,
-                                 Estado=he.Estado
-                                     
+                                 Estado=he.Estado,
+
+                                 EstadoBool = he.Estado == "A" ? true : false
 
 
-                                 }).ToList();
+
+                             }).ToList();
 
                 }
 

@@ -29,7 +29,9 @@ namespace Core.Erp.Data.RRHH
                                      Cod_region=q.Cod_region,
                                      pe_mes=q.pe_mes,
                                      pe_anio=q.pe_anio,
-                                     pe_estado=q.pe_estado
+                                     pe_estado=q.pe_estado,
+
+                                     EstadoBool = q.pe_estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.ro_periodo
@@ -45,7 +47,9 @@ namespace Core.Erp.Data.RRHH
                                      Cod_region = q.Cod_region,
                                      pe_mes = q.pe_mes,
                                      pe_anio = q.pe_anio,
-                                     pe_estado = q.pe_estado
+                                     pe_estado = q.pe_estado,
+
+                                     EstadoBool = q.pe_estado == "A" ? true : false
                                  }).ToList();
                 }
                 foreach (var item in Lista)
