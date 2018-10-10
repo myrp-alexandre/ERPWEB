@@ -33,6 +33,7 @@ namespace Core.Erp.Info.RRHH
         public string Observacion { get; set; }
         public string IdUsuario { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public System.DateTime Fecha_Transac { get; set; }
         public string Ip { get; set; }
         public string IdUsuarioUltModi { get; set; }

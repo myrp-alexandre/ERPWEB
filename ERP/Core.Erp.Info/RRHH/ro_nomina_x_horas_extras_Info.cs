@@ -18,6 +18,7 @@ namespace Core.Erp.Info.RRHH
         [Required(ErrorMessage = "El campo periodo es obligatorio")]
         public int IdPeriodo { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }

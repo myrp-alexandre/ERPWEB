@@ -71,8 +71,7 @@
         settings.Columns.Add("IdCatalogo", "ID").Width = Unit.Percentage(8);
         settings.Columns.Add("CodCatalogo","Código").Width = Unit.Percentage(8);
         settings.Columns.Add("ca_descripcion","Descripción").Width = Unit.Percentage(68);
-        settings.Columns.Add("ca_orden","Orden").Width = Unit.Percentage(8);
-        settings.Columns.Add("ca_estado","Estado").Width = Unit.Percentage(8);
+
     });
 }
 @grid.Bind(Model).GetHtml()

@@ -27,7 +27,9 @@ namespace Core.Erp.Data.RRHH
                                  FechaInicio=q.FechaInicio,
                                  FechaFin=q.FechaFin,
                                  IdNomina=q.IdNomina,
-                                 
+
+                                 EstadoBool = q.Estado == "A" ? true : false
+
                              }).ToList();
                   
                 }

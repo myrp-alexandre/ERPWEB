@@ -36,7 +36,9 @@ namespace Core.Erp.Data.RRHH
                                      rub_Contabiliza_x_empleado = q.rub_Contabiliza_x_empleado ,
                                      rub_ctacon = q.rub_ctacon,
                                     ru_estado = q.ru_estado,
-                                     rub_acumula_descuento = q.rub_acumula_descuento
+                                     rub_acumula_descuento = q.rub_acumula_descuento,
+
+                                     EstadoBool = q.ru_estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.ro_rubro_tipo
@@ -59,7 +61,9 @@ namespace Core.Erp.Data.RRHH
                                      rub_Contabiliza_x_empleado = q.rub_Contabiliza_x_empleado,
                                      rub_ctacon = q.rub_ctacon,
                                      ru_estado = q.ru_estado,
-                                     rub_acumula_descuento = q.rub_acumula_descuento
+                                     rub_acumula_descuento = q.rub_acumula_descuento,
+
+                                     EstadoBool = q.ru_estado == "A" ? true : false
 
                                  }).ToList();
                 }

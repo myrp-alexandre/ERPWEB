@@ -32,7 +32,9 @@ namespace Core.Erp.Data.RRHH
                                  Ingresos = q.Ingresos,
                                  Egresos = q.Egresos,
                                  Estado = q.EstadoActa,
-                                 Contrato_tipo = q.CodCatalogo
+                                 Contrato_tipo = q.CodCatalogo,
+
+                                 EstadoBool = q.EstadoActa == "A" ? true : false
                              }).ToList();
 
                 }

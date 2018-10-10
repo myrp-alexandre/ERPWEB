@@ -34,6 +34,7 @@ namespace Core.Erp.Info.RRHH
         public string IdUsuario_anula { get; set; }
         public Nullable<System.DateTime> Fecha_anulacion { get; set; }
         public String Estado { get; set; }
+        public bool EstadoBool { get; set; }
         // vista
         public string Cerrado { get; set; }
         public string Procesado { get; set; }

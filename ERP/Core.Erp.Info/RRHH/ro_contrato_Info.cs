@@ -24,6 +24,7 @@ namespace Core.Erp.Info.RRHH
         [DataType(DataType.Date)]
         public System.DateTime FechaFin { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         [Required(ErrorMessage = "El campo observación es obligatorio")]
         [StringLength(200, MinimumLength = 4, ErrorMessage = "La descripción debe tener mínimo 4 caracteres y máximo 200")]
         public string Observacion { get; set; }

@@ -31,7 +31,9 @@ namespace Core.Erp.Data.RRHH
                                      FechaDefucion=q.FechaDefucion,
                                      FechaNacimiento=q.FechaNacimiento,
                                       TipoFamiliar=q.TipoFamiliar,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.ro_cargaFamiliar
@@ -49,7 +51,9 @@ namespace Core.Erp.Data.RRHH
                                      FechaDefucion = q.FechaDefucion,
                                      FechaNacimiento = q.FechaNacimiento,
                                      TipoFamiliar = q.TipoFamiliar,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 
@@ -86,7 +90,9 @@ namespace Core.Erp.Data.RRHH
                                      FechaDefucion = q.FechaDefucion,
                                      FechaNacimiento = q.FechaNacimiento,
                                      TipoFamiliar = q.TipoFamiliar,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
 

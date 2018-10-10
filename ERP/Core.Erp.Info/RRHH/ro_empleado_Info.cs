@@ -36,6 +36,7 @@ namespace Core.Erp.Info.RRHH
         public string em_SepagaBeneficios { get; set; }
         public string em_SePagaConTablaSec { get; set; }
         public string em_estado { get; set; }
+        public bool EstadoBool { get; set; }
         public double em_sueldoBasicoMen { get; set; }
         public Nullable<double> em_SueldoExtraMen { get; set; }
         public Nullable<double> em_MovilizacionQuincenal { get; set; }

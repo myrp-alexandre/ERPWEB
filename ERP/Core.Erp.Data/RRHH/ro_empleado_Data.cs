@@ -94,7 +94,9 @@ namespace Core.Erp.Data.RRHH
                                      pe_cedulaRuc=q.pe_cedulaRuc,
                                      em_codigo=q.em_codigo,
                                      em_fechaIngaRol=q.em_fechaIngaRol,
-                                     IdPersona=q.IdPersona
+                                     IdPersona=q.IdPersona,
+
+                                     EstadoBool = q.em_estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.vwro_empleados_consulta
@@ -110,7 +112,9 @@ namespace Core.Erp.Data.RRHH
                                      pe_cedulaRuc = q.pe_cedulaRuc,
                                      em_codigo = q.em_codigo,
                                      em_fechaIngaRol = q.em_fechaIngaRol,
-                                     IdPersona = q.IdPersona
+                                     IdPersona = q.IdPersona,
+
+                                     EstadoBool = q.em_estado == "A" ? true : false
                                  }).ToList();
                 }
 

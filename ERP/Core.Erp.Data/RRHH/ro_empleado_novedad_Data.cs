@@ -38,7 +38,9 @@ namespace Core.Erp.Data.RRHH
                                      pe_cedulaRuc = q.pe_cedulaRuc,
                                      pe_nombreCompleto = q.pe_apellido + " " + q.pe_nombre,
                                      Observacion = q.Observacion,
-                                     TotalValor = q.TotalValor
+                                     TotalValor = q.TotalValor,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
 
                 }

@@ -86,9 +86,18 @@
         settings.Columns.Add("IdNomina_TipoLiqui", "ID").Width=Unit.Percentage(10);
         settings.Columns.Add("Descripcion", "Nómina").Width = Unit.Percentage(40);
         settings.Columns.Add("DescripcionProcesoNomina","Tipo liquidación de nómina").Width = Unit.Percentage(40);
-        settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
     });
 
-   
+
 }
 @grid.Bind(Model).GetHtml()

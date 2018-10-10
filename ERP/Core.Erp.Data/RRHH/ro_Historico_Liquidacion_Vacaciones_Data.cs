@@ -34,7 +34,9 @@ namespace Core.Erp.Data.RRHH
                                  Observaciones=q.Observaciones,
                                  Periodo=q.Periodo,
                                  FechaPago=q.FechaPago,
-                                 Estado=q.Estado
+                                 Estado=q.Estado,
+
+                                 EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                 }
                 return Lista;

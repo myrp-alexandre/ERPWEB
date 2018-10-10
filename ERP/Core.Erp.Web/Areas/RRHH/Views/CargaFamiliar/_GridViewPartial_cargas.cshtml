@@ -72,8 +72,16 @@
         settings.Columns.Add("TipoFamiliar","Parentezco").Width = Unit.Percentage(10);
         settings.Columns.Add("Nombres","Nombres").Width = Unit.Percentage(30);
         settings.Columns.Add("FechaNacimiento","Fecha nac./matrimonio").Width = Unit.Percentage(10);
-        settings.Columns.Add("Estado","Estado").Width = Unit.Percentage(5);
-        settings.Columns.Add("capacidades_especiales","Capacidades especiales").Width = Unit.Percentage(20);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        }); settings.Columns.Add("capacidades_especiales","Capacidades especiales").Width = Unit.Percentage(20);
     });
 }
 @grid.Bind(Model).GetHtml()

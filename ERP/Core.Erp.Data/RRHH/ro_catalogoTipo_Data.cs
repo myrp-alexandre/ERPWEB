@@ -24,7 +24,9 @@ namespace Core.Erp.Data.RRHH
                                      Codigo = q.Codigo,
                                      tc_Descripcion = q.tc_Descripcion,
                                      IdTipoCatalogo = q.IdTipoCatalogo,
-                                     ca_estado=q.ca_estado
+                                     ca_estado=q.ca_estado,
+
+                                     EstadoBool = q.ca_estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.ro_catalogoTipo
@@ -34,7 +36,9 @@ namespace Core.Erp.Data.RRHH
                                      Codigo = q.Codigo,
                                      tc_Descripcion = q.tc_Descripcion,
                                      IdTipoCatalogo = q.IdTipoCatalogo,
-                                     ca_estado = q.ca_estado
+                                     ca_estado = q.ca_estado,
+
+                                     EstadoBool = q.ca_estado == "A" ? true : false
                                  }).ToList();
 
                 }

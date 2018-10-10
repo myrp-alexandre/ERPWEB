@@ -36,8 +36,10 @@ namespace Core.Erp.Data.RRHH
                                      Estado = cont.Estado,
                                      Empleado=emp.Empleado,
                                      Contrato=cat.ca_descripcion,
-                                     EstadoContrato=cont.EstadoContrato
-                                     
+                                     EstadoContrato=cont.EstadoContrato,
+
+                                     EstadoBool = cont.Estado == "A" ? true : false
+
                                  }).ToList();
                    
                 }
@@ -74,7 +76,9 @@ namespace Core.Erp.Data.RRHH
                                  FechaFin = cont.FechaFin,
                                  NumDocumento = cont.NumDocumento,
                                  Estado = cont.Estado,
-                                 EstadoContrato = cont.EstadoContrato
+                                 EstadoContrato = cont.EstadoContrato,
+
+                                 EstadoBool = cont.Estado == "A" ? true : false
 
                              }).ToList();
 

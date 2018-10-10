@@ -44,7 +44,9 @@ namespace Core.Erp.Data.RRHH
                                      pe_cedulaRuc=q.pe_cedulaRuc,
                                      pe_nombre_completo=q.pe_apellido+" "+q.pe_nombre,
                                      Estado = q.Estado,
-                                     IdLiquidacion=q.IdLiquidacion
+                                     IdLiquidacion=q.IdLiquidacion,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.vwRo_Solicitud_Vacaciones
@@ -72,7 +74,9 @@ namespace Core.Erp.Data.RRHH
                                      Observacion = q.Observacion,
                                      Gozadas_Pgadas = q.Gozadas_Pgadas,
                                      Estado = q.Estado,
-                                     IdLiquidacion = q.IdLiquidacion
+                                     IdLiquidacion = q.IdLiquidacion,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
 
                                  }).ToList();
                 }

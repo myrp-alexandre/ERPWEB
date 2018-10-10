@@ -34,6 +34,7 @@ namespace Core.Erp.Info.RRHH
         public string ip { get; set; }
         public string MotiAnula { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string IdCentroCosto { get; set; }
         public string MotivoModiica { get; set; }
         public string IdCalendario { get; set; }

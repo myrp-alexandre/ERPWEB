@@ -20,6 +20,7 @@ namespace Core.Erp.Info.RRHH
         [DataType(DataType.Date)]
         public System.DateTime pe_FechaFin { get; set; }
         public string pe_estado { get; set; }
+        public bool EstadoBool { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltMod { get; set; }

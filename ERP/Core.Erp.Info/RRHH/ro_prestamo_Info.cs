@@ -21,6 +21,7 @@ namespace Core.Erp.Info.RRHH
         public bool descuento_quincena { get; set; }
         public bool descuento_men_quin { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public System.DateTime Fecha { get; set; }
         [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Ingrese solo numeros")]
         [Required(ErrorMessage = "El campo monto es obligatorio")]

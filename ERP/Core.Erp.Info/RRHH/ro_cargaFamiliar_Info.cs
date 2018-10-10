@@ -26,6 +26,7 @@ namespace Core.Erp.Info.RRHH
         [Required(ErrorMessage = "El campo fecha es obligatorio")]
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public Nullable<System.DateTime> FechaDefucion { get; set; }
         public bool capacidades_especiales { get; set; }
     }

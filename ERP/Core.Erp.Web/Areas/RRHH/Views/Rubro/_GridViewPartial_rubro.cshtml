@@ -82,8 +82,16 @@
         settings.Columns.Add("ru_codRolGen","Código reporte").Width = Unit.Percentage(10);
         settings.Columns.Add("ru_descripcion","Descripción").Width = Unit.Percentage(50);
         settings.Columns.Add("NombreCorto","Descripción corta").Width = Unit.Percentage(20);
-        settings.Columns.Add("ru_estado", "Estado").Width = Unit.Percentage(5);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
 
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()
