@@ -9184,7 +9184,14 @@
     <Content Include="Areas\Contabilidad\Views\RevisionContable\_GridViewPartial_Facturacion.cshtml" />
     <Content Include="Areas\Caja\Views\Caja\_CmbCuenta_Caja.cshtml" />
     <Content Include="Areas\Caja\Views\TipoMovimientoCaja\_CmbCuenta_Tipo_movimiento.cshtml" />
-    <Content Include="Areas\ActivoFijo\Views\ParametroAF\_CmbCuenta_Parametro.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ParametroAF\_CmbCuenta_Param1.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ParametroAF\_CmbCuenta_Param2.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ParametroAF\_CmbCuenta_Param3.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ParametrosCXP\_CmbCuenta_Param1.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ParametrosCXP\_CmbCuenta_Param2.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ParametrosCXP\_CmbCuenta_Param5.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ParametrosCXP\_CmbCuenta_Param4.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\ParametrosCXP\_CmbCuenta_Param3.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

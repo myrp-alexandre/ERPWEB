@@ -1,7 +1,9 @@
 ﻿using Core.Erp.Bus.ActivoFijo;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.ActivoFijo;
+using Core.Erp.Info.Contabilidad;
 using Core.Erp.Web.Helps;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -58,5 +60,35 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         }
 
         #endregion
+
+
+        #region Metodos ComboBox bajo demanda
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        public ActionResult CmbCuenta_Param1()
+        {
+            Af_Parametros_Info model = new Af_Parametros_Info();
+            return PartialView("_CmbCuenta_Param1", model);
+        }
+        public ActionResult CmbCuenta_Param2()
+        {
+            Af_Parametros_Info model = new Af_Parametros_Info();
+            return PartialView("_CmbCuenta_Param2", model);
+        }
+        public ActionResult CmbCuenta_Param3()
+        {
+            Af_Parametros_Info model = new Af_Parametros_Info();
+            return PartialView("_CmbCuenta_Param3", model);
+        }
+
+        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
     }
 }
