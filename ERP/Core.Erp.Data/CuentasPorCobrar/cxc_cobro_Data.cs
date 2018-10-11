@@ -913,21 +913,25 @@ namespace Core.Erp.Data.CuentasPorCobrar
                             IdUsuarioAnu = info.IdUsuarioUltAnu
                         }))
                         {
-                            var cobro_tipo = Context.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == Entity.IdCobro_tipo).FirstOrDefault();
-                            if (cobro_tipo.tc_Que_Tipo_Registro_Genera == cl_enumeradores.eTipoCobroGenera.MOVI_CAJA.ToString())
+                            if (Entity.IdCobro_tipo != null)
                             {
-                                caj_Caja_Movimiento_Data odata_caj = new caj_Caja_Movimiento_Data();
-                                odata_caj.anularDB(new Info.Caja.caj_Caja_Movimiento_Info
+                                var cobro_tipo = Context.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == Entity.IdCobro_tipo).FirstOrDefault();
+
+                                if (cobro_tipo.tc_Que_Tipo_Registro_Genera == cl_enumeradores.eTipoCobroGenera.MOVI_CAJA.ToString())
                                 {
-                                    IdEmpresa = relacion.ct_IdEmpresa,
-                                    IdTipocbte = relacion.ct_IdTipoCbte,
-                                    IdCbteCble = relacion.ct_IdCbteCble,
-                                    IdUsuario = info.IdUsuarioUltAnu,
-                                    IdUsuario_Anu = info.IdUsuarioUltAnu
-                                });
+                                    caj_Caja_Movimiento_Data odata_caj = new caj_Caja_Movimiento_Data();
+                                    odata_caj.anularDB(new Info.Caja.caj_Caja_Movimiento_Info
+                                    {
+                                        IdEmpresa = relacion.ct_IdEmpresa,
+                                        IdTipocbte = relacion.ct_IdTipoCbte,
+                                        IdCbteCble = relacion.ct_IdCbteCble,
+                                        IdUsuario = info.IdUsuarioUltAnu,
+                                        IdUsuario_Anu = info.IdUsuarioUltAnu
+                                    });
+                                }
                             }
                         }
-                    }                    
+                    }             
 
                     Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                     Entity.Fecha_UltAnu = DateTime.Now;
