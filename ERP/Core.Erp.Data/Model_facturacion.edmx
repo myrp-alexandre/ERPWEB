@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model_facturacion.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model_facturacion.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="fa_catalogo">
           <Key>
             <PropertyRef Name="IdCatalogo" />
@@ -59,6 +59,7 @@
           <Property Name="es_empresa_relacionada" Type="bit" />
           <Property Name="NivelPrecio" Type="int" />
           <Property Name="FormaPago" Type="varchar" MaxLength="2" />
+          <Property Name="EsClienteExportador" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="fa_cliente_contactos">
           <Key>
@@ -1834,335 +1835,335 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
           <EntitySet Name="fa_Vendedor" EntityType="Self.fa_Vendedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vwfa_cliente_contactos" EntityType="Self.vwfa_cliente_contactos" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwfa_cliente_contactos].[IdEmpresa] AS [IdEmpresa], 
-[vwfa_cliente_contactos].[IdCliente] AS [IdCliente], 
-[vwfa_cliente_contactos].[IdContacto] AS [IdContacto], 
-[vwfa_cliente_contactos].[Nombres] AS [Nombres], 
-[vwfa_cliente_contactos].[Telefono] AS [Telefono], 
-[vwfa_cliente_contactos].[Celular] AS [Celular], 
-[vwfa_cliente_contactos].[Correo] AS [Correo], 
-[vwfa_cliente_contactos].[Direccion] AS [Direccion], 
-[vwfa_cliente_contactos].[IdCiudad] AS [IdCiudad], 
-[vwfa_cliente_contactos].[IdParroquia] AS [IdParroquia], 
-[vwfa_cliente_contactos].[nom_parroquia] AS [nom_parroquia], 
-[vwfa_cliente_contactos].[Descripcion_Ciudad] AS [Descripcion_Ciudad]
-FROM [dbo].[vwfa_cliente_contactos] AS [vwfa_cliente_contactos]</DefiningQuery>
+    [vwfa_cliente_contactos].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_cliente_contactos].[IdCliente] AS [IdCliente], 
+    [vwfa_cliente_contactos].[IdContacto] AS [IdContacto], 
+    [vwfa_cliente_contactos].[Nombres] AS [Nombres], 
+    [vwfa_cliente_contactos].[Telefono] AS [Telefono], 
+    [vwfa_cliente_contactos].[Celular] AS [Celular], 
+    [vwfa_cliente_contactos].[Correo] AS [Correo], 
+    [vwfa_cliente_contactos].[Direccion] AS [Direccion], 
+    [vwfa_cliente_contactos].[IdCiudad] AS [IdCiudad], 
+    [vwfa_cliente_contactos].[IdParroquia] AS [IdParroquia], 
+    [vwfa_cliente_contactos].[nom_parroquia] AS [nom_parroquia], 
+    [vwfa_cliente_contactos].[Descripcion_Ciudad] AS [Descripcion_Ciudad]
+    FROM [dbo].[vwfa_cliente_contactos] AS [vwfa_cliente_contactos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_proforma" EntityType="Self.vwfa_proforma" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwfa_proforma].[IdEmpresa] AS [IdEmpresa], 
-[vwfa_proforma].[IdSucursal] AS [IdSucursal], 
-[vwfa_proforma].[IdProforma] AS [IdProforma], 
-[vwfa_proforma].[IdCliente] AS [IdCliente], 
-[vwfa_proforma].[IdTerminoPago] AS [IdTerminoPago], 
-[vwfa_proforma].[pf_plazo] AS [pf_plazo], 
-[vwfa_proforma].[pf_codigo] AS [pf_codigo], 
-[vwfa_proforma].[pf_observacion] AS [pf_observacion], 
-[vwfa_proforma].[pf_fecha] AS [pf_fecha], 
-[vwfa_proforma].[pf_fecha_vcto] AS [pf_fecha_vcto], 
-[vwfa_proforma].[Su_Descripcion] AS [Su_Descripcion], 
-[vwfa_proforma].[pe_nombreCompleto] AS [pe_nombreCompleto], 
-[vwfa_proforma].[pd_subtotal] AS [pd_subtotal], 
-[vwfa_proforma].[pd_iva] AS [pd_iva], 
-[vwfa_proforma].[pd_total] AS [pd_total], 
-[vwfa_proforma].[estado] AS [estado], 
-[vwfa_proforma].[IdUsuario_creacion] AS [IdUsuario_creacion], 
-[vwfa_proforma].[fecha_creacion] AS [fecha_creacion], 
-[vwfa_proforma].[IdUsuario_modificacion] AS [IdUsuario_modificacion], 
-[vwfa_proforma].[fecha_modificacion] AS [fecha_modificacion], 
-[vwfa_proforma].[IdUsuario_anulacion] AS [IdUsuario_anulacion], 
-[vwfa_proforma].[fecha_anulacion] AS [fecha_anulacion], 
-[vwfa_proforma].[IdBodega] AS [IdBodega], 
-[vwfa_proforma].[IdVendedor] AS [IdVendedor], 
-[vwfa_proforma].[pf_atencion_a] AS [pf_atencion_a], 
-[vwfa_proforma].[pr_dias_entrega] AS [pr_dias_entrega], 
-[vwfa_proforma].[EstadoCierre] AS [EstadoCierre]
-FROM [dbo].[vwfa_proforma] AS [vwfa_proforma]</DefiningQuery>
+    [vwfa_proforma].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_proforma].[IdSucursal] AS [IdSucursal], 
+    [vwfa_proforma].[IdProforma] AS [IdProforma], 
+    [vwfa_proforma].[IdCliente] AS [IdCliente], 
+    [vwfa_proforma].[IdTerminoPago] AS [IdTerminoPago], 
+    [vwfa_proforma].[pf_plazo] AS [pf_plazo], 
+    [vwfa_proforma].[pf_codigo] AS [pf_codigo], 
+    [vwfa_proforma].[pf_observacion] AS [pf_observacion], 
+    [vwfa_proforma].[pf_fecha] AS [pf_fecha], 
+    [vwfa_proforma].[pf_fecha_vcto] AS [pf_fecha_vcto], 
+    [vwfa_proforma].[Su_Descripcion] AS [Su_Descripcion], 
+    [vwfa_proforma].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwfa_proforma].[pd_subtotal] AS [pd_subtotal], 
+    [vwfa_proforma].[pd_iva] AS [pd_iva], 
+    [vwfa_proforma].[pd_total] AS [pd_total], 
+    [vwfa_proforma].[estado] AS [estado], 
+    [vwfa_proforma].[IdUsuario_creacion] AS [IdUsuario_creacion], 
+    [vwfa_proforma].[fecha_creacion] AS [fecha_creacion], 
+    [vwfa_proforma].[IdUsuario_modificacion] AS [IdUsuario_modificacion], 
+    [vwfa_proforma].[fecha_modificacion] AS [fecha_modificacion], 
+    [vwfa_proforma].[IdUsuario_anulacion] AS [IdUsuario_anulacion], 
+    [vwfa_proforma].[fecha_anulacion] AS [fecha_anulacion], 
+    [vwfa_proforma].[IdBodega] AS [IdBodega], 
+    [vwfa_proforma].[IdVendedor] AS [IdVendedor], 
+    [vwfa_proforma].[pf_atencion_a] AS [pf_atencion_a], 
+    [vwfa_proforma].[pr_dias_entrega] AS [pr_dias_entrega], 
+    [vwfa_proforma].[EstadoCierre] AS [EstadoCierre]
+    FROM [dbo].[vwfa_proforma] AS [vwfa_proforma]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_proforma_det" EntityType="Self.vwfa_proforma_det" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwfa_proforma_det].[IdEmpresa] AS [IdEmpresa], 
-[vwfa_proforma_det].[IdSucursal] AS [IdSucursal], 
-[vwfa_proforma_det].[IdProforma] AS [IdProforma], 
-[vwfa_proforma_det].[Secuencia] AS [Secuencia], 
-[vwfa_proforma_det].[IdProducto] AS [IdProducto], 
-[vwfa_proforma_det].[pd_cantidad] AS [pd_cantidad], 
-[vwfa_proforma_det].[pd_precio] AS [pd_precio], 
-[vwfa_proforma_det].[pd_por_descuento_uni] AS [pd_por_descuento_uni], 
-[vwfa_proforma_det].[pd_descuento_uni] AS [pd_descuento_uni], 
-[vwfa_proforma_det].[pd_precio_final] AS [pd_precio_final], 
-[vwfa_proforma_det].[pd_subtotal] AS [pd_subtotal], 
-[vwfa_proforma_det].[IdCod_Impuesto] AS [IdCod_Impuesto], 
-[vwfa_proforma_det].[pd_por_iva] AS [pd_por_iva], 
-[vwfa_proforma_det].[pd_iva] AS [pd_iva], 
-[vwfa_proforma_det].[pd_total] AS [pd_total], 
-[vwfa_proforma_det].[anulado] AS [anulado], 
-[vwfa_proforma_det].[pr_descripcion] AS [pr_descripcion], 
-[vwfa_proforma_det].[nom_presentacion] AS [nom_presentacion], 
-[vwfa_proforma_det].[lote_num_lote] AS [lote_num_lote], 
-[vwfa_proforma_det].[lote_fecha_vcto] AS [lote_fecha_vcto]
-FROM [dbo].[vwfa_proforma_det] AS [vwfa_proforma_det]</DefiningQuery>
+    [vwfa_proforma_det].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_proforma_det].[IdSucursal] AS [IdSucursal], 
+    [vwfa_proforma_det].[IdProforma] AS [IdProforma], 
+    [vwfa_proforma_det].[Secuencia] AS [Secuencia], 
+    [vwfa_proforma_det].[IdProducto] AS [IdProducto], 
+    [vwfa_proforma_det].[pd_cantidad] AS [pd_cantidad], 
+    [vwfa_proforma_det].[pd_precio] AS [pd_precio], 
+    [vwfa_proforma_det].[pd_por_descuento_uni] AS [pd_por_descuento_uni], 
+    [vwfa_proforma_det].[pd_descuento_uni] AS [pd_descuento_uni], 
+    [vwfa_proforma_det].[pd_precio_final] AS [pd_precio_final], 
+    [vwfa_proforma_det].[pd_subtotal] AS [pd_subtotal], 
+    [vwfa_proforma_det].[IdCod_Impuesto] AS [IdCod_Impuesto], 
+    [vwfa_proforma_det].[pd_por_iva] AS [pd_por_iva], 
+    [vwfa_proforma_det].[pd_iva] AS [pd_iva], 
+    [vwfa_proforma_det].[pd_total] AS [pd_total], 
+    [vwfa_proforma_det].[anulado] AS [anulado], 
+    [vwfa_proforma_det].[pr_descripcion] AS [pr_descripcion], 
+    [vwfa_proforma_det].[nom_presentacion] AS [nom_presentacion], 
+    [vwfa_proforma_det].[lote_num_lote] AS [lote_num_lote], 
+    [vwfa_proforma_det].[lote_fecha_vcto] AS [lote_fecha_vcto]
+    FROM [dbo].[vwfa_proforma_det] AS [vwfa_proforma_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_proforma_det_por_facturar" EntityType="Self.vwfa_proforma_det_por_facturar" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwfa_proforma_det_por_facturar].[IdEmpresa] AS [IdEmpresa], 
-[vwfa_proforma_det_por_facturar].[IdSucursal] AS [IdSucursal], 
-[vwfa_proforma_det_por_facturar].[IdProforma] AS [IdProforma], 
-[vwfa_proforma_det_por_facturar].[Secuencia] AS [Secuencia], 
-[vwfa_proforma_det_por_facturar].[IdProducto] AS [IdProducto], 
-[vwfa_proforma_det_por_facturar].[pd_cantidad] AS [pd_cantidad], 
-[vwfa_proforma_det_por_facturar].[pd_precio] AS [pd_precio], 
-[vwfa_proforma_det_por_facturar].[pd_por_descuento_uni] AS [pd_por_descuento_uni], 
-[vwfa_proforma_det_por_facturar].[pd_descuento_uni] AS [pd_descuento_uni], 
-[vwfa_proforma_det_por_facturar].[pd_precio_final] AS [pd_precio_final], 
-[vwfa_proforma_det_por_facturar].[pd_subtotal] AS [pd_subtotal], 
-[vwfa_proforma_det_por_facturar].[IdCod_Impuesto] AS [IdCod_Impuesto], 
-[vwfa_proforma_det_por_facturar].[pd_por_iva] AS [pd_por_iva], 
-[vwfa_proforma_det_por_facturar].[pd_iva] AS [pd_iva], 
-[vwfa_proforma_det_por_facturar].[pd_total] AS [pd_total], 
-[vwfa_proforma_det_por_facturar].[anulado] AS [anulado], 
-[vwfa_proforma_det_por_facturar].[pr_descripcion] AS [pr_descripcion], 
-[vwfa_proforma_det_por_facturar].[nom_presentacion] AS [nom_presentacion], 
-[vwfa_proforma_det_por_facturar].[lote_num_lote] AS [lote_num_lote], 
-[vwfa_proforma_det_por_facturar].[lote_fecha_vcto] AS [lote_fecha_vcto], 
-[vwfa_proforma_det_por_facturar].[IdCliente] AS [IdCliente], 
-[vwfa_proforma_det_por_facturar].[se_distribuye] AS [se_distribuye], 
-[vwfa_proforma_det_por_facturar].[tp_ManejaInven] AS [tp_ManejaInven]
-FROM [dbo].[vwfa_proforma_det_por_facturar] AS [vwfa_proforma_det_por_facturar]</DefiningQuery>
+    [vwfa_proforma_det_por_facturar].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_proforma_det_por_facturar].[IdSucursal] AS [IdSucursal], 
+    [vwfa_proforma_det_por_facturar].[IdProforma] AS [IdProforma], 
+    [vwfa_proforma_det_por_facturar].[Secuencia] AS [Secuencia], 
+    [vwfa_proforma_det_por_facturar].[IdProducto] AS [IdProducto], 
+    [vwfa_proforma_det_por_facturar].[pd_cantidad] AS [pd_cantidad], 
+    [vwfa_proforma_det_por_facturar].[pd_precio] AS [pd_precio], 
+    [vwfa_proforma_det_por_facturar].[pd_por_descuento_uni] AS [pd_por_descuento_uni], 
+    [vwfa_proforma_det_por_facturar].[pd_descuento_uni] AS [pd_descuento_uni], 
+    [vwfa_proforma_det_por_facturar].[pd_precio_final] AS [pd_precio_final], 
+    [vwfa_proforma_det_por_facturar].[pd_subtotal] AS [pd_subtotal], 
+    [vwfa_proforma_det_por_facturar].[IdCod_Impuesto] AS [IdCod_Impuesto], 
+    [vwfa_proforma_det_por_facturar].[pd_por_iva] AS [pd_por_iva], 
+    [vwfa_proforma_det_por_facturar].[pd_iva] AS [pd_iva], 
+    [vwfa_proforma_det_por_facturar].[pd_total] AS [pd_total], 
+    [vwfa_proforma_det_por_facturar].[anulado] AS [anulado], 
+    [vwfa_proforma_det_por_facturar].[pr_descripcion] AS [pr_descripcion], 
+    [vwfa_proforma_det_por_facturar].[nom_presentacion] AS [nom_presentacion], 
+    [vwfa_proforma_det_por_facturar].[lote_num_lote] AS [lote_num_lote], 
+    [vwfa_proforma_det_por_facturar].[lote_fecha_vcto] AS [lote_fecha_vcto], 
+    [vwfa_proforma_det_por_facturar].[IdCliente] AS [IdCliente], 
+    [vwfa_proforma_det_por_facturar].[se_distribuye] AS [se_distribuye], 
+    [vwfa_proforma_det_por_facturar].[tp_ManejaInven] AS [tp_ManejaInven]
+    FROM [dbo].[vwfa_proforma_det_por_facturar] AS [vwfa_proforma_det_por_facturar]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_cliente_consulta" EntityType="Self.vwfa_cliente_consulta" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwfa_cliente_consulta].[IdEmpresa] AS [IdEmpresa], 
-[vwfa_cliente_consulta].[IdCliente] AS [IdCliente], 
-[vwfa_cliente_consulta].[Codigo] AS [Codigo], 
-[vwfa_cliente_consulta].[IdPersona] AS [IdPersona], 
-[vwfa_cliente_consulta].[pe_nombreCompleto] AS [pe_nombreCompleto], 
-[vwfa_cliente_consulta].[Idtipo_cliente] AS [Idtipo_cliente], 
-[vwfa_cliente_consulta].[pe_cedulaRuc] AS [pe_cedulaRuc], 
-[vwfa_cliente_consulta].[Estado] AS [Estado]
-FROM [web].[vwfa_cliente_consulta] AS [vwfa_cliente_consulta]</DefiningQuery>
+    [vwfa_cliente_consulta].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_cliente_consulta].[IdCliente] AS [IdCliente], 
+    [vwfa_cliente_consulta].[Codigo] AS [Codigo], 
+    [vwfa_cliente_consulta].[IdPersona] AS [IdPersona], 
+    [vwfa_cliente_consulta].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwfa_cliente_consulta].[Idtipo_cliente] AS [Idtipo_cliente], 
+    [vwfa_cliente_consulta].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [vwfa_cliente_consulta].[Estado] AS [Estado]
+    FROM [web].[vwfa_cliente_consulta] AS [vwfa_cliente_consulta]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_factura" EntityType="Self.vwfa_factura" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwfa_factura].[IdEmpresa] AS [IdEmpresa], 
-[vwfa_factura].[IdSucursal] AS [IdSucursal], 
-[vwfa_factura].[IdBodega] AS [IdBodega], 
-[vwfa_factura].[IdCbteVta] AS [IdCbteVta], 
-[vwfa_factura].[vt_NumFactura] AS [vt_NumFactura], 
-[vwfa_factura].[vt_fecha] AS [vt_fecha], 
-[vwfa_factura].[Nombres] AS [Nombres], 
-[vwfa_factura].[Ve_Vendedor] AS [Ve_Vendedor], 
-[vwfa_factura].[vt_Subtotal0] AS [vt_Subtotal0], 
-[vwfa_factura].[vt_SubtotalIVA] AS [vt_SubtotalIVA], 
-[vwfa_factura].[vt_iva] AS [vt_iva], 
-[vwfa_factura].[vt_total] AS [vt_total], 
-[vwfa_factura].[Estado] AS [Estado], 
-[vwfa_factura].[esta_impresa] AS [esta_impresa], 
-[vwfa_factura].[IdEmpresa_in_eg_x_inv] AS [IdEmpresa_in_eg_x_inv], 
-[vwfa_factura].[IdSucursal_in_eg_x_inv] AS [IdSucursal_in_eg_x_inv], 
-[vwfa_factura].[IdMovi_inven_tipo_in_eg_x_inv] AS [IdMovi_inven_tipo_in_eg_x_inv], 
-[vwfa_factura].[IdNumMovi_in_eg_x_inv] AS [IdNumMovi_in_eg_x_inv]
-FROM [web].[vwfa_factura] AS [vwfa_factura]</DefiningQuery>
+    [vwfa_factura].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_factura].[IdSucursal] AS [IdSucursal], 
+    [vwfa_factura].[IdBodega] AS [IdBodega], 
+    [vwfa_factura].[IdCbteVta] AS [IdCbteVta], 
+    [vwfa_factura].[vt_NumFactura] AS [vt_NumFactura], 
+    [vwfa_factura].[vt_fecha] AS [vt_fecha], 
+    [vwfa_factura].[Nombres] AS [Nombres], 
+    [vwfa_factura].[Ve_Vendedor] AS [Ve_Vendedor], 
+    [vwfa_factura].[vt_Subtotal0] AS [vt_Subtotal0], 
+    [vwfa_factura].[vt_SubtotalIVA] AS [vt_SubtotalIVA], 
+    [vwfa_factura].[vt_iva] AS [vt_iva], 
+    [vwfa_factura].[vt_total] AS [vt_total], 
+    [vwfa_factura].[Estado] AS [Estado], 
+    [vwfa_factura].[esta_impresa] AS [esta_impresa], 
+    [vwfa_factura].[IdEmpresa_in_eg_x_inv] AS [IdEmpresa_in_eg_x_inv], 
+    [vwfa_factura].[IdSucursal_in_eg_x_inv] AS [IdSucursal_in_eg_x_inv], 
+    [vwfa_factura].[IdMovi_inven_tipo_in_eg_x_inv] AS [IdMovi_inven_tipo_in_eg_x_inv], 
+    [vwfa_factura].[IdNumMovi_in_eg_x_inv] AS [IdNumMovi_in_eg_x_inv]
+    FROM [web].[vwfa_factura] AS [vwfa_factura]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_factura_det" EntityType="Self.vwfa_factura_det" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwfa_factura_det].[IdEmpresa] AS [IdEmpresa], 
-[vwfa_factura_det].[IdSucursal] AS [IdSucursal], 
-[vwfa_factura_det].[IdBodega] AS [IdBodega], 
-[vwfa_factura_det].[IdCbteVta] AS [IdCbteVta], 
-[vwfa_factura_det].[Secuencia] AS [Secuencia], 
-[vwfa_factura_det].[IdProducto] AS [IdProducto], 
-[vwfa_factura_det].[vt_cantidad] AS [vt_cantidad], 
-[vwfa_factura_det].[vt_Precio] AS [vt_Precio], 
-[vwfa_factura_det].[vt_PorDescUnitario] AS [vt_PorDescUnitario], 
-[vwfa_factura_det].[vt_DescUnitario] AS [vt_DescUnitario], 
-[vwfa_factura_det].[vt_PrecioFinal] AS [vt_PrecioFinal], 
-[vwfa_factura_det].[vt_Subtotal] AS [vt_Subtotal], 
-[vwfa_factura_det].[vt_iva] AS [vt_iva], 
-[vwfa_factura_det].[vt_total] AS [vt_total], 
-[vwfa_factura_det].[vt_estado] AS [vt_estado], 
-[vwfa_factura_det].[vt_detallexItems] AS [vt_detallexItems], 
-[vwfa_factura_det].[vt_por_iva] AS [vt_por_iva], 
-[vwfa_factura_det].[IdPunto_Cargo] AS [IdPunto_Cargo], 
-[vwfa_factura_det].[IdPunto_cargo_grupo] AS [IdPunto_cargo_grupo], 
-[vwfa_factura_det].[IdCod_Impuesto_Iva] AS [IdCod_Impuesto_Iva], 
-[vwfa_factura_det].[IdCod_Impuesto_Ice] AS [IdCod_Impuesto_Ice], 
-[vwfa_factura_det].[IdCentroCosto] AS [IdCentroCosto], 
-[vwfa_factura_det].[IdCentroCosto_sub_centro_costo] AS [IdCentroCosto_sub_centro_costo], 
-[vwfa_factura_det].[IdEmpresa_pf] AS [IdEmpresa_pf], 
-[vwfa_factura_det].[IdSucursal_pf] AS [IdSucursal_pf], 
-[vwfa_factura_det].[IdProforma] AS [IdProforma], 
-[vwfa_factura_det].[Secuencia_pf] AS [Secuencia_pf], 
-[vwfa_factura_det].[pr_descripcion] AS [pr_descripcion], 
-[vwfa_factura_det].[nom_presentacion] AS [nom_presentacion], 
-[vwfa_factura_det].[lote_num_lote] AS [lote_num_lote], 
-[vwfa_factura_det].[lote_fecha_vcto] AS [lote_fecha_vcto], 
-[vwfa_factura_det].[se_distribuye] AS [se_distribuye], 
-[vwfa_factura_det].[tp_ManejaInven] AS [tp_ManejaInven]
-FROM [web].[vwfa_factura_det] AS [vwfa_factura_det]</DefiningQuery>
+    [vwfa_factura_det].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_factura_det].[IdSucursal] AS [IdSucursal], 
+    [vwfa_factura_det].[IdBodega] AS [IdBodega], 
+    [vwfa_factura_det].[IdCbteVta] AS [IdCbteVta], 
+    [vwfa_factura_det].[Secuencia] AS [Secuencia], 
+    [vwfa_factura_det].[IdProducto] AS [IdProducto], 
+    [vwfa_factura_det].[vt_cantidad] AS [vt_cantidad], 
+    [vwfa_factura_det].[vt_Precio] AS [vt_Precio], 
+    [vwfa_factura_det].[vt_PorDescUnitario] AS [vt_PorDescUnitario], 
+    [vwfa_factura_det].[vt_DescUnitario] AS [vt_DescUnitario], 
+    [vwfa_factura_det].[vt_PrecioFinal] AS [vt_PrecioFinal], 
+    [vwfa_factura_det].[vt_Subtotal] AS [vt_Subtotal], 
+    [vwfa_factura_det].[vt_iva] AS [vt_iva], 
+    [vwfa_factura_det].[vt_total] AS [vt_total], 
+    [vwfa_factura_det].[vt_estado] AS [vt_estado], 
+    [vwfa_factura_det].[vt_detallexItems] AS [vt_detallexItems], 
+    [vwfa_factura_det].[vt_por_iva] AS [vt_por_iva], 
+    [vwfa_factura_det].[IdPunto_Cargo] AS [IdPunto_Cargo], 
+    [vwfa_factura_det].[IdPunto_cargo_grupo] AS [IdPunto_cargo_grupo], 
+    [vwfa_factura_det].[IdCod_Impuesto_Iva] AS [IdCod_Impuesto_Iva], 
+    [vwfa_factura_det].[IdCod_Impuesto_Ice] AS [IdCod_Impuesto_Ice], 
+    [vwfa_factura_det].[IdCentroCosto] AS [IdCentroCosto], 
+    [vwfa_factura_det].[IdCentroCosto_sub_centro_costo] AS [IdCentroCosto_sub_centro_costo], 
+    [vwfa_factura_det].[IdEmpresa_pf] AS [IdEmpresa_pf], 
+    [vwfa_factura_det].[IdSucursal_pf] AS [IdSucursal_pf], 
+    [vwfa_factura_det].[IdProforma] AS [IdProforma], 
+    [vwfa_factura_det].[Secuencia_pf] AS [Secuencia_pf], 
+    [vwfa_factura_det].[pr_descripcion] AS [pr_descripcion], 
+    [vwfa_factura_det].[nom_presentacion] AS [nom_presentacion], 
+    [vwfa_factura_det].[lote_num_lote] AS [lote_num_lote], 
+    [vwfa_factura_det].[lote_fecha_vcto] AS [lote_fecha_vcto], 
+    [vwfa_factura_det].[se_distribuye] AS [se_distribuye], 
+    [vwfa_factura_det].[tp_ManejaInven] AS [tp_ManejaInven]
+    FROM [web].[vwfa_factura_det] AS [vwfa_factura_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_factura_sin_guia" EntityType="Self.vwfa_factura_sin_guia" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwfa_factura_sin_guia].[IdEmpresa] AS [IdEmpresa], 
-[vwfa_factura_sin_guia].[IdSucursal] AS [IdSucursal], 
-[vwfa_factura_sin_guia].[IdBodega] AS [IdBodega], 
-[vwfa_factura_sin_guia].[IdCbteVta] AS [IdCbteVta], 
-[vwfa_factura_sin_guia].[CodCbteVta] AS [CodCbteVta], 
-[vwfa_factura_sin_guia].[IdCliente] AS [IdCliente], 
-[vwfa_factura_sin_guia].[vt_tipoDoc] AS [vt_tipoDoc], 
-[vwfa_factura_sin_guia].[vt_serie1] AS [vt_serie1], 
-[vwfa_factura_sin_guia].[vt_serie2] AS [vt_serie2], 
-[vwfa_factura_sin_guia].[vt_NumFactura] AS [vt_NumFactura], 
-[vwfa_factura_sin_guia].[vt_Observacion] AS [vt_Observacion], 
-[vwfa_factura_sin_guia].[vt_fecha] AS [vt_fecha]
-FROM [web].[vwfa_factura_sin_guia] AS [vwfa_factura_sin_guia]</DefiningQuery>
+    [vwfa_factura_sin_guia].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_factura_sin_guia].[IdSucursal] AS [IdSucursal], 
+    [vwfa_factura_sin_guia].[IdBodega] AS [IdBodega], 
+    [vwfa_factura_sin_guia].[IdCbteVta] AS [IdCbteVta], 
+    [vwfa_factura_sin_guia].[CodCbteVta] AS [CodCbteVta], 
+    [vwfa_factura_sin_guia].[IdCliente] AS [IdCliente], 
+    [vwfa_factura_sin_guia].[vt_tipoDoc] AS [vt_tipoDoc], 
+    [vwfa_factura_sin_guia].[vt_serie1] AS [vt_serie1], 
+    [vwfa_factura_sin_guia].[vt_serie2] AS [vt_serie2], 
+    [vwfa_factura_sin_guia].[vt_NumFactura] AS [vt_NumFactura], 
+    [vwfa_factura_sin_guia].[vt_Observacion] AS [vt_Observacion], 
+    [vwfa_factura_sin_guia].[vt_fecha] AS [vt_fecha]
+    FROM [web].[vwfa_factura_sin_guia] AS [vwfa_factura_sin_guia]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_factura_x_fa_guia_remision" EntityType="Self.vwfa_factura_x_fa_guia_remision" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwfa_factura_x_fa_guia_remision].[IdEmpresa] AS [IdEmpresa], 
-[vwfa_factura_x_fa_guia_remision].[IdSucursal] AS [IdSucursal], 
-[vwfa_factura_x_fa_guia_remision].[IdBodega] AS [IdBodega], 
-[vwfa_factura_x_fa_guia_remision].[IdCbteVta] AS [IdCbteVta], 
-[vwfa_factura_x_fa_guia_remision].[CodCbteVta] AS [CodCbteVta], 
-[vwfa_factura_x_fa_guia_remision].[vt_tipoDoc] AS [vt_tipoDoc], 
-[vwfa_factura_x_fa_guia_remision].[vt_serie1] AS [vt_serie1], 
-[vwfa_factura_x_fa_guia_remision].[vt_serie2] AS [vt_serie2], 
-[vwfa_factura_x_fa_guia_remision].[vt_NumFactura] AS [vt_NumFactura], 
-[vwfa_factura_x_fa_guia_remision].[gi_IdGuiaRemision] AS [gi_IdGuiaRemision]
-FROM [web].[vwfa_factura_x_fa_guia_remision] AS [vwfa_factura_x_fa_guia_remision]</DefiningQuery>
+    [vwfa_factura_x_fa_guia_remision].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_factura_x_fa_guia_remision].[IdSucursal] AS [IdSucursal], 
+    [vwfa_factura_x_fa_guia_remision].[IdBodega] AS [IdBodega], 
+    [vwfa_factura_x_fa_guia_remision].[IdCbteVta] AS [IdCbteVta], 
+    [vwfa_factura_x_fa_guia_remision].[CodCbteVta] AS [CodCbteVta], 
+    [vwfa_factura_x_fa_guia_remision].[vt_tipoDoc] AS [vt_tipoDoc], 
+    [vwfa_factura_x_fa_guia_remision].[vt_serie1] AS [vt_serie1], 
+    [vwfa_factura_x_fa_guia_remision].[vt_serie2] AS [vt_serie2], 
+    [vwfa_factura_x_fa_guia_remision].[vt_NumFactura] AS [vt_NumFactura], 
+    [vwfa_factura_x_fa_guia_remision].[gi_IdGuiaRemision] AS [gi_IdGuiaRemision]
+    FROM [web].[vwfa_factura_x_fa_guia_remision] AS [vwfa_factura_x_fa_guia_remision]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_guia_remision" EntityType="Self.vwfa_guia_remision" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwfa_guia_remision].[IdEmpresa] AS [IdEmpresa], 
-[vwfa_guia_remision].[IdSucursal] AS [IdSucursal], 
-[vwfa_guia_remision].[IdBodega] AS [IdBodega], 
-[vwfa_guia_remision].[IdGuiaRemision] AS [IdGuiaRemision], 
-[vwfa_guia_remision].[CodGuiaRemision] AS [CodGuiaRemision], 
-[vwfa_guia_remision].[CodDocumentoTipo] AS [CodDocumentoTipo], 
-[vwfa_guia_remision].[Serie1] AS [Serie1], 
-[vwfa_guia_remision].[Serie2] AS [Serie2], 
-[vwfa_guia_remision].[NumGuia_Preimpresa] AS [NumGuia_Preimpresa], 
-[vwfa_guia_remision].[NUAutorizacion] AS [NUAutorizacion], 
-[vwfa_guia_remision].[Fecha_Autorizacion] AS [Fecha_Autorizacion], 
-[vwfa_guia_remision].[IdCliente] AS [IdCliente], 
-[vwfa_guia_remision].[IdTransportista] AS [IdTransportista], 
-[vwfa_guia_remision].[gi_fecha] AS [gi_fecha], 
-[vwfa_guia_remision].[gi_plazo] AS [gi_plazo], 
-[vwfa_guia_remision].[gi_fech_venc] AS [gi_fech_venc], 
-[vwfa_guia_remision].[gi_Observacion] AS [gi_Observacion], 
-[vwfa_guia_remision].[Impreso] AS [Impreso], 
-[vwfa_guia_remision].[gi_FechaFinTraslado] AS [gi_FechaFinTraslado], 
-[vwfa_guia_remision].[gi_FechaInicioTraslado] AS [gi_FechaInicioTraslado], 
-[vwfa_guia_remision].[placa] AS [placa], 
-[vwfa_guia_remision].[ruta] AS [ruta], 
-[vwfa_guia_remision].[Direccion_Origen] AS [Direccion_Origen], 
-[vwfa_guia_remision].[Direccion_Destino] AS [Direccion_Destino], 
-[vwfa_guia_remision].[pe_cedulaRuc] AS [pe_cedulaRuc], 
-[vwfa_guia_remision].[pe_nombreCompleto] AS [pe_nombreCompleto], 
-[vwfa_guia_remision].[Estado] AS [Estado], 
-[vwfa_guia_remision].[Nombres] AS [Nombres]
-FROM [web].[vwfa_guia_remision] AS [vwfa_guia_remision]</DefiningQuery>
+    [vwfa_guia_remision].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_guia_remision].[IdSucursal] AS [IdSucursal], 
+    [vwfa_guia_remision].[IdBodega] AS [IdBodega], 
+    [vwfa_guia_remision].[IdGuiaRemision] AS [IdGuiaRemision], 
+    [vwfa_guia_remision].[CodGuiaRemision] AS [CodGuiaRemision], 
+    [vwfa_guia_remision].[CodDocumentoTipo] AS [CodDocumentoTipo], 
+    [vwfa_guia_remision].[Serie1] AS [Serie1], 
+    [vwfa_guia_remision].[Serie2] AS [Serie2], 
+    [vwfa_guia_remision].[NumGuia_Preimpresa] AS [NumGuia_Preimpresa], 
+    [vwfa_guia_remision].[NUAutorizacion] AS [NUAutorizacion], 
+    [vwfa_guia_remision].[Fecha_Autorizacion] AS [Fecha_Autorizacion], 
+    [vwfa_guia_remision].[IdCliente] AS [IdCliente], 
+    [vwfa_guia_remision].[IdTransportista] AS [IdTransportista], 
+    [vwfa_guia_remision].[gi_fecha] AS [gi_fecha], 
+    [vwfa_guia_remision].[gi_plazo] AS [gi_plazo], 
+    [vwfa_guia_remision].[gi_fech_venc] AS [gi_fech_venc], 
+    [vwfa_guia_remision].[gi_Observacion] AS [gi_Observacion], 
+    [vwfa_guia_remision].[Impreso] AS [Impreso], 
+    [vwfa_guia_remision].[gi_FechaFinTraslado] AS [gi_FechaFinTraslado], 
+    [vwfa_guia_remision].[gi_FechaInicioTraslado] AS [gi_FechaInicioTraslado], 
+    [vwfa_guia_remision].[placa] AS [placa], 
+    [vwfa_guia_remision].[ruta] AS [ruta], 
+    [vwfa_guia_remision].[Direccion_Origen] AS [Direccion_Origen], 
+    [vwfa_guia_remision].[Direccion_Destino] AS [Direccion_Destino], 
+    [vwfa_guia_remision].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [vwfa_guia_remision].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwfa_guia_remision].[Estado] AS [Estado], 
+    [vwfa_guia_remision].[Nombres] AS [Nombres]
+    FROM [web].[vwfa_guia_remision] AS [vwfa_guia_remision]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_guia_remision_det" EntityType="Self.vwfa_guia_remision_det" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwfa_guia_remision_det].[IdEmpresa] AS [IdEmpresa], 
-[vwfa_guia_remision_det].[IdSucursal] AS [IdSucursal], 
-[vwfa_guia_remision_det].[IdBodega] AS [IdBodega], 
-[vwfa_guia_remision_det].[Secuencia] AS [Secuencia], 
-[vwfa_guia_remision_det].[IdProducto] AS [IdProducto], 
-[vwfa_guia_remision_det].[gi_cantidad] AS [gi_cantidad], 
-[vwfa_guia_remision_det].[gi_detallexItems] AS [gi_detallexItems], 
-[vwfa_guia_remision_det].[pr_descripcion] AS [pr_descripcion], 
-[vwfa_guia_remision_det].[pr_descripcion_2] AS [pr_descripcion_2], 
-[vwfa_guia_remision_det].[pr_codigo] AS [pr_codigo], 
-[vwfa_guia_remision_det].[lote_fecha_fab] AS [lote_fecha_fab], 
-[vwfa_guia_remision_det].[lote_fecha_vcto] AS [lote_fecha_vcto], 
-[vwfa_guia_remision_det].[lote_num_lote] AS [lote_num_lote], 
-[vwfa_guia_remision_det].[ca_Categoria] AS [ca_Categoria], 
-[vwfa_guia_remision_det].[nom_presentacion] AS [nom_presentacion], 
-[vwfa_guia_remision_det].[IdGuiaRemision] AS [IdGuiaRemision], 
-[vwfa_guia_remision_det].[IdEmpresa_fact] AS [IdEmpresa_fact], 
-[vwfa_guia_remision_det].[IdSucursal_fact] AS [IdSucursal_fact], 
-[vwfa_guia_remision_det].[IdBodega_fact] AS [IdBodega_fact], 
-[vwfa_guia_remision_det].[IdCbteVta_fact] AS [IdCbteVta_fact], 
-[vwfa_guia_remision_det].[Secuencia_fact] AS [Secuencia_fact]
-FROM [web].[vwfa_guia_remision_det] AS [vwfa_guia_remision_det]</DefiningQuery>
+    [vwfa_guia_remision_det].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_guia_remision_det].[IdSucursal] AS [IdSucursal], 
+    [vwfa_guia_remision_det].[IdBodega] AS [IdBodega], 
+    [vwfa_guia_remision_det].[Secuencia] AS [Secuencia], 
+    [vwfa_guia_remision_det].[IdProducto] AS [IdProducto], 
+    [vwfa_guia_remision_det].[gi_cantidad] AS [gi_cantidad], 
+    [vwfa_guia_remision_det].[gi_detallexItems] AS [gi_detallexItems], 
+    [vwfa_guia_remision_det].[pr_descripcion] AS [pr_descripcion], 
+    [vwfa_guia_remision_det].[pr_descripcion_2] AS [pr_descripcion_2], 
+    [vwfa_guia_remision_det].[pr_codigo] AS [pr_codigo], 
+    [vwfa_guia_remision_det].[lote_fecha_fab] AS [lote_fecha_fab], 
+    [vwfa_guia_remision_det].[lote_fecha_vcto] AS [lote_fecha_vcto], 
+    [vwfa_guia_remision_det].[lote_num_lote] AS [lote_num_lote], 
+    [vwfa_guia_remision_det].[ca_Categoria] AS [ca_Categoria], 
+    [vwfa_guia_remision_det].[nom_presentacion] AS [nom_presentacion], 
+    [vwfa_guia_remision_det].[IdGuiaRemision] AS [IdGuiaRemision], 
+    [vwfa_guia_remision_det].[IdEmpresa_fact] AS [IdEmpresa_fact], 
+    [vwfa_guia_remision_det].[IdSucursal_fact] AS [IdSucursal_fact], 
+    [vwfa_guia_remision_det].[IdBodega_fact] AS [IdBodega_fact], 
+    [vwfa_guia_remision_det].[IdCbteVta_fact] AS [IdCbteVta_fact], 
+    [vwfa_guia_remision_det].[Secuencia_fact] AS [Secuencia_fact]
+    FROM [web].[vwfa_guia_remision_det] AS [vwfa_guia_remision_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_notaCreDeb" EntityType="Self.vwfa_notaCreDeb" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwfa_notaCreDeb].[IdEmpresa] AS [IdEmpresa], 
-[vwfa_notaCreDeb].[IdSucursal] AS [IdSucursal], 
-[vwfa_notaCreDeb].[IdBodega] AS [IdBodega], 
-[vwfa_notaCreDeb].[IdNota] AS [IdNota], 
-[vwfa_notaCreDeb].[CreDeb] AS [CreDeb], 
-[vwfa_notaCreDeb].[NumNota_Impresa] AS [NumNota_Impresa], 
-[vwfa_notaCreDeb].[no_fecha] AS [no_fecha], 
-[vwfa_notaCreDeb].[Nombres] AS [Nombres], 
-[vwfa_notaCreDeb].[sc_subtotal] AS [sc_subtotal], 
-[vwfa_notaCreDeb].[sc_iva] AS [sc_iva], 
-[vwfa_notaCreDeb].[sc_total] AS [sc_total], 
-[vwfa_notaCreDeb].[Estado] AS [Estado]
-FROM [web].[vwfa_notaCreDeb] AS [vwfa_notaCreDeb]</DefiningQuery>
+    [vwfa_notaCreDeb].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_notaCreDeb].[IdSucursal] AS [IdSucursal], 
+    [vwfa_notaCreDeb].[IdBodega] AS [IdBodega], 
+    [vwfa_notaCreDeb].[IdNota] AS [IdNota], 
+    [vwfa_notaCreDeb].[CreDeb] AS [CreDeb], 
+    [vwfa_notaCreDeb].[NumNota_Impresa] AS [NumNota_Impresa], 
+    [vwfa_notaCreDeb].[no_fecha] AS [no_fecha], 
+    [vwfa_notaCreDeb].[Nombres] AS [Nombres], 
+    [vwfa_notaCreDeb].[sc_subtotal] AS [sc_subtotal], 
+    [vwfa_notaCreDeb].[sc_iva] AS [sc_iva], 
+    [vwfa_notaCreDeb].[sc_total] AS [sc_total], 
+    [vwfa_notaCreDeb].[Estado] AS [Estado]
+    FROM [web].[vwfa_notaCreDeb] AS [vwfa_notaCreDeb]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_notaCreDeb_det" EntityType="Self.vwfa_notaCreDeb_det" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwfa_notaCreDeb_det].[IdEmpresa] AS [IdEmpresa], 
-[vwfa_notaCreDeb_det].[IdSucursal] AS [IdSucursal], 
-[vwfa_notaCreDeb_det].[IdBodega] AS [IdBodega], 
-[vwfa_notaCreDeb_det].[IdNota] AS [IdNota], 
-[vwfa_notaCreDeb_det].[Secuencia] AS [Secuencia], 
-[vwfa_notaCreDeb_det].[IdProducto] AS [IdProducto], 
-[vwfa_notaCreDeb_det].[sc_cantidad] AS [sc_cantidad], 
-[vwfa_notaCreDeb_det].[sc_Precio] AS [sc_Precio], 
-[vwfa_notaCreDeb_det].[sc_descUni] AS [sc_descUni], 
-[vwfa_notaCreDeb_det].[sc_PordescUni] AS [sc_PordescUni], 
-[vwfa_notaCreDeb_det].[sc_precioFinal] AS [sc_precioFinal], 
-[vwfa_notaCreDeb_det].[sc_subtotal] AS [sc_subtotal], 
-[vwfa_notaCreDeb_det].[sc_iva] AS [sc_iva], 
-[vwfa_notaCreDeb_det].[sc_total] AS [sc_total], 
-[vwfa_notaCreDeb_det].[sc_costo] AS [sc_costo], 
-[vwfa_notaCreDeb_det].[sc_observacion] AS [sc_observacion], 
-[vwfa_notaCreDeb_det].[sc_estado] AS [sc_estado], 
-[vwfa_notaCreDeb_det].[vt_por_iva] AS [vt_por_iva], 
-[vwfa_notaCreDeb_det].[IdPunto_Cargo] AS [IdPunto_Cargo], 
-[vwfa_notaCreDeb_det].[IdPunto_cargo_grupo] AS [IdPunto_cargo_grupo], 
-[vwfa_notaCreDeb_det].[IdCod_Impuesto_Iva] AS [IdCod_Impuesto_Iva], 
-[vwfa_notaCreDeb_det].[IdCod_Impuesto_Ice] AS [IdCod_Impuesto_Ice], 
-[vwfa_notaCreDeb_det].[IdCentroCosto] AS [IdCentroCosto], 
-[vwfa_notaCreDeb_det].[IdCentroCosto_sub_centro_costo] AS [IdCentroCosto_sub_centro_costo], 
-[vwfa_notaCreDeb_det].[pr_descripcion] AS [pr_descripcion], 
-[vwfa_notaCreDeb_det].[nom_presentacion] AS [nom_presentacion], 
-[vwfa_notaCreDeb_det].[lote_fecha_vcto] AS [lote_fecha_vcto], 
-[vwfa_notaCreDeb_det].[lote_num_lote] AS [lote_num_lote]
-FROM [web].[vwfa_notaCreDeb_det] AS [vwfa_notaCreDeb_det]</DefiningQuery>
+    [vwfa_notaCreDeb_det].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_notaCreDeb_det].[IdSucursal] AS [IdSucursal], 
+    [vwfa_notaCreDeb_det].[IdBodega] AS [IdBodega], 
+    [vwfa_notaCreDeb_det].[IdNota] AS [IdNota], 
+    [vwfa_notaCreDeb_det].[Secuencia] AS [Secuencia], 
+    [vwfa_notaCreDeb_det].[IdProducto] AS [IdProducto], 
+    [vwfa_notaCreDeb_det].[sc_cantidad] AS [sc_cantidad], 
+    [vwfa_notaCreDeb_det].[sc_Precio] AS [sc_Precio], 
+    [vwfa_notaCreDeb_det].[sc_descUni] AS [sc_descUni], 
+    [vwfa_notaCreDeb_det].[sc_PordescUni] AS [sc_PordescUni], 
+    [vwfa_notaCreDeb_det].[sc_precioFinal] AS [sc_precioFinal], 
+    [vwfa_notaCreDeb_det].[sc_subtotal] AS [sc_subtotal], 
+    [vwfa_notaCreDeb_det].[sc_iva] AS [sc_iva], 
+    [vwfa_notaCreDeb_det].[sc_total] AS [sc_total], 
+    [vwfa_notaCreDeb_det].[sc_costo] AS [sc_costo], 
+    [vwfa_notaCreDeb_det].[sc_observacion] AS [sc_observacion], 
+    [vwfa_notaCreDeb_det].[sc_estado] AS [sc_estado], 
+    [vwfa_notaCreDeb_det].[vt_por_iva] AS [vt_por_iva], 
+    [vwfa_notaCreDeb_det].[IdPunto_Cargo] AS [IdPunto_Cargo], 
+    [vwfa_notaCreDeb_det].[IdPunto_cargo_grupo] AS [IdPunto_cargo_grupo], 
+    [vwfa_notaCreDeb_det].[IdCod_Impuesto_Iva] AS [IdCod_Impuesto_Iva], 
+    [vwfa_notaCreDeb_det].[IdCod_Impuesto_Ice] AS [IdCod_Impuesto_Ice], 
+    [vwfa_notaCreDeb_det].[IdCentroCosto] AS [IdCentroCosto], 
+    [vwfa_notaCreDeb_det].[IdCentroCosto_sub_centro_costo] AS [IdCentroCosto_sub_centro_costo], 
+    [vwfa_notaCreDeb_det].[pr_descripcion] AS [pr_descripcion], 
+    [vwfa_notaCreDeb_det].[nom_presentacion] AS [nom_presentacion], 
+    [vwfa_notaCreDeb_det].[lote_fecha_vcto] AS [lote_fecha_vcto], 
+    [vwfa_notaCreDeb_det].[lote_num_lote] AS [lote_num_lote]
+    FROM [web].[vwfa_notaCreDeb_det] AS [vwfa_notaCreDeb_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_notaCreDeb_x_fa_factura_NotaDeb" EntityType="Self.vwfa_notaCreDeb_x_fa_factura_NotaDeb" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[IdEmpresa_nt] AS [IdEmpresa_nt], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[IdSucursal_nt] AS [IdSucursal_nt], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[IdBodega_nt] AS [IdBodega_nt], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[IdNota_nt] AS [IdNota_nt], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[secuencia] AS [secuencia], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[vt_tipoDoc] AS [vt_tipoDoc], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[IdEmpresa_fac_nd_doc_mod] AS [IdEmpresa_fac_nd_doc_mod], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[IdSucursal_fac_nd_doc_mod] AS [IdSucursal_fac_nd_doc_mod], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[IdBodega_fac_nd_doc_mod] AS [IdBodega_fac_nd_doc_mod], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[IdCbteVta_fac_nd_doc_mod] AS [IdCbteVta_fac_nd_doc_mod], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[Valor_Aplicado] AS [Valor_Aplicado], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[vt_NumFactura] AS [vt_NumFactura], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[vt_Observacion] AS [vt_Observacion], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[CodDoc] AS [CodDoc], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[vt_Subtotal] AS [vt_Subtotal], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[vt_iva] AS [vt_iva], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[vt_total] AS [vt_total], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[ValorCobrado] AS [ValorCobrado], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[saldo] AS [saldo], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[saldo_sin_cobro] AS [saldo_sin_cobro], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[vt_fecha] AS [vt_fecha], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[vt_fech_venc] AS [vt_fech_venc], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[IdCliente] AS [IdCliente], 
-[vwfa_notaCreDeb_x_fa_factura_NotaDeb].[pe_nombreCompleto] AS [pe_nombreCompleto]
-FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factura_NotaDeb]</DefiningQuery>
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[IdEmpresa_nt] AS [IdEmpresa_nt], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[IdSucursal_nt] AS [IdSucursal_nt], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[IdBodega_nt] AS [IdBodega_nt], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[IdNota_nt] AS [IdNota_nt], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[secuencia] AS [secuencia], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[vt_tipoDoc] AS [vt_tipoDoc], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[IdEmpresa_fac_nd_doc_mod] AS [IdEmpresa_fac_nd_doc_mod], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[IdSucursal_fac_nd_doc_mod] AS [IdSucursal_fac_nd_doc_mod], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[IdBodega_fac_nd_doc_mod] AS [IdBodega_fac_nd_doc_mod], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[IdCbteVta_fac_nd_doc_mod] AS [IdCbteVta_fac_nd_doc_mod], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[Valor_Aplicado] AS [Valor_Aplicado], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[vt_NumFactura] AS [vt_NumFactura], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[vt_Observacion] AS [vt_Observacion], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[CodDoc] AS [CodDoc], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[vt_Subtotal] AS [vt_Subtotal], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[vt_iva] AS [vt_iva], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[vt_total] AS [vt_total], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[ValorCobrado] AS [ValorCobrado], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[saldo] AS [saldo], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[saldo_sin_cobro] AS [saldo_sin_cobro], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[vt_fecha] AS [vt_fecha], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[vt_fech_venc] AS [vt_fech_venc], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[IdCliente] AS [IdCliente], 
+    [vwfa_notaCreDeb_x_fa_factura_NotaDeb].[pe_nombreCompleto] AS [pe_nombreCompleto]
+    FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factura_NotaDeb]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_fa_catalogo_fa_catalogo_tipo" Association="Self.FK_fa_catalogo_fa_catalogo_tipo">
             <End Role="fa_catalogo_tipo" EntitySet="fa_catalogo_tipo" />
@@ -2356,42 +2357,6 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="fa_catalogo" Relationship="Self.FK_fa_catalogo_fa_catalogo_tipo" FromRole="fa_catalogo_tipo" ToRole="fa_catalogo" />
         </EntityType>
-        <EntityType Name="fa_cliente">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdCliente" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdCliente" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdPersona" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Idtipo_cliente" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCredito" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="cl_plazo" Type="Int32" Nullable="false" />
-          <Property Name="IdCtaCble_cxc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdCtaCble_Anti" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="cl_Cupo" Type="Double" Nullable="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="IdCtaCble_cxc_Credito" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="es_empresa_relacionada" Type="Boolean" />
-          <Property Name="NivelPrecio" Type="Int32" />
-          <Property Name="FormaPago" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="fa_cliente_contactos" Relationship="Self.FK_fa_cliente_contactos_fa_cliente" FromRole="fa_cliente" ToRole="fa_cliente_contactos" />
-          <NavigationProperty Name="fa_cliente_tipo" Relationship="Self.FK_fa_cliente_fa_cliente_tipo" FromRole="fa_cliente" ToRole="fa_cliente_tipo" />
-          <NavigationProperty Name="fa_formaPago" Relationship="Self.FK_fa_cliente_fa_forma_pago" FromRole="fa_cliente" ToRole="fa_formaPago" />
-          <NavigationProperty Name="fa_TerminoPago" Relationship="Self.FK_fa_cliente_fa_TerminoPago" FromRole="fa_cliente" ToRole="fa_TerminoPago" />
-          <NavigationProperty Name="fa_cliente_x_fa_Vendedor_x_sucursal" Relationship="Self.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_cliente" FromRole="fa_cliente" ToRole="fa_cliente_x_fa_Vendedor_x_sucursal" />
-          <NavigationProperty Name="fa_guia_remision" Relationship="Self.FK_fa_guia_remision_fa_cliente" FromRole="fa_cliente" ToRole="fa_guia_remision" />
-          <NavigationProperty Name="fa_notaCreDeb" Relationship="Self.FK_fa_notaCreDeb_fa_cliente" FromRole="fa_cliente" ToRole="fa_notaCreDeb" />
-          <NavigationProperty Name="fa_proforma" Relationship="Self.FK_fa_proforma_fa_cliente" FromRole="fa_cliente" ToRole="fa_proforma" />
-          <NavigationProperty Name="fa_factura" Relationship="Model_facturacion.FK_fa_factura_fa_cliente" FromRole="fa_cliente" ToRole="fa_factura" />
-        </EntityType>
         <EntityType Name="fa_cliente_contactos">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2408,10 +2373,10 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <Property Name="Direccion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="IdCiudad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IdParroquia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="fa_cliente" Relationship="Self.FK_fa_cliente_contactos_fa_cliente" FromRole="fa_cliente_contactos" ToRole="fa_cliente" />
           <NavigationProperty Name="fa_guia_remision" Relationship="Self.FK_fa_guia_remision_fa_cliente_contactos" FromRole="fa_cliente_contactos" ToRole="fa_guia_remision" />
           <NavigationProperty Name="fa_notaCreDeb" Relationship="Self.FK_fa_notaCreDeb_fa_cliente_contactos" FromRole="fa_cliente_contactos" ToRole="fa_notaCreDeb" />
           <NavigationProperty Name="fa_factura" Relationship="Model_facturacion.FK_fa_factura_fa_cliente_contactos" FromRole="fa_cliente_contactos" ToRole="fa_factura" />
+          <NavigationProperty Name="fa_cliente" Relationship="Model_facturacion.FK_fa_cliente_contactos_fa_cliente" FromRole="fa_cliente_contactos" ToRole="fa_cliente" />
         </EntityType>
         <EntityType Name="fa_cliente_tipo">
           <Key>
@@ -2435,7 +2400,7 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="fa_cliente" Relationship="Self.FK_fa_cliente_fa_cliente_tipo" FromRole="fa_cliente_tipo" ToRole="fa_cliente" />
+          <NavigationProperty Name="fa_cliente" Relationship="Model_facturacion.FK_fa_cliente_fa_cliente_tipo" FromRole="fa_cliente_tipo" ToRole="fa_cliente" />
         </EntityType>
         <EntityType Name="fa_cliente_x_fa_Vendedor_x_sucursal">
           <Key>
@@ -2449,8 +2414,8 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <Property Name="IdSucursal" Type="Int32" Nullable="false" />
           <Property Name="IdVendedor" Type="Int32" Nullable="false" />
           <Property Name="observacion" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="fa_cliente" Relationship="Self.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_cliente" FromRole="fa_cliente_x_fa_Vendedor_x_sucursal" ToRole="fa_cliente" />
           <NavigationProperty Name="fa_Vendedor" Relationship="Model_facturacion.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_Vendedor" FromRole="fa_cliente_x_fa_Vendedor_x_sucursal" ToRole="fa_Vendedor" />
+          <NavigationProperty Name="fa_cliente" Relationship="Model_facturacion.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_cliente" FromRole="fa_cliente_x_fa_Vendedor_x_sucursal" ToRole="fa_cliente" />
         </EntityType>
         <EntityType Name="fa_cuotas_x_doc">
           <Key>
@@ -2598,8 +2563,8 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           </Key>
           <Property Name="IdFormaPago" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nom_FormaPago" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="fa_cliente" Relationship="Self.FK_fa_cliente_fa_forma_pago" FromRole="fa_formaPago" ToRole="fa_cliente" />
           <NavigationProperty Name="fa_factura_x_formaPago" Relationship="Self.FK_fa_factura_x_formaPago_fa_formaPago" FromRole="fa_formaPago" ToRole="fa_factura_x_formaPago" />
+          <NavigationProperty Name="fa_cliente" Relationship="Model_facturacion.FK_fa_cliente_fa_forma_pago" FromRole="fa_formaPago" ToRole="fa_cliente" />
         </EntityType>
         <EntityType Name="fa_guia_remision">
           <Key>
@@ -2647,10 +2612,10 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <Property Name="IdCatalogo_traslado" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="aprobada_enviar_sri" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="fa_catalogo" Relationship="Self.FK_fa_guia_remision_fa_catalogo" FromRole="fa_guia_remision" ToRole="fa_catalogo" />
-          <NavigationProperty Name="fa_cliente" Relationship="Self.FK_fa_guia_remision_fa_cliente" FromRole="fa_guia_remision" ToRole="fa_cliente" />
           <NavigationProperty Name="fa_cliente_contactos" Relationship="Self.FK_fa_guia_remision_fa_cliente_contactos" FromRole="fa_guia_remision" ToRole="fa_cliente_contactos" />
           <NavigationProperty Name="fa_factura_x_fa_guia_remision" Relationship="Self.FK_fa_factura_x_fa_guia_remision_fa_guia_remision" FromRole="fa_guia_remision" ToRole="fa_factura_x_fa_guia_remision" />
           <NavigationProperty Name="fa_guia_remision_det" Relationship="Self.FK_fa_guia_remision_det_fa_guia_remision" FromRole="fa_guia_remision" ToRole="fa_guia_remision_det" />
+          <NavigationProperty Name="fa_cliente" Relationship="Model_facturacion.FK_fa_guia_remision_fa_cliente" FromRole="fa_guia_remision" ToRole="fa_cliente" />
         </EntityType>
         <EntityType Name="fa_guia_remision_det">
           <Key>
@@ -2736,13 +2701,13 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <Property Name="IdCtaCble_TipoNota" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdPuntoVta" Type="Int32" />
           <Property Name="aprobada_enviar_sri" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="fa_cliente" Relationship="Self.FK_fa_notaCreDeb_fa_cliente" FromRole="fa_notaCreDeb" ToRole="fa_cliente" />
           <NavigationProperty Name="fa_cliente_contactos" Relationship="Self.FK_fa_notaCreDeb_fa_cliente_contactos" FromRole="fa_notaCreDeb" ToRole="fa_cliente_contactos" />
           <NavigationProperty Name="fa_notaCreDeb_det" Relationship="Self.FK_fa_notaCreDeb_det_fa_notaCreDeb" FromRole="fa_notaCreDeb" ToRole="fa_notaCreDeb_det" />
           <NavigationProperty Name="fa_PuntoVta" Relationship="Self.FK_fa_notaCreDeb_fa_PuntoVta" FromRole="fa_notaCreDeb" ToRole="fa_PuntoVta" />
           <NavigationProperty Name="fa_TipoNota" Relationship="Self.FK_fa_notaCreDeb_fa_TipoNota" FromRole="fa_notaCreDeb" ToRole="fa_TipoNota" />
           <NavigationProperty Name="fa_notaCreDeb_x_ct_cbtecble" Relationship="Self.FK_fa_notaCreDeb_x_ct_cbtecble_fa_notaCreDeb" FromRole="fa_notaCreDeb" ToRole="fa_notaCreDeb_x_ct_cbtecble" />
           <NavigationProperty Name="fa_notaCreDeb_x_cxc_cobro" Relationship="Self.FK_fa_notaCreDeb_x_cxc_cobro_fa_notaCreDeb" FromRole="fa_notaCreDeb" ToRole="fa_notaCreDeb_x_cxc_cobro" />
+          <NavigationProperty Name="fa_cliente" Relationship="Model_facturacion.FK_fa_notaCreDeb_fa_cliente" FromRole="fa_notaCreDeb" ToRole="fa_cliente" />
         </EntityType>
         <EntityType Name="fa_notaCreDeb_det">
           <Key>
@@ -2867,10 +2832,10 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <Property Name="IdVendedor" Type="Int32" Nullable="false" />
           <Property Name="pf_atencion_a" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="pr_dias_entrega" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="fa_cliente" Relationship="Self.FK_fa_proforma_fa_cliente" FromRole="fa_proforma" ToRole="fa_cliente" />
           <NavigationProperty Name="fa_proforma_det" Relationship="Self.FK_fa_proforma_det_fa_proforma" FromRole="fa_proforma" ToRole="fa_proforma_det" />
           <NavigationProperty Name="fa_TerminoPago" Relationship="Self.FK_fa_proforma_fa_TerminoPago" FromRole="fa_proforma" ToRole="fa_TerminoPago" />
           <NavigationProperty Name="fa_Vendedor" Relationship="Model_facturacion.FK_fa_proforma_fa_Vendedor" FromRole="fa_proforma" ToRole="fa_Vendedor" />
+          <NavigationProperty Name="fa_cliente" Relationship="Model_facturacion.FK_fa_proforma_fa_cliente" FromRole="fa_proforma" ToRole="fa_cliente" />
         </EntityType>
         <EntityType Name="fa_proforma_det">
           <Key>
@@ -2923,9 +2888,9 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <Property Name="Num_Coutas" Type="Int32" Nullable="false" />
           <Property Name="Dias_Vct" Type="Int32" Nullable="false" />
           <Property Name="estado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="fa_cliente" Relationship="Self.FK_fa_cliente_fa_TerminoPago" FromRole="fa_TerminoPago" ToRole="fa_cliente" />
           <NavigationProperty Name="fa_proforma" Relationship="Self.FK_fa_proforma_fa_TerminoPago" FromRole="fa_TerminoPago" ToRole="fa_proforma" />
           <NavigationProperty Name="fa_TerminoPago_Distribucion" Relationship="Self.FK_fa_TerminoPago_Distribucion_fa_TerminoPago" FromRole="fa_TerminoPago" ToRole="fa_TerminoPago_Distribucion" />
+          <NavigationProperty Name="fa_cliente" Relationship="Model_facturacion.FK_fa_cliente_fa_TerminoPago" FromRole="fa_TerminoPago" ToRole="fa_cliente" />
         </EntityType>
         <EntityType Name="fa_TerminoPago_Distribucion">
           <Key>
@@ -3347,114 +3312,6 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_fa_cliente_contactos_fa_cliente">
-          <End Role="fa_cliente" Type="Self.fa_cliente" Multiplicity="1" />
-          <End Role="fa_cliente_contactos" Type="Self.fa_cliente_contactos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="fa_cliente">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCliente" />
-            </Principal>
-            <Dependent Role="fa_cliente_contactos">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_fa_cliente_fa_cliente_tipo">
-          <End Role="fa_cliente_tipo" Type="Self.fa_cliente_tipo" Multiplicity="1" />
-          <End Role="fa_cliente" Type="Self.fa_cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="fa_cliente_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="Idtipo_cliente" />
-            </Principal>
-            <Dependent Role="fa_cliente">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="Idtipo_cliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_fa_cliente_fa_forma_pago">
-          <End Role="fa_formaPago" Type="Self.fa_formaPago" Multiplicity="0..1" />
-          <End Role="fa_cliente" Type="Self.fa_cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="fa_formaPago">
-              <PropertyRef Name="IdFormaPago" />
-            </Principal>
-            <Dependent Role="fa_cliente">
-              <PropertyRef Name="FormaPago" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_fa_cliente_fa_TerminoPago">
-          <End Role="fa_TerminoPago" Type="Self.fa_TerminoPago" Multiplicity="1" />
-          <End Role="fa_cliente" Type="Self.fa_cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="fa_TerminoPago">
-              <PropertyRef Name="IdTerminoPago" />
-            </Principal>
-            <Dependent Role="fa_cliente">
-              <PropertyRef Name="IdTipoCredito" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_cliente">
-          <End Role="fa_cliente" Type="Self.fa_cliente" Multiplicity="1" />
-          <End Role="fa_cliente_x_fa_Vendedor_x_sucursal" Type="Self.fa_cliente_x_fa_Vendedor_x_sucursal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="fa_cliente">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCliente" />
-            </Principal>
-            <Dependent Role="fa_cliente_x_fa_Vendedor_x_sucursal">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_fa_guia_remision_fa_cliente">
-          <End Role="fa_cliente" Type="Self.fa_cliente" Multiplicity="1" />
-          <End Role="fa_guia_remision" Type="Self.fa_guia_remision" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="fa_cliente">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCliente" />
-            </Principal>
-            <Dependent Role="fa_guia_remision">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_fa_notaCreDeb_fa_cliente">
-          <End Role="fa_cliente" Type="Self.fa_cliente" Multiplicity="1" />
-          <End Role="fa_notaCreDeb" Type="Self.fa_notaCreDeb" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="fa_cliente">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCliente" />
-            </Principal>
-            <Dependent Role="fa_notaCreDeb">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_fa_proforma_fa_cliente">
-          <End Role="fa_cliente" Type="Self.fa_cliente" Multiplicity="1" />
-          <End Role="fa_proforma" Type="Self.fa_proforma" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="fa_cliente">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCliente" />
-            </Principal>
-            <Dependent Role="fa_proforma">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_fa_guia_remision_fa_cliente_contactos">
           <End Role="fa_cliente_contactos" Type="Self.fa_cliente_contactos" Multiplicity="1" />
           <End Role="fa_guia_remision" Type="Self.fa_guia_remision" Multiplicity="*" />
@@ -3730,7 +3587,6 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
         <EntityContainer Name="Entities_facturacion" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="fa_catalogo" EntityType="Self.fa_catalogo" />
           <EntitySet Name="fa_catalogo_tipo" EntityType="Self.fa_catalogo_tipo" />
-          <EntitySet Name="fa_cliente" EntityType="Self.fa_cliente" />
           <EntitySet Name="fa_cliente_contactos" EntityType="Self.fa_cliente_contactos" />
           <EntitySet Name="fa_cliente_tipo" EntityType="Self.fa_cliente_tipo" />
           <EntitySet Name="fa_cliente_x_fa_Vendedor_x_sucursal" EntityType="Self.fa_cliente_x_fa_Vendedor_x_sucursal" />
@@ -3773,38 +3629,6 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <AssociationSet Name="FK_fa_guia_remision_fa_catalogo" Association="Self.FK_fa_guia_remision_fa_catalogo">
             <End Role="fa_catalogo" EntitySet="fa_catalogo" />
             <End Role="fa_guia_remision" EntitySet="fa_guia_remision" />
-          </AssociationSet>
-          <AssociationSet Name="FK_fa_cliente_contactos_fa_cliente" Association="Self.FK_fa_cliente_contactos_fa_cliente">
-            <End Role="fa_cliente" EntitySet="fa_cliente" />
-            <End Role="fa_cliente_contactos" EntitySet="fa_cliente_contactos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_fa_cliente_fa_cliente_tipo" Association="Self.FK_fa_cliente_fa_cliente_tipo">
-            <End Role="fa_cliente_tipo" EntitySet="fa_cliente_tipo" />
-            <End Role="fa_cliente" EntitySet="fa_cliente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_fa_cliente_fa_forma_pago" Association="Self.FK_fa_cliente_fa_forma_pago">
-            <End Role="fa_formaPago" EntitySet="fa_formaPago" />
-            <End Role="fa_cliente" EntitySet="fa_cliente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_fa_cliente_fa_TerminoPago" Association="Self.FK_fa_cliente_fa_TerminoPago">
-            <End Role="fa_TerminoPago" EntitySet="fa_TerminoPago" />
-            <End Role="fa_cliente" EntitySet="fa_cliente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_cliente" Association="Self.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_cliente">
-            <End Role="fa_cliente" EntitySet="fa_cliente" />
-            <End Role="fa_cliente_x_fa_Vendedor_x_sucursal" EntitySet="fa_cliente_x_fa_Vendedor_x_sucursal" />
-          </AssociationSet>
-          <AssociationSet Name="FK_fa_guia_remision_fa_cliente" Association="Self.FK_fa_guia_remision_fa_cliente">
-            <End Role="fa_cliente" EntitySet="fa_cliente" />
-            <End Role="fa_guia_remision" EntitySet="fa_guia_remision" />
-          </AssociationSet>
-          <AssociationSet Name="FK_fa_notaCreDeb_fa_cliente" Association="Self.FK_fa_notaCreDeb_fa_cliente">
-            <End Role="fa_cliente" EntitySet="fa_cliente" />
-            <End Role="fa_notaCreDeb" EntitySet="fa_notaCreDeb" />
-          </AssociationSet>
-          <AssociationSet Name="FK_fa_proforma_fa_cliente" Association="Self.FK_fa_proforma_fa_cliente">
-            <End Role="fa_cliente" EntitySet="fa_cliente" />
-            <End Role="fa_proforma" EntitySet="fa_proforma" />
           </AssociationSet>
           <AssociationSet Name="FK_fa_guia_remision_fa_cliente_contactos" Association="Self.FK_fa_guia_remision_fa_cliente_contactos">
             <End Role="fa_cliente_contactos" EntitySet="fa_cliente_contactos" />
@@ -3889,10 +3713,6 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <EntitySet Name="fa_parametro" EntityType="Model_facturacion.fa_parametro" />
           <EntitySet Name="vwfa_factura" EntityType="Model_facturacion.vwfa_factura" />
           <EntitySet Name="fa_factura" EntityType="Model_facturacion.fa_factura" />
-          <AssociationSet Name="FK_fa_factura_fa_cliente" Association="Model_facturacion.FK_fa_factura_fa_cliente">
-            <End Role="fa_cliente" EntitySet="fa_cliente" />
-            <End Role="fa_factura" EntitySet="fa_factura" />
-          </AssociationSet>
           <AssociationSet Name="FK_fa_factura_fa_cliente_contactos" Association="Model_facturacion.FK_fa_factura_fa_cliente_contactos">
             <End Role="fa_cliente_contactos" EntitySet="fa_cliente_contactos" />
             <End Role="fa_factura" EntitySet="fa_factura" />
@@ -3928,6 +3748,43 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <AssociationSet Name="FK_fa_factura_x_in_Ing_Egr_Inven_fa_factura" Association="Model_facturacion.FK_fa_factura_x_in_Ing_Egr_Inven_fa_factura">
             <End Role="fa_factura" EntitySet="fa_factura" />
             <End Role="fa_factura_x_in_Ing_Egr_Inven" EntitySet="fa_factura_x_in_Ing_Egr_Inven" />
+          </AssociationSet>
+          <EntitySet Name="fa_cliente" EntityType="Model_facturacion.fa_cliente" />
+          <AssociationSet Name="FK_fa_cliente_contactos_fa_cliente" Association="Model_facturacion.FK_fa_cliente_contactos_fa_cliente">
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+            <End Role="fa_cliente_contactos" EntitySet="fa_cliente_contactos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_cliente_fa_cliente_tipo" Association="Model_facturacion.FK_fa_cliente_fa_cliente_tipo">
+            <End Role="fa_cliente_tipo" EntitySet="fa_cliente_tipo" />
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_cliente_fa_forma_pago" Association="Model_facturacion.FK_fa_cliente_fa_forma_pago">
+            <End Role="fa_formaPago" EntitySet="fa_formaPago" />
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_cliente_fa_TerminoPago" Association="Model_facturacion.FK_fa_cliente_fa_TerminoPago">
+            <End Role="fa_TerminoPago" EntitySet="fa_TerminoPago" />
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_cliente" Association="Model_facturacion.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_cliente">
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+            <End Role="fa_cliente_x_fa_Vendedor_x_sucursal" EntitySet="fa_cliente_x_fa_Vendedor_x_sucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_factura_fa_cliente" Association="Model_facturacion.FK_fa_factura_fa_cliente">
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+            <End Role="fa_factura" EntitySet="fa_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_guia_remision_fa_cliente" Association="Model_facturacion.FK_fa_guia_remision_fa_cliente">
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+            <End Role="fa_guia_remision" EntitySet="fa_guia_remision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_notaCreDeb_fa_cliente" Association="Model_facturacion.FK_fa_notaCreDeb_fa_cliente">
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+            <End Role="fa_notaCreDeb" EntitySet="fa_notaCreDeb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_proforma_fa_cliente" Association="Model_facturacion.FK_fa_proforma_fa_cliente">
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+            <End Role="fa_proforma" EntitySet="fa_proforma" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="vwfa_factura_det">
@@ -4194,7 +4051,6 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <Property Name="fecha_primera_cuota" Type="DateTime" Precision="3" />
           <Property Name="valor_abono" Type="Double" />
           <Property Name="aprobada_enviar_sri" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="fa_cliente" Relationship="Model_facturacion.FK_fa_factura_fa_cliente" FromRole="fa_factura" ToRole="fa_cliente" />
           <NavigationProperty Name="fa_cliente_contactos" Relationship="Model_facturacion.FK_fa_factura_fa_cliente_contactos" FromRole="fa_factura" ToRole="fa_cliente_contactos" />
           <NavigationProperty Name="fa_cuotas_x_doc" Relationship="Model_facturacion.FK_fa_cuotas_x_doc_fa_factura" FromRole="fa_factura" ToRole="fa_cuotas_x_doc" />
           <NavigationProperty Name="fa_factura_det" Relationship="Model_facturacion.FK_fa_factura_det_fa_factura" FromRole="fa_factura" ToRole="fa_factura_det" />
@@ -4204,21 +4060,8 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
           <NavigationProperty Name="fa_factura_x_fa_guia_remision" Relationship="Model_facturacion.FK_fa_factura_x_fa_guia_remision_fa_factura" FromRole="fa_factura" ToRole="fa_factura_x_fa_guia_remision" />
           <NavigationProperty Name="fa_factura_x_formaPago" Relationship="Model_facturacion.FK_fa_factura_x_formaPago_fa_factura" FromRole="fa_factura" ToRole="fa_factura_x_formaPago" />
           <NavigationProperty Name="fa_factura_x_in_Ing_Egr_Inven" Relationship="Model_facturacion.FK_fa_factura_x_in_Ing_Egr_Inven_fa_factura" FromRole="fa_factura" ToRole="fa_factura_x_in_Ing_Egr_Inven" />
+          <NavigationProperty Name="fa_cliente" Relationship="Model_facturacion.FK_fa_factura_fa_cliente" FromRole="fa_factura" ToRole="fa_cliente" />
         </EntityType>
-        <Association Name="FK_fa_factura_fa_cliente">
-          <End Type="Model_facturacion.fa_cliente" Role="fa_cliente" Multiplicity="1" />
-          <End Type="Model_facturacion.fa_factura" Role="fa_factura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="fa_cliente">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCliente" />
-            </Principal>
-            <Dependent Role="fa_factura">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_fa_factura_fa_cliente_contactos">
           <End Type="Model_facturacion.fa_cliente_contactos" Role="fa_cliente_contactos" Multiplicity="0..1" />
           <End Type="Model_facturacion.fa_factura" Role="fa_factura" Multiplicity="*" />
@@ -4373,6 +4216,165 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="fa_cliente">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Idtipo_cliente" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCredito" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cl_plazo" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble_cxc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_Anti" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cl_Cupo" Type="Double" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdCtaCble_cxc_Credito" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="es_empresa_relacionada" Type="Boolean" />
+          <Property Name="NivelPrecio" Type="Int32" />
+          <Property Name="FormaPago" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="EsClienteExportador" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="fa_cliente_contactos" Relationship="Model_facturacion.FK_fa_cliente_contactos_fa_cliente" FromRole="fa_cliente" ToRole="fa_cliente_contactos" />
+          <NavigationProperty Name="fa_cliente_tipo" Relationship="Model_facturacion.FK_fa_cliente_fa_cliente_tipo" FromRole="fa_cliente" ToRole="fa_cliente_tipo" />
+          <NavigationProperty Name="fa_formaPago" Relationship="Model_facturacion.FK_fa_cliente_fa_forma_pago" FromRole="fa_cliente" ToRole="fa_formaPago" />
+          <NavigationProperty Name="fa_TerminoPago" Relationship="Model_facturacion.FK_fa_cliente_fa_TerminoPago" FromRole="fa_cliente" ToRole="fa_TerminoPago" />
+          <NavigationProperty Name="fa_cliente_x_fa_Vendedor_x_sucursal" Relationship="Model_facturacion.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_cliente" FromRole="fa_cliente" ToRole="fa_cliente_x_fa_Vendedor_x_sucursal" />
+          <NavigationProperty Name="fa_factura" Relationship="Model_facturacion.FK_fa_factura_fa_cliente" FromRole="fa_cliente" ToRole="fa_factura" />
+          <NavigationProperty Name="fa_guia_remision" Relationship="Model_facturacion.FK_fa_guia_remision_fa_cliente" FromRole="fa_cliente" ToRole="fa_guia_remision" />
+          <NavigationProperty Name="fa_notaCreDeb" Relationship="Model_facturacion.FK_fa_notaCreDeb_fa_cliente" FromRole="fa_cliente" ToRole="fa_notaCreDeb" />
+          <NavigationProperty Name="fa_proforma" Relationship="Model_facturacion.FK_fa_proforma_fa_cliente" FromRole="fa_cliente" ToRole="fa_proforma" />
+        </EntityType>
+        <Association Name="FK_fa_cliente_contactos_fa_cliente">
+          <End Type="Model_facturacion.fa_cliente" Role="fa_cliente" Multiplicity="1" />
+          <End Type="Model_facturacion.fa_cliente_contactos" Role="fa_cliente_contactos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_cliente">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="fa_cliente_contactos">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_cliente_fa_cliente_tipo">
+          <End Type="Model_facturacion.fa_cliente_tipo" Role="fa_cliente_tipo" Multiplicity="1" />
+          <End Type="Model_facturacion.fa_cliente" Role="fa_cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_cliente_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="Idtipo_cliente" />
+            </Principal>
+            <Dependent Role="fa_cliente">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="Idtipo_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_cliente_fa_forma_pago">
+          <End Type="Model_facturacion.fa_formaPago" Role="fa_formaPago" Multiplicity="0..1" />
+          <End Type="Model_facturacion.fa_cliente" Role="fa_cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_formaPago">
+              <PropertyRef Name="IdFormaPago" />
+            </Principal>
+            <Dependent Role="fa_cliente">
+              <PropertyRef Name="FormaPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_cliente_fa_TerminoPago">
+          <End Type="Model_facturacion.fa_TerminoPago" Role="fa_TerminoPago" Multiplicity="1" />
+          <End Type="Model_facturacion.fa_cliente" Role="fa_cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_TerminoPago">
+              <PropertyRef Name="IdTerminoPago" />
+            </Principal>
+            <Dependent Role="fa_cliente">
+              <PropertyRef Name="IdTipoCredito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_cliente">
+          <End Type="Model_facturacion.fa_cliente" Role="fa_cliente" Multiplicity="1" />
+          <End Type="Model_facturacion.fa_cliente_x_fa_Vendedor_x_sucursal" Role="fa_cliente_x_fa_Vendedor_x_sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_cliente">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="fa_cliente_x_fa_Vendedor_x_sucursal">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_factura_fa_cliente">
+          <End Type="Model_facturacion.fa_cliente" Role="fa_cliente" Multiplicity="1" />
+          <End Type="Model_facturacion.fa_factura" Role="fa_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_cliente">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="fa_factura">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_guia_remision_fa_cliente">
+          <End Type="Model_facturacion.fa_cliente" Role="fa_cliente" Multiplicity="1" />
+          <End Type="Model_facturacion.fa_guia_remision" Role="fa_guia_remision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_cliente">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="fa_guia_remision">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_notaCreDeb_fa_cliente">
+          <End Type="Model_facturacion.fa_cliente" Role="fa_cliente" Multiplicity="1" />
+          <End Type="Model_facturacion.fa_notaCreDeb" Role="fa_notaCreDeb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_cliente">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="fa_notaCreDeb">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_proforma_fa_cliente">
+          <End Type="Model_facturacion.fa_cliente" Role="fa_cliente" Multiplicity="1" />
+          <End Type="Model_facturacion.fa_proforma" Role="fa_proforma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_cliente">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="fa_proforma">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4406,33 +4408,6 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
                 <ScalarProperty Name="IdCatalogo_tipo" ColumnName="IdCatalogo_tipo" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="fa_cliente">
-            <EntityTypeMapping TypeName="Model_facturacion.fa_cliente">
-              <MappingFragment StoreEntitySet="fa_cliente">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-                <ScalarProperty Name="Idtipo_cliente" ColumnName="Idtipo_cliente" />
-                <ScalarProperty Name="IdTipoCredito" ColumnName="IdTipoCredito" />
-                <ScalarProperty Name="cl_plazo" ColumnName="cl_plazo" />
-                <ScalarProperty Name="IdCtaCble_cxc" ColumnName="IdCtaCble_cxc" />
-                <ScalarProperty Name="IdCtaCble_Anti" ColumnName="IdCtaCble_Anti" />
-                <ScalarProperty Name="cl_Cupo" ColumnName="cl_Cupo" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="IdCtaCble_cxc_Credito" ColumnName="IdCtaCble_cxc_Credito" />
-                <ScalarProperty Name="es_empresa_relacionada" ColumnName="es_empresa_relacionada" />
-                <ScalarProperty Name="NivelPrecio" ColumnName="NivelPrecio" />
-                <ScalarProperty Name="FormaPago" ColumnName="FormaPago" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5345,6 +5320,34 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="fa_cliente">
+            <EntityTypeMapping TypeName="Model_facturacion.fa_cliente">
+              <MappingFragment StoreEntitySet="fa_cliente">
+                <ScalarProperty Name="EsClienteExportador" ColumnName="EsClienteExportador" />
+                <ScalarProperty Name="FormaPago" ColumnName="FormaPago" />
+                <ScalarProperty Name="NivelPrecio" ColumnName="NivelPrecio" />
+                <ScalarProperty Name="es_empresa_relacionada" ColumnName="es_empresa_relacionada" />
+                <ScalarProperty Name="IdCtaCble_cxc_Credito" ColumnName="IdCtaCble_cxc_Credito" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="cl_Cupo" ColumnName="cl_Cupo" />
+                <ScalarProperty Name="IdCtaCble_Anti" ColumnName="IdCtaCble_Anti" />
+                <ScalarProperty Name="IdCtaCble_cxc" ColumnName="IdCtaCble_cxc" />
+                <ScalarProperty Name="cl_plazo" ColumnName="cl_plazo" />
+                <ScalarProperty Name="IdTipoCredito" ColumnName="IdTipoCredito" />
+                <ScalarProperty Name="Idtipo_cliente" ColumnName="Idtipo_cliente" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -5361,7 +5364,7 @@ FROM [web].[vwfa_notaCreDeb_x_fa_factura_NotaDeb] AS [vwfa_notaCreDeb_x_fa_factu
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>

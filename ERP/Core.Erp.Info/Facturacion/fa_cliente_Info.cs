@@ -37,8 +37,8 @@ namespace Core.Erp.Info.Facturacion
         public bool es_empresa_relacionada { get; set; }
         public Nullable<int> NivelPrecio { get; set; }
         public string FormaPago { get; set; }
+        public bool EsClienteExportador { get; set; }
 
-        
         //Campos que no existen en la tabla
         public tb_persona_Info info_persona { get; set; }
         public string Descripcion_tip_cliente { get; set; }
