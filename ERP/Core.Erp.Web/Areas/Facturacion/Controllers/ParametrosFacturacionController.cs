@@ -9,6 +9,8 @@ using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Facturacion;
 using Core.Erp.Bus.Caja;
 using Core.Erp.Web.Helps;
+using Core.Erp.Info.Contabilidad;
+using DevExpress.Web;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
@@ -16,7 +18,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
     {
         #region Variables
         fa_parametro_Bus bus_parametro = new fa_parametro_Bus();
-        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
         ct_cbtecble_tipo_Bus bus_tipo_comprobante = new ct_cbtecble_tipo_Bus();
         in_movi_inven_tipo_Bus bus_tipo_movimiento = new in_movi_inven_tipo_Bus();
         caj_Caja_Bus bus_caja = new caj_Caja_Bus();
@@ -68,5 +69,38 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
 
         #endregion
+
+        #region Metodos ComboBox bajo demanda
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        public ActionResult CmbCuenta_Param1()
+        {
+            fa_parametro_Info model = new fa_parametro_Info();
+            return PartialView("_CmbCuenta_Param1", model);
+        }
+        public ActionResult CmbCuenta_Param2()
+        {
+            fa_parametro_Info model = new fa_parametro_Info();
+            return PartialView("_CmbCuenta_Param2", model);
+        }
+        public ActionResult CmbCuenta_Param3()
+        {
+            fa_parametro_Info model = new fa_parametro_Info();
+            return PartialView("_CmbCuenta_Param3", model);
+        }
+        public ActionResult CmbCuenta_Param4()
+        {
+            fa_parametro_Info model = new fa_parametro_Info();
+            return PartialView("_CmbCuenta_Param4", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
     }
 }
