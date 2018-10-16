@@ -39,7 +39,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="IdProveedor">Proveedor</label>
-                            @Html.Partial("_CmbProveedor_Importacion", Model)
+                            @Html.Partial("_CmbProveedor_Importacion", Model.IdProveedor)
                             @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="IdProductoPadre">Producto</label>
-                            @Html.Partial("_CmbProductoPadre_Importacion", Model)
+                            @Html.Partial("_CmbProductoPadre_Importacion", Model.IdProductoPadre)
                             @Html.ValidationMessageFor(q => q.IdProductoPadre, "", new { @class = "text-danger" })
                         </div>
                     </div>

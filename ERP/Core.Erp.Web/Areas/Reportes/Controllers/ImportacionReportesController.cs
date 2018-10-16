@@ -99,7 +99,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cl_filtros_importacion_Info model = new cl_filtros_importacion_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdPais_embarque = ""
+                IdPais_embarque = "",
+                IdMarca = 0,
+                IdProveedor = 0,
+                IdProductoPadre = 0
             };
             cargar_combos();
             IMP_003_Rpt report = new IMP_003_Rpt();

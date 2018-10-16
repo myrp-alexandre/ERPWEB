@@ -16,22 +16,25 @@ namespace Core.Erp.Data.Reportes.Importacion
                 fecha_ini = fecha_ini.Date;
                 fecha_fin = fecha_fin.Date;
                 List<IMP_003_Info> Lista;
-                decimal idprov=  IdProveedor == 0 ? 999999 : IdProveedor;
-                decimal IdProdu = IdProducto == 0 ? 999999 : IdProducto;
-                int IdMa = IdMarca == 0 ? 999 : IdMarca;
+                
+
+                decimal IdProveedorini = IdProveedor;
+                decimal IdProveedorfin =  IdProveedor == 0 ? 9999 : IdProveedor;
+
+                decimal IdProductoini = IdProducto;
+                decimal IdProductorfin = IdProducto == 0 ? 9999 : IdProducto;
+
+                int IdMarcaini = IdMarca;
+                int IdMarcafin = IdMarca == 0 ? 9999 : IdMarca;
 
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = (from q in Context.VWIMP_003
                              where q.IdEmpresa == IdEmpresa
-                             && q.IdProveedor >= idprov
-                             && q.IdProveedor <= idprov
 
-                             && q.IdProducto >= IdProdu
-                             && q.IdProducto <= IdProdu
-
-
-                             && IdMarca <= q.IdMarca && q.IdMarca <= IdMarca
+                             && q.IdProveedor >= IdProveedorini && q.IdProveedor <= IdProveedorfin
+                             && q.IdProducto >= IdProductoini && q.IdProducto <= IdProductorfin
+                             && q.IdMarca >= IdMarcaini && q.IdMarca <= IdMarcafin
 
                              select new IMP_003_Info
                              {
