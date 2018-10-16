@@ -9,6 +9,7 @@ namespace Core.Erp.Info.Reportes.RRHH
     public class ROL_013_Info
     {
         public int IdDepartamento { get; set; }
+        public decimal IdEmpleado { get; set; }
         public Nullable<int> pe_anio { get; set; }
         public System.DateTime pe_FechaIni { get; set; }
         public System.DateTime pe_FechaFin { get; set; }

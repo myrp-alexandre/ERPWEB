@@ -9,14 +9,17 @@ namespace Core.Erp.Data.Reportes.RRHH
 {
     public class ROL_013_Data
     {
-        public List<ROL_013_Info> get_list(int IdEmpresa, int IdNomina, DateTime fecha_inicio, DateTime fecha_fin)
+        public List<ROL_013_Info> get_list(int IdEmpresa, int IdNomina, decimal IdEmpleado, DateTime fecha_inicio, DateTime fecha_fin)
         {
             try
             {
+                decimal IdEmpleadoIni = IdEmpleado;
+                decimal IdEmpleadoFin = IdEmpleado == 0 ? 9999 : IdEmpleado;
                 List<ROL_013_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = (from q in Context.SPROL_013(IdEmpresa, IdNomina, fecha_inicio, fecha_fin)
+                             where q.IdEmpleado >= IdEmpleadoIni && q.IdEmpleado <= IdEmpleadoFin
                              select new ROL_013_Info
                              {
                                  IdDepartamento = q.IdDepartamento,
@@ -34,14 +37,15 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  em_fechaIngaRol = q.em_fechaIngaRol,
                                  em_fechaSalida = q.em_fechaSalida,
                                  Descripcion = q.de_descripcion,
-                                 Valor = q.Valor
+                                 Valor = q.Valor,
+                                 IdEmpleado = q.IdEmpleado
 
 
                              }).ToList();
                 }
                 return Lista;
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 throw;

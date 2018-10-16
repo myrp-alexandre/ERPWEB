@@ -175,22 +175,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="IdCtaCble_SubTotal_Vtas_x_Default">Cuenta contable default para descuento</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.pa_IdCtaCble_descuento, settings =>
-                                {
-                                    settings.Name = "pa_IdCtaCble_descuento";
-                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                    settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                                    settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                                    //Campo ID
-                                    settings.Properties.ValueField = "IdCtaCble";
-                                    settings.Properties.ValueType = typeof(string);
-                                    settings.Properties.TextField = "pc_Cuenta";
-                                    //Boton para seleccionar ningun registro
-                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                    settings.Properties.NullText = "== Seleccione ==";
-                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                                }).BindList(ViewBag.lst_cuentas).GetHtml()
+                                @Html.Partial("_CmbCuenta_Param1", Model)
                                 @Html.ValidationMessageFor(q => q.pa_IdCtaCble_descuento, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -201,22 +186,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="IdCtaCble_SubTotal_Vtas_x_Default">Cuenta contable default para ventas</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_SubTotal_Vtas_x_Default, settings =>
-                                {
-                                    settings.Name = "IdCtaCble_SubTotal_Vtas_x_Default";
-                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                    settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                                    settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                                    //Campo ID
-                                    settings.Properties.ValueField = "IdCtaCble";
-                                    settings.Properties.ValueType = typeof(string);
-                                    settings.Properties.TextField = "pc_Cuenta";
-                                    //Boton para seleccionar ningun registro
-                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                    settings.Properties.NullText = "== Seleccione ==";
-                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                                }).BindList(ViewBag.lst_cuentas).GetHtml()
+                                @Html.Partial("_CmbCuenta_Param2", Model)
                                 @Html.ValidationMessageFor(q => q.IdCtaCble_SubTotal_Vtas_x_Default, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -226,22 +196,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="IdCtaCble_CXC_Vtas_x_Default">Cuenta contable default para crédito</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_CXC_Vtas_x_Default, settings =>
-                                {
-                                    settings.Name = "IdCtaCble_CXC_Vtas_x_Default";
-                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                    settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                                    settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                                    //Campo ID
-                                    settings.Properties.ValueField = "IdCtaCble";
-                                    settings.Properties.ValueType = typeof(string);
-                                    settings.Properties.TextField = "pc_Cuenta";
-                                    //Boton para seleccionar ningun registro
-                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                    settings.Properties.NullText = "== Seleccione ==";
-                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                                }).BindList(ViewBag.lst_cuentas).GetHtml()
+                                @Html.Partial("_CmbCuenta_Param3", Model)
                                 @Html.ValidationMessageFor(q => q.IdCtaCble_CXC_Vtas_x_Default, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -251,22 +206,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="IdCtaCble_IVA">Cuenta contable default para IVA</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_IVA, settings =>
-                                {
-                                    settings.Name = "IdCtaCble_IVA";
-                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                    settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                                    settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                                    //Campo ID
-                                    settings.Properties.ValueField = "IdCtaCble";
-                                    settings.Properties.ValueType = typeof(string);
-                                    settings.Properties.TextField = "pc_Cuenta";
-                                    //Boton para seleccionar ningun registro
-                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                    settings.Properties.NullText = "== Seleccione ==";
-                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                                }).BindList(ViewBag.lst_cuentas).GetHtml()
+                                @Html.Partial("_CmbCuenta_Param4", Model)
                                 @Html.ValidationMessageFor(q => q.IdCtaCble_IVA, "", new { @class = "text-danger" })
                             </div>
                         </div>
