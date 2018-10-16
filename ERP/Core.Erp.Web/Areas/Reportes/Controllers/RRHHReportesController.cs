@@ -1,8 +1,12 @@
-﻿using Core.Erp.Bus.RRHH;
+﻿using Core.Erp.Bus.General;
+using Core.Erp.Bus.RRHH;
+using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
 using Core.Erp.Web.Reportes.RRHH;
+using DevExpress.Web;
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
@@ -10,6 +14,23 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     [SessionTimeout]
     public class RRHHReportesController : Controller
     {
+        #region Metodos ComboBox bajo demanda
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        public ActionResult CmbEmpleado_RRHH()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            return PartialView("_CmbEmpleado_RRHH", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        #endregion
+
         public ActionResult ROL_001(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui= 0, int IdPeriodo=0)
         {
             ROL_001_Rpt model = new ROL_001_Rpt();
@@ -137,8 +158,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-        
-            public ActionResult ROL_011(int IdEmpresa = 0, int IdHorasExtras =0)
+        public ActionResult ROL_011(int IdEmpresa = 0, int IdHorasExtras =0)
         {
             ROL_011_Rpt model = new ROL_011_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
@@ -250,6 +270,38 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
             report.p_IdTipoNomina.Value = model.IdTipoNomina;
             report.RequestParameters = false;
+            ViewBag.Report = report;
+            return View(model);
+        }
+        public ActionResult ROL_015()
+        {
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdEmpleado = 0
+                
+            };
+            ROL_015_Rpt report = new ROL_015_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdEmpleado.Value = model.IdEmpleado;
+            report.p_fechaInicio.Value = model.fecha_ini;
+            report.p_fechaFin.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+            ViewBag.Report = report;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult ROL_015(cl_filtros_Info model)
+        {
+            ROL_015_Rpt report = new ROL_015_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdEmpleado.Value = model.IdEmpleado;
+            report.p_fechaInicio.Value = model.fecha_ini;
+            report.p_fechaFin.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
             return View(model);
         }

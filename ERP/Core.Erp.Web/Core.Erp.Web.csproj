@@ -989,6 +989,12 @@
     <Compile Include="Reportes\RRHH\ROL_014_Rpt.Designer.cs">
       <DependentUpon>ROL_014_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\RRHH\ROL_015_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_015_Rpt.Designer.cs">
+      <DependentUpon>ROL_015_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -9199,6 +9205,8 @@
     <Content Include="Areas\Inventario\Views\ParametroInventario\_CmbCuenta_Param1.cshtml" />
     <Content Include="Areas\Inventario\Views\ParametroInventario\_CmbCuenta_Param2.cshtml" />
     <Content Include="Areas\Inventario\Views\ParametroInventario\_CmbCuenta_Param3.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbEmpleado_RRHH.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_015.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -9312,6 +9320,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -9593,6 +9602,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_014_Rpt.resx">
       <DependentUpon>ROL_014_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_015_Rpt.resx">
+      <DependentUpon>ROL_015_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
