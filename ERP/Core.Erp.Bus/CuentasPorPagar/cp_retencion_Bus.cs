@@ -87,6 +87,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info_retencion.Descripcion = info_orden_giro.Descripcion;
                 info_retencion.pe_razonSocial = info_orden_giro.info_proveedor.info_persona.pe_razonSocial;
                 info_retencion.observacion = info_orden_giro.co_observacion;
+                info_retencion.fecha = info_orden_giro.co_FechaFactura;
                 return info_retencion;
             }
             catch (Exception)

@@ -84,6 +84,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
            
           #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0 , int IdTipoCbte_Ogiro = 0, decimal IdCbteCble_Ogiro = 0)
+
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -96,15 +97,19 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             {
                 IdEmpresa = IdEmpresa
             };
-            model.fecha = DateTime.Now;
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            
+            
+
             Session["info_param_op"] = bus_parametros.get_info(IdEmpresa);
             model = bus_retencion.get_info_factura(IdEmpresa, IdTipoCbte_Ogiro, IdCbteCble_Ogiro);
-            model.fecha = DateTime.Now;
+            model.fecha = model.fecha;
             if (model.co_valoriva > 0)
                 Session["co_valoriva"] = model.co_valoriva;
             cargar_combos(IdEmpresa);
             cargar_combos_detalle();
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            List_cp_retencion_det.set_list(new List<cp_retencion_det_Info>(), model.IdTransaccionSession);
+            List_ct_cbtecble_det_List.set_list(new List<ct_cbtecble_det_Info>(), model.IdTransaccionSession);
             return View(model);
         }
         [HttpPost]
