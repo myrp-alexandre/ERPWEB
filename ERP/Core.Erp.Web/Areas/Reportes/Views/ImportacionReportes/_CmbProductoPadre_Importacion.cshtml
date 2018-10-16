@@ -15,6 +15,9 @@
         settings.Properties.TextField = "pr_descripcion";
         settings.Properties.TextFormatString = "[{0}] {1}";
         settings.Properties.FilterMinLength = 3;
+        settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+        settings.Properties.NullText = "== Seleccione ==";
+        settings.Properties.AllowNull = true;
 
         settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdProducto.PerformCallback(); IdProducto.SetValue(0); }";
 
@@ -23,12 +26,10 @@
         settings.Properties.Columns.Add("nom_presentacion", "Presentación").Width = System.Web.UI.WebControls.Unit.Percentage(20);
         settings.Properties.Columns.Add("nom_categoria", "Categoría").Width = System.Web.UI.WebControls.Unit.Percentage(20);
 
-        settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-        settings.Properties.NullText = "== Seleccione ==";
-        settings.Properties.AllowNull = true;
+
     })
     .BindList(new Core.Erp.Web.Areas.Reportes.Controllers.ImportacionReportesController().get_list_ProductoPadre_bajo_demanda, new Core.Erp.Web.Areas.Reportes.Controllers.ImportacionReportesController().get_info_producto_bajo_demanda)
-    .Bind(Model.IdProductoPadre);
+    .Bind(Model.GetType() == typeof(Core.Erp.Info.Helps.cl_filtros_importacion_Info) ? "" : (Model == 0 ? "" : Model));
 
 }
 @comboBox.GetHtml()
