@@ -48,7 +48,7 @@ namespace Core.Erp.Data.Reportes.CuentasPorCobrar
                 }
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception EX)
             {
 
                 throw;
