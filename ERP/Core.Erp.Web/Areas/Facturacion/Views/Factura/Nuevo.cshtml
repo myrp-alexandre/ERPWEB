@@ -71,7 +71,8 @@
             IdSucursal: $("#IdSucursal").val(),
             IdPuntoVta: $("#IdPuntoVta").val(),
             Secuencia: Secuencia,
-            IdTransaccionSession: $("#IdTransaccionSession").val()
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            IdCliente: IdCliente.GetValue()
         }
         $.ajax({
             type: 'POST',
@@ -244,7 +245,8 @@
         var datos = {
             IdSucursal: $("#IdSucursal").val(),
             IdPuntoVta: $("#IdPuntoVta").val(),
-            IdProducto: s.GetValue()
+            IdProducto: s.GetValue(),
+            IdCliente: IdCliente.GetValue()
         }
         $.ajax({
             type: 'POST',
