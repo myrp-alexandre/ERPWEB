@@ -340,6 +340,7 @@
     <Compile Include="Reportes\RRHH\ROL_013_Info.cs" />
     <Compile Include="Reportes\RRHH\ROL_014_Info.cs" />
     <Compile Include="Reportes\RRHH\ROL_015_Info.cs" />
+    <Compile Include="Reportes\RRHH\ROL_016_Info.cs" />
     <Compile Include="RRHH\RDEP\Rdep.cs" />
     <Compile Include="RRHH\RDEP\Rdep_Info.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Detalle_Info.cs" />
