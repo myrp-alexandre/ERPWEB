@@ -600,14 +600,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
             info_det.IdProducto = info_det.IdProducto;
             info_det.pr_descripcion = info_det.pr_descripcion;
-            info_det.pd_descuento_uni = Math.Round(info_det.pd_precio * (info_det.pd_por_descuento_uni / 100), 2, MidpointRounding.AwayFromZero);
-            info_det.pd_precio_final = Math.Round(info_det.pd_precio - info_det.pd_descuento_uni, 2, MidpointRounding.AwayFromZero);
-            info_det.pd_subtotal = Math.Round(info_det.pd_cantidad * info_det.pd_precio_final, 2, MidpointRounding.AwayFromZero);
+            info_det.pd_descuento_uni = info_det.pd_precio * (info_det.pd_por_descuento_uni / 100);
+            info_det.pd_precio_final = info_det.pd_precio - info_det.pd_descuento_uni;
+            info_det.pd_subtotal = info_det.pd_cantidad * info_det.pd_precio_final;
             var impuesto = bus_impuesto.get_info(info_det.IdCod_Impuesto);
             if (impuesto != null)
                 info_det.pd_por_iva = impuesto.porcentaje;
-            info_det.pd_iva = Math.Round(info_det.pd_subtotal * (info_det.pd_por_iva / 100), 2, MidpointRounding.AwayFromZero);
-            info_det.pd_total = Math.Round(info_det.pd_subtotal + info_det.pd_iva, 2, MidpointRounding.AwayFromZero);
+            info_det.pd_iva = info_det.pd_subtotal * (info_det.pd_por_iva / 100);
+            info_det.pd_total = info_det.pd_subtotal + info_det.pd_iva;
             list.Add(info_det);
         }
 
@@ -619,17 +619,17 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             edited_info.pd_cantidad = info_det.pd_cantidad;
             edited_info.pd_por_descuento_uni = info_det.pd_por_descuento_uni;
             edited_info.pd_precio = info_det.pd_precio;
-            edited_info.pd_descuento_uni = Math.Round(info_det.pd_precio * (info_det.pd_por_descuento_uni / 100), 2, MidpointRounding.AwayFromZero);
-            edited_info.pd_precio_final = Math.Round(info_det.pd_precio - edited_info.pd_descuento_uni,2,MidpointRounding.AwayFromZero);
-            edited_info.pd_subtotal = Math.Round(info_det.pd_cantidad * edited_info.pd_precio_final,2,MidpointRounding.AwayFromZero);
+            edited_info.pd_descuento_uni = info_det.pd_precio * (info_det.pd_por_descuento_uni / 100);
+            edited_info.pd_precio_final = info_det.pd_precio - edited_info.pd_descuento_uni;
+            edited_info.pd_subtotal = info_det.pd_cantidad * edited_info.pd_precio_final;
             if(!string.IsNullOrEmpty(info_det.IdCod_Impuesto) && info_det.IdCod_Impuesto != edited_info.IdCod_Impuesto)
             {
                 var impuesto = bus_impuesto.get_info(info_det.IdCod_Impuesto);
                 if (impuesto != null)
                     edited_info.pd_por_iva = impuesto.porcentaje;
             }
-            edited_info.pd_iva = Math.Round(edited_info.pd_subtotal * (edited_info.pd_por_iva / 100),2,MidpointRounding.AwayFromZero);
-            edited_info.pd_total = Math.Round(edited_info.pd_subtotal + edited_info.pd_iva,2,MidpointRounding.AwayFromZero);
+            edited_info.pd_iva = edited_info.pd_subtotal * (edited_info.pd_por_iva / 100);
+            edited_info.pd_total = edited_info.pd_subtotal + edited_info.pd_iva;
         }
 
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
