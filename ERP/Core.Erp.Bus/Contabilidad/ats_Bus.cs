@@ -189,7 +189,7 @@ namespace Core.Erp.Bus.Contabilidad
                                            comp_det.air.Add(new detalleAir
                                            {
                                                codRetAir = "332",
-                                               baseImpAir = "0.00",
+                                               baseImpAir =Convert.ToDecimal( comp.baseImpGrav+comp.baseImponible).ToString(),
                                                porcentajeAir = "0",
                                                valRetAir = "0.00",
                                            });
