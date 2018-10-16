@@ -397,7 +397,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             {
                 if (item.sc_cantidad > item.sc_cantidad_factura)
                 {
-                    msg = "No puede devolver una cantidad mayor a la facturada: " + i_validar.Serie1 + "-" + i_validar.Serie2 + "-" + i_validar.NumNota_Impresa + " utilizado.";
+                    msg = "No puede devolver una cantidad mayor a la facturado, Facturado["+item.sc_cantidad_factura+"]:  intenta devolver ["+item.sc_cantidad+"]  produdcto ["+ item.pr_descripcion+"]"  ;
+                    return false;
                 }
             }
             return true;
