@@ -1231,7 +1231,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_007' does not have
           <Property Name="RTF_8" Type="float" />
           <Property Name="RTF_10" Type="float" />
           <Property Name="RTF_100" Type="float" />
-          <Property Name="Documento" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Documento" Type="varchar" MaxLength="23" Nullable="false" />
           <Property Name="descripcion_cod_sri" Type="varchar" MaxLength="350" />
           <Property Name="re_tipoRet" Type="char" MaxLength="3" />
           <Property Name="Num_Autorizacion_OG" Type="varchar" MaxLength="50" />
@@ -2928,14 +2928,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Parameter Name="idProveedorIni" Type="decimal" Mode="In" />
           <Parameter Name="idProveedorFIn" Type="decimal" Mode="In" />
         </Function>
-        <Function Name="SPCXP_010" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
-          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
-          <Parameter Name="IdProveedorIni" Type="numeric" Mode="In" />
-          <Parameter Name="IdProveedorFin" Type="numeric" Mode="In" />
-          <Parameter Name="FechaIni" Type="date" Mode="In" />
-          <Parameter Name="FechaFin" Type="date" Mode="In" />
-          <Parameter Name="MostrarAnulados" Type="bit" Mode="In" />
-        </Function>
         <Function Name="SPFAC_002" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="SucursalIni" Type="int" Mode="In" />
@@ -2968,14 +2960,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Parameter Name="IdSubGrupo" Type="int" Mode="In" />
           <Parameter Name="IdMarcaIni" Type="int" Mode="In" />
           <Parameter Name="IdMarcaFin" Type="int" Mode="In" />
-        </Function>
-        <Function Name="SPFAC_011" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
-          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
-          <Parameter Name="IdClienteIni" Type="numeric" Mode="In" />
-          <Parameter Name="IdClienteFin" Type="numeric" Mode="In" />
-          <Parameter Name="FechaIni" Type="date" Mode="In" />
-          <Parameter Name="FechaFin" Type="date" Mode="In" />
-          <Parameter Name="MostrarAnulados" Type="bit" Mode="In" />
         </Function>
         <Function Name="SPINV_003" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
@@ -3077,6 +3061,11 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Parameter Name="idnomina" Type="int" Mode="In" />
           <Parameter Name="fecha_inicio" Type="date" Mode="In" />
           <Parameter Name="fecha_fin" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SPROL_015" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
+          <Parameter Name="FechaInicio" Type="date" Mode="In" />
+          <Parameter Name="FechaFin" Type="date" Mode="In" />
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="Model_reportesStoreContainer">
           <EntitySet Name="ro_SPROL_002" EntityType="Self.ro_SPROL_002" Schema="web" store:Type="Tables" />
@@ -5821,7 +5810,7 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
           <Property Name="RTF_8" Type="Double" />
           <Property Name="RTF_10" Type="Double" />
           <Property Name="RTF_100" Type="Double" />
-          <Property Name="Documento" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Documento" Type="String" MaxLength="23" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="descripcion_cod_sri" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
           <Property Name="re_tipoRet" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="Num_Autorizacion_OG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -7521,6 +7510,11 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
             <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
             <Parameter Name="MostrarAnulados" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="SPROL_015" ReturnType="Collection(Model_reportes.SPROL_015_Result)">
+            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPACTF_004_detalle_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -8306,6 +8300,17 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
           <Property Type="Double" Name="Saldo" Nullable="true" />
           <Property Type="Double" Name="SaldoModulo" Nullable="true" />
           <Property Type="Int32" Name="Secuencia" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SPROL_015_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Decimal" Name="IdEmpleado" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="IdNominaTipo" Nullable="false" />
+          <Property Type="Int32" Name="IdNominaTipoLiqui" Nullable="false" />
+          <Property Type="String" Name="pe_cedulaRuc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="pe_nombreCompleto" Nullable="false" MaxLength="200" />
+          <Property Type="Double" Name="Decimocuarto" Nullable="true" />
+          <Property Type="Double" Name="DecimoTercero" Nullable="true" />
+          <Property Type="Double" Name="Vacaciones" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -10722,41 +10727,18 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SPCXP_010" FunctionName="Model_reportes.Store.SPCXP_010">
+          <FunctionImportMapping FunctionImportName="SPROL_015" FunctionName="Model_reportes.Store.SPROL_015">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Model_reportes.SPCXP_010_Result">
+              <ComplexTypeMapping TypeName="Model_reportes.SPROL_015_Result">
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
+                <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
                 <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
-                <ScalarProperty Name="co_observacion" ColumnName="co_observacion" />
-                <ScalarProperty Name="Debito" ColumnName="Debito" />
-                <ScalarProperty Name="Credito" ColumnName="Credito" />
-                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
-                <ScalarProperty Name="SaldoModulo" ColumnName="SaldoModulo" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SPFAC_011" FunctionName="Model_reportes.Store.SPFAC_011">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model_reportes.SPFAC_011_Result">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="Debitos" ColumnName="Debitos" />
-                <ScalarProperty Name="Creditos" ColumnName="Creditos" />
-                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
-                <ScalarProperty Name="SaldoModulo" ColumnName="SaldoModulo" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="Decimocuarto" ColumnName="Decimocuarto" />
+                <ScalarProperty Name="DecimoTercero" ColumnName="DecimoTercero" />
+                <ScalarProperty Name="Vacaciones" ColumnName="Vacaciones" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
