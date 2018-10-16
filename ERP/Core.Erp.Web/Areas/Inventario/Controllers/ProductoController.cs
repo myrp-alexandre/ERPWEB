@@ -102,12 +102,16 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-            in_Producto_Info model = new in_Producto_Info { IdEmpresa = IdEmpresa, IdCod_Impuesto_Iva = "IVA12" };
+            in_Producto_Info model = new in_Producto_Info {
+                IdEmpresa = IdEmpresa,
+                IdCod_Impuesto_Iva = "IVA12",
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
+                lst_producto_composicion = new List<in_Producto_Composicion_Info>()
+            };
             model.IdTransaccionSession =Convert.ToDecimal( SessionFixed.IdTransaccionSession);
             var lst_producto_x_bodega = bus_producto_x_bodega.get_list(Convert.ToInt32(SessionFixed.IdEmpresa));
             model.pr_imagen = new byte[0];
-            model.lst_producto_composicion = new List<in_Producto_Composicion_Info>();
-            list_producto_composicion.set_list(model.lst_producto_composicion);
+            list_producto_composicion.set_list(model.lst_producto_composicion, model.IdTransaccionSession);
             Lis_in_producto_x_tb_bodega_Info_List.set_list(bus_producto_x_bodega.get_list(Convert.ToInt32(SessionFixed.IdEmpresa)), model.IdTransaccionSession);
             cargar_combos(model);
             return View(model);
@@ -117,6 +121,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             model.IdUsuario = SessionFixed.IdUsuario.ToString();
             model.pr_imagen = Producto_imagen.pr_imagen;
+            model.lst_producto_composicion = list_producto_composicion.get_list(model.IdTransaccionSession);
             model.lst_producto_x_bodega = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToInt32(model.IdTransaccionSession));
             if (model.lst_producto_x_bodega == null)
                 model.lst_producto_x_bodega = new List<in_producto_x_tb_bodega_Info>();
@@ -154,7 +159,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             model.lst_producto_composicion = bus_producto_composicion.get_list(model.IdEmpresa, model.IdProducto);
             model.lst_producto_x_bodega = bus_producto_x_bodega.get_list(IdEmpresa, model.IdProducto);
             Lis_in_producto_x_tb_bodega_Info_List.set_list(model.lst_producto_x_bodega, model.IdTransaccionSession);
-            list_producto_composicion.set_list(model.lst_producto_composicion);
+            list_producto_composicion.set_list(model.lst_producto_composicion, model.IdTransaccionSession);
             return View(model);
         }
         [HttpPost]
@@ -183,7 +188,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 return View(model);
             }
 
-            model.lst_producto_composicion = list_producto_composicion.get_list();
+            model.lst_producto_composicion = list_producto_composicion.get_list(model.IdTransaccionSession);
             model.lst_producto_composicion.ForEach(q => { q.IdEmpresa = model.IdEmpresa; q.IdProductoPadre = model.IdProducto; });
             bus_producto_composicion.eliminarDB(model.IdEmpresa, model.IdProducto);
             if (!bus_producto_composicion.guardarDB(model.lst_producto_composicion))
@@ -207,7 +212,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 return RedirectToAction("Index");
             cargar_combos(model);
             model.lst_producto_composicion = bus_producto_composicion.get_list(model.IdEmpresa, model.IdProducto);
-            list_producto_composicion.set_list(model.lst_producto_composicion);
+            list_producto_composicion.set_list(model.lst_producto_composicion, model.IdTransaccionSession);
             return View(model);
         }
         [HttpPost]
@@ -404,11 +409,13 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_producto_composicion(decimal IdProducto = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             in_Producto_Info model = new in_Producto_Info();
             model.lst_producto_composicion = bus_producto_composicion.get_list(IdEmpresa, IdProducto);
             if (model.lst_producto_composicion.Count == 0)
-                model.lst_producto_composicion = list_producto_composicion.get_list();
+                model.lst_producto_composicion = list_producto_composicion.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            model.lst_producto_composicion = list_producto_composicion.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos();
             return PartialView("_GridViewPartial_producto_composicion", model);
         }
@@ -429,9 +436,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                     info_det.pr_descripcion = info_p.pr_descripcion;
                     info_det.IdUnidadMedida = info_p.IdUnidadMedida;
                 }
-                list_producto_composicion.AddRow(info_det);
+                list_producto_composicion.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             }
-            model.lst_producto_composicion = list_producto_composicion.get_list();
+            model.lst_producto_composicion = list_producto_composicion.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_producto_composicion", model);
         }
 
@@ -451,17 +458,17 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                     info_det.pr_descripcion = info_p.pr_descripcion;
                     info_det.IdUnidadMedida = info_p.IdUnidadMedida;
                 }
-                list_producto_composicion.UpdateRow(info_det);
+                list_producto_composicion.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             }
-            model.lst_producto_composicion = list_producto_composicion.get_list();
+            model.lst_producto_composicion = list_producto_composicion.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_producto_composicion", model);
         }
 
         public ActionResult EditingDelete(int secuencia)
         {
-            list_producto_composicion.DeleteRow(secuencia);
+            list_producto_composicion.DeleteRow(secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             in_Producto_Info model = new in_Producto_Info();
-            model.lst_producto_composicion = list_producto_composicion.get_list();
+            model.lst_producto_composicion = list_producto_composicion.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos();
             return PartialView("_GridViewPartial_producto_composicion", model);
         }
@@ -557,34 +564,36 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
     public class in_Producto_Composicion_List
     {
         in_Producto_Bus bus_producto = new in_Producto_Bus();
-        public List<in_Producto_Composicion_Info> get_list()
+        string Variable = "in_Producto_Composicion_Info";
+
+        public List<in_Producto_Composicion_Info> get_list(decimal IdTransaccionSession)
         {
-            if (HttpContext.Current.Session["in_Producto_Composicion_Info"] == null)
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
             {
                 List<in_Producto_Composicion_Info> list = new List<in_Producto_Composicion_Info>();
 
-                HttpContext.Current.Session["in_Producto_Composicion_Info"] = list;
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<in_Producto_Composicion_Info>)HttpContext.Current.Session["in_Producto_Composicion_Info"];
+            return (List<in_Producto_Composicion_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<in_Producto_Composicion_Info> list)
+        public void set_list(List<in_Producto_Composicion_Info> list, decimal IdTransaccionSession)
         {
-            HttpContext.Current.Session["in_Producto_Composicion_Info"] = list;
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }
 
-        public void AddRow(in_Producto_Composicion_Info info_det)
+        public void AddRow(in_Producto_Composicion_Info info_det, decimal IdTransaccionSession)
         {
-            List<in_Producto_Composicion_Info> list = get_list();
+            List<in_Producto_Composicion_Info> list = get_list(IdTransaccionSession);
             
             info_det.secuencia = list.Count == 0 ? 1 : list.Max(q => q.secuencia)+1;
             info_det.pr_descripcion = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProductoHijo).pr_descripcion_combo;
             list.Add(info_det);
         }
 
-        public void UpdateRow(in_Producto_Composicion_Info info_det)
+        public void UpdateRow(in_Producto_Composicion_Info info_det, decimal IdTransaccionSession)
         {
-            in_Producto_Composicion_Info edited_info = get_list().Where(m => m.secuencia == info_det.secuencia).First();
+            in_Producto_Composicion_Info edited_info = get_list(IdTransaccionSession).Where(m => m.secuencia == info_det.secuencia).First();
             if (edited_info.IdProductoHijo != info_det.IdProductoHijo)
             {
                 edited_info.pr_descripcion = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProductoHijo).pr_descripcion_combo;
@@ -594,9 +603,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             edited_info.Cantidad = info_det.Cantidad;
         }
 
-        public void DeleteRow(int secuencia)
+        public void DeleteRow(int secuencia, decimal IdTransaccionSession)
         {
-            List<in_Producto_Composicion_Info> list = get_list();
+            List<in_Producto_Composicion_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.secuencia == secuencia).First());
         }
     }
@@ -633,8 +642,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             list.Remove(list.Where(m => m.IdProducto == IdProducto).First());
         }
     }
-
-
 
     public class in_producto_x_tb_bodega_Info_List
     {
