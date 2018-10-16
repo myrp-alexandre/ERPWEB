@@ -2,6 +2,7 @@
 using Core.Erp.Bus.RRHH;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
+using Core.Erp.Info.RRHH;
 using Core.Erp.Web.Helps;
 using Core.Erp.Web.Reportes.RRHH;
 using DevExpress.Web;
@@ -155,6 +156,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ro_nomina_tipo_Bus bus_nomina = new ro_nomina_tipo_Bus();
             var lst_nomina = bus_nomina.get_list(IdEmpresa, false);
+            lst_nomina.Add(new ro_nomina_tipo_Info
+            {
+                IdNomina_Tipo = 0,
+                Descripcion = "TODAS"
+
+            });
             ViewBag.lst_nomina = lst_nomina;
 
             
