@@ -14,6 +14,7 @@ namespace Core.Erp.Data
     public partial class SPROL_013_Result
     {
         public int IdDepartamento { get; set; }
+        public decimal IdEmpleado { get; set; }
         public Nullable<int> pe_anio { get; set; }
         public System.DateTime pe_FechaIni { get; set; }
         public System.DateTime pe_FechaFin { get; set; }

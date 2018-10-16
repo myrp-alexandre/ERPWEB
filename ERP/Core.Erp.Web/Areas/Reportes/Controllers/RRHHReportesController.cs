@@ -210,24 +210,23 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-        public ActionResult ROL_013(DateTime? fecha_inicio, DateTime? fecha_fin, int IdNomina = 0)
+        public ActionResult ROL_013()
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
-                fecha_ini = fecha_inicio == null ? DateTime.Now : Convert.ToDateTime(fecha_inicio),
-                fecha_fin = fecha_fin == null ? DateTime.Now : Convert.ToDateTime(fecha_fin),
-                IdNomina = IdNomina
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdNomina = 0,
+                IdEmpleado = 0
             };
             cargar_combos();
             ROL_013_Rpt report = new ROL_013_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdNomina.Value = model.IdNomina;
+            report.p_IdEmpleado.Value = model.IdEmpleado;
             report.p_fecha_inicio.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
-            report.usuario = Session["IdUsuario"].ToString();
-            report.empresa = Session["nom_empresa"].ToString();
-            if (IdNomina == 0)
-                report.RequestParameters = false;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
             return View(model);
         }
@@ -236,15 +235,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult ROL_013(cl_filtros_Info model)
         {
             ROL_013_Rpt report = new ROL_013_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdNomina.Value = model.IdNomina;
+            report.p_IdEmpleado.Value = model.IdEmpleado;
             report.p_fecha_inicio.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
-            report.usuario = Session["IdUsuario"].ToString();
-            report.empresa = Session["nom_empresa"].ToString();
-            cargar_combos();
-            if (model.IdNomina == 0)
-                report.RequestParameters = false;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
             return View(model);
         }
