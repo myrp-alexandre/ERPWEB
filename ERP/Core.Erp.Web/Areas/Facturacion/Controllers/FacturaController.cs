@@ -403,14 +403,21 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             else
                 List_producto.set_list(new List<in_Producto_Info>());
+            
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult GetLotesPorProducto(int IdSucursal = 0, int IdPuntoVta = 0, decimal IdProducto = 0)
+        public JsonResult GetLotesPorProducto(int IdSucursal = 0, int IdPuntoVta = 0, decimal IdProducto = 0, decimal IdCliente = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var resultado = bus_producto.get_info(IdEmpresa, IdProducto);
             if (resultado == null)
                 resultado = new in_Producto_Info();
+
+            var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
+            if (cliente != null && cliente.EsClienteExportador)
+            {
+                resultado.IdCod_Impuesto_Iva = "IVA0";
+            }
 
             var punto_venta = bus_punto_venta.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
             if (punto_venta != null)

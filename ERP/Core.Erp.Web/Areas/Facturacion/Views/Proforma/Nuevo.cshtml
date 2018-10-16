@@ -285,7 +285,8 @@
         var datos = {
             IdSucursal: $("#IdSucursal").val(),
             IdBodega: $("#IdBodega").val(),
-            IdProducto: s.GetValue()
+            IdProducto: s.GetValue(),
+            IdCliente: IdCliente.GetValue()
         }
         $.ajax({
             type: 'POST',

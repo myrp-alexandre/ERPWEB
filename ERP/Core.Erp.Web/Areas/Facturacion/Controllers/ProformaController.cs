@@ -364,14 +364,20 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetLotesPorProducto(int IdSucursal = 0, int IdBodega = 0, decimal IdProducto = 0)
+        public JsonResult GetLotesPorProducto(int IdSucursal = 0, int IdBodega = 0, decimal IdProducto = 0, decimal IdCliente = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var resultado = bus_producto.get_info(IdEmpresa,IdProducto);
             if (resultado == null)
                 resultado = new in_Producto_Info();
-            
-                if(resultado.IdProducto_padre > 0)
+
+            var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
+            if (cliente != null && cliente.EsClienteExportador)
+            {
+                resultado.IdCod_Impuesto_Iva = "IVA0";
+            }
+
+            if (resultado.IdProducto_padre > 0)
                     List_producto.set_list(bus_producto.get_list_stock_lotes(IdEmpresa, IdSucursal, IdBodega, Convert.ToDecimal(resultado.IdProducto_padre)));
                 else
                 List_producto.set_list(new List<in_Producto_Info>());
