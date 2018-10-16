@@ -41,6 +41,9 @@ namespace Core.Erp.Info.Facturacion
         public string lote_num_lote { get; set; }
         public DateTime? lote_fecha_vcto { get; set; }
         public string nom_presentacion { get; set; }
+
+        public double sc_cantidad_factura { get; set; }
+
         #endregion
 
     }

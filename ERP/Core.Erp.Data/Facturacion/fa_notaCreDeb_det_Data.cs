@@ -106,6 +106,7 @@ namespace Core.Erp.Data.Facturacion
                                      nom_presentacion = q.nom_presentacion,
                                      lote_num_lote = q.lote_num_lote,
                                      lote_fecha_vcto = q.lote_fecha_vcto,
+                                     sc_cantidad_factura=q.vt_cantidad
                                  }).ToList();
                     }else
                         Lista = (from q in Context.vwfa_notaCreDeb_det
