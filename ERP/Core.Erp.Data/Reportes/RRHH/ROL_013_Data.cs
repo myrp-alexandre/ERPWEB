@@ -15,11 +15,12 @@ namespace Core.Erp.Data.Reportes.RRHH
             {
                 decimal IdEmpleadoIni = IdEmpleado;
                 decimal IdEmpleadoFin = IdEmpleado == 0 ? 9999 : IdEmpleado;
+                
                 List<ROL_013_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = (from q in Context.SPROL_013(IdEmpresa, IdNomina, fecha_inicio, fecha_fin)
-                             where q.IdEmpleado >= IdEmpleadoIni && q.IdEmpleado <= IdEmpleadoFin
+                             where  q.IdEmpleado >= IdEmpleadoIni && q.IdEmpleado <= IdEmpleadoFin
                              select new ROL_013_Info
                              {
                                  IdDepartamento = q.IdDepartamento,

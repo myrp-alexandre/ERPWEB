@@ -17,7 +17,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     {
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         tb_persona_Bus bus_persona = new tb_persona_Bus();
-
         #region ProductoPadre
         public ActionResult CmbProductoPadre_Importacion()
         {
@@ -34,7 +33,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
         #endregion
-
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbProveedor_Importacion()
         {
@@ -50,10 +48,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROVEE.ToString());
         }
         #endregion
-
-        private void cargar_combos()
+        private void cargar_combos(int IdEmpresa)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             tb_pais_Bus bus_pais = new tb_pais_Bus();
             var lst_pais = bus_pais.get_list(false);
             lst_pais.Add(new Info.General.tb_pais_Info
@@ -75,25 +71,21 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult IMP_001(int IdOrdenCompra_ext = 0)
         {
             IMP_001_Rpt model = new IMP_001_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.p_IdOrdenCompra_ext.Value = IdOrdenCompra_ext;
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
-                model.RequestParameters = false;
+            model.usuario = SessionFixed.IdUsuario.ToString();
+            model.empresa = SessionFixed.NomEmpresa.ToString();
             return View(model);
         }
-
         public ActionResult IMP_002(int IdOrdenCompra_ext = 0)
         {
             IMP_002_Rpt model = new IMP_002_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.p_IdOrdenCompra_ext.Value = IdOrdenCompra_ext;
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
-            model.RequestParameters = false;
+            model.usuario = SessionFixed.IdUsuario.ToString();
+            model.empresa = SessionFixed.NomEmpresa.ToString();
             return View(model);
         }
-
         public ActionResult IMP_003()
         {
             cl_filtros_importacion_Info model = new cl_filtros_importacion_Info
@@ -104,7 +96,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdProveedor = 0,
                 IdProductoPadre = 0
             };
-            cargar_combos();
+            cargar_combos(model.IdEmpresa);
             IMP_003_Rpt report = new IMP_003_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdProveedor.Value = model.IdProveedor;
@@ -118,7 +110,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
-
         [HttpPost]
         public ActionResult IMP_003(cl_filtros_importacion_Info model)
         {
@@ -132,7 +123,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_fecha_fin.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
-            cargar_combos();
+            cargar_combos(model.IdEmpresa);
             ViewBag.Report = report;
             return View(model);
         }

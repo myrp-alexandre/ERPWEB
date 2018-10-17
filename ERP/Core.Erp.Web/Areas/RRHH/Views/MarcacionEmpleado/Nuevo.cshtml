@@ -16,8 +16,8 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdCtaCblePadre">Empleado*</label>
-                    @Html.Partial("_CmbEmpleado_marcacion", Model.IdEmpleado)
+                    <label for="IdEmpleado">Empleado*</label>
+                    @Html.Partial("_CmbEmpleado_Marcacion", Model.IdEmpleado)
                     @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
                 </div>
             </div>

@@ -2849,6 +2849,42 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Property Name="Fondos_Reservas" Type="varchar" MaxLength="30" />
           <Property Name="IdDivision" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_016' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VWROL_016">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdActaFiniquito" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdCausaTerminacion" />
+            <PropertyRef Name="FechaIngreso" />
+            <PropertyRef Name="FechaSalida" />
+            <PropertyRef Name="UltimaRemuneracion" />
+            <PropertyRef Name="Ingresos" />
+            <PropertyRef Name="Egresos" />
+            <PropertyRef Name="Liquido" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="Contrato" />
+            <PropertyRef Name="IdTipoCatalogo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdActaFiniquito" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdCausaTerminacion" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="FechaIngreso" Type="datetime" Nullable="false" />
+          <Property Name="FechaSalida" Type="datetime" Nullable="false" />
+          <Property Name="UltimaRemuneracion" Type="float" Nullable="false" />
+          <Property Name="Observacion" Type="varchar" MaxLength="250" />
+          <Property Name="Ingresos" Type="float" Nullable="false" />
+          <Property Name="Egresos" Type="float" Nullable="false" />
+          <Property Name="Liquido" Type="float" Nullable="false" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ca_descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Contrato" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="IdTipoCatalogo" Type="int" Nullable="false" />
+        </EntityType>
         <Function Name="SPACTF_004_detalle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="Fecha_corte" Type="datetime" Mode="In" />
@@ -3077,6 +3113,16 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_014' does not have
           <Parameter Name="idnomina" Type="int" Mode="In" />
           <Parameter Name="fecha_inicio" Type="date" Mode="In" />
           <Parameter Name="fecha_fin" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SPROL_015" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
+          <Parameter Name="FechaInicio" Type="date" Mode="In" />
+          <Parameter Name="FechaFin" Type="date" Mode="In" />
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SPROL_017" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="FechaInicio" Type="date" Mode="In" />
+          <Parameter Name="FechaFin" Type="date" Mode="In" />
         </Function>
         <EntityContainer Name="Model_reportesStoreContainer">
           <EntitySet Name="ro_SPROL_002" EntityType="Self.ro_SPROL_002" Schema="web" store:Type="Tables" />
@@ -4742,6 +4788,26 @@ FROM [web].[VWROL_011] AS [VWROL_011]</DefiningQuery>
 [VWROL_014].[IdDivision] AS [IdDivision]
 FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VWROL_016" EntityType="Self.VWROL_016" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+[VWROL_016].[IdEmpresa] AS [IdEmpresa], 
+[VWROL_016].[IdActaFiniquito] AS [IdActaFiniquito], 
+[VWROL_016].[IdEmpleado] AS [IdEmpleado], 
+[VWROL_016].[IdCausaTerminacion] AS [IdCausaTerminacion], 
+[VWROL_016].[FechaIngreso] AS [FechaIngreso], 
+[VWROL_016].[FechaSalida] AS [FechaSalida], 
+[VWROL_016].[UltimaRemuneracion] AS [UltimaRemuneracion], 
+[VWROL_016].[Observacion] AS [Observacion], 
+[VWROL_016].[Ingresos] AS [Ingresos], 
+[VWROL_016].[Egresos] AS [Egresos], 
+[VWROL_016].[Liquido] AS [Liquido], 
+[VWROL_016].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+[VWROL_016].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+[VWROL_016].[ca_descripcion] AS [ca_descripcion], 
+[VWROL_016].[Contrato] AS [Contrato], 
+[VWROL_016].[IdTipoCatalogo] AS [IdTipoCatalogo]
+FROM [web].[VWROL_016] AS [VWROL_016]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -5383,32 +5449,6 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
           <Property Name="dc_Valor" Type="Double" Nullable="false" />
           <Property Name="dc_Valor_Debe" Type="Double" Nullable="false" />
           <Property Name="dc_Valor_Haber" Type="Double" />
-        </EntityType>
-        <EntityType Name="VWCXC_003">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdBodega" />
-            <PropertyRef Name="IdCbteVta" />
-            <PropertyRef Name="vt_tipoDoc" />
-            <PropertyRef Name="IdCliente" />
-            <PropertyRef Name="vt_fecha" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdBodega" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteVta" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="vt_tipoDoc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="vt_NumFactura" Type="String" MaxLength="28" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IdCliente" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ValorRteFTE" Type="Double" />
-          <Property Name="ValorRteIVA" Type="Double" />
-          <Property Name="PorcentajeRetFTE" Type="Double" />
-          <Property Name="PorcentajeRetIVA" Type="Double" />
-          <Property Name="TotalRTE" Type="Double" />
-          <Property Name="cr_fecha" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="VWCXP_001">
           <Key>
@@ -7246,7 +7286,6 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
           <EntitySet Name="VWCXC_001_diario" EntityType="Self.VWCXC_001_diario" />
           <EntitySet Name="VWCXC_002" EntityType="Self.VWCXC_002" />
           <EntitySet Name="VWCXC_002_diario" EntityType="Self.VWCXC_002_diario" />
-          <EntitySet Name="VWCXC_003" EntityType="Self.VWCXC_003" />
           <EntitySet Name="VWCXP_001" EntityType="Self.VWCXP_001" />
           <EntitySet Name="VWCXP_002" EntityType="Self.VWCXP_002" />
           <EntitySet Name="VWCXP_002_diario" EntityType="Self.VWCXP_002_diario" />
@@ -7488,18 +7527,12 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
           </FunctionImport>
           <EntitySet Name="VWCXC_006" EntityType="Model_reportes.VWCXC_006" />
           <EntitySet Name="VWCXC_006_sin_comision" EntityType="Model_reportes.VWCXC_006_sin_comision" />
-          <FunctionImport Name="SPROL_015" ReturnType="Collection(Model_reportes.SPROL_015_Result)">
-            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
-            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="SPROL_013" ReturnType="Collection(Model_reportes.SPROL_013_Result)">
             <Parameter Name="idempresa" Mode="In" Type="Int32" />
             <Parameter Name="idnomina" Mode="In" Type="Int32" />
             <Parameter Name="fecha_inicio" Mode="In" Type="DateTime" />
             <Parameter Name="fecha_fin" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="VWROL_016" EntityType="Model_reportes.VWROL_016" />
           <FunctionImport Name="SPCXP_010" ReturnType="Collection(Model_reportes.SPCXP_010_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdProveedorIni" Mode="In" Type="Decimal" />
@@ -7526,6 +7559,18 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
             <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
             <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
             <Parameter Name="MostrarAnulados" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="VWCXC_003" EntityType="Model_reportes.VWCXC_003" />
+          <EntitySet Name="VWROL_016" EntityType="Model_reportes.VWROL_016" />
+          <FunctionImport Name="SPROL_015" ReturnType="Collection(Model_reportes.SPROL_015_Result)">
+            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPROL_017" ReturnType="Collection(Model_reportes.SPROL_017_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPACTF_004_detalle_Result">
@@ -8240,17 +8285,6 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Saldo" Type="Double" Nullable="false" />
         </EntityType>
-        <ComplexType Name="SPROL_015_Result">
-          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
-          <Property Type="Decimal" Name="IdEmpleado" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="Int32" Name="IdNominaTipo" Nullable="false" />
-          <Property Type="Int32" Name="IdNominaTipoLiqui" Nullable="false" />
-          <Property Type="String" Name="pe_cedulaRuc" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="pe_nombreCompleto" Nullable="false" MaxLength="200" />
-          <Property Type="Double" Name="Decimocuarto" Nullable="true" />
-          <Property Type="Double" Name="DecimoTercero" Nullable="true" />
-          <Property Type="Double" Name="Vacaciones" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="SPROL_013_Result">
           <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
           <Property Type="Decimal" Name="IdEmpleado" Nullable="false" Precision="18" Scale="0" />
@@ -8270,40 +8304,6 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
           <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="1" />
           <Property Type="Double" Name="Valor" Nullable="false" />
         </ComplexType>
-        <EntityType Name="VWROL_016">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdActaFiniquito" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="IdCausaTerminacion" />
-            <PropertyRef Name="FechaIngreso" />
-            <PropertyRef Name="FechaSalida" />
-            <PropertyRef Name="UltimaRemuneracion" />
-            <PropertyRef Name="Ingresos" />
-            <PropertyRef Name="Egresos" />
-            <PropertyRef Name="Liquido" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="Contrato" />
-            <PropertyRef Name="IdTipoCatalogo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdActaFiniquito" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdCausaTerminacion" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaSalida" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UltimaRemuneracion" Type="Double" Nullable="false" />
-          <Property Name="Observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Ingresos" Type="Double" Nullable="false" />
-          <Property Name="Egresos" Type="Double" Nullable="false" />
-          <Property Name="Liquido" Type="Double" Nullable="false" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="ca_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Contrato" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoCatalogo" Type="Int32" Nullable="false" />
-        </EntityType>
         <ComplexType Name="SPCXP_010_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
           <Property Type="Decimal" Name="IdProveedor" Nullable="false" Precision="18" Scale="0" />
@@ -8358,6 +8358,97 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
           <Property Type="Double" Name="Saldo" Nullable="true" />
           <Property Type="Double" Name="SaldoModulo" Nullable="true" />
           <Property Type="Int32" Name="Secuencia" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="VWCXC_003">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+            <PropertyRef Name="vt_tipoDoc" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="vt_fecha" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="vt_tipoDoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="vt_NumFactura" Type="String" MaxLength="28" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ValorRteFTE" Type="Double" />
+          <Property Name="ValorRteIVA" Type="Double" />
+          <Property Name="PorcentajeRetFTE" Type="Double" />
+          <Property Name="PorcentajeRetIVA" Type="Double" />
+          <Property Name="TotalRTE" Type="Double" />
+          <Property Name="cr_fecha" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="VWROL_016">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdActaFiniquito" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdCausaTerminacion" />
+            <PropertyRef Name="FechaIngreso" />
+            <PropertyRef Name="FechaSalida" />
+            <PropertyRef Name="UltimaRemuneracion" />
+            <PropertyRef Name="Ingresos" />
+            <PropertyRef Name="Egresos" />
+            <PropertyRef Name="Liquido" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="Contrato" />
+            <PropertyRef Name="IdTipoCatalogo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdActaFiniquito" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdCausaTerminacion" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaSalida" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UltimaRemuneracion" Type="Double" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Ingresos" Type="Double" Nullable="false" />
+          <Property Name="Egresos" Type="Double" Nullable="false" />
+          <Property Name="Liquido" Type="Double" Nullable="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ca_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contrato" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoCatalogo" Type="Int32" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="SPROL_015_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Decimal" Name="IdEmpleado" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="IdNominaTipo" Nullable="false" />
+          <Property Type="Int32" Name="IdNominaTipoLiqui" Nullable="false" />
+          <Property Type="String" Name="pe_cedulaRuc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="pe_nombreCompleto" Nullable="false" MaxLength="200" />
+          <Property Type="Double" Name="Decimocuarto" Nullable="true" />
+          <Property Type="Double" Name="DecimoTercero" Nullable="true" />
+          <Property Type="Double" Name="Vacaciones" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SPROL_017_Result">
+          <Property Type="Time" Name="Entrada1" Nullable="false" />
+          <Property Type="Time" Name="Entrada2" Nullable="false" />
+          <Property Type="Time" Name="Salida1" Nullable="false" />
+          <Property Type="Time" Name="Salida2" Nullable="false" />
+          <Property Type="Time" Name="SalidaLounch" Nullable="false" />
+          <Property Type="Time" Name="RegresoLounch" Nullable="false" />
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Decimal" Name="IdEmpleado" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="pe_nombreCompleto" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="pe_cedulaRuc" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="es_fechaRegistro" Nullable="false" Precision="23" />
+          <Property Type="Time" Name="es_Hora" Nullable="true" />
+          <Property Type="Int32" Name="es_anio" Nullable="true" />
+          <Property Type="Int32" Name="es_mes" Nullable="true" />
+          <Property Type="Int32" Name="es_semana" Nullable="true" />
+          <Property Type="Int32" Name="es_dia" Nullable="true" />
+          <Property Type="String" Name="es_sdia" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="ma_descripcion" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -8802,27 +8893,6 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
                 <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
                 <ScalarProperty Name="dc_Valor_Debe" ColumnName="dc_Valor_Debe" />
                 <ScalarProperty Name="dc_Valor_Haber" ColumnName="dc_Valor_Haber" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VWCXC_003">
-            <EntityTypeMapping TypeName="Model_reportes.VWCXC_003">
-              <MappingFragment StoreEntitySet="VWCXC_003">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
-                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
-                <ScalarProperty Name="vt_tipoDoc" ColumnName="vt_tipoDoc" />
-                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
-                <ScalarProperty Name="ValorRteFTE" ColumnName="ValorRteFTE" />
-                <ScalarProperty Name="ValorRteIVA" ColumnName="ValorRteIVA" />
-                <ScalarProperty Name="PorcentajeRetFTE" ColumnName="PorcentajeRetFTE" />
-                <ScalarProperty Name="PorcentajeRetIVA" ColumnName="PorcentajeRetIVA" />
-                <ScalarProperty Name="TotalRTE" ColumnName="TotalRTE" />
-                <ScalarProperty Name="cr_fecha" ColumnName="cr_fecha" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -10810,6 +10880,88 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
                 <ScalarProperty Name="Saldo" ColumnName="Saldo" />
                 <ScalarProperty Name="SaldoModulo" ColumnName="SaldoModulo" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="VWCXC_003">
+            <EntityTypeMapping TypeName="Model_reportes.VWCXC_003">
+              <MappingFragment StoreEntitySet="VWCXC_003">
+                <ScalarProperty Name="cr_fecha" ColumnName="cr_fecha" />
+                <ScalarProperty Name="TotalRTE" ColumnName="TotalRTE" />
+                <ScalarProperty Name="PorcentajeRetIVA" ColumnName="PorcentajeRetIVA" />
+                <ScalarProperty Name="PorcentajeRetFTE" ColumnName="PorcentajeRetFTE" />
+                <ScalarProperty Name="ValorRteIVA" ColumnName="ValorRteIVA" />
+                <ScalarProperty Name="ValorRteFTE" ColumnName="ValorRteFTE" />
+                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
+                <ScalarProperty Name="vt_tipoDoc" ColumnName="vt_tipoDoc" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWROL_016">
+            <EntityTypeMapping TypeName="Model_reportes.VWROL_016">
+              <MappingFragment StoreEntitySet="VWROL_016">
+                <ScalarProperty Name="IdTipoCatalogo" ColumnName="IdTipoCatalogo" />
+                <ScalarProperty Name="Contrato" ColumnName="Contrato" />
+                <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="Liquido" ColumnName="Liquido" />
+                <ScalarProperty Name="Egresos" ColumnName="Egresos" />
+                <ScalarProperty Name="Ingresos" ColumnName="Ingresos" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="UltimaRemuneracion" ColumnName="UltimaRemuneracion" />
+                <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="IdCausaTerminacion" ColumnName="IdCausaTerminacion" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdActaFiniquito" ColumnName="IdActaFiniquito" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPROL_015" FunctionName="Model_reportes.Store.SPROL_015">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_reportes.SPROL_015_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
+                <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="Decimocuarto" ColumnName="Decimocuarto" />
+                <ScalarProperty Name="DecimoTercero" ColumnName="DecimoTercero" />
+                <ScalarProperty Name="Vacaciones" ColumnName="Vacaciones" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPROL_017" FunctionName="Model_reportes.Store.SPROL_017">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_reportes.SPROL_017_Result">
+                <ScalarProperty Name="Entrada1" ColumnName="Entrada1" />
+                <ScalarProperty Name="Entrada2" ColumnName="Entrada2" />
+                <ScalarProperty Name="Salida1" ColumnName="Salida1" />
+                <ScalarProperty Name="Salida2" ColumnName="Salida2" />
+                <ScalarProperty Name="SalidaLounch" ColumnName="SalidaLounch" />
+                <ScalarProperty Name="RegresoLounch" ColumnName="RegresoLounch" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="es_fechaRegistro" ColumnName="es_fechaRegistro" />
+                <ScalarProperty Name="es_Hora" ColumnName="es_Hora" />
+                <ScalarProperty Name="es_anio" ColumnName="es_anio" />
+                <ScalarProperty Name="es_mes" ColumnName="es_mes" />
+                <ScalarProperty Name="es_semana" ColumnName="es_semana" />
+                <ScalarProperty Name="es_dia" ColumnName="es_dia" />
+                <ScalarProperty Name="es_sdia" ColumnName="es_sdia" />
+                <ScalarProperty Name="ma_descripcion" ColumnName="ma_descripcion" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

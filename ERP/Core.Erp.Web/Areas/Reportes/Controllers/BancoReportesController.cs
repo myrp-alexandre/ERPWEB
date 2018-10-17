@@ -15,75 +15,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     public class BancoReportesController : Controller
     {
         ba_Cbte_Ban_Bus bus_cbte = new ba_Cbte_Ban_Bus();
-        public ActionResult BAN_001( int IdTipoCbte = 0, decimal IdCbteCble = 0)
-        {
-            BAN_001_Rpt model = new BAN_001_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
-            model.p_IdTipoCbte.Value = IdTipoCbte;
-            model.p_IdCbteCble.Value = IdCbteCble;
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
-                model.RequestParameters = false;
-            return View(model);
-        }
-        public ActionResult BAN_002( int IdTipocbte = 0, decimal IdCbteCble = 0)
-        {
-            BAN_002_Rpt model = new BAN_002_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
-            model.p_IdTipocbte.Value = IdTipocbte;
-            model.p_IdCbteCble.Value = IdCbteCble;
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
-                model.RequestParameters = false;
-            return View(model);
-        }
-        public ActionResult BAN_003( int IdTipocbte = 0, decimal IdCbteCble = 0)
-        {
-            BAN_003_Rpt model = new BAN_003_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
-            model.p_IdTipocbte.Value = IdTipocbte;
-            model.p_IdCbteCble.Value = IdCbteCble;
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
-                model.RequestParameters = false;
-            return View(model);
-        }
-        public ActionResult BAN_004( int IdBanco = 0, decimal IdConciliacion = 0)
-        {
-            BAN_004_Rpt model = new BAN_004_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
-            model.p_IdBanco.Value = IdBanco;
-            model.p_IdConciliacion.Value = IdConciliacion;
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
-                model.RequestParameters = false;
-            return View(model);
-        }
-        public ActionResult BAN_005(int IdTipocbte = 0, decimal IdCbteCble = 0)
-        {
-            BAN_005_Rpt model = new BAN_005_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
-            model.p_IdTipocbte.Value = IdTipocbte;
-            model.p_IdCbteCble.Value = IdCbteCble;
-            model.RequestParameters = false;
-
-            bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), IdTipocbte, IdCbteCble, "ESTCBENT");
-
-            return View(model);
-        }
-        public ActionResult BAN_006(int IdTipoCbte = 0, decimal IdCbteCble = 0)
-        {
-            BAN_006_Rpt model = new BAN_006_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
-            model.p_IdTipoCbte.Value = IdTipoCbte;
-            model.p_IdCbteCble.Value = IdCbteCble;
-            model.RequestParameters = false;
-
-            bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), IdTipoCbte, IdCbteCble, "ESTCBENT");
-
-            return View(model);
-        }
-
         #region Metodos ComboBox bajo demanda
 
         public ActionResult CmbPersona_Banco()
@@ -103,7 +34,64 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
 
         #endregion
-
+        public ActionResult BAN_001( int IdTipoCbte = 0, decimal IdCbteCble = 0)
+        {
+            BAN_001_Rpt model = new BAN_001_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.p_IdTipoCbte.Value = IdTipoCbte;
+            model.p_IdCbteCble.Value = IdCbteCble;
+            model.usuario = SessionFixed.IdUsuario.ToString();
+            model.empresa = SessionFixed.NomEmpresa.ToString();
+            return View(model);
+        }
+        public ActionResult BAN_002( int IdTipocbte = 0, decimal IdCbteCble = 0)
+        {
+            BAN_002_Rpt model = new BAN_002_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.p_IdTipocbte.Value = IdTipocbte;
+            model.p_IdCbteCble.Value = IdCbteCble;
+            model.usuario = SessionFixed.IdUsuario.ToString();
+            model.empresa = SessionFixed.NomEmpresa.ToString();
+            return View(model);
+        }
+        public ActionResult BAN_003( int IdTipocbte = 0, decimal IdCbteCble = 0)
+        {
+            BAN_003_Rpt model = new BAN_003_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.p_IdTipocbte.Value = IdTipocbte;
+            model.p_IdCbteCble.Value = IdCbteCble;
+            model.usuario = SessionFixed.IdUsuario.ToString();
+            model.empresa = SessionFixed.NomEmpresa.ToString();
+            return View(model);
+        }
+        public ActionResult BAN_004( int IdBanco = 0, decimal IdConciliacion = 0)
+        {
+            BAN_004_Rpt model = new BAN_004_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.p_IdBanco.Value = IdBanco;
+            model.p_IdConciliacion.Value = IdConciliacion;
+            model.usuario = SessionFixed.IdUsuario.ToString();
+            model.empresa = SessionFixed.NomEmpresa.ToString();
+            return View(model);
+        }
+        public ActionResult BAN_005(int IdTipocbte = 0, decimal IdCbteCble = 0)
+        {
+            BAN_005_Rpt model = new BAN_005_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.p_IdTipocbte.Value = IdTipocbte;
+            model.p_IdCbteCble.Value = IdCbteCble;
+            bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), IdTipocbte, IdCbteCble, "ESTCBENT");
+            return View(model);
+        }
+        public ActionResult BAN_006(int IdTipoCbte = 0, decimal IdCbteCble = 0)
+        {
+            BAN_006_Rpt model = new BAN_006_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.p_IdTipoCbte.Value = IdTipoCbte;
+            model.p_IdCbteCble.Value = IdCbteCble;
+            bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), IdTipoCbte, IdCbteCble, "ESTCBENT");
+            return View(model);
+        }
         private void cargar_banco(int IdEmpresa)
         {
             ba_Banco_Cuenta_Bus bus_banco = new ba_Banco_Cuenta_Bus();
@@ -152,7 +140,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
-
         [HttpPost]
         public ActionResult BAN_007(cl_filtros_banco_Info model)
         {
@@ -170,6 +157,5 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             return View(model);
         }
-
     }
 }

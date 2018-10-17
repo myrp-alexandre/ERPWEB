@@ -212,12 +212,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
             {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 Check1 = false
             };
 
             cargar_combos(model);
             FAC_001_Rpt report = new FAC_001_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_fecha_ini.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;
@@ -238,7 +239,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult FAC_001(cl_filtros_facturacion_Info model)
         {
             FAC_001_Rpt report = new FAC_001_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_fecha_ini.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;
@@ -258,11 +259,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         public ActionResult FAC_002()
         {
-            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+            };
             
             cargar_combos(model);
             FAC_002_Rpt report = new FAC_002_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_fechaCorte.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdCliente.Value = model.IdCliente;
@@ -279,7 +283,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult FAC_002(cl_filtros_facturacion_Info model)
         {
             FAC_002_Rpt report = new FAC_002_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_fechaCorte.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdCliente.Value = model.IdCliente;
@@ -335,13 +339,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
             {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 Check1 = true,
                 Check2 = false
             };
 
             cargar_combos(model);
             FAC_005_Rpt report = new FAC_005_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_Fecha_ini.Value = model.fecha_ini;
             report.p_Fecha_fin.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;
@@ -359,7 +364,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult FAC_005(cl_filtros_facturacion_Info model)
         {
             FAC_005_Rpt report = new FAC_005_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_Fecha_ini.Value = model.fecha_ini;
             report.p_Fecha_fin.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;

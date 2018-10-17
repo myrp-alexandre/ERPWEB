@@ -11,61 +11,49 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     [SessionTimeout]
     public class ActivoFijoReportesController : Controller
     {
-
+        #region Json
+        public JsonResult cargar_categoria(int IdEmpresa = 0 , int IdActivoFijoTipo = 0)
+        {
+            Af_Activo_fijo_Categoria_Bus bus_categoria = new Af_Activo_fijo_Categoria_Bus();
+            var resultado = bus_categoria.get_list(IdEmpresa, IdActivoFijoTipo, false);
+            resultado.Add(new Af_Activo_fijo_Categoria_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdCategoriaAF = 0,
+                Descripcion = "Todos"
+            });
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
         public ActionResult ACTF_001(decimal Id_Mejora_Baja_Activo = 0, string Id_Tipo = "" )
         {
             ACTF_001_Rpt model = new ACTF_001_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.p_Id_Mejora_Baja_Activo.Value = Id_Mejora_Baja_Activo;
             model.p_Id_Tipo.Value = Id_Tipo;
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
-            if (Id_Mejora_Baja_Activo != 0)
-            {
-                model.p_IdEmpresa.Visible = false;
-                model.p_Id_Mejora_Baja_Activo.Visible = false;
-                model.p_Id_Tipo.Visible = false;
-            }
-            else
-                model.RequestParameters = false;
+            model.usuario = SessionFixed.IdUsuario.ToString();
+            model.empresa = SessionFixed.NomEmpresa.ToString();
             return View(model);
         }
-
         public ActionResult ACTF_002(decimal IdVtaActivo = 0)
         {
             ACTF_002_Rpt model = new ACTF_002_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.p_IdVtaActivo.Value = IdVtaActivo;
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
-            if (IdVtaActivo != 0)
-            {
-                model.p_IdEmpresa.Visible = false;
-                model.p_IdVtaActivo.Visible = false;
-            }
-            else
-                model.RequestParameters = false;
+            model.usuario = SessionFixed.IdUsuario.ToString();
+            model.empresa = SessionFixed.NomEmpresa.ToString();
             return View(model);
         }
-
         public ActionResult ACTF_003(decimal IdRetiroActivo = 0)
         {
             ACTF_003_Rpt model = new ACTF_003_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.p_IdRetiroActivo.Value = IdRetiroActivo;
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
-            if (IdRetiroActivo != 0)
-            {
-                model.p_IdEmpresa.Visible = false;
-                model.p_IdRetiroActivo.Visible = false;
-            }
-            else
-                model.RequestParameters = false;
+            model.usuario = SessionFixed.IdUsuario.ToString();
+            model.empresa = SessionFixed.NomEmpresa.ToString();
             return View(model);
 
         }
-
         public ActionResult ACTF_004()
         {
             cl_filtros_Info model = new cl_filtros_Info
@@ -120,10 +108,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.p_Estado_Proceso.Value = model.Estado_Proceso;
                 report.p_IdUsuario.Value = model.IdUsuario;
                 report.p_fecha_corte.Value = model.fecha_fin;
-                report.usuario = Session["IdUsuario"].ToString();
-                report.empresa = Session["nom_empresa"].ToString();
+                report.usuario = SessionFixed.IdUsuario.ToString();
+                report.empresa = SessionFixed.NomEmpresa.ToString();
                 cargar_combos(model);
-                report.RequestParameters = false;
                 ViewBag.Report = report;
             }
             else
@@ -135,15 +122,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.p_Estado_Proceso.Value = model.Estado_Proceso;
                 report.p_IdUsuario.Value = model.IdUsuario;
                 report.p_fecha_corte.Value = model.fecha_fin;
-                report.usuario = Session["IdUsuario"].ToString();
-                report.empresa = Session["nom_empresa"].ToString();
+                report.usuario = SessionFixed.IdUsuario.ToString();
+                report.empresa = SessionFixed.NomEmpresa.ToString();
                 cargar_combos(model);
-                report.RequestParameters = false;
                 ViewBag.Report = report;
             }
             return View(model);
         }
-
         private void cargar_combos(cl_filtros_Info model)
         {
 
@@ -178,20 +163,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
 
         }
-        #region Json
-        public JsonResult cargar_categoria(int IdEmpresa = 0 , int IdActivoFijoTipo = 0)
-        {
-            Af_Activo_fijo_Categoria_Bus bus_categoria = new Af_Activo_fijo_Categoria_Bus();
-            var resultado = bus_categoria.get_list(IdEmpresa, IdActivoFijoTipo, false);
-            resultado.Add(new Af_Activo_fijo_Categoria_Info
-            {
-                IdEmpresa = IdEmpresa,
-                IdCategoriaAF = 0,
-                Descripcion = "Todos"
-            });
-            return Json(resultado, JsonRequestBehavior.AllowGet);
-        }
-        #endregion
         public ActionResult ACTF_005()
         {
             cl_filtros_Info model = new cl_filtros_Info

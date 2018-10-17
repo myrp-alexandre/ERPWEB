@@ -47,7 +47,6 @@ namespace Core.Erp.Data
         public DbSet<VWCXC_001_diario> VWCXC_001_diario { get; set; }
         public DbSet<VWCXC_002> VWCXC_002 { get; set; }
         public DbSet<VWCXC_002_diario> VWCXC_002_diario { get; set; }
-        public DbSet<VWCXC_003> VWCXC_003 { get; set; }
         public DbSet<VWCXP_001> VWCXP_001 { get; set; }
         public DbSet<VWCXP_002> VWCXP_002 { get; set; }
         public DbSet<VWCXP_002_diario> VWCXP_002_diario { get; set; }
@@ -93,6 +92,7 @@ namespace Core.Erp.Data
         public DbSet<VWINV_011> VWINV_011 { get; set; }
         public DbSet<VWCXC_006> VWCXC_006 { get; set; }
         public DbSet<VWCXC_006_sin_comision> VWCXC_006_sin_comision { get; set; }
+        public DbSet<VWCXC_003> VWCXC_003 { get; set; }
         public DbSet<VWROL_016> VWROL_016 { get; set; }
     
         public virtual ObjectResult<SPACTF_004_detalle_Result> SPACTF_004_detalle(Nullable<int> idEmpresa, Nullable<System.DateTime> fecha_corte, string idUsuario, Nullable<int> idActivoFijoTipo_ini, Nullable<int> idActivoFijoTipo_fin, Nullable<int> idCategoria_ini, Nullable<int> idCategoria_fin, string estado_Proceso)
@@ -819,23 +819,6 @@ namespace Core.Erp.Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPCXC_005_Result>("SPCXC_005", idEmpresaParameter, idClienteIniParameter, idClienteFinParameter, idContactoIniParameter, idContactoFinParameter, fechaCorteParameter, mostrarSaldo0Parameter);
         }
     
-        public virtual ObjectResult<SPROL_015_Result> SPROL_015(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<int> idEmpresa)
-        {
-            var fechaInicioParameter = fechaInicio.HasValue ?
-                new ObjectParameter("FechaInicio", fechaInicio) :
-                new ObjectParameter("FechaInicio", typeof(System.DateTime));
-    
-            var fechaFinParameter = fechaFin.HasValue ?
-                new ObjectParameter("FechaFin", fechaFin) :
-                new ObjectParameter("FechaFin", typeof(System.DateTime));
-    
-            var idEmpresaParameter = idEmpresa.HasValue ?
-                new ObjectParameter("IdEmpresa", idEmpresa) :
-                new ObjectParameter("IdEmpresa", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPROL_015_Result>("SPROL_015", fechaInicioParameter, fechaFinParameter, idEmpresaParameter);
-        }
-    
         public virtual ObjectResult<SPROL_013_Result> SPROL_013(Nullable<int> idempresa, Nullable<int> idnomina, Nullable<System.DateTime> fecha_inicio, Nullable<System.DateTime> fecha_fin)
         {
             var idempresaParameter = idempresa.HasValue ?
@@ -954,6 +937,40 @@ namespace Core.Erp.Data
                 new ObjectParameter("MostrarAnulados", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPFAC_011_Result>("SPFAC_011", idEmpresaParameter, idClienteIniParameter, idClienteFinParameter, fechaIniParameter, fechaFinParameter, mostrarAnuladosParameter);
+        }
+    
+        public virtual ObjectResult<SPROL_015_Result> SPROL_015(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<int> idEmpresa)
+        {
+            var fechaInicioParameter = fechaInicio.HasValue ?
+                new ObjectParameter("FechaInicio", fechaInicio) :
+                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+    
+            var fechaFinParameter = fechaFin.HasValue ?
+                new ObjectParameter("FechaFin", fechaFin) :
+                new ObjectParameter("FechaFin", typeof(System.DateTime));
+    
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPROL_015_Result>("SPROL_015", fechaInicioParameter, fechaFinParameter, idEmpresaParameter);
+        }
+    
+        public virtual ObjectResult<SPROL_017_Result> SPROL_017(Nullable<int> idEmpresa, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var fechaInicioParameter = fechaInicio.HasValue ?
+                new ObjectParameter("FechaInicio", fechaInicio) :
+                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+    
+            var fechaFinParameter = fechaFin.HasValue ?
+                new ObjectParameter("FechaFin", fechaFin) :
+                new ObjectParameter("FechaFin", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPROL_017_Result>("SPROL_017", idEmpresaParameter, fechaInicioParameter, fechaFinParameter);
         }
     }
 }

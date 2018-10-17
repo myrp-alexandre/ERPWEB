@@ -1,13 +1,13 @@
 ﻿@model Core.Erp.Info.Helps.cl_filtros_Info
 @{
     Layout = "~/Areas/Reportes/Views/Layout/_Layout_filtros.cshtml";
-    ViewBag.Title = "ROL_013";
+    ViewBag.Title = "ROL_017";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
     }
 }
-@using (Html.BeginForm("ROL_013", "RRHHReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("ROL_017", "RRHHReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q=>q.IdEmpresa)
     <div class="box ">
@@ -29,29 +29,7 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="IdNomina">Nomina</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdNomina, settings =>
-                           {
-                               settings.Name = "IdNomina";
-                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                               settings.Properties.Columns.Add("IdNomina_Tipo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                               settings.Properties.Columns.Add("Descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                               //Campo ID
-                               settings.Properties.ValueField = "IdNomina_Tipo";
-                               settings.Properties.ValueType = typeof(int);
-                               settings.Properties.TextField = "Descripcion";
-                               settings.Properties.NullText = "== Seleccione ==";
-                               
-                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                           }).BindList(ViewBag.lst_nomina).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdNomina, "", new { @class = "text-danger" })
-
-                        </div>
-                    </div>       
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                         <div class="form-group">
                             <label for="IdProveedor">Empleado</label>
                             @Html.Partial("_CmbEmpleado_RRHH", Model.IdEmpleado)
@@ -97,6 +75,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
             <!-- /.box-body -->

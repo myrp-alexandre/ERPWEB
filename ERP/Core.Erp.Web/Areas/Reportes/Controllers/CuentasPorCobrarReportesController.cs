@@ -15,9 +15,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     [SessionTimeout]
     public class CuentasPorCobrarReportesController : Controller
     {
+        #region Metodos ComboBox bajo demanda
         tb_persona_Bus bus_persona = new tb_persona_Bus();
-         #region Metodos ComboBox bajo demanda
-
         public ActionResult CmbCliente_CXC()
         {
             decimal model = new decimal();
@@ -31,18 +30,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.CLIENTE.ToString());
         }
-
-
         #endregion
-
-        private void cargar_combos()
-        {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
-            var lst_cliente = bus_cliente.get_list(IdEmpresa, false);
-            ViewBag.lst_cliente = lst_cliente;
-        }
-
+        #region Json
         private void cargar_cliente_contacto(cl_filtros_facturacion_Info model)
         {
             
@@ -77,6 +66,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             });
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+        #endregion
+        private void cargar_combos(int IdEmpresa)
+        {
+            fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
+            var lst_cliente = bus_cliente.get_list(IdEmpresa, false);
+            ViewBag.lst_cliente = lst_cliente;
+        }
         public ActionResult CXC_001(int IdSucursal = 0, decimal IdCobro = 0)
         {
             CXC_001_Rpt model = new CXC_001_Rpt();
@@ -105,11 +101,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
             {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdCliente = 0
             };
-            cargar_combos();
+            cargar_combos(model.IdEmpresa);
             CXC_003_Rpt report = new CXC_003_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdCliente.Value = model.IdCliente;
             report.p_Fecha_ini.Value = model.fecha_ini;
             report.p_Fecha_fin.Value = model.fecha_fin;
@@ -124,17 +121,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
 
             CXC_003_Rpt report = new CXC_003_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdCliente.Value = model.IdCliente;
             report.p_Fecha_ini.Value = model.fecha_ini;
             report.p_Fecha_fin.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa;
-            cargar_combos();
+            cargar_combos(model.IdEmpresa);
             ViewBag.Report = report;
             return View(model);
         }
-
         public ActionResult CXC_004()
         {
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
@@ -145,7 +141,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             };
             cargar_cliente_contacto(model);
             CXC_004_Rpt report = new CXC_004_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdCliente.Value = model.IdCliente;
             report.p_IdContacto.Value = model.IdClienteContacto;
             report.p_fecha_corte.Value = model.fecha_corte;
@@ -156,12 +152,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             return View(model);
         }
-
         [HttpPost]
         public ActionResult CXC_004(cl_filtros_facturacion_Info model)
         {
             CXC_004_Rpt report = new CXC_004_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdCliente.Value = model.IdCliente;
             report.p_IdContacto.Value = model.IdClienteContacto;
             report.p_fecha_corte.Value = model.fecha_corte;
@@ -173,8 +168,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             return View(model);
         }
-
-
         public ActionResult CXC_005()
         {
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
@@ -196,7 +189,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             return View(model);
         }
-
         [HttpPost]
         public ActionResult CXC_005(cl_filtros_facturacion_Info model)
         {
@@ -213,11 +205,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             return View(model);
         }
-
-        public ActionResult CXC_006(int IdEmpresa = 0 , decimal IdLiquidacion= 0)
+        public ActionResult CXC_006( decimal IdLiquidacion= 0)
         {
             CXC_006_Rpt report = new CXC_006_Rpt();
-            report.p_IdEmpresa.Value = IdEmpresa;
+            report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             report.p_IdLiquidacion.Value = IdLiquidacion;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa;
