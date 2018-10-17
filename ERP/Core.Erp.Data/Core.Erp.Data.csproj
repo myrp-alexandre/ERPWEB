@@ -1090,9 +1090,6 @@
     <Compile Include="ro_empleado.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
-    <Compile Include="ro_empleado_historial_Sueldo.cs">
-      <DependentUpon>Model_rrhh.tt</DependentUpon>
-    </Compile>
     <Compile Include="ro_empleado_Novedad.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -1103,9 +1100,6 @@
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="ro_empleado_proyeccion_gastos_det.cs">
-      <DependentUpon>Model_rrhh.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ro_empleado_x_centro_costo.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="ro_empleado_x_horario.cs">
@@ -1139,6 +1133,9 @@
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="ro_horario_planificacion_det.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ro_marcaciones_tipo.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="ro_marcaciones_x_empleado.cs">
@@ -1230,11 +1227,9 @@
     <Compile Include="RRHH\ro_division_Data.cs" />
     <Compile Include="RRHH\ro_DocumentoxEmp_Data.cs" />
     <Compile Include="RRHH\ro_empleado_Data.cs" />
-    <Compile Include="RRHH\ro_empleado_historial_Sueldo_Data.cs" />
     <Compile Include="RRHH\ro_empleado_novedad_Data.cs" />
     <Compile Include="RRHH\ro_empleado_novedad_det_Data.cs" />
     <Compile Include="RRHH\ro_empleado_proyeccion_gastos_det_Data.cs" />
-    <Compile Include="RRHH\ro_empleado_x_centro_costo_Data.cs" />
     <Compile Include="RRHH\ro_empleado_x_horario_Data.cs" />
     <Compile Include="RRHH\ro_empleado_proyeccion_gastos_Data.cs" />
     <Compile Include="RRHH\ro_empleado_x_ro_rubro_Data.cs" />
@@ -1247,6 +1242,7 @@
     <Compile Include="RRHH\ro_horario_Data.cs" />
     <Compile Include="RRHH\ro_horario_planificacion_Data.cs" />
     <Compile Include="RRHH\ro_horario_planificacion_det_Data.cs" />
+    <Compile Include="RRHH\ro_marcaciones_tipo_Data.cs" />
     <Compile Include="RRHH\ro_marcaciones_x_empleado_Data.cs" />
     <Compile Include="RRHH\ro_Nomina_Tipoliqui_Data.cs" />
     <Compile Include="RRHH\ro_nomina_tipo_Data.cs" />

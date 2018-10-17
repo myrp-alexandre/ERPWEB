@@ -17,14 +17,15 @@ namespace Core.Erp.Web.Reportes.RRHH
         {
             InitializeComponent();
         }
-
+        
         private void ROL_017_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
             lbl_empresa.Text = empresa;
             lbl_usuario.Text = usuario;
+
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            decimal IdEmpleado = p_IdEmpleado.Value == null ? 0 : Convert.ToDecimal(p_IdEmpleado.Value);
+            decimal IdEmpleado = String.IsNullOrEmpty(p_IdEmpleado.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdEmpleado.Value);
             DateTime fechaIni = p_fechaIni.Value == null ? DateTime.Now : Convert.ToDateTime(p_fechaIni.Value);
             DateTime fechaFin = p_fechaFin.Value == null ? DateTime.Now : Convert.ToDateTime(p_fechaFin.Value);
 

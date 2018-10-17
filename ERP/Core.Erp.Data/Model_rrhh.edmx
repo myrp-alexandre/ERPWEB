@@ -377,31 +377,6 @@
           <Property Name="IdHorario" Type="int" />
           <Property Name="IdPuntoCargo" Type="int" />
         </EntityType>
-        <EntityType Name="ro_empleado_historial_Sueldo">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="Secuencia" />
-          </Key>
-          <Property Name="IdEmpresa" Type="int" Nullable="false" />
-          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Secuencia" Type="int" Nullable="false" />
-          <Property Name="SueldoAnterior" Type="float" Nullable="false" />
-          <Property Name="SueldoActual" Type="float" Nullable="false" />
-          <Property Name="PorIncrementoSueldo" Type="float" Nullable="false" />
-          <Property Name="ValorIncrementoSueldo" Type="float" Nullable="false" />
-          <Property Name="Motivo" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="Fecha" Type="datetime" Nullable="false" />
-          <Property Name="idUsuario" Type="varchar" MaxLength="20" />
-          <Property Name="Fecha_Transac" Type="datetime" />
-          <Property Name="IdUsuarioUltModi" Type="varchar" MaxLength="20" />
-          <Property Name="Fecha_UltMod" Type="datetime" />
-          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
-          <Property Name="ip" Type="varchar" MaxLength="30" />
-          <Property Name="de_descripcion" Type="varchar" MaxLength="50" />
-          <Property Name="ca_descripcion" Type="varchar" MaxLength="50" />
-          <Property Name="IdCentroCosto" Type="varchar" MaxLength="20" />
-        </EntityType>
         <EntityType Name="ro_empleado_Novedad">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -488,20 +463,6 @@
           <Property Name="IdTipoGasto" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Valor" Type="float" Nullable="false" />
           <Property Name="Observacion" Type="varchar" MaxLength="500" />
-        </EntityType>
-        <EntityType Name="ro_empleado_x_centro_costo">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdEmpleado" />
-          </Key>
-          <Property Name="IdEmpresa" Type="int" Nullable="false" />
-          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdCentroCosto" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="IdCentroCosto_sub_centro_costo" Type="varchar" MaxLength="20" />
-          <Property Name="FechaIngresa" Type="datetime" Nullable="false" />
-          <Property Name="UsuarioIngresa" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="FechaModifica" Type="datetime" />
-          <Property Name="UsuarioModifica" Type="varchar" MaxLength="25" />
         </EntityType>
         <EntityType Name="ro_empleado_x_horario">
           <Key>
@@ -713,6 +674,13 @@
           <Property Name="IdHorario" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="1" />
           <Property Name="Observacion" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ro_marcaciones_tipo">
+          <Key>
+            <PropertyRef Name="IdTipoMarcaciones" />
+          </Key>
+          <Property Name="IdTipoMarcaciones" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ma_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="ro_marcaciones_x_empleado">
           <Key>
@@ -1233,8 +1201,8 @@
           <Property Name="ip" Type="varchar" MaxLength="25" />
           <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwRo_ActaFiniquito' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwRo_ActaFiniquito' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwRo_ActaFiniquito">
           <Key>
             <PropertyRef Name="NombreCompleto" />
@@ -1286,8 +1254,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwRo_ActaFiniquito
           <Property Name="CodCatalogo" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="EstadoContrato" Type="varchar" MaxLength="10" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_combo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_combo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_combo">
           <Key>
             <PropertyRef Name="pe_cedulaRuc" />
@@ -1300,8 +1268,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_comb
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_datos_generales' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_datos_generales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_datos_generales">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1409,8 +1377,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_dato
           <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_Novedad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_Novedad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_Novedad">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1444,8 +1412,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_Nove
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Observacion" Type="varchar" MaxLength="500" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_x_ro_rubro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_x_ro_rubro' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_x_ro_rubro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1476,8 +1444,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_x_ro
           <Property Name="Valor" Type="money" Nullable="false" />
           <Property Name="IdRubroFijo" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_x_rubro_acumulado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_x_rubro_acumulado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_x_rubro_acumulado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1499,8 +1467,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_x_ru
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="em_codigo" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_x_titulos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_x_titulos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_x_titulos">
           <Key>
             <PropertyRef Name="CodCatalogo" />
@@ -1533,8 +1501,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_x_ti
           <Property Name="IdTitulo" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="estado" Type="varchar" MaxLength="1" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleados_consulta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleados_consulta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleados_consulta">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1555,8 +1523,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleados_con
           <Property Name="em_codigo" Type="varchar" MaxLength="50" />
           <Property Name="em_fechaIngaRol" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_Historico_Liquidacion_Vacaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_Historico_Liquidacion_Vacaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_Historico_Liquidacion_Vacaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1592,8 +1560,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_Historico_Liq
           <Property Name="Fecha_Hasta" Type="datetime" Nullable="false" />
           <Property Name="Fecha_Retorno" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_horario_planificacion_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_horario_planificacion_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_horario_planificacion_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1634,8 +1602,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_horario_plani
           <Property Name="fecha" Type="date" />
           <Property Name="IdCalendario" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_marcaciones_x_empleado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_marcaciones_x_empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_marcaciones_x_empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1678,8 +1646,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_marcaciones_x
           <Property Name="ca_descripcion" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="cargo" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_nomina_x_horas_extras_aprobadas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_nomina_x_horas_extras_aprobadas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_nomina_x_horas_extras_aprobadas">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1702,8 +1670,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_nomina_x_hora
           <Property Name="Valor50" Type="float" Nullable="false" />
           <Property Name="Valor100" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_nomina_x_horas_extras_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_nomina_x_horas_extras_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_nomina_x_horas_extras_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1752,8 +1720,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_nomina_x_hora
           <Property Name="ca_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_participacion_utilidad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_participacion_utilidad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_participacion_utilidad">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1789,8 +1757,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_participacion
           <Property Name="IdUtilidad" Type="int" Nullable="false" />
           <Property Name="Estado" Type="varchar" MaxLength="1" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_participacion_utilidad_empleado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_participacion_utilidad_empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_participacion_utilidad_empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1834,8 +1802,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_participacion
           <Property Name="UtilidadDerechoIndividual" Type="float" Nullable="false" />
           <Property Name="UtilidadCargaFamiliar" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwRo_Prestamo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwRo_Prestamo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwRo_Prestamo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1891,8 +1859,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwRo_Prestamo' no 
           <Property Name="descuento_quincena" Type="bit" Nullable="false" />
           <Property Name="descuento_men_quin" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_rol' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_rol' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_rol">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1920,8 +1888,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_rol' no tiene
           <Property Name="pe_FechaIni" Type="smalldatetime" Nullable="false" />
           <Property Name="pe_FechaFin" Type="smalldatetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_rubro_tipo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_rubro_tipo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_rubro_tipo">
           <Key>
             <PropertyRef Name="ru_descripcion" />
@@ -1931,8 +1899,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwro_rubro_tipo' n
           <Property Name="ru_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwRo_Solicitud_Vacaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwRo_Solicitud_Vacaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwRo_Solicitud_Vacaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1984,8 +1952,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwRo_Solicitud_Vac
           <Property Name="em_codigo" Type="varchar" MaxLength="50" />
           <Property Name="IdLiquidacion" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.EntidadRegulatoria.vwrdep_IngrEgr_x_Empleado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.EntidadRegulatoria.vwrdep_IngrEgr_x_Empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwrdep_IngrEgr_x_Empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2019,8 +1987,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.EntidadRegulatoria.vwr
           <Property Name="Utilidades" Type="float" Nullable="false" />
           <Property Name="IngresoVarios" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_empleado_x_Proyeccion_Gastos_Personales' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwro_empleado_x_Proyeccion_Gastos_Personales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_x_Proyeccion_Gastos_Personales">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2039,8 +2007,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_empleado_x_Pr
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="estado" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_rol_detalle_generar_op' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwro_rol_detalle_generar_op' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_rol_detalle_generar_op">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2291,20 +2259,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_rol_detalle_g
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ro_empleado_historial_Sueldo_ro_empleado">
-          <End Role="ro_empleado" Type="Self.ro_empleado" Multiplicity="1" />
-          <End Role="ro_empleado_historial_Sueldo" Type="Self.ro_empleado_historial_Sueldo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_empleado">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="ro_empleado_historial_Sueldo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEmpleado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ro_empleado_novedad_det_ro_empleado_Novedad">
           <End Role="ro_empleado_Novedad" Type="Self.ro_empleado_Novedad" Multiplicity="1" />
           <End Role="ro_empleado_novedad_det" Type="Self.ro_empleado_novedad_det" Multiplicity="*" />
@@ -2494,20 +2448,6 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_rol_detalle_g
             <Dependent Role="ro_empleado1">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdEmpleado_Supervisor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ro_empleado_x_centro_costo_ro_empleado">
-          <End Role="ro_empleado" Type="Self.ro_empleado" Multiplicity="1" />
-          <End Role="ro_empleado_x_centro_costo" Type="Self.ro_empleado_x_centro_costo" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="ro_empleado">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="ro_empleado_x_centro_costo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEmpleado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2776,6 +2716,18 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_rol_detalle_g
             <Dependent Role="ro_marcaciones_x_empleado">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_marcaciones_x_empleado_ro_marcaciones_tipo">
+          <End Role="ro_marcaciones_tipo" Type="Self.ro_marcaciones_tipo" Multiplicity="1" />
+          <End Role="ro_marcaciones_x_empleado" Type="Self.ro_marcaciones_x_empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_marcaciones_tipo">
+              <PropertyRef Name="IdTipoMarcaciones" />
+            </Principal>
+            <Dependent Role="ro_marcaciones_x_empleado">
+              <PropertyRef Name="IdTipoMarcaciones" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3302,12 +3254,10 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_rol_detalle_g
           <EntitySet Name="ro_Division" EntityType="Self.ro_Division" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_DocumentoxEmp" EntityType="Self.ro_DocumentoxEmp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_empleado" EntityType="Self.ro_empleado" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ro_empleado_historial_Sueldo" EntityType="Self.ro_empleado_historial_Sueldo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_empleado_Novedad" EntityType="Self.ro_empleado_Novedad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_empleado_novedad_det" EntityType="Self.ro_empleado_novedad_det" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_empleado_proyeccion_gastos" EntityType="Self.ro_empleado_proyeccion_gastos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_empleado_proyeccion_gastos_det" EntityType="Self.ro_empleado_proyeccion_gastos_det" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ro_empleado_x_centro_costo" EntityType="Self.ro_empleado_x_centro_costo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_empleado_x_horario" EntityType="Self.ro_empleado_x_horario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_empleado_x_ro_rubro" EntityType="Self.ro_empleado_x_ro_rubro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_empleado_x_ro_tipoNomina" EntityType="Self.ro_empleado_x_ro_tipoNomina" Schema="dbo" store:Type="Tables" />
@@ -3319,6 +3269,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwro_rol_detalle_g
           <EntitySet Name="ro_horario" EntityType="Self.ro_horario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_horario_planificacion" EntityType="Self.ro_horario_planificacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_horario_planificacion_det" EntityType="Self.ro_horario_planificacion_det" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ro_marcaciones_tipo" EntityType="Self.ro_marcaciones_tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_marcaciones_x_empleado" EntityType="Self.ro_marcaciones_x_empleado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_Nomina_Tipo" EntityType="Self.ro_Nomina_Tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_Nomina_Tipoliqui" EntityType="Self.ro_Nomina_Tipoliqui" Schema="dbo" store:Type="Tables" />
@@ -3928,10 +3879,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_DocumentoxEmp" EntitySet="ro_DocumentoxEmp" />
           </AssociationSet>
-          <AssociationSet Name="FK_ro_empleado_historial_Sueldo_ro_empleado" Association="Self.FK_ro_empleado_historial_Sueldo_ro_empleado">
-            <End Role="ro_empleado" EntitySet="ro_empleado" />
-            <End Role="ro_empleado_historial_Sueldo" EntitySet="ro_empleado_historial_Sueldo" />
-          </AssociationSet>
           <AssociationSet Name="FK_ro_empleado_novedad_det_ro_empleado_Novedad" Association="Self.FK_ro_empleado_novedad_det_ro_empleado_Novedad">
             <End Role="ro_empleado_Novedad" EntitySet="ro_empleado_Novedad" />
             <End Role="ro_empleado_novedad_det" EntitySet="ro_empleado_novedad_det" />
@@ -3987,10 +3934,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <AssociationSet Name="FK_ro_empleado_ro_empleado" Association="Self.FK_ro_empleado_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_empleado1" EntitySet="ro_empleado" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ro_empleado_x_centro_costo_ro_empleado" Association="Self.FK_ro_empleado_x_centro_costo_ro_empleado">
-            <End Role="ro_empleado" EntitySet="ro_empleado" />
-            <End Role="ro_empleado_x_centro_costo" EntitySet="ro_empleado_x_centro_costo" />
           </AssociationSet>
           <AssociationSet Name="FK_ro_empleado_x_horario_ro_horario" Association="Self.FK_ro_empleado_x_horario_ro_horario">
             <End Role="ro_horario" EntitySet="ro_horario" />
@@ -4066,6 +4009,10 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           </AssociationSet>
           <AssociationSet Name="FK_ro_marcaciones_x_empleado_ro_empleado" Association="Self.FK_ro_marcaciones_x_empleado_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
+            <End Role="ro_marcaciones_x_empleado" EntitySet="ro_marcaciones_x_empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_marcaciones_x_empleado_ro_marcaciones_tipo" Association="Self.FK_ro_marcaciones_x_empleado_ro_marcaciones_tipo">
+            <End Role="ro_marcaciones_tipo" EntitySet="ro_marcaciones_tipo" />
             <End Role="ro_marcaciones_x_empleado" EntitySet="ro_marcaciones_x_empleado" />
           </AssociationSet>
           <AssociationSet Name="FK_ro_Nomina_Tipoliqui_ro_Nomina_Tipo" Association="Self.FK_ro_Nomina_Tipoliqui_ro_Nomina_Tipo">
@@ -4365,7 +4312,7 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <NavigationProperty Name="ro_empleado1" Relationship="Self.FK_ro_empleado_ro_Catalogo1" FromRole="ro_catalogo" ToRole="ro_empleado" />
           <NavigationProperty Name="ro_empleado2" Relationship="Self.FK_ro_empleado_ro_Catalogo2" FromRole="ro_catalogo" ToRole="ro_empleado" />
           <NavigationProperty Name="ro_empleado3" Relationship="Self.FK_ro_empleado_ro_Catalogo3" FromRole="ro_catalogo" ToRole="ro_empleado" />
-          <NavigationProperty Name="ro_marcaciones_x_empleado" Relationship="Self.FK_ro_marcaciones_x_empleado_ro_catalogo" FromRole="ro_catalogo" ToRole="ro_marcaciones_x_empleado" />
+          <NavigationProperty Name="ro_marcaciones_x_empleado" Relationship="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_catalogo" FromRole="ro_catalogo" ToRole="ro_marcaciones_x_empleado" />
         </EntityType>
         <EntityType Name="ro_catalogoTipo">
           <Key>
@@ -4608,11 +4555,9 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <NavigationProperty Name="ro_Departamento" Relationship="Self.FK_ro_empleado_ro_Departamento" FromRole="ro_empleado" ToRole="ro_Departamento" />
           <NavigationProperty Name="ro_Division" Relationship="Self.FK_ro_empleado_ro_Division" FromRole="ro_empleado" ToRole="ro_Division" />
           <NavigationProperty Name="ro_DocumentoxEmp" Relationship="Self.FK_ro_DocumentoxEmp_ro_empleado" FromRole="ro_empleado" ToRole="ro_DocumentoxEmp" />
-          <NavigationProperty Name="ro_empleado_historial_Sueldo" Relationship="Self.FK_ro_empleado_historial_Sueldo_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_historial_Sueldo" />
           <NavigationProperty Name="ro_empleado_Novedad" Relationship="Self.FK_ro_empleado_Novedad_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_Novedad" />
           <NavigationProperty Name="ro_empleado1" Relationship="Self.FK_ro_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado1" />
           <NavigationProperty Name="ro_empleado2" Relationship="Self.FK_ro_empleado_ro_empleado" FromRole="ro_empleado1" ToRole="ro_empleado" />
-          <NavigationProperty Name="ro_empleado_x_centro_costo" Relationship="Self.FK_ro_empleado_x_centro_costo_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_x_centro_costo" />
           <NavigationProperty Name="ro_empleado_x_ro_rubro" Relationship="Self.FK_ro_empleado_x_ro_rubro_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_x_ro_rubro" />
           <NavigationProperty Name="ro_empleado_x_ro_tipoNomina" Relationship="Self.FK_ro_empleado_x_ro_tipoNomina_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_x_ro_tipoNomina" />
           <NavigationProperty Name="ro_empleado_x_rubro_acumulado" Relationship="Self.FK_ro_empleado_x_rubro_acumulado" FromRole="ro_empleado" ToRole="ro_empleado_x_rubro_acumulado" />
@@ -4620,39 +4565,13 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <NavigationProperty Name="ro_Historico_Liquidacion_Vacaciones" Relationship="Self.FK_ro_Historico_Liquidacion_Vacaciones_ro_empleado" FromRole="ro_empleado" ToRole="ro_Historico_Liquidacion_Vacaciones" />
           <NavigationProperty Name="ro_historico_vacaciones_x_empleado" Relationship="Self.FK_ro_historico_vacaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_historico_vacaciones_x_empleado" />
           <NavigationProperty Name="ro_horario_planificacion_det" Relationship="Self.FK_ro_horario_planificacion_ro_empleado" FromRole="ro_empleado" ToRole="ro_horario_planificacion_det" />
-          <NavigationProperty Name="ro_marcaciones_x_empleado" Relationship="Self.FK_ro_marcaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_marcaciones_x_empleado" />
           <NavigationProperty Name="ro_nomina_x_horas_extras_det" Relationship="Self.FK_ro_nomina_x_horas_extras_det_ro_empleado" FromRole="ro_empleado" ToRole="ro_nomina_x_horas_extras_det" />
           <NavigationProperty Name="ro_participacion_utilidad_empleado" Relationship="Self.FK_ro_participacion_utilidad_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_participacion_utilidad_empleado" />
           <NavigationProperty Name="ro_prestamo" Relationship="Self.FK_ro_prestamo_ro_empleado" FromRole="ro_empleado" ToRole="ro_prestamo" />
           <NavigationProperty Name="ro_rol_detalle" Relationship="Self.FK_ro_rol_detalle_ro_empleado" FromRole="ro_empleado" ToRole="ro_rol_detalle" />
           <NavigationProperty Name="ro_Solicitud_Vacaciones_x_empleado" Relationship="Self.FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_Solicitud_Vacaciones_x_empleado" />
           <NavigationProperty Name="ro_empleado_proyeccion_gastos" Relationship="Model_rrhh.FK_ro_empleado_proyeccion_gastos_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_proyeccion_gastos" />
-        </EntityType>
-        <EntityType Name="ro_empleado_historial_Sueldo">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="Secuencia" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="SueldoAnterior" Type="Double" Nullable="false" />
-          <Property Name="SueldoActual" Type="Double" Nullable="false" />
-          <Property Name="PorIncrementoSueldo" Type="Double" Nullable="false" />
-          <Property Name="ValorIncrementoSueldo" Type="Double" Nullable="false" />
-          <Property Name="Motivo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="idUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltModi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ip" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="de_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ca_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdCentroCosto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ro_empleado" Relationship="Self.FK_ro_empleado_historial_Sueldo_ro_empleado" FromRole="ro_empleado_historial_Sueldo" ToRole="ro_empleado" />
+          <NavigationProperty Name="ro_marcaciones_x_empleado" Relationship="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_marcaciones_x_empleado" />
         </EntityType>
         <EntityType Name="ro_empleado_Novedad">
           <Key>
@@ -4713,21 +4632,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <Property Name="IdPeriodo" Type="Int32" />
           <NavigationProperty Name="ro_empleado_Novedad" Relationship="Self.FK_ro_empleado_novedad_det_ro_empleado_Novedad" FromRole="ro_empleado_novedad_det" ToRole="ro_empleado_Novedad" />
           <NavigationProperty Name="ro_rubro_tipo" Relationship="Self.FK_ro_empleado_novedad_det_ro_rubro_tipo" FromRole="ro_empleado_novedad_det" ToRole="ro_rubro_tipo" />
-        </EntityType>
-        <EntityType Name="ro_empleado_x_centro_costo">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdEmpleado" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdCentroCosto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdCentroCosto_sub_centro_costo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="FechaIngresa" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UsuarioIngresa" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="UsuarioModifica" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ro_empleado" Relationship="Self.FK_ro_empleado_x_centro_costo_ro_empleado" FromRole="ro_empleado_x_centro_costo" ToRole="ro_empleado" />
         </EntityType>
         <EntityType Name="ro_empleado_x_horario">
           <Key>
@@ -4961,42 +4865,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <NavigationProperty Name="ro_empleado" Relationship="Self.FK_ro_horario_planificacion_ro_empleado" FromRole="ro_horario_planificacion_det" ToRole="ro_empleado" />
           <NavigationProperty Name="ro_horario" Relationship="Self.FK_ro_horario_planificacion_ro_horario" FromRole="ro_horario_planificacion_det" ToRole="ro_horario" />
           <NavigationProperty Name="ro_horario_planificacion" Relationship="Self.FK_ro_horario_planificacion_det_ro_horario_planificacion" FromRole="ro_horario_planificacion_det" ToRole="ro_horario_planificacion" />
-        </EntityType>
-        <EntityType Name="ro_marcaciones_x_empleado">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdRegistro" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdRegistro" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdCalendadrio" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdTipoMarcaciones" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdNomina" Type="Int32" />
-          <Property Name="IdPeriodo" Type="Int32" />
-          <Property Name="es_Hora" Type="Time" Precision="0" />
-          <Property Name="es_fechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="es_anio" Type="Int32" />
-          <Property Name="es_mes" Type="Int32" />
-          <Property Name="es_semana" Type="Int32" />
-          <Property Name="es_dia" Type="Int32" />
-          <Property Name="es_sdia" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
-          <Property Name="es_idDia" Type="Int32" />
-          <Property Name="es_EsActualizacion" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="IdTipoMarcaciones_Biometrico" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Observacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Ip" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuarioUltModi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Motivo_Anu" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ro_catalogo" Relationship="Self.FK_ro_marcaciones_x_empleado_ro_catalogo" FromRole="ro_marcaciones_x_empleado" ToRole="ro_catalogo" />
-          <NavigationProperty Name="ro_empleado" Relationship="Self.FK_ro_marcaciones_x_empleado_ro_empleado" FromRole="ro_marcaciones_x_empleado" ToRole="ro_empleado" />
         </EntityType>
         <EntityType Name="ro_Nomina_Tipo">
           <Key>
@@ -6390,18 +6258,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ro_marcaciones_x_empleado_ro_catalogo">
-          <End Role="ro_catalogo" Type="Self.ro_catalogo" Multiplicity="1" />
-          <End Role="ro_marcaciones_x_empleado" Type="Self.ro_marcaciones_x_empleado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_catalogo">
-              <PropertyRef Name="CodCatalogo" />
-            </Principal>
-            <Dependent Role="ro_marcaciones_x_empleado">
-              <PropertyRef Name="IdTipoMarcaciones" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ro_Config_Param_contable_ro_Departamento">
           <End Role="ro_Departamento" Type="Self.ro_Departamento" Multiplicity="1" />
           <End Role="ro_Config_Param_contable" Type="Self.ro_Config_Param_contable" Multiplicity="*" />
@@ -6500,20 +6356,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ro_empleado_historial_Sueldo_ro_empleado">
-          <End Role="ro_empleado" Type="Self.ro_empleado" Multiplicity="1" />
-          <End Role="ro_empleado_historial_Sueldo" Type="Self.ro_empleado_historial_Sueldo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_empleado">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="ro_empleado_historial_Sueldo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEmpleado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ro_empleado_Novedad_ro_empleado">
           <End Role="ro_empleado" Type="Self.ro_empleado" Multiplicity="1" />
           <End Role="ro_empleado_Novedad" Type="Self.ro_empleado_Novedad" Multiplicity="*" />
@@ -6539,20 +6381,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             <Dependent Role="ro_empleado1">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdEmpleado_Supervisor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ro_empleado_x_centro_costo_ro_empleado">
-          <End Role="ro_empleado" Type="Self.ro_empleado" Multiplicity="1" />
-          <End Role="ro_empleado_x_centro_costo" Type="Self.ro_empleado_x_centro_costo" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="ro_empleado">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="ro_empleado_x_centro_costo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEmpleado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6649,20 +6477,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
               <PropertyRef Name="IdEmpleado" />
             </Principal>
             <Dependent Role="ro_horario_planificacion_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEmpleado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ro_marcaciones_x_empleado_ro_empleado">
-          <End Role="ro_empleado" Type="Self.ro_empleado" Multiplicity="1" />
-          <End Role="ro_marcaciones_x_empleado" Type="Self.ro_marcaciones_x_empleado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_empleado">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="ro_marcaciones_x_empleado">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdEmpleado" />
             </Dependent>
@@ -7311,10 +7125,8 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <EntitySet Name="ro_Division" EntityType="Self.ro_Division" />
           <EntitySet Name="ro_DocumentoxEmp" EntityType="Self.ro_DocumentoxEmp" />
           <EntitySet Name="ro_empleado" EntityType="Self.ro_empleado" />
-          <EntitySet Name="ro_empleado_historial_Sueldo" EntityType="Self.ro_empleado_historial_Sueldo" />
           <EntitySet Name="ro_empleado_Novedad" EntityType="Self.ro_empleado_Novedad" />
           <EntitySet Name="ro_empleado_novedad_det" EntityType="Self.ro_empleado_novedad_det" />
-          <EntitySet Name="ro_empleado_x_centro_costo" EntityType="Self.ro_empleado_x_centro_costo" />
           <EntitySet Name="ro_empleado_x_horario" EntityType="Self.ro_empleado_x_horario" />
           <EntitySet Name="ro_empleado_x_ro_rubro" EntityType="Self.ro_empleado_x_ro_rubro" />
           <EntitySet Name="ro_empleado_x_ro_tipoNomina" EntityType="Self.ro_empleado_x_ro_tipoNomina" />
@@ -7326,7 +7138,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <EntitySet Name="ro_horario" EntityType="Self.ro_horario" />
           <EntitySet Name="ro_horario_planificacion" EntityType="Self.ro_horario_planificacion" />
           <EntitySet Name="ro_horario_planificacion_det" EntityType="Self.ro_horario_planificacion_det" />
-          <EntitySet Name="ro_marcaciones_x_empleado" EntityType="Self.ro_marcaciones_x_empleado" />
           <EntitySet Name="ro_Nomina_Tipo" EntityType="Self.ro_Nomina_Tipo" />
           <EntitySet Name="ro_Nomina_Tipoliqui" EntityType="Self.ro_Nomina_Tipoliqui" />
           <EntitySet Name="ro_nomina_x_horas_extras" EntityType="Self.ro_nomina_x_horas_extras" />
@@ -7428,10 +7239,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             <End Role="ro_catalogo" EntitySet="ro_catalogo" />
             <End Role="ro_empleado" EntitySet="ro_empleado" />
           </AssociationSet>
-          <AssociationSet Name="FK_ro_marcaciones_x_empleado_ro_catalogo" Association="Self.FK_ro_marcaciones_x_empleado_ro_catalogo">
-            <End Role="ro_catalogo" EntitySet="ro_catalogo" />
-            <End Role="ro_marcaciones_x_empleado" EntitySet="ro_marcaciones_x_empleado" />
-          </AssociationSet>
           <AssociationSet Name="FK_ro_Config_Param_contable_ro_Departamento" Association="Self.FK_ro_Config_Param_contable_ro_Departamento">
             <End Role="ro_Departamento" EntitySet="ro_Departamento" />
             <End Role="ro_Config_Param_contable" EntitySet="ro_Config_Param_contable" />
@@ -7460,10 +7267,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_DocumentoxEmp" EntitySet="ro_DocumentoxEmp" />
           </AssociationSet>
-          <AssociationSet Name="FK_ro_empleado_historial_Sueldo_ro_empleado" Association="Self.FK_ro_empleado_historial_Sueldo_ro_empleado">
-            <End Role="ro_empleado" EntitySet="ro_empleado" />
-            <End Role="ro_empleado_historial_Sueldo" EntitySet="ro_empleado_historial_Sueldo" />
-          </AssociationSet>
           <AssociationSet Name="FK_ro_empleado_Novedad_ro_empleado" Association="Self.FK_ro_empleado_Novedad_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_empleado_Novedad" EntitySet="ro_empleado_Novedad" />
@@ -7471,10 +7274,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <AssociationSet Name="FK_ro_empleado_ro_empleado" Association="Self.FK_ro_empleado_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_empleado1" EntitySet="ro_empleado" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ro_empleado_x_centro_costo_ro_empleado" Association="Self.FK_ro_empleado_x_centro_costo_ro_empleado">
-            <End Role="ro_empleado" EntitySet="ro_empleado" />
-            <End Role="ro_empleado_x_centro_costo" EntitySet="ro_empleado_x_centro_costo" />
           </AssociationSet>
           <AssociationSet Name="FK_ro_empleado_x_ro_rubro_ro_empleado" Association="Self.FK_ro_empleado_x_ro_rubro_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
@@ -7503,10 +7302,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <AssociationSet Name="FK_ro_horario_planificacion_ro_empleado" Association="Self.FK_ro_horario_planificacion_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_horario_planificacion_det" EntitySet="ro_horario_planificacion_det" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ro_marcaciones_x_empleado_ro_empleado" Association="Self.FK_ro_marcaciones_x_empleado_ro_empleado">
-            <End Role="ro_empleado" EntitySet="ro_empleado" />
-            <End Role="ro_marcaciones_x_empleado" EntitySet="ro_marcaciones_x_empleado" />
           </AssociationSet>
           <AssociationSet Name="FK_ro_nomina_x_horas_extras_det_ro_empleado" Association="Self.FK_ro_nomina_x_horas_extras_det_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
@@ -7755,7 +7550,21 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <EntitySet Name="vwrdep_IngrEgr_x_Empleado" EntityType="Model_rrhh.vwrdep_IngrEgr_x_Empleado" />
           <EntitySet Name="vwRo_Solicitud_Vacaciones" EntityType="Model_rrhh.vwRo_Solicitud_Vacaciones" />
           <EntitySet Name="vwro_empleado_combo" EntityType="Model_rrhh.vwro_empleado_combo" />
-        </EntityContainer>
+          <EntitySet Name="ro_marcaciones_tipo" EntityType="Model_rrhh.ro_marcaciones_tipo" />
+          <EntitySet Name="ro_marcaciones_x_empleado" EntityType="Model_rrhh.ro_marcaciones_x_empleado" />
+          <AssociationSet Name="FK_ro_marcaciones_x_empleado_ro_catalogo" Association="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_catalogo">
+            <End Role="ro_catalogo" EntitySet="ro_catalogo" />
+            <End Role="ro_marcaciones_x_empleado" EntitySet="ro_marcaciones_x_empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_marcaciones_x_empleado_ro_empleado" Association="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_empleado">
+            <End Role="ro_empleado" EntitySet="ro_empleado" />
+            <End Role="ro_marcaciones_x_empleado" EntitySet="ro_marcaciones_x_empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_marcaciones_x_empleado_ro_marcaciones_tipo" Association="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_marcaciones_tipo">
+            <End Role="ro_marcaciones_tipo" EntitySet="ro_marcaciones_tipo" />
+            <End Role="ro_marcaciones_x_empleado" EntitySet="ro_marcaciones_x_empleado" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
           <Property Type="Decimal" Name="IdEmpleado" Nullable="false" Precision="18" Scale="0" />
@@ -8009,7 +7818,90 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
         </EntityType>
-      </Schema>
+        <EntityType Name="ro_marcaciones_tipo">
+          <Key>
+            <PropertyRef Name="IdTipoMarcaciones" />
+          </Key>
+          <Property Name="IdTipoMarcaciones" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ma_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ro_marcaciones_x_empleado" Relationship="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_marcaciones_tipo" FromRole="ro_marcaciones_tipo" ToRole="ro_marcaciones_x_empleado" />
+        </EntityType>
+        <EntityType Name="ro_marcaciones_x_empleado">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdRegistro" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdRegistro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdCalendadrio" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipoMarcaciones" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdNomina" Type="Int32" />
+          <Property Name="IdPeriodo" Type="Int32" />
+          <Property Name="es_Hora" Type="Time" Precision="0" />
+          <Property Name="es_fechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="es_anio" Type="Int32" />
+          <Property Name="es_mes" Type="Int32" />
+          <Property Name="es_semana" Type="Int32" />
+          <Property Name="es_dia" Type="Int32" />
+          <Property Name="es_sdia" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="es_idDia" Type="Int32" />
+          <Property Name="es_EsActualizacion" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdTipoMarcaciones_Biometrico" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Observacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Ip" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltModi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Motivo_Anu" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ro_catalogo" Relationship="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_catalogo" FromRole="ro_marcaciones_x_empleado" ToRole="ro_catalogo" />
+          <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_empleado" FromRole="ro_marcaciones_x_empleado" ToRole="ro_empleado" />
+          <NavigationProperty Name="ro_marcaciones_tipo" Relationship="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_marcaciones_tipo" FromRole="ro_marcaciones_x_empleado" ToRole="ro_marcaciones_tipo" />
+        </EntityType>
+        <Association Name="FK_ro_marcaciones_x_empleado_ro_catalogo">
+          <End Type="Model_rrhh.ro_catalogo" Role="ro_catalogo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_marcaciones_x_empleado" Role="ro_marcaciones_x_empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_catalogo">
+              <PropertyRef Name="CodCatalogo" />
+            </Principal>
+            <Dependent Role="ro_marcaciones_x_empleado">
+              <PropertyRef Name="IdTipoMarcaciones" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_marcaciones_x_empleado_ro_empleado">
+          <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_marcaciones_x_empleado" Role="ro_marcaciones_x_empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="ro_marcaciones_x_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_marcaciones_x_empleado_ro_marcaciones_tipo">
+          <End Type="Model_rrhh.ro_marcaciones_tipo" Role="ro_marcaciones_tipo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_marcaciones_x_empleado" Role="ro_marcaciones_x_empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_marcaciones_tipo">
+              <PropertyRef Name="IdTipoMarcaciones" />
+            </Principal>
+            <Dependent Role="ro_marcaciones_x_empleado">
+              <PropertyRef Name="IdTipoMarcaciones" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -8377,30 +8269,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ro_empleado_historial_Sueldo">
-            <EntityTypeMapping TypeName="Model_rrhh.ro_empleado_historial_Sueldo">
-              <MappingFragment StoreEntitySet="ro_empleado_historial_Sueldo">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="SueldoAnterior" ColumnName="SueldoAnterior" />
-                <ScalarProperty Name="SueldoActual" ColumnName="SueldoActual" />
-                <ScalarProperty Name="PorIncrementoSueldo" ColumnName="PorIncrementoSueldo" />
-                <ScalarProperty Name="ValorIncrementoSueldo" ColumnName="ValorIncrementoSueldo" />
-                <ScalarProperty Name="Motivo" ColumnName="Motivo" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
-                <ScalarProperty Name="ip" ColumnName="ip" />
-                <ScalarProperty Name="de_descripcion" ColumnName="de_descripcion" />
-                <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
-                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ro_empleado_Novedad">
             <EntityTypeMapping TypeName="Model_rrhh.ro_empleado_Novedad">
               <MappingFragment StoreEntitySet="ro_empleado_Novedad">
@@ -8450,20 +8318,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
                 <ScalarProperty Name="IdCalendario" ColumnName="IdCalendario" />
                 <ScalarProperty Name="Num_Horas" ColumnName="Num_Horas" />
                 <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ro_empleado_x_centro_costo">
-            <EntityTypeMapping TypeName="Model_rrhh.ro_empleado_x_centro_costo">
-              <MappingFragment StoreEntitySet="ro_empleado_x_centro_costo">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
-                <ScalarProperty Name="IdCentroCosto_sub_centro_costo" ColumnName="IdCentroCosto_sub_centro_costo" />
-                <ScalarProperty Name="FechaIngresa" ColumnName="FechaIngresa" />
-                <ScalarProperty Name="UsuarioIngresa" ColumnName="UsuarioIngresa" />
-                <ScalarProperty Name="FechaModifica" ColumnName="FechaModifica" />
-                <ScalarProperty Name="UsuarioModifica" ColumnName="UsuarioModifica" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8665,40 +8519,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
                 <ScalarProperty Name="IdHorario" ColumnName="IdHorario" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ro_marcaciones_x_empleado">
-            <EntityTypeMapping TypeName="Model_rrhh.ro_marcaciones_x_empleado">
-              <MappingFragment StoreEntitySet="ro_marcaciones_x_empleado">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdRegistro" ColumnName="IdRegistro" />
-                <ScalarProperty Name="IdCalendadrio" ColumnName="IdCalendadrio" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdTipoMarcaciones" ColumnName="IdTipoMarcaciones" />
-                <ScalarProperty Name="IdNomina" ColumnName="IdNomina" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-                <ScalarProperty Name="es_Hora" ColumnName="es_Hora" />
-                <ScalarProperty Name="es_fechaRegistro" ColumnName="es_fechaRegistro" />
-                <ScalarProperty Name="es_anio" ColumnName="es_anio" />
-                <ScalarProperty Name="es_mes" ColumnName="es_mes" />
-                <ScalarProperty Name="es_semana" ColumnName="es_semana" />
-                <ScalarProperty Name="es_dia" ColumnName="es_dia" />
-                <ScalarProperty Name="es_sdia" ColumnName="es_sdia" />
-                <ScalarProperty Name="es_idDia" ColumnName="es_idDia" />
-                <ScalarProperty Name="es_EsActualizacion" ColumnName="es_EsActualizacion" />
-                <ScalarProperty Name="IdTipoMarcaciones_Biometrico" ColumnName="IdTipoMarcaciones_Biometrico" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="Ip" ColumnName="Ip" />
-                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
-                <ScalarProperty Name="Motivo_Anu" ColumnName="Motivo_Anu" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -9790,6 +9610,48 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
                 <ScalarProperty Name="em_status" ColumnName="em_status" />
                 <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
                 <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_marcaciones_tipo">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_marcaciones_tipo">
+              <MappingFragment StoreEntitySet="ro_marcaciones_tipo">
+                <ScalarProperty Name="ma_descripcion" ColumnName="ma_descripcion" />
+                <ScalarProperty Name="IdTipoMarcaciones" ColumnName="IdTipoMarcaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_marcaciones_x_empleado">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_marcaciones_x_empleado">
+              <MappingFragment StoreEntitySet="ro_marcaciones_x_empleado">
+                <ScalarProperty Name="Motivo_Anu" ColumnName="Motivo_Anu" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
+                <ScalarProperty Name="Ip" ColumnName="Ip" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="IdTipoMarcaciones_Biometrico" ColumnName="IdTipoMarcaciones_Biometrico" />
+                <ScalarProperty Name="es_EsActualizacion" ColumnName="es_EsActualizacion" />
+                <ScalarProperty Name="es_idDia" ColumnName="es_idDia" />
+                <ScalarProperty Name="es_sdia" ColumnName="es_sdia" />
+                <ScalarProperty Name="es_dia" ColumnName="es_dia" />
+                <ScalarProperty Name="es_semana" ColumnName="es_semana" />
+                <ScalarProperty Name="es_mes" ColumnName="es_mes" />
+                <ScalarProperty Name="es_anio" ColumnName="es_anio" />
+                <ScalarProperty Name="es_fechaRegistro" ColumnName="es_fechaRegistro" />
+                <ScalarProperty Name="es_Hora" ColumnName="es_Hora" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdNomina" ColumnName="IdNomina" />
+                <ScalarProperty Name="IdTipoMarcaciones" ColumnName="IdTipoMarcaciones" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdCalendadrio" ColumnName="IdCalendadrio" />
+                <ScalarProperty Name="IdRegistro" ColumnName="IdRegistro" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

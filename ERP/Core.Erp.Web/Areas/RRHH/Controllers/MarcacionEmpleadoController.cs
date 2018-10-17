@@ -19,6 +19,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_catalogo_Bus bus_catalogo = new ro_catalogo_Bus();
         ro_marcaciones_x_empleado_Bus bus_marcaciones = new ro_marcaciones_x_empleado_Bus();
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
+        ro_marcaciones_tipo_Bus bus_tipo = new ro_marcaciones_tipo_Bus();
         int IdEmpresa = 0;
         #region Metodos ComboBox bajo demanda
         tb_persona_Bus bus_persona = new tb_persona_Bus();
@@ -180,6 +181,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                bus_tipo = new ro_marcaciones_tipo_Bus();
+                ViewBag.lst_tipo = bus_tipo.get_list();
+
                 bus_empleado = new ro_empleado_Bus();
                 bus_catalogo = new ro_catalogo_Bus();
                 ro_nomina_tipo_Bus bus_nomina = new ro_nomina_tipo_Bus();
@@ -187,6 +191,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 ViewBag.lst_empleado = bus_empleado.get_list_combo(IdEmpresa);
                 ViewBag.lst_tipomarcacion = bus_catalogo.get_list_x_tipo(18);
 
+               
             }
             catch (Exception)
             {

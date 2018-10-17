@@ -14,6 +14,7 @@ namespace Core.Erp.Data
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
+
     public partial class Entities_rrhh : DbContext
     {
         public Entities_rrhh()
@@ -42,10 +43,8 @@ namespace Core.Erp.Data
         public DbSet<ro_Division> ro_Division { get; set; }
         public DbSet<ro_DocumentoxEmp> ro_DocumentoxEmp { get; set; }
         public DbSet<ro_empleado> ro_empleado { get; set; }
-        public DbSet<ro_empleado_historial_Sueldo> ro_empleado_historial_Sueldo { get; set; }
         public DbSet<ro_empleado_Novedad> ro_empleado_Novedad { get; set; }
         public DbSet<ro_empleado_novedad_det> ro_empleado_novedad_det { get; set; }
-        public DbSet<ro_empleado_x_centro_costo> ro_empleado_x_centro_costo { get; set; }
         public DbSet<ro_empleado_x_horario> ro_empleado_x_horario { get; set; }
         public DbSet<ro_empleado_x_ro_rubro> ro_empleado_x_ro_rubro { get; set; }
         public DbSet<ro_empleado_x_ro_tipoNomina> ro_empleado_x_ro_tipoNomina { get; set; }
@@ -57,7 +56,6 @@ namespace Core.Erp.Data
         public DbSet<ro_horario> ro_horario { get; set; }
         public DbSet<ro_horario_planificacion> ro_horario_planificacion { get; set; }
         public DbSet<ro_horario_planificacion_det> ro_horario_planificacion_det { get; set; }
-        public DbSet<ro_marcaciones_x_empleado> ro_marcaciones_x_empleado { get; set; }
         public DbSet<ro_Nomina_Tipo> ro_Nomina_Tipo { get; set; }
         public DbSet<ro_Nomina_Tipoliqui> ro_Nomina_Tipoliqui { get; set; }
         public DbSet<ro_nomina_x_horas_extras> ro_nomina_x_horas_extras { get; set; }
@@ -104,6 +102,8 @@ namespace Core.Erp.Data
         public DbSet<vwrdep_IngrEgr_x_Empleado> vwrdep_IngrEgr_x_Empleado { get; set; }
         public DbSet<vwRo_Solicitud_Vacaciones> vwRo_Solicitud_Vacaciones { get; set; }
         public DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
+        public DbSet<ro_marcaciones_tipo> ro_marcaciones_tipo { get; set; }
+        public DbSet<ro_marcaciones_x_empleado> ro_marcaciones_x_empleado { get; set; }
     
         public virtual int spRo_Cierre_Rol(Nullable<int> idEmpresa, Nullable<int> idPeriodo, Nullable<int> idNomina_Tipo, Nullable<int> idNomina_TipoLiqui)
         {
