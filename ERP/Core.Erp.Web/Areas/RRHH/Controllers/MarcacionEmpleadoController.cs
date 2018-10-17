@@ -20,14 +20,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_marcaciones_x_empleado_Bus bus_marcaciones = new ro_marcaciones_x_empleado_Bus();
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
         int IdEmpresa = 0;
-
-
         #region Metodos ComboBox bajo demanda
         tb_persona_Bus bus_persona = new tb_persona_Bus();
-        public ActionResult CmbEmpleado_marcacion()
+        public ActionResult CmbEmpleado_Marcacion()
         {
             decimal model = new decimal();
-            return PartialView("_CmbEmpleado_marcacion", model);
+            return PartialView("_CmbEmpleado_Marcacion", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
@@ -38,12 +36,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
         }
         #endregion
-
         public ActionResult Index()
         {
             return View();
         }
-
         [ValidateInput(false)]
         public ActionResult GridViewPartial_marcaciones_empleado()
         {
@@ -129,7 +125,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-
         public ActionResult Modificar(decimal IdEmpleado = 0, decimal IdRegistro = 0)
         {
             try
@@ -146,7 +141,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
         }
         [HttpPost]
-
         public ActionResult Anular(ro_marcaciones_x_empleado_Info info)
         {
             try
@@ -182,7 +176,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-
         private void cargar_combo()
         {
             try
@@ -201,7 +194,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-
         private int GetIdEmpresa()
         {
             try
@@ -217,7 +209,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-
        
     }
 }

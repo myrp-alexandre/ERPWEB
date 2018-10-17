@@ -955,5 +955,22 @@ namespace Core.Erp.Data
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPROL_015_Result>("SPROL_015", fechaInicioParameter, fechaFinParameter, idEmpresaParameter);
         }
+    
+        public virtual ObjectResult<SPROL_017_Result> SPROL_017(Nullable<int> idEmpresa, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var fechaInicioParameter = fechaInicio.HasValue ?
+                new ObjectParameter("FechaInicio", fechaInicio) :
+                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+    
+            var fechaFinParameter = fechaFin.HasValue ?
+                new ObjectParameter("FechaFin", fechaFin) :
+                new ObjectParameter("FechaFin", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPROL_017_Result>("SPROL_017", idEmpresaParameter, fechaInicioParameter, fechaFinParameter);
+        }
     }
 }

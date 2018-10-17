@@ -50,7 +50,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             var lst_cta = bus_cta.get_list(IdEmpresa, false, false);
             ViewBag.lst_cta = lst_cta;
         }
-
         private void cargar_nivel()
         {
             Dictionary<int, string> lst_nivel = new Dictionary<int, string>();
@@ -68,7 +67,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             lst_balance.Add("", "Balance de comprobación");
             ViewBag.lst_balance = lst_balance;
         }
-
         public ActionResult CONTA_002()
         {
             cl_filtros_Info model = new cl_filtros_Info
@@ -88,7 +86,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
-
         [HttpPost]
         public ActionResult CONTA_002(cl_filtros_Info model)
         {
@@ -103,7 +100,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
-
         public ActionResult CONTA_003()
         {
             cl_filtros_contabilidad_Info model = new cl_filtros_contabilidad_Info
@@ -131,7 +127,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cargar_nivel();
             return View(model);
         }
-
         [HttpPost]
         public ActionResult CONTA_003(cl_filtros_contabilidad_Info model)
         {

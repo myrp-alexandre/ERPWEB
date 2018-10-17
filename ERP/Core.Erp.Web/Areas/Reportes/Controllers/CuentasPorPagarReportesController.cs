@@ -15,7 +15,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     public class CuentasPorPagarReportesController : Controller
     {
         tb_persona_Bus bus_persona = new tb_persona_Bus();
-
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbProveedor_CXP()
         {
@@ -31,8 +30,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROVEE.ToString());
         }
         #endregion
-
-
         public ActionResult CXP_001(int IdTipoCbte_Ogiro = 0, decimal IdCbteCble_Ogiro = 0)
         {
             CXP_001_Rpt model = new CXP_001_Rpt();
@@ -109,12 +106,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
-
         [HttpPost]
         public ActionResult CXP_007(cl_filtros_Info model)
         {
             CXP_007_Rpt report = new CXP_007_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_fecha_ini.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
             report.p_mostrar_agrupado.Value = model.mostrar_agrupado;
@@ -124,8 +120,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
-
-
         private void cargar_combos()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -138,6 +132,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 fecha = fecha == null ? DateTime.Now : Convert.ToDateTime(fecha),
                 IdProveedor = IdProveedor,
                 no_mostrar_en_conciliacion = no_mostrar_en_conciliacion,
@@ -145,7 +140,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             };
             cargar_combos();
             CXP_008_Rpt report = new CXP_008_Rpt();
-            report.p_IdEmpresa.Value = SessionFixed.IdEmpresa;
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_fecha.Value = model.fecha;
             report.p_IdProveedor.Value = model.IdProveedor;
             report.p_no_mostrar_en_conciliacion.Value = model.no_mostrar_en_conciliacion;
@@ -156,12 +151,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
-
         [HttpPost]
         public ActionResult CXP_008(cl_filtros_Info model)
         {
             CXP_008_Rpt report = new CXP_008_Rpt();
-            report.p_IdEmpresa.Value = SessionFixed.IdEmpresa;
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_fecha.Value = model.fecha;
             report.p_IdProveedor.Value = model.IdProveedor;
             report.p_no_mostrar_en_conciliacion.Value = model.no_mostrar_en_conciliacion;
@@ -173,7 +167,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 ViewBag.Report = report;
             return View(model);
         }
-
         public ActionResult CXP_009()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -188,12 +181,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
-
         [HttpPost]
         public ActionResult CXP_009(cl_filtros_Info model)
         {
             CXP_009_Rpt report = new CXP_009_Rpt();
-            report.p_IdEmpresa.Value = SessionFixed.IdEmpresa;
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_Fecha_ini.Value = model.fecha_ini;
             report.p_Fecha_fin.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario;
@@ -212,7 +204,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             };
             cargar_combos();
             CXP_010_Rpt report = new CXP_010_Rpt();
-            report.p_IdEmpresa.Value = SessionFixed.IdEmpresa;
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdProveedor.Value = model.IdProveedor;
             report.p_fechaIni.Value = model.fecha_ini;
             report.p_fechaFin.Value = model.fecha_fin;
@@ -224,12 +216,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
-
         [HttpPost]
         public ActionResult CXP_010(cl_filtros_Info model)
         {
             CXP_010_Rpt report = new CXP_010_Rpt();
-            report.p_IdEmpresa.Value = SessionFixed.IdEmpresa;
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdProveedor.Value = model.IdProveedor;
             report.p_fechaIni.Value = model.fecha_ini;
             report.p_fechaFin.Value = model.fecha_fin;

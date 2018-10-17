@@ -600,7 +600,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult INV_010()
         {
 
-            cl_filtros_inventario_Info model = new cl_filtros_inventario_Info { IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa), IdCategoria = "", fecha_ini = new DateTime(DateTime.Now.Year,1,1), fecha_fin = new DateTime(DateTime.Now.Year,12,31) };
+            cl_filtros_inventario_Info model = new cl_filtros_inventario_Info {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdCategoria = "",
+                fecha_ini = new DateTime(DateTime.Now.Year,1,1),
+                fecha_fin = new DateTime(DateTime.Now.Year,12,31)
+            };
 
             cargar_combos(model);
             INV_010_Rpt report = new INV_010_Rpt();

@@ -298,5 +298,35 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
+        public ActionResult ROL_017()
+        {
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdEmpleado = 0
+            };
+            ROL_017_Rpt report = new ROL_017_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdEmpleado.Value = model.IdEmpleado;
+            report.p_fechaIni.Value = model.fecha_ini;
+            report.p_fechaFin.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+            ViewBag.Report = report;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ROL_017(cl_filtros_Info model)
+        {
+            ROL_017_Rpt report = new ROL_017_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdEmpleado.Value = model.IdEmpleado;
+            report.p_fechaIni.Value = model.fecha_ini;
+            report.p_fechaFin.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+            ViewBag.Report = report;
+            return View(model);
+        }
     }
 }
