@@ -31,7 +31,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
         }
         #endregion
-
         public ActionResult ROL_001(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui= 0, int IdPeriodo=0)
         {
             ROL_001_Rpt model = new ROL_001_Rpt();
@@ -53,7 +52,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.empresa.Value = SessionFixed.NomEmpresa.ToString();
             return View(model);
         }
-
         public ActionResult ROL_003(decimal IdEmpleado=0, decimal IdNovedad=0)
         {
             ROL_003_Rpt model = new ROL_003_Rpt();
@@ -64,7 +62,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.empresa = SessionFixed.NomEmpresa.ToString();
             return View(model);
         }
-
         public ActionResult ROL_004(int IdUtilidad=0)
         {
             ROL_004_Rpt model = new ROL_004_Rpt();
@@ -74,7 +71,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.empresa = SessionFixed.NomEmpresa.ToString();
             return View(model);
         }
-   
         public ActionResult ROL_005(decimal IdActaFiniquito = 0)
         {
             ROL_005_Rpt model = new ROL_005_Rpt();
@@ -119,7 +115,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
 
             };
-            cargar_combos();
+            cargar_combos(model.IdEmpresa);
             ROL_009_Rpt report = new ROL_009_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_fecha_inicio.Value = model.fecha_ini;
@@ -140,7 +136,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.empresa = SessionFixed.NomEmpresa.ToString();
             return View(model);
         }
-
         public ActionResult ROL_011( int IdHorasExtras =0)
         {
             ROL_011_Rpt model = new ROL_011_Rpt();
@@ -150,23 +145,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.empresa = SessionFixed.NomEmpresa.ToString();
             return View(model);
         }
-
-        private void cargar_combos()
+        private void cargar_combos(int IdEmpresa)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ro_nomina_tipo_Bus bus_nomina = new ro_nomina_tipo_Bus();
             var lst_nomina = bus_nomina.get_list(IdEmpresa, false);
-            lst_nomina.Add(new ro_nomina_tipo_Info
-            {
-                IdNomina_Tipo = 0,
-                Descripcion = "TODAS"
-
-            });
             ViewBag.lst_nomina = lst_nomina;
-
-            
         }
-
         public ActionResult ROL_012( )
         {
             cl_filtros_Info model = new cl_filtros_Info
@@ -183,7 +167,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
         [HttpPost]
-
         public ActionResult ROl_012(cl_filtros_Info model)
         {
             ROL_012_Rpt report = new ROL_012_Rpt();
@@ -195,16 +178,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
-
         public ActionResult ROL_013()
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdNomina = 0,
-                IdEmpleado = 0
+                IdNomina = 1
             };
-            cargar_combos();
+            cargar_combos(model.IdEmpresa);
             ROL_013_Rpt report = new ROL_013_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdNomina.Value = model.IdNomina;
@@ -216,7 +197,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
-
         [HttpPost]
         public ActionResult ROL_013(cl_filtros_Info model)
         {
@@ -229,6 +209,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
+            cargar_combos(model.IdEmpresa);
+
             return View(model);
         }
         public ActionResult ROL_014()
@@ -238,7 +220,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdTipoNomina = 0
             };
-            cargar_combos();
+            cargar_combos(model.IdEmpresa);
             ROL_014_Rpt report = new ROL_014_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdTipoNomina.Value = model.IdTipoNomina;
