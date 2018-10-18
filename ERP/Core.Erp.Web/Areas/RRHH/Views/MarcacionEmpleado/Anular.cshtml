@@ -34,7 +34,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdMarcacionesEmpleado_Tipo">Tipo marcación*</label>
-                    @Html.DropDownListFor(q => q.IdTipoMarcaciones, new SelectList(ViewBag.lst_tipomarcacion, "CodCatalogo", "ca_descripcion"), "== Seleccione ==", new { @class = "form-control", @disabled = "disabled" })
+                    @Html.DropDownListFor(q => q.IdTipoMarcaciones, new SelectList(ViewBag.lst_tipo, "IdTipoMarcaciones", "ma_descripcion"), "== Seleccione ==", new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.IdTipoMarcaciones_Biometrico, "", new { @class = "text-danger" })
                 </div>
             </div>

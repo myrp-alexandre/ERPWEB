@@ -8431,24 +8431,22 @@ FROM [web].[VWROL_016] AS [VWROL_016]</DefiningQuery>
           <Property Type="Double" Name="Vacaciones" Nullable="true" />
         </ComplexType>
         <ComplexType Name="SPROL_017_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Decimal" Name="IdEmpleado" Nullable="false" Precision="18" Scale="0" />
           <Property Type="Time" Name="Entrada1" Nullable="false" />
           <Property Type="Time" Name="Entrada2" Nullable="false" />
           <Property Type="Time" Name="Salida1" Nullable="false" />
           <Property Type="Time" Name="Salida2" Nullable="false" />
           <Property Type="Time" Name="SalidaLounch" Nullable="false" />
           <Property Type="Time" Name="RegresoLounch" Nullable="false" />
-          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
-          <Property Type="Decimal" Name="IdEmpleado" Nullable="false" Precision="18" Scale="0" />
           <Property Type="String" Name="pe_nombreCompleto" Nullable="false" MaxLength="200" />
           <Property Type="String" Name="pe_cedulaRuc" Nullable="false" MaxLength="50" />
           <Property Type="DateTime" Name="es_fechaRegistro" Nullable="false" Precision="23" />
-          <Property Type="Time" Name="es_Hora" Nullable="true" />
-          <Property Type="Int32" Name="es_anio" Nullable="true" />
           <Property Type="Int32" Name="es_mes" Nullable="true" />
+          <Property Type="Int32" Name="es_anio" Nullable="true" />
           <Property Type="Int32" Name="es_semana" Nullable="true" />
           <Property Type="Int32" Name="es_dia" Nullable="true" />
           <Property Type="String" Name="es_sdia" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="ma_descripcion" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -10944,24 +10942,22 @@ FROM [web].[VWROL_016] AS [VWROL_016]</DefiningQuery>
           <FunctionImportMapping FunctionImportName="SPROL_017" FunctionName="Model_reportes.Store.SPROL_017">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Model_reportes.SPROL_017_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="Entrada1" ColumnName="Entrada1" />
                 <ScalarProperty Name="Entrada2" ColumnName="Entrada2" />
                 <ScalarProperty Name="Salida1" ColumnName="Salida1" />
                 <ScalarProperty Name="Salida2" ColumnName="Salida2" />
                 <ScalarProperty Name="SalidaLounch" ColumnName="SalidaLounch" />
                 <ScalarProperty Name="RegresoLounch" ColumnName="RegresoLounch" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
                 <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
                 <ScalarProperty Name="es_fechaRegistro" ColumnName="es_fechaRegistro" />
-                <ScalarProperty Name="es_Hora" ColumnName="es_Hora" />
-                <ScalarProperty Name="es_anio" ColumnName="es_anio" />
                 <ScalarProperty Name="es_mes" ColumnName="es_mes" />
+                <ScalarProperty Name="es_anio" ColumnName="es_anio" />
                 <ScalarProperty Name="es_semana" ColumnName="es_semana" />
                 <ScalarProperty Name="es_dia" ColumnName="es_dia" />
                 <ScalarProperty Name="es_sdia" ColumnName="es_sdia" />
-                <ScalarProperty Name="ma_descripcion" ColumnName="ma_descripcion" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

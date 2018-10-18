@@ -37,7 +37,7 @@ namespace Core.Erp.Data.RRHH
                                  IdUsuario = q.IdUsuario,
                                 
                                  Estado = q.Estado,
-                                 ca_descripcion=q.ca_descripcion,
+                                 ca_descripcion=q.ma_descripcion,
                                  cargo=q.cargo,
                                  pe_NombreCompleato=q.pe_apellido+" "+q.pe_nombre,
                                  pe_cedula=q.pe_cedulaRuc,

@@ -85,7 +85,6 @@ namespace Core.Erp.Data
         public DbSet<vwro_empleados_consulta> vwro_empleados_consulta { get; set; }
         public DbSet<vwro_Historico_Liquidacion_Vacaciones> vwro_Historico_Liquidacion_Vacaciones { get; set; }
         public DbSet<vwro_horario_planificacion_det> vwro_horario_planificacion_det { get; set; }
-        public DbSet<vwro_marcaciones_x_empleado> vwro_marcaciones_x_empleado { get; set; }
         public DbSet<vwro_nomina_x_horas_extras_aprobadas> vwro_nomina_x_horas_extras_aprobadas { get; set; }
         public DbSet<vwro_nomina_x_horas_extras_det> vwro_nomina_x_horas_extras_det { get; set; }
         public DbSet<vwro_participacion_utilidad> vwro_participacion_utilidad { get; set; }
@@ -104,6 +103,8 @@ namespace Core.Erp.Data
         public DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
         public DbSet<ro_marcaciones_tipo> ro_marcaciones_tipo { get; set; }
         public DbSet<ro_marcaciones_x_empleado> ro_marcaciones_x_empleado { get; set; }
+        public DbSet<vwro_marcaciones_x_empleado> vwro_marcaciones_x_empleado { get; set; }
+        public DbSet<ro_permiso_x_empleado> ro_permiso_x_empleado { get; set; }
     
         public virtual int spRo_Cierre_Rol(Nullable<int> idEmpresa, Nullable<int> idPeriodo, Nullable<int> idNomina_Tipo, Nullable<int> idNomina_TipoLiqui)
         {

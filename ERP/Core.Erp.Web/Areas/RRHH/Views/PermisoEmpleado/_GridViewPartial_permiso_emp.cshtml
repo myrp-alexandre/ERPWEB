@@ -2,10 +2,12 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridView_area";
-        settings.CallbackRouteValues = new { Controller = "Area", Action = "GridViewPartial_area" };
-        settings.KeyFieldName = "IdArea";
-
+        settings.Name = "GridView_permiso_emp";
+        settings.CallbackRouteValues = new
+        {
+            Controller = "PermisoEmpleado",
+            Action = "GridViewPartial_permiso_emp" };
+        settings.KeyFieldName = "IdPermiso";
         settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -50,7 +52,7 @@
         };
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToString(e.GetValue("estado")) == "I")
+            if (Convert.ToBoolean(e.GetValue("estado")) == false)
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
@@ -60,7 +62,7 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "estado")) == "A")
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true)
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdArea = DataBinder.Eval(tc.DataItem, "IdArea") }) + "&nbsp;" +
@@ -80,12 +82,14 @@
             c.Width = Unit.Pixel(150);
         });
 
-        settings.Columns.Add("IdArea","ID").Width=Unit.Percentage(10);
-        settings.Columns.Add("Division", "División").Width = Unit.Percentage(45);
-        settings.Columns.Add("Descripcion","Descripción").Width = Unit.Percentage(45);
+        settings.Columns.Add("IdPermiso", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("FechaInicio", "Fecha inicio").Width = Unit.Percentage(10);
+        settings.Columns.Add("FechaFin", "Fecha fin").Width = Unit.Percentage(10);
+        settings.Columns.Add("HoraSalida", "Hora de salida").Width = Unit.Percentage(10);
+        settings.Columns.Add("HoraRegreso", "Hora de regreso").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
-            column.FieldName = "EstadoBool";
+            column.FieldName = "estado";
             column.Caption = "Estado";
             column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
             column.EditorProperties().CheckBox(sp =>

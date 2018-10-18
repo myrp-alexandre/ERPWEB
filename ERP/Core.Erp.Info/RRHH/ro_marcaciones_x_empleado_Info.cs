@@ -50,5 +50,7 @@ namespace Core.Erp.Info.RRHH
         public string em_codigo { get; set; }
 
 
+
+
     }
 }

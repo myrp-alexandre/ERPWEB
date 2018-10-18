@@ -38,7 +38,7 @@ namespace Core.Erp.Data
         public string pe_nombre { get; set; }
         public string em_codigo { get; set; }
         public string pe_cedulaRuc { get; set; }
-        public string ca_descripcion { get; set; }
         public string cargo { get; set; }
+        public string ma_descripcion { get; set; }
     }
 }

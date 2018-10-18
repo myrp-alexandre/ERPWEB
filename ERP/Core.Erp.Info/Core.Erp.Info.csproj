@@ -387,6 +387,7 @@
     <Compile Include="RRHH\ro_participacion_utilidad_Info.cs" />
     <Compile Include="RRHH\ro_periodo_Info.cs" />
     <Compile Include="RRHH\ro_periodo_x_ro_Nomina_TipoLiqui_Info.cs" />
+    <Compile Include="RRHH\ro_permiso_x_empleado_Info.cs" />
     <Compile Include="RRHH\ro_prestamo_detalle_Info.cs" />
     <Compile Include="RRHH\ro_prestamo_Info.cs" />
     <Compile Include="RRHH\ro_rol_detalle_Info.cs" />

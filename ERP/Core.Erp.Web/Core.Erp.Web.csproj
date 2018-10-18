@@ -401,6 +401,7 @@
     <Compile Include="Areas\RRHH\Controllers\ParticipacionUtilidadController.cs" />
     <Compile Include="Areas\RRHH\Controllers\PeriodoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\PeriodosPorNominaController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\PermisoEmpleadoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\PrestamosController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ProcesarRolController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ProyeccionDeGastosController.cs" />
@@ -9221,6 +9222,8 @@
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_016.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_017.cshtml" />
     <Content Include="Areas\RRHH\Views\MarcacionEmpleado\_CmbEmpleado_Marcacion.cshtml" />
+    <Content Include="Areas\RRHH\Views\PermisoEmpleado\Index.cshtml" />
+    <Content Include="Areas\RRHH\Views\PermisoEmpleado\_GridViewPartial_permiso_emp.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
