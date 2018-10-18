@@ -171,5 +171,37 @@ namespace Core.Erp.Info.Helps
             }
             return Num2Text;
         }
+
+        public static string QuitartildesEspaciosPuntos(string cadena)
+        {
+            try
+            {
+                //if (cadena == null)
+                //    cadena = "";
+                string Convertida = cadena;
+                Convertida = Convertida.Trim();
+                Convertida = Convertida.Replace("S.A","");
+                Convertida = Convertida.Replace("CIA.", "");
+                Convertida = Convertida.Replace("LTDA.", "");
+                Convertida = Convertida.Replace("Ñ", "N").ToUpper();
+                Convertida = Convertida.Replace("Á", "A").ToUpper();
+                Convertida = Convertida.Replace("É", "E").ToUpper();
+                Convertida = Convertida.Replace("Í", "I").ToUpper();
+                Convertida = Convertida.Replace("Ú", "U").ToUpper();
+                Convertida = Convertida.Replace("Ó", "O").ToUpper();
+                Convertida = Convertida.Replace(".", "");
+
+                Convertida = Convertida.Trim();
+
+
+                return Convertida;
+            }
+            catch (Exception)
+            {
+
+
+                throw;
+            }
+        }
     }
 }

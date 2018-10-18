@@ -9,6 +9,7 @@ using Core.Erp.Info.Contabilidad.ATS;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Data.General;
 using Core.Erp.Info.General;
+using Core.Erp.Info.Helps;
 namespace Core.Erp.Bus.Contabilidad
 {
   public  class ats_Bus
@@ -71,7 +72,7 @@ namespace Core.Erp.Bus.Contabilidad
                        detalleCompras comp_det = new detalleCompras();
 
                        registro = comp.denopr + " " + comp.secuencial;
-
+                        comp.denopr = cl_funciones.QuitartildesEspaciosPuntos(comp.denopr);
                        comp_det.codSustento = comp.codSustento;
                        comp_det.tpIdProv = comp.tpIdProv;
                        comp_det.idProv = comp.idProv;
@@ -222,6 +223,7 @@ namespace Core.Erp.Bus.Contabilidad
                                  {
                                      det_ventas.parteRelVtas = parteRelType.NO;
                                  }
+                                 vent.DenoCli = cl_funciones.QuitartildesEspaciosPuntos(vent.DenoCli);
                                  det_ventas.tipoComprobante = vent.tipoComprobante;
                                  det_ventas.tipoEmision = tipoEmisionType.F;
                                  det_ventas.numeroComprobantes = vent.numeroComprobantes.ToString();
@@ -288,7 +290,7 @@ namespace Core.Erp.Bus.Contabilidad
                                 exp_det.idClienteEx = exp.idClienteEx;
                                 exp_det.parteRelExp = parteRelType.NO;
                                 exp_det.tipoCli = "02";
-                                exp_det.denoExpCli = exp.denoExpCli;
+                                exp_det.denoExpCli = exp.denoExpCli=cl_funciones.QuitartildesEspaciosPuntos(exp.denoExpCli);
                                 exp_det.tipoRegi = tipoRegiType.Item01;
                                 exp_det.paisEfecPagoGen = exp.paisEfecPagoGen;
                                 exp_det.paisEfecExp = exp.paisEfecExp;
@@ -352,5 +354,6 @@ namespace Core.Erp.Bus.Contabilidad
                 throw;
             }
         }
+      
     }
 }
