@@ -97,7 +97,14 @@
             CTL_10,
             CTL_11
         }
+        public enum eTipoPermisoRRHH
+        {
 
+           MATERNIDAD,
+           PATERNIDAD,
+           ENFERMEDAD,
+           PERSONAL
+        }
         public enum eTipoIngEgr
         {
             ING,
