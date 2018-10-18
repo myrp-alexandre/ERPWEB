@@ -9224,6 +9224,8 @@
     <Content Include="Areas\RRHH\Views\MarcacionEmpleado\_CmbEmpleado_Marcacion.cshtml" />
     <Content Include="Areas\RRHH\Views\PermisoEmpleado\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\PermisoEmpleado\_GridViewPartial_permiso_emp.cshtml" />
+    <Content Include="Areas\RRHH\Views\PermisoEmpleado\Nuevo.cshtml" />
+    <Content Include="Areas\RRHH\Views\PermisoEmpleado\_CmbEmpleado_permiso.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
