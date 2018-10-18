@@ -41,6 +41,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_notaCreDeb_x_fa_factura_NotaDeb_Bus bus_cruce = new fa_notaCreDeb_x_fa_factura_NotaDeb_Bus();
         fa_notaCreDeb_x_fa_factura_NotaDeb_List List_cruce = new fa_notaCreDeb_x_fa_factura_NotaDeb_List();
         fa_TipoNota_x_Empresa_x_Sucursal_Bus bus_tipo_nota_x_sucursal = new fa_TipoNota_x_Empresa_x_Sucursal_Bus();
+        fa_TipoNota_x_Empresa_x_Sucursal_Bus bus_nota_x_empresa_sucursal = new fa_TipoNota_x_Empresa_x_Sucursal_Bus();
         #endregion
 
         #region Index
@@ -435,6 +436,16 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Nuevo(fa_notaCreDeb_Info model)
         {
+            var nota = bus_nota_x_empresa_sucursal.get_info(model.IdEmpresa, model.IdTipoNota, model.IdSucursal);
+            if (nota != null)
+            {
+                if (nota.IdCtaCble == null | nota.IdCtaCble == "")
+                {
+                    ViewBag.mensaje = "No existe cuenta contable para el tipo de nota de credito";
+                    cargar_combos(model);
+                    return View(model);
+                }
+            }
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
@@ -473,6 +484,16 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Modificar(fa_notaCreDeb_Info model)
         {
+            var nota = bus_nota_x_empresa_sucursal.get_info(model.IdEmpresa, model.IdTipoNota, model.IdSucursal);
+            if (nota != null)
+            {
+                if (nota.IdCtaCble == null | nota.IdCtaCble=="")
+                {
+                    ViewBag.mensaje = "No existe cuenta contable para el tipo de nota de credito";
+                    cargar_combos(model);
+                    return View(model);
+                }
+            }
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
