@@ -15,7 +15,12 @@ namespace Core.Erp.Data.Reportes.RRHH
             {
                 decimal IdEmpleadoIni = IdEmpleado;
                 decimal IdEmpleadoFin = IdEmpleado == 0 ? 9999 : IdEmpleado;
+
+                fechaFin = Convert.ToDateTime(fechaFin.ToShortDateString());
+                fechaIni = Convert.ToDateTime(fechaIni.ToShortDateString());
+
                 List<ROL_017_Info> Lista;
+
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = (from q in Context.SPROL_017(IdEmpresa, fechaIni, fechaFin)
@@ -40,14 +45,12 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  Salida1 = q.Salida1,
                                  Salida2 = q.Salida2,
                                  SalidaLounch = q.SalidaLounch
-
                              }).ToList();
                 }
                 return Lista;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

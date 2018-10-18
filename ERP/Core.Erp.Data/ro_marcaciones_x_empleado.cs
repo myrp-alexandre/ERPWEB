@@ -45,5 +45,6 @@ namespace Core.Erp.Data
     
         public virtual ro_catalogo ro_catalogo { get; set; }
         public virtual ro_empleado ro_empleado { get; set; }
+        public virtual ro_marcaciones_tipo ro_marcaciones_tipo { get; set; }
     }
 }

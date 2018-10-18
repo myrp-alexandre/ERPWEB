@@ -30,7 +30,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdMarcacioneEmpleado_Tipo">Tipo marcación*</label>
-                    @Html.DropDownListFor(q => q.IdTipoMarcaciones, new SelectList(ViewBag.lst_tipomarcacion, "CodCatalogo", "ca_descripcion"), "== Seleccione ==", new { @class = "form-control" })
+                    @Html.DropDownListFor(q => q.IdTipoMarcaciones, new SelectList(ViewBag.lst_tipo, "IdTipoMarcaciones", "ma_descripcion"), "== Seleccione ==", new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.IdTipoMarcaciones, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -38,8 +38,6 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-
-
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="es_fechaRegistro">Fecha marcación*</label>

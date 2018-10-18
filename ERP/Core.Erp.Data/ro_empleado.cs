@@ -20,7 +20,6 @@ namespace Core.Erp.Data
             this.ro_cargaFamiliar = new HashSet<ro_cargaFamiliar>();
             this.ro_contrato = new HashSet<ro_contrato>();
             this.ro_DocumentoxEmp = new HashSet<ro_DocumentoxEmp>();
-            this.ro_empleado_historial_Sueldo = new HashSet<ro_empleado_historial_Sueldo>();
             this.ro_empleado_Novedad = new HashSet<ro_empleado_Novedad>();
             this.ro_empleado1 = new HashSet<ro_empleado>();
             this.ro_empleado_x_ro_rubro = new HashSet<ro_empleado_x_ro_rubro>();
@@ -30,13 +29,13 @@ namespace Core.Erp.Data
             this.ro_Historico_Liquidacion_Vacaciones = new HashSet<ro_Historico_Liquidacion_Vacaciones>();
             this.ro_historico_vacaciones_x_empleado = new HashSet<ro_historico_vacaciones_x_empleado>();
             this.ro_horario_planificacion_det = new HashSet<ro_horario_planificacion_det>();
-            this.ro_marcaciones_x_empleado = new HashSet<ro_marcaciones_x_empleado>();
             this.ro_nomina_x_horas_extras_det = new HashSet<ro_nomina_x_horas_extras_det>();
             this.ro_participacion_utilidad_empleado = new HashSet<ro_participacion_utilidad_empleado>();
             this.ro_prestamo = new HashSet<ro_prestamo>();
             this.ro_rol_detalle = new HashSet<ro_rol_detalle>();
             this.ro_Solicitud_Vacaciones_x_empleado = new HashSet<ro_Solicitud_Vacaciones_x_empleado>();
             this.ro_empleado_proyeccion_gastos = new HashSet<ro_empleado_proyeccion_gastos>();
+            this.ro_marcaciones_x_empleado = new HashSet<ro_marcaciones_x_empleado>();
         }
     
         public int IdEmpresa { get; set; }
@@ -128,11 +127,9 @@ namespace Core.Erp.Data
         public virtual ro_Departamento ro_Departamento { get; set; }
         public virtual ro_Division ro_Division { get; set; }
         public virtual ICollection<ro_DocumentoxEmp> ro_DocumentoxEmp { get; set; }
-        public virtual ICollection<ro_empleado_historial_Sueldo> ro_empleado_historial_Sueldo { get; set; }
         public virtual ICollection<ro_empleado_Novedad> ro_empleado_Novedad { get; set; }
         public virtual ICollection<ro_empleado> ro_empleado1 { get; set; }
         public virtual ro_empleado ro_empleado2 { get; set; }
-        public virtual ro_empleado_x_centro_costo ro_empleado_x_centro_costo { get; set; }
         public virtual ICollection<ro_empleado_x_ro_rubro> ro_empleado_x_ro_rubro { get; set; }
         public virtual ICollection<ro_empleado_x_ro_tipoNomina> ro_empleado_x_ro_tipoNomina { get; set; }
         public virtual ICollection<ro_empleado_x_rubro_acumulado> ro_empleado_x_rubro_acumulado { get; set; }
@@ -140,12 +137,12 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_Historico_Liquidacion_Vacaciones> ro_Historico_Liquidacion_Vacaciones { get; set; }
         public virtual ICollection<ro_historico_vacaciones_x_empleado> ro_historico_vacaciones_x_empleado { get; set; }
         public virtual ICollection<ro_horario_planificacion_det> ro_horario_planificacion_det { get; set; }
-        public virtual ICollection<ro_marcaciones_x_empleado> ro_marcaciones_x_empleado { get; set; }
         public virtual ICollection<ro_nomina_x_horas_extras_det> ro_nomina_x_horas_extras_det { get; set; }
         public virtual ICollection<ro_participacion_utilidad_empleado> ro_participacion_utilidad_empleado { get; set; }
         public virtual ICollection<ro_prestamo> ro_prestamo { get; set; }
         public virtual ICollection<ro_rol_detalle> ro_rol_detalle { get; set; }
         public virtual ICollection<ro_Solicitud_Vacaciones_x_empleado> ro_Solicitud_Vacaciones_x_empleado { get; set; }
         public virtual ICollection<ro_empleado_proyeccion_gastos> ro_empleado_proyeccion_gastos { get; set; }
+        public virtual ICollection<ro_marcaciones_x_empleado> ro_marcaciones_x_empleado { get; set; }
     }
 }

@@ -359,12 +359,10 @@
     <Compile Include="RRHH\ro_departamento_Info.cs" />
     <Compile Include="RRHH\ro_division_Info.cs" />
     <Compile Include="RRHH\ro_DocumentoxEmp_Info.cs" />
-    <Compile Include="RRHH\ro_empleado_historial_Sueldo_Info.cs" />
     <Compile Include="RRHH\ro_empleado_Info.cs" />
     <Compile Include="RRHH\ro_empleado_novedad_det_Info.cs" />
     <Compile Include="RRHH\ro_empleado_novedad_Info.cs" />
     <Compile Include="RRHH\ro_empleado_proyeccion_gastos_det_Info.cs" />
-    <Compile Include="RRHH\ro_empleado_x_centro_costo_Info.cs" />
     <Compile Include="RRHH\ro_empleado_x_horario_Info.cs" />
     <Compile Include="RRHH\ro_empleado_proyeccion_gastos_Info.cs" />
     <Compile Include="RRHH\ro_empleado_x_ro_rubro_Info.cs" />
@@ -377,6 +375,7 @@
     <Compile Include="RRHH\ro_horario_Info.cs" />
     <Compile Include="RRHH\ro_horario_planificacion_det_Info.cs" />
     <Compile Include="RRHH\ro_horario_planificacion_Info.cs" />
+    <Compile Include="RRHH\ro_marcaciones_tipo_Info.cs" />
     <Compile Include="RRHH\ro_marcaciones_x_empleado_Info.cs" />
     <Compile Include="RRHH\ro_Nomina_Tipoliqui_Info.cs" />
     <Compile Include="RRHH\ro_nomina_tipo_Info.cs" />
