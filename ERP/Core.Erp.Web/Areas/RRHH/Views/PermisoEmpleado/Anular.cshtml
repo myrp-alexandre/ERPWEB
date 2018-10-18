@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.RRHH.ro_permiso_x_empleado_Info
 @{
-    ViewBag.Title = "Nuevo permiso";
+    ViewBag.Title = "Anular permiso";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -9,7 +9,7 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Nuevo", "PermisoEmpleado", FormMethod.Post, new { @role = "form", @class = "form" }))
+@using (Html.BeginForm("Anular", "PermisoEmpleado", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdPermiso)
@@ -149,7 +149,7 @@
     </div>
 
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index","PermisoEmpleado",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {
@@ -158,14 +158,11 @@
 }
 <script>
     ocultar_mostrar_div();
-
     $(function () {
-
         $("#TipoPermiso").change(function () {
             ocultar_mostrar_div();
         });
     });
-
     function ocultar_mostrar_div() {
         var tipo_nota = $("#TipoPermiso").val();
         if (tipo_nota == "PERSONAL") {

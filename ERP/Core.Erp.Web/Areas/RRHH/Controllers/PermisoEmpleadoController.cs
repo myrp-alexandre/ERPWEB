@@ -24,6 +24,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             decimal model = new decimal();
             return PartialView("_CmbEmpleado_permiso", model);
         }
+        public ActionResult CmbEmpleado_aprueba_permiso()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbEmpleado_aprueba_permiso", model);
+        }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
             return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
@@ -48,8 +53,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
         private void cargar_combos()
         {
-            var list_tipo_permiso = from cl_enumeradores.eTipoPeriodoRRHH s in Enum.GetValues(typeof(cl_enumeradores.eTipoPeriodoRRHH))
-                           select new { ID = s, Name = s.ToString() };
+            var list_tipo_permiso = from cl_enumeradores.eTipoPermisoRRHH s in Enum.GetValues(typeof(cl_enumeradores.eTipoPermisoRRHH))
+                           select s ;
             ViewBag.list_tipo_permiso = list_tipo_permiso;
         }
 
@@ -59,7 +64,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             ro_permiso_x_empleado_Info model = new ro_permiso_x_empleado_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                HoraRegreso = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
+                HoraSalida = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
+                FechaInicio = DateTime.Now.Date,
+                FechaFin = DateTime.Now.Date
             };
             cargar_combos();
             return View(model);
@@ -74,7 +83,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(int IdEmpresa = 0, int IdPermiso = 0)
+        public ActionResult Modificar(int IdEmpresa = 0, decimal IdPermiso = 0)
         {
             ro_permiso_x_empleado_Info model = bus_permiso.get_info(IdEmpresa, IdPermiso);
             if (model == null)
@@ -93,7 +102,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return RedirectToAction("Index");
 
         }
-        public ActionResult Anular(int IdEmpresa = 0, int IdPermiso = 0)
+        public ActionResult Anular(int IdEmpresa = 0, decimal IdPermiso = 0)
         {
             ro_permiso_x_empleado_Info model = bus_permiso.get_info(IdEmpresa, IdPermiso);
             if (model == null)

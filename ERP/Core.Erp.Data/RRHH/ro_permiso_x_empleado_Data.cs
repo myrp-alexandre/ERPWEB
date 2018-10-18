@@ -141,7 +141,7 @@ namespace Core.Erp.Data.RRHH
                         FechaInicio = info.FechaInicio,
                         HoraRegreso = info.HoraRegreso,
                         HoraSalida = info.HoraSalida,
-                        IdPermiso = info.IdPermiso,
+                        IdPermiso = info.IdPermiso=get_id(info.IdEmpresa),
                         Recuperable = info.Recuperable,
                         TipoPermiso = info.TipoPermiso
                     };

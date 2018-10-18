@@ -65,8 +65,8 @@
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdArea = DataBinder.Eval(tc.DataItem, "IdArea") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdArea = DataBinder.Eval(tc.DataItem, "IdArea") },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdPermiso = DataBinder.Eval(tc.DataItem, "IdPermiso") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdPermiso = DataBinder.Eval(tc.DataItem, "IdPermiso") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -74,19 +74,20 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-
-        settings.Columns.Add("IdPermiso", "ID").Width = Unit.Percentage(10);
+        
         settings.Columns.Add("FechaInicio", "Fecha inicio").Width = Unit.Percentage(10);
         settings.Columns.Add("FechaFin", "Fecha fin").Width = Unit.Percentage(10);
         settings.Columns.Add("HoraSalida", "Hora de salida").Width = Unit.Percentage(10);
         settings.Columns.Add("HoraRegreso", "Hora de regreso").Width = Unit.Percentage(10);
+        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(20);
+        settings.Columns.Add("Asunto", "Asunto").Width = Unit.Percentage(20);
         settings.Columns.Add(column =>
         {
             column.FieldName = "estado";

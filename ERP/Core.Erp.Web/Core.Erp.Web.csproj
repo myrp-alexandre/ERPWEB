@@ -9226,6 +9226,9 @@
     <Content Include="Areas\RRHH\Views\PermisoEmpleado\_GridViewPartial_permiso_emp.cshtml" />
     <Content Include="Areas\RRHH\Views\PermisoEmpleado\Nuevo.cshtml" />
     <Content Include="Areas\RRHH\Views\PermisoEmpleado\_CmbEmpleado_permiso.cshtml" />
+    <Content Include="Areas\RRHH\Views\PermisoEmpleado\_CmbEmpleado_aprueba_permiso.cshtml" />
+    <Content Include="Areas\RRHH\Views\PermisoEmpleado\Modificar.cshtml" />
+    <Content Include="Areas\RRHH\Views\PermisoEmpleado\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
