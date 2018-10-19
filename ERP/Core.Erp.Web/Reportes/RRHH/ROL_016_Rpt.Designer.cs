@@ -406,7 +406,7 @@
             this.xrTableCell1.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Italic);
             this.xrTableCell1.Name = "xrTableCell1";
             this.xrTableCell1.StylePriority.UseFont = false;
-            this.xrTableCell1.Text = "REPORTE DE LIQUIDACIONES";
+            this.xrTableCell1.Text = "LISTADO DE LIQUIDACIONES";
             this.xrTableCell1.Weight = 2D;
             // 
             // PageHeader
