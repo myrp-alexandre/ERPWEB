@@ -130,24 +130,36 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Nuevo(fa_guia_remision_Info model)
         {
-            model.IdUsuario = SessionFixed.IdUsuario;
-            model.CodGuiaRemision= (model.CodGuiaRemision == null) ? "" : model.CodGuiaRemision;
-            model.lst_detalle_x_factura = List_rel.get_list(model.IdTransaccionSession);
-            model.lst_detalle = detalle_info.get_list(model.IdTransaccionSession);
-            model.CodDocumentoTipo = "GUIA";
-            string mensaje = bus_guia.validar(model);
-            if (mensaje != "")
+            try
             {
+                model.IdUsuario = SessionFixed.IdUsuario;
+                model.CodGuiaRemision = (model.CodGuiaRemision == null) ? "" : model.CodGuiaRemision;
+                model.lst_detalle_x_factura = List_rel.get_list(model.IdTransaccionSession);
+                model.lst_detalle = detalle_info.get_list(model.IdTransaccionSession);
+                model.CodDocumentoTipo = "GUIA";
+                model.nom_pc = "";
+                model.ip = "";
+                string mensaje = bus_guia.validar(model);
+                if (mensaje != "")
+                {
+                    cargar_combos(model);
+                    ViewBag.mensaje = mensaje;
+                    return View(model);
+                }
+                if (!bus_guia.guardarDB(model))
+                {
+                    cargar_combos(model);
+                    return View(model);
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+
+                ViewBag.mensaje = ex.ToString();
                 cargar_combos(model);
-                ViewBag.mensaje = mensaje;
                 return View(model);
             }
-            if (!bus_guia.guardarDB(model))
-            {
-                cargar_combos(model);
-                return View(model);
-            }
-            return RedirectToAction("Index");
         }
         public ActionResult Modificar(int IdEmpresa = 0, decimal IdGuiaRemision=0)
         {
