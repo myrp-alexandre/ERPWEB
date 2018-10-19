@@ -90,7 +90,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult CONTA_002(cl_filtros_Info model)
         {
             CONTA_002_Rpt report = new CONTA_002_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdCtaCble.Value = model.IdCtaCble;
             report.p_fechaIni.Value = model.fecha_ini;
             report.p_fechaFin.Value = model.fecha_fin;

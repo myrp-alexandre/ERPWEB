@@ -10,6 +10,7 @@
 }
 @using (Html.BeginForm("CXP_009", "CuentasPorPagarReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     <div class="box">
         <div class="box-header with-border">
             <div class="row">
@@ -69,10 +70,10 @@
                     </div>
                 </div>
             </div>
-            </div>
-            <!-- /.box-body -->
         </div>
-    
+        <!-- /.box-body -->
+    </div>
+
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">@ViewBag.Title</h3>
