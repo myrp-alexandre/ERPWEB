@@ -137,8 +137,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 model.lst_detalle_x_factura = List_rel.get_list(model.IdTransaccionSession);
                 model.lst_detalle = detalle_info.get_list(model.IdTransaccionSession);
                 model.CodDocumentoTipo = "GUIA";
-                model.nom_pc = "";
-                model.ip = "";
                 string mensaje = bus_guia.validar(model);
                 if (mensaje != "")
                 {
