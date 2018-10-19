@@ -18,6 +18,7 @@ namespace Core.Erp.Bus.Facturacion
         tb_sis_Documento_Tipo_Talonario_Data data_talonario = new tb_sis_Documento_Tipo_Talonario_Data();
         tb_sis_Documento_Tipo_Talonario_Info info_talonario = new tb_sis_Documento_Tipo_Talonario_Info();
         fa_factura_x_fa_guia_remision_Data odata_fac_x_guia = new fa_factura_x_fa_guia_remision_Data();
+
         public List<fa_guia_remision_Info> get_list(int IdEmpresa, DateTime fecha_inicio, DateTime fecha_fin)
         {
             try
@@ -126,6 +127,16 @@ namespace Core.Erp.Bus.Facturacion
                 else
                     if(info.lst_detalle.Count()==0)
                     mensaje = "No existe detalle para la guia";
+               var resultado = data_talonario.get_info_ultimo_no_usado(info.IdEmpresa, info.Serie1, info.Serie2, "GUIA");
+                if (resultado == null)
+                    mensaje = "La numeración "+info.Serie1+"-"+info.Serie2 + "-" + info.NumGuia_Preimpresa+" no esta creado en talonario";
+                else
+                {
+                    if(resultado.NumDocumento==null)
+                        mensaje = "La numeración " + info.Serie1 + "-" + info.Serie2 + "-" + info.NumGuia_Preimpresa + " no esta creado en talonario";
+                }
+              if(  odata.si_existe(info.IdEmpresa, info.Serie1, info.Serie2, info.NumGuia_Preimpresa))
+                    mensaje = "La numeración " + info.Serie1 + "-" + info.Serie2 + "-" + info.NumGuia_Preimpresa + " ya fue usada";
 
                 return mensaje;
 

@@ -96,141 +96,203 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
-            #region Validar Session
-            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
-                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
-            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
-            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
-            #endregion
-            in_Producto_Info model = new in_Producto_Info {
-                IdEmpresa = IdEmpresa,
-                IdCod_Impuesto_Iva = "IVA12",
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
-                lst_producto_composicion = new List<in_Producto_Composicion_Info>()
-            };
-            model.IdTransaccionSession =Convert.ToDecimal( SessionFixed.IdTransaccionSession);
-            var lst_producto_x_bodega = bus_producto_x_bodega.get_list(Convert.ToInt32(SessionFixed.IdEmpresa));
-            model.pr_imagen = new byte[0];
-            list_producto_composicion.set_list(model.lst_producto_composicion, model.IdTransaccionSession);
-            Lis_in_producto_x_tb_bodega_Info_List.set_list(bus_producto_x_bodega.get_list(Convert.ToInt32(SessionFixed.IdEmpresa)), model.IdTransaccionSession);
-            cargar_combos(model);
-            return View(model);
+            try
+            {
+                #region Validar Session
+                if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                    return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+                SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+                SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+                #endregion
+                in_Producto_Info model = new in_Producto_Info
+                {
+                    IdEmpresa = IdEmpresa,
+                    IdCod_Impuesto_Iva = "IVA12",
+                    IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
+                    lst_producto_composicion = new List<in_Producto_Composicion_Info>()
+                };
+                model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+                var lst_producto_x_bodega = bus_producto_x_bodega.get_list(Convert.ToInt32(SessionFixed.IdEmpresa));
+                model.pr_imagen = new byte[0];
+                list_producto_composicion.set_list(model.lst_producto_composicion, model.IdTransaccionSession);
+                Lis_in_producto_x_tb_bodega_Info_List.set_list(bus_producto_x_bodega.get_list(Convert.ToInt32(SessionFixed.IdEmpresa)), model.IdTransaccionSession);
+                cargar_combos(model);
+                return View(model);
+            }
+            catch (Exception)
+            {
+                throw;
+               
+            }
         }
         [HttpPost]
         public ActionResult Nuevo(in_Producto_Info model)
         {
-            model.IdUsuario = SessionFixed.IdUsuario.ToString();
-            model.pr_imagen = Producto_imagen.pr_imagen;
-            model.lst_producto_composicion = list_producto_composicion.get_list(model.IdTransaccionSession);
-            model.lst_producto_x_bodega = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToInt32(model.IdTransaccionSession));
-            if (model.lst_producto_x_bodega == null)
-                model.lst_producto_x_bodega = new List<in_producto_x_tb_bodega_Info>();
-            if (!validar(model, ref mensaje))
+            try
+            {
+                bus_producto = new in_Producto_Bus();
+                model.IdUsuario = SessionFixed.IdUsuario.ToString();
+                model.pr_imagen = Producto_imagen.pr_imagen;
+                model.lst_producto_composicion = list_producto_composicion.get_list(model.IdTransaccionSession);
+                model.lst_producto_x_bodega = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToInt32(model.IdTransaccionSession));
+                if (model.lst_producto_x_bodega == null)
+                    model.lst_producto_x_bodega = new List<in_producto_x_tb_bodega_Info>();
+                if (!validar(model, ref mensaje))
+                {
+                    if (model.pr_imagen == null)
+                        model.pr_imagen = new byte[0];
+                    cargar_combos(model);
+                    ViewBag.mensaje = mensaje;
+                    return View(model);
+                }
+                if (!bus_producto.guardarDB(model))
+                {
+                    if (model.pr_imagen == null)
+                        model.pr_imagen = new byte[0];
+                    cargar_combos(model);
+                    return View(model);
+                }
+                Producto_imagen.pr_imagen = null;
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
             {
                 if (model.pr_imagen == null)
                     model.pr_imagen = new byte[0];
                 cargar_combos(model);
-                ViewBag.mensaje = mensaje;
+                ViewBag.mensaje = "Ocurrio un error inersparado!! "+ex.Message.ToString();
                 return View(model);
+                
             }
-            if (!bus_producto.guardarDB(model))
-            {
-                if (model.pr_imagen == null)
-                    model.pr_imagen = new byte[0];
-                cargar_combos(model);
-                return View(model);
-            }
-            Producto_imagen.pr_imagen = null;
-            return RedirectToAction("Index");
         }
         public ActionResult Modificar(int IdEmpresa = 0 , decimal IdProducto = 0)
         {
-            #region Validar Session
-            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
-                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
-            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
-            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
-            #endregion
-            in_Producto_Info model = bus_producto.get_info(IdEmpresa, IdProducto);
-            if (model == null)
-                return RedirectToAction("Index");
-            cargar_combos(model);
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
-            model.lst_producto_composicion = bus_producto_composicion.get_list(model.IdEmpresa, model.IdProducto);
-            model.lst_producto_x_bodega = bus_producto_x_bodega.get_list(IdEmpresa, model.IdProducto);
-            Lis_in_producto_x_tb_bodega_Info_List.set_list(model.lst_producto_x_bodega, model.IdTransaccionSession);
-            list_producto_composicion.set_list(model.lst_producto_composicion, model.IdTransaccionSession);
-            return View(model);
+            try
+            {
+                #region Validar Session
+                if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                    return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+                SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+                SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+                #endregion
+                in_Producto_Info model = bus_producto.get_info(IdEmpresa, IdProducto);
+                if (model == null)
+                    return RedirectToAction("Index");
+                cargar_combos(model);
+                model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+                model.lst_producto_composicion = bus_producto_composicion.get_list(model.IdEmpresa, model.IdProducto);
+                model.lst_producto_x_bodega = bus_producto_x_bodega.get_list(IdEmpresa, model.IdProducto);
+                Lis_in_producto_x_tb_bodega_Info_List.set_list(model.lst_producto_x_bodega, model.IdTransaccionSession);
+                list_producto_composicion.set_list(model.lst_producto_composicion, model.IdTransaccionSession);
+                return View(model);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         [HttpPost]
         public ActionResult Modificar(in_Producto_Info model)
 
         {
-            bus_producto = new in_Producto_Bus();
-            model.lst_producto_x_bodega = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToInt32(model.IdTransaccionSession));
-            if (model.lst_producto_x_bodega == null)
-                model.lst_producto_x_bodega = new List<in_producto_x_tb_bodega_Info>();
-            model.IdUsuarioUltMod = SessionFixed.IdUsuario.ToString();
-            model.pr_imagen = Producto_imagen.pr_imagen;
-            if (!validar(model,ref mensaje))
+            try
             {
-                if (model.pr_imagen == null)
-                    model.pr_imagen = new byte[0];
-                cargar_combos(model);
-                ViewBag.mensaje = mensaje;
-                return View(model);
-            }            
-            if (!bus_producto.modificarDB(model))
-            {
-                if (model.pr_imagen == null)
-                    model.pr_imagen = new byte[0];
-                cargar_combos(model);
-                return View(model);
-            }
+                bus_producto = new in_Producto_Bus();
+                model.lst_producto_x_bodega = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToInt32(model.IdTransaccionSession));
+                if (model.lst_producto_x_bodega == null)
+                    model.lst_producto_x_bodega = new List<in_producto_x_tb_bodega_Info>();
+                model.IdUsuarioUltMod = SessionFixed.IdUsuario.ToString();
+                model.pr_imagen = Producto_imagen.pr_imagen;
+                if (!validar(model, ref mensaje))
+                {
+                    if (model.pr_imagen == null)
+                        model.pr_imagen = new byte[0];
+                    cargar_combos(model);
+                    ViewBag.mensaje = mensaje;
+                    return View(model);
+                }
+                if (!bus_producto.modificarDB(model))
+                {
+                    if (model.pr_imagen == null)
+                        model.pr_imagen = new byte[0];
+                    cargar_combos(model);
+                    return View(model);
+                }
 
-            model.lst_producto_composicion = list_producto_composicion.get_list(model.IdTransaccionSession);
-            model.lst_producto_composicion.ForEach(q => { q.IdEmpresa = model.IdEmpresa; q.IdProductoPadre = model.IdProducto; });
-            bus_producto_composicion.eliminarDB(model.IdEmpresa, model.IdProducto);
-            if (!bus_producto_composicion.guardarDB(model.lst_producto_composicion))
+                model.lst_producto_composicion = list_producto_composicion.get_list(model.IdTransaccionSession);
+                model.lst_producto_composicion.ForEach(q => { q.IdEmpresa = model.IdEmpresa; q.IdProductoPadre = model.IdProducto; });
+                bus_producto_composicion.eliminarDB(model.IdEmpresa, model.IdProducto);
+                if (!bus_producto_composicion.guardarDB(model.lst_producto_composicion))
+                {
+                    cargar_combos(model);
+                    return View(model);
+                }
+                Producto_imagen.pr_imagen = null;
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
             {
+
+                if (model.pr_imagen == null)
+                    model.pr_imagen = new byte[0];
                 cargar_combos(model);
+                ViewBag.mensaje = "Ocurrio un error inersparado!! " + ex.Message.ToString();
                 return View(model);
             }
-            Producto_imagen.pr_imagen = null;
-            return RedirectToAction("Index");
         }
         public ActionResult Anular(int IdEmpresa = 0 , decimal IdProducto = 0)
         {
-            #region Validar Session
-            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
-                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
-            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
-            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
-            #endregion
-            in_Producto_Info model = bus_producto.get_info(IdEmpresa, IdProducto);
-            if (model == null)
-                return RedirectToAction("Index");
-            cargar_combos(model);
-            model.lst_producto_composicion = bus_producto_composicion.get_list(model.IdEmpresa, model.IdProducto);
-            list_producto_composicion.set_list(model.lst_producto_composicion, model.IdTransaccionSession);
-            return View(model);
+            try
+            {
+                #region Validar Session
+                if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                    return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+                SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+                SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+                #endregion
+                in_Producto_Info model = bus_producto.get_info(IdEmpresa, IdProducto);
+                if (model == null)
+                    return RedirectToAction("Index");
+                cargar_combos(model);
+                model.lst_producto_composicion = bus_producto_composicion.get_list(model.IdEmpresa, model.IdProducto);
+                list_producto_composicion.set_list(model.lst_producto_composicion, model.IdTransaccionSession);
+                return View(model);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         [HttpPost]
         public ActionResult Anular(in_Producto_Info model)
         {
-            model.IdUsuarioUltAnu = SessionFixed.IdUsuario.ToString();
-            if (!bus_producto.validar_anulacion(model.IdEmpresa, model.IdProducto, ref mensaje))
+            try
             {
+                model.IdUsuarioUltAnu = SessionFixed.IdUsuario.ToString();
+                if (!bus_producto.validar_anulacion(model.IdEmpresa, model.IdProducto, ref mensaje))
+                {
+                    cargar_combos(model);
+                    ViewBag.mensaje = mensaje;
+                    return View(model);
+                }
+                if (!bus_producto.anularDB(model))
+                {
+                    cargar_combos(model);
+                    return View(model);
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+
+                if (model.pr_imagen == null)
+                    model.pr_imagen = new byte[0];
                 cargar_combos(model);
-                ViewBag.mensaje = mensaje;
+                ViewBag.mensaje = "Ocurrio un error inersparado!! " + ex.Message.ToString();
                 return View(model);
             }
-            if (!bus_producto.anularDB(model))
-            {
-                cargar_combos(model);
-                return View(model);
-            }
-            return RedirectToAction("Index");
         }
         #endregion
 

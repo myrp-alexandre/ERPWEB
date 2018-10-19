@@ -348,5 +348,29 @@ namespace Core.Erp.Data.Facturacion
             }
         }
 
+        public bool si_existe(int IdEmpresa, string Establecimiento, string Puntoemision, string Numero)
+        {
+            try
+            {
+                using (Entities_facturacion Context = new Entities_facturacion())
+                {
+                    var lst = from q in Context.fa_guia_remision
+                              where q.IdEmpresa == IdEmpresa
+                              && q.Serie1==Establecimiento
+                              && q.Serie2==Puntoemision
+                              && q.NumGuia_Preimpresa==null
+                              select q;
+                    if (lst.Count() > 0)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
