@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,8 @@ namespace Core.Erp.Info.RRHH
     {
         public int IdEmpresa { get; set; }
         public decimal IdPermiso { get; set; }
+        [Required(ErrorMessage = ("el campo empleado es obligatorio"))]
+
         public decimal IdEmpleado { get; set; }
         public Nullable<decimal> IdEmpleadoAprueba { get; set; }
         public System.DateTime FechaInicio { get; set; }
@@ -18,7 +21,11 @@ namespace Core.Erp.Info.RRHH
         public Nullable<System.TimeSpan> HoraRegreso { get; set; }
         public bool DescuentaVacaciones { get; set; }
         public bool Recuperable { get; set; }
+        [Required(ErrorMessage = ("el campo asunto es obligatorio"))]
+        [StringLength(250, MinimumLength = 1, ErrorMessage = "el campo asunto debe tener mínimo 1 caracter y máximo 250")]
         public string Asunto { get; set; }
+        [Required(ErrorMessage = ("el campo descripción es obligatorio"))]
+        [StringLength(250, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 250")]
         public string Descripcion { get; set; }
         public string TipoPermiso { get; set; }
         public bool estado { get; set; }

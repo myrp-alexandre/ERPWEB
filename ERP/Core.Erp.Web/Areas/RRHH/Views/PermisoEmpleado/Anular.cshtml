@@ -18,7 +18,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdEmpleado">Empleado</label>
+                    <label for="IdEmpleado">Empleado*</label>
                     @Html.Partial("_CmbEmpleado_permiso", Model.IdEmpleado)
                     @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
                 </div>
@@ -40,7 +40,7 @@
         <div class="col-md-12">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="TipoPermiso">Tipo permiso</label>
+                    <label for="TipoPermiso">Tipo permiso*</label>
                     @Html.DropDownListFor(q => q.TipoPermiso, new SelectList(ViewBag.list_tipo_permiso), new { @class = "form-control", @id = "TipoPermiso" })
                     @Html.ValidationMessageFor(q => q.TipoPermiso, "", new { @class = "text-danger" })
                 </div>
@@ -129,7 +129,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="Asunto">Asunto</label>
+                    <label for="Asunto">Asunto*</label>
                     @Html.TextBoxFor(q => q.Asunto, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Asunto, "", new { @class = "text-danger" })
                 </div>
@@ -140,7 +140,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="Descripcion">Descripción</label>
+                    <label for="Descripcion">Descripción*</label>
                     @Html.TextBoxFor(q => q.Descripcion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Descripcion, "", new { @class = "text-danger" })
                 </div>
