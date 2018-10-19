@@ -93,8 +93,8 @@
         </div>
         <div class="col-md-12">
             <div class="form-group">
-                <label for="IdProveedor">Proveedor</label>
-                @Html.Partial("_CmbProveedor_CXP", Model)
+                <label for="IdProveedor">Proveedor*</label>
+                @Html.Partial("_CmbProveedor_CXP", Model.IdProveedor)
                 @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
             </div>
         </div>
