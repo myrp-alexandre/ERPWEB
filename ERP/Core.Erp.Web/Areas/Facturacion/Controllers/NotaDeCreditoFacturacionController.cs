@@ -350,7 +350,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 msg = "Existen registros sin producto en el detalle";
                 return false;
             }
-            if (i_validar.lst_det.Sum(q=>q.sc_total) < i_validar.lst_cruce.Sum(q=>q.Valor_Aplicado))
+
+            decimal valorAplicado = Convert.ToDecimal(i_validar.lst_cruce.Sum(q => q.Valor_Aplicado));
+            decimal valorDevuelto = Convert.ToDecimal(i_validar.lst_det.Sum(q => q.sc_total));
+            decimal diferencia = valorDevuelto - valorAplicado;
+            if (Convert.ToDecimal( i_validar.lst_det.Sum(q=>q.sc_total)) <Convert.ToDecimal(  i_validar.lst_cruce.Sum(q=>q.Valor_Aplicado))&&diferencia>1)
             {
                 msg = "El valor aplicado en facturas es mayor al valor total de la nota de crédito";
                 return false;
