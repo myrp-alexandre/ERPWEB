@@ -37,7 +37,6 @@ namespace Core.Erp.Data
         public DbSet<fa_factura_x_formaPago> fa_factura_x_formaPago { get; set; }
         public DbSet<fa_factura_x_in_Ing_Egr_Inven> fa_factura_x_in_Ing_Egr_Inven { get; set; }
         public DbSet<fa_formaPago> fa_formaPago { get; set; }
-        public DbSet<fa_guia_remision> fa_guia_remision { get; set; }
         public DbSet<fa_guia_remision_det> fa_guia_remision_det { get; set; }
         public DbSet<fa_guia_remision_det_x_factura> fa_guia_remision_det_x_factura { get; set; }
         public DbSet<fa_notaCreDeb> fa_notaCreDeb { get; set; }
@@ -70,5 +69,6 @@ namespace Core.Erp.Data
         public DbSet<fa_cliente> fa_cliente { get; set; }
         public DbSet<fa_notaCreDeb_det> fa_notaCreDeb_det { get; set; }
         public DbSet<vwfa_notaCreDeb_det> vwfa_notaCreDeb_det { get; set; }
+        public DbSet<fa_guia_remision> fa_guia_remision { get; set; }
     }
 }

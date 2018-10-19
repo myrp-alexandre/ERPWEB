@@ -171,8 +171,6 @@ namespace Core.Erp.Data.Facturacion
                         IdCatalogo_traslado=info.IdCatalogo_traslado,
                         Estado = info.Estado="A",
                         IdUsuario=info.IdUsuario,
-                        nom_pc=info.nom_pc,
-                        ip=info.ip,
                         Fecha_Transac=info.Fecha_Transac=DateTime.Now
 
                     };

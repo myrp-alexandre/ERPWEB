@@ -116,8 +116,7 @@ namespace Core.Erp.Bus.Facturacion
         {
             try
             {
-                info.ip = "";
-                info.nom_pc = "";
+               
 
                 string mensaje = "";
                 if (info.IdCliente == 0)

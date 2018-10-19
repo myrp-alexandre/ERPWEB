@@ -55,8 +55,6 @@ namespace Core.Erp.Info.Facturacion
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
         public string Estado { get; set; }
         public bool EstadoBool { get; set; }
         [Required(ErrorMessage = "El campo motivo de anulación es obligatorio")]

@@ -50,8 +50,6 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
         public string Estado { get; set; }
         public string MotiAnula { get; set; }
         public string Direccion_Destino { get; set; }
@@ -60,9 +58,9 @@ namespace Core.Erp.Data
         public bool aprobada_enviar_sri { get; set; }
     
         public virtual fa_catalogo fa_catalogo { get; set; }
+        public virtual fa_cliente fa_cliente { get; set; }
         public virtual fa_cliente_contactos fa_cliente_contactos { get; set; }
         public virtual ICollection<fa_factura_x_fa_guia_remision> fa_factura_x_fa_guia_remision { get; set; }
         public virtual ICollection<fa_guia_remision_det> fa_guia_remision_det { get; set; }
-        public virtual fa_cliente fa_cliente { get; set; }
     }
 }
