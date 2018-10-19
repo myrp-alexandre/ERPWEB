@@ -35,7 +35,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             
             var lst_pais = bus_pais.get_list(false);
             ViewBag.lst_pais = lst_pais;
-            var lst_region = bus_region.get_list("1",false);
+            var lst_region = bus_region.get_list(IdPais,false);
             ViewBag.lst_region = lst_region;
         }
         #endregion

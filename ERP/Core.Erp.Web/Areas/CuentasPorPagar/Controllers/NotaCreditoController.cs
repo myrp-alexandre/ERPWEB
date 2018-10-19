@@ -40,7 +40,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         public ActionResult CmbProveedor_CXP()
         {
-            cp_nota_DebCre_Info model = new cp_nota_DebCre_Info();
+            decimal model = new decimal();
             return PartialView("_CmbProveedor_CXP", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)

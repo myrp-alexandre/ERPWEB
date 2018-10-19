@@ -60,16 +60,13 @@
     }
 }
 <script>
-    $(function () {
         cargar_bodega();
-    });
-
     $("#IdSucursal").change(function () {
         cargar_bodega();
     });
 
     function cargar_bodega() {
-        $("#IdBodega").val();
+        $("#IdBodega").empty();
 
         var sucursal = $("#IdSucursal").val();
 
