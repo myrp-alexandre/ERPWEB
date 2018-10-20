@@ -159,10 +159,10 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             {
                 if (model.pr_imagen == null)
                     model.pr_imagen = new byte[0];
+                tb_sis_log_error_InfoList.DescripcionError = ex.InnerException.ToString();
+                ViewBag.error = ex.Message.ToString();
                 cargar_combos(model);
-                ViewBag.mensaje = "Ocurrio un error inersparado!! "+ex.Message.ToString();
                 return View(model);
-                
             }
         }
         public ActionResult Modificar(int IdEmpresa = 0 , decimal IdProducto = 0)
@@ -236,8 +236,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
                 if (model.pr_imagen == null)
                     model.pr_imagen = new byte[0];
+                tb_sis_log_error_InfoList.DescripcionError = ex.InnerException.ToString();
+                ViewBag.error = ex.Message.ToString();
                 cargar_combos(model);
-                ViewBag.mensaje = "Ocurrio un error inersparado!! " + ex.Message.ToString();
                 return View(model);
             }
         }
@@ -289,8 +290,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
                 if (model.pr_imagen == null)
                     model.pr_imagen = new byte[0];
+                tb_sis_log_error_InfoList.DescripcionError = ex.InnerException.ToString();
+                ViewBag.error = ex.Message.ToString();
                 cargar_combos(model);
-                ViewBag.mensaje = "Ocurrio un error inersparado!! " + ex.Message.ToString();
                 return View(model);
             }
         }

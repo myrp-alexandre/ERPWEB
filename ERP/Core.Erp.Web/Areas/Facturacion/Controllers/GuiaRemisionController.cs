@@ -153,8 +153,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             catch (Exception ex)
             {
-
-                ViewBag.mensaje = ex.InnerException.ToString();
+                tb_sis_log_error_InfoList.DescripcionError=ex.InnerException.ToString();
+                ViewBag.error = ex.Message.ToString();
                 cargar_combos(model);
                 return View(model);
             }
@@ -180,25 +180,38 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         [HttpPost]
         public ActionResult Modificar(fa_guia_remision_Info model)
-        {   
-            model.IdUsuario = SessionFixed.IdUsuario.ToString();
-            model.CodGuiaRemision = (model.CodGuiaRemision == null) ? "" : model.CodGuiaRemision;
-            model.CodDocumentoTipo = "GUIA";
-            model.lst_detalle_x_factura = List_rel.get_list(model.IdTransaccionSession);
-            model.lst_detalle = detalle_info.get_list(model.IdTransaccionSession);
-            string mensaje = bus_guia.validar(model);
-            if (mensaje != "")
+        {
+            try
             {
+                model.IdUsuario = SessionFixed.IdUsuario.ToString();
+                model.CodGuiaRemision = (model.CodGuiaRemision == null) ? "" : model.CodGuiaRemision;
+                model.CodDocumentoTipo = "GUIA";
+                model.lst_detalle_x_factura = List_rel.get_list(model.IdTransaccionSession);
+                model.lst_detalle = detalle_info.get_list(model.IdTransaccionSession);
+                string mensaje = bus_guia.validar(model);
+                if (mensaje != "")
+                {
+                    cargar_combos(model);
+                    ViewBag.mensaje = mensaje;
+                    return View(model);
+                }
+                if (!bus_guia.modificarDB(model))
+                {
+                    cargar_combos(model);
+                    return View(model);
+                }
+                return RedirectToAction("Index");
+
+            }
+            catch (Exception ex)
+            {
+
+                tb_sis_log_error_InfoList.DescripcionError = ex.InnerException.ToString();
+                ViewBag.error = ex.Message.ToString();
                 cargar_combos(model);
-                ViewBag.mensaje = mensaje;
                 return View(model);
             }
-            if (!bus_guia.modificarDB(model))
-            {
-                cargar_combos(model);
-                return View(model);
-            }
-            return RedirectToAction("Index");
+           
         }
         public ActionResult Anular(int IdEmpresa = 0, decimal IdGuiaRemision=0)
         {
@@ -222,13 +235,26 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Anular(fa_guia_remision_Info model)
         {
-            if (!bus_guia.anularDB(model))
+           
+            try
             {
+                if (!bus_guia.anularDB(model))
+                {
+                    cargar_combos(model);
+                    return View(model);
+                }
+                Session["fa_guia_remision_det_Info"] = null;
+                return RedirectToAction("Index");
+
+            }
+            catch (Exception ex)
+            {
+
+                tb_sis_log_error_InfoList.DescripcionError = ex.InnerException.ToString();
+                ViewBag.error = ex.Message.ToString();
                 cargar_combos(model);
                 return View(model);
             }
-            Session["fa_guia_remision_det_Info"] = null;
-            return RedirectToAction("Index");
         }
         #endregion
 

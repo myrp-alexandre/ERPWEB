@@ -12,9 +12,12 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_persona_tipo
+    public partial class tb_sis_log_error
     {
-        public string IdTipo_Persona { get; set; }
-        public string Descricpion { get; set; }
+        public int IdEmpresa { get; set; }
+        public decimal IdError { get; set; }
+        public string DescripcionError { get; set; }
+        public string Modulo { get; set; }
+        public string Accion { get; set; }
     }
 }
