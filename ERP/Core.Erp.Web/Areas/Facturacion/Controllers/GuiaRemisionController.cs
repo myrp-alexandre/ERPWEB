@@ -154,7 +154,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             catch (Exception ex)
             {
 
-                ViewBag.mensaje = ex.ToString();
+                ViewBag.mensaje = ex.InnerException.ToString();
                 cargar_combos(model);
                 return View(model);
             }
