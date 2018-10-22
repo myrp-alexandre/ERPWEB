@@ -160,6 +160,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 if (model.pr_imagen == null)
                     model.pr_imagen = new byte[0];
                 tb_sis_log_error_InfoList.DescripcionError = ex.InnerException.ToString();
+                if (tb_sis_log_error_InfoList.DescripcionError == null)
+                    tb_sis_log_error_InfoList.DescripcionError = ex.Message.ToString();
                 ViewBag.error = ex.Message.ToString();
                 cargar_combos(model);
                 return View(model);
@@ -237,6 +239,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 if (model.pr_imagen == null)
                     model.pr_imagen = new byte[0];
                 tb_sis_log_error_InfoList.DescripcionError = ex.InnerException.ToString();
+                if (tb_sis_log_error_InfoList.DescripcionError == null)
+                    tb_sis_log_error_InfoList.DescripcionError = ex.Message.ToString();
                 ViewBag.error = ex.Message.ToString();
                 cargar_combos(model);
                 return View(model);
@@ -291,6 +295,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 if (model.pr_imagen == null)
                     model.pr_imagen = new byte[0];
                 tb_sis_log_error_InfoList.DescripcionError = ex.InnerException.ToString();
+                if (tb_sis_log_error_InfoList.DescripcionError == null)
+                    tb_sis_log_error_InfoList.DescripcionError = ex.Message.ToString();
                 ViewBag.error = ex.Message.ToString();
                 cargar_combos(model);
                 return View(model);

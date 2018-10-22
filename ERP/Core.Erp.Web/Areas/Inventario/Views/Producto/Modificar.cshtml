@@ -37,6 +37,17 @@
         </div>
 
     }
+    if (ViewBag.error != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.error
+                <a href="@Url.Action("Index","LogError",new  {Area="General"}, null )" class="small-box-footer" target="_blank">Ver detalle error<i class="fa fa-arrow-circle-right"></i></a>
+            </h4>
+        </div>
+
+    }
+
     if (Model.pr_imagen == null)
     {
         Model.pr_imagen = new byte[0];
