@@ -314,6 +314,7 @@
     <Compile Include="Areas\General\Controllers\EmpresaController.cs" />
     <Compile Include="Areas\General\Controllers\ImagenesController.cs" />
     <Compile Include="Areas\General\Controllers\ImpuestoController.cs" />
+    <Compile Include="Areas\General\Controllers\LogErrorController.cs" />
     <Compile Include="Areas\General\Controllers\ReportesPorUsuarioController.cs" />
     <Compile Include="Areas\General\Controllers\ModuloController.cs" />
     <Compile Include="Areas\General\Controllers\PaisController.cs" />
@@ -9229,6 +9230,7 @@
     <Content Include="Areas\RRHH\Views\PermisoEmpleado\_CmbEmpleado_aprueba_permiso.cshtml" />
     <Content Include="Areas\RRHH\Views\PermisoEmpleado\Modificar.cshtml" />
     <Content Include="Areas\RRHH\Views\PermisoEmpleado\Anular.cshtml" />
+    <Content Include="Areas\General\Views\LogError\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

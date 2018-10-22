@@ -179,6 +179,7 @@
     <Compile Include="General\tb_sis_Impuesto_Bus.cs" />
     <Compile Include="General\tb_sis_Impuesto_Tipo_Bus.cs" />
     <Compile Include="General\tb_sis_Impuesto_x_ctacble_Bus.cs" />
+    <Compile Include="General\tb_sis_log_error_Bus.cs" />
     <Compile Include="General\tb_sis_reporte_Bus.cs" />
     <Compile Include="General\tb_sis_reporte_diseno_Bus.cs" />
     <Compile Include="General\tb_sis_reporte_x_seg_usuario_Bus.cs" />

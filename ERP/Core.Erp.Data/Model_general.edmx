@@ -317,6 +317,17 @@
           <Property Name="observacion" Type="varchar" MaxLength="50" />
           <Property Name="IdCtaCble_vta" Type="varchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="tb_sis_log_error">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdError" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdError" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DescripcionError" Type="varchar(max)" Nullable="false" />
+          <Property Name="Modulo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Accion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="tb_sucursal">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -792,6 +803,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwtb_comprobantes_
           <EntitySet Name="tb_sis_Impuesto" EntityType="Self.tb_sis_Impuesto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_Impuesto_Tipo" EntityType="Self.tb_sis_Impuesto_Tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_Impuesto_x_ctacble" EntityType="Self.tb_sis_Impuesto_x_ctacble" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_sis_log_error" EntityType="Self.tb_sis_log_error" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sucursal" EntityType="Self.tb_sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_transportista" EntityType="Self.tb_transportista" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_visor_video" EntityType="Self.tb_visor_video" Schema="dbo" store:Type="Tables" />
@@ -1821,6 +1833,7 @@ FROM [web].[vwtb_comprobantes_no_autorizados] AS [vwtb_comprobantes_no_autorizad
           <EntitySet Name="vwtb_bodega_x_sucursal" EntityType="Model_general.vwtb_bodega_x_sucursal" />
           <EntitySet Name="tbl_usuario_ftp" EntityType="Model_general.tbl_usuario_ftp" />
           <EntitySet Name="tbl_TransaccionesAutorizadas" EntityType="Model_general.tbl_TransaccionesAutorizadas" />
+          <EntitySet Name="tb_sis_log_error" EntityType="Model_general.tb_sis_log_error" />
         </EntityContainer>
         <EntityType Name="vwtb_bodega_x_sucursal">
           <Key>
@@ -1860,6 +1873,17 @@ FROM [web].[vwtb_comprobantes_no_autorizados] AS [vwtb_comprobantes_no_autorizad
           <Property Name="IdUsuarioAut" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FechaTransaccion" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="tb_sis_log_error">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdError" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdError" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="DescripcionError" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Modulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Accion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2364,6 +2388,17 @@ FROM [web].[vwtb_comprobantes_no_autorizados] AS [vwtb_comprobantes_no_autorizad
                 <ScalarProperty Name="IdUsuarioAut" ColumnName="IdUsuarioAut" />
                 <ScalarProperty Name="IdUsuarioLog" ColumnName="IdUsuarioLog" />
                 <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_sis_log_error">
+            <EntityTypeMapping TypeName="Model_general.tb_sis_log_error">
+              <MappingFragment StoreEntitySet="tb_sis_log_error">
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+                <ScalarProperty Name="Modulo" ColumnName="Modulo" />
+                <ScalarProperty Name="DescripcionError" ColumnName="DescripcionError" />
+                <ScalarProperty Name="IdError" ColumnName="IdError" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

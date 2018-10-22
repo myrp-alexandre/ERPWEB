@@ -60,6 +60,7 @@
         <EntityTypeShape EntityType="Model_general.vwtb_bodega_x_sucursal" Width="1.5" PointX="17.375" PointY="10.75" />
         <EntityTypeShape EntityType="Model_general.tbl_usuario_ftp" Width="1.5" PointX="19.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_general.tbl_TransaccionesAutorizadas" Width="1.5" PointX="0.75" PointY="19.75" />
+        <EntityTypeShape EntityType="Model_general.tb_sis_log_error" Width="1.5" PointX="19.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

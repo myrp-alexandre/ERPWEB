@@ -204,6 +204,7 @@
     <Compile Include="General\tb_sis_Impuesto_Info.cs" />
     <Compile Include="General\tb_sis_Impuesto_Tipo_Info.cs" />
     <Compile Include="General\tb_sis_Impuesto_x_ctacble_Info.cs" />
+    <Compile Include="General\tb_sis_log_error_Info.cs" />
     <Compile Include="General\tb_sis_reporte_diseno_Info.cs" />
     <Compile Include="General\tb_sis_reporte_Info.cs" />
     <Compile Include="General\tb_sis_reporte_x_seg_usuario_Info.cs" />
