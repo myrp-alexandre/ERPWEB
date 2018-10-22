@@ -2885,6 +2885,45 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_016' does not have
           <Property Name="Contrato" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="IdTipoCatalogo" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_018' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VWROL_018">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdLiquidacion" />
+            <PropertyRef Name="IdPeriodo_Inicio" />
+            <PropertyRef Name="IdPeriodo_Fin" />
+            <PropertyRef Name="FechaIni" />
+            <PropertyRef Name="FechaFin" />
+            <PropertyRef Name="Dias_q_Corresponde" />
+            <PropertyRef Name="Dias_a_disfrutar" />
+            <PropertyRef Name="Dias_pendiente" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="FechaPago" />
+            <PropertyRef Name="Fecha_Desde" />
+            <PropertyRef Name="Fecha_Hasta" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdLiquidacion" Type="int" Nullable="false" />
+          <Property Name="IdPeriodo_Inicio" Type="int" Nullable="false" />
+          <Property Name="IdPeriodo_Fin" Type="int" Nullable="false" />
+          <Property Name="FechaIni" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" Nullable="false" />
+          <Property Name="Dias_q_Corresponde" Type="int" Nullable="false" />
+          <Property Name="Dias_a_disfrutar" Type="int" Nullable="false" />
+          <Property Name="Dias_pendiente" Type="int" Nullable="false" />
+          <Property Name="Total_Remuneracion" Type="float" />
+          <Property Name="Total_Vacaciones" Type="float" />
+          <Property Name="Valor_Cancelar" Type="float" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="FechaPago" Type="date" Nullable="false" />
+          <Property Name="Fecha_Desde" Type="datetime" Nullable="false" />
+          <Property Name="Fecha_Hasta" Type="datetime" Nullable="false" />
+        </EntityType>
         <Function Name="SPACTF_004_detalle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="Fecha_corte" Type="datetime" Mode="In" />
@@ -4807,6 +4846,28 @@ FROM [web].[VWROL_014] AS [VWROL_014]</DefiningQuery>
 [VWROL_016].[Contrato] AS [Contrato], 
 [VWROL_016].[IdTipoCatalogo] AS [IdTipoCatalogo]
 FROM [web].[VWROL_016] AS [VWROL_016]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VWROL_018" EntityType="Self.VWROL_018" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+[VWROL_018].[IdEmpresa] AS [IdEmpresa], 
+[VWROL_018].[IdEmpleado] AS [IdEmpleado], 
+[VWROL_018].[IdLiquidacion] AS [IdLiquidacion], 
+[VWROL_018].[IdPeriodo_Inicio] AS [IdPeriodo_Inicio], 
+[VWROL_018].[IdPeriodo_Fin] AS [IdPeriodo_Fin], 
+[VWROL_018].[FechaIni] AS [FechaIni], 
+[VWROL_018].[FechaFin] AS [FechaFin], 
+[VWROL_018].[Dias_q_Corresponde] AS [Dias_q_Corresponde], 
+[VWROL_018].[Dias_a_disfrutar] AS [Dias_a_disfrutar], 
+[VWROL_018].[Dias_pendiente] AS [Dias_pendiente], 
+[VWROL_018].[Total_Remuneracion] AS [Total_Remuneracion], 
+[VWROL_018].[Total_Vacaciones] AS [Total_Vacaciones], 
+[VWROL_018].[Valor_Cancelar] AS [Valor_Cancelar], 
+[VWROL_018].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+[VWROL_018].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+[VWROL_018].[FechaPago] AS [FechaPago], 
+[VWROL_018].[Fecha_Desde] AS [Fecha_Desde], 
+[VWROL_018].[Fecha_Hasta] AS [Fecha_Hasta]
+FROM [web].[VWROL_018] AS [VWROL_018]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -7572,6 +7633,7 @@ FROM [web].[VWROL_016] AS [VWROL_016]</DefiningQuery>
             <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="VWROL_018" EntityType="Model_reportes.VWROL_018" />
         </EntityContainer>
         <ComplexType Name="SPACTF_004_detalle_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -8448,6 +8510,43 @@ FROM [web].[VWROL_016] AS [VWROL_016]</DefiningQuery>
           <Property Type="Int32" Name="es_dia" Nullable="true" />
           <Property Type="String" Name="es_sdia" Nullable="true" MaxLength="15" />
         </ComplexType>
+        <EntityType Name="VWROL_018">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdLiquidacion" />
+            <PropertyRef Name="IdPeriodo_Inicio" />
+            <PropertyRef Name="IdPeriodo_Fin" />
+            <PropertyRef Name="FechaIni" />
+            <PropertyRef Name="FechaFin" />
+            <PropertyRef Name="Dias_q_Corresponde" />
+            <PropertyRef Name="Dias_a_disfrutar" />
+            <PropertyRef Name="Dias_pendiente" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="FechaPago" />
+            <PropertyRef Name="Fecha_Desde" />
+            <PropertyRef Name="Fecha_Hasta" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdLiquidacion" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo_Inicio" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo_Fin" Type="Int32" Nullable="false" />
+          <Property Name="FechaIni" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Dias_q_Corresponde" Type="Int32" Nullable="false" />
+          <Property Name="Dias_a_disfrutar" Type="Int32" Nullable="false" />
+          <Property Name="Dias_pendiente" Type="Int32" Nullable="false" />
+          <Property Name="Total_Remuneracion" Type="Double" />
+          <Property Name="Total_Vacaciones" Type="Double" />
+          <Property Name="Valor_Cancelar" Type="Double" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fecha_Desde" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha_Hasta" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10961,6 +11060,30 @@ FROM [web].[VWROL_016] AS [VWROL_016]</DefiningQuery>
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="VWROL_018">
+            <EntityTypeMapping TypeName="Model_reportes.VWROL_018">
+              <MappingFragment StoreEntitySet="VWROL_018">
+                <ScalarProperty Name="Fecha_Hasta" ColumnName="Fecha_Hasta" />
+                <ScalarProperty Name="Fecha_Desde" ColumnName="Fecha_Desde" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="Valor_Cancelar" ColumnName="Valor_Cancelar" />
+                <ScalarProperty Name="Total_Vacaciones" ColumnName="Total_Vacaciones" />
+                <ScalarProperty Name="Total_Remuneracion" ColumnName="Total_Remuneracion" />
+                <ScalarProperty Name="Dias_pendiente" ColumnName="Dias_pendiente" />
+                <ScalarProperty Name="Dias_a_disfrutar" ColumnName="Dias_a_disfrutar" />
+                <ScalarProperty Name="Dias_q_Corresponde" ColumnName="Dias_q_Corresponde" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaIni" ColumnName="FechaIni" />
+                <ScalarProperty Name="IdPeriodo_Fin" ColumnName="IdPeriodo_Fin" />
+                <ScalarProperty Name="IdPeriodo_Inicio" ColumnName="IdPeriodo_Inicio" />
+                <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

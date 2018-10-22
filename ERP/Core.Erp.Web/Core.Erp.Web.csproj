@@ -1009,6 +1009,12 @@
     <Compile Include="Reportes\RRHH\ROL_017_Rpt.Designer.cs">
       <DependentUpon>ROL_017_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\RRHH\ROL_018_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_018_Rpt.Designer.cs">
+      <DependentUpon>ROL_018_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -9231,6 +9237,7 @@
     <Content Include="Areas\RRHH\Views\PermisoEmpleado\Modificar.cshtml" />
     <Content Include="Areas\RRHH\Views\PermisoEmpleado\Anular.cshtml" />
     <Content Include="Areas\General\Views\LogError\Index.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_018.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -9635,6 +9642,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_017_Rpt.resx">
       <DependentUpon>ROL_017_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_018_Rpt.resx">
+      <DependentUpon>ROL_018_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
