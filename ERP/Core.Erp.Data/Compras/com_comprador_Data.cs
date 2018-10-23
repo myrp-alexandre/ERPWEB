@@ -25,7 +25,9 @@ namespace Core.Erp.Data.Compras
                                    IdComprador = q.IdComprador,
                                    Estado = q.Estado,
                                    Descripcion = q.Descripcion,
-                                   IdUsuario_com = q.IdUsuario_com
+                                   IdUsuario_com = q.IdUsuario_com,
+
+                                   EstadoBool = q.Estado == "A" ? true : false
                                }).ToList();
                    
                     else
@@ -38,7 +40,9 @@ namespace Core.Erp.Data.Compras
                                      IdComprador = q.IdComprador,
                                      Estado = q.Estado,
                                      Descripcion = q.Descripcion,
-                                     IdUsuario_com = q.IdUsuario_com
+                                     IdUsuario_com = q.IdUsuario_com,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                   
                 }

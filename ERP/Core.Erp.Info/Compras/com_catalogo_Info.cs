@@ -21,6 +21,7 @@ namespace Core.Erp.Info.Compras
         [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 50")]
         public string Nombre { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string Abrebiatura { get; set; }
         public string NombreIngles { get; set; }
         public Nullable<int> Orden { get; set; }

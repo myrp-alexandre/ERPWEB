@@ -25,7 +25,9 @@ namespace Core.Erp.Data.Compras
                                      IdMotivo = q.IdMotivo,
                                      Cod_Motivo = q.Cod_Motivo,
                                      Descripcion = q.Descripcion,
-                                     estado = q.estado
+                                     estado = q.estado,
+
+                                     EstadoBool = q.estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.com_Motivo_Orden_Compra
@@ -37,7 +39,9 @@ namespace Core.Erp.Data.Compras
                                      IdMotivo = q.IdMotivo,
                                      Cod_Motivo = q.Cod_Motivo,
                                      Descripcion = q.Descripcion,
-                                     estado = q.estado
+                                     estado = q.estado,
+
+                                     EstadoBool = q.estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

@@ -18,6 +18,7 @@ namespace Core.Erp.Info.Compras
         [Required(ErrorMessage = ("el campo días es obligatorio"))]
         public int Dias { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string IdUsuario { get; set; }
         public string nom_pc { get; set; }
         public string ip { get; set; }

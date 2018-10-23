@@ -80,7 +80,16 @@
         });
         settings.Columns.Add("IdOrdenCompra", "Id").Width = Unit.Percentage(10);
         settings.Columns.Add("oc_observacion", "Observación").Width = Unit.Percentage(20);
-        settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

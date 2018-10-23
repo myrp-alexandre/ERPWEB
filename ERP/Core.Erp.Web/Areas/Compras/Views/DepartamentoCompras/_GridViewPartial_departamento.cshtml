@@ -81,7 +81,16 @@
 
         settings.Columns.Add("IdDepartamento", "Código").Width = Unit.Percentage(10);
         settings.Columns.Add("nom_departamento", "Descripción").Width = Unit.Percentage(10);
-        settings.Columns.Add("Estado", "Estado").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

@@ -22,7 +22,9 @@ namespace Core.Erp.Data.Compras
                                  {
                                  IdEstado_cierre = q.IdEstado_cierre,
                                  Descripcion = q.Descripcion,
-                                 estado = q.estado
+                                 estado = q.estado,
+
+                                     EstadoBool = q.estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.com_estado_cierre
@@ -31,7 +33,9 @@ namespace Core.Erp.Data.Compras
                                   {
                                       IdEstado_cierre = q.IdEstado_cierre,
                                       Descripcion = q.Descripcion,
-                                      estado = q.estado
+                                      estado = q.estado,
+
+                                      EstadoBool = q.estado == "A" ? true : false
                                   }).ToList();
                 }
                 return Lista;

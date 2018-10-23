@@ -24,7 +24,9 @@ namespace Core.Erp.Data.Compras
                                      IdEmpresa = q.IdEmpresa,
                                      nom_departamento = q.nom_departamento,
                                      IdDepartamento = q.IdDepartamento,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.com_departamento
@@ -35,7 +37,9 @@ namespace Core.Erp.Data.Compras
                                      IdEmpresa = q.IdEmpresa,
                                      nom_departamento = q.nom_departamento,
                                      IdDepartamento = q.IdDepartamento,
-                                     Estado = q.Estado
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

@@ -40,7 +40,9 @@ namespace Core.Erp.Data.Compras
                                      oc_fechaVencimiento = q.oc_fechaVencimiento,
                                      oc_NumDocumento = q.oc_NumDocumento,
                                      co_fechaReproba = q.co_fechaReproba,
-                                     co_fecha_aprobacion = q.co_fecha_aprobacion
+                                     co_fecha_aprobacion = q.co_fecha_aprobacion,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.com_ordencompra_local
@@ -68,6 +70,8 @@ namespace Core.Erp.Data.Compras
                                      oc_NumDocumento = q.oc_NumDocumento,
                                      co_fechaReproba = q.co_fechaReproba,
                                      co_fecha_aprobacion = q.co_fecha_aprobacion,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

@@ -24,6 +24,8 @@ namespace Core.Erp.Data.Compras
                                      Descripcion = q.Descripcion,
                                      Dias = q.Dias,
                                      Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     else
                         Lista = (from q in Context.com_TerminoPago
@@ -34,6 +36,8 @@ namespace Core.Erp.Data.Compras
                                      Descripcion = q.Descripcion,
                                      Dias = q.Dias,
                                      Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
                 return Lista;

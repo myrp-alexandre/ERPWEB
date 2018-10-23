@@ -11,6 +11,7 @@ namespace Core.Erp.Info.Compras
     {
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
+        [Required(ErrorMessage = ("el campo sucursal es obligatorio"))]
         public int IdSucursal { get; set; }
         public decimal IdOrdenCompra { get; set; }
         [Required(ErrorMessage = ("el campo Proveedor es obligatorio"))]
@@ -25,6 +26,7 @@ namespace Core.Erp.Info.Compras
         public System.DateTime oc_fecha { get; set; }
         public string oc_observacion { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         [Required(ErrorMessage = ("el campo estado de aprobación es obligatorio"))]
         public string IdEstadoAprobacion_cat { get; set; }
         public Nullable<System.DateTime> co_fecha_aprobacion { get; set; }
