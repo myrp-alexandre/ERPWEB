@@ -106,5 +106,91 @@ namespace Core.Erp.Data.Banco
                 throw;
             }
         }
+
+        public bool guardarDB(ba_TipoFlujo_Info info)
+        {
+            try
+            {
+                using (Entities_banco Context = new Entities_banco())
+                {
+                    ba_TipoFlujo Entity = new ba_TipoFlujo
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        cod_flujo = info.cod_flujo,
+                        Descricion = info.Descricion,
+                        Estado = info.Estado="A",
+                        IdTipoFlujo = info.IdTipoFlujo=get_id(info.IdEmpresa),
+                        IdTipoFlujoPadre = info.IdTipoFlujoPadre,
+                        Tipo = info.Tipo,
+                        
+                        IdUsuario = info.IdUsuario,
+                        Fecha_Transac = DateTime.Now
+                    };
+                    Context.ba_TipoFlujo.Add(Entity);
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool modificarDB(ba_TipoFlujo_Info info)
+        {
+            try
+            {
+                using (Entities_banco Context = new Entities_banco())
+                {
+                    ba_TipoFlujo Entity = Context.ba_TipoFlujo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoFlujo == info.IdTipoFlujo).FirstOrDefault();
+                    if (Entity == null) return false;
+                    Entity.cod_flujo = info.cod_flujo;
+                    Entity.Descricion = info.Descricion;
+                    Entity.Tipo = info.Tipo;
+
+                    Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
+                    Entity.Fecha_UltMod = DateTime.Now;
+                    
+                    Context.ba_TipoFlujo.Add(Entity);
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool anularDB(ba_TipoFlujo_Info info)
+        {
+            try
+            {
+                using (Entities_banco Context = new Entities_banco())
+                {
+                    ba_TipoFlujo Entity = Context.ba_TipoFlujo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoFlujo == info.IdTipoFlujo).FirstOrDefault();
+                    if (Entity == null) return false;
+
+                    Entity.Estado = "I";
+
+                    Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
+                    Entity.Fecha_UltAnu = DateTime.Now;
+
+                    Context.ba_TipoFlujo.Add(Entity);
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
     }
 }
