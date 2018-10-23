@@ -56,5 +56,6 @@ namespace Core.Erp.Data
         public virtual ba_Catalogo ba_Catalogo { get; set; }
         public virtual ba_Catalogo ba_Catalogo1 { get; set; }
         public virtual ba_tipo_nota ba_tipo_nota { get; set; }
+        public virtual ba_TipoFlujo ba_TipoFlujo { get; set; }
     }
 }
