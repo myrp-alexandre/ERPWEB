@@ -504,6 +504,11 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                 if (cta_x_tipo != null)
                                     item.IdCtaCble = cta_x_tipo.IdCtaCble;
                             }
+                        }else
+                        {
+                            var cta_x_tipo = Context_cxc.cxc_cobro_tipo_Param_conta_x_sucursal.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCobro_tipo == info.IdCobro_tipo && q.IdSucursal == info.IdSucursal).FirstOrDefault();
+                            if (cta_x_tipo != null)
+                                info.lst_det.ForEach(q=>q.IdCtaCble = cta_x_tipo.IdCtaCble);
                         }
                     }
                 }
