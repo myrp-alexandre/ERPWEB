@@ -430,8 +430,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
        
     }
 
-
-
     public class fa_guia_remision_det_Info_lst
     {
         string Variable = "fa_guia_remision_det_Info";
