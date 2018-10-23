@@ -53,7 +53,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 
             Dictionary<string, string> lst_cta = new Dictionary<string, string>();
             lst_cta.Add("CAJA", "CAJA");
-            lst_cta.Add("TIPO_COBRO", "TIPO COBRO");
+            lst_cta.Add("TIP_COBRO", "TIPO COBRO");
             ViewBag.lst_cta = lst_cta;
         }
 
