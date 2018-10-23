@@ -12,7 +12,9 @@ namespace Core.Erp.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
+
     public partial class Entities_banco : DbContext
     {
         public Entities_banco()
@@ -43,5 +45,6 @@ namespace Core.Erp.Data
         public DbSet<vwba_Conciliacion_det_IngEgr_x_conciliar> vwba_Conciliacion_det_IngEgr_x_conciliar { get; set; }
         public DbSet<vwba_Talonario_cheques_x_banco_ID> vwba_Talonario_cheques_x_banco_ID { get; set; }
         public DbSet<ba_parametros> ba_parametros { get; set; }
+        public DbSet<ba_TipoFlujo> ba_TipoFlujo { get; set; }
     }
 }

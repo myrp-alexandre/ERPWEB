@@ -33,6 +33,9 @@
         <AssociationConnector Association="Model_banco.FK_ba_Cbte_Ban_ba_tipo_nota" ManuallyRouted="false" />
         <AssociationConnector Association="Model_banco.FK_ba_Conciliacion_det_IngEgr_ba_Conciliacion" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Model_banco.ba_parametros" Width="1.5" PointX="10.375" PointY="14.75" />
+        <EntityTypeShape EntityType="Model_banco.ba_TipoFlujo" Width="1.5" PointX="12.375" PointY="15" />
+        <AssociationConnector Association="Model_banco.FK_ba_Cbte_Ban_ba_TipoFlujo" />
+        <AssociationConnector Association="Model_banco.FK_ba_TipoFlujo_ba_TipoFlujo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
