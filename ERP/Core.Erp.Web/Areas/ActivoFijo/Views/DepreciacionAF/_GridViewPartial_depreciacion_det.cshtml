@@ -8,11 +8,20 @@
         settings.Width = Unit.Percentage(100);
 
         //CConfiguracion responsive
-        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
-        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
-        settings.SettingsPager.PageSize = 10;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 800;
+
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 500;
+        settings.Settings.VerticalScrollableHeight = 500;
+        settings.CommandColumn.Width = Unit.Pixel(100);
+        settings.CommandColumn.AdaptivePriority = 1;
+
         //Configuración filtro por columna
         settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
         settings.Settings.ShowFilterRow = true;
