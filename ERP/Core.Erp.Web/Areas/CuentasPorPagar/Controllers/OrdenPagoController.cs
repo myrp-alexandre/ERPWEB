@@ -161,16 +161,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             Session["ct_cbtecble_det_Info"] = model.info_comprobante.lst_ct_cbtecble_det;
 
 
-            if (Session["info_param_op"] == null)
-            {
                 info_param_op = bus_orden_pago_tipo.get_info(IdEmpresa, model.IdTipo_op);
-                Session["info_param_op"] = info_param_op;
-            }
-            else
-            {
-                info_param_op = Session["info_param_op"] as cp_orden_pago_tipo_x_empresa_Info;
-            }
-
+          
             return View(model);
         }
 
@@ -270,15 +262,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
 
-            if (Session["info_param_op"] == null)
-            {
-                info_param_op = bus_orden_pago_tipo.get_info(IdEmpresa, IdTipo_op);
-                Session["info_param_op"] = info_param_op;
-            }
-            else
-            {
-                info_param_op = Session["info_param_op"] as cp_orden_pago_tipo_x_empresa_Info;
-            }
+            info_param_op = bus_orden_pago_tipo.get_info(IdEmpresa, IdTipo_op);
+
             comprobante_contable_fp.delete_detail_New_details(info_param_op, IdEntidad, Valor_a_pagar, observacion);
             // añadir detalle 
             Session["lst_detalle"] = null;

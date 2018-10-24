@@ -117,7 +117,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;
