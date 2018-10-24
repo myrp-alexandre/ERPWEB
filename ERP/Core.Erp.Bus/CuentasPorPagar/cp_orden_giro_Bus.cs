@@ -96,12 +96,13 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     & info.info_cuota.lst_cuotas_det.Count()>0
                   )
                 {
+                    bus_cuotas = new cp_cuotas_x_doc_Bus();
                     info.info_cuota.IdEmpresa = info.IdEmpresa;
                     info.info_cuota.IdTipoCbte = info.info_comrobante.IdTipoCbte;
                     info.info_cuota.IdCbteCble = info.info_comrobante.IdCbteCble;
                     info.info_cuota.Observacion = info.co_observacion;
                     info.info_cuota.Estado = true;
-
+                    
                     bus_cuotas.GuardarDB(info.info_cuota);
                 }
 

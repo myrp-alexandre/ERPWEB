@@ -8,6 +8,10 @@
         settings.Width = Unit.Percentage(100);
 
 
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Deudas", Action = "EditingAddNew", Area = "CuentasPorPagar" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Deudas", Action = "EditingUpdate", Area = "CuentasPorPagar" };
