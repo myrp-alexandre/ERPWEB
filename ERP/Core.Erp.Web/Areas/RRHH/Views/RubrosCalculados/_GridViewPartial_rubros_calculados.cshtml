@@ -6,12 +6,20 @@
 
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdEmpresa";
+        //CConfiguracion responsive
 
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
-        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 800;
+
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 500;
+        settings.Settings.VerticalScrollableHeight = 500;
+        settings.CommandColumn.Width = Unit.Pixel(100);
+        settings.CommandColumn.AdaptivePriority = 1;
 
         settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Hidden;
         settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
@@ -47,22 +55,22 @@
         };
         settings.HtmlRowPrepared = (s, e) =>
         {
-            
-                e.Row.ForeColor = System.Drawing.Color.Red;
-            
+
+            e.Row.ForeColor = System.Drawing.Color.Red;
+
         };
         settings.Columns.Add(c =>
         {
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                
-                    ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
-                
+
+                ViewContext.Writer.Write(
+            Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa") }) + "&nbsp;" +
+                    Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa") },
+                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
+                );
+
             });
             c.SetHeaderTemplateContent(tc =>
             {
