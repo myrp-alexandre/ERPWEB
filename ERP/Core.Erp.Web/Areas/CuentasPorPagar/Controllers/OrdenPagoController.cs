@@ -387,7 +387,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             try
             {
                 
-                HttpContext.Current.Session["ct_cbtecble_det_Info"] = null;
 
                 // cuenta total
                 ct_cbtecble_det_Info cbtecble_debe_Info = new ct_cbtecble_det_Info();

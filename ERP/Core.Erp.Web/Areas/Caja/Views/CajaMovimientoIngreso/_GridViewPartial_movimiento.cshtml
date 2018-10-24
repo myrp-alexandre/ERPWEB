@@ -1,5 +1,7 @@
+@using System.Web.UI.WebControls;
 @{
-    var grid = Html.DevExpress().GridView(settings => {
+    var grid = Html.DevExpress().GridView(settings =>
+    {
         settings.Name = "GridView_movimiento";
         settings.CallbackRouteValues = new { Controller = "CajaMovimientoIngreso", Action = "GridViewPartial_movimiento" };
         settings.KeyFieldName = "IdCbteCble";
