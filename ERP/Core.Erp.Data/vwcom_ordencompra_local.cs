@@ -12,13 +12,8 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class com_ordencompra_local
+    public partial class vwcom_ordencompra_local
     {
-        public com_ordencompra_local()
-        {
-            this.com_ordencompra_local_det = new HashSet<com_ordencompra_local_det>();
-        }
-    
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public decimal IdOrdenCompra { get; set; }
@@ -34,26 +29,15 @@ namespace Core.Erp.Data
         public string IdUsuario_Aprueba { get; set; }
         public string IdUsuario_Reprue { get; set; }
         public Nullable<System.DateTime> co_fechaReproba { get; set; }
-        public Nullable<System.DateTime> Fecha_Transac { get; set; }
-        public Nullable<System.DateTime> Fecha_UltMod { get; set; }
-        public string IdUsuarioUltMod { get; set; }
-        public Nullable<System.DateTime> FechaHoraAnul { get; set; }
-        public string IdUsuarioUltAnu { get; set; }
-        public string MotivoAnulacion { get; set; }
         public string MotivoReprobacion { get; set; }
         public Nullable<decimal> IdDepartamento { get; set; }
-        public string IdUsuario { get; set; }
         public Nullable<int> IdMotivo { get; set; }
         public System.DateTime oc_fechaVencimiento { get; set; }
         public string IdEstado_cierre { get; set; }
         public decimal IdComprador { get; set; }
-    
-        public virtual com_catalogo com_catalogo { get; set; }
-        public virtual com_departamento com_departamento { get; set; }
-        public virtual com_estado_cierre com_estado_cierre { get; set; }
-        public virtual com_Motivo_Orden_Compra com_Motivo_Orden_Compra { get; set; }
-        public virtual com_TerminoPago com_TerminoPago { get; set; }
-        public virtual ICollection<com_ordencompra_local_det> com_ordencompra_local_det { get; set; }
-        public virtual com_comprador com_comprador { get; set; }
+        public string pr_codigo { get; set; }
+        public string pe_cedulaRuc { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public string Nombre { get; set; }
     }
 }

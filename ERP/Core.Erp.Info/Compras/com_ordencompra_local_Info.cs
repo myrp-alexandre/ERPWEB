@@ -50,7 +50,10 @@ namespace Core.Erp.Info.Compras
         public decimal IdComprador { get; set; }
 
         //campos que no existen en la tabla
-
+        public string pr_codigo { get; set; }
+        public string pe_cedulaRuc { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public string Nombre { get; set; }
 
         public List<com_ordencompra_local_det_Info> lst_det { get; set; }
     }

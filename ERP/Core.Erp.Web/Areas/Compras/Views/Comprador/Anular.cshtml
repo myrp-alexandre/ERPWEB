@@ -26,7 +26,7 @@
 
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="IdPersona">Beneficiario*</label>
+                    <label for="IdPersona">Beneficiario</label>
                     @Html.Partial("_CmbPersona_Compras", Model.IdPersona)
                     @Html.ValidationMessageFor(q => q.IdPersona, "", new { @class = "text-danger" })
                 </div>
