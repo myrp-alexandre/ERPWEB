@@ -30,6 +30,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         cp_orden_pago_cancelaciones_Bus bus_cancelacion = new cp_orden_pago_cancelaciones_Bus();
         List<cp_orden_pago_tipo_x_empresa_Info> lst_tipo_orden_pago = new List<cp_orden_pago_tipo_x_empresa_Info>();
         int IdEmpresa = 0;
+        cp_orden_pago_det_Info_list lis_cp_orden_pago_det_Info = new cp_orden_pago_det_Info_list();
         #endregion
         public ActionResult Index()
         {
@@ -62,7 +63,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             try
             {
-                lst_detalle_op = Session["lst_detalle"] as List<cp_orden_pago_det_Info>;
+                lst_detalle_op =lis_cp_orden_pago_det_Info.get_list();
                 return PartialView("_GridViewPartial_detalle_op", lst_detalle_op);
             }
             catch (Exception)
@@ -75,7 +76,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ct_cbtecble_Info model = new ct_cbtecble_Info();
-            model.lst_ct_cbtecble_det = Session["ct_cbtecble_det_Info"] as List<ct_cbtecble_det_Info>;
+            model.lst_ct_cbtecble_det = comprobante_contable_fp.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_orden_pago_dc", model);
         }
@@ -106,7 +107,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
         public ActionResult Nuevo(int IdEmpresa = 0 )
         {
-            (Session["ct_cbtecble_det_Info"]) = null;
             cp_orden_pago_Info model = new cp_orden_pago_Info
             {
                 IdEmpresa = IdEmpresa,
@@ -121,9 +121,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost]
         public ActionResult Nuevo(cp_orden_pago_Info model)
         {
-            model.detalle = Session["lst_detalle"] as List<cp_orden_pago_det_Info>;
-            model.info_comprobante.lst_ct_cbtecble_det = Session["ct_cbtecble_det_Info"] as List<ct_cbtecble_det_Info>;
-            info_param_op = Session["info_param_op"] as cp_orden_pago_tipo_x_empresa_Info;
+            bus_orden_pago_tipo = new cp_orden_pago_tipo_x_empresa_Bus();
+            bus_orden_pago = new cp_orden_pago_Bus();
+            model.detalle =lis_cp_orden_pago_det_Info.get_list();
+            model.info_comprobante.lst_ct_cbtecble_det = comprobante_contable_fp.get_list();
+            info_param_op = bus_orden_pago_tipo.get_info(model.IdEmpresa, model.IdTipo_op);
             model.IdEmpresa =Convert.ToInt32( SessionFixed.IdEmpresa);
             model.info_comprobante.IdTipoCbte =(int) info_param_op.IdTipoCbte_OP;
             model.IdEstadoAprobacion = info_param_op.IdEstadoAprobacion;
@@ -151,25 +153,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         public ActionResult Modificar(int IdEmpresa = 0 , int IdOrdenPago = 0)
         {
-            cargar_combos(IdEmpresa);
+            bus_orden_pago = new cp_orden_pago_Bus();
+               cargar_combos(IdEmpresa);
             cargar_combos_detalle();
             IdEmpresa =Convert.ToInt32( Session["IdEmpresa"]);
             cp_orden_pago_Info model = new cp_orden_pago_Info();
             model = bus_orden_pago.get_info(IdEmpresa, IdOrdenPago);
-            Session["ct_cbtecble_Info"] = model.info_comprobante;
-            Session["lst_detalle"] = model.detalle;
-            Session["ct_cbtecble_det_Info"] = model.info_comprobante.lst_ct_cbtecble_det;
-
-
-            if (Session["info_param_op"] == null)
-            {
-                info_param_op = bus_orden_pago_tipo.get_info(IdEmpresa, model.IdTipo_op);
-                Session["info_param_op"] = info_param_op;
-            }
-            else
-            {
-                info_param_op = Session["info_param_op"] as cp_orden_pago_tipo_x_empresa_Info;
-            }
+            comprobante_contable_fp.set_list(model.info_comprobante.lst_ct_cbtecble_det);
+            lis_cp_orden_pago_det_Info.set_list(model.detalle);
 
             return View(model);
         }
@@ -178,6 +169,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         public ActionResult Modificar(cp_orden_pago_Info model)
         {
             string mensaje = "";
+            bus_orden_pago_tipo = new cp_orden_pago_tipo_x_empresa_Bus();
+            bus_orden_pago = new cp_orden_pago_Bus();
+            bus_cancelacion = new cp_orden_pago_cancelaciones_Bus();
             if (bus_cancelacion.si_existe_cancelacion(IdEmpresa, model.IdOrdenPago))
             {
                 mensaje = "La orden de pago tiene cancelaciones no se puede modificar";
@@ -196,11 +190,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
 
 
-            model.detalle = Session["lst_detalle"] as List<cp_orden_pago_det_Info>;
-            model.info_comprobante = Session["ct_cbtecble_Info"] as ct_cbtecble_Info;
-            model.info_comprobante.lst_ct_cbtecble_det = Session["ct_cbtecble_det_Info"] as List<ct_cbtecble_det_Info>;
-            info_param_op = Session["info_param_op"] as cp_orden_pago_tipo_x_empresa_Info;
+            model.detalle = lis_cp_orden_pago_det_Info.get_list();
+            model.info_comprobante.lst_ct_cbtecble_det = comprobante_contable_fp.get_list();
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            info_param_op = bus_orden_pago_tipo.get_info(model.IdEmpresa,model.IdTipo_op);
             model.info_comprobante.IdTipoCbte = (int)info_param_op.IdTipoCbte_OP;
             model.IdEstadoAprobacion = info_param_op.IdEstadoAprobacion;
             mensaje = bus_orden_pago.validar(model);
@@ -234,7 +227,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model = bus_orden_pago.get_info(IdEmpresa, IdOrdenPago);
             Session["ct_cbtecble_Info"] = model.info_comprobante;
             Session["lst_detalle"] = model.detalle;
-            Session["ct_cbtecble_det_Info"] = model.info_comprobante.lst_ct_cbtecble_det;
+            comprobante_contable_fp.set_list( model.info_comprobante.lst_ct_cbtecble_det);
             return View(model);
         }
 
@@ -269,25 +262,16 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         public JsonResult armar_diario(string IdTipo_op = "", decimal IdEntidad = 0, double Valor_a_pagar = 0, string observacion="")
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            info_param_op = bus_orden_pago_tipo.get_info(IdEmpresa, IdTipo_op);
 
-            if (Session["info_param_op"] == null)
-            {
-                info_param_op = bus_orden_pago_tipo.get_info(IdEmpresa, IdTipo_op);
-                Session["info_param_op"] = info_param_op;
-            }
-            else
-            {
-                info_param_op = Session["info_param_op"] as cp_orden_pago_tipo_x_empresa_Info;
-            }
             comprobante_contable_fp.delete_detail_New_details(info_param_op, IdEntidad, Valor_a_pagar, observacion);
             // añadir detalle 
-            Session["lst_detalle"] = null;
             cp_orden_pago_det_Info info_detalle = new cp_orden_pago_det_Info();
             info_detalle.Valor_a_pagar = Valor_a_pagar;
             info_detalle.Referencia = observacion;
             info_detalle.IdEstadoAprobacion = info_param_op.IdEstadoAprobacion;
             lst_detalle_op.Add(info_detalle);
-            Session["lst_detalle"] = lst_detalle_op;
+            lis_cp_orden_pago_det_Info.set_list(lst_detalle_op);
 
             return Json("", JsonRequestBehavior.AllowGet);
         }
@@ -357,7 +341,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
     public class ct_cbtecble_det_List_op
     {
-        public List<ct_cbtecble_det_Info> get_list()
+        public List<ct_cbtecble_det_Info> get_list( )
         {
             if (HttpContext.Current.Session["ct_cbtecble_det_Info"] == null)
             {
@@ -438,4 +422,28 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
 
     }
+
+    public class cp_orden_pago_det_Info_list
+    {
+        public List<cp_orden_pago_det_Info> get_list()
+        {
+            if (HttpContext.Current.Session["cp_orden_pago_det_Info"] == null)
+            {
+                List<ct_cbtecble_det_Info> list = new List<ct_cbtecble_det_Info>();
+
+                HttpContext.Current.Session["cp_orden_pago_det_Info"] = list;
+            }
+            return (List<cp_orden_pago_det_Info>)HttpContext.Current.Session["cp_orden_pago_det_Info"];
+        }
+
+        public void set_list(List<cp_orden_pago_det_Info> list)
+        {
+            HttpContext.Current.Session["cp_orden_pago_det_Info"] = list;
+        }
+
+      
+
+    }
+
+    
 }

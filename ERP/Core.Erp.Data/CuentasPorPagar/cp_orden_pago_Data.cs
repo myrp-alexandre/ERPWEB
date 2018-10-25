@@ -59,7 +59,6 @@ namespace Core.Erp.Data.CuentasPorPagar
             try
             {
                 cp_orden_pago_Info info = new cp_orden_pago_Info();
-
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
                     cp_orden_pago Entity = Context.cp_orden_pago.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdOrdenPago == IdOrdenPago);
@@ -103,8 +102,16 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  IdUsuario_Aprobacion = q.IdUsuario_Aprobacion,
                                  fecha_hora_Aproba = q.fecha_hora_Aproba,
                                  Motivo_aproba=q.Motivo_aproba
-
+                                 
                              }).ToList();
+                }
+                if (info.detalle != null)
+                {
+                    if (info.detalle.Count > 0)
+                    {
+                        info.info_comprobante.IdTipoCbte =Convert.ToInt32( info.detalle.FirstOrDefault().IdTipoCbte_cxp);
+                        info.info_comprobante.IdCbteCble =Convert.ToDecimal( info.detalle.FirstOrDefault().IdCbteCble_cxp);
+                    }
                 }
 
                 return info;
