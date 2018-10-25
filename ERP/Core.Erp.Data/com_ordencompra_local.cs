@@ -49,11 +49,11 @@ namespace Core.Erp.Data
         public decimal IdComprador { get; set; }
     
         public virtual com_catalogo com_catalogo { get; set; }
-        public virtual com_comprador com_comprador { get; set; }
         public virtual com_departamento com_departamento { get; set; }
         public virtual com_estado_cierre com_estado_cierre { get; set; }
         public virtual com_Motivo_Orden_Compra com_Motivo_Orden_Compra { get; set; }
         public virtual com_TerminoPago com_TerminoPago { get; set; }
         public virtual ICollection<com_ordencompra_local_det> com_ordencompra_local_det { get; set; }
+        public virtual com_comprador com_comprador { get; set; }
     }
 }

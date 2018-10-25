@@ -25,12 +25,22 @@
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
-        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        //CConfiguracion responsive
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
-        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 800;
+
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+        settings.EditFormLayoutProperties.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 500;
+        settings.Settings.VerticalScrollableHeight = 500;
+        settings.CommandColumn.Width = Unit.Pixel(100);
+        settings.CommandColumn.AdaptivePriority = 1;
         //Funcion para inicializar fila al presionar nuevo
-      
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "pr_descripcion";
@@ -40,7 +50,7 @@
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
-       
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "gi_cantidad";
@@ -53,7 +63,7 @@
                 q.Width = Unit.Percentage(100);
             });
         });
-        
+
 
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "gi_cantidad").DisplayFormat = "{0:n2}";
         settings.Settings.ShowFooter = true;

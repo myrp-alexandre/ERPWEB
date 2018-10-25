@@ -29,8 +29,10 @@ namespace Core.Erp.Data.Compras
                                      CodCatalogo = q.CodCatalogo,
                                      Estado = q.Estado,
                                      Abrebiatura = q.Abrebiatura,
-                                     Orden = q.Orden
-                                     
+                                     Orden = q.Orden,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
+
                                  }).ToList();
                     }
                     else
@@ -47,7 +49,9 @@ namespace Core.Erp.Data.Compras
                                      CodCatalogo = q.CodCatalogo,
                                      Estado = q.Estado,
                                      Abrebiatura = q.Abrebiatura,
-                                     Orden = q.Orden
+                                     Orden = q.Orden,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     }
                 }

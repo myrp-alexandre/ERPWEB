@@ -17,7 +17,7 @@ namespace Core.Erp.Data.Compras
                 using (Entities_compras Context = new Entities_compras())
                 {
                     if (mostrar_anulados)
-                        Lista = (from q in Context.com_ordencompra_local
+                        Lista = (from q in Context.vwcom_ordencompra_local
                                  where q.IdEmpresa == IdEmpresa
                                  select new com_ordencompra_local_Info
                                  {
@@ -40,10 +40,17 @@ namespace Core.Erp.Data.Compras
                                      oc_fechaVencimiento = q.oc_fechaVencimiento,
                                      oc_NumDocumento = q.oc_NumDocumento,
                                      co_fechaReproba = q.co_fechaReproba,
-                                     co_fecha_aprobacion = q.co_fecha_aprobacion
+                                     co_fecha_aprobacion = q.co_fecha_aprobacion,
+
+                                     EstadoBool = q.Estado == "A" ? true : false,
+                                     pr_codigo = q.pr_codigo,
+                                     Nombre = q.Nombre,
+                                     pe_nombreCompleto = q.pe_nombreCompleto,
+                                     pe_cedulaRuc = q.pe_cedulaRuc
+                                     
                                  }).ToList();
                     else
-                        Lista = (from q in Context.com_ordencompra_local
+                        Lista = (from q in Context.vwcom_ordencompra_local
                                  where q.IdEmpresa == IdEmpresa
                                  && q.Estado == "A"
                                  select new com_ordencompra_local_Info
@@ -68,6 +75,12 @@ namespace Core.Erp.Data.Compras
                                      oc_NumDocumento = q.oc_NumDocumento,
                                      co_fechaReproba = q.co_fechaReproba,
                                      co_fecha_aprobacion = q.co_fecha_aprobacion,
+
+                                     EstadoBool = q.Estado == "A" ? true : false,
+                                     pr_codigo = q.pr_codigo,
+                                     Nombre = q.Nombre,
+                                     pe_nombreCompleto = q.pe_nombreCompleto,
+                                     pe_cedulaRuc = q.pe_cedulaRuc
                                  }).ToList();
                 }
                 return Lista;

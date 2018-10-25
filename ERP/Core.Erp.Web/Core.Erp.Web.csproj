@@ -241,6 +241,7 @@
     <Compile Include="Areas\Banco\Controllers\NotaDeDebitoBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\ParametroBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\TalonarioChequeBancoController.cs" />
+    <Compile Include="Areas\Banco\Controllers\TipoFlujoBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\TipoNotaBancoController.cs" />
     <Compile Include="Areas\Caja\CajaAreaRegistration.cs" />
     <Compile Include="Areas\Caja\Controllers\CajaController.cs" />
@@ -9238,6 +9239,11 @@
     <Content Include="Areas\RRHH\Views\PermisoEmpleado\Anular.cshtml" />
     <Content Include="Areas\General\Views\LogError\Index.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_018.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoBanco\Index.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoBanco\_GridViewPartial_tipo_flujo.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoBanco\Nuevo.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoBanco\Modificar.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoBanco\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

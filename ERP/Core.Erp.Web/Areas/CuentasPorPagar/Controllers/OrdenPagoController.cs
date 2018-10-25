@@ -263,6 +263,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             info_param_op = bus_orden_pago_tipo.get_info(IdEmpresa, IdTipo_op);
+            info_param_op = bus_orden_pago_tipo.get_info(IdEmpresa, IdTipo_op);
 
             comprobante_contable_fp.delete_detail_New_details(info_param_op, IdEntidad, Valor_a_pagar, observacion);
             // añadir detalle 
@@ -386,7 +387,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             try
             {
                 
-                HttpContext.Current.Session["ct_cbtecble_det_Info"] = null;
 
                 // cuenta total
                 ct_cbtecble_det_Info cbtecble_debe_Info = new ct_cbtecble_det_Info();

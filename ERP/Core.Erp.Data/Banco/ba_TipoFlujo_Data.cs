@@ -146,14 +146,15 @@ namespace Core.Erp.Data.Banco
                 {
                     ba_TipoFlujo Entity = Context.ba_TipoFlujo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoFlujo == info.IdTipoFlujo).FirstOrDefault();
                     if (Entity == null) return false;
+
                     Entity.cod_flujo = info.cod_flujo;
                     Entity.Descricion = info.Descricion;
                     Entity.Tipo = info.Tipo;
+                    Entity.IdTipoFlujoPadre = info.IdTipoFlujoPadre;
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
                     
-                    Context.ba_TipoFlujo.Add(Entity);
                     Context.SaveChanges();
                 }
                 return true;
@@ -178,8 +179,7 @@ namespace Core.Erp.Data.Banco
 
                     Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                     Entity.Fecha_UltAnu = DateTime.Now;
-
-                    Context.ba_TipoFlujo.Add(Entity);
+                    
                     Context.SaveChanges();
                 }
                 return true;
