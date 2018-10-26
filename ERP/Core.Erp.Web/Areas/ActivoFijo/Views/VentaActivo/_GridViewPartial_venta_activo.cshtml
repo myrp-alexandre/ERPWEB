@@ -1,5 +1,7 @@
+@using System.Web.UI.WebControls;
 @{
-    var grid = Html.DevExpress().GridView(settings => {
+    var grid = Html.DevExpress().GridView(settings =>
+    {
         settings.Name = "GridView_venta_activo";
         settings.CallbackRouteValues = new { Controller = "VentaActivo", Action = "GridViewPartial_venta_activo" };
         settings.KeyFieldName = "IdVtaActivo";
@@ -78,7 +80,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
@@ -109,7 +111,7 @@
         {
             column.SetDataItemTemplateContent(c =>
             {
-                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ACTF_002", "ActivoFijoReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdVtaActivo = DataBinder.Eval(c.DataItem, "IdVtaActivo").ToString()}, Request.Url.Scheme) + "');\"></span>");
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ACTF_002", "ActivoFijoReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdVtaActivo = DataBinder.Eval(c.DataItem, "IdVtaActivo").ToString() }, Request.Url.Scheme) + "');\"></span>");
             });
             column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
         });

@@ -1,5 +1,7 @@
+@using System.Web.UI.WebControls;
 @{
-    var grid = Html.DevExpress().GridView(settings => {
+    var grid = Html.DevExpress().GridView(settings =>
+    {
         settings.Name = "GridView_retiro_activo";
         settings.CallbackRouteValues = new { Controller = "RetiroActivo", Action = "GridViewPartial_retiro_activo" };
         settings.KeyFieldName = "IdRetiroActivo";
@@ -78,7 +80,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
@@ -105,13 +107,13 @@
 
             });
         });        //settings.Columns.Add(column =>
-        //{
-        //    column.SetDataItemTemplateContent(c =>
-        //    {
-        //        ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ACTF_003", "ActivoFijoReportes", new { Area = "Reportes",IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdRetiroActivo = DataBinder.Eval(c.DataItem, "IdRetiroActivo").ToString()}, Request.Url.Scheme) + "');\"></span>");
-        //    });
-        //    column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
-        //});
+                   //{
+                   //    column.SetDataItemTemplateContent(c =>
+                   //    {
+                   //        ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ACTF_003", "ActivoFijoReportes", new { Area = "Reportes",IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdRetiroActivo = DataBinder.Eval(c.DataItem, "IdRetiroActivo").ToString()}, Request.Url.Scheme) + "');\"></span>");
+                   //    });
+                   //    column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+                   //});
     });
 }
 @grid.Bind(Model).GetHtml()

@@ -1,5 +1,7 @@
+@using System.Web.UI.WebControls;
 @{
-    var grid = Html.DevExpress().GridView(settings => {
+    var grid = Html.DevExpress().GridView(settings =>
+    {
         settings.Name = "GridView_persona";
         settings.CallbackRouteValues = new { Controller = "Persona", Action = "GridViewPartial_persona" };
         settings.KeyFieldName = "IdPersona";
@@ -69,7 +71,7 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "pe_estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdPersona = DataBinder.Eval(tc.DataItem, "IdPersona")}) + "&nbsp;" +
+                Html.ActionLink("Modificar", "Modificar", new { IdPersona = DataBinder.Eval(tc.DataItem, "IdPersona") }) + "&nbsp;" +
                         Html.ActionLink("Anular", "Anular", new { IdPersona = DataBinder.Eval(tc.DataItem, "IdPersona") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
@@ -86,10 +88,10 @@
             c.Width = System.Web.UI.WebControls.Unit.Pixel(150);
         });
 
-        settings.Columns.Add("IdPersona","ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add("pe_nombreCompleto","Nombre completo").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-        settings.Columns.Add("IdTipoDocumento","Tipo documento").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add("pe_cedulaRuc","Cédula/RUC").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+        settings.Columns.Add("IdPersona", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("pe_nombreCompleto", "Nombre completo").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+        settings.Columns.Add("IdTipoDocumento", "Tipo documento").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("pe_cedulaRuc", "Cédula/RUC").Width = System.Web.UI.WebControls.Unit.Percentage(20);
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoBool";

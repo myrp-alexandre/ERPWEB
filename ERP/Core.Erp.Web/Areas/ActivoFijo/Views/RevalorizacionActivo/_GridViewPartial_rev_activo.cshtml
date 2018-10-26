@@ -1,5 +1,7 @@
+@using System.Web.UI.WebControls;
 @{
-    var grid = Html.DevExpress().GridView(settings => {
+    var grid = Html.DevExpress().GridView(settings =>
+    {
         settings.Name = "GridView_rev_activo";
         settings.CallbackRouteValues = new { Controller = "RevalorizacionActivo", Action = "GridViewPartial_rev_activo" };
         settings.KeyFieldName = "Id_Mejora_Baja_Activo";
@@ -78,7 +80,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new {  IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;

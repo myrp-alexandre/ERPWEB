@@ -1,5 +1,7 @@
+@using System.Web.UI.WebControls;
 @{
-    var grid = Html.DevExpress().GridView(settings => {
+    var grid = Html.DevExpress().GridView(settings =>
+    {
         settings.Name = "GridView_activo_fijo";
         settings.CallbackRouteValues = new { Controller = "ActivoFijo", Action = "GridViewPartial_activo_fijo" };
         settings.KeyFieldName = "IdActivoFijo";
@@ -70,8 +72,8 @@
                 {
                     ViewContext.Writer.Write(
 
-                        Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdActivoFijo = DataBinder.Eval(tc.DataItem, "IdActivoFijo")}) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdActivoFijo = DataBinder.Eval(tc.DataItem, "IdActivoFijo")},
+                        Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdActivoFijo = DataBinder.Eval(tc.DataItem, "IdActivoFijo") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdActivoFijo = DataBinder.Eval(tc.DataItem, "IdActivoFijo") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
