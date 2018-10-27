@@ -59,6 +59,7 @@
     <Reference Include="DevExpress.RichEdit.v17.2.Export, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Sparkline.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Utils.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Web.ASPxPivotGrid.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Web.ASPxThemes.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Web.ASPxTreeList.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Web.Mvc5.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -8416,7 +8417,6 @@
     <Content Include="Areas\Caja\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Caja\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Caja\Views\Caja\Index.cshtml" />
-    <Content Include="Areas\Caja\Views\Caja\_GridViewPartial_caja.cshtml" />
     <Content Include="Areas\Caja\Views\Caja\Nuevo.cshtml" />
     <Content Include="Areas\Caja\Views\Caja\Modificar.cshtml" />
     <Content Include="Areas\Caja\Views\Caja\Anular.cshtml" />
@@ -9244,6 +9244,8 @@
     <Content Include="Areas\Banco\Views\TipoFlujoBanco\Nuevo.cshtml" />
     <Content Include="Areas\Banco\Views\TipoFlujoBanco\Modificar.cshtml" />
     <Content Include="Areas\Banco\Views\TipoFlujoBanco\Anular.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_019.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\_PivotGridPartial.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

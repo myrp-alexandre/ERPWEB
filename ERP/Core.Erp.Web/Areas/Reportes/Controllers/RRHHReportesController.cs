@@ -1,4 +1,5 @@
-﻿using Core.Erp.Bus.General;
+﻿using DevExpress.Web.Mvc;
+using Core.Erp.Bus.General;
 using Core.Erp.Bus.RRHH;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
@@ -9,6 +10,8 @@ using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Core.Erp.Info.Reportes.RRHH;
+using Core.Erp.Bus.Reportes.RRHH;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
@@ -357,6 +360,23 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
             return View(model);
+        }
+        public ActionResult ROL_019(cl_filtros_Info model)
+        {
+            List<ROL_019_Info> lista = new List<ROL_019_Info>();
+            ROL_019_Bus bus = new ROL_019_Bus();
+            lista = bus.get_list(1,Convert.ToDecimal( 1), DateTime.Now.Date, DateTime.Now.Date);
+            return PartialView(model);
+        }
+
+
+        [ValidateInput(false)]
+        public ActionResult PivotGridPartial()
+        {
+            List<ROL_019_Info> lista = new List<ROL_019_Info>();
+            ROL_019_Bus bus = new ROL_019_Bus();
+            lista = bus.get_list(1, Convert.ToDecimal(1), DateTime.Now.Date, DateTime.Now.Date);
+            return PartialView("_PivotGridPartial",lista);
         }
     }
 }

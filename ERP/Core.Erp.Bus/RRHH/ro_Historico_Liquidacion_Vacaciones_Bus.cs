@@ -148,7 +148,7 @@ namespace Core.Erp.Bus.RRHH
                         info_det.Total_Vacaciones = valor_provision;
                         if (valor_provision != 0)
                         {
-                            info_det.Valor_Cancelar = valor_provision / info_solicitud.Dias_a_disfrutar;
+                            info_det.Valor_Cancelar =( valor_provision /15)* info_solicitud.Dias_a_disfrutar;
                         }
                         
                         info_solicitud.Anio_Desde= info_solicitud.Anio_Desde.AddMonths(1);

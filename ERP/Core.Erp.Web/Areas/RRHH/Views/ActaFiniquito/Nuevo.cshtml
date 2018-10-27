@@ -159,7 +159,7 @@
     function get_info()
     {
         var datos = {
-            IdEmpleado:  IdEmpleado.GetValue(),
+            IdEmpleado: IdEmpleado.GetValue(),
         }
             $.ajax({
                 type: 'POST',
@@ -174,9 +174,15 @@
                     } else {
                         $("#IdContrato_Tipo").val(data.IdContrato_Tipo);
                         $("#IdContrato").val(data.IdContrato);
-                        FechaIngreso.GetValue(data.FechaInicio);
-                        FechaIngreso.datepicker("setDate", moment(data.FechaInicio).format("DD/MM/YYYY"));
-                        FechaSalida.datepicker("setDate", moment(data.em_fechaSalida).format("DD/MM/YYYY"));
+
+
+                        var datei = new Date(moment(data.FechaInicio, "DD/MM/YYYY"));
+                        FechaIngreso.SetValue(datei);
+
+                        var date = new Date(moment(data.FechaFin, "DD/MM/YYYY"));
+                        FechaSalida.SetValue(date);
+
+
                         $("#Sueldo").val(data.Sueldo);
 
                     }

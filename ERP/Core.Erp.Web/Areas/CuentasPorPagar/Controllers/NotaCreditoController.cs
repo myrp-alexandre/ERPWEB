@@ -92,6 +92,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #region funciones
         public ActionResult Nuevo(int IdEmpresa = 0 )
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             (Session["ct_cbtecble_det_Info"]) = null;
             Session["list_op_por_proveedor"] = null;
             Session["list_op_seleccionadas"] = null;

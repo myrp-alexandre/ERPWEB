@@ -107,6 +107,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
         public ActionResult Nuevo(int IdEmpresa = 0 )
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            lis_cp_orden_pago_det_Info.set_list(new List<cp_orden_pago_det_Info>());
+            comprobante_contable_fp.set_list(new List<ct_cbtecble_det_Info>());
+            #endregion
             cp_orden_pago_Info model = new cp_orden_pago_Info
             {
                 IdEmpresa = IdEmpresa,
@@ -386,7 +394,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             try
             {
-                
+                set_list(new List<ct_cbtecble_det_Info>());
 
                 // cuenta total
                 ct_cbtecble_det_Info cbtecble_debe_Info = new ct_cbtecble_det_Info();

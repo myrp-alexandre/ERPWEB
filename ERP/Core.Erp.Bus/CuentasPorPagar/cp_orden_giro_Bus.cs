@@ -102,7 +102,8 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     info.info_cuota.IdCbteCble = info.info_comrobante.IdCbteCble;
                     info.info_cuota.Observacion = info.co_observacion;
                     info.info_cuota.Estado = true;
-                    
+                    if (info.info_cuota.Fecha_inicio.Year == 1)
+                        info.info_cuota.Fecha_inicio = info.co_FechaFactura;
                     bus_cuotas.GuardarDB(info.info_cuota);
                 }
 

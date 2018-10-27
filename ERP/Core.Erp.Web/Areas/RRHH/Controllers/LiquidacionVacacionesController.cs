@@ -100,6 +100,16 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {
                     string mensaje = "";
                     info.detalle = Session["detalle"] as List<ro_Historico_Liquidacion_Vacaciones_Det_Info>;
+                    if (info.detalle != null)
+                    {
+                        foreach (var item in info.detalle)
+                        {
+                            if (item.Valor_Cancelar == 0)
+                            {
+                                mensaje = "Existen periodos con valores cero a cancelar";
+                            }
+                        }
+                    }
                     if (mensaje != "")
                     {
                         ViewBag.mensaje = mensaje;
@@ -157,6 +167,16 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {
                     string mensaje = "";
                     info.detalle = Session["detalle"] as List<ro_Historico_Liquidacion_Vacaciones_Det_Info>;
+                    if(info.detalle!=null)
+                    {
+                        foreach (var item in info.detalle)
+                        {
+                            if (item.Valor_Cancelar == 0)
+                            {
+                                mensaje = "Existen periodos con valores cero a cancelar";
+                            }
+                        }
+                    }
                     if (mensaje != "")
                     {
                         ViewBag.mensaje = mensaje;

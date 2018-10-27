@@ -49,6 +49,8 @@ namespace Core.Erp.Data.RRHH
                                  on new { q.IdEmpresa, q.IdPeriodo} equals new { p.IdEmpresa,p.IdPeriodo}
                                      where q.IdEmpresa == IdEmpresa
                                        & q.IdEmpleado == IdEmpleado
+                                        &p.pe_anio==Anio
+                                        && p.pe_mes==mes
                                        && q.IdRubro == "295"
                                        && q.Estado == "PEN"
                                  select q.Valor);
