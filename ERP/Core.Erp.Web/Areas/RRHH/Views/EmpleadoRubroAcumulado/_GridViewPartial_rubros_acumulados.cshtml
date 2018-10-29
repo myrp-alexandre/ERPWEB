@@ -6,20 +6,14 @@
 
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdRubro";
-        //CConfiguracion responsive
 
+        //Configuracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
-        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 800;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
 
-        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
-        settings.EditFormLayoutProperties.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
-        settings.EditFormLayoutProperties.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 500;
-        settings.Settings.VerticalScrollableHeight = 500;
-        settings.CommandColumn.Width = Unit.Pixel(100);
-        settings.CommandColumn.AdaptivePriority = 1;
         settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Hidden;
         settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
         settings.Settings.VerticalScrollableHeight = 400;
