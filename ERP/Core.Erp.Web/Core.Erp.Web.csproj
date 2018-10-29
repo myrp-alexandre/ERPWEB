@@ -9249,6 +9249,7 @@
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_019.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\_PivotGridROL_019.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ExportPartial.cshtml" />
+    <Content Include="Areas\Caja\Views\Caja\_GridViewPartial_caja.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
