@@ -374,6 +374,8 @@
     <Compile Include="Areas\Reportes\Controllers\InventarioReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\RRHHReportesController.cs" />
     <Compile Include="Areas\Reportes\ReportesAreaRegistration.cs" />
+    <Compile Include="Areas\Reportes\Views\RRHHReportes\PivotGridExportDemoOptions.cs" />
+    <Compile Include="Areas\Reportes\Views\RRHHReportes\PivotGridDataOutputDemosHelper.cs" />
     <Compile Include="Areas\RRHH\Controllers\ActaFiniquitoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\AreaController.cs" />
     <Compile Include="Areas\RRHH\Controllers\BaseImpuestoRentaController.cs" />
@@ -9245,7 +9247,8 @@
     <Content Include="Areas\Banco\Views\TipoFlujoBanco\Modificar.cshtml" />
     <Content Include="Areas\Banco\Views\TipoFlujoBanco\Anular.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_019.cshtml" />
-    <Content Include="Areas\Reportes\Views\RRHHReportes\_PivotGridPartial.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\_PivotGridROL_019.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ExportPartial.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />

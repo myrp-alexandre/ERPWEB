@@ -2943,6 +2943,7 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_019' no tien
             <PropertyRef Name="Cedula" />
             <PropertyRef Name="Empleado" />
             <PropertyRef Name="ru_tipo" />
+            <PropertyRef Name="ru_codRolGen" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdNominaTipo" Type="int" Nullable="false" />
@@ -2964,8 +2965,9 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.VWROL_019' no tien
           <Property Name="Cedula" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Empleado" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="ru_tipo" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="pe_FechaIni" Type="smalldatetime" />
-          <Property Name="pe_FechaFin" Type="smalldatetime" />
+          <Property Name="FechaIni" Type="date" />
+          <Property Name="FechaFin" Type="date" />
+          <Property Name="ru_codRolGen" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <Function Name="SPACTF_004_detalle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
@@ -4934,8 +4936,9 @@ FROM [web].[VWROL_018] AS [VWROL_018]</DefiningQuery>
 [VWROL_019].[Cedula] AS [Cedula], 
 [VWROL_019].[Empleado] AS [Empleado], 
 [VWROL_019].[ru_tipo] AS [ru_tipo], 
-[VWROL_019].[pe_FechaIni] AS [pe_FechaIni], 
-[VWROL_019].[pe_FechaFin] AS [pe_FechaFin]
+[VWROL_019].[FechaIni] AS [FechaIni], 
+[VWROL_019].[FechaFin] AS [FechaFin], 
+[VWROL_019].[ru_codRolGen] AS [ru_codRolGen]
 FROM [web].[VWROL_019] AS [VWROL_019]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -8634,6 +8637,7 @@ FROM [web].[VWROL_019] AS [VWROL_019]</DefiningQuery>
             <PropertyRef Name="Cedula" />
             <PropertyRef Name="Empleado" />
             <PropertyRef Name="ru_tipo" />
+            <PropertyRef Name="ru_codRolGen" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
@@ -8655,8 +8659,9 @@ FROM [web].[VWROL_019] AS [VWROL_019]</DefiningQuery>
           <Property Name="Cedula" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Empleado" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ru_tipo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="pe_FechaIni" Type="DateTime" Precision="0" />
-          <Property Name="pe_FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="FechaIni" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="ru_codRolGen" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -11198,8 +11203,9 @@ FROM [web].[VWROL_019] AS [VWROL_019]</DefiningQuery>
           <EntitySetMapping Name="VWROL_019">
             <EntityTypeMapping TypeName="Model_reportes.VWROL_019">
               <MappingFragment StoreEntitySet="VWROL_019">
-                <ScalarProperty Name="pe_FechaFin" ColumnName="pe_FechaFin" />
-                <ScalarProperty Name="pe_FechaIni" ColumnName="pe_FechaIni" />
+                <ScalarProperty Name="ru_codRolGen" ColumnName="ru_codRolGen" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaIni" ColumnName="FechaIni" />
                 <ScalarProperty Name="ru_tipo" ColumnName="ru_tipo" />
                 <ScalarProperty Name="Empleado" ColumnName="Empleado" />
                 <ScalarProperty Name="Cedula" ColumnName="Cedula" />

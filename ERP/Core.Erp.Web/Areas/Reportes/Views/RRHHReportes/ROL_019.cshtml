@@ -2,7 +2,7 @@
 @model Core.Erp.Info.Helps.cl_filtros_Info
 @{
     Layout = "~/Areas/Reportes/Views/Layout/_Layout_filtros.cshtml";
-    ViewBag.Title = "ROL_018";
+    ViewBag.Title = "ROL_019";
     //if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     //{
     //    Response.Redirect("~/Account/Login");
@@ -96,11 +96,16 @@
         </div>
         <div class="box-body">
             
-
-
-            @Html.Action("PivotGridPartial")
-
-
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.Action("PivotGridROL_019", new  { Model.IdEmpresa, Model.fecha_ini, Model.fecha_fin,Model.IdEmpleado})
+                            @Html.Partial("ExportSettingsPartial", (Core.Erp.Web.Areas.Reportes.Views.RRHHReportes.PivotGridExportDemoOptions)ViewBag.DemoOptions)
+                     </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

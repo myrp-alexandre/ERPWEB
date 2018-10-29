@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Core.Erp.Info.Reportes.RRHH;
 using Core.Erp.Bus.Reportes.RRHH;
+using Core.Erp.Web.Areas.Reportes.Views.RRHHReportes;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
@@ -363,20 +364,32 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         public ActionResult ROL_019(cl_filtros_Info model)
         {
-            List<ROL_019_Info> lista = new List<ROL_019_Info>();
-            ROL_019_Bus bus = new ROL_019_Bus();
-            lista = bus.get_list(1,Convert.ToDecimal( 1), DateTime.Now.Date, DateTime.Now.Date);
+            model.fecha_ini = new DateTime (DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime FechaFin = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            model.fecha_fin= FechaFin.AddMonths(1).AddDays(-1);
+          
+            model.IdEmpresa =Convert.ToInt32( SessionFixed.IdEmpresa);
+            ViewBag.fecha_ini = model.fecha_ini;
+            ViewBag.fecha_fin = model.fecha_fin;
+            ViewBag.IdEmpresa = model.IdEmpresa;
+            ViewBag.IdEmpleado = model.IdEmpleado;
+
+            ViewBag.DemoOptions = ViewBag.DemoOptions ?? new PivotGridExportDemoOptions();
+
+
             return PartialView(model);
         }
 
 
         [ValidateInput(false)]
-        public ActionResult PivotGridPartial()
+        public ActionResult PivotGridROL_019(int? IdEmpresa, DateTime? fecha_ini, DateTime? fecha_fin, decimal ? IdEmpleado)
         {
             List<ROL_019_Info> lista = new List<ROL_019_Info>();
+            if (IdEmpleado == null)
+                IdEmpleado = 0;
             ROL_019_Bus bus = new ROL_019_Bus();
-            lista = bus.get_list(1, Convert.ToDecimal(1), DateTime.Now.Date, DateTime.Now.Date);
-            return PartialView("_PivotGridPartial",lista);
+            lista = bus.get_list(Convert.ToInt32( IdEmpresa),Convert.ToDecimal(IdEmpleado), Convert.ToDateTime(fecha_ini), Convert.ToDateTime(fecha_fin));
+            return PartialView("_PivotGridROL_019", lista);
         }
     }
 }

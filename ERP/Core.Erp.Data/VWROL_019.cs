@@ -34,7 +34,8 @@ namespace Core.Erp.Data
         public string Cedula { get; set; }
         public string Empleado { get; set; }
         public string ru_tipo { get; set; }
-        public Nullable<System.DateTime> pe_FechaIni { get; set; }
-        public Nullable<System.DateTime> pe_FechaFin { get; set; }
+        public Nullable<System.DateTime> FechaIni { get; set; }
+        public Nullable<System.DateTime> FechaFin { get; set; }
+        public string ru_codRolGen { get; set; }
     }
 }

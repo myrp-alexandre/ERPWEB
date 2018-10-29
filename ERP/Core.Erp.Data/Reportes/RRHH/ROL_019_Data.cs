@@ -21,10 +21,11 @@ namespace Core.Erp.Data.Reportes.RRHH
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = (from q in Context.VWROL_019
-                             //where q.IdEmpresa == IdEmpresa
-                             //&& q.IdEmpleado >= IdEmpleadoIni && q.IdEmpleado <= IdEmpleadoFin
-                             //&& q.pe_FechaIni >= fecha_ini 
-                             //&& q.pe_FechaIni <= fecha_fin
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdEmpleado >= IdEmpleadoIni 
+                             && q.IdEmpleado <= IdEmpleadoFin
+                             && q.FechaIni >= fecha_ini 
+                             && q.FechaIni <= fecha_fin
                              select new ROL_019_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -47,8 +48,9 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  Empleado = q.Empleado,
                                  Cedula = q.Cedula,
                                  ru_tipo = q.ru_tipo,
-                                 pe_FechaIni = q.pe_FechaIni,
-                                 pe_FechaFin = q.pe_FechaFin
+                                 pe_FechaIni = q.FechaIni,
+                                 pe_FechaFin = q.FechaFin,
+                                 ru_codRolGen=q.ru_codRolGen
                              }).ToList();
                 }
                 return Lista;

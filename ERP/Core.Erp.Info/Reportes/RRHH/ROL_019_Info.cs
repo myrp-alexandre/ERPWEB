@@ -30,6 +30,7 @@ namespace Core.Erp.Info.Reportes.RRHH
         public string ru_tipo { get; set; }
         public Nullable<System.DateTime> pe_FechaIni { get; set; }
         public Nullable<System.DateTime> pe_FechaFin { get; set; }
+        public string ru_codRolGen { get; set; }
 
     }
 }
