@@ -24,5 +24,13 @@ namespace Core.Erp.Info.Reportes.RRHH
         public Nullable<int> es_semana { get; set; }
         public Nullable<int> es_dia { get; set; }
         public string es_sdia { get; set; }
+
+
+        public string ent1 { get; set; }
+        public string ent2 { get; set; }
+        public string sal1 { get; set; }
+        public string sal { get; set; }
+        public string lousal { get; set; }
+        public string loureg { get; set; }
     }
 }

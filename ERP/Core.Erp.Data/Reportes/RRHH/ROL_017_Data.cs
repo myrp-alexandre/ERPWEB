@@ -45,6 +45,18 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  SalidaLounch = q.SalidaLounch
                              }).ToList();
                 }
+
+                foreach (var item in Lista)
+                {
+                    item.ent1 = item.Entrada1.ToString().Substring(0,5);
+                    item.ent2 = item.Entrada2.ToString().Substring(0, 5);
+                    item.sal = item.Salida1.ToString().Substring(0, 5);
+                    item.sal1 = item.Salida2.ToString().Substring(0, 5);
+                    item.lousal = item.SalidaLounch.ToString().Substring(0, 5);
+                    item.loureg = item.RegresoLounch.ToString().Substring(0, 5);
+
+
+                }
                 return Lista;
             }
             catch (Exception)

@@ -141,7 +141,10 @@ namespace Core.Erp.Bus.RRHH
                         item.IdNominaTipoLiqui = 2;
 
                     saldo = saldo - valor_cuota;
-                        info.lst_detalle.Add(item);
+                    item.TotalCuota = Math.Round(item.TotalCuota, 2);
+                    item.Saldo = Math.Round(item.Saldo, 2);
+
+                    info.lst_detalle.Add(item);
                     
                 }
                 return info;
@@ -184,6 +187,8 @@ namespace Core.Erp.Bus.RRHH
                     item.IdNominaTipoLiqui = 1;
 
                     saldo = saldo - valor_cuota;
+                    item.TotalCuota = Math.Round(item.TotalCuota, 2);
+                    item.Saldo = Math.Round(item.Saldo, 2);
                     info.lst_detalle.Add(item);
 
                 }
@@ -245,6 +250,8 @@ namespace Core.Erp.Bus.RRHH
                     else
                         item.IdNominaTipoLiqui = 1;
                     saldo = saldo - valor_cuota;
+                    item.TotalCuota = Math.Round(item.TotalCuota, 2);
+                    item.Saldo = Math.Round(item.Saldo, 2);
                     info.lst_detalle.Add(item);
 
                 }

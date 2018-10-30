@@ -108,7 +108,7 @@
                 sp.Width = Unit.Percentage(100);
             });
         });
-        settings.Columns.Add("Observacion","Observación").Width=Unit.Percentage(15);
+        //settings.Columns.Add("Observacion","Observación").Width=Unit.Percentage(15);
         settings.Columns.Add("Dias_q_Corresponde","Ganados").Width=Unit.Percentage(10);
         settings.Columns.Add("Dias_a_disfrutar", "Tomados").Width = Unit.Percentage(10);
         settings.Columns.Add("Dias_pendiente", "Pendientes").Width = Unit.Percentage(10);
@@ -204,7 +204,14 @@
 
             });
         });
-
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ROL_007", "RRHHReportes", new { Area = "Reportes", IdEmpleado= DataBinder.Eval(c.DataItem, "IdEmpleado"), IdSolicitud = DataBinder.Eval(c.DataItem, "IdSolicitud") }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(4);
+        });
 
     });
 }

@@ -82,7 +82,9 @@ namespace Core.Erp.Data.RRHH
                         IdUtilidad = Entity.IdUtilidad,
                         IdNomina_Tipo = Entity.IdNomina,
                         IdNomina_TipoLiqui= Entity.IdNominaTipo_liq,
-                        IdPeriodo=Entity.IdPeriodo
+                        IdPeriodo=Entity.IdPeriodo,
+                        UtilidadCargaFamiliar=Entity.UtilidadCargaFamiliar,
+                        UtilidadDerechoIndividual=Entity.UtilidadDerechoIndividual
                     };
                 }
 
@@ -156,9 +158,6 @@ namespace Core.Erp.Data.RRHH
                     ro_participacion_utilidad Entity = Context.ro_participacion_utilidad.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdUtilidad == info.IdUtilidad);
                     if (Entity == null)
                         return false;
-                    Entity.IdNomina = info.IdNomina_Tipo;
-                    Entity.IdNominaTipo_liq = info.IdNomina_TipoLiqui;
-                    Entity.IdPeriodo = info.IdPeriodo;
                     Entity.IdUsuarioModifica = info.IdUsuarioModifica;
                     Entity.UtilidadDerechoIndividual = info.UtilidadDerechoIndividual;
                     Entity.UtilidadCargaFamiliar = info.UtilidadCargaFamiliar;

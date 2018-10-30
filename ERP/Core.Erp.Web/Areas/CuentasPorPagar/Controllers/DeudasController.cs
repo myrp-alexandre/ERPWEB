@@ -691,7 +691,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
                 edited_info.co_valorpagar = info_det.co_valorpagar;
             }
-
+            
             return PartialView("_GridViewPartial_aprobacion_facturas", model);
         }
         public ActionResult EditingDelete_og(decimal IdCbteCble_Ogiro)

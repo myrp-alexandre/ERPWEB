@@ -234,6 +234,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         [HttpPost]
         public ActionResult ROL_014(cl_filtros_Info model)
         {
+            cargar_combos(model.IdEmpresa);
             ROL_014_Rpt report = new ROL_014_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdTipoNomina.Value = model.IdTipoNomina;
@@ -376,6 +377,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             ViewBag.DemoOptions = ViewBag.DemoOptions ?? new PivotGridExportDemoOptions();
 
+            Session["IdEmpleado"] = model.IdEmpleado;
+            Session["fecha_ini"] = model.fecha_ini;
+            Session["fecha_fin"] = model.fecha_fin;
 
             return PartialView(model);
         }
@@ -385,6 +389,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult PivotGridROL_019(int? IdEmpresa, DateTime? fecha_ini, DateTime? fecha_fin, decimal ? IdEmpleado)
         {
             List<ROL_019_Info> lista = new List<ROL_019_Info>();
+            IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            fecha_ini =Convert.ToDateTime( Session["fecha_ini"] );
+            fecha_fin = Convert.ToDateTime(Session["fecha_fin"]);
+
             if (IdEmpleado == null)
                 IdEmpleado = 0;
             ROL_019_Bus bus = new ROL_019_Bus();
