@@ -12,13 +12,14 @@
         settings.Toolbars.Add(t =>
         {
             t.EnableAdaptivity = true;
-            t.Items.Add(TreeListToolbarCommand.ExportToPdf);
-            t.Items.Add(TreeListToolbarCommand.ExportToXls);
-            t.Items.Add(TreeListToolbarCommand.ExportToXlsx);
-            t.Items.Add(TreeListToolbarCommand.ExportToDocx);
-            t.Items.Add(TreeListToolbarCommand.ExportToRtf);
+
+            t.Items.Add(TreeListToolbarCommand.ExportToPdf).Text = "Exportar a PDF";
+            t.Items.Add(TreeListToolbarCommand.ExportToXls).Text = "Exportar a XLS";
+            t.Items.Add(TreeListToolbarCommand.ExportToXlsx).Text = "Exportar a XLSX";
+            t.Items.Add(TreeListToolbarCommand.ExportToDocx).Text = "Exportar a DOCX";
+            t.Items.Add(TreeListToolbarCommand.ExportToRtf).Text = "Exportar a RTF";
         });
-        
+
         settings.Columns.Add(
     column =>
     {
@@ -84,7 +85,7 @@ column =>
         column.FieldName = "IdMenu";
         column.Caption = "ID";
     }
-);        
+);
 
         settings.SettingsPager.Visible = true;
         settings.Settings.GridLines = GridLines.Both;
