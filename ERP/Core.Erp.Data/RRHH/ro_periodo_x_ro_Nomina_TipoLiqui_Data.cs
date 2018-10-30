@@ -48,6 +48,55 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+
+
+        public List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> get_list_utimo_periodo_aprocesar(int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiq)
+        {
+            try
+            {
+                List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> Lista;
+
+
+                int SiguientePeriodo = 0;
+              
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+
+                    SiguientePeriodo = Context.ro_periodo_x_ro_Nomina_TipoLiqui.Where(c => c.Procesado =="N").Min(c => c.IdPeriodo);
+                    Lista = (from q in Context.ro_periodo_x_ro_Nomina_TipoLiqui
+                             join p in Context.ro_periodo
+                             on q.IdPeriodo equals p.IdPeriodo
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdNomina_Tipo == IdNominaTipo
+                             && q.IdNomina_TipoLiqui == IdNominaTipoLiq
+                             && q.IdEmpresa == p.IdEmpresa
+                             && q.Procesado=="N"
+                             && q.IdPeriodo== SiguientePeriodo
+                             select new ro_periodo_x_ro_Nomina_TipoLiqui_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdNomina_Tipo = q.IdNomina_Tipo,
+                                 IdNomina_TipoLiqui = q.IdNomina_TipoLiqui,
+                                 IdPeriodo = q.IdPeriodo,
+                                 Contabilizado = q.Contabilizado,
+                                 Cerrado = q.Cerrado,
+                                 Procesado = q.Procesado,
+                                 pe_FechaIni = p.pe_FechaIni,
+                                 pe_FechaFin = p.pe_FechaFin
+                             }).ToList();
+                }
+                Lista.ForEach(v => v.descripcion = v.pe_FechaIni.ToString("dd/MM/yyyy").Substring(0, 10) + "                  al                  " + v.pe_FechaFin.ToString("dd/MM/yyyy").Substring(0, 10));
+
+                return Lista;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public ro_periodo_x_ro_Nomina_TipoLiqui_Info get_info(int IdEmpresa, int IdNomina_Tipo, int IdNominaTipoLiq, int IdPeriodo)
         {
             try
@@ -81,8 +130,6 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
-
-  
         public bool guardarDB(ro_periodo_x_ro_Nomina_TipoLiqui_Info info)
         {
             try
@@ -108,9 +155,7 @@ namespace Core.Erp.Data.RRHH
 
                 throw;
             }
-        }
-
-     
+        }    
         public bool anularDB(ro_periodo_x_ro_Nomina_TipoLiqui_Info info)
         {
             try

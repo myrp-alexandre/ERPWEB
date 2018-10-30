@@ -19,7 +19,20 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+        public List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> get_list_utimo_periodo_aprocesar(int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiq)
+        {
+            try
+            {
+                return odata.get_list_utimo_periodo_aprocesar(IdEmpresa, IdNominaTipo, IdNominaTipoLiq);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
+
+        
         public ro_periodo_x_ro_Nomina_TipoLiqui_Info get_info(int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiq, int IdPeriodo)
         {
             try
