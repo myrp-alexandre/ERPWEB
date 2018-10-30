@@ -70,14 +70,18 @@ namespace Core.Erp.Bus.RRHH
                         item.FactorA = item.CargasFamiliares * item.DiasTrabajados;
                         factorB = factorB + item.FactorA; 
                     }
+                    item.ValorCargaFamiliar = Math.Round(item.ValorCargaFamiliar,2);
                 }
                     foreach (var item in lista)// calculando valor por carga
                     {
                     if(factorB > 0)
                         item.ValorCargaFamiliar = (valorCarga * (item.FactorA / factorB));
                     item.ValorTotal = item.ValorIndividual + item.ValorCargaFamiliar;
-                    }
-                    
+                    item.ValorTotal = Math.Round(item.ValorTotal, 2);
+                    item.ValorIndividual = Math.Round(item.ValorIndividual, 2);
+
+                }
+
                 return lista;
             }
             catch (Exception)

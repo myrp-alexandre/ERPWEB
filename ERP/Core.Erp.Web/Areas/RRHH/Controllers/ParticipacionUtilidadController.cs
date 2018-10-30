@@ -99,7 +99,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 ro_participacion_utilidad_Info info = new ro_participacion_utilidad_Info();
                 IdEmpresa = GetIdEmpresa();
                 info= bus_utilidad.get_info(IdEmpresa, IdUtilidad);
-                Session["info_utilidad"] = info.detalle;
+                Session["detalle"] = info.detalle;
                 cargar_combos(info.IdNomina_Tipo,info.IdNomina_TipoLiqui);
 
                 return View(info);

@@ -43,7 +43,7 @@ namespace Core.Erp.Bus.RRHH
             try
             { int IdUtilidad = 0;
 
-                info_new = (odata.get_info(info.IdEmpresa, info.IdPeriodo));
+                info_new = (odata.get_info(info.IdEmpresa, info.IdUtilidad));
                 if (info_new == null)
                 {
                     if (odata.guardarDB(info, ref IdUtilidad))

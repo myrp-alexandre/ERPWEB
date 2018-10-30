@@ -154,7 +154,14 @@
 
                 });
             });
-
+            settings.Columns.Add(column =>
+            {
+                column.SetDataItemTemplateContent(c =>
+                {
+                    ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ROL_008", "RRHHReportes", new { Area = "Reportes", IdPrestamo = DataBinder.Eval(c.DataItem, "IdPrestamo") }, Request.Url.Scheme) + "');\"></span>");
+                });
+                column.Width = System.Web.UI.WebControls.Unit.Percentage(4);
+            });
 
         });
 }

@@ -84,7 +84,14 @@
         settings.Columns.Add("pe_FechaFin", "Hasta");
         settings.Columns.Add("UtilidadDerechoIndividual","10% Idividual");
         settings.Columns.Add("UtilidadCargaFamiliar","5% por cargas");
-
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ROL_004", "RRHHReportes", new { Area = "Reportes", IdUtilidad = DataBinder.Eval(c.DataItem, "IdUtilidad") }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(4);
+        });
     });
 }
 @grid.Bind(Model).GetHtml()
