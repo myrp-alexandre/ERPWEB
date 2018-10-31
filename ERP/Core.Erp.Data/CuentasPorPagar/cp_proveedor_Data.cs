@@ -224,9 +224,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                     Entity.idCredito_Predeter = info.idCredito_Predeter;
                     Entity.IdBanco_acreditacion = info.IdBanco_acreditacion;
                     Entity.IdCentroCosot = info.IdCentroCosot;
-                    Entity.IdCtaCble_Anticipo = info.IdCtaCble_Anticipo;
-                    Entity.IdCtaCble_CXP = info.IdCtaCble_CXP;
-                    Entity.IdCtaCble_Gasto = info.IdCtaCble_Gasto;
+                    Entity.IdCtaCble_Anticipo = (info.IdCtaCble_Anticipo)== "== Seleccione =="?null: info.IdCtaCble_Anticipo;
+                    Entity.IdCtaCble_CXP = (info.IdCtaCble_CXP)== "== Seleccione =="?null: info.IdCtaCble_CXP;
+                    Entity.IdCtaCble_Gasto =  (info.IdCtaCble_Gasto) == "== Seleccione ==" ? null : info.IdCtaCble_Gasto;
                     Entity.IdPunto_cargo = info.IdPunto_cargo;
                     Entity.IdPunto_cargo_grupo = info.IdPunto_cargo_grupo;
                     Entity.IdTipoCta_acreditacion_cat = info.IdTipoCta_acreditacion_cat;
