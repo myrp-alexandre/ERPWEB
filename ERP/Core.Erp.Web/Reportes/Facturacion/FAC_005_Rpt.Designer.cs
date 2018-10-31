@@ -971,22 +971,27 @@
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // p_IdSucursal
             // 
             this.p_IdSucursal.Name = "p_IdSucursal";
+            this.p_IdSucursal.Visible = false;
             // 
             // p_IdCliente
             // 
             this.p_IdCliente.Name = "p_IdCliente";
+            this.p_IdCliente.Visible = false;
             // 
             // p_Fecha_ini
             // 
             this.p_Fecha_ini.Name = "p_Fecha_ini";
+            this.p_Fecha_ini.Visible = false;
             // 
             // p_Fecha_fin
             // 
             this.p_Fecha_fin.Name = "p_Fecha_fin";
+            this.p_Fecha_fin.Visible = false;
             // 
             // GroupHeader1
             // 
@@ -1198,10 +1203,12 @@
             // p_MostrarContactos
             // 
             this.p_MostrarContactos.Name = "p_MostrarContactos";
+            this.p_MostrarContactos.Visible = false;
             // 
             // p_MostrarSaldo0
             // 
             this.p_MostrarSaldo0.Name = "p_MostrarSaldo0";
+            this.p_MostrarSaldo0.Visible = false;
             // 
             // GroupHeader2
             // 

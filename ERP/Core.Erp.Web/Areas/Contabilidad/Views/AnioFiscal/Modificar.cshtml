@@ -11,6 +11,8 @@
 @using (Html.BeginForm("Modificar", "AnioFiscal", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdanioFiscal)
+    @Html.HiddenFor(q => q.info_anio_ctautil.IdEmpresa)
+    @Html.HiddenFor(q => q.info_anio_ctautil.IdanioFiscal)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -72,8 +74,8 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdCtaCble">Utilidad</label>
-                    @Html.DropDownListFor(q => q.info_anio_ctautil.IdCtaCble, new SelectList(" "), new { @class = "form-control" })
+                    <label for="IdCtaCble">Cuenta contable de utilidad*</label>
+                    @Html.Partial("_CmbCuenta_Anio", Model.info_anio_ctautil.IdCtaCble)
                     @Html.ValidationMessageFor(q => q.info_anio_ctautil.IdCtaCble, "", new { @class = "text-danger" })
                 </div>
             </div>
